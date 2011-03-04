@@ -12,6 +12,7 @@
                             <TextBlock x:Name="TrackNumber" FontSize="10" Text="{Binding Number}"/>
                             <TextBlock x:Name="TrackTitle" FontFamily="Arial" FontWeight="Bold" Text="{Binding Title}" Margin="1 1 5 1"/>
                             <TextBlock x:Name="TrackArtist" Text="{Binding Artist}"/>
+                            <TextBlock x:Name="TrackAlbum" Background="DarkBlue" Foreground="LightCoral" Text="{Binding Album}" Margin="4 0 0 0"/>
                         </StackPanel>
                     </Border>
                 </DataTemplate>

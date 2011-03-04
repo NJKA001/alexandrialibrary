@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.ListMaker", "Gnosis.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Archon", "Gnosis.Archon\Gnosis.Archon.csproj", "{1307CB13-F914-4DEC-8198-BBBC571D821C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "taglib-sharp", "..\lib\TagLibSharp\0.13.2\taglib-sharp.csproj", "{4CC18776-125E-4318-9D24-D60110AD9697}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{F1E21BC9-CF85-4CC2-8A00-00ED88073BE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "taglib-sharp", "..\lib\taglib-sharp\2.0.3.7\taglib-sharp.csproj", "{4CC18776-125E-4318-9D24-D60110AD9697}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,5 +76,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4CC18776-125E-4318-9D24-D60110AD9697} = {F1E21BC9-CF85-4CC2-8A00-00ED88073BE5}
 	EndGlobalSection
 EndGlobal

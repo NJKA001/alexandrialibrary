@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -12,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
+using TagLib;
 
 namespace Gnosis.Archon
 {
@@ -26,27 +29,51 @@ namespace Gnosis.Archon
 
             TrackListView.ItemsSource = tracks;
 
-            AddSampleTracks();
+            LoadSampleMusic();
+            //AddSampleMusic2();
         }
 
         private readonly ObservableCollection<ITrack> tracks = new ObservableCollection<ITrack>();
 
-        private void AddSampleTracks()
+        private void LoadSampleMusic()
         {
-            var pathAlbum1 = @"\\vmware-host\Shared Folders\Documents\My Music\A Perfect Circle\Thirteenth Step\";
-            var date1 = new DateTime(2003, 9, 16);
-            var track1 = new Track { Path = pathAlbum1 + "01 The Package.mp3", Number = 1, Title = "The Package", Album = "Thirteenth Step", Artist = "A Perfect Circle", ImagePath = pathAlbum1 + "folder.jpg", ReleaseDate = date1 };
-            var track2 = new Track { Path = pathAlbum1 + "02 Weak and Powerless.mp3", Number = 2, Title = "Weak and Powerless", Album = "Thirteenth Step", Artist = "A Perfect Circle", ImagePath = pathAlbum1 + "folder.jpg", ReleaseDate = date1 };
+            //var path = @"C:\Users\Public\Music\Sample Music\Kalimba.mp3";
+            //var file = TagLib.File.Create(path);
+            //var tag = file.Tag;
+            //var x = tag;
 
-            var pathAlbum2 = @"\\vmware-host\Shared Folders\Documents\My Music\A Perfect Circle\Mer De Noms\";
-            var date2 = new DateTime(2000, 5, 23);
-            var track3 = new Track { Path = pathAlbum2 + "01 The Hollow.mp3", Number = 1, Title = "The Hollow", Album = "Mer De Noms", Artist = "A Perfect Circle", ImagePath = pathAlbum2 + "folder.jpg", ReleaseDate = date2 };
-            var track4 = new Track { Path = pathAlbum1 + "02 Magdalena.mp3", Number = 2, Title = "Magdalena", Album = "Mer De Noms", Artist = "A Perfect Circle", ImagePath = pathAlbum2 + "folder.jpg", ReleaseDate = date2 };
+            var directory = new DirectoryInfo(@"C:\Users\Public\Music\Sample Music");
+            foreach (var file in directory.GetFiles())
+            {
+                if (file.FullName.EndsWith(".mp3"))
+                {
+                    var tagFile = TagLib.File.Create(file.FullName);
 
-            tracks.Add(track1);
-            tracks.Add(track2);
-            tracks.Add(track3);
-            tracks.Add(track4);
+                    var track = GetTrack(file.FullName, tagFile.Tag);
+
+                    tracks.Add(track);
+                }
+            }
+        }
+
+        private ITrack GetTrack(string path, Tag tag)
+        {
+            var title = tag.Title;
+            var album = tag.Album;
+            var number = tag.Track;
+            var artist = tag.JoinedPerformers;
+            var releaseDate = (tag.Year > 0) ? new DateTime((int)tag.Year, 1, 1) : new DateTime(1900, 1, 1);
+
+            if (tag.Pictures.Length > 0)
+            {
+                var picture = tag.Pictures[0];
+                //BitmapImage image = new BitmapImage();
+                //image.BeginInit();
+                //image.StreamSource = picture.Data.
+                
+            }
+
+            return new Track { Album = album, Artist = artist, Number = number, ReleaseDate = releaseDate};
         }
 
         private void TrackListView_SelectionChanged(object sender, RoutedEventArgs args)
@@ -54,7 +81,7 @@ namespace Gnosis.Archon
             var track = TrackListView.SelectedItem as ITrack;
             if (track != null)
             {
-                MessageBox.Show("Play this track " + track.Title, "TEST");
+                //MessageBox.Show("Play this track " + track.Title, "TEST");
             }
         }
     }

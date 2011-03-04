@@ -17,7 +17,7 @@ namespace Gnosis.Archon
         private string title;
         private string artist;
         private string album;
-        private int number;
+        private uint number;
         private DateTime releaseDate;
         private bool isSelected;
 
@@ -109,7 +109,7 @@ namespace Gnosis.Archon
             }
         }
 
-        public int Number
+        public uint Number
         {
             get
             {

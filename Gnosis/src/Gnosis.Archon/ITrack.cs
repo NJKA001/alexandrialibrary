@@ -13,7 +13,7 @@ namespace Gnosis.Archon
         string Title { get; set; }
         string Artist { get; set; }
         string Album { get; set; }
-        int Number { get; set; }
+        uint Number { get; set; }
         DateTime ReleaseDate { get; set; }
         bool IsSelected { get; set; }
     }
