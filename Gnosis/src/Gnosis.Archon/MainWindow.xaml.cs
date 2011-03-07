@@ -63,17 +63,9 @@ namespace Gnosis.Archon
             var number = tag.Track;
             var artist = tag.JoinedPerformers;
             var releaseDate = (tag.Year > 0) ? new DateTime((int)tag.Year, 1, 1) : new DateTime(1900, 1, 1);
+            ICollection<byte> image = (tag.Pictures.Length > 0) ? tag.Pictures[0].Data : null;
 
-            if (tag.Pictures.Length > 0)
-            {
-                var picture = tag.Pictures[0];
-                //BitmapImage image = new BitmapImage();
-                //image.BeginInit();
-                //image.StreamSource = picture.Data.
-                
-            }
-
-            return new Track { Album = album, Artist = artist, Number = number, ReleaseDate = releaseDate};
+            return new Track { Title = title, Album = album, Artist = artist, Number = number, ReleaseDate = releaseDate, Image = image};
         }
 
         private void TrackListView_SelectionChanged(object sender, RoutedEventArgs args)

@@ -9,7 +9,7 @@ namespace Gnosis.Archon
     public interface ITrack : INotifyPropertyChanged
     {
         string Path { get; set; }
-        string ImagePath { get; set; }
+        ICollection<byte> Image { get; set; }
         string Title { get; set; }
         string Artist { get; set; }
         string Album { get; set; }
