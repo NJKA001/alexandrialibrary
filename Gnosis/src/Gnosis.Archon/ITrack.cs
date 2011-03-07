@@ -8,6 +8,7 @@ namespace Gnosis.Archon
 {
     public interface ITrack : INotifyPropertyChanged
     {
+        Guid Id { get; }
         string Path { get; set; }
         string ImagePath { get; set; }
         ICollection<byte> ImageData { get; set; }
@@ -15,8 +16,11 @@ namespace Gnosis.Archon
         string Title { get; set; }
         string Artist { get; set; }
         string Album { get; set; }
-        uint Number { get; set; }
+        uint TrackNumber { get; set; }
+        uint DiscNumber { get; set; }
+        string Genre { get; set; }
         DateTime ReleaseDate { get; set; }
+        string ReleaseYear { get; }
         bool IsSelected { get; set; }
     }
 }

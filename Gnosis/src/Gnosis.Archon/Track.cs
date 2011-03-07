@@ -10,16 +10,25 @@ namespace Gnosis.Archon
     {
         public Track()
         {
+            id = Guid.NewGuid();
         }
 
+        public Track(Guid id)
+        {
+            this.id = id;
+        }
+
+        private readonly Guid id;
         private string path;
         private string imagePath = string.Empty;
         private ICollection<byte> imageData;
-        private string title;
-        private string artist;
-        private string album;
-        private uint number;
-        private DateTime releaseDate;
+        private string title = "Untitled";
+        private string artist = "Unknown Artist";
+        private string album = "Unknown Album";
+        private uint trackNumber = 0;
+        private uint discNumber = 0;
+        private string genre = "Unknown Genre";
+        private DateTime releaseDate = new DateTime(2000, 1, 1);
         private bool isSelected;
 
         private void OnPropertyChanged(string propertyName)
@@ -29,6 +38,11 @@ namespace Gnosis.Archon
         }
 
         #region ITrack Members
+
+        public Guid Id
+        {
+            get { return id; }
+        }
 
         public string Path
         {
@@ -130,18 +144,47 @@ namespace Gnosis.Archon
             }
         }
 
-        public uint Number
+        public uint TrackNumber
         {
             get
             {
-                return number;
+                return trackNumber;
             }
             set
             {
-                if (number != value)
+                if (trackNumber != value)
                 {
-                    number = value;
-                    OnPropertyChanged("Number");
+                    trackNumber = value;
+                    OnPropertyChanged("TrackNumber");
+                }
+            }
+        }
+
+        public uint DiscNumber
+        {
+            get
+            {
+                return discNumber;
+            }
+            set
+            {
+                if (discNumber != value)
+                {
+                    discNumber = value;
+                    OnPropertyChanged("DiscNumber");
+                }
+            }
+        }
+
+        public string Genre
+        {
+            get { return genre; }
+            set
+            {
+                if (genre != value)
+                {
+                    genre = value;
+                    OnPropertyChanged("Genre");
                 }
             }
         }
@@ -157,6 +200,11 @@ namespace Gnosis.Archon
                     OnPropertyChanged("ReleaseDate");
                 }
             }
+        }
+
+        public string ReleaseYear
+        {
+            get { return releaseDate.Year.ToString(); }
         }
 
         public bool IsSelected
