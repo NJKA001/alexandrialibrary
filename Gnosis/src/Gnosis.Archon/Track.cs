@@ -13,7 +13,8 @@ namespace Gnosis.Archon
         }
 
         private string path;
-        private ICollection<byte> image;
+        private string imagePath = string.Empty;
+        private ICollection<byte> imageData;
         private string title;
         private string artist;
         private string album;
@@ -45,19 +46,39 @@ namespace Gnosis.Archon
             }
         }
 
-        public ICollection<byte> Image
+        public string ImagePath
+        {
+            get { return imagePath; }
+            set
+            {
+                if (imagePath != value)
+                {
+                    imagePath = value;
+                    OnPropertyChanged("ImagePath");
+                    OnPropertyChanged("ImageSource");
+                }
+            }
+        }
+
+        public ICollection<byte> ImageData
+        {
+            get { return imageData; }
+            set
+            {
+                if (imageData != value)
+                {
+                    imageData = value;
+                    OnPropertyChanged("ImageData");
+                    OnPropertyChanged("ImageSource");
+                }
+            }
+        }
+
+        public object ImageSource
         {
             get
             {
-                return image;
-            }
-            set
-            {
-                if (image != value)
-                {
-                    image = value;
-                    OnPropertyChanged("Image");
-                }
+                return !string.IsNullOrEmpty(imagePath) ? (object)imagePath : imageData;
             }
         }
 

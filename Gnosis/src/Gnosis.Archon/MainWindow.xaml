@@ -4,7 +4,7 @@
         xmlns:local="clr-namespace:Gnosis.Archon"
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
-        <local:ByteImageConverter x:Key="imageConverter" />
+        <local:ImageSourceConverter x:Key="imageConverter" />
     </Window.Resources>
     <Grid>
         <ListView x:Name="TrackListView" SelectionChanged="TrackListView_SelectionChanged">
@@ -12,18 +12,18 @@
                 <DataTemplate>
                     <Border Margin="3 3 3 3">
                         <StackPanel Orientation="Horizontal">
-                            <Image x:Name="ItemImage" Source="{Binding Path=Image, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Width="50" Height="50"/>
+                            <Image x:Name="ItemImage" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Width="50" Height="50"/>
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock x:Name="TrackNumber" Text="{Binding Number}" Margin="2 0 4 0" FontSize="10"/>
+                                    <TextBlock x:Name="TrackNumber" Text="{Binding Number}" Margin="4 0 6 0" FontSize="10"/>
                                     <TextBlock x:Name="TrackTitle" Text="{Binding Title}" Margin="4 0 0 0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="by" Margin="2 0 2 0" FontSize="10" Foreground="DarkGray"/>
+                                    <TextBlock Text="by" Margin="2 0 2 0" FontSize="10" Foreground="Gray"/>
                                     <TextBlock x:Name="TrackArtist" Text="{Binding Artist}" Margin="4 0 0 0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="on" Margin="2 0 2 0" FontSize="10" Foreground="DarkGray"/>
+                                    <TextBlock Text="on" Margin="2 0 2 0" FontSize="10" Foreground="Gray"/>
                                     <TextBlock x:Name="TrackAlbum" Text="{Binding Album}" Margin="4 0 0 0"/>
                                 </StackPanel>
                             </StackPanel>

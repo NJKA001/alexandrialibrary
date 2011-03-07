@@ -63,9 +63,11 @@ namespace Gnosis.Archon
             var number = tag.Track;
             var artist = tag.JoinedPerformers;
             var releaseDate = (tag.Year > 0) ? new DateTime((int)tag.Year, 1, 1) : new DateTime(1900, 1, 1);
-            ICollection<byte> image = (tag.Pictures.Length > 0) ? tag.Pictures[0].Data : null;
+            ICollection<byte> imageData = (tag.Pictures.Length > 0) ? tag.Pictures[0].Data : null;
+            var imagePath = string.Empty; 
+            //"http://2.bp.blogspot.com/_mV-M8K3UNgg/SO4eaOKhtcI/AAAAAAAAEHI/a8WtGmHtZSA/s400/00+Mr+Scruff+-+Ninja+Tuna.jpg";
 
-            return new Track { Title = title, Album = album, Artist = artist, Number = number, ReleaseDate = releaseDate, Image = image};
+            return new Track { Path = path, Title = title, Album = album, Artist = artist, Number = number, ReleaseDate = releaseDate, ImageData = imageData, ImagePath = imagePath };
         }
 
         private void TrackListView_SelectionChanged(object sender, RoutedEventArgs args)

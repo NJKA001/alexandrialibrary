@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 namespace Gnosis.Archon
 {
     //reference: - http://cromwellhaus.com/blogs/ryanc/archive/2007/07/26/binding-to-the-byte-of-an-image-in-wpf.aspx
-    internal class ByteImageConverter : IValueConverter
+    internal class ImageSourceConverter : IValueConverter
     {
         #region IValueConverter Members
 
@@ -18,6 +18,9 @@ namespace Gnosis.Archon
         {
             if (targetType != typeof(ImageSource))
                 throw new InvalidOperationException("The target must be ImageSource or derived types");
+
+            if (value == null)
+                return null;
 
             //if (value != null && value is List<Byte>)
             //{
@@ -33,7 +36,7 @@ namespace Gnosis.Archon
             //    }
             //}
 
-            if (value != null && value is ICollection<byte>)
+            if (value is ICollection<byte>)
             {
                 var bytes = value as ICollection<byte>;
                 if (bytes.Count > 0)
@@ -48,6 +51,20 @@ namespace Gnosis.Archon
                     return image;
                 }
             }
+
+            if (value is string)
+            {
+                var path = value as string;
+
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.CreateOptions = BitmapCreateOptions.None;
+                image.UriSource = new Uri(path, UriKind.Absolute);
+                image.EndInit();
+                return image;
+            }
+
             return null;
         }
 
