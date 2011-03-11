@@ -8,10 +8,22 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" x:Name="TrackListView" SelectionChanged="TrackListView_SelectionChanged">
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button x:Name="BackButton" Width="50" Margin="8" Click="BackButton_Click">Back</Button>
+            <Button x:Name="PlayButton" Width="50" Margin="8" Click="PlayButton_Click">Play</Button>
+            <Button x:Name="NextButton" Width="50" Margin="8" Click="NextButton_Click">Next</Button>
+            <StackPanel x:Name="NowPlayingMarquee" Visibility="Collapsed" Orientation="Horizontal">
+            <TextBlock x:Name="NowPlayingLabel" Margin="8 20 4 8" Text="Now Playing" Foreground="Gray" FontSize="12"/>
+            <TextBlock x:Name="NowPlayingTitle" Margin="8 18 8 8" Text="{Binding Title}" FontSize="14"/>
+            <TextBlock x:Name="NowPlayingBy" Margin="4 20 4 8" Text="by" Foreground="Gray" FontSize="12"/>
+            <TextBlock x:Name="NowPlayingArtist" Margin="8 18 8 8" Text="{Binding Artist}" FontSize="14"/>
+            </StackPanel>
+        </StackPanel>
+        <ListView Grid.Row="1" x:Name="TrackListView" SelectionChanged="TrackListView_SelectionChanged" MouseDoubleClick="TrackListView_MouseDoubleClick">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border Margin="3 3 3 3">
@@ -21,6 +33,7 @@
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock x:Name="TrackNumber" Text="{Binding TrackNumber}" Margin="4 0 6 0" FontSize="10"/>
                                     <TextBlock x:Name="TrackTitle" Text="{Binding Title}" Margin="4 0 0 0"/>
+                                    <TextBlock x:Name="TrackPlaybackStatus" Text="{Binding PlaybackStatus}" Margin="6 4 0 0" Foreground="Blue" FontFamily="Impact" FontSize="10"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="by" Margin="2 2 2 0" FontSize="10" Foreground="Gray"/>
@@ -43,7 +56,7 @@
                 </Style>
             </ListView.Resources>
         </ListView>
-        <Border Grid.Row="1" x:Name="TrackPropertiesBorder" Visibility="Collapsed">
+        <Border Grid.Row="2" x:Name="TrackPropertiesBorder" Visibility="Collapsed">
             <Expander x:Name="TrackProperties">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="200" Width="200"/>

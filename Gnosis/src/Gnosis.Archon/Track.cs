@@ -30,6 +30,7 @@ namespace Gnosis.Archon
         private string genre = "Unknown Genre";
         private DateTime releaseDate = new DateTime(2000, 1, 1);
         private bool isSelected;
+        private string playbackStatus;
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -216,6 +217,19 @@ namespace Gnosis.Archon
                 {
                     isSelected = value;
                     OnPropertyChanged("IsSelected");
+                }
+            }
+        }
+
+        public string PlaybackStatus
+        {
+            get { return playbackStatus; }
+            set
+            {
+                if (playbackStatus != value)
+                {
+                    playbackStatus = value;
+                    OnPropertyChanged("PlaybackStatus");
                 }
             }
         }

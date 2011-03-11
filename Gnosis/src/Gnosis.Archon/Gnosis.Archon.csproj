@@ -106,6 +106,14 @@
       <Project>{4CC18776-125E-4318-9D24-D60110AD9697}</Project>
       <Name>taglib-sharp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gnosis.Core\Gnosis.Core.csproj">
+      <Project>{37091600-5BFE-4FCB-8A69-F016FF451462}</Project>
+      <Name>Gnosis.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gnosis.Fmod\Gnosis.Fmod.csproj">
+      <Project>{1629B512-34A2-4F04-AB9A-EBD30228EBDC}</Project>
+      <Name>Gnosis.Fmod</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

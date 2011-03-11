@@ -40,14 +40,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AudioPlayer.cs" />
+    <Compile Include="AudioStateChangedEventArgs.cs" />
+    <Compile Include="BitRateType.cs" />
+    <Compile Include="BufferState.cs" />
+    <Compile Include="CompressionType.cs" />
     <Compile Include="ElementType.cs" />
+    <Compile Include="IAudioPlayer.cs" />
+    <Compile Include="IAudioStream.cs" />
+    <Compile Include="IAudioStreamFactory.cs" />
     <Compile Include="IBody.cs" />
+    <Compile Include="ICodec.cs" />
     <Compile Include="IElement.cs" />
+    <Compile Include="IMediaFormat.cs" />
+    <Compile Include="IMediaPlayer.cs" />
+    <Compile Include="IMediaStream.cs" />
     <Compile Include="IResultElement.cs" />
     <Compile Include="IPlaybackElement.cs" />
     <Compile Include="IMessage.cs" />
     <Compile Include="ITrackElement.cs" />
+    <Compile Include="MediaStateChangedEventArgs.cs" />
+    <Compile Include="MediaType.cs" />
+    <Compile Include="NetworkState.cs" />
     <Compile Include="PlaybackFunction.cs" />
+    <Compile Include="PlaybackState.cs" />
+    <Compile Include="SeekState.cs" />
     <Compile Include="StreamingStatus.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

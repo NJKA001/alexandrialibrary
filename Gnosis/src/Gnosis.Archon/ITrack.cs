@@ -22,5 +22,6 @@ namespace Gnosis.Archon
         DateTime ReleaseDate { get; set; }
         string ReleaseYear { get; }
         bool IsSelected { get; set; }
+        string PlaybackStatus { get; set; }
     }
 }

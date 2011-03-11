@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{F1E21BC9-CF8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "taglib-sharp", "..\lib\taglib-sharp\2.0.3.7\taglib-sharp.csproj", "{4CC18776-125E-4318-9D24-D60110AD9697}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Fmod", "Gnosis.Fmod\Gnosis.Fmod.csproj", "{1629B512-34A2-4F04-AB9A-EBD30228EBDC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,16 @@ Global
 		{4CC18776-125E-4318-9D24-D60110AD9697}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{4CC18776-125E-4318-9D24-D60110AD9697}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4CC18776-125E-4318-9D24-D60110AD9697}.Release|x86.ActiveCfg = Release|Any CPU
+		{1629B512-34A2-4F04-AB9A-EBD30228EBDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1629B512-34A2-4F04-AB9A-EBD30228EBDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1629B512-34A2-4F04-AB9A-EBD30228EBDC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1629B512-34A2-4F04-AB9A-EBD30228EBDC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1629B512-34A2-4F04-AB9A-EBD30228EBDC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1629B512-34A2-4F04-AB9A-EBD30228EBDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1629B512-34A2-4F04-AB9A-EBD30228EBDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1629B512-34A2-4F04-AB9A-EBD30228EBDC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1629B512-34A2-4F04-AB9A-EBD30228EBDC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1629B512-34A2-4F04-AB9A-EBD30228EBDC}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
