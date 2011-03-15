@@ -198,6 +198,7 @@ namespace Gnosis.Archon
                 if (releaseDate != value)
                 {
                     releaseDate = value;
+                    OnPropertyChanged("ReleaseYear");
                     OnPropertyChanged("ReleaseDate");
                 }
             }
@@ -206,6 +207,15 @@ namespace Gnosis.Archon
         public string ReleaseYear
         {
             get { return releaseDate.Year.ToString(); }
+            set
+            {
+                if (releaseDate.Year != int.Parse(value))
+                {
+                    releaseDate = new DateTime(int.Parse(value), 1, 1);
+                    OnPropertyChanged("ReleaseYear");
+                    OnPropertyChanged("ReleaseDate");
+                }
+            }
         }
 
         public bool IsSelected

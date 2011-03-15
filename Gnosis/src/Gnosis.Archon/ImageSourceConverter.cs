@@ -19,8 +19,10 @@ namespace Gnosis.Archon
             if (targetType != typeof(ImageSource))
                 throw new InvalidOperationException("The target must be ImageSource or derived types");
 
+            const string placeholder = "pack://application:,,,/Images/placeholder.jpg";
+
             if (value == null)
-                return null;
+                return placeholder;
 
             //if (value != null && value is List<Byte>)
             //{
@@ -41,14 +43,21 @@ namespace Gnosis.Archon
                 var bytes = value as ICollection<byte>;
                 if (bytes.Count > 0)
                 {
-                    var buffer = new byte[bytes.Count];
-                    bytes.CopyTo(buffer, 0);
-                    var stream = new MemoryStream(buffer);
-                    var image = new BitmapImage();
-                    image.BeginInit();
-                    image.StreamSource = stream;
-                    image.EndInit();
-                    return image;
+                    try
+                    {
+                        var buffer = new byte[bytes.Count];
+                        bytes.CopyTo(buffer, 0);
+                        var stream = new MemoryStream(buffer);
+                        var image = new BitmapImage();
+                        image.BeginInit();
+                        image.StreamSource = stream;
+                        image.EndInit();
+                        return image;
+                    }
+                    catch (Exception)
+                    {
+                        return null;
+                    }
                 }
             }
 
@@ -65,7 +74,7 @@ namespace Gnosis.Archon
                 return image;
             }
 
-            return null;
+            return placeholder;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
