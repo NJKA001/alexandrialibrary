@@ -60,8 +60,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FolderSource.cs" />
     <Compile Include="ImageSourceConverter.cs" />
-    <Compile Include="ITrackRepository.cs" />
+    <Compile Include="ISource.cs" />
+    <Compile Include="ISourceRepository.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="MediaSource.cs" />
+    <Compile Include="PlaylistSource.cs" />
+    <Compile Include="RepositoryBase.cs" />
+    <Compile Include="SourceBase.cs" />
     <Compile Include="StreamExtensions.cs" />
     <Compile Include="Track.cs" />
     <Compile Include="TrackRepository.cs" />

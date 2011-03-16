@@ -8,32 +8,14 @@ using System.Data.SQLite;
 
 namespace Gnosis.Archon
 {
-    public class TrackRepository : ITrackRepository
+    public class TrackRepository : RepositoryBase<ITrack>
     {
         public TrackRepository()
+            : base("Alexandria.db", "Track")
         {
-            Initialize();
         }
 
-        private static IDbConnection GetConnecion()
-        {
-            return new SQLiteConnection("Data Source=Alexandria.db;Version=3;");
-        }
-
-        private void Initialize()
-        {
-            using (var connection = GetConnecion())
-            {
-                connection.Open();
-                using (var command = connection.CreateCommand())
-                {
-                    command.CommandText = GetInitializeText();
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-
-        private static string GetInitializeText()
+        protected override string GetInitializeText()
         {
             var sql = new StringBuilder();
 
@@ -69,7 +51,7 @@ namespace Gnosis.Archon
             return sql.ToString();
         }
 
-        private static ITrack GetTrack(IDataReader reader)
+        protected override ITrack Get(IDataReader reader)
         {
             var idIndex = reader.GetOrdinal("Id");
             var pathIndex = reader.GetOrdinal("Path");
@@ -105,15 +87,7 @@ namespace Gnosis.Archon
             return track;
         }
 
-        private static void AddParameter(IDbCommand command, string name, object value)
-        {
-            var parameter = command.CreateParameter();
-            parameter.ParameterName = name;
-            parameter.Value = value;
-            command.Parameters.Add(parameter);
-        }
-
-        private static IDbCommand GetSaveCommand(IDbConnection connection, ITrack track)
+        protected override IDbCommand GetSaveCommand(IDbConnection connection, ITrack track)
         {
             var command = connection.CreateCommand();
 
@@ -142,12 +116,16 @@ namespace Gnosis.Archon
             return command;
         }
 
-        private static IDbCommand GetSelectCommand(IDbConnection connection, Guid id)
+        protected override IDbCommand GetDeleteCommand(IDbConnection connection, Guid id)
         {
-            return GetSelectCommand(connection, new Dictionary<string, object> { { "Id", id } });
+            var command = connection.CreateCommand();
+            command.CommandText = "delete from Track where Id = @Id;";
+            AddParameter(command, "@Id", id.ToString());
+
+            return command;
         }
 
-        private static IDbCommand GetSelectCommand(IDbConnection connection, IEnumerable<KeyValuePair<string, object>> criteria)
+        protected override IDbCommand GetSelectCommand(IDbConnection connection, IEnumerable<KeyValuePair<string, object>> criteria)
         {
             var command = connection.CreateCommand();
 
@@ -174,96 +152,6 @@ namespace Gnosis.Archon
 
             command.CommandText = sql.ToString();
             return command;
-        }
-
-        public ITrack Get(Guid id)
-        {
-            using (var connection = GetConnecion())
-            {
-                connection.Open();
-                using (var command = GetSelectCommand(connection, id))
-                {
-                    using (var reader = command.ExecuteReader())
-                    {
-                        reader.Read();
-                        return GetTrack(reader);
-                    }
-                }
-            }
-        }
-
-        public void Save(ITrack track)
-        {
-            using (var connection = GetConnecion())
-            {
-                connection.Open();
-                using (var command = GetSaveCommand(connection, track))
-                {
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public void Delete(Guid id)
-        {
-            using (var connection = GetConnecion())
-            {
-                connection.Open();
-                using (var command = connection.CreateCommand())
-                {
-                    command.CommandText = "delete from Track where Id = @Id;";
-                    AddParameter(command, "@Id", id.ToString());
-                    
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public IEnumerable<ITrack> Tracks()
-        {
-            var tracks = new List<ITrack>();
-
-            using (var connection = GetConnecion())
-            {
-                connection.Open();
-                using (var command = connection.CreateCommand())
-                {
-                    command.CommandText = "select * from Track order by Artist, ReleaseDate, DiscNumber, Album, TrackNumber;";
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            var track = GetTrack(reader);
-                            tracks.Add(track);
-                        }
-                    }
-                }
-            }
-
-            return tracks;
-        }
-
-        public IEnumerable<ITrack> Tracks(IEnumerable<KeyValuePair<string, object>> criteria)
-        {
-            var tracks = new List<ITrack>();
-
-            using (var connection = GetConnecion())
-            {
-                connection.Open();
-                using (var command = GetSelectCommand(connection,criteria))
-                {
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            var track = GetTrack(reader);
-                            tracks.Add(track);
-                        }
-                    }
-                }
-            }
-
-            return tracks;
         }
     }
 }

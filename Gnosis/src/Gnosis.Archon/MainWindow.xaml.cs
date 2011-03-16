@@ -30,9 +30,18 @@ namespace Gnosis.Archon
         {
             InitializeComponent();
 
-            TrackListView.ItemsSource = boundTracks;
+            TrackView.ItemsSource = boundTracks;
+            PlaylistView.ItemsSource = boundSources;
 
-            var tracks = repository.Tracks();
+            var playlist1 = new PlaylistSource { Name = "Head-bangin' Music" };
+            playlist1.AddChild(new MediaSource { Name = "Tool - Laterlus", Parent = playlist1 });
+            playlist1.AddChild(new MediaSource { Name = "Radiohead - Paranoid Android", Parent = playlist1 });
+            var playlist2 = new PlaylistSource { Name = "Chill Out #2" };
+            playlist2.AddChild(new MediaSource { Name = "Cat Power - Maybe Not", Parent = playlist2});
+            boundSources.Add(playlist1);
+            boundSources.Add(playlist2);
+
+            var tracks = trackRepository.All();
             if (tracks.Count() == 0)
             {
                 LoadMusic();
@@ -50,7 +59,8 @@ namespace Gnosis.Archon
         }
 
         private readonly ObservableCollection<ITrack> boundTracks = new ObservableCollection<ITrack>();
-        private readonly ITrackRepository repository = new TrackRepository();
+        private readonly ObservableCollection<ISource> boundSources = new ObservableCollection<ISource>();
+        private readonly IRepository<ITrack> trackRepository = new TrackRepository();
         private readonly IAudioPlayer player = new AudioPlayer(new Fmod.AudioStreamFactory()) { PlayToggles = true };
         private ITrack currentTrack;
         private IPicture copiedPicture;
@@ -66,7 +76,7 @@ namespace Gnosis.Archon
                     var track = GetTrack(file.FullName, tagFile.Tag);
 
                     boundTracks.Add(track);
-                    repository.Save(track);
+                    trackRepository.Save(track);
                 }
             }
 
@@ -156,7 +166,7 @@ namespace Gnosis.Archon
 
         private ITrack GetSelectedTrack()
         {
-            return TrackListView.SelectedItem as ITrack;
+            return TrackView.SelectedItem as ITrack;
         }
 
         private string GetPlayButtonContent()
@@ -308,11 +318,11 @@ namespace Gnosis.Archon
                 {
                     var criteria = GetSearchCriteria(search);
 
-                    tracks = repository.Tracks(criteria);
+                    tracks = trackRepository.Search(criteria);
                 }
                 else
                 {
-                    tracks = repository.Tracks();
+                    tracks = trackRepository.All();
                 }
 
                 if (tracks != null)
@@ -448,7 +458,7 @@ namespace Gnosis.Archon
                 if (track != null)
                 {
                     SaveTag(track);
-                    repository.Save(track);
+                    trackRepository.Save(track);
                 }
             }
             catch (Exception ex)

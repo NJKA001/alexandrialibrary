@@ -5,6 +5,20 @@
         Title="Alexandria" Height="640" Width="768">
     <Window.Resources>
         <local:ImageSourceConverter x:Key="imageConverter" />
+        <Style x:Key="sourceItemStyle" TargetType="{x:Type TreeViewItem}">
+            <!--
+            <EventSetter Event="PreviewMouseRightButtonDown" Handler="TreeViewItem_PreviewMouseRightButtonDown" />
+            <EventSetter Event="KeyUp" Handler="TreeViewItem_KeyUp"/>
+            <EventSetter Event="Expanded" Handler="TreeViewItem_Expanded" />
+            -->
+            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+            <!--
+            <Setter Property="Foreground" Value="{Binding Foreground, Mode=TwoWay}"/>
+            <Setter Property="Background" Value="{Binding Background, Mode=TwoWay}"/>
+            <Setter Property="Visibility" Value="{Binding Visibility}"/>
+            -->
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -24,51 +38,71 @@
             <TextBlock x:Name="NowPlayingArtist" Margin="8 18 8 8" Text="{Binding Artist}" FontSize="14"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <TextBlock Text="Search"/>
-            <TextBox x:Name="SearchTextBox" Width="600" KeyUp="SearchTextBox_KeyUp"/>
-            <Button x:Name="SearchButton" Click="SearchButton_Click">Search</Button>
-        </StackPanel>
-        <ListView Grid.Row="2" x:Name="TrackListView" SelectionChanged="TrackListView_SelectionChanged" MouseDoubleClick="TrackListView_MouseDoubleClick">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border Margin="3 3 3 3">
-                        <StackPanel Orientation="Horizontal">
-                            <Image x:Name="ItemImage" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" AllowDrop="True" Drop="ItemImage_Drop" Width="50" Height="50">
-                                <Image.ContextMenu>
-                                    <ContextMenu x:Name="ItemImageContentMenu">
-                                        <MenuItem x:Name="ItemImageCopy" Header="Copy" Click="ItemImageCopy_Click"/>
-                                        <MenuItem x:Name="ItemImagePaste" Header="Paste" Click="ItemImagePaste_Click"/>
-                                    </ContextMenu>
-                                </Image.ContextMenu>
-                            </Image>
-                            <StackPanel Orientation="Vertical">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock x:Name="TrackNumber" Text="{Binding TrackNumber}" Margin="4 0 6 0" FontSize="10"/>
-                                    <TextBlock x:Name="TrackTitle" Text="{Binding Title}" Margin="4 0 0 0"/>
-                                    <TextBlock x:Name="TrackPlaybackStatus" Text="{Binding PlaybackStatus}" Margin="6 4 0 0" Foreground="Blue" FontFamily="Impact" FontSize="10"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="by" Margin="2 2 2 0" FontSize="10" Foreground="Gray"/>
-                                    <TextBlock x:Name="TrackArtist" Text="{Binding Artist}" Margin="4 0 0 0"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="from" Margin="2 2 2 0" FontSize="10" Foreground="Gray"/>
-                                    <TextBlock x:Name="TrackAlbum" Text="{Binding Album}" Margin="4 0 0 0"/>
-                                    <TextBlock Text="released" Margin="4 2 4 0" FontSize="10" Foreground="Gray"/>
-                                    <TextBlock x:Name="TrackReleaseYear" Text="{Binding ReleaseYear}"/>
+        <Grid x:Name="SearchGrid" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="75"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="SearchTextBox" Grid.Column="0" Width="600" KeyUp="SearchTextBox_KeyUp"/>
+            <Button x:Name="SearchButton" Grid.Column="1" Click="SearchButton_Click">Search</Button>
+        </Grid>
+        <Grid x:Name="ContentGrid" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TreeView x:Name="PlaylistView" Grid.Column="0" ItemContainerStyle="{StaticResource sourceItemStyle}">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type local:ISource}">
+                        <Border>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}"/>
+                            </StackPanel>
+                        </Border>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+            <ListView x:Name="TrackView" Grid.Column="1" SelectionChanged="TrackListView_SelectionChanged" MouseDoubleClick="TrackListView_MouseDoubleClick">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="3 3 3 3">
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="ItemImage" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" AllowDrop="True" Drop="ItemImage_Drop" Width="50" Height="50">
+                                    <Image.ContextMenu>
+                                        <ContextMenu x:Name="ItemImageContentMenu">
+                                            <MenuItem x:Name="ItemImageCopy" Header="Copy" Click="ItemImageCopy_Click"/>
+                                            <MenuItem x:Name="ItemImagePaste" Header="Paste" Click="ItemImagePaste_Click"/>
+                                        </ContextMenu>
+                                    </Image.ContextMenu>
+                                </Image>
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Name="TrackNumber" Text="{Binding TrackNumber}" Margin="4 0 6 0" FontSize="10"/>
+                                        <TextBlock x:Name="TrackTitle" Text="{Binding Title}" Margin="4 0 0 0"/>
+                                        <TextBlock x:Name="TrackPlaybackStatus" Text="{Binding PlaybackStatus}" Margin="6 4 0 0" Foreground="Blue" FontFamily="Impact" FontSize="10"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="by" Margin="2 2 2 0" FontSize="10" Foreground="Gray"/>
+                                        <TextBlock x:Name="TrackArtist" Text="{Binding Artist}" Margin="4 0 0 0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="from" Margin="2 2 2 0" FontSize="10" Foreground="Gray"/>
+                                        <TextBlock x:Name="TrackAlbum" Text="{Binding Album}" Margin="4 0 0 0"/>
+                                        <TextBlock Text="released" Margin="4 2 4 0" FontSize="10" Foreground="Gray"/>
+                                        <TextBlock x:Name="TrackReleaseYear" Text="{Binding ReleaseYear}"/>
+                                    </StackPanel>
                                 </StackPanel>
                             </StackPanel>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.Resources>
-                <Style TargetType="{x:Type ListViewItem}">
-                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
-                </Style>
-            </ListView.Resources>
-        </ListView>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.Resources>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                    </Style>
+                </ListView.Resources>
+            </ListView>
+        </Grid>
         <Border Grid.Row="3" x:Name="TrackPropertiesBorder" Visibility="Collapsed">
             <Expander x:Name="TrackProperties">
                 <StackPanel Orientation="Horizontal">
