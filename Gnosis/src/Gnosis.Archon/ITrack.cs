@@ -14,8 +14,14 @@ namespace Gnosis.Archon
         ICollection<byte> ImageData { get; set; }
         object ImageSource { get; }
         string Title { get; set; }
+        string TitleHash { get; }
+        string TitleMetaphone { get; }
         string Artist { get; set; }
+        string ArtistHash { get; }
+        string ArtistMetaphone { get; }
         string Album { get; set; }
+        string AlbumHash { get; }
+        string AlbumMetaphone { get; }
         uint TrackNumber { get; set; }
         uint DiscNumber { get; set; }
         string Genre { get; set; }

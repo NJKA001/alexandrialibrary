@@ -11,5 +11,6 @@ namespace Gnosis.Archon
         void Save(ITrack track);
         void Delete(Guid id);
         IEnumerable<ITrack> Tracks();
+        IEnumerable<ITrack> Tracks(IEnumerable<KeyValuePair<string, object>> criteria);
     }
 }

@@ -78,8 +78,9 @@ namespace Gnosis.Archon
 
         private void LoadMusic()
         {
-            var directory = new DirectoryInfo(@"\\vmware-host\Shared Folders\Documents\My Music\Alexandria Anthology #1");
-//C:\Users\Public\Music\Sample Music");
+            var directory = new DirectoryInfo(
+                //@"\\vmware-host\Shared Folders\Documents\My Music\Alexandria Anthology #1");
+                @"C:\Users\Public\Music\Sample Music");
             LoadDirectory(directory);
         }
 
@@ -276,6 +277,60 @@ namespace Gnosis.Archon
             }
         }
 
+        private IEnumerable<KeyValuePair<string, object>> GetSearchCriteria(string search)
+        {
+            var criteria = new Dictionary<string, object>();
+
+            var searchLike = string.Format("%{0}%", search);
+            var searchHash = search.AsNameHash();
+            var searchMetaphone = search.AsDoubleMetaphone();
+
+            criteria.Add("Title", searchLike);
+            criteria.Add("TitleHash", searchHash);
+            criteria.Add("TitleMetaphone", searchMetaphone);
+            criteria.Add("Artist", searchLike);
+            criteria.Add("ArtistHash", searchHash);
+            criteria.Add("ArtistMetaphone", searchMetaphone);
+            criteria.Add("Album", searchLike);
+            criteria.Add("AlbumHash", searchHash);
+            criteria.Add("AlbumMetaphone", searchMetaphone);
+
+            return criteria;
+        }
+
+        private void Search(string search)
+        {
+            try
+            {
+                IEnumerable<ITrack> tracks = null;
+
+                if (!string.IsNullOrEmpty(search))
+                {
+                    var criteria = GetSearchCriteria(search);
+
+                    tracks = repository.Tracks(criteria);
+                }
+                else
+                {
+                    tracks = repository.Tracks();
+                }
+
+                if (tracks != null)
+                {
+                    boundTracks.Clear();
+                    foreach (var track in tracks)
+                    {
+                        LoadPicture(track);
+                        boundTracks.Add(track);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Search Failed");
+            }
+        }
+
         private void TrackListView_SelectionChanged(object sender, RoutedEventArgs args)
         {
             var track = GetSelectedTrack();
@@ -444,6 +499,20 @@ namespace Gnosis.Archon
             catch (Exception ex)
             {
                 System.Windows.MessageBox.Show(ex.Message, "Item Image Drag/Drop Failed");
+            }
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            Search(SearchTextBox.Text);
+        }
+
+        private void SearchTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Search(SearchTextBox.Text);
+                e.Handled = true;
             }
         }
     }

@@ -4,31 +4,46 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core;
+
 namespace Gnosis.Archon
 {
     public class Track : ITrack
     {
-        public Track()
+        public Track() : this(Guid.NewGuid())
         {
-            id = Guid.NewGuid();
         }
 
         public Track(Guid id)
         {
             this.id = id;
+            TitleHash = title.AsNameHash();
+            TitleMetaphone = title.AsDoubleMetaphone();
+            ArtistHash = artist.AsNameHash();
+            ArtistMetaphone = artist.AsDoubleMetaphone();
+            AlbumHash = album.AsNameHash();
+            AlbumMetaphone = album.AsDoubleMetaphone();
         }
+
+        public const string DEFAULT_TITLE = "Untitled";
+        public const string DEFAULT_ARTIST = "Unknown Artist";
+        public const string DEFAULT_ALBUM = "Unknown Album";
+        public const uint DEFAULT_TRACK = 0;
+        public const uint DEFAULT_DISC = 0;
+        public const string DEFAULT_GENRE = "Unknown Genre";
+        public static readonly DateTime DEFAULT_RELEASE_DATE = new DateTime(2000, 1, 1);
 
         private readonly Guid id;
         private string path;
         private string imagePath = string.Empty;
         private ICollection<byte> imageData;
-        private string title = "Untitled";
-        private string artist = "Unknown Artist";
-        private string album = "Unknown Album";
-        private uint trackNumber = 0;
-        private uint discNumber = 0;
-        private string genre = "Unknown Genre";
-        private DateTime releaseDate = new DateTime(2000, 1, 1);
+        private string title = DEFAULT_TITLE;
+        private string artist = DEFAULT_ARTIST;
+        private string album = DEFAULT_ALBUM;
+        private uint trackNumber = DEFAULT_TRACK;
+        private uint discNumber = DEFAULT_DISC;
+        private string genre = DEFAULT_GENRE;
+        private DateTime releaseDate = DEFAULT_RELEASE_DATE;
         private bool isSelected;
         private string playbackStatus;
 
@@ -113,6 +128,18 @@ namespace Gnosis.Archon
             }
         }
 
+        public string TitleHash
+        {
+            get;
+            private set;
+        }
+
+        public string TitleMetaphone
+        {
+            get;
+            private set;
+        }
+
         public string Artist
         {
             get
@@ -129,6 +156,18 @@ namespace Gnosis.Archon
             }
         }
 
+        public string ArtistHash
+        {
+            get;
+            private set;
+        }
+
+        public string ArtistMetaphone
+        {
+            get;
+            private set;
+        }
+
         public string Album
         {
             get
@@ -143,6 +182,18 @@ namespace Gnosis.Archon
                     OnPropertyChanged("Album");
                 }
             }
+        }
+
+        public string AlbumHash
+        {
+            get;
+            private set;
+        }
+
+        public string AlbumMetaphone
+        {
+            get;
+            private set;
         }
 
         public uint TrackNumber
