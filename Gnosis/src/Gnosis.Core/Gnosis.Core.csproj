@@ -65,6 +65,7 @@
     <Compile Include="PlaybackFunction.cs" />
     <Compile Include="PlaybackState.cs" />
     <Compile Include="SeekState.cs" />
+    <Compile Include="StreamExtensions.cs" />
     <Compile Include="StreamingStatus.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
