@@ -16,7 +16,8 @@ using System.Windows.Shapes;
 
 using TagLib;
 
-using Gnosis.Archon.Sources;
+using Gnosis.Archon.Models;
+using Gnosis.Archon.Repositories;
 using Gnosis.Core;
 using Gnosis.Fmod;
 

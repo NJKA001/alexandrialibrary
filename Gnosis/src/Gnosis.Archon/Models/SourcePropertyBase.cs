@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Archon.Sources.Properties
+namespace Gnosis.Archon.Models
 {
     public class SourcePropertyBase<T> : ISourceProperty
     {

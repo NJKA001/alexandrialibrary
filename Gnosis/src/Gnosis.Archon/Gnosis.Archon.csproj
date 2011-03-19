@@ -60,21 +60,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="FolderSource.cs" />
+    <Compile Include="Models\FolderSource.cs" />
     <Compile Include="ImageSourceConverter.cs" />
     <Compile Include="ISource.cs" />
     <Compile Include="ISourceProperty.cs" />
-    <Compile Include="ISourceRepository.cs" />
     <Compile Include="IRepository.cs" />
-    <Compile Include="Sources\MediaSource.cs" />
-    <Compile Include="Sources\PlaylistSource.cs" />
-    <Compile Include="RepositoryBase.cs" />
-    <Compile Include="SourceBase.cs" />
-    <Compile Include="Sources\Properties\LocationProperty.cs" />
-    <Compile Include="Sources\Properties\SourcePropertyBase.cs" />
-    <Compile Include="StreamExtensions.cs" />
-    <Compile Include="Track.cs" />
-    <Compile Include="TrackRepository.cs" />
+    <Compile Include="Repositories\SourceRepository.cs" />
+    <Compile Include="Models\MediaSource.cs" />
+    <Compile Include="Models\PlaylistSource.cs" />
+    <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="Models\SourceBase.cs" />
+    <Compile Include="Models\LocationProperty.cs" />
+    <Compile Include="Models\SourcePropertyBase.cs" />
+    <Compile Include="Models\Track.cs" />
+    <Compile Include="Repositories\TrackRepository.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -128,9 +127,7 @@
       <Name>Gnosis.Fmod</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repository\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\placeholder.jpg" />
   </ItemGroup>

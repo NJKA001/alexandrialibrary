@@ -5,7 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 
-namespace Gnosis.Archon
+namespace Gnosis.Archon.Models
 {
     public abstract class SourceBase : ISource, INotifyPropertyChanged
     {

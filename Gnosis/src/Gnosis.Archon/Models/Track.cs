@@ -6,7 +6,7 @@ using System.Text;
 
 using Gnosis.Core;
 
-namespace Gnosis.Archon
+namespace Gnosis.Archon.Models
 {
     public class Track : ITrack
     {
