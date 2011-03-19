@@ -19,8 +19,12 @@ namespace Gnosis.Archon
         }
 
         private Guid id;
+        private string path;
+        private string imagePath;
+        private ICollection<byte> imageData;
         private ISource parent;
         private string name;
+        private readonly ObservableCollection<ISourceProperty> properties = new ObservableCollection<ISourceProperty>();
         private readonly ObservableCollection<ISource> children = new ObservableCollection<ISource>();
         private bool isExpanded;
         private bool isSelected;
@@ -31,9 +35,66 @@ namespace Gnosis.Archon
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        protected IEnumerable<ISourceProperty> GetPropertiesWithName(string name)
+        {
+            return properties.Where(x => x.Name == name);
+        }
+
         public Guid Id
         {
             get { return id; }
+        }
+
+        public string Path
+        {
+            get
+            {
+                return path;
+            }
+            set
+            {
+                if (path != value)
+                {
+                    path = value;
+                    OnPropertyChanged("Path");
+                }
+            }
+        }
+
+        public string ImagePath
+        {
+            get { return imagePath; }
+            set
+            {
+                if (imagePath != value)
+                {
+                    imagePath = value;
+                    OnPropertyChanged("ImagePath");
+                    OnPropertyChanged("ImageSource");
+                }
+            }
+        }
+
+        public ICollection<byte> ImageData
+        {
+            get { return imageData; }
+            set
+            {
+                if (imageData != value)
+                {
+                    imageData = value;
+                    OnPropertyChanged("ImageData");
+                    OnPropertyChanged("ImageSource");
+                }
+            }
+        }
+
+        public object ImageSource
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(imagePath) ? (object)imagePath : imageData;
+            }
         }
 
         public ISource Parent
@@ -58,8 +119,26 @@ namespace Gnosis.Archon
                 {
                     name = value;
                     OnPropertyChanged("Name");
+
                 }
             }
+        }
+
+        public string NameHash
+        {
+            get;
+            private set;
+        }
+
+        public string NameMetaphone
+        {
+            get;
+            private set;
+        }
+
+        public IEnumerable<ISourceProperty> Properties
+        {
+            get { return properties; }
         }
 
         public IEnumerable<ISource> Children
@@ -94,6 +173,12 @@ namespace Gnosis.Archon
                     OnPropertyChanged("IsSelected");
                 }
             }
+        }
+
+        public virtual void AddProperty(ISourceProperty property)
+        {
+            properties.Add(property);
+            OnPropertyChanged("Properties");
         }
 
         public virtual void AddChild(ISource child)

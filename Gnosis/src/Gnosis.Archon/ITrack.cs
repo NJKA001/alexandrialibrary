@@ -26,7 +26,7 @@ namespace Gnosis.Archon
         uint DiscNumber { get; set; }
         string Genre { get; set; }
         DateTime ReleaseDate { get; set; }
-        string ReleaseYear { get; set; }
+        int ReleaseYear { get; set; }
         bool IsSelected { get; set; }
         string PlaybackStatus { get; set; }
     }

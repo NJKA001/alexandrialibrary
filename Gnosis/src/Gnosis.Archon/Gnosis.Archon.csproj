@@ -63,12 +63,15 @@
     <Compile Include="FolderSource.cs" />
     <Compile Include="ImageSourceConverter.cs" />
     <Compile Include="ISource.cs" />
+    <Compile Include="ISourceProperty.cs" />
     <Compile Include="ISourceRepository.cs" />
     <Compile Include="IRepository.cs" />
-    <Compile Include="MediaSource.cs" />
-    <Compile Include="PlaylistSource.cs" />
+    <Compile Include="Sources\MediaSource.cs" />
+    <Compile Include="Sources\PlaylistSource.cs" />
     <Compile Include="RepositoryBase.cs" />
     <Compile Include="SourceBase.cs" />
+    <Compile Include="Sources\Properties\LocationProperty.cs" />
+    <Compile Include="Sources\Properties\SourcePropertyBase.cs" />
     <Compile Include="StreamExtensions.cs" />
     <Compile Include="Track.cs" />
     <Compile Include="TrackRepository.cs" />
@@ -125,7 +128,9 @@
       <Name>Gnosis.Fmod</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Repository\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\placeholder.jpg" />
   </ItemGroup>

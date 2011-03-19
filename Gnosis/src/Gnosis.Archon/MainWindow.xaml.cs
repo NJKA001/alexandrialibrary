@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 
 using TagLib;
 
+using Gnosis.Archon.Sources;
 using Gnosis.Core;
 using Gnosis.Fmod;
 
@@ -88,9 +89,8 @@ namespace Gnosis.Archon
 
         private void LoadMusic()
         {
-            var directory = new DirectoryInfo(
-                //@"\\vmware-host\Shared Folders\Documents\My Music\Alexandria Anthology #1");
-                @"C:\Users\Public\Music\Sample Music");
+            var directory = new DirectoryInfo(@"\\vmware-host\Shared Folders\Documents\My Music\Alexandria Anthology #1");
+            //var directory = new DirectoryInfo(@"C:\Users\Public\Music\Sample Music");
             LoadDirectory(directory);
         }
 
@@ -156,9 +156,7 @@ namespace Gnosis.Archon
                 if (!string.IsNullOrEmpty(track.Genre))
                     file.Tag.Genres = track.Genre.Split(',', ';');
 
-                uint year = 0;
-                if (uint.TryParse(track.ReleaseYear, out year))
-                    file.Tag.Year = year;
+                file.Tag.Year = Convert.ToUInt32(track.ReleaseYear);
 
                 file.Save();
             }

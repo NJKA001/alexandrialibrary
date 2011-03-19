@@ -120,10 +120,12 @@ namespace Gnosis.Archon
             }
             set
             {
-                if (title != value)
+                if (title != value && value != null)
                 {
                     title = value;
                     OnPropertyChanged("Title");
+                    TitleHash = title.AsNameHash();
+                    TitleMetaphone = title.AsDoubleMetaphone();
                 }
             }
         }
@@ -148,10 +150,12 @@ namespace Gnosis.Archon
             }
             set
             {
-                if (artist != value)
+                if (artist != value && value != null)
                 {
                     artist = value;
                     OnPropertyChanged("Artist");
+                    ArtistHash = artist.AsNameHash();
+                    ArtistMetaphone = artist.AsDoubleMetaphone();
                 }
             }
         }
@@ -176,10 +180,12 @@ namespace Gnosis.Archon
             }
             set
             {
-                if (album != value)
+                if (album != value && value != null)
                 {
                     album = value;
                     OnPropertyChanged("Album");
+                    AlbumHash = album.AsNameHash();
+                    AlbumMetaphone = album.AsDoubleMetaphone();
                 }
             }
         }
@@ -233,7 +239,7 @@ namespace Gnosis.Archon
             get { return genre; }
             set
             {
-                if (genre != value)
+                if (genre != value && value != null)
                 {
                     genre = value;
                     OnPropertyChanged("Genre");
@@ -255,16 +261,14 @@ namespace Gnosis.Archon
             }
         }
 
-        public string ReleaseYear
+        public int ReleaseYear
         {
-            get { return releaseDate.Year.ToString(); }
+            get { return releaseDate.Year; }
             set
             {
-                if (releaseDate.Year != int.Parse(value))
+                if (releaseDate.Year != value && value != 0)
                 {
-                    releaseDate = new DateTime(int.Parse(value), 1, 1);
-                    OnPropertyChanged("ReleaseYear");
-                    OnPropertyChanged("ReleaseDate");
+                    ReleaseDate = new DateTime(value, 1, 1);
                 }
             }
         }

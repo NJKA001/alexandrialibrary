@@ -114,7 +114,7 @@ namespace TagLib.Riff
                if (stream_format == "WAVE" && style != ReadStyle.None)
                {
                   Seek (position + 8);
-                  codecs = new ICodec [] {new WaveFormatEx (ReadBlock (18))};
+                  codecs = new ICodec [] {new WaveFormatEx (ReadBlock (18), 0)};
                }
                break;
             case "data":
