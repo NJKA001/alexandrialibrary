@@ -9,15 +9,17 @@ namespace Gnosis.Archon.Repositories
 {
     public abstract class RepositoryBase<T> : IRepository<T>
     {
-        protected RepositoryBase(string database, string recordName)
+        protected RepositoryBase(string database, string table, string orderBy)
         {
             this.database = database;
-            this.recordName = recordName;
+            this.table = table;
+            this.orderBy = orderBy;
             Initialize();
         }
 
         private string database;
-        private string recordName;
+        private string table;
+        private string orderBy;
 
         private void Initialize()
         {
@@ -45,16 +47,58 @@ namespace Gnosis.Archon.Repositories
             return new SQLiteConnection(string.Format("Data Source={0};Version=3;", database));
         }
 
+        protected virtual IDbCommand GetDeleteCommand(IDbConnection connection, Guid id)
+        {
+            var command = connection.CreateCommand();
+            command.CommandText = string.Format("delete from {0} where Id = @Id;", table);
+            AddParameter(command, "@Id", id.ToString());
+
+            return command;
+        }
+
+        protected virtual IDbCommand GetSelectCommand(IDbConnection connection)
+        {
+            return GetSelectCommand(connection, new Dictionary<string, object>());
+        }
+
         protected virtual IDbCommand GetSelectCommand(IDbConnection connection, Guid id)
         {
             return GetSelectCommand(connection, new Dictionary<string, object> { { "Id", id } });
         }
 
+        protected virtual IDbCommand GetSelectCommand(IDbConnection connection, IEnumerable<KeyValuePair<string, object>> criteria)
+        {
+            var command = connection.CreateCommand();
+
+            var sql = new StringBuilder();
+            sql.AppendFormat("select * from {0}\n", table);
+
+            if (criteria != null && criteria.Count() > 0)
+            {
+                sql.AppendLine("where");
+                var prefix = string.Empty;
+                foreach (var criterium in criteria)
+                {
+                    var parameterName = string.Format("@{0}", Guid.NewGuid().ToString().Replace("-", string.Empty));
+                    AddParameter(command, parameterName, criterium.Value);
+
+                    if (criterium.Value != null && criterium.Value.ToString().Contains('%'))
+                        sql.AppendFormat("\n  {0}{1} like {2}", prefix, criterium.Key, parameterName);
+                    else
+                        sql.AppendFormat("\n  {0}{1} = {2}", prefix, criterium.Key, parameterName);
+                    prefix = "or ";
+                }
+            }
+
+            sql.AppendFormat("\norder by {0}\n;", orderBy);
+
+            command.CommandText = sql.ToString();
+            return command;
+        }
+
         protected abstract string GetInitializeText();
-        protected abstract T Get(IDataReader reader);
+        protected abstract T GetRecord(IDataReader reader);
         protected abstract IDbCommand GetSaveCommand(IDbConnection connection, T record);
-        protected abstract IDbCommand GetDeleteCommand(IDbConnection connection, Guid id);
-        protected abstract IDbCommand GetSelectCommand(IDbConnection connection, IEnumerable<KeyValuePair<string, object>> criteria);
 
         public T Get(Guid id)
         {
@@ -66,7 +110,7 @@ namespace Gnosis.Archon.Repositories
                     using (var reader = command.ExecuteReader())
                     {
                         reader.Read();
-                        return Get(reader);
+                        return GetRecord(reader);
                     }
                 }
             }
@@ -103,14 +147,14 @@ namespace Gnosis.Archon.Repositories
             using (var connection = GetConnection())
             {
                 connection.Open();
-                using (var command = GetSelectCommand(connection, null))
+                using (var command = GetSelectCommand(connection))
                 {
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            var result = Get(reader);
-                            results.Add(result);
+                            var record = GetRecord(reader);
+                            results.Add(record);
                         }
                     }
                 }
@@ -132,8 +176,8 @@ namespace Gnosis.Archon.Repositories
                     {
                         while (reader.Read())
                         {
-                            var result = Get(reader);
-                            results.Add(result);
+                            var record = GetRecord(reader);
+                            results.Add(record);
                         }
                     }
                 }

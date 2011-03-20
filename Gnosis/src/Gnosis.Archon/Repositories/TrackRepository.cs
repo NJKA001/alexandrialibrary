@@ -11,7 +11,7 @@ namespace Gnosis.Archon.Repositories
     public class TrackRepository : RepositoryBase<ITrack>
     {
         public TrackRepository()
-            : base("Alexandria.db", "Track")
+            : base("Alexandria.db", "Track", "ArtistHash, ReleaseDate, DiscNumber, AlbumHash, TrackNumber")
         {
         }
 
@@ -51,7 +51,7 @@ namespace Gnosis.Archon.Repositories
             return sql.ToString();
         }
 
-        protected override ITrack Get(IDataReader reader)
+        protected override ITrack GetRecord(IDataReader reader)
         {
             var idIndex = reader.GetOrdinal("Id");
             var pathIndex = reader.GetOrdinal("Path");
@@ -71,18 +71,18 @@ namespace Gnosis.Archon.Repositories
             var releaseDateIndex = reader.GetOrdinal("ReleaseDate");
 
             var id = new Guid(reader.GetString(idIndex));
-            var track = new Track(id);
-            //{
-                track.Path = reader.GetString(pathIndex);
-                track.ImagePath = reader.GetString(imagePathIndex);
-                track.Title = reader.GetString(titleIndex);
-                track.Artist = reader.GetString(artistIndex);
-                track.Album = reader.GetString(albumIndex);
-                track.TrackNumber = Convert.ToUInt32(reader.GetValue(trackNumberIndex));
-                track.DiscNumber = Convert.ToUInt32(reader.GetValue(discNumberIndex));
-                track.Genre = reader.GetString(genreIndex);
-                track.ReleaseDate = DateTime.Parse(reader.GetString(releaseDateIndex));
-            //};
+            var track = new Track(id)
+            {
+                Path = reader.GetString(pathIndex),
+                ImagePath = reader.GetString(imagePathIndex),
+                Title = reader.GetString(titleIndex),
+                Artist = reader.GetString(artistIndex),
+                Album = reader.GetString(albumIndex),
+                TrackNumber = Convert.ToUInt32(reader.GetValue(trackNumberIndex)),
+                DiscNumber = Convert.ToUInt32(reader.GetValue(discNumberIndex)),
+                Genre = reader.GetString(genreIndex),
+                ReleaseDate = DateTime.Parse(reader.GetString(releaseDateIndex))
+            };
 
             return track;
         }
@@ -113,44 +113,6 @@ namespace Gnosis.Archon.Repositories
             AddParameter(command, "@Genre", track.Genre);
             AddParameter(command, "@ReleaseDate", track.ReleaseDate.ToString("s"));
 
-            return command;
-        }
-
-        protected override IDbCommand GetDeleteCommand(IDbConnection connection, Guid id)
-        {
-            var command = connection.CreateCommand();
-            command.CommandText = "delete from Track where Id = @Id;";
-            AddParameter(command, "@Id", id.ToString());
-
-            return command;
-        }
-
-        protected override IDbCommand GetSelectCommand(IDbConnection connection, IEnumerable<KeyValuePair<string, object>> criteria)
-        {
-            var command = connection.CreateCommand();
-
-            var sql = new StringBuilder("select * from Track\n");
-
-            if (criteria != null && criteria.Count() > 0)
-            {
-                sql.AppendLine("where");
-                var prefix = string.Empty;
-                foreach (var criterium in criteria)
-                {
-                    var parameterName = string.Format("@{0}", Guid.NewGuid().ToString().Replace("-", string.Empty));
-                    AddParameter(command, parameterName, criterium.Value);
-
-                    if (criterium.Value != null && criterium.Value.ToString().Contains('%'))
-                        sql.AppendFormat("\n  {0}{1} like {2}", prefix, criterium.Key, parameterName);
-                    else
-                        sql.AppendFormat("\n  {0}{1} = {2}", prefix, criterium.Key, parameterName);
-                    prefix = "or ";
-                }
-            }
-
-            sql.AppendLine("\norder by ArtistHash, ReleaseDate, DiscNumber, AlbumHash, TrackNumber;");
-
-            command.CommandText = sql.ToString();
             return command;
         }
     }

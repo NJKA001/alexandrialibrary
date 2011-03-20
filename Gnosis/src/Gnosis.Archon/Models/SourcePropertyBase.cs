@@ -7,18 +7,20 @@ namespace Gnosis.Archon.Models
 {
     public class SourcePropertyBase<T> : ISourceProperty
     {
-        protected SourcePropertyBase(string name)
-            : this(name, default(T), null)
+        protected SourcePropertyBase(Guid id, ISource source, string name)
+            : this(id, source, name, default(T), null)
         {
         }
 
-        protected SourcePropertyBase(string name, T @default)
-            : this(name, @default, null)
+        protected SourcePropertyBase(Guid id, ISource source, string name, T @default)
+            : this(id, source, name, @default, null)
         {
         }
 
-        protected SourcePropertyBase(string name, T @default, Predicate<T> predicate)
+        protected SourcePropertyBase(Guid id, ISource source, string name, T @default, Predicate<T> predicate)
         {
+            this.id = id;
+            this.source = source;
             this.name = name;
             this.type = typeof(T);
             this.@default = @default;
@@ -26,6 +28,8 @@ namespace Gnosis.Archon.Models
             this.predicate = predicate;
         }
 
+        private readonly Guid id;
+        private readonly ISource source;
         private readonly string name;
         private readonly Type type;
         private readonly object @default;
@@ -33,6 +37,16 @@ namespace Gnosis.Archon.Models
         private Predicate<T> predicate;
 
         #region ISourceProperty Members
+
+        public Guid Id
+        {
+            get { return id; }
+        }
+
+        public ISource Source
+        {
+            get { return source; }
+        }
 
         public string Name
         {

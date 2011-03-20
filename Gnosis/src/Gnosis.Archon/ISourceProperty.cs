@@ -7,6 +7,8 @@ namespace Gnosis.Archon
 {
     public interface ISourceProperty
     {
+        Guid Id { get; }
+        ISource Source { get; }
         string Name { get; }
         Type Type { get; }
         object Default { get; }

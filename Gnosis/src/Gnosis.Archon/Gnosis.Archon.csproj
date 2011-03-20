@@ -65,6 +65,8 @@
     <Compile Include="ISource.cs" />
     <Compile Include="ISourceProperty.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="Models\PlaylistItemSource.cs" />
+    <Compile Include="Models\SourceType.cs" />
     <Compile Include="Repositories\SourceRepository.cs" />
     <Compile Include="Models\MediaSource.cs" />
     <Compile Include="Models\PlaylistSource.cs" />

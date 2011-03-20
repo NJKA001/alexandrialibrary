@@ -24,6 +24,8 @@ namespace Gnosis.Archon.Models
         private ICollection<byte> imageData;
         private ISource parent;
         private string name;
+        private string creator;
+        private int number;
         private readonly ObservableCollection<ISourceProperty> properties = new ObservableCollection<ISourceProperty>();
         private readonly ObservableCollection<ISource> children = new ObservableCollection<ISource>();
         private bool isExpanded;
@@ -134,6 +136,32 @@ namespace Gnosis.Archon.Models
         {
             get;
             private set;
+        }
+
+        public string Creator
+        {
+            get { return creator; }
+            set
+            {
+                if (creator != value)
+                {
+                    creator = value;
+                    OnPropertyChanged("Creator");
+                }
+            }
+        }
+
+        public int Number
+        {
+            get { return number; }
+            set
+            {
+                if (number != value)
+                {
+                    number = value;
+                    OnPropertyChanged("Number");
+                }
+            }
         }
 
         public IEnumerable<ISourceProperty> Properties

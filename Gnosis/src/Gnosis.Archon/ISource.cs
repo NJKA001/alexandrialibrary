@@ -16,6 +16,8 @@ namespace Gnosis.Archon
         string Name { get; set; }
         string NameHash { get; }
         string NameMetaphone { get; }
+        string Creator { get; set; }
+        int Number { get; set; }
         IEnumerable<ISourceProperty> Properties { get; }
         IEnumerable<ISource> Children { get; }
 
