@@ -1,0 +1,393 @@
+<VisualStudioProject>
+    <CSHARP
+        ProjectType = "Local"
+        ProductVersion = "7.10.3077"
+        SchemaVersion = "2.0"
+        ProjectGuid = "{8DE2053A-247B-430A-86C3-E52B4725AA60}"
+    >
+        <Build>
+            <Settings
+                ApplicationIcon = ""
+                AssemblyKeyContainerName = ""
+                AssemblyName = "Atom.NET"
+                AssemblyOriginatorKeyFile = ""
+                DefaultClientScript = "JScript"
+                DefaultHTMLPageLayout = "Grid"
+                DefaultTargetSchema = "IE50"
+                DelaySign = "false"
+                OutputType = "Library"
+                PreBuildEvent = ""
+                PostBuildEvent = ""
+                RootNamespace = "Atom.NET"
+                RunPostBuildEvent = "OnBuildSuccess"
+                StartupObject = ""
+            >
+                <Config
+                    Name = "Debug"
+                    AllowUnsafeBlocks = "false"
+                    BaseAddress = "285212672"
+                    CheckForOverflowUnderflow = "false"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = "DEBUG;TRACE"
+                    DocumentationFile = ""
+                    DebugSymbols = "true"
+                    FileAlignment = "4096"
+                    IncrementalBuild = "false"
+                    NoStdLib = "false"
+                    NoWarn = ""
+                    Optimize = "false"
+                    OutputPath = "bin\Debug\"
+                    RegisterForComInterop = "false"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "false"
+                    WarningLevel = "4"
+                />
+                <Config
+                    Name = "Release"
+                    AllowUnsafeBlocks = "false"
+                    BaseAddress = "285212672"
+                    CheckForOverflowUnderflow = "false"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = "TRACE"
+                    DocumentationFile = ""
+                    DebugSymbols = "false"
+                    FileAlignment = "4096"
+                    IncrementalBuild = "false"
+                    NoStdLib = "false"
+                    NoWarn = ""
+                    Optimize = "true"
+                    OutputPath = "bin\Release\"
+                    RegisterForComInterop = "false"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "false"
+                    WarningLevel = "4"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.XML"
+                    HintPath = "C:\WINNT\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
+                />
+                <Reference
+                    Name = "System.Web"
+                    AssemblyName = "System.Web"
+                    HintPath = "C:\WINNT\Microsoft.NET\Framework\v1.1.4322\System.Web.dll"
+                />
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                    HintPath = "C:\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll"
+                />
+                <Reference
+                    Name = "nunit.framework"
+                    AssemblyName = "nunit.framework"
+                    HintPath = "C:\Programmi\NUnit 2.2\bin\nunit.framework.dll"
+                    AssemblyFolderKey = "hklm\dn\nunit.framework"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "AssemblyInfo.cs"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "atomnet.build"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "AtomReader.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "AtomWriter.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "AUTHORS.txt"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "CHANGES.txt"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "COPYING.txt"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Makefile"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "Makefile.Atom.NET"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "mediatypes.txt"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "README.txt"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "TODO.txt"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Atom.AdditionalElements\ScopedElement.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.AdditionalElements\ScopedElementCollection.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.AdditionalElements\DublinCore\DcElement.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.Core\AtomContent.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.Core\AtomContentConstruct.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.Core\AtomDateConstruct.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.Core\AtomElement.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.Core\AtomEntry.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.Core\AtomFeed.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.Core\AtomGenerator.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.Core\AtomLink.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.Core\AtomPersonConstruct.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.Core\Enums.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.Core\Exceptions.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.Core.Collections\AtomContentCollection.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.Core.Collections\AtomEntryCollection.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.Core.Collections\AtomLinkCollection.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.Core.Collections\AtomPersonConstructCollection.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.Utils\DefaultValues.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Atom.Utils\Utils.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "mvpxml\XmlNamespaces.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "mvpxml\XPathNavigatorReader.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "tests\Atom.Core\AtomContentTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "tests\Atom.Core\AtomEntryTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "tests\Atom.Core\AtomFeedTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "tests\Atom.Core\AtomLinksTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "tests\Atom.Utils\UtilsTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "tests\entries\myblog.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\entries\sampleentry.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\Atom03_Max.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\Atom03_Min.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\Atom03_Multipart.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\atom03maximal-noerror.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\atom03maximal-nowarn.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\atom03minimal-noerror.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\atom03minimal-nowarn.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\blojsom-atom03-12282004.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\diveintomark-03-12282003.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\erikweblog.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\firedrop.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\first.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\namespacedfeed.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\onlyentryhaveauthor.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\pilgrim.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\randomthoughts.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\scottwater.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\second.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\testmonologue.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\third.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\tkachenko.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\feeds\withdcstuff.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\invalidentries\atomapi-07-sample.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\invalidfeeds\index.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\invalidfeeds\miguel.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "tests\invalidfeeds\oreilly.xml"
+                    BuildAction = "Content"
+                />
+            </Include>
+        </Files>
+    </CSHARP>
+</VisualStudioProject>
+

@@ -1,0 +1,33 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{C1463886-9D80-4FF0-BABF-74BD1F14BFE6}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atom.NET", "Atom.NET\Atom.NET.csproj", "{8DE2053A-247B-430A-86C3-E52B4725AA60}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{C1463886-9D80-4FF0-BABF-74BD1F14BFE6}.Debug.ActiveCfg = Debug|.NET
+		{C1463886-9D80-4FF0-BABF-74BD1F14BFE6}.Debug.Build.0 = Debug|.NET
+		{C1463886-9D80-4FF0-BABF-74BD1F14BFE6}.Release.ActiveCfg = Release|.NET
+		{C1463886-9D80-4FF0-BABF-74BD1F14BFE6}.Release.Build.0 = Release|.NET
+		{8DE2053A-247B-430A-86C3-E52B4725AA60}.Debug.ActiveCfg = Debug|.NET
+		{8DE2053A-247B-430A-86C3-E52B4725AA60}.Debug.Build.0 = Debug|.NET
+		{8DE2053A-247B-430A-86C3-E52B4725AA60}.Release.ActiveCfg = Release|.NET
+		{8DE2053A-247B-430A-86C3-E52B4725AA60}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(SolutionItems) = postSolution
+		Atom.NET.FxCop = Atom.NET.FxCop
+		Atom.NET.ndoc = Atom.NET.ndoc
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
