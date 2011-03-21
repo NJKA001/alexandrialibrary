@@ -8,13 +8,14 @@ namespace Gnosis.Archon.Models
     public class PlaylistSource : SourceBase
     {
         public PlaylistSource()
-            : base()
+            : this(Guid.NewGuid())
         {
         }
 
         public PlaylistSource(Guid id)
             : base(id)
         {
+            ImagePath = "pack://application:,,,/Images/playlist.png";
         }
     }
 }

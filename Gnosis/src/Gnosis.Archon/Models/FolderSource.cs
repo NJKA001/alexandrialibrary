@@ -8,13 +8,14 @@ namespace Gnosis.Archon.Models
     public class FolderSource : SourceBase
     {
         public FolderSource()
-            : base()
+            : this(Guid.NewGuid())
         {
         }
 
         public FolderSource(Guid id)
             : base(id)
         {
+            ImagePath = "pack://application:,,,/Images/folder.png";
         }
     }
 }

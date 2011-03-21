@@ -2,18 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel;
+
+using Gnosis.Core;
 
 namespace Gnosis.Archon.Models
 {
-    public class SourcePropertyBase<T> : ISourceProperty
+    public class SourcePropertyBase<T> : ISourceProperty, INotifyPropertyChanged
     {
+        protected SourcePropertyBase(ISource source, string name)
+            : this(Guid.NewGuid(), source, name, default(T), new Predicate<T>(x => { return true; }))
+        {
+        }
+
         protected SourcePropertyBase(Guid id, ISource source, string name)
-            : this(id, source, name, default(T), null)
+            : this(id, source, name, default(T), new Predicate<T>(x => { return true; }))
+        {
+        }
+
+        protected SourcePropertyBase(ISource source, string name, T @default)
+            : this(Guid.NewGuid(), source, name, @default, new Predicate<T>(x => { return true; }))
         {
         }
 
         protected SourcePropertyBase(Guid id, ISource source, string name, T @default)
-            : this(id, source, name, @default, null)
+            : this(id, source, name, @default, new Predicate<T>(x => { return true; }))
+        {
+        }
+
+        protected SourcePropertyBase(ISource source, string name, T @default, Predicate<T> predicate)
+            : this(Guid.NewGuid(), source, name, @default, predicate)
         {
         }
 
@@ -22,16 +40,16 @@ namespace Gnosis.Archon.Models
             this.id = id;
             this.source = source;
             this.name = name;
-            this.type = typeof(T);
+            this.baseType = typeof(T);
             this.@default = @default;
-            this.value = @default;
+            Value = @default;
             this.predicate = predicate;
         }
 
         private readonly Guid id;
         private readonly ISource source;
         private readonly string name;
-        private readonly Type type;
+        private readonly Type baseType;
         private readonly object @default;
         private object value;
         private Predicate<T> predicate;
@@ -53,9 +71,9 @@ namespace Gnosis.Archon.Models
             get { return name; }
         }
 
-        public Type Type
+        public Type BaseType
         {
-            get { return type; }
+            get { return baseType; }
         }
 
         public object Default
@@ -71,8 +89,28 @@ namespace Gnosis.Archon.Models
                 if (!IsValid(value))
                     throw new ArgumentException("Value is not valid for property " + Name);
 
-                this.value = value;
+                if (this.value != value)
+                {
+                    this.value = value;
+                    ValueHash = value != null ? value.ToString().AsNameHash() : string.Empty;
+                    ValueMetaphone = value != null ? value.ToString().AsDoubleMetaphone() : string.Empty;
+                    OnPropertyChanged("Value");
+                    OnPropertyChanged("ValueHash");
+                    OnPropertyChanged("ValueMetaphone");
+                }
             }
+        }
+
+        public string ValueHash
+        {
+            get;
+            private set;
+        }
+
+        public string ValueMetaphone
+        {
+            get;
+            private set;
         }
 
         public virtual bool IsValid(object value)
@@ -87,8 +125,20 @@ namespace Gnosis.Archon.Models
                 return false;
             }
 
-            return (predicate != null) ? predicate(check) : true;
+            return predicate(check);
         }
+
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
     }

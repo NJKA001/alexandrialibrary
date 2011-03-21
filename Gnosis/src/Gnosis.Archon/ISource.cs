@@ -24,6 +24,7 @@ namespace Gnosis.Archon
         void AddProperty(ISourceProperty property);
         void AddChild(ISource child);
 
+        string Marquee { get; }
         bool IsExpanded { get; set; }
         bool IsSelected { get; set; }
     }

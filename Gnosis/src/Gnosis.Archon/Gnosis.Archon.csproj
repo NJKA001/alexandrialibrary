@@ -60,12 +60,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ISourcePropertyFactory.cs" />
+    <Compile Include="Models\CreatorProperty.cs" />
     <Compile Include="Models\FolderSource.cs" />
     <Compile Include="ImageSourceConverter.cs" />
     <Compile Include="ISource.cs" />
     <Compile Include="ISourceProperty.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="Models\IdentifierProperty.cs" />
     <Compile Include="Models\PlaylistItemSource.cs" />
+    <Compile Include="Models\ProxySource.cs" />
+    <Compile Include="Models\SourcePropertyFactory.cs" />
     <Compile Include="Models\SourceType.cs" />
     <Compile Include="Repositories\SourceRepository.cs" />
     <Compile Include="Models\MediaSource.cs" />
@@ -129,9 +134,14 @@
       <Name>Gnosis.Fmod</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\folder.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\placeholder.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\playlist.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

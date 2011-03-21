@@ -5,7 +5,11 @@ using System.Text;
 
 namespace Gnosis.Archon.Models
 {
-    class LocationProperty
+    public class LocationProperty : SourcePropertyBase<Uri>
     {
+        public LocationProperty(Guid id, ISource source)
+            : base(id, source, "Location", new Uri("file:///"))
+        {
+        }
     }
 }

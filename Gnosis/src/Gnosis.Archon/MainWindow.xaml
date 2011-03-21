@@ -9,8 +9,9 @@
             <!--
             <EventSetter Event="PreviewMouseRightButtonDown" Handler="TreeViewItem_PreviewMouseRightButtonDown" />
             <EventSetter Event="KeyUp" Handler="TreeViewItem_KeyUp"/>
-            <EventSetter Event="Expanded" Handler="TreeViewItem_Expanded" />
+            
             -->
+            <EventSetter Event="Expanded" Handler="SourceItem_Expanded" />
             <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
             <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
             <!--
@@ -51,17 +52,24 @@
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TreeView x:Name="PlaylistView" Grid.Column="0" ItemContainerStyle="{StaticResource sourceItemStyle}">
-                <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type local:ISource}">
-                        <Border>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Name}"/>
-                            </StackPanel>
-                        </Border>
-                    </HierarchicalDataTemplate>
-                </TreeView.ItemTemplate>
-            </TreeView>
+            <StackPanel Grid.Column="0" Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="AddFolderButton" Click="AddFolderButton_Click">Add Folder</Button>
+                    <Button x:Name="AddPlaylistButton" Click="AddPlaylistButton_Click">Add Playlist</Button>
+                </StackPanel>
+                <TreeView x:Name="SourceView" ItemContainerStyle="{StaticResource sourceItemStyle}">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type local:ISource}">
+                            <Border>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image x:Name="SourceImage" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" AllowDrop="True" Width="24" Height="24"></Image>
+                                    <TextBox x:Name="SourceNameTextBox" Text="{Binding Name}" KeyUp="SourceNameTextBox_KeyUp" />
+                                </StackPanel>
+                            </Border>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </StackPanel>
             <ListView x:Name="TrackView" Grid.Column="1" SelectionChanged="TrackListView_SelectionChanged" MouseDoubleClick="TrackListView_MouseDoubleClick">
                 <ListView.ItemTemplate>
                     <DataTemplate>

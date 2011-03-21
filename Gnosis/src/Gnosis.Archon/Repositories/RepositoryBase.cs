@@ -71,26 +71,32 @@ namespace Gnosis.Archon.Repositories
             var command = connection.CreateCommand();
 
             var sql = new StringBuilder();
-            sql.AppendFormat("select * from {0}\n", table);
+            sql.AppendFormat("select * from {0}", table);
 
             if (criteria != null && criteria.Count() > 0)
             {
-                sql.AppendLine("where");
+                sql.Append(" where");
                 var prefix = string.Empty;
                 foreach (var criterium in criteria)
                 {
-                    var parameterName = string.Format("@{0}", Guid.NewGuid().ToString().Replace("-", string.Empty));
-                    AddParameter(command, parameterName, criterium.Value);
+                    if (criterium.Value != null)
+                    {
+                        var parameterName = string.Format("@{0}", Guid.NewGuid().ToString().Replace("-", string.Empty));
+                        AddParameter(command, parameterName, criterium.Value);
 
-                    if (criterium.Value != null && criterium.Value.ToString().Contains('%'))
-                        sql.AppendFormat("\n  {0}{1} like {2}", prefix, criterium.Key, parameterName);
+                        if (criterium.Value.ToString().Contains('%'))
+                            sql.AppendFormat(" {0}{1} like {2}", prefix, criterium.Key, parameterName);
+                        else
+                            sql.AppendFormat(" {0}{1} = {2}", prefix, criterium.Key, parameterName);
+                    }
                     else
-                        sql.AppendFormat("\n  {0}{1} = {2}", prefix, criterium.Key, parameterName);
+                        sql.AppendFormat(" {0}{1} is null", prefix, criterium.Key);
+
                     prefix = "or ";
                 }
             }
 
-            sql.AppendFormat("\norder by {0}\n;", orderBy);
+            sql.AppendFormat(" order by {0};", orderBy);
 
             command.CommandText = sql.ToString();
             return command;

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.ComponentModel;
-using System.Collections.ObjectModel;
+
+using Gnosis.Core;
 
 namespace Gnosis.Archon.Models
 {
@@ -120,8 +122,12 @@ namespace Gnosis.Archon.Models
                 if (name != value)
                 {
                     name = value;
+                    NameHash = value != null ? value.AsNameHash() : string.Empty;
+                    NameMetaphone = value != null ? value.AsDoubleMetaphone() : string.Empty;
                     OnPropertyChanged("Name");
-
+                    OnPropertyChanged("NameHash");
+                    OnPropertyChanged("NameMetaphone");
+                    OnPropertyChanged("Marquee");
                 }
             }
         }
@@ -147,6 +153,7 @@ namespace Gnosis.Archon.Models
                 {
                     creator = value;
                     OnPropertyChanged("Creator");
+                    OnPropertyChanged("Marquee");
                 }
             }
         }
@@ -172,6 +179,11 @@ namespace Gnosis.Archon.Models
         public IEnumerable<ISource> Children
         {
             get { return children; }
+        }
+
+        public virtual string Marquee
+        {
+            get { return string.Format("{0} {1}", Name ?? "Unknown", Creator != null ? string.Format("({0})", Creator) : string.Empty ); }
         }
 
         public bool IsExpanded

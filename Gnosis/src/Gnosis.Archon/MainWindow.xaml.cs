@@ -32,40 +32,65 @@ namespace Gnosis.Archon
         {
             InitializeComponent();
 
-            TrackView.ItemsSource = boundTracks;
-            PlaylistView.ItemsSource = boundSources;
-
-            var playlist1 = new PlaylistSource { Name = "Head-bangin' Music" };
-            playlist1.AddChild(new MediaSource { Name = "Tool - Laterlus", Parent = playlist1 });
-            playlist1.AddChild(new MediaSource { Name = "Radiohead - Paranoid Android", Parent = playlist1 });
-            var playlist2 = new PlaylistSource { Name = "Chill Out #2" };
-            playlist2.AddChild(new MediaSource { Name = "Cat Power - Maybe Not", Parent = playlist2});
-            boundSources.Add(playlist1);
-            boundSources.Add(playlist2);
-
-            var tracks = trackRepository.All();
-            if (tracks.Count() == 0)
+            try
             {
-                LoadMusic();
-            }
-            else
-            {
-                foreach (var track in tracks)
+                SourceView.ItemsSource = boundSources;
+                TrackView.ItemsSource = boundTracks;
+
+                var sources = sourceRepository.Search(new Dictionary<string, object> { { "Parent", null } });
+                if (sources != null && sources.Count() > 0)
                 {
-                    LoadPicture(track);
-                    boundTracks.Add(track);
+                    foreach (var source in sources)
+                    {
+                        boundSources.Add(source);
+                        LoadSourceChildren(source);
+                    }
                 }
-            }
 
-            player.CurrentAudioStreamEnded += new EventHandler<EventArgs>(CurrentTrackEnded);
+                var tracks = trackRepository.All();
+                if (tracks.Count() == 0)
+                {
+                    LoadMusic();
+                }
+                else
+                {
+                    foreach (var track in tracks)
+                    {
+                        LoadPicture(track);
+                        boundTracks.Add(track);
+                    }
+                }
+
+                player.CurrentAudioStreamEnded += new EventHandler<EventArgs>(CurrentTrackEnded);
+            }
+            catch (Exception ex)
+            {
+                var message = ex.Message;
+                System.Diagnostics.Debug.WriteLine("MainWindow.ctor failed:" + ex.Message + "\n\n" + ex.StackTrace);
+            }
         }
 
         private readonly ObservableCollection<ITrack> boundTracks = new ObservableCollection<ITrack>();
         private readonly ObservableCollection<ISource> boundSources = new ObservableCollection<ISource>();
         private readonly IRepository<ITrack> trackRepository = new TrackRepository();
+        private readonly IRepository<ISource> sourceRepository = new SourceRepository();
         private readonly IAudioPlayer player = new AudioPlayer(new Fmod.AudioStreamFactory()) { PlayToggles = true };
         private ITrack currentTrack;
         private IPicture copiedPicture;
+
+        private void LoadSourceChildren(ISource source)
+        {
+            var children = sourceRepository.Search(new Dictionary<string, object> { { "Parent", source.Id.ToString() } });
+            if (children != null && children.Count() > 0)
+            {
+                foreach (var child in children)
+                {
+                    child.Parent = source;
+                    source.AddChild(child);
+                    LoadSourceChildren(child);
+                }
+            }
+        }
 
         private void LoadDirectory(DirectoryInfo directory)
         {
@@ -522,6 +547,92 @@ namespace Gnosis.Archon
             {
                 Search(SearchTextBox.Text);
                 e.Handled = true;
+            }
+        }
+
+        private ISource GetSelectedSource()
+        {
+            return SourceView.SelectedItem as ISource;
+        }
+
+        private void AddFolderButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var folder = new FolderSource { Name = "New Folder" };
+
+                var source = GetSelectedSource();
+                if (source != null)
+                {
+                    folder.Parent = source;
+                    source.AddChild(folder);
+                }
+                else
+                {
+                    boundSources.Add(folder);
+                }
+
+                sourceRepository.Save(folder);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Add Folder Failed");
+            }
+        }
+
+        private void AddPlaylistButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var playlist = new PlaylistSource { Name = "New Playlist" };
+
+                var source = GetSelectedSource();
+                if (source != null)
+                {
+                    playlist.Parent = source;
+                    source.AddChild(playlist);
+                }
+                else
+                {
+                    boundSources.Add(playlist);
+                }
+
+                sourceRepository.Save(playlist);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Add Playlist Failed");
+            }
+        }
+
+        private void SourceNameTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.Key == Key.Enter || e.Key == Key.Return)
+                {
+                    e.Handled = true;
+                    var source = GetSelectedSource();
+                    if (source != null)
+                    {
+                        sourceRepository.Save(source);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Edit Playlist Failed");
+            }
+        }
+
+        private void SourceItem_Expanded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Source Expanded Failed");
             }
         }
     }
