@@ -8,16 +8,24 @@
         <Style x:Key="sourceItemStyle" TargetType="{x:Type TreeViewItem}">
             <!--
             <EventSetter Event="PreviewMouseRightButtonDown" Handler="TreeViewItem_PreviewMouseRightButtonDown" />
-            <EventSetter Event="KeyUp" Handler="TreeViewItem_KeyUp"/>
-            
             -->
+            <EventSetter Event="KeyUp" Handler="SourceItem_KeyUp"/>
             <EventSetter Event="Expanded" Handler="SourceItem_Expanded" />
+            <EventSetter Event="Drop" Handler="SourceItem_Drop"/>
+            <Setter Property="AllowDrop" Value="true"/>
             <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
             <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
             <!--
             <Setter Property="Foreground" Value="{Binding Foreground, Mode=TwoWay}"/>
             <Setter Property="Background" Value="{Binding Background, Mode=TwoWay}"/>
             <Setter Property="Visibility" Value="{Binding Visibility}"/>
+            -->
+            <!--
+            <Style.Triggers>
+                <Trigger Property="IsBeingRenamed" Value="true">
+                    <Setter Property="IsBeingRenamed" V
+                </Trigger>
+            </Style.Triggers>
             -->
         </Style>
     </Window.Resources>
@@ -63,7 +71,8 @@
                             <Border>
                                 <StackPanel Orientation="Horizontal">
                                     <Image x:Name="SourceImage" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" AllowDrop="True" Width="24" Height="24"></Image>
-                                    <TextBox x:Name="SourceNameTextBox" Text="{Binding Name}" KeyUp="SourceNameTextBox_KeyUp" />
+                                    <TextBlock x:Name="SourceNameTextBlock" Text="{Binding Name}" Visibility="{Binding DisplayNameVisibility}"/>
+                                    <TextBox x:Name="SourceNameTextBox" Text="{Binding Name, Mode=TwoWay}" Visibility="{Binding EditNameVisibility}" KeyUp="SourceNameTextBox_KeyUp" />
                                 </StackPanel>
                             </Border>
                         </HierarchicalDataTemplate>

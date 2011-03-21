@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 using Gnosis.Core;
 
@@ -32,6 +33,7 @@ namespace Gnosis.Archon.Models
         private readonly ObservableCollection<ISource> children = new ObservableCollection<ISource>();
         private bool isExpanded;
         private bool isSelected;
+        private bool isBeingRenamed;
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -213,6 +215,31 @@ namespace Gnosis.Archon.Models
                     OnPropertyChanged("IsSelected");
                 }
             }
+        }
+
+        public bool IsBeingRenamed
+        {
+            get { return isBeingRenamed; }
+            set
+            {
+                if (isBeingRenamed != value)
+                {
+                    isBeingRenamed = value;
+                    OnPropertyChanged("IsBeingRenamed");
+                    OnPropertyChanged("DisplayNameVisibility");
+                    OnPropertyChanged("EditNameVisibility");
+                }
+            }
+        }
+
+        public Visibility DisplayNameVisibility
+        {
+            get { return IsBeingRenamed ? Visibility.Collapsed : Visibility.Visible; }
+        }
+
+        public Visibility EditNameVisibility
+        {
+            get { return IsBeingRenamed ? Visibility.Visible : Visibility.Collapsed; }
         }
 
         public virtual void AddProperty(ISourceProperty property)

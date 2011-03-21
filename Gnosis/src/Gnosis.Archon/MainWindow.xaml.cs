@@ -564,6 +564,7 @@ namespace Gnosis.Archon
                 var source = GetSelectedSource();
                 if (source != null)
                 {
+                    source.IsExpanded = true;
                     folder.Parent = source;
                     source.AddChild(folder);
                 }
@@ -589,6 +590,7 @@ namespace Gnosis.Archon
                 var source = GetSelectedSource();
                 if (source != null)
                 {
+                    source.IsExpanded = true;
                     playlist.Parent = source;
                     source.AddChild(playlist);
                 }
@@ -605,6 +607,25 @@ namespace Gnosis.Archon
             }
         }
 
+        private void SourceItem_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.Key == Key.F2)
+                {
+                    var source = GetSelectedSource();
+                    if (source != null)
+                    {
+                        source.IsBeingRenamed = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Edit Source Failed");
+            }
+        }
+
         private void SourceNameTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             try
@@ -613,9 +634,13 @@ namespace Gnosis.Archon
                 {
                     e.Handled = true;
                     var source = GetSelectedSource();
-                    if (source != null)
+                    var textBox = sender as TextBox;
+                    if (source != null && source.IsBeingRenamed && textBox != null)
                     {
+                        source.Name = textBox.Text;
+                        source.IsBeingRenamed = false;
                         sourceRepository.Save(source);
+
                     }
                 }
             }
@@ -633,6 +658,22 @@ namespace Gnosis.Archon
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Source Expanded Failed");
+            }
+        }
+
+        private void SourceItem_Drop(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var source = GetSelectedSource();
+                if (source != null)
+                {
+                    var x = e;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Source Item Drop Failed");
             }
         }
     }

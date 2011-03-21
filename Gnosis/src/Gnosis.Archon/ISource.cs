@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace Gnosis.Archon
 {
@@ -27,5 +28,8 @@ namespace Gnosis.Archon
         string Marquee { get; }
         bool IsExpanded { get; set; }
         bool IsSelected { get; set; }
+        bool IsBeingRenamed { get; set; }
+        Visibility DisplayNameVisibility { get; }
+        Visibility EditNameVisibility { get; }
     }
 }
