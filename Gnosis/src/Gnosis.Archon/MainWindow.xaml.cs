@@ -20,6 +20,7 @@ using Gnosis.Archon.Models;
 using Gnosis.Archon.Repositories;
 using Gnosis.Core;
 using Gnosis.Fmod;
+using Gnosis.Archon.Helpers;
 
 namespace Gnosis.Archon
 {
@@ -131,6 +132,15 @@ namespace Gnosis.Archon
             if (file != null && file.Tag != null && file.Tag.Pictures.Length > 0)
             {
                 track.ImageData = file.Tag.Pictures[0].Data;
+            }
+        }
+
+        private void LoadPicture(PlaylistItemSource source)
+        {
+            var file = GetTagFile(source.Path);
+            if (file != null && file.Tag != null && file.Tag.Pictures.Length > 0)
+            {
+                source.ImageData = file.Tag.Pictures[0].Data;
             }
         }
 
@@ -654,6 +664,25 @@ namespace Gnosis.Archon
         {
             try
             {
+                var treeViewItem = sender as TreeViewItem;
+                if (treeViewItem != null)
+                {
+                    var source = treeViewItem.Header as ISource;
+                    if (source != null)
+                    {
+                        foreach (var child in source.Children)
+                        {
+                            var playlistItem = child as PlaylistItemSource;
+                            if (playlistItem != null)
+                            {
+                                if (!string.IsNullOrEmpty(playlistItem.Path) && playlistItem.ImageData == null)
+                                {
+                                    LoadPicture(playlistItem);
+                                }
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -661,19 +690,171 @@ namespace Gnosis.Archon
             }
         }
 
-        private void SourceItem_Drop(object sender, RoutedEventArgs e)
+        private Point trackItemDragStartPoint = new Point(0, 0);
+        private ITrack trackToDrag = null;
+
+        private void TrackItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            trackItemDragStartPoint = e.GetPosition(null);
+        }
+
+        private void TrackItem_MouseMove(object sender, MouseEventArgs e)
         {
             try
             {
-                var source = GetSelectedSource();
-                if (source != null)
+                var position = e.GetPosition(null);
+                var offset = trackItemDragStartPoint - position;
+
+                if (e.LeftButton == MouseButtonState.Pressed
+                    && Math.Abs(offset.X) > SystemParameters.MinimumHorizontalDragDistance
+                    && Math.Abs(offset.Y) > SystemParameters.MinimumVerticalDragDistance)
                 {
-                    var x = e;
+                    var track = GetSelectedTrack();
+                    if (track != null && track != trackToDrag)
+                    {
+                        trackToDrag = track;
+                        var data = new DataObject("Track", track);
+                        DragDrop.DoDragDrop(TrackView, data, DragDropEffects.Copy);
+                        System.Diagnostics.Debug.WriteLine("TrackItem_MouseMove: DoDragDrop");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Track Item Drag Failed");
+            }
+        }
+
+        private ISource GetSourceDropTarget(DragEventArgs e)
+        {
+            var element = e.OriginalSource as UIElement;
+            if (element != null)
+            {
+                var item = VisualHelper.FindContainingTreeViewItem(element);
+                if (item != null)
+                {
+                    return item.Header as ISource;
+                }
+            }
+
+            return null;
+        }
+
+        private void SourceView_DragEnter(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent("Track"))
+            {
+                e.Effects = DragDropEffects.None;
+            }
+            else
+            {
+                var playlist = GetSourceDropTarget(e) as PlaylistSource;
+                if (playlist == null)
+                {
+                    e.Effects = DragDropEffects.None;
+                }
+            }
+        }
+
+        private void AddPlaylistItem(PlaylistSource playlist, ITrack track)
+        {
+            var item = new PlaylistItemSource()
+            { 
+                Parent = playlist,
+                Path = track.Path,
+                ImagePath = track.ImagePath, 
+                ImageData = track.ImageData,
+                Name = string.Format("{0} by {1}", track.Title ?? "Untitled", track.Artist ?? "Unknown Artist"),
+                Number = playlist.Children.Count() + 1
+            };
+
+            sourceRepository.Save(item);
+
+            playlist.AddChild(item);
+            playlist.IsExpanded = true;
+            item.IsSelected = true;
+        }
+
+        private void SourceView_Drop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                var track = e.Data.GetData("Track") as ITrack;
+                if (track != null)
+                {
+                    var playlist = GetSourceDropTarget(e) as PlaylistSource;
+                    if (playlist != null)
+                    {
+                        AddPlaylistItem(playlist, track);
+                    }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Source Item Drop Failed");
+            }
+        }
+
+        private void LoadPlaylist_Clicked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var menuItem = sender as MenuItem;
+                if (menuItem != null)
+                {
+                    PlaylistSource playlist = menuItem.CommandParameter as PlaylistSource;
+                    if (playlist != null)
+                    {
+                        boundTracks.Clear();
+                        foreach (var item in playlist.Children)
+                        {
+                            var track = trackRepository.Search(new Dictionary<string, object> { { "Path", item.Path } }).FirstOrDefault();
+                            if (track != null)
+                            {
+                                LoadPicture(track);
+                                boundTracks.Add(track);
+                            }
+                        }
+                        if (boundTracks.Count > 0)
+                        {
+                            boundTracks[0].IsSelected = true;
+                            PlayButton_Click(this, null);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Load Playlist Failed");
+            }
+        }
+
+        private void SourceItem_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                SourceView.ContextMenu = null;
+                var item = sender as TreeViewItem;
+                if (item != null)
+                {
+                    var source = item.Header as ISource;
+                    if (source != null)
+                    {
+                        if (source is PlaylistSource)
+                        {
+                            var menu = new ContextMenu();
+                            var loadPlaylistItem = new MenuItem { Header = "Load Playlist" };
+                            loadPlaylistItem.CommandParameter = source;
+                            loadPlaylistItem.Click += LoadPlaylist_Clicked;
+                            menu.Items.Add(loadPlaylistItem);
+                            SourceView.ContextMenu = menu;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Source Item Preview Right Click Failed");
             }
         }
     }

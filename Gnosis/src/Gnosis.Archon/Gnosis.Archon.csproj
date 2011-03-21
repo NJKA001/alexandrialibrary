@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\VisualHelper.cs" />
     <Compile Include="ISourcePropertyFactory.cs" />
     <Compile Include="Models\CreatorProperty.cs" />
     <Compile Include="Models\FolderSource.cs" />
@@ -142,6 +143,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\playlist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

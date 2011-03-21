@@ -11,7 +11,7 @@
             -->
             <EventSetter Event="KeyUp" Handler="SourceItem_KeyUp"/>
             <EventSetter Event="Expanded" Handler="SourceItem_Expanded" />
-            <EventSetter Event="Drop" Handler="SourceItem_Drop"/>
+            <EventSetter Event="PreviewMouseRightButtonDown" Handler="SourceItem_PreviewMouseRightButtonDown"/>
             <Setter Property="AllowDrop" Value="true"/>
             <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
             <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
@@ -65,7 +65,7 @@
                     <Button x:Name="AddFolderButton" Click="AddFolderButton_Click">Add Folder</Button>
                     <Button x:Name="AddPlaylistButton" Click="AddPlaylistButton_Click">Add Playlist</Button>
                 </StackPanel>
-                <TreeView x:Name="SourceView" ItemContainerStyle="{StaticResource sourceItemStyle}">
+                <TreeView x:Name="SourceView" ItemContainerStyle="{StaticResource sourceItemStyle}" DragEnter="SourceView_DragEnter" Drop="SourceView_Drop">
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type local:ISource}">
                             <Border>
@@ -116,6 +116,8 @@
                 <ListView.Resources>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="TrackItem_PreviewMouseLeftButtonDown"/>
+                        <EventSetter Event="MouseMove" Handler="TrackItem_MouseMove"/>
                     </Style>
                 </ListView.Resources>
             </ListView>
