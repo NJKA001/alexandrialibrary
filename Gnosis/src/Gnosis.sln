@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Core", "Gnosis.Core\Gnosis.Core.csproj", "{37091600-5BFE-4FCB-8A69-F016FF451462}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Archon", "Gnosis.Archon\Gnosis.Archon.csproj", "{1307CB13-F914-4DEC-8198-BBBC571D821C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Alexandria", "Gnosis.Alexandria\Gnosis.Alexandria.csproj", "{1307CB13-F914-4DEC-8198-BBBC571D821C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{F1E21BC9-CF85-4CC2-8A00-00ED88073BE5}"
 EndProject

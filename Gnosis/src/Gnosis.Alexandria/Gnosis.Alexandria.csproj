@@ -8,8 +8,8 @@
     <ProjectGuid>{1307CB13-F914-4DEC-8198-BBBC571D821C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gnosis.Archon</RootNamespace>
-    <AssemblyName>Gnosis.Archon</AssemblyName>
+    <RootNamespace>Gnosis.Alexandria</RootNamespace>
+    <AssemblyName>Alexandria</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
