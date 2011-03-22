@@ -288,7 +288,6 @@ namespace Gnosis.Fmod
 		/// <summary>
 		/// Gets and sets the Channel's current position in Milliseconds
 		/// </summary>
-		[CLSCompliant(false)]
 		public uint Position
 		{
 			get
@@ -305,7 +304,6 @@ namespace Gnosis.Fmod
 		#endregion
 		
 		#region PositionInBytes
-		[CLSCompliant(false)]
 		public uint PositionInBytes
 		{
 			get
@@ -578,7 +576,6 @@ namespace Gnosis.Fmod
 		#endregion
 				
 		#region Loop
-		[CLSCompliant(false)]
 		public SoundLoop Loop
 		{
 			get {return loop;}
@@ -635,7 +632,6 @@ namespace Gnosis.Fmod
 		#endregion
 
 		#region SetCallback
-		[CLSCompliant(false)]
 		public void SetCallback(ChannelCallbackType callbackType, ChannelCallback callback, int command)
 		{
 			currentResult = NativeMethods.FMOD_Channel_SetCallback(handle, callbackType, callback, command);

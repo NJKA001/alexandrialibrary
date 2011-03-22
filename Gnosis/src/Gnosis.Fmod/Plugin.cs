@@ -15,7 +15,6 @@ namespace Gnosis.Fmod
 		#endregion
 		
 		#region Constructors
-		[CLSCompliant(false)]
 		public Plugin(IntPtr systemHandle, PluginType type, int id, string fileName, uint version)
 		{
 			this.systemHandle = systemHandle;
@@ -57,7 +56,6 @@ namespace Gnosis.Fmod
 		#endregion
 		
 		#region Version
-		[CLSCompliant(false)]
 		public uint Version
 		{
 			get {return version;}

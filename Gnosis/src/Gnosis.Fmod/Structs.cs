@@ -90,13 +90,11 @@ namespace Gnosis.Fmod
 		/// <summary>
 		/// [in] Optional. Specify 0 to ignore. Size in bytes of file to load, or sound to create (in this case only if FMOD_OPENUSER is used).  Required if loading from memory.  If 0 is specified, then it will use the size of the file (unless loading from memory then an error will be returned).
 		/// </summary>
-		[CLSCompliant(false)]
 		public uint Length;
 		
 		/// <summary>
 		/// [in] Optional. Specify 0 to ignore. Offset from start of the file to start loading from.  This is useful for loading files from inside big data files.
 		/// </summary>
-		[CLSCompliant(false)]
 		public uint FileOffset;
 		
 		/// <summary>
@@ -117,7 +115,6 @@ namespace Gnosis.Fmod
 		/// <summary>
 		/// [in] Optional. Specify 0 to ignore. For streams.  This determines the size of the double buffer (in PCM samples) that a stream uses.  Use this for user created streams if you want to determine the size of the callback buffer passed to you.  Specify 0 to use FMOD's default size which is currently equivalent to 400ms of the sound format created/loaded.
 		/// </summary>
-		[CLSCompliant(false)]
 		public uint DecodeBufferSize;
 		
 		/// <summary>
@@ -143,13 +140,11 @@ namespace Gnosis.Fmod
 		/// <summary>
 		/// [in] Optional. Specify 0 to ignore. Callback to 'piggyback' on FMOD's read functions and accept or even write PCM data while FMOD is opening the sound.  Used for user sounds created with OPENUSER or for capturing decoded data as FMOD reads it.
 		/// </summary>
-		[CLSCompliant(false)]
 		public SoundPcmReadCallback PcmReadCallback;
 		
 		/// <summary>
 		/// [in] Optional. Specify 0 to ignore. Callback for when the user calls a seeking function such as Channel::setPosition within a multi-sample sound, and for when it is opened.
 		/// </summary>
-		[CLSCompliant(false)]
 		public SoundPcmSetPositionCallback PcmSetPositionCallback;
 		
 		/// <summary>
@@ -350,7 +345,6 @@ namespace Gnosis.Fmod
 		/// <summary>
 		/// [out] FmodLength of the data contained in this Tag
 		/// </summary>
-		[CLSCompliant(false)]
 		public uint DataLength;      
 		public bool IsUpdated;      /* [out] True if this Tag has been updated since last being accessed with Sound::getTag */
 		#endregion
@@ -541,7 +535,6 @@ namespace Gnosis.Fmod
 		/// <summary>
 		/// [in/out] REVERB_CHANNELFLAGS - modifies the behavior of properties (win32)
 		/// </summary>
-		[CLSCompliant(false)]
 		public uint Flags;
 		#endregion
 		
@@ -696,7 +689,6 @@ namespace Gnosis.Fmod
 		/// <summary>
 		/// [in] Plugin writer's Version number.
 		/// </summary>
-		[CLSCompliant(false)]
 		public uint Version;
 		
 		public int Channels;           /* [in] Number of channels.  Use 0 to process whatever number of channels is currently in the network.  >0 would be mostly used if the unit is a unit that only generates sound. */
@@ -753,15 +745,11 @@ namespace Gnosis.Fmod
 	public struct SoundDelay
 	{
 		#region Public Fields
-		[CLSCompliant(false)]
 		public uint Start;
-
-		[CLSCompliant(false)]
 		public uint End;
 		#endregion
 
 		#region Constructor
-		[CLSCompliant(false)]
 		public SoundDelay(uint start, uint end)
 		{
 			Start = start;

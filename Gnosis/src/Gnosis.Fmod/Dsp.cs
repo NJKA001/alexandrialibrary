@@ -234,7 +234,6 @@ namespace Gnosis.Fmod
 		#endregion
 		
 		#region Version
-		[CLSCompliant(false)]
 		public uint Version
 		{
 			get

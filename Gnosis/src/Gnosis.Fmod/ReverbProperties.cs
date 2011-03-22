@@ -58,7 +58,6 @@ namespace Gnosis.Fmod
 		/// <summary>
 		/// [in/out] 0     , 25    , 0      , sets all listener properties (win32/ps2)
 		/// </summary>
-		[CLSCompliant(false)]
 		public uint Environment;
 		
 		/// <summary>
@@ -186,7 +185,6 @@ namespace Gnosis.Fmod
 		/// <summary>
 		/// [in/out] ReverbFlags - modifies the behavior of above properties (win32/ps2)
 		/// </summary>
-		[CLSCompliant(false)]
 		public uint ReverbFlags;
 		#endregion
 		
@@ -225,7 +223,6 @@ namespace Gnosis.Fmod
 		/// <param name="diffusion">diffusion</param>
 		/// <param name="density">density</param>
 		/// <param name="reverbFlags">reverb flags</param>
-		[CLSCompliant(false)]
 		public ReverbProperties(int instance, uint environment, float environmentSize, float environmentDiffusion, int room, int roomHighFrequency, int roomLowFrequency,
 			float decayTime, float decayHighFrequencyRatio, float decayLowFrequencyRatio, int reflections, float reflectionsDelay,
 			float reflectionsPanX, float reflectionsPanY, float reflectionsPanZ, int reverb, float reverbDelay,

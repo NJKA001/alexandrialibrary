@@ -4,11 +4,9 @@ using System.Text;
 
 namespace Gnosis.Fmod
 {
-	[CLSCompliant(false)]
 	public class SoundLoop	
 	{
 		#region Constructors
-		[CLSCompliant(false)]
 		public SoundLoop(uint start, TimeUnits startUnit, uint end, TimeUnits endUnit, int count)
 		{
 			this.start = start;
@@ -30,7 +28,6 @@ namespace Gnosis.Fmod
 		#region Public Properties
 				
 		#region Start
-		[CLSCompliant(false)]
 		public uint Start
 		{
 			get {return start;}
@@ -47,7 +44,6 @@ namespace Gnosis.Fmod
 		#endregion
 		
 		#region End
-		[CLSCompliant(false)]
 		public uint End
 		{
 			get {return end;}

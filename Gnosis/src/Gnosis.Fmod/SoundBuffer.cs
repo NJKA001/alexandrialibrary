@@ -24,7 +24,6 @@ namespace Gnosis.Fmod
 		#endregion
 				
 		#region Constructors
-		[CLSCompliant(false)]
 		public SoundBuffer(IntPtr soundHandle, IntPtr data, uint totalBytes, uint currentBytes)
 		{
 			this.soundHandle = soundHandle;
@@ -64,7 +63,6 @@ namespace Gnosis.Fmod
 		/// <summary>
 		/// Gets the total numnber of bytes allocated for this buffer
 		/// </summary>
-		[CLSCompliant(false)]
 		public uint TotalBytes
 		{
 			get {return totalBytes;}
@@ -75,7 +73,6 @@ namespace Gnosis.Fmod
 		/// <summary>
 		/// Gets the current number of bytes read into this buffer
 		/// </summary>
-		[CLSCompliant(false)]
 		public uint CurrentBytes
 		{
 			get {return currentBytes;}
@@ -94,7 +91,6 @@ namespace Gnosis.Fmod
 		/// Do NOT use this method for normal seeking within a Sound - use Channel.SetPosition() for that
 		/// </summary>		
 		/// <param name="length">the length of bytes to seek forward in the buffer</param>
-		[CLSCompliant(false)]
 		public void Seek(uint length)
 		{
 			currentResult = NativeMethods.FMOD_Sound_SeekData(soundHandle, length);

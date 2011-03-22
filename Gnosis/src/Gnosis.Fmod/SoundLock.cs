@@ -42,7 +42,6 @@ namespace Gnosis.Fmod
 		#endregion
 		
 		#region Constructors
-		[CLSCompliant(false)]
 		public SoundLock(IntPtr soundHandle, bool isLocked, uint offset, uint length)
 		{
 			this.soundHandle = soundHandle;			
@@ -84,7 +83,6 @@ namespace Gnosis.Fmod
 		#endregion
 		
 		#region Offset
-		[CLSCompliant(false)]
 		public uint Offset
 		{
 			get {return offset;}
@@ -93,7 +91,6 @@ namespace Gnosis.Fmod
 		#endregion
 		
 		#region FmodLength
-		[CLSCompliant(false)]
 		public uint Length
 		{
 			get {return length;}
@@ -132,7 +129,6 @@ namespace Gnosis.Fmod
 		#endregion
 		
 		#region Length1
-		[CLSCompliant(false)]
 		public uint Length1
 		{
 			get {return length1;}
@@ -148,7 +144,6 @@ namespace Gnosis.Fmod
 		#endregion
 		
 		#region Length2
-		[CLSCompliant(false)]
 		public uint Length2
 		{
 			get { return length2; }

@@ -570,7 +570,6 @@ namespace Gnosis.Fmod
 		#endregion		
 		
 		#region DspBufferLength
-		[CLSCompliant(false)]
 		public uint DspBufferLength
 		{
 			get
@@ -603,7 +602,6 @@ namespace Gnosis.Fmod
 		#endregion
 				
 		#region UserFileOpenCallback
-		[CLSCompliant(false)]
 		public FileOpenCallback UserFileOpenCallback
 		{
 			get {return userFileOpenCallback;}
@@ -620,7 +618,6 @@ namespace Gnosis.Fmod
 		#endregion
 		
 		#region UserFileReadCallback
-		[CLSCompliant(false)]
 		public FileReadCallback UserFileReadCallback
 		{
 			get {return userFileReadCallback;}
@@ -871,7 +868,6 @@ namespace Gnosis.Fmod
 		#endregion
 
 		#region StreamBufferSize
-		[CLSCompliant(false)]
 		public uint StreamBufferSize
 		{
 			get
@@ -1150,7 +1146,6 @@ namespace Gnosis.Fmod
 		#endregion
 		
 		#region RecordPosition
-		[CLSCompliant(false)]
 		public uint RecordPosition
 		{
 			get
