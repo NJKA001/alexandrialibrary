@@ -1,0 +1,25 @@
+﻿<views:ControlView x:Class="Gnosis.Alexandria.Views.HomeTabView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:views="clr-namespace:Gnosis.Alexandria.Views"
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="388">
+    <Grid Height="221" Name="gridHome" Width="375">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Button Content="Browse" Height="23" HorizontalAlignment="Center" Margin="25,27,25,23" Name="btnBrowse" VerticalAlignment="Center" Width="75" />
+        <TextBox Height="20" HorizontalAlignment="Stretch" Margin="52,-31,0,0" Name="txtSearch" VerticalAlignment="Top" Width="323" Grid.ColumnSpan="3" KeyDown="SearchEntered" />
+        <Label Content="Search" Height="28" HorizontalAlignment="Left" Margin="0,-33,0,0" Name="lblSearch" VerticalAlignment="Top" />
+        <Button Content="Catalog" Grid.Column="1" Height="23" HorizontalAlignment="Center" Margin="24,28,25,23" Name="btnCatalog" VerticalAlignment="Center" Width="75" />
+        <Button Content="Play" Grid.Column="2" Height="23" HorizontalAlignment="Center" Margin="26,27,23,24" Name="btnPlay" VerticalAlignment="Center" Width="75" />
+    </Grid>
+</views:ControlView>
