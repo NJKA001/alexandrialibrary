@@ -26,18 +26,18 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
+using System.Net.Mime;
+using System.Text;
 
-namespace Gnosis.Core
+namespace Gnosis.Fmod
 {
-	/// <summary>
-	/// The network state of a media stream
-	/// </summary>
-	public enum NetworkState
+	public interface IMediaFormat
 	{
-		None = 0,
-		Connecting,
-		Error,
-		Reconnecting,
-		Streaming,
+		string Name { get; }
+		string Description { get; }
+		IList<ContentType> ContentTypes { get; }
+		IList<string> FileExtensions { get; }
+		IList<ICodec> Codecs { get; }
 	}
 }

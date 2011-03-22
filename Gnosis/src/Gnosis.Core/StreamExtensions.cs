@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Archon
+namespace Gnosis.Core
 {
     public static class StreamExtensions
     {

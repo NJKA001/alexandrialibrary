@@ -29,12 +29,33 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Gnosis.Core
+namespace Gnosis.Fmod
 {
-	public interface IAudioStream : IMediaStream
+	public class AudioStateChangedEventArgs : EventArgs
 	{
-		float Volume { get; set; }
-		bool IsMuted { get; set; }
-		EventHandler<AudioStateChangedEventArgs> VolumeChanged { get; set; }
+		#region Constructors
+		public AudioStateChangedEventArgs(float volume, bool isMuted)
+		{
+			this.volume = volume;
+			this.isMuted = isMuted;
+		}
+		#endregion
+
+		#region Private Fields
+		private float volume;
+		private bool isMuted;
+		#endregion
+
+		#region Public Properties
+		public float Volume
+		{
+			get { return volume; }
+		}
+
+		public bool IsMuted
+		{
+			get { return isMuted; }
+		}
+		#endregion
 	}
 }

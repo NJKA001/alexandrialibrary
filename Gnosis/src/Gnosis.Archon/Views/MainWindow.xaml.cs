@@ -4,8 +4,10 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
+using ControlPrimatives=System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -22,7 +24,7 @@ using Gnosis.Core;
 using Gnosis.Fmod;
 using Gnosis.Archon.Helpers;
 
-namespace Gnosis.Archon
+namespace Gnosis.Archon.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -80,10 +82,10 @@ namespace Gnosis.Archon
         private readonly IRepository<ITrack> trackRepository = new TrackRepository();
         private readonly IRepository<ISource> sourceRepository = new SourceRepository();
         private readonly IAudioPlayer player = new AudioPlayer(new Fmod.AudioStreamFactory()) { PlayToggles = true };
-        private readonly System.Timers.Timer playbackTimer = new System.Timers.Timer(1000);
+        private readonly Timer playbackTimer = new Timer(1000);
+        private readonly IPlaybackStatus playbackStatus = new PlaybackStatus();
         private ITrack currentTrack;
         private IPicture copiedPicture;
-        private PlaybackStatus playbackStatus = new PlaybackStatus();
 
         private void LoadSourceChildren(ISource source)
         {
@@ -889,12 +891,12 @@ namespace Gnosis.Archon
             }
         }
 
-        private void PlaybackTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private void PlaybackTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             UpdatePlaybackStatus();
         }
 
-        private void NowPlayingElapsedSlider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        private void NowPlayingElapsedSlider_DragStarted(object sender, ControlPrimatives.DragStartedEventArgs e)
         {
             try
             {
@@ -909,7 +911,7 @@ namespace Gnosis.Archon
             }
         }
 
-        private void NowPlayingElapsedSlider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        private void NowPlayingElapsedSlider_DragCompleted(object sender, ControlPrimatives.DragCompletedEventArgs e)
         {
             try
             {

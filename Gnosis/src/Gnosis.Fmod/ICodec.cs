@@ -26,16 +26,16 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 
-namespace Gnosis.Core
+namespace Gnosis.Fmod
 {
-	public enum MediaType
+	public interface ICodec
 	{
-		None = 0,
-		Audio,
-		Image,
-		Subtitle,
-		Text,
-		Video
+		string Name { get; }
+		string Description { get; }
+		MediaType MediaType { get; }
+		IList<BitRateType> BitRateTypes { get; }
+		IList<CompressionType> CompressionTypes { get; }
 	}
 }

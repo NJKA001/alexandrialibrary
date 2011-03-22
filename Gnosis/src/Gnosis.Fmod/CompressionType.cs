@@ -26,19 +26,15 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Gnosis.Core
+namespace Gnosis.Fmod
 {
-	/// <summary>
-	/// The buffer state of a media stream
-	/// </summary>
-	public enum BufferState
+	public enum CompressionType
 	{
-		None = 0,
-		Error,
-		Loading,
-		Buffering,
-		Full,
-		Starving
+		Unknown = 0,
+		Lossless,
+		Lossy
 	}
 }

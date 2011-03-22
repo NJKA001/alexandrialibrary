@@ -61,10 +61,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\VisualHelper.cs" />
+    <Compile Include="IPlaybackStatus.cs" />
     <Compile Include="ISourcePropertyFactory.cs" />
     <Compile Include="Models\CreatorProperty.cs" />
     <Compile Include="Models\FolderSource.cs" />
-    <Compile Include="ImageSourceConverter.cs" />
+    <Compile Include="Converters\ImageSourceConverter.cs" />
     <Compile Include="ISource.cs" />
     <Compile Include="ISourceProperty.cs" />
     <Compile Include="IRepository.cs" />
@@ -73,7 +74,7 @@
     <Compile Include="Models\ProxySource.cs" />
     <Compile Include="Models\SourcePropertyFactory.cs" />
     <Compile Include="Models\SourceType.cs" />
-    <Compile Include="PlaybackStatus.cs" />
+    <Compile Include="Models\PlaybackStatus.cs" />
     <Compile Include="Repositories\SourceRepository.cs" />
     <Compile Include="Models\MediaSource.cs" />
     <Compile Include="Models\PlaylistSource.cs" />
@@ -83,7 +84,7 @@
     <Compile Include="Models\SourcePropertyBase.cs" />
     <Compile Include="Models\Track.cs" />
     <Compile Include="Repositories\TrackRepository.cs" />
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -92,7 +93,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ITrack.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

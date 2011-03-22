@@ -26,13 +26,14 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Gnosis.Core
+namespace Gnosis.Fmod
 {
-	public interface IAudioStreamFactory
+	public enum SeekState
 	{
-		IAudioStream CreateAudioStream(Uri path);
+		None = 0,
+		Backward,
+		Error,
+		Forward
 	}
 }

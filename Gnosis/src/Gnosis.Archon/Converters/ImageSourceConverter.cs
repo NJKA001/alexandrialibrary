@@ -7,7 +7,7 @@ using System.Windows.Media;
 using System.IO;
 using System.Windows.Media.Imaging;
 
-namespace Gnosis.Archon
+namespace Gnosis.Archon.Converters
 {
     //reference: - http://cromwellhaus.com/blogs/ryanc/archive/2007/07/26/binding-to-the-byte-of-an-image-in-wpf.aspx
     internal class ImageSourceConverter : IValueConverter

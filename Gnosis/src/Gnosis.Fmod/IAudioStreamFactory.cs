@@ -27,17 +27,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net.Mime;
 using System.Text;
 
-namespace Gnosis.Core
+namespace Gnosis.Fmod
 {
-	public interface IMediaFormat
+	public interface IAudioStreamFactory
 	{
-		string Name { get; }
-		string Description { get; }
-		IList<ContentType> ContentTypes { get; }
-		IList<string> FileExtensions { get; }
-		IList<ICodec> Codecs { get; }
+		IAudioStream CreateAudioStream(Uri path);
 	}
 }

@@ -29,12 +29,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Gnosis.Core
+namespace Gnosis.Fmod
 {
-	public enum CompressionType
+	public interface IAudioStream : IMediaStream
 	{
-		Unknown = 0,
-		Lossless,
-		Lossy
+		float Volume { get; set; }
+		bool IsMuted { get; set; }
+		EventHandler<AudioStateChangedEventArgs> VolumeChanged { get; set; }
 	}
 }

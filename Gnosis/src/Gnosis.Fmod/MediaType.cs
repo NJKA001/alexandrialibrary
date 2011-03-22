@@ -27,13 +27,15 @@
 
 using System;
 
-namespace Gnosis.Core
+namespace Gnosis.Fmod
 {
-	public enum SeekState
+	public enum MediaType
 	{
 		None = 0,
-		Backward,
-		Error,
-		Forward
+		Audio,
+		Image,
+		Subtitle,
+		Text,
+		Video
 	}
 }

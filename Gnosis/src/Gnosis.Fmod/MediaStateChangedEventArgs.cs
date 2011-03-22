@@ -26,16 +26,48 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
 
-namespace Gnosis.Core
+namespace Gnosis.Fmod
 {
-	public interface ICodec
+	public class MediaStateChangedEventArgs : EventArgs
 	{
-		string Name { get; }
-		string Description { get; }
-		MediaType MediaType { get; }
-		IList<BitRateType> BitRateTypes { get; }
-		IList<CompressionType> CompressionTypes { get; }
+		#region Constructors
+		public MediaStateChangedEventArgs(BufferState bufferState, NetworkState networkState, PlaybackState playbackState, SeekState seekState)
+		{
+			this.bufferState = bufferState;
+			this.networkState = networkState;
+			this.playbackState = playbackState;
+			this.seekState = seekState;
+		}
+		#endregion
+
+		#region Private Fields
+		private BufferState bufferState = BufferState.None;
+		private NetworkState networkState = NetworkState.None;
+		private PlaybackState playbackState = PlaybackState.None;
+		private SeekState seekState = SeekState.None;
+		#endregion
+
+		#region Public Properties
+		public BufferState BufferState
+		{
+			get { return bufferState; }
+		}
+
+		public NetworkState NetworkState
+		{
+			get { return networkState; }
+		}
+
+		public PlaybackState PlaybackState
+		{
+			get { return playbackState; }
+		}
+
+		public SeekState SeekState
+		{
+			get { return seekState; }
+		}
+		#endregion
 	}
 }

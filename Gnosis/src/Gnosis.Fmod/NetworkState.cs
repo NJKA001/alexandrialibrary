@@ -27,17 +27,17 @@
 
 using System;
 
-namespace Gnosis.Core
+namespace Gnosis.Fmod
 {
 	/// <summary>
-	/// The playback state of a media stream
+	/// The network state of a media stream
 	/// </summary>
-	public enum PlaybackState
+	public enum NetworkState
 	{
 		None = 0,
+		Connecting,
 		Error,
-		Playing,
-		Paused,
-		Stopped
+		Reconnecting,
+		Streaming,
 	}
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 
-namespace Gnosis.Archon
+namespace Gnosis.Archon.Models
 {
-    public class PlaybackStatus : INotifyPropertyChanged
+    public class PlaybackStatus : IPlaybackStatus, INotifyPropertyChanged
     {
         private bool isPlaying = false;
         private string imagePath = playPath;

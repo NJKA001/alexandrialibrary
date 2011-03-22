@@ -28,7 +28,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Gnosis.Core
+namespace Gnosis.Fmod
 {
 	public class AudioPlayer : IAudioPlayer
 	{

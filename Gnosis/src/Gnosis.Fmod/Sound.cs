@@ -73,8 +73,14 @@ namespace Gnosis.Fmod
 				
 				if (handle != IntPtr.Zero)
 				{
-					NativeMethods.FMOD_Sound_Release(handle);
-					handle = IntPtr.Zero;
+                    try
+                    {
+                        NativeMethods.FMOD_Sound_Release(handle);
+                    }
+                    finally
+                    {
+                        handle = IntPtr.Zero;
+                    }
 				}
 			}
 			disposed = true;
