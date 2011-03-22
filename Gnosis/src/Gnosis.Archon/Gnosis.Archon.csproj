@@ -73,6 +73,7 @@
     <Compile Include="Models\ProxySource.cs" />
     <Compile Include="Models\SourcePropertyFactory.cs" />
     <Compile Include="Models\SourceType.cs" />
+    <Compile Include="PlaybackStatus.cs" />
     <Compile Include="Repositories\SourceRepository.cs" />
     <Compile Include="Models\MediaSource.cs" />
     <Compile Include="Models\PlaylistSource.cs" />
@@ -146,6 +147,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\back.png" />
+    <Resource Include="Images\next.png" />
+    <Resource Include="Images\pause.png" />
+    <Resource Include="Images\play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\sphinx.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

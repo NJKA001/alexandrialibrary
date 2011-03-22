@@ -46,6 +46,9 @@ namespace Gnosis.Archon.Models
         private DateTime releaseDate = DEFAULT_RELEASE_DATE;
         private bool isSelected;
         private string playbackStatus;
+        private string durationLabel;
+        private string elapsedLabel;
+        private double elapsed;
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -295,6 +298,45 @@ namespace Gnosis.Archon.Models
                 {
                     playbackStatus = value;
                     OnPropertyChanged("PlaybackStatus");
+                }
+            }
+        }
+
+        public string DurationLabel
+        {
+            get { return durationLabel; }
+            set
+            {
+                if (durationLabel != value)
+                {
+                    durationLabel = value;
+                    OnPropertyChanged("DurationLabel");
+                }
+            }
+        }
+
+        public string ElapsedLabel
+        {
+            get { return elapsedLabel; }
+            set
+            {
+                if (elapsedLabel != value)
+                {
+                    elapsedLabel = value;
+                    OnPropertyChanged("ElapsedLabel");
+                }
+            }
+        }
+
+        public double Elapsed
+        {
+            get { return elapsed; }
+            set
+            {
+                if (elapsed != value)
+                {
+                    elapsed = value;
+                    OnPropertyChanged("Elapsed");
                 }
             }
         }

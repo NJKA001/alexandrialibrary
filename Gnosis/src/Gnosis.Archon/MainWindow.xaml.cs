@@ -35,8 +35,12 @@ namespace Gnosis.Archon
 
             try
             {
+                playbackTimer.Elapsed += new System.Timers.ElapsedEventHandler(PlaybackTimer_Elapsed);
+                playbackTimer.Start();
+
                 SourceView.ItemsSource = boundSources;
                 TrackView.ItemsSource = boundTracks;
+                PlayButtonImage.DataContext = playbackStatus;
 
                 var sources = sourceRepository.Search(new Dictionary<string, object> { { "Parent", null } });
                 if (sources != null && sources.Count() > 0)
@@ -76,8 +80,10 @@ namespace Gnosis.Archon
         private readonly IRepository<ITrack> trackRepository = new TrackRepository();
         private readonly IRepository<ISource> sourceRepository = new SourceRepository();
         private readonly IAudioPlayer player = new AudioPlayer(new Fmod.AudioStreamFactory()) { PlayToggles = true };
+        private readonly System.Timers.Timer playbackTimer = new System.Timers.Timer(1000);
         private ITrack currentTrack;
         private IPicture copiedPicture;
+        private PlaybackStatus playbackStatus = new PlaybackStatus();
 
         private void LoadSourceChildren(ISource source)
         {
@@ -203,10 +209,10 @@ namespace Gnosis.Archon
             return TrackView.SelectedItem as ITrack;
         }
 
-        private string GetPlayButtonContent()
-        {
-            return player.CurrentAudioStream.PlaybackState == PlaybackState.Playing ? "Pause" : "Play";
-        }
+        //private string GetPlayButtonContent()
+        //{
+        //    return player.CurrentAudioStream.PlaybackState == PlaybackState.Playing ? "Pause" : "Play";
+        //}
 
         private Uri GetCurrentUri()
         {
@@ -222,8 +228,12 @@ namespace Gnosis.Archon
                 track.PlaybackStatus = "Now Playing";
 
             currentTrack = track;
-            NowPlayingMarquee.DataContext = currentTrack;
-            NowPlayingMarquee.Visibility = currentTrack != null ? Visibility.Visible : Visibility.Collapsed;
+
+            NowPlayingMarquee.Dispatcher.Invoke((Action)delegate()
+            {
+                NowPlayingMarquee.DataContext = currentTrack;
+                NowPlayingMarquee.Visibility = currentTrack != null ? Visibility.Visible : Visibility.Collapsed;
+            });
         }
 
         private void PlayCurrentTrack()
@@ -245,8 +255,15 @@ namespace Gnosis.Archon
                     }
                 }
 
+                currentTrack.ElapsedLabel = "0:00";
+                currentTrack.DurationLabel = string.Format("{0}:{1:00}", player.CurrentAudioStream.Duration.Minutes, player.Duration.Seconds);
+                
+                NowPlayingElapsedSlider.Dispatcher.Invoke((Action)delegate { NowPlayingElapsedSlider.Maximum = player.CurrentAudioStream.Duration.TotalSeconds; });
+
                 player.Play();
-                PlayButton.Content = GetPlayButtonContent();
+
+                playbackStatus.IsPlaying = (player.CurrentAudioStream.PlaybackState == PlaybackState.Playing);
+                //PlayButton.Dispatcher.Invoke((Action)delegate() { PlayButton.Content = GetPlayButtonContent(); });
             }
         }
 
@@ -855,6 +872,56 @@ namespace Gnosis.Archon
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Source Item Preview Right Click Failed");
+            }
+        }
+
+        private void UpdatePlaybackStatus()
+        {
+            if (player != null && player.CurrentAudioStream != null && currentTrack != null)
+            {
+                player.RefreshPlayerStates();
+                currentTrack.ElapsedLabel = string.Format("{0}:{1:00}", player.CurrentAudioStream.Elapsed.Minutes, player.CurrentAudioStream.Elapsed.Seconds);
+
+                if (!player.SeekIsPending)
+                {
+                    currentTrack.Elapsed = player.CurrentAudioStream.Elapsed.TotalSeconds;
+                }
+            }
+        }
+
+        private void PlaybackTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            UpdatePlaybackStatus();
+        }
+
+        private void NowPlayingElapsedSlider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        {
+            try
+            {
+                if (player != null && player.CurrentAudioStream != null && currentTrack != null)
+                {
+                    player.BeginSeek();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Seek Started Failed");
+            }
+        }
+
+        private void NowPlayingElapsedSlider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            try
+            {
+                if (player != null && player.CurrentAudioStream != null && currentTrack != null && NowPlayingElapsedSlider.Value >= 0)
+                {
+                    player.Seek(Convert.ToInt32(NowPlayingElapsedSlider.Value * 1000));
+                    UpdatePlaybackStatus();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Seek Completed Failed");
             }
         }
     }

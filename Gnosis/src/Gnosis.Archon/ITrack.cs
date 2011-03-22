@@ -29,5 +29,8 @@ namespace Gnosis.Archon
         int ReleaseYear { get; set; }
         bool IsSelected { get; set; }
         string PlaybackStatus { get; set; }
+        string DurationLabel { get; set; }
+        string ElapsedLabel { get; set; }
+        double Elapsed { get; set; }
     }
 }
