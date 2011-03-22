@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 using Gnosis.Core;
 
-namespace Gnosis.Archon.Models
+namespace Gnosis.Alexandria.Models
 {
     public class SourcePropertyBase<T> : ISourceProperty, INotifyPropertyChanged
     {

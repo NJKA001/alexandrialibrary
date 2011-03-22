@@ -1,8 +1,8 @@
-﻿<Window x:Class="Gnosis.Archon.Views.MainWindow"
+﻿<Window x:Class="Gnosis.Alexandria.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:Gnosis.Archon"
-        xmlns:converters="clr-namespace:Gnosis.Archon.Converters"
+        xmlns:local="clr-namespace:Gnosis.Alexandria"
+        xmlns:converters="clr-namespace:Gnosis.Alexandria.Converters"
         Title="Alexandria" Height="640" Width="768" Icon="pack://application:,,,/Images/sphinx.png">
     <Window.Resources>
         <converters:ImageSourceConverter x:Key="imageConverter" />

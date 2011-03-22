@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 
-namespace Gnosis.Archon
+namespace Gnosis.Alexandria
 {
     public interface ISource
     {

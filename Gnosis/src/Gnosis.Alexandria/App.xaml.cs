@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 
-namespace Gnosis.Archon
+namespace Gnosis.Alexandria
 {
     /// <summary>
     /// Interaction logic for App.xaml

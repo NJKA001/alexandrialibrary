@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 
-namespace Gnosis.Archon.Models
+namespace Gnosis.Alexandria.Models
 {
     public class PlaybackStatus : IPlaybackStatus, INotifyPropertyChanged
     {

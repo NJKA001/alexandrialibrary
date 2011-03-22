@@ -77,6 +77,10 @@ namespace Gnosis.Fmod
                     {
                         NativeMethods.FMOD_Sound_Release(handle);
                     }
+                    catch (AccessViolationException)
+                    {
+                        //TODO: The sound handle has already been relased - all that we can do is log it
+                    }
                     finally
                     {
                         handle = IntPtr.Zero;

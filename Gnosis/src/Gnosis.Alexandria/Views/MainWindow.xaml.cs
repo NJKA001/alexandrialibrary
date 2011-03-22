@@ -18,13 +18,13 @@ using System.Windows.Shapes;
 
 using TagLib;
 
-using Gnosis.Archon.Models;
-using Gnosis.Archon.Repositories;
+using Gnosis.Alexandria.Helpers;
+using Gnosis.Alexandria.Models;
+using Gnosis.Alexandria.Repositories;
 using Gnosis.Core;
 using Gnosis.Fmod;
-using Gnosis.Archon.Helpers;
 
-namespace Gnosis.Archon.Views
+namespace Gnosis.Alexandria.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

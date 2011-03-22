@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Archon
+namespace Gnosis.Alexandria
 {
     public interface ITrack : INotifyPropertyChanged
     {

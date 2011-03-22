@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Gnosis.Archon.Helpers
+namespace Gnosis.Alexandria.Helpers
 {
     public static class VisualHelper
     {

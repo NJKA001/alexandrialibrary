@@ -4,9 +4,9 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Archon.Models;
+using Gnosis.Alexandria.Models;
 
-namespace Gnosis.Archon.Repositories
+namespace Gnosis.Alexandria.Repositories
 {
     public class SourceRepository : RepositoryBase<ISource>
     {

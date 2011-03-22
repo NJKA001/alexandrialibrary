@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\back.png" />

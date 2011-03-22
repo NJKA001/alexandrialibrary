@@ -5,7 +5,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Archon.Repositories
+namespace Gnosis.Alexandria.Repositories
 {
     public abstract class RepositoryBase<T> : IRepository<T>
     {

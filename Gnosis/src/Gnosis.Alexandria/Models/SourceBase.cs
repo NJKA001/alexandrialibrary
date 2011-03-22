@@ -8,7 +8,7 @@ using System.Windows;
 
 using Gnosis.Core;
 
-namespace Gnosis.Archon.Models
+namespace Gnosis.Alexandria.Models
 {
     public abstract class SourceBase : ISource, INotifyPropertyChanged
     {

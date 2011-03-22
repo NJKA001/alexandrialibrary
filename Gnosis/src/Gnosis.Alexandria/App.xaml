@@ -1,4 +1,4 @@
-﻿<Application x:Class="Gnosis.Archon.App"
+﻿<Application x:Class="Gnosis.Alexandria.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="Views/MainWindow.xaml">
