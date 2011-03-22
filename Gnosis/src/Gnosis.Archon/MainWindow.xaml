@@ -37,13 +37,13 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button x:Name="BackButton" Width="50" Margin="8" Click="BackButton_Click" BorderBrush="Transparent" BorderThickness="0">
+            <Button x:Name="BackButton" Width="50" Margin="4" Click="BackButton_Click" BorderBrush="Transparent" BorderThickness="0" Background="Transparent">
                 <Image x:Name="BackButtonImage" Source="pack://application:,,,/Images/back.png"/>
             </Button>
-            <Button x:Name="PlayButton" Width="50" Margin="8" Click="PlayButton_Click" BorderBrush="Transparent" BorderThickness="0">
+            <Button x:Name="PlayButton" Width="50" Margin="4" Click="PlayButton_Click" BorderBrush="Transparent" BorderThickness="0" Background="Transparent">
                 <Image x:Name="PlayButtonImage" Source="{Binding ImagePath}" Visibility="Visible" />
             </Button>
-            <Button x:Name="NextButton" Width="50" Margin="8" Click="NextButton_Click" BorderBrush="Transparent" BorderThickness="0">
+            <Button x:Name="NextButton" Width="50" Margin="4" Click="NextButton_Click" BorderBrush="Transparent" BorderThickness="0" Background="Transparent">
                 <Image x:Name="NextButtonImage" Source="pack://application:,,,/Images/next.png"/>
             </Button>
             <StackPanel x:Name="NowPlayingMarquee" Visibility="Collapsed" Orientation="Vertical">
@@ -54,10 +54,10 @@
                     <TextBlock x:Name="NowPlayingArtist" Margin="8 8 8 8" Text="{Binding Artist}" FontSize="14"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="NowPlayingElapsed" Margin="4 4 4 8" Text="{Binding ElapsedLabel}" FontSize="12" FontWeight="Bold"/>
+                    <TextBlock x:Name="NowPlayingElapsed" Margin="8 4 4 8" Text="{Binding ElapsedLabel}" FontSize="12" FontWeight="Bold"/>
                     <TextBlock Text="/" Margin="0 4 0 8" FontSize="12"/>
                     <TextBlock x:Name="NowPlayingDuration" Margin="4 4 4 8" Text="{Binding DurationLabel}" FontSize="12" FontWeight="Bold"/>
-                    <Slider x:Name="NowPlayingElapsedSlider" Margin="4 4 4 8" Value="{Binding Elapsed}" Orientation="Horizontal" Width="200" Thumb.DragStarted="NowPlayingElapsedSlider_DragStarted" Thumb.DragCompleted="NowPlayingElapsedSlider_DragCompleted"/>
+                    <Slider x:Name="NowPlayingElapsedSlider" Margin="4 4 4 8" Value="{Binding Elapsed}" Orientation="Horizontal" Width="300" Thumb.DragStarted="NowPlayingElapsedSlider_DragStarted" Thumb.DragCompleted="NowPlayingElapsedSlider_DragCompleted"/>
                 </StackPanel>
             </StackPanel>
             
