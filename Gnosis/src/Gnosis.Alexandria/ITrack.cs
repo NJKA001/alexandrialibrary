@@ -26,6 +26,8 @@ namespace Gnosis.Alexandria
         uint DiscNumber { get; set; }
         string Genre { get; set; }
         DateTime ReleaseDate { get; set; }
+        string Country { get; set; }
+        string CountryImagePath { get; }
         int ReleaseYear { get; set; }
         bool IsSelected { get; set; }
         string PlaybackStatus { get; set; }

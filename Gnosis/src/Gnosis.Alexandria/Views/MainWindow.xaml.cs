@@ -1015,14 +1015,13 @@ namespace Gnosis.Alexandria.Views
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     var directory = new DirectoryInfo(dialog.SelectedPath);
-                    var source = new FileSystemSource() { Name = directory.Name, Path = dialog.SelectedPath };
+                    var source = new FileSystemSource() { Name = directory.Name, Path = dialog.SelectedPath, Parent = parent };
                     LoadDirectory(directory);
 
                     sourceRepository.Save(source);
 
                     if (parent != null)
                     {
-                        source.Parent = parent;
                         parent.AddChild(source);
                     }
                     else

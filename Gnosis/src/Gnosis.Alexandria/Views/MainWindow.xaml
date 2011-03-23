@@ -129,6 +129,11 @@
                                     <TextBlock Text="in" Foreground="Gray"/>
                                     <TextBox Text="{Binding ReleaseYear}" FontSize="12" Margin="4 0 4 0"/>
                                 </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Country" Foreground="Gray"/>
+                                    <TextBox Text="{Binding Country}" FontSize="12" Margin="4 0 4 0"/>
+                                    <Image Source="{Binding CountryImagePath}" Margin="4"/>
+                                </StackPanel>
                                 <Button x:Name="SaveTrackPropertiesButton" Width="60" Click="SaveTrackPropertiesButton_Click">Save</Button>
                             </StackPanel>
                         </StackPanel>
@@ -162,6 +167,8 @@
                                             <TextBlock x:Name="TrackAlbum" Text="{Binding Album}" Margin="4 0 0 0"/>
                                             <TextBlock Text="released" Margin="4 2 4 0" FontSize="10" Foreground="Gray"/>
                                             <TextBlock x:Name="TrackReleaseYear" Text="{Binding ReleaseYear}"/>
+                                            <TextBlock Text="in" Margin="4 2 4 0" FontSize="10" Foreground="Gray"/>
+                                            <Image Source="{Binding CountryImagePath}" Margin="4 0 0 0"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>

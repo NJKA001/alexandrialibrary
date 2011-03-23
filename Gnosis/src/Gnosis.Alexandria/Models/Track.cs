@@ -32,6 +32,7 @@ namespace Gnosis.Alexandria.Models
         public const uint DEFAULT_DISC = 0;
         public const string DEFAULT_GENRE = "Unknown Genre";
         public static readonly DateTime DEFAULT_RELEASE_DATE = new DateTime(2000, 1, 1);
+        public const string DEFAULT_COUNTRY = "us";
 
         private readonly Guid id;
         private string path;
@@ -44,6 +45,7 @@ namespace Gnosis.Alexandria.Models
         private uint discNumber = DEFAULT_DISC;
         private string genre = DEFAULT_GENRE;
         private DateTime releaseDate = DEFAULT_RELEASE_DATE;
+        private string country = DEFAULT_COUNTRY;
         private bool isSelected;
         private string playbackStatus;
         private string durationLabel;
@@ -262,6 +264,25 @@ namespace Gnosis.Alexandria.Models
                     OnPropertyChanged("ReleaseDate");
                 }
             }
+        }
+
+        public string Country
+        {
+            get { return country; }
+            set
+            {
+                if (country != value && value != null)
+                {
+                    country = value;
+                    OnPropertyChanged("Country");
+                    OnPropertyChanged("CountryImagePath");
+                }
+            }
+        }
+
+        public string CountryImagePath
+        {
+            get { return string.Format("pack://application:,,,/Images/Countries/{0}.png", Country ?? DEFAULT_COUNTRY); }
         }
 
         public int ReleaseYear
