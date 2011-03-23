@@ -915,6 +915,7 @@ namespace Gnosis.Alexandria.Views
                         if (boundTracks.Count > 0)
                         {
                             boundTracks[0].IsSelected = true;
+                            player.Stop();
                             PlayButton_Click(this, null);
                         }
                     }
