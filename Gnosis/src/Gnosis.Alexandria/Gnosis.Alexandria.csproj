@@ -69,6 +69,7 @@
     <Compile Include="IPlaybackStatus.cs" />
     <Compile Include="ISourcePropertyFactory.cs" />
     <Compile Include="Models\CreatorProperty.cs" />
+    <Compile Include="Models\DirectorySource.cs" />
     <Compile Include="Models\FileSystemSource.cs" />
     <Compile Include="Models\FolderSource.cs" />
     <Compile Include="Converters\ImageSourceConverter.cs" />
@@ -170,6 +171,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\filesystem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\directory.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

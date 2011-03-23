@@ -16,6 +16,7 @@ namespace Gnosis.Alexandria.Models
             : base(id)
         {
             ImagePath = "pack://application:,,,/Images/filesystem.png";
+            AddChild(new ProxySource(Guid.Empty){Parent = this});
         }
     }
 }

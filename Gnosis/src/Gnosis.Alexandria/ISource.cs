@@ -23,7 +23,9 @@ namespace Gnosis.Alexandria
         IEnumerable<ISource> Children { get; }
 
         void AddProperty(ISourceProperty property);
+        void RemoveProperty(ISourceProperty property);
         void AddChild(ISource child);
+        void RemoveChild(ISource child);
 
         string Marquee { get; }
         bool IsExpanded { get; set; }

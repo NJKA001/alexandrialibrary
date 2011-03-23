@@ -29,6 +29,8 @@ namespace Gnosis.Alexandria.Repositories
                 return (int)SourceType.PlaylistItem;
             else if (record is FileSystemSource)
                 return (int)SourceType.FileSystem;
+            else if (record is DirectorySource)
+                return (int)SourceType.Directory;
             else
                 return (int)SourceType.None;
         }
@@ -109,6 +111,9 @@ namespace Gnosis.Alexandria.Repositories
                     break;
                 case SourceType.FileSystem:
                     source = new FileSystemSource(id);
+                    break;
+                case SourceType.Directory:
+                    source = new DirectorySource(id);
                     break;
                 default:
                     source = new ProxySource(id);

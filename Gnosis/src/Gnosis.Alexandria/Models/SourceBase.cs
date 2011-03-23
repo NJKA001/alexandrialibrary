@@ -248,9 +248,21 @@ namespace Gnosis.Alexandria.Models
             OnPropertyChanged("Properties");
         }
 
+        public virtual void RemoveProperty(ISourceProperty property)
+        {
+            properties.Remove(property);
+            OnPropertyChanged("Properties");
+        }
+
         public virtual void AddChild(ISource child)
         {
             children.Add(child);
+            OnPropertyChanged("Children");
+        }
+
+        public virtual void RemoveChild(ISource child)
+        {
+            children.Remove(child);
             OnPropertyChanged("Children");
         }
 
