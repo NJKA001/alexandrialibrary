@@ -11,6 +11,7 @@ namespace Gnosis.Alexandria.Models
         Folder = 1,
         Media = 2,
         Playlist = 3,
-        PlaylistItem = 4
+        PlaylistItem = 4,
+        FileSystem = 5
     }
 }

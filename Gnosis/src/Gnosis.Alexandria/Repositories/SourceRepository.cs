@@ -21,10 +21,14 @@ namespace Gnosis.Alexandria.Repositories
         {
             if (record is FolderSource)
                 return (int)SourceType.Folder;
+            else if (record is MediaSource)
+                return (int)SourceType.Media;
             else if (record is PlaylistSource)
                 return (int)SourceType.Playlist;
             else if (record is PlaylistItemSource)
                 return (int)SourceType.PlaylistItem;
+            else if (record is FileSystemSource)
+                return (int)SourceType.FileSystem;
             else
                 return (int)SourceType.None;
         }
@@ -82,8 +86,6 @@ namespace Gnosis.Alexandria.Repositories
             var imagePathIndex = reader.GetOrdinal("ImagePath");
             var parentIndex = reader.GetOrdinal("Parent");
             var nameIndex = reader.GetOrdinal("Name");
-            //var nameHashIndex = reader.GetOrdinal("NameHash");
-            //var nameMetaphoneIndex = reader.GetOrdinal("NameMetaphone");
             var creatorIndex = reader.GetOrdinal("Creator");
             var numberIndex = reader.GetOrdinal("Number");
 
@@ -96,11 +98,17 @@ namespace Gnosis.Alexandria.Repositories
                 case SourceType.Folder:
                     source = new FolderSource(id);
                     break;
+                case SourceType.Media:
+                    source = new MediaSource(id);
+                    break;
                 case SourceType.Playlist:
                     source = new PlaylistSource(id);
                     break;
                 case SourceType.PlaylistItem:
                     source = new PlaylistItemSource(id);
+                    break;
+                case SourceType.FileSystem:
+                    source = new FileSystemSource(id);
                     break;
                 default:
                     source = new ProxySource(id);

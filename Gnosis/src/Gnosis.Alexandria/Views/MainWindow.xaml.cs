@@ -23,6 +23,7 @@ using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Repositories;
 using Gnosis.Core;
 using Gnosis.Fmod;
+using log4net;
 
 namespace Gnosis.Alexandria.Views
 {
@@ -35,8 +36,12 @@ namespace Gnosis.Alexandria.Views
         {
             InitializeComponent();
 
+            log4net.Config.XmlConfigurator.Configure();
+
             try
             {
+                log.Info("MainWindow.ctor: started");
+
                 playbackTimer.Elapsed += new System.Timers.ElapsedEventHandler(PlaybackTimer_Elapsed);
                 playbackTimer.Start();
 
@@ -55,28 +60,21 @@ namespace Gnosis.Alexandria.Views
                 }
 
                 var tracks = trackRepository.All();
-                if (tracks.Count() == 0)
+                foreach (var track in tracks)
                 {
-                    LoadMusic();
-                }
-                else
-                {
-                    foreach (var track in tracks)
-                    {
-                        LoadPicture(track);
-                        boundTracks.Add(track);
-                    }
+                    LoadPicture(track);
+                    boundTracks.Add(track);
                 }
 
                 player.CurrentAudioStreamEnded += new EventHandler<EventArgs>(CurrentTrackEnded);
             }
             catch (Exception ex)
             {
-                var message = ex.Message;
-                System.Diagnostics.Debug.WriteLine("MainWindow.ctor failed:" + ex.Message + "\n\n" + ex.StackTrace);
+                log.Error("MainWindow.ctor", ex);
             }
         }
 
+        private static readonly ILog log = LogManager.GetLogger(typeof(MainWindow));
         private readonly ObservableCollection<ITrack> boundTracks = new ObservableCollection<ITrack>();
         private readonly ObservableCollection<ISource> boundSources = new ObservableCollection<ISource>();
         private readonly IRepository<ITrack> trackRepository = new TrackRepository();
@@ -122,12 +120,12 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        private void LoadMusic()
-        {
-            var directory = new DirectoryInfo(@"\\vmware-host\Shared Folders\Documents\My Music\Alexandria Anthology #1");
-            //var directory = new DirectoryInfo(@"C:\Users\Public\Music\Sample Music");
-            LoadDirectory(directory);
-        }
+        //private void LoadMusic()
+        //{
+        //    var directory = new DirectoryInfo(@"\\vmware-host\Shared Folders\Documents\My Music\Alexandria Anthology #1");
+        //    //var directory = new DirectoryInfo(@"C:\Users\Public\Music\Sample Music");
+        //    LoadDirectory(directory);
+        //}
 
         private TagLib.File GetTagFile(string path)
         {
@@ -390,7 +388,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Search Failed");
+                log.Error("Search(string)", ex);
             }
         }
 
@@ -561,7 +559,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.Message, "Item Image Drag/Drop Failed");
+                log.Error("ItemImage_Drop", ex);
             }
         }
 
@@ -606,7 +604,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Add Folder Failed");
+                log.Error("AddFolderButton_Click", ex);
             }
         }
 
@@ -632,7 +630,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Add Playlist Failed");
+                log.Error("AddPlaylistButton_Click", ex);
             }
         }
 
@@ -651,7 +649,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Edit Source Failed");
+                log.Error("SourceItem_KeyUp", ex);
             }
         }
 
@@ -675,7 +673,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Edit Playlist Failed");
+                log.Error("SourceNameTextBox_KeyUp", ex);
             }
         }
 
@@ -705,7 +703,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Source Expanded Failed");
+                log.Error("SourceItem_Expanded", ex);
             }
         }
 
@@ -740,7 +738,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Track Item Drag Failed");
+                log.Error("TrackItem_MouseMove", ex);
             }
         }
 
@@ -810,7 +808,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Source Item Drop Failed");
+                log.Error("SouceView_Drop", ex);
             }
         }
 
@@ -844,7 +842,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Load Playlist Failed");
+                log.Error("LoadPlaylist_Clicked", ex);
             }
         }
 
@@ -873,7 +871,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Source Item Preview Right Click Failed");
+                log.Error("SourceItem_PreviewMouseRightButtonDown", ex);
             }
         }
 
@@ -907,7 +905,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Seek Started Failed");
+                log.Error("NowPlayingElapsedSlider_DragStarted", ex);
             }
         }
 
@@ -923,7 +921,74 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Seek Completed Failed");
+                log.Error("NowPlayingElapsedSlider_DragCompleted", ex);
+            }
+        }
+
+        private void AddFileSystemButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var parent = GetSelectedSource();
+
+                var dialog = new System.Windows.Forms.FolderBrowserDialog();
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    var directory = new DirectoryInfo(dialog.SelectedPath);
+                    var source = new FileSystemSource() { Name = directory.Name, Path = dialog.SelectedPath };
+                    LoadDirectory(directory);
+
+                    if (parent != null)
+                    {
+                        source.Parent = parent;
+                    }
+                    else
+                    {
+                        boundSources.Add(source);
+                    }
+
+                    sourceRepository.Save(source);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("AddFileSystemButton_Click", ex);
+            }
+        }
+
+        private void DeselectAll(ISource source)
+        {
+            if (source != null)
+            {
+                source.IsSelected = false;
+                foreach (var child in source.Children)
+                    DeselectAll(child);
+            }
+        }
+
+        private void SourceView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                var result = VisualTreeHelper.HitTest(SourceView, e.GetPosition(SourceView));
+                if (result != null)
+                {
+                    var element = result.VisualHit as UIElement;
+                    var item = VisualHelper.FindContainingTreeViewItem(element);
+                    if (item == null)
+                    {
+                        foreach (var source in boundSources)
+                            DeselectAll(source);
+                    }
+                    else
+                    {
+                        item.IsSelected = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("SourceView_PreviewMouseLeftButtonDown", ex);
             }
         }
     }

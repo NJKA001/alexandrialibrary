@@ -134,6 +134,37 @@ namespace Gnosis.Alexandria.Repositories
             }
         }
 
+        public void Save(IEnumerable<T> records)
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        foreach (var record in records)
+                        {
+                            using (var command = GetSaveCommand(connection, record))
+                            {
+                                command.Transaction = transaction;
+                                command.ExecuteNonQuery();
+                            }
+                        }
+
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        if (transaction != null)
+                            transaction.Rollback();
+
+                        throw;
+                    }
+                }
+            }
+        }
+
         public void Delete(Guid id)
         {
             using (var connection = GetConnection())
@@ -142,6 +173,37 @@ namespace Gnosis.Alexandria.Repositories
                 using (var command = GetDeleteCommand(connection, id))
                 {
                     command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Delete(IEnumerable<Guid> ids)
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        foreach (var id in ids)
+                        {
+                            using (var command = GetDeleteCommand(connection, id))
+                            {
+                                command.Transaction = transaction;
+                                command.ExecuteNonQuery();
+                            }
+                        }
+
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        if (transaction != null)
+                            transaction.Rollback();
+
+                        throw;
+                    }
                 }
             }
         }
