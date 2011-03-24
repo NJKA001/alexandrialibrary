@@ -890,6 +890,11 @@ namespace Gnosis.Alexandria.Views
                     if (source != null)
                     {
                         boundTracks.Clear();
+                        if (source is FileSystemSource || source is DirectorySource)
+                        {
+                            LoadDirectories(source);
+                        }
+
                         foreach (var item in source.Children)
                         {
                             try
