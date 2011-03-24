@@ -536,7 +536,12 @@ namespace Gnosis.Alexandria.Views
         {
             try
             {
-                var track = GetSelectedTrack();
+                var item = VisualHelper.FindContainingListViewItem(sender as UIElement);
+                if (item == null)
+                    return;
+
+                var track = item.DataContext as ITrack;
+
                 if (track != null)
                 {
                     var image = e.Data.GetData(DataFormats.Bitmap) as Image;
