@@ -27,6 +27,9 @@ namespace Gnosis.Alexandria
         string Genre { get; set; }
         DateTime ReleaseDate { get; set; }
         string Country { get; set; }
+        string Comment { get; set; }
+        TimeSpan StartAt { get; }
+        TimeSpan StopAt { get; }
         string CountryImagePath { get; }
         int ReleaseYear { get; set; }
         bool IsSelected { get; set; }

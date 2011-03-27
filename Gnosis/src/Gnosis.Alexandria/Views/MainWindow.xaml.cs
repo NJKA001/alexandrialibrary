@@ -179,6 +179,8 @@ namespace Gnosis.Alexandria.Views
             if (tag.Pictures.Length > 0)
                 track.ImageData = tag.Pictures[0].Data;
 
+            track.Comment = tag.Comment;
+
             return track;
         }
 
@@ -259,12 +261,19 @@ namespace Gnosis.Alexandria.Views
                     }
                 }
 
-                currentTrack.ElapsedLabel = "0:00";
                 currentTrack.DurationLabel = string.Format("{0}:{1:00}", player.CurrentAudioStream.Duration.Minutes, player.Duration.Seconds);
                 
                 NowPlayingElapsedSlider.Dispatcher.Invoke((Action)delegate { NowPlayingElapsedSlider.Maximum = player.CurrentAudioStream.Duration.TotalSeconds; });
 
+                currentTrack.ElapsedLabel = string.Format("{0}:{1:00}", player.Elapsed.Minutes, player.Elapsed.Seconds);
+
                 player.Play();
+
+                if (currentTrack.StartAt != TimeSpan.Zero)
+                {
+                    player.BeginSeek();
+                    player.Seek(Convert.ToInt32(currentTrack.StartAt.TotalMilliseconds));
+                }
 
                 playbackStatus.IsPlaying = (player.CurrentAudioStream.PlaybackState == PlaybackState.Playing);
                 //PlayButton.Dispatcher.Invoke((Action)delegate() { PlayButton.Content = GetPlayButtonContent(); });
@@ -977,6 +986,14 @@ namespace Gnosis.Alexandria.Views
                 if (!player.SeekIsPending)
                 {
                     currentTrack.Elapsed = player.CurrentAudioStream.Elapsed.TotalSeconds;
+                }
+
+                if (currentTrack.StopAt != TimeSpan.Zero)
+                {
+                    if (player.CurrentAudioStream.Elapsed >= currentTrack.StopAt)
+                    {
+                        PlayNextTrack();
+                    }
                 }
             }
         }

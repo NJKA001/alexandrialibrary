@@ -36,7 +36,8 @@ namespace Gnosis.Alexandria.Repositories
             sql.AppendLine("DiscNumber INTEGER NOT NULL DEFAULT 1,");
             sql.AppendLine("Genre TEXT NOT NULL DEFAULT 'Unknown Genre',");
             sql.AppendLine("ReleaseDate TEXT NOT NULL DEFAULT '2000-01-01T00:00:00',");
-            sql.AppendLine("Country TEXT NOT NULL DEFAULT 'us'");
+            sql.AppendLine("Country TEXT NOT NULL DEFAULT 'us',");
+            sql.AppendLine("Comment TEXT NOT NULL DEFAULT ''");
             sql.AppendLine(");");
             sql.AppendLine("create index if not exists Track_Title on Track (Title ASC);");
             sql.AppendLine("create index if not exists Track_TitleHash on Track (TitleHash ASC);");
@@ -49,6 +50,7 @@ namespace Gnosis.Alexandria.Repositories
             sql.AppendLine("create index if not exists Track_AlbumMetaphone on Track (AlbumMetaphone ASC);");
             sql.AppendLine("create index if not exists Track_ReleaseDate on Track (ReleaseDate ASC);");
             sql.AppendLine("create index if not exists Track_Country on Track (Country ASC);");
+            sql.AppendLine("create index if not exists Track_Comment on Track (Comment ASC);");
             sql.AppendLine("create index if not exists Track_DefaultSortOrder on Track (Artist ASC, ReleaseDate ASC, DiscNumber ASC, Album ASC, TrackNumber ASC);");
             return sql.ToString();
         }
@@ -72,6 +74,7 @@ namespace Gnosis.Alexandria.Repositories
             var genreIndex = reader.GetOrdinal("Genre");
             var releaseDateIndex = reader.GetOrdinal("ReleaseDate");
             var countryIndex = reader.GetOrdinal("Country");
+            var commentIndex = reader.GetOrdinal("Comment");
 
             var id = new Guid(reader.GetString(idIndex));
             var track = new Track(id)
@@ -85,7 +88,8 @@ namespace Gnosis.Alexandria.Repositories
                 DiscNumber = Convert.ToUInt32(reader.GetValue(discNumberIndex)),
                 Genre = reader.GetString(genreIndex),
                 ReleaseDate = DateTime.Parse(reader.GetString(releaseDateIndex)),
-                Country = reader.GetString(countryIndex)
+                Country = reader.GetString(countryIndex),
+                Comment = reader.GetString(commentIndex)
             };
 
             return track;
@@ -96,8 +100,8 @@ namespace Gnosis.Alexandria.Repositories
             var command = connection.CreateCommand();
 
             var sql = new StringBuilder();
-            sql.AppendLine("insert or replace into Track (Id, Path, ImagePath, Title, TitleHash, TitleMetaphone, Artist, ArtistHash, ArtistMetaphone, Album, AlbumHash, AlbumMetaphone, TrackNumber, DiscNumber, Genre, ReleaseDate, Country)");
-            sql.AppendLine(" values (@Id, @Path, @ImagePath, @Title, @TitleHash, @TitleMetaphone, @Artist, @ArtistHash, @ArtistMetaphone, @Album, @AlbumHash, @AlbumMetaphone, @TrackNumber, @DiscNumber, @Genre, @ReleaseDate, @Country);");
+            sql.AppendLine("insert or replace into Track (Id, Path, ImagePath, Title, TitleHash, TitleMetaphone, Artist, ArtistHash, ArtistMetaphone, Album, AlbumHash, AlbumMetaphone, TrackNumber, DiscNumber, Genre, ReleaseDate, Country, Comment)");
+            sql.AppendLine(" values (@Id, @Path, @ImagePath, @Title, @TitleHash, @TitleMetaphone, @Artist, @ArtistHash, @ArtistMetaphone, @Album, @AlbumHash, @AlbumMetaphone, @TrackNumber, @DiscNumber, @Genre, @ReleaseDate, @Country, @Comment);");
             command.CommandText = sql.ToString();
 
             AddParameter(command, "@Id", track.Id.ToString());
@@ -117,6 +121,7 @@ namespace Gnosis.Alexandria.Repositories
             AddParameter(command, "@Genre", track.Genre);
             AddParameter(command, "@ReleaseDate", track.ReleaseDate.ToString("s"));
             AddParameter(command, "@Country", track.Country);
+            AddParameter(command, "@Comment", track.Comment);
 
             return command;
         }

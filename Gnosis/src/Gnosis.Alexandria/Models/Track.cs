@@ -46,6 +46,7 @@ namespace Gnosis.Alexandria.Models
         private string genre = DEFAULT_GENRE;
         private DateTime releaseDate = DEFAULT_RELEASE_DATE;
         private string country = DEFAULT_COUNTRY;
+        private string comment = string.Empty;
         private bool isSelected;
         private string playbackStatus;
         private string durationLabel;
@@ -277,6 +278,60 @@ namespace Gnosis.Alexandria.Models
                     OnPropertyChanged("Country");
                     OnPropertyChanged("CountryImagePath");
                 }
+            }
+        }
+
+        public string Comment
+        {
+            get { return comment; }
+            set
+            {
+                if (comment != value && !string.IsNullOrEmpty(value))
+                {
+                    comment = value;
+                    OnPropertyChanged("Comment");
+                }
+            }
+        }
+
+        private IList<TimeSpan> GetStartAndStopTimes()
+        {
+            IList<TimeSpan> times = new List<TimeSpan>();
+
+            if (!string.IsNullOrEmpty(Comment))
+            {
+                var tokens = Comment.Split(',');
+                if (tokens != null && tokens.Length > 0)
+                {
+                    foreach (var token in tokens)
+                    {
+                        var seconds = 0;
+                        if (int.TryParse(token, out seconds))
+                        {
+                            times.Add(new TimeSpan(0, 0, seconds));
+                        }
+                    }
+                }
+            }
+
+            return times;
+        }
+
+        public TimeSpan StartAt
+        {
+            get
+            {
+                var times = GetStartAndStopTimes();
+                return times.Count > 0 ? times[0] : TimeSpan.Zero;
+            }
+        }
+
+        public TimeSpan StopAt
+        {
+            get
+            {
+                var times = GetStartAndStopTimes();
+                return times.Count > 1 ? times[1] : TimeSpan.Zero;
             }
         }
 

@@ -134,6 +134,10 @@
                                     <TextBox Text="{Binding Country}" FontSize="12" Margin="4 0 4 0"/>
                                     <Image Source="{Binding CountryImagePath}" Margin="4"/>
                                 </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Comment" Foreground="Gray"/>
+                                    <TextBox Text="{Binding Comment}" FontSize="12" Margin="4 0 4 0"/>
+                                </StackPanel>
                                 <Button x:Name="SaveTrackPropertiesButton" Width="60" Click="SaveTrackPropertiesButton_Click">Save</Button>
                             </StackPanel>
                         </StackPanel>
