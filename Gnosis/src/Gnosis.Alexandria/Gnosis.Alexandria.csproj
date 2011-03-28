@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>pyramid.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
       <SpecificVersion>False</SpecificVersion>
@@ -427,6 +430,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Countries\sf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\pyramid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\pyramid.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pyramid.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Gnosis.Alexandria"
         xmlns:converters="clr-namespace:Gnosis.Alexandria.Converters"
-        Title="Alexandria" Height="640" Width="768" Icon="pack://application:,,,/Images/sphinx.png">
+        Title="Alexandria" Height="640" Width="768" Icon="pack://application:,,,/Images/pyramid.png">
     <Window.Resources>
         <converters:ImageSourceConverter x:Key="imageConverter" />
         <Style x:Key="sourceItemStyle" TargetType="{x:Type TreeViewItem}">
