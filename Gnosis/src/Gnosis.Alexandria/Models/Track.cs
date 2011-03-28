@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 using Gnosis.Core;
 
@@ -47,11 +48,15 @@ namespace Gnosis.Alexandria.Models
         private DateTime releaseDate = DEFAULT_RELEASE_DATE;
         private string country = DEFAULT_COUNTRY;
         private string comment = string.Empty;
+        private string lyrics = string.Empty;
+        private string grouping = string.Empty;
+
         private bool isSelected;
         private string playbackStatus;
         private string durationLabel;
         private string elapsedLabel;
         private double elapsed;
+        private readonly IList<Tuple<TimeSpan, TimeSpan>> clips = new List<Tuple<TimeSpan, TimeSpan>>() { new Tuple<TimeSpan, TimeSpan>(TimeSpan.Zero, TimeSpan.MaxValue) };
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -290,50 +295,161 @@ namespace Gnosis.Alexandria.Models
                 {
                     comment = value;
                     OnPropertyChanged("Comment");
+                    SetClips();
                 }
             }
         }
 
-        private IList<TimeSpan> GetStartAndStopTimes()
+        public string Lyrics
         {
-            IList<TimeSpan> times = new List<TimeSpan>();
-
-            if (!string.IsNullOrEmpty(Comment))
+            get { return lyrics; }
+            set
             {
-                var tokens = Comment.Split(',');
-                if (tokens != null && tokens.Length > 0)
+                if (lyrics != value && !string.IsNullOrEmpty(value))
                 {
-                    foreach (var token in tokens)
+                    lyrics = value;
+                    OnPropertyChanged("Lyrics");
+                }
+            }
+        }
+
+        public string Grouping
+        {
+            get { return grouping; }
+            set
+            {
+                if (grouping != value && !string.IsNullOrEmpty(value))
+                {
+                    grouping = value;
+                    OnPropertyChanged("Grouping");
+                }
+            }
+        }
+
+        private void SetClips()
+        {
+            clips.Clear();
+
+            var regex = new Regex("clips=['\"](?<CLIPS>[^\"']+)");
+            var match = regex.Match(comment);
+            if (match != null)
+            {
+                var clipsGroup = match.Groups["CLIPS"].Value;
+                if (!string.IsNullOrEmpty(clipsGroup))
+                {
+                    var clipTokens = clipsGroup.Split(' ');
+                    foreach (var clipToken in clipTokens)
                     {
-                        var seconds = 0;
-                        if (int.TryParse(token, out seconds))
+                        var partTokens = clipToken.Split('-');
+                        var start = TimeSpan.Zero; var startSeconds = 0; var startMinutes = 0;
+                        var end = TimeSpan.MaxValue; var endSeconds = 0; var endMinutes = 0;
+
+                        if (partTokens.Length > 0)
                         {
-                            times.Add(new TimeSpan(0, 0, seconds));
+                            if (partTokens[0].Contains(':'))
+                            {
+                                var subTokens = partTokens[0].Split(':');
+                                if (subTokens.Length == 2)
+                                {
+                                    int.TryParse(subTokens[0], out startMinutes);
+                                    int.TryParse(subTokens[1], out startSeconds);
+                                }
+                            }
+                            else int.TryParse(partTokens[0], out startSeconds);
+                            
+                            start = new TimeSpan(0, startMinutes, startSeconds);
+
+                            if (partTokens.Length > 1)
+                            {
+                                if (partTokens[1].Contains(':'))
+                                {
+                                    var subTokens = partTokens[1].Split(':');
+                                    if (subTokens.Length == 2)
+                                    {
+                                        int.TryParse(subTokens[0], out endMinutes);
+                                        int.TryParse(subTokens[1], out endSeconds);
+                                    }
+                                }
+                                else int.TryParse(partTokens[1], out endSeconds);
+
+                                end = new TimeSpan(0, endMinutes, endSeconds);
+                            }
+
+                            clips.Add(new Tuple<TimeSpan, TimeSpan>(start, end));
+                        }
+                        else
+                        {
+                            //Invalid clip
                         }
                     }
                 }
             }
 
-            return times;
+            if (clips.Count == 0)
+            {
+                clips.Add(new Tuple<TimeSpan, TimeSpan>(TimeSpan.Zero, TimeSpan.MaxValue));
+            }
+
+            OnPropertyChanged("Clips");
         }
 
-        public TimeSpan StartAt
+        public IEnumerable<Tuple<TimeSpan, TimeSpan>> Clips
         {
-            get
-            {
-                var times = GetStartAndStopTimes();
-                return times.Count > 0 ? times[0] : TimeSpan.Zero;
-            }
+            get { return clips; }
         }
 
-        public TimeSpan StopAt
+        public bool HasClipAt(TimeSpan elapsed)
         {
-            get
-            {
-                var times = GetStartAndStopTimes();
-                return times.Count > 1 ? times[1] : TimeSpan.Zero;
-            }
+            var clip = clips.Where(x => x.Item1 <= elapsed && x.Item2 >= elapsed).FirstOrDefault();
+
+            return clip != null;
         }
+
+        public Tuple<TimeSpan, TimeSpan> GetNextClipFrom(TimeSpan elapsed)
+        {
+            return clips.Where(x => x.Item1 >= elapsed).FirstOrDefault();
+        }
+
+        //private IList<TimeSpan> GetStartAndStopTimes()
+        //{
+        //    IList<TimeSpan> times = new List<TimeSpan>();
+
+        //    if (!string.IsNullOrEmpty(Comment))
+        //    {
+        //        var tokens = Comment.Split(',');
+        //        if (tokens != null && tokens.Length > 0)
+        //        {
+        //            foreach (var token in tokens)
+        //            {
+        //                var seconds = 0;
+        //                if (int.TryParse(token, out seconds))
+        //                {
+        //                    times.Add(new TimeSpan(0, 0, seconds));
+        //                }
+        //            }
+        //        }
+        //    }
+
+        //    return times;
+        //}
+
+        //public TimeSpan StartAt
+        //{
+        //    get
+        //    {
+        //        var times = GetStartAndStopTimes();
+        //        return times.Count > 0 ? times[0] : TimeSpan.Zero;
+        //    }
+        //}
+
+        //public TimeSpan StopAt
+        //{
+        //    get
+        //    {
+        //        var times = GetStartAndStopTimes();
+        //        return times.Count > 1 ? times[1] : TimeSpan.Zero;
+        //    }
+        //}
 
         public string CountryImagePath
         {

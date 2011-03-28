@@ -135,8 +135,14 @@
                                     <Image Source="{Binding CountryImagePath}" Margin="4"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Grouping" Foreground="Gray"/>
+                                    <TextBox Text="{Binding Grouping}" FontSize="12" Margin="4 0 4 0" Width="100"/>
                                     <TextBlock Text="Comment" Foreground="Gray"/>
-                                    <TextBox Text="{Binding Comment}" FontSize="12" Margin="4 0 4 0"/>
+                                    <TextBox Text="{Binding Comment}" FontSize="12" Margin="4 0 4 0" Width="200"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="Lyrics" Foreground="Gray"/>
+                                    <TextBox Text="{Binding Lyrics}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Height="50" Width="400" HorizontalAlignment="Left"/>
                                 </StackPanel>
                                 <Button x:Name="SaveTrackPropertiesButton" Width="60" Click="SaveTrackPropertiesButton_Click">Save</Button>
                             </StackPanel>

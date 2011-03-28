@@ -84,6 +84,8 @@ namespace Gnosis.Alexandria.Views
         private readonly IPlaybackStatus playbackStatus = new PlaybackStatus();
         private ITrack currentTrack;
         private IPicture copiedPicture;
+        private bool isAboutToPlay = false;
+        private bool hasSeek = false;
 
         private void LoadSourceChildren(ISource source)
         {
@@ -234,6 +236,7 @@ namespace Gnosis.Alexandria.Views
                 track.PlaybackStatus = "Now Playing";
 
             currentTrack = track;
+            hasSeek = false;
 
             NowPlayingMarquee.Dispatcher.Invoke((Action)delegate()
             {
@@ -267,13 +270,29 @@ namespace Gnosis.Alexandria.Views
 
                 currentTrack.ElapsedLabel = string.Format("{0}:{1:00}", player.Elapsed.Minutes, player.Elapsed.Seconds);
 
+                isAboutToPlay = true;
+
+                bool startAtZero = currentTrack.HasClipAt(TimeSpan.Zero);
+                if (!startAtZero)
+                {
+                    //NOTE: We're going to be seeking so we want to mute to avoid any popping
+                    player.Mute();
+                }
+
                 player.Play();
 
-                if (currentTrack.StartAt != TimeSpan.Zero)
+                if (!startAtZero)
                 {
-                    player.BeginSeek();
-                    player.Seek(Convert.ToInt32(currentTrack.StartAt.TotalMilliseconds));
+                    var clip = currentTrack.Clips.FirstOrDefault();
+                    if (clip != null)
+                    {
+                        player.BeginSeek();
+                        player.Seek(Convert.ToInt32(clip.Item1.TotalMilliseconds));
+                    }
+                    player.Unmute();
                 }
+
+                isAboutToPlay = false;
 
                 playbackStatus.IsPlaying = (player.CurrentAudioStream.PlaybackState == PlaybackState.Playing);
                 //PlayButton.Dispatcher.Invoke((Action)delegate() { PlayButton.Content = GetPlayButtonContent(); });
@@ -981,18 +1000,30 @@ namespace Gnosis.Alexandria.Views
             if (player != null && player.CurrentAudioStream != null && currentTrack != null)
             {
                 player.RefreshPlayerStates();
-                currentTrack.ElapsedLabel = string.Format("{0}:{1:00}", player.CurrentAudioStream.Elapsed.Minutes, player.CurrentAudioStream.Elapsed.Seconds);
+                var elapsed = player.CurrentAudioStream.Elapsed;
+                currentTrack.ElapsedLabel = string.Format("{0}:{1:00}", elapsed.Minutes, elapsed.Seconds);
 
                 if (!player.SeekIsPending)
                 {
-                    currentTrack.Elapsed = player.CurrentAudioStream.Elapsed.TotalSeconds;
-                }
+                    currentTrack.Elapsed = elapsed.TotalSeconds;
 
-                if (currentTrack.StopAt != TimeSpan.Zero)
-                {
-                    if (player.CurrentAudioStream.Elapsed >= currentTrack.StopAt)
+                    if (!isAboutToPlay && !hasSeek)
                     {
-                        PlayNextTrack();
+                        if (!currentTrack.HasClipAt(elapsed))
+                        {
+                            var nextClip = currentTrack.GetNextClipFrom(elapsed);
+                            if (nextClip != null)
+                            {
+                                player.Mute();
+                                player.BeginSeek();
+                                player.Seek(Convert.ToInt32(nextClip.Item1.TotalMilliseconds));
+                                player.Unmute();
+                            }
+                            else
+                            {
+                                PlayNextTrack();
+                            }
+                        }
                     }
                 }
             }
@@ -1024,6 +1055,7 @@ namespace Gnosis.Alexandria.Views
             {
                 if (player != null && player.CurrentAudioStream != null && currentTrack != null && NowPlayingElapsedSlider.Value >= 0)
                 {
+                    hasSeek = true;
                     player.Seek(Convert.ToInt32(NowPlayingElapsedSlider.Value * 1000));
                     UpdatePlaybackStatus();
                 }

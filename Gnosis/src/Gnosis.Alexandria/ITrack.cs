@@ -28,8 +28,9 @@ namespace Gnosis.Alexandria
         DateTime ReleaseDate { get; set; }
         string Country { get; set; }
         string Comment { get; set; }
-        TimeSpan StartAt { get; }
-        TimeSpan StopAt { get; }
+        string Lyrics { get; set; }
+        string Grouping { get; set; }
+        IEnumerable<Tuple<TimeSpan, TimeSpan>> Clips { get; }
         string CountryImagePath { get; }
         int ReleaseYear { get; set; }
         bool IsSelected { get; set; }
@@ -37,5 +38,7 @@ namespace Gnosis.Alexandria
         string DurationLabel { get; set; }
         string ElapsedLabel { get; set; }
         double Elapsed { get; set; }
+        bool HasClipAt(TimeSpan elapsed);
+        Tuple<TimeSpan, TimeSpan> GetNextClipFrom(TimeSpan elapsed);
     }
 }
