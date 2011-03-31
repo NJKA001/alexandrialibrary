@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="Gnosis.Alexandria.Views.SourceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Gnosis.Alexandria"
+             xmlns:converters="clr-namespace:Gnosis.Alexandria.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converters:ImageSourceConverter x:Key="imageConverter" />
+        <Style x:Key="sourceItemStyle" TargetType="{x:Type TreeViewItem}">
+            <!--
+            <EventSetter Event="PreviewMouseRightButtonDown" Handler="TreeViewItem_PreviewMouseRightButtonDown" />
+            -->
+            <EventSetter Event="KeyUp" Handler="SourceItem_KeyUp"/>
+            <EventSetter Event="Expanded" Handler="SourceItem_Expanded" />
+            <EventSetter Event="PreviewMouseRightButtonDown" Handler="SourceItem_PreviewMouseRightButtonDown"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+            <!--
+            <Setter Property="Foreground" Value="{Binding Foreground, Mode=TwoWay}"/>
+            <Setter Property="Background" Value="{Binding Background, Mode=TwoWay}"/>
+            <Setter Property="Visibility" Value="{Binding Visibility}"/>
+            -->
+            <!--
+            <Style.Triggers>
+                <Trigger Property="IsBeingRenamed" Value="true">
+                    <Setter Property="IsBeingRenamed" V
+                </Trigger>
+            </Style.Triggers>
+            -->
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="buttonPanel" Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+            <Button x:Name="AddFolderButton" Margin="4" Click="AddFolderButton_Click">Add Folder</Button>
+            <Button x:Name="AddPlaylistButton" Margin="4" Click="AddPlaylistButton_Click">Add Playlist</Button>
+            <Button x:Name="AddFileSystemButton" Margin="4" Click="AddFileSystemButton_Click">Add File System</Button>
+        </StackPanel>
+        <TreeView x:Name="treeView" Grid.Column="0" Grid.Row="1" ItemContainerStyle="{StaticResource sourceItemStyle}" DragEnter="SourceView_DragEnter" Drop="SourceView_Drop" VerticalAlignment="Stretch" PreviewMouseLeftButtonDown="SourceView_PreviewMouseLeftButtonDown">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type local:ISource}">
+                    <Border>
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="SourceImage" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" AllowDrop="True" Width="24" Height="24"></Image>
+                            <TextBlock x:Name="SourceNameTextBlock" Text="{Binding Name}" Visibility="{Binding DisplayNameVisibility}"/>
+                            <TextBox x:Name="SourceNameTextBox" Text="{Binding Name, Mode=TwoWay}" Visibility="{Binding EditNameVisibility}" KeyUp="SourceNameTextBox_KeyUp" />
+                        </StackPanel>
+                    </Border>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+    </Grid>
+</UserControl>

@@ -18,12 +18,14 @@ using System.Windows.Shapes;
 
 using TagLib;
 
+using Gnosis.Alexandria.Controllers;
 using Gnosis.Alexandria.Helpers;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Repositories;
 using Gnosis.Core;
 using Gnosis.Fmod;
 using log4net;
+using Gnosis.Alexandria.Events;
 
 namespace Gnosis.Alexandria.Views
 {
@@ -42,31 +44,26 @@ namespace Gnosis.Alexandria.Views
             {
                 log.Info("MainWindow.ctor: started");
 
+                tagController = new TagController();
+                trackController = new TrackController(trackRepository, tagController);
+                sourceController = new SourceController(sourceRepository, trackController);
+                sourceView.Initialize(sourceController, trackController, tagController);
+
                 playbackTimer.Elapsed += new System.Timers.ElapsedEventHandler(PlaybackTimer_Elapsed);
                 playbackTimer.Start();
 
-                SourceView.ItemsSource = boundSources;
                 TrackView.ItemsSource = boundTracks;
                 PlayButtonImage.DataContext = playbackStatus;
-
-                var sources = sourceRepository.Search(new Dictionary<string, object> { { "Parent", null } });
-                if (sources != null && sources.Count() > 0)
-                {
-                    foreach (var source in sources)
-                    {
-                        boundSources.Add(source);
-                        LoadSourceChildren(source);
-                    }
-                }
 
                 var tracks = trackRepository.All();
                 foreach (var track in tracks)
                 {
-                    LoadPicture(track);
+                    tagController.LoadPicture(track);
                     boundTracks.Add(track);
                 }
 
                 player.CurrentAudioStreamEnded += new EventHandler<EventArgs>(CurrentTrackEnded);
+                sourceView.SourceLoaded += new EventHandler<SourceLoadedEventArgs>(SourceLoaded);
             }
             catch (Exception ex)
             {
@@ -75,10 +72,13 @@ namespace Gnosis.Alexandria.Views
         }
 
         private static readonly ILog log = LogManager.GetLogger(typeof(MainWindow));
-        private readonly ObservableCollection<ITrack> boundTracks = new ObservableCollection<ITrack>();
-        private readonly ObservableCollection<ISource> boundSources = new ObservableCollection<ISource>();
         private readonly IRepository<ITrack> trackRepository = new TrackRepository();
         private readonly IRepository<ISource> sourceRepository = new SourceRepository();
+        private readonly ITagController tagController;
+        private readonly ITrackController trackController;
+        private readonly ISourceController sourceController;
+
+        private readonly ObservableCollection<ITrack> boundTracks = new ObservableCollection<ITrack>();
         private readonly IAudioPlayer player = new AudioPlayer(new Fmod.AudioStreamFactory()) { PlayToggles = true };
         private readonly Timer playbackTimer = new Timer(1000);
         private readonly IPlaybackStatus playbackStatus = new PlaybackStatus();
@@ -87,140 +87,10 @@ namespace Gnosis.Alexandria.Views
         private bool isAboutToPlay = false;
         private bool hasSeek = false;
 
-        private void LoadSourceChildren(ISource source)
-        {
-            var children = sourceRepository.Search(new Dictionary<string, object> { { "Parent", source.Id.ToString() } });
-            if (children != null && children.Count() > 0)
-            {
-                foreach (var child in children)
-                {
-                    child.Parent = source;
-                    source.AddChild(child);
-                    LoadSourceChildren(child);
-                }
-            }
-        }
-
-        private void LoadDirectory(DirectoryInfo directory)
-        {
-            foreach (var file in directory.GetFiles())
-            {
-                if (file.FullName.EndsWith(".mp3"))
-                {
-                    var track = GetTrack(file.FullName);
-
-                    boundTracks.Add(track);
-                    trackRepository.Save(track);
-                }
-            }
-
-            foreach (var child in directory.GetDirectories())
-            {
-                LoadDirectory(child);
-            }
-        }
-
-        //private void LoadMusic()
-        //{
-        //    var directory = new DirectoryInfo(@"\\vmware-host\Shared Folders\Documents\My Music\Alexandria Anthology #1");
-        //    //var directory = new DirectoryInfo(@"C:\Users\Public\Music\Sample Music");
-        //    LoadDirectory(directory);
-        //}
-
-        private TagLib.File GetTagFile(string path)
-        {
-            return TagLib.File.Create(path);
-        }
-
-        private void LoadPicture(ITrack track)
-        {
-            var file = GetTagFile(track.Path);
-            if (file != null && file.Tag != null && file.Tag.Pictures.Length > 0)
-            {
-                track.ImageData = file.Tag.Pictures[0].Data;
-            }
-        }
-
-        private void LoadPicture(PlaylistItemSource source)
-        {
-            var file = GetTagFile(source.Path);
-            if (file != null && file.Tag != null && file.Tag.Pictures.Length > 0)
-            {
-                source.ImageData = file.Tag.Pictures[0].Data;
-            }
-        }
-
-        private ITrack GetTrack(string path)
-        {
-            var tagFile = GetTagFile(path);
-            return GetTrack(path, tagFile.Tag);
-        }
-
-        private ITrack GetTrack(string path, TagLib.Tag tag)
-        {
-            var track = new Track() { Path = path };
-
-            if (!string.IsNullOrEmpty(tag.Title))
-                track.Title = tag.Title;
-
-            if (!string.IsNullOrEmpty(tag.Album))
-                track.Album = tag.Album;
-
-            track.TrackNumber = tag.Track;
-            track.DiscNumber = tag.Disc;
-
-            if (!string.IsNullOrEmpty(tag.JoinedGenres))
-                track.Genre = tag.JoinedGenres;
-
-            if (!string.IsNullOrEmpty(tag.JoinedPerformers))
-                track.Artist = tag.JoinedPerformers;
-
-            if (tag.Year > 0 && tag.Year < int.MaxValue)
-                track.ReleaseDate = new DateTime((int)tag.Year, 1, 1);
-
-            if (tag.Pictures.Length > 0)
-                track.ImageData = tag.Pictures[0].Data;
-
-            track.Comment = tag.Comment;
-
-            return track;
-        }
-
-        private void SaveTag(ITrack track)
-        {
-            var file = TagLib.File.Create(track.Path);
-            if (file.Tag != null)
-            {
-                if (!string.IsNullOrEmpty(track.Title))
-                    file.Tag.Title = track.Title;
-
-                if (!string.IsNullOrEmpty(track.Album))
-                    file.Tag.Album = track.Album;
-
-                file.Tag.Track = track.TrackNumber;
-                file.Tag.Disc = track.DiscNumber;
-
-                if (!string.IsNullOrEmpty(track.Artist))
-                    file.Tag.Performers = track.Artist.Split(',', ';');
-                
-                if (!string.IsNullOrEmpty(track.Genre))
-                    file.Tag.Genres = track.Genre.Split(',', ';');
-
-                file.Tag.Year = Convert.ToUInt32(track.ReleaseYear);
-
-                file.Save();
-            }
-        }
-
         private ITrack GetSelectedTrack()
         {
             return TrackView.SelectedItem as ITrack;
         }
-
-        //private string GetPlayButtonContent()
-        //{
-        //    return player.CurrentAudioStream.PlaybackState == PlaybackState.Playing ? "Pause" : "Play";
-        //}
 
         private Uri GetCurrentUri()
         {
@@ -423,7 +293,7 @@ namespace Gnosis.Alexandria.Views
                     boundTracks.Clear();
                     foreach (var track in tracks)
                     {
-                        LoadPicture(track);
+                        tagController.LoadPicture(track);
                         boundTracks.Add(track);
                     }
                 }
@@ -550,8 +420,8 @@ namespace Gnosis.Alexandria.Views
                 var track = GetSelectedTrack();
                 if (track != null)
                 {
-                    SaveTag(track);
-                    trackRepository.Save(track);
+                    tagController.SaveTag(track);
+                    trackController.Save(track);
                 }
             }
             catch (Exception ex)
@@ -624,184 +494,6 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        private ISource GetSelectedSource()
-        {
-            return SourceView.SelectedItem as ISource;
-        }
-
-        private void AddFolderButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var folder = new FolderSource { Name = "New Folder" };
-
-                var source = GetSelectedSource();
-                if (source != null)
-                {
-                    source.IsExpanded = true;
-                    folder.Parent = source;
-                    source.AddChild(folder);
-                }
-                else
-                {
-                    boundSources.Add(folder);
-                }
-
-                sourceRepository.Save(folder);
-            }
-            catch (Exception ex)
-            {
-                log.Error("AddFolderButton_Click", ex);
-            }
-        }
-
-        private void AddPlaylistButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var playlist = new PlaylistSource { Name = "New Playlist" };
-
-                var source = GetSelectedSource();
-                if (source != null)
-                {
-                    source.IsExpanded = true;
-                    playlist.Parent = source;
-                    source.AddChild(playlist);
-                }
-                else
-                {
-                    boundSources.Add(playlist);
-                }
-
-                sourceRepository.Save(playlist);
-            }
-            catch (Exception ex)
-            {
-                log.Error("AddPlaylistButton_Click", ex);
-            }
-        }
-
-        private void SourceItem_KeyUp(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if (e.Key == Key.F2)
-                {
-                    var source = GetSelectedSource();
-                    if (source != null)
-                    {
-                        source.IsBeingRenamed = true;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error("SourceItem_KeyUp", ex);
-            }
-        }
-
-        private void SourceNameTextBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if (e.Key == Key.Enter || e.Key == Key.Return)
-                {
-                    e.Handled = true;
-                    var textBox = sender as TextBox;
-                    var item = VisualHelper.FindContainingTreeViewItem(textBox);
-                    if (item != null)
-                    {
-                        var source = item.Header as ISource;
-                        if (source != null && source.IsBeingRenamed)
-                        {
-                            source.Name = textBox.Text;
-                            source.IsBeingRenamed = false;
-                            sourceRepository.Save(source);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error("SourceNameTextBox_KeyUp", ex);
-            }
-        }
-
-        private void LoadDirectories(ISource source)
-        {
-            if (source.Children.Count() == 1)
-            {
-                var proxy = source.Children.FirstOrDefault() as ProxySource;
-                if (proxy != null)
-                    source.RemoveChild(proxy);
-
-                if (Directory.Exists(source.Path))
-                {
-                    var directory = new DirectoryInfo(source.Path);
-                    foreach (var subDirectory in directory.GetDirectories())
-                    {
-                        var child = new DirectorySource() { Name = subDirectory.Name, Path = subDirectory.FullName, Parent = source };
-                        source.AddChild(child);
-                        //LoadDirectories(child);
-                    }
-                    foreach (var file in directory.GetFiles("*.mp3"))
-                    {
-                        try
-                        {
-                            var track = trackRepository.Search(new Dictionary<string, object> { { "Path", file.FullName } }).FirstOrDefault();
-                            if (track == null)
-                            {
-                                track = GetTrack(file.FullName);
-                                trackRepository.Save(track);
-                            }
-
-                            var item = GetPlaylistItem(source, track);
-                            source.AddChild(item);
-                        }
-                        catch (Exception ex)
-                        {
-                            log.Error("LoadDirectories: Could Not Load File path=" + file.FullName, ex);
-                        }
-                    }
-                }
-            }
-        }
-
-        private void SourceItem_Expanded(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var treeViewItem = sender as TreeViewItem;
-                if (treeViewItem != null)
-                {
-                    var source = treeViewItem.Header as ISource;
-                    if (source != null)
-                    {
-                        if (source is FileSystemSource || source is DirectorySource)
-                        {
-                            LoadDirectories(source);
-                        }
-
-                        foreach (var child in source.Children)
-                        {
-                            var playlistItem = child as PlaylistItemSource;
-                            if (playlistItem != null)
-                            {
-                                if (!string.IsNullOrEmpty(playlistItem.Path) && playlistItem.ImageData == null)
-                                {
-                                    LoadPicture(playlistItem);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error("SourceItem_Expanded", ex);
-            }
-        }
-
         private Point trackItemDragStartPoint = new Point(0, 0);
         private ITrack trackToDrag = null;
 
@@ -837,161 +529,49 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        private ISource GetSourceDropTarget(DragEventArgs e)
-        {
-            var element = e.OriginalSource as UIElement;
-            if (element != null)
-            {
-                var item = VisualHelper.FindContainingTreeViewItem(element);
-                if (item != null)
-                {
-                    return item.Header as ISource;
-                }
-            }
-
-            return null;
-        }
-
-        private void SourceView_DragEnter(object sender, DragEventArgs e)
-        {
-            if (!e.Data.GetDataPresent("Track"))
-            {
-                e.Effects = DragDropEffects.None;
-            }
-            else
-            {
-                var playlist = GetSourceDropTarget(e) as PlaylistSource;
-                if (playlist == null)
-                {
-                    e.Effects = DragDropEffects.None;
-                }
-            }
-        }
-
-        private ISource GetPlaylistItem(ISource parent, ITrack track)
-        {
-            return new PlaylistItemSource()
-            {
-                Parent = parent,
-                Path = track.Path,
-                ImagePath = track.ImagePath,
-                ImageData = track.ImageData,
-                Name = string.Format("{0} by {1}", track.Title ?? "Untitled", track.Artist ?? "Unknown Artist"),
-                Number = parent.Children.Count() + 1
-            };
-        }
-
-        private void AddPlaylistItem(ISource source, ITrack track)
-        {
-            var item = GetPlaylistItem(source, track);
-
-            sourceRepository.Save(item);
-
-            source.AddChild(item);
-            source.IsExpanded = true;
-            item.IsSelected = true;
-        }
-
-        private void SourceView_Drop(object sender, DragEventArgs e)
+        private void SourceLoaded(object sender, SourceLoadedEventArgs args)
         {
             try
             {
-                var track = e.Data.GetData("Track") as ITrack;
-                if (track != null)
+                boundTracks.Clear();
+                if (args.Source is FileSystemSource || args.Source is DirectorySource)
                 {
-                    var playlist = GetSourceDropTarget(e) as PlaylistSource;
-                    if (playlist != null)
+                    sourceController.LoadDirectories(args.Source);
+                }
+
+                foreach (var item in args.Source.Children)
+                {
+                    try
                     {
-                        AddPlaylistItem(playlist, track);
+                        var track = trackController.Search(new Dictionary<string, object> { { "Path", item.Path } }).FirstOrDefault();
+                        if (track == null)
+                        {
+                            track = trackController.ReadFromTag(item.Path);
+                            trackController.Save(track);
+                        }
+
+                        if (track != null)
+                        {
+                            tagController.LoadPicture(track);
+                            boundTracks.Add(track);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error("MainWindow.SourceLoaded: Could not load track path=" + item.Path, ex);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                log.Error("SouceView_Drop", ex);
-            }
-        }
-
-        private void LoadMedia_Clicked(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var menuItem = sender as MenuItem;
-                if (menuItem != null)
+                if (boundTracks.Count > 0)
                 {
-                    ISource source = menuItem.CommandParameter as ISource;
-                    if (source != null)
-                    {
-                        boundTracks.Clear();
-                        if (source is FileSystemSource || source is DirectorySource)
-                        {
-                            LoadDirectories(source);
-                        }
-
-                        foreach (var item in source.Children)
-                        {
-                            try
-                            {
-                                var track = trackRepository.Search(new Dictionary<string, object> { { "Path", item.Path } }).FirstOrDefault();
-                                if (track == null)
-                                {
-                                    track = GetTrack(item.Path);
-                                    trackRepository.Save(track);
-                                }
-
-                                if (track != null)
-                                {
-                                    LoadPicture(track);
-                                    boundTracks.Add(track);
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                log.Error("LoadMedia_Click: Could Not Load Track path=" + item.Path, ex);
-                            }
-                        }
-                        if (boundTracks.Count > 0)
-                        {
-                            boundTracks[0].IsSelected = true;
-                            player.Stop();
-                            currentTrack = null;
-                            PlayButton_Click(this, null);
-                        }
-                    }
+                    boundTracks[0].IsSelected = true;
+                    player.Stop();
+                    currentTrack = null;
+                    PlayButton_Click(this, null);
                 }
             }
             catch (Exception ex)
             {
                 log.Error("LoadPlaylist_Clicked", ex);
-            }
-        }
-
-        private void SourceItem_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                SourceView.ContextMenu = null;
-                var item = sender as TreeViewItem;
-                if (item != null)
-                {
-                    var source = item.Header as ISource;
-                    if (source != null)
-                    {
-                        //if (source is PlaylistSource)
-                        //{
-                            var menu = new ContextMenu();
-                            var loadMediaItem = new MenuItem { Header = "Load Media" };
-                            loadMediaItem.CommandParameter = source;
-                            loadMediaItem.Click += LoadMedia_Clicked;
-                            menu.Items.Add(loadMediaItem);
-                            SourceView.ContextMenu = menu;
-                        //}
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error("SourceItem_PreviewMouseRightButtonDown", ex);
             }
         }
 
@@ -1063,73 +643,6 @@ namespace Gnosis.Alexandria.Views
             catch (Exception ex)
             {
                 log.Error("NowPlayingElapsedSlider_DragCompleted", ex);
-            }
-        }
-
-        private void AddFileSystemButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var parent = GetSelectedSource();
-
-                var dialog = new System.Windows.Forms.FolderBrowserDialog();
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    var directory = new DirectoryInfo(dialog.SelectedPath);
-                    var source = new FileSystemSource() { Name = directory.Name, Path = dialog.SelectedPath, Parent = parent };
-                    LoadDirectory(directory);
-
-                    sourceRepository.Save(source);
-
-                    if (parent != null)
-                    {
-                        parent.AddChild(source);
-                    }
-                    else
-                    {
-                        boundSources.Add(source);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error("AddFileSystemButton_Click", ex);
-            }
-        }
-
-        private void DeselectAll(ISource source)
-        {
-            if (source != null)
-            {
-                source.IsSelected = false;
-                foreach (var child in source.Children)
-                    DeselectAll(child);
-            }
-        }
-
-        private void SourceView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                var result = VisualTreeHelper.HitTest(SourceView, e.GetPosition(SourceView));
-                if (result != null)
-                {
-                    var element = result.VisualHit as UIElement;
-                    var item = VisualHelper.FindContainingTreeViewItem(element);
-                    if (item == null)
-                    {
-                        foreach (var source in boundSources)
-                            DeselectAll(source);
-                    }
-                    else
-                    {
-                        item.IsSelected = true;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error("SourceView_PreviewMouseLeftButtonDown", ex);
             }
         }
     }
