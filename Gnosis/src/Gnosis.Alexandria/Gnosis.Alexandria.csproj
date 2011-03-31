@@ -103,8 +103,11 @@
     <Compile Include="Models\SourcePropertyBase.cs" />
     <Compile Include="Models\Track.cs" />
     <Compile Include="Repositories\TrackRepository.cs" />
-    <Compile Include="Views\MediaView.xaml.cs">
-      <DependentUpon>MediaView.xaml</DependentUpon>
+    <Compile Include="Views\MediaListView.xaml.cs">
+      <DependentUpon>MediaListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MediaPropertyView.xaml.cs">
+      <DependentUpon>MediaPropertyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PlaybackView.xaml.cs">
       <DependentUpon>PlaybackView.xaml</DependentUpon>
@@ -128,7 +131,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\MediaView.xaml">
+    <Page Include="Views\MediaListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MediaPropertyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

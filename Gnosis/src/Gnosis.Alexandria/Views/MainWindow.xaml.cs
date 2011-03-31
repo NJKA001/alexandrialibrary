@@ -51,6 +51,7 @@ namespace Gnosis.Alexandria.Views
                 sourceView.Initialize(sourceController, trackController, tagController);
                 searchView.Initialize(trackController);
                 playbackView.Initialize(trackController, playbackController);
+                mediaPropertyView.Initialize(trackController, tagController);
 
                 TrackView.ItemsSource = trackController.Tracks;
 
@@ -80,61 +81,18 @@ namespace Gnosis.Alexandria.Views
             return TrackView.SelectedItem as ITrack;
         }
 
-        private void AddPicture(ITrack track, string path)
-        {
-            try
-            {
-                var picture = new TagLib.Picture(path);
-                AddPicture(track, picture);
-            }
-            catch (Exception ex)
-            {
-                var message = ex.Message;
-            }
-        }
-
-        private void AddPicture(ITrack track, IPicture picture)
-        {
-            try
-            {
-                var file = TagLib.File.Create(track.Path);
-                var existingPictures = file.Tag.Pictures;
-                if (existingPictures == null || existingPictures.Length == 0)
-                {
-                    file.Tag.Pictures = new IPicture[1] { picture };
-                    file.Save();
-                    track.ImageData = picture.Data;
-                }
-                else
-                {
-                    var pictures = new IPicture[existingPictures.Length + 1];
-                    pictures[0] = picture;
-                    for (var i = 1; i < pictures.Length; i++)
-                        pictures[i] = existingPictures[i];
-
-                    file.Tag.Pictures = pictures;
-                    file.Save();
-                    track.ImageData = picture.Data;
-                }
-            }
-            catch (Exception ex)
-            {
-                var message = ex.Message;
-            }
-        }
-
         private void TrackListView_SelectionChanged(object sender, RoutedEventArgs args)
         {
             var track = GetSelectedTrack();
             if (track != null)
             {
-                TrackPropertiesBorder.Visibility = System.Windows.Visibility.Visible;
-                TrackProperties.DataContext = track;
+                mediaPropertyView.Visibility = System.Windows.Visibility.Visible;
+                mediaPropertyView.Track = track;
             }
             else
             {
-                TrackPropertiesBorder.Visibility = System.Windows.Visibility.Collapsed;
-                TrackProperties.DataContext = null;
+                mediaPropertyView.Visibility = System.Windows.Visibility.Collapsed;
+                mediaPropertyView.Track = null;
             }
         }
 
@@ -147,27 +105,6 @@ namespace Gnosis.Alexandria.Views
         {
             playbackView.SetNowPlaying(GetSelectedTrack());
             playbackView.PlayCurrentTrack();
-        }
-
-        private void ChangePictureButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var track = GetSelectedTrack();
-                if (track != null)
-                {
-                    var dialog = new System.Windows.Forms.OpenFileDialog();
-                    dialog.Filter = "Image Files (*.jpg,*.jpeg,*.png,*.gif)|*.jpg;*.jpeg;*.png;*.gif|All Files (*.*)|*.*";
-                    if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    {
-                        AddPicture(track, dialog.FileName);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                var message = ex.Message;
-            }
         }
 
         private void ItemImageCopy_Click(object sender, RoutedEventArgs e)
@@ -195,24 +132,7 @@ namespace Gnosis.Alexandria.Views
                 var track = GetSelectedTrack();
                 if (track != null && copiedPicture != null)
                 {
-                    AddPicture(track, copiedPicture);
-                }
-            }
-            catch (Exception ex)
-            {
-                var message = ex.Message;
-            }
-        }
-
-        private void SaveTrackPropertiesButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var track = GetSelectedTrack();
-                if (track != null)
-                {
-                    tagController.SaveTag(track);
-                    trackController.Save(track);
+                    tagController.AddPicture(track, copiedPicture);
                 }
             }
             catch (Exception ex)
@@ -257,7 +177,7 @@ namespace Gnosis.Alexandria.Views
                                         var buffer = stream.AsBuffer();
                                         var data = new ByteVector(buffer);
                                         var picture = new TagLib.Picture(data);
-                                        AddPicture(track, picture);
+                                        tagController.AddPicture(track, picture);
                                     }
                                 }
                             }

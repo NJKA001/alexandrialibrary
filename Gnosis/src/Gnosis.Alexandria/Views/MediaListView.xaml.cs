@@ -17,9 +17,9 @@ namespace Gnosis.Alexandria.Views
     /// <summary>
     /// Interaction logic for MediaView.xaml
     /// </summary>
-    public partial class MediaView : UserControl
+    public partial class MediaListView : UserControl
     {
-        public MediaView()
+        public MediaListView()
         {
             InitializeComponent();
         }

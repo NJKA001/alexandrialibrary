@@ -54,5 +54,34 @@ namespace Gnosis.Alexandria.Controllers
                 file.Save();
             }
         }
+
+        public void AddPicture(ITrack track, string path)
+        {
+            var picture = new TagLib.Picture(path);
+            AddPicture(track, picture);
+        }
+
+        public void AddPicture(ITrack track, IPicture picture)
+        {
+            var file = GetFile(track.Path);
+            var existingPictures = file.Tag.Pictures;
+            if (existingPictures == null || existingPictures.Length == 0)
+            {
+                file.Tag.Pictures = new IPicture[1] { picture };
+                file.Save();
+                track.ImageData = picture.Data;
+            }
+            else
+            {
+                var pictures = new IPicture[existingPictures.Length + 1];
+                pictures[0] = picture;
+                for (var i = 1; i < pictures.Length; i++)
+                    pictures[i] = existingPictures[i];
+
+                file.Tag.Pictures = pictures;
+                file.Save();
+                track.ImageData = picture.Data;
+            }
+        }
     }
 }
