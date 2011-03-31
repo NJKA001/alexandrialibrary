@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
+using log4net;
 using TagLib;
 
 using Gnosis.Alexandria.Models;
@@ -26,6 +27,7 @@ namespace Gnosis.Alexandria.Controllers
             }
         }
 
+        private static readonly ILog log = LogManager.GetLogger(typeof(TrackController));
         private readonly IRepository<ITrack> repository;
         private readonly ITagController tagController;
         private readonly ObservableCollection<ITrack> boundTracks = new ObservableCollection<ITrack>();
@@ -208,6 +210,34 @@ namespace Gnosis.Alexandria.Controllers
         public ITrack GetSelectedTrack()
         {
             return boundTracks.Where(x => x.IsSelected == true).FirstOrDefault();
+        }
+
+        public void Load(ISource source)
+        {
+            ClearTracks();
+
+            foreach (var item in source.Children)
+            {
+                try
+                {
+                    var track = Search(new Dictionary<string, object> { { "Path", item.Path } }).FirstOrDefault();
+                    if (track == null)
+                    {
+                        track = ReadFromTag(item.Path);
+                        Save(track);
+                    }
+
+                    if (track != null)
+                    {
+                        tagController.LoadPicture(track);
+                        AddTrack(track);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    log.Error("TrackController.Load: Could not load track path=" + item.Path, ex);
+                }
+            }
         }
     }
 }

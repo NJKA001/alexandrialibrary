@@ -35,50 +35,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <views:MediaPropertyView Grid.Column="1" Grid.Row="0" x:Name="mediaPropertyView" Visibility="Collapsed"/>
-                <ListView Grid.Row="1" x:Name="TrackView" SelectionChanged="TrackListView_SelectionChanged" MouseDoubleClick="TrackListView_MouseDoubleClick">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Border Margin="3 3 3 3">
-                                <StackPanel Orientation="Horizontal">
-                                    <Image x:Name="ItemImage" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" AllowDrop="True" Drop="ItemImage_Drop" Width="50" Height="50">
-                                        <Image.ContextMenu>
-                                            <ContextMenu x:Name="ItemImageContentMenu">
-                                                <MenuItem x:Name="ItemImageCopy" Header="Copy" Click="ItemImageCopy_Click"/>
-                                                <MenuItem x:Name="ItemImagePaste" Header="Paste" Click="ItemImagePaste_Click"/>
-                                            </ContextMenu>
-                                        </Image.ContextMenu>
-                                    </Image>
-                                    <StackPanel Orientation="Vertical">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock x:Name="TrackNumber" Text="{Binding TrackNumber}" Margin="4 0 6 0" FontSize="10"/>
-                                            <TextBlock x:Name="TrackTitle" Text="{Binding Title}" Margin="4 0 0 0"/>
-                                            <TextBlock x:Name="TrackPlaybackStatus" Text="{Binding PlaybackStatus}" Margin="6 4 0 0" Foreground="Blue" FontFamily="Impact" FontSize="10"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="by" Margin="2 2 2 0" FontSize="10" Foreground="Gray"/>
-                                            <TextBlock x:Name="TrackArtist" Text="{Binding Artist}" Margin="4 0 0 0"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="from" Margin="2 2 2 0" FontSize="10" Foreground="Gray"/>
-                                            <TextBlock x:Name="TrackAlbum" Text="{Binding Album}" Margin="4 0 0 0"/>
-                                            <TextBlock Text="released" Margin="4 2 4 0" FontSize="10" Foreground="Gray"/>
-                                            <TextBlock x:Name="TrackReleaseYear" Text="{Binding ReleaseYear}"/>
-                                            <TextBlock Text="in" Margin="4 2 4 0" FontSize="10" Foreground="Gray"/>
-                                            <Image Source="{Binding CountryImagePath}" Margin="4 0 0 0"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <ListView.Resources>
-                        <Style TargetType="{x:Type ListViewItem}">
-                            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
-                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="TrackItem_PreviewMouseLeftButtonDown"/>
-                            <EventSetter Event="MouseMove" Handler="TrackItem_MouseMove"/>
-                        </Style>
-                    </ListView.Resources>
-                </ListView>
+                <views:MediaListView Grid.Row="1" x:Name="mediaListView"/>
             </Grid>
         </Grid>
     </Grid>

@@ -19,5 +19,6 @@ namespace Gnosis.Alexandria.Controllers
         void ClearTracks();
         void AddTrack(ITrack track);
         ITrack GetSelectedTrack();
+        void Load(ISource source);
     }
 }

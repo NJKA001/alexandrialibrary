@@ -52,8 +52,7 @@ namespace Gnosis.Alexandria.Views
                 searchView.Initialize(trackController);
                 playbackView.Initialize(trackController, playbackController);
                 mediaPropertyView.Initialize(trackController, tagController);
-
-                TrackView.ItemsSource = trackController.Tracks;
+                mediaListView.Initialize(trackController, tagController, playbackView, mediaPropertyView);
 
                 sourceView.SourceLoaded += new EventHandler<SourceLoadedEventArgs>(SourceLoaded);
                 playbackController.CurrentTrackEnded += CurrentTrackEnded;
@@ -72,190 +71,23 @@ namespace Gnosis.Alexandria.Views
         private readonly ISourceController sourceController;
         private readonly IPlaybackController playbackController;
 
-        private IPicture copiedPicture;
-        private Point trackItemDragStartPoint = new Point(0, 0);
-        private ITrack trackToDrag = null;
-
-        private ITrack GetSelectedTrack()
-        {
-            return TrackView.SelectedItem as ITrack;
-        }
-
-        private void TrackListView_SelectionChanged(object sender, RoutedEventArgs args)
-        {
-            var track = GetSelectedTrack();
-            if (track != null)
-            {
-                mediaPropertyView.Visibility = System.Windows.Visibility.Visible;
-                mediaPropertyView.Track = track;
-            }
-            else
-            {
-                mediaPropertyView.Visibility = System.Windows.Visibility.Collapsed;
-                mediaPropertyView.Track = null;
-            }
-        }
-
         private void CurrentTrackEnded(object sender, EventArgs args)
         {
             playbackView.PlayNextTrack();
-        }
-
-        private void TrackListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            playbackView.SetNowPlaying(GetSelectedTrack());
-            playbackView.PlayCurrentTrack();
-        }
-
-        private void ItemImageCopy_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var track = GetSelectedTrack();
-                if (track != null)
-                {
-                    var file = TagLib.File.Create(track.Path);
-                    if (file.Tag != null && file.Tag.Pictures != null && file.Tag.Pictures.Length > 0)
-                        copiedPicture = file.Tag.Pictures[0];
-                }
-            }
-            catch (Exception ex)
-            {
-                var message = ex.Message;
-            }
-        }
-
-        private void ItemImagePaste_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var track = GetSelectedTrack();
-                if (track != null && copiedPicture != null)
-                {
-                    tagController.AddPicture(track, copiedPicture);
-                }
-            }
-            catch (Exception ex)
-            {
-                var message = ex.Message;
-            }
-        }
-
-        private void ItemImage_Drop(object sender, System.Windows.DragEventArgs e)
-        {
-            try
-            {
-                var item = VisualHelper.FindContainingListViewItem(sender as UIElement);
-                if (item == null)
-                    return;
-
-                var track = item.DataContext as ITrack;
-
-                if (track != null)
-                {
-                    var image = e.Data.GetData(DataFormats.Bitmap) as Image;
-                    if (image != null)
-                    {
-                        return;
-                    }
-                    var html = e.Data.GetData(DataFormats.Html) as string;
-                    if (!string.IsNullOrEmpty(html))
-                    {
-                        var regex = new System.Text.RegularExpressions.Regex("src=['\"](?<PATH>[^\"']+)");
-                        var match = regex.Match(html);
-                        if (match != null)
-                        {
-                            var path = match.Groups["PATH"].Value;
-                            if (!string.IsNullOrEmpty(path))
-                            {
-                                var request = System.Net.HttpWebRequest.Create(path);
-                                var response = request.GetResponse();
-                                if (response != null)
-                                {
-                                    using (var stream = response.GetResponseStream())
-                                    {
-                                        var buffer = stream.AsBuffer();
-                                        var data = new ByteVector(buffer);
-                                        var picture = new TagLib.Picture(data);
-                                        tagController.AddPicture(track, picture);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error("ItemImage_Drop", ex);
-            }
-        }
-
-        private void TrackItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            trackItemDragStartPoint = e.GetPosition(null);
-            log.Debug("MainWindow.TrackItem_PreviewMouseLeftButtonDown: x=" + trackItemDragStartPoint.X + " y=" + trackItemDragStartPoint.Y);
-        }
-
-        private void TrackItem_MouseMove(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                var position = e.GetPosition(null);
-                var offset = trackItemDragStartPoint - position;
-
-                if (e.LeftButton == MouseButtonState.Pressed
-                    && Math.Abs(offset.X) > SystemParameters.MinimumHorizontalDragDistance
-                    && Math.Abs(offset.Y) > SystemParameters.MinimumVerticalDragDistance)
-                {
-                    var track = GetSelectedTrack();
-                    if (track != null && track != trackToDrag)
-                    {
-                        trackToDrag = track;
-                        var data = new DataObject("Track", track);
-                        DragDrop.DoDragDrop(TrackView, data, DragDropEffects.Copy);
-                        log.Debug("TrackItem_MouseMove: DoDragDrop");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error("TrackItem_MouseMove", ex);
-            }
         }
 
         private void SourceLoaded(object sender, SourceLoadedEventArgs args)
         {
             try
             {
-                trackController.ClearTracks();
-                if (args.Source is FileSystemSource || args.Source is DirectorySource)
+                var source = args.Source;
+                if (source is FileSystemSource || source is DirectorySource)
                 {
                     sourceController.LoadDirectories(args.Source);
                 }
 
-                foreach (var item in args.Source.Children)
-                {
-                    try
-                    {
-                        var track = trackController.Search(new Dictionary<string, object> { { "Path", item.Path } }).FirstOrDefault();
-                        if (track == null)
-                        {
-                            track = trackController.ReadFromTag(item.Path);
-                            trackController.Save(track);
-                        }
+                trackController.Load(source);
 
-                        if (track != null)
-                        {
-                            tagController.LoadPicture(track);
-                            trackController.AddTrack(track);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        log.Error("MainWindow.SourceLoaded: Could not load track path=" + item.Path, ex);
-                    }
-                }
                 if (trackController.TrackCount > 0)
                 {
                     var track = trackController.GetTrackAt(0);
@@ -267,7 +99,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                log.Error("LoadPlaylist_Clicked", ex);
+                log.Error("MainWindow.SourceLoaded", ex);
             }
         }
     }
