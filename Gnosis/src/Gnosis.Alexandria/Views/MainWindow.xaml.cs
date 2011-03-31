@@ -47,13 +47,13 @@ namespace Gnosis.Alexandria.Views
                 tagController = new TagController();
                 trackController = new TrackController(trackRepository, tagController);
                 sourceController = new SourceController(sourceRepository, trackController);
+                playbackController = new PlaybackController();
                 sourceView.Initialize(sourceController, trackController, tagController);
 
-                playbackTimer.Elapsed += new System.Timers.ElapsedEventHandler(PlaybackTimer_Elapsed);
-                playbackTimer.Start();
+
 
                 TrackView.ItemsSource = boundTracks;
-                PlayButtonImage.DataContext = playbackStatus;
+                PlayButtonImage.DataContext = playbackController.Status;
 
                 var tracks = trackRepository.All();
                 foreach (var track in tracks)
@@ -62,8 +62,8 @@ namespace Gnosis.Alexandria.Views
                     boundTracks.Add(track);
                 }
 
-                player.CurrentAudioStreamEnded += new EventHandler<EventArgs>(CurrentTrackEnded);
                 sourceView.SourceLoaded += new EventHandler<SourceLoadedEventArgs>(SourceLoaded);
+                playbackController.CurrentTrackEnded += CurrentTrackEnded;
             }
             catch (Exception ex)
             {
@@ -77,104 +77,41 @@ namespace Gnosis.Alexandria.Views
         private readonly ITagController tagController;
         private readonly ITrackController trackController;
         private readonly ISourceController sourceController;
+        private readonly IPlaybackController playbackController;
 
         private readonly ObservableCollection<ITrack> boundTracks = new ObservableCollection<ITrack>();
-        private readonly IAudioPlayer player = new AudioPlayer(new Fmod.AudioStreamFactory()) { PlayToggles = true };
-        private readonly Timer playbackTimer = new Timer(1000);
-        private readonly IPlaybackStatus playbackStatus = new PlaybackStatus();
-        private ITrack currentTrack;
         private IPicture copiedPicture;
-        private bool isAboutToPlay = false;
-        private bool hasSeek = false;
+        private Point trackItemDragStartPoint = new Point(0, 0);
+        private ITrack trackToDrag = null;
 
         private ITrack GetSelectedTrack()
         {
             return TrackView.SelectedItem as ITrack;
         }
 
-        private Uri GetCurrentUri()
-        {
-            return (currentTrack != null) ? new Uri(currentTrack.Path, UriKind.Absolute) : null;
-        }
-
         private void SetCurrentTrack(ITrack track)
         {
-            if (currentTrack != null)
-                currentTrack.PlaybackStatus = null;
-
-            if (track != null)
-                track.PlaybackStatus = "Now Playing";
-
-            currentTrack = track;
-            hasSeek = false;
+            playbackController.Load(track);
 
             NowPlayingMarquee.Dispatcher.Invoke((Action)delegate()
             {
-                NowPlayingMarquee.DataContext = currentTrack;
-                NowPlayingMarquee.Visibility = currentTrack != null ? Visibility.Visible : Visibility.Collapsed;
+                NowPlayingMarquee.DataContext = playbackController.CurrentTrack;
+                NowPlayingMarquee.Visibility = playbackController.CurrentTrack != null ? Visibility.Visible : Visibility.Collapsed;
             });
         }
 
         private void PlayCurrentTrack()
         {
-            if (currentTrack != null)
-            {
-                var currentUri = GetCurrentUri();
-                if (player.CurrentAudioStream == null)
-                {
-                    player.LoadAudioStream(new Uri(currentTrack.Path, UriKind.Absolute));
-                }
-                else
-                {
-                    var streamUri = new Uri(player.CurrentAudioStream.Path, UriKind.Absolute);
-                    if (currentUri != streamUri)
-                    {
-                        player.Stop();
-                        player.LoadAudioStream(new Uri(currentTrack.Path, UriKind.Absolute));
-                    }
-                }
-
-                currentTrack.DurationLabel = string.Format("{0}:{1:00}", player.CurrentAudioStream.Duration.Minutes, player.Duration.Seconds);
-                
-                NowPlayingElapsedSlider.Dispatcher.Invoke((Action)delegate { NowPlayingElapsedSlider.Maximum = player.CurrentAudioStream.Duration.TotalSeconds; });
-
-                currentTrack.ElapsedLabel = string.Format("{0}:{1:00}", player.Elapsed.Minutes, player.Elapsed.Seconds);
-
-                isAboutToPlay = true;
-
-                bool startAtZero = currentTrack.HasClipAt(TimeSpan.Zero);
-                if (!startAtZero)
-                {
-                    //NOTE: We're going to be seeking so we want to mute to avoid any popping
-                    player.Mute();
-                }
-
-                player.Play();
-
-                if (!startAtZero)
-                {
-                    var clip = currentTrack.Clips.FirstOrDefault();
-                    if (clip != null)
-                    {
-                        player.BeginSeek();
-                        player.Seek(Convert.ToInt32(clip.Item1.TotalMilliseconds));
-                    }
-                    player.Unmute();
-                }
-
-                isAboutToPlay = false;
-
-                playbackStatus.IsPlaying = (player.CurrentAudioStream.PlaybackState == PlaybackState.Playing);
-                //PlayButton.Dispatcher.Invoke((Action)delegate() { PlayButton.Content = GetPlayButtonContent(); });
-            }
+            playbackController.Play();
+            NowPlayingElapsedSlider.Dispatcher.Invoke((Action)delegate { NowPlayingElapsedSlider.Maximum = playbackController.CurrentDuration.TotalSeconds; });
         }
 
         private void PlayPreviousTrack()
         {
-            if (currentTrack != null)
+            if (playbackController.CurrentTrack != null)
             {
-                player.Stop();
-                var index = boundTracks.IndexOf(currentTrack) - 1;
+                playbackController.Stop();
+                var index = boundTracks.IndexOf(playbackController.CurrentTrack) - 1;
                 if (index == -1)
                     index = boundTracks.Count - 1;
 
@@ -185,10 +122,10 @@ namespace Gnosis.Alexandria.Views
 
         private void PlayNextTrack()
         {
-            if (currentTrack != null)
+            if (playbackController.CurrentTrack != null)
             {
-                player.Stop();
-                var index = boundTracks.IndexOf(currentTrack) + 1;
+                playbackController.Stop();
+                var index = boundTracks.IndexOf(playbackController.CurrentTrack) + 1;
                 if (index == boundTracks.Count)
                     index = 0;
 
@@ -304,6 +241,30 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
+        private void NowPlayingElapsedSlider_DragStarted(object sender, ControlPrimatives.DragStartedEventArgs e)
+        {
+            try
+            {
+                playbackController.BeginSeek();
+            }
+            catch (Exception ex)
+            {
+                log.Error("NowPlayingElapsedSlider_DragStarted", ex);
+            }
+        }
+
+        private void NowPlayingElapsedSlider_DragCompleted(object sender, ControlPrimatives.DragCompletedEventArgs e)
+        {
+            try
+            {
+                playbackController.Seek(Convert.ToInt32(NowPlayingElapsedSlider.Value * 1000));
+            }
+            catch (Exception ex)
+            {
+                log.Error("NowPlayingElapsedSlider_DragCompleted", ex);
+            }
+        }
+
         private void TrackListView_SelectionChanged(object sender, RoutedEventArgs args)
         {
             var track = GetSelectedTrack();
@@ -331,7 +292,7 @@ namespace Gnosis.Alexandria.Views
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
-            if (currentTrack == null)
+            if (playbackController.CurrentTrack == null)
             {
                 var selectedTrack = GetSelectedTrack();
                 if (selectedTrack != null)
@@ -494,12 +455,10 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        private Point trackItemDragStartPoint = new Point(0, 0);
-        private ITrack trackToDrag = null;
-
         private void TrackItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             trackItemDragStartPoint = e.GetPosition(null);
+            log.Debug("MainWindow.TrackItem_PreviewMouseLeftButtonDown: x=" + trackItemDragStartPoint.X + " y=" + trackItemDragStartPoint.Y);
         }
 
         private void TrackItem_MouseMove(object sender, MouseEventArgs e)
@@ -519,7 +478,7 @@ namespace Gnosis.Alexandria.Views
                         trackToDrag = track;
                         var data = new DataObject("Track", track);
                         DragDrop.DoDragDrop(TrackView, data, DragDropEffects.Copy);
-                        System.Diagnostics.Debug.WriteLine("TrackItem_MouseMove: DoDragDrop");
+                        log.Debug("TrackItem_MouseMove: DoDragDrop");
                     }
                 }
             }
@@ -564,85 +523,13 @@ namespace Gnosis.Alexandria.Views
                 if (boundTracks.Count > 0)
                 {
                     boundTracks[0].IsSelected = true;
-                    player.Stop();
-                    currentTrack = null;
+                    playbackController.Reset();
                     PlayButton_Click(this, null);
                 }
             }
             catch (Exception ex)
             {
                 log.Error("LoadPlaylist_Clicked", ex);
-            }
-        }
-
-        private void UpdatePlaybackStatus()
-        {
-            if (player != null && player.CurrentAudioStream != null && currentTrack != null)
-            {
-                player.RefreshPlayerStates();
-                var elapsed = player.CurrentAudioStream.Elapsed;
-                currentTrack.ElapsedLabel = string.Format("{0}:{1:00}", elapsed.Minutes, elapsed.Seconds);
-
-                if (!player.SeekIsPending)
-                {
-                    currentTrack.Elapsed = elapsed.TotalSeconds;
-
-                    if (!isAboutToPlay && !hasSeek)
-                    {
-                        if (!currentTrack.HasClipAt(elapsed))
-                        {
-                            var nextClip = currentTrack.GetNextClipFrom(elapsed);
-                            if (nextClip != null)
-                            {
-                                player.Mute();
-                                player.BeginSeek();
-                                player.Seek(Convert.ToInt32(nextClip.Item1.TotalMilliseconds));
-                                player.Unmute();
-                            }
-                            else
-                            {
-                                PlayNextTrack();
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        private void PlaybackTimer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            UpdatePlaybackStatus();
-        }
-
-        private void NowPlayingElapsedSlider_DragStarted(object sender, ControlPrimatives.DragStartedEventArgs e)
-        {
-            try
-            {
-                if (player != null && player.CurrentAudioStream != null && currentTrack != null)
-                {
-                    player.BeginSeek();
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error("NowPlayingElapsedSlider_DragStarted", ex);
-            }
-        }
-
-        private void NowPlayingElapsedSlider_DragCompleted(object sender, ControlPrimatives.DragCompletedEventArgs e)
-        {
-            try
-            {
-                if (player != null && player.CurrentAudioStream != null && currentTrack != null && NowPlayingElapsedSlider.Value >= 0)
-                {
-                    hasSeek = true;
-                    player.Seek(Convert.ToInt32(NowPlayingElapsedSlider.Value * 1000));
-                    UpdatePlaybackStatus();
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error("NowPlayingElapsedSlider_DragCompleted", ex);
             }
         }
     }

@@ -72,6 +72,7 @@
     <Compile Include="Controllers\ISourceController.cs" />
     <Compile Include="Controllers\ITagController.cs" />
     <Compile Include="Controllers\ITrackController.cs" />
+    <Compile Include="Controllers\PlaybackController.cs" />
     <Compile Include="Controllers\SourceController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\TrackController.cs" />

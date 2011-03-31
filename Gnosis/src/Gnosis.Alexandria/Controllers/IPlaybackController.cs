@@ -8,5 +8,17 @@ namespace Gnosis.Alexandria.Controllers
     public interface IPlaybackController
     {
         ITrack CurrentTrack { get; }
+        TimeSpan CurrentDuration { get; }
+        TimeSpan CurrentElapsed { get; }
+        IPlaybackStatus Status { get; }
+
+        EventHandler<EventArgs> CurrentTrackEnded { get; set; }
+
+        void BeginSeek();
+        void Reset();
+        void Play();
+        void Seek(int position);
+        void Load(ITrack track);
+        void Stop();
     }
 }
