@@ -49,18 +49,10 @@ namespace Gnosis.Alexandria.Views
                 sourceController = new SourceController(sourceRepository, trackController);
                 playbackController = new PlaybackController();
                 sourceView.Initialize(sourceController, trackController, tagController);
+                searchView.Initialize(trackController);
+                playbackView.Initialize(trackController, playbackController);
 
-
-
-                TrackView.ItemsSource = boundTracks;
-                PlayButtonImage.DataContext = playbackController.Status;
-
-                var tracks = trackRepository.All();
-                foreach (var track in tracks)
-                {
-                    tagController.LoadPicture(track);
-                    boundTracks.Add(track);
-                }
+                TrackView.ItemsSource = trackController.Tracks;
 
                 sourceView.SourceLoaded += new EventHandler<SourceLoadedEventArgs>(SourceLoaded);
                 playbackController.CurrentTrackEnded += CurrentTrackEnded;
@@ -79,7 +71,6 @@ namespace Gnosis.Alexandria.Views
         private readonly ISourceController sourceController;
         private readonly IPlaybackController playbackController;
 
-        private readonly ObservableCollection<ITrack> boundTracks = new ObservableCollection<ITrack>();
         private IPicture copiedPicture;
         private Point trackItemDragStartPoint = new Point(0, 0);
         private ITrack trackToDrag = null;
@@ -87,51 +78,6 @@ namespace Gnosis.Alexandria.Views
         private ITrack GetSelectedTrack()
         {
             return TrackView.SelectedItem as ITrack;
-        }
-
-        private void SetCurrentTrack(ITrack track)
-        {
-            playbackController.Load(track);
-
-            NowPlayingMarquee.Dispatcher.Invoke((Action)delegate()
-            {
-                NowPlayingMarquee.DataContext = playbackController.CurrentTrack;
-                NowPlayingMarquee.Visibility = playbackController.CurrentTrack != null ? Visibility.Visible : Visibility.Collapsed;
-            });
-        }
-
-        private void PlayCurrentTrack()
-        {
-            playbackController.Play();
-            NowPlayingElapsedSlider.Dispatcher.Invoke((Action)delegate { NowPlayingElapsedSlider.Maximum = playbackController.CurrentDuration.TotalSeconds; });
-        }
-
-        private void PlayPreviousTrack()
-        {
-            if (playbackController.CurrentTrack != null)
-            {
-                playbackController.Stop();
-                var index = boundTracks.IndexOf(playbackController.CurrentTrack) - 1;
-                if (index == -1)
-                    index = boundTracks.Count - 1;
-
-                SetCurrentTrack(boundTracks[index]);
-                PlayCurrentTrack();
-            }
-        }
-
-        private void PlayNextTrack()
-        {
-            if (playbackController.CurrentTrack != null)
-            {
-                playbackController.Stop();
-                var index = boundTracks.IndexOf(playbackController.CurrentTrack) + 1;
-                if (index == boundTracks.Count)
-                    index = 0;
-
-                SetCurrentTrack(boundTracks[index]);
-                PlayCurrentTrack();
-            }
         }
 
         private void AddPicture(ITrack track, string path)
@@ -177,94 +123,6 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        private IEnumerable<KeyValuePair<string, object>> GetSearchCriteria(string search)
-        {
-            var criteria = new Dictionary<string, object>();
-
-            var searchLike = string.Format("%{0}%", search);
-            var searchHash = search.AsNameHash();
-            var searchMetaphone = search.AsDoubleMetaphone();
-
-            criteria.Add("Title", searchLike);
-            criteria.Add("TitleHash", searchHash);
-            criteria.Add("TitleMetaphone", searchMetaphone);
-            criteria.Add("Artist", searchLike);
-            criteria.Add("ArtistHash", searchHash);
-            criteria.Add("ArtistMetaphone", searchMetaphone);
-            criteria.Add("Album", searchLike);
-            criteria.Add("AlbumHash", searchHash);
-            criteria.Add("AlbumMetaphone", searchMetaphone);
-
-            return criteria;
-        }
-
-        private void Search(string search)
-        {
-            try
-            {
-                IEnumerable<ITrack> tracks = null;
-
-                if (!string.IsNullOrEmpty(search))
-                {
-                    var criteria = GetSearchCriteria(search);
-
-                    tracks = trackRepository.Search(criteria);
-                    if (tracks.Count() == 0 && search.Contains(' '))
-                    {
-                        var set = new HashSet<ITrack>();
-                        foreach (var word in search.Split(' '))
-                        {
-                            foreach (var track in trackRepository.Search(GetSearchCriteria(word)))
-                                set.Add(track);
-                        }
-                        tracks = set;
-                    }
-                }
-                else
-                {
-                    tracks = trackRepository.All();
-                }
-
-                if (tracks != null)
-                {
-                    boundTracks.Clear();
-                    foreach (var track in tracks)
-                    {
-                        tagController.LoadPicture(track);
-                        boundTracks.Add(track);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error("Search(string)", ex);
-            }
-        }
-
-        private void NowPlayingElapsedSlider_DragStarted(object sender, ControlPrimatives.DragStartedEventArgs e)
-        {
-            try
-            {
-                playbackController.BeginSeek();
-            }
-            catch (Exception ex)
-            {
-                log.Error("NowPlayingElapsedSlider_DragStarted", ex);
-            }
-        }
-
-        private void NowPlayingElapsedSlider_DragCompleted(object sender, ControlPrimatives.DragCompletedEventArgs e)
-        {
-            try
-            {
-                playbackController.Seek(Convert.ToInt32(NowPlayingElapsedSlider.Value * 1000));
-            }
-            catch (Exception ex)
-            {
-                log.Error("NowPlayingElapsedSlider_DragCompleted", ex);
-            }
-        }
-
         private void TrackListView_SelectionChanged(object sender, RoutedEventArgs args)
         {
             var track = GetSelectedTrack();
@@ -282,41 +140,13 @@ namespace Gnosis.Alexandria.Views
 
         private void CurrentTrackEnded(object sender, EventArgs args)
         {
-            PlayNextTrack();
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            PlayPreviousTrack();
-        }
-
-        private void PlayButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (playbackController.CurrentTrack == null)
-            {
-                var selectedTrack = GetSelectedTrack();
-                if (selectedTrack != null)
-                {
-                    SetCurrentTrack(selectedTrack);
-                }
-                else if (boundTracks.Count > 0)
-                {
-                    SetCurrentTrack(boundTracks[0]);
-                }
-            }
-
-            PlayCurrentTrack();
-        }
-
-        private void NextButton_Click(object sender, RoutedEventArgs e)
-        {
-            PlayNextTrack();
+            playbackView.PlayNextTrack();
         }
 
         private void TrackListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            SetCurrentTrack(GetSelectedTrack());
-            PlayCurrentTrack();
+            playbackView.SetNowPlaying(GetSelectedTrack());
+            playbackView.PlayCurrentTrack();
         }
 
         private void ChangePictureButton_Click(object sender, RoutedEventArgs e)
@@ -441,20 +271,6 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-            Search(SearchTextBox.Text);
-        }
-
-        private void SearchTextBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                Search(SearchTextBox.Text);
-                e.Handled = true;
-            }
-        }
-
         private void TrackItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             trackItemDragStartPoint = e.GetPosition(null);
@@ -492,7 +308,7 @@ namespace Gnosis.Alexandria.Views
         {
             try
             {
-                boundTracks.Clear();
+                trackController.ClearTracks();
                 if (args.Source is FileSystemSource || args.Source is DirectorySource)
                 {
                     sourceController.LoadDirectories(args.Source);
@@ -512,7 +328,7 @@ namespace Gnosis.Alexandria.Views
                         if (track != null)
                         {
                             tagController.LoadPicture(track);
-                            boundTracks.Add(track);
+                            trackController.AddTrack(track);
                         }
                     }
                     catch (Exception ex)
@@ -520,11 +336,13 @@ namespace Gnosis.Alexandria.Views
                         log.Error("MainWindow.SourceLoaded: Could not load track path=" + item.Path, ex);
                     }
                 }
-                if (boundTracks.Count > 0)
+                if (trackController.TrackCount > 0)
                 {
-                    boundTracks[0].IsSelected = true;
+                    var track = trackController.GetTrackAt(0);
+                    track.IsSelected = true;
                     playbackController.Reset();
-                    PlayButton_Click(this, null);
+                    playbackView.SetNowPlaying(track);
+                    playbackView.PlayCurrentTrack();
                 }
             }
             catch (Exception ex)

@@ -14,41 +14,8 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel x:Name="PlaybackPanel" Grid.Row="0" Orientation="Horizontal">
-            <Button x:Name="BackButton" Width="60" Margin="4" Click="BackButton_Click" BorderBrush="Transparent" BorderThickness="0" Background="Transparent">
-                <Image x:Name="BackButtonImage" Source="pack://application:,,,/Images/back.png"/>
-            </Button>
-            <Button x:Name="PlayButton" Width="60" Margin="4" Click="PlayButton_Click" BorderBrush="Transparent" BorderThickness="0" Background="Transparent">
-                <Image x:Name="PlayButtonImage" Source="{Binding ImagePath}" Visibility="Visible" />
-            </Button>
-            <Button x:Name="NextButton" Width="60" Margin="4" Click="NextButton_Click" BorderBrush="Transparent" BorderThickness="0" Background="Transparent">
-                <Image x:Name="NextButtonImage" Source="pack://application:,,,/Images/next.png"/>
-            </Button>
-            <StackPanel x:Name="NowPlayingMarquee" Visibility="Collapsed" Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="NowPlayingLabel" Margin="8 10 4 8" Text="Now Playing" Foreground="Gray" FontSize="12"/>
-                    <TextBlock x:Name="NowPlayingTitle" Margin="8 8 8 8" Text="{Binding Title}" FontSize="14"/>
-                    <TextBlock x:Name="NowPlayingBy" Margin="4 10 4 8" Text="by" Foreground="Gray" FontSize="12"/>
-                    <TextBlock x:Name="NowPlayingArtist" Margin="8 8 8 8" Text="{Binding Artist}" FontSize="14"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="NowPlayingElapsed" Margin="8 4 4 8" Text="{Binding ElapsedLabel}" FontSize="12" FontWeight="Bold"/>
-                    <TextBlock Text="/" Margin="0 4 0 8" FontSize="12"/>
-                    <TextBlock x:Name="NowPlayingDuration" Margin="4 4 4 8" Text="{Binding DurationLabel}" FontSize="12" FontWeight="Bold"/>
-                    <Slider x:Name="NowPlayingElapsedSlider" Margin="4 4 4 8" Value="{Binding Elapsed}" Orientation="Horizontal" Width="300" Thumb.DragStarted="NowPlayingElapsedSlider_DragStarted" Thumb.DragCompleted="NowPlayingElapsedSlider_DragCompleted"/>
-                </StackPanel>
-            </StackPanel>
-        </StackPanel>
-        <Grid x:Name="SearchGrid" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="30"/>
-            </Grid.ColumnDefinitions>
-            <TextBox x:Name="SearchTextBox" Grid.Column="0" Width="600" KeyUp="SearchTextBox_KeyUp"/>
-            <Button x:Name="SearchButton" Grid.Column="1" Click="SearchButton_Click"  BorderBrush="Transparent" BorderThickness="0" Background="Transparent">
-                <Image Source="pack://application:,,,/Images/search.png"/>
-            </Button>
-        </Grid>
+        <views:PlaybackView x:Name="playbackView" Grid.Row="0"/>
+        <views:SearchView x:Name="searchView" Grid.Row="1"/>
         <Grid x:Name="ContentGrid" Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
