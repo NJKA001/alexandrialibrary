@@ -45,8 +45,8 @@
                             <TextBox Text="{Binding Comment}" FontSize="12" Margin="4 0 4 0" Width="200"/>
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Lyrics" Foreground="Gray"/>
-                            <TextBox Text="{Binding Lyrics}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Height="100" HorizontalAlignment="Stretch" AcceptsReturn="True" AcceptsTab="True"/>
+                            <TextBlock x:Name="lyricsTextBlock" Text="Lyrics" Foreground="Gray" AllowDrop="True" DragEnter="lyricsTextBlock_DragEnter" Drop="lyricsTextBlock_Drop"/>
+                            <TextBox x:Name="lyricsTextBox" Text="{Binding Lyrics, Mode=TwoWay}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Height="100" HorizontalAlignment="Stretch" AcceptsReturn="True" AcceptsTab="True"/>
                         </StackPanel>
                         <Button x:Name="SaveTrackPropertiesButton" Width="60" Click="SaveTrackPropertiesButton_Click">Save</Button>
                     </StackPanel>

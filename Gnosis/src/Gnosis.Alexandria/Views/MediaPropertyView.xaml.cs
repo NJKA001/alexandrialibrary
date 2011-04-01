@@ -80,5 +80,78 @@ namespace Gnosis.Alexandria.Views
             this.trackController = trackController;
             this.tagController = tagController;
         }
+
+        private string GetHtml(string url)
+        {
+            var html = string.Empty;
+            var request = System.Net.HttpWebRequest.Create(url);
+            var response = request.GetResponse();
+            if (response != null)
+            {
+                using (var stream = response.GetResponseStream())
+                {
+                    using (var reader = new System.IO.StreamReader(stream))
+                    {
+                        html = reader.ReadToEnd();
+                    }
+                }
+            }
+
+            return html;
+        }
+
+        private string GetLyrics(string html)
+        {
+            var lyrics = string.Empty;
+
+            if (!string.IsNullOrEmpty(html))
+            {
+                var regex = new System.Text.RegularExpressions.Regex("<img src='http://images.wikia.com/lyricwiki/images/phone_right.gif' alt='phone' width='16' height='17'/></a></div>(?<LYRICS>[^!]+)");
+                var match = regex.Match(html);
+                if (match != null)
+                {
+                    var encodedLyrics = match.Groups["LYRICS"].Value;
+                    if (!string.IsNullOrEmpty(encodedLyrics))
+                    {
+                        lyrics = System.Web.HttpUtility.HtmlDecode(encodedLyrics.TrimEnd('<')).Replace("<br />", "\r\n");
+                    }
+                }
+            }
+
+            return lyrics;
+        }
+
+        private void lyricsTextBlock_Drop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                if (track != null && e.Data.GetDataPresent(typeof(string)))
+                {
+                    var url = e.Data.GetData(typeof(string)) as string;
+                    if (url != null && url.StartsWith("http://lyrics.wikia.com"))
+                    {
+                        var html = GetHtml(url);
+                        var lyrics = GetLyrics(html);
+                        if (!string.IsNullOrEmpty(lyrics))
+                        {
+                            track.Lyrics = lyrics;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var message = ex.Message;
+            }
+        }
+
+        private void lyricsTextBlock_DragEnter(object sender, DragEventArgs e)
+        {
+            //foreach (var format in e.Data.GetFormats())
+            //{
+            //    var x = format;
+            //}
+            e.Effects = DragDropEffects.All;
+        }
     }
 }
