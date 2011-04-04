@@ -11,6 +11,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
+using log4net;
+
 using Gnosis.Alexandria.Controllers;
 
 namespace Gnosis.Alexandria.Views
@@ -25,6 +28,7 @@ namespace Gnosis.Alexandria.Views
             InitializeComponent();
         }
 
+        private static readonly ILog log = LogManager.GetLogger(typeof(MediaPropertyView));
         private ITrackController trackController;
         private ITagController tagController;
         private ITrack track;
@@ -61,7 +65,8 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                var message = ex.Message;
+                log.Error("MediaPropertyView.SaveTrackPropertiesButton_Click", ex);
+                MessageBox.Show(ex.Message, "Could Not Save Track");
             }
         }
 
