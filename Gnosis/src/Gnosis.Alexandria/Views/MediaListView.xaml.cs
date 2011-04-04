@@ -43,8 +43,11 @@ namespace Gnosis.Alexandria.Views
 
         private void TrackListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            playbackView.SetNowPlaying(SelectedTrack);
-            playbackView.PlayCurrentTrack();
+            if (SelectedTrack != null)
+            {
+                playbackView.SetNowPlaying(SelectedTrack);
+                playbackView.PlayCurrentTrack();
+            }
         }
 
         private void ItemImageCopy_Click(object sender, RoutedEventArgs e)

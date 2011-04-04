@@ -77,6 +77,23 @@ namespace Gnosis.Alexandria.Helpers
             return null;
         }
 
+        public static T FindContainingItem<T>(UIElement element)
+            where T : UIElement
+        {
+            if (element != null)
+            {
+                var item = element as T;
+                if (item != null)
+                    return item;
+
+                var parent = VisualTreeHelper.GetParent(element) as UIElement;
+                if (parent != null)
+                    return FindContainingItem<T>(parent);
+            }
+
+            return null;
+        }
+
         public static TreeViewItem FindTreeViewItem(ItemsControl container, object item)
         {
             if (container != null)

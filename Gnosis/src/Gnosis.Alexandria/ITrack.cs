@@ -34,6 +34,8 @@ namespace Gnosis.Alexandria
         string CountryImagePath { get; }
         int ReleaseYear { get; set; }
         bool IsSelected { get; set; }
+        bool IsHovered { get; set; }
+        string Background { get; }
         string PlaybackStatus { get; set; }
         string DurationLabel { get; set; }
         string ElapsedLabel { get; set; }

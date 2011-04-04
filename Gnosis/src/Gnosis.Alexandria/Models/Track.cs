@@ -34,6 +34,8 @@ namespace Gnosis.Alexandria.Models
         public const string DEFAULT_GENRE = "Unknown Genre";
         public static readonly DateTime DEFAULT_RELEASE_DATE = new DateTime(2000, 1, 1);
         public const string DEFAULT_COUNTRY = "us";
+        public const string COLOR_TRANSPARENT = "#00FFFFFF";
+        public const string COLOR_LIGHTBLUE = "#FFADD8E6";
 
         private readonly Guid id;
         private string path;
@@ -52,6 +54,7 @@ namespace Gnosis.Alexandria.Models
         private string grouping = string.Empty;
 
         private bool isSelected;
+        private bool isHovered;
         private string playbackStatus;
         private string durationLabel;
         private string elapsedLabel;
@@ -481,6 +484,25 @@ namespace Gnosis.Alexandria.Models
             }
         }
 
+        public bool IsHovered
+        {
+            get { return isHovered; }
+            set
+            {
+                if (isHovered != value)
+                {
+                    isHovered = value;
+                    OnPropertyChanged("IsHovered");
+                    OnPropertyChanged("Background");
+                }
+            }
+        }
+
+        public string Background
+        {
+            get { return isHovered ? COLOR_LIGHTBLUE : COLOR_TRANSPARENT; }
+        }
+
         public string PlaybackStatus
         {
             get { return playbackStatus; }
@@ -540,5 +562,53 @@ namespace Gnosis.Alexandria.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
+
+        public override int GetHashCode()
+        {
+            return id.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (object.ReferenceEquals(obj, null))
+                return false;
+
+            var track = obj as Track;
+            if (object.ReferenceEquals(track, null))
+                return false;
+
+            return this == track;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Track: {0} by {1} from {2}", title, artist, album);
+        }
+
+        public static bool operator ==(Track track1, Track track2)
+        {
+            if (object.ReferenceEquals(track1, null) || object.ReferenceEquals(track2, null))
+                return false;
+
+            return track1.id == track2.id;
+        }
+
+        public static bool operator !=(Track track1, Track track2)
+        {
+            if (object.ReferenceEquals(track1, null))
+            {
+                if (object.ReferenceEquals(track2, null))
+                    return false;
+                else
+                    return true;
+            }
+            else
+            {
+                if (object.ReferenceEquals(track2, null))
+                    return true;
+                else
+                    return track1.id != track2.id;
+            }
+        }
     }
 }

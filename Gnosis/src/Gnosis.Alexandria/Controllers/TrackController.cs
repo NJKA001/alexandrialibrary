@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -19,18 +20,23 @@ namespace Gnosis.Alexandria.Controllers
             this.repository = repository;
             this.tagController = tagController;
 
-            var tracks = repository.All();
-            foreach (var track in tracks)
-            {
-                tagController.LoadPicture(track);
-                boundTracks.Add(track);
-            }
+            //var tracks = repository.All();
+            //foreach (var track in tracks)
+            //{
+            //    tagController.LoadPicture(track);
+            //    boundTracks.Add(track);
+            //}
+
+            imageLoader.WorkerSupportsCancellation = true;
+            imageLoader.DoWork += LoadTrackImages;
+            imageLoader.RunWorkerCompleted += LoadTrackImagesCompleted;
         }
 
         private static readonly ILog log = LogManager.GetLogger(typeof(TrackController));
         private readonly IRepository<ITrack> repository;
         private readonly ITagController tagController;
         private readonly ObservableCollection<ITrack> boundTracks = new ObservableCollection<ITrack>();
+        private BackgroundWorker imageLoader = new BackgroundWorker();
 
         private ITrack GetTrack(string path, Tag tag)
         {
@@ -174,6 +180,34 @@ namespace Gnosis.Alexandria.Controllers
             return tracks;
         }
 
+        private void LoadTrackImages(object sender, DoWorkEventArgs args)
+        {
+            var worker = sender as BackgroundWorker;
+            var tracksToLoad = new List<ITrack>();
+            lock (boundTracks)
+            {
+                tracksToLoad.AddRange(boundTracks);
+            }
+
+            foreach (var track in tracksToLoad)
+            {
+                if (worker.CancellationPending)
+                {
+                    args.Cancel = true;
+                    break;
+                }
+                tagController.LoadPicture(track);
+            }
+        }
+
+        private void LoadTrackImagesCompleted(object sender, RunWorkerCompletedEventArgs args)
+        {
+            if (args.Cancelled && boundTracks.Count > 0)
+            {
+                imageLoader.RunWorkerAsync();
+            }
+        }
+
         public void Filter(string search)
         {
             var tracks = Search(search);
@@ -184,6 +218,15 @@ namespace Gnosis.Alexandria.Controllers
                 foreach (var track in tracks)
                 {
                     boundTracks.Add(track);
+                }
+
+                if (imageLoader.IsBusy)
+                {
+                    imageLoader.CancelAsync();
+                }
+                else
+                {
+                    imageLoader.RunWorkerAsync();
                 }
             }
         }

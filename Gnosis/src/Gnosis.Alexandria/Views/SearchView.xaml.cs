@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using Gnosis.Alexandria.Controllers;
 using Gnosis.Core;
 using System.ComponentModel;
+using Gnosis.Alexandria.Helpers;
 
 namespace Gnosis.Alexandria.Views
 {
@@ -28,8 +29,10 @@ namespace Gnosis.Alexandria.Views
         {
             InitializeComponent();
             autocompleteListBox.ItemsSource = autocompleteTracks;
+            
             imageLoader.WorkerSupportsCancellation = true;
             imageLoader.DoWork += LoadAutocompleteImages;
+            imageLoader.RunWorkerCompleted += LoadAutocompleteImagesCompleted;
         }
 
         private ITrackController trackController;
@@ -58,21 +61,50 @@ namespace Gnosis.Alexandria.Views
         private void RefreshAutocomplete()
         {
             autocompletePopup.IsOpen = autocompleteTracks.Count > 0;
-            imageLoader.CancelAsync();
-            imageLoader.RunWorkerAsync();
+
+            if (autocompleteTracks.Count > 0)
+            {
+                if (imageLoader.IsBusy)
+                {
+                    imageLoader.CancelAsync();
+                }
+                else
+                {
+                    imageLoader.RunWorkerAsync();
+                }
+            }
+            else
+            {
+                if (imageLoader.IsBusy)
+                    imageLoader.CancelAsync();
+            }
         }
 
         private void LoadAutocompleteImages(object sender, DoWorkEventArgs args)
         {
             var worker = sender as BackgroundWorker;
-            foreach (var track in autocompleteTracks)
+            var tracksToLoad = new List<ITrack>();
+            lock (autocompleteTracks)
+            {
+                tracksToLoad.AddRange(autocompleteTracks);
+            }
+
+            foreach (var track in tracksToLoad)
             {
                 if (worker.CancellationPending)
                 {
                     args.Cancel = true;
                     break;
                 }
-                tagController.LoadPicture(track);       
+                tagController.LoadPicture(track);   
+            }
+        }
+
+        private void LoadAutocompleteImagesCompleted(object sender, RunWorkerCompletedEventArgs args)
+        {
+            if (args.Cancelled && autocompleteTracks.Count > 0)
+            {
+                imageLoader.RunWorkerAsync();
             }
         }
 
@@ -95,16 +127,21 @@ namespace Gnosis.Alexandria.Views
                 if (search != lastSearch)
                 {
                     lastSearch = search;
-                    ClearAutocomplete();
+                    //ClearAutocomplete();
                     if (!string.IsNullOrEmpty(lastSearch) && lastSearch.Length > 1)
                     {
-
                         var suggestions = trackController.Search(lastSearch).Take(maxSuggestions);
-                        if (suggestions != null)
+                        if (suggestions != null && !suggestions.SequenceEqual(autocompleteTracks))
                         {
+                            ClearAutocomplete();
                             foreach (var suggestion in suggestions)
                                 autocompleteTracks.Add(suggestion);
                         }
+
+                    }
+                    else
+                    {
+                        ClearAutocomplete();
                     }
 
                     RefreshAutocomplete();
@@ -122,6 +159,36 @@ namespace Gnosis.Alexandria.Views
                     searchTextBox.Text = track.Title;
                     ClearAutocomplete();
                     Filter();
+                }
+            }
+        }
+
+        private void autocompleteItemPanel_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var element = sender as UIElement;
+            if (element != null)
+            {
+                var item = VisualHelper.FindContainingItem<ListBoxItem>(element);
+                if (item != null)
+                {
+                    var track = item.DataContext as ITrack;
+                    if (track != null)
+                        track.IsHovered = true;
+                }
+            }
+        }
+
+        private void autocompleteItemPanel_MouseLeave(object sender, MouseEventArgs e)
+        {
+            var element = sender as UIElement;
+            if (element != null)
+            {
+                var item = VisualHelper.FindContainingItem<ListBoxItem>(element);
+                if (item != null)
+                {
+                    var track = item.DataContext as ITrack;
+                    if (track != null)
+                        track.IsHovered = false;
                 }
             }
         }
