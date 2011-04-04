@@ -49,7 +49,7 @@ namespace Gnosis.Alexandria.Views
                 sourceController = new SourceController(sourceRepository, trackController);
                 playbackController = new PlaybackController();
                 sourceView.Initialize(sourceController, trackController, tagController);
-                searchView.Initialize(trackController);
+                searchView.Initialize(trackController, tagController);
                 playbackView.Initialize(trackController, playbackController);
                 mediaPropertyView.Initialize(trackController, tagController);
                 mediaListView.Initialize(trackController, tagController, playbackView, mediaPropertyView);

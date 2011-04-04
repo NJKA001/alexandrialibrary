@@ -15,6 +15,7 @@ namespace Gnosis.Alexandria.Controllers
         ITrack ReadFromTag(string path);
         void LoadDirectory(DirectoryInfo directory);
         void Filter(string search);
+        IEnumerable<ITrack> Search(string search);
         int IndexOf(ITrack track);
         void ClearTracks();
         void AddTrack(ITrack track);

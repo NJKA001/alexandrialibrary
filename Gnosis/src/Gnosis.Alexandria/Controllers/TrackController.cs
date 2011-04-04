@@ -141,7 +141,7 @@ namespace Gnosis.Alexandria.Controllers
             return criteria;
         }
 
-        public void Filter(string search)
+        public IEnumerable<ITrack> Search(string search)
         {
             IEnumerable<ITrack> tracks = null;
 
@@ -156,7 +156,9 @@ namespace Gnosis.Alexandria.Controllers
                     foreach (var word in search.Split(' '))
                     {
                         foreach (var track in Search(GetSearchCriteria(word)))
+                        {
                             set.Add(track);
+                        }
                     }
                     tracks = set;
                 }
@@ -166,12 +168,21 @@ namespace Gnosis.Alexandria.Controllers
                 tracks = All();
             }
 
+            //foreach (var track in tracks)
+                //tagController.LoadPicture(track);
+
+            return tracks;
+        }
+
+        public void Filter(string search)
+        {
+            var tracks = Search(search);
+
             if (tracks != null)
             {
                 boundTracks.Clear();
                 foreach (var track in tracks)
                 {
-                    tagController.LoadPicture(track);
                     boundTracks.Add(track);
                 }
             }
