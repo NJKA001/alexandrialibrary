@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using log4net;
 
 using Gnosis.Alexandria.Controllers;
+using Gnosis.Alexandria.Models;
 
 namespace Gnosis.Alexandria.Views
 {

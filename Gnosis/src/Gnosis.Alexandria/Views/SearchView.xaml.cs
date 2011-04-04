@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -14,9 +15,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using Gnosis.Alexandria.Controllers;
-using Gnosis.Core;
-using System.ComponentModel;
 using Gnosis.Alexandria.Helpers;
+using Gnosis.Alexandria.Models;
+using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Views
 {

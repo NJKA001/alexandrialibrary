@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 
-namespace Gnosis.Alexandria
+namespace Gnosis.Alexandria.Models
 {
     public interface ISource
     {

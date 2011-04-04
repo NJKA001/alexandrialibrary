@@ -17,6 +17,7 @@ using TagLib;
 
 using Gnosis.Alexandria.Controllers;
 using Gnosis.Alexandria.Helpers;
+using Gnosis.Alexandria.Models;
 using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Views

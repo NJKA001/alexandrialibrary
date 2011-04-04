@@ -9,6 +9,7 @@ using log4net;
 using TagLib;
 
 using Gnosis.Alexandria.Models;
+using Gnosis.Alexandria.Repositories;
 using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Controllers

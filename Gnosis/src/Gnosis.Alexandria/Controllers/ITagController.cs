@@ -5,6 +5,8 @@ using System.Text;
 
 using TagLib;
 
+using Gnosis.Alexandria.Models;
+
 namespace Gnosis.Alexandria.Controllers
 {
     public interface ITagController

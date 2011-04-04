@@ -7,6 +7,7 @@ using System.Text;
 using log4net;
 
 using Gnosis.Alexandria.Models;
+using Gnosis.Alexandria.Repositories;
 
 namespace Gnosis.Alexandria.Controllers
 {

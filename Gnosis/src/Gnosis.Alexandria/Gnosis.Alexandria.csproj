@@ -37,7 +37,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>pyramid.ico</ApplicationIcon>
+    <ApplicationIcon>App.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
@@ -79,16 +79,16 @@
     <Compile Include="Controllers\TrackController.cs" />
     <Compile Include="Events\SourceLoadedEventArgs.cs" />
     <Compile Include="Helpers\VisualHelper.cs" />
-    <Compile Include="IPlaybackStatus.cs" />
-    <Compile Include="ISourcePropertyFactory.cs" />
+    <Compile Include="Models\IPlaybackStatus.cs" />
+    <Compile Include="Models\ISourcePropertyFactory.cs" />
     <Compile Include="Models\CreatorProperty.cs" />
     <Compile Include="Models\DirectorySource.cs" />
     <Compile Include="Models\FileSystemSource.cs" />
     <Compile Include="Models\FolderSource.cs" />
     <Compile Include="Converters\ImageSourceConverter.cs" />
-    <Compile Include="ISource.cs" />
-    <Compile Include="ISourceProperty.cs" />
-    <Compile Include="IRepository.cs" />
+    <Compile Include="Models\ISource.cs" />
+    <Compile Include="Models\ISourceProperty.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Models\IdentifierProperty.cs" />
     <Compile Include="Models\PlaylistItemSource.cs" />
     <Compile Include="Models\ProxySource.cs" />
@@ -119,7 +119,7 @@
     <Compile Include="Views\SourceView.xaml.cs">
       <DependentUpon>SourceView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\MainWindow.xaml">
+    <Page Include="Views\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -127,9 +127,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ITrack.cs" />
-    <Compile Include="Views\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Models\ITrack.cs" />
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\MediaListView.xaml">
@@ -479,7 +479,7 @@
     <Resource Include="Images\pyramid.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="pyramid.ico" />
+    <Resource Include="App.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
