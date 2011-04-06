@@ -22,5 +22,30 @@ namespace Gnosis.Core
             input.CopyTo(memoryStream);
             return memoryStream.GetBuffer();
         }
+
+        public static void Copy(this Stream source, Stream target, int blockSize)
+        {
+            int read;
+            byte[] buffer = new byte[blockSize];
+            while ((read = source.Read(buffer, 0, blockSize)) > 0)
+            {
+                target.Write(buffer, 0, read);
+            }
+        }
+
+        public static void BlockCopy(this Stream source, Stream target, int blockSize = 65536)
+        {
+            source.Copy(target, blockSize);
+        }
+
+        public static void SaveToFile(this Stream source, string fileName)
+        {
+            using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                source.BlockCopy(fs);
+                fs.Flush();
+                fs.Close();
+            }
+        }
     }
 }

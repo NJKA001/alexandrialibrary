@@ -8,6 +8,7 @@ using System.Timers;
 using log4net;
 
 using Gnosis.Alexandria.Models;
+using Gnosis.Core;
 using Gnosis.Fmod;
 using System.Net;
 
@@ -22,7 +23,14 @@ namespace Gnosis.Alexandria.Controllers
 
             player.CurrentAudioStreamEnded += new EventHandler<EventArgs>(CurrentAudioStreamEnded);
 
-            LoadCachedFiles();
+            if (!Directory.Exists(cachePath))
+            {
+                Directory.CreateDirectory(cachePath);
+            }
+            else
+            {
+                LoadCachedFiles();
+            }
         }
 
         private static readonly ILog log = LogManager.GetLogger(typeof(PlaybackController));
@@ -33,9 +41,8 @@ namespace Gnosis.Alexandria.Controllers
         private bool isAboutToPlay = false;
         private bool hasSeek = false;
         private readonly IDictionary<Guid, string> cachedFiles = new Dictionary<Guid, string>();
-        private string cachePath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic); 
-            //@"\\vmware-host\Shared Folders\Documents\My Music\";
-            //@"\\vmware-host\Shared Folders\Documents\My Music\";
+        private string cachePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), "Alexandria", "Cache");
+        const string extensionMp3 = ".mp3";
 
         private void LoadCachedFiles()
         {
@@ -65,26 +72,33 @@ namespace Gnosis.Alexandria.Controllers
             {
                 var fileName = System.IO.Path.Combine(cachePath, track.Id.ToString().Replace("-", string.Empty));
 
-                var index = track.Path.LastIndexOf('.');
-                if (index > -1)
+                //TODO: Get mime type from feed
+                //      We should not assume the file will always be an MP3 - e.g video podcasts
+                if (track.Path.EndsWith(extensionMp3))
                 {
+                    var index = track.Path.LastIndexOf(extensionMp3);
                     var extension = track.Path.Substring(index, track.Path.Length - index);
                     fileName += extension;
+                }
+                else
+                {
+                    fileName += extensionMp3;
                 }
 
                 var request = HttpWebRequest.Create(track.Path);
                 using (var stream = request.GetResponse().GetResponseStream())
                 {
-                    using (var fs = new FileStream(fileName, FileMode.CreateNew, FileAccess.Write))
-                    {
-                        var buffer = new byte[4096];
-                        var bytesRead = 0;
+                    stream.SaveToFile(fileName);
+                    //using (var fs = new FileStream(fileName, FileMode.CreateNew, FileAccess.Write))
+                    //{
+                    //    var buffer = new byte[4096];
+                    //    var bytesRead = 0;
 
-                        while (0 < (bytesRead = stream.Read(buffer, 0, buffer.Length)))
-                        {
-                            fs.Write(buffer, 0, bytesRead);
-                        }
-                    }
+                    //    while (0 < (bytesRead = stream.Read(buffer, 0, buffer.Length)))
+                    //    {
+                    //        fs.Write(buffer, 0, bytesRead);
+                    //    }
+                    //}
 
                     cachedFiles.Add(track.Id, fileName);
                 }
