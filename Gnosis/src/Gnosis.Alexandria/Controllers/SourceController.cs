@@ -178,7 +178,8 @@ namespace Gnosis.Alexandria.Controllers
 
                         if (linkNode != null)
                         {
-                            var playlistItem = new PlaylistItemSource { Path = linkNode.InnerText, ImagePath = source.ImagePath, Parent = source };
+                            var path = linkNode.InnerText; //linkNode.Attributes["url"].Value;
+                            var playlistItem = new PlaylistItemSource { Path = path, ImagePath = source.ImagePath, Parent = source };
                             playlistItem.Name = titleNode != null ? titleNode.InnerText : "Unknown Podcast";
                             playlistItem.Creator = authorNode != null ? authorNode.InnerText : "Unknown Creator";
                             playlistItem.Summary = summaryNode != null ? summaryNode.InnerText : string.Empty;

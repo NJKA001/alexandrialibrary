@@ -33,10 +33,9 @@ namespace Gnosis.Alexandria.Controllers
         private bool isAboutToPlay = false;
         private bool hasSeek = false;
         private readonly IDictionary<Guid, string> cachedFiles = new Dictionary<Guid, string>();
-        private string cachePath = 
-            //Environment.GetFolderPath(Environment.SpecialFolder.MyMusic); 
+        private string cachePath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic); 
             //@"\\vmware-host\Shared Folders\Documents\My Music\";
-            @"\\vmware-host\Shared Folders\Documents\My Music\";
+            //@"\\vmware-host\Shared Folders\Documents\My Music\";
 
         private void LoadCachedFiles()
         {
@@ -64,7 +63,7 @@ namespace Gnosis.Alexandria.Controllers
         {
             try
             {
-                var fileName = string.Format(@"{0}{1}", cachePath, track.Id.ToString().Replace("-", string.Empty));
+                var fileName = System.IO.Path.Combine(cachePath, track.Id.ToString().Replace("-", string.Empty));
 
                 var index = track.Path.LastIndexOf('.');
                 if (index > -1)
@@ -78,8 +77,8 @@ namespace Gnosis.Alexandria.Controllers
                 {
                     // Hope GetEncoding() knows how to parse the CharacterSet
                     //Encoding encoding = Encoding.GetEncoding(response.CharacterSet);
-                    var reader = new StreamReader(response.GetResponseStream()); //, encoding);
-                    using (StreamWriter writer = new StreamWriter(fileName, false)) //, encoding))
+                    var reader = new StreamReader(response.GetResponseStream(), true); //, encoding);
+                    using (StreamWriter writer = new StreamWriter(fileName, false, reader.CurrentEncoding)) //, encoding))
                     {
                         writer.Write(reader.ReadToEnd());
                         writer.Flush();
