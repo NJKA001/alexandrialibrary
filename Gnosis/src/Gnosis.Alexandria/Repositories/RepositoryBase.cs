@@ -81,8 +81,14 @@ namespace Gnosis.Alexandria.Repositories
                 {
                     if (criterium.Value != null)
                     {
+                        var value = criterium.Value;
+                        if (value is Guid)
+                        {
+                            value = ((Guid)criterium.Value).ToString();
+                        }
+
                         var parameterName = string.Format("@{0}", Guid.NewGuid().ToString().Replace("-", string.Empty));
-                        AddParameter(command, parameterName, criterium.Value);
+                        AddParameter(command, parameterName, value);
 
                         if (criterium.Value.ToString().Contains('%'))
                             sql.AppendFormat(" {0}{1} like {2}", prefix, criterium.Key, parameterName);

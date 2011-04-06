@@ -18,6 +18,7 @@ namespace Gnosis.Alexandria.Models
         string NameHash { get; }
         string NameMetaphone { get; }
         string Creator { get; set; }
+        string Summary { get; set; }
         int Number { get; set; }
         IEnumerable<ISourceProperty> Properties { get; }
         IEnumerable<ISource> Children { get; }
@@ -30,8 +31,8 @@ namespace Gnosis.Alexandria.Models
         string Marquee { get; }
         bool IsExpanded { get; set; }
         bool IsSelected { get; set; }
-        bool IsBeingRenamed { get; set; }
-        Visibility DisplayNameVisibility { get; }
-        Visibility EditNameVisibility { get; }
+        bool IsBeingEdited { get; set; }
+        Visibility DisplayVisibility { get; }
+        Visibility EditVisibility { get; }
     }
 }

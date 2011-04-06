@@ -88,6 +88,7 @@
     <Compile Include="Converters\ImageSourceConverter.cs" />
     <Compile Include="Models\ISource.cs" />
     <Compile Include="Models\ISourceProperty.cs" />
+    <Compile Include="Models\PodcastSource.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Models\IdentifierProperty.cs" />
     <Compile Include="Models\PlaylistItemSource.cs" />
@@ -480,6 +481,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="App.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\podcast.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

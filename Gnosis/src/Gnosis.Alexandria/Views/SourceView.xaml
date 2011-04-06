@@ -45,6 +45,7 @@
             <Button x:Name="AddFolderButton" Margin="4" Click="AddFolderButton_Click">Add Folder</Button>
             <Button x:Name="AddPlaylistButton" Margin="4" Click="AddPlaylistButton_Click">Add Playlist</Button>
             <Button x:Name="AddFileSystemButton" Margin="4" Click="AddFileSystemButton_Click">Add File System</Button>
+            <Button x:Name="addPodcastButton" Margin="4" Click="addPodcastButton_Click">Add Podcast</Button>
         </StackPanel>
         <TreeView x:Name="treeView" Grid.Column="0" Grid.Row="1" ItemContainerStyle="{StaticResource sourceItemStyle}" DragEnter="SourceView_DragEnter" Drop="SourceView_Drop" VerticalAlignment="Stretch" PreviewMouseLeftButtonDown="SourceView_PreviewMouseLeftButtonDown">
             <TreeView.ItemTemplate>
@@ -52,8 +53,11 @@
                     <Border>
                         <StackPanel Orientation="Horizontal">
                             <Image x:Name="SourceImage" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" AllowDrop="True" Width="24" Height="24"></Image>
-                            <TextBlock x:Name="SourceNameTextBlock" Text="{Binding Name}" Visibility="{Binding DisplayNameVisibility}"/>
-                            <TextBox x:Name="SourceNameTextBox" Text="{Binding Name, Mode=TwoWay}" Visibility="{Binding EditNameVisibility}" KeyUp="SourceNameTextBox_KeyUp" />
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock x:Name="SourceNameTextBlock" Text="{Binding Name}" Visibility="{Binding DisplayVisibility}"/>
+                                <TextBox x:Name="SourceNameTextBox" Text="{Binding Name, Mode=TwoWay}" Visibility="{Binding EditVisibility}" KeyUp="SourceNameTextBox_KeyUp" />
+                                <TextBox x:Name="sourcePathTextBox" Text="{Binding Path}" Visibility="{Binding EditVisibility}" KeyUp="sourcePathTextBox_KeyUp" />
+                            </StackPanel>
                         </StackPanel>
                     </Border>
                 </HierarchicalDataTemplate>

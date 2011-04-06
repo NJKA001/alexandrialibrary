@@ -13,6 +13,7 @@ namespace Gnosis.Fmod
 		#endregion
 		
 		#region IAudioStreamFactory Members
+
 		public IAudioStream CreateAudioStream(Uri path)
 		{
 			if (path != null)
@@ -29,6 +30,7 @@ namespace Gnosis.Fmod
 			}
 			else return null;
 		}
+
 		#endregion
 	}
 }

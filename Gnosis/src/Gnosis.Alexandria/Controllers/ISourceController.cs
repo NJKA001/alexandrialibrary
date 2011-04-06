@@ -12,5 +12,6 @@ namespace Gnosis.Alexandria.Controllers
     {
         ISource GetPlaylistItem(ISource parent, ITrack track);
         void LoadDirectories(ISource source);
+        void LoadPodcast(ISource source);
     }
 }

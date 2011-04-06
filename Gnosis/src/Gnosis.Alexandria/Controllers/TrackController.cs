@@ -271,6 +271,32 @@ namespace Gnosis.Alexandria.Controllers
         {
             ClearTracks();
 
+            try
+            {
+                if (source is PlaylistItemSource)
+                {
+                    var track = Search(new Dictionary<string, object> { {"Path", source.Path }}).FirstOrDefault();
+                    if (track == null)
+                    {
+                        if (System.IO.File.Exists(source.Path))
+                        {
+                            track = ReadFromTag(source.Path);
+                            tagController.LoadPicture(track);
+                        }
+                        else
+                        {
+                            track = new Track() { Path = source.Path, ImagePath = source.ImagePath, Title = source.Name, Artist = source.Creator, Comment = source.Summary };
+                        }
+                        Save(track);
+                    }
+                    AddTrack(track);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("TrackController.Load: Could not load playlist item source as track", ex);
+            }
+
             foreach (var item in source.Children)
             {
                 try

@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Timers;
 
+using log4net;
+
 using Gnosis.Alexandria.Models;
 using Gnosis.Fmod;
+using System.Net;
 
 namespace Gnosis.Alexandria.Controllers
 {
@@ -17,14 +21,79 @@ namespace Gnosis.Alexandria.Controllers
             playbackTimer.Start();
 
             player.CurrentAudioStreamEnded += new EventHandler<EventArgs>(CurrentAudioStreamEnded);
+
+            LoadCachedFiles();
         }
 
+        private static readonly ILog log = LogManager.GetLogger(typeof(PlaybackController));
         private readonly IAudioPlayer player = new AudioPlayer(new Fmod.AudioStreamFactory()) { PlayToggles = true };
         private readonly Timer playbackTimer = new Timer(1000);
         private readonly IPlaybackStatus playbackStatus = new PlaybackStatus();
         private ITrack currentTrack;
         private bool isAboutToPlay = false;
         private bool hasSeek = false;
+        private readonly IDictionary<Guid, string> cachedFiles = new Dictionary<Guid, string>();
+        private string cachePath = 
+            //Environment.GetFolderPath(Environment.SpecialFolder.MyMusic); 
+            //@"\\vmware-host\Shared Folders\Documents\My Music\";
+            @"\\vmware-host\Shared Folders\Documents\My Music\";
+
+        private void LoadCachedFiles()
+        {
+            foreach (var file in new DirectoryInfo(cachePath).GetFiles())
+            {
+                var index = file.Name.LastIndexOf('.');
+                if (index > -1)
+                {
+                    var prefix = file.Name.Substring(0, index);
+                    var id = Guid.Empty;
+                    if (Guid.TryParse(prefix, out id))
+                    {
+                        cachedFiles.Add(id, file.FullName);
+                    }
+                }
+            }
+        }
+
+        private Uri GetCachedUri(Guid id)
+        {
+            return cachedFiles.ContainsKey(id) ? new Uri(cachedFiles[id], UriKind.Absolute) : null;
+        }
+
+        private void CacheTrack(ITrack track)
+        {
+            try
+            {
+                var fileName = string.Format(@"{0}{1}", cachePath, track.Id.ToString().Replace("-", string.Empty));
+
+                var index = track.Path.LastIndexOf('.');
+                if (index > -1)
+                {
+                    var extension = track.Path.Substring(index, track.Path.Length - index);
+                    fileName += extension;
+                }
+
+                var request = HttpWebRequest.Create(track.Path);
+                using (var response = request.GetResponse() as HttpWebResponse)
+                {
+                    // Hope GetEncoding() knows how to parse the CharacterSet
+                    //Encoding encoding = Encoding.GetEncoding(response.CharacterSet);
+                    var reader = new StreamReader(response.GetResponseStream()); //, encoding);
+                    using (StreamWriter writer = new StreamWriter(fileName, false)) //, encoding))
+                    {
+                        writer.Write(reader.ReadToEnd());
+                        writer.Flush();
+                        writer.Close();
+                    }
+
+                    cachedFiles.Add(track.Id, fileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("PlaybackController.CacheTrack", ex);
+            }
+        }
 
         private void DoCurrentTrackEnded()
         {
@@ -125,52 +194,83 @@ namespace Gnosis.Alexandria.Controllers
 
         public void Play()
         {
-            if (currentTrack != null)
+            try
             {
-                var currentUri = GetCurrentUri();
-                if (player.CurrentAudioStream == null)
+                if (currentTrack != null)
                 {
-                    player.LoadAudioStream(new Uri(currentTrack.Path, UriKind.Absolute));
-                }
-                else
-                {
-                    var streamUri = new Uri(player.CurrentAudioStream.Path, UriKind.Absolute);
-                    if (currentUri != streamUri)
+                    var currentUri = GetCurrentUri();
+                    Uri cachedUri = null;
+                    if (!currentUri.IsFile)
                     {
-                        player.Stop();
-                        player.LoadAudioStream(new Uri(currentTrack.Path, UriKind.Absolute));
+                        cachedUri = GetCachedUri(currentTrack.Id);
+                        if (cachedUri == null)
+                        {
+                            CacheTrack(currentTrack);
+                            cachedUri = GetCachedUri(currentTrack.Id);
+                        }
                     }
-                }
 
-                currentTrack.DurationLabel = string.Format("{0}:{1:00}", player.CurrentAudioStream.Duration.Minutes, player.Duration.Seconds);
-
-                currentTrack.ElapsedLabel = string.Format("{0}:{1:00}", player.Elapsed.Minutes, player.Elapsed.Seconds);
-
-                isAboutToPlay = true;
-
-                bool startAtZero = currentTrack.HasClipAt(TimeSpan.Zero);
-                if (!startAtZero)
-                {
-                    //NOTE: We're going to be seeking so we want to mute to avoid any popping
-                    player.Mute();
-                }
-
-                player.Play();
-
-                if (!startAtZero)
-                {
-                    var clip = currentTrack.Clips.FirstOrDefault();
-                    if (clip != null)
+                    if (player.CurrentAudioStream == null)
                     {
-                        player.BeginSeek();
-                        player.Seek(Convert.ToInt32(clip.Item1.TotalMilliseconds));
+                        if (cachedUri != null)
+                            player.LoadAudioStream(cachedUri);
+                        else player.LoadAudioStream(new Uri(currentTrack.Path, UriKind.Absolute));
                     }
-                    player.Unmute();
+                    else
+                    {
+                        if (cachedUri != null)
+                        {
+                            if (currentUri != cachedUri)
+                            {
+                                player.Stop();
+                                player.LoadAudioStream(cachedUri);
+                            }
+                        }
+                        else
+                        {
+                            var streamUri = new Uri(player.CurrentAudioStream.Path, UriKind.Absolute);
+                            if (currentUri != streamUri)
+                            {
+                                player.Stop();
+                                player.LoadAudioStream(new Uri(currentTrack.Path, UriKind.Absolute));
+                            }
+                        }
+                    }
+
+                    currentTrack.DurationLabel = string.Format("{0}:{1:00}", player.CurrentAudioStream.Duration.Minutes, player.Duration.Seconds);
+
+                    currentTrack.ElapsedLabel = string.Format("{0}:{1:00}", player.Elapsed.Minutes, player.Elapsed.Seconds);
+
+                    isAboutToPlay = true;
+
+                    bool startAtZero = currentTrack.HasClipAt(TimeSpan.Zero);
+                    if (!startAtZero)
+                    {
+                        //NOTE: We're going to be seeking so we want to mute to avoid any popping
+                        player.Mute();
+                    }
+
+                    player.Play();
+
+                    if (!startAtZero)
+                    {
+                        var clip = currentTrack.Clips.FirstOrDefault();
+                        if (clip != null)
+                        {
+                            player.BeginSeek();
+                            player.Seek(Convert.ToInt32(clip.Item1.TotalMilliseconds));
+                        }
+                        player.Unmute();
+                    }
+
+                    isAboutToPlay = false;
+
+                    playbackStatus.IsPlaying = (player.CurrentAudioStream.PlaybackState == PlaybackState.Playing);
                 }
-
-                isAboutToPlay = false;
-
-                playbackStatus.IsPlaying = (player.CurrentAudioStream.PlaybackState == PlaybackState.Playing);
+            }
+            catch (Exception ex)
+            {
+                log.Error("PlaybackController.Play", ex);
             }
         }
 

@@ -199,6 +199,29 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
+        private void addPodcastButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var parent = GetSelectedSource();
+
+                var source = new PodcastSource { Name = "New Podcast", Path = "unknown", Parent = parent };
+
+                if (parent != null)
+                {
+                    parent.AddChild(source);
+                }
+                else
+                {
+                    boundSources.Add(source);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("SourceView.addPodcastButton_Click", ex);
+            }
+        }
+
         #endregion
 
         #region ContextMenu Events
@@ -297,6 +320,11 @@ namespace Gnosis.Alexandria.Views
                             sourceController.LoadDirectories(source);
                         }
 
+                        if (source is PodcastSource)
+                        {
+                            sourceController.LoadPodcast(source);
+                        }
+
                         foreach (var child in source.Children)
                         {
                             var playlistItem = child as PlaylistItemSource;
@@ -352,7 +380,7 @@ namespace Gnosis.Alexandria.Views
                     var source = GetSelectedSource();
                     if (source != null)
                     {
-                        source.IsBeingRenamed = true;
+                        source.IsBeingEdited = true;
                     }
                 }
             }
@@ -374,10 +402,10 @@ namespace Gnosis.Alexandria.Views
                     if (item != null)
                     {
                         var source = item.Header as ISource;
-                        if (source != null && source.IsBeingRenamed)
+                        if (source != null && source.IsBeingEdited)
                         {
                             source.Name = textBox.Text;
-                            source.IsBeingRenamed = false;
+                            source.IsBeingEdited = false;
                             sourceController.Save(source);
                         }
                     }
@@ -386,6 +414,33 @@ namespace Gnosis.Alexandria.Views
             catch (Exception ex)
             {
                 log.Error("SourceView.SourceNameTextBox_KeyUp", ex);
+            }
+        }
+
+        private void sourcePathTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.Key == Key.Enter || e.Key == Key.Return)
+                {
+                    e.Handled = true;
+                    var textBox = sender as TextBox;
+                    var item = VisualHelper.FindContainingTreeViewItem(textBox);
+                    if (item != null)
+                    {
+                        var source = item.Header as ISource;
+                        if (source != null && source.IsBeingEdited)
+                        {
+                            source.Path = textBox.Text;
+                            source.IsBeingEdited = false;
+                            sourceController.Save(source);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("sourcePathTextBox_KeyUp", ex);
             }
         }
 

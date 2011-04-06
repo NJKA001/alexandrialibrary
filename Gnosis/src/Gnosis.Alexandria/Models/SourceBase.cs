@@ -19,6 +19,11 @@ namespace Gnosis.Alexandria.Models
         protected SourceBase(Guid id)
         {
             this.id = id;
+            Path = string.Empty;
+            ImagePath = string.Empty;
+            Name = "Unknown Source";
+            Creator = "Unknown Creator";
+            Summary = string.Empty;
         }
 
         private Guid id;
@@ -28,12 +33,13 @@ namespace Gnosis.Alexandria.Models
         private ISource parent;
         private string name;
         private string creator;
+        private string summary;
         private int number;
         private readonly ObservableCollection<ISourceProperty> properties = new ObservableCollection<ISourceProperty>();
         private readonly ObservableCollection<ISource> children = new ObservableCollection<ISource>();
         private bool isExpanded;
         private bool isSelected;
-        private bool isBeingRenamed;
+        private bool isBeingEdited;
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -151,11 +157,24 @@ namespace Gnosis.Alexandria.Models
             get { return creator; }
             set
             {
-                if (creator != value)
+                if (creator != value && value != null)
                 {
                     creator = value;
                     OnPropertyChanged("Creator");
                     OnPropertyChanged("Marquee");
+                }
+            }
+        }
+
+        public string Summary
+        {
+            get { return summary; }
+            set
+            {
+                if (summary != value && value != null)
+                {
+                    summary = value;
+                    OnPropertyChanged("Summary");
                 }
             }
         }
@@ -217,29 +236,29 @@ namespace Gnosis.Alexandria.Models
             }
         }
 
-        public bool IsBeingRenamed
+        public bool IsBeingEdited
         {
-            get { return isBeingRenamed; }
+            get { return isBeingEdited; }
             set
             {
-                if (isBeingRenamed != value)
+                if (isBeingEdited != value)
                 {
-                    isBeingRenamed = value;
-                    OnPropertyChanged("IsBeingRenamed");
-                    OnPropertyChanged("DisplayNameVisibility");
-                    OnPropertyChanged("EditNameVisibility");
+                    isBeingEdited = value;
+                    OnPropertyChanged("IsBeingEdited");
+                    OnPropertyChanged("DisplayVisibility");
+                    OnPropertyChanged("EditVisibility");
                 }
             }
         }
 
-        public Visibility DisplayNameVisibility
+        public Visibility DisplayVisibility
         {
-            get { return IsBeingRenamed ? Visibility.Collapsed : Visibility.Visible; }
+            get { return IsBeingEdited ? Visibility.Collapsed : Visibility.Visible; }
         }
 
-        public Visibility EditNameVisibility
+        public Visibility EditVisibility
         {
-            get { return IsBeingRenamed ? Visibility.Visible : Visibility.Collapsed; }
+            get { return IsBeingEdited ? Visibility.Visible : Visibility.Collapsed; }
         }
 
         public virtual void AddProperty(ISourceProperty property)
@@ -256,6 +275,12 @@ namespace Gnosis.Alexandria.Models
 
         public virtual void AddChild(ISource child)
         {
+            if (child != null && !(child is ProxySource))
+            {
+                if (children.Count == 1 && children[0] is ProxySource)
+                    children.RemoveAt(0);
+            }
+
             children.Add(child);
             OnPropertyChanged("Children");
         }
