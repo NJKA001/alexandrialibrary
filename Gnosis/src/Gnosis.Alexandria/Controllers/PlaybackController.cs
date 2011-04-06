@@ -73,16 +73,17 @@ namespace Gnosis.Alexandria.Controllers
                 }
 
                 var request = HttpWebRequest.Create(track.Path);
-                using (var response = request.GetResponse() as HttpWebResponse)
+                using (var stream = request.GetResponse().GetResponseStream())
                 {
-                    // Hope GetEncoding() knows how to parse the CharacterSet
-                    //Encoding encoding = Encoding.GetEncoding(response.CharacterSet);
-                    var reader = new StreamReader(response.GetResponseStream(), true); //, encoding);
-                    using (StreamWriter writer = new StreamWriter(fileName, false, reader.CurrentEncoding)) //, encoding))
+                    using (var fs = new FileStream(fileName, FileMode.CreateNew, FileAccess.Write))
                     {
-                        writer.Write(reader.ReadToEnd());
-                        writer.Flush();
-                        writer.Close();
+                        var buffer = new byte[4096];
+                        var bytesRead = 0;
+
+                        while (0 < (bytesRead = stream.Read(buffer, 0, buffer.Length)))
+                        {
+                            fs.Write(buffer, 0, bytesRead);
+                        }
                     }
 
                     cachedFiles.Add(track.Id, fileName);
@@ -217,9 +218,11 @@ namespace Gnosis.Alexandria.Controllers
                     }
                     else
                     {
+                        var streamUri = new Uri(player.CurrentAudioStream.Path, UriKind.Absolute);
+
                         if (cachedUri != null)
                         {
-                            if (currentUri != cachedUri)
+                            if (cachedUri != streamUri)
                             {
                                 player.Stop();
                                 player.LoadAudioStream(cachedUri);
@@ -227,7 +230,6 @@ namespace Gnosis.Alexandria.Controllers
                         }
                         else
                         {
-                            var streamUri = new Uri(player.CurrentAudioStream.Path, UriKind.Absolute);
                             if (currentUri != streamUri)
                             {
                                 player.Stop();

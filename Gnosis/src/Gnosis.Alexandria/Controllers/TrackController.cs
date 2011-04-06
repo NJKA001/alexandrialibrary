@@ -285,7 +285,8 @@ namespace Gnosis.Alexandria.Controllers
                         }
                         else
                         {
-                            track = new Track() { Path = source.Path, ImagePath = source.ImagePath, Title = source.Name, Artist = source.Creator, Comment = source.Summary };
+                            var album = source.Parent != null ? source.Parent.Name : source.Name;
+                            track = new Track() { Path = source.Path, ImagePath = source.ImagePath, Title = source.Name, Artist = source.Creator, Album = album, Comment = source.Summary };
                         }
                         Save(track);
                     }
