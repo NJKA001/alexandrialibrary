@@ -172,13 +172,13 @@ namespace Gnosis.Alexandria.Controllers
                     foreach (XmlNode itemNode in itemNodes)
                     {
                         var titleNode = itemNode.SelectSingleNode("title", nsmgr);
-                        var linkNode = itemNode.SelectSingleNode("link", nsmgr);
+                        var linkNode = itemNode.SelectSingleNode("enclosure", nsmgr); //"link", nsmgr);
                         var authorNode = itemNode.SelectSingleNode("itunes:author", nsmgr);
                         var summaryNode = itemNode.SelectSingleNode("itunes:summary", nsmgr);
 
                         if (linkNode != null)
                         {
-                            var path = linkNode.InnerText; //linkNode.Attributes["url"].Value;
+                            var path = linkNode.Attributes["url"].Value; //linkNode.InnerText;
                             var playlistItem = new PlaylistItemSource { Path = path, ImagePath = source.ImagePath, Parent = source };
                             playlistItem.Name = titleNode != null ? titleNode.InnerText : "Unknown Podcast";
                             playlistItem.Creator = authorNode != null ? authorNode.InnerText : "Unknown Creator";
