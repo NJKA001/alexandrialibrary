@@ -11,7 +11,7 @@ namespace Gnosis.Alexandria.Repositories
     public class SourceRepository : RepositoryBase<ISource>
     {
         public SourceRepository()
-            : base("Alexandria.db", "Source", "Number, NameHash")
+            : base("Alexandria.db", "Source", "Number, Date, NameHash")
         {
         }
 
@@ -52,7 +52,8 @@ namespace Gnosis.Alexandria.Repositories
             sql.AppendLine("  NameMetaphone TEXT NOT NULL DEFAULT '',");
             sql.AppendLine("  Creator TEXT NOT NULL DEFAULT 'Unknown Creator',");
             sql.AppendLine("  Summary TEXT NOT NULL DEFAULT '',");
-            sql.AppendLine("  Number INTEGER NOT NULL DEFAULT 0");
+            sql.AppendLine("  Number INTEGER NOT NULL DEFAULT 0,");
+            sql.AppendLine("  Date TEXT NOT NULL DEFAULT '2000-01-01T00:00:00'");
             sql.AppendLine(");");
             sql.AppendLine("create index if not exists Source_Type on Source (Type ASC);");
             sql.AppendLine("create index if not exists Source_Path on Source (Path ASC);");
@@ -63,6 +64,7 @@ namespace Gnosis.Alexandria.Repositories
             sql.AppendLine("create index if not exists Source_Creator on Source (Creator ASC);");
             sql.AppendLine("create index if not exists Source_Summary on Source (Summary ASC);");
             sql.AppendLine("create index if not exists Source_Nuber on Source (Number ASC);");
+            sql.AppendLine("create index if not exists Source_Date on Source (Date ASC);");
             sql.AppendLine("create index if not exists Source_DefaultSortOrder on Source (Number ASC, NameHash ASC);");
 
             sql.AppendLine("create table if not exists SourceProperty (");
@@ -95,6 +97,7 @@ namespace Gnosis.Alexandria.Repositories
             var creatorIndex = reader.GetOrdinal("Creator");
             var summaryIndex = reader.GetOrdinal("Summary");
             var numberIndex = reader.GetOrdinal("Number");
+            var dateIndex = reader.GetOrdinal("Date");
 
             var id = new Guid(reader.GetString(idIndex));
             var type = Convert.ToInt32(reader.GetValue(typeIndex));
@@ -136,6 +139,7 @@ namespace Gnosis.Alexandria.Repositories
                 source.Creator = reader.GetString(creatorIndex);
                 source.Summary = reader.GetString(summaryIndex);
                 source.Number = Convert.ToInt32(reader.GetValue(numberIndex));
+                source.Date = DateTime.Parse(reader.GetString(dateIndex));
 
                 if (!reader.IsDBNull(parentIndex))
                 {
@@ -154,8 +158,8 @@ namespace Gnosis.Alexandria.Repositories
             var command = connection.CreateCommand();
 
             var sql = new StringBuilder();
-            sql.AppendLine("insert or replace into Source (Id, Type, Path, ImagePath, Parent, Name, NameHash, NameMetaphone, Creator, Summary, Number)");
-            sql.AppendLine(" values (@Id, @Type, @Path, @ImagePath, @Parent, @Name, @NameHash, @NameMetaphone, @Creator, @Summary, @Number);");
+            sql.AppendLine("insert or replace into Source (Id, Type, Path, ImagePath, Parent, Name, NameHash, NameMetaphone, Creator, Summary, Number, Date)");
+            sql.AppendLine(" values (@Id, @Type, @Path, @ImagePath, @Parent, @Name, @NameHash, @NameMetaphone, @Creator, @Summary, @Number, @Date);");
             command.CommandText = sql.ToString();
 
             AddParameter(command, "@Id", record.Id.ToString());
@@ -169,6 +173,7 @@ namespace Gnosis.Alexandria.Repositories
             AddParameter(command, "@Creator", record.Creator);
             AddParameter(command, "@Summary", record.Summary);
             AddParameter(command, "@Number", record.Number);
+            AddParameter(command, "@Date", record.Date);
 
             return command;
         }

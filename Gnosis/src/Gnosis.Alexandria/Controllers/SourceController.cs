@@ -130,13 +130,13 @@ namespace Gnosis.Alexandria.Controllers
         {
             try
             {
-                if (source.Children.Count() >= 1 && !(source.Children.FirstOrDefault() is ProxySource))
-                {
-                    log.Info("SourceController.LoadPodcast: Podcast already loaded");
-                    return;
-                }
-                else
-                {
+                //if (source.Children.Count() >= 1 && !(source.Children.FirstOrDefault() is ProxySource))
+                //{
+                //    log.Info("SourceController.LoadPodcast: Podcast already loaded");
+                //    return;
+                //}
+                //else
+                //{
                     if (source.Children.Count() == 1 && source.Children.FirstOrDefault() is ProxySource)
                     {
                         var children = Search(new Dictionary<string, object> { { "Parent", source.Id } });
@@ -149,7 +149,8 @@ namespace Gnosis.Alexandria.Controllers
                             return;
                         }
                     }
-                }
+                //}
+
                 var xml = new XmlDocument();
                 xml.LoadXml(GetPodcastXml(source.Path));
                 var nsmgr = new XmlNamespaceManager(xml.NameTable);
@@ -175,16 +176,41 @@ namespace Gnosis.Alexandria.Controllers
                         var linkNode = itemNode.SelectSingleNode("enclosure", nsmgr); //"link", nsmgr);
                         var authorNode = itemNode.SelectSingleNode("itunes:author", nsmgr);
                         var summaryNode = itemNode.SelectSingleNode("itunes:summary", nsmgr);
+                        var dateNode = itemNode.SelectSingleNode("pubDate", nsmgr);
 
                         if (linkNode != null)
                         {
                             var path = linkNode.Attributes["url"].Value; //linkNode.InnerText;
-                            var playlistItem = new PlaylistItemSource { Path = path, ImagePath = source.ImagePath, Parent = source };
-                            playlistItem.Name = titleNode != null ? titleNode.InnerText : "Unknown Podcast";
-                            playlistItem.Creator = authorNode != null ? authorNode.InnerText : "Unknown Creator";
-                            playlistItem.Summary = summaryNode != null ? summaryNode.InnerText : string.Empty;
-                            Save(playlistItem);
-                            source.AddChild(playlistItem);
+
+                            //Make sure that the podcast doesn't already have an item with this path
+                            if (source.Children.Where(x => x.Path == path).FirstOrDefault() == null)
+                            {
+                                var date = DateTime.Now;
+                                try
+                                {
+                                    if (dateNode != null)
+                                    {
+                                        if (!DateTime.TryParse(dateNode.InnerText, out date))
+                                        {
+                                            //TODO: Replace this with a regex and move it to an extension method
+                                            var dateText = dateNode.InnerText.Replace(",", string.Empty).Replace("PST", string.Empty).Replace("PDT", string.Empty).Replace("MST", string.Empty).Replace("MDT", string.Empty).Replace("CST", string.Empty).Replace("CDT", string.Empty).Replace("EST", string.Empty).Replace("EDT", string.Empty).Trim();
+                                            date = DateTime.ParseExact(dateText, "ddd d MMM yyyy hh:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                                        }
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    log.Error("SourceController.LoadPodcast: Could not parse pubDate", ex);
+                                }
+
+                                var playlistItem = new PlaylistItemSource { Path = path, ImagePath = source.ImagePath, Date = date, Parent = source };
+                                playlistItem.Name = titleNode != null ? titleNode.InnerText : "Unknown Podcast";
+                                playlistItem.Creator = authorNode != null ? authorNode.InnerText : "Unknown Creator";
+                                playlistItem.Summary = summaryNode != null ? summaryNode.InnerText : string.Empty;
+
+                                Save(playlistItem);
+                                source.AddChild(playlistItem);
+                            }
                         }
                     }
                 }

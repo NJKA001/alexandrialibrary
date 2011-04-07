@@ -24,6 +24,7 @@ namespace Gnosis.Alexandria.Models
             Name = "Unknown Source";
             Creator = "Unknown Creator";
             Summary = string.Empty;
+            Date = new DateTime(2000, 1, 1);
         }
 
         private Guid id;
@@ -34,6 +35,7 @@ namespace Gnosis.Alexandria.Models
         private string name;
         private string creator;
         private string summary;
+        private DateTime date;
         private int number;
         private readonly ObservableCollection<ISourceProperty> properties = new ObservableCollection<ISourceProperty>();
         private readonly ObservableCollection<ISource> children = new ObservableCollection<ISource>();
@@ -175,6 +177,19 @@ namespace Gnosis.Alexandria.Models
                 {
                     summary = value;
                     OnPropertyChanged("Summary");
+                }
+            }
+        }
+
+        public DateTime Date
+        {
+            get { return date; }
+            set
+            {
+                if (date != value)
+                {
+                    date = value;
+                    OnPropertyChanged("Date");
                 }
             }
         }

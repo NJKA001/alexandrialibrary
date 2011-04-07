@@ -19,6 +19,7 @@ namespace Gnosis.Alexandria.Models
         string NameMetaphone { get; }
         string Creator { get; set; }
         string Summary { get; set; }
+        DateTime Date { get; set; }
         int Number { get; set; }
         IEnumerable<ISourceProperty> Properties { get; }
         IEnumerable<ISource> Children { get; }
