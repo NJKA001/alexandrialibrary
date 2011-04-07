@@ -4,7 +4,7 @@
         xmlns:local="clr-namespace:Gnosis.Alexandria"
         xmlns:views="clr-namespace:Gnosis.Alexandria.Views"
         xmlns:converters="clr-namespace:Gnosis.Alexandria.Converters"
-        Title="Alexandria" Height="640" Width="768" Icon="pack://application:,,,/Images/pyramid.png">
+        Title="Alexandria" Height="640" Width="768" Icon="pack://application:,,,/App.ico">
     <Window.Resources>
         <converters:ImageSourceConverter x:Key="imageConverter" />
     </Window.Resources>
