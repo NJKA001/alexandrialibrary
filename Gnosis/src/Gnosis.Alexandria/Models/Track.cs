@@ -52,6 +52,7 @@ namespace Gnosis.Alexandria.Models
         private string comment = string.Empty;
         private string lyrics = string.Empty;
         private string grouping = string.Empty;
+        private string cachePath = string.Empty;
 
         private bool isSelected;
         private bool isHovered;
@@ -413,47 +414,6 @@ namespace Gnosis.Alexandria.Models
             return clips.Where(x => x.Item1 >= elapsed).FirstOrDefault();
         }
 
-        //private IList<TimeSpan> GetStartAndStopTimes()
-        //{
-        //    IList<TimeSpan> times = new List<TimeSpan>();
-
-        //    if (!string.IsNullOrEmpty(Comment))
-        //    {
-        //        var tokens = Comment.Split(',');
-        //        if (tokens != null && tokens.Length > 0)
-        //        {
-        //            foreach (var token in tokens)
-        //            {
-        //                var seconds = 0;
-        //                if (int.TryParse(token, out seconds))
-        //                {
-        //                    times.Add(new TimeSpan(0, 0, seconds));
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //    return times;
-        //}
-
-        //public TimeSpan StartAt
-        //{
-        //    get
-        //    {
-        //        var times = GetStartAndStopTimes();
-        //        return times.Count > 0 ? times[0] : TimeSpan.Zero;
-        //    }
-        //}
-
-        //public TimeSpan StopAt
-        //{
-        //    get
-        //    {
-        //        var times = GetStartAndStopTimes();
-        //        return times.Count > 1 ? times[1] : TimeSpan.Zero;
-        //    }
-        //}
-
         public string CountryImagePath
         {
             get { return string.Format("pack://application:,,,/Images/Countries/{0}.png", Country ?? DEFAULT_COUNTRY); }
@@ -551,6 +511,19 @@ namespace Gnosis.Alexandria.Models
                 {
                     elapsed = value;
                     OnPropertyChanged("Elapsed");
+                }
+            }
+        }
+
+        public string CachePath
+        {
+            get { return cachePath; }
+            set
+            {
+                if (cachePath != value)
+                {
+                    cachePath = value;
+                    OnPropertyChanged("CachePath");
                 }
             }
         }

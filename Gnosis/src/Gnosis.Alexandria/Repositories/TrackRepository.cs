@@ -39,7 +39,8 @@ namespace Gnosis.Alexandria.Repositories
             sql.AppendLine("Country TEXT NOT NULL DEFAULT 'us',");
             sql.AppendLine("Comment TEXT NOT NULL DEFAULT '',");
             sql.AppendLine("Lyrics TEXT NOT NULL DEFAULT '',");
-            sql.AppendLine("Grouping TEXT NOT NULL DEFAULT ''");
+            sql.AppendLine("Grouping TEXT NOT NULL DEFAULT '',");
+            sql.AppendLine("CachePath TEXT NOT NULL DEFAULT ''");
             sql.AppendLine(");");
             sql.AppendLine("create index if not exists Track_Title on Track (Title ASC);");
             sql.AppendLine("create index if not exists Track_TitleHash on Track (TitleHash ASC);");
@@ -55,6 +56,7 @@ namespace Gnosis.Alexandria.Repositories
             sql.AppendLine("create index if not exists Track_Comment on Track (Comment ASC);");
             sql.AppendLine("create index if not exists Track_Lyrics on Track (Lyrics ASC);");
             sql.AppendLine("create index if not exists Track_Grouping on Track (Grouping ASC);");
+            sql.AppendLine("create index if not exists Track_CachePath on Track (CachePath);");
             sql.AppendLine("create index if not exists Track_DefaultSortOrder on Track (Artist ASC, ReleaseDate ASC, DiscNumber ASC, Album ASC, TrackNumber ASC);");
             return sql.ToString();
         }
@@ -81,6 +83,7 @@ namespace Gnosis.Alexandria.Repositories
             var commentIndex = reader.GetOrdinal("Comment");
             var lyricsIndex = reader.GetOrdinal("Lyrics");
             var groupingIndex = reader.GetOrdinal("Grouping");
+            var cachePathIndex = reader.GetOrdinal("CachePath");
 
             var id = new Guid(reader.GetString(idIndex));
             var track = new Track(id)
@@ -97,41 +100,43 @@ namespace Gnosis.Alexandria.Repositories
                 Country = reader.GetString(countryIndex),
                 Comment = reader.GetString(commentIndex),
                 Lyrics = reader.GetString(lyricsIndex),
-                Grouping = reader.GetString(groupingIndex)
+                Grouping = reader.GetString(groupingIndex),
+                CachePath = reader.GetString(cachePathIndex)
             };
 
             return track;
         }
 
-        protected override IDbCommand GetSaveCommand(IDbConnection connection, ITrack track)
+        protected override IDbCommand GetSaveCommand(IDbConnection connection, ITrack record)
         {
             var command = connection.CreateCommand();
 
             var sql = new StringBuilder();
-            sql.AppendLine("insert or replace into Track (Id, Path, ImagePath, Title, TitleHash, TitleMetaphone, Artist, ArtistHash, ArtistMetaphone, Album, AlbumHash, AlbumMetaphone, TrackNumber, DiscNumber, Genre, ReleaseDate, Country, Comment, Lyrics, Grouping)");
-            sql.AppendLine(" values (@Id, @Path, @ImagePath, @Title, @TitleHash, @TitleMetaphone, @Artist, @ArtistHash, @ArtistMetaphone, @Album, @AlbumHash, @AlbumMetaphone, @TrackNumber, @DiscNumber, @Genre, @ReleaseDate, @Country, @Comment, @Lyrics, @Grouping);");
+            sql.AppendLine("insert or replace into Track (Id, Path, ImagePath, Title, TitleHash, TitleMetaphone, Artist, ArtistHash, ArtistMetaphone, Album, AlbumHash, AlbumMetaphone, TrackNumber, DiscNumber, Genre, ReleaseDate, Country, Comment, Lyrics, Grouping, CachePath)");
+            sql.AppendLine(" values (@Id, @Path, @ImagePath, @Title, @TitleHash, @TitleMetaphone, @Artist, @ArtistHash, @ArtistMetaphone, @Album, @AlbumHash, @AlbumMetaphone, @TrackNumber, @DiscNumber, @Genre, @ReleaseDate, @Country, @Comment, @Lyrics, @Grouping, @CachePath);");
             command.CommandText = sql.ToString();
 
-            AddParameter(command, "@Id", track.Id.ToString());
-            AddParameter(command, "@Path", track.Path);
-            AddParameter(command, "@ImagePath", track.ImagePath);
-            AddParameter(command, "@Title", track.Title);
-            AddParameter(command, "@TitleHash", track.TitleHash);
-            AddParameter(command, "@TitleMetaphone", track.TitleMetaphone);
-            AddParameter(command, "@Artist", track.Artist);
-            AddParameter(command, "@ArtistHash", track.ArtistHash);
-            AddParameter(command, "@ArtistMetaphone", track.ArtistMetaphone);
-            AddParameter(command, "@Album", track.Album);
-            AddParameter(command, "@AlbumHash", track.AlbumHash);
-            AddParameter(command, "@AlbumMetaphone", track.AlbumMetaphone);
-            AddParameter(command, "@TrackNumber", track.TrackNumber);
-            AddParameter(command, "@DiscNumber", track.DiscNumber);
-            AddParameter(command, "@Genre", track.Genre);
-            AddParameter(command, "@ReleaseDate", track.ReleaseDate.ToString("s"));
-            AddParameter(command, "@Country", track.Country);
-            AddParameter(command, "@Comment", track.Comment);
-            AddParameter(command, "@Lyrics", track.Lyrics);
-            AddParameter(command, "@Grouping", track.Grouping);
+            AddParameter(command, "@Id", record.Id.ToString());
+            AddParameter(command, "@Path", record.Path);
+            AddParameter(command, "@ImagePath", record.ImagePath);
+            AddParameter(command, "@Title", record.Title);
+            AddParameter(command, "@TitleHash", record.TitleHash);
+            AddParameter(command, "@TitleMetaphone", record.TitleMetaphone);
+            AddParameter(command, "@Artist", record.Artist);
+            AddParameter(command, "@ArtistHash", record.ArtistHash);
+            AddParameter(command, "@ArtistMetaphone", record.ArtistMetaphone);
+            AddParameter(command, "@Album", record.Album);
+            AddParameter(command, "@AlbumHash", record.AlbumHash);
+            AddParameter(command, "@AlbumMetaphone", record.AlbumMetaphone);
+            AddParameter(command, "@TrackNumber", record.TrackNumber);
+            AddParameter(command, "@DiscNumber", record.DiscNumber);
+            AddParameter(command, "@Genre", record.Genre);
+            AddParameter(command, "@ReleaseDate", record.ReleaseDate.ToString("s"));
+            AddParameter(command, "@Country", record.Country);
+            AddParameter(command, "@Comment", record.Comment);
+            AddParameter(command, "@Lyrics", record.Lyrics);
+            AddParameter(command, "@Grouping", record.Grouping);
+            AddParameter(command, "@CachePath", record.CachePath);
 
             return command;
         }

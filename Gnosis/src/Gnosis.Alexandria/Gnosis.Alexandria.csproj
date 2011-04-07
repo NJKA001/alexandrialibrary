@@ -78,6 +78,7 @@
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\TrackController.cs" />
     <Compile Include="Events\SourceLoadedEventArgs.cs" />
+    <Compile Include="Helpers\Rfc822DateTime.cs" />
     <Compile Include="Helpers\VisualHelper.cs" />
     <Compile Include="Models\IPlaybackStatus.cs" />
     <Compile Include="Models\ISourcePropertyFactory.cs" />

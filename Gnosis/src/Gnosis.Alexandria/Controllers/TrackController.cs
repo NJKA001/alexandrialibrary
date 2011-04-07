@@ -31,6 +31,15 @@ namespace Gnosis.Alexandria.Controllers
             imageLoader.WorkerSupportsCancellation = true;
             imageLoader.DoWork += LoadTrackImages;
             imageLoader.RunWorkerCompleted += LoadTrackImagesCompleted;
+
+            if (!System.IO.Directory.Exists(cachePath))
+            {
+                System.IO.Directory.CreateDirectory(cachePath);
+            }
+            else
+            {
+                LoadCachedFiles();
+            }
         }
 
         private static readonly ILog log = LogManager.GetLogger(typeof(TrackController));
@@ -38,6 +47,66 @@ namespace Gnosis.Alexandria.Controllers
         private readonly ITagController tagController;
         private readonly ObservableCollection<ITrack> boundTracks = new ObservableCollection<ITrack>();
         private BackgroundWorker imageLoader = new BackgroundWorker();
+
+        private readonly IDictionary<Guid, string> cachedFiles = new Dictionary<Guid, string>();
+        private string cachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), "Alexandria", "Cache");
+        const string extensionMp3 = ".mp3";
+
+        private void LoadCachedFiles()
+        {
+            foreach (var file in new System.IO.DirectoryInfo(cachePath).GetFiles())
+            {
+                var index = file.Name.LastIndexOf('.');
+                if (index > -1)
+                {
+                    var prefix = file.Name.Substring(0, index);
+                    var id = Guid.Empty;
+                    if (Guid.TryParse(prefix, out id))
+                    {
+                        cachedFiles.Add(id, file.FullName);
+                    }
+                }
+            }
+        }
+
+        public Uri GetCachedUri(Guid id)
+        {
+            return cachedFiles.ContainsKey(id) ? new Uri(cachedFiles[id], UriKind.Absolute) : null;
+        }
+
+        public void CacheTrack(ITrack track)
+        {
+            try
+            {
+                var fileName = System.IO.Path.Combine(cachePath, track.Id.ToString().Replace("-", string.Empty));
+
+                //TODO: Get mime type from feed
+                //      We should not assume the file will always be an MP3 - e.g video podcasts
+                if (track.Path.EndsWith(extensionMp3))
+                {
+                    var index = track.Path.LastIndexOf(extensionMp3);
+                    var extension = track.Path.Substring(index, track.Path.Length - index);
+                    fileName += extension;
+                }
+                else
+                {
+                    fileName += extensionMp3;
+                }
+
+                var request = System.Net.HttpWebRequest.Create(track.Path);
+                using (var stream = request.GetResponse().GetResponseStream())
+                {
+                    stream.SaveToFile(fileName);
+
+                    cachedFiles.Add(track.Id, fileName);
+                    track.CachePath = fileName;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("TrackController.CacheTrack", ex);
+            }
+        }
 
         private ITrack GetTrack(string path, Tag tag)
         {
@@ -267,30 +336,41 @@ namespace Gnosis.Alexandria.Controllers
             return boundTracks.Where(x => x.IsSelected == true).FirstOrDefault();
         }
 
+        private ITrack ConvertToTrack(ISource source)
+        {
+            var album = source.Parent != null ? source.Parent.Name : source.Name;
+            return new Track() { Path = source.Path, ImagePath = source.ImagePath, Title = source.Name, Artist = source.Creator, Album = album, Comment = source.Summary };
+        }
+
+        private void LoadPlaylistItem(PlaylistItemSource source)
+        {
+            var track = Search(new Dictionary<string, object> { { "Path", source.Path } }).FirstOrDefault();
+            if (track == null)
+            {
+                if (System.IO.File.Exists(source.Path))
+                {
+                    track = ReadFromTag(source.Path);
+                    tagController.LoadPicture(track);
+                }
+                else
+                {
+                    track = ConvertToTrack(source);
+                }
+                Save(track);
+            }
+            AddTrack(track);
+        }
+
         public void Load(ISource source)
         {
             ClearTracks();
 
             try
             {
+                //TODO: Refactor to avoid examining the type
                 if (source is PlaylistItemSource)
                 {
-                    var track = Search(new Dictionary<string, object> { {"Path", source.Path }}).FirstOrDefault();
-                    if (track == null)
-                    {
-                        if (System.IO.File.Exists(source.Path))
-                        {
-                            track = ReadFromTag(source.Path);
-                            tagController.LoadPicture(track);
-                        }
-                        else
-                        {
-                            var album = source.Parent != null ? source.Parent.Name : source.Name;
-                            track = new Track() { Path = source.Path, ImagePath = source.ImagePath, Title = source.Name, Artist = source.Creator, Album = album, Comment = source.Summary };
-                        }
-                        Save(track);
-                    }
-                    AddTrack(track);
+                    LoadPlaylistItem(source as PlaylistItemSource);
                 }
             }
             catch (Exception ex)
@@ -305,11 +385,21 @@ namespace Gnosis.Alexandria.Controllers
                     var track = Search(new Dictionary<string, object> { { "Path", item.Path } }).FirstOrDefault();
                     if (track == null)
                     {
-                        track = ReadFromTag(item.Path);
-                        Save(track);
+                        var uri = new Uri(item.Path);
+                        if (uri.IsFile && System.IO.File.Exists(item.Path))
+                        {
+                            track = ReadFromTag(item.Path);
+                            Save(track);
+                        }
+                        else
+                        {
+                            track = ConvertToTrack(item);
+                            CacheTrack(track);
+                            Save(track);
+                        }
                     }
 
-                    if (track != null)
+                    if (track != null && System.IO.File.Exists(track.Path))
                     {
                         tagController.LoadPicture(track);
                         AddTrack(track);

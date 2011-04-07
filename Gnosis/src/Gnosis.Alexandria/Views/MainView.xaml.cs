@@ -47,7 +47,7 @@ namespace Gnosis.Alexandria.Views
                 tagController = new TagController();
                 trackController = new TrackController(trackRepository, tagController);
                 sourceController = new SourceController(sourceRepository, trackController);
-                playbackController = new PlaybackController();
+                playbackController = new PlaybackController(trackController);
                 sourceView.Initialize(sourceController, trackController, tagController);
                 searchView.Initialize(trackController, tagController);
                 playbackView.Initialize(trackController, playbackController);

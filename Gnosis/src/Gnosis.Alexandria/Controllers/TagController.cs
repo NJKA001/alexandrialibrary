@@ -24,16 +24,20 @@ namespace Gnosis.Alexandria.Controllers
 
         public void LoadPicture(ITrack track)
         {
-            var file = GetFile(track.Path);
-            if (file != null && file.Tag != null && file.Tag.Pictures.Length > 0)
+            var path = !string.IsNullOrEmpty(track.CachePath) ? track.CachePath : track.Path;
+            if (!string.IsNullOrEmpty(path) && System.IO.File.Exists(path))
             {
-                track.ImageData = file.Tag.Pictures[0].Data;
+                var file = GetFile(path);
+                if (file != null && file.Tag != null && file.Tag.Pictures.Length > 0)
+                {
+                    track.ImageData = file.Tag.Pictures[0].Data;
+                }
             }
         }
 
         public void SaveTag(ITrack track)
         {
-            var file = GetFile(track.Path);
+            var file = !string.IsNullOrEmpty(track.CachePath) ? GetFile(track.CachePath) : GetFile(track.Path);
             if (file.Tag != null)
             {
                 if (!string.IsNullOrEmpty(track.Title))

@@ -16,99 +16,25 @@ namespace Gnosis.Alexandria.Controllers
 {
     public class PlaybackController : IPlaybackController
     {
-        public PlaybackController()
+        public PlaybackController(ITrackController trackController)
         {
+            this.trackController = trackController;
+
             playbackTimer.Elapsed += new ElapsedEventHandler(PlaybackTimer_Elapsed);
             playbackTimer.Start();
 
             player.CurrentAudioStreamEnded += new EventHandler<EventArgs>(CurrentAudioStreamEnded);
-
-            if (!Directory.Exists(cachePath))
-            {
-                Directory.CreateDirectory(cachePath);
-            }
-            else
-            {
-                LoadCachedFiles();
-            }
         }
 
         private static readonly ILog log = LogManager.GetLogger(typeof(PlaybackController));
+        private readonly ITrackController trackController;
         private readonly IAudioPlayer player = new AudioPlayer(new Fmod.AudioStreamFactory()) { PlayToggles = true };
         private readonly Timer playbackTimer = new Timer(1000);
         private readonly IPlaybackStatus playbackStatus = new PlaybackStatus();
         private ITrack currentTrack;
         private bool isAboutToPlay = false;
         private bool hasSeek = false;
-        private readonly IDictionary<Guid, string> cachedFiles = new Dictionary<Guid, string>();
-        private string cachePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), "Alexandria", "Cache");
-        const string extensionMp3 = ".mp3";
-
-        private void LoadCachedFiles()
-        {
-            foreach (var file in new DirectoryInfo(cachePath).GetFiles())
-            {
-                var index = file.Name.LastIndexOf('.');
-                if (index > -1)
-                {
-                    var prefix = file.Name.Substring(0, index);
-                    var id = Guid.Empty;
-                    if (Guid.TryParse(prefix, out id))
-                    {
-                        cachedFiles.Add(id, file.FullName);
-                    }
-                }
-            }
-        }
-
-        private Uri GetCachedUri(Guid id)
-        {
-            return cachedFiles.ContainsKey(id) ? new Uri(cachedFiles[id], UriKind.Absolute) : null;
-        }
-
-        private void CacheTrack(ITrack track)
-        {
-            try
-            {
-                var fileName = System.IO.Path.Combine(cachePath, track.Id.ToString().Replace("-", string.Empty));
-
-                //TODO: Get mime type from feed
-                //      We should not assume the file will always be an MP3 - e.g video podcasts
-                if (track.Path.EndsWith(extensionMp3))
-                {
-                    var index = track.Path.LastIndexOf(extensionMp3);
-                    var extension = track.Path.Substring(index, track.Path.Length - index);
-                    fileName += extension;
-                }
-                else
-                {
-                    fileName += extensionMp3;
-                }
-
-                var request = HttpWebRequest.Create(track.Path);
-                using (var stream = request.GetResponse().GetResponseStream())
-                {
-                    stream.SaveToFile(fileName);
-                    //using (var fs = new FileStream(fileName, FileMode.CreateNew, FileAccess.Write))
-                    //{
-                    //    var buffer = new byte[4096];
-                    //    var bytesRead = 0;
-
-                    //    while (0 < (bytesRead = stream.Read(buffer, 0, buffer.Length)))
-                    //    {
-                    //        fs.Write(buffer, 0, bytesRead);
-                    //    }
-                    //}
-
-                    cachedFiles.Add(track.Id, fileName);
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error("PlaybackController.CacheTrack", ex);
-            }
-        }
-
+        
         private void DoCurrentTrackEnded()
         {
             if (CurrentTrackEnded != null)
@@ -216,19 +142,25 @@ namespace Gnosis.Alexandria.Controllers
                     Uri cachedUri = null;
                     if (!currentUri.IsFile)
                     {
-                        cachedUri = GetCachedUri(currentTrack.Id);
+                        cachedUri = trackController.GetCachedUri(currentTrack.Id);
                         if (cachedUri == null)
                         {
-                            CacheTrack(currentTrack);
-                            cachedUri = GetCachedUri(currentTrack.Id);
+                            trackController.CacheTrack(currentTrack);
+                            cachedUri = trackController.GetCachedUri(currentTrack.Id);
                         }
                     }
 
                     if (player.CurrentAudioStream == null)
                     {
                         if (cachedUri != null)
+                        {
+                            currentTrack.CachePath = cachedUri.LocalPath;
                             player.LoadAudioStream(cachedUri);
-                        else player.LoadAudioStream(new Uri(currentTrack.Path, UriKind.Absolute));
+                        }
+                        else
+                        {
+                            player.LoadAudioStream(new Uri(currentTrack.Path, UriKind.Absolute));
+                        }
                     }
                     else
                     {
@@ -238,6 +170,7 @@ namespace Gnosis.Alexandria.Controllers
                         {
                             if (cachedUri != streamUri)
                             {
+                                currentTrack.CachePath = cachedUri.LocalPath;
                                 player.Stop();
                                 player.LoadAudioStream(cachedUri);
                             }

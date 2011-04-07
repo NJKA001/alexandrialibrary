@@ -219,6 +219,7 @@ namespace Gnosis.Alexandria.Views
             catch (Exception ex)
             {
                 log.Error("SourceView.addPodcastButton_Click", ex);
+                MessageBox.Show("There was an error trying to add a podcast.\n\n" + ex.Message, "Could Not Add Podcast");
             }
         }
 
@@ -228,14 +229,65 @@ namespace Gnosis.Alexandria.Views
 
         private void LoadSource_Clicked(object sender, RoutedEventArgs args)
         {
-            var menuItem = sender as MenuItem;
-            if (menuItem != null)
+            try
             {
-                ISource source = menuItem.CommandParameter as ISource;
-                if (source != null)
+                var menuItem = sender as MenuItem;
+                if (menuItem != null)
                 {
-                    OnSourceLoaded(source);
+                    var source = menuItem.CommandParameter as ISource;
+                    if (source != null)
+                    {
+                        OnSourceLoaded(source);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                log.Error("SourceView.LoadSource_Clicked", ex);
+            }
+        }
+
+        private void EditSource_Clicked(object sender, RoutedEventArgs args)
+        {
+            try
+            {
+                var menuItem = sender as MenuItem;
+                if (menuItem != null)
+                {
+                    var source = menuItem.CommandParameter as ISource;
+                    if (source != null)
+                    {
+                        source.IsBeingEdited = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("SourceView.EditSource_Clicked", ex);
+            }
+        }
+
+        private void DeleteSource_Clicked(object sender, RoutedEventArgs args)
+        {
+            try
+            {
+                var menuItem = sender as MenuItem;
+                if (menuItem != null)
+                {
+                    var source = menuItem.CommandParameter as ISource;
+                    if (source != null)
+                    {
+                        var result = MessageBox.Show("Are you sure that you want to delete this source?\n\nName: " + source.Name + "\nPath: " + source.Path, "Delete Source", MessageBoxButton.OKCancel);
+                        if (result == MessageBoxResult.OK)
+                        {
+                            sourceController.Delete(source.Id);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("SourceView.DeleteSource_Clicked", ex);
             }
         }
 
@@ -357,10 +409,22 @@ namespace Gnosis.Alexandria.Views
                     if (source != null)
                     {
                         var menu = new ContextMenu();
+                        
                         var loadMediaItem = new MenuItem { Header = "Load" };
                         loadMediaItem.CommandParameter = source;
                         loadMediaItem.Click += LoadSource_Clicked;
+                        
+                        var editItem = new MenuItem { Header = "Edit" };
+                        editItem.CommandParameter = source;
+                        editItem.Click += EditSource_Clicked;
+
+                        var deleteItem = new MenuItem { Header = "Delete" };
+                        deleteItem.CommandParameter = source;
+                        deleteItem.Click += DeleteSource_Clicked;
+
                         menu.Items.Add(loadMediaItem);
+                        menu.Items.Add(editItem);
+                        menu.Items.Add(deleteItem);
                         treeView.ContextMenu = menu;
                     }
                 }
@@ -390,24 +454,37 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
+        private ISource GetSourceFromTextBoxKeyUp(TextBox textBox)
+        {
+            var item = VisualHelper.FindContainingTreeViewItem(textBox);
+            if (item != null)
+                return item.Header as ISource;
+            else return null;
+        }
+
         private void SourceNameTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             try
             {
+                var textBox = sender as TextBox;
                 if (e.Key == Key.Enter || e.Key == Key.Return)
                 {
                     e.Handled = true;
-                    var textBox = sender as TextBox;
-                    var item = VisualHelper.FindContainingTreeViewItem(textBox);
-                    if (item != null)
+                    var source = GetSourceFromTextBoxKeyUp(textBox);
+                    if (source != null && source.IsBeingEdited)
                     {
-                        var source = item.Header as ISource;
-                        if (source != null && source.IsBeingEdited)
-                        {
-                            source.Name = textBox.Text;
-                            source.IsBeingEdited = false;
-                            sourceController.Save(source);
-                        }
+                        source.Name = textBox.Text;
+                        source.IsBeingEdited = false;
+                        sourceController.Save(source);
+                    }
+                }
+                if (e.Key == Key.Escape)
+                {
+                    e.Handled = true;
+                    var source = GetSourceFromTextBoxKeyUp(textBox);
+                    if (source != null && source.IsBeingEdited)
+                    {
+                        source.IsBeingEdited = false;
                     }
                 }
             }
@@ -421,20 +498,26 @@ namespace Gnosis.Alexandria.Views
         {
             try
             {
+                var textBox = sender as TextBox;
                 if (e.Key == Key.Enter || e.Key == Key.Return)
                 {
                     e.Handled = true;
-                    var textBox = sender as TextBox;
-                    var item = VisualHelper.FindContainingTreeViewItem(textBox);
-                    if (item != null)
+
+                    var source = GetSourceFromTextBoxKeyUp(textBox);
+                    if (source != null && source.IsBeingEdited)
                     {
-                        var source = item.Header as ISource;
-                        if (source != null && source.IsBeingEdited)
-                        {
-                            source.Path = textBox.Text;
-                            source.IsBeingEdited = false;
-                            sourceController.Save(source);
-                        }
+                        source.Path = textBox.Text;
+                        source.IsBeingEdited = false;
+                        sourceController.Save(source);
+                    }
+                }
+                if (e.Key == Key.Escape)
+                {
+                    e.Handled = true;
+                    var source = GetSourceFromTextBoxKeyUp(textBox);
+                    if (source != null && source.IsBeingEdited)
+                    {
+                        source.IsBeingEdited = false;
                     }
                 }
             }

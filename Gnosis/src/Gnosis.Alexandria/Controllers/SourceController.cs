@@ -10,6 +10,7 @@ using log4net;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Repositories;
 using System.Net;
+using Gnosis.Alexandria.Helpers;
 
 namespace Gnosis.Alexandria.Controllers
 {
@@ -181,28 +182,27 @@ namespace Gnosis.Alexandria.Controllers
                         if (linkNode != null)
                         {
                             var path = linkNode.Attributes["url"].Value; //linkNode.InnerText;
+                            var date = DateTime.MinValue;
+                            Rfc822DateTime.TryParse(dateNode.InnerText, out date);
 
-                            //Make sure that the podcast doesn't already have an item with this path
-                            if (source.Children.Where(x => x.Path == path).FirstOrDefault() == null)
+                            var child = source.Children.Where(x => x.Path == path).FirstOrDefault();
+
+                            if (child != null)
                             {
-                                var date = DateTime.Now;
-                                try
+                                if (child.Date != date && date != DateTime.MinValue)
                                 {
-                                    if (dateNode != null)
+                                    child.Date = date;
+                                    Save(child);
+                                    var track = trackController.Search(new Dictionary<string, object> { { "Path", child.Path } }).FirstOrDefault();
+                                    if (track != null)
                                     {
-                                        if (!DateTime.TryParse(dateNode.InnerText, out date))
-                                        {
-                                            //TODO: Replace this with a regex and move it to an extension method
-                                            var dateText = dateNode.InnerText.Replace(",", string.Empty).Replace("PST", string.Empty).Replace("PDT", string.Empty).Replace("MST", string.Empty).Replace("MDT", string.Empty).Replace("CST", string.Empty).Replace("CDT", string.Empty).Replace("EST", string.Empty).Replace("EDT", string.Empty).Trim();
-                                            date = DateTime.ParseExact(dateText, "ddd d MMM yyyy hh:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-                                        }
+                                        track.ReleaseDate = date;
+                                        trackController.Save(track);
                                     }
                                 }
-                                catch (Exception ex)
-                                {
-                                    log.Error("SourceController.LoadPodcast: Could not parse pubDate", ex);
-                                }
-
+                            }
+                            else
+                            {
                                 var playlistItem = new PlaylistItemSource { Path = path, ImagePath = source.ImagePath, Date = date, Parent = source };
                                 playlistItem.Name = titleNode != null ? titleNode.InnerText : "Unknown Podcast";
                                 playlistItem.Creator = authorNode != null ? authorNode.InnerText : "Unknown Creator";

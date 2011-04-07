@@ -31,7 +31,7 @@
                             <TextBlock Text="by" Foreground="Gray"/>
                             <TextBox Text="{Binding Artist}" FontSize="12" Margin="4 0 4 0"/>
                             <TextBlock Text="in" Foreground="Gray"/>
-                            <TextBox Text="{Binding ReleaseYear}" FontSize="12" Margin="4 0 4 0"/>
+                            <TextBox Text="{Binding ReleaseDate}" FontSize="12" Margin="4 0 4 0"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Country" Foreground="Gray"/>

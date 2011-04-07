@@ -24,5 +24,8 @@ namespace Gnosis.Alexandria.Controllers
         void AddTrack(ITrack track);
         ITrack GetSelectedTrack();
         void Load(ISource source);
+
+        void CacheTrack(ITrack track);
+        Uri GetCachedUri(Guid id);
     }
 }

@@ -42,5 +42,6 @@ namespace Gnosis.Alexandria.Models
         double Elapsed { get; set; }
         bool HasClipAt(TimeSpan elapsed);
         Tuple<TimeSpan, TimeSpan> GetNextClipFrom(TimeSpan elapsed);
+        string CachePath { get; set; }
     }
 }
