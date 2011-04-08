@@ -659,7 +659,6 @@
     <Resource Include="Images\Countries\tiny\ug.png" />
     <Resource Include="Images\Countries\tiny\um.png" />
     <Resource Include="Images\Countries\tiny\un.png" />
-    <Resource Include="Images\Countries\tiny\us.png" />
     <Resource Include="Images\Countries\tiny\uy.png" />
     <Resource Include="Images\Countries\tiny\uz.png" />
     <Resource Include="Images\Countries\tiny\va.png" />
@@ -672,7 +671,6 @@
     <Resource Include="Images\Countries\tiny\wales.png" />
     <Resource Include="Images\Countries\tiny\wf.png" />
     <Resource Include="Images\Countries\tiny\ws.png" />
-    <Resource Include="Images\Countries\tiny\xa.png" />
     <Resource Include="Images\Countries\tiny\ye.png" />
     <Resource Include="Images\Countries\tiny\yt.png" />
     <Resource Include="Images\Countries\tiny\za.png" />
@@ -871,6 +869,9 @@
     <Resource Include="Images\Countries\small\zaire_small.png" />
     <Resource Include="Images\Countries\small\zambia_small.png" />
     <Resource Include="Images\Countries\small\zimbabwe_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Countries\unknown.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
