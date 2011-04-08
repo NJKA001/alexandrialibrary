@@ -36,7 +36,7 @@ namespace Gnosis.Alexandria.Repositories
             sql.AppendLine("DiscNumber INTEGER NOT NULL DEFAULT 1,");
             sql.AppendLine("Genre TEXT NOT NULL DEFAULT 'Unknown Genre',");
             sql.AppendLine("ReleaseDate TEXT NOT NULL DEFAULT '2000-01-01T00:00:00',");
-            sql.AppendLine("Country TEXT NOT NULL DEFAULT 'us',");
+            sql.AppendLine("Country TEXT NOT NULL DEFAULT 'unknown',");
             sql.AppendLine("Comment TEXT NOT NULL DEFAULT '',");
             sql.AppendLine("Lyrics TEXT NOT NULL DEFAULT '',");
             sql.AppendLine("Grouping TEXT NOT NULL DEFAULT '',");
