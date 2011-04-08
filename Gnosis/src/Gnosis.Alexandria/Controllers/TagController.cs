@@ -37,27 +37,31 @@ namespace Gnosis.Alexandria.Controllers
 
         public void SaveTag(ITrack track)
         {
-            var file = !string.IsNullOrEmpty(track.CachePath) ? GetFile(track.CachePath) : GetFile(track.Path);
-            if (file.Tag != null)
+            var path = !string.IsNullOrEmpty(track.CachePath) ? track.CachePath : track.Path;
+            if (new Uri(path).IsFile)
             {
-                if (!string.IsNullOrEmpty(track.Title))
-                    file.Tag.Title = track.Title;
+                var file = GetFile(path);
+                if (file.Tag != null)
+                {
+                    if (!string.IsNullOrEmpty(track.Title))
+                        file.Tag.Title = track.Title;
 
-                if (!string.IsNullOrEmpty(track.Album))
-                    file.Tag.Album = track.Album;
+                    if (!string.IsNullOrEmpty(track.Album))
+                        file.Tag.Album = track.Album;
 
-                file.Tag.Track = track.TrackNumber;
-                file.Tag.Disc = track.DiscNumber;
+                    file.Tag.Track = track.TrackNumber;
+                    file.Tag.Disc = track.DiscNumber;
 
-                if (!string.IsNullOrEmpty(track.Artist))
-                    file.Tag.Performers = track.Artist.Split(',', ';');
+                    if (!string.IsNullOrEmpty(track.Artist))
+                        file.Tag.Performers = track.Artist.Split(',', ';');
 
-                if (!string.IsNullOrEmpty(track.Genre))
-                    file.Tag.Genres = track.Genre.Split(',', ';');
+                    if (!string.IsNullOrEmpty(track.Genre))
+                        file.Tag.Genres = track.Genre.Split(',', ';');
 
-                file.Tag.Year = Convert.ToUInt32(track.ReleaseYear);
+                    file.Tag.Year = Convert.ToUInt32(track.ReleaseYear);
 
-                file.Save();
+                    file.Save();
+                }
             }
         }
 

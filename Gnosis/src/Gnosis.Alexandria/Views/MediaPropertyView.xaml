@@ -12,45 +12,59 @@
     <Grid>
         <Border>
             <Expander x:Name="mediaPropertyExpander">
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Vertical">
-                        <Button x:Name="ChangePictureButton" Click="ChangePictureButton_Click">
-                            <Image Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="100" Width="100"/>
-                        </Button>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Text="{Binding TrackNumber}" FontSize="12" Margin="4 0 4 0"/>
-                            <TextBox Text="{Binding Title}" FontSize="12" Margin="4 0 4 0"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="from" Foreground="Gray"/>
-                            <TextBox Text="{Binding Album}" FontSize="12" Margin="4 0 4 0"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="by" Foreground="Gray"/>
-                            <TextBox Text="{Binding Artist}" FontSize="12" Margin="4 0 4 0"/>
-                            <TextBlock Text="in" Foreground="Gray"/>
-                            <TextBox Text="{Binding ReleaseDate}" FontSize="12" Margin="4 0 4 0"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Country" Foreground="Gray"/>
-                            <TextBox Text="{Binding Country}" FontSize="12" Margin="4 0 4 0"/>
-                            <Image Source="{Binding CountryImagePath}" Margin="4"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Grouping" Foreground="Gray"/>
-                            <TextBox Text="{Binding Grouping}" FontSize="12" Margin="4 0 4 0" Width="100"/>
-                            <TextBlock Text="Comment" Foreground="Gray"/>
-                            <TextBox Text="{Binding Comment}" FontSize="12" Margin="4 0 4 0" Width="200"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock x:Name="lyricsTextBlock" Text="Lyrics" Foreground="Gray" AllowDrop="True" DragEnter="lyricsTextBlock_DragEnter" Drop="lyricsTextBlock_Drop"/>
-                            <TextBox x:Name="lyricsTextBox" Text="{Binding Lyrics, Mode=TwoWay}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Height="100" HorizontalAlignment="Stretch" AcceptsReturn="True" AcceptsTab="True"/>
-                        </StackPanel>
-                        <Button x:Name="SaveTrackPropertiesButton" Width="60" Click="SaveTrackPropertiesButton_Click">Save</Button>
-                    </StackPanel>
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="52"/>
+                        <ColumnDefinition Width="76"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Button x:Name="ChangePictureButton" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="5" Margin="2" Click="ChangePictureButton_Click">
+                        <Image Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="100" Width="100"/>
+                    </Button>
+                    <TextBlock Grid.Column="2" Grid.Row="0" Text="Title" Foreground="Gray" Margin="4"/>
+                    <TextBox Grid.Column="3" Grid.Row="0" Text="{Binding Title}" FontSize="12" Margin="2"/>
+
+                    <TextBlock Grid.Column="4" Grid.Row="0" Text="Number" Foreground="Gray" Margin="4"/>
+                    <TextBox Grid.Column="5" Grid.Row="0" Text="{Binding TrackNumber}" FontSize="12" Margin="2"/>
+
+                    <TextBlock Grid.Column="2" Grid.Row="1" Text="Artist" Foreground="Gray" Margin="4"/>
+                    <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding Album}" FontSize="12" Margin="2"/>
+
+                    <TextBlock Grid.Column="4" Grid.Row="1" Text="Country" Foreground="Gray" Margin="4"/>
+                    <TextBox x:Name="countryTextBox" Grid.Column="5" Grid.Row="1" Text="{Binding Country}" Visibility="{Binding CountryEditVisibility}" FontSize="12" Margin="2" KeyUp="countryTextBox_KeyUp"/>
+                    <Image x:Name="countryImage" Grid.Column="5" Grid.Row="1" Visibility="{Binding CountryDisplayVisibility}" Margin="2" Source="{Binding CountryImagePath}" MouseUp="countryImage_MouseUp"/>
+                    
+                    <TextBlock Grid.Column="2" Grid.Row="2" Text="Curator" Foreground="Gray" Margin="4"/>
+                    <TextBox Grid.Column="3" Grid.Row="2" Text="{Binding Grouping}" FontSize="12" Margin="2"/>
+
+                    <TextBlock Grid.Column="2" Grid.Row="3" Text="Album" Foreground="Gray" Margin="4"/>
+                    <TextBox Grid.Column="3" Grid.Row="3" Text="{Binding Artist}" FontSize="12" Margin="2"/>
+
+                    <TextBlock Grid.Column="4" Grid.Row="3" Text="Date" Foreground="Gray" Margin="4"/>
+                    <TextBox x:Name="releaseDateTextBox" Grid.Column="5" Grid.Row="3" Text="{Binding ReleaseDate, StringFormat='d'}" FontSize="12" Margin="2"/>
+
+                    <Button Grid.Column="5" Grid.Row="4" x:Name="SaveTrackPropertiesButton" Click="SaveTrackPropertiesButton_Click">Save</Button>
+
+                    <Expander x:Name="commentExpander" Header="Comments" Foreground="Gray" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="6" Margin="2">
+                        <TextBox x:Name="commentTextBox" Text="{Binding Comment}" FontSize="12" Margin="2" Height="60" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AcceptsReturn="True" AcceptsTab="True" TextWrapping="Wrap"/>
+                    </Expander>
+                    
+                    <Expander x:Name="lyricsExpander" Header="Lyrics" Foreground="Gray" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="6" Margin="2" AllowDrop="True" DragEnter="lyricsExpander_DragEnter" Drop="lyricsExpander_Drop">
+                        <TextBox x:Name="lyricsTextBox" Text="{Binding Lyrics}" Margin="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AcceptsReturn="True" AcceptsTab="True"/>
+                    </Expander>                    
+                </Grid>
             </Expander>
         </Border>
     </Grid>

@@ -56,6 +56,7 @@ namespace Gnosis.Alexandria.Models
 
         private bool isSelected;
         private bool isHovered;
+        private bool isCountryBeingEdited;
         private string playbackStatus;
         private string durationLabel;
         private string elapsedLabel;
@@ -526,6 +527,31 @@ namespace Gnosis.Alexandria.Models
                     OnPropertyChanged("CachePath");
                 }
             }
+        }
+
+        public bool IsCountryBeingEdited
+        {
+            get { return isCountryBeingEdited; }
+            set
+            {
+                if (isCountryBeingEdited != value)
+                {
+                    isCountryBeingEdited = value;
+                    OnPropertyChanged("IsCountryBeingEdited");
+                    OnPropertyChanged("CountryDisplayVisibility");
+                    OnPropertyChanged("CountryEditVisibility");
+                }
+            }
+        }
+
+        public System.Windows.Visibility CountryDisplayVisibility
+        {
+            get { return IsCountryBeingEdited ? System.Windows.Visibility.Collapsed : System.Windows.Visibility.Visible; }
+        }
+
+        public System.Windows.Visibility CountryEditVisibility
+        {
+            get { return IsCountryBeingEdited ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed; }
         }
 
         #endregion

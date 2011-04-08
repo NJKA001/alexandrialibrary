@@ -127,7 +127,7 @@ namespace Gnosis.Alexandria.Views
             return lyrics;
         }
 
-        private void lyricsTextBlock_Drop(object sender, DragEventArgs e)
+        private void lyricsExpander_Drop(object sender, DragEventArgs e)
         {
             try
             {
@@ -151,13 +151,62 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        private void lyricsTextBlock_DragEnter(object sender, DragEventArgs e)
+        private void lyricsExpander_DragEnter(object sender, DragEventArgs e)
         {
             //foreach (var format in e.Data.GetFormats())
             //{
             //    var x = format;
             //}
             e.Effects = DragDropEffects.All;
+        }
+
+        private void countryTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                var textBox = sender as TextBox;
+                if (e.Key == Key.Enter || e.Key == Key.Return)
+                {
+                    e.Handled = true;
+                    if (textBox != null && track != null)
+                    {
+                        log.Info("MediaPropertyView.countryTextBox_KeyUp: Saving country=" + textBox.Text);
+                        track.IsCountryBeingEdited = false;
+                        track.Country = textBox.Text;
+                        trackController.Save(track);
+                        releaseDateTextBox.Focus();
+                    }
+                }
+                if (e.Key == Key.Escape)
+                {
+                    e.Handled = true;
+                    if (textBox != null && track != null)
+                    {
+                        track.IsCountryBeingEdited = false;
+                        releaseDateTextBox.Focus();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("MediaPropertyView.countryTextBox_KeyUp", ex);
+            }
+        }
+
+        private void countryImage_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (track != null && !track.IsCountryBeingEdited)
+                {
+                    track.IsCountryBeingEdited = true;
+                    countryTextBox.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("MediaPropertyView.countryImage_MouseUp", ex);
+            }
         }
     }
 }

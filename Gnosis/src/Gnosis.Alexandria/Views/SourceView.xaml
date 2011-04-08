@@ -42,10 +42,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel x:Name="buttonPanel" Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
-            <Button x:Name="AddFolderButton" Margin="4" Click="AddFolderButton_Click">Add Folder</Button>
-            <Button x:Name="AddPlaylistButton" Margin="4" Click="AddPlaylistButton_Click">Add Playlist</Button>
-            <Button x:Name="AddFileSystemButton" Margin="4" Click="AddFileSystemButton_Click">Add File System</Button>
-            <Button x:Name="addPodcastButton" Margin="4" Click="addPodcastButton_Click">Add Podcast</Button>
+            <Button x:Name="AddFolderButton" Margin="4" Click="AddFolderButton_Click">Folder</Button>
+            <Button x:Name="AddPlaylistButton" Margin="4" Click="AddPlaylistButton_Click">Playlist</Button>
+            <Button x:Name="AddFileSystemButton" Margin="4" Click="AddFileSystemButton_Click">Storage</Button>
+            <Button x:Name="addPodcastButton" Margin="4" Click="addPodcastButton_Click">Podcast</Button>
         </StackPanel>
         <TreeView x:Name="treeView" Grid.Column="0" Grid.Row="1" ItemContainerStyle="{StaticResource sourceItemStyle}" DragEnter="SourceView_DragEnter" Drop="SourceView_Drop" VerticalAlignment="Stretch" PreviewMouseLeftButtonDown="SourceView_PreviewMouseLeftButtonDown">
             <TreeView.ItemTemplate>

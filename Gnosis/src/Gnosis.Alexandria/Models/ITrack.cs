@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace Gnosis.Alexandria.Models
 {
@@ -43,5 +44,8 @@ namespace Gnosis.Alexandria.Models
         bool HasClipAt(TimeSpan elapsed);
         Tuple<TimeSpan, TimeSpan> GetNextClipFrom(TimeSpan elapsed);
         string CachePath { get; set; }
+        bool IsCountryBeingEdited { get; set; }
+        Visibility CountryDisplayVisibility { get; }
+        Visibility CountryEditVisibility { get; }
     }
 }
