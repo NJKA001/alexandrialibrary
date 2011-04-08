@@ -57,6 +57,7 @@
                                 <TextBlock x:Name="SourceNameTextBlock" Text="{Binding Name}" Visibility="{Binding DisplayVisibility}"/>
                                 <TextBox x:Name="SourceNameTextBox" Text="{Binding Name, Mode=TwoWay}" Visibility="{Binding EditVisibility}" KeyUp="SourceNameTextBox_KeyUp" />
                                 <TextBox x:Name="sourcePathTextBox" Text="{Binding Path}" Visibility="{Binding EditVisibility}" KeyUp="sourcePathTextBox_KeyUp" />
+                                <TextBox x:Name="sourceImagePath" Text="{Binding ImagePath}" Visibility="{Binding EditVisibility}" KeyUp="sourceImagePath_KeyUp"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>

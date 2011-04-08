@@ -527,6 +527,39 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
+        private void sourceImagePath_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                var textBox = sender as TextBox;
+                if (e.Key == Key.Enter || e.Key == Key.Return)
+                {
+                    e.Handled = true;
+
+                    var source = GetSourceFromTextBoxKeyUp(textBox);
+                    if (source != null && source.IsBeingEdited)
+                    {
+                        source.ImagePath = textBox.Text;
+                        source.IsBeingEdited = false;
+                        sourceController.Save(source);
+                    }
+                }
+                if (e.Key == Key.Escape)
+                {
+                    e.Handled = true;
+                    var source = GetSourceFromTextBoxKeyUp(textBox);
+                    if (source != null && source.IsBeingEdited)
+                    {
+                        source.IsBeingEdited = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("sourceImagePathTextBox_KeyUp", ex);
+            }
+        }
+
         #endregion
 
         public EventHandler<SourceLoadedEventArgs> SourceLoaded { get; set; }
