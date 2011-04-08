@@ -39,7 +39,7 @@
                                     <TextBlock Text="released" Margin="4 2 4 0" FontSize="10" Foreground="Gray"/>
                                     <TextBlock x:Name="TrackReleaseYear" Text="{Binding ReleaseYear}"/>
                                     <TextBlock Text="in" Margin="4 2 4 0" FontSize="10" Foreground="Gray"/>
-                                    <Image Source="{Binding CountryImagePath}" Margin="4 0 0 0" Height="11" Width="16"/>
+                                    <Image Source="{Binding CountryImagePath}" Margin="4 0 0 0" Width="23" Height="14"/>
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>

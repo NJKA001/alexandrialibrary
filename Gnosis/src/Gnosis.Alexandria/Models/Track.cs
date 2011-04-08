@@ -33,7 +33,7 @@ namespace Gnosis.Alexandria.Models
         public const uint DEFAULT_DISC = 0;
         public const string DEFAULT_GENRE = "Unknown Genre";
         public static readonly DateTime DEFAULT_RELEASE_DATE = new DateTime(2000, 1, 1);
-        public const string DEFAULT_COUNTRY = "us";
+        public const string DEFAULT_COUNTRY = "unknown";
         public const string COLOR_TRANSPARENT = "#00FFFFFF";
         public const string COLOR_LIGHTBLUE = "#FFADD8E6";
 
