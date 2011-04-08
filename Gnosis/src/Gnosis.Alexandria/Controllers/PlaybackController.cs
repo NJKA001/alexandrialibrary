@@ -24,6 +24,9 @@ namespace Gnosis.Alexandria.Controllers
             playbackTimer.Start();
 
             player.CurrentAudioStreamEnded += new EventHandler<EventArgs>(CurrentAudioStreamEnded);
+
+            if (!System.IO.Directory.Exists(playbackCachePath))
+                System.IO.Directory.CreateDirectory(playbackCachePath);
         }
 
         private static readonly ILog log = LogManager.GetLogger(typeof(PlaybackController));
@@ -34,7 +37,8 @@ namespace Gnosis.Alexandria.Controllers
         private ITrack currentTrack;
         private bool isAboutToPlay = false;
         private bool hasSeek = false;
-        
+        private string playbackCachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), "Alexandria", "Cache", "Playback");
+
         private void DoCurrentTrackEnded()
         {
             if (CurrentTrackEnded != null)
@@ -132,6 +136,28 @@ namespace Gnosis.Alexandria.Controllers
             currentTrack = null;
         }
 
+        private Uri GetPlaybackUri(Uri originalUri)
+        {
+            var file = new FileInfo(originalUri.LocalPath);
+            return new Uri(System.IO.Path.Combine(playbackCachePath, file.Name));
+        }
+
+        private void CacheForPlayback(Uri originalUri, Uri playbackUri)
+        {
+            try
+            {
+                if (System.IO.File.Exists(originalUri.LocalPath))
+                {
+                    if (!System.IO.File.Exists(playbackUri.LocalPath))
+                        System.IO.File.Copy(originalUri.LocalPath, playbackUri.LocalPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("PlaybackController.CacheForPlayback", ex);
+            }
+        }
+
         public void Play()
         {
             try
@@ -150,16 +176,21 @@ namespace Gnosis.Alexandria.Controllers
                         }
                     }
 
+                    var trackUri = new Uri(currentTrack.Path, UriKind.Absolute);
+
                     if (player.CurrentAudioStream == null)
                     {
                         if (cachedUri != null)
                         {
-                            currentTrack.CachePath = cachedUri.LocalPath;
-                            player.LoadAudioStream(cachedUri);
+                            var playbackUri = GetPlaybackUri(cachedUri);
+                            CacheForPlayback(cachedUri, playbackUri);
+                            player.LoadAudioStream(playbackUri);
                         }
                         else
                         {
-                            player.LoadAudioStream(new Uri(currentTrack.Path, UriKind.Absolute));
+                            var playbackUri = GetPlaybackUri(trackUri);
+                            CacheForPlayback(trackUri, playbackUri);
+                            player.LoadAudioStream(playbackUri);
                         }
                     }
                     else
@@ -168,19 +199,22 @@ namespace Gnosis.Alexandria.Controllers
 
                         if (cachedUri != null)
                         {
-                            if (cachedUri != streamUri)
+                            var playbackUri = GetPlaybackUri(cachedUri);
+                            if (playbackUri != streamUri)
                             {
-                                currentTrack.CachePath = cachedUri.LocalPath;
+                                CacheForPlayback(cachedUri, playbackUri);
                                 player.Stop();
-                                player.LoadAudioStream(cachedUri);
+                                player.LoadAudioStream(playbackUri);
                             }
                         }
                         else
                         {
                             if (currentUri != streamUri)
                             {
+                                var playbackUri = GetPlaybackUri(trackUri);
+                                CacheForPlayback(trackUri, playbackUri);
                                 player.Stop();
-                                player.LoadAudioStream(new Uri(currentTrack.Path, UriKind.Absolute));
+                                player.LoadAudioStream(playbackUri);
                             }
                         }
                     }
