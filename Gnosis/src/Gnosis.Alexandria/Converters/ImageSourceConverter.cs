@@ -65,13 +65,19 @@ namespace Gnosis.Alexandria.Converters
             {
                 var path = value as string;
 
-                BitmapImage image = new BitmapImage();
-                image.BeginInit();
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.CreateOptions = BitmapCreateOptions.None;
-                image.UriSource = new Uri(path, UriKind.Absolute);
-                image.EndInit();
-                return image;
+                if (path.EndsWith(".svg"))
+                {
+                }
+                else
+                {
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.CreateOptions = BitmapCreateOptions.None;
+                    image.UriSource = new Uri(path, UriKind.Absolute);
+                    image.EndInit();
+                    return image;
+                }
             }
 
             return placeholder;
