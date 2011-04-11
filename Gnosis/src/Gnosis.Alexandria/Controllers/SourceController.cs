@@ -147,7 +147,6 @@ namespace Gnosis.Alexandria.Controllers
                                 source.AddChild(child);
 
                             log.Info("SourceController.LoadPodcast: Loaded podcast from repository");
-                            return;
                         }
                     }
                 //}
