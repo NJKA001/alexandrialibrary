@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Repositories;
 using System.Net;
 using Gnosis.Alexandria.Helpers;
+using System.Windows;
 
 namespace Gnosis.Alexandria.Controllers
 {
@@ -127,29 +129,30 @@ namespace Gnosis.Alexandria.Controllers
             }
         }
 
-        public void LoadPodcast(ISource source)
+        private void LoadPodcastStarted(object sender, DoWorkEventArgs args)
         {
             try
             {
-                //if (source.Children.Count() >= 1 && !(source.Children.FirstOrDefault() is ProxySource))
-                //{
-                //    log.Info("SourceController.LoadPodcast: Podcast already loaded");
-                //    return;
-                //}
-                //else
-                //{
-                    if (source.Children.Count() == 1 && source.Children.FirstOrDefault() is ProxySource)
-                    {
-                        var children = Search(new Dictionary<string, object> { { "Parent", source.Id } });
-                        if (children != null && children.Count() > 0)
-                        {
-                            foreach (var child in children)
-                                source.AddChild(child);
+                var request = args.Argument as LoadSourceRequest;
+                if (request == null)
+                {
+                    log.Warn("LoadPodcastStarted: request is null");
+                    return;
+                }
 
-                            log.Info("SourceController.LoadPodcast: Loaded podcast from repository");
-                        }
+                var source = request.Source;
+
+                if (source.Children.Count() == 1 && source.Children.FirstOrDefault() is ProxySource)
+                {
+                    var children = Search(new Dictionary<string, object> { { "Parent", source.Id } });
+                    if (children != null && children.Count() > 0)
+                    {
+                        foreach (var child in children)
+                            source.AddChild(child);
+
+                        log.Info("SourceController.LoadPodcast: Loaded podcast from repository");
                     }
-                //}
+                }
 
                 var xml = new XmlDocument();
                 xml.LoadXml(GetPodcastXml(source.Path));
@@ -208,7 +211,8 @@ namespace Gnosis.Alexandria.Controllers
                                 playlistItem.Summary = summaryNode != null ? summaryNode.InnerText : string.Empty;
 
                                 Save(playlistItem);
-                                source.AddChild(playlistItem);
+
+                                request.Handle.Dispatcher.Invoke((Action)delegate { source.AddChild(playlistItem); });
                             }
                         }
                     }
@@ -216,8 +220,33 @@ namespace Gnosis.Alexandria.Controllers
             }
             catch (Exception ex)
             {
-                log.Error("SourceController.LoadPodcast", ex);
+                log.Error("SourceController.LoadPodcastStarted", ex);
+                args.Result = ex;
             }
+        }
+
+        private void LoadPodcastCompleted(object sender, RunWorkerCompletedEventArgs args)
+        {
+            if (args.Result is Exception)
+            {
+                //Load failed
+            }
+            else if (args.Cancelled)
+            {
+                //Load cancelled
+            }
+            else
+            {
+                log.Debug("LoadPodcastCompleted");
+            }
+        }
+
+        public void LoadPodcast(ISource source, DependencyObject handle)
+        {
+            var worker = new BackgroundWorker();
+            worker.DoWork += LoadPodcastStarted;
+            worker.RunWorkerCompleted += LoadPodcastCompleted;
+            worker.RunWorkerAsync(new LoadSourceRequest { Source = source, Handle = handle });
         }
     }
 }

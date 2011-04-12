@@ -35,5 +35,6 @@ namespace Gnosis.Alexandria.Models
         bool IsBeingEdited { get; set; }
         Visibility DisplayVisibility { get; }
         Visibility EditVisibility { get; }
+        void DeselectAll();
     }
 }

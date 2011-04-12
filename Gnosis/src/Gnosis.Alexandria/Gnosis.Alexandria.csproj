@@ -78,6 +78,7 @@
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\TrackController.cs" />
     <Compile Include="Events\SourceLoadedEventArgs.cs" />
+    <Compile Include="Extensions\UIElementExtensions.cs" />
     <Compile Include="Helpers\Rfc822DateTime.cs" />
     <Compile Include="Helpers\VisualHelper.cs" />
     <Compile Include="Models\IPlaybackStatus.cs" />
@@ -89,7 +90,9 @@
     <Compile Include="Converters\ImageSourceConverter.cs" />
     <Compile Include="Models\ISource.cs" />
     <Compile Include="Models\ISourceProperty.cs" />
+    <Compile Include="Models\LoadSourceRequest.cs" />
     <Compile Include="Models\PodcastSource.cs" />
+    <Compile Include="Models\WebScrapeSource.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Models\IdentifierProperty.cs" />
     <Compile Include="Models\PlaylistItemSource.cs" />
@@ -698,6 +701,9 @@
     <Resource Include="Images\trash_full.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Delete.png" />
+    <Resource Include="Images\edit.png" />
+    <Resource Include="Images\feed.png" />
     <Resource Include="Images\Countries\large\Argentina.png" />
     <Resource Include="Images\Countries\large\Armenia.png" />
     <Resource Include="Images\Countries\large\Australia.png" />

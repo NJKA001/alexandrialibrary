@@ -306,6 +306,13 @@ namespace Gnosis.Alexandria.Models
             OnPropertyChanged("Children");
         }
 
+        public void DeselectAll()
+        {
+            IsSelected = false;
+            foreach (var child in children)
+                child.DeselectAll();
+        }
+
         #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged;

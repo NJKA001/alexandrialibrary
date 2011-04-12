@@ -18,6 +18,7 @@ using log4net;
 
 using Gnosis.Alexandria.Controllers;
 using Gnosis.Alexandria.Events;
+using Gnosis.Alexandria.Extensions;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Helpers;
 using Gnosis.Alexandria.Repositories;
@@ -84,26 +85,28 @@ namespace Gnosis.Alexandria.Views
 
         private void LoadPicture(ISource source)
         {
-            var file = tagController.GetFile(source.Path);
-            if (file != null && file.Tag != null && file.Tag.Pictures.Length > 0)
+            var uri = new Uri(source.Path);
+            if (uri.IsFile && System.IO.File.Exists(source.Path))
             {
-                source.ImageData = file.Tag.Pictures[0].Data;
+                var file = tagController.GetFile(source.Path);
+                if (file != null && file.Tag != null && file.Tag.Pictures.Length > 0)
+                {
+                    source.ImageData = file.Tag.Pictures[0].Data;
+                }
+            }
+            else
+            {
+                log.Warn("SourceView.LoadPicture: Cannot load pictures for remote media. path=" + source.Path);
             }
         }
 
         private ISource GetSelectedSource()
         {
-            return treeView.SelectedItem as ISource;
-        }
+            var source = treeView.SelectedItem as ISource;
+            if (source != null && source.IsSelected)
+                return source;
 
-        private void DeselectAll(ISource source)
-        {
-            if (source != null)
-            {
-                source.IsSelected = false;
-                foreach (var child in source.Children)
-                    DeselectAll(child);
-            }
+            return null;
         }
 
         private void OnSourceLoaded(ISource source)
@@ -227,7 +230,7 @@ namespace Gnosis.Alexandria.Views
 
         #region ContextMenu Events
 
-        private void LoadSource_Clicked(object sender, RoutedEventArgs args)
+        private void PlaySource_Clicked(object sender, RoutedEventArgs args)
         {
             try
             {
@@ -243,7 +246,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                log.Error("SourceView.LoadSource_Clicked", ex);
+                log.Error("SourceView.PlaySource_Clicked", ex);
             }
         }
 
@@ -267,6 +270,23 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
+        private void Delete(ISource source)
+        {
+            sourceController.Delete(source.Id);
+
+            if (source.Parent != null)
+            {
+                source.Parent.RemoveChild(source);
+            }
+            else
+            {
+                if (boundSources.Contains(source))
+                {
+                    boundSources.Remove(source);
+                }
+            }
+        }
+
         private void DeleteSource_Clicked(object sender, RoutedEventArgs args)
         {
             try
@@ -280,7 +300,7 @@ namespace Gnosis.Alexandria.Views
                         var result = MessageBox.Show("Are you sure that you want to delete this source?\n\nName: " + source.Name + "\nPath: " + source.Path, "Delete Source", MessageBoxButton.OKCancel);
                         if (result == MessageBoxResult.OK)
                         {
-                            sourceController.Delete(source.Id);
+                            Delete(source);
                         }
                     }
                 }
@@ -295,6 +315,8 @@ namespace Gnosis.Alexandria.Views
 
         #region SourceView Events
 
+        
+
         private void SourceView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             try
@@ -306,8 +328,12 @@ namespace Gnosis.Alexandria.Views
                     var item = VisualHelper.FindContainingTreeViewItem(element);
                     if (item == null)
                     {
+                        //The user clicked on the scrollbar or some other chrome element - we don't want to deselect anything
+                        if (element != null && element.IsWindowChrome())
+                            return;
+
                         foreach (var source in boundSources)
-                            DeselectAll(source);
+                            source.DeselectAll();
                     }
                     else
                     {
@@ -374,7 +400,7 @@ namespace Gnosis.Alexandria.Views
 
                         if (source is PodcastSource)
                         {
-                            sourceController.LoadPodcast(source);
+                            sourceController.LoadPodcast(source, this);
                         }
 
                         foreach (var child in source.Children)
@@ -397,6 +423,21 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
+        private Image GetMenuIcon(string path)
+        {
+            var icon = new Image();
+            icon.Width = 16;
+            icon.Height = 16;
+
+            var image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(path);
+            image.EndInit();
+
+            icon.Source = image;
+            return icon;
+        }
+
         private void SourceItem_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             try
@@ -410,19 +451,22 @@ namespace Gnosis.Alexandria.Views
                     {
                         var menu = new ContextMenu();
                         
-                        var loadMediaItem = new MenuItem { Header = "Load" };
-                        loadMediaItem.CommandParameter = source;
-                        loadMediaItem.Click += LoadSource_Clicked;
-                        
+                        var playItem = new MenuItem { Header = "Play" };
+                        playItem.CommandParameter = source;
+                        playItem.Click += PlaySource_Clicked;
+                        playItem.Icon = GetMenuIcon("pack://application:,,,/Images/play.png");
+
                         var editItem = new MenuItem { Header = "Edit" };
                         editItem.CommandParameter = source;
                         editItem.Click += EditSource_Clicked;
+                        editItem.Icon = GetMenuIcon("pack://application:,,,/Images/edit.png");
 
                         var deleteItem = new MenuItem { Header = "Delete" };
                         deleteItem.CommandParameter = source;
                         deleteItem.Click += DeleteSource_Clicked;
+                        deleteItem.Icon = GetMenuIcon("pack://application:,,,/Images/delete.png");
 
-                        menu.Items.Add(loadMediaItem);
+                        menu.Items.Add(playItem);
                         menu.Items.Add(editItem);
                         menu.Items.Add(deleteItem);
                         treeView.ContextMenu = menu;
