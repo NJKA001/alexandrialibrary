@@ -33,7 +33,7 @@ namespace Gnosis.Alexandria.Models
         public const uint DEFAULT_DISC = 0;
         public const string DEFAULT_GENRE = "Unknown Genre";
         public static readonly DateTime DEFAULT_RELEASE_DATE = new DateTime(2000, 1, 1);
-        public const string DEFAULT_COUNTRY = "unknown";
+        public const string DEFAULT_COUNTRY = "United States of America";
         public const string COLOR_TRANSPARENT = "#00FFFFFF";
         public const string COLOR_LIGHTBLUE = "#FFADD8E6";
 
@@ -286,7 +286,8 @@ namespace Gnosis.Alexandria.Models
                 {
                     country = value;
                     OnPropertyChanged("Country");
-                    OnPropertyChanged("CountryImagePath");
+                    OnPropertyChanged("CountryLargeImagePath");
+                    OnPropertyChanged("CountrySmallImagePath");
                 }
             }
         }
@@ -415,9 +416,14 @@ namespace Gnosis.Alexandria.Models
             return clips.Where(x => x.Item1 >= elapsed).FirstOrDefault();
         }
 
-        public string CountryImagePath
+        public string CountryLargeImagePath
         {
-            get { return string.Format("pack://application:,,,/Images/Countries/{0}.png", Country ?? DEFAULT_COUNTRY); }
+            get { return string.Format("pack://application:,,,/Images/Countries/large/{0}.png", Country ?? DEFAULT_COUNTRY); }
+        }
+
+        public string CountrySmallImagePath
+        {
+            get { return string.Format("pack://application:,,,/Images/Countries/small/{0}.png", Country ?? DEFAULT_COUNTRY); }
         }
 
         public int ReleaseYear
