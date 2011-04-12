@@ -44,7 +44,11 @@
 
                     <TextBlock Grid.Column="4" Grid.Row="1" Text="Country" Foreground="Gray" Margin="4"/>
                     <TextBox x:Name="countryTextBox" Grid.Column="5" Grid.Row="1" Text="{Binding Country}" Visibility="{Binding CountryEditVisibility}" FontSize="12" Margin="2" KeyUp="countryTextBox_KeyUp"/>
-                    <Image x:Name="countryImage" Grid.Column="5" Grid.Row="1" Grid.RowSpan="2" Visibility="{Binding CountryDisplayVisibility}" Margin="2" Source="{Binding CountryLargeImagePath}" MouseUp="countryImage_MouseUp"/>
+                    <Image x:Name="countryImage" Grid.Column="5" Grid.Row="1" Grid.RowSpan="2" Visibility="{Binding CountryDisplayVisibility}" Margin="2" Source="{Binding CountryLargeImagePath}" MouseUp="countryImage_MouseUp">
+                        <Image.ToolTip>
+                            <TextBlock Background="LightYellow" Text="{Binding Country}"/>
+                        </Image.ToolTip>
+                    </Image>
                     
                     <TextBlock Grid.Column="2" Grid.Row="2" Text="Curator" Foreground="Gray" Margin="4"/>
                     <TextBox Grid.Column="3" Grid.Row="2" Text="{Binding Grouping}" FontSize="12" Margin="2"/>
