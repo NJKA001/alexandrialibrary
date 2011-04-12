@@ -873,6 +873,27 @@
   <ItemGroup>
     <Resource Include="Images\Countries\unknown.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add.png" />
+    <Resource Include="Images\cancel.png" />
+    <Resource Include="Images\close.png" />
+    <Resource Include="Images\first.png" />
+    <Resource Include="Images\forward.png" />
+    <Resource Include="Images\help.png" />
+    <Resource Include="Images\info.png" />
+    <Resource Include="Images\last.png" />
+    <Resource Include="Images\previous.png" />
+    <Resource Include="Images\refresh.png" />
+    <Resource Include="Images\reload.png" />
+    <Resource Include="Images\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\folder_disc.png" />
+    <Resource Include="Images\folder_movie.png" />
+    <Resource Include="Images\folder_tools.png" />
+    <Resource Include="Images\trash_empty.png" />
+    <Resource Include="Images\trash_full.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

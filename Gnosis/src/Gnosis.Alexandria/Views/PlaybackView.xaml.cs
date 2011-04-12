@@ -58,7 +58,7 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void backButton_Click(object sender, RoutedEventArgs e)
         {
             PlayPreviousTrack();
         }
@@ -83,7 +83,7 @@ namespace Gnosis.Alexandria.Views
             PlayCurrentTrack();
         }
 
-        private void NextButton_Click(object sender, RoutedEventArgs e)
+        private void forwardButton_Click(object sender, RoutedEventArgs e)
         {
             PlayNextTrack();
         }

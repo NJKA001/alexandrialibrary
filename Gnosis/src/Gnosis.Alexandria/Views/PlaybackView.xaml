@@ -7,14 +7,14 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <StackPanel x:Name="PlaybackPanel" Orientation="Horizontal">
-            <Button x:Name="BackButton" Width="60" Margin="4" Click="BackButton_Click" BorderBrush="Transparent" BorderThickness="0" Background="Transparent">
-                <Image x:Name="BackButtonImage" Source="pack://application:,,,/Images/back.png"/>
+            <Button x:Name="backButton" Width="60" Margin="4" Click="backButton_Click" BorderBrush="Transparent" BorderThickness="0" Background="Transparent">
+                <Image x:Name="backButtonImage" Source="pack://application:,,,/Images/back.png"/>
             </Button>
             <Button x:Name="PlayButton" Width="60" Margin="4" Click="PlayButton_Click" BorderBrush="Transparent" BorderThickness="0" Background="Transparent">
                 <Image x:Name="playButtonImage" Source="{Binding ImagePath}" Visibility="Visible" />
             </Button>
-            <Button x:Name="NextButton" Width="60" Margin="4" Click="NextButton_Click" BorderBrush="Transparent" BorderThickness="0" Background="Transparent">
-                <Image x:Name="NextButtonImage" Source="pack://application:,,,/Images/next.png"/>
+            <Button x:Name="forwardButton" Width="60" Margin="4" Click="forwardButton_Click" BorderBrush="Transparent" BorderThickness="0" Background="Transparent">
+                <Image x:Name="forwardButtonImage" Source="pack://application:,,,/Images/forward.png"/>
             </Button>
             <StackPanel x:Name="NowPlayingMarquee" Visibility="Collapsed" Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
