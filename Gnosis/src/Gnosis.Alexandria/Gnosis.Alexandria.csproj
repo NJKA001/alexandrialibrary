@@ -92,7 +92,7 @@
     <Compile Include="Models\ISourceProperty.cs" />
     <Compile Include="Models\LoadSourceRequest.cs" />
     <Compile Include="Models\PodcastSource.cs" />
-    <Compile Include="Models\WebScrapeSource.cs" />
+    <Compile Include="Models\SpiderSource.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Models\IdentifierProperty.cs" />
     <Compile Include="Models\PlaylistItemSource.cs" />
@@ -701,6 +701,7 @@
     <Resource Include="Images\trash_full.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\spider.png" />
     <Resource Include="Images\Delete.png" />
     <Resource Include="Images\edit.png" />
     <Resource Include="Images\feed.png" />

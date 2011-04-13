@@ -21,6 +21,10 @@ namespace Gnosis.Alexandria.Models
         string Summary { get; set; }
         DateTime Date { get; set; }
         int Number { get; set; }
+        string ImagePattern { get; set; }
+        string ChildPattern { get; set; }
+        string PagePattern { get; set; }
+
         IEnumerable<ISourceProperty> Properties { get; }
         IEnumerable<ISource> Children { get; }
 
@@ -35,6 +39,8 @@ namespace Gnosis.Alexandria.Models
         bool IsBeingEdited { get; set; }
         Visibility DisplayVisibility { get; }
         Visibility EditVisibility { get; }
+        Visibility PatternVisibility { get; }
+
         void DeselectAll();
     }
 }

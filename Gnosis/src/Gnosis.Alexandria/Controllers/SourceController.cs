@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 using log4net;
@@ -116,7 +117,7 @@ namespace Gnosis.Alexandria.Controllers
             }
         }
 
-        private string GetPodcastXml(string path)
+        private string GetResponseBody(string path)
         {
             var request = HttpWebRequest.Create(path);
 
@@ -155,7 +156,7 @@ namespace Gnosis.Alexandria.Controllers
                 }
 
                 var xml = new XmlDocument();
-                xml.LoadXml(GetPodcastXml(source.Path));
+                xml.LoadXml(GetResponseBody(source.Path));
                 var nsmgr = new XmlNamespaceManager(xml.NameTable);
                 nsmgr.AddNamespace("itunes", "http://www.itunes.com/dtds/podcast-1.0.dtd");
                 nsmgr.AddNamespace("atom", "http://www.w3.org/2005/Atom");
@@ -212,7 +213,7 @@ namespace Gnosis.Alexandria.Controllers
 
                                 Save(playlistItem);
 
-                                request.Handle.Dispatcher.Invoke((Action)delegate { source.AddChild(playlistItem); });
+                                request.Invoke((Action)delegate { source.AddChild(playlistItem); });
                             }
                         }
                     }
@@ -241,12 +242,102 @@ namespace Gnosis.Alexandria.Controllers
             }
         }
 
+        private void LoadSpiderStarted(object sender, DoWorkEventArgs args)
+        {
+            try
+            {
+                log.Info("LoadSpiderStarted");
+                var request = args.Argument as LoadSourceRequest;
+                if (request == null)
+                {
+                    log.Warn("LoadSpiderStarted: request is null");
+                    return;
+                }
+
+                var source = request.Source;
+
+                if (source != null && !string.IsNullOrEmpty(source.Path))
+                {
+                    var body = GetResponseBody(source.Path);
+
+                    if (!string.IsNullOrEmpty(source.ChildPattern))
+                    {
+                        var regex = new Regex(source.ChildPattern);
+                        foreach (Match match in regex.Matches(body))
+                        {
+                            var childName = match.Groups["NAME"].Value;
+                            var childPath = match.Groups["PATH"].Value;
+                            var childSummary = match.Groups["SUMMARY"].Value;
+
+                            if (!string.IsNullOrEmpty(childPath))
+                            {
+                                //We need to turn relative paths into absolute paths
+                                if (childPath.StartsWith("~/"))
+                                    childPath = childPath.Substring(1, childPath.Length-1);
+
+                                if (childPath.StartsWith("/"))
+                                {
+                                    var parentUri = new Uri(source.Path);
+                                    childPath = string.Format("{0}://{1}{2}", parentUri.Scheme, parentUri.Host, childPath);
+                                }
+
+                                var existingChild = source.Children.Where(x => x.Path == childPath).FirstOrDefault();
+                                if (existingChild != null)
+                                {
+                                    if (!string.IsNullOrEmpty(childName) && existingChild.Name != childName)
+                                    {
+                                        Save(existingChild);
+                                    }
+                                }
+                                else
+                                {
+                                    var childSpider = new SpiderSource { Name = childName, Path = childPath, Summary = childSummary, Parent = source };
+
+                                    log.Info(string.Format("LoadSpiderStarted: Saving new spider child. name={0} path={1}", childName, childPath));
+                                    Save(childSpider);
+                                    request.Invoke(() => source.AddChild(childSpider));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("LoadSpiderStarted", ex);
+            }
+        }
+
+        private void LoadSpiderCompleted(object sender, RunWorkerCompletedEventArgs args)
+        {
+            if (args.Result is Exception)
+            {
+                //Load failed
+            }
+            else if (args.Cancelled)
+            {
+                //Load cancelled
+            }
+            else
+            {
+                log.Debug("LoadSpiderCompleted");
+            }
+        }
+
         public void LoadPodcast(ISource source, DependencyObject handle)
         {
             var worker = new BackgroundWorker();
             worker.DoWork += LoadPodcastStarted;
             worker.RunWorkerCompleted += LoadPodcastCompleted;
-            worker.RunWorkerAsync(new LoadSourceRequest { Source = source, Handle = handle });
+            worker.RunWorkerAsync(new LoadSourceRequest(handle) { Source = source });
+        }
+
+        public void LoadSpider(ISource source, DependencyObject handle)
+        {
+            var worker = new BackgroundWorker();
+            worker.DoWork += LoadSpiderStarted;
+            worker.RunWorkerCompleted += LoadSpiderCompleted;
+            worker.RunWorkerAsync(new LoadSourceRequest(handle) { Source = source });
         }
     }
 }

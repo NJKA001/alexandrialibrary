@@ -14,6 +14,7 @@ namespace Gnosis.Alexandria.Models
         PlaylistItem = 4,
         FileSystem = 5,
         Directory = 6,
-        Podcast = 7
+        Podcast = 7,
+        Spider = 8
     }
 }

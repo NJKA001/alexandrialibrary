@@ -207,6 +207,53 @@ namespace Gnosis.Alexandria.Models
             }
         }
 
+        #region Pattern Properties
+
+        private string imagePattern = string.Empty;
+        private string childPattern = string.Empty;
+        private string pagePattern = string.Empty;
+
+        public string ImagePattern
+        {
+            get { return imagePattern; }
+            set
+            {
+                if (imagePattern != value && value != null)
+                {
+                    imagePattern = value;
+                    OnPropertyChanged("ImagePattern");
+                }
+            }
+        }
+
+        public string ChildPattern
+        {
+            get { return childPattern; }
+            set
+            {
+                if (childPattern != value && value != null)
+                {
+                    childPattern = value;
+                    OnPropertyChanged("ChildPattern");
+                }
+            }
+        }
+
+        public string PagePattern
+        {
+            get { return pagePattern; }
+            set
+            {
+                if (pagePattern != value && value != null)
+                {
+                    pagePattern = value;
+                    OnPropertyChanged("PagePattern");
+                }
+            }
+        }
+
+        #endregion
+
         public IEnumerable<ISourceProperty> Properties
         {
             get { return properties; }
@@ -274,6 +321,11 @@ namespace Gnosis.Alexandria.Models
         public Visibility EditVisibility
         {
             get { return IsBeingEdited ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
+        public virtual Visibility PatternVisibility
+        {
+            get { return Visibility.Collapsed; }
         }
 
         public virtual void AddProperty(ISourceProperty property)

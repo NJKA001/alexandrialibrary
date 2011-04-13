@@ -226,6 +226,30 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
+        private void addSpiderButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var parent = GetSelectedSource();
+
+                var source = new SpiderSource { Name = "New Spider", Path = "unknown", Parent = parent };
+
+                if (parent != null)
+                {
+                    parent.AddChild(source);
+                }
+                else
+                {
+                    boundSources.Add(source);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("SourceView.addSpiderButton_Click", ex);
+                MessageBox.Show("There was an error trying to add a spider.\n\n" + ex.Message, "Could Not Add Spider");
+            }
+        }
+
         #endregion
 
         #region ContextMenu Events
@@ -403,6 +427,11 @@ namespace Gnosis.Alexandria.Views
                             sourceController.LoadPodcast(source, this);
                         }
 
+                        if (source is SpiderSource)
+                        {
+                            sourceController.LoadSpider(source, this);
+                        }
+
                         foreach (var child in source.Children)
                         {
                             var playlistItem = child as PlaylistItemSource;
@@ -498,15 +527,15 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        private ISource GetSourceFromTextBoxKeyUp(TextBox textBox)
+        private ISource GetSourceFromChildElement(UIElement element)
         {
-            var item = VisualHelper.FindContainingTreeViewItem(textBox);
+            var item = VisualHelper.FindContainingTreeViewItem(element);
             if (item != null)
                 return item.Header as ISource;
             else return null;
         }
 
-        private void SourceNameTextBox_KeyUp(object sender, KeyEventArgs e)
+        private void sourceNameTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             try
             {
@@ -514,7 +543,7 @@ namespace Gnosis.Alexandria.Views
                 if (e.Key == Key.Enter || e.Key == Key.Return)
                 {
                     e.Handled = true;
-                    var source = GetSourceFromTextBoxKeyUp(textBox);
+                    var source = GetSourceFromChildElement(textBox);
                     if (source != null && source.IsBeingEdited)
                     {
                         source.Name = textBox.Text;
@@ -525,7 +554,7 @@ namespace Gnosis.Alexandria.Views
                 if (e.Key == Key.Escape)
                 {
                     e.Handled = true;
-                    var source = GetSourceFromTextBoxKeyUp(textBox);
+                    var source = GetSourceFromChildElement(textBox);
                     if (source != null && source.IsBeingEdited)
                     {
                         source.IsBeingEdited = false;
@@ -547,7 +576,7 @@ namespace Gnosis.Alexandria.Views
                 {
                     e.Handled = true;
 
-                    var source = GetSourceFromTextBoxKeyUp(textBox);
+                    var source = GetSourceFromChildElement(textBox);
                     if (source != null && source.IsBeingEdited)
                     {
                         source.Path = textBox.Text;
@@ -558,7 +587,7 @@ namespace Gnosis.Alexandria.Views
                 if (e.Key == Key.Escape)
                 {
                     e.Handled = true;
-                    var source = GetSourceFromTextBoxKeyUp(textBox);
+                    var source = GetSourceFromChildElement(textBox);
                     if (source != null && source.IsBeingEdited)
                     {
                         source.IsBeingEdited = false;
@@ -580,7 +609,7 @@ namespace Gnosis.Alexandria.Views
                 {
                     e.Handled = true;
 
-                    var source = GetSourceFromTextBoxKeyUp(textBox);
+                    var source = GetSourceFromChildElement(textBox);
                     if (source != null && source.IsBeingEdited)
                     {
                         source.ImagePath = textBox.Text;
@@ -591,7 +620,7 @@ namespace Gnosis.Alexandria.Views
                 if (e.Key == Key.Escape)
                 {
                     e.Handled = true;
-                    var source = GetSourceFromTextBoxKeyUp(textBox);
+                    var source = GetSourceFromChildElement(textBox);
                     if (source != null && source.IsBeingEdited)
                     {
                         source.IsBeingEdited = false;
@@ -600,7 +629,207 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                log.Error("sourceImagePathTextBox_KeyUp", ex);
+                log.Error("sourceImagePath_KeyUp", ex);
+            }
+        }
+
+        private void sourceImagePattern_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                var textBox = sender as TextBox;
+                if (e.Key == Key.Enter || e.Key == Key.Return)
+                {
+                    e.Handled = true;
+
+                    var source = GetSourceFromChildElement(textBox);
+                    if (source != null && source.IsBeingEdited)
+                    {
+                        source.ImagePattern = textBox.Text;
+                        source.IsBeingEdited = false;
+                        sourceController.Save(source);
+                    }
+                }
+                if (e.Key == Key.Escape)
+                {
+                    e.Handled = true;
+                    var source = GetSourceFromChildElement(textBox);
+                    if (source != null && source.IsBeingEdited)
+                    {
+                        source.IsBeingEdited = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("sourceImagePattern_KeyUp", ex);
+            }
+        }
+
+        private void sourceChildPattern_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                var textBox = sender as TextBox;
+                if (e.Key == Key.Enter || e.Key == Key.Return)
+                {
+                    e.Handled = true;
+
+                    var source = GetSourceFromChildElement(textBox);
+                    if (source != null && source.IsBeingEdited)
+                    {
+                        source.ChildPattern = textBox.Text;
+                        source.IsBeingEdited = false;
+                        sourceController.Save(source);
+                    }
+                }
+                if (e.Key == Key.Escape)
+                {
+                    e.Handled = true;
+                    var source = GetSourceFromChildElement(textBox);
+                    if (source != null && source.IsBeingEdited)
+                    {
+                        source.IsBeingEdited = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("sourceChildPattern_KeyUp", ex);
+            }
+        }
+
+        private void sourcePagePattern_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                var textBox = sender as TextBox;
+                if (e.Key == Key.Enter || e.Key == Key.Return)
+                {
+                    e.Handled = true;
+
+                    var source = GetSourceFromChildElement(textBox);
+                    if (source != null && source.IsBeingEdited)
+                    {
+                        source.PagePattern = textBox.Text;
+                        source.IsBeingEdited = false;
+                        sourceController.Save(source);
+                    }
+                }
+                if (e.Key == Key.Escape)
+                {
+                    e.Handled = true;
+                    var source = GetSourceFromChildElement(textBox);
+                    if (source != null && source.IsBeingEdited)
+                    {
+                        source.IsBeingEdited = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("sourcePagePattern_KeyUp", ex);
+            }
+        }
+
+        private IEnumerable<ISource> GetChildrenForDepth(ISource source, int depth)
+        {
+            var results = new List<ISource>();
+
+            if (depth < 1)
+                depth = 1;
+            else if (depth > 3)
+                depth = 3;
+
+            foreach (var child in source.Children)
+            {
+                if (depth == 1)
+                    results.Add(child);
+                else
+                {
+                    foreach (var grandchild in child.Children)
+                    {
+                        if (depth == 2)
+                            results.Add(grandchild);
+                        else
+                        {
+                            foreach (var greatGrandchild in grandchild.Children)
+                            {
+                                results.Add(greatGrandchild);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return results;
+        }
+
+        private void sourceSetChildPatternsButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var button = sender as Button;
+                Grid parent = null;
+                TextBox setContentPatternTextBox = null;
+                TextBox setImagePatternTextBox = null;
+                TextBox setPagePatternTextBox = null;
+                TextBox setDepthTextBox = null;
+
+                if (button == null)
+                    return;
+
+                parent = button.Parent as Grid;
+                if (parent == null)
+                    return;
+
+                foreach (UIElement child in parent.Children)
+                {
+                    var textBox = child as TextBox;
+                    if (textBox != null)
+                    {
+                        if (textBox.Name == "sourceSetContentPattern")
+                            setContentPatternTextBox = textBox;
+                        else if (textBox.Name == "sourceSetImagePattern")
+                            setImagePatternTextBox = textBox;
+                        else if (textBox.Name == "sourceSetPagePattern")
+                            setPagePatternTextBox = textBox;
+                        else if (textBox.Name == "sourceSetDepth")
+                            setDepthTextBox = textBox;
+                    }
+                }
+
+                if (setContentPatternTextBox == null || setImagePatternTextBox == null || setPagePatternTextBox == null || setDepthTextBox == null)
+                    return;
+
+                var source = GetSourceFromChildElement(button);
+                if (source != null)
+                {
+                    var depth = 1;
+                    int.TryParse(setDepthTextBox.Text, out depth);
+                    var children = GetChildrenForDepth(source, depth);
+
+                    foreach (var child in children)
+                    {
+                        try
+                        {
+                            child.ChildPattern = setContentPatternTextBox.Text;
+                            child.ImagePattern = setImagePatternTextBox.Text;
+                            child.PagePattern = setPagePatternTextBox.Text;
+                            sourceController.Save(child);
+                        }
+                        catch (Exception ex)
+                        {
+                            log.Error("sourceSetChildPatternsButton_Click: Failed for child. name=" + child.Name, ex);
+                        }
+                    }
+                }
+
+                MessageBox.Show("Patterns set for child spiders to the indicated depth.", "Child Patterns Set");
+            }
+            catch (Exception ex)
+            {
+                log.Error("sourceSetChildPatternsButton_Click", ex);
             }
         }
 

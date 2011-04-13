@@ -33,8 +33,35 @@ namespace Gnosis.Alexandria.Repositories
                 return (int)SourceType.Directory;
             else if (record is PodcastSource)
                 return (int)SourceType.Podcast;
+            else if (record is SpiderSource)
+                return (int)SourceType.Spider;
             else
                 return (int)SourceType.None;
+        }
+
+        private ISource GetSource(SourceType sourceType, Guid id)
+        {
+            switch (sourceType)
+            {
+                case SourceType.Folder:
+                    return new FolderSource(id);
+                case SourceType.Media:
+                    return new MediaSource(id);
+                case SourceType.Playlist:
+                    return new PlaylistSource(id);
+                case SourceType.PlaylistItem:
+                    return new PlaylistItemSource(id);
+                case SourceType.FileSystem:
+                    return new FileSystemSource(id);
+                case SourceType.Directory:
+                    return new DirectorySource(id);
+                case SourceType.Podcast:
+                    return new PodcastSource(id);
+                case SourceType.Spider:
+                    return new SpiderSource(id);
+                default:
+                    return new ProxySource(id);
+            }
         }
 
         protected override string GetInitializeText()
@@ -53,7 +80,10 @@ namespace Gnosis.Alexandria.Repositories
             sql.AppendLine("  Creator TEXT NOT NULL DEFAULT 'Unknown Creator',");
             sql.AppendLine("  Summary TEXT NOT NULL DEFAULT '',");
             sql.AppendLine("  Number INTEGER NOT NULL DEFAULT 0,");
-            sql.AppendLine("  Date TEXT NOT NULL DEFAULT '2000-01-01T00:00:00'");
+            sql.AppendLine("  Date TEXT NOT NULL DEFAULT '2000-01-01T00:00:00',");
+            sql.AppendLine("  ImagePattern TEXT NOT NULL DEFAULT '',");
+            sql.AppendLine("  ChildPattern TEXT NOT NULL DEFAULT '',");
+            sql.AppendLine("  PagePattern TEXT NOT NULL DEFAULT ''");
             sql.AppendLine(");");
             sql.AppendLine("create index if not exists Source_Type on Source (Type ASC);");
             sql.AppendLine("create index if not exists Source_Path on Source (Path ASC);");
@@ -98,39 +128,15 @@ namespace Gnosis.Alexandria.Repositories
             var summaryIndex = reader.GetOrdinal("Summary");
             var numberIndex = reader.GetOrdinal("Number");
             var dateIndex = reader.GetOrdinal("Date");
+            var imagePatternIndex = reader.GetOrdinal("ImagePattern");
+            var childPatternIndex = reader.GetOrdinal("ChildPattern");
+            var pagePatternIndex = reader.GetOrdinal("PagePattern");
 
             var id = new Guid(reader.GetString(idIndex));
             var type = Convert.ToInt32(reader.GetValue(typeIndex));
             var sourceType = (SourceType)type;
 
-            switch (sourceType)
-            {
-                case SourceType.Folder:
-                    source = new FolderSource(id);
-                    break;
-                case SourceType.Media:
-                    source = new MediaSource(id);
-                    break;
-                case SourceType.Playlist:
-                    source = new PlaylistSource(id);
-                    break;
-                case SourceType.PlaylistItem:
-                    source = new PlaylistItemSource(id);
-                    break;
-                case SourceType.FileSystem:
-                    source = new FileSystemSource(id);
-                    break;
-                case SourceType.Directory:
-                    source = new DirectorySource(id);
-                    break;
-                case SourceType.Podcast:
-                    source = new PodcastSource(id);
-                    break;
-                default:
-                    source = new ProxySource(id);
-                    break;
-            }
-
+            source = GetSource(sourceType, id);
             if (source != null)
             {
                 source.Path = reader.GetString(pathIndex);
@@ -140,6 +146,9 @@ namespace Gnosis.Alexandria.Repositories
                 source.Summary = reader.GetString(summaryIndex);
                 source.Number = Convert.ToInt32(reader.GetValue(numberIndex));
                 source.Date = DateTime.Parse(reader.GetString(dateIndex));
+                source.ImagePattern = reader.GetString(imagePatternIndex);
+                source.ChildPattern = reader.GetString(childPatternIndex);
+                source.PagePattern = reader.GetString(pagePatternIndex);
 
                 if (!reader.IsDBNull(parentIndex))
                 {
@@ -158,8 +167,8 @@ namespace Gnosis.Alexandria.Repositories
             var command = connection.CreateCommand();
 
             var sql = new StringBuilder();
-            sql.AppendLine("insert or replace into Source (Id, Type, Path, ImagePath, Parent, Name, NameHash, NameMetaphone, Creator, Summary, Number, Date)");
-            sql.AppendLine(" values (@Id, @Type, @Path, @ImagePath, @Parent, @Name, @NameHash, @NameMetaphone, @Creator, @Summary, @Number, @Date);");
+            sql.AppendLine("insert or replace into Source (Id, Type, Path, ImagePath, Parent, Name, NameHash, NameMetaphone, Creator, Summary, Number, Date, ImagePattern, ChildPattern, PagePattern)");
+            sql.AppendLine(" values (@Id, @Type, @Path, @ImagePath, @Parent, @Name, @NameHash, @NameMetaphone, @Creator, @Summary, @Number, @Date, @ImagePattern, @ChildPattern, @PagePattern);");
             command.CommandText = sql.ToString();
 
             AddParameter(command, "@Id", record.Id.ToString());
@@ -174,6 +183,9 @@ namespace Gnosis.Alexandria.Repositories
             AddParameter(command, "@Summary", record.Summary);
             AddParameter(command, "@Number", record.Number);
             AddParameter(command, "@Date", record.Date);
+            AddParameter(command, "@ImagePattern", record.ImagePattern);
+            AddParameter(command, "@ChildPattern", record.ChildPattern);
+            AddParameter(command, "@PagePattern", record.PagePattern);
 
             return command;
         }
