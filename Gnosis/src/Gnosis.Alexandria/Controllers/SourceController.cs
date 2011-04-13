@@ -284,10 +284,11 @@ namespace Gnosis.Alexandria.Controllers
                                 var existingChild = source.Children.Where(x => x.Path == childPath).FirstOrDefault();
                                 if (existingChild != null)
                                 {
-                                    if (!string.IsNullOrEmpty(childName) && existingChild.Name != childName)
-                                    {
-                                        Save(existingChild);
-                                    }
+                                    //TODO: Decide whether or not we want to ever update existing items
+                                    //if (!string.IsNullOrEmpty(childName) && existingChild.Name != childName)
+                                    //{
+                                        //Save(existingChild);
+                                    //}
                                 }
                                 else
                                 {

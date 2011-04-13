@@ -342,12 +342,13 @@ namespace Gnosis.Alexandria.Controllers
             return new Track() { Path = source.Path, ImagePath = source.ImagePath, Title = source.Name, Artist = source.Creator, Album = album, Comment = source.Summary };
         }
 
-        private void LoadPlaylistItem(PlaylistItemSource source)
+        private void LoadSource(ISource source)
         {
             var track = Search(new Dictionary<string, object> { { "Path", source.Path } }).FirstOrDefault();
             if (track == null)
             {
-                if (System.IO.File.Exists(source.Path))
+                var uri = new Uri(source.Path);
+                if (uri.IsFile && System.IO.File.Exists(source.Path))
                 {
                     track = ReadFromTag(source.Path);
                     tagController.LoadPicture(track);
@@ -367,15 +368,11 @@ namespace Gnosis.Alexandria.Controllers
 
             try
             {
-                //TODO: Refactor to avoid examining the type
-                if (source is PlaylistItemSource)
-                {
-                    LoadPlaylistItem(source as PlaylistItemSource);
-                }
+                LoadSource(source);
             }
             catch (Exception ex)
             {
-                log.Error("TrackController.Load: Could not load playlist item source as track", ex);
+                log.Error("TrackController.Load: Could not load source as track", ex);
             }
 
             foreach (var item in source.Children)

@@ -94,10 +94,6 @@ namespace Gnosis.Alexandria.Views
                     source.ImageData = file.Tag.Pictures[0].Data;
                 }
             }
-            else
-            {
-                log.Warn("SourceView.LoadPicture: Cannot load pictures for remote media. path=" + source.Path);
-            }
         }
 
         private ISource GetSelectedSource()
