@@ -219,9 +219,8 @@ namespace Gnosis.Alexandria.Controllers
                         }
                     }
 
-                    currentTrack.DurationLabel = string.Format("{0}:{1:00}", player.CurrentAudioStream.Duration.Minutes, player.Duration.Seconds);
-
-                    currentTrack.ElapsedLabel = string.Format("{0}:{1:00}", player.Elapsed.Minutes, player.Elapsed.Seconds);
+                    currentTrack.DurationLabel = player.Duration.ToFormattedString();
+                    currentTrack.ElapsedLabel = player.Elapsed.ToFormattedString();
 
                     isAboutToPlay = true;
 
