@@ -309,6 +309,7 @@ namespace Gnosis.Alexandria.Models
                     OnPropertyChanged("IsBeingEdited");
                     OnPropertyChanged("DisplayVisibility");
                     OnPropertyChanged("EditVisibility");
+                    OnPropertyChanged("PatternVisibility");
                 }
             }
         }

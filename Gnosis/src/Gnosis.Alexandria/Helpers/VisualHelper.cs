@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Controls.Primitives;
 
 namespace Gnosis.Alexandria.Helpers
 {
@@ -52,6 +53,10 @@ namespace Gnosis.Alexandria.Helpers
                 var item = element as TreeViewItem;
                 if (item != null)
                     return item;
+
+                var popup = element as Popup;
+                if (popup != null && popup.PlacementTarget != null)
+                    return FindContainingTreeViewItem(popup.PlacementTarget);
 
                 var parent = VisualTreeHelper.GetParent(element) as UIElement;
                 if (parent != null)

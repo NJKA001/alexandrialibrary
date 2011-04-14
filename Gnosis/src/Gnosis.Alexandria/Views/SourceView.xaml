@@ -55,56 +55,58 @@
                         <StackPanel Orientation="Horizontal">
                             <Image x:Name="SourceImage" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" AllowDrop="True" Width="24" Height="24"></Image>
                             <TextBlock Name="sourceNameTextBlock" Grid.Column="0" Grid.Row="0" Text="{Binding Name}" Visibility="{Binding DisplayVisibility}"/>
-                            <Grid Visibility="{Binding EditVisibility}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="90"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Name" FontSize="10" Foreground="Gray"/>
-                                <TextBox Name="sourceNameTextBox" Grid.Column="1" Grid.Row="0" Text="{Binding Name, Mode=TwoWay}" KeyUp="sourceNameTextBox_KeyUp" />
+                            <Popup IsOpen="{Binding IsBeingEdited}" PlacementTarget="{Binding ElementName=sourceNameTextBlock}" Placement="Right" Tag="{Binding ElementName=sourceNameTextBlock}">
+                                <Grid Visibility="{Binding EditVisibility}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="90"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Name" FontSize="10" Background="LightGray" Foreground="DarkBlue"/>
+                                    <TextBox Name="sourceNameTextBox" Grid.Column="1" Grid.Row="0" Text="{Binding Name, Mode=TwoWay}" KeyUp="sourceNameTextBox_KeyUp" />
 
-                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Path" FontSize="10" Foreground="Gray"/>
-                                <TextBox Name="sourcePathTextBox" Grid.Column="1" Grid.Row="1" Text="{Binding Path}" KeyUp="sourcePathTextBox_KeyUp" />
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Path" FontSize="10" Background="LightGray" Foreground="DarkBlue"/>
+                                    <TextBox Name="sourcePathTextBox" Grid.Column="1" Grid.Row="1" Text="{Binding Path}" KeyUp="sourcePathTextBox_KeyUp" />
 
-                                <TextBlock Grid.Column="0" Grid.Row="2" Text="Image Path" FontSize="10" Foreground="Gray"/>
-                                <TextBox Name="sourceImagePath" Grid.Column="1" Grid.Row="2" Text="{Binding ImagePath}" KeyUp="sourceImagePath_KeyUp"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="Image Path" FontSize="10" Background="LightGray" Foreground="DarkBlue"/>
+                                    <TextBox Name="sourceImagePath" Grid.Column="1" Grid.Row="2" Text="{Binding ImagePath}" KeyUp="sourceImagePath_KeyUp"/>
 
-                                <TextBlock Grid.Column="0" Grid.Row="3" Text="Image Pattern" FontSize="10" Foreground="Gray" Visibility="{Binding PatternVisibility}"/>
-                                <TextBox Name="sourceImagePattern" Grid.Column="1" Grid.Row="3" Text="{Binding ImagePattern}" Visibility="{Binding PatternVisibility}" KeyUp="sourceImagePattern_KeyUp"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="3" Text="Image Pattern" FontSize="10" Background="LightGray" Foreground="DarkBlue" Visibility="{Binding PatternVisibility}"/>
+                                    <TextBox Name="sourceImagePattern" Grid.Column="1" Grid.Row="3" Text="{Binding ImagePattern}" Visibility="{Binding PatternVisibility}" KeyUp="sourceImagePattern_KeyUp"/>
 
-                                <TextBlock Grid.Column="0" Grid.Row="4" Text="Child Pattern" FontSize="10" Foreground="Gray" Visibility="{Binding PatternVisibility}"/>
-                                <TextBox Name="sourceChildPattern" Grid.Column="1" Grid.Row="4" Text="{Binding ChildPattern}" Visibility="{Binding PatternVisibility}" KeyUp="sourceChildPattern_KeyUp"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="4" Text="Child Pattern" FontSize="10" Background="LightGray" Foreground="DarkBlue" Visibility="{Binding PatternVisibility}"/>
+                                    <TextBox Name="sourceChildPattern" Grid.Column="1" Grid.Row="4" Text="{Binding ChildPattern}" Visibility="{Binding PatternVisibility}" KeyUp="sourceChildPattern_KeyUp"/>
 
-                                <TextBlock Grid.Column="0" Grid.Row="5" Text="Page Pattern" FontSize="10" Foreground="Gray" Visibility="{Binding PatternVisibility}"/>
-                                <TextBox Name="sourcePagePattern" Grid.Column="1" Grid.Row="5" Text="{Binding PagePattern}" Visibility="{Binding PatternVisibility}" KeyUp="sourcePagePattern_KeyUp"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="5" Text="Page Pattern" FontSize="10" Background="LightGray" Foreground="DarkBlue" Visibility="{Binding PatternVisibility}"/>
+                                    <TextBox Name="sourcePagePattern" Grid.Column="1" Grid.Row="5" Text="{Binding PagePattern}" Visibility="{Binding PatternVisibility}" KeyUp="sourcePagePattern_KeyUp"/>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="6" Text="Set Content Pattern" FontSize="10" Background="LightGray" Foreground="DarkBlue" Visibility="{Binding PatternVisibility}"/>
+                                    <TextBox Name="sourceSetContentPattern" Grid.Column="1" Grid.Row="6" Visibility="{Binding PatternVisibility}"/>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="7" Text="Set Image Pattern" FontSize="10" Background="LightGray" Foreground="DarkBlue" Visibility="{Binding PatternVisibility}"/>
+                                    <TextBox Name="sourceSetImagePattern" Grid.Column="1" Grid.Row="7" Visibility="{Binding PatternVisibility}"/>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="8" Text="Set Page Pattern" FontSize="10" Background="LightGray" Foreground="DarkBlue" Visibility="{Binding PatternVisibility}"/>
+                                    <TextBox Name="sourceSetPagePattern" Grid.Column="1" Grid.Row="8" Visibility="{Binding PatternVisibility}"/>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="9" Text="Set Depth" FontSize="10" Background="LightGray" Foreground="DarkBlue" Visibility="{Binding PatternVisibility}"/>
+                                    <TextBox Name="sourceSetDepth" Grid.Column="1" Grid.Row="9" Visibility="{Binding PatternVisibility}"/>
                                 
-                                <TextBlock Grid.Column="0" Grid.Row="6" Text="Set Content Pattern" FontSize="10" Foreground="Gray" Visibility="{Binding PatternVisibility}"/>
-                                <TextBox Name="sourceSetContentPattern" Grid.Column="1" Grid.Row="6" Visibility="{Binding PatternVisibility}"/>
-
-                                <TextBlock Grid.Column="0" Grid.Row="7" Text="Set Image Pattern" FontSize="10" Foreground="Gray" Visibility="{Binding PatternVisibility}"/>
-                                <TextBox Name="sourceSetImagePattern" Grid.Column="1" Grid.Row="7" Visibility="{Binding PatternVisibility}"/>
-
-                                <TextBlock Grid.Column="0" Grid.Row="8" Text="Set Page Pattern" FontSize="10" Foreground="Gray" Visibility="{Binding PatternVisibility}"/>
-                                <TextBox Name="sourceSetPagePattern" Grid.Column="1" Grid.Row="8" Visibility="{Binding PatternVisibility}"/>
-
-                                <TextBlock Grid.Column="0" Grid.Row="9" Text="Set Depth" FontSize="10" Foreground="Gray" Visibility="{Binding PatternVisibility}"/>
-                                <TextBox Name="sourceSetDepth" Grid.Column="1" Grid.Row="9" Visibility="{Binding PatternVisibility}"/>
-                                
-                                <Button Name="sourceSetChildPatternsButton" Grid.Column="0" Grid.Row="10" Visibility="{Binding PatternVisibility}" Click="sourceSetChildPatternsButton_Click">Set Child Patterns</Button>
-                            </Grid>
+                                    <Button Name="sourceSetChildPatternsButton" Grid.Column="0" Grid.Row="10" Visibility="{Binding PatternVisibility}" Click="sourceSetChildPatternsButton_Click">Set Child Patterns</Button>
+                                </Grid>
+                            </Popup>
                         </StackPanel>
                     </Border>
                 </HierarchicalDataTemplate>

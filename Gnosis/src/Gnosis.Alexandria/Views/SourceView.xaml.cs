@@ -531,6 +531,18 @@ namespace Gnosis.Alexandria.Views
             else return null;
         }
 
+        private void RevertChanges(ISource source)
+        {
+            var original = sourceController.Get(source.Id);
+            if (original != null)
+            {
+                source.Name = original.Name;
+                source.Path = original.Path;
+                source.ImagePath = original.ImagePath;
+            }
+            source.IsBeingEdited = false;
+        }
+
         private void sourceNameTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             try
@@ -539,7 +551,7 @@ namespace Gnosis.Alexandria.Views
                 if (e.Key == Key.Enter || e.Key == Key.Return)
                 {
                     e.Handled = true;
-                    var source = GetSourceFromChildElement(textBox);
+                    var source = textBox.DataContext as ISource; //GetSourceFromChildElement(textBox);
                     if (source != null && source.IsBeingEdited)
                     {
                         source.Name = textBox.Text;
@@ -550,10 +562,10 @@ namespace Gnosis.Alexandria.Views
                 if (e.Key == Key.Escape)
                 {
                     e.Handled = true;
-                    var source = GetSourceFromChildElement(textBox);
+                    var source = textBox.DataContext as ISource; //GetSourceFromChildElement(textBox);
                     if (source != null && source.IsBeingEdited)
                     {
-                        source.IsBeingEdited = false;
+                        RevertChanges(source);
                     }
                 }
             }
