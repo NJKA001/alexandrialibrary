@@ -209,9 +209,10 @@ namespace Gnosis.Alexandria.Controllers
                         }
                         else
                         {
-                            if (currentUri != streamUri)
+                            var playbackUri = GetPlaybackUri(trackUri);
+                            if (playbackUri != streamUri) //currentUri != streamUri)
                             {
-                                var playbackUri = GetPlaybackUri(trackUri);
+                                //var playbackUri = GetPlaybackUri(trackUri);
                                 CacheForPlayback(trackUri, playbackUri);
                                 player.Stop();
                                 player.LoadAudioStream(playbackUri);

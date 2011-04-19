@@ -44,13 +44,22 @@ namespace Gnosis.Alexandria.Views
                     dialog.Filter = "Image Files (*.jpg,*.jpeg,*.png,*.gif)|*.jpg;*.jpeg;*.png;*.gif|All Files (*.*)|*.*";
                     if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
-                        tagController.AddPicture(track, dialog.FileName);
+                        if (track.Path.EndsWith(".mp3"))
+                        {
+                            tagController.AddPicture(track, dialog.FileName);
+                        }
+                        else
+                        {
+                            track.ImagePath = dialog.FileName;
+                            trackController.Save(track);
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                var message = ex.Message;
+                log.Error("MediaPropertyView.ChangePictureButton_Click", ex);
+                MessageBox.Show("There was an error trying to add a picture to this track.\n\n" + ex.Message, "Could Not Add Picture To Track");
             }
         }
 

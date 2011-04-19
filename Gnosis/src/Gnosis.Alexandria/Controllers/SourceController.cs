@@ -110,7 +110,26 @@ namespace Gnosis.Alexandria.Controllers
                         }
                         catch (Exception ex)
                         {
-                            log.Error("SourceController.LoadDirectories: Could not load file path=" + file.FullName, ex);
+                            log.Error("SourceController.LoadDirectories: Could not load MP3 file. path=" + file.FullName, ex);
+                        }
+                    }
+                    foreach (var file in directory.GetFiles("*.wav"))
+                    {
+                        try
+                        {
+                            var track = trackController.Search(new Dictionary<string, object> { { "Path", file.FullName } }).FirstOrDefault();
+                            if (track == null)
+                            {
+                                track = new Track { Path = file.FullName, Title = file.Name };
+                                trackController.Save(track);
+                            }
+
+                            var item = GetPlaylistItem(source, track);
+                            source.AddChild(item);
+                        }
+                        catch (Exception ex)
+                        {
+                            log.Error("SourceController.LoadDirectories: Could not load WAV file. path=" + file.FullName, ex);
                         }
                     }
                 }
