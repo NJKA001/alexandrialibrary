@@ -428,6 +428,14 @@ namespace Gnosis.Alexandria.Views
                             sourceController.LoadSpider(source, this);
                         }
 
+                        if (source is DeviceCatalogSource)
+                        {
+                            if (source.Children.Count() == 1 && source.Children.FirstOrDefault() is ProxySource)
+                            {
+                                sourceController.LoadDevices(source, this);
+                            }
+                        }
+
                         foreach (var child in source.Children)
                         {
                             var playlistItem = child as PlaylistItemSource;
@@ -852,6 +860,8 @@ namespace Gnosis.Alexandria.Views
             this.tagController = tagController;
 
             treeView.ItemsSource = boundSources;
+
+            boundSources.Add(new DeviceCatalogSource { Name = "Devices" });
 
             var sources = sourceController.Search(new Dictionary<string, object> { { "Parent", null } });
             if (sources != null && sources.Count() > 0)

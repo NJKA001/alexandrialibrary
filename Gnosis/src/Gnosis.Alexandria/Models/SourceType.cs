@@ -15,6 +15,9 @@ namespace Gnosis.Alexandria.Models
         FileSystem = 5,
         Directory = 6,
         Podcast = 7,
-        Spider = 8
+        Spider = 8,
+        DeviceCatalog = 9,
+        HardDisk = 10,
+        OpticalDisc = 11
     }
 }

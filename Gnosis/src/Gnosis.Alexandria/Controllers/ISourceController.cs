@@ -15,5 +15,6 @@ namespace Gnosis.Alexandria.Controllers
         void LoadDirectories(ISource source);
         void LoadPodcast(ISource source, DependencyObject handle);
         void LoadSpider(ISource source, DependencyObject handle);
+        void LoadDevices(ISource source, DependencyObject handle);
     }
 }

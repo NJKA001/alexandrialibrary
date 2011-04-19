@@ -14,6 +14,7 @@ using Gnosis.Alexandria.Repositories;
 using System.Net;
 using Gnosis.Alexandria.Helpers;
 using System.Windows;
+using System.Runtime.InteropServices;
 
 namespace Gnosis.Alexandria.Controllers
 {
@@ -344,6 +345,74 @@ namespace Gnosis.Alexandria.Controllers
             }
         }
 
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
+        public static extern int GetDriveType(string lpRootPathName);
+
+        private enum DriveType
+        {
+            Unknown = 0,
+            NoRoot = 1,
+            Removable = 2,
+            Localdisk = 3,
+            Network = 4,
+            CD = 5,
+            RAMDrive = 6
+        }
+
+        private void LoadDevicesStarted(object sender, DoWorkEventArgs args)
+        {
+            try
+            {
+                log.Info("LoadDevicesStarted");
+                var request = args.Argument as LoadSourceRequest;
+                if (request == null)
+                {
+                    log.Warn("LoadDevicesStarted: request is null");
+                    return;
+                }
+
+                var source = request.Source;
+
+                if (source != null)
+                {
+                    foreach (var drive in System.Environment.GetLogicalDrives())
+                    {
+                        switch (GetDriveType(drive))
+                        {
+                            case (int)DriveType.Localdisk:
+                                request.Invoke(() => source.AddChild(new HardDiskSource { Name = drive, Parent = source }));
+                                break;
+                            case (int)DriveType.CD:
+                                request.Invoke(() => source.AddChild(new OpticalDiscSource { Name = drive, Parent = source }));
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("LoadDevicesStarted", ex);
+            }
+        }
+
+        private void LoadDevicesCompleted(object sender, RunWorkerCompletedEventArgs args)
+        {
+            if (args.Result is Exception)
+            {
+                //Load failed
+            }
+            else if (args.Cancelled)
+            {
+                //Load cancelled
+            }
+            else
+            {
+                log.Debug("LoadDevicesCompleted");
+            }
+        }
+
         public void LoadPodcast(ISource source, DependencyObject handle)
         {
             var worker = new BackgroundWorker();
@@ -357,6 +426,14 @@ namespace Gnosis.Alexandria.Controllers
             var worker = new BackgroundWorker();
             worker.DoWork += LoadSpiderStarted;
             worker.RunWorkerCompleted += LoadSpiderCompleted;
+            worker.RunWorkerAsync(new LoadSourceRequest(handle) { Source = source });
+        }
+
+        public void LoadDevices(ISource source, DependencyObject handle)
+        {
+            var worker = new BackgroundWorker();
+            worker.DoWork += LoadDevicesStarted;
+            worker.RunWorkerCompleted += LoadDevicesCompleted;
             worker.RunWorkerAsync(new LoadSourceRequest(handle) { Source = source });
         }
     }

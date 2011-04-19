@@ -35,6 +35,12 @@ namespace Gnosis.Alexandria.Repositories
                 return (int)SourceType.Podcast;
             else if (record is SpiderSource)
                 return (int)SourceType.Spider;
+            else if (record is DeviceCatalogSource)
+                return (int)SourceType.DeviceCatalog;
+            else if (record is HardDiskSource)
+                return (int)SourceType.HardDisk;
+            else if (record is OpticalDiscSource)
+                return (int)SourceType.OpticalDisc;
             else
                 return (int)SourceType.None;
         }
@@ -59,6 +65,12 @@ namespace Gnosis.Alexandria.Repositories
                     return new PodcastSource(id);
                 case SourceType.Spider:
                     return new SpiderSource(id);
+                case SourceType.DeviceCatalog:
+                    return new DeviceCatalogSource(id);
+                case SourceType.HardDisk:
+                    return new HardDiskSource(id);
+                case SourceType.OpticalDisc:
+                    return new OpticalDiscSource(id);
                 default:
                     return new ProxySource(id);
             }
