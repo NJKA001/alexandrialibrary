@@ -11,15 +11,17 @@
     <Window.CommandBindings>
         <CommandBinding Command="BrowseBack" Executed="backCommand_Executed" CanExecute="command_CanExecute"/>
         <CommandBinding Command="MediaCommands.Play" Executed="playCommand_Executed" CanExecute="command_CanExecute"/>
+        <CommandBinding Command="MediaCommands.Pause" Executed="pauseCommand_Executed" CanExecute="pauseCommand_CanExecute"/>
         <CommandBinding Command="BrowseForward" Executed="forwardCommand_Executed" CanExecute="command_CanExecute"/>
     </Window.CommandBindings>
     <Window.TaskbarItemInfo>
-        <TaskbarItemInfo Description="Media Controls">
+        <TaskbarItemInfo x:Name="taskbarItemInfo" Description="Media Controls">
             <TaskbarItemInfo.ThumbButtonInfos>
                 <ThumbButtonInfoCollection>
-                    <ThumbButtonInfo Description="Back" DismissWhenClicked="False" Command="BrowseBack" ImageSource="pack://application:,,,/Images/back.png" />
-                    <ThumbButtonInfo Description="Play" DismissWhenClicked="False" Command="MediaCommands.Play" ImageSource="pack://application:,,,/Images/play.png"/>
-                    <ThumbButtonInfo Description="Forward" DismissWhenClicked="False" Command="BrowseForward" ImageSource="pack://application:,,,/Images/forward.png" />
+                    <ThumbButtonInfo x:Name="backThumbnailButton" Description="Back" DismissWhenClicked="False" Command="BrowseBack" ImageSource="pack://application:,,,/Images/back_thumbnail.png" CommandTarget="{Binding ElementName=backButton}" />
+                    <ThumbButtonInfo x:Name="playThumbnailButton" Description="Play" DismissWhenClicked="False" Command="MediaCommands.Play" ImageSource="pack://application:,,,/Images/play_thumbnail.png" CommandTarget="{Binding ElementName=playButton}"/>
+                    <ThumbButtonInfo x:Name="pauseThumbnailButton" Description="Pause" DismissWhenClicked="False" Command="MediaCommands.Pause" ImageSource="pack://application:,,,/Images/pause_thumbnail.png" CommandTarget="{Binding ElementName=pauseButton}"/>
+                    <ThumbButtonInfo x:Name="forwardThumbnailButton" Description="Forward" DismissWhenClicked="False" Command="BrowseForward" ImageSource="pack://application:,,,/Images/forward_thumbnail.png" CommandTarget="{Binding ElementName=forwardButton}"/>
                 </ThumbButtonInfoCollection>
             </TaskbarItemInfo.ThumbButtonInfos>
         </TaskbarItemInfo>
@@ -54,5 +56,11 @@
                 <views:MediaListView Grid.Row="1" x:Name="mediaListView"/>
             </Grid>
         </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Visibility="Collapsed">
+            <Button Name="backButton" Command="BrowseBack"/>
+            <Button Name="playButton" Command="MediaCommands.Play"/>
+            <Button Name="pauseButton" Command="MediaCommands.Pause"/>
+            <Button Name="forwardButton" Command="BrowseForward"/>
+        </StackPanel>
     </Grid>
 </Window>

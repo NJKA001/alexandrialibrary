@@ -14,6 +14,9 @@ namespace Gnosis.Alexandria.Controllers
         TimeSpan CurrentElapsed { get; }
         IPlaybackStatus Status { get; }
 
+        EventHandler<EventArgs> CurrentTrackPlayed { get; set; }
+        EventHandler<EventArgs> CurrentTrackPaused { get; set; }
+        EventHandler<EventArgs> CurrentTrackStopped { get; set; }
         EventHandler<EventArgs> CurrentTrackEnded { get; set; }
 
         void BeginSeek();

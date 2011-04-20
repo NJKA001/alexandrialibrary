@@ -39,6 +39,24 @@ namespace Gnosis.Alexandria.Controllers
         private bool hasSeek = false;
         private string playbackCachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), "Alexandria", "Cache", "Playback");
 
+        private void DoCurrentTrackPlayed()
+        {
+            if (CurrentTrackPlayed != null)
+                CurrentTrackPlayed(this, EventArgs.Empty);
+        }
+
+        private void DoCurrentTrackPaused()
+        {
+            if (CurrentTrackPaused != null)
+                CurrentTrackPaused(this, EventArgs.Empty);
+        }
+
+        private void DoCurrentTrackStopped()
+        {
+            if (CurrentTrackStopped != null)
+                CurrentTrackStopped(this, EventArgs.Empty);
+        }
+
         private void DoCurrentTrackEnded()
         {
             if (CurrentTrackEnded != null)
@@ -115,6 +133,9 @@ namespace Gnosis.Alexandria.Controllers
             get { return playbackStatus; }
         }
 
+        public EventHandler<EventArgs> CurrentTrackPlayed { get; set; }
+        public EventHandler<EventArgs> CurrentTrackPaused { get; set; }
+        public EventHandler<EventArgs> CurrentTrackStopped { get; set; }
         public EventHandler<EventArgs> CurrentTrackEnded { get; set; }
 
         public void BeginSeek()
@@ -155,6 +176,27 @@ namespace Gnosis.Alexandria.Controllers
             catch (Exception ex)
             {
                 log.Error("PlaybackController.CacheForPlayback", ex);
+            }
+        }
+
+        private void SendPlaybackStateNotification()
+        {
+            if (player != null && player.CurrentAudioStream != null)
+            {
+                switch (player.CurrentAudioStream.PlaybackState)
+                {
+                    case PlaybackState.Paused:
+                        DoCurrentTrackPaused();
+                        break;
+                    case PlaybackState.Playing:
+                        DoCurrentTrackPlayed();
+                        break;
+                    case PlaybackState.Stopped:
+                        DoCurrentTrackStopped();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -234,6 +276,8 @@ namespace Gnosis.Alexandria.Controllers
 
                     player.Play();
 
+                    SendPlaybackStateNotification();
+
                     if (!startAtZero)
                     {
                         var clip = currentTrack.Clips.FirstOrDefault();
@@ -287,6 +331,7 @@ namespace Gnosis.Alexandria.Controllers
             if (player != null)
             {
                 player.Stop();
+                SendPlaybackStateNotification();
             }
         }
     }

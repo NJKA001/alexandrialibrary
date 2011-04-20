@@ -704,6 +704,9 @@
     <Resource Include="Images\trash_full.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\pause_thumbnail.png" />
+    <Resource Include="Images\forward_thumbnail.png" />
+    <Resource Include="Images\play_thumbnail.png" />
     <Resource Include="Images\gear.png" />
     <Resource Include="Images\spider.png" />
     <Resource Include="Images\Delete.png" />
@@ -891,6 +894,7 @@
     <Resource Include="Images\Countries\medium\hungary.png" />
     <Resource Include="Images\Countries\medium\iceland.png" />
     <Resource Include="Images\cd.png" />
+    <Resource Include="Images\back_thumbnail.png" />
     <Content Include="Images\Countries\medium\index.htm" />
     <Resource Include="Images\Countries\medium\india.png" />
     <Resource Include="Images\Countries\medium\indonesia.png" />

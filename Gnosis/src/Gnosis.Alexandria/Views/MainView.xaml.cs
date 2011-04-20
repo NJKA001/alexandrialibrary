@@ -54,10 +54,11 @@ namespace Gnosis.Alexandria.Views
                 mediaPropertyView.Initialize(trackController, tagController);
                 mediaListView.Initialize(trackController, tagController, playbackView, mediaPropertyView);
 
-                sourceView.SourceLoaded += new EventHandler<SourceLoadedEventArgs>(SourceLoaded);
-                playbackController.CurrentTrackEnded += CurrentTrackEnded;
-
-                //thumbnailPlayButton.ImageSource = playbackController.Status.ImagePath;
+                sourceView.SourceLoaded += sourceLoaded;
+                playbackController.CurrentTrackPlayed += currentTrackPlayed;
+                playbackController.CurrentTrackPaused += currentTrackPaused;
+                playbackController.CurrentTrackStopped += currentTrackStopped;
+                playbackController.CurrentTrackEnded += currentTrackEnded;
             }
             catch (Exception ex)
             {
@@ -73,12 +74,38 @@ namespace Gnosis.Alexandria.Views
         private readonly ISourceController sourceController;
         private readonly IPlaybackController playbackController;
 
-        private void CurrentTrackEnded(object sender, EventArgs args)
+        private string GetTitle()
+        {
+            return "Alexandria" +
+                ((playbackController != null && playbackController.CurrentTrack != null) ?
+                " - " + playbackController.CurrentTrack.Title : string.Empty);
+        }
+
+        private void currentTrackPlayed(object sender, EventArgs args)
+        {
+            Title = GetTitle();
+            playThumbnailButton.IsEnabled = false;
+            pauseThumbnailButton.IsEnabled = true;
+        }
+
+        private void currentTrackPaused(object sender, EventArgs args)
+        {
+            playThumbnailButton.IsEnabled = true;
+            pauseThumbnailButton.IsEnabled = false;
+        }
+
+        private void currentTrackStopped(object sender, EventArgs args)
+        {
+            playThumbnailButton.IsEnabled = true;
+            pauseThumbnailButton.IsEnabled = false;
+        }
+
+        private void currentTrackEnded(object sender, EventArgs args)
         {
             playbackView.PlayNextTrack();
         }
 
-        private void SourceLoaded(object sender, SourceLoadedEventArgs args)
+        private void sourceLoaded(object sender, SourceLoadedEventArgs args)
         {
             try
             {
@@ -115,6 +142,11 @@ namespace Gnosis.Alexandria.Views
             playbackView.PlayCurrentTrack();
         }
 
+        private void pauseCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            playbackView.PlayCurrentTrack();
+        }
+
         private void forwardCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             playbackView.PlayNextTrack();
@@ -122,7 +154,12 @@ namespace Gnosis.Alexandria.Views
 
         private void command_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = playbackController.CurrentTrack != null;
+            e.CanExecute = (playbackController != null && playbackController.CurrentTrack != null);
+        }
+
+        private void pauseCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = (playbackController != null && playbackController.CurrentTrack != null);
         }
     }
 }
