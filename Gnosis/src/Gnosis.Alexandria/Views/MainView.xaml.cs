@@ -56,6 +56,8 @@ namespace Gnosis.Alexandria.Views
 
                 sourceView.SourceLoaded += new EventHandler<SourceLoadedEventArgs>(SourceLoaded);
                 playbackController.CurrentTrackEnded += CurrentTrackEnded;
+
+                //thumbnailPlayButton.ImageSource = playbackController.Status.ImagePath;
             }
             catch (Exception ex)
             {
@@ -101,6 +103,26 @@ namespace Gnosis.Alexandria.Views
             {
                 log.Error("MainWindow.SourceLoaded", ex);
             }
+        }
+
+        private void backCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            playbackView.PlayPreviousTrack();
+        }
+
+        private void playCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            playbackView.PlayCurrentTrack();
+        }
+
+        private void forwardCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            playbackView.PlayNextTrack();
+        }
+
+        private void command_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = playbackController.CurrentTrack != null;
         }
     }
 }

@@ -8,6 +8,22 @@
     <Window.Resources>
         <converters:ImageSourceConverter x:Key="imageConverter" />
     </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="BrowseBack" Executed="backCommand_Executed" CanExecute="command_CanExecute"/>
+        <CommandBinding Command="MediaCommands.Play" Executed="playCommand_Executed" CanExecute="command_CanExecute"/>
+        <CommandBinding Command="BrowseForward" Executed="forwardCommand_Executed" CanExecute="command_CanExecute"/>
+    </Window.CommandBindings>
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo Description="Media Controls">
+            <TaskbarItemInfo.ThumbButtonInfos>
+                <ThumbButtonInfoCollection>
+                    <ThumbButtonInfo Description="Back" DismissWhenClicked="False" Command="BrowseBack" ImageSource="pack://application:,,,/Images/back.png" />
+                    <ThumbButtonInfo Description="Play" DismissWhenClicked="False" Command="MediaCommands.Play" ImageSource="pack://application:,,,/Images/play.png"/>
+                    <ThumbButtonInfo Description="Forward" DismissWhenClicked="False" Command="BrowseForward" ImageSource="pack://application:,,,/Images/forward.png" />
+                </ThumbButtonInfoCollection>
+            </TaskbarItemInfo.ThumbButtonInfos>
+        </TaskbarItemInfo>
+    </Window.TaskbarItemInfo>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="68"/>
