@@ -40,6 +40,8 @@ namespace Gnosis.Alexandria.Views
         private ITrackController trackController;
         private ITagController tagController;
         private readonly ObservableCollection<ISource> boundSources = new ObservableCollection<ISource>();
+        private Point dragStart;
+        private bool isDragging;
 
         #region Private Methods
 
@@ -62,7 +64,7 @@ namespace Gnosis.Alexandria.Views
             var element = e.OriginalSource as UIElement;
             if (element != null)
             {
-                var item = VisualHelper.FindContainingTreeViewItem(element);
+                var item = element.FindContainingTreeViewItem();
                 if (item != null)
                 {
                     return item.Header as ISource;
@@ -383,15 +385,20 @@ namespace Gnosis.Alexandria.Views
         {
             try
             {
+                dragStart = e.GetPosition(null);
+
                 var result = VisualTreeHelper.HitTest(treeView, e.GetPosition(treeView));
                 if (result != null)
                 {
                     var element = result.VisualHit as UIElement;
-                    var item = VisualHelper.FindContainingTreeViewItem(element);
+                    if (element == null)
+                        return;
+
+                    var item = element.FindContainingTreeViewItem();
                     if (item == null)
                     {
                         //The user clicked on the scrollbar or some other chrome element - we don't want to deselect anything
-                        if (element != null && element.IsWindowChrome())
+                        if (element != null && (element.IsWindowChrome()))
                             return;
 
                         foreach (var source in boundSources)
@@ -409,20 +416,98 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
+        private void startDragDrop(MouseEventArgs e)
+        {
+            try
+            {
+                isDragging = true;
+
+                var source = GetSelectedSource();
+                if (source != null)
+                {
+                    var data = new DataObject("Source", source);
+                    DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("SourceView.startDragDrop", ex);
+            }
+            finally
+            {
+                isDragging = false;
+            }
+        }
+
+        private void sourceView_PreviewMouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed && !isDragging && !this.HasMouseOverScrollbar())
+            {
+                Point position = e.GetPosition(null);
+
+                if (Math.Abs(position.X - dragStart.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                    Math.Abs(position.Y - dragStart.Y) > SystemParameters.MinimumVerticalDragDistance)
+                {
+                    log.Debug("sourceView_PreviewMouseMove: Moved minimum drag distance");
+                    startDragDrop(e);
+                }
+            }
+        }
+
         private void SourceView_DragEnter(object sender, DragEventArgs e)
         {
-            if (!e.Data.GetDataPresent("Track"))
+            if (e.Data.GetDataPresent("Source"))
             {
-                e.Effects = DragDropEffects.None;
+                var target = GetSourceDropTarget(e);
+                var source = e.Data.GetData("Source") as ISource;
+                if (!TargetIsValidForSource(source, target))
+                {
+                    e.Effects = DragDropEffects.None;
+                }
+                else
+                {
+                    e.Effects = DragDropEffects.Move;
+                }
+                return;
             }
-            else
+            if (e.Data.GetDataPresent("Track"))
             {
                 var playlist = GetSourceDropTarget(e) as PlaylistSource;
                 if (playlist == null)
                 {
                     e.Effects = DragDropEffects.None;
                 }
+                else
+                {
+                    e.Effects = DragDropEffects.Copy;
+                }
+                return;
             }
+
+            e.Effects = DragDropEffects.None;
+        }
+
+        private bool TargetIsValidForSource(ISource source, ISource target)
+        {
+            if (source == null || target == null)
+                return false;
+
+            if (source == target)
+                return false;
+
+            if (source.Parent != null)
+            {
+                if (source.Parent is PodcastSource)
+                    return false;
+
+                if (source.Parent is SpiderSource)
+                    return false;
+
+                if (source.Parent == target.Parent)
+                    return false;
+            }
+
+            return true;
         }
 
         private void SourceView_Drop(object sender, DragEventArgs e)
@@ -436,6 +521,30 @@ namespace Gnosis.Alexandria.Views
                     if (playlist != null)
                     {
                         AddPlaylistItem(playlist, track);
+                    }
+                }
+                var source = e.Data.GetData("Source") as ISource;
+                if (source != null)
+                {
+                    var target = GetSourceDropTarget(e) as ISource;
+                    if (TargetIsValidForSource(source, target))
+                    {
+                        var previousParent = source.Parent;
+                        source.Parent = target;
+                        sourceController.Save(source);
+
+                        if (previousParent != null)
+                        {
+                            previousParent.RemoveChild(source);
+                        }
+                        else
+                        {
+                            if (boundSources.Contains(source))
+                                boundSources.Remove(source);
+                        }
+
+                        target.AddChild(source);
+                        target.IsExpanded = true;
                     }
                 }
             }
@@ -583,7 +692,7 @@ namespace Gnosis.Alexandria.Views
 
         private ISource GetSourceFromChildElement(UIElement element)
         {
-            var item = VisualHelper.FindContainingTreeViewItem(element);
+            var item = element.FindContainingTreeViewItem();
             if (item != null)
                 return item.Header as ISource;
             else return null;

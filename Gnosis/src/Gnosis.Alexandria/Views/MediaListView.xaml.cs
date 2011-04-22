@@ -16,6 +16,7 @@ using log4net;
 using TagLib;
 
 using Gnosis.Alexandria.Controllers;
+using Gnosis.Alexandria.Extensions;
 using Gnosis.Alexandria.Helpers;
 using Gnosis.Alexandria.Models;
 using Gnosis.Core;
@@ -89,7 +90,12 @@ namespace Gnosis.Alexandria.Views
         {
             try
             {
-                var item = VisualHelper.FindContainingListViewItem(sender as UIElement);
+                var uiElement = sender as UIElement;
+                if (uiElement == null)
+                    return;
+
+
+                var item = uiElement.FindContainingListViewItem();
                 if (item == null)
                     return;
 

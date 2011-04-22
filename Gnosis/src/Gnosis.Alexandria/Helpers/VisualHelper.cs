@@ -6,11 +6,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace Gnosis.Alexandria.Helpers
 {
     public static class VisualHelper
     {
+        /*
         public static childItem FindVisualChild<childItem>(DependencyObject obj)
             where childItem : DependencyObject
         {
@@ -39,64 +41,6 @@ namespace Gnosis.Alexandria.Helpers
 
                 this.BringIndexIntoView(index);
             }
-        }
-
-        /// <summary>
-        /// Go up the visual tree to find the TreeViewItem that contains the given UI element
-        /// </summary>
-        /// <param name="element">The UI element</param>
-        /// <returns>The TreeViewItem that contains the given element, or null if the given element is not a child of a TreeViewItem</returns>
-        public static TreeViewItem FindContainingTreeViewItem(UIElement element)
-        {
-            if (element != null)
-            {
-                var item = element as TreeViewItem;
-                if (item != null)
-                    return item;
-
-                var popup = element as Popup;
-                if (popup != null && popup.PlacementTarget != null)
-                    return FindContainingTreeViewItem(popup.PlacementTarget);
-
-                var parent = VisualTreeHelper.GetParent(element) as UIElement;
-                if (parent != null)
-                    return FindContainingTreeViewItem(parent);
-            }
-
-            return null;
-        }
-
-        public static ListViewItem FindContainingListViewItem(UIElement element)
-        {
-            if (element != null)
-            {
-                var item = element as ListViewItem;
-                if (item != null)
-                    return item;
-
-                var parent = VisualTreeHelper.GetParent(element) as UIElement;
-                if (parent != null)
-                    return FindContainingListViewItem(parent);
-            }
-
-            return null;
-        }
-
-        public static T FindContainingItem<T>(UIElement element)
-            where T : UIElement
-        {
-            if (element != null)
-            {
-                var item = element as T;
-                if (item != null)
-                    return item;
-
-                var parent = VisualTreeHelper.GetParent(element) as UIElement;
-                if (parent != null)
-                    return FindContainingItem<T>(parent);
-            }
-
-            return null;
         }
 
         public static TreeViewItem FindTreeViewItem(ItemsControl container, object item)
@@ -193,5 +137,6 @@ namespace Gnosis.Alexandria.Helpers
 
             return null;
         }
+        */
     }
 }

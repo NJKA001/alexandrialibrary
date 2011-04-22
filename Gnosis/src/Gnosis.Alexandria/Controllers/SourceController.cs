@@ -83,17 +83,21 @@ namespace Gnosis.Alexandria.Controllers
         {
             if (source.Children.Count() == 1)
             {
-                var proxy = source.Children.FirstOrDefault() as ProxySource;
-                if (proxy != null)
-                    source.RemoveChild(proxy);
+                //var proxy = source.Children.FirstOrDefault() as ProxySource;
+                //if (proxy != null)
+                //    source.RemoveChild(proxy);
 
                 if (Directory.Exists(source.Path))
                 {
                     var directory = new DirectoryInfo(source.Path);
                     foreach (var subDirectory in directory.GetDirectories())
                     {
-                        var child = new DirectorySource() { Name = subDirectory.Name, Path = subDirectory.FullName, Parent = source };
-                        source.AddChild(child);
+                        var child = source.Children.Where(x => x.Path == subDirectory.FullName).FirstOrDefault();
+                        if (child == null)
+                        {
+                            child = new DirectorySource() { Name = subDirectory.Name, Path = subDirectory.FullName, Parent = source };
+                            source.AddChild(child);
+                        }
                         //LoadDirectories(child);
                     }
                     foreach (var file in directory.GetFiles("*.mp3"))

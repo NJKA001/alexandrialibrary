@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using Gnosis.Alexandria.Controllers;
+using Gnosis.Alexandria.Extensions;
 using Gnosis.Alexandria.Helpers;
 using Gnosis.Alexandria.Models;
 using Gnosis.Core;
@@ -169,7 +170,7 @@ namespace Gnosis.Alexandria.Views
             var element = sender as UIElement;
             if (element != null)
             {
-                var item = VisualHelper.FindContainingItem<ListBoxItem>(element);
+                var item = element.FindContainingItem<ListBoxItem>();
                 if (item != null)
                 {
                     var track = item.DataContext as ITrack;
@@ -184,7 +185,7 @@ namespace Gnosis.Alexandria.Views
             var element = sender as UIElement;
             if (element != null)
             {
-                var item = VisualHelper.FindContainingItem<ListBoxItem>(element);
+                var item = element.FindContainingItem<ListBoxItem>();
                 if (item != null)
                 {
                     var track = item.DataContext as ITrack;
