@@ -96,6 +96,11 @@
     <Compile Include="Models\OpticalDiscSource.cs" />
     <Compile Include="Models\PodcastSource.cs" />
     <Compile Include="Models\SpiderSource.cs" />
+    <Compile Include="Models\YouTubePlaylistSource.cs" />
+    <Compile Include="Models\YouTubeUserFavoritesSource.cs" />
+    <Compile Include="Models\YouTubeUserPlaylistsSource.cs" />
+    <Compile Include="Models\YouTubeUserSource.cs" />
+    <Compile Include="Models\YouTubeVideoSource.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Models\IdentifierProperty.cs" />
     <Compile Include="Models\PlaylistItemSource.cs" />
@@ -704,6 +709,7 @@
     <Resource Include="Images\trash_full.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\YouTube.png" />
     <Resource Include="Images\pause_thumbnail.png" />
     <Resource Include="Images\forward_thumbnail.png" />
     <Resource Include="Images\play_thumbnail.png" />

@@ -246,6 +246,30 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
+        private void addYouTubeButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var parent = GetSelectedSource();
+
+                var source = new YouTubeUserSource { Name = "New YouTube Feed", Path = "unknown", Parent = parent };
+
+                if (parent != null)
+                {
+                    parent.AddChild(source);
+                }
+                else
+                {
+                    boundSources.Add(source);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("SourceView.addYouTubeButton_Click", ex);
+                MessageBox.Show("There was an error trying to add a YouTube feed.\n\n" + ex.Message, "Could Not Add YouTube Feed");
+            }
+        }
+
         #endregion
 
         #region ContextMenu Events
@@ -433,6 +457,14 @@ namespace Gnosis.Alexandria.Views
                             if (source.Children.Count() == 1 && source.Children.FirstOrDefault() is ProxySource)
                             {
                                 sourceController.LoadDevices(source, this);
+                            }
+                        }
+
+                        if (source is YouTubeUserSource)
+                        {
+                            if (source.Children.Count() == 1 && source.Children.FirstOrDefault() is ProxySource)
+                            {
+                                sourceController.LoadYouTubeUser(source, this);
                             }
                         }
 

@@ -41,6 +41,16 @@ namespace Gnosis.Alexandria.Repositories
                 return (int)SourceType.HardDisk;
             else if (record is OpticalDiscSource)
                 return (int)SourceType.OpticalDisc;
+            else if (record is YouTubePlaylistSource)
+                return (int)SourceType.YouTubePlaylist;
+            else if (record is YouTubeUserFavoritesSource)
+                return (int)SourceType.YouTubeUserFavorites;
+            else if (record is YouTubeUserPlaylistsSource)
+                return (int)SourceType.YouTubeUserPlaylists;
+            else if (record is YouTubeUserSource)
+                return (int)SourceType.YouTubeUser;
+            else if (record is YouTubeVideoSource)
+                return (int)SourceType.YouTubeVideo;
             else
                 return (int)SourceType.None;
         }
@@ -71,6 +81,16 @@ namespace Gnosis.Alexandria.Repositories
                     return new HardDiskSource(id);
                 case SourceType.OpticalDisc:
                     return new OpticalDiscSource(id);
+                case SourceType.YouTubePlaylist:
+                    return new YouTubePlaylistSource(id);
+                case SourceType.YouTubeUser:
+                    return new YouTubeUserSource(id);
+                case SourceType.YouTubeUserFavorites:
+                    return new YouTubeUserFavoritesSource(id);
+                case SourceType.YouTubeUserPlaylists:
+                    return new YouTubeUserPlaylistsSource(id);
+                case SourceType.YouTubeVideo:
+                    return new YouTubeVideoSource(id);
                 default:
                     return new ProxySource(id);
             }

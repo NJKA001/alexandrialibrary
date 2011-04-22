@@ -18,6 +18,11 @@ namespace Gnosis.Alexandria.Models
         Spider = 8,
         DeviceCatalog = 9,
         HardDisk = 10,
-        OpticalDisc = 11
+        OpticalDisc = 11,
+        YouTubeUser = 12,
+        YouTubeUserFavorites = 13,
+        YouTubeUserPlaylists = 14,
+        YouTubePlaylist = 15,
+        YouTubeVideo = 16
     }
 }

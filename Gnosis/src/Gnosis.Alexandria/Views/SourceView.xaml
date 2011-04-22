@@ -47,6 +47,7 @@
             <Button Name="AddFileSystemButton" Margin="4" Click="AddFileSystemButton_Click">Storage</Button>
             <Button Name="addPodcastButton" Margin="4" Click="addPodcastButton_Click">Podcast</Button>
             <Button Name="addSpiderButton" Margin="4" Click="addSpiderButton_Click">Spider</Button>
+            <Button Name="addYouTubeButton" Margin="4" Click="addYouTubeButton_Click">YouTube</Button>
         </StackPanel>
         <TreeView Name="treeView" Grid.Column="0" Grid.Row="1" ItemContainerStyle="{StaticResource sourceItemStyle}" DragEnter="SourceView_DragEnter" Drop="SourceView_Drop" VerticalAlignment="Stretch" PreviewMouseLeftButtonDown="SourceView_PreviewMouseLeftButtonDown">
             <TreeView.ItemTemplate>

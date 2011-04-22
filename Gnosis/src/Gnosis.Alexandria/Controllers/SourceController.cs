@@ -15,6 +15,7 @@ using System.Net;
 using Gnosis.Alexandria.Helpers;
 using System.Windows;
 using System.Runtime.InteropServices;
+using System.Web;
 
 namespace Gnosis.Alexandria.Controllers
 {
@@ -359,6 +360,8 @@ namespace Gnosis.Alexandria.Controllers
             RAMDrive = 6
         }
 
+        #region LoadDevices
+
         private void LoadDevicesStarted(object sender, DoWorkEventArgs args)
         {
             try
@@ -413,6 +416,170 @@ namespace Gnosis.Alexandria.Controllers
             }
         }
 
+        #endregion
+
+        #region LoadYouTubeUser
+
+        private void GetYouTubeUserPlaylists(ISource source, LoadSourceRequest request)
+        {
+            var path = source.Path + "/playlists?v=2";
+            var xml = new XmlDocument();
+            xml.LoadXml(GetResponseBody(path));
+            var nsmgr = new XmlNamespaceManager(xml.NameTable);
+            nsmgr.AddNamespace("openSearch", "http://a9.com/-/spec/opensearchrss/1.0/");
+            nsmgr.AddNamespace("gd", "http://schemas.google.com/g/2005");
+            nsmgr.AddNamespace("yt", "http://gdata.youtube.com/schemas/2007");
+            nsmgr.AddNamespace("atom", "http://www.w3.org/2005/Atom");
+            //nsmgr.AddNamespace("itunes", "http://www.itunes.com/dtds/podcast-1.0.dtd");
+            //nsmgr.AddNamespace("atom", "http://www.w3.org/2005/Atom");
+
+            //var userPlaylists = new YouTubePlaylistsSource() { 
+            var feedNode = xml.SelectSingleNode("/atom:feed", nsmgr);
+            if (feedNode != null)
+            {
+                var titleNode = feedNode.SelectSingleNode("atom:title", nsmgr);
+                var playlistsName = (titleNode != null) ? titleNode.InnerText : "Playlists";
+
+                var userPlaylists = Search(new Dictionary<string, object> { { "Path", path } }).FirstOrDefault() as YouTubeUserPlaylistsSource;
+                if (userPlaylists == null)
+                {
+                    userPlaylists = new YouTubeUserPlaylistsSource() { Name = playlistsName, Path = path, Parent = source };
+                    Save(userPlaylists);
+                    request.Invoke(() => source.AddChild(userPlaylists));
+                }
+                
+                var playlistNodes = feedNode.SelectNodes("atom:entry", nsmgr);
+                if (playlistNodes != null && playlistNodes.Count > 0)
+                {
+                    foreach (XmlNode node in playlistNodes)
+                    {
+                        GetYouTubePlaylist(userPlaylists, request, nsmgr, node);
+                    }
+                }
+            }
+            //var playlistNodes = playlistsXml.SelectNodes
+        }
+
+        private void GetYouTubePlaylist(YouTubeUserPlaylistsSource source, LoadSourceRequest request, XmlNamespaceManager nsmgr, XmlNode node)
+        {
+            var titleNode = node.SelectSingleNode("atom:title", nsmgr);
+            var publishedNode = node.SelectSingleNode("atom:published", nsmgr);
+            var contentNode = node.SelectSingleNode("atom:content", nsmgr);
+            var authorNode = node.SelectSingleNode("atom:author/atom:name", nsmgr);
+
+            var name = titleNode != null ? titleNode.InnerText : "Untitled Playlist";
+            var date = new DateTime(2000, 1, 1);
+            if (publishedNode != null)
+                DateTime.TryParse(publishedNode.InnerText, out date);
+            var path = contentNode != null ? contentNode.Attributes["src"].Value : "unknown";
+            var creator = authorNode != null ? authorNode.InnerText : "Unknown Creator";
+
+            YouTubePlaylistSource playlist = null;
+            if (path != "unknown")
+                playlist = Search(new Dictionary<string, object> { { "Path", path } }).FirstOrDefault() as YouTubePlaylistSource;
+
+            if (playlist == null)
+            {    
+                playlist = new YouTubePlaylistSource() { Name = name, Date = date, Creator = creator, Path = path, Parent = source };
+                Save(playlist);
+                request.Invoke(() => source.AddChild(playlist));
+            }
+            GetYouTubeVideos(playlist, request);
+        }
+
+        private void GetYouTubeVideos(YouTubePlaylistSource source, LoadSourceRequest request)
+        {
+            if (!string.IsNullOrEmpty(source.Path) && source.Path != "unknown")
+            {
+                var xml = new XmlDocument();
+                xml.LoadXml(GetResponseBody(source.Path));
+                var nsmgr = new XmlNamespaceManager(xml.NameTable);
+                nsmgr.AddNamespace("openSearch", "http://a9.com/-/spec/opensearchrss/1.0/");
+                nsmgr.AddNamespace("gd", "http://schemas.google.com/g/2005");
+                nsmgr.AddNamespace("yt", "http://gdata.youtube.com/schemas/2007");
+                nsmgr.AddNamespace("media", "http://search.yahoo.com/mrss/");
+                nsmgr.AddNamespace("atom", "http://www.w3.org/2005/Atom");
+
+                var entries = xml.SelectNodes("/atom:feed/atom:entry", nsmgr);
+                if (entries != null && entries.Count > 0)
+                {
+                    foreach (XmlNode entryNode in entries)
+                    {
+                        var titleNode = entryNode.SelectSingleNode("atom:title", nsmgr);
+                        var linkNode = entryNode.SelectSingleNode("atom:link[@atom:rel = \"alternate\"]", nsmgr);
+                        //var authorNode = entryNode.SelectSingleNode("author/name", nsmgr);
+                        var thumbnailNode = entryNode.SelectSingleNode("media:thumbnail[@yt:name=\"hqdefault\"]", nsmgr);
+
+                        var name = titleNode != null ? titleNode.InnerText : "Untitled Video";
+                        var path = linkNode != null ? linkNode.Attributes["href"].Value : "unknown";
+                        if (path != null && path != "unknown")
+                            path = System.Web.HttpUtility.UrlDecode(path);
+                        var imagePath = thumbnailNode != null ? thumbnailNode.Attributes["url"].Value : null;
+
+                        YouTubeVideoSource video = null;
+                        if (path != "unknown")
+                            video = Search(new Dictionary<string, object> { {"Path", path } }).FirstOrDefault() as YouTubeVideoSource;
+
+                        if (video == null)
+                        {
+                            video = new YouTubeVideoSource() { Name = name, Path = path, ImagePath = imagePath, Parent = source };
+                            Save(video);
+                            request.Invoke(() => source.AddChild(video));
+                        }
+                    }
+                }
+            }
+        }
+
+        private void GetYouTubeUserFavorites(ISource source, LoadSourceRequest request)
+        {
+        }
+
+        private void LoadYouTubeUserStarted(object sender, DoWorkEventArgs args)
+        {
+            try
+            {
+                log.Info("LoadYouTubeUserStarted");
+                var request = args.Argument as LoadSourceRequest;
+                if (request == null)
+                {
+                    log.Warn("LoadYouTubeUserStarted: request is null");
+                    return;
+                }
+
+                var source = request.Source;
+
+                if (source != null && !string.IsNullOrEmpty(source.Path))
+                {
+                    GetYouTubeUserPlaylists(source, request);
+                    GetYouTubeUserFavorites(source, request);
+                    Save(source);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("LoadYouTubeUserStarted", ex);
+            }
+        }
+
+        private void LoadYouTubeUserCompleted(object sender, RunWorkerCompletedEventArgs args)
+        {
+            if (args.Result is Exception)
+            {
+                //Load failed
+            }
+            else if (args.Cancelled)
+            {
+                //Load cancelled
+            }
+            else
+            {
+                log.Debug("LoadYouTubeUserCompleted");
+            }
+        }
+
+        #endregion
+
         public void LoadPodcast(ISource source, DependencyObject handle)
         {
             var worker = new BackgroundWorker();
@@ -434,6 +601,14 @@ namespace Gnosis.Alexandria.Controllers
             var worker = new BackgroundWorker();
             worker.DoWork += LoadDevicesStarted;
             worker.RunWorkerCompleted += LoadDevicesCompleted;
+            worker.RunWorkerAsync(new LoadSourceRequest(handle) { Source = source });
+        }
+
+        public void LoadYouTubeUser(ISource source, DependencyObject handle)
+        {
+            var worker = new BackgroundWorker();
+            worker.DoWork += LoadYouTubeUserStarted;
+            worker.RunWorkerCompleted += LoadYouTubeUserCompleted;
             worker.RunWorkerAsync(new LoadSourceRequest(handle) { Source = source });
         }
     }

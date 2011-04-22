@@ -115,6 +115,11 @@ namespace Gnosis.Alexandria.Views
                     sourceController.LoadDirectories(args.Source);
                 }
 
+                if (source is YouTubeVideoSource)
+                {
+                    System.Diagnostics.Process.Start(source.Path);
+                }
+
                 trackController.Load(source);
 
                 if (trackController.TrackCount > 0)
