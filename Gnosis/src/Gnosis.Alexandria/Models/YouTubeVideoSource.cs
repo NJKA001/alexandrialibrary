@@ -16,7 +16,7 @@ namespace Gnosis.Alexandria.Models
             : base(id)
         {
             ImagePath = "pack://application:,,,/Images/YouTube.png";
-            AddChild(new ProxySource(Guid.Empty) { Parent = this });
+            //AddChild(new ProxySource(Guid.Empty) { Parent = this });
         }
     }
 }

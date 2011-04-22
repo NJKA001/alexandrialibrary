@@ -440,11 +440,15 @@ namespace Gnosis.Alexandria.Controllers
                 var titleNode = feedNode.SelectSingleNode("atom:title", nsmgr);
                 var playlistsName = (titleNode != null) ? titleNode.InnerText : "Playlists";
 
-                var userPlaylists = Search(new Dictionary<string, object> { { "Path", path } }).FirstOrDefault() as YouTubeUserPlaylistsSource;
+                var userPlaylists = source.Children.Where(x => x.Path == path).FirstOrDefault() as YouTubeUserPlaylistsSource;
                 if (userPlaylists == null)
                 {
-                    userPlaylists = new YouTubeUserPlaylistsSource() { Name = playlistsName, Path = path, Parent = source };
-                    Save(userPlaylists);
+                    userPlaylists = Search(new Dictionary<string, object> { { "Path", path } }).FirstOrDefault() as YouTubeUserPlaylistsSource;
+                    if (userPlaylists == null)
+                    {
+                        userPlaylists = new YouTubeUserPlaylistsSource() { Name = playlistsName, Path = path, Parent = source };
+                        Save(userPlaylists);
+                    }
                     request.Invoke(() => source.AddChild(userPlaylists));
                 }
                 
@@ -457,7 +461,6 @@ namespace Gnosis.Alexandria.Controllers
                     }
                 }
             }
-            //var playlistNodes = playlistsXml.SelectNodes
         }
 
         private void GetYouTubePlaylist(YouTubeUserPlaylistsSource source, LoadSourceRequest request, XmlNamespaceManager nsmgr, XmlNode node)
@@ -474,16 +477,18 @@ namespace Gnosis.Alexandria.Controllers
             var path = contentNode != null ? contentNode.Attributes["src"].Value : "unknown";
             var creator = authorNode != null ? authorNode.InnerText : "Unknown Creator";
 
-            YouTubePlaylistSource playlist = null;
-            if (path != "unknown")
-                playlist = Search(new Dictionary<string, object> { { "Path", path } }).FirstOrDefault() as YouTubePlaylistSource;
-
+            var playlist = source.Children.Where(x => x.Path == path).FirstOrDefault() as YouTubePlaylistSource;
             if (playlist == null)
-            {    
-                playlist = new YouTubePlaylistSource() { Name = name, Date = date, Creator = creator, Path = path, Parent = source };
-                Save(playlist);
+            {
+                playlist = Search(new Dictionary<string, object> { { "Path", path } }).FirstOrDefault() as YouTubePlaylistSource;
+                if (playlist == null)
+                {
+                    playlist = new YouTubePlaylistSource() { Name = name, Date = date, Creator = creator, Path = path, Parent = source };
+                    Save(playlist);
+                }
                 request.Invoke(() => source.AddChild(playlist));
             }
+            
             GetYouTubeVideos(playlist, request);
         }
 
@@ -506,24 +511,48 @@ namespace Gnosis.Alexandria.Controllers
                     foreach (XmlNode entryNode in entries)
                     {
                         var titleNode = entryNode.SelectSingleNode("atom:title", nsmgr);
-                        var linkNode = entryNode.SelectSingleNode("atom:link[@atom:rel = \"alternate\"]", nsmgr);
+                        var linkNodes = entryNode.SelectNodes("atom:link", nsmgr); //[@rel = \"alternate\"]", nsmgr);
+                        XmlNode pathNode = null;
+                        foreach (XmlNode linkNode in linkNodes)
+                        {
+                            var rel = linkNode.Attributes["rel"].Value;
+                            if (rel == "alternate")
+                            {
+                                pathNode = linkNode;
+                                break;
+                            }
+                        }
+
+                        XmlNode imageNode = null;
+                        var thumbnailNodes = entryNode.SelectNodes("media:group/media:thumbnail", nsmgr);
+                        foreach (XmlNode thumbnailNode in thumbnailNodes)
+                        {
+                            var thumbNailName = thumbnailNode.Attributes["yt:name"].Value;
+                            if (thumbNailName == "hqdefault")
+                            {
+                                imageNode = thumbnailNode;
+                                break;
+                            }
+                        }
                         //var authorNode = entryNode.SelectSingleNode("author/name", nsmgr);
-                        var thumbnailNode = entryNode.SelectSingleNode("media:thumbnail[@yt:name=\"hqdefault\"]", nsmgr);
+                        //var thumbnailNode = entryNode.SelectSingleNode("media:thumbnail[@yt:name=\"hqdefault\"]", nsmgr);
 
                         var name = titleNode != null ? titleNode.InnerText : "Untitled Video";
-                        var path = linkNode != null ? linkNode.Attributes["href"].Value : "unknown";
+                        var path = pathNode != null ? pathNode.Attributes["href"].Value : "unknown";
                         if (path != null && path != "unknown")
                             path = System.Web.HttpUtility.UrlDecode(path);
-                        var imagePath = thumbnailNode != null ? thumbnailNode.Attributes["url"].Value : null;
 
-                        YouTubeVideoSource video = null;
-                        if (path != "unknown")
-                            video = Search(new Dictionary<string, object> { {"Path", path } }).FirstOrDefault() as YouTubeVideoSource;
+                        var imagePath = imageNode != null ? imageNode.Attributes["url"].Value : null;
 
+                        var video = source.Children.Where(x => x.Path == path).FirstOrDefault() as YouTubeVideoSource;
                         if (video == null)
                         {
-                            video = new YouTubeVideoSource() { Name = name, Path = path, ImagePath = imagePath, Parent = source };
-                            Save(video);
+                            video = Search(new Dictionary<string, object> { {"Path", path } }).FirstOrDefault() as YouTubeVideoSource;
+                            if (video == null)
+                            {
+                                video = new YouTubeVideoSource() { Name = name, Path = path, ImagePath = imagePath, Parent = source };
+                                Save(video);
+                            }
                             request.Invoke(() => source.AddChild(video));
                         }
                     }
@@ -553,7 +582,7 @@ namespace Gnosis.Alexandria.Controllers
                 {
                     GetYouTubeUserPlaylists(source, request);
                     GetYouTubeUserFavorites(source, request);
-                    Save(source);
+                    //Save(source);
                 }
             }
             catch (Exception ex)

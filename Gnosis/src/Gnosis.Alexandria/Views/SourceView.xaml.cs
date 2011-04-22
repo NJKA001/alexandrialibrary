@@ -462,10 +462,10 @@ namespace Gnosis.Alexandria.Views
 
                         if (source is YouTubeUserSource)
                         {
-                            if (source.Children.Count() == 1 && source.Children.FirstOrDefault() is ProxySource)
-                            {
+                            //if (source.Children.Count() == 1 && source.Children.FirstOrDefault() is ProxySource)
+                            //{
                                 sourceController.LoadYouTubeUser(source, this);
-                            }
+                            //}
                         }
 
                         foreach (var child in source.Children)
