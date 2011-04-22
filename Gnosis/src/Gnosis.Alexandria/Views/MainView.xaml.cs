@@ -59,6 +59,7 @@ namespace Gnosis.Alexandria.Views
                 playbackController.CurrentTrackPaused += currentTrackPaused;
                 playbackController.CurrentTrackStopped += currentTrackStopped;
                 playbackController.CurrentTrackEnded += currentTrackEnded;
+                trackController.SourceLoadCompleted += sourceLoadCompleted;
             }
             catch (Exception ex)
             {
@@ -115,13 +116,23 @@ namespace Gnosis.Alexandria.Views
                     sourceController.LoadDirectories(args.Source);
                 }
 
-                if (source is YouTubeVideoSource)
+                if (source is YouTubeVideoSource) // || (source.Path != null && !source.Path.EndsWith(".mp3") && !source.Path.EndsWith(".wav")))
                 {
                     System.Diagnostics.Process.Start(source.Path);
                 }
 
-                trackController.Load(source);
+                trackController.Load(source, this);
+            }
+            catch (Exception ex)
+            {
+                log.Error("MainWindow.SourceLoaded", ex);
+            }
+        }
 
+        private void sourceLoadCompleted(object sender, EventArgs args)
+        {
+            try
+            {
                 if (trackController.TrackCount > 0)
                 {
                     var track = trackController.GetTrackAt(0);
@@ -133,7 +144,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                log.Error("MainWindow.SourceLoaded", ex);
+                log.Error("MainWindow.sourceLoadedCompleted", ex);
             }
         }
 

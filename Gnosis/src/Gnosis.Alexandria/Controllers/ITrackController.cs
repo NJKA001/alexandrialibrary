@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Repositories;
@@ -23,9 +24,11 @@ namespace Gnosis.Alexandria.Controllers
         void ClearTracks();
         void AddTrack(ITrack track);
         ITrack GetSelectedTrack();
-        void Load(ISource source);
+        void Load(ISource source, DependencyObject handle);
 
         void CacheTrack(ITrack track);
         Uri GetCachedUri(Guid id);
+
+        EventHandler<EventArgs> SourceLoadCompleted { get; set; }
     }
 }

@@ -4,12 +4,14 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 using log4net;
 using TagLib;
 
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Repositories;
+using Gnosis.Alexandria.Views;
 using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Controllers
@@ -342,7 +344,7 @@ namespace Gnosis.Alexandria.Controllers
             return new Track() { Path = source.Path, ImagePath = source.ImagePath, Title = source.Name, Artist = source.Creator, Album = album, Comment = source.Summary };
         }
 
-        private void LoadSource(ISource source)
+        private void LoadSource(ISource source, LoadSourceRequest request)
         {
             var track = Search(new Dictionary<string, object> { { "Path", source.Path } }).FirstOrDefault();
             if (track == null)
@@ -359,54 +361,92 @@ namespace Gnosis.Alexandria.Controllers
                 }
                 Save(track);
             }
-            AddTrack(track);
+            request.Invoke(() => AddTrack(track));
         }
 
-        public void Load(ISource source)
+        private void LoadStarted(object sender, DoWorkEventArgs args)
         {
-            ClearTracks();
-
             try
             {
-                LoadSource(source);
+                log.Info("TrackController.LoadStarted");
+                var request = args.Argument as LoadSourceRequest;
+                if (request == null)
+                {
+                    log.Warn("  Request is null");
+                    return;
+                }
+
+                var source = request.Source;
+
+                request.Invoke(() => ClearTracks());
+                LoadSource(source, request);
+
+                foreach (var item in source.Children)
+                {
+                    try
+                    {
+                        var track = Search(new Dictionary<string, object> { { "Path", item.Path } }).FirstOrDefault();
+                        if (track == null)
+                        {
+                            var uri = new Uri(item.Path);
+                            if (uri.IsFile && System.IO.File.Exists(item.Path))
+                            {
+                                track = ReadFromTag(item.Path);
+                                Save(track);
+                            }
+                            else
+                            {
+                                track = ConvertToTrack(item);
+                                CacheTrack(track);
+                                Save(track);
+                            }
+                        }
+
+                        if (track != null && System.IO.File.Exists(track.Path))
+                        {
+                            tagController.LoadPicture(track);
+                            request.Invoke(() => AddTrack(track));
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error("TrackController.Load: Could not load track path=" + item.Path, ex);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                log.Error("TrackController.Load: Could not load source as track", ex);
-            }
-
-            foreach (var item in source.Children)
-            {
-                try
-                {
-                    var track = Search(new Dictionary<string, object> { { "Path", item.Path } }).FirstOrDefault();
-                    if (track == null)
-                    {
-                        var uri = new Uri(item.Path);
-                        if (uri.IsFile && System.IO.File.Exists(item.Path))
-                        {
-                            track = ReadFromTag(item.Path);
-                            Save(track);
-                        }
-                        else
-                        {
-                            track = ConvertToTrack(item);
-                            CacheTrack(track);
-                            Save(track);
-                        }
-                    }
-
-                    if (track != null && System.IO.File.Exists(track.Path))
-                    {
-                        tagController.LoadPicture(track);
-                        AddTrack(track);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    log.Error("TrackController.Load: Could not load track path=" + item.Path, ex);
-                }
+                log.Error("TrackController.LoadStarted", ex);
             }
         }
+
+        private void LoadCompleted(object sender, RunWorkerCompletedEventArgs args)
+        {
+            if (args.Result is Exception)
+            {
+                //Load failed
+            }
+            else if (args.Cancelled)
+            {
+                //Load cancelled
+            }
+            else
+            {
+                log.Debug("TrackController.LoadCompleted");
+
+                if (SourceLoadCompleted != null)
+                    SourceLoadCompleted(this, EventArgs.Empty);
+            }
+        }
+
+        public void Load(ISource source, DependencyObject handle)
+        {
+            var worker = new BackgroundWorker();
+            worker.DoWork += LoadStarted;
+            worker.RunWorkerCompleted += LoadCompleted;
+            worker.RunWorkerAsync(new LoadSourceRequest(handle) { Source = source });
+        }
+
+        public EventHandler<EventArgs> SourceLoadCompleted { get; set; }
     }
 }

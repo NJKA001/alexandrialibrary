@@ -182,14 +182,28 @@ namespace Gnosis.Alexandria.Controllers
                 nsmgr.AddNamespace("itunes", "http://www.itunes.com/dtds/podcast-1.0.dtd");
                 nsmgr.AddNamespace("atom", "http://www.w3.org/2005/Atom");
 
+                bool isUpdated = false;
                 var imageNode = xml.SelectSingleNode("/rss/channel/image/url", nsmgr);
                 if (imageNode != null)
                 {
                     if (source.ImagePath != imageNode.InnerText)
                     {
                         source.ImagePath = imageNode.InnerText;
-                        Save(source);
+                        isUpdated = true;
                     }
+                }
+                var lastBuildDateNode = xml.SelectSingleNode("/rss/channel/lastBuildDate", nsmgr);
+                if (lastBuildDateNode != null)
+                {
+                    var lastBuildDate = DateTime.Now;
+                    Rfc822DateTime.TryParse(lastBuildDateNode.InnerText, out lastBuildDate);
+                    source.Date = lastBuildDate;
+                    isUpdated = true;
+                }
+
+                if (isUpdated)
+                {
+                    Save(source);
                 }
 
                 var itemNodes = xml.SelectNodes("/rss/channel/item", nsmgr);
@@ -198,16 +212,28 @@ namespace Gnosis.Alexandria.Controllers
                     foreach (XmlNode itemNode in itemNodes)
                     {
                         var titleNode = itemNode.SelectSingleNode("title", nsmgr);
-                        var linkNode = itemNode.SelectSingleNode("enclosure", nsmgr); //"link", nsmgr);
+                        var linkNode = itemNode.SelectSingleNode("enclosure", nsmgr);
+                        var dateNode = itemNode.SelectSingleNode("pubDate", nsmgr);
                         var authorNode = itemNode.SelectSingleNode("itunes:author", nsmgr);
                         var summaryNode = itemNode.SelectSingleNode("itunes:summary", nsmgr);
-                        var dateNode = itemNode.SelectSingleNode("pubDate", nsmgr);
+                        var path = string.Empty;
 
-                        if (linkNode != null)
+                        if (linkNode == null)
                         {
-                            var path = linkNode.Attributes["url"].Value; //linkNode.InnerText;
-                            var date = DateTime.MinValue;
-                            Rfc822DateTime.TryParse(dateNode.InnerText, out date);
+                            linkNode = itemNode.SelectSingleNode("link", nsmgr);
+                            if (linkNode != null)
+                                path = linkNode.InnerText;
+                        }
+                        else
+                        {
+                            path = linkNode.Attributes["url"].Value;
+                        }
+
+                        if (!string.IsNullOrEmpty(path))
+                        {
+                            var date = source.Date;
+                            if (dateNode != null)
+                                Rfc822DateTime.TryParse(dateNode.InnerText, out date);
 
                             var child = source.Children.Where(x => x.Path == path).FirstOrDefault();
 
@@ -492,7 +518,63 @@ namespace Gnosis.Alexandria.Controllers
             GetYouTubeVideos(playlist, request);
         }
 
-        private void GetYouTubeVideos(YouTubePlaylistSource source, LoadSourceRequest request)
+        private void AddVideos(ISource source, LoadSourceRequest request, XmlDocument xml, XmlNamespaceManager nsmgr)
+        {
+            var entries = xml.SelectNodes("/atom:feed/atom:entry", nsmgr);
+            if (entries != null && entries.Count > 0)
+            {
+                foreach (XmlNode entryNode in entries)
+                {
+                    var titleNode = entryNode.SelectSingleNode("atom:title", nsmgr);
+                    var linkNodes = entryNode.SelectNodes("atom:link", nsmgr); //[@rel = \"alternate\"]", nsmgr);
+                    XmlNode pathNode = null;
+                    foreach (XmlNode linkNode in linkNodes)
+                    {
+                        var rel = linkNode.Attributes["rel"].Value;
+                        if (rel == "alternate")
+                        {
+                            pathNode = linkNode;
+                            break;
+                        }
+                    }
+
+                    XmlNode imageNode = null;
+                    var thumbnailNodes = entryNode.SelectNodes("media:group/media:thumbnail", nsmgr);
+                    foreach (XmlNode thumbnailNode in thumbnailNodes)
+                    {
+                        var thumbNailName = thumbnailNode.Attributes["yt:name"].Value;
+                        if (thumbNailName == "hqdefault")
+                        {
+                            imageNode = thumbnailNode;
+                            break;
+                        }
+                    }
+                    //var authorNode = entryNode.SelectSingleNode("author/name", nsmgr);
+                    //var thumbnailNode = entryNode.SelectSingleNode("media:thumbnail[@yt:name=\"hqdefault\"]", nsmgr);
+
+                    var name = titleNode != null ? titleNode.InnerText : "Untitled Video";
+                    var path = pathNode != null ? pathNode.Attributes["href"].Value : "unknown";
+                    if (path != null && path != "unknown")
+                        path = System.Web.HttpUtility.UrlDecode(path);
+
+                    var imagePath = imageNode != null ? imageNode.Attributes["url"].Value : null;
+
+                    var video = source.Children.Where(x => x.Path == path).FirstOrDefault() as YouTubeVideoSource;
+                    if (video == null)
+                    {
+                        video = Search(new Dictionary<string, object> { { "Path", path } }).FirstOrDefault() as YouTubeVideoSource;
+                        if (video == null)
+                        {
+                            video = new YouTubeVideoSource() { Name = name, Path = path, ImagePath = imagePath, Parent = source };
+                            Save(video);
+                        }
+                        request.Invoke(() => source.AddChild(video));
+                    }
+                }
+            }
+        }
+
+        private void GetYouTubeVideos(ISource source, LoadSourceRequest request)
         {
             if (!string.IsNullOrEmpty(source.Path) && source.Path != "unknown")
             {
@@ -505,63 +587,45 @@ namespace Gnosis.Alexandria.Controllers
                 nsmgr.AddNamespace("media", "http://search.yahoo.com/mrss/");
                 nsmgr.AddNamespace("atom", "http://www.w3.org/2005/Atom");
 
-                var entries = xml.SelectNodes("/atom:feed/atom:entry", nsmgr);
-                if (entries != null && entries.Count > 0)
-                {
-                    foreach (XmlNode entryNode in entries)
-                    {
-                        var titleNode = entryNode.SelectSingleNode("atom:title", nsmgr);
-                        var linkNodes = entryNode.SelectNodes("atom:link", nsmgr); //[@rel = \"alternate\"]", nsmgr);
-                        XmlNode pathNode = null;
-                        foreach (XmlNode linkNode in linkNodes)
-                        {
-                            var rel = linkNode.Attributes["rel"].Value;
-                            if (rel == "alternate")
-                            {
-                                pathNode = linkNode;
-                                break;
-                            }
-                        }
-
-                        XmlNode imageNode = null;
-                        var thumbnailNodes = entryNode.SelectNodes("media:group/media:thumbnail", nsmgr);
-                        foreach (XmlNode thumbnailNode in thumbnailNodes)
-                        {
-                            var thumbNailName = thumbnailNode.Attributes["yt:name"].Value;
-                            if (thumbNailName == "hqdefault")
-                            {
-                                imageNode = thumbnailNode;
-                                break;
-                            }
-                        }
-                        //var authorNode = entryNode.SelectSingleNode("author/name", nsmgr);
-                        //var thumbnailNode = entryNode.SelectSingleNode("media:thumbnail[@yt:name=\"hqdefault\"]", nsmgr);
-
-                        var name = titleNode != null ? titleNode.InnerText : "Untitled Video";
-                        var path = pathNode != null ? pathNode.Attributes["href"].Value : "unknown";
-                        if (path != null && path != "unknown")
-                            path = System.Web.HttpUtility.UrlDecode(path);
-
-                        var imagePath = imageNode != null ? imageNode.Attributes["url"].Value : null;
-
-                        var video = source.Children.Where(x => x.Path == path).FirstOrDefault() as YouTubeVideoSource;
-                        if (video == null)
-                        {
-                            video = Search(new Dictionary<string, object> { {"Path", path } }).FirstOrDefault() as YouTubeVideoSource;
-                            if (video == null)
-                            {
-                                video = new YouTubeVideoSource() { Name = name, Path = path, ImagePath = imagePath, Parent = source };
-                                Save(video);
-                            }
-                            request.Invoke(() => source.AddChild(video));
-                        }
-                    }
-                }
+                AddVideos(source, request, xml, nsmgr);
             }
         }
 
         private void GetYouTubeUserFavorites(ISource source, LoadSourceRequest request)
         {
+            var path = source.Path + "/favorites?v=2";
+            var xml = new XmlDocument();
+            xml.LoadXml(GetResponseBody(path));
+            var nsmgr = new XmlNamespaceManager(xml.NameTable);
+            nsmgr.AddNamespace("openSearch", "http://a9.com/-/spec/opensearchrss/1.0/");
+            nsmgr.AddNamespace("gd", "http://schemas.google.com/g/2005");
+            nsmgr.AddNamespace("yt", "http://gdata.youtube.com/schemas/2007");
+            nsmgr.AddNamespace("media", "http://search.yahoo.com/mrss/");
+            nsmgr.AddNamespace("atom", "http://www.w3.org/2005/Atom");
+            //nsmgr.AddNamespace("itunes", "http://www.itunes.com/dtds/podcast-1.0.dtd");
+            //nsmgr.AddNamespace("atom", "http://www.w3.org/2005/Atom");
+
+            //var userPlaylists = new YouTubePlaylistsSource() { 
+            var feedNode = xml.SelectSingleNode("/atom:feed", nsmgr);
+            if (feedNode != null)
+            {
+                var titleNode = feedNode.SelectSingleNode("atom:title", nsmgr);
+                var favoritesName = (titleNode != null) ? titleNode.InnerText : "Favorites";
+
+                var favoritesSource = source.Children.Where(x => x.Path == path).FirstOrDefault() as YouTubeUserFavoritesSource;
+                if (favoritesSource == null)
+                {
+                    favoritesSource = Search(new Dictionary<string, object>() { {"Path", path } }).FirstOrDefault() as YouTubeUserFavoritesSource;
+                    if (favoritesSource == null)
+                    {
+                        favoritesSource = new YouTubeUserFavoritesSource() { Name = favoritesName, Path = path, Parent = source };
+                        Save(favoritesSource);
+                    }
+                    request.Invoke(() => source.AddChild(favoritesSource));
+                }
+
+                AddVideos(favoritesSource, request, xml, nsmgr);
+            }
         }
 
         private void LoadYouTubeUserStarted(object sender, DoWorkEventArgs args)

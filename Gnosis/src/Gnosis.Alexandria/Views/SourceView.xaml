@@ -16,6 +16,7 @@
             <EventSetter Event="KeyUp" Handler="SourceItem_KeyUp"/>
             <EventSetter Event="Expanded" Handler="SourceItem_Expanded" />
             <EventSetter Event="PreviewMouseRightButtonDown" Handler="SourceItem_PreviewMouseRightButtonDown"/>
+            <EventSetter Event="MouseDoubleClick" Handler="sourceItem_MouseDoubleClick"/>
             <Setter Property="AllowDrop" Value="true"/>
             <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
             <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>

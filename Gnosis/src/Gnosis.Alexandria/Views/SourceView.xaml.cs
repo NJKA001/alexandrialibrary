@@ -359,7 +359,25 @@ namespace Gnosis.Alexandria.Views
 
         #region SourceView Events
 
-        
+        private void sourceItem_MouseDoubleClick(object sender, MouseButtonEventArgs args)
+        {
+            try
+            {
+                //var item = sender as TreeViewItem;
+                //if (item != null)
+                //{
+                //    var source = item.DataContext as ISource;
+                //    if (source != null)
+                //    {
+                //        OnSourceLoaded(source);
+                //    }
+                //}
+            }
+            catch (Exception ex)
+            {
+                log.Error("sourceItem_MouseDoubleClick", ex);
+            }
+        }
 
         private void SourceView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
