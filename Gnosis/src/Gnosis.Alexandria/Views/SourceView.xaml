@@ -55,7 +55,7 @@
                 <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}" DataType="{x:Type models:ISource}">
                     <Border>
                         <StackPanel Orientation="Horizontal">
-                            <Image x:Name="SourceImage" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" AllowDrop="True" Width="24" Height="24"></Image>
+                            <Image x:Name="SourceImage" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" AllowDrop="True" Width="24" Height="24" Margin="2"></Image>
                             <TextBlock Name="sourceNameTextBlock" Grid.Column="0" Grid.Row="0" Text="{Binding Name}" Visibility="{Binding DisplayVisibility}"/>
                             <Popup IsOpen="{Binding IsBeingEdited}" PlacementTarget="{Binding ElementName=sourceNameTextBlock}" Placement="Right" Tag="{Binding ElementName=sourceNameTextBlock}">
                                 <Grid Visibility="{Binding EditVisibility}">

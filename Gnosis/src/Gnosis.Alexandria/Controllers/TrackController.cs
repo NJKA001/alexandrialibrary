@@ -268,7 +268,11 @@ namespace Gnosis.Alexandria.Controllers
                     args.Cancel = true;
                     break;
                 }
-                tagController.LoadPicture(track);
+                var uri = new Uri(track.Path);
+                if (uri.IsFile)
+                {
+                    tagController.LoadPicture(track);
+                }
             }
         }
 
