@@ -489,11 +489,17 @@ namespace Gnosis.Alexandria.Views
 
         private bool TargetIsValidForSource(ISource source, ISource target)
         {
-            if (source == null || target == null)
+            if (source == null)
                 return false;
 
             if (source == target)
                 return false;
+
+            if (target != null && target.IsDescendantOf(source))
+            {
+                //MessageBox.Show("A source cannot be moved into one of its decendants.\nThat would make its child into its parent which is a paradox.", "Cannot Move Source");
+                return false;
+            }
 
             if (source.Parent != null)
             {
@@ -501,9 +507,6 @@ namespace Gnosis.Alexandria.Views
                     return false;
 
                 if (source.Parent is SpiderSource)
-                    return false;
-
-                if (source.Parent == target.Parent)
                     return false;
             }
 
@@ -527,6 +530,7 @@ namespace Gnosis.Alexandria.Views
                 if (source != null)
                 {
                     var target = GetSourceDropTarget(e) as ISource;
+                    
                     if (TargetIsValidForSource(source, target))
                     {
                         var previousParent = source.Parent;
@@ -543,8 +547,15 @@ namespace Gnosis.Alexandria.Views
                                 boundSources.Remove(source);
                         }
 
-                        target.AddChild(source);
-                        target.IsExpanded = true;
+                        if (target != null)
+                        {
+                            target.AddChild(source);
+                            target.IsExpanded = true;
+                        }
+                        else
+                        {
+                            boundSources.Add(source);
+                        }
                     }
                 }
             }

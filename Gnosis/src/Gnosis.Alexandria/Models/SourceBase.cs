@@ -366,6 +366,17 @@ namespace Gnosis.Alexandria.Models
                 child.DeselectAll();
         }
 
+        public bool IsDescendantOf(ISource source)
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
+
+            if (Parent == null)
+                return false;
+
+            return (Parent.Id == source.Id) ? true : Parent.IsDescendantOf(source);
+        }
+
         #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged;

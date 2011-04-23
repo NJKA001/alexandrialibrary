@@ -42,5 +42,6 @@ namespace Gnosis.Alexandria.Models
         Visibility PatternVisibility { get; }
 
         void DeselectAll();
+        bool IsDescendantOf(ISource source);
     }
 }
