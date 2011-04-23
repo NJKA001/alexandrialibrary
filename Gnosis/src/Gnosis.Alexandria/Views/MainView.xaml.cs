@@ -116,7 +116,7 @@ namespace Gnosis.Alexandria.Views
                     sourceController.LoadDirectories(args.Source);
                 }
 
-                if (source is YouTubeVideoSource) // || (source.Path != null && !source.Path.EndsWith(".mp3") && !source.Path.EndsWith(".wav")))
+                if (source is YouTubeVideoSource || (source.Path != null && source.Path.StartsWith("http://www.gutenberg.org"))) // || (source.Path != null && !source.Path.EndsWith(".mp3") && !source.Path.EndsWith(".wav")))
                 {
                     System.Diagnostics.Process.Start(source.Path);
                 }
