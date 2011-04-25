@@ -41,6 +41,7 @@ namespace Gnosis.Alexandria.Views
         private ITagController tagController;
         private readonly ObservableCollection<ISource> boundSources = new ObservableCollection<ISource>();
         private Point dragStart;
+        private bool isDraggableLeftClick;
         private bool isDragging;
 
         #region Private Methods
@@ -386,6 +387,7 @@ namespace Gnosis.Alexandria.Views
             try
             {
                 dragStart = e.GetPosition(null);
+                isDraggableLeftClick = true;
 
                 var result = VisualTreeHelper.HitTest(treeView, e.GetPosition(treeView));
                 if (result != null)
@@ -399,7 +401,10 @@ namespace Gnosis.Alexandria.Views
                     {
                         //The user clicked on the scrollbar or some other chrome element - we don't want to deselect anything
                         if (element != null && (element.IsWindowChrome()))
+                        {
+                            isDraggableLeftClick = false;
                             return;
+                        }
 
                         foreach (var source in boundSources)
                             source.DeselectAll();
@@ -441,7 +446,7 @@ namespace Gnosis.Alexandria.Views
 
         private void sourceView_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed && !isDragging && !this.HasMouseOverScrollbar())
+            if (e.LeftButton == MouseButtonState.Pressed && !isDragging && isDraggableLeftClick && !this.HasMouseOverScrollbar())
             {
                 Point position = e.GetPosition(null);
 
