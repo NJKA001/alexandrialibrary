@@ -350,6 +350,18 @@ namespace Gnosis.Alexandria.Controllers
 
         private void LoadSource(ISource source, LoadSourceRequest request)
         {
+            if (source is DeviceCatalogSource)
+                return;
+
+            if (source is HardDiskSource)
+                return;
+
+            if (source is OpticalDiscSource)
+                return;
+
+            if (source is DirectorySource)
+                return;
+
             var track = Search(new Dictionary<string, object> { { "Path", source.Path } }).FirstOrDefault();
             if (track == null)
             {

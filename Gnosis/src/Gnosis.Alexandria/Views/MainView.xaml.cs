@@ -74,6 +74,7 @@ namespace Gnosis.Alexandria.Views
         private readonly ITrackController trackController;
         private readonly ISourceController sourceController;
         private readonly IPlaybackController playbackController;
+        private bool currentTrackIsEnding;
 
         private string GetTitle()
         {
@@ -84,26 +85,40 @@ namespace Gnosis.Alexandria.Views
 
         private void currentTrackPlayed(object sender, EventArgs args)
         {
-            Title = GetTitle();
-            playThumbnailButton.IsEnabled = false;
-            pauseThumbnailButton.IsEnabled = true;
+            playThumbnailButton.Dispatcher.Invoke((Action)delegate
+            {
+                Title = GetTitle();
+                playThumbnailButton.IsEnabled = false;
+                pauseThumbnailButton.IsEnabled = true;
+            });
         }
 
         private void currentTrackPaused(object sender, EventArgs args)
         {
-            playThumbnailButton.IsEnabled = true;
-            pauseThumbnailButton.IsEnabled = false;
+            playThumbnailButton.Dispatcher.Invoke((Action)delegate
+            {
+                playThumbnailButton.IsEnabled = true;
+                pauseThumbnailButton.IsEnabled = false;
+            });
         }
 
         private void currentTrackStopped(object sender, EventArgs args)
         {
-            playThumbnailButton.IsEnabled = true;
-            pauseThumbnailButton.IsEnabled = false;
+            playThumbnailButton.Dispatcher.Invoke((Action)delegate
+            {
+                playThumbnailButton.IsEnabled = true;
+                pauseThumbnailButton.IsEnabled = false;
+            });
         }
 
         private void currentTrackEnded(object sender, EventArgs args)
         {
-            playbackView.PlayNextTrack();
+            if (!currentTrackIsEnding)
+            {
+                currentTrackIsEnding = true;
+                playbackView.PlayNextTrack();
+                currentTrackIsEnding = false;
+            }
         }
 
         private void sourceLoaded(object sender, SourceLoadedEventArgs args)
