@@ -80,10 +80,15 @@
     <Compile Include="Events\SourceLoadedEventArgs.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Extensions\UIElementExtensions.cs" />
+    <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="Helpers\Rfc822DateTime.cs" />
     <Compile Include="Helpers\VisualHelper.cs" />
+    <Compile Include="Models\ChangeableModelBase.cs" />
     <Compile Include="Models\DeviceCatalogSource.cs" />
     <Compile Include="Models\HardDiskSource.cs" />
+    <Compile Include="Models\IChangeableModel.cs" />
+    <Compile Include="Models\IModel.cs" />
+    <Compile Include="Models\IModelContext.cs" />
     <Compile Include="Models\IPlaybackStatus.cs" />
     <Compile Include="Models\ISourcePropertyFactory.cs" />
     <Compile Include="Models\CreatorProperty.cs" />
@@ -93,10 +98,29 @@
     <Compile Include="Converters\ImageSourceConverter.cs" />
     <Compile Include="Models\ISource.cs" />
     <Compile Include="Models\ISourceProperty.cs" />
+    <Compile Include="Models\ITimeStamp.cs" />
     <Compile Include="Models\LoadSourceRequest.cs" />
+    <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\OpticalDiscSource.cs" />
     <Compile Include="Models\PodcastSource.cs" />
     <Compile Include="Models\SpiderSource.cs" />
+    <Compile Include="Models\TimeStamp.cs" />
+    <Compile Include="Models\Tracks\ITrack.cs" />
+    <Compile Include="Models\Tracks\ITrackAlbumArtist.cs" />
+    <Compile Include="Models\Tracks\ITrackArtist.cs" />
+    <Compile Include="Models\Tracks\ITrackComposer.cs" />
+    <Compile Include="Models\Tracks\ITrackConductor.cs" />
+    <Compile Include="Models\Tracks\ITrackGenre.cs" />
+    <Compile Include="Models\Tracks\ITrackIdentifier.cs" />
+    <Compile Include="Models\Tracks\ITrackLanguage.cs" />
+    <Compile Include="Models\Tracks\ITrackMood.cs" />
+    <Compile Include="Models\Tracks\ITrackPicture.cs" />
+    <Compile Include="Models\Tracks\ITrackRating.cs" />
+    <Compile Include="Models\Tracks\ITrackRemixer.cs" />
+    <Compile Include="Models\Tracks\ITrackSynchronizedLyrics.cs" />
+    <Compile Include="Models\Tracks\ITrackUnsynchronizedLyrics.cs" />
+    <Compile Include="Models\Tracks\TrackPictureType.cs" />
+    <Compile Include="Models\Tracks\TrackSynchronizedTextType.cs" />
     <Compile Include="Models\YouTubePlaylistSource.cs" />
     <Compile Include="Models\YouTubeUserFavoritesSource.cs" />
     <Compile Include="Models\YouTubeUserPlaylistsSource.cs" />
@@ -217,6 +241,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
+    <Folder Include="Models\Devices\" />
+    <Folder Include="Models\Feeds\" />
+    <Folder Include="Models\Playlists\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\back.png" />
