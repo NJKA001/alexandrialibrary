@@ -21,8 +21,16 @@ namespace Gnosis.Alexandria.Models.Tracks
         string AlbumSort { get; set; }
         string AlbumSubtitle { get; set; }
 
+        string Artists { get; set; }
         string ArtistSort { get; set; }
+        string AlbumArtists { get; }
 
+        string Composers { get; set; }
+        string Conductors { get; set; }
+        string Genres { get; set; }
+        string Moods { get; set; }
+        string Languages { get; set; }
+        
         DateTime RecordingDate { get; set; }
         DateTime ReleaseDate { get; set; }
         
@@ -47,24 +55,11 @@ namespace Gnosis.Alexandria.Models.Tracks
         string Copyright { get; set; }
         string Publisher { get; set; }
         string InternationalStandardRecordingCode { get; set; }
-        
-        IEnumerable<ITrackArtist> Artists { get; }
-        IEnumerable<ITrackAlbumArtist> AlbumArtists { get; }
-        IEnumerable<ITrackComposer> Composers { get; }
-        IEnumerable<ITrackConductor> Conductors { get; }
-        IEnumerable<ITrackGenre> Genres { get; }
-        IEnumerable<ITrackMood> Moods { get; }
-        IEnumerable<ITrackLanguage> Languages { get; }
+
         IEnumerable<ITrackUnsynchronizedLyrics> Lyrics { get; }
         IEnumerable<ITrackSynchronizedLyrics> SynchronizedLyrics { get; }
         IEnumerable<ITrackPicture> Pictures { get; }
         IEnumerable<ITrackRating> Ratings { get; }
         IEnumerable<ITrackIdentifier> Identifiers { get; }
-
-        //Aggregate Properties
-        string ArtistsMarquee { get; }
-        string AlbumArtistsMarquee { get; }
-        string ComposersMarquee { get; }
-        string GenresMarquee { get; }
     }
 }
