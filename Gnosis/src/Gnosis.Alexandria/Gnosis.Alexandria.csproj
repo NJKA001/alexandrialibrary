@@ -114,6 +114,17 @@
     <Compile Include="Models\Old\OpticalDiscSource.cs" />
     <Compile Include="Models\Old\PodcastSource.cs" />
     <Compile Include="Models\Old\SpiderSource.cs" />
+    <Compile Include="Models\Playlists\IPlaylist.cs" />
+    <Compile Include="Models\Playlists\IPlaylistAttribution.cs" />
+    <Compile Include="Models\Playlists\IPlaylistExtension.cs" />
+    <Compile Include="Models\Playlists\IPlaylistItem.cs" />
+    <Compile Include="Models\Playlists\IPlaylistItemExtension.cs" />
+    <Compile Include="Models\Playlists\IPlaylistItemIdentifier.cs" />
+    <Compile Include="Models\Playlists\IPlaylistItemLink.cs" />
+    <Compile Include="Models\Playlists\IPlaylistItemLocation.cs" />
+    <Compile Include="Models\Playlists\IPlaylistItemMetadata.cs" />
+    <Compile Include="Models\Playlists\IPlaylistLink.cs" />
+    <Compile Include="Models\Playlists\IPlaylistMetadata.cs" />
     <Compile Include="Models\TimeStamp.cs" />
     <Compile Include="Models\Tracks\ITrack.cs" />
     <Compile Include="Models\Tracks\ITrackIdentifier.cs" />
@@ -246,7 +257,6 @@
   <ItemGroup>
     <Folder Include="Commands\" />
     <Folder Include="Models\Devices\" />
-    <Folder Include="Models\Playlists\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\back.png" />
