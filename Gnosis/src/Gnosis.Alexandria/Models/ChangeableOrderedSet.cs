@@ -47,26 +47,26 @@ namespace Gnosis.Alexandria.Models
                 originalItems.Add(item);
         }
 
-        public new void Add(T item)
+        public void Add(T item)
         {
-            base.Add(item);
+            AddItem(item);
             addedItems.Add(item);
         }
 
-        public new void Insert(int index, T item)
+        public void Insert(int index, T item)
         {
-            base.Insert(index, item);
+            InsertItem(index, item);
             addedItems.Add(item);
         }
 
-        public new void Move(int index, T item)
+        public void Move(int index, T item)
         {
-            base.Move(index, item);
+            MoveItem(index, item);
         }
 
-        public new void Remove(T item)
+        public void Remove(T item)
         {
-            base.Remove(item);
+            RemoveItem(item);
         }
 
         public void RemoveAt(int index)
@@ -74,16 +74,35 @@ namespace Gnosis.Alexandria.Models
             if (index >= 0 && index < Count)
             {
                 var item = base[index];
-                base.Remove(item);
+                RemoveItem(item);
             }
             else throw new IndexOutOfRangeException();
         }
 
-        public new void Replace(T original, T replacement)
+        public void Replace(T original, T replacement)
         {
-            base.Replace(original, replacement);
+            ReplaceItem(original, replacement);
             addedItems.Add(replacement);
             removedItems.Add(original);
+        }
+
+        public IEnumerable<T> GetExistingItems()
+        {
+            IList<T> existingItems = new List<T>();
+
+            var index = 0;
+            foreach (var item in Items)
+            {
+                if (originalItems.Count > index)
+                {
+                    if (originalItems[index].GetHashCode() == item.GetHashCode())
+                        existingItems.Add(item);
+                }
+
+                index++;
+            }
+
+            return existingItems;
         }
 
         public IEnumerable<T> GetAddedItems()

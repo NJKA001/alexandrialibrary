@@ -16,6 +16,7 @@ namespace Gnosis.Alexandria.Models
         void Remove(T item);
         void Replace(T original, T replacement);
 
+        IEnumerable<T> GetExistingItems();
         IEnumerable<T> GetAddedItems();
         IEnumerable<T> GetRemovedItems();
     }

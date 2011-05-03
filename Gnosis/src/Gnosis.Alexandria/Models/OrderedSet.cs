@@ -11,7 +11,7 @@ namespace Gnosis.Alexandria.Models
         public OrderedSet(IEnumerable<T> items)
         {
             foreach (var item in items)
-                Add(item);
+                AddItem(item);
         }
 
         private readonly Dispatcher dispatcher = Dispatcher.CurrentDispatcher;
@@ -23,7 +23,7 @@ namespace Gnosis.Alexandria.Models
             get { return list; }
         }
 
-        protected void Add(T item)
+        protected void AddItem(T item)
         {
             var key = item.GetHashCode();
             if (!map.ContainsKey(key))
@@ -41,7 +41,7 @@ namespace Gnosis.Alexandria.Models
             else throw new ArgumentException("item already contained in set - a set cannot have duplicates");
         }
 
-        protected void Insert(int index, T item)
+        protected void InsertItem(int index, T item)
         {
             var key = item.GetHashCode();
             if (!map.ContainsKey(key))
@@ -59,7 +59,7 @@ namespace Gnosis.Alexandria.Models
             else throw new ArgumentException("item already contained in set - a set cannot have duplicates");
         }
 
-        protected void Move(int index, T item)
+        protected void MoveItem(int index, T item)
         {
             var key = item.GetHashCode();
             if (map.ContainsKey(key))
@@ -77,7 +77,7 @@ namespace Gnosis.Alexandria.Models
             else throw new KeyNotFoundException("item not contained in set - cannot move");
         }
 
-        protected void Remove(T item)
+        protected void RemoveItem(T item)
         {
             var key = item.GetHashCode();
             if (map.ContainsKey(key))
@@ -95,7 +95,7 @@ namespace Gnosis.Alexandria.Models
             else throw new KeyNotFoundException("item not contained in set - cannot remove");
         }
 
-        protected void Replace(T original, T replacement)
+        protected void ReplaceItem(T original, T replacement)
         {
             var key = original.GetHashCode();
             if (map.ContainsKey(key))
