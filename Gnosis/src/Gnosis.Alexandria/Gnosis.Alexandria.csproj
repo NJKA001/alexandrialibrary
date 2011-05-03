@@ -84,6 +84,10 @@
     <Compile Include="Helpers\Rfc822DateTime.cs" />
     <Compile Include="Helpers\VisualHelper.cs" />
     <Compile Include="Models\ChangeableModelBase.cs" />
+    <Compile Include="Models\Devices\IDevice.cs" />
+    <Compile Include="Models\Devices\IDeviceItem.cs" />
+    <Compile Include="Models\Devices\IDeviceItemAttributes.cs" />
+    <Compile Include="Models\Devices\IMovableDeviceItem.cs" />
     <Compile Include="Models\Feeds\IFeed.cs" />
     <Compile Include="Models\Feeds\IFeedCategory.cs" />
     <Compile Include="Models\Feeds\IFeedItem.cs" />
@@ -256,7 +260,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="Models\Devices\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\back.png" />

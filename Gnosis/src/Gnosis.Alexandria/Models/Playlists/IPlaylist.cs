@@ -35,8 +35,14 @@ namespace Gnosis.Alexandria.Models.Playlists
         void RemoveItem(IPlaylistItem item);
         void MoveItemTo(IPlaylistItem item, int index);
 
+        IEnumerable<IPlaylistItem> GetNewItems();
+        IEnumerable<IPlaylistItem> GetChangedItems();
+        IEnumerable<KeyValuePair<int, IPlaylistItem>> GetMovedItems();
+        IEnumerable<IPlaylistItem> GetRemovedItems();
+
         void AddLink(IPlaylistLink link);
         void RemoveLink(IPlaylistLink link);
+
 
         void AddMetadata(IPlaylistMetadata metadata);
         void RemoveMetadata(IPlaylistMetadata metadata);

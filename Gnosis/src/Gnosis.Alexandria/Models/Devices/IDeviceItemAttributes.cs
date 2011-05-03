@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Gnosis.Alexandria.Models.Devices
+{
+    public interface IDeviceItemAttributes : IModel
+    {
+        bool IsReadOnly { get; }
+        bool IsHidden { get; }
+        bool IsSystem { get; }
+        bool IsDirectory { get; }
+        bool IsArchive { get; }
+        bool IsNormal { get; }
+        bool IsTemporary { get; }
+        bool IsSparseFile { get; }
+        bool HasReparsePoint { get; }
+        bool IsCompressed { get; }
+        bool IsOffline { get; }
+        bool IsNotContentIndexed { get; }
+        bool IsEncrypted { get; }
+    }
+}
