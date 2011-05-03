@@ -84,6 +84,7 @@
     <Compile Include="Helpers\Rfc822DateTime.cs" />
     <Compile Include="Helpers\VisualHelper.cs" />
     <Compile Include="Models\ChangeableModelBase.cs" />
+    <Compile Include="Models\ChangeableOrderedSet.cs" />
     <Compile Include="Models\Devices\IDevice.cs" />
     <Compile Include="Models\Devices\IDeviceItem.cs" />
     <Compile Include="Models\Devices\IDeviceItemAttributes.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Models\Feeds\IFeedItemMetadata.cs" />
     <Compile Include="Models\Feeds\IFeedLink.cs" />
     <Compile Include="Models\Feeds\IFeedMetadata.cs" />
+    <Compile Include="Models\IChangeableSet.cs" />
     <Compile Include="Models\Old\DeviceCatalogSource.cs" />
     <Compile Include="Models\Old\HardDiskSource.cs" />
     <Compile Include="Models\IChangeableModel.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="Models\Old\OpticalDiscSource.cs" />
     <Compile Include="Models\Old\PodcastSource.cs" />
     <Compile Include="Models\Old\SpiderSource.cs" />
+    <Compile Include="Models\OrderedSet.cs" />
     <Compile Include="Models\Playlists\IPlaylist.cs" />
     <Compile Include="Models\Playlists\IPlaylistAttribution.cs" />
     <Compile Include="Models\Playlists\IPlaylistExtension.cs" />

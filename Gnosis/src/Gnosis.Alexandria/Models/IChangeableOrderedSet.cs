@@ -3,21 +3,18 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
+using System.Windows.Threading;
 
 namespace Gnosis.Alexandria.Models
 {
     public interface IChangeableOrderedSet<T>
         : IOrderedSet<T>,
-        INotifyCollectionChanged
+        IChangeableSet<T>
     {
-        bool IsChanged { get; }
-        IEnumerable<T> RemovedItems { get; }
-
-        void ClearRemovedItems();
         void Insert(int index, T item);
-        void InsertFirst(T item);
-        void InsertLast(T item);
-        void Remove(T item);
+        void Move(int index, T item);
         void RemoveAt(int index);
+
+        IEnumerable<T> GetMovedItems();
     }
 }
