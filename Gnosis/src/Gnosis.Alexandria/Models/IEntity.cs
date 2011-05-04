@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace Gnosis.Alexandria.Models
 {
-    public interface IModel
+    public interface IEntity
+        : INotifyPropertyChanged
     {
-        IModelContext ModelContext { get; }
         Guid Id { get; }
+        ITimeStamp TimeStamp { get; }
         bool IsNew { get; }
+        bool IsChanged { get; }
     }
 }

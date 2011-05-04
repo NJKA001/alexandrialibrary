@@ -5,9 +5,8 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Tracks
 {
-    public interface ITrackMetadata : IModel
+    public interface ITrackMetadata : IValue
     {
-        ITrack Track { get; }
         string TextEncoding { get; }
         string Description { get; }
         string Content { get; }

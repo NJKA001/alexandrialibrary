@@ -5,34 +5,54 @@ using System.Linq;
 using System.Text;
 using System.Windows.Threading;
 
+using log4net;
+
 namespace Gnosis.Alexandria.Models
 {
     public class OrderedSet<T> : IOrderedSet<T>
     {
-        public OrderedSet()
+        public OrderedSet(IContext context)
         {
+            this.context = context;
         }
 
-        public OrderedSet(IEnumerable<T> items)
+        public OrderedSet(IContext context, IEnumerable<T> items)
+            : this(context)
         {
-            foreach (var item in items)
+            if (items != null)
             {
-                originalItems.Add(item);
-                AddItem(item);
+                foreach (var item in items)
+                {
+                    originalItems.Add(item);
+                    AddItem(item);
+                }
             }
         }
 
-        private readonly Dispatcher dispatcher = Dispatcher.CurrentDispatcher;
+        private static readonly ILog log = LogManager.GetLogger(typeof(OrderedSet<T>));
+
+        private readonly IContext context;
         private readonly IList<T> list = new List<T>();
         private readonly IDictionary<int, T> map = new Dictionary<int, T>();
         private readonly IList<T> originalItems = new List<T>();
         private readonly IList<T> addedItems = new List<T>();
         private readonly IList<T> removedItems = new List<T>();
 
-        protected void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
+        protected void OnCollectionChanged(Action action, NotifyCollectionChangedEventArgs args)
         {
+            context.Invoke(action);
+
             if (CollectionChanged != null)
-                CollectionChanged(this, args);
+            {
+                try
+                {
+                    CollectionChanged(this, args);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("OrderedSet.OnCollectionChanged", ex);
+                }
+            }
         }
 
         protected IEnumerable<T> Items
@@ -46,15 +66,7 @@ namespace Gnosis.Alexandria.Models
             if (!map.ContainsKey(key))
             {
                 var action = new Action(delegate { list.Add(item); map.Add(key, item); });
-                if (dispatcher.CheckAccess())
-                {
-                    action.Invoke();
-                }
-                else
-                {
-                    dispatcher.Invoke(action, DispatcherPriority.DataBind, null);
-                }
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item));
+                OnCollectionChanged(action, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item));
             }
             else throw new ArgumentException("item already contained in set - a set cannot have duplicates");
         }
@@ -65,15 +77,7 @@ namespace Gnosis.Alexandria.Models
             if (!map.ContainsKey(key))
             {
                 var action = new Action(delegate { list.Insert(index, item); map.Add(key, item); });
-                if (dispatcher.CheckAccess())
-                {
-                    action.Invoke();
-                }
-                else
-                {
-                    dispatcher.Invoke(action, DispatcherPriority.DataBind, null);
-                }
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, index));
+                OnCollectionChanged(action, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, index));
             }
             else throw new ArgumentException("item already contained in set - a set cannot have duplicates");
         }
@@ -85,15 +89,7 @@ namespace Gnosis.Alexandria.Models
             {
                 var oldIndex = IndexOf(item);
                 var action = new Action(delegate { list.Remove(item); list.Insert(index, item); });
-                if (dispatcher.CheckAccess())
-                {
-                    action.Invoke();
-                }
-                else
-                {
-                    dispatcher.Invoke(action, DispatcherPriority.DataBind, null);
-                }
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Move, item, index, oldIndex));
+                OnCollectionChanged(action, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Move, item, index, oldIndex));
             }
             else throw new KeyNotFoundException("item not contained in set - cannot move");
         }
@@ -104,15 +100,7 @@ namespace Gnosis.Alexandria.Models
             if (map.ContainsKey(key))
             {
                 var action = new Action(delegate { list.Remove(item); map.Remove(key); });
-                if (dispatcher.CheckAccess())
-                {
-                    action.Invoke();
-                }
-                else
-                {
-                    dispatcher.Invoke(action, DispatcherPriority.DataBind, null);
-                }
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item));
+                OnCollectionChanged(action, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item));
             }
             else throw new KeyNotFoundException("item not contained in set - cannot remove");
         }
@@ -123,15 +111,7 @@ namespace Gnosis.Alexandria.Models
             if (map.ContainsKey(key))
             {
                 var action = new Action(delegate { var index = IndexOf(original); list.Remove(original); map.Remove(key); list.Insert(index, replacement); map.Add(replacement.GetHashCode(), replacement); });
-                if (dispatcher.CheckAccess())
-                {
-                    action.Invoke();
-                }
-                else
-                {
-                    dispatcher.Invoke(action, DispatcherPriority.DataBind, null);
-                }
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, replacement, original));
+                OnCollectionChanged(action, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, replacement, original));
             }
             else throw new KeyNotFoundException("item not contained in set - cannot replace");
         }
@@ -173,9 +153,8 @@ namespace Gnosis.Alexandria.Models
 
         public void Clear()
         {
-            list.Clear();
-            map.Clear();
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            var action = new Action(delegate { list.Clear(); map.Clear(); });
+            OnCollectionChanged(action, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         public void Add(T item)

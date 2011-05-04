@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Tracks
 {
-    public interface ITrackPicture : IChangeableModel
+    public interface ITrackPicture : IEntity
     {
         ITrack Track { get; }
         string TextEncoding { get; set; }

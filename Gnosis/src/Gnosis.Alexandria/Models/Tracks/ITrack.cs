@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Alexandria.Models.Tracks
 {
     public interface ITrack :
-        IChangeableModel
+        IEntity
     {
         Uri Location { get; }
         string MediaType { get; set; }
@@ -22,8 +22,8 @@ namespace Gnosis.Alexandria.Models.Tracks
         string AlbumSubtitle { get; set; }
 
         string Artists { get; set; }
-        string ArtistSort { get; set; }
-        string AlbumArtists { get; }
+        string ArtistsSort { get; set; }
+        string AlbumArtists { get; set; }
 
         string Composers { get; set; }
         string Conductors { get; set; }

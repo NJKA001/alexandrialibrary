@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Feeds
 {
-    public interface IFeedItemLink : IModel
+    public interface IFeedItemLink : IValue
     {
         IFeed Feed { get; }
         string Relationship { get; }

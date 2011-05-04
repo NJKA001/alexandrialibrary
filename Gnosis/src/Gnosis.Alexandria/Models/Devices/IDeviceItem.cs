@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Devices
 {
-    public interface IDeviceItem : IChangeableModel
+    public interface IDeviceItem : IEntity
     {
         Uri Location { get; }
         string Name { get; }

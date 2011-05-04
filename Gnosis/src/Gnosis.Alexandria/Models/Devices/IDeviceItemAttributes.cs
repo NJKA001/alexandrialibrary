@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Devices
 {
-    public interface IDeviceItemAttributes : IModel
+    public interface IDeviceItemAttributes : IValue
     {
         bool IsReadOnly { get; }
         bool IsHidden { get; }

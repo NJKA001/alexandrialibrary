@@ -6,21 +6,124 @@ using System.Text;
 namespace Gnosis.Alexandria.Models.Tracks
 {
     public class Track
-        : ChangeableModelBase, ITrack
+        : EntityBase, ITrack
     {
-        public Track(IModelContext modelContext, Uri location)
-            : base(modelContext)
+        public Track(IContext context, Uri location)
+            : base(context)
         {
             this.location = location;
+
+            this.pictures = new OrderedSet<ITrackPicture>(context);
+            this.lyrics = new OrderedSet<ITrackUnsynchronizedLyrics>(context);
+            this.synchronizedLyrics = new OrderedSet<ITrackSynchronizedLyrics>(context);
+            this.identifiers = new OrderedSet<ITrackIdentifier>(context);
+            this.ratings = new OrderedSet<ITrackRating>(context);
+            this.links = new OrderedSet<ITrackLink>(context);
+            this.metadata = new OrderedSet<ITrackMetadata>(context);
         }
 
-        public Track(IModelContext modelContext, Guid id, ITimeStamp timeStamp, Uri location)
-            : base(modelContext, id, timeStamp)
+        public Track(IContext context, Guid id, ITimeStamp timeStamp, 
+            Uri location, string mediaType, string title, string titleSort, string subtitle, string grouping, string comment, 
+            string album, string albumSort, string albumSubtitle, string artists, string artistsSort, string albumArtists, 
+            string composers, string conductors, string genres, string moods, string languages, DateTime recordingDate, DateTime releaseDate,
+            string originalTitle, DateTime originalReleaseDate, uint trackNumber, uint trackCount, uint discNumber, uint discCount,
+            TimeSpan duration, uint beatsPerMinute, ulong playCount, TimeSpan playlistDelay, string originalFileName,
+            DateTime encodingDate, DateTime taggingDate, string copyright, string publisher, string internationalStandardRecordingCode,
+            IEnumerable<ITrackPicture> pictures, IEnumerable<ITrackUnsynchronizedLyrics> lyrics, 
+            IEnumerable<ITrackSynchronizedLyrics> synchronizedLyrics, IEnumerable<ITrackIdentifier> identifiers,
+            IEnumerable<ITrackRating> ratings, IEnumerable<ITrackLink> links, IEnumerable<ITrackMetadata> metadata)
+            : base(context, id, timeStamp)
         {
             this.location = location;
+            this.mediaType = mediaType;
+            this.title = title;
+            this.titleSort = titleSort;
+            this.subtitle = subtitle;
+            this.grouping = grouping;
+            this.comment = comment;
+            this.album = album;
+            this.albumSort = albumSort;
+            this.albumSubtitle = albumSubtitle;
+            this.artists = artists;
+            this.artistsSort = artistsSort;
+            this.albumArtists = albumArtists;
+            this.composers = composers;
+            this.conductors = conductors;
+            this.genres = genres;
+            this.moods = moods;
+            this.languages = languages;
+            this.recordingDate = recordingDate;
+            this.releaseDate = releaseDate;
+            this.originalTitle = originalTitle;
+            this.originalReleaseDate = originalReleaseDate;
+            this.trackNumber = trackNumber;
+            this.trackCount = trackCount;
+            this.discNumber = discNumber;
+            this.discCount = discCount;
+            this.duration = duration;
+            this.beatsPerMinute = beatsPerMinute;
+            this.playCount = playCount;
+            this.playlistDelay = playlistDelay;
+            this.originalFileName = originalFileName;
+            this.encodingDate = encodingDate;
+            this.taggingDate = taggingDate;
+            this.copyright = copyright;
+            this.publisher = publisher;
+            this.internationalStandardRecordingCode = internationalStandardRecordingCode;
+
+            this.pictures = new OrderedSet<ITrackPicture>(context, pictures);
+            this.lyrics = new OrderedSet<ITrackUnsynchronizedLyrics>(context, lyrics);
+            this.synchronizedLyrics = new OrderedSet<ITrackSynchronizedLyrics>(context, synchronizedLyrics);
+            this.identifiers = new OrderedSet<ITrackIdentifier>(context, identifiers);
+            this.ratings = new OrderedSet<ITrackRating>(context, ratings);
+            this.links = new OrderedSet<ITrackLink>(context, links);
+            this.metadata = new OrderedSet<ITrackMetadata>(context, metadata);
         }
 
         private readonly Uri location;
+        private string mediaType = "audio/unknown";
+        private string title = "Untitled";
+        private string titleSort = "Untitled";
+        private string subtitle = string.Empty;
+        private string grouping = string.Empty;
+        private string comment = string.Empty;
+        private string album = "Unknown Album";
+        private string albumSort = "Unknown Album";
+        private string albumSubtitle = string.Empty;
+        private string artists = "Unknown Artist";
+        private string artistsSort = "Unknown Artist";
+        private string albumArtists = string.Empty;
+        private string composers = string.Empty;
+        private string conductors = string.Empty;
+        private string genres = string.Empty;
+        private string moods = string.Empty;
+        private string languages = string.Empty;
+        private DateTime recordingDate = DateTime.MinValue;
+        private DateTime releaseDate = DateTime.MinValue;
+        private string originalTitle = string.Empty;
+        private DateTime originalReleaseDate = DateTime.MinValue;
+        private uint trackNumber = 0;
+        private uint trackCount = 0;
+        private uint discNumber = 0;
+        private uint discCount = 0;
+        private TimeSpan duration = TimeSpan.Zero;
+        private uint beatsPerMinute = 0;
+        private ulong playCount = 0;
+        private TimeSpan playlistDelay = TimeSpan.Zero;
+        private string originalFileName = string.Empty;
+        private DateTime encodingDate = DateTime.MinValue;
+        private DateTime taggingDate = DateTime.MinValue;
+        private string copyright = string.Empty;
+        private string publisher = string.Empty;
+        private string internationalStandardRecordingCode = string.Empty;
+        
+        private readonly IOrderedSet<ITrackPicture> pictures;
+        private readonly IOrderedSet<ITrackUnsynchronizedLyrics> lyrics;
+        private readonly IOrderedSet<ITrackSynchronizedLyrics> synchronizedLyrics;
+        private readonly IOrderedSet<ITrackIdentifier> identifiers;
+        private readonly IOrderedSet<ITrackRating> ratings;
+        private readonly IOrderedSet<ITrackLink> links;
+        private readonly IOrderedSet<ITrackMetadata> metadata;
 
         #region ITrack Members
 
@@ -31,450 +134,457 @@ namespace Gnosis.Alexandria.Models.Tracks
 
         public string MediaType
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return mediaType; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != mediaType)
+                {
+                    OnEntityChanged(() => mediaType = value, "MediaType");
+                }
             }
         }
 
         public string Title
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return title; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != title)
+                {
+                    OnEntityChanged(() => title = value, "Title");
+                }
             }
         }
 
         public string TitleSort
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return titleSort; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != titleSort)
+                {
+                    OnEntityChanged(() => titleSort = value, "TitleSort");
+                }
             }
         }
 
         public string Subtitle
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return subtitle; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != subtitle)
+                {
+                    OnEntityChanged(() => subtitle = value, "Subtitle");
+                }
             }
         }
 
         public string Grouping
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return grouping; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != grouping)
+                {
+                    OnEntityChanged(() => grouping = value, "Grouping");
+                }
             }
         }
 
         public string Comment
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return comment; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != comment)
+                {
+                    OnEntityChanged(() => comment = value, "Comment");
+                }
             }
         }
 
         public string Album
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return album; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != album)
+                {
+                    OnEntityChanged(() => album = value, "Album");
+                }
             }
         }
 
         public string AlbumSort
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return albumSort; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != albumSort)
+                {
+                    OnEntityChanged(() => albumSort = value, "AlbumSort");
+                }
             }
         }
 
         public string AlbumSubtitle
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return albumSubtitle; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != albumSubtitle)
+                {
+                    OnEntityChanged(() => albumSubtitle = value, "AlbumSubtitle");
+                }
             }
         }
 
         public string Artists
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return artists; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != artists)
+                {
+                    OnEntityChanged(() => artists = value, "Artists");
+                }
             }
         }
 
-        public string ArtistSort
+        public string ArtistsSort
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return artistsSort; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != artistsSort)
+                {
+                    OnEntityChanged(() => artistsSort = value, "ArtistsSort");
+                }
             }
         }
 
         public string AlbumArtists
         {
-            get { throw new NotImplementedException(); }
+            get { return albumArtists; }
+            set
+            {
+                if (value != null && value != albumArtists)
+                {
+                    OnEntityChanged(() => albumArtists = value, "AlbumArtists");
+                }
+            }
         }
 
         public string Composers
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return composers; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != composers)
+                {
+                    OnEntityChanged(() => composers = value, "Composers");
+                }
             }
         }
 
         public string Conductors
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return conductors; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != conductors)
+                {
+                    OnEntityChanged(() => conductors = value, "Conductors");
+                }
             }
         }
 
         public string Genres
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return genres; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != genres)
+                {
+                    OnEntityChanged(() => genres = value, "Genres");
+                }
             }
         }
 
         public string Moods
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return moods; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != moods)
+                {
+                    OnEntityChanged(() => moods = value, "Moods");
+                }
             }
         }
 
         public string Languages
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return languages; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != languages)
+                {
+                    OnEntityChanged(() => languages = value, "Languages");
+                }
             }
         }
 
         public DateTime RecordingDate
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return recordingDate; }
             set
             {
-                throw new NotImplementedException();
+                if (value != recordingDate)
+                {
+                    OnEntityChanged(() => recordingDate = value, "RecordingDate");
+                }
             }
         }
 
         public DateTime ReleaseDate
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return releaseDate; }
             set
             {
-                throw new NotImplementedException();
+                if (value != releaseDate)
+                {
+                    OnEntityChanged(() => releaseDate = value, "ReleaseDate");
+                }
             }
         }
 
         public string OriginalTitle
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return originalFileName; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != originalTitle)
+                {
+                    OnEntityChanged(() => originalTitle = value, "OriginalTitle");
+                }
             }
         }
 
         public DateTime OriginalReleaseDate
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return originalReleaseDate; }
             set
             {
-                throw new NotImplementedException();
+                if (value != originalReleaseDate)
+                {
+                    OnEntityChanged(() => originalReleaseDate = value, "OriginalReleaseDate");
+                }
             }
         }
 
         public uint TrackNumber
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return trackNumber; }
             set
             {
-                throw new NotImplementedException();
+                if (value != trackNumber)
+                {
+                    OnEntityChanged(() => trackNumber = value, "TrackNumber");
+                }
             }
         }
 
         public uint TrackCount
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return trackCount; }
             set
             {
-                throw new NotImplementedException();
+                if (value != trackCount)
+                {
+                    OnEntityChanged(() => trackCount = value, "TrackCount");
+                }
             }
         }
 
         public uint DiscNumber
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return discNumber; }
             set
             {
-                throw new NotImplementedException();
+                if (value != discNumber)
+                {
+                    OnEntityChanged(() => discNumber = value, "DiscNumber");
+                }
             }
         }
 
         public uint DiscCount
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return discCount; }
             set
             {
-                throw new NotImplementedException();
+                if (value != discCount)
+                {
+                    OnEntityChanged(() => discCount = value, "DiscCount");
+                }
             }
         }
 
         public TimeSpan Duration
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return duration; }
             set
             {
-                throw new NotImplementedException();
+                if (value != duration)
+                {
+                    OnEntityChanged(() => duration = value, "Duration");
+                }
             }
         }
 
         public uint BeatsPerMinute
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return beatsPerMinute; }
             set
             {
-                throw new NotImplementedException();
+                if (value != beatsPerMinute)
+                {
+                    OnEntityChanged(() => beatsPerMinute = value, "BeatsPerMinute");
+                }
             }
         }
 
         public ulong PlayCount
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return playCount; }
             set
             {
-                throw new NotImplementedException();
+                if (value != playCount)
+                {
+                    OnEntityChanged(() => playCount = value, "PlayCount");
+                }
             }
         }
 
         public TimeSpan PlaylistDelay
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return playlistDelay; }
             set
             {
-                throw new NotImplementedException();
+                if (value != playlistDelay)
+                {
+                    OnEntityChanged(() => playlistDelay = value, "PlaylistDelay");
+                }
             }
         }
 
         public string OriginalFileName
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return originalFileName; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != originalFileName)
+                {
+                    OnEntityChanged(() => originalFileName = value, "OriginalFileName");
+                }
             }
         }
 
         public DateTime EncodingDate
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return encodingDate; }
             set
             {
-                throw new NotImplementedException();
+                if (value != encodingDate)
+                {
+                    OnEntityChanged(() => encodingDate = value, "EncodingDate");
+                }
             }
         }
 
         public DateTime TaggingDate
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return taggingDate; }
             set
             {
-                throw new NotImplementedException();
+                if (value != taggingDate)
+                {
+                    OnEntityChanged(() => taggingDate = value, "TaggingDate");
+                }
             }
         }
 
         public string Copyright
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return copyright; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != copyright)
+                {
+                    OnEntityChanged(() => copyright = value, "Copyright");
+                }
             }
         }
 
         public string Publisher
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return publisher; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != publisher)
+                {
+                    OnEntityChanged(() => publisher = value, "Publisher");
+                }
             }
         }
 
         public string InternationalStandardRecordingCode
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return internationalStandardRecordingCode; }
             set
             {
-                throw new NotImplementedException();
+                if (value != null && value != internationalStandardRecordingCode)
+                {
+                    OnEntityChanged(() => internationalStandardRecordingCode = value, "InternationalStandardRecordingCode");
+                }
             }
         }
 
         public IOrderedSet<ITrackPicture> Pictures
         {
-            get { throw new NotImplementedException(); }
+            get { return pictures; }
         }
 
         public IOrderedSet<ITrackUnsynchronizedLyrics> Lyrics
         {
-            get { throw new NotImplementedException(); }
+            get { return lyrics; }
         }
 
         public IOrderedSet<ITrackSynchronizedLyrics> SynchronizedLyrics
         {
-            get { throw new NotImplementedException(); }
+            get { return synchronizedLyrics; }
         }
 
         public IOrderedSet<ITrackIdentifier> Identifiers
         {
-            get { throw new NotImplementedException(); }
+            get { return identifiers; }
         }
 
         public IOrderedSet<ITrackRating> Ratings
         {
-            get { throw new NotImplementedException(); }
+            get { return ratings; }
         }
 
         public IOrderedSet<ITrackLink> Links
         {
-            get { throw new NotImplementedException(); }
+            get { return links; }
         }
 
         public IOrderedSet<ITrackMetadata> Metadata
         {
-            get { throw new NotImplementedException(); }
+            get { return metadata; }
         }
 
         #endregion

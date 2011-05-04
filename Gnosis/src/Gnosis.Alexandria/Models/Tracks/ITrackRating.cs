@@ -5,9 +5,8 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Tracks
 {
-    public interface ITrackRating : IModel
+    public interface ITrackRating : IValue
     {
-        ITrack Track { get; }
         byte Rating { get; }
         Uri User { get; }
         ulong PlayCount { get; }

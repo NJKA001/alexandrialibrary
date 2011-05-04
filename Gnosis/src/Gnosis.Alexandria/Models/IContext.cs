@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Threading;
 
 namespace Gnosis.Alexandria.Models
 {
-    public interface IModelContext
+    public interface IContext
     {
+        Uri CurrentUser { get; }
+
+        void ChangeCurrentUser(Uri user);
+        void Invoke(Action action);
+
         ITimeStamp GetCreatedTimeStamp();
         ITimeStamp GetAccessedTimeStamp(ITimeStamp timeStamp);
         ITimeStamp GetModifiedTimeStamp(ITimeStamp timeStamp);
-        Uri GetCurrentUser();
     }
 }

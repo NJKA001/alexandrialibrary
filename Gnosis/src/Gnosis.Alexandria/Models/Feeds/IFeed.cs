@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Feeds
 {
-    public interface IFeed : IChangeableModel
+    public interface IFeed : IEntity
     {
         Uri Location { get; }
         string MediaType { get; }

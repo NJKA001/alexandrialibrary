@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Tracks
 {
-    public interface ITrackUnsynchronizedLyrics : IChangeableModel
+    public interface ITrackUnsynchronizedLyrics : IEntity
     {
         ITrack Track { get; }
-        string Encoding { get; set; }
+        string TextEncoding { get; set; }
         string Language { get; set; }
         string Description { get; set; }
         string Lyrics { get; set; }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Playlists
 {
-    public interface IPlaylistLink : IModel
+    public interface IPlaylistLink : IValue
     {
         IPlaylist Playlist { get; }
         Uri Relationship { get; }

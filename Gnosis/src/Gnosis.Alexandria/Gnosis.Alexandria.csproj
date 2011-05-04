@@ -83,7 +83,7 @@
     <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="Helpers\Rfc822DateTime.cs" />
     <Compile Include="Helpers\VisualHelper.cs" />
-    <Compile Include="Models\ChangeableModelBase.cs" />
+    <Compile Include="Models\EntityBase.cs" />
     <Compile Include="Models\Devices\IDevice.cs" />
     <Compile Include="Models\Devices\IDeviceItem.cs" />
     <Compile Include="Models\Devices\IDeviceItemAttributes.cs" />
@@ -97,11 +97,12 @@
     <Compile Include="Models\Feeds\IFeedLink.cs" />
     <Compile Include="Models\Feeds\IFeedMetadata.cs" />
     <Compile Include="Models\ISet.cs" />
+    <Compile Include="Models\ModelContext.cs" />
     <Compile Include="Models\Old\DeviceCatalogSource.cs" />
     <Compile Include="Models\Old\HardDiskSource.cs" />
-    <Compile Include="Models\IChangeableModel.cs" />
-    <Compile Include="Models\IModel.cs" />
-    <Compile Include="Models\IModelContext.cs" />
+    <Compile Include="Models\IEntity.cs" />
+    <Compile Include="Models\IValue.cs" />
+    <Compile Include="Models\IContext.cs" />
     <Compile Include="Models\IOrderedSet.cs" />
     <Compile Include="Models\Old\IPlaybackStatus.cs" />
     <Compile Include="Models\Old\ISourcePropertyFactory.cs" />
@@ -114,7 +115,6 @@
     <Compile Include="Models\Old\ISourceProperty.cs" />
     <Compile Include="Models\ITimeStamp.cs" />
     <Compile Include="Models\Old\LoadSourceRequest.cs" />
-    <Compile Include="Models\Old\ModelBase.cs" />
     <Compile Include="Models\Old\OpticalDiscSource.cs" />
     <Compile Include="Models\Old\PodcastSource.cs" />
     <Compile Include="Models\Old\SpiderSource.cs" />
@@ -138,6 +138,14 @@
     <Compile Include="Models\Tracks\ITrackPicture.cs" />
     <Compile Include="Models\Tracks\ITrackRating.cs" />
     <Compile Include="Models\Tracks\Track.cs" />
+    <Compile Include="Models\Tracks\TrackIdentifier.cs" />
+    <Compile Include="Models\Tracks\TrackLink.cs" />
+    <Compile Include="Models\Tracks\TrackMetadata.cs" />
+    <Compile Include="Models\Tracks\TrackPicture.cs" />
+    <Compile Include="Models\Tracks\TrackRating.cs" />
+    <Compile Include="Models\Tracks\TrackSynchronizedLyrics.cs" />
+    <Compile Include="Models\Tracks\TrackUnsynchronizedLyrics.cs" />
+    <Compile Include="Models\ValueBase.cs" />
     <Compile Include="Repositories\Tracks\ITrackSearch.cs" />
     <Compile Include="Models\Tracks\ITrackSynchronizedLyrics.cs" />
     <Compile Include="Models\Tracks\ITrackUnsynchronizedLyrics.cs" />

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Playlists
 {
-    public interface IPlaylistItem : IChangeableModel
+    public interface IPlaylistItem : IEntity
     {
         IPlaylist Playlist { get; }
         string Title { get; set; }
