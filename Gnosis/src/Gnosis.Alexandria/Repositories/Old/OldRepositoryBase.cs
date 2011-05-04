@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Repositories
 {
-    public abstract class RepositoryBase<T> : IRepository<T>
+    public abstract class OldRepositoryBase<T> : IOldRepository<T>
     {
-        protected RepositoryBase(string database, string table, string orderBy)
+        protected OldRepositoryBase(string database, string table, string orderBy)
         {
             this.database = database;
             this.table = table;

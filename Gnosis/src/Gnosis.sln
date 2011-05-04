@@ -11,19 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "taglib-sharp", "..\lib\tagl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Fmod", "Gnosis.Fmod\Gnosis.Fmod.csproj", "{1629B512-34A2-4F04-AB9A-EBD30228EBDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Alexandria.Tests", "Gnosis.Alexandria.Tests\Gnosis.Alexandria.Tests.csproj", "{19053258-6EF2-440A-98C8-64D402DFA1FB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B3C8207B-8CA1-4C24-B96B-622783C8BE5F}"
-	ProjectSection(SolutionItems) = preProject
-		Gnosis.vsmdi = Gnosis.vsmdi
-		Local.testsettings = Local.testsettings
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-	EndProjectSection
-EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = Gnosis.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -73,16 +61,6 @@ Global
 		{1629B512-34A2-4F04-AB9A-EBD30228EBDC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{1629B512-34A2-4F04-AB9A-EBD30228EBDC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{1629B512-34A2-4F04-AB9A-EBD30228EBDC}.Release|x86.ActiveCfg = Release|Any CPU
-		{19053258-6EF2-440A-98C8-64D402DFA1FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19053258-6EF2-440A-98C8-64D402DFA1FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{19053258-6EF2-440A-98C8-64D402DFA1FB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{19053258-6EF2-440A-98C8-64D402DFA1FB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{19053258-6EF2-440A-98C8-64D402DFA1FB}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{19053258-6EF2-440A-98C8-64D402DFA1FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{19053258-6EF2-440A-98C8-64D402DFA1FB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{19053258-6EF2-440A-98C8-64D402DFA1FB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{19053258-6EF2-440A-98C8-64D402DFA1FB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{19053258-6EF2-440A-98C8-64D402DFA1FB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -84,7 +84,6 @@
     <Compile Include="Helpers\Rfc822DateTime.cs" />
     <Compile Include="Helpers\VisualHelper.cs" />
     <Compile Include="Models\ChangeableModelBase.cs" />
-    <Compile Include="Models\ChangeableOrderedSet.cs" />
     <Compile Include="Models\Devices\IDevice.cs" />
     <Compile Include="Models\Devices\IDeviceItem.cs" />
     <Compile Include="Models\Devices\IDeviceItemAttributes.cs" />
@@ -97,11 +96,10 @@
     <Compile Include="Models\Feeds\IFeedItemMetadata.cs" />
     <Compile Include="Models\Feeds\IFeedLink.cs" />
     <Compile Include="Models\Feeds\IFeedMetadata.cs" />
-    <Compile Include="Models\IChangeableSet.cs" />
+    <Compile Include="Models\ISet.cs" />
     <Compile Include="Models\Old\DeviceCatalogSource.cs" />
     <Compile Include="Models\Old\HardDiskSource.cs" />
     <Compile Include="Models\IChangeableModel.cs" />
-    <Compile Include="Models\IChangeableOrderedSet.cs" />
     <Compile Include="Models\IModel.cs" />
     <Compile Include="Models\IModelContext.cs" />
     <Compile Include="Models\IOrderedSet.cs" />
@@ -139,6 +137,8 @@
     <Compile Include="Models\Tracks\ITrackMetadata.cs" />
     <Compile Include="Models\Tracks\ITrackPicture.cs" />
     <Compile Include="Models\Tracks\ITrackRating.cs" />
+    <Compile Include="Models\Tracks\Track.cs" />
+    <Compile Include="Repositories\Tracks\ITrackSearch.cs" />
     <Compile Include="Models\Tracks\ITrackSynchronizedLyrics.cs" />
     <Compile Include="Models\Tracks\ITrackUnsynchronizedLyrics.cs" />
     <Compile Include="Models\Tracks\TrackPictureType.cs" />
@@ -148,22 +148,23 @@
     <Compile Include="Models\Old\YouTubeUserPlaylistsSource.cs" />
     <Compile Include="Models\Old\YouTubeUserSource.cs" />
     <Compile Include="Models\Old\YouTubeVideoSource.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\Old\IOldRepository.cs" />
     <Compile Include="Models\Old\IdentifierProperty.cs" />
     <Compile Include="Models\Old\PlaylistItemSource.cs" />
     <Compile Include="Models\Old\ProxySource.cs" />
     <Compile Include="Models\Old\SourcePropertyFactory.cs" />
     <Compile Include="Models\Old\SourceType.cs" />
     <Compile Include="Models\Old\PlaybackStatus.cs" />
-    <Compile Include="Repositories\SourceRepository.cs" />
+    <Compile Include="Repositories\Tracks\ITrackRepository.cs" />
+    <Compile Include="Repositories\Old\OldSourceRepository.cs" />
     <Compile Include="Models\Old\MediaSource.cs" />
     <Compile Include="Models\Old\PlaylistSource.cs" />
-    <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="Repositories\Old\OldRepositoryBase.cs" />
     <Compile Include="Models\Old\SourceBase.cs" />
     <Compile Include="Models\Old\LocationProperty.cs" />
     <Compile Include="Models\Old\SourcePropertyBase.cs" />
     <Compile Include="Models\Old\Track.cs" />
-    <Compile Include="Repositories\TrackRepository.cs" />
+    <Compile Include="Repositories\Old\OldTrackRepository.cs" />
     <Compile Include="Views\MediaListView.xaml.cs">
       <DependentUpon>MediaListView.xaml</DependentUpon>
     </Compile>

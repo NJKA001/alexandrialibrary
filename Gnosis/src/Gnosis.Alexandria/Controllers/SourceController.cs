@@ -21,14 +21,14 @@ namespace Gnosis.Alexandria.Controllers
 {
     public class SourceController : ISourceController
     {
-        public SourceController(IRepository<ISource> repository, ITrackController trackController)
+        public SourceController(IOldRepository<ISource> repository, ITrackController trackController)
         {
             this.repository = repository;
             this.trackController = trackController;
         }
 
         private static readonly ILog log = LogManager.GetLogger(typeof(SourceController));
-        private readonly IRepository<ISource> repository;
+        private readonly IOldRepository<ISource> repository;
         private readonly ITrackController trackController;
 
         public ISource Get(Guid id)

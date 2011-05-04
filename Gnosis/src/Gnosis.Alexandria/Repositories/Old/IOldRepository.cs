@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Repositories
 {
-    public interface IRepository<T>
+    public interface IOldRepository<T>
     {
         T Get(Guid id);
         void Save(T record);

@@ -6,12 +6,12 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models
 {
-    public interface IChangeableSet<T>
+    public interface ISet<T>
         : IEnumerable<T>, INotifyCollectionChanged
     {
         bool IsChanged { get; }
 
-        void ClearState();
+        void ResetState();
         void Add(T item);
         void Remove(T item);
         void Replace(T original, T replacement);

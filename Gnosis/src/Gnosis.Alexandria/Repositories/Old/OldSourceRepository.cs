@@ -8,9 +8,9 @@ using Gnosis.Alexandria.Models;
 
 namespace Gnosis.Alexandria.Repositories
 {
-    public class SourceRepository : RepositoryBase<ISource>
+    public class OldSourceRepository : OldRepositoryBase<ISource>
     {
-        public SourceRepository()
+        public OldSourceRepository()
             : base("Alexandria.db", "Source", "Number, Date, NameHash")
         {
         }

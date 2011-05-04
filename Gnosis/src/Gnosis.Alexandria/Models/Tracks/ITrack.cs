@@ -9,7 +9,7 @@ namespace Gnosis.Alexandria.Models.Tracks
         IChangeableModel
     {
         Uri Location { get; }
-        string MediaType { get; }
+        string MediaType { get; set; }
 
         string Title { get; set; }
         string TitleSort { get; set; }
@@ -56,33 +56,12 @@ namespace Gnosis.Alexandria.Models.Tracks
         string Publisher { get; set; }
         string InternationalStandardRecordingCode { get; set; }
 
-        IEnumerable<ITrackPicture> Pictures { get; }
-        IEnumerable<ITrackUnsynchronizedLyrics> Lyrics { get; }
-        IEnumerable<ITrackSynchronizedLyrics> SynchronizedLyrics { get; }
-        IEnumerable<ITrackIdentifier> Identifiers { get; }
-        IEnumerable<ITrackRating> Ratings { get; }
-        IEnumerable<ITrackLink> Links { get; }
-        IEnumerable<ITrackMetadata> Metadata { get; }
-
-        void AddPicture(ITrackPicture picture);
-        void RemovePicture(ITrackPicture picture);
-
-        void AddLyrics(ITrackUnsynchronizedLyrics lyrics);
-        void RemoveLyrics(ITrackUnsynchronizedLyrics lyrics);
-
-        void AddSyncrhonizedLyrics(ITrackSynchronizedLyrics lyrics);
-        void RemoveSynchronizedLyrics(ITrackSynchronizedLyrics lyrics);
-
-        void AddIdentifier(ITrackIdentifier identifier);
-        void RemoveIdentifier(ITrackIdentifier identifier);
-
-        void AddRating(ITrackRating rating);
-        void RemoveRating(ITrackRating rating);
-
-        void AddLink(ITrackLink link);
-        void RemoveLink(ITrackLink link);
-
-        void AddMetadata(ITrackMetadata metadata);
-        void RemoveMetadata(ITrackMetadata metadata);
+        IOrderedSet<ITrackPicture> Pictures { get; }
+        IOrderedSet<ITrackUnsynchronizedLyrics> Lyrics { get; }
+        IOrderedSet<ITrackSynchronizedLyrics> SynchronizedLyrics { get; }
+        IOrderedSet<ITrackIdentifier> Identifiers { get; }
+        IOrderedSet<ITrackRating> Ratings { get; }
+        IOrderedSet<ITrackLink> Links { get; }
+        IOrderedSet<ITrackMetadata> Metadata { get; }
     }
 }

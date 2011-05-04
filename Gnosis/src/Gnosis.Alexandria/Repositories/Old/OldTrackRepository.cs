@@ -8,9 +8,9 @@ using Gnosis.Alexandria.Models;
 
 namespace Gnosis.Alexandria.Repositories
 {
-    public class TrackRepository : RepositoryBase<ITrack>
+    public class OldTrackRepository : OldRepositoryBase<ITrack>
     {
-        public TrackRepository()
+        public OldTrackRepository()
             : base("Alexandria.db", "Track", "ArtistHash, ReleaseDate, DiscNumber, AlbumHash, TrackNumber")
         {
         }

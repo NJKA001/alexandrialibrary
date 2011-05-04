@@ -9,7 +9,7 @@ using Gnosis.Alexandria.Repositories;
 
 namespace Gnosis.Alexandria.Controllers
 {
-    public interface ISourceController : IRepository<ISource>
+    public interface ISourceController : IOldRepository<ISource>
     {
         ISource GetPlaylistItem(ISource parent, ITrack track);
         void LoadDirectories(ISource source);

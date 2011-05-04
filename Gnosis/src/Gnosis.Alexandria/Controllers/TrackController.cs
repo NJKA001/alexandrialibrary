@@ -18,7 +18,7 @@ namespace Gnosis.Alexandria.Controllers
 {
     public class TrackController : ITrackController
     {
-        public TrackController(IRepository<ITrack> repository, ITagController tagController)
+        public TrackController(IOldRepository<ITrack> repository, ITagController tagController)
         {
             this.repository = repository;
             this.tagController = tagController;
@@ -45,7 +45,7 @@ namespace Gnosis.Alexandria.Controllers
         }
 
         private static readonly ILog log = LogManager.GetLogger(typeof(TrackController));
-        private readonly IRepository<ITrack> repository;
+        private readonly IOldRepository<ITrack> repository;
         private readonly ITagController tagController;
         private readonly ObservableCollection<ITrack> boundTracks = new ObservableCollection<ITrack>();
         private BackgroundWorker imageLoader = new BackgroundWorker();

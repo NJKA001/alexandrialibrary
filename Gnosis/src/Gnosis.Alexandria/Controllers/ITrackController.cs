@@ -10,7 +10,7 @@ using Gnosis.Alexandria.Repositories;
 
 namespace Gnosis.Alexandria.Controllers
 {
-    public interface ITrackController : IRepository<ITrack>
+    public interface ITrackController : IOldRepository<ITrack>
     {
         IEnumerable<ITrack> Tracks { get; }
         int TrackCount { get; }
