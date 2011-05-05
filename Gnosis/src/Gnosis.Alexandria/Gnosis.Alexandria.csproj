@@ -150,6 +150,7 @@
     <Compile Include="Models\Tracks\TrackSynchronizedLyrics.cs" />
     <Compile Include="Models\Tracks\TrackUnsynchronizedLyrics.cs" />
     <Compile Include="Models\ValueBase.cs" />
+    <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\Tracks\ITrackSearch.cs" />
     <Compile Include="Models\Tracks\ITrackSynchronizedLyrics.cs" />
     <Compile Include="Models\Tracks\ITrackUnsynchronizedLyrics.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Models\Old\SourcePropertyBase.cs" />
     <Compile Include="Models\Old\Track.cs" />
     <Compile Include="Repositories\Old\OldTrackRepository.cs" />
+    <Compile Include="Repositories\Tracks\TrackRepository.cs" />
     <Compile Include="Views\MediaListView.xaml.cs">
       <DependentUpon>MediaListView.xaml</DependentUpon>
     </Compile>

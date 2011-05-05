@@ -37,6 +37,7 @@ namespace Gnosis.Alexandria.Models
         private readonly IList<T> originalItems = new List<T>();
         private readonly IList<T> addedItems = new List<T>();
         private readonly IList<T> removedItems = new List<T>();
+        private readonly IList<Tuple<T, T>> replacedItems = new List<Tuple<T, T>>();
 
         protected void OnCollectionChanged(Action action, NotifyCollectionChangedEventArgs args)
         {
@@ -192,8 +193,7 @@ namespace Gnosis.Alexandria.Models
         public void Replace(T original, T replacement)
         {
             ReplaceItem(original, replacement);
-            addedItems.Add(replacement);
-            removedItems.Add(original);
+            replacedItems.Add(new Tuple<T, T>(original, replacement));
         }
 
         public IEnumerable<T> GetExistingItems()
@@ -243,6 +243,11 @@ namespace Gnosis.Alexandria.Models
         public IEnumerable<T> GetRemovedItems()
         {
             return removedItems;
+        }
+
+        public IEnumerable<Tuple<T, T>> GetReplacedItems()
+        {
+            return replacedItems;
         }
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
