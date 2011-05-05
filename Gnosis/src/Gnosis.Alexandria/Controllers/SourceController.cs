@@ -66,7 +66,7 @@ namespace Gnosis.Alexandria.Controllers
             return repository.Search(criteria);
         }
 
-        public ISource GetPlaylistItem(ISource parent, ITrack track)
+        public ISource GetPlaylistItem(ISource parent, IOldTrack track)
         {
             return new PlaylistItemSource()
             {
@@ -126,7 +126,7 @@ namespace Gnosis.Alexandria.Controllers
                             var track = trackController.Search(new Dictionary<string, object> { { "Path", file.FullName } }).FirstOrDefault();
                             if (track == null)
                             {
-                                track = new Track { Path = file.FullName, Title = file.Name };
+                                track = new OldTrack { Path = file.FullName, Title = file.Name };
                                 trackController.Save(track);
                             }
 

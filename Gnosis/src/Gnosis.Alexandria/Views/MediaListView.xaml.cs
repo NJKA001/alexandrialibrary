@@ -41,7 +41,7 @@ namespace Gnosis.Alexandria.Views
 
         private IPicture copiedPicture;
         private Point trackItemDragStartPoint = new Point(0, 0);
-        private ITrack trackToDrag = null;
+        private IOldTrack trackToDrag = null;
 
         private void TrackListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -99,7 +99,7 @@ namespace Gnosis.Alexandria.Views
                 if (item == null)
                     return;
 
-                var track = item.DataContext as ITrack;
+                var track = item.DataContext as IOldTrack;
 
                 if (track != null)
                 {
@@ -199,9 +199,9 @@ namespace Gnosis.Alexandria.Views
             mediaList.ItemsSource = trackController.Tracks;
         }
 
-        public ITrack SelectedTrack
+        public IOldTrack SelectedTrack
         {
-            get { return mediaList.SelectedItem as ITrack; }
+            get { return mediaList.SelectedItem as IOldTrack; }
         }
     }
 }

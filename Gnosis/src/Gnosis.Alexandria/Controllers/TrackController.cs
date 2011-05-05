@@ -18,7 +18,7 @@ namespace Gnosis.Alexandria.Controllers
 {
     public class TrackController : ITrackController
     {
-        public TrackController(IOldRepository<ITrack> repository, ITagController tagController)
+        public TrackController(IOldRepository<IOldTrack> repository, ITagController tagController)
         {
             this.repository = repository;
             this.tagController = tagController;
@@ -45,9 +45,9 @@ namespace Gnosis.Alexandria.Controllers
         }
 
         private static readonly ILog log = LogManager.GetLogger(typeof(TrackController));
-        private readonly IOldRepository<ITrack> repository;
+        private readonly IOldRepository<IOldTrack> repository;
         private readonly ITagController tagController;
-        private readonly ObservableCollection<ITrack> boundTracks = new ObservableCollection<ITrack>();
+        private readonly ObservableCollection<IOldTrack> boundTracks = new ObservableCollection<IOldTrack>();
         private BackgroundWorker imageLoader = new BackgroundWorker();
 
         private readonly IDictionary<Guid, string> cachedFiles = new Dictionary<Guid, string>();
@@ -76,7 +76,7 @@ namespace Gnosis.Alexandria.Controllers
             return cachedFiles.ContainsKey(id) ? new Uri(cachedFiles[id], UriKind.Absolute) : null;
         }
 
-        public void CacheTrack(ITrack track)
+        public void CacheTrack(IOldTrack track)
         {
             try
             {
@@ -110,9 +110,9 @@ namespace Gnosis.Alexandria.Controllers
             }
         }
 
-        private ITrack GetTrack(string path, Tag tag)
+        private IOldTrack GetTrack(string path, Tag tag)
         {
-            var track = new Track() { Path = path };
+            var track = new OldTrack() { Path = path };
 
             if (!string.IsNullOrEmpty(tag.Title))
                 track.Title = tag.Title;
@@ -140,23 +140,23 @@ namespace Gnosis.Alexandria.Controllers
             return track;
         }
 
-        public ITrack ReadFromTag(string path)
+        public IOldTrack ReadFromTag(string path)
         {
             var tag = tagController.GetTag(path);
             return GetTrack(path, tag);
         }
 
-        public ITrack Get(Guid id)
+        public IOldTrack Get(Guid id)
         {
             return repository.Get(id);
         }
 
-        public void Save(ITrack record)
+        public void Save(IOldTrack record)
         {
             repository.Save(record);
         }
 
-        public void Save(IEnumerable<ITrack> records)
+        public void Save(IEnumerable<IOldTrack> records)
         {
             repository.Save(records);
         }
@@ -171,12 +171,12 @@ namespace Gnosis.Alexandria.Controllers
             repository.Delete(ids);
         }
 
-        public IEnumerable<ITrack> All()
+        public IEnumerable<IOldTrack> All()
         {
             return repository.All();
         }
 
-        public IEnumerable<ITrack> Search(IEnumerable<KeyValuePair<string, object>> criteria)
+        public IEnumerable<IOldTrack> Search(IEnumerable<KeyValuePair<string, object>> criteria)
         {
             return repository.Search(criteria);
         }
@@ -219,9 +219,9 @@ namespace Gnosis.Alexandria.Controllers
             return criteria;
         }
 
-        public IEnumerable<ITrack> Search(string search)
+        public IEnumerable<IOldTrack> Search(string search)
         {
-            IEnumerable<ITrack> tracks = null;
+            IEnumerable<IOldTrack> tracks = null;
 
             if (!string.IsNullOrEmpty(search))
             {
@@ -230,7 +230,7 @@ namespace Gnosis.Alexandria.Controllers
                 tracks = Search(criteria);
                 if (tracks.Count() == 0 && search.Contains(' '))
                 {
-                    var set = new HashSet<ITrack>();
+                    var set = new HashSet<IOldTrack>();
                     foreach (var word in search.Split(' '))
                     {
                         foreach (var track in Search(GetSearchCriteria(word)))
@@ -255,7 +255,7 @@ namespace Gnosis.Alexandria.Controllers
         private void LoadTrackImages(object sender, DoWorkEventArgs args)
         {
             var worker = sender as BackgroundWorker;
-            var tracksToLoad = new List<ITrack>();
+            var tracksToLoad = new List<IOldTrack>();
             lock (boundTracks)
             {
                 tracksToLoad.AddRange(boundTracks);
@@ -307,7 +307,7 @@ namespace Gnosis.Alexandria.Controllers
             }
         }
 
-        public IEnumerable<ITrack> Tracks
+        public IEnumerable<IOldTrack> Tracks
         {
             get { return boundTracks; }
         }
@@ -317,12 +317,12 @@ namespace Gnosis.Alexandria.Controllers
             get { return boundTracks.Count; }
         }
 
-        public int IndexOf(ITrack track)
+        public int IndexOf(IOldTrack track)
         {
             return boundTracks.IndexOf(track);
         }
 
-        public ITrack GetTrackAt(int index)
+        public IOldTrack GetTrackAt(int index)
         {
             return boundTracks[index];
         }
@@ -332,20 +332,20 @@ namespace Gnosis.Alexandria.Controllers
             boundTracks.Clear();
         }
 
-        public void AddTrack(ITrack track)
+        public void AddTrack(IOldTrack track)
         {
             boundTracks.Add(track);
         }
 
-        public ITrack GetSelectedTrack()
+        public IOldTrack GetSelectedTrack()
         {
             return boundTracks.Where(x => x.IsSelected == true).FirstOrDefault();
         }
 
-        private ITrack ConvertToTrack(ISource source)
+        private IOldTrack ConvertToTrack(ISource source)
         {
             var album = source.Parent != null ? source.Parent.Name : source.Name;
-            return new Track() { Path = source.Path, ImagePath = source.ImagePath, Title = source.Name, Artist = source.Creator, Album = album, Comment = source.Summary };
+            return new OldTrack() { Path = source.Path, ImagePath = source.ImagePath, Title = source.Name, Artist = source.Creator, Album = album, Comment = source.Summary };
         }
 
         private void LoadSource(ISource source, LoadSourceRequest request)

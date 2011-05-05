@@ -9,13 +9,13 @@ using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Models
 {
-    public class Track : ITrack
+    public class OldTrack : IOldTrack
     {
-        public Track() : this(Guid.NewGuid())
+        public OldTrack() : this(Guid.NewGuid())
         {
         }
 
-        public Track(Guid id)
+        public OldTrack(Guid id)
         {
             this.id = id;
             TitleHash = title.AsNameHash();
@@ -578,7 +578,7 @@ namespace Gnosis.Alexandria.Models
             if (object.ReferenceEquals(obj, null))
                 return false;
 
-            var track = obj as Track;
+            var track = obj as OldTrack;
             if (object.ReferenceEquals(track, null))
                 return false;
 
@@ -590,7 +590,7 @@ namespace Gnosis.Alexandria.Models
             return string.Format("Track: {0} by {1} from {2}", title, artist, album);
         }
 
-        public static bool operator ==(Track track1, Track track2)
+        public static bool operator ==(OldTrack track1, OldTrack track2)
         {
             if (object.ReferenceEquals(track1, null) || object.ReferenceEquals(track2, null))
                 return false;
@@ -598,7 +598,7 @@ namespace Gnosis.Alexandria.Models
             return track1.id == track2.id;
         }
 
-        public static bool operator !=(Track track1, Track track2)
+        public static bool operator !=(OldTrack track1, OldTrack track2)
         {
             if (object.ReferenceEquals(track1, null))
             {

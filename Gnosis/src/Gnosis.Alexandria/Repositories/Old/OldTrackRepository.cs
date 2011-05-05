@@ -8,7 +8,7 @@ using Gnosis.Alexandria.Models;
 
 namespace Gnosis.Alexandria.Repositories
 {
-    public class OldTrackRepository : OldRepositoryBase<ITrack>
+    public class OldTrackRepository : OldRepositoryBase<IOldTrack>
     {
         public OldTrackRepository()
             : base("Alexandria.db", "Track", "ArtistHash, ReleaseDate, DiscNumber, AlbumHash, TrackNumber")
@@ -61,7 +61,7 @@ namespace Gnosis.Alexandria.Repositories
             return sql.ToString();
         }
 
-        protected override ITrack GetRecord(IDataReader reader)
+        protected override IOldTrack GetRecord(IDataReader reader)
         {
             var idIndex = reader.GetOrdinal("Id");
             var pathIndex = reader.GetOrdinal("Path");
@@ -86,7 +86,7 @@ namespace Gnosis.Alexandria.Repositories
             var cachePathIndex = reader.GetOrdinal("CachePath");
 
             var id = new Guid(reader.GetString(idIndex));
-            var track = new Track(id)
+            var track = new OldTrack(id)
             {
                 Path = reader.GetString(pathIndex),
                 ImagePath = reader.GetString(imagePathIndex),
@@ -107,7 +107,7 @@ namespace Gnosis.Alexandria.Repositories
             return track;
         }
 
-        protected override IDbCommand GetSaveCommand(IDbConnection connection, ITrack record)
+        protected override IDbCommand GetSaveCommand(IDbConnection connection, IOldTrack record)
         {
             var command = connection.CreateCommand();
 

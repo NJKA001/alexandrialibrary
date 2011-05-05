@@ -5,16 +5,22 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Alexandria.Models;
+
 namespace Gnosis.Alexandria.Repositories
 {
     public abstract class RepositoryBase
     {
-        protected RepositoryBase(string database, string rootTable)
+        protected RepositoryBase(IContext context, string database, string rootTable)
         {
+            this.context = context;
             this.database = database;
             this.rootTable = rootTable;
+
+            Initialize();
         }
 
+        private readonly IContext context;
         private string database;
         private string rootTable;
 
@@ -25,10 +31,17 @@ namespace Gnosis.Alexandria.Repositories
                 connection.Open();
                 using (var command = connection.CreateCommand())
                 {
-                    //command.CommandText = GetInitializeText();
+                    command.CommandText = GetInitializeText();
                     command.ExecuteNonQuery();
                 }
             }
+        }
+
+        protected abstract string GetInitializeText();
+
+        protected IContext Context
+        {
+            get { return context; }
         }
 
         protected static void AddParameter(IDbCommand command, string name, object value)

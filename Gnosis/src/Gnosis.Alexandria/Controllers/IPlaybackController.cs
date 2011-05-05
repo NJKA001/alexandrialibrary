@@ -9,7 +9,7 @@ namespace Gnosis.Alexandria.Controllers
 {
     public interface IPlaybackController
     {
-        ITrack CurrentTrack { get; }
+        IOldTrack CurrentTrack { get; }
         TimeSpan CurrentDuration { get; }
         TimeSpan CurrentElapsed { get; }
         IPlaybackStatus Status { get; }
@@ -23,7 +23,7 @@ namespace Gnosis.Alexandria.Controllers
         void Reset();
         void Play();
         void Seek(int position);
-        void Load(ITrack track);
+        void Load(IOldTrack track);
         void Stop();
     }
 }

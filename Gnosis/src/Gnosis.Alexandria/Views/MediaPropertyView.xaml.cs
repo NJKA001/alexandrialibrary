@@ -32,7 +32,7 @@ namespace Gnosis.Alexandria.Views
         private static readonly ILog log = LogManager.GetLogger(typeof(MediaPropertyView));
         private ITrackController trackController;
         private ITagController tagController;
-        private ITrack track;
+        private IOldTrack track;
 
         private void ChangePictureButton_Click(object sender, RoutedEventArgs e)
         {
@@ -80,7 +80,7 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        public ITrack Track
+        public IOldTrack Track
         {
             get { return track; }
             set

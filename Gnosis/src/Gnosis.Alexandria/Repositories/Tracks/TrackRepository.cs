@@ -9,34 +9,59 @@ using Gnosis.Alexandria.Models.Tracks;
 namespace Gnosis.Alexandria.Repositories.Tracks
 {
     public class TrackRepository
-        : ITrackRepository
+        : RepositoryBase, ITrackRepository
     {
-        public Models.Tracks.ITrack New(Uri location)
+        public TrackRepository(IContext context)
+            : base(context, "Catalog.db", "Track")
+        {
+        }
+
+        protected override string GetInitializeText()
+        {
+            var track = new Track(Context, new Uri("urn:unknown"));
+
+            var trackTable =
+                new CreateTableBuilder("Track")
+                .PrimaryKeyText("TrackId")
+                .TextColumn("Title", track.Title);
+
+            var titleIndex =
+                new CreateIndexBuilder("Track_Title", "Track")
+                .AscendingColumn("Title");
+
+            var artistsIndex =
+                new CreateIndexBuilder("Track_Artists", "Track")
+                .AscendingColumn("Artists");
+
+            return string.Empty;
+        }
+
+        public ITrack New(Uri location)
         {
             throw new NotImplementedException();
         }
 
-        public Models.Tracks.ITrack GetOne(Guid id)
+        public ITrack GetOne(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Models.Tracks.ITrack GetOne(Uri location)
+        public ITrack GetOne(Uri location)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Models.Tracks.ITrack> GetAll()
+        public IEnumerable<ITrack> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Models.Tracks.ITrack> GetAny(ITrackSearch search)
+        public IEnumerable<ITrack> GetAny(ITrackSearch search)
         {
             throw new NotImplementedException();
         }
 
-        public void Save(IEnumerable<Models.Tracks.ITrack> tracks)
+        public void Save(IEnumerable<ITrack> tracks)
         {
             throw new NotImplementedException();
         }

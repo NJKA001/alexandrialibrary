@@ -39,7 +39,7 @@ namespace Gnosis.Alexandria.Views
 
         private ITrackController trackController;
         private ITagController tagController;
-        private readonly ObservableCollection<ITrack> autocompleteTracks = new ObservableCollection<ITrack>();
+        private readonly ObservableCollection<IOldTrack> autocompleteTracks = new ObservableCollection<IOldTrack>();
         private string lastSearch = string.Empty;
         private const int maxSuggestions = 10;
         private BackgroundWorker imageLoader = new BackgroundWorker();
@@ -85,7 +85,7 @@ namespace Gnosis.Alexandria.Views
         private void LoadAutocompleteImages(object sender, DoWorkEventArgs args)
         {
             var worker = sender as BackgroundWorker;
-            var tracksToLoad = new List<ITrack>();
+            var tracksToLoad = new List<IOldTrack>();
             lock (autocompleteTracks)
             {
                 tracksToLoad.AddRange(autocompleteTracks);
@@ -155,7 +155,7 @@ namespace Gnosis.Alexandria.Views
         {
             if (autocompleteListBox.SelectedItem != null)
             {
-                var track = autocompleteListBox.SelectedItem as ITrack;
+                var track = autocompleteListBox.SelectedItem as IOldTrack;
                 if (track != null)
                 {
                     searchTextBox.Text = track.Title;
@@ -173,7 +173,7 @@ namespace Gnosis.Alexandria.Views
                 var item = element.FindContainingItem<ListBoxItem>();
                 if (item != null)
                 {
-                    var track = item.DataContext as ITrack;
+                    var track = item.DataContext as IOldTrack;
                     if (track != null)
                         track.IsHovered = true;
                 }
@@ -188,7 +188,7 @@ namespace Gnosis.Alexandria.Views
                 var item = element.FindContainingItem<ListBoxItem>();
                 if (item != null)
                 {
-                    var track = item.DataContext as ITrack;
+                    var track = item.DataContext as IOldTrack;
                     if (track != null)
                         track.IsHovered = false;
                 }

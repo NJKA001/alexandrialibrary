@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace Gnosis.Alexandria.Models
 {
-    public interface ITrack : INotifyPropertyChanged
+    public interface IOldTrack : INotifyPropertyChanged
     {
         Guid Id { get; }
         string Path { get; set; }

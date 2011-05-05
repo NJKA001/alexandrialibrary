@@ -22,7 +22,7 @@ namespace Gnosis.Alexandria.Controllers
             return file.Tag;
         }
 
-        public void LoadPicture(ITrack track)
+        public void LoadPicture(IOldTrack track)
         {
             var path = !string.IsNullOrEmpty(track.CachePath) ? track.CachePath : track.Path;
             if (!string.IsNullOrEmpty(path) && System.IO.File.Exists(path))
@@ -35,7 +35,7 @@ namespace Gnosis.Alexandria.Controllers
             }
         }
 
-        public void SaveTag(ITrack track)
+        public void SaveTag(IOldTrack track)
         {
             var path = !string.IsNullOrEmpty(track.CachePath) ? track.CachePath : track.Path;
             if (new Uri(path).IsFile)
@@ -65,13 +65,13 @@ namespace Gnosis.Alexandria.Controllers
             }
         }
 
-        public void AddPicture(ITrack track, string path)
+        public void AddPicture(IOldTrack track, string path)
         {
             var picture = new TagLib.Picture(path);
             AddPicture(track, picture);
         }
 
-        public void AddPicture(ITrack track, IPicture picture)
+        public void AddPicture(IOldTrack track, IPicture picture)
         {
             var file = GetFile(track.Path);
             var existingPictures = file.Tag.Pictures;

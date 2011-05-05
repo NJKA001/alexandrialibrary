@@ -10,23 +10,23 @@ using Gnosis.Alexandria.Repositories;
 
 namespace Gnosis.Alexandria.Controllers
 {
-    public interface ITrackController : IOldRepository<ITrack>
+    public interface ITrackController : IOldRepository<IOldTrack>
     {
-        IEnumerable<ITrack> Tracks { get; }
+        IEnumerable<IOldTrack> Tracks { get; }
         int TrackCount { get; }
-        ITrack GetTrackAt(int index);
+        IOldTrack GetTrackAt(int index);
 
-        ITrack ReadFromTag(string path);
+        IOldTrack ReadFromTag(string path);
         void LoadDirectory(DirectoryInfo directory);
         void Filter(string search);
-        IEnumerable<ITrack> Search(string search);
-        int IndexOf(ITrack track);
+        IEnumerable<IOldTrack> Search(string search);
+        int IndexOf(IOldTrack track);
         void ClearTracks();
-        void AddTrack(ITrack track);
-        ITrack GetSelectedTrack();
+        void AddTrack(IOldTrack track);
+        IOldTrack GetSelectedTrack();
         void Load(ISource source, DependencyObject handle);
 
-        void CacheTrack(ITrack track);
+        void CacheTrack(IOldTrack track);
         Uri GetCachedUri(Guid id);
 
         EventHandler<EventArgs> SourceLoadCompleted { get; set; }

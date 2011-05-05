@@ -68,7 +68,7 @@ namespace Gnosis.Alexandria.Views
         }
 
         private static readonly ILog log = LogManager.GetLogger(typeof(MainWindow));
-        private readonly IOldRepository<ITrack> trackRepository = new OldTrackRepository();
+        private readonly IOldRepository<IOldTrack> trackRepository = new OldTrackRepository();
         private readonly IOldRepository<ISource> sourceRepository = new OldSourceRepository();
         private readonly ITagController tagController;
         private readonly ITrackController trackController;

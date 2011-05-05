@@ -96,7 +96,7 @@ namespace Gnosis.Alexandria.Views
             playButtonImage.DataContext = playbackController.Status;
         }
 
-        public void SetNowPlaying(ITrack track)
+        public void SetNowPlaying(IOldTrack track)
         {
             playbackController.Load(track);
 

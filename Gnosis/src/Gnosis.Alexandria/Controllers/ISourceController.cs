@@ -11,7 +11,7 @@ namespace Gnosis.Alexandria.Controllers
 {
     public interface ISourceController : IOldRepository<ISource>
     {
-        ISource GetPlaylistItem(ISource parent, ITrack track);
+        ISource GetPlaylistItem(ISource parent, IOldTrack track);
         void LoadDirectories(ISource source);
         void LoadPodcast(ISource source, DependencyObject handle);
         void LoadSpider(ISource source, DependencyObject handle);

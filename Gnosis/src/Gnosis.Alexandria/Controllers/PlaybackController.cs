@@ -34,7 +34,7 @@ namespace Gnosis.Alexandria.Controllers
         private readonly IAudioPlayer player = new AudioPlayer(new Fmod.AudioStreamFactory()) { PlayToggles = true };
         private readonly Timer playbackTimer = new Timer(1000);
         private readonly IPlaybackStatus playbackStatus = new PlaybackStatus();
-        private ITrack currentTrack;
+        private IOldTrack currentTrack;
         private bool isAboutToPlay = false;
         private bool hasSeek = false;
         private string playbackCachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), "Alexandria", "Cache", "Playback");
@@ -113,7 +113,7 @@ namespace Gnosis.Alexandria.Controllers
             UpdatePlaybackStatus();
         }
 
-        public ITrack CurrentTrack
+        public IOldTrack CurrentTrack
         {
             get { return currentTrack; }
         }
@@ -310,7 +310,7 @@ namespace Gnosis.Alexandria.Controllers
             }
         }
 
-        public void Load(ITrack track)
+        public void Load(IOldTrack track)
         {
             if (track == null)
                 throw new ArgumentNullException("track");

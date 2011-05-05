@@ -75,7 +75,7 @@ namespace Gnosis.Alexandria.Views
             return null;
         }
 
-        private void AddPlaylistItem(ISource source, ITrack track)
+        private void AddPlaylistItem(ISource source, IOldTrack track)
         {
             var item = sourceController.GetPlaylistItem(source, track);
 
@@ -522,7 +522,7 @@ namespace Gnosis.Alexandria.Views
         {
             try
             {
-                var track = e.Data.GetData("Track") as ITrack;
+                var track = e.Data.GetData("Track") as IOldTrack;
                 if (track != null)
                 {
                     var playlist = GetSourceDropTarget(e) as PlaylistSource;

@@ -13,9 +13,9 @@ namespace Gnosis.Alexandria.Controllers
     {
         File GetFile(string path);
         Tag GetTag(string path);
-        void LoadPicture(ITrack track);
-        void SaveTag(ITrack track);
-        void AddPicture(ITrack track, string path);
-        void AddPicture(ITrack track, IPicture picture);
+        void LoadPicture(IOldTrack track);
+        void SaveTag(IOldTrack track);
+        void AddPicture(IOldTrack track, string path);
+        void AddPicture(IOldTrack track, IPicture picture);
     }
 }
