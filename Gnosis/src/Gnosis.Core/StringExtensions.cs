@@ -916,33 +916,25 @@ namespace Gnosis.Core
 
         #endregion
 
-        public static string AsMd5HashFromFileName(this string fileName)
-        {
-            FileStream file = new FileStream(fileName, FileMode.Open);
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] retVal = md5.ComputeHash(file);
-            file.Close();
-
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < retVal.Length; i++)
-            {
-                sb.Append(retVal[i].ToString("x2"));
-            }
-            return sb.ToString();
-        }
-
         public static string AsMd5Hash(this string input)
         {
-            var md5 = System.Security.Cryptography.MD5.Create();
-            byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(input);
-            byte[] hash = md5.ComputeHash(inputBytes);
-
-            var sb = new StringBuilder();
-            for (int i = 0; i < hash.Length; i++)
+            try
             {
-                sb.Append(hash[i].ToString("x2"));
+                var md5 = System.Security.Cryptography.MD5.Create();
+                byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(input);
+                byte[] hash = md5.ComputeHash(inputBytes);
+
+                var sb = new StringBuilder();
+                for (int i = 0; i < hash.Length; i++)
+                {
+                    sb.Append(hash[i].ToString("x2"));
+                }
+                return sb.ToString();
             }
-            return sb.ToString();
+            catch
+            {
+                return null;
+            }
         }
     }
 }

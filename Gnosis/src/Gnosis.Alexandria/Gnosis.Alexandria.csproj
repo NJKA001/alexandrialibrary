@@ -96,6 +96,10 @@
     <Compile Include="Models\Feeds\IFeedItemMetadata.cs" />
     <Compile Include="Models\Feeds\IFeedLink.cs" />
     <Compile Include="Models\Feeds\IFeedMetadata.cs" />
+    <Compile Include="Models\HashCodes\DoubleMetaphone.cs" />
+    <Compile Include="Models\HashCodes\Md5Hash.cs" />
+    <Compile Include="Models\HashCodes\NameHash.cs" />
+    <Compile Include="Models\IHashCode.cs" />
     <Compile Include="Models\ISet.cs" />
     <Compile Include="Models\ModelContext.cs" />
     <Compile Include="Models\Old\DeviceCatalogSource.cs" />

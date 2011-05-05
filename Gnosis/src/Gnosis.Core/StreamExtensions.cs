@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Gnosis.Core
@@ -21,6 +22,19 @@ namespace Gnosis.Core
             var memoryStream = new MemoryStream();
             input.CopyTo(memoryStream);
             return memoryStream.GetBuffer();
+        }
+
+        public static string AsMd5Hash(this Stream stream)
+        {
+            var md5 = new MD5CryptoServiceProvider();
+            var retVal = md5.ComputeHash(stream);
+            
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < retVal.Length; i++)
+            {
+                sb.Append(retVal[i].ToString("x2"));
+            }
+            return sb.ToString();
         }
 
         public static void Copy(this Stream source, Stream target, int blockSize)

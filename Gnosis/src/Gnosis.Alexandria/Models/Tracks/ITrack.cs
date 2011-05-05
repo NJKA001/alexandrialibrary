@@ -63,5 +63,13 @@ namespace Gnosis.Alexandria.Models.Tracks
         IOrderedSet<ITrackRating> Ratings { get; }
         IOrderedSet<ITrackLink> Links { get; }
         IOrderedSet<ITrackMetadata> Metadata { get; }
+
+        IOrderedSet<IHashCode> TitleHashCodes { get; }
+        IOrderedSet<IHashCode> AlbumHashCodes { get; }
+        IOrderedSet<IHashCode> ArtistHashCodes { get; }
+        IOrderedSet<IHashCode> AlbumArtistHashCodes { get; }
+        IOrderedSet<IHashCode> ComposerHashCodes { get; }
+        IOrderedSet<IHashCode> ConductorHashCodes { get; }
+        IOrderedSet<IHashCode> OriginalTitleHashCodes { get; }
     }
 }
