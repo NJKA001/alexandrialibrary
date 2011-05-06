@@ -9,8 +9,21 @@ namespace Gnosis.Alexandria.Models
     public class PrimaryKeyAttribute : KeyAttribute
     {
         public PrimaryKeyAttribute(string name, params string[] columns)
-            : base(name, columns)
+            : base(name, true, columns)
         {
+        }
+
+        public PrimaryKeyAttribute(string name, bool autoIncrement, params string[] columns)
+            : base(name, true, columns)
+        {
+            this.autoIncrement = autoIncrement;
+        }
+
+        private readonly bool autoIncrement;
+
+        public bool AutoIncrement
+        {
+            get { return autoIncrement; }
         }
     }
 }

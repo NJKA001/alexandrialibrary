@@ -9,7 +9,7 @@ namespace Gnosis.Alexandria.Models
     public class UniqueIndexAttribute : KeyAttribute
     {
         public UniqueIndexAttribute(string name, params string[] columns)
-            : base(name, columns)
+            : base(name, true, columns)
         {
         }
     }

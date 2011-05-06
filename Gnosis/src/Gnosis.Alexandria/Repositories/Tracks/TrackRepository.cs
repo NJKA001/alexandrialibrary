@@ -9,32 +9,37 @@ using Gnosis.Alexandria.Models.Tracks;
 namespace Gnosis.Alexandria.Repositories.Tracks
 {
     public class TrackRepository
-        : RepositoryBase, ITrackRepository
+        : RepositoryBase<ITrack>, ITrackRepository
     {
         public TrackRepository(IContext context)
-            : base(context, "Catalog.db", "Track")
+            : base(context)
         {
         }
 
-        protected override string GetInitializeText()
+        protected override ITrack Create()
         {
-            var track = new Track(Context, new Uri("urn:unknown"));
-
-            var trackTable =
-                new CreateTableBuilder("Track")
-                .PrimaryKeyText("TrackId")
-                .TextColumn("Title", track.Title);
-
-            var titleIndex =
-                new CreateIndexBuilder("Track_Title", "Track")
-                .AscendingColumn("Title");
-
-            var artistsIndex =
-                new CreateIndexBuilder("Track_Artists", "Track")
-                .AscendingColumn("Artists");
-
-            return string.Empty;
+            return new Track(Context, new Uri("urn:unknown"));
         }
+
+        //protected override string GetInitializeText()
+        //{
+        //    var track = new Track(Context, new Uri("urn:unknown"));
+
+        //    var trackTable =
+        //        new CreateTableBuilder("Track")
+        //        .PrimaryKeyText("TrackId")
+        //        .TextColumn("Title", track.Title);
+
+        //    var titleIndex =
+        //        new CreateIndexBuilder("Track_Title", "Track")
+        //        .AscendingColumn("Title");
+
+        //    var artistsIndex =
+        //        new CreateIndexBuilder("Track_Artists", "Track")
+        //        .AscendingColumn("Artists");
+
+        //    return string.Empty;
+        //}
 
         public ITrack New(Uri location)
         {

@@ -10,7 +10,7 @@ namespace Gnosis.Alexandria.Repositories
         public CreateIndexBuilder(string name, string table)
         {
             builder = new StringBuilder();
-            builder.AppendFormat("create index if not exists {0} on {1} ({2}", name, table, Environment.NewLine);
+            builder.AppendFormat("create index if not exists {0} on {1} (", name, table);
         }
 
         private readonly StringBuilder builder;
@@ -19,7 +19,17 @@ namespace Gnosis.Alexandria.Repositories
         private void AppendPrefix()
         {
             if (hasColumns)
-                builder.Append("," + Environment.NewLine);
+                builder.Append(", ");
+        }
+
+        public CreateIndexBuilder Column(string name)
+        {
+            AppendPrefix();
+
+            builder.Append(name);
+
+            hasColumns = true;
+            return this;
         }
 
         public CreateIndexBuilder AscendingColumn(string name)

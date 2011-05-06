@@ -6,10 +6,13 @@ using System.Text;
 namespace Gnosis.Alexandria.Models.Tracks
 {
     [Table("Track")]
-    [PrimaryKey("Track_Id", "Id")]
     [UniqueIndex("Track_Location", "Location")]
     [Index("Track_Title", "Title")]
     [Index("Track_TitleSort", "TitleSort")]
+    [Index("Track_Album", "Album")]
+    [Index("Track_AlbumSort", "AlbumSort")]
+    [Index("Track_Composers", "Composers")]
+    [Index("Track_Conductors", "Conductors")]
     [Index("Track_Sort", "Artists", "ReleaseDate", "Album", "TrackNumber")]
     public interface ITrack :
         IEntity
@@ -62,47 +65,47 @@ namespace Gnosis.Alexandria.Models.Tracks
         string Publisher { get; set; }
         string InternationalStandardRecordingCode { get; set; }
 
-        [ChildTable("TrackPictures", "TrackId", "Sequence")]
+        [OneToMany("TrackPictures", HasSequence=true)]
         IOrderedSet<ITrackPicture> Pictures { get; }
 
-        [ChildTable("TrackLyrics", "TrackId", "Sequence")]
+        [OneToMany("TrackLyrics", HasSequence = true)]
         IOrderedSet<ITrackUnsynchronizedLyrics> Lyrics { get; }
-        
-        [ChildTable("TrackSynchronizedLyrics", "TrackId", "Sequence")]
+
+        [OneToMany("TrackSynchronizedLyrics", HasSequence = true)]
         IOrderedSet<ITrackSynchronizedLyrics> SynchronizedLyrics { get; }
-        
-        [ChildTable("TrackIdentifiers", "TrackId", "Sequence")]
+
+        [OneToMany("TrackIdentifiers", HasSequence = true)]
         IOrderedSet<ITrackIdentifier> Identifiers { get; }
 
-        [ChildTable("TrackRatings", "TrackId", "Sequence")]
+        [OneToMany("TrackRatings", HasSequence = true)]
         IOrderedSet<ITrackRating> Ratings { get; }
 
-        [ChildTable("TrackLinks", "TrackId", "Sequence")]
+        [OneToMany("TrackLinks", HasSequence = true)]
         IOrderedSet<ITrackLink> Links { get; }
 
-        [ChildTable("TrackMetadata", "TrackId", "Sequence")]
+        [OneToMany("TrackMetadata", HasSequence = true)]
         IOrderedSet<ITrackMetadata> Metadata { get; }
 
 
-        [ChildTable("TrackTitleHashCodes", "TrackId")]
+        [OneToMany("TrackTitleHashCodes")]
         ISet<IHashCode> TitleHashCodes { get; }
 
-        [ChildTable("TrackAlbumHashCodes", "TrackId")]
+        [OneToMany("TrackAlbumHashCodes")]
         ISet<IHashCode> AlbumHashCodes { get; }
 
-        [ChildTable("TrackArtistHashCodes", "TrackId")]
+        [OneToMany("TrackArtistHashCodes")]
         ISet<IHashCode> ArtistHashCodes { get; }
 
-        [ChildTable("TrackAlbumArtistHashCodes", "TrackId")]
+        [OneToMany("TrackAlbumArtistHashCodes")]
         ISet<IHashCode> AlbumArtistHashCodes { get; }
 
-        [ChildTable("TrackComposerHashCodes", "TrackId")]
+        [OneToMany("TrackComposerHashCodes")]
         ISet<IHashCode> ComposerHashCodes { get; }
 
-        [ChildTable("TrackConductorHashCodes", "TrackId")]
+        [OneToMany("TrackConductorHashCodes")]
         ISet<IHashCode> ConductorHashCodes { get; }
 
-        [ChildTable("TrackOriginalTitleHashCodes", "TrackId")]
+        [OneToMany("TrackOriginalTitleHashCodes")]
         ISet<IHashCode> OriginalTitleHashCodes { get; }
     }
 }

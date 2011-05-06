@@ -22,6 +22,7 @@ using Gnosis.Alexandria.Controllers;
 using Gnosis.Alexandria.Helpers;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Repositories;
+using Gnosis.Alexandria.Repositories.Tracks;
 using Gnosis.Core;
 using Gnosis.Fmod;
 using log4net;
@@ -45,7 +46,7 @@ namespace Gnosis.Alexandria.Views
                 log.Info("MainWindow.ctor: started");
 
                 tagController = new TagController();
-                trackController = new TrackController(trackRepository, tagController);
+                trackController = new TrackController(oldTrackRepository, tagController);
                 sourceController = new SourceController(sourceRepository, trackController);
                 playbackController = new PlaybackController(trackController);
                 sourceView.Initialize(sourceController, trackController, tagController);
@@ -60,6 +61,9 @@ namespace Gnosis.Alexandria.Views
                 playbackController.CurrentTrackStopped += currentTrackStopped;
                 playbackController.CurrentTrackEnded += currentTrackEnded;
                 trackController.SourceLoadCompleted += sourceLoadCompleted;
+
+                context = new ModelContext(new Uri("mailto:dan.poage@gmail.com"), this.Dispatcher);
+                trackRepository = new TrackRepository(context);
             }
             catch (Exception ex)
             {
@@ -68,7 +72,11 @@ namespace Gnosis.Alexandria.Views
         }
 
         private static readonly ILog log = LogManager.GetLogger(typeof(MainWindow));
-        private readonly IOldRepository<IOldTrack> trackRepository = new OldTrackRepository();
+        
+        private readonly IContext context;
+        private readonly ITrackRepository trackRepository;
+
+        private readonly IOldRepository<IOldTrack> oldTrackRepository = new OldTrackRepository();
         private readonly IOldRepository<ISource> sourceRepository = new OldSourceRepository();
         private readonly ITagController tagController;
         private readonly ITrackController trackController;

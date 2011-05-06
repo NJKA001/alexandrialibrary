@@ -22,7 +22,7 @@ namespace Gnosis.Alexandria.Repositories
                 builder.Append("," + Environment.NewLine);
         }
 
-        private void AddBlobColumn(string name, byte defaultValue)
+        private void AddBlobColumn(string name, object defaultValue)
         {
             AppendPrefix();
 
@@ -31,7 +31,7 @@ namespace Gnosis.Alexandria.Repositories
             hasColumns = true;
         }
 
-        private void AddIntegerColumn(string name, int defaultValue)
+        private void AddIntegerColumn(string name, object defaultValue)
         {
             AppendPrefix();
 
@@ -40,7 +40,7 @@ namespace Gnosis.Alexandria.Repositories
             hasColumns = true;
         }
 
-        private void AddRealColumn(string name, decimal defaultValue)
+        private void AddRealColumn(string name, object defaultValue)
         {
             AppendPrefix();
 
@@ -49,22 +49,34 @@ namespace Gnosis.Alexandria.Repositories
             hasColumns = true;
         }
 
-        private void AddTextColumn(string name, string defaultValue)
+        private void AddTextColumn(string name, object defaultValue)
         {
             AppendPrefix();
 
-            builder.AppendFormat("{0} TEXT NOT NULL DEFAULT '{1}'", name, defaultValue);
+            var defaultString = string.Empty;
+            if (defaultValue != null)
+            {
+                if (defaultValue is DateTime)
+                    defaultString = ((DateTime)defaultValue).ToString("s");
+                else
+                    defaultString = defaultValue.ToString();
+            }
+
+
+            builder.AppendFormat("{0} TEXT NOT NULL DEFAULT '{1}'", name, defaultString);
 
             hasColumns = true;
         }
 
-        private void AddTextColumn(string name, DateTime defaultValue)
+        public CreateTableBuilder PrimaryKeyInteger(string name)
         {
             AppendPrefix();
 
-            builder.AppendFormat("{0} TEXT NOT NULL DEFAULT '{1}'", name, defaultValue.ToString("s"));
+            builder.AppendFormat("{0} INTEGER PRIMARY KEY", name);
 
             hasColumns = true;
+
+            return this;
         }
 
         public CreateTableBuilder PrimaryKeyIntegerAutoIncrement(string name)
@@ -89,31 +101,25 @@ namespace Gnosis.Alexandria.Repositories
             return this;
         }
 
-        public CreateTableBuilder BlobColumn(string name, byte defaultValue)
+        public CreateTableBuilder BlobColumn(string name, object defaultValue)
         {
             AddBlobColumn(name, defaultValue);
             return this;
         }
 
-        public CreateTableBuilder IntegerColumn(string name, int defaultValue)
+        public CreateTableBuilder IntegerColumn(string name, object defaultValue)
         {
             AddIntegerColumn(name, defaultValue);
             return this;
         }
 
-        public CreateTableBuilder RealColumn(string name, decimal defaultValue)
+        public CreateTableBuilder RealColumn(string name, object defaultValue)
         {
             AddRealColumn(name, defaultValue);
             return this;
         }
 
-        public CreateTableBuilder TextColumn(string name, string defaultValue)
-        {
-            AddTextColumn(name, defaultValue);
-            return this;
-        }
-
-        public CreateTableBuilder TextColumn(string name, DateTime defaultValue)
+        public CreateTableBuilder TextColumn(string name, object defaultValue)
         {
             AddTextColumn(name, defaultValue);
             return this;

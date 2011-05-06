@@ -9,6 +9,7 @@ namespace Gnosis.Alexandria.Models
     public interface IEntity
         : INotifyPropertyChanged
     {
+        [PrimaryKeyColumn]
         Guid Id { get; }
 
         ITimeStamp TimeStamp { get; }

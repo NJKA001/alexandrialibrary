@@ -83,7 +83,7 @@
     <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="Helpers\Rfc822DateTime.cs" />
     <Compile Include="Helpers\VisualHelper.cs" />
-    <Compile Include="Models\ChildTableAttribute.cs" />
+    <Compile Include="Models\OneToManyAttribute.cs" />
     <Compile Include="Models\ColumnAttribute.cs" />
     <Compile Include="Models\ColumnIgnoreAttribute.cs" />
     <Compile Include="Models\DataTypeAttribute.cs" />
@@ -141,6 +141,7 @@
     <Compile Include="Models\Playlists\IPlaylistLink.cs" />
     <Compile Include="Models\Playlists\IPlaylistMetadata.cs" />
     <Compile Include="Models\PrimaryKeyAttribute.cs" />
+    <Compile Include="Models\PrimaryKeyColumnAttribute.cs" />
     <Compile Include="Models\Set.cs" />
     <Compile Include="Models\TableAttribute.cs" />
     <Compile Include="Models\TimeStamp.cs" />

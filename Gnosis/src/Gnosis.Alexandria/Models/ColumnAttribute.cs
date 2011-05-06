@@ -13,11 +13,23 @@ namespace Gnosis.Alexandria.Models
             this.name = name;
         }
 
+        public ColumnAttribute(string name, object defaultValue)
+        {
+            this.name = name;
+            this.defaultValue = defaultValue;
+        }
+
         private readonly string name;
+        private readonly object defaultValue;
 
         public string Name
         {
             get { return name; }
+        }
+
+        public object DefaultValue
+        {
+            get { return defaultValue; }
         }
     }
 }
