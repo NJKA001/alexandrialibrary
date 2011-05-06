@@ -10,8 +10,13 @@ namespace Gnosis.Alexandria.Models
         : INotifyPropertyChanged
     {
         Guid Id { get; }
+
         ITimeStamp TimeStamp { get; }
+
+        [ColumnIgnore]
         bool IsNew { get; }
+        
+        [ColumnIgnore]
         bool IsChanged { get; }
     }
 }

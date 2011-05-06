@@ -5,6 +5,12 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Tracks
 {
+    [Table("Track")]
+    [PrimaryKey("Track_Id", "Id")]
+    [UniqueIndex("Track_Location", "Location")]
+    [Index("Track_Title", "Title")]
+    [Index("Track_TitleSort", "TitleSort")]
+    [Index("Track_Sort", "Artists", "ReleaseDate", "Album", "TrackNumber")]
     public interface ITrack :
         IEntity
     {
@@ -56,20 +62,47 @@ namespace Gnosis.Alexandria.Models.Tracks
         string Publisher { get; set; }
         string InternationalStandardRecordingCode { get; set; }
 
+        [ChildTable("TrackPictures", "TrackId", "Sequence")]
         IOrderedSet<ITrackPicture> Pictures { get; }
+
+        [ChildTable("TrackLyrics", "TrackId", "Sequence")]
         IOrderedSet<ITrackUnsynchronizedLyrics> Lyrics { get; }
+        
+        [ChildTable("TrackSynchronizedLyrics", "TrackId", "Sequence")]
         IOrderedSet<ITrackSynchronizedLyrics> SynchronizedLyrics { get; }
+        
+        [ChildTable("TrackIdentifiers", "TrackId", "Sequence")]
         IOrderedSet<ITrackIdentifier> Identifiers { get; }
+
+        [ChildTable("TrackRatings", "TrackId", "Sequence")]
         IOrderedSet<ITrackRating> Ratings { get; }
+
+        [ChildTable("TrackLinks", "TrackId", "Sequence")]
         IOrderedSet<ITrackLink> Links { get; }
+
+        [ChildTable("TrackMetadata", "TrackId", "Sequence")]
         IOrderedSet<ITrackMetadata> Metadata { get; }
 
-        IOrderedSet<IHashCode> TitleHashCodes { get; }
-        IOrderedSet<IHashCode> AlbumHashCodes { get; }
-        IOrderedSet<IHashCode> ArtistHashCodes { get; }
-        IOrderedSet<IHashCode> AlbumArtistHashCodes { get; }
-        IOrderedSet<IHashCode> ComposerHashCodes { get; }
-        IOrderedSet<IHashCode> ConductorHashCodes { get; }
-        IOrderedSet<IHashCode> OriginalTitleHashCodes { get; }
+
+        [ChildTable("TrackTitleHashCodes", "TrackId")]
+        ISet<IHashCode> TitleHashCodes { get; }
+
+        [ChildTable("TrackAlbumHashCodes", "TrackId")]
+        ISet<IHashCode> AlbumHashCodes { get; }
+
+        [ChildTable("TrackArtistHashCodes", "TrackId")]
+        ISet<IHashCode> ArtistHashCodes { get; }
+
+        [ChildTable("TrackAlbumArtistHashCodes", "TrackId")]
+        ISet<IHashCode> AlbumArtistHashCodes { get; }
+
+        [ChildTable("TrackComposerHashCodes", "TrackId")]
+        ISet<IHashCode> ComposerHashCodes { get; }
+
+        [ChildTable("TrackConductorHashCodes", "TrackId")]
+        ISet<IHashCode> ConductorHashCodes { get; }
+
+        [ChildTable("TrackOriginalTitleHashCodes", "TrackId")]
+        ISet<IHashCode> OriginalTitleHashCodes { get; }
     }
 }

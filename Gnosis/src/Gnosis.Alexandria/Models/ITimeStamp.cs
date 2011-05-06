@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models
 {
+    [DataType]
     public interface ITimeStamp
     {
         Uri CreatedBy { get; }

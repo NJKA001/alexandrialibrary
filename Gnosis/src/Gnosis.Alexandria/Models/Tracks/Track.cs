@@ -83,13 +83,13 @@ namespace Gnosis.Alexandria.Models.Tracks
             this.links = new OrderedSet<ITrackLink>(context, links);
             this.metadata = new OrderedSet<ITrackMetadata>(context, metadata);
 
-            this.titleHashCodes = new OrderedSet<IHashCode>(context, titleHashCodes);
-            this.albumHashCodes = new OrderedSet<IHashCode>(context, albumHashCodes);
-            this.artistHashCodes = new OrderedSet<IHashCode>(context, artistHashCodes);
-            this.albumArtistHashCodes = new OrderedSet<IHashCode>(context, albumArtistHashCodes);
-            this.composerHashCodes = new OrderedSet<IHashCode>(context, composerHashCodes);
-            this.conductorHashCodes = new OrderedSet<IHashCode>(context, conductorHashCodes);
-            this.originalTitleHashCodes = new OrderedSet<IHashCode>(context, originalTitleHashCodes);
+            this.titleHashCodes = new Set<IHashCode>(context, titleHashCodes);
+            this.albumHashCodes = new Set<IHashCode>(context, albumHashCodes);
+            this.artistHashCodes = new Set<IHashCode>(context, artistHashCodes);
+            this.albumArtistHashCodes = new Set<IHashCode>(context, albumArtistHashCodes);
+            this.composerHashCodes = new Set<IHashCode>(context, composerHashCodes);
+            this.conductorHashCodes = new Set<IHashCode>(context, conductorHashCodes);
+            this.originalTitleHashCodes = new Set<IHashCode>(context, originalTitleHashCodes);
         }
 
         private readonly Uri location;
@@ -137,13 +137,13 @@ namespace Gnosis.Alexandria.Models.Tracks
         private readonly IOrderedSet<ITrackLink> links;
         private readonly IOrderedSet<ITrackMetadata> metadata;
 
-        private readonly IOrderedSet<IHashCode> titleHashCodes;
-        private readonly IOrderedSet<IHashCode> albumHashCodes;
-        private readonly IOrderedSet<IHashCode> artistHashCodes;
-        private readonly IOrderedSet<IHashCode> albumArtistHashCodes;
-        private readonly IOrderedSet<IHashCode> composerHashCodes;
-        private readonly IOrderedSet<IHashCode> conductorHashCodes;
-        private readonly IOrderedSet<IHashCode> originalTitleHashCodes;
+        private readonly ISet<IHashCode> titleHashCodes;
+        private readonly ISet<IHashCode> albumHashCodes;
+        private readonly ISet<IHashCode> artistHashCodes;
+        private readonly ISet<IHashCode> albumArtistHashCodes;
+        private readonly ISet<IHashCode> composerHashCodes;
+        private readonly ISet<IHashCode> conductorHashCodes;
+        private readonly ISet<IHashCode> originalTitleHashCodes;
 
         #region ITrack Members
 
@@ -607,37 +607,37 @@ namespace Gnosis.Alexandria.Models.Tracks
             get { return metadata; }
         }
 
-        public IOrderedSet<IHashCode> TitleHashCodes
+        public ISet<IHashCode> TitleHashCodes
         {
             get { return titleHashCodes; }
         }
 
-        public IOrderedSet<IHashCode> AlbumHashCodes
+        public ISet<IHashCode> AlbumHashCodes
         {
             get { return albumHashCodes; }
         }
 
-        public IOrderedSet<IHashCode> ArtistHashCodes
+        public ISet<IHashCode> ArtistHashCodes
         {
             get { return artistHashCodes; }
         }
 
-        public IOrderedSet<IHashCode> AlbumArtistHashCodes
+        public ISet<IHashCode> AlbumArtistHashCodes
         {
             get { return albumArtistHashCodes; }
         }
 
-        public IOrderedSet<IHashCode> ComposerHashCodes
+        public ISet<IHashCode> ComposerHashCodes
         {
             get { return composerHashCodes; }
         }
 
-        public IOrderedSet<IHashCode> ConductorHashCodes
+        public ISet<IHashCode> ConductorHashCodes
         {
             get { return conductorHashCodes; }
         }
 
-        public IOrderedSet<IHashCode> OriginalTitleHashCodes
+        public ISet<IHashCode> OriginalTitleHashCodes
         {
             get { return originalTitleHashCodes; }
         }
