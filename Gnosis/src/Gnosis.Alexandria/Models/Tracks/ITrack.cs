@@ -6,6 +6,7 @@ using System.Text;
 namespace Gnosis.Alexandria.Models.Tracks
 {
     [Table("Track")]
+    [Index("Track_TimeStamp_CreatedDate", "TimeStamp_CreatedDate")]
     [UniqueIndex("Track_Location", "Location")]
     [Index("Track_Title", "Title")]
     [Index("Track_TitleSort", "TitleSort")]
@@ -75,6 +76,8 @@ namespace Gnosis.Alexandria.Models.Tracks
         IOrderedSet<ITrackSynchronizedLyrics> SynchronizedLyrics { get; }
 
         [OneToMany("TrackIdentifiers", HasSequence = true)]
+        [ForeignUniqueIndex("TrackIdentifiers_Unique", "Scheme", "Identifier")]
+        [ForeignIndex("TrackIdentifiers_Identifier", "Identifier")]
         IOrderedSet<ITrackIdentifier> Identifiers { get; }
 
         [OneToMany("TrackRatings", HasSequence = true)]

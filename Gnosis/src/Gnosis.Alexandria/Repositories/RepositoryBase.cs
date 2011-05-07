@@ -74,59 +74,17 @@ namespace Gnosis.Alexandria.Repositories
             return false;
         }
 
-        private void AddColumn(CreateTableBuilder tableBuilder, object instance, string columnName, PropertyInfo property, object defaultValue, PrimaryKeyColumnAttribute primaryKey)
+        private void AddColumnsForRootType(CommandBuilder builder, CreateTableBuilder createTable, Type type, object instance)
         {
-            if (primaryKey != null)
-            {
-                if (property.PropertyType.IsIntegerColumn())
-                {
-                    if (primaryKey.AutoIncrement)
-                        tableBuilder.PrimaryKeyIntegerAutoIncrement(columnName);
-                    else
-                        tableBuilder.PrimaryKeyInteger(columnName);
-                }
-                else if (property.PropertyType.IsTextColumn())
-                {
-                    tableBuilder.PrimaryKeyText(columnName);
-                }
-            }
-            else
-            {
-                if (IsDataTypeColumn(property.PropertyType))
-                {
-                    var dataType = property.GetValue(instance, null);
-                    AddColumnsForRootType(tableBuilder, property.PropertyType, dataType);
-                }
-                else if (property.PropertyType.IsTextColumn())
-                {
-                    tableBuilder.TextColumn(columnName, defaultValue);
-                }
-                else if (property.PropertyType.IsIntegerColumn())
-                {
-                    tableBuilder.IntegerColumn(columnName, defaultValue);
-                }
-                else if (property.PropertyType.IsRealColumn())
-                {
-                    tableBuilder.RealColumn(columnName, defaultValue);
-                }
-                else if (property.PropertyType.IsBlobColumn())
-                {
-                    tableBuilder.BlobColumn(columnName, defaultValue);
-                }
-            }
-        }
-
-        private void AddColumnsForRootType(CreateTableBuilder tableBuilder, Type type, object instance)
-        {
-            AddColumns(tableBuilder, type, instance);
-
             foreach (var typeInterface in type.GetInterfaces())
             {
-                AddColumns(tableBuilder, typeInterface, instance);
+                AddColumns(builder, createTable, typeInterface, instance);
             }
+
+            AddColumns(builder, createTable, type, instance);
         }
 
-        private void AddColumns(CreateTableBuilder tableBuilder, Type type, object instance)
+        private void AddColumns(CommandBuilder builder, CreateTableBuilder createTable, Type type, object instance)
         {
             foreach (var property in type.GetProperties())
             {
@@ -135,6 +93,7 @@ namespace Gnosis.Alexandria.Repositories
                 object defaultValue = null;
                 PrimaryKeyColumnAttribute primaryKey = null;
                 OneToManyAttribute oneToMany = null;
+                var foreignIndices = new List<KeyAttribute>();
 
                 foreach (var attribute in property.GetCustomAttributes(true))
                 {
@@ -147,6 +106,11 @@ namespace Gnosis.Alexandria.Repositories
                     if (attribute is OneToManyAttribute)
                         oneToMany = attribute as OneToManyAttribute;
 
+                    if (attribute is ForeignIndexAttribute || attribute is ForeignUniqueIndexAttribute)
+                    {
+                        foreignIndices.Add(attribute as KeyAttribute);
+                    }
+
                     if (attribute is PrimaryKeyColumnAttribute)
                         primaryKey = attribute as PrimaryKeyColumnAttribute;
 
@@ -154,25 +118,117 @@ namespace Gnosis.Alexandria.Repositories
                     {
                         var column = attribute as ColumnAttribute;
                         columnName = column.Name;
-                        defaultValue = column.DefaultValue != null ? column.DefaultValue : property.GetValue(instance, null);
+                        defaultValue = (column.DefaultValue != null || instance == null) ? column.DefaultValue : property.GetValue(instance, null);
                     }
                 }
 
                 if (oneToMany != null)
                 {
-                    var x = property.PropertyType;
-                    //TODO: Create foreign table based on OneToManyAttribute
+                    var genericArgs = property.PropertyType.GetGenericArguments();
+                    if (genericArgs.Length > 0)
+                    {
+                        var itemType = genericArgs[0];
+                        var createItemTable = new CreateTableBuilder(oneToMany.Name);
+                        if (oneToMany.HasPrimaryKey)
+                        {
+                            if (oneToMany.PrimaryKeyType.IsTextColumn())
+                            {
+                                createItemTable.PrimaryKeyText(oneToMany.PrimaryKeyName);
+                            }
+                            else if (oneToMany.PrimaryKeyType.IsIntegerColumn())
+                            {
+                                createItemTable.PrimaryKeyInteger(oneToMany.PrimaryKeyName);
+                            }
+                        }
+                        if (oneToMany.HasSequence)
+                        {
+                            if (oneToMany.SequenceType.IsIntegerColumn())
+                            {
+                                createItemTable.IntegerColumn(oneToMany.SequenceName, 0);
+                            }
+                            else if (oneToMany.SequenceType.IsRealColumn())
+                            {
+                                createItemTable.RealColumn(oneToMany.SequenceName, 0m);
+                            }
+                        }
+                        builder.Add(createItemTable);
+
+                        foreach (var foreignIndex in foreignIndices)
+                        {
+                            var createForeignIndex = new CreateIndexBuilder(foreignIndex.Name, oneToMany.Name);
+                            foreach (var foreignColumn in foreignIndex.Columns)
+                                createForeignIndex.Column(foreignColumn);
+
+                            builder.Add(createForeignIndex);
+                        }
+
+                        AddColumnsForRootType(builder, createItemTable, itemType, null);
+                    }
                 }
                 else if (includeColumn)
                 {
-                    AddColumn(tableBuilder, instance, columnName, property, defaultValue, primaryKey);
+                    AddColumn(builder, createTable, instance, columnName, property, defaultValue, primaryKey);
+                }
+            }
+        }
+
+        private void AddColumn(CommandBuilder builder, CreateTableBuilder createTable, object instance, string columnName, PropertyInfo property, object defaultValue, PrimaryKeyColumnAttribute primaryKey)
+        {
+            if (primaryKey != null)
+            {
+                if (property.PropertyType.IsIntegerColumn())
+                {
+                    if (primaryKey.AutoIncrement)
+                        createTable.PrimaryKeyIntegerAutoIncrement(columnName);
+                    else
+                        createTable.PrimaryKeyInteger(columnName);
+                }
+                else if (property.PropertyType.IsTextColumn())
+                {
+                    createTable.PrimaryKeyText(columnName);
+                }
+            }
+            else
+            {
+                if (IsDataTypeColumn(property.PropertyType))
+                {
+                    object dataTypeInstance = null;
+                    if (instance != null)
+                    {
+                        dataTypeInstance = property.GetValue(instance, null);
+                    }
+                    else
+                    {
+                        if (property.PropertyType is ITimeStamp)
+                        {
+                            dataTypeInstance = new TimeStamp(new Uri("urn:empty"));
+                        }
+                    }
+                    
+                    AddColumnsForRootType(builder, createTable, property.PropertyType, dataTypeInstance);
+                }
+                else if (property.PropertyType.IsTextColumn())
+                {
+                    createTable.TextColumn(columnName, defaultValue);
+                }
+                else if (property.PropertyType.IsIntegerColumn())
+                {
+                    createTable.IntegerColumn(columnName, defaultValue);
+                }
+                else if (property.PropertyType.IsRealColumn())
+                {
+                    createTable.RealColumn(columnName, defaultValue);
+                }
+                else if (property.PropertyType.IsBlobColumn())
+                {
+                    createTable.BlobColumn(columnName, defaultValue);
                 }
             }
         }
 
         private string GetCreateCommandText(Type type, object instance)
         {
-            var builder = new StringBuilder();
+            CommandBuilder builder = null;
 
             TableAttribute table = null;
             CreateTableBuilder tableBuilder = null;
@@ -194,7 +250,8 @@ namespace Gnosis.Alexandria.Repositories
             if (table != null)
             {
                 tableBuilder = new CreateTableBuilder(table.Name);
-                AddColumnsForRootType(tableBuilder, type, instance);
+                builder = new CommandBuilder(tableBuilder);
+                AddColumnsForRootType(builder, tableBuilder, type, instance);
 
                 foreach (var key in keys)
                 {
@@ -204,11 +261,11 @@ namespace Gnosis.Alexandria.Repositories
 
                     indexBuilders.Add(indexBuilder);
                 }
-            }
 
-            builder.AppendLine(tableBuilder.ToString());
-            foreach (var indexBuilder in indexBuilders)
-                builder.AppendLine(indexBuilder.ToString());
+                builder.Add(tableBuilder);
+                foreach (var indexBuilder in indexBuilders)
+                    builder.Add(indexBuilder);
+            }
 
             return builder.ToString();
         }

@@ -31,6 +31,7 @@ namespace Gnosis.Alexandria.Models
         }
 
         private readonly string name;
+        private bool hasPrimaryKey = true;
         private readonly string primaryKeyName = "Id";
         private readonly Type primaryKeyType = typeof(int);
         private bool hasSequence;
@@ -40,6 +41,12 @@ namespace Gnosis.Alexandria.Models
         public string Name
         {
             get { return name; }
+        }
+
+        public bool HasPrimaryKey
+        {
+            get { return hasPrimaryKey; }
+            set { hasPrimaryKey = value; }
         }
 
         public string PrimaryKeyName

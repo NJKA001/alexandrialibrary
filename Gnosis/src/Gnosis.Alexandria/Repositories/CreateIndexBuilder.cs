@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Repositories
 {
-    public class CreateIndexBuilder
+    public class CreateIndexBuilder : IStatementBuilder
     {
         public CreateIndexBuilder(string name, string table)
         {
