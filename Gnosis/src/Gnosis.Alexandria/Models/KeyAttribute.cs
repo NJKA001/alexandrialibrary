@@ -10,6 +10,7 @@ namespace Gnosis.Alexandria.Models
         protected KeyAttribute(string name, bool isUnique, params string[] columns)
         {
             this.name = name;
+            this.isUnique = isUnique;
             this.columns = columns.AsEnumerable<string>();
         }
 
