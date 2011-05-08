@@ -26,7 +26,7 @@ namespace Gnosis.Alexandria.Repositories
         {
             AppendPrefix();
 
-            builder.AppendFormat("{0} BLOB NOT NULL DEFAULT {1}", name, defaultValue);
+            builder.AppendFormat("{0} BLOB NOT NULL DEFAULT 0", name);
 
             hasColumns = true;
         }
