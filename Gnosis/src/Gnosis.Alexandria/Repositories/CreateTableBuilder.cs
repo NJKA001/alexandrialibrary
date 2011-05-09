@@ -10,7 +10,7 @@ namespace Gnosis.Alexandria.Repositories
         public CreateTableBuilder(string name)
         {
             builder = new StringBuilder();
-            builder.AppendFormat("create table if not exists {0} ({1}", name, Environment.NewLine);
+            builder.AppendFormat("create table if not exists {0} (", name);
         }
 
         private readonly StringBuilder builder;
@@ -19,7 +19,7 @@ namespace Gnosis.Alexandria.Repositories
         private void AppendPrefix()
         {
             if (hasColumns)
-                builder.Append("," + Environment.NewLine);
+                builder.Append(", ");
         }
 
         private void AddBlobColumn(string name, object defaultValue)

@@ -35,5 +35,10 @@ namespace Gnosis.Alexandria.Repositories
 
             return builder.ToString();
         }
+
+        public string ToUnformattedString()
+        {
+            return ToString().Replace(Environment.NewLine, " ");
+        }
     }
 }
