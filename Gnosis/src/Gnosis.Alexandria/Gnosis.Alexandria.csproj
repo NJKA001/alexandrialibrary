@@ -90,9 +90,6 @@
     <Compile Include="Models\Feeds\IFeed.cs" />
     <Compile Include="Models\Feeds\IFeedCategory.cs" />
     <Compile Include="Models\Feeds\IFeedItem.cs" />
-    <Compile Include="Models\Feeds\IFeedItemCategory.cs" />
-    <Compile Include="Models\Feeds\IFeedItemLink.cs" />
-    <Compile Include="Models\Feeds\IFeedItemMetadata.cs" />
     <Compile Include="Models\Feeds\IFeedLink.cs" />
     <Compile Include="Models\Feeds\IFeedMetadata.cs" />
     <Compile Include="Models\HashCodes\DoubleMetaphone.cs" />
@@ -118,11 +115,8 @@
     <Compile Include="Models\Playlists\IPlaylistAttribution.cs" />
     <Compile Include="Models\Playlists\IPlaylistExtension.cs" />
     <Compile Include="Models\Playlists\IPlaylistItem.cs" />
-    <Compile Include="Models\Playlists\IPlaylistItemExtension.cs" />
     <Compile Include="Models\Playlists\IPlaylistItemIdentifier.cs" />
-    <Compile Include="Models\Playlists\IPlaylistItemLink.cs" />
     <Compile Include="Models\Playlists\IPlaylistItemLocation.cs" />
-    <Compile Include="Models\Playlists\IPlaylistItemMetadata.cs" />
     <Compile Include="Models\Playlists\IPlaylistLink.cs" />
     <Compile Include="Models\Playlists\IPlaylistMetadata.cs" />
     <Compile Include="Models\Tracks\ITrack.cs" />

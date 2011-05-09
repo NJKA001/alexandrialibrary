@@ -3,10 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core.Attributes;
+
 namespace Gnosis.Core
 {
     public static class TypeExtensions
     {
+        /// <summary>
+        /// Get the SQLIte type affinity of the given type
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns>TypeAffinity</returns>
+        /// <remarks>http://sqlite.org/datatype3.html#affinity</remarks>
+        public static TypeAffinity GetTypeAffinity(this Type type)
+        {
+            if (type.IsIntegerColumn())
+                return TypeAffinity.Integer;
+            else if (type.IsTextColumn())
+                return TypeAffinity.Text;
+            else if (type.IsBlobColumn())
+                return TypeAffinity.None;
+            else if (type.IsRealColumn())
+                return TypeAffinity.Real;
+            else
+                return TypeAffinity.Numeric;
+        }
+
+        public static bool IsDataTypeColumn(this Type type)
+        {
+            foreach (var attribute in type.GetCustomAttributes(true))
+            {
+                if (attribute is DataTypeAttribute)
+                    return true;
+            }
+
+            return false;
+        }
+
         public static bool IsTextColumn(this Type type)
         {
             if (type == typeof(string))

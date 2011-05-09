@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core;
+
 namespace Gnosis.Alexandria.Repositories
 {
     public class CreateTableBuilder : IStatementBuilder
@@ -35,7 +37,16 @@ namespace Gnosis.Alexandria.Repositories
         {
             AppendPrefix();
 
-            builder.AppendFormat("{0} INTEGER NOT NULL DEFAULT {1}", name, defaultValue);
+            builder.AppendFormat("{0} INTEGER NOT NULL DEFAULT {1}", name, defaultValue ?? 0);
+
+            hasColumns = true;
+        }
+
+        private void AddNumericColumn(string name, object defaultValue)
+        {
+            AppendPrefix();
+
+            builder.AppendFormat("{0} NUMERIC NOT NULL DEFAULT {1}", name, defaultValue ?? 0);
 
             hasColumns = true;
         }
@@ -44,7 +55,7 @@ namespace Gnosis.Alexandria.Repositories
         {
             AppendPrefix();
 
-            builder.AppendFormat("{0} REAL NOT NULL DEFAULT {1}", name, defaultValue);
+            builder.AppendFormat("{0} REAL NOT NULL DEFAULT {1}", name, defaultValue ?? 0);
 
             hasColumns = true;
         }
@@ -61,7 +72,6 @@ namespace Gnosis.Alexandria.Repositories
                 else
                     defaultString = defaultValue.ToString();
             }
-
 
             builder.AppendFormat("{0} TEXT NOT NULL DEFAULT '{1}'", name, defaultString);
 
@@ -97,6 +107,39 @@ namespace Gnosis.Alexandria.Repositories
             builder.AppendFormat("{0} TEXT PRIMARY KEY NOT NULL", name);
 
             hasColumns = true;
+
+            return this;
+        }
+
+        public CreateTableBuilder Column(Type type, string name)
+        {
+            return Column(type, name, null);
+        }
+
+        public CreateTableBuilder Column(Type type, string name, object defaultValue)
+        {
+            var affinity = type.GetTypeAffinity();
+
+            switch (affinity)
+            {
+                case TypeAffinity.Integer:
+                    AddIntegerColumn(name, defaultValue);
+                    break;
+                case TypeAffinity.None:
+                    AddBlobColumn(name, defaultValue);
+                    break;
+                case TypeAffinity.Numeric:
+                    AddNumericColumn(name, defaultValue);
+                    break;
+                case TypeAffinity.Real:
+                    AddRealColumn(name, defaultValue);
+                    break;
+                case TypeAffinity.Text:
+                    AddTextColumn(name, defaultValue);
+                    break;
+                default:
+                    break;
+            }
 
             return this;
         }

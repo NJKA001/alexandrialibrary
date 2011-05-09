@@ -20,11 +20,22 @@ namespace Gnosis.Core.Attributes
             this.primaryKeyType = primaryKeyType;
         }
 
-        public OneToManyAttribute(string name, string primaryKeyName, Type primaryKeyType, string sequenceName, Type sequenceType)
+        public OneToManyAttribute(string name, string primaryKeyName, Type primaryKeyType, string foreignKeyName, Type foreignKeyType)
         {
             this.name = name;
             this.primaryKeyName = primaryKeyName;
             this.primaryKeyType = primaryKeyType;
+            this.foreignKeyName = foreignKeyName;
+            this.foreignKeyType = foreignKeyType;
+        }
+
+        public OneToManyAttribute(string name, string primaryKeyName, Type primaryKeyType, string foreignKeyName, Type foreignKeyType, string sequenceName, Type sequenceType)
+        {
+            this.name = name;
+            this.primaryKeyName = primaryKeyName;
+            this.primaryKeyType = primaryKeyType;
+            this.foreignKeyName = foreignKeyName;
+            this.foreignKeyType = foreignKeyType;
             this.hasSequence = true;
             this.sequenceName = sequenceName;
             this.sequenceType = sequenceType;
@@ -34,6 +45,9 @@ namespace Gnosis.Core.Attributes
         private bool hasPrimaryKey = true;
         private readonly string primaryKeyName = "Id";
         private readonly Type primaryKeyType = typeof(int);
+        private bool hasForeignKey = true;
+        private readonly string foreignKeyName = "Parent";
+        private readonly Type foreignKeyType = typeof(Guid);
         private bool hasSequence;
         private readonly string sequenceName = "Sequence";
         private readonly Type sequenceType = typeof(int);
@@ -57,6 +71,22 @@ namespace Gnosis.Core.Attributes
         public Type PrimaryKeyType
         {
             get { return primaryKeyType; }
+        }
+
+        public bool HasForeignKey
+        {
+            get { return hasForeignKey; }
+            set { hasForeignKey = value; }
+        }
+
+        public string ForeignKeyName
+        {
+            get { return foreignKeyName; }
+        }
+
+        public Type ForeignKeyType
+        {
+            get { return foreignKeyType; }
         }
 
         public bool HasSequence

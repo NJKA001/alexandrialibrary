@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Core.Attributes;
+using Gnosis.Core.Collections;
 
 namespace Gnosis.Alexandria.Models.Playlists
 {
+    [Table("Playlist")]
     public interface IPlaylist : IEntity
     {
         Uri Location { get; }
@@ -21,32 +24,19 @@ namespace Gnosis.Alexandria.Models.Playlists
         DateTime CreatedDate { get; set; }
         string Copyright { get; set; }
 
-        IEnumerable<IPlaylistAttribution> Attributions { get; }
-        IEnumerable<IPlaylistExtension> Extensions { get; }
-        IEnumerable<IPlaylistItem> Items { get; }
-        IEnumerable<IPlaylistLink> Links { get; }
-        IEnumerable<IPlaylistMetadata> Metadata { get; }
+        [OneToMany("PlaylistAttributions", HasSequence = true)]
+        IOrderedSet<IPlaylistAttribution> Attributions { get; }
 
-        void AddAttribution(IPlaylistAttribution attribution);
-        void RemoveAttribution(IPlaylistAttribution attribution);
+        [OneToMany("PlaylistExtensions", HasSequence = true)]
+        IOrderedSet<IPlaylistExtension> Extensions { get; }
+        
+        [OneToMany("PlaylistItems", HasSequence = true)]
+        IOrderedSet<IPlaylistItem> Items { get; }
 
-        void AddExtension(IPlaylistExtension extension);
-        void RemoveExtension(IPlaylistExtension extension);
+        [OneToMany("PlaylistLinks", HasSequence = true)]
+        IOrderedSet<IPlaylistLink> Links { get; }
 
-        void AddItem(IPlaylistItem item);
-        void RemoveItem(IPlaylistItem item);
-        void MoveItemTo(IPlaylistItem item, int index);
-
-        IEnumerable<IPlaylistItem> GetNewItems();
-        IEnumerable<IPlaylistItem> GetChangedItems();
-        IEnumerable<KeyValuePair<int, IPlaylistItem>> GetMovedItems();
-        IEnumerable<IPlaylistItem> GetRemovedItems();
-
-        void AddLink(IPlaylistLink link);
-        void RemoveLink(IPlaylistLink link);
-
-
-        void AddMetadata(IPlaylistMetadata metadata);
-        void RemoveMetadata(IPlaylistMetadata metadata);
+        [OneToMany("PlaylistMetadata", HasSequence = true)]
+        IOrderedSet<IPlaylistMetadata> Metadata { get; }
     }
 }

@@ -9,7 +9,6 @@ namespace Gnosis.Alexandria.Models.Playlists
 {
     public interface IPlaylistExtension : IValue
     {
-        IPlaylist Playlist { get; }
         Uri Application { get; }
         string Content { get; }
     }

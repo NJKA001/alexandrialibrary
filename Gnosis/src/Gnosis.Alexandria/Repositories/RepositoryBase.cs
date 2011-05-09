@@ -53,28 +53,6 @@ namespace Gnosis.Alexandria.Repositories
             }
         }
 
-        private bool IsDataTypeColumn(Type type)
-        {
-            foreach (var attribute in type.GetCustomAttributes(true))
-            {
-                if (attribute is DataTypeAttribute)
-                    return true;
-            }
-
-            return false;
-        }
-
-        private bool IsOneToManyColumn(PropertyInfo property)
-        {
-            foreach (var attribute in property.GetCustomAttributes(true))
-            {
-                if (attribute is OneToManyAttribute)
-                    return true;
-            }
-
-            return false;
-        }
-
         private void AddColumnsForRootType(CommandBuilder builder, CreateTableBuilder createTable, Type type, object instance)
         {
             foreach (var typeInterface in type.GetInterfaces())
@@ -141,16 +119,13 @@ namespace Gnosis.Alexandria.Repositories
                                 createItemTable.PrimaryKeyInteger(oneToMany.PrimaryKeyName);
                             }
                         }
+                        if (oneToMany.HasForeignKey)
+                        {
+                            createItemTable.Column(oneToMany.ForeignKeyType, oneToMany.ForeignKeyName);
+                        }
                         if (oneToMany.HasSequence)
                         {
-                            if (oneToMany.SequenceType.IsIntegerColumn())
-                            {
-                                createItemTable.IntegerColumn(oneToMany.SequenceName, 0);
-                            }
-                            else if (oneToMany.SequenceType.IsRealColumn())
-                            {
-                                createItemTable.RealColumn(oneToMany.SequenceName, 0m);
-                            }
+                            createItemTable.Column(oneToMany.SequenceType, oneToMany.SequenceName);
                         }
                         builder.Add(createItemTable);
 
@@ -191,7 +166,7 @@ namespace Gnosis.Alexandria.Repositories
             }
             else
             {
-                if (IsDataTypeColumn(property.PropertyType))
+                if (property.PropertyType.IsDataTypeColumn())
                 {
                     object dataTypeInstance = null;
                     if (instance != null)
@@ -202,27 +177,15 @@ namespace Gnosis.Alexandria.Repositories
                     {
                         if (property.PropertyType is ITimeStamp)
                         {
-                            dataTypeInstance = new TimeStamp(new Uri("urn:empty"));
+                            dataTypeInstance = new TimeStamp(UriExtensions.EmptyUri);
                         }
                     }
                     
                     AddColumnsForRootType(builder, createTable, property.PropertyType, dataTypeInstance);
                 }
-                else if (property.PropertyType.IsTextColumn())
+                else
                 {
-                    createTable.TextColumn(columnName, defaultValue);
-                }
-                else if (property.PropertyType.IsIntegerColumn())
-                {
-                    createTable.IntegerColumn(columnName, defaultValue);
-                }
-                else if (property.PropertyType.IsRealColumn())
-                {
-                    createTable.RealColumn(columnName, defaultValue);
-                }
-                else if (property.PropertyType.IsBlobColumn())
-                {
-                    createTable.BlobColumn(columnName, defaultValue);
+                    createTable.Column(property.PropertyType, columnName, defaultValue);
                 }
             }
         }

@@ -9,7 +9,6 @@ namespace Gnosis.Alexandria.Models.Feeds
 {
     public interface IFeedCategory : IValue
     {
-        IFeed Feed { get; }
         string Name { get; }
         Uri Scheme { get; }
         string Label { get; }

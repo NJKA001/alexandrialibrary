@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Core.Attributes;
+using Gnosis.Core.Collections;
 
 namespace Gnosis.Alexandria.Models.Feeds
 {
     public interface IFeedItem : IEntity
     {
-        IFeed Feed { get; }
         string Title { get; set; }
         string TitleMediaType { get; set; }
         string Authors { get; set; }
@@ -23,17 +24,8 @@ namespace Gnosis.Alexandria.Models.Feeds
         DateTime UpdatedDate { get; set; }
         string FeedItemIdentifier { get; set; }
 
-        IEnumerable<IFeedItemCategory> Categories { get; }
-        IEnumerable<IFeedItemLink> Links { get; }
-        IEnumerable<IFeedItemMetadata> Metadata { get; }
-
-        void AddCategory(IFeedItemCategory category);
-        void RemoveCategory(IFeedItemCategory category);
-
-        void AddLink(IFeedItemLink link);
-        void RemoveLink(IFeedItemLink link);
-
-        void AddMetadata(IFeedItemMetadata metadata);
-        void RemoveMetadata(IFeedItemMetadata metadata);
+        IOrderedSet<IFeedCategory> Categories { get; }
+        IOrderedSet<IFeedLink> Links { get; }
+        IOrderedSet<IFeedMetadata> Metadata { get; }
     }
 }

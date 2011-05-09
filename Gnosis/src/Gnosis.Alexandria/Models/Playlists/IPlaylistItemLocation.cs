@@ -9,7 +9,6 @@ namespace Gnosis.Alexandria.Models.Playlists
 {
     public interface IPlaylistItemLocation : IValue
     {
-        IPlaylist Playlist { get; }
         Uri Location { get; }
     }
 }

@@ -80,11 +80,12 @@ namespace Gnosis.Alexandria.Models.Tracks
         IOrderedSet<ITrackSynchronizedLyrics> SynchronizedLyrics { get; }
 
         [OneToMany("TrackIdentifiers", HasSequence = true)]
-        [ForeignUniqueIndex("TrackIdentifiers_Unique", "Scheme", "Identifier")]
+        [ForeignUniqueIndex("TrackIdentifiers_Parent_Scheme_Identifier", "Parent", "Scheme", "Identifier")]
         [ForeignIndex("TrackIdentifiers_Identifier", "Identifier")]
         IOrderedSet<ITrackIdentifier> Identifiers { get; }
 
         [OneToMany("TrackRatings", HasSequence = true)]
+        [ForeignUniqueIndex("TrackRatings_Parent_User", "Parent", "User")]
         IOrderedSet<ITrackRating> Ratings { get; }
 
         [OneToMany("TrackLinks", HasSequence = true)]
