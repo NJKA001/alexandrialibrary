@@ -6,6 +6,8 @@ using System.Text;
 
 using log4net;
 
+using Gnosis.Core;
+
 namespace Gnosis.Alexandria.Models
 {
     public abstract class EntityBase

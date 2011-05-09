@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Threading;
 
+using Gnosis.Core;
+
 namespace Gnosis.Alexandria.Models
 {
     public class ModelContext

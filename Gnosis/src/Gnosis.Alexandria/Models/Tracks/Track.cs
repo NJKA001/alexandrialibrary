@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core;
+using Gnosis.Core.Collections;
+
 namespace Gnosis.Alexandria.Models.Tracks
 {
     public class Track
@@ -137,13 +140,13 @@ namespace Gnosis.Alexandria.Models.Tracks
         private readonly IOrderedSet<ITrackLink> links;
         private readonly IOrderedSet<ITrackMetadata> metadata;
 
-        private readonly ISet<IHashCode> titleHashCodes;
-        private readonly ISet<IHashCode> albumHashCodes;
-        private readonly ISet<IHashCode> artistHashCodes;
-        private readonly ISet<IHashCode> albumArtistHashCodes;
-        private readonly ISet<IHashCode> composerHashCodes;
-        private readonly ISet<IHashCode> conductorHashCodes;
-        private readonly ISet<IHashCode> originalTitleHashCodes;
+        private readonly Gnosis.Core.Collections.ISet<IHashCode> titleHashCodes;
+        private readonly Gnosis.Core.Collections.ISet<IHashCode> albumHashCodes;
+        private readonly Gnosis.Core.Collections.ISet<IHashCode> artistHashCodes;
+        private readonly Gnosis.Core.Collections.ISet<IHashCode> albumArtistHashCodes;
+        private readonly Gnosis.Core.Collections.ISet<IHashCode> composerHashCodes;
+        private readonly Gnosis.Core.Collections.ISet<IHashCode> conductorHashCodes;
+        private readonly Gnosis.Core.Collections.ISet<IHashCode> originalTitleHashCodes;
 
         #region ITrack Members
 
@@ -607,37 +610,37 @@ namespace Gnosis.Alexandria.Models.Tracks
             get { return metadata; }
         }
 
-        public ISet<IHashCode> TitleHashCodes
+        public Gnosis.Core.Collections.ISet<IHashCode> TitleHashCodes
         {
             get { return titleHashCodes; }
         }
 
-        public ISet<IHashCode> AlbumHashCodes
+        public Gnosis.Core.Collections.ISet<IHashCode> AlbumHashCodes
         {
             get { return albumHashCodes; }
         }
 
-        public ISet<IHashCode> ArtistHashCodes
+        public Gnosis.Core.Collections.ISet<IHashCode> ArtistHashCodes
         {
             get { return artistHashCodes; }
         }
 
-        public ISet<IHashCode> AlbumArtistHashCodes
+        public Gnosis.Core.Collections.ISet<IHashCode> AlbumArtistHashCodes
         {
             get { return albumArtistHashCodes; }
         }
 
-        public ISet<IHashCode> ComposerHashCodes
+        public Gnosis.Core.Collections.ISet<IHashCode> ComposerHashCodes
         {
             get { return composerHashCodes; }
         }
 
-        public ISet<IHashCode> ConductorHashCodes
+        public Gnosis.Core.Collections.ISet<IHashCode> ConductorHashCodes
         {
             get { return conductorHashCodes; }
         }
 
-        public ISet<IHashCode> OriginalTitleHashCodes
+        public Gnosis.Core.Collections.ISet<IHashCode> OriginalTitleHashCodes
         {
             get { return originalTitleHashCodes; }
         }

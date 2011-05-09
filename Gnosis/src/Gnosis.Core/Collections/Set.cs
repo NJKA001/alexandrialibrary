@@ -4,9 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
-using log4net;
-
-namespace Gnosis.Alexandria.Models
+namespace Gnosis.Core.Collections
 {
     public class Set<T> : ISet<T>
     {
@@ -26,8 +24,6 @@ namespace Gnosis.Alexandria.Models
             }
         }
 
-        private static readonly ILog log = LogManager.GetLogger(typeof(OrderedSet<T>));
-
         private readonly IContext context;
         private readonly IDictionary<int, T> map = new Dictionary<int, T>();
         private readonly IList<T> originalItems = new List<T>();
@@ -41,14 +37,7 @@ namespace Gnosis.Alexandria.Models
 
             if (CollectionChanged != null)
             {
-                try
-                {
-                    CollectionChanged(this, args);
-                }
-                catch (Exception ex)
-                {
-                    log.Error("Set.OnCollectionChanged", ex);
-                }
+                CollectionChanged(this, args);
             }
         }
 

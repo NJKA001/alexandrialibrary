@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Gnosis.Alexandria.Models
+namespace Gnosis.Core
 {
     public interface IValue
     {

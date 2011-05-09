@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Alexandria.Models
+using Gnosis.Core.Attributes;
+
+namespace Gnosis.Core
 {
     [DataType]
     public interface ITimeStamp

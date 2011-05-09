@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core;
+using Gnosis.Core.Attributes;
+using Gnosis.Core.Collections;
+
 namespace Gnosis.Alexandria.Models.Tracks
 {
     [Table("Track")]
@@ -91,24 +95,24 @@ namespace Gnosis.Alexandria.Models.Tracks
 
 
         [OneToMany("TrackTitleHashCodes")]
-        ISet<IHashCode> TitleHashCodes { get; }
+        Gnosis.Core.Collections.ISet<IHashCode> TitleHashCodes { get; }
 
         [OneToMany("TrackAlbumHashCodes")]
-        ISet<IHashCode> AlbumHashCodes { get; }
+        Gnosis.Core.Collections.ISet<IHashCode> AlbumHashCodes { get; }
 
         [OneToMany("TrackArtistHashCodes")]
-        ISet<IHashCode> ArtistHashCodes { get; }
+        Gnosis.Core.Collections.ISet<IHashCode> ArtistHashCodes { get; }
 
         [OneToMany("TrackAlbumArtistHashCodes")]
-        ISet<IHashCode> AlbumArtistHashCodes { get; }
+        Gnosis.Core.Collections.ISet<IHashCode> AlbumArtistHashCodes { get; }
 
         [OneToMany("TrackComposerHashCodes")]
-        ISet<IHashCode> ComposerHashCodes { get; }
+        Gnosis.Core.Collections.ISet<IHashCode> ComposerHashCodes { get; }
 
         [OneToMany("TrackConductorHashCodes")]
-        ISet<IHashCode> ConductorHashCodes { get; }
+        Gnosis.Core.Collections.ISet<IHashCode> ConductorHashCodes { get; }
 
         [OneToMany("TrackOriginalTitleHashCodes")]
-        ISet<IHashCode> OriginalTitleHashCodes { get; }
+        Gnosis.Core.Collections.ISet<IHashCode> OriginalTitleHashCodes { get; }
     }
 }

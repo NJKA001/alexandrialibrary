@@ -5,9 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Threading;
 
-using log4net;
-
-namespace Gnosis.Alexandria.Models
+namespace Gnosis.Core.Collections
 {
     public class OrderedSet<T>
         : Set<T>, IOrderedSet<T>
@@ -28,8 +26,6 @@ namespace Gnosis.Alexandria.Models
                 }
             }
         }
-
-        private static readonly ILog log = LogManager.GetLogger(typeof(OrderedSet<T>));
 
         private readonly IList<T> list = new List<T>();
 

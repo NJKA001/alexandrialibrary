@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Alexandria.Models
+namespace Gnosis.Core.Collections
 {
     public interface ISet<T>
         : IEnumerable<T>, INotifyCollectionChanged

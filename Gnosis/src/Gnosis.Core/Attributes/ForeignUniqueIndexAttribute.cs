@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Alexandria.Models
+namespace Gnosis.Core.Attributes
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-    class ForeignUniqueIndexAttribute : KeyAttribute
+    public class ForeignUniqueIndexAttribute : KeyAttribute
     {
         public ForeignUniqueIndexAttribute(string name, params string[] columns)
             : base(name, true, columns)

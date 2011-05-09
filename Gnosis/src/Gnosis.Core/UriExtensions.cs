@@ -10,6 +10,18 @@ namespace Gnosis.Core
 {
     public static class UriExtensions
     {
+        private const string emptyUrn = "urn:empty";
+
+        public static readonly Uri EmptyUri = new Uri(emptyUrn);
+
+        public static bool IsEmpty(this Uri self)
+        {
+            if (self == null)
+                return false;
+
+            return self.AbsolutePath == emptyUrn;
+        }
+
         private static string GetMd5Hash(Uri url)
         {
             var request = HttpWebRequest.Create(url);

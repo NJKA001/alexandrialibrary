@@ -9,6 +9,7 @@ using System.Text;
 using log4net;
 
 using Gnosis.Core;
+using Gnosis.Core.Attributes;
 using Gnosis.Alexandria.Models;
 
 namespace Gnosis.Alexandria.Repositories
