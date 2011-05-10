@@ -137,8 +137,8 @@
     <Compile Include="Models\ValueBase.cs" />
     <Compile Include="Repositories\CommandBuilder.cs" />
     <Compile Include="Repositories\CreateCommandBuilder.cs" />
-    <Compile Include="Repositories\CreateIndexBuilder.cs" />
-    <Compile Include="Repositories\CreateTableBuilder.cs" />
+    <Compile Include="Repositories\CreateIndexStatementBuilder.cs" />
+    <Compile Include="Repositories\CreateTableStatementBuilder.cs" />
     <Compile Include="Repositories\Feeds\FeedRepository.cs" />
     <Compile Include="Repositories\Feeds\IFeedRepository.cs" />
     <Compile Include="Repositories\Feeds\IFeedSearch.cs" />
@@ -147,6 +147,7 @@
     <Compile Include="Repositories\IStatementBuilder.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\SelectCommandBuilder.cs" />
+    <Compile Include="Repositories\SelectStatementBuilder.cs" />
     <Compile Include="Repositories\Tracks\ITrackSearch.cs" />
     <Compile Include="Models\Tracks\ITrackSynchronizedLyrics.cs" />
     <Compile Include="Models\Tracks\ITrackUnsynchronizedLyrics.cs" />

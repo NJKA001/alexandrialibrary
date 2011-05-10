@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 using Gnosis.Core.Attributes;
@@ -42,6 +43,19 @@ namespace Gnosis.Core
             return null;
         }
 
+        public static DefaultSortAttribute GetDefaultSortAttribute(this Type type)
+        {
+            foreach (var attribute in type.GetCustomAttributes(true))
+            {
+                if (attribute is DefaultSortAttribute)
+                {
+                    return attribute as DefaultSortAttribute;
+                }
+            }
+
+            return null;
+        }
+
         public static IEnumerable<IndexAttribute> GetIndexAttributes(this Type type)
         {
             var indexAttributes = new List<IndexAttribute>();
@@ -55,6 +69,22 @@ namespace Gnosis.Core
             }
 
             return indexAttributes;
+        }
+
+        public static IEnumerable<OneToManyAttribute> GetOneToManyAttributes(this Type type)
+        {
+            var oneToManyAttributes = new List<OneToManyAttribute>();
+
+            foreach (var property in type.GetProperties(BindingFlags.Instance | BindingFlags.Public))
+            {
+                foreach (var attribute in property.GetCustomAttributes(true))
+                {
+                    if (attribute is OneToManyAttribute)
+                        oneToManyAttributes.Add(attribute as OneToManyAttribute);
+                }
+            }
+
+            return oneToManyAttributes;
         }
 
         public static bool IsCustomDataType(this Type type)

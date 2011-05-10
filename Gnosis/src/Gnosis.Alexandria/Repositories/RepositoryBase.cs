@@ -78,11 +78,11 @@ namespace Gnosis.Alexandria.Repositories
         {
         }
 
-        protected IEnumerable<T> ExecuteReader(string commandText, IEnumerable<KeyValuePair<string, object>> parameters)
+        protected IEnumerable<T> Select(string whereClause)
         {
             var items = new List<T>();
 
-            var commandBuilder = new SelectCommandBuilder();
+            var commandBuilder = new SelectCommandBuilder(typeof(T), whereClause);
 
             using (var connection = GetConnection())
             {

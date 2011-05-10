@@ -14,6 +14,7 @@ namespace Gnosis.Alexandria.Models.Feeds
     [UniqueIndex("Feed_Location", "Location")]
     [Index("Feed_Title", "Title")]
     [Index("Feed_Sort", "Authors", "PublishedDate", "Title")]
+    [DefaultSort("Authors ASC, PublishedDate ASC, Title ASC")]
     public interface IFeed : IEntity
     {
         Uri Location { get; }
@@ -33,16 +34,21 @@ namespace Gnosis.Alexandria.Models.Feeds
         string FeedIdentifier { get; set; }
 
         [OneToMany("FeedCategory")]
+        [ForeignUniqueIndex("FeedCategory_Parent_Scheme_Name", "Parent", "Scheme", "Name")]
+        [ForeignIndex("FeedCategory_Name", "Name")]
         IOrderedSet<IFeedCategory> Categories { get; }
 
         [OneToMany("FeedLink")]
+        [ForeignUniqueIndex("FeedLink_Parent_Relationship_MediaType_Language", "Parent", "Relationship", "MediaType", "Language")]
         [ForeignIndex("FeedLink_Location", "Location")]
         IOrderedSet<IFeedLink> Links { get; }
 
         [OneToMany("FeedMetadata")]
+        [ForeignUniqueIndex("FeedMetadata_Parent_Scheme_Name", "Parent", "Scheme", "Name")]
+        [ForeignIndex("FeedMetadata_Content", "Content")]
         IOrderedSet<IFeedMetadata> Metadata { get; }
 
-        [OneToMany("FeedItem")]
+        [OneToMany]
         IOrderedSet<IFeedItem> Items { get; }
     }
 }

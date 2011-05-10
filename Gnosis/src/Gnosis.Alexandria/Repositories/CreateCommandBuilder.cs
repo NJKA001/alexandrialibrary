@@ -24,11 +24,11 @@ namespace Gnosis.Alexandria.Repositories
 
             if (table != null)
             {
-                AddStatement(new CreateTableBuilder(this, table.Name, type, instance));
+                AddStatement(new CreateTableStatementBuilder(this, table.Name, type, instance));
                 
                 foreach (var index in indices)
                 {
-                    AddStatement(new CreateIndexBuilder(table.Name, index.Name, index.IsUnique, index.Columns));
+                    AddStatement(new CreateIndexStatementBuilder(table.Name, index.Name, index.IsUnique, index.Columns));
                 }
             }
         }

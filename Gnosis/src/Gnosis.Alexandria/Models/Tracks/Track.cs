@@ -16,9 +16,9 @@ namespace Gnosis.Alexandria.Models.Tracks
         {
             this.location = location;
 
-            this.pictures = new OrderedSet<ITrackPicture>(context);
-            this.lyrics = new OrderedSet<ITrackUnsynchronizedLyrics>(context);
-            this.synchronizedLyrics = new OrderedSet<ITrackSynchronizedLyrics>(context);
+            this.pictures = new  Gnosis.Core.Collections.Set<ITrackPicture>(context);
+            this.lyrics = new Gnosis.Core.Collections.Set<ITrackUnsynchronizedLyrics>(context);
+            this.synchronizedLyrics = new Gnosis.Core.Collections.Set<ITrackSynchronizedLyrics>(context);
             this.identifiers = new OrderedSet<ITrackIdentifier>(context);
             this.ratings = new OrderedSet<ITrackRating>(context);
             this.links = new OrderedSet<ITrackLink>(context);
@@ -78,9 +78,9 @@ namespace Gnosis.Alexandria.Models.Tracks
             this.publisher = publisher;
             this.internationalStandardRecordingCode = internationalStandardRecordingCode;
 
-            this.pictures = new OrderedSet<ITrackPicture>(context, pictures);
-            this.lyrics = new OrderedSet<ITrackUnsynchronizedLyrics>(context, lyrics);
-            this.synchronizedLyrics = new OrderedSet<ITrackSynchronizedLyrics>(context, synchronizedLyrics);
+            this.pictures = new Set<ITrackPicture>(context, pictures);
+            this.lyrics = new Set<ITrackUnsynchronizedLyrics>(context, lyrics);
+            this.synchronizedLyrics = new Set<ITrackSynchronizedLyrics>(context, synchronizedLyrics);
             this.identifiers = new OrderedSet<ITrackIdentifier>(context, identifiers);
             this.ratings = new OrderedSet<ITrackRating>(context, ratings);
             this.links = new OrderedSet<ITrackLink>(context, links);
@@ -131,10 +131,10 @@ namespace Gnosis.Alexandria.Models.Tracks
         private string copyright = string.Empty;
         private string publisher = string.Empty;
         private string internationalStandardRecordingCode = string.Empty;
-        
-        private readonly IOrderedSet<ITrackPicture> pictures;
-        private readonly IOrderedSet<ITrackUnsynchronizedLyrics> lyrics;
-        private readonly IOrderedSet<ITrackSynchronizedLyrics> synchronizedLyrics;
+
+        private readonly Gnosis.Core.Collections.ISet<ITrackPicture> pictures;
+        private readonly Gnosis.Core.Collections.ISet<ITrackUnsynchronizedLyrics> lyrics;
+        private readonly Gnosis.Core.Collections.ISet<ITrackSynchronizedLyrics> synchronizedLyrics;
         private readonly IOrderedSet<ITrackIdentifier> identifiers;
         private readonly IOrderedSet<ITrackRating> ratings;
         private readonly IOrderedSet<ITrackLink> links;
@@ -575,17 +575,17 @@ namespace Gnosis.Alexandria.Models.Tracks
             }
         }
 
-        public IOrderedSet<ITrackPicture> Pictures
+        public Gnosis.Core.Collections.ISet<ITrackPicture> Pictures
         {
             get { return pictures; }
         }
 
-        public IOrderedSet<ITrackUnsynchronizedLyrics> Lyrics
+        public Gnosis.Core.Collections.ISet<ITrackUnsynchronizedLyrics> Lyrics
         {
             get { return lyrics; }
         }
 
-        public IOrderedSet<ITrackSynchronizedLyrics> SynchronizedLyrics
+        public Gnosis.Core.Collections.ISet<ITrackSynchronizedLyrics> SynchronizedLyrics
         {
             get { return synchronizedLyrics; }
         }

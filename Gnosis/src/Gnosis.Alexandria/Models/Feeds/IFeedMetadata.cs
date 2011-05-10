@@ -9,9 +9,9 @@ namespace Gnosis.Alexandria.Models.Feeds
 {
     public interface IFeedMetadata : IValue
     {
-        string Name { get; }
         string MediaType { get; }
         Uri Scheme { get; }
+        string Name { get; }
         string Content { get; }
     }
 }

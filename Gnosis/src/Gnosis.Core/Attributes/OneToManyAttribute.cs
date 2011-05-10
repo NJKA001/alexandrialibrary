@@ -8,6 +8,14 @@ namespace Gnosis.Core.Attributes
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class OneToManyAttribute : Attribute
     {
+        public OneToManyAttribute()
+            : this(string.Empty)
+        {
+            HasPrimaryKey = false;
+            HasForeignKey = false;
+            HasSequence = false;
+        }
+
         public OneToManyAttribute(string tableName)
         {
             this.tableName = tableName;
@@ -36,7 +44,6 @@ namespace Gnosis.Core.Attributes
             this.primaryKeyType = primaryKeyType;
             this.foreignKeyName = foreignKeyName;
             this.foreignKeyType = foreignKeyType;
-            this.hasSequence = true;
             this.sequenceName = sequenceName;
             this.sequenceType = sequenceType;
         }
@@ -49,7 +56,7 @@ namespace Gnosis.Core.Attributes
         private bool hasForeignKey = true;
         private readonly string foreignKeyName = "Parent";
         private readonly Type foreignKeyType = typeof(Guid);
-        private bool hasSequence;
+        private bool hasSequence = true;
         private readonly string sequenceName = "Sequence";
         private readonly Type sequenceType = typeof(int);
 

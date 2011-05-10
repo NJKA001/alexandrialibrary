@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Repositories
 {
-    public class CreateIndexBuilder : IStatementBuilder
+    public class CreateIndexStatementBuilder : IStatementBuilder
     {
-        public CreateIndexBuilder(string table, string name, bool isUnique)
+        public CreateIndexStatementBuilder(string table, string name, bool isUnique)
         {
             var indexType = isUnique ? "unique index" : "index";
 
@@ -15,7 +15,7 @@ namespace Gnosis.Alexandria.Repositories
             builder.AppendFormat("create {0} if not exists {1} on {2} (", indexType, name, table);
         }
 
-        public CreateIndexBuilder(string table, string name, bool isUnique, IEnumerable<string> columns)
+        public CreateIndexStatementBuilder(string table, string name, bool isUnique, IEnumerable<string> columns)
             : this(table, name, isUnique)
         {
             foreach (var column in columns)
@@ -31,7 +31,7 @@ namespace Gnosis.Alexandria.Repositories
                 builder.Append(", ");
         }
 
-        public CreateIndexBuilder Column(string name)
+        public CreateIndexStatementBuilder Column(string name)
         {
             AppendPrefix();
 
@@ -41,7 +41,7 @@ namespace Gnosis.Alexandria.Repositories
             return this;
         }
 
-        public CreateIndexBuilder AscendingColumn(string name)
+        public CreateIndexStatementBuilder AscendingColumn(string name)
         {
             AppendPrefix();
 
@@ -51,7 +51,7 @@ namespace Gnosis.Alexandria.Repositories
             return this;
         }
 
-        public CreateIndexBuilder DescendingColumn(string name)
+        public CreateIndexStatementBuilder DescendingColumn(string name)
         {
             AppendPrefix();
 

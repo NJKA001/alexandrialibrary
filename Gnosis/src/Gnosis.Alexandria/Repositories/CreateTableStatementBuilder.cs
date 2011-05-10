@@ -9,23 +9,23 @@ using Gnosis.Core.Attributes;
 
 namespace Gnosis.Alexandria.Repositories
 {
-    public class CreateTableBuilder : IStatementBuilder
+    public class CreateTableStatementBuilder : IStatementBuilder
     {
-        public CreateTableBuilder(string name)
+        public CreateTableStatementBuilder(string name)
         {
             builder = new StringBuilder();
             builder.AppendFormat("create table if not exists {0} (", name);
         }
 
-        public CreateTableBuilder(CreateCommandBuilder commandBuilder, string name, Type type, object instance)
+        public CreateTableStatementBuilder(CreateCommandBuilder commandBuilder, string name, Type type, object instance)
             : this(name)
         {
             this.commandBuilder = commandBuilder;
             AddColumnsForRootType(type, instance);
         }
 
-        private CreateTableBuilder(CreateCommandBuilder commandBuilder, OneToManyAttribute oneToMany, Type collectionType, Type itemType)
-            : this(oneToMany.TableName)
+        private CreateTableStatementBuilder(CreateCommandBuilder commandBuilder, OneToManyAttribute oneToMany, Type collectionType, Type itemType)
+            : this(GetOneToManyTableName(oneToMany, itemType))
         {
             this.commandBuilder = commandBuilder;
             AddColumnsForOneToMany(oneToMany, collectionType, itemType);
@@ -36,6 +36,14 @@ namespace Gnosis.Alexandria.Repositories
         private readonly StringBuilder builder;
         private bool hasColumns;
 
+        private static string GetOneToManyTableName(OneToManyAttribute oneToMany, Type itemType)
+        {
+            var itemTable = itemType.GetTableAttribute();
+            var itemName = itemTable != null ? itemTable.Name : itemType.Name;
+
+            return !string.IsNullOrEmpty(oneToMany.TableName) ? oneToMany.TableName : itemName;
+        }
+        
         private void AppendPrefix()
         {
             if (hasColumns)
@@ -121,7 +129,7 @@ namespace Gnosis.Alexandria.Repositories
             {
                 Column(oneToMany.ForeignKeyType, oneToMany.ForeignKeyName);
             }
-            if ((oneToMany.HasSequence || collectionIsOrdered) && !collectionIsUnordered)
+            if (oneToMany.HasSequence && !collectionIsUnordered)
             {
                 Column(oneToMany.SequenceType, oneToMany.SequenceName);
             }
@@ -187,11 +195,11 @@ namespace Gnosis.Alexandria.Repositories
                     if (genericArgs.Length > 0)
                     {
                         var itemType = genericArgs[0];
-                        commandBuilder.AddStatement(new CreateTableBuilder(commandBuilder, oneToMany, collectionType, itemType));
+                        commandBuilder.AddStatement(new CreateTableStatementBuilder(commandBuilder, oneToMany, collectionType, itemType));
                         
                         foreach (var foreignIndex in foreignIndices)
                         {
-                            commandBuilder.AddStatement(new CreateIndexBuilder(oneToMany.TableName, foreignIndex.Name, foreignIndex.IsUnique, foreignIndex.Columns));
+                            commandBuilder.AddStatement(new CreateIndexStatementBuilder(oneToMany.TableName, foreignIndex.Name, foreignIndex.IsUnique, foreignIndex.Columns));
                         }
                     }
                 }
@@ -244,7 +252,7 @@ namespace Gnosis.Alexandria.Repositories
             }
         }
 
-        public CreateTableBuilder PrimaryKeyInteger(string name)
+        public CreateTableStatementBuilder PrimaryKeyInteger(string name)
         {
             AppendPrefix();
 
@@ -255,7 +263,7 @@ namespace Gnosis.Alexandria.Repositories
             return this;
         }
 
-        public CreateTableBuilder PrimaryKeyIntegerAutoIncrement(string name)
+        public CreateTableStatementBuilder PrimaryKeyIntegerAutoIncrement(string name)
         {
             AppendPrefix();
 
@@ -266,7 +274,7 @@ namespace Gnosis.Alexandria.Repositories
             return this;
         }
 
-        public CreateTableBuilder PrimaryKeyText(string name)
+        public CreateTableStatementBuilder PrimaryKeyText(string name)
         {
             AppendPrefix();
 
@@ -277,12 +285,12 @@ namespace Gnosis.Alexandria.Repositories
             return this;
         }
 
-        public CreateTableBuilder Column(Type type, string name)
+        public CreateTableStatementBuilder Column(Type type, string name)
         {
             return Column(type, name, null);
         }
 
-        public CreateTableBuilder Column(Type type, string name, object defaultValue)
+        public CreateTableStatementBuilder Column(Type type, string name, object defaultValue)
         {
             var affinity = type.GetTypeAffinity();
 
@@ -310,25 +318,25 @@ namespace Gnosis.Alexandria.Repositories
             return this;
         }
 
-        public CreateTableBuilder BlobColumn(string name, object defaultValue)
+        public CreateTableStatementBuilder BlobColumn(string name, object defaultValue)
         {
             AddBlobColumn(name, defaultValue);
             return this;
         }
 
-        public CreateTableBuilder IntegerColumn(string name, object defaultValue)
+        public CreateTableStatementBuilder IntegerColumn(string name, object defaultValue)
         {
             AddIntegerColumn(name, defaultValue);
             return this;
         }
 
-        public CreateTableBuilder RealColumn(string name, object defaultValue)
+        public CreateTableStatementBuilder RealColumn(string name, object defaultValue)
         {
             AddRealColumn(name, defaultValue);
             return this;
         }
 
-        public CreateTableBuilder TextColumn(string name, object defaultValue)
+        public CreateTableStatementBuilder TextColumn(string name, object defaultValue)
         {
             AddTextColumn(name, defaultValue);
             return this;
