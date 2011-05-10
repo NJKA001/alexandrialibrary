@@ -7,25 +7,25 @@ using Gnosis.Core.Attributes;
 
 namespace Gnosis.Core
 {
-    [DataType]
+    [CustomDataType]
     public interface ITimeStamp
     {
-        [Column("TimeStamp_CreatedBy", "urn:empty")]
+        [Column("TimeStamp_CreatedBy", UriExtensions.EmptyUriPath)]
         Uri CreatedBy { get; }
 
-        [Column("TimeStamp_CreatedDate", "0001-01-01T00:00:00")]
+        [Column("TimeStamp_CreatedDate", DateTimeExtensions.EmptyDateString)]
         DateTime CreatedDate { get; }
 
-        [Column("TimeStamp_LastAccessedBy", "urn:empty")]
+        [Column("TimeStamp_LastAccessedBy", UriExtensions.EmptyUriPath)]
         Uri LastAccessedBy { get; }
 
-        [Column("TimeStamp_LastAccessedDate", "0001-01-01T00:00:00")]
+        [Column("TimeStamp_LastAccessedDate", DateTimeExtensions.EmptyDateString)]
         DateTime LastAccessedDate { get; }
 
-        [Column("TimeStamp_LastModifiedBy", "urn:empty")]
+        [Column("TimeStamp_LastModifiedBy", UriExtensions.EmptyUriPath)]
         Uri LastModifiedBy { get; }
 
-        [Column("TimeStamp_LastModifiedDate", "0001-01-01T00:00:00")]
+        [Column("TimeStamp_LastModifiedDate", DateTimeExtensions.EmptyDateString)]
         DateTime LastModifiedDate { get; }
     }
 }

@@ -8,30 +8,30 @@ namespace Gnosis.Core.Attributes
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class OneToManyAttribute : Attribute
     {
-        public OneToManyAttribute(string name)
+        public OneToManyAttribute(string tableName)
         {
-            this.name = name;
+            this.tableName = tableName;
         }
 
-        public OneToManyAttribute(string name, string primaryKeyName, Type primaryKeyType)
+        public OneToManyAttribute(string tableName, string primaryKeyName, Type primaryKeyType)
         {
-            this.name = name;
+            this.tableName = tableName;
             this.primaryKeyName = primaryKeyName;
             this.primaryKeyType = primaryKeyType;
         }
 
-        public OneToManyAttribute(string name, string primaryKeyName, Type primaryKeyType, string foreignKeyName, Type foreignKeyType)
+        public OneToManyAttribute(string tableName, string primaryKeyName, Type primaryKeyType, string foreignKeyName, Type foreignKeyType)
         {
-            this.name = name;
+            this.tableName = tableName;
             this.primaryKeyName = primaryKeyName;
             this.primaryKeyType = primaryKeyType;
             this.foreignKeyName = foreignKeyName;
             this.foreignKeyType = foreignKeyType;
         }
 
-        public OneToManyAttribute(string name, string primaryKeyName, Type primaryKeyType, string foreignKeyName, Type foreignKeyType, string sequenceName, Type sequenceType)
+        public OneToManyAttribute(string tableName, string primaryKeyName, Type primaryKeyType, string foreignKeyName, Type foreignKeyType, string sequenceName, Type sequenceType)
         {
-            this.name = name;
+            this.tableName = tableName;
             this.primaryKeyName = primaryKeyName;
             this.primaryKeyType = primaryKeyType;
             this.foreignKeyName = foreignKeyName;
@@ -41,7 +41,7 @@ namespace Gnosis.Core.Attributes
             this.sequenceType = sequenceType;
         }
 
-        private readonly string name;
+        private readonly string tableName;
         private bool hasPrimaryKey = true;
         private readonly string primaryKeyName = "Id";
         private readonly Type primaryKeyType = typeof(int);
@@ -53,9 +53,9 @@ namespace Gnosis.Core.Attributes
         private readonly string sequenceName = "Sequence";
         private readonly Type sequenceType = typeof(int);
 
-        public string Name
+        public string TableName
         {
-            get { return name; }
+            get { return tableName; }
         }
 
         public bool HasPrimaryKey

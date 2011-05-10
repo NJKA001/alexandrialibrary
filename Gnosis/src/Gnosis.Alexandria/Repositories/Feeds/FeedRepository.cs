@@ -17,7 +17,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         {
         }
 
-        protected override IFeed Create()
+        protected override IFeed CreateDefault()
         {
             return Create(UriExtensions.EmptyUri);
         }

@@ -18,7 +18,7 @@ namespace Gnosis.Alexandria.Repositories.Tracks
         {
         }
 
-        protected override ITrack Create()
+        protected override ITrack CreateDefault()
         {
             return Create(UriExtensions.EmptyUri);
         }

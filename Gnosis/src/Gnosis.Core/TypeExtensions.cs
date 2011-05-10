@@ -29,15 +29,68 @@ namespace Gnosis.Core
                 return TypeAffinity.Numeric;
         }
 
-        public static bool IsDataTypeColumn(this Type type)
+        public static TableAttribute GetTableAttribute(this Type type)
         {
             foreach (var attribute in type.GetCustomAttributes(true))
             {
-                if (attribute is DataTypeAttribute)
+                if (attribute is TableAttribute)
+                {
+                    return attribute as TableAttribute;
+                }
+            }
+
+            return null;
+        }
+
+        public static IEnumerable<IndexAttribute> GetIndexAttributes(this Type type)
+        {
+            var indexAttributes = new List<IndexAttribute>();
+
+            foreach (var attribute in type.GetCustomAttributes(true))
+            {
+                if (attribute is IndexAttribute)
+                {
+                    indexAttributes.Add(attribute as IndexAttribute);
+                }
+            }
+
+            return indexAttributes;
+        }
+
+        public static bool IsCustomDataType(this Type type)
+        {
+            foreach (var attribute in type.GetCustomAttributes(true))
+            {
+                if (attribute is CustomDataTypeAttribute)
                     return true;
             }
 
             return false;
+        }
+
+        public static bool IsEntityType(this Type type)
+        {
+            return typeof(IEntity).IsAssignableFrom(type);
+        }
+
+        public static bool IsValueType(this Type type)
+        {
+            return typeof(IValue).IsAssignableFrom(type);
+        }
+
+        public static bool IsTimeStampType(this Type type)
+        {
+            return type == typeof(ITimeStamp);
+        }
+
+        public static bool IsOrderedCollectionType(this Type type)
+        {
+            return type.Name == "IOrderedSet`1";
+        }
+
+        public static bool IsUnorderedCollectionType(this Type type)
+        {
+            return type.Name == "ISet`1";
         }
 
         public static bool IsTextColumn(this Type type)

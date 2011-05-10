@@ -32,17 +32,17 @@ namespace Gnosis.Alexandria.Models.Feeds
         Uri IconPath { get; set; }
         string FeedIdentifier { get; set; }
 
-        [OneToMany("FeedCategory", HasSequence = true)]
+        [OneToMany("FeedCategory")]
         IOrderedSet<IFeedCategory> Categories { get; }
 
-        [OneToMany("FeedLink", HasSequence = true)]
+        [OneToMany("FeedLink")]
         [ForeignIndex("FeedLink_Location", "Location")]
         IOrderedSet<IFeedLink> Links { get; }
 
-        [OneToMany("FeedMetadata", HasSequence = true)]
+        [OneToMany("FeedMetadata")]
         IOrderedSet<IFeedMetadata> Metadata { get; }
 
-        [OneToMany("FeedItem", HasPrimaryKey = false, HasSequence = true)]
+        [OneToMany("FeedItem")]
         IOrderedSet<IFeedItem> Items { get; }
     }
 }

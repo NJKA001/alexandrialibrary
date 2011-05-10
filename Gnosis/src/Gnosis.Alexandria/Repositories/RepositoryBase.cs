@@ -33,16 +33,13 @@ namespace Gnosis.Alexandria.Repositories
         {
             try
             {
-                var instance = Create();
-                var commandBuilder = new CreateCommandBuilder(typeof(T), instance);
-                var commandText = commandBuilder.ToString();
+                var commandBuilder = new CreateCommandBuilder(typeof(T), CreateDefault());
 
                 using (var connection = GetConnection())
                 {
                     connection.Open();
-                    using (var command = connection.CreateCommand())
+                    using (var command = commandBuilder.GetCommand(connection))
                     {
-                        command.CommandText = commandText;
                         command.ExecuteNonQuery();
                     }
                 }
@@ -53,15 +50,7 @@ namespace Gnosis.Alexandria.Repositories
             }
         }
 
-        private static void AddParameter(IDbCommand command, string name, object value)
-        {
-            var parameter = command.CreateParameter();
-            parameter.ParameterName = name;
-            parameter.Value = value;
-            command.Parameters.Add(parameter);
-        }
-
-        protected abstract T Create();
+        protected abstract T CreateDefault();
         protected abstract T Create(IDataReader reader);
 
         protected IContext Context
@@ -74,16 +63,16 @@ namespace Gnosis.Alexandria.Repositories
             return new SQLiteConnection(string.Format("Data Source={0};Version=3;", database));
         }
 
-        protected static IDbCommand GetCommand(IDbConnection connection, string commandText, IEnumerable<KeyValuePair<string, object>> parameters)
-        {
-            var command = connection.CreateCommand();
-            command.CommandText = commandText;
+        //protected static IDbCommand GetCommand(IDbConnection connection, string commandText, IEnumerable<KeyValuePair<string, object>> parameters)
+        //{
+        //    var command = connection.CreateCommand();
+        //    command.CommandText = commandText;
 
-            foreach (var parameter in parameters)
-                AddParameter(command, parameter.Key, parameter.Value);
+        //    foreach (var parameter in parameters)
+        //        AddParameter(command, parameter.Key, parameter.Value);
 
-            return command;
-        }
+        //    return command;
+        //}
 
         protected void ExecuteNonQuery(string commandText, IEnumerable<KeyValuePair<string, object>> parameters)
         {
@@ -93,16 +82,21 @@ namespace Gnosis.Alexandria.Repositories
         {
             var items = new List<T>();
 
+            var commandBuilder = new SelectCommandBuilder();
+
             using (var connection = GetConnection())
             {
                 connection.Open();
 
-                using (var command = GetCommand(connection, commandText, parameters))
+                using (var command = commandBuilder.GetCommand(connection))
                 {
                     using (var reader = command.ExecuteReader())
                     {
-                        var item = Create(reader);
-                        items.Add(item);
+                        while (reader.Read())
+                        {
+                            var item = Create(reader);
+                            items.Add(item);
+                        }
                     }
                 }
             }

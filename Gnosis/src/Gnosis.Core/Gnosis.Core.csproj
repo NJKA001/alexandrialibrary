@@ -43,11 +43,12 @@
   <ItemGroup>
     <Compile Include="Attributes\ColumnAttribute.cs" />
     <Compile Include="Attributes\ColumnIgnoreAttribute.cs" />
-    <Compile Include="Attributes\DataTypeAttribute.cs" />
+    <Compile Include="Attributes\CustomDataTypeAttribute.cs" />
     <Compile Include="Attributes\ForeignIndexAttribute.cs" />
     <Compile Include="Attributes\ForeignUniqueIndexAttribute.cs" />
     <Compile Include="Attributes\TableCheckConstraintAttribute.cs" />
     <Compile Include="Attributes\TableConstraintAttribute.cs" />
+    <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="IContext.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IHashCode.cs" />

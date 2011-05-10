@@ -146,6 +146,7 @@
     <Compile Include="Repositories\ISearch.cs" />
     <Compile Include="Repositories\IStatementBuilder.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="Repositories\SelectCommandBuilder.cs" />
     <Compile Include="Repositories\Tracks\ITrackSearch.cs" />
     <Compile Include="Models\Tracks\ITrackSynchronizedLyrics.cs" />
     <Compile Include="Models\Tracks\ITrackUnsynchronizedLyrics.cs" />

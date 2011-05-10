@@ -7,12 +7,19 @@ namespace Gnosis.Alexandria.Repositories
 {
     public class CreateIndexBuilder : IStatementBuilder
     {
-        public CreateIndexBuilder(string name, bool isUnique, string table)
+        public CreateIndexBuilder(string table, string name, bool isUnique)
         {
             var indexType = isUnique ? "unique index" : "index";
 
             builder = new StringBuilder();
             builder.AppendFormat("create {0} if not exists {1} on {2} (", indexType, name, table);
+        }
+
+        public CreateIndexBuilder(string table, string name, bool isUnique, IEnumerable<string> columns)
+            : this(table, name, isUnique)
+        {
+            foreach (var column in columns)
+                Column(column);
         }
 
         private readonly StringBuilder builder;

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Core.Attributes;
 
 namespace Gnosis.Alexandria.Repositories
 {
@@ -15,6 +17,22 @@ namespace Gnosis.Alexandria.Repositories
             builder.AppendFormat("create table if not exists {0} (", name);
         }
 
+        public CreateTableBuilder(CreateCommandBuilder commandBuilder, string name, Type type, object instance)
+            : this(name)
+        {
+            this.commandBuilder = commandBuilder;
+            AddColumnsForRootType(type, instance);
+        }
+
+        private CreateTableBuilder(CreateCommandBuilder commandBuilder, OneToManyAttribute oneToMany, Type collectionType, Type itemType)
+            : this(oneToMany.TableName)
+        {
+            this.commandBuilder = commandBuilder;
+            AddColumnsForOneToMany(oneToMany, collectionType, itemType);
+            AddColumnsForRootType(itemType);
+        }
+
+        private readonly CreateCommandBuilder commandBuilder;
         private readonly StringBuilder builder;
         private bool hasColumns;
 
@@ -76,6 +94,154 @@ namespace Gnosis.Alexandria.Repositories
             builder.AppendFormat("{0} TEXT NOT NULL DEFAULT '{1}'", name, defaultString);
 
             hasColumns = true;
+        }
+
+        private void AddColumnsForOneToMany(OneToManyAttribute oneToMany, Type collectionType, Type itemType)
+        {
+            var collectionIsOrdered = collectionType.IsOrderedCollectionType();
+            var collectionIsUnordered = collectionType.IsUnorderedCollectionType();
+            var itemIsEntity = itemType.IsEntityType();
+            var itemIsValue = itemType.IsValueType();
+
+            if (oneToMany.HasPrimaryKey && !itemIsEntity)
+            {
+                if (oneToMany.PrimaryKeyType.IsTextColumn())
+                {
+                    PrimaryKeyText(oneToMany.PrimaryKeyName);
+                }
+                else if (oneToMany.PrimaryKeyType.IsIntegerColumn())
+                {
+                    if (oneToMany.PrimaryKeyIsAutoIncrement)
+                        PrimaryKeyIntegerAutoIncrement(oneToMany.PrimaryKeyName);
+                    else
+                        PrimaryKeyInteger(oneToMany.PrimaryKeyName);
+                }
+            }
+            if (oneToMany.HasForeignKey)
+            {
+                Column(oneToMany.ForeignKeyType, oneToMany.ForeignKeyName);
+            }
+            if ((oneToMany.HasSequence || collectionIsOrdered) && !collectionIsUnordered)
+            {
+                Column(oneToMany.SequenceType, oneToMany.SequenceName);
+            }
+        }
+
+        private void AddColumnsForRootType(Type type)
+        {
+            AddColumnsForRootType(type, null);
+        }
+
+        private void AddColumnsForRootType(Type type, object instance)
+        {
+            foreach (var typeInterface in type.GetInterfaces())
+            {
+                AddColumns(typeInterface, instance);
+            }
+
+            AddColumns(type, instance);
+        }
+
+        private void AddColumns(Type type, object instance)
+        {
+            foreach (var property in type.GetProperties())
+            {
+                bool includeColumn = true;
+                string columnName = property.Name;
+                object defaultValue = null;
+                PrimaryKeyColumnAttribute primaryKey = null;
+                OneToManyAttribute oneToMany = null;
+                var foreignIndices = new List<ForeignIndexAttribute>();
+
+                foreach (var attribute in property.GetCustomAttributes(true))
+                {
+                    if (attribute is ColumnIgnoreAttribute)
+                    {
+                        includeColumn = false;
+                        continue;
+                    }
+
+                    if (attribute is OneToManyAttribute)
+                        oneToMany = attribute as OneToManyAttribute;
+
+                    if (attribute is ForeignIndexAttribute)
+                    {
+                        foreignIndices.Add(attribute as ForeignIndexAttribute);
+                    }
+
+                    if (attribute is PrimaryKeyColumnAttribute)
+                        primaryKey = attribute as PrimaryKeyColumnAttribute;
+
+                    if (attribute is ColumnAttribute)
+                    {
+                        var column = attribute as ColumnAttribute;
+                        columnName = column.Name;
+                        defaultValue = (column.DefaultValue != null || instance == null) ? column.DefaultValue : property.GetValue(instance, null);
+                    }
+                }
+
+                if (oneToMany != null)
+                {
+                    var collectionType = property.PropertyType.GetGenericTypeDefinition();
+                    var genericArgs = property.PropertyType.GetGenericArguments();
+                    if (genericArgs.Length > 0)
+                    {
+                        var itemType = genericArgs[0];
+                        commandBuilder.AddStatement(new CreateTableBuilder(commandBuilder, oneToMany, collectionType, itemType));
+                        
+                        foreach (var foreignIndex in foreignIndices)
+                        {
+                            commandBuilder.AddStatement(new CreateIndexBuilder(oneToMany.TableName, foreignIndex.Name, foreignIndex.IsUnique, foreignIndex.Columns));
+                        }
+                    }
+                }
+                else if (includeColumn)
+                {
+                    AddColumn(instance, columnName, property, defaultValue, primaryKey);
+                }
+            }
+        }
+
+        private void AddColumn(object instance, string columnName, PropertyInfo property, object defaultValue, PrimaryKeyColumnAttribute primaryKey)
+        {
+            if (primaryKey != null)
+            {
+                if (property.PropertyType.IsIntegerColumn())
+                {
+                    if (primaryKey.AutoIncrement)
+                        PrimaryKeyIntegerAutoIncrement(columnName);
+                    else
+                        PrimaryKeyInteger(columnName);
+                }
+                else if (property.PropertyType.IsTextColumn())
+                {
+                    PrimaryKeyText(columnName);
+                }
+            }
+            else
+            {
+                if (property.PropertyType.IsCustomDataType())
+                {
+                    object dataTypeInstance = null;
+                    if (instance != null)
+                    {
+                        dataTypeInstance = property.GetValue(instance, null);
+                    }
+                    else
+                    {
+                        if (property.PropertyType.IsTimeStampType())
+                        {
+                            dataTypeInstance = new TimeStamp(UriExtensions.EmptyUri);
+                        }
+                    }
+
+                    AddColumnsForRootType(property.PropertyType, dataTypeInstance);
+                }
+                else
+                {
+                    Column(property.PropertyType, columnName, defaultValue);
+                }
+            }
         }
 
         public CreateTableBuilder PrimaryKeyInteger(string name)

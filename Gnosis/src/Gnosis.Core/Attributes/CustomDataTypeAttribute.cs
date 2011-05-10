@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Attributes
 {
     [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false)]
-    public class DataTypeAttribute : Attribute
+    public class CustomDataTypeAttribute : Attribute
     {
     }
 }
