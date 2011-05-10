@@ -70,50 +70,58 @@ namespace Gnosis.Alexandria.Models.Tracks
         string Publisher { get; set; }
         string InternationalStandardRecordingCode { get; set; }
 
-        [OneToMany("TrackPictures", HasSequence=true)]
+        [OneToMany("TrackPicture", HasPrimaryKey = false, HasSequence=true)]
         IOrderedSet<ITrackPicture> Pictures { get; }
 
-        [OneToMany("TrackLyrics", HasSequence = true)]
+        [OneToMany("TrackLyrics", HasPrimaryKey = false, HasSequence = true)]
         IOrderedSet<ITrackUnsynchronizedLyrics> Lyrics { get; }
 
-        [OneToMany("TrackSynchronizedLyrics", HasSequence = true)]
+        [OneToMany("TrackSynchronizedLyrics", HasPrimaryKey = false, HasSequence = true)]
         IOrderedSet<ITrackSynchronizedLyrics> SynchronizedLyrics { get; }
 
-        [OneToMany("TrackIdentifiers", HasSequence = true)]
-        [ForeignUniqueIndex("TrackIdentifiers_Parent_Scheme_Identifier", "Parent", "Scheme", "Identifier")]
-        [ForeignIndex("TrackIdentifiers_Identifier", "Identifier")]
+        [OneToMany("TrackIdentifier", HasSequence = true)]
+        [ForeignUniqueIndex("TrackIdentifier_Parent_Scheme_Identifier", "Parent", "Scheme", "Identifier")]
+        [ForeignIndex("TrackIdentifier_Identifier", "Identifier")]
         IOrderedSet<ITrackIdentifier> Identifiers { get; }
 
-        [OneToMany("TrackRatings", HasSequence = true)]
-        [ForeignUniqueIndex("TrackRatings_Parent_User", "Parent", "User")]
+        [OneToMany("TrackRating", HasSequence = true)]
+        [ForeignUniqueIndex("TrackRating_Parent_User", "Parent", "User")]
         IOrderedSet<ITrackRating> Ratings { get; }
 
-        [OneToMany("TrackLinks", HasSequence = true)]
+        [OneToMany("TrackLink", HasSequence = true)]
+        [ForeignIndex("TrackLink_Location", "Location")]
         IOrderedSet<ITrackLink> Links { get; }
 
         [OneToMany("TrackMetadata", HasSequence = true)]
         IOrderedSet<ITrackMetadata> Metadata { get; }
 
 
-        [OneToMany("TrackTitleHashCodes")]
+        [OneToMany("TrackTitleHash")]
+        [ForeignIndex("TrackTitleHashCode_Value", "Value")]
         Gnosis.Core.Collections.ISet<IHashCode> TitleHashCodes { get; }
 
-        [OneToMany("TrackAlbumHashCodes")]
+        [OneToMany("TrackAlbumHash")]
+        [ForeignIndex("TrackAlbumHash_Value", "Value")]
         Gnosis.Core.Collections.ISet<IHashCode> AlbumHashCodes { get; }
 
-        [OneToMany("TrackArtistHashCodes")]
+        [OneToMany("TrackArtistHash")]
+        [ForeignIndex("TrackArtistHash_Value", "Value")]
         Gnosis.Core.Collections.ISet<IHashCode> ArtistHashCodes { get; }
 
-        [OneToMany("TrackAlbumArtistHashCodes")]
+        [OneToMany("TrackAlbumArtistHash")]
+        [ForeignIndex("TrackAlbumArtistHash_Value", "Value")]
         Gnosis.Core.Collections.ISet<IHashCode> AlbumArtistHashCodes { get; }
 
-        [OneToMany("TrackComposerHashCodes")]
+        [OneToMany("TrackComposerHash")]
+        [ForeignIndex("TrackComposerHash_Value", "Value")]
         Gnosis.Core.Collections.ISet<IHashCode> ComposerHashCodes { get; }
 
-        [OneToMany("TrackConductorHashCodes")]
+        [OneToMany("TrackConductorHash")]
+        [ForeignIndex("TrackConductorHash_Value", "Value")]
         Gnosis.Core.Collections.ISet<IHashCode> ConductorHashCodes { get; }
 
-        [OneToMany("TrackOriginalTitleHashCodes")]
+        [OneToMany("TrackOriginalTitleHash")]
+        [ForeignIndex("TrackOriginalTitleHash_Value", "Value")]
         Gnosis.Core.Collections.ISet<IHashCode> OriginalTitleHashCodes { get; }
     }
 }

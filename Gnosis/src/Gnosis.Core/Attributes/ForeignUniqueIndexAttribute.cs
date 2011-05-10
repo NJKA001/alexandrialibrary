@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Attributes
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-    public class ForeignUniqueIndexAttribute : KeyAttribute
+    public class ForeignUniqueIndexAttribute : ForeignIndexAttribute
     {
         public ForeignUniqueIndexAttribute(string name, params string[] columns)
             : base(name, true, columns)

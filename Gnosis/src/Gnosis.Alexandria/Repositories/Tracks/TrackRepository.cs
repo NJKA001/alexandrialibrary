@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -19,32 +20,22 @@ namespace Gnosis.Alexandria.Repositories.Tracks
 
         protected override ITrack Create()
         {
-            return new Track(Context, new Uri("urn:unknown"));
+            return Create(UriExtensions.EmptyUri);
         }
 
-        //protected override string GetInitializeText()
-        //{
-        //    var track = new Track(Context, new Uri("urn:unknown"));
+        protected override ITrack Create(IDataReader reader)
+        {
+            return null;
+        }
 
-        //    var trackTable =
-        //        new CreateTableBuilder("Track")
-        //        .PrimaryKeyText("TrackId")
-        //        .TextColumn("Title", track.Title);
-
-        //    var titleIndex =
-        //        new CreateIndexBuilder("Track_Title", "Track")
-        //        .AscendingColumn("Title");
-
-        //    var artistsIndex =
-        //        new CreateIndexBuilder("Track_Artists", "Track")
-        //        .AscendingColumn("Artists");
-
-        //    return string.Empty;
-        //}
+        protected ITrack Create(Uri location)
+        {
+            return new Track(Context, location);
+        }
 
         public ITrack New(Uri location)
         {
-            throw new NotImplementedException();
+            return Create(location);
         }
 
         public ITrack GetOne(Guid id)

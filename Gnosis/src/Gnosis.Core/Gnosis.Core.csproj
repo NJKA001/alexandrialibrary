@@ -46,6 +46,8 @@
     <Compile Include="Attributes\DataTypeAttribute.cs" />
     <Compile Include="Attributes\ForeignIndexAttribute.cs" />
     <Compile Include="Attributes\ForeignUniqueIndexAttribute.cs" />
+    <Compile Include="Attributes\TableCheckConstraintAttribute.cs" />
+    <Compile Include="Attributes\TableConstraintAttribute.cs" />
     <Compile Include="IContext.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IHashCode.cs" />

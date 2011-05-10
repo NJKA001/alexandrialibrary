@@ -45,6 +45,7 @@ namespace Gnosis.Core.Attributes
         private bool hasPrimaryKey = true;
         private readonly string primaryKeyName = "Id";
         private readonly Type primaryKeyType = typeof(int);
+        private bool primaryKeyIsAutoIncrement = true;
         private bool hasForeignKey = true;
         private readonly string foreignKeyName = "Parent";
         private readonly Type foreignKeyType = typeof(Guid);
@@ -71,6 +72,12 @@ namespace Gnosis.Core.Attributes
         public Type PrimaryKeyType
         {
             get { return primaryKeyType; }
+        }
+
+        public bool PrimaryKeyIsAutoIncrement
+        {
+            get { return primaryKeyIsAutoIncrement; }
+            set { primaryKeyIsAutoIncrement = value; }
         }
 
         public bool HasForeignKey

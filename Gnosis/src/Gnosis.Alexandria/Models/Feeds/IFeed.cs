@@ -4,14 +4,20 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Core.Attributes;
 using Gnosis.Core.Collections;
 
 namespace Gnosis.Alexandria.Models.Feeds
 {
+    [Table("Feed")]
+    [Index("Feed_TimeStamp_CreatedDate", "TimeStamp_CreatedDate")]
+    [UniqueIndex("Feed_Location", "Location")]
+    [Index("Feed_Title", "Title")]
+    [Index("Feed_Sort", "Authors", "PublishedDate", "Title")]
     public interface IFeed : IEntity
     {
         Uri Location { get; }
-        string MediaType { get; }
+        string MediaType { get; set; }
         string Title { get; set; }
         string Authors { get; set; }
         string Contributors { get; set; }
@@ -26,9 +32,17 @@ namespace Gnosis.Alexandria.Models.Feeds
         Uri IconPath { get; set; }
         string FeedIdentifier { get; set; }
 
+        [OneToMany("FeedCategory", HasSequence = true)]
         IOrderedSet<IFeedCategory> Categories { get; }
+
+        [OneToMany("FeedLink", HasSequence = true)]
+        [ForeignIndex("FeedLink_Location", "Location")]
         IOrderedSet<IFeedLink> Links { get; }
+
+        [OneToMany("FeedMetadata", HasSequence = true)]
         IOrderedSet<IFeedMetadata> Metadata { get; }
+
+        [OneToMany("FeedItem", HasPrimaryKey = false, HasSequence = true)]
         IOrderedSet<IFeedItem> Items { get; }
     }
 }

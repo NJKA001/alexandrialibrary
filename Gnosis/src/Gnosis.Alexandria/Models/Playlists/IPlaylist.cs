@@ -30,7 +30,7 @@ namespace Gnosis.Alexandria.Models.Playlists
         [OneToMany("PlaylistExtensions", HasSequence = true)]
         IOrderedSet<IPlaylistExtension> Extensions { get; }
         
-        [OneToMany("PlaylistItems", HasSequence = true)]
+        [OneToMany("PlaylistItems", HasPrimaryKey = false, HasSequence = true)]
         IOrderedSet<IPlaylistItem> Items { get; }
 
         [OneToMany("PlaylistLinks", HasSequence = true)]

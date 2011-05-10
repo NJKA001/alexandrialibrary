@@ -17,7 +17,7 @@ namespace Gnosis.Core.Attributes
             this.autoIncrement = autoIncrement;
         }
 
-        private bool autoIncrement;
+        private bool autoIncrement = false;
 
         public bool AutoIncrement
         {

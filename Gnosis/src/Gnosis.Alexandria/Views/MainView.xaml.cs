@@ -22,6 +22,7 @@ using Gnosis.Alexandria.Controllers;
 using Gnosis.Alexandria.Helpers;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Repositories;
+using Gnosis.Alexandria.Repositories.Feeds;
 using Gnosis.Alexandria.Repositories.Tracks;
 using Gnosis.Core;
 using Gnosis.Fmod;
@@ -63,6 +64,7 @@ namespace Gnosis.Alexandria.Views
                 trackController.SourceLoadCompleted += sourceLoadCompleted;
 
                 context = new ModelContext(new Uri("mailto:dan.poage@gmail.com"), this.Dispatcher);
+                feedRepository = new FeedRepository(context);
                 trackRepository = new TrackRepository(context);
             }
             catch (Exception ex)
@@ -75,6 +77,7 @@ namespace Gnosis.Alexandria.Views
         
         private readonly IContext context;
         private readonly ITrackRepository trackRepository;
+        private readonly IFeedRepository feedRepository;
 
         private readonly IOldRepository<IOldTrack> oldTrackRepository = new OldTrackRepository();
         private readonly IOldRepository<ISource> sourceRepository = new OldSourceRepository();
