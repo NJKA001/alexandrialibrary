@@ -22,9 +22,25 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             return Create(UriExtensions.EmptyUri);
         }
 
-        protected override IFeed Create(IDataReader reader)
+        protected override IEnumerable<IFeed> CreateItems(IDataReader reader)
         {
-            throw new NotImplementedException();
+            var items = new List<IFeed>();
+
+            var resultCount = 0;
+            do
+            {
+                resultCount++;
+                var rowCount = 0;
+                while (reader.Read())
+                {
+                    rowCount++;
+                    var table = reader[0].ToString();
+                    System.Diagnostics.Debug.WriteLine("table: " + table + " columns: " + reader.FieldCount + " row: " + rowCount);
+                }
+            }
+            while (reader.NextResult());
+
+            return items;
         }
 
         protected IFeed Create(Uri location)
@@ -49,7 +65,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
         public IEnumerable<IFeed> GetAll()
         {
-            throw new NotImplementedException();
+            return Select();
         }
 
         public IEnumerable<IFeed> GetAny(IFeedSearch search)

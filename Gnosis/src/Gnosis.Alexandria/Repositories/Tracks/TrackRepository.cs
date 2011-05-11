@@ -23,9 +23,9 @@ namespace Gnosis.Alexandria.Repositories.Tracks
             return Create(UriExtensions.EmptyUri);
         }
 
-        protected override ITrack Create(IDataReader reader)
+        protected override IEnumerable<ITrack> CreateItems(IDataReader reader)
         {
-            return null;
+            return new List<ITrack>();
         }
 
         protected ITrack Create(Uri location)

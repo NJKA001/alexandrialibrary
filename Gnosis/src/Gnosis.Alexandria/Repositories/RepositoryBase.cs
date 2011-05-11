@@ -51,7 +51,7 @@ namespace Gnosis.Alexandria.Repositories
         }
 
         protected abstract T CreateDefault();
-        protected abstract T Create(IDataReader reader);
+        protected abstract IEnumerable<T> CreateItems(IDataReader reader);
 
         protected IContext Context
         {
@@ -78,6 +78,11 @@ namespace Gnosis.Alexandria.Repositories
         {
         }
 
+        protected IEnumerable<T> Select()
+        {
+            return Select(string.Empty);
+        }
+
         protected IEnumerable<T> Select(string whereClause)
         {
             var items = new List<T>();
@@ -92,11 +97,12 @@ namespace Gnosis.Alexandria.Repositories
                 {
                     using (var reader = command.ExecuteReader())
                     {
-                        while (reader.Read())
-                        {
-                            var item = Create(reader);
-                            items.Add(item);
-                        }
+                        return CreateItems(reader); 
+                        //while (reader.Read())
+                        //{
+                        //    var item = Create(reader);
+                        //    items.Add(item);
+                        //}
                     }
                 }
             }

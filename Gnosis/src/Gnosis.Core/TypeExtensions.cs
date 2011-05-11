@@ -71,16 +71,16 @@ namespace Gnosis.Core
             return indexAttributes;
         }
 
-        public static IEnumerable<OneToManyAttribute> GetOneToManyAttributes(this Type type)
+        public static IEnumerable<Tuple<PropertyInfo, OneToManyAttribute>> GetOneToManyAttributes(this Type type)
         {
-            var oneToManyAttributes = new List<OneToManyAttribute>();
+            var oneToManyAttributes = new List<Tuple<PropertyInfo, OneToManyAttribute>>();
 
             foreach (var property in type.GetProperties(BindingFlags.Instance | BindingFlags.Public))
             {
                 foreach (var attribute in property.GetCustomAttributes(true))
                 {
                     if (attribute is OneToManyAttribute)
-                        oneToManyAttributes.Add(attribute as OneToManyAttribute);
+                        oneToManyAttributes.Add(new Tuple<PropertyInfo, OneToManyAttribute>(property, attribute as OneToManyAttribute));
                 }
             }
 

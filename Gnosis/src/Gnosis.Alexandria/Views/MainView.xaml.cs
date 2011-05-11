@@ -66,6 +66,15 @@ namespace Gnosis.Alexandria.Views
                 context = new ModelContext(new Uri("mailto:dan.poage@gmail.com"), this.Dispatcher);
                 feedRepository = new FeedRepository(context);
                 trackRepository = new TrackRepository(context);
+
+                try
+                {
+                    var allFeeds = feedRepository.GetAll();
+                }
+                catch (Exception ex)
+                {
+                    log.Error("MainView.ctor()", ex);
+                }
             }
             catch (Exception ex)
             {

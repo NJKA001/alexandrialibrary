@@ -12,7 +12,7 @@ namespace Gnosis.Alexandria.Repositories
     {
         public SelectStatementBuilder(TableAttribute table, string whereClause, string orderByClause)
         {            
-            builder.AppendFormat("select {0}.* from {0}", table.Name);
+            builder.AppendFormat("select '{0}', {0}.* from {0}", table.Name);
             if (!string.IsNullOrEmpty(whereClause))
                 builder.AppendFormat(" where {0}", whereClause);
             if (!string.IsNullOrEmpty(orderByClause))
@@ -22,7 +22,7 @@ namespace Gnosis.Alexandria.Repositories
 
         public SelectStatementBuilder(string parentTableName, string tableName, string foreignKeyColumnName, string whereClause, string orderByClause)
         {
-            builder.AppendFormat("select {0}.* from {0}", tableName);
+            builder.AppendFormat("select '{0}', {0}.* from {0}", tableName);
             builder.AppendFormat(" inner join {0} on {0}.Id = {1}.{2}", parentTableName, tableName, foreignKeyColumnName);
             if (!string.IsNullOrEmpty(whereClause))
                 builder.AppendFormat(" where {0}", whereClause);
