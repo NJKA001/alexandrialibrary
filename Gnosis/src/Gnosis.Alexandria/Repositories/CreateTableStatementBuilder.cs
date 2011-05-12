@@ -25,7 +25,7 @@ namespace Gnosis.Alexandria.Repositories
         }
 
         private CreateTableStatementBuilder(CreateCommandBuilder commandBuilder, OneToManyAttribute oneToMany, Type collectionType, Type itemType)
-            : this(GetOneToManyTableName(oneToMany, itemType))
+            : this(oneToMany.TableName)
         {
             this.commandBuilder = commandBuilder;
             AddColumnsForOneToMany(oneToMany, collectionType, itemType);
@@ -36,14 +36,8 @@ namespace Gnosis.Alexandria.Repositories
         private readonly StringBuilder builder;
         private bool hasColumns;
 
-        private static string GetOneToManyTableName(OneToManyAttribute oneToMany, Type itemType)
-        {
-            var itemTable = itemType.GetTableAttribute();
-            var itemName = itemTable != null ? itemTable.Name : itemType.Name;
+        #region Private Helper Methods
 
-            return !string.IsNullOrEmpty(oneToMany.TableName) ? oneToMany.TableName : itemName;
-        }
-        
         private void AppendPrefix()
         {
             if (hasColumns)
@@ -104,6 +98,8 @@ namespace Gnosis.Alexandria.Repositories
             hasColumns = true;
         }
 
+        #endregion
+
         private void AddColumnsForOneToMany(OneToManyAttribute oneToMany, Type collectionType, Type itemType)
         {
             var collectionIsOrdered = collectionType.IsOrderedCollectionType();
@@ -111,7 +107,7 @@ namespace Gnosis.Alexandria.Repositories
             var itemIsEntity = itemType.IsEntityType();
             var itemIsValue = itemType.IsValueType();
 
-            if (oneToMany.HasPrimaryKey && !itemIsEntity)
+            if (!itemIsEntity && oneToMany.HasPrimaryKey)
             {
                 if (oneToMany.PrimaryKeyType.IsTextColumn())
                 {
@@ -200,6 +196,11 @@ namespace Gnosis.Alexandria.Repositories
                         foreach (var foreignIndex in foreignIndices)
                         {
                             commandBuilder.AddStatement(new CreateIndexStatementBuilder(oneToMany.TableName, foreignIndex.Name, foreignIndex.IsUnique, foreignIndex.Columns));
+                        }
+
+                        foreach (var index in itemType.GetIndexAttributes())
+                        {
+                            commandBuilder.AddStatement(new CreateIndexStatementBuilder(oneToMany.TableName, index.Name, index.IsUnique, index.Columns));
                         }
                     }
                 }

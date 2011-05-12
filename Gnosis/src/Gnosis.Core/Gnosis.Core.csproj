@@ -51,6 +51,7 @@
     <Compile Include="Attributes\TableConstraintAttribute.cs" />
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="IContext.cs" />
+    <Compile Include="DataReaderExtensions.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IHashCode.cs" />
     <Compile Include="Attributes\IndexAttribute.cs" />

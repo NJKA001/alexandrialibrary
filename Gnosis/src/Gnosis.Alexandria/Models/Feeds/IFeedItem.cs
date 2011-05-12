@@ -10,19 +10,17 @@ using Gnosis.Core.Collections;
 namespace Gnosis.Alexandria.Models.Feeds
 {
     [Table("FeedItem")]
-    [UniqueIndex("FeedItem_Feed_FeedItemIdentifier", "Feed", "FeedItemIdentifier")]
+    [UniqueIndex("FeedItem_Parent_FeedItemIdentifier", "Parent", "FeedItemIdentifier")]
     [Index("FeedItem_Title", "Title")]
     [Index("FeedItem_Authors", "Authors")]
     [Index("FeedItem_Contributors", "Contributors")]
     [Index("FeedItem_PublishedDate", "PublishedDate")]
     [Index("FeedItem_Summary", "Summary")]
     [Index("FeedItem_UpdatedDate", "UpdatedDate")]
-    [Index("FeedItem_Sort", "Feed", "Sequence")]
-    [DefaultSort("Feed ASC, Sequence ASC")]
+    [Index("FeedItem_Sort", "Parent", "Sequence")]
+    [DefaultSort("Parent ASC, Sequence ASC")]
     public interface IFeedItem : IEntity
     {
-        IFeed Feed { get; }
-        int Sequence { get; }
         string Title { get; set; }
         string TitleMediaType { get; set; }
         string Authors { get; set; }
@@ -36,13 +34,19 @@ namespace Gnosis.Alexandria.Models.Feeds
         DateTime UpdatedDate { get; set; }
         string FeedItemIdentifier { get; set; }
 
-        [OneToMany("FeedItemCategories")]
+        [OneToMany("FeedItemCategory")]
+        [ForeignUniqueIndex("FeedItemCategory_Parent_Scheme_Name", "Parent", "Scheme", "Name")]
+        [ForeignIndex("FeedItemCategory_Name", "Name")]
         IOrderedSet<IFeedCategory> Categories { get; }
 
-        [OneToMany("FeedItemLinks")]
+        [OneToMany("FeedItemLink")]
+        [ForeignUniqueIndex("FeedItemLink_Parent_Relationship_MediaType_Language", "Parent", "Relationship", "MediaType", "Language")]
+        [ForeignIndex("FeedItemLink_Location", "Location")]
         IOrderedSet<IFeedLink> Links { get; }
 
         [OneToMany("FeedItemMetadata")]
+        [ForeignUniqueIndex("FeedItemMetadata_Parent_Scheme_Name", "Parent", "Scheme", "Name")]
+        [ForeignIndex("FeedItemMetadata_Content", "Content")]
         IOrderedSet<IFeedMetadata> Metadata { get; }
     }
 }

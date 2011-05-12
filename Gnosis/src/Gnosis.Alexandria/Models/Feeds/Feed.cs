@@ -16,13 +16,36 @@ namespace Gnosis.Alexandria.Models.Feeds
             : base(context)
         {
             this.location = location;
+            
+            this.categories = new OrderedSet<IFeedCategory>(context);
+            this.links = new OrderedSet<IFeedLink>(context);
+            this.metadata = new OrderedSet<IFeedMetadata>(context);
+            this.items = new OrderedSet<IFeedItem>(context);
         }
 
-        public Feed(IContext context, Guid id, ITimeStamp timeStamp, Uri location, string mediaType)
+        public Feed(IContext context, Guid id, ITimeStamp timeStamp, Uri location, string mediaType, string title, string authors, string contributors, string description, string language, Uri originalLocation, string copyright, DateTime publishedDate, DateTime updatedDate, string generator, Uri imagePath, Uri iconPath, string feedIdentifier)
             : base(context, id, timeStamp)
         {
             this.location = location;
             this.mediaType = mediaType;
+            this.title = title;
+            this.authors = authors;
+            this.contributors = contributors;
+            this.description = description;
+            this.language = language;
+            this.originalLocation = originalLocation;
+            this.copyright = copyright;
+            this.publishedDate = publishedDate;
+            this.updatedDate = updatedDate;
+            this.generator = generator;
+            this.imagePath = imagePath;
+            this.iconPath = iconPath;
+            this.feedIdentifier = feedIdentifier;
+
+            this.categories = new OrderedSet<IFeedCategory>(context);
+            this.links = new OrderedSet<IFeedLink>(context);
+            this.metadata = new OrderedSet<IFeedMetadata>(context);
+            this.items = new OrderedSet<IFeedItem>(context);
         }
 
         private readonly Uri location;

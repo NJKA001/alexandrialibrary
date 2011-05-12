@@ -48,7 +48,7 @@ namespace Gnosis.Alexandria.Models.Feeds
         [ForeignIndex("FeedMetadata_Content", "Content")]
         IOrderedSet<IFeedMetadata> Metadata { get; }
 
-        [OneToMany]
+        [OneToMany("FeedItem")]
         IOrderedSet<IFeedItem> Items { get; }
     }
 }

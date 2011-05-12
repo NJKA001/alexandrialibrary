@@ -23,7 +23,7 @@ namespace Gnosis.Alexandria.Repositories.Tracks
             return Create(UriExtensions.EmptyUri);
         }
 
-        protected override IEnumerable<ITrack> CreateItems(IDataReader reader)
+        protected override IEnumerable<ITrack> Create(IDataReader reader)
         {
             return new List<ITrack>();
         }

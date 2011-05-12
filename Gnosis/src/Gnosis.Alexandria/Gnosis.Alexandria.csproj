@@ -88,6 +88,7 @@
     <Compile Include="Models\Devices\IMovableDeviceItem.cs" />
     <Compile Include="Models\EntityBase.cs" />
     <Compile Include="Models\Feeds\Feed.cs" />
+    <Compile Include="Models\Feeds\FeedCategory.cs" />
     <Compile Include="Models\Feeds\IFeed.cs" />
     <Compile Include="Models\Feeds\IFeedCategory.cs" />
     <Compile Include="Models\Feeds\IFeedItem.cs" />

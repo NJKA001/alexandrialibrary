@@ -8,14 +8,6 @@ namespace Gnosis.Core.Attributes
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class OneToManyAttribute : Attribute
     {
-        public OneToManyAttribute()
-            : this(string.Empty)
-        {
-            HasPrimaryKey = false;
-            HasForeignKey = false;
-            HasSequence = false;
-        }
-
         public OneToManyAttribute(string tableName)
         {
             this.tableName = tableName;
@@ -50,15 +42,15 @@ namespace Gnosis.Core.Attributes
 
         private readonly string tableName;
         private bool hasPrimaryKey = true;
-        private readonly string primaryKeyName = "Id";
-        private readonly Type primaryKeyType = typeof(int);
+        private string primaryKeyName = "Id";
+        private Type primaryKeyType = typeof(int);
         private bool primaryKeyIsAutoIncrement = true;
         private bool hasForeignKey = true;
-        private readonly string foreignKeyName = "Parent";
-        private readonly Type foreignKeyType = typeof(Guid);
+        private string foreignKeyName = "Parent";
+        private Type foreignKeyType = typeof(Guid);
         private bool hasSequence = true;
-        private readonly string sequenceName = "Sequence";
-        private readonly Type sequenceType = typeof(int);
+        private string sequenceName = "Sequence";
+        private Type sequenceType = typeof(int);
 
         public string TableName
         {
@@ -74,11 +66,13 @@ namespace Gnosis.Core.Attributes
         public string PrimaryKeyName
         {
             get { return primaryKeyName; }
+            set { primaryKeyName = value; }
         }
 
         public Type PrimaryKeyType
         {
             get { return primaryKeyType; }
+            set { primaryKeyType = value; }
         }
 
         public bool PrimaryKeyIsAutoIncrement
@@ -96,11 +90,13 @@ namespace Gnosis.Core.Attributes
         public string ForeignKeyName
         {
             get { return foreignKeyName; }
+            set { foreignKeyName = value; }
         }
 
         public Type ForeignKeyType
         {
             get { return foreignKeyType; }
+            set { foreignKeyType = value; }
         }
 
         public bool HasSequence
@@ -112,11 +108,13 @@ namespace Gnosis.Core.Attributes
         public string SequenceName
         {
             get { return sequenceName; }
+            set { sequenceName = value; }
         }
 
         public Type SequenceType
         {
             get { return sequenceType; }
+            set { sequenceType = value; }
         }
     }
 }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Gnosis.Core;
 using Gnosis.Core.Collections;
@@ -16,13 +13,21 @@ namespace Gnosis.Alexandria.Models.Tracks
         {
             this.location = location;
 
-            this.pictures = new  Gnosis.Core.Collections.Set<ITrackPicture>(context);
-            this.lyrics = new Gnosis.Core.Collections.Set<ITrackUnsynchronizedLyrics>(context);
-            this.synchronizedLyrics = new Gnosis.Core.Collections.Set<ITrackSynchronizedLyrics>(context);
-            this.identifiers = new OrderedSet<ITrackIdentifier>(context);
-            this.ratings = new OrderedSet<ITrackRating>(context);
-            this.links = new OrderedSet<ITrackLink>(context);
-            this.metadata = new OrderedSet<ITrackMetadata>(context);
+            this.pictures = new  Set<ITrackPicture>(context);
+            this.lyrics = new Set<ITrackUnsynchronizedLyrics>(context);
+            this.synchronizedLyrics = new Set<ITrackSynchronizedLyrics>(context);
+            this.identifiers = new Set<ITrackIdentifier>(context);
+            this.ratings = new Set<ITrackRating>(context);
+            this.links = new Set<ITrackLink>(context);
+            this.metadata = new Set<ITrackMetadata>(context);
+
+            this.titleHashCodes = new Set<IHashCode>(context);
+            this.albumHashCodes = new Set<IHashCode>(context);
+            this.artistHashCodes = new Set<IHashCode>(context);
+            this.albumArtistHashCodes = new Set<IHashCode>(context);
+            this.composerHashCodes = new Set<IHashCode>(context);
+            this.conductorHashCodes = new Set<IHashCode>(context);
+            this.originalTitleHashCodes = new Set<IHashCode>(context);
         }
 
         public Track(IContext context, Guid id, ITimeStamp timeStamp, 
@@ -31,14 +36,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             string composers, string conductors, string genres, string moods, string languages, DateTime recordingDate, DateTime releaseDate,
             string originalTitle, DateTime originalReleaseDate, uint trackNumber, uint trackCount, uint discNumber, uint discCount,
             TimeSpan duration, uint beatsPerMinute, ulong playCount, TimeSpan playlistDelay, string originalFileName,
-            DateTime encodingDate, DateTime taggingDate, string copyright, string publisher, string internationalStandardRecordingCode,
-            IEnumerable<ITrackPicture> pictures, IEnumerable<ITrackUnsynchronizedLyrics> lyrics, 
-            IEnumerable<ITrackSynchronizedLyrics> synchronizedLyrics, IEnumerable<ITrackIdentifier> identifiers,
-            IEnumerable<ITrackRating> ratings, IEnumerable<ITrackLink> links, IEnumerable<ITrackMetadata> metadata,
-            IEnumerable<IHashCode> titleHashCodes, IEnumerable<IHashCode> albumHashCodes,
-            IEnumerable<IHashCode> artistHashCodes, IEnumerable<IHashCode> albumArtistHashCodes,
-            IEnumerable<IHashCode> composerHashCodes, IEnumerable<IHashCode> conductorHashCodes,
-            IEnumerable<IHashCode> originalTitleHashCodes)
+            DateTime encodingDate, DateTime taggingDate, string copyright, string publisher, string internationalStandardRecordingCode)
             : base(context, id, timeStamp)
         {
             this.location = location;
@@ -78,21 +76,21 @@ namespace Gnosis.Alexandria.Models.Tracks
             this.publisher = publisher;
             this.internationalStandardRecordingCode = internationalStandardRecordingCode;
 
-            this.pictures = new Set<ITrackPicture>(context, pictures);
-            this.lyrics = new Set<ITrackUnsynchronizedLyrics>(context, lyrics);
-            this.synchronizedLyrics = new Set<ITrackSynchronizedLyrics>(context, synchronizedLyrics);
-            this.identifiers = new OrderedSet<ITrackIdentifier>(context, identifiers);
-            this.ratings = new OrderedSet<ITrackRating>(context, ratings);
-            this.links = new OrderedSet<ITrackLink>(context, links);
-            this.metadata = new OrderedSet<ITrackMetadata>(context, metadata);
+            this.pictures = new Set<ITrackPicture>(context);
+            this.lyrics = new Set<ITrackUnsynchronizedLyrics>(context);
+            this.synchronizedLyrics = new Set<ITrackSynchronizedLyrics>(context);
+            this.identifiers = new Set<ITrackIdentifier>(context);
+            this.ratings = new Set<ITrackRating>(context);
+            this.links = new Set<ITrackLink>(context);
+            this.metadata = new Set<ITrackMetadata>(context);
 
-            this.titleHashCodes = new Set<IHashCode>(context, titleHashCodes);
-            this.albumHashCodes = new Set<IHashCode>(context, albumHashCodes);
-            this.artistHashCodes = new Set<IHashCode>(context, artistHashCodes);
-            this.albumArtistHashCodes = new Set<IHashCode>(context, albumArtistHashCodes);
-            this.composerHashCodes = new Set<IHashCode>(context, composerHashCodes);
-            this.conductorHashCodes = new Set<IHashCode>(context, conductorHashCodes);
-            this.originalTitleHashCodes = new Set<IHashCode>(context, originalTitleHashCodes);
+            this.titleHashCodes = new Set<IHashCode>(context);
+            this.albumHashCodes = new Set<IHashCode>(context);
+            this.artistHashCodes = new Set<IHashCode>(context);
+            this.albumArtistHashCodes = new Set<IHashCode>(context);
+            this.composerHashCodes = new Set<IHashCode>(context);
+            this.conductorHashCodes = new Set<IHashCode>(context);
+            this.originalTitleHashCodes = new Set<IHashCode>(context);
         }
 
         private readonly Uri location;
@@ -132,21 +130,21 @@ namespace Gnosis.Alexandria.Models.Tracks
         private string publisher = string.Empty;
         private string internationalStandardRecordingCode = string.Empty;
 
-        private readonly Gnosis.Core.Collections.ISet<ITrackPicture> pictures;
-        private readonly Gnosis.Core.Collections.ISet<ITrackUnsynchronizedLyrics> lyrics;
-        private readonly Gnosis.Core.Collections.ISet<ITrackSynchronizedLyrics> synchronizedLyrics;
-        private readonly IOrderedSet<ITrackIdentifier> identifiers;
-        private readonly IOrderedSet<ITrackRating> ratings;
-        private readonly IOrderedSet<ITrackLink> links;
-        private readonly IOrderedSet<ITrackMetadata> metadata;
+        private readonly ISet<ITrackPicture> pictures;
+        private readonly ISet<ITrackUnsynchronizedLyrics> lyrics;
+        private readonly ISet<ITrackSynchronizedLyrics> synchronizedLyrics;
+        private readonly ISet<ITrackIdentifier> identifiers;
+        private readonly ISet<ITrackRating> ratings;
+        private readonly ISet<ITrackLink> links;
+        private readonly ISet<ITrackMetadata> metadata;
 
-        private readonly Gnosis.Core.Collections.ISet<IHashCode> titleHashCodes;
-        private readonly Gnosis.Core.Collections.ISet<IHashCode> albumHashCodes;
-        private readonly Gnosis.Core.Collections.ISet<IHashCode> artistHashCodes;
-        private readonly Gnosis.Core.Collections.ISet<IHashCode> albumArtistHashCodes;
-        private readonly Gnosis.Core.Collections.ISet<IHashCode> composerHashCodes;
-        private readonly Gnosis.Core.Collections.ISet<IHashCode> conductorHashCodes;
-        private readonly Gnosis.Core.Collections.ISet<IHashCode> originalTitleHashCodes;
+        private readonly ISet<IHashCode> titleHashCodes;
+        private readonly ISet<IHashCode> albumHashCodes;
+        private readonly ISet<IHashCode> artistHashCodes;
+        private readonly ISet<IHashCode> albumArtistHashCodes;
+        private readonly ISet<IHashCode> composerHashCodes;
+        private readonly ISet<IHashCode> conductorHashCodes;
+        private readonly ISet<IHashCode> originalTitleHashCodes;
 
         #region ITrack Members
 
@@ -575,72 +573,72 @@ namespace Gnosis.Alexandria.Models.Tracks
             }
         }
 
-        public Gnosis.Core.Collections.ISet<ITrackPicture> Pictures
+        public ISet<ITrackPicture> Pictures
         {
             get { return pictures; }
         }
 
-        public Gnosis.Core.Collections.ISet<ITrackUnsynchronizedLyrics> Lyrics
+        public ISet<ITrackUnsynchronizedLyrics> Lyrics
         {
             get { return lyrics; }
         }
 
-        public Gnosis.Core.Collections.ISet<ITrackSynchronizedLyrics> SynchronizedLyrics
+        public ISet<ITrackSynchronizedLyrics> SynchronizedLyrics
         {
             get { return synchronizedLyrics; }
         }
 
-        public IOrderedSet<ITrackIdentifier> Identifiers
+        public ISet<ITrackIdentifier> Identifiers
         {
             get { return identifiers; }
         }
 
-        public IOrderedSet<ITrackRating> Ratings
+        public ISet<ITrackRating> Ratings
         {
             get { return ratings; }
         }
 
-        public IOrderedSet<ITrackLink> Links
+        public ISet<ITrackLink> Links
         {
             get { return links; }
         }
 
-        public IOrderedSet<ITrackMetadata> Metadata
+        public ISet<ITrackMetadata> Metadata
         {
             get { return metadata; }
         }
 
-        public Gnosis.Core.Collections.ISet<IHashCode> TitleHashCodes
+        public ISet<IHashCode> TitleHashCodes
         {
             get { return titleHashCodes; }
         }
 
-        public Gnosis.Core.Collections.ISet<IHashCode> AlbumHashCodes
+        public ISet<IHashCode> AlbumHashCodes
         {
             get { return albumHashCodes; }
         }
 
-        public Gnosis.Core.Collections.ISet<IHashCode> ArtistHashCodes
+        public ISet<IHashCode> ArtistHashCodes
         {
             get { return artistHashCodes; }
         }
 
-        public Gnosis.Core.Collections.ISet<IHashCode> AlbumArtistHashCodes
+        public ISet<IHashCode> AlbumArtistHashCodes
         {
             get { return albumArtistHashCodes; }
         }
 
-        public Gnosis.Core.Collections.ISet<IHashCode> ComposerHashCodes
+        public ISet<IHashCode> ComposerHashCodes
         {
             get { return composerHashCodes; }
         }
 
-        public Gnosis.Core.Collections.ISet<IHashCode> ConductorHashCodes
+        public ISet<IHashCode> ConductorHashCodes
         {
             get { return conductorHashCodes; }
         }
 
-        public Gnosis.Core.Collections.ISet<IHashCode> OriginalTitleHashCodes
+        public ISet<IHashCode> OriginalTitleHashCodes
         {
             get { return originalTitleHashCodes; }
         }

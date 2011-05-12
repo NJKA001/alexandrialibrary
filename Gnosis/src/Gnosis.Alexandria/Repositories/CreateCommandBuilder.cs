@@ -20,13 +20,11 @@ namespace Gnosis.Alexandria.Repositories
                 throw new ArgumentNullException("instance");
 
             var table = type.GetTableAttribute();
-            var indices = type.GetIndexAttributes();
-
             if (table != null)
             {
                 AddStatement(new CreateTableStatementBuilder(this, table.Name, type, instance));
                 
-                foreach (var index in indices)
+                foreach (var index in type.GetIndexAttributes())
                 {
                     AddStatement(new CreateIndexStatementBuilder(table.Name, index.Name, index.IsUnique, index.Columns));
                 }

@@ -51,7 +51,7 @@ namespace Gnosis.Alexandria.Repositories
         }
 
         protected abstract T CreateDefault();
-        protected abstract IEnumerable<T> CreateItems(IDataReader reader);
+        protected abstract IEnumerable<T> Create(IDataReader reader);
 
         protected IContext Context
         {
@@ -61,6 +61,18 @@ namespace Gnosis.Alexandria.Repositories
         protected IDbConnection GetConnection()
         {
             return new SQLiteConnection(string.Format("Data Source={0};Version=3;", database));
+        }
+
+        protected ITimeStamp GetTimeStamp(IDataReader reader)
+        {
+            var createdBy = new Uri(reader["TimeStamp_CreatedBy"].ToString());
+            var createdDate = DateTime.Parse(reader["TimeStamp_CreatedDate"].ToString());
+            var lastAccessedBy = new Uri(reader["TimeStamp_LastAccessedBy"].ToString());
+            var lastAccessedDate = DateTime.Parse(reader["TimeStamp_LastAccessedDate"].ToString());
+            var lastModifiedBy = new Uri(reader["TimeStamp_LastModifiedBy"].ToString());
+            var lastModifiedDate = DateTime.Parse(reader["TimeStamp_LastModifiedDate"].ToString());
+
+            return new TimeStamp(createdBy, createdDate, lastAccessedBy, lastAccessedDate, lastModifiedBy, lastModifiedDate);
         }
 
         //protected static IDbCommand GetCommand(IDbConnection connection, string commandText, IEnumerable<KeyValuePair<string, object>> parameters)
@@ -85,7 +97,7 @@ namespace Gnosis.Alexandria.Repositories
 
         protected IEnumerable<T> Select(string whereClause)
         {
-            var items = new List<T>();
+            //var items = new List<T>();
 
             var commandBuilder = new SelectCommandBuilder(typeof(T), whereClause);
 
@@ -97,7 +109,7 @@ namespace Gnosis.Alexandria.Repositories
                 {
                     using (var reader = command.ExecuteReader())
                     {
-                        return CreateItems(reader); 
+                        return Create(reader); 
                         //while (reader.Read())
                         //{
                         //    var item = Create(reader);
@@ -107,7 +119,7 @@ namespace Gnosis.Alexandria.Repositories
                 }
             }
 
-            return items;
+            //return items;
         }
     }
 }
