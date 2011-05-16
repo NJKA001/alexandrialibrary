@@ -150,6 +150,7 @@
     <Compile Include="Repositories\ISearch.cs" />
     <Compile Include="Repositories\IStatementBuilder.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="Repositories\SaveCommandBuilder.cs" />
     <Compile Include="Repositories\SelectCommandBuilder.cs" />
     <Compile Include="Repositories\SelectStatementBuilder.cs" />
     <Compile Include="Repositories\Tracks\ITrackSearch.cs" />

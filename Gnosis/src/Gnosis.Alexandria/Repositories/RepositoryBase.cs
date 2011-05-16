@@ -20,7 +20,6 @@ namespace Gnosis.Alexandria.Repositories
         {
             this.context = context;
             //this.database = "Catalog.db";
-            //this.rootTable = rootTable;
 
             Initialize();
         }
@@ -52,6 +51,7 @@ namespace Gnosis.Alexandria.Repositories
 
         protected abstract T CreateDefault();
         protected abstract IEnumerable<T> Create(IDataReader reader);
+        protected abstract CommandBuilder GetSaveCommandBuilder(IEnumerable<T> items);
 
         protected IContext Context
         {
@@ -86,8 +86,16 @@ namespace Gnosis.Alexandria.Repositories
         //    return command;
         //}
 
-        protected void ExecuteNonQuery(string commandText, IEnumerable<KeyValuePair<string, object>> parameters)
+        protected int Execute(CommandBuilder commandBuilder)
         {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var command = commandBuilder.GetCommand(connection))
+                {
+                    return command.ExecuteNonQuery();
+                }
+            }
         }
 
         protected IEnumerable<T> Select()
@@ -136,6 +144,12 @@ namespace Gnosis.Alexandria.Repositories
             }
 
             //return items;
+        }
+
+        public void Save(IEnumerable<T> items)
+        {
+            var builder = GetSaveCommandBuilder(items);
+            Execute(builder);
         }
     }
 }

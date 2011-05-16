@@ -12,7 +12,7 @@ namespace Gnosis.Alexandria.Repositories
         {
         }
 
-        protected CommandBuilder(IEnumerable<KeyValuePair<string, object>> paramters)
+        protected CommandBuilder(IEnumerable<KeyValuePair<string, object>> parameters)
         {
             if (parameters != null)
             {

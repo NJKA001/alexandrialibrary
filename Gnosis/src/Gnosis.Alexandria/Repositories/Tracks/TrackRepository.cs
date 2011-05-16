@@ -23,6 +23,13 @@ namespace Gnosis.Alexandria.Repositories.Tracks
             return Create(UriExtensions.EmptyUri);
         }
 
+        protected override CommandBuilder GetSaveCommandBuilder(IEnumerable<ITrack> items)
+        {
+            var builder = new SaveCommandBuilder();
+
+            return builder;
+        }
+
         protected override IEnumerable<ITrack> Create(IDataReader reader)
         {
             return new List<ITrack>();
@@ -54,11 +61,6 @@ namespace Gnosis.Alexandria.Repositories.Tracks
         }
 
         public IEnumerable<ITrack> GetAny(ITrackSearch search)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Save(IEnumerable<ITrack> tracks)
         {
             throw new NotImplementedException();
         }

@@ -232,6 +232,13 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             return metadata;
         }
 
+        protected override CommandBuilder GetSaveCommandBuilder(IEnumerable<IFeed> items)
+        {
+            var builder = new SaveCommandBuilder();
+
+            return builder;
+        }
+
         protected override IEnumerable<IFeed> Create(IDataReader reader)
         {
             IDictionary<Guid, IFeed> feeds = null;
@@ -394,11 +401,6 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         public IEnumerable<IFeed> GetAny(IFeedSearch search)
         {
             return Select(search.GetWhereClause(), search.Parameters);
-        }
-
-        public void Save(IEnumerable<IFeed> tracks)
-        {
-            throw new NotImplementedException();
         }
     }
 }
