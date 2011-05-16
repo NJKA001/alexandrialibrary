@@ -97,9 +97,25 @@ namespace Gnosis.Alexandria.Repositories
 
         protected IEnumerable<T> Select(string whereClause)
         {
+            return Select(whereClause, null);
+        }
+
+        protected IEnumerable<T> Select(string whereClause, string parameterName, object parameterValue)
+        {
+            return Select(whereClause, new Dictionary<string, object> { { parameterName, parameterValue } });
+        }
+
+        protected IEnumerable<T> Select(string whereClause, IEnumerable<KeyValuePair<string, object>> parameters)
+        {
             //var items = new List<T>();
 
             var commandBuilder = new SelectCommandBuilder(typeof(T), whereClause);
+
+            if (parameters != null)
+            {
+                foreach (var pair in parameters)
+                    commandBuilder.AddParameter(pair.Key, pair.Value);
+            }
 
             using (var connection = GetConnection())
             {

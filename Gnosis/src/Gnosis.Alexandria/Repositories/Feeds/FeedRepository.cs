@@ -81,6 +81,24 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         {
             var links = new Dictionary<Guid, IList<IFeedLink>>();
 
+            do
+            {
+                var parent = new Guid(reader["Parent"].ToString());
+                var relationship = reader["Relationship"].ToString();
+                var location = new Uri(reader["Location"].ToString());
+                var mediaType = reader["MediaType"].ToString();
+                var length = uint.Parse(reader["Length"].ToString());
+                var language = reader["Language"].ToString();
+
+                var link = new FeedLink(relationship, location, mediaType, length, language);
+
+                if (!links.ContainsKey(parent))
+                    links.Add(parent, new List<IFeedLink>());
+
+                links[parent].Add(link);
+            }
+            while (reader.Read());
+
             return links;
         }
 
@@ -88,12 +106,56 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         {
             var metadata = new Dictionary<Guid, IList<IFeedMetadata>>();
 
+            do
+            {
+                var parent = new Guid(reader["Parent"].ToString());
+                var mediaType = reader["MediaType"].ToString();
+                var scheme = new Uri(reader["Scheme"].ToString());
+                var name = reader["Name"].ToString();
+                var content = reader["Content"].ToString();
+
+                var metadatum = new FeedMetadata(mediaType, scheme, name, content);
+
+                if (!metadata.ContainsKey(parent))
+                    metadata.Add(parent, new List<IFeedMetadata>());
+
+                metadata[parent].Add(metadatum);
+            }
+            while (reader.Read());
+
             return metadata;
         }
 
         private IDictionary<Guid, IList<IFeedItem>> GetFeedItems(IDataReader reader)
         {
             var items = new Dictionary<Guid, IList<IFeedItem>>();
+
+            do
+            {
+                var timeStamp = GetTimeStamp(reader);
+                var id = new Guid(reader["Id"].ToString());
+                var parent = new Guid(reader["Parent"].ToString());
+                var title = reader["Title"].ToString();
+                var titleMediaType = reader["TitleMediaType"].ToString();
+                var authors = reader["Authors"].ToString();
+                var contributors = reader["Contributors"].ToString();
+                var publishedDate = DateTime.Parse(reader["PublishedDate"].ToString());
+                var copyright = reader["Copyright"].ToString();
+                var summary = reader["Summary"].ToString();
+                var content = reader["Content"].ToString();
+                var contentMediaType = reader["ContentMediaType"].ToString();
+                var contentLocation = new Uri(reader["ContentLocation"].ToString());
+                var updatedDate = DateTime.Parse(reader["UpdatedDate"].ToString());
+                var feedItemIdentifier = reader["FeedItemIdentifier"].ToString();
+
+                var item = new FeedItem(Context, id, timeStamp, title, titleMediaType, authors, contributors, publishedDate, copyright, summary, content, contentMediaType, contentLocation, updatedDate, feedItemIdentifier);
+
+                if (!items.ContainsKey(parent))
+                    items.Add(parent, new List<IFeedItem>());
+
+                items[parent].Add(item);
+            }
+            while (reader.Read());
 
             return items;
         }
@@ -125,12 +187,47 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         {
             var links = new Dictionary<Guid, IList<IFeedLink>>();
 
+            do
+            {
+                var parent = new Guid(reader["Parent"].ToString());
+                var relationship = reader["Relationship"].ToString();
+                var location = new Uri(reader["Location"].ToString());
+                var mediaType = reader["MediaType"].ToString();
+                var length = uint.Parse(reader["Length"].ToString());
+                var language = reader["Language"].ToString();
+
+                var link = new FeedLink(relationship, location, mediaType, length, language);
+
+                if (!links.ContainsKey(parent))
+                    links.Add(parent, new List<IFeedLink>());
+
+                links[parent].Add(link);
+            }
+            while (reader.Read());
+
             return links;
         }
 
         private IDictionary<Guid, IList<IFeedMetadata>> GetFeedItemMetadata(IDataReader reader)
         {
             var metadata = new Dictionary<Guid, IList<IFeedMetadata>>();
+
+            do
+            {
+                var parent = new Guid(reader["Parent"].ToString());
+                var mediaType = reader["MediaType"].ToString();
+                var scheme = new Uri(reader["Scheme"].ToString());
+                var name = reader["Name"].ToString();
+                var content = reader["Content"].ToString();
+
+                var metadatum = new FeedMetadata(mediaType, scheme, name, content);
+
+                if (!metadata.ContainsKey(parent))
+                    metadata.Add(parent, new List<IFeedMetadata>());
+
+                metadata[parent].Add(metadatum);
+            }
+            while (reader.Read());
 
             return metadata;
         }
@@ -276,17 +373,17 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
         public IFeed New(Uri location)
         {
-            throw new NotImplementedException();
+            return Create(location);
         }
 
         public IFeed GetOne(Guid id)
         {
-            throw new NotImplementedException();
+            return Select("Feed.Id = @Id", "@Id", id).FirstOrDefault();
         }
 
         public IFeed GetOne(Uri location)
         {
-            throw new NotImplementedException();
+            return Select("Feed.Location = @Location", "@Location", location).FirstOrDefault();
         }
 
         public IEnumerable<IFeed> GetAll()
@@ -296,7 +393,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
         public IEnumerable<IFeed> GetAny(IFeedSearch search)
         {
-            throw new NotImplementedException();
+            return Select(search.GetWhereClause(), search.Parameters);
         }
 
         public void Save(IEnumerable<IFeed> tracks)
