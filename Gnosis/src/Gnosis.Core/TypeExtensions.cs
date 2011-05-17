@@ -155,12 +155,24 @@ namespace Gnosis.Core
         public static void AddValueInsertStatement<T>(this T self, CommandBuilder builder)
             where T : IValue
         {
+            self.AddValueInsertStatement(builder, typeof(T).GetTableInfo());
         }
 
         public static void AddValueInsertStatement<T>(this T self, CommandBuilder builder, TableInfo table)
             where T : IValue
         {
 
+        }
+
+        public static void AddValueDeleteStatement<T>(this T self, CommandBuilder builder)
+            where T : IValue
+        {
+            self.AddValueDeleteStatement(builder, typeof(T).GetTableInfo());
+        }
+
+        public static void AddValueDeleteStatement<T>(this T self, CommandBuilder builder, TableInfo table)
+            where T : IValue
+        {
         }
 
         public static void AddEntitySaveStatement<T>(this T self, CommandBuilder builder)
@@ -223,6 +235,17 @@ namespace Gnosis.Core
             }
 
             builder.AddStatement(updateStatement);
+        }
+
+        public static void AddEntityDeleteStatement<T>(this T self, CommandBuilder builder)
+            where T : IEntity
+        {
+            self.AddEntityDeleteStatement(builder, typeof(T).GetTableInfo());
+        }
+
+        public static void AddEntityDeleteStatement<T>(this T self, CommandBuilder builder, TableInfo table)
+            where T : IEntity
+        {
         }
 
         public static bool IsCustomDataType(this Type type)

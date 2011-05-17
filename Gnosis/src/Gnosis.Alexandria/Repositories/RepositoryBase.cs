@@ -16,6 +16,7 @@ using Gnosis.Alexandria.Models;
 namespace Gnosis.Alexandria.Repositories
 {
     public abstract class RepositoryBase<T>
+        where T : IEntity
     {
         protected RepositoryBase(IContext context)
         {
