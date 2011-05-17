@@ -6,30 +6,46 @@ using System.Text;
 
 namespace Gnosis.Core.Collections
 {
-    public class Set<T> : ISet<T>
+    public class Set<T> : Set<int, T>
     {
         public Set(IContext context)
+            : base(context, x => x.GetHashCode())
         {
-            this.context = context;
         }
 
         public Set(IContext context, IEnumerable<T> items)
+            : base(context, x => x.GetHashCode(), items)
+        {
+        }
+    }
+
+    public class Set<K, V> : ISet<V>
+    {
+        public Set(IContext context, Func<V, K> function)
         {
             this.context = context;
+            this.function = function;
+        }
+
+        public Set(IContext context, Func<V, K> function, IEnumerable<V> items)
+        {
+            this.context = context;
+            this.function = function;
 
             foreach (var item in items)
             {
-                map.Add(item.GetHashCode(), item);
+                map.Add(GetKey(item), item);
                 originalItems.Add(item);
             }
         }
 
         private readonly IContext context;
-        private readonly IDictionary<int, T> map = new Dictionary<int, T>();
-        private readonly IList<T> originalItems = new List<T>();
-        private readonly IList<T> addedItems = new List<T>();
-        private readonly IList<T> removedItems = new List<T>();
-        private readonly IList<Tuple<T, T>> replacedItems = new List<Tuple<T, T>>();
+        private readonly IDictionary<K, V> map = new Dictionary<K, V>();
+        private readonly Func<V, K> function;
+        private readonly IList<V> originalItems = new List<V>();
+        private readonly IList<V> addedItems = new List<V>();
+        private readonly IList<V> removedItems = new List<V>();
+        private readonly IList<Tuple<V, V>> replacedItems = new List<Tuple<V, V>>();
 
         protected void OnCollectionChanged(Action action, NotifyCollectionChangedEventArgs args)
         {
@@ -46,24 +62,29 @@ namespace Gnosis.Core.Collections
             get { return context; }
         }
 
-        protected IList<T> OriginalItems
+        protected IList<V> OriginalItems
         {
             get { return originalItems; }
         }
 
-        protected IDictionary<int, T> Map
+        protected IDictionary<K, V> Map
         {
             get { return map; }
         }
 
-        protected virtual IEnumerable<T> Items
+        protected virtual IEnumerable<V> Items
         {
             get { return map.Values; }
         }
 
-        protected void AddItem(T item)
+        protected K GetKey(V value)
         {
-            var key = item.GetHashCode();
+            return function(value);
+        }
+
+        protected void AddItem(V item)
+        {
+            var key = GetKey(item);
             if (!map.ContainsKey(key))
             {
                 var action = new Action(delegate { map.Add(key, item); });
@@ -73,9 +94,9 @@ namespace Gnosis.Core.Collections
             else throw new ArgumentException("item already contained in set - a set cannot have duplicates");
         }
 
-        protected void RemoveItem(T item)
+        protected void RemoveItem(V item)
         {
-            var key = item.GetHashCode();
+            var key = GetKey(item);
             if (map.ContainsKey(key))
             {
                 var action = new Action(delegate { map.Remove(key); });
@@ -85,19 +106,20 @@ namespace Gnosis.Core.Collections
             else throw new KeyNotFoundException("item not contained in set - cannot remove");
         }
 
-        protected void ReplaceItem(T original, T replacement)
+        protected void ReplaceItem(V original, V replacement)
         {
-            var key = original.GetHashCode();
+            var key = GetKey(original);
             if (map.ContainsKey(key))
             {
-                var action = new Action(delegate { map.Remove(key); map.Add(replacement.GetHashCode(), replacement); });
+                var replacementKey = GetKey(replacement);
+                var action = new Action(delegate { map.Remove(key); map.Add(replacementKey, replacement); });
                 OnCollectionChanged(action, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, replacement, original));
-                replacedItems.Add(new Tuple<T, T>(original, replacement));
+                replacedItems.Add(new Tuple<V, V>(original, replacement));
             }
             else throw new KeyNotFoundException("item not contained in set - cannot replace");
         }
 
-        #region ISet<T> Members
+        #region ISet<V> Members
 
         public int Count
         {
@@ -126,31 +148,31 @@ namespace Gnosis.Core.Collections
                 originalItems.Add(item);
         }
 
-        public virtual void Add(T item)
+        public virtual void Add(V item)
         {
             AddItem(item);
         }
 
-        public virtual void Remove(T item)
+        public virtual void Remove(V item)
         {
             RemoveItem(item);
         }
 
-        public virtual void Replace(T original, T replacement)
+        public virtual void Replace(V original, V replacement)
         {
             ReplaceItem(original, replacement);
         }
 
-        public IEnumerable<T> GetExistingItems()
+        public IEnumerable<V> GetExistingItems()
         {
-            IList<T> existingItems = new List<T>();
+            IList<V> existingItems = new List<V>();
 
             var index = 0;
             foreach (var item in Items)
             {
                 if (originalItems.Count > index)
                 {
-                    if (originalItems[index].GetHashCode() == item.GetHashCode())
+                    if (GetKey(originalItems[index]).Equals(GetKey(item)))
                         existingItems.Add(item);
                 }
 
@@ -160,31 +182,31 @@ namespace Gnosis.Core.Collections
             return existingItems;
         }
 
-        public bool Contains(T item)
+        public bool Contains(V item)
         {
-            return map.ContainsKey(item.GetHashCode());
+            return map.ContainsKey(GetKey(item));
         }
 
-        public IEnumerable<T> GetAddedItems()
+        public IEnumerable<V> GetAddedItems()
         {
             return addedItems;
         }
 
-        public IEnumerable<T> GetRemovedItems()
+        public IEnumerable<V> GetRemovedItems()
         {
             return removedItems;
         }
 
-        public IEnumerable<Tuple<T, T>> GetReplacedItems()
+        public IEnumerable<Tuple<V, V>> GetReplacedItems()
         {
             return replacedItems;
         }
 
         #endregion
 
-        #region IEnumerable<T> Members
+        #region IEnumerable<V> Members
 
-        public IEnumerator<T> GetEnumerator()
+        public IEnumerator<V> GetEnumerator()
         {
             return Items.GetEnumerator();
         }

@@ -16,7 +16,7 @@ namespace Gnosis.Core.Collections
         }
 
         public OrderedSet(IContext context, IEnumerable<T> items)
-            : base(context, items)
+            : base(context,  items)
         {
             if (items != null)
             {
@@ -36,7 +36,7 @@ namespace Gnosis.Core.Collections
 
         protected void InsertItem(int index, T item)
         {
-            var key = item.GetHashCode();
+            var key = GetKey(item);
             if (!Map.ContainsKey(key))
             {
                 var action = new Action(delegate { list.Insert(index, item); AddItem(item); });
@@ -47,7 +47,7 @@ namespace Gnosis.Core.Collections
 
         protected void MoveItem(int index, T item)
         {
-            var key = item.GetHashCode();
+            var key = GetKey(item);
             if (Map.ContainsKey(key))
             {
                 var oldIndex = IndexOf(item);
@@ -122,7 +122,7 @@ namespace Gnosis.Core.Collections
             {
                 if (OriginalItems.Count > index)
                 {
-                    if (OriginalItems[index].GetHashCode() != item.GetHashCode())
+                    if (GetKey(OriginalItems[index]).Equals(GetKey(item)))
                         movedItems.Add(item);
                 }
                 else movedItems.Add(item);

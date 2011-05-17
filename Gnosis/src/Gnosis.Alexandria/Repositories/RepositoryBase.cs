@@ -150,6 +150,8 @@ namespace Gnosis.Alexandria.Repositories
 
         public void Delete(IEnumerable<T> items)
         {
+            var builder = GetDeleteCommandBuilder(items);
+            Execute(builder);
         }
     }
 }

@@ -62,6 +62,7 @@
     <Compile Include="Commands\SelectStatement.cs" />
     <Compile Include="Commands\UpdateStatement.cs" />
     <Compile Include="DateTimeExtensions.cs" />
+    <Compile Include="ForeignKeyInfo.cs" />
     <Compile Include="IContext.cs" />
     <Compile Include="DataReaderExtensions.cs" />
     <Compile Include="IEntity.cs" />
