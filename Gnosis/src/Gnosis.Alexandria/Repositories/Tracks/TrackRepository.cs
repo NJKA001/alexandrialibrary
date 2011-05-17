@@ -63,11 +63,6 @@ namespace Gnosis.Alexandria.Repositories.Tracks
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ITrack> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<ITrack> GetAny(ITrackSearch search)
         {
             throw new NotImplementedException();
