@@ -6,11 +6,11 @@ using System.Text;
 using Gnosis.Core;
 using Gnosis.Core.Attributes;
 
-namespace Gnosis.Alexandria.Repositories
+namespace Gnosis.Core.Commands
 {
-    public class SelectStatementBuilder : IStatementBuilder
+    public class SelectStatement : IStatement
     {
-        public SelectStatementBuilder(TableAttribute table, string whereClause, string orderByClause)
+        public SelectStatement(TableInfo table, string whereClause, string orderByClause)
         {            
             builder.AppendFormat("select '{0}', {0}.* from {0}", table.Name);
             if (!string.IsNullOrEmpty(whereClause))
@@ -20,7 +20,7 @@ namespace Gnosis.Alexandria.Repositories
             builder.Append(";");
         }
 
-        public SelectStatementBuilder(string parentTableName, string tableName, string foreignKeyColumnName, string whereClause, string orderByClause)
+        public SelectStatement(string parentTableName, string tableName, string foreignKeyColumnName, string whereClause, string orderByClause)
         {
             builder.AppendFormat("select '{0}', {0}.* from {0}", tableName);
             builder.AppendFormat(" inner join {0} on {0}.Id = {1}.{2}", parentTableName, tableName, foreignKeyColumnName);

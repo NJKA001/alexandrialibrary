@@ -10,6 +10,7 @@ using log4net;
 
 using Gnosis.Core;
 using Gnosis.Core.Attributes;
+using Gnosis.Core.Commands;
 using Gnosis.Alexandria.Models;
 
 namespace Gnosis.Alexandria.Repositories
@@ -19,7 +20,6 @@ namespace Gnosis.Alexandria.Repositories
         protected RepositoryBase(IContext context)
         {
             this.context = context;
-            //this.database = "Catalog.db";
 
             Initialize();
         }
@@ -50,8 +50,9 @@ namespace Gnosis.Alexandria.Repositories
         }
 
         protected abstract T CreateDefault();
-        protected abstract IEnumerable<T> Create(IDataReader reader);
+        protected abstract IEnumerable<T> Read(IDataReader reader);
         protected abstract CommandBuilder GetSaveCommandBuilder(IEnumerable<T> items);
+        protected abstract CommandBuilder GetDeleteCommandBuilder(IEnumerable<T> items);
 
         protected IContext Context
         {
@@ -75,17 +76,6 @@ namespace Gnosis.Alexandria.Repositories
             return new TimeStamp(createdBy, createdDate, lastAccessedBy, lastAccessedDate, lastModifiedBy, lastModifiedDate);
         }
 
-        //protected static IDbCommand GetCommand(IDbConnection connection, string commandText, IEnumerable<KeyValuePair<string, object>> parameters)
-        //{
-        //    var command = connection.CreateCommand();
-        //    command.CommandText = commandText;
-
-        //    foreach (var parameter in parameters)
-        //        AddParameter(command, parameter.Key, parameter.Value);
-
-        //    return command;
-        //}
-
         protected int Execute(CommandBuilder commandBuilder)
         {
             using (var connection = GetConnection())
@@ -108,6 +98,11 @@ namespace Gnosis.Alexandria.Repositories
             return Select(whereClause, null);
         }
 
+        protected IEnumerable<T> Select(ISearch search)
+        {
+            return Select(search.WhereClause, search.Parameters);
+        }
+
         protected IEnumerable<T> Select(string whereClause, string parameterName, object parameterValue)
         {
             return Select(whereClause, new Dictionary<string, object> { { parameterName, parameterValue } });
@@ -115,8 +110,6 @@ namespace Gnosis.Alexandria.Repositories
 
         protected IEnumerable<T> Select(string whereClause, IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            //var items = new List<T>();
-
             var commandBuilder = new SelectCommandBuilder(typeof(T), whereClause);
 
             if (parameters != null)
@@ -133,23 +126,30 @@ namespace Gnosis.Alexandria.Repositories
                 {
                     using (var reader = command.ExecuteReader())
                     {
-                        return Create(reader); 
-                        //while (reader.Read())
-                        //{
-                        //    var item = Create(reader);
-                        //    items.Add(item);
-                        //}
+                        return Read(reader); 
                     }
                 }
             }
+        }
 
-            //return items;
+        public IEnumerable<T> GetAll()
+        {
+            return Select();
+        }
+
+        public IEnumerable<T> GetAny(ISearch<T> search)
+        {
+            return Select(search);
         }
 
         public void Save(IEnumerable<T> items)
         {
             var builder = GetSaveCommandBuilder(items);
             Execute(builder);
+        }
+
+        public void Delete(IEnumerable<T> items)
+        {
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Core.Commands;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Tracks;
 
@@ -30,7 +31,14 @@ namespace Gnosis.Alexandria.Repositories.Tracks
             return builder;
         }
 
-        protected override IEnumerable<ITrack> Create(IDataReader reader)
+        protected override CommandBuilder GetDeleteCommandBuilder(IEnumerable<ITrack> items)
+        {
+            var builder = new SaveCommandBuilder();
+
+            return builder;
+        }
+
+        protected override IEnumerable<ITrack> Read(IDataReader reader)
         {
             return new List<ITrack>();
         }

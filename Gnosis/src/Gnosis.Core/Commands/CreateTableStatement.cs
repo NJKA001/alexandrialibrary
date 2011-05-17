@@ -7,24 +7,24 @@ using System.Text;
 using Gnosis.Core;
 using Gnosis.Core.Attributes;
 
-namespace Gnosis.Alexandria.Repositories
+namespace Gnosis.Core.Commands
 {
-    public class CreateTableStatementBuilder : IStatementBuilder
+    public class CreateTableStatement : IStatement
     {
-        public CreateTableStatementBuilder(string name)
+        public CreateTableStatement(string name)
         {
             builder = new StringBuilder();
             builder.AppendFormat("create table if not exists {0} (", name);
         }
 
-        public CreateTableStatementBuilder(CreateCommandBuilder commandBuilder, string name, Type type, object instance)
+        public CreateTableStatement(CreateCommandBuilder commandBuilder, string name, Type type, object instance)
             : this(name)
         {
             this.commandBuilder = commandBuilder;
             AddColumnsForRootType(type, instance);
         }
 
-        private CreateTableStatementBuilder(CreateCommandBuilder commandBuilder, OneToManyAttribute oneToMany, Type collectionType, Type itemType)
+        private CreateTableStatement(CreateCommandBuilder commandBuilder, OneToManyAttribute oneToMany, Type collectionType, Type itemType)
             : this(oneToMany.TableName)
         {
             this.commandBuilder = commandBuilder;
@@ -191,16 +191,16 @@ namespace Gnosis.Alexandria.Repositories
                     if (genericArgs.Length > 0)
                     {
                         var itemType = genericArgs[0];
-                        commandBuilder.AddStatement(new CreateTableStatementBuilder(commandBuilder, oneToMany, collectionType, itemType));
+                        commandBuilder.AddStatement(new CreateTableStatement(commandBuilder, oneToMany, collectionType, itemType));
                         
                         foreach (var foreignIndex in foreignIndices)
                         {
-                            commandBuilder.AddStatement(new CreateIndexStatementBuilder(oneToMany.TableName, foreignIndex.Name, foreignIndex.IsUnique, foreignIndex.Columns));
+                            commandBuilder.AddStatement(new CreateIndexStatement(oneToMany.TableName, foreignIndex.Name, foreignIndex.IsUnique, foreignIndex.Columns));
                         }
 
-                        foreach (var index in itemType.GetIndexAttributes())
+                        foreach (var index in itemType.GetIndexInfo())
                         {
-                            commandBuilder.AddStatement(new CreateIndexStatementBuilder(oneToMany.TableName, index.Name, index.IsUnique, index.Columns));
+                            commandBuilder.AddStatement(new CreateIndexStatement(oneToMany.TableName, index.Name, index.IsUnique, index.Columns));
                         }
                     }
                 }
@@ -253,7 +253,7 @@ namespace Gnosis.Alexandria.Repositories
             }
         }
 
-        public CreateTableStatementBuilder PrimaryKeyInteger(string name)
+        public CreateTableStatement PrimaryKeyInteger(string name)
         {
             AppendPrefix();
 
@@ -264,7 +264,7 @@ namespace Gnosis.Alexandria.Repositories
             return this;
         }
 
-        public CreateTableStatementBuilder PrimaryKeyIntegerAutoIncrement(string name)
+        public CreateTableStatement PrimaryKeyIntegerAutoIncrement(string name)
         {
             AppendPrefix();
 
@@ -275,7 +275,7 @@ namespace Gnosis.Alexandria.Repositories
             return this;
         }
 
-        public CreateTableStatementBuilder PrimaryKeyText(string name)
+        public CreateTableStatement PrimaryKeyText(string name)
         {
             AppendPrefix();
 
@@ -286,12 +286,12 @@ namespace Gnosis.Alexandria.Repositories
             return this;
         }
 
-        public CreateTableStatementBuilder Column(Type type, string name)
+        public CreateTableStatement Column(Type type, string name)
         {
             return Column(type, name, null);
         }
 
-        public CreateTableStatementBuilder Column(Type type, string name, object defaultValue)
+        public CreateTableStatement Column(Type type, string name, object defaultValue)
         {
             var affinity = type.GetTypeAffinity();
 
@@ -319,25 +319,25 @@ namespace Gnosis.Alexandria.Repositories
             return this;
         }
 
-        public CreateTableStatementBuilder BlobColumn(string name, object defaultValue)
+        public CreateTableStatement BlobColumn(string name, object defaultValue)
         {
             AddBlobColumn(name, defaultValue);
             return this;
         }
 
-        public CreateTableStatementBuilder IntegerColumn(string name, object defaultValue)
+        public CreateTableStatement IntegerColumn(string name, object defaultValue)
         {
             AddIntegerColumn(name, defaultValue);
             return this;
         }
 
-        public CreateTableStatementBuilder RealColumn(string name, object defaultValue)
+        public CreateTableStatement RealColumn(string name, object defaultValue)
         {
             AddRealColumn(name, defaultValue);
             return this;
         }
 
-        public CreateTableStatementBuilder TextColumn(string name, object defaultValue)
+        public CreateTableStatement TextColumn(string name, object defaultValue)
         {
             AddTextColumn(name, defaultValue);
             return this;

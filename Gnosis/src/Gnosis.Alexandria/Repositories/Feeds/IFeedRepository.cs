@@ -14,7 +14,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         IFeed GetOne(Guid id);
         IFeed GetOne(Uri location);
         IEnumerable<IFeed> GetAll();
-        IEnumerable<IFeed> GetAny(IFeedSearch search);
+        IEnumerable<IFeed> GetAny(ISearch<IFeed> search);
 
         void Save(IEnumerable<IFeed> tracks);
     }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Alexandria.Repositories
+namespace Gnosis.Core.Commands
 {
-    public class CreateIndexStatementBuilder : IStatementBuilder
+    public class CreateIndexStatement : IStatement
     {
-        public CreateIndexStatementBuilder(string table, string name, bool isUnique)
+        public CreateIndexStatement(string table, string name, bool isUnique)
         {
             var indexType = isUnique ? "unique index" : "index";
 
@@ -15,7 +15,7 @@ namespace Gnosis.Alexandria.Repositories
             builder.AppendFormat("create {0} if not exists {1} on {2} (", indexType, name, table);
         }
 
-        public CreateIndexStatementBuilder(string table, string name, bool isUnique, IEnumerable<string> columns)
+        public CreateIndexStatement(string table, string name, bool isUnique, IEnumerable<string> columns)
             : this(table, name, isUnique)
         {
             foreach (var column in columns)
@@ -31,7 +31,7 @@ namespace Gnosis.Alexandria.Repositories
                 builder.Append(", ");
         }
 
-        public CreateIndexStatementBuilder Column(string name)
+        public CreateIndexStatement Column(string name)
         {
             AppendPrefix();
 
@@ -41,7 +41,7 @@ namespace Gnosis.Alexandria.Repositories
             return this;
         }
 
-        public CreateIndexStatementBuilder AscendingColumn(string name)
+        public CreateIndexStatement AscendingColumn(string name)
         {
             AppendPrefix();
 
@@ -51,7 +51,7 @@ namespace Gnosis.Alexandria.Repositories
             return this;
         }
 
-        public CreateIndexStatementBuilder DescendingColumn(string name)
+        public CreateIndexStatement DescendingColumn(string name)
         {
             AppendPrefix();
 

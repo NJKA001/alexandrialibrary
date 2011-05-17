@@ -8,7 +8,7 @@ namespace Gnosis.Alexandria.Repositories
     public interface ISearch
     {
         IEnumerable<KeyValuePair<string, object>> Parameters { get; }
-        string GetWhereClause();
+        string WhereClause { get; }
     }
 
     public interface ISearch<T> : ISearch

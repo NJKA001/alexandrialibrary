@@ -5,7 +5,7 @@ using System.Text;
 
 using Gnosis.Core;
 
-namespace Gnosis.Alexandria.Repositories
+namespace Gnosis.Core.Commands
 {
     public class SelectCommandBuilder : CommandBuilder
     {
@@ -14,14 +14,14 @@ namespace Gnosis.Alexandria.Repositories
             if (type == null)
                 throw new ArgumentNullException("type");
 
-            var table = type.GetTableAttribute();
+            var table = type.GetTableInfo();
             if (table == null)
                 throw new ArgumentException("type is not defined as a persistent table");
 
-            var defaultSort = type.GetDefaultSortAttribute();
-            var orderByClause = defaultSort != null ? defaultSort.Expression : string.Empty;
+            //var defaultSort = type.GetDefaultSortAttribute();
+            //var orderByClause = !string.IsNullOrEmpty(table.DefaultSort) ? tab : string.Empty;
 
-            AddStatement(new SelectStatementBuilder(table, whereClause, orderByClause));
+            AddStatement(new SelectStatement(table, whereClause, table.DefaultSort));
 
             foreach (var oneToMany in type.GetOneToManyAttributes())
             {
@@ -29,7 +29,7 @@ namespace Gnosis.Alexandria.Repositories
                 {
                     var oneToManyOrderByClause = (oneToMany.HasSequence) ? string.Format("{0}.{1} ASC, {0}.{2} ASC", oneToMany.TableName, oneToMany.ForeignKeyName, oneToMany.SequenceName) : string.Format("{0}.{1} ASC", oneToMany.TableName, oneToMany.ForeignKeyName);
 
-                    AddStatement(new SelectStatementBuilder(table.Name, oneToMany.TableName, oneToMany.ForeignKeyName, whereClause, oneToManyOrderByClause));
+                    AddStatement(new SelectStatement(table.Name, oneToMany.TableName, oneToMany.ForeignKeyName, whereClause, oneToManyOrderByClause));
                 }
             }
         }

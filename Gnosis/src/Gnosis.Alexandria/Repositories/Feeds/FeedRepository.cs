@@ -6,6 +6,7 @@ using System.Text;
 
 using Gnosis.Alexandria.Models.Feeds;
 using Gnosis.Core;
+using Gnosis.Core.Commands;
 
 namespace Gnosis.Alexandria.Repositories.Feeds
 {
@@ -17,10 +18,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         {
         }
 
-        protected override IFeed CreateDefault()
-        {
-            return Create(UriExtensions.EmptyUri);
-        }
+        #region Private Helpers Methods
 
         private IDictionary<Guid, IFeed> GetFeeds(IDataReader reader)
         {
@@ -232,14 +230,144 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             return metadata;
         }
 
+        #region Update Statements
+
+        private void AddFeedUpdateStatment(CommandBuilder builder, IFeed feed)
+        {
+
+        }
+
+        #endregion
+
+        #region Delete Statements
+
+        private void AddFeedDeleteStatement(CommandBuilder builder, IFeed feed)
+        {
+            var idParameterName = builder.GetParameterName();
+
+            builder.AddStatement(new DeleteStatement("Feed", "Feed.Id = " + idParameterName));
+            builder.AddParameter(idParameterName, feed.Id);
+
+            foreach (var category in feed.Categories)
+            {
+                AddFeedCategoryDeleteStatement(builder, feed.Id, category, "FeedCategory");
+            }
+
+            foreach (var link in feed.Links)
+            {
+                AddFeedLinkDeleteStatement(builder, feed.Id, link, "FeedLink");
+            }
+
+            foreach (var metadata in feed.Metadata)
+            {
+                AddFeedMetadataDeleteStatement(builder, feed.Id, metadata, "FeedMetadata");
+            }
+
+            foreach (var item in feed.Items)
+            {
+                AddFeedItemDeleteStatement(builder, feed.Id, item);
+            }
+        }
+
+        private void AddFeedCategoryDeleteStatement(CommandBuilder builder, Guid parentId, IFeedCategory category, string tableName)
+        {
+            var parentParameterName = builder.GetParameterName();
+            var schemeParameterName = builder.GetParameterName();
+            var nameParameterName = builder.GetParameterName();
+            var whereClause = string.Format("{0}.Parent = {1} and {0}.Scheme = {2} and {0}.Name = {3}", tableName, parentParameterName, schemeParameterName, nameParameterName);
+
+            builder.AddStatement(new DeleteStatement(tableName, whereClause));
+            builder.AddParameter(parentParameterName, parentId);
+            builder.AddParameter(schemeParameterName, category.Scheme);
+            builder.AddParameter(nameParameterName, category.Name);
+        }
+
+        private void AddFeedLinkDeleteStatement(CommandBuilder builder, Guid parentId, IFeedLink link, string tableName)
+        {
+            var parentParameterName = builder.GetParameterName();
+            var relationshipParameterName = builder.GetParameterName();
+            var mediaTypeParameterName = builder.GetParameterName();
+            var languageParameterName = builder.GetParameterName();
+            var whereClause = string.Format("{0}.Parent = {1} and {0}.Relationship = {2} and {0}.MediaType = {3} and {0}.Language = {4}", tableName, parentParameterName, relationshipParameterName, mediaTypeParameterName, languageParameterName);
+
+            builder.AddStatement(new DeleteStatement(tableName, whereClause));
+            builder.AddParameter(parentParameterName, parentId);
+            builder.AddParameter(relationshipParameterName, link.Relationship);
+            builder.AddParameter(mediaTypeParameterName, link.MediaType);
+            builder.AddParameter(languageParameterName, link.Language);
+        }
+
+        private void AddFeedMetadataDeleteStatement(CommandBuilder builder, Guid parentId, IFeedMetadata metadata, string tableName)
+        {
+            var parentParameterName = builder.GetParameterName();
+            var schemeParameterName = builder.GetParameterName();
+            var nameParameterName = builder.GetParameterName();
+            var whereClause = string.Format("{0}.Parent = {1} and {0}.Scheme = {2} and {0}.Name = {3}", tableName, parentParameterName, schemeParameterName, nameParameterName);
+
+            builder.AddStatement(new DeleteStatement(tableName, whereClause));
+            builder.AddParameter(parentParameterName, parentId);
+            builder.AddParameter(schemeParameterName, metadata.Scheme);
+            builder.AddParameter(nameParameterName, metadata.Name);
+        }
+
+        private void AddFeedItemDeleteStatement(CommandBuilder builder, Guid parentId, IFeedItem item)
+        {
+            var parentParameterName = builder.GetParameterName();
+            var whereClause = string.Format("FeedItem.Parent = {0}", parentParameterName);
+
+            builder.AddStatement(new DeleteStatement("FeedItem", whereClause));
+            builder.AddParameter(parentParameterName, parentId);
+
+            foreach (var category in item.Categories)
+            {
+                AddFeedCategoryDeleteStatement(builder, item.Id, category, "FeedItemCategory");
+            }
+
+            foreach (var link in item.Links)
+            {
+                AddFeedLinkDeleteStatement(builder, item.Id, link, "FeedItemLink");
+            }
+
+            foreach (var metadata in item.Metadata)
+            {
+                AddFeedMetadataDeleteStatement(builder, item.Id, metadata, "FeedItemMetadata");
+            }
+        }
+
+#endregion
+
+        #endregion
+
+        protected override IFeed CreateDefault()
+        {
+            return Create(UriExtensions.EmptyUri);
+        }
+
         protected override CommandBuilder GetSaveCommandBuilder(IEnumerable<IFeed> items)
         {
             var builder = new SaveCommandBuilder();
 
+            foreach (var feed in items)
+            {
+                feed.AddEntitySaveStatement<IFeed>(builder);
+            }
+
             return builder;
         }
 
-        protected override IEnumerable<IFeed> Create(IDataReader reader)
+        protected override CommandBuilder GetDeleteCommandBuilder(IEnumerable<IFeed> items)
+        {
+            var builder = new SaveCommandBuilder();
+
+            foreach (var feed in items)
+            {
+                AddFeedDeleteStatement(builder, feed);
+            }
+
+            return builder;
+        }
+
+        protected override IEnumerable<IFeed> Read(IDataReader reader)
         {
             IDictionary<Guid, IFeed> feeds = null;
             IDictionary<Guid, IList<IFeedCategory>> categories = null;
@@ -391,16 +519,6 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         public IFeed GetOne(Uri location)
         {
             return Select("Feed.Location = @Location", "@Location", location).FirstOrDefault();
-        }
-
-        public IEnumerable<IFeed> GetAll()
-        {
-            return Select();
-        }
-
-        public IEnumerable<IFeed> GetAny(IFeedSearch search)
-        {
-            return Select(search.GetWhereClause(), search.Parameters);
         }
     }
 }

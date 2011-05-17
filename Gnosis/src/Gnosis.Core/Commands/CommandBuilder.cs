@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Alexandria.Repositories
+namespace Gnosis.Core.Commands
 {
     public abstract class CommandBuilder
     {
@@ -22,7 +22,7 @@ namespace Gnosis.Alexandria.Repositories
         }
 
         private readonly IDictionary<string, object> parameters = new Dictionary<string, object>();
-        private readonly IList<IStatementBuilder> statements = new List<IStatementBuilder>();
+        private readonly IList<IStatement> statements = new List<IStatement>();
         
         private static void AddParameter(IDbCommand command, string name, object value)
         {
@@ -37,9 +37,14 @@ namespace Gnosis.Alexandria.Repositories
             parameters.Add(name, value);
         }
 
-        public void AddStatement(IStatementBuilder statement)
+        public void AddStatement(IStatement statement)
         {
             statements.Add(statement);
+        }
+
+        public string GetParameterName()
+        {
+            return string.Format("@{0}", Guid.NewGuid().ToString().Replace("-", string.Empty));
         }
 
         public IDbCommand GetCommand(IDbConnection connection)

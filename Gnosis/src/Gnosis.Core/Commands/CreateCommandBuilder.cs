@@ -7,7 +7,7 @@ using System.Text;
 using Gnosis.Core;
 using Gnosis.Core.Attributes;
 
-namespace Gnosis.Alexandria.Repositories
+namespace Gnosis.Core.Commands
 {
     public class CreateCommandBuilder : CommandBuilder
     {
@@ -19,14 +19,14 @@ namespace Gnosis.Alexandria.Repositories
             if (instance == null)
                 throw new ArgumentNullException("instance");
 
-            var table = type.GetTableAttribute();
+            var table = type.GetTableInfo();
             if (table != null)
             {
-                AddStatement(new CreateTableStatementBuilder(this, table.Name, type, instance));
+                AddStatement(new CreateTableStatement(this, table.Name, type, instance));
                 
-                foreach (var index in type.GetIndexAttributes())
+                foreach (var index in table.Indices) //type.GetIndexAttributes())
                 {
-                    AddStatement(new CreateIndexStatementBuilder(table.Name, index.Name, index.IsUnique, index.Columns));
+                    AddStatement(new CreateIndexStatement(table.Name, index.Name, index.IsUnique, index.Columns));
                 }
             }
         }

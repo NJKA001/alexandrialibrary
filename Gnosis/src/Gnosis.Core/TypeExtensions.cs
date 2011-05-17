@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 
 using Gnosis.Core.Attributes;
+using Gnosis.Core.Commands;
 
 namespace Gnosis.Core
 {
@@ -30,33 +31,56 @@ namespace Gnosis.Core
                 return TypeAffinity.Numeric;
         }
 
-        public static TableAttribute GetTableAttribute(this Type type)
+        public static TableInfo GetTableInfo(this Type type)
         {
+            TableAttribute table = null;
+            DefaultSortAttribute defaultSort = null;
+
             foreach (var attribute in type.GetCustomAttributes(true))
             {
                 if (attribute is TableAttribute)
                 {
-                    return attribute as TableAttribute;
+                    table = attribute as TableAttribute;
                 }
-            }
-
-            return null;
-        }
-
-        public static DefaultSortAttribute GetDefaultSortAttribute(this Type type)
-        {
-            foreach (var attribute in type.GetCustomAttributes(true))
-            {
-                if (attribute is DefaultSortAttribute)
+                else if (attribute is DefaultSortAttribute)
                 {
-                    return attribute as DefaultSortAttribute;
+                    defaultSort = attribute as DefaultSortAttribute;
                 }
+            }
+
+            if (table != null)
+            {
+                var defaultSortExpression = defaultSort != null ? defaultSort.Expression : string.Empty;
+                new TableInfo(table.Name, defaultSortExpression, type.GetColumnInfo(), type.GetIndexInfo());
             }
 
             return null;
         }
 
-        public static IEnumerable<IndexAttribute> GetIndexAttributes(this Type type)
+        //public static DefaultSortAttribute GetDefaultSortAttribute(this Type type)
+        //{
+        //    foreach (var attribute in type.GetCustomAttributes(true))
+        //    {
+        //        if (attribute is DefaultSortAttribute)
+        //        {
+        //            return attribute as DefaultSortAttribute;
+        //        }
+        //    }
+
+        //    return null;
+        //}
+
+        public static IEnumerable<IndexInfo> GetIndexInfo(this Type type)
+        {
+            var indexInfo = new List<IndexInfo>();
+
+            foreach (var indexAttribute in type.GetIndexAttributes())
+                indexInfo.Add(new IndexInfo(indexAttribute));
+
+            return indexInfo;
+        }
+
+        private static IEnumerable<IndexAttribute> GetIndexAttributes(this Type type)
         {
             var indexAttributes = new List<IndexAttribute>();
 
@@ -85,6 +109,120 @@ namespace Gnosis.Core
             }
 
             return oneToManyAttributes;
+        }
+
+        private static void AddColumnInfo(List<ColumnInfo> columnInfo, Type type)
+        {
+            foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                ColumnAttribute columnAttribute = null;
+                var ignore = false;
+
+                foreach (var propertyAttribute in property.GetCustomAttributes(true))
+                {
+                    if (propertyAttribute is ColumnIgnoreAttribute)
+                    {
+                        ignore = true;
+                        break;
+                    }
+
+                    if (propertyAttribute is ColumnAttribute)
+                        columnAttribute = propertyAttribute as ColumnAttribute;
+                }
+
+                if (!ignore)
+                {
+                    var name = (columnAttribute != null) ? columnAttribute.Name : property.Name;
+                    columnInfo.Add(new ColumnInfo(name, property));
+                }
+            }
+        }
+
+        private static IEnumerable<ColumnInfo> GetColumnInfo(this Type type)
+        {
+            var columnInfo = new List<ColumnInfo>();
+
+            foreach (var typeInterface in type.GetInterfaces())
+            {
+                AddColumnInfo(columnInfo, typeInterface);
+            }
+
+            AddColumnInfo(columnInfo, type);
+
+            return columnInfo;
+        }
+
+        public static void AddValueInsertStatement<T>(this T self, CommandBuilder builder)
+            where T : IValue
+        {
+        }
+
+        public static void AddValueInsertStatement<T>(this T self, CommandBuilder builder, TableInfo table)
+            where T : IValue
+        {
+
+        }
+
+        public static void AddEntitySaveStatement<T>(this T self, CommandBuilder builder)
+            where T : IEntity
+        {
+            if (self.IsNew)
+                self.AddEntityInsertStatement(builder);
+            else if (self.IsChanged)
+                self.AddEntityUpdateStatement(builder);
+        }
+
+        public static void AddEntitySaveStatement<T>(this T self, CommandBuilder builder, TableInfo table)
+            where T : IEntity
+        {
+            if (self.IsNew)
+                self.AddEntityInsertStatement(builder);
+            else if (self.IsChanged)
+                self.AddEntityUpdateStatement(builder);
+        }
+
+        public static void AddEntityInsertStatement<T>(this T self, CommandBuilder builder)
+            where T : IEntity
+        {
+            self.AddEntityInsertStatement<T>(builder, typeof(T).GetTableInfo());
+        }
+
+        public static void AddEntityInsertStatement<T>(this T self, CommandBuilder builder, TableInfo table)
+            where T : IEntity
+        {
+            var idParameterName = builder.GetParameterName();
+            var insertStatement = new InsertStatement(table.Name);
+
+            foreach (var column in table.Columns)
+            {
+                var columnParameterName = builder.GetParameterName();
+                insertStatement.Add(column.Name, columnParameterName);
+                builder.AddParameter(columnParameterName, column.GetValue(self));
+            }
+        }
+
+        public static void AddEntityUpdateStatement<T>(this T self, CommandBuilder builder)
+            where T : IEntity
+        {
+            self.AddEntityUpdateStatement<T>(builder, typeof(T).GetTableInfo());
+        }
+
+        public static void AddEntityUpdateStatement<T>(this T self, CommandBuilder builder, TableInfo table)
+            where T : IEntity
+        {
+            var idParameterName = builder.GetParameterName();
+            var whereClause = string.Format("{0}.Id = {1}", table.Name, idParameterName);
+            var updateStatement = new UpdateStatement("Feed", whereClause);
+            builder.AddParameter(idParameterName, self.Id);
+
+            foreach (var column in table.Columns.Where(x => x.IsReadOnly == false))
+            {
+                var columnParameterName = builder.GetParameterName();
+                updateStatement.Set(column.Name, columnParameterName);
+                builder.AddParameter(columnParameterName, column.GetValue(self));
+            }
+
+            builder.AddStatement(updateStatement);
         }
 
         public static bool IsCustomDataType(this Type type)
