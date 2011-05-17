@@ -12,12 +12,29 @@ namespace Gnosis.Core.Attributes
         {
         }
 
+        public PrimaryKeyColumnAttribute(string name)
+        {
+            this.name = name;
+        }
+
+        public PrimaryKeyColumnAttribute(string name, bool autoIncrement)
+        {
+            this.name = name;
+            this.autoIncrement = autoIncrement;
+        }
+
         public PrimaryKeyColumnAttribute(bool autoIncrement)
         {
             this.autoIncrement = autoIncrement;
         }
 
-        private bool autoIncrement = false;
+        private readonly string name = string.Empty;
+        private readonly bool autoIncrement = false;
+
+        public string Name
+        {
+            get { return name; }
+        }
 
         public bool AutoIncrement
         {

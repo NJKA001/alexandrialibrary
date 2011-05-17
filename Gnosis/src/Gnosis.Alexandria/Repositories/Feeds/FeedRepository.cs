@@ -230,15 +230,6 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             return metadata;
         }
 
-        #region Update Statements
-
-        private void AddFeedUpdateStatment(CommandBuilder builder, IFeed feed)
-        {
-
-        }
-
-        #endregion
-
         #region Delete Statements
 
         private void AddFeedDeleteStatement(CommandBuilder builder, IFeed feed)
@@ -334,37 +325,13 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             }
         }
 
-#endregion
+        #endregion
 
         #endregion
 
         protected override IFeed CreateDefault()
         {
             return Create(UriExtensions.EmptyUri);
-        }
-
-        protected override CommandBuilder GetSaveCommandBuilder(IEnumerable<IFeed> items)
-        {
-            var builder = new SaveCommandBuilder();
-
-            foreach (var feed in items)
-            {
-                feed.AddEntitySaveStatement<IFeed>(builder);
-            }
-
-            return builder;
-        }
-
-        protected override CommandBuilder GetDeleteCommandBuilder(IEnumerable<IFeed> items)
-        {
-            var builder = new SaveCommandBuilder();
-
-            foreach (var feed in items)
-            {
-                AddFeedDeleteStatement(builder, feed);
-            }
-
-            return builder;
         }
 
         protected override IEnumerable<IFeed> Read(IDataReader reader)

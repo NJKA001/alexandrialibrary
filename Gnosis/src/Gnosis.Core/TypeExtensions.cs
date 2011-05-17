@@ -51,24 +51,11 @@ namespace Gnosis.Core
             if (table != null)
             {
                 var defaultSortExpression = defaultSort != null ? defaultSort.Expression : string.Empty;
-                new TableInfo(table.Name, defaultSortExpression, type.GetColumnInfo(), type.GetIndexInfo());
+                new TableInfo(table.Name, defaultSortExpression, type.GetColumnInfo(), type.GetIndexInfo(), type.GetForeignKeyInfo());
             }
 
             return null;
         }
-
-        //public static DefaultSortAttribute GetDefaultSortAttribute(this Type type)
-        //{
-        //    foreach (var attribute in type.GetCustomAttributes(true))
-        //    {
-        //        if (attribute is DefaultSortAttribute)
-        //        {
-        //            return attribute as DefaultSortAttribute;
-        //        }
-        //    }
-
-        //    return null;
-        //}
 
         public static IEnumerable<IndexInfo> GetIndexInfo(this Type type)
         {
@@ -95,6 +82,18 @@ namespace Gnosis.Core
             return indexAttributes;
         }
 
+        public static IEnumerable<ForeignKeyInfo> GetForeignKeyInfo(this Type type)
+        {
+            var foreignKeyInfo = new List<ForeignKeyInfo>();
+
+            foreach (var oneToMany in type.GetOneToManyAttributes())
+            {
+                foreignKeyInfo.Add(new ForeignKeyInfo(oneToMany.TableName));
+            }
+
+            return foreignKeyInfo;
+        }
+
         public static IEnumerable<OneToManyAttribute> GetOneToManyAttributes(this Type type)
         {
             var oneToManyAttributes = new List<OneToManyAttribute>();
@@ -116,6 +115,7 @@ namespace Gnosis.Core
             foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 ColumnAttribute columnAttribute = null;
+                PrimaryKeyColumnAttribute primaryKeyColumnAttribute = null;
                 var ignore = false;
 
                 foreach (var propertyAttribute in property.GetCustomAttributes(true))
@@ -126,14 +126,35 @@ namespace Gnosis.Core
                         break;
                     }
 
+                    if (propertyAttribute is OneToManyAttribute)
+                    {
+                        ignore = true;
+                        break;
+                    }
+
                     if (propertyAttribute is ColumnAttribute)
                         columnAttribute = propertyAttribute as ColumnAttribute;
+
+                    if (propertyAttribute is PrimaryKeyColumnAttribute)
+                        primaryKeyColumnAttribute = propertyAttribute as PrimaryKeyColumnAttribute;
                 }
 
                 if (!ignore)
                 {
-                    var name = (columnAttribute != null) ? columnAttribute.Name : property.Name;
-                    columnInfo.Add(new ColumnInfo(name, property));
+                    if (columnAttribute != null)
+                    {
+                        var name = !string.IsNullOrEmpty(columnAttribute.Name) ? columnAttribute.Name : property.Name;
+                        columnInfo.Add(new ColumnInfo(name, property));
+                    }
+                    else if (primaryKeyColumnAttribute != null)
+                    {
+                        var name = !string.IsNullOrEmpty(primaryKeyColumnAttribute.Name) ? primaryKeyColumnAttribute.Name : property.Name;
+                        columnInfo.Add(new ColumnInfo(name, property, true, primaryKeyColumnAttribute.AutoIncrement));
+                    }
+                    else
+                    {
+                        columnInfo.Add(new ColumnInfo(property.Name, property));
+                    }
                 }
             }
         }

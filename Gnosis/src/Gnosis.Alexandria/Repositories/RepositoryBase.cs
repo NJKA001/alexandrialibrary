@@ -52,8 +52,30 @@ namespace Gnosis.Alexandria.Repositories
 
         protected abstract T CreateDefault();
         protected abstract IEnumerable<T> Read(IDataReader reader);
-        protected abstract CommandBuilder GetSaveCommandBuilder(IEnumerable<T> items);
-        protected abstract CommandBuilder GetDeleteCommandBuilder(IEnumerable<T> items);
+        
+        protected virtual CommandBuilder GetSaveCommandBuilder(IEnumerable<T> items)
+        {
+            var builder = new SaveCommandBuilder();
+
+            foreach (var item in items)
+            {
+                item.AddEntitySaveStatement<T>(builder);
+            }
+
+            return builder;
+        }
+
+        protected virtual CommandBuilder GetDeleteCommandBuilder(IEnumerable<T> items)
+        {
+            var builder = new SaveCommandBuilder();
+
+            foreach (var item in items)
+            {
+                item.AddEntityDeleteStatement<T>(builder);
+            }
+
+            return builder;
+        }
 
         protected IContext Context
         {
