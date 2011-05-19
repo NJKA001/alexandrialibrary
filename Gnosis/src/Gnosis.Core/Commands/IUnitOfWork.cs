@@ -5,11 +5,9 @@ using System.Text;
 
 namespace Gnosis.Core.Commands
 {
-    public class SaveCommandBuilder : CommandBuilder
+    public interface IUnitOfWork
     {
-        public SaveCommandBuilder()
-            : base()
-        {
-        }
+        void Add(ICommandBuilder builder);
+        void Execute();
     }
 }

@@ -53,29 +53,29 @@ namespace Gnosis.Alexandria.Repositories
         protected abstract T CreateDefault();
         protected abstract IEnumerable<T> Read(IDataReader reader);
         
-        protected virtual CommandBuilder GetSaveCommandBuilder(IEnumerable<T> items)
-        {
-            var builder = new SaveCommandBuilder();
+        //protected virtual CommandBuilder GetSaveCommandBuilder(IEnumerable<T> items)
+        //{
+        //    var builder = new SaveCommandBuilder();
 
-            foreach (var item in items)
-            {
-                item.AddEntitySaveStatement<T>(builder);
-            }
+        //    foreach (var item in items)
+        //    {
+        //        item.AddEntitySaveStatement<T>(builder);
+        //    }
 
-            return builder;
-        }
+        //    return builder;
+        //}
 
-        protected virtual CommandBuilder GetDeleteCommandBuilder(IEnumerable<T> items)
-        {
-            var builder = new SaveCommandBuilder();
+        //protected virtual CommandBuilder GetDeleteCommandBuilder(IEnumerable<T> items)
+        //{
+        //    var builder = new SaveCommandBuilder();
 
-            foreach (var item in items)
-            {
-                item.AddEntityDeleteStatement<T>(builder);
-            }
+        //    foreach (var item in items)
+        //    {
+        //        item.AddEntityDeleteStatement<T>(builder);
+        //    }
 
-            return builder;
-        }
+        //    return builder;
+        //}
 
         protected IContext Context
         {
@@ -167,14 +167,22 @@ namespace Gnosis.Alexandria.Repositories
 
         public void Save(IEnumerable<T> items)
         {
-            var builder = GetSaveCommandBuilder(items);
-            Execute(builder);
+            var unitOfWork = new UnitOfWork(() => GetConnection());
+
+            foreach (var item in items)
+                item.AddEntitySaveStatement(unitOfWork);
+
+            unitOfWork.Execute();
         }
 
         public void Delete(IEnumerable<T> items)
         {
-            var builder = GetDeleteCommandBuilder(items);
-            Execute(builder);
+            var unitOfWork = new UnitOfWork(() => GetConnection());
+
+            foreach (var item in items)
+                item.AddEntityDeleteStatement(unitOfWork);
+
+            unitOfWork.Execute();
         }
     }
 }

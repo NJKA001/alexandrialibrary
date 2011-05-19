@@ -7,18 +7,10 @@ using System.Text;
 namespace Gnosis.Core.Commands
 {
     public abstract class CommandBuilder
+        : ICommandBuilder
     {
         protected CommandBuilder()
         {
-        }
-
-        protected CommandBuilder(IEnumerable<KeyValuePair<string, object>> parameters)
-        {
-            if (parameters != null)
-            {
-                foreach (var parameter in parameters)
-                    this.parameters.Add(parameter);
-            }
         }
 
         private readonly IDictionary<string, object> parameters = new Dictionary<string, object>();
@@ -31,6 +23,8 @@ namespace Gnosis.Core.Commands
             parameter.Value = value;
             command.Parameters.Add(parameter);
         }
+
+        #region ICommandBuilber Members
 
         public void AddParameter(string name, object value)
         {
@@ -57,6 +51,8 @@ namespace Gnosis.Core.Commands
 
             return command;
         }
+
+        #endregion
 
         public override string ToString()
         {

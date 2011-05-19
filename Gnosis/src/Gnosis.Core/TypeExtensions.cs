@@ -51,7 +51,7 @@ namespace Gnosis.Core
             if (table != null)
             {
                 var defaultSortExpression = defaultSort != null ? defaultSort.Expression : string.Empty;
-                new TableInfo(table.Name, defaultSortExpression, type.GetColumnInfo(), type.GetIndexInfo(), type.GetForeignKeyInfo());
+                new TableInfo(table.Name, defaultSortExpression, type.GetColumnInfo(), type.GetIndexInfo(), type.GetForeignKeyInfo(), type.GetCustomDataTypeInfo());
             }
 
             return null;
@@ -94,6 +94,34 @@ namespace Gnosis.Core
             return foreignKeyInfo;
         }
 
+        public static IEnumerable<CustomDataTypeInfo> GetCustomDataTypeInfo(this Type type)
+        {
+            var customDataTypeInfo = new List<CustomDataTypeInfo>();
+
+            foreach (var interfaceType in type.GetInterfaces())
+            {
+                interfaceType.AddCustomDataTypeInfo(customDataTypeInfo);
+            }
+
+            type.AddCustomDataTypeInfo(customDataTypeInfo);
+
+            return customDataTypeInfo;
+        }
+
+        public static void AddCustomDataTypeInfo(this Type type, List<CustomDataTypeInfo> customDataTypeInfo)
+        {
+            foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                foreach (var attribute in type.GetCustomAttributes(true))
+                {
+                    if (attribute is CustomDataTypeAttribute)
+                    {
+                         customDataTypeInfo.Add(new CustomDataTypeInfo(property.PropertyType.GetColumnInfo(), property));
+                    }
+                }
+            }
+        }
+
         public static IEnumerable<OneToManyAttribute> GetOneToManyAttributes(this Type type)
         {
             var oneToManyAttributes = new List<OneToManyAttribute>();
@@ -110,7 +138,7 @@ namespace Gnosis.Core
             return oneToManyAttributes;
         }
 
-        private static void AddColumnInfo(List<ColumnInfo> columnInfo, Type type)
+        private static void AddColumnInfo(this Type type, List<ColumnInfo> columnInfo)
         {
             foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
@@ -127,6 +155,12 @@ namespace Gnosis.Core
                     }
 
                     if (propertyAttribute is OneToManyAttribute)
+                    {
+                        ignore = true;
+                        break;
+                    }
+
+                    if (property.PropertyType.IsCustomDataType())
                     {
                         ignore = true;
                         break;
@@ -163,108 +197,139 @@ namespace Gnosis.Core
         {
             var columnInfo = new List<ColumnInfo>();
 
-            foreach (var typeInterface in type.GetInterfaces())
+            foreach (var interfaceType in type.GetInterfaces())
             {
-                AddColumnInfo(columnInfo, typeInterface);
+                interfaceType.AddColumnInfo(columnInfo);
             }
 
-            AddColumnInfo(columnInfo, type);
+            type.AddColumnInfo(columnInfo);
 
             return columnInfo;
         }
 
-        public static void AddValueInsertStatement<T>(this T self, CommandBuilder builder)
+        public static void AddValueInsertStatement<T>(this T self, IUnitOfWork unitOfWork)
             where T : IValue
         {
-            self.AddValueInsertStatement(builder, typeof(T).GetTableInfo());
+            self.AddValueInsertStatement(unitOfWork, typeof(T).GetTableInfo());
         }
 
-        public static void AddValueInsertStatement<T>(this T self, CommandBuilder builder, TableInfo table)
+        public static void AddValueInsertStatement<T>(this T self, IUnitOfWork unitOfWork, TableInfo table)
             where T : IValue
         {
 
         }
 
-        public static void AddValueDeleteStatement<T>(this T self, CommandBuilder builder)
+        public static void AddValueDeleteStatement<T>(this T self, IUnitOfWork unitOfWork)
             where T : IValue
         {
-            self.AddValueDeleteStatement(builder, typeof(T).GetTableInfo());
+            self.AddValueDeleteStatement(unitOfWork, typeof(T).GetTableInfo());
         }
 
-        public static void AddValueDeleteStatement<T>(this T self, CommandBuilder builder, TableInfo table)
+        public static void AddValueDeleteStatement<T>(this T self, IUnitOfWork unitOfWork, TableInfo table)
             where T : IValue
         {
         }
 
-        public static void AddEntitySaveStatement<T>(this T self, CommandBuilder builder)
+        public static void AddEntitySaveStatement<T>(this T self, IUnitOfWork unitOfWork)
+            where T : IEntity
+        {
+            self.AddEntitySaveStatement(unitOfWork, typeof(T).GetTableInfo());
+        }
+
+        public static void AddEntitySaveStatement<T>(this T self, IUnitOfWork unitOfWork, TableInfo table)
             where T : IEntity
         {
             if (self.IsNew)
-                self.AddEntityInsertStatement(builder);
+                self.AddEntityInsertStatement(unitOfWork, table);
             else if (self.IsChanged)
-                self.AddEntityUpdateStatement(builder);
+                self.AddEntityUpdateStatement(unitOfWork, table);
         }
 
-        public static void AddEntitySaveStatement<T>(this T self, CommandBuilder builder, TableInfo table)
+        public static void AddEntityInsertStatement<T>(this T self, IUnitOfWork unitOfWork)
             where T : IEntity
         {
-            if (self.IsNew)
-                self.AddEntityInsertStatement(builder);
-            else if (self.IsChanged)
-                self.AddEntityUpdateStatement(builder);
+            self.AddEntityInsertStatement<T>(unitOfWork, typeof(T).GetTableInfo());
         }
 
-        public static void AddEntityInsertStatement<T>(this T self, CommandBuilder builder)
+        public static void AddEntityInsertStatement<T>(this T self, IUnitOfWork unitOfWork, TableInfo table)
             where T : IEntity
         {
-            self.AddEntityInsertStatement<T>(builder, typeof(T).GetTableInfo());
-        }
-
-        public static void AddEntityInsertStatement<T>(this T self, CommandBuilder builder, TableInfo table)
-            where T : IEntity
-        {
-            var idParameterName = builder.GetParameterName();
-            var insertStatement = new InsertStatement(table.Name);
+            var builder = new SaveCommandBuilder();
+            var statement = new InsertStatement(table.Name);
 
             foreach (var column in table.Columns)
             {
-                var columnParameterName = builder.GetParameterName();
-                insertStatement.Add(column.Name, columnParameterName);
-                builder.AddParameter(columnParameterName, column.GetValue(self));
+                var parameterName = builder.GetParameterName();
+                statement.Add(column.Name, parameterName);
+                builder.AddParameter(parameterName, column.GetValue(self));
+            }
+
+            foreach (var customDataType in table.CustomDataTypes)
+            {
+                var dataTypeValue = customDataType.GetValue(self);
+
+                foreach (var column in customDataType.Columns)
+                {
+                    var parameterName = builder.GetParameterName();
+                    statement.Add(column.Name, parameterName);
+                    builder.AddParameter(parameterName, column.GetValue(dataTypeValue));
+                }
+            }
+
+            builder.AddStatement(statement);
+            unitOfWork.Add(builder);
+
+            foreach (var foreignKey in table.ForeignKeys)
+            {
+                //
             }
         }
 
-        public static void AddEntityUpdateStatement<T>(this T self, CommandBuilder builder)
+        public static void AddEntityUpdateStatement<T>(this T self, IUnitOfWork unitOfWork)
             where T : IEntity
         {
-            self.AddEntityUpdateStatement<T>(builder, typeof(T).GetTableInfo());
+            self.AddEntityUpdateStatement<T>(unitOfWork, typeof(T).GetTableInfo());
         }
 
-        public static void AddEntityUpdateStatement<T>(this T self, CommandBuilder builder, TableInfo table)
+        public static void AddEntityUpdateStatement<T>(this T self, IUnitOfWork unitOfWork, TableInfo table)
             where T : IEntity
         {
+            var builder = new SaveCommandBuilder();
             var idParameterName = builder.GetParameterName();
             var whereClause = string.Format("{0}.Id = {1}", table.Name, idParameterName);
-            var updateStatement = new UpdateStatement("Feed", whereClause);
+            var statement = new UpdateStatement(table.Name, whereClause);
             builder.AddParameter(idParameterName, self.Id);
 
             foreach (var column in table.Columns.Where(x => x.IsReadOnly == false))
             {
-                var columnParameterName = builder.GetParameterName();
-                updateStatement.Set(column.Name, columnParameterName);
-                builder.AddParameter(columnParameterName, column.GetValue(self));
+                var parameterName = builder.GetParameterName();
+                statement.Set(column.Name, parameterName);
+                builder.AddParameter(parameterName, column.GetValue(self));
             }
 
-            builder.AddStatement(updateStatement);
+            foreach (var customDataType in table.CustomDataTypes)
+            {
+                var dataTypeValue = customDataType.GetValue(self);
+
+                foreach (var column in customDataType.Columns)
+                {
+                    var parameterName = builder.GetParameterName();
+                    statement.Set(column.Name, parameterName);
+                    builder.AddParameter(parameterName, column.GetValue(dataTypeValue));
+                }
+            }
+
+            builder.AddStatement(statement);
+            unitOfWork.Add(builder);
         }
 
-        public static void AddEntityDeleteStatement<T>(this T self, CommandBuilder builder)
+        public static void AddEntityDeleteStatement<T>(this T self, IUnitOfWork unitOfWork)
             where T : IEntity
         {
-            self.AddEntityDeleteStatement(builder, typeof(T).GetTableInfo());
+            self.AddEntityDeleteStatement(unitOfWork, typeof(T).GetTableInfo());
         }
 
-        public static void AddEntityDeleteStatement<T>(this T self, CommandBuilder builder, TableInfo table)
+        public static void AddEntityDeleteStatement<T>(this T self, IUnitOfWork unitOfWork, TableInfo table)
             where T : IEntity
         {
         }

@@ -24,20 +24,6 @@ namespace Gnosis.Alexandria.Repositories.Tracks
             return Create(UriExtensions.EmptyUri);
         }
 
-        protected override CommandBuilder GetSaveCommandBuilder(IEnumerable<ITrack> items)
-        {
-            var builder = new SaveCommandBuilder();
-
-            return builder;
-        }
-
-        protected override CommandBuilder GetDeleteCommandBuilder(IEnumerable<ITrack> items)
-        {
-            var builder = new SaveCommandBuilder();
-
-            return builder;
-        }
-
         protected override IEnumerable<ITrack> Read(IDataReader reader)
         {
             return new List<ITrack>();
