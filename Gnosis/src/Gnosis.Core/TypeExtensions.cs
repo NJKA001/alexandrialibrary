@@ -6,6 +6,7 @@ using System.Text;
 
 using Gnosis.Core.Attributes;
 using Gnosis.Core.Commands;
+using System.Collections;
 
 namespace Gnosis.Core
 {
@@ -51,7 +52,7 @@ namespace Gnosis.Core
             if (table != null)
             {
                 var defaultSortExpression = defaultSort != null ? defaultSort.Expression : string.Empty;
-                new TableInfo(table.Name, defaultSortExpression, type.GetColumnInfo(), type.GetIndexInfo(), type.GetForeignKeyInfo(), type.GetCustomDataTypeInfo());
+                new TableInfo(table.Name, defaultSortExpression, type.GetColumnInfo(), type.GetIndexInfo(), type.GetOneToManyInfo(), type.GetCustomDataTypeInfo());
             }
 
             return null;
@@ -82,16 +83,17 @@ namespace Gnosis.Core
             return indexAttributes;
         }
 
-        public static IEnumerable<ForeignKeyInfo> GetForeignKeyInfo(this Type type)
+        public static IEnumerable<OneToManyInfo> GetOneToManyInfo(this Type type)
         {
-            var foreignKeyInfo = new List<ForeignKeyInfo>();
+            var oneToManyInfo = new List<OneToManyInfo>();
 
             foreach (var oneToMany in type.GetOneToManyAttributes())
             {
-                foreignKeyInfo.Add(new ForeignKeyInfo(oneToMany.TableName));
+
+                oneToManyInfo.Add(new OneToManyInfo(oneToMany.Item1, oneToMany.Item2));
             }
 
-            return foreignKeyInfo;
+            return oneToManyInfo;
         }
 
         public static IEnumerable<CustomDataTypeInfo> GetCustomDataTypeInfo(this Type type)
@@ -122,16 +124,16 @@ namespace Gnosis.Core
             }
         }
 
-        public static IEnumerable<OneToManyAttribute> GetOneToManyAttributes(this Type type)
+        public static IEnumerable<Tuple<OneToManyAttribute, PropertyInfo>> GetOneToManyAttributes(this Type type)
         {
-            var oneToManyAttributes = new List<OneToManyAttribute>();
+            var oneToManyAttributes = new List<Tuple<OneToManyAttribute, PropertyInfo>>();
 
             foreach (var property in type.GetProperties(BindingFlags.Instance | BindingFlags.Public))
             {
                 foreach (var attribute in property.GetCustomAttributes(true))
                 {
                     if (attribute is OneToManyAttribute)
-                        oneToManyAttributes.Add(attribute as OneToManyAttribute);
+                        oneToManyAttributes.Add(new Tuple<OneToManyAttribute, PropertyInfo>(attribute as OneToManyAttribute, property));
                 }
             }
 
@@ -245,6 +247,10 @@ namespace Gnosis.Core
                 self.AddEntityUpdateStatement(unitOfWork, table);
         }
 
+        public static void AddEntitySaveStatements(this IEnumerable self, IUnitOfWork unitOfWork, OneToManyInfo child)
+        {
+        }
+
         public static void AddEntityInsertStatement<T>(this T self, IUnitOfWork unitOfWork)
             where T : IEntity
         {
@@ -279,9 +285,10 @@ namespace Gnosis.Core
             builder.AddStatement(statement);
             unitOfWork.Add(builder);
 
-            foreach (var foreignKey in table.ForeignKeys)
+            foreach (var childInfo in table.Children)
             {
-                //
+                var childrenValues = childInfo.GetValues(self);
+                childrenValues.AddEntitySaveStatements(unitOfWork, childInfo);
             }
         }
 

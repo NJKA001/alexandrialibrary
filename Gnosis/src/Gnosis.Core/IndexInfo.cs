@@ -23,6 +23,13 @@ namespace Gnosis.Core
             this.columns = indexAttribute.Columns;
         }
 
+        public IndexInfo(ForeignIndexAttribute indexAttribute)
+        {
+            this.name = indexAttribute.Name;
+            this.isUnique = indexAttribute.IsUnique;
+            this.columns = indexAttribute.Columns;
+        }
+
         private readonly string name;
         private readonly bool isUnique;
         private readonly IEnumerable<string> columns;

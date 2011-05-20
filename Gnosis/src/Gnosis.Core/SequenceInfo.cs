@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 
 namespace Gnosis.Core
 {
-    public class ForeignKeyInfo
+    public class SequenceInfo
     {
-        public ForeignKeyInfo(string name, Type type)
+        public SequenceInfo(string name, Type type)
         {
             this.name = name;
             this.type = type;

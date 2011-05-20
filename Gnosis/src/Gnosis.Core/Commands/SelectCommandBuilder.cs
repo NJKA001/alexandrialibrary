@@ -25,11 +25,11 @@ namespace Gnosis.Core.Commands
 
             foreach (var oneToMany in type.GetOneToManyAttributes())
             {
-                if (oneToMany.HasForeignKey)
+                if (oneToMany.Item1.HasForeignKey)
                 {
-                    var oneToManyOrderByClause = (oneToMany.HasSequence) ? string.Format("{0}.{1} ASC, {0}.{2} ASC", oneToMany.TableName, oneToMany.ForeignKeyName, oneToMany.SequenceName) : string.Format("{0}.{1} ASC", oneToMany.TableName, oneToMany.ForeignKeyName);
+                    var oneToManyOrderByClause = (oneToMany.Item1.HasSequence) ? string.Format("{0}.{1} ASC, {0}.{2} ASC", oneToMany.Item1.TableName, oneToMany.Item1.ForeignKeyName, oneToMany.Item1.SequenceName) : string.Format("{0}.{1} ASC", oneToMany.Item1.TableName, oneToMany.Item1.ForeignKeyName);
 
-                    AddStatement(new SelectStatement(table.Name, oneToMany.TableName, oneToMany.ForeignKeyName, whereClause, oneToManyOrderByClause));
+                    AddStatement(new SelectStatement(table.Name, oneToMany.Item1.TableName, oneToMany.Item1.ForeignKeyName, whereClause, oneToManyOrderByClause));
                 }
             }
         }

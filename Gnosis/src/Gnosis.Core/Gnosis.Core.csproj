@@ -84,8 +84,10 @@
     <Compile Include="Attributes\PrimaryKeyAttribute.cs" />
     <Compile Include="Attributes\PrimaryKeyColumnAttribute.cs" />
     <Compile Include="Collections\Set.cs" />
+    <Compile Include="OneToManyInfo.cs" />
     <Compile Include="PrimaryKeyInfo.cs" />
     <Compile Include="ReflectionExtensions.cs" />
+    <Compile Include="SequenceInfo.cs" />
     <Compile Include="StreamExtensions.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
