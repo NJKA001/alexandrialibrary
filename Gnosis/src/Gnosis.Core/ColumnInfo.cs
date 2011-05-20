@@ -18,6 +18,7 @@ namespace Gnosis.Core
             this.name = name;
             this.property = property;
             this.isPrimaryKey = isPrimaryKey;
+            this.isAutoIncrement = isAutoIncrement;
         }
 
         private readonly string name;

@@ -9,10 +9,28 @@ namespace Gnosis.Core
     {
         public PrimaryKeyInfo(string name, Type type, bool isAutoIncrement)
         {
+            this.name = name;
+            this.type = type;
+            this.isAutoIncrement = isAutoIncrement;
         }
 
         private readonly string name;
         private readonly Type type;
         private readonly bool isAutoIncrement;
+
+        public string Name
+        {
+            get { return name; }
+        }
+
+        public Type Type
+        {
+            get { return type; }
+        }
+
+        public bool IsAutoIncrement
+        {
+            get { return isAutoIncrement; }
+        }
     }
 }

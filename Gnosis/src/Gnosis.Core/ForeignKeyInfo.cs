@@ -65,5 +65,10 @@ namespace Gnosis.Core
         {
             get { return sequenceType; }
         }
+
+        public TableInfo GetTable()
+        {
+            return null;
+        }
     }
 }
