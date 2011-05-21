@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -6,8 +7,13 @@ using System.Text;
 
 namespace Gnosis.Core.Collections
 {
+    public interface ISet
+    {
+        IEnumerable<CollectionItemInfo> GetItemInfo();
+    }
+
     public interface ISet<T>
-        : IEnumerable<T>, INotifyCollectionChanged
+        : ISet, IEnumerable<T>, INotifyCollectionChanged
     {
         int Count { get; }
         bool IsChanged { get; }

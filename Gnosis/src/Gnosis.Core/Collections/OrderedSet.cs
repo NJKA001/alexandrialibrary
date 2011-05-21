@@ -132,5 +132,31 @@ namespace Gnosis.Core.Collections
 
             return movedItems;
         }
+
+        #region ISet Members
+
+        public override IEnumerable<CollectionItemInfo> GetItemInfo()
+        {
+            var info = new List<CollectionItemInfo>();
+
+            foreach (var added in GetAddedItems())
+                info.Add(new CollectionItemInfo(IndexOf(added), added, CollectionItemState.Added));
+
+            foreach (var removed in GetRemovedItems())
+                info.Add(new CollectionItemInfo(IndexOf(removed), removed, CollectionItemState.Removed));
+
+            var movedItems = GetMovedItems();
+            foreach (var existing in GetExistingItems())
+            {
+                if (movedItems.Contains(existing))
+                    info.Add(new CollectionItemInfo(IndexOf(existing), existing, CollectionItemState.Moved));
+                else
+                    info.Add(new CollectionItemInfo(IndexOf(existing), existing, CollectionItemState.Existing));
+            }
+
+            return info;
+        }
+
+        #endregion
     }
 }

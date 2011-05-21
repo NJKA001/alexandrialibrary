@@ -49,6 +49,8 @@
     <Compile Include="Attributes\ForeignUniqueIndexAttribute.cs" />
     <Compile Include="Attributes\TableCheckConstraintAttribute.cs" />
     <Compile Include="Attributes\TableConstraintAttribute.cs" />
+    <Compile Include="Collections\CollectionItemInfo.cs" />
+    <Compile Include="Collections\CollectionItemState.cs" />
     <Compile Include="ColumnInfo.cs" />
     <Compile Include="Commands\CommandBuilder.cs" />
     <Compile Include="Commands\CreateCommandBuilder.cs" />

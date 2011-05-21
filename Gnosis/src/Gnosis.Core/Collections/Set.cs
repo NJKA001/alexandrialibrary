@@ -119,6 +119,26 @@ namespace Gnosis.Core.Collections
             else throw new KeyNotFoundException("item not contained in set - cannot replace");
         }
 
+        #region ISet Members
+
+        public virtual IEnumerable<CollectionItemInfo> GetItemInfo()
+        {
+            var info = new List<CollectionItemInfo>();
+
+            foreach (var added in GetAddedItems())
+                info.Add(new CollectionItemInfo(null, added, CollectionItemState.Added));
+
+            foreach (var removed in GetRemovedItems())
+                info.Add(new CollectionItemInfo(null, removed, CollectionItemState.Removed));
+
+            foreach (var existing in GetExistingItems())
+                info.Add(new CollectionItemInfo(null, existing, CollectionItemState.Existing));
+
+            return info;
+        }
+
+        #endregion
+
         #region ISet<V> Members
 
         public int Count
