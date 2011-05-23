@@ -16,6 +16,6 @@ namespace Gnosis.Core.Collections
         void RemoveAt(int index);
 
         int IndexOf(T item);
-        IEnumerable<T> GetMovedItems();
+        //IEnumerable<T> GetMovedItems();
     }
 }

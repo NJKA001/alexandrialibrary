@@ -25,9 +25,9 @@ namespace Gnosis.Core.Collections
         void Replace(T original, T replacement);
 
         bool Contains(T item);
-        IEnumerable<T> GetExistingItems();
-        IEnumerable<T> GetAddedItems();
-        IEnumerable<T> GetRemovedItems();
-        IEnumerable<Tuple<T, T>> GetReplacedItems();
+        //IEnumerable<T> GetExistingItems();
+        //IEnumerable<T> GetAddedItems();
+        //IEnumerable<T> GetRemovedItems();
+        //IEnumerable<Tuple<T, T>> GetReplacedItems();
     }
 }
