@@ -17,19 +17,29 @@ namespace Gnosis.Core.Commands
             builder.AppendFormat("create table if not exists {0} (", name);
         }
 
-        public CreateTableStatement(CreateCommandBuilder commandBuilder, string name, Type type, object instance)
-            : this(name)
+        //public CreateTableStatement(CreateCommandBuilder commandBuilder, string name, Type type, object instance)
+        //    : this(name)
+        //{
+        //    this.commandBuilder = commandBuilder;
+        //    AddColumnsForRootType(type, instance);
+        //}
+
+        //private CreateTableStatement(CreateCommandBuilder commandBuilder, OneToManyAttribute oneToMany, Type collectionType, Type itemType)
+        //    : this(oneToMany.TableName)
+        //{
+        //    this.commandBuilder = commandBuilder;
+        //    AddColumnsForOneToMany(oneToMany, collectionType, itemType);
+        //    AddColumnsForRootType(itemType);
+        //}
+
+        public CreateTableStatement(CreateCommandBuilder commandBuilder, TableInfo tableInfo)
+            : this(tableInfo.Name)
         {
-            this.commandBuilder = commandBuilder;
-            AddColumnsForRootType(type, instance);
         }
 
-        private CreateTableStatement(CreateCommandBuilder commandBuilder, OneToManyAttribute oneToMany, Type collectionType, Type itemType)
-            : this(oneToMany.TableName)
+        public CreateTableStatement(CreateCommandBuilder commandBuilder, OneToManyInfo childInfo)
+            : this(childInfo.TableName)
         {
-            this.commandBuilder = commandBuilder;
-            AddColumnsForOneToMany(oneToMany, collectionType, itemType);
-            AddColumnsForRootType(itemType);
         }
 
         private readonly CreateCommandBuilder commandBuilder;
@@ -191,7 +201,7 @@ namespace Gnosis.Core.Commands
                     if (genericArgs.Length > 0)
                     {
                         var itemType = genericArgs[0];
-                        commandBuilder.AddStatement(new CreateTableStatement(commandBuilder, oneToMany, collectionType, itemType));
+                        //commandBuilder.AddStatement(new CreateTableStatement(commandBuilder, oneToMany, collectionType, itemType));
                         
                         foreach (var foreignIndex in foreignIndices)
                         {

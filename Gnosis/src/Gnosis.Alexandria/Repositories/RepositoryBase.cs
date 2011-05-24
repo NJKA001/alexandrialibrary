@@ -33,16 +33,20 @@ namespace Gnosis.Alexandria.Repositories
         {
             try
             {
-                var commandBuilder = new CreateCommandBuilder(typeof(T), CreateDefault());
+                var unitOfWork = CreateUnitOfWork();
+                typeof(T).AddEntityCreateStatement(unitOfWork);
+                unitOfWork.Execute();
 
-                using (var connection = GetConnection())
-                {
-                    connection.Open();
-                    using (var command = commandBuilder.GetCommand(connection))
-                    {
-                        command.ExecuteNonQuery();
-                    }
-                }
+                //var commandBuilder = new CreateCommandBuilder//(typeof(T), CreateDefault());
+
+                //using (var connection = GetConnection())
+                //{
+                //    connection.Open();
+                //    using (var command = commandBuilder.GetCommand(connection))
+                //    {
+                //        command.ExecuteNonQuery();
+                //    }
+                //}
             }
             catch (Exception ex)
             {
@@ -85,6 +89,11 @@ namespace Gnosis.Alexandria.Repositories
         protected IDbConnection GetConnection()
         {
             return new SQLiteConnection(string.Format("Data Source={0};Version=3;", database));
+        }
+
+        protected IUnitOfWork CreateUnitOfWork()
+        {
+            return new UnitOfWork(() => GetConnection());
         }
 
         protected ITimeStamp GetTimeStamp(IDataReader reader)

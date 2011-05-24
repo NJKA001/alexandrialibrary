@@ -43,7 +43,7 @@ namespace Gnosis.Core.Attributes
         private readonly string tableName;
         private bool hasPrimaryKey = true;
         private string primaryKeyName = "Id";
-        private Type primaryKeyType = typeof(int);
+        private Type primaryKeyType = typeof(Guid);
         private bool primaryKeyIsAutoIncrement = true;
         private bool hasForeignKey = true;
         private string foreignKeyName = "Parent";

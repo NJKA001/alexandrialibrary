@@ -11,6 +11,11 @@ namespace Gnosis.Core.Commands
 {
     public class CreateCommandBuilder : CommandBuilder
     {
+        public CreateCommandBuilder()
+        {
+        }
+
+        /*
         public CreateCommandBuilder(Type type, object instance)
         {
             if (type == null)
@@ -28,7 +33,14 @@ namespace Gnosis.Core.Commands
                 {
                     AddStatement(new CreateIndexStatement(table.Name, index.Name, index.IsUnique, index.Columns));
                 }
+
+                foreach (var child in table.Children)
+                {
+                    //AddStatement(new CreateTableStatement(this, child.TableName, child.ChildType, null));
+
+
+                }
             }
-        }
+        }*/
     }
 }
