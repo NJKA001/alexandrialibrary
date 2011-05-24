@@ -43,9 +43,7 @@ namespace Gnosis.Core.Collections
         private readonly IDictionary<K, V> map = new Dictionary<K, V>();
         private readonly Func<V, K> function;
         private readonly IList<V> originalItems = new List<V>();
-        private readonly IList<V> addedItems = new List<V>();
         private readonly IList<V> removedItems = new List<V>();
-        private readonly IList<Tuple<V, V>> replacedItems = new List<Tuple<V, V>>();
 
         protected void OnCollectionChanged(Action action, NotifyCollectionChangedEventArgs args)
         {
@@ -65,6 +63,11 @@ namespace Gnosis.Core.Collections
         protected IList<V> OriginalItems
         {
             get { return originalItems; }
+        }
+
+        protected IList<V> RemovedItems
+        {
+            get { return removedItems; }
         }
 
         protected IDictionary<K, V> Map
@@ -89,7 +92,6 @@ namespace Gnosis.Core.Collections
             {
                 var action = new Action(delegate { map.Add(key, item); });
                 OnCollectionChanged(action, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item));
-                addedItems.Add(item);
             }
             else throw new ArgumentException("item already contained in set - a set cannot have duplicates");
         }
@@ -99,9 +101,8 @@ namespace Gnosis.Core.Collections
             var key = GetKey(item);
             if (map.ContainsKey(key))
             {
-                var action = new Action(delegate { map.Remove(key); });
+                var action = new Action(delegate { map.Remove(key); removedItems.Add(item); });
                 OnCollectionChanged(action, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item));
-                removedItems.Add(item);
             }
             else throw new KeyNotFoundException("item not contained in set - cannot remove");
         }
@@ -114,7 +115,6 @@ namespace Gnosis.Core.Collections
                 var replacementKey = GetKey(replacement);
                 var action = new Action(delegate { map.Remove(key); map.Add(replacementKey, replacement); });
                 OnCollectionChanged(action, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, replacement, original));
-                replacedItems.Add(new Tuple<V, V>(original, replacement));
             }
             else throw new KeyNotFoundException("item not contained in set - cannot replace");
         }
@@ -125,14 +125,26 @@ namespace Gnosis.Core.Collections
         {
             var info = new List<CollectionItemInfo>();
 
-            foreach (var added in GetAddedItems())
-                info.Add(new CollectionItemInfo(null, added, CollectionItemState.Added));
+            foreach (var currentItem in Items)
+            {
+                if (originalItems.Contains(currentItem))
+                {
+                    info.Add(new CollectionItemInfo(currentItem, CollectionItemState.Existing, GetKey(currentItem)));
+                }
+                else
+                {
+                    info.Add(new CollectionItemInfo(currentItem, CollectionItemState.Added, GetKey(currentItem))); 
+                }
+            }
 
-            foreach (var removed in GetRemovedItems())
-                info.Add(new CollectionItemInfo(null, removed, CollectionItemState.Removed));
-
-            foreach (var existing in GetExistingItems())
-                info.Add(new CollectionItemInfo(null, existing, CollectionItemState.Existing));
+            foreach (var removedItem in removedItems)
+            {
+                var removedKey = GetKey(removedItem);
+                if (!Map.ContainsKey(removedKey))
+                {
+                    info.Add(new CollectionItemInfo(removedItem, CollectionItemState.Removed, removedKey));
+                }
+            }
 
             return info;
         }
@@ -146,9 +158,21 @@ namespace Gnosis.Core.Collections
             get { return map.Count; }
         }
 
-        public bool IsChanged
+        public virtual bool IsChanged
         {
-            get { return addedItems.Count > 0 || removedItems.Count > 0 || replacedItems.Count > 0; }
+            get
+            {
+                if (originalItems.Count != map.Count)
+                    return true;
+
+                foreach (var item in originalItems)
+                {
+                    if (!map.ContainsKey(GetKey(item)))
+                        return true;
+                }
+
+                return false;
+            }
         }
 
         public virtual void Clear()
@@ -159,11 +183,9 @@ namespace Gnosis.Core.Collections
 
         public void ResetState()
         {
-            addedItems.Clear();
             removedItems.Clear();
-            replacedItems.Clear();
-
             originalItems.Clear();
+
             foreach (var item in Items)
                 originalItems.Add(item);
         }
@@ -183,43 +205,9 @@ namespace Gnosis.Core.Collections
             ReplaceItem(original, replacement);
         }
 
-        public IEnumerable<V> GetExistingItems()
-        {
-            IList<V> existingItems = new List<V>();
-
-            var index = 0;
-            foreach (var item in Items)
-            {
-                if (originalItems.Count > index)
-                {
-                    if (GetKey(originalItems[index]).Equals(GetKey(item)))
-                        existingItems.Add(item);
-                }
-
-                index++;
-            }
-
-            return existingItems;
-        }
-
         public bool Contains(V item)
         {
             return map.ContainsKey(GetKey(item));
-        }
-
-        public IEnumerable<V> GetAddedItems()
-        {
-            return addedItems;
-        }
-
-        public IEnumerable<V> GetRemovedItems()
-        {
-            return removedItems;
-        }
-
-        public IEnumerable<Tuple<V, V>> GetReplacedItems()
-        {
-            return replacedItems;
         }
 
         #endregion

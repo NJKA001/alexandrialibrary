@@ -51,6 +51,14 @@
     <Compile Include="Attributes\TableConstraintAttribute.cs" />
     <Compile Include="Collections\CollectionItemInfo.cs" />
     <Compile Include="Collections\CollectionItemState.cs" />
+    <Compile Include="Collections\EntitySet.cs" />
+    <Compile Include="Collections\IEntitySet.cs" />
+    <Compile Include="Collections\IOrderedEntitySet.cs" />
+    <Compile Include="Collections\IOrderedValueSet.cs" />
+    <Compile Include="Collections\IValueSet.cs" />
+    <Compile Include="Collections\OrderedEntitySet.cs" />
+    <Compile Include="Collections\OrderedValueSet.cs" />
+    <Compile Include="Collections\ValueSet.cs" />
     <Compile Include="ColumnInfo.cs" />
     <Compile Include="Commands\CommandBuilder.cs" />
     <Compile Include="Commands\CreateCommandBuilder.cs" />

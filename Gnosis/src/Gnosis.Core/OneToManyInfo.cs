@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 
 using Gnosis.Core.Attributes;
-using System.Collections;
+using Gnosis.Core.Collections;
 
 namespace Gnosis.Core
 {
@@ -93,9 +94,17 @@ namespace Gnosis.Core
             get { return table.Indices; }
         }
 
-        public IEnumerable GetValues(object instance)
+        public IEnumerable<CollectionItemInfo> GetItemInfo(object instance)
         {
-            return property.GetValue(instance, null) as IEnumerable;
+            var value = property.GetValue(instance, null) as ISet;
+            if (value != null)
+            {
+                return value.GetItemInfo();
+            }
+            else
+            {
+                return new List<CollectionItemInfo>();
+            }
         }
     }
 }

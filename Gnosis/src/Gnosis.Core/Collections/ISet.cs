@@ -8,8 +8,10 @@ using System.Text;
 namespace Gnosis.Core.Collections
 {
     public interface ISet
+        : IEnumerable
     {
         IEnumerable<CollectionItemInfo> GetItemInfo();
+
     }
 
     public interface ISet<T>
@@ -25,9 +27,5 @@ namespace Gnosis.Core.Collections
         void Replace(T original, T replacement);
 
         bool Contains(T item);
-        //IEnumerable<T> GetExistingItems();
-        //IEnumerable<T> GetAddedItems();
-        //IEnumerable<T> GetRemovedItems();
-        //IEnumerable<Tuple<T, T>> GetReplacedItems();
     }
 }

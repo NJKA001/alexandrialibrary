@@ -218,7 +218,11 @@ namespace Gnosis.Core
         public static void AddValueInsertStatement<T>(this T self, IUnitOfWork unitOfWork, TableInfo table)
             where T : IValue
         {
+        }
 
+        public static void AddValueInsertStatement<T>(this T self, IUnitOfWork unitOfWork, OneToManyInfo childInfo)
+            where T : IValue
+        {
         }
 
         public static void AddValueDeleteStatement<T>(this T self, IUnitOfWork unitOfWork)
@@ -228,6 +232,16 @@ namespace Gnosis.Core
         }
 
         public static void AddValueDeleteStatement<T>(this T self, IUnitOfWork unitOfWork, TableInfo table)
+            where T : IValue
+        {
+        }
+
+        public static void AddValueDeleteStatement<T>(this T self, IUnitOfWork unitOfWork, OneToManyInfo childInfo)
+            where T : IValue
+        {
+        }
+
+        public static void AddValueMoveStatement<T>(this T self, IUnitOfWork unitOfWork, OneToManyInfo childInfo)
             where T : IValue
         {
         }
@@ -247,8 +261,67 @@ namespace Gnosis.Core
                 self.AddEntityUpdateStatement(unitOfWork, table);
         }
 
-        public static void AddEntitySaveStatements(this IEnumerable self, IUnitOfWork unitOfWork, OneToManyInfo child)
+        public static void AddEntitySaveStatements(this IEnumerable<OneToManyInfo> self, IUnitOfWork unitOfWork, object instance)
         {
+            foreach (var child in self)
+            {
+                var itemInfos = child.GetItemInfo(instance);
+                if (child.ChildType.IsEntityType())
+                {
+                    IEntity entity = null;
+                    foreach (var info in itemInfos)
+                    {
+                        entity = info.Item as IEntity;
+
+                        switch (info.State)
+                        {
+                            case Collections.CollectionItemState.Added:
+                                entity.AddEntityInsertStatement(unitOfWork, child);
+                                break;
+                            case Collections.CollectionItemState.Removed:
+                                entity.AddEntityDeleteStatement(unitOfWork, child);
+                                break;
+                            case Collections.CollectionItemState.Existing:
+                                if (entity.IsChanged)
+                                {
+                                    entity.AddEntityUpdateStatement(unitOfWork, child);
+                                }
+                                break;
+                            case Collections.CollectionItemState.Moved:
+                                entity.AddEntityUpdateStatement(unitOfWork, child);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                else
+                {
+                    IValue value = null;
+
+                    foreach (var info in itemInfos)
+                    {
+                        value = info.Item as IValue;
+
+                        switch (info.State)
+                        {
+                            case Collections.CollectionItemState.Added:
+                                value.AddValueInsertStatement(unitOfWork, child);
+                                break;
+                            case Collections.CollectionItemState.Removed:
+                                value.AddValueDeleteStatement(unitOfWork, child);
+                                break;
+                            case Collections.CollectionItemState.Existing:
+                                break;
+                            case Collections.CollectionItemState.Moved:
+                                value.AddValueMoveStatement(unitOfWork, child);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
         }
 
         public static void AddEntityInsertStatement<T>(this T self, IUnitOfWork unitOfWork)
@@ -285,11 +358,13 @@ namespace Gnosis.Core
             builder.AddStatement(statement);
             unitOfWork.Add(builder);
 
-            foreach (var childInfo in table.Children)
-            {
-                var childrenValues = childInfo.GetValues(self);
-                childrenValues.AddEntitySaveStatements(unitOfWork, childInfo);
-            }
+            table.Children.AddEntitySaveStatements(unitOfWork, self);
+        }
+
+        public static void AddEntityInsertStatement<T>(this T self, IUnitOfWork unitOfWork, OneToManyInfo childInfo)
+            where T : IEntity
+        {
+            //TODO: Implement this for child table
         }
 
         public static void AddEntityUpdateStatement<T>(this T self, IUnitOfWork unitOfWork)
@@ -330,6 +405,12 @@ namespace Gnosis.Core
             unitOfWork.Add(builder);
         }
 
+        public static void AddEntityUpdateStatement<T>(this T self, IUnitOfWork unitOfWork, OneToManyInfo childInfo)
+            where T : IEntity
+        {
+            //TODO: Implement this for child table
+        }
+
         public static void AddEntityDeleteStatement<T>(this T self, IUnitOfWork unitOfWork)
             where T : IEntity
         {
@@ -337,6 +418,11 @@ namespace Gnosis.Core
         }
 
         public static void AddEntityDeleteStatement<T>(this T self, IUnitOfWork unitOfWork, TableInfo table)
+            where T : IEntity
+        {
+        }
+
+        public static void AddEntityDeleteStatement<T>(this T self, IUnitOfWork unitOfWork, OneToManyInfo childInfo)
             where T : IEntity
         {
         }

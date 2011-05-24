@@ -7,21 +7,26 @@ namespace Gnosis.Core.Collections
 {
     public struct CollectionItemInfo
     {
-        public CollectionItemInfo(object sequence, object item, CollectionItemState state)
+        public CollectionItemInfo(object item, CollectionItemState state, object id)
         {
-            this.sequence = sequence;
             this.item = item;
             this.state = state;
+            this.id = id;
+            this.sequence = null;
         }
 
-        private readonly object sequence;
+        public CollectionItemInfo(object item, CollectionItemState state, object id, object sequence)
+        {
+            this.item = item;
+            this.state = state;
+            this.id = id;
+            this.sequence = sequence;
+        }
+
         private readonly object item;
         private readonly CollectionItemState state;
-
-        public object Sequence
-        {
-            get { return sequence; }
-        }
+        private readonly object id;
+        private readonly object sequence;
 
         public object Item
         {
@@ -31,6 +36,16 @@ namespace Gnosis.Core.Collections
         public CollectionItemState State
         {
             get { return state; }
+        }
+
+        public object Id
+        {
+            get { return id; }
+        }
+
+        public object Sequence
+        {
+            get { return sequence; }
         }
     }
 }

@@ -62,6 +62,23 @@ namespace Gnosis.Core.Collections
             get { return list[index]; }
         }
 
+        public override bool IsChanged
+        {
+            get
+            {
+                if (OriginalItems.Count != list.Count)
+                    return true;
+
+                for (var index=0; index < OriginalItems.Count; index++)
+                {
+                    if (GetKey(OriginalItems[index]) != GetKey(list[index]))
+                        return true;
+                }
+
+                return false;
+            }
+        }
+
         public int IndexOf(T item)
         {
             return list.IndexOf(item);
@@ -139,19 +156,35 @@ namespace Gnosis.Core.Collections
         {
             var info = new List<CollectionItemInfo>();
 
-            foreach (var added in GetAddedItems())
-                info.Add(new CollectionItemInfo(IndexOf(added), added, CollectionItemState.Added));
-
-            foreach (var removed in GetRemovedItems())
-                info.Add(new CollectionItemInfo(IndexOf(removed), removed, CollectionItemState.Removed));
-
-            var movedItems = GetMovedItems();
-            foreach (var existing in GetExistingItems())
+            var sequence = 0;
+            foreach (var currentItem in Items)
             {
-                if (movedItems.Contains(existing))
-                    info.Add(new CollectionItemInfo(IndexOf(existing), existing, CollectionItemState.Moved));
+                if (OriginalItems.Contains(currentItem))
+                {
+                    if (IndexOf(currentItem) == OriginalItems.IndexOf(currentItem))
+                    {
+                        info.Add(new CollectionItemInfo(currentItem, CollectionItemState.Existing, GetKey(currentItem), sequence));
+                    }
+                    else
+                    {
+                        info.Add(new CollectionItemInfo(currentItem, CollectionItemState.Moved, GetKey(currentItem), sequence));
+                    }
+                }
                 else
-                    info.Add(new CollectionItemInfo(IndexOf(existing), existing, CollectionItemState.Existing));
+                {
+                    info.Add(new CollectionItemInfo(currentItem, CollectionItemState.Added, GetKey(currentItem), sequence));
+                }
+
+                sequence++;
+            }
+
+            foreach (var removedItem in RemovedItems)
+            {
+                var removedKey = GetKey(removedItem);
+                if (!Map.ContainsKey(removedKey))
+                {
+                    info.Add(new CollectionItemInfo(removedItem, CollectionItemState.Removed, removedKey));
+                }
             }
 
             return info;
