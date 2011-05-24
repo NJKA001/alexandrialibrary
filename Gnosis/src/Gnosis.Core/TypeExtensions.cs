@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 
 using Gnosis.Core.Attributes;
+using Gnosis.Core.Collections;
 using Gnosis.Core.Commands;
-using System.Collections;
 
 namespace Gnosis.Core
 {
@@ -220,7 +221,7 @@ namespace Gnosis.Core
         {
         }
 
-        public static void AddValueInsertStatement<T>(this T self, IUnitOfWork unitOfWork, OneToManyInfo childInfo)
+        public static void AddValueInsertStatement<T>(this T self, IUnitOfWork unitOfWork, OneToManyInfo childInfo, CollectionItemInfo itemInfo, IEntity parent)
             where T : IValue
         {
         }
@@ -236,12 +237,12 @@ namespace Gnosis.Core
         {
         }
 
-        public static void AddValueDeleteStatement<T>(this T self, IUnitOfWork unitOfWork, OneToManyInfo childInfo)
+        public static void AddValueDeleteStatement<T>(this T self, IUnitOfWork unitOfWork, OneToManyInfo childInfo, CollectionItemInfo itemInfo, IEntity parent)
             where T : IValue
         {
         }
 
-        public static void AddValueMoveStatement<T>(this T self, IUnitOfWork unitOfWork, OneToManyInfo childInfo)
+        public static void AddValueMoveStatement<T>(this T self, IUnitOfWork unitOfWork, OneToManyInfo childInfo, CollectionItemInfo itemInfo, IEntity parent)
             where T : IValue
         {
         }
@@ -261,34 +262,34 @@ namespace Gnosis.Core
                 self.AddEntityUpdateStatement(unitOfWork, table);
         }
 
-        public static void AddEntitySaveStatements(this IEnumerable<OneToManyInfo> self, IUnitOfWork unitOfWork, object instance)
+        public static void AddEntitySaveStatements(this IEnumerable<OneToManyInfo> self, IUnitOfWork unitOfWork, IEntity parent)
         {
             foreach (var child in self)
             {
-                var itemInfos = child.GetItemInfo(instance);
+                var itemInfos = child.GetItemInfo(parent);
                 if (child.ChildType.IsEntityType())
                 {
                     IEntity entity = null;
-                    foreach (var info in itemInfos)
+                    foreach (var itemInfo in itemInfos)
                     {
-                        entity = info.Item as IEntity;
+                        entity = itemInfo.Item as IEntity;
 
-                        switch (info.State)
+                        switch (itemInfo.State)
                         {
                             case Collections.CollectionItemState.Added:
-                                entity.AddEntityInsertStatement(unitOfWork, child);
+                                entity.AddEntityInsertStatement(unitOfWork, child, itemInfo, parent);
                                 break;
                             case Collections.CollectionItemState.Removed:
-                                entity.AddEntityDeleteStatement(unitOfWork, child);
+                                entity.AddEntityDeleteStatement(unitOfWork, child, itemInfo, parent);
                                 break;
                             case Collections.CollectionItemState.Existing:
                                 if (entity.IsChanged)
                                 {
-                                    entity.AddEntityUpdateStatement(unitOfWork, child);
+                                    entity.AddEntityUpdateStatement(unitOfWork, child, itemInfo, parent);
                                 }
                                 break;
                             case Collections.CollectionItemState.Moved:
-                                entity.AddEntityUpdateStatement(unitOfWork, child);
+                                entity.AddEntityUpdateStatement(unitOfWork, child, itemInfo, parent);
                                 break;
                             default:
                                 break;
@@ -299,22 +300,22 @@ namespace Gnosis.Core
                 {
                     IValue value = null;
 
-                    foreach (var info in itemInfos)
+                    foreach (var itemInfo in itemInfos)
                     {
-                        value = info.Item as IValue;
+                        value = itemInfo.Item as IValue;
 
-                        switch (info.State)
+                        switch (itemInfo.State)
                         {
                             case Collections.CollectionItemState.Added:
-                                value.AddValueInsertStatement(unitOfWork, child);
+                                value.AddValueInsertStatement(unitOfWork, child, itemInfo, parent);
                                 break;
                             case Collections.CollectionItemState.Removed:
-                                value.AddValueDeleteStatement(unitOfWork, child);
+                                value.AddValueDeleteStatement(unitOfWork, child, itemInfo, parent);
                                 break;
                             case Collections.CollectionItemState.Existing:
                                 break;
                             case Collections.CollectionItemState.Moved:
-                                value.AddValueMoveStatement(unitOfWork, child);
+                                value.AddValueMoveStatement(unitOfWork, child, itemInfo, parent);
                                 break;
                             default:
                                 break;
@@ -361,10 +362,52 @@ namespace Gnosis.Core
             table.Children.AddEntitySaveStatements(unitOfWork, self);
         }
 
-        public static void AddEntityInsertStatement<T>(this T self, IUnitOfWork unitOfWork, OneToManyInfo childInfo)
+        public static void AddEntityInsertStatement<T>(this T self, IUnitOfWork unitOfWork, OneToManyInfo childInfo, CollectionItemInfo itemInfo, IEntity parent)
             where T : IEntity
         {
-            //TODO: Implement this for child table
+            var builder = new SaveCommandBuilder();
+            var statement = new InsertStatement(childInfo.TableName);
+
+            if (childInfo.PrimaryKey != null)
+            {
+                var parameterName = builder.GetParameterName();
+                statement.Add(childInfo.PrimaryKey.Name, parameterName);
+                builder.AddParameter(parameterName, itemInfo.Id);
+            }
+
+            if (childInfo.ForeignKey != null)
+            {
+                var parameterName = builder.GetParameterName();
+                statement.Add(childInfo.ForeignKey.Name, parameterName);
+                builder.AddParameter(parameterName, parent.Id);
+            }
+
+            if (childInfo.Sequence != null)
+            {
+                var parameterName = builder.GetParameterName();
+                statement.Add(childInfo.Sequence.Name, parameterName);
+                builder.AddParameter(parameterName, itemInfo.Sequence);
+            }
+
+            foreach (var column in childInfo.ChildTable.Columns)
+            {
+                var parameterName = builder.GetParameterName();
+                statement.Add(column.Name, parameterName);
+                builder.AddParameter(parameterName, column.GetValue(itemInfo.Item));
+            }
+
+            foreach (var customDataType in childInfo.ChildTable.CustomDataTypes)
+            {
+                foreach (var column in customDataType.Columns)
+                {
+                    var parameterName = builder.GetParameterName();
+                    statement.Add(column.Name, parameterName);
+                    builder.AddParameter(parameterName, column.GetValue(itemInfo.Item));
+                }
+            }
+
+            builder.AddStatement(statement);
+            unitOfWork.Add(builder);
         }
 
         public static void AddEntityUpdateStatement<T>(this T self, IUnitOfWork unitOfWork)
@@ -405,10 +448,42 @@ namespace Gnosis.Core
             unitOfWork.Add(builder);
         }
 
-        public static void AddEntityUpdateStatement<T>(this T self, IUnitOfWork unitOfWork, OneToManyInfo childInfo)
+        public static void AddEntityUpdateStatement<T>(this T self, IUnitOfWork unitOfWork, OneToManyInfo childInfo, CollectionItemInfo itemInfo, IEntity parent)
             where T : IEntity
         {
-            //TODO: Implement this for child table
+            var builder = new SaveCommandBuilder();
+
+            var idParameterName = builder.GetParameterName();
+            builder.AddParameter(idParameterName, self.Id);
+            var whereClause = string.Format("{0}.Id = {1}", childInfo.TableName, idParameterName);
+            var statement = new UpdateStatement(childInfo.TableName, whereClause);
+
+            if (childInfo.Sequence != null)
+            {
+                var parameterName = builder.GetParameterName();
+                statement.Set(childInfo.Sequence.Name, parameterName);
+                builder.AddParameter(parameterName, itemInfo.Sequence);
+            }
+
+            foreach (var column in childInfo.ChildTable.Columns)
+            {
+                var parameterName = builder.GetParameterName();
+                statement.Set(column.Name, parameterName);
+                builder.AddParameter(parameterName, column.GetValue(itemInfo.Item));
+            }
+
+            foreach (var customDataType in childInfo.ChildTable.CustomDataTypes)
+            {
+                foreach (var column in customDataType.Columns)
+                {
+                    var parameterName = builder.GetParameterName();
+                    statement.Set(column.Name, parameterName);
+                    builder.AddParameter(parameterName, column.GetValue(itemInfo.Item));
+                }
+            }
+
+            builder.AddStatement(statement);
+            unitOfWork.Add(builder);
         }
 
         public static void AddEntityDeleteStatement<T>(this T self, IUnitOfWork unitOfWork)
@@ -420,11 +495,29 @@ namespace Gnosis.Core
         public static void AddEntityDeleteStatement<T>(this T self, IUnitOfWork unitOfWork, TableInfo table)
             where T : IEntity
         {
+            var builder = new SaveCommandBuilder();
+
+            var idParameterName = builder.GetParameterName();
+            builder.AddParameter(idParameterName, self.Id);
+            var whereClause = string.Format("{0}.Id = {1}", table.Name, idParameterName);
+            var statement = new DeleteStatement(table.Name, whereClause);
+
+            builder.AddStatement(statement);
+            unitOfWork.Add(builder);
         }
 
-        public static void AddEntityDeleteStatement<T>(this T self, IUnitOfWork unitOfWork, OneToManyInfo childInfo)
+        public static void AddEntityDeleteStatement<T>(this T self, IUnitOfWork unitOfWork, OneToManyInfo childInfo, CollectionItemInfo itemInfo, IEntity parent)
             where T : IEntity
         {
+            var builder = new SaveCommandBuilder();
+
+            var idParameterName = builder.GetParameterName();
+            builder.AddParameter(idParameterName, self.Id);
+            var whereClause = string.Format("{0}.Id = {1}", childInfo.TableName, idParameterName);
+            var statement = new DeleteStatement(childInfo.TableName, whereClause);
+
+            builder.AddStatement(statement);
+            unitOfWork.Add(builder);
         }
 
         public static bool IsCustomDataType(this Type type)

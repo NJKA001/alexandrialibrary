@@ -79,19 +79,14 @@ namespace Gnosis.Core
             get { return property.PropertyType.GetGenericArguments()[0]; }
         }
 
+        public TableInfo ChildTable
+        {
+            get { return table; }
+        }
+
         public IEnumerable<IndexInfo> ForeignIndices
         {
             get { return foreignIndices; }
-        }
-
-        public IEnumerable<ColumnInfo> OriginalColumns
-        {
-            get { return table.Columns; }
-        }
-
-        public IEnumerable<IndexInfo> OriginalIndices
-        {
-            get { return table.Indices; }
         }
 
         public IEnumerable<CollectionItemInfo> GetItemInfo(object instance)
