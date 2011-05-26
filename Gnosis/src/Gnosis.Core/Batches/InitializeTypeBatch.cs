@@ -13,7 +13,7 @@ namespace Gnosis.Core.Batches
         public InitializeTypeBatch(Func<IDbConnection> getConnection, Type type)
             : base(getConnection)
         {
-            tableInfo = type.GetTableInfo();
+            var tableInfo = type.GetTableInfo();
 
             Add(GetRootCommandBuilder(tableInfo, type.GetDefaultInstance()));
             
@@ -22,9 +22,6 @@ namespace Gnosis.Core.Batches
                 Add(GetChildCommandBuilder(tableInfo, childInfo));
             }
         }
-
-        private readonly TableInfo tableInfo;
-        private readonly CommandBuilder rootBuilder;
 
         private static ICommandBuilder GetRootCommandBuilder(TableInfo tableInfo, object instance)
         {

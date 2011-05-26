@@ -13,6 +13,9 @@ namespace Gnosis.Core.Commands
     {
         public CreateTableStatement(TableInfo tableInfo, object instance)
         {
+            builder = new StringBuilder();
+            builder.AppendFormat("create table if not exists {0} (", tableInfo.Name);
+
             foreach (var column in tableInfo.Columns)
             {
                 //switch (column.
