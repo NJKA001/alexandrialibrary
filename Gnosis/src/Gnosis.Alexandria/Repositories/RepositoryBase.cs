@@ -10,6 +10,7 @@ using log4net;
 
 using Gnosis.Core;
 using Gnosis.Core.Attributes;
+using Gnosis.Core.Batches;
 using Gnosis.Core.Commands;
 using Gnosis.Alexandria.Models;
 
@@ -33,9 +34,9 @@ namespace Gnosis.Alexandria.Repositories
         {
             try
             {
-                var unitOfWork = CreateUnitOfWork();
-                typeof(T).AddEntityCreateStatement(unitOfWork);
-                unitOfWork.Execute();
+                var batch = new InitializeTypeBatch(() => GetConnection(), typeof(T));
+                //typeof(T).AddEntityCreateStatement(unitOfWork);
+                batch.Execute();
 
                 //var commandBuilder = new CreateCommandBuilder//(typeof(T), CreateDefault());
 
@@ -91,11 +92,6 @@ namespace Gnosis.Alexandria.Repositories
             return new SQLiteConnection(string.Format("Data Source={0};Version=3;", database));
         }
 
-        protected IUnitOfWork CreateUnitOfWork()
-        {
-            return new UnitOfWork(() => GetConnection());
-        }
-
         protected ITimeStamp GetTimeStamp(IDataReader reader)
         {
             var createdBy = new Uri(reader["TimeStamp_CreatedBy"].ToString());
@@ -142,7 +138,10 @@ namespace Gnosis.Alexandria.Repositories
 
         protected IEnumerable<T> Select(string whereClause, IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            var commandBuilder = new SelectCommandBuilder(typeof(T), whereClause);
+            var tableInfo = typeof(T).GetTableInfo();
+            var commandBuilder = new CommandBuilder();//typeof(T), whereClause);
+            
+            commandBuilder.AddStatement(new SelectStatement(tableInfo, whereClause, tableInfo.DefaultSort));
 
             if (parameters != null)
             {
@@ -176,7 +175,7 @@ namespace Gnosis.Alexandria.Repositories
 
         public void Save(IEnumerable<T> items)
         {
-            var unitOfWork = new UnitOfWork(() => GetConnection());
+            var unitOfWork = new Batch(() => GetConnection());
 
             foreach (var item in items)
                 item.AddEntitySaveStatement(unitOfWork);
@@ -186,7 +185,7 @@ namespace Gnosis.Alexandria.Repositories
 
         public void Delete(IEnumerable<T> items)
         {
-            var unitOfWork = new UnitOfWork(() => GetConnection());
+            var unitOfWork = new Batch(() => GetConnection());
 
             foreach (var item in items)
                 item.AddEntityDeleteStatement(unitOfWork);

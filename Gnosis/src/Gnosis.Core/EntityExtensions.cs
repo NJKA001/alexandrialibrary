@@ -13,7 +13,7 @@ namespace Gnosis.Core
         public static IDbCommand GetSaveCommand<T>(this IEnumerable<T> items, IDbConnection connection)
             where T : IEntity
         {
-            var builder = new SaveCommandBuilder();
+            var builder = new CommandBuilder();
 
 
 
@@ -23,7 +23,7 @@ namespace Gnosis.Core
         public static IDbCommand GetDeleteCommand<T>(this IEnumerable<T> items, IDbConnection connection)
             where T : IEntity
         {
-            var builder = new SaveCommandBuilder();
+            var builder = new CommandBuilder();
 
             return builder.GetCommand(connection);
         }

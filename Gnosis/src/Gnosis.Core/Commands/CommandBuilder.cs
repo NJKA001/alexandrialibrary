@@ -6,10 +6,10 @@ using System.Text;
 
 namespace Gnosis.Core.Commands
 {
-    public abstract class CommandBuilder
+    public class CommandBuilder
         : ICommandBuilder
     {
-        protected CommandBuilder()
+        public CommandBuilder()
         {
         }
 

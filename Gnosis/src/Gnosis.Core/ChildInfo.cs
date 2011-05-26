@@ -10,9 +10,9 @@ using Gnosis.Core.Collections;
 
 namespace Gnosis.Core
 {
-    public class OneToManyInfo
+    public class ChildInfo
     {
-        public OneToManyInfo(OneToManyAttribute oneToManyAttribute, PropertyInfo property)
+        public ChildInfo(OneToManyAttribute oneToManyAttribute, PropertyInfo property)
         {
             this.tableName = oneToManyAttribute.TableName;
             this.property = property;
@@ -23,7 +23,7 @@ namespace Gnosis.Core
             GetIndices();
         }
 
-        public OneToManyInfo(string tableName, PropertyInfo property, PrimaryKeyInfo primaryKey, ForeignKeyInfo foreignKey, SequenceInfo sequence)
+        public ChildInfo(string tableName, PropertyInfo property, PrimaryKeyInfo primaryKey, ForeignKeyInfo foreignKey, SequenceInfo sequence)
         {
             this.tableName = tableName;
             this.property = property;

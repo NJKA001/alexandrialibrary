@@ -4,12 +4,14 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core.Commands
+using Gnosis.Core.Commands;
+
+namespace Gnosis.Core.Batches
 {
-    public class UnitOfWork
-        : IUnitOfWork
+    public class Batch
+        : IBatch
     {
-        public UnitOfWork(Func<IDbConnection> getConnection)
+        public Batch(Func<IDbConnection> getConnection)
         {
             this.getConnection = getConnection;
         }

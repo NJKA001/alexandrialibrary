@@ -49,6 +49,7 @@
     <Compile Include="Attributes\ForeignUniqueIndexAttribute.cs" />
     <Compile Include="Attributes\TableCheckConstraintAttribute.cs" />
     <Compile Include="Attributes\TableConstraintAttribute.cs" />
+    <Compile Include="Batches\InitializeTypeBatch.cs" />
     <Compile Include="Collections\CollectionItemInfo.cs" />
     <Compile Include="Collections\CollectionItemState.cs" />
     <Compile Include="Collections\EntitySet.cs" />
@@ -61,18 +62,15 @@
     <Compile Include="Collections\ValueSet.cs" />
     <Compile Include="ColumnInfo.cs" />
     <Compile Include="Commands\CommandBuilder.cs" />
-    <Compile Include="Commands\CreateCommandBuilder.cs" />
     <Compile Include="Commands\CreateIndexStatement.cs" />
     <Compile Include="Commands\CreateTableStatement.cs" />
     <Compile Include="Commands\DeleteStatement.cs" />
     <Compile Include="Commands\ICommandBuilder.cs" />
     <Compile Include="Commands\InsertStatement.cs" />
     <Compile Include="Commands\IStatement.cs" />
-    <Compile Include="Commands\IUnitOfWork.cs" />
-    <Compile Include="Commands\SaveCommandBuilder.cs" />
-    <Compile Include="Commands\SelectCommandBuilder.cs" />
+    <Compile Include="Batches\IBatch.cs" />
     <Compile Include="Commands\SelectStatement.cs" />
-    <Compile Include="Commands\UnitOfWork.cs" />
+    <Compile Include="Batches\Batch.cs" />
     <Compile Include="Commands\UpdateStatement.cs" />
     <Compile Include="CustomDataTypeInfo.cs" />
     <Compile Include="DateTimeExtensions.cs" />
@@ -81,6 +79,7 @@
     <Compile Include="IContext.cs" />
     <Compile Include="DataReaderExtensions.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="IFactory.cs" />
     <Compile Include="IHashCode.cs" />
     <Compile Include="Attributes\IndexAttribute.cs" />
     <Compile Include="Collections\IOrderedSet.cs" />
@@ -94,7 +93,7 @@
     <Compile Include="Attributes\PrimaryKeyAttribute.cs" />
     <Compile Include="Attributes\PrimaryKeyColumnAttribute.cs" />
     <Compile Include="Collections\Set.cs" />
-    <Compile Include="OneToManyInfo.cs" />
+    <Compile Include="ChildInfo.cs" />
     <Compile Include="PrimaryKeyInfo.cs" />
     <Compile Include="ReflectionExtensions.cs" />
     <Compile Include="SequenceInfo.cs" />

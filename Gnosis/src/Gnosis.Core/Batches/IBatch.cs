@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core.Commands
+using Gnosis.Core.Commands;
+
+namespace Gnosis.Core.Batches
 {
-    public interface IUnitOfWork
+    public interface IBatch
     {
         void Add(ICommandBuilder builder);
         void Execute();

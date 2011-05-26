@@ -7,7 +7,7 @@ namespace Gnosis.Core
 {
     public class TableInfo
     {
-        public TableInfo(string name, string defaultSort, IEnumerable<ColumnInfo> columns, IEnumerable<IndexInfo> indices, IEnumerable<OneToManyInfo> children, IEnumerable<CustomDataTypeInfo> customDataTypes)
+        public TableInfo(string name, string defaultSort, IEnumerable<ColumnInfo> columns, IEnumerable<IndexInfo> indices, IEnumerable<ChildInfo> children, IEnumerable<CustomDataTypeInfo> customDataTypes)
         {
             this.name = name;
             this.defaultSort = defaultSort;
@@ -21,7 +21,7 @@ namespace Gnosis.Core
         private readonly string defaultSort = string.Empty;
         private readonly IEnumerable<ColumnInfo> columns;
         private readonly IEnumerable<IndexInfo> indices;
-        private readonly IEnumerable<OneToManyInfo> children;
+        private readonly IEnumerable<ChildInfo> children;
         private readonly IEnumerable<CustomDataTypeInfo> customDataTypes;
 
         public string Name
@@ -44,7 +44,7 @@ namespace Gnosis.Core
             get { return indices; }
         }
 
-        public IEnumerable<OneToManyInfo> Children
+        public IEnumerable<ChildInfo> Children
         {
             get { return children; }
         }

@@ -11,11 +11,23 @@ namespace Gnosis.Core.Commands
 {
     public class CreateTableStatement : IStatement
     {
-        public CreateTableStatement(string name)
+        public CreateTableStatement(TableInfo tableInfo, object instance)
         {
-            builder = new StringBuilder();
-            builder.AppendFormat("create table if not exists {0} (", name);
+            foreach (var column in tableInfo.Columns)
+            {
+                //switch (column.
+            }
         }
+
+        public CreateTableStatement(TableInfo tableInfo, ChildInfo childInfo, object instance)
+        {
+        }
+
+        //public CreateTableStatement(string name)
+        //{
+        //    builder = new StringBuilder();
+        //    builder.AppendFormat("create table if not exists {0} (", name);
+        //}
 
         //public CreateTableStatement(CreateCommandBuilder commandBuilder, string name, Type type, object instance)
         //    : this(name)
@@ -32,17 +44,17 @@ namespace Gnosis.Core.Commands
         //    AddColumnsForRootType(itemType);
         //}
 
-        public CreateTableStatement(CreateCommandBuilder commandBuilder, TableInfo tableInfo)
-            : this(tableInfo.Name)
-        {
-        }
+        //public CreateTableStatement(CreateCommandBuilder commandBuilder, TableInfo tableInfo)
+        //    : this(tableInfo.Name)
+        //{
+        //}
 
-        public CreateTableStatement(CreateCommandBuilder commandBuilder, OneToManyInfo childInfo)
-            : this(childInfo.TableName)
-        {
-        }
+        //public CreateTableStatement(CreateCommandBuilder commandBuilder, OneToManyInfo childInfo)
+        //    : this(childInfo.TableName)
+        //{
+        //}
 
-        private readonly CreateCommandBuilder commandBuilder;
+        //private readonly CreateCommandBuilder commandBuilder;
         private readonly StringBuilder builder;
         private bool hasColumns;
 
@@ -109,6 +121,8 @@ namespace Gnosis.Core.Commands
         }
 
         #endregion
+
+        /*
 
         private void AddColumnsForOneToMany(OneToManyAttribute oneToMany, Type collectionType, Type itemType)
         {
@@ -262,6 +276,8 @@ namespace Gnosis.Core.Commands
                 }
             }
         }
+
+        */
 
         public CreateTableStatement PrimaryKeyInteger(string name)
         {
