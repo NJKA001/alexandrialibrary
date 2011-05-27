@@ -17,6 +17,11 @@ namespace Gnosis.Core
         private readonly IEnumerable<ColumnInfo> columns;
         private readonly PropertyInfo property;
 
+        private string columnList
+        {
+            get { return columns.Select(x => x.Name).Aggregate((result, name) => result + ", " + name); }
+        }
+
         public IEnumerable<ColumnInfo> Columns
         {
             get { return columns; }
@@ -37,6 +42,11 @@ namespace Gnosis.Core
                 values.Add(column.Name, column.GetValue(propertyValue));
 
             return values;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("CUSTOM DATA TYPE {0} ({1})", property.PropertyType.Name, columnList);
         }
     }
 }

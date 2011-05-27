@@ -16,10 +16,10 @@ namespace Gnosis.Core
         {
             this.tableName = oneToManyAttribute.TableName;
             this.property = property;
-            this.primaryKey = oneToManyAttribute.HasPrimaryKey ? new PrimaryKeyInfo(oneToManyAttribute.PrimaryKeyName, oneToManyAttribute.PrimaryKeyType, oneToManyAttribute.PrimaryKeyIsAutoIncrement) : null;
+            this.primaryKey = (oneToManyAttribute.HasPrimaryKey && !BaseType.IsEntityType()) ? new PrimaryKeyInfo(oneToManyAttribute.PrimaryKeyName, oneToManyAttribute.PrimaryKeyType, oneToManyAttribute.PrimaryKeyIsAutoIncrement) : null;
             this.foreignKey = oneToManyAttribute.HasForeignKey ? new ForeignKeyInfo(oneToManyAttribute.ForeignKeyName, oneToManyAttribute.ForeignKeyType) : null;
             this.sequence = oneToManyAttribute.HasSequence ? new SequenceInfo(oneToManyAttribute.SequenceName, oneToManyAttribute.SequenceType) : null;
-            this.table = ChildType.GetTableInfo();
+            this.table = BaseType.GetTableInfo();
             GetIndices();
         }
 
@@ -30,7 +30,7 @@ namespace Gnosis.Core
             this.primaryKey = primaryKey;
             this.foreignKey = foreignKey;
             this.sequence = sequence;
-            this.table = ChildType.GetTableInfo();
+            this.table = BaseType.GetTableInfo();
             GetIndices();
         }
 
@@ -74,12 +74,12 @@ namespace Gnosis.Core
             get { return sequence; }
         }
 
-        public Type ChildType
+        public Type BaseType
         {
             get { return property.PropertyType.GetGenericArguments()[0]; }
         }
 
-        public TableInfo ChildTable
+        public TableInfo BaseTable
         {
             get { return table; }
         }
@@ -100,6 +100,11 @@ namespace Gnosis.Core
             {
                 return new List<CollectionItemInfo>();
             }
+        }
+
+        public override string ToString()
+        {
+            return string.Format("CHILD {0} ({1})", tableName, BaseType.Name);
         }
     }
 }

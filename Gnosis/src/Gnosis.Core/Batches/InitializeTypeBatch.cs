@@ -15,30 +15,40 @@ namespace Gnosis.Core.Batches
         {
             var tableInfo = type.GetTableInfo();
 
-            Add(GetRootCommandBuilder(tableInfo, type.GetDefaultInstance()));
+            AddRootCommandBuilder(tableInfo);
+            AddChildrenCommandBuilders(tableInfo.Children);
+        }
+
+        private void AddRootCommandBuilder(TableInfo tableInfo)
+        {
+            var builder = new CommandBuilder();
+            builder.AddStatement(new CreateTableStatement(tableInfo));
             
-            foreach (var childInfo in tableInfo.Children)
+            AddIndexStatements(builder, tableInfo.Name, tableInfo.Indices);
+            Add(builder);
+        }
+
+        private void AddChildrenCommandBuilders(IEnumerable<ChildInfo> children)
+        {
+            foreach (var childInfo in children)
             {
-                Add(GetChildCommandBuilder(tableInfo, childInfo));
+                var builder = new CommandBuilder();
+                builder.AddStatement(new CreateTableStatement(childInfo));
+
+                AddIndexStatements(builder, childInfo.TableName, childInfo.ForeignIndices);
+                AddIndexStatements(builder, childInfo.TableName, childInfo.BaseTable.Indices);
+                Add(builder);
+
+                AddChildrenCommandBuilders(childInfo.BaseTable.Children);
             }
         }
 
-        private static ICommandBuilder GetRootCommandBuilder(TableInfo tableInfo, object instance)
+        private void AddIndexStatements(ICommandBuilder builder, string tableName, IEnumerable<IndexInfo> indices)
         {
-            var builder = new CommandBuilder();
-            builder.AddStatement(new CreateTableStatement(tableInfo, instance));
-            foreach (var indexInfo in tableInfo.Indices)
+            foreach (var indexInfo in indices)
             {
-                builder.AddStatement(new CreateIndexStatement(tableInfo, indexInfo));
+                builder.AddStatement(new CreateIndexStatement(tableName, indexInfo));
             }
-            return builder;
-        }
-
-        private static ICommandBuilder GetChildCommandBuilder(TableInfo tableInfo, ChildInfo childInfo)
-        {
-            var builder = new CommandBuilder();
-            builder.AddStatement(new CreateTableStatement(tableInfo, childInfo, childInfo.ChildType.GetDefaultInstance()));
-            return builder;
         }
     }
 }

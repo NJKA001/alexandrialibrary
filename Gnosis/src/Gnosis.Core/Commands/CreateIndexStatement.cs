@@ -7,12 +7,12 @@ namespace Gnosis.Core.Commands
 {
     public class CreateIndexStatement : IStatement
     {
-        public CreateIndexStatement(TableInfo tableInfo, IndexInfo indexInfo)
+        public CreateIndexStatement(string tableName, IndexInfo indexInfo)
         {
             var indexType = indexInfo.IsUnique ? "unique index" : "index";
 
             builder = new StringBuilder();
-            builder.AppendFormat("create {0} if not exists {1} on {2} (", indexType, indexInfo.Name, tableInfo.Name);
+            builder.AppendFormat("create {0} if not exists {1} on {2} (", indexType, indexInfo.Name, tableName);
 
             foreach (var column in indexInfo.Columns)
                 Column(column);
@@ -27,7 +27,7 @@ namespace Gnosis.Core.Commands
                 builder.Append(", ");
         }
 
-        public CreateIndexStatement Column(string name)
+        private CreateIndexStatement Column(string name)
         {
             AppendPrefix();
 
@@ -37,7 +37,7 @@ namespace Gnosis.Core.Commands
             return this;
         }
 
-        public CreateIndexStatement AscendingColumn(string name)
+        private CreateIndexStatement AscendingColumn(string name)
         {
             AppendPrefix();
 
@@ -47,7 +47,7 @@ namespace Gnosis.Core.Commands
             return this;
         }
 
-        public CreateIndexStatement DescendingColumn(string name)
+        private CreateIndexStatement DescendingColumn(string name)
         {
             AppendPrefix();
 

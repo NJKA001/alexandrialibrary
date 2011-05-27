@@ -34,6 +34,11 @@ namespace Gnosis.Core
         private readonly bool isUnique;
         private readonly IEnumerable<string> columns;
 
+        private string columnList
+        {
+            get { return columns.Aggregate((result, column) => result + ", " + column); }
+        }
+
         public string Name
         {
             get { return name; }
@@ -47,6 +52,14 @@ namespace Gnosis.Core
         public IEnumerable<string> Columns
         {
             get { return columns; }
+        }
+
+        public override string ToString()
+        {
+            if (isUnique)
+                return string.Format("UNIQUE INDEX {0} ({1})", name, columnList);
+            else
+                return string.Format("INDEX {0} ({1})", name, columnList);
         }
     }
 }

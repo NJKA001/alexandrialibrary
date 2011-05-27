@@ -11,57 +11,45 @@ namespace Gnosis.Core.Commands
 {
     public class CreateTableStatement : IStatement
     {
-        public CreateTableStatement(TableInfo tableInfo, object instance)
+        private CreateTableStatement(string name)
         {
-            builder = new StringBuilder();
-            builder.AppendFormat("create table if not exists {0} (", tableInfo.Name);
+            builder.AppendFormat("create table if not exists {0} (", name);
+        }
 
-            foreach (var column in tableInfo.Columns)
+        public CreateTableStatement(TableInfo tableInfo)
+            : this(tableInfo.Name)
+        {
+            AddColumns(tableInfo.Columns);
+
+            foreach (var customDataType in tableInfo.CustomDataTypes)
+                AddColumns(customDataType.Columns);
+        }
+
+        public CreateTableStatement(ChildInfo childInfo)
+            : this(childInfo.TableName)
+        {
+            if (childInfo.PrimaryKey != null)
             {
-                //switch (column.
+                PrimaryKey(childInfo.PrimaryKey.Type, childInfo.PrimaryKey.Name, childInfo.PrimaryKey.IsAutoIncrement);
             }
+            if (childInfo.ForeignKey != null)
+            {
+                Column(childInfo.ForeignKey.Type, childInfo.ForeignKey.Name);
+            }
+            if (childInfo.Sequence != null)
+            {
+                Column(childInfo.Sequence.Type, childInfo.Sequence.Name);
+            }
+
+            AddColumns(childInfo.BaseTable.Columns);
+            foreach (var customDataType in childInfo.BaseTable.CustomDataTypes)
+                AddColumns(customDataType.Columns);
         }
 
-        public CreateTableStatement(TableInfo tableInfo, ChildInfo childInfo, object instance)
-        {
-        }
-
-        //public CreateTableStatement(string name)
-        //{
-        //    builder = new StringBuilder();
-        //    builder.AppendFormat("create table if not exists {0} (", name);
-        //}
-
-        //public CreateTableStatement(CreateCommandBuilder commandBuilder, string name, Type type, object instance)
-        //    : this(name)
-        //{
-        //    this.commandBuilder = commandBuilder;
-        //    AddColumnsForRootType(type, instance);
-        //}
-
-        //private CreateTableStatement(CreateCommandBuilder commandBuilder, OneToManyAttribute oneToMany, Type collectionType, Type itemType)
-        //    : this(oneToMany.TableName)
-        //{
-        //    this.commandBuilder = commandBuilder;
-        //    AddColumnsForOneToMany(oneToMany, collectionType, itemType);
-        //    AddColumnsForRootType(itemType);
-        //}
-
-        //public CreateTableStatement(CreateCommandBuilder commandBuilder, TableInfo tableInfo)
-        //    : this(tableInfo.Name)
-        //{
-        //}
-
-        //public CreateTableStatement(CreateCommandBuilder commandBuilder, OneToManyInfo childInfo)
-        //    : this(childInfo.TableName)
-        //{
-        //}
-
-        //private readonly CreateCommandBuilder commandBuilder;
-        private readonly StringBuilder builder;
+        private readonly StringBuilder builder = new StringBuilder();
         private bool hasColumns;
 
-        #region Private Helper Methods
+        #region Column Helper Methods
 
         private void AppendPrefix()
         {
@@ -121,6 +109,149 @@ namespace Gnosis.Core.Commands
             builder.AppendFormat("{0} TEXT NOT NULL DEFAULT '{1}'", name, defaultString);
 
             hasColumns = true;
+        }
+
+        private void Column(Type type, string name)
+        {
+            Column(type, name, null);
+        }
+
+        private void Column(Type type, string name, object defaultValue)
+        {
+            var affinity = type.GetTypeAffinity();
+
+            switch (affinity)
+            {
+                case TypeAffinity.Integer:
+                    AddIntegerColumn(name, defaultValue);
+                    break;
+                case TypeAffinity.None:
+                    AddBlobColumn(name, defaultValue);
+                    break;
+                case TypeAffinity.Numeric:
+                    AddNumericColumn(name, defaultValue);
+                    break;
+                case TypeAffinity.Real:
+                    AddRealColumn(name, defaultValue);
+                    break;
+                case TypeAffinity.Text:
+                    AddTextColumn(name, defaultValue);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void BlobColumn(string name, object defaultValue)
+        {
+            AddBlobColumn(name, defaultValue);
+        }
+
+        private void IntegerColumn(string name, object defaultValue)
+        {
+            AddIntegerColumn(name, defaultValue);
+        }
+
+        private void RealColumn(string name, object defaultValue)
+        {
+            AddRealColumn(name, defaultValue);
+        }
+
+        private void TextColumn(string name, object defaultValue)
+        {
+            AddTextColumn(name, defaultValue);
+        }
+
+        #endregion
+
+        #region Primary Key Helper Methods
+
+        private void PrimaryKey(Type type, string name, bool isAutoIncrement)
+        {
+            switch (type.GetTypeAffinity())
+            {
+                case TypeAffinity.Integer:
+                    if (isAutoIncrement)
+                        PrimaryKeyIntegerAutoIncrement(name);
+                    else
+                        PrimaryKeyInteger(name);
+                    break;
+                case TypeAffinity.Numeric:
+                    PrimaryKeyNumeric(name);
+                    break;
+                case TypeAffinity.Real:
+                    PrimaryKeyReal(name);
+                    break;
+                case TypeAffinity.Text:
+                    PrimaryKeyText(name);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void PrimaryKeyInteger(string name)
+        {
+            AppendPrefix();
+
+            builder.AppendFormat("{0} INTEGER PRIMARY KEY", name);
+
+            hasColumns = true;
+        }
+
+        private void PrimaryKeyIntegerAutoIncrement(string name)
+        {
+            AppendPrefix();
+
+            builder.AppendFormat("{0} INTEGER PRIMARY KEY AUTOINCREMENT", name);
+
+            hasColumns = true;
+        }
+
+        private void PrimaryKeyNumeric(string name)
+        {
+            AppendPrefix();
+
+            builder.AppendFormat("{0} NUMERIC PRIMARY KEY NOT NULL", name);
+
+            hasColumns = true;
+        }
+
+        private void PrimaryKeyReal(string name)
+        {
+            AppendPrefix();
+
+            builder.AppendFormat("{0} REAL PRIMARY KEY NOT NULL", name);
+
+            hasColumns = true;
+        }
+
+        private void PrimaryKeyText(string name)
+        {
+            AppendPrefix();
+
+            builder.AppendFormat("{0} TEXT PRIMARY KEY NOT NULL", name);
+
+            hasColumns = true;
+        }
+
+        #endregion
+
+        #region TableInfo Helper Methods
+
+        private void AddColumns(IEnumerable<ColumnInfo> columns)
+        {
+            foreach (var column in columns)
+            {
+                if (column.IsPrimaryKey)
+                {
+                    PrimaryKey(column.ColumnType, column.Name, column.IsAutoIncrement);
+                }
+                else
+                {
+                    Column(column.ColumnType, column.Name, column.DefaultValue);
+                }
+            }
         }
 
         #endregion
@@ -281,96 +412,6 @@ namespace Gnosis.Core.Commands
         }
 
         */
-
-        public CreateTableStatement PrimaryKeyInteger(string name)
-        {
-            AppendPrefix();
-
-            builder.AppendFormat("{0} INTEGER PRIMARY KEY", name);
-
-            hasColumns = true;
-
-            return this;
-        }
-
-        public CreateTableStatement PrimaryKeyIntegerAutoIncrement(string name)
-        {
-            AppendPrefix();
-
-            builder.AppendFormat("{0} INTEGER PRIMARY KEY AUTOINCREMENT", name);
-
-            hasColumns = true;
-
-            return this;
-        }
-
-        public CreateTableStatement PrimaryKeyText(string name)
-        {
-            AppendPrefix();
-
-            builder.AppendFormat("{0} TEXT PRIMARY KEY NOT NULL", name);
-
-            hasColumns = true;
-
-            return this;
-        }
-
-        public CreateTableStatement Column(Type type, string name)
-        {
-            return Column(type, name, null);
-        }
-
-        public CreateTableStatement Column(Type type, string name, object defaultValue)
-        {
-            var affinity = type.GetTypeAffinity();
-
-            switch (affinity)
-            {
-                case TypeAffinity.Integer:
-                    AddIntegerColumn(name, defaultValue);
-                    break;
-                case TypeAffinity.None:
-                    AddBlobColumn(name, defaultValue);
-                    break;
-                case TypeAffinity.Numeric:
-                    AddNumericColumn(name, defaultValue);
-                    break;
-                case TypeAffinity.Real:
-                    AddRealColumn(name, defaultValue);
-                    break;
-                case TypeAffinity.Text:
-                    AddTextColumn(name, defaultValue);
-                    break;
-                default:
-                    break;
-            }
-
-            return this;
-        }
-
-        public CreateTableStatement BlobColumn(string name, object defaultValue)
-        {
-            AddBlobColumn(name, defaultValue);
-            return this;
-        }
-
-        public CreateTableStatement IntegerColumn(string name, object defaultValue)
-        {
-            AddIntegerColumn(name, defaultValue);
-            return this;
-        }
-
-        public CreateTableStatement RealColumn(string name, object defaultValue)
-        {
-            AddRealColumn(name, defaultValue);
-            return this;
-        }
-
-        public CreateTableStatement TextColumn(string name, object defaultValue)
-        {
-            AddTextColumn(name, defaultValue);
-            return this;
-        }
 
         public override string ToString()
         {

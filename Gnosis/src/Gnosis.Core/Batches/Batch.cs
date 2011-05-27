@@ -27,6 +27,7 @@ namespace Gnosis.Core.Batches
         public void Execute()
         {
             IDbTransaction transaction = null;
+            var isCommited = false;
             try
             {
                 using (var connection = getConnection())
@@ -41,12 +42,14 @@ namespace Gnosis.Core.Batches
                                 command.ExecuteNonQuery();
                             }
                         }
+                        transaction.Commit();
+                        isCommited = true;
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                if (transaction != null)
+                if (!isCommited && transaction != null && transaction.Connection != null)
                     transaction.Rollback();
 
                 throw;

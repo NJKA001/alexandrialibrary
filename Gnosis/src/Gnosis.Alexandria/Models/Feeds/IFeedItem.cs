@@ -9,7 +9,6 @@ using Gnosis.Core.Collections;
 
 namespace Gnosis.Alexandria.Models.Feeds
 {
-    [Table("FeedItem")]
     [UniqueIndex("FeedItem_Parent_FeedItemIdentifier", "Parent", "FeedItemIdentifier")]
     [Index("FeedItem_Title", "Title")]
     [Index("FeedItem_Authors", "Authors")]

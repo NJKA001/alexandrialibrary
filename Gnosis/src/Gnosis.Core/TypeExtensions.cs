@@ -34,14 +34,10 @@ namespace Gnosis.Core
                 return TypeAffinity.Numeric;
         }
 
-        public static object GetDefaultInstance(this Type type)
-        {
-            return null;
-        }
-
         public static TableInfo GetTableInfo(this Type type)
         {
             TableAttribute table = null;
+            TableIgnoreAttribute tableIgnore = null;
             DefaultSortAttribute defaultSort = null;
 
             foreach (var attribute in type.GetCustomAttributes(true))
@@ -54,15 +50,31 @@ namespace Gnosis.Core
                 {
                     defaultSort = attribute as DefaultSortAttribute;
                 }
+                else if (attribute is TableIgnoreAttribute)
+                {
+                    tableIgnore = attribute as TableIgnoreAttribute;
+                }
             }
 
-            if (table != null)
+            if (tableIgnore == null)
             {
+                var tableName = table != null ? table.Name : GetTableName(type);
                 var defaultSortExpression = defaultSort != null ? defaultSort.Expression : string.Empty;
-                new TableInfo(table.Name, defaultSortExpression, type.GetColumnInfo(), type.GetIndexInfo(), type.GetOneToManyInfo(), type.GetCustomDataTypeInfo());
+                return new TableInfo(tableName, defaultSortExpression, type.GetColumnInfo(), type.GetIndexInfo(), type.GetChildInfo(), type.GetCustomDataTypeInfo());
             }
 
             return null;
+        }
+
+        private static string GetTableName(Type type)
+        {
+            if (type.IsInterface)
+            {
+                if (type.Name.StartsWith("I") && type.Name.Length > 1)
+                    return type.Name.Substring(1);
+            }
+
+            return type.Name;
         }
 
         public static IEnumerable<IndexInfo> GetIndexInfo(this Type type)
@@ -90,13 +102,12 @@ namespace Gnosis.Core
             return indexAttributes;
         }
 
-        public static IEnumerable<ChildInfo> GetOneToManyInfo(this Type type)
+        public static IEnumerable<ChildInfo> GetChildInfo(this Type type)
         {
             var oneToManyInfo = new List<ChildInfo>();
 
             foreach (var oneToMany in type.GetOneToManyAttributes())
             {
-
                 oneToManyInfo.Add(new ChildInfo(oneToMany.Item1, oneToMany.Item2));
             }
 
@@ -121,7 +132,7 @@ namespace Gnosis.Core
         {
             foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
-                foreach (var attribute in type.GetCustomAttributes(true))
+                foreach (var attribute in property.PropertyType.GetCustomAttributes(true))
                 {
                     if (attribute is CustomDataTypeAttribute)
                     {
@@ -131,10 +142,8 @@ namespace Gnosis.Core
             }
         }
 
-        public static IEnumerable<Tuple<OneToManyAttribute, PropertyInfo>> GetOneToManyAttributes(this Type type)
+        private static void AddOneToManyAttributes(Type type, List<Tuple<OneToManyAttribute, PropertyInfo>> oneToManyAttributes)
         {
-            var oneToManyAttributes = new List<Tuple<OneToManyAttribute, PropertyInfo>>();
-
             foreach (var property in type.GetProperties(BindingFlags.Instance | BindingFlags.Public))
             {
                 foreach (var attribute in property.GetCustomAttributes(true))
@@ -142,6 +151,18 @@ namespace Gnosis.Core
                     if (attribute is OneToManyAttribute)
                         oneToManyAttributes.Add(new Tuple<OneToManyAttribute, PropertyInfo>(attribute as OneToManyAttribute, property));
                 }
+            }
+        }
+
+        public static IEnumerable<Tuple<OneToManyAttribute, PropertyInfo>> GetOneToManyAttributes(this Type type)
+        {
+            var oneToManyAttributes = new List<Tuple<OneToManyAttribute, PropertyInfo>>();
+
+            AddOneToManyAttributes(type, oneToManyAttributes);
+
+            foreach (var interfaceType in type.GetInterfaces())
+            {
+                AddOneToManyAttributes(interfaceType, oneToManyAttributes);
             }
 
             return oneToManyAttributes;
@@ -155,31 +176,32 @@ namespace Gnosis.Core
                 PrimaryKeyColumnAttribute primaryKeyColumnAttribute = null;
                 var ignore = false;
 
-                foreach (var propertyAttribute in property.GetCustomAttributes(true))
+                if (property.PropertyType.IsCustomDataType())
                 {
-                    if (propertyAttribute is ColumnIgnoreAttribute)
+                    ignore = true;
+                }
+                else
+                {
+                    foreach (var propertyAttribute in property.GetCustomAttributes(true))
                     {
-                        ignore = true;
-                        break;
+                        if (propertyAttribute is ColumnIgnoreAttribute)
+                        {
+                            ignore = true;
+                            break;
+                        }
+
+                        if (propertyAttribute is OneToManyAttribute)
+                        {
+                            ignore = true;
+                            break;
+                        }
+
+                        if (propertyAttribute is ColumnAttribute)
+                            columnAttribute = propertyAttribute as ColumnAttribute;
+
+                        if (propertyAttribute is PrimaryKeyColumnAttribute)
+                            primaryKeyColumnAttribute = propertyAttribute as PrimaryKeyColumnAttribute;
                     }
-
-                    if (propertyAttribute is OneToManyAttribute)
-                    {
-                        ignore = true;
-                        break;
-                    }
-
-                    if (property.PropertyType.IsCustomDataType())
-                    {
-                        ignore = true;
-                        break;
-                    }
-
-                    if (propertyAttribute is ColumnAttribute)
-                        columnAttribute = propertyAttribute as ColumnAttribute;
-
-                    if (propertyAttribute is PrimaryKeyColumnAttribute)
-                        primaryKeyColumnAttribute = propertyAttribute as PrimaryKeyColumnAttribute;
                 }
 
                 if (!ignore)
@@ -187,7 +209,8 @@ namespace Gnosis.Core
                     if (columnAttribute != null)
                     {
                         var name = !string.IsNullOrEmpty(columnAttribute.Name) ? columnAttribute.Name : property.Name;
-                        columnInfo.Add(new ColumnInfo(name, property));
+                        var defaultValue = columnAttribute.DefaultValue;
+                        columnInfo.Add(new ColumnInfo(name, property, defaultValue));
                     }
                     else if (primaryKeyColumnAttribute != null)
                     {
@@ -196,7 +219,7 @@ namespace Gnosis.Core
                     }
                     else
                     {
-                        columnInfo.Add(new ColumnInfo(property.Name, property));
+                        columnInfo.Add(new ColumnInfo(property.Name, property, null));
                     }
                 }
             }
@@ -346,7 +369,7 @@ namespace Gnosis.Core
             foreach (var childInfo in self)
             {
                 var itemInfos = childInfo.GetItemInfo(parent);
-                if (childInfo.ChildType.IsEntityType())
+                if (childInfo.BaseType.IsEntityType())
                 {
                     IEntity entity = null;
                     foreach (var itemInfo in itemInfos)
@@ -372,7 +395,7 @@ namespace Gnosis.Core
             foreach (var child in self)
             {
                 var itemInfos = child.GetItemInfo(parent);
-                if (child.ChildType.IsEntityType())
+                if (child.BaseType.IsEntityType())
                 {
                     IEntity entity = null;
                     foreach (var itemInfo in itemInfos)
@@ -494,14 +517,14 @@ namespace Gnosis.Core
                 builder.AddParameter(parameterName, itemInfo.Sequence);
             }
 
-            foreach (var column in childInfo.ChildTable.Columns)
+            foreach (var column in childInfo.BaseTable.Columns)
             {
                 var parameterName = builder.GetParameterName();
                 statement.Add(column.Name, parameterName);
                 builder.AddParameter(parameterName, column.GetValue(itemInfo.Item));
             }
 
-            foreach (var customDataType in childInfo.ChildTable.CustomDataTypes)
+            foreach (var customDataType in childInfo.BaseTable.CustomDataTypes)
             {
                 foreach (var column in customDataType.Columns)
                 {
@@ -514,7 +537,7 @@ namespace Gnosis.Core
             builder.AddStatement(statement);
             unitOfWork.Add(builder);
 
-            childInfo.ChildTable.Children.AddChildSaveStatements(unitOfWork, self);
+            childInfo.BaseTable.Children.AddChildSaveStatements(unitOfWork, self);
         }
 
         public static void AddEntityUpdateStatement<T>(this T self, IBatch unitOfWork)
@@ -572,14 +595,14 @@ namespace Gnosis.Core
                 builder.AddParameter(parameterName, itemInfo.Sequence);
             }
 
-            foreach (var column in childInfo.ChildTable.Columns)
+            foreach (var column in childInfo.BaseTable.Columns)
             {
                 var parameterName = builder.GetParameterName();
                 statement.Set(column.Name, parameterName);
                 builder.AddParameter(parameterName, column.GetValue(itemInfo.Item));
             }
 
-            foreach (var customDataType in childInfo.ChildTable.CustomDataTypes)
+            foreach (var customDataType in childInfo.BaseTable.CustomDataTypes)
             {
                 foreach (var column in customDataType.Columns)
                 {
@@ -592,7 +615,7 @@ namespace Gnosis.Core
             builder.AddStatement(statement);
             unitOfWork.Add(builder);
 
-            childInfo.ChildTable.Children.AddChildSaveStatements(unitOfWork, self);
+            childInfo.BaseTable.Children.AddChildSaveStatements(unitOfWork, self);
         }
 
         public static void AddEntityDeleteStatement<T>(this T self, IBatch unitOfWork)
@@ -628,7 +651,7 @@ namespace Gnosis.Core
             builder.AddStatement(statement);
             unitOfWork.Add(builder);
 
-            childInfo.ChildTable.Children.AddChildDeleteStatements(unitOfWork, self);
+            childInfo.BaseTable.Children.AddChildDeleteStatements(unitOfWork, self);
         }
 
         public static bool IsCustomDataType(this Type type)

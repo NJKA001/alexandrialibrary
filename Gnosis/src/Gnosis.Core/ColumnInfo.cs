@@ -8,21 +8,27 @@ namespace Gnosis.Core
 {
     public class ColumnInfo
     {
-        public ColumnInfo(string name, PropertyInfo property)
-            : this(name, property, false, false)
+        public ColumnInfo(string name, PropertyInfo property, object defaultValue)
         {
+            this.name = name;
+            this.property = property;
+            this.defaultValue = defaultValue;
+            this.isPrimaryKey = false;
+            this.isAutoIncrement = false;
         }
 
         public ColumnInfo(string name, PropertyInfo property, bool isPrimaryKey, bool isAutoIncrement)
         {
             this.name = name;
             this.property = property;
+            this.defaultValue = null;
             this.isPrimaryKey = isPrimaryKey;
             this.isAutoIncrement = isAutoIncrement;
         }
 
         private readonly string name;
         private readonly PropertyInfo property;
+        private readonly object defaultValue;
         private readonly bool isPrimaryKey;
         private readonly bool isAutoIncrement;
 
@@ -46,6 +52,16 @@ namespace Gnosis.Core
             get { return !property.CanWrite; }
         }
 
+        public Type ColumnType
+        {
+            get { return property.PropertyType; }
+        }
+
+        public object DefaultValue
+        {
+            get { return defaultValue; }
+        }
+
         public object GetValue(object instance)
         {
             return property.GetValue(instance, null);
@@ -57,6 +73,14 @@ namespace Gnosis.Core
             {
                 property.SetValue(instance, value, null);
             }
+        }
+
+        public override string ToString()
+        {
+            if (isPrimaryKey)
+                return string.Format("PRIMARY KEY {0} ({1})", name, ColumnType);
+            else
+                return string.Format("COLUMN {0} ({1})", name, ColumnType);
         }
     }
 }

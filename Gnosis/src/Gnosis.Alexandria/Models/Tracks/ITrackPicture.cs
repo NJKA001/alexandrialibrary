@@ -9,7 +9,7 @@ using Gnosis.Core.Attributes;
 namespace Gnosis.Alexandria.Models.Tracks
 {
     [Table("TrackPicture")]
-    [UniqueIndex("TrackPicture_Track_Description", "Track", "Descption")]
+    [UniqueIndex("TrackPicture_Track_Description", "Track", "Description")]
     [Index("TrackPicture_Track_PictureType", "Track", "PictureType")]
     public interface ITrackPicture : IEntity
     {
