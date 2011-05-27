@@ -50,7 +50,10 @@
     <Compile Include="Attributes\TableCheckConstraintAttribute.cs" />
     <Compile Include="Attributes\TableConstraintAttribute.cs" />
     <Compile Include="Attributes\TableIgnoreAttribute.cs" />
+    <Compile Include="Batches\DeleteEntitiesBatch.cs" />
     <Compile Include="Batches\InitializeTypeBatch.cs" />
+    <Compile Include="Batches\SaveEntitiesBatch.cs" />
+    <Compile Include="Batches\SelectEntitiesBatch.cs" />
     <Compile Include="Collections\CollectionItemInfo.cs" />
     <Compile Include="Collections\CollectionItemState.cs" />
     <Compile Include="Collections\EntitySet.cs" />
@@ -85,7 +88,6 @@
     <Compile Include="Attributes\IndexAttribute.cs" />
     <Compile Include="Collections\IOrderedSet.cs" />
     <Compile Include="Collections\ISet.cs" />
-    <Compile Include="IndexInfo.cs" />
     <Compile Include="ITimeStamp.cs" />
     <Compile Include="IValue.cs" />
     <Compile Include="Attributes\KeyAttribute.cs" />
@@ -96,6 +98,8 @@
     <Compile Include="Collections\Set.cs" />
     <Compile Include="ChildInfo.cs" />
     <Compile Include="PrimaryKeyInfo.cs" />
+    <Compile Include="Queries\IQuery.cs" />
+    <Compile Include="Queries\Query.cs" />
     <Compile Include="ReflectionExtensions.cs" />
     <Compile Include="SequenceInfo.cs" />
     <Compile Include="StreamExtensions.cs" />

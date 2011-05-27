@@ -26,5 +26,7 @@ namespace Gnosis.Core
         {
             get { return type; }
         }
+
+        public static readonly ForeignKeyInfo Default = new ForeignKeyInfo("Parent", typeof(Guid));
     }
 }

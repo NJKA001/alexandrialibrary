@@ -25,5 +25,7 @@ namespace Gnosis.Core
         {
             get { return type; }
         }
+
+        public static readonly SequenceInfo Default = new SequenceInfo("Sequence", typeof(int));
     }
 }

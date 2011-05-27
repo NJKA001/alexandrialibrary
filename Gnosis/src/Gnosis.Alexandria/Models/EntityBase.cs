@@ -71,14 +71,14 @@ namespace Gnosis.Alexandria.Models
             get { return timeStamp; }
         }
 
-        public bool IsNew
+        public bool IsNew()
         {
-            get { return isNew; }
+            return isNew;
         }
 
-        public bool IsChanged
+        public bool IsChanged()
         {
-            get { return isChanged; }
+            return isChanged;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

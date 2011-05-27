@@ -20,7 +20,6 @@ namespace Gnosis.Core
             this.foreignKey = oneToManyAttribute.HasForeignKey ? new ForeignKeyInfo(oneToManyAttribute.ForeignKeyName, oneToManyAttribute.ForeignKeyType) : null;
             this.sequence = oneToManyAttribute.HasSequence ? new SequenceInfo(oneToManyAttribute.SequenceName, oneToManyAttribute.SequenceType) : null;
             this.table = BaseType.GetTableInfo();
-            GetIndices();
         }
 
         public ChildInfo(string tableName, PropertyInfo property, PrimaryKeyInfo primaryKey, ForeignKeyInfo foreignKey, SequenceInfo sequence)
@@ -31,7 +30,6 @@ namespace Gnosis.Core
             this.foreignKey = foreignKey;
             this.sequence = sequence;
             this.table = BaseType.GetTableInfo();
-            GetIndices();
         }
 
         private readonly string tableName;
@@ -40,19 +38,6 @@ namespace Gnosis.Core
         private readonly ForeignKeyInfo foreignKey;
         private readonly SequenceInfo sequence;
         private readonly TableInfo table;
-        private readonly IList<IndexInfo> foreignIndices = new List<IndexInfo>();
-
-        private void GetIndices()
-        {
-            foreach (var attribute in property.GetCustomAttributes(true))
-            {
-                var indexAttribute = attribute as ForeignIndexAttribute;
-                if (indexAttribute != null)
-                {
-                    foreignIndices.Add(new IndexInfo(indexAttribute));
-                }
-            }
-        }
 
         public string TableName
         {
@@ -82,11 +67,6 @@ namespace Gnosis.Core
         public TableInfo BaseTable
         {
             get { return table; }
-        }
-
-        public IEnumerable<IndexInfo> ForeignIndices
-        {
-            get { return foreignIndices; }
         }
 
         public IEnumerable<CollectionItemInfo> GetItemInfo(object instance)

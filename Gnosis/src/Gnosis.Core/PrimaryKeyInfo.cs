@@ -32,5 +32,7 @@ namespace Gnosis.Core
         {
             get { return isAutoIncrement; }
         }
+
+        public static readonly PrimaryKeyInfo Default = new PrimaryKeyInfo("Id", typeof(Guid), false);
     }
 }

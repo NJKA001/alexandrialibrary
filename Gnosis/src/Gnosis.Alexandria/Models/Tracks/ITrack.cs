@@ -6,26 +6,26 @@ using Gnosis.Core.Collections;
 
 namespace Gnosis.Alexandria.Models.Tracks
 {
-    [Table("Track")]
-    [UniqueIndex("Track_Location", "Location")]
+    //[Table("Track")]
+    //[UniqueIndex("Track_Location", "Location")]
     
-    [Index("Track_Title", "Title")]
-    [Index("Track_TitleSort", "TitleSort")]
-    [Index("Track_Album", "Album")]
-    [Index("Track_AlbumSort", "AlbumSort")]
-    [Index("Track_Artists", "Artists")]
-    [Index("Track_ArtistsSort", "ArtistsSort")]
-    [Index("Track_Composers", "Composers")]
-    [Index("Track_Conductors", "Conductors")]
-    [Index("Track_Genres", "Genres")]
-    [Index("Track_Moods", "Moods")]
-    [Index("Track_RecordingDate", "RecordingDate")]
-    [Index("Track_ReleaseDate", "ReleaseDate")]
-    [Index("Track_OriginalTitle", "OriginalTitle")]
-    [Index("Track_OriginalReleaseDate", "OriginalReleaseDate")]
+    //[Index("Track_Title", "Title")]
+    //[Index("Track_TitleSort", "TitleSort")]
+    //[Index("Track_Album", "Album")]
+    //[Index("Track_AlbumSort", "AlbumSort")]
+    //[Index("Track_Artists", "Artists")]
+    //[Index("Track_ArtistsSort", "ArtistsSort")]
+    //[Index("Track_Composers", "Composers")]
+    //[Index("Track_Conductors", "Conductors")]
+    //[Index("Track_Genres", "Genres")]
+    //[Index("Track_Moods", "Moods")]
+    //[Index("Track_RecordingDate", "RecordingDate")]
+    //[Index("Track_ReleaseDate", "ReleaseDate")]
+    //[Index("Track_OriginalTitle", "OriginalTitle")]
+    //[Index("Track_OriginalReleaseDate", "OriginalReleaseDate")]
 
-    [Index("Track_Sort", "Artists", "ReleaseDate", "Album", "DiscNumber", "TrackNumber")]
-    [DefaultSort("Artists ASC, ReleaseDate ASC, Album ASC, DiscNumber ASC, TrackNumber ASC")]
+    //[Index("Track_Sort", "Artists", "ReleaseDate", "Album", "DiscNumber", "TrackNumber")]
+    //[DefaultSort("Artists ASC, ReleaseDate ASC, Album ASC, DiscNumber ASC, TrackNumber ASC")]
     public interface ITrack :
         IEntity
     {

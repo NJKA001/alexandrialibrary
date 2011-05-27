@@ -69,7 +69,7 @@ namespace Gnosis.Alexandria.Views
 
                 try
                 {
-                    var allFeeds = feedRepository.GetAll();
+                    var allFeeds = feedRepository.Search();
                 }
                 catch (Exception ex)
                 {
@@ -85,8 +85,8 @@ namespace Gnosis.Alexandria.Views
         private static readonly ILog log = LogManager.GetLogger(typeof(MainWindow));
         
         private readonly IContext context;
-        private readonly ITrackRepository trackRepository;
-        private readonly IFeedRepository feedRepository;
+        private readonly IRepository<Gnosis.Alexandria.Models.Tracks.ITrack> trackRepository;
+        private readonly IRepository<Gnosis.Alexandria.Models.Feeds.IFeed> feedRepository;
 
         private readonly IOldRepository<IOldTrack> oldTrackRepository = new OldTrackRepository();
         private readonly IOldRepository<ISource> sourceRepository = new OldSourceRepository();

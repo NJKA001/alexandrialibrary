@@ -12,11 +12,14 @@ using Gnosis.Core;
 using Gnosis.Core.Attributes;
 using Gnosis.Core.Batches;
 using Gnosis.Core.Commands;
-using Gnosis.Alexandria.Models;
+using Gnosis.Core.Queries;
+
+//using Gnosis.Alexandria.Models;
 
 namespace Gnosis.Alexandria.Repositories
 {
     public abstract class RepositoryBase<T>
+        : IRepository<T>
         where T : IEntity
     {
         protected RepositoryBase(IContext context)
@@ -35,19 +38,7 @@ namespace Gnosis.Alexandria.Repositories
             try
             {
                 var batch = new InitializeTypeBatch(() => GetConnection(), typeof(T));
-                //typeof(T).AddEntityCreateStatement(unitOfWork);
                 batch.Execute();
-
-                //var commandBuilder = new CreateCommandBuilder//(typeof(T), CreateDefault());
-
-                //using (var connection = GetConnection())
-                //{
-                //    connection.Open();
-                //    using (var command = commandBuilder.GetCommand(connection))
-                //    {
-                //        command.ExecuteNonQuery();
-                //    }
-                //}
             }
             catch (Exception ex)
             {
@@ -58,30 +49,6 @@ namespace Gnosis.Alexandria.Repositories
         protected abstract T CreateDefault();
         protected abstract IEnumerable<T> Read(IDataReader reader);
         
-        //protected virtual CommandBuilder GetSaveCommandBuilder(IEnumerable<T> items)
-        //{
-        //    var builder = new SaveCommandBuilder();
-
-        //    foreach (var item in items)
-        //    {
-        //        item.AddEntitySaveStatement<T>(builder);
-        //    }
-
-        //    return builder;
-        //}
-
-        //protected virtual CommandBuilder GetDeleteCommandBuilder(IEnumerable<T> items)
-        //{
-        //    var builder = new SaveCommandBuilder();
-
-        //    foreach (var item in items)
-        //    {
-        //        item.AddEntityDeleteStatement<T>(builder);
-        //    }
-
-        //    return builder;
-        //}
-
         protected IContext Context
         {
             get { return context; }
@@ -92,105 +59,83 @@ namespace Gnosis.Alexandria.Repositories
             return new SQLiteConnection(string.Format("Data Source={0};Version=3;", database));
         }
 
-        protected ITimeStamp GetTimeStamp(IDataReader reader)
-        {
-            var createdBy = new Uri(reader["TimeStamp_CreatedBy"].ToString());
-            var createdDate = DateTime.Parse(reader["TimeStamp_CreatedDate"].ToString());
-            var lastAccessedBy = new Uri(reader["TimeStamp_LastAccessedBy"].ToString());
-            var lastAccessedDate = DateTime.Parse(reader["TimeStamp_LastAccessedDate"].ToString());
-            var lastModifiedBy = new Uri(reader["TimeStamp_LastModifiedBy"].ToString());
-            var lastModifiedDate = DateTime.Parse(reader["TimeStamp_LastModifiedDate"].ToString());
+        //protected ITimeStamp GetTimeStamp(IDataReader reader)
+        //{
+        //    var createdBy = new Uri(reader["TimeStamp_CreatedBy"].ToString());
+        //    var createdDate = DateTime.Parse(reader["TimeStamp_CreatedDate"].ToString());
+        //    var lastAccessedBy = new Uri(reader["TimeStamp_LastAccessedBy"].ToString());
+        //    var lastAccessedDate = DateTime.Parse(reader["TimeStamp_LastAccessedDate"].ToString());
+        //    var lastModifiedBy = new Uri(reader["TimeStamp_LastModifiedBy"].ToString());
+        //    var lastModifiedDate = DateTime.Parse(reader["TimeStamp_LastModifiedDate"].ToString());
 
-            return new TimeStamp(createdBy, createdDate, lastAccessedBy, lastAccessedDate, lastModifiedBy, lastModifiedDate);
-        }
+        //    return new TimeStamp(createdBy, createdDate, lastAccessedBy, lastAccessedDate, lastModifiedBy, lastModifiedDate);
+        //}
 
-        protected int Execute(CommandBuilder commandBuilder)
-        {
-            using (var connection = GetConnection())
-            {
-                connection.Open();
-                using (var command = commandBuilder.GetCommand(connection))
-                {
-                    return command.ExecuteNonQuery();
-                }
-            }
-        }
+        //protected int Execute(CommandBuilder commandBuilder)
+        //{
+        //    using (var connection = GetConnection())
+        //    {
+        //        connection.Open();
+        //        using (var command = commandBuilder.GetCommand(connection))
+        //        {
+        //            return command.ExecuteNonQuery();
+        //        }
+        //    }
+        //}
 
         protected IEnumerable<T> Select()
         {
-            return Select(string.Empty);
+            return Select(string.Empty, string.Empty, null);
         }
 
         protected IEnumerable<T> Select(string whereClause)
         {
-            return Select(whereClause, null);
+            return Select(whereClause, string.Empty, null);
         }
 
         protected IEnumerable<T> Select(ISearch search)
         {
-            return Select(search.WhereClause, search.Parameters);
+            return Select(search.WhereClause, search.OrderByClause, search.Parameters);
         }
 
-        protected IEnumerable<T> Select(string whereClause, string parameterName, object parameterValue)
+        protected IEnumerable<T> Select(string whereClause, string orderByClause, IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            return Select(whereClause, new Dictionary<string, object> { { parameterName, parameterValue } });
+            var query = new Query<T>(() => GetConnection(), whereClause, orderByClause, parameters);
+            return query.Execute();
         }
 
-        protected IEnumerable<T> Select(string whereClause, IEnumerable<KeyValuePair<string, object>> parameters)
+        public T Lookup(Guid id)
         {
-            var tableInfo = typeof(T).GetTableInfo();
-            var commandBuilder = new CommandBuilder();//typeof(T), whereClause);
-            
-            commandBuilder.AddStatement(new SelectStatement(tableInfo, whereClause, tableInfo.DefaultSort));
-
-            if (parameters != null)
-            {
-                foreach (var pair in parameters)
-                    commandBuilder.AddParameter(pair.Key, pair.Value);
-            }
-
-            using (var connection = GetConnection())
-            {
-                connection.Open();
-
-                using (var command = commandBuilder.GetCommand(connection))
-                {
-                    using (var reader = command.ExecuteReader())
-                    {
-                        return Read(reader); 
-                    }
-                }
-            }
+            var whereClause = string.Format("{0}.Id = @Id", typeof(T).GetTableInfo().Name);
+            var parameters = new Dictionary<string, object> { { "@Id", id } };
+            return Select(whereClause, string.Empty, parameters).FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll()
+        public T Lookup(ILookup<T> lookup)
+        {
+            return Select(lookup.WhereClause, string.Empty, lookup.Parameters).FirstOrDefault();
+        }
+
+        public IEnumerable<T> Search()
         {
             return Select();
         }
 
-        public IEnumerable<T> GetAny(ISearch<T> search)
+        public IEnumerable<T> Search(ISearch<T> search)
         {
             return Select(search);
         }
 
         public void Save(IEnumerable<T> items)
         {
-            var unitOfWork = new Batch(() => GetConnection());
-
-            foreach (var item in items)
-                item.AddEntitySaveStatement(unitOfWork);
-
-            unitOfWork.Execute();
+            var batch = new SaveEntitiesBatch<T>(() => GetConnection(), items);
+            batch.Execute();
         }
 
         public void Delete(IEnumerable<T> items)
         {
-            var unitOfWork = new Batch(() => GetConnection());
-
-            foreach (var item in items)
-                item.AddEntityDeleteStatement(unitOfWork);
-
-            unitOfWork.Execute();
+            var batch = new DeleteEntitiesBatch<T>(() => GetConnection(), items);
+            batch.Execute();
         }
     }
 }

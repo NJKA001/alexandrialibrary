@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core;
+
 namespace Gnosis.Alexandria.Repositories
 {
-    public interface ISearch
+    public interface ILookup
     {
-        string Name { get; }
-        string WhereClause { get; }
-        string OrderByClause { get; }
-        bool IsDefault { get; }
         IEnumerable<KeyValuePair<string, object>> Parameters { get; }
+        string WhereClause { get; }
     }
 
-    public interface ISearch<T>
-        : ISearch
+    public interface ILookup<T>
+        : ILookup
     {
     }
 }

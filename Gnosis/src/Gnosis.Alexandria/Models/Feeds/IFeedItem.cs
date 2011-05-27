@@ -9,15 +9,15 @@ using Gnosis.Core.Collections;
 
 namespace Gnosis.Alexandria.Models.Feeds
 {
-    [UniqueIndex("FeedItem_Parent_FeedItemIdentifier", "Parent", "FeedItemIdentifier")]
-    [Index("FeedItem_Title", "Title")]
-    [Index("FeedItem_Authors", "Authors")]
-    [Index("FeedItem_Contributors", "Contributors")]
-    [Index("FeedItem_PublishedDate", "PublishedDate")]
-    [Index("FeedItem_Summary", "Summary")]
-    [Index("FeedItem_UpdatedDate", "UpdatedDate")]
-    [Index("FeedItem_Sort", "Parent", "Sequence")]
-    [DefaultSort("Parent ASC, Sequence ASC")]
+    //[UniqueIndex("FeedItem_Parent_FeedItemIdentifier", "Parent", "FeedItemIdentifier")]
+    //[Index("FeedItem_Title", "Title")]
+    //[Index("FeedItem_Authors", "Authors")]
+    //[Index("FeedItem_Contributors", "Contributors")]
+    //[Index("FeedItem_PublishedDate", "PublishedDate")]
+    //[Index("FeedItem_Summary", "Summary")]
+    //[Index("FeedItem_UpdatedDate", "UpdatedDate")]
+    //[Index("FeedItem_Sort", "Parent", "Sequence")]
+    //[DefaultSort("Parent ASC, Sequence ASC")]
     public interface IFeedItem : IEntity
     {
         string Title { get; set; }
@@ -33,19 +33,16 @@ namespace Gnosis.Alexandria.Models.Feeds
         DateTime UpdatedDate { get; set; }
         string FeedItemIdentifier { get; set; }
 
-        [OneToMany("FeedItemCategory")]
-        [ForeignUniqueIndex("FeedItemCategory_Parent_Scheme_Name", "Parent", "Scheme", "Name")]
-        [ForeignIndex("FeedItemCategory_Name", "Name")]
+        //[ForeignUniqueIndex("FeedItemCategory_Parent_Scheme_Name", "Parent", "Scheme", "Name")]
+        //[ForeignIndex("FeedItemCategory_Name", "Name")]
         IOrderedSet<IFeedCategory> Categories { get; }
 
-        [OneToMany("FeedItemLink")]
-        [ForeignUniqueIndex("FeedItemLink_Parent_Relationship_MediaType_Language", "Parent", "Relationship", "MediaType", "Language")]
-        [ForeignIndex("FeedItemLink_Location", "Location")]
+        //[ForeignUniqueIndex("FeedItemLink_Parent_Relationship_MediaType_Language", "Parent", "Relationship", "MediaType", "Language")]
+        //[ForeignIndex("FeedItemLink_Location", "Location")]
         IOrderedSet<IFeedLink> Links { get; }
 
-        [OneToMany("FeedItemMetadata")]
-        [ForeignUniqueIndex("FeedItemMetadata_Parent_Scheme_Name", "Parent", "Scheme", "Name")]
-        [ForeignIndex("FeedItemMetadata_Content", "Content")]
+        //[ForeignUniqueIndex("FeedItemMetadata_Parent_Scheme_Name", "Parent", "Scheme", "Name")]
+        //[ForeignIndex("FeedItemMetadata_Content", "Content")]
         IOrderedSet<IFeedMetadata> Metadata { get; }
     }
 }

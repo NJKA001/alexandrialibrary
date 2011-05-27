@@ -11,7 +11,7 @@ using Gnosis.Core.Commands;
 namespace Gnosis.Alexandria.Repositories.Feeds
 {
     public class FeedRepository
-        : RepositoryBase<IFeed>, IFeedRepository
+        : RepositoryBase<IFeed>
     {
         public FeedRepository(IContext context)
             : base(context)
@@ -26,7 +26,8 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
             do
             {
-                var timeStamp = GetTimeStamp(reader);
+                //var timeStamp = GetTimeStamp(reader);
+                ITimeStamp timeStamp = null;
                 var id = new Guid(reader["Id"].ToString());
                 var location = new Uri(reader["Location"].ToString());
                 var mediaType = reader["MediaType"].ToString();
@@ -130,7 +131,8 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
             do
             {
-                var timeStamp = GetTimeStamp(reader);
+                //var timeStamp = GetTimeStamp(reader);
+                ITimeStamp timeStamp = null;
                 var id = new Guid(reader["Id"].ToString());
                 var parent = new Guid(reader["Parent"].ToString());
                 var title = reader["Title"].ToString();
@@ -480,12 +482,12 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
         public IFeed GetOne(Guid id)
         {
-            return Select("Feed.Id = @Id", "@Id", id).FirstOrDefault();
+            return Select("Feed.Id = @Id", string.Empty, new Dictionary<string, object> { { "@Id", id } }).FirstOrDefault();
         }
 
         public IFeed GetOne(Uri location)
         {
-            return Select("Feed.Location = @Location", "@Location", location).FirstOrDefault();
+            return Select("Feed.Location = @Location", string.Empty, new Dictionary<string, object> { { "@Location", location } }).FirstOrDefault();
         }
     }
 }

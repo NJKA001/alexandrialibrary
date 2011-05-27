@@ -58,15 +58,15 @@ namespace Gnosis.Core
 
             if (tableIgnore == null)
             {
-                var tableName = table != null ? table.Name : GetTableName(type);
+                var tableName = table != null ? table.Name : type.GetTableName();
                 var defaultSortExpression = defaultSort != null ? defaultSort.Expression : string.Empty;
-                return new TableInfo(tableName, defaultSortExpression, type.GetColumnInfo(), type.GetIndexInfo(), type.GetChildInfo(), type.GetCustomDataTypeInfo());
+                return new TableInfo(tableName, defaultSortExpression, type.GetColumnInfo(string.Empty), type.GetChildInfo(), type.GetCustomDataTypeInfo());
             }
 
             return null;
         }
 
-        private static string GetTableName(Type type)
+        private static string GetTableName(this Type type)
         {
             if (type.IsInterface)
             {
@@ -77,15 +77,15 @@ namespace Gnosis.Core
             return type.Name;
         }
 
-        public static IEnumerable<IndexInfo> GetIndexInfo(this Type type)
-        {
-            var indexInfo = new List<IndexInfo>();
+        //public static IEnumerable<IndexInfo> GetIndexInfo(this Type type)
+        //{
+        //    var indexInfo = new List<IndexInfo>();
 
-            foreach (var indexAttribute in type.GetIndexAttributes())
-                indexInfo.Add(new IndexInfo(indexAttribute));
+        //    foreach (var indexAttribute in type.GetIndexAttributes())
+        //        indexInfo.Add(new IndexInfo(indexAttribute));
 
-            return indexInfo;
-        }
+        //    return indexInfo;
+        //}
 
         private static IEnumerable<IndexAttribute> GetIndexAttributes(this Type type)
         {
@@ -102,16 +102,45 @@ namespace Gnosis.Core
             return indexAttributes;
         }
 
+        private static void AddChildInfo(this Type type, List<ChildInfo> childInfo)
+        {
+            foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                var hasAttribute = false;
+                foreach (var attribute in property.GetCustomAttributes(true))
+                {
+                    var oneToManyAttribute = attribute as OneToManyAttribute;
+                    if (oneToManyAttribute != null)
+                    {
+                        hasAttribute = true;
+                        childInfo.Add(new ChildInfo(oneToManyAttribute, property));
+                        break;
+                    }
+                }
+
+                if (!hasAttribute && property.PropertyType.IsCollectionType())
+                {
+                    var tableName = string.Format("{0}_{1}", type.GetTableName(), property.PropertyType.GetItemType().GetTableName());
+                    var primaryKey = property.PropertyType.IsValueCollectionType() ? PrimaryKeyInfo.Default : null;
+                    var foreignKey = ForeignKeyInfo.Default;
+                    var sequence = property.PropertyType.IsOrderedCollectionType() ? SequenceInfo.Default : null;
+                    childInfo.Add(new ChildInfo(tableName, property, primaryKey, foreignKey, sequence));
+                }
+            }
+        }
+
         public static IEnumerable<ChildInfo> GetChildInfo(this Type type)
         {
-            var oneToManyInfo = new List<ChildInfo>();
+            var childInfo = new List<ChildInfo>();
 
-            foreach (var oneToMany in type.GetOneToManyAttributes())
+            foreach (var interfaceType in type.GetInterfaces())
             {
-                oneToManyInfo.Add(new ChildInfo(oneToMany.Item1, oneToMany.Item2));
+                interfaceType.AddChildInfo(childInfo);
             }
 
-            return oneToManyInfo;
+            type.AddChildInfo(childInfo);
+
+            return childInfo;
         }
 
         public static IEnumerable<CustomDataTypeInfo> GetCustomDataTypeInfo(this Type type)
@@ -132,11 +161,18 @@ namespace Gnosis.Core
         {
             foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
-                foreach (var attribute in property.PropertyType.GetCustomAttributes(true))
+                if (property.PropertyType.IsValueType())
                 {
-                    if (attribute is CustomDataTypeAttribute)
+                    customDataTypeInfo.Add(new CustomDataTypeInfo(property.PropertyType.GetColumnInfo(property.PropertyType.GetTableName() + "_"), property));
+                }
+                else
+                {
+                    foreach (var attribute in property.PropertyType.GetCustomAttributes(true))
                     {
-                         customDataTypeInfo.Add(new CustomDataTypeInfo(property.PropertyType.GetColumnInfo(), property));
+                        if (attribute is CustomDataTypeAttribute)
+                        {
+                            customDataTypeInfo.Add(new CustomDataTypeInfo(property.PropertyType.GetColumnInfo(string.Empty), property));
+                        }
                     }
                 }
             }
@@ -154,29 +190,30 @@ namespace Gnosis.Core
             }
         }
 
-        public static IEnumerable<Tuple<OneToManyAttribute, PropertyInfo>> GetOneToManyAttributes(this Type type)
-        {
-            var oneToManyAttributes = new List<Tuple<OneToManyAttribute, PropertyInfo>>();
+        //public static IEnumerable<Tuple<OneToManyAttribute, PropertyInfo>> GetOneToManyAttributes(this Type type)
+        //{
+        //    var oneToManyAttributes = new List<Tuple<OneToManyAttribute, PropertyInfo>>();
 
-            AddOneToManyAttributes(type, oneToManyAttributes);
+        //    AddOneToManyAttributes(type, oneToManyAttributes);
 
-            foreach (var interfaceType in type.GetInterfaces())
-            {
-                AddOneToManyAttributes(interfaceType, oneToManyAttributes);
-            }
+        //    foreach (var interfaceType in type.GetInterfaces())
+        //    {
+        //        AddOneToManyAttributes(interfaceType, oneToManyAttributes);
+        //    }
 
-            return oneToManyAttributes;
-        }
+        //    return oneToManyAttributes;
+        //}
 
-        private static void AddColumnInfo(this Type type, List<ColumnInfo> columnInfo)
+        private static void AddColumnInfo(this Type type, List<ColumnInfo> columnInfo, string prefix)
         {
             foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 ColumnAttribute columnAttribute = null;
                 PrimaryKeyColumnAttribute primaryKeyColumnAttribute = null;
                 var ignore = false;
+                var isPrimaryKey = (type == typeof(IEntity) && property.Name == "Id");
 
-                if (property.PropertyType.IsCustomDataType())
+                if (property.PropertyType.IsCustomDataType() || property.PropertyType.IsValueType())
                 {
                     ignore = true;
                 }
@@ -208,33 +245,35 @@ namespace Gnosis.Core
                 {
                     if (columnAttribute != null)
                     {
-                        var name = !string.IsNullOrEmpty(columnAttribute.Name) ? columnAttribute.Name : property.Name;
+                        var name = !string.IsNullOrEmpty(columnAttribute.Name) ? (prefix ?? string.Empty) + columnAttribute.Name : (prefix ?? string.Empty) + property.Name;
                         var defaultValue = columnAttribute.DefaultValue;
                         columnInfo.Add(new ColumnInfo(name, property, defaultValue));
                     }
-                    else if (primaryKeyColumnAttribute != null)
+                    else if (primaryKeyColumnAttribute != null || isPrimaryKey)
                     {
-                        var name = !string.IsNullOrEmpty(primaryKeyColumnAttribute.Name) ? primaryKeyColumnAttribute.Name : property.Name;
-                        columnInfo.Add(new ColumnInfo(name, property, true, primaryKeyColumnAttribute.AutoIncrement));
+                        var name = (primaryKeyColumnAttribute != null && !string.IsNullOrEmpty(primaryKeyColumnAttribute.Name)) ? primaryKeyColumnAttribute.Name : property.Name;
+                        var isAutoIncrement = primaryKeyColumnAttribute != null ? primaryKeyColumnAttribute.IsAutoIncrement : false;
+                        columnInfo.Add(new ColumnInfo(name, property, true, isAutoIncrement));
                     }
                     else
                     {
-                        columnInfo.Add(new ColumnInfo(property.Name, property, null));
+                        var name = (prefix ?? string.Empty) + property.Name;
+                        columnInfo.Add(new ColumnInfo(name, property, null));
                     }
                 }
             }
         }
 
-        private static IEnumerable<ColumnInfo> GetColumnInfo(this Type type)
+        private static IEnumerable<ColumnInfo> GetColumnInfo(this Type type, string prefix)
         {
             var columnInfo = new List<ColumnInfo>();
 
             foreach (var interfaceType in type.GetInterfaces())
             {
-                interfaceType.AddColumnInfo(columnInfo);
+                interfaceType.AddColumnInfo(columnInfo, prefix);
             }
 
-            type.AddColumnInfo(columnInfo);
+            type.AddColumnInfo(columnInfo, prefix);
 
             return columnInfo;
         }
@@ -358,9 +397,9 @@ namespace Gnosis.Core
         public static void AddEntitySaveStatement<T>(this T self, IBatch unitOfWork, TableInfo table)
             where T : IEntity
         {
-            if (self.IsNew)
+            if (self.IsNew())
                 self.AddEntityInsertStatement(unitOfWork, table);
-            else if (self.IsChanged)
+            else if (self.IsChanged())
                 self.AddEntityUpdateStatement(unitOfWork, table);
         }
 
@@ -411,7 +450,7 @@ namespace Gnosis.Core
                                 entity.AddEntityDeleteStatement(unitOfWork, child, itemInfo, parent);
                                 break;
                             case Collections.CollectionItemState.Existing:
-                                if (entity.IsChanged)
+                                if (entity.IsChanged())
                                 {
                                     entity.AddEntityUpdateStatement(unitOfWork, child, itemInfo, parent);
                                 }
@@ -665,9 +704,36 @@ namespace Gnosis.Core
             return false;
         }
 
+        public static Type GetItemType(this Type type)
+        {
+            var args = type.GetGenericArguments();
+            if (args != null && args.Length > 0)
+                return args[0];
+
+            return null;
+        }
+
+        public static bool IsEntityCollectionType(this Type type)
+        {
+            var itemType = type.GetItemType();
+            if (itemType != null)
+                return itemType.IsEntityType();
+
+            return false;
+        }
+
         public static bool IsEntityType(this Type type)
         {
             return typeof(IEntity).IsAssignableFrom(type);
+        }
+
+        public static bool IsValueCollectionType(this Type type)
+        {
+            var itemType = type.GetItemType();
+            if (itemType != null)
+                return itemType.IsValueType();
+
+            return false;
         }
 
         public static bool IsValueType(this Type type)
@@ -675,9 +741,14 @@ namespace Gnosis.Core
             return typeof(IValue).IsAssignableFrom(type);
         }
 
-        public static bool IsTimeStampType(this Type type)
+        //public static bool IsTimeStampType(this Type type)
+        //{
+        //    return typeof(ITimeStamp).IsAssignableFrom(type);
+        //}
+
+        public static bool IsCollectionType(this Type type)
         {
-            return type == typeof(ITimeStamp);
+            return type.IsOrderedCollectionType() || type.IsUnorderedCollectionType();
         }
 
         public static bool IsOrderedCollectionType(this Type type)

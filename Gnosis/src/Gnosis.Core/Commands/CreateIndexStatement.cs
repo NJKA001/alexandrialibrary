@@ -7,14 +7,14 @@ namespace Gnosis.Core.Commands
 {
     public class CreateIndexStatement : IStatement
     {
-        public CreateIndexStatement(string tableName, IndexInfo indexInfo)
+        public CreateIndexStatement(string tableName, string name, bool isUnique, IEnumerable<string> columns)
         {
-            var indexType = indexInfo.IsUnique ? "unique index" : "index";
+            var indexType = isUnique ? "unique index" : "index";
 
             builder = new StringBuilder();
-            builder.AppendFormat("create {0} if not exists {1} on {2} (", indexType, indexInfo.Name, tableName);
+            builder.AppendFormat("create {0} if not exists {1} on {2} (", indexType, name, tableName);
 
-            foreach (var column in indexInfo.Columns)
+            foreach (var column in columns)
                 Column(column);
         }
 

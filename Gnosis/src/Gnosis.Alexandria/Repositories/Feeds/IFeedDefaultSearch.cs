@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Repositories.Feeds
 {
-    public interface IFeedSearch : ISearch
+    public interface IFeedDefaultSearch : ISearch
     {
     }
 }

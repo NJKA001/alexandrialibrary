@@ -24,7 +24,7 @@ namespace Gnosis.Core.Batches
             var builder = new CommandBuilder();
             builder.AddStatement(new CreateTableStatement(tableInfo));
             
-            AddIndexStatements(builder, tableInfo.Name, tableInfo.Indices);
+            //AddIndexStatements(builder, tableInfo.Name, tableInfo.Indices);
             Add(builder);
         }
 
@@ -35,20 +35,20 @@ namespace Gnosis.Core.Batches
                 var builder = new CommandBuilder();
                 builder.AddStatement(new CreateTableStatement(childInfo));
 
-                AddIndexStatements(builder, childInfo.TableName, childInfo.ForeignIndices);
-                AddIndexStatements(builder, childInfo.TableName, childInfo.BaseTable.Indices);
+                //AddIndexStatements(builder, childInfo.TableName, childInfo.ForeignIndices);
+                //AddIndexStatements(builder, childInfo.TableName, childInfo.BaseTable.Indices);
                 Add(builder);
 
                 AddChildrenCommandBuilders(childInfo.BaseTable.Children);
             }
         }
 
-        private void AddIndexStatements(ICommandBuilder builder, string tableName, IEnumerable<IndexInfo> indices)
-        {
-            foreach (var indexInfo in indices)
-            {
-                builder.AddStatement(new CreateIndexStatement(tableName, indexInfo));
-            }
-        }
+        //private void AddIndexStatements(ICommandBuilder builder, string tableName, IEnumerable<IndexInfo> indices)
+        //{
+        //    foreach (var indexInfo in indices)
+        //    {
+        //        builder.AddStatement(new CreateIndexStatement(tableName, indexInfo));
+        //    }
+        //}
     }
 }

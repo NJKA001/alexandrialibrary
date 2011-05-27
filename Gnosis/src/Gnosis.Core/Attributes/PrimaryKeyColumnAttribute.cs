@@ -17,28 +17,28 @@ namespace Gnosis.Core.Attributes
             this.name = name;
         }
 
-        public PrimaryKeyColumnAttribute(string name, bool autoIncrement)
+        public PrimaryKeyColumnAttribute(string name, bool isAutoIncrement)
         {
             this.name = name;
-            this.autoIncrement = autoIncrement;
+            this.isAutoIncrement = isAutoIncrement;
         }
 
-        public PrimaryKeyColumnAttribute(bool autoIncrement)
+        public PrimaryKeyColumnAttribute(bool isAutoIncrement)
         {
-            this.autoIncrement = autoIncrement;
+            this.isAutoIncrement = isAutoIncrement;
         }
 
         private readonly string name = string.Empty;
-        private readonly bool autoIncrement = false;
+        private readonly bool isAutoIncrement = false;
 
         public string Name
         {
             get { return name; }
         }
 
-        public bool AutoIncrement
+        public bool IsAutoIncrement
         {
-            get { return autoIncrement; }
+            get { return isAutoIncrement; }
         }
     }
 }

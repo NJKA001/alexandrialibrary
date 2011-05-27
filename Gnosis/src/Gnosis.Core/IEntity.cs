@@ -11,15 +11,10 @@ namespace Gnosis.Core
     public interface IEntity
         : INotifyPropertyChanged
     {
-        [PrimaryKeyColumn]
         Guid Id { get; }
-
         ITimeStamp TimeStamp { get; }
 
-        [ColumnIgnore]
-        bool IsNew { get; }
-        
-        [ColumnIgnore]
-        bool IsChanged { get; }
+        bool IsNew();
+        bool IsChanged();
     }
 }

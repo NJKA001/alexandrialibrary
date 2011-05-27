@@ -12,7 +12,7 @@ using Gnosis.Alexandria.Models.Tracks;
 namespace Gnosis.Alexandria.Repositories.Tracks
 {
     public class TrackRepository
-        : RepositoryBase<ITrack>, ITrackRepository
+        : RepositoryBase<ITrack>
     {
         public TrackRepository(IContext context)
             : base(context)
