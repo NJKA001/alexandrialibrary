@@ -47,7 +47,7 @@ namespace Gnosis.Core.Batches
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 if (!isCommited && transaction != null && transaction.Connection != null)
                     transaction.Rollback();
