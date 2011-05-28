@@ -25,19 +25,21 @@ namespace Gnosis.Alexandria.Repositories
         protected RepositoryBase(IContext context)
         {
             this.context = context;
-
-            Initialize();
+            this.baseType = typeof(T);
         }
 
         private static readonly ILog log = LogManager.GetLogger(typeof(RepositoryBase<T>));
         private readonly IContext context;
+        private readonly Type baseType;
+        private readonly IList<ILookup> lookups = new List<ILookup>();
+        private readonly IList<ISearch> searches = new List<ISearch>();
         private string database = "Catalog.db";
 
-        private void Initialize()
+        protected void Initialize()
         {
             try
             {
-                var batch = new InitializeTypeBatch(() => GetConnection(), typeof(T));
+                var batch = new InitializeTypeBatch(() => GetConnection(), baseType, lookups, searches);
                 batch.Execute();
             }
             catch (Exception ex)
@@ -46,12 +48,21 @@ namespace Gnosis.Alexandria.Repositories
             }
         }
 
-        protected abstract T CreateDefault();
         protected abstract IEnumerable<T> Read(IDataReader reader);
         
         protected IContext Context
         {
             get { return context; }
+        }
+
+        protected void AddLookup(ILookup lookup)
+        {
+            lookups.Add(lookup);
+        }
+
+        protected void AddSearch(ISearch search)
+        {
+            searches.Add(search);
         }
 
         protected IDbConnection GetConnection()
@@ -83,47 +94,33 @@ namespace Gnosis.Alexandria.Repositories
         //    }
         //}
 
-        protected IEnumerable<T> Select()
+        protected IEnumerable<T> Select(IFilter filter)
         {
-            return Select(string.Empty, string.Empty, null);
-        }
-
-        protected IEnumerable<T> Select(string whereClause)
-        {
-            return Select(whereClause, string.Empty, null);
-        }
-
-        protected IEnumerable<T> Select(ISearch search)
-        {
-            return Select(search.WhereClause, search.OrderByClause, search.Parameters);
-        }
-
-        protected IEnumerable<T> Select(string whereClause, string orderByClause, IEnumerable<KeyValuePair<string, object>> parameters)
-        {
-            var query = new Query<T>(() => GetConnection(), whereClause, orderByClause, parameters);
+            var query = new Query<T>(() => GetConnection(), filter);
             return query.Execute();
         }
 
         public T Lookup(Guid id)
         {
-            var whereClause = string.Format("{0}.Id = @Id", typeof(T).GetTableInfo().Name);
+            var whereClause = string.Format("{0}.Id = @Id", baseType.GetTableName());
             var parameters = new Dictionary<string, object> { { "@Id", id } };
-            return Select(whereClause, string.Empty, parameters).FirstOrDefault();
+            return Select(new Filter(whereClause, parameters)).FirstOrDefault();
         }
 
-        public T Lookup(ILookup<T> lookup)
+        public T Lookup(ILookup lookup, IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            return Select(lookup.WhereClause, string.Empty, lookup.Parameters).FirstOrDefault();
+            return Select(lookup.GetFilter(parameters)).FirstOrDefault();
         }
 
         public IEnumerable<T> Search()
         {
-            return Select();
+            var search = searches.Where(x => x.IsDefault == true).FirstOrDefault();
+            return Select(search.GetFilter());
         }
 
-        public IEnumerable<T> Search(ISearch<T> search)
+        public IEnumerable<T> Search(ISearch search, IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            return Select(search);
+            return Select(search.GetFilter(parameters));
         }
 
         public void Save(IEnumerable<T> items)

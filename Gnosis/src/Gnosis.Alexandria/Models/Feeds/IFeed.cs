@@ -4,16 +4,10 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
-using Gnosis.Core.Attributes;
 using Gnosis.Core.Collections;
 
 namespace Gnosis.Alexandria.Models.Feeds
 {
-    //[Index("Feed_TimeStamp_CreatedDate", "TimeStamp_CreatedDate")]
-    //[UniqueIndex("Feed_Location", "Location")]
-    //[Index("Feed_Title", "Title")]
-    //[Index("Feed_Sort", "Authors", "PublishedDate", "Title")]
-    //[DefaultSort("Authors ASC, PublishedDate ASC, Title ASC")]
     public interface IFeed : IEntity
     {
         Uri Location { get; }
@@ -32,18 +26,9 @@ namespace Gnosis.Alexandria.Models.Feeds
         Uri IconPath { get; set; }
         string FeedIdentifier { get; set; }
 
-        //[ForeignUniqueIndex("FeedCategory_Parent_Scheme_Name", "Parent", "Scheme", "Name")]
-        //[ForeignIndex("FeedCategory_Name", "Name")]
         IOrderedSet<IFeedCategory> Categories { get; }
-
-        //[ForeignUniqueIndex("FeedLink_Parent_Relationship_MediaType_Language", "Parent", "Relationship", "MediaType", "Language")]
-        //[ForeignIndex("FeedLink_Location", "Location")]
         IOrderedSet<IFeedLink> Links { get; }
-
-        //[ForeignUniqueIndex("FeedMetadata_Parent_Scheme_Name", "Parent", "Scheme", "Name")]
-        //[ForeignIndex("FeedMetadata_Content", "Content")]
         IOrderedSet<IFeedMetadata> Metadata { get; }
-
         IOrderedSet<IFeedItem> Items { get; }
     }
 }

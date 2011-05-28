@@ -10,13 +10,15 @@ namespace Gnosis.Core.Batches
 {
     public class InitializeTypeBatch : Batch
     {
-        public InitializeTypeBatch(Func<IDbConnection> getConnection, Type type)
+        public InitializeTypeBatch(Func<IDbConnection> getConnection, Type type, IEnumerable<ILookup> lookups, IEnumerable<ISearch> searches)
             : base(getConnection)
         {
             var tableInfo = type.GetTableInfo();
 
             AddRootCommandBuilder(tableInfo);
             AddChildrenCommandBuilders(tableInfo.Children);
+            AddLookupIndices(lookups);
+            AddSearchIndices(searches);
         }
 
         private void AddRootCommandBuilder(TableInfo tableInfo)
@@ -24,7 +26,6 @@ namespace Gnosis.Core.Batches
             var builder = new CommandBuilder();
             builder.AddStatement(new CreateTableStatement(tableInfo));
             
-            //AddIndexStatements(builder, tableInfo.Name, tableInfo.Indices);
             Add(builder);
         }
 
@@ -35,20 +36,34 @@ namespace Gnosis.Core.Batches
                 var builder = new CommandBuilder();
                 builder.AddStatement(new CreateTableStatement(childInfo));
 
-                //AddIndexStatements(builder, childInfo.TableName, childInfo.ForeignIndices);
-                //AddIndexStatements(builder, childInfo.TableName, childInfo.BaseTable.Indices);
                 Add(builder);
 
                 AddChildrenCommandBuilders(childInfo.BaseTable.Children);
             }
         }
 
-        //private void AddIndexStatements(ICommandBuilder builder, string tableName, IEnumerable<IndexInfo> indices)
-        //{
-        //    foreach (var indexInfo in indices)
-        //    {
-        //        builder.AddStatement(new CreateIndexStatement(tableName, indexInfo));
-        //    }
-        //}
+        private void AddLookupIndices(IEnumerable<ILookup> lookups)
+        {
+            var builder = new CommandBuilder();
+            foreach (var lookup in lookups)
+            {
+                var tableName = lookup.BaseType.GetTableName();
+                var indexName = string.Format("{0}_{1}_ux", tableName, lookup.Name);
+                builder.AddStatement(new CreateIndexStatement(tableName, indexName, true, lookup.Columns));
+            }
+            Add(builder);
+        }
+
+        private void AddSearchIndices(IEnumerable<ISearch> searches)
+        {
+            var builder = new CommandBuilder();
+            foreach (var search in searches)
+            {
+                var tableName = search.BaseType.GetTableName();
+                var indexName = string.Format("{0}_{1}_ux", tableName, search.Name);
+                builder.AddStatement(new CreateIndexStatement(tableName, indexName, false, search.Columns));
+            }
+            Add(builder);
+        }
     }
 }

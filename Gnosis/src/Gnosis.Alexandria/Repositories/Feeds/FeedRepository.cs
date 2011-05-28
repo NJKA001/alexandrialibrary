@@ -16,6 +16,11 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         public FeedRepository(IContext context)
             : base(context)
         {
+            AddLookup(new LookupFeedByLocation());
+            AddSearch(new SearchFeedsByAuthors());
+            AddSearch(new SearchFeedsByTitle());
+
+            Initialize();
         }
 
         #region Private Helpers Methods
@@ -331,11 +336,6 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
         #endregion
 
-        protected override IFeed CreateDefault()
-        {
-            return Create(UriExtensions.EmptyUri);
-        }
-
         protected override IEnumerable<IFeed> Read(IDataReader reader)
         {
             IDictionary<Guid, IFeed> feeds = null;
@@ -468,26 +468,6 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             }
             else
                 return new List<IFeed>();
-        }
-
-        protected IFeed Create(Uri location)
-        {
-            return new Feed(Context, location);
-        }
-
-        public IFeed New(Uri location)
-        {
-            return Create(location);
-        }
-
-        public IFeed GetOne(Guid id)
-        {
-            return Select("Feed.Id = @Id", string.Empty, new Dictionary<string, object> { { "@Id", id } }).FirstOrDefault();
-        }
-
-        public IFeed GetOne(Uri location)
-        {
-            return Select("Feed.Location = @Location", string.Empty, new Dictionary<string, object> { { "@Location", location } }).FirstOrDefault();
         }
     }
 }

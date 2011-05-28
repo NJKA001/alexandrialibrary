@@ -66,7 +66,7 @@ namespace Gnosis.Core
             return null;
         }
 
-        private static string GetTableName(this Type type)
+        public static string GetTableName(this Type type)
         {
             if (type.IsInterface)
             {

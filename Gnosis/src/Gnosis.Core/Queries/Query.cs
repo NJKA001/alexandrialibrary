@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core;
 using Gnosis.Core.Commands;
 
 namespace Gnosis.Core.Queries
@@ -11,12 +12,12 @@ namespace Gnosis.Core.Queries
     public class Query<T>
         : IQuery<T> where T : IEntity
     {
-        public Query(Func<IDbConnection> getConnection, string whereClause, string orderByClause, IEnumerable<KeyValuePair<string, object>> parameters)
+        public Query(Func<IDbConnection> getConnection, IFilter filter)
         {
             this.getConnection = getConnection;
-            this.whereClause = whereClause;
-            this.orderByClause = orderByClause;
-            this.parameters = parameters;
+            this.whereClause = filter.WhereClause;
+            this.orderByClause = filter.OrderByClause;
+            this.parameters = filter.Parameters;
         }
 
         private readonly Func<IDbConnection> getConnection;
