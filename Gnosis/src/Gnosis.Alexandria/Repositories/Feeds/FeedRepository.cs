@@ -19,6 +19,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             AddLookup(new LookupFeedByLocation());
             AddSearch(new SearchFeedsByAuthors());
             AddSearch(new SearchFeedsByTitle());
+            AddSearch(new SearchAllFeeds());
 
             Initialize();
         }

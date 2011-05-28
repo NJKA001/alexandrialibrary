@@ -141,6 +141,7 @@
     <Compile Include="Models\ValueBase.cs" />
     <Compile Include="Repositories\Feeds\FeedRepository.cs" />
     <Compile Include="Repositories\Feeds\LookupFeedByLocation.cs" />
+    <Compile Include="Repositories\Feeds\SearchAllFeeds.cs" />
     <Compile Include="Repositories\Feeds\SearchFeedsByAuthors.cs" />
     <Compile Include="Repositories\Feeds\SearchFeedsByTitle.cs" />
     <Compile Include="Repositories\LookupBase.cs" />
