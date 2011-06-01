@@ -14,95 +14,9 @@ namespace Gnosis.Core
 {
     public static class TypeExtensions
     {
-        /// <summary>
-        /// Get the SQLIte type affinity of the given type
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns>TypeAffinity</returns>
-        /// <remarks>http://sqlite.org/datatype3.html#affinity</remarks>
-        public static TypeAffinity GetTypeAffinity(this Type type)
-        {
-            if (type.IsIntegerColumn())
-                return TypeAffinity.Integer;
-            else if (type.IsTextColumn())
-                return TypeAffinity.Text;
-            else if (type.IsBlobColumn())
-                return TypeAffinity.None;
-            else if (type.IsRealColumn())
-                return TypeAffinity.Real;
-            else
-                return TypeAffinity.Numeric;
-        }
+        #region Private Helpers Methods
 
-        public static TableInfo GetTableInfo(this Type type)
-        {
-            TableAttribute table = null;
-            TableIgnoreAttribute tableIgnore = null;
-            DefaultSortAttribute defaultSort = null;
-
-            foreach (var attribute in type.GetCustomAttributes(true))
-            {
-                if (attribute is TableAttribute)
-                {
-                    table = attribute as TableAttribute;
-                }
-                else if (attribute is DefaultSortAttribute)
-                {
-                    defaultSort = attribute as DefaultSortAttribute;
-                }
-                else if (attribute is TableIgnoreAttribute)
-                {
-                    tableIgnore = attribute as TableIgnoreAttribute;
-                }
-            }
-
-            if (tableIgnore == null)
-            {
-                var tableName = table != null ? table.Name : type.GetTableName();
-                var defaultSortExpression = defaultSort != null ? defaultSort.Expression : string.Empty;
-                return new TableInfo(tableName, defaultSortExpression, type.GetColumnInfo(string.Empty), type.GetChildInfo(), type.GetCustomDataTypeInfo());
-            }
-
-            return null;
-        }
-
-        public static string GetTableName(this Type type)
-        {
-            if (type.IsInterface)
-            {
-                if (type.Name.StartsWith("I") && type.Name.Length > 1)
-                    return type.Name.Substring(1);
-            }
-
-            return type.Name;
-        }
-
-        //public static IEnumerable<IndexInfo> GetIndexInfo(this Type type)
-        //{
-        //    var indexInfo = new List<IndexInfo>();
-
-        //    foreach (var indexAttribute in type.GetIndexAttributes())
-        //        indexInfo.Add(new IndexInfo(indexAttribute));
-
-        //    return indexInfo;
-        //}
-
-        private static IEnumerable<IndexAttribute> GetIndexAttributes(this Type type)
-        {
-            var indexAttributes = new List<IndexAttribute>();
-
-            foreach (var attribute in type.GetCustomAttributes(true))
-            {
-                if (attribute is IndexAttribute)
-                {
-                    indexAttributes.Add(attribute as IndexAttribute);
-                }
-            }
-
-            return indexAttributes;
-        }
-
-        private static void AddChildInfo(this Type type, List<ChildInfo> childInfo)
+        private static void AddChildInfo(Type type, List<ChildInfo> childInfo)
         {
             foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
@@ -120,7 +34,7 @@ namespace Gnosis.Core
 
                 if (!hasAttribute && property.PropertyType.IsCollectionType())
                 {
-                    var tableName = string.Format("{0}_{1}", type.GetTableName(), property.PropertyType.GetItemType().GetTableName());
+                    var tableName = string.Format("{0}_{1}", type.GetDefaultTableName(), property.PropertyType.GetItemType().GetDefaultTableName());
                     var primaryKey = property.PropertyType.IsValueCollectionType() ? PrimaryKeyInfo.Default : null;
                     var foreignKey = ForeignKeyInfo.Default;
                     var sequence = property.PropertyType.IsOrderedCollectionType() ? SequenceInfo.Default : null;
@@ -129,41 +43,13 @@ namespace Gnosis.Core
             }
         }
 
-        public static IEnumerable<ChildInfo> GetChildInfo(this Type type)
-        {
-            var childInfo = new List<ChildInfo>();
-
-            foreach (var interfaceType in type.GetInterfaces())
-            {
-                interfaceType.AddChildInfo(childInfo);
-            }
-
-            type.AddChildInfo(childInfo);
-
-            return childInfo;
-        }
-
-        public static IEnumerable<CustomDataTypeInfo> GetCustomDataTypeInfo(this Type type)
-        {
-            var customDataTypeInfo = new List<CustomDataTypeInfo>();
-
-            foreach (var interfaceType in type.GetInterfaces())
-            {
-                interfaceType.AddCustomDataTypeInfo(customDataTypeInfo);
-            }
-
-            type.AddCustomDataTypeInfo(customDataTypeInfo);
-
-            return customDataTypeInfo;
-        }
-
-        public static void AddCustomDataTypeInfo(this Type type, List<CustomDataTypeInfo> customDataTypeInfo)
+        private static void AddCustomDataTypeInfo(Type type, List<CustomDataTypeInfo> customDataTypeInfo)
         {
             foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 if (property.PropertyType.IsValueType())
                 {
-                    customDataTypeInfo.Add(new CustomDataTypeInfo(property.PropertyType.GetColumnInfo(property.PropertyType.GetTableName() + "_"), property));
+                    customDataTypeInfo.Add(new CustomDataTypeInfo(property.PropertyType.GetColumnInfo(property.PropertyType.GetDefaultTableName() + "_"), property));
                 }
                 else
                 {
@@ -190,21 +76,7 @@ namespace Gnosis.Core
             }
         }
 
-        //public static IEnumerable<Tuple<OneToManyAttribute, PropertyInfo>> GetOneToManyAttributes(this Type type)
-        //{
-        //    var oneToManyAttributes = new List<Tuple<OneToManyAttribute, PropertyInfo>>();
-
-        //    AddOneToManyAttributes(type, oneToManyAttributes);
-
-        //    foreach (var interfaceType in type.GetInterfaces())
-        //    {
-        //        AddOneToManyAttributes(interfaceType, oneToManyAttributes);
-        //    }
-
-        //    return oneToManyAttributes;
-        //}
-
-        private static void AddColumnInfo(this Type type, List<ColumnInfo> columnInfo, string prefix)
+        private static void AddColumnInfo(Type type, List<ColumnInfo> columnInfo, string prefix)
         {
             foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
@@ -270,427 +142,120 @@ namespace Gnosis.Core
 
             foreach (var interfaceType in type.GetInterfaces())
             {
-                interfaceType.AddColumnInfo(columnInfo, prefix);
+                AddColumnInfo(interfaceType, columnInfo, prefix);
             }
 
-            type.AddColumnInfo(columnInfo, prefix);
+            AddColumnInfo(type, columnInfo, prefix);
 
             return columnInfo;
         }
 
-        public static void AddValueCreateStatement(this Type self, IBatch unitOfWork)
+        private static IEnumerable<IndexAttribute> GetIndexAttributes(this Type type)
         {
-        }
+            var indexAttributes = new List<IndexAttribute>();
 
-        public static void AddEntityCreateStatement(this Type self, IBatch unitOfWork)
-        {
-            var builder = new CommandBuilder();
-
-            var table = self.GetTableInfo();
-
-            //var createTable = new CreateTableStatement(builder, table);
-
-            //builder.AddStatement(createTable);
-            unitOfWork.Add(builder);
-        }
-
-        public static void AddEntityCreateStatement(this Type self, ChildInfo childInfo, IBatch unitOfWork)
-        {
-
-        }
-
-        //public static void AddValueInsertStatement<T>(this T self, IUnitOfWork unitOfWork)
-        //    where T : IValue
-        //{
-        //    self.AddValueInsertStatement(unitOfWork, typeof(T).GetTableInfo());
-        //}
-
-        //public static void AddValueInsertStatement<T>(this T self, IUnitOfWork unitOfWork, TableInfo table)
-        //    where T : IValue
-        //{
-        //}
-
-        public static void AddValueInsertStatement<T>(this T self, IBatch unitOfWork, ChildInfo childInfo, CollectionItemInfo itemInfo, IEntity parent)
-            where T : IValue
-        {
-            var builder = new CommandBuilder();
-            var statement = new InsertStatement(childInfo.TableName);
-
-            if (childInfo.PrimaryKey != null)
+            foreach (var attribute in type.GetCustomAttributes(true))
             {
-                var parameterName = builder.GetParameterName();
-                statement.Add(childInfo.PrimaryKey.Name, parameterName);
-                builder.AddParameter(parameterName, itemInfo.Id);
-            }
-
-            if (childInfo.ForeignKey != null)
-            {
-                var parameterName = builder.GetParameterName();
-                statement.Add(childInfo.ForeignKey.Name, parameterName);
-                builder.AddParameter(parameterName, parent.Id);
-            }
-
-            if (childInfo.Sequence != null)
-            {
-                var parameterName = builder.GetParameterName();
-                statement.Add(childInfo.Sequence.Name, parameterName);
-                builder.AddParameter(parameterName, itemInfo.Sequence);
-            }
-
-            builder.AddStatement(statement);
-            unitOfWork.Add(builder);
-        }
-
-        //public static void AddValueDeleteStatement<T>(this T self, IUnitOfWork unitOfWork)
-        //    where T : IValue
-        //{
-        //    self.AddValueDeleteStatement(unitOfWork, typeof(T).GetTableInfo());
-        //}
-
-        //public static void AddValueDeleteStatement<T>(this T self, IUnitOfWork unitOfWork, TableInfo table)
-        //    where T : IValue
-        //{
-        //}
-
-        public static void AddValueDeleteStatement<T>(this T self, IBatch unitOfWork, ChildInfo childInfo, CollectionItemInfo itemInfo, IEntity parent)
-            where T : IValue
-        {
-            var builder = new CommandBuilder();
-
-            var parentParameterName = builder.GetParameterName();
-            builder.AddParameter(parentParameterName, parent.Id);
-            var idParameterName = builder.GetParameterName();
-            builder.AddParameter(idParameterName, itemInfo.Id);
-            var whereClause = string.Format("{0}.{1} = {2} and {0}.{3} = {4}", childInfo.TableName, childInfo.ForeignKey.Name, parent.Id, childInfo.PrimaryKey.Name, itemInfo.Id);
-            var statement = new DeleteStatement(childInfo.TableName, whereClause);
-
-            builder.AddStatement(statement);
-            unitOfWork.Add(builder);
-        }
-
-        public static void AddValueMoveStatement<T>(this T self, IBatch unitOfWork, ChildInfo childInfo, CollectionItemInfo itemInfo, IEntity parent)
-            where T : IValue
-        {
-            var builder = new CommandBuilder();
-
-            var parentParameterName = builder.GetParameterName();
-            builder.AddParameter(parentParameterName, parent.Id);
-            var idParameterName = builder.GetParameterName();
-            builder.AddParameter(idParameterName, itemInfo.Id);
-            var whereClause = string.Format("{0}.{1} = {2} and {0}.{3} = {4}", childInfo.TableName, childInfo.ForeignKey.Name, parent.Id, childInfo.PrimaryKey.Name, itemInfo.Id);
-            var statement = new UpdateStatement(childInfo.TableName, whereClause);
-
-            var sequenceParameterName = builder.GetParameterName();
-            statement.Set(childInfo.Sequence.Name, sequenceParameterName);
-            builder.AddParameter(sequenceParameterName, itemInfo.Sequence);
-
-            builder.AddStatement(statement);
-            unitOfWork.Add(builder);
-        }
-
-        public static void AddEntitySaveStatement<T>(this T self, IBatch unitOfWork)
-            where T : IEntity
-        {
-            self.AddEntitySaveStatement(unitOfWork, typeof(T).GetTableInfo());
-        }
-
-        public static void AddEntitySaveStatement<T>(this T self, IBatch unitOfWork, TableInfo table)
-            where T : IEntity
-        {
-            if (self.IsNew())
-                self.AddEntityInsertStatement(unitOfWork, table);
-            else if (self.IsChanged())
-                self.AddEntityUpdateStatement(unitOfWork, table);
-        }
-
-        public static void AddChildDeleteStatements(this IEnumerable<ChildInfo> self, IBatch unitOfWork, IEntity parent)
-        {
-            foreach (var childInfo in self)
-            {
-                var itemInfos = childInfo.GetItemInfo(parent);
-                if (childInfo.BaseType.IsEntityType())
+                if (attribute is IndexAttribute)
                 {
-                    IEntity entity = null;
-                    foreach (var itemInfo in itemInfos)
-                    {
-                        entity = itemInfo.Item as IEntity;
-                        entity.AddEntityDeleteStatement(unitOfWork, childInfo, itemInfo, parent);
-                    }
-                }
-                else
-                {
-                    IValue value = null;
-                    foreach (var itemInfo in itemInfos)
-                    {
-                        value = itemInfo.Item as IValue;
-                        value.AddValueDeleteStatement(unitOfWork, childInfo, itemInfo, parent);
-                    }
-                }
-            }
-        }
-
-        public static void AddChildSaveStatements(this IEnumerable<ChildInfo> self, IBatch unitOfWork, IEntity parent)
-        {
-            foreach (var child in self)
-            {
-                var itemInfos = child.GetItemInfo(parent);
-                if (child.BaseType.IsEntityType())
-                {
-                    IEntity entity = null;
-                    foreach (var itemInfo in itemInfos)
-                    {
-                        entity = itemInfo.Item as IEntity;
-
-                        switch (itemInfo.State)
-                        {
-                            case Collections.CollectionItemState.Added:
-                                entity.AddEntityInsertStatement(unitOfWork, child, itemInfo, parent);
-                                break;
-                            case Collections.CollectionItemState.Removed:
-                                entity.AddEntityDeleteStatement(unitOfWork, child, itemInfo, parent);
-                                break;
-                            case Collections.CollectionItemState.Existing:
-                                if (entity.IsChanged())
-                                {
-                                    entity.AddEntityUpdateStatement(unitOfWork, child, itemInfo, parent);
-                                }
-                                break;
-                            case Collections.CollectionItemState.Moved:
-                                entity.AddEntityUpdateStatement(unitOfWork, child, itemInfo, parent);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-                else
-                {
-                    IValue value = null;
-
-                    foreach (var itemInfo in itemInfos)
-                    {
-                        value = itemInfo.Item as IValue;
-
-                        switch (itemInfo.State)
-                        {
-                            case Collections.CollectionItemState.Added:
-                                value.AddValueInsertStatement(unitOfWork, child, itemInfo, parent);
-                                break;
-                            case Collections.CollectionItemState.Removed:
-                                value.AddValueDeleteStatement(unitOfWork, child, itemInfo, parent);
-                                break;
-                            case Collections.CollectionItemState.Existing:
-                                break;
-                            case Collections.CollectionItemState.Moved:
-                                value.AddValueMoveStatement(unitOfWork, child, itemInfo, parent);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-            }
-        }
-
-        public static void AddEntityInsertStatement<T>(this T self, IBatch unitOfWork)
-            where T : IEntity
-        {
-            self.AddEntityInsertStatement<T>(unitOfWork, typeof(T).GetTableInfo());
-        }
-
-        public static void AddEntityInsertStatement<T>(this T self, IBatch unitOfWork, TableInfo table)
-            where T : IEntity
-        {
-            var builder = new CommandBuilder();
-            var statement = new InsertStatement(table.Name);
-
-            foreach (var column in table.Columns)
-            {
-                var parameterName = builder.GetParameterName();
-                statement.Add(column.Name, parameterName);
-                builder.AddParameter(parameterName, column.GetValue(self));
-            }
-
-            foreach (var customDataType in table.CustomDataTypes)
-            {
-                var dataTypeValue = customDataType.GetValue(self);
-
-                foreach (var column in customDataType.Columns)
-                {
-                    var parameterName = builder.GetParameterName();
-                    statement.Add(column.Name, parameterName);
-                    builder.AddParameter(parameterName, column.GetValue(dataTypeValue));
+                    indexAttributes.Add(attribute as IndexAttribute);
                 }
             }
 
-            builder.AddStatement(statement);
-            unitOfWork.Add(builder);
-
-            table.Children.AddChildSaveStatements(unitOfWork, self);
+            return indexAttributes;
         }
 
-        public static void AddEntityInsertStatement<T>(this T self, IBatch unitOfWork, ChildInfo childInfo, CollectionItemInfo itemInfo, IEntity parent)
-            where T : IEntity
+        private static IEnumerable<ChildInfo> GetChildInfo(this Type type)
         {
-            var builder = new CommandBuilder();
-            var statement = new InsertStatement(childInfo.TableName);
+            var childInfo = new List<ChildInfo>();
 
-            if (childInfo.PrimaryKey != null)
+            foreach (var interfaceType in type.GetInterfaces())
             {
-                var parameterName = builder.GetParameterName();
-                statement.Add(childInfo.PrimaryKey.Name, parameterName);
-                builder.AddParameter(parameterName, itemInfo.Id);
+                AddChildInfo(interfaceType, childInfo);
             }
 
-            if (childInfo.ForeignKey != null)
+            AddChildInfo(type, childInfo);
+
+            return childInfo;
+        }
+
+        private static IEnumerable<CustomDataTypeInfo> GetCustomDataTypeInfo(this Type type)
+        {
+            var customDataTypeInfo = new List<CustomDataTypeInfo>();
+
+            foreach (var interfaceType in type.GetInterfaces())
             {
-                var parameterName = builder.GetParameterName();
-                statement.Add(childInfo.ForeignKey.Name, parameterName);
-                builder.AddParameter(parameterName, parent.Id);
+                AddCustomDataTypeInfo(interfaceType, customDataTypeInfo);
             }
 
-            if (childInfo.Sequence != null)
+            AddCustomDataTypeInfo(type, customDataTypeInfo);
+
+            return customDataTypeInfo;
+        }
+
+        private static string GetDefaultTableName(this Type type)
+        {
+            if (type.IsInterface)
             {
-                var parameterName = builder.GetParameterName();
-                statement.Add(childInfo.Sequence.Name, parameterName);
-                builder.AddParameter(parameterName, itemInfo.Sequence);
+                if (type.Name.StartsWith("I") && type.Name.Length > 1)
+                    return type.Name.Substring(1);
             }
 
-            foreach (var column in childInfo.BaseTable.Columns)
-            {
-                var parameterName = builder.GetParameterName();
-                statement.Add(column.Name, parameterName);
-                builder.AddParameter(parameterName, column.GetValue(itemInfo.Item));
-            }
+            return type.Name;
+        }
 
-            foreach (var customDataType in childInfo.BaseTable.CustomDataTypes)
+        #endregion
+
+        /// <summary>
+        /// Get the SQLite type affinity of the given type
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns>TypeAffinity</returns>
+        /// <remarks>http://sqlite.org/datatype3.html#affinity</remarks>
+        public static TypeAffinity GetTypeAffinity(this Type type)
+        {
+            if (type.IsIntegerColumn())
+                return TypeAffinity.Integer;
+            else if (type.IsTextColumn())
+                return TypeAffinity.Text;
+            else if (type.IsBlobColumn())
+                return TypeAffinity.None;
+            else if (type.IsRealColumn())
+                return TypeAffinity.Real;
+            else
+                return TypeAffinity.Numeric;
+        }
+
+        public static TableInfo GetTableInfo(this Type type)
+        {
+            TableAttribute table = null;
+            TableIgnoreAttribute tableIgnore = null;
+            DefaultSortAttribute defaultSort = null;
+
+            foreach (var attribute in type.GetCustomAttributes(true))
             {
-                foreach (var column in customDataType.Columns)
+                if (attribute is TableAttribute)
                 {
-                    var parameterName = builder.GetParameterName();
-                    statement.Add(column.Name, parameterName);
-                    builder.AddParameter(parameterName, column.GetValue(itemInfo.Item));
+                    table = attribute as TableAttribute;
+                }
+                else if (attribute is DefaultSortAttribute)
+                {
+                    defaultSort = attribute as DefaultSortAttribute;
+                }
+                else if (attribute is TableIgnoreAttribute)
+                {
+                    tableIgnore = attribute as TableIgnoreAttribute;
                 }
             }
 
-            builder.AddStatement(statement);
-            unitOfWork.Add(builder);
-
-            childInfo.BaseTable.Children.AddChildSaveStatements(unitOfWork, self);
-        }
-
-        public static void AddEntityUpdateStatement<T>(this T self, IBatch unitOfWork)
-            where T : IEntity
-        {
-            self.AddEntityUpdateStatement<T>(unitOfWork, typeof(T).GetTableInfo());
-        }
-
-        public static void AddEntityUpdateStatement<T>(this T self, IBatch unitOfWork, TableInfo table)
-            where T : IEntity
-        {
-            var builder = new CommandBuilder();
-            var idParameterName = builder.GetParameterName();
-            var whereClause = string.Format("{0}.Id = {1}", table.Name, idParameterName);
-            var statement = new UpdateStatement(table.Name, whereClause);
-            builder.AddParameter(idParameterName, self.Id);
-
-            foreach (var column in table.Columns.Where(x => x.IsReadOnly == false))
+            if (tableIgnore == null)
             {
-                var parameterName = builder.GetParameterName();
-                statement.Set(column.Name, parameterName);
-                builder.AddParameter(parameterName, column.GetValue(self));
+                var tableName = table != null ? table.Name : type.GetDefaultTableName();
+                var defaultSortExpression = defaultSort != null ? defaultSort.Expression : string.Empty;
+                return new TableInfo(tableName, defaultSortExpression, type.GetColumnInfo(string.Empty), type.GetChildInfo(), type.GetCustomDataTypeInfo());
             }
 
-            foreach (var customDataType in table.CustomDataTypes)
-            {
-                var dataTypeValue = customDataType.GetValue(self);
-
-                foreach (var column in customDataType.Columns)
-                {
-                    var parameterName = builder.GetParameterName();
-                    statement.Set(column.Name, parameterName);
-                    builder.AddParameter(parameterName, column.GetValue(dataTypeValue));
-                }
-            }
-
-            builder.AddStatement(statement);
-            unitOfWork.Add(builder);
-        }
-
-        public static void AddEntityUpdateStatement<T>(this T self, IBatch unitOfWork, ChildInfo childInfo, CollectionItemInfo itemInfo, IEntity parent)
-            where T : IEntity
-        {
-            var builder = new CommandBuilder();
-
-            var idParameterName = builder.GetParameterName();
-            builder.AddParameter(idParameterName, self.Id);
-            var whereClause = string.Format("{0}.Id = {1}", childInfo.TableName, idParameterName);
-            var statement = new UpdateStatement(childInfo.TableName, whereClause);
-
-            if (childInfo.Sequence != null)
-            {
-                var parameterName = builder.GetParameterName();
-                statement.Set(childInfo.Sequence.Name, parameterName);
-                builder.AddParameter(parameterName, itemInfo.Sequence);
-            }
-
-            foreach (var column in childInfo.BaseTable.Columns)
-            {
-                var parameterName = builder.GetParameterName();
-                statement.Set(column.Name, parameterName);
-                builder.AddParameter(parameterName, column.GetValue(itemInfo.Item));
-            }
-
-            foreach (var customDataType in childInfo.BaseTable.CustomDataTypes)
-            {
-                foreach (var column in customDataType.Columns)
-                {
-                    var parameterName = builder.GetParameterName();
-                    statement.Set(column.Name, parameterName);
-                    builder.AddParameter(parameterName, column.GetValue(itemInfo.Item));
-                }
-            }
-
-            builder.AddStatement(statement);
-            unitOfWork.Add(builder);
-
-            childInfo.BaseTable.Children.AddChildSaveStatements(unitOfWork, self);
-        }
-
-        public static void AddEntityDeleteStatement<T>(this T self, IBatch unitOfWork)
-            where T : IEntity
-        {
-            self.AddEntityDeleteStatement(unitOfWork, typeof(T).GetTableInfo());
-        }
-
-        public static void AddEntityDeleteStatement<T>(this T self, IBatch unitOfWork, TableInfo table)
-            where T : IEntity
-        {
-            var builder = new CommandBuilder();
-
-            var idParameterName = builder.GetParameterName();
-            builder.AddParameter(idParameterName, self.Id);
-            var whereClause = string.Format("{0}.Id = {1}", table.Name, idParameterName);
-            var statement = new DeleteStatement(table.Name, whereClause);
-
-            builder.AddStatement(statement);
-            unitOfWork.Add(builder);
-        }
-
-        public static void AddEntityDeleteStatement<T>(this T self, IBatch unitOfWork, ChildInfo childInfo, CollectionItemInfo itemInfo, IEntity parent)
-            where T : IEntity
-        {
-            var builder = new CommandBuilder();
-
-            var idParameterName = builder.GetParameterName();
-            builder.AddParameter(idParameterName, self.Id);
-            var whereClause = string.Format("{0}.Id = {1}", childInfo.TableName, idParameterName);
-            var statement = new DeleteStatement(childInfo.TableName, whereClause);
-
-            builder.AddStatement(statement);
-            unitOfWork.Add(builder);
-
-            childInfo.BaseTable.Children.AddChildDeleteStatements(unitOfWork, self);
+            return null;
         }
 
         public static bool IsCustomDataType(this Type type)
@@ -740,11 +305,6 @@ namespace Gnosis.Core
         {
             return typeof(IValue).IsAssignableFrom(type);
         }
-
-        //public static bool IsTimeStampType(this Type type)
-        //{
-        //    return typeof(ITimeStamp).IsAssignableFrom(type);
-        //}
 
         public static bool IsCollectionType(this Type type)
         {

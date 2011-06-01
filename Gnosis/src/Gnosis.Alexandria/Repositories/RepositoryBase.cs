@@ -70,30 +70,6 @@ namespace Gnosis.Alexandria.Repositories
             return new SQLiteConnection(string.Format("Data Source={0};Version=3;", database));
         }
 
-        //protected ITimeStamp GetTimeStamp(IDataReader reader)
-        //{
-        //    var createdBy = new Uri(reader["TimeStamp_CreatedBy"].ToString());
-        //    var createdDate = DateTime.Parse(reader["TimeStamp_CreatedDate"].ToString());
-        //    var lastAccessedBy = new Uri(reader["TimeStamp_LastAccessedBy"].ToString());
-        //    var lastAccessedDate = DateTime.Parse(reader["TimeStamp_LastAccessedDate"].ToString());
-        //    var lastModifiedBy = new Uri(reader["TimeStamp_LastModifiedBy"].ToString());
-        //    var lastModifiedDate = DateTime.Parse(reader["TimeStamp_LastModifiedDate"].ToString());
-
-        //    return new TimeStamp(createdBy, createdDate, lastAccessedBy, lastAccessedDate, lastModifiedBy, lastModifiedDate);
-        //}
-
-        //protected int Execute(CommandBuilder commandBuilder)
-        //{
-        //    using (var connection = GetConnection())
-        //    {
-        //        connection.Open();
-        //        using (var command = commandBuilder.GetCommand(connection))
-        //        {
-        //            return command.ExecuteNonQuery();
-        //        }
-        //    }
-        //}
-
         protected IEnumerable<T> Select(IFilter filter)
         {
             var query = new Query<T>(() => GetConnection(), filter);
@@ -102,7 +78,7 @@ namespace Gnosis.Alexandria.Repositories
 
         public T Lookup(Guid id)
         {
-            var whereClause = string.Format("{0}.Id = @Id", baseType.GetTableName());
+            var whereClause = string.Format("{0}.Id = @Id", baseType.GetTableInfo().Name);
             var parameters = new Dictionary<string, object> { { "@Id", id } };
             return Select(new Filter(whereClause, parameters)).FirstOrDefault();
         }

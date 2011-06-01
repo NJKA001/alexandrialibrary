@@ -52,6 +52,7 @@
     <Compile Include="Attributes\TableIgnoreAttribute.cs" />
     <Compile Include="Batches\DeleteEntitiesBatch.cs" />
     <Compile Include="Batches\InitializeTypeBatch.cs" />
+    <Compile Include="Batches\PersistEntitiesBatch.cs" />
     <Compile Include="Batches\SaveEntitiesBatch.cs" />
     <Compile Include="Batches\SelectEntitiesBatch.cs" />
     <Compile Include="Collections\CollectionItemInfo.cs" />

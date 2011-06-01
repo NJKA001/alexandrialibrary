@@ -47,8 +47,8 @@ namespace Gnosis.Core.Batches
             var builder = new CommandBuilder();
             foreach (var lookup in lookups)
             {
-                var tableName = lookup.BaseType.GetTableName();
-                var indexName = string.Format("{0}_{1}_ux", tableName, lookup.Name);
+                var tableName = lookup.BaseType.GetTableInfo().Name;
+                var indexName = string.Format("{0}_{1}_index", tableName, lookup.Name);
                 builder.AddStatement(new CreateIndexStatement(tableName, indexName, true, lookup.Columns));
             }
             Add(builder);
@@ -59,8 +59,8 @@ namespace Gnosis.Core.Batches
             var builder = new CommandBuilder();
             foreach (var search in searches)
             {
-                var tableName = search.BaseType.GetTableName();
-                var indexName = string.Format("{0}_{1}_ux", tableName, search.Name);
+                var tableName = search.BaseType.GetTableInfo().Name;
+                var indexName = string.Format("{0}_{1}_index", tableName, search.Name);
                 builder.AddStatement(new CreateIndexStatement(tableName, indexName, false, search.Columns));
             }
             Add(builder);
