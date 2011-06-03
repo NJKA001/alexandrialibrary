@@ -1,31 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Gnosis.Core;
-using Gnosis.Core.Attributes;
-using Gnosis.Core.Collections;
 
 namespace Gnosis.Alexandria.Models.Tracks
 {
-    //[Table("Track")]
-    //[UniqueIndex("Track_Location", "Location")]
-    
-    //[Index("Track_Title", "Title")]
-    //[Index("Track_TitleSort", "TitleSort")]
-    //[Index("Track_Album", "Album")]
-    //[Index("Track_AlbumSort", "AlbumSort")]
-    //[Index("Track_Artists", "Artists")]
-    //[Index("Track_ArtistsSort", "ArtistsSort")]
-    //[Index("Track_Composers", "Composers")]
-    //[Index("Track_Conductors", "Conductors")]
-    //[Index("Track_Genres", "Genres")]
-    //[Index("Track_Moods", "Moods")]
-    //[Index("Track_RecordingDate", "RecordingDate")]
-    //[Index("Track_ReleaseDate", "ReleaseDate")]
-    //[Index("Track_OriginalTitle", "OriginalTitle")]
-    //[Index("Track_OriginalReleaseDate", "OriginalReleaseDate")]
-
-    //[Index("Track_Sort", "Artists", "ReleaseDate", "Album", "DiscNumber", "TrackNumber")]
-    //[DefaultSort("Artists ASC, ReleaseDate ASC, Album ASC, DiscNumber ASC, TrackNumber ASC")]
     public interface ITrack :
         IEntity
     {
@@ -77,71 +56,19 @@ namespace Gnosis.Alexandria.Models.Tracks
         string Publisher { get; set; }
         string InternationalStandardRecordingCode { get; set; }
 
-        [OneToMany("TrackPicture")]
-        [ForeignUniqueIndex("TrackPicture_Parent_Description", "Parent", "Description")]
-        ISet<ITrackPicture> Pictures { get; }
-
-        [OneToMany("TrackLyrics")]
-        [ForeignUniqueIndex("TrackLyrics_Parent_Language_Description", "Parent", "Language", "Description")]
-        ISet<ITrackUnsynchronizedLyrics> Lyrics { get; }
-
-        [OneToMany("TrackSynchronizedLyrics")]
-        [ForeignUniqueIndex("TrackSynchronizedLyrics_Parent_Language_Description", "Parent", "Language", "Description")]
-        ISet<ITrackSynchronizedLyrics> SynchronizedLyrics { get; }
-
-        [OneToMany("TrackIdentifier")]
-        [ForeignUniqueIndex("TrackIdentifier_Parent_Scheme_Identifier", "Parent", "Scheme", "Identifier")]
-        [ForeignIndex("TrackIdentifier_Identifier", "Identifier")]
-        ISet<ITrackIdentifier> Identifiers { get; }
-
-        [OneToMany("TrackRating")]
-        [ForeignUniqueIndex("TrackRating_Parent_User", "Parent", "User")]
-        ISet<ITrackRating> Ratings { get; }
-
-        [OneToMany("TrackLink")]
-        [ForeignUniqueIndex("TrackLink_Parent_Relationship", "Parent", "Relationship")]
-        [ForeignIndex("TrackLink_Location", "Location")]
-        ISet<ITrackLink> Links { get; }
-
-        [OneToMany("TrackMetadata")]
-        [ForeignUniqueIndex("TrackMetadata_Parent_Description", "Parent", "Description")]
-        [ForeignIndex("TrackMetadata_Description", "Description")]
-        [ForeignIndex("TrackMetadata_Content", "Content")]
-        ISet<ITrackMetadata> Metadata { get; }
-
-        [OneToMany("TrackTitleHash")]
-        [ForeignUniqueIndex("TrackTitleHash_Parent_Scheme", "Parent", "Scheme")]
-        [ForeignIndex("TrackTitleHash_Value", "Value")]
-        ISet<IHashCode> TitleHashCodes { get; }
-
-        [OneToMany("TrackAlbumHash")]
-        [ForeignUniqueIndex("TrackAlbumHash_Parent_Scheme", "Parent", "Scheme")]
-        [ForeignIndex("TrackAlbumHash_Value", "Value")]
-        ISet<IHashCode> AlbumHashCodes { get; }
-
-        [OneToMany("TrackArtistHash")]
-        [ForeignUniqueIndex("TrackTitleHash_Parent_Scheme", "Parent", "Scheme")]
-        [ForeignIndex("TrackArtistHash_Value", "Value")]
-        ISet<IHashCode> ArtistHashCodes { get; }
-
-        [OneToMany("TrackAlbumArtistHash")]
-        [ForeignUniqueIndex("TrackAlbumArtistHash_Parent_Scheme", "Parent", "Scheme")]
-        [ForeignIndex("TrackAlbumArtistHash_Value", "Value")]
-        ISet<IHashCode> AlbumArtistHashCodes { get; }
-
-        [OneToMany("TrackComposerHash")]
-        [ForeignUniqueIndex("TrackComposerHash_Parent_Scheme", "Parent", "Scheme")]
-        [ForeignIndex("TrackComposerHash_Value", "Value")]
-        ISet<IHashCode> ComposerHashCodes { get; }
-
-        [OneToMany("TrackConductorHash")]
-        [ForeignUniqueIndex("TrackConductorHash_Parent_Scheme", "Parent", "Scheme")]
-        [ForeignIndex("TrackConductorHash_Value", "Value")]
-        ISet<IHashCode> ConductorHashCodes { get; }
-
-        [OneToMany("TrackOriginalTitleHash")]
-        [ForeignUniqueIndex("TrackOriginalTitleHash_Parent_Scheme", "Parent", "Scheme")]
-        [ForeignIndex("TrackOriginalTitleHash_Value", "Value")]
-        ISet<IHashCode> OriginalTitleHashCodes { get; }
+        IEnumerable<ITrackPicture> Pictures { get; }
+        IEnumerable<ITrackUnsynchronizedLyrics> Lyrics { get; }
+        IEnumerable<ITrackSynchronizedLyrics> SynchronizedLyrics { get; }
+        IEnumerable<ITrackIdentifier> Identifiers { get; }
+        IEnumerable<ITrackRating> Ratings { get; }
+        IEnumerable<ITrackLink> Links { get; }
+        IEnumerable<ITrackMetadata> Metadata { get; }
+        IEnumerable<IHashCode> TitleHashCodes { get; }
+        IEnumerable<IHashCode> AlbumHashCodes { get; }
+        IEnumerable<IHashCode> ArtistHashCodes { get; }
+        IEnumerable<IHashCode> AlbumArtistHashCodes { get; }
+        IEnumerable<IHashCode> ComposerHashCodes { get; }
+        IEnumerable<IHashCode> ConductorHashCodes { get; }
+        IEnumerable<IHashCode> OriginalTitleHashCodes { get; }
     }
 }

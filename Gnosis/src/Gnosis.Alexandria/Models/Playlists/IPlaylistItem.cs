@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
-using Gnosis.Core.Attributes;
-using Gnosis.Core.Collections;
 
 namespace Gnosis.Alexandria.Models.Playlists
 {
@@ -20,9 +18,9 @@ namespace Gnosis.Alexandria.Models.Playlists
         uint TrackNumber { get; set; }
         TimeSpan Duration { get; set; }
 
-        IOrderedSet<IPlaylistExtension> Extensions { get; }
-        IOrderedSet<IPlaylistLink> Links { get; }
-        IOrderedSet<IPlaylistItemLocation> Locations { get; }
-        IOrderedSet<IPlaylistMetadata> Metadata { get; }
+        IEnumerable<IPlaylistExtension> Extensions { get; }
+        IEnumerable<IPlaylistLink> Links { get; }
+        IEnumerable<IPlaylistItemLocation> Locations { get; }
+        IEnumerable<IPlaylistMetadata> Metadata { get; }
     }
 }

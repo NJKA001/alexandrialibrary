@@ -9,7 +9,6 @@ using System.Text;
 using log4net;
 
 using Gnosis.Core;
-using Gnosis.Core.Attributes;
 using Gnosis.Core.Batches;
 using Gnosis.Core.Commands;
 using Gnosis.Core.Queries;
@@ -48,7 +47,7 @@ namespace Gnosis.Alexandria.Repositories
             }
         }
 
-        protected abstract IEnumerable<T> Read(IDataReader reader);
+        //protected abstract IEnumerable<T> Read(IDataReader reader);
         
         protected IContext Context
         {
@@ -79,7 +78,7 @@ namespace Gnosis.Alexandria.Repositories
 
         public T Lookup(Guid id)
         {
-            var whereClause = string.Format("{0}.Id = @Id", baseType.GetTableInfo().Name);
+            var whereClause = string.Format("{0}.Id = @Id", new EntityInfo(baseType).Name);
             var parameters = new Dictionary<string, object> { { "@Id", id } };
             return Select(new Filter(whereClause, parameters)).FirstOrDefault();
         }

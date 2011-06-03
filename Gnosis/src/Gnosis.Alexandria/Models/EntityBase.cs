@@ -17,22 +17,22 @@ namespace Gnosis.Alexandria.Models
         {
             this.context = context;
             this.id = Guid.NewGuid();
-            this.timeStamp = context.GetCreatedTimeStamp();
+            this.timeStamp = DateTime.Now.ToUniversalTime();
             this.isNew = true;
         }
 
-        protected EntityBase(IContext context, Guid id, ITimeStamp timeStamp)
+        protected EntityBase(IContext context, Guid id, DateTime timeStamp)
         {
             this.context = context;
             this.id = id;
-            this.timeStamp = context.GetAccessedTimeStamp(timeStamp);
+            this.timeStamp = timeStamp;
         }
 
         private static readonly ILog log = LogManager.GetLogger(typeof(EntityBase));
 
         private readonly IContext context;
         private readonly Guid id;
-        private ITimeStamp timeStamp;
+        private DateTime timeStamp;
         private bool isNew;
         private bool isChanged;
 
@@ -45,7 +45,6 @@ namespace Gnosis.Alexandria.Models
         {
             context.Invoke(action);
 
-            timeStamp = context.GetModifiedTimeStamp(timeStamp);
             isChanged = true;
 
             if (PropertyChanged != null)
@@ -56,7 +55,7 @@ namespace Gnosis.Alexandria.Models
                 }
                 catch (Exception ex)
                 {
-                    log.Error("ChangeableModelBase.OnEntityChanged", ex);
+                    log.Error("EntityBase.OnEntityChanged", ex);
                 }
             }
         }
@@ -66,7 +65,7 @@ namespace Gnosis.Alexandria.Models
             get { return id; }
         }
 
-        public ITimeStamp TimeStamp
+        public DateTime TimeStamp
         {
             get { return timeStamp; }
         }
@@ -79,6 +78,23 @@ namespace Gnosis.Alexandria.Models
         public bool IsChanged()
         {
             return isChanged;
+        }
+
+        public virtual IEnumerable<IChild> GetChildren(ChildInfo childInfo)
+        {
+            return new List<IChild>();
+        }
+
+        public virtual IEnumerable<IValue> GetValues(ValueInfo valueInfo)
+        {
+            return new List<IValue>();
+        }
+
+        public virtual void Save(DateTime timeStamp)
+        {
+            this.timeStamp = timeStamp;
+            isNew = false;
+            isChanged = false;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

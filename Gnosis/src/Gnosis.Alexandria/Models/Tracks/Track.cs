@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Gnosis.Core;
-using Gnosis.Core.Collections;
 
 namespace Gnosis.Alexandria.Models.Tracks
 {
@@ -13,24 +13,24 @@ namespace Gnosis.Alexandria.Models.Tracks
         {
             this.location = location;
 
-            this.pictures = new  Set<ITrackPicture>(context);
-            this.lyrics = new Set<ITrackUnsynchronizedLyrics>(context);
-            this.synchronizedLyrics = new Set<ITrackSynchronizedLyrics>(context);
-            this.identifiers = new Set<ITrackIdentifier>(context);
-            this.ratings = new Set<ITrackRating>(context);
-            this.links = new Set<ITrackLink>(context);
-            this.metadata = new Set<ITrackMetadata>(context);
+            this.pictures = new  List<ITrackPicture>();
+            this.lyrics = new List<ITrackUnsynchronizedLyrics>();
+            this.synchronizedLyrics = new List<ITrackSynchronizedLyrics>();
+            this.identifiers = new List<ITrackIdentifier>();
+            this.ratings = new List<ITrackRating>();
+            this.links = new List<ITrackLink>();
+            this.metadata = new List<ITrackMetadata>();
 
-            this.titleHashCodes = new Set<IHashCode>(context);
-            this.albumHashCodes = new Set<IHashCode>(context);
-            this.artistHashCodes = new Set<IHashCode>(context);
-            this.albumArtistHashCodes = new Set<IHashCode>(context);
-            this.composerHashCodes = new Set<IHashCode>(context);
-            this.conductorHashCodes = new Set<IHashCode>(context);
-            this.originalTitleHashCodes = new Set<IHashCode>(context);
+            this.titleHashCodes = new List<IHashCode>();
+            this.albumHashCodes = new List<IHashCode>();
+            this.artistHashCodes = new List<IHashCode>();
+            this.albumArtistHashCodes = new List<IHashCode>();
+            this.composerHashCodes = new List<IHashCode>();
+            this.conductorHashCodes = new List<IHashCode>();
+            this.originalTitleHashCodes = new List<IHashCode>();
         }
 
-        public Track(IContext context, Guid id, ITimeStamp timeStamp, 
+        public Track(IContext context, Guid id, DateTime timeStamp, 
             Uri location, string mediaType, string title, string titleSort, string subtitle, string grouping, string comment, 
             string album, string albumSort, string albumSubtitle, string artists, string artistsSort, string albumArtists, 
             string composers, string conductors, string genres, string moods, string languages, DateTime recordingDate, DateTime releaseDate,
@@ -76,21 +76,21 @@ namespace Gnosis.Alexandria.Models.Tracks
             this.publisher = publisher;
             this.internationalStandardRecordingCode = internationalStandardRecordingCode;
 
-            this.pictures = new Set<ITrackPicture>(context);
-            this.lyrics = new Set<ITrackUnsynchronizedLyrics>(context);
-            this.synchronizedLyrics = new Set<ITrackSynchronizedLyrics>(context);
-            this.identifiers = new Set<ITrackIdentifier>(context);
-            this.ratings = new Set<ITrackRating>(context);
-            this.links = new Set<ITrackLink>(context);
-            this.metadata = new Set<ITrackMetadata>(context);
+            this.pictures = new List<ITrackPicture>();
+            this.lyrics = new List<ITrackUnsynchronizedLyrics>();
+            this.synchronizedLyrics = new List<ITrackSynchronizedLyrics>();
+            this.identifiers = new List<ITrackIdentifier>();
+            this.ratings = new List<ITrackRating>();
+            this.links = new List<ITrackLink>();
+            this.metadata = new List<ITrackMetadata>();
 
-            this.titleHashCodes = new Set<IHashCode>(context);
-            this.albumHashCodes = new Set<IHashCode>(context);
-            this.artistHashCodes = new Set<IHashCode>(context);
-            this.albumArtistHashCodes = new Set<IHashCode>(context);
-            this.composerHashCodes = new Set<IHashCode>(context);
-            this.conductorHashCodes = new Set<IHashCode>(context);
-            this.originalTitleHashCodes = new Set<IHashCode>(context);
+            this.titleHashCodes = new List<IHashCode>();
+            this.albumHashCodes = new List<IHashCode>();
+            this.artistHashCodes = new List<IHashCode>();
+            this.albumArtistHashCodes = new List<IHashCode>();
+            this.composerHashCodes = new List<IHashCode>();
+            this.conductorHashCodes = new List<IHashCode>();
+            this.originalTitleHashCodes = new List<IHashCode>();
         }
 
         private readonly Uri location;
@@ -130,21 +130,21 @@ namespace Gnosis.Alexandria.Models.Tracks
         private string publisher = string.Empty;
         private string internationalStandardRecordingCode = string.Empty;
 
-        private readonly ISet<ITrackPicture> pictures;
-        private readonly ISet<ITrackUnsynchronizedLyrics> lyrics;
-        private readonly ISet<ITrackSynchronizedLyrics> synchronizedLyrics;
-        private readonly ISet<ITrackIdentifier> identifiers;
-        private readonly ISet<ITrackRating> ratings;
-        private readonly ISet<ITrackLink> links;
-        private readonly ISet<ITrackMetadata> metadata;
+        private readonly IList<ITrackPicture> pictures;
+        private readonly IList<ITrackUnsynchronizedLyrics> lyrics;
+        private readonly IList<ITrackSynchronizedLyrics> synchronizedLyrics;
+        private readonly IList<ITrackIdentifier> identifiers;
+        private readonly IList<ITrackRating> ratings;
+        private readonly IList<ITrackLink> links;
+        private readonly IList<ITrackMetadata> metadata;
 
-        private readonly ISet<IHashCode> titleHashCodes;
-        private readonly ISet<IHashCode> albumHashCodes;
-        private readonly ISet<IHashCode> artistHashCodes;
-        private readonly ISet<IHashCode> albumArtistHashCodes;
-        private readonly ISet<IHashCode> composerHashCodes;
-        private readonly ISet<IHashCode> conductorHashCodes;
-        private readonly ISet<IHashCode> originalTitleHashCodes;
+        private readonly IList<IHashCode> titleHashCodes;
+        private readonly IList<IHashCode> albumHashCodes;
+        private readonly IList<IHashCode> artistHashCodes;
+        private readonly IList<IHashCode> albumArtistHashCodes;
+        private readonly IList<IHashCode> composerHashCodes;
+        private readonly IList<IHashCode> conductorHashCodes;
+        private readonly IList<IHashCode> originalTitleHashCodes;
 
         #region ITrack Members
 
@@ -573,72 +573,72 @@ namespace Gnosis.Alexandria.Models.Tracks
             }
         }
 
-        public ISet<ITrackPicture> Pictures
+        public IEnumerable<ITrackPicture> Pictures
         {
             get { return pictures; }
         }
 
-        public ISet<ITrackUnsynchronizedLyrics> Lyrics
+        public IEnumerable<ITrackUnsynchronizedLyrics> Lyrics
         {
             get { return lyrics; }
         }
 
-        public ISet<ITrackSynchronizedLyrics> SynchronizedLyrics
+        public IEnumerable<ITrackSynchronizedLyrics> SynchronizedLyrics
         {
             get { return synchronizedLyrics; }
         }
 
-        public ISet<ITrackIdentifier> Identifiers
+        public IEnumerable<ITrackIdentifier> Identifiers
         {
             get { return identifiers; }
         }
 
-        public ISet<ITrackRating> Ratings
+        public IEnumerable<ITrackRating> Ratings
         {
             get { return ratings; }
         }
 
-        public ISet<ITrackLink> Links
+        public IEnumerable<ITrackLink> Links
         {
             get { return links; }
         }
 
-        public ISet<ITrackMetadata> Metadata
+        public IEnumerable<ITrackMetadata> Metadata
         {
             get { return metadata; }
         }
 
-        public ISet<IHashCode> TitleHashCodes
+        public IEnumerable<IHashCode> TitleHashCodes
         {
             get { return titleHashCodes; }
         }
 
-        public ISet<IHashCode> AlbumHashCodes
+        public IEnumerable<IHashCode> AlbumHashCodes
         {
             get { return albumHashCodes; }
         }
 
-        public ISet<IHashCode> ArtistHashCodes
+        public IEnumerable<IHashCode> ArtistHashCodes
         {
             get { return artistHashCodes; }
         }
 
-        public ISet<IHashCode> AlbumArtistHashCodes
+        public IEnumerable<IHashCode> AlbumArtistHashCodes
         {
             get { return albumArtistHashCodes; }
         }
 
-        public ISet<IHashCode> ComposerHashCodes
+        public IEnumerable<IHashCode> ComposerHashCodes
         {
             get { return composerHashCodes; }
         }
 
-        public ISet<IHashCode> ConductorHashCodes
+        public IEnumerable<IHashCode> ConductorHashCodes
         {
             get { return conductorHashCodes; }
         }
 
-        public ISet<IHashCode> OriginalTitleHashCodes
+        public IEnumerable<IHashCode> OriginalTitleHashCodes
         {
             get { return originalTitleHashCodes; }
         }

@@ -13,16 +13,11 @@ namespace Gnosis.Core.Batches
         public DeleteEntitiesBatch(Func<IDbConnection> getConnection, IEnumerable<T> entities)
             : base(getConnection)
         {
-            var table = typeof(T).GetTableInfo();
+            var entityInfo = new EntityInfo(typeof(T));
 
             foreach (var entity in entities)
             {
-                AddEntityDeleteStatement(entity, table);
-
-                foreach (var childInfo in table.Children)
-                {
-                    AddChildDeleteStatements(childInfo, entity);
-                }
+                AddEntityDeleteStatement(entity, entityInfo);
             }
         }
     }

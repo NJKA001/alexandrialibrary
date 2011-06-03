@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
-using Gnosis.Core.Collections;
 
 namespace Gnosis.Alexandria.Models.Feeds
 {
@@ -26,9 +25,9 @@ namespace Gnosis.Alexandria.Models.Feeds
         Uri IconPath { get; set; }
         string FeedIdentifier { get; set; }
 
-        IOrderedSet<IFeedCategory> Categories { get; }
-        IOrderedSet<IFeedLink> Links { get; }
-        IOrderedSet<IFeedMetadata> Metadata { get; }
-        IOrderedSet<IFeedItem> Items { get; }
+        IEnumerable<IFeedCategory> Categories { get; }
+        IEnumerable<IFeedLink> Links { get; }
+        IEnumerable<IFeedMetadata> Metadata { get; }
+        IEnumerable<IFeedItem> Items { get; }
     }
 }

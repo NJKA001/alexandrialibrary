@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
-using Gnosis.Core.Attributes;
 
 namespace Gnosis.Core.Commands
 {
     public class SelectStatement : IStatement
     {
-        public SelectStatement(TableInfo table, string whereClause, string orderByClause)
-        {            
-            builder.AppendFormat("select '{0}', {0}.* from {0}", table.Name);
+        public SelectStatement(EntityInfo entityInfo, string whereClause, string orderByClause)
+        {
+            builder.AppendFormat("select '{0}', {0}.* from {0}", entityInfo.Name);
             if (!string.IsNullOrEmpty(whereClause))
                 builder.AppendFormat(" where {0}", whereClause);
             if (!string.IsNullOrEmpty(orderByClause))

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
-using Gnosis.Core.Collections;
 
 namespace Gnosis.Alexandria.Models.Feeds
 {
@@ -17,13 +16,13 @@ namespace Gnosis.Alexandria.Models.Feeds
         {
             this.location = location;
             
-            this.categories = new OrderedSet<IFeedCategory>(context);
-            this.links = new OrderedSet<IFeedLink>(context);
-            this.metadata = new OrderedSet<IFeedMetadata>(context);
-            this.items = new OrderedSet<IFeedItem>(context);
+            this.categories = new List<IFeedCategory>();
+            this.links = new List<IFeedLink>();
+            this.metadata = new List<IFeedMetadata>();
+            this.items = new List<IFeedItem>();
         }
 
-        public Feed(IContext context, Guid id, ITimeStamp timeStamp, Uri location, string mediaType, string title, string authors, string contributors, string description, string language, Uri originalLocation, string copyright, DateTime publishedDate, DateTime updatedDate, string generator, Uri imagePath, Uri iconPath, string feedIdentifier)
+        public Feed(IContext context, Guid id, DateTime timeStamp, Uri location, string mediaType, string title, string authors, string contributors, string description, string language, Uri originalLocation, string copyright, DateTime publishedDate, DateTime updatedDate, string generator, Uri imagePath, Uri iconPath, string feedIdentifier)
             : base(context, id, timeStamp)
         {
             this.location = location;
@@ -42,10 +41,10 @@ namespace Gnosis.Alexandria.Models.Feeds
             this.iconPath = iconPath;
             this.feedIdentifier = feedIdentifier;
 
-            this.categories = new OrderedSet<IFeedCategory>(context);
-            this.links = new OrderedSet<IFeedLink>(context);
-            this.metadata = new OrderedSet<IFeedMetadata>(context);
-            this.items = new OrderedSet<IFeedItem>(context);
+            this.categories = new List<IFeedCategory>();
+            this.links = new List<IFeedLink>();
+            this.metadata = new List<IFeedMetadata>();
+            this.items = new List<IFeedItem>();
         }
 
         private readonly Uri location;
@@ -64,10 +63,10 @@ namespace Gnosis.Alexandria.Models.Feeds
         private Uri iconPath;
         private string feedIdentifier;
 
-        private readonly IOrderedSet<IFeedCategory> categories;
-        private readonly IOrderedSet<IFeedLink> links;
-        private readonly IOrderedSet<IFeedMetadata> metadata;
-        private readonly IOrderedSet<IFeedItem> items;
+        private readonly IList<IFeedCategory> categories;
+        private readonly IList<IFeedLink> links;
+        private readonly IList<IFeedMetadata> metadata;
+        private readonly IList<IFeedItem> items;
 
         public Uri Location
         {
@@ -242,22 +241,22 @@ namespace Gnosis.Alexandria.Models.Feeds
             }
         }
 
-        public IOrderedSet<IFeedCategory> Categories
+        public IEnumerable<IFeedCategory> Categories
         {
             get { return categories; }
         }
 
-        public IOrderedSet<IFeedLink> Links
+        public IEnumerable<IFeedLink> Links
         {
             get { return links; }
         }
 
-        public IOrderedSet<IFeedMetadata> Metadata
+        public IEnumerable<IFeedMetadata> Metadata
         {
             get { return metadata; }
         }
 
-        public IOrderedSet<IFeedItem> Items
+        public IEnumerable<IFeedItem> Items
         {
             get { return items; }
         }

@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Text;
 
 using Gnosis.Core;
-using Gnosis.Core.Attributes;
 
 namespace Gnosis.Core.Commands
 {
@@ -16,30 +15,27 @@ namespace Gnosis.Core.Commands
             builder.AppendFormat("create table if not exists {0} (", name);
         }
 
-        public CreateTableStatement(TableInfo tableInfo)
-            : this(tableInfo.Name)
+        public CreateTableStatement(EntityInfo entityInfo)
+            : this(entityInfo.Name)
         {
-            AddColumns(tableInfo.Columns);
+            AddColumns(entityInfo.Elements);
 
-            foreach (var customDataType in tableInfo.CustomDataTypes)
-                AddColumns(customDataType.Columns);
+            foreach (var dataType in entityInfo.DataTypes)
+                AddColumns(dataType.Elements);
+        }
+
+        public CreateTableStatement(ValueInfo valueInfo)
+            : this(valueInfo.Name)
+        {
+            AddColumns(valueInfo.Elements);
         }
 
         public CreateTableStatement(ChildInfo childInfo)
-            : this(childInfo.TableName)
+            : this(childInfo.Name)
         {
-            if (childInfo.ForeignKey != null)
-            {
-                Column(childInfo.ForeignKey.Type, childInfo.ForeignKey.Name);
-            }
-            if (childInfo.Sequence != null)
-            {
-                Column(childInfo.Sequence.Type, childInfo.Sequence.Name);
-            }
-
-            AddColumns(childInfo.BaseTable.Columns);
-            foreach (var customDataType in childInfo.BaseTable.CustomDataTypes)
-                AddColumns(customDataType.Columns);
+            AddColumns(childInfo.Entity.Elements);
+            foreach (var dataType in childInfo.Entity.DataTypes)
+                AddColumns(dataType.Elements);
         }
 
         private readonly StringBuilder builder = new StringBuilder();
@@ -235,17 +231,17 @@ namespace Gnosis.Core.Commands
 
         #region TableInfo Helper Methods
 
-        private void AddColumns(IEnumerable<ColumnInfo> columns)
+        private void AddColumns(IEnumerable<ElementInfo> elements)
         {
-            foreach (var column in columns)
+            foreach (var element in elements)
             {
-                if (column.IsPrimaryKey)
+                if (element.IsPrimaryKey)
                 {
-                    PrimaryKey(column.ColumnType, column.Name, column.IsAutoIncrement);
+                    PrimaryKey(element.Type, element.Name, element.IsAutoIncrement);
                 }
                 else
                 {
-                    Column(column.ColumnType, column.Name, column.DefaultValue);
+                    Column(element.Type, element.Name);
                 }
             }
         }

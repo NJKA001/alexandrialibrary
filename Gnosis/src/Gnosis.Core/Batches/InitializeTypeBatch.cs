@@ -13,32 +13,40 @@ namespace Gnosis.Core.Batches
         public InitializeTypeBatch(Func<IDbConnection> getConnection, Type type, IEnumerable<ILookup> lookups, IEnumerable<ISearch> searches)
             : base(getConnection)
         {
-            var tableInfo = type.GetTableInfo();
+            var entityInfo = new EntityInfo(type);
 
-            AddRootCommandBuilder(tableInfo);
-            AddChildrenCommandBuilders(tableInfo.Children);
+            AddRootCommandBuilder(entityInfo);
+            AddCommandBuilders(entityInfo);
             AddLookupIndices(lookups);
             AddSearchIndices(searches);
         }
 
-        private void AddRootCommandBuilder(TableInfo tableInfo)
+        private void AddRootCommandBuilder(EntityInfo entityInfo)
         {
-            var builder = new CommandBuilder(tableInfo.Name);
-            builder.AddStatement(new CreateTableStatement(tableInfo));
+            var builder = new CommandBuilder();
+            builder.AddStatement(new CreateTableStatement(entityInfo));
             
             Add(builder);
         }
 
-        private void AddChildrenCommandBuilders(IEnumerable<ChildInfo> children)
+        private void AddCommandBuilders(EntityInfo entityInfo)
         {
-            foreach (var childInfo in children)
+            foreach (var valueInfo in entityInfo.Values)
             {
-                var builder = new CommandBuilder(childInfo.TableName);
+                var builder = new CommandBuilder();
+                builder.AddStatement(new CreateTableStatement(valueInfo));
+
+                Add(builder);
+            }
+
+            foreach (var childInfo in entityInfo.Children)
+            {
+                var builder = new CommandBuilder();
                 builder.AddStatement(new CreateTableStatement(childInfo));
 
                 Add(builder);
 
-                AddChildrenCommandBuilders(childInfo.BaseTable.Children);
+                AddCommandBuilders(childInfo.Entity);
             }
         }
 
@@ -47,7 +55,7 @@ namespace Gnosis.Core.Batches
             var builder = new CommandBuilder();
             foreach (var lookup in lookups)
             {
-                var tableName = lookup.BaseType.GetTableInfo().Name;
+                var tableName = new EntityInfo(lookup.BaseType).Name;
                 var indexName = string.Format("{0}_{1}_index", tableName, lookup.Name);
                 builder.AddStatement(new CreateIndexStatement(tableName, indexName, true, lookup.Columns));
             }
@@ -59,7 +67,7 @@ namespace Gnosis.Core.Batches
             var builder = new CommandBuilder();
             foreach (var search in searches)
             {
-                var tableName = search.BaseType.GetTableInfo().Name;
+                var tableName = new EntityInfo(search.BaseType).Name;
                 var indexName = string.Format("{0}_{1}_index", tableName, search.Name);
                 builder.AddStatement(new CreateIndexStatement(tableName, indexName, false, search.Columns));
             }

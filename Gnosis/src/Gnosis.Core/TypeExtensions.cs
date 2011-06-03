@@ -5,18 +5,18 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-using Gnosis.Core.Attributes;
 using Gnosis.Core.Batches;
-using Gnosis.Core.Collections;
 using Gnosis.Core.Commands;
 
 namespace Gnosis.Core
 {
     public static class TypeExtensions
     {
+
+        /*
         #region Private Helpers Methods
 
-        private static void AddChildInfo(Type type, List<ChildInfo> childInfo)
+        private static void AddChildInfo(Type type, List<OldChildInfo> childInfo)
         {
             foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
@@ -27,7 +27,7 @@ namespace Gnosis.Core
                     if (oneToManyAttribute != null)
                     {
                         hasAttribute = true;
-                        childInfo.Add(new ChildInfo(oneToManyAttribute, property));
+                        childInfo.Add(new OldChildInfo(oneToManyAttribute, property));
                         break;
                     }
                 }
@@ -37,7 +37,7 @@ namespace Gnosis.Core
                     var tableName = string.Format("{0}_{1}", type.GetDefaultTableName(), property.PropertyType.GetItemType().GetDefaultTableName());
                     var foreignKey = ForeignKeyInfo.Default;
                     var sequence = property.PropertyType.IsOrderedCollectionType() ? SequenceInfo.Default : null;
-                    childInfo.Add(new ChildInfo(tableName, property, foreignKey, sequence));
+                    childInfo.Add(new OldChildInfo(tableName, property, foreignKey, sequence));
                 }
             }
         }
@@ -168,9 +168,9 @@ namespace Gnosis.Core
             return indexAttributes;
         }
 
-        private static IEnumerable<ChildInfo> GetChildInfo(this Type type)
+        private static IEnumerable<OldChildInfo> GetChildInfo(this Type type)
         {
-            var childInfo = new List<ChildInfo>();
+            var childInfo = new List<OldChildInfo>();
 
             foreach (var interfaceType in type.GetInterfaces())
             {
@@ -208,6 +208,7 @@ namespace Gnosis.Core
         }
 
         #endregion
+        */
 
         /// <summary>
         /// Get the SQLite type affinity of the given type
@@ -229,6 +230,7 @@ namespace Gnosis.Core
                 return TypeAffinity.Numeric;
         }
 
+        /*
         public static TableInfo GetTableInfo(this Type type)
         {
             TableAttribute table = null;
@@ -261,16 +263,16 @@ namespace Gnosis.Core
             return null;
         }
 
-        public static bool IsCustomDataType(this Type type)
-        {
-            foreach (var attribute in type.GetCustomAttributes(true))
-            {
-                if (attribute is CustomDataTypeAttribute)
-                    return true;
-            }
+        //public static bool IsCustomDataType(this Type type)
+        //{
+        //    foreach (var attribute in type.GetCustomAttributes(true))
+        //    {
+        //        if (attribute is CustomDataTypeAttribute)
+        //            return true;
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
         public static Type GetItemType(this Type type)
         {
@@ -323,10 +325,51 @@ namespace Gnosis.Core
         {
             return type.Name == "ISet`1";
         }
+        */
+
+        public static bool IsSimple(this Type type)
+        {
+            if (type.IsEnum)
+                return true;
+
+            if (type == typeof(string))
+                return true;
+
+            if (type == typeof(Guid))
+                return true;
+
+            if (type == typeof(Uri))
+                return true;
+
+            if (type == typeof(DateTime))
+                return true;
+
+            if (type == typeof(TimeSpan))
+                return true;
+
+            return false;
+        }
+
+        public static bool IsEntityType(this Type type)
+        {
+            return typeof(IEntity).IsAssignableFrom(type);
+        }
+
+        public static bool IsChildType(this Type type)
+        {
+            return typeof(IChild).IsAssignableFrom(type);
+        }
+
+        public static bool IsValueType(this Type type)
+        {
+            return typeof(IValue).IsAssignableFrom(type);
+        }
 
         public static bool IsTextColumn(this Type type)
         {
-            if (type == typeof(string))
+            if (type.IsEntityType())
+                return true;
+            else if (type == typeof(string))
                 return true;
             else if (type == typeof(DateTime))
                 return true;
@@ -340,7 +383,9 @@ namespace Gnosis.Core
 
         public static bool IsIntegerColumn(this Type type)
         {
-            if (type == typeof(bool))
+            if (type.IsEnum)
+                return true;
+            else if (type == typeof(bool))
                 return true;
             else if (type == typeof(byte))
                 return true;

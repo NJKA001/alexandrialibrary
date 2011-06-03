@@ -24,6 +24,8 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             Initialize();
         }
 
+        /*
+
         #region Private Helpers Methods
 
         private IDictionary<Guid, IFeed> GetFeeds(IDataReader reader)
@@ -476,5 +478,6 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             else
                 return new List<IFeed>();
         }
+        */
     }
 }

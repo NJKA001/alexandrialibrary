@@ -18,10 +18,5 @@ namespace Gnosis.Alexandria.Repositories.Tracks
             : base(context)
         {
         }
-
-        protected override IEnumerable<ITrack> Read(IDataReader reader)
-        {
-            return new List<ITrack>();
-        }
     }
 }

@@ -52,20 +52,5 @@ namespace Gnosis.Alexandria.Models
                 dispatcher.Invoke(action, DispatcherPriority.DataBind, null);
             }
         }
-
-        public ITimeStamp GetCreatedTimeStamp()
-        {
-            return new TimeStamp(currentUser);
-        }
-
-        public ITimeStamp GetAccessedTimeStamp(ITimeStamp timeStamp)
-        {
-            return new TimeStamp(timeStamp.CreatedBy, timeStamp.CreatedDate, currentUser, GetCurrentDateTime(), timeStamp.LastModifiedBy, timeStamp.LastModifiedDate);
-        }
-
-        public ITimeStamp GetModifiedTimeStamp(ITimeStamp timeStamp)
-        {
-            return new TimeStamp(timeStamp.CreatedBy, timeStamp.CreatedDate, timeStamp.LastAccessedBy, timeStamp.LastAccessedDate, currentUser, GetCurrentDateTime());
-        }
     }
 }

@@ -16,7 +16,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             this.track = track;
         }
 
-        public TrackSynchronizedLyrics(IContext context, Guid id, ITimeStamp timeStamp, ITrack track, string textEncoding, string language, string description, string lyrics, TrackSynchronizedTextType contentType)
+        public TrackSynchronizedLyrics(IContext context, Guid id, DateTime timeStamp, ITrack track, string textEncoding, string language, string description, string lyrics, TrackSynchronizedTextType contentType)
             : base(context, id, timeStamp)
         {
             this.track = track;

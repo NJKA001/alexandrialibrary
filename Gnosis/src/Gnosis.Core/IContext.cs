@@ -12,9 +12,5 @@ namespace Gnosis.Core
 
         void ChangeCurrentUser(Uri user);
         void Invoke(Action action);
-
-        ITimeStamp GetCreatedTimeStamp();
-        ITimeStamp GetAccessedTimeStamp(ITimeStamp timeStamp);
-        ITimeStamp GetModifiedTimeStamp(ITimeStamp timeStamp);
     }
 }

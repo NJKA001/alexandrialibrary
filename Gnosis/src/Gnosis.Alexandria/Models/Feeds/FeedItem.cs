@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
-using Gnosis.Core.Collections;
 
 namespace Gnosis.Alexandria.Models.Feeds
 {
@@ -14,17 +13,17 @@ namespace Gnosis.Alexandria.Models.Feeds
         public FeedItem(IContext context)
             : base(context)
         {
-            this.categories = new OrderedSet<IFeedCategory>(context);
-            this.links = new OrderedSet<IFeedLink>(context);
-            this.metadata = new OrderedSet<IFeedMetadata>(context);
+            this.categories = new List<IFeedCategory>();
+            this.links = new List<IFeedLink>();
+            this.metadata = new List<IFeedMetadata>();
         }
 
-        public FeedItem(IContext context, Guid id, ITimeStamp timeStamp, string title, string titleMediaType, string authors, string contributors, DateTime publishedDate, string copyright, string summary, string content, string contentMediaType, Uri contentLocation, DateTime updatedDate, string feedItemIdentifier)
+        public FeedItem(IContext context, Guid id, DateTime timeStamp, string title, string titleMediaType, string authors, string contributors, DateTime publishedDate, string copyright, string summary, string content, string contentMediaType, Uri contentLocation, DateTime updatedDate, string feedItemIdentifier)
             : base(context, id, timeStamp)
         {
-            this.categories = new OrderedSet<IFeedCategory>(context);
-            this.links = new OrderedSet<IFeedLink>(context);
-            this.metadata = new OrderedSet<IFeedMetadata>(context);
+            this.categories = new List<IFeedCategory>();
+            this.links = new List<IFeedLink>();
+            this.metadata = new List<IFeedMetadata>();
         }
 
         private string title;
@@ -40,9 +39,9 @@ namespace Gnosis.Alexandria.Models.Feeds
         private DateTime updatedDate;
         private string feedItemIdentifier;
 
-        private readonly OrderedSet<IFeedCategory> categories;
-        private readonly OrderedSet<IFeedLink> links;
-        private readonly OrderedSet<IFeedMetadata> metadata;
+        private readonly List<IFeedCategory> categories;
+        private readonly List<IFeedLink> links;
+        private readonly List<IFeedMetadata> metadata;
 
         #region IFeedItem Members
 
@@ -191,17 +190,17 @@ namespace Gnosis.Alexandria.Models.Feeds
             }
         }
 
-        public IOrderedSet<IFeedCategory> Categories
+        public IEnumerable<IFeedCategory> Categories
         {
             get { return categories; }
         }
 
-        public IOrderedSet<IFeedLink> Links
+        public IEnumerable<IFeedLink> Links
         {
             get { return links; }
         }
 
-        public IOrderedSet<IFeedMetadata> Metadata
+        public IEnumerable<IFeedMetadata> Metadata
         {
             get { return metadata; }
         }

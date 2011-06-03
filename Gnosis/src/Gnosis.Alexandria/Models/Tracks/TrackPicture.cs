@@ -16,7 +16,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             this.track = track;
         }
 
-        public TrackPicture(IContext context, Guid id, ITimeStamp timeStamp, ITrack track, string textEncoding, string mediaType, TrackPictureType pictureType, string description, byte[] pictureData)
+        public TrackPicture(IContext context, Guid id, DateTime timeStamp, ITrack track, string textEncoding, string mediaType, TrackPictureType pictureType, string description, byte[] pictureData)
             : base(context, id, timeStamp)
         {
             this.track = track;

@@ -10,13 +10,14 @@ namespace Gnosis.Alexandria.Models.HashCodes
     public class DoubleMetaphone
         : ValueBase, IHashCode
     {
-        public DoubleMetaphone(string value)
-            : this(Guid.NewGuid(), value)
+        public DoubleMetaphone(Guid parent, string value)
+            : base(parent)
         {
+            this.value = value;
         }
 
-        public DoubleMetaphone(Guid id, string value)
-            : base(id)
+        public DoubleMetaphone(Guid id, Guid parent, string value)
+            : base(id, parent)
         {
             this.value = value;
         }
@@ -35,12 +36,12 @@ namespace Gnosis.Alexandria.Models.HashCodes
 
         public static readonly Uri Namespace = new Uri("http://alxlib.com/domain/1/hash-schemes/double-metaphone/1");
 
-        public static IHashCode Create(string originalString)
+        public static IHashCode Create(Guid parent, string originalString)
         {
             if (string.IsNullOrEmpty(originalString))
                 return null;
 
-            return new DoubleMetaphone(originalString.AsDoubleMetaphone());
+            return new DoubleMetaphone(parent, originalString.AsDoubleMetaphone());
         }
     }
 }
