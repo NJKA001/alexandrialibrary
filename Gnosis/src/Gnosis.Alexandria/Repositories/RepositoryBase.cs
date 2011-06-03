@@ -72,7 +72,8 @@ namespace Gnosis.Alexandria.Repositories
 
         protected IEnumerable<T> Select(IFilter filter)
         {
-            var query = new Query<T>(() => GetConnection(), filter);
+            var factory = null as IFactory;
+            var query = new Query<T>(() => GetConnection(), factory, filter);
             return query.Execute();
         }
 

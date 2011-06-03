@@ -54,7 +54,6 @@
     <Compile Include="Batches\InitializeTypeBatch.cs" />
     <Compile Include="Batches\PersistEntitiesBatch.cs" />
     <Compile Include="Batches\SaveEntitiesBatch.cs" />
-    <Compile Include="Batches\SelectEntitiesBatch.cs" />
     <Compile Include="Collections\CollectionItemInfo.cs" />
     <Compile Include="Collections\CollectionItemState.cs" />
     <Compile Include="Collections\EntitySet.cs" />

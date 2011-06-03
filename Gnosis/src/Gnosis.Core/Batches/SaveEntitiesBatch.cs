@@ -40,7 +40,7 @@ namespace Gnosis.Core.Batches
 
         private void AddEntityInsertStatement(IEntity entity, TableInfo table)
         {
-            var builder = new CommandBuilder();
+            var builder = new CommandBuilder(table.Name);
             var statement = new InsertStatement(table.Name);
 
             foreach (var column in table.Columns)

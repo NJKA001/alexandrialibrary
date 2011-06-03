@@ -10,7 +10,6 @@ namespace Gnosis.Core.Queries
     public interface IQuery<T>
         where T : IEntity
     {
-        void Add(ICommandBuilder builder);
         IEnumerable<T> Execute();
     }
 }

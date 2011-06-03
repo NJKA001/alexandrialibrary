@@ -23,7 +23,7 @@ namespace Gnosis.Core.Batches
 
         private void AddRootCommandBuilder(TableInfo tableInfo)
         {
-            var builder = new CommandBuilder();
+            var builder = new CommandBuilder(tableInfo.Name);
             builder.AddStatement(new CreateTableStatement(tableInfo));
             
             Add(builder);
@@ -33,7 +33,7 @@ namespace Gnosis.Core.Batches
         {
             foreach (var childInfo in children)
             {
-                var builder = new CommandBuilder();
+                var builder = new CommandBuilder(childInfo.TableName);
                 builder.AddStatement(new CreateTableStatement(childInfo));
 
                 Add(builder);

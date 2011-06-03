@@ -10,9 +10,17 @@ namespace Gnosis.Core.Commands
         : ICommandBuilder
     {
         public CommandBuilder()
+            : this(string.Empty)
         {
         }
 
+        public CommandBuilder(string name)
+        {
+            this.name = name;
+        }
+
+        private readonly string name;
+        private readonly IList<ICommandBuilder> children = new List<ICommandBuilder>();
         private readonly IDictionary<string, object> parameters = new Dictionary<string, object>();
         private readonly IList<IStatement> statements = new List<IStatement>();
         
@@ -25,6 +33,16 @@ namespace Gnosis.Core.Commands
         }
 
         #region ICommandBuilber Members
+
+        public string Name
+        {
+            get { return name; }
+        }
+
+        public void AddChild(ICommandBuilder child)
+        {
+            children.Add(child);
+        }
 
         public void AddParameter(string name, object value)
         {
@@ -50,6 +68,11 @@ namespace Gnosis.Core.Commands
                 AddParameter(command, parameter.Key, parameter.Value);
 
             return command;
+        }
+
+        public IEnumerable<ICommandBuilder> Children
+        {
+            get { return children; }
         }
 
         #endregion
