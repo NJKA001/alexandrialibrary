@@ -35,10 +35,9 @@ namespace Gnosis.Core
                 if (!hasAttribute && property.PropertyType.IsCollectionType())
                 {
                     var tableName = string.Format("{0}_{1}", type.GetDefaultTableName(), property.PropertyType.GetItemType().GetDefaultTableName());
-                    var primaryKey = property.PropertyType.IsValueCollectionType() ? PrimaryKeyInfo.Default : null;
                     var foreignKey = ForeignKeyInfo.Default;
                     var sequence = property.PropertyType.IsOrderedCollectionType() ? SequenceInfo.Default : null;
-                    childInfo.Add(new ChildInfo(tableName, property, primaryKey, foreignKey, sequence));
+                    childInfo.Add(new ChildInfo(tableName, property, foreignKey, sequence));
                 }
             }
         }
@@ -49,7 +48,7 @@ namespace Gnosis.Core
             {
                 if (property.PropertyType.IsValueType())
                 {
-                    customDataTypeInfo.Add(new CustomDataTypeInfo(property.PropertyType.GetColumnInfo(property.PropertyType.GetDefaultTableName() + "_"), property));
+                    customDataTypeInfo.Add(new CustomDataTypeInfo(property.PropertyType.GetColumnInfo(property.PropertyType.GetDefaultTableName() + "_", false), property));
                 }
                 else
                 {
@@ -57,7 +56,7 @@ namespace Gnosis.Core
                     {
                         if (attribute is CustomDataTypeAttribute)
                         {
-                            customDataTypeInfo.Add(new CustomDataTypeInfo(property.PropertyType.GetColumnInfo(string.Empty), property));
+                            customDataTypeInfo.Add(new CustomDataTypeInfo(property.PropertyType.GetColumnInfo(string.Empty, false), property));
                         }
                     }
                 }
@@ -76,16 +75,20 @@ namespace Gnosis.Core
             }
         }
 
-        private static void AddColumnInfo(Type type, List<ColumnInfo> columnInfo, string prefix)
+        private static void AddColumnInfo(Type type, List<ColumnInfo> columnInfo, string prefix, bool includePrimaryKey)
         {
             foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 ColumnAttribute columnAttribute = null;
                 PrimaryKeyColumnAttribute primaryKeyColumnAttribute = null;
                 var ignore = false;
-                var isPrimaryKey = (type == typeof(IEntity) && property.Name == "Id");
+                var isPrimaryKey = ((type == typeof(IEntity) || type == typeof(IValue)) && property.Name == "Id");
 
-                if (property.PropertyType.IsCustomDataType() || property.PropertyType.IsValueType())
+                if (isPrimaryKey && !includePrimaryKey)
+                {
+                    ignore = true;
+                }
+                else if (property.PropertyType.IsCustomDataType() || property.PropertyType.IsValueType())
                 {
                     ignore = true;
                 }
@@ -136,16 +139,16 @@ namespace Gnosis.Core
             }
         }
 
-        private static IEnumerable<ColumnInfo> GetColumnInfo(this Type type, string prefix)
+        private static IEnumerable<ColumnInfo> GetColumnInfo(this Type type, string prefix, bool includePrimaryKey)
         {
             var columnInfo = new List<ColumnInfo>();
 
             foreach (var interfaceType in type.GetInterfaces())
             {
-                AddColumnInfo(interfaceType, columnInfo, prefix);
+                AddColumnInfo(interfaceType, columnInfo, prefix, includePrimaryKey);
             }
 
-            AddColumnInfo(type, columnInfo, prefix);
+            AddColumnInfo(type, columnInfo, prefix, includePrimaryKey);
 
             return columnInfo;
         }
@@ -252,7 +255,7 @@ namespace Gnosis.Core
             {
                 var tableName = table != null ? table.Name : type.GetDefaultTableName();
                 var defaultSortExpression = defaultSort != null ? defaultSort.Expression : string.Empty;
-                return new TableInfo(tableName, defaultSortExpression, type.GetColumnInfo(string.Empty), type.GetChildInfo(), type.GetCustomDataTypeInfo());
+                return new TableInfo(tableName, defaultSortExpression, type.GetColumnInfo(string.Empty, true), type.GetChildInfo(), type.GetCustomDataTypeInfo());
             }
 
             return null;

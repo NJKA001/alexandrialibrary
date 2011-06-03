@@ -9,5 +9,6 @@ namespace Gnosis.Core
 {
     public interface IValue
     {
+        Guid Id { get; }
     }
 }

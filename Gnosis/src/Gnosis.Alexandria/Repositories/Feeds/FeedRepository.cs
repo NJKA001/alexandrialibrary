@@ -65,12 +65,13 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
             do
             {
+                var id = new Guid(reader["Id"].ToString());
                 var parent = new Guid(reader["Parent"].ToString());
                 var scheme = new Uri(reader["Scheme"].ToString());
                 var name = reader["Name"].ToString();
                 var label = reader["Label"].ToString();
 
-                var category = new FeedCategory(scheme, name, label);
+                var category = new FeedCategory(id, scheme, name, label);
 
                 if (!categories.ContainsKey(parent))
                     categories.Add(parent, new List<IFeedCategory>());
@@ -88,6 +89,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
             do
             {
+                var id = new Guid(reader["Id"].ToString());
                 var parent = new Guid(reader["Parent"].ToString());
                 var relationship = reader["Relationship"].ToString();
                 var location = new Uri(reader["Location"].ToString());
@@ -95,7 +97,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
                 var length = uint.Parse(reader["Length"].ToString());
                 var language = reader["Language"].ToString();
 
-                var link = new FeedLink(relationship, location, mediaType, length, language);
+                var link = new FeedLink(id, relationship, location, mediaType, length, language);
 
                 if (!links.ContainsKey(parent))
                     links.Add(parent, new List<IFeedLink>());
@@ -113,13 +115,14 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
             do
             {
+                var id = new Guid(reader["Id"].ToString());
                 var parent = new Guid(reader["Parent"].ToString());
                 var mediaType = reader["MediaType"].ToString();
                 var scheme = new Uri(reader["Scheme"].ToString());
                 var name = reader["Name"].ToString();
                 var content = reader["Content"].ToString();
 
-                var metadatum = new FeedMetadata(mediaType, scheme, name, content);
+                var metadatum = new FeedMetadata(id, mediaType, scheme, name, content);
 
                 if (!metadata.ContainsKey(parent))
                     metadata.Add(parent, new List<IFeedMetadata>());
@@ -172,12 +175,13 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
             do
             {
+                var id = new Guid(reader["Id"].ToString());
                 var parent = new Guid(reader["Parent"].ToString());
                 var scheme = new Uri(reader["Scheme"].ToString());
                 var name = reader["Name"].ToString();
                 var label = reader["Label"].ToString();
 
-                var category = new FeedCategory(scheme, name, label);
+                var category = new FeedCategory(id, scheme, name, label);
 
                 if (!categories.ContainsKey(parent))
                     categories.Add(parent, new List<IFeedCategory>());
@@ -195,6 +199,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
             do
             {
+                var id = new Guid(reader["Id"].ToString());
                 var parent = new Guid(reader["Parent"].ToString());
                 var relationship = reader["Relationship"].ToString();
                 var location = new Uri(reader["Location"].ToString());
@@ -202,7 +207,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
                 var length = uint.Parse(reader["Length"].ToString());
                 var language = reader["Language"].ToString();
 
-                var link = new FeedLink(relationship, location, mediaType, length, language);
+                var link = new FeedLink(id, relationship, location, mediaType, length, language);
 
                 if (!links.ContainsKey(parent))
                     links.Add(parent, new List<IFeedLink>());
@@ -220,13 +225,14 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
             do
             {
+                var id = new Guid(reader["Id"].ToString());
                 var parent = new Guid(reader["Parent"].ToString());
                 var mediaType = reader["MediaType"].ToString();
                 var scheme = new Uri(reader["Scheme"].ToString());
                 var name = reader["Name"].ToString();
                 var content = reader["Content"].ToString();
 
-                var metadatum = new FeedMetadata(mediaType, scheme, name, content);
+                var metadatum = new FeedMetadata(id, mediaType, scheme, name, content);
 
                 if (!metadata.ContainsKey(parent))
                     metadata.Add(parent, new List<IFeedMetadata>());

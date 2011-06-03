@@ -8,7 +8,8 @@ namespace Gnosis.Alexandria.Models.Tracks
     public class TrackIdentifier
         : ValueBase, ITrackIdentifier
     {
-        public TrackIdentifier(Uri scheme, string identifier)
+        public TrackIdentifier(Guid id, Uri scheme, string identifier)
+            : base(id)
         {
             this.scheme = scheme;
             this.identifier = identifier;

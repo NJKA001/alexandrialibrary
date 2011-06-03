@@ -11,6 +11,12 @@ namespace Gnosis.Alexandria.Models.HashCodes
         : ValueBase, IHashCode
     {
         public NameHash(string value)
+            : this(Guid.NewGuid(), value)
+        {
+        }
+
+        public NameHash(Guid id, string value)
+            : base(id)
         {
             this.value = value;
         }

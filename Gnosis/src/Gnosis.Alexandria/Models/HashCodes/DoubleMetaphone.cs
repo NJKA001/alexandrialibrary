@@ -11,6 +11,12 @@ namespace Gnosis.Alexandria.Models.HashCodes
         : ValueBase, IHashCode
     {
         public DoubleMetaphone(string value)
+            : this(Guid.NewGuid(), value)
+        {
+        }
+
+        public DoubleMetaphone(Guid id, string value)
+            : base(id)
         {
             this.value = value;
         }

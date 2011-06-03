@@ -163,16 +163,16 @@ namespace Gnosis.Core.Collections
                 {
                     if (IndexOf(currentItem) == OriginalItems.IndexOf(currentItem))
                     {
-                        info.Add(new CollectionItemInfo(currentItem, CollectionItemState.Existing, GetKey(currentItem), sequence));
+                        info.Add(new CollectionItemInfo(currentItem, CollectionItemState.Existing, sequence));
                     }
                     else
                     {
-                        info.Add(new CollectionItemInfo(currentItem, CollectionItemState.Moved, GetKey(currentItem), sequence));
+                        info.Add(new CollectionItemInfo(currentItem, CollectionItemState.Moved, sequence));
                     }
                 }
                 else
                 {
-                    info.Add(new CollectionItemInfo(currentItem, CollectionItemState.Added, GetKey(currentItem), sequence));
+                    info.Add(new CollectionItemInfo(currentItem, CollectionItemState.Added, sequence));
                 }
 
                 sequence++;

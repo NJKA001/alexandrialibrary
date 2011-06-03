@@ -8,7 +8,8 @@ namespace Gnosis.Alexandria.Models.Feeds
     public class FeedMetadata
         : ValueBase, IFeedMetadata
     {
-        public FeedMetadata(string mediaType, Uri scheme, string name, string content)
+        public FeedMetadata(Guid id, string mediaType, Uri scheme, string name, string content)
+            : base(id)
         {
             this.mediaType = mediaType;
             this.scheme = scheme;

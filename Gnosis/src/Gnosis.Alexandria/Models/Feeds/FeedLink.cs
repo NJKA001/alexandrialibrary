@@ -8,7 +8,8 @@ namespace Gnosis.Alexandria.Models.Feeds
     public class FeedLink
         : ValueBase, IFeedLink
     {
-        public FeedLink(string relationship, Uri location, string mediaType, uint length, string language)
+        public FeedLink(Guid id, string relationship, Uri location, string mediaType, uint length, string language)
+            : base(id)
         {
             this.relationship = relationship;
             this.location = location;

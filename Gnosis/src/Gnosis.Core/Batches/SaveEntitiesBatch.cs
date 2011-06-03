@@ -71,13 +71,6 @@ namespace Gnosis.Core.Batches
             var builder = new CommandBuilder();
             var statement = new InsertStatement(childInfo.TableName);
 
-            if (childInfo.PrimaryKey != null)
-            {
-                var parameterName = builder.GetParameterName();
-                statement.Add(childInfo.PrimaryKey.Name, parameterName);
-                builder.AddParameter(parameterName, itemInfo.Id);
-            }
-
             if (childInfo.ForeignKey != null)
             {
                 var parameterName = builder.GetParameterName();
@@ -194,13 +187,6 @@ namespace Gnosis.Core.Batches
             var builder = new CommandBuilder();
             var statement = new InsertStatement(childInfo.TableName);
 
-            if (childInfo.PrimaryKey != null)
-            {
-                var parameterName = builder.GetParameterName();
-                statement.Add(childInfo.PrimaryKey.Name, parameterName);
-                builder.AddParameter(parameterName, itemInfo.Id);
-            }
-
             if (childInfo.ForeignKey != null)
             {
                 var parameterName = builder.GetParameterName();
@@ -230,8 +216,8 @@ namespace Gnosis.Core.Batches
             var parentParameterName = builder.GetParameterName();
             builder.AddParameter(parentParameterName, parent.Id);
             var idParameterName = builder.GetParameterName();
-            builder.AddParameter(idParameterName, itemInfo.Id);
-            var whereClause = string.Format("{0}.{1} = {2} and {0}.{3} = {4}", childInfo.TableName, childInfo.ForeignKey.Name, parent.Id, childInfo.PrimaryKey.Name, itemInfo.Id);
+            builder.AddParameter(idParameterName, value.Id);
+            var whereClause = string.Format("{0}.{1} = {2} and {0}.Id = {3}", childInfo.TableName, childInfo.ForeignKey.Name, parentParameterName, idParameterName);
             var statement = new UpdateStatement(childInfo.TableName, whereClause);
 
             var sequenceParameterName = builder.GetParameterName();

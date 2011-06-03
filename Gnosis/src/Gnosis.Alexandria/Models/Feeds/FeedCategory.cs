@@ -10,7 +10,8 @@ namespace Gnosis.Alexandria.Models.Feeds
     public class FeedCategory
         : ValueBase, IFeedCategory
     {
-        public FeedCategory(Uri scheme, string name, string label)
+        public FeedCategory(Guid id, Uri scheme, string name, string label)
+            : base(id)
         {
             this.scheme = scheme ?? UriExtensions.EmptyUri;
             this.name = name ?? string.Empty;

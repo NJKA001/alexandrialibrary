@@ -24,19 +24,10 @@ namespace Gnosis.Alexandria.Models.Playlists
         DateTime CreatedDate { get; set; }
         string Copyright { get; set; }
 
-        [OneToMany("PlaylistAttributions", HasSequence = true)]
         IOrderedSet<IPlaylistAttribution> Attributions { get; }
-
-        [OneToMany("PlaylistExtensions", HasSequence = true)]
         IOrderedSet<IPlaylistExtension> Extensions { get; }
-        
-        [OneToMany("PlaylistItems", HasPrimaryKey = false, HasSequence = true)]
         IOrderedSet<IPlaylistItem> Items { get; }
-
-        [OneToMany("PlaylistLinks", HasSequence = true)]
         IOrderedSet<IPlaylistLink> Links { get; }
-
-        [OneToMany("PlaylistMetadata", HasSequence = true)]
         IOrderedSet<IPlaylistMetadata> Metadata { get; }
     }
 }

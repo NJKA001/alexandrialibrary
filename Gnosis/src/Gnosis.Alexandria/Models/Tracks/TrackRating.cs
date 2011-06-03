@@ -8,7 +8,8 @@ namespace Gnosis.Alexandria.Models.Tracks
     public class TrackRating
         : ValueBase, ITrackRating
     {
-        public TrackRating(byte rating, Uri user, ulong playCount)
+        public TrackRating(Guid id, byte rating, Uri user, ulong playCount)
+            : base(id)
         {
             this.rating = rating;
             this.user = user;

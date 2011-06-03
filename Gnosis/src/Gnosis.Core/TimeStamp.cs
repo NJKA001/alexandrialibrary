@@ -23,12 +23,18 @@ namespace Gnosis.Core
             this.lastModifiedDate = lastModifiedDate;
         }
 
+        private readonly Guid id = Guid.NewGuid();
         private readonly Uri createdBy;
         private readonly DateTime createdDate;
         private readonly Uri lastAccessedBy = UriExtensions.EmptyUri;
         private readonly DateTime lastAccessedDate = DateTime.MinValue;
         private readonly Uri lastModifiedBy = UriExtensions.EmptyUri;
         private readonly DateTime lastModifiedDate = DateTime.MinValue;
+
+        public Guid Id
+        {
+            get { return id; }
+        }
 
         public Uri CreatedBy
         {

@@ -8,7 +8,8 @@ namespace Gnosis.Alexandria.Models.Tracks
     public class TrackMetadata
         : ValueBase, ITrackMetadata
     {
-        public TrackMetadata(string textEncoding, string description, string content)
+        public TrackMetadata(Guid id, string textEncoding, string description, string content)
+            : base(id)
         {
             this.textEncoding = textEncoding;
             this.description = description;

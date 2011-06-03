@@ -8,7 +8,8 @@ namespace Gnosis.Alexandria.Models.Tracks
     public class TrackLink
         : ValueBase, ITrackLink
     {
-        public TrackLink(string textEncoding, string relationship, Uri location)
+        public TrackLink(Guid id, string textEncoding, string relationship, Uri location)
+            : base(id)
         {
             this.textEncoding = textEncoding;
             this.relationship = relationship;

@@ -28,10 +28,6 @@ namespace Gnosis.Core.Commands
         public CreateTableStatement(ChildInfo childInfo)
             : this(childInfo.TableName)
         {
-            if (childInfo.PrimaryKey != null)
-            {
-                PrimaryKey(childInfo.PrimaryKey.Type, childInfo.PrimaryKey.Name, childInfo.PrimaryKey.IsAutoIncrement);
-            }
             if (childInfo.ForeignKey != null)
             {
                 Column(childInfo.ForeignKey.Type, childInfo.ForeignKey.Name);

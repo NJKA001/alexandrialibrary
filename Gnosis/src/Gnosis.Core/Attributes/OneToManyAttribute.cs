@@ -13,27 +13,16 @@ namespace Gnosis.Core.Attributes
             this.tableName = tableName;
         }
 
-        public OneToManyAttribute(string tableName, string primaryKeyName, Type primaryKeyType)
+        public OneToManyAttribute(string tableName, string foreignKeyName, Type foreignKeyType)
         {
             this.tableName = tableName;
-            this.primaryKeyName = primaryKeyName;
-            this.primaryKeyType = primaryKeyType;
-        }
-
-        public OneToManyAttribute(string tableName, string primaryKeyName, Type primaryKeyType, string foreignKeyName, Type foreignKeyType)
-        {
-            this.tableName = tableName;
-            this.primaryKeyName = primaryKeyName;
-            this.primaryKeyType = primaryKeyType;
             this.foreignKeyName = foreignKeyName;
             this.foreignKeyType = foreignKeyType;
         }
 
-        public OneToManyAttribute(string tableName, string primaryKeyName, Type primaryKeyType, string foreignKeyName, Type foreignKeyType, string sequenceName, Type sequenceType)
+        public OneToManyAttribute(string tableName, string foreignKeyName, Type foreignKeyType, string sequenceName, Type sequenceType)
         {
             this.tableName = tableName;
-            this.primaryKeyName = primaryKeyName;
-            this.primaryKeyType = primaryKeyType;
             this.foreignKeyName = foreignKeyName;
             this.foreignKeyType = foreignKeyType;
             this.sequenceName = sequenceName;
@@ -41,10 +30,6 @@ namespace Gnosis.Core.Attributes
         }
 
         private readonly string tableName;
-        private bool hasPrimaryKey = true;
-        private string primaryKeyName = "Id";
-        private Type primaryKeyType = typeof(Guid);
-        private bool primaryKeyIsAutoIncrement = true;
         private bool hasForeignKey = true;
         private string foreignKeyName = "Parent";
         private Type foreignKeyType = typeof(Guid);
@@ -55,30 +40,6 @@ namespace Gnosis.Core.Attributes
         public string TableName
         {
             get { return tableName; }
-        }
-
-        public bool HasPrimaryKey
-        {
-            get { return hasPrimaryKey; }
-            set { hasPrimaryKey = value; }
-        }
-
-        public string PrimaryKeyName
-        {
-            get { return primaryKeyName; }
-            set { primaryKeyName = value; }
-        }
-
-        public Type PrimaryKeyType
-        {
-            get { return primaryKeyType; }
-            set { primaryKeyType = value; }
-        }
-
-        public bool PrimaryKeyIsAutoIncrement
-        {
-            get { return primaryKeyIsAutoIncrement; }
-            set { primaryKeyIsAutoIncrement = value; }
         }
 
         public bool HasForeignKey
