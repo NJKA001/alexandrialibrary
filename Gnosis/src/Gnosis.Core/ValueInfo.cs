@@ -8,14 +8,16 @@ namespace Gnosis.Core
 {
     public class ValueInfo
     {
-        public ValueInfo(PropertyInfo property, Type valueType)
+        public ValueInfo(PropertyInfo property, Type valueType, string prefix)
         {
             this.property = property;
+            this.name = string.Format("{0}_{1}", prefix, property.Name);
 
             GetElements(valueType);
         }
 
         private readonly PropertyInfo property;
+        private readonly string name;
         private readonly List<ElementInfo> elements = new List<ElementInfo>();
 
         private void GetElements(Type type)
@@ -44,7 +46,7 @@ namespace Gnosis.Core
 
         public string Name
         {
-            get { return property.Name; }
+            get { return name; }
         }
 
         public ElementInfo Identifer

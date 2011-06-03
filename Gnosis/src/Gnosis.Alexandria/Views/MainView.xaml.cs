@@ -64,8 +64,10 @@ namespace Gnosis.Alexandria.Views
                 trackController.SourceLoadCompleted += sourceLoadCompleted;
 
                 context = new ModelContext(new Uri("mailto:dan.poage@gmail.com"), this.Dispatcher);
-                feedRepository = new FeedRepository(context);
-                trackRepository = new TrackRepository(context);
+                factory = new Factory(context);
+
+                feedRepository = new FeedRepository(context, factory);
+                trackRepository = new TrackRepository(context, factory);
 
                 try
                 {
@@ -85,6 +87,7 @@ namespace Gnosis.Alexandria.Views
         private static readonly ILog log = LogManager.GetLogger(typeof(MainWindow));
         
         private readonly IContext context;
+        private readonly IFactory factory;
         private readonly IRepository<Gnosis.Alexandria.Models.Tracks.ITrack> trackRepository;
         private readonly IRepository<Gnosis.Alexandria.Models.Feeds.IFeed> feedRepository;
 

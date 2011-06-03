@@ -9,7 +9,7 @@ namespace Gnosis.Alexandria.Models.Feeds
 {
     public interface IFeed : IEntity
     {
-        Uri Location { get; }
+        Uri Location { get; set; }
         string MediaType { get; set; }
         string Title { get; set; }
         string Authors { get; set; }

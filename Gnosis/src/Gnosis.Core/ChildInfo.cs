@@ -8,18 +8,20 @@ namespace Gnosis.Core
 {
     public class ChildInfo
     {
-        public ChildInfo(PropertyInfo property, Type entityType)
+        public ChildInfo(PropertyInfo property, Type entityType, string prefix)
         {
             this.property = property;
+            this.name = string.Format("{0}_{1}", prefix, property.Name);
             this.entity = new EntityInfo(entityType);
         }
 
         private readonly PropertyInfo property;
+        private readonly string name;
         private readonly EntityInfo entity;
 
         public string Name
         {
-            get { return property.Name; }
+            get { return name; }
         }
 
         public ElementInfo ParentIdentifier

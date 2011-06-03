@@ -14,8 +14,8 @@ namespace Gnosis.Alexandria.Repositories.Tracks
     public class TrackRepository
         : RepositoryBase<ITrack>
     {
-        public TrackRepository(IContext context)
-            : base(context)
+        public TrackRepository(IContext context, IFactory factory)
+            : base(context, factory)
         {
         }
     }

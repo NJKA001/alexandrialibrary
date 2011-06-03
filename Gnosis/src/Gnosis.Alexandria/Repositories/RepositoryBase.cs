@@ -21,14 +21,16 @@ namespace Gnosis.Alexandria.Repositories
         : IRepository<T>
         where T : IEntity
     {
-        protected RepositoryBase(IContext context)
+        protected RepositoryBase(IContext context, IFactory factory)
         {
             this.context = context;
+            this.factory = factory;
             this.baseType = typeof(T);
         }
 
         private static readonly ILog log = LogManager.GetLogger(typeof(RepositoryBase<T>));
         private readonly IContext context;
+        private readonly IFactory factory;
         private readonly Type baseType;
         private readonly IList<ILookup> lookups = new List<ILookup>();
         private readonly IList<ISearch> searches = new List<ISearch>();
@@ -46,8 +48,6 @@ namespace Gnosis.Alexandria.Repositories
                 log.Error("RepositoryBase.Initialize", ex);
             }
         }
-
-        //protected abstract IEnumerable<T> Read(IDataReader reader);
         
         protected IContext Context
         {
@@ -71,14 +71,14 @@ namespace Gnosis.Alexandria.Repositories
 
         protected IEnumerable<T> Select(IFilter filter)
         {
-            var factory = null as IFactory;
             var query = new Query<T>(() => GetConnection(), factory, filter);
             return query.Execute();
         }
 
         public T Lookup(Guid id)
         {
-            var whereClause = string.Format("{0}.Id = @Id", new EntityInfo(baseType).Name);
+            var entityInfo = new EntityInfo(baseType);
+            var whereClause = string.Format("{0}.{1} = @Id", entityInfo.Name, entityInfo.Identifier.Name);
             var parameters = new Dictionary<string, object> { { "@Id", id } };
             return Select(new Filter(whereClause, parameters)).FirstOrDefault();
         }

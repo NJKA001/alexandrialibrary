@@ -13,8 +13,8 @@ namespace Gnosis.Alexandria.Repositories.Feeds
     public class FeedRepository
         : RepositoryBase<IFeed>
     {
-        public FeedRepository(IContext context)
-            : base(context)
+        public FeedRepository(IContext context, IFactory factory)
+            : base(context, factory)
         {
             AddLookup(new LookupFeedByLocation());
             AddSearch(new SearchFeedsByAuthors());
@@ -23,6 +23,8 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
             Initialize();
         }
+
+        #region Old Code
 
         /*
 
@@ -479,5 +481,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
                 return new List<IFeed>();
         }
         */
+
+        #endregion
     }
 }

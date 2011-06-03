@@ -8,18 +8,18 @@ using Gnosis.Core;
 namespace Gnosis.Alexandria.Models.Feeds
 {
     public class FeedItem
-        : EntityBase, IFeedItem
+        : ChildBase, IFeedItem
     {
-        public FeedItem(IContext context)
-            : base(context)
+        public FeedItem(IContext context, Guid parent)
+            : base(context, parent)
         {
             this.categories = new List<IFeedCategory>();
             this.links = new List<IFeedLink>();
             this.metadata = new List<IFeedMetadata>();
         }
 
-        public FeedItem(IContext context, Guid id, DateTime timeStamp, string title, string titleMediaType, string authors, string contributors, DateTime publishedDate, string copyright, string summary, string content, string contentMediaType, Uri contentLocation, DateTime updatedDate, string feedItemIdentifier)
-            : base(context, id, timeStamp)
+        public FeedItem(IContext context, Guid id, Guid parent, DateTime timeStamp, string title, string titleMediaType, string authors, string contributors, DateTime publishedDate, string copyright, string summary, string content, string contentMediaType, Uri contentLocation, DateTime updatedDate, string feedItemIdentifier)
+            : base(context, id, timeStamp, parent)
         {
             this.categories = new List<IFeedCategory>();
             this.links = new List<IFeedLink>();

@@ -65,11 +65,11 @@ namespace Gnosis.Core
                             var itemType = args[0];
                             if (itemType.IsChildType())
                             {
-                                children.Add(new ChildInfo(property, itemType));
+                                children.Add(new ChildInfo(property, itemType, name));
                             }
                             else if (itemType.IsValueType())
                             {
-                                values.Add(new ValueInfo(property, itemType));
+                                values.Add(new ValueInfo(property, itemType, name));
                             }
                         }
                         else

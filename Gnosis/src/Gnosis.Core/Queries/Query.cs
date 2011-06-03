@@ -46,7 +46,7 @@ namespace Gnosis.Core.Queries
                 {
                     while (reader.Read())
                     {
-                        var item = factory.Create<T>(reader);
+                        var item = factory.CreateEntity<T>(reader);
                         if (item != null)
                         {
                             items.Add(item);

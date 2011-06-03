@@ -11,11 +11,9 @@ namespace Gnosis.Alexandria.Models.Feeds
         : EntityBase, IFeed
     {
 
-        public Feed(IContext context, Uri location)
+        public Feed(IContext context)
             : base(context)
         {
-            this.location = location;
-            
             this.categories = new List<IFeedCategory>();
             this.links = new List<IFeedLink>();
             this.metadata = new List<IFeedMetadata>();
@@ -47,7 +45,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             this.items = new List<IFeedItem>();
         }
 
-        private readonly Uri location;
+        private Uri location;
         private string mediaType;
         private string title;
         private string authors;
@@ -71,6 +69,13 @@ namespace Gnosis.Alexandria.Models.Feeds
         public Uri Location
         {
             get { return location; }
+            set
+            {
+                if (value != null && value != location)
+                {
+                    OnEntityChanged(() => location = value, "Location");
+                }
+            }
         }
 
         public string MediaType
