@@ -8,9 +8,6 @@ namespace Gnosis.Core
 {
     public interface IContext
     {
-        Uri CurrentUser { get; }
-
-        void ChangeCurrentUser(Uri user);
         void Invoke(Action action);
     }
 }

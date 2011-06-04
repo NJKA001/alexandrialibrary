@@ -11,34 +11,16 @@ namespace Gnosis.Alexandria.Models
     public class ModelContext
         : IContext
     {
-        public ModelContext(Uri currentUser)
+        public ModelContext(Dispatcher dispatcher)
         {
-            this.currentUser = currentUser;
-            this.dispatcher = Dispatcher.CurrentDispatcher;
-        }
-
-        public ModelContext(Uri currentUser, Dispatcher dispatcher)
-        {
-            this.currentUser = currentUser;
             this.dispatcher = dispatcher;
         }
 
         private readonly Dispatcher dispatcher;
-        private Uri currentUser;
 
         private DateTime GetCurrentDateTime()
         {
             return DateTime.Now.ToUniversalTime();
-        }
-
-        public Uri CurrentUser
-        {
-            get { return currentUser; }
-        }
-
-        public void ChangeCurrentUser(Uri user)
-        {
-            currentUser = user;
         }
 
         public void Invoke(Action action)

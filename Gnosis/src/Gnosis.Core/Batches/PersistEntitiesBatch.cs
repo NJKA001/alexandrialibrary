@@ -57,7 +57,7 @@ namespace Gnosis.Core.Batches
 
         protected void AddEntityDeleteStatement(IEntity entity, EntityInfo entityInfo)
         {
-            var builder = new CommandBuilder(entityInfo.Name);
+            var builder = new CommandBuilder();
 
             var idParameterName = builder.GetParameterName();
             builder.AddParameter(idParameterName, entity.Id);
@@ -72,7 +72,7 @@ namespace Gnosis.Core.Batches
 
         protected void AddEntityDeleteStatement(IChild child, ChildInfo childInfo)
         {
-            var builder = new CommandBuilder(childInfo.Name);
+            var builder = new CommandBuilder();
 
             var idParameterName = builder.GetParameterName();
             builder.AddParameter(idParameterName, child.Id);

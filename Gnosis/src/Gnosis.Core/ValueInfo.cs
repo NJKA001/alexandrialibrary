@@ -8,14 +8,18 @@ namespace Gnosis.Core
 {
     public class ValueInfo
     {
-        public ValueInfo(PropertyInfo property, Type valueType, string prefix)
+        public ValueInfo(EntityInfo parent, PropertyInfo property, Type valueType, string prefix)
         {
+            this.parent = parent;
             this.property = property;
+            this.type = valueType;
             this.name = string.Format("{0}_{1}", prefix, property.Name);
 
             GetElements(valueType);
         }
 
+        private readonly EntityInfo parent;
+        private readonly Type type;
         private readonly PropertyInfo property;
         private readonly string name;
         private readonly List<ElementInfo> elements = new List<ElementInfo>();
@@ -42,6 +46,16 @@ namespace Gnosis.Core
                     }
                 }
             }
+        }
+
+        public EntityInfo Parent
+        {
+            get { return parent; }
+        }
+
+        public Type Type
+        {
+            get { return type; }
         }
 
         public string Name

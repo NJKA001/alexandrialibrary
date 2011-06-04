@@ -19,5 +19,8 @@ namespace Gnosis.Core
         T CreateChild<T>(Guid parent) where T : IChild;
         T CreateChild<T>(IDataRecord record) where T : IChild;
         T CreateValue<T>(IDataRecord record) where T : IValue;
+
+        void AddChildren(Type parentType, Type childType, string childName, IEnumerable<IEntity> parents, IEnumerable<IChild> children);
+        void AddValues(Type parentType, Type valueType, string valueName, IEnumerable<IEntity> parents, IEnumerable<IValue> values);
     }
 }

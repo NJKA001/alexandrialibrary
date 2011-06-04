@@ -7,7 +7,7 @@ using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Models.Feeds
 {
-    public interface IFeedItem : IEntity
+    public interface IFeedItem : IChild
     {
         string Title { get; set; }
         string TitleMediaType { get; set; }

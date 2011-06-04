@@ -163,5 +163,13 @@ namespace Gnosis.Alexandria.Repositories
         {
             return (T)CreateValue(typeof(T), record);
         }
+
+        public void AddChildren(Type parentType, Type childType, string childName, IEnumerable<IEntity> parents, IEnumerable<IChild> children)
+        {
+        }
+
+        public void AddValues(Type parentType, Type valueType, string valueName, IEnumerable<IEntity> parents, IEnumerable<IValue> values)
+        {
+        }
     }
 }

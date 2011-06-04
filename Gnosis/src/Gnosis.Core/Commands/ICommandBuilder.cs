@@ -9,6 +9,7 @@ namespace Gnosis.Core.Commands
     public interface ICommandBuilder
     {
         string Name { get; }
+        Type Type { get; }
 
         void AddChild(ICommandBuilder builder);
         void AddParameter(string name, object value);

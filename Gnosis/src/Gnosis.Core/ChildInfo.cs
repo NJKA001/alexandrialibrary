@@ -8,13 +8,15 @@ namespace Gnosis.Core
 {
     public class ChildInfo
     {
-        public ChildInfo(PropertyInfo property, Type entityType, string prefix)
+        public ChildInfo(EntityInfo parent, PropertyInfo property, Type itemType, string prefix)
         {
+            this.parent = parent;
             this.property = property;
             this.name = string.Format("{0}_{1}", prefix, property.Name);
-            this.entity = new EntityInfo(entityType);
+            this.entity = new EntityInfo(itemType, parent);
         }
 
+        private readonly EntityInfo parent;
         private readonly PropertyInfo property;
         private readonly string name;
         private readonly EntityInfo entity;
@@ -32,6 +34,11 @@ namespace Gnosis.Core
         public ElementInfo Sequence
         {
             get { return entity.Elements.Where(x => x.Name == "Sequence").FirstOrDefault(); }
+        }
+
+        public EntityInfo Parent
+        {
+            get { return parent; }
         }
 
         public EntityInfo Entity

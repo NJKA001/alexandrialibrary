@@ -10,17 +10,24 @@ namespace Gnosis.Core
     {
         public EntityInfo(Type type)
         {
-            name = GetEntityName(type);
+            this.name = GetEntityName(type);
+            this.type = type;
 
-            foreach (var interfaceType in type.GetInterfaces())
-            {
-                MapProperties(interfaceType);
-            }
+            MapTypes(type);
+        }
 
-            MapProperties(type);
+        public EntityInfo(Type type, EntityInfo parent)
+        {
+            this.name = GetEntityName(type);
+            this.type = type;
+            this.parent = parent;
+
+            MapTypes(type);
         }
 
         private readonly string name;
+        private readonly Type type;
+        private readonly EntityInfo parent;
         private readonly IList<ElementInfo> elements = new List<ElementInfo>();
         private readonly IList<DataTypeInfo> dataTypes = new List<DataTypeInfo>();
         private readonly IList<ChildInfo> children = new List<ChildInfo>();
@@ -35,6 +42,16 @@ namespace Gnosis.Core
             }
 
             return type.Name;
+        }
+
+        private void MapTypes(Type type)
+        {
+            foreach (var interfaceType in type.GetInterfaces())
+            {
+                MapProperties(interfaceType);
+            }
+
+            MapProperties(type);
         }
 
         private void MapProperties(Type type)
@@ -65,11 +82,11 @@ namespace Gnosis.Core
                             var itemType = args[0];
                             if (itemType.IsChildType())
                             {
-                                children.Add(new ChildInfo(property, itemType, name));
+                                children.Add(new ChildInfo(this, property, itemType, name));
                             }
                             else if (itemType.IsValueType())
                             {
-                                values.Add(new ValueInfo(property, itemType, name));
+                                values.Add(new ValueInfo(this, property, itemType, name));
                             }
                         }
                         else
@@ -84,6 +101,16 @@ namespace Gnosis.Core
         public string Name
         {
             get { return name; }
+        }
+
+        public Type Type
+        {
+            get { return type; }
+        }
+
+        public EntityInfo Parent
+        {
+            get { return parent; }
         }
 
         public ElementInfo Identifier

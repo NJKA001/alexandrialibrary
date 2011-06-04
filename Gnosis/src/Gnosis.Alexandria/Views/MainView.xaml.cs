@@ -63,7 +63,7 @@ namespace Gnosis.Alexandria.Views
                 playbackController.CurrentTrackEnded += currentTrackEnded;
                 trackController.SourceLoadCompleted += sourceLoadCompleted;
 
-                context = new ModelContext(new Uri("mailto:dan.poage@gmail.com"), this.Dispatcher);
+                context = new ModelContext(this.Dispatcher);
                 factory = new Factory(context);
 
                 feedRepository = new FeedRepository(context, factory);
@@ -75,7 +75,7 @@ namespace Gnosis.Alexandria.Views
                 }
                 catch (Exception ex)
                 {
-                    log.Error("MainView.ctor()", ex);
+                    log.Error("feedRepository.Search()", ex);
                 }
             }
             catch (Exception ex)
