@@ -10,6 +10,8 @@ namespace Gnosis.Core
     {
         public DataTypeInfo(PropertyInfo property)
         {
+            this.property = property;
+
             foreach (var subProperty in property.PropertyType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 elements.Add(new ElementInfo(property, property.Name));
