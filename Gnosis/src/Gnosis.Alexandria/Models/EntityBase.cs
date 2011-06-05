@@ -80,7 +80,7 @@ namespace Gnosis.Alexandria.Models
             return isChanged;
         }
 
-        public virtual IEnumerable<IChild> GetChildren(ChildInfo childInfo)
+        public virtual IEnumerable<IChild> GetChildren(EntityInfo childInfo)
         {
             return new List<IChild>();
         }

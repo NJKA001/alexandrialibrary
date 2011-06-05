@@ -14,7 +14,7 @@ namespace Gnosis.Core
 
         bool IsNew();
         bool IsChanged();
-        IEnumerable<IChild> GetChildren(ChildInfo childInfo);
+        IEnumerable<IChild> GetChildren(EntityInfo childInfo);
         IEnumerable<IValue> GetValues(ValueInfo valueInfo);
 
         void Save(DateTime timeStamp);

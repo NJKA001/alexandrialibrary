@@ -42,11 +42,11 @@ namespace Gnosis.Core.Batches
                 {
                     var idParameterName = builder.GetParameterName();
                     builder.AddParameter(idParameterName, child.Id);
-                    var whereClause = string.Format("{0}.Id = {3}", childInfo.Entity.Name, idParameterName);
-                    var statement = new DeleteStatement(childInfo.Entity.Name, whereClause);
+                    var whereClause = string.Format("{0}.Id = {3}", childInfo.Name, idParameterName);
+                    var statement = new DeleteStatement(childInfo.Name, whereClause);
                     builder.AddStatement(statement);
 
-                    AddDeleteStatements(child, childInfo.Entity);
+                    AddDeleteStatements(child, childInfo);
                 }
 
                 Add(builder);
@@ -70,19 +70,19 @@ namespace Gnosis.Core.Batches
             AddDeleteStatements(entity, entityInfo);
         }
 
-        protected void AddEntityDeleteStatement(IChild child, ChildInfo childInfo)
+        protected void AddEntityDeleteStatement(IChild child, EntityInfo childInfo)
         {
             var builder = new CommandBuilder();
 
             var idParameterName = builder.GetParameterName();
             builder.AddParameter(idParameterName, child.Id);
-            var whereClause = string.Format("{0}.Id = {1}", childInfo.Entity.Name, idParameterName);
-            var statement = new DeleteStatement(childInfo.Entity.Name, whereClause);
+            var whereClause = string.Format("{0}.Id = {1}", childInfo.Name, idParameterName);
+            var statement = new DeleteStatement(childInfo.Name, whereClause);
 
             builder.AddStatement(statement);
             Add(builder);
 
-            AddDeleteStatements(child, childInfo.Entity);
+            AddDeleteStatements(child, childInfo);
         }
 
         #endregion

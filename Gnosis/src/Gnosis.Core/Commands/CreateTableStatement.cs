@@ -30,14 +30,6 @@ namespace Gnosis.Core.Commands
             AddColumns(valueInfo.Elements);
         }
 
-        public CreateTableStatement(ChildInfo childInfo)
-            : this(childInfo.Entity.Name)
-        {
-            AddColumns(childInfo.Entity.Elements);
-            foreach (var dataType in childInfo.Entity.DataTypes)
-                AddColumns(dataType.Elements);
-        }
-
         private readonly StringBuilder builder = new StringBuilder();
         private bool hasColumns;
 

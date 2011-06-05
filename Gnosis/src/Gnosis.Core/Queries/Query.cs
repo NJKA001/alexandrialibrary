@@ -38,11 +38,11 @@ namespace Gnosis.Core.Queries
         {
             foreach (var childInfo in entityInfo.Children)
             {
-                var childBuilder = new CommandBuilder(childInfo.Entity.Name, childInfo.Entity.Type);
+                var childBuilder = new CommandBuilder(childInfo.Name, childInfo.Type);
                 childBuilder.AddStatement(new SelectStatement(childInfo, filter));
                 parentBuilder.AddChild(childBuilder);
 
-                AddChildStatements(childBuilder, childInfo.Entity, filter);
+                AddChildStatements(childBuilder, childInfo, filter);
             }
 
             foreach (var valueInfo in entityInfo.Values)

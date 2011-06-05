@@ -46,7 +46,7 @@ namespace Gnosis.Core.Batches
 
                 Add(builder);
 
-                AddCommandBuilders(childInfo.Entity);
+                AddCommandBuilders(childInfo);
             }
         }
 

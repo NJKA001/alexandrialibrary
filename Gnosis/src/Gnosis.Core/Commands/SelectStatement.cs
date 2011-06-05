@@ -11,32 +11,34 @@ namespace Gnosis.Core.Commands
     {
         public SelectStatement(EntityInfo entityInfo, IFilter filter)
         {
-            builder.AppendFormat("select {0}.* from {0}", entityInfo.Name);
-            if (!string.IsNullOrEmpty(filter.WhereClause))
-                builder.AppendFormat(" where {0}", filter.WhereClause);
-            if (!string.IsNullOrEmpty(filter.OrderByClause))
-                builder.AppendFormat(" order by {0}", filter.OrderByClause);
-            builder.Append(";");
-        }
-
-        public SelectStatement(ChildInfo childInfo, IFilter filter)
-        {
-            builder.AppendFormat("select {0}.* from {0}", childInfo.Entity.Name);
-
-            var previousName = childInfo.Entity.Name;
-            var parent = childInfo.Parent;
-            while (parent != null)
+            if (entityInfo.IsRoot)
             {
-                builder.AppendFormat(" inner join {0} on {0}.Id = {1}.Parent", parent.Name, previousName);
-                previousName = parent.Name;
-                parent = parent.Parent;
+                builder.AppendFormat("select {0}.* from {0}", entityInfo.Name);
+                if (!string.IsNullOrEmpty(filter.WhereClause))
+                    builder.AppendFormat(" where {0}", filter.WhereClause);
+                if (!string.IsNullOrEmpty(filter.OrderByClause))
+                    builder.AppendFormat(" order by {0}", filter.OrderByClause);
+                builder.Append(";");
             }
+            else
+            {
+                builder.AppendFormat("select {0}.* from {0}", entityInfo.Name);
 
-            if (!string.IsNullOrEmpty(filter.WhereClause))
-                builder.AppendFormat(" where {0}", filter.WhereClause);
+                var previousName = entityInfo.Name;
+                var parent = entityInfo.Parent;
+                while (parent != null)
+                {
+                    builder.AppendFormat(" inner join {0} on {0}.Id = {1}.Parent", parent.Name, previousName);
+                    previousName = parent.Name;
+                    parent = parent.Parent;
+                }
 
-            if (childInfo.Sequence != null)
-                builder.AppendFormat(" order by {0}.{1}", childInfo.Entity.Name, childInfo.Sequence.Name);
+                if (!string.IsNullOrEmpty(filter.WhereClause))
+                    builder.AppendFormat(" where {0}", filter.WhereClause);
+
+                if (entityInfo.Sequence != null)
+                    builder.AppendFormat(" order by {0}.{1}", entityInfo.Name, entityInfo.Sequence.Name);
+            }
         }
 
         public SelectStatement(ValueInfo valueInfo, IFilter filter)

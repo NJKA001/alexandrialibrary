@@ -58,7 +58,6 @@
     <Compile Include="Commands\UpdateStatement.cs" />
     <Compile Include="DataRecordExtensions.cs" />
     <Compile Include="DateTimeExtensions.cs" />
-    <Compile Include="ChildInfo.cs" />
     <Compile Include="ElementInfo.cs" />
     <Compile Include="DataTypeInfo.cs" />
     <Compile Include="EntityInfo.cs" />

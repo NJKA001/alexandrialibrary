@@ -64,19 +64,19 @@ namespace Gnosis.Core.Batches
             AddSaveStatements(entity, entityInfo);
         }
 
-        private void AddEntityInsertStatement(IChild child, ChildInfo childInfo)
+        private void AddEntityInsertStatement(IChild child, EntityInfo childInfo)
         {
             var builder = new CommandBuilder();
-            var statement = new InsertStatement(childInfo.Entity.Name);
+            var statement = new InsertStatement(childInfo.Name);
 
-            foreach (var element in childInfo.Entity.Elements)
+            foreach (var element in childInfo.Elements)
             {
                 var parameterName = builder.GetParameterName();
                 statement.Add(element.Name, parameterName);
                 builder.AddParameter(parameterName, element.GetValue(child));
             }
 
-            foreach (var dataType in childInfo.Entity.DataTypes)
+            foreach (var dataType in childInfo.DataTypes)
             {
                 foreach (var element in dataType.Elements)
                 {
@@ -89,7 +89,7 @@ namespace Gnosis.Core.Batches
             builder.AddStatement(statement);
             Add(builder);
 
-            AddSaveStatements(child, childInfo.Entity);
+            AddSaveStatements(child, childInfo);
         }
 
         #endregion
@@ -127,23 +127,23 @@ namespace Gnosis.Core.Batches
             AddSaveStatements(entity, entityInfo);
         }
 
-        private void AddEntityUpdateStatement(IChild child, ChildInfo childInfo)
+        private void AddEntityUpdateStatement(IChild child, EntityInfo childInfo)
         {
             var builder = new CommandBuilder();
 
             var idParameterName = builder.GetParameterName();
             builder.AddParameter(idParameterName, child.Id);
-            var whereClause = string.Format("{0}.Id = {1}", childInfo.Entity.Name, idParameterName);
-            var statement = new UpdateStatement(childInfo.Entity.Name, whereClause);
+            var whereClause = string.Format("{0}.Id = {1}", childInfo.Name, idParameterName);
+            var statement = new UpdateStatement(childInfo.Name, whereClause);
 
-            foreach (var element in childInfo.Entity.Elements)
+            foreach (var element in childInfo.Elements)
             {
                 var parameterName = builder.GetParameterName();
                 statement.Set(element.Name, parameterName);
                 builder.AddParameter(parameterName, element.GetValue(child));
             }
 
-            foreach (var dataType in childInfo.Entity.DataTypes)
+            foreach (var dataType in childInfo.DataTypes)
             {
                 foreach (var element in dataType.Elements)
                 {
@@ -156,7 +156,7 @@ namespace Gnosis.Core.Batches
             builder.AddStatement(statement);
             Add(builder);
 
-            AddSaveStatements(child, childInfo.Entity);
+            AddSaveStatements(child, childInfo);
         }
 
         #endregion
@@ -243,7 +243,7 @@ namespace Gnosis.Core.Batches
                     }
                     else
                     {
-                        AddSaveStatements(child, childInfo.Entity);
+                        AddSaveStatements(child, childInfo);
                     }
                 }
             }

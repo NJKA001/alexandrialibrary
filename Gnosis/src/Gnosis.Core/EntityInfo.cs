@@ -30,7 +30,7 @@ namespace Gnosis.Core
         private readonly EntityInfo parent;
         private readonly IList<ElementInfo> elements = new List<ElementInfo>();
         private readonly IList<DataTypeInfo> dataTypes = new List<DataTypeInfo>();
-        private readonly IList<ChildInfo> children = new List<ChildInfo>();
+        private readonly IList<EntityInfo> children = new List<EntityInfo>();
         private readonly IList<ValueInfo> values = new List<ValueInfo>();
 
         private static string GetEntityName(Type type)
@@ -82,7 +82,7 @@ namespace Gnosis.Core
                             var itemType = args[0];
                             if (itemType.IsChildType())
                             {
-                                children.Add(new ChildInfo(this, property, itemType));
+                                children.Add(new EntityInfo(itemType, this));
                             }
                             else if (itemType.IsValueType())
                             {
@@ -108,6 +108,11 @@ namespace Gnosis.Core
             get { return type; }
         }
 
+        public bool IsRoot
+        {
+            get { return parent == null; }
+        }
+
         public EntityInfo Parent
         {
             get { return parent; }
@@ -116,6 +121,16 @@ namespace Gnosis.Core
         public ElementInfo Identifier
         {
             get { return elements.Where(x => x.Name == "Id").FirstOrDefault(); }
+        }
+
+        public ElementInfo ParentIdentifier
+        {
+            get { return elements.Where(x => x.Name == "Parent").FirstOrDefault(); }
+        }
+
+        public ElementInfo Sequence
+        {
+            get { return elements.Where(x => x.Name == "Sequence").FirstOrDefault(); }
         }
 
         public IEnumerable<ElementInfo> Elements
@@ -128,7 +143,7 @@ namespace Gnosis.Core
             get { return dataTypes; }
         }
 
-        public IEnumerable<ChildInfo> Children
+        public IEnumerable<EntityInfo> Children
         {
             get { return children; }
         }
