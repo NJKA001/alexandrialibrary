@@ -21,9 +21,9 @@ namespace Gnosis.Core.Commands
 
         public SelectStatement(ChildInfo childInfo, IFilter filter)
         {
-            builder.AppendFormat("select {0}.* from {0}", childInfo.Name);
+            builder.AppendFormat("select {0}.* from {0}", childInfo.Entity.Name);
 
-            var previousName = childInfo.Name;
+            var previousName = childInfo.Entity.Name;
             var parent = childInfo.Parent;
             while (parent != null)
             {
@@ -36,7 +36,7 @@ namespace Gnosis.Core.Commands
                 builder.AppendFormat(" where {0}", filter.WhereClause);
 
             if (childInfo.Sequence != null)
-                builder.AppendFormat(" order by {0}.{1}", childInfo.Name, childInfo.Sequence.Name);
+                builder.AppendFormat(" order by {0}.{1}", childInfo.Entity.Name, childInfo.Sequence.Name);
         }
 
         public SelectStatement(ValueInfo valueInfo, IFilter filter)

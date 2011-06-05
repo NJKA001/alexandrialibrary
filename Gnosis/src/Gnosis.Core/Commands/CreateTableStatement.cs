@@ -31,7 +31,7 @@ namespace Gnosis.Core.Commands
         }
 
         public CreateTableStatement(ChildInfo childInfo)
-            : this(childInfo.Name)
+            : this(childInfo.Entity.Name)
         {
             AddColumns(childInfo.Entity.Elements);
             foreach (var dataType in childInfo.Entity.DataTypes)

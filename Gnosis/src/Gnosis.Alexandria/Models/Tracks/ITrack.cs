@@ -5,8 +5,7 @@ using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Models.Tracks
 {
-    public interface ITrack :
-        IEntity
+    public interface ITrack : IEntity
     {
         Uri Location { get; }
         string MediaType { get; set; }

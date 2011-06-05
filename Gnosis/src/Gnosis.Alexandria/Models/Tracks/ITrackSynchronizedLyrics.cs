@@ -7,9 +7,8 @@ using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Models.Tracks
 {
-    public interface ITrackSynchronizedLyrics : IEntity
+    public interface ITrackSynchronizedLyrics : IChild
     {
-        ITrack Track { get; }
         string TextEncoding { get; set; }
         string Language { get; set; }
         string Description { get; set; }

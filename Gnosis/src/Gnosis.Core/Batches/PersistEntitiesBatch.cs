@@ -42,8 +42,8 @@ namespace Gnosis.Core.Batches
                 {
                     var idParameterName = builder.GetParameterName();
                     builder.AddParameter(idParameterName, child.Id);
-                    var whereClause = string.Format("{0}.Id = {3}", childInfo.Name, idParameterName);
-                    var statement = new DeleteStatement(childInfo.Name, whereClause);
+                    var whereClause = string.Format("{0}.Id = {3}", childInfo.Entity.Name, idParameterName);
+                    var statement = new DeleteStatement(childInfo.Entity.Name, whereClause);
                     builder.AddStatement(statement);
 
                     AddDeleteStatements(child, childInfo.Entity);
@@ -76,8 +76,8 @@ namespace Gnosis.Core.Batches
 
             var idParameterName = builder.GetParameterName();
             builder.AddParameter(idParameterName, child.Id);
-            var whereClause = string.Format("{0}.Id = {1}", childInfo.Name, idParameterName);
-            var statement = new DeleteStatement(childInfo.Name, whereClause);
+            var whereClause = string.Format("{0}.Id = {1}", childInfo.Entity.Name, idParameterName);
+            var statement = new DeleteStatement(childInfo.Entity.Name, whereClause);
 
             builder.AddStatement(statement);
             Add(builder);

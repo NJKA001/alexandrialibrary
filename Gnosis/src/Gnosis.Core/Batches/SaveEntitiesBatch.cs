@@ -67,7 +67,7 @@ namespace Gnosis.Core.Batches
         private void AddEntityInsertStatement(IChild child, ChildInfo childInfo)
         {
             var builder = new CommandBuilder();
-            var statement = new InsertStatement(childInfo.Name);
+            var statement = new InsertStatement(childInfo.Entity.Name);
 
             foreach (var element in childInfo.Entity.Elements)
             {
@@ -133,8 +133,8 @@ namespace Gnosis.Core.Batches
 
             var idParameterName = builder.GetParameterName();
             builder.AddParameter(idParameterName, child.Id);
-            var whereClause = string.Format("{0}.Id = {1}", childInfo.Name, idParameterName);
-            var statement = new UpdateStatement(childInfo.Name, whereClause);
+            var whereClause = string.Format("{0}.Id = {1}", childInfo.Entity.Name, idParameterName);
+            var statement = new UpdateStatement(childInfo.Entity.Name, whereClause);
 
             foreach (var element in childInfo.Entity.Elements)
             {

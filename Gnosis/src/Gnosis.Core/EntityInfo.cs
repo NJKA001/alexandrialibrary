@@ -82,7 +82,7 @@ namespace Gnosis.Core
                             var itemType = args[0];
                             if (itemType.IsChildType())
                             {
-                                children.Add(new ChildInfo(this, property, itemType, name));
+                                children.Add(new ChildInfo(this, property, itemType));
                             }
                             else if (itemType.IsValueType())
                             {

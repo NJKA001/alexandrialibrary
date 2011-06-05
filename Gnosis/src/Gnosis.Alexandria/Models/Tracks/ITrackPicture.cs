@@ -7,9 +7,8 @@ using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Models.Tracks
 {
-    public interface ITrackPicture : IEntity
+    public interface ITrackPicture : IChild
     {
-        ITrack Track { get; }
         string TextEncoding { get; set; }
         string MediaType { get; set; }
         TrackPictureType PictureType { get; set; }

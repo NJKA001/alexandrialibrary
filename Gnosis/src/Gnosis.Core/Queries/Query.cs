@@ -38,7 +38,7 @@ namespace Gnosis.Core.Queries
         {
             foreach (var childInfo in entityInfo.Children)
             {
-                var childBuilder = new CommandBuilder(childInfo.Name, childInfo.Entity.Type);
+                var childBuilder = new CommandBuilder(childInfo.Entity.Name, childInfo.Entity.Type);
                 childBuilder.AddStatement(new SelectStatement(childInfo, filter));
                 parentBuilder.AddChild(childBuilder);
 

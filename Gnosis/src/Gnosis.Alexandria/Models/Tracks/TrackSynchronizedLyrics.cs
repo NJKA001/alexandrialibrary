@@ -8,18 +8,16 @@ using Gnosis.Core;
 namespace Gnosis.Alexandria.Models.Tracks
 {
     public class TrackSynchronizedLyrics
-        : EntityBase, ITrackSynchronizedLyrics
+        : ChildBase, ITrackSynchronizedLyrics
     {
-        public TrackSynchronizedLyrics(IContext context, ITrack track)
-            : base(context)
+        public TrackSynchronizedLyrics(IContext context, Guid parent)
+            : base(context, parent)
         {
-            this.track = track;
         }
 
-        public TrackSynchronizedLyrics(IContext context, Guid id, DateTime timeStamp, ITrack track, string textEncoding, string language, string description, string lyrics, TrackSynchronizedTextType contentType)
-            : base(context, id, timeStamp)
+        public TrackSynchronizedLyrics(IContext context, Guid id, DateTime timeStamp, Guid parent, string textEncoding, string language, string description, string lyrics, TrackSynchronizedTextType contentType)
+            : base(context, id, timeStamp, parent)
         {
-            this.track = track;
             this.textEncoding = textEncoding;
             this.language = language;
             this.description = description;
@@ -27,17 +25,11 @@ namespace Gnosis.Alexandria.Models.Tracks
             this.contentType = contentType;
         }
 
-        private readonly ITrack track;
         private string textEncoding = string.Empty;
         private string language = string.Empty;
         private string description = string.Empty;
         private string lyrics = string.Empty;
         private TrackSynchronizedTextType contentType = TrackSynchronizedTextType.Lyrics;
-
-        public ITrack Track
-        {
-            get { return track; }
-        }
 
         public string TextEncoding
         {

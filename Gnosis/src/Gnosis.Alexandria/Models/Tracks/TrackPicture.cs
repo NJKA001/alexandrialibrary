@@ -8,18 +8,16 @@ using Gnosis.Core;
 namespace Gnosis.Alexandria.Models.Tracks
 {
     public class TrackPicture
-        : EntityBase, ITrackPicture
+        : ChildBase, ITrackPicture
     {
-        public TrackPicture(IContext context, ITrack track)
-            : base(context)
+        public TrackPicture(IContext context, Guid parent)
+            : base(context, parent)
         {
-            this.track = track;
         }
 
-        public TrackPicture(IContext context, Guid id, DateTime timeStamp, ITrack track, string textEncoding, string mediaType, TrackPictureType pictureType, string description, byte[] pictureData)
-            : base(context, id, timeStamp)
+        public TrackPicture(IContext context, Guid id, DateTime timeStamp, Guid parent, string textEncoding, string mediaType, TrackPictureType pictureType, string description, byte[] pictureData)
+            : base(context, id, timeStamp, parent)
         {
-            this.track = track;
             this.textEncoding = textEncoding;
             this.mediaType = mediaType;
             this.pictureType = pictureType;
@@ -27,17 +25,11 @@ namespace Gnosis.Alexandria.Models.Tracks
             this.pictureData = pictureData;
         }
 
-        private readonly ITrack track;
         private string textEncoding = string.Empty;
         private string mediaType = "image/jpeg";
         private TrackPictureType pictureType = TrackPictureType.FrontCover;
         private string description = string.Empty;
         private byte[] pictureData = new byte[] { 0 };
-
-        public ITrack Track
-        {
-            get { return track; }
-        }
 
         public string TextEncoding
         {
