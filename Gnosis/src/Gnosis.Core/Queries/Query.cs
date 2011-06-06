@@ -13,9 +13,10 @@ namespace Gnosis.Core.Queries
     public class Query<T>
         : IQuery<T> where T : IEntity
     {
-        public Query(Func<IDbConnection> getConnection, IFactory factory, IFilter filter)
+        public Query(Func<IDbConnection> getConnection, ILogger logger, IFactory factory, IFilter filter)
         {
             this.getConnection = getConnection;
+            this.logger = logger;
             this.factory = factory;
             this.builder = new CommandBuilder();
             this.whereClause = filter.WhereClause;
@@ -28,6 +29,7 @@ namespace Gnosis.Core.Queries
         }
 
         private readonly Func<IDbConnection> getConnection;
+        private readonly ILogger logger;
         private readonly IFactory factory;
         private readonly ICommandBuilder builder;
         private readonly string whereClause;
@@ -55,6 +57,7 @@ namespace Gnosis.Core.Queries
 
         private void AddChildren(IDbConnection connection, ICommandBuilder parentBuilder, IEnumerable<IEntity> parents)
         {
+            logger.Info("  Query.AddChildren");
             foreach (var childBuilder in parentBuilder.Children)
             {
                 if (childBuilder.Type == null)
@@ -67,6 +70,7 @@ namespace Gnosis.Core.Queries
 
                 using (var command = childBuilder.GetCommand(connection))
                 {
+                    logger.Debug("    " + command.CommandText.Trim());
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -99,13 +103,17 @@ namespace Gnosis.Core.Queries
 
         public IEnumerable<T> Execute()
         {
+            logger.Info("Query.Execute");
+
             var items = new List<T>();
 
             using (var connection = getConnection())
             {
+                logger.Debug("  opening connection");
                 connection.Open();
 
                 var command = builder.GetCommand(connection);
+                logger.Debug("    " + command.CommandText.Trim());
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -121,6 +129,7 @@ namespace Gnosis.Core.Queries
                 AddChildren(connection, builder, items.Cast<IEntity>());
             }
 
+            logger.Debug("  return items. count=" + items.Count);
             return items;
         }
     }

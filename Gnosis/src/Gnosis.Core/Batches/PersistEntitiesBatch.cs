@@ -11,8 +11,8 @@ namespace Gnosis.Core.Batches
     public abstract class PersistEntitiesBatch
         : Batch
     {
-        protected PersistEntitiesBatch(Func<IDbConnection> getConnection)
-            : base(getConnection)
+        protected PersistEntitiesBatch(Func<IDbConnection> getConnection, ILogger logger)
+            : base(getConnection, logger)
         {
         }
 

@@ -12,8 +12,8 @@ namespace Gnosis.Core.Batches
         : PersistEntitiesBatch 
         where T : IEntity
     {
-        public SaveEntitiesBatch(Func<IDbConnection> getConnection, IEnumerable<T> entities)
-            : base(getConnection)
+        public SaveEntitiesBatch(Func<IDbConnection> getConnection, ILogger logger, IEnumerable<T> entities)
+            : base(getConnection, logger)
         {
             var entityInfo = new EntityInfo(typeof(T));
 

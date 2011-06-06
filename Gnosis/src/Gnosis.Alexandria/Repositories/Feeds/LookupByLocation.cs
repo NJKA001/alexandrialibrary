@@ -7,11 +7,11 @@ using Gnosis.Alexandria.Models.Feeds;
 
 namespace Gnosis.Alexandria.Repositories.Feeds
 {
-    public class SearchFeedsByTitle
-        : SearchBase<IFeed>
+    public class LookupByLocation :
+        LookupBase<IFeed>
     {
-        public SearchFeedsByTitle()
-            : base("SearchFeedsByTitle", "Feed.Title LIKE @Title", "Feed.Title ASC", new List<string> { "Title" })
+        public LookupByLocation()
+            : base("LookupByLocation", "Feed.Location = @Location", new List<string> { "Location" })
         {
         }
     }

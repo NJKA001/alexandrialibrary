@@ -8,14 +8,14 @@ namespace Gnosis.Core
 {
     public class ValueInfo
     {
-        public ValueInfo(EntityInfo parent, PropertyInfo property, Type valueType, string prefix)
+        public ValueInfo(EntityInfo parent, PropertyInfo property, Type valueType)
         {
             this.parent = parent;
             this.property = property;
             this.type = valueType;
-            this.name = string.Format("{0}_{1}", prefix, property.Name);
+            this.name = string.Format("{0}_{1}", parent.Name, valueType.GetNormalizedName());
 
-            GetElements(valueType);
+            MapTypes(valueType);
         }
 
         private readonly EntityInfo parent;
@@ -24,7 +24,17 @@ namespace Gnosis.Core
         private readonly string name;
         private readonly List<ElementInfo> elements = new List<ElementInfo>();
 
-        private void GetElements(Type type)
+        private void MapTypes(Type type)
+        {
+            foreach (var interfaceType in type.GetInterfaces())
+            {
+                MapProperties(interfaceType);
+            }
+
+            MapProperties(type);
+        }
+
+        private void MapProperties(Type type)
         {
             foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {

@@ -13,6 +13,7 @@ using Gnosis.Core.Batches;
 using Gnosis.Core.Commands;
 using Gnosis.Core.Queries;
 
+using Gnosis.Alexandria.Helpers;
 //using Gnosis.Alexandria.Models;
 
 namespace Gnosis.Alexandria.Repositories
@@ -21,16 +22,17 @@ namespace Gnosis.Alexandria.Repositories
         : IRepository<T>
         where T : IEntity
     {
-        protected RepositoryBase(IContext context, IFactory factory)
+        protected RepositoryBase(IContext context, IFactory factory, ILogger logger)
         {
             this.context = context;
             this.factory = factory;
+            this.logger = logger;
             this.baseType = typeof(T);
         }
 
-        private static readonly ILog log = LogManager.GetLogger(typeof(RepositoryBase<T>));
         private readonly IContext context;
         private readonly IFactory factory;
+        private readonly ILogger logger;
         private readonly Type baseType;
         private readonly IList<ILookup> lookups = new List<ILookup>();
         private readonly IList<ISearch> searches = new List<ISearch>();
@@ -40,12 +42,12 @@ namespace Gnosis.Alexandria.Repositories
         {
             try
             {
-                var batch = new InitializeTypeBatch(() => GetConnection(), baseType, lookups, searches);
+                var batch = new InitializeTypeBatch(() => GetConnection(), logger, baseType, lookups, searches);
                 batch.Execute();
             }
             catch (Exception ex)
             {
-                log.Error("RepositoryBase.Initialize", ex);
+                logger.Error("RepositoryBase.Initialize", ex);
             }
         }
         
@@ -71,7 +73,7 @@ namespace Gnosis.Alexandria.Repositories
 
         protected IEnumerable<T> Select(IFilter filter)
         {
-            var query = new Query<T>(() => GetConnection(), factory, filter);
+            var query = new Query<T>(() => GetConnection(), logger, factory, filter);
             return query.Execute();
         }
 
@@ -101,13 +103,13 @@ namespace Gnosis.Alexandria.Repositories
 
         public void Save(IEnumerable<T> items)
         {
-            var batch = new SaveEntitiesBatch<T>(() => GetConnection(), items);
+            var batch = new SaveEntitiesBatch<T>(() => GetConnection(), logger, items);
             batch.Execute();
         }
 
         public void Delete(IEnumerable<T> items)
         {
-            var batch = new DeleteEntitiesBatch<T>(() => GetConnection(), items);
+            var batch = new DeleteEntitiesBatch<T>(() => GetConnection(), logger, items);
             batch.Execute();
         }
     }

@@ -67,7 +67,7 @@ namespace Gnosis.Alexandria.Views
                 factory = new Factory(context);
 
                 feedRepository = new FeedRepository(context, factory);
-                trackRepository = new TrackRepository(context, factory);
+                //trackRepository = new TrackRepository(context, factory);
 
                 try
                 {
@@ -84,11 +84,12 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        private static readonly ILog log = LogManager.GetLogger(typeof(MainWindow));
+        private static readonly log4net.ILog log = LogManager.GetLogger(typeof(MainWindow));
         
         private readonly IContext context;
         private readonly IFactory factory;
-        private readonly IRepository<Gnosis.Alexandria.Models.Tracks.ITrack> trackRepository;
+        private readonly ILogger logger = new Logger(log);
+        //private readonly IRepository<Gnosis.Alexandria.Models.Tracks.ITrack> trackRepository;
         private readonly IRepository<Gnosis.Alexandria.Models.Feeds.IFeed> feedRepository;
 
         private readonly IOldRepository<IOldTrack> oldTrackRepository = new OldTrackRepository();

@@ -10,7 +10,7 @@ namespace Gnosis.Core
     {
         public EntityInfo(Type type)
         {
-            this.name = GetEntityName(type);
+            this.name = type.GetNormalizedName();
             this.type = type;
 
             MapTypes(type);
@@ -18,7 +18,7 @@ namespace Gnosis.Core
 
         public EntityInfo(Type type, EntityInfo parent)
         {
-            this.name = GetEntityName(type);
+            this.name = type.GetNormalizedName();
             this.type = type;
             this.parent = parent;
 
@@ -32,17 +32,6 @@ namespace Gnosis.Core
         private readonly IList<DataTypeInfo> dataTypes = new List<DataTypeInfo>();
         private readonly IList<EntityInfo> children = new List<EntityInfo>();
         private readonly IList<ValueInfo> values = new List<ValueInfo>();
-
-        private static string GetEntityName(Type type)
-        {
-            if (type.IsInterface)
-            {
-                if (type.Name.StartsWith("I") && type.Name.Length > 1)
-                    return type.Name.Substring(1);
-            }
-
-            return type.Name;
-        }
 
         private void MapTypes(Type type)
         {
@@ -86,7 +75,7 @@ namespace Gnosis.Core
                             }
                             else if (itemType.IsValueType())
                             {
-                                values.Add(new ValueInfo(this, property, itemType, name));
+                                values.Add(new ValueInfo(this, property, itemType));
                             }
                         }
                         else

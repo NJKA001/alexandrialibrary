@@ -230,6 +230,17 @@ namespace Gnosis.Core
                 return TypeAffinity.Numeric;
         }
 
+        public static string GetNormalizedName(this Type type)
+        {
+            if (type.IsInterface)
+            {
+                if (type.Name.StartsWith("I") && type.Name.Length > 1)
+                    return type.Name.Substring(1);
+            }
+
+            return type.Name;
+        }
+
         /*
         public static TableInfo GetTableInfo(this Type type)
         {

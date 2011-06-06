@@ -69,6 +69,7 @@
     <Compile Include="IFactory.cs" />
     <Compile Include="IFilter.cs" />
     <Compile Include="IHashCode.cs" />
+    <Compile Include="ILogger.cs" />
     <Compile Include="ILookup.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ISearch.cs" />

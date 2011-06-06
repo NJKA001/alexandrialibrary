@@ -80,6 +80,7 @@
     <Compile Include="Events\SourceLoadedEventArgs.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Extensions\UIElementExtensions.cs" />
+    <Compile Include="Helpers\Logger.cs" />
     <Compile Include="Helpers\Rfc822DateTime.cs" />
     <Compile Include="Helpers\VisualHelper.cs" />
     <Compile Include="Models\ChildBase.cs" />
@@ -142,10 +143,10 @@
     <Compile Include="Models\ValueBase.cs" />
     <Compile Include="Repositories\Factory.cs" />
     <Compile Include="Repositories\Feeds\FeedRepository.cs" />
-    <Compile Include="Repositories\Feeds\LookupFeedByLocation.cs" />
-    <Compile Include="Repositories\Feeds\SearchAllFeeds.cs" />
-    <Compile Include="Repositories\Feeds\SearchFeedsByAuthors.cs" />
-    <Compile Include="Repositories\Feeds\SearchFeedsByTitle.cs" />
+    <Compile Include="Repositories\Feeds\LookupByLocation.cs" />
+    <Compile Include="Repositories\Feeds\SearchAll.cs" />
+    <Compile Include="Repositories\Feeds\SearchByAuthors.cs" />
+    <Compile Include="Repositories\Feeds\SearchByTitle.cs" />
     <Compile Include="Repositories\LookupBase.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\SearchBase.cs" />

@@ -10,8 +10,8 @@ namespace Gnosis.Core.Batches
 {
     public class InitializeTypeBatch : Batch
     {
-        public InitializeTypeBatch(Func<IDbConnection> getConnection, Type type, IEnumerable<ILookup> lookups, IEnumerable<ISearch> searches)
-            : base(getConnection)
+        public InitializeTypeBatch(Func<IDbConnection> getConnection, ILogger logger, Type type, IEnumerable<ILookup> lookups, IEnumerable<ISearch> searches)
+            : base(getConnection, logger)
         {
             var entityInfo = new EntityInfo(type);
 
@@ -52,26 +52,26 @@ namespace Gnosis.Core.Batches
 
         private void AddLookupIndices(IEnumerable<ILookup> lookups)
         {
-            var builder = new CommandBuilder();
             foreach (var lookup in lookups)
             {
+                var builder = new CommandBuilder();
                 var tableName = new EntityInfo(lookup.BaseType).Name;
-                var indexName = string.Format("{0}_{1}_index", tableName, lookup.Name);
+                var indexName = string.Format("{0}_{1}", tableName, lookup.Name);
                 builder.AddStatement(new CreateIndexStatement(tableName, indexName, true, lookup.Columns));
+                Add(builder);
             }
-            Add(builder);
         }
 
         private void AddSearchIndices(IEnumerable<ISearch> searches)
         {
-            var builder = new CommandBuilder();
             foreach (var search in searches)
             {
+                var builder = new CommandBuilder();
                 var tableName = new EntityInfo(search.BaseType).Name;
-                var indexName = string.Format("{0}_{1}_index", tableName, search.Name);
+                var indexName = string.Format("{0}_{1}", tableName, search.Name);
                 builder.AddStatement(new CreateIndexStatement(tableName, indexName, false, search.Columns));
+                Add(builder);
             }
-            Add(builder);
         }
     }
 }
