@@ -33,6 +33,11 @@ namespace Gnosis.Core
             return record[name].ToString();
         }
 
+        public static TimeSpan GetTimeSpan(this IDataRecord record, string name)
+        {
+            return new TimeSpan(long.Parse(record[name].ToString()));
+        }
+
         public static uint GetUInt32(this IDataRecord record, string name)
         {
             return uint.Parse(record[name].ToString());

@@ -42,9 +42,10 @@ namespace Gnosis.Alexandria.Views
 
             log4net.Config.XmlConfigurator.Configure();
 
+
             try
             {
-                log.Info("MainWindow.ctor: started");
+                logger.Info("MainWindow.ctor: started");
 
                 tagController = new TagController();
                 trackController = new TrackController(oldTrackRepository, tagController);
@@ -71,16 +72,27 @@ namespace Gnosis.Alexandria.Views
 
                 try
                 {
-                    var allFeeds = feedRepository.Search();
+                    var feed = new Models.Feeds.Feed(context) { Authors = "Bill Simmons", Contributors = "Joe House, Marc Stein, John Hollinger", Copyright = "c 2011", Description = "Sports etc.", FeedIdentifier = "12345ABC", Generator = "espn.go.com", Language = "en-us", Location = new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045"), MediaType = "application/xml+rss", OriginalLocation = new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045"), PublishedDate = new DateTime(2009, 2, 13), UpdatedDate = DateTime.Now, Title = "BS Report", IconPath = new Uri("http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg"), ImagePath = new Uri("http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg") };
+                    //feedRepository.Save(new List<Models.Feeds.IFeed> { feed });
                 }
                 catch (Exception ex)
                 {
-                    log.Error("feedRepository.Search()", ex);
+                    logger.Error("feedRepository.Save()", ex);
+                }
+
+                try
+                {
+                    var allFeeds = feedRepository.Search();
+                    var x = allFeeds.Count();
+                }
+                catch (Exception ex)
+                {
+                    logger.Error("feedRepository.Search()", ex);
                 }
             }
             catch (Exception ex)
             {
-                log.Error("MainWindow.ctor", ex);
+                logger.Error("MainWindow.ctor", ex);
             }
         }
 
@@ -164,7 +176,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                log.Error("MainWindow.SourceLoaded", ex);
+                logger.Error("MainWindow.SourceLoaded", ex);
             }
         }
 
@@ -183,7 +195,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                log.Error("MainWindow.sourceLoadedCompleted", ex);
+                logger.Error("MainWindow.sourceLoadedCompleted", ex);
             }
         }
 

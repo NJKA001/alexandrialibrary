@@ -414,6 +414,10 @@ namespace Gnosis.Core
                 return true;
             else if (type == typeof(ulong))
                 return true;
+            else if (type.IsEnum)
+                return true;
+            else if (type == typeof(TimeSpan))
+                return true;
 
             return false;
         }

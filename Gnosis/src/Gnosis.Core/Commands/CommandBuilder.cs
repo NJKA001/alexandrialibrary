@@ -53,7 +53,29 @@ namespace Gnosis.Core.Commands
 
         public void AddParameter(string name, object value)
         {
-            parameters.Add(name, value);
+            var normalizedValue = value;
+
+            if (value != null)
+            {
+                if (value is IEntity)
+                    normalizedValue = ((IEntity)value).Id.ToString();
+                if (value is IValue)
+                    normalizedValue = ((IValue)value).Id.ToString();
+                if (value.GetType() == typeof(bool))
+                    normalizedValue = (bool)value ? 1 : 0;
+                if (value.GetType() == typeof(Guid))
+                    normalizedValue = ((Guid)value).ToString();
+                else if (value.GetType() == typeof(Uri))
+                    normalizedValue = ((Uri)value).ToString();
+                else if (value.GetType() == typeof(DateTime))
+                    normalizedValue = ((DateTime)value).ToString("s");
+                else if (value.GetType() == typeof(TimeSpan))
+                    normalizedValue = ((TimeSpan)value).Ticks;
+                else if (value.GetType().IsEnum)
+                    normalizedValue = (int)value;
+            }
+
+            parameters.Add(name, normalizedValue);
         }
 
         public void AddStatement(IStatement statement)
