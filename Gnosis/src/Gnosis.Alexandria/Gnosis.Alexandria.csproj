@@ -141,7 +141,8 @@
     <Compile Include="Models\Tracks\TrackSynchronizedLyrics.cs" />
     <Compile Include="Models\Tracks\TrackUnsynchronizedLyrics.cs" />
     <Compile Include="Models\ValueBase.cs" />
-    <Compile Include="Repositories\Factory.cs" />
+    <Compile Include="Repositories\FactoryBase.cs" />
+    <Compile Include="Repositories\Feeds\FeedFactory.cs" />
     <Compile Include="Repositories\Feeds\FeedRepository.cs" />
     <Compile Include="Repositories\Feeds\LookupByLocation.cs" />
     <Compile Include="Repositories\Feeds\SearchAll.cs" />

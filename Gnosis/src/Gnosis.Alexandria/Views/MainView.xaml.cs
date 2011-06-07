@@ -65,9 +65,8 @@ namespace Gnosis.Alexandria.Views
                 trackController.SourceLoadCompleted += sourceLoadCompleted;
 
                 context = new ModelContext(this.Dispatcher);
-                factory = new Factory(context);
 
-                feedRepository = new FeedRepository(context, factory);
+                feedRepository = new FeedRepository(context);
                 //trackRepository = new TrackRepository(context, factory);
 
                 try
