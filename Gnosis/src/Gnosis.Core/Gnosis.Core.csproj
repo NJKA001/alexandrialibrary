@@ -61,6 +61,7 @@
     <Compile Include="ElementInfo.cs" />
     <Compile Include="DataTypeInfo.cs" />
     <Compile Include="EntityInfo.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Filter.cs" />
     <Compile Include="IChild.cs" />
     <Compile Include="IContext.cs" />

@@ -35,18 +35,18 @@ namespace Gnosis.Alexandria.Models
         private DateTime timeStamp;
         private bool isNew;
         private bool isChanged;
+        private readonly IList<IChild> children = new List<IChild>();
+        private readonly IList<IChild> removedChildren = new List<IChild>();
+        private readonly IList<IValue> values = new List<IValue>();
+        private readonly IList<IValue> removedValues = new List<IValue>();
 
         protected IContext Context
         {
             get { return context; }
         }
 
-        protected void OnEntityChanged(Action action, string propertyName)
+        private void OnPropertyChanged(string propertyName)
         {
-            context.Invoke(action);
-
-            isChanged = true;
-
             if (PropertyChanged != null)
             {
                 try
@@ -55,8 +55,59 @@ namespace Gnosis.Alexandria.Models
                 }
                 catch (Exception ex)
                 {
-                    log.Error("EntityBase.OnEntityChanged", ex);
+                    log.Error("EntityBase.OnPropertyChanged", ex);
                 }
+            }
+        }
+
+        protected void OnEntityChanged(Action action, string propertyName)
+        {
+            context.Invoke(action);
+
+            isChanged = true;
+
+            OnPropertyChanged(propertyName);
+        }
+
+        protected void AddChild(Action action, IChild child, string propertyName)
+        {
+            if (!children.Contains(child))
+            {
+                context.Invoke(action);
+                children.Add(child);
+                OnPropertyChanged(propertyName);
+            }
+        }
+
+        protected void RemoveChild(Action action, IChild child, string propertyName)
+        {
+            if (children.Contains(child))
+            {
+                context.Invoke(action);
+                children.Remove(child);
+                removedChildren.Add(child);
+                OnPropertyChanged(propertyName);
+            }
+        }
+
+        protected void AddValue(Action action, IValue value, string propertyName)
+        {
+            if (!values.Contains(value))
+            {
+                context.Invoke(action);
+                values.Add(value);
+                OnPropertyChanged(propertyName);
+            }
+        }
+
+        protected void RemoveValue(Action action, IValue value, string propertyName)
+        {
+            if (values.Contains(value))
+            {
+                context.Invoke(action);
+                values.Remove(value);
+                removedValues.Add(value);
+                OnPropertyChanged(propertyName);
             }
         }
 
@@ -82,12 +133,12 @@ namespace Gnosis.Alexandria.Models
 
         public virtual IEnumerable<IChild> GetChildren(EntityInfo childInfo)
         {
-            return new List<IChild>();
+            return removedChildren.Concat(children);
         }
 
         public virtual IEnumerable<IValue> GetValues(ValueInfo valueInfo)
         {
-            return new List<IValue>();
+            return removedValues.Concat(values);
         }
 
         public virtual void Save(DateTime timeStamp)

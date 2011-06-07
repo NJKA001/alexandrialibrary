@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -13,17 +14,23 @@ namespace Gnosis.Alexandria.Models.Feeds
         public FeedItem(IContext context, Guid parent)
             : base(context, parent)
         {
-            this.categories = new List<IFeedCategory>();
-            this.links = new List<IFeedLink>();
-            this.metadata = new List<IFeedMetadata>();
         }
 
         public FeedItem(IContext context, Guid id, Guid parent, DateTime timeStamp, string title, string titleMediaType, string authors, string contributors, DateTime publishedDate, string copyright, string summary, string content, string contentMediaType, Uri contentLocation, DateTime updatedDate, string feedItemIdentifier)
             : base(context, id, timeStamp, parent)
         {
-            this.categories = new List<IFeedCategory>();
-            this.links = new List<IFeedLink>();
-            this.metadata = new List<IFeedMetadata>();
+            this.title = title;
+            this.titleMediaType = titleMediaType;
+            this.authors = authors;
+            this.contributors = contributors;
+            this.publishedDate = publishedDate;
+            this.copyright = copyright;
+            this.summary = summary;
+            this.content = content;
+            this.contentMediaType = contentMediaType;
+            this.contentLocation = contentLocation;
+            this.updatedDate = updatedDate;
+            this.feedItemIdentifier = feedItemIdentifier;
         }
 
         private string title;
@@ -39,9 +46,9 @@ namespace Gnosis.Alexandria.Models.Feeds
         private DateTime updatedDate;
         private string feedItemIdentifier;
 
-        private readonly List<IFeedCategory> categories;
-        private readonly List<IFeedLink> links;
-        private readonly List<IFeedMetadata> metadata;
+        private readonly IList<IFeedCategory> categories = new ObservableCollection<IFeedCategory>();
+        private readonly IList<IFeedLink> links = new ObservableCollection<IFeedLink>();
+        private readonly IList<IFeedMetadata> metadata = new ObservableCollection<IFeedMetadata>();
 
         #region IFeedItem Members
 
@@ -203,6 +210,36 @@ namespace Gnosis.Alexandria.Models.Feeds
         public IEnumerable<IFeedMetadata> Metadata
         {
             get { return metadata; }
+        }
+
+        public void AddCategory(IFeedCategory category)
+        {
+            AddValue(() => categories.Add(category), category, "Categories");
+        }
+
+        public void RemoveCategory(IFeedCategory category)
+        {
+            RemoveValue(() => categories.Remove(category), category, "Categories");
+        }
+
+        public void AddLink(IFeedLink link)
+        {
+            AddValue(() => links.Add(link), link, "Links");
+        }
+
+        public void RemoveLink(IFeedLink link)
+        {
+            RemoveValue(() => links.Remove(link), link, "Links");
+        }
+
+        public void AddMetadatum(IFeedMetadata metadatum)
+        {
+            AddValue(() => metadata.Add(metadatum), metadatum, "Metadata");
+        }
+
+        public void RemoveMetadatum(IFeedMetadata metadatum)
+        {
+            RemoveValue(() => metadata.Remove(metadatum), metadatum, "Metadata");
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -14,10 +15,6 @@ namespace Gnosis.Alexandria.Models.Feeds
         public Feed(IContext context)
             : base(context)
         {
-            this.categories = new List<IFeedCategory>();
-            this.links = new List<IFeedLink>();
-            this.metadata = new List<IFeedMetadata>();
-            this.items = new List<IFeedItem>();
         }
 
         public Feed(IContext context, Guid id, DateTime timeStamp, Uri location, string mediaType, string title, string authors, string contributors, string description, string language, Uri originalLocation, string copyright, DateTime publishedDate, DateTime updatedDate, string generator, Uri imagePath, Uri iconPath, string feedIdentifier)
@@ -38,11 +35,6 @@ namespace Gnosis.Alexandria.Models.Feeds
             this.imagePath = imagePath;
             this.iconPath = iconPath;
             this.feedIdentifier = feedIdentifier;
-
-            this.categories = new List<IFeedCategory>();
-            this.links = new List<IFeedLink>();
-            this.metadata = new List<IFeedMetadata>();
-            this.items = new List<IFeedItem>();
         }
 
         private Uri location;
@@ -61,10 +53,10 @@ namespace Gnosis.Alexandria.Models.Feeds
         private Uri iconPath;
         private string feedIdentifier;
 
-        private readonly IList<IFeedCategory> categories;
-        private readonly IList<IFeedLink> links;
-        private readonly IList<IFeedMetadata> metadata;
-        private readonly IList<IFeedItem> items;
+        private readonly IList<IFeedCategory> categories = new ObservableCollection<IFeedCategory>();
+        private readonly IList<IFeedLink> links = new ObservableCollection<IFeedLink>();
+        private readonly IList<IFeedMetadata> metadata = new ObservableCollection<IFeedMetadata>();
+        private readonly IList<IFeedItem> items = new ObservableCollection<IFeedItem>();
 
         public Uri Location
         {
@@ -264,6 +256,46 @@ namespace Gnosis.Alexandria.Models.Feeds
         public IEnumerable<IFeedItem> Items
         {
             get { return items; }
+        }
+
+        public void AddCategory(IFeedCategory category)
+        {
+            AddValue(() => categories.Add(category), category, "Categories");
+        }
+
+        public void RemoveCategory(IFeedCategory category)
+        {
+            RemoveValue(() => categories.Remove(category), category, "Categories");
+        }
+
+        public void AddLink(IFeedLink link)
+        {
+            AddValue(() => links.Add(link), link, "Links");
+        }
+
+        public void RemoveLink(IFeedLink link)
+        {
+            RemoveValue(() => links.Remove(link), link, "Links");
+        }
+
+        public void AddMetadatum(IFeedMetadata metadatum)
+        {
+            AddValue(() => metadata.Add(metadatum), metadatum, "Metadata");
+        }
+
+        public void RemoveMetadatum(IFeedMetadata metadatum)
+        {
+            RemoveValue(() => metadata.Remove(metadatum), metadatum, "Metadata");
+        }
+
+        public void AddItem(IFeedItem item)
+        {
+            AddChild(() => items.Add(item), item, "Items");
+        }
+
+        public void RemoveItem(IFeedItem item)
+        {
+            RemoveChild(() => items.Remove(item), item, "Items");
         }
     }
 }

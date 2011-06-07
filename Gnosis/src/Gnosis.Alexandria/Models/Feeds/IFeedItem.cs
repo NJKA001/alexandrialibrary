@@ -25,5 +25,14 @@ namespace Gnosis.Alexandria.Models.Feeds
         IEnumerable<IFeedCategory> Categories { get; }
         IEnumerable<IFeedLink> Links { get; }
         IEnumerable<IFeedMetadata> Metadata { get; }
+
+        void AddCategory(IFeedCategory category);
+        void RemoveCategory(IFeedCategory category);
+
+        void AddLink(IFeedLink link);
+        void RemoveLink(IFeedLink link);
+
+        void AddMetadatum(IFeedMetadata metadatum);
+        void RemoveMetadatum(IFeedMetadata metadatum);
     }
 }

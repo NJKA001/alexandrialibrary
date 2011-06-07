@@ -72,7 +72,7 @@ namespace Gnosis.Alexandria.Views
 
                 try
                 {
-                    var feed = new Models.Feeds.Feed(context) { Authors = "Bill Simmons", Contributors = "Joe House, Marc Stein, John Hollinger", Copyright = "c 2011", Description = "Sports etc.", FeedIdentifier = "12345ABC", Generator = "espn.go.com", Language = "en-us", Location = new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045"), MediaType = "application/xml+rss", OriginalLocation = new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045"), PublishedDate = new DateTime(2009, 2, 13), UpdatedDate = DateTime.Now, Title = "BS Report", IconPath = new Uri("http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg"), ImagePath = new Uri("http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg") };
+                    //var feed = new Models.Feeds.Feed(context) { Authors = "Bill Simmons", Contributors = "Joe House, Marc Stein, John Hollinger", Copyright = "c 2011", Description = "Sports etc.", FeedIdentifier = "12345ABC", Generator = "espn.go.com", Language = "en-us", Location = new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045"), MediaType = "application/xml+rss", OriginalLocation = new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045"), PublishedDate = new DateTime(2009, 2, 13), UpdatedDate = DateTime.Now, Title = "BS Report", IconPath = new Uri("http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg"), ImagePath = new Uri("http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg") };
                     //feedRepository.Save(new List<Models.Feeds.IFeed> { feed });
                 }
                 catch (Exception ex)
