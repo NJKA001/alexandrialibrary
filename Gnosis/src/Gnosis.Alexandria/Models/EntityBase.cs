@@ -146,6 +146,8 @@ namespace Gnosis.Alexandria.Models
             this.timeStamp = timeStamp;
             isNew = false;
             isChanged = false;
+            removedChildren.Clear();
+            removedValues.Clear();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
