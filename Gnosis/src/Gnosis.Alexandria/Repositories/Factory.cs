@@ -16,8 +16,10 @@ namespace Gnosis.Alexandria.Repositories
             this.context = context;
 
             functionMap.Add(typeof(IFeed), (record, parent) => CreateFeed(record, parent));
-            functionMap.Add(typeof(IFeedItem), (record, parent) => CreateFeedItem(record, parent));
-            functionMap.Add(typeof(IFeedCategory), (record, parent) => CreateFeedCategory(record, parent));
+            functionMap.Add(typeof(IFeedItem), (record, parent) => CreateItem(record, parent));
+            functionMap.Add(typeof(IFeedCategory), (record, parent) => CreateCategory(record, parent));
+            functionMap.Add(typeof(IFeedLink), (record, parent) => CreateLink(record, parent));
+            functionMap.Add(typeof(IFeedMetadata), (record, parent) => CreateMetadata(record, parent));
         }
 
         private readonly IContext context;
@@ -50,7 +52,7 @@ namespace Gnosis.Alexandria.Repositories
             }
         }
 
-        private object CreateFeedItem(IDataRecord record, Guid parent)
+        private object CreateItem(IDataRecord record, Guid parent)
         {
             if (record == null)
                 return new FeedItem(context, parent);
@@ -76,19 +78,117 @@ namespace Gnosis.Alexandria.Repositories
             }
         }
 
-        private object CreateFeedCategory(IDataRecord record, Guid parent)
+        private object CreateCategory(IDataRecord record, Guid parent)
         {
-            if (record != null)
+            var id = record.GetGuid("Id");
+            parent = record.GetGuid("Parent");
+            var sequence = record.GetUInt32("Sequence");
+            var scheme = record.GetUri("Scheme");
+            var name = record.GetString("Name");
+            var label = record.GetString("Label");
+            return new FeedCategory(id, parent, sequence, scheme, name, label);
+        }
+
+        private object CreateLink(IDataRecord record, Guid parent)
+        {
+            var id = record.GetGuid("Id");
+            parent = record.GetGuid("Parent");
+            var sequence = record.GetUInt32("Sequence");
+            var relationship = record.GetString("Relationship");
+            var location = record.GetUri("Location");
+            var mediaType = record.GetString("MediaType");
+            var length = record.GetUInt32("Length");
+            var language = record.GetString("Language");
+            return new FeedLink(id, parent, sequence, relationship, location, mediaType, length, language);
+        }
+
+        private object CreateMetadata(IDataRecord record, Guid parent)
+        {
+            var id = record.GetGuid("Id");
+            parent = record.GetGuid("Parent");
+            var sequence = record.GetUInt32("Sequence");
+            var mediaType = record.GetString("MediaType");
+            var scheme = record.GetUri("Scheme");
+            var name = record.GetString("Name");
+            var content = record.GetString("Content");
+            return new FeedMetadata(id, parent, sequence, mediaType, scheme, name, content);
+        }
+
+        private void AddFeedCategories(IEnumerable<IEntity> parents, IEnumerable<IValue> children)
+        {
+            foreach (var feed in parents.Cast<IFeed>())
             {
-                var id = record.GetGuid("Id");
-                parent = record.GetGuid("Parent");
-                var sequence = record.GetUInt32("Sequence");
-                var scheme = record.GetUri("Scheme");
-                var name = record.GetString("Name");
-                var label = record.GetString("Label");
-                return new FeedCategory(id, parent, sequence, scheme, name, label);
+                foreach (var child in children.Where(x => x.Parent == feed.Id).OrderBy(x => x.Sequence))
+                {
+                    feed.AddCategory(child as IFeedCategory);
+                }
             }
-            else return null;
+        }
+
+        private void AddFeedLinks(IEnumerable<IEntity> parents, IEnumerable<IValue> children)
+        {
+            foreach (var feed in parents.Cast<IFeed>())
+            {
+                foreach (var child in children.Where(x => x.Parent == feed.Id).OrderBy(x => x.Sequence))
+                {
+                    feed.AddLink(child as IFeedLink);
+                }
+            }
+        }
+
+        private void AddFeedMetadata(IEnumerable<IEntity> parents, IEnumerable<IValue> children)
+        {
+            foreach (var feed in parents.Cast<IFeed>())
+            {
+                foreach (var child in children.Where(x => x.Parent == feed.Id).OrderBy(x => x.Sequence))
+                {
+                    feed.AddMetadatum(child as IFeedMetadata);
+                }
+            }
+        }
+
+        private void AddFeedItems(IEnumerable<IEntity> parents, IEnumerable<IChild> children)
+        {
+            foreach (var feed in parents.Cast<IFeed>())
+            {
+                foreach (var child in children.Where(x => x.Parent == feed.Id).OrderBy(x => x.Sequence))
+                {
+                    feed.AddItem(child as IFeedItem);
+                }
+            }
+        }
+
+        private void AddFeedItemCategories(IEnumerable<IEntity> parents, IEnumerable<IValue> children)
+        {
+            foreach (var feedItem in parents.Cast<IFeedItem>())
+            {
+                foreach (var child in children.Where(x => x.Parent == feedItem.Id).OrderBy(x => x.Sequence))
+                {
+                    feedItem.AddCategory(child as IFeedCategory);
+                }
+            }
+        }
+
+        private void AddFeedItemLinks(IEnumerable<IEntity> parents, IEnumerable<IValue> children)
+        {
+            foreach (var feedItem in parents.Cast<IFeedItem>())
+            {
+                foreach (var child in children.Where(x => x.Parent == feedItem.Id).OrderBy(x => x.Sequence))
+                {
+                    feedItem.AddLink(child as IFeedLink);
+                }
+            }
+        }
+
+        private void AddFeedItemMetadata(IEnumerable<IEntity> parents, IEnumerable<IValue> children)
+        {
+            foreach (var feedItem in parents.Cast<IFeedItem>())
+            {
+                foreach (var child in children.Where(x => x.Parent == feedItem.Id).OrderBy(x => x.Sequence))
+                {
+                    feedItem.AddMetadatum(child as IFeedMetadata);
+                }
+            }
         }
 
         public IEntity CreateEntity(Type type)
@@ -133,7 +233,12 @@ namespace Gnosis.Alexandria.Repositories
 
         public IValue CreateValue(Type type, IDataRecord record)
         {
-            throw new NotImplementedException();
+            if (functionMap.ContainsKey(type))
+            {
+                return functionMap[type](record, Guid.Empty) as IValue;
+            }
+
+            return null;
         }
 
         public T CreateEntity<T>()
@@ -166,10 +271,33 @@ namespace Gnosis.Alexandria.Repositories
 
         public void AddChildren(Type parentType, Type childType, string childName, IEnumerable<IEntity> parents, IEnumerable<IChild> children)
         {
+            if (parentType == typeof(IFeed))
+            {
+                if (childType == typeof(IFeedItem))
+                    AddFeedItems(parents, children);
+            }
         }
 
         public void AddValues(Type parentType, Type valueType, string valueName, IEnumerable<IEntity> parents, IEnumerable<IValue> values)
         {
+            if (parentType == typeof(IFeed))
+            {
+                if (valueType == typeof(IFeedCategory))
+                    AddFeedCategories(parents, values);
+                else if (valueType == typeof(IFeedLink))
+                    AddFeedLinks(parents, values);
+                else if (valueType == typeof(IFeedMetadata))
+                    AddFeedMetadata(parents, values);
+            }
+            else if (parentType == typeof(IFeedItem))
+            {
+                if (valueType == typeof(IFeedCategory))
+                    AddFeedItemCategories(parents, values);
+                else if (valueType == typeof(IFeedLink))
+                    AddFeedItemLinks(parents, values);
+                else if (valueType == typeof(IFeedMetadata))
+                    AddFeedItemMetadata(parents, values);
+            }
         }
     }
 }

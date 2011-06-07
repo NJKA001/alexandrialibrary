@@ -72,8 +72,26 @@ namespace Gnosis.Alexandria.Views
 
                 try
                 {
-                    //var feed = new Models.Feeds.Feed(context) { Authors = "Bill Simmons", Contributors = "Joe House, Marc Stein, John Hollinger", Copyright = "c 2011", Description = "Sports etc.", FeedIdentifier = "12345ABC", Generator = "espn.go.com", Language = "en-us", Location = new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045"), MediaType = "application/xml+rss", OriginalLocation = new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045"), PublishedDate = new DateTime(2009, 2, 13), UpdatedDate = DateTime.Now, Title = "BS Report", IconPath = new Uri("http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg"), ImagePath = new Uri("http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg") };
-                    //feedRepository.Save(new List<Models.Feeds.IFeed> { feed });
+                    var feed = feedRepository.Lookup(new LookupByLocation(new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045")));
+                    if (feed == null)
+                    {
+                        feed = new Models.Feeds.Feed(context) { Authors = "Bill Simmons", Contributors = "Joe House, Marc Stein, John Hollinger", Copyright = "c 2009-2011", Description = "Sports etc.", FeedIdentifier = "12345ABC", Generator = "espn.go.com", Language = "en-us", Location = new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045"), MediaType = "application/xml+rss", OriginalLocation = new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045"), PublishedDate = new DateTime(2009, 2, 13), UpdatedDate = DateTime.Now, Title = "BS Report", IconPath = new Uri("http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg"), ImagePath = new Uri("http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg") };
+                        feed.AddCategory(new Models.Feeds.FeedCategory(feed.Id, 0, UriExtensions.EmptyUri, "Sports", "Sports"));
+                        feed.AddCategory(new Models.Feeds.FeedCategory(feed.Id, 1, UriExtensions.EmptyUri, "Comedy", "Comedy"));
+                        feed.AddLink(new Models.Feeds.FeedLink(feed.Id, 0, "self", new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045"), "application/xml+rss", 0, "en-us"));
+                        feed.AddLink(new Models.Feeds.FeedLink(feed.Id, 1, "alt", new Uri("http://espn.go.com/espnradio"), "text/html", 0, "en-us"));
+                        feed.AddLink(new Models.Feeds.FeedLink(feed.Id, 2, "alt", new Uri("http://espn.go.com/epsnradio?lang=es-mx"), "text/html", 0, "es-mx"));
+                        feed.AddMetadatum(new Models.Feeds.FeedMetadata(feed.Id, 0, "text/plain", UriExtensions.EmptyUri, "tag", "Bill Simmons"));
+                        feed.AddMetadatum(new Models.Feeds.FeedMetadata(feed.Id, 1, "application/xml", UriExtensions.EmptyUri, "marquee", "<marquee><title>BS Report</title><subtitle>with Bill Simmons</subtitle></marquee>"));
+                        var item = new Models.Feeds.FeedItem(context, feed.Id) { Authors = "Bill Simmons", Contributors = "Joe House, ", Copyright = "c 2011", FeedItemIdentifier = "ZYZ235AMQ379", Summary = "Bill previews the NBA Finals with ESPN experts", PublishedDate = new DateTime(2011, 6, 5), UpdatedDate = new DateTime(2011, 6, 5), Title = "NBA Finals Preview", TitleMediaType = "text/plain" };
+                        item.AddCategory(new Models.Feeds.FeedCategory(item.Id, 0, UriExtensions.EmptyUri, "Basketball", "Basketball"));
+                        item.AddLink(new Models.Feeds.FeedLink(item.Id, 0, "self", new Uri("http://espn.go.com/espnradio/media/xyz.mp3"), "audio/mpeg", 0, "en-us"));
+                        item.AddMetadatum(new Models.Feeds.FeedMetadata(item.Id, 0, "text/plain", UriExtensions.EmptyUri, "rating", "4/5"));
+                        item.AddMetadatum(new Models.Feeds.FeedMetadata(item.Id, 1, "application/xml", UriExtensions.EmptyUri, "rating", "<rating><score>4</score><max>5</max></rating>"));
+                        feed.AddItem(item);
+
+                        feedRepository.Save(new List<Models.Feeds.IFeed> { feed });
+                    }
                 }
                 catch (Exception ex)
                 {

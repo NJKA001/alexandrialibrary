@@ -19,9 +19,9 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         public FeedRepository(IContext context, IFactory factory)
             : base(context, factory, new Logger(log))
         {
-            AddLookup(new LookupByLocation());
-            AddSearch(new SearchByAuthors());
-            AddSearch(new SearchByTitle());
+            AddLookup(new LookupByLocation(null));
+            AddSearch(new SearchByAuthors(null));
+            AddSearch(new SearchByTitle(null));
             AddSearch(new SearchAll());
 
             Initialize();

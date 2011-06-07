@@ -172,7 +172,14 @@ namespace Gnosis.Core.Batches
             {
                 var parameterName = builder.GetParameterName();
                 statement.Add(element.Name, parameterName);
-                builder.AddParameter(parameterName, element.GetValue(value));
+                try
+                {
+                    builder.AddParameter(parameterName, element.GetValue(value));
+                }
+                catch (Exception ex)
+                {
+                    var m = ex.Message;
+                }
             }
 
             builder.AddStatement(statement);

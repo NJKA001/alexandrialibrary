@@ -14,6 +14,5 @@ namespace Gnosis.Core
         bool IsDefault { get; }
         IEnumerable<string> Columns { get; }
         IFilter GetFilter();
-        IFilter GetFilter(IEnumerable<KeyValuePair<string, object>> parameters);
     }
 }

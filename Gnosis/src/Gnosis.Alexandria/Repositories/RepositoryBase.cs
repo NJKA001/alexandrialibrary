@@ -85,20 +85,23 @@ namespace Gnosis.Alexandria.Repositories
             return Select(new Filter(whereClause, parameters)).FirstOrDefault();
         }
 
-        public T Lookup(ILookup lookup, IEnumerable<KeyValuePair<string, object>> parameters)
+        public T Lookup(ILookup lookup)
         {
-            return Select(lookup.GetFilter(parameters)).FirstOrDefault();
+            return Select(lookup.GetFilter()).FirstOrDefault();
         }
 
         public IEnumerable<T> Search()
         {
             var search = searches.Where(x => x.IsDefault == true).FirstOrDefault();
+            if (search == null)
+                throw new InvalidOperationException("No default search defined for this repository");
+
             return Select(search.GetFilter());
         }
 
-        public IEnumerable<T> Search(ISearch search, IEnumerable<KeyValuePair<string, object>> parameters)
+        public IEnumerable<T> Search(ISearch search)
         {
-            return Select(search.GetFilter(parameters));
+            return Select(search.GetFilter());
         }
 
         public void Save(IEnumerable<T> items)

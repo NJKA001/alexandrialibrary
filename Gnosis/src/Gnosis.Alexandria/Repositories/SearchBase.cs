@@ -10,17 +10,18 @@ namespace Gnosis.Alexandria.Repositories
     public abstract class SearchBase<T>
         : ISearch
     {
-        protected SearchBase(string name, string whereClause, string orderByClause, IEnumerable<string> columns)
-            : this(name, whereClause, orderByClause, columns, false)
+        protected SearchBase(string name, string whereClause, string orderByClause, IEnumerable<string> columns, IDictionary<string, object> parameters)
+            : this(name, whereClause, orderByClause, columns, parameters, false)
         {
         }
 
-        protected SearchBase(string name, string whereClause, string orderByClause, IEnumerable<string> columns, bool isDefault)
+        protected SearchBase(string name, string whereClause, string orderByClause, IEnumerable<string> columns, IDictionary<string, object> parameters, bool isDefault)
         {
             this.name = name;
             this.whereClause = whereClause;
             this.orderByClause = orderByClause;
             this.columns = columns;
+            this.parameters = parameters;
             this.isDefault = isDefault;
         }
 
@@ -28,6 +29,7 @@ namespace Gnosis.Alexandria.Repositories
         private readonly string whereClause;
         private readonly string orderByClause;
         private readonly IEnumerable<string> columns;
+        private readonly IDictionary<string, object> parameters;
         private readonly bool isDefault;
 
         public string Name
@@ -61,11 +63,6 @@ namespace Gnosis.Alexandria.Repositories
         }
 
         public IFilter GetFilter()
-        {
-            return GetFilter(null);
-        }
-
-        public IFilter GetFilter(IEnumerable<KeyValuePair<string, object>> parameters)
         {
             return new Filter(whereClause, orderByClause, parameters);
         }

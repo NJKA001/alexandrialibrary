@@ -133,12 +133,12 @@ namespace Gnosis.Alexandria.Models
 
         public virtual IEnumerable<IChild> GetChildren(EntityInfo childInfo)
         {
-            return removedChildren.Concat(children);
+            return (removedChildren.Concat(children)).Where(x => childInfo.Type.IsAssignableFrom(x.GetType()));
         }
 
         public virtual IEnumerable<IValue> GetValues(ValueInfo valueInfo)
         {
-            return removedValues.Concat(values);
+            return (removedValues.Concat(values)).Where(x => valueInfo.Type.IsAssignableFrom(x.GetType()));
         }
 
         public virtual void Save(DateTime timeStamp)

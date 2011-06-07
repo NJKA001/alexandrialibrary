@@ -44,14 +44,14 @@ namespace Gnosis.Alexandria.Models.Feeds
         private string contributors;
         private string description;
         private string language;
-        private Uri originalLocation;
-        private string copyright;
+        private Uri originalLocation = UriExtensions.EmptyUri;
+        private string copyright = string.Empty;
         private DateTime publishedDate;
         private DateTime updatedDate;
-        private string generator;
+        private string generator = string.Empty;
         private Uri imagePath;
         private Uri iconPath;
-        private string feedIdentifier;
+        private string feedIdentifier = string.Empty;
 
         private readonly IList<IFeedCategory> categories = new ObservableCollection<IFeedCategory>();
         private readonly IList<IFeedLink> links = new ObservableCollection<IFeedLink>();

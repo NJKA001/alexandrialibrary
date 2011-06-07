@@ -11,6 +11,6 @@ namespace Gnosis.Core
         Type BaseType { get; }
         string WhereClause { get; }
         IEnumerable<string> Columns { get; }
-        IFilter GetFilter(IEnumerable<KeyValuePair<string, object>> criteria);
+        IFilter GetFilter();
     }
 }

@@ -15,16 +15,20 @@ namespace Gnosis.Core.Queries
     {
         public Query(Func<IDbConnection> getConnection, ILogger logger, IFactory factory, IFilter filter)
         {
+            var entityInfo = new EntityInfo(typeof(T));
+
             this.getConnection = getConnection;
             this.logger = logger;
             this.factory = factory;
-            this.builder = new CommandBuilder();
+            this.builder = new CommandBuilder(entityInfo.Name, entityInfo.Type);
             this.whereClause = filter.WhereClause;
             this.orderByClause = filter.OrderByClause;
             this.parameters = filter.Parameters;
 
-            var entityInfo = new EntityInfo(typeof(T));
             builder.AddStatement(new SelectStatement(entityInfo, filter));
+            foreach (var parameter in filter.Parameters)
+                builder.AddParameter(parameter.Key, parameter.Value);
+
             AddChildStatements(builder, entityInfo, filter);
         }
 
@@ -42,6 +46,9 @@ namespace Gnosis.Core.Queries
             {
                 var childBuilder = new CommandBuilder(childInfo.Name, childInfo.Type);
                 childBuilder.AddStatement(new SelectStatement(childInfo, filter));
+                foreach (var parameter in filter.Parameters)
+                    childBuilder.AddParameter(parameter.Key, parameter.Value);
+
                 parentBuilder.AddChild(childBuilder);
 
                 AddChildStatements(childBuilder, childInfo, filter);
@@ -51,6 +58,9 @@ namespace Gnosis.Core.Queries
             {
                 var valueBuilder = new CommandBuilder(valueInfo.Name, valueInfo.Type);
                 valueBuilder.AddStatement(new SelectStatement(valueInfo, filter));
+                foreach (var parameter in filter.Parameters)
+                    valueBuilder.AddParameter(parameter.Key, parameter.Value);
+
                 parentBuilder.AddChild(valueBuilder);
             }
         }

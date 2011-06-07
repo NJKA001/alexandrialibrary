@@ -33,18 +33,18 @@ namespace Gnosis.Alexandria.Models.Feeds
             this.feedItemIdentifier = feedItemIdentifier;
         }
 
-        private string title;
-        private string titleMediaType;
-        private string authors;
-        private string contributors;
-        private DateTime publishedDate;
-        private string copyright;
-        private string summary;
-        private string content;
-        private string contentMediaType;
-        private Uri contentLocation;
-        private DateTime updatedDate;
-        private string feedItemIdentifier;
+        private string title = string.Empty;
+        private string titleMediaType = "text/plain";
+        private string authors = string.Empty;
+        private string contributors = string.Empty;
+        private DateTime publishedDate = new DateTime(2000, 1, 1);
+        private string copyright = string.Empty;
+        private string summary = string.Empty;
+        private string content = string.Empty;
+        private string contentMediaType = "text/plain";
+        private Uri contentLocation = UriExtensions.EmptyUri;
+        private DateTime updatedDate = new DateTime(2000, 1, 1);
+        private string feedItemIdentifier = string.Empty;
 
         private readonly IList<IFeedCategory> categories = new ObservableCollection<IFeedCategory>();
         private readonly IList<IFeedLink> links = new ObservableCollection<IFeedLink>();
