@@ -8,15 +8,22 @@ namespace Gnosis.Alexandria.Models.Tracks
     public class TrackIdentifier
         : ValueBase, ITrackIdentifier
     {
-        public TrackIdentifier(Guid id, Uri scheme, string identifier)
-            : base(id)
+        public TrackIdentifier()
         {
-            this.scheme = scheme;
-            this.identifier = identifier;
         }
 
-        private readonly Uri scheme;
-        private readonly string identifier;
+        public TrackIdentifier(Guid parent, Uri scheme, string identifier)
+        {
+            AddInitializer("Scheme", x => this.scheme = scheme);
+            AddInitializer("Identifier", x => this.identifier = identifier);
+            
+            Initialize(parent);
+        }
+
+        private Uri scheme;
+        private string identifier;
+
+        #region ITrackIdentifier Members
 
         public Uri Scheme
         {
@@ -27,5 +34,7 @@ namespace Gnosis.Alexandria.Models.Tracks
         {
             get { return identifier; }
         }
+
+        #endregion
     }
 }

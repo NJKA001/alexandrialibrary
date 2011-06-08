@@ -61,12 +61,14 @@
     <Compile Include="ElementInfo.cs" />
     <Compile Include="DataTypeInfo.cs" />
     <Compile Include="EntityInfo.cs" />
+    <Compile Include="EntityInitialState.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Filter.cs" />
     <Compile Include="IChild.cs" />
     <Compile Include="IContext.cs" />
     <Compile Include="DataReaderExtensions.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="IEntityInitialState.cs" />
     <Compile Include="IFactory.cs" />
     <Compile Include="IFilter.cs" />
     <Compile Include="IHashCode.cs" />
@@ -75,6 +77,8 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="ISearch.cs" />
     <Compile Include="IValue.cs" />
+    <Compile Include="IValueInitialState.cs" />
+    <Compile Include="ObjectExtensions.cs" />
     <Compile Include="PersistenceIgnoreAttribute.cs" />
     <Compile Include="ValueInfo.cs" />
     <Compile Include="Queries\IQuery.cs" />
@@ -86,6 +90,7 @@
     <Compile Include="TypeAffinity.cs" />
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="UriExtensions.cs" />
+    <Compile Include="ValueInitialState.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

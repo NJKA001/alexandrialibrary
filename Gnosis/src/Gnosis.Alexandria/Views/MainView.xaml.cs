@@ -36,6 +36,53 @@ namespace Gnosis.Alexandria.Views
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Models.Feeds.IFeed GetTestFeed(IContext context, ILogger logger)
+        {
+            var feed = new Models.Feeds.Feed();
+            feed.Initialize(new EntityInitialState(context, logger));
+            feed.Authors = "Bill Simmons";
+            feed.Contributors = "Joe House, Marc Stein, John Hollinger";
+            feed.Copyright = "c 2009-2011";
+            feed.Description = "Sports etc.";
+            feed.FeedIdentifier = "12345ABC";
+            feed.Generator = "espn.go.com";
+            feed.Language = "en-us";
+            feed.Location = new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045");
+            feed.MediaType = "application/xml+rss";
+            feed.OriginalLocation = new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045");
+            feed.PublishedDate = new DateTime(2009, 2, 13);
+            feed.UpdatedDate = new DateTime(2011, 6, 7);
+            feed.Title = "BS Report";
+            feed.IconPath = new Uri("http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg"); 
+            feed.ImagePath = new Uri("http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg");
+            feed.AddCategory(new Models.Feeds.FeedCategory(feed.Id, 0, UriExtensions.EmptyUri, "Sports", "Sports"));
+            feed.AddCategory(new Models.Feeds.FeedCategory(feed.Id, 1, UriExtensions.EmptyUri, "Comedy", "Comedy"));
+            feed.AddLink(new Models.Feeds.FeedLink(feed.Id, "self", new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045"), "application/xml+rss", 0, "en-us"));
+            feed.AddLink(new Models.Feeds.FeedLink(feed.Id, "alt", new Uri("http://espn.go.com/espnradio"), "text/html", 0, "en-us"));
+            feed.AddLink(new Models.Feeds.FeedLink(feed.Id, "alt", new Uri("http://espn.go.com/epsnradio?lang=es-mx"), "text/html", 0, "es-mx"));
+            feed.AddMetadatum(new Models.Feeds.FeedMetadata(feed.Id, "text/plain", UriExtensions.EmptyUri, "tag", "Bill Simmons"));
+            feed.AddMetadatum(new Models.Feeds.FeedMetadata(feed.Id, "application/xml", UriExtensions.EmptyUri, "marquee", "<marquee><title>BS Report</title><subtitle>with Bill Simmons</subtitle></marquee>"));
+            
+            var item = new Models.Feeds.FeedItem();
+            item.Initialize(new EntityInitialState(context, logger, feed.Id, 0));
+            item.Authors = "Bill Simmons";
+            item.Contributors = "Joe House, Joe Mead";
+            item.Copyright = "Copyright ESPN 2011"; 
+            item.FeedItemIdentifier = "ZYZ235AMQ379"; 
+            item.Summary = "Bill previews the NBA Finals with ESPN experts";
+            item.PublishedDate = new DateTime(2011, 6, 5);
+            item.UpdatedDate = new DateTime(2011, 6, 5);
+            item.Title = "NBA Finals Preview";
+            item.TitleMediaType = "text/plain";
+            item.AddCategory(new Models.Feeds.FeedCategory(item.Id, 0, UriExtensions.EmptyUri, "Basketball", "Basketball"));
+            item.AddLink(new Models.Feeds.FeedLink(item.Id, "self", new Uri("http://espn.go.com/espnradio/media/xyz.mp3"), "audio/mpeg", 0, "en-us"));
+            item.AddMetadatum(new Models.Feeds.FeedMetadata(item.Id, "text/plain", UriExtensions.EmptyUri, "rating", "4/5"));
+            item.AddMetadatum(new Models.Feeds.FeedMetadata(item.Id, "application/xml", UriExtensions.EmptyUri, "rating", "<rating><score>4</score><max>5</max></rating>"));
+            feed.AddItem(item);
+
+            return feed;
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -66,7 +113,7 @@ namespace Gnosis.Alexandria.Views
 
                 context = new ModelContext(this.Dispatcher);
 
-                feedRepository = new FeedRepository(context);
+                feedRepository = new FeedRepository(context, logger);
                 //trackRepository = new TrackRepository(context, factory);
 
                 try
@@ -74,21 +121,7 @@ namespace Gnosis.Alexandria.Views
                     var feed = feedRepository.Lookup(new LookupByLocation(new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045")));
                     if (feed == null)
                     {
-                        feed = new Models.Feeds.Feed(context) { Authors = "Bill Simmons", Contributors = "Joe House, Marc Stein, John Hollinger", Copyright = "c 2009-2011", Description = "Sports etc.", FeedIdentifier = "12345ABC", Generator = "espn.go.com", Language = "en-us", Location = new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045"), MediaType = "application/xml+rss", OriginalLocation = new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045"), PublishedDate = new DateTime(2009, 2, 13), UpdatedDate = DateTime.Now, Title = "BS Report", IconPath = new Uri("http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg"), ImagePath = new Uri("http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg") };
-                        feed.AddCategory(new Models.Feeds.FeedCategory(feed.Id, 0, UriExtensions.EmptyUri, "Sports", "Sports"));
-                        feed.AddCategory(new Models.Feeds.FeedCategory(feed.Id, 1, UriExtensions.EmptyUri, "Comedy", "Comedy"));
-                        feed.AddLink(new Models.Feeds.FeedLink(feed.Id, 0, "self", new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045"), "application/xml+rss", 0, "en-us"));
-                        feed.AddLink(new Models.Feeds.FeedLink(feed.Id, 1, "alt", new Uri("http://espn.go.com/espnradio"), "text/html", 0, "en-us"));
-                        feed.AddLink(new Models.Feeds.FeedLink(feed.Id, 2, "alt", new Uri("http://espn.go.com/epsnradio?lang=es-mx"), "text/html", 0, "es-mx"));
-                        feed.AddMetadatum(new Models.Feeds.FeedMetadata(feed.Id, 0, "text/plain", UriExtensions.EmptyUri, "tag", "Bill Simmons"));
-                        feed.AddMetadatum(new Models.Feeds.FeedMetadata(feed.Id, 1, "application/xml", UriExtensions.EmptyUri, "marquee", "<marquee><title>BS Report</title><subtitle>with Bill Simmons</subtitle></marquee>"));
-                        var item = new Models.Feeds.FeedItem(context, feed.Id) { Authors = "Bill Simmons", Contributors = "Joe House, ", Copyright = "c 2011", FeedItemIdentifier = "ZYZ235AMQ379", Summary = "Bill previews the NBA Finals with ESPN experts", PublishedDate = new DateTime(2011, 6, 5), UpdatedDate = new DateTime(2011, 6, 5), Title = "NBA Finals Preview", TitleMediaType = "text/plain" };
-                        item.AddCategory(new Models.Feeds.FeedCategory(item.Id, 0, UriExtensions.EmptyUri, "Basketball", "Basketball"));
-                        item.AddLink(new Models.Feeds.FeedLink(item.Id, 0, "self", new Uri("http://espn.go.com/espnradio/media/xyz.mp3"), "audio/mpeg", 0, "en-us"));
-                        item.AddMetadatum(new Models.Feeds.FeedMetadata(item.Id, 0, "text/plain", UriExtensions.EmptyUri, "rating", "4/5"));
-                        item.AddMetadatum(new Models.Feeds.FeedMetadata(item.Id, 1, "application/xml", UriExtensions.EmptyUri, "rating", "<rating><score>4</score><max>5</max></rating>"));
-                        feed.AddItem(item);
-
+                        feed = GetTestFeed(context, logger);
                         feedRepository.Save(new List<Models.Feeds.IFeed> { feed });
                     }
                 }

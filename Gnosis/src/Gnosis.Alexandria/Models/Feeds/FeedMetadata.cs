@@ -3,33 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core;
+
 namespace Gnosis.Alexandria.Models.Feeds
 {
     public class FeedMetadata
         : ValueBase, IFeedMetadata
     {
-        public FeedMetadata(Guid parent, uint sequence, string mediaType, Uri scheme, string name, string content)
-            : base(parent, sequence)
+        public FeedMetadata()
         {
-            this.mediaType = mediaType;
-            this.scheme = scheme;
-            this.name = name;
-            this.content = content;
+            AddInitializer("MediaType", x => this.mediaType = x.ToString());
+            AddInitializer("Scheme", x => this.scheme = x.ToUri());
+            AddInitializer("Name", x => this.name = x.ToString());
+            AddInitializer("Content", x => this.content = x.ToString());
         }
 
-        public FeedMetadata(Guid id, Guid parent, uint sequence, string mediaType, Uri scheme, string name, string content)
-            : base(id, parent, sequence)
+        public FeedMetadata(Guid parent, string mediaType, Uri scheme, string name, string content)
         {
-            this.mediaType = mediaType;
-            this.scheme = scheme;
-            this.name = name;
-            this.content = content;
+            AddInitializer("MediaType", x => this.mediaType = mediaType);
+            AddInitializer("Scheme", x => this.scheme = scheme);
+            AddInitializer("Name", x => this.name = name);
+            AddInitializer("Content", x => this.content = content);
+
+            Initialize(parent);
         }
 
-        private readonly string mediaType;
-        private readonly Uri scheme;
-        private readonly string name;
-        private readonly string content;
+        private string mediaType;
+        private Uri scheme;
+        private string name;
+        private string content;
 
         #region IFeedMetadata Members
 

@@ -10,25 +10,22 @@ namespace Gnosis.Alexandria.Models.Feeds
     public class FeedCategory
         : ValueBase, IFeedCategory
     {
+        public FeedCategory()
+        {
+        }
+
         public FeedCategory(Guid parent, uint sequence, Uri scheme, string name, string label)
-            : base(parent, sequence)
         {
-            this.scheme = scheme;
-            this.name = name;
-            this.label = label;
+            AddInitializer("Scheme", x => this.scheme = scheme);
+            AddInitializer("Name", x => this.name = name);
+            AddInitializer("Label", x => this.label = label);
+
+            Initialize(parent, sequence);
         }
 
-        public FeedCategory(Guid id, Guid parent, uint sequence, Uri scheme, string name, string label)
-            : base(id, parent, sequence)
-        {
-            this.scheme = scheme ?? UriExtensions.EmptyUri;
-            this.name = name ?? string.Empty;
-            this.label = label ?? string.Empty;
-        }
-
-        private readonly Uri scheme;
-        private readonly string name;
-        private readonly string label;
+        private Uri scheme;
+        private string name;
+        private string label;
 
         #region IFeedCategory Members
 

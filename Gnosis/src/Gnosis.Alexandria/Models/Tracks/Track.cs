@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using Gnosis.Core;
 
@@ -8,28 +9,23 @@ namespace Gnosis.Alexandria.Models.Tracks
     public class Track
         : EntityBase, ITrack
     {
-        public Track(IContext context, Uri location)
-            : base(context)
+        public Track()
         {
-            this.location = location;
-
-            this.pictures = new  List<ITrackPicture>();
-            this.lyrics = new List<ITrackUnsynchronizedLyrics>();
-            this.synchronizedLyrics = new List<ITrackSynchronizedLyrics>();
-            this.identifiers = new List<ITrackIdentifier>();
-            this.ratings = new List<ITrackRating>();
-            this.links = new List<ITrackLink>();
-            this.metadata = new List<ITrackMetadata>();
-
-            this.titleHashCodes = new List<IHashCode>();
-            this.albumHashCodes = new List<IHashCode>();
-            this.artistHashCodes = new List<IHashCode>();
-            this.albumArtistHashCodes = new List<IHashCode>();
-            this.composerHashCodes = new List<IHashCode>();
-            this.conductorHashCodes = new List<IHashCode>();
-            this.originalTitleHashCodes = new List<IHashCode>();
+            AddInitializer("Location", x => this.location = x.ToUri());
+            AddInitializer("MediaType", x => this.mediaType = x.ToString());
+            AddInitializer("Title", x => this.title = x.ToString());
+            AddInitializer("TitleSort", x => this.titleSort = x.ToString());
+            AddInitializer("Subtitle", x => this.subtitle = x.ToString());
+            AddInitializer("Grouping", x => this.grouping = x.ToString());
+            AddInitializer("Comment", x => this.comment = x.ToString());
+            AddInitializer("Album", x => this.album = x.ToString());
+            AddInitializer("AlbumSort", x => this.albumSort = x.ToString());
+            AddInitializer("AlbumSubtitle", x => this.albumSubtitle = x.ToString());
+            AddInitializer("Artists", x => this.artists = x.ToString());
+            AddInitializer("ArtistsSort", x => this.artistsSort = x.ToString());
         }
 
+        /*
         public Track(IContext context, Guid id, DateTime timeStamp, 
             Uri location, string mediaType, string title, string titleSort, string subtitle, string grouping, string comment, 
             string album, string albumSort, string albumSubtitle, string artists, string artistsSort, string albumArtists, 
@@ -76,24 +72,25 @@ namespace Gnosis.Alexandria.Models.Tracks
             this.publisher = publisher;
             this.internationalStandardRecordingCode = internationalStandardRecordingCode;
 
-            this.pictures = new List<ITrackPicture>();
-            this.lyrics = new List<ITrackUnsynchronizedLyrics>();
-            this.synchronizedLyrics = new List<ITrackSynchronizedLyrics>();
-            this.identifiers = new List<ITrackIdentifier>();
-            this.ratings = new List<ITrackRating>();
-            this.links = new List<ITrackLink>();
-            this.metadata = new List<ITrackMetadata>();
+            this.pictures = new ObservableCollection<ITrackPicture>();
+            this.lyrics = new ObservableCollection<ITrackUnsynchronizedLyrics>();
+            this.synchronizedLyrics = new ObservableCollection<ITrackSynchronizedLyrics>();
+            this.identifiers = new ObservableCollection<ITrackIdentifier>();
+            this.ratings = new ObservableCollection<ITrackRating>();
+            this.links = new ObservableCollection<ITrackLink>();
+            this.metadata = new ObservableCollection<ITrackMetadata>();
 
-            this.titleHashCodes = new List<IHashCode>();
-            this.albumHashCodes = new List<IHashCode>();
-            this.artistHashCodes = new List<IHashCode>();
-            this.albumArtistHashCodes = new List<IHashCode>();
-            this.composerHashCodes = new List<IHashCode>();
-            this.conductorHashCodes = new List<IHashCode>();
-            this.originalTitleHashCodes = new List<IHashCode>();
+            this.titleHashCodes = new ObservableCollection<IHashCode>();
+            this.albumHashCodes = new ObservableCollection<IHashCode>();
+            this.artistHashCodes = new ObservableCollection<IHashCode>();
+            this.albumArtistHashCodes = new ObservableCollection<IHashCode>();
+            this.composerHashCodes = new ObservableCollection<IHashCode>();
+            this.conductorHashCodes = new ObservableCollection<IHashCode>();
+            this.originalTitleHashCodes = new ObservableCollection<IHashCode>();
         }
+        */
 
-        private readonly Uri location;
+        private Uri location;
         private string mediaType = "audio/unknown";
         private string title = "Untitled";
         private string titleSort = "Untitled";
@@ -130,27 +127,34 @@ namespace Gnosis.Alexandria.Models.Tracks
         private string publisher = string.Empty;
         private string internationalStandardRecordingCode = string.Empty;
 
-        private readonly IList<ITrackPicture> pictures;
-        private readonly IList<ITrackUnsynchronizedLyrics> lyrics;
-        private readonly IList<ITrackSynchronizedLyrics> synchronizedLyrics;
-        private readonly IList<ITrackIdentifier> identifiers;
-        private readonly IList<ITrackRating> ratings;
-        private readonly IList<ITrackLink> links;
-        private readonly IList<ITrackMetadata> metadata;
+        private readonly ObservableCollection<ITrackPicture> pictures = new ObservableCollection<ITrackPicture>();
+        private readonly ObservableCollection<ITrackUnsynchronizedLyrics> lyrics = new ObservableCollection<ITrackUnsynchronizedLyrics>();
+        private readonly ObservableCollection<ITrackSynchronizedLyrics> synchronizedLyrics = new ObservableCollection<ITrackSynchronizedLyrics>();
+        private readonly ObservableCollection<ITrackIdentifier> identifiers = new ObservableCollection<ITrackIdentifier>();
+        private readonly ObservableCollection<ITrackRating> ratings = new ObservableCollection<ITrackRating>();
+        private readonly ObservableCollection<ITrackLink> links = new ObservableCollection<ITrackLink>();
+        private readonly ObservableCollection<ITrackMetadata> metadata = new ObservableCollection<ITrackMetadata>();
 
-        private readonly IList<IHashCode> titleHashCodes;
-        private readonly IList<IHashCode> albumHashCodes;
-        private readonly IList<IHashCode> artistHashCodes;
-        private readonly IList<IHashCode> albumArtistHashCodes;
-        private readonly IList<IHashCode> composerHashCodes;
-        private readonly IList<IHashCode> conductorHashCodes;
-        private readonly IList<IHashCode> originalTitleHashCodes;
+        private readonly ObservableCollection<IHashCode> titleHashCodes = new ObservableCollection<IHashCode>();
+        private readonly ObservableCollection<IHashCode> albumHashCodes = new ObservableCollection<IHashCode>();
+        private readonly ObservableCollection<IHashCode> artistHashCodes = new ObservableCollection<IHashCode>();
+        private readonly ObservableCollection<IHashCode> albumArtistHashCodes = new ObservableCollection<IHashCode>();
+        private readonly ObservableCollection<IHashCode> composerHashCodes = new ObservableCollection<IHashCode>();
+        private readonly ObservableCollection<IHashCode> conductorHashCodes = new ObservableCollection<IHashCode>();
+        private readonly ObservableCollection<IHashCode> originalTitleHashCodes = new ObservableCollection<IHashCode>();
 
         #region ITrack Members
 
         public Uri Location
         {
             get { return location; }
+            set
+            {
+                if (value != null && value != location)
+                {
+                    Change(() => location = value, "Location");
+                }
+            }
         }
 
         public string MediaType
@@ -160,7 +164,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != mediaType)
                 {
-                    OnEntityChanged(() => mediaType = value, "MediaType");
+                    Change(() => mediaType = value, "MediaType");
                 }
             }
         }
@@ -172,7 +176,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != title)
                 {
-                    OnEntityChanged(() => title = value, "Title");
+                    Change(() => title = value, "Title");
                 }
             }
         }
@@ -184,7 +188,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != titleSort)
                 {
-                    OnEntityChanged(() => titleSort = value, "TitleSort");
+                    Change(() => titleSort = value, "TitleSort");
                 }
             }
         }
@@ -196,7 +200,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != subtitle)
                 {
-                    OnEntityChanged(() => subtitle = value, "Subtitle");
+                    Change(() => subtitle = value, "Subtitle");
                 }
             }
         }
@@ -208,7 +212,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != grouping)
                 {
-                    OnEntityChanged(() => grouping = value, "Grouping");
+                    Change(() => grouping = value, "Grouping");
                 }
             }
         }
@@ -220,7 +224,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != comment)
                 {
-                    OnEntityChanged(() => comment = value, "Comment");
+                    Change(() => comment = value, "Comment");
                 }
             }
         }
@@ -232,7 +236,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != album)
                 {
-                    OnEntityChanged(() => album = value, "Album");
+                    Change(() => album = value, "Album");
                 }
             }
         }
@@ -244,7 +248,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != albumSort)
                 {
-                    OnEntityChanged(() => albumSort = value, "AlbumSort");
+                    Change(() => albumSort = value, "AlbumSort");
                 }
             }
         }
@@ -256,7 +260,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != albumSubtitle)
                 {
-                    OnEntityChanged(() => albumSubtitle = value, "AlbumSubtitle");
+                    Change(() => albumSubtitle = value, "AlbumSubtitle");
                 }
             }
         }
@@ -268,7 +272,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != artists)
                 {
-                    OnEntityChanged(() => artists = value, "Artists");
+                    Change(() => artists = value, "Artists");
                 }
             }
         }
@@ -280,7 +284,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != artistsSort)
                 {
-                    OnEntityChanged(() => artistsSort = value, "ArtistsSort");
+                    Change(() => artistsSort = value, "ArtistsSort");
                 }
             }
         }
@@ -292,7 +296,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != albumArtists)
                 {
-                    OnEntityChanged(() => albumArtists = value, "AlbumArtists");
+                    Change(() => albumArtists = value, "AlbumArtists");
                 }
             }
         }
@@ -304,7 +308,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != composers)
                 {
-                    OnEntityChanged(() => composers = value, "Composers");
+                    Change(() => composers = value, "Composers");
                 }
             }
         }
@@ -316,7 +320,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != conductors)
                 {
-                    OnEntityChanged(() => conductors = value, "Conductors");
+                    Change(() => conductors = value, "Conductors");
                 }
             }
         }
@@ -328,7 +332,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != genres)
                 {
-                    OnEntityChanged(() => genres = value, "Genres");
+                    Change(() => genres = value, "Genres");
                 }
             }
         }
@@ -340,7 +344,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != moods)
                 {
-                    OnEntityChanged(() => moods = value, "Moods");
+                    Change(() => moods = value, "Moods");
                 }
             }
         }
@@ -352,7 +356,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != languages)
                 {
-                    OnEntityChanged(() => languages = value, "Languages");
+                    Change(() => languages = value, "Languages");
                 }
             }
         }
@@ -364,7 +368,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != recordingDate)
                 {
-                    OnEntityChanged(() => recordingDate = value, "RecordingDate");
+                    Change(() => recordingDate = value, "RecordingDate");
                 }
             }
         }
@@ -376,7 +380,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != releaseDate)
                 {
-                    OnEntityChanged(() => releaseDate = value, "ReleaseDate");
+                    Change(() => releaseDate = value, "ReleaseDate");
                 }
             }
         }
@@ -388,7 +392,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != originalTitle)
                 {
-                    OnEntityChanged(() => originalTitle = value, "OriginalTitle");
+                    Change(() => originalTitle = value, "OriginalTitle");
                 }
             }
         }
@@ -400,7 +404,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != originalReleaseDate)
                 {
-                    OnEntityChanged(() => originalReleaseDate = value, "OriginalReleaseDate");
+                    Change(() => originalReleaseDate = value, "OriginalReleaseDate");
                 }
             }
         }
@@ -412,7 +416,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != trackNumber)
                 {
-                    OnEntityChanged(() => trackNumber = value, "TrackNumber");
+                    Change(() => trackNumber = value, "TrackNumber");
                 }
             }
         }
@@ -424,7 +428,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != trackCount)
                 {
-                    OnEntityChanged(() => trackCount = value, "TrackCount");
+                    Change(() => trackCount = value, "TrackCount");
                 }
             }
         }
@@ -436,7 +440,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != discNumber)
                 {
-                    OnEntityChanged(() => discNumber = value, "DiscNumber");
+                    Change(() => discNumber = value, "DiscNumber");
                 }
             }
         }
@@ -448,7 +452,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != discCount)
                 {
-                    OnEntityChanged(() => discCount = value, "DiscCount");
+                    Change(() => discCount = value, "DiscCount");
                 }
             }
         }
@@ -460,7 +464,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != duration)
                 {
-                    OnEntityChanged(() => duration = value, "Duration");
+                    Change(() => duration = value, "Duration");
                 }
             }
         }
@@ -472,7 +476,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != beatsPerMinute)
                 {
-                    OnEntityChanged(() => beatsPerMinute = value, "BeatsPerMinute");
+                    Change(() => beatsPerMinute = value, "BeatsPerMinute");
                 }
             }
         }
@@ -484,7 +488,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != playCount)
                 {
-                    OnEntityChanged(() => playCount = value, "PlayCount");
+                    Change(() => playCount = value, "PlayCount");
                 }
             }
         }
@@ -496,7 +500,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != playlistDelay)
                 {
-                    OnEntityChanged(() => playlistDelay = value, "PlaylistDelay");
+                    Change(() => playlistDelay = value, "PlaylistDelay");
                 }
             }
         }
@@ -508,7 +512,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != originalFileName)
                 {
-                    OnEntityChanged(() => originalFileName = value, "OriginalFileName");
+                    Change(() => originalFileName = value, "OriginalFileName");
                 }
             }
         }
@@ -520,7 +524,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != encodingDate)
                 {
-                    OnEntityChanged(() => encodingDate = value, "EncodingDate");
+                    Change(() => encodingDate = value, "EncodingDate");
                 }
             }
         }
@@ -532,7 +536,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != taggingDate)
                 {
-                    OnEntityChanged(() => taggingDate = value, "TaggingDate");
+                    Change(() => taggingDate = value, "TaggingDate");
                 }
             }
         }
@@ -544,7 +548,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != copyright)
                 {
-                    OnEntityChanged(() => copyright = value, "Copyright");
+                    Change(() => copyright = value, "Copyright");
                 }
             }
         }
@@ -556,7 +560,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != publisher)
                 {
-                    OnEntityChanged(() => publisher = value, "Publisher");
+                    Change(() => publisher = value, "Publisher");
                 }
             }
         }
@@ -568,7 +572,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != internationalStandardRecordingCode)
                 {
-                    OnEntityChanged(() => internationalStandardRecordingCode = value, "InternationalStandardRecordingCode");
+                    Change(() => internationalStandardRecordingCode = value, "InternationalStandardRecordingCode");
                 }
             }
         }

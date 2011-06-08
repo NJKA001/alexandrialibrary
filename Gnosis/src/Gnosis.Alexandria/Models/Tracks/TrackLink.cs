@@ -8,17 +8,24 @@ namespace Gnosis.Alexandria.Models.Tracks
     public class TrackLink
         : ValueBase, ITrackLink
     {
-        public TrackLink(Guid id, string textEncoding, string relationship, Uri location)
-            : base(id)
+        public TrackLink()
         {
-            this.textEncoding = textEncoding;
-            this.relationship = relationship;
-            this.location = location;
         }
 
-        private readonly string textEncoding;
-        private readonly string relationship;
-        private readonly Uri location;
+        public TrackLink(Guid parent, string textEncoding, string relationship, Uri location)
+        {
+            AddInitializer("TextEncoding", x => this.textEncoding = textEncoding);
+            AddInitializer("Relationship", x => this.relationship = relationship);
+            AddInitializer("Location", x => this.location = location);
+
+            Initialize(parent);
+        }
+
+        private string textEncoding;
+        private string relationship;
+        private Uri location;
+
+        #region ITrackLink Members
 
         public string TextEncoding
         {
@@ -34,5 +41,7 @@ namespace Gnosis.Alexandria.Models.Tracks
         {
             get { return location; }
         }
+
+        #endregion
     }
 }

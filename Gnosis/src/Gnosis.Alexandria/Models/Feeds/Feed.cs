@@ -11,32 +11,6 @@ namespace Gnosis.Alexandria.Models.Feeds
     public class Feed
         : EntityBase, IFeed
     {
-
-        public Feed(IContext context)
-            : base(context)
-        {
-        }
-
-        public Feed(IContext context, Guid id, DateTime timeStamp, Uri location, string mediaType, string title, string authors, string contributors, string description, string language, Uri originalLocation, string copyright, DateTime publishedDate, DateTime updatedDate, string generator, Uri imagePath, Uri iconPath, string feedIdentifier)
-            : base(context, id, timeStamp)
-        {
-            this.location = location;
-            this.mediaType = mediaType;
-            this.title = title;
-            this.authors = authors;
-            this.contributors = contributors;
-            this.description = description;
-            this.language = language;
-            this.originalLocation = originalLocation;
-            this.copyright = copyright;
-            this.publishedDate = publishedDate;
-            this.updatedDate = updatedDate;
-            this.generator = generator;
-            this.imagePath = imagePath;
-            this.iconPath = iconPath;
-            this.feedIdentifier = feedIdentifier;
-        }
-
         private Uri location;
         private string mediaType;
         private string title;
@@ -65,7 +39,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             {
                 if (value != null && value != location)
                 {
-                    OnEntityChanged(() => location = value, "Location");
+                    Change(() => location = value, "Location");
                 }
             }
         }
@@ -77,7 +51,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             {
                 if (value != null && value != mediaType)
                 {
-                    OnEntityChanged(() => mediaType = value, "MediaType");
+                    Change(() => mediaType = value, "MediaType");
                 }
             }
         }
@@ -89,7 +63,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             {
                 if (value != null && value != title)
                 {
-                    OnEntityChanged(() => title = value, "Title");
+                    Change(() => title = value, "Title");
                 }
             }
         }
@@ -101,7 +75,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             {
                 if (value != null && value != authors)
                 {
-                    OnEntityChanged(() => authors = value, "Authors");
+                    Change(() => authors = value, "Authors");
                 }
             }
         }
@@ -113,7 +87,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             {
                 if (value != null && value != contributors)
                 {
-                    OnEntityChanged(() => contributors = value, "Contributors");
+                    Change(() => contributors = value, "Contributors");
                 }
             }
         }
@@ -125,7 +99,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             {
                 if (value != null && value != description)
                 {
-                    OnEntityChanged(() => description = value, "Description");
+                    Change(() => description = value, "Description");
                 }
             }
         }
@@ -137,7 +111,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             {
                 if (value != null && value != language)
                 {
-                    OnEntityChanged(() => language = value, "Language");
+                    Change(() => language = value, "Language");
                 }
             }
         }
@@ -149,7 +123,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             {
                 if (value != null && value != originalLocation)
                 {
-                    OnEntityChanged(() => originalLocation = value, "OriginalLocation");
+                    Change(() => originalLocation = value, "OriginalLocation");
                 }
             }
         }
@@ -161,7 +135,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             {
                 if (value != null && value != copyright)
                 {
-                    OnEntityChanged(() => copyright = value, "Copyright");
+                    Change(() => copyright = value, "Copyright");
                 }
             }
         }
@@ -173,7 +147,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             {
                 if (value != null && value != publishedDate)
                 {
-                    OnEntityChanged(() => publishedDate = value, "PublishedDate");
+                    Change(() => publishedDate = value, "PublishedDate");
                 }
             }
         }
@@ -185,7 +159,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             {
                 if (value != null && value != updatedDate)
                 {
-                    OnEntityChanged(() => updatedDate = value, "UpdatedDate");
+                    Change(() => updatedDate = value, "UpdatedDate");
                 }
             }
         }
@@ -197,7 +171,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             {
                 if (value != null && value != generator)
                 {
-                    OnEntityChanged(() => generator = value, "Generator");
+                    Change(() => generator = value, "Generator");
                 }
             }
         }
@@ -209,7 +183,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             {
                 if (value != null && value != imagePath)
                 {
-                    OnEntityChanged(() => imagePath = value, "ImagePath");
+                    Change(() => imagePath = value, "ImagePath");
                 }
             }
         }
@@ -221,7 +195,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             {
                 if (value != null && value != iconPath)
                 {
-                    OnEntityChanged(() => iconPath = value, "IconPath");
+                    Change(() => iconPath = value, "IconPath");
                 }
             }
         }
@@ -233,7 +207,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             {
                 if (value != null && value != feedIdentifier)
                 {
-                    OnEntityChanged(() => feedIdentifier = value, "FeedIdentifier");
+                    Change(() => feedIdentifier = value, "FeedIdentifier");
                 }
             }
         }

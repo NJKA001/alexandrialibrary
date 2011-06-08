@@ -10,18 +10,19 @@ namespace Gnosis.Alexandria.Models.HashCodes
     public class NameHash
         : ValueBase, IHashCode
     {
-        public NameHash(string value)
-            : this(Guid.NewGuid(), value)
+        public NameHash()
         {
+            AddInitializer("Value", x => this.value = x.ToString());
         }
 
-        public NameHash(Guid id, string value)
-            : base(id)
+        private NameHash(Guid parent, string value)
         {
-            this.value = value;
+            AddInitializer("Value", x => this.value = value);
+
+            Initialize(parent);
         }
 
-        private readonly string value;
+        private string value;
 
         public Uri Scheme
         {
@@ -35,12 +36,12 @@ namespace Gnosis.Alexandria.Models.HashCodes
 
         public static Uri Namespace = new Uri("http://alxlib.com/domain/1/hash-schemes/double-metaphone/1");
 
-        public static IHashCode Create(string originalString)
+        public static IHashCode Create(Guid parent, string originalString)
         {
             if (string.IsNullOrEmpty(originalString))
                 return null;
 
-            return new NameHash(originalString.AsNameHash());
+            return new NameHash(parent, originalString.AsNameHash());
         }
     }
 }

@@ -4,8 +4,6 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-using log4net;
-
 using Gnosis.Alexandria.Helpers;
 using Gnosis.Alexandria.Models.Feeds;
 using Gnosis.Core;
@@ -16,8 +14,8 @@ namespace Gnosis.Alexandria.Repositories.Feeds
     public class FeedRepository
         : RepositoryBase<IFeed>
     {
-        public FeedRepository(IContext context)
-            : base(context, new FeedFactory(context), new Logger(log))
+        public FeedRepository(IContext context, ILogger logger)
+            : base(context, logger, new FeedFactory(context, logger))
         {
             AddLookup(new LookupByLocation(null));
             AddSearch(new SearchByAuthors(null));
@@ -26,8 +24,6 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
             Initialize();
         }
-
-        private static readonly ILog log = LogManager.GetLogger(typeof(FeedRepository));
 
         #region Old Code
 

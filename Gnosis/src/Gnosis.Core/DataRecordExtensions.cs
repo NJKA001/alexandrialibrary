@@ -13,6 +13,20 @@ namespace Gnosis.Core
             return int.Parse(record[name].ToString()) > 0;
         }
 
+        public static byte GetByte(this IDataRecord record, string name)
+        {
+            return byte.Parse(record[name].ToString());
+        }
+
+        public static byte[] GetBytes(this IDataRecord record, string name)
+        {
+            var ordinal = record.GetOrdinal(name);
+            var length = record.GetBytes(ordinal, 0, null, 0, 0);
+            byte[] buffer = new byte[length];
+            record.GetBytes(ordinal, 0, buffer, 0, (int)length);
+            return buffer;
+        }
+
         public static DateTime GetDateTime(this IDataRecord record, string name)
         {
             return DateTime.Parse(record[name].ToString());

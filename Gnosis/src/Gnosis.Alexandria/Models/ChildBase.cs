@@ -10,26 +10,7 @@ namespace Gnosis.Alexandria.Models
     public class ChildBase
         : EntityBase, IChild
     {
-        protected ChildBase(IContext context, Guid parent)
-            : base(context)
-        {
-            this.parent = parent;
-        }
-
-        protected ChildBase(IContext context, Guid id, DateTime timeStamp, Guid parent)
-            : base(context, id, timeStamp)
-        {
-            this.parent = parent;
-        }
-
-        protected ChildBase(IContext context, Guid id, DateTime timeStamp, Guid parent, uint sequence)
-            : base(context, id, timeStamp)
-        {
-            this.parent = parent;
-            this.sequence = sequence;
-        }
-
-        private readonly Guid parent;
+        private Guid parent;
         private uint sequence;
         private bool isMoved;
         private bool isRemoved;
@@ -66,6 +47,17 @@ namespace Gnosis.Alexandria.Models
         public void Remove()
         {
             isRemoved = true;
+        }
+
+        public override void Initialize(IEntityInitialState state)
+        {
+            if (state == null)
+                throw new ArgumentNullException("state");
+
+            this.parent = state.Parent;
+            this.sequence = state.Sequence;
+
+            Initialize(state);
         }
 
         public override void Save(DateTime timeStamp)

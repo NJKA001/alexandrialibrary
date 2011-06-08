@@ -14,9 +14,11 @@ namespace Gnosis.Core
 
         bool IsNew();
         bool IsChanged();
+        bool IsInitialized();
         IEnumerable<IChild> GetChildren(EntityInfo childInfo);
         IEnumerable<IValue> GetValues(ValueInfo valueInfo);
 
+        void Initialize(IEntityInitialState state);
         void Save(DateTime timeStamp);
     }
 }

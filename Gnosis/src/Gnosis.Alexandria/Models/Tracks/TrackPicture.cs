@@ -10,19 +10,13 @@ namespace Gnosis.Alexandria.Models.Tracks
     public class TrackPicture
         : ChildBase, ITrackPicture
     {
-        public TrackPicture(IContext context, Guid parent)
-            : base(context, parent)
+        public TrackPicture()
         {
-        }
-
-        public TrackPicture(IContext context, Guid id, DateTime timeStamp, Guid parent, string textEncoding, string mediaType, TrackPictureType pictureType, string description, byte[] pictureData)
-            : base(context, id, timeStamp, parent)
-        {
-            this.textEncoding = textEncoding;
-            this.mediaType = mediaType;
-            this.pictureType = pictureType;
-            this.description = description;
-            this.pictureData = pictureData;
+            AddInitializer("TextEncoding", value => this.textEncoding = value.ToString());
+            AddInitializer("MediaType", value => this.mediaType = value.ToString());
+            AddInitializer("PictureType", x => this.pictureType = x.ToEnum<TrackPictureType>());
+            AddInitializer("Description", x => this.description = x.ToString());
+            AddInitializer("PictureData", (name, record) => this.pictureData = record.GetBytes(name));
         }
 
         private string textEncoding = string.Empty;
@@ -31,6 +25,8 @@ namespace Gnosis.Alexandria.Models.Tracks
         private string description = string.Empty;
         private byte[] pictureData = new byte[] { 0 };
 
+        #region ITrackPicture Members
+
         public string TextEncoding
         {
             get { return textEncoding; }
@@ -38,7 +34,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != textEncoding)
                 {
-                    OnEntityChanged(() => textEncoding = value, "TextEncoding");
+                    Change(() => textEncoding = value, "TextEncoding");
                 }
             }
         }
@@ -50,7 +46,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != mediaType)
                 {
-                    OnEntityChanged(() => mediaType = value, "MediaType");
+                    Change(() => mediaType = value, "MediaType");
                 }
             }
         }
@@ -62,7 +58,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != pictureType)
                 {
-                    OnEntityChanged(() => pictureType = value, "PictureType");
+                    Change(() => pictureType = value, "PictureType");
                 }
             }
         }
@@ -74,7 +70,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != description)
                 {
-                    OnEntityChanged(() => description = value, "Description");
+                    Change(() => description = value, "Description");
                 }
             }
         }
@@ -86,9 +82,11 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != pictureData)
                 {
-                    OnEntityChanged(() => pictureData = value, "PictureData");
+                    Change(() => pictureData = value, "PictureData");
                 }
             }
         }
+
+        #endregion
     }
 }

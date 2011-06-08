@@ -12,8 +12,8 @@ namespace Gnosis.Alexandria.Repositories.Feeds
     public class FeedFactory
         : FactoryBase
     {
-        public FeedFactory(IContext context)
-            : base(context)
+        public FeedFactory(IContext context, ILogger logger)
+            : base(context, logger)
         {
             MapCreateEntityFunction(typeof(IFeed), (record) => CreateFeed(record));
             MapCreateChildFunction(typeof(IFeedItem), (record, parent) => CreateItem(record, parent));
@@ -31,8 +31,15 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
         private IEntity CreateFeed(IDataRecord record)
         {
+            var feed = new Feed();
+            if (record != null)
+                feed.Initialize(new EntityInitialState(Context, Logger, record));
+            else feed.Initialize(new EntityInitialState(Context, Logger));
+            return feed;
+
+            /*
             if (record == null)
-                return new Feed(Context);
+                feed.Initialize(new EntityInitialState(Context, Logger, 
             else
             {
                 var id = record.GetGuid("Id");
@@ -52,12 +59,22 @@ namespace Gnosis.Alexandria.Repositories.Feeds
                 var imagePath = record.GetUri("ImagePath");
                 var iconPath = record.GetUri("IconPath");
                 var feedIdentifier = record.GetString("FeedIdentifier");
+                
                 return new Feed(Context, id, timeStamp, location, mediaType, title, authors, contributors, description, language, originalLocation, copyright, publishedDate, updatedDate, generator, imagePath, iconPath, feedIdentifier);
             }
+             */
         }
 
         private IChild CreateItem(IDataRecord record, Guid parent)
         {
+            var item = new FeedItem();
+            if (record != null)
+                item.Initialize(new EntityInitialState(Context, Logger, record));
+            else item.Initialize(new EntityInitialState(Context, Logger));
+
+            return item;
+
+            /*
             if (record == null)
                 return new FeedItem(Context, parent);
             else
@@ -80,10 +97,16 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
                 return new FeedItem(Context, id, parent, timeStamp, title, titleMediaType, authors, contributors, publishedDate, copyright, summary, content, contentMediaType, contentLocation, updatedDate, feedItemIdentifier);
             }
+            */
         }
 
         private IValue CreateCategory(IDataRecord record)
         {
+            var category = new FeedCategory();
+            category.Initialize(new ValueInitialState(record));
+            return category;
+
+            /*
             var id = record.GetGuid("Id");
             var parent = record.GetGuid("Parent");
             var sequence = record.GetUInt32("Sequence");
@@ -91,10 +114,16 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             var name = record.GetString("Name");
             var label = record.GetString("Label");
             return new FeedCategory(id, parent, sequence, scheme, name, label);
+            */
         }
 
         private IValue CreateLink(IDataRecord record)
         {
+            var link = new FeedLink();
+            link.Initialize(new ValueInitialState(record));
+            return link;
+
+            /*
             var id = record.GetGuid("Id");
             var parent = record.GetGuid("Parent");
             var sequence = record.GetUInt32("Sequence");
@@ -104,10 +133,16 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             var length = record.GetUInt32("Length");
             var language = record.GetString("Language");
             return new FeedLink(id, parent, sequence, relationship, location, mediaType, length, language);
+            */
         }
 
         private IValue CreateMetadata(IDataRecord record)
         {
+            var metadata = new FeedMetadata();
+            metadata.Initialize(new ValueInitialState(record));
+            return metadata;
+
+            /*
             var id = record.GetGuid("Id");
             var parent = record.GetGuid("Parent");
             var sequence = record.GetUInt32("Sequence");
@@ -116,6 +151,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             var name = record.GetString("Name");
             var content = record.GetString("Content");
             return new FeedMetadata(id, parent, sequence, mediaType, scheme, name, content);
+            */
         }
 
         private void AddFeedCategories(string valueName, IEnumerable<IEntity> parents, IEnumerable<IValue> children)

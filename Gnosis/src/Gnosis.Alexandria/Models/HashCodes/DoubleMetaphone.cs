@@ -10,19 +10,19 @@ namespace Gnosis.Alexandria.Models.HashCodes
     public class DoubleMetaphone
         : ValueBase, IHashCode
     {
-        public DoubleMetaphone(Guid parent, string value)
-            : base(parent)
+        public DoubleMetaphone()
         {
-            this.value = value;
+            AddInitializer("Value", x => this.value = x.ToString());
         }
 
-        public DoubleMetaphone(Guid id, Guid parent, string value)
-            : base(id, parent)
+        private DoubleMetaphone(Guid parent, string value)
         {
-            this.value = value;
+            AddInitializer("Value", x => this.value = value);
+
+            Initialize(parent);
         }
 
-        private readonly string value;
+        private string value;
 
         public Uri Scheme
         {

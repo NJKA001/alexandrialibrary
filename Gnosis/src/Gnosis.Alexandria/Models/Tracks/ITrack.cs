@@ -7,7 +7,7 @@ namespace Gnosis.Alexandria.Models.Tracks
 {
     public interface ITrack : IEntity
     {
-        Uri Location { get; }
+        Uri Location { get; set; }
         string MediaType { get; set; }
 
         string Title { get; set; }

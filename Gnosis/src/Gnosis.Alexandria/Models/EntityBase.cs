@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
-
-using log4net;
 
 using Gnosis.Core;
 
@@ -13,37 +12,19 @@ namespace Gnosis.Alexandria.Models
     public abstract class EntityBase
         : IEntity
     {
-        protected EntityBase(IContext context)
-        {
-            this.context = context;
-            this.id = Guid.NewGuid();
-            this.timeStamp = DateTime.Now.ToUniversalTime();
-            this.isNew = true;
-        }
-
-        protected EntityBase(IContext context, Guid id, DateTime timeStamp)
-        {
-            this.context = context;
-            this.id = id;
-            this.timeStamp = timeStamp;
-        }
-
-        private static readonly ILog log = LogManager.GetLogger(typeof(EntityBase));
-
-        private readonly IContext context;
-        private readonly Guid id;
+        private IContext context;
+        private ILogger logger;
+        private Guid id;
         private DateTime timeStamp;
         private bool isNew;
         private bool isChanged;
+        private bool isInitialized;
         private readonly IList<IChild> children = new List<IChild>();
         private readonly IList<IChild> removedChildren = new List<IChild>();
         private readonly IList<IValue> values = new List<IValue>();
         private readonly IList<IValue> removedValues = new List<IValue>();
-
-        protected IContext Context
-        {
-            get { return context; }
-        }
+        private readonly IDictionary<string, Action<object>> initializers = new Dictionary<string, Action<object>>();
+        private readonly IDictionary<string, Action<string, IDataRecord>> customInitializers = new Dictionary<string, Action<string, IDataRecord>>();
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -55,13 +36,26 @@ namespace Gnosis.Alexandria.Models
                 }
                 catch (Exception ex)
                 {
-                    log.Error("EntityBase.OnPropertyChanged", ex);
+                    logger.Error("EntityBase.OnPropertyChanged", ex);
                 }
             }
         }
 
-        protected void OnEntityChanged(Action action, string propertyName)
+        protected IContext Context
         {
+            get { return context; }
+        }
+
+        protected ILogger Logger
+        {
+            get { return logger; }
+        }
+
+        protected void Change(Action action, string propertyName)
+        {
+            if (!isInitialized)
+                throw new InvalidOperationException("Entity must be initialized before it can be changed");
+
             context.Invoke(action);
 
             isChanged = true;
@@ -69,8 +63,21 @@ namespace Gnosis.Alexandria.Models
             OnPropertyChanged(propertyName);
         }
 
+        protected void AddInitializer(string name, Action<object> action)
+        {
+            initializers[name] = action;
+        }
+
+        protected void AddInitializer(string name, Action<string, IDataRecord> action)
+        {
+            customInitializers[name] = action;
+        }
+
         protected void AddChild(Action action, IChild child, string propertyName)
         {
+            if (!isInitialized)
+                throw new InvalidOperationException("Entity must be initialized before children can be added");
+
             if (!children.Contains(child))
             {
                 context.Invoke(action);
@@ -81,9 +88,13 @@ namespace Gnosis.Alexandria.Models
 
         protected void RemoveChild(Action action, IChild child, string propertyName)
         {
+            if (!isInitialized)
+                throw new InvalidOperationException("Entity must be initialized before children can be removed");
+
             if (children.Contains(child))
             {
                 context.Invoke(action);
+                child.Remove();
                 children.Remove(child);
                 removedChildren.Add(child);
                 OnPropertyChanged(propertyName);
@@ -92,6 +103,9 @@ namespace Gnosis.Alexandria.Models
 
         protected void AddValue(Action action, IValue value, string propertyName)
         {
+            if (!isInitialized)
+                throw new InvalidOperationException("Entity must be initialized before values can be added");
+
             if (!values.Contains(value))
             {
                 context.Invoke(action);
@@ -102,9 +116,13 @@ namespace Gnosis.Alexandria.Models
 
         protected void RemoveValue(Action action, IValue value, string propertyName)
         {
+            if (!isInitialized)
+                throw new InvalidOperationException("Entity must be initialized before values can be removed");
+
             if (values.Contains(value))
             {
                 context.Invoke(action);
+                value.Remove();
                 values.Remove(value);
                 removedValues.Add(value);
                 OnPropertyChanged(propertyName);
@@ -131,6 +149,11 @@ namespace Gnosis.Alexandria.Models
             return isChanged;
         }
 
+        public bool IsInitialized()
+        {
+            return isInitialized;
+        }
+
         public virtual IEnumerable<IChild> GetChildren(EntityInfo childInfo)
         {
             return (removedChildren.Concat(children)).Where(x => childInfo.Type.IsAssignableFrom(x.GetType()));
@@ -139,6 +162,28 @@ namespace Gnosis.Alexandria.Models
         public virtual IEnumerable<IValue> GetValues(ValueInfo valueInfo)
         {
             return (removedValues.Concat(values)).Where(x => valueInfo.Type.IsAssignableFrom(x.GetType()));
+        }
+
+        public virtual void Initialize(IEntityInitialState state)
+        {
+            if (state == null)
+                throw new ArgumentNullException("state");
+
+            this.context = state.Context;
+            this.logger = state.Logger;
+            this.id = state.Id;
+            this.timeStamp = state.TimeStamp;
+            this.isNew = state.IsNew;
+            this.isInitialized = true;
+
+            if (!isNew)
+            {
+                foreach (var initializer in initializers)
+                    state.Initialize(initializer.Key, initializer.Value);
+
+                foreach (var customInitializer in customInitializers)
+                    state.Initialize(customInitializer.Key, customInitializer.Value);
+            }
         }
 
         public virtual void Save(DateTime timeStamp)

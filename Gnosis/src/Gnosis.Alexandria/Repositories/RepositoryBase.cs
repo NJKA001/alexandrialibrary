@@ -13,7 +13,6 @@ using Gnosis.Core.Batches;
 using Gnosis.Core.Commands;
 using Gnosis.Core.Queries;
 
-using Gnosis.Alexandria.Helpers;
 //using Gnosis.Alexandria.Models;
 
 namespace Gnosis.Alexandria.Repositories
@@ -22,17 +21,17 @@ namespace Gnosis.Alexandria.Repositories
         : IRepository<T>
         where T : IEntity
     {
-        protected RepositoryBase(IContext context, IFactory factory, ILogger logger)
+        protected RepositoryBase(IContext context, ILogger logger, IFactory factory)
         {
             this.context = context;
-            this.factory = factory;
             this.logger = logger;
+            this.factory = factory;
             this.baseType = typeof(T);
         }
 
         private readonly IContext context;
-        private readonly IFactory factory;
         private readonly ILogger logger;
+        private readonly IFactory factory;
         private readonly Type baseType;
         private readonly IList<ILookup> lookups = new List<ILookup>();
         private readonly IList<ISearch> searches = new List<ISearch>();
@@ -54,6 +53,11 @@ namespace Gnosis.Alexandria.Repositories
         protected IContext Context
         {
             get { return context; }
+        }
+
+        protected ILogger Logger
+        {
+            get { return logger; }
         }
 
         protected void AddLookup(ILookup lookup)

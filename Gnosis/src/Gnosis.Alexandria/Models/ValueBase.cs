@@ -10,37 +10,36 @@ namespace Gnosis.Alexandria.Models
     public abstract class ValueBase
         : IValue
     {
-        protected ValueBase(Guid parent)
-            : this(parent, 0)
+        private Guid id;
+        private Guid parent;
+        private uint sequence;
+        private bool isInitialized;
+        private bool isNew;
+        private bool isMoved;
+        private bool isRemoved;
+        private readonly IDictionary<string, Action<object>> initializers = new Dictionary<string, Action<object>>();
+
+        protected void AddInitializer(string name, Action<object> action)
         {
+            initializers[name] = action;
         }
 
-        protected ValueBase(Guid parent, uint sequence)
+        protected void Initialize(Guid parent)
+        {
+            Initialize(parent, 0);
+        }
+
+        protected void Initialize(Guid parent, uint sequence)
         {
             this.id = Guid.NewGuid();
             this.parent = parent;
             this.sequence = sequence;
-            isNew = true;
-        }
+            this.isNew = true;
+            this.isInitialized = true;
 
-        protected ValueBase(Guid id, Guid parent)
-            : this(id, parent, 0)
-        {
+            foreach (var initializer in initializers)
+                initializer.Value(null);
         }
-
-        protected ValueBase(Guid id, Guid parent, uint sequence)
-        {
-            this.id = id;
-            this.parent = parent;
-            this.sequence = sequence;
-        }
-
-        private readonly Guid id;
-        private readonly Guid parent;
-        private uint sequence;
-        private bool isNew;
-        private bool isMoved;
-        private bool isRemoved;
 
         public Guid Id
         {
@@ -55,6 +54,11 @@ namespace Gnosis.Alexandria.Models
         public uint Sequence
         {
             get { return sequence; }
+        }
+
+        public bool IsInitialized()
+        {
+            return isInitialized;
         }
 
         public bool IsNew()
@@ -74,6 +78,9 @@ namespace Gnosis.Alexandria.Models
 
         public virtual void Move(uint sequence)
         {
+            if (!isInitialized)
+                throw new InvalidOperationException("Value must be initialized before it can be moved");
+
             if (this.sequence != sequence)
             {
                 this.sequence = sequence;
@@ -83,7 +90,25 @@ namespace Gnosis.Alexandria.Models
 
         public virtual void Remove()
         {
+            if (!isInitialized)
+                throw new InvalidOperationException("Value must be initialized before it can be removed");
+
             isRemoved = true;
+        }
+
+        public virtual void Initialize(IValueInitialState state)
+        {
+            this.id = state.Id;
+            this.parent = state.Parent;
+            this.sequence = state.Sequence;
+            this.isNew = state.IsNew;
+            this.isInitialized = true;
+
+            if (!isNew)
+            {
+                foreach (var initializer in initializers)
+                    state.Initialize(initializer.Key, initializer.Value);
+            }
         }
 
         public virtual void Save()

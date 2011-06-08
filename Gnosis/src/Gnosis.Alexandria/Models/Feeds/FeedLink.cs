@@ -3,36 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core;
+
 namespace Gnosis.Alexandria.Models.Feeds
 {
     public class FeedLink
         : ValueBase, IFeedLink
     {
-        public FeedLink(Guid parent, uint sequence, string relationship, Uri location, string mediaType, uint length, string language)
-            : base(parent, sequence)
+        public FeedLink()
         {
-            this.relationship = relationship;
-            this.location = location;
-            this.mediaType = mediaType;
-            this.length = length;
-            this.language = language;
+            AddInitializer("Relationship", x => this.relationship = x.ToString());
+            AddInitializer("Location", x => this.location = x.ToUri());
+            AddInitializer("MediaType", x => this.mediaType = x.ToString());
+            AddInitializer("Length", x => this.length = x.ToUInt32());
+            AddInitializer("Language", x => this.language = x.ToString());
         }
 
-        public FeedLink(Guid id, Guid parent, uint sequence, string relationship, Uri location, string mediaType, uint length, string language)
-            : base(id, parent, sequence)
+        public FeedLink(Guid parent, string relationship, Uri location, string mediaType, uint length, string language)
         {
-            this.relationship = relationship;
-            this.location = location;
-            this.mediaType = mediaType;
-            this.length = length;
-            this.language = language;
+            AddInitializer("Relationship", x => this.relationship = relationship);
+            AddInitializer("Location", x => this.location = location);
+            AddInitializer("MediaType", x => this.mediaType = mediaType);
+            AddInitializer("Length", x => this.length = length);
+            AddInitializer("Language", x => this.language = language);
+
+            Initialize(parent);
         }
 
-        private readonly string relationship;
-        private readonly Uri location;
-        private readonly string mediaType;
-        private readonly uint length;
-        private readonly string language;
+        private string relationship;
+        private Uri location;
+        private string mediaType;
+        private uint length;
+        private string language;
 
         #region IFeedLink Members
 

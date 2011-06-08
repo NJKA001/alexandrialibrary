@@ -10,19 +10,19 @@ namespace Gnosis.Alexandria.Models.HashCodes
     public class Md5Hash
         : ValueBase, IHashCode
     {
-        public Md5Hash(Guid parent, string value)
-            : base(parent)
+        public Md5Hash()
         {
-            this.value = value;
+            AddInitializer("Value", x => this.value = x.ToString());
         }
 
-        public Md5Hash(Guid id, Guid parent, string value)
-            : base(id, parent)
+        private Md5Hash(Guid parent, string value)
         {
-            this.value = value;
+            AddInitializer("Value", x => this.value = value);
+
+            Initialize(parent);
         }
 
-        private readonly string value;
+        private string value;
 
         public Uri Scheme
         {

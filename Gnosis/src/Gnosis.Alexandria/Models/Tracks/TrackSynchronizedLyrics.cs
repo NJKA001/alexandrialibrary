@@ -10,6 +10,7 @@ namespace Gnosis.Alexandria.Models.Tracks
     public class TrackSynchronizedLyrics
         : ChildBase, ITrackSynchronizedLyrics
     {
+        /*
         public TrackSynchronizedLyrics(IContext context, Guid parent)
             : base(context, parent)
         {
@@ -24,6 +25,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             this.lyrics = lyrics;
             this.contentType = contentType;
         }
+        */
 
         private string textEncoding = string.Empty;
         private string language = string.Empty;
@@ -38,7 +40,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != textEncoding)
                 {
-                    OnEntityChanged(() => textEncoding = value, "TextEncoding");
+                    Change(() => textEncoding = value, "TextEncoding");
                 }
             }
         }
@@ -50,7 +52,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != language)
                 {
-                    OnEntityChanged(() => language = value, "Language");
+                    Change(() => language = value, "Language");
                 }
             }
         }
@@ -62,7 +64,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != description)
                 {
-                    OnEntityChanged(() => description = value, "Description");
+                    Change(() => description = value, "Description");
                 }
             }
         }
@@ -74,7 +76,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != lyrics)
                 {
-                    OnEntityChanged(() => lyrics = value, "Lyrics");
+                    Change(() => lyrics = value, "Lyrics");
                 }
             }
         }
@@ -86,7 +88,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != contentType)
                 {
-                    OnEntityChanged(() => contentType = value, "ContentType");
+                    Change(() => contentType = value, "ContentType");
                 }
             }
         }

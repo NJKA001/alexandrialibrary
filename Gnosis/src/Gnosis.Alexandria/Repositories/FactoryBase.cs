@@ -11,12 +11,14 @@ namespace Gnosis.Alexandria.Repositories
 {
     public abstract class FactoryBase : IFactory
     {
-        protected FactoryBase(IContext context)
+        protected FactoryBase(IContext context, ILogger logger)
         {
             this.context = context;
+            this.logger = logger;
         }
 
         private readonly IContext context;
+        private readonly ILogger logger;
         private readonly IDictionary<Type, Func<IDataRecord, IEntity>> createEntityFunctions = new Dictionary<Type, Func<IDataRecord, IEntity>>();
         private readonly IDictionary<Type, Func<IDataRecord, Guid, IChild>> createChildFunctions = new Dictionary<Type, Func<IDataRecord, Guid, IChild>>();
         private readonly IDictionary<Type, Func<IDataRecord, IValue>> createValueFunctions = new Dictionary<Type, Func<IDataRecord, IValue>>();
@@ -26,6 +28,11 @@ namespace Gnosis.Alexandria.Repositories
         protected IContext Context
         {
             get { return context; }
+        }
+
+        protected ILogger Logger
+        {
+            get { return logger; }
         }
 
         protected void MapCreateEntityFunction(Type type, Func<IDataRecord, IEntity> function)

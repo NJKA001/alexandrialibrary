@@ -13,10 +13,12 @@ namespace Gnosis.Core
         Guid Parent { get; }
         uint Sequence { get; }
 
+        bool IsInitialized();
         bool IsNew();
         bool IsMoved();
         bool IsRemoved();
 
+        void Initialize(IValueInitialState state);
         void Move(uint sequence);
         void Remove();
         void Save();
