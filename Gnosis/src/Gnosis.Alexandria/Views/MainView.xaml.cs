@@ -68,19 +68,53 @@ namespace Gnosis.Alexandria.Views
             item.Authors = "Bill Simmons";
             item.Contributors = "Joe House, Joe Mead";
             item.Copyright = "Copyright ESPN 2011"; 
-            item.FeedItemIdentifier = "ZYZ235AMQ379";
+            item.FeedItemIdentifier = "ZYZ235AMQ3792206";
             item.Summary = "Bill previews the NBA Finals with ESPN experts";
             item.PublishedDate = new DateTime(2011, 6, 5);
             item.UpdatedDate = new DateTime(2011, 6, 5);
-            item.Title = "NBA Finals Preview";
+            item.Title = "NBA Finals Preview (Part 1)";
             item.TitleMediaType = "text/plain";
-            item.AddCategory(new Models.Feeds.FeedCategory(item.Id, UriExtensions.EmptyUri, "Basketball", "Basketball"));
-            item.AddLink(new Models.Feeds.FeedLink(item.Id, "self", new Uri("http://espn.go.com/espnradio/media/xyz.mp3"), "audio/mpeg", 0, "en-us"));
+            //item.AddCategory(new Models.Feeds.FeedCategory(item.Id, UriExtensions.EmptyUri, "Basketball", "Basketball"));
+            item.AddLink(new Models.Feeds.FeedLink(item.Id, "self", new Uri("http://espn.go.com/espnradio/media/xyz1.mp3"), "audio/mpeg", 0, "en-us"));
             item.AddMetadatum(new Models.Feeds.FeedMetadata(item.Id, "text/plain", UriExtensions.EmptyUri, "rating", "4/5"));
             item.AddMetadatum(new Models.Feeds.FeedMetadata(item.Id, "application/xml", UriExtensions.EmptyUri, "rating", "<rating><score>4</score><max>5</max></rating>"));
             feed.AddItem(item);
 
+            var item2 = new Models.Feeds.FeedItem();
+            item2.Initialize(new EntityInitialState(context, logger, feed.Id, 0));
+            item2.Authors = "Bill Simmons";
+            item2.Contributors = "Joe House, Joe Mead";
+            item2.Copyright = "Copyright ESPN 2011";
+            item2.FeedItemIdentifier = "ZYZ235AMQ38564587";
+            item2.Summary = "Bill previews the NBA Finals with ESPN experts";
+            item2.PublishedDate = new DateTime(2011, 6, 5);
+            item2.UpdatedDate = new DateTime(2011, 6, 5);
+            item2.Title = "NBA Finals Preview (Part 2)";
+            item2.TitleMediaType = "text/plain";
+            item2.AddCategory(new Models.Feeds.FeedCategory(item.Id, UriExtensions.EmptyUri, "Basketball", "Basketball"));
+            item2.AddLink(new Models.Feeds.FeedLink(item.Id, "self", new Uri("http://espn.go.com/espnradio/media/xyz2.mp3"), "audio/mpeg", 0, "en-us"));
+            item2.AddMetadatum(new Models.Feeds.FeedMetadata(item.Id, "text/plain", UriExtensions.EmptyUri, "rating", "4/5"));
+            item2.AddMetadatum(new Models.Feeds.FeedMetadata(item.Id, "application/xml", UriExtensions.EmptyUri, "rating", "<rating><score>4</score><max>5</max></rating>"));
+            feed.AddItem(item2);
+
             return feed;
+        }
+
+        private void ModifyTestFeed(Models.Feeds.IFeed feed)
+        {
+            feed.Title = "Some other title";
+            feed.FeedIdentifier = "NEW-ID-5634634636-NEW";
+            feed.Generator = "other-generator";
+
+            var firstCategory = feed.Categories.FirstOrDefault();
+            feed.RemoveCategory(firstCategory);
+
+
+            feed.RemoveItem(feed.Items.LastOrDefault());
+            feed.Items.FirstOrDefault().RemoveMetadatum(feed.Items.FirstOrDefault().Metadata.FirstOrDefault());
+            feed.Items.FirstOrDefault().AddCategory(new Models.Feeds.FeedCategory(feed.Items.FirstOrDefault().Id, new Uri("http://example.com/scheme"), "Misc.", "Misc."));
+            feed.AddMetadatum(new Models.Feeds.FeedMetadata(feed.Id, "text/html", new Uri("http://other.com/1/different-scheme"), "review", "<html><body><p>This feed is awesome</p><p>I <b>love</b> it so much!</p></body></html>"));
+            feedRepository.Save(new List<Models.Feeds.IFeed> { feed });
         }
 
         public MainWindow()
@@ -124,6 +158,7 @@ namespace Gnosis.Alexandria.Views
                         feed = GetTestFeed(context, logger);
                         feedRepository.Save(new List<Models.Feeds.IFeed> { feed });
                     }
+                    else ModifyTestFeed(feed);
                 }
                 catch (Exception ex)
                 {
@@ -149,7 +184,6 @@ namespace Gnosis.Alexandria.Views
         private static readonly log4net.ILog log = LogManager.GetLogger(typeof(MainWindow));
         
         private readonly IContext context;
-        private readonly IFactory factory;
         private readonly ILogger logger = new Logger(log);
         //private readonly IRepository<Gnosis.Alexandria.Models.Tracks.ITrack> trackRepository;
         private readonly IRepository<Gnosis.Alexandria.Models.Feeds.IFeed> feedRepository;
