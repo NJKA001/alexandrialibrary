@@ -10,8 +10,8 @@ namespace Gnosis.Core.Batches
         : PersistEntitiesBatch
         where T : IEntity
     {
-        public DeleteEntitiesBatch(Func<IDbConnection> getConnection, ILogger logger, IEnumerable<T> entities)
-            : base(getConnection, logger)
+        public DeleteEntitiesBatch(IDbConnection connection, ILogger logger, IEnumerable<T> entities)
+            : base(connection, logger)
         {
             var entityInfo = new EntityInfo(typeof(T));
 

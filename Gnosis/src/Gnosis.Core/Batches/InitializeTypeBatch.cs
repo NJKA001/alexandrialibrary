@@ -10,8 +10,8 @@ namespace Gnosis.Core.Batches
 {
     public class InitializeTypeBatch : Batch
     {
-        public InitializeTypeBatch(Func<IDbConnection> getConnection, ILogger logger, Type type, IEnumerable<ILookup> lookups, IEnumerable<ISearch> searches)
-            : base(getConnection, logger)
+        public InitializeTypeBatch(IDbConnection connection, ILogger logger, Type type, IEnumerable<ILookup> lookups, IEnumerable<ISearch> searches)
+            : base(connection, logger)
         {
             var entityInfo = new EntityInfo(type);
 

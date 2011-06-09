@@ -176,6 +176,7 @@
     <Compile Include="Models\Old\SourcePropertyBase.cs" />
     <Compile Include="Models\Old\OldTrack.cs" />
     <Compile Include="Repositories\Old\OldTrackRepository.cs" />
+    <Compile Include="Repositories\Tracks\TrackFactory.cs" />
     <Compile Include="Repositories\Tracks\TrackRepository.cs" />
     <Compile Include="Views\MediaListView.xaml.cs">
       <DependentUpon>MediaListView.xaml</DependentUpon>

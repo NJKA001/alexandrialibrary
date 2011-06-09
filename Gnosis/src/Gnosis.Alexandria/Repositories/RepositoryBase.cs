@@ -6,8 +6,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-using log4net;
-
 using Gnosis.Core;
 using Gnosis.Core.Batches;
 using Gnosis.Core.Commands;
@@ -22,10 +20,16 @@ namespace Gnosis.Alexandria.Repositories
         where T : IEntity
     {
         protected RepositoryBase(IContext context, ILogger logger, IFactory factory)
+            : this(context, logger, factory, null)
+        {
+        }
+
+        protected RepositoryBase(IContext context, ILogger logger, IFactory factory, IDbConnection defaultConnection)
         {
             this.context = context;
             this.logger = logger;
             this.factory = factory;
+            this.defaultConnection = defaultConnection;
             this.baseType = typeof(T);
         }
 
@@ -35,20 +39,7 @@ namespace Gnosis.Alexandria.Repositories
         private readonly Type baseType;
         private readonly IList<ILookup> lookups = new List<ILookup>();
         private readonly IList<ISearch> searches = new List<ISearch>();
-        private string database = "Catalog.db";
-
-        protected void Initialize()
-        {
-            try
-            {
-                var batch = new InitializeTypeBatch(() => GetConnection(), logger, baseType, lookups, searches);
-                batch.Execute();
-            }
-            catch (Exception ex)
-            {
-                logger.Error("RepositoryBase.Initialize", ex);
-            }
-        }
+        private readonly IDbConnection defaultConnection;
         
         protected IContext Context
         {
@@ -72,13 +63,31 @@ namespace Gnosis.Alexandria.Repositories
 
         protected IDbConnection GetConnection()
         {
-            return new SQLiteConnection(string.Format("Data Source={0};Version=3;", database));
+            if (defaultConnection != null)
+                return defaultConnection;
+            else
+            {
+                var connection = new SQLiteConnection("Data Source=Catalog.db;Version=3;");
+                connection.Open();
+                return connection;
+            }
         }
 
         protected IEnumerable<T> Select(IFilter filter)
         {
-            var query = new Query<T>(() => GetConnection(), logger, factory, filter);
-            return query.Execute();
+            IDbConnection connection = null;
+
+            try
+            {
+                connection = GetConnection();
+                var query = new Query<T>(connection, logger, factory, filter);
+                return query.Execute();
+            }
+            finally
+            {
+                if (defaultConnection == null && connection != null)
+                    connection.Close();
+            }
         }
 
         public T Lookup(Guid id)
@@ -108,16 +117,55 @@ namespace Gnosis.Alexandria.Repositories
             return Select(search.GetFilter());
         }
 
+        public virtual void Initialize()
+        {
+            IDbConnection connection = null;
+
+            try
+            {
+                connection = GetConnection();
+                var batch = new InitializeTypeBatch(connection, logger, baseType, lookups, searches);
+                batch.Execute();
+            }
+            finally
+            {
+                if (defaultConnection == null && connection != null)
+                    connection.Close();
+            }
+        }
+
         public void Save(IEnumerable<T> items)
         {
-            var batch = new SaveEntitiesBatch<T>(() => GetConnection(), logger, items);
-            batch.Execute();
+            IDbConnection connection = null;
+
+            try
+            {
+                connection = GetConnection();
+                var batch = new SaveEntitiesBatch<T>(connection, logger, items);
+                batch.Execute();
+            }
+            finally
+            {
+                if (defaultConnection == null && connection != null)
+                    connection.Close();
+            }
         }
 
         public void Delete(IEnumerable<T> items)
         {
-            var batch = new DeleteEntitiesBatch<T>(() => GetConnection(), logger, items);
-            batch.Execute();
+            IDbConnection connection = null;
+
+            try
+            {
+                connection = GetConnection();
+                var batch = new DeleteEntitiesBatch<T>(connection, logger, items);
+                batch.Execute();
+            }
+            finally
+            {
+                if (defaultConnection == null && connection != null)
+                    connection.Close();
+            }
         }
     }
 }

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "taglib-sharp", "..\lib\tagl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Fmod", "Gnosis.Fmod\Gnosis.Fmod.csproj", "{1629B512-34A2-4F04-AB9A-EBD30228EBDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Tests", "Gnosis.Tests\Gnosis.Tests.csproj", "{CA62A344-0BEB-4DD3-9BF7-0F7D8D850CCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,16 @@ Global
 		{1629B512-34A2-4F04-AB9A-EBD30228EBDC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{1629B512-34A2-4F04-AB9A-EBD30228EBDC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{1629B512-34A2-4F04-AB9A-EBD30228EBDC}.Release|x86.ActiveCfg = Release|Any CPU
+		{CA62A344-0BEB-4DD3-9BF7-0F7D8D850CCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA62A344-0BEB-4DD3-9BF7-0F7D8D850CCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA62A344-0BEB-4DD3-9BF7-0F7D8D850CCB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CA62A344-0BEB-4DD3-9BF7-0F7D8D850CCB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CA62A344-0BEB-4DD3-9BF7-0F7D8D850CCB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CA62A344-0BEB-4DD3-9BF7-0F7D8D850CCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA62A344-0BEB-4DD3-9BF7-0F7D8D850CCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA62A344-0BEB-4DD3-9BF7-0F7D8D850CCB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CA62A344-0BEB-4DD3-9BF7-0F7D8D850CCB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CA62A344-0BEB-4DD3-9BF7-0F7D8D850CCB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

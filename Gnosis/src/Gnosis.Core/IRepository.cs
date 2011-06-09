@@ -13,6 +13,7 @@ namespace Gnosis.Core
         IEnumerable<T> Search();
         IEnumerable<T> Search(ISearch search);
 
+        void Initialize();
         void Save(IEnumerable<T> items);
         void Delete(IEnumerable<T> items);
     }

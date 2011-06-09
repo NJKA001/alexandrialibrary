@@ -13,15 +13,13 @@ namespace Gnosis.Alexandria.Models
     {
         public ModelContext(Dispatcher dispatcher)
         {
+            if (dispatcher == null)
+                throw new ArgumentNullException("dispatcher");
+
             this.dispatcher = dispatcher;
         }
 
         private readonly Dispatcher dispatcher;
-
-        private DateTime GetCurrentDateTime()
-        {
-            return DateTime.Now.ToUniversalTime();
-        }
 
         public void Invoke(Action action)
         {

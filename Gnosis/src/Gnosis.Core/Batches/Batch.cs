@@ -11,13 +11,13 @@ namespace Gnosis.Core.Batches
     public class Batch
         : IBatch
     {
-        public Batch(Func<IDbConnection> getConnection, ILogger logger)
+        public Batch(IDbConnection connection, ILogger logger)
         {
-            this.getConnection = getConnection;
+            this.connection = connection;
             this.logger = logger;
         }
 
-        private readonly Func<IDbConnection> getConnection;
+        private readonly IDbConnection connection;
         private readonly ILogger logger;
         private readonly IList<ICommandBuilder> builders = new List<ICommandBuilder>();
 
@@ -33,26 +33,20 @@ namespace Gnosis.Core.Batches
             var isCommited = false;
             try
             {
-                using (var connection = getConnection())
+                using (transaction = connection.BeginTransaction())
                 {
-                    logger.Debug("  opening connection");
-                    connection.Open();
-                    using (transaction = connection.BeginTransaction())
+                    foreach (var builder in builders)
                     {
-                        foreach (var builder in builders)
+                        using (var command = builder.GetCommand(connection))
                         {
-                            using (var command = builder.GetCommand(connection))
-                            {
-                                logger.Debug("    " + command.CommandText.Trim());
-                                command.ExecuteNonQuery();
-                            }
+                            logger.Debug("    " + command.CommandText.Trim());
+                            command.ExecuteNonQuery();
                         }
-                        logger.Debug("  committing transaction");
-                        transaction.Commit();
-                        isCommited = true;
                     }
+                    logger.Debug("  committing transaction");
+                    transaction.Commit();
+                    isCommited = true;
                 }
-                logger.Debug("  closing connection");
             }
             catch (Exception ex)
             {

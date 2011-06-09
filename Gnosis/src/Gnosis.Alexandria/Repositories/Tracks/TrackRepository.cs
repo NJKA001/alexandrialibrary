@@ -4,8 +4,6 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-using log4net;
-
 using Gnosis.Core;
 using Gnosis.Core.Commands;
 using Gnosis.Alexandria.Helpers;
@@ -17,11 +15,14 @@ namespace Gnosis.Alexandria.Repositories.Tracks
     public class TrackRepository
         : RepositoryBase<ITrack>
     {
-        public TrackRepository(IContext context, ILogger logger, IFactory factory)
-            : base(context, logger, factory)
+        public TrackRepository(IContext context, ILogger logger)
+            : this(context, logger, null)
         {
         }
 
-        private static readonly ILog log = LogManager.GetLogger(typeof(TrackRepository));
+        public TrackRepository(IContext context, ILogger logger, IDbConnection defaultConnection)
+            : base(context, logger, new TrackFactory(context, logger), defaultConnection)
+        {
+        }
     }
 }

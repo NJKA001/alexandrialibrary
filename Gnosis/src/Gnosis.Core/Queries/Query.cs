@@ -13,11 +13,11 @@ namespace Gnosis.Core.Queries
     public class Query<T>
         : IQuery<T> where T : IEntity
     {
-        public Query(Func<IDbConnection> getConnection, ILogger logger, IFactory factory, IFilter filter)
+        public Query(IDbConnection connection, ILogger logger, IFactory factory, IFilter filter)
         {
             var entityInfo = new EntityInfo(typeof(T));
 
-            this.getConnection = getConnection;
+            this.connection = connection;
             this.logger = logger;
             this.factory = factory;
             this.builder = new CommandBuilder(entityInfo.Name, entityInfo.Type);
@@ -32,7 +32,7 @@ namespace Gnosis.Core.Queries
             AddChildStatements(builder, entityInfo, filter);
         }
 
-        private readonly Func<IDbConnection> getConnection;
+        private readonly IDbConnection connection;
         private readonly ILogger logger;
         private readonly IFactory factory;
         private readonly ICommandBuilder builder;
@@ -117,27 +117,21 @@ namespace Gnosis.Core.Queries
 
             var items = new List<T>();
 
-            using (var connection = getConnection())
+            var command = builder.GetCommand(connection);
+            logger.Debug("    " + command.CommandText.Trim());
+            using (var reader = command.ExecuteReader())
             {
-                logger.Debug("  opening connection");
-                connection.Open();
-
-                var command = builder.GetCommand(connection);
-                logger.Debug("    " + command.CommandText.Trim());
-                using (var reader = command.ExecuteReader())
+                while (reader.Read())
                 {
-                    while (reader.Read())
+                    var item = factory.CreateEntity<T>(reader);
+                    if (item != null)
                     {
-                        var item = factory.CreateEntity<T>(reader);
-                        if (item != null)
-                        {
-                            items.Add(item);
-                        }
+                        items.Add(item);
                     }
                 }
-
-                AddChildren(connection, builder, items.Cast<IEntity>());
             }
+
+            AddChildren(connection, builder, items.Cast<IEntity>());
 
             logger.Debug("  return items. count=" + items.Count);
             return items;

@@ -148,6 +148,8 @@ namespace Gnosis.Alexandria.Views
                 context = new ModelContext(this.Dispatcher);
 
                 feedRepository = new FeedRepository(context, logger);
+                feedRepository.Initialize();
+
                 //trackRepository = new TrackRepository(context, factory);
 
                 try
@@ -158,7 +160,7 @@ namespace Gnosis.Alexandria.Views
                         feed = GetTestFeed(context, logger);
                         feedRepository.Save(new List<Models.Feeds.IFeed> { feed });
                     }
-                    else ModifyTestFeed(feed);
+                    //else ModifyTestFeed(feed);
                 }
                 catch (Exception ex)
                 {

@@ -15,14 +15,17 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         : RepositoryBase<IFeed>
     {
         public FeedRepository(IContext context, ILogger logger)
-            : base(context, logger, new FeedFactory(context, logger))
+            : this(context, logger, null)
+        {
+        }
+
+        public FeedRepository(IContext context, ILogger logger, IDbConnection defaultConnection)
+            : base(context, logger, new FeedFactory(context, logger), defaultConnection)
         {
             AddLookup(new LookupByLocation(null));
             AddSearch(new SearchByAuthors(null));
             AddSearch(new SearchByTitle(null));
             AddSearch(new SearchAll());
-
-            Initialize();
         }
     }
 }
