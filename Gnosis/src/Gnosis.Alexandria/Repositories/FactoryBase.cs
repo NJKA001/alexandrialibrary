@@ -19,11 +19,11 @@ namespace Gnosis.Alexandria.Repositories
 
         private readonly IContext context;
         private readonly ILogger logger;
-        private readonly IDictionary<Type, Func<IDataRecord, IEntity>> createEntityFunctions = new Dictionary<Type, Func<IDataRecord, IEntity>>();
-        private readonly IDictionary<Type, Func<IDataRecord, Guid, IChild>> createChildFunctions = new Dictionary<Type, Func<IDataRecord, Guid, IChild>>();
-        private readonly IDictionary<Type, Func<IDataRecord, IValue>> createValueFunctions = new Dictionary<Type, Func<IDataRecord, IValue>>();
-        private readonly IDictionary<Type, Dictionary<Type, Action<string, IEnumerable<IEntity>, IEnumerable<IChild>>>> addChildActions = new Dictionary<Type, Dictionary<Type, Action<string, IEnumerable<IEntity>, IEnumerable<IChild>>>>();
-        private readonly IDictionary<Type, Dictionary<Type, Action<string, IEnumerable<IEntity>, IEnumerable<IValue>>>> addValueActions = new Dictionary<Type, Dictionary<Type, Action<string, IEnumerable<IEntity>, IEnumerable<IValue>>>>();
+        private readonly IDictionary<Type, Func<IEntity>> entityConstructors = new Dictionary<Type, Func<IEntity>>();
+        private readonly IDictionary<Type, Func<IChild>> childConstructors = new Dictionary<Type, Func<IChild>>();
+        private readonly IDictionary<Type, Func<IValue>> valueConstructors = new Dictionary<Type, Func<IValue>>();
+        private readonly IDictionary<string, Action<IEntity, IChild>> addChildActions = new Dictionary<string, Action<IEntity, IChild>>();
+        private readonly IDictionary<string, Action<IEntity, IValue>> addValueActions = new Dictionary<string, Action<IEntity, IValue>>();
 
         protected IContext Context
         {
@@ -35,85 +35,79 @@ namespace Gnosis.Alexandria.Repositories
             get { return logger; }
         }
 
-        protected void MapCreateEntityFunction(Type type, Func<IDataRecord, IEntity> function)
+        protected void MapEntityConstructor(Type type, Func<IEntity> constructor)
         {
-            createEntityFunctions.Add(type, function);
+            entityConstructors.Add(type, constructor);
         }
 
-        protected void MapCreateChildFunction(Type type, Func<IDataRecord, Guid, IChild> function)
+        protected void MapChildConstructor(Type type, Func<IChild> constructor)
         {
-            createChildFunctions.Add(type, function);
+            childConstructors.Add(type, constructor);
         }
 
-        protected void MapCreateValueFunction(Type type, Func<IDataRecord, IValue> function)
+        protected void MapValueConstructor(Type type, Func<IValue> constructor)
         {
-            createValueFunctions.Add(type, function);
+            valueConstructors.Add(type, constructor);
         }
 
-        protected void MapAddChildAction(Type parentType, Type childType, Action<string, IEnumerable<IEntity>, IEnumerable<IChild>> action)
+        protected void MapAddChildAction(string childName, Action<IEntity, IChild> action)
         {
-            if (!addChildActions.ContainsKey(parentType))
-                addChildActions.Add(parentType, new Dictionary<Type, Action<string, IEnumerable<IEntity>, IEnumerable<IChild>>>());
-
-            addChildActions[parentType].Add(childType, action);
+            addChildActions.Add(childName, action);
         }
 
-        protected void MapAddValueAction(Type parentType, Type valueType, Action<string, IEnumerable<IEntity>, IEnumerable<IValue>> action)
+        protected void MapAddValueAction(string valueName, Action<IEntity, IValue> action)
         {
-            if (!addValueActions.ContainsKey(parentType))
-                addValueActions.Add(parentType, new Dictionary<Type, Action<string, IEnumerable<IEntity>, IEnumerable<IValue>>>());
-
-            addValueActions[parentType].Add(valueType, action);
+            addValueActions.Add(valueName, action);
         }
 
         public IEntity CreateEntity(Type type)
         {
-            if (createEntityFunctions.ContainsKey(type))
-            {
-                return createEntityFunctions[type](null);
-            }
+            if (!entityConstructors.ContainsKey(type))
+                throw new InvalidOperationException("No constructor mapped for entity type: " + type.Name);
 
-            return null;
+            var entity = entityConstructors[type]();
+            entity.Initialize(new EntityInitialState(Context, Logger));
+            return entity;
         }
 
         public IEntity CreateEntity(Type type, IDataRecord record)
         {
-            if (createEntityFunctions.ContainsKey(type))
-            {
-                return createEntityFunctions[type](record);
-            }
+            if (!entityConstructors.ContainsKey(type))
+                throw new InvalidOperationException("No constructor mapped for entity type: " + type.Name);
 
-            return null;
+            var entity = entityConstructors[type]();
+            entity.Initialize(new EntityInitialState(Context, Logger, record));
+            return entity;
         }
 
         public IChild CreateChild(Type type, Guid parent)
         {
-            if (createChildFunctions.ContainsKey(type))
-            {
-                return createChildFunctions[type](null, parent);
-            }
+            if (!childConstructors.ContainsKey(type))
+                throw new InvalidOperationException("No constructor mapped for child type: " + type.Name);
 
-            return null;
+            var child = childConstructors[type]();
+            child.Initialize(new EntityInitialState(Context, Logger, parent));
+            return child;
         }
 
         public IChild CreateChild(Type type, IDataRecord record)
         {
-            if (createChildFunctions.ContainsKey(type))
-            {
-                return createChildFunctions[type](record, Guid.Empty);
-            }
+            if (!childConstructors.ContainsKey(type))
+                throw new InvalidOperationException("No constructor mapped for child type: " + type.Name);
 
-            return null;
+            var child = childConstructors[type]();
+            child.Initialize(new EntityInitialState(Context, Logger, record));
+            return child;
         }
 
         public IValue CreateValue(Type type, IDataRecord record)
         {
-            if (createValueFunctions.ContainsKey(type))
-            {
-                return createValueFunctions[type](record);
-            }
+            if (!valueConstructors.ContainsKey(type))
+                throw new InvalidOperationException("No constructor mapped for value type: " + type.Name);
 
-            return null;
+            var value = valueConstructors[type]();
+            value.Initialize(new ValueInitialState(record));
+            return value;
         }
 
         public T CreateEntity<T>()
@@ -146,24 +140,28 @@ namespace Gnosis.Alexandria.Repositories
 
         public void AddChildren(Type parentType, Type childType, string childName, IEnumerable<IEntity> parents, IEnumerable<IChild> children)
         {
-            if (addChildActions.ContainsKey(parentType))
+            if (!addChildActions.ContainsKey(childName))
+                throw new InvalidOperationException("No add action mapped for child name: " + childName);
+            
+            foreach (var parent in parents)
             {
-                var map = addChildActions[parentType];
-                if (map.ContainsKey(childType))
+                foreach (var child in children.Where(x => x.Parent == parent.Id).OrderBy(x => x.Sequence))
                 {
-                    map[childType](childName, parents, children);
+                    addChildActions[childName](parent, child);
                 }
             }
         }
 
         public void AddValues(Type parentType, Type valueType, string valueName, IEnumerable<IEntity> parents, IEnumerable<IValue> values)
         {
-            if (addValueActions.ContainsKey(parentType))
+            if (!addValueActions.ContainsKey(valueName))
+                throw new InvalidOperationException("No add action mapped for value name: " + valueName);
+
+            foreach (var parent in parents)
             {
-                var map = addValueActions[parentType];
-                if (map.ContainsKey(valueType))
+                foreach (var value in values.Where(x => x.Parent == parent.Id).OrderBy(x => x.Sequence))
                 {
-                    map[valueType](valueName, parents, values);
+                    addValueActions[valueName](parent, value);
                 }
             }
         }

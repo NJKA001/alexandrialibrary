@@ -11,29 +11,22 @@ namespace Gnosis.Alexandria.Models.Feeds
     public class FeedItem
         : ChildBase, IFeedItem
     {
-        /*
-        public FeedItem(IContext context, Guid parent)
-            : base(context, parent)
+        public FeedItem()
         {
+            AddInitializer("Title", x => this.title = x.ToString());
+            AddInitializer("TitleMediaType", x => this.titleMediaType = x.ToString());
+            AddInitializer("Authors", x => this.authors = x.ToString());
+            AddInitializer("Contributors", x => this.contributors = x.ToString());
+            AddInitializer("PublishedDate", x => this.publishedDate = x.ToDateTime());
+            AddInitializer("Copyright", x => this.copyright = x.ToString());
+            AddInitializer("Summary", x => this.summary = x.ToString());
+            AddInitializer("Content", x => this.content = x.ToString());
+            AddInitializer("ContentMediaType", x => this.contentMediaType = x.ToString());
+            AddInitializer("ContentLocation", x => this.contentLocation = x.ToUri());
+            AddInitializer("UpdatedDate", x => this.updatedDate = x.ToDateTime());
+            AddInitializer("FeedItemIdentifier", x => this.feedItemIdentifier = x.ToString());
         }
 
-        public FeedItem(IContext context, Guid id, Guid parent, DateTime timeStamp, string title, string titleMediaType, string authors, string contributors, DateTime publishedDate, string copyright, string summary, string content, string contentMediaType, Uri contentLocation, DateTime updatedDate, string feedItemIdentifier)
-            : base(context, id, timeStamp, parent)
-        {
-            this.title = title;
-            this.titleMediaType = titleMediaType;
-            this.authors = authors;
-            this.contributors = contributors;
-            this.publishedDate = publishedDate;
-            this.copyright = copyright;
-            this.summary = summary;
-            this.content = content;
-            this.contentMediaType = contentMediaType;
-            this.contentLocation = contentLocation;
-            this.updatedDate = updatedDate;
-            this.feedItemIdentifier = feedItemIdentifier;
-        }
-        */
         private string title = string.Empty;
         private string titleMediaType = "text/plain";
         private string authors = string.Empty;

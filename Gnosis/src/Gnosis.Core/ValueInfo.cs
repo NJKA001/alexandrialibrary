@@ -13,7 +13,7 @@ namespace Gnosis.Core
             this.parent = parent;
             this.property = property;
             this.type = valueType;
-            this.name = string.Format("{0}_{1}", parent.Name, valueType.GetNormalizedName());
+            this.name = string.Format("{0}_{1}", parent.Name, property.Name);
 
             MapTypes(valueType);
         }

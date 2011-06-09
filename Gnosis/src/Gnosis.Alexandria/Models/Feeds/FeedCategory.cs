@@ -12,15 +12,18 @@ namespace Gnosis.Alexandria.Models.Feeds
     {
         public FeedCategory()
         {
+            AddInitializer("Scheme", x => this.scheme = x.ToUri());
+            AddInitializer("Name", x => this.name = x.ToString());
+            AddInitializer("Label", x => this.label = x.ToString());
         }
 
-        public FeedCategory(Guid parent, uint sequence, Uri scheme, string name, string label)
+        public FeedCategory(Guid parent, Uri scheme, string name, string label)
         {
             AddInitializer("Scheme", x => this.scheme = scheme);
             AddInitializer("Name", x => this.name = name);
             AddInitializer("Label", x => this.label = label);
 
-            Initialize(parent, sequence);
+            Initialize(parent);
         }
 
         private Uri scheme;

@@ -57,7 +57,7 @@ namespace Gnosis.Alexandria.Models
             this.parent = state.Parent;
             this.sequence = state.Sequence;
 
-            Initialize(state);
+            base.Initialize(state);
         }
 
         public override void Save(DateTime timeStamp)

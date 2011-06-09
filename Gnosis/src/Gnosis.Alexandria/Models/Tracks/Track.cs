@@ -23,72 +23,31 @@ namespace Gnosis.Alexandria.Models.Tracks
             AddInitializer("AlbumSubtitle", x => this.albumSubtitle = x.ToString());
             AddInitializer("Artists", x => this.artists = x.ToString());
             AddInitializer("ArtistsSort", x => this.artistsSort = x.ToString());
+            AddInitializer("AlbumArtists", x => this.albumArtists = x.ToString());
+            AddInitializer("Composers", x => this.composers = x.ToString());
+            AddInitializer("Conductors", x => this.conductors = x.ToString());
+            AddInitializer("Genres", x => this.genres = x.ToString());
+            AddInitializer("Moods", x => this.moods = x.ToString());
+            AddInitializer("Languages", x => this.languages = x.ToString());
+            AddInitializer("RecordingDate", x => this.recordingDate = x.ToDateTime());
+            AddInitializer("ReleaseDate", x => this.releaseDate = x.ToDateTime());
+            AddInitializer("OriginalTitle", x => this.originalTitle = x.ToString());
+            AddInitializer("OriginalReleaseDate", x => this.originalReleaseDate = x.ToDateTime());
+            AddInitializer("TrackNumber", x => this.trackNumber = x.ToUInt32());
+            AddInitializer("TrackCount", x => this.trackCount = x.ToUInt32());
+            AddInitializer("DiscNumber", x => this.discNumber = x.ToUInt32());
+            AddInitializer("DiscCount", x => this.discCount = x.ToUInt32());
+            AddInitializer("Duration", x => this.duration = x.ToTimeSpan());
+            AddInitializer("BeatsPerMinute", x => this.beatsPerMinute = x.ToUInt32());
+            AddInitializer("PlayCount", x => this.playCount = x.ToUInt64());
+            AddInitializer("PlaylistDelay", x => this.playlistDelay = x.ToTimeSpan());
+            AddInitializer("OriginalFileName", x => this.originalFileName = x.ToString());
+            AddInitializer("EncodingDate", x => this.encodingDate = x.ToDateTime());
+            AddInitializer("TaggingDate", x => this.taggingDate = x.ToDateTime());
+            AddInitializer("Copyright", x => this.copyright = x.ToString());
+            AddInitializer("Publisher", x => this.publisher = x.ToString());
+            AddInitializer("InternationalStandardRecordingCode", x => this.internationalStandardRecordingCode = x.ToString());
         }
-
-        /*
-        public Track(IContext context, Guid id, DateTime timeStamp, 
-            Uri location, string mediaType, string title, string titleSort, string subtitle, string grouping, string comment, 
-            string album, string albumSort, string albumSubtitle, string artists, string artistsSort, string albumArtists, 
-            string composers, string conductors, string genres, string moods, string languages, DateTime recordingDate, DateTime releaseDate,
-            string originalTitle, DateTime originalReleaseDate, uint trackNumber, uint trackCount, uint discNumber, uint discCount,
-            TimeSpan duration, uint beatsPerMinute, ulong playCount, TimeSpan playlistDelay, string originalFileName,
-            DateTime encodingDate, DateTime taggingDate, string copyright, string publisher, string internationalStandardRecordingCode)
-            : base(context, id, timeStamp)
-        {
-            this.location = location;
-            this.mediaType = mediaType;
-            this.title = title;
-            this.titleSort = titleSort;
-            this.subtitle = subtitle;
-            this.grouping = grouping;
-            this.comment = comment;
-            this.album = album;
-            this.albumSort = albumSort;
-            this.albumSubtitle = albumSubtitle;
-            this.artists = artists;
-            this.artistsSort = artistsSort;
-            this.albumArtists = albumArtists;
-            this.composers = composers;
-            this.conductors = conductors;
-            this.genres = genres;
-            this.moods = moods;
-            this.languages = languages;
-            this.recordingDate = recordingDate;
-            this.releaseDate = releaseDate;
-            this.originalTitle = originalTitle;
-            this.originalReleaseDate = originalReleaseDate;
-            this.trackNumber = trackNumber;
-            this.trackCount = trackCount;
-            this.discNumber = discNumber;
-            this.discCount = discCount;
-            this.duration = duration;
-            this.beatsPerMinute = beatsPerMinute;
-            this.playCount = playCount;
-            this.playlistDelay = playlistDelay;
-            this.originalFileName = originalFileName;
-            this.encodingDate = encodingDate;
-            this.taggingDate = taggingDate;
-            this.copyright = copyright;
-            this.publisher = publisher;
-            this.internationalStandardRecordingCode = internationalStandardRecordingCode;
-
-            this.pictures = new ObservableCollection<ITrackPicture>();
-            this.lyrics = new ObservableCollection<ITrackUnsynchronizedLyrics>();
-            this.synchronizedLyrics = new ObservableCollection<ITrackSynchronizedLyrics>();
-            this.identifiers = new ObservableCollection<ITrackIdentifier>();
-            this.ratings = new ObservableCollection<ITrackRating>();
-            this.links = new ObservableCollection<ITrackLink>();
-            this.metadata = new ObservableCollection<ITrackMetadata>();
-
-            this.titleHashCodes = new ObservableCollection<IHashCode>();
-            this.albumHashCodes = new ObservableCollection<IHashCode>();
-            this.artistHashCodes = new ObservableCollection<IHashCode>();
-            this.albumArtistHashCodes = new ObservableCollection<IHashCode>();
-            this.composerHashCodes = new ObservableCollection<IHashCode>();
-            this.conductorHashCodes = new ObservableCollection<IHashCode>();
-            this.originalTitleHashCodes = new ObservableCollection<IHashCode>();
-        }
-        */
 
         private Uri location;
         private string mediaType = "audio/unknown";

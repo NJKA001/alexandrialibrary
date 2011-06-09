@@ -11,6 +11,25 @@ namespace Gnosis.Alexandria.Models.Feeds
     public class Feed
         : EntityBase, IFeed
     {
+        public Feed()
+        {
+            AddInitializer("Location", x => this.location = x.ToUri());
+            AddInitializer("MediaType", x => this.mediaType = x.ToString());
+            AddInitializer("Title", x => this.title = x.ToString());
+            AddInitializer("Authors", x => this.authors = x.ToString());
+            AddInitializer("Contributors", x => this.contributors = x.ToString());
+            AddInitializer("Description", x => this.description = x.ToString());
+            AddInitializer("Language", x => this.language = x.ToString());
+            AddInitializer("OriginalLocation", x => this.originalLocation = x.ToUri());
+            AddInitializer("Copyright", x => this.copyright = x.ToString());
+            AddInitializer("PublishedDate", x => this.publishedDate = x.ToDateTime());
+            AddInitializer("UpdatedDate", x => this.updatedDate = x.ToDateTime());
+            AddInitializer("Generator", x => this.generator = x.ToString());
+            AddInitializer("ImagePath", x => this.imagePath = x.ToUri());
+            AddInitializer("IconPath", x => this.iconPath = x.ToUri());
+            AddInitializer("FeedIdentifier", x => this.feedIdentifier = x.ToString());
+        }
+
         private Uri location;
         private string mediaType;
         private string title;
