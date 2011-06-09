@@ -91,10 +91,10 @@ namespace Gnosis.Alexandria.Views
             item2.UpdatedDate = new DateTime(2011, 6, 5);
             item2.Title = "NBA Finals Preview (Part 2)";
             item2.TitleMediaType = "text/plain";
-            item2.AddCategory(new Models.Feeds.FeedCategory(item.Id, UriExtensions.EmptyUri, "Basketball", "Basketball"));
-            item2.AddLink(new Models.Feeds.FeedLink(item.Id, "self", new Uri("http://espn.go.com/espnradio/media/xyz2.mp3"), "audio/mpeg", 0, "en-us"));
-            item2.AddMetadatum(new Models.Feeds.FeedMetadata(item.Id, "text/plain", UriExtensions.EmptyUri, "rating", "4/5"));
-            item2.AddMetadatum(new Models.Feeds.FeedMetadata(item.Id, "application/xml", UriExtensions.EmptyUri, "rating", "<rating><score>4</score><max>5</max></rating>"));
+            item2.AddCategory(new Models.Feeds.FeedCategory(item2.Id, UriExtensions.EmptyUri, "Basketball", "Basketball"));
+            item2.AddLink(new Models.Feeds.FeedLink(item2.Id, "self", new Uri("http://espn.go.com/espnradio/media/xyz2.mp3"), "audio/mpeg", 0, "en-us"));
+            item2.AddMetadatum(new Models.Feeds.FeedMetadata(item2.Id, "text/plain", UriExtensions.EmptyUri, "rating", "4/5"));
+            item2.AddMetadatum(new Models.Feeds.FeedMetadata(item2.Id, "application/xml", UriExtensions.EmptyUri, "rating", "<rating><score>4</score><max>5</max></rating>"));
             feed.AddItem(item2);
 
             return feed;

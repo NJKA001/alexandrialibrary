@@ -26,7 +26,7 @@ namespace Gnosis.Core.Batches
                 {
                     var idParameterName = builder.GetParameterName();
                     builder.AddParameter(idParameterName, value.Id);
-                    var whereClause = string.Format("{0}.Id = {3}", valueInfo.Name, idParameterName);
+                    var whereClause = string.Format("{0}.{1} = {2}", valueInfo.Name, valueInfo.Identifer.Name, idParameterName);
                     var statement = new DeleteStatement(valueInfo.Name, whereClause);
                     builder.AddStatement(statement);
                 }
@@ -42,7 +42,7 @@ namespace Gnosis.Core.Batches
                 {
                     var idParameterName = builder.GetParameterName();
                     builder.AddParameter(idParameterName, child.Id);
-                    var whereClause = string.Format("{0}.Id = {3}", childInfo.Name, idParameterName);
+                    var whereClause = string.Format("{0}.{1} = {2}", childInfo.Name, childInfo.Identifier.Name, idParameterName);
                     var statement = new DeleteStatement(childInfo.Name, whereClause);
                     builder.AddStatement(statement);
 
@@ -61,7 +61,7 @@ namespace Gnosis.Core.Batches
 
             var idParameterName = builder.GetParameterName();
             builder.AddParameter(idParameterName, entity.Id);
-            var whereClause = string.Format("{0}.Id = {1}", entityInfo.Name, idParameterName);
+            var whereClause = string.Format("{0}.{1} = {2}", entityInfo.Name, entityInfo.Identifier.Name, idParameterName);
             var statement = new DeleteStatement(entityInfo.Name, whereClause);
 
             builder.AddStatement(statement);
@@ -76,7 +76,7 @@ namespace Gnosis.Core.Batches
 
             var idParameterName = builder.GetParameterName();
             builder.AddParameter(idParameterName, child.Id);
-            var whereClause = string.Format("{0}.Id = {1}", childInfo.Name, idParameterName);
+            var whereClause = string.Format("{0}.{1} = {2}", childInfo.Name, childInfo.Identifier.Name, idParameterName);
             var statement = new DeleteStatement(childInfo.Name, whereClause);
 
             builder.AddStatement(statement);
