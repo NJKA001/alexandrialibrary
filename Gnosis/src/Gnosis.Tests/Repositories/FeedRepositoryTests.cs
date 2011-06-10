@@ -19,7 +19,7 @@ namespace Gnosis.Tests.Repositories
     {
         private IContext context;
         private ILogger logger;
-        private IRepository<IFeed> repository;
+        private IFeedRepository repository;
         private IDbConnection connection;
 
         private readonly Uri feedLocation = new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045");
@@ -155,13 +155,13 @@ namespace Gnosis.Tests.Repositories
 
             Assert.IsFalse(feed.IsNew());
 
-            var createdFeed = repository.Lookup(new LookupByLocation(feedLocation));
+            var createdFeed = repository.LookupByLocation(feedLocation);
 
             Assert.IsNotNull(createdFeed);
 
             repository.Delete(new List<IFeed> { feed });
 
-            var deletedFeed = repository.Lookup(new LookupByLocation(feedLocation));
+            var deletedFeed = repository.LookupByLocation(feedLocation);
 
             Assert.IsNull(deletedFeed);
         }

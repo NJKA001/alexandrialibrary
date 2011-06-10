@@ -7,7 +7,17 @@ namespace Gnosis.Core.Commands
 {
     public class CreateIndexStatement : IStatement
     {
-        public CreateIndexStatement(string tableName, string name, bool isUnique, IEnumerable<string> columns)
+        public CreateIndexStatement(ILookup lookup)
+            : this(lookup.SourceName, lookup.Name, true, lookup.Columns)
+        {
+        }
+
+        public CreateIndexStatement(ISearch search)
+            : this(search.SourceName, search.Name, false, search.Columns)
+        {
+        }
+
+        private CreateIndexStatement(string tableName, string name, bool isUnique, IEnumerable<string> columns)
         {
             var indexType = isUnique ? "unique index" : "index";
 

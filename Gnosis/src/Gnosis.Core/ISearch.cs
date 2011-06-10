@@ -8,11 +8,9 @@ namespace Gnosis.Core
     public interface ISearch
     {
         string Name { get; }
-        Type BaseType { get; }
-        string WhereClause { get; }
-        string OrderByClause { get; }
+        string SourceName { get; }
         bool IsDefault { get; }
         IEnumerable<string> Columns { get; }
-        IFilter GetFilter();
+        IFilter GetFilter(IDictionary<string, object> parameters);
     }
 }

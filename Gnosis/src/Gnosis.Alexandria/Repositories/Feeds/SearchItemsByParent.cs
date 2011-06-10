@@ -8,10 +8,10 @@ using Gnosis.Alexandria.Models.Feeds;
 namespace Gnosis.Alexandria.Repositories.Feeds
 {
     public class SearchItemsByParent
-        : SearchBase<IFeedItem>
+        : EntitySearchBase<IFeedItem>
     {
-        public SearchItemsByParent(Guid parent)
-            : base("SearchItemsByParent", "FeedItem.Parent = @Parent", "FeedItem.Sequence", new List<string> { "Parent ASC", "Sequence ASC" }, new Dictionary<string, object> { { "@Parent", parent } })
+        public SearchItemsByParent()
+            : base("FeedItem.Parent = @Parent", x => x.Parent)
         {
         }
     }

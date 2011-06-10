@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core;
 using Gnosis.Alexandria.Models.Feeds;
 
 namespace Gnosis.Alexandria.Repositories.Feeds
 {
-    public class SearchByAuthors
-        : EntitySearchBase<IFeed>
+    public interface IFeedRepository
+        : IRepository<IFeed>
     {
-        public SearchByAuthors()
-            : base("Feed.Authors LIKE @Authors", x => x.Authors)
-        {
-        }
+        IFeed LookupByLocation(Uri location);
+        IEnumerable<IFeed> SearchByAuthors(string authors);
     }
 }

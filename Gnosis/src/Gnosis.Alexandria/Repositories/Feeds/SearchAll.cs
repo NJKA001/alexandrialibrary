@@ -8,10 +8,10 @@ using Gnosis.Alexandria.Models.Feeds;
 namespace Gnosis.Alexandria.Repositories.Feeds
 {
     public class SearchAll
-        : SearchBase<IFeed>
+        : EntitySearchBase<IFeed>
     {
         public SearchAll()
-            : base("SearchAll", string.Empty, "Authors ASC, UpdatedDate ASC, Title ASC", new List<string> { "Authors", "UpdatedDate", "Title" }, new Dictionary<string, object>(), true)
+            : base(x => x.Authors, x => x.UpdatedDate, x => x.Title)
         {
         }
     }

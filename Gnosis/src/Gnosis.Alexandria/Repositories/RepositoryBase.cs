@@ -98,9 +98,9 @@ namespace Gnosis.Alexandria.Repositories
             return Select(new Filter(whereClause, parameters)).FirstOrDefault();
         }
 
-        public T Lookup(ILookup lookup)
+        public T Lookup(ILookup lookup, IDictionary<string, object> parameters)
         {
-            return Select(lookup.GetFilter()).FirstOrDefault();
+            return Select(lookup.GetFilter(parameters)).FirstOrDefault();
         }
 
         public IEnumerable<T> Search()
@@ -109,12 +109,12 @@ namespace Gnosis.Alexandria.Repositories
             if (search == null)
                 throw new InvalidOperationException("No default search defined for this repository");
 
-            return Select(search.GetFilter());
+            return Select(search.GetFilter(new Dictionary<string, object>()));
         }
 
-        public IEnumerable<T> Search(ISearch search)
+        public IEnumerable<T> Search(ISearch search, IDictionary<string, object> parameters)
         {
-            return Select(search.GetFilter());
+            return Select(search.GetFilter(parameters));
         }
 
         public virtual void Initialize()

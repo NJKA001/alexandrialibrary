@@ -10,8 +10,8 @@ namespace Gnosis.Alexandria.Repositories.Feeds
     public class LookupByLocation :
         LookupBase<IFeed>
     {
-        public LookupByLocation(Uri location)
-            : base("LookupByLocation", "Feed.Location = @Location", new List<string> { "Location" }, new Dictionary<string, object> { { "@Location", location }})
+        public LookupByLocation()
+            : base("Feed.Location = @Location", x => x.Location)
         {
         }
     }

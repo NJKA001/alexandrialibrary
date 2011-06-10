@@ -145,15 +145,21 @@
     <Compile Include="Repositories\FactoryBase.cs" />
     <Compile Include="Repositories\Feeds\FeedFactory.cs" />
     <Compile Include="Repositories\Feeds\FeedRepository.cs" />
+    <Compile Include="Repositories\Feeds\IFeedRepository.cs" />
     <Compile Include="Repositories\Feeds\LookupByLocation.cs" />
     <Compile Include="Repositories\Feeds\SearchAll.cs" />
     <Compile Include="Repositories\Feeds\SearchByAuthors.cs" />
     <Compile Include="Repositories\Feeds\SearchByTitle.cs" />
     <Compile Include="Repositories\Feeds\SearchCategoriesByParent.cs" />
+    <Compile Include="Repositories\Feeds\SearchItemCategoriesByParent.cs" />
+    <Compile Include="Repositories\Feeds\SearchItemLinksByParent.cs" />
+    <Compile Include="Repositories\Feeds\SearchItemMetadataByParent.cs" />
     <Compile Include="Repositories\Feeds\SearchItemsByParent.cs" />
+    <Compile Include="Repositories\Feeds\SearchLinksByParent.cs" />
+    <Compile Include="Repositories\Feeds\SearchMetadataByParent.cs" />
     <Compile Include="Repositories\LookupBase.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
-    <Compile Include="Repositories\SearchBase.cs" />
+    <Compile Include="Repositories\EntitySearchBase.cs" />
     <Compile Include="Models\Tracks\ITrackSynchronizedLyrics.cs" />
     <Compile Include="Models\Tracks\ITrackUnsynchronizedLyrics.cs" />
     <Compile Include="Models\Tracks\TrackPictureType.cs" />
@@ -181,6 +187,7 @@
     <Compile Include="Repositories\Old\OldTrackRepository.cs" />
     <Compile Include="Repositories\Tracks\TrackFactory.cs" />
     <Compile Include="Repositories\Tracks\TrackRepository.cs" />
+    <Compile Include="Repositories\ValueSearchBase.cs" />
     <Compile Include="Views\MediaListView.xaml.cs">
       <DependentUpon>MediaListView.xaml</DependentUpon>
     </Compile>

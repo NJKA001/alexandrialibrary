@@ -8,9 +8,8 @@ namespace Gnosis.Core
     public interface ILookup
     {
         string Name { get; }
-        Type BaseType { get; }
-        string WhereClause { get; }
+        string SourceName { get; }
         IEnumerable<string> Columns { get; }
-        IFilter GetFilter();
+        IFilter GetFilter(IDictionary<string, object> parameters);
     }
 }

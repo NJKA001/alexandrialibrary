@@ -8,6 +8,11 @@ namespace Gnosis.Core
     public class Filter
         : IFilter
     {
+        public Filter(string whereClause, string orderByClause)
+            : this(whereClause, orderByClause, new Dictionary<string, object>())
+        {
+        }
+
         public Filter(string whereClause, IEnumerable<KeyValuePair<string, object>> parameters)
             : this(whereClause, string.Empty, parameters)
         {

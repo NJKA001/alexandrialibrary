@@ -81,6 +81,7 @@
     <Compile Include="IValueInitialState.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="PersistenceIgnoreAttribute.cs" />
+    <Compile Include="ReflectionHelper.cs" />
     <Compile Include="ValueInfo.cs" />
     <Compile Include="Queries\IQuery.cs" />
     <Compile Include="Queries\Query.cs" />

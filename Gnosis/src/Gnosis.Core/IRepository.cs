@@ -9,9 +9,9 @@ namespace Gnosis.Core
         where T : IEntity
     {
         T Lookup(Guid id);
-        T Lookup(ILookup lookup);
+        T Lookup(ILookup lookup, IDictionary<string, object> parameters);
         IEnumerable<T> Search();
-        IEnumerable<T> Search(ISearch search);
+        IEnumerable<T> Search(ISearch search, IDictionary<string, object> parameters);
 
         void Initialize();
         void Save(IEnumerable<T> items);

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Linq.Expressions;
+using System.Reflection;
 
 using Gnosis.Core;
 
@@ -9,33 +9,32 @@ namespace Gnosis.Alexandria.Repositories
 {
     public abstract class LookupBase<T>
         : ILookup
+        where T : IEntity
     {
-        protected LookupBase(string name, string whereClause, IEnumerable<string> columns, IDictionary<string, object> parameters)
+        protected LookupBase(string whereClause, params Expression<Func<T, object>>[] columns)
         {
-            this.name = name;
+            this.entityInfo = new EntityInfo(typeof(T));
             this.whereClause = whereClause;
-            this.columns = columns;
-            this.parameters = parameters;
+
+            foreach (var column in columns)
+            {
+                var columnName = column.AsProperty().Name;
+                this.columns.Add(columnName);
+            }
         }
 
-        private readonly string name;
+        private readonly EntityInfo entityInfo;
         private readonly string whereClause;
-        private readonly IEnumerable<string> columns;
-        private readonly IDictionary<string, object> parameters;
+        private readonly IList<string> columns = new List<string>();
 
         public string Name
         {
-            get { return name; }
+            get { return string.Format("{0}_{1}", SourceName, this.GetType().Name); }
         }
 
-        public Type BaseType
+        public string SourceName
         {
-            get { return typeof(T); }
-        }
-
-        public string WhereClause
-        {
-            get { return whereClause; }
+            get { return entityInfo.Name; }
         }
 
         public IEnumerable<string> Columns
@@ -43,7 +42,7 @@ namespace Gnosis.Alexandria.Repositories
             get { return columns; }
         }
 
-        public IFilter GetFilter()
+        public IFilter GetFilter(IDictionary<string, object> parameters)
         {
             return new Filter(whereClause, string.Empty, parameters);
         }
