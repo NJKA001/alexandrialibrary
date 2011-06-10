@@ -48,7 +48,7 @@ namespace Gnosis.Alexandria.Models.Feeds
 
         private readonly IList<IFeedCategory> categories = new ObservableCollection<IFeedCategory>();
         private readonly IList<IFeedLink> links = new ObservableCollection<IFeedLink>();
-        private readonly IList<IFeedMetadata> metadata = new ObservableCollection<IFeedMetadata>();
+        private readonly IList<IFeedMetadatum> metadata = new ObservableCollection<IFeedMetadatum>();
         private readonly IList<IFeedItem> items = new ObservableCollection<IFeedItem>();
 
         public Uri Location
@@ -241,7 +241,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             get { return links; }
         }
 
-        public IEnumerable<IFeedMetadata> Metadata
+        public IEnumerable<IFeedMetadatum> Metadata
         {
             get { return metadata; }
         }
@@ -249,6 +249,11 @@ namespace Gnosis.Alexandria.Models.Feeds
         public IEnumerable<IFeedItem> Items
         {
             get { return items; }
+        }
+
+        public void AddCategory(Uri scheme, string name, string label)
+        {
+            AddCategory(new FeedCategory(this.Id, scheme, name, label));
         }
 
         public void AddCategory(IFeedCategory category)
@@ -261,6 +266,11 @@ namespace Gnosis.Alexandria.Models.Feeds
             RemoveValue(() => categories.Remove(category), category.Id, "Categories");
         }
 
+        public void AddLink(string relationship, Uri location, string mediaType, uint length, string language)
+        {
+            AddLink(new FeedLink(this.Id, relationship, location, mediaType, length, language));
+        }
+
         public void AddLink(IFeedLink link)
         {
             AddValue(() => links.Add(link), link, "Links");
@@ -271,12 +281,17 @@ namespace Gnosis.Alexandria.Models.Feeds
             RemoveValue(() => links.Remove(link), link.Id, "Links");
         }
 
-        public void AddMetadatum(IFeedMetadata metadatum)
+        public void AddMetadatum(string mediaType, Uri scheme, string name, string content)
+        {
+            AddMetadatum(new FeedMetadatum(this.Id, mediaType, scheme, name, content));
+        }
+
+        public void AddMetadatum(IFeedMetadatum metadatum)
         {
             AddValue(() => metadata.Add(metadatum), metadatum, "Metadata");
         }
 
-        public void RemoveMetadatum(IFeedMetadata metadatum)
+        public void RemoveMetadatum(IFeedMetadatum metadatum)
         {
             RemoveValue(() => metadata.Remove(metadatum), metadatum.Id, "Metadata");
         }

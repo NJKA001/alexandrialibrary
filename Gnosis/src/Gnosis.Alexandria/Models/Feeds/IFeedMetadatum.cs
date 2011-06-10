@@ -7,7 +7,7 @@ using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Models.Feeds
 {
-    public interface IFeedMetadata : IValue
+    public interface IFeedMetadatum : IValue
     {
         string MediaType { get; }
         Uri Scheme { get; }

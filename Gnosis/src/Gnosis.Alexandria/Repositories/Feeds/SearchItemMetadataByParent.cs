@@ -9,7 +9,7 @@ using Gnosis.Alexandria.Models.Feeds;
 namespace Gnosis.Alexandria.Repositories.Feeds
 {
     public class SearchItemMetadataByParent
-        : ValueSearchBase<IFeedItem, IFeedMetadata>
+        : ValueSearchBase<IFeedItem, IFeedMetadatum>
     {
         public SearchItemMetadataByParent()
             : base("FeedItem_Metadata.Parent = @Parent",

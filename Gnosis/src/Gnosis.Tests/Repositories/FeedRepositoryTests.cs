@@ -45,13 +45,13 @@ namespace Gnosis.Tests.Repositories
             feed.Title = "BS Report";
             feed.IconPath = new Uri("http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg");
             feed.ImagePath = new Uri("http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg");
-            feed.AddCategory(new FeedCategory(feed.Id, UriExtensions.EmptyUri, "Sports", "Sports"));
-            feed.AddCategory(new FeedCategory(feed.Id, UriExtensions.EmptyUri, "Comedy", "Comedy"));
-            feed.AddLink(new FeedLink(feed.Id, "self", new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045"), "application/xml+rss", 0, "en-us"));
-            feed.AddLink(new FeedLink(feed.Id, "alt", new Uri("http://espn.go.com/espnradio"), "text/html", 0, "en-us"));
-            feed.AddLink(new FeedLink(feed.Id, "alt", new Uri("http://espn.go.com/epsnradio?lang=es-mx"), "text/html", 0, "es-mx"));
-            feed.AddMetadatum(new FeedMetadata(feed.Id, "text/plain", UriExtensions.EmptyUri, "tag", "Bill Simmons"));
-            feed.AddMetadatum(new FeedMetadata(feed.Id, "application/xml", UriExtensions.EmptyUri, "marquee", "<marquee><title>BS Report</title><subtitle>with Bill Simmons</subtitle></marquee>"));
+            feed.AddCategory(UriExtensions.EmptyUri, "Sports", "Sports");
+            feed.AddCategory(UriExtensions.EmptyUri, "Comedy", "Comedy");
+            feed.AddLink("self", new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045"), "application/xml+rss", 0, "en-us");
+            feed.AddLink("alt", new Uri("http://espn.go.com/espnradio"), "text/html", 0, "en-us");
+            feed.AddLink("alt", new Uri("http://espn.go.com/epsnradio?lang=es-mx"), "text/html", 0, "es-mx");
+            feed.AddMetadatum("text/plain", UriExtensions.EmptyUri, "tag", "Bill Simmons");
+            feed.AddMetadatum("application/xml", UriExtensions.EmptyUri, "marquee", "<marquee><title>BS Report</title><subtitle>with Bill Simmons</subtitle></marquee>");
 
             var item = new FeedItem();
             item.Initialize(new EntityInitialState(context, logger, feed.Id, 0));
@@ -64,10 +64,9 @@ namespace Gnosis.Tests.Repositories
             item.UpdatedDate = new DateTime(2011, 6, 5);
             item.Title = "NBA Finals Preview (Part 1)";
             item.TitleMediaType = "text/plain";
-            //item.AddCategory(new Models.Feeds.FeedCategory(item.Id, UriExtensions.EmptyUri, "Basketball", "Basketball"));
-            item.AddLink(new FeedLink(item.Id, "self", new Uri("http://espn.go.com/espnradio/media/xyz1.mp3"), "audio/mpeg", 0, "en-us"));
-            item.AddMetadatum(new FeedMetadata(item.Id, "text/plain", UriExtensions.EmptyUri, "rating", "4/5"));
-            item.AddMetadatum(new FeedMetadata(item.Id, "application/xml", UriExtensions.EmptyUri, "rating", "<rating><score>4</score><max>5</max></rating>"));
+            item.AddLink("self", new Uri("http://espn.go.com/espnradio/media/xyz1.mp3"), "audio/mpeg", 0, "en-us");
+            item.AddMetadatum("text/plain", UriExtensions.EmptyUri, "rating", "4/5");
+            item.AddMetadatum("application/xml", UriExtensions.EmptyUri, "rating", "<rating><score>4</score><max>5</max></rating>");
             feed.AddItem(item);
 
             var item2 = new FeedItem();
@@ -81,10 +80,10 @@ namespace Gnosis.Tests.Repositories
             item2.UpdatedDate = new DateTime(2011, 6, 5);
             item2.Title = "NBA Finals Preview (Part 2)";
             item2.TitleMediaType = "text/plain";
-            item2.AddCategory(new FeedCategory(item2.Id, UriExtensions.EmptyUri, "Basketball", "Basketball"));
-            item2.AddLink(new FeedLink(item2.Id, "self", new Uri("http://espn.go.com/espnradio/media/xyz2.mp3"), "audio/mpeg", 0, "en-us"));
-            item2.AddMetadatum(new FeedMetadata(item2.Id, "text/plain", UriExtensions.EmptyUri, "rating", "4/5"));
-            item2.AddMetadatum(new FeedMetadata(item2.Id, "application/xml", UriExtensions.EmptyUri, "rating", "<rating><score>4</score><max>5</max></rating>"));
+            item2.AddCategory(UriExtensions.EmptyUri, "Basketball", "Basketball");
+            item2.AddLink("self", new Uri("http://espn.go.com/espnradio/media/xyz2.mp3"), "audio/mpeg", 0, "en-us");
+            item2.AddMetadatum("text/plain", UriExtensions.EmptyUri, "rating", "4/5");
+            item2.AddMetadatum("application/xml", UriExtensions.EmptyUri, "rating", "<rating><score>4</score><max>5</max></rating>");
             feed.AddItem(item2);
 
             return feed;
@@ -102,9 +101,8 @@ namespace Gnosis.Tests.Repositories
 
             feed.RemoveItem(feed.Items.LastOrDefault());
             feed.Items.FirstOrDefault().RemoveMetadatum(feed.Items.FirstOrDefault().Metadata.FirstOrDefault());
-            feed.Items.FirstOrDefault().AddCategory(new FeedCategory(feed.Items.FirstOrDefault().Id, new Uri("http://example.com/scheme"), "Misc.", "Misc."));
-            feed.AddMetadatum(new FeedMetadata(feed.Id, "text/html", new Uri("http://other.com/1/different-scheme"), "review", "<html><body><p>This feed is awesome</p><p>I <b>love</b> it so much!</p></body></html>"));
-            //feedRepository.Save(new List<Models.Feeds.IFeed> { feed });
+            feed.Items.FirstOrDefault().AddCategory(new Uri("http://example.com/scheme"), "Misc.", "Misc.");
+            feed.AddMetadatum("text/html", new Uri("http://other.com/1/different-scheme"), "review", "<html><body><p>This feed is awesome</p><p>I <b>love</b> it so much!</p></body></html>");
         }
 
         #endregion
@@ -188,6 +186,7 @@ namespace Gnosis.Tests.Repositories
             const string mediaType = "application/xml";
             var publishedDate = new DateTime(2011, 2, 13);
             var updatedDate = new DateTime(2011, 4, 27);
+            const string testCategoryName = "ABC Some Category";
 
             feed.Title = title;
             feed.Description = description;
@@ -208,9 +207,9 @@ namespace Gnosis.Tests.Repositories
             Assert.IsTrue(feed.IsChanged());
             Assert.IsFalse(feed.IsNew());
 
-            var category = new FeedCategory(id, new Uri("http://example.com/some-random-scheme/xyz"), "Test Name", "Test Label");
-            feed.AddCategory(category);
-            Assert.IsTrue(category.IsNew());
+            feed.AddCategory(new Uri("http://example.com/some-random-scheme/xyz"), testCategoryName, testCategoryName);
+            Assert.IsNotNull(feed.Categories.Where(x => x.Name == testCategoryName).FirstOrDefault());
+            Assert.IsTrue(feed.Categories.Where(x => x.Name == testCategoryName).FirstOrDefault().IsNew());
 
             var oldTimeStamp = feed.TimeStamp;
             repository.Save(new List<IFeed>{ feed});
@@ -234,7 +233,8 @@ namespace Gnosis.Tests.Repositories
             Assert.AreEqual(mediaType, changedFeed.MediaType);
             Assert.AreEqual(publishedDate, changedFeed.PublishedDate);
             Assert.AreEqual(updatedDate, changedFeed.UpdatedDate);
-            Assert.IsNotNull(changedFeed.Categories.Where(x => x.Name == "Test Name").FirstOrDefault());
+            Assert.IsNotNull(changedFeed.Categories.Where(x => x.Name == testCategoryName).FirstOrDefault());
+            Assert.IsFalse(changedFeed.Categories.Where(x => x.Name == testCategoryName).FirstOrDefault().IsNew());
             Assert.AreEqual(3, changedFeed.Categories.Count());
         }
     }

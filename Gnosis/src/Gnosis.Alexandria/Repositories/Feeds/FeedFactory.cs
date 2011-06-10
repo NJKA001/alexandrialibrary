@@ -19,14 +19,14 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             MapChildConstructor(typeof(IFeedItem), () => new FeedItem());
             MapValueConstructor(typeof(IFeedCategory), () => new FeedCategory());
             MapValueConstructor(typeof(IFeedLink), () => new FeedLink());
-            MapValueConstructor(typeof(IFeedMetadata), () => new FeedMetadata());
+            MapValueConstructor(typeof(IFeedMetadatum), () => new FeedMetadatum());
             MapAddChildAction("FeedItem", (parent, child) => ((IFeed)parent).AddItem(child as IFeedItem));
             MapAddValueAction("Feed_Categories", (parent, child) => ((IFeed)parent).AddCategory(child as IFeedCategory));
             MapAddValueAction("Feed_Links", (parent, child) => ((IFeed)parent).AddLink(child as IFeedLink));
-            MapAddValueAction("Feed_Metadata", (parent, child) => ((IFeed)parent).AddMetadatum(child as IFeedMetadata));
+            MapAddValueAction("Feed_Metadata", (parent, child) => ((IFeed)parent).AddMetadatum(child as IFeedMetadatum));
             MapAddValueAction("FeedItem_Categories", (parent, child) => ((IFeedItem)parent).AddCategory(child as IFeedCategory));
             MapAddValueAction("FeedItem_Links", (parent, child) => ((IFeedItem)parent).AddLink(child as IFeedLink));
-            MapAddValueAction("FeedItem_Metadata", (parent, child) => ((IFeedItem)parent).AddMetadatum(child as IFeedMetadata));
+            MapAddValueAction("FeedItem_Metadata", (parent, child) => ((IFeedItem)parent).AddMetadatum(child as IFeedMetadatum));
         }
     }
 }
