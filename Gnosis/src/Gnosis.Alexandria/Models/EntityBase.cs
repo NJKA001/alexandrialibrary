@@ -19,10 +19,10 @@ namespace Gnosis.Alexandria.Models
         private bool isNew;
         private bool isChanged;
         private bool isInitialized;
-        private readonly IList<IChild> children = new List<IChild>();
-        private readonly IList<IChild> removedChildren = new List<IChild>();
-        private readonly IList<IValue> values = new List<IValue>();
-        private readonly IList<IValue> removedValues = new List<IValue>();
+        private readonly IDictionary<Guid, IChild> children = new Dictionary<Guid, IChild>();
+        private readonly IDictionary<Guid, IChild> removedChildren = new Dictionary<Guid, IChild>();
+        private readonly IDictionary<Guid, IValue> values = new Dictionary<Guid, IValue>();
+        private readonly IDictionary<Guid, IValue> removedValues = new Dictionary<Guid, IValue>();
         private readonly IDictionary<string, Action<object>> initializers = new Dictionary<string, Action<object>>();
         private readonly IDictionary<string, Action<string, IDataRecord>> customInitializers = new Dictionary<string, Action<string, IDataRecord>>();
 
@@ -78,25 +78,29 @@ namespace Gnosis.Alexandria.Models
             if (!isInitialized)
                 throw new InvalidOperationException("Entity must be initialized before children can be added");
 
-            if (!children.Contains(child))
+            if (removedChildren.ContainsKey(child.Id))
+                removedChildren.Remove(child.Id);
+
+            if (!children.ContainsKey(child.Id))
             {
                 context.Invoke(action);
-                children.Add(child);
+                children.Add(child.Id, child);
                 OnPropertyChanged(propertyName);
             }
         }
 
-        protected void RemoveChild(Action action, IChild child, string propertyName)
+        protected void RemoveChild(Action action, Guid id, string propertyName)
         {
             if (!isInitialized)
                 throw new InvalidOperationException("Entity must be initialized before children can be removed");
 
-            if (children.Contains(child))
+            if (children.ContainsKey(id))
             {
+                var child = children[id];
                 context.Invoke(action);
                 child.Remove();
-                children.Remove(child);
-                removedChildren.Add(child);
+                children.Remove(id);
+                removedChildren.Add(id, child);
                 OnPropertyChanged(propertyName);
             }
         }
@@ -106,25 +110,29 @@ namespace Gnosis.Alexandria.Models
             if (!isInitialized)
                 throw new InvalidOperationException("Entity must be initialized before values can be added");
 
-            if (!values.Contains(value))
+            if (removedValues.ContainsKey(value.Id))
+                removedValues.Remove(value.Id);
+
+            if (!values.ContainsKey(value.Id))
             {
                 context.Invoke(action);
-                values.Add(value);
+                values.Add(value.Id, value);
                 OnPropertyChanged(propertyName);
             }
         }
 
-        protected void RemoveValue(Action action, IValue value, string propertyName)
+        protected void RemoveValue(Action action, Guid id, string propertyName)
         {
             if (!isInitialized)
                 throw new InvalidOperationException("Entity must be initialized before values can be removed");
 
-            if (values.Contains(value))
+            if (values.ContainsKey(id))
             {
+                var value = values[id];
                 context.Invoke(action);
                 value.Remove();
-                values.Remove(value);
-                removedValues.Add(value);
+                values.Remove(id);
+                removedValues.Add(id, value);
                 OnPropertyChanged(propertyName);
             }
         }
@@ -156,12 +164,12 @@ namespace Gnosis.Alexandria.Models
 
         public virtual IEnumerable<IChild> GetChildren(EntityInfo childInfo)
         {
-            return (removedChildren.Concat(children)).Where(x => childInfo.Type.IsAssignableFrom(x.GetType()));
+            return (removedChildren.Values.Concat(children.Values)).Where(x => childInfo.Type.IsAssignableFrom(x.GetType()));
         }
 
         public virtual IEnumerable<IValue> GetValues(ValueInfo valueInfo)
         {
-            return (removedValues.Concat(values)).Where(x => valueInfo.Type.IsAssignableFrom(x.GetType()));
+            return (removedValues.Values.Concat(values.Values)).Where(x => valueInfo.Type.IsAssignableFrom(x.GetType()));
         }
 
         public virtual void Initialize(IEntityInitialState state)

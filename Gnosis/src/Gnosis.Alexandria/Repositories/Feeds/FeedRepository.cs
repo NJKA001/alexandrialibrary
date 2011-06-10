@@ -26,6 +26,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             AddSearch(new SearchByAuthors(null));
             AddSearch(new SearchByTitle(null));
             AddSearch(new SearchAll());
+            AddSearch(new SearchItemsByParent(Guid.Empty));
         }
     }
 }

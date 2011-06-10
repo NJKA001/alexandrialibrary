@@ -170,6 +170,7 @@ namespace Gnosis.Tests.Repositories
         public void TestChangeFeed()
         {
             var feed = GetTestFeed();
+            var id = feed.Id;
 
             repository.Save(new List<IFeed> { feed });
 
@@ -177,15 +178,37 @@ namespace Gnosis.Tests.Repositories
             const string description = "Updated Description";
             const string copyright = "Copyright 2000";
             const string authors = "Tweedle Dee and Tweedle Dumb";
+            const string contributors = "Larry, Moe and Curly";
+            const string feedIdentifier = "1234WXYZ7890ABCD"; 
+            const string generator = "some-generator-name-XYZ";
+            const string iconPath = "http://example.com/icons/path.jpg";
+            const string imagePath = "http://exmaple.com/images/path.jpg";
+            const string language = "es-es";
+            const string location = "http://example.com/feeds/rss/example.xml";
+            const string mediaType = "application/xml";
+            var publishedDate = new DateTime(2011, 2, 13);
+            var updatedDate = new DateTime(2011, 4, 27);
 
             feed.Title = title;
             feed.Description = description;
             feed.Copyright = copyright;
             feed.Authors = authors;
+            feed.Contributors = contributors;
+            feed.FeedIdentifier = feedIdentifier;
+            feed.Generator = generator;
+            feed.IconPath = new Uri(iconPath);
+            feed.ImagePath = new Uri(imagePath);
+            feed.Language = language;
+            feed.Location = new Uri(location);
+            feed.MediaType = mediaType;
+            feed.OriginalLocation = new Uri(location);
+            feed.PublishedDate = publishedDate;
+            feed.UpdatedDate = updatedDate;
+
             Assert.IsTrue(feed.IsChanged());
             Assert.IsFalse(feed.IsNew());
 
-            var category = new FeedCategory(feed.Id, new Uri("http://example.com/some-random-scheme/xyz"), "Test Name", "Test Label");
+            var category = new FeedCategory(id, new Uri("http://example.com/some-random-scheme/xyz"), "Test Name", "Test Label");
             feed.AddCategory(category);
             Assert.IsTrue(category.IsNew());
 
@@ -195,12 +218,24 @@ namespace Gnosis.Tests.Repositories
             Assert.IsFalse(feed.IsChanged());
             Assert.AreNotEqual(oldTimeStamp, newTimeStamp);
             
-            var changedFeed = repository.Lookup(new LookupByLocation(feedLocation));
+            var changedFeed = repository.Lookup(id);
             Assert.IsNotNull(changedFeed);
             Assert.AreEqual(title, changedFeed.Title);
             Assert.AreEqual(description, changedFeed.Description);
             Assert.AreEqual(copyright, changedFeed.Copyright);
             Assert.AreEqual(authors, changedFeed.Authors);
+            Assert.AreEqual(contributors, changedFeed.Contributors);
+            Assert.AreEqual(feedIdentifier, changedFeed.FeedIdentifier);
+            Assert.AreEqual(generator, changedFeed.Generator);
+            Assert.AreEqual(iconPath, changedFeed.IconPath.ToString());
+            Assert.AreEqual(imagePath, changedFeed.ImagePath.ToString());
+            Assert.AreEqual(language, changedFeed.Language);
+            Assert.AreEqual(location, changedFeed.Location.ToString());
+            Assert.AreEqual(mediaType, changedFeed.MediaType);
+            Assert.AreEqual(publishedDate, changedFeed.PublishedDate);
+            Assert.AreEqual(updatedDate, changedFeed.UpdatedDate);
+            Assert.IsNotNull(changedFeed.Categories.Where(x => x.Name == "Test Name").FirstOrDefault());
+            Assert.AreEqual(3, changedFeed.Categories.Count());
         }
     }
 }

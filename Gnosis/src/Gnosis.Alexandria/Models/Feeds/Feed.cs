@@ -258,7 +258,7 @@ namespace Gnosis.Alexandria.Models.Feeds
 
         public void RemoveCategory(IFeedCategory category)
         {
-            RemoveValue(() => categories.Remove(category), category, "Categories");
+            RemoveValue(() => categories.Remove(category), category.Id, "Categories");
         }
 
         public void AddLink(IFeedLink link)
@@ -268,7 +268,7 @@ namespace Gnosis.Alexandria.Models.Feeds
 
         public void RemoveLink(IFeedLink link)
         {
-            RemoveValue(() => links.Remove(link), link, "Links");
+            RemoveValue(() => links.Remove(link), link.Id, "Links");
         }
 
         public void AddMetadatum(IFeedMetadata metadatum)
@@ -278,7 +278,7 @@ namespace Gnosis.Alexandria.Models.Feeds
 
         public void RemoveMetadatum(IFeedMetadata metadatum)
         {
-            RemoveValue(() => metadata.Remove(metadatum), metadatum, "Metadata");
+            RemoveValue(() => metadata.Remove(metadatum), metadatum.Id, "Metadata");
         }
 
         public void AddItem(IFeedItem item)
@@ -288,7 +288,7 @@ namespace Gnosis.Alexandria.Models.Feeds
 
         public void RemoveItem(IFeedItem item)
         {
-            RemoveChild(() => items.Remove(item), item, "Items");
+            RemoveChild(() => items.Remove(item), item.Id, "Items");
         }
     }
 }
