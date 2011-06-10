@@ -15,28 +15,29 @@ namespace Gnosis.Core.Batches
         public SaveEntitiesBatch(IDbConnection connection, ILogger logger, IEnumerable<T> entities)
             : base(connection, logger)
         {
+            var timeStamp = DateTime.Now.ToUniversalTime();
             var entityInfo = new EntityInfo(typeof(T));
 
             foreach (var entity in entities)
             {
                 if (entity.IsNew())
                 {
-                    AddEntityInsertStatement(entity, entityInfo);
+                    AddEntityInsertStatement(entity, entityInfo, timeStamp);
                 }
                 else if (entity.IsChanged())
                 {
-                    AddEntityUpdateStatement(entity, entityInfo);
+                    AddEntityUpdateStatement(entity, entityInfo, timeStamp);
                 }
                 else
                 {
-                    AddSaveStatements(entity, entityInfo);
+                    AddSaveStatements(entity, entityInfo, timeStamp);
                 }
             }
         }
 
         #region Entity Insert
 
-        private void AddEntityInsertStatement(IEntity entity, EntityInfo entityInfo)
+        private void AddEntityInsertStatement(IEntity entity, EntityInfo entityInfo, DateTime timeStamp)
         {
             var builder = new CommandBuilder();
             var statement = new InsertStatement(entityInfo.Name);
@@ -45,7 +46,8 @@ namespace Gnosis.Core.Batches
             {
                 var parameterName = builder.GetParameterName();
                 statement.Add(element.Name, parameterName);
-                builder.AddParameter(parameterName, element.GetValue(entity));
+                var value = element.Name == "TimeStamp" ? timeStamp : element.GetValue(entity);
+                builder.AddParameter(parameterName, value);
             }
 
             foreach (var dataType in entityInfo.DataTypes)
@@ -61,10 +63,12 @@ namespace Gnosis.Core.Batches
             builder.AddStatement(statement);
             Add(builder);
 
-            AddSaveStatements(entity, entityInfo);
+            AddSaveStatements(entity, entityInfo, timeStamp);
+
+            entity.Save(timeStamp);
         }
 
-        private void AddEntityInsertStatement(IChild child, EntityInfo childInfo)
+        private void AddEntityInsertStatement(IChild child, EntityInfo childInfo, DateTime timeStamp)
         {
             var builder = new CommandBuilder();
             var statement = new InsertStatement(childInfo.Name);
@@ -73,7 +77,8 @@ namespace Gnosis.Core.Batches
             {
                 var parameterName = builder.GetParameterName();
                 statement.Add(element.Name, parameterName);
-                builder.AddParameter(parameterName, element.GetValue(child));
+                var value = element.Name == "TimeStamp" ? timeStamp : element.GetValue(child);
+                builder.AddParameter(parameterName, value);
             }
 
             foreach (var dataType in childInfo.DataTypes)
@@ -89,22 +94,28 @@ namespace Gnosis.Core.Batches
             builder.AddStatement(statement);
             Add(builder);
 
-            AddSaveStatements(child, childInfo);
+            AddSaveStatements(child, childInfo, timeStamp);
+
+            child.Save(timeStamp);
         }
 
         #endregion
 
         #region Entity Update
 
-        private void AddEntityUpdateStatement(IEntity entity, EntityInfo entityInfo)
+        private void AddEntityUpdateStatement(IEntity entity, EntityInfo entityInfo, DateTime timeStamp)
         {
             var builder = new CommandBuilder();
             var idParameterName = builder.GetParameterName();
-            var whereClause = string.Format("{0}.Id = {1}", entityInfo.Name, idParameterName);
-            var statement = new UpdateStatement(entityInfo.Name, whereClause);
             builder.AddParameter(idParameterName, entity.Id);
+            var whereClause = string.Format("{0}.{1} = {2}", entityInfo.Name, entityInfo.Identifier.Name, idParameterName);
+            var statement = new UpdateStatement(entityInfo.Name, whereClause);
+            
+            var timeStampParameterName = builder.GetParameterName();
+            statement.Set("TimeStamp", timeStampParameterName);
+            builder.AddParameter(timeStampParameterName, timeStamp);
 
-            foreach (var column in entityInfo.Elements.Where(x => x.IsReadOnly == false))
+            foreach (var column in entityInfo.Elements.Where(x => !x.IsReadOnly))
             {
                 var parameterName = builder.GetParameterName();
                 statement.Set(column.Name, parameterName);
@@ -124,19 +135,25 @@ namespace Gnosis.Core.Batches
             builder.AddStatement(statement);
             Add(builder);
 
-            AddSaveStatements(entity, entityInfo);
+            AddSaveStatements(entity, entityInfo, timeStamp);
+
+            entity.Save(timeStamp);
         }
 
-        private void AddEntityUpdateStatement(IChild child, EntityInfo childInfo)
+        private void AddEntityUpdateStatement(IChild child, EntityInfo childInfo, DateTime timeStamp)
         {
             var builder = new CommandBuilder();
 
             var idParameterName = builder.GetParameterName();
             builder.AddParameter(idParameterName, child.Id);
-            var whereClause = string.Format("{0}.Id = {1}", childInfo.Name, idParameterName);
+            var whereClause = string.Format("{0}.{1} = {2}", childInfo.Name, childInfo.Identifier.Name, idParameterName);
             var statement = new UpdateStatement(childInfo.Name, whereClause);
 
-            foreach (var element in childInfo.Elements)
+            var timeStampParameterName = builder.GetParameterName();
+            statement.Set("TimeStamp", timeStampParameterName);
+            builder.AddParameter(timeStampParameterName, timeStamp);
+
+            foreach (var element in childInfo.Elements.Where(x => !x.IsReadOnly))
             {
                 var parameterName = builder.GetParameterName();
                 statement.Set(element.Name, parameterName);
@@ -156,7 +173,9 @@ namespace Gnosis.Core.Batches
             builder.AddStatement(statement);
             Add(builder);
 
-            AddSaveStatements(child, childInfo);
+            AddSaveStatements(child, childInfo, timeStamp);
+
+            child.Save(timeStamp);
         }
 
         #endregion
@@ -184,6 +203,8 @@ namespace Gnosis.Core.Batches
 
             builder.AddStatement(statement);
             Add(builder);
+
+            value.Save();
         }
 
         #endregion
@@ -205,13 +226,15 @@ namespace Gnosis.Core.Batches
 
             builder.AddStatement(statement);
             Add(builder);
+
+            value.Save();
         }
 
         #endregion
 
         #region Child Entity
 
-        private void AddSaveStatements(IEntity entity, EntityInfo entityInfo)
+        private void AddSaveStatements(IEntity entity, EntityInfo entityInfo, DateTime timeStamp)
         {
             foreach (var valueInfo in entityInfo.Values)
             {
@@ -238,11 +261,11 @@ namespace Gnosis.Core.Batches
                 {
                     if (child.IsNew())
                     {
-                        AddEntityInsertStatement(child, childInfo);
+                        AddEntityInsertStatement(child, childInfo, timeStamp);
                     }
                     else if (child.IsChanged() || child.IsMoved())
                     {
-                        AddEntityUpdateStatement(child, childInfo);
+                        AddEntityUpdateStatement(child, childInfo, timeStamp);
                     }
                     else if (child.IsRemoved())
                     {
@@ -250,7 +273,7 @@ namespace Gnosis.Core.Batches
                     }
                     else
                     {
-                        AddSaveStatements(child, childInfo);
+                        AddSaveStatements(child, childInfo, timeStamp);
                     }
                 }
             }

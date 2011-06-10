@@ -26,7 +26,7 @@ namespace Gnosis.Tests.Repositories
 
         #region Helper Methods
 
-        private IFeed GetTestFeed(IContext context, ILogger logger)
+        private IFeed GetTestFeed()
         {
             var feed = new Feed();
             feed.Initialize(new EntityInitialState(context, logger));
@@ -110,11 +110,20 @@ namespace Gnosis.Tests.Repositories
         #endregion
 
         [TestFixtureSetUp]
-        public void Setup()
+        public void FixtureSetUp()
         {
             context = new SingleThreadedContext();
-            logger = new DummyLogger();
-            
+            logger = new DebugLogger();
+        }
+
+        [TestFixtureTearDown]
+        public void FixtureTearDown()
+        {
+        }
+
+        [SetUp]
+        public void SetUp()
+        {
             connection = new SQLiteConnection("Data Source=:memory:;Version=3;");
             connection.Open();
 
@@ -122,22 +131,29 @@ namespace Gnosis.Tests.Repositories
             repository.Initialize();
         }
 
-        [TestFixtureTearDown]
+        [TearDown]
         public void TearDown()
         {
             if (connection != null)
+            {
                 connection.Close();
+                connection = null;
+            }
         }
 
         [Test]
-        public void TestInsert()
+        public void TestCreateFeed()
         {
             var initialFeeds = repository.Search();
             Assert.AreEqual(0, initialFeeds.Count());
 
-            var feed = GetTestFeed(context, logger);
+            var feed = GetTestFeed();
+
+            Assert.IsTrue(feed.IsNew());
 
             repository.Save(new List<IFeed> { feed });
+
+            Assert.IsFalse(feed.IsNew());
 
             var createdFeed = repository.Lookup(new LookupByLocation(feedLocation));
 
@@ -148,6 +164,43 @@ namespace Gnosis.Tests.Repositories
             var deletedFeed = repository.Lookup(new LookupByLocation(feedLocation));
 
             Assert.IsNull(deletedFeed);
+        }
+
+        [Test]
+        public void TestChangeFeed()
+        {
+            var feed = GetTestFeed();
+
+            repository.Save(new List<IFeed> { feed });
+
+            const string title = "New Title";
+            const string description = "Updated Description";
+            const string copyright = "Copyright 2000";
+            const string authors = "Tweedle Dee and Tweedle Dumb";
+
+            feed.Title = title;
+            feed.Description = description;
+            feed.Copyright = copyright;
+            feed.Authors = authors;
+            Assert.IsTrue(feed.IsChanged());
+            Assert.IsFalse(feed.IsNew());
+
+            var category = new FeedCategory(feed.Id, new Uri("http://example.com/some-random-scheme/xyz"), "Test Name", "Test Label");
+            feed.AddCategory(category);
+            Assert.IsTrue(category.IsNew());
+
+            var oldTimeStamp = feed.TimeStamp;
+            repository.Save(new List<IFeed>{ feed});
+            var newTimeStamp = feed.TimeStamp;
+            Assert.IsFalse(feed.IsChanged());
+            Assert.AreNotEqual(oldTimeStamp, newTimeStamp);
+            
+            var changedFeed = repository.Lookup(new LookupByLocation(feedLocation));
+            Assert.IsNotNull(changedFeed);
+            Assert.AreEqual(title, changedFeed.Title);
+            Assert.AreEqual(description, changedFeed.Description);
+            Assert.AreEqual(copyright, changedFeed.Copyright);
+            Assert.AreEqual(authors, changedFeed.Authors);
         }
     }
 }

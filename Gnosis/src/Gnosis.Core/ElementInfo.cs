@@ -40,7 +40,7 @@ namespace Gnosis.Core
 
         public bool IsReadOnly
         {
-            get { return property.CanWrite; }
+            get { return !property.CanWrite; }
         }
 
         public Type Type

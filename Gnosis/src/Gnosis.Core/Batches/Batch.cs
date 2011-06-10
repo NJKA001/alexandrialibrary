@@ -40,6 +40,12 @@ namespace Gnosis.Core.Batches
                         using (var command = builder.GetCommand(connection))
                         {
                             logger.Debug("    " + command.CommandText.Trim());
+                            foreach (var parameter in command.Parameters)
+                            {
+                                var dbParameter = parameter as System.Data.IDbDataParameter;
+                                if (dbParameter != null)
+                                    logger.Debug("      parameter name=" + dbParameter.ParameterName + " value=" + dbParameter.Value);
+                            }
                             command.ExecuteNonQuery();
                         }
                     }
