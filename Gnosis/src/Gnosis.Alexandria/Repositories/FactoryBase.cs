@@ -60,6 +60,8 @@ namespace Gnosis.Alexandria.Repositories
             addValueActions.Add(valueName, action);
         }
 
+        #region IFactory Members
+
         public IEntity CreateEntity(Type type)
         {
             if (!entityConstructors.ContainsKey(type))
@@ -165,5 +167,7 @@ namespace Gnosis.Alexandria.Repositories
                 }
             }
         }
+
+        #endregion
     }
 }

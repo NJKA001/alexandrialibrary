@@ -5,17 +5,17 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Tracks
 {
-    public class TrackMetadata
-        : ValueBase, ITrackMetadata
+    public class TrackMetadatum
+        : ValueBase, ITrackMetadatum
     {
-        public TrackMetadata()
+        public TrackMetadatum()
         {
             AddInitializer("TextEncoding", x => this.textEncoding = x.ToString());
             AddInitializer("Description", x => this.description = x.ToString());
             AddInitializer("Content", x => this.content = x.ToString());
         }
 
-        public TrackMetadata(Guid parent, string textEncoding, string description, string content)
+        public TrackMetadatum(Guid parent, string textEncoding, string description, string content)
         {
             AddInitializer("TextEncoding", x => this.textEncoding = textEncoding);
             AddInitializer("Description", x => this.description = description);

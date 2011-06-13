@@ -56,12 +56,33 @@ namespace Gnosis.Alexandria.Models.Tracks
         string InternationalStandardRecordingCode { get; set; }
 
         IEnumerable<ITrackPicture> Pictures { get; }
+        void AddPicture(ITrackPicture picture);
+        void RemovePicture(ITrackPicture picture);
+
         IEnumerable<ITrackUnsynchronizedLyrics> Lyrics { get; }
+        void AddLyrics(ITrackUnsynchronizedLyrics lyrics);
+        void RemoveLyrics(ITrackUnsynchronizedLyrics lyrics);
+
         IEnumerable<ITrackSynchronizedLyrics> SynchronizedLyrics { get; }
+        void AddSynchronizedLyrics(ITrackSynchronizedLyrics synchronizedLyrics);
+        void RemoveSynchronizedLyrics(ITrackSynchronizedLyrics synchronizedLyrics);
+
         IEnumerable<ITrackIdentifier> Identifiers { get; }
+        //void AddIdentifier(ITrackIdentifier identifier);
+        //void RemoveIdentifier(ITrackIdentifier identifier);
+
         IEnumerable<ITrackRating> Ratings { get; }
+        //void AddRating(ITrackRating rating);
+        //void RemoveRating(ITrackRating rating);
+
         IEnumerable<ITrackLink> Links { get; }
-        IEnumerable<ITrackMetadata> Metadata { get; }
+        //void AddLink(ITrackLink link);
+        //void RemoveLink(ITrackLink link);
+
+        IEnumerable<ITrackMetadatum> Metadata { get; }
+        //void AddMetadatum(ITrackMetadatum metadatum);
+        //void RemoveMetadatum(ITrackMetadatum metadatum);
+
         IEnumerable<IHashCode> TitleHashCodes { get; }
         IEnumerable<IHashCode> AlbumHashCodes { get; }
         IEnumerable<IHashCode> ArtistHashCodes { get; }

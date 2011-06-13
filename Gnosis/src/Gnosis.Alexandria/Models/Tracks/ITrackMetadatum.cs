@@ -7,7 +7,7 @@ using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Models.Tracks
 {
-    public interface ITrackMetadata : IValue
+    public interface ITrackMetadatum : IValue
     {
         string TextEncoding { get; }
         string Description { get; }

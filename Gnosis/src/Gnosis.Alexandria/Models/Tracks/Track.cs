@@ -92,7 +92,7 @@ namespace Gnosis.Alexandria.Models.Tracks
         private readonly ObservableCollection<ITrackIdentifier> identifiers = new ObservableCollection<ITrackIdentifier>();
         private readonly ObservableCollection<ITrackRating> ratings = new ObservableCollection<ITrackRating>();
         private readonly ObservableCollection<ITrackLink> links = new ObservableCollection<ITrackLink>();
-        private readonly ObservableCollection<ITrackMetadata> metadata = new ObservableCollection<ITrackMetadata>();
+        private readonly ObservableCollection<ITrackMetadatum> metadata = new ObservableCollection<ITrackMetadatum>();
 
         private readonly ObservableCollection<IHashCode> titleHashCodes = new ObservableCollection<IHashCode>();
         private readonly ObservableCollection<IHashCode> albumHashCodes = new ObservableCollection<IHashCode>();
@@ -541,15 +541,48 @@ namespace Gnosis.Alexandria.Models.Tracks
             get { return pictures; }
         }
 
+        public void AddPicture(ITrackPicture picture)
+        {
+            AddChild(() => pictures.Add(picture), picture, "Pictures");
+        }
+
+        public void RemovePicture(ITrackPicture picture)
+        {
+            RemoveChild(() => pictures.Remove(picture), picture.Id, "Pictures");
+        }
+
+
         public IEnumerable<ITrackUnsynchronizedLyrics> Lyrics
         {
             get { return lyrics; }
         }
 
+        public void AddLyrics(ITrackUnsynchronizedLyrics lyrics)
+        {
+            AddChild(() => this.lyrics.Add(lyrics), lyrics, "Lyrics");
+        }
+
+        public void RemoveLyrics(ITrackUnsynchronizedLyrics lyrics)
+        {
+            RemoveChild(() => this.lyrics.Remove(lyrics), lyrics.Id, "Lyrics");
+        }
+
+
         public IEnumerable<ITrackSynchronizedLyrics> SynchronizedLyrics
         {
             get { return synchronizedLyrics; }
         }
+
+        public void AddSynchronizedLyrics(ITrackSynchronizedLyrics synchronizedLyrics)
+        {
+            AddChild(() => this.synchronizedLyrics.Add(synchronizedLyrics), synchronizedLyrics, "SynchronizedLyrics");
+        }
+
+        public void RemoveSynchronizedLyrics(ITrackSynchronizedLyrics synchronizedLyrics)
+        {
+            RemoveChild(() => this.synchronizedLyrics.Remove(synchronizedLyrics), synchronizedLyrics.Id, "SynchronizedLyrics");
+        }
+
 
         public IEnumerable<ITrackIdentifier> Identifiers
         {
@@ -566,7 +599,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             get { return links; }
         }
 
-        public IEnumerable<ITrackMetadata> Metadata
+        public IEnumerable<ITrackMetadatum> Metadata
         {
             get { return metadata; }
         }

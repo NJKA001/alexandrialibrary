@@ -68,6 +68,8 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -178,13 +180,13 @@
     <Compile Include="Models\Tracks\ITrack.cs" />
     <Compile Include="Models\Tracks\ITrackIdentifier.cs" />
     <Compile Include="Models\Tracks\ITrackLink.cs" />
-    <Compile Include="Models\Tracks\ITrackMetadata.cs" />
+    <Compile Include="Models\Tracks\ITrackMetadatum.cs" />
     <Compile Include="Models\Tracks\ITrackPicture.cs" />
     <Compile Include="Models\Tracks\ITrackRating.cs" />
     <Compile Include="Models\Tracks\Track.cs" />
     <Compile Include="Models\Tracks\TrackIdentifier.cs" />
     <Compile Include="Models\Tracks\TrackLink.cs" />
-    <Compile Include="Models\Tracks\TrackMetadata.cs" />
+    <Compile Include="Models\Tracks\TrackMetadatum.cs" />
     <Compile Include="Models\Tracks\TrackPicture.cs" />
     <Compile Include="Models\Tracks\TrackRating.cs" />
     <Compile Include="Models\Tracks\TrackSynchronizedLyrics.cs" />
@@ -233,6 +235,9 @@
     <Compile Include="Models\Old\SourcePropertyBase.cs" />
     <Compile Include="Models\Old\OldTrack.cs" />
     <Compile Include="Repositories\Old\OldTrackRepository.cs" />
+    <Compile Include="Repositories\Tracks\ITrackRepository.cs" />
+    <Compile Include="Repositories\Tracks\LookupByLocation.cs" />
+    <Compile Include="Repositories\Tracks\SearchByTitle.cs" />
     <Compile Include="Repositories\Tracks\TrackFactory.cs" />
     <Compile Include="Repositories\Tracks\TrackRepository.cs" />
     <Compile Include="Repositories\ValueSearchBase.cs" />
