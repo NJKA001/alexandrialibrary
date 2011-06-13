@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -21,6 +23,26 @@ namespace Gnosis.Tests.Repositories
         private ILogger logger;
         private ITrackRepository repository;
         private IDbConnection connection;
+
+        private const string coverImagePath = @"Images\Undertow.jpg";
+
+        #region Helpers Methods
+
+        private ITrack GetTestTrack()
+        {
+            var track = new Track();
+            track.Initialize(new EntityInitialState(context, logger));
+
+            track.Album = "Undertow";
+            track.Artists = "Tool";
+
+            var image = Image.FromFile(coverImagePath);
+            track.AddPicture("utf8", "image/jpg", TrackPictureType.FrontCover, "Undertow", image.ToBytes());
+
+            return track;
+        }
+
+        #endregion
 
         [TestFixtureSetUp]
         public void FixtureSetUp()
@@ -59,7 +81,11 @@ namespace Gnosis.Tests.Repositories
         {
             var initialTracks = repository.Search();
             Assert.AreEqual(0, initialTracks.Count());
+            Assert.IsTrue(File.Exists(coverImagePath));
 
+            var track = GetTestTrack();
+            Assert.IsTrue(track.IsNew());
+            Assert.IsNotNull(track.Pictures.FirstOrDefault());
         }
     }
 }

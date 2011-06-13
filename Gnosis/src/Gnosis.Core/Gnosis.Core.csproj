@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -74,6 +75,7 @@
     <Compile Include="IFilter.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="ILookup.cs" />
+    <Compile Include="ImageExtensions.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ISearch.cs" />
     <Compile Include="IValue.cs" />
