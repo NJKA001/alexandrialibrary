@@ -24,10 +24,12 @@ namespace Gnosis.Alexandria.Repositories.Tracks
             : base(context, logger, new TrackFactory(context, logger), defaultConnection)
         {
             AddLookup(byLocation);
+            AddSearch(all);
             AddSearch(byTitle);
         }
 
         private readonly ILookup byLocation = new LookupByLocation();
+        private readonly ISearch all = new SearchAll();
         private readonly ISearch byTitle = new SearchByTitle();
 
         public ITrack LookupByLocation(Uri location)

@@ -13,6 +13,6 @@ namespace Gnosis.Alexandria.Models.Tracks
         string MediaType { get; set; }
         TrackPictureType PictureType { get; set; }
         string Description { get; set; }
-        byte[] PictureData { get; set; }
+        byte[] Data { get; set; }
     }
 }

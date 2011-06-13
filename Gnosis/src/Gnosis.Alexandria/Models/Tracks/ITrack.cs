@@ -71,7 +71,7 @@ namespace Gnosis.Alexandria.Models.Tracks
         IEnumerable<IHashCode> ConductorHashCodes { get; }
         IEnumerable<IHashCode> OriginalTitleHashCodes { get; }
 
-        void AddPicture(string textEncoding, string mediaType, TrackPictureType pictureType, string description, byte[] pictureData);
+        void AddPicture(string textEncoding, string mediaType, TrackPictureType pictureType, string description, byte[] data);
         void RemovePicture(ITrackPicture picture);
 
         void AddLyrics(string textEncoding, string language, string description, string lyrics);

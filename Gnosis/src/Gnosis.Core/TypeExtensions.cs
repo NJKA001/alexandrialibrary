@@ -358,6 +358,9 @@ namespace Gnosis.Core
             if (type == typeof(TimeSpan))
                 return true;
 
+            if (type == typeof(byte[]))
+                return true;
+
             return false;
         }
 

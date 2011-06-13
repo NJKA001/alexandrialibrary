@@ -236,6 +236,7 @@
     <Compile Include="Repositories\Old\OldTrackRepository.cs" />
     <Compile Include="Repositories\Tracks\ITrackRepository.cs" />
     <Compile Include="Repositories\Tracks\LookupByLocation.cs" />
+    <Compile Include="Repositories\Tracks\SearchAll.cs" />
     <Compile Include="Repositories\Tracks\SearchByTitle.cs" />
     <Compile Include="Repositories\Tracks\TrackFactory.cs" />
     <Compile Include="Repositories\Tracks\TrackRepository.cs" />

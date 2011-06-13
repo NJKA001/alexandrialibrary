@@ -16,14 +16,14 @@ namespace Gnosis.Alexandria.Models.Tracks
             AddInitializer("MediaType", value => this.mediaType = value.ToString());
             AddInitializer("PictureType", x => this.pictureType = x.ToEnum<TrackPictureType>());
             AddInitializer("Description", x => this.description = x.ToString());
-            AddInitializer("PictureData", (name, record) => this.pictureData = record.GetBytes(name));
+            AddInitializer("Data", (name, record) => this.data = record.GetBytes(name));
         }
 
         private string textEncoding = string.Empty;
         private string mediaType = "image/jpeg";
         private TrackPictureType pictureType = TrackPictureType.FrontCover;
         private string description = string.Empty;
-        private byte[] pictureData = new byte[] { 0 };
+        private byte[] data = new byte[] { 0 };
 
         #region ITrackPicture Members
 
@@ -75,14 +75,14 @@ namespace Gnosis.Alexandria.Models.Tracks
             }
         }
 
-        public byte[] PictureData
+        public byte[] Data
         {
-            get { return pictureData; }
+            get { return data; }
             set
             {
-                if (value != null && value != pictureData)
+                if (value != null && value != data)
                 {
-                    Change(() => pictureData = value, "PictureData");
+                    Change(() => data = value, "Data");
                 }
             }
         }

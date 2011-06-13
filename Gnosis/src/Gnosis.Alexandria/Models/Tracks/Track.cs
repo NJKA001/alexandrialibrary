@@ -731,7 +731,7 @@ namespace Gnosis.Alexandria.Models.Tracks
         }
 
 
-        public void AddPicture(string textEncoding, string mediaType, TrackPictureType pictureType, string description, byte[] pictureData)
+        public void AddPicture(string textEncoding, string mediaType, TrackPictureType pictureType, string description, byte[] data)
         {
             var picture = new TrackPicture();
             picture.Initialize(new EntityInitialState(Context, Logger, this.Id));
@@ -739,7 +739,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             picture.MediaType = mediaType;
             picture.PictureType = pictureType;
             picture.Description = description;
-            picture.PictureData = pictureData;
+            picture.Data = data;
             AddPicture(picture);
         }
 

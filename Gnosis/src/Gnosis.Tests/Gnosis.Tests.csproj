@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repositories\TrackRepositoryTests.cs" />
     <Compile Include="SingleThreadedContext.cs" />
     <Compile Include="DebugLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
