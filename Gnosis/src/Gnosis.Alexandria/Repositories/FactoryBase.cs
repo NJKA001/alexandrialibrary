@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
-using Gnosis.Alexandria.Models.Feeds;
+using Gnosis.Alexandria.Models;
 
 namespace Gnosis.Alexandria.Repositories
 {
@@ -15,6 +15,8 @@ namespace Gnosis.Alexandria.Repositories
         {
             this.context = context;
             this.logger = logger;
+
+            MapValueConstructor<IHashCode>(() => new HashCode());
         }
 
         private readonly IContext context;

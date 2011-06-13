@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Tracks;
 using Gnosis.Core;
 
@@ -23,7 +22,6 @@ namespace Gnosis.Alexandria.Repositories.Tracks
             MapValueConstructor<ITrackIdentifier>(() => new TrackIdentifier());
             MapValueConstructor<ITrackLink>(() => new TrackLink());
             MapValueConstructor<ITrackMetadatum>(() => new TrackMetadatum());
-            MapValueConstructor<IHashCode>(() => new HashCode());
         }
     }
 }

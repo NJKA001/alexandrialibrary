@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
-using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Feeds;
 
 namespace Gnosis.Alexandria.Repositories.Feeds
@@ -21,7 +20,6 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             MapValueConstructor<IFeedCategory>(() => new FeedCategory());
             MapValueConstructor<IFeedLink>(() => new FeedLink());
             MapValueConstructor<IFeedMetadatum>(() => new FeedMetadatum());
-            MapValueConstructor<IHashCode>(() => new HashCode());
         }
     }
 }
