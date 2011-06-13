@@ -56,32 +56,12 @@ namespace Gnosis.Alexandria.Models.Tracks
         string InternationalStandardRecordingCode { get; set; }
 
         IEnumerable<ITrackPicture> Pictures { get; }
-        void AddPicture(ITrackPicture picture);
-        void RemovePicture(ITrackPicture picture);
-
         IEnumerable<ITrackUnsynchronizedLyrics> Lyrics { get; }
-        void AddLyrics(ITrackUnsynchronizedLyrics lyrics);
-        void RemoveLyrics(ITrackUnsynchronizedLyrics lyrics);
-
         IEnumerable<ITrackSynchronizedLyrics> SynchronizedLyrics { get; }
-        void AddSynchronizedLyrics(ITrackSynchronizedLyrics synchronizedLyrics);
-        void RemoveSynchronizedLyrics(ITrackSynchronizedLyrics synchronizedLyrics);
-
-        IEnumerable<ITrackIdentifier> Identifiers { get; }
-        //void AddIdentifier(ITrackIdentifier identifier);
-        //void RemoveIdentifier(ITrackIdentifier identifier);
-
         IEnumerable<ITrackRating> Ratings { get; }
-        //void AddRating(ITrackRating rating);
-        //void RemoveRating(ITrackRating rating);
-
+        IEnumerable<ITrackIdentifier> Identifiers { get; }
         IEnumerable<ITrackLink> Links { get; }
-        //void AddLink(ITrackLink link);
-        //void RemoveLink(ITrackLink link);
-
         IEnumerable<ITrackMetadatum> Metadata { get; }
-        //void AddMetadatum(ITrackMetadatum metadatum);
-        //void RemoveMetadatum(ITrackMetadatum metadatum);
 
         IEnumerable<IHashCode> TitleHashCodes { get; }
         IEnumerable<IHashCode> AlbumHashCodes { get; }
@@ -90,5 +70,26 @@ namespace Gnosis.Alexandria.Models.Tracks
         IEnumerable<IHashCode> ComposerHashCodes { get; }
         IEnumerable<IHashCode> ConductorHashCodes { get; }
         IEnumerable<IHashCode> OriginalTitleHashCodes { get; }
+
+        void AddPicture(string textEncoding, string mediaType, TrackPictureType pictureType, string description, byte[] pictureData);
+        void RemovePicture(ITrackPicture picture);
+
+        void AddLyrics(string textEncoding, string language, string description, string lyrics);
+        void RemoveLyrics(ITrackUnsynchronizedLyrics lyrics);
+
+        void AddSynchronizedLyrics(string textEncoding, string language, string description, string lyrics, TrackSynchronizedTextType contentType);
+        void RemoveSynchronizedLyrics(ITrackSynchronizedLyrics synchronizedLyrics);
+
+        void AddRating(byte rating, Uri user, ulong playCount);
+        void RemoveRating(ITrackRating rating);
+
+        void AddIdentifier(Uri scheme, string identifier);
+        void RemoveIdentifier(ITrackIdentifier identifier);
+
+        void AddLink(string textEncoding, string relationship, Uri location);
+        void RemoveLink(ITrackLink link);
+
+        void AddMetadatum(string textEncoding, string description, string content);
+        void RemoveMetadatum(ITrackMetadatum metadatum);
     }
 }

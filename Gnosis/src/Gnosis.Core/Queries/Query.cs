@@ -73,10 +73,11 @@ namespace Gnosis.Core.Queries
                 if (childBuilder.Type == null)
                     continue;
 
-                var isChild = childBuilder.Type.IsChildType();
+                var isChildType = childBuilder.Type.IsChildType();
 
-                var children = new List<IChild>();
-                var values = new List<IValue>();
+                var children = new Dictionary<Guid, IList<IChild>>();
+                var values = new Dictionary<Guid, IList<IValue>>();
+                var allChildren = new List<IEntity>();
 
                 using (var command = childBuilder.GetCommand(connection))
                 {
@@ -85,28 +86,50 @@ namespace Gnosis.Core.Queries
                     {
                         while (reader.Read())
                         {
-                            if (isChild)
+                            if (isChildType)
                             {
                                 var child = factory.CreateChild(childBuilder.Type, reader);
-                                children.Add(child);
+
+                                if (!children.ContainsKey(child.Parent))
+                                    children.Add(child.Parent, new List<IChild>());
+
+                                children[child.Parent].Add(child);
+                                allChildren.Add(child);
                             }
                             else
                             {
                                 var value = factory.CreateValue(childBuilder.Type, reader);
-                                values.Add(value);
+
+                                if (!values.ContainsKey(value.Parent))
+                                    values.Add(value.Parent, new List<IValue>());
+                                
+                                values[value.Parent].Add(value);
                             }
                         }
                     }
                 }
 
-                if (isChild)
+                if (isChildType)
                 {
-                    factory.AddChildren(parentBuilder.Type, childBuilder.Type, childBuilder.Name, parents, children);
-                    AddChildren(connection, childBuilder, children.Cast<IEntity>());
+                    foreach (var parent in parents)
+                    {
+                        if (children.ContainsKey(parent.Id))
+                            parent.InitializeChildren(childBuilder.Name, children[parent.Id]);
+                    }
+
+                    //factory.AddChildren(childBuilder.Name, parents, children);
+
+                    AddChildren(connection, childBuilder, allChildren);
                 }
                 else
                 {
-                    factory.AddValues(parentBuilder.Type, childBuilder.Type, childBuilder.Name, parents, values);
+                    foreach (var parent in parents)
+                    {
+                        if (values.ContainsKey(parent.Id))
+                            parent.InitializeValues(childBuilder.Name, values[parent.Id]);
+                    }
+
+                    //factory.AddValues(childBuilder.Name, parents, values);
                 }
             }
         }

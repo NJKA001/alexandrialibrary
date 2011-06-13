@@ -13,21 +13,29 @@ namespace Gnosis.Alexandria.Models.Feeds
     {
         public Feed()
         {
-            AddInitializer("Location", x => this.location = x.ToUri());
-            AddInitializer("MediaType", x => this.mediaType = x.ToString());
-            AddInitializer("Title", x => this.title = x.ToString());
-            AddInitializer("Authors", x => this.authors = x.ToString());
-            AddInitializer("Contributors", x => this.contributors = x.ToString());
-            AddInitializer("Description", x => this.description = x.ToString());
-            AddInitializer("Language", x => this.language = x.ToString());
-            AddInitializer("OriginalLocation", x => this.originalLocation = x.ToUri());
-            AddInitializer("Copyright", x => this.copyright = x.ToString());
-            AddInitializer("PublishedDate", x => this.publishedDate = x.ToDateTime());
-            AddInitializer("UpdatedDate", x => this.updatedDate = x.ToDateTime());
-            AddInitializer("Generator", x => this.generator = x.ToString());
-            AddInitializer("ImagePath", x => this.imagePath = x.ToUri());
-            AddInitializer("IconPath", x => this.iconPath = x.ToUri());
-            AddInitializer("FeedIdentifier", x => this.feedIdentifier = x.ToString());
+            AddInitializer("Location", value => this.location = value.ToUri());
+            AddInitializer("MediaType", value => this.mediaType = value.ToString());
+            AddInitializer("Title", value => this.title = value.ToString());
+            AddInitializer("Authors", value => this.authors = value.ToString());
+            AddInitializer("Contributors", value => this.contributors = value.ToString());
+            AddInitializer("Description", value => this.description = value.ToString());
+            AddInitializer("Language", value => this.language = value.ToString());
+            AddInitializer("OriginalLocation", value => this.originalLocation = value.ToUri());
+            AddInitializer("Copyright", value => this.copyright = value.ToString());
+            AddInitializer("PublishedDate", value => this.publishedDate = value.ToDateTime());
+            AddInitializer("UpdatedDate", value => this.updatedDate = value.ToDateTime());
+            AddInitializer("Generator", value => this.generator = value.ToString());
+            AddInitializer("ImagePath", value => this.imagePath = value.ToUri());
+            AddInitializer("IconPath", value => this.iconPath = value.ToUri());
+            AddInitializer("FeedIdentifier", value => this.feedIdentifier = value.ToString());
+            AddChildInitializer("FeedItem", child => AddItem(child as IFeedItem));
+            AddValueInitializer("Feed_Categories", value => AddCategory(value as IFeedCategory));
+            AddValueInitializer("Feed_Links", value => AddLink(value as IFeedLink));
+            AddValueInitializer("Feed_Metadata", value => AddMetadatum(value as IFeedMetadatum));
+            AddValueInitializer("Feed_TitleHashCodes", value => AddTitleHashCode(value as IHashCode));
+            AddValueInitializer("Feed_AuthorHashCodes", value => AddAuthorHashCode(value as IHashCode));
+            AddValueInitializer("Feed_ContributorHashCodes", value => AddContributorHashCode(value as IHashCode));
+            AddValueInitializer("Feed_DescriptionHashCodes", value => AddDescriptionHashCode(value as IHashCode));
         }
 
         private Uri location;
@@ -50,6 +58,72 @@ namespace Gnosis.Alexandria.Models.Feeds
         private readonly IList<IFeedLink> links = new ObservableCollection<IFeedLink>();
         private readonly IList<IFeedMetadatum> metadata = new ObservableCollection<IFeedMetadatum>();
         private readonly IList<IFeedItem> items = new ObservableCollection<IFeedItem>();
+
+        private readonly IList<IHashCode> titleHashCodes = new ObservableCollection<IHashCode>();
+        private readonly IList<IHashCode> authorHashCodes = new ObservableCollection<IHashCode>();
+        private readonly IList<IHashCode> contributorHashCodes = new ObservableCollection<IHashCode>();
+        private readonly IList<IHashCode> descriptionHashCodes = new ObservableCollection<IHashCode>();
+
+        #region Private Methods
+
+        private void AddCategory(IFeedCategory category)
+        {
+            AddValue(() => categories.Add(category), category, "Categories");
+        }
+
+        private void AddLink(IFeedLink link)
+        {
+            AddValue(() => links.Add(link), link, "Links");
+        }
+
+        private void AddMetadatum(IFeedMetadatum metadatum)
+        {
+            AddValue(() => metadata.Add(metadatum), metadatum, "Metadata");
+        }
+
+        private void AddTitleHashCode(IHashCode hashCode)
+        {
+            AddValue(() => titleHashCodes.Add(hashCode), hashCode, "TitleHashCodes");
+        }
+
+        private void RemoveTitleHashCode(IHashCode hashCode)
+        {
+            RemoveValue(() => titleHashCodes.Remove(hashCode), hashCode.Id, "TitleHashCodes");
+        }
+
+        private void AddAuthorHashCode(IHashCode hashCode)
+        {
+            AddValue(() => authorHashCodes.Add(hashCode), hashCode, "AuthorHashCodes");
+        }
+
+        private void RemoveAuthorHashCode(IHashCode hashCode)
+        {
+            RemoveValue(() => authorHashCodes.Remove(hashCode), hashCode.Id, "AuthorHashCodes");
+        }
+
+        private void AddContributorHashCode(IHashCode hashCode)
+        {
+            AddValue(() => contributorHashCodes.Add(hashCode), hashCode, "ContributorHashCodes");
+        }
+
+        private void RemoveContributorHashCode(IHashCode hashCode)
+        {
+            RemoveValue(() => contributorHashCodes.Remove(hashCode), hashCode.Id, "ContributorHashCodes");
+        }
+
+        private void AddDescriptionHashCode(IHashCode hashCode)
+        {
+            AddValue(() => descriptionHashCodes.Add(hashCode), hashCode, "DescriptionHashCodes");
+        }
+
+        private void RemoveDescriptionHashCode(IHashCode hashCode)
+        {
+            RemoveValue(() => descriptionHashCodes.Remove(hashCode), hashCode.Id, "DescriptionHashCodes");
+        }
+
+        #endregion
+
+        #region IFeed Members
 
         public Uri Location
         {
@@ -251,14 +325,31 @@ namespace Gnosis.Alexandria.Models.Feeds
             get { return items; }
         }
 
+
+        public IEnumerable<IHashCode> TitleHashCodes
+        {
+            get { return titleHashCodes; }
+        }
+
+        public IEnumerable<IHashCode> AuthorHashCodes
+        {
+            get { return authorHashCodes; }
+        }
+
+        public IEnumerable<IHashCode> ContributorHashCodes
+        {
+            get { return contributorHashCodes; }
+        }
+
+        public IEnumerable<IHashCode> DescriptionHashCodes
+        {
+            get { return descriptionHashCodes; }
+        }
+
+
         public void AddCategory(Uri scheme, string name, string label)
         {
             AddCategory(new FeedCategory(this.Id, scheme, name, label));
-        }
-
-        public void AddCategory(IFeedCategory category)
-        {
-            AddValue(() => categories.Add(category), category, "Categories");
         }
 
         public void RemoveCategory(IFeedCategory category)
@@ -271,11 +362,6 @@ namespace Gnosis.Alexandria.Models.Feeds
             AddLink(new FeedLink(this.Id, relationship, location, mediaType, length, language));
         }
 
-        public void AddLink(IFeedLink link)
-        {
-            AddValue(() => links.Add(link), link, "Links");
-        }
-
         public void RemoveLink(IFeedLink link)
         {
             RemoveValue(() => links.Remove(link), link.Id, "Links");
@@ -284,11 +370,6 @@ namespace Gnosis.Alexandria.Models.Feeds
         public void AddMetadatum(string mediaType, Uri scheme, string name, string content)
         {
             AddMetadatum(new FeedMetadatum(this.Id, mediaType, scheme, name, content));
-        }
-
-        public void AddMetadatum(IFeedMetadatum metadatum)
-        {
-            AddValue(() => metadata.Add(metadatum), metadatum, "Metadata");
         }
 
         public void RemoveMetadatum(IFeedMetadatum metadatum)
@@ -305,5 +386,7 @@ namespace Gnosis.Alexandria.Models.Feeds
         {
             RemoveChild(() => items.Remove(item), item.Id, "Items");
         }
+
+        #endregion
     }
 }

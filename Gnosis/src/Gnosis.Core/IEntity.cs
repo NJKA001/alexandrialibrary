@@ -19,6 +19,8 @@ namespace Gnosis.Core
         IEnumerable<IValue> GetValues(ValueInfo valueInfo);
 
         void Initialize(IEntityInitialState state);
+        void InitializeChildren(string name, IEnumerable<IChild> children);
+        void InitializeValues(string name, IEnumerable<IValue> values);
         void Save(DateTime timeStamp);
     }
 }

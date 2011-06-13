@@ -25,6 +25,9 @@ namespace Gnosis.Alexandria.Models.Feeds
             AddInitializer("ContentLocation", x => this.contentLocation = x.ToUri());
             AddInitializer("UpdatedDate", x => this.updatedDate = x.ToDateTime());
             AddInitializer("FeedItemIdentifier", x => this.feedItemIdentifier = x.ToString());
+            AddValueInitializer("FeedItem_Categories", value => this.AddCategory(value as IFeedCategory));
+            AddValueInitializer("FeedItem_Links", value => this.AddLink(value as IFeedLink));
+            AddValueInitializer("FeedItem_Metadata", value => this.AddMetadatum(value as IFeedMetadatum));
         }
 
         private string title = string.Empty;
@@ -43,6 +46,25 @@ namespace Gnosis.Alexandria.Models.Feeds
         private readonly IList<IFeedCategory> categories = new ObservableCollection<IFeedCategory>();
         private readonly IList<IFeedLink> links = new ObservableCollection<IFeedLink>();
         private readonly IList<IFeedMetadatum> metadata = new ObservableCollection<IFeedMetadatum>();
+
+        #region Private Value Methods
+
+        private void AddCategory(IFeedCategory category)
+        {
+            AddValue(() => categories.Add(category), category, "Categories");
+        }
+
+        private void AddLink(IFeedLink link)
+        {
+            AddValue(() => links.Add(link), link, "Links");
+        }
+
+        private void AddMetadatum(IFeedMetadatum metadatum)
+        {
+            AddValue(() => metadata.Add(metadatum), metadatum, "Metadata");
+        }
+
+        #endregion
 
         #region IFeedItem Members
 
@@ -211,11 +233,6 @@ namespace Gnosis.Alexandria.Models.Feeds
             AddCategory(new FeedCategory(this.Id, scheme, name, label));
         }
 
-        public void AddCategory(IFeedCategory category)
-        {
-            AddValue(() => categories.Add(category), category, "Categories");
-        }
-
         public void RemoveCategory(IFeedCategory category)
         {
             RemoveValue(() => categories.Remove(category), category.Id, "Categories");
@@ -226,11 +243,6 @@ namespace Gnosis.Alexandria.Models.Feeds
             AddLink(new FeedLink(this.Id, relationship, location, mediaType, length, language));
         }
 
-        public void AddLink(IFeedLink link)
-        {
-            AddValue(() => links.Add(link), link, "Links");
-        }
-
         public void RemoveLink(IFeedLink link)
         {
             RemoveValue(() => links.Remove(link), link.Id, "Links");
@@ -239,11 +251,6 @@ namespace Gnosis.Alexandria.Models.Feeds
         public void AddMetadatum(string mediaType, Uri scheme, string name, string content)
         {
             AddMetadatum(new FeedMetadatum(this.Id, mediaType, scheme, name, content));
-        }
-
-        public void AddMetadatum(IFeedMetadatum metadatum)
-        {
-            AddValue(() => metadata.Add(metadatum), metadatum, "Metadata");
         }
 
         public void RemoveMetadatum(IFeedMetadatum metadatum)

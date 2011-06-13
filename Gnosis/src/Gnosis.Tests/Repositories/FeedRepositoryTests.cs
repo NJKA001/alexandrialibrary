@@ -204,6 +204,7 @@ namespace Gnosis.Tests.Repositories
             feed.PublishedDate = publishedDate;
             feed.UpdatedDate = updatedDate;
 
+            Assert.AreEqual(2, feed.Categories.Count());
             Assert.IsTrue(feed.IsChanged());
             Assert.IsFalse(feed.IsNew());
 
@@ -212,7 +213,7 @@ namespace Gnosis.Tests.Repositories
             Assert.IsTrue(feed.Categories.Where(x => x.Name == testCategoryName).FirstOrDefault().IsNew());
 
             var oldTimeStamp = feed.TimeStamp;
-            repository.Save(new List<IFeed>{ feed});
+            repository.Save(new List<IFeed>{ feed });
             var newTimeStamp = feed.TimeStamp;
             Assert.IsFalse(feed.IsChanged());
             Assert.AreNotEqual(oldTimeStamp, newTimeStamp);

@@ -22,8 +22,8 @@ namespace Gnosis.Alexandria.Repositories
         private readonly IDictionary<Type, Func<IEntity>> entityConstructors = new Dictionary<Type, Func<IEntity>>();
         private readonly IDictionary<Type, Func<IChild>> childConstructors = new Dictionary<Type, Func<IChild>>();
         private readonly IDictionary<Type, Func<IValue>> valueConstructors = new Dictionary<Type, Func<IValue>>();
-        private readonly IDictionary<string, Action<IEntity, IChild>> addChildActions = new Dictionary<string, Action<IEntity, IChild>>();
-        private readonly IDictionary<string, Action<IEntity, IValue>> addValueActions = new Dictionary<string, Action<IEntity, IValue>>();
+        //private readonly IDictionary<string, Action<IEntity, IChild>> addChildActions = new Dictionary<string, Action<IEntity, IChild>>();
+        //private readonly IDictionary<string, Action<IEntity, IValue>> addValueActions = new Dictionary<string, Action<IEntity, IValue>>();
 
         protected IContext Context
         {
@@ -35,30 +35,33 @@ namespace Gnosis.Alexandria.Repositories
             get { return logger; }
         }
 
-        protected void MapEntityConstructor(Type type, Func<IEntity> constructor)
+        protected void MapEntityConstructor<T>(Func<IEntity> constructor)
+            where T : IEntity
         {
-            entityConstructors.Add(type, constructor);
+            entityConstructors.Add(typeof(T), constructor);
         }
 
-        protected void MapChildConstructor(Type type, Func<IChild> constructor)
+        protected void MapChildConstructor<T>(Func<IChild> constructor)
+            where T : IChild
         {
-            childConstructors.Add(type, constructor);
+            childConstructors.Add(typeof(T), constructor);
         }
 
-        protected void MapValueConstructor(Type type, Func<IValue> constructor)
+        protected void MapValueConstructor<T>(Func<IValue> constructor)
+            where T : IValue
         {
-            valueConstructors.Add(type, constructor);
+            valueConstructors.Add(typeof(T), constructor);
         }
 
-        protected void MapAddChildAction(string childName, Action<IEntity, IChild> action)
-        {
-            addChildActions.Add(childName, action);
-        }
+        //protected void MapAddChildAction(string childName, Action<IEntity, IChild> action)
+        //{
+        //    addChildActions.Add(childName, action);
+        //}
 
-        protected void MapAddValueAction(string valueName, Action<IEntity, IValue> action)
-        {
-            addValueActions.Add(valueName, action);
-        }
+        //protected void MapAddValueAction(string valueName, Action<IEntity, IValue> action)
+        //{
+        //    addValueActions.Add(valueName, action);
+        //}
 
         #region IFactory Members
 
@@ -140,33 +143,45 @@ namespace Gnosis.Alexandria.Repositories
             return (T)CreateValue(typeof(T), record);
         }
 
-        public void AddChildren(Type parentType, Type childType, string childName, IEnumerable<IEntity> parents, IEnumerable<IChild> children)
+        /*
+        public void AddChildren(string childName, IEnumerable<IEntity> parents, IDictionary<Guid, IList<IChild>> children)
         {
             if (!addChildActions.ContainsKey(childName))
                 throw new InvalidOperationException("No add action mapped for child name: " + childName);
             
             foreach (var parent in parents)
             {
-                foreach (var child in children.Where(x => x.Parent == parent.Id).OrderBy(x => x.Sequence))
+                if (children.ContainsKey(parent.Id))
                 {
-                    addChildActions[childName](parent, child);
+                    foreach (var child in children[parent.Id].OrderBy(x => x.Sequence))
+                        addChildActions[childName](parent, child);
                 }
+                //foreach (var child in children.Where(x => x.Parent == parent.Id).OrderBy(x => x.Sequence))
+                //{
+                //    addChildActions[childName](parent, child);
+                //}
             }
         }
 
-        public void AddValues(Type parentType, Type valueType, string valueName, IEnumerable<IEntity> parents, IEnumerable<IValue> values)
+        public void AddValues(string valueName, IEnumerable<IEntity> parents, IDictionary<Guid, IList<IValue>> values)
         {
             if (!addValueActions.ContainsKey(valueName))
                 throw new InvalidOperationException("No add action mapped for value name: " + valueName);
 
             foreach (var parent in parents)
             {
-                foreach (var value in values.Where(x => x.Parent == parent.Id).OrderBy(x => x.Sequence))
+                if (values.ContainsKey(parent.Id))
                 {
-                    addValueActions[valueName](parent, value);
+                    foreach (var value in values[parent.Id].OrderBy(x => x.Sequence))
+                        addValueActions[valueName](parent, value);
                 }
+                //foreach (var value in values.Where(x => x.Parent == parent.Id).OrderBy(x => x.Sequence))
+                //{
+                //    addValueActions[valueName](parent, value);
+                //}
             }
         }
+        */
 
         #endregion
     }

@@ -25,6 +25,8 @@ namespace Gnosis.Alexandria.Models
         private readonly IDictionary<Guid, IValue> removedValues = new Dictionary<Guid, IValue>();
         private readonly IDictionary<string, Action<object>> initializers = new Dictionary<string, Action<object>>();
         private readonly IDictionary<string, Action<string, IDataRecord>> customInitializers = new Dictionary<string, Action<string, IDataRecord>>();
+        private readonly IDictionary<string, Action<IChild>> childInitializers = new Dictionary<string, Action<IChild>>();
+        private readonly IDictionary<string, Action<IValue>> valueInitializers = new Dictionary<string, Action<IValue>>();
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -71,6 +73,16 @@ namespace Gnosis.Alexandria.Models
         protected void AddInitializer(string name, Action<string, IDataRecord> action)
         {
             customInitializers[name] = action;
+        }
+
+        protected void AddChildInitializer(string name, Action<IChild> action)
+        {
+            childInitializers[name] = action;
+        }
+
+        protected void AddValueInitializer(string name, Action<IValue> action)
+        {
+            valueInitializers[name] = action;
         }
 
         protected void AddChild(Action action, IChild child, string propertyName)
@@ -192,6 +204,25 @@ namespace Gnosis.Alexandria.Models
                 foreach (var customInitializer in customInitializers)
                     state.Initialize(customInitializer.Key, customInitializer.Value);
             }
+        }
+
+        public virtual void InitializeChildren(string name, IEnumerable<IChild> children)
+        {
+            if (!childInitializers.ContainsKey(name))
+                throw new InvalidOperationException("No child initializer with name: " + name);
+
+            foreach (var child in children)
+                childInitializers[name](child);
+        }
+
+        public virtual void InitializeValues(string name, IEnumerable<IValue> values)
+        {
+            if (!valueInitializers.ContainsKey(name))
+                throw new InvalidOperationException("No value initializer with name: " + name);
+
+
+            foreach (var value in values)
+                valueInitializers[name](value);
         }
 
         public virtual void Save(DateTime timeStamp)

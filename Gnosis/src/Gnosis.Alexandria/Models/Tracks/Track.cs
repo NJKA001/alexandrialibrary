@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 using Gnosis.Core;
+using Gnosis.Alexandria.Models;
 
 namespace Gnosis.Alexandria.Models.Tracks
 {
@@ -47,6 +48,20 @@ namespace Gnosis.Alexandria.Models.Tracks
             AddInitializer("Copyright", x => this.copyright = x.ToString());
             AddInitializer("Publisher", x => this.publisher = x.ToString());
             AddInitializer("InternationalStandardRecordingCode", x => this.internationalStandardRecordingCode = x.ToString());
+            AddChildInitializer("Track_Pictures", child => AddPicture(child as ITrackPicture));
+            AddChildInitializer("Track_Lyrics", child => AddLyrics(child as ITrackUnsynchronizedLyrics));
+            AddChildInitializer("Track_SynchronizedLyrics", child => AddSynchronizedLyrics(child as ITrackSynchronizedLyrics));
+            AddChildInitializer("Track_Ratings", child => AddRating(child as ITrackRating));
+            AddValueInitializer("Track_Identifiers", value => AddIdentifier(value as ITrackIdentifier));
+            AddValueInitializer("Track_Links", value => AddLink(value as ITrackLink));
+            AddValueInitializer("Track_Metadata", value => AddMetadatum(value as ITrackMetadatum));
+            AddValueInitializer("Track_TitleHashCodes", value => AddTitleHashCode(value as IHashCode));
+            AddValueInitializer("Track_AlbumHashCodes", value => AddAlbumHashCode(value as IHashCode));
+            AddValueInitializer("Track_ArtistHashCodes", value => AddArtistHashCode(value as IHashCode));
+            AddValueInitializer("Track_AlbumArtistHashCodes", value => AddAlbumArtistHashCode(value as IHashCode));
+            AddValueInitializer("Track_ComposerHashCodes", value => AddComposerHashCode(value as IHashCode));
+            AddValueInitializer("Track_ConductorHashCodes", value => AddConductorHashCode(value as IHashCode));
+            AddValueInitializer("Track_OriginalTitleHashCodes", value => AddOriginalTitleHashCode(value as IHashCode));
         }
 
         private Uri location;
@@ -101,6 +116,115 @@ namespace Gnosis.Alexandria.Models.Tracks
         private readonly ObservableCollection<IHashCode> composerHashCodes = new ObservableCollection<IHashCode>();
         private readonly ObservableCollection<IHashCode> conductorHashCodes = new ObservableCollection<IHashCode>();
         private readonly ObservableCollection<IHashCode> originalTitleHashCodes = new ObservableCollection<IHashCode>();
+
+        #region Private Methods
+
+        private void AddPicture(ITrackPicture picture)
+        {
+            AddChild(() => pictures.Add(picture), picture, "Pictures");
+        }
+
+        private void AddLyrics(ITrackUnsynchronizedLyrics lyrics)
+        {
+            AddChild(() => this.lyrics.Add(lyrics), lyrics, "Lyrics");
+        }
+
+        private void AddSynchronizedLyrics(ITrackSynchronizedLyrics synchronizedLyrics)
+        {
+            AddChild(() => this.synchronizedLyrics.Add(synchronizedLyrics), synchronizedLyrics, "SynchronizedLyrics");
+        }
+
+        private void AddRating(ITrackRating rating)
+        {
+            AddChild(() => this.ratings.Add(rating), rating, "Ratings");
+        }
+
+        private void AddIdentifier(ITrackIdentifier identifier)
+        {
+            AddValue(() => this.identifiers.Add(identifier), identifier, "Identifiers");
+        }
+
+        private void AddLink(ITrackLink link)
+        {
+            AddValue(() => this.links.Add(link), link, "Links");
+        }
+
+        private void AddMetadatum(ITrackMetadatum metadatum)
+        {
+            AddValue(() => this.metadata.Add(metadatum), metadatum, "Metadata");
+        }
+
+        private void AddTitleHashCode(IHashCode hashCode)
+        {
+            AddValue(() => this.titleHashCodes.Add(hashCode), hashCode, "TitleHashCodes");
+        }
+
+        private void RemoveTitleHashCode(IHashCode hashCode)
+        {
+            RemoveValue(() => this.titleHashCodes.Remove(hashCode), hashCode.Id, "TitleHashCodes");
+        }
+
+        private void AddAlbumHashCode(IHashCode hashCode)
+        {
+            AddValue(() => this.albumHashCodes.Add(hashCode), hashCode, "AlbumHashCodes");
+        }
+
+        private void RemoveAlbumHashCode(IHashCode hashCode)
+        {
+            RemoveValue(() => this.albumHashCodes.Remove(hashCode), hashCode.Id, "AlbumHashCodes");
+        }
+
+        private void AddArtistHashCode(IHashCode hashCode)
+        {
+            AddValue(() => this.artistHashCodes.Add(hashCode), hashCode, "ArtistHashCodes");
+        }
+
+        private void RemoveArtistHashCode(IHashCode hashCode)
+        {
+            RemoveValue(() => this.albumHashCodes.Remove(hashCode), hashCode.Id, "ArtistHashCodes");
+        }
+
+        private void AddAlbumArtistHashCode(IHashCode hashCode)
+        {
+            AddValue(() => this.albumArtistHashCodes.Add(hashCode), hashCode, "AlbumArtistHashCodes");
+        }
+
+        private void RemoveAlbumArtistHashCode(IHashCode hashCode)
+        {
+            RemoveValue(() => this.albumArtistHashCodes.Remove(hashCode), hashCode.Id, "AlbumArtistHashCodes");
+        }
+
+        private void AddComposerHashCode(IHashCode hashCode)
+        {
+            AddValue(() => this.composerHashCodes.Add(hashCode), hashCode, "ComposerHashCodes");
+        }
+
+        private void RemoveComposerHashCode(IHashCode hashCode)
+        {
+            RemoveValue(() => this.composerHashCodes.Remove(hashCode), hashCode.Id, "ComposerHashCodes");
+        }
+
+        private void AddConductorHashCode(IHashCode hashCode)
+        {
+            AddValue(() => this.conductorHashCodes.Add(hashCode), hashCode, "ConductorHashCodes");
+        }
+
+        private void RemoveConductorHashCode(IHashCode hashCode)
+        {
+            RemoveValue(() => this.conductorHashCodes.Remove(hashCode), hashCode.Id, "ConductorHashCodes");
+        }
+
+        private void AddOriginalTitleHashCode(IHashCode hashCode)
+        {
+            AddValue(() => this.originalTitleHashCodes.Add(hashCode), hashCode, "OriginalTitleHashCodes");
+        }
+
+        private void RemoveOriginalTitleHashCode(IHashCode hashCode)
+        {
+            RemoveValue(() => this.originalTitleHashCodes.Remove(hashCode), hashCode.Id, "OriginalTitleHashCodes");
+        }
+
+        #endregion
 
         #region ITrack Members
 
@@ -541,48 +665,15 @@ namespace Gnosis.Alexandria.Models.Tracks
             get { return pictures; }
         }
 
-        public void AddPicture(ITrackPicture picture)
-        {
-            AddChild(() => pictures.Add(picture), picture, "Pictures");
-        }
-
-        public void RemovePicture(ITrackPicture picture)
-        {
-            RemoveChild(() => pictures.Remove(picture), picture.Id, "Pictures");
-        }
-
-
         public IEnumerable<ITrackUnsynchronizedLyrics> Lyrics
         {
             get { return lyrics; }
         }
 
-        public void AddLyrics(ITrackUnsynchronizedLyrics lyrics)
-        {
-            AddChild(() => this.lyrics.Add(lyrics), lyrics, "Lyrics");
-        }
-
-        public void RemoveLyrics(ITrackUnsynchronizedLyrics lyrics)
-        {
-            RemoveChild(() => this.lyrics.Remove(lyrics), lyrics.Id, "Lyrics");
-        }
-
-
         public IEnumerable<ITrackSynchronizedLyrics> SynchronizedLyrics
         {
             get { return synchronizedLyrics; }
         }
-
-        public void AddSynchronizedLyrics(ITrackSynchronizedLyrics synchronizedLyrics)
-        {
-            AddChild(() => this.synchronizedLyrics.Add(synchronizedLyrics), synchronizedLyrics, "SynchronizedLyrics");
-        }
-
-        public void RemoveSynchronizedLyrics(ITrackSynchronizedLyrics synchronizedLyrics)
-        {
-            RemoveChild(() => this.synchronizedLyrics.Remove(synchronizedLyrics), synchronizedLyrics.Id, "SynchronizedLyrics");
-        }
-
 
         public IEnumerable<ITrackIdentifier> Identifiers
         {
@@ -637,6 +728,108 @@ namespace Gnosis.Alexandria.Models.Tracks
         public IEnumerable<IHashCode> OriginalTitleHashCodes
         {
             get { return originalTitleHashCodes; }
+        }
+
+
+        public void AddPicture(string textEncoding, string mediaType, TrackPictureType pictureType, string description, byte[] pictureData)
+        {
+            var picture = new TrackPicture();
+            picture.Initialize(new EntityInitialState(Context, Logger, this.Id));
+            picture.TextEncoding = textEncoding;
+            picture.MediaType = mediaType;
+            picture.PictureType = pictureType;
+            picture.Description = description;
+            picture.PictureData = pictureData;
+            AddPicture(picture);
+        }
+
+        public void RemovePicture(ITrackPicture picture)
+        {
+            RemoveChild(() => pictures.Remove(picture), picture.Id, "Pictures");
+        }
+
+
+        public void AddLyrics(string textEncoding, string language, string description, string lyrics)
+        {
+            var lyricsItem = new TrackUnsynchronizedLyrics();
+            lyricsItem.Initialize(new EntityInitialState(Context, Logger, this.Id));
+            lyricsItem.TextEncoding = textEncoding;
+            lyricsItem.Language = language;
+            lyricsItem.Description = description;
+            lyricsItem.Lyrics = lyrics;
+            AddLyrics(lyricsItem);
+        }
+
+        public void RemoveLyrics(ITrackUnsynchronizedLyrics lyrics)
+        {
+            RemoveChild(() => this.lyrics.Remove(lyrics), lyrics.Id, "Lyrics");
+        }
+
+
+        public void AddSynchronizedLyrics(string textEncoding, string language, string description, string lyrics, TrackSynchronizedTextType contentType)
+        {
+            var lyricsItem = new TrackSynchronizedLyrics();
+            lyricsItem.Initialize(new EntityInitialState(Context, Logger, this.Id));
+            lyricsItem.TextEncoding = textEncoding;
+            lyricsItem.Language = language;
+            lyricsItem.Description = description;
+            lyricsItem.Lyrics = lyrics;
+            lyricsItem.ContentType = contentType;
+            AddSynchronizedLyrics(lyricsItem);
+        }
+
+        public void RemoveSynchronizedLyrics(ITrackSynchronizedLyrics synchronizedLyrics)
+        {
+            RemoveChild(() => this.synchronizedLyrics.Remove(synchronizedLyrics), synchronizedLyrics.Id, "SynchronizedLyrics");
+        }
+
+
+        public void AddRating(byte rating, Uri user, ulong playCount)
+        {
+            var ratingItem = new TrackRating();
+            ratingItem.Initialize(new EntityInitialState(Context, Logger, this.Id));
+            ratingItem.Rating = rating;
+            ratingItem.User = user;
+            ratingItem.PlayCount = playCount;
+            AddRating(ratingItem);
+        }
+
+        public void RemoveRating(ITrackRating rating)
+        {
+            RemoveChild(() => this.ratings.Remove(rating), rating.Id, "Ratings");
+        }
+
+
+        public void AddIdentifier(Uri scheme, string identifier)
+        {
+            AddIdentifier(new TrackIdentifier(this.Id, scheme, identifier));
+        }
+
+        public void RemoveIdentifier(ITrackIdentifier identifier)
+        {
+            RemoveValue(() => this.identifiers.Remove(identifier), identifier.Id, "Identifiers");
+        }
+
+
+        public void AddLink(string textEncoding, string relationship, Uri location)
+        {
+            AddLink(new TrackLink(this.Id, textEncoding, relationship, location));
+        }
+
+        public void RemoveLink(ITrackLink link)
+        {
+            RemoveValue(() => this.links.Remove(link), link.Id, "Links");
+        }
+
+
+        public void AddMetadatum(string textEncoding, string description, string content)
+        {
+            AddMetadatum(new TrackMetadatum(this.Id, textEncoding, description, content));
+        }
+
+        public void RemoveMetadatum(ITrackMetadatum metadatum)
+        {
+            RemoveValue(() => this.metadata.Remove(metadatum), metadatum.Id, "Metadata");
         }
 
         #endregion

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Tracks;
 using Gnosis.Core;
 
@@ -14,11 +15,15 @@ namespace Gnosis.Alexandria.Repositories.Tracks
         public TrackFactory(IContext context, ILogger logger)
             : base(context, logger)
         {
-            MapEntityConstructor(typeof(ITrack), () => new Track());
-            MapChildConstructor(typeof(ITrackPicture), () => new TrackPicture());
-            MapChildConstructor(typeof(ITrackRating), () => new TrackRating());
-            MapChildConstructor(typeof(ITrackSynchronizedLyrics), () => new TrackSynchronizedLyrics());
-            MapChildConstructor(typeof(ITrackUnsynchronizedLyrics), () => new TrackUnsynchronizedLyrics());
+            MapEntityConstructor<ITrack>(() => new Track());
+            MapChildConstructor<ITrackPicture>(() => new TrackPicture());
+            MapChildConstructor<ITrackRating>(() => new TrackRating());
+            MapChildConstructor<ITrackSynchronizedLyrics>(() => new TrackSynchronizedLyrics());
+            MapChildConstructor<ITrackUnsynchronizedLyrics>(() => new TrackUnsynchronizedLyrics());
+            MapValueConstructor<ITrackIdentifier>(() => new TrackIdentifier());
+            MapValueConstructor<ITrackLink>(() => new TrackLink());
+            MapValueConstructor<ITrackMetadatum>(() => new TrackMetadatum());
+            MapValueConstructor<IHashCode>(() => new HashCode());
         }
     }
 }
