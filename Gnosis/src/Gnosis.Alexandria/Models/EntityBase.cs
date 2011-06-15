@@ -29,6 +29,8 @@ namespace Gnosis.Alexandria.Models
         private readonly IDictionary<string, Action<string, IDataRecord>> customInitializers = new Dictionary<string, Action<string, IDataRecord>>();
         private readonly IDictionary<string, Action<IChild>> childInitializers = new Dictionary<string, Action<IChild>>();
         private readonly IDictionary<string, Action<IValue>> valueInitializers = new Dictionary<string, Action<IValue>>();
+        private readonly IDictionary<Uri, Func<string, IHashCode>> hashFunctions = new Dictionary<Uri, Func<string, IHashCode>>();
+        private readonly IDictionary<string, Tuple<Action<IHashCode>, Action<IHashCode>>> hashInitializers = new Dictionary<string, Tuple<Action<IHashCode>, Action<IHashCode>>>();
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -206,6 +208,62 @@ namespace Gnosis.Alexandria.Models
             }
         }
 
+        protected void AddHashFunction(Uri scheme, Func<string, IHashCode> function)
+        {
+            hashFunctions[scheme] = function;
+        }
+
+        protected void AddHashInitializer(Action<IHashCode> addFunction, Action<IHashCode> removeFunction, Expression<Func<T, IEnumerable<IHashCode>>> property)
+        {
+            var propertyInfo = property.AsProperty();
+
+            hashInitializers[propertyInfo.Name] = new Tuple<Action<IHashCode>,Action<IHashCode>>(addFunction, removeFunction);
+        }
+
+        protected void RefreshHashCodes(string value, Expression<Func<T, IEnumerable<IHashCode>>> property)
+        {
+            if (hashFunctions.Count == 0)
+                throw new InvalidOperationException("No hash functions defined for this entity");
+
+            var propertyInfo = property.AsProperty();
+            if (!hashInitializers.ContainsKey(propertyInfo.Name))
+                throw new InvalidOperationException("No hash initializer defined for property: " + propertyInfo.Name);
+
+            var source = propertyInfo.GetValue(this, null) as IEnumerable<IHashCode>;
+            if (source == null)
+                throw new InvalidOperationException("Property is not a valid hash source: " + propertyInfo.Name);
+
+            var addAction = hashInitializers[propertyInfo.Name].Item1;
+            var removeAction = hashInitializers[propertyInfo.Name].Item2;
+
+            foreach (var scheme in hashFunctions.Keys)
+            {
+                var oldCodes = new List<IHashCode>();
+                oldCodes.AddRange(source.Where(hashCode => hashCode.Scheme == scheme));
+
+                foreach (var hashCode in oldCodes)
+                    removeAction(hashCode);
+
+                var rootCode = hashFunctions[scheme](value);
+                if (rootCode != null)
+                {
+                    addAction(rootCode);
+
+                    var tokens = value.ToTokens();
+                    if (tokens.Count() > 1)
+                    {
+                        foreach (var token in tokens)
+                        {
+                            var hashCode = hashFunctions[scheme](token);
+                            if (hashCode != null && hashCode.Value != value)
+                                addAction(hashCode);
+                        }
+                    }
+                }
+            }
+        }
+
+        /*
         protected static void ReplaceHashCodes(Uri scheme, string value, Func<string, IHashCode> hashFunction, Action<IHashCode> addAction, Action<IHashCode> removeAction, IEnumerable<IHashCode> source)
         {
             var codesToRemove = new List<IHashCode>();
@@ -229,6 +287,7 @@ namespace Gnosis.Alexandria.Models
                 }
             }
         }
+        */
 
         public Guid Id
         {

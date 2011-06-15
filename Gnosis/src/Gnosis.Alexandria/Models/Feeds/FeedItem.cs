@@ -33,6 +33,14 @@ namespace Gnosis.Alexandria.Models.Feeds
             AddValueInitializer(value => AddAuthorHashCode(value as IHashCode), x => x.AuthorHashCodes);
             AddValueInitializer(value => AddContributorHashCode(value as IHashCode), x => x.ContributorHashCodes);
             AddValueInitializer(value => AddSummaryHashCode(value as IHashCode), x => x.SummaryHashCodes);
+
+            AddHashFunction(HashCode.SchemeDoubleMetaphone, token => HashCode.CreateDoubleMetaphoneHash(this.Id, token));
+            AddHashFunction(HashCode.SchemeNameHash, token => HashCode.CreateNameHash(this.Id, token));
+
+            AddHashInitializer(hashCode => AddTitleHashCode(hashCode), hashCode => RemoveTitleHashCode(hashCode), feedItem => feedItem.TitleHashCodes);
+            AddHashInitializer(hashCode => AddAuthorHashCode(hashCode), hashCode => RemoveAuthorHashCode(hashCode), feedItem => feedItem.AuthorHashCodes);
+            AddHashInitializer(hashCode => AddContributorHashCode(hashCode), hashCode => RemoveContributorHashCode(hashCode), feedItem => feedItem.ContributorHashCodes);
+            AddHashInitializer(hashCode => AddSummaryHashCode(hashCode), hashCode => RemoveSummaryHashCode(hashCode), feedItem => feedItem.SummaryHashCodes);
         }
 
         private string title = string.Empty;
@@ -126,6 +134,7 @@ namespace Gnosis.Alexandria.Models.Feeds
                 if (value != null && title != value)
                 {
                     Change(() => title = value, x => x.Title);
+                    RefreshHashCodes(value, feed => feed.TitleHashCodes);
                 }
             }
         }
@@ -150,6 +159,7 @@ namespace Gnosis.Alexandria.Models.Feeds
                 if (value != null && authors != value)
                 {
                     Change(() => authors = value, x => x.Authors);
+                    RefreshHashCodes(value, x => x.AuthorHashCodes);
                 }
             }
         }
