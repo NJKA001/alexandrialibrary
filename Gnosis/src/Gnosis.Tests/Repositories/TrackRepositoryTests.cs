@@ -205,7 +205,7 @@ namespace Gnosis.Tests.Repositories
             Assert.IsTrue(firstPicture.Data.Length == coverImage.ToBytes().Length);
 
             var firstRating = lookupTrack.Ratings.FirstOrDefault();
-            Assert.AreEqual(ratingScore, firstRating.Rating);
+            Assert.AreEqual(ratingScore, firstRating.Score);
             Assert.AreEqual(ratingUser, firstRating.User);
             Assert.AreEqual(ratingPlayCount, firstRating.PlayCount);
         }

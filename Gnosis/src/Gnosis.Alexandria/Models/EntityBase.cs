@@ -10,8 +10,9 @@ using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Models
 {
-    public abstract class EntityBase
+    public abstract class EntityBase<T>
         : IEntity
+        where T : IEntity
     {
         private IContext context;
         private ILogger logger;
@@ -54,7 +55,7 @@ namespace Gnosis.Alexandria.Models
             get { return logger; }
         }
 
-        protected void Change(Action action, string propertyName)
+        protected void Change(Action action, Expression<Func<T, object>> property)
         {
             if (!isInitialized)
                 throw new InvalidOperationException("Entity must be initialized before it can be changed");
@@ -63,38 +64,45 @@ namespace Gnosis.Alexandria.Models
 
             isChanged = true;
 
-            OnPropertyChanged(propertyName);
+            var propertyInfo = property.AsProperty();
+            OnPropertyChanged(propertyInfo.Name);
         }
 
-        protected void AddInitializer(string name, Action<object> action)
+        protected void AddInitializer(Action<object> action, Expression<Func<T, object>> property)
         {
-            initializers[name] = action;
+            var propertyInfo = property.AsProperty();
+            initializers[propertyInfo.Name] = action;
         }
 
-        protected void AddInitializer(string name, Action<string, IDataRecord> action)
+        protected void AddInitializer(Action<string, IDataRecord> action, Expression<Func<T, object>> property)
         {
-            customInitializers[name] = action;
+            var propertyInfo = property.AsProperty();
+            customInitializers[propertyInfo.Name] = action;
         }
 
-        protected void AddChildInitializer(string name, Action<IChild> action)
+        protected void AddChildInitializer<TChild>(Action<IChild> action)
+            where TChild : IChild
         {
-            childInitializers[name] = action;
+            var childName = typeof(TChild).GetNormalizedName();
+            childInitializers[childName] = action;
         }
 
-        protected void AddValueInitializer(string name, Action<IValue> action)
+        protected void AddValueInitializer(Action<IValue> action, Expression<Func<T, object>> property)
         {
+            var propertyInfo = property.AsProperty();
+            var entityName = typeof(T).GetNormalizedName();
+            var name = string.Format("{0}_{1}", entityName, propertyInfo.Name);
             valueInitializers[name] = action;
         }
 
-        protected void AddChild<TParent, TChild>(Action action, TChild child, Expression<Func<TParent, object>> property)
-            where TParent : IEntity
+        protected void AddChild<TChild>(Action action, TChild child, Expression<Func<T, object>> property)
             where TChild : IChild
         {
             if (!isInitialized)
                 throw new InvalidOperationException("Entity must be initialized before children can be added");
 
             var propertyInfo = property.AsProperty();
-            var parentInfo = new EntityInfo(typeof(TParent));
+            var parentInfo = new EntityInfo(typeof(T));
             var childInfo = new EntityInfo(typeof(TChild), parentInfo);
             var key = childInfo.Name;
 
@@ -115,15 +123,14 @@ namespace Gnosis.Alexandria.Models
             }
         }
 
-        protected void RemoveChild<TParent, TChild>(Action action, TChild child, Expression<Func<TParent, object>> property)
-            where TParent : IEntity
+        protected void RemoveChild<TChild>(Action action, TChild child, Expression<Func<T, object>> property)
             where TChild : IChild
         {
             if (!isInitialized)
                 throw new InvalidOperationException("Entity must be initialized before children can be removed");
 
             var propertyInfo = property.AsProperty();
-            var parentInfo = new EntityInfo(typeof(TParent));
+            var parentInfo = new EntityInfo(typeof(T));
             var childInfo = new EntityInfo(typeof(TChild), parentInfo);
             var key = childInfo.Name;
 
@@ -144,14 +151,13 @@ namespace Gnosis.Alexandria.Models
             }
         }
 
-        protected void AddValue<TParent, TValue>(Action action, TValue value, Expression<Func<TParent, object>> property)
-            where TParent : IEntity
+        protected void AddValue<TValue>(Action action, TValue value, Expression<Func<T, object>> property)
             where TValue : IValue
         {
             if (!isInitialized)
                 throw new InvalidOperationException("Entity must be initialized before values can be added");
 
-            var entity = new EntityInfo(typeof(TParent));
+            var entity = new EntityInfo(typeof(T));
             var propertyInfo = property.AsProperty();
             var key = string.Format("{0}_{1}", entity.Name, propertyInfo.Name);
 
@@ -172,14 +178,13 @@ namespace Gnosis.Alexandria.Models
             }
         }
 
-        protected void RemoveValue<TParent, TValue>(Action action, TValue value, Expression<Func<TParent, object>> property)
-            where TParent : IEntity
+        protected void RemoveValue<TValue>(Action action, TValue value, Expression<Func<T, object>> property)
             where TValue : IValue
         {
             if (!isInitialized)
                 throw new InvalidOperationException("Entity must be initialized before values can be removed");
 
-            var entity = new EntityInfo(typeof(TParent));
+            var entity = new EntityInfo(typeof(T));
             var propertyInfo = property.AsProperty();
 
             var key = string.Format("{0}_{1}", entity.Name, propertyInfo.Name);

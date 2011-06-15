@@ -8,60 +8,62 @@ using Gnosis.Alexandria.Models;
 namespace Gnosis.Alexandria.Models.Tracks
 {
     public class Track
-        : EntityBase, ITrack
+        : EntityBase<ITrack>, ITrack
     {
         public Track()
         {
-            AddInitializer("Location", x => this.location = x.ToUri());
-            AddInitializer("MediaType", x => this.mediaType = x.ToString());
-            AddInitializer("Title", x => this.title = x.ToString());
-            AddInitializer("TitleSort", x => this.titleSort = x.ToString());
-            AddInitializer("Subtitle", x => this.subtitle = x.ToString());
-            AddInitializer("Grouping", x => this.grouping = x.ToString());
-            AddInitializer("Comment", x => this.comment = x.ToString());
-            AddInitializer("Album", x => this.album = x.ToString());
-            AddInitializer("AlbumSort", x => this.albumSort = x.ToString());
-            AddInitializer("AlbumSubtitle", x => this.albumSubtitle = x.ToString());
-            AddInitializer("Artists", x => this.artists = x.ToString());
-            AddInitializer("ArtistsSort", x => this.artistsSort = x.ToString());
-            AddInitializer("AlbumArtists", x => this.albumArtists = x.ToString());
-            AddInitializer("Composers", x => this.composers = x.ToString());
-            AddInitializer("Conductors", x => this.conductors = x.ToString());
-            AddInitializer("Genres", x => this.genres = x.ToString());
-            AddInitializer("Moods", x => this.moods = x.ToString());
-            AddInitializer("Languages", x => this.languages = x.ToString());
-            AddInitializer("RecordingDate", x => this.recordingDate = x.ToDateTime());
-            AddInitializer("ReleaseDate", x => this.releaseDate = x.ToDateTime());
-            AddInitializer("OriginalTitle", x => this.originalTitle = x.ToString());
-            AddInitializer("OriginalReleaseDate", x => this.originalReleaseDate = x.ToDateTime());
-            AddInitializer("TrackNumber", x => this.trackNumber = x.ToUInt32());
-            AddInitializer("TrackCount", x => this.trackCount = x.ToUInt32());
-            AddInitializer("DiscNumber", x => this.discNumber = x.ToUInt32());
-            AddInitializer("DiscCount", x => this.discCount = x.ToUInt32());
-            AddInitializer("Duration", x => this.duration = x.ToTimeSpan());
-            AddInitializer("BeatsPerMinute", x => this.beatsPerMinute = x.ToUInt32());
-            AddInitializer("PlayCount", x => this.playCount = x.ToUInt64());
-            AddInitializer("PlaylistDelay", x => this.playlistDelay = x.ToTimeSpan());
-            AddInitializer("OriginalFileName", x => this.originalFileName = x.ToString());
-            AddInitializer("EncodingDate", x => this.encodingDate = x.ToDateTime());
-            AddInitializer("TaggingDate", x => this.taggingDate = x.ToDateTime());
-            AddInitializer("Copyright", x => this.copyright = x.ToString());
-            AddInitializer("Publisher", x => this.publisher = x.ToString());
-            AddInitializer("InternationalStandardRecordingCode", x => this.internationalStandardRecordingCode = x.ToString());
-            AddChildInitializer("TrackPicture", child => AddPicture(child as ITrackPicture));
-            AddChildInitializer("TrackUnsynchronizedLyrics", child => AddLyrics(child as ITrackUnsynchronizedLyrics));
-            AddChildInitializer("TrackSynchronizedLyrics", child => AddSynchronizedLyrics(child as ITrackSynchronizedLyrics));
-            AddChildInitializer("TrackRating", child => AddRating(child as ITrackRating));
-            AddValueInitializer("Track_Identifiers", value => AddIdentifier(value as ITrackIdentifier));
-            AddValueInitializer("Track_Links", value => AddLink(value as ITrackLink));
-            AddValueInitializer("Track_Metadata", value => AddMetadatum(value as ITrackMetadatum));
-            AddValueInitializer("Track_TitleHashCodes", value => AddTitleHashCode(value as IHashCode));
-            AddValueInitializer("Track_AlbumHashCodes", value => AddAlbumHashCode(value as IHashCode));
-            AddValueInitializer("Track_ArtistHashCodes", value => AddArtistHashCode(value as IHashCode));
-            AddValueInitializer("Track_AlbumArtistHashCodes", value => AddAlbumArtistHashCode(value as IHashCode));
-            AddValueInitializer("Track_ComposerHashCodes", value => AddComposerHashCode(value as IHashCode));
-            AddValueInitializer("Track_ConductorHashCodes", value => AddConductorHashCode(value as IHashCode));
-            AddValueInitializer("Track_OriginalTitleHashCodes", value => AddOriginalTitleHashCode(value as IHashCode));
+            AddInitializer(value => this.location = value.ToUri(), track => track.Location);
+            AddInitializer(x => this.mediaType = x.ToString(), track => track.MediaType);
+            AddInitializer(x => this.title = x.ToString(), track => track.Title);
+            AddInitializer(x => this.titleSort = x.ToString(), track => track.TitleSort);
+            AddInitializer(x => this.subtitle = x.ToString(), track => track.Subtitle);
+            AddInitializer(x => this.grouping = x.ToString(), track => track.Grouping);
+            AddInitializer(x => this.comment = x.ToString(), track => track.Comment);
+            AddInitializer(x => this.album = x.ToString(), track => track.Album);
+            AddInitializer(x => this.albumSort = x.ToString(), track => track.AlbumSort);
+            AddInitializer(x => this.albumSubtitle = x.ToString(), track => track.AlbumSubtitle);
+            AddInitializer(x => this.artists = x.ToString(), track => track.Artists);
+            AddInitializer(x => this.artistsSort = x.ToString(), track => track.ArtistsSort);
+            AddInitializer(x => this.albumArtists = x.ToString(), track => track.AlbumArtists);
+            AddInitializer(x => this.composers = x.ToString(), track => track.Composers);
+            AddInitializer(x => this.conductors = x.ToString(), track => track.Conductors);
+            AddInitializer(x => this.genres = x.ToString(), track => track.Genres);
+            AddInitializer(x => this.moods = x.ToString(), track => track.Moods);
+            AddInitializer(x => this.languages = x.ToString(), track => track.Languages);
+            AddInitializer(x => this.recordingDate = x.ToDateTime(), track => track.RecordingDate);
+            AddInitializer(x => this.releaseDate = x.ToDateTime(), track => track.ReleaseDate);
+            AddInitializer(x => this.originalTitle = x.ToString(), track => track.OriginalTitle);
+            AddInitializer(x => this.originalReleaseDate = x.ToDateTime(), track => track.OriginalReleaseDate);
+            AddInitializer(x => this.trackNumber = x.ToUInt32(), track => track.TrackNumber);
+            AddInitializer(x => this.trackCount = x.ToUInt32(), track => track.TrackCount);
+            AddInitializer(x => this.discNumber = x.ToUInt32(), track => track.DiscNumber);
+            AddInitializer(x => this.discCount = x.ToUInt32(), track => track.DiscCount);
+            AddInitializer(x => this.duration = x.ToTimeSpan(), track => track.Duration);
+            AddInitializer(x => this.beatsPerMinute = x.ToUInt32(), track => track.BeatsPerMinute);
+            AddInitializer(x => this.playCount = x.ToUInt64(), track => track.PlayCount);
+            AddInitializer(x => this.playlistDelay = x.ToTimeSpan(), track => track.PlaylistDelay);
+            AddInitializer(x => this.originalFileName = x.ToString(), track => track.OriginalFileName);
+            AddInitializer(x => this.encodingDate = x.ToDateTime(), track => track.EncodingDate);
+            AddInitializer(x => this.taggingDate = x.ToDateTime(), track => track.TaggingDate);
+            AddInitializer(x => this.copyright = x.ToString(), track => track.Copyright);
+            AddInitializer(x => this.publisher = x.ToString(), track => track.Publisher);
+            AddInitializer(x => this.internationalStandardRecordingCode = x.ToString(), track => track.InternationalStandardRecordingCode);
+            
+            AddChildInitializer<ITrackPicture>(child => AddPicture(child as ITrackPicture));
+            AddChildInitializer<ITrackUnsynchronizedLyrics>(child => AddLyrics(child as ITrackUnsynchronizedLyrics));
+            AddChildInitializer<ITrackSynchronizedLyrics>(child => AddSynchronizedLyrics(child as ITrackSynchronizedLyrics));
+            AddChildInitializer<ITrackRating>(child => AddRating(child as ITrackRating));
+            
+            AddValueInitializer(value => AddIdentifier(value as ITrackIdentifier), x => x.Identifiers);
+            AddValueInitializer(value => AddLink(value as ITrackLink), x => x.Links);
+            AddValueInitializer(value => AddMetadatum(value as ITrackMetadatum), x => x.Metadata);
+            AddValueInitializer(value => AddTitleHashCode(value as IHashCode), x => x.TitleHashCodes);
+            AddValueInitializer(value => AddAlbumHashCode(value as IHashCode), x => x.AlbumHashCodes);
+            AddValueInitializer(value => AddArtistHashCode(value as IHashCode), x => x.ArtistHashCodes);
+            AddValueInitializer(value => AddAlbumArtistHashCode(value as IHashCode), x => x.AlbumArtistHashCodes);
+            AddValueInitializer(value => AddComposerHashCode(value as IHashCode), x => x.ComposerHashCodes);
+            AddValueInitializer(value => AddConductorHashCode(value as IHashCode), x => x.ConductorHashCodes);
+            AddValueInitializer(value => AddOriginalTitleHashCode(value as IHashCode), x => x.OriginalTitleHashCodes);
         }
 
         private Uri location;
@@ -121,107 +123,107 @@ namespace Gnosis.Alexandria.Models.Tracks
 
         private void AddPicture(ITrackPicture picture)
         {
-            AddChild<ITrack, ITrackPicture>(() => pictures.Add(picture), picture, x => x.Pictures);
+            AddChild<ITrackPicture>(() => pictures.Add(picture), picture, x => x.Pictures);
         }
 
         private void AddLyrics(ITrackUnsynchronizedLyrics lyrics)
         {
-            AddChild<ITrack, ITrackUnsynchronizedLyrics>(() => this.lyrics.Add(lyrics), lyrics, x => x.Lyrics);
+            AddChild<ITrackUnsynchronizedLyrics>(() => this.lyrics.Add(lyrics), lyrics, x => x.Lyrics);
         }
 
         private void AddSynchronizedLyrics(ITrackSynchronizedLyrics synchronizedLyrics)
         {
-            AddChild<ITrack, ITrackSynchronizedLyrics>(() => this.synchronizedLyrics.Add(synchronizedLyrics), synchronizedLyrics, x => x.Lyrics);
+            AddChild<ITrackSynchronizedLyrics>(() => this.synchronizedLyrics.Add(synchronizedLyrics), synchronizedLyrics, x => x.Lyrics);
         }
 
         private void AddRating(ITrackRating rating)
         {
-            AddChild<ITrack, ITrackRating>(() => this.ratings.Add(rating), rating, x => x.Ratings);
+            AddChild<ITrackRating>(() => this.ratings.Add(rating), rating, x => x.Ratings);
         }
 
         private void AddIdentifier(ITrackIdentifier identifier)
         {
-            AddValue<ITrack, ITrackIdentifier>(() => this.identifiers.Add(identifier), identifier, x => x.Identifiers);
+            AddValue<ITrackIdentifier>(() => this.identifiers.Add(identifier), identifier, x => x.Identifiers);
         }
 
         private void AddLink(ITrackLink link)
         {
-            AddValue<ITrack, ITrackLink>(() => this.links.Add(link), link, x => x.Links);
+            AddValue<ITrackLink>(() => this.links.Add(link), link, x => x.Links);
         }
 
         private void AddMetadatum(ITrackMetadatum metadatum)
         {
-            AddValue<ITrack, ITrackMetadatum>(() => this.metadata.Add(metadatum), metadatum, x => x.Metadata);
+            AddValue<ITrackMetadatum>(() => this.metadata.Add(metadatum), metadatum, x => x.Metadata);
         }
 
         private void AddTitleHashCode(IHashCode hashCode)
         {
-            AddValue<ITrack, IHashCode>(() => this.titleHashCodes.Add(hashCode), hashCode, x => x.TitleHashCodes);
+            AddValue<IHashCode>(() => this.titleHashCodes.Add(hashCode), hashCode, x => x.TitleHashCodes);
         }
 
         private void RemoveTitleHashCode(IHashCode hashCode)
         {
-            RemoveValue<ITrack, IHashCode>(() => this.titleHashCodes.Remove(hashCode), hashCode, x => x.TitleHashCodes);
+            RemoveValue<IHashCode>(() => this.titleHashCodes.Remove(hashCode), hashCode, x => x.TitleHashCodes);
         }
 
         private void AddAlbumHashCode(IHashCode hashCode)
         {
-            AddValue<ITrack, IHashCode>(() => this.albumHashCodes.Add(hashCode), hashCode, x => x.AlbumHashCodes);
+            AddValue<IHashCode>(() => this.albumHashCodes.Add(hashCode), hashCode, x => x.AlbumHashCodes);
         }
 
         private void RemoveAlbumHashCode(IHashCode hashCode)
         {
-            RemoveValue<ITrack, IHashCode>(() => this.albumHashCodes.Remove(hashCode), hashCode, x => x.AlbumHashCodes);
+            RemoveValue<IHashCode>(() => this.albumHashCodes.Remove(hashCode), hashCode, x => x.AlbumHashCodes);
         }
 
         private void AddArtistHashCode(IHashCode hashCode)
         {
-            AddValue<ITrack, IHashCode>(() => this.artistHashCodes.Add(hashCode), hashCode, x => x.ArtistHashCodes);
+            AddValue<IHashCode>(() => this.artistHashCodes.Add(hashCode), hashCode, x => x.ArtistHashCodes);
         }
 
         private void RemoveArtistHashCode(IHashCode hashCode)
         {
-            RemoveValue<ITrack, IHashCode>(() => this.albumHashCodes.Remove(hashCode), hashCode, x => x.ArtistHashCodes);
+            RemoveValue<IHashCode>(() => this.albumHashCodes.Remove(hashCode), hashCode, x => x.ArtistHashCodes);
         }
 
         private void AddAlbumArtistHashCode(IHashCode hashCode)
         {
-            AddValue<ITrack, IHashCode>(() => this.albumArtistHashCodes.Add(hashCode), hashCode, x => x.AlbumArtistHashCodes);
+            AddValue<IHashCode>(() => this.albumArtistHashCodes.Add(hashCode), hashCode, x => x.AlbumArtistHashCodes);
         }
 
         private void RemoveAlbumArtistHashCode(IHashCode hashCode)
         {
-            RemoveValue<ITrack, IHashCode>(() => this.albumArtistHashCodes.Remove(hashCode), hashCode, x => x.AlbumArtistHashCodes);
+            RemoveValue<IHashCode>(() => this.albumArtistHashCodes.Remove(hashCode), hashCode, x => x.AlbumArtistHashCodes);
         }
 
         private void AddComposerHashCode(IHashCode hashCode)
         {
-            AddValue<ITrack, IHashCode>(() => this.composerHashCodes.Add(hashCode), hashCode, x => x.ComposerHashCodes);
+            AddValue<IHashCode>(() => this.composerHashCodes.Add(hashCode), hashCode, x => x.ComposerHashCodes);
         }
 
         private void RemoveComposerHashCode(IHashCode hashCode)
         {
-            RemoveValue<ITrack, IHashCode>(() => this.composerHashCodes.Remove(hashCode), hashCode, x => x.ComposerHashCodes);
+            RemoveValue<IHashCode>(() => this.composerHashCodes.Remove(hashCode), hashCode, x => x.ComposerHashCodes);
         }
 
         private void AddConductorHashCode(IHashCode hashCode)
         {
-            AddValue<ITrack, IHashCode>(() => this.conductorHashCodes.Add(hashCode), hashCode, x => x.ConductorHashCodes);
+            AddValue<IHashCode>(() => this.conductorHashCodes.Add(hashCode), hashCode, x => x.ConductorHashCodes);
         }
 
         private void RemoveConductorHashCode(IHashCode hashCode)
         {
-            RemoveValue<ITrack, IHashCode>(() => this.conductorHashCodes.Remove(hashCode), hashCode, x => x.ConductorHashCodes);
+            RemoveValue<IHashCode>(() => this.conductorHashCodes.Remove(hashCode), hashCode, x => x.ConductorHashCodes);
         }
 
         private void AddOriginalTitleHashCode(IHashCode hashCode)
         {
-            AddValue<ITrack, IHashCode>(() => this.originalTitleHashCodes.Add(hashCode), hashCode, x => x.OriginalTitleHashCodes);
+            AddValue<IHashCode>(() => this.originalTitleHashCodes.Add(hashCode), hashCode, x => x.OriginalTitleHashCodes);
         }
 
         private void RemoveOriginalTitleHashCode(IHashCode hashCode)
         {
-            RemoveValue<ITrack, IHashCode>(() => this.originalTitleHashCodes.Remove(hashCode), hashCode, x => x.OriginalTitleHashCodes);
+            RemoveValue<IHashCode>(() => this.originalTitleHashCodes.Remove(hashCode), hashCode, x => x.OriginalTitleHashCodes);
         }
 
         #endregion
@@ -235,7 +237,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != location)
                 {
-                    Change(() => location = value, "Location");
+                    Change(() => location = value, x => x.Location);
                 }
             }
         }
@@ -247,7 +249,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != mediaType)
                 {
-                    Change(() => mediaType = value, "MediaType");
+                    Change(() => mediaType = value, x => x.MediaType);
                 }
             }
         }
@@ -259,7 +261,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != title)
                 {
-                    Change(() => title = value, "Title");
+                    Change(() => title = value, x => x.Title);
                 }
             }
         }
@@ -271,7 +273,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != titleSort)
                 {
-                    Change(() => titleSort = value, "TitleSort");
+                    Change(() => titleSort = value, x => x.TitleSort);
                 }
             }
         }
@@ -283,7 +285,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != subtitle)
                 {
-                    Change(() => subtitle = value, "Subtitle");
+                    Change(() => subtitle = value, x => x.Subtitle);
                 }
             }
         }
@@ -295,7 +297,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != grouping)
                 {
-                    Change(() => grouping = value, "Grouping");
+                    Change(() => grouping = value, x => x.Grouping);
                 }
             }
         }
@@ -307,7 +309,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != comment)
                 {
-                    Change(() => comment = value, "Comment");
+                    Change(() => comment = value, x => x.Comment);
                 }
             }
         }
@@ -319,7 +321,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != album)
                 {
-                    Change(() => album = value, "Album");
+                    Change(() => album = value, x => x.Album);
                 }
             }
         }
@@ -331,7 +333,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != albumSort)
                 {
-                    Change(() => albumSort = value, "AlbumSort");
+                    Change(() => albumSort = value, x => x.AlbumSort);
                 }
             }
         }
@@ -343,7 +345,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != albumSubtitle)
                 {
-                    Change(() => albumSubtitle = value, "AlbumSubtitle");
+                    Change(() => albumSubtitle = value, x => x.AlbumSubtitle);
                 }
             }
         }
@@ -355,7 +357,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != artists)
                 {
-                    Change(() => artists = value, "Artists");
+                    Change(() => artists = value, x => x.Artists);
                 }
             }
         }
@@ -367,7 +369,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != artistsSort)
                 {
-                    Change(() => artistsSort = value, "ArtistsSort");
+                    Change(() => artistsSort = value, x => x.ArtistsSort);
                 }
             }
         }
@@ -379,7 +381,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != albumArtists)
                 {
-                    Change(() => albumArtists = value, "AlbumArtists");
+                    Change(() => albumArtists = value, x => x.AlbumArtists);
                 }
             }
         }
@@ -391,7 +393,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != composers)
                 {
-                    Change(() => composers = value, "Composers");
+                    Change(() => composers = value, x => x.Composers);
                 }
             }
         }
@@ -403,7 +405,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != conductors)
                 {
-                    Change(() => conductors = value, "Conductors");
+                    Change(() => conductors = value, x => x.Conductors);
                 }
             }
         }
@@ -415,7 +417,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != genres)
                 {
-                    Change(() => genres = value, "Genres");
+                    Change(() => genres = value, x => x.Genres);
                 }
             }
         }
@@ -427,7 +429,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != moods)
                 {
-                    Change(() => moods = value, "Moods");
+                    Change(() => moods = value, x => x.Moods);
                 }
             }
         }
@@ -439,7 +441,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != languages)
                 {
-                    Change(() => languages = value, "Languages");
+                    Change(() => languages = value, x => x.Languages);
                 }
             }
         }
@@ -451,7 +453,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != recordingDate)
                 {
-                    Change(() => recordingDate = value, "RecordingDate");
+                    Change(() => recordingDate = value, x => x.RecordingDate);
                 }
             }
         }
@@ -463,7 +465,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != releaseDate)
                 {
-                    Change(() => releaseDate = value, "ReleaseDate");
+                    Change(() => releaseDate = value, x => x.ReleaseDate);
                 }
             }
         }
@@ -475,7 +477,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != originalTitle)
                 {
-                    Change(() => originalTitle = value, "OriginalTitle");
+                    Change(() => originalTitle = value, x => x.OriginalTitle);
                 }
             }
         }
@@ -487,7 +489,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != originalReleaseDate)
                 {
-                    Change(() => originalReleaseDate = value, "OriginalReleaseDate");
+                    Change(() => originalReleaseDate = value, x => x.OriginalReleaseDate);
                 }
             }
         }
@@ -499,7 +501,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != trackNumber)
                 {
-                    Change(() => trackNumber = value, "TrackNumber");
+                    Change(() => trackNumber = value, x => x.TrackNumber);
                 }
             }
         }
@@ -511,7 +513,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != trackCount)
                 {
-                    Change(() => trackCount = value, "TrackCount");
+                    Change(() => trackCount = value, x => x.TrackCount);
                 }
             }
         }
@@ -523,7 +525,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != discNumber)
                 {
-                    Change(() => discNumber = value, "DiscNumber");
+                    Change(() => discNumber = value, x => x.DiscNumber);
                 }
             }
         }
@@ -535,7 +537,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != discCount)
                 {
-                    Change(() => discCount = value, "DiscCount");
+                    Change(() => discCount = value, x => x.DiscCount);
                 }
             }
         }
@@ -547,7 +549,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != duration)
                 {
-                    Change(() => duration = value, "Duration");
+                    Change(() => duration = value, x => x.Duration);
                 }
             }
         }
@@ -559,7 +561,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != beatsPerMinute)
                 {
-                    Change(() => beatsPerMinute = value, "BeatsPerMinute");
+                    Change(() => beatsPerMinute = value, x => x.BeatsPerMinute);
                 }
             }
         }
@@ -571,7 +573,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != playCount)
                 {
-                    Change(() => playCount = value, "PlayCount");
+                    Change(() => playCount = value, x => x.PlayCount);
                 }
             }
         }
@@ -583,7 +585,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != playlistDelay)
                 {
-                    Change(() => playlistDelay = value, "PlaylistDelay");
+                    Change(() => playlistDelay = value, x => x.PlaylistDelay);
                 }
             }
         }
@@ -595,7 +597,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != originalFileName)
                 {
-                    Change(() => originalFileName = value, "OriginalFileName");
+                    Change(() => originalFileName = value, x => x.OriginalFileName);
                 }
             }
         }
@@ -607,7 +609,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != encodingDate)
                 {
-                    Change(() => encodingDate = value, "EncodingDate");
+                    Change(() => encodingDate = value, x => x.EncodingDate);
                 }
             }
         }
@@ -619,7 +621,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != taggingDate)
                 {
-                    Change(() => taggingDate = value, "TaggingDate");
+                    Change(() => taggingDate = value, x => x.TaggingDate);
                 }
             }
         }
@@ -631,7 +633,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != copyright)
                 {
-                    Change(() => copyright = value, "Copyright");
+                    Change(() => copyright = value, x => x.Copyright);
                 }
             }
         }
@@ -643,7 +645,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != publisher)
                 {
-                    Change(() => publisher = value, "Publisher");
+                    Change(() => publisher = value, x => x.Publisher);
                 }
             }
         }
@@ -655,7 +657,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != internationalStandardRecordingCode)
                 {
-                    Change(() => internationalStandardRecordingCode = value, "InternationalStandardRecordingCode");
+                    Change(() => internationalStandardRecordingCode = value, x => x.InternationalStandardRecordingCode);
                 }
             }
         }
@@ -745,58 +747,58 @@ namespace Gnosis.Alexandria.Models.Tracks
 
         public void RemovePicture(ITrackPicture picture)
         {
-            RemoveChild<ITrack, ITrackPicture>(() => pictures.Remove(picture), picture, x => x.Pictures);
+            RemoveChild<ITrackPicture>(() => pictures.Remove(picture), picture, x => x.Pictures);
         }
 
 
-        public void AddLyrics(string textEncoding, string language, string description, string lyrics)
+        public void AddLyrics(string textEncoding, string language, string description, string text)
         {
-            var lyricsItem = new TrackUnsynchronizedLyrics();
-            lyricsItem.Initialize(new EntityInitialState(Context, Logger, this.Id));
-            lyricsItem.TextEncoding = textEncoding;
-            lyricsItem.Language = language;
-            lyricsItem.Description = description;
-            lyricsItem.Lyrics = lyrics;
-            AddLyrics(lyricsItem);
+            var lyrics = new TrackUnsynchronizedLyrics();
+            lyrics.Initialize(new EntityInitialState(Context, Logger, this.Id));
+            lyrics.TextEncoding = textEncoding;
+            lyrics.Language = language;
+            lyrics.Description = description;
+            lyrics.Text = text;
+            AddLyrics(lyrics);
         }
 
         public void RemoveLyrics(ITrackUnsynchronizedLyrics lyrics)
         {
-            RemoveChild<ITrack, ITrackUnsynchronizedLyrics>(() => this.lyrics.Remove(lyrics), lyrics, x => x.Lyrics);
+            RemoveChild<ITrackUnsynchronizedLyrics>(() => this.lyrics.Remove(lyrics), lyrics, x => x.Lyrics);
         }
 
 
-        public void AddSynchronizedLyrics(string textEncoding, string language, string description, string lyrics, TrackSynchronizedTextType contentType)
+        public void AddSynchronizedLyrics(string textEncoding, string language, string description, string text, TrackSynchronizedTextType contentType)
         {
-            var lyricsItem = new TrackSynchronizedLyrics();
-            lyricsItem.Initialize(new EntityInitialState(Context, Logger, this.Id));
-            lyricsItem.TextEncoding = textEncoding;
-            lyricsItem.Language = language;
-            lyricsItem.Description = description;
-            lyricsItem.Lyrics = lyrics;
-            lyricsItem.ContentType = contentType;
-            AddSynchronizedLyrics(lyricsItem);
+            var lyrics = new TrackSynchronizedLyrics();
+            lyrics.Initialize(new EntityInitialState(Context, Logger, this.Id));
+            lyrics.TextEncoding = textEncoding;
+            lyrics.Language = language;
+            lyrics.Description = description;
+            lyrics.Text = text;
+            lyrics.ContentType = contentType;
+            AddSynchronizedLyrics(lyrics);
         }
 
         public void RemoveSynchronizedLyrics(ITrackSynchronizedLyrics synchronizedLyrics)
         {
-            RemoveChild<ITrack, ITrackSynchronizedLyrics>(() => this.synchronizedLyrics.Remove(synchronizedLyrics), synchronizedLyrics, x => x.SynchronizedLyrics);
+            RemoveChild<ITrackSynchronizedLyrics>(() => this.synchronizedLyrics.Remove(synchronizedLyrics), synchronizedLyrics, x => x.SynchronizedLyrics);
         }
 
 
-        public void AddRating(byte rating, Uri user, ulong playCount)
+        public void AddRating(byte score, Uri user, ulong playCount)
         {
-            var ratingItem = new TrackRating();
-            ratingItem.Initialize(new EntityInitialState(Context, Logger, this.Id));
-            ratingItem.Rating = rating;
-            ratingItem.User = user;
-            ratingItem.PlayCount = playCount;
-            AddRating(ratingItem);
+            var rating = new TrackRating();
+            rating.Initialize(new EntityInitialState(Context, Logger, this.Id));
+            rating.Score = score;
+            rating.User = user;
+            rating.PlayCount = playCount;
+            AddRating(rating);
         }
 
         public void RemoveRating(ITrackRating rating)
         {
-            RemoveChild<ITrack, ITrackRating>(() => this.ratings.Remove(rating), rating, x => x.Ratings);
+            RemoveChild<ITrackRating>(() => this.ratings.Remove(rating), rating, x => x.Ratings);
         }
 
 
@@ -807,7 +809,7 @@ namespace Gnosis.Alexandria.Models.Tracks
 
         public void RemoveIdentifier(ITrackIdentifier identifier)
         {
-            RemoveValue<ITrack, ITrackIdentifier>(() => this.identifiers.Remove(identifier), identifier, x => x.Identifiers);
+            RemoveValue<ITrackIdentifier>(() => this.identifiers.Remove(identifier), identifier, x => x.Identifiers);
         }
 
 
@@ -818,7 +820,7 @@ namespace Gnosis.Alexandria.Models.Tracks
 
         public void RemoveLink(ITrackLink link)
         {
-            RemoveValue<ITrack, ITrackLink>(() => this.links.Remove(link), link, x => x.Links);
+            RemoveValue<ITrackLink>(() => this.links.Remove(link), link, x => x.Links);
         }
 
 
@@ -829,7 +831,7 @@ namespace Gnosis.Alexandria.Models.Tracks
 
         public void RemoveMetadatum(ITrackMetadatum metadatum)
         {
-            RemoveValue<ITrack, ITrackMetadatum>(() => this.metadata.Remove(metadatum), metadatum, x => x.Metadata);
+            RemoveValue<ITrackMetadatum>(() => this.metadata.Remove(metadatum), metadatum, x => x.Metadata);
         }
 
         #endregion

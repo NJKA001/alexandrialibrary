@@ -9,7 +9,7 @@ namespace Gnosis.Alexandria.Models.Tracks
 {
     public interface ITrackRating : IChild
     {
-        byte Rating { get; set; }
+        byte Score { get; set; }
         Uri User { get; set; }
         ulong PlayCount { get; set; }
     }

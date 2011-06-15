@@ -8,30 +8,24 @@ using Gnosis.Core;
 namespace Gnosis.Alexandria.Models.Tracks
 {
     public class TrackSynchronizedLyrics
-        : ChildBase, ITrackSynchronizedLyrics
+        : ChildBase<ITrack, ITrackSynchronizedLyrics>, ITrackSynchronizedLyrics
     {
-        /*
-        public TrackSynchronizedLyrics(IContext context, Guid parent)
-            : base(context, parent)
+        public TrackSynchronizedLyrics()
         {
+            AddInitializer(value => this.textEncoding = value.ToString(), lyrics => lyrics.TextEncoding);
+            AddInitializer(value => this.language = value.ToString(), lyrics => lyrics.Language);
+            AddInitializer(value => this.description = value.ToString(), lyrics => lyrics.Description);
+            AddInitializer(value => this.text = value.ToString(), lyrics => lyrics.Text);
+            AddInitializer(value => this.contentType = value.ToEnum<TrackSynchronizedTextType>(), lyrics => lyrics.ContentType);
         }
-
-        public TrackSynchronizedLyrics(IContext context, Guid id, DateTime timeStamp, Guid parent, string textEncoding, string language, string description, string lyrics, TrackSynchronizedTextType contentType)
-            : base(context, id, timeStamp, parent)
-        {
-            this.textEncoding = textEncoding;
-            this.language = language;
-            this.description = description;
-            this.lyrics = lyrics;
-            this.contentType = contentType;
-        }
-        */
 
         private string textEncoding = string.Empty;
         private string language = string.Empty;
         private string description = string.Empty;
-        private string lyrics = string.Empty;
+        private string text = string.Empty;
         private TrackSynchronizedTextType contentType = TrackSynchronizedTextType.Lyrics;
+
+        #region ITrackSynchronizedLyrics Members
 
         public string TextEncoding
         {
@@ -40,7 +34,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != textEncoding)
                 {
-                    Change(() => textEncoding = value, "TextEncoding");
+                    Change(() => textEncoding = value, x => x.TextEncoding);
                 }
             }
         }
@@ -52,7 +46,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != language)
                 {
-                    Change(() => language = value, "Language");
+                    Change(() => language = value, x => x.Language);
                 }
             }
         }
@@ -64,19 +58,19 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != description)
                 {
-                    Change(() => description = value, "Description");
+                    Change(() => description = value, x => x.Description);
                 }
             }
         }
 
-        public string Lyrics
+        public string Text
         {
-            get { return lyrics; }
+            get { return text; }
             set
             {
-                if (value != null && value != lyrics)
+                if (value != null && value != text)
                 {
-                    Change(() => lyrics = value, "Lyrics");
+                    Change(() => text = value, x => x.Text);
                 }
             }
         }
@@ -88,9 +82,11 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != contentType)
                 {
-                    Change(() => contentType = value, "ContentType");
+                    Change(() => contentType = value, x => x.ContentType);
                 }
             }
         }
+
+        #endregion
     }
 }

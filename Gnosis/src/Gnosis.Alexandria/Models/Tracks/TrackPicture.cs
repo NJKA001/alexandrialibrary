@@ -8,15 +8,15 @@ using Gnosis.Core;
 namespace Gnosis.Alexandria.Models.Tracks
 {
     public class TrackPicture
-        : ChildBase, ITrackPicture
+        : ChildBase<ITrack, ITrackPicture>, ITrackPicture
     {
         public TrackPicture()
         {
-            AddInitializer("TextEncoding", value => this.textEncoding = value.ToString());
-            AddInitializer("MediaType", value => this.mediaType = value.ToString());
-            AddInitializer("PictureType", x => this.pictureType = x.ToEnum<TrackPictureType>());
-            AddInitializer("Description", x => this.description = x.ToString());
-            AddInitializer("Data", (name, record) => this.data = record.GetBytes(name));
+            AddInitializer(value => this.textEncoding = value.ToString(), picture => picture.TextEncoding);
+            AddInitializer(value => this.mediaType = value.ToString(), picture => picture.MediaType);
+            AddInitializer(value => this.pictureType = value.ToEnum<TrackPictureType>(), picture => picture.PictureType);
+            AddInitializer(value => this.description = value.ToString(), picture => picture.Description);
+            AddInitializer((name, record) => this.data = record.GetBytes(name), picture => picture.Data);
         }
 
         private string textEncoding = string.Empty;
@@ -34,7 +34,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != textEncoding)
                 {
-                    Change(() => textEncoding = value, "TextEncoding");
+                    Change(() => textEncoding = value, picture => picture.TextEncoding);
                 }
             }
         }
@@ -46,7 +46,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != mediaType)
                 {
-                    Change(() => mediaType = value, "MediaType");
+                    Change(() => mediaType = value, picture => picture.MediaType);
                 }
             }
         }
@@ -58,7 +58,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != pictureType)
                 {
-                    Change(() => pictureType = value, "PictureType");
+                    Change(() => pictureType = value, picture => picture.PictureType);
                 }
             }
         }
@@ -70,7 +70,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != description)
                 {
-                    Change(() => description = value, "Description");
+                    Change(() => description = value, picture => picture.Description);
                 }
             }
         }
@@ -82,7 +82,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != data)
                 {
-                    Change(() => data = value, "Data");
+                    Change(() => data = value, picture => picture.Data);
                 }
             }
         }

@@ -7,8 +7,10 @@ using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Models
 {
-    public class ChildBase
-        : EntityBase, IChild
+    public class ChildBase<TParent, TChild>
+        : EntityBase<TChild>, IChild
+        where TParent :IEntity
+        where TChild : IChild
     {
         private Guid parent;
         private uint sequence;

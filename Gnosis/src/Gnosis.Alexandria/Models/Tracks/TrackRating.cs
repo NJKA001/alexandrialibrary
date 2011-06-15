@@ -8,27 +8,29 @@ using Gnosis.Core;
 namespace Gnosis.Alexandria.Models.Tracks
 {
     public class TrackRating
-        : ChildBase, ITrackRating
+        : ChildBase<ITrack, ITrackRating>, ITrackRating
     {
         public TrackRating()
         {
-            AddInitializer("Rating", x => this.rating = x.ToByte());
-            AddInitializer("User", x => this.user = x.ToUri());
-            AddInitializer("PlayCount", x => this.playCount = x.ToUInt64());
+            AddInitializer(value => this.score = value.ToByte(), rating => rating.Score);
+            AddInitializer(value => this.user = value.ToUri(), rating => rating.User);
+            AddInitializer(value => this.playCount = value.ToUInt64(), rating => rating.PlayCount);
         }
 
-        private byte rating;
+        private byte score;
         private Uri user;
         private ulong playCount;
 
-        public byte Rating
+        #region ITrackRating Members
+
+        public byte Score
         {
-            get { return rating; }
+            get { return score; }
             set
             {
-                if (value != rating)
+                if (value != score)
                 {
-                    Change(() => this.rating = value, "Rating");
+                    Change(() => this.score = value, rating => rating.Score);
                 }
             }
         }
@@ -40,7 +42,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != null && value != user)
                 {
-                    Change(() => this.user = value, "User");
+                    Change(() => this.user = value, rating => rating.User);
                 }
             }
         }
@@ -52,9 +54,11 @@ namespace Gnosis.Alexandria.Models.Tracks
             {
                 if (value != playCount)
                 {
-                    Change(() => this.playCount = value, "PlayCount");
+                    Change(() => this.playCount = value, rating => rating.PlayCount);
                 }
             }
         }
+
+        #endregion
     }
 }

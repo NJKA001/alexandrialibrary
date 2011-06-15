@@ -12,7 +12,7 @@ namespace Gnosis.Alexandria.Models.Tracks
         string TextEncoding { get; set; }
         string Language { get; set; }
         string Description { get; set; }
-        string Lyrics { get; set; }
+        string Text { get; set; }
         TrackSynchronizedTextType ContentType { get; set; }
     }
 }
