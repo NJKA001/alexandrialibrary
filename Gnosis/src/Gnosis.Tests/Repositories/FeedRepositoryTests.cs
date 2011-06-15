@@ -180,14 +180,14 @@ namespace Gnosis.Tests.Repositories
             var feed = GetTestFeed();
             var id = feed.Id;
 
-            Assert.AreEqual(2, feed.TitleHashCodes.Count());
+            Assert.AreEqual(6, feed.TitleHashCodes.Count());
 
             repository.Save(new List<IFeed> { feed });
 
             const string title = "New Title";
             const string description = "Updated Description";
             const string copyright = "Copyright 2000";
-            const string authors = "Tweedle Dee and Tweedle Dumb";
+            const string authors = "Tweedle Dee and Tweedle Dumb, The Walrus and the Carpenter";
             const string contributors = "Larry, Moe and Curly";
             const string feedIdentifier = "1234WXYZ7890ABCD"; 
             const string generator = "some-generator-name-XYZ";
@@ -219,8 +219,8 @@ namespace Gnosis.Tests.Repositories
             feed.PublishedDate = publishedDate;
             feed.UpdatedDate = updatedDate;
 
-            Assert.AreEqual(2, feed.TitleHashCodes.Count());
-            Assert.AreEqual(2, feed.AuthorHashCodes.Count());
+            Assert.AreEqual(6, feed.TitleHashCodes.Count());
+            Assert.AreEqual(18, feed.AuthorHashCodes.Count());
             Assert.AreEqual(2, feed.Categories.Count());
             Assert.IsTrue(feed.IsChanged());
             Assert.IsFalse(feed.IsNew());
@@ -236,9 +236,9 @@ namespace Gnosis.Tests.Repositories
             Assert.AreNotEqual(oldTimeStamp, newTimeStamp);
             
             var changedFeed = repository.Lookup(id);
-            //Assert.AreEqual(2, GetCount(string.Format("select count() from Feed_AuthorHashCodes where Parent = '{0}';", id)));
-            Assert.AreEqual(2, changedFeed.TitleHashCodes.Count());
-            Assert.AreEqual(2, changedFeed.AuthorHashCodes.Count());
+            Assert.AreEqual(18, GetCount(string.Format("select count() from Feed_AuthorHashCodes where Parent = '{0}';", id)));
+            Assert.AreEqual(6, changedFeed.TitleHashCodes.Count());
+            Assert.AreEqual(18, changedFeed.AuthorHashCodes.Count());
             Assert.AreNotEqual(titleNameHash, changedFeed.TitleHashCodes.Where(x => x.Scheme == HashCode.SchemeNameHash).FirstOrDefault().Value);
             Assert.AreNotEqual(titleDoubleMetaphone, changedFeed.TitleHashCodes.Where(x => x.Scheme == HashCode.SchemeDoubleMetaphone).FirstOrDefault().Value);
             Assert.IsNotNull(changedFeed);

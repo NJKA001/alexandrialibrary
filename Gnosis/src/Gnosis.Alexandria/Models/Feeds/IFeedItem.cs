@@ -26,6 +26,11 @@ namespace Gnosis.Alexandria.Models.Feeds
         IEnumerable<IFeedLink> Links { get; }
         IEnumerable<IFeedMetadatum> Metadata { get; }
 
+        IEnumerable<IHashCode> TitleHashCodes { get; }
+        IEnumerable<IHashCode> AuthorHashCodes { get; }
+        IEnumerable<IHashCode> ContributorHashCodes { get; }
+        IEnumerable<IHashCode> SummaryHashCodes { get; }
+
         void AddCategory(Uri scheme, string name, string label);
         void RemoveCategory(IFeedCategory category);
 

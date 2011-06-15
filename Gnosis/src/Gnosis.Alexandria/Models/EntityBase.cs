@@ -201,6 +201,30 @@ namespace Gnosis.Alexandria.Models
             }
         }
 
+        protected static void ReplaceHashCodes(Uri scheme, string value, Func<string, IHashCode> hashFunction, Action<IHashCode> addAction, Action<IHashCode> removeAction, IEnumerable<IHashCode> source)
+        {
+            var codesToRemove = new List<IHashCode>();
+            codesToRemove.AddRange(source.Where(hashCode => hashCode.Scheme == scheme));
+
+            foreach (var codeToRemove in codesToRemove)
+                removeAction(codeToRemove);
+
+            var rootCode = hashFunction(value);
+            if (rootCode != null)
+                addAction(rootCode);
+
+            var tokens = value.ToTokens();
+            if (tokens.Count() > 1)
+            {
+                foreach (var token in tokens)
+                {
+                    var hashCode = hashFunction(token);
+                    if (hashCode != null && hashCode.Value != value)
+                        addAction(hashCode);
+                }
+            }
+        }
+
         public Guid Id
         {
             get { return id; }

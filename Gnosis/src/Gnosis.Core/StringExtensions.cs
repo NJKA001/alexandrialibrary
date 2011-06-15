@@ -9,102 +9,83 @@ namespace Gnosis.Core
 {
     public static class StringExtensions
     {
-        public static string AsNameHash(this string name)
+        #region MetaphoneData
+
+        private class MetaphoneData
         {
-            if (string.IsNullOrEmpty(name))
-                return string.Empty;
+            readonly StringBuilder _primary = new StringBuilder(5);
+            readonly StringBuilder _secondary = new StringBuilder(5);
 
-            var punctuation = new Dictionary<char, string> {
-                {'!', string.Empty}, {'@', string.Empty}, {'#', string.Empty}, {'$', string.Empty}, {'%', string.Empty}, {'^', string.Empty}, {'&', string.Empty}, {'*', string.Empty}, {'(', string.Empty}, {')', string.Empty}, {'-', string.Empty}, {'_', string.Empty}, {'+', string.Empty}, {'=', string.Empty},
-                {'{', string.Empty}, {'}', string.Empty}, {'[', string.Empty}, {']', string.Empty}, {'|', string.Empty}, {'\\', string.Empty}, {':', string.Empty}, {';', string.Empty}, {'\'', string.Empty}, {'"', string.Empty}, {'<', string.Empty}, {'>', string.Empty}, {',', string.Empty}, {'.', string.Empty},
-                {'?', string.Empty}, {'/', string.Empty}, {'~', string.Empty}, {'`', string.Empty}
-            };
 
-            var charactersToNormalize = new Dictionary<char, string> {
-                {'À', "A"}, {'Â', "A"}, {'Á', "A"}, {'Æ', "AE"}, {'Ǣ', "AE"}, {'Å', "A"},
-                {'à', "A"}, {'â', "A"}, {'á', "A"}, {'æ', "AE"}, {'ǣ', "AE"}, {'ā', "A"},
+            #region Properties
 
-                {'Ç', "C"},
-                {'č', "C"},
-
-                {'Ð', "D"},
-                {'ð', "D"}, 
-
-                {'È', "E"}, {'Ê', "E"}, {'Ë', "E"}, {'É', "E"},
-                {'è', "E"}, {'ê', "E"}, {'ë', "E"}, {'ē', "E"}, {'é', "E"},
-
-                {'Ğ', "G"}, {'ѓ', "G"},
-                {'ģ', "G"}, {'ǧ', "G"},
-
-                {'ȟ', "H"},
-
-                {'Ï', "I"}, {'Î', "I"}, {'Í', "I"}, {'İ', "I"}, {'й', "I"}, {'ѝ', "I"},
-                {'ï', "I"}, {'î', "I"}, {'ī', "I"}, {'í', "I"},
-                
-                {'ќ', "K"},
-                {'ķ', "K"},
-
-                {'ļ', "L"},
-
-                {'Ñ', "N"},
-                {'ñ', "N"}, {'ņ', "N"}, {'ŋ', "N"},
-
-                {'Ô', "O"}, {'Ö', "O"}, {'Ó', "O"},
-                {'ô', "O"}, {'ö', "O"}, {'ø', "O"}, {'ó', "O"}, {'õ', "O"},
-                
-                {'ŗ', "R"},
-
-                {'Ş', "S"},
-                {'š', "S"},
-
-                {'Û', "U"}, {'Ù', "U"}, {'Ú', "U"}, {'Ü', "U"},
-                {'û', "U"}, {'ù', "U"}, {'ū', "U"}, {'ú', "U"},
-                
-                {'ў', "U"},
-                {'ž', "Z"}
-            };
-
-            var wordsToNormalize = new Dictionary<string, string> {
-                {"THE", string.Empty}, {"A", string.Empty}, {"OF", string.Empty}, {"AT", string.Empty}, {"AND", string.Empty}, {"IN", string.Empty}, {"WITH", string.Empty}, {"BUT", string.Empty}, {"OR", string.Empty}, {"FOR", string.Empty}, {"NOR", string.Empty}, {"YET", string.Empty},
-                {"ONE", "1"}, {"TWO", "2"}, {"THREE", "3"}, {"FOUR", "4"}, {"FIVE", "5"}, {"SIX", "6"}, {"SEVEN", "7"}, {"EIGHT", "8"}, {"NINE", "9"}, {"TEN", "10"},
-                {"ELEVEN", "11"}, {"TWELVE", "12"}, {"THIRTEEN", "13"}, {"FOURTEEN", "14"}, {"FIFTEEN", "15"}, {"SIXTEEN", "16"}, {"SEVENTEEN", "17"}, {"EIGHTEEN", "18"}, {"NINETEEN", "19"}, {"TWENTY", "20"},
-                {"HUNDRED", "00"}, {"THOUSAND", "000"}, {"MILLION", "000000"}, {"BILLION", "000000000"}, {"TRILLION", "000000000000"}
-            };
-
-            var result = new StringBuilder();
-            var wordDelimiters = new string[] { " ", "\t", "\r\n", "\n" };
-            var words = name.Split(wordDelimiters, StringSplitOptions.RemoveEmptyEntries);
-
-            foreach (var word in words)
+            internal bool Alternative { get; set; }
+            internal int PrimaryLength
             {
-                var key = word.Trim().ToUpper();
-                var noPunctuation = new StringBuilder();
-                foreach (var character in key.ToCharArray())
+                get
                 {
-                    if (punctuation.ContainsKey(character))
-                        noPunctuation.Append(punctuation[character]);
-                    else
-                        noPunctuation.Append(character);
+                    return _primary.Length;
                 }
-
-                key = noPunctuation.ToString();
-                if (wordsToNormalize.ContainsKey(key))
-                    key = wordsToNormalize[key];
-
-                var normalized = new StringBuilder();
-                foreach (var character in key.ToCharArray())
-                {
-                    if (charactersToNormalize.ContainsKey(character))
-                        normalized.Append(charactersToNormalize[character]);
-                    else
-                        normalized.Append(character);
-                }
-
-                result.Append(normalized.ToString());
             }
 
-            return result.ToString();
+            internal int SecondaryLength
+            {
+                get
+                {
+                    return _secondary.Length;
+                }
+            }
+
+            #endregion
+
+
+            internal void Add(string main)
+            {
+                if (main != null)
+                {
+                    _primary.Append(main);
+                    _secondary.Append(main);
+                }
+            }
+
+            internal void Add(string main, string alternative)
+            {
+                if (main != null)
+                {
+                    _primary.Append(main);
+                }
+
+                if (alternative != null)
+                {
+                    Alternative = true;
+                    if (alternative.Trim().Length > 0)
+                    {
+                        _secondary.Append(alternative);
+                    }
+                }
+                else
+                {
+                    if (main != null && main.Trim().Length > 0)
+                    {
+                        _secondary.Append(main);
+                    }
+                }
+            }
+
+            public override string ToString()
+            {
+                string ret = (Alternative ? _secondary : _primary).ToString();
+                //only give back 4 char metaph
+                if (ret.Length > 4)
+                {
+                    ret = ret.Substring(0, 4);
+                }
+
+                return ret;
+            }
         }
+
+        #endregion
 
         public static string AsDoubleMetaphone(this string self)
         {
@@ -170,7 +151,7 @@ namespace Gnosis.Core
 
 					case 'C':
 						//various germanic
-						if ((current > 1) && !IsVowel(workingString[current - 2]) && StringAt(workingString, (current - 1), "ACH")
+						if ((current > 1) && !workingString[current - 2].IsVowel() && StringAt(workingString, (current - 1), "ACH")
 							&& ((workingString[current + 2] != 'I') && ((workingString[current + 2] != 'E') || StringAt(workingString, (current - 2), "BACHER", "MACHER")))) {
 							metaphoneData.Add("K");
 							current += 2;
@@ -340,7 +321,7 @@ namespace Gnosis.Core
 
 					case 'G':
 						if (workingString[current + 1] == 'H') {
-							if ((current > 0) && !IsVowel(workingString[current - 1])) {
+							if ((current > 0) && !workingString[current - 1].IsVowel()) {
 								metaphoneData.Add("K");
 								current += 2;
 								break;
@@ -381,7 +362,7 @@ namespace Gnosis.Core
 						}
 
 						if (workingString[current + 1] == 'N') {
-							if ((current == 1) && IsVowel(workingString[0]) && !isSlavoGermanic) {
+							if ((current == 1) && workingString[0].IsVowel() && !isSlavoGermanic) {
 								metaphoneData.Add("KN", "N");
 							}
 							else
@@ -448,7 +429,7 @@ namespace Gnosis.Core
 
 					case 'H':
 						//only keep if first & before vowel or btw. 2 vowels
-						if (((current == 0) || IsVowel(workingString[current - 1])) && IsVowel(workingString[current + 1])) {
+						if (((current == 0) || workingString[current - 1].IsVowel()) && workingString[current + 1].IsVowel()) {
 							metaphoneData.Add("H");
 							current += 2;
 						}
@@ -476,7 +457,7 @@ namespace Gnosis.Core
 						}
 						else
 							//spanish pron. of e.g. 'bajador'
-							if (IsVowel(workingString[current - 1]) && !isSlavoGermanic && ((workingString[current + 1] == 'A') || (workingString[current + 1] == 'O'))) {
+							if (workingString[current - 1].IsVowel() && !isSlavoGermanic && ((workingString[current + 1] == 'A') || (workingString[current + 1] == 'O'))) {
 								metaphoneData.Add("J", "H");
 							}
 							else if (current == last) {
@@ -659,7 +640,7 @@ namespace Gnosis.Core
 									break;
 								}
 								else {
-									if ((current == 0) && !IsVowel(workingString[3]) && (workingString[3] != 'W')) {
+									if ((current == 0) && !workingString[3].IsVowel() && (workingString[3] != 'W')) {
 										metaphoneData.Add("X", "S");
 									}
 									else {
@@ -749,9 +730,9 @@ namespace Gnosis.Core
 							break;
 						}
 
-						if ((current == 0) && (IsVowel(workingString[current + 1]) || StringAt(workingString, current, "WH"))) {
+						if ((current == 0) && (workingString[current + 1].IsVowel() || StringAt(workingString, current, "WH"))) {
 							//Wasserman should match Vasserman
-							if (IsVowel(workingString[current + 1])) {
+							if (workingString[current + 1].IsVowel()) {
 								metaphoneData.Add("A", "F");
 							}
 							else {
@@ -761,7 +742,7 @@ namespace Gnosis.Core
 						}
 
 						//Arnow should match Arnoff
-						if (((current == last) && IsVowel(workingString[current - 1])) || StringAt(workingString, (current - 1), "EWSKI", "EWSKY", "OWSKI", "OWSKY")
+						if (((current == last) && workingString[current - 1].IsVowel()) || StringAt(workingString, (current - 1), "EWSKI", "EWSKY", "OWSKI", "OWSKY")
 							|| StringAt(workingString, 0, "SCH")) {
 							metaphoneData.Add("", "F");
 							current += 1;
@@ -824,104 +805,12 @@ namespace Gnosis.Core
 			return metaphoneData.ToString();
 		}
 
-        #region Metaphone Helpers
-
-        static bool IsVowel(this char self) {
-			return (self == 'A') || (self == 'E') || (self == 'I') || (self == 'O') || (self == 'U') || (self == 'Y');
-		}
-
-
-		static bool StartsWith(this string self, StringComparison comparison, params string[] strings) {
-			foreach (string str in strings) {
-				if (self.StartsWith(str, comparison)) {
-					return true;
-				}
-			}
-			return false;
-		}
-
-		static bool StringAt(this string self, int startIndex, params string[] strings) {
-			if (startIndex < 0) {
-				startIndex = 0;
-			}
-
-			foreach (string str in strings) {
-				if (self.IndexOf(str, startIndex, StringComparison.OrdinalIgnoreCase) >= startIndex) {
-					return true;
-				}
-			}
-			return false;
-		}
-
-
-		class MetaphoneData
-		{
-			readonly StringBuilder _primary = new StringBuilder(5);
-			readonly StringBuilder _secondary = new StringBuilder(5);
-
-
-			#region Properties
-
-			internal bool Alternative { get; set; }
-			internal int PrimaryLength {
-				get {
-					return _primary.Length;
-				}
-			}
-
-			internal int SecondaryLength {
-				get {
-					return _secondary.Length;
-				}
-			}
-
-			#endregion
-
-
-			internal void Add(string main) {
-				if (main != null) {
-					_primary.Append(main);
-					_secondary.Append(main);
-				}
-			}
-
-			internal void Add(string main, string alternative) {
-				if (main != null) {
-					_primary.Append(main);
-				}
-
-				if (alternative != null) {
-					Alternative = true;
-					if (alternative.Trim().Length > 0) {
-						_secondary.Append(alternative);
-					}
-				}
-				else {
-					if (main != null && main.Trim().Length > 0) {
-						_secondary.Append(main);
-					}
-				}
-			}
-
-			public override string ToString() {
-				string ret = (Alternative ? _secondary : _primary).ToString();
-				//only give back 4 char metaph
-				if (ret.Length > 4) {
-					ret = ret.Substring(0, 4);
-				}
-
-				return ret;
-			}
-        }
-
-        #endregion
-
-        public static string AsMd5Hash(this string input)
+        public static string AsMd5Hash(this string self)
         {
             try
             {
                 var md5 = System.Security.Cryptography.MD5.Create();
-                byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(input);
+                byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(self);
                 byte[] hash = md5.ComputeHash(inputBytes);
 
                 var sb = new StringBuilder();
@@ -935,6 +824,148 @@ namespace Gnosis.Core
             {
                 return null;
             }
+        }
+
+        public static string AsNameHash(this string self)
+        {
+            if (string.IsNullOrEmpty(self))
+                return string.Empty;
+
+            var punctuation = new Dictionary<char, string> {
+                {'!', string.Empty}, {'@', string.Empty}, {'#', string.Empty}, {'$', string.Empty}, {'%', string.Empty}, {'^', string.Empty}, {'&', string.Empty}, {'*', string.Empty}, {'(', string.Empty}, {')', string.Empty}, {'-', string.Empty}, {'_', string.Empty}, {'+', string.Empty}, {'=', string.Empty},
+                {'{', string.Empty}, {'}', string.Empty}, {'[', string.Empty}, {']', string.Empty}, {'|', string.Empty}, {'\\', string.Empty}, {':', string.Empty}, {';', string.Empty}, {'\'', string.Empty}, {'"', string.Empty}, {'<', string.Empty}, {'>', string.Empty}, {',', string.Empty}, {'.', string.Empty},
+                {'?', string.Empty}, {'/', string.Empty}, {'~', string.Empty}, {'`', string.Empty}
+            };
+
+            var charactersToNormalize = new Dictionary<char, string> {
+                {'À', "A"}, {'Â', "A"}, {'Á', "A"}, {'Æ', "AE"}, {'Ǣ', "AE"}, {'Å', "A"},
+                {'à', "A"}, {'â', "A"}, {'á', "A"}, {'æ', "AE"}, {'ǣ', "AE"}, {'ā', "A"},
+
+                {'Ç', "C"},
+                {'č', "C"},
+
+                {'Ð', "D"},
+                {'ð', "D"}, 
+
+                {'È', "E"}, {'Ê', "E"}, {'Ë', "E"}, {'É', "E"},
+                {'è', "E"}, {'ê', "E"}, {'ë', "E"}, {'ē', "E"}, {'é', "E"},
+
+                {'Ğ', "G"}, {'ѓ', "G"},
+                {'ģ', "G"}, {'ǧ', "G"},
+
+                {'ȟ', "H"},
+
+                {'Ï', "I"}, {'Î', "I"}, {'Í', "I"}, {'İ', "I"}, {'й', "I"}, {'ѝ', "I"},
+                {'ï', "I"}, {'î', "I"}, {'ī', "I"}, {'í', "I"},
+                
+                {'ќ', "K"},
+                {'ķ', "K"},
+
+                {'ļ', "L"},
+
+                {'Ñ', "N"},
+                {'ñ', "N"}, {'ņ', "N"}, {'ŋ', "N"},
+
+                {'Ô', "O"}, {'Ö', "O"}, {'Ó', "O"},
+                {'ô', "O"}, {'ö', "O"}, {'ø', "O"}, {'ó', "O"}, {'õ', "O"},
+                
+                {'ŗ', "R"},
+
+                {'Ş', "S"},
+                {'š', "S"},
+
+                {'Û', "U"}, {'Ù', "U"}, {'Ú', "U"}, {'Ü', "U"},
+                {'û', "U"}, {'ù', "U"}, {'ū', "U"}, {'ú', "U"},
+                
+                {'ў', "U"},
+                {'ž', "Z"}
+            };
+
+            var wordsToNormalize = new Dictionary<string, string> {
+                {"THE", string.Empty}, {"A", string.Empty}, {"OF", string.Empty}, {"AT", string.Empty}, {"AND", string.Empty}, {"IN", string.Empty}, {"WITH", string.Empty}, {"BUT", string.Empty}, {"OR", string.Empty}, {"FOR", string.Empty}, {"NOR", string.Empty}, {"YET", string.Empty},
+                {"ONE", "1"}, {"TWO", "2"}, {"THREE", "3"}, {"FOUR", "4"}, {"FIVE", "5"}, {"SIX", "6"}, {"SEVEN", "7"}, {"EIGHT", "8"}, {"NINE", "9"}, {"TEN", "10"},
+                {"ELEVEN", "11"}, {"TWELVE", "12"}, {"THIRTEEN", "13"}, {"FOURTEEN", "14"}, {"FIFTEEN", "15"}, {"SIXTEEN", "16"}, {"SEVENTEEN", "17"}, {"EIGHTEEN", "18"}, {"NINETEEN", "19"}, {"TWENTY", "20"},
+                {"HUNDRED", "00"}, {"THOUSAND", "000"}, {"MILLION", "000000"}, {"BILLION", "000000000"}, {"TRILLION", "000000000000"}
+            };
+
+            var result = new StringBuilder();
+            var wordDelimiters = new string[] { " ", "\t", "\r\n", "\n" };
+            var words = self.Split(wordDelimiters, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var word in words)
+            {
+                var key = word.Trim().ToUpper();
+                var noPunctuation = new StringBuilder();
+                foreach (var character in key.ToCharArray())
+                {
+                    if (punctuation.ContainsKey(character))
+                        noPunctuation.Append(punctuation[character]);
+                    else
+                        noPunctuation.Append(character);
+                }
+
+                key = noPunctuation.ToString();
+                if (wordsToNormalize.ContainsKey(key))
+                    key = wordsToNormalize[key];
+
+                var normalized = new StringBuilder();
+                foreach (var character in key.ToCharArray())
+                {
+                    if (charactersToNormalize.ContainsKey(character))
+                        normalized.Append(charactersToNormalize[character]);
+                    else
+                        normalized.Append(character);
+                }
+
+                result.Append(normalized.ToString());
+            }
+
+            return result.ToString();
+        }
+
+        public static bool StartsWith(this string self, StringComparison comparison, params string[] strings)
+        {
+            foreach (string str in strings)
+            {
+                if (self.StartsWith(str, comparison))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static bool StringAt(this string self, int startIndex, params string[] strings)
+        {
+            if (startIndex < 0)
+            {
+                startIndex = 0;
+            }
+
+            foreach (string str in strings)
+            {
+                if (self.IndexOf(str, startIndex, StringComparison.OrdinalIgnoreCase) >= startIndex)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static IEnumerable<string> ToNames(this string self)
+        {
+            if (string.IsNullOrEmpty(self))
+                return new List<string> { string.Empty };
+
+            return self.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        public static IEnumerable<string> ToTokens(this string self)
+        {
+            if (string.IsNullOrEmpty(self))
+                return new List<string> { string.Empty };
+
+            return self.Split(new char[] { ';', ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
         }
     }
 }

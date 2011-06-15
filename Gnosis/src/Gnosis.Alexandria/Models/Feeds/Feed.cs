@@ -32,10 +32,10 @@ namespace Gnosis.Alexandria.Models.Feeds
             AddValueInitializer("Feed_Categories", value => AddCategory(value as IFeedCategory));
             AddValueInitializer("Feed_Links", value => AddLink(value as IFeedLink));
             AddValueInitializer("Feed_Metadata", value => AddMetadatum(value as IFeedMetadatum));
-            AddValueInitializer("Feed_TitleHashCodes", value => ReplaceTitleHashCode(value as IHashCode));
-            AddValueInitializer("Feed_AuthorHashCodes", value => ReplaceAuthorHashCode(value as IHashCode));
-            AddValueInitializer("Feed_ContributorHashCodes", value => ReplaceContributorHashCode(value as IHashCode));
-            AddValueInitializer("Feed_DescriptionHashCodes", value => ReplaceDescriptionHashCode(value as IHashCode));
+            AddValueInitializer("Feed_TitleHashCodes", value => AddTitleHashCode(value as IHashCode));
+            AddValueInitializer("Feed_AuthorHashCodes", value => AddAuthorHashCode(value as IHashCode));
+            AddValueInitializer("Feed_ContributorHashCodes", value => AddContributorHashCode(value as IHashCode));
+            AddValueInitializer("Feed_DescriptionHashCodes", value => AddDescriptionHashCode(value as IHashCode));
         }
 
         private Uri location;
@@ -91,25 +91,6 @@ namespace Gnosis.Alexandria.Models.Feeds
             RemoveValue<IFeed, IHashCode>(() => titleHashCodes.Remove(hashCode), hashCode, x => x.TitleHashCodes);
         }
 
-        private void ReplaceTitleHashCode(IHashCode hashCode)
-        {
-            ReplaceTitleHashCode(hashCode.Scheme, hashCode.Value);
-        }
-
-        private void ReplaceTitleHashCode(Uri scheme, string value)
-        {
-            var existing = titleHashCodes.Where(hashCode => hashCode.Scheme == scheme).FirstOrDefault();
-            if (existing != null)
-            {
-                if (existing.Value == value)
-                    return;
-
-                RemoveTitleHashCode(existing);
-            }
-
-            AddTitleHashCode(new HashCode(this.Id, scheme, value));
-        }
-
         private void AddAuthorHashCode(IHashCode hashCode)
         {
             AddValue<IFeed, IHashCode>(() => authorHashCodes.Add(hashCode), hashCode, x => x.AuthorHashCodes);
@@ -118,25 +99,6 @@ namespace Gnosis.Alexandria.Models.Feeds
         private void RemoveAuthorHashCode(IHashCode hashCode)
         {
             RemoveValue<IFeed, IHashCode>(() => authorHashCodes.Remove(hashCode), hashCode, x => x.AuthorHashCodes);
-        }
-
-        private void ReplaceAuthorHashCode(IHashCode hashCode)
-        {
-            ReplaceAuthorHashCode(hashCode.Scheme, hashCode.Value);
-        }
-
-        private void ReplaceAuthorHashCode(Uri scheme, string value)
-        {
-            var existing = authorHashCodes.Where(hashCode => hashCode.Scheme == scheme).FirstOrDefault();
-            if (existing != null)
-            {
-                if (existing.Value == value)
-                    return;
-
-                RemoveAuthorHashCode(existing);
-            }
-
-            AddAuthorHashCode(new HashCode(this.Id, scheme, value));
         }
 
         private void AddContributorHashCode(IHashCode hashCode)
@@ -149,25 +111,6 @@ namespace Gnosis.Alexandria.Models.Feeds
             RemoveValue<IFeed, IHashCode>(() => contributorHashCodes.Remove(hashCode), hashCode, x => x.ContributorHashCodes);
         }
 
-        private void ReplaceContributorHashCode(IHashCode hashCode)
-        {
-            ReplaceContributorHashCode(hashCode.Scheme, hashCode.Value);
-        }
-
-        private void ReplaceContributorHashCode(Uri scheme, string value)
-        {
-            var existing = contributorHashCodes.Where(hashCode => hashCode.Scheme == scheme).FirstOrDefault();
-            if (existing != null)
-            {
-                if (existing.Value == value)
-                    return;
-
-                RemoveContributorHashCode(existing);
-            }
-
-            AddContributorHashCode(new HashCode(this.Id, scheme, value));
-        }
-
         private void AddDescriptionHashCode(IHashCode hashCode)
         {
             AddValue<IFeed, IHashCode>(() => descriptionHashCodes.Add(hashCode), hashCode, x => x.DescriptionHashCodes);
@@ -176,25 +119,6 @@ namespace Gnosis.Alexandria.Models.Feeds
         private void RemoveDescriptionHashCode(IHashCode hashCode)
         {
             RemoveValue<IFeed, IHashCode>(() => descriptionHashCodes.Remove(hashCode), hashCode, x => x.DescriptionHashCodes);
-        }
-
-        private void ReplaceDescriptionHashCode(IHashCode hashCode)
-        {
-            ReplaceDescriptionHashCode(hashCode.Scheme, hashCode.Value);
-        }
-
-        private void ReplaceDescriptionHashCode(Uri scheme, string value)
-        {
-            var existing = descriptionHashCodes.Where(hashCode => hashCode.Scheme == scheme).FirstOrDefault();
-            if (existing != null)
-            {
-                if (existing.Value == value)
-                    return;
-
-                RemoveDescriptionHashCode(existing);
-            }
-
-            AddDescriptionHashCode(new HashCode(this.Id, scheme, value));
         }
 
         #endregion
@@ -233,8 +157,8 @@ namespace Gnosis.Alexandria.Models.Feeds
                 if (value != null && value != title)
                 {
                     Change(() => title = value, "Title");
-                    ReplaceTitleHashCode(HashCode.SchemeDoubleMetaphone, value.AsDoubleMetaphone());
-                    ReplaceTitleHashCode(HashCode.SchemeNameHash, value.AsNameHash());
+                    ReplaceHashCodes(HashCode.SchemeDoubleMetaphone, value, x => HashCode.CreateDoubleMetaphoneHash(this.Id, x), hashCode => AddTitleHashCode(hashCode), hashCode => RemoveTitleHashCode(hashCode), titleHashCodes);
+                    ReplaceHashCodes(HashCode.SchemeNameHash, value, x => HashCode.CreateNameHash(this.Id, x), hashCode => AddTitleHashCode(hashCode), hashCode => RemoveTitleHashCode(hashCode), titleHashCodes);
                 }
             }
         }
@@ -247,8 +171,8 @@ namespace Gnosis.Alexandria.Models.Feeds
                 if (value != null && value != authors)
                 {
                     Change(() => authors = value, "Authors");
-                    ReplaceAuthorHashCode(HashCode.SchemeDoubleMetaphone, value.AsDoubleMetaphone());
-                    ReplaceAuthorHashCode(HashCode.SchemeNameHash, value.AsNameHash());
+                    ReplaceHashCodes(HashCode.SchemeDoubleMetaphone, value, token => HashCode.CreateDoubleMetaphoneHash(this.Id, token), hashCode => AddAuthorHashCode(hashCode), hashCode => RemoveAuthorHashCode(hashCode), authorHashCodes);
+                    ReplaceHashCodes(HashCode.SchemeNameHash, value, token => HashCode.CreateNameHash(this.Id, token), hashCode => AddAuthorHashCode(hashCode), hashCode => RemoveAuthorHashCode(hashCode), authorHashCodes);
                 }
             }
         }
@@ -261,8 +185,8 @@ namespace Gnosis.Alexandria.Models.Feeds
                 if (value != null && value != contributors)
                 {
                     Change(() => contributors = value, "Contributors");
-                    ReplaceContributorHashCode(HashCode.SchemeDoubleMetaphone, value.AsDoubleMetaphone());
-                    ReplaceContributorHashCode(HashCode.SchemeNameHash, value.AsNameHash());
+                    ReplaceHashCodes(HashCode.SchemeDoubleMetaphone, value, token => HashCode.CreateDoubleMetaphoneHash(this.Id, token), hashCode => AddContributorHashCode(hashCode), hashCode => RemoveContributorHashCode(hashCode), contributorHashCodes);
+                    ReplaceHashCodes(HashCode.SchemeNameHash, value, token => HashCode.CreateNameHash(this.Id, token), hashCode => AddContributorHashCode(hashCode), hashCode => RemoveContributorHashCode(hashCode), contributorHashCodes);
                 }
             }
         }
@@ -275,8 +199,8 @@ namespace Gnosis.Alexandria.Models.Feeds
                 if (value != null && value != description)
                 {
                     Change(() => description = value, "Description");
-                    ReplaceDescriptionHashCode(HashCode.SchemeDoubleMetaphone, value.AsDoubleMetaphone());
-                    ReplaceDescriptionHashCode(HashCode.SchemeNameHash, value.AsNameHash());
+                    ReplaceHashCodes(HashCode.SchemeDoubleMetaphone, value, token => HashCode.CreateDoubleMetaphoneHash(this.Id, token), hashCode => AddDescriptionHashCode(hashCode), hashCode => RemoveDescriptionHashCode(hashCode), descriptionHashCodes);
+                    ReplaceHashCodes(HashCode.SchemeNameHash, value, token => HashCode.CreateNameHash(this.Id, token), hashCode => AddDescriptionHashCode(hashCode), hashCode => RemoveDescriptionHashCode(hashCode), descriptionHashCodes);
                 }
             }
         }

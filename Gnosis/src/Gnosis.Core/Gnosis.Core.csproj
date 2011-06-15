@@ -47,6 +47,7 @@
     <Compile Include="Batches\InitializeTypeBatch.cs" />
     <Compile Include="Batches\PersistEntitiesBatch.cs" />
     <Compile Include="Batches\SaveEntitiesBatch.cs" />
+    <Compile Include="CharExtensions.cs" />
     <Compile Include="Commands\CommandBuilder.cs" />
     <Compile Include="Commands\CreateIndexStatement.cs" />
     <Compile Include="Commands\CreateTableStatement.cs" />

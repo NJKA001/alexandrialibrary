@@ -28,6 +28,10 @@ namespace Gnosis.Alexandria.Models.Feeds
             AddValueInitializer("FeedItem_Categories", value => this.AddCategory(value as IFeedCategory));
             AddValueInitializer("FeedItem_Links", value => this.AddLink(value as IFeedLink));
             AddValueInitializer("FeedItem_Metadata", value => this.AddMetadatum(value as IFeedMetadatum));
+            AddValueInitializer("FeedItem_TitleHashCodes", value => AddTitleHashCode(value as IHashCode));
+            AddValueInitializer("FeedItem_AuthorHashCodes", value => AddAuthorHashCode(value as IHashCode));
+            AddValueInitializer("FeedItem_ContributorHashCodes", value => AddContributorHashCode(value as IHashCode));
+            AddValueInitializer("FeedItem_SummaryHashCodes", value => AddSummaryHashCode(value as IHashCode));
         }
 
         private string title = string.Empty;
@@ -47,7 +51,12 @@ namespace Gnosis.Alexandria.Models.Feeds
         private readonly IList<IFeedLink> links = new ObservableCollection<IFeedLink>();
         private readonly IList<IFeedMetadatum> metadata = new ObservableCollection<IFeedMetadatum>();
 
-        #region Private Value Methods
+        private readonly IList<IHashCode> titleHashCodes = new ObservableCollection<IHashCode>();
+        private readonly IList<IHashCode> authorHashCodes = new ObservableCollection<IHashCode>();
+        private readonly IList<IHashCode> contributorHashCodes = new ObservableCollection<IHashCode>();
+        private readonly IList<IHashCode> summaryHashCodes = new ObservableCollection<IHashCode>();
+
+        #region Private Methods
 
         private void AddCategory(IFeedCategory category)
         {
@@ -62,6 +71,46 @@ namespace Gnosis.Alexandria.Models.Feeds
         private void AddMetadatum(IFeedMetadatum metadatum)
         {
             AddValue<IFeedItem, IFeedMetadatum>(() => metadata.Add(metadatum), metadatum, x => x.Metadata);
+        }
+
+        private void AddTitleHashCode(IHashCode hashCode)
+        {
+            AddValue<IFeedItem, IHashCode>(() => titleHashCodes.Add(hashCode), hashCode, x => x.TitleHashCodes);
+        }
+
+        private void RemoveTitleHashCode(IHashCode hashCode)
+        {
+            RemoveValue<IFeedItem, IHashCode>(() => titleHashCodes.Remove(hashCode), hashCode, x => x.TitleHashCodes);
+        }
+
+        private void AddAuthorHashCode(IHashCode hashCode)
+        {
+            AddValue<IFeedItem, IHashCode>(() => authorHashCodes.Add(hashCode), hashCode, x => x.AuthorHashCodes);
+        }
+
+        private void RemoveAuthorHashCode(IHashCode hashCode)
+        {
+            RemoveValue<IFeedItem, IHashCode>(() => authorHashCodes.Remove(hashCode), hashCode, x => x.AuthorHashCodes);
+        }
+
+        private void AddContributorHashCode(IHashCode hashCode)
+        {
+            AddValue<IFeedItem, IHashCode>(() => contributorHashCodes.Add(hashCode), hashCode, x => x.ContributorHashCodes);
+        }
+
+        private void RemoveContributorHashCode(IHashCode hashCode)
+        {
+            RemoveValue<IFeedItem, IHashCode>(() => contributorHashCodes.Remove(hashCode), hashCode, x => x.ContributorHashCodes);
+        }
+
+        private void AddSummaryHashCode(IHashCode hashCode)
+        {
+            AddValue<IFeedItem, IHashCode>(() => summaryHashCodes.Add(hashCode), hashCode, x => x.SummaryHashCodes);
+        }
+
+        private void RemoveSummaryHashCode(IHashCode hashCode)
+        {
+            RemoveValue<IFeedItem, IHashCode>(() => summaryHashCodes.Remove(hashCode), hashCode, x => x.SummaryHashCodes);
         }
 
         #endregion
@@ -227,6 +276,27 @@ namespace Gnosis.Alexandria.Models.Feeds
         {
             get { return metadata; }
         }
+
+        public IEnumerable<IHashCode> TitleHashCodes
+        {
+            get { return titleHashCodes; }
+        }
+
+        public IEnumerable<IHashCode> AuthorHashCodes
+        {
+            get { return authorHashCodes; }
+        }
+
+        public IEnumerable<IHashCode> ContributorHashCodes
+        {
+            get { return contributorHashCodes; }
+        }
+
+        public IEnumerable<IHashCode> SummaryHashCodes
+        {
+            get { return summaryHashCodes; }
+        }
+
 
         public void AddCategory(Uri scheme, string name, string label)
         {

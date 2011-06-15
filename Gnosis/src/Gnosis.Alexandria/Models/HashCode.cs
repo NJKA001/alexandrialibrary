@@ -46,7 +46,9 @@ namespace Gnosis.Alexandria.Models
             if (string.IsNullOrEmpty(originalString))
                 return null;
 
-            return new HashCode(parent, SchemeDoubleMetaphone, originalString.AsDoubleMetaphone());
+            var value = originalString.AsDoubleMetaphone();
+            
+            return (!string.IsNullOrEmpty(value)) ? new HashCode(parent, SchemeDoubleMetaphone, value) : null;
         }
 
         #endregion
@@ -60,9 +62,9 @@ namespace Gnosis.Alexandria.Models
             if (string.IsNullOrEmpty(originalString))
                 return null;
 
-            var hash = originalString.AsMd5Hash();
+            var value = originalString.AsMd5Hash();
 
-            return (hash != null) ? new HashCode(parent, SchemeMd5, hash) : null;
+            return (!string.IsNullOrEmpty(value)) ? new HashCode(parent, SchemeMd5, value) : null;
         }
 
         public static IHashCode CreateMd5Hash(Guid parent, Uri location)
@@ -70,9 +72,9 @@ namespace Gnosis.Alexandria.Models
             if (location == null)
                 return null;
 
-            var hash = location.AsMd5Hash();
+            var value = location.AsMd5Hash();
 
-            return (hash != null) ? new HashCode(parent, SchemeMd5, hash) : null;
+            return (!string.IsNullOrEmpty(value)) ? new HashCode(parent, SchemeMd5, value) : null;
         }
 
         #endregion
@@ -86,7 +88,9 @@ namespace Gnosis.Alexandria.Models
             if (string.IsNullOrEmpty(originalString))
                 return null;
 
-            return new HashCode(parent, SchemeNameHash, originalString.AsNameHash());
+            var value = originalString.AsNameHash();
+
+            return (!string.IsNullOrEmpty(value)) ? new HashCode(parent, SchemeNameHash, value) : null;
         }
 
         #endregion
