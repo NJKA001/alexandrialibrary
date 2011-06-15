@@ -222,6 +222,11 @@ namespace Gnosis.Alexandria.Models
 
         protected void RefreshHashCodes(string value, Expression<Func<T, IEnumerable<IHashCode>>> property)
         {
+            RefreshHashCodes(value, property, null);
+        }
+
+        protected void RefreshHashCodes(string value, Expression<Func<T, IEnumerable<IHashCode>>> property, params Uri[] schemesToUse)
+        {
             if (hashFunctions.Count == 0)
                 throw new InvalidOperationException("No hash functions defined for this entity");
 
@@ -238,56 +243,33 @@ namespace Gnosis.Alexandria.Models
 
             foreach (var scheme in hashFunctions.Keys)
             {
-                var oldCodes = new List<IHashCode>();
-                oldCodes.AddRange(source.Where(hashCode => hashCode.Scheme == scheme));
-
-                foreach (var hashCode in oldCodes)
-                    removeAction(hashCode);
-
-                var rootCode = hashFunctions[scheme](value);
-                if (rootCode != null)
+                if (schemesToUse == null || schemesToUse.Contains(scheme))
                 {
-                    addAction(rootCode);
+                    var oldCodes = new List<IHashCode>();
+                    oldCodes.AddRange(source.Where(hashCode => hashCode.Scheme == scheme));
 
-                    var tokens = value.ToTokens();
-                    if (tokens.Count() > 1)
+                    foreach (var hashCode in oldCodes)
+                        removeAction(hashCode);
+
+                    var rootCode = hashFunctions[scheme](value);
+                    if (rootCode != null)
                     {
-                        foreach (var token in tokens)
+                        addAction(rootCode);
+
+                        var tokens = value.ToTokens();
+                        if (tokens.Count() > 1)
                         {
-                            var hashCode = hashFunctions[scheme](token);
-                            if (hashCode != null && hashCode.Value != value)
-                                addAction(hashCode);
+                            foreach (var token in tokens)
+                            {
+                                var hashCode = hashFunctions[scheme](token);
+                                if (hashCode != null && hashCode.Value != value)
+                                    addAction(hashCode);
+                            }
                         }
                     }
                 }
             }
         }
-
-        /*
-        protected static void ReplaceHashCodes(Uri scheme, string value, Func<string, IHashCode> hashFunction, Action<IHashCode> addAction, Action<IHashCode> removeAction, IEnumerable<IHashCode> source)
-        {
-            var codesToRemove = new List<IHashCode>();
-            codesToRemove.AddRange(source.Where(hashCode => hashCode.Scheme == scheme));
-
-            foreach (var codeToRemove in codesToRemove)
-                removeAction(codeToRemove);
-
-            var rootCode = hashFunction(value);
-            if (rootCode != null)
-                addAction(rootCode);
-
-            var tokens = value.ToTokens();
-            if (tokens.Count() > 1)
-            {
-                foreach (var token in tokens)
-                {
-                    var hashCode = hashFunction(token);
-                    if (hashCode != null && hashCode.Value != value)
-                        addAction(hashCode);
-                }
-            }
-        }
-        */
 
         public Guid Id
         {
