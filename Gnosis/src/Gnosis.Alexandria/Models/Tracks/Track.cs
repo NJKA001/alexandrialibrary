@@ -48,10 +48,10 @@ namespace Gnosis.Alexandria.Models.Tracks
             AddInitializer("Copyright", x => this.copyright = x.ToString());
             AddInitializer("Publisher", x => this.publisher = x.ToString());
             AddInitializer("InternationalStandardRecordingCode", x => this.internationalStandardRecordingCode = x.ToString());
-            AddChildInitializer("Track_Pictures", child => AddPicture(child as ITrackPicture));
-            AddChildInitializer("Track_Lyrics", child => AddLyrics(child as ITrackUnsynchronizedLyrics));
-            AddChildInitializer("Track_SynchronizedLyrics", child => AddSynchronizedLyrics(child as ITrackSynchronizedLyrics));
-            AddChildInitializer("Track_Ratings", child => AddRating(child as ITrackRating));
+            AddChildInitializer("TrackPicture", child => AddPicture(child as ITrackPicture));
+            AddChildInitializer("TrackUnsynchronizedLyrics", child => AddLyrics(child as ITrackUnsynchronizedLyrics));
+            AddChildInitializer("TrackSynchronizedLyrics", child => AddSynchronizedLyrics(child as ITrackSynchronizedLyrics));
+            AddChildInitializer("TrackRating", child => AddRating(child as ITrackRating));
             AddValueInitializer("Track_Identifiers", value => AddIdentifier(value as ITrackIdentifier));
             AddValueInitializer("Track_Links", value => AddLink(value as ITrackLink));
             AddValueInitializer("Track_Metadata", value => AddMetadatum(value as ITrackMetadatum));
@@ -121,107 +121,107 @@ namespace Gnosis.Alexandria.Models.Tracks
 
         private void AddPicture(ITrackPicture picture)
         {
-            AddChild(() => pictures.Add(picture), picture, "Pictures");
+            AddChild<ITrack, ITrackPicture>(() => pictures.Add(picture), picture, x => x.Pictures);
         }
 
         private void AddLyrics(ITrackUnsynchronizedLyrics lyrics)
         {
-            AddChild(() => this.lyrics.Add(lyrics), lyrics, "Lyrics");
+            AddChild<ITrack, ITrackUnsynchronizedLyrics>(() => this.lyrics.Add(lyrics), lyrics, x => x.Lyrics);
         }
 
         private void AddSynchronizedLyrics(ITrackSynchronizedLyrics synchronizedLyrics)
         {
-            AddChild(() => this.synchronizedLyrics.Add(synchronizedLyrics), synchronizedLyrics, "SynchronizedLyrics");
+            AddChild<ITrack, ITrackSynchronizedLyrics>(() => this.synchronizedLyrics.Add(synchronizedLyrics), synchronizedLyrics, x => x.Lyrics);
         }
 
         private void AddRating(ITrackRating rating)
         {
-            AddChild(() => this.ratings.Add(rating), rating, "Ratings");
+            AddChild<ITrack, ITrackRating>(() => this.ratings.Add(rating), rating, x => x.Ratings);
         }
 
         private void AddIdentifier(ITrackIdentifier identifier)
         {
-            AddValue(() => this.identifiers.Add(identifier), identifier, "Identifiers");
+            AddValue<ITrack, ITrackIdentifier>(() => this.identifiers.Add(identifier), identifier, x => x.Identifiers);
         }
 
         private void AddLink(ITrackLink link)
         {
-            AddValue(() => this.links.Add(link), link, "Links");
+            AddValue<ITrack, ITrackLink>(() => this.links.Add(link), link, x => x.Links);
         }
 
         private void AddMetadatum(ITrackMetadatum metadatum)
         {
-            AddValue(() => this.metadata.Add(metadatum), metadatum, "Metadata");
+            AddValue<ITrack, ITrackMetadatum>(() => this.metadata.Add(metadatum), metadatum, x => x.Metadata);
         }
 
         private void AddTitleHashCode(IHashCode hashCode)
         {
-            AddValue(() => this.titleHashCodes.Add(hashCode), hashCode, "TitleHashCodes");
+            AddValue<ITrack, IHashCode>(() => this.titleHashCodes.Add(hashCode), hashCode, x => x.TitleHashCodes);
         }
 
         private void RemoveTitleHashCode(IHashCode hashCode)
         {
-            RemoveValue(() => this.titleHashCodes.Remove(hashCode), hashCode.Id, "TitleHashCodes");
+            RemoveValue<ITrack, IHashCode>(() => this.titleHashCodes.Remove(hashCode), hashCode, x => x.TitleHashCodes);
         }
 
         private void AddAlbumHashCode(IHashCode hashCode)
         {
-            AddValue(() => this.albumHashCodes.Add(hashCode), hashCode, "AlbumHashCodes");
+            AddValue<ITrack, IHashCode>(() => this.albumHashCodes.Add(hashCode), hashCode, x => x.AlbumHashCodes);
         }
 
         private void RemoveAlbumHashCode(IHashCode hashCode)
         {
-            RemoveValue(() => this.albumHashCodes.Remove(hashCode), hashCode.Id, "AlbumHashCodes");
+            RemoveValue<ITrack, IHashCode>(() => this.albumHashCodes.Remove(hashCode), hashCode, x => x.AlbumHashCodes);
         }
 
         private void AddArtistHashCode(IHashCode hashCode)
         {
-            AddValue(() => this.artistHashCodes.Add(hashCode), hashCode, "ArtistHashCodes");
+            AddValue<ITrack, IHashCode>(() => this.artistHashCodes.Add(hashCode), hashCode, x => x.ArtistHashCodes);
         }
 
         private void RemoveArtistHashCode(IHashCode hashCode)
         {
-            RemoveValue(() => this.albumHashCodes.Remove(hashCode), hashCode.Id, "ArtistHashCodes");
+            RemoveValue<ITrack, IHashCode>(() => this.albumHashCodes.Remove(hashCode), hashCode, x => x.ArtistHashCodes);
         }
 
         private void AddAlbumArtistHashCode(IHashCode hashCode)
         {
-            AddValue(() => this.albumArtistHashCodes.Add(hashCode), hashCode, "AlbumArtistHashCodes");
+            AddValue<ITrack, IHashCode>(() => this.albumArtistHashCodes.Add(hashCode), hashCode, x => x.AlbumArtistHashCodes);
         }
 
         private void RemoveAlbumArtistHashCode(IHashCode hashCode)
         {
-            RemoveValue(() => this.albumArtistHashCodes.Remove(hashCode), hashCode.Id, "AlbumArtistHashCodes");
+            RemoveValue<ITrack, IHashCode>(() => this.albumArtistHashCodes.Remove(hashCode), hashCode, x => x.AlbumArtistHashCodes);
         }
 
         private void AddComposerHashCode(IHashCode hashCode)
         {
-            AddValue(() => this.composerHashCodes.Add(hashCode), hashCode, "ComposerHashCodes");
+            AddValue<ITrack, IHashCode>(() => this.composerHashCodes.Add(hashCode), hashCode, x => x.ComposerHashCodes);
         }
 
         private void RemoveComposerHashCode(IHashCode hashCode)
         {
-            RemoveValue(() => this.composerHashCodes.Remove(hashCode), hashCode.Id, "ComposerHashCodes");
+            RemoveValue<ITrack, IHashCode>(() => this.composerHashCodes.Remove(hashCode), hashCode, x => x.ComposerHashCodes);
         }
 
         private void AddConductorHashCode(IHashCode hashCode)
         {
-            AddValue(() => this.conductorHashCodes.Add(hashCode), hashCode, "ConductorHashCodes");
+            AddValue<ITrack, IHashCode>(() => this.conductorHashCodes.Add(hashCode), hashCode, x => x.ConductorHashCodes);
         }
 
         private void RemoveConductorHashCode(IHashCode hashCode)
         {
-            RemoveValue(() => this.conductorHashCodes.Remove(hashCode), hashCode.Id, "ConductorHashCodes");
+            RemoveValue<ITrack, IHashCode>(() => this.conductorHashCodes.Remove(hashCode), hashCode, x => x.ConductorHashCodes);
         }
 
         private void AddOriginalTitleHashCode(IHashCode hashCode)
         {
-            AddValue(() => this.originalTitleHashCodes.Add(hashCode), hashCode, "OriginalTitleHashCodes");
+            AddValue<ITrack, IHashCode>(() => this.originalTitleHashCodes.Add(hashCode), hashCode, x => x.OriginalTitleHashCodes);
         }
 
         private void RemoveOriginalTitleHashCode(IHashCode hashCode)
         {
-            RemoveValue(() => this.originalTitleHashCodes.Remove(hashCode), hashCode.Id, "OriginalTitleHashCodes");
+            RemoveValue<ITrack, IHashCode>(() => this.originalTitleHashCodes.Remove(hashCode), hashCode, x => x.OriginalTitleHashCodes);
         }
 
         #endregion
@@ -745,7 +745,7 @@ namespace Gnosis.Alexandria.Models.Tracks
 
         public void RemovePicture(ITrackPicture picture)
         {
-            RemoveChild(() => pictures.Remove(picture), picture.Id, "Pictures");
+            RemoveChild<ITrack, ITrackPicture>(() => pictures.Remove(picture), picture, x => x.Pictures);
         }
 
 
@@ -762,7 +762,7 @@ namespace Gnosis.Alexandria.Models.Tracks
 
         public void RemoveLyrics(ITrackUnsynchronizedLyrics lyrics)
         {
-            RemoveChild(() => this.lyrics.Remove(lyrics), lyrics.Id, "Lyrics");
+            RemoveChild<ITrack, ITrackUnsynchronizedLyrics>(() => this.lyrics.Remove(lyrics), lyrics, x => x.Lyrics);
         }
 
 
@@ -780,7 +780,7 @@ namespace Gnosis.Alexandria.Models.Tracks
 
         public void RemoveSynchronizedLyrics(ITrackSynchronizedLyrics synchronizedLyrics)
         {
-            RemoveChild(() => this.synchronizedLyrics.Remove(synchronizedLyrics), synchronizedLyrics.Id, "SynchronizedLyrics");
+            RemoveChild<ITrack, ITrackSynchronizedLyrics>(() => this.synchronizedLyrics.Remove(synchronizedLyrics), synchronizedLyrics, x => x.SynchronizedLyrics);
         }
 
 
@@ -796,7 +796,7 @@ namespace Gnosis.Alexandria.Models.Tracks
 
         public void RemoveRating(ITrackRating rating)
         {
-            RemoveChild(() => this.ratings.Remove(rating), rating.Id, "Ratings");
+            RemoveChild<ITrack, ITrackRating>(() => this.ratings.Remove(rating), rating, x => x.Ratings);
         }
 
 
@@ -807,7 +807,7 @@ namespace Gnosis.Alexandria.Models.Tracks
 
         public void RemoveIdentifier(ITrackIdentifier identifier)
         {
-            RemoveValue(() => this.identifiers.Remove(identifier), identifier.Id, "Identifiers");
+            RemoveValue<ITrack, ITrackIdentifier>(() => this.identifiers.Remove(identifier), identifier, x => x.Identifiers);
         }
 
 
@@ -818,7 +818,7 @@ namespace Gnosis.Alexandria.Models.Tracks
 
         public void RemoveLink(ITrackLink link)
         {
-            RemoveValue(() => this.links.Remove(link), link.Id, "Links");
+            RemoveValue<ITrack, ITrackLink>(() => this.links.Remove(link), link, x => x.Links);
         }
 
 
@@ -829,7 +829,7 @@ namespace Gnosis.Alexandria.Models.Tracks
 
         public void RemoveMetadatum(ITrackMetadatum metadatum)
         {
-            RemoveValue(() => this.metadata.Remove(metadatum), metadatum.Id, "Metadata");
+            RemoveValue<ITrack, ITrackMetadatum>(() => this.metadata.Remove(metadatum), metadatum, x => x.Metadata);
         }
 
         #endregion

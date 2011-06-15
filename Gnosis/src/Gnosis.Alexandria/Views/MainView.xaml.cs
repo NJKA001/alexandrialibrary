@@ -67,8 +67,35 @@ namespace Gnosis.Alexandria.Views
                 feedRepository = new FeedRepository(context, logger);
                 feedRepository.Initialize();
 
-                var feeds = feedRepository.Search();
-                var x = feeds.Count();
+                trackRepository = new TrackRepository(context, logger);
+                trackRepository.Initialize();
+
+                //var track = new Models.Tracks.Track();
+                //track.Initialize(new EntityInitialState(context, logger));
+                //track.Location = new Uri(@"file:///C:/Users/Dan/Music/Tool/Undertow/01%20Intolerance.mp3");
+                //var trackId = track.Id;
+                //track.AddIdentifier(new Uri("http://allmusic.com"), "R   169347");
+                //track.AddIdentifier(new Uri("http://musicbrainz.org/trackId"), "9afffc81-c4b9-46aa-baef-232a45817158");
+                //trackRepository.Save(new List<Models.Tracks.ITrack> { track });
+                //var x = trackRepository.Lookup(trackId);
+                //var y = x;
+                //var feeds = feedRepository.Search();
+                //var x = feeds.Count();
+                //var entityInfo = new EntityInfo(typeof(Models.Tracks.ITrack));
+                //var y = entityInfo;
+
+                /*
+                var feed = new Models.Feeds.Feed();
+                feed.Initialize(new EntityInitialState(context, logger));
+                feed.Location = new Uri("http://example.com/feeds/exmaple.xml");
+                feed.Authors = "Neal Stephenson; William Gibson";
+                var x = feed.AuthorHashCodes.Count();
+                var firstIsNew = feed.AuthorHashCodes.FirstOrDefault().IsNew();
+                var lastIsNew = feed.AuthorHashCodes.LastOrDefault().IsNew();
+                feedRepository.Save(new List<Models.Feeds.IFeed> { feed });
+                var lookup = feedRepository.Lookup(feed.Id);
+                var y = lookup.AuthorHashCodes.Count();
+                 */
             }
             catch (Exception ex)
             {
@@ -80,7 +107,7 @@ namespace Gnosis.Alexandria.Views
         
         private readonly IContext context;
         private readonly ILogger logger = new Logger(log);
-        //private readonly IRepository<Gnosis.Alexandria.Models.Tracks.ITrack> trackRepository;
+        private readonly IRepository<Gnosis.Alexandria.Models.Tracks.ITrack> trackRepository;
         private readonly IRepository<Gnosis.Alexandria.Models.Feeds.IFeed> feedRepository;
 
         private readonly IOldRepository<IOldTrack> oldTrackRepository = new OldTrackRepository();

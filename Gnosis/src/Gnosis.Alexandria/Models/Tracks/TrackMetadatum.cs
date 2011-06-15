@@ -10,9 +10,9 @@ namespace Gnosis.Alexandria.Models.Tracks
     {
         public TrackMetadatum()
         {
-            AddInitializer("TextEncoding", x => this.textEncoding = x.ToString());
-            AddInitializer("Description", x => this.description = x.ToString());
-            AddInitializer("Content", x => this.content = x.ToString());
+            AddInitializer("TextEncoding", value => this.textEncoding = value.ToString());
+            AddInitializer("Description", value => this.description = value.ToString());
+            AddInitializer("Content", value => this.content = value.ToString());
         }
 
         public TrackMetadatum(Guid parent, string textEncoding, string description, string content)

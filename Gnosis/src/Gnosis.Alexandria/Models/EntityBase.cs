@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 using Gnosis.Core;
@@ -19,10 +20,10 @@ namespace Gnosis.Alexandria.Models
         private bool isNew;
         private bool isChanged;
         private bool isInitialized;
-        private readonly IDictionary<Guid, IChild> children = new Dictionary<Guid, IChild>();
-        private readonly IDictionary<Guid, IChild> removedChildren = new Dictionary<Guid, IChild>();
-        private readonly IDictionary<Guid, IValue> values = new Dictionary<Guid, IValue>();
-        private readonly IDictionary<Guid, IValue> removedValues = new Dictionary<Guid, IValue>();
+        private readonly IDictionary<string, IDictionary<Guid, IChild>> children = new Dictionary<string, IDictionary<Guid, IChild>>();
+        private readonly IDictionary<string, IDictionary<Guid, IChild>> removedChildren = new Dictionary<string, IDictionary<Guid, IChild>>();
+        private readonly IDictionary<string, IDictionary<Guid, IValue>> values = new Dictionary<string, IDictionary<Guid, IValue>>();
+        private readonly IDictionary<string, IDictionary<Guid, IValue>> removedValues = new Dictionary<string, IDictionary<Guid, IValue>>();
         private readonly IDictionary<string, Action<object>> initializers = new Dictionary<string, Action<object>>();
         private readonly IDictionary<string, Action<string, IDataRecord>> customInitializers = new Dictionary<string, Action<string, IDataRecord>>();
         private readonly IDictionary<string, Action<IChild>> childInitializers = new Dictionary<string, Action<IChild>>();
@@ -85,67 +86,118 @@ namespace Gnosis.Alexandria.Models
             valueInitializers[name] = action;
         }
 
-        protected void AddChild(Action action, IChild child, string propertyName)
+        protected void AddChild<TParent, TChild>(Action action, TChild child, Expression<Func<TParent, object>> property)
+            where TParent : IEntity
+            where TChild : IChild
         {
             if (!isInitialized)
                 throw new InvalidOperationException("Entity must be initialized before children can be added");
 
-            if (removedChildren.ContainsKey(child.Id))
-                removedChildren.Remove(child.Id);
+            var propertyInfo = property.AsProperty();
+            var parentInfo = new EntityInfo(typeof(TParent));
+            var childInfo = new EntityInfo(typeof(TChild), parentInfo);
+            var key = childInfo.Name;
 
-            if (!children.ContainsKey(child.Id))
+            if (!removedChildren.ContainsKey(key))
+                removedChildren[key] = new Dictionary<Guid, IChild>();
+
+            if (!children.ContainsKey(key))
+                children[key] = new Dictionary<Guid, IChild>();
+
+            if (removedChildren[key].ContainsKey(child.Id))
+                removedChildren[key].Remove(child.Id);
+
+            if (!children[key].ContainsKey(child.Id))
             {
                 context.Invoke(action);
-                children.Add(child.Id, child);
-                OnPropertyChanged(propertyName);
+                children[key].Add(child.Id, child);
+                OnPropertyChanged(propertyInfo.Name);
             }
         }
 
-        protected void RemoveChild(Action action, Guid id, string propertyName)
+        protected void RemoveChild<TParent, TChild>(Action action, TChild child, Expression<Func<TParent, object>> property)
+            where TParent : IEntity
+            where TChild : IChild
         {
             if (!isInitialized)
                 throw new InvalidOperationException("Entity must be initialized before children can be removed");
 
-            if (children.ContainsKey(id))
+            var propertyInfo = property.AsProperty();
+            var parentInfo = new EntityInfo(typeof(TParent));
+            var childInfo = new EntityInfo(typeof(TChild), parentInfo);
+            var key = childInfo.Name;
+
+            if (!removedChildren.ContainsKey(key))
+                removedChildren[key] = new Dictionary<Guid, IChild>();
+
+            if (!children.ContainsKey(key))
+                children[key] = new Dictionary<Guid, IChild>();
+
+            if (children[key].ContainsKey(child.Id))
             {
-                var child = children[id];
+                var childToRemove = children[key][child.Id];
                 context.Invoke(action);
-                child.Remove();
-                children.Remove(id);
-                removedChildren.Add(id, child);
-                OnPropertyChanged(propertyName);
+                childToRemove.Remove();
+                children[key].Remove(child.Id);
+                removedChildren[key].Add(childToRemove.Id, childToRemove);
+                OnPropertyChanged(propertyInfo.Name);
             }
         }
 
-        protected void AddValue(Action action, IValue value, string propertyName)
+        protected void AddValue<TParent, TValue>(Action action, TValue value, Expression<Func<TParent, object>> property)
+            where TParent : IEntity
+            where TValue : IValue
         {
             if (!isInitialized)
                 throw new InvalidOperationException("Entity must be initialized before values can be added");
 
-            if (removedValues.ContainsKey(value.Id))
-                removedValues.Remove(value.Id);
+            var entity = new EntityInfo(typeof(TParent));
+            var propertyInfo = property.AsProperty();
+            var key = string.Format("{0}_{1}", entity.Name, propertyInfo.Name);
 
-            if (!values.ContainsKey(value.Id))
+            if (!removedValues.ContainsKey(key))
+                removedValues[key] = new Dictionary<Guid, IValue>();
+
+            if (!values.ContainsKey(key))
+                values[key] = new Dictionary<Guid, IValue>();
+
+            if (removedValues[key].ContainsKey(value.Id))
+                removedValues[key].Remove(value.Id);
+
+            if (!values[key].ContainsKey(value.Id))
             {
                 context.Invoke(action);
-                values.Add(value.Id, value);
-                OnPropertyChanged(propertyName);
+                values[key].Add(value.Id, value);
+                OnPropertyChanged(propertyInfo.Name);
             }
         }
 
-        protected void RemoveValue(Action action, Guid id, string propertyName)
+        protected void RemoveValue<TParent, TValue>(Action action, TValue value, Expression<Func<TParent, object>> property)
+            where TParent : IEntity
+            where TValue : IValue
         {
             if (!isInitialized)
                 throw new InvalidOperationException("Entity must be initialized before values can be removed");
 
-            if (values.ContainsKey(id))
+            var entity = new EntityInfo(typeof(TParent));
+            var propertyInfo = property.AsProperty();
+
+            var key = string.Format("{0}_{1}", entity.Name, propertyInfo.Name);
+
+            if (!removedValues.ContainsKey(key))
+                removedValues[key] = new Dictionary<Guid, IValue>();
+
+            if (!values.ContainsKey(key))
+                values[key] = new Dictionary<Guid, IValue>();
+
+            if (values[key].ContainsKey(value.Id))
             {
-                var value = values[id];
+                var valueToRemove = values[key][value.Id];
                 context.Invoke(action);
-                value.Remove();
-                values.Remove(id);
-                removedValues.Add(id, value);
-                OnPropertyChanged(propertyName);
+                valueToRemove.Remove();
+                values[key].Remove(value.Id);
+                removedValues[key].Add(value.Id, valueToRemove);
+                OnPropertyChanged(propertyInfo.Name);
             }
         }
 
@@ -176,12 +228,24 @@ namespace Gnosis.Alexandria.Models
 
         public virtual IEnumerable<IChild> GetChildren(EntityInfo childInfo)
         {
-            return (removedChildren.Values.Concat(children.Values)).Where(x => childInfo.Type.IsAssignableFrom(x.GetType()));
+            var allChildren = new List<IChild>();
+            if (removedChildren.ContainsKey(childInfo.Name))
+                allChildren.AddRange(removedChildren[childInfo.Name].Values);
+            if (children.ContainsKey(childInfo.Name))
+                allChildren.AddRange(children[childInfo.Name].Values);
+
+            return allChildren;
         }
 
         public virtual IEnumerable<IValue> GetValues(ValueInfo valueInfo)
         {
-            return (removedValues.Values.Concat(values.Values)).Where(x => valueInfo.Type.IsAssignableFrom(x.GetType()));
+            var allValues = new List<IValue>();
+            if (removedValues.ContainsKey(valueInfo.Name))
+                allValues.AddRange(removedValues[valueInfo.Name].Values);
+            if (values.ContainsKey(valueInfo.Name))
+                allValues.AddRange(values[valueInfo.Name].Values);
+
+            return allValues;
         }
 
         public virtual void Initialize(IEntityInitialState state)

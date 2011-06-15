@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core;
+
 namespace Gnosis.Alexandria.Models.Tracks
 {
     public class TrackLink
@@ -10,13 +12,16 @@ namespace Gnosis.Alexandria.Models.Tracks
     {
         public TrackLink()
         {
+            AddInitializer("TextEncoding", value => this.textEncoding = value.ToString());
+            AddInitializer("Relationship", value => this.relationship = value.ToString());
+            AddInitializer("Location", value => this.location = value.ToUri());
         }
 
         public TrackLink(Guid parent, string textEncoding, string relationship, Uri location)
         {
-            AddInitializer("TextEncoding", x => this.textEncoding = textEncoding);
-            AddInitializer("Relationship", x => this.relationship = relationship);
-            AddInitializer("Location", x => this.location = location);
+            AddInitializer("TextEncoding", value => this.textEncoding = textEncoding);
+            AddInitializer("Relationship", value => this.relationship = relationship);
+            AddInitializer("Location", value => this.location = location);
 
             Initialize(parent);
         }

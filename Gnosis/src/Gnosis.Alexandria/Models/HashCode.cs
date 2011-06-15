@@ -16,7 +16,7 @@ namespace Gnosis.Alexandria.Models
             AddInitializer("Value", value => this.value = value.ToString());
         }
 
-        private HashCode(Guid parent, Uri scheme, string value)
+        public HashCode(Guid parent, Uri scheme, string value)
         {
             AddInitializer("Scheme", x => this.scheme = scheme);
             AddInitializer("Value", x => this.value = value);

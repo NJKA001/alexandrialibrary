@@ -51,17 +51,17 @@ namespace Gnosis.Alexandria.Models.Feeds
 
         private void AddCategory(IFeedCategory category)
         {
-            AddValue(() => categories.Add(category), category, "Categories");
+            AddValue<IFeedItem, IFeedCategory>(() => categories.Add(category), category, x => x.Categories);
         }
 
         private void AddLink(IFeedLink link)
         {
-            AddValue(() => links.Add(link), link, "Links");
+            AddValue<IFeedItem, IFeedLink>(() => links.Add(link), link, x => x.Links);
         }
 
         private void AddMetadatum(IFeedMetadatum metadatum)
         {
-            AddValue(() => metadata.Add(metadatum), metadatum, "Metadata");
+            AddValue<IFeedItem, IFeedMetadatum>(() => metadata.Add(metadatum), metadatum, x => x.Metadata);
         }
 
         #endregion
@@ -235,7 +235,7 @@ namespace Gnosis.Alexandria.Models.Feeds
 
         public void RemoveCategory(IFeedCategory category)
         {
-            RemoveValue(() => categories.Remove(category), category.Id, "Categories");
+            RemoveValue<IFeedItem, IFeedCategory>(() => categories.Remove(category), category, x => x.Categories);
         }
 
         public void AddLink(string relationship, Uri location, string mediaType, uint length, string language)
@@ -245,7 +245,7 @@ namespace Gnosis.Alexandria.Models.Feeds
 
         public void RemoveLink(IFeedLink link)
         {
-            RemoveValue(() => links.Remove(link), link.Id, "Links");
+            RemoveValue<IFeedItem, IFeedLink>(() => links.Remove(link), link, x => x.Links);
         }
 
         public void AddMetadatum(string mediaType, Uri scheme, string name, string content)
@@ -255,7 +255,7 @@ namespace Gnosis.Alexandria.Models.Feeds
 
         public void RemoveMetadatum(IFeedMetadatum metadatum)
         {
-            RemoveValue(() => metadata.Remove(metadatum), metadatum.Id, "Metadata");
+            RemoveValue<IFeedItem, IFeedMetadatum>(() => metadata.Remove(metadatum), metadatum, x => x.Metadata);
         }
 
         #endregion

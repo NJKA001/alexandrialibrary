@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core;
+
 namespace Gnosis.Alexandria.Models.Tracks
 {
     public class TrackIdentifier
@@ -10,6 +12,8 @@ namespace Gnosis.Alexandria.Models.Tracks
     {
         public TrackIdentifier()
         {
+            AddInitializer("Scheme", value => this.scheme = value.ToUri());
+            AddInitializer("Identifier", value => this.identifier = value.ToString());
         }
 
         public TrackIdentifier(Guid parent, Uri scheme, string identifier)

@@ -114,7 +114,10 @@ namespace Gnosis.Core.Queries
                     foreach (var parent in parents)
                     {
                         if (children.ContainsKey(parent.Id))
-                            parent.InitializeChildren(childBuilder.Name, children[parent.Id]);
+                        {
+                            var theseChildren = children[parent.Id];
+                            parent.InitializeChildren(childBuilder.Name, theseChildren);
+                        }
                     }
 
                     //factory.AddChildren(childBuilder.Name, parents, children);
@@ -126,7 +129,10 @@ namespace Gnosis.Core.Queries
                     foreach (var parent in parents)
                     {
                         if (values.ContainsKey(parent.Id))
-                            parent.InitializeValues(childBuilder.Name, values[parent.Id]);
+                        {
+                            var theseValues = values[parent.Id];
+                            parent.InitializeValues(childBuilder.Name, theseValues);
+                        }
                     }
 
                     //factory.AddValues(childBuilder.Name, parents, values);

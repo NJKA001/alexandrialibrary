@@ -26,6 +26,16 @@ namespace Gnosis.Tests.Repositories
 
         #region Helper Methods
 
+        private int GetCount(string sql)
+        {
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = sql;
+                return int.Parse(command.ExecuteScalar().ToString());
+            }
+        }
+
         private IFeed GetTestFeed()
         {
             var feed = new Feed();
@@ -140,7 +150,7 @@ namespace Gnosis.Tests.Repositories
         }
 
         [Test]
-        public void TestCreateFeed()
+        public void CreateFeed()
         {
             var initialFeeds = repository.Search();
             Assert.AreEqual(0, initialFeeds.Count());
@@ -165,10 +175,12 @@ namespace Gnosis.Tests.Repositories
         }
 
         [Test]
-        public void TestChangeFeed()
+        public void UpdateFeed()
         {
             var feed = GetTestFeed();
             var id = feed.Id;
+
+            Assert.AreEqual(2, feed.TitleHashCodes.Count());
 
             repository.Save(new List<IFeed> { feed });
 
@@ -188,6 +200,9 @@ namespace Gnosis.Tests.Repositories
             var updatedDate = new DateTime(2011, 4, 27);
             const string testCategoryName = "ABC Some Category";
 
+            var titleNameHash = feed.TitleHashCodes.Where(x => x.Scheme == HashCode.SchemeNameHash).FirstOrDefault().Value;
+            var titleDoubleMetaphone = feed.TitleHashCodes.Where(x => x.Scheme == HashCode.SchemeDoubleMetaphone).FirstOrDefault().Value;
+
             feed.Title = title;
             feed.Description = description;
             feed.Copyright = copyright;
@@ -204,6 +219,8 @@ namespace Gnosis.Tests.Repositories
             feed.PublishedDate = publishedDate;
             feed.UpdatedDate = updatedDate;
 
+            Assert.AreEqual(2, feed.TitleHashCodes.Count());
+            Assert.AreEqual(2, feed.AuthorHashCodes.Count());
             Assert.AreEqual(2, feed.Categories.Count());
             Assert.IsTrue(feed.IsChanged());
             Assert.IsFalse(feed.IsNew());
@@ -219,6 +236,11 @@ namespace Gnosis.Tests.Repositories
             Assert.AreNotEqual(oldTimeStamp, newTimeStamp);
             
             var changedFeed = repository.Lookup(id);
+            //Assert.AreEqual(2, GetCount(string.Format("select count() from Feed_AuthorHashCodes where Parent = '{0}';", id)));
+            Assert.AreEqual(2, changedFeed.TitleHashCodes.Count());
+            Assert.AreEqual(2, changedFeed.AuthorHashCodes.Count());
+            Assert.AreNotEqual(titleNameHash, changedFeed.TitleHashCodes.Where(x => x.Scheme == HashCode.SchemeNameHash).FirstOrDefault().Value);
+            Assert.AreNotEqual(titleDoubleMetaphone, changedFeed.TitleHashCodes.Where(x => x.Scheme == HashCode.SchemeDoubleMetaphone).FirstOrDefault().Value);
             Assert.IsNotNull(changedFeed);
             Assert.AreEqual(title, changedFeed.Title);
             Assert.AreEqual(description, changedFeed.Description);
@@ -237,6 +259,62 @@ namespace Gnosis.Tests.Repositories
             Assert.IsNotNull(changedFeed.Categories.Where(x => x.Name == testCategoryName).FirstOrDefault());
             Assert.IsFalse(changedFeed.Categories.Where(x => x.Name == testCategoryName).FirstOrDefault().IsNew());
             Assert.AreEqual(3, changedFeed.Categories.Count());
+        }
+
+        [Test]
+        public void DeleteFeed()
+        {
+            Assert.AreEqual(new Uri("http://example.com/index.html"), new Uri("http://example.com/index.html"));
+
+            var feed = GetTestFeed();
+            var id = feed.Id;
+            var linkCountSql = string.Format("select count() from Feed_Links where Parent = '{0}';", id);
+            var feedItemId = feed.Items.FirstOrDefault().Id;
+            var feedItemMetadataCountSql = string.Format("select count() from FeedItem_Metadata where Parent = '{0}';", feedItemId);
+            repository.Save(new List<IFeed> { feed });
+
+            var feed2 = new Feed();
+            feed2.Initialize(new EntityInitialState(context, logger));
+            var id2 = feed2.Id;
+            Assert.AreNotEqual(id, id2);
+            var item2 = new FeedItem();
+            item2.Initialize(new EntityInitialState(context, logger, feed2.Id));
+            var feedItem2MetadataCountSql = string.Format("select count() from FeedItem_Metadata where Parent = '{0}';", item2.Id);
+            item2.AddMetadatum("text/plain", UriExtensions.EmptyUri, "Read Me", "Here is the text content of the read me.");
+            item2.AddMetadatum("text/rtf", new Uri("file:///C:/Users/Bob/Documents/readme.rtf"), "Read Me", string.Empty);
+            item2.AddMetadatum("application/msword", new Uri("file:///C:/Users/Bob/Documents/readme.doc"), "Read Me", string.Empty);
+
+            var link2CountSql = string.Format("select count() from Feed_Links where Parent = '{0}';", id2);
+            var itemMetadata2CountSql = string.Format("select count() from FeedItem_Metadata where Parent = '{0}';", item2.Id);
+            feed2.Location = new Uri("http://example.com/feeds/somepath/feed.xml");
+            feed2.AddLink("self", new Uri("http://example.com/feeds/somepath/feed.xml"), "application/xml+rss", 0, "en-us");
+            feed2.AddItem(item2);
+
+            var entityInfo = new EntityInfo(typeof(IFeed));
+            var values = feed2.GetValues(entityInfo.Values.Where(x => x.Name == "Feed_Links").FirstOrDefault());
+            Assert.AreEqual(1, values.Count());
+            Assert.IsNotNull(values.FirstOrDefault());
+            Assert.AreEqual(id2, values.FirstOrDefault().Parent);
+            Assert.IsTrue(values.FirstOrDefault().IsNew());
+
+            Assert.AreEqual(1, feed2.Links.Count());
+            repository.Save(new List<IFeed> { feed2 });
+
+            Assert.AreEqual(1, GetCount(link2CountSql));
+            Assert.AreEqual(3, GetCount(itemMetadata2CountSql));
+            Assert.AreEqual(2, repository.Search().Count());
+
+            Assert.AreEqual(3, GetCount(linkCountSql));
+            Assert.AreEqual(2, GetCount(feedItemMetadataCountSql));
+            Assert.IsNotNull(repository.Lookup(id));
+
+            repository.Delete(new List<IFeed> { feed });
+
+            Assert.IsNull(repository.Lookup(id));
+            Assert.AreEqual(0, GetCount(linkCountSql));
+            Assert.AreEqual(0, GetCount(feedItemMetadataCountSql));
+            Assert.AreEqual(1, GetCount(link2CountSql));
+            Assert.AreEqual(3, GetCount(itemMetadata2CountSql));
         }
     }
 }

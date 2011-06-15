@@ -32,26 +32,26 @@ namespace Gnosis.Alexandria.Models.Feeds
             AddValueInitializer("Feed_Categories", value => AddCategory(value as IFeedCategory));
             AddValueInitializer("Feed_Links", value => AddLink(value as IFeedLink));
             AddValueInitializer("Feed_Metadata", value => AddMetadatum(value as IFeedMetadatum));
-            AddValueInitializer("Feed_TitleHashCodes", value => AddTitleHashCode(value as IHashCode));
-            AddValueInitializer("Feed_AuthorHashCodes", value => AddAuthorHashCode(value as IHashCode));
-            AddValueInitializer("Feed_ContributorHashCodes", value => AddContributorHashCode(value as IHashCode));
-            AddValueInitializer("Feed_DescriptionHashCodes", value => AddDescriptionHashCode(value as IHashCode));
+            AddValueInitializer("Feed_TitleHashCodes", value => ReplaceTitleHashCode(value as IHashCode));
+            AddValueInitializer("Feed_AuthorHashCodes", value => ReplaceAuthorHashCode(value as IHashCode));
+            AddValueInitializer("Feed_ContributorHashCodes", value => ReplaceContributorHashCode(value as IHashCode));
+            AddValueInitializer("Feed_DescriptionHashCodes", value => ReplaceDescriptionHashCode(value as IHashCode));
         }
 
         private Uri location;
-        private string mediaType;
-        private string title;
-        private string authors;
-        private string contributors;
-        private string description;
-        private string language;
+        private string mediaType = "application/xml+rss";
+        private string title = string.Empty;
+        private string authors = string.Empty;
+        private string contributors = string.Empty;
+        private string description = string.Empty;
+        private string language = "en-us";
         private Uri originalLocation = UriExtensions.EmptyUri;
         private string copyright = string.Empty;
-        private DateTime publishedDate;
-        private DateTime updatedDate;
+        private DateTime publishedDate = DateTime.MinValue;
+        private DateTime updatedDate = DateTime.MinValue;
         private string generator = string.Empty;
-        private Uri imagePath;
-        private Uri iconPath;
+        private Uri imagePath = UriExtensions.EmptyUri;
+        private Uri iconPath = UriExtensions.EmptyUri;
         private string feedIdentifier = string.Empty;
 
         private readonly IList<IFeedCategory> categories = new ObservableCollection<IFeedCategory>();
@@ -68,57 +68,133 @@ namespace Gnosis.Alexandria.Models.Feeds
 
         private void AddCategory(IFeedCategory category)
         {
-            AddValue(() => categories.Add(category), category, "Categories");
+            AddValue<IFeed, IFeedCategory>(() => categories.Add(category), category, x => x.Categories);
         }
 
         private void AddLink(IFeedLink link)
         {
-            AddValue(() => links.Add(link), link, "Links");
+            AddValue<IFeed, IFeedLink>(() => links.Add(link), link, x => x.Links);
         }
 
         private void AddMetadatum(IFeedMetadatum metadatum)
         {
-            AddValue(() => metadata.Add(metadatum), metadatum, "Metadata");
+            AddValue<IFeed, IFeedMetadatum>(() => metadata.Add(metadatum), metadatum, x => x.Metadata);
         }
 
         private void AddTitleHashCode(IHashCode hashCode)
         {
-            AddValue(() => titleHashCodes.Add(hashCode), hashCode, "TitleHashCodes");
+            AddValue<IFeed, IHashCode>(() => titleHashCodes.Add(hashCode), hashCode, x => x.TitleHashCodes);
         }
 
         private void RemoveTitleHashCode(IHashCode hashCode)
         {
-            RemoveValue(() => titleHashCodes.Remove(hashCode), hashCode.Id, "TitleHashCodes");
+            RemoveValue<IFeed, IHashCode>(() => titleHashCodes.Remove(hashCode), hashCode, x => x.TitleHashCodes);
+        }
+
+        private void ReplaceTitleHashCode(IHashCode hashCode)
+        {
+            ReplaceTitleHashCode(hashCode.Scheme, hashCode.Value);
+        }
+
+        private void ReplaceTitleHashCode(Uri scheme, string value)
+        {
+            var existing = titleHashCodes.Where(hashCode => hashCode.Scheme == scheme).FirstOrDefault();
+            if (existing != null)
+            {
+                if (existing.Value == value)
+                    return;
+
+                RemoveTitleHashCode(existing);
+            }
+
+            AddTitleHashCode(new HashCode(this.Id, scheme, value));
         }
 
         private void AddAuthorHashCode(IHashCode hashCode)
         {
-            AddValue(() => authorHashCodes.Add(hashCode), hashCode, "AuthorHashCodes");
+            AddValue<IFeed, IHashCode>(() => authorHashCodes.Add(hashCode), hashCode, x => x.AuthorHashCodes);
         }
 
         private void RemoveAuthorHashCode(IHashCode hashCode)
         {
-            RemoveValue(() => authorHashCodes.Remove(hashCode), hashCode.Id, "AuthorHashCodes");
+            RemoveValue<IFeed, IHashCode>(() => authorHashCodes.Remove(hashCode), hashCode, x => x.AuthorHashCodes);
+        }
+
+        private void ReplaceAuthorHashCode(IHashCode hashCode)
+        {
+            ReplaceAuthorHashCode(hashCode.Scheme, hashCode.Value);
+        }
+
+        private void ReplaceAuthorHashCode(Uri scheme, string value)
+        {
+            var existing = authorHashCodes.Where(hashCode => hashCode.Scheme == scheme).FirstOrDefault();
+            if (existing != null)
+            {
+                if (existing.Value == value)
+                    return;
+
+                RemoveAuthorHashCode(existing);
+            }
+
+            AddAuthorHashCode(new HashCode(this.Id, scheme, value));
         }
 
         private void AddContributorHashCode(IHashCode hashCode)
         {
-            AddValue(() => contributorHashCodes.Add(hashCode), hashCode, "ContributorHashCodes");
+            AddValue<IFeed, IHashCode>(() => contributorHashCodes.Add(hashCode), hashCode, x => x.ContributorHashCodes);
         }
 
         private void RemoveContributorHashCode(IHashCode hashCode)
         {
-            RemoveValue(() => contributorHashCodes.Remove(hashCode), hashCode.Id, "ContributorHashCodes");
+            RemoveValue<IFeed, IHashCode>(() => contributorHashCodes.Remove(hashCode), hashCode, x => x.ContributorHashCodes);
+        }
+
+        private void ReplaceContributorHashCode(IHashCode hashCode)
+        {
+            ReplaceContributorHashCode(hashCode.Scheme, hashCode.Value);
+        }
+
+        private void ReplaceContributorHashCode(Uri scheme, string value)
+        {
+            var existing = contributorHashCodes.Where(hashCode => hashCode.Scheme == scheme).FirstOrDefault();
+            if (existing != null)
+            {
+                if (existing.Value == value)
+                    return;
+
+                RemoveContributorHashCode(existing);
+            }
+
+            AddContributorHashCode(new HashCode(this.Id, scheme, value));
         }
 
         private void AddDescriptionHashCode(IHashCode hashCode)
         {
-            AddValue(() => descriptionHashCodes.Add(hashCode), hashCode, "DescriptionHashCodes");
+            AddValue<IFeed, IHashCode>(() => descriptionHashCodes.Add(hashCode), hashCode, x => x.DescriptionHashCodes);
         }
 
         private void RemoveDescriptionHashCode(IHashCode hashCode)
         {
-            RemoveValue(() => descriptionHashCodes.Remove(hashCode), hashCode.Id, "DescriptionHashCodes");
+            RemoveValue<IFeed, IHashCode>(() => descriptionHashCodes.Remove(hashCode), hashCode, x => x.DescriptionHashCodes);
+        }
+
+        private void ReplaceDescriptionHashCode(IHashCode hashCode)
+        {
+            ReplaceDescriptionHashCode(hashCode.Scheme, hashCode.Value);
+        }
+
+        private void ReplaceDescriptionHashCode(Uri scheme, string value)
+        {
+            var existing = descriptionHashCodes.Where(hashCode => hashCode.Scheme == scheme).FirstOrDefault();
+            if (existing != null)
+            {
+                if (existing.Value == value)
+                    return;
+
+                RemoveDescriptionHashCode(existing);
+            }
+
+            AddDescriptionHashCode(new HashCode(this.Id, scheme, value));
         }
 
         #endregion
@@ -157,6 +233,8 @@ namespace Gnosis.Alexandria.Models.Feeds
                 if (value != null && value != title)
                 {
                     Change(() => title = value, "Title");
+                    ReplaceTitleHashCode(HashCode.SchemeDoubleMetaphone, value.AsDoubleMetaphone());
+                    ReplaceTitleHashCode(HashCode.SchemeNameHash, value.AsNameHash());
                 }
             }
         }
@@ -169,6 +247,8 @@ namespace Gnosis.Alexandria.Models.Feeds
                 if (value != null && value != authors)
                 {
                     Change(() => authors = value, "Authors");
+                    ReplaceAuthorHashCode(HashCode.SchemeDoubleMetaphone, value.AsDoubleMetaphone());
+                    ReplaceAuthorHashCode(HashCode.SchemeNameHash, value.AsNameHash());
                 }
             }
         }
@@ -181,6 +261,8 @@ namespace Gnosis.Alexandria.Models.Feeds
                 if (value != null && value != contributors)
                 {
                     Change(() => contributors = value, "Contributors");
+                    ReplaceContributorHashCode(HashCode.SchemeDoubleMetaphone, value.AsDoubleMetaphone());
+                    ReplaceContributorHashCode(HashCode.SchemeNameHash, value.AsNameHash());
                 }
             }
         }
@@ -193,6 +275,8 @@ namespace Gnosis.Alexandria.Models.Feeds
                 if (value != null && value != description)
                 {
                     Change(() => description = value, "Description");
+                    ReplaceDescriptionHashCode(HashCode.SchemeDoubleMetaphone, value.AsDoubleMetaphone());
+                    ReplaceDescriptionHashCode(HashCode.SchemeNameHash, value.AsNameHash());
                 }
             }
         }
@@ -354,7 +438,7 @@ namespace Gnosis.Alexandria.Models.Feeds
 
         public void RemoveCategory(IFeedCategory category)
         {
-            RemoveValue(() => categories.Remove(category), category.Id, "Categories");
+            RemoveValue<IFeed, IFeedCategory>(() => categories.Remove(category), category, x => x.Categories);
         }
 
         public void AddLink(string relationship, Uri location, string mediaType, uint length, string language)
@@ -364,7 +448,7 @@ namespace Gnosis.Alexandria.Models.Feeds
 
         public void RemoveLink(IFeedLink link)
         {
-            RemoveValue(() => links.Remove(link), link.Id, "Links");
+            RemoveValue<IFeed, IFeedLink>(() => links.Remove(link), link, x => x.Links);
         }
 
         public void AddMetadatum(string mediaType, Uri scheme, string name, string content)
@@ -374,17 +458,17 @@ namespace Gnosis.Alexandria.Models.Feeds
 
         public void RemoveMetadatum(IFeedMetadatum metadatum)
         {
-            RemoveValue(() => metadata.Remove(metadatum), metadatum.Id, "Metadata");
+            RemoveValue<IFeed, IFeedMetadatum>(() => metadata.Remove(metadatum), metadatum, x => x.Metadata);
         }
 
         public void AddItem(IFeedItem item)
         {
-            AddChild(() => items.Add(item), item, "Items");
+            AddChild<IFeed, IFeedItem>(() => items.Add(item), item, x => x.Items);
         }
 
         public void RemoveItem(IFeedItem item)
         {
-            RemoveChild(() => items.Remove(item), item.Id, "Items");
+            RemoveChild<IFeed, IFeedItem>(() => items.Remove(item), item, x => x.Items);
         }
 
         #endregion
