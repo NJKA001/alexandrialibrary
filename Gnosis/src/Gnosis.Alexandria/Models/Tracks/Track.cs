@@ -64,6 +64,17 @@ namespace Gnosis.Alexandria.Models.Tracks
             AddValueInitializer(value => AddComposerHashCode(value as IHashCode), x => x.ComposerHashCodes);
             AddValueInitializer(value => AddConductorHashCode(value as IHashCode), x => x.ConductorHashCodes);
             AddValueInitializer(value => AddOriginalTitleHashCode(value as IHashCode), x => x.OriginalTitleHashCodes);
+
+            AddHashFunction(HashCode.SchemeDoubleMetaphone, token => HashCode.CreateDoubleMetaphoneHash(this.Id, token));
+            AddHashFunction(HashCode.SchemeNameHash, token => HashCode.CreateNameHash(this.Id, token));
+
+            AddHashInitializer(hashCode => AddTitleHashCode(hashCode), hashCode => RemoveTitleHashCode(hashCode), track => track.TitleHashCodes);
+            AddHashInitializer(hashCode => AddArtistHashCode(hashCode), hashCode => RemoveArtistHashCode(hashCode), track => track.ArtistHashCodes);
+            AddHashInitializer(hashCode => AddAlbumHashCode(hashCode), hashCode => RemoveAlbumHashCode(hashCode), track => track.AlbumHashCodes);
+            AddHashInitializer(hashCode => AddAlbumArtistHashCode(hashCode), hashCode => RemoveAlbumArtistHashCode(hashCode), track => track.AlbumArtistHashCodes);
+            AddHashInitializer(hashCode => AddComposerHashCode(hashCode), hashCode => RemoveComposerHashCode(hashCode), track => track.ComposerHashCodes);
+            AddHashInitializer(hashCode => AddConductorHashCode(hashCode), hashCode => RemoveConductorHashCode(hashCode), track => track.ConductorHashCodes);
+            AddHashInitializer(hashCode => AddOriginalTitleHashCode(hashCode), hashCode => RemoveOriginalTitleHashCode(hashCode), track => track.OriginalTitleHashCodes);
         }
 
         private Uri location;
@@ -262,6 +273,7 @@ namespace Gnosis.Alexandria.Models.Tracks
                 if (value != null && value != title)
                 {
                     Change(() => title = value, x => x.Title);
+                    RefreshHashCodes(value, x => x.TitleHashCodes);
                 }
             }
         }
@@ -322,6 +334,7 @@ namespace Gnosis.Alexandria.Models.Tracks
                 if (value != null && value != album)
                 {
                     Change(() => album = value, x => x.Album);
+                    RefreshHashCodes(value, x => x.AlbumHashCodes);
                 }
             }
         }
@@ -358,6 +371,7 @@ namespace Gnosis.Alexandria.Models.Tracks
                 if (value != null && value != artists)
                 {
                     Change(() => artists = value, x => x.Artists);
+                    RefreshHashCodes(value, x => x.ArtistHashCodes);
                 }
             }
         }
@@ -382,6 +396,7 @@ namespace Gnosis.Alexandria.Models.Tracks
                 if (value != null && value != albumArtists)
                 {
                     Change(() => albumArtists = value, x => x.AlbumArtists);
+                    RefreshHashCodes(value, x => x.AlbumArtistHashCodes);
                 }
             }
         }
@@ -394,6 +409,7 @@ namespace Gnosis.Alexandria.Models.Tracks
                 if (value != null && value != composers)
                 {
                     Change(() => composers = value, x => x.Composers);
+                    RefreshHashCodes(value, x => x.ComposerHashCodes);
                 }
             }
         }
@@ -406,6 +422,7 @@ namespace Gnosis.Alexandria.Models.Tracks
                 if (value != null && value != conductors)
                 {
                     Change(() => conductors = value, x => x.Conductors);
+                    RefreshHashCodes(value, x => x.ConductorHashCodes);
                 }
             }
         }
@@ -478,6 +495,7 @@ namespace Gnosis.Alexandria.Models.Tracks
                 if (value != null && value != originalTitle)
                 {
                     Change(() => originalTitle = value, x => x.OriginalTitle);
+                    RefreshHashCodes(value, x => x.OriginalTitleHashCodes);
                 }
             }
         }
