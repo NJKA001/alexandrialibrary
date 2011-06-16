@@ -123,12 +123,12 @@ Way before";
         {
             file = TagLib.File.Create(location);
             tag = file.GetTag(TagTypes.Id3v2) as TagLib.Id3v2.Tag;
-            tag.Performers = new string[] { "Shakira", "Dizzee Rascal" };
+            //tag.Performers = new string[] { "Shakira", "Dizzee Rascal" };
             //tag.Subtitle = subtitle;
             //tag.TitleSort = titleSort;
             //tag.Grouping = grouping;
             //tag.t
-            file.Save();
+            //file.Save();
         }
 
         [TearDown]
