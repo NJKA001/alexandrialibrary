@@ -19,7 +19,7 @@ namespace Gnosis.Alexandria.Models.Tracks
         string Album { get; set; }
         string AlbumSort { get; set; }
         string AlbumSubtitle { get; set; }
-
+        
         string Artists { get; set; }
         string ArtistsSort { get; set; }
         string AlbumArtists { get; set; }

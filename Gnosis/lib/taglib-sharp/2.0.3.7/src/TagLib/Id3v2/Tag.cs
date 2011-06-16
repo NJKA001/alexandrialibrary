@@ -1060,6 +1060,34 @@ namespace TagLib.Id3v2 {
             set { SetTextFrame(FrameType.TIT3, value); }
         }
 
+        public string JoinedOriginalArtists
+        {
+            get { return JoinGroup(OriginalArtists); }
+        }
+
+        public string OriginalTitle
+        {
+            get { return GetTextAsString(FrameType.TOAL); }
+            set { SetTextFrame(FrameType.TOAL, value); }
+        }
+
+        public string[] OriginalArtists
+        {
+            get { return GetTextAsArray(FrameType.TOPE); }
+            set { SetTextFrame(FrameType.TOPE, value); }
+        }
+
+        public string JoinedLanguages
+        {
+            get { return string.Join("; ", Languages); }
+        }
+
+        public string[] Languages
+        {
+            get { return GetTextAsArray(FrameType.TLAN); }
+            set { SetTextFrame(FrameType.TLAN, value); }
+        }
+
 		/// <summary>
 		///    Gets and sets the performers or artists who performed in
 		///    the media described by the current instance.
@@ -1078,7 +1106,13 @@ namespace TagLib.Id3v2 {
 			get {return GetTextAsArray (FrameType.TPE1);}
 			set {SetTextFrame (FrameType.TPE1, value);}
 		}
-		
+
+        public string ArtistsSort
+        {
+            get { return GetTextAsString(FrameType.TSOP); }
+            set { SetTextFrame(FrameType.TSOP, value); }
+        }
+
 		/// <summary>
 		///    Gets and sets the band or artist who is credited in the
 		///    creation of the entire album or collection containing the
@@ -1134,7 +1168,19 @@ namespace TagLib.Id3v2 {
 			get {return GetTextAsString (FrameType.TALB);}
 			set {SetTextFrame (FrameType.TALB, value);}
 		}
-		
+
+        public string AlbumSort
+        {
+            get { return GetTextAsString(FrameType.TSOA); }
+            set { SetTextFrame(FrameType.TSOA, value); }
+        }
+
+        public string AlbumSubtitle
+        {
+            get { return GetTextAsString(FrameType.TSST); }
+            set { SetTextFrame(FrameType.TSST, value); }
+        }
+
 		/// <summary>
 		///    Gets and sets a user comment on the media represented by
 		///    the current instance.
@@ -1240,7 +1286,18 @@ namespace TagLib.Id3v2 {
 				SetTextFrame (FrameType.TCON, value);
 			}
 		}
-		
+
+        public string JoinedMoods
+        {
+            get { return string.Join("; ", Moods); }
+        }
+
+        public string[] Moods
+        {
+            get { return GetTextAsArray(FrameType.TMOO); }
+            set { SetTextFrame(FrameType.TMOO, value); }
+        }
+
 		/// <summary>
 		///    Gets and sets the year that the media represented by the
 		///    current instance was recorded.
@@ -1276,7 +1333,35 @@ namespace TagLib.Id3v2 {
 				SetNumberFrame (FrameType.TDRC, value, 0);
 			}
 		}
-		
+
+        public DateTime RecordingDate
+        {
+            get
+            {
+                var date = DateTime.MinValue;
+                DateTime.TryParse(GetTextAsString(FrameType.TDRC), out date);
+                return date;
+            }
+            set
+            {
+                SetTextFrame(FrameType.TDRC, value.ToString("s"));
+            }
+        }
+
+        public DateTime ReleaseDate
+        {
+            get
+            {
+                var date = DateTime.MinValue;
+                DateTime.TryParse(GetTextAsString(FrameType.TDRL), out date);
+                return date;
+            }
+            set
+            {
+                SetTextFrame(FrameType.TDRL, value.ToString("s"));
+            }
+        }
+
 		/// <summary>
 		///    Gets and sets the position of the media represented by
 		///    the current instance in its containing album.

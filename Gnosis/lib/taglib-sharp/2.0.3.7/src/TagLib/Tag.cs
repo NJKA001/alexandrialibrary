@@ -725,7 +725,7 @@ namespace TagLib {
 		///    A semicolon separated <see cref="string" /> object
 		///    containing the values from <paramref name="group" />.
 		/// </returns>
-		private static string JoinGroup (string [] group)
+		protected static string JoinGroup (string [] group)
 		{
 			if (group == null)
 				return null;
