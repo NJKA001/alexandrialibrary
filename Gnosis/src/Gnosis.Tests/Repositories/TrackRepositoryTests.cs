@@ -46,7 +46,7 @@ namespace Gnosis.Tests.Repositories
 
         private const string coverImageDescription = "Undertow";
         private const string coverImageTextEncoding = "UTF-8";
-        private const string coverImageLocation = @"Images\Undertow.jpg";
+        private const string coverImageLocation = @"Files\Undertow.jpg";
         private const string coverImageMediaType = "image/jpg";
         private Image coverImage = Image.FromFile(coverImageLocation);
 

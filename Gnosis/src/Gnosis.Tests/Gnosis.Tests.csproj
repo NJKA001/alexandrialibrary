@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\TrackTests.cs" />
     <Compile Include="Repositories\TrackRepositoryTests.cs" />
     <Compile Include="SingleThreadedContext.cs" />
     <Compile Include="DebugLogger.cs" />
@@ -74,7 +75,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\Undertow.jpg">
+    <Content Include="Files\03 - Antes De Las Seis.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\Undertow.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
