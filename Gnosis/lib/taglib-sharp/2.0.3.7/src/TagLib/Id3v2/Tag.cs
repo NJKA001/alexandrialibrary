@@ -29,6 +29,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace TagLib.Id3v2 {
@@ -1065,6 +1066,12 @@ namespace TagLib.Id3v2 {
             get { return JoinGroup(OriginalArtists); }
         }
 
+        public string OriginalFilename
+        {
+            get { return GetTextAsString(FrameType.TOFN); }
+            set { SetTextFrame(FrameType.TOFN, value); }
+        }
+
         public string OriginalTitle
         {
             get { return GetTextAsString(FrameType.TOAL); }
@@ -1075,6 +1082,20 @@ namespace TagLib.Id3v2 {
         {
             get { return GetTextAsArray(FrameType.TOPE); }
             set { SetTextFrame(FrameType.TOPE, value); }
+        }
+
+        public DateTime OriginalReleaseDate
+        {
+            get
+            {
+                var date = DateTime.MinValue;
+                DateTime.TryParse(GetTextAsString(FrameType.TDOR), out date);
+                return date;
+            }
+            set
+            {
+                SetTextFrame(FrameType.TDOR, value.ToString("s"));
+            }
         }
 
         public string JoinedLanguages
@@ -1362,6 +1383,46 @@ namespace TagLib.Id3v2 {
             }
         }
 
+        public DateTime EncodingDate
+        {
+            get
+            {
+                var date = DateTime.MinValue;
+                DateTime.TryParse(GetTextAsString(FrameType.TDEN), out date);
+                return date;
+            }
+            set
+            {
+                SetTextFrame(FrameType.TDEN, value.ToString("s"));
+            }
+        }
+
+        public DateTime TaggingDate
+        {
+            get
+            {
+                var date = DateTime.MinValue;
+                DateTime.TryParse(GetTextAsString(FrameType.TDTG), out date);
+                return date;
+            }
+            set
+            {
+                SetTextFrame(FrameType.TDTG, value.ToString("s"));
+            }
+        }
+
+        public string Publisher
+        {
+            get { return GetTextAsString(FrameType.TPUB); }
+            set { SetTextFrame(FrameType.TPUB, value); }
+        }
+
+        public string InternationalStandardRecordingCode
+        {
+            get { return GetTextAsString(FrameType.TSRC); }
+            set { SetTextFrame(FrameType.TSRC, value); }
+        }
+
 		/// <summary>
 		///    Gets and sets the position of the media represented by
 		///    the current instance in its containing album.
@@ -1452,8 +1513,8 @@ namespace TagLib.Id3v2 {
 			get {
 				UnsynchronisedLyricsFrame f =
 					UnsynchronisedLyricsFrame.GetPreferred (
-						this, string.Empty, Language);
 				
+						this, string.Empty, Language);
 				return f != null ? f.ToString () : null;
 			}
 			set {
@@ -1524,7 +1585,54 @@ namespace TagLib.Id3v2 {
 			}
 			set {SetNumberFrame (FrameType.TBPM, value, 0);}
 		}
-		
+
+        public TimeSpan Duration
+        {
+            get
+            {
+                var ms = 0;
+                int.TryParse(GetTextAsString(FrameType.TLEN), out ms);
+                return new TimeSpan(0, 0, 0, 0, ms);
+            }
+            set
+            {
+                SetNumberFrame(FrameType.TLEN, (uint)Math.Round(value.TotalMilliseconds), 0);
+            }
+        }
+
+        public ulong PlayCount
+        {
+            get
+            {
+                var frame = GetFrames<PlayCountFrame>().FirstOrDefault();
+                return (frame != null) ? frame.PlayCount : 0;
+            }
+            set
+            {
+                var frame = GetFrames<PlayCountFrame>().FirstOrDefault();
+                if (frame == null)
+                {
+                    frame = new PlayCountFrame();
+                    AddFrame(frame);
+                }
+                frame.PlayCount = value;
+            }
+        }
+
+        public TimeSpan PlaylistDelay
+        {
+            get
+            {
+                var ms = 0;
+                int.TryParse(GetTextAsString(FrameType.TDLY), out ms);
+                return new TimeSpan(0, 0, 0, 0, ms);
+            }
+            set
+            {
+                SetNumberFrame(FrameType.TDLY, (uint)Math.Round(value.TotalMilliseconds), 0);
+            }
+        }
+
 		/// <summary>
 		///    Gets and sets the conductor or director of the media
 		///    represented by the current instance.

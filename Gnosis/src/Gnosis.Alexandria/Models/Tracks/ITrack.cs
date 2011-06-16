@@ -32,8 +32,9 @@ namespace Gnosis.Alexandria.Models.Tracks
         
         DateTime RecordingDate { get; set; }
         DateTime ReleaseDate { get; set; }
-        
+
         string OriginalTitle { get; set; }
+        string OriginalArtists { get; set; }
         DateTime OriginalReleaseDate { get; set; }
 
         uint TrackNumber { get; set; }
@@ -70,6 +71,7 @@ namespace Gnosis.Alexandria.Models.Tracks
         IEnumerable<IHashCode> ComposerHashCodes { get; }
         IEnumerable<IHashCode> ConductorHashCodes { get; }
         IEnumerable<IHashCode> OriginalTitleHashCodes { get; }
+        IEnumerable<IHashCode> OriginalArtistHashCodes { get; }
 
         void AddPicture(string mediaType, TrackPictureType pictureType, string description, byte[] data);
         void RemovePicture(ITrackPicture picture);

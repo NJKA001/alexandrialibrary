@@ -35,14 +35,28 @@ namespace Gnosis.Tests.Models
 
         private const string originalTitle = "Loca Con Su Tigre";
         private const string originalArtists = "El Cata";
-        
-        
+        private readonly DateTime originalReleaseDate = new DateTime(2009, 10, 20); 
+
+        private readonly DateTime releaseDate = new DateTime(2010, 10, 15);
+        private readonly DateTime recordingDate = new DateTime(2010, 1, 1);
 
         private const uint track = 13;
         private const uint trackCount = 15;
         private const uint disc = 1;
         private const uint discCount = 1;
-        private const uint year = 2010;
+
+        private readonly TimeSpan duration = new TimeSpan(0, 0, 193);
+        private const uint beatsPerMinute = 128;
+
+        private ulong playCount = 394;
+        private readonly TimeSpan playlistDelay = new TimeSpan(0, 0, 2);
+
+        private const string originalFilename = "13 - Loca (Featuring Dizzee Rascal).mp3";
+        private readonly DateTime encodingDate = new DateTime(2011, 6, 14);
+        private readonly DateTime taggingDate = new DateTime(2011, 6, 16);
+
+        private const string publisher = "Epic Records";
+        private const string isrc = "8869 777433 2";
 
         private TagLib.File file;
         private TagLib.Id3v2.Tag tag;
@@ -154,6 +168,19 @@ Way before";
             //tag.ArtistsSort = artistsSort;
             //tag.Moods = new string[] { "Spicy", "Cheerful", "Fin", "Party", "Sensual", "Sexy", "Confident", "Energetic", "Stylish", "Carefree", "Playful" };
             //tag.Languages = new string[] { "spa", "eng" };
+            //tag.RecordingDate = recordingDate;
+            //tag.ReleaseDate = releaseDate;
+            //tag.OriginalArtists = new string[] { originalArtists };
+            //tag.OriginalReleaseDate = originalReleaseDate;
+            //tag.Duration = duration;
+            //tag.BeatsPerMinute = beatsPerMinute;
+            //tag.PlayCount = playCount;
+            //tag.PlaylistDelay = playlistDelay;
+            //tag.OriginalFilename = originalFilename;
+            //tag.EncodingDate = encodingDate;
+            //tag.TaggingDate = taggingDate;
+            //tag.Publisher = publisher;
+            //tag.InternationalStandardRecordingCode = isrc;
             //file.Save();
         }
 
@@ -188,14 +215,30 @@ Way before";
             Assert.AreEqual(moods, tag.JoinedMoods);
             Assert.AreEqual(languages, tag.JoinedLanguages);
 
+            Assert.AreEqual(recordingDate, tag.RecordingDate);
+            Assert.AreEqual(releaseDate, tag.ReleaseDate);
+
             Assert.AreEqual(originalTitle, tag.OriginalTitle);
             Assert.AreEqual(originalArtists, tag.JoinedOriginalArtists);
+            Assert.AreEqual(originalReleaseDate, tag.OriginalReleaseDate);
 
             Assert.AreEqual(track, tag.Track);
             Assert.AreEqual(trackCount, tag.TrackCount);
             Assert.AreEqual(disc, tag.Disc);
             Assert.AreEqual(discCount, tag.DiscCount);
-            Assert.AreEqual(year, tag.Year);
+
+            Assert.AreEqual(duration, tag.Duration);
+            Assert.AreEqual(beatsPerMinute, tag.BeatsPerMinute);
+
+            Assert.AreEqual(playCount, tag.PlayCount);
+            Assert.AreEqual(playlistDelay, tag.PlaylistDelay);
+
+            Assert.AreEqual(originalFilename, tag.OriginalFilename);
+            Assert.AreEqual(encodingDate, tag.EncodingDate);
+            Assert.AreEqual(taggingDate, tag.TaggingDate);
+
+            Assert.AreEqual(publisher, tag.Publisher);
+            Assert.AreEqual(isrc, tag.InternationalStandardRecordingCode);
         }
     }
 }

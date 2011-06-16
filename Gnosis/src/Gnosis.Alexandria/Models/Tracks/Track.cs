@@ -64,6 +64,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             AddValueInitializer(value => AddComposerHashCode(value as IHashCode), x => x.ComposerHashCodes);
             AddValueInitializer(value => AddConductorHashCode(value as IHashCode), x => x.ConductorHashCodes);
             AddValueInitializer(value => AddOriginalTitleHashCode(value as IHashCode), x => x.OriginalTitleHashCodes);
+            AddValueInitializer(value => AddOriginalArtistHashCode(value as IHashCode), x => x.OriginalArtistHashCodes);
 
             AddHashFunction(HashCode.SchemeDoubleMetaphone, token => HashCode.CreateDoubleMetaphoneHash(this.Id, token));
             AddHashFunction(HashCode.SchemeNameHash, token => HashCode.CreateNameHash(this.Id, token));
@@ -75,6 +76,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             AddHashInitializer(hashCode => AddComposerHashCode(hashCode), hashCode => RemoveComposerHashCode(hashCode), track => track.ComposerHashCodes);
             AddHashInitializer(hashCode => AddConductorHashCode(hashCode), hashCode => RemoveConductorHashCode(hashCode), track => track.ConductorHashCodes);
             AddHashInitializer(hashCode => AddOriginalTitleHashCode(hashCode), hashCode => RemoveOriginalTitleHashCode(hashCode), track => track.OriginalTitleHashCodes);
+            AddHashInitializer(hashCode => AddOriginalArtistHashCode(hashCode), hashCode => RemoveOriginalArtistHashCode(hashCode), track => track.OriginalArtistHashCodes);
         }
 
         private Uri location;
@@ -98,6 +100,7 @@ namespace Gnosis.Alexandria.Models.Tracks
         private DateTime recordingDate = DateTime.MinValue;
         private DateTime releaseDate = DateTime.MinValue;
         private string originalTitle = string.Empty;
+        private string originalArtists = string.Empty;
         private DateTime originalReleaseDate = DateTime.MinValue;
         private uint trackNumber = 0;
         private uint trackCount = 0;
@@ -114,21 +117,22 @@ namespace Gnosis.Alexandria.Models.Tracks
         private string publisher = string.Empty;
         private string internationalStandardRecordingCode = string.Empty;
 
-        private readonly ObservableCollection<ITrackPicture> pictures = new ObservableCollection<ITrackPicture>();
-        private readonly ObservableCollection<ITrackUnsynchronizedLyrics> lyrics = new ObservableCollection<ITrackUnsynchronizedLyrics>();
-        private readonly ObservableCollection<ITrackSynchronizedLyrics> synchronizedLyrics = new ObservableCollection<ITrackSynchronizedLyrics>();
-        private readonly ObservableCollection<ITrackIdentifier> identifiers = new ObservableCollection<ITrackIdentifier>();
-        private readonly ObservableCollection<ITrackRating> ratings = new ObservableCollection<ITrackRating>();
-        private readonly ObservableCollection<ITrackLink> links = new ObservableCollection<ITrackLink>();
-        private readonly ObservableCollection<ITrackMetadatum> metadata = new ObservableCollection<ITrackMetadatum>();
+        private readonly IList<ITrackPicture> pictures = new ObservableCollection<ITrackPicture>();
+        private readonly IList<ITrackUnsynchronizedLyrics> lyrics = new ObservableCollection<ITrackUnsynchronizedLyrics>();
+        private readonly IList<ITrackSynchronizedLyrics> synchronizedLyrics = new ObservableCollection<ITrackSynchronizedLyrics>();
+        private readonly IList<ITrackIdentifier> identifiers = new ObservableCollection<ITrackIdentifier>();
+        private readonly IList<ITrackRating> ratings = new ObservableCollection<ITrackRating>();
+        private readonly IList<ITrackLink> links = new ObservableCollection<ITrackLink>();
+        private readonly IList<ITrackMetadatum> metadata = new ObservableCollection<ITrackMetadatum>();
 
-        private readonly ObservableCollection<IHashCode> titleHashCodes = new ObservableCollection<IHashCode>();
-        private readonly ObservableCollection<IHashCode> albumHashCodes = new ObservableCollection<IHashCode>();
-        private readonly ObservableCollection<IHashCode> artistHashCodes = new ObservableCollection<IHashCode>();
-        private readonly ObservableCollection<IHashCode> albumArtistHashCodes = new ObservableCollection<IHashCode>();
-        private readonly ObservableCollection<IHashCode> composerHashCodes = new ObservableCollection<IHashCode>();
-        private readonly ObservableCollection<IHashCode> conductorHashCodes = new ObservableCollection<IHashCode>();
-        private readonly ObservableCollection<IHashCode> originalTitleHashCodes = new ObservableCollection<IHashCode>();
+        private readonly IList<IHashCode> titleHashCodes = new ObservableCollection<IHashCode>();
+        private readonly IList<IHashCode> albumHashCodes = new ObservableCollection<IHashCode>();
+        private readonly IList<IHashCode> artistHashCodes = new ObservableCollection<IHashCode>();
+        private readonly IList<IHashCode> albumArtistHashCodes = new ObservableCollection<IHashCode>();
+        private readonly IList<IHashCode> composerHashCodes = new ObservableCollection<IHashCode>();
+        private readonly IList<IHashCode> conductorHashCodes = new ObservableCollection<IHashCode>();
+        private readonly IList<IHashCode> originalTitleHashCodes = new ObservableCollection<IHashCode>();
+        private readonly IList<IHashCode> originalArtistHashCodes = new ObservableCollection<IHashCode>();
 
         #region Private Methods
 
@@ -230,6 +234,16 @@ namespace Gnosis.Alexandria.Models.Tracks
         private void RemoveOriginalTitleHashCode(IHashCode hashCode)
         {
             RemoveValue<IHashCode>(() => this.originalTitleHashCodes.Remove(hashCode), hashCode, x => x.OriginalTitleHashCodes);
+        }
+
+        private void AddOriginalArtistHashCode(IHashCode hashCode)
+        {
+            AddValue<IHashCode>(() => this.originalArtistHashCodes.Add(hashCode), hashCode, x => x.OriginalArtistHashCodes);
+        }
+
+        private void RemoveOriginalArtistHashCode(IHashCode hashCode)
+        {
+            RemoveValue<IHashCode>(() => this.originalArtistHashCodes.Remove(hashCode), hashCode, x => x.OriginalArtistHashCodes);
         }
 
         #endregion
@@ -495,6 +509,19 @@ namespace Gnosis.Alexandria.Models.Tracks
             }
         }
 
+        public string OriginalArtists
+        {
+            get { return originalArtists; }
+            set
+            {
+                if (value != null && value != originalArtists)
+                {
+                    Change(() => originalArtists = value, track => track.OriginalArtists);
+                    RefreshHashCodes(value, track => track.OriginalArtistHashCodes);
+                }
+            }
+        }
+
         public DateTime OriginalReleaseDate
         {
             get { return originalReleaseDate; }
@@ -743,6 +770,11 @@ namespace Gnosis.Alexandria.Models.Tracks
         public IEnumerable<IHashCode> OriginalTitleHashCodes
         {
             get { return originalTitleHashCodes; }
+        }
+
+        public IEnumerable<IHashCode> OriginalArtistHashCodes
+        {
+            get { return originalArtistHashCodes; }
         }
 
 
