@@ -1047,7 +1047,19 @@ namespace TagLib.Id3v2 {
 			get {return GetTextAsString (FrameType.TIT2);}
 			set {SetTextFrame (FrameType.TIT2, value);}
 		}
-		
+
+        public string TitleSort
+        {
+            get { return GetTextAsString(FrameType.TSOT); }
+            set { SetTextFrame(FrameType.TSOT, value); }
+        }
+
+        public string Subtitle
+        {
+            get { return GetTextAsString(FrameType.TIT3); }
+            set { SetTextFrame(FrameType.TIT3, value); }
+        }
+
 		/// <summary>
 		///    Gets and sets the performers or artists who performed in
 		///    the media described by the current instance.
