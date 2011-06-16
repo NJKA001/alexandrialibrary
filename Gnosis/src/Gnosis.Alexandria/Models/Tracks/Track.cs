@@ -142,11 +142,6 @@ namespace Gnosis.Alexandria.Models.Tracks
             AddChild<ITrackUnsynchronizedLyrics>(() => this.lyrics.Add(lyrics), lyrics, x => x.Lyrics);
         }
 
-        private void AddSynchronizedLyrics(ITrackSynchronizedLyrics synchronizedLyrics)
-        {
-            AddChild<ITrackSynchronizedLyrics>(() => this.synchronizedLyrics.Add(synchronizedLyrics), synchronizedLyrics, x => x.Lyrics);
-        }
-
         private void AddRating(ITrackRating rating)
         {
             AddChild<ITrackRating>(() => this.ratings.Add(rating), rating, x => x.Ratings);
@@ -751,11 +746,11 @@ namespace Gnosis.Alexandria.Models.Tracks
         }
 
 
-        public void AddPicture(string textEncoding, string mediaType, TrackPictureType pictureType, string description, byte[] data)
+        public void AddPicture(string mediaType, TrackPictureType pictureType, string description, byte[] data)
         {
             var picture = new TrackPicture();
             picture.Initialize(new EntityInitialState(Context, Logger, this.Id));
-            picture.TextEncoding = textEncoding;
+            picture.TextEncoding = TextEncoding.UTF8;
             picture.MediaType = mediaType;
             picture.PictureType = pictureType;
             picture.Description = description;
@@ -769,11 +764,11 @@ namespace Gnosis.Alexandria.Models.Tracks
         }
 
 
-        public void AddLyrics(string textEncoding, string language, string description, string text)
+        public void AddLyrics(string language, string description, string text)
         {
             var lyrics = new TrackUnsynchronizedLyrics();
             lyrics.Initialize(new EntityInitialState(Context, Logger, this.Id));
-            lyrics.TextEncoding = textEncoding;
+            lyrics.TextEncoding = TextEncoding.UTF8;
             lyrics.Language = language;
             lyrics.Description = description;
             lyrics.Text = text;
@@ -785,22 +780,14 @@ namespace Gnosis.Alexandria.Models.Tracks
             RemoveChild<ITrackUnsynchronizedLyrics>(() => this.lyrics.Remove(lyrics), lyrics, x => x.Lyrics);
         }
 
-
-        public void AddSynchronizedLyrics(string textEncoding, string language, string description, string text, TrackSynchronizedTextType contentType)
+        public void AddSynchronizedLyrics(ITrackSynchronizedLyrics lyrics)
         {
-            var lyrics = new TrackSynchronizedLyrics();
-            lyrics.Initialize(new EntityInitialState(Context, Logger, this.Id));
-            lyrics.TextEncoding = textEncoding;
-            lyrics.Language = language;
-            lyrics.Description = description;
-            lyrics.Text = text;
-            lyrics.ContentType = contentType;
-            AddSynchronizedLyrics(lyrics);
+            AddChild<ITrackSynchronizedLyrics>(() => this.synchronizedLyrics.Add(lyrics), lyrics, x => x.Lyrics);
         }
 
-        public void RemoveSynchronizedLyrics(ITrackSynchronizedLyrics synchronizedLyrics)
+        public void RemoveSynchronizedLyrics(ITrackSynchronizedLyrics lyrics)
         {
-            RemoveChild<ITrackSynchronizedLyrics>(() => this.synchronizedLyrics.Remove(synchronizedLyrics), synchronizedLyrics, x => x.SynchronizedLyrics);
+            RemoveChild<ITrackSynchronizedLyrics>(() => this.synchronizedLyrics.Remove(lyrics), lyrics, x => x.SynchronizedLyrics);
         }
 
 
@@ -831,9 +818,9 @@ namespace Gnosis.Alexandria.Models.Tracks
         }
 
 
-        public void AddLink(string textEncoding, string relationship, Uri location)
+        public void AddLink(string relationship, Uri location)
         {
-            AddLink(new TrackLink(this.Id, textEncoding, relationship, location));
+            AddLink(new TrackLink(this.Id, TextEncoding.UTF8, relationship, location));
         }
 
         public void RemoveLink(ITrackLink link)
@@ -842,9 +829,9 @@ namespace Gnosis.Alexandria.Models.Tracks
         }
 
 
-        public void AddMetadatum(string textEncoding, string description, string content)
+        public void AddMetadatum(string description, string content)
         {
-            AddMetadatum(new TrackMetadatum(this.Id, textEncoding, description, content));
+            AddMetadatum(new TrackMetadatum(this.Id, TextEncoding.UTF8, description, content));
         }
 
         public void RemoveMetadatum(ITrackMetadatum metadatum)

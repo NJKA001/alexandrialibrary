@@ -8,20 +8,20 @@ using Gnosis.Core;
 namespace Gnosis.Alexandria.Models.Feeds
 {
     public class FeedCategory
-        : ValueBase, IFeedCategory
+        : ValueBase<IFeedCategory>, IFeedCategory
     {
         public FeedCategory()
         {
-            AddInitializer("Scheme", x => this.scheme = x.ToUri());
-            AddInitializer("Name", x => this.name = x.ToString());
-            AddInitializer("Label", x => this.label = x.ToString());
+            AddInitializer(value => this.scheme = value.ToUri(), category => category.Scheme);
+            AddInitializer(value => this.name = value.ToString(), category => category.Name);
+            AddInitializer(value => this.label = value.ToString(), category => category.Label);
         }
 
         public FeedCategory(Guid parent, Uri scheme, string name, string label)
         {
-            AddInitializer("Scheme", x => this.scheme = scheme);
-            AddInitializer("Name", x => this.name = name);
-            AddInitializer("Label", x => this.label = label);
+            AddInitializer(value => this.scheme = scheme, category => category.Scheme);
+            AddInitializer(value => this.name = name, category => category.Name);
+            AddInitializer(value => this.label = label, category => category.Label);
 
             Initialize(parent);
         }

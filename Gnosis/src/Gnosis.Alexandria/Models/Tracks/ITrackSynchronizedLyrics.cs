@@ -9,10 +9,15 @@ namespace Gnosis.Alexandria.Models.Tracks
 {
     public interface ITrackSynchronizedLyrics : IChild
     {
-        string TextEncoding { get; set; }
+        TextEncoding TextEncoding { get; set; }
         string Language { get; set; }
         string Description { get; set; }
-        string Text { get; set; }
+        TimestampFormat TimestampFormat { get; set; }
         TrackSynchronizedTextType ContentType { get; set; }
+
+        IEnumerable<ISynchronizedText> Text { get; }
+
+        void AddText(long time, string text);
+        void RemoveText(ISynchronizedText text);
     }
 }

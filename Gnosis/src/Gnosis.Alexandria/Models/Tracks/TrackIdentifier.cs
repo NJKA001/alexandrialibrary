@@ -8,18 +8,18 @@ using Gnosis.Core;
 namespace Gnosis.Alexandria.Models.Tracks
 {
     public class TrackIdentifier
-        : ValueBase, ITrackIdentifier
+        : ValueBase<ITrackIdentifier>, ITrackIdentifier
     {
         public TrackIdentifier()
         {
-            AddInitializer("Scheme", value => this.scheme = value.ToUri());
-            AddInitializer("Identifier", value => this.identifier = value.ToString());
+            AddInitializer(value => this.scheme = value.ToUri(), id => id.Scheme);
+            AddInitializer(value => this.identifier = value.ToString(), id => id.Identifier);
         }
 
         public TrackIdentifier(Guid parent, Uri scheme, string identifier)
         {
-            AddInitializer("Scheme", x => this.scheme = scheme);
-            AddInitializer("Identifier", x => this.identifier = identifier);
+            AddInitializer(value => this.scheme = scheme, id => id.Scheme);
+            AddInitializer(value => this.identifier = identifier, id => id.Identifier);
             
             Initialize(parent);
         }

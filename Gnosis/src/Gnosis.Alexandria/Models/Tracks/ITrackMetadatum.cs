@@ -9,7 +9,7 @@ namespace Gnosis.Alexandria.Models.Tracks
 {
     public interface ITrackMetadatum : IValue
     {
-        string TextEncoding { get; }
+        TextEncoding TextEncoding { get; }
         string Description { get; }
         string Content { get; }
     }

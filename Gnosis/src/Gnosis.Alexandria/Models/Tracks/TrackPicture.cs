@@ -12,14 +12,14 @@ namespace Gnosis.Alexandria.Models.Tracks
     {
         public TrackPicture()
         {
-            AddInitializer(value => this.textEncoding = value.ToString(), picture => picture.TextEncoding);
+            AddInitializer(value => this.textEncoding = value.ToEnum<TextEncoding>(), picture => picture.TextEncoding);
             AddInitializer(value => this.mediaType = value.ToString(), picture => picture.MediaType);
             AddInitializer(value => this.pictureType = value.ToEnum<TrackPictureType>(), picture => picture.PictureType);
             AddInitializer(value => this.description = value.ToString(), picture => picture.Description);
             AddInitializer((name, record) => this.data = record.GetBytes(name), picture => picture.Data);
         }
 
-        private string textEncoding = string.Empty;
+        private TextEncoding textEncoding;
         private string mediaType = "image/jpeg";
         private TrackPictureType pictureType = TrackPictureType.FrontCover;
         private string description = string.Empty;
@@ -27,12 +27,12 @@ namespace Gnosis.Alexandria.Models.Tracks
 
         #region ITrackPicture Members
 
-        public string TextEncoding
+        public TextEncoding TextEncoding
         {
             get { return textEncoding; }
             set
             {
-                if (value != null && value != textEncoding)
+                if (value != textEncoding)
                 {
                     Change(() => textEncoding = value, picture => picture.TextEncoding);
                 }

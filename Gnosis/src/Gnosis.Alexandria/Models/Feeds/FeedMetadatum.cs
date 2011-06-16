@@ -8,22 +8,22 @@ using Gnosis.Core;
 namespace Gnosis.Alexandria.Models.Feeds
 {
     public class FeedMetadatum
-        : ValueBase, IFeedMetadatum
+        : ValueBase<IFeedMetadatum>, IFeedMetadatum
     {
         public FeedMetadatum()
         {
-            AddInitializer("MediaType", x => this.mediaType = x.ToString());
-            AddInitializer("Scheme", x => this.scheme = x.ToUri());
-            AddInitializer("Name", x => this.name = x.ToString());
-            AddInitializer("Content", x => this.content = x.ToString());
+            AddInitializer(value => this.mediaType = value.ToString(), meta => meta.MediaType);
+            AddInitializer(value => this.scheme = value.ToUri(), meta => meta.Scheme);
+            AddInitializer(value => this.name = value.ToString(), meta => meta.Name);
+            AddInitializer(value => this.content = value.ToString(), meta => meta.Content);
         }
 
         public FeedMetadatum(Guid parent, string mediaType, Uri scheme, string name, string content)
         {
-            AddInitializer("MediaType", x => this.mediaType = mediaType);
-            AddInitializer("Scheme", x => this.scheme = scheme);
-            AddInitializer("Name", x => this.name = name);
-            AddInitializer("Content", x => this.content = content);
+            AddInitializer(value => this.mediaType = mediaType, meta => meta.MediaType);
+            AddInitializer(value => this.scheme = scheme, meta => meta.Scheme);
+            AddInitializer(value => this.name = name, meta => meta.Name);
+            AddInitializer(value => this.content = content, meta => meta.Content);
 
             Initialize(parent);
         }

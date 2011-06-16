@@ -9,7 +9,7 @@ namespace Gnosis.Alexandria.Models.Tracks
 {
     public interface ITrackPicture : IChild
     {
-        string TextEncoding { get; set; }
+        TextEncoding TextEncoding { get; set; }
         string MediaType { get; set; }
         TrackPictureType PictureType { get; set; }
         string Description { get; set; }

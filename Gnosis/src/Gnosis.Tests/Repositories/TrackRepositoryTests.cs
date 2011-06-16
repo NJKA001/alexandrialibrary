@@ -45,7 +45,6 @@ namespace Gnosis.Tests.Repositories
         private const int trackNumber = 1;
 
         private const string coverImageDescription = "Undertow";
-        private const string coverImageTextEncoding = "UTF-8";
         private const string coverImageLocation = @"Files\Undertow.jpg";
         private const string coverImageMediaType = "image/jpg";
         private Image coverImage = Image.FromFile(coverImageLocation);
@@ -100,9 +99,9 @@ namespace Gnosis.Tests.Repositories
 
             track.AddIdentifier(allMusicScheme, allMusicId);
             track.AddIdentifier(musicBrainzReleaseScheme, musicBrainzReleaseId);
-            track.AddPicture(coverImageTextEncoding, coverImageMediaType, TrackPictureType.FrontCover, coverImageDescription, coverImage.ToBytes());
+            track.AddPicture(coverImageMediaType, TrackPictureType.FrontCover, coverImageDescription, coverImage.ToBytes());
             track.AddRating(ratingScore, ratingUser, ratingPlayCount);
-            track.AddLink("UTF-8", "alt", new Uri("http://random.org/some-random-path/example.html"));
+            track.AddLink("alt", new Uri("http://random.org/some-random-path/example.html"));
 
             return track;
         }
@@ -267,9 +266,9 @@ namespace Gnosis.Tests.Repositories
             var id2 = track2.Id;
             var linkCount2Sql = string.Format("select count() from Track_Links where Parent = '{0}';", id2);
             track2.Location = new Uri("http://example.com/feeds/45235235/some-podcast.mp3");
-            track2.AddLink("UTF-8", "alt", new Uri("http://example.com/feeds/2525235/summary.html"));
-            track2.AddLink("UTF-8", "self", new Uri("http://example.com/feeds/45235235/some-podcast.mp3"));
-            track2.AddLink("UTF-8", "alt", new Uri("http://nowhere.com/editorials/index"));
+            track2.AddLink("alt", new Uri("http://example.com/feeds/2525235/summary.html"));
+            track2.AddLink("self", new Uri("http://example.com/feeds/45235235/some-podcast.mp3"));
+            track2.AddLink("alt", new Uri("http://nowhere.com/editorials/index"));
             repository.Save(new List<ITrack> { track2 });
             Assert.AreEqual(2, repository.Search().Count());
             Assert.AreEqual(1, GetCount(linkCountSql));

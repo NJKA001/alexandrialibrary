@@ -71,14 +71,14 @@ namespace Gnosis.Alexandria.Models.Tracks
         IEnumerable<IHashCode> ConductorHashCodes { get; }
         IEnumerable<IHashCode> OriginalTitleHashCodes { get; }
 
-        void AddPicture(string textEncoding, string mediaType, TrackPictureType pictureType, string description, byte[] data);
+        void AddPicture(string mediaType, TrackPictureType pictureType, string description, byte[] data);
         void RemovePicture(ITrackPicture picture);
 
-        void AddLyrics(string textEncoding, string language, string description, string lyrics);
+        void AddLyrics(string language, string description, string lyrics);
         void RemoveLyrics(ITrackUnsynchronizedLyrics lyrics);
 
-        void AddSynchronizedLyrics(string textEncoding, string language, string description, string lyrics, TrackSynchronizedTextType contentType);
-        void RemoveSynchronizedLyrics(ITrackSynchronizedLyrics synchronizedLyrics);
+        void AddSynchronizedLyrics(ITrackSynchronizedLyrics lyrics);
+        void RemoveSynchronizedLyrics(ITrackSynchronizedLyrics lyrics);
 
         void AddRating(byte rating, Uri user, ulong playCount);
         void RemoveRating(ITrackRating rating);
@@ -86,10 +86,10 @@ namespace Gnosis.Alexandria.Models.Tracks
         void AddIdentifier(Uri scheme, string identifier);
         void RemoveIdentifier(ITrackIdentifier identifier);
 
-        void AddLink(string textEncoding, string relationship, Uri location);
+        void AddLink(string relationship, Uri location);
         void RemoveLink(ITrackLink link);
 
-        void AddMetadatum(string textEncoding, string description, string content);
+        void AddMetadatum(string description, string content);
         void RemoveMetadatum(ITrackMetadatum metadatum);
     }
 }

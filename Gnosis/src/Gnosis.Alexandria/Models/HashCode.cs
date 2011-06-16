@@ -8,24 +8,26 @@ using Gnosis.Core;
 namespace Gnosis.Alexandria.Models
 {
     public class HashCode
-        : ValueBase, IHashCode
+        : ValueBase<IHashCode>, IHashCode
     {
         public HashCode()
         {
-            AddInitializer("Scheme", value => this.scheme = value.ToUri());
-            AddInitializer("Value", value => this.value = value.ToString());
+            AddInitializer(value => this.scheme = value.ToUri(), hashCode => hashCode.Scheme);
+            AddInitializer(value => this.value = value.ToString(), hashCode => hashCode.Value);
         }
 
         public HashCode(Guid parent, Uri scheme, string value)
         {
-            AddInitializer("Scheme", x => this.scheme = scheme);
-            AddInitializer("Value", x => this.value = value);
+            AddInitializer(x => this.scheme = scheme, hashCode => hashCode.Scheme);
+            AddInitializer(x => this.value = value, hashCode => hashCode.Value);
 
             Initialize(parent);
         }
 
         private Uri scheme;
         private string value;
+
+        #region IHashCode Members
 
         public Uri Scheme
         {
@@ -36,6 +38,8 @@ namespace Gnosis.Alexandria.Models
         {
             get { return value; }
         }
+
+        #endregion
 
         #region Double Metaphone
 

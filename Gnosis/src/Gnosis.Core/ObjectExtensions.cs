@@ -42,6 +42,11 @@ namespace Gnosis.Core
             return int.Parse(self.ToString());
         }
 
+        public static long ToInt64(this object self)
+        {
+            return long.Parse(self.ToString());
+        }
+
         public static Guid ToGuid(this object self)
         {
             return new Guid(self.ToString());

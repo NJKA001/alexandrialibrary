@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -12,29 +13,54 @@ namespace Gnosis.Alexandria.Models.Tracks
     {
         public TrackSynchronizedLyrics()
         {
-            AddInitializer(value => this.textEncoding = value.ToString(), lyrics => lyrics.TextEncoding);
+            AddInitializer(value => this.textEncoding = value.ToEnum<TextEncoding>(), lyrics => lyrics.TextEncoding);
+            AddInitializer(value => this.timestampFormat = value.ToEnum<TimestampFormat>(), lyrics => lyrics.TimestampFormat);
             AddInitializer(value => this.language = value.ToString(), lyrics => lyrics.Language);
             AddInitializer(value => this.description = value.ToString(), lyrics => lyrics.Description);
-            AddInitializer(value => this.text = value.ToString(), lyrics => lyrics.Text);
             AddInitializer(value => this.contentType = value.ToEnum<TrackSynchronizedTextType>(), lyrics => lyrics.ContentType);
+
+            AddValueInitializer(value => AddText(value as ISynchronizedText), lyrics => lyrics.Text);
         }
 
-        private string textEncoding = string.Empty;
+        private TextEncoding textEncoding;
+        private TimestampFormat timestampFormat;
         private string language = string.Empty;
         private string description = string.Empty;
-        private string text = string.Empty;
         private TrackSynchronizedTextType contentType = TrackSynchronizedTextType.Lyrics;
+
+        private readonly IList<ISynchronizedText> text = new ObservableCollection<ISynchronizedText>();
+
+        #region Private Methods
+
+        private void AddText(ISynchronizedText text)
+        {
+            AddValue<ISynchronizedText>(() => this.text.Add(text), text, lyrics => lyrics.Text);
+        }
+
+        #endregion
 
         #region ITrackSynchronizedLyrics Members
 
-        public string TextEncoding
+        public TextEncoding TextEncoding
         {
             get { return textEncoding; }
             set
             {
-                if (value != null && value != textEncoding)
+                if (value != textEncoding)
                 {
                     Change(() => textEncoding = value, x => x.TextEncoding);
+                }
+            }
+        }
+
+        public TimestampFormat TimestampFormat
+        {
+            get { return timestampFormat; }
+            set
+            {
+                if (value != timestampFormat)
+                {
+                    Change(() => timestampFormat = value, lyrics => lyrics.TimestampFormat);
                 }
             }
         }
@@ -63,18 +89,6 @@ namespace Gnosis.Alexandria.Models.Tracks
             }
         }
 
-        public string Text
-        {
-            get { return text; }
-            set
-            {
-                if (value != null && value != text)
-                {
-                    Change(() => text = value, x => x.Text);
-                }
-            }
-        }
-
         public TrackSynchronizedTextType ContentType
         {
             get { return contentType; }
@@ -85,6 +99,21 @@ namespace Gnosis.Alexandria.Models.Tracks
                     Change(() => contentType = value, x => x.ContentType);
                 }
             }
+        }
+
+        public IEnumerable<ISynchronizedText> Text
+        {
+            get { return text; }
+        }
+
+        public void AddText(long time, string text)
+        {
+            AddText(new SynchronizedText(this.Id, (uint)this.text.Count + 1, time, text));
+        }
+
+        public void RemoveText(ISynchronizedText text)
+        {
+            RemoveValue<ISynchronizedText>(() => this.text.Remove(text), text, lyrics => lyrics.Text);
         }
 
         #endregion

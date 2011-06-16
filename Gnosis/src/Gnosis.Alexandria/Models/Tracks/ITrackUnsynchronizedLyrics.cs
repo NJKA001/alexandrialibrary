@@ -9,7 +9,7 @@ namespace Gnosis.Alexandria.Models.Tracks
 {
     public interface ITrackUnsynchronizedLyrics : IChild
     {
-        string TextEncoding { get; set; }
+        TextEncoding TextEncoding { get; set; }
         string Language { get; set; }
         string Description { get; set; }
         string Text { get; set; }

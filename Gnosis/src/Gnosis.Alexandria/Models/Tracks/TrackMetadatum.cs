@@ -3,34 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core;
+
 namespace Gnosis.Alexandria.Models.Tracks
 {
     public class TrackMetadatum
-        : ValueBase, ITrackMetadatum
+        : ValueBase<ITrackMetadatum>, ITrackMetadatum
     {
         public TrackMetadatum()
         {
-            AddInitializer("TextEncoding", value => this.textEncoding = value.ToString());
-            AddInitializer("Description", value => this.description = value.ToString());
-            AddInitializer("Content", value => this.content = value.ToString());
+            AddInitializer(value => this.textEncoding = value.ToEnum<TextEncoding>(), meta => meta.TextEncoding);
+            AddInitializer(value => this.description = value.ToString(), meta => meta.Description);
+            AddInitializer(value => this.content = value.ToString(), meta => meta.Content);
         }
 
-        public TrackMetadatum(Guid parent, string textEncoding, string description, string content)
+        public TrackMetadatum(Guid parent, TextEncoding textEncoding, string description, string content)
         {
-            AddInitializer("TextEncoding", x => this.textEncoding = textEncoding);
-            AddInitializer("Description", x => this.description = description);
-            AddInitializer("Content", x => this.content = content);
+            AddInitializer(value => this.textEncoding = textEncoding, meta => meta.TextEncoding);
+            AddInitializer(value => this.description = description, meta => meta.Description);
+            AddInitializer(value => this.content = content, meta => meta.Content);
 
             Initialize(parent);
         }
 
-        private string textEncoding;
+        private TextEncoding textEncoding;
         private string description;
         private string content;
 
         #region ITrackMetadata Members
 
-        public string TextEncoding
+        public TextEncoding TextEncoding
         {
             get { return textEncoding; }
         }

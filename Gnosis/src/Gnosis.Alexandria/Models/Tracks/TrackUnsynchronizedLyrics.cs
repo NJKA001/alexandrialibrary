@@ -12,25 +12,25 @@ namespace Gnosis.Alexandria.Models.Tracks
     {
         public TrackUnsynchronizedLyrics()
         {
-            AddInitializer(value => this.textEncoding = value.ToString(), lyrics => lyrics.TextEncoding);
+            AddInitializer(value => this.textEncoding = value.ToEnum<TextEncoding>(), lyrics => lyrics.TextEncoding);
             AddInitializer(value => this.language = value.ToString(), lyrics => lyrics.Language);
             AddInitializer(value => this.description = value.ToString(), lyrics => lyrics.Description);
             AddInitializer(value => this.text = value.ToString(), lyrics => lyrics.Text);
         }
 
-        private string textEncoding = string.Empty;
+        private TextEncoding textEncoding;
         private string language = string.Empty;
         private string description = string.Empty;
         private string text = string.Empty;
 
         #region ITrackUnsynchronizedLyrics Members
 
-        public string TextEncoding
+        public TextEncoding TextEncoding
         {
             get { return textEncoding; }
             set
             {
-                if (value != null && value != textEncoding)
+                if (value != textEncoding)
                 {
                     Change(() => textEncoding = value, lyrics => lyrics.TextEncoding);
                 }

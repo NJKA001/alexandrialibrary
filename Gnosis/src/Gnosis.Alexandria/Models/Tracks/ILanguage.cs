@@ -7,10 +7,10 @@ using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Models.Tracks
 {
-    public interface ITrackLink : IValue
+    public interface ILanguage
+        : IValue
     {
-        TextEncoding TextEncoding { get; }
-        string Relationship { get; }
-        Uri Location { get; }
+        string Code { get; }
+        string Name { get; }
     }
 }

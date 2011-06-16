@@ -176,12 +176,17 @@
     <Compile Include="Models\Playlists\IPlaylistItemLocation.cs" />
     <Compile Include="Models\Playlists\IPlaylistLink.cs" />
     <Compile Include="Models\Playlists\IPlaylistMetadata.cs" />
+    <Compile Include="Models\Tracks\ILanguage.cs" />
+    <Compile Include="Models\Tracks\ISynchronizedText.cs" />
     <Compile Include="Models\Tracks\ITrack.cs" />
     <Compile Include="Models\Tracks\ITrackIdentifier.cs" />
     <Compile Include="Models\Tracks\ITrackLink.cs" />
     <Compile Include="Models\Tracks\ITrackMetadatum.cs" />
     <Compile Include="Models\Tracks\ITrackPicture.cs" />
     <Compile Include="Models\Tracks\ITrackRating.cs" />
+    <Compile Include="Models\Tracks\SynchronizedText.cs" />
+    <Compile Include="Models\Tracks\TextEncoding.cs" />
+    <Compile Include="Models\Tracks\TimestampFormat.cs" />
     <Compile Include="Models\Tracks\Track.cs" />
     <Compile Include="Models\Tracks\TrackIdentifier.cs" />
     <Compile Include="Models\Tracks\TrackLink.cs" />

@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Models
 {
-    public abstract class ValueBase
+    public abstract class ValueBase<T>
         : IValue
+        where T : IValue
     {
         private Guid id;
         private Guid parent;
@@ -19,9 +21,10 @@ namespace Gnosis.Alexandria.Models
         private bool isRemoved;
         private readonly IDictionary<string, Action<object>> initializers = new Dictionary<string, Action<object>>();
 
-        protected void AddInitializer(string name, Action<object> action)
+        protected void AddInitializer(Action<object> action, Expression<Func<T, object>> property)
         {
-            initializers[name] = action;
+            var propertyInfo = property.AsProperty();
+            initializers[propertyInfo.Name] = action;
         }
 
         protected void Initialize(Guid parent)
