@@ -93,5 +93,8 @@ namespace Gnosis.Alexandria.Models.Tracks
 
         void AddMetadatum(string description, string content);
         void RemoveMetadatum(ITrackMetadatum metadatum);
+
+        void LoadTag();
+        void SaveTag();
     }
 }

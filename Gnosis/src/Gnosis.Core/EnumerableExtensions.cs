@@ -18,5 +18,23 @@ namespace Gnosis.Core
         {
             return sequence.Contains(value) || sequence.Where(x => x.Id == value.Id).FirstOrDefault() != null;
         }
+
+        public static T[] ToArray<T>(this IEnumerable<T> self)
+        {
+            var count = self.Count();
+            if (count == 0)
+                return new T[0];
+
+            var array = new T[count];
+            
+            var index = 0;
+            foreach (var item in self)
+            {
+                array[index] = item;
+                index++;
+            }
+
+            return array;
+        }
     }
 }

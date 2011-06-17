@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
+using TagLib;
+
 using Gnosis.Core;
 using Gnosis.Alexandria.Models;
 
@@ -116,6 +118,9 @@ namespace Gnosis.Alexandria.Models.Tracks
         private string copyright = string.Empty;
         private string publisher = string.Empty;
         private string internationalStandardRecordingCode = string.Empty;
+
+        private TagLib.File file;
+        private TagLib.Id3v2.Tag tag;
 
         private readonly IList<ITrackPicture> pictures = new ObservableCollection<ITrackPicture>();
         private readonly IList<ITrackUnsynchronizedLyrics> lyrics = new ObservableCollection<ITrackUnsynchronizedLyrics>();
@@ -498,7 +503,7 @@ namespace Gnosis.Alexandria.Models.Tracks
 
         public string OriginalTitle
         {
-            get { return originalFileName; }
+            get { return originalTitle; }
             set
             {
                 if (value != null && value != originalTitle)
@@ -869,6 +874,106 @@ namespace Gnosis.Alexandria.Models.Tracks
         public void RemoveMetadatum(ITrackMetadatum metadatum)
         {
             RemoveValue<ITrackMetadatum>(() => this.metadata.Remove(metadatum), metadatum, x => x.Metadata);
+        }
+
+        private void InitializeTag()
+        {
+            if (Location == null || !Location.IsFile || MediaType != "audio/mpeg")
+                throw new InvalidOperationException("Only local MP3 files can be tagged - tracks with an invalid or remote location cannot be tagged");
+
+            if (file == null)
+                file = TagLib.File.Create(Location.LocalPath);
+            
+            if (tag == null)
+                tag = file.GetTag(TagTypes.Id3v2) as TagLib.Id3v2.Tag;
+        }
+
+        public void LoadTag()
+        {
+            InitializeTag();
+
+            Title = tag.Title;
+            TitleSort = tag.TitleSort;
+            Subtitle = tag.Subtitle;
+            Grouping = tag.Grouping;
+            Comment = tag.Comment;
+            Album = tag.Album;
+            AlbumSort = tag.AlbumSort;
+            AlbumSubtitle = tag.AlbumSubtitle;
+            Artists = tag.JoinedPerformers;
+            ArtistsSort = tag.ArtistsSort;
+            AlbumArtists = tag.JoinedAlbumArtists;
+            Composers = tag.JoinedComposers;
+            Conductors = tag.Conductor;
+            Genres = tag.JoinedGenres;
+            Moods = tag.JoinedMoods;
+            Languages = tag.JoinedLanguages;
+            RecordingDate = tag.RecordingDate;
+            ReleaseDate = tag.ReleaseDate;
+            OriginalTitle = tag.OriginalTitle;
+            OriginalArtists = tag.JoinedOriginalArtists;
+            OriginalReleaseDate = tag.OriginalReleaseDate;
+            TrackNumber = tag.Track;
+            TrackCount = tag.TrackCount;
+            DiscNumber = tag.Disc;
+            DiscCount = tag.DiscCount;
+            Duration = tag.Duration;
+            BeatsPerMinute = tag.BeatsPerMinute;
+            PlayCount = tag.PlayCount;
+            PlaylistDelay = tag.PlaylistDelay;
+            OriginalFileName = tag.OriginalFilename;
+            EncodingDate = tag.EncodingDate;
+            TaggingDate = tag.TaggingDate;
+            Copyright = tag.Copyright;
+            Publisher = tag.Publisher;
+            InternationalStandardRecordingCode = tag.InternationalStandardRecordingCode;
+
+            //TODO: Synch lyrics and ad-hoc metadata
+        }
+
+        public void SaveTag()
+        {
+            InitializeTag();
+
+            tag.Title = Title;
+            tag.TitleSort = TitleSort;
+            tag.Subtitle = Subtitle;
+            tag.Grouping = Grouping;
+            tag.Comment = Comment;
+            tag.Album = Album;
+            tag.AlbumSort = AlbumSort;
+            tag.AlbumSubtitle = AlbumSubtitle;
+            tag.Performers = Artists.ToNames().ToArray();
+            tag.ArtistsSort = ArtistsSort;
+            tag.AlbumArtists = AlbumArtists.ToNames().ToArray();
+            tag.Composers = Composers.ToNames().ToArray();
+            tag.Conductor = Conductors;
+            tag.Genres = Genres.Split('/');
+            tag.Moods = Moods.Split('/');
+            tag.Languages = Languages.Split('/');
+            tag.RecordingDate = RecordingDate;
+            tag.ReleaseDate = ReleaseDate;
+            tag.OriginalTitle = OriginalTitle;
+            tag.OriginalArtists = Artists.ToNames().ToArray();
+            tag.OriginalReleaseDate = OriginalReleaseDate;
+            tag.Track = TrackNumber;
+            tag.TrackCount = TrackCount;
+            tag.Disc = DiscNumber;
+            tag.DiscCount = DiscCount;
+            tag.Duration = Duration;
+            tag.BeatsPerMinute = BeatsPerMinute;
+            tag.PlayCount = PlayCount;
+            tag.PlaylistDelay = PlaylistDelay;
+            tag.OriginalFilename = OriginalFileName;
+            tag.EncodingDate = EncodingDate;
+            tag.TaggingDate = TaggingDate;
+            tag.Copyright = Copyright;
+            tag.Publisher = Publisher;
+            tag.InternationalStandardRecordingCode = InternationalStandardRecordingCode;
+
+            //TODO: Synch lyrics and ad-hoc metadata
+
+            file.Save();
         }
 
         #endregion

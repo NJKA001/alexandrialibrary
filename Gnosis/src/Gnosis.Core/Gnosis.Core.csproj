@@ -79,6 +79,8 @@
     <Compile Include="ImageExtensions.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ISearch.cs" />
+    <Compile Include="Iso\ILanguage639.cs" />
+    <Compile Include="Iso\Language639.cs" />
     <Compile Include="IValue.cs" />
     <Compile Include="IValueInitialState.cs" />
     <Compile Include="ObjectExtensions.cs" />

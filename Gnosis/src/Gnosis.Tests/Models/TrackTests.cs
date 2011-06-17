@@ -6,13 +6,66 @@ using System.Text;
 using NUnit.Framework;
 using TagLib;
 
+using Gnosis.Core;
+using Gnosis.Alexandria.Models.Tracks;
+
 namespace Gnosis.Tests.Models
 {
     [TestFixture]
     public class TrackTests
     {
+        #region Constants
         private const string location1 = @"Files\03 - Antes De Las Seis.mp3";
         private const string location2 = @"Files\13 - Loca (Featuring Dizzee Rascal).mp3";
+        private const string mediaTypeMpeg = "audio/mpeg";
+
+        const string title = "Loca (Featuring Dizzee Rascal)";
+        const string titleSort = "Loca (Featuring Dizzee Rascal)";
+        const string subtitle = "Featuring Dizzee Rascal";
+        const string grouping = "Song";
+
+        const string album = "Sale El Sol";
+        const string albumSort = "Sale El Sol";
+        const string albumSubtitle = "The Sun Comes Out";
+
+        const string artists = "Shakira; Dizzee Rascal";
+        const string artistsSort = "Shakira; Dizzee Rascal";
+        const string albumArtists = "Shakira";
+
+        const string composers = "None";
+        const string conductors = "None";
+        const string genres = "Latin Pop; Merengue; Rock en Español";
+        const string moods = "Spicy/Cheerful/Fin/Party/Sensual/Sexy/Confident/Energetic/Stylish/Carefree/Playful";
+        const string languages = "spa/eng";
+
+        const string originalTitle = "Loca Con Su Tigre";
+        const string originalArtists = "El Cata";
+        DateTime originalReleaseDate = new DateTime(2009, 10, 20);
+
+        DateTime releaseDate = new DateTime(2010, 10, 15);
+        DateTime recordingDate = new DateTime(2010, 1, 1);
+
+        const uint trackNumber = 13;
+        const uint trackCount = 15;
+        const uint discNumber = 1;
+        const uint discCount = 1;
+
+        TimeSpan duration = new TimeSpan(0, 0, 193);
+        const uint beatsPerMinute = 128;
+
+        ulong playCount = 394;
+        TimeSpan playlistDelay = new TimeSpan(0, 0, 2);
+
+        const string originalFilename = "13 - Loca (Featuring Dizzee Rascal).mp3";
+        DateTime encodingDate = new DateTime(2011, 6, 14);
+        DateTime taggingDate = new DateTime(2011, 6, 16);
+
+        const string publisher = "Epic Records";
+        const string isrc = "8869 777433 2";
+        #endregion
+
+        private IContext context = new SingleThreadedContext();
+        private ILogger logger = new DebugLogger();
 
         private TagLib.File file;
         private TagLib.Id3v2.Tag tag;
@@ -20,8 +73,6 @@ namespace Gnosis.Tests.Models
         private void InitializeTag()
         {
             /*
-            file = TagLib.File.Create(location2);
-            tag = file.GetTag(TagTypes.Id3v2) as TagLib.Id3v2.Tag;
             tag.Performers = new string[] { "Shakira", "Dizzee Rascal" };
             tag.Subtitle = subtitle;
             tag.TitleSort = titleSort;
@@ -49,7 +100,7 @@ namespace Gnosis.Tests.Models
             tag.TaggingDate = taggingDate;
             tag.Publisher = publisher;
             tag.InternationalStandardRecordingCode = isrc;
-            file.Save()
+            file.Save();
             */
         }
 
@@ -73,52 +124,6 @@ namespace Gnosis.Tests.Models
         [Test]
         public void ReadTag()
         {
-            #region Constants
-            const string title = "Loca (Featuring Dizzee Rascal)";
-            const string titleSort = "Loca (Featuring Dizzee Rascal)";
-            const string subtitle = "Featuring Dizzee Rascal";
-            const string grouping = "Song";
-
-            const string album = "Sale El Sol";
-            const string albumSort = "Sale El Sol";
-            const string albumSubtitle = "The Sun Comes Out";
-
-            const string artists = "Shakira; Dizzee Rascal";
-            const string artistsSort = "Shakira; Dizzee Rascal";
-            const string albumArtists = "Shakira";
-        
-            const string composers = "None";
-            const string conductors = "None";
-            const string genres = "Latin Pop; Merengue; Rock en Español";
-            const string moods = "Spicy/Cheerful/Fin/Party/Sensual/Sexy/Confident/Energetic/Stylish/Carefree/Playful";
-            const string languages = "spa/eng";
-
-            const string originalTitle = "Loca Con Su Tigre";
-            const string originalArtists = "El Cata";
-            DateTime originalReleaseDate = new DateTime(2009, 10, 20); 
-
-            DateTime releaseDate = new DateTime(2010, 10, 15);
-            DateTime recordingDate = new DateTime(2010, 1, 1);
-
-            const uint track = 13;
-            const uint trackCount = 15;
-            const uint disc = 1;
-            const uint discCount = 1;
-
-            TimeSpan duration = new TimeSpan(0, 0, 193);
-            const uint beatsPerMinute = 128;
-
-            ulong playCount = 394;
-            TimeSpan playlistDelay = new TimeSpan(0, 0, 2);
-
-            const string originalFilename = "13 - Loca (Featuring Dizzee Rascal).mp3";
-            DateTime encodingDate = new DateTime(2011, 6, 14);
-            DateTime taggingDate = new DateTime(2011, 6, 16);
-
-            const string publisher = "Epic Records";
-            const string isrc = "8869 777433 2";
-            #endregion
-
             file = TagLib.File.Create(location2);
             tag = file.GetTag(TagTypes.Id3v2) as TagLib.Id3v2.Tag;
 
@@ -152,9 +157,9 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(originalArtists, tag.JoinedOriginalArtists);
             Assert.AreEqual(originalReleaseDate, tag.OriginalReleaseDate);
 
-            Assert.AreEqual(track, tag.Track);
+            Assert.AreEqual(trackNumber, tag.Track);
             Assert.AreEqual(trackCount, tag.TrackCount);
-            Assert.AreEqual(disc, tag.Disc);
+            Assert.AreEqual(discNumber, tag.Disc);
             Assert.AreEqual(discCount, tag.DiscCount);
 
             Assert.AreEqual(duration, tag.Duration);
@@ -285,6 +290,62 @@ Mucho antes";
             Assert.AreEqual(descEnglish, frameEnglish.Description);
             Assert.AreEqual(langEnglish, frameEnglish.Language);
             Assert.AreEqual(lyricsEnglish, frameEnglish.Text);
+        }
+
+        [Test]
+        public void LoadTag()
+        {
+            var track = new Track();
+            track.Initialize(new EntityInitialState(context, logger));
+
+            var fileInfo = new System.IO.FileInfo(@".\" + location2);
+            track.Location = new Uri(fileInfo.FullName);
+            track.MediaType = mediaTypeMpeg;
+            track.LoadTag();
+
+            Assert.AreEqual(title, track.Title);
+            Assert.AreEqual(titleSort, track.TitleSort);
+            Assert.AreEqual(grouping, track.Grouping);
+            Assert.AreEqual(subtitle, track.Subtitle);
+
+            Assert.AreEqual(album, track.Album);
+            Assert.AreEqual(albumSort, track.AlbumSort);
+            Assert.AreEqual(albumSubtitle, track.AlbumSubtitle);
+
+            Assert.AreEqual(artists, track.Artists);
+            Assert.AreEqual(artistsSort, track.ArtistsSort);
+            Assert.AreEqual(albumArtists, track.AlbumArtists);
+
+            Assert.AreEqual(composers, track.Composers);
+            Assert.AreEqual(conductors, track.Conductors);
+            Assert.AreEqual(genres, track.Genres);
+            Assert.AreEqual(moods, track.Moods);
+            Assert.AreEqual(languages, track.Languages);
+
+            Assert.AreEqual(recordingDate, track.RecordingDate);
+            Assert.AreEqual(releaseDate, track.ReleaseDate);
+
+            Assert.AreEqual(originalTitle, track.OriginalTitle);
+            Assert.AreEqual(originalArtists, track.OriginalArtists);
+            Assert.AreEqual(originalReleaseDate, track.OriginalReleaseDate);
+
+            Assert.AreEqual(trackNumber, track.TrackNumber);
+            Assert.AreEqual(trackCount, track.TrackCount);
+            Assert.AreEqual(discNumber, track.DiscNumber);
+            Assert.AreEqual(discCount, track.DiscCount);
+
+            Assert.AreEqual(duration, track.Duration);
+            Assert.AreEqual(beatsPerMinute, track.BeatsPerMinute);
+
+            Assert.AreEqual(playCount, track.PlayCount);
+            Assert.AreEqual(playlistDelay, track.PlaylistDelay);
+
+            Assert.AreEqual(originalFilename, track.OriginalFileName);
+            Assert.AreEqual(encodingDate, track.EncodingDate);
+            Assert.AreEqual(taggingDate, track.TaggingDate);
+
+            Assert.AreEqual(publisher, track.Publisher);
+            Assert.AreEqual(isrc, track.InternationalStandardRecordingCode);
         }
     }
 }
