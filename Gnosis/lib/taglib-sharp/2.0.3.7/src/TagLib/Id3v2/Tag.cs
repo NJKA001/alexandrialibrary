@@ -1537,7 +1537,28 @@ namespace TagLib.Id3v2 {
 				frame.TextEncoding = DefaultEncoding;
 			}
 		}
-		
+
+        public IEnumerable<UnsynchronisedLyricsFrame> GetUnsynchronizedLyrics()
+        {
+            return GetFrames<UnsynchronisedLyricsFrame>();
+        }
+
+        public UnsynchronisedLyricsFrame GetUnsynchronizedLyrics(string description, string language)
+        {
+            return UnsynchronisedLyricsFrame.Get(this, description, language, false);
+        }
+
+        public void AddUnsynchronizedLyrics(string description, string language, string text)
+        {
+            var frame = GetUnsynchronizedLyrics(description, language);
+            if (frame == null)
+            {
+                frame = new UnsynchronisedLyricsFrame(description, language, StringType.UTF8);
+                frame.Text = text;
+                AddFrame(frame);
+            }
+        }
+
 		/// <summary>
 		///    Gets and sets the grouping on the album which the media
 		///    in the current instance belongs to.
