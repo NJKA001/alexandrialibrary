@@ -231,6 +231,8 @@ namespace Gnosis.Tests.Repositories
 
             var oldTimeStamp = feed.TimeStamp;
             repository.Save(new List<IFeed>{ feed });
+            Assert.AreEqual(1, GetCount(string.Format("select count() from Feed where Id = '{0}';", id)));
+            
             var newTimeStamp = feed.TimeStamp;
             Assert.IsFalse(feed.IsChanged());
             Assert.AreNotEqual(oldTimeStamp, newTimeStamp);

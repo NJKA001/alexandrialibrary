@@ -27,7 +27,10 @@ namespace Gnosis.Core.Queries
 
             builder.AddStatement(new SelectStatement(entityInfo, filter));
             foreach (var parameter in filter.Parameters)
-                builder.AddParameter(parameter.Key, parameter.Value);
+            {
+                builder.AddParameter(parameter);
+                //logger.Debug("  parameter name=" + parameter.Name + "value=" + parameter.Value.ToString());
+            }
 
             AddChildStatements(builder, entityInfo, filter);
         }
@@ -38,7 +41,7 @@ namespace Gnosis.Core.Queries
         private readonly ICommandBuilder builder;
         private readonly string whereClause;
         private readonly string orderByClause;
-        private readonly IEnumerable<KeyValuePair<string, object>> parameters;
+        private readonly IEnumerable<IParameter> parameters;
 
         private void AddChildStatements(ICommandBuilder parentBuilder, EntityInfo entityInfo, IFilter filter)
         {
@@ -47,7 +50,10 @@ namespace Gnosis.Core.Queries
                 var childBuilder = new CommandBuilder(childInfo.Name, childInfo.Type);
                 childBuilder.AddStatement(new SelectStatement(childInfo, filter));
                 foreach (var parameter in filter.Parameters)
-                    childBuilder.AddParameter(parameter.Key, parameter.Value);
+                {
+                    childBuilder.AddParameter(parameter);
+                    //logger.Debug("  parameter name=" + parameter.Name + "value=" + parameter.Value.ToString());
+                }
 
                 parentBuilder.AddChild(childBuilder);
 
@@ -59,7 +65,10 @@ namespace Gnosis.Core.Queries
                 var valueBuilder = new CommandBuilder(valueInfo.Name, valueInfo.Type);
                 valueBuilder.AddStatement(new SelectStatement(valueInfo, filter));
                 foreach (var parameter in filter.Parameters)
-                    valueBuilder.AddParameter(parameter.Key, parameter.Value);
+                {
+                    valueBuilder.AddParameter(parameter);
+                    //logger.Debug("  parameter name=" + parameter.Name + "value=" + parameter.Value.ToString());
+                }
 
                 parentBuilder.AddChild(valueBuilder);
             }
@@ -120,8 +129,6 @@ namespace Gnosis.Core.Queries
                         }
                     }
 
-                    //factory.AddChildren(childBuilder.Name, parents, children);
-
                     AddChildren(connection, childBuilder, allChildren);
                 }
                 else
@@ -134,8 +141,6 @@ namespace Gnosis.Core.Queries
                             parent.InitializeValues(childBuilder.Name, theseValues);
                         }
                     }
-
-                    //factory.AddValues(childBuilder.Name, parents, values);
                 }
             }
         }

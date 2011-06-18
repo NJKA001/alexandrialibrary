@@ -94,7 +94,7 @@ namespace Gnosis.Alexandria.Repositories
         {
             var entityInfo = new EntityInfo(baseType);
             var whereClause = string.Format("{0}.{1} = @Id", entityInfo.Name, entityInfo.Identifier.Name);
-            var parameters = new Dictionary<string, object> { { "@Id", id } };
+            var parameters = new Dictionary<string, object> { { "@Id", id.ToString() } };
             return Select(new Filter(whereClause, parameters)).FirstOrDefault();
         }
 

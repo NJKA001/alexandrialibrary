@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core.Commands;
+
 namespace Gnosis.Core
 {
     public class Filter
@@ -22,12 +24,12 @@ namespace Gnosis.Core
         {
             this.whereClause = whereClause;
             this.orderByClause = orderByClause;
-            this.parameters = parameters;
+            this.parameters = parameters.Select(x => new Parameter(x.Key, x.Value, false));
         }
 
         private readonly string whereClause;
         private readonly string orderByClause;
-        private readonly IEnumerable<KeyValuePair<string, object>> parameters;
+        private readonly IEnumerable<IParameter> parameters;
 
         public string WhereClause
         {
@@ -39,7 +41,7 @@ namespace Gnosis.Core
             get { return orderByClause; }
         }
 
-        public IEnumerable<KeyValuePair<string, object>> Parameters
+        public IEnumerable<IParameter> Parameters
         {
             get { return parameters; }
         }

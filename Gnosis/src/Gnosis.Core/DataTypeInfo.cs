@@ -21,6 +21,11 @@ namespace Gnosis.Core
         private readonly PropertyInfo property;
         private readonly IList<ElementInfo> elements = new List<ElementInfo>();
 
+        public string Name
+        {
+            get { return property.Name; }
+        }
+
         public IEnumerable<ElementInfo> Elements
         {
             get { return elements; }

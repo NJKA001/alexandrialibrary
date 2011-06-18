@@ -20,36 +20,32 @@ namespace Gnosis.Core.Batches
         {
             foreach (var valueInfo in entityInfo.Values)
             {
-                var builder = new CommandBuilder();
-
                 foreach (var value in entity.GetValues(valueInfo))
                 {
-                    var idParameterName = builder.GetParameterName();
-                    builder.AddParameter(idParameterName, value.Id);
-                    var whereClause = string.Format("{0}.{1} = {2}", valueInfo.Name, valueInfo.Identifer.Name, idParameterName);
+                    var builder = new CommandBuilder();
+                    var idParameter = value.Id.ToParameter();
+                    builder.AddParameter(idParameter);
+                    var whereClause = string.Format("{0}.{1} = {2}", valueInfo.Name, valueInfo.Identifer.Name, idParameter.Name);
                     var statement = new DeleteStatement(valueInfo.Name, whereClause);
                     builder.AddStatement(statement);
+                    Add(builder);
                 }
-
-                Add(builder);
             }
 
             foreach (var childInfo in entityInfo.Children)
             {
-                var builder = new CommandBuilder();
-
                 foreach (var child in entity.GetChildren(childInfo))
                 {
-                    var idParameterName = builder.GetParameterName();
-                    builder.AddParameter(idParameterName, child.Id);
-                    var whereClause = string.Format("{0}.{1} = {2}", childInfo.Name, childInfo.Identifier.Name, idParameterName);
+                    var builder = new CommandBuilder();
+                    var idParameter = child.Id.ToParameter();
+                    builder.AddParameter(idParameter);
+                    var whereClause = string.Format("{0}.{1} = {2}", childInfo.Name, childInfo.Identifier.Name, idParameter.Name);
                     var statement = new DeleteStatement(childInfo.Name, whereClause);
                     builder.AddStatement(statement);
 
                     AddDeleteStatements(child, childInfo);
+                    Add(builder);
                 }
-
-                Add(builder);
             }
         }
 
@@ -59,9 +55,9 @@ namespace Gnosis.Core.Batches
         {
             var builder = new CommandBuilder();
 
-            var idParameterName = builder.GetParameterName();
-            builder.AddParameter(idParameterName, entity.Id);
-            var whereClause = string.Format("{0}.{1} = {2}", entityInfo.Name, entityInfo.Identifier.Name, idParameterName);
+            var idParameter = entity.Id.ToParameter();
+            builder.AddParameter(idParameter);
+            var whereClause = string.Format("{0}.{1} = {2}", entityInfo.Name, entityInfo.Identifier.Name, idParameter.Name);
             var statement = new DeleteStatement(entityInfo.Name, whereClause);
 
             builder.AddStatement(statement);
@@ -74,9 +70,9 @@ namespace Gnosis.Core.Batches
         {
             var builder = new CommandBuilder();
 
-            var idParameterName = builder.GetParameterName();
-            builder.AddParameter(idParameterName, child.Id);
-            var whereClause = string.Format("{0}.{1} = {2}", childInfo.Name, childInfo.Identifier.Name, idParameterName);
+            var idParameter = child.Id.ToParameter();
+            builder.AddParameter(idParameter);
+            var whereClause = string.Format("{0}.{1} = {2}", childInfo.Name, childInfo.Identifier.Name, idParameter.Name);
             var statement = new DeleteStatement(childInfo.Name, whereClause);
 
             builder.AddStatement(statement);
@@ -93,9 +89,9 @@ namespace Gnosis.Core.Batches
         {
             var builder = new CommandBuilder();
 
-            var idParameterName = builder.GetParameterName();
-            builder.AddParameter(idParameterName, value.Id);
-            var whereClause = string.Format("{0}.{1} = {2}", valueInfo.Name, valueInfo.Identifer.Name, idParameterName);
+            var idParameter = value.Id.ToParameter();
+            builder.AddParameter(idParameter);
+            var whereClause = string.Format("{0}.{1} = {2}", valueInfo.Name, valueInfo.Identifer.Name, idParameter.Name);
             var statement = new DeleteStatement(valueInfo.Name, whereClause);
 
             builder.AddStatement(statement);

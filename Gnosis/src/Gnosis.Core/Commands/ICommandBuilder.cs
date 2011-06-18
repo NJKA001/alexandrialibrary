@@ -12,11 +12,10 @@ namespace Gnosis.Core.Commands
         Type Type { get; }
 
         void AddChild(ICommandBuilder builder);
-        void AddParameter(string name, object value);
+        void AddParameter(IParameter parameter);
         void AddStatement(IStatement statement);
 
         IDbCommand GetCommand(IDbConnection connection);
-        string GetParameterName();
         IEnumerable<ICommandBuilder> Children { get; }
     }
 }

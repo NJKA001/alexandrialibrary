@@ -36,5 +36,23 @@ namespace Gnosis.Core
 
             return array;
         }
+
+        public static string ToNamesString<T>(this IEnumerable<T> self)
+        {
+            if (self == null)
+                return string.Empty;
+
+            return string.Join("; ", self);
+        }
+
+        public static string ToNamesString<T>(this IEnumerable<T> self, Func<T, string> function)
+        {
+            if (self == null)
+                return string.Empty;
+
+            var values = self.Select(function);
+
+            return string.Join("; ", values);
+        }
     }
 }

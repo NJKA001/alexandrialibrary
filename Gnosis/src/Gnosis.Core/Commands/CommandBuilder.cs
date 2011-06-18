@@ -34,7 +34,7 @@ namespace Gnosis.Core.Commands
             command.Parameters.Add(parameter);
         }
 
-        #region ICommandBuilber Members
+        #region ICommandBuilder Members
 
         public string Name
         {
@@ -51,41 +51,20 @@ namespace Gnosis.Core.Commands
             children.Add(child);
         }
 
-        public void AddParameter(string name, object value)
+        public void AddParameter(IParameter parameter)
         {
-            var normalizedValue = value;
+            if (parameter == null)
+                throw new ArgumentNullException("parameter");
 
-            if (value != null)
-            {
-                if (value is IEntity)
-                    normalizedValue = ((IEntity)value).Id.ToString();
-                if (value is IValue)
-                    normalizedValue = ((IValue)value).Id.ToString();
-                if (value.GetType() == typeof(bool))
-                    normalizedValue = (bool)value ? 1 : 0;
-                if (value.GetType() == typeof(Guid))
-                    normalizedValue = ((Guid)value).ToString();
-                else if (value.GetType() == typeof(Uri))
-                    normalizedValue = ((Uri)value).ToString();
-                else if (value.GetType() == typeof(DateTime))
-                    normalizedValue = ((DateTime)value).ToString("s");
-                else if (value.GetType() == typeof(TimeSpan))
-                    normalizedValue = ((TimeSpan)value).Ticks;
-                else if (value.GetType().IsEnum)
-                    normalizedValue = (int)value;
-            }
-
-            parameters.Add(name, normalizedValue);
+            parameters.Add(parameter.Name, parameter.Value);
         }
 
         public void AddStatement(IStatement statement)
         {
-            statements.Add(statement);
-        }
+            if (statement == null)
+                throw new ArgumentNullException("statement");
 
-        public string GetParameterName()
-        {
-            return string.Format("@{0}", Guid.NewGuid().ToString().Replace("-", string.Empty));
+            statements.Add(statement);
         }
 
         public IDbCommand GetCommand(IDbConnection connection)
@@ -116,9 +95,9 @@ namespace Gnosis.Core.Commands
             return builder.ToString();
         }
 
-        public string ToUnformattedString()
-        {
-            return ToString().Replace(Environment.NewLine, " ");
-        }
+        //public string ToUnformattedString()
+        //{
+        //    return ToString().Replace(Environment.NewLine, " ");
+        //}
     }
 }

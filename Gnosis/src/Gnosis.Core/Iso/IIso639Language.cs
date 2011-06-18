@@ -8,7 +8,7 @@ namespace Gnosis.Core.Iso
     /// <summary>
     /// Defines a language based on the ISO 639-1 and 639-2 standards
     /// </summary>
-    public interface ILanguage639
+    public interface IIso639Language
     {
         string Alpha3Code { get; }
         string Alpha3TermCode { get; }
