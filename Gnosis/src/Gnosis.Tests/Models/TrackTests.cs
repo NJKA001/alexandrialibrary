@@ -7,6 +7,7 @@ using NUnit.Framework;
 using TagLib;
 
 using Gnosis.Core;
+using Gnosis.Core.Iso;
 using Gnosis.Alexandria.Models.Tracks;
 
 namespace Gnosis.Tests.Models
@@ -36,7 +37,7 @@ namespace Gnosis.Tests.Models
         const string conductors = "None";
         const string genres = "Latin Pop; Merengue; Rock en Español";
         const string moods = "Spicy/Cheerful/Fin/Party/Sensual/Sexy/Confident/Energetic/Stylish/Carefree/Playful";
-        const string languages = "spa/eng";
+        private IEnumerable<IIso639Language> languages = new List<IIso639Language>() { Iso639Language.Spanish, Iso639Language.English };
 
         const string originalTitle = "Loca Con Su Tigre";
         const string originalArtists = "El Cata";
@@ -148,7 +149,7 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(conductors, tag.Conductor);
             Assert.AreEqual(genres, tag.JoinedGenres);
             Assert.AreEqual(moods, tag.JoinedMoods);
-            Assert.AreEqual(languages, tag.JoinedLanguages);
+            Assert.AreEqual(languages, tag.Languages.Split('/').Select(code => Iso639Language.GetLanguageByCode(code)));
 
             Assert.AreEqual(recordingDate, tag.RecordingDate);
             Assert.AreEqual(releaseDate, tag.ReleaseDate);

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 using TagLib;
 
 using Gnosis.Core;
+using Gnosis.Core.Iso;
 using Gnosis.Alexandria.Models;
 
 namespace Gnosis.Alexandria.Models.Tracks
@@ -31,7 +33,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             AddInitializer(x => this.conductors = x.ToString(), track => track.Conductors);
             AddInitializer(x => this.genres = x.ToString(), track => track.Genres);
             AddInitializer(x => this.moods = x.ToString(), track => track.Moods);
-            AddInitializer(x => this.languages = x.ToString(), track => track.Languages);
+            AddInitializer(value => this.languages = value.ToIso639Languages(), track => track.Languages);
             AddInitializer(x => this.recordingDate = x.ToDateTime(), track => track.RecordingDate);
             AddInitializer(x => this.releaseDate = x.ToDateTime(), track => track.ReleaseDate);
             AddInitializer(x => this.originalTitle = x.ToString(), track => track.OriginalTitle);
@@ -98,7 +100,7 @@ namespace Gnosis.Alexandria.Models.Tracks
         private string conductors = string.Empty;
         private string genres = string.Empty;
         private string moods = string.Empty;
-        private string languages = string.Empty;
+        private IEnumerable<IIso639Language> languages = new List<IIso639Language>();
         private DateTime recordingDate = DateTime.MinValue;
         private DateTime releaseDate = DateTime.MinValue;
         private string originalTitle = string.Empty;
@@ -465,14 +467,14 @@ namespace Gnosis.Alexandria.Models.Tracks
             }
         }
 
-        public string Languages
+        public IEnumerable<IIso639Language> Languages
         {
             get { return languages; }
             set
             {
                 if (value != null && value != languages)
                 {
-                    Change(() => languages = value, x => x.Languages);
+                    Change(() => languages = value, track => track.Languages);
                 }
             }
         }
@@ -907,7 +909,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             Conductors = tag.Conductor;
             Genres = tag.JoinedGenres;
             Moods = tag.JoinedMoods;
-            Languages = tag.JoinedLanguages;
+            Languages = !string.IsNullOrEmpty(tag.Languages) ? tag.Languages.Split('/').Select(code => Iso639Language.GetLanguageByCode(code)) : new List<IIso639Language> { Iso639Language.Undetermined };
             RecordingDate = tag.RecordingDate;
             ReleaseDate = tag.ReleaseDate;
             OriginalTitle = tag.OriginalTitle;
@@ -950,7 +952,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             tag.Conductor = Conductors;
             tag.Genres = Genres.Split('/');
             tag.Moods = Moods.Split('/');
-            tag.Languages = Languages.Split('/');
+            tag.Languages = string.Join("/", Languages.Select(lang => lang.Alpha3Code));
             tag.RecordingDate = RecordingDate;
             tag.ReleaseDate = ReleaseDate;
             tag.OriginalTitle = OriginalTitle;

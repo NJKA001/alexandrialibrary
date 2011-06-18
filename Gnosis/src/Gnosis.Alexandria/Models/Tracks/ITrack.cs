@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Gnosis.Core;
+using Gnosis.Core.Iso;
 
 namespace Gnosis.Alexandria.Models.Tracks
 {
@@ -28,7 +29,7 @@ namespace Gnosis.Alexandria.Models.Tracks
         string Conductors { get; set; }
         string Genres { get; set; }
         string Moods { get; set; }
-        string Languages { get; set; }
+        IEnumerable<IIso639Language> Languages { get; set; }
         
         DateTime RecordingDate { get; set; }
         DateTime ReleaseDate { get; set; }

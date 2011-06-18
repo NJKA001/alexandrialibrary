@@ -10,6 +10,7 @@ using NUnit.Framework;
 using System.Data.SQLite;
 
 using Gnosis.Core;
+using Gnosis.Core.Iso;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Tracks;
 using Gnosis.Alexandria.Repositories.Tracks;
@@ -37,7 +38,7 @@ namespace Gnosis.Tests.Repositories
         private DateTime recodingDate = new DateTime(1992, 1, 1);
         private DateTime encodingDate = new DateTime(2000, 5, 17);
         private const string genres = "Rock; Metal; Alternative Metal; Heavy Metal; Progressive Metal";
-        private const string languages = "en-us";
+        private IEnumerable<IIso639Language> languages = new List<IIso639Language>() { Iso639Language.English };
         private const string moods = "Angry; Angst-Rodden; Bleak; Harsh; Menacing; Suffocating; Confrontational; Eerie; Fierce; Gloomy; Intense";
         private ulong playCount = 397;
         private const int playlistDelaySeconds = 2;

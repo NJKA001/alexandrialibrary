@@ -1098,14 +1098,9 @@ namespace TagLib.Id3v2 {
             }
         }
 
-        public string JoinedLanguages
+        public string Languages
         {
-            get { return string.Join("; ", Languages); }
-        }
-
-        public string[] Languages
-        {
-            get { return GetTextAsArray(FrameType.TLAN); }
+            get { return GetTextAsString(FrameType.TLAN); }
             set { SetTextFrame(FrameType.TLAN, value); }
         }
 

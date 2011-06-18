@@ -365,8 +365,6 @@ namespace Gnosis.Core.Iso
             languages.Add(Mohawk);
             languages.Add(Mongolian);
             languages.Add(Mossi);
-            languages.Add(Mao);
-            languages.Add(May);
             languages.Add(MultipleLanguages);
             languages.Add(MundaLanguages);
             languages.Add(Creek);
@@ -903,8 +901,6 @@ namespace Gnosis.Core.Iso
         public static readonly Iso639Language Mohawk = new Iso639Language("moh","Mohawk");
         public static readonly Iso639Language Mongolian = new Iso639Language("mon","mn","Mongolian");
         public static readonly Iso639Language Mossi = new Iso639Language("mos","Mossi");
-        public static readonly Iso639Language Mao = new Iso639Language("mao","mri","mi","Maori");
-        public static readonly Iso639Language May = new Iso639Language("may","msa","ms","Malay");
         public static readonly Iso639Language MultipleLanguages = new Iso639Language("mul","Multiple languages");
         public static readonly Iso639Language MundaLanguages = new Iso639Language("mun","Munda languages");
         public static readonly Iso639Language Creek = new Iso639Language("mus","Creek");
