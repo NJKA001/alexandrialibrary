@@ -132,7 +132,6 @@
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Extensions\UIElementExtensions.cs" />
     <Compile Include="Helpers\Logger.cs" />
-    <Compile Include="Helpers\Rfc822DateTime.cs" />
     <Compile Include="Helpers\VisualHelper.cs" />
     <Compile Include="Models\ChildBase.cs" />
     <Compile Include="Models\Devices\IDevice.cs" />

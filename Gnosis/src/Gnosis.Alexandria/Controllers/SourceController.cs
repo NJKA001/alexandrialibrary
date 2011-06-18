@@ -200,7 +200,7 @@ namespace Gnosis.Alexandria.Controllers
                 if (lastBuildDateNode != null)
                 {
                     var lastBuildDate = DateTime.Now;
-                    Rfc822DateTime.TryParse(lastBuildDateNode.InnerText, out lastBuildDate);
+                    Gnosis.Core.W3c.Rfc822DateTime.TryParse(lastBuildDateNode.InnerText, out lastBuildDate);
                     source.Date = lastBuildDate;
                     isUpdated = true;
                 }
@@ -237,7 +237,7 @@ namespace Gnosis.Alexandria.Controllers
                         {
                             var date = source.Date;
                             if (dateNode != null)
-                                Rfc822DateTime.TryParse(dateNode.InnerText, out date);
+                                Gnosis.Core.W3c.Rfc822DateTime.TryParse(dateNode.InnerText, out date);
 
                             var child = source.Children.Where(x => x.Path == path).FirstOrDefault();
 

@@ -97,6 +97,7 @@
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="UriExtensions.cs" />
     <Compile Include="ValueInitialState.cs" />
+    <Compile Include="W3c\Rfc822DateTime.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

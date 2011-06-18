@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Globalization;
 
-namespace Gnosis.Alexandria.Helpers
+namespace Gnosis.Core.W3c
 {
     /// <summary>
     /// Provides methods for converting <see cref="DateTime"/> structures 

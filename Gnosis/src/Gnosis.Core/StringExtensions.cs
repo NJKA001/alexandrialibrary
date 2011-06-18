@@ -5,6 +5,8 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
+using Gnosis.Core.W3c;
+
 namespace Gnosis.Core
 {
     public static class StringExtensions
@@ -921,6 +923,13 @@ namespace Gnosis.Core
             }
 
             return result.ToString();
+        }
+
+        public static DateTime AsRfc822DateTime(this string self)
+        {
+            var date = DateTime.MinValue;
+            Rfc822DateTime.TryParse(self, out date);
+            return date;
         }
 
         public static bool StartsWith(this string self, StringComparison comparison, params string[] strings)

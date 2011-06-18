@@ -10,8 +10,9 @@ namespace Gnosis.Core.Iso
     /// </summary>
     public interface ILanguage639
     {
-        string Alpha2Code { get; }
         string Alpha3Code { get; }
+        string Alpha3TermCode { get; }
+        string Alpha2Code { get; }
         string Name { get; }
     }
 }
