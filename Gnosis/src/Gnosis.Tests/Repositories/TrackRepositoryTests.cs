@@ -28,7 +28,7 @@ namespace Gnosis.Tests.Repositories
         private const string location = @"C:\Users\Dan\Music\Tool\Undertow\01 Intolerance.mp3";
         private const string mediaType = "audio/mpeg";
         private const string album = "Undertow";
-        private const string artists = "Tool";
+        private IEnumerable<string> artists = new List<string> { "Tool" };
         private const string title = "Intolerance";
         private const string comment = "First track on their first LP";
         private const int discCount = 1;
@@ -80,7 +80,7 @@ namespace Gnosis.Tests.Repositories
             track.Album = album;
             track.AlbumSort = album;
             track.Artists = artists;
-            track.ArtistsSort = artists;
+            track.ArtistsSort = artists.ToNamesString();
             track.Comment = comment;
             track.DiscCount = discCount;
             track.DiscNumber = discNumber;
@@ -166,7 +166,7 @@ namespace Gnosis.Tests.Repositories
             Assert.AreEqual(album, track.Album);
             Assert.AreEqual(album, lookupTrack.AlbumSort);
             Assert.AreEqual(artists, lookupTrack.Artists);
-            Assert.AreEqual(artists, lookupTrack.ArtistsSort);
+            Assert.AreEqual(artists.ToNamesString(), lookupTrack.ArtistsSort);
             Assert.AreEqual(comment, lookupTrack.Comment);
             Assert.AreEqual(discCount, lookupTrack.DiscCount);
             Assert.AreEqual(discNumber, lookupTrack.DiscNumber);
@@ -215,7 +215,7 @@ namespace Gnosis.Tests.Repositories
         {
             const int trackNumber = 4;
             const string title = "Bottom";
-            const string artists = "Tool; Henry Rollins";
+            IEnumerable<string> artists = new List<string> { "Tool", "Henry Rollins" };
             const string composers = "Tool; Henry Rollins";
             const string comment = "Guest vocals by Henry Rollins";
             const int durationSeconds = 433;

@@ -222,10 +222,20 @@ namespace Gnosis.Alexandria.Models
 
         protected void RefreshHashCodes(string value, Expression<Func<T, IEnumerable<IHashCode>>> property)
         {
-            RefreshHashCodes(value, property, null);
+            RefreshHashCodes(new List<string> { value }, property, null);
         }
 
         protected void RefreshHashCodes(string value, Expression<Func<T, IEnumerable<IHashCode>>> property, params Uri[] schemesToUse)
+        {
+            RefreshHashCodes(new List<string> { value }, property, schemesToUse);
+        }
+
+        protected void RefreshHashCodes(IEnumerable<string> values, Expression<Func<T, IEnumerable<IHashCode>>> property)
+        {
+            RefreshHashCodes(values, property, null);
+        }
+
+        protected void RefreshHashCodes(IEnumerable<string> values, Expression<Func<T, IEnumerable<IHashCode>>> property, params Uri[] schemesToUse)
         {
             if (hashFunctions.Count == 0)
                 throw new InvalidOperationException("No hash functions defined for this entity");
@@ -241,16 +251,17 @@ namespace Gnosis.Alexandria.Models
             var addAction = hashInitializers[propertyInfo.Name].Item1;
             var removeAction = hashInitializers[propertyInfo.Name].Item2;
 
-            foreach (var scheme in hashFunctions.Keys)
+
+            foreach (var scheme in hashFunctions.Keys.Where(x => schemesToUse == null || schemesToUse.Contains(x)))
             {
-                if (schemesToUse == null || schemesToUse.Contains(scheme))
+                var oldCodes = new List<IHashCode>();
+                oldCodes.AddRange(source.Where(hashCode => hashCode.Scheme == scheme));
+
+                foreach (var hashCode in oldCodes)
+                    removeAction(hashCode);
+
+                foreach (var value in values)
                 {
-                    var oldCodes = new List<IHashCode>();
-                    oldCodes.AddRange(source.Where(hashCode => hashCode.Scheme == scheme));
-
-                    foreach (var hashCode in oldCodes)
-                        removeAction(hashCode);
-
                     var rootCode = hashFunctions[scheme](value);
                     if (rootCode != null)
                     {

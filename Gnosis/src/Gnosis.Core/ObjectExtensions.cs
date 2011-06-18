@@ -79,40 +79,37 @@ namespace Gnosis.Core
             return ((string)self.ToString()).ToNames();
         }
 
-        public static IParameter ToParameter(this object self, string name)
-        {
-            var paramName = "@" + Guid.NewGuid().ToString().Replace("-", string.Empty); //name.StartsWith("@") ? name : "@" + name;
-
-            if (self == null)
-                return new Parameter(paramName);
-
-            if (self is IEntity)
-                return new Parameter(paramName, self as IEntity);
-            if (self is IValue)
-                return new Parameter(paramName, self as IValue);
-            if (self is IIso639Language)
-                return new Parameter(paramName, self as IIso639Language);
-            if (self is IEnumerable<IIso639Language>)
-                return new Parameter(paramName, self as IEnumerable<IIso639Language>);
-            if (self.GetType() == typeof(bool))
-                return new Parameter(paramName, (bool)self);
-            if (self.GetType() == typeof(Guid))
-                return new Parameter(paramName, (Guid)self);
-            if (self.GetType() == typeof(Uri))
-                return new Parameter(paramName, self as Uri);
-            if (self.GetType() == typeof(DateTime))
-                return new Parameter(paramName, (DateTime)self);
-            if (self.GetType() == typeof(TimeSpan))
-                return new Parameter(paramName, (TimeSpan)self);
-            if (self.GetType().IsEnum)
-                return new Parameter(paramName, (int)self, false);
-
-            return new Parameter(paramName, self, false);
-        }
-
         public static IParameter ToParameter(this object self)
         {
-            return self.ToParameter("@" + Guid.NewGuid().ToString().Replace("-", string.Empty));
+            var name = "@" + Guid.NewGuid().ToString().Replace("-", string.Empty);
+
+            if (self == null)
+                return new Parameter(name);
+
+            if (self is IEntity)
+                return new Parameter(name, self as IEntity);
+            if (self is IValue)
+                return new Parameter(name, self as IValue);
+            if (self is IIso639Language)
+                return new Parameter(name, self as IIso639Language);
+            if (self is IEnumerable<IIso639Language>)
+                return new Parameter(name, self as IEnumerable<IIso639Language>);
+            if (self is IEnumerable<string>)
+                return new Parameter(name, self as IEnumerable<string>);
+            if (self.GetType() == typeof(bool))
+                return new Parameter(name, (bool)self);
+            if (self.GetType() == typeof(Guid))
+                return new Parameter(name, (Guid)self);
+            if (self.GetType() == typeof(Uri))
+                return new Parameter(name, self as Uri);
+            if (self.GetType() == typeof(DateTime))
+                return new Parameter(name, (DateTime)self);
+            if (self.GetType() == typeof(TimeSpan))
+                return new Parameter(name, (TimeSpan)self);
+            if (self.GetType().IsEnum)
+                return new Parameter(name, (int)self, false);
+
+            return new Parameter(name, self, false);
         }
 
         public static TimeSpan ToTimeSpan(this object self)

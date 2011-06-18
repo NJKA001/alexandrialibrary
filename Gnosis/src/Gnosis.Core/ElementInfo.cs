@@ -38,6 +38,21 @@ namespace Gnosis.Core
             get { return property.Name == "Id" && property.PropertyType == typeof(Guid); }
         }
 
+        public bool IsTimeStamp
+        {
+            get { return property.Name == "TimeStamp" && property.PropertyType == typeof(DateTime); }
+        }
+
+        public bool IsParentIdentifier
+        {
+            get { return property.Name == "Parent" && property.PropertyType == typeof(Guid); }
+        }
+
+        public bool IsSequence
+        {
+            get { return property.Name == "Sequence" && property.PropertyType == typeof(uint); }
+        }
+
         public bool IsReadOnly
         {
             get { return !property.CanWrite; }

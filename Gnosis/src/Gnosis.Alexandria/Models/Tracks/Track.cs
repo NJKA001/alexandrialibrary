@@ -26,11 +26,11 @@ namespace Gnosis.Alexandria.Models.Tracks
             AddInitializer(x => this.album = x.ToString(), track => track.Album);
             AddInitializer(x => this.albumSort = x.ToString(), track => track.AlbumSort);
             AddInitializer(x => this.albumSubtitle = x.ToString(), track => track.AlbumSubtitle);
-            AddInitializer(x => this.artists = x.ToString(), track => track.Artists);
+            AddInitializer(x => this.artists = x.ToNames(), track => track.Artists);
             AddInitializer(x => this.artistsSort = x.ToString(), track => track.ArtistsSort);
-            AddInitializer(x => this.albumArtists = x.ToString(), track => track.AlbumArtists);
+            AddInitializer(x => this.albumArtists = x.ToNames(), track => track.AlbumArtists);
             AddInitializer(x => this.composers = x.ToString(), track => track.Composers);
-            AddInitializer(x => this.conductors = x.ToString(), track => track.Conductors);
+            AddInitializer(x => this.conductor = x.ToString(), track => track.Conductor);
             AddInitializer(x => this.genres = x.ToString(), track => track.Genres);
             AddInitializer(x => this.moods = x.ToString(), track => track.Moods);
             AddInitializer(value => this.languages = value.ToIso639Languages(), track => track.Languages);
@@ -93,11 +93,11 @@ namespace Gnosis.Alexandria.Models.Tracks
         private string album = "Unknown Album";
         private string albumSort = "Unknown Album";
         private string albumSubtitle = string.Empty;
-        private string artists = "Unknown Artist";
+        private IEnumerable<string> artists = new List<string>{ "Unknown Artist" };
         private string artistsSort = "Unknown Artist";
-        private string albumArtists = string.Empty;
+        private IEnumerable<string> albumArtists = new List<string>();
         private string composers = string.Empty;
-        private string conductors = string.Empty;
+        private string conductor = string.Empty;
         private string genres = string.Empty;
         private string moods = string.Empty;
         private IEnumerable<IIso639Language> languages = new List<IIso639Language>();
@@ -379,7 +379,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             }
         }
 
-        public string Artists
+        public IEnumerable<string> Artists
         {
             get { return artists; }
             set
@@ -404,7 +404,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             }
         }
 
-        public string AlbumArtists
+        public IEnumerable<string> AlbumArtists
         {
             get { return albumArtists; }
             set
@@ -430,14 +430,14 @@ namespace Gnosis.Alexandria.Models.Tracks
             }
         }
 
-        public string Conductors
+        public string Conductor
         {
-            get { return conductors; }
+            get { return conductor; }
             set
             {
-                if (value != null && value != conductors)
+                if (value != null && value != conductor)
                 {
-                    Change(() => conductors = value, x => x.Conductors);
+                    Change(() => conductor = value, x => x.Conductor);
                     RefreshHashCodes(value, x => x.ConductorHashCodes);
                 }
             }
@@ -902,11 +902,11 @@ namespace Gnosis.Alexandria.Models.Tracks
             Album = tag.Album;
             AlbumSort = tag.AlbumSort;
             AlbumSubtitle = tag.AlbumSubtitle;
-            Artists = tag.JoinedPerformers;
+            Artists = tag.Performers.AsEnumerable();
             ArtistsSort = tag.ArtistsSort;
-            AlbumArtists = tag.JoinedAlbumArtists;
+            AlbumArtists = tag.AlbumArtists.AsEnumerable();
             Composers = tag.JoinedComposers;
-            Conductors = tag.Conductor;
+            Conductor = tag.Conductor;
             Genres = tag.JoinedGenres;
             Moods = tag.JoinedMoods;
             Languages = !string.IsNullOrEmpty(tag.Languages) ? tag.Languages.Split('/').Select(code => Iso639Language.GetLanguageByCode(code)) : new List<IIso639Language> { Iso639Language.Undetermined };
@@ -945,11 +945,11 @@ namespace Gnosis.Alexandria.Models.Tracks
             tag.Album = Album;
             tag.AlbumSort = AlbumSort;
             tag.AlbumSubtitle = AlbumSubtitle;
-            tag.Performers = Artists.ToNames().ToArray();
+            tag.Performers = Artists.ToArray();
             tag.ArtistsSort = ArtistsSort;
-            tag.AlbumArtists = AlbumArtists.ToNames().ToArray();
+            tag.AlbumArtists = AlbumArtists.ToArray();
             tag.Composers = Composers.ToNames().ToArray();
-            tag.Conductor = Conductors;
+            tag.Conductor = Conductor;
             tag.Genres = Genres.Split('/');
             tag.Moods = Moods.Split('/');
             tag.Languages = string.Join("/", Languages.Select(lang => lang.Alpha3Code));

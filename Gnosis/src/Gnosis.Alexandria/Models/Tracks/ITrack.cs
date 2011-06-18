@@ -21,12 +21,12 @@ namespace Gnosis.Alexandria.Models.Tracks
         string AlbumSort { get; set; }
         string AlbumSubtitle { get; set; }
         
-        string Artists { get; set; }
+        IEnumerable<string> Artists { get; set; }
         string ArtistsSort { get; set; }
-        string AlbumArtists { get; set; }
+        IEnumerable<string> AlbumArtists { get; set; }
 
         string Composers { get; set; }
-        string Conductors { get; set; }
+        string Conductor { get; set; }
         string Genres { get; set; }
         string Moods { get; set; }
         IEnumerable<IIso639Language> Languages { get; set; }

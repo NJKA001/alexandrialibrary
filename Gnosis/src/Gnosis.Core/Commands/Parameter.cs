@@ -37,16 +37,6 @@ namespace Gnosis.Core.Commands
         {
         }
 
-        public Parameter(string name, IEnumerable<string> values)
-            : this(name, values.ToNamesString(), true)
-        {
-        }
-
-        public Parameter(string name, IEnumerable<IIso639Language> languages)
-            : this(name, languages.ToNamesString(lang => lang.Alpha3Code), true)
-        {
-        }
-
         public Parameter(string name, Guid value)
             : this(name, value.ToString(), false)
         {
@@ -69,6 +59,16 @@ namespace Gnosis.Core.Commands
 
         public Parameter(string name, TimeSpan value)
             : this(name, value.Ticks, false)
+        {
+        }
+
+        public Parameter(string name, IEnumerable<string> values)
+            : this(name, values.ToNamesString(), true)
+        {
+        }
+
+        public Parameter(string name, IEnumerable<IIso639Language> languages)
+            : this(name, languages.ToNamesString(lang => lang.Alpha3Code), true)
         {
         }
 

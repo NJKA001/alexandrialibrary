@@ -44,8 +44,8 @@ namespace Gnosis.Core.Batches
 
             foreach (var element in entityInfo.Elements)
             {
-                var value = element.Name == "TimeStamp" ? timeStamp : element.GetValue(entity);
-                var parameter = value.ToParameter(entityInfo.Name + "_" + element.Name);
+                var value = element.IsTimeStamp ? timeStamp : element.GetValue(entity);
+                var parameter = value.ToParameter();
                 statement.Add(element.Name, parameter.Name);
                 builder.AddParameter(parameter);
             }
@@ -55,7 +55,7 @@ namespace Gnosis.Core.Batches
                 foreach (var element in dataType.Elements)
                 {
                     var value = dataType.GetValue(element, entity);
-                    var parameter = value.ToParameter(dataType.Name + "_" + element.Name);
+                    var parameter = value.ToParameter();
                     statement.Add(element.Name, parameter.Name);
                     builder.AddParameter(parameter);
                 }
@@ -77,7 +77,7 @@ namespace Gnosis.Core.Batches
             foreach (var element in childInfo.Elements)
             {
                 var value = element.Name == "TimeStamp" ? timeStamp : element.GetValue(child);
-                var parameter = value.ToParameter(childInfo.Name + "_" + element.Name);
+                var parameter = value.ToParameter();
                 statement.Add(element.Name, parameter.Name);
                 
                 builder.AddParameter(parameter);
@@ -88,7 +88,7 @@ namespace Gnosis.Core.Batches
                 foreach (var element in dataType.Elements)
                 {
                     var value = dataType.GetValue(element, child);
-                    var parameter = value.ToParameter(dataType.Name + "_" + element.Name);
+                    var parameter = value.ToParameter();
                     statement.Add(element.Name, parameter.Name);
                     builder.AddParameter(parameter);
                 }
@@ -109,20 +109,19 @@ namespace Gnosis.Core.Batches
         private void AddEntityUpdateStatement(IEntity entity, EntityInfo entityInfo, DateTime timeStamp)
         {
             var builder = new CommandBuilder();
-            var idParameter = entity.Id.ToParameter(entityInfo.Name + "_" + entityInfo.Identifier.Name);
+            var idParameter = entity.Id.ToParameter();
             builder.AddParameter(idParameter);
             var whereClause = string.Format("{0}.{1} = {2}", entityInfo.Name, entityInfo.Identifier.Name, idParameter.Name);
             var statement = new UpdateStatement(entityInfo.Name, whereClause);
 
-            const string tsName = "TimeStamp";
-            var timeStampParameter = timeStamp.ToParameter(tsName);
-            statement.Set(tsName, timeStampParameter.Name);
+            var timeStampParameter = timeStamp.ToParameter();
+            statement.Set(entityInfo.TimeStamp.Name, timeStampParameter.Name);
             builder.AddParameter(timeStampParameter);
 
             foreach (var column in entityInfo.Elements.Where(x => !x.IsReadOnly))
             {
                 var value = column.GetValue(entity);
-                var parameter = value.ToParameter(entityInfo.Name + "_" + column.Name);
+                var parameter = value.ToParameter();
                 statement.Set(column.Name, parameter.Name);
                 builder.AddParameter(parameter);
             }
@@ -132,7 +131,7 @@ namespace Gnosis.Core.Batches
                 foreach (var element in dataType.Elements)
                 {
                     var value = dataType.GetValue(element, entity);
-                    var parameter = value.ToParameter(dataType.Name + "_" + element.Name);
+                    var parameter = value.ToParameter();
                     statement.Set(element.Name, parameter.Name);
                     builder.AddParameter(parameter);
                 }
@@ -150,20 +149,19 @@ namespace Gnosis.Core.Batches
         {
             var builder = new CommandBuilder();
 
-            var idParameter = child.Id.ToParameter(childInfo.Name + "_" + childInfo.Identifier.Name);
+            var idParameter = child.Id.ToParameter();
             builder.AddParameter(idParameter);
             var whereClause = string.Format("{0}.{1} = {2}", childInfo.Name, childInfo.Identifier.Name, idParameter.Name);
             var statement = new UpdateStatement(childInfo.Name, whereClause);
 
-            var tsName = "TimeStamp";
-            var timeStampParameter = timeStamp.ToParameter(tsName);
-            statement.Set(tsName, timeStampParameter.Name);
+            var timeStampParameter = timeStamp.ToParameter();
+            statement.Set(childInfo.TimeStamp.Name, timeStampParameter.Name);
             builder.AddParameter(timeStampParameter);
 
             foreach (var element in childInfo.Elements.Where(x => !x.IsReadOnly))
             {
                 var value = element.GetValue(child);
-                var parameter = value.ToParameter(childInfo.Name + "_" + element.Name);
+                var parameter = value.ToParameter();
                 statement.Set(element.Name, parameter.Name);
                 builder.AddParameter(parameter);
             }
@@ -173,7 +171,7 @@ namespace Gnosis.Core.Batches
                 foreach (var element in dataType.Elements)
                 {
                     var value = dataType.GetValue(element, child);
-                    var parameter = value.ToParameter(dataType.Name + "_" + element.Name);
+                    var parameter = value.ToParameter();
                     statement.Set(element.Name, parameter.Name);
                     builder.AddParameter(parameter);
                 }
@@ -199,7 +197,7 @@ namespace Gnosis.Core.Batches
             foreach (var element in valueInfo.Elements)
             {
                 var result = element.GetValue(value);
-                var parameter = result.ToParameter(valueInfo.Name + "_" + element.Name);
+                var parameter = result.ToParameter();
                 statement.Add(element.Name, parameter.Name);
                 builder.AddParameter(parameter);
             }
@@ -218,13 +216,13 @@ namespace Gnosis.Core.Batches
         {
             var builder = new CommandBuilder();
 
-            var idParameter = value.Id.ToParameter(valueInfo.Name + "_" + valueInfo.Identifer.Name);
+            var idParameter = value.Id.ToParameter();
             builder.AddParameter(idParameter);
             var whereClause = string.Format("{0}.{1} = {2}", valueInfo.Name, valueInfo.Identifer.Name, idParameter.Name);
             var statement = new UpdateStatement(valueInfo.Name, whereClause);
 
             var seq = valueInfo.Sequence.GetValue(value);
-            var sequenceParameter = seq.ToParameter(valueInfo.Sequence.Name);
+            var sequenceParameter = seq.ToParameter();
             statement.Set(valueInfo.Sequence.Name, sequenceParameter.Name);
             builder.AddParameter(sequenceParameter);
 

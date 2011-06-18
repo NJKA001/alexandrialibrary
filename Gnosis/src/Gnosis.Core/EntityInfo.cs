@@ -109,7 +109,7 @@ namespace Gnosis.Core
 
         public ElementInfo Identifier
         {
-            get { return elements.Where(x => x.Name == "Id").FirstOrDefault(); }
+            get { return elements.Where(elem => elem.IsPrimaryKey).FirstOrDefault(); }
         }
 
         public ElementInfo ParentIdentifier
@@ -120,6 +120,11 @@ namespace Gnosis.Core
         public ElementInfo Sequence
         {
             get { return elements.Where(x => x.Name == "Sequence").FirstOrDefault(); }
+        }
+
+        public ElementInfo TimeStamp
+        {
+            get { return elements.Where(elem => elem.IsTimeStamp).FirstOrDefault(); }
         }
 
         public IEnumerable<ElementInfo> Elements

@@ -29,12 +29,12 @@ namespace Gnosis.Tests.Models
         const string albumSort = "Sale El Sol";
         const string albumSubtitle = "The Sun Comes Out";
 
-        const string artists = "Shakira; Dizzee Rascal";
+        IEnumerable<string> artists = new List<string> { "Shakira", "Dizzee Rascal" };
         const string artistsSort = "Shakira; Dizzee Rascal";
-        const string albumArtists = "Shakira";
+        IEnumerable<string> albumArtists = new List<string> { "Shakira" };
 
         const string composers = "None";
-        const string conductors = "None";
+        const string conductor = "None";
         const string genres = "Latin Pop; Merengue; Rock en Español";
         const string moods = "Spicy/Cheerful/Fin/Party/Sensual/Sexy/Confident/Energetic/Stylish/Carefree/Playful";
         private IEnumerable<IIso639Language> languages = new List<IIso639Language>() { Iso639Language.Spanish, Iso639Language.English };
@@ -141,12 +141,12 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(albumSort, tag.AlbumSort);
             Assert.AreEqual(albumSubtitle, tag.AlbumSubtitle);
 
-            Assert.AreEqual(artists, tag.JoinedPerformers);
+            Assert.AreEqual(artists, tag.Performers.AsEnumerable());
             Assert.AreEqual(artistsSort, tag.ArtistsSort);
-            Assert.AreEqual(albumArtists, tag.JoinedAlbumArtists);
+            Assert.AreEqual(albumArtists, tag.AlbumArtists.AsEnumerable());
 
             Assert.AreEqual(composers, tag.JoinedComposers);
-            Assert.AreEqual(conductors, tag.Conductor);
+            Assert.AreEqual(conductor, tag.Conductor);
             Assert.AreEqual(genres, tag.JoinedGenres);
             Assert.AreEqual(moods, tag.JoinedMoods);
             Assert.AreEqual(languages, tag.Languages.Split('/').Select(code => Iso639Language.GetLanguageByCode(code)));
@@ -318,7 +318,7 @@ Mucho antes";
             Assert.AreEqual(albumArtists, track.AlbumArtists);
 
             Assert.AreEqual(composers, track.Composers);
-            Assert.AreEqual(conductors, track.Conductors);
+            Assert.AreEqual(conductor, track.Conductor);
             Assert.AreEqual(genres, track.Genres);
             Assert.AreEqual(moods, track.Moods);
             Assert.AreEqual(languages, track.Languages);
