@@ -148,7 +148,7 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(composers, tag.JoinedComposers);
             Assert.AreEqual(conductor, tag.Conductor);
             Assert.AreEqual(genres, tag.JoinedGenres);
-            Assert.AreEqual(moods, tag.JoinedMoods);
+            Assert.AreEqual(moods, tag.Moods);
             Assert.AreEqual(languages, tag.Languages.Split('/').Select(code => Iso639Language.GetLanguageByCode(code)));
 
             Assert.AreEqual(recordingDate, tag.RecordingDate);

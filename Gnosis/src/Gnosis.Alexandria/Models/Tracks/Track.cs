@@ -908,7 +908,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             Composers = tag.JoinedComposers;
             Conductor = tag.Conductor;
             Genres = tag.JoinedGenres;
-            Moods = tag.JoinedMoods;
+            Moods = tag.Moods;
             Languages = !string.IsNullOrEmpty(tag.Languages) ? tag.Languages.Split('/').Select(code => Iso639Language.GetLanguageByCode(code)) : new List<IIso639Language> { Iso639Language.Undetermined };
             RecordingDate = tag.RecordingDate;
             ReleaseDate = tag.ReleaseDate;
@@ -951,7 +951,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             tag.Composers = Composers.ToNames().ToArray();
             tag.Conductor = Conductor;
             tag.Genres = Genres.Split('/');
-            tag.Moods = Moods.Split('/');
+            tag.Moods = Moods;
             tag.Languages = string.Join("/", Languages.Select(lang => lang.Alpha3Code));
             tag.RecordingDate = RecordingDate;
             tag.ReleaseDate = ReleaseDate;

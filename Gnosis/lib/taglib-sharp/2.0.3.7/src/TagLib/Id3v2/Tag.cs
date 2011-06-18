@@ -1303,14 +1303,9 @@ namespace TagLib.Id3v2 {
 			}
 		}
 
-        public string JoinedMoods
+        public string Moods
         {
-            get { return string.Join("; ", Moods); }
-        }
-
-        public string[] Moods
-        {
-            get { return GetTextAsArray(FrameType.TMOO); }
+            get { return GetTextAsString(FrameType.TMOO); }
             set { SetTextFrame(FrameType.TMOO, value); }
         }
 
