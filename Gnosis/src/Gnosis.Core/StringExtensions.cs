@@ -966,7 +966,7 @@ namespace Gnosis.Core
             if (string.IsNullOrEmpty(self))
                 return new List<string> { string.Empty };
 
-            return self.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            return self.Split(new string[]{"; "}, StringSplitOptions.RemoveEmptyEntries);
         }
 
         public static IEnumerable<string> ToTokens(this string self)

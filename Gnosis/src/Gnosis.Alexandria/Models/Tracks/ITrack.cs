@@ -25,17 +25,17 @@ namespace Gnosis.Alexandria.Models.Tracks
         string ArtistsSort { get; set; }
         IEnumerable<string> AlbumArtists { get; set; }
 
-        string Composers { get; set; }
-        string Conductor { get; set; }
-        string Genres { get; set; }
-        string Moods { get; set; }
+        IEnumerable<string> Composers { get; set; }
+        IEnumerable<string> Genres { get; set; }
+        IEnumerable<string> Moods { get; set; }
         IEnumerable<IIso639Language> Languages { get; set; }
-        
+        string Conductor { get; set; }
+
         DateTime RecordingDate { get; set; }
         DateTime ReleaseDate { get; set; }
 
         string OriginalTitle { get; set; }
-        string OriginalArtists { get; set; }
+        IEnumerable<string> OriginalArtists { get; set; }
         DateTime OriginalReleaseDate { get; set; }
 
         uint TrackNumber { get; set; }

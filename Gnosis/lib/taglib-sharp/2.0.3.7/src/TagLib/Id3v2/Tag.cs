@@ -1061,11 +1061,6 @@ namespace TagLib.Id3v2 {
             set { SetTextFrame(FrameType.TIT3, value); }
         }
 
-        public string JoinedOriginalArtists
-        {
-            get { return JoinGroup(OriginalArtists); }
-        }
-
         public string OriginalFilename
         {
             get { return GetTextAsString(FrameType.TOFN); }
@@ -1078,10 +1073,10 @@ namespace TagLib.Id3v2 {
             set { SetTextFrame(FrameType.TOAL, value); }
         }
 
-        public string[] OriginalArtists
+        public IEnumerable<string> OriginalArtists
         {
             get { return GetTextAsArray(FrameType.TOPE); }
-            set { SetTextFrame(FrameType.TOPE, value); }
+            set { SetTextFrame(FrameType.TOPE, value.ToArray()); }
         }
 
         public DateTime OriginalReleaseDate
@@ -1098,10 +1093,10 @@ namespace TagLib.Id3v2 {
             }
         }
 
-        public string Languages
+        public IEnumerable<string> Languages
         {
-            get { return GetTextAsString(FrameType.TLAN); }
-            set { SetTextFrame(FrameType.TLAN, value); }
+            get { return GetTextAsString(FrameType.TLAN) != null ? GetTextAsString(FrameType.TLAN).Split('/') : new string[0]; }
+            set { SetTextFrame(FrameType.TLAN, value.ToArray()); }
         }
 
 		/// <summary>
@@ -1122,6 +1117,12 @@ namespace TagLib.Id3v2 {
 			get {return GetTextAsArray (FrameType.TPE1);}
 			set {SetTextFrame (FrameType.TPE1, value);}
 		}
+
+        public IEnumerable<string> ArtistsList
+        {
+            get { return Performers; }
+            set { Performers = value.ToArray(); }
+        }
 
         public string ArtistsSort
         {
@@ -1148,7 +1149,13 @@ namespace TagLib.Id3v2 {
 			get {return GetTextAsArray (FrameType.TPE2);}
 			set {SetTextFrame (FrameType.TPE2, value);}
 		}
-		
+
+        public IEnumerable<string> AlbumArtistsList
+        {
+            get { return AlbumArtists; }
+            set { AlbumArtists = value.ToArray(); }
+        }
+
 		/// <summary>
 		///    Gets and sets the composers of the media represented by
 		///    the current instance.
@@ -1166,7 +1173,13 @@ namespace TagLib.Id3v2 {
 			get {return GetTextAsArray (FrameType.TCOM);}
 			set {SetTextFrame (FrameType.TCOM, value);}
 		}
-		
+
+        public IEnumerable<string> ComposersList
+        {
+            get { return Composers; }
+            set { Composers = value.ToArray(); }
+        }
+
 		/// <summary>
 		///    Gets and sets the album of the media represented by the
 		///    current instance.
@@ -1303,10 +1316,16 @@ namespace TagLib.Id3v2 {
 			}
 		}
 
-        public string Moods
+        public IEnumerable<string> GenresList
         {
-            get { return GetTextAsString(FrameType.TMOO); }
-            set { SetTextFrame(FrameType.TMOO, value); }
+            get { return Genres; }
+            set { Genres = value.ToArray(); }
+        }
+
+        public IEnumerable<string> Moods
+        {
+            get { return GetTextAsString(FrameType.TMOO) != null ? GetTextAsString(FrameType.TMOO).Split('/') : new string[0]; }
+            set { SetTextFrame(FrameType.TMOO, string.Join("/", value)); }
         }
 
 		/// <summary>

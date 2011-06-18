@@ -33,14 +33,14 @@ namespace Gnosis.Tests.Models
         const string artistsSort = "Shakira; Dizzee Rascal";
         IEnumerable<string> albumArtists = new List<string> { "Shakira" };
 
-        const string composers = "None";
+        IEnumerable<string> composers = new List<string> { "None" };
+        IEnumerable<string> genres = new List<string> { "Latin Pop", "Merengue", "Rock en Español" };
+        IEnumerable<string> moods = new List<string> { "Spicy", "Cheerful", "Fin", "Party", "Sensual", "Sexy", "Confident", "Energetic", "Stylish", "Carefree", "Playful" };
+        IEnumerable<IIso639Language> languages = new List<IIso639Language>() { Iso639Language.Spanish, Iso639Language.English };
         const string conductor = "None";
-        const string genres = "Latin Pop; Merengue; Rock en Español";
-        const string moods = "Spicy/Cheerful/Fin/Party/Sensual/Sexy/Confident/Energetic/Stylish/Carefree/Playful";
-        private IEnumerable<IIso639Language> languages = new List<IIso639Language>() { Iso639Language.Spanish, Iso639Language.English };
 
         const string originalTitle = "Loca Con Su Tigre";
-        const string originalArtists = "El Cata";
+        IEnumerable<string> originalArtists = new List<string> { "El Cata" };
         DateTime originalReleaseDate = new DateTime(2009, 10, 20);
 
         DateTime releaseDate = new DateTime(2010, 10, 15);
@@ -141,21 +141,21 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(albumSort, tag.AlbumSort);
             Assert.AreEqual(albumSubtitle, tag.AlbumSubtitle);
 
-            Assert.AreEqual(artists, tag.Performers.AsEnumerable());
+            Assert.AreEqual(artists, tag.ArtistsList);
             Assert.AreEqual(artistsSort, tag.ArtistsSort);
-            Assert.AreEqual(albumArtists, tag.AlbumArtists.AsEnumerable());
+            Assert.AreEqual(albumArtists, tag.AlbumArtistsList);
 
-            Assert.AreEqual(composers, tag.JoinedComposers);
-            Assert.AreEqual(conductor, tag.Conductor);
-            Assert.AreEqual(genres, tag.JoinedGenres);
+            Assert.AreEqual(composers, tag.ComposersList);
+            Assert.AreEqual(genres, tag.GenresList);
             Assert.AreEqual(moods, tag.Moods);
-            Assert.AreEqual(languages, tag.Languages.Split('/').Select(code => Iso639Language.GetLanguageByCode(code)));
+            Assert.AreEqual(languages, tag.Languages.Select(code => Iso639Language.GetLanguageByCode(code)));
+            Assert.AreEqual(conductor, tag.Conductor);
 
             Assert.AreEqual(recordingDate, tag.RecordingDate);
             Assert.AreEqual(releaseDate, tag.ReleaseDate);
 
             Assert.AreEqual(originalTitle, tag.OriginalTitle);
-            Assert.AreEqual(originalArtists, tag.JoinedOriginalArtists);
+            Assert.AreEqual(originalArtists, tag.OriginalArtists);
             Assert.AreEqual(originalReleaseDate, tag.OriginalReleaseDate);
 
             Assert.AreEqual(trackNumber, tag.Track);
@@ -318,10 +318,10 @@ Mucho antes";
             Assert.AreEqual(albumArtists, track.AlbumArtists);
 
             Assert.AreEqual(composers, track.Composers);
-            Assert.AreEqual(conductor, track.Conductor);
             Assert.AreEqual(genres, track.Genres);
             Assert.AreEqual(moods, track.Moods);
             Assert.AreEqual(languages, track.Languages);
+            Assert.AreEqual(conductor, track.Conductor);
 
             Assert.AreEqual(recordingDate, track.RecordingDate);
             Assert.AreEqual(releaseDate, track.ReleaseDate);

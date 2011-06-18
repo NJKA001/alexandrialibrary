@@ -37,9 +37,9 @@ namespace Gnosis.Tests.Repositories
         private DateTime releaseDate = new DateTime(1993, 4, 6);
         private DateTime recodingDate = new DateTime(1992, 1, 1);
         private DateTime encodingDate = new DateTime(2000, 5, 17);
-        private const string genres = "Rock; Metal; Alternative Metal; Heavy Metal; Progressive Metal";
+        private IEnumerable<string> genres = new List<string> {"Rock", "Metal", "Alternative Metal", "Heavy Metal", "Progressive Metal" };
         private IEnumerable<IIso639Language> languages = new List<IIso639Language>() { Iso639Language.English };
-        private const string moods = "Angry; Angst-Rodden; Bleak; Harsh; Menacing; Suffocating; Confrontational; Eerie; Fierce; Gloomy; Intense";
+        private IEnumerable<string> moods = new List<string> { "Angry", "Angst-Ridden", "Bleak", "Harsh", "Menacing", "Suffocating", "Confrontational", "Eerie", "Fierce", "Gloomy", "Intense" };
         private ulong playCount = 397;
         private const int playlistDelaySeconds = 2;
         private const int trackCount = 69;
@@ -216,7 +216,7 @@ namespace Gnosis.Tests.Repositories
             const int trackNumber = 4;
             const string title = "Bottom";
             IEnumerable<string> artists = new List<string> { "Tool", "Henry Rollins" };
-            const string composers = "Tool; Henry Rollins";
+            IEnumerable<string> composers = new List<string> { "Tool", "Henry Rollins" };
             const string comment = "Guest vocals by Henry Rollins";
             const int durationSeconds = 433;
             

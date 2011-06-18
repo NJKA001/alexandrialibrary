@@ -17,41 +17,42 @@ namespace Gnosis.Alexandria.Models.Tracks
         public Track()
         {
             AddInitializer(value => this.location = value.ToUri(), track => track.Location);
-            AddInitializer(x => this.mediaType = x.ToString(), track => track.MediaType);
-            AddInitializer(x => this.title = x.ToString(), track => track.Title);
-            AddInitializer(x => this.titleSort = x.ToString(), track => track.TitleSort);
-            AddInitializer(x => this.subtitle = x.ToString(), track => track.Subtitle);
-            AddInitializer(x => this.grouping = x.ToString(), track => track.Grouping);
-            AddInitializer(x => this.comment = x.ToString(), track => track.Comment);
-            AddInitializer(x => this.album = x.ToString(), track => track.Album);
-            AddInitializer(x => this.albumSort = x.ToString(), track => track.AlbumSort);
-            AddInitializer(x => this.albumSubtitle = x.ToString(), track => track.AlbumSubtitle);
-            AddInitializer(x => this.artists = x.ToNames(), track => track.Artists);
-            AddInitializer(x => this.artistsSort = x.ToString(), track => track.ArtistsSort);
-            AddInitializer(x => this.albumArtists = x.ToNames(), track => track.AlbumArtists);
-            AddInitializer(x => this.composers = x.ToString(), track => track.Composers);
-            AddInitializer(x => this.conductor = x.ToString(), track => track.Conductor);
-            AddInitializer(x => this.genres = x.ToString(), track => track.Genres);
-            AddInitializer(x => this.moods = x.ToString(), track => track.Moods);
+            AddInitializer(value => this.mediaType = value.ToString(), track => track.MediaType);
+            AddInitializer(value => this.title = value.ToString(), track => track.Title);
+            AddInitializer(value => this.titleSort = value.ToString(), track => track.TitleSort);
+            AddInitializer(value => this.subtitle = value.ToString(), track => track.Subtitle);
+            AddInitializer(value => this.grouping = value.ToString(), track => track.Grouping);
+            AddInitializer(value => this.comment = value.ToString(), track => track.Comment);
+            AddInitializer(value => this.album = value.ToString(), track => track.Album);
+            AddInitializer(value => this.albumSort = value.ToString(), track => track.AlbumSort);
+            AddInitializer(value => this.albumSubtitle = value.ToString(), track => track.AlbumSubtitle);
+            AddInitializer(value => this.artists = value.ToNames(), track => track.Artists);
+            AddInitializer(value => this.artistsSort = value.ToString(), track => track.ArtistsSort);
+            AddInitializer(value => this.albumArtists = value.ToNames(), track => track.AlbumArtists);
+            AddInitializer(value => this.composers = value.ToNames(), track => track.Composers);
+            AddInitializer(value => this.genres = value.ToNames(), track => track.Genres);
+            AddInitializer(value => this.moods = value.ToNames(), track => track.Moods);
             AddInitializer(value => this.languages = value.ToIso639Languages(), track => track.Languages);
-            AddInitializer(x => this.recordingDate = x.ToDateTime(), track => track.RecordingDate);
-            AddInitializer(x => this.releaseDate = x.ToDateTime(), track => track.ReleaseDate);
-            AddInitializer(x => this.originalTitle = x.ToString(), track => track.OriginalTitle);
-            AddInitializer(x => this.originalReleaseDate = x.ToDateTime(), track => track.OriginalReleaseDate);
-            AddInitializer(x => this.trackNumber = x.ToUInt32(), track => track.TrackNumber);
-            AddInitializer(x => this.trackCount = x.ToUInt32(), track => track.TrackCount);
-            AddInitializer(x => this.discNumber = x.ToUInt32(), track => track.DiscNumber);
-            AddInitializer(x => this.discCount = x.ToUInt32(), track => track.DiscCount);
-            AddInitializer(x => this.duration = x.ToTimeSpan(), track => track.Duration);
-            AddInitializer(x => this.beatsPerMinute = x.ToUInt32(), track => track.BeatsPerMinute);
-            AddInitializer(x => this.playCount = x.ToUInt64(), track => track.PlayCount);
-            AddInitializer(x => this.playlistDelay = x.ToTimeSpan(), track => track.PlaylistDelay);
-            AddInitializer(x => this.originalFileName = x.ToString(), track => track.OriginalFileName);
-            AddInitializer(x => this.encodingDate = x.ToDateTime(), track => track.EncodingDate);
-            AddInitializer(x => this.taggingDate = x.ToDateTime(), track => track.TaggingDate);
-            AddInitializer(x => this.copyright = x.ToString(), track => track.Copyright);
-            AddInitializer(x => this.publisher = x.ToString(), track => track.Publisher);
-            AddInitializer(x => this.internationalStandardRecordingCode = x.ToString(), track => track.InternationalStandardRecordingCode);
+            AddInitializer(value => this.conductor = value.ToString(), track => track.Conductor);
+            AddInitializer(value => this.recordingDate = value.ToDateTime(), track => track.RecordingDate);
+            AddInitializer(value => this.releaseDate = value.ToDateTime(), track => track.ReleaseDate);
+            AddInitializer(value => this.originalTitle = value.ToString(), track => track.OriginalTitle);
+            AddInitializer(value => this.originalArtists = value.ToNames(), track => track.OriginalArtists);
+            AddInitializer(value => this.originalReleaseDate = value.ToDateTime(), track => track.OriginalReleaseDate);
+            AddInitializer(value => this.trackNumber = value.ToUInt32(), track => track.TrackNumber);
+            AddInitializer(value => this.trackCount = value.ToUInt32(), track => track.TrackCount);
+            AddInitializer(value => this.discNumber = value.ToUInt32(), track => track.DiscNumber);
+            AddInitializer(value => this.discCount = value.ToUInt32(), track => track.DiscCount);
+            AddInitializer(value => this.duration = value.ToTimeSpan(), track => track.Duration);
+            AddInitializer(value => this.beatsPerMinute = value.ToUInt32(), track => track.BeatsPerMinute);
+            AddInitializer(value => this.playCount = value.ToUInt64(), track => track.PlayCount);
+            AddInitializer(value => this.playlistDelay = value.ToTimeSpan(), track => track.PlaylistDelay);
+            AddInitializer(value => this.originalFileName = value.ToString(), track => track.OriginalFileName);
+            AddInitializer(value => this.encodingDate = value.ToDateTime(), track => track.EncodingDate);
+            AddInitializer(value => this.taggingDate = value.ToDateTime(), track => track.TaggingDate);
+            AddInitializer(value => this.copyright = value.ToString(), track => track.Copyright);
+            AddInitializer(value => this.publisher = value.ToString(), track => track.Publisher);
+            AddInitializer(value => this.internationalStandardRecordingCode = value.ToString(), track => track.InternationalStandardRecordingCode);
             
             AddChildInitializer<ITrackPicture>(child => AddPicture(child as ITrackPicture));
             AddChildInitializer<ITrackUnsynchronizedLyrics>(child => AddLyrics(child as ITrackUnsynchronizedLyrics));
@@ -96,15 +97,15 @@ namespace Gnosis.Alexandria.Models.Tracks
         private IEnumerable<string> artists = new List<string>{ "Unknown Artist" };
         private string artistsSort = "Unknown Artist";
         private IEnumerable<string> albumArtists = new List<string>();
-        private string composers = string.Empty;
-        private string conductor = string.Empty;
-        private string genres = string.Empty;
-        private string moods = string.Empty;
+        private IEnumerable<string> composers = new List<string>();
+        private IEnumerable<string> genres = new List<string>();
+        private IEnumerable<string> moods = new List<string>();
         private IEnumerable<IIso639Language> languages = new List<IIso639Language>();
+        private string conductor = string.Empty;
         private DateTime recordingDate = DateTime.MinValue;
         private DateTime releaseDate = DateTime.MinValue;
         private string originalTitle = string.Empty;
-        private string originalArtists = string.Empty;
+        private IEnumerable<string> originalArtists = new List<string>();
         private DateTime originalReleaseDate = DateTime.MinValue;
         private uint trackNumber = 0;
         private uint trackCount = 0;
@@ -417,7 +418,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             }
         }
 
-        public string Composers
+        public IEnumerable<string> Composers
         {
             get { return composers; }
             set
@@ -430,39 +431,26 @@ namespace Gnosis.Alexandria.Models.Tracks
             }
         }
 
-        public string Conductor
-        {
-            get { return conductor; }
-            set
-            {
-                if (value != null && value != conductor)
-                {
-                    Change(() => conductor = value, x => x.Conductor);
-                    RefreshHashCodes(value, x => x.ConductorHashCodes);
-                }
-            }
-        }
-
-        public string Genres
+        public IEnumerable<string> Genres
         {
             get { return genres; }
             set
             {
                 if (value != null && value != genres)
                 {
-                    Change(() => genres = value, x => x.Genres);
+                    Change(() => genres = value, track => track.Genres);
                 }
             }
         }
 
-        public string Moods
+        public IEnumerable<string> Moods
         {
             get { return moods; }
             set
             {
                 if (value != null && value != moods)
                 {
-                    Change(() => moods = value, x => x.Moods);
+                    Change(() => moods = value, track => track.Moods);
                 }
             }
         }
@@ -475,6 +463,19 @@ namespace Gnosis.Alexandria.Models.Tracks
                 if (value != null && value != languages)
                 {
                     Change(() => languages = value, track => track.Languages);
+                }
+            }
+        }
+
+        public string Conductor
+        {
+            get { return conductor; }
+            set
+            {
+                if (value != null && value != conductor)
+                {
+                    Change(() => conductor = value, track => track.Conductor);
+                    RefreshHashCodes(value, track => track.ConductorHashCodes);
                 }
             }
         }
@@ -516,7 +517,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             }
         }
 
-        public string OriginalArtists
+        public IEnumerable<string> OriginalArtists
         {
             get { return originalArtists; }
             set
@@ -905,15 +906,15 @@ namespace Gnosis.Alexandria.Models.Tracks
             Artists = tag.Performers.AsEnumerable();
             ArtistsSort = tag.ArtistsSort;
             AlbumArtists = tag.AlbumArtists.AsEnumerable();
-            Composers = tag.JoinedComposers;
-            Conductor = tag.Conductor;
-            Genres = tag.JoinedGenres;
+            Composers = tag.ComposersList;
+            Genres = tag.GenresList;
             Moods = tag.Moods;
-            Languages = !string.IsNullOrEmpty(tag.Languages) ? tag.Languages.Split('/').Select(code => Iso639Language.GetLanguageByCode(code)) : new List<IIso639Language> { Iso639Language.Undetermined };
+            Languages = tag.Languages.Select(code => Iso639Language.GetLanguageByCode(code));
+            Conductor = tag.Conductor;
             RecordingDate = tag.RecordingDate;
             ReleaseDate = tag.ReleaseDate;
             OriginalTitle = tag.OriginalTitle;
-            OriginalArtists = tag.JoinedOriginalArtists;
+            OriginalArtists = tag.OriginalArtists;
             OriginalReleaseDate = tag.OriginalReleaseDate;
             TrackNumber = tag.Track;
             TrackCount = tag.TrackCount;
@@ -945,18 +946,18 @@ namespace Gnosis.Alexandria.Models.Tracks
             tag.Album = Album;
             tag.AlbumSort = AlbumSort;
             tag.AlbumSubtitle = AlbumSubtitle;
-            tag.Performers = Artists.ToArray();
+            tag.ArtistsList = Artists;
             tag.ArtistsSort = ArtistsSort;
-            tag.AlbumArtists = AlbumArtists.ToArray();
-            tag.Composers = Composers.ToNames().ToArray();
-            tag.Conductor = Conductor;
-            tag.Genres = Genres.Split('/');
+            tag.AlbumArtistsList = AlbumArtists;
+            tag.ComposersList = Composers;
+            tag.GenresList = Genres;
             tag.Moods = Moods;
-            tag.Languages = string.Join("/", Languages.Select(lang => lang.Alpha3Code));
+            tag.Languages = Languages.Select(lang => lang.Alpha3Code);
+            tag.Conductor = Conductor;
             tag.RecordingDate = RecordingDate;
             tag.ReleaseDate = ReleaseDate;
             tag.OriginalTitle = OriginalTitle;
-            tag.OriginalArtists = Artists.ToNames().ToArray();
+            tag.OriginalArtists = Artists;
             tag.OriginalReleaseDate = OriginalReleaseDate;
             tag.Track = TrackNumber;
             tag.TrackCount = TrackCount;
