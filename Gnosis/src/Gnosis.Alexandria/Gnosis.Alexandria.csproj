@@ -175,7 +175,6 @@
     <Compile Include="Models\Playlists\IPlaylistItemLocation.cs" />
     <Compile Include="Models\Playlists\IPlaylistLink.cs" />
     <Compile Include="Models\Playlists\IPlaylistMetadata.cs" />
-    <Compile Include="Models\Tracks\ILanguage.cs" />
     <Compile Include="Models\Tracks\ISynchronizedText.cs" />
     <Compile Include="Models\Tracks\ITrack.cs" />
     <Compile Include="Models\Tracks\ITrackIdentifier.cs" />

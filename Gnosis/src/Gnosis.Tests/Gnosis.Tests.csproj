@@ -49,7 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Iso639LanguageTests.cs" />
+    <Compile Include="Models\CountryTests.cs" />
+    <Compile Include="Models\LanguageTests.cs" />
     <Compile Include="Models\TrackTests.cs" />
     <Compile Include="Repositories\TrackRepositoryTests.cs" />
     <Compile Include="SingleThreadedContext.cs" />

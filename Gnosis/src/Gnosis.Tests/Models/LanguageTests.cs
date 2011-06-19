@@ -11,37 +11,40 @@ using Gnosis.Core.Iso;
 namespace Gnosis.Tests.Models
 {
     [TestFixture]
-    public class Iso639LanguageTests
+    public class LanguageTests
     {
         private ILogger logger = new DebugLogger();
 
         [Test]
         public void LookupLanguage()
         {
-            var map2 = new Dictionary<string, IIso639Language>();
-            var map3 = new Dictionary<string, IIso639Language>();
-            var map3t = new Dictionary<string, IIso639Language>();
+            var map2 = new Dictionary<string, ILanguage>();
+            var map3 = new Dictionary<string, ILanguage>();
+            var map3t = new Dictionary<string, ILanguage>();
 
-            foreach (var lang in Iso639Language.GetLanguages())
+            foreach (var lang in Language.GetLanguages())
             {
                 logger.Debug("lang name=" + lang.Name + " alpha2=" + lang.Alpha2Code + " alpha3=" + lang.Alpha3Code + " alpha3term=" + lang.Alpha3TermCode);
 
                 if (!string.IsNullOrEmpty(lang.Alpha2Code))
                 {
                     map2.Add(lang.Alpha2Code, lang);
-                    Assert.AreEqual(lang, Iso639Language.GetLanguageByCode(lang.Alpha2Code));
+                    Assert.AreEqual(lang, Language.GetLanguageByCode(lang.Alpha2Code));
                 }
 
                 if (!string.IsNullOrEmpty(lang.Alpha3TermCode))
                 {
                     map3t.Add(lang.Alpha3TermCode, lang);
-                    Assert.AreEqual(lang, Iso639Language.GetLanguageByCode(lang.Alpha3TermCode));
+                    Assert.AreEqual(lang, Language.GetLanguageByCode(lang.Alpha3TermCode));
                 }
 
                 map3.Add(lang.Alpha3Code, lang);
-                Assert.AreEqual(lang, Iso639Language.GetLanguageByCode(lang.Alpha3Code));
-                Assert.AreEqual(lang, Iso639Language.GetLanguageByName(lang.Name));
+                Assert.AreEqual(lang, Language.GetLanguageByCode(lang.Alpha3Code));
+                Assert.AreEqual(lang, Language.GetLanguageByName(lang.Name));
             }
+
+            //Assert that an invalud code will return Language.Undetermined
+            Assert.AreEqual(Language.Undetermined, Language.GetLanguageByCode("XYZ"));
 
             Assert.AreEqual(484, map3.Count);
             Assert.AreEqual(20, map3t.Count);

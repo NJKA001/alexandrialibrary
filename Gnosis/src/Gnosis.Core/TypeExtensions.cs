@@ -44,103 +44,6 @@ namespace Gnosis.Core
             return type.Name;
         }
 
-        /*
-        public static TableInfo GetTableInfo(this Type type)
-        {
-            TableAttribute table = null;
-            TableIgnoreAttribute tableIgnore = null;
-            DefaultSortAttribute defaultSort = null;
-
-            foreach (var attribute in type.GetCustomAttributes(true))
-            {
-                if (attribute is TableAttribute)
-                {
-                    table = attribute as TableAttribute;
-                }
-                else if (attribute is DefaultSortAttribute)
-                {
-                    defaultSort = attribute as DefaultSortAttribute;
-                }
-                else if (attribute is TableIgnoreAttribute)
-                {
-                    tableIgnore = attribute as TableIgnoreAttribute;
-                }
-            }
-
-            if (tableIgnore == null)
-            {
-                var tableName = table != null ? table.Name : type.GetDefaultTableName();
-                var defaultSortExpression = defaultSort != null ? defaultSort.Expression : string.Empty;
-                return new TableInfo(tableName, defaultSortExpression, type.GetColumnInfo(string.Empty, true), type.GetChildInfo(), type.GetCustomDataTypeInfo());
-            }
-
-            return null;
-        }
-
-        //public static bool IsCustomDataType(this Type type)
-        //{
-        //    foreach (var attribute in type.GetCustomAttributes(true))
-        //    {
-        //        if (attribute is CustomDataTypeAttribute)
-        //            return true;
-        //    }
-
-        //    return false;
-        //}
-
-        public static Type GetItemType(this Type type)
-        {
-            var args = type.GetGenericArguments();
-            if (args != null && args.Length > 0)
-                return args[0];
-
-            return null;
-        }
-
-        public static bool IsEntityCollectionType(this Type type)
-        {
-            var itemType = type.GetItemType();
-            if (itemType != null)
-                return itemType.IsEntityType();
-
-            return false;
-        }
-
-        public static bool IsEntityType(this Type type)
-        {
-            return typeof(IEntity).IsAssignableFrom(type);
-        }
-
-        public static bool IsValueCollectionType(this Type type)
-        {
-            var itemType = type.GetItemType();
-            if (itemType != null)
-                return itemType.IsValueType();
-
-            return false;
-        }
-
-        public static bool IsValueType(this Type type)
-        {
-            return typeof(IValue).IsAssignableFrom(type);
-        }
-
-        public static bool IsCollectionType(this Type type)
-        {
-            return type.IsOrderedCollectionType() || type.IsUnorderedCollectionType();
-        }
-
-        public static bool IsOrderedCollectionType(this Type type)
-        {
-            return type.Name == "IOrderedSet`1";
-        }
-
-        public static bool IsUnorderedCollectionType(this Type type)
-        {
-            return type.Name == "ISet`1";
-        }
-        */
-
         public static bool IsSimple(this Type type)
         {
             if (type.IsEnum)
@@ -164,7 +67,10 @@ namespace Gnosis.Core
             if (type == typeof(byte[]))
                 return true;
 
-            if (type == typeof(IIso639Language))
+            if (type == typeof(ILanguage))
+                return true;
+
+            if (type == typeof(ICountry))
                 return true;
 
             var args = type.GetGenericArguments();
@@ -203,7 +109,9 @@ namespace Gnosis.Core
                 return true;
             else if (type == typeof(Uri))
                 return true;
-            else if (type == typeof(IIso639Language))
+            else if (type == typeof(ILanguage))
+                return true;
+            else if (type == typeof(ICountry))
                 return true;
 
             var args = type.GetGenericArguments();

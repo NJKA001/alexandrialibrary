@@ -32,8 +32,13 @@ namespace Gnosis.Core.Commands
         {
         }
 
-        public Parameter(string name, IIso639Language language)
-            : this(name, language.Alpha3Code, false)
+        public Parameter(string name, ILanguage language)
+            : this(name, language.ToString(), false)
+        {
+        }
+
+        public Parameter(string name, ICountry country)
+            : this(name, country.ToString(), false)
         {
         }
 
@@ -67,8 +72,13 @@ namespace Gnosis.Core.Commands
         {
         }
 
-        public Parameter(string name, IEnumerable<IIso639Language> languages)
-            : this(name, languages.ToNamesString(lang => lang.Alpha3Code), true)
+        public Parameter(string name, IEnumerable<ILanguage> languages)
+            : this(name, languages.ToNamesString(), true)
+        {
+        }
+
+        public Parameter(string name, IEnumerable<ICountry> countries)
+            : this(name, countries.ToNamesString(), true)
         {
         }
 

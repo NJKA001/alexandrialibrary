@@ -36,7 +36,7 @@ namespace Gnosis.Tests.Models
         IEnumerable<string> composers = new List<string> { "None" };
         IEnumerable<string> genres = new List<string> { "Latin Pop", "Merengue", "Rock en Español" };
         IEnumerable<string> moods = new List<string> { "Spicy", "Cheerful", "Fin", "Party", "Sensual", "Sexy", "Confident", "Energetic", "Stylish", "Carefree", "Playful" };
-        IEnumerable<IIso639Language> languages = new List<IIso639Language>() { Iso639Language.Spanish, Iso639Language.English };
+        IEnumerable<ILanguage> languages = new List<ILanguage>() { Language.Spanish, Language.English };
         const string conductor = "None";
 
         const string originalTitle = "Loca Con Su Tigre";
@@ -148,7 +148,7 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(composers, tag.ComposersList);
             Assert.AreEqual(genres, tag.GenresList);
             Assert.AreEqual(moods, tag.Moods);
-            Assert.AreEqual(languages, tag.Languages.Select(code => Iso639Language.GetLanguageByCode(code)));
+            Assert.AreEqual(languages, tag.Languages.Select(code => Language.GetLanguageByCode(code)));
             Assert.AreEqual(conductor, tag.Conductor);
 
             Assert.AreEqual(recordingDate, tag.RecordingDate);

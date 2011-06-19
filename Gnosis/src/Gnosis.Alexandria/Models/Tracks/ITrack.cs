@@ -28,7 +28,7 @@ namespace Gnosis.Alexandria.Models.Tracks
         IEnumerable<string> Composers { get; set; }
         IEnumerable<string> Genres { get; set; }
         IEnumerable<string> Moods { get; set; }
-        IEnumerable<IIso639Language> Languages { get; set; }
+        IEnumerable<ILanguage> Languages { get; set; }
         string Conductor { get; set; }
 
         DateTime RecordingDate { get; set; }

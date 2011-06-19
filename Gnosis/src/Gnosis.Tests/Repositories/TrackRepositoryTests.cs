@@ -38,7 +38,7 @@ namespace Gnosis.Tests.Repositories
         private DateTime recodingDate = new DateTime(1992, 1, 1);
         private DateTime encodingDate = new DateTime(2000, 5, 17);
         private IEnumerable<string> genres = new List<string> {"Rock", "Metal", "Alternative Metal", "Heavy Metal", "Progressive Metal" };
-        private IEnumerable<IIso639Language> languages = new List<IIso639Language>() { Iso639Language.English };
+        private IEnumerable<ILanguage> languages = new List<ILanguage>() { Language.English };
         private IEnumerable<string> moods = new List<string> { "Angry", "Angst-Ridden", "Bleak", "Harsh", "Menacing", "Suffocating", "Confrontational", "Eerie", "Fierce", "Gloomy", "Intense" };
         private ulong playCount = 397;
         private const int playlistDelaySeconds = 2;

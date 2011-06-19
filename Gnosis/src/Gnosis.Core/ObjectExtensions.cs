@@ -55,20 +55,20 @@ namespace Gnosis.Core
             return new Guid(self.ToString());
         }
 
-        public static IIso639Language ToIso639Language(this object self)
+        public static ILanguage ToIso639Language(this object self)
         {
             if (self == null)
-                return Iso639Language.Undetermined;
+                return Language.Undetermined;
 
-            return Iso639Language.GetLanguageByCode(self.ToString());
+            return Language.GetLanguageByCode(self.ToString());
         }
 
-        public static IEnumerable<IIso639Language> ToIso639Languages(this object self)
+        public static IEnumerable<ILanguage> ToIso639Languages(this object self)
         {
             if (self == null)
-                return new List<IIso639Language>();
+                return new List<ILanguage>();
 
-            return self.ToNames().Select(code => Iso639Language.GetLanguageByCode(code));
+            return self.ToNames().Select(code => Language.GetLanguageByCode(code));
         }
 
         public static IEnumerable<string> ToNames(this object self)
@@ -90,10 +90,14 @@ namespace Gnosis.Core
                 return new Parameter(name, self as IEntity);
             if (self is IValue)
                 return new Parameter(name, self as IValue);
-            if (self is IIso639Language)
-                return new Parameter(name, self as IIso639Language);
-            if (self is IEnumerable<IIso639Language>)
-                return new Parameter(name, self as IEnumerable<IIso639Language>);
+            if (self is ILanguage)
+                return new Parameter(name, self as ILanguage);
+            if (self is ICountry)
+                return new Parameter(name, self as ICountry);
+            if (self is IEnumerable<ILanguage>)
+                return new Parameter(name, self as IEnumerable<ILanguage>);
+            if (self is IEnumerable<ILanguage>)
+                return new Parameter(name, self as IEnumerable<ICountry>);
             if (self is IEnumerable<string>)
                 return new Parameter(name, self as IEnumerable<string>);
             if (self.GetType() == typeof(bool))

@@ -81,8 +81,10 @@
     <Compile Include="ImageExtensions.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ISearch.cs" />
-    <Compile Include="Iso\IIso639Language.cs" />
-    <Compile Include="Iso\Iso639Language.cs" />
+    <Compile Include="Iso\ICountry.cs" />
+    <Compile Include="Iso\ILanguage.cs" />
+    <Compile Include="Iso\Country.cs" />
+    <Compile Include="Iso\Language.cs" />
     <Compile Include="IValue.cs" />
     <Compile Include="IValueInitialState.cs" />
     <Compile Include="ObjectExtensions.cs" />
