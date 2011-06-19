@@ -100,7 +100,7 @@ namespace Gnosis.Core.Iso
                     byAlpha3TermCode.Add(language.Alpha3TermCode, language);
 
                 byAlpha3Code.Add(language.Alpha3Code, language);
-                byName.Add(language.Name, language);
+                byName.Add(language.Name.ToUpper(), language);
             }
         }
 
@@ -622,7 +622,12 @@ namespace Gnosis.Core.Iso
 
         public static ILanguage GetLanguageByName(string name)
         {
-            return byName.ContainsKey(name) ? byName[name] : Undetermined;
+            if (name == null)
+                return Undetermined;
+
+            var upper = name.ToUpper();
+
+            return byName.ContainsKey(upper) ? byName[upper] : Undetermined;
         }
 
         public static IEnumerable<ILanguage> GetLanguages()

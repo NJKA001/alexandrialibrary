@@ -76,7 +76,7 @@ namespace Gnosis.Core.Iso
             foreach (var country in countries)
             {
                 byAlpha2Code.Add(country.Alpha2Code, country);
-                byName.Add(country.Name, country);
+                byName.Add(country.Name.ToUpper(), country);
                 byTopLevelDomain.Add(country.TopLevelDomain, country);
 
                 if (!string.IsNullOrEmpty(country.Alpha3Code))
@@ -378,7 +378,12 @@ namespace Gnosis.Core.Iso
 
         public static ICountry GetCountryByName(string name)
         {
-            return byName.ContainsKey(name) ? byName[name] : Unknown;
+            if (name == null)
+                return Unknown;
+
+            var upper = name.ToUpper();
+
+            return byName.ContainsKey(upper) ? byName[upper] : Unknown;
         }
 
         public static ICountry GetCountryByNumber(int number)

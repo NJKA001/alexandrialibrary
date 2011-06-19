@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Models\CountryTests.cs" />
     <Compile Include="Models\LanguageTests.cs" />
+    <Compile Include="Models\RegionTests.cs" />
+    <Compile Include="Models\ScriptTests.cs" />
     <Compile Include="Models\TrackTests.cs" />
     <Compile Include="Repositories\TrackRepositoryTests.cs" />
     <Compile Include="SingleThreadedContext.cs" />

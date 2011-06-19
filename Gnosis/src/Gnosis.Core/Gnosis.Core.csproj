@@ -74,6 +74,7 @@
     <Compile Include="DataReaderExtensions.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IEntityInitialState.cs" />
+    <Compile Include="Ietf\ILanguageTag.cs" />
     <Compile Include="IFactory.cs" />
     <Compile Include="IFilter.cs" />
     <Compile Include="ILogger.cs" />
@@ -84,12 +85,16 @@
     <Compile Include="Iso\ICountry.cs" />
     <Compile Include="Iso\ILanguage.cs" />
     <Compile Include="Iso\Country.cs" />
+    <Compile Include="Iso\IScript.cs" />
     <Compile Include="Iso\Language.cs" />
+    <Compile Include="Iso\Script.cs" />
     <Compile Include="IValue.cs" />
     <Compile Include="IValueInitialState.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="PersistenceIgnoreAttribute.cs" />
     <Compile Include="ReflectionHelper.cs" />
+    <Compile Include="UN\IRegion.cs" />
+    <Compile Include="UN\Region.cs" />
     <Compile Include="ValueInfo.cs" />
     <Compile Include="Queries\IQuery.cs" />
     <Compile Include="Queries\Query.cs" />
