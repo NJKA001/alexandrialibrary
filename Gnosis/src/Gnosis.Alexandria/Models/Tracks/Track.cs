@@ -32,7 +32,7 @@ namespace Gnosis.Alexandria.Models.Tracks
             AddInitializer(value => this.composers = value.ToNames(), track => track.Composers);
             AddInitializer(value => this.genres = value.ToNames(), track => track.Genres);
             AddInitializer(value => this.moods = value.ToNames(), track => track.Moods);
-            AddInitializer(value => this.languages = value.ToIso639Languages(), track => track.Languages);
+            AddInitializer(value => this.languages = value.ToLanguages(), track => track.Languages);
             AddInitializer(value => this.conductor = value.ToString(), track => track.Conductor);
             AddInitializer(value => this.recordingDate = value.ToDateTime(), track => track.RecordingDate);
             AddInitializer(value => this.releaseDate = value.ToDateTime(), track => track.ReleaseDate);

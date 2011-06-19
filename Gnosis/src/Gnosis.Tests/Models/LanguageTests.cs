@@ -43,8 +43,9 @@ namespace Gnosis.Tests.Models
                 Assert.AreEqual(lang, Language.GetLanguageByName(lang.Name));
             }
 
-            //Assert that an invalud code will return Language.Undetermined
-            Assert.AreEqual(Language.Undetermined, Language.GetLanguageByCode("XYZ"));
+            Assert.AreEqual(Language.Undetermined, Language.GetLanguageByCode("xyz"));
+            Assert.AreEqual(Language.Undetermined, Language.GetLanguageByCode(null));
+            Assert.AreEqual(Language.Undetermined, Language.GetLanguageByName("Ancient Elven"));
 
             Assert.AreEqual(484, map3.Count);
             Assert.AreEqual(20, map3t.Count);

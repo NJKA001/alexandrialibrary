@@ -48,7 +48,11 @@ namespace Gnosis.Tests.Models
                 }
             }
 
-            Assert.AreEqual(Country.Unknown, Country.GetCountryByCode("zz"));
+            Assert.AreEqual(Country.Unknown, Country.GetCountryByCode("ZZ"));
+            Assert.AreEqual(Country.Unknown, Country.GetCountryByCode(null));
+            Assert.AreEqual(Country.Unknown, Country.GetCountryByName("The Land of Oz"));
+            Assert.AreEqual(Country.Unknown, Country.GetCountryByNumber(-1));
+            Assert.AreEqual(Country.Unknown, Country.GetCountryByTopLevelDomain(".zz"));
 
             Assert.AreEqual(249, map2.Count);
             Assert.AreEqual(249, mapName.Count);

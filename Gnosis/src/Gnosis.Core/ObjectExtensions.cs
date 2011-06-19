@@ -26,6 +26,22 @@ namespace Gnosis.Core
             return (byte[])self;
         }
 
+        public static ICountry ToCountry(this object self)
+        {
+            if (self == null)
+                return Country.Unknown;
+
+            return Country.GetCountryByCode(self.ToString());
+        }
+
+        public static IEnumerable<ICountry> ToCountries(this object self)
+        {
+            if (self == null)
+                return new List<ICountry>();
+
+            return self.ToNames().Select(code => Country.GetCountryByCode(code));
+        }
+
         public static DateTime ToDateTime(this object self)
         {
             return DateTime.Parse(self.ToString());
@@ -55,7 +71,7 @@ namespace Gnosis.Core
             return new Guid(self.ToString());
         }
 
-        public static ILanguage ToIso639Language(this object self)
+        public static ILanguage ToLanguage(this object self)
         {
             if (self == null)
                 return Language.Undetermined;
@@ -63,7 +79,7 @@ namespace Gnosis.Core
             return Language.GetLanguageByCode(self.ToString());
         }
 
-        public static IEnumerable<ILanguage> ToIso639Languages(this object self)
+        public static IEnumerable<ILanguage> ToLanguages(this object self)
         {
             if (self == null)
                 return new List<ILanguage>();

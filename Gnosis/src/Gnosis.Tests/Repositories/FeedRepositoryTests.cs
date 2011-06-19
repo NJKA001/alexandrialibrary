@@ -8,6 +8,7 @@ using NUnit.Framework;
 using System.Data.SQLite;
 
 using Gnosis.Core;
+using Gnosis.Core.Iso;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Feeds;
 using Gnosis.Alexandria.Repositories.Feeds;
@@ -46,7 +47,7 @@ namespace Gnosis.Tests.Repositories
             feed.Description = "Sports etc.";
             feed.FeedIdentifier = "12345ABC";
             feed.Generator = "espn.go.com";
-            feed.Language = "en-us";
+            feed.Language = Language.English;
             feed.Location = feedLocation;
             feed.MediaType = "application/xml+rss";
             feed.OriginalLocation = new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045");
@@ -193,7 +194,7 @@ namespace Gnosis.Tests.Repositories
             const string generator = "some-generator-name-XYZ";
             const string iconPath = "http://example.com/icons/path.jpg";
             const string imagePath = "http://exmaple.com/images/path.jpg";
-            const string language = "es-es";
+            ILanguage language = Language.Spanish;
             const string location = "http://example.com/feeds/rss/example.xml";
             const string mediaType = "application/xml";
             var publishedDate = new DateTime(2011, 2, 13);

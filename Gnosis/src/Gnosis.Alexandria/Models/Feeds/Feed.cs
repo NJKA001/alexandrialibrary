@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Core.Iso;
 
 namespace Gnosis.Alexandria.Models.Feeds
 {
@@ -19,7 +20,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             AddInitializer(value => this.authors = value.ToString(), x => x.Authors);
             AddInitializer(value => this.contributors = value.ToString(), x => x.Contributors);
             AddInitializer(value => this.description = value.ToString(), x => x.Description);
-            AddInitializer(value => this.language = value.ToString(), x => x.Language);
+            AddInitializer(value => this.language = value.ToLanguage(), feed => feed.Language);
             AddInitializer(value => this.originalLocation = value.ToUri(), x => x.OriginalLocation);
             AddInitializer(value => this.copyright = value.ToString(), x => x.Copyright);
             AddInitializer(value => this.publishedDate = value.ToDateTime(), x => x.PublishedDate);
@@ -54,7 +55,7 @@ namespace Gnosis.Alexandria.Models.Feeds
         private string authors = string.Empty;
         private string contributors = string.Empty;
         private string description = string.Empty;
-        private string language = "en-us";
+        private ILanguage language = Gnosis.Core.Iso.Language.Undetermined;
         private Uri originalLocation = UriExtensions.EmptyUri;
         private string copyright = string.Empty;
         private DateTime publishedDate = DateTime.MinValue;
@@ -211,14 +212,14 @@ namespace Gnosis.Alexandria.Models.Feeds
             }
         }
 
-        public string Language
+        public ILanguage Language
         {
             get { return language; }
             set
             {
                 if (value != null && value != language)
                 {
-                    Change(() => language = value, x => x.Language);
+                    Change(() => language = value, feed => feed.Language);
                 }
             }
         }

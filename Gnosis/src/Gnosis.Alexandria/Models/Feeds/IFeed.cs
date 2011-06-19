@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Core.Iso;
 
 namespace Gnosis.Alexandria.Models.Feeds
 {
@@ -15,7 +16,7 @@ namespace Gnosis.Alexandria.Models.Feeds
         string Authors { get; set; }
         string Contributors { get; set; }
         string Description { get; set; }
-        string Language { get; set; }
+        ILanguage Language { get; set; }
         Uri OriginalLocation { get; set; }
         string Copyright { get; set; }
         DateTime PublishedDate { get; set; }

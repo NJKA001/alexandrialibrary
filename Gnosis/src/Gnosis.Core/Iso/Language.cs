@@ -607,7 +607,7 @@ namespace Gnosis.Core.Iso
         public static ILanguage GetLanguageByCode(string code)
         {
             if (code == null)
-                throw new ArgumentNullException("code");
+                return Undetermined;
 
             var lower = code.ToLower();
 
@@ -617,12 +617,12 @@ namespace Gnosis.Core.Iso
             if (byAlpha3TermCode.ContainsKey(lower))
                 return byAlpha3TermCode[lower];
 
-            return byAlpha3Code.ContainsKey(lower) ? byAlpha3Code[lower] : Language.Undetermined;
+            return byAlpha3Code.ContainsKey(lower) ? byAlpha3Code[lower] : Undetermined;
         }
 
         public static ILanguage GetLanguageByName(string name)
         {
-            return byName.ContainsKey(name) ? byName[name] : Language.Undetermined;
+            return byName.ContainsKey(name) ? byName[name] : Undetermined;
         }
 
         public static IEnumerable<ILanguage> GetLanguages()

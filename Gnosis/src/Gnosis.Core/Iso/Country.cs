@@ -355,15 +355,25 @@ namespace Gnosis.Core.Iso
 
         public static ICountry GetCountryByCode(string code)
         {
-            if (byAlpha2Code.ContainsKey(code))
-                return byAlpha2Code[code];
+            if (code == null)
+                return Unknown;
 
-            return byAlpha3Code.ContainsKey(code) ? byAlpha3Code[code] : Unknown;
+            var upper = code.ToUpper();
+
+            if (byAlpha2Code.ContainsKey(upper))
+                return byAlpha2Code[upper];
+
+            return byAlpha3Code.ContainsKey(upper) ? byAlpha3Code[upper] : Unknown;
         }
 
         public static ICountry GetCountryByTopLevelDomain(string topLevelDomain)
         {
-            return byTopLevelDomain.ContainsKey(topLevelDomain) ? byTopLevelDomain[topLevelDomain] : Unknown;
+            if (topLevelDomain == null)
+                return Unknown;
+
+            var lower = topLevelDomain.ToLower();
+
+            return byTopLevelDomain.ContainsKey(lower) ? byTopLevelDomain[lower] : Unknown;
         }
 
         public static ICountry GetCountryByName(string name)
