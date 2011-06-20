@@ -8,6 +8,7 @@ using System.Text;
 //using Gnosis.Core.Batches;
 //using Gnosis.Core.Commands;
 using Gnosis.Core.Iso;
+using Gnosis.Core.UN;
 
 namespace Gnosis.Core
 {
@@ -71,6 +72,9 @@ namespace Gnosis.Core
                 return true;
 
             if (type == typeof(ICountry))
+                return true;
+
+            if (type == typeof(IRegion))
                 return true;
 
             var args = type.GetGenericArguments();

@@ -75,6 +75,7 @@
     <Compile Include="IEntity.cs" />
     <Compile Include="IEntityInitialState.cs" />
     <Compile Include="Ietf\ILanguageTag.cs" />
+    <Compile Include="Ietf\LanguageTag.cs" />
     <Compile Include="IFactory.cs" />
     <Compile Include="IFilter.cs" />
     <Compile Include="ILogger.cs" />
