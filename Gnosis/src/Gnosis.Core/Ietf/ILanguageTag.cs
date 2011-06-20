@@ -13,7 +13,7 @@ namespace Gnosis.Core.Ietf
     /// </summary>
     public interface ILanguageTag
     {
-        ILanguage Language { get; }
+        ILanguage PrimaryLanguage { get; }
         string ExtendedLanguage { get; }
         IScript Script { get; }
         ICountry Country { get; }

@@ -18,6 +18,10 @@ namespace Gnosis.Tests.Models
         [Test]
         public void LookupLanguage()
         {
+            const int totalAlph2 = 184;
+            const int totalAlpha3 = 497;
+            const int totalAlpha3Term = 20;
+
             var map2 = new Dictionary<string, ILanguage>();
             var map3 = new Dictionary<string, ILanguage>();
             var map3t = new Dictionary<string, ILanguage>();
@@ -47,9 +51,9 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(Language.Undetermined, Language.GetLanguageByCode(null));
             Assert.AreEqual(Language.Undetermined, Language.GetLanguageByName("Ancient Elven"));
 
-            Assert.AreEqual(484, map3.Count);
-            Assert.AreEqual(20, map3t.Count);
-            Assert.AreEqual(184, map2.Count);
+            Assert.AreEqual(totalAlpha3, map3.Count);
+            Assert.AreEqual(totalAlpha3Term, map3t.Count);
+            Assert.AreEqual(totalAlph2, map2.Count);
         }
 
     }

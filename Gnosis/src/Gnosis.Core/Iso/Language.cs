@@ -131,6 +131,7 @@ namespace Gnosis.Core.Iso
             languages.Add(Algonquian);
             languages.Add(SouthernAltai);
             languages.Add(Amharic);
+            languages.Add(Amis);
             languages.Add(OldEnglish);
             languages.Add(Angika);
             languages.Add(Apache);
@@ -180,6 +181,7 @@ namespace Gnosis.Core.Iso
             languages.Add(Buriat);
             languages.Add(Buginese);
             languages.Add(Bulgarian);
+            languages.Add(Bunun);
             languages.Add(Burmese);
             languages.Add(Bilin);
             languages.Add(Caddo);
@@ -287,6 +289,7 @@ namespace Gnosis.Core.Iso
             languages.Add(Gwichin);
             languages.Add(Haida);
             languages.Add(Haitian);
+            languages.Add(Hakka);
             languages.Add(Hausa);
             languages.Add(Hawaiian);
             languages.Add(Hebrew);
@@ -453,6 +456,7 @@ namespace Gnosis.Core.Iso
             languages.Add(Papuan);
             languages.Add(Pangasinan);
             languages.Add(Pahlavi);
+            languages.Add(Paiwan);
             languages.Add(Pampanga);
             languages.Add(Panjabi);
             languages.Add(Papiamento);
@@ -533,7 +537,9 @@ namespace Gnosis.Core.Iso
             languages.Add(Tahitian);
             languages.Add(TaiLanguages);
             languages.Add(Tamil);
+            languages.Add(Tao);
             languages.Add(Tatar);
+            languages.Add(Tayal);
             languages.Add(Teluga);
             languages.Add(Timne);
             languages.Add(Tereno);
@@ -554,6 +560,7 @@ namespace Gnosis.Core.Iso
             languages.Add(Tsimshian);
             languages.Add(Tswana);
             languages.Add(Tsonga);
+            languages.Add(Tsou);
             languages.Add(Turkmen);
             languages.Add(Tumbuka);
             languages.Add(Tupi);
@@ -598,6 +605,13 @@ namespace Gnosis.Core.Iso
             languages.Add(Zuni);
             languages.Add(NotApplicable);
             languages.Add(Zaza);
+
+            languages.Add(BelgianFrenchSignLanguage);
+            languages.Add(BelgianFlemishSignLanguage);
+            languages.Add(SwissGermanSignLanguage);
+            languages.Add(MandarinChinese);
+            languages.Add(MinanHokkien);
+            languages.Add(Xiang);
         }
 
         #endregion
@@ -656,6 +670,7 @@ namespace Gnosis.Core.Iso
         public static readonly ILanguage Algonquian = new Language("alg","Algonquian languages");
         public static readonly ILanguage SouthernAltai = new Language("alt","Southern Altai");
         public static readonly ILanguage Amharic = new Language("amh","am","Amharic");
+        public static readonly ILanguage Amis = new Language("ami", "Amis");
         public static readonly ILanguage OldEnglish = new Language("ang", "English, Old (ca.450-1100)");
         public static readonly ILanguage Angika = new Language("anp","Angika");
         public static readonly ILanguage Apache = new Language("apa","Apache languages");
@@ -705,6 +720,7 @@ namespace Gnosis.Core.Iso
         public static readonly ILanguage Buriat = new Language("bua","Buriat");
         public static readonly ILanguage Buginese = new Language("bug","Buginese");
         public static readonly ILanguage Bulgarian = new Language("bul","bg","Bulgarian");
+        public static readonly ILanguage Bunun = new Language("bun", "Bunun");
         public static readonly ILanguage Burmese = new Language("bur","mya", "my",	"Burmese");
         public static readonly ILanguage Bilin = new Language("byn","Blin; Bilin");
         public static readonly ILanguage Caddo = new Language("cad","Caddo");
@@ -812,6 +828,7 @@ namespace Gnosis.Core.Iso
         public static readonly ILanguage Gwichin = new Language("gwi","Gwich'in");
         public static readonly ILanguage Haida = new Language("hai","Haida");
         public static readonly ILanguage Haitian = new Language("hat","ht","Haitian; Haitian Creole");
+        public static readonly ILanguage Hakka = new Language("hak", "Hakka");
         public static readonly ILanguage Hausa = new Language("hau","ha","Hausa");
         public static readonly ILanguage Hawaiian = new Language("haw","Hawaiian");
         public static readonly ILanguage Hebrew = new Language("heb","he","Hebrew");
@@ -978,6 +995,7 @@ namespace Gnosis.Core.Iso
         public static readonly ILanguage Papuan = new Language("paa","Papuan languages");
         public static readonly ILanguage Pangasinan = new Language("pag","Pangasinan");
         public static readonly ILanguage Pahlavi = new Language("pal","Pahlavi");
+        public static readonly ILanguage Paiwan = new Language("pwn", "Paiwan");
         public static readonly ILanguage Pampanga = new Language("pam","Pampanga; Kapampangan");
         public static readonly ILanguage Panjabi = new Language("pan","pa","Panjabi; Punjabi");
         public static readonly ILanguage Papiamento = new Language("pap","Papiamento");
@@ -1058,6 +1076,7 @@ namespace Gnosis.Core.Iso
         public static readonly ILanguage Tahitian = new Language("tah","ty","Tahitian");
         public static readonly ILanguage TaiLanguages = new Language("tai","Tai languages");
         public static readonly ILanguage Tamil = new Language("tam","ta","Tamil");
+        public static readonly ILanguage Tao = new Language("tao", "Tao");
         public static readonly ILanguage Tatar = new Language("tat","tt","Tatar");
         public static readonly ILanguage Teluga = new Language("tel","te","Telugu");
         public static readonly ILanguage Timne = new Language("tem","Timne");
@@ -1065,6 +1084,7 @@ namespace Gnosis.Core.Iso
         public static readonly ILanguage Tetum = new Language("tet","Tetum");
         public static readonly ILanguage Tajik = new Language("tgk","tg","Tajik");
         public static readonly ILanguage Tagalog = new Language("tgl","tl","Tagalog");
+        public static readonly ILanguage Tayal = new Language("tay", "Tayal");
         public static readonly ILanguage Thai = new Language("tha","th","Thai");
         public static readonly ILanguage Tigre = new Language("tig","Tigre");
         public static readonly ILanguage Tigrinya = new Language("tir","ti","Tigrinya");
@@ -1079,6 +1099,7 @@ namespace Gnosis.Core.Iso
         public static readonly ILanguage Tsimshian = new Language("tsi","Tsimshian");
         public static readonly ILanguage Tswana = new Language("tsn","tn","Tswana");
         public static readonly ILanguage Tsonga = new Language("tso","ts","Tsonga");
+        public static readonly ILanguage Tsou = new Language("tsu", "Tsou");
         public static readonly ILanguage Turkmen = new Language("tuk","tk","Turkmen");
         public static readonly ILanguage Tumbuka = new Language("tum","Tumbuka");
         public static readonly ILanguage Tupi = new Language("tup","Tupi languages");
@@ -1123,6 +1144,13 @@ namespace Gnosis.Core.Iso
         public static readonly ILanguage Zuni = new Language("zun","Zuni");
         public static readonly ILanguage NotApplicable = new Language("zxx","No linguistic content; Not applicable");
         public static readonly ILanguage Zaza = new Language("zza", "Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki");
+
+        public static readonly ILanguage BelgianFrenchSignLanguage = new Language("sfb", "Belgian French Sign Language");
+        public static readonly ILanguage BelgianFlemishSignLanguage = new Language("vgt", "Belgian Flemish Sign Language");
+        public static readonly ILanguage SwissGermanSignLanguage = new Language("sgg", "Swiss German Sign Language");
+        public static readonly ILanguage MandarinChinese = new Language("cmn", "Mandarin Chinese");
+        public static readonly ILanguage MinanHokkien = new Language("nan", "Minan Hokkien");
+        public static readonly ILanguage Xiang = new Language("hsn", "Xiang");
 
         #endregion
     }
