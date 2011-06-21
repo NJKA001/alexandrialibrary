@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\CountryTests.cs" />
+    <Compile Include="Models\LanguageTagTests.cs" />
     <Compile Include="Models\LanguageTests.cs" />
     <Compile Include="Models\RegionTests.cs" />
     <Compile Include="Models\ScriptTests.cs" />

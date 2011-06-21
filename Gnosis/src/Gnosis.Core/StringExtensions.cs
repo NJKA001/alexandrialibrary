@@ -932,6 +932,25 @@ namespace Gnosis.Core
             return date;
         }
 
+        public static bool IsMixedAlphaNumeric(this string self)
+        {
+            if (self == null || self.Length < 2)
+                return false;
+
+            var hasAlpha = false;
+            var hasNumeric = false;
+
+            foreach (var c in self.ToCharArray())
+            {
+                if (Char.IsLetter(c))
+                    hasAlpha = true;
+                if (Char.IsDigit(c))
+                    hasNumeric = true;
+            }
+
+            return hasAlpha && hasNumeric;
+        }
+
         public static bool StartsWith(this string self, StringComparison comparison, params string[] strings)
         {
             foreach (string str in strings)
