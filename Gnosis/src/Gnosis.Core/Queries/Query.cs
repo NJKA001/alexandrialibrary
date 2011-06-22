@@ -145,6 +145,29 @@ namespace Gnosis.Core.Queries
             }
         }
 
+        private void AddChildCommandTexts(IList<string> commandTexts, ICommandBuilder parent)
+        {
+            foreach (var child in parent.Children)
+            {
+                var command = child.GetCommand(connection);
+                commandTexts.Add(command.CommandText);
+
+                AddChildCommandTexts(commandTexts, child);
+            }
+        }
+
+        public IList<string> GetCommandTexts()
+        {
+            var commandTexts = new List<string>();
+
+            var command = builder.GetCommand(connection);
+            commandTexts.Add(command.CommandText);
+
+            AddChildCommandTexts(commandTexts, builder);
+
+            return commandTexts;
+        }
+
         public IEnumerable<T> Execute()
         {
             logger.Info("Query.Execute");

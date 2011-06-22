@@ -14,8 +14,10 @@ namespace Gnosis.Core.Commands
             if (entityInfo.IsRoot)
             {
                 builder.AppendFormat("select {0}.* from {0}", entityInfo.Name);
+                if (!string.IsNullOrEmpty(filter.JoinClause))
+                    builder.AppendFormat(" {0}", filter.JoinClause);
                 if (!string.IsNullOrEmpty(filter.WhereClause))
-                    builder.AppendFormat(" where {0}", filter.WhereClause);
+                    builder.AppendFormat(" where {0}", filter.WhereClause.Trim());
                 if (!string.IsNullOrEmpty(filter.OrderByClause))
                     builder.AppendFormat(" order by {0}", filter.OrderByClause);
                 builder.Append(";");
@@ -33,8 +35,11 @@ namespace Gnosis.Core.Commands
                     parent = parent.Parent;
                 }
 
+                if (!string.IsNullOrEmpty(filter.JoinClause))
+                    builder.AppendFormat(" {0}", filter.JoinClause);
+
                 if (!string.IsNullOrEmpty(filter.WhereClause))
-                    builder.AppendFormat(" where {0}", filter.WhereClause);
+                    builder.AppendFormat(" where {0}", filter.WhereClause.Trim());
 
                 if (entityInfo.Sequence != null)
                     builder.AppendFormat(" order by {0}.{1}", entityInfo.Name, entityInfo.Sequence.Name);
@@ -54,23 +59,15 @@ namespace Gnosis.Core.Commands
                 parent = parent.Parent;
             }
 
+            if (!string.IsNullOrEmpty(filter.JoinClause))
+                builder.AppendFormat(" {0}", filter.JoinClause);
+
             if (!string.IsNullOrEmpty(filter.WhereClause))
-                builder.AppendFormat(" where {0}", filter.WhereClause);
+                builder.AppendFormat(" where {0}", filter.WhereClause.Trim());
 
             if (valueInfo.Sequence != null)
                 builder.AppendFormat(" order by {0}.{1}", valueInfo.Name, valueInfo.Sequence.Name);
         }
-
-        //public SelectStatement(string parentTableName, string tableName, string foreignKeyColumnName, string whereClause, string orderByClause)
-        //{
-        //    builder.AppendFormat("select {0}.* from {0}", tableName);
-        //    builder.AppendFormat(" inner join {0} on {0}.Id = {1}.{2}", parentTableName, tableName, foreignKeyColumnName);
-        //    if (!string.IsNullOrEmpty(whereClause))
-        //        builder.AppendFormat(" where {0}", whereClause);
-        //    if (!string.IsNullOrEmpty(orderByClause))
-        //        builder.AppendFormat(" order by {0}", orderByClause);
-        //    builder.Append(";");
-        //}
 
         private readonly StringBuilder builder = new StringBuilder();
 

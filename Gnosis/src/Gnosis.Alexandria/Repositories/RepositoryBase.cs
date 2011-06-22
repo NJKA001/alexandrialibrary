@@ -134,6 +134,11 @@ namespace Gnosis.Alexandria.Repositories
             }
         }
 
+        public void Save(T item)
+        {
+            Save(new List<T> { item });
+        }
+
         public void Save(IEnumerable<T> items)
         {
             IDbConnection connection = null;
@@ -149,6 +154,11 @@ namespace Gnosis.Alexandria.Repositories
                 if (defaultConnection == null && connection != null)
                     connection.Close();
             }
+        }
+
+        public void Delete(T item)
+        {
+            Delete(new List<T> { item });
         }
 
         public void Delete(IEnumerable<T> items)

@@ -35,32 +35,40 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             AddSearch(itemMetadataByParent);
         }
 
-        private readonly ILookup byLocation = new LookupByLocation();
+        private readonly LookupByLocation byLocation = new LookupByLocation();
 
-        private readonly ISearch all = new SearchAll();
-        private readonly ISearch byAuthors = new SearchByAuthors();
-        private readonly ISearch byTitle = new SearchByTitle();
-        private readonly ISearch categoriesByParent = new SearchCategoriesByParent();
-        private readonly ISearch itemsByParent = new SearchItemsByParent();
-        private readonly ISearch linksByParent = new SearchLinksByParent();
-        private readonly ISearch metadataByParent = new SearchMetadataByParent();
-        private readonly ISearch itemCategoriesByParent = new SearchItemCategoriesByParent();
-        private readonly ISearch itemLinksByParent = new SearchItemLinksByParent();
-        private readonly ISearch itemMetadataByParent = new SearchItemMetadataByParent();
+        private readonly SearchAll all = new SearchAll();
+        private readonly SearchByAuthors byAuthors = new SearchByAuthors();
+        private readonly SearchByTitle byTitle = new SearchByTitle();
+        private readonly SearchCategoriesByParent categoriesByParent = new SearchCategoriesByParent();
+        private readonly SearchItemsByParent itemsByParent = new SearchItemsByParent();
+        private readonly SearchLinksByParent linksByParent = new SearchLinksByParent();
+        private readonly SearchMetadataByParent metadataByParent = new SearchMetadataByParent();
+        private readonly SearchItemCategoriesByParent itemCategoriesByParent = new SearchItemCategoriesByParent();
+        private readonly SearchItemLinksByParent itemLinksByParent = new SearchItemLinksByParent();
+        private readonly SearchItemMetadataByParent itemMetadataByParent = new SearchItemMetadataByParent();
+
+        private readonly SearchByKeyword byKeyword = new SearchByKeyword();
 
         public IFeed LookupByLocation(Uri location)
         {
-            return Lookup(byLocation, new Dictionary<string, object> { { "@Location", location } });
+            return Select(byLocation.GetFilter(location))
+                .FirstOrDefault();
         }
 
         public IEnumerable<IFeed> SearchByAuthors(string authors)
         {
-            return Search(byAuthors, new Dictionary<string, object> { { "@Authors", authors } });
+            return Select(byAuthors.GetFilter(authors));
+        }
+
+        public IEnumerable<IFeed> SearchByKeyword(string keyword)
+        {
+            return Select(byKeyword.GetFilter(keyword));
         }
 
         public IEnumerable<IFeed> SearchByTitle(string title)
         {
-            return Search(byTitle, new Dictionary<string, object> { { "@Title", title } });
+            return Select(byTitle.GetFilter(title));
         }
     }
 }

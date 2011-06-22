@@ -13,5 +13,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
     {
         IFeed LookupByLocation(Uri location);
         IEnumerable<IFeed> SearchByAuthors(string authors);
+        IEnumerable<IFeed> SearchByKeyword(string keyword);
+        IEnumerable<IFeed> SearchByTitle(string title);
     }
 }

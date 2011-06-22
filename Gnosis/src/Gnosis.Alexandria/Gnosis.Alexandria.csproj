@@ -201,6 +201,7 @@
     <Compile Include="Repositories\Feeds\LookupByLocation.cs" />
     <Compile Include="Repositories\Feeds\SearchAll.cs" />
     <Compile Include="Repositories\Feeds\SearchByAuthors.cs" />
+    <Compile Include="Repositories\Feeds\SearchByKeyword.cs" />
     <Compile Include="Repositories\Feeds\SearchByTitle.cs" />
     <Compile Include="Repositories\Feeds\SearchCategoriesByParent.cs" />
     <Compile Include="Repositories\Feeds\SearchItemCategoriesByParent.cs" />

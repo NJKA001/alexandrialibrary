@@ -9,6 +9,7 @@ using System.Data.SQLite;
 
 using Gnosis.Core;
 using Gnosis.Core.Iso;
+using Gnosis.Core.Queries;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Feeds;
 using Gnosis.Alexandria.Repositories.Feeds;
@@ -37,7 +38,7 @@ namespace Gnosis.Tests.Repositories
             }
         }
 
-        private IFeed GetTestFeed()
+        private IFeed GetFeed()
         {
             var feed = new Feed();
             feed.Initialize(new EntityInitialState(context, logger));
@@ -100,6 +101,30 @@ namespace Gnosis.Tests.Repositories
             return feed;
         }
 
+        private IFeed GetFeed(Uri location, string title, string authors, string contributors, string description)
+        {
+            var feed = new Feed();
+            feed.Initialize(new EntityInitialState(context, logger));
+            feed.Location = location;
+            feed.Title = title;
+            feed.Authors = authors;
+            feed.Contributors = contributors;
+            feed.Description = description;
+            return feed;
+        }
+
+        private IFeedItem GetFeedItem(IFeed parent, string title, string authors, string contributors, string summary)
+        {
+            var item = new FeedItem();
+            item.Initialize(new EntityInitialState(context, logger, parent.Id));
+            item.Title = title;
+            item.Authors = authors;
+            item.Contributors = contributors;
+            item.Summary = summary;
+            parent.AddItem(item);
+            return item;
+        }
+
         private void ModifyTestFeed(IFeed feed)
         {
             feed.Title = "Some other title";
@@ -117,6 +142,8 @@ namespace Gnosis.Tests.Repositories
         }
 
         #endregion
+
+        #region Setup
 
         [TestFixtureSetUp]
         public void FixtureSetUp()
@@ -150,13 +177,17 @@ namespace Gnosis.Tests.Repositories
             }
         }
 
+        #endregion
+
+        #region Create
+
         [Test]
         public void CreateFeed()
         {
             var initialFeeds = repository.Search();
             Assert.AreEqual(0, initialFeeds.Count());
 
-            var feed = GetTestFeed();
+            var feed = GetFeed();
 
             Assert.IsTrue(feed.IsNew());
 
@@ -175,10 +206,14 @@ namespace Gnosis.Tests.Repositories
             Assert.IsNull(deletedFeed);
         }
 
+        #endregion
+
+        #region Update
+
         [Test]
         public void UpdateFeed()
         {
-            var feed = GetTestFeed();
+            var feed = GetFeed();
             var id = feed.Id;
 
             Assert.AreEqual(6, feed.TitleHashCodes.Count());
@@ -264,12 +299,16 @@ namespace Gnosis.Tests.Repositories
             Assert.AreEqual(3, changedFeed.Categories.Count());
         }
 
+        #endregion
+
+        #region Delete
+
         [Test]
         public void DeleteFeed()
         {
             Assert.AreEqual(new Uri("http://example.com/index.html"), new Uri("http://example.com/index.html"));
 
-            var feed = GetTestFeed();
+            var feed = GetFeed();
             var id = feed.Id;
             var linkCountSql = string.Format("select count() from Feed_Links where Parent = '{0}';", id);
             var feedItemId = feed.Items.FirstOrDefault().Id;
@@ -319,5 +358,82 @@ namespace Gnosis.Tests.Repositories
             Assert.AreEqual(1, GetCount(link2CountSql));
             Assert.AreEqual(3, GetCount(itemMetadata2CountSql));
         }
+
+        #endregion
+
+        #region Search
+
+        [Test]
+        public void SearchByTitle()
+        {
+            var feed1 = GetFeed(new Uri("http://espn.go.com/feeds/4636346"), "The BS Report", "Bill Simmons", "Joe House, Marc Stein, John Hollinger", "Bill Simmons Podcast");
+            var feed2 = GetFeed(new Uri("http://cnn.com//other-path/rss?id=43645734625"), "CNN Feed", "A Bunch of Talking Heads", "More Jackasses", "Blah Blah Blah");
+            var feed3 = GetFeed(new Uri("http://cnn.com//some-path/rss?id=9957457"), "CNN Feed #2", "Some Other Talking Heads", "Still More Jackasses", "Yadda Yadda Yadda");
+            var feed4 = GetFeed(new Uri("http://comedycentral.com/feeds/colbert.xml"), "The Colbert Report and Other Nonsense", "Stephen Colbert", "Various", "Stephen Colbert, the great American Patriot, with his musings on politics and culture");
+            var feed5 = GetFeed(new Uri("http://www.nerdist.com/category/podcast/"), "The Nerdist Podcast", "Chris Hardwick", "Uncredited", "Chris Hardwich being a NERD!");
+            repository.Save(new List<IFeed> { feed1, feed2, feed3, feed4, feed5 });
+
+            Assert.AreEqual(5, repository.Search().Count());
+
+            var results = repository.SearchByTitle("Report");
+            Assert.AreEqual(2, results.Count());
+        }
+
+        [Test]
+        public void SearchByAuthor()
+        {
+            var feed1 = GetFeed(new Uri("http://espn.go.com/feeds/4636346"), "The BS Report", "Bill Simmons", "Joe House, Marc Stein, John Hollinger", "Bill Simmons Podcast");
+            var feed2 = GetFeed(new Uri("http://cnn.com//other-path/rss?id=43645734625"), "CNN Feed", "A Bunch of Talking Heads", "More Jackasses", "Blah Blah Blah");
+            var feed3 = GetFeed(new Uri("http://cnn.com//some-path/rss?id=9957457"), "CNN Feed #2", "Some Other Talking Heads", "Still More Jackasses", "Yadda Yadda Yadda");
+            var feed4 = GetFeed(new Uri("http://comedycentral.com/feeds/colbert.xml"), "The Colbert Report and Other Nonsense", "Stephen Colbert", "Various", "Stephen Colbert, the great American Patriot, with his musings on politics and culture");
+            var feed5 = GetFeed(new Uri("http://www.nerdist.com/category/podcast/"), "The Nerdist Podcast", "Chris Hardwick", "Uncredited", "Chris Hardwich being a NERD!");
+            repository.Save(new List<IFeed> { feed1, feed2, feed3, feed4, feed5 });
+
+            var results1 = repository.SearchByAuthors("Stephen Colbert");
+            Assert.AreEqual(1, results1.Count());
+
+            var results2 = repository.SearchByAuthors("Talking Heads");
+            Assert.AreEqual(2, results2.Count());
+        }
+
+        [Test]
+        public void SearchFeedsByKeyword()
+        {
+            var feedA = GetFeed(new Uri("http://espn.go.com/feeds/4636346"), "The BS Report", "Bill Simmons", "Joe House, Marc Stein, John Hollinger", "Bill Simmons Podcast");
+            var feedB = GetFeed(new Uri("http://cnn.com//other-path/rss?id=43645734625"), "CNN Feed", "A Bunch of Talking Heads", "More Jackasses", "Blah Blah Blah");
+            var feedC = GetFeed(new Uri("http://cnn.com//some-path/rss?id=9957457"), "CNN Feed #2", "Some Other Talking Heads", "Still More Jackasses", "Yadda Yadda Yadda");
+            var feedD = GetFeed(new Uri("http://comedycentral.com/feeds/colbert.xml"), "The Colbert Report and Other Nonsense", "Stephen Colbert", "Various", "Stephen Colbert, the great American Patriot, with his musings on politics and culture");
+            var feedE = GetFeed(new Uri("http://www.nerdist.com/category/podcast/"), "The Nerdist Podcast", "Chris Hardwick", "Uncredited", "Chris Hardwich being a NERD!");
+
+            var itemE1 = GetFeedItem(feedE, "Apples", "Chris Hardwick", "Aaron Abramson", "Discussions about Apples");
+            var itemE2 = GetFeedItem(feedE, "Bananas", "Chris Hardwick", "Bonny Brown", "Haggling for Bananas in the market");
+            var itemE3 = GetFeedItem(feedE, "Cantaloupes", "Chris Hardwick", "Carl Castle", "In depth look at Cantaloupes");
+            var itemE4 = GetFeedItem(feedE, "Durians", "Chris Hardwick", "Daria Doyle", "Arguments about the best ways to prepare Durians for delicious desserts");
+            var itemA1 = GetFeedItem(feedA, "NBA Finals Preview Pt. 1", "Bill Simmons", "John Hollinger, Ric Bucher", "Discussing the 2011 NBA Finals");
+            var itemA2 = GetFeedItem(feedA, "NBA Finals Preview Pt. 2", "Bill Simmons", "John Hollinger, Ric Bucher", "Discussing the 2011 NBA Finals");
+
+            itemA2.AddMetadatum("text/plain", new Uri("http://example.com/schemes/random"), "RandomCode", "Octopus-Squid-Whale");
+            itemA1.AddMetadatum("text/plain", new Uri("http://example.com/schemes/random"), "RandomCode", "W.X.Y-Z");
+
+            repository.Save(new List<IFeed> { feedA, feedB, feedC, feedD, feedE });
+
+            const string keyword1 = "WXYZ";
+            var factory = new FeedFactory(context, logger);
+            var search = new SearchByKeyword();
+            var query = new Query<IFeed>(connection, logger, factory, search.GetFilter(keyword1));
+
+            //const string format = "select {0}.* from {0} {1} where {2} order by Feed.Authors ASC, Feed.PublishedDate ASC, Feed.Title ASC;\r\n";
+            //var text0 = string.Format(format, "Feed", SearchByKeyword.GetJoinClause(), SearchByKeyword.GetWhereClause());
+
+            //var texts = query.GetCommandTexts();
+            //Assert.IsNotNull(texts);
+            //Assert.AreEqual(16, texts.Count());
+            //Assert.AreEqual(text0, texts[0]);
+            
+            //var results = repository.SearchByKeyword("WXYZ");
+            //Assert.AreEqual(1, results.Count());
+        }
+
+        #endregion
     }
 }

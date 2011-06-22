@@ -14,7 +14,9 @@ namespace Gnosis.Core
         IEnumerable<T> Search(ISearch search, IDictionary<string, object> parameters);
 
         void Initialize();
+        void Save(T item);
         void Save(IEnumerable<T> items);
+        void Delete(T item);
         void Delete(IEnumerable<T> items);
     }
 }

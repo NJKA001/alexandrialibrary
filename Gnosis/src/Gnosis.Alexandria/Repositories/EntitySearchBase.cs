@@ -14,14 +14,20 @@ namespace Gnosis.Alexandria.Repositories
         where T : IEntity
     {
         protected EntitySearchBase(params Expression<Func<T, object>>[] columns)
-            : this(string.Empty, columns)
+            : this(string.Empty, string.Empty, columns)
         {
         }
 
         protected EntitySearchBase(string whereClause, params Expression<Func<T, object>>[] columns)
+            : this(whereClause, string.Empty, columns)
+        {
+        }
+
+        protected EntitySearchBase(string whereClause, string joinClause, params Expression<Func<T, object>>[] columns)
         {
             this.entityInfo = new EntityInfo(typeof(T));
             this.whereClause = whereClause;
+            this.joinClause = joinClause;
 
             var orderByBuilder = new StringBuilder();
             foreach (var column in columns)
@@ -40,6 +46,7 @@ namespace Gnosis.Alexandria.Repositories
         private readonly EntityInfo entityInfo;
         private readonly string whereClause;
         private readonly string orderByClause;
+        private readonly string joinClause;
         private readonly IDictionary<string, bool> columns = new Dictionary<string, bool>();
 
         public string Name
@@ -64,7 +71,7 @@ namespace Gnosis.Alexandria.Repositories
 
         public IFilter GetFilter(IDictionary<string, object> parameters)
         {
-            return new Filter(whereClause, orderByClause, parameters);
+            return new Filter(whereClause, orderByClause, joinClause, parameters);
         }
     }
 }
