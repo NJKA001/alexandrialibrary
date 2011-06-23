@@ -94,6 +94,24 @@ namespace Gnosis.Alexandria.Repositories
             }
         }
 
+        protected IEnumerable<TChild> SelectChild<TChild>(IFilter filter)
+            where TChild : IChild
+        {
+            IDbConnection connection = null;
+
+            try
+            {
+                connection = GetConnection();
+                var query = new Query<TChild>(connection, logger, factory, filter);
+                return query.Execute();
+            }
+            finally
+            {
+                if (defaultConnection == null && connection != null)
+                    connection.Close();
+            }
+        }
+
         protected IEnumerable<TValue> Select<TValue>(IFilter filter, Expression<Func<T, object>> property)
             where TValue : IValue
         {

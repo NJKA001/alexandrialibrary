@@ -79,6 +79,11 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             return Select<IHashCode>(titleHashCodesBySchemeAndValue.GetFilter(scheme, value), feed => feed.TitleHashCodes);
         }
 
+        public IEnumerable<IFeedItem> SearchFeedItemsByParent(Guid parent)
+        {
+            return SelectChild<IFeedItem>(itemsByParent.GetFilter(new Dictionary<string, object> { { "@Parent", parent.ToString() } }));
+        }
+
         public IEnumerable<IFeed> SearchByTitleHashCodes(Uri scheme, string value)
         {
             return SelectReverse<IHashCode>(titleHashCodesBySchemeAndValue.GetFilter(scheme, value), "Feed.Authors ASC, Feed.PublishedDate ASC, Feed.Title ASC", feed => feed.TitleHashCodes);

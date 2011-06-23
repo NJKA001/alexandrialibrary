@@ -16,6 +16,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             : base(context, logger)
         {
             MapEntityConstructor<IFeed>(() => new Feed());
+            MapEntityConstructor<IFeedItem>(() => new FeedItem());
             MapChildConstructor<IFeedItem>(() => new FeedItem());
             MapValueConstructor<IFeedCategory>(() => new FeedCategory());
             MapValueConstructor<IFeedLink>(() => new FeedLink());
