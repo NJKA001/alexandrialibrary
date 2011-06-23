@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
@@ -51,6 +52,11 @@ namespace Gnosis.Alexandria.Repositories
             get { return logger; }
         }
 
+        protected IFactory Factory
+        {
+            get { return factory; }
+        }
+
         protected void AddLookup(ILookup lookup)
         {
             lookups.Add(lookup);
@@ -81,6 +87,24 @@ namespace Gnosis.Alexandria.Repositories
             {
                 connection = GetConnection();
                 var query = new Query<T>(connection, logger, factory, filter);
+                return query.Execute();
+            }
+            finally
+            {
+                if (defaultConnection == null && connection != null)
+                    connection.Close();
+            }
+        }
+
+        protected IEnumerable<TValue> Select<TValue>(IFilter filter, Expression<Func<T, object>> property)
+            where TValue : IValue
+        {
+            IDbConnection connection = null;
+
+            try
+            {
+                connection = GetConnection();
+                var query = new ValueQuery<T, TValue>(connection, logger, factory, filter, property);
                 return query.Execute();
             }
             finally

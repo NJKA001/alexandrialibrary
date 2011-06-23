@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Gnosis.Core.Queries
 {
-    public interface IQuery<T>
-        where T : IEntity
+    public interface IValueQuery<T>
+        where T : IValue
     {
         IEnumerable<T> Execute();
     }

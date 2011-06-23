@@ -397,30 +397,44 @@ namespace Gnosis.Tests.Repositories
         }
 
         [Test]
-        public void SearchFeedsByKeyword()
+        public void SearchFeedTitleHashCodes()
         {
             var feedA = GetFeed(new Uri("http://espn.go.com/feeds/4636346"), "The BS Report", "Bill Simmons", "Joe House, Marc Stein, John Hollinger", "Bill Simmons Podcast");
-            var feedB = GetFeed(new Uri("http://cnn.com//other-path/rss?id=43645734625"), "CNN Feed", "A Bunch of Talking Heads", "More Jackasses", "Blah Blah Blah");
-            var feedC = GetFeed(new Uri("http://cnn.com//some-path/rss?id=9957457"), "CNN Feed #2", "Some Other Talking Heads", "Still More Jackasses", "Yadda Yadda Yadda");
-            var feedD = GetFeed(new Uri("http://comedycentral.com/feeds/colbert.xml"), "The Colbert Report and Other Nonsense", "Stephen Colbert", "Various", "Stephen Colbert, the great American Patriot, with his musings on politics and culture");
+            var feedB = GetFeed(new Uri("http://iceland.com//other-path/rss?id=43645734625"), "Björk's Podcast", "Cool Stuff From An Alien Planet", "Other People", "Blah Blah Blah");
+            var feedC = GetFeed(new Uri("http://wxyz.com//some-path/rss?id=9957457"), "W.X.Y-Z", "Some Other Talking Heads", "Still More Jackasses", "Yadda Yadda Yadda");
+            var feedD = GetFeed(new Uri("http://comedycentral.com/feeds/colbert.xml"), "Stephen", "Stephen Colbert", "Various", "Stephen Colbert, the great American Patriot, with his musings on politics and culture");
             var feedE = GetFeed(new Uri("http://www.nerdist.com/category/podcast/"), "The Nerdist Podcast", "Chris Hardwick", "Uncredited", "Chris Hardwich being a NERD!");
 
-            var itemE1 = GetFeedItem(feedE, "Apples", "Chris Hardwick", "Aaron Abramson", "Discussions about Apples");
-            var itemE2 = GetFeedItem(feedE, "Bananas", "Chris Hardwick", "Bonny Brown", "Haggling for Bananas in the market");
-            var itemE3 = GetFeedItem(feedE, "Cantaloupes", "Chris Hardwick", "Carl Castle", "In depth look at Cantaloupes");
-            var itemE4 = GetFeedItem(feedE, "Durians", "Chris Hardwick", "Daria Doyle", "Arguments about the best ways to prepare Durians for delicious desserts");
-            var itemA1 = GetFeedItem(feedA, "NBA Finals Preview Pt. 1", "Bill Simmons", "John Hollinger, Ric Bucher", "Discussing the 2011 NBA Finals");
-            var itemA2 = GetFeedItem(feedA, "NBA Finals Preview Pt. 2", "Bill Simmons", "John Hollinger, Ric Bucher", "Discussing the 2011 NBA Finals");
+            //var itemE1 = GetFeedItem(feedE, "Apples", "Chris Hardwick", "Aaron Abramson", "Discussions about Apples");
+            //var itemE2 = GetFeedItem(feedE, "Bananas", "Chris Hardwick", "Bonny Brown", "Haggling for Bananas in the market");
+            //var itemE3 = GetFeedItem(feedE, "Cantaloupes", "Chris Hardwick", "Carl Castle", "In depth look at Cantaloupes");
+            //var itemE4 = GetFeedItem(feedE, "Durians", "Chris Hardwick", "Daria Doyle", "Arguments about the best ways to prepare Durians for delicious desserts");
+            //var itemA1 = GetFeedItem(feedA, "NBA Finals Preview Pt. 1", "Bill Simmons", "John Hollinger, Ric Bucher", "Discussing the 2011 NBA Finals");
+            //var itemA2 = GetFeedItem(feedA, "NBA Finals Preview Pt. 2", "Bill Simmons", "John Hollinger, Ric Bucher", "Discussing the 2011 NBA Finals");
 
-            itemA2.AddMetadatum("text/plain", new Uri("http://example.com/schemes/random"), "RandomCode", "Octopus-Squid-Whale");
-            itemA1.AddMetadatum("text/plain", new Uri("http://example.com/schemes/random"), "RandomCode", "W.X.Y-Z");
+            //itemA2.AddMetadatum("text/plain", new Uri("http://example.com/schemes/random"), "RandomCode", "Octopus-Squid-Whale");
+            //itemA1.AddMetadatum("text/plain", new Uri("http://example.com/schemes/random"), "RandomCode", "W.X.Y-Z");
 
             repository.Save(new List<IFeed> { feedA, feedB, feedC, feedD, feedE });
 
-            const string keyword1 = "WXYZ";
-            var factory = new FeedFactory(context, logger);
-            var search = new SearchByKeyword();
-            var query = new Query<IFeed>(connection, logger, factory, search.GetFilter(keyword1));
+            var keyword1 = "W.X.Y-Z".AsNameHash();
+            var results1 = repository.SearchTitleHashCodesBySchemeAndValue(HashCode.SchemeNameHash, keyword1);
+            Assert.AreEqual(1, results1.Count());
+
+            var keyword2 = "Steven".AsDoubleMetaphone();
+            var results2 = repository.SearchTitleHashCodesBySchemeAndValue(HashCode.SchemeDoubleMetaphone, keyword2);
+            Assert.AreEqual(1, results2.Count());
+
+            var keyword3 = "%BJORK%";
+            var results3 = repository.SearchTitleHashCodesBySchemeAndValue(HashCode.SchemeNameHash, keyword3);
+            Assert.AreEqual(2, results3.Count());
+            Assert.AreEqual("BJORKSPODCAST", results3.First().Value);
+            Assert.AreEqual("BJORKS", results3.Last().Value);
+
+            //const string keyword1 = "WXYZ";
+            //var factory = new FeedFactory(context, logger);
+            //var search = new SearchByKeyword();
+            //var query = new Query<IFeed>(connection, logger, factory, search.GetFilter(keyword1));
 
             //const string format = "select {0}.* from {0} {1} where {2} order by Feed.Authors ASC, Feed.PublishedDate ASC, Feed.Title ASC;\r\n";
             //var text0 = string.Format(format, "Feed", SearchByKeyword.GetJoinClause(), SearchByKeyword.GetWhereClause());

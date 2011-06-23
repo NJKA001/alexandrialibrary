@@ -12,6 +12,7 @@ namespace Gnosis.Core
         string WhereClause { get; }
         string OrderByClause { get; }
         string JoinClause { get; }
+        bool AutoJoin { get; }
         IEnumerable<IParameter> Parameters { get; }
     }
 }

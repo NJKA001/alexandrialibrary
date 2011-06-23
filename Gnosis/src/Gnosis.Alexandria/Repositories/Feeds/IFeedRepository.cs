@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Feeds;
 
 namespace Gnosis.Alexandria.Repositories.Feeds
@@ -15,5 +16,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         IEnumerable<IFeed> SearchByAuthors(string authors);
         IEnumerable<IFeed> SearchByKeyword(string keyword);
         IEnumerable<IFeed> SearchByTitle(string title);
+
+        IEnumerable<IHashCode> SearchTitleHashCodesBySchemeAndValue(Uri scheme, string value);
     }
 }

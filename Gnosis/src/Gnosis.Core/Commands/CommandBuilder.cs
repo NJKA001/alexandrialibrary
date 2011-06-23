@@ -94,10 +94,5 @@ namespace Gnosis.Core.Commands
 
             return builder.ToString();
         }
-
-        //public string ToUnformattedString()
-        //{
-        //    return ToString().Replace(Environment.NewLine, " ");
-        //}
     }
 }

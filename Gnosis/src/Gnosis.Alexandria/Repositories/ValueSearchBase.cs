@@ -48,6 +48,8 @@ namespace Gnosis.Alexandria.Repositories
         private readonly string orderByClause;
         private readonly IDictionary<string, bool> columns = new Dictionary<string, bool>();
 
+        #region ISearch Members
+
         public string Name
         {
             get { return string.Format("{0}_{1}", SourceName, this.GetType().Name); }
@@ -70,7 +72,9 @@ namespace Gnosis.Alexandria.Repositories
 
         public IFilter GetFilter(IDictionary<string, object> parameters)
         {
-            return new Filter(whereClause, orderByClause, parameters);
+            return new Filter(whereClause, orderByClause, string.Empty, false, parameters);
         }
+
+        #endregion
     }
 }

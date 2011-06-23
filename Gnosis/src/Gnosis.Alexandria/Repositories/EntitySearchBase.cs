@@ -71,7 +71,7 @@ namespace Gnosis.Alexandria.Repositories
 
         public IFilter GetFilter(IDictionary<string, object> parameters)
         {
-            return new Filter(whereClause, orderByClause, joinClause, parameters);
+            return new Filter(whereClause, orderByClause, joinClause, true, parameters);
         }
     }
 }

@@ -28,11 +28,14 @@ namespace Gnosis.Core.Commands
 
                 var previousName = entityInfo.Name;
                 var parent = entityInfo.Parent;
-                while (parent != null)
+                if (filter.AutoJoin)
                 {
-                    builder.AppendFormat(" inner join {0} on {0}.Id = {1}.Parent", parent.Name, previousName);
-                    previousName = parent.Name;
-                    parent = parent.Parent;
+                    while (parent != null)
+                    {
+                        builder.AppendFormat(" inner join {0} on {0}.Id = {1}.Parent", parent.Name, previousName);
+                        previousName = parent.Name;
+                        parent = parent.Parent;
+                    }
                 }
 
                 if (!string.IsNullOrEmpty(filter.JoinClause))
@@ -52,13 +55,15 @@ namespace Gnosis.Core.Commands
 
             var previousName = valueInfo.Name;
             var parent = valueInfo.Parent;
-            while (parent != null)
+            if (filter.AutoJoin)
             {
-                builder.AppendFormat(" inner join {0} on {0}.Id = {1}.Parent", parent.Name, previousName);
-                previousName = parent.Name;
-                parent = parent.Parent;
+                while (parent != null)
+                {
+                    builder.AppendFormat(" inner join {0} on {0}.Id = {1}.Parent", parent.Name, previousName);
+                    previousName = parent.Name;
+                    parent = parent.Parent;
+                }
             }
-
             if (!string.IsNullOrEmpty(filter.JoinClause))
                 builder.AppendFormat(" {0}", filter.JoinClause);
 

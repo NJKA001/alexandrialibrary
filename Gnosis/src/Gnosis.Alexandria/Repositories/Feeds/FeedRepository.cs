@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Alexandria.Helpers;
+using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Feeds;
 using Gnosis.Core;
 using Gnosis.Core.Commands;
+using Gnosis.Core.Queries;
 
 namespace Gnosis.Alexandria.Repositories.Feeds
 {
@@ -47,6 +49,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         private readonly SearchItemCategoriesByParent itemCategoriesByParent = new SearchItemCategoriesByParent();
         private readonly SearchItemLinksByParent itemLinksByParent = new SearchItemLinksByParent();
         private readonly SearchItemMetadataByParent itemMetadataByParent = new SearchItemMetadataByParent();
+        private readonly SearchTitleHashCodesBySchemeAndValue titleHashCodesBySchemeAndValue = new SearchTitleHashCodesBySchemeAndValue();
 
         private readonly SearchByKeyword byKeyword = new SearchByKeyword();
 
@@ -69,6 +72,11 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         public IEnumerable<IFeed> SearchByTitle(string title)
         {
             return Select(byTitle.GetFilter(title));
+        }
+
+        public IEnumerable<IHashCode> SearchTitleHashCodesBySchemeAndValue(Uri scheme, string value)
+        {
+            return Select<IHashCode>(titleHashCodesBySchemeAndValue.GetFilter(scheme, value), feed => feed.TitleHashCodes);
         }
     }
 }

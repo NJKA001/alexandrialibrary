@@ -43,6 +43,8 @@ namespace Gnosis.Core.Queries
         private readonly string orderByClause;
         private readonly IEnumerable<IParameter> parameters;
 
+        #region Private Methods
+
         private void AddChildStatements(ICommandBuilder parentBuilder, EntityInfo entityInfo, IFilter filter)
         {
             foreach (var childInfo in entityInfo.Children)
@@ -145,28 +147,9 @@ namespace Gnosis.Core.Queries
             }
         }
 
-        private void AddChildCommandTexts(IList<string> commandTexts, ICommandBuilder parent)
-        {
-            foreach (var child in parent.Children)
-            {
-                var command = child.GetCommand(connection);
-                commandTexts.Add(command.CommandText);
+        #endregion
 
-                AddChildCommandTexts(commandTexts, child);
-            }
-        }
-
-        public IList<string> GetCommandTexts()
-        {
-            var commandTexts = new List<string>();
-
-            var command = builder.GetCommand(connection);
-            commandTexts.Add(command.CommandText);
-
-            AddChildCommandTexts(commandTexts, builder);
-
-            return commandTexts;
-        }
+        #region IQuery Members
 
         public IEnumerable<T> Execute()
         {
@@ -193,5 +176,7 @@ namespace Gnosis.Core.Queries
             logger.Debug("  return items. count=" + items.Count);
             return items;
         }
+
+        #endregion
     }
 }
