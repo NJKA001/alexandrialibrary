@@ -114,6 +114,24 @@ namespace Gnosis.Alexandria.Repositories
             }
         }
 
+        protected IEnumerable<T> SelectReverse<TValue>(IFilter filter, string entityOrderByClause, Expression<Func<T, object>> property)
+            where TValue : IValue
+        {
+            IDbConnection connection = null;
+
+            try
+            {
+                connection = GetConnection();
+                var query = new ReverseLookupQuery<T, TValue>(connection, logger, factory, filter, entityOrderByClause, property);
+                return query.Execute();
+            }
+            finally
+            {
+                if (defaultConnection == null && connection != null)
+                    connection.Close();
+            }
+        }
+
         public T Lookup(Guid id)
         {
             var entityInfo = new EntityInfo(baseType);

@@ -399,8 +399,9 @@ namespace Gnosis.Tests.Repositories
         [Test]
         public void SearchFeedTitleHashCodes()
         {
+            const string titleB = "Björk's Podcast";
             var feedA = GetFeed(new Uri("http://espn.go.com/feeds/4636346"), "The BS Report", "Bill Simmons", "Joe House, Marc Stein, John Hollinger", "Bill Simmons Podcast");
-            var feedB = GetFeed(new Uri("http://iceland.com//other-path/rss?id=43645734625"), "Björk's Podcast", "Cool Stuff From An Alien Planet", "Other People", "Blah Blah Blah");
+            var feedB = GetFeed(new Uri("http://iceland.com//other-path/rss?id=43645734625"), titleB, "Cool Stuff From An Alien Planet", "Other People", "Blah Blah Blah");
             var feedC = GetFeed(new Uri("http://wxyz.com//some-path/rss?id=9957457"), "W.X.Y-Z", "Some Other Talking Heads", "Still More Jackasses", "Yadda Yadda Yadda");
             var feedD = GetFeed(new Uri("http://comedycentral.com/feeds/colbert.xml"), "Stephen", "Stephen Colbert", "Various", "Stephen Colbert, the great American Patriot, with his musings on politics and culture");
             var feedE = GetFeed(new Uri("http://www.nerdist.com/category/podcast/"), "The Nerdist Podcast", "Chris Hardwick", "Uncredited", "Chris Hardwich being a NERD!");
@@ -428,8 +429,12 @@ namespace Gnosis.Tests.Repositories
             var keyword3 = "%BJORK%";
             var results3 = repository.SearchTitleHashCodesBySchemeAndValue(HashCode.SchemeNameHash, keyword3);
             Assert.AreEqual(2, results3.Count());
-            Assert.AreEqual("BJORKSPODCAST", results3.First().Value);
-            Assert.AreEqual("BJORKS", results3.Last().Value);
+            Assert.IsNotNull(results3.Where(hashCode => hashCode.Value == "BJORKSPODCAST").FirstOrDefault());
+            Assert.IsNotNull(results3.Where(hashCode => hashCode.Value == "BJORKS").FirstOrDefault());
+
+            var results4 = repository.SearchByTitleHashCodes(HashCode.SchemeNameHash, keyword3);
+            Assert.AreEqual(1, results4.Count());
+            Assert.AreEqual(titleB, results4.FirstOrDefault().Title);
 
             //const string keyword1 = "WXYZ";
             //var factory = new FeedFactory(context, logger);

@@ -94,6 +94,7 @@
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="PersistenceIgnoreAttribute.cs" />
     <Compile Include="Queries\IValueQuery.cs" />
+    <Compile Include="Queries\ReverseLookupQuery.cs" />
     <Compile Include="Queries\ValueQuery.cs" />
     <Compile Include="ReflectionHelper.cs" />
     <Compile Include="UN\IRegion.cs" />

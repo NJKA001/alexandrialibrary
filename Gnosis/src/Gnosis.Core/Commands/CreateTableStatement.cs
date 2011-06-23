@@ -30,6 +30,11 @@ namespace Gnosis.Core.Commands
             AddColumns(valueInfo.Elements);
         }
 
+        public CreateTableStatement(string name, SelectStatement statement)
+        {
+            builder.AppendFormat("create temp table {0} as {1}", name, statement.ToString());
+        }
+
         private readonly StringBuilder builder = new StringBuilder();
         private bool hasColumns;
 
@@ -399,7 +404,13 @@ namespace Gnosis.Core.Commands
 
         public override string ToString()
         {
-            return builder.ToString() + ");";
+            var sql = builder.ToString();
+            if (sql.Contains('(') && !sql.Contains(')'))
+                sql += ");";
+            else
+                sql += ";";
+
+            return sql;
         }
     }
 }
