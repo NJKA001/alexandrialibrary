@@ -66,7 +66,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
         public IEnumerable<IFeed> SearchByKeyword(string keyword)
         {
-            return Select(byKeyword.GetFilter(keyword));
+            return SelectForward(byKeyword.GetFilter(keyword));
         }
 
         public IEnumerable<IFeed> SearchByTitle(string title)

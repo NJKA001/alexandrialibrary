@@ -29,14 +29,14 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             whereClause.Append(" or fi.Title like @pattern or fi.Authors like @pattern or fi.Contributors like @pattern or fi.Summary like @pattern");
             whereClause.Append(" or fic.Name like @pattern");
             whereClause.Append(" or fim.Content like @pattern or fim.Name like @pattern");
-            whereClause.Append(" or (fth.Scheme = @schemeDM and fth.Value = @patternDM) or (fth.Scheme = @schemeNH and fth.Value = @patternNH)");
-            whereClause.Append(" or (fah.Scheme = @schemeDM and fah.Value = @patternDM) or (fah.Scheme = @schemeNH and fah.Value = @patternNH)");
-            whereClause.Append(" or (fch.Scheme = @schemeDM and fch.Value = @patternDM) or (fch.Scheme = @schemeNH and fch.Value = @patternNH)");
-            whereClause.Append(" or (fdh.Scheme = @schemeDM and fdh.Value = @patternDM) or (fdh.Scheme = @schemeNH and fdh.Value = @patternNH)");
-            whereClause.Append(" or (fith.Scheme = @schemeDM and fith.Value = @patternDM) or (fith.Scheme = @schemeNH and fith.Value = @patternNH)");
-            whereClause.Append(" or (fiah.Scheme = @schemeDM and fiah.Value = @patternDM) or (fiah.Scheme = @schemeNH and fiah.Value = @patternNH)");
-            whereClause.Append(" or (fich.Scheme = @schemeDM and fich.Value = @patternDM) or (fich.Scheme = @schemeNH and fich.Value = @patternNH)");
-            whereClause.Append(" or (fish.Scheme = @schemeDM and fish.Value = @patternDM) or (fish.Scheme = @schemeNH and fish.Value = @patternNH)");
+            whereClause.Append(" or (fth.Scheme = @schemeDM and fth.Value like @patternDM) or (fth.Scheme = @schemeNH and fth.Value like @patternNH)");
+            whereClause.Append(" or (fah.Scheme = @schemeDM and fah.Value like @patternDM) or (fah.Scheme = @schemeNH and fah.Value like @patternNH)");
+            whereClause.Append(" or (fch.Scheme = @schemeDM and fch.Value like @patternDM) or (fch.Scheme = @schemeNH and fch.Value like @patternNH)");
+            whereClause.Append(" or (fdh.Scheme = @schemeDM and fdh.Value like @patternDM) or (fdh.Scheme = @schemeNH and fdh.Value like @patternNH)");
+            whereClause.Append(" or (fith.Scheme = @schemeDM and fith.Value like @patternDM) or (fith.Scheme = @schemeNH and fith.Value like @patternNH)");
+            whereClause.Append(" or (fiah.Scheme = @schemeDM and fiah.Value like @patternDM) or (fiah.Scheme = @schemeNH and fiah.Value like @patternNH)");
+            whereClause.Append(" or (fich.Scheme = @schemeDM and fich.Value like @patternDM) or (fich.Scheme = @schemeNH and fich.Value like @patternNH)");
+            whereClause.Append(" or (fish.Scheme = @schemeDM and fish.Value like @patternDM) or (fish.Scheme = @schemeNH and fish.Value like @patternNH)");
             return whereClause.ToString();
         }
 

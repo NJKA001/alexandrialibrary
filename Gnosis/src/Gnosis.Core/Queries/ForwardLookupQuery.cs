@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -10,60 +9,59 @@ using Gnosis.Core.Commands;
 
 namespace Gnosis.Core.Queries
 {
-    public class Query<T>
-        : IQuery<T> where T : IEntity
+    public class ForwardLookupQuery<T>
+        : IQuery<T>
+        where T : IEntity
     {
-        public Query(IDbConnection connection, ILogger logger, IFactory factory, IFilter filter)
+        public ForwardLookupQuery(IDbConnection connection, ILogger logger, IFactory factory, IFilter filter)
         {
             var entityInfo = new EntityInfo(typeof(T));
 
             this.connection = connection;
             this.logger = logger;
             this.factory = factory;
-            this.builder = new CommandBuilder(entityInfo.Name, entityInfo.Type);
+            this.setupBuilder = new CommandBuilder();
 
-            builder.AddStatement(new SelectStatement(entityInfo, filter));
+            rootName = "T_" + Guid.NewGuid().ToString().Replace("-", string.Empty);
+            var selectStatement = new SelectStatement(entityInfo, filter, rootIdAlias);
+            setupBuilder.AddStatement(new CreateTableStatement(rootName, selectStatement));
             foreach (var parameter in filter.Parameters)
             {
-                builder.AddParameter(parameter);
+                setupBuilder.AddParameter(parameter);
             }
 
-            AddChildStatements(builder, entityInfo, filter);
+            this.builder = new CommandBuilder(entityInfo.Name, entityInfo.Type);
+            builder.AddStatement(new SelectStatement(entityInfo, rootName, rootIdAlias));
+
+            AddChildStatements(builder, entityInfo);
         }
 
         private readonly IDbConnection connection;
         private readonly ILogger logger;
         private readonly IFactory factory;
+        private readonly ICommandBuilder setupBuilder;
         private readonly ICommandBuilder builder;
+        private readonly string rootName;
+        private const string rootIdAlias = "Root_Id";
 
-        #region Private Methods
+        #region Private Members
 
-        private void AddChildStatements(ICommandBuilder parentBuilder, EntityInfo entityInfo, IFilter filter)
+        private void AddChildStatements(ICommandBuilder parentBuilder, EntityInfo entityInfo)
         {
             foreach (var childInfo in entityInfo.Children)
             {
                 var childBuilder = new CommandBuilder(childInfo.Name, childInfo.Type);
-                childBuilder.AddStatement(new SelectStatement(childInfo, filter));
-                foreach (var parameter in filter.Parameters)
-                {
-                    childBuilder.AddParameter(parameter);
-                    //logger.Debug("  parameter name=" + parameter.Name + "value=" + parameter.Value.ToString());
-                }
+                childBuilder.AddStatement(new SelectStatement(childInfo, rootName, rootIdAlias));
 
                 parentBuilder.AddChild(childBuilder);
 
-                AddChildStatements(childBuilder, childInfo, filter);
+                AddChildStatements(childBuilder, childInfo);
             }
 
             foreach (var valueInfo in entityInfo.Values)
             {
                 var valueBuilder = new CommandBuilder(valueInfo.Name, valueInfo.Type);
-                valueBuilder.AddStatement(new SelectStatement(valueInfo, filter));
-                foreach (var parameter in filter.Parameters)
-                {
-                    valueBuilder.AddParameter(parameter);
-                    //logger.Debug("  parameter name=" + parameter.Name + "value=" + parameter.Value.ToString());
-                }
+                valueBuilder.AddStatement(new SelectStatement(valueInfo, rootName, rootIdAlias));
 
                 parentBuilder.AddChild(valueBuilder);
             }
@@ -71,7 +69,7 @@ namespace Gnosis.Core.Queries
 
         private void AddChildren(IDbConnection connection, ICommandBuilder parentBuilder, IEnumerable<IEntity> parents)
         {
-            logger.Info("  Query.AddChildren");
+            logger.Info("  ForwardLookupQuery.AddChildren");
             foreach (var childBuilder in parentBuilder.Children)
             {
                 if (childBuilder.Type == null)
@@ -106,7 +104,7 @@ namespace Gnosis.Core.Queries
 
                                 if (!values.ContainsKey(value.Parent))
                                     values.Add(value.Parent, new List<IValue>());
-                                
+
                                 values[value.Parent].Add(value);
                             }
                         }
@@ -146,12 +144,16 @@ namespace Gnosis.Core.Queries
 
         public IEnumerable<T> Execute()
         {
-            logger.Info("Query.Execute");
+            logger.Info("ForwardLookupQuery.Execute");
+
+            var createTempTable = setupBuilder.GetCommand(connection);
+            logger.Debug("    setup command: " + createTempTable.CommandText);
+            createTempTable.ExecuteNonQuery();
 
             var items = new List<T>();
 
             var command = builder.GetCommand(connection);
-            logger.Debug("    " + command.CommandText.Trim());
+            logger.Debug("    query command: " + command.CommandText.Trim());
             using (var reader = command.ExecuteReader())
             {
                 while (reader.Read())

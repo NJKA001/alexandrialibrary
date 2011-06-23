@@ -12,8 +12,6 @@ using Gnosis.Core.Batches;
 using Gnosis.Core.Commands;
 using Gnosis.Core.Queries;
 
-//using Gnosis.Alexandria.Models;
-
 namespace Gnosis.Alexandria.Repositories
 {
     public abstract class RepositoryBase<T>
@@ -105,6 +103,23 @@ namespace Gnosis.Alexandria.Repositories
             {
                 connection = GetConnection();
                 var query = new ValueQuery<T, TValue>(connection, logger, factory, filter, property);
+                return query.Execute();
+            }
+            finally
+            {
+                if (defaultConnection == null && connection != null)
+                    connection.Close();
+            }
+        }
+
+        protected IEnumerable<T> SelectForward(IFilter filter)
+        {
+            IDbConnection connection = null;
+
+            try
+            {
+                connection = GetConnection();
+                var query = new ForwardLookupQuery<T>(connection, logger, factory, filter);
                 return query.Execute();
             }
             finally

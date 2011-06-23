@@ -48,6 +48,21 @@ namespace Gnosis.Core.Commands
             }
         }
 
+        public SelectStatement(EntityInfo entityInfo, IFilter filter, string rootIdAlias)
+        {
+            if (entityInfo.IsRoot)
+            {
+                builder.AppendFormat("select distinct {0}.{1} {2} from {0}", entityInfo.Name, entityInfo.Identifier.Name, rootIdAlias);
+                if (!string.IsNullOrEmpty(filter.JoinClause))
+                    builder.AppendFormat(" {0}", filter.JoinClause);
+                if (!string.IsNullOrEmpty(filter.WhereClause))
+                    builder.AppendFormat(" where {0}", filter.WhereClause.Trim());
+                if (!string.IsNullOrEmpty(filter.OrderByClause))
+                    builder.AppendFormat(" order by {0}", filter.OrderByClause);
+                builder.Append(";");
+            }
+        }
+
         public SelectStatement(EntityInfo entityInfo, IFilter filter)
         {
             if (entityInfo.IsRoot)
