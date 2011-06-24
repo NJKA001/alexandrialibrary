@@ -4,11 +4,13 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core.Queries
+namespace Gnosis.Core
 {
-    public interface IQuery<T>
+    public interface IOutline<T>
         where T : IEntity
     {
-        IEnumerable<T> Execute(IDbConnection connection);
+        Guid Id { get; }
+
+        void Initialize(IDataRecord record);
     }
 }

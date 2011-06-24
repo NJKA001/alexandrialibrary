@@ -77,6 +77,76 @@ namespace Gnosis.Alexandria.Repositories
             }
         }
 
+        protected IEnumerable<T> SelectEntities(IFilter filter)
+        {
+            IDbConnection connection = null;
+
+            try
+            {
+                connection = GetConnection();
+                var query = new Query<T>(logger, factory, filter);
+                return query.Execute(connection);
+            }
+            finally
+            {
+                if (defaultConnection == null && connection != null)
+                    connection.Close();
+            }
+        }
+
+        protected IEnumerable<TEntity> SelectEntities<TEntity>(IQuery<TEntity> query)
+            where TEntity : IEntity
+        {
+            IDbConnection connection = null;
+
+            try
+            {
+                connection = GetConnection();
+                return query.Execute(connection);
+            }
+            finally
+            {
+                if (defaultConnection == null && connection != null)
+                    connection.Close();
+            }
+        }
+
+        protected IEnumerable<TOutline> SelectOutlines<TEntity, TOutline>(IOutlineQuery<TEntity, TOutline> query)
+            where TEntity : IEntity
+            where TOutline : IOutline<TEntity>
+        {
+            IDbConnection connection = null;
+
+            try
+            {
+                connection = GetConnection();
+                return query.Execute(connection);
+            }
+            finally
+            {
+                if (defaultConnection == null && connection != null)
+                    connection.Close();
+            }
+        }
+
+        protected IEnumerable<TValue> SelectValues<TValue>(IValueQuery<TValue> query)
+            where TValue : IValue
+        {
+            IDbConnection connection = null;
+
+            try
+            {
+                connection = GetConnection();
+                return query.Execute(connection);
+            }
+            finally
+            {
+                if (defaultConnection == null && connection != null)
+                    connection.Close();
+            }
+        }
+
+        /*
         protected IEnumerable<T> Select(IFilter filter)
         {
             IDbConnection connection = null;
@@ -85,6 +155,24 @@ namespace Gnosis.Alexandria.Repositories
             {
                 connection = GetConnection();
                 var query = new Query<T>(connection, logger, factory, filter);
+                return query.Execute();
+            }
+            finally
+            {
+                if (defaultConnection == null && connection != null)
+                    connection.Close();
+            }
+        }
+
+        protected IEnumerable<TOutline> SelectOutline<TOutline>(IFilter filter)
+            where TOutline : IOutline<T>, new()
+        {
+            IDbConnection connection = null;
+
+            try
+            {
+                connection = GetConnection();
+                var query = new OutlineQuery<T, TOutline>(connection, logger, factory, filter);
                 return query.Execute();
             }
             finally
@@ -182,18 +270,20 @@ namespace Gnosis.Alexandria.Repositories
                     connection.Close();
             }
         }
+        */
 
         public T Lookup(Guid id)
         {
             var entityInfo = new EntityInfo(baseType);
             var whereClause = string.Format("{0}.{1} = @Id", entityInfo.Name, entityInfo.Identifier.Name);
             var parameters = new Dictionary<string, object> { { "@Id", id.ToString() } };
-            return Select(new Filter(whereClause, parameters)).FirstOrDefault();
+            return SelectEntities(new Filter(whereClause, parameters)).FirstOrDefault();
         }
 
-        public T Lookup(ILookup lookup, IDictionary<string, object> parameters)
+        public T Lookup(IQuery<T> query) //ILookup lookup, IDictionary<string, object> parameters)
         {
-            return Select(lookup.GetFilter(parameters)).FirstOrDefault();
+            return SelectEntities(query).FirstOrDefault();
+            //return SelectEntities(lookup.GetFilter(parameters)).FirstOrDefault();
         }
 
         public IEnumerable<T> Search()
@@ -202,12 +292,12 @@ namespace Gnosis.Alexandria.Repositories
             if (search == null)
                 throw new InvalidOperationException("No default search defined for this repository");
 
-            return Select(search.GetFilter(new Dictionary<string, object>()));
+            return SelectEntities(search.GetFilter(new Dictionary<string, object>()));
         }
 
-        public IEnumerable<T> Search(ISearch search, IDictionary<string, object> parameters)
+        public IEnumerable<T> Search(IQuery<T> query)//ISearch search, IDictionary<string, object> parameters)
         {
-            return Select(search.GetFilter(parameters));
+            return SelectEntities(query); //search.GetFilter(parameters));
         }
 
         public virtual void Initialize()

@@ -81,6 +81,7 @@
     <Compile Include="ILogger.cs" />
     <Compile Include="ILookup.cs" />
     <Compile Include="ImageExtensions.cs" />
+    <Compile Include="IOutline.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ISearch.cs" />
     <Compile Include="Iso\ICountry.cs" />
@@ -93,9 +94,11 @@
     <Compile Include="IValueInitialState.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="PersistenceIgnoreAttribute.cs" />
-    <Compile Include="Queries\ForwardLookupQuery.cs" />
+    <Compile Include="Queries\ForwardQuery.cs" />
+    <Compile Include="Queries\IOutlineQuery.cs" />
     <Compile Include="Queries\IValueQuery.cs" />
-    <Compile Include="Queries\ReverseLookupQuery.cs" />
+    <Compile Include="Queries\OutlineQuery.cs" />
+    <Compile Include="Queries\ReverseQuery.cs" />
     <Compile Include="Queries\ValueQuery.cs" />
     <Compile Include="ReflectionHelper.cs" />
     <Compile Include="UN\IRegion.cs" />

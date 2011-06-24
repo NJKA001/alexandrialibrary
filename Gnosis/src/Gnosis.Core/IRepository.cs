@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core.Queries;
+
 namespace Gnosis.Core
 {
     public interface IRepository<T>
         where T : IEntity
     {
         T Lookup(Guid id);
-        T Lookup(ILookup lookup, IDictionary<string, object> parameters);
+        T Lookup(IQuery<T> query);
         IEnumerable<T> Search();
-        IEnumerable<T> Search(ISearch search, IDictionary<string, object> parameters);
+        IEnumerable<T> Search(IQuery<T> query);
 
         void Initialize();
         void Save(T item);

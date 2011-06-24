@@ -532,6 +532,30 @@ namespace Gnosis.Tests.Repositories
             Assert.AreEqual(2, results2.Count());
         }
 
+        [Test]
+        public void SearchOutlinesByTitle()
+        {
+            var feed1 = GetFeed(new Uri("http://espn.go.com/feeds/4636346"), "The BS Report", "Bill Simmons", "Joe House, Marc Stein, John Hollinger", "Bill Simmons Podcast");
+            var feed2 = GetFeed(new Uri("http://cnn.com//other-path/rss?id=43645734625"), "CNN Feed", "A Bunch of Talking Heads", "More Jackasses", "Blah Blah Blah");
+            var feed3 = GetFeed(new Uri("http://cnn.com//some-path/rss?id=9957457"), "CNN Feed #2", "Some Other Talking Heads", "Still More Jackasses", "Yadda Yadda Yadda");
+            var feed4 = GetFeed(new Uri("http://comedycentral.com/feeds/colbert.xml"), "The Colbert Report and Other Nonsense", "Stephen Colbert", "Various", "Stephen Colbert, the great American Patriot, with his musings on politics and culture");
+            var feed5 = GetFeed(new Uri("http://www.nerdist.com/category/podcast/"), "The Nerdist Podcast", "Chris Hardwick", "Uncredited", "Chris Hardwich being a NERD!");
+            var feed6 = GetFeed(new Uri("http://www.something.else.com/entirely-different/1.rss"), "Some Other Cast for CNN New Network", "Joe Talker, Sally Yeller", "Who Knows", "More hot air being expelled");
+            repository.Save(new List<IFeed> { feed1, feed2, feed3, feed4, feed5, feed6 });
+
+            var results1 = repository.SearchOutlinesByTitle("CNN");
+            Assert.AreEqual(3, results1.Count());
+            var num2 = results1.Where(feed => feed.Title == "CNN Feed #2").FirstOrDefault();
+            Assert.IsNotNull(num2);
+            Assert.AreEqual(feed3.Id, num2.Id);
+            Assert.AreEqual("http://cnn.com//some-path/rss?id=9957457", num2.Location.ToString());
+            Assert.AreEqual("CNN Feed #2", num2.Title);
+            Assert.AreEqual("Some Other Talking Heads", num2.Authors);
+            Assert.AreEqual("Yadda Yadda Yadda", num2.Description);
+            Assert.AreEqual(UriExtensions.EmptyUriPath, num2.ImagePath.ToString());
+            Assert.AreEqual(UriExtensions.EmptyUriPath, num2.IconPath.ToString());
+        }
+
         #endregion
     }
 }

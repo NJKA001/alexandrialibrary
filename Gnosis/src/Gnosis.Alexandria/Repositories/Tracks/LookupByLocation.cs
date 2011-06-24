@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core;
 using Gnosis.Alexandria.Models.Tracks;
 
 namespace Gnosis.Alexandria.Repositories.Tracks
@@ -14,5 +15,10 @@ namespace Gnosis.Alexandria.Repositories.Tracks
             : base("Track.Location = @Location", track => track.Location)
         {
         }
+
+        public IFilter GetFilter(Uri location)
+        {
+            return GetFilter(new Dictionary<string, object> { { "@Location", location.ToString() } });
+        }  
     }
 }

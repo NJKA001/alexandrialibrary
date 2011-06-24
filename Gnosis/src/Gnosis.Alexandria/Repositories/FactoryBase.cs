@@ -24,8 +24,6 @@ namespace Gnosis.Alexandria.Repositories
         private readonly IDictionary<Type, Func<IEntity>> entityConstructors = new Dictionary<Type, Func<IEntity>>();
         private readonly IDictionary<Type, Func<IChild>> childConstructors = new Dictionary<Type, Func<IChild>>();
         private readonly IDictionary<Type, Func<IValue>> valueConstructors = new Dictionary<Type, Func<IValue>>();
-        //private readonly IDictionary<string, Action<IEntity, IChild>> addChildActions = new Dictionary<string, Action<IEntity, IChild>>();
-        //private readonly IDictionary<string, Action<IEntity, IValue>> addValueActions = new Dictionary<string, Action<IEntity, IValue>>();
 
         protected IContext Context
         {
@@ -54,16 +52,6 @@ namespace Gnosis.Alexandria.Repositories
         {
             valueConstructors.Add(typeof(T), constructor);
         }
-
-        //protected void MapAddChildAction(string childName, Action<IEntity, IChild> action)
-        //{
-        //    addChildActions.Add(childName, action);
-        //}
-
-        //protected void MapAddValueAction(string valueName, Action<IEntity, IValue> action)
-        //{
-        //    addValueActions.Add(valueName, action);
-        //}
 
         #region IFactory Members
 

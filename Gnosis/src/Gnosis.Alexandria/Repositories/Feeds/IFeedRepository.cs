@@ -22,5 +22,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
         IEnumerable<IHashCode> SearchTitleHashCodesBySchemeAndValue(Uri scheme, string value);
         IEnumerable<IFeed> SearchByTitleHashCodes(Uri scheme, string value);
+
+        IEnumerable<IFeedOutline> SearchOutlinesByTitle(string title);
     }
 }

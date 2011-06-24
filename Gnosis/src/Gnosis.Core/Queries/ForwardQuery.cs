@@ -9,15 +9,14 @@ using Gnosis.Core.Commands;
 
 namespace Gnosis.Core.Queries
 {
-    public class ForwardLookupQuery<T>
+    public class ForwardQuery<T>
         : IQuery<T>
         where T : IEntity
     {
-        public ForwardLookupQuery(IDbConnection connection, ILogger logger, IFactory factory, IFilter filter)
+        public ForwardQuery(ILogger logger, IFactory factory, IFilter filter)
         {
             var entityInfo = new EntityInfo(typeof(T));
 
-            this.connection = connection;
             this.logger = logger;
             this.factory = factory;
             this.setupBuilder = new CommandBuilder();
@@ -36,7 +35,6 @@ namespace Gnosis.Core.Queries
             AddChildStatements(builder, entityInfo);
         }
 
-        private readonly IDbConnection connection;
         private readonly ILogger logger;
         private readonly IFactory factory;
         private readonly ICommandBuilder setupBuilder;
@@ -142,9 +140,9 @@ namespace Gnosis.Core.Queries
 
         #region IQuery Members
 
-        public IEnumerable<T> Execute()
+        public IEnumerable<T> Execute(IDbConnection connection)
         {
-            logger.Info("ForwardLookupQuery.Execute");
+            logger.Info("ForwardQuery.Execute");
 
             var createTempTable = setupBuilder.GetCommand(connection);
             logger.Debug("    setup command: " + createTempTable.CommandText);

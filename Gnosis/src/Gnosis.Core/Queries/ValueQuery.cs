@@ -16,13 +16,12 @@ namespace Gnosis.Core.Queries
         where TParent : IEntity
         where TValue : IValue
     {
-        public ValueQuery(IDbConnection connection, ILogger logger, IFactory factory, IFilter filter, Expression<Func<TParent, object>> property)
+        public ValueQuery(ILogger logger, IFactory factory, IFilter filter, Expression<Func<TParent, object>> property)
         {
             var parent = new EntityInfo(typeof(TParent));
             var valueType = typeof(TValue);
             var valueInfo = new ValueInfo(parent, property.AsProperty(), valueType);
 
-            this.connection = connection;
             this.logger = logger;
             this.factory = factory;
             this.builder = new CommandBuilder(valueInfo.Name, valueType);
@@ -38,7 +37,6 @@ namespace Gnosis.Core.Queries
             }
         }
 
-        private readonly IDbConnection connection;
         private readonly ILogger logger;
         private readonly IFactory factory;
         private readonly ICommandBuilder builder;
@@ -46,9 +44,9 @@ namespace Gnosis.Core.Queries
         private readonly string orderByClause;
         private readonly IEnumerable<IParameter> parameters;
 
-        #region IQuery Members
+        #region IValueQuery Members
 
-        public IEnumerable<TValue> Execute()
+        public IEnumerable<TValue> Execute(IDbConnection connection)
         {
             logger.Info("ValueQuery.Execute");
 

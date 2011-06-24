@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
-using Gnosis.Core.Commands;
+using Gnosis.Core.Queries;
 using Gnosis.Alexandria.Helpers;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Tracks;
@@ -28,18 +28,21 @@ namespace Gnosis.Alexandria.Repositories.Tracks
             AddSearch(byTitle);
         }
 
-        private readonly ILookup byLocation = new LookupByLocation();
-        private readonly ISearch all = new SearchAll();
-        private readonly ISearch byTitle = new SearchByTitle();
+        private readonly LookupByLocation byLocation = new LookupByLocation();
+        private readonly SearchAll all = new SearchAll();
+        private readonly SearchByTitle byTitle = new SearchByTitle();
 
         public ITrack LookupByLocation(Uri location)
         {
-            return Lookup(byLocation, new Dictionary<string, object> { { "@Location", location } });
+            var query = new Query<ITrack>(Logger, Factory, byLocation.GetFilter(location));
+            return Lookup(query);
+            //return Lookup(byLocation, new Dictionary<string, object> { { "@Location", location } });
         }
 
         public IEnumerable<ITrack> SearchByTitle(string title)
         {
-            return Search(byTitle, new Dictionary<string, object> { { "@Title", title } });
+            var query = new Query<ITrack>(Logger, Factory, byTitle.GetFilter(title));
+            return Search(query);
         }
     }
 }

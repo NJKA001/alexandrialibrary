@@ -56,43 +56,62 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
         public IFeed LookupByLocation(Uri location)
         {
-            return Select(byLocation.GetFilter(location))
-                .FirstOrDefault();
+            var query = new Query<IFeed>(Logger, Factory, byLocation.GetFilter(location));
+            return Lookup(query);
         }
 
         public IEnumerable<IFeed> SearchByAuthors(string authors)
         {
-            return Select(byAuthors.GetFilter(authors));
+            var query = new Query<IFeed>(Logger, Factory, byAuthors.GetFilter(authors));
+            return Search(query);
         }
 
         public IEnumerable<IFeed> SearchByKeyword(string keyword)
         {
-            return SelectForward(byKeyword.GetFilter(keyword));
+            //return SelectForward(byKeyword.GetFilter(keyword));
+            var query = new ForwardQuery<IFeed>(Logger, Factory, byKeyword.GetFilter(keyword));
+            return Search(query);
         }
 
         public IEnumerable<IFeedItem> SearchFeedItemsByKeyword(string keyword)
         {
-            return SelectForward<IFeedItem>(itemsByKeyword.GetFilter(keyword));
+            var query = new ForwardQuery<IFeedItem>(Logger, Factory, itemsByKeyword.GetFilter(keyword));
+            return SelectEntities<IFeedItem>(query);
+            //return SelectForward<IFeedItem>(itemsByKeyword.GetFilter(keyword));
         }
 
         public IEnumerable<IFeed> SearchByTitle(string title)
         {
-            return Select(byTitle.GetFilter(title));
+            var query = new Query<IFeed>(Logger, Factory, byTitle.GetFilter(title));
+            return Search(query);
         }
 
         public IEnumerable<IHashCode> SearchTitleHashCodesBySchemeAndValue(Uri scheme, string value)
         {
-            return Select<IHashCode>(titleHashCodesBySchemeAndValue.GetFilter(scheme, value), feed => feed.TitleHashCodes);
+            var query = new ValueQuery<IFeed, IHashCode>(Logger, Factory, titleHashCodesBySchemeAndValue.GetFilter(scheme, value), feed => feed.TitleHashCodes);
+            return SelectValues<IHashCode>(query);
+            //return Select<IHashCode>(titleHashCodesBySchemeAndValue.GetFilter(scheme, value), feed => feed.TitleHashCodes);
         }
 
         public IEnumerable<IFeedItem> SearchFeedItemsByParent(Guid parent)
         {
-            return SelectChild<IFeedItem>(itemsByParent.GetFilter(new Dictionary<string, object> { { "@Parent", parent.ToString() } }));
+            var query = new Query<IFeedItem>(Logger, Factory, itemsByParent.GetFilter(parent));
+            return SelectEntities<IFeedItem>(query);
+            //return SelectChild<IFeedItem>(itemsByParent.GetFilter(new Dictionary<string, object> { { "@Parent", parent.ToString() } }));
         }
 
         public IEnumerable<IFeed> SearchByTitleHashCodes(Uri scheme, string value)
         {
-            return SelectReverse<IHashCode>(titleHashCodesBySchemeAndValue.GetFilter(scheme, value), "Feed.Authors ASC, Feed.PublishedDate ASC, Feed.Title ASC", feed => feed.TitleHashCodes);
+            var filter = titleHashCodesBySchemeAndValue.GetFilter(scheme, value);
+            var query = new ReverseQuery<IFeed, IHashCode>(Logger, Factory, filter, feed => feed.TitleHashCodes);
+            return Search(query);
+            //return SelectReverse<IHashCode>(titleHashCodesBySchemeAndValue.GetFilter(scheme, value), "Feed.Authors ASC, Feed.PublishedDate ASC, Feed.Title ASC", feed => feed.TitleHashCodes);
+        }
+
+        public IEnumerable<IFeedOutline> SearchOutlinesByTitle(string title)
+        {
+            var query = new OutlineQuery<IFeed, IFeedOutline>(Logger, () => new FeedOutline(), byTitle.GetFilter(title));
+            return SelectOutlines<IFeed, IFeedOutline>(query);
         }
     }
 }

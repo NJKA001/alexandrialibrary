@@ -13,11 +13,10 @@ namespace Gnosis.Core.Queries
     public class Query<T>
         : IQuery<T> where T : IEntity
     {
-        public Query(IDbConnection connection, ILogger logger, IFactory factory, IFilter filter)
+        public Query(ILogger logger, IFactory factory, IFilter filter)
         {
             var entityInfo = new EntityInfo(typeof(T));
 
-            this.connection = connection;
             this.logger = logger;
             this.factory = factory;
             this.builder = new CommandBuilder(entityInfo.Name, entityInfo.Type);
@@ -31,7 +30,6 @@ namespace Gnosis.Core.Queries
             AddChildStatements(builder, entityInfo, filter);
         }
 
-        private readonly IDbConnection connection;
         private readonly ILogger logger;
         private readonly IFactory factory;
         private readonly ICommandBuilder builder;
@@ -144,7 +142,7 @@ namespace Gnosis.Core.Queries
 
         #region IQuery Members
 
-        public IEnumerable<T> Execute()
+        public IEnumerable<T> Execute(IDbConnection connection)
         {
             logger.Info("Query.Execute");
 

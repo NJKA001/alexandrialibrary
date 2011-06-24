@@ -11,18 +11,17 @@ using Gnosis.Core.Commands;
 
 namespace Gnosis.Core.Queries
 {
-    public class ReverseLookupQuery<TParent, TValue>
+    public class ReverseQuery<TParent, TValue>
         : IQuery<TParent>
         where TParent : IEntity
         where TValue : IValue
     {
-        public ReverseLookupQuery(IDbConnection connection, ILogger logger, IFactory factory, IFilter filter, string entityOrderByClause, Expression<Func<TParent, object>> property)
+        public ReverseQuery(ILogger logger, IFactory factory, IFilter filter, Expression<Func<TParent, object>> property)
         {
             var parent = new EntityInfo(typeof(TParent));
             var valueType = typeof(TValue);
             var valueInfo = new ValueInfo(parent, property.AsProperty(), valueType);
 
-            this.connection = connection;
             this.logger = logger;
             this.factory = factory;
             this.valueBuilder = new CommandBuilder(valueInfo.Name, valueInfo.Type);
@@ -37,19 +36,17 @@ namespace Gnosis.Core.Queries
             }
 
             builder = new CommandBuilder(parent.Name, parent.Type);
-            builder.AddStatement(new SelectStatement(parent, rootName, rootIdAlias, entityOrderByClause));
+            builder.AddStatement(new SelectStatement(parent, rootName, rootIdAlias));
 
             AddChildStatements(builder, parent);
         }
 
-        private readonly IDbConnection connection;
         private readonly ILogger logger;
         private readonly IFactory factory;
         private readonly ICommandBuilder valueBuilder;
         private readonly ICommandBuilder builder;
         private readonly string rootName;
         const string rootIdAlias = "Root_Id";
-
 
         #region Private Methods
 
@@ -149,7 +146,7 @@ namespace Gnosis.Core.Queries
 
         #region IQuery Members
 
-        public IEnumerable<TParent> Execute()
+        public IEnumerable<TParent> Execute(IDbConnection connection)
         {
             logger.Info("ReverseLookupQuery.Execute");
 

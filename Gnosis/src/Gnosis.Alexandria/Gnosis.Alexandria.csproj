@@ -144,11 +144,13 @@
     <Compile Include="Models\Feeds\FeedItem.cs" />
     <Compile Include="Models\Feeds\FeedLink.cs" />
     <Compile Include="Models\Feeds\FeedMetadatum.cs" />
+    <Compile Include="Models\Feeds\FeedOutline.cs" />
     <Compile Include="Models\Feeds\IFeed.cs" />
     <Compile Include="Models\Feeds\IFeedCategory.cs" />
     <Compile Include="Models\Feeds\IFeedItem.cs" />
     <Compile Include="Models\Feeds\IFeedLink.cs" />
     <Compile Include="Models\Feeds\IFeedMetadatum.cs" />
+    <Compile Include="Models\Feeds\IFeedOutline.cs" />
     <Compile Include="Models\HashCode.cs" />
     <Compile Include="Models\IHashCode.cs" />
     <Compile Include="Models\ModelContext.cs" />
@@ -167,6 +169,7 @@
     <Compile Include="Models\Old\OpticalDiscSource.cs" />
     <Compile Include="Models\Old\PodcastSource.cs" />
     <Compile Include="Models\Old\SpiderSource.cs" />
+    <Compile Include="Models\OutlineBase.cs" />
     <Compile Include="Models\Playlists\IPlaylist.cs" />
     <Compile Include="Models\Playlists\IPlaylistAttribution.cs" />
     <Compile Include="Models\Playlists\IPlaylistExtension.cs" />
