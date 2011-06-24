@@ -44,6 +44,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         private readonly SearchByTitle byTitle = new SearchByTitle();
         private readonly SearchCategoriesByParent categoriesByParent = new SearchCategoriesByParent();
         private readonly SearchItemsByParent itemsByParent = new SearchItemsByParent();
+        private readonly SearchItemsByKeyword itemsByKeyword = new SearchItemsByKeyword();
         private readonly SearchLinksByParent linksByParent = new SearchLinksByParent();
         private readonly SearchMetadataByParent metadataByParent = new SearchMetadataByParent();
         private readonly SearchItemCategoriesByParent itemCategoriesByParent = new SearchItemCategoriesByParent();
@@ -67,6 +68,11 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         public IEnumerable<IFeed> SearchByKeyword(string keyword)
         {
             return SelectForward(byKeyword.GetFilter(keyword));
+        }
+
+        public IEnumerable<IFeedItem> SearchFeedItemsByKeyword(string keyword)
+        {
+            return SelectForward<IFeedItem>(itemsByKeyword.GetFilter(keyword));
         }
 
         public IEnumerable<IFeed> SearchByTitle(string title)

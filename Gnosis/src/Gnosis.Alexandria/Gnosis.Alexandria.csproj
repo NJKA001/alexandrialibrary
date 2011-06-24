@@ -208,6 +208,7 @@
     <Compile Include="Repositories\Feeds\SearchItemCategoriesByParent.cs" />
     <Compile Include="Repositories\Feeds\SearchItemLinksByParent.cs" />
     <Compile Include="Repositories\Feeds\SearchItemMetadataByParent.cs" />
+    <Compile Include="Repositories\Feeds\SearchItemsByKeyword.cs" />
     <Compile Include="Repositories\Feeds\SearchItemsByParent.cs" />
     <Compile Include="Repositories\Feeds\SearchLinksByParent.cs" />
     <Compile Include="Repositories\Feeds\SearchMetadataByParent.cs" />

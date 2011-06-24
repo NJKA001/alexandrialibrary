@@ -482,6 +482,34 @@ namespace Gnosis.Tests.Repositories
         }
 
         [Test]
+        public void SearchItemsByKeyword()
+        {
+            var feedA = GetFeed(new Uri("http://espn.go.com/feeds/4636346"), "The BS Report", "Bill Simmons", "Joe House, Marc Stein, John Hollinger", "Bill Simmons Podcast");
+            var feedB = GetFeed(new Uri("http://iceland.com//other-path/rss?id=43645734625"), "Bjork's Podcast", "Cool Stuff From An Alien Planet", "Other People", "Blah Blah Blah");
+            var feedC = GetFeed(new Uri("http://wxyz.com//some-path/rss?id=9957457"), "W.X.Y-Z", "Some Other Talking Heads", "Still More Jackasses", "Yadda Yadda Yadda");
+            var feedD = GetFeed(new Uri("http://comedycentral.com/feeds/colbert.xml"), "Stephen", "Stephen Colbert", "Various", "Stephen Colbert, the great American Patriot, with his musings on politics and culture");
+            var feedE = GetFeed(new Uri("http://www.nerdist.com/category/podcast/"), "The Nerdist Podcast", "Chris Hardwick", "Uncredited", "Chris Hardwich being a NERD!");
+
+            var itemE1 = GetFeedItem(feedE, "Apples", "Chris Hardwick", "Aaron Abramson", "Discussions about Apples");
+            var itemE2 = GetFeedItem(feedE, "Z.X.W.", "Chris Hardwick", "Bertha Boyle", "Haggling for Bananas in the market");
+            var itemE3 = GetFeedItem(feedE, "Cantaloupes", "Chris Hardwick", "Carl Castle", "Z-X-W!");
+            var itemE4 = GetFeedItem(feedE, "Durians", "Chris Hardwick", "Daria Doyle", "Arguments about the best ways to prepare Durians for delicious desserts");
+            var itemA1 = GetFeedItem(feedA, "NBA Finals Preview Pt. 1", "Bill Simmons", "John Hollinger, Ric Bucher", "Discussing the 2011 NBA Finals");
+            var itemA2 = GetFeedItem(feedA, "NBA Finals Preview Pt. 2", "Bill Simmons", "John Hollinger, Ric Bucher", "Discussing the 2011 NBA Finals");
+
+            itemA2.AddMetadatum("text/plain", new Uri("http://example.com/schemes/random"), "RandomCode", "Octopus-Squid-Whale");
+            itemA1.AddMetadatum("text/plain", new Uri("http://example.com/schemes/random"), "RandomCode", "w.x.y-z");
+
+            repository.Save(new List<IFeed> { feedA, feedB, feedC, feedD, feedE });
+
+            //var count = GetCount("select count() from Feed_TitleHashCodes where Value = 'WXYZ';");
+            //Assert.AreEqual(1, count);
+
+            var results = repository.SearchFeedItemsByKeyword("ZXW");
+            Assert.AreEqual(2, results.Count());
+        }
+
+        [Test]
         public void SearchItemsByParent()
         {
             var feedA = GetFeed(new Uri("http://espn.go.com/feeds/4636346"), "The BS Report", "Bill Simmons", "Joe House, Marc Stein, John Hollinger", "Bill Simmons Podcast");

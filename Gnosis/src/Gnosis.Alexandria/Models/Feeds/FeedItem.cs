@@ -172,6 +172,7 @@ namespace Gnosis.Alexandria.Models.Feeds
                 if (value != null && contributors != value)
                 {
                     Change(() => contributors = value, x => x.Contributors);
+                    RefreshHashCodes(value, feedItem => feedItem.ContributorHashCodes);
                 }
             }
         }
@@ -208,6 +209,7 @@ namespace Gnosis.Alexandria.Models.Feeds
                 if (value != null && value != summary)
                 {
                     Change(() => summary = value, x => x.Summary);
+                    RefreshHashCodes(value, feedItem => feedItem.SummaryHashCodes);
                 }
             }
         }

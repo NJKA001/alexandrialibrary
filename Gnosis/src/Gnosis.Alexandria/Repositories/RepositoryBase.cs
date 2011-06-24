@@ -147,6 +147,24 @@ namespace Gnosis.Alexandria.Repositories
             }
         }
 
+        protected IEnumerable<TChild> SelectForward<TChild>(IFilter filter)
+            where TChild : IEntity
+        {
+            IDbConnection connection = null;
+
+            try
+            {
+                connection = GetConnection();
+                var query = new ForwardLookupQuery<TChild>(connection, logger, factory, filter);
+                return query.Execute();
+            }
+            finally
+            {
+                if (defaultConnection == null && connection != null)
+                    connection.Close();
+            }
+        }
+
         protected IEnumerable<T> SelectReverse<TValue>(IFilter filter, string entityOrderByClause, Expression<Func<T, object>> property)
             where TValue : IValue
         {
