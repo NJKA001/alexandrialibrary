@@ -15,11 +15,12 @@ namespace Gnosis.Tests.Models
         [Test]
         public void LookupMediaType()
         {
-            const int total = 4;
+            const int total = 6;
             var list = new List<IMediaType>();
 
             foreach (var mediaType in MediaType.GetMediaTypes())
             {
+                Assert.IsNotNull(mediaType);
                 list.Add(mediaType);
 
                 Assert.AreEqual(mediaType, MediaType.Parse(mediaType.ToString()));
@@ -27,6 +28,11 @@ namespace Gnosis.Tests.Models
                 var byTypeList = MediaType.GetMediaTypesByType(mediaType.Type);
                 Assert.IsNotNull(byTypeList);
                 Assert.IsTrue(byTypeList.Contains(mediaType));
+
+                foreach (var legacyType in mediaType.LegacyTypes)
+                {
+                    Assert.AreEqual(mediaType, MediaType.Parse(legacyType));
+                }
 
                 foreach (var fileExtension in mediaType.FileExtensions)
                 {
