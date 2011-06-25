@@ -29,6 +29,16 @@ namespace Gnosis.Tests.Repositories
 
         #region Helper Methods
 
+        private string GetString(string sql)
+        {
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = sql;
+                return command.ExecuteScalar().ToString();
+            }
+        }
+
         private int GetCount(string sql)
         {
             using (var command = connection.CreateCommand())
@@ -267,9 +277,10 @@ namespace Gnosis.Tests.Repositories
             Assert.IsTrue(feed.Categories.Where(x => x.Name == testCategoryName).FirstOrDefault().IsNew());
 
             var oldTimeStamp = feed.TimeStamp;
-            repository.Save(new List<IFeed>{ feed });
+            repository.Save(feed);
             Assert.AreEqual(1, GetCount(string.Format("select count() from Feed where Id = '{0}';", id)));
-            
+            Assert.AreEqual("es-MX", GetString(string.Format("select Language from Feed where Id = '{0}';", id)));
+
             var newTimeStamp = feed.TimeStamp;
             Assert.IsFalse(feed.IsChanged());
             Assert.AreNotEqual(oldTimeStamp, newTimeStamp);
@@ -290,8 +301,8 @@ namespace Gnosis.Tests.Repositories
             Assert.AreEqual(generator, changedFeed.Generator);
             Assert.AreEqual(iconPath, changedFeed.IconPath.ToString());
             Assert.AreEqual(imagePath, changedFeed.ImagePath.ToString());
-            //Assert.AreEqual(language.PrimaryLanguage, changedFeed.Language.PrimaryLanguage);
-            //Assert.AreEqual(language.Country, changedFeed.Language.Country);
+            Assert.AreEqual(language.PrimaryLanguage, changedFeed.Language.PrimaryLanguage);
+            Assert.AreEqual(language.Country, changedFeed.Language.Country);
             Assert.AreEqual(location, changedFeed.Location.ToString());
             Assert.AreEqual(mediaType, changedFeed.MediaType);
             Assert.AreEqual(publishedDate, changedFeed.PublishedDate);

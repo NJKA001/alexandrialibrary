@@ -146,6 +146,17 @@ namespace Gnosis.Core
             return new Parameter(name, self, false);
         }
 
+        public static IRegion ToRegion(this object self)
+        {
+            if (self == null)
+                return Region.Unknown;
+
+            var code = -1;
+            int.TryParse(self.ToString(), out code);
+            
+            return Region.GetRegionByCode(code);
+        }
+
         public static TimeSpan ToTimeSpan(this object self)
         {
             return new TimeSpan((long)self);

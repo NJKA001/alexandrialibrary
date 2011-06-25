@@ -31,6 +31,11 @@ namespace Gnosis.Core.UN
 
         #endregion
 
+        public override string ToString()
+        {
+            return code.ToString();
+        }
+
         static Region()
         {
             InitializeRegions();

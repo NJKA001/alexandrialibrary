@@ -119,7 +119,11 @@ namespace Gnosis.Core
                 return true;
             else if (type == typeof(ILanguage))
                 return true;
+            else if (type == typeof(ILanguageTag))
+                return true;
             else if (type == typeof(ICountry))
+                return true;
+            else if (type == typeof(IRegion))
                 return true;
 
             var args = type.GetGenericArguments();

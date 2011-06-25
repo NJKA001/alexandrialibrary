@@ -33,6 +33,17 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
+        public void ParseMexicanSpanishTag()
+        {
+            var tag = LanguageTag.Create(Language.Spanish, Country.Mexico);
+            Assert.IsNotNull(tag);
+            Assert.AreNotEqual(LanguageTag.Empty, tag);
+            Assert.AreEqual(Language.Spanish, tag.PrimaryLanguage);
+            Assert.AreEqual(Country.Mexico, tag.Country);
+            Assert.AreEqual("es-MX", tag.ToString());
+        }
+
+        [Test]
         public void ParseGrandfatheredAliasedTags()
         {
             const string original1 = "i-hak";
