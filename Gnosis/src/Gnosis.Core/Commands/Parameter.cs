@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core.Ietf;
 using Gnosis.Core.Iso;
+using Gnosis.Core.UN;
 
 namespace Gnosis.Core.Commands
 {
@@ -37,8 +39,18 @@ namespace Gnosis.Core.Commands
         {
         }
 
+        public Parameter(string name, ILanguageTag languageTag)
+            : this(name, languageTag.ToString(), false)
+        {
+        }
+
         public Parameter(string name, ICountry country)
             : this(name, country.ToString(), false)
+        {
+        }
+
+        public Parameter(string name, IRegion region)
+            : this(name, region.ToString(), false)
         {
         }
 

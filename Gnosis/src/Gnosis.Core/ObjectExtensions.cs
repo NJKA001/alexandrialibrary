@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core.Commands;
+using Gnosis.Core.Ietf;
 using Gnosis.Core.Iso;
+using Gnosis.Core.UN;
 
 namespace Gnosis.Core
 {
@@ -79,6 +81,14 @@ namespace Gnosis.Core
             return Language.GetLanguageByCode(self.ToString());
         }
 
+        public static ILanguageTag ToLanguageTag(this object self)
+        {
+            if (self == null)
+                return LanguageTag.Empty;
+
+            return LanguageTag.Parse(self.ToString());
+        }
+
         public static IEnumerable<ILanguage> ToLanguages(this object self)
         {
             if (self == null)
@@ -108,8 +118,12 @@ namespace Gnosis.Core
                 return new Parameter(name, self as IValue);
             if (self is ILanguage)
                 return new Parameter(name, self as ILanguage);
+            if (self is ILanguageTag)
+                return new Parameter(name, self as ILanguageTag);
             if (self is ICountry)
                 return new Parameter(name, self as ICountry);
+            if (self is IRegion)
+                return new Parameter(name, self as IRegion);
             if (self is IEnumerable<ILanguage>)
                 return new Parameter(name, self as IEnumerable<ILanguage>);
             if (self is IEnumerable<ILanguage>)

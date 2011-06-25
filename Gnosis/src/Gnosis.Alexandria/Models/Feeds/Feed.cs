@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
-using Gnosis.Core.Iso;
+using Gnosis.Core.Ietf;
 
 namespace Gnosis.Alexandria.Models.Feeds
 {
@@ -20,7 +20,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             AddInitializer(value => this.authors = value.ToString(), x => x.Authors);
             AddInitializer(value => this.contributors = value.ToString(), x => x.Contributors);
             AddInitializer(value => this.description = value.ToString(), x => x.Description);
-            AddInitializer(value => this.language = value.ToLanguage(), feed => feed.Language);
+            AddInitializer(value => this.language = value.ToLanguageTag(), feed => feed.Language);
             AddInitializer(value => this.originalLocation = value.ToUri(), x => x.OriginalLocation);
             AddInitializer(value => this.copyright = value.ToString(), x => x.Copyright);
             AddInitializer(value => this.publishedDate = value.ToDateTime(), x => x.PublishedDate);
@@ -50,12 +50,12 @@ namespace Gnosis.Alexandria.Models.Feeds
         }
 
         private Uri location;
-        private string mediaType = "application/xml+rss";
+        private string mediaType = "application/rss+xml";
         private string title = string.Empty;
         private string authors = string.Empty;
         private string contributors = string.Empty;
         private string description = string.Empty;
-        private ILanguage language = Gnosis.Core.Iso.Language.Undetermined;
+        private ILanguageTag language = LanguageTag.Empty;
         private Uri originalLocation = UriExtensions.EmptyUri;
         private string copyright = string.Empty;
         private DateTime publishedDate = DateTime.MinValue;
@@ -212,7 +212,7 @@ namespace Gnosis.Alexandria.Models.Feeds
             }
         }
 
-        public ILanguage Language
+        public ILanguageTag Language
         {
             get { return language; }
             set

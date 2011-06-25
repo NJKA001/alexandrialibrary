@@ -28,7 +28,6 @@ namespace Gnosis.Core.Queries
             }
         }
 
-        private readonly IDbConnection connection;
         private readonly ILogger logger;
         private readonly Func<TOutline> factory;
 

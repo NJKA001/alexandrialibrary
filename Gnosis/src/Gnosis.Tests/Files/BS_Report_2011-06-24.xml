@@ -1,0 +1,556 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="http://sports.espn.go.com/rss/friendlyRSSPodcastv3.xsl"  type="application/xml" media="screen"?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+
+  <channel>
+    <atom:link href="http://sports.espn.go.com/espnradio/podcast/feeds/itunes/podCast?id=2864045" rel="self" type="application/rss+xml" />
+    <title>ESPN: The B.S. Report with Bill Simmons</title>
+    <link>http://sports.espn.go.com/espnradio/podcast/index</link>
+    <itunes:author>ESPN</itunes:author>
+    <description><![CDATA[ESPN.com and ESPN the Magazine's Bill Simmons talks about his favorite things in sports: the Celtics, the Red Sox, his fantasy team and more.]]></description>
+    <itunes:subtitle><![CDATA[ESPN.com and ESPN the Magazine's Bill Simmons talks about his favorite things in sports: the Celtics, the Red Sox, his fantasy team and more.]]></itunes:subtitle>
+    <itunes:summary><![CDATA[ESPN.com and ESPN the Magazine's Bill Simmons talks about his favorite things in sports: the Celtics, the Red Sox, his fantasy team and more.]]></itunes:summary>
+    <category></category>
+    <language>en-us</language>
+    <copyright>2010</copyright>
+    <itunes:explicit>no</itunes:explicit>
+    <itunes:owner>
+      <itunes:name>ESPN Radio</itunes:name>
+      <itunes:email>blair.cullen@espn3.com</itunes:email>
+    </itunes:owner>
+
+
+    <image>
+      <url>http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg</url>
+      <title>ESPN: The B.S. Report with Bill Simmons</title>
+      <link>http://sports.espn.go.com/espnradio/podcast/index</link>
+    </image>
+
+
+    <itunes:image href="http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg" />
+
+    <itunes:category text="Sports &amp; Recreation"/>
+
+    <item>
+      <title>The B.S. Report: 6/24 Part 2</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/649361/simmons_2011-06-24-164701.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Bill Simmons breaks down the NBA draft with TrueHoop's Henry Abbott. Plus, Joe House comments on Washington's draft.]]></description>
+
+      <itunes:subtitle><![CDATA[Bill Simmons breaks down the NBA draft with TrueHoop's Henry Abbott. Plus, Joe House comments on Washington's draft.]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Bill Simmons breaks down the NBA draft with TrueHoop's Henry Abbott. Plus, Joe House comments on Washington's draft.]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/649361/simmons_2011-06-24-164701.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Fri, 24 Jun 2011 13:53:44 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[51:49]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report, nba, washington wizards]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6701443</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 6/24 Part 1</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/649337/simmons_2011-06-24-163637.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Bill Simmons talks with Minnesota's David Kahn about his reign as Timberwolves GM. Kahn dishes on the NBA draft, Ricky Rubio, Jonny Flynn and much more.]]></description>
+
+      <itunes:subtitle><![CDATA[Bill Simmons talks with Minnesota's David Kahn about his reign as Timberwolves GM. Kahn dishes on the NBA draft, Ricky Rubio, Jonny Flynn and much more.]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Bill Simmons talks with Minnesota's David Kahn about his reign as Timberwolves GM. Kahn dishes on the NBA draft, Ricky Rubio, Jonny Flynn and much more.]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/649337/simmons_2011-06-24-163637.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Fri, 24 Jun 2011 13:42:11 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[39:35]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report, nba, minnesota timberwolves]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6701395</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 6/23</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/646145/simmons_2011-06-21-214945.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Chuck Klosterman and Weird Al Yankovic cover the evolution of pop culture and Yankovic's experiences with Lady Gaga, Eminem, Paul McCartney, Kurt Cobain and more.]]></description>
+
+      <itunes:subtitle><![CDATA[Chuck Klosterman and Weird Al Yankovic cover the evolution of pop culture and Yankovic's experiences with Lady Gaga, Eminem, Paul McCartney, Kurt Cobain and more.]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Chuck Klosterman and Weird Al Yankovic cover the evolution of pop culture and Yankovic's experiences with Lady Gaga, Eminem, Paul McCartney, Kurt Cobain and more.]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/646145/simmons_2011-06-21-214945.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Tue, 21 Jun 2011 19:03:52 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[33:44]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report, Chuck Klosterman, Al Yankovic, Lady Gaga, Eminem, Paul McCartney, Kurt Cobain, Nirvana]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6689521</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 6/21</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/645707/simmons_2011-06-21-143607.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Bill Simmons and Chad Ford look ahead to the NBA draft and speculate on potential trade scenarios, including Dwight Howard to the Lakers.]]></description>
+
+      <itunes:subtitle><![CDATA[Bill Simmons and Chad Ford look ahead to the NBA draft and speculate on potential trade scenarios.]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Bill Simmons and Chad Ford look ahead to the NBA draft and speculate on potential trade scenarios, including Dwight Howard to the Lakers.]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/645707/simmons_2011-06-21-143607.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Tue, 21 Jun 2011 11:36:52 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[1:10:45]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report, chad ford]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6688113</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 6/17 Part 2</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/637455/simmons_2011-06-17-165655.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Bill Simmons catches up with JackO on Yankees-Red Sox, the O.J. Simpson anniversary and much more.]]></description>
+
+      <itunes:subtitle><![CDATA[Bill Simmons catches up with JackO on Yankees-Red Sox, the O.J. Simpson anniversary and much more.]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Bill Simmons catches up with JackO on Yankees-Red Sox, the O.J. Simpson anniversary and much more.]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/637455/simmons_2011-06-17-165655.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Fri, 17 Jun 2011 14:00:51 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[47:00]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6674105</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 6/17 Part 1</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/637417/simmons_2011-06-17-164917.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Bill Simmons talks with New York Times writer Dan Barry about the New York sporting scene and his new book, "Bottom of the 33rd."]]></description>
+
+      <itunes:subtitle><![CDATA[Bill Simmons talks with New York Times writer Dan Barry about the New York sporting scene and his new book, "Bottom of the 33rd."]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Bill Simmons talks with New York Times writer Dan Barry about the New York sporting scene and his new book, "Bottom of the 33rd."]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/637417/simmons_2011-06-17-164917.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Fri, 17 Jun 2011 13:53:09 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[43:15]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6674073</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 6/16</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/635921/simmons_2011-06-16-114721.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Bill Simmons and reality tsar Dave Jacoby break down their reality TV draft and discuss the included shows.]]></description>
+
+      <itunes:subtitle><![CDATA[Bill Simmons and reality tsar Dave Jacoby break down their reality TV draft and discuss the included shows.]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Bill Simmons and reality tsar Dave Jacoby break down their reality TV draft and discuss the included shows.]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/635921/simmons_2011-06-16-114721.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Thu, 16 Jun 2011 08:51:23 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[51:59]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6668277</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 6/15</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/634895/simmons_2011-06-15-140335.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Bill Simmons talks with TNT NBA analyst Mike Fratello about the NBA Finals and his coaching career facing legendary Celtics and Bulls teams.]]></description>
+
+      <itunes:subtitle><![CDATA[Bill Simmons talks with TNT NBA analyst Mike Fratello about the NBA Finals and his coaching career facing legendary Celtics and Bulls teams.]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Bill Simmons talks with TNT NBA analyst Mike Fratello about the NBA Finals and his coaching career facing legendary Celtics and Bulls teams.]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/634895/simmons_2011-06-15-140335.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Wed, 15 Jun 2011 11:05:15 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[55:20]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report, nba]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6664634</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 6/14</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/633937/simmons_2011-06-14-163437.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Bill Simmons and Miami Herald columnist Dan Le Batard discuss the NBA Finals and recap the first season for James, Wade and Bosh in Miami. Will everyone come back next season?]]></description>
+
+      <itunes:subtitle><![CDATA[Bill Simmons and Miami Herald columnist Dan Le Batard discuss the NBA Finals and recap the first season for James, Wade and Bosh in Miami. Will everyone come back next season?]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Bill Simmons and Miami Herald columnist Dan Le Batard discuss the NBA Finals and recap the first season for James, Wade and Bosh in Miami. Will everyone come back next season?]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/633937/simmons_2011-06-14-163437.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Tue, 14 Jun 2011 13:37:33 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[59:27]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report, nba, miami heat, dallas mavericks]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6661720</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 6/2</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/622765/simmons_2011-06-02-133305.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Bill Simmons talks with <i>Those Guys Have All the Fun</i> co-author Jim Miller about the book and the history of ESPN.]]></description>
+
+      <itunes:subtitle><![CDATA[Bill Simmons talks with <i>Those Guys Have All the Fun</i> co-author Jim Miller about the book and the history of ESPN.]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Bill Simmons talks with <i>Those Guys Have All the Fun</i> co-author Jim Miller about the book and the history of ESPN.]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/622765/simmons_2011-06-02-133305.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Thu, 2 Jun 2011 10:36:31 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[46:29]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6619387</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 6/1</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/612135/simmons_2011-06-01-151435.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Bill Simmons previews the Stanley Cup finals with Greg Wyshynski. Plus, Michael Rapaport weighs in on the NBA Finals and his celebrity basketball career.]]></description>
+
+      <itunes:subtitle><![CDATA[Bill Simmons previews the Stanley Cup finals with Greg Wyshynski. Plus, Michael Rapaport weighs in on the NBA Finals and his celebrity basketball career.]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Bill Simmons previews the Stanley Cup finals with Greg Wyshynski. Plus, Michael Rapaport weighs in on the NBA Finals and his celebrity basketball career.]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/612135/simmons_2011-06-01-151435.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Wed, 1 Jun 2011 12:19:48 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[1:01:33]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6615963</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 5/31</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/610157/simmons_2011-05-31-154557.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Bill Simmons previews the NBA Finals with Marc Stein, Ric Bucher, John Hollinger, Chad Millman and Joe House.]]></description>
+
+      <itunes:subtitle><![CDATA[Bill Simmons previews the NBA Finals with Marc Stein, Ric Bucher, John Hollinger, Chad Millman and Joe House.]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Bill Simmons previews the NBA Finals with Marc Stein, Ric Bucher, John Hollinger, Chad Millman and Joe House.]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/610157/simmons_2011-05-31-154557.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Tue, 31 May 2011 12:47:45 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[1:39:58]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6612019</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 5/26</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/605851/simmons_2011-05-26-154051.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Bill Simmons breaks down the NBA playoffs with ESPN NBA Insider Ric Bucher. Will the Mavericks get exposed for their flaws in the Finals?]]></description>
+
+      <itunes:subtitle><![CDATA[Bill Simmons breaks down the NBA playoffs with ESPN NBA Insider Ric Bucher. Will the Mavericks get exposed for their flaws in the Finals?]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Bill Simmons breaks down the NBA playoffs with ESPN NBA Insider Ric Bucher. Will the Mavericks get exposed for their flaws in the Finals?]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/605851/simmons_2011-05-26-154051.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Thu, 26 May 2011 12:43:26 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[59:48]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6595158</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 5/20</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/600297/simmons_2011-05-20-172437.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Toronto Maple Leafs GM Brian Burke talks about the NHL playoffs and what hockey means to Canadian fans. Plus, Hitfix.com TV critic Alan Sepinwall on the upfronts.]]></description>
+
+      <itunes:subtitle><![CDATA[Toronto Maple Leafs GM Brian Burke talks about the NHL playoffs and what hockey means to Canadian fans. Plus, Hitfix.com TV critic Alan Sepinwall on the upfronts.]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Toronto Maple Leafs GM Brian Burke talks about the NHL playoffs and what hockey means to Canadian fans. Plus, Hitfix.com TV critic Alan Sepinwall on the upfronts.]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/600297/simmons_2011-05-20-172437.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Fri, 20 May 2011 14:25:03 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[51:45]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report, nhl, toronto maple leafs]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6571116</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 5/19</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/599407/simmons_2011-05-19-171307.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Bill Simmons and Chuck Klosterman break down the NBA playoffs with TNT NBA analyst Charles Barkley.]]></description>
+
+      <itunes:subtitle><![CDATA[Bill Simmons and Chuck Klosterman break down the NBA playoffs with TNT NBA analyst Charles Barkley.]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Bill Simmons and Chuck Klosterman break down the NBA playoffs with TNT NBA analyst Charles Barkley.]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/599407/simmons_2011-05-19-171307.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Thu, 19 May 2011 14:15:49 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[1:19:04]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6567587</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 5/18</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/598191/simmons_2011-05-18-162031.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Bill Simmons and Chuck Klosterman compare Dirk Nowitzki to Larry Bird and discuss the NBA playoffs, the Rolling Stones and much more.]]></description>
+
+      <itunes:subtitle><![CDATA[Bill Simmons and Chuck Klosterman compare Dirk Nowitzki to Larry Bird and discuss the NBA playoffs, the Rolling Stones and much more.]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Bill Simmons and Chuck Klosterman compare Dirk Nowitzki to Larry Bird and discuss the NBA playoffs, the Rolling Stones and much more.]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/598191/simmons_2011-05-18-162031.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Wed, 18 May 2011 13:24:54 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[1:05:40]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report, nba]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6563730</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 5/17</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/597299/simmons_2011-05-17-155339.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Bill Simmons and ESPN NBA Draft Insider Chad Ford break down the top draft prospects.]]></description>
+
+      <itunes:subtitle><![CDATA[Bill Simmons and ESPN NBA draft insider Chad Ford break down the top draft prospects.]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Bill Simmons and ESPN NBA draft insider Chad Ford break down the top draft prospects.]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/597299/simmons_2011-05-17-155339.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Tue, 17 May 2011 12:55:54 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[1:00:14]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report, nba]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6559975</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 5/16</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/594879/simmons_2011-05-16-150319.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Bill Simmons talks with Phoenix Suns president and CEO Rick Welts about his decision to reveal he's gay, his role in the creation of All-Star Weekend and the Dream Team and more.]]></description>
+
+      <itunes:subtitle><![CDATA[Bill Simmons talks with Phoenix Suns president and CEO Rick Welts about his decision to reveal he's gay, his role in the creation of All-Star Weekend and the Dream Team and more.]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Bill Simmons talks with Phoenix Suns president and CEO Rick Welts about his decision to reveal he's gay, his role in the creation of All-Star Weekend and the Dream Team and more.]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/594879/simmons_2011-05-16-150319.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Mon, 16 May 2011 12:08:02 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[34:23]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report, nba, phoenix suns]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6556599</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 5/12</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/592311/simmons_2011-05-12-160911.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Bill Simmons talks with Celtics broadcaster Sean Grande about the end of Boston's season. Could the Miami Heat really win it all? Can Boston contend for the title next season?]]></description>
+
+      <itunes:subtitle><![CDATA[Bill Simmons talks with Celtics broadcaster Sean Grande about the end of Boston's season. Could the Miami Heat really win it all? Can Boston contend for the title next season?]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Bill Simmons talks with Celtics broadcaster Sean Grande about the end of Boston's season. Could the Miami Heat really win it all? Can Boston contend for the title next season?]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/592311/simmons_2011-05-12-160911.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Thu, 12 May 2011 13:22:28 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[1:08:30]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report, nba, boston celtics]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6534843</guid>
+    </item>
+
+    <item>
+      <title>The B.S. Report: 5/11</title>
+      <link>http://c.espnradio.com/s:5l8r1/audio/591055/simmons_2011-05-11-162355.mp3</link>
+      <itunes:author><![CDATA[ESPN: The B.S. Report]]></itunes:author>
+      <description><![CDATA[Bill Simmons talks with MSNBC's "Way Too Early" host Willie Geist about his career and his new book.]]></description>
+
+      <itunes:subtitle><![CDATA[Bill Simmons talks with MSNBC's "Way Too Early" host Willie Geist about his career and his new book.]]></itunes:subtitle>
+      <itunes:summary><![CDATA[Bill Simmons talks with MSNBC's "Way Too Early" host Willie Geist about his career and his new book.]]></itunes:summary>
+
+      <enclosure url="http://c.espnradio.com/s:5l8r1/audio/591055/simmons_2011-05-11-162355.mp3" length="9166422" type="audio/mp3" />
+
+
+      <pubDate><![CDATA[Wed, 11 May 2011 13:26:15 PDT]]></pubDate>
+
+      <category><![CDATA[News]]></category>
+      <!-- 
+										<itunes:category text="News">
+											<itunes:category text="Sports" />
+										</itunes:category>
+										-->
+      <itunes:explicit><![CDATA[No]]></itunes:explicit>
+      <itunes:duration><![CDATA[49:46]]></itunes:duration>
+      <itunes:keywords><![CDATA[bill_simmons, bill simmons, the sports guy, the bs report, b.s. report]]></itunes:keywords>
+      <guid isPermaLink="false">http://sports.espn.go.com/espnradio/podcast?id=6528378</guid>
+    </item>
+
+  </channel>
+</rss>
+

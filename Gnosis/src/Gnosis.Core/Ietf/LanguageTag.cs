@@ -17,6 +17,11 @@ namespace Gnosis.Core.Ietf
         {
         }
 
+        private LanguageTag(ILanguage primaryLanguage, IRegion region)
+            : this(primaryLanguage, null, null, null, region, new List<string>(), new List<string>(), null)
+        {
+        }
+
         private LanguageTag(ILanguage primaryLanguage, string extendedLanguage, IScript script, ICountry country, IRegion region, IEnumerable<string> variants, IEnumerable<string> extensions, string privateUse)
         {
             if (primaryLanguage == null)
@@ -87,6 +92,9 @@ namespace Gnosis.Core.Ietf
 
         public override string ToString()
         {
+            if (primaryLanguage == Language.Undetermined)
+                return string.Empty;
+
             const string alphaFormat = "-{0}";
             const string numFormat = "-{0:000}";
 
@@ -131,6 +139,8 @@ namespace Gnosis.Core.Ietf
 
         private static readonly IDictionary<string, Tuple<ILanguage, ICountry>> grandfatheredTags = new Dictionary<string, Tuple<ILanguage, ICountry>>();
 
+        public static readonly ILanguageTag Empty = new LanguageTag(Language.Undetermined, Iso.Country.Unknown);
+
         #region InitializeGrandfatheredTags
 
         /// <summary>
@@ -171,10 +181,30 @@ namespace Gnosis.Core.Ietf
 
         #region Public Static Methods
 
+        public static ILanguageTag Create(ILanguage primaryLanguage, ICountry country)
+        {
+            if (primaryLanguage == null)
+                throw new ArgumentNullException("primaryLanguage");
+            if (country == null)
+                throw new ArgumentNullException("country");
+
+            return new LanguageTag(primaryLanguage, country);
+        }
+
+        public static ILanguageTag Create(ILanguage primaryLanguage, IRegion region)
+        {
+            if (primaryLanguage == null)
+                throw new ArgumentNullException("primaryLanguage");
+            if (region == null)
+                throw new ArgumentNullException("region");
+
+            return new LanguageTag(primaryLanguage, region);
+        }
+
         public static ILanguageTag Parse(string value)
         {
-            if (value == null)
-                return null;
+            if (string.IsNullOrEmpty(value))
+                return Empty;
 
             ILanguage primaryLanguage = null;
             string extendedLanguage = null;
@@ -280,7 +310,7 @@ namespace Gnosis.Core.Ietf
                 count++;
             }
 
-            return (primaryLanguage != null && primaryLanguage != Language.Undetermined) ? new LanguageTag(primaryLanguage, extendedLanguage, script, country, region, variants, extensions, privateUse) : null;
+            return (primaryLanguage != null) ? new LanguageTag(primaryLanguage, extendedLanguage, script, country, region, variants, extensions, privateUse) : Empty;
         }
 
         #endregion

@@ -7,6 +7,7 @@ using System.Text;
 
 //using Gnosis.Core.Batches;
 //using Gnosis.Core.Commands;
+using Gnosis.Core.Ietf;
 using Gnosis.Core.Iso;
 using Gnosis.Core.UN;
 
@@ -69,6 +70,9 @@ namespace Gnosis.Core
                 return true;
 
             if (type == typeof(ILanguage))
+                return true;
+
+            if (type == typeof(ILanguageTag))
                 return true;
 
             if (type == typeof(ICountry))

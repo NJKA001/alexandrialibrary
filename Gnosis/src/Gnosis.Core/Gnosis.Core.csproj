@@ -114,6 +114,8 @@
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="UriExtensions.cs" />
     <Compile Include="ValueInitialState.cs" />
+    <Compile Include="W3c\IMediaType.cs" />
+    <Compile Include="W3c\MediaType.cs" />
     <Compile Include="W3c\Rfc822DateTime.cs" />
   </ItemGroup>
   <ItemGroup />

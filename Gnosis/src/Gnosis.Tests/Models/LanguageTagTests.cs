@@ -57,7 +57,9 @@ namespace Gnosis.Tests.Models
         {
             const string original = "xyz-us-Latn";
             var tag = LanguageTag.Parse(original);
-            Assert.IsNull(tag);
+            Assert.IsNotNull(tag);
+            Assert.AreEqual(Language.Undetermined, tag.PrimaryLanguage);
+            Assert.AreEqual(string.Empty, tag.ToString());
         }
 
         [Test]
