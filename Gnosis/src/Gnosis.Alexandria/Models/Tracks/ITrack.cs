@@ -65,14 +65,14 @@ namespace Gnosis.Alexandria.Models.Tracks
         IEnumerable<ITrackLink> Links { get; }
         IEnumerable<ITrackMetadatum> Metadata { get; }
 
-        IEnumerable<IHashCode> TitleHashCodes { get; }
-        IEnumerable<IHashCode> AlbumHashCodes { get; }
-        IEnumerable<IHashCode> ArtistHashCodes { get; }
-        IEnumerable<IHashCode> AlbumArtistHashCodes { get; }
-        IEnumerable<IHashCode> ComposerHashCodes { get; }
-        IEnumerable<IHashCode> ConductorHashCodes { get; }
-        IEnumerable<IHashCode> OriginalTitleHashCodes { get; }
-        IEnumerable<IHashCode> OriginalArtistHashCodes { get; }
+        IEnumerable<ITag> TitleTags { get; }
+        IEnumerable<ITag> AlbumTags { get; }
+        IEnumerable<ITag> ArtistTags { get; }
+        IEnumerable<ITag> AlbumArtistTags { get; }
+        IEnumerable<ITag> ComposerTags { get; }
+        IEnumerable<ITag> ConductorTags { get; }
+        IEnumerable<ITag> OriginalTitleTags { get; }
+        IEnumerable<ITag> OriginalArtistTags { get; }
 
         void AddPicture(string mediaType, TrackPictureType pictureType, string description, byte[] data);
         void RemovePicture(ITrackPicture picture);

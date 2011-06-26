@@ -16,7 +16,7 @@ namespace Gnosis.Alexandria.Repositories
             this.context = context;
             this.logger = logger;
 
-            MapValueConstructor<IHashCode>(() => new HashCode());
+            MapValueConstructor<ITag>(() => new Tag());
         }
 
         private readonly IContext context;

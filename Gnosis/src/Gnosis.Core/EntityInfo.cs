@@ -10,7 +10,7 @@ namespace Gnosis.Core
     {
         public EntityInfo(Type type)
         {
-            this.name = type.GetNormalizedName();
+            this.name = type.ToPersistentName();
             this.type = type;
 
             MapTypes(type);
@@ -18,7 +18,7 @@ namespace Gnosis.Core
 
         public EntityInfo(Type type, EntityInfo parent)
         {
-            this.name = type.GetNormalizedName();
+            this.name = type.ToPersistentName();
             this.type = type;
             this.parent = parent;
 
@@ -59,7 +59,7 @@ namespace Gnosis.Core
 
                 if (!ignore)
                 {
-                    if (property.PropertyType.IsPrimitive || property.PropertyType.IsSimple() || property.PropertyType.IsChildType())
+                    if (property.PropertyType.IsPrimitive || property.PropertyType.IsSimpleType() || property.PropertyType.IsChildType())
                     {
                         elements.Add(new ElementInfo(property));
                     }

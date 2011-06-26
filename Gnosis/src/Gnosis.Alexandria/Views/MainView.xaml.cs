@@ -89,12 +89,12 @@ namespace Gnosis.Alexandria.Views
                 feed.Initialize(new EntityInitialState(context, logger));
                 feed.Location = new Uri("http://example.com/feeds/exmaple.xml");
                 feed.Authors = "Neal Stephenson; William Gibson";
-                var x = feed.AuthorHashCodes.Count();
-                var firstIsNew = feed.AuthorHashCodes.FirstOrDefault().IsNew();
-                var lastIsNew = feed.AuthorHashCodes.LastOrDefault().IsNew();
+                var x = feed.AuthorTags.Count();
+                var firstIsNew = feed.AuthorTags.FirstOrDefault().IsNew();
+                var lastIsNew = feed.AuthorTags.LastOrDefault().IsNew();
                 feedRepository.Save(new List<Models.Feeds.IFeed> { feed });
                 var lookup = feedRepository.Lookup(feed.Id);
-                var y = lookup.AuthorHashCodes.Count();
+                var y = lookup.AuthorTags.Count();
                  */
             }
             catch (Exception ex)

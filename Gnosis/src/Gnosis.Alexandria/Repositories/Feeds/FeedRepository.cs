@@ -50,7 +50,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         private readonly SearchItemCategoriesByParent itemCategoriesByParent = new SearchItemCategoriesByParent();
         private readonly SearchItemLinksByParent itemLinksByParent = new SearchItemLinksByParent();
         private readonly SearchItemMetadataByParent itemMetadataByParent = new SearchItemMetadataByParent();
-        private readonly SearchTitleHashCodesBySchemeAndValue titleHashCodesBySchemeAndValue = new SearchTitleHashCodesBySchemeAndValue();
+        private readonly SearchTitleTagsBySchemeAndValue titleTagsBySchemeAndValue = new SearchTitleTagsBySchemeAndValue();
 
         private readonly SearchByKeyword byKeyword = new SearchByKeyword();
 
@@ -86,11 +86,11 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             return Search(query);
         }
 
-        public IEnumerable<IHashCode> SearchTitleHashCodesBySchemeAndValue(Uri scheme, string value)
+        public IEnumerable<ITag> SearchForTitleTags(Uri scheme, string value)
         {
-            var query = new ValueQuery<IFeed, IHashCode>(Logger, Factory, titleHashCodesBySchemeAndValue.GetFilter(scheme, value), feed => feed.TitleHashCodes);
-            return SelectValues<IHashCode>(query);
-            //return Select<IHashCode>(titleHashCodesBySchemeAndValue.GetFilter(scheme, value), feed => feed.TitleHashCodes);
+            var query = new ValueQuery<IFeed, ITag>(Logger, Factory, titleTagsBySchemeAndValue.GetFilter(scheme, value), feed => feed.TitleTags);
+            return SelectValues<ITag>(query);
+            //return Select<ITag>(titleTagsBySchemeAndValue.GetFilter(scheme, value), feed => feed.TitleTags);
         }
 
         public IEnumerable<IFeedItem> SearchFeedItemsByParent(Guid parent)
@@ -100,12 +100,12 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             //return SelectChild<IFeedItem>(itemsByParent.GetFilter(new Dictionary<string, object> { { "@Parent", parent.ToString() } }));
         }
 
-        public IEnumerable<IFeed> SearchByTitleHashCodes(Uri scheme, string value)
+        public IEnumerable<IFeed> SearchByTitleTags(Uri scheme, string value)
         {
-            var filter = titleHashCodesBySchemeAndValue.GetFilter(scheme, value);
-            var query = new ReverseQuery<IFeed, IHashCode>(Logger, Factory, filter, feed => feed.TitleHashCodes);
+            var filter = titleTagsBySchemeAndValue.GetFilter(scheme, value);
+            var query = new ReverseQuery<IFeed, ITag>(Logger, Factory, filter, feed => feed.TitleTags);
             return Search(query);
-            //return SelectReverse<IHashCode>(titleHashCodesBySchemeAndValue.GetFilter(scheme, value), "Feed.Authors ASC, Feed.PublishedDate ASC, Feed.Title ASC", feed => feed.TitleHashCodes);
+            //return SelectReverse<ITag>(titleTagsBySchemeAndValue.GetFilter(scheme, value), "Feed.Authors ASC, Feed.PublishedDate ASC, Feed.Title ASC", feed => feed.TitleTags);
         }
 
         public IEnumerable<IFeedOutline> SearchOutlinesByTitle(string title)

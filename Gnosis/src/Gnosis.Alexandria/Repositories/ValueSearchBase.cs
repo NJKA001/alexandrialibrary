@@ -20,7 +20,7 @@ namespace Gnosis.Alexandria.Repositories
 
             if (valueExpression != null)
             {
-                this.property = valueExpression.AsProperty();
+                this.property = valueExpression.ToPropertyInfo();
                 if (this.property != null)
                 {
                     this.valueInfo = new ValueInfo(entityInfo, property, typeof(TValue));
@@ -30,7 +30,7 @@ namespace Gnosis.Alexandria.Repositories
             var orderByBuilder = new StringBuilder();
             foreach (var column in columns)
             {
-                var columnName = column.AsProperty().Name;
+                var columnName = column.ToPropertyInfo().Name;
                 this.columns.Add(columnName, true);
 
                 if (orderByBuilder.Length > 0)

@@ -50,7 +50,7 @@ namespace Gnosis.Core
 
                 if (!ignore)
                 {
-                    if (property.PropertyType.IsPrimitive || property.PropertyType.IsSimple() || property.PropertyType.IsChildType())
+                    if (property.PropertyType.IsPrimitive || property.PropertyType.IsSimpleType() || property.PropertyType.IsChildType())
                     {
                         elements.Add(new ElementInfo(property));
                     }

@@ -153,8 +153,8 @@
     <Compile Include="Models\Feeds\IFeedLink.cs" />
     <Compile Include="Models\Feeds\IFeedMetadatum.cs" />
     <Compile Include="Models\Feeds\IFeedOutline.cs" />
-    <Compile Include="Models\HashCode.cs" />
-    <Compile Include="Models\IHashCode.cs" />
+    <Compile Include="Models\Tag.cs" />
+    <Compile Include="Models\ITag.cs" />
     <Compile Include="Models\ModelContext.cs" />
     <Compile Include="Models\Old\DeviceCatalogSource.cs" />
     <Compile Include="Models\Old\HardDiskSource.cs" />
@@ -205,7 +205,7 @@
     <Compile Include="Repositories\Feeds\IFeedRepository.cs" />
     <Compile Include="Repositories\Feeds\LookupByLocation.cs" />
     <Compile Include="Repositories\Feeds\SearchAll.cs" />
-    <Compile Include="Repositories\Feeds\SearchAuthorHashCodesBySchemeAndValue.cs" />
+    <Compile Include="Repositories\Feeds\SearchAuthorTagsBySchemeAndValue.cs" />
     <Compile Include="Repositories\Feeds\SearchByAuthors.cs" />
     <Compile Include="Repositories\Feeds\SearchByKeyword.cs" />
     <Compile Include="Repositories\Feeds\SearchByTitle.cs" />
@@ -217,7 +217,7 @@
     <Compile Include="Repositories\Feeds\SearchItemsByParent.cs" />
     <Compile Include="Repositories\Feeds\SearchLinksByParent.cs" />
     <Compile Include="Repositories\Feeds\SearchMetadataByParent.cs" />
-    <Compile Include="Repositories\Feeds\SearchTitleHashCodesBySchemeAndValue.cs" />
+    <Compile Include="Repositories\Feeds\SearchTitleTagsBySchemeAndValue.cs" />
     <Compile Include="Repositories\LookupBase.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\EntitySearchBase.cs" />

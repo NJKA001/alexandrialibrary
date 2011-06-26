@@ -35,18 +35,18 @@ namespace Gnosis.Alexandria.Models.Feeds
             AddValueInitializer(value => AddCategory(value as IFeedCategory), x => x.Categories);
             AddValueInitializer(value => AddLink(value as IFeedLink), x => x.Links);
             AddValueInitializer(value => AddMetadatum(value as IFeedMetadatum), x => x.Metadata);
-            AddValueInitializer(value => AddTitleHashCode(value as IHashCode), x => x.TitleHashCodes);
-            AddValueInitializer(value => AddAuthorHashCode(value as IHashCode), x => x.AuthorHashCodes);
-            AddValueInitializer(value => AddContributorHashCode(value as IHashCode), x => x.ContributorHashCodes);
-            AddValueInitializer(value => AddDescriptionHashCode(value as IHashCode), x => x.DescriptionHashCodes);
+            AddValueInitializer(value => AddTitleTag(value as ITag), x => x.TitleTags);
+            AddValueInitializer(value => AddAuthorTag(value as ITag), x => x.AuthorTags);
+            AddValueInitializer(value => AddContributorTag(value as ITag), x => x.ContributorTags);
+            AddValueInitializer(value => AddDescriptionTag(value as ITag), x => x.DescriptionTags);
 
-            AddHashFunction(HashCode.SchemeDoubleMetaphone, token => HashCode.CreateDoubleMetaphoneHash(this.Id, token));
-            AddHashFunction(HashCode.SchemeNameHash, token => HashCode.CreateNameHash(this.Id, token));
+            AddHashFunction(Tag.SchemeDoubleMetaphone, token => Tag.CreateDoubleMetaphoneHash(this.Id, token));
+            AddHashFunction(Tag.SchemeAmericanizedGraph, token => Tag.CreateAmericanizedGraph(this.Id, token));
 
-            AddHashInitializer(hashCode => AddTitleHashCode(hashCode), hashCode => RemoveTitleHashCode(hashCode), feed => feed.TitleHashCodes);
-            AddHashInitializer(hashCode => AddAuthorHashCode(hashCode), hashCode => RemoveAuthorHashCode(hashCode), feed => feed.AuthorHashCodes);
-            AddHashInitializer(hashCode => AddContributorHashCode(hashCode), hashCode => RemoveContributorHashCode(hashCode), feed => feed.ContributorHashCodes);
-            AddHashInitializer(hashCode => AddDescriptionHashCode(hashCode), hashCode => RemoveDescriptionHashCode(hashCode), feed => feed.DescriptionHashCodes);
+            AddHashInitializer(tag => AddTitleTag(tag), tag => RemoveTitleTag(tag), feed => feed.TitleTags);
+            AddHashInitializer(tag => AddAuthorTag(tag), tag => RemoveAuthorTag(tag), feed => feed.AuthorTags);
+            AddHashInitializer(tag => AddContributorTag(tag), tag => RemoveContributorTag(tag), feed => feed.ContributorTags);
+            AddHashInitializer(tag => AddDescriptionTag(tag), tag => RemoveDescriptionTag(tag), feed => feed.DescriptionTags);
         }
 
         private Uri location;
@@ -70,10 +70,10 @@ namespace Gnosis.Alexandria.Models.Feeds
         private readonly IList<IFeedMetadatum> metadata = new ObservableCollection<IFeedMetadatum>();
         private readonly IList<IFeedItem> items = new ObservableCollection<IFeedItem>();
 
-        private readonly IList<IHashCode> titleHashCodes = new ObservableCollection<IHashCode>();
-        private readonly IList<IHashCode> authorHashCodes = new ObservableCollection<IHashCode>();
-        private readonly IList<IHashCode> contributorHashCodes = new ObservableCollection<IHashCode>();
-        private readonly IList<IHashCode> descriptionHashCodes = new ObservableCollection<IHashCode>();
+        private readonly IList<ITag> titleTags = new ObservableCollection<ITag>();
+        private readonly IList<ITag> authorTags = new ObservableCollection<ITag>();
+        private readonly IList<ITag> contributorTags = new ObservableCollection<ITag>();
+        private readonly IList<ITag> descriptionTags = new ObservableCollection<ITag>();
 
         #region Private Methods
 
@@ -92,44 +92,44 @@ namespace Gnosis.Alexandria.Models.Feeds
             AddValue<IFeedMetadatum>(() => metadata.Add(metadatum), metadatum, x => x.Metadata);
         }
 
-        private void AddTitleHashCode(IHashCode hashCode)
+        private void AddTitleTag(ITag tag)
         {
-            AddValue<IHashCode>(() => titleHashCodes.Add(hashCode), hashCode, x => x.TitleHashCodes);
+            AddValue<ITag>(() => titleTags.Add(tag), tag, x => x.TitleTags);
         }
 
-        private void RemoveTitleHashCode(IHashCode hashCode)
+        private void RemoveTitleTag(ITag tag)
         {
-            RemoveValue<IHashCode>(() => titleHashCodes.Remove(hashCode), hashCode, x => x.TitleHashCodes);
+            RemoveValue<ITag>(() => titleTags.Remove(tag), tag, x => x.TitleTags);
         }
 
-        private void AddAuthorHashCode(IHashCode hashCode)
+        private void AddAuthorTag(ITag tag)
         {
-            AddValue<IHashCode>(() => authorHashCodes.Add(hashCode), hashCode, x => x.AuthorHashCodes);
+            AddValue<ITag>(() => authorTags.Add(tag), tag, x => x.AuthorTags);
         }
 
-        private void RemoveAuthorHashCode(IHashCode hashCode)
+        private void RemoveAuthorTag(ITag tag)
         {
-            RemoveValue<IHashCode>(() => authorHashCodes.Remove(hashCode), hashCode, x => x.AuthorHashCodes);
+            RemoveValue<ITag>(() => authorTags.Remove(tag), tag, x => x.AuthorTags);
         }
 
-        private void AddContributorHashCode(IHashCode hashCode)
+        private void AddContributorTag(ITag tag)
         {
-            AddValue<IHashCode>(() => contributorHashCodes.Add(hashCode), hashCode, x => x.ContributorHashCodes);
+            AddValue<ITag>(() => contributorTags.Add(tag), tag, x => x.ContributorTags);
         }
 
-        private void RemoveContributorHashCode(IHashCode hashCode)
+        private void RemoveContributorTag(ITag tag)
         {
-            RemoveValue<IHashCode>(() => contributorHashCodes.Remove(hashCode), hashCode, x => x.ContributorHashCodes);
+            RemoveValue<ITag>(() => contributorTags.Remove(tag), tag, x => x.ContributorTags);
         }
 
-        private void AddDescriptionHashCode(IHashCode hashCode)
+        private void AddDescriptionTag(ITag tag)
         {
-            AddValue<IHashCode>(() => descriptionHashCodes.Add(hashCode), hashCode, x => x.DescriptionHashCodes);
+            AddValue<ITag>(() => descriptionTags.Add(tag), tag, x => x.DescriptionTags);
         }
 
-        private void RemoveDescriptionHashCode(IHashCode hashCode)
+        private void RemoveDescriptionTag(ITag tag)
         {
-            RemoveValue<IHashCode>(() => descriptionHashCodes.Remove(hashCode), hashCode, x => x.DescriptionHashCodes);
+            RemoveValue<ITag>(() => descriptionTags.Remove(tag), tag, x => x.DescriptionTags);
         }
 
         #endregion
@@ -168,7 +168,7 @@ namespace Gnosis.Alexandria.Models.Feeds
                 if (value != null && value != title)
                 {
                     Change(() => title = value, x => x.Title);
-                    RefreshHashCodes(value, x => x.TitleHashCodes);
+                    RefreshTags(value, x => x.TitleTags);
                 }
             }
         }
@@ -181,7 +181,7 @@ namespace Gnosis.Alexandria.Models.Feeds
                 if (value != null && value != authors)
                 {
                     Change(() => authors = value, x => x.Authors);
-                    RefreshHashCodes(value, x => x.AuthorHashCodes);
+                    RefreshTags(value, x => x.AuthorTags);
                 }
             }
         }
@@ -194,7 +194,7 @@ namespace Gnosis.Alexandria.Models.Feeds
                 if (value != null && value != contributors)
                 {
                     Change(() => contributors = value, x => x.Contributors);
-                    RefreshHashCodes(value, x => x.ContributorHashCodes);
+                    RefreshTags(value, x => x.ContributorTags);
                 }
             }
         }
@@ -207,7 +207,7 @@ namespace Gnosis.Alexandria.Models.Feeds
                 if (value != null && value != description)
                 {
                     Change(() => description = value, x => x.Description);
-                    RefreshHashCodes(value, x => x.DescriptionHashCodes);
+                    RefreshTags(value, x => x.DescriptionTags);
                 }
             }
         }
@@ -341,24 +341,24 @@ namespace Gnosis.Alexandria.Models.Feeds
         }
 
 
-        public IEnumerable<IHashCode> TitleHashCodes
+        public IEnumerable<ITag> TitleTags
         {
-            get { return titleHashCodes; }
+            get { return titleTags; }
         }
 
-        public IEnumerable<IHashCode> AuthorHashCodes
+        public IEnumerable<ITag> AuthorTags
         {
-            get { return authorHashCodes; }
+            get { return authorTags; }
         }
 
-        public IEnumerable<IHashCode> ContributorHashCodes
+        public IEnumerable<ITag> ContributorTags
         {
-            get { return contributorHashCodes; }
+            get { return contributorTags; }
         }
 
-        public IEnumerable<IHashCode> DescriptionHashCodes
+        public IEnumerable<ITag> DescriptionTags
         {
-            get { return descriptionHashCodes; }
+            get { return descriptionTags; }
         }
 
 

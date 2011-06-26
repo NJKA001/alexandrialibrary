@@ -62,26 +62,26 @@ namespace Gnosis.Alexandria.Models.Tracks
             AddValueInitializer(value => AddIdentifier(value as ITrackIdentifier), track => track.Identifiers);
             AddValueInitializer(value => AddLink(value as ITrackLink), track => track.Links);
             AddValueInitializer(value => AddMetadatum(value as ITrackMetadatum), track => track.Metadata);
-            AddValueInitializer(value => AddTitleHashCode(value as IHashCode), track => track.TitleHashCodes);
-            AddValueInitializer(value => AddAlbumHashCode(value as IHashCode), track => track.AlbumHashCodes);
-            AddValueInitializer(value => AddArtistHashCode(value as IHashCode), track => track.ArtistHashCodes);
-            AddValueInitializer(value => AddAlbumArtistHashCode(value as IHashCode), track => track.AlbumArtistHashCodes);
-            AddValueInitializer(value => AddComposerHashCode(value as IHashCode), track => track.ComposerHashCodes);
-            AddValueInitializer(value => AddConductorHashCode(value as IHashCode), track => track.ConductorHashCodes);
-            AddValueInitializer(value => AddOriginalTitleHashCode(value as IHashCode), track => track.OriginalTitleHashCodes);
-            AddValueInitializer(value => AddOriginalArtistHashCode(value as IHashCode), track => track.OriginalArtistHashCodes);
+            AddValueInitializer(value => AddTitleTag(value as ITag), track => track.TitleTags);
+            AddValueInitializer(value => AddAlbumTag(value as ITag), track => track.AlbumTags);
+            AddValueInitializer(value => AddArtistTag(value as ITag), track => track.ArtistTags);
+            AddValueInitializer(value => AddAlbumArtistTag(value as ITag), track => track.AlbumArtistTags);
+            AddValueInitializer(value => AddComposerTag(value as ITag), track => track.ComposerTags);
+            AddValueInitializer(value => AddConductorTag(value as ITag), track => track.ConductorTags);
+            AddValueInitializer(value => AddOriginalTitleTag(value as ITag), track => track.OriginalTitleTags);
+            AddValueInitializer(value => AddOriginalArtistTag(value as ITag), track => track.OriginalArtistTags);
 
-            AddHashFunction(HashCode.SchemeDoubleMetaphone, token => HashCode.CreateDoubleMetaphoneHash(this.Id, token));
-            AddHashFunction(HashCode.SchemeNameHash, token => HashCode.CreateNameHash(this.Id, token));
+            AddHashFunction(Tag.SchemeDoubleMetaphone, token => Tag.CreateDoubleMetaphoneHash(this.Id, token));
+            AddHashFunction(Tag.SchemeAmericanizedGraph, token => Tag.CreateAmericanizedGraph(this.Id, token));
 
-            AddHashInitializer(hashCode => AddTitleHashCode(hashCode), hashCode => RemoveTitleHashCode(hashCode), track => track.TitleHashCodes);
-            AddHashInitializer(hashCode => AddArtistHashCode(hashCode), hashCode => RemoveArtistHashCode(hashCode), track => track.ArtistHashCodes);
-            AddHashInitializer(hashCode => AddAlbumHashCode(hashCode), hashCode => RemoveAlbumHashCode(hashCode), track => track.AlbumHashCodes);
-            AddHashInitializer(hashCode => AddAlbumArtistHashCode(hashCode), hashCode => RemoveAlbumArtistHashCode(hashCode), track => track.AlbumArtistHashCodes);
-            AddHashInitializer(hashCode => AddComposerHashCode(hashCode), hashCode => RemoveComposerHashCode(hashCode), track => track.ComposerHashCodes);
-            AddHashInitializer(hashCode => AddConductorHashCode(hashCode), hashCode => RemoveConductorHashCode(hashCode), track => track.ConductorHashCodes);
-            AddHashInitializer(hashCode => AddOriginalTitleHashCode(hashCode), hashCode => RemoveOriginalTitleHashCode(hashCode), track => track.OriginalTitleHashCodes);
-            AddHashInitializer(hashCode => AddOriginalArtistHashCode(hashCode), hashCode => RemoveOriginalArtistHashCode(hashCode), track => track.OriginalArtistHashCodes);
+            AddHashInitializer(tag => AddTitleTag(tag), tag => RemoveTitleTag(tag), track => track.TitleTags);
+            AddHashInitializer(tag => AddArtistTag(tag), tag => RemoveArtistTag(tag), track => track.ArtistTags);
+            AddHashInitializer(tag => AddAlbumTag(tag), tag => RemoveAlbumTag(tag), track => track.AlbumTags);
+            AddHashInitializer(tag => AddAlbumArtistTag(tag), tag => RemoveAlbumArtistTag(tag), track => track.AlbumArtistTags);
+            AddHashInitializer(tag => AddComposerTag(tag), tag => RemoveComposerTag(tag), track => track.ComposerTags);
+            AddHashInitializer(tag => AddConductorTag(tag), tag => RemoveConductorTag(tag), track => track.ConductorTags);
+            AddHashInitializer(tag => AddOriginalTitleTag(tag), tag => RemoveOriginalTitleTag(tag), track => track.OriginalTitleTags);
+            AddHashInitializer(tag => AddOriginalArtistTag(tag), tag => RemoveOriginalArtistTag(tag), track => track.OriginalArtistTags);
         }
 
         private Uri location;
@@ -133,14 +133,14 @@ namespace Gnosis.Alexandria.Models.Tracks
         private readonly IList<ITrackLink> links = new ObservableCollection<ITrackLink>();
         private readonly IList<ITrackMetadatum> metadata = new ObservableCollection<ITrackMetadatum>();
 
-        private readonly IList<IHashCode> titleHashCodes = new ObservableCollection<IHashCode>();
-        private readonly IList<IHashCode> albumHashCodes = new ObservableCollection<IHashCode>();
-        private readonly IList<IHashCode> artistHashCodes = new ObservableCollection<IHashCode>();
-        private readonly IList<IHashCode> albumArtistHashCodes = new ObservableCollection<IHashCode>();
-        private readonly IList<IHashCode> composerHashCodes = new ObservableCollection<IHashCode>();
-        private readonly IList<IHashCode> conductorHashCodes = new ObservableCollection<IHashCode>();
-        private readonly IList<IHashCode> originalTitleHashCodes = new ObservableCollection<IHashCode>();
-        private readonly IList<IHashCode> originalArtistHashCodes = new ObservableCollection<IHashCode>();
+        private readonly IList<ITag> titleTags = new ObservableCollection<ITag>();
+        private readonly IList<ITag> albumTags = new ObservableCollection<ITag>();
+        private readonly IList<ITag> artistTags = new ObservableCollection<ITag>();
+        private readonly IList<ITag> albumArtistTags = new ObservableCollection<ITag>();
+        private readonly IList<ITag> composerTags = new ObservableCollection<ITag>();
+        private readonly IList<ITag> conductorTags = new ObservableCollection<ITag>();
+        private readonly IList<ITag> originalTitleTags = new ObservableCollection<ITag>();
+        private readonly IList<ITag> originalArtistTags = new ObservableCollection<ITag>();
 
         #region Private Methods
 
@@ -174,84 +174,84 @@ namespace Gnosis.Alexandria.Models.Tracks
             AddValue<ITrackMetadatum>(() => this.metadata.Add(metadatum), metadatum, track => track.Metadata);
         }
 
-        private void AddTitleHashCode(IHashCode hashCode)
+        private void AddTitleTag(ITag tag)
         {
-            AddValue<IHashCode>(() => this.titleHashCodes.Add(hashCode), hashCode, track => track.TitleHashCodes);
+            AddValue<ITag>(() => this.titleTags.Add(tag), tag, track => track.TitleTags);
         }
 
-        private void RemoveTitleHashCode(IHashCode hashCode)
+        private void RemoveTitleTag(ITag tag)
         {
-            RemoveValue<IHashCode>(() => this.titleHashCodes.Remove(hashCode), hashCode, track => track.TitleHashCodes);
+            RemoveValue<ITag>(() => this.titleTags.Remove(tag), tag, track => track.TitleTags);
         }
 
-        private void AddAlbumHashCode(IHashCode hashCode)
+        private void AddAlbumTag(ITag tag)
         {
-            AddValue<IHashCode>(() => this.albumHashCodes.Add(hashCode), hashCode, track => track.AlbumHashCodes);
+            AddValue<ITag>(() => this.albumTags.Add(tag), tag, track => track.AlbumTags);
         }
 
-        private void RemoveAlbumHashCode(IHashCode hashCode)
+        private void RemoveAlbumTag(ITag tag)
         {
-            RemoveValue<IHashCode>(() => this.albumHashCodes.Remove(hashCode), hashCode, track => track.AlbumHashCodes);
+            RemoveValue<ITag>(() => this.albumTags.Remove(tag), tag, track => track.AlbumTags);
         }
 
-        private void AddArtistHashCode(IHashCode hashCode)
+        private void AddArtistTag(ITag tag)
         {
-            AddValue<IHashCode>(() => this.artistHashCodes.Add(hashCode), hashCode, track => track.ArtistHashCodes);
+            AddValue<ITag>(() => this.artistTags.Add(tag), tag, track => track.ArtistTags);
         }
 
-        private void RemoveArtistHashCode(IHashCode hashCode)
+        private void RemoveArtistTag(ITag tag)
         {
-            RemoveValue<IHashCode>(() => this.albumHashCodes.Remove(hashCode), hashCode, track => track.ArtistHashCodes);
+            RemoveValue<ITag>(() => this.albumTags.Remove(tag), tag, track => track.ArtistTags);
         }
 
-        private void AddAlbumArtistHashCode(IHashCode hashCode)
+        private void AddAlbumArtistTag(ITag tag)
         {
-            AddValue<IHashCode>(() => this.albumArtistHashCodes.Add(hashCode), hashCode, track => track.AlbumArtistHashCodes);
+            AddValue<ITag>(() => this.albumArtistTags.Add(tag), tag, track => track.AlbumArtistTags);
         }
 
-        private void RemoveAlbumArtistHashCode(IHashCode hashCode)
+        private void RemoveAlbumArtistTag(ITag tag)
         {
-            RemoveValue<IHashCode>(() => this.albumArtistHashCodes.Remove(hashCode), hashCode, track => track.AlbumArtistHashCodes);
+            RemoveValue<ITag>(() => this.albumArtistTags.Remove(tag), tag, track => track.AlbumArtistTags);
         }
 
-        private void AddComposerHashCode(IHashCode hashCode)
+        private void AddComposerTag(ITag tag)
         {
-            AddValue<IHashCode>(() => this.composerHashCodes.Add(hashCode), hashCode, track => track.ComposerHashCodes);
+            AddValue<ITag>(() => this.composerTags.Add(tag), tag, track => track.ComposerTags);
         }
 
-        private void RemoveComposerHashCode(IHashCode hashCode)
+        private void RemoveComposerTag(ITag tag)
         {
-            RemoveValue<IHashCode>(() => this.composerHashCodes.Remove(hashCode), hashCode, track => track.ComposerHashCodes);
+            RemoveValue<ITag>(() => this.composerTags.Remove(tag), tag, track => track.ComposerTags);
         }
 
-        private void AddConductorHashCode(IHashCode hashCode)
+        private void AddConductorTag(ITag tag)
         {
-            AddValue<IHashCode>(() => this.conductorHashCodes.Add(hashCode), hashCode, track => track.ConductorHashCodes);
+            AddValue<ITag>(() => this.conductorTags.Add(tag), tag, track => track.ConductorTags);
         }
 
-        private void RemoveConductorHashCode(IHashCode hashCode)
+        private void RemoveConductorTag(ITag tag)
         {
-            RemoveValue<IHashCode>(() => this.conductorHashCodes.Remove(hashCode), hashCode, track => track.ConductorHashCodes);
+            RemoveValue<ITag>(() => this.conductorTags.Remove(tag), tag, track => track.ConductorTags);
         }
 
-        private void AddOriginalTitleHashCode(IHashCode hashCode)
+        private void AddOriginalTitleTag(ITag tag)
         {
-            AddValue<IHashCode>(() => this.originalTitleHashCodes.Add(hashCode), hashCode, track => track.OriginalTitleHashCodes);
+            AddValue<ITag>(() => this.originalTitleTags.Add(tag), tag, track => track.OriginalTitleTags);
         }
 
-        private void RemoveOriginalTitleHashCode(IHashCode hashCode)
+        private void RemoveOriginalTitleTag(ITag tag)
         {
-            RemoveValue<IHashCode>(() => this.originalTitleHashCodes.Remove(hashCode), hashCode, track => track.OriginalTitleHashCodes);
+            RemoveValue<ITag>(() => this.originalTitleTags.Remove(tag), tag, track => track.OriginalTitleTags);
         }
 
-        private void AddOriginalArtistHashCode(IHashCode hashCode)
+        private void AddOriginalArtistTag(ITag tag)
         {
-            AddValue<IHashCode>(() => this.originalArtistHashCodes.Add(hashCode), hashCode, track => track.OriginalArtistHashCodes);
+            AddValue<ITag>(() => this.originalArtistTags.Add(tag), tag, track => track.OriginalArtistTags);
         }
 
-        private void RemoveOriginalArtistHashCode(IHashCode hashCode)
+        private void RemoveOriginalArtistTag(ITag tag)
         {
-            RemoveValue<IHashCode>(() => this.originalArtistHashCodes.Remove(hashCode), hashCode, track => track.OriginalArtistHashCodes);
+            RemoveValue<ITag>(() => this.originalArtistTags.Remove(tag), tag, track => track.OriginalArtistTags);
         }
 
         #endregion
@@ -290,7 +290,7 @@ namespace Gnosis.Alexandria.Models.Tracks
                 if (value != null && value != title)
                 {
                     Change(() => title = value, track => track.Title);
-                    RefreshHashCodes(value, track => track.TitleHashCodes);
+                    RefreshTags(value, track => track.TitleTags);
                 }
             }
         }
@@ -351,7 +351,7 @@ namespace Gnosis.Alexandria.Models.Tracks
                 if (value != null && value != album)
                 {
                     Change(() => album = value, track => track.Album);
-                    RefreshHashCodes(value, track => track.AlbumHashCodes);
+                    RefreshTags(value, track => track.AlbumTags);
                 }
             }
         }
@@ -388,7 +388,7 @@ namespace Gnosis.Alexandria.Models.Tracks
                 if (value != null && value != artists)
                 {
                     Change(() => artists = value, track => track.Artists);
-                    RefreshHashCodes(value, track => track.ArtistHashCodes);
+                    RefreshTags(value, track => track.ArtistTags);
                 }
             }
         }
@@ -413,7 +413,7 @@ namespace Gnosis.Alexandria.Models.Tracks
                 if (value != null && value != albumArtists)
                 {
                     Change(() => albumArtists = value, track => track.AlbumArtists);
-                    RefreshHashCodes(value, track => track.AlbumArtistHashCodes);
+                    RefreshTags(value, track => track.AlbumArtistTags);
                 }
             }
         }
@@ -426,7 +426,7 @@ namespace Gnosis.Alexandria.Models.Tracks
                 if (value != null && value != composers)
                 {
                     Change(() => composers = value, track => track.Composers);
-                    RefreshHashCodes(value, track => track.ComposerHashCodes);
+                    RefreshTags(value, track => track.ComposerTags);
                 }
             }
         }
@@ -475,7 +475,7 @@ namespace Gnosis.Alexandria.Models.Tracks
                 if (value != null && value != conductor)
                 {
                     Change(() => conductor = value, track => track.Conductor);
-                    RefreshHashCodes(value, track => track.ConductorHashCodes);
+                    RefreshTags(value, track => track.ConductorTags);
                 }
             }
         }
@@ -512,7 +512,7 @@ namespace Gnosis.Alexandria.Models.Tracks
                 if (value != null && value != originalTitle)
                 {
                     Change(() => originalTitle = value, track => track.OriginalTitle);
-                    RefreshHashCodes(value, track => track.OriginalTitleHashCodes);
+                    RefreshTags(value, track => track.OriginalTitleTags);
                 }
             }
         }
@@ -525,7 +525,7 @@ namespace Gnosis.Alexandria.Models.Tracks
                 if (value != null && value != originalArtists)
                 {
                     Change(() => originalArtists = value, track => track.OriginalArtists);
-                    RefreshHashCodes(value, track => track.OriginalArtistHashCodes);
+                    RefreshTags(value, track => track.OriginalArtistTags);
                 }
             }
         }
@@ -745,44 +745,44 @@ namespace Gnosis.Alexandria.Models.Tracks
             get { return metadata; }
         }
 
-        public IEnumerable<IHashCode> TitleHashCodes
+        public IEnumerable<ITag> TitleTags
         {
-            get { return titleHashCodes; }
+            get { return titleTags; }
         }
 
-        public IEnumerable<IHashCode> AlbumHashCodes
+        public IEnumerable<ITag> AlbumTags
         {
-            get { return albumHashCodes; }
+            get { return albumTags; }
         }
 
-        public IEnumerable<IHashCode> ArtistHashCodes
+        public IEnumerable<ITag> ArtistTags
         {
-            get { return artistHashCodes; }
+            get { return artistTags; }
         }
 
-        public IEnumerable<IHashCode> AlbumArtistHashCodes
+        public IEnumerable<ITag> AlbumArtistTags
         {
-            get { return albumArtistHashCodes; }
+            get { return albumArtistTags; }
         }
 
-        public IEnumerable<IHashCode> ComposerHashCodes
+        public IEnumerable<ITag> ComposerTags
         {
-            get { return composerHashCodes; }
+            get { return composerTags; }
         }
 
-        public IEnumerable<IHashCode> ConductorHashCodes
+        public IEnumerable<ITag> ConductorTags
         {
-            get { return conductorHashCodes; }
+            get { return conductorTags; }
         }
 
-        public IEnumerable<IHashCode> OriginalTitleHashCodes
+        public IEnumerable<ITag> OriginalTitleTags
         {
-            get { return originalTitleHashCodes; }
+            get { return originalTitleTags; }
         }
 
-        public IEnumerable<IHashCode> OriginalArtistHashCodes
+        public IEnumerable<ITag> OriginalArtistTags
         {
-            get { return originalArtistHashCodes; }
+            get { return originalArtistTags; }
         }
 
 

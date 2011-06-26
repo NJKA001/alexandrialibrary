@@ -7,7 +7,7 @@ using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Models
 {
-    public interface IHashCode
+    public interface ITag
         : IValue
     {
         Uri Scheme { get; }

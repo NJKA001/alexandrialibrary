@@ -29,8 +29,8 @@ namespace Gnosis.Alexandria.Models
         private readonly IDictionary<string, Action<string, IDataRecord>> customInitializers = new Dictionary<string, Action<string, IDataRecord>>();
         private readonly IDictionary<string, Action<IChild>> childInitializers = new Dictionary<string, Action<IChild>>();
         private readonly IDictionary<string, Action<IValue>> valueInitializers = new Dictionary<string, Action<IValue>>();
-        private readonly IDictionary<Uri, Func<string, IHashCode>> hashFunctions = new Dictionary<Uri, Func<string, IHashCode>>();
-        private readonly IDictionary<string, Tuple<Action<IHashCode>, Action<IHashCode>>> hashInitializers = new Dictionary<string, Tuple<Action<IHashCode>, Action<IHashCode>>>();
+        private readonly IDictionary<Uri, Func<string, ITag>> hashFunctions = new Dictionary<Uri, Func<string, ITag>>();
+        private readonly IDictionary<string, Tuple<Action<ITag>, Action<ITag>>> hashInitializers = new Dictionary<string, Tuple<Action<ITag>, Action<ITag>>>();
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -66,33 +66,33 @@ namespace Gnosis.Alexandria.Models
 
             isChanged = true;
 
-            var propertyInfo = property.AsProperty();
+            var propertyInfo = property.ToPropertyInfo();
             OnPropertyChanged(propertyInfo.Name);
         }
 
         protected void AddInitializer(Action<object> action, Expression<Func<T, object>> property)
         {
-            var propertyInfo = property.AsProperty();
+            var propertyInfo = property.ToPropertyInfo();
             initializers[propertyInfo.Name] = action;
         }
 
         protected void AddInitializer(Action<string, IDataRecord> action, Expression<Func<T, object>> property)
         {
-            var propertyInfo = property.AsProperty();
+            var propertyInfo = property.ToPropertyInfo();
             customInitializers[propertyInfo.Name] = action;
         }
 
         protected void AddChildInitializer<TChild>(Action<IChild> action)
             where TChild : IChild
         {
-            var childName = typeof(TChild).GetNormalizedName();
+            var childName = typeof(TChild).ToPersistentName();
             childInitializers[childName] = action;
         }
 
         protected void AddValueInitializer(Action<IValue> action, Expression<Func<T, object>> property)
         {
-            var propertyInfo = property.AsProperty();
-            var entityName = typeof(T).GetNormalizedName();
+            var propertyInfo = property.ToPropertyInfo();
+            var entityName = typeof(T).ToPersistentName();
             var name = string.Format("{0}_{1}", entityName, propertyInfo.Name);
             valueInitializers[name] = action;
         }
@@ -103,7 +103,7 @@ namespace Gnosis.Alexandria.Models
             if (!isInitialized)
                 throw new InvalidOperationException("Entity must be initialized before children can be added");
 
-            var propertyInfo = property.AsProperty();
+            var propertyInfo = property.ToPropertyInfo();
             var parentInfo = new EntityInfo(typeof(T));
             var childInfo = new EntityInfo(typeof(TChild), parentInfo);
             var key = childInfo.Name;
@@ -131,7 +131,7 @@ namespace Gnosis.Alexandria.Models
             if (!isInitialized)
                 throw new InvalidOperationException("Entity must be initialized before children can be removed");
 
-            var propertyInfo = property.AsProperty();
+            var propertyInfo = property.ToPropertyInfo();
             var parentInfo = new EntityInfo(typeof(T));
             var childInfo = new EntityInfo(typeof(TChild), parentInfo);
             var key = childInfo.Name;
@@ -160,7 +160,7 @@ namespace Gnosis.Alexandria.Models
                 throw new InvalidOperationException("Entity must be initialized before values can be added");
 
             var entity = new EntityInfo(typeof(T));
-            var propertyInfo = property.AsProperty();
+            var propertyInfo = property.ToPropertyInfo();
             var key = string.Format("{0}_{1}", entity.Name, propertyInfo.Name);
 
             if (!removedValues.ContainsKey(key))
@@ -187,7 +187,7 @@ namespace Gnosis.Alexandria.Models
                 throw new InvalidOperationException("Entity must be initialized before values can be removed");
 
             var entity = new EntityInfo(typeof(T));
-            var propertyInfo = property.AsProperty();
+            var propertyInfo = property.ToPropertyInfo();
 
             var key = string.Format("{0}_{1}", entity.Name, propertyInfo.Name);
 
@@ -208,43 +208,43 @@ namespace Gnosis.Alexandria.Models
             }
         }
 
-        protected void AddHashFunction(Uri scheme, Func<string, IHashCode> function)
+        protected void AddHashFunction(Uri scheme, Func<string, ITag> function)
         {
             hashFunctions[scheme] = function;
         }
 
-        protected void AddHashInitializer(Action<IHashCode> addFunction, Action<IHashCode> removeFunction, Expression<Func<T, IEnumerable<IHashCode>>> property)
+        protected void AddHashInitializer(Action<ITag> addFunction, Action<ITag> removeFunction, Expression<Func<T, IEnumerable<ITag>>> property)
         {
-            var propertyInfo = property.AsProperty();
+            var propertyInfo = property.ToPropertyInfo();
 
-            hashInitializers[propertyInfo.Name] = new Tuple<Action<IHashCode>,Action<IHashCode>>(addFunction, removeFunction);
+            hashInitializers[propertyInfo.Name] = new Tuple<Action<ITag>,Action<ITag>>(addFunction, removeFunction);
         }
 
-        protected void RefreshHashCodes(string value, Expression<Func<T, IEnumerable<IHashCode>>> property)
+        protected void RefreshTags(string value, Expression<Func<T, IEnumerable<ITag>>> property)
         {
-            RefreshHashCodes(new List<string> { value }, property, null);
+            RefreshTags(new List<string> { value }, property, null);
         }
 
-        protected void RefreshHashCodes(string value, Expression<Func<T, IEnumerable<IHashCode>>> property, params Uri[] schemesToUse)
+        protected void RefreshTags(string value, Expression<Func<T, IEnumerable<ITag>>> property, params Uri[] schemesToUse)
         {
-            RefreshHashCodes(new List<string> { value }, property, schemesToUse);
+            RefreshTags(new List<string> { value }, property, schemesToUse);
         }
 
-        protected void RefreshHashCodes(IEnumerable<string> values, Expression<Func<T, IEnumerable<IHashCode>>> property)
+        protected void RefreshTags(IEnumerable<string> values, Expression<Func<T, IEnumerable<ITag>>> property)
         {
-            RefreshHashCodes(values, property, null);
+            RefreshTags(values, property, null);
         }
 
-        protected void RefreshHashCodes(IEnumerable<string> values, Expression<Func<T, IEnumerable<IHashCode>>> property, params Uri[] schemesToUse)
+        protected void RefreshTags(IEnumerable<string> values, Expression<Func<T, IEnumerable<ITag>>> property, params Uri[] schemesToUse)
         {
             if (hashFunctions.Count == 0)
                 throw new InvalidOperationException("No hash functions defined for this entity");
 
-            var propertyInfo = property.AsProperty();
+            var propertyInfo = property.ToPropertyInfo();
             if (!hashInitializers.ContainsKey(propertyInfo.Name))
                 throw new InvalidOperationException("No hash initializer defined for property: " + propertyInfo.Name);
 
-            var source = propertyInfo.GetValue(this, null) as IEnumerable<IHashCode>;
+            var source = propertyInfo.GetValue(this, null) as IEnumerable<ITag>;
             if (source == null)
                 throw new InvalidOperationException("Property is not a valid hash source: " + propertyInfo.Name);
 
@@ -254,11 +254,11 @@ namespace Gnosis.Alexandria.Models
 
             foreach (var scheme in hashFunctions.Keys.Where(x => schemesToUse == null || schemesToUse.Contains(x)))
             {
-                var oldCodes = new List<IHashCode>();
-                oldCodes.AddRange(source.Where(hashCode => hashCode.Scheme == scheme));
+                var oldCodes = new List<ITag>();
+                oldCodes.AddRange(source.Where(tag => tag.Scheme == scheme));
 
-                foreach (var hashCode in oldCodes)
-                    removeAction(hashCode);
+                foreach (var tag in oldCodes)
+                    removeAction(tag);
 
                 foreach (var value in values)
                 {
@@ -272,9 +272,9 @@ namespace Gnosis.Alexandria.Models
                         {
                             foreach (var token in tokens)
                             {
-                                var hashCode = hashFunctions[scheme](token);
-                                if (hashCode != null && hashCode.Value != value)
-                                    addAction(hashCode);
+                                var tag = hashFunctions[scheme](token);
+                                if (tag != null && tag.Value != value)
+                                    addAction(tag);
                             }
                         }
                     }

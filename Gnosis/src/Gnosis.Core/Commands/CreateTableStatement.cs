@@ -107,7 +107,7 @@ namespace Gnosis.Core.Commands
 
         private void Column(Type type, string name, object defaultValue)
         {
-            var affinity = type.GetTypeAffinity();
+            var affinity = type.ToTypeAffinity();
 
             switch (affinity)
             {
@@ -157,7 +157,7 @@ namespace Gnosis.Core.Commands
 
         private void PrimaryKey(Type type, string name, bool isAutoIncrement)
         {
-            switch (type.GetTypeAffinity())
+            switch (type.ToTypeAffinity())
             {
                 case TypeAffinity.Integer:
                     if (isAutoIncrement)

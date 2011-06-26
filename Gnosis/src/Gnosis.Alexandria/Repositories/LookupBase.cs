@@ -18,7 +18,7 @@ namespace Gnosis.Alexandria.Repositories
 
             foreach (var column in columns)
             {
-                var columnName = column.AsProperty().Name;
+                var columnName = column.ToPropertyInfo().Name;
                 this.columns.Add(columnName);
             }
         }

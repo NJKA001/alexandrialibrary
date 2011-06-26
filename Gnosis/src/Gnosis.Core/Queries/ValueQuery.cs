@@ -20,7 +20,7 @@ namespace Gnosis.Core.Queries
         {
             var parent = new EntityInfo(typeof(TParent));
             var valueType = typeof(TValue);
-            var valueInfo = new ValueInfo(parent, property.AsProperty(), valueType);
+            var valueInfo = new ValueInfo(parent, property.ToPropertyInfo(), valueType);
 
             this.logger = logger;
             this.factory = factory;

@@ -110,7 +110,7 @@ namespace Gnosis.Alexandria.Controllers
             }
         }
 
-        private IOldTrack GetTrack(string path, Tag tag)
+        private IOldTrack GetTrack(string path, TagLib.Tag tag)
         {
             var track = new OldTrack() { Path = path };
 

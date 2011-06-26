@@ -118,24 +118,14 @@ namespace Gnosis.Core
 
         #endregion
 
-        public static PropertyInfo AsProperty<T>(this Expression<Func<T, object>> expression)
-        {
-            return GetMember<T>(expression) as PropertyInfo;
-        }
+        #region Private Helper Methods
 
-        public static PropertyInfo AsProperty<TEntity, TValue>(this Expression<Func<TEntity, IEnumerable<TValue>>> expression)
-            where TEntity : IEntity
-            where TValue : IValue
-        {
-            return GetMember<TEntity, IEnumerable<TValue>>(expression) as PropertyInfo;
-        }
-
-        public static MemberInfo GetMember<TModel, TReturn>(Expression<Func<TModel, TReturn>> expression)
+        private static MemberInfo GetMember<TModel, TReturn>(Expression<Func<TModel, TReturn>> expression)
         {
             return GetMemberInfo(expression.Body);
         }
 
-        public static MemberInfo GetMember<TModel>(Expression<Func<TModel, object>> expression)
+        private static MemberInfo GetMember<TModel>(Expression<Func<TModel, object>> expression)
         {
             return GetMemberInfo(expression.Body);
         }
@@ -252,5 +242,19 @@ namespace Gnosis.Core
             return new PropertyChain(list.ToArray());
         }
         */
+
+        #endregion
+
+        public static PropertyInfo ToPropertyInfo<T>(this Expression<Func<T, object>> expression)
+        {
+            return GetMember<T>(expression) as PropertyInfo;
+        }
+
+        public static PropertyInfo ToPropertyInfo<TEntity, TValue>(this Expression<Func<TEntity, IEnumerable<TValue>>> expression)
+            where TEntity : IEntity
+            where TValue : IValue
+        {
+            return GetMember<TEntity, IEnumerable<TValue>>(expression) as PropertyInfo;
+        }
     }
 }

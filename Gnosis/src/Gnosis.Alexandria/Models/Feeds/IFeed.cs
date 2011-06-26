@@ -32,10 +32,10 @@ namespace Gnosis.Alexandria.Models.Feeds
         IEnumerable<IFeedMetadatum> Metadata { get; }
         IEnumerable<IFeedItem> Items { get; }
 
-        IEnumerable<IHashCode> TitleHashCodes { get; }
-        IEnumerable<IHashCode> AuthorHashCodes { get; }
-        IEnumerable<IHashCode> ContributorHashCodes { get; }
-        IEnumerable<IHashCode> DescriptionHashCodes { get; }
+        IEnumerable<ITag> TitleTags { get; }
+        IEnumerable<ITag> AuthorTags { get; }
+        IEnumerable<ITag> ContributorTags { get; }
+        IEnumerable<ITag> DescriptionTags { get; }
 
         void AddCategory(Uri scheme, string name, string label);
         void RemoveCategory(IFeedCategory category);

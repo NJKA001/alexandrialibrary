@@ -23,7 +23,7 @@ namespace Gnosis.Alexandria.Models
 
         protected void AddInitializer(Action<object> action, Expression<Func<T, object>> property)
         {
-            var propertyInfo = property.AsProperty();
+            var propertyInfo = property.ToPropertyInfo();
             initializers[propertyInfo.Name] = action;
         }
 

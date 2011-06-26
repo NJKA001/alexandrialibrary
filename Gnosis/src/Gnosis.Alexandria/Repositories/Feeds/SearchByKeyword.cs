@@ -26,10 +26,10 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             whereClause.Append(" or Feed.Description like @pattern");
             whereClause.Append(" or fc.Name like @pattern");
             whereClause.Append(" or fm.Content like @pattern or fm.Name like @pattern");
-            whereClause.Append(" or (fth.Scheme = @schemeDM and fth.Value like @patternDM) or (fth.Scheme = @schemeNH and fth.Value like @patternNH)");
-            whereClause.Append(" or (fah.Scheme = @schemeDM and fah.Value like @patternDM) or (fah.Scheme = @schemeNH and fah.Value like @patternNH)");
-            whereClause.Append(" or (fch.Scheme = @schemeDM and fch.Value like @patternDM) or (fch.Scheme = @schemeNH and fch.Value like @patternNH)");
-            whereClause.Append(" or (fdh.Scheme = @schemeDM and fdh.Value like @patternDM) or (fdh.Scheme = @schemeNH and fdh.Value like @patternNH)");
+            whereClause.Append(" or (ftt.Scheme = @schemeDM and ftt.Value like @patternDM) or (ftt.Scheme = @schemeNH and ftt.Value like @patternNH)");
+            whereClause.Append(" or (fat.Scheme = @schemeDM and fat.Value like @patternDM) or (fat.Scheme = @schemeNH and fat.Value like @patternNH)");
+            whereClause.Append(" or (fct.Scheme = @schemeDM and fct.Value like @patternDM) or (fct.Scheme = @schemeNH and fct.Value like @patternNH)");
+            whereClause.Append(" or (fdt.Scheme = @schemeDM and fdt.Value like @patternDM) or (fdt.Scheme = @schemeNH and fdt.Value like @patternNH)");
             return whereClause.ToString();
         }
 
@@ -39,10 +39,10 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             joinClause.Append("left outer join Feed_Categories fc on Feed.Id = fc.Parent");
             joinClause.Append(" left outer join Feed_Links fl on Feed.Id = fl.Parent");
             joinClause.Append(" left outer join Feed_Metadata fm on Feed.Id = fm.Parent");
-            joinClause.Append(" left outer join Feed_TitleHashCodes fth on Feed.Id = fth.Parent");
-            joinClause.Append(" left outer join Feed_AuthorHashCodes fah on Feed.Id = fah.Parent");
-            joinClause.Append(" left outer join Feed_ContributorHashCodes fch on Feed.Id = fch.Parent");
-            joinClause.Append(" left outer join Feed_DescriptionHashCodes fdh on Feed.Id = fdh.Parent");
+            joinClause.Append(" left outer join Feed_TitleTags ftt on Feed.Id = ftt.Parent");
+            joinClause.Append(" left outer join Feed_AuthorTags fat on Feed.Id = fat.Parent");
+            joinClause.Append(" left outer join Feed_ContributorTags fct on Feed.Id = fct.Parent");
+            joinClause.Append(" left outer join Feed_DescriptionTags fdt on Feed.Id = fdt.Parent");
             return joinClause.ToString();
         }
 
@@ -55,8 +55,8 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             parameters.Add("@pattern", '%' + keyword + '%');
             parameters.Add("@patternDM", '%' + keyword.AsDoubleMetaphone() + '%');
             parameters.Add("@patternNH", '%' + keyword.AsNameHash() + '%');
-            parameters.Add("@schemeDM", HashCode.SchemeDoubleMetaphone.ToString());
-            parameters.Add("@schemeNH", HashCode.SchemeNameHash.ToString());
+            parameters.Add("@schemeDM", Tag.SchemeDoubleMetaphone.ToString());
+            parameters.Add("@schemeNH", Tag.SchemeAmericanizedGraph.ToString());
 
             return GetFilter(parameters);
         }

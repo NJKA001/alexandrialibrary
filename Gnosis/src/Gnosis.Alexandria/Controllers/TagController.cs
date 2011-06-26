@@ -16,7 +16,7 @@ namespace Gnosis.Alexandria.Controllers
             return File.Create(path);
         }
 
-        public Tag GetTag(string path)
+        public TagLib.Tag GetTag(string path)
         {
             var file = GetFile(path);
             return file.Tag;

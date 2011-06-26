@@ -227,7 +227,7 @@ namespace Gnosis.Tests.Repositories
             var feed = GetFeed();
             var id = feed.Id;
 
-            Assert.AreEqual(6, feed.TitleHashCodes.Count());
+            Assert.AreEqual(6, feed.TitleTags.Count());
 
             repository.Save(new List<IFeed> { feed });
 
@@ -247,8 +247,8 @@ namespace Gnosis.Tests.Repositories
             var updatedDate = new DateTime(2011, 4, 27);
             const string testCategoryName = "ABC Some Category";
 
-            var titleNameHash = feed.TitleHashCodes.Where(x => x.Scheme == HashCode.SchemeNameHash).FirstOrDefault().Value;
-            var titleDoubleMetaphone = feed.TitleHashCodes.Where(x => x.Scheme == HashCode.SchemeDoubleMetaphone).FirstOrDefault().Value;
+            var titleNameHash = feed.TitleTags.Where(x => x.Scheme == Tag.SchemeAmericanizedGraph).FirstOrDefault().Value;
+            var titleDoubleMetaphone = feed.TitleTags.Where(x => x.Scheme == Tag.SchemeDoubleMetaphone).FirstOrDefault().Value;
 
             feed.Title = title;
             feed.Description = description;
@@ -266,8 +266,8 @@ namespace Gnosis.Tests.Repositories
             feed.PublishedDate = publishedDate;
             feed.UpdatedDate = updatedDate;
 
-            Assert.AreEqual(6, feed.TitleHashCodes.Count());
-            Assert.AreEqual(18, feed.AuthorHashCodes.Count());
+            Assert.AreEqual(6, feed.TitleTags.Count());
+            Assert.AreEqual(18, feed.AuthorTags.Count());
             Assert.AreEqual(2, feed.Categories.Count());
             Assert.IsTrue(feed.IsChanged());
             Assert.IsFalse(feed.IsNew());
@@ -286,11 +286,11 @@ namespace Gnosis.Tests.Repositories
             Assert.AreNotEqual(oldTimeStamp, newTimeStamp);
             
             var changedFeed = repository.Lookup(id);
-            Assert.AreEqual(18, GetCount(string.Format("select count() from Feed_AuthorHashCodes where Parent = '{0}';", id)));
-            Assert.AreEqual(6, changedFeed.TitleHashCodes.Count());
-            Assert.AreEqual(18, changedFeed.AuthorHashCodes.Count());
-            Assert.AreNotEqual(titleNameHash, changedFeed.TitleHashCodes.Where(x => x.Scheme == HashCode.SchemeNameHash).FirstOrDefault().Value);
-            Assert.AreNotEqual(titleDoubleMetaphone, changedFeed.TitleHashCodes.Where(x => x.Scheme == HashCode.SchemeDoubleMetaphone).FirstOrDefault().Value);
+            Assert.AreEqual(18, GetCount(string.Format("select count() from Feed_AuthorTags where Parent = '{0}';", id)));
+            Assert.AreEqual(6, changedFeed.TitleTags.Count());
+            Assert.AreEqual(18, changedFeed.AuthorTags.Count());
+            Assert.AreNotEqual(titleNameHash, changedFeed.TitleTags.Where(x => x.Scheme == Tag.SchemeAmericanizedGraph).FirstOrDefault().Value);
+            Assert.AreNotEqual(titleDoubleMetaphone, changedFeed.TitleTags.Where(x => x.Scheme == Tag.SchemeDoubleMetaphone).FirstOrDefault().Value);
             Assert.IsNotNull(changedFeed);
             Assert.AreEqual(title, changedFeed.Title);
             Assert.AreEqual(description, changedFeed.Description);
@@ -410,7 +410,7 @@ namespace Gnosis.Tests.Repositories
         }
 
         [Test]
-        public void SearchFeedTitleHashCodes()
+        public void SearchFeedTitleTags()
         {
             const string titleB = "Björk's Podcast";
             var feedA = GetFeed(new Uri("http://espn.go.com/feeds/4636346"), "The BS Report", "Bill Simmons", "Joe House, Marc Stein, John Hollinger", "Bill Simmons Podcast");
@@ -432,20 +432,20 @@ namespace Gnosis.Tests.Repositories
             repository.Save(new List<IFeed> { feedA, feedB, feedC, feedD, feedE });
 
             var keyword1 = "W.X.Y-Z".AsNameHash();
-            var results1 = repository.SearchTitleHashCodesBySchemeAndValue(HashCode.SchemeNameHash, keyword1);
+            var results1 = repository.SearchForTitleTags(Tag.SchemeAmericanizedGraph, keyword1);
             Assert.AreEqual(1, results1.Count());
 
             var keyword2 = "Steven".AsDoubleMetaphone();
-            var results2 = repository.SearchTitleHashCodesBySchemeAndValue(HashCode.SchemeDoubleMetaphone, keyword2);
+            var results2 = repository.SearchForTitleTags(Tag.SchemeDoubleMetaphone, keyword2);
             Assert.AreEqual(1, results2.Count());
 
             var keyword3 = "%BJORK%";
-            var results3 = repository.SearchTitleHashCodesBySchemeAndValue(HashCode.SchemeNameHash, keyword3);
+            var results3 = repository.SearchForTitleTags(Tag.SchemeAmericanizedGraph, keyword3);
             Assert.AreEqual(2, results3.Count());
-            Assert.IsNotNull(results3.Where(hashCode => hashCode.Value == "BJORKSPODCAST").FirstOrDefault());
-            Assert.IsNotNull(results3.Where(hashCode => hashCode.Value == "BJORKS").FirstOrDefault());
+            Assert.IsNotNull(results3.Where(tag => tag.Value == "BJORKSPODCAST").FirstOrDefault());
+            Assert.IsNotNull(results3.Where(tag => tag.Value == "BJORKS").FirstOrDefault());
 
-            var results4 = repository.SearchByTitleHashCodes(HashCode.SchemeNameHash, keyword3);
+            var results4 = repository.SearchByTitleTags(Tag.SchemeAmericanizedGraph, keyword3);
             Assert.AreEqual(1, results4.Count());
             Assert.AreEqual(titleB, results4.FirstOrDefault().Title);
 
@@ -487,7 +487,7 @@ namespace Gnosis.Tests.Repositories
 
             repository.Save(new List<IFeed> { feedA, feedB, feedC, feedD, feedE });
 
-            //var count = GetCount("select count() from Feed_TitleHashCodes where Value = 'WXYZ';");
+            //var count = GetCount("select count() from Feed_TitleTags where Value = 'WXYZ';");
             //Assert.AreEqual(1, count);
 
             var results = repository.SearchByKeyword("WXYZ");
@@ -515,7 +515,7 @@ namespace Gnosis.Tests.Repositories
 
             repository.Save(new List<IFeed> { feedA, feedB, feedC, feedD, feedE });
 
-            //var count = GetCount("select count() from Feed_TitleHashCodes where Value = 'WXYZ';");
+            //var count = GetCount("select count() from Feed_TitleTags where Value = 'WXYZ';");
             //Assert.AreEqual(1, count);
 
             var results = repository.SearchFeedItemsByKeyword("ZXW");

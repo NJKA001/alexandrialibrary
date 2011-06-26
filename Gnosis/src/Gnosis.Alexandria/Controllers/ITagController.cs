@@ -12,7 +12,7 @@ namespace Gnosis.Alexandria.Controllers
     public interface ITagController
     {
         File GetFile(string path);
-        Tag GetTag(string path);
+        TagLib.Tag GetTag(string path);
         void LoadPicture(IOldTrack track);
         void SaveTag(IOldTrack track);
         void AddPicture(IOldTrack track, string path);

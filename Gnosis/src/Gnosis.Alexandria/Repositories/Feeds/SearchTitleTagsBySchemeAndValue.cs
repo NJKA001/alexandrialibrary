@@ -9,11 +9,11 @@ using Gnosis.Alexandria.Models.Feeds;
 
 namespace Gnosis.Alexandria.Repositories.Feeds
 {
-    public class SearchTitleHashCodesBySchemeAndValue
-        : ValueSearchBase<IFeed, IHashCode>
+    public class SearchTitleTagsBySchemeAndValue
+        : ValueSearchBase<IFeed, ITag>
     {
-        public SearchTitleHashCodesBySchemeAndValue()
-            : base("Feed_TitleHashCodes.Scheme = @Scheme and Feed_TitleHashCodes.Value like @Value", feed => feed.TitleHashCodes, hashCode => hashCode.Scheme, hashCode => hashCode.Value)
+        public SearchTitleTagsBySchemeAndValue()
+            : base("Feed_TitleTags.Scheme = @Scheme and Feed_TitleTags.Value like @Value", feed => feed.TitleTags, tag => tag.Scheme, tag => tag.Value)
         {
         }
 
