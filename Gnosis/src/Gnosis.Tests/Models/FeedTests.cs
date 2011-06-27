@@ -10,7 +10,7 @@ using Gnosis.Alexandria.Models.Feeds;
 
 namespace Gnosis.Tests.Models
 {
-    [TestFixture]
+    //[TestFixture]
     public class FeedTests
     {
     }
