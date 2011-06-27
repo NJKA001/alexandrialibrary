@@ -13,7 +13,7 @@ namespace Gnosis.Tests.Models
     [TestFixture]
     public class LanguageTests
     {
-        private ILogger logger = new DebugLogger();
+        //private ILogger logger = new DebugLogger();
 
         [Test]
         public void LookupLanguage()
@@ -28,7 +28,7 @@ namespace Gnosis.Tests.Models
 
             foreach (var lang in Language.GetLanguages())
             {
-                logger.Debug("lang name=" + lang.Name + " alpha2=" + lang.Alpha2Code + " alpha3=" + lang.Alpha3Code + " alpha3term=" + lang.Alpha3TermCode);
+                //logger.Debug("lang name=" + lang.Name + " alpha2=" + lang.Alpha2Code + " alpha3=" + lang.Alpha3Code + " alpha3term=" + lang.Alpha3TermCode);
 
                 if (!string.IsNullOrEmpty(lang.Alpha2Code))
                 {

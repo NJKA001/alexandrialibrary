@@ -11,8 +11,8 @@ namespace Gnosis.Alexandria.Repositories.Tracks
     public class TrackFactory
         : FactoryBase
     {
-        public TrackFactory(IContext context, ILogger logger)
-            : base(context, logger)
+        public TrackFactory()
+            : base()
         {
             MapEntityConstructor<ITrack>(() => new Track());
             MapChildConstructor<ITrackPicture>(() => new TrackPicture());

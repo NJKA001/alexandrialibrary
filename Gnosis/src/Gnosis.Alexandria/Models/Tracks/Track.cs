@@ -7,6 +7,7 @@ using TagLib;
 
 using Gnosis.Core;
 using Gnosis.Core.Iso;
+using Gnosis.Data;
 using Gnosis.Alexandria.Models;
 
 namespace Gnosis.Alexandria.Models.Tracks
@@ -789,7 +790,7 @@ namespace Gnosis.Alexandria.Models.Tracks
         public void AddPicture(string mediaType, TrackPictureType pictureType, string description, byte[] data)
         {
             var picture = new TrackPicture();
-            picture.Initialize(new EntityInitialState(Context, Logger, this.Id));
+            picture.Initialize(new EntityInitialState(this.Id));
             picture.TextEncoding = TextEncoding.UTF8;
             picture.MediaType = mediaType;
             picture.PictureType = pictureType;
@@ -807,7 +808,7 @@ namespace Gnosis.Alexandria.Models.Tracks
         public void AddLyrics(string language, string description, string text)
         {
             var lyrics = new TrackUnsynchronizedLyrics();
-            lyrics.Initialize(new EntityInitialState(Context, Logger, this.Id));
+            lyrics.Initialize(new EntityInitialState(this.Id));
             lyrics.TextEncoding = TextEncoding.UTF8;
             lyrics.Language = language;
             lyrics.Description = description;
@@ -834,7 +835,7 @@ namespace Gnosis.Alexandria.Models.Tracks
         public void AddRating(byte score, Uri user, ulong playCount)
         {
             var rating = new TrackRating();
-            rating.Initialize(new EntityInitialState(Context, Logger, this.Id));
+            rating.Initialize(new EntityInitialState(this.Id));
             rating.Score = score;
             rating.User = user;
             rating.PlayCount = playCount;

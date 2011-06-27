@@ -9,7 +9,8 @@ using System.Data.SQLite;
 
 using Gnosis.Core;
 using Gnosis.Core.Iso;
-using Gnosis.Core.Queries;
+using Gnosis.Data;
+using Gnosis.Data.Queries;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Feeds;
 using Gnosis.Alexandria.Repositories.Feeds;
@@ -20,8 +21,8 @@ namespace Gnosis.Tests.Repositories
     [TestFixture]
     public class FeedRepositoryTests
     {
-        private IContext context;
-        private ILogger logger;
+        //private IContext context;
+        //private ILogger logger;
         private IFeedRepository repository;
         private IDbConnection connection;
 
@@ -52,7 +53,7 @@ namespace Gnosis.Tests.Repositories
         private IFeed GetFeed()
         {
             var feed = new Feed();
-            feed.Initialize(new EntityInitialState(context, logger));
+            feed.Initialize(new EntityInitialState());
             feed.Authors = "Bill Simmons";
             feed.Contributors = "Joe House, Marc Stein, John Hollinger";
             feed.Copyright = "c 2009-2011";
@@ -77,7 +78,7 @@ namespace Gnosis.Tests.Repositories
             feed.AddMetadatum("application/xml", UriExtensions.EmptyUri, "marquee", "<marquee><title>BS Report</title><subtitle>with Bill Simmons</subtitle></marquee>");
 
             var item = new FeedItem();
-            item.Initialize(new EntityInitialState(context, logger, feed.Id, 0));
+            item.Initialize(new EntityInitialState(feed.Id, 0));
             item.Authors = "Bill Simmons";
             item.Contributors = "Joe House, Joe Mead";
             item.Copyright = "Copyright ESPN 2011";
@@ -93,7 +94,7 @@ namespace Gnosis.Tests.Repositories
             feed.AddItem(item);
 
             var item2 = new FeedItem();
-            item2.Initialize(new EntityInitialState(context, logger, feed.Id, 0));
+            item2.Initialize(new EntityInitialState(feed.Id, 0));
             item2.Authors = "Bill Simmons";
             item2.Contributors = "Joe House, Joe Mead";
             item2.Copyright = "Copyright ESPN 2011";
@@ -115,7 +116,7 @@ namespace Gnosis.Tests.Repositories
         private IFeed GetFeed(Uri location, string title, string authors, string contributors, string description)
         {
             var feed = new Feed();
-            feed.Initialize(new EntityInitialState(context, logger));
+            feed.Initialize(new EntityInitialState());
             feed.Location = location;
             feed.Title = title;
             feed.Authors = authors;
@@ -127,7 +128,7 @@ namespace Gnosis.Tests.Repositories
         private IFeedItem GetFeedItem(IFeed parent, string title, string authors, string contributors, string summary)
         {
             var item = new FeedItem();
-            item.Initialize(new EntityInitialState(context, logger, parent.Id));
+            item.Initialize(new EntityInitialState(parent.Id));
             item.Title = title;
             item.Authors = authors;
             item.Contributors = contributors;
@@ -159,8 +160,8 @@ namespace Gnosis.Tests.Repositories
         [TestFixtureSetUp]
         public void FixtureSetUp()
         {
-            context = new SingleThreadedContext();
-            logger = new DebugLogger();
+            //context = new SingleThreadedContext();
+            //logger = new DebugLogger();
         }
 
         [TestFixtureTearDown]
@@ -174,7 +175,7 @@ namespace Gnosis.Tests.Repositories
             connection = new SQLiteConnection("Data Source=:memory:;Version=3;");
             connection.Open();
 
-            repository = new FeedRepository(context, logger, connection);
+            repository = new FeedRepository(connection);
             repository.Initialize();
         }
 
@@ -251,6 +252,7 @@ namespace Gnosis.Tests.Repositories
             var titleDoubleMetaphone = feed.TitleTags.Where(x => x.Scheme == Tag.SchemeDoubleMetaphone).FirstOrDefault().Value;
 
             feed.Title = title;
+            Assert.AreEqual(feed.Title, title);
             feed.Description = description;
             feed.Copyright = copyright;
             feed.Authors = authors;
@@ -329,11 +331,11 @@ namespace Gnosis.Tests.Repositories
             repository.Save(new List<IFeed> { feed });
 
             var feed2 = new Feed();
-            feed2.Initialize(new EntityInitialState(context, logger));
+            feed2.Initialize(new EntityInitialState());
             var id2 = feed2.Id;
             Assert.AreNotEqual(id, id2);
             var item2 = new FeedItem();
-            item2.Initialize(new EntityInitialState(context, logger, feed2.Id));
+            item2.Initialize(new EntityInitialState(feed2.Id));
             var feedItem2MetadataCountSql = string.Format("select count() from FeedItem_Metadata where Parent = '{0}';", item2.Id);
             item2.AddMetadatum("text/plain", UriExtensions.EmptyUri, "Read Me", "Here is the text content of the read me.");
             item2.AddMetadatum("text/rtf", new Uri("file:///C:/Users/Bob/Documents/readme.rtf"), "Read Me", string.Empty);

@@ -12,8 +12,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
     public class FeedFactory
         : FactoryBase
     {
-        public FeedFactory(IContext context, ILogger logger)
-            : base(context, logger)
+        public FeedFactory()
         {
             MapEntityConstructor<IFeed>(() => new Feed());
             MapEntityConstructor<IFeedItem>(() => new FeedItem());

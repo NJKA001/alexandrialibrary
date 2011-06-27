@@ -5,35 +5,21 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Data;
 using Gnosis.Alexandria.Models;
 
 namespace Gnosis.Alexandria.Repositories
 {
     public abstract class FactoryBase : IFactory
     {
-        protected FactoryBase(IContext context, ILogger logger)
+        protected FactoryBase()
         {
-            this.context = context;
-            this.logger = logger;
-
             MapValueConstructor<ITag>(() => new Tag());
         }
 
-        private readonly IContext context;
-        private readonly ILogger logger;
         private readonly IDictionary<Type, Func<IEntity>> entityConstructors = new Dictionary<Type, Func<IEntity>>();
         private readonly IDictionary<Type, Func<IChild>> childConstructors = new Dictionary<Type, Func<IChild>>();
         private readonly IDictionary<Type, Func<IValue>> valueConstructors = new Dictionary<Type, Func<IValue>>();
-
-        protected IContext Context
-        {
-            get { return context; }
-        }
-
-        protected ILogger Logger
-        {
-            get { return logger; }
-        }
 
         protected void MapEntityConstructor<T>(Func<IEntity> constructor)
             where T : IEntity
@@ -61,7 +47,7 @@ namespace Gnosis.Alexandria.Repositories
                 throw new InvalidOperationException("No constructor mapped for entity type: " + type.Name);
 
             var entity = entityConstructors[type]();
-            entity.Initialize(new EntityInitialState(Context, Logger));
+            entity.Initialize(new EntityInitialState());
             return entity;
         }
 
@@ -71,7 +57,7 @@ namespace Gnosis.Alexandria.Repositories
                 throw new InvalidOperationException("No constructor mapped for entity type: " + type.Name);
 
             var entity = entityConstructors[type]();
-            entity.Initialize(new EntityInitialState(Context, Logger, record));
+            entity.Initialize(new EntityInitialState(record));
             return entity;
         }
 
@@ -81,7 +67,7 @@ namespace Gnosis.Alexandria.Repositories
                 throw new InvalidOperationException("No constructor mapped for child type: " + type.Name);
 
             var child = childConstructors[type]();
-            child.Initialize(new EntityInitialState(Context, Logger, parent));
+            child.Initialize(new EntityInitialState(parent));
             return child;
         }
 
@@ -91,7 +77,7 @@ namespace Gnosis.Alexandria.Repositories
                 throw new InvalidOperationException("No constructor mapped for child type: " + type.Name);
 
             var child = childConstructors[type]();
-            child.Initialize(new EntityInitialState(Context, Logger, record));
+            child.Initialize(new EntityInitialState(record));
             return child;
         }
 

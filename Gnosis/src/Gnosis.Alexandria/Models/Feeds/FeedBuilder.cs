@@ -7,31 +7,24 @@ using System.Xml;
 using Gnosis.Core;
 using Gnosis.Core.Ietf;
 using Gnosis.Core.Iso;
+using Gnosis.Data;
 
 namespace Gnosis.Alexandria.Models.Feeds
 {
     public class FeedBuilder
         : IFeedBuilder
     {
-        public FeedBuilder(IContext context, ILogger logger, Uri location, XmlDocument xml)
+        public FeedBuilder(Uri location, XmlDocument xml)
         {
-            if (context == null)
-                throw new ArgumentNullException("context");
-            if (logger == null)
-                throw new ArgumentNullException("logger");
             if (location == null)
                 throw new ArgumentNullException("location");
             if (xml == null)
                 throw new ArgumentNullException("xml");
 
-            this.context = context;
-            this.logger = logger;
             this.location = location;
             this.xml = xml;
         }
 
-        private readonly IContext context;
-        private readonly ILogger logger;
         private readonly Uri location;
         private readonly XmlDocument xml;
 
@@ -58,7 +51,7 @@ namespace Gnosis.Alexandria.Models.Feeds
 
 
             var feed = new Feed();
-            feed.Initialize(new EntityInitialState(context, logger));
+            feed.Initialize(new EntityInitialState());
             feed.MediaType = mediaType;
             feed.Title = title;
             return feed;

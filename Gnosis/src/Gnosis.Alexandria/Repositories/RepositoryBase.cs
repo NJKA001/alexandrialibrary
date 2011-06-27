@@ -8,9 +8,10 @@ using System.Reflection;
 using System.Text;
 
 using Gnosis.Core;
-using Gnosis.Core.Batches;
-using Gnosis.Core.Commands;
-using Gnosis.Core.Queries;
+using Gnosis.Data;
+using Gnosis.Data.Batches;
+using Gnosis.Data.Commands;
+using Gnosis.Data.Queries;
 
 namespace Gnosis.Alexandria.Repositories
 {
@@ -18,37 +19,23 @@ namespace Gnosis.Alexandria.Repositories
         : IRepository<T>
         where T : IEntity
     {
-        protected RepositoryBase(IContext context, ILogger logger, IFactory factory)
-            : this(context, logger, factory, null)
+        protected RepositoryBase(IFactory factory)
+            : this(factory, null)
         {
         }
 
-        protected RepositoryBase(IContext context, ILogger logger, IFactory factory, IDbConnection defaultConnection)
+        protected RepositoryBase(IFactory factory, IDbConnection defaultConnection)
         {
-            this.context = context;
-            this.logger = logger;
             this.factory = factory;
             this.defaultConnection = defaultConnection;
             this.baseType = typeof(T);
         }
 
-        private readonly IContext context;
-        private readonly ILogger logger;
         private readonly IFactory factory;
         private readonly Type baseType;
         private readonly IList<ILookup> lookups = new List<ILookup>();
         private readonly IList<ISearch> searches = new List<ISearch>();
         private readonly IDbConnection defaultConnection;
-        
-        protected IContext Context
-        {
-            get { return context; }
-        }
-
-        protected ILogger Logger
-        {
-            get { return logger; }
-        }
 
         protected IFactory Factory
         {
@@ -84,7 +71,7 @@ namespace Gnosis.Alexandria.Repositories
             try
             {
                 connection = GetConnection();
-                var query = new Query<T>(logger, factory, filter);
+                var query = new Query<T>(factory, filter);
                 return query.Execute(connection);
             }
             finally
@@ -307,7 +294,7 @@ namespace Gnosis.Alexandria.Repositories
             try
             {
                 connection = GetConnection();
-                var batch = new InitializeTypeBatch(connection, logger, baseType, lookups, searches);
+                var batch = new InitializeTypeBatch(connection, baseType, lookups, searches);
                 batch.Execute();
             }
             finally
@@ -329,7 +316,7 @@ namespace Gnosis.Alexandria.Repositories
             try
             {
                 connection = GetConnection();
-                var batch = new SaveEntitiesBatch<T>(connection, logger, items);
+                var batch = new SaveEntitiesBatch<T>(connection, items);
                 batch.Execute();
             }
             finally
@@ -351,7 +338,7 @@ namespace Gnosis.Alexandria.Repositories
             try
             {
                 connection = GetConnection();
-                var batch = new DeleteEntitiesBatch<T>(connection, logger, items);
+                var batch = new DeleteEntitiesBatch<T>(connection, items);
                 batch.Execute();
             }
             finally

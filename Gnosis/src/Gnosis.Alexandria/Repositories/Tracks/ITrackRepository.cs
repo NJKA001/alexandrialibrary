@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Data;
 using Gnosis.Alexandria.Models.Tracks;
 
 namespace Gnosis.Alexandria.Repositories.Tracks

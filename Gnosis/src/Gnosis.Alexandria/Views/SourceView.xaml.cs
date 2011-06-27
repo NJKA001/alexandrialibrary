@@ -20,7 +20,6 @@ using Gnosis.Alexandria.Controllers;
 using Gnosis.Alexandria.Events;
 using Gnosis.Alexandria.Extensions;
 using Gnosis.Alexandria.Models;
-using Gnosis.Alexandria.Helpers;
 using Gnosis.Alexandria.Repositories;
 
 namespace Gnosis.Alexandria.Views

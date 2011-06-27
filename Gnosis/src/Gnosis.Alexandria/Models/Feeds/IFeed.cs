@@ -6,6 +6,7 @@ using System.Text;
 using Gnosis.Core;
 using Gnosis.Core.Ietf;
 using Gnosis.Core.Iso;
+using Gnosis.Data;
 
 namespace Gnosis.Alexandria.Models.Feeds
 {

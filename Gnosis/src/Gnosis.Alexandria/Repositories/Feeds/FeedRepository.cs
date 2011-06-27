@@ -4,25 +4,25 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Alexandria.Helpers;
+using Gnosis.Alexandria;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Feeds;
 using Gnosis.Core;
-using Gnosis.Core.Commands;
-using Gnosis.Core.Queries;
+using Gnosis.Data.Commands;
+using Gnosis.Data.Queries;
 
 namespace Gnosis.Alexandria.Repositories.Feeds
 {
     public class FeedRepository
         : RepositoryBase<IFeed>, IFeedRepository
     {
-        public FeedRepository(IContext context, ILogger logger)
-            : this(context, logger, null)
+        public FeedRepository()
+            : this(null)
         {
         }
 
-        public FeedRepository(IContext context, ILogger logger, IDbConnection defaultConnection)
-            : base(context, logger, new FeedFactory(context, logger), defaultConnection)
+        public FeedRepository(IDbConnection defaultConnection)
+            : base(new FeedFactory(), defaultConnection)
         {
             AddLookup(byLocation);
             AddSearch(all);
@@ -56,46 +56,46 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
         public IFeed LookupByLocation(Uri location)
         {
-            var query = new Query<IFeed>(Logger, Factory, byLocation.GetFilter(location));
+            var query = new Query<IFeed>(Factory, byLocation.GetFilter(location));
             return Lookup(query);
         }
 
         public IEnumerable<IFeed> SearchByAuthors(string authors)
         {
-            var query = new Query<IFeed>(Logger, Factory, byAuthors.GetFilter(authors));
+            var query = new Query<IFeed>(Factory, byAuthors.GetFilter(authors));
             return Search(query);
         }
 
         public IEnumerable<IFeed> SearchByKeyword(string keyword)
         {
             //return SelectForward(byKeyword.GetFilter(keyword));
-            var query = new ForwardQuery<IFeed>(Logger, Factory, byKeyword.GetFilter(keyword));
+            var query = new ForwardQuery<IFeed>(Factory, byKeyword.GetFilter(keyword));
             return Search(query);
         }
 
         public IEnumerable<IFeedItem> SearchFeedItemsByKeyword(string keyword)
         {
-            var query = new ForwardQuery<IFeedItem>(Logger, Factory, itemsByKeyword.GetFilter(keyword));
+            var query = new ForwardQuery<IFeedItem>(Factory, itemsByKeyword.GetFilter(keyword));
             return SelectEntities<IFeedItem>(query);
             //return SelectForward<IFeedItem>(itemsByKeyword.GetFilter(keyword));
         }
 
         public IEnumerable<IFeed> SearchByTitle(string title)
         {
-            var query = new Query<IFeed>(Logger, Factory, byTitle.GetFilter(title));
+            var query = new Query<IFeed>(Factory, byTitle.GetFilter(title));
             return Search(query);
         }
 
         public IEnumerable<ITag> SearchForTitleTags(Uri scheme, string value)
         {
-            var query = new ValueQuery<IFeed, ITag>(Logger, Factory, titleTagsBySchemeAndValue.GetFilter(scheme, value), feed => feed.TitleTags);
+            var query = new ValueQuery<IFeed, ITag>(Factory, titleTagsBySchemeAndValue.GetFilter(scheme, value), feed => feed.TitleTags);
             return SelectValues<ITag>(query);
             //return Select<ITag>(titleTagsBySchemeAndValue.GetFilter(scheme, value), feed => feed.TitleTags);
         }
 
         public IEnumerable<IFeedItem> SearchFeedItemsByParent(Guid parent)
         {
-            var query = new Query<IFeedItem>(Logger, Factory, itemsByParent.GetFilter(parent));
+            var query = new Query<IFeedItem>(Factory, itemsByParent.GetFilter(parent));
             return SelectEntities<IFeedItem>(query);
             //return SelectChild<IFeedItem>(itemsByParent.GetFilter(new Dictionary<string, object> { { "@Parent", parent.ToString() } }));
         }
@@ -103,14 +103,14 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         public IEnumerable<IFeed> SearchByTitleTags(Uri scheme, string value)
         {
             var filter = titleTagsBySchemeAndValue.GetFilter(scheme, value);
-            var query = new ReverseQuery<IFeed, ITag>(Logger, Factory, filter, feed => feed.TitleTags);
+            var query = new ReverseQuery<IFeed, ITag>(Factory, filter, feed => feed.TitleTags);
             return Search(query);
             //return SelectReverse<ITag>(titleTagsBySchemeAndValue.GetFilter(scheme, value), "Feed.Authors ASC, Feed.PublishedDate ASC, Feed.Title ASC", feed => feed.TitleTags);
         }
 
         public IEnumerable<IFeedOutline> SearchOutlinesByTitle(string title)
         {
-            var query = new OutlineQuery<IFeed, IFeedOutline>(Logger, () => new FeedOutline(), byTitle.GetFilter(title));
+            var query = new OutlineQuery<IFeed, IFeedOutline>(() => new FeedOutline(), byTitle.GetFilter(title));
             return SelectOutlines<IFeed, IFeedOutline>(query);
         }
     }

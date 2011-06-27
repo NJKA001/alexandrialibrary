@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Data;
 
 namespace Gnosis.Alexandria.Models
 {
@@ -14,8 +15,6 @@ namespace Gnosis.Alexandria.Models
         : IEntity
         where T : IEntity
     {
-        private IContext context;
-        private ILogger logger;
         private Guid id;
         private DateTime timeStamp;
         private bool isNew;
@@ -36,33 +35,35 @@ namespace Gnosis.Alexandria.Models
         {
             if (PropertyChanged != null)
             {
-                try
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-                }
-                catch (Exception ex)
-                {
-                    logger.Error("EntityBase.OnPropertyChanged", ex);
-                }
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                //try
+                //{
+                //    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                //}
+                //catch (Exception ex)
+                //{
+                //    logger.Error("EntityBase.OnPropertyChanged", ex);
+                //}
             }
         }
 
-        protected IContext Context
-        {
-            get { return context; }
-        }
+        //protected IContext Context
+        //{
+        //    get { return context; }
+        //}
 
-        protected ILogger Logger
-        {
-            get { return logger; }
-        }
+        //protected ILogger Logger
+        //{
+        //    get { return logger; }
+        //}
 
         protected void Change(Action action, Expression<Func<T, object>> property)
         {
             if (!isInitialized)
                 throw new InvalidOperationException("Entity must be initialized before it can be changed");
 
-            context.Invoke(action);
+            action();
+            //context.Invoke(action);
 
             isChanged = true;
 
@@ -119,7 +120,8 @@ namespace Gnosis.Alexandria.Models
 
             if (!children[key].ContainsKey(child.Id))
             {
-                context.Invoke(action);
+                action();
+                //context.Invoke(action);
                 children[key].Add(child.Id, child);
                 OnPropertyChanged(propertyInfo.Name);
             }
@@ -145,7 +147,8 @@ namespace Gnosis.Alexandria.Models
             if (children[key].ContainsKey(child.Id))
             {
                 var childToRemove = children[key][child.Id];
-                context.Invoke(action);
+                action();
+                //context.Invoke(action);
                 childToRemove.Remove();
                 children[key].Remove(child.Id);
                 removedChildren[key].Add(childToRemove.Id, childToRemove);
@@ -174,7 +177,8 @@ namespace Gnosis.Alexandria.Models
 
             if (!values[key].ContainsKey(value.Id))
             {
-                context.Invoke(action);
+                action();
+                //context.Invoke(action);
                 values[key].Add(value.Id, value);
                 OnPropertyChanged(propertyInfo.Name);
             }
@@ -200,7 +204,8 @@ namespace Gnosis.Alexandria.Models
             if (values[key].ContainsKey(value.Id))
             {
                 var valueToRemove = values[key][value.Id];
-                context.Invoke(action);
+                action();
+                //context.Invoke(action);
                 valueToRemove.Remove();
                 values[key].Remove(value.Id);
                 removedValues[key].Add(value.Id, valueToRemove);
@@ -267,7 +272,7 @@ namespace Gnosis.Alexandria.Models
                     {
                         addAction(rootCode);
 
-                        var tokens = value.ToTokens();
+                        var tokens = value.ToWords();
                         if (tokens.Count() > 1)
                         {
                             foreach (var token in tokens)
@@ -334,8 +339,8 @@ namespace Gnosis.Alexandria.Models
             if (state == null)
                 throw new ArgumentNullException("state");
 
-            this.context = state.Context;
-            this.logger = state.Logger;
+            //this.context = state.Context;
+            //this.logger = state.Logger;
             this.id = state.Id;
             this.timeStamp = state.TimeStamp;
             this.isNew = state.IsNew;

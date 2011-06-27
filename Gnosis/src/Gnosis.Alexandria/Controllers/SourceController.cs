@@ -9,10 +9,10 @@ using System.Xml;
 
 using log4net;
 
+using Gnosis.Alexandria;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Repositories;
 using System.Net;
-using Gnosis.Alexandria.Helpers;
 using System.Windows;
 using System.Runtime.InteropServices;
 using System.Web;

@@ -18,8 +18,9 @@ using System.Windows.Shapes;
 
 using TagLib;
 
+using Gnosis.Alexandria.Contexts;
 using Gnosis.Alexandria.Controllers;
-using Gnosis.Alexandria.Helpers;
+using Gnosis.Alexandria.Loggers;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Repositories;
 using Gnosis.Alexandria.Repositories.Feeds;
@@ -62,12 +63,12 @@ namespace Gnosis.Alexandria.Views
                 playbackController.CurrentTrackEnded += currentTrackEnded;
                 trackController.SourceLoadCompleted += sourceLoadCompleted;
 
-                context = new ModelContext(this.Dispatcher);
+                context = new MultiThreadedContext(this.Dispatcher);
 
-                feedRepository = new FeedRepository(context, logger);
+                feedRepository = new FeedRepository();
                 feedRepository.Initialize();
 
-                trackRepository = new TrackRepository(context, logger);
+                trackRepository = new TrackRepository();
                 trackRepository.Initialize();
 
                 //var track = new Models.Tracks.Track();
@@ -106,9 +107,9 @@ namespace Gnosis.Alexandria.Views
         private static readonly log4net.ILog log = LogManager.GetLogger(typeof(MainWindow));
         
         private readonly IContext context;
-        private readonly ILogger logger = new Logger(log);
-        private readonly IRepository<Gnosis.Alexandria.Models.Tracks.ITrack> trackRepository;
-        private readonly IRepository<Gnosis.Alexandria.Models.Feeds.IFeed> feedRepository;
+        private readonly ILogger logger = new Log4NetLogger(log);
+        private readonly ITrackRepository trackRepository;
+        private readonly IFeedRepository feedRepository;
 
         private readonly IOldRepository<IOldTrack> oldTrackRepository = new OldTrackRepository();
         private readonly IOldRepository<ISource> sourceRepository = new OldSourceRepository();

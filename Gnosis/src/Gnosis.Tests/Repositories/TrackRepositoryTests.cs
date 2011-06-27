@@ -11,6 +11,7 @@ using System.Data.SQLite;
 
 using Gnosis.Core;
 using Gnosis.Core.Iso;
+using Gnosis.Data;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Tracks;
 using Gnosis.Alexandria.Repositories.Tracks;
@@ -20,8 +21,6 @@ namespace Gnosis.Tests.Repositories
     [TestFixture]
     public class TrackRepositoryTests
     {
-        private IContext context;
-        private ILogger logger;
         private ITrackRepository repository;
         private IDbConnection connection;
 
@@ -75,7 +74,7 @@ namespace Gnosis.Tests.Repositories
         private ITrack GetTestTrack()
         {
             var track = new Track();
-            track.Initialize(new EntityInitialState(context, logger));
+            track.Initialize(new EntityInitialState());
 
             track.Album = album;
             track.AlbumSort = album;
@@ -112,8 +111,6 @@ namespace Gnosis.Tests.Repositories
         [TestFixtureSetUp]
         public void FixtureSetUp()
         {
-            context = new SingleThreadedContext();
-            logger = new DebugLogger();
         }
 
         [TestFixtureTearDown]
@@ -127,7 +124,7 @@ namespace Gnosis.Tests.Repositories
             connection = new SQLiteConnection("Data Source=:memory:;Version=3;");
             connection.Open();
 
-            repository = new TrackRepository(context, logger, connection);
+            repository = new TrackRepository(connection);
             repository.Initialize();
         }
 
@@ -263,7 +260,7 @@ namespace Gnosis.Tests.Repositories
             repository.Save(new List<ITrack> { track });
 
             var track2 = new Track();
-            track2.Initialize(new EntityInitialState(context, logger));
+            track2.Initialize(new EntityInitialState());
             var id2 = track2.Id;
             var linkCount2Sql = string.Format("select count() from Track_Links where Parent = '{0}';", id2);
             track2.Location = new Uri("http://example.com/feeds/45235235/some-podcast.mp3");

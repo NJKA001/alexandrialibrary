@@ -988,12 +988,13 @@ namespace Gnosis.Core
             return self.Split(new string[]{"; "}, StringSplitOptions.RemoveEmptyEntries);
         }
 
-        public static IEnumerable<string> ToTokens(this string self)
+        public static IEnumerable<string> ToWords(this string self)
         {
             if (string.IsNullOrEmpty(self))
                 return new List<string> { string.Empty };
 
-            return self.Split(new char[] { ';', ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            //'-', ',', ';', '.', 
+            return self.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
         }
     }
 }

@@ -8,6 +8,7 @@ using TagLib;
 
 using Gnosis.Core;
 using Gnosis.Core.Iso;
+using Gnosis.Data;
 using Gnosis.Alexandria.Models.Tracks;
 
 namespace Gnosis.Tests.Models
@@ -65,8 +66,8 @@ namespace Gnosis.Tests.Models
         const string isrc = "8869 777433 2";
         #endregion
 
-        private IContext context = new SingleThreadedContext();
-        private ILogger logger = new DebugLogger();
+        //private IContext context = new SingleThreadedContext();
+        //private ILogger logger = new DebugLogger();
 
         private TagLib.File file;
         private TagLib.Id3v2.Tag tag;
@@ -297,7 +298,7 @@ Mucho antes";
         public void LoadTag()
         {
             var track = new Track();
-            track.Initialize(new EntityInitialState(context, logger));
+            track.Initialize(new EntityInitialState());
 
             var fileInfo = new System.IO.FileInfo(@".\" + location2);
             track.Location = new Uri(fileInfo.FullName);

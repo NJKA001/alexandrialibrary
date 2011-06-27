@@ -58,8 +58,6 @@
     <Compile Include="Models\ScriptTests.cs" />
     <Compile Include="Models\TrackTests.cs" />
     <Compile Include="Repositories\TrackRepositoryTests.cs" />
-    <Compile Include="SingleThreadedContext.cs" />
-    <Compile Include="DebugLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\FeedRepositoryTests.cs" />
   </ItemGroup>
@@ -76,6 +74,10 @@
       <Project>{37091600-5BFE-4FCB-8A69-F016FF451462}</Project>
       <Name>Gnosis.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gnosis.Data\Gnosis.Data.csproj">
+      <Project>{B36EA69D-F61D-4002-9E0E-FB0F897C6977}</Project>
+      <Name>Gnosis.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Gnosis.Fmod\Gnosis.Fmod.csproj">
       <Project>{1629B512-34A2-4F04-AB9A-EBD30228EBDC}</Project>
       <Name>Gnosis.Fmod</Name>
@@ -88,9 +90,10 @@
     <Content Include="Files\13 - Loca %28Featuring Dizzee Rascal%29.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Files\BS_Report_2011-06-24.xml">
+    <None Include="Files\bearbrarian.atom" />
+    <None Include="Files\bs_report.rss">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="Files\Undertow.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

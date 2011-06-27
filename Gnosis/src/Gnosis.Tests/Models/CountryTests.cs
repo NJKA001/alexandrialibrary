@@ -13,7 +13,7 @@ namespace Gnosis.Tests.Models
     [TestFixture]
     public class CountryTests
     {
-        private ILogger logger = new DebugLogger();
+        //private ILogger logger = new DebugLogger();
 
         [Test]
         public void LookupCountry()
@@ -26,7 +26,7 @@ namespace Gnosis.Tests.Models
 
             foreach (var country in Country.GetCountries())
             {
-                logger.Debug("country name=" + country.Name + " alpha2=" + country.Alpha2Code + " tld=" + country.TopLevelDomain + " year=" + country.Year);
+                //logger.Debug("country name=" + country.Name + " alpha2=" + country.Alpha2Code + " tld=" + country.TopLevelDomain + " year=" + country.Year);
 
                 map2.Add(country.Alpha2Code, country);
                 mapName.Add(country.Name, country);

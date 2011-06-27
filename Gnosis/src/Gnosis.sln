@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Fmod", "Gnosis.Fmod\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Tests", "Gnosis.Tests\Gnosis.Tests.csproj", "{CA62A344-0BEB-4DD3-9BF7-0F7D8D850CCB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Data", "Gnosis.Data\Gnosis.Data.csproj", "{B36EA69D-F61D-4002-9E0E-FB0F897C6977}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,18 @@ Global
 		{CA62A344-0BEB-4DD3-9BF7-0F7D8D850CCB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{CA62A344-0BEB-4DD3-9BF7-0F7D8D850CCB}.Release|x64.ActiveCfg = Release|Any CPU
 		{CA62A344-0BEB-4DD3-9BF7-0F7D8D850CCB}.Release|x86.ActiveCfg = Release|Any CPU
+		{B36EA69D-F61D-4002-9E0E-FB0F897C6977}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B36EA69D-F61D-4002-9E0E-FB0F897C6977}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B36EA69D-F61D-4002-9E0E-FB0F897C6977}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B36EA69D-F61D-4002-9E0E-FB0F897C6977}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B36EA69D-F61D-4002-9E0E-FB0F897C6977}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B36EA69D-F61D-4002-9E0E-FB0F897C6977}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B36EA69D-F61D-4002-9E0E-FB0F897C6977}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B36EA69D-F61D-4002-9E0E-FB0F897C6977}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B36EA69D-F61D-4002-9E0E-FB0F897C6977}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B36EA69D-F61D-4002-9E0E-FB0F897C6977}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B36EA69D-F61D-4002-9E0E-FB0F897C6977}.Release|x64.ActiveCfg = Release|Any CPU
+		{B36EA69D-F61D-4002-9E0E-FB0F897C6977}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

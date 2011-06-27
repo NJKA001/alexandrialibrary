@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
-using Gnosis.Core.Queries;
-using Gnosis.Alexandria.Helpers;
+using Gnosis.Data;
+using Gnosis.Data.Queries;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Tracks;
 
@@ -15,13 +15,13 @@ namespace Gnosis.Alexandria.Repositories.Tracks
     public class TrackRepository
         : RepositoryBase<ITrack>, ITrackRepository
     {
-        public TrackRepository(IContext context, ILogger logger)
-            : this(context, logger, null)
+        public TrackRepository()
+            : this(null)
         {
         }
 
-        public TrackRepository(IContext context, ILogger logger, IDbConnection defaultConnection)
-            : base(context, logger, new TrackFactory(context, logger), defaultConnection)
+        public TrackRepository(IDbConnection defaultConnection)
+            : base(new TrackFactory(), defaultConnection)
         {
             AddLookup(byLocation);
             AddSearch(all);
@@ -34,14 +34,14 @@ namespace Gnosis.Alexandria.Repositories.Tracks
 
         public ITrack LookupByLocation(Uri location)
         {
-            var query = new Query<ITrack>(Logger, Factory, byLocation.GetFilter(location));
+            var query = new Query<ITrack>(Factory, byLocation.GetFilter(location));
             return Lookup(query);
             //return Lookup(byLocation, new Dictionary<string, object> { { "@Location", location } });
         }
 
         public IEnumerable<ITrack> SearchByTitle(string title)
         {
-            var query = new Query<ITrack>(Logger, Factory, byTitle.GetFilter(title));
+            var query = new Query<ITrack>(Factory, byTitle.GetFilter(title));
             return Search(query);
         }
     }

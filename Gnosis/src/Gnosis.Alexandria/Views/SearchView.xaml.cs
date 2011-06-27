@@ -16,7 +16,6 @@ using System.Windows.Shapes;
 
 using Gnosis.Alexandria.Controllers;
 using Gnosis.Alexandria.Extensions;
-using Gnosis.Alexandria.Helpers;
 using Gnosis.Alexandria.Models;
 using Gnosis.Core;
 
