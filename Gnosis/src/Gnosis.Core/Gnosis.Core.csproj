@@ -55,7 +55,14 @@
     <Compile Include="Iso\Language.cs" />
     <Compile Include="Iso\Script.cs" />
     <Compile Include="ObjectExtensions.cs" />
+    <Compile Include="Rss\IRssCategory.cs" />
+    <Compile Include="Rss\IRssEnclosure.cs" />
     <Compile Include="Rss\IRssFeed.cs" />
+    <Compile Include="Rss\IRssFeedItem.cs" />
+    <Compile Include="Rss\IRssImage.cs" />
+    <Compile Include="Rss\IRssSource.cs" />
+    <Compile Include="Rss\RssDay.cs" />
+    <Compile Include="Rss\RssHour.cs" />
     <Compile Include="UN\IRegion.cs" />
     <Compile Include="UN\Region.cs" />
     <Compile Include="StreamExtensions.cs" />
@@ -64,6 +71,7 @@
     <Compile Include="TimeSpanExtensions.cs" />
     <Compile Include="UriExtensions.cs" />
     <Compile Include="W3c\IMediaType.cs" />
+    <Compile Include="W3c\IPicsRating.cs" />
     <Compile Include="W3c\MediaType.cs" />
     <Compile Include="W3c\Rfc822DateTime.cs" />
   </ItemGroup>

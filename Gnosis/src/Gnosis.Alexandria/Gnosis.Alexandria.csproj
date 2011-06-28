@@ -257,6 +257,7 @@
     <Compile Include="Repositories\Tracks\TrackFactory.cs" />
     <Compile Include="Repositories\Tracks\TrackRepository.cs" />
     <Compile Include="Repositories\ValueSearchBase.cs" />
+    <Compile Include="ViewModels\ITreeNode.cs" />
     <Compile Include="Views\MediaListView.xaml.cs">
       <DependentUpon>MediaListView.xaml</DependentUpon>
     </Compile>
