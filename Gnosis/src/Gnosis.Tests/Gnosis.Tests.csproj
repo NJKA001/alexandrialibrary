@@ -90,6 +90,7 @@
     <Content Include="Files\13 - Loca %28Featuring Dizzee Rascal%29.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Files\arstechnica.rss" />
     <None Include="Files\bearbrarian.atom" />
     <None Include="Files\bs_report.rss">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
