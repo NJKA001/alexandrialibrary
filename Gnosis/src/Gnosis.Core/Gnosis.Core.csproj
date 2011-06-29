@@ -45,9 +45,10 @@
   <ItemGroup>
     <Compile Include="CharExtensions.cs" />
     <Compile Include="DateTimeExtensions.cs" />
-    <Compile Include="Ietf\IAtomEntry.cs" />
-    <Compile Include="Ietf\IAtomFeed.cs" />
-    <Compile Include="Ietf\IAtomPerson.cs" />
+    <Compile Include="Atom\IAtomEntry.cs" />
+    <Compile Include="Atom\IAtomFeed.cs" />
+    <Compile Include="Atom\IAtomPerson.cs" />
+    <Compile Include="Id3\IId3Tag.cs" />
     <Compile Include="Ietf\ILanguageTag.cs" />
     <Compile Include="Ietf\LanguageTag.cs" />
     <Compile Include="ImageExtensions.cs" />
@@ -78,9 +79,7 @@
     <Compile Include="W3c\MediaType.cs" />
     <Compile Include="W3c\Rfc822DateTime.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Id3\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

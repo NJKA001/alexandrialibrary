@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core.Ietf
+namespace Gnosis.Core.Atom
 {
     /// <summary>
-    /// Defines as Atom Feed 1.0 Feed based on IETF RFC 4287
+    /// Defines an Atom 1.0 Feed based on IETF RFC 4287
     /// </summary>
     /// <remarks>http://tools.ietf.org/html/rfc4287</remarks>
     public interface IAtomFeed
@@ -15,5 +15,7 @@ namespace Gnosis.Core.Ietf
         DateTime Updated { get; }
         IAtomPerson Author { get; }
         Uri Id { get; }
+
+        IEnumerable<IAtomEntry> Entries { get; }
     }
 }
