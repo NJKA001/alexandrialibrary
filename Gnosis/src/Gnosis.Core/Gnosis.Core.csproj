@@ -45,6 +45,9 @@
   <ItemGroup>
     <Compile Include="CharExtensions.cs" />
     <Compile Include="DateTimeExtensions.cs" />
+    <Compile Include="Ietf\IAtomEntry.cs" />
+    <Compile Include="Ietf\IAtomFeed.cs" />
+    <Compile Include="Ietf\IAtomPerson.cs" />
     <Compile Include="Ietf\ILanguageTag.cs" />
     <Compile Include="Ietf\LanguageTag.cs" />
     <Compile Include="ImageExtensions.cs" />

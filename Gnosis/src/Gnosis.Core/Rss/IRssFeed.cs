@@ -37,11 +37,5 @@ namespace Gnosis.Core.Rss
 
         IEnumerable<IRssCategory> Categories { get; }
         IEnumerable<IRssFeedItem> Items { get; }
-
-        void AddCategory(IRssCategory category);
-        void RemoveCategory(IRssCategory category);
-
-        void AddItem(IRssFeedItem item);
-        void RemoveItem(IRssFeedItem item);
     }
 }

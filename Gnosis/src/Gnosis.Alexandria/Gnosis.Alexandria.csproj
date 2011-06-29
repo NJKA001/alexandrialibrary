@@ -132,6 +132,7 @@
     <Compile Include="Controllers\TrackController.cs" />
     <Compile Include="Events\SourceLoadedEventArgs.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
+    <Compile Include="Extensions\TreeViewExtensions.cs" />
     <Compile Include="Extensions\UIElementExtensions.cs" />
     <Compile Include="Loggers\DebugLogger.cs" />
     <Compile Include="Loggers\Log4NetLogger.cs" />

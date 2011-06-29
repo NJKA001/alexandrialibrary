@@ -19,8 +19,5 @@ namespace Gnosis.Core.Rss
         IRssSource Source { get; set; }
 
         IEnumerable<IRssCategory> Categories { get; }
-
-        void AddCategory(IRssCategory category);
-        void RemoveCategory(IRssCategory category);
     }
 }
