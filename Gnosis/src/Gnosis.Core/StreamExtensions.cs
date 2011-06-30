@@ -17,6 +17,16 @@ namespace Gnosis.Core
         //        output.Write(buffer, 0, read);
         //}
 
+        public static byte[] GetHeader(this Stream self)
+        {
+            const int headerSize = 20;
+            var header = new byte[headerSize];
+
+            self.Read(header, 0, headerSize);
+
+            return header;
+        }
+
         public static byte[] AsBuffer(this Stream input)
         {
             var memoryStream = new MemoryStream();
@@ -59,6 +69,17 @@ namespace Gnosis.Core
                 source.BlockCopy(fs);
                 fs.Flush();
                 fs.Close();
+            }
+        }
+
+        public static string ToContentString(this Stream self)
+        {
+            if (self == null)
+                return null;
+
+            using (var reader = new StreamReader(self))
+            {
+                return reader.ReadToEnd();
             }
         }
     }

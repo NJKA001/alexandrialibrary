@@ -11,6 +11,6 @@ namespace Gnosis.Core.W3c
         string SubType { get; }
         IEnumerable<string> FileExtensions { get; }
         IEnumerable<string> LegacyTypes { get; }
-        IEnumerable<string> MagicNumbers { get; }
+        IEnumerable<byte[]> MagicNumbers { get; }
     }
 }

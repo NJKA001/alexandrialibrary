@@ -6,6 +6,8 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 
+using Gnosis.Core.W3c;
+
 namespace Gnosis.Core
 {
     public static class UriExtensions
@@ -58,6 +60,34 @@ namespace Gnosis.Core
             catch
             {
                 return null;
+            }
+        }
+
+        public static string ToExtension(this Uri location)
+        {
+            if (location == null)
+                return string.Empty;
+
+            var dotIndex = location.AbsolutePath.LastIndexOf('.');
+            var slashIndex = location.AbsolutePath.LastIndexOf('/');
+            if (dotIndex > slashIndex)
+                return location.AbsolutePath.Substring(dotIndex);
+            
+            return string.Empty;
+        }
+
+        public static IMediaType ToMediaType(this Uri location)
+        {
+            if (location == null)
+                return MediaType.Unknown;
+
+            try
+            {
+                return MediaType.GetMediaType(location);
+            }
+            catch
+            {
+                return MediaType.Unknown;
             }
         }
     }

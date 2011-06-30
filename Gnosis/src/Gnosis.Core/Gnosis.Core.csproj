@@ -48,6 +48,7 @@
     <Compile Include="Atom\IAtomEntry.cs" />
     <Compile Include="Atom\IAtomFeed.cs" />
     <Compile Include="Atom\IAtomPerson.cs" />
+    <Compile Include="FileInfoExtensions.cs" />
     <Compile Include="Id3\IId3Tag.cs" />
     <Compile Include="Ietf\ILanguageTag.cs" />
     <Compile Include="Ietf\LanguageTag.cs" />
