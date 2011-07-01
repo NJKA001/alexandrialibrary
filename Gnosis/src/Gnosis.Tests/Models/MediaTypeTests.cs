@@ -5,6 +5,7 @@ using System.Text;
 
 using NUnit.Framework;
 
+using Gnosis.Core;
 using Gnosis.Core.W3c;
 
 namespace Gnosis.Tests.Models
@@ -47,7 +48,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void GetMediaTypeForRssFeedWithInvalidContentType()
+        public void GetMediaTypeForRemoteRssFeedWithInvalidContentType()
         {
             var location = new Uri("http://feeds.arstechnica.com/arstechnica/index");
             var mediaType = MediaType.GetMediaType(location);
@@ -55,11 +56,41 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void GetMediaTypeForAtomFeed()
+        public void GetMediaTypeForRemoteAtomFeed()
         {
             var location = new Uri("http://www.blogger.com/feeds/8677504/posts/default");
             var mediaType = MediaType.GetMediaType(location);
             Assert.AreEqual(MediaType.AtomFeed, mediaType);
+        }
+
+        [Test]
+        public void GetMediaTypeForLocalPng()
+        {
+            var path = @".\Files\radiohead.png";
+            var fileInfo = new System.IO.FileInfo(path);
+            Assert.IsTrue(System.IO.File.Exists(path));
+            var location = new Uri(fileInfo.FullName, UriKind.Absolute);
+            var mediaType = MediaType.GetMediaType(location);
+            Assert.AreEqual(MediaType.PngImage, mediaType);
+        }
+
+        [Test]
+        public void GetMediaTypeForLocalPngWithInvalidFileExtension()
+        {
+            var path = @".\Files\radiohead";
+            var fileInfo = new System.IO.FileInfo(path);
+            Assert.IsTrue(System.IO.File.Exists(path));
+            var location = new Uri(fileInfo.FullName, UriKind.Absolute);
+            var mediaType = MediaType.GetMediaType(location);
+            Assert.AreEqual(MediaType.PngImage, mediaType);
+        }
+
+        [Test]
+        public void GetMediaTypeForRemotePng()
+        {
+            var location = new Uri("http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png");
+            var mediaType = MediaType.GetMediaType(location);
+            Assert.AreEqual(MediaType.PngImage, mediaType);
         }
 
         [Test]
@@ -81,6 +112,14 @@ namespace Gnosis.Tests.Models
             Assert.IsTrue(System.IO.File.Exists(path));
             var location = new Uri(fileInfo.FullName, UriKind.Absolute);
             var mediaType = MediaType.GetMediaType(location);
+            Assert.AreEqual(MediaType.GifImage, mediaType);
+        }
+
+        [Test]
+        public void GetMediaTypeForRemoteGif()
+        {
+            var location = new Uri("http://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Rotating_earth_%28large%29.gif/200px-Rotating_earth_%28large%29.gif");
+            var mediaType = location.ToMediaType();
             Assert.AreEqual(MediaType.GifImage, mediaType);
         }
 
@@ -112,6 +151,14 @@ namespace Gnosis.Tests.Models
             var location = new Uri("http://upload.wikimedia.org/wikipedia/commons/b/b4/JPEG_example_JPG_RIP_100.jpg");
             var mediaType = MediaType.GetMediaType(location);
             Assert.AreEqual(MediaType.JpegImage, mediaType);
+        }
+
+        [Test]
+        public void GetMediaTypeForRemoteHtml()
+        {
+            var location = new Uri("http://arstechnica.com/");
+            var mediaType = location.ToMediaType();
+            Assert.AreEqual(MediaType.HtmlDoc, mediaType);
         }
     }
 }

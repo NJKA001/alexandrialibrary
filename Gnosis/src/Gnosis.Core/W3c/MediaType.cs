@@ -172,8 +172,8 @@ namespace Gnosis.Core.W3c
         private static IMediaType GetMediaTypeByMagicNumber(byte[] header)
         {
             //System.Diagnostics.Debug.WriteLine("magicNumber=" + header);
-            //foreach (var b in header)
-                //System.Diagnostics.Debug.WriteLine(b);
+            foreach (var b in header)
+                System.Diagnostics.Debug.WriteLine(b);
 
             //TODO: Optimize this algorithm
             byte[] lookup = null;
@@ -186,6 +186,8 @@ namespace Gnosis.Core.W3c
                     Array.Copy(header, lookup, keyLength);
                 }
                 else lookup = header;
+
+                System.Diagnostics.Debug.WriteLine("lookup=" + Encoding.UTF8.GetString(lookup) + " key=" + Encoding.UTF8.GetString(pair.Key));
 
                 //NOTE: In the case of GIF images, even when the byte arrays look identical,
                 //      they don't match unless I compare them as UTF-8 encoded strings.
@@ -299,7 +301,7 @@ namespace Gnosis.Core.W3c
         public static readonly IMediaType HtmlDoc = new MediaType(TypeText, "html", new List<string> { ".html", ".htm" }, new List<string> { "text/html" });
         public static readonly IMediaType JpegImage = new MediaType(TypeImage, "jpeg", new List<string> { ".jpg", ".jpeg", ".jpe", ".jif", ".jfif", ".jfi" }, new List<string>(), new List<byte[]> { new byte[] { 255, 216, 255, 224 } });
         public static readonly IMediaType MpegAudio = new MediaType(TypeAudio, "mpeg", new List<string> { ".mp3", ".mp2", ".mp1" });
-        public static readonly IMediaType PngImage = new MediaType(TypeImage, "png", new List<string> { ".png" }, new List<string> { "image/x-png" });
+        public static readonly IMediaType PngImage = new MediaType(TypeImage, "png", new List<string> { ".png" }, new List<string> { "image/x-png" }, new List<byte[]> { new byte[] { 137, 80, 78, 71, 13, 10, 26, 10} });
         public static readonly IMediaType RssFeed = new MediaType(TypeApplication, "rss+xml", new List<string> { ".rss", ".xml" });
         public static readonly IMediaType XhtmlDoc = new MediaType(TypeApplication, "xhtml+xml", new List<string> { ".xhtml", "" }, new List<string> { "text/html" });
         public static readonly IMediaType XmlDoc = new MediaType(TypeApplication, "xml", new List<string> { ".xml" }, new List<string> { "text/xml" });

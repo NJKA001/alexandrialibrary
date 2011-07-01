@@ -75,6 +75,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimeSpanExtensions.cs" />
     <Compile Include="UriExtensions.cs" />
+    <Compile Include="W3c\CharacterSet.cs" />
+    <Compile Include="W3c\ContentType.cs" />
+    <Compile Include="W3c\ICharacterSet.cs" />
+    <Compile Include="W3c\IContentType.cs" />
     <Compile Include="W3c\IMediaType.cs" />
     <Compile Include="W3c\IPicsRating.cs" />
     <Compile Include="W3c\MediaType.cs" />
