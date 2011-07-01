@@ -43,6 +43,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ByteArrayExtensions.cs" />
     <Compile Include="CharExtensions.cs" />
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="Atom\IAtomEntry.cs" />

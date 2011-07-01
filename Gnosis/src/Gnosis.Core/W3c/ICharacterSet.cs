@@ -9,5 +9,6 @@ namespace Gnosis.Core.W3c
     {
         string Name { get; }
         string Description { get; }
+        byte[] ByteOrderMark { get; }
     }
 }

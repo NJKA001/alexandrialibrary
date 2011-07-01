@@ -191,7 +191,8 @@ namespace Gnosis.Core.W3c
 
                 //NOTE: In the case of GIF images, even when the byte arrays look identical,
                 //      they don't match unless I compare them as UTF-8 encoded strings.
-                if (lookup == pair.Key || Encoding.UTF8.GetString(lookup) == Encoding.UTF8.GetString(pair.Key))
+                //if (lookup == pair.Key || Encoding.UTF8.GetString(lookup) == Encoding.UTF8.GetString(pair.Key))
+                if (lookup.SequenceEqual(pair.Key))
                 {
                     return pair.Value;
                 }
