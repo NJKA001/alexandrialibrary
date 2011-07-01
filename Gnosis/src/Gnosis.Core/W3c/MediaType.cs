@@ -169,7 +169,7 @@ namespace Gnosis.Core.W3c
                 : new List<IMediaType>();
         }
 
-        private static IMediaType GetMediaTypeByMagicNumber(byte[] header)
+        public static IMediaType GetMediaTypeByMagicNumber(byte[] header)
         {
             //System.Diagnostics.Debug.WriteLine("magicNumber=" + header);
             foreach (var b in header)
@@ -194,93 +194,6 @@ namespace Gnosis.Core.W3c
                 if (lookup == pair.Key || Encoding.UTF8.GetString(lookup) == Encoding.UTF8.GetString(pair.Key))
                 {
                     return pair.Value;
-                }
-            }
-
-            return MediaType.Unknown;
-        }
-
-        public static IMediaType GetMediaType(Uri location)
-        {
-            if (location == null)
-                return MediaType.Unknown;
-
-            if (location.IsFile)
-            {
-                if (!System.IO.File.Exists(location.LocalPath))
-                    return MediaType.Unknown;
-
-                var fileInfo = new System.IO.FileInfo(location.LocalPath);
-                var header = fileInfo.GetHeader();
-                var mediaType = GetMediaTypeByMagicNumber(header);
-                if (mediaType != MediaType.Unknown)
-                    return mediaType;
-
-                var extension = location.ToExtension();
-                if (!string.IsNullOrEmpty(extension))
-                {
-                    return GetMediaTypesByFileExtension(extension).FirstOrDefault();
-                }
-            }
-            else
-            {
-                var request = HttpWebRequest.Create(location);
-                var response = request.GetResponse();
-
-                if (!string.IsNullOrEmpty(response.ContentType))
-                {
-                    var mediaType = MediaType.Unknown;
-                    var tokens = response.ContentType.Split(new string[] { "; ", " " }, StringSplitOptions.RemoveEmptyEntries);
-                    var value = tokens[0].Trim();
-                    System.Diagnostics.Debug.WriteLine("ContentType: " + value);
-                    mediaType = Parse(value);
-                    if (mediaType != MediaType.Unknown && mediaType != XmlDoc)
-                        return mediaType;
-
-                    if (mediaType == MediaType.XmlDoc)
-                    {
-                        try
-                        {
-                            var content = response.GetResponseStream().ToContentString();
-                            if (content != null)
-                            {
-                                var xml = new XmlDocument();
-                                xml.LoadXml(content);
-                                foreach (var node in xml.ChildNodes)
-                                {
-                                    var element = node as XmlElement;
-                                    if (element != null)
-                                    {
-                                        System.Diagnostics.Debug.WriteLine(element.Name);
-                                        if (element.Name == "rss")
-                                            return MediaType.RssFeed;
-                                        if (element.Name == "feed")
-                                            return MediaType.AtomFeed;
-                                    }
-                                }
-                            }
-                        }
-                        catch
-                        {
-                            return MediaType.XmlDoc;
-                        }
-                    }
-
-                    return mediaType;
-                }
-                else
-                {
-                    var mediaType = MediaType.Unknown;
-                    var header = response.GetResponseStream().GetHeader();
-                    mediaType = GetMediaTypeByMagicNumber(header);
-                    if (mediaType != MediaType.Unknown)
-                        return mediaType;
-
-                    var extension = location.ToExtension();
-                    if (!string.IsNullOrEmpty(extension))
-                    {
-                        return GetMediaTypesByFileExtension(extension).FirstOrDefault();
-                    }
                 }
             }
 

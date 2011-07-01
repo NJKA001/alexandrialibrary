@@ -83,11 +83,27 @@ namespace Gnosis.Core
 
             try
             {
-                return MediaType.GetMediaType(location);
+                var contentType = location.ToContentType();
+                return contentType.Type;
             }
             catch
             {
                 return MediaType.Unknown;
+            }
+        }
+
+        public static IContentType ToContentType(this Uri location)
+        {
+            if (location == null)
+                return ContentType.Empty;
+
+            try
+            {
+                return ContentType.GetContentType(location);
+            }
+            catch
+            {
+                return ContentType.Empty;
             }
         }
     }

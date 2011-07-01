@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\CharacterSetTests.cs" />
+    <Compile Include="Models\ContentTypeTests.cs" />
     <Compile Include="Models\CountryTests.cs" />
     <Compile Include="Models\FeedTests.cs" />
     <Compile Include="Models\LanguageTagTests.cs" />

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
+using System.Xml;
 
 namespace Gnosis.Core.W3c
 {
@@ -66,41 +69,114 @@ namespace Gnosis.Core.W3c
             return builder.ToString();
         }
 
-        public static IContentType Parse(string value)
+        public static readonly IContentType Empty = new ContentType(MediaType.Unknown);
+
+        #region Public Static Methods
+
+        public static IContentType GetContentType(Uri location)
         {
-            if (string.IsNullOrEmpty(value))
-                return new ContentType(MediaType.Unknown);
+            if (location == null)
+                return ContentType.Empty;
 
-            var tokens = value.Split(new string[] { "; ", ";" }, StringSplitOptions.RemoveEmptyEntries);
-            if (tokens == null || tokens.Length == 0)
-                return new ContentType(MediaType.Unknown);
-
-            var type = MediaType.Unknown;
+            var mediaType = MediaType.Unknown;
             ICharacterSet charSet = null;
             string boundary = null;
 
-            var token = string.Empty;
-            for (var i = 0; i < tokens.Length; i++)
+            if (location.IsFile)
             {
-                token = tokens[i].Trim();
-                if (i == 0)
+                if (!System.IO.File.Exists(location.LocalPath))
+                    return ContentType.Empty;
+
+                var fileInfo = new FileInfo(location.LocalPath);
+                var header = fileInfo.GetHeader();
+                mediaType = MediaType.GetMediaTypeByMagicNumber(header);
+                if (mediaType != MediaType.Unknown)
+                    return new ContentType(mediaType);
+
+                var extension = location.ToExtension();
+                if (!string.IsNullOrEmpty(extension))
                 {
-                    type = MediaType.Parse(token);
+                    mediaType = MediaType.GetMediaTypesByFileExtension(extension).FirstOrDefault();
                 }
-                else
+
+                return new ContentType(mediaType);
+            }
+
+            var request = HttpWebRequest.Create(location);
+            var response = request.GetResponse();
+
+            if (!string.IsNullOrEmpty(response.ContentType))
+            {
+                var tokens = response.ContentType.Split(new string[] { "; ", " " }, StringSplitOptions.RemoveEmptyEntries);
+                mediaType = MediaType.Parse(tokens[0].Trim());
+                
+                if (tokens.Length > 1)
                 {
-                    if (token.Contains(charSetFieldName) && token.Length > 8)
+                    var token = string.Empty;
+                    for (var i = 1; i < tokens.Length; i++)
                     {
-                        charSet = CharacterSet.Parse(token.Substring(8).Trim());
+                        token = tokens[i].Trim();
+
+                        if (token.Contains(charSetFieldName) && token.Length > 8)
+                        {
+                            charSet = CharacterSet.Parse(token.Substring(8).Trim());
+                        }
+                        else if (token.Contains(boundaryFieldName) && token.Length > 9)
+                        {
+                            boundary = token.Substring(9);
+                        }
                     }
-                    else if (token.Contains(boundaryFieldName) && token.Length > 9)
+                }
+
+                if (mediaType != MediaType.Unknown && mediaType != MediaType.XmlDoc)
+                    return new ContentType(mediaType, charSet, boundary);
+
+                if (mediaType == MediaType.XmlDoc)
+                {
+                    try
                     {
-                        boundary = token.Substring(9);
+                        var content = response.GetResponseStream().ToContentString();
+                        if (content != null)
+                        {
+                            var xml = new XmlDocument();
+                            xml.LoadXml(content);
+                            foreach (var node in xml.ChildNodes)
+                            {
+                                var element = node as XmlElement;
+                                if (element != null)
+                                {
+                                    System.Diagnostics.Debug.WriteLine(element.Name);
+                                    if (element.Name == "rss")
+                                        return new ContentType(MediaType.RssFeed, charSet, boundary);
+                                    if (element.Name == "feed")
+                                        return new ContentType(MediaType.AtomFeed, charSet, boundary);
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        return new ContentType(MediaType.XmlDoc, charSet, boundary);
                     }
                 }
             }
+            else
+            {
+                var header = response.GetResponseStream().GetHeader();
+                mediaType = MediaType.GetMediaTypeByMagicNumber(header);
+                if (mediaType != MediaType.Unknown)
+                    return new ContentType(mediaType, charSet, boundary);
 
-            return new ContentType(type, charSet, boundary);
+                var extension = location.ToExtension();
+                if (!string.IsNullOrEmpty(extension))
+                {
+                    mediaType = MediaType.GetMediaTypesByFileExtension(extension).FirstOrDefault();
+                }
+            }
+
+            return new ContentType(mediaType, charSet, boundary);
         }
+
+        #endregion
     }
 }
