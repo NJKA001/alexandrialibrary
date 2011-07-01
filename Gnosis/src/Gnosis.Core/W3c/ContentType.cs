@@ -61,10 +61,10 @@ namespace Gnosis.Core.W3c
             builder.Append(type.ToString());
 
             if (charSet != null && charSet != CharacterSet.Unknown)
-                builder.AppendFormat(";{0}{1}", charSetFieldName, charSet.ToString());
+                builder.AppendFormat("; {0}{1}", charSetFieldName, charSet.ToString());
 
             if (!string.IsNullOrEmpty(boundary))
-                builder.AppendFormat(";{0}{1}", boundaryFieldName, boundary);
+                builder.AppendFormat("; {0}{1}", boundaryFieldName, boundary);
 
             return builder.ToString();
         }
