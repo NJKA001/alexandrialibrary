@@ -46,8 +46,12 @@ namespace Gnosis.Core.W3c
 
         private static void InitializeCharacterSets()
         {
-            characterSets.Add(UsAscii);
+            characterSets.Add(Ascii);
+            characterSets.Add(Utf7);
             characterSets.Add(Utf8);
+            characterSets.Add(Utf16);
+            characterSets.Add(Utf16Be);
+            characterSets.Add(Utf32);
             characterSets.Add(Unknown);
         }
 
@@ -61,6 +65,24 @@ namespace Gnosis.Core.W3c
             return byName.ContainsKey(name) ? byName[name] : Unknown;
         }
 
+        public static ICharacterSet GetCharacterSet(Encoding encoding)
+        {
+            if (encoding == Encoding.ASCII)
+                return Ascii;
+            else if (encoding == Encoding.UTF7)
+                return Utf7;
+            else if (encoding == Encoding.UTF8)
+                return Utf8;
+            else if (encoding == Encoding.Unicode)
+                return Utf16;
+            else if (encoding == Encoding.BigEndianUnicode)
+                return Utf16Be;
+            else if (encoding == Encoding.UTF32)
+                return Utf32;
+
+            return Unknown;
+        }
+
         public static IEnumerable<ICharacterSet> GetCharacterSets()
         {
             return characterSets;
@@ -70,8 +92,12 @@ namespace Gnosis.Core.W3c
 
         #region Character Sets
 
-        public static readonly ICharacterSet UsAscii = new CharacterSet("US-ASCII", "ANSI X3.4-1968");
+        public static readonly ICharacterSet Ascii = new CharacterSet("US-ASCII", "ANSI X3.4-1968");
+        public static readonly ICharacterSet Utf7 = new CharacterSet("UTF-7", "Unicode UTF-7: RFC 2152");
         public static readonly ICharacterSet Utf8 = new CharacterSet("UTF-8", "Unicode UTF-8: RFC 3629");
+        public static readonly ICharacterSet Utf16 = new CharacterSet("UTF-16", "Unicode UTF-16: Little Endian RFC 2781");
+        public static readonly ICharacterSet Utf16Be = new CharacterSet("UTF-16BE", "Unicode UTF-16: Big Endian RFC 2781");
+        public static readonly ICharacterSet Utf32 = new CharacterSet("UTF-32", "Unicode UTF-32: Little Endian");
         public static readonly ICharacterSet Unknown = new CharacterSet("UNKNOWN", "Unknown Character Set");
 
         #endregion
