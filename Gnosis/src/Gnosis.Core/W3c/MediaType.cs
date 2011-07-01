@@ -172,8 +172,8 @@ namespace Gnosis.Core.W3c
         public static IMediaType GetMediaTypeByMagicNumber(byte[] header)
         {
             //System.Diagnostics.Debug.WriteLine("magicNumber=" + header);
-            foreach (var b in header)
-                System.Diagnostics.Debug.WriteLine(b);
+            //foreach (var b in header)
+                //System.Diagnostics.Debug.WriteLine(b);
 
             //TODO: Optimize this algorithm
             byte[] lookup = null;
@@ -187,7 +187,7 @@ namespace Gnosis.Core.W3c
                 }
                 else lookup = header;
 
-                System.Diagnostics.Debug.WriteLine("lookup=" + Encoding.UTF8.GetString(lookup) + " key=" + Encoding.UTF8.GetString(pair.Key));
+                //System.Diagnostics.Debug.WriteLine("lookup=" + Encoding.UTF8.GetString(lookup) + " key=" + Encoding.UTF8.GetString(pair.Key));
 
                 //NOTE: In the case of GIF images, even when the byte arrays look identical,
                 //      they don't match unless I compare them as UTF-8 encoded strings.

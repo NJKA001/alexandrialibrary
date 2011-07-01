@@ -85,13 +85,14 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(MediaType.PngImage, mediaType);
         }
 
-        [Test]
-        public void GetMediaTypeForRemotePng()
-        {
-            var location = new Uri("http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png");
-            var mediaType = location.ToMediaType();
-            Assert.AreEqual(MediaType.PngImage, mediaType);
-        }
+        //TODO: Choose another remote PNG resource, the one at this URL is SLOW
+        //[Test]
+        //public void GetMediaTypeForRemotePng()
+        //{
+        //    var location = new Uri("http://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png");
+        //    var mediaType = location.ToMediaType();
+        //    Assert.AreEqual(MediaType.PngImage, mediaType);
+        //}
 
         [Test]
         public void GetMediaTypeForLocalGif()
