@@ -9,8 +9,8 @@ namespace Gnosis.Core.Rss
 {
     public interface IRssEnclosure
     {
-        Uri Path { get; }
-        IMediaType MediaType { get; }
+        Uri Url { get; }
+        IMediaType Type { get; }
         int Length { get; }
     }
 }

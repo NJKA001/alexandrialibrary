@@ -89,7 +89,17 @@ namespace Gnosis.Core.W3c
 
         public static ICharacterSet Parse(string name)
         {
-            return byName.ContainsKey(name) ? byName[name] : Unknown;
+            if (name == null)
+                return Unknown;
+
+            var key = name.ToUpper().Trim();
+            System.Diagnostics.Debug.WriteLine("key=" + key);
+            System.Diagnostics.Debug.WriteLine("contains key=" + byName.ContainsKey(name));
+
+            var charSet = byName.ContainsKey(key) ? byName[key] : Unknown;
+
+            //System.Diagnostics.Debug.WriteLine("charSet is not null=" + (charSet != null));
+            return charSet;
         }
 
         public static ICharacterSet GetCharacterSet(Encoding encoding)
@@ -116,12 +126,12 @@ namespace Gnosis.Core.W3c
             if (header == null || header.Length < minimumHeaderSize)
                 return Unknown;
 
-            header.ToDebugString("header=");
+            //header.ToDebugString("header=");
 
             var length = minimumHeaderSize;
             while (length > 1)
             {
-                System.Diagnostics.Debug.WriteLine("contains length key=" + byLengthAndBom.ContainsKey(length) + " length=" + length);
+                //System.Diagnostics.Debug.WriteLine("contains length key=" + byLengthAndBom.ContainsKey(length) + " length=" + length);
                 if (byLengthAndBom.ContainsKey(length))
                 {
                     var bomMap = byLengthAndBom[length];
@@ -130,15 +140,12 @@ namespace Gnosis.Core.W3c
                     
                     foreach (var pair in bomMap)
                     {
-                        System.Diagnostics.Debug.WriteLine(string.Empty);
-                        pair.Key.ToDebugString("key=");
-                        bom.ToDebugString("bom=");
+                        //System.Diagnostics.Debug.WriteLine(string.Empty);
+                        //pair.Key.ToDebugString("key=");
+                        //bom.ToDebugString("bom=");
                         if (bom.SequenceEqual(pair.Key))
                             return pair.Value;
                     }
-                    //System.Diagnostics.Debug.WriteLine("contains bom key=" + bomMap.ContainsKey(bom));
-                    //if (bomMap.ContainsKey(bom))
-                        //return bomMap[bom];
                 }
                 length--;
             }

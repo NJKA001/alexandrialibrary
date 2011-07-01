@@ -107,7 +107,7 @@ namespace Gnosis.Core.W3c
 
             if (!string.IsNullOrEmpty(response.ContentType))
             {
-                var tokens = response.ContentType.Split(new string[] { "; ", " " }, StringSplitOptions.RemoveEmptyEntries);
+                var tokens = response.ContentType.Split(new string[] { "; ", " ", ";" }, StringSplitOptions.RemoveEmptyEntries);
                 mediaType = MediaType.Parse(tokens[0].Trim());
                 
                 if (tokens.Length > 1)
@@ -129,7 +129,19 @@ namespace Gnosis.Core.W3c
                 }
 
                 if (mediaType != MediaType.Unknown && mediaType != MediaType.XmlDoc)
+                {
+                    if (mediaType.Type == MediaType.TypeText && charSet == null)
+                    {
+                        using (var reader = new StreamReader(response.GetResponseStream(), true))
+                        {
+                            var buffer = new char[20];
+                            reader.Read(buffer, 0, 20);
+                            charSet = CharacterSet.GetCharacterSet(reader.CurrentEncoding);
+                        }
+                    }
+
                     return new ContentType(mediaType, charSet, boundary);
+                }
 
                 if (mediaType == MediaType.XmlDoc)
                 {
@@ -140,16 +152,29 @@ namespace Gnosis.Core.W3c
                         {
                             var xml = new XmlDocument();
                             xml.LoadXml(content);
+
                             foreach (var node in xml.ChildNodes)
                             {
-                                var element = node as XmlElement;
-                                if (element != null)
+                                var declaration = node as XmlDeclaration;
+                                if (declaration != null)
                                 {
-                                    System.Diagnostics.Debug.WriteLine(element.Name);
-                                    if (element.Name == "rss")
-                                        return new ContentType(MediaType.RssFeed, charSet, boundary);
-                                    if (element.Name == "feed")
-                                        return new ContentType(MediaType.AtomFeed, charSet, boundary);
+                                    charSet = CharacterSet.Parse(declaration.Encoding);
+                                }
+                                else
+                                {
+                                    var element = node as XmlElement;
+                                    if (element != null)
+                                    {
+                                        //System.Diagnostics.Debug.WriteLine(element.Name);
+                                        if (element.Name == "rss")
+                                        {
+                                            mediaType = MediaType.RssFeed;
+                                        }
+                                        else if (element.Name == "feed")
+                                        {
+                                            mediaType = MediaType.AtomFeed;
+                                        }
+                                    }
                                 }
                             }
                         }

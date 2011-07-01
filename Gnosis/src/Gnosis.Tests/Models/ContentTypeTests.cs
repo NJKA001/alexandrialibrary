@@ -24,5 +24,17 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(CharacterSet.Utf8, contentType.CharSet);
             Assert.IsNull(contentType.Boundary);
         }
+
+        [Test]
+        public void GetContentTypeForAtomFeed()
+        {
+            var location = new Uri("http://www.blogger.com/feeds/8677504/posts/default");
+            var contentType = location.ToContentType();
+            Assert.IsNotNull(contentType);
+            Assert.AreNotEqual(ContentType.Empty, contentType);
+            Assert.AreEqual(MediaType.AtomFeed, contentType.Type);
+            //Assert.AreEqual(CharacterSet.Utf8, contentType.CharSet);
+            Assert.IsNull(contentType.Boundary);
+        }
     }
 }

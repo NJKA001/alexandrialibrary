@@ -68,6 +68,7 @@
     <Compile Include="Rss\IRssImage.cs" />
     <Compile Include="Rss\IRssSource.cs" />
     <Compile Include="Rss\RssDay.cs" />
+    <Compile Include="Rss\RssEnclosure.cs" />
     <Compile Include="Rss\RssHour.cs" />
     <Compile Include="UN\IRegion.cs" />
     <Compile Include="UN\Region.cs" />
