@@ -27,6 +27,7 @@ namespace Gnosis.Tests.Models
                 list.Add(mediaType);
 
                 Assert.AreEqual(mediaType, MediaType.Parse(mediaType.ToString()));
+                Assert.AreEqual(mediaType, MediaType.Parse(mediaType.Type + "/" + mediaType.SubType));
 
                 var byTypeList = MediaType.GetMediaTypesByType(mediaType.Type);
                 Assert.IsNotNull(byTypeList);

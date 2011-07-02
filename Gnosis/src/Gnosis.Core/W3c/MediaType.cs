@@ -61,7 +61,7 @@ namespace Gnosis.Core.W3c
 
         public string SubType
         {
-            get { return type; }
+            get { return subType; }
         }
 
         public IEnumerable<string> FileExtensions

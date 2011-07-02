@@ -33,7 +33,7 @@ namespace Gnosis.Tests.Models
             Assert.IsNotNull(contentType);
             Assert.AreNotEqual(ContentType.Empty, contentType);
             Assert.AreEqual(MediaType.AtomFeed, contentType.Type);
-            //Assert.AreEqual(CharacterSet.Utf8, contentType.CharSet);
+            Assert.AreEqual(CharacterSet.Utf8, contentType.CharSet);
             Assert.IsNull(contentType.Boundary);
         }
     }

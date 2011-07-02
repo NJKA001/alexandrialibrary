@@ -128,7 +128,7 @@ namespace Gnosis.Core.W3c
                     }
                 }
 
-                if (mediaType != MediaType.Unknown && mediaType != MediaType.XmlDoc)
+                if (mediaType != MediaType.Unknown && !mediaType.SubType.Contains("xml"))
                 {
                     if (mediaType.Type == MediaType.TypeText && charSet == null)
                     {
@@ -140,10 +140,11 @@ namespace Gnosis.Core.W3c
                         }
                     }
 
+                    //System.Diagnostics.Debug.WriteLine("response.ContentType=" + response.ContentType + " mediaType.SubType=" + mediaType.SubType);
                     return new ContentType(mediaType, charSet, boundary);
                 }
 
-                if (mediaType == MediaType.XmlDoc)
+                if (mediaType.SubType.Contains("xml"))
                 {
                     try
                     {
@@ -162,17 +163,20 @@ namespace Gnosis.Core.W3c
                                 }
                                 else
                                 {
-                                    var element = node as XmlElement;
-                                    if (element != null)
+                                    if (mediaType == MediaType.XmlDoc)
                                     {
-                                        //System.Diagnostics.Debug.WriteLine(element.Name);
-                                        if (element.Name == "rss")
+                                        var element = node as XmlElement;
+                                        if (element != null)
                                         {
-                                            mediaType = MediaType.RssFeed;
-                                        }
-                                        else if (element.Name == "feed")
-                                        {
-                                            mediaType = MediaType.AtomFeed;
+                                            //System.Diagnostics.Debug.WriteLine("elementName=" + element.Name);
+                                            if (element.Name == "rss")
+                                            {
+                                                mediaType = MediaType.RssFeed;
+                                            }
+                                            else if (element.Name == "feed")
+                                            {
+                                                mediaType = MediaType.AtomFeed;
+                                            }
                                         }
                                     }
                                 }
