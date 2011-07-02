@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Gnosis.Core.Rss
 {
-    public interface IRssSource
+    public interface IRssGuid
     {
-        Uri Url { get; }
-        string Name { get; }
+        string Value { get; }
+        bool IsPermaLink { get; }
     }
 }

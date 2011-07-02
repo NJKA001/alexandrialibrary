@@ -5,9 +5,10 @@ using System.Text;
 
 namespace Gnosis.Core.Rss
 {
-    public interface IRssSource
+    public enum RssCloudProtocol
     {
-        Uri Url { get; }
-        string Name { get; }
+        HttpPost,
+        Soap,
+        XmlRpc
     }
 }

@@ -5,9 +5,11 @@ using System.Text;
 
 namespace Gnosis.Core.Rss
 {
-    public interface IRssSource
+    public interface IRssTextInput
     {
-        Uri Url { get; }
+        string Title { get; }
+        string Description { get; }
         string Name { get; }
+        Uri Link { get; }
     }
 }

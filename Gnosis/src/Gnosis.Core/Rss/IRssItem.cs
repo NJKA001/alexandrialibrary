@@ -5,17 +5,16 @@ using System.Text;
 
 namespace Gnosis.Core.Rss
 {
-    public interface IRssFeedItem
+    public interface IRssItem
     {
         string Title { get; set; }
         Uri Link { get; set; }
         string Description { get; set; }
-        string AuthorName { get; set; }
-        Uri AuthorEmail { get; set; }
+        string Author { get; set; }
         Uri Comments { get; set; }
         IRssEnclosure Enclosure { get; set; }
-        string Guid { get; set; }
-        DateTime PublishedDate { get; set; }
+        IRssGuid Guid { get; set; }
+        DateTime PubDate { get; set; }
         IRssSource Source { get; set; }
 
         IEnumerable<IRssCategory> Categories { get; }

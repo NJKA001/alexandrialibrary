@@ -7,10 +7,11 @@ namespace Gnosis.Core.Rss
 {
     public interface IRssImage
     {
+        Uri Url { get; }
         string Title { get; }
-        Uri Path { get; }
         Uri Link { get; }
         int Width { get; }
         int Height { get; }
+        string Description { get; }
     }
 }
