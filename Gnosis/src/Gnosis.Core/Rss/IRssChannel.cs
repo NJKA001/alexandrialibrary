@@ -24,14 +24,14 @@ namespace Gnosis.Core.Rss
         DateTime PubDate { get; }
         DateTime LastBuildDate { get; }
         string Generator { get; }
-        Uri Docs { get; set; }
-        IRssCloud Cloud { get; set; }
-        TimeSpan Ttl { get; set; }
-        IRssImage Image { get; set; }
-        IPicsRating Rating { get; set; }
-        IRssTextInput TextInput { get; set; }
-        IEnumerable<RssHour> SkipHours { get; set; }
-        IEnumerable<RssDay> SkipDays { get; set; }
+        Uri Docs { get; }
+        IRssCloud Cloud { get; }
+        TimeSpan Ttl { get; }
+        IRssImage Image { get; }
+        IPicsRating Rating { get; }
+        IRssTextInput TextInput { get; }
+        IEnumerable<RssHour> SkipHours { get; }
+        IEnumerable<RssDay> SkipDays { get; }
 
         IEnumerable<IRssCategory> Categories { get; }
         IEnumerable<IRssItem> Items { get; }

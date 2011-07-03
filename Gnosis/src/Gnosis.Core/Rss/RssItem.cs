@@ -8,119 +8,81 @@ namespace Gnosis.Core.Rss
     public class RssItem
         : IRssItem
     {
+        public RssItem(string title, Uri link, string description, string author, Uri comments, IRssEnclosure enclosure, IRssGuid guid, DateTime pubDate, IRssSource source, IEnumerable<IRssCategory> categories)
+        {
+            this.title = title;
+            this.link = link;
+            this.description = description;
+            this.author = author;
+            this.comments = comments;
+            this.enclosure = enclosure;
+            this.guid = guid;
+            this.pubDate = pubDate;
+            this.source = source;
+            this.categories = categories;
+        }
+
+        private readonly string title;
+        private readonly Uri link;
+        private readonly string description;
+        private readonly string author;
+        private readonly Uri comments;
+        private readonly IRssEnclosure enclosure;
+        private readonly IRssGuid guid;
+        private readonly DateTime pubDate;
+        private readonly IRssSource source;
+        private readonly IEnumerable<IRssCategory> categories;
+
         #region IRssItem Members
 
         public string Title
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return title; }
         }
 
         public Uri Link
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return link; }
         }
 
         public string Description
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return description; }
         }
 
         public string Author
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return author; }
         }
 
         public Uri Comments
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return comments; }
         }
 
         public IRssEnclosure Enclosure
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return enclosure; }
         }
 
         public IRssGuid Guid
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return guid; }
         }
 
         public DateTime PubDate
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return pubDate; }
         }
 
         public IRssSource Source
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return source; }
         }
 
         public IEnumerable<IRssCategory> Categories
         {
-            get { throw new NotImplementedException(); }
+            get { return categories; }
         }
 
         #endregion

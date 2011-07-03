@@ -3,167 +3,159 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core.Ietf;
+using Gnosis.Core.W3c;
+
 namespace Gnosis.Core.Rss
 {
     public class RssChannel
         : IRssChannel
     {
+        public RssChannel(string title, Uri link, string description, ILanguageTag language, string copyright, string managingEditor, string webMaster, DateTime pubDate, DateTime lastBuildDate, string generator, Uri docs, IRssCloud cloud, TimeSpan ttl, IRssImage image, IPicsRating rating, IRssTextInput textInput, IEnumerable<RssHour> skipHours, IEnumerable<RssDay> skipDays, IEnumerable<IRssCategory> categories, IEnumerable<IRssItem> items)
+        {
+            this.title = title;
+            this.link = link;
+            this.description = description;
+            this.language = language;
+            this.copyright = copyright;
+            this.managingEditor = managingEditor;
+            this.webMaster = webMaster;
+            this.pubDate = pubDate;
+            this.lastBuildDate = lastBuildDate;
+            this.generator = generator;
+            this.docs = docs;
+            this.cloud = cloud;
+            this.ttl = ttl;
+            this.image = image;
+            this.rating = rating;
+            this.textInput = textInput;
+            this.skipHours = skipHours;
+            this.skipDays = skipDays;
+            this.categories = categories;
+            this.items = items;
+        }
+
+        private readonly string title;
+        private readonly Uri link;
+        private readonly string description;
+        private readonly ILanguageTag language;
+        private readonly string copyright;
+        private readonly string managingEditor;
+        private readonly string webMaster;
+        private readonly DateTime pubDate;
+        private readonly DateTime lastBuildDate;
+        private readonly string generator;
+        private readonly Uri docs;
+        private readonly IRssCloud cloud;
+        private readonly TimeSpan ttl;
+        private readonly IRssImage image;
+        private readonly IPicsRating rating;
+        private readonly IRssTextInput textInput;
+        private readonly IEnumerable<RssHour> skipHours;
+        private readonly IEnumerable<RssDay> skipDays;
+        private readonly IEnumerable<IRssCategory> categories;
+        private readonly IEnumerable<IRssItem> items;
+
         #region IRssChannel Members
 
         public string Title
         {
-            get { throw new NotImplementedException(); }
+            get { return title; }
         }
 
         public Uri Link
         {
-            get { throw new NotImplementedException(); }
+            get { return link; }
         }
 
         public string Description
         {
-            get { throw new NotImplementedException(); }
+            get { return description; }
         }
 
-        public Ietf.ILanguageTag Language
+        public ILanguageTag Language
         {
-            get { throw new NotImplementedException(); }
+            get { return language; }
         }
 
         public string Copyright
         {
-            get { throw new NotImplementedException(); }
+            get { return copyright; }
         }
 
         public string ManagingEditor
         {
-            get { throw new NotImplementedException(); }
+            get { return managingEditor; }
         }
 
         public string WebMaster
         {
-            get { throw new NotImplementedException(); }
+            get { return webMaster; }
         }
 
         public DateTime PubDate
         {
-            get { throw new NotImplementedException(); }
+            get { return pubDate; }
         }
 
         public DateTime LastBuildDate
         {
-            get { throw new NotImplementedException(); }
+            get { return lastBuildDate; }
         }
 
         public string Generator
         {
-            get { throw new NotImplementedException(); }
+            get { return generator; }
         }
 
         public Uri Docs
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return docs; }
         }
 
         public IRssCloud Cloud
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return cloud; }
         }
 
         public TimeSpan Ttl
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return ttl; }
         }
 
         public IRssImage Image
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return image; }
         }
 
-        public W3c.IPicsRating Rating
+        public IPicsRating Rating
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return rating; }
         }
 
         public IRssTextInput TextInput
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return textInput; }
         }
 
         public IEnumerable<RssHour> SkipHours
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return skipHours; }
         }
 
         public IEnumerable<RssDay> SkipDays
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return skipDays; }
         }
 
         public IEnumerable<IRssCategory> Categories
         {
-            get { throw new NotImplementedException(); }
+            get { return categories; }
         }
 
         public IEnumerable<IRssItem> Items
         {
-            get { throw new NotImplementedException(); }
+            get { return items; }
         }
 
         #endregion

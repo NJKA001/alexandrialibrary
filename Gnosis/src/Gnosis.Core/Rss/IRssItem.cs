@@ -7,15 +7,15 @@ namespace Gnosis.Core.Rss
 {
     public interface IRssItem
     {
-        string Title { get; set; }
-        Uri Link { get; set; }
-        string Description { get; set; }
-        string Author { get; set; }
-        Uri Comments { get; set; }
-        IRssEnclosure Enclosure { get; set; }
-        IRssGuid Guid { get; set; }
-        DateTime PubDate { get; set; }
-        IRssSource Source { get; set; }
+        string Title { get; }
+        Uri Link { get; }
+        string Description { get; }
+        string Author { get; }
+        Uri Comments { get; }
+        IRssEnclosure Enclosure { get; }
+        IRssGuid Guid { get; }
+        DateTime PubDate { get; }
+        IRssSource Source { get; }
 
         IEnumerable<IRssCategory> Categories { get; }
     }
