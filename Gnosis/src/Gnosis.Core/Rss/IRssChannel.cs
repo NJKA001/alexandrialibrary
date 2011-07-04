@@ -33,7 +33,9 @@ namespace Gnosis.Core.Rss
         IEnumerable<RssHour> SkipHours { get; }
         IEnumerable<RssDay> SkipDays { get; }
 
+        IEnumerable<INamespace> Namespaces { get; }
         IEnumerable<IRssCategory> Categories { get; }
         IEnumerable<IRssItem> Items { get; }
+        IEnumerable<IRssExtension> Extensions { get; }
     }
 }

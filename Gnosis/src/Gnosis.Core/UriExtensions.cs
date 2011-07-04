@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using System.Xml;
 
 using Gnosis.Core.W3c;
 
@@ -105,6 +106,17 @@ namespace Gnosis.Core
             {
                 return ContentType.Empty;
             }
+        }
+
+        public static XmlDocument ToXml(this Uri location)
+        {
+            var request = HttpWebRequest.Create(location);
+            var response = request.GetResponse();
+            var xml = new XmlDocument();
+            var content = response.GetResponseStream().ToContentString();
+            xml.LoadXml(content);
+
+            return xml;
         }
     }
 }

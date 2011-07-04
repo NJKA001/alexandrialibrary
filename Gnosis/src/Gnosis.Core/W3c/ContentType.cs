@@ -73,6 +73,81 @@ namespace Gnosis.Core.W3c
 
         #region Public Static Methods
 
+        private static ICharacterSet GetCharacterSet(Stream stream, IMediaType mediaType, ICharacterSet charSet)
+        {
+            if (mediaType != MediaType.Unknown && !mediaType.SubType.Contains("xml"))
+            {
+                if (mediaType.Type == MediaType.TypeText && charSet == null)
+                {
+                    using (var reader = new StreamReader(stream, true))
+                    {
+                        var buffer = new char[20];
+                        reader.Read(buffer, 0, 20);
+                        return CharacterSet.GetCharacterSet(reader.CurrentEncoding);
+                    }
+                }
+
+                //System.Diagnostics.Debug.WriteLine("response.ContentType=" + response.ContentType + " mediaType.SubType=" + mediaType.SubType);
+                //return new ContentType(mediaType, charSet, boundary);
+            }
+
+            return charSet;
+        }
+
+        private static Tuple<IMediaType, ICharacterSet> GetXmlExtendedType(Stream stream, IMediaType mediaType, ICharacterSet charSet)
+        {
+            var newMediaType = mediaType;
+            var newCharSet = charSet;
+
+            System.Diagnostics.Debug.WriteLine("GetXmlExtendedType. mediaType=" + mediaType);
+            if (mediaType.SubType.Contains("xml"))
+            {
+                try
+                {
+                    var content = stream.ToContentString();
+                    if (content != null)
+                    {
+                        var xml = new XmlDocument();
+                        xml.LoadXml(content);
+
+                        foreach (var node in xml.ChildNodes)
+                        {
+                            var declaration = node as XmlDeclaration;
+                            if (declaration != null)
+                            {
+                                newCharSet = CharacterSet.Parse(declaration.Encoding);
+                            }
+                            else
+                            {
+                                if (newMediaType == mediaType)
+                                {
+                                    var element = node as XmlElement;
+                                    if (element != null)
+                                    {
+                                        System.Diagnostics.Debug.WriteLine("elementName=" + element.Name);
+                                        if (element.Name == "rss")
+                                        {
+                                            newMediaType = MediaType.RssFeed;
+                                        }
+                                        else if (element.Name == "feed")
+                                        {
+                                            newMediaType = MediaType.AtomFeed;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    newMediaType = MediaType.XmlDoc;
+                }
+            }
+
+            return new Tuple<IMediaType, ICharacterSet>(newMediaType, newCharSet);
+        }
+
         public static IContentType GetContentType(Uri location)
         {
             if (location == null)
@@ -99,7 +174,15 @@ namespace Gnosis.Core.W3c
                     mediaType = MediaType.GetMediaTypesByFileExtension(extension).FirstOrDefault();
                 }
 
-                return new ContentType(mediaType);
+                using (var stream = new FileStream(location.LocalPath, FileMode.Open, FileAccess.Read))
+                {
+                    charSet = GetCharacterSet(stream, mediaType, charSet);
+                    var ext = GetXmlExtendedType(stream, mediaType, charSet);
+                    mediaType = ext.Item1;
+                    charSet = ext.Item2;
+                }
+
+                return new ContentType(mediaType, charSet, boundary);
             }
 
             var request = HttpWebRequest.Create(location);
@@ -128,66 +211,15 @@ namespace Gnosis.Core.W3c
                     }
                 }
 
-                if (mediaType != MediaType.Unknown && !mediaType.SubType.Contains("xml"))
+                using (var stream = response.GetResponseStream())
                 {
-                    if (mediaType.Type == MediaType.TypeText && charSet == null)
-                    {
-                        using (var reader = new StreamReader(response.GetResponseStream(), true))
-                        {
-                            var buffer = new char[20];
-                            reader.Read(buffer, 0, 20);
-                            charSet = CharacterSet.GetCharacterSet(reader.CurrentEncoding);
-                        }
-                    }
-
-                    //System.Diagnostics.Debug.WriteLine("response.ContentType=" + response.ContentType + " mediaType.SubType=" + mediaType.SubType);
-                    return new ContentType(mediaType, charSet, boundary);
+                    charSet = GetCharacterSet(stream, mediaType, charSet);
+                    var ext = GetXmlExtendedType(stream, mediaType, charSet);
+                    mediaType = ext.Item1;
+                    charSet = ext.Item2;
                 }
 
-                if (mediaType.SubType.Contains("xml"))
-                {
-                    try
-                    {
-                        var content = response.GetResponseStream().ToContentString();
-                        if (content != null)
-                        {
-                            var xml = new XmlDocument();
-                            xml.LoadXml(content);
-
-                            foreach (var node in xml.ChildNodes)
-                            {
-                                var declaration = node as XmlDeclaration;
-                                if (declaration != null)
-                                {
-                                    charSet = CharacterSet.Parse(declaration.Encoding);
-                                }
-                                else
-                                {
-                                    if (mediaType == MediaType.XmlDoc)
-                                    {
-                                        var element = node as XmlElement;
-                                        if (element != null)
-                                        {
-                                            //System.Diagnostics.Debug.WriteLine("elementName=" + element.Name);
-                                            if (element.Name == "rss")
-                                            {
-                                                mediaType = MediaType.RssFeed;
-                                            }
-                                            else if (element.Name == "feed")
-                                            {
-                                                mediaType = MediaType.AtomFeed;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    catch
-                    {
-                        return new ContentType(MediaType.XmlDoc, charSet, boundary);
-                    }
-                }
+                return new ContentType(mediaType, charSet, boundary);
             }
             else
             {
