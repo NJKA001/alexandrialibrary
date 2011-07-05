@@ -8,7 +8,7 @@ namespace Gnosis.Core.Rss
     public class RssItem
         : IRssItem
     {
-        public RssItem(string title, Uri link, string description, string author, Uri comments, IRssEnclosure enclosure, IRssGuid guid, DateTime pubDate, IRssSource source, IEnumerable<IRssCategory> categories)
+        public RssItem(string title, Uri link, string description, string author, Uri comments, IRssEnclosure enclosure, IRssGuid guid, DateTime pubDate, IRssSource source, IEnumerable<IRssCategory> categories, IEnumerable<IRssExtension> extensions)
         {
             this.title = title;
             this.link = link;
@@ -20,6 +20,7 @@ namespace Gnosis.Core.Rss
             this.pubDate = pubDate;
             this.source = source;
             this.categories = categories;
+            this.extensions = extensions;
         }
 
         private readonly string title;
@@ -32,6 +33,7 @@ namespace Gnosis.Core.Rss
         private readonly DateTime pubDate;
         private readonly IRssSource source;
         private readonly IEnumerable<IRssCategory> categories;
+        private readonly IEnumerable<IRssExtension> extensions;
 
         #region IRssItem Members
 
@@ -83,6 +85,11 @@ namespace Gnosis.Core.Rss
         public IEnumerable<IRssCategory> Categories
         {
             get { return categories; }
+        }
+
+        public IEnumerable<IRssExtension> Extensions
+        {
+            get { return extensions; }
         }
 
         #endregion

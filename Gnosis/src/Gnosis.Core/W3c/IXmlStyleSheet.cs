@@ -5,9 +5,10 @@ using System.Text;
 
 namespace Gnosis.Core.W3c
 {
-    public interface INamespace
+    public interface IXmlStyleSheet
     {
-        Uri Identifier { get; }
-        string Alias { get; }
+        IMediaType Type { get; }
+        IMedia Media { get; }
+        Uri Href { get; }
     }
 }

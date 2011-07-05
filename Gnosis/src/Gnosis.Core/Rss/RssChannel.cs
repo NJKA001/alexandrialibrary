@@ -11,7 +11,7 @@ namespace Gnosis.Core.Rss
     public class RssChannel
         : IRssChannel
     {
-        public RssChannel(string title, Uri link, string description, ILanguageTag language, string copyright, string managingEditor, string webMaster, DateTime pubDate, DateTime lastBuildDate, string generator, Uri docs, IRssCloud cloud, TimeSpan ttl, IRssImage image, IPicsRating rating, IRssTextInput textInput, IEnumerable<RssHour> skipHours, IEnumerable<RssDay> skipDays, IEnumerable<INamespace> namespaces, IEnumerable<IRssCategory> categories, IEnumerable<IRssItem> items, IEnumerable<IRssExtension> extensions)
+        public RssChannel(string title, Uri link, string description, ILanguageTag language, string copyright, string managingEditor, string webMaster, DateTime pubDate, DateTime lastBuildDate, string generator, Uri docs, IRssCloud cloud, TimeSpan ttl, IRssImage image, IPicsRating rating, IRssTextInput textInput, IEnumerable<RssHour> skipHours, IEnumerable<RssDay> skipDays, IEnumerable<IRssCategory> categories, IEnumerable<IRssItem> items, IEnumerable<IRssExtension> extensions)
         {
             this.title = title;
             this.link = link;
@@ -31,7 +31,6 @@ namespace Gnosis.Core.Rss
             this.textInput = textInput;
             this.skipHours = skipHours;
             this.skipDays = skipDays;
-            this.namespaces = namespaces;
             this.categories = categories;
             this.items = items;
             this.extensions = extensions;
@@ -56,7 +55,6 @@ namespace Gnosis.Core.Rss
         private readonly IEnumerable<RssHour> skipHours;
         private readonly IEnumerable<RssDay> skipDays;
 
-        private readonly IEnumerable<INamespace> namespaces;
         private readonly IEnumerable<IRssCategory> categories;
         private readonly IEnumerable<IRssItem> items;
         private readonly IEnumerable<IRssExtension> extensions;
@@ -151,11 +149,6 @@ namespace Gnosis.Core.Rss
         public IEnumerable<RssDay> SkipDays
         {
             get { return skipDays; }
-        }
-
-        public IEnumerable<INamespace> Namespaces
-        {
-            get { return namespaces; }
         }
 
         public IEnumerable<IRssCategory> Categories

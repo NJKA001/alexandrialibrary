@@ -80,7 +80,7 @@ namespace Gnosis.Core
         public static IMediaType ToMediaType(this Uri location)
         {
             if (location == null)
-                return MediaType.Unknown;
+                return MediaType.ApplicationUnknown;
 
             try
             {
@@ -89,7 +89,7 @@ namespace Gnosis.Core
             }
             catch
             {
-                return MediaType.Unknown;
+                return MediaType.ApplicationUnknown;
             }
         }
 

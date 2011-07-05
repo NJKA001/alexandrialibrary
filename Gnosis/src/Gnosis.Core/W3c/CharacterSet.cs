@@ -93,8 +93,8 @@ namespace Gnosis.Core.W3c
                 return Unknown;
 
             var key = name.ToUpper().Trim();
-            System.Diagnostics.Debug.WriteLine("key=" + key);
-            System.Diagnostics.Debug.WriteLine("contains key=" + byName.ContainsKey(name));
+            //System.Diagnostics.Debug.WriteLine("key=" + key);
+            //System.Diagnostics.Debug.WriteLine("contains key=" + byName.ContainsKey(name));
 
             var charSet = byName.ContainsKey(key) ? byName[key] : Unknown;
 

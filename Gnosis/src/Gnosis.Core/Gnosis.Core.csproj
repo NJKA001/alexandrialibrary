@@ -62,11 +62,12 @@
     <Compile Include="Iso\Script.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Rss\IRssCategory.cs" />
-    <Compile Include="Rss\IRssChannelFactory.cs" />
+    <Compile Include="Rss\IRssFeedFactory.cs" />
     <Compile Include="Rss\IRssCloud.cs" />
     <Compile Include="Rss\IRssEnclosure.cs" />
     <Compile Include="Rss\IRssChannel.cs" />
     <Compile Include="Rss\IRssExtension.cs" />
+    <Compile Include="Rss\IRssFeed.cs" />
     <Compile Include="Rss\IRssItem.cs" />
     <Compile Include="Rss\IRssGuid.cs" />
     <Compile Include="Rss\IRssImage.cs" />
@@ -74,11 +75,12 @@
     <Compile Include="Rss\IRssTextInput.cs" />
     <Compile Include="Rss\RssCategory.cs" />
     <Compile Include="Rss\RssChannel.cs" />
-    <Compile Include="Rss\RssChannelFactory.cs" />
+    <Compile Include="Rss\RssFeedFactory.cs" />
     <Compile Include="Rss\RssCloud.cs" />
     <Compile Include="Rss\RssCloudProtocol.cs" />
     <Compile Include="Rss\RssDay.cs" />
     <Compile Include="Rss\RssEnclosure.cs" />
+    <Compile Include="Rss\RssFeed.cs" />
     <Compile Include="Rss\RssGuid.cs" />
     <Compile Include="Rss\RssHour.cs" />
     <Compile Include="Rss\RssImage.cs" />
@@ -96,12 +98,20 @@
     <Compile Include="W3c\ContentType.cs" />
     <Compile Include="W3c\ICharacterSet.cs" />
     <Compile Include="W3c\IContentType.cs" />
+    <Compile Include="W3c\IMedia.cs" />
     <Compile Include="W3c\IMediaType.cs" />
-    <Compile Include="W3c\INamespace.cs" />
+    <Compile Include="W3c\IXmlNamespace.cs" />
     <Compile Include="W3c\IPicsRating.cs" />
+    <Compile Include="W3c\IXmlStyleSheet.cs" />
+    <Compile Include="W3c\Media.cs" />
+    <Compile Include="W3c\MediaContinuityGroup.cs" />
+    <Compile Include="W3c\MediaInteractivityGroup.cs" />
+    <Compile Include="W3c\MediaLayoutGroup.cs" />
+    <Compile Include="W3c\MediaSensoryGroup.cs" />
     <Compile Include="W3c\MediaType.cs" />
-    <Compile Include="W3c\Namespace.cs" />
+    <Compile Include="W3c\XmlNamespace.cs" />
     <Compile Include="W3c\Rfc822DateTime.cs" />
+    <Compile Include="W3c\XmlStyleSheet.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

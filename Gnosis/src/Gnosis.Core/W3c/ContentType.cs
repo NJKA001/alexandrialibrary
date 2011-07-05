@@ -69,13 +69,13 @@ namespace Gnosis.Core.W3c
             return builder.ToString();
         }
 
-        public static readonly IContentType Empty = new ContentType(MediaType.Unknown);
+        public static readonly IContentType Empty = new ContentType(MediaType.ApplicationUnknown);
 
         #region Public Static Methods
 
         private static ICharacterSet GetCharacterSet(Stream stream, IMediaType mediaType, ICharacterSet charSet)
         {
-            if (mediaType != MediaType.Unknown && !mediaType.SubType.Contains("xml"))
+            if (mediaType != MediaType.ApplicationUnknown && !mediaType.SubType.Contains("xml"))
             {
                 if (mediaType.Type == MediaType.TypeText && charSet == null)
                 {
@@ -99,7 +99,7 @@ namespace Gnosis.Core.W3c
             var newMediaType = mediaType;
             var newCharSet = charSet;
 
-            System.Diagnostics.Debug.WriteLine("GetXmlExtendedType. mediaType=" + mediaType);
+            //System.Diagnostics.Debug.WriteLine("GetXmlExtendedType. mediaType=" + mediaType);
             if (mediaType.SubType.Contains("xml"))
             {
                 try
@@ -124,14 +124,14 @@ namespace Gnosis.Core.W3c
                                     var element = node as XmlElement;
                                     if (element != null)
                                     {
-                                        System.Diagnostics.Debug.WriteLine("elementName=" + element.Name);
+                                        //System.Diagnostics.Debug.WriteLine("elementName=" + element.Name);
                                         if (element.Name == "rss")
                                         {
-                                            newMediaType = MediaType.RssFeed;
+                                            newMediaType = MediaType.ApplicationRssXml;
                                         }
                                         else if (element.Name == "feed")
                                         {
-                                            newMediaType = MediaType.AtomFeed;
+                                            newMediaType = MediaType.ApplicationAtomXml;
                                         }
                                     }
                                 }
@@ -141,7 +141,7 @@ namespace Gnosis.Core.W3c
                 }
                 catch
                 {
-                    newMediaType = MediaType.XmlDoc;
+                    newMediaType = MediaType.ApplicationXml;
                 }
             }
 
@@ -153,7 +153,7 @@ namespace Gnosis.Core.W3c
             if (location == null)
                 return ContentType.Empty;
 
-            var mediaType = MediaType.Unknown;
+            var mediaType = MediaType.ApplicationUnknown;
             ICharacterSet charSet = null;
             string boundary = null;
 
@@ -165,7 +165,7 @@ namespace Gnosis.Core.W3c
                 var fileInfo = new FileInfo(location.LocalPath);
                 var header = fileInfo.GetHeader();
                 mediaType = MediaType.GetMediaTypeByMagicNumber(header);
-                if (mediaType != MediaType.Unknown)
+                if (mediaType != MediaType.ApplicationUnknown)
                     return new ContentType(mediaType);
 
                 var extension = location.ToExtension();
@@ -225,7 +225,7 @@ namespace Gnosis.Core.W3c
             {
                 var header = response.GetResponseStream().GetHeader();
                 mediaType = MediaType.GetMediaTypeByMagicNumber(header);
-                if (mediaType != MediaType.Unknown)
+                if (mediaType != MediaType.ApplicationUnknown)
                     return new ContentType(mediaType, charSet, boundary);
 
                 var extension = location.ToExtension();

@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Gnosis.Core.Rss
 {
-    public interface IRssChannelFactory
+    public interface IRssFeedFactory
     {
-        IRssChannel Create(Uri location);
+        IRssFeed Create(Uri location);
     }
 }

@@ -20,7 +20,7 @@ namespace Gnosis.Tests.Models
             var contentType = location.ToContentType();
             Assert.IsNotNull(contentType);
             Assert.AreNotEqual(ContentType.Empty, contentType);
-            Assert.AreEqual(MediaType.RssFeed, contentType.Type);
+            Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
             Assert.AreEqual(CharacterSet.Utf8, contentType.CharSet);
             Assert.IsNull(contentType.Boundary);
         }
@@ -32,7 +32,7 @@ namespace Gnosis.Tests.Models
             var contentType = location.ToContentType();
             Assert.IsNotNull(contentType);
             Assert.AreNotEqual(ContentType.Empty, contentType);
-            Assert.AreEqual(MediaType.AtomFeed, contentType.Type);
+            Assert.AreEqual(MediaType.ApplicationAtomXml, contentType.Type);
             Assert.AreEqual(CharacterSet.Utf8, contentType.CharSet);
             Assert.IsNull(contentType.Boundary);
         }

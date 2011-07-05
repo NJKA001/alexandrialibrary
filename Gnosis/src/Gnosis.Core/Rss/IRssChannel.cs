@@ -8,10 +8,6 @@ using Gnosis.Core.W3c;
 
 namespace Gnosis.Core.Rss
 {
-    /// <summary>
-    /// Defines an RSS 2.0 Feed based on the unofficial RSS specification
-    /// </summary>
-    /// <remarks>http://cyber.law.harvard.edu/rss/rss.html</remarks>
     public interface IRssChannel
     {
         string Title { get; }
@@ -33,7 +29,6 @@ namespace Gnosis.Core.Rss
         IEnumerable<RssHour> SkipHours { get; }
         IEnumerable<RssDay> SkipDays { get; }
 
-        IEnumerable<INamespace> Namespaces { get; }
         IEnumerable<IRssCategory> Categories { get; }
         IEnumerable<IRssItem> Items { get; }
         IEnumerable<IRssExtension> Extensions { get; }

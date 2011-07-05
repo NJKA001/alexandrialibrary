@@ -131,16 +131,18 @@ namespace Gnosis.Core.W3c
 
         private static void InitializeMediaTypes()
         {
-            mediaTypes.Add(AtomFeed);
-            mediaTypes.Add(GifImage);
-            mediaTypes.Add(HtmlDoc);
-            mediaTypes.Add(JpegImage);
-            mediaTypes.Add(MpegAudio);
-            mediaTypes.Add(PngImage);
-            mediaTypes.Add(RssFeed);
-            mediaTypes.Add(Unknown);
-            mediaTypes.Add(XhtmlDoc);
-            mediaTypes.Add(XmlDoc);
+            mediaTypes.Add(ApplicationAtomXml);
+            mediaTypes.Add(ApplicationRssXml);
+            mediaTypes.Add(ApplicationXhtmlXml);
+            mediaTypes.Add(ApplicationXml);
+            mediaTypes.Add(ApplicationUnknown);
+            mediaTypes.Add(AudioMpeg);
+            mediaTypes.Add(ImageGif);
+            mediaTypes.Add(ImageJpeg);
+            mediaTypes.Add(ImagePng);
+            mediaTypes.Add(TextCss);
+            mediaTypes.Add(TextHtml);
+            mediaTypes.Add(TextXsl);
         }
 
         #endregion
@@ -152,7 +154,7 @@ namespace Gnosis.Core.W3c
             if (byCode.ContainsKey(value))
                 return byCode[value];
             
-            return byLegacyType.ContainsKey(value) ? byLegacyType[value].First() : Unknown;
+            return byLegacyType.ContainsKey(value) ? byLegacyType[value].First() : ApplicationUnknown;
         }
 
         public static IEnumerable<IMediaType> GetMediaTypesByType(string type)
@@ -198,7 +200,7 @@ namespace Gnosis.Core.W3c
                 }
             }
 
-            return MediaType.Unknown;
+            return MediaType.ApplicationUnknown;
         }
 
         public static IEnumerable<IMediaType> GetMediaTypes()
@@ -210,17 +212,21 @@ namespace Gnosis.Core.W3c
 
         #region Media Types
 
-        public static readonly IMediaType AtomFeed = new MediaType(TypeApplication, "atom+xml", new List<string> { ".atom", ".xml" });
-        public static readonly IMediaType GifImage = new MediaType(TypeImage, "gif", new List<string> { ".gif" }, new List<string>(), new List<byte[]> { new byte[] { 71, 73, 70, 56, 55, 97 }, new byte[] { 71, 73, 70, 56, 57, 97 } });
-        public static readonly IMediaType HtmlDoc = new MediaType(TypeText, "html", new List<string> { ".html", ".htm" }, new List<string> { "text/html" });
-        public static readonly IMediaType JpegImage = new MediaType(TypeImage, "jpeg", new List<string> { ".jpg", ".jpeg", ".jpe", ".jif", ".jfif", ".jfi" }, new List<string>(), new List<byte[]> { new byte[] { 255, 216, 255, 224 } });
-        public static readonly IMediaType MpegAudio = new MediaType(TypeAudio, "mpeg", new List<string> { ".mp3", ".mp2", ".mp1" });
-        public static readonly IMediaType PngImage = new MediaType(TypeImage, "png", new List<string> { ".png" }, new List<string> { "image/x-png" }, new List<byte[]> { new byte[] { 137, 80, 78, 71, 13, 10, 26, 10} });
-        public static readonly IMediaType RssFeed = new MediaType(TypeApplication, "rss+xml", new List<string> { ".rss", ".xml" });
-        public static readonly IMediaType XhtmlDoc = new MediaType(TypeApplication, "xhtml+xml", new List<string> { ".xhtml", "" }, new List<string> { "text/html" });
-        public static readonly IMediaType XmlDoc = new MediaType(TypeApplication, "xml", new List<string> { ".xml" }, new List<string> { "text/xml" });
+        public static readonly IMediaType ApplicationAtomXml = new MediaType(TypeApplication, "atom+xml", new List<string> { ".atom", ".xml" });
+        public static readonly IMediaType ApplicationRssXml = new MediaType(TypeApplication, "rss+xml", new List<string> { ".rss", ".xml" });
+        public static readonly IMediaType ApplicationXhtmlXml = new MediaType(TypeApplication, "xhtml+xml", new List<string> { ".xhtml", "" }, new List<string> { "text/html" });
+        public static readonly IMediaType ApplicationXml = new MediaType(TypeApplication, "xml", new List<string> { ".xml" }, new List<string> { "text/xml" });
+        public static readonly IMediaType ApplicationUnknown = new MediaType(TypeApplication, "unknown");
 
-        public static readonly IMediaType Unknown = new MediaType(TypeApplication, "unknown");
+        public static readonly IMediaType AudioMpeg = new MediaType(TypeAudio, "mpeg", new List<string> { ".mp3", ".mp2", ".mp1" });
+
+        public static readonly IMediaType ImageGif = new MediaType(TypeImage, "gif", new List<string> { ".gif" }, new List<string>(), new List<byte[]> { new byte[] { 71, 73, 70, 56, 55, 97 }, new byte[] { 71, 73, 70, 56, 57, 97 } });        
+        public static readonly IMediaType ImageJpeg = new MediaType(TypeImage, "jpeg", new List<string> { ".jpg", ".jpeg", ".jpe", ".jif", ".jfif", ".jfi" }, new List<string>(), new List<byte[]> { new byte[] { 255, 216, 255, 224 } });
+        public static readonly IMediaType ImagePng = new MediaType(TypeImage, "png", new List<string> { ".png" }, new List<string> { "image/x-png" }, new List<byte[]> { new byte[] { 137, 80, 78, 71, 13, 10, 26, 10} });
+
+        public static readonly IMediaType TextCss = new MediaType(TypeText, "css", new List<string> { ".css" });
+        public static readonly IMediaType TextHtml = new MediaType(TypeText, "html", new List<string> { ".html", ".htm" }, new List<string> { "text/html" });
+        public static readonly IMediaType TextXsl = new MediaType(TypeText, "xsl", new List<string> { ".xsl" });
 
         public const string TypeApplication = "application";
         public const string TypeAudio = "audio";
