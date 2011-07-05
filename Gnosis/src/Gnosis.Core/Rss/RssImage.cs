@@ -13,9 +13,13 @@ namespace Gnosis.Core.Rss
             this.url = url;
             this.title = title;
             this.link = link;
-            this.width = width;
-            this.height = height;
             this.description = description;
+
+            if (width > 0)
+                this.width = width;
+
+            if (height > 0)
+                this.height = height;
         }
 
         private readonly Uri url;

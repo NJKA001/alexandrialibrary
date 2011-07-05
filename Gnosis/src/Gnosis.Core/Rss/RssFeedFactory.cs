@@ -14,42 +14,6 @@ namespace Gnosis.Core.Rss
     public class RssFeedFactory
         : IRssFeedFactory
     {
-        private static string ProcessRssNode(XmlElement rssNode, IList<IXmlNamespace> namespaces)
-        {
-            string version = null;
-            if (rssNode.Attributes != null)
-            {
-                foreach (var attrib in rssNode.Attributes)
-                {
-                    var attribute = attrib as XmlAttribute;
-                    if (attribute != null)
-                    {
-                        if (attribute.Name == "version")
-                            version = attribute.Value;
-                        else if (attribute.Name.StartsWith("xmlns"))
-                        {
-                            var identifier = new Uri(attribute.Value, UriKind.RelativeOrAbsolute);
-
-                            if (attribute.Name == "xmlns")
-                            {
-                                namespaces.Add(new XmlNamespace(identifier));
-                            }
-                            else if (attribute.Name.Contains(':'))
-                            {
-                                var tokens = attribute.Name.Split(':');
-                                if (tokens != null && tokens.Length == 2)
-                                {
-                                    namespaces.Add(new XmlNamespace(identifier, tokens[1]));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            return version;
-        }
-
         private static XmlNode FindChannelNode(XmlElement parent)
         {
             if (parent != null && parent.HasChildNodes)
@@ -67,16 +31,239 @@ namespace Gnosis.Core.Rss
             return null;
         }
 
-        private static void AddExtension(XmlNode node, IList<IRssExtension> extensions)
+        private static void AddExtension(XmlNode node, IList<IRssExtension> extensions, IList<IXmlNamespace> namespaces)
         {
+            if (node.Attributes != null)
+            {
+                foreach (var attrib in node.Attributes.Cast<XmlAttribute>())
+                {
+                    if (attrib != null && attrib.Name.StartsWith("xmlns"))
+                    {
+                        if (attrib.Name.Contains(':'))
+                        {
+                        }
+                    }
+                }
+            }
         }
 
         private static void AddCategory(XmlNode node, IList<IRssCategory> categories)
         {
+            Uri domain = null;
+            string name = null;
+
+            if (node.Attributes != null)
+            {
+                foreach (var attrib in node.Attributes.Cast<XmlAttribute>())
+                {
+                    if (attrib != null && attrib.Name == "domain")
+                        domain = new Uri(attrib.Value, UriKind.RelativeOrAbsolute);
+                }
+            }
+
+            name = node.InnerText;
+
+            if (name != null)
+            {
+                categories.Add(new RssCategory(domain, name));
+            }
         }
 
         private static void AddItem(XmlNode node, IList<IRssItem> items)
         {
+        }
+
+        private static IRssCloud GetCloud(XmlNode node)
+        {
+            string domain = null;
+            int port = -1;
+            string path = null;
+            string registerProcedure = null;
+            var protocol = RssCloudProtocol.None;
+
+            foreach (var attrib in node.Attributes.Cast<XmlAttribute>())
+            {
+                if (attrib != null)
+                {
+                    switch (attrib.Name)
+                    {
+                        case "domain":
+                            domain = attrib.Value;
+                            break;
+                        case "port":
+                            int.TryParse(attrib.Value, out port);
+                            break;
+                        case "path":
+                            path = attrib.Value;
+                            break;
+                        case "registerProcedure":
+                            registerProcedure = attrib.Value;
+                            break;
+                        case "protocol":
+                            if (attrib.Value == "http-post")
+                                protocol = RssCloudProtocol.HttpPost;
+                            else if (attrib.Value == "soap")
+                                protocol = RssCloudProtocol.Soap;
+                            else if (attrib.Value == "xml-rpc")
+                                protocol = RssCloudProtocol.XmlRpc;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            return (domain != null && port > -1 && path != null && registerProcedure != null && protocol != RssCloudProtocol.None) ?
+                new RssCloud(domain, port, path, registerProcedure, protocol)
+                : null;
+        }
+
+        private static TimeSpan GetTtl(XmlNode node)
+        {
+            var minutes = 0;
+            return int.TryParse(node.InnerText, out minutes) ?
+                new TimeSpan(0, minutes, 0)
+                : TimeSpan.Zero;
+        }
+
+        private static IRssImage GetImage(XmlNode node)
+        {
+            Uri url = null;
+            string title = null;
+            Uri link = null;
+            int width = 0;
+            int height = 0;
+            string desciption = null;
+
+            foreach (var child in node.ChildNodes.Cast<XmlNode>())
+            {
+                if (child != null)
+                {
+                    switch (child.Name)
+                    {
+                        case "url":
+                            url = new Uri(child.InnerText, UriKind.RelativeOrAbsolute);
+                            break;
+                        case "title":
+                            title = child.InnerText;
+                            break;
+                        case "link":
+                            link = new Uri(child.InnerText, UriKind.RelativeOrAbsolute);
+                            break;
+                        case "width":
+                            int.TryParse(child.InnerText, out width);
+                            break;
+                        case "height":
+                            int.TryParse(child.InnerText, out height);
+                            break;
+                        case "description":
+                            desciption = child.InnerText;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            return (url != null && title != null && link != null) ?
+                new RssImage(url, title, link, width, height, desciption)
+                : null;
+        }
+
+        private static IRssTextInput GetTextInput(XmlNode node)
+        {
+            string title = null;
+            string description = null;
+            string name = null;
+            Uri link = null;            
+
+            foreach (var child in node.ChildNodes.Cast<XmlNode>())
+            {
+                if (child != null)
+                {
+                    switch (child.Name)
+                    {
+                        case "title":
+                            title = child.InnerText;
+                            break;
+                        case "description":
+                            description = child.InnerText;
+                            break;
+                        case "name":
+                            name = child.InnerText;
+                            break;
+                        case "link":
+                            link = new Uri(child.InnerText, UriKind.RelativeOrAbsolute);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            return (title != null && description != null && name != null && link != null) ?
+                new RssTextInput(title, description, name, link)
+                : null;
+        }
+
+        private static IEnumerable<RssDay> GetSkipDays(XmlNode node)
+        {
+            var skipDays = new List<RssDay>();
+
+            foreach (var child in node.ChildNodes.Cast<XmlNode>())
+            {
+                if (child != null && child.Name == "day")
+                {
+                    switch (child.InnerText)
+                    {
+                        case "Sunday":
+                            skipDays.Add(RssDay.Sunday);
+                            break;
+                        case "Monday":
+                            skipDays.Add(RssDay.Monday);
+                            break;
+                        case "Tuesday":
+                            skipDays.Add(RssDay.Tuesday);
+                            break;
+                        case "Wednesday":
+                            skipDays.Add(RssDay.Wednesday);
+                            break;
+                        case "Thursday":
+                            skipDays.Add(RssDay.Thursday);
+                            break;
+                        case "Friday":
+                            skipDays.Add(RssDay.Friday);
+                            break;
+                        case "Saturday":
+                            skipDays.Add(RssDay.Saturday);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            return skipDays;
+        }
+
+        private static IEnumerable<RssHour> GetSkipHours(XmlNode node)
+        {
+            var skipHours = new List<RssHour>();
+
+            foreach (var child in node.ChildNodes.Cast<XmlNode>())
+            {
+                if (child != null && child.Name == "hour")
+                {
+                    var hour = -1;
+                    if (int.TryParse(child.InnerText, out hour))
+                    {
+                        if (hour >= 0 && hour <= 23)
+                            skipHours.Add((RssHour)hour);
+                    }
+                }
+            }
+
+            return skipHours;
         }
 
         private static IRssChannel GetChannel(XmlElement rssNode, IList<IXmlNamespace> namespaces)
@@ -97,8 +284,8 @@ namespace Gnosis.Core.Rss
             IRssImage image = null;
             IPicsRating rating = null;
             IRssTextInput textInput = null;
-            var skipHours = new List<RssHour>();
-            var skipDays = new List<RssDay>();
+            IEnumerable<RssHour> skipHours = new List<RssHour>();
+            IEnumerable<RssDay> skipDays = new List<RssDay>();
 
             var categories = new List<IRssCategory>();
             var items = new List<IRssItem>();
@@ -113,7 +300,7 @@ namespace Gnosis.Core.Rss
                 var child = node as XmlNode;
                 if (child.Name.Contains(':'))
                 {
-                    AddExtension(child, extensions);
+                    AddExtension(child, extensions, namespaces);
                 }
                 else
                 {
@@ -152,7 +339,27 @@ namespace Gnosis.Core.Rss
                         case "docs":
                             docs = new Uri(child.InnerText, UriKind.RelativeOrAbsolute);
                             break;
-                        //TODO: Add logic for cloud, ttl, image, rating, textInput, skipHours, skipDays
+                        case "cloud":
+                            cloud = GetCloud(child);
+                            break;
+                        case "ttl":
+                            ttl = GetTtl(child);
+                            break;
+                        case "image":
+                            image = GetImage(child);
+                            break;
+                        case "rating":
+                            rating = new PicsRating(child.InnerText);
+                            break;
+                        case "textInput":
+                            textInput = GetTextInput(child);
+                            break;
+                        case "skipHours":
+                            skipHours = GetSkipHours(child);
+                            break;
+                        case "skipDays":
+                            skipDays = GetSkipDays(child);
+                            break;
                         case "category":
                             AddCategory(child, categories);
                             break;
@@ -207,6 +414,45 @@ namespace Gnosis.Core.Rss
             {
                 styleSheets.Add(new XmlStyleSheet(type, media, href));
             }
+        }
+
+        #endregion
+
+        #region ProcessRssNode
+
+        private static string ProcessRssNode(XmlElement rssNode, IList<IXmlNamespace> namespaces)
+        {
+            string version = null;
+            if (rssNode.Attributes != null)
+            {
+                foreach (var attribute in rssNode.Attributes.Cast<XmlAttribute>())
+                {
+                    if (attribute != null)
+                    {
+                        if (attribute.Name == "version")
+                            version = attribute.Value;
+                        else if (attribute.Name.StartsWith("xmlns"))
+                        {
+                            var identifier = new Uri(attribute.Value, UriKind.RelativeOrAbsolute);
+
+                            if (attribute.Name == "xmlns")
+                            {
+                                namespaces.Add(new XmlNamespace(identifier));
+                            }
+                            else if (attribute.Name.Contains(':'))
+                            {
+                                var tokens = attribute.Name.Split(':');
+                                if (tokens != null && tokens.Length == 2)
+                                {
+                                    namespaces.Add(new XmlNamespace(identifier, tokens[1]));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return version;
         }
 
         #endregion

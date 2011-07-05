@@ -27,9 +27,40 @@ namespace Gnosis.Tests.Models
             const string description = "The Art of Technology";
             var language = LanguageTag.Parse("en");
             var lastBuildDate = new DateTime(2011, 6, 29, 18, 45, 05); //Wed, 29 Jun 2011 18:45:05 +0000
-            var generator = "http://www.sixapart.com/movabletype/";
-            var docs = "http://www.rssboard.org/rss-specification";
-            var copyright = "Copyright 2011 Conde Nast Digital. The contents of this feed are available for non-commercial use only.";
+            const string generator = "http://www.sixapart.com/movabletype/";
+            const string docs = "http://www.rssboard.org/rss-specification";
+            const string copyright = "Copyright 2011 Conde Nast Digital. The contents of this feed are available for non-commercial use only.";
+            var pubDate = new DateTime(2011, 6, 4, 9, 14, 58); //Sat, 4 Jun 2011 09:14:58 +0000
+            const string managingEditor = "kfisher@arstechnica.com (Ken Fisher)";
+            const string webMaster = "cecker@arstechnica.com (Clint Ecker)";
+
+            const string categoryDomain = "http://www.sixapart.com/ns/types#category";
+            const string categoryName = "News";
+
+            const string cloudDomain = "radio.xmlstoragesystem.com";
+            const int cloudPort = 80;
+            const string cloudPath = "/RPC2";
+            const string cloudProc = "xmlStorageSystem.rssPleaseNotify";
+            var cloudProcotol = RssCloudProtocol.XmlRpc;
+
+            const int ttl = 45;
+
+            const string imageUrl = "http://static.arstechnica.net//public/v6/styles/light/images/masthead/logo.png?1309476728";
+            const string imageTitle = "Ars Technica";
+            const string imageLink = "http://arstechnica.com/index.php";
+            const int imageHeight = 169;
+            const int imageWidth = 300;
+            const string imageDescription = "The Art of Technology";
+
+            const string ratingExcerpt = "'http://www.gcf.org/v2.5' labels";
+
+            const string textInputTitle = "Contact Us";
+            const string textInputDescription = "Email us with feedback";
+            const string textInputName = "Submit";
+            const string textInputLink = "http://arstechnica.com/contact-us.php";
+
+            var skipHours = new List<RssHour> { RssHour.Zero, RssHour.One, RssHour.Two, RssHour.Twelve, RssHour.Thirteen, RssHour.Nineteen, RssHour.TwentyThree };
+            var skipDays = new List<RssDay> { RssDay.Sunday, RssDay.Thursday, RssDay.Saturday };
 
             var fileInfo = new FileInfo(path);
             Assert.IsTrue(fileInfo.Exists);
@@ -55,16 +86,36 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(generator, feed.Channel.Generator);
             Assert.AreEqual(docs, feed.Channel.Docs.ToString());
             Assert.AreEqual(copyright, feed.Channel.Copyright);
-            Assert.AreEqual(DateTime.MinValue, feed.Channel.PubDate);
-            Assert.IsNull(feed.Channel.ManagingEditor);
-            Assert.IsNull(feed.Channel.WebMaster);
-            Assert.IsNull(feed.Channel.Cloud);
-            Assert.AreEqual(TimeSpan.Zero, feed.Channel.Ttl);
-            Assert.IsNull(feed.Channel.Image);
-            Assert.IsNull(feed.Channel.Rating);
-            Assert.IsNull(feed.Channel.TextInput);
-            Assert.AreEqual(0, feed.Channel.SkipHours.Count());
-            Assert.AreEqual(0, feed.Channel.SkipDays.Count());
+            Assert.AreEqual(pubDate, feed.Channel.PubDate);
+            Assert.AreEqual(managingEditor, feed.Channel.ManagingEditor);
+            Assert.AreEqual(webMaster, feed.Channel.WebMaster);
+            Assert.IsNotNull(feed.Channel.Cloud);
+            Assert.AreEqual(cloudDomain, feed.Channel.Cloud.Domain);
+            Assert.AreEqual(cloudPort, feed.Channel.Cloud.Port);
+            Assert.AreEqual(cloudPath, feed.Channel.Cloud.Path);
+            Assert.AreEqual(cloudProc, feed.Channel.Cloud.RegisterProcedure);
+            Assert.AreEqual(cloudProcotol, feed.Channel.Cloud.Protocol);
+            Assert.AreEqual(ttl, feed.Channel.Ttl.TotalMinutes);
+            Assert.IsNotNull(feed.Channel.Image);
+            Assert.AreEqual(imageUrl, feed.Channel.Image.Url.ToString());
+            Assert.AreEqual(imageTitle, feed.Channel.Image.Title);
+            Assert.AreEqual(imageLink, feed.Channel.Image.Link.ToString());
+            Assert.AreEqual(imageHeight, feed.Channel.Image.Height);
+            Assert.AreEqual(imageWidth, feed.Channel.Image.Width);
+            Assert.AreEqual(imageDescription, feed.Channel.Image.Description);
+            Assert.IsNotNull(feed.Channel.Rating);
+            Assert.IsNotNull(feed.Channel.Rating.Value);
+            Assert.IsTrue(feed.Channel.Rating.Value.Contains(ratingExcerpt));
+            Assert.IsNotNull(feed.Channel.TextInput);
+            Assert.AreEqual(textInputTitle, feed.Channel.TextInput.Title);
+            Assert.AreEqual(textInputDescription, feed.Channel.TextInput.Description);
+            Assert.AreEqual(textInputName, feed.Channel.TextInput.Name);
+            Assert.AreEqual(textInputLink, feed.Channel.TextInput.Link.ToString());
+            Assert.IsTrue(skipHours.SequenceEqual(feed.Channel.SkipHours));
+            Assert.IsTrue(skipDays.SequenceEqual(feed.Channel.SkipDays));
+            Assert.AreEqual(1, feed.Channel.Categories.Count());
+            Assert.AreEqual(categoryDomain, feed.Channel.Categories.First().Domain.ToString());
+            Assert.AreEqual(categoryName, feed.Channel.Categories.First().Name);
         }
     }
 }

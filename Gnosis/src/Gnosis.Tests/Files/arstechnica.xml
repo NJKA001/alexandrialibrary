@@ -25,6 +25,50 @@
     <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml" href="http://feeds.arstechnica.com/arstechnica/index" />
     <feedburner:info uri="arstechnica/index" />
     <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://pubsubhubbub.appspot.com/" />
+    
+    <!-- NOTE: The following elements were not found in the original feed, they are included for testing purposes only -->
+    <category domain="http://www.sixapart.com/ns/types#category">News</category>
+    <pubDate>Sat, 4 Jun 2011 09:14:58 +0000</pubDate>
+    <managingEditor>kfisher@arstechnica.com (Ken Fisher)</managingEditor>
+    <webMaster>cecker@arstechnica.com (Clint Ecker)</webMaster>
+    <cloud domain="radio.xmlstoragesystem.com" port="80" path="/RPC2" registerProcedure="xmlStorageSystem.rssPleaseNotify" protocol="xml-rpc" />
+    <ttl>45</ttl>
+    <image>
+      <url>http://static.arstechnica.net//public/v6/styles/light/images/masthead/logo.png?1309476728</url>
+      <title>Ars Technica</title>
+      <link>http://arstechnica.com/index.php</link>
+      <height>169</height>
+      <width>300</width>
+      <description>The Art of Technology</description>
+    </image>
+    <rating>
+      'http://www.gcf.org/v2.5' labels
+      on '1994.11.05T08:15-0500'
+      exp '1995.12.31T23:59-0000'
+      for 'http://www.greatdocs.com/foo.html'
+      by 'George Sanderson, Jr.'
+      ratings (suds 0.5 density 0 color/hue 1))
+    </rating>
+    <textInput>
+      <title>Contact Us</title>
+      <description>Email us with feedback</description>
+      <name>Submit</name>
+      <link>http://arstechnica.com/contact-us.php</link>
+    </textInput>
+    <skipHours>
+      <hour>0</hour>
+      <hour>1</hour>
+      <hour>2</hour>
+      <hour>12</hour>
+      <hour>13</hour>
+      <hour>19</hour>
+      <hour>23</hour>
+    </skipHours>
+    <skipDays>
+      <day>Sunday</day>
+      <day>Thursday</day>
+      <day>Saturday</day>
+    </skipDays>
     <item>
 
       <title>Impressions from Uncharted 3: Drake's Deception's open beta </title>

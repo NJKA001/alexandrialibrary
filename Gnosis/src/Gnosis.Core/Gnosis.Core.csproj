@@ -109,6 +109,7 @@
     <Compile Include="W3c\MediaLayoutGroup.cs" />
     <Compile Include="W3c\MediaSensoryGroup.cs" />
     <Compile Include="W3c\MediaType.cs" />
+    <Compile Include="W3c\PicsRating.cs" />
     <Compile Include="W3c\XmlNamespace.cs" />
     <Compile Include="W3c\Rfc822DateTime.cs" />
     <Compile Include="W3c\XmlStyleSheet.cs" />
