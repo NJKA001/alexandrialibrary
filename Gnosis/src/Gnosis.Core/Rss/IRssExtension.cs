@@ -9,7 +9,9 @@ namespace Gnosis.Core.Rss
 {
     public interface IRssExtension
     {
-        IXmlNamespace Namespace { get; }
+        IXmlNamespace PrimaryNamespace { get; }
+        IEnumerable<IXmlNamespace> AdditionalNamespaces { get; }
+        string Prefix { get; }
         string Name { get; }
         string Content { get; }
     }

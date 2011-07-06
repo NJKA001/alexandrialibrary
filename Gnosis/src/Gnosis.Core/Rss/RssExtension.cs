@@ -10,22 +10,36 @@ namespace Gnosis.Core.Rss
     public class RssExtension
         : IRssExtension
     {
-        public RssExtension(IXmlNamespace ns, string name, string content)
+        public RssExtension(IXmlNamespace primaryNamespace, IEnumerable<IXmlNamespace> additionalNamespaces, string prefix, string name, string content)
         {
-            this.ns = ns;
+            this.primaryNamespace = primaryNamespace;
+            this.additionalNamespaces = additionalNamespaces;
+            this.prefix = prefix;
             this.name = name;
             this.content = content;
         }
 
-        private readonly IXmlNamespace ns;
+        private readonly IXmlNamespace primaryNamespace;
+        private readonly IEnumerable<IXmlNamespace> additionalNamespaces;
+        private readonly string prefix;
         private readonly string name;
         private readonly string content;
 
         #region IRssExtension Members
 
-        public IXmlNamespace Namespace
+        public IXmlNamespace PrimaryNamespace
         {
-            get { return ns; }
+            get { return primaryNamespace; }
+        }
+
+        public IEnumerable<IXmlNamespace> AdditionalNamespaces
+        {
+            get { return additionalNamespaces; }
+        }
+
+        public string Prefix
+        {
+            get { return prefix; }
         }
 
         public string Name

@@ -34,10 +34,14 @@ namespace Gnosis.Core.Rss
         private static void AddExtension(XmlNode node, IList<IRssExtension> extensions, IList<IXmlNamespace> namespaces)
         {
             var nameTokens = node.Name.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+            if (nameTokens == null || nameTokens.Length != 2)
+                return;
+
             var prefix = nameTokens[0];
             var name = nameTokens[1];
 
-            IXmlNamespace ns = null;
+            IXmlNamespace primaryNamespace = null;
+            var additionalNamespaces = new List<IXmlNamespace>();
 
             if (node.Attributes != null)
             {
@@ -48,21 +52,34 @@ namespace Gnosis.Core.Rss
                         if (attrib.Name.Contains(':'))
                         {
                             var attribTokens = attrib.Name.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
-                            ns = new XmlNamespace(new Uri(attrib.Value, UriKind.RelativeOrAbsolute), attribTokens[1]);
+                            if (attribTokens != null && attribTokens.Length == 2)
+                            {
+                                var attribPrefix = attribTokens[1];
+                                var ns = new XmlNamespace(new Uri(attrib.Value, UriKind.RelativeOrAbsolute), attribPrefix);
+
+                                if (attribPrefix == prefix)
+                                {
+                                    primaryNamespace = ns;
+                                }
+                                else
+                                {
+                                    additionalNamespaces.Add(ns);
+                                }
+                            }
                         }
                     }
                 }
             }
 
-            if (ns == null)
+            if (primaryNamespace == null)
             {
-                ns = namespaces.Where(x => x.Prefix == prefix).FirstOrDefault();
+                primaryNamespace = namespaces.Where(x => x.Prefix == prefix).FirstOrDefault();
             }
 
-            if (ns != null)
+            if (primaryNamespace != null)
             {
-                var extension = new RssExtension(ns, name, node.OuterXml);
-                System.Diagnostics.Debug.WriteLine("ns prefix=" + ns.Prefix + " ns id=" + ns.Identifier.ToString() + " name=" + name + " content=" + node.OuterXml);
+                var extension = new RssExtension(primaryNamespace, additionalNamespaces, prefix, name, node.OuterXml);
+                //System.Diagnostics.Debug.WriteLine("ns prefix=" + primaryNamespace.Prefix + " ns id=" + primaryNamespace.Identifier.ToString() + " name=" + name + " content=" + node.OuterXml);
                 extensions.Add(extension);
             }
         }
