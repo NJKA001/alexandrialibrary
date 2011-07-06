@@ -33,6 +33,12 @@ namespace Gnosis.Core.Rss
 
         private static void AddExtension(XmlNode node, IList<IRssExtension> extensions, IList<IXmlNamespace> namespaces)
         {
+            var nameTokens = node.Name.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+            var prefix = nameTokens[0];
+            var name = nameTokens[1];
+
+            IXmlNamespace ns = null;
+
             if (node.Attributes != null)
             {
                 foreach (var attrib in node.Attributes.Cast<XmlAttribute>())
@@ -41,9 +47,23 @@ namespace Gnosis.Core.Rss
                     {
                         if (attrib.Name.Contains(':'))
                         {
+                            var attribTokens = attrib.Name.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+                            ns = new XmlNamespace(new Uri(attrib.Value, UriKind.RelativeOrAbsolute), attribTokens[1]);
                         }
                     }
                 }
+            }
+
+            if (ns == null)
+            {
+                ns = namespaces.Where(x => x.Prefix == prefix).FirstOrDefault();
+            }
+
+            if (ns != null)
+            {
+                var extension = new RssExtension(ns, name, node.OuterXml);
+                System.Diagnostics.Debug.WriteLine("ns prefix=" + ns.Prefix + " ns id=" + ns.Identifier.ToString() + " name=" + name + " content=" + node.OuterXml);
+                extensions.Add(extension);
             }
         }
 

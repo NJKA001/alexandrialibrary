@@ -116,6 +116,7 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(1, feed.Channel.Categories.Count());
             Assert.AreEqual(categoryDomain, feed.Channel.Categories.First().Domain.ToString());
             Assert.AreEqual(categoryName, feed.Channel.Categories.First().Name);
+            Assert.AreEqual(3, feed.Channel.Extensions.Count());
         }
     }
 }
