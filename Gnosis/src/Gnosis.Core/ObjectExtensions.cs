@@ -7,6 +7,7 @@ using System.Text;
 using Gnosis.Core.Ietf;
 using Gnosis.Core.Iso;
 using Gnosis.Core.UN;
+using Gnosis.Core.W3c;
 
 namespace Gnosis.Core
 {
@@ -27,6 +28,14 @@ namespace Gnosis.Core
             return (byte[])self;
         }
 
+        public static ICharacterSet ToCharacterSet(this object self)
+        {
+            if (self == null)
+                return CharacterSet.Unknown;
+
+            return CharacterSet.Parse(self.ToString());
+        }
+
         public static ICountry ToCountry(this object self)
         {
             if (self == null)
@@ -45,7 +54,15 @@ namespace Gnosis.Core
 
         public static DateTime ToDateTime(this object self)
         {
-            return DateTime.Parse(self.ToString());
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var date = DateTime.MinValue;
+            var s = self.ToString();
+            if (Rfc822DateTime.TryParse(s, out date))
+                return date;
+
+            return DateTime.Parse(s);
         }
 
         public static T ToEnum<T>(this object self)
@@ -104,6 +121,13 @@ namespace Gnosis.Core
             return ((string)self.ToString()).ToNames();
         }
 
+        public static IPicsRating ToPicsRating(this object self)
+        {
+            if (self == null)
+                return null;
+
+            return new PicsRating(self.ToString());
+        }
 
         public static IRegion ToRegion(this object self)
         {
@@ -133,7 +157,7 @@ namespace Gnosis.Core
 
         public static Uri ToUri(this object self)
         {
-            return new Uri(self.ToString());
+            return new Uri(self.ToString(), UriKind.RelativeOrAbsolute);
         }
     }
 }

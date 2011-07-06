@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
 
+using Gnosis.Core.Rss;
 using Gnosis.Core.W3c;
 
 namespace Gnosis.Core
@@ -45,7 +46,7 @@ namespace Gnosis.Core
             }
         }
 
-        public static string AsMd5Hash(this Uri location)
+        public static string ToMd5Hash(this Uri location)
         {
             try
             {
@@ -117,6 +118,53 @@ namespace Gnosis.Core
             xml.LoadXml(content);
 
             return xml;
+        }
+
+        public static IRssFeed ToRssFeed(this Uri location)
+        {
+            var contentType = location.ToContentType();
+            if (contentType.Type != MediaType.ApplicationRssXml)
+                throw new InvalidOperationException("The resource at this location is not a valid RSS feed");
+
+            IRssChannel channel = null;
+            var encoding = CharacterSet.Utf8;
+            string version = null;
+            IEnumerable<IXmlNamespace> namespaces = new List<IXmlNamespace>();
+            var styleSheets = new List<IXmlStyleSheet>();
+
+            var xml = location.ToXml();
+            foreach (var child in xml.ChildNodes.Cast<XmlNode>())
+            {
+                if (child != null)
+                {
+                    switch (child.NodeType)
+                    {
+                        case XmlNodeType.XmlDeclaration:
+                            encoding = child.ToEncoding();
+                            break;
+                        case XmlNodeType.ProcessingInstruction:
+                            var styleSheet = child.ToXmlStyleSheet();
+                            if (styleSheet != null)
+                                styleSheets.Add(styleSheet);
+                            break;
+                        case XmlNodeType.Element:
+                            if (child.Name == "rss")
+                            {
+                                version = child.ToRssVersion();
+                                namespaces = child.ToXmlNamespaces();
+                                var channelNode = child.FindChild("channel");
+                                channel = (channelNode != null) ? channelNode.ToRssChannel(namespaces) : null;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            return (channel != null) ?
+                new RssFeed(channel, encoding, version, namespaces, styleSheets)
+                : null;
         }
     }
 }

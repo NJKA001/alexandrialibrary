@@ -14,6 +14,7 @@ namespace Gnosis.Core.Rss
     public interface IRssFeed
     {
         IRssChannel Channel { get; }
+        ICharacterSet Encoding { get; }
         string Version { get; }
         IEnumerable<IXmlNamespace> Namespaces { get; }
         IEnumerable<IXmlStyleSheet> StyleSheets { get; }

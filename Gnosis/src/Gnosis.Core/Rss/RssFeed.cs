@@ -10,15 +10,17 @@ namespace Gnosis.Core.Rss
     public class RssFeed
         : IRssFeed
     {
-        public RssFeed(IRssChannel channel, string version, IEnumerable<IXmlNamespace> namespaces, IEnumerable<IXmlStyleSheet> styleSheets)
+        public RssFeed(IRssChannel channel, ICharacterSet encoding, string version, IEnumerable<IXmlNamespace> namespaces, IEnumerable<IXmlStyleSheet> styleSheets)
         {
             this.channel = channel;
+            this.encoding = encoding;
             this.version = version;
             this.namespaces = namespaces;
             this.styleSheets = styleSheets;
         }
 
         private readonly IRssChannel channel;
+        private readonly ICharacterSet encoding;
         private readonly string version;
         private readonly IEnumerable<IXmlNamespace> namespaces;
         private readonly IEnumerable<IXmlStyleSheet> styleSheets;
@@ -28,6 +30,11 @@ namespace Gnosis.Core.Rss
         public IRssChannel Channel
         {
             get { return channel; }
+        }
+
+        public ICharacterSet Encoding
+        {
+            get { return encoding; }
         }
 
         public string Version

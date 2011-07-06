@@ -76,7 +76,7 @@ namespace Gnosis.Alexandria.Models
             if (location == null)
                 return null;
 
-            var value = location.AsMd5Hash();
+            var value = location.ToMd5Hash();
 
             return (!string.IsNullOrEmpty(value)) ? new Tag(parent, SchemeMd5, value) : null;
         }

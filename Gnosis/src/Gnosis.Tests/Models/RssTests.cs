@@ -20,6 +20,8 @@ namespace Gnosis.Tests.Models
         [Test]
         public void CreateRssFeedFromLocalXml()
         {
+            #region Constants
+
             const string path = @".\Files\arstechnica.xml";
             const string version = "2.0";
             const string title = "Ars Technica";
@@ -66,6 +68,14 @@ namespace Gnosis.Tests.Models
             const string ext1Name = "link";
             const string ext1Namespace = "http://www.w3.org/2005/Atom";
 
+            const string item1Title = "Impressions from Uncharted 3: Drake's Deception's open beta ";
+            const string item1Author = "joshmcillwain@gmail.com (Josh McIllwain)";
+            const string item1MediaContentUrl = "http://static.arstechnica.net/assets/2011/06/uncharted-3-thumb-300x169-23017-f.jpg";
+            const string item1Guid = "http://arstechnica.com/gaming/news/2011/06/impressions-from-uncharted-3-drakes-deceptions-open-beta.ars?utm_source=rss&utm_medium=rss&utm_campaign=rss";
+            var item1PubDate = new DateTime(2011, 6, 29, 16, 47, 00); //Wed, 29 Jun 2011 11:47:00 -0500
+
+            #endregion
+
             var fileInfo = new FileInfo(path);
             Assert.IsTrue(fileInfo.Exists);
             
@@ -73,8 +83,7 @@ namespace Gnosis.Tests.Models
             var contentType = location.ToContentType();
             Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
             
-            var factory = new RssFeedFactory();
-            var feed = factory.Create(location);
+            var feed = location.ToRssFeed();
 
             Assert.IsNotNull(feed);
             Assert.IsNotNull(feed.Channel);
@@ -125,6 +134,21 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(ext1Prefix, feed.Channel.Extensions.First().Prefix);
             Assert.IsNotNull(feed.Channel.Extensions.First().PrimaryNamespace);
             Assert.AreEqual(ext1Namespace, feed.Channel.Extensions.First().PrimaryNamespace.Identifier.ToString());
+            Assert.AreEqual(25, feed.Channel.Items.Count());
+            var firstItem = feed.Channel.Items.First();
+            Assert.IsNotNull(firstItem);
+            Assert.AreEqual(item1Title, firstItem.Title);
+            Assert.AreEqual(item1Author, firstItem.Author);
+            Assert.IsNotNull(firstItem.Guid);
+            Assert.AreEqual(item1Guid, firstItem.Guid.Value);
+            Assert.IsFalse(firstItem.Guid.IsPermaLink);
+            Assert.AreEqual(item1PubDate, firstItem.PubDate);
+            Assert.AreEqual(5, firstItem.Categories.Count());
+            var firstMediaContentExt = firstItem.Extensions.Where(x => x.Prefix == "media" && x.Name == "content").FirstOrDefault();
+            Assert.IsNotNull(firstMediaContentExt);
+            Assert.IsTrue(firstMediaContentExt.Content.Contains(item1MediaContentUrl));
+            var lastItem = feed.Channel.Items.Last();
+            Assert.IsNotNull(lastItem);
         }
     }
 }
