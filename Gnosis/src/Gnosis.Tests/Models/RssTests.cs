@@ -62,6 +62,10 @@ namespace Gnosis.Tests.Models
             var skipHours = new List<RssHour> { RssHour.Zero, RssHour.One, RssHour.Two, RssHour.Twelve, RssHour.Thirteen, RssHour.Nineteen, RssHour.TwentyThree };
             var skipDays = new List<RssDay> { RssDay.Sunday, RssDay.Thursday, RssDay.Saturday };
 
+            const string ext1Prefix = "atom10";
+            const string ext1Name = "link";
+            const string ext1Namespace = "http://www.w3.org/2005/Atom";
+
             var fileInfo = new FileInfo(path);
             Assert.IsTrue(fileInfo.Exists);
             
@@ -117,6 +121,10 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(categoryDomain, feed.Channel.Categories.First().Domain.ToString());
             Assert.AreEqual(categoryName, feed.Channel.Categories.First().Name);
             Assert.AreEqual(3, feed.Channel.Extensions.Count());
+            Assert.AreEqual(ext1Name, feed.Channel.Extensions.First().Name);
+            Assert.AreEqual(ext1Prefix, feed.Channel.Extensions.First().Prefix);
+            Assert.IsNotNull(feed.Channel.Extensions.First().PrimaryNamespace);
+            Assert.AreEqual(ext1Namespace, feed.Channel.Extensions.First().PrimaryNamespace.Identifier.ToString());
         }
     }
 }
