@@ -5,22 +5,22 @@ using System.Text;
 
 namespace Gnosis.Core.Atom
 {
-    public interface IAtomEntry
+    public interface IAtomSource
         : IAtomCommon
     {
         IEnumerable<IAtomPerson> Authors { get; }
-        IAtomContent Content { get; }
         IAtomId Id { get; }
         IEnumerable<IAtomLink> Links { get; }
-        IAtomSummary Summary { get; }
         IAtomTitle Title { get; }
         IAtomUpdated Updated { get; }
 
         IEnumerable<IAtomCategory> Categories { get; }
         IEnumerable<IAtomPerson> Contributors { get; }
-        IAtomPublished Published { get; }
+        IAtomGenerator Generator { get; }
+        IAtomIcon Icon { get; }
+        IAtomLogo Logo { get; }
         IAtomRights Rights { get; }
-        IAtomSource Source { get; }
+        IAtomSubtitle Subtitle { get; }
         IEnumerable<IAtomExtension> Extensions { get; }
     }
 }

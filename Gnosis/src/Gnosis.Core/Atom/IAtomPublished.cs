@@ -5,10 +5,8 @@ using System.Text;
 
 namespace Gnosis.Core.Atom
 {
-    public interface IAtomPerson
+    public interface IAtomPublished
+        : IAtomDateConstruct
     {
-        string Name { get; }
-        Uri Url { get; }
-        string Email { get; }
     }
 }

@@ -8,7 +8,7 @@ namespace Gnosis.Core.Atom
     public interface IAtomTextConstruct
         : IAtomCommon
     {
+        string Text { get; }
         AtomTextType Type { get; }
-        string Content { get; }
     }
 }

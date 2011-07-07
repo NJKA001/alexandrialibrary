@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Gnosis.Core.Ietf;
+
+namespace Gnosis.Core.Atom
+{
+    public class AtomSubtitle
+        : AtomTextConstruct, IAtomSubtitle
+    {
+        public AtomSubtitle(Uri baseId, ILanguageTag lang, string text, AtomTextType type)
+            : base(baseId, lang, text, type)
+        {
+        }
+    }
+}

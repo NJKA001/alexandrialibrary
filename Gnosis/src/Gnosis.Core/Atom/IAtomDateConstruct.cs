@@ -8,6 +8,6 @@ namespace Gnosis.Core.Atom
     public interface IAtomDateConstruct
         : IAtomCommon
     {
-        DateTime Content { get; }
+        DateTime Date { get; }
     }
 }
