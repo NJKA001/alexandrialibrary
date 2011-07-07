@@ -48,6 +48,7 @@
     <Compile Include="Atom\AtomTextType.cs" />
     <Compile Include="Atom\IAtomCategory.cs" />
     <Compile Include="Atom\IAtomCommon.cs" />
+    <Compile Include="Atom\IAtomContent.cs" />
     <Compile Include="Atom\IAtomDateConstruct.cs" />
     <Compile Include="Atom\IAtomExtension.cs" />
     <Compile Include="Atom\IAtomGenerator.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Atom\IAtomLogo.cs" />
     <Compile Include="Atom\IAtomRights.cs" />
     <Compile Include="Atom\IAtomSubtitle.cs" />
+    <Compile Include="Atom\IAtomSummary.cs" />
     <Compile Include="Atom\IAtomTextConstruct.cs" />
     <Compile Include="Atom\IAtomTitle.cs" />
     <Compile Include="Atom\IAtomUpdated.cs" />

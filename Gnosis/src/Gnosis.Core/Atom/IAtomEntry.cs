@@ -7,12 +7,11 @@ namespace Gnosis.Core.Atom
 {
     public interface IAtomEntry
     {
-        string Title { get; }
-        Uri Link { get; }
-        Uri Id { get; }
-        DateTime Updated { get; }
-        string Summary { get; }
-
-        
+        IAtomTitle Title { get; }
+        IAtomLink Link { get; }
+        IAtomId Id { get; }
+        IAtomUpdated Updated { get; }
+        IAtomSummary Summary { get; }
+        IAtomContent Content { get; }
     }
 }
