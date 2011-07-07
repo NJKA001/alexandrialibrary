@@ -69,13 +69,13 @@ namespace Gnosis.Tests.Repositories
             feed.Title = "BS Report";
             feed.IconPath = new Uri("http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg");
             feed.ImagePath = new Uri("http://assets.espn.go.com/i/espnradio/podcast/bsreport_subway_300.jpg");
-            feed.AddCategory(UriExtensions.EmptyUri, "Sports", "Sports");
-            feed.AddCategory(UriExtensions.EmptyUri, "Comedy", "Comedy");
+            feed.AddCategory(Guid.Empty.ToUrn(), "Sports", "Sports");
+            feed.AddCategory(Guid.Empty.ToUrn(), "Comedy", "Comedy");
             feed.AddLink("self", new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045"), "application/xml+rss", 0, "en-us");
             feed.AddLink("alt", new Uri("http://espn.go.com/espnradio"), "text/html", 0, "en-us");
             feed.AddLink("alt", new Uri("http://espn.go.com/epsnradio?lang=es-mx"), "text/html", 0, "es-mx");
-            feed.AddMetadatum("text/plain", UriExtensions.EmptyUri, "tag", "Bill Simmons");
-            feed.AddMetadatum("application/xml", UriExtensions.EmptyUri, "marquee", "<marquee><title>BS Report</title><subtitle>with Bill Simmons</subtitle></marquee>");
+            feed.AddMetadatum("text/plain", Guid.Empty.ToUrn(), "tag", "Bill Simmons");
+            feed.AddMetadatum("application/xml", Guid.Empty.ToUrn(), "marquee", "<marquee><title>BS Report</title><subtitle>with Bill Simmons</subtitle></marquee>");
 
             var item = new FeedItem();
             item.Initialize(new EntityInitialState(feed.Id, 0));
@@ -89,8 +89,8 @@ namespace Gnosis.Tests.Repositories
             item.Title = "NBA Finals Preview (Part 1)";
             item.TitleMediaType = "text/plain";
             item.AddLink("self", new Uri("http://espn.go.com/espnradio/media/xyz1.mp3"), "audio/mpeg", 0, "en-us");
-            item.AddMetadatum("text/plain", UriExtensions.EmptyUri, "rating", "4/5");
-            item.AddMetadatum("application/xml", UriExtensions.EmptyUri, "rating", "<rating><score>4</score><max>5</max></rating>");
+            item.AddMetadatum("text/plain", Guid.Empty.ToUrn(), "rating", "4/5");
+            item.AddMetadatum("application/xml", Guid.Empty.ToUrn(), "rating", "<rating><score>4</score><max>5</max></rating>");
             feed.AddItem(item);
 
             var item2 = new FeedItem();
@@ -104,10 +104,10 @@ namespace Gnosis.Tests.Repositories
             item2.UpdatedDate = new DateTime(2011, 6, 5);
             item2.Title = "NBA Finals Preview (Part 2)";
             item2.TitleMediaType = "text/plain";
-            item2.AddCategory(UriExtensions.EmptyUri, "Basketball", "Basketball");
+            item2.AddCategory(Guid.Empty.ToUrn(), "Basketball", "Basketball");
             item2.AddLink("self", new Uri("http://espn.go.com/espnradio/media/xyz2.mp3"), "audio/mpeg", 0, "en-us");
-            item2.AddMetadatum("text/plain", UriExtensions.EmptyUri, "rating", "4/5");
-            item2.AddMetadatum("application/xml", UriExtensions.EmptyUri, "rating", "<rating><score>4</score><max>5</max></rating>");
+            item2.AddMetadatum("text/plain", Guid.Empty.ToUrn(), "rating", "4/5");
+            item2.AddMetadatum("application/xml", Guid.Empty.ToUrn(), "rating", "<rating><score>4</score><max>5</max></rating>");
             feed.AddItem(item2);
 
             return feed;
@@ -337,7 +337,7 @@ namespace Gnosis.Tests.Repositories
             var item2 = new FeedItem();
             item2.Initialize(new EntityInitialState(feed2.Id));
             var feedItem2MetadataCountSql = string.Format("select count() from FeedItem_Metadata where Parent = '{0}';", item2.Id);
-            item2.AddMetadatum("text/plain", UriExtensions.EmptyUri, "Read Me", "Here is the text content of the read me.");
+            item2.AddMetadatum("text/plain", Guid.Empty.ToUrn(), "Read Me", "Here is the text content of the read me.");
             item2.AddMetadatum("text/rtf", new Uri("file:///C:/Users/Bob/Documents/readme.rtf"), "Read Me", string.Empty);
             item2.AddMetadatum("application/msword", new Uri("file:///C:/Users/Bob/Documents/readme.doc"), "Read Me", string.Empty);
 
@@ -567,8 +567,8 @@ namespace Gnosis.Tests.Repositories
             Assert.AreEqual("CNN Feed #2", num2.Title);
             Assert.AreEqual("Some Other Talking Heads", num2.Authors);
             Assert.AreEqual("Yadda Yadda Yadda", num2.Description);
-            Assert.AreEqual(UriExtensions.EmptyUriPath, num2.ImagePath.ToString());
-            Assert.AreEqual(UriExtensions.EmptyUriPath, num2.IconPath.ToString());
+            Assert.AreEqual(Guid.Empty.ToUrn().ToString(), num2.ImagePath.ToString());
+            Assert.AreEqual(Guid.Empty.ToUrn().ToString(), num2.IconPath.ToString());
         }
 
         #endregion

@@ -83,7 +83,7 @@ namespace Gnosis.Core.W3c
                 }
                 else
                 {
-                    formats = new string[35];
+                    formats = new string[43];
 
                     // two-digit day, four-digit year patterns
                     formats[0] = "ddd',' dd MMM yyyy HH':'mm':'ss'.'fffffff zzzz";
@@ -125,10 +125,20 @@ namespace Gnosis.Core.W3c
                     formats[30] = "ddd',' d MMM yy HH':'mm':'ss'.'f zzzz";
                     formats[31] = "ddd',' d MMM yy HH':'mm':'ss zzzz";
 
+                    // full month, day, year patterns
+                    formats[32] = "MMMM dd',' yyyy HH':'mm':'ss'.'fffffff zzzz";
+                    formats[33] = "MMMM dd',' yyyy HH':'mm':'ss'.'ffffff zzzz";
+                    formats[34] = "MMMM dd',' yyyy HH':'mm':'ss'.'fffff zzzz";
+                    formats[35] = "MMMM dd',' yyyy HH':'mm':'ss'.'ffff zzzz";
+                    formats[36] = "MMMM dd',' yyyy HH':'mm':'ss'.'fff zzzz";
+                    formats[37] = "MMMM dd',' yyyy HH':'mm':'ss'.'ff zzzz";
+                    formats[38] = "MMMM dd',' yyyy HH':'mm':'ss'.'f zzzz";
+                    formats[39] = "MMMM dd',' yyyy HH':'mm':'ss zzzz";
+
                     // Fall back patterns
-                    formats[32] = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK"; // RoundtripDateTimePattern
-                    formats[33] = DateTimeFormatInfo.InvariantInfo.UniversalSortableDateTimePattern;
-                    formats[34] = DateTimeFormatInfo.InvariantInfo.SortableDateTimePattern;
+                    formats[40] = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK"; // RoundtripDateTimePattern
+                    formats[41] = DateTimeFormatInfo.InvariantInfo.UniversalSortableDateTimePattern;
+                    formats[42] = DateTimeFormatInfo.InvariantInfo.SortableDateTimePattern;
 
                     return formats;
                 }
@@ -187,7 +197,6 @@ namespace Gnosis.Core.W3c
         public static string ConvertZoneToLocalDifferential(string s)
         {
             string zoneRepresentedAsLocalDifferential = String.Empty;
-
             //------------------------------------------------------------
             //  Validate parameter
             //------------------------------------------------------------
@@ -235,6 +244,7 @@ namespace Gnosis.Core.W3c
             else if (s.EndsWith(" PDT", StringComparison.OrdinalIgnoreCase))
             {
                 zoneRepresentedAsLocalDifferential = String.Concat(s.Substring(0, (s.LastIndexOf(" PDT") + 1)), "-07:00");
+                //System.Diagnostics.Debug.WriteLine("differential=" + zoneRepresentedAsLocalDifferential);
             }
             else if (s.EndsWith(" Z", StringComparison.OrdinalIgnoreCase))
             {

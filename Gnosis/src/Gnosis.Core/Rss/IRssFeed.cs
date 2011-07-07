@@ -12,11 +12,9 @@ namespace Gnosis.Core.Rss
     /// </summary>
     /// <remarks>http://cyber.law.harvard.edu/rss/rss.html</remarks>
     public interface IRssFeed
+        : IXmlDocument
     {
         IRssChannel Channel { get; }
-        ICharacterSet Encoding { get; }
         string Version { get; }
-        IEnumerable<IXmlNamespace> Namespaces { get; }
-        IEnumerable<IXmlStyleSheet> StyleSheets { get; }
     }
 }

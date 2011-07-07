@@ -123,7 +123,7 @@ namespace Gnosis.Alexandria.Views
                                 {
                                     using (var stream = response.GetResponseStream())
                                     {
-                                        var buffer = stream.AsBuffer();
+                                        var buffer = stream.ToBuffer();
                                         var data = new ByteVector(buffer);
                                         var picture = new TagLib.Picture(data);
                                         tagController.AddPicture(track, picture);

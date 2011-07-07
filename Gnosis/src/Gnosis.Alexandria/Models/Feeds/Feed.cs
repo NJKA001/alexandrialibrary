@@ -56,13 +56,13 @@ namespace Gnosis.Alexandria.Models.Feeds
         private string contributors = string.Empty;
         private string description = string.Empty;
         private ILanguageTag language = LanguageTag.Empty;
-        private Uri originalLocation = UriExtensions.EmptyUri;
+        private Uri originalLocation = Guid.Empty.ToUrn();
         private string copyright = string.Empty;
         private DateTime publishedDate = DateTime.MinValue;
         private DateTime updatedDate = DateTime.MinValue;
         private string generator = string.Empty;
-        private Uri imagePath = UriExtensions.EmptyUri;
-        private Uri iconPath = UriExtensions.EmptyUri;
+        private Uri imagePath = Guid.Empty.ToUrn();
+        private Uri iconPath = Guid.Empty.ToUrn();
         private string feedIdentifier = string.Empty;
 
         private readonly IList<IFeedCategory> categories = new ObservableCollection<IFeedCategory>();

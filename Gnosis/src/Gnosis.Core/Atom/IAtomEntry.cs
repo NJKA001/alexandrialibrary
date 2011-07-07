@@ -12,5 +12,7 @@ namespace Gnosis.Core.Atom
         Uri Id { get; }
         DateTime Updated { get; }
         string Summary { get; }
+
+        
     }
 }

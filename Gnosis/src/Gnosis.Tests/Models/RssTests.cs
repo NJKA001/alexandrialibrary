@@ -150,5 +150,15 @@ namespace Gnosis.Tests.Models
             var lastItem = feed.Channel.Items.Last();
             Assert.IsNotNull(lastItem);
         }
+
+        [Test]
+        public void CreateRssFeedFromRemoteLocation()
+        {
+            var location = new Uri("http://search.espn.go.com/rss/bill-simmons/");
+            var feed = location.ToRssFeed();
+            Assert.IsNotNull(feed);
+            Assert.IsNotNull(feed.Channel);
+            Assert.IsTrue(feed.Channel.Items.Count() > 1);
+        }
     }
 }

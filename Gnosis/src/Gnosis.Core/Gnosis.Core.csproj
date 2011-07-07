@@ -43,13 +43,32 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Atom\AtomCommon.cs" />
+    <Compile Include="Atom\AtomTextConstruct.cs" />
+    <Compile Include="Atom\AtomTextType.cs" />
+    <Compile Include="Atom\IAtomCategory.cs" />
+    <Compile Include="Atom\IAtomCommon.cs" />
+    <Compile Include="Atom\IAtomDateConstruct.cs" />
+    <Compile Include="Atom\IAtomExtension.cs" />
+    <Compile Include="Atom\IAtomGenerator.cs" />
+    <Compile Include="Atom\IAtomIcon.cs" />
+    <Compile Include="Atom\IAtomId.cs" />
+    <Compile Include="Atom\IAtomLink.cs" />
+    <Compile Include="Atom\IAtomLogo.cs" />
+    <Compile Include="Atom\IAtomRights.cs" />
+    <Compile Include="Atom\IAtomSubtitle.cs" />
+    <Compile Include="Atom\IAtomTextConstruct.cs" />
+    <Compile Include="Atom\IAtomTitle.cs" />
+    <Compile Include="Atom\IAtomUpdated.cs" />
     <Compile Include="ByteArrayExtensions.cs" />
+    <Compile Include="DebugExtensions.cs" />
     <Compile Include="CharExtensions.cs" />
-    <Compile Include="DateTimeExtensions.cs" />
+    <Compile Include="CollectionExtensions.cs" />
     <Compile Include="Atom\IAtomEntry.cs" />
     <Compile Include="Atom\IAtomFeed.cs" />
     <Compile Include="Atom\IAtomPerson.cs" />
     <Compile Include="FileInfoExtensions.cs" />
+    <Compile Include="GuidExtensions.cs" />
     <Compile Include="Id3\IId3Tag.cs" />
     <Compile Include="Ietf\ILanguageTag.cs" />
     <Compile Include="Ietf\LanguageTag.cs" />
@@ -100,6 +119,7 @@
     <Compile Include="W3c\IContentType.cs" />
     <Compile Include="W3c\IMedia.cs" />
     <Compile Include="W3c\IMediaType.cs" />
+    <Compile Include="W3c\IXmlDocument.cs" />
     <Compile Include="W3c\IXmlNamespace.cs" />
     <Compile Include="W3c\IPicsRating.cs" />
     <Compile Include="W3c\IXmlStyleSheet.cs" />

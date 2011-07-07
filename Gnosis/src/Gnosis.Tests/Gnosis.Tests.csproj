@@ -58,6 +58,7 @@
     <Compile Include="Models\MediaTests.cs" />
     <Compile Include="Models\MediaTypeTests.cs" />
     <Compile Include="Models\RegionTests.cs" />
+    <Compile Include="Models\Rfc822DateTimeTests.cs" />
     <Compile Include="Models\RssTests.cs" />
     <Compile Include="Models\ScriptTests.cs" />
     <Compile Include="Models\TrackTests.cs" />

@@ -163,12 +163,12 @@ namespace Gnosis.Core.W3c
                     return ContentType.Empty;
 
                 var fileInfo = new FileInfo(location.LocalPath);
-                var header = fileInfo.GetHeader();
+                var header = fileInfo.ToHeader();
                 mediaType = MediaType.GetMediaTypeByMagicNumber(header);
                 if (mediaType != MediaType.ApplicationUnknown)
                     return new ContentType(mediaType);
 
-                var extension = location.ToExtension();
+                var extension = location.ToFileExtension();
                 if (!string.IsNullOrEmpty(extension))
                 {
                     mediaType = MediaType.GetMediaTypesByFileExtension(extension).FirstOrDefault();
@@ -223,12 +223,12 @@ namespace Gnosis.Core.W3c
             }
             else
             {
-                var header = response.GetResponseStream().GetHeader();
+                var header = response.GetResponseStream().ToHeader();
                 mediaType = MediaType.GetMediaTypeByMagicNumber(header);
                 if (mediaType != MediaType.ApplicationUnknown)
                     return new ContentType(mediaType, charSet, boundary);
 
-                var extension = location.ToExtension();
+                var extension = location.ToFileExtension();
                 if (!string.IsNullOrEmpty(extension))
                 {
                     mediaType = MediaType.GetMediaTypesByFileExtension(extension).FirstOrDefault();

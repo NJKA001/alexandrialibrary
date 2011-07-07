@@ -9,17 +9,76 @@ namespace Gnosis.Core
 {
     public static class StreamExtensions
     {
-        //public static void CopyTo(this Stream input, Stream output)
-        //{
-        //    byte[] buffer = new byte[32768];
-        //    var read = 0;
-        //    while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
-        //        output.Write(buffer, 0, read);
-        //}
-
-        public static byte[] GetHeader(this Stream self)
+        public static void Copy(this Stream self, Stream target)
         {
-            const int headerSize = 20;
+            self.Copy(target, 65536);
+        }
+
+        public static void Copy(this Stream self, Stream target, int blockSize)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+            if (target == null)
+                throw new ArgumentNullException("target");
+            if (blockSize <= 0)
+                throw new ArgumentException("blockSize must be greater than zero");
+
+            int read;
+            byte[] buffer = new byte[blockSize];
+            while ((read = self.Read(buffer, 0, blockSize)) > 0)
+            {
+                target.Write(buffer, 0, read);
+            }
+        }
+
+        public static void SaveToFile(this Stream self, string fileName)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+            if (fileName == null)
+                throw new ArgumentNullException("fileName");
+
+            using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                self.Copy(fs);
+                fs.Flush();
+                fs.Close();
+            }
+        }
+
+        public static byte[] ToBuffer(this Stream self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var memoryStream = new MemoryStream();
+            self.CopyTo(memoryStream);
+            return memoryStream.GetBuffer();
+        }
+
+        public static string ToContentString(this Stream self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            using (var reader = new StreamReader(self))
+            {
+                return reader.ReadToEnd();
+            }
+        }
+
+        public static byte[] ToHeader(this Stream self)
+        {
+            return self.ToHeader(20);
+        }
+
+        public static byte[] ToHeader(this Stream self, int headerSize)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+            if (headerSize <= 0)
+                throw new ArgumentException("headerSize must be greater than zero");
+
             var header = new byte[headerSize];
 
             self.Read(header, 0, headerSize);
@@ -27,60 +86,20 @@ namespace Gnosis.Core
             return header;
         }
 
-        public static byte[] AsBuffer(this Stream input)
+        public static string ToMd5Hash(this Stream self)
         {
-            var memoryStream = new MemoryStream();
-            input.CopyTo(memoryStream);
-            return memoryStream.GetBuffer();
-        }
+            if (self == null)
+                throw new ArgumentNullException("self");
 
-        public static string AsMd5Hash(this Stream stream)
-        {
             var md5 = new MD5CryptoServiceProvider();
-            var retVal = md5.ComputeHash(stream);
-            
+            var retVal = md5.ComputeHash(self);
+
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < retVal.Length; i++)
             {
                 sb.Append(retVal[i].ToString("x2"));
             }
             return sb.ToString();
-        }
-
-        public static void Copy(this Stream source, Stream target, int blockSize)
-        {
-            int read;
-            byte[] buffer = new byte[blockSize];
-            while ((read = source.Read(buffer, 0, blockSize)) > 0)
-            {
-                target.Write(buffer, 0, read);
-            }
-        }
-
-        public static void BlockCopy(this Stream source, Stream target, int blockSize = 65536)
-        {
-            source.Copy(target, blockSize);
-        }
-
-        public static void SaveToFile(this Stream source, string fileName)
-        {
-            using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None))
-            {
-                source.BlockCopy(fs);
-                fs.Flush();
-                fs.Close();
-            }
-        }
-
-        public static string ToContentString(this Stream self)
-        {
-            if (self == null)
-                return null;
-
-            using (var reader = new StreamReader(self))
-            {
-                return reader.ReadToEnd();
-            }
         }
     }
 }

@@ -8,12 +8,19 @@ namespace Gnosis.Core
 {
     public static class FileInfoExtensions
     {
-        public static byte[] GetHeader(this FileInfo self)
+        public static byte[] ToHeader(this FileInfo self)
         {
-            const int headerSize = 20;
+            return self.ToHeader(20);
+        }
 
-            if (self == null || !self.Exists || self.Length < headerSize)
-                return null;
+        public static byte[] ToHeader(this FileInfo self, int headerSize)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+            if (headerSize <= 0)
+                throw new ArgumentException("headerSize must be greater than zero");
+            if (!self.Exists || self.Length < headerSize)
+                throw new ArgumentException("file must exist and have a length greater than headerSize");
 
             var header = new byte[headerSize];
 

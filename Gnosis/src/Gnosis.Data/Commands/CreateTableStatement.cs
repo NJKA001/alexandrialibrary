@@ -385,7 +385,7 @@ namespace Gnosis.Data.Commands
                     {
                         if (property.PropertyType.IsTimeStampType())
                         {
-                            dataTypeInstance = new TimeStamp(UriExtensions.EmptyUri);
+                            dataTypeInstance = new TimeStamp(Guid.Empty.ToUrn());
                         }
                     }
 

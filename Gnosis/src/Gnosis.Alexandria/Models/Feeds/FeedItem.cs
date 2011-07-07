@@ -52,7 +52,7 @@ namespace Gnosis.Alexandria.Models.Feeds
         private string summary = string.Empty;
         private string content = string.Empty;
         private string contentMediaType = "text/plain";
-        private Uri contentLocation = UriExtensions.EmptyUri;
+        private Uri contentLocation = Guid.Empty.ToUrn();
         private DateTime updatedDate = new DateTime(2000, 1, 1);
         private string feedItemIdentifier = string.Empty;
 
