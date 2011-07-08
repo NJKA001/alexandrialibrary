@@ -6,6 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Atom
 {
     public interface IAtomPerson
+        : IAtomCommon
     {
         string Name { get; }
         Uri Uri { get; }

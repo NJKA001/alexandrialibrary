@@ -8,6 +8,6 @@ namespace Gnosis.Core.Atom
     public interface IAtomIcon
         : IAtomCommon
     {
-        Uri Location { get; }
+        Uri Uri { get; }
     }
 }

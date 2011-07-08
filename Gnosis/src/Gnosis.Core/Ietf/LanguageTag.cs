@@ -90,6 +90,23 @@ namespace Gnosis.Core.Ietf
 
         #endregion
 
+        public override bool Equals(object obj)
+        {
+            if (object.ReferenceEquals(obj, null))
+                return false;
+
+            var lang = obj as ILanguageTag;
+            if (lang == null)
+                return false;
+
+            return this == lang;
+        }
+
+        public override int GetHashCode()
+        {
+            return ToString().GetHashCode();
+        }
+
         public override string ToString()
         {
             if (primaryLanguage == Language.Undetermined)
@@ -130,6 +147,22 @@ namespace Gnosis.Core.Ietf
                 builder.AppendFormat(alphaFormat, privateUse);
 
             return builder.ToString();
+        }
+
+        public static bool operator ==(LanguageTag lang1, ILanguageTag lang2)
+        {
+            if (object.ReferenceEquals(lang1, lang2))
+                return true;
+
+            if (object.ReferenceEquals(lang1, null) || object.ReferenceEquals(lang2, null))
+                return false;
+
+            return lang1.ToString() == lang2.ToString();
+        }
+
+        public static bool operator !=(LanguageTag lang1, ILanguageTag lang2)
+        {
+            return !(lang1 == lang2);
         }
 
         static LanguageTag()

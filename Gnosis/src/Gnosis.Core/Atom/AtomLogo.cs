@@ -10,19 +10,19 @@ namespace Gnosis.Core.Atom
     public class AtomLogo
         : AtomCommon, IAtomLogo
     {
-        public AtomLogo(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, Uri location)
+        public AtomLogo(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, Uri uri)
             : base(baseId, lang, extensions)
         {
-            this.location = location;
+            this.uri = uri;
         }
 
-        private readonly Uri location;
+        private readonly Uri uri;
 
         #region IAtomLogo Members
 
-        public Uri Location
+        public Uri Uri
         {
-            get { return location; }
+            get { return uri; }
         }
 
         #endregion

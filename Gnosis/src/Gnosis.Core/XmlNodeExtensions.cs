@@ -11,17 +11,53 @@ namespace Gnosis.Core
 {
     public static class XmlNodeExtensions
     {
-        public static XmlAttribute FindAttribute(this XmlNode node, string name)
+        public static XmlAttribute FindAttribute(this XmlNode self, string name)
         {
-            return (node != null && node.Attributes != null && !string.IsNullOrEmpty(name)) ?
-                node.Attributes.Cast<XmlAttribute>().Where(x => x.Name == name).FirstOrDefault()
+            return (self != null && self.Attributes != null && !string.IsNullOrEmpty(name)) ?
+                self.Attributes.Cast<XmlAttribute>().Where(attrib => attrib != null && attrib.Name == name).FirstOrDefault()
                 : null;
         }
 
-        public static XmlNode FindChild(this XmlNode node, string name)
+        public static XmlNode FindChild(this XmlNode self, string name)
         {
-            return (node != null && !string.IsNullOrEmpty(name)) ?
-                node.ChildNodes.Cast<XmlNode>().Where(x => x.Name == name).FirstOrDefault()
+            return (self != null && !string.IsNullOrEmpty(name)) ?
+                self.ChildNodes.Cast<XmlNode>().Where(node => node != null && node.Name == name).FirstOrDefault()
+                : null;
+        }
+
+        public static string GetAttributeString(this XmlNode self, string name)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var attrib = self.FindAttribute(name);
+
+            return attrib != null ?
+                attrib.Value
+                : null;
+        }
+
+        public static IMediaType GetAttributeMediaType(this XmlNode self, string name)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var attrib = self.FindAttribute(name);
+
+            return (attrib != null && attrib.Value != null) ?
+                MediaType.Parse(attrib.Value)
+                : null;
+        }
+
+        public static Uri GetAttributeUri(this XmlNode self, string name)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var attrib = self.FindAttribute(name);
+
+            return (attrib != null && attrib.Value != null) ?
+                attrib.Value.ToUri()
                 : null;
         }
 
