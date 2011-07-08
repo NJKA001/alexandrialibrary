@@ -21,7 +21,39 @@ namespace Gnosis.Core
             if (contentType.Type != MediaType.ApplicationAtomXml)
                 throw new InvalidOperationException("The resource at this location is not a valid Atom feed");
 
-            return null;
+            IAtomFeed feed = null;
+            var encoding = CharacterSet.Utf8;
+            IEnumerable<IXmlNamespace> namespaces = new List<IXmlNamespace>();
+            var styleSheets = new List<IXmlStyleSheet>();
+
+            var xml = location.ToXml();
+            foreach (var child in xml.ChildNodes.Cast<XmlNode>())
+            {
+                if (child == null)
+                    continue;
+
+                switch (child.NodeType)
+                {
+                    case XmlNodeType.XmlDeclaration:
+                        encoding = child.ToEncoding();
+                        break;
+                    case XmlNodeType.ProcessingInstruction:
+                        styleSheets.AddIfNotNull(child.ToXmlStyleSheet());
+                        break;
+                    case XmlNodeType.Element:
+                        System.Diagnostics.Debug.WriteLine("node name=" + child.Name);
+                        if (child.Name != "feed")
+                            break;
+
+                        namespaces = child.ToXmlNamespaces();
+                        feed = child.ToAtomFeed(encoding, namespaces, styleSheets);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return feed;
         }
 
         public static IContentType ToContentType(this Uri location)
@@ -104,8 +136,8 @@ namespace Gnosis.Core
                 throw new InvalidOperationException("The resource at this location is not a valid RSS feed");
 
             IRssChannel channel = null;
-            var encoding = CharacterSet.Utf8;
             string version = null;
+            var encoding = CharacterSet.Utf8;
             IEnumerable<IXmlNamespace> namespaces = new List<IXmlNamespace>();
             var styleSheets = new List<IXmlStyleSheet>();
 

@@ -8,7 +8,7 @@ namespace Gnosis.Core.Atom
     public interface IAtomPerson
     {
         string Name { get; }
-        Uri Url { get; }
+        Uri Uri { get; }
         string Email { get; }
     }
 }

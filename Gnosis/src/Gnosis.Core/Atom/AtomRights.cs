@@ -10,8 +10,8 @@ namespace Gnosis.Core.Atom
     public class AtomRights
         : AtomTextConstruct, IAtomRights
     {
-        public AtomRights(Uri baseId, ILanguageTag lang, string text, AtomTextType type)
-            : base(baseId, lang, text, type)
+        public AtomRights(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, string text, AtomTextType type)
+            : base(baseId, lang, extensions, text, type)
         {
         }
     }

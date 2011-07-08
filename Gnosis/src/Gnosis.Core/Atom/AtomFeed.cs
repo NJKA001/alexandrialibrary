@@ -11,8 +11,8 @@ namespace Gnosis.Core.Atom
     public class AtomFeed
         : AtomCommon, IAtomFeed
     {
-        public AtomFeed(ICharacterSet encoding, IEnumerable<IXmlNamespace> namespaces, IEnumerable<IXmlStyleSheet> styleSheets, Uri baseId, ILanguageTag lang, IEnumerable<IAtomPerson> authors, IAtomId id, IEnumerable<IAtomLink> links, IAtomTitle title, IAtomUpdated updated, IEnumerable<IAtomCategory> categories, IEnumerable<IAtomPerson> contributors, IEnumerable<IAtomEntry> entries, IAtomGenerator generator, IAtomIcon icon, IAtomLogo logo, IAtomRights rights, IAtomSubtitle subtitle, IEnumerable<IAtomExtension> extensions)
-            : base(baseId, lang)
+        public AtomFeed(ICharacterSet encoding, IEnumerable<IXmlNamespace> namespaces, IEnumerable<IXmlStyleSheet> styleSheets, Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, IEnumerable<IAtomPerson> authors, IAtomId id, IEnumerable<IAtomLink> links, IAtomTitle title, IAtomUpdated updated, IEnumerable<IAtomCategory> categories, IEnumerable<IAtomPerson> contributors, IEnumerable<IAtomEntry> entries, IAtomGenerator generator, IAtomIcon icon, IAtomLogo logo, IAtomRights rights, IAtomSubtitle subtitle)
+            : base(baseId, lang, extensions)
         {
             this.encoding = encoding;
             this.namespaces = namespaces;
@@ -31,7 +31,6 @@ namespace Gnosis.Core.Atom
             this.logo = logo;
             this.rights = rights;
             this.subtitle = subtitle;
-            this.extensions = extensions;
         }
 
         private readonly ICharacterSet encoding;
@@ -51,7 +50,6 @@ namespace Gnosis.Core.Atom
         private readonly IAtomLogo logo;
         private readonly IAtomRights rights;
         private readonly IAtomSubtitle subtitle;
-        private readonly IEnumerable<IAtomExtension> extensions;
 
         #region IAtomFeed Members
 
@@ -118,11 +116,6 @@ namespace Gnosis.Core.Atom
         public IAtomSubtitle Subtitle
         {
             get { return subtitle; }
-        }
-
-        public IEnumerable<IAtomExtension> Extensions
-        {
-            get { return extensions; }
         }
 
         #endregion

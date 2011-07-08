@@ -11,8 +11,8 @@ namespace Gnosis.Core.Atom
     public class AtomLink
         : AtomCommon, IAtomLink
     {
-        public AtomLink(Uri baseId, ILanguageTag lang, Uri href, string rel, IMediaType type, ILanguageTag hrefLang, string title, int length)
-            : base(baseId, lang)
+        public AtomLink(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, Uri href, string rel, IMediaType type, ILanguageTag hrefLang, string title, int length)
+            : base(baseId, lang, extensions)
         {
             this.href = href;
             this.rel = rel;

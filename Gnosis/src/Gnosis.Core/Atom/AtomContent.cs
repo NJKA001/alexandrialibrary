@@ -11,8 +11,8 @@ namespace Gnosis.Core.Atom
     public class AtomContent
         : AtomTextConstruct, IAtomContent
     {
-        public AtomContent(Uri baseId, ILanguageTag lang, string text, AtomTextType type, IMediaType mediaType, Uri src)
-            : base(baseId, lang, text, type)
+        public AtomContent(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, string text, AtomTextType type, IMediaType mediaType, Uri src)
+            : base(baseId, lang, extensions, text, type)
         {
             this.mediaType = mediaType;
             this.src = src;

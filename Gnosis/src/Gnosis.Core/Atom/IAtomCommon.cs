@@ -11,5 +11,6 @@ namespace Gnosis.Core.Atom
     {
         Uri BaseId { get; }
         ILanguageTag Lang { get; }
+        IEnumerable<IAtomExtension> Extensions { get; }
     }
 }

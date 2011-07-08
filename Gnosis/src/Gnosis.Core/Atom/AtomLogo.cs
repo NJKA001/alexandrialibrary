@@ -10,8 +10,8 @@ namespace Gnosis.Core.Atom
     public class AtomLogo
         : AtomCommon, IAtomLogo
     {
-        public AtomLogo(Uri baseId, ILanguageTag lang, Uri location)
-            : base(baseId, lang)
+        public AtomLogo(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, Uri location)
+            : base(baseId, lang, extensions)
         {
             this.location = location;
         }

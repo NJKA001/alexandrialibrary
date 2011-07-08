@@ -10,8 +10,8 @@ namespace Gnosis.Core.Atom
     public class AtomSubtitle
         : AtomTextConstruct, IAtomSubtitle
     {
-        public AtomSubtitle(Uri baseId, ILanguageTag lang, string text, AtomTextType type)
-            : base(baseId, lang, text, type)
+        public AtomSubtitle(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, string text, AtomTextType type)
+            : base(baseId, lang, extensions, text, type)
         {
         }
     }

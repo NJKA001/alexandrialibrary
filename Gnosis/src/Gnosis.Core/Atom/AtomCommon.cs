@@ -10,14 +10,16 @@ namespace Gnosis.Core.Atom
     public abstract class AtomCommon
         : IAtomCommon
     {
-        protected AtomCommon(Uri baseId, ILanguageTag lang)
+        protected AtomCommon(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions)
         {
             this.baseId = baseId;
             this.lang = lang;
+            this.extensions = extensions;
         }
 
         private readonly Uri baseId;
         private readonly ILanguageTag lang;
+        private readonly IEnumerable<IAtomExtension> extensions;
 
         #region IAtomCommon Members
 
@@ -29,6 +31,11 @@ namespace Gnosis.Core.Atom
         public ILanguageTag  Lang
         {
 	        get { return lang; }
+        }
+
+        public IEnumerable<IAtomExtension> Extensions
+        {
+            get { return extensions; }
         }
 
         #endregion

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
+using Gnosis.Core.Ietf;
 using Gnosis.Core.W3c;
 
 namespace Gnosis.Core
@@ -33,6 +34,28 @@ namespace Gnosis.Core
             var encoding = declaration.Encoding.ToCharacterSet();
 
             return (encoding != CharacterSet.Unknown) ? encoding : CharacterSet.Utf8;
+        }
+
+        public static Uri ToXmlBase(this XmlNode self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var attrib = self.FindAttribute("xml:base");
+            return (attrib != null && attrib.Value != null) ?
+                new Uri(attrib.Value)
+                : null;
+        }
+
+        public static ILanguageTag ToXmlLang(this XmlNode self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var attrib = self.FindAttribute("xml:lang");
+            return (attrib != null && attrib.Value != null) ?
+                LanguageTag.Parse(attrib.Value)
+                : null;
         }
 
         public static IEnumerable<IXmlNamespace> ToXmlNamespaces(this XmlNode node)

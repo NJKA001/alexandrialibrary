@@ -10,8 +10,8 @@ namespace Gnosis.Core.Atom
     public class AtomEntry
         : AtomCommon, IAtomEntry
     {
-        public AtomEntry(Uri baseId, ILanguageTag lang, IEnumerable<IAtomPerson> authors, IAtomContent content, IAtomId id, IEnumerable<IAtomLink> links, IAtomSummary summary, IAtomTitle title, IAtomUpdated updated, IEnumerable<IAtomCategory> categories, IEnumerable<IAtomPerson> contributors, IAtomPublished published, IAtomRights rights, IAtomSource source, IEnumerable<IAtomExtension> extensions)
-            : base(baseId, lang)
+        public AtomEntry(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, IEnumerable<IAtomPerson> authors, IAtomContent content, IAtomId id, IEnumerable<IAtomLink> links, IAtomSummary summary, IAtomTitle title, IAtomUpdated updated, IEnumerable<IAtomCategory> categories, IEnumerable<IAtomPerson> contributors, IAtomPublished published, IAtomRights rights, IAtomSource source)
+            : base(baseId, lang, extensions)
         {
             this.authors = authors;
             this.content = content;
@@ -25,7 +25,6 @@ namespace Gnosis.Core.Atom
             this.published = published;
             this.rights = rights;
             this.source = source;
-            this.extensions = extensions;
         }
 
         private readonly IEnumerable<IAtomPerson> authors;
@@ -40,7 +39,6 @@ namespace Gnosis.Core.Atom
         private readonly IAtomPublished published;
         private readonly IAtomRights rights;
         private readonly IAtomSource source;
-        private readonly IEnumerable<IAtomExtension> extensions;
 
         #region IAtomEntry Members
 
@@ -102,11 +100,6 @@ namespace Gnosis.Core.Atom
         public IAtomSource Source
         {
             get { return source; }
-        }
-
-        public IEnumerable<IAtomExtension> Extensions
-        {
-            get { return extensions; }
         }
 
         #endregion

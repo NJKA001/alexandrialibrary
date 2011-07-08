@@ -10,8 +10,8 @@ namespace Gnosis.Core.Atom
     public class AtomUpdated
         : AtomDateConstruct, IAtomUpdated
     {
-        public AtomUpdated(Uri baseId, ILanguageTag lang, DateTime date)
-            : base(baseId, lang, date)
+        public AtomUpdated(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, DateTime date)
+            : base(baseId, lang, extensions, date)
         {
         }
     }

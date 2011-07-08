@@ -28,6 +28,5 @@ namespace Gnosis.Core.Atom
         IAtomLogo Logo { get; }
         IAtomRights Rights { get; }
         IAtomSubtitle Subtitle { get; }
-        IEnumerable<IAtomExtension> Extensions { get; }
     }
 }

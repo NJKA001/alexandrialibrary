@@ -65,6 +65,7 @@
     <Compile Include="Atom\AtomTextType.cs" />
     <Compile Include="Atom\AtomTitle.cs" />
     <Compile Include="Atom\AtomUpdated.cs" />
+    <Compile Include="Atom\AtomXmlNodeExtensions.cs" />
     <Compile Include="Atom\IAtomCategory.cs" />
     <Compile Include="Atom\IAtomCommon.cs" />
     <Compile Include="Atom\IAtomContent.cs" />

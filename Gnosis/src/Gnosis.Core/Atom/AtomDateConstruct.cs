@@ -10,8 +10,8 @@ namespace Gnosis.Core.Atom
     public abstract class AtomDateConstruct
         : AtomCommon, IAtomDateConstruct
     {
-        protected AtomDateConstruct(Uri baseId, ILanguageTag lang, DateTime date)
-            : base(baseId, lang)
+        protected AtomDateConstruct(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, DateTime date)
+            : base(baseId, lang, extensions)
         {
             this.date = date;
         }

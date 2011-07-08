@@ -21,6 +21,5 @@ namespace Gnosis.Core.Atom
         IAtomPublished Published { get; }
         IAtomRights Rights { get; }
         IAtomSource Source { get; }
-        IEnumerable<IAtomExtension> Extensions { get; }
     }
 }

@@ -10,16 +10,16 @@ namespace Gnosis.Core.Atom
     public class AtomPerson
         : AtomCommon, IAtomPerson
     {
-        public AtomPerson(Uri baseId, ILanguageTag lang, string name, Uri url, string email)
-            : base(baseId, lang)
+        public AtomPerson(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, string name, Uri uri, string email)
+            : base(baseId, lang, extensions)
         {
             this.name = name;
-            this.url = url;
+            this.uri = uri;
             this.email = email;
         }
 
         private readonly string name;
-        private readonly Uri url;
+        private readonly Uri uri;
         private readonly string email;
 
         #region IAtomPerson Members
@@ -29,9 +29,9 @@ namespace Gnosis.Core.Atom
             get { return name; }
         }
 
-        public Uri Url
+        public Uri Uri
         {
-            get { return url; }
+            get { return uri; }
         }
 
         public string Email

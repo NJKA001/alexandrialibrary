@@ -10,8 +10,8 @@ namespace Gnosis.Core.Atom
     public class AtomGenerator
         : AtomCommon, IAtomGenerator
     {
-        public AtomGenerator(Uri baseId, ILanguageTag lang, string name, Uri uri, string version)
-            : base(baseId, lang)
+        public AtomGenerator(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, string name, Uri uri, string version)
+            : base(baseId, lang, extensions)
         {
             this.name = name;
             this.uri = uri;

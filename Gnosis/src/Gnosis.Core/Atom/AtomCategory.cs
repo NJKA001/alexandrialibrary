@@ -10,8 +10,8 @@ namespace Gnosis.Core.Atom
     public class AtomCategory
         : AtomCommon, IAtomCategory
     {
-        public AtomCategory(Uri baseId, ILanguageTag lang, string term, Uri scheme, string label)
-            : base(baseId, lang)
+        public AtomCategory(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, string term, Uri scheme, string label)
+            : base(baseId, lang, extensions)
         {
             this.term = term;
             this.scheme = scheme;
