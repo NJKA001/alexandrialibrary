@@ -79,7 +79,7 @@ namespace Gnosis.Core.Atom
         {
             Uri baseId = self.ToXmlBase();
             ILanguageTag lang = self.ToXmlLang();
-            IList<IAtomPerson> authors = new List<IAtomPerson>();
+            IEnumerable<IAtomPerson> authors = self.ToAtomPeople(namespaces, "author");
             IAtomId id = null;
             IList<IAtomLink> links = new List<IAtomLink>();
             IAtomTitle title = null;
@@ -101,9 +101,6 @@ namespace Gnosis.Core.Atom
 
                 switch (child.Name)
                 {
-                    case "author":
-                        authors.AddIfNotNull(child.ToAtomPerson(namespaces));
-                        break;
                     case "id":
                         id = child.ToAtomId(namespaces);
                         break;
@@ -118,6 +115,19 @@ namespace Gnosis.Core.Atom
             return (id != null && title != null) ?
                 new AtomFeed(encoding, namespaces, styleSheets, baseId, lang, extensions, authors, id, links, title, updated, categories, contributors, entries, generator, icon, logo, rights, subtitle)
                 : null;
+        }
+
+        private static IEnumerable<IAtomPerson> ToAtomPeople(this XmlNode self, IEnumerable<IXmlNamespace> namespaces, string name)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var people = new List<IAtomPerson>();
+
+            foreach (var child in self.ChildNodes.Cast<XmlNode>().Where(node => node != null && node.Name == name))
+                people.AddIfNotNull(child.ToAtomPerson(namespaces));
+
+            return people;
         }
 
         public static IAtomPerson ToAtomPerson(this XmlNode self, IEnumerable<IXmlNamespace> namespaces)

@@ -27,6 +27,8 @@ namespace Gnosis.Tests.Models
             const string authorUri = "http://www.blogger.com/profile/06751101786776663258";
             const string authorEmail = "noreply@blogger.com";
 
+            var feedLang = LanguageTag.Parse("en-GB");
+
             #endregion
 
             var fileInfo = new FileInfo(path);
@@ -39,14 +41,20 @@ namespace Gnosis.Tests.Models
             var feed = location.ToAtomFeed();
 
             Assert.IsNotNull(feed);
-            Assert.IsNotNull(feed.Title);
-            Assert.AreEqual(title, feed.Title.Text);
-            Assert.AreEqual(1, feed.StyleSheets.Count());
+            Assert.IsNotNull(feed.Lang);
+            Assert.AreEqual(feedLang.PrimaryLanguage, feed.Lang.PrimaryLanguage);
+            Assert.AreEqual(feedLang.Country, feed.Lang.Country);
             Assert.AreEqual(4, feed.Namespaces.Count());
+            Assert.IsNotNull(feed.Namespaces.Last());
+            Assert.AreEqual(1, feed.StyleSheets.Count());
+            Assert.IsNotNull(feed.StyleSheets.First());
+            
             Assert.AreEqual(1, feed.Authors.Count());
             Assert.AreEqual(authorName, feed.Authors.First().Name);
             Assert.AreEqual(authorUri, feed.Authors.First().Uri.ToString());
             Assert.AreEqual(authorEmail, feed.Authors.First().Email);
+            Assert.IsNotNull(feed.Title);
+            Assert.AreEqual(title, feed.Title.Text);
         }
     }
 }

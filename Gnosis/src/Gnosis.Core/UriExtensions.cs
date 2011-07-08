@@ -41,7 +41,6 @@ namespace Gnosis.Core
                         styleSheets.AddIfNotNull(child.ToXmlStyleSheet());
                         break;
                     case XmlNodeType.Element:
-                        System.Diagnostics.Debug.WriteLine("node name=" + child.Name);
                         if (child.Name != "feed")
                             break;
 
