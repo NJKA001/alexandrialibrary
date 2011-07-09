@@ -6,8 +6,9 @@ using System.Text;
 namespace Gnosis.Core.VCard
 {
     /// <summary>
-    /// Defines a vCard based on IETF standard RFC 2426 
+    /// Defines a vCard based on version 3.0 of IETF RFC 2426 
     /// </summary>
+    /// <remarks>http://www.ietf.org/rfc/rfc2426.txt</remarks>
     public interface IVCard
     {
         string Version { get; }
