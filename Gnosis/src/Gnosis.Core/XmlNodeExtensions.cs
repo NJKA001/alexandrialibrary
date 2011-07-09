@@ -25,6 +25,32 @@ namespace Gnosis.Core
                 : null;
         }
 
+        public static int GetAttributeInt32(this XmlNode self, string name)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var attrib = self.FindAttribute(name);
+
+            var number = 0;
+            if (attrib != null)
+                int.TryParse(attrib.Value, out number);
+
+            return number;
+        }
+
+        public static ILanguageTag GetAttributeLanguageTag(this XmlNode self, string name)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var attrib = self.FindAttribute(name);
+
+            return attrib != null ?
+                LanguageTag.Parse(attrib.Value)
+                : null;
+        }
+
         public static string GetAttributeString(this XmlNode self, string name)
         {
             if (self == null)

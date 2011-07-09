@@ -27,11 +27,8 @@ namespace Gnosis.Core
             var styleSheets = new List<IXmlStyleSheet>();
 
             var xml = location.ToXml();
-            foreach (var child in xml.ChildNodes.Cast<XmlNode>())
+            foreach (var child in xml.ChildNodes.Cast<XmlNode>().Where(node => node != null))
             {
-                if (child == null)
-                    continue;
-
                 switch (child.NodeType)
                 {
                     case XmlNodeType.XmlDeclaration:
@@ -134,18 +131,14 @@ namespace Gnosis.Core
             if (contentType.Type != MediaType.ApplicationRssXml)
                 throw new InvalidOperationException("The resource at this location is not a valid RSS feed");
 
-            IRssChannel channel = null;
-            string version = null;
+            IRssFeed feed = null;
             var encoding = CharacterSet.Utf8;
             IEnumerable<IXmlNamespace> namespaces = new List<IXmlNamespace>();
             var styleSheets = new List<IXmlStyleSheet>();
 
             var xml = location.ToXml();
-            foreach (var child in xml.ChildNodes.Cast<XmlNode>())
+            foreach (var child in xml.ChildNodes.Cast<XmlNode>().Where(node => node != null))
             {
-                if (child == null)
-                    continue;
-
                 switch (child.NodeType)
                 {
                     case XmlNodeType.XmlDeclaration:
@@ -158,18 +151,15 @@ namespace Gnosis.Core
                         if (child.Name != "rss")
                             break;
 
-                        version = child.ToRssVersion();
                         namespaces = child.ToXmlNamespaces();
-                        channel = child.FindChild("channel").ToRssChannel(namespaces);
+                        feed = child.ToRssFeed(encoding, namespaces, styleSheets);
                         break;
                     default:
                         break;
                 }
             }
 
-            return (channel != null) ?
-                new RssFeed(channel, version, encoding, namespaces, styleSheets)
-                : null;
+            return feed;
         }
 
         public static XmlDocument ToXml(this Uri location)

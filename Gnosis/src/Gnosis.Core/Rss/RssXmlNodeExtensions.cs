@@ -11,7 +11,9 @@ namespace Gnosis.Core.Rss
 {
     public static class RssXmlNodeExtensions
     {
-        public static IRssCategory ToRssCategory(this XmlNode node)
+        #region Private Extension Methods
+
+        private static IRssCategory ToRssCategory(this XmlNode node)
         {
             Uri domain = null;
             string name = null;
@@ -32,7 +34,7 @@ namespace Gnosis.Core.Rss
                 : null;
         }
 
-        public static IRssChannel ToRssChannel(this XmlNode node, IEnumerable<IXmlNamespace> namespaces)
+        private static IRssChannel ToRssChannel(this XmlNode node, IEnumerable<IXmlNamespace> namespaces)
         {
             string title = null;
             Uri link = null;
@@ -145,7 +147,7 @@ namespace Gnosis.Core.Rss
             return new RssChannel(title, link, description, language, copyright, managingEditor, webMaster, pubDate, lastBuildDate, generator, docs, cloud, ttl, image, rating, textInput, skipHours, skipDays, categories, items, extensions);
         }
 
-        public static IRssCloud ToRssCloud(this XmlNode node)
+        private static IRssCloud ToRssCloud(this XmlNode node)
         {
             if (node == null)
                 return null;
@@ -193,7 +195,7 @@ namespace Gnosis.Core.Rss
                 : null;
         }
 
-        public static IRssEnclosure ToRssEnclosure(this XmlNode node)
+        private static IRssEnclosure ToRssEnclosure(this XmlNode node)
         {
             if (node == null)
                 return null;
@@ -228,7 +230,7 @@ namespace Gnosis.Core.Rss
                 : null;
         }
 
-        public static IRssExtension ToRssExtension(this XmlNode node, IEnumerable<IXmlNamespace> namespaces)
+        private static IRssExtension ToRssExtension(this XmlNode node, IEnumerable<IXmlNamespace> namespaces)
         {
             var nameTokens = node.Name.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
             if (nameTokens == null || nameTokens.Length != 2)
@@ -278,7 +280,7 @@ namespace Gnosis.Core.Rss
                 : null;
         }
 
-        public static IRssGuid ToRssGuid(this XmlNode node)
+        private static IRssGuid ToRssGuid(this XmlNode node)
         {
             if (node == null)
                 return null;
@@ -295,7 +297,7 @@ namespace Gnosis.Core.Rss
                 : null;
         }
 
-        public static IRssImage ToRssImage(this XmlNode node)
+        private static IRssImage ToRssImage(this XmlNode node)
         {
             if (node == null)
                 return null;
@@ -418,7 +420,7 @@ namespace Gnosis.Core.Rss
                 : null;
         }
 
-        public static IEnumerable<RssDay> ToRssSkipDays(this XmlNode node)
+        private static IEnumerable<RssDay> ToRssSkipDays(this XmlNode node)
         {
             var skipDays = new List<RssDay>();
             if (node == null)
@@ -460,7 +462,7 @@ namespace Gnosis.Core.Rss
             return skipDays;
         }
 
-        public static IEnumerable<RssHour> ToRssSkipHours(this XmlNode node)
+        private static IEnumerable<RssHour> ToRssSkipHours(this XmlNode node)
         {
             var skipHours = new List<RssHour>();
             if (node == null)
@@ -482,7 +484,7 @@ namespace Gnosis.Core.Rss
             return skipHours;
         }
 
-        public static IRssSource ToRssSource(this XmlNode node)
+        private static IRssSource ToRssSource(this XmlNode node)
         {
             if (node == null)
                 return null;
@@ -499,7 +501,7 @@ namespace Gnosis.Core.Rss
                 : null;
         }
 
-        public static IRssTextInput ToRssTextInput(this XmlNode node)
+        private static IRssTextInput ToRssTextInput(this XmlNode node)
         {
             if (node == null)
                 return null;
@@ -538,7 +540,7 @@ namespace Gnosis.Core.Rss
                 : null;
         }
 
-        public static TimeSpan ToRssTtl(this XmlNode node)
+        private static TimeSpan ToRssTtl(this XmlNode node)
         {
             if (node == null)
                 return TimeSpan.Zero;
@@ -549,15 +551,20 @@ namespace Gnosis.Core.Rss
                 : TimeSpan.Zero;
         }
 
-        public static string ToRssVersion(this XmlNode node)
+        #endregion
+
+        public static IRssFeed ToRssFeed(this XmlNode self, ICharacterSet encoding, IEnumerable<IXmlNamespace> namespaces, IEnumerable<IXmlStyleSheet> styleSheets)
         {
-            string version = null;
-            if (node == null || node.Attributes == null)
-                return version;
+            IRssChannel channel = null;
+            string version = self.GetAttributeString("version");
+            
+            var child = self.FindChild("channel");
+            if (child != null)
+                channel = child.ToRssChannel(namespaces);
 
-            var attrib = node.Attributes.Cast<XmlAttribute>().Where(x => x != null && x.Name == "version").FirstOrDefault();
-
-            return attrib != null ? attrib.Value : null;
+            return channel != null ?
+                new RssFeed(channel, version, encoding, namespaces, styleSheets)
+                : null;
         }
     }
 }
