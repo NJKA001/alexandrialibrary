@@ -150,7 +150,7 @@ namespace Gnosis.Core.Atom
                 }
             }
 
-            return (id != null && title != null) ?
+            return (id != null && title != null && updated != null) ?
                 new AtomEntry(common.BaseId, common.Lang, common.Extensions, authors, content, id, links, summary, title, updated, categories, contributors, published, rights, source)
                 : null;
         }
@@ -516,7 +516,7 @@ namespace Gnosis.Core.Atom
                 }
             }
 
-            return (id != null && title != null) ?
+            return (id != null && title != null && updated != null) ?
                 new AtomFeed(encoding, namespaces, styleSheets, common.BaseId, common.Lang, common.Extensions, authors, id, links, title, updated, categories, contributors, entries, generator, icon, logo, rights, subtitle)
                 : null;
         }
