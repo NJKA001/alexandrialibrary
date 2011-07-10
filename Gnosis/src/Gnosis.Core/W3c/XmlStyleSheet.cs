@@ -37,5 +37,25 @@ namespace Gnosis.Core.W3c
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            var xml = new StringBuilder();
+
+            xml.Append("<?xml-stylesheet");
+
+            if (href != null)
+                xml.AppendFormat(" href='{0}'", href.ToString());
+
+            if (type != null)
+                xml.AppendFormat(" type='{0}'", type.ToString());
+
+            if (media != null)
+                xml.AppendFormat(" media='{0}'", media.ToString());
+
+            xml.Append("?>");
+
+            return xml.ToString();
+        }
     }
 }

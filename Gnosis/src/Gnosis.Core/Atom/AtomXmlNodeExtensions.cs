@@ -36,6 +36,36 @@ namespace Gnosis.Core.Atom
 
         #region Private Extension Methods
 
+        private static IAtomAuthor ToAtomAuthor(this XmlNode self, IEnumerable<IXmlNamespace> namespaces)
+        {
+            var common = self.ToAtomCommon(namespaces);
+            string name = null;
+            Uri uri = null;
+            string email = null;
+
+            foreach (var child in self.ChildNodes.Cast<XmlNode>())
+            {
+                switch (child.Name)
+                {
+                    case "name":
+                        name = child.InnerText;
+                        break;
+                    case "uri":
+                        uri = child.InnerText.ToUri();
+                        break;
+                    case "email":
+                        email = child.InnerText;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return (name != null) ?
+                new AtomAuthor(common.BaseId, common.Lang, common.Extensions, name, uri, email)
+                : null;
+        }
+
         private static IAtomCategory ToAtomCategory(this XmlNode self, IEnumerable<IXmlNamespace> namespaces)
         {
             if (self == null)
@@ -89,13 +119,43 @@ namespace Gnosis.Core.Atom
             return new AtomContent(common.BaseId, common.Lang, common.Extensions, text, type, mediaType, src);
         }
 
+        private static IAtomContributor ToAtomContributor(this XmlNode self, IEnumerable<IXmlNamespace> namespaces)
+        {
+            var common = self.ToAtomCommon(namespaces);
+            string name = null;
+            Uri uri = null;
+            string email = null;
+
+            foreach (var child in self.ChildNodes.Cast<XmlNode>())
+            {
+                switch (child.Name)
+                {
+                    case "name":
+                        name = child.InnerText;
+                        break;
+                    case "uri":
+                        uri = child.InnerText.ToUri();
+                        break;
+                    case "email":
+                        email = child.InnerText;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return (name != null) ?
+                new AtomContributor(common.BaseId, common.Lang, common.Extensions, name, uri, email)
+                : null;
+        }
+
         private static IAtomEntry ToAtomEntry(this XmlNode self, IEnumerable<IXmlNamespace> namespaces)
         {
             var common = self.ToAtomCommon(namespaces);
-            IList<IAtomPerson> authors = new List<IAtomPerson>();
+            IList<IAtomAuthor> authors = new List<IAtomAuthor>();
             IList<IAtomCategory> categories = new List<IAtomCategory>();
             IAtomContent content = null;
-            IList<IAtomPerson> contributors = new List<IAtomPerson>();
+            IList<IAtomContributor> contributors = new List<IAtomContributor>();
             IAtomId id = null;
             IList<IAtomLink> links = new List<IAtomLink>();
             IAtomPublished published = null;
@@ -110,7 +170,7 @@ namespace Gnosis.Core.Atom
                 switch (child.Name)
                 {
                     case "author":
-                        authors.AddIfNotNull(child.ToAtomPerson(namespaces));
+                        authors.AddIfNotNull(child.ToAtomAuthor(namespaces));
                         break;
                     case "category":
                         categories.AddIfNotNull(child.ToAtomCategory(namespaces));
@@ -119,7 +179,7 @@ namespace Gnosis.Core.Atom
                         content = child.ToAtomContent(namespaces);
                         break;
                     case "contributor":
-                        contributors.AddIfNotNull(child.ToAtomPerson(namespaces));
+                        contributors.AddIfNotNull(child.ToAtomContributor(namespaces));
                         break;
                     case "id":
                         id = child.ToAtomId(namespaces);
@@ -279,36 +339,6 @@ namespace Gnosis.Core.Atom
                 : null;
         }
 
-        private static IAtomPerson ToAtomPerson(this XmlNode self, IEnumerable<IXmlNamespace> namespaces)
-        {
-            var common = self.ToAtomCommon(namespaces);
-            string name = null;
-            Uri uri = null;
-            string email = null;
-
-            foreach (var child in self.ChildNodes.Cast<XmlNode>())
-            {
-                switch (child.Name)
-                {
-                    case "name":
-                        name = child.InnerText;
-                        break;
-                    case "uri":
-                        uri = child.InnerText.ToUri();
-                        break;
-                    case "email":
-                        email = child.InnerText;
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            return (name != null) ?
-                new AtomPerson(common.BaseId, common.Lang, common.Extensions, name, uri, email)
-                : null;
-        }
-
         private static IAtomPublished ToAtomPublished(this XmlNode self, IEnumerable<IXmlNamespace> namespaces)
         {
             var common = self.ToAtomCommon(namespaces);
@@ -331,13 +361,13 @@ namespace Gnosis.Core.Atom
         private static IAtomSource ToAtomSource(this XmlNode self, IEnumerable<IXmlNamespace> namespaces)
         {
             var common = self.ToAtomCommon(namespaces);
-            IList<IAtomPerson> authors = new List<IAtomPerson>();
+            IList<IAtomAuthor> authors = new List<IAtomAuthor>();
             IAtomId id = null;
             IList<IAtomLink> links = new List<IAtomLink>();
             IAtomTitle title = null;
             IAtomUpdated updated = null;
             IList<IAtomCategory> categories = new List<IAtomCategory>();
-            IList<IAtomPerson> contributors = new List<IAtomPerson>();
+            IList<IAtomContributor> contributors = new List<IAtomContributor>();
             IAtomGenerator generator = null;
             IAtomIcon icon = null;
             IAtomLogo logo = null;
@@ -349,7 +379,7 @@ namespace Gnosis.Core.Atom
                 switch (child.Name)
                 {
                     case "author":
-                        authors.AddIfNotNull(child.ToAtomPerson(namespaces));
+                        authors.AddIfNotNull(child.ToAtomAuthor(namespaces));
                         break;
                     case "id":
                         id = child.ToAtomId(namespaces);
@@ -367,7 +397,7 @@ namespace Gnosis.Core.Atom
                         categories.AddIfNotNull(child.ToAtomCategory(namespaces));
                         break;
                     case "contributor":
-                        contributors.AddIfNotNull(child.ToAtomPerson(namespaces));
+                        contributors.AddIfNotNull(child.ToAtomContributor(namespaces));
                         break;
                     case "generator":
                         generator = child.ToAtomGenerator(namespaces);
@@ -454,13 +484,13 @@ namespace Gnosis.Core.Atom
         public static IAtomFeed ToAtomFeed(this XmlNode self, ICharacterSet encoding, IEnumerable<IXmlNamespace> namespaces, IEnumerable<IXmlStyleSheet> styleSheets)
         {
             var common = self.ToAtomCommon(namespaces);
-            IList<IAtomPerson> authors = new List<IAtomPerson>();
+            IList<IAtomAuthor> authors = new List<IAtomAuthor>();
             IAtomId id = null;
             IList<IAtomLink> links = new List<IAtomLink>();
             IAtomTitle title = null;
             IAtomUpdated updated = null;
             IList<IAtomCategory> categories = new List<IAtomCategory>();
-            IList<IAtomPerson> contributors = new List<IAtomPerson>();
+            IList<IAtomContributor> contributors = new List<IAtomContributor>();
             IList<IAtomEntry> entries = new List<IAtomEntry>();
             IAtomGenerator generator = null;
             IAtomIcon icon = null;
@@ -473,7 +503,7 @@ namespace Gnosis.Core.Atom
                 switch (child.Name)
                 {
                     case "author":
-                        authors.AddIfNotNull(child.ToAtomPerson(namespaces));
+                        authors.AddIfNotNull(child.ToAtomAuthor(namespaces));
                         break;
                     case "id":
                         id = child.ToAtomId(namespaces);
@@ -491,7 +521,7 @@ namespace Gnosis.Core.Atom
                         categories.AddIfNotNull(child.ToAtomCategory(namespaces));
                         break;
                     case "contributor":
-                        contributors.AddIfNotNull(child.ToAtomPerson(namespaces));
+                        contributors.AddIfNotNull(child.ToAtomContributor(namespaces));
                         break;
                     case "entry":
                         entries.AddIfNotNull(child.ToAtomEntry(namespaces));

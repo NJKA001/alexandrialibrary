@@ -7,10 +7,10 @@ using Gnosis.Core.Ietf;
 
 namespace Gnosis.Core.Atom
 {
-    public class AtomPerson
+    public abstract class AtomPerson
         : AtomCommon, IAtomPerson
     {
-        public AtomPerson(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, string name, Uri uri, string email)
+        protected AtomPerson(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, string name, Uri uri, string email)
             : base(baseId, lang, extensions)
         {
             this.name = name;

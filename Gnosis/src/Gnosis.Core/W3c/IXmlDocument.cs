@@ -10,5 +10,7 @@ namespace Gnosis.Core.W3c
         ICharacterSet Encoding { get; }
         IEnumerable<IXmlNamespace> Namespaces { get; }
         IEnumerable<IXmlStyleSheet> StyleSheets { get; }
+
+        string ToXml();
     }
 }

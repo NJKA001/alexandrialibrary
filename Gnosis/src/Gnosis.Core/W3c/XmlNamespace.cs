@@ -39,8 +39,8 @@ namespace Gnosis.Core.W3c
         public override string ToString()
         {
             return !string.IsNullOrEmpty(prefix) ? 
-                string.Format("xmlns:{0}='{1}'", prefix, identifier)
-                : string.Format("xmlns='{0}'", identifier);
+                string.Format("xmlns:{0}='{1}'", prefix, identifier.ToString())
+                : string.Format("xmlns='{0}'", identifier.ToString());
         }
 
         public static IXmlNamespace Parse(string value)

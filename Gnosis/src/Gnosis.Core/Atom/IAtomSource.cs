@@ -8,14 +8,14 @@ namespace Gnosis.Core.Atom
     public interface IAtomSource
         : IAtomCommon
     {
-        IEnumerable<IAtomPerson> Authors { get; }
+        IEnumerable<IAtomAuthor> Authors { get; }
         IAtomId Id { get; }
         IEnumerable<IAtomLink> Links { get; }
         IAtomTitle Title { get; }
         IAtomUpdated Updated { get; }
 
         IEnumerable<IAtomCategory> Categories { get; }
-        IEnumerable<IAtomPerson> Contributors { get; }
+        IEnumerable<IAtomContributor> Contributors { get; }
         IAtomGenerator Generator { get; }
         IAtomIcon Icon { get; }
         IAtomLogo Logo { get; }

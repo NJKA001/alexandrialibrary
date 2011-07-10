@@ -43,9 +43,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Atom\AtomAuthor.cs" />
     <Compile Include="Atom\AtomCategory.cs" />
     <Compile Include="Atom\AtomCommon.cs" />
     <Compile Include="Atom\AtomContent.cs" />
+    <Compile Include="Atom\AtomContributor.cs" />
     <Compile Include="Atom\AtomDateConstruct.cs" />
     <Compile Include="Atom\AtomEntry.cs" />
     <Compile Include="Atom\AtomExtension.cs" />
@@ -66,9 +68,11 @@
     <Compile Include="Atom\AtomTitle.cs" />
     <Compile Include="Atom\AtomUpdated.cs" />
     <Compile Include="Atom\AtomXmlNodeExtensions.cs" />
+    <Compile Include="Atom\IAtomAuthor.cs" />
     <Compile Include="Atom\IAtomCategory.cs" />
     <Compile Include="Atom\IAtomCommon.cs" />
     <Compile Include="Atom\IAtomContent.cs" />
+    <Compile Include="Atom\IAtomContributor.cs" />
     <Compile Include="Atom\IAtomDateConstruct.cs" />
     <Compile Include="Atom\IAtomExtension.cs" />
     <Compile Include="Atom\IAtomGenerator.cs" />

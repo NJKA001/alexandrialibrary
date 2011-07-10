@@ -11,7 +11,7 @@ namespace Gnosis.Core.Atom
     public class AtomSource
         : AtomCommon, IAtomSource
     {
-        public AtomSource(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, IEnumerable<IAtomPerson> authors, IAtomId id, IEnumerable<IAtomLink> links, IAtomTitle title, IAtomUpdated updated, IEnumerable<IAtomCategory> categories, IEnumerable<IAtomPerson> contributors, IAtomGenerator generator, IAtomIcon icon, IAtomLogo logo, IAtomRights rights, IAtomSubtitle subtitle)
+        public AtomSource(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, IEnumerable<IAtomAuthor> authors, IAtomId id, IEnumerable<IAtomLink> links, IAtomTitle title, IAtomUpdated updated, IEnumerable<IAtomCategory> categories, IEnumerable<IAtomContributor> contributors, IAtomGenerator generator, IAtomIcon icon, IAtomLogo logo, IAtomRights rights, IAtomSubtitle subtitle)
             : base(baseId, lang, extensions)
         {
             this.authors = authors;
@@ -28,13 +28,13 @@ namespace Gnosis.Core.Atom
             this.subtitle = subtitle;
         }
 
-        private readonly IEnumerable<IAtomPerson> authors;
+        private readonly IEnumerable<IAtomAuthor> authors;
         private readonly IAtomId id;
         private readonly IEnumerable<IAtomLink> links;
         private readonly IAtomTitle title;
         private readonly IAtomUpdated updated;
         private readonly IEnumerable<IAtomCategory> categories;
-        private readonly IEnumerable<IAtomPerson> contributors;
+        private readonly IEnumerable<IAtomContributor> contributors;
         private readonly IAtomGenerator generator;
         private readonly IAtomIcon icon;
         private readonly IAtomLogo logo;
@@ -43,7 +43,7 @@ namespace Gnosis.Core.Atom
 
         #region IAtomSource Members
 
-        public IEnumerable<IAtomPerson> Authors
+        public IEnumerable<IAtomAuthor> Authors
         {
             get { return authors; }
         }
@@ -73,7 +73,7 @@ namespace Gnosis.Core.Atom
             get { return categories; }
         }
 
-        public IEnumerable<IAtomPerson> Contributors
+        public IEnumerable<IAtomContributor> Contributors
         {
             get { return contributors; }
         }

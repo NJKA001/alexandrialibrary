@@ -56,6 +56,13 @@ namespace Gnosis.Core.Rss
             get { return styleSheets; }
         }
 
+        public string ToXml()
+        {
+            var xml = new StringBuilder();
+
+            return xml.ToString();
+        }
+
         #endregion
     }
 }

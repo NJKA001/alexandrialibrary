@@ -14,14 +14,14 @@ namespace Gnosis.Core.Atom
     public interface IAtomFeed
         : IAtomCommon, IXmlDocument
     {
-        IEnumerable<IAtomPerson> Authors { get; }
+        IEnumerable<IAtomAuthor> Authors { get; }
         IAtomId Id { get; }
         IEnumerable<IAtomLink> Links { get; }
         IAtomTitle Title { get; }
         IAtomUpdated Updated { get; }
 
         IEnumerable<IAtomCategory> Categories { get; }
-        IEnumerable<IAtomPerson> Contributors { get; }
+        IEnumerable<IAtomContributor> Contributors { get; }
         IEnumerable<IAtomEntry> Entries { get; }
         IAtomGenerator Generator { get; }
         IAtomIcon Icon { get; }
