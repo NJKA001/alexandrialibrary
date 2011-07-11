@@ -160,12 +160,11 @@ namespace Gnosis.Core.Atom
                 xml.AppendLine(author.ToString());
 
             xml.AppendLine(id.ToString());
+            xml.AppendLine(title.ToString());
+            xml.AppendLine(updated.ToString());
 
             foreach (var link in links)
                 xml.AppendLine(link.ToString());
-
-            xml.AppendLine(title.ToString());
-            xml.AppendLine(updated.ToString());
 
             foreach (var category in categories)
                 xml.AppendLine(category.ToString());
@@ -182,6 +181,9 @@ namespace Gnosis.Core.Atom
             if (icon != null)
                 xml.AppendLine(icon.ToString());
 
+            if (logo != null)
+                xml.AppendLine(logo.ToString());
+
             if (rights != null)
                 xml.AppendLine(rights.ToString());
 
@@ -192,6 +194,7 @@ namespace Gnosis.Core.Atom
 
             System.Diagnostics.Debug.WriteLine(xml.ToString());
             return xml.ToString();
+            
         }
 
         #endregion

@@ -996,5 +996,19 @@ namespace Gnosis.Core
             //'-', ',', ';', '.', 
             return self.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
         }
+
+        public static string ToXmlString(this string self)
+        {
+            if (self == null)
+                return null;
+
+            return self
+                .Replace("&", "&amp;")
+                .Replace("\"", "&quot;")
+                .Replace("'", "&apos;")
+                .Replace("<", "&lt;")
+                .Replace(">", "&gt;");
+
+        }
     }
 }

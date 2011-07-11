@@ -29,7 +29,7 @@
   <rights xml:base='http://example.co.uk/license' xml:lang='en-GB' type='xhtml'>
     <xhtml:div xmlns:xhtml="http://www.w3.org/2000/xhtml">Oy Guv'na, no rights! <xhtml:em> &lt; </xhtml:em></xhtml:div>
   </rights>
-  <category term='Blogs/News' scheme='http://example.com/schemes/categories' label='Blogs &amp; News'/>
+  <category term='Blogs/News' scheme='http://example.com/schemes/categories' label='&lt;Blogs &amp; News&gt;'/>
   <category term='Other' label='Other &amp; Misc'/>
   <generator version='7.00' uri='http://www.blogger.com'>Blogger</generator>
   <openSearch:totalResults>6</openSearch:totalResults>

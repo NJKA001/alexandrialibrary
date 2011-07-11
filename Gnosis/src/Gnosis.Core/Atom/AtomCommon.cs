@@ -74,7 +74,6 @@ namespace Gnosis.Core.Atom
         protected void AppendEndTag(StringBuilder xml, string name)
         {
             xml.AppendFormat("</{0}>", name);
-            xml.AppendLine();
         }
 
         protected void AppendTag(StringBuilder xml, string name, IEnumerable<KeyValuePair<string, string>> attributes)
@@ -96,9 +95,7 @@ namespace Gnosis.Core.Atom
                 xml.AppendLine();
 
                 foreach (var extension in extensions)
-                {
                     xml.AppendLine(extension.ToString());
-                }
 
                 xml.AppendFormat("</{0}>", name);
                 xml.AppendLine();

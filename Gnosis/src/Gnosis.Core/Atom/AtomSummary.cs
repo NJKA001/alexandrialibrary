@@ -14,5 +14,10 @@ namespace Gnosis.Core.Atom
             : base(baseId, lang, extensions, text, type)
         {
         }
+
+        public override string ToString()
+        {
+            return ToString("summary");
+        }
     }
 }

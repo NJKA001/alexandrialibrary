@@ -39,7 +39,9 @@ namespace Gnosis.Core.Atom
         {
             var xml = new StringBuilder();
             var attributes = new Dictionary<string, string>();
-            attributes.AddIfNotNull("src", src);
+            string srcEscaped = src != null ? src.ToString().ToXmlString() : null;
+
+            attributes.AddIfNotNull("src", srcEscaped);
 
             if (mediaType != null)
                 attributes.Add("type", mediaType.ToString());

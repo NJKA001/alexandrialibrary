@@ -345,7 +345,7 @@ namespace Gnosis.Core.Atom
             var date = DateTime.MinValue;
 
             return DateTime.TryParse(self.InnerText, out date) ?
-                new AtomPublished(common.BaseId, common.Lang, common.Extensions, date)
+                new AtomPublished(common.BaseId, common.Lang, common.Extensions, date.ToUniversalTime())
                 : null;
         }
 
@@ -475,7 +475,7 @@ namespace Gnosis.Core.Atom
             var date = DateTime.MinValue;
 
             return DateTime.TryParse(self.InnerText, out date) ?
-                new AtomUpdated(common.BaseId, common.Lang, common.Extensions, date)
+                new AtomUpdated(common.BaseId, common.Lang, common.Extensions, date.ToUniversalTime())
                 : null;
         }
 

@@ -49,14 +49,9 @@ namespace Gnosis.Core.Atom
             var xml = new StringBuilder();
             var attributes = new Dictionary<string, string>();
 
-            string normalizedLabel = null;
-            if (label != null)
-                normalizedLabel = label.Replace("&", "&amp;");
-            
-
-            attributes.Add("term", term);
+            attributes.Add("term", term.ToXmlString());
             attributes.AddIfNotNull("scheme", scheme);
-            attributes.AddIfNotNull("label", normalizedLabel);
+            attributes.AddIfNotNull("label", label.ToXmlString());
 
             AppendTag(xml, "category", attributes);
 

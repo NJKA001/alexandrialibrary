@@ -66,11 +66,11 @@ namespace Gnosis.Core.Atom
         public override string ToString()
         {
             IDictionary<string, string> attributes = new Dictionary<string, string>();
-            attributes.Add("href", href.ToString());
-            attributes.AddIfNotNull("rel", rel);
+            attributes.Add("href", href.ToString().ToXmlString());
+            attributes.AddIfNotNull("rel", rel.ToXmlString());
             attributes.AddIfNotNull("type", type);
-            attributes.AddIfNotNull("hrefLang", hrefLang);
-            attributes.AddIfNotNull("title", title);
+            attributes.AddIfNotNull("hreflang", hrefLang);
+            attributes.AddIfNotNull("title", title.ToXmlString());
             attributes.AddIfTrue("length", length, x => x > 0);
             
             var xml = new StringBuilder();

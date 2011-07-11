@@ -89,6 +89,7 @@
     <Compile Include="Atom\IAtomTitle.cs" />
     <Compile Include="Atom\IAtomUpdated.cs" />
     <Compile Include="ByteArrayExtensions.cs" />
+    <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="DebugExtensions.cs" />
     <Compile Include="CharExtensions.cs" />
     <Compile Include="CollectionExtensions.cs" />

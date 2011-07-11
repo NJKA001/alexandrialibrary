@@ -110,6 +110,8 @@ namespace Gnosis.Core.Atom
 
             AppendStartTag(xml, "entry");
 
+
+
             foreach (var author in authors)
                 xml.AppendLine(author.ToString());
 
@@ -117,15 +119,14 @@ namespace Gnosis.Core.Atom
                 xml.AppendLine(content.ToString());
 
             xml.AppendLine(id.ToString());
+            xml.AppendLine(title.ToString());
+            xml.AppendLine(updated.ToString());
 
             foreach (var link in links)
                 xml.AppendLine(link.ToString());
 
             if (summary != null)
                 xml.AppendLine(summary.ToString());
-
-            xml.AppendLine(title.ToString());
-            xml.AppendLine(updated.ToString());
 
             foreach (var category in categories)
                 xml.AppendLine(category.ToString());
@@ -145,6 +146,7 @@ namespace Gnosis.Core.Atom
             AppendEndTag(xml, "entry");
 
             return xml.ToString();
-        }
+        }
+
     }
 }

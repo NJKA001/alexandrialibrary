@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core;
 using Gnosis.Core.Ietf;
 
 namespace Gnosis.Core.Atom
@@ -22,7 +23,7 @@ namespace Gnosis.Core.Atom
         {
             var xml = new StringBuilder();
             AppendStartTag(xml, tag);
-            xml.Append(Date.ToUniversalTime().ToString("s"));
+            xml.AppendFormat(date.ToRfc3339String());
             AppendEndTag(xml, tag);
             return xml.ToString();
         }
