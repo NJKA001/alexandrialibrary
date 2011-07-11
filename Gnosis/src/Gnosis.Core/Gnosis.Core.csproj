@@ -136,6 +136,7 @@
     <Compile Include="Rss\RssSource.cs" />
     <Compile Include="Rss\RssTextInput.cs" />
     <Compile Include="Rss\RssXmlNodeExtensions.cs" />
+    <Compile Include="StringBuilderExtensions.cs" />
     <Compile Include="UN\IRegion.cs" />
     <Compile Include="UN\Region.cs" />
     <Compile Include="StreamExtensions.cs" />

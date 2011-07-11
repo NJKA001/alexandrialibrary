@@ -33,7 +33,7 @@ namespace Gnosis.Core.Atom
 
             xml.AppendFormat("<name>{0}</name>", Name);
             if (Uri != null)
-                xml.AppendFormat("<uri>{0}</uri>", Uri.ToString().ToXmlString());
+                xml.AppendFormat("<uri>{0}</uri>", Uri.ToString().ToXmlEscapedString());
             if (Email != null)
                 xml.AppendFormat("<email>{0}</email>", Email);
 

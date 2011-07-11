@@ -215,13 +215,43 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateRssFeedFromRemoteLocation()
+        public void CreateRssFeedFromRemoteCustomSource()
         {
+            const string generator = "ESPN Inc. http://espn.go.com/";
+            var language = LanguageTag.Parse("en-us");
+
             var location = new Uri("http://search.espn.go.com/rss/bill-simmons/");
             var feed = location.ToRssFeed();
             Assert.IsNotNull(feed);
             Assert.IsNotNull(feed.Channel);
+            Assert.AreEqual(generator, feed.Channel.Generator);
+            Assert.AreEqual(language, feed.Channel.Language);
             Assert.IsTrue(feed.Channel.Items.Count() > 1);
+        }
+
+        [Test]
+        public void CreateRssFeedFromRemoteWordPressSource()
+        {
+            const string generator = "http://wordpress.org/?v=3.2";
+
+            var location = new Uri("http://www.nerdist.com/category/podcast/feed/");
+            var feed = location.ToRssFeed();
+            Assert.IsNotNull(feed);
+            Assert.IsNotNull(feed.Channel);
+            Assert.AreEqual(generator, feed.Channel.Generator);
+        }
+
+        [Test]
+        public void CreateRssFeedFromRemoteUnspecifiedSourceWithXmlBase()
+        {
+            const string baseId = "http://www.thisamericanlife.org/";
+
+            var location = new Uri("http://feeds.thisamericanlife.org/talpodcast");
+            var feed = location.ToRssFeed();
+            Assert.IsNotNull(feed);
+            Assert.IsNotNull(feed.BaseId);
+            Assert.AreEqual(baseId, feed.BaseId.ToString());
+            Assert.IsNotNull(feed.Channel);
         }
     }
 }

@@ -16,5 +16,6 @@ namespace Gnosis.Core.Rss
     {
         IRssChannel Channel { get; }
         string Version { get; }
+        Uri BaseId { get; }
     }
 }

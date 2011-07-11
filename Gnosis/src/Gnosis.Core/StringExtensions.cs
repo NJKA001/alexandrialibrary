@@ -997,7 +997,7 @@ namespace Gnosis.Core
             return self.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
         }
 
-        public static string ToXmlString(this string self)
+        public static string ToXmlEscapedString(this string self)
         {
             if (self == null)
                 return null;

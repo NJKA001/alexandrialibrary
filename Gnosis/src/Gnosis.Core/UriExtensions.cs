@@ -183,5 +183,13 @@ namespace Gnosis.Core
 
             return xml;
         }
+
+        public static string ToXmlEscapedString(this Uri location)
+        {
+            if (location == null)
+                return null;
+
+            return location.ToString().ToXmlEscapedString();
+        }
     }
 }

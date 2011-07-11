@@ -556,14 +556,15 @@ namespace Gnosis.Core.Rss
         public static IRssFeed ToRssFeed(this XmlNode self, ICharacterSet encoding, IEnumerable<IXmlNamespace> namespaces, IEnumerable<IXmlStyleSheet> styleSheets)
         {
             IRssChannel channel = null;
-            string version = self.GetAttributeString("version");
-            
+            var version = self.GetAttributeString("version");
+            var baseId = self.GetAttributeUri("xml:base");
+
             var child = self.FindChild("channel");
             if (child != null)
                 channel = child.ToRssChannel(namespaces);
 
             return channel != null ?
-                new RssFeed(channel, version, encoding, namespaces, styleSheets)
+                new RssFeed(channel, version, baseId, encoding, namespaces, styleSheets)
                 : null;
         }
     }

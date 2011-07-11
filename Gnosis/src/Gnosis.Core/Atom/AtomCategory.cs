@@ -49,9 +49,9 @@ namespace Gnosis.Core.Atom
             var xml = new StringBuilder();
             var attributes = new Dictionary<string, string>();
 
-            attributes.Add("term", term.ToXmlString());
+            attributes.Add("term", term.ToXmlEscapedString());
             attributes.AddIfNotNull("scheme", scheme);
-            attributes.AddIfNotNull("label", label.ToXmlString());
+            attributes.AddIfNotNull("label", label.ToXmlEscapedString());
 
             AppendTag(xml, "category", attributes);
 

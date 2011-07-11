@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core;
 using Gnosis.Core.Ietf;
 using Gnosis.Core.W3c;
 
@@ -167,5 +168,22 @@ namespace Gnosis.Core.Rss
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            var xml = new StringBuilder();
+            xml.AppendLine("<channel>");
+
+            xml.AppendEscapedTagIfNotNull("title", title);
+            xml.AppendEscapedTagIfNotNull("link", link);
+            xml.AppendEscapedTagIfNotNull("description", description);
+            xml.AppendEscapedTagIfNotNull("language", language);
+            xml.AppendEscapedTagIfNotNull("copyright", copyright);
+            xml.AppendEscapedTagIfNotNull("managingEditor", managingEditor);
+            xml.AppendEscapedTagIfNotNull("webMaster", webMaster);
+
+            xml.AppendLine("</channel>");
+            return xml.ToString();
+        }
     }
 }
