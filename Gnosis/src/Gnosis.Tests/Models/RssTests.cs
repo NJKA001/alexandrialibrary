@@ -18,6 +18,69 @@ namespace Gnosis.Tests.Models
     public class RssTests
     {
         [Test]
+        public void CreateExampleRss091FeedFromLocalXml()
+        {
+            const string path = @".\Files\example0.91.rss";
+            const string version = "0.91";
+
+            var fileInfo = new FileInfo(path);
+            Assert.IsTrue(fileInfo.Exists);
+
+            var location = new Uri(fileInfo.FullName);
+            var contentType = location.ToContentType();
+            Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
+
+            var feed = location.ToRssFeed();
+
+            Assert.IsNotNull(feed);
+            Assert.IsNotNull(feed.Channel);
+            Assert.AreEqual(version, feed.Version);
+            Assert.AreEqual(CharacterSet.Latin1, feed.Encoding);
+        }
+
+        [Test]
+        public void CreateExampleRss092FeedFromLocalXml()
+        {
+            const string path = @".\Files\example0.92.rss";
+            const string version = "0.92";
+
+            var fileInfo = new FileInfo(path);
+            Assert.IsTrue(fileInfo.Exists);
+
+            var location = new Uri(fileInfo.FullName);
+            var contentType = location.ToContentType();
+            Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
+
+            var feed = location.ToRssFeed();
+
+            Assert.IsNotNull(feed);
+            Assert.IsNotNull(feed.Channel);
+            Assert.AreEqual(version, feed.Version);
+        }
+
+        [Test]
+        public void CreateExampleRss20FeedFromLocalXml()
+        {
+            const string path = @".\Files\example2.0.rss";
+            const string version = "2.0";
+
+            var fileInfo = new FileInfo(path);
+            Assert.IsTrue(fileInfo.Exists);
+
+            var location = new Uri(fileInfo.FullName);
+            var contentType = location.ToContentType();
+            Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
+
+            var feed = location.ToRssFeed();
+
+            Assert.IsNotNull(feed);
+            Assert.IsNotNull(feed.Channel);
+            Assert.AreEqual(version, feed.Version);
+        }
+
+
+
+        [Test]
         public void CreateRssFeedFromLocalXml()
         {
             #region Constants

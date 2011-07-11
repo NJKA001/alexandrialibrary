@@ -13,6 +13,9 @@ namespace Gnosis.Core.Atom
         public AtomCategory(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, string term, Uri scheme, string label)
             : base(baseId, lang, extensions)
         {
+            if (term == null)
+                throw new ArgumentNullException("term");
+
             this.term = term;
             this.scheme = scheme;
             this.label = label;
@@ -40,5 +43,24 @@ namespace Gnosis.Core.Atom
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            var xml = new StringBuilder();
+            var attributes = new Dictionary<string, string>();
+
+            string normalizedLabel = null;
+            if (label != null)
+                normalizedLabel = label.Replace("&", "&amp;");
+            
+
+            attributes.Add("term", term);
+            attributes.AddIfNotNull("scheme", scheme);
+            attributes.AddIfNotNull("label", normalizedLabel);
+
+            AppendTag(xml, "category", attributes);
+
+            return xml.ToString();
+        }
     }
 }

@@ -104,5 +104,45 @@ namespace Gnosis.Core.Atom
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            var xml = new StringBuilder();
+
+            AppendStartTag(xml, "source");
+
+            foreach (var author in authors)
+                xml.AppendLine(author.ToString());
+
+            xml.AppendLine(id.ToString());
+
+            foreach (var link in links)
+                xml.AppendLine(link.ToString());
+
+            xml.AppendLine(title.ToString());
+            xml.AppendLine(updated.ToString());
+
+            foreach (var category in categories)
+                xml.AppendLine(category.ToString());
+
+            foreach (var contributor in contributors)
+                xml.AppendLine(contributor.ToString());
+
+            if (generator != null)
+                xml.AppendLine(generator.ToString());
+
+            if (icon != null)
+                xml.AppendLine(icon.ToString());
+
+            if (rights != null)
+                xml.AppendLine(rights.ToString());
+
+            if (subtitle != null)
+                xml.AppendLine(subtitle.ToString());
+
+            AppendEndTag(xml, "source");
+
+            return xml.ToString();
+        }
     }
 }

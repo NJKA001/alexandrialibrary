@@ -17,21 +17,7 @@ namespace Gnosis.Core.Atom
 
         public override string ToString()
         {
-            var xml = new StringBuilder();
-
-            xml.Append("<contributor");
-
-            if (BaseId != null)
-                xml.AppendFormat(" xml:base='{0}'", BaseId.ToString());
-
-            if (Lang != null)
-                xml.AppendFormat(" xml:lang='{0}'", Lang.ToString());
-
-            xml.Append(">");
-
-            xml.Append("</contributor>");
-
-            return xml.ToString();
+            return ToString("contributor");
         }
     }
 }

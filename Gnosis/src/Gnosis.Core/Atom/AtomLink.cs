@@ -62,5 +62,20 @@ namespace Gnosis.Core.Atom
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            IDictionary<string, string> attributes = new Dictionary<string, string>();
+            attributes.Add("href", href.ToString());
+            attributes.AddIfNotNull("rel", rel);
+            attributes.AddIfNotNull("type", type);
+            attributes.AddIfNotNull("hrefLang", hrefLang);
+            attributes.AddIfNotNull("title", title);
+            attributes.AddIfTrue("length", length, x => x > 0);
+            
+            var xml = new StringBuilder();
+            AppendTag(xml, "link", attributes);
+            return xml.ToString();
+        }
     }
 }

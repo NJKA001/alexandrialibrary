@@ -14,6 +14,13 @@ namespace Gnosis.Core.Atom
         public AtomFeed(ICharacterSet encoding, IEnumerable<IXmlNamespace> namespaces, IEnumerable<IXmlStyleSheet> styleSheets, Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, IEnumerable<IAtomAuthor> authors, IAtomId id, IEnumerable<IAtomLink> links, IAtomTitle title, IAtomUpdated updated, IEnumerable<IAtomCategory> categories, IEnumerable<IAtomContributor> contributors, IEnumerable<IAtomEntry> entries, IAtomGenerator generator, IAtomIcon icon, IAtomLogo logo, IAtomRights rights, IAtomSubtitle subtitle)
             : base(baseId, lang, extensions)
         {
+            if (id == null)
+                throw new ArgumentNullException("id");
+            if (title == null)
+                throw new ArgumentNullException("title");
+            if (updated == null)
+                throw new ArgumentNullException("updated");
+
             this.encoding = encoding ?? CharacterSet.Utf8;
             this.namespaces = namespaces;
             this.styleSheets = styleSheets;
@@ -147,26 +154,51 @@ namespace Gnosis.Core.Atom
             foreach (var styleSheet in styleSheets)
                 xml.AppendLine(styleSheet.ToString());
 
-            xml.Append("<feed");
-
-            foreach (var ns in namespaces)
-                xml.AppendFormat(" {0}", ns.ToString());
-
-            if (BaseId != null)
-                xml.AppendFormat(" xml:base='{0}'", BaseId.ToString());
-
-            if (Lang != null)
-                xml.AppendFormat(" xml:lang='{0}'", Lang.ToString());
-
-            xml.Append(">");
-            xml.AppendLine();
+            AppendStartTag(xml, "feed", namespaces);
 
             foreach (var author in authors)
                 xml.AppendLine(author.ToString());
 
+            xml.AppendLine(id.ToString());
+
+            foreach (var link in links)
+                xml.AppendLine(link.ToString());
+
+            xml.AppendLine(title.ToString());
+            xml.AppendLine(updated.ToString());
+
+            foreach (var category in categories)
+                xml.AppendLine(category.ToString());
+
+            foreach (var contributor in contributors)
+                xml.AppendLine(contributor.ToString());
+
+            foreach (var entry in entries)
+                xml.AppendLine(entry.ToString());
+
+            if (generator != null)
+                xml.AppendLine(generator.ToString());
+
+            if (icon != null)
+                xml.AppendLine(icon.ToString());
+
+            if (rights != null)
+                xml.AppendLine(rights.ToString());
+
+            if (subtitle != null)
+                xml.AppendLine(subtitle.ToString());
+
+            AppendEndTag(xml, "feed");
+
+            System.Diagnostics.Debug.WriteLine(xml.ToString());
             return xml.ToString();
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            return ToXml();
+        }
     }
 }

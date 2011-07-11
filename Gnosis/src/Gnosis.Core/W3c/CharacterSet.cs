@@ -70,6 +70,7 @@ namespace Gnosis.Core.W3c
         private static void InitializeCharacterSets()
         {
             characterSets.Add(Ascii);
+            characterSets.Add(Latin1);
             characterSets.Add(Utf7);
             characterSets.Add(Utf8);
             characterSets.Add(Utf16);
@@ -163,6 +164,7 @@ namespace Gnosis.Core.W3c
         #region Character Sets
 
         public static readonly ICharacterSet Ascii = new CharacterSet("US-ASCII", "ANSI X3.4-1968");
+        public static readonly ICharacterSet Latin1 = new CharacterSet("ISO-8859-1", "ISO/IEC 8859-1:1998: Latin1");
         public static readonly ICharacterSet Utf7 = new CharacterSet("UTF-7", "Unicode UTF-7: RFC 2152", new byte[] { 43, 47, 118 });
         public static readonly ICharacterSet Utf8 = new CharacterSet("UTF-8", "Unicode UTF-8: RFC 3629", new byte[] { 239, 187, 191 });
         public static readonly ICharacterSet Utf16 = new CharacterSet("UTF-16", "Uncide UTF-16: RFC 2781");

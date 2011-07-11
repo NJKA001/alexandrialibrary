@@ -26,5 +26,19 @@ namespace Gnosis.Core.Atom
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            var xml = new StringBuilder();
+
+            AppendStartTag(xml, "icon");
+
+            if (uri != null)
+                xml.Append(uri.ToString());
+
+            AppendEndTag(xml, "icon");
+
+            return xml.ToString();
+        }
     }
 }

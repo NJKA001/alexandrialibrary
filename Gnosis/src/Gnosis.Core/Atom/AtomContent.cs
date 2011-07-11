@@ -34,5 +34,25 @@ namespace Gnosis.Core.Atom
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            var xml = new StringBuilder();
+            var attributes = new Dictionary<string, string>();
+            attributes.AddIfNotNull("src", src);
+
+            if (mediaType != null)
+                attributes.Add("type", mediaType.ToString());
+            else
+                attributes.Add("type", Type.ToString().ToLower());
+
+            xml.Append("<content");
+
+            AppendTagAttributes(xml, attributes, new List<IXmlNamespace>());
+
+            xml.AppendFormat(">{0}</content>", Text ?? string.Empty);
+
+            return xml.ToString();
+        }
     }
 }

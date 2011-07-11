@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core.Ietf;
+using Gnosis.Core.W3c;
 
 namespace Gnosis.Core.Atom
 {
@@ -19,6 +20,21 @@ namespace Gnosis.Core.Atom
 
         private readonly string text;
         private readonly AtomTextType type = AtomTextType.Text;
+
+        protected string ToString(string tag)
+        {
+            var xml = new StringBuilder();
+            var attributes = new Dictionary<string, string>();
+            attributes.Add("type", Type.ToString().ToLower());
+
+            xml.AppendFormat("<{0}", tag);
+
+            AppendTagAttributes(xml, attributes, new List<IXmlNamespace>());
+
+            xml.AppendFormat(">{0}</{1}>", text ?? string.Empty, tag);
+
+            return xml.ToString();
+        }
 
         #region IAtomTextConstruct Members
 

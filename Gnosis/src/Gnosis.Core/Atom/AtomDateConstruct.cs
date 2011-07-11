@@ -18,6 +18,15 @@ namespace Gnosis.Core.Atom
 
         private readonly DateTime date;
 
+        protected string ToString(string tag)
+        {
+            var xml = new StringBuilder();
+            AppendStartTag(xml, tag);
+            xml.Append(Date.ToUniversalTime().ToString("s"));
+            AppendEndTag(xml, tag);
+            return xml.ToString();
+        }
+
         #region IAtomDateConstruct Members
 
         public DateTime Date
