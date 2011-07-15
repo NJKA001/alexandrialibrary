@@ -12,6 +12,9 @@ namespace Gnosis.Core.Rss
     {
         public RssExtension(IXmlNamespace primaryNamespace, IEnumerable<IXmlNamespace> additionalNamespaces, string prefix, string name, string content)
         {
+            if (content == null)
+                throw new ArgumentNullException("content");
+
             this.primaryNamespace = primaryNamespace;
             this.additionalNamespaces = additionalNamespaces;
             this.prefix = prefix;
@@ -53,5 +56,10 @@ namespace Gnosis.Core.Rss
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            return content;
+        }
     }
 }

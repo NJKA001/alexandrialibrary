@@ -10,6 +10,9 @@ namespace Gnosis.Core.W3c
     {
         public PicsRating(string value)
         {
+            if (value == null)
+                throw new ArgumentNullException("value");
+
             this.value = value;
         }
 

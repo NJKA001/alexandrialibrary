@@ -93,5 +93,36 @@ namespace Gnosis.Core.Rss
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            var xml = new StringBuilder();
+
+            xml.AppendLine("<item>");
+            
+            xml.AppendEscapedTagIfNotNull("title", title);
+            xml.AppendEscapedTagIfNotNull("link", link);
+            xml.AppendEscapedTagIfNotNull("description", description);
+            xml.AppendEscapedTagIfNotNull("author", author);
+            xml.AppendEscapedTagIfNotNull("comments", comments);
+
+            if (enclosure != null)
+                xml.AppendLine(enclosure.ToString());
+            if (guid != null)
+                xml.AppendLine(guid.ToString());
+            xml.AppendDateIfNotMinValue("pubDate", pubDate, x => x.ToRfc822String());
+            if (source != null)
+                xml.AppendLine(source.ToString());
+
+            foreach (var category in categories)
+                xml.AppendLine(category.ToString());
+
+            foreach (var extension in extensions)
+                xml.AppendLine(extension.ToString());
+
+            xml.AppendLine("</item>");
+
+            return xml.ToString();
+        }
     }
 }

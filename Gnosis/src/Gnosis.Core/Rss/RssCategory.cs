@@ -10,6 +10,9 @@ namespace Gnosis.Core.Rss
     {
         public RssCategory(Uri domain, string name)
         {
+            if (name == null)
+                throw new ArgumentNullException("name");
+
             this.domain = domain;
             this.name = name;
         }
@@ -30,5 +33,21 @@ namespace Gnosis.Core.Rss
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            var xml = new StringBuilder();
+
+            xml.Append("<category");
+
+            if (domain != null)
+                xml.AppendFormat(" domain='{0}'", domain.ToXmlEscapedString());
+
+            xml.Append(">");
+            xml.AppendFormat("{0}</category>", name.ToXmlEscapedString());
+            xml.AppendLine();
+
+            return xml.ToString();
+        }
     }
 }

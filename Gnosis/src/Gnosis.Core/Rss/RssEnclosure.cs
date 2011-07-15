@@ -12,6 +12,11 @@ namespace Gnosis.Core.Rss
     {
         public RssEnclosure(Uri url, IMediaType type, int length)
         {
+            if (url == null)
+                throw new ArgumentNullException("url");
+            if (type == null)
+                throw new ArgumentNullException("type");
+
             this.url = url;
             this.type = type;
             this.length = length;
@@ -39,5 +44,15 @@ namespace Gnosis.Core.Rss
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            var xml = new StringBuilder();
+
+            xml.AppendFormat("<enclosure url='{0}' length='{1}' type='{2}' />", url.ToXmlEscapedString(), length, type.ToString());
+            xml.AppendLine();
+
+            return xml.ToString();
+        }
     }
 }

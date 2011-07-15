@@ -10,6 +10,13 @@ namespace Gnosis.Core.Rss
     {
         public RssImage(Uri url, string title, Uri link, int width, int height, string description)
         {
+            if (url == null)
+                throw new ArgumentNullException("url");
+            if (title == null)
+                throw new ArgumentNullException("title");
+            if (link == null)
+                throw new ArgumentNullException("link");
+
             this.url = url;
             this.title = title;
             this.link = link;
@@ -62,5 +69,32 @@ namespace Gnosis.Core.Rss
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            var xml = new StringBuilder();
+
+            xml.AppendLine("<image>");
+            xml.AppendFormat("  <url>{0}</url>", url.ToXmlEscapedString());
+            xml.AppendLine();
+            xml.AppendFormat("  <title>{0}</title>", title.ToXmlEscapedString());
+            xml.AppendLine();
+            xml.AppendFormat("  <link>{0}</link>", link.ToXmlEscapedString());
+            xml.AppendLine();
+            xml.AppendFormat("  <width>{0}</width>", width);
+            xml.AppendLine();
+            xml.AppendFormat("  <height>{0}</height>", height);
+            xml.AppendLine();
+
+            if (description != null)
+            {
+                xml.AppendFormat("  <description>{0}</description>", description.ToXmlEscapedString());
+                xml.AppendLine();
+            }
+
+            xml.AppendLine("</image>");
+
+            return xml.ToString();
+        }
     }
 }

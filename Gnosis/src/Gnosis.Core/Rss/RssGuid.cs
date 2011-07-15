@@ -35,5 +35,14 @@ namespace Gnosis.Core.Rss
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            var xml = new StringBuilder();
+
+            xml.AppendFormat("<guid isPermaLink='{0}'>{1}</guid>", isPermaLink.ToString().ToLower(), value.ToXmlEscapedString());
+
+            return xml.ToString();
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Xml;
 
 using NUnit.Framework;
 
@@ -17,75 +18,10 @@ namespace Gnosis.Tests.Models
     [TestFixture]
     public class RssTests
     {
-        [Test]
-        public void CreateExampleRss091FeedFromLocalXml()
-        {
-            const string path = @".\Files\example0.91.rss";
-            const string version = "0.91";
-
-            var fileInfo = new FileInfo(path);
-            Assert.IsTrue(fileInfo.Exists);
-
-            var location = new Uri(fileInfo.FullName);
-            var contentType = location.ToContentType();
-            Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
-
-            var feed = location.ToRssFeed();
-
-            Assert.IsNotNull(feed);
-            Assert.IsNotNull(feed.Channel);
-            Assert.AreEqual(version, feed.Version);
-            Assert.AreEqual(CharacterSet.Latin1, feed.Encoding);
-        }
-
-        [Test]
-        public void CreateExampleRss092FeedFromLocalXml()
-        {
-            const string path = @".\Files\example0.92.rss";
-            const string version = "0.92";
-
-            var fileInfo = new FileInfo(path);
-            Assert.IsTrue(fileInfo.Exists);
-
-            var location = new Uri(fileInfo.FullName);
-            var contentType = location.ToContentType();
-            Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
-
-            var feed = location.ToRssFeed();
-
-            Assert.IsNotNull(feed);
-            Assert.IsNotNull(feed.Channel);
-            Assert.AreEqual(version, feed.Version);
-        }
-
-        [Test]
-        public void CreateExampleRss20FeedFromLocalXml()
-        {
-            const string path = @".\Files\example2.0.rss";
-            const string version = "2.0";
-
-            var fileInfo = new FileInfo(path);
-            Assert.IsTrue(fileInfo.Exists);
-
-            var location = new Uri(fileInfo.FullName);
-            var contentType = location.ToContentType();
-            Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
-
-            var feed = location.ToRssFeed();
-
-            Assert.IsNotNull(feed);
-            Assert.IsNotNull(feed.Channel);
-            Assert.AreEqual(version, feed.Version);
-        }
-
-
-
-        [Test]
-        public void CreateRssFeedFromLocalXml()
+        private void MakeRssFeedAssertions(IRssFeed feed)
         {
             #region Constants
 
-            const string path = @".\Files\arstechnica.xml";
             const string version = "2.0";
             const string title = "Ars Technica";
             const string link = "http://arstechnica.com/index.php";
@@ -138,15 +74,6 @@ namespace Gnosis.Tests.Models
             var item1PubDate = new DateTime(2011, 6, 29, 16, 47, 00); //Wed, 29 Jun 2011 11:47:00 -0500
 
             #endregion
-
-            var fileInfo = new FileInfo(path);
-            Assert.IsTrue(fileInfo.Exists);
-            
-            var location = new Uri(fileInfo.FullName);
-            var contentType = location.ToContentType();
-            Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
-            
-            var feed = location.ToRssFeed();
 
             Assert.IsNotNull(feed);
             Assert.IsNotNull(feed.Channel);
@@ -215,6 +142,83 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
+        public void CreateExampleRss091FeedFromLocalXml()
+        {
+            const string path = @".\Files\example0.91.rss";
+            const string version = "0.91";
+
+            var fileInfo = new FileInfo(path);
+            Assert.IsTrue(fileInfo.Exists);
+
+            var location = new Uri(fileInfo.FullName);
+            var contentType = location.ToContentType();
+            Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
+
+            var feed = location.ToRssFeed();
+
+            Assert.IsNotNull(feed);
+            Assert.IsNotNull(feed.Channel);
+            Assert.AreEqual(version, feed.Version);
+            Assert.AreEqual(CharacterSet.Latin1, feed.Encoding);
+        }
+
+        [Test]
+        public void CreateExampleRss092FeedFromLocalXml()
+        {
+            const string path = @".\Files\example0.92.rss";
+            const string version = "0.92";
+
+            var fileInfo = new FileInfo(path);
+            Assert.IsTrue(fileInfo.Exists);
+
+            var location = new Uri(fileInfo.FullName);
+            var contentType = location.ToContentType();
+            Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
+
+            var feed = location.ToRssFeed();
+
+            Assert.IsNotNull(feed);
+            Assert.IsNotNull(feed.Channel);
+            Assert.AreEqual(version, feed.Version);
+        }
+
+        [Test]
+        public void CreateExampleRss20FeedFromLocalXml()
+        {
+            const string path = @".\Files\example2.0.rss";
+            const string version = "2.0";
+
+            var fileInfo = new FileInfo(path);
+            Assert.IsTrue(fileInfo.Exists);
+
+            var location = new Uri(fileInfo.FullName);
+            var contentType = location.ToContentType();
+            Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
+
+            var feed = location.ToRssFeed();
+
+            Assert.IsNotNull(feed);
+            Assert.IsNotNull(feed.Channel);
+            Assert.AreEqual(version, feed.Version);
+        }
+
+        [Test]
+        public void CreateRssFeedFromLocalXml()
+        {
+            const string path = @".\Files\arstechnica.xml";
+            var fileInfo = new FileInfo(path);
+            Assert.IsTrue(fileInfo.Exists);
+            
+            var location = new Uri(fileInfo.FullName);
+            var contentType = location.ToContentType();
+            Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
+            
+            var feed = location.ToRssFeed();
+
+            MakeRssFeedAssertions(feed);
+        }
+
+        [Test]
         public void CreateRssFeedFromRemoteCustomSource()
         {
             const string generator = "ESPN Inc. http://espn.go.com/";
@@ -232,7 +236,7 @@ namespace Gnosis.Tests.Models
         [Test]
         public void CreateRssFeedFromRemoteWordPressSource()
         {
-            const string generator = "http://wordpress.org/?v=3.2";
+            const string generator = "http://wordpress.org/?v=3.2.1";
 
             var location = new Uri("http://www.nerdist.com/category/podcast/feed/");
             var feed = location.ToRssFeed();
@@ -252,6 +256,52 @@ namespace Gnosis.Tests.Models
             Assert.IsNotNull(feed.BaseId);
             Assert.AreEqual(baseId, feed.BaseId.ToString());
             Assert.IsNotNull(feed.Channel);
+        }
+
+        [Test]
+        public void CreateRssFeedFromXmlOutput()
+        {
+            const string path = @".\Files\arstechnica.xml";
+            var fileInfo = new FileInfo(path);
+            Assert.IsTrue(fileInfo.Exists);
+
+            var location = new Uri(fileInfo.FullName);
+            var contentType = location.ToContentType();
+            Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
+
+            var original = location.ToRssFeed();
+
+            IRssFeed feed = null;
+            var encoding = CharacterSet.Utf8;
+            IEnumerable<IXmlNamespace> namespaces = new List<IXmlNamespace>();
+            var styleSheets = new List<IXmlStyleSheet>();
+            var xmlString = original.ToString();
+            var xml = new XmlDocument();
+            xml.LoadXml(xmlString);
+
+            foreach (var child in xml.ChildNodes.Cast<XmlNode>().Where(node => node != null))
+            {
+                switch (child.NodeType)
+                {
+                    case XmlNodeType.XmlDeclaration:
+                        encoding = child.ToEncoding();
+                        break;
+                    case XmlNodeType.ProcessingInstruction:
+                        styleSheets.AddIfNotNull(child.ToXmlStyleSheet());
+                        break;
+                    case XmlNodeType.Element:
+                        if (child.Name != "rss")
+                            break;
+
+                        namespaces = child.ToXmlNamespaces();
+                        feed = child.ToRssFeed(encoding, namespaces, styleSheets);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            MakeRssFeedAssertions(feed);
         }
     }
 }

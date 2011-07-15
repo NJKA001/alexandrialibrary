@@ -181,6 +181,54 @@ namespace Gnosis.Core.Rss
             xml.AppendEscapedTagIfNotNull("copyright", copyright);
             xml.AppendEscapedTagIfNotNull("managingEditor", managingEditor);
             xml.AppendEscapedTagIfNotNull("webMaster", webMaster);
+            xml.AppendDateIfNotMinValue("pubDate", pubDate, x => x.ToRfc822String());
+            xml.AppendDateIfNotMinValue("lastBuildDate", lastBuildDate, x => x.ToRfc822String());
+            xml.AppendEscapedTagIfNotNull("generator", generator);
+            xml.AppendEscapedTagIfNotNull("docs", docs);
+            
+            if (cloud != null)
+                xml.AppendLine(cloud.ToString());
+            if (ttl != TimeSpan.Zero)
+                xml.AppendEscapedTagIfNotNull("ttl", ttl.TotalMinutes);
+            if (image != null)
+                xml.AppendLine(image.ToString());
+            
+            if (rating != null)
+            {
+                xml.AppendLine("<rating>");
+                xml.AppendLine(rating.ToString().ToXmlEscapedString());
+                xml.AppendLine("</rating>");
+            }
+
+            if (textInput != null)
+                xml.AppendLine(textInput.ToString());
+            
+            if (skipHours != null && skipHours.Count() > 0)
+            {
+                xml.AppendLine("<skipHours>");
+
+                foreach (var hour in skipHours)
+                    xml.AppendLine("<hour>" + ((int)hour).ToString() + "</hour>");
+
+                xml.AppendLine("</skipHours>");
+            }
+
+            if (skipDays != null && skipDays.Count() > 0)
+            {
+                xml.AppendLine("<skipDays>");
+
+                foreach (var day in skipDays)
+                    xml.AppendLine("<day>" + day.ToString() + "</day>");
+
+                xml.AppendLine("</skipDays>");
+            }
+
+            foreach (var category in categories)
+                xml.AppendLine(category.ToString());
+            foreach (var item in items)
+                xml.AppendLine(item.ToString());
+            foreach (var extension in extensions)
+                xml.AppendLine(extension.ToString());
 
             xml.AppendLine("</channel>");
             return xml.ToString();

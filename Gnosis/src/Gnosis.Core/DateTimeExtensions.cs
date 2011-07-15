@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core.W3c;
+
 namespace Gnosis.Core
 {
     public static class DateTimeExtensions
     {
         public static string ToRfc3339String(this DateTime self)
         {
-            return self.ToString("yyyy-MM-ddTHH:mm:ss.fff") + "Z";
+            return self.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fff") + "Z";
+        }
+
+        public static string ToRfc822String(this DateTime self)
+        {
+            return Rfc822DateTime.ToString(self.ToUniversalTime());
         }
     }
 }

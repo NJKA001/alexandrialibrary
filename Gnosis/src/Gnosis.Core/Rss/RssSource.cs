@@ -10,6 +10,11 @@ namespace Gnosis.Core.Rss
     {
         public RssSource(Uri url, string name)
         {
+            if (url == null)
+                throw new ArgumentNullException("url");
+            if (name == null)
+                throw new ArgumentNullException("name");
+
             this.url = url;
             this.name = name;
         }
@@ -30,5 +35,14 @@ namespace Gnosis.Core.Rss
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            var xml = new StringBuilder();
+
+            xml.AppendFormat("<source url='{0}'>{1}</source>", url.ToXmlEscapedString(), name.ToXmlEscapedString());
+
+            return xml.ToString();
+        }
     }
 }
