@@ -214,13 +214,12 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(MediaType.ApplicationAtomXml, contentType.Type);
 
             var original = location.ToAtomFeed();
-            var xmlString = original.ToXml();
+            var xmlString = original.ToString();
             Assert.IsNotNull(xmlString);
             var xml = new XmlDocument();
             xml.LoadXml(xmlString);
             IAtomFeed feed = null;
             var encoding = CharacterSet.Utf8;
-            IEnumerable<IXmlNamespace> namespaces = new List<IXmlNamespace>();
             var styleSheets = new List<IXmlStyleSheet>();
 
             foreach (var child in xml.ChildNodes.Cast<XmlNode>().Where(node => node != null))
@@ -237,8 +236,7 @@ namespace Gnosis.Tests.Models
                         if (child.Name != "feed")
                             break;
 
-                        namespaces = child.ToXmlNamespaces();
-                        feed = child.ToAtomFeed(encoding, namespaces, styleSheets);
+                        feed = child.ToAtomFeed(encoding, styleSheets);
                         break;
                     default:
                         break;

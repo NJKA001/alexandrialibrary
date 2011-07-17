@@ -12,7 +12,7 @@ namespace Gnosis.Core.Rss
     public class RssChannel
         : IRssChannel
     {
-        public RssChannel(string title, Uri link, string description, ILanguageTag language, string copyright, string managingEditor, string webMaster, DateTime pubDate, DateTime lastBuildDate, string generator, Uri docs, IRssCloud cloud, TimeSpan ttl, IRssImage image, IPicsRating rating, IRssTextInput textInput, IEnumerable<RssHour> skipHours, IEnumerable<RssDay> skipDays, IEnumerable<IRssCategory> categories, IEnumerable<IRssItem> items, IEnumerable<IRssExtension> extensions)
+        public RssChannel(string title, Uri link, string description, ILanguageTag language, string copyright, string managingEditor, string webMaster, DateTime pubDate, DateTime lastBuildDate, string generator, Uri docs, IRssCloud cloud, TimeSpan ttl, IRssImage image, IPicsRating rating, IRssTextInput textInput, IEnumerable<RssHour> skipHours, IEnumerable<RssDay> skipDays, IEnumerable<IRssCategory> categories, IEnumerable<IRssItem> items, IEnumerable<IXmlExtension> extensions)
         {
             this.title = title;
             this.link = link;
@@ -58,7 +58,7 @@ namespace Gnosis.Core.Rss
 
         private readonly IEnumerable<IRssCategory> categories;
         private readonly IEnumerable<IRssItem> items;
-        private readonly IEnumerable<IRssExtension> extensions;
+        private readonly IEnumerable<IXmlExtension> extensions;
 
         #region IRssChannel Members
 
@@ -162,7 +162,7 @@ namespace Gnosis.Core.Rss
             get { return items; }
         }
 
-        public IEnumerable<IRssExtension> Extensions
+        public IEnumerable<IXmlExtension> Extensions
         {
             get { return extensions; }
         }

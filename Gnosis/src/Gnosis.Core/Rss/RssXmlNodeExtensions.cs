@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
+using Gnosis.Core;
 using Gnosis.Core.Ietf;
 using Gnosis.Core.W3c;
 
@@ -57,7 +58,7 @@ namespace Gnosis.Core.Rss
 
             var categories = new List<IRssCategory>();
             var items = new List<IRssItem>();
-            var extensions = new List<IRssExtension>();
+            var extensions = new List<IXmlExtension>();
 
             foreach (var child in node.ChildNodes.Cast<XmlNode>())
             {
@@ -66,7 +67,7 @@ namespace Gnosis.Core.Rss
 
                 if (child.Name.Contains(':'))
                 {
-                    var extension = child.ToRssExtension(namespaces);
+                    var extension = child.ToXmlExtension(namespaces);
                     if (extension != null)
                         extensions.Add(extension);
                 }
@@ -230,56 +231,6 @@ namespace Gnosis.Core.Rss
                 : null;
         }
 
-        private static IRssExtension ToRssExtension(this XmlNode node, IEnumerable<IXmlNamespace> namespaces)
-        {
-            var nameTokens = node.Name.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
-            if (nameTokens == null || nameTokens.Length != 2)
-                return null;
-
-            var prefix = nameTokens[0];
-            var name = nameTokens[1];
-
-            IXmlNamespace primaryNamespace = null;
-            var additionalNamespaces = new List<IXmlNamespace>();
-
-            if (node.Attributes != null)
-            {
-                foreach (var attrib in node.Attributes.Cast<XmlAttribute>())
-                {
-                    if (attrib != null && attrib.Name.StartsWith("xmlns"))
-                    {
-                        if (attrib.Name.Contains(':'))
-                        {
-                            var attribTokens = attrib.Name.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
-                            if (attribTokens != null && attribTokens.Length == 2)
-                            {
-                                var attribPrefix = attribTokens[1];
-                                var ns = new XmlNamespace(new Uri(attrib.Value, UriKind.RelativeOrAbsolute), attribPrefix);
-
-                                if (attribPrefix == prefix)
-                                {
-                                    primaryNamespace = ns;
-                                }
-                                else
-                                {
-                                    additionalNamespaces.Add(ns);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (primaryNamespace == null)
-            {
-                primaryNamespace = namespaces.Where(x => x.Prefix == prefix).FirstOrDefault();
-            }
-
-            return (primaryNamespace != null) ?
-                new RssExtension(primaryNamespace, additionalNamespaces, prefix, name, node.OuterXml)
-                : null;
-        }
-
         private static IRssGuid ToRssGuid(this XmlNode node)
         {
             if (node == null)
@@ -344,9 +295,9 @@ namespace Gnosis.Core.Rss
                 : null;
         }
 
-        private static IRssItem ToRssItem(this XmlNode node, IEnumerable<IXmlNamespace> namespaces)
+        private static IRssItem ToRssItem(this XmlNode self, IEnumerable<IXmlNamespace> globalNamespaces)
         {
-            if (node == null)
+            if (self == null)
                 return null;
 
             string title = null;
@@ -360,15 +311,17 @@ namespace Gnosis.Core.Rss
             IRssSource source = null;
 
             IList<IRssCategory> categories = new List<IRssCategory>();
-            IList<IRssExtension> extensions = new List<IRssExtension>();
+            IList<IXmlExtension> extensions = new List<IXmlExtension>();
+            var namespaces = self.ToXmlNamespaces();
+            var primaryNamespace = namespaces.Where(x => x != null && string.IsNullOrEmpty(x.Prefix)).FirstOrDefault();
 
-            foreach (var child in node.ChildNodes.Cast<XmlElement>())
+            foreach (var child in self.ChildNodes.Cast<XmlElement>())
             {
                 if (child != null)
                 {
                     if (child.Name.Contains(':'))
                     {
-                        var extension = child.ToRssExtension(namespaces);
+                        var extension = child.ToXmlExtension(globalNamespaces);
                         if (extension != null)
                             extensions.Add(extension);
                     }
@@ -416,7 +369,7 @@ namespace Gnosis.Core.Rss
             }
 
             return (title != null || description != null) ?
-                new RssItem(title, link, description, author, comments, enclosure, guid, pubDate, source, categories, extensions)
+                new RssItem(extensions, namespaces, primaryNamespace, title, link, description, author, comments, enclosure, guid, pubDate, source, categories)
                 : null;
         }
 
@@ -558,13 +511,21 @@ namespace Gnosis.Core.Rss
             IRssChannel channel = null;
             var version = self.GetAttributeString("version");
             var baseId = self.GetAttributeUri("xml:base");
+            var extensions = new List<IXmlExtension>();
+
+            foreach (var extNode in self.ChildNodes.Cast<XmlNode>().Where(x => x.Name != null && x.Name.Contains(":")))
+            {
+                var extension = extNode.ToXmlExtension(namespaces);
+                if (extension != null)
+                    extensions.Add(extension);
+            }
 
             var child = self.FindChild("channel");
             if (child != null)
                 channel = child.ToRssChannel(namespaces);
 
             return channel != null ?
-                new RssFeed(channel, version, baseId, encoding, namespaces, styleSheets)
+                new RssFeed(channel, version, baseId, encoding, extensions, namespaces, styleSheets)
                 : null;
         }
     }

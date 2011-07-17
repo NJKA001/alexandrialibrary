@@ -3,41 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core.W3c;
-
-namespace Gnosis.Core.Rss
+namespace Gnosis.Core.W3c
 {
-    public class RssExtension
-        : IRssExtension
+    public class XmlExtension
+        : IXmlExtension
     {
-        public RssExtension(IXmlNamespace primaryNamespace, IEnumerable<IXmlNamespace> additionalNamespaces, string prefix, string name, string content)
+        public XmlExtension(IEnumerable<IXmlNamespace> namespaces, IXmlNamespace primaryNamespace, string prefix, string name, string content)
         {
             if (content == null)
                 throw new ArgumentNullException("content");
 
+            this.namespaces = namespaces;
             this.primaryNamespace = primaryNamespace;
-            this.additionalNamespaces = additionalNamespaces;
             this.prefix = prefix;
             this.name = name;
             this.content = content;
         }
 
+        private readonly IEnumerable<IXmlNamespace> namespaces;
         private readonly IXmlNamespace primaryNamespace;
-        private readonly IEnumerable<IXmlNamespace> additionalNamespaces;
         private readonly string prefix;
         private readonly string name;
         private readonly string content;
 
-        #region IRssExtension Members
+        #region IXmlExtension Members
+
+        public IEnumerable<IXmlNamespace> Namespaces
+        {
+            get { return namespaces; }
+        }
 
         public IXmlNamespace PrimaryNamespace
         {
             get { return primaryNamespace; }
-        }
-
-        public IEnumerable<IXmlNamespace> AdditionalNamespaces
-        {
-            get { return additionalNamespaces; }
         }
 
         public string Prefix

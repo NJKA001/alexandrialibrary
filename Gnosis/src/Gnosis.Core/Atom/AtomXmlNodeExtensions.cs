@@ -16,20 +16,26 @@ namespace Gnosis.Core.Atom
 
         private struct AtomCommonInfo
         {
-            public AtomCommonInfo(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions)
+            public AtomCommonInfo(Uri baseId, ILanguageTag lang, IEnumerable<IXmlExtension> extensions, IEnumerable<IXmlNamespace> namespaces, IXmlNamespace primaryNamespace)
             {
                 this.baseId = baseId;
                 this.lang = lang;
                 this.extensions = extensions;
+                this.namespaces = namespaces;
+                this.primaryNamespace = primaryNamespace;
             }
 
             private readonly Uri baseId;
             private readonly ILanguageTag lang;
-            private readonly IEnumerable<IAtomExtension> extensions;
+            private readonly IEnumerable<IXmlExtension> extensions;
+            private readonly IEnumerable<IXmlNamespace> namespaces;
+            private readonly IXmlNamespace primaryNamespace;
 
             public Uri BaseId { get { return baseId; } }
             public ILanguageTag Lang { get { return lang; } }
-            public IEnumerable<IAtomExtension> Extensions { get { return extensions; } }
+            public IEnumerable<IXmlExtension> Extensions { get { return extensions; } }
+            public IEnumerable<IXmlNamespace> Namespaces { get { return namespaces; } }
+            public IXmlNamespace PrimaryNamespace { get { return primaryNamespace; } }
         }
 
         #endregion
@@ -62,7 +68,7 @@ namespace Gnosis.Core.Atom
             }
 
             return (name != null) ?
-                new AtomAuthor(common.BaseId, common.Lang, common.Extensions, name, uri, email)
+                new AtomAuthor(common.BaseId, common.Lang, common.Extensions, common.Namespaces, common.PrimaryNamespace, name, uri, email)
                 : null;
         }
 
@@ -77,16 +83,28 @@ namespace Gnosis.Core.Atom
             string label = self.GetAttributeString("label");
 
             return term != null ?
-                new AtomCategory(common.BaseId, common.Lang, common.Extensions, term, scheme, label)
+                new AtomCategory(common.BaseId, common.Lang, common.Extensions, common.Namespaces, common.PrimaryNamespace, term, scheme, label)
                 : null;
         }
 
-        private static AtomCommonInfo ToAtomCommon(this XmlNode self, IEnumerable<IXmlNamespace> namespaces)
+        private static AtomCommonInfo ToAtomCommon(this XmlNode self)
         {
+            return self.ToAtomCommon(null);
+        }
+
+        private static AtomCommonInfo ToAtomCommon(this XmlNode self, IEnumerable<IXmlNamespace> globalNamespaces)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
             var baseId = self.ToXmlBase();
             var lang = self.ToXmlLang();
-            var extensions = self.ToAtomExtensions(namespaces);
-            return new AtomCommonInfo(baseId, lang, extensions);
+            var namespaces = self.ToXmlNamespaces();
+            var primaryNamespace = namespaces.Where(x => x != null && string.IsNullOrEmpty(x.Prefix)).FirstOrDefault();
+
+            var extensions = globalNamespaces != null ? self.ToXmlExtensions(globalNamespaces) : self.ToXmlExtensions(namespaces);
+            
+            return new AtomCommonInfo(baseId, lang, extensions, namespaces, primaryNamespace);
         }
 
         private static IAtomContent ToAtomContent(this XmlNode self, IEnumerable<IXmlNamespace> namespaces)
@@ -116,7 +134,7 @@ namespace Gnosis.Core.Atom
                     break;
             }
 
-            return new AtomContent(common.BaseId, common.Lang, common.Extensions, text, type, mediaType, src);
+            return new AtomContent(common.BaseId, common.Lang, common.Extensions, common.Namespaces, common.PrimaryNamespace, text, type, mediaType, src);
         }
 
         private static IAtomContributor ToAtomContributor(this XmlNode self, IEnumerable<IXmlNamespace> namespaces)
@@ -145,7 +163,7 @@ namespace Gnosis.Core.Atom
             }
 
             return (name != null) ?
-                new AtomContributor(common.BaseId, common.Lang, common.Extensions, name, uri, email)
+                new AtomContributor(common.BaseId, common.Lang, common.Extensions, common.Namespaces, common.PrimaryNamespace, name, uri, email)
                 : null;
         }
 
@@ -211,71 +229,8 @@ namespace Gnosis.Core.Atom
             }
 
             return (id != null && title != null && updated != null) ?
-                new AtomEntry(common.BaseId, common.Lang, common.Extensions, authors, content, id, links, summary, title, updated, categories, contributors, published, rights, source)
+                new AtomEntry(common.BaseId, common.Lang, common.Extensions, common.Namespaces, common.PrimaryNamespace, authors, content, id, links, summary, title, updated, categories, contributors, published, rights, source)
                 : null;
-        }
-
-        private static IAtomExtension ToAtomExtension(this XmlNode self, IEnumerable<IXmlNamespace> namespaces)
-        {
-            var nameTokens = self.Name.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
-            if (nameTokens == null || nameTokens.Length != 2)
-                return null;
-
-            var prefix = nameTokens[0];
-            var name = nameTokens[1];
-
-            IXmlNamespace primaryNamespace = null;
-            var additionalNamespaces = new List<IXmlNamespace>();
-
-            if (self.Attributes != null)
-            {
-                foreach (var attrib in self.Attributes.Cast<XmlAttribute>())
-                {
-                    if (attrib != null && attrib.Name.StartsWith("xmlns"))
-                    {
-                        if (attrib.Name.Contains(':'))
-                        {
-                            var attribTokens = attrib.Name.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
-                            if (attribTokens != null && attribTokens.Length == 2)
-                            {
-                                var attribPrefix = attribTokens[1];
-                                var ns = new XmlNamespace(new Uri(attrib.Value, UriKind.RelativeOrAbsolute), attribPrefix);
-
-                                if (attribPrefix == prefix)
-                                {
-                                    primaryNamespace = ns;
-                                }
-                                else
-                                {
-                                    additionalNamespaces.Add(ns);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (primaryNamespace == null)
-            {
-                primaryNamespace = namespaces.Where(x => x.Prefix == prefix).FirstOrDefault();
-            }
-
-            return (primaryNamespace != null) ?
-                new AtomExtension(primaryNamespace, additionalNamespaces, prefix, name, self.OuterXml)
-                : null;
-        }
-
-        private static IEnumerable<IAtomExtension> ToAtomExtensions(this XmlNode self, IEnumerable<IXmlNamespace> namespaces)
-        {
-            if (self == null)
-                throw new ArgumentNullException("self");
-
-            var extensions = new List<IAtomExtension>();
-
-            foreach (var child in self.ChildNodes.Cast<XmlNode>().Where(node => node.Name.Contains(':')))
-                extensions.AddIfNotNull(child.ToAtomExtension(namespaces));
-
-            return extensions;
         }
 
         private static IAtomGenerator ToAtomGenerator(this XmlNode self, IEnumerable<IXmlNamespace> namespaces)
@@ -289,7 +244,7 @@ namespace Gnosis.Core.Atom
             var version = self.GetAttributeString("version");
 
             return name != null ?
-                new AtomGenerator(common.BaseId, common.Lang, common.Extensions, name, uri, version)
+                new AtomGenerator(common.BaseId, common.Lang, common.Extensions, common.Namespaces, common.PrimaryNamespace, name, uri, version)
                 : null;
         }
 
@@ -302,7 +257,7 @@ namespace Gnosis.Core.Atom
             var uri = self.InnerText.ToUri();
 
             return (uri != null) ?
-                new AtomIcon(common.BaseId, common.Lang, common.Extensions, uri)
+                new AtomIcon(common.BaseId, common.Lang, common.Extensions, common.Namespaces, common.PrimaryNamespace, uri)
                 : null;
         }
 
@@ -311,7 +266,7 @@ namespace Gnosis.Core.Atom
             var common = self.ToAtomCommon(namespaces);
             var value = self.InnerText.ToUri();
 
-            return new AtomId(common.BaseId, common.Lang, common.Extensions, value);
+            return new AtomId(common.BaseId, common.Lang, common.Extensions, common.Namespaces, common.PrimaryNamespace, value);
         }
 
         private static IAtomLink ToAtomLink(this XmlNode self, IEnumerable<IXmlNamespace> namespaces)
@@ -325,7 +280,7 @@ namespace Gnosis.Core.Atom
             int length = self.GetAttributeInt32("length");
 
             return href != null ?
-                new AtomLink(common.BaseId, common.Lang, common.Extensions, href, rel, type, hrefLang, title, length)
+                new AtomLink(common.BaseId, common.Lang, common.Extensions, common.Namespaces, common.PrimaryNamespace, href, rel, type, hrefLang, title, length)
                 : null;
         }
 
@@ -335,7 +290,7 @@ namespace Gnosis.Core.Atom
             var uri = self.InnerText.ToUri();
 
             return (uri != null) ?
-                new AtomLogo(common.BaseId, common.Lang, common.Extensions, uri)
+                new AtomLogo(common.BaseId, common.Lang, common.Extensions, common.Namespaces, common.PrimaryNamespace, uri)
                 : null;
         }
 
@@ -345,7 +300,7 @@ namespace Gnosis.Core.Atom
             var date = DateTime.MinValue;
 
             return DateTime.TryParse(self.InnerText, out date) ?
-                new AtomPublished(common.BaseId, common.Lang, common.Extensions, date.ToUniversalTime())
+                new AtomPublished(common.BaseId, common.Lang, common.Extensions, common.Namespaces, common.PrimaryNamespace, date.ToUniversalTime())
                 : null;
         }
 
@@ -355,7 +310,7 @@ namespace Gnosis.Core.Atom
             var type = self.ToAtomTextType();
             var text = self.InnerXml;
 
-            return new AtomRights(common.BaseId, common.Lang, common.Extensions, text, type);
+            return new AtomRights(common.BaseId, common.Lang, common.Extensions, common.Namespaces, common.PrimaryNamespace, text, type);
         }
 
         private static IAtomSource ToAtomSource(this XmlNode self, IEnumerable<IXmlNamespace> namespaces)
@@ -420,7 +375,7 @@ namespace Gnosis.Core.Atom
             }
 
             return (id != null && title != null) ?
-                new AtomSource(common.BaseId, common.Lang, common.Extensions, authors, id, links, title, updated, categories, contributors, generator, icon, logo, rights, subtitle)
+                new AtomSource(common.BaseId, common.Lang, common.Extensions, common.Namespaces, common.PrimaryNamespace, authors, id, links, title, updated, categories, contributors, generator, icon, logo, rights, subtitle)
                 : null;
         }
 
@@ -430,7 +385,7 @@ namespace Gnosis.Core.Atom
             var text = self.InnerXml;
             var type = self.ToAtomTextType();
 
-            return new AtomSubtitle(common.BaseId, common.Lang, common.Extensions, text, type);
+            return new AtomSubtitle(common.BaseId, common.Lang, common.Extensions, common.Namespaces, common.PrimaryNamespace, text, type);
         }
 
         private static IAtomSummary ToAtomSummary(this XmlNode self, IEnumerable<IXmlNamespace> namespaces)
@@ -439,7 +394,7 @@ namespace Gnosis.Core.Atom
             var text = self.InnerXml;
             var type = self.ToAtomTextType();
 
-            return new AtomSummary(common.BaseId, common.Lang, common.Extensions, text, type);
+            return new AtomSummary(common.BaseId, common.Lang, common.Extensions, common.Namespaces, common.PrimaryNamespace, text, type);
         }
 
         private static AtomTextType ToAtomTextType(this XmlNode self)
@@ -466,7 +421,7 @@ namespace Gnosis.Core.Atom
             var text = self.InnerXml;
             var type = self.ToAtomTextType();
 
-            return new AtomTitle(common.BaseId, common.Lang, common.Extensions, text, type);
+            return new AtomTitle(common.BaseId, common.Lang, common.Extensions, common.Namespaces, common.PrimaryNamespace, text, type);
         }
 
         private static IAtomUpdated ToAtomUpdated(this XmlNode self, IEnumerable<IXmlNamespace> namespaces)
@@ -475,15 +430,15 @@ namespace Gnosis.Core.Atom
             var date = DateTime.MinValue;
 
             return DateTime.TryParse(self.InnerText, out date) ?
-                new AtomUpdated(common.BaseId, common.Lang, common.Extensions, date.ToUniversalTime())
+                new AtomUpdated(common.BaseId, common.Lang, common.Extensions, common.Namespaces, common.PrimaryNamespace, date.ToUniversalTime())
                 : null;
         }
 
         #endregion
 
-        public static IAtomFeed ToAtomFeed(this XmlNode self, ICharacterSet encoding, IEnumerable<IXmlNamespace> namespaces, IEnumerable<IXmlStyleSheet> styleSheets)
+        public static IAtomFeed ToAtomFeed(this XmlNode self, ICharacterSet encoding, IEnumerable<IXmlStyleSheet> styleSheets)
         {
-            var common = self.ToAtomCommon(namespaces);
+            var common = self.ToAtomCommon();
             IList<IAtomAuthor> authors = new List<IAtomAuthor>();
             IAtomId id = null;
             IList<IAtomLink> links = new List<IAtomLink>();
@@ -503,43 +458,43 @@ namespace Gnosis.Core.Atom
                 switch (child.Name)
                 {
                     case "author":
-                        authors.AddIfNotNull(child.ToAtomAuthor(namespaces));
+                        authors.AddIfNotNull(child.ToAtomAuthor(common.Namespaces));
                         break;
                     case "id":
-                        id = child.ToAtomId(namespaces);
+                        id = child.ToAtomId(common.Namespaces);
                         break;
                     case "link":
-                        links.AddIfNotNull(child.ToAtomLink(namespaces));
+                        links.AddIfNotNull(child.ToAtomLink(common.Namespaces));
                         break;
                     case "title":
-                        title = child.ToAtomTitle(namespaces);
+                        title = child.ToAtomTitle(common.Namespaces);
                         break;
                     case "updated":
-                        updated = child.ToAtomUpdated(namespaces);
+                        updated = child.ToAtomUpdated(common.Namespaces);
                         break;
                     case "category":
-                        categories.AddIfNotNull(child.ToAtomCategory(namespaces));
+                        categories.AddIfNotNull(child.ToAtomCategory(common.Namespaces));
                         break;
                     case "contributor":
-                        contributors.AddIfNotNull(child.ToAtomContributor(namespaces));
+                        contributors.AddIfNotNull(child.ToAtomContributor(common.Namespaces));
                         break;
                     case "entry":
-                        entries.AddIfNotNull(child.ToAtomEntry(namespaces));
+                        entries.AddIfNotNull(child.ToAtomEntry(common.Namespaces));
                         break;
                     case "generator":
-                        generator = child.ToAtomGenerator(namespaces);
+                        generator = child.ToAtomGenerator(common.Namespaces);
                         break;
                     case "icon":
-                        icon = child.ToAtomIcon(namespaces);
+                        icon = child.ToAtomIcon(common.Namespaces);
                         break;
                     case "logo":
-                        logo = child.ToAtomLogo(namespaces);
+                        logo = child.ToAtomLogo(common.Namespaces);
                         break;
                     case "rights":
-                        rights = child.ToAtomRights(namespaces);
+                        rights = child.ToAtomRights(common.Namespaces);
                         break;
                     case "subtitle":
-                        subtitle = child.ToAtomSubtitle(namespaces);
+                        subtitle = child.ToAtomSubtitle(common.Namespaces);
                         break;
                     default:
                         break;
@@ -547,7 +502,7 @@ namespace Gnosis.Core.Atom
             }
 
             return (id != null && title != null && updated != null) ?
-                new AtomFeed(encoding, namespaces, styleSheets, common.BaseId, common.Lang, common.Extensions, authors, id, links, title, updated, categories, contributors, entries, generator, icon, logo, rights, subtitle)
+                new AtomFeed(common.BaseId, common.Lang, common.Extensions, common.Namespaces, common.PrimaryNamespace, encoding, styleSheets, authors, id, links, title, updated, categories, contributors, entries, generator, icon, logo, rights, subtitle)
                 : null;
         }
     }

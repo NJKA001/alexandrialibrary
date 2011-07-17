@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core.W3c;
+
 namespace Gnosis.Core.Rss
 {
     public class RssItem
         : IRssItem
     {
-        public RssItem(string title, Uri link, string description, string author, Uri comments, IRssEnclosure enclosure, IRssGuid guid, DateTime pubDate, IRssSource source, IEnumerable<IRssCategory> categories, IEnumerable<IRssExtension> extensions)
+        public RssItem(IEnumerable<IXmlExtension> extensions, IEnumerable<IXmlNamespace> namespaces, IXmlNamespace primaryNamespace, string title, Uri link, string description, string author, Uri comments, IRssEnclosure enclosure, IRssGuid guid, DateTime pubDate, IRssSource source, IEnumerable<IRssCategory> categories)
         {
+            this.extensions = extensions;
+            this.namespaces = namespaces;
+            this.primaryNamespace = primaryNamespace;
+
             this.title = title;
             this.link = link;
             this.description = description;
@@ -19,9 +25,12 @@ namespace Gnosis.Core.Rss
             this.guid = guid;
             this.pubDate = pubDate;
             this.source = source;
-            this.categories = categories;
-            this.extensions = extensions;
+            this.categories = categories;            
         }
+
+        private readonly IEnumerable<IXmlExtension> extensions;
+        private readonly IEnumerable<IXmlNamespace> namespaces;
+        private readonly IXmlNamespace primaryNamespace;
 
         private readonly string title;
         private readonly Uri link;
@@ -33,7 +42,6 @@ namespace Gnosis.Core.Rss
         private readonly DateTime pubDate;
         private readonly IRssSource source;
         private readonly IEnumerable<IRssCategory> categories;
-        private readonly IEnumerable<IRssExtension> extensions;
 
         #region IRssItem Members
 
@@ -87,9 +95,23 @@ namespace Gnosis.Core.Rss
             get { return categories; }
         }
 
-        public IEnumerable<IRssExtension> Extensions
+        #endregion
+
+        #region IXmlElement Members
+
+        public IEnumerable<IXmlExtension> Extensions
         {
             get { return extensions; }
+        }
+
+        public IEnumerable<IXmlNamespace> Namespaces
+        {
+            get { return namespaces; }
+        }
+
+        public IXmlNamespace PrimaryNamespace
+        {
+            get { return primaryNamespace; }
         }
 
         #endregion

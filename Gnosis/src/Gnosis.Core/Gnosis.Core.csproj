@@ -50,7 +50,6 @@
     <Compile Include="Atom\AtomContributor.cs" />
     <Compile Include="Atom\AtomDateConstruct.cs" />
     <Compile Include="Atom\AtomEntry.cs" />
-    <Compile Include="Atom\AtomExtension.cs" />
     <Compile Include="Atom\AtomFeed.cs" />
     <Compile Include="Atom\AtomGenerator.cs" />
     <Compile Include="Atom\AtomIcon.cs" />
@@ -74,7 +73,6 @@
     <Compile Include="Atom\IAtomContent.cs" />
     <Compile Include="Atom\IAtomContributor.cs" />
     <Compile Include="Atom\IAtomDateConstruct.cs" />
-    <Compile Include="Atom\IAtomExtension.cs" />
     <Compile Include="Atom\IAtomGenerator.cs" />
     <Compile Include="Atom\IAtomIcon.cs" />
     <Compile Include="Atom\IAtomId.cs" />
@@ -114,7 +112,6 @@
     <Compile Include="Rss\IRssCloud.cs" />
     <Compile Include="Rss\IRssEnclosure.cs" />
     <Compile Include="Rss\IRssChannel.cs" />
-    <Compile Include="Rss\IRssExtension.cs" />
     <Compile Include="Rss\IRssFeed.cs" />
     <Compile Include="Rss\IRssItem.cs" />
     <Compile Include="Rss\IRssGuid.cs" />
@@ -123,7 +120,8 @@
     <Compile Include="Rss\IRssTextInput.cs" />
     <Compile Include="Rss\RssCategory.cs" />
     <Compile Include="Rss\RssChannel.cs" />
-    <Compile Include="Rss\RssExtension.cs" />
+    <Compile Include="W3c\IXmlElement.cs" />
+    <Compile Include="W3c\XmlExtension.cs" />
     <Compile Include="Rss\RssCloud.cs" />
     <Compile Include="Rss\RssCloudProtocol.cs" />
     <Compile Include="Rss\RssDay.cs" />
@@ -152,6 +150,7 @@
     <Compile Include="W3c\IMedia.cs" />
     <Compile Include="W3c\IMediaType.cs" />
     <Compile Include="W3c\IXmlDocument.cs" />
+    <Compile Include="W3c\IXmlExtension.cs" />
     <Compile Include="W3c\IXmlNamespace.cs" />
     <Compile Include="W3c\IPicsRating.cs" />
     <Compile Include="W3c\IXmlStyleSheet.cs" />

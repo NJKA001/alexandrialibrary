@@ -31,6 +31,6 @@ namespace Gnosis.Core.Rss
 
         IEnumerable<IRssCategory> Categories { get; }
         IEnumerable<IRssItem> Items { get; }
-        IEnumerable<IRssExtension> Extensions { get; }
+        IEnumerable<IXmlExtension> Extensions { get; }
     }
 }

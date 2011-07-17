@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core.Ietf;
+using Gnosis.Core.W3c;
 
 namespace Gnosis.Core.Atom
 {
     public class AtomIcon
         : AtomCommon, IAtomIcon
     {
-        public AtomIcon(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, Uri uri)
-            : base(baseId, lang, extensions)
+        public AtomIcon(Uri baseId, ILanguageTag lang, IEnumerable<IXmlExtension> extensions, IEnumerable<IXmlNamespace> namespaces, IXmlNamespace primaryNamespace, Uri uri)
+            : base(baseId, lang, extensions, namespaces, primaryNamespace)
         {
             this.uri = uri;
         }

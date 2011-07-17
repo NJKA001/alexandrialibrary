@@ -5,14 +5,15 @@ using System.Text;
 
 using Gnosis.Core;
 using Gnosis.Core.Ietf;
+using Gnosis.Core.W3c;
 
 namespace Gnosis.Core.Atom
 {
     public abstract class AtomDateConstruct
         : AtomCommon, IAtomDateConstruct
     {
-        protected AtomDateConstruct(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, DateTime date)
-            : base(baseId, lang, extensions)
+        protected AtomDateConstruct(Uri baseId, ILanguageTag lang, IEnumerable<IXmlExtension> extensions, IEnumerable<IXmlNamespace> namespaces, IXmlNamespace primaryNamespace, DateTime date)
+            : base(baseId, lang, extensions, namespaces, primaryNamespace)
         {
             this.date = date;
         }

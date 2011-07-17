@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core.Ietf;
+using Gnosis.Core.W3c;
 
 namespace Gnosis.Core.Atom
 {
     public class AtomUpdated
         : AtomDateConstruct, IAtomUpdated
     {
-        public AtomUpdated(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, DateTime date)
-            : base(baseId, lang, extensions, date)
+        public AtomUpdated(Uri baseId, ILanguageTag lang, IEnumerable<IXmlExtension> extensions, IEnumerable<IXmlNamespace> namespaces, IXmlNamespace primaryNamespace, DateTime date)
+            : base(baseId, lang, extensions, namespaces, primaryNamespace, date)
         {
         }
 

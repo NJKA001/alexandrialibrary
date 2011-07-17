@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core.Ietf;
+using Gnosis.Core.W3c;
 
 namespace Gnosis.Core.Atom
 {
     public class AtomId
         : AtomCommon, IAtomId
     {
-        public AtomId(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, Uri value)
-            : base(baseId, lang, extensions)
+        public AtomId(Uri baseId, ILanguageTag lang, IEnumerable<IXmlExtension> extensions, IEnumerable<IXmlNamespace> namespaces, IXmlNamespace primaryNamespace, Uri value)
+            : base(baseId, lang, extensions, namespaces, primaryNamespace)
         {
             this.value = value;
         }

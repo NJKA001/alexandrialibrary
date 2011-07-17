@@ -11,8 +11,8 @@ namespace Gnosis.Core.Atom
     public class AtomFeed
         : AtomCommon, IAtomFeed
     {
-        public AtomFeed(ICharacterSet encoding, IEnumerable<IXmlNamespace> namespaces, IEnumerable<IXmlStyleSheet> styleSheets, Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, IEnumerable<IAtomAuthor> authors, IAtomId id, IEnumerable<IAtomLink> links, IAtomTitle title, IAtomUpdated updated, IEnumerable<IAtomCategory> categories, IEnumerable<IAtomContributor> contributors, IEnumerable<IAtomEntry> entries, IAtomGenerator generator, IAtomIcon icon, IAtomLogo logo, IAtomRights rights, IAtomSubtitle subtitle)
-            : base(baseId, lang, extensions)
+        public AtomFeed(Uri baseId, ILanguageTag lang, IEnumerable<IXmlExtension> extensions, IEnumerable<IXmlNamespace> namespaces, IXmlNamespace primaryNamespace, ICharacterSet encoding, IEnumerable<IXmlStyleSheet> styleSheets, IEnumerable<IAtomAuthor> authors, IAtomId id, IEnumerable<IAtomLink> links, IAtomTitle title, IAtomUpdated updated, IEnumerable<IAtomCategory> categories, IEnumerable<IAtomContributor> contributors, IEnumerable<IAtomEntry> entries, IAtomGenerator generator, IAtomIcon icon, IAtomLogo logo, IAtomRights rights, IAtomSubtitle subtitle)
+            : base(baseId, lang, extensions, namespaces, primaryNamespace)
         {
             if (id == null)
                 throw new ArgumentNullException("id");
@@ -22,8 +22,7 @@ namespace Gnosis.Core.Atom
                 throw new ArgumentNullException("updated");
 
             this.encoding = encoding ?? CharacterSet.Utf8;
-            this.namespaces = namespaces;
-            this.styleSheets = styleSheets;
+            this.styleSheets = styleSheets ?? new List<IXmlStyleSheet>();
 
             this.authors = authors;
             this.id = id;
@@ -41,7 +40,6 @@ namespace Gnosis.Core.Atom
         }
 
         private readonly ICharacterSet encoding;
-        private readonly IEnumerable<IXmlNamespace> namespaces;
         private readonly IEnumerable<IXmlStyleSheet> styleSheets;
 
         private readonly IEnumerable<IAtomAuthor> authors;
@@ -134,17 +132,14 @@ namespace Gnosis.Core.Atom
             get { return encoding; }
         }
 
-        public IEnumerable<IXmlNamespace> Namespaces
-        {
-            get { return namespaces; }
-        }
-
         public IEnumerable<IXmlStyleSheet> StyleSheets
         {
             get { return styleSheets; }
         }
 
-        public string ToXml()
+        #endregion
+
+        public override string ToString()
         {
             var xml = new StringBuilder();
 
@@ -154,7 +149,7 @@ namespace Gnosis.Core.Atom
             foreach (var styleSheet in styleSheets)
                 xml.AppendLine(styleSheet.ToString());
 
-            AppendStartTag(xml, "feed", namespaces);
+            AppendStartTag(xml, "feed", Namespaces);
 
             foreach (var author in authors)
                 xml.AppendLine(author.ToString());
@@ -194,14 +189,6 @@ namespace Gnosis.Core.Atom
 
             System.Diagnostics.Debug.WriteLine(xml.ToString());
             return xml.ToString();
-            
-        }
-
-        #endregion
-
-        public override string ToString()
-        {
-            return ToXml();
         }
     }
 }

@@ -11,16 +11,20 @@ namespace Gnosis.Core.Atom
     public abstract class AtomCommon
         : IAtomCommon
     {
-        protected AtomCommon(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions)
+        protected AtomCommon(Uri baseId, ILanguageTag lang, IEnumerable<IXmlExtension> extensions, IEnumerable<IXmlNamespace> namespaces, IXmlNamespace primaryNamespace)
         {
             this.baseId = baseId;
             this.lang = lang;
             this.extensions = extensions;
+            this.namespaces = namespaces;
+            this.primaryNamespace = primaryNamespace;
         }
 
         private readonly Uri baseId;
         private readonly ILanguageTag lang;
-        private readonly IEnumerable<IAtomExtension> extensions;
+        private readonly IEnumerable<IXmlExtension> extensions;
+        private readonly IEnumerable<IXmlNamespace> namespaces;
+        private readonly IXmlNamespace primaryNamespace;
 
         #region XML Helper methods
 
@@ -116,9 +120,23 @@ namespace Gnosis.Core.Atom
 	        get { return lang; }
         }
 
-        public IEnumerable<IAtomExtension> Extensions
+        #endregion
+
+        #region IXmlElement Members
+
+        public IEnumerable<IXmlExtension> Extensions
         {
             get { return extensions; }
+        }
+
+        public IEnumerable<IXmlNamespace> Namespaces
+        {
+            get { return namespaces; }
+        }
+
+        public IXmlNamespace PrimaryNamespace
+        {
+            get { return primaryNamespace; }
         }
 
         #endregion

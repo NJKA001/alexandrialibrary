@@ -41,8 +41,7 @@ namespace Gnosis.Core
                         if (child.Name != "feed")
                             break;
 
-                        namespaces = child.ToXmlNamespaces();
-                        feed = child.ToAtomFeed(encoding, namespaces, styleSheets);
+                        feed = child.ToAtomFeed(encoding, styleSheets);
                         break;
                     default:
                         break;

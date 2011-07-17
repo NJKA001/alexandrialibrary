@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core.W3c;
+
 namespace Gnosis.Core.Rss
 {
     public interface IRssItem
+        : IXmlElement
     {
         string Title { get; }
         Uri Link { get; }
@@ -18,6 +21,5 @@ namespace Gnosis.Core.Rss
         IRssSource Source { get; }
 
         IEnumerable<IRssCategory> Categories { get; }
-        IEnumerable<IRssExtension> Extensions { get; }
     }
 }

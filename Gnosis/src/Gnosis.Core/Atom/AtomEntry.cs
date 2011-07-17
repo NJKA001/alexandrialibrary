@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core.Ietf;
+using Gnosis.Core.W3c;
 
 namespace Gnosis.Core.Atom
 {
     public class AtomEntry
         : AtomCommon, IAtomEntry
     {
-        public AtomEntry(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, IEnumerable<IAtomPerson> authors, IAtomContent content, IAtomId id, IEnumerable<IAtomLink> links, IAtomSummary summary, IAtomTitle title, IAtomUpdated updated, IEnumerable<IAtomCategory> categories, IEnumerable<IAtomPerson> contributors, IAtomPublished published, IAtomRights rights, IAtomSource source)
-            : base(baseId, lang, extensions)
+        public AtomEntry(Uri baseId, ILanguageTag lang, IEnumerable<IXmlExtension> extensions, IEnumerable<IXmlNamespace> namespaces, IXmlNamespace primaryNamespace, IEnumerable<IAtomPerson> authors, IAtomContent content, IAtomId id, IEnumerable<IAtomLink> links, IAtomSummary summary, IAtomTitle title, IAtomUpdated updated, IEnumerable<IAtomCategory> categories, IEnumerable<IAtomPerson> contributors, IAtomPublished published, IAtomRights rights, IAtomSource source)
+            : base(baseId, lang, extensions, namespaces, primaryNamespace)
         {
             this.authors = authors;
             this.content = content;

@@ -109,6 +109,46 @@ namespace Gnosis.Core
                 : null;
         }
 
+        public static IXmlExtension ToXmlExtension(this XmlNode self, IEnumerable<IXmlNamespace> globalNamespaces)
+        {
+            if (self != null)
+            {
+                System.Diagnostics.Debug.WriteLine(self.Name);
+            }
+
+            var nameTokens = self.Name.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+            if (nameTokens == null || nameTokens.Length != 2)
+                return null;
+
+            var prefix = nameTokens[0];
+            var name = nameTokens[1];
+
+            var namespaces = self.ToXmlNamespaces();
+            System.Diagnostics.Debug.WriteLine("  prefix=" + prefix);
+            System.Diagnostics.Debug.WriteLine("  local namespaces count=" + namespaces.Count());
+            System.Diagnostics.Debug.WriteLine("  global namespaces count=" + globalNamespaces.Count());
+            var primaryNamespace = namespaces.Where(x => x != null && x.Prefix == prefix).FirstOrDefault();
+            if (primaryNamespace == null)
+                primaryNamespace = globalNamespaces.Where(x => x != null && x.Prefix == prefix).FirstOrDefault();
+
+            return (primaryNamespace != null) ?
+                new XmlExtension(namespaces, primaryNamespace, prefix, name, self.OuterXml)
+                : null;
+        }
+
+        public static IEnumerable<IXmlExtension> ToXmlExtensions(this XmlNode self, IEnumerable<IXmlNamespace> globalNamespaces)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var extensions = new List<IXmlExtension>();
+
+            foreach (var child in self.ChildNodes.Cast<XmlNode>().Where(node => node != null && node.Name.Contains(':')))
+                extensions.AddIfNotNull(child.ToXmlExtension(globalNamespaces));
+
+            return extensions;
+        }
+
         public static ILanguageTag ToXmlLang(this XmlNode self)
         {
             if (self == null)

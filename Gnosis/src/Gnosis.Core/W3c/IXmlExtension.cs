@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core.W3c;
-
-namespace Gnosis.Core.Atom
+namespace Gnosis.Core.W3c
 {
-    public interface IAtomExtension
+    public interface IXmlExtension
     {
+        IEnumerable<IXmlNamespace> Namespaces { get; }
         IXmlNamespace PrimaryNamespace { get; }
-        IEnumerable<IXmlNamespace> AdditionalNamespaces { get; }
         string Prefix { get; }
         string Name { get; }
         string Content { get; }

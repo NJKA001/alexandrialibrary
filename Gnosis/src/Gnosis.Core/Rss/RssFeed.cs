@@ -11,7 +11,7 @@ namespace Gnosis.Core.Rss
     public class RssFeed
         : IRssFeed
     {
-        public RssFeed(IRssChannel channel, string version, Uri baseId, ICharacterSet encoding, IEnumerable<IXmlNamespace> namespaces, IEnumerable<IXmlStyleSheet> styleSheets)
+        public RssFeed(IRssChannel channel, string version, Uri baseId, ICharacterSet encoding, IEnumerable<IXmlExtension> extensions, IEnumerable<IXmlNamespace> namespaces, IEnumerable<IXmlStyleSheet> styleSheets)
         {
             if (channel == null)
                 throw new ArgumentNullException("channel");
@@ -20,7 +20,9 @@ namespace Gnosis.Core.Rss
             this.version = version ?? "2.0";
             this.baseId = baseId;
             this.encoding = encoding ?? CharacterSet.Utf8;
+            this.extensions = extensions;
             this.namespaces = namespaces;
+            this.primaryNamespace = namespaces.Where(x => x != null && string.IsNullOrEmpty(x.Prefix)).FirstOrDefault();
             this.styleSheets = styleSheets;
         }
 
@@ -28,7 +30,9 @@ namespace Gnosis.Core.Rss
         private readonly string version;
         private readonly Uri baseId;
         private readonly ICharacterSet encoding;
+        private readonly IEnumerable<IXmlExtension> extensions;
         private readonly IEnumerable<IXmlNamespace> namespaces;
+        private readonly IXmlNamespace primaryNamespace;
         private readonly IEnumerable<IXmlStyleSheet> styleSheets;
 
         #region IRssFeed Members
@@ -57,9 +61,19 @@ namespace Gnosis.Core.Rss
             get { return encoding; }
         }
 
+        public IEnumerable<IXmlExtension> Extensions
+        {
+            get { return extensions; }
+        }
+
         public IEnumerable<IXmlNamespace> Namespaces
         {
             get { return namespaces; }
+        }
+
+        public IXmlNamespace PrimaryNamespace
+        {
+            get { return namespaces.Where(x => x != null && string.IsNullOrEmpty(x.Prefix)).FirstOrDefault(); }
         }
 
         public IEnumerable<IXmlStyleSheet> StyleSheets
@@ -67,7 +81,9 @@ namespace Gnosis.Core.Rss
             get { return styleSheets; }
         }
 
-        public string ToXml()
+        #endregion
+
+        public override string ToString()
         {
             var xml = new StringBuilder();
 
@@ -92,13 +108,6 @@ namespace Gnosis.Core.Rss
             xml.Append("</rss>");
 
             return xml.ToString();
-        }
-
-        #endregion
-
-        public override string ToString()
-        {
-            return ToXml();
         }
     }
 }

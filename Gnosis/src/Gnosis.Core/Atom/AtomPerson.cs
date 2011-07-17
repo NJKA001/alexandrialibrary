@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core.Ietf;
+using Gnosis.Core.W3c;
 
 namespace Gnosis.Core.Atom
 {
     public abstract class AtomPerson
         : AtomCommon, IAtomPerson
     {
-        protected AtomPerson(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, string name, Uri uri, string email)
-            : base(baseId, lang, extensions)
+        protected AtomPerson(Uri baseId, ILanguageTag lang, IEnumerable<IXmlExtension> extensions, IEnumerable<IXmlNamespace> namespaces, IXmlNamespace primaryNamespace, string name, Uri uri, string email)
+            : base(baseId, lang, extensions, namespaces, primaryNamespace)
         {
             if (name == null)
                 throw new ArgumentNullException("name");

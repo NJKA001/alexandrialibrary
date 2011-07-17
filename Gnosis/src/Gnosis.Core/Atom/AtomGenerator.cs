@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core.Ietf;
+using Gnosis.Core.W3c;
 
 namespace Gnosis.Core.Atom
 {
     public class AtomGenerator
         : AtomCommon, IAtomGenerator
     {
-        public AtomGenerator(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, string name, Uri uri, string version)
-            : base(baseId, lang, extensions)
+        public AtomGenerator(Uri baseId, ILanguageTag lang, IEnumerable<IXmlExtension> extensions, IEnumerable<IXmlNamespace> namespaces, IXmlNamespace primaryNamespace, string name, Uri uri, string version)
+            : base(baseId, lang, extensions, namespaces, primaryNamespace)
         {
             this.name = name;
             this.uri = uri;

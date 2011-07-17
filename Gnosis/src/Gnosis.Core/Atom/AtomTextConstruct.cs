@@ -11,8 +11,8 @@ namespace Gnosis.Core.Atom
     public abstract class AtomTextConstruct
         : AtomCommon, IAtomTextConstruct
     {
-        protected AtomTextConstruct(Uri baseId, ILanguageTag lang, IEnumerable<IAtomExtension> extensions, string text, AtomTextType type)
-            : base(baseId, lang, extensions)
+        protected AtomTextConstruct(Uri baseId, ILanguageTag lang, IEnumerable<IXmlExtension> extensions, IEnumerable<IXmlNamespace> namespaces, IXmlNamespace primaryNamespace, string text, AtomTextType type)
+            : base(baseId, lang, extensions, namespaces, primaryNamespace)
         {
             this.text = text;
             this.type = type;
