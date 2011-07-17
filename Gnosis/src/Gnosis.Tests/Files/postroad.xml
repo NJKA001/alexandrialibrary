@@ -1,0 +1,1125 @@
+<?xml version="1.0" encoding="UTF-8"?><rdf:RDF
+	xmlns="http://purl.org/rss/1.0/"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:admin="http://webns.net/mvcb/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	>
+<channel rdf:about="http://extragoodshit.phlap.net">
+	<title>GoodShit</title>
+	<link>http://extragoodshit.phlap.net</link>
+	<description></description>
+	<dc:date>2011-07-16T16:41:15Z</dc:date>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<sy:updateBase>2000-01-01T12:00+00:00</sy:updateBase>
+	<admin:generatorAgent rdf:resource="http://wordpress.org/?v=3.2" />
+	<items>
+		<rdf:Seq>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136180"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136109"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136105"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136082"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136077"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136069"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136067"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136065"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136061"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136059"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136057"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136054"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136051"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136049"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136046"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136043"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136038"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136036"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136032"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=134074"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=134078"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136028"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136026"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136024"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=134090"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=134082"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136018"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136015"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=136013"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135070"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=134351"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135860"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135895"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135735"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135743"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135840"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135849"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135889"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135901"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135851"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135903"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135935"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135899"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135984"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135981"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135912"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135976"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135925"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135972"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135922"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135970"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135932"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135968"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135929"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135965"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135942"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135963"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135961"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135959"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135957"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135955"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135953"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135949"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135947"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135887"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135880"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135878"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135876"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135874"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135872"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135870"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135866"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135834"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135832"/>
+					<rdf:li rdf:resource="http://extragoodshit.phlap.net/?p=135827"/>
+				</rdf:Seq>
+	</items>
+</channel>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136180">
+	<title>Largest ever marijuana plantation hidden under black netting in Mexican desert</title>
+	<link>http://extragoodshit.phlap.net/?p=136180</link>
+	 <dc:date>2011-07-16T16:40:04Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>Mexican soldiers discovered the largest marijuana plantation in the country&#8217;s history, hidden under black cloth in the middle of the desert. The 300-acre plantation is four times larger than the previous record discovery by authorities and workers had even installed toilet facilities, the Defence Department said. The towering pot plants sheltered under black screen-cloth in [...]</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/gOvTZ.jpg" alt="" title="Hosted by imgur.com" />
+<p>Mexican soldiers discovered the largest marijuana plantation in the country&#8217;s history, hidden under black cloth in the middle of the desert.</p>
+<p>The 300-acre plantation is four times larger than the previous record discovery by authorities and workers had even installed toilet facilities, the Defence Department said.</p>
+<p>The towering pot plants sheltered under black screen-cloth in a huge square on the floor of the Baja California desert, more than 150 miles south of Tijuana, across the border from San Diego.</p>
+<p> <a href='http://www.dailymail.co.uk/news/article-2015001/Largest-marijuana-plantation-hidden-black-netting-Mexican-desert.html'><B>READ MORE HERE</B></A></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136109">
+	<title>Japanese firm cuts ties with Iran over crane executions </title>
+	<link>http://extragoodshit.phlap.net/?p=136109</link>
+	 <dc:date>2011-07-15T23:20:22Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>Crane manufacturer says it has ended business relations with Islamic Republic after Los Angeles Times report reveals Tehran used cranes for public hangings A Japanese heavy machinery manufacturer said it has cut business ties with the Iranian government following a report that its cranes have been used for public executions. The company&#8217;s announcement came several [...]</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/7RhXy.jpg" alt="" title="Hosted by imgur.com" />
+<p>Crane manufacturer says it has ended business relations with Islamic Republic after Los Angeles Times report reveals Tehran used cranes for public hangings</p>
+<p>A Japanese heavy machinery manufacturer said it has cut business ties with the Iranian government following a report that its cranes have been used for public executions.</p>
+</p>
+<p>The company&#8217;s announcement came several days after United Against Nuclear Iran President Mark D. Wallace published an op-ed in Los Angeles Times where he names the Japanese Tadano company as one of several companies exporting cranes to Iran.</p>
+<p>via <a href='http://www.ynetnews.com/articles/0,7340,L-4095895,00.html'>via</a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136105">
+	<title>Chicago Marilyn Monroe Sculpture Unveiled</title>
+	<link>http://extragoodshit.phlap.net/?p=136105</link>
+	 <dc:date>2011-07-15T23:07:27Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>story and slice show at link: CLICK HERE</description>
+	<content:encoded><![CDATA[<p><a href="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/by-default-2011-07-15-at-7.05.38-PM.png"><img src="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/by-default-2011-07-15-at-7.05.38-PM.png" alt="" title="by default 2011-07-15 at 7.05.38 PM" width="791" height="439" class="aligncenter size-full wp-image-136107" /></a><P>story and slice show at link:
+<p><a href='http://www.newser.com/story/123569/chicago-marilyn-monroe-sculpture-unveiled-michigan-ave-plaza-statue-clearly-shows-lacy-underwear.html'><B>CLICK HERE</b></a><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136082">
+	<title>our man in afghanistan</title>
+	<link>http://extragoodshit.phlap.net/?p=136082</link>
+	 <dc:date>2011-07-15T20:40:11Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>&#8230;CIA agent Wali Karzai dead in Afghanistan. Another death, that of Afghan President Hamid Karzai’s brother, has featured all over the news media in the past few days. Ahmed Wali Karzai, Afghan drug lord and influential strongman, was shot dead by his bodyguards last Tuesday. Wali Karzai’s role as a CIA agent is less widely [...]</description>
+	<content:encoded><![CDATA[<p>&#8230;CIA agent Wali Karzai dead in Afghanistan. Another death, that of Afghan President Hamid Karzai’s brother, has featured all over the news media in the past few days. Ahmed Wali Karzai, Afghan drug lord and influential strongman, was shot dead by his bodyguards last Tuesday. <B>Wali Karzai’s role as a CIA agent is less widely advertised in obituaries </b>[emphasis mine](with a few notable exceptions). IntelNews readers will remember that, in October of 2009, The New York Times revealed that Wali Karzai had been financially sustained by the CIA ever since the initial US invasion of Afghanistan, in 2001, and that he was still —as of 2009— receiving “regular payments” from the Agency&#8230;</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136077">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=136077</link>
+	 <dc:date>2011-07-15T16:32:24Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description></description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/z7ohM.jpg" alt="" title="Hosted by imgur.com" /></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136069">
+	<title>Just what is Manhattanhenge?</title>
+	<link>http://extragoodshit.phlap.net/?p=136069</link>
+	 <dc:date>2011-07-15T16:24:57Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>New Yorkers have witnessed an urban solar phenomenon, with the Sun setting in alignment with the city&#8217;s skyscrapers and giving an effect fans say is reminiscent of Wiltshire&#8217;s Stonehenge. Welcome to Manhattanhenge. Twice every year amateur photographers gather in carefully-selected spots to set up tripods and wait to capture the ultimate sunset.[explained in full here] [...]</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/gUpu5.jpg" alt="" title="Hosted by imgur.com" /></p>
+<p>New Yorkers have witnessed an urban solar phenomenon, with the Sun setting in alignment with the city&#8217;s skyscrapers and giving an effect fans say is reminiscent of Wiltshire&#8217;s Stonehenge. Welcome to Manhattanhenge.</p>
+<p>Twice every year amateur photographers gather in carefully-selected spots to set up tripods and wait to capture the ultimate sunset.[explained in full here]</p>
+<p><span id="more-136069"></span></p>
+<p>On Wednesday night at 2025 local time (0125 BST), the east-west lying streets of the city&#8217;s famous grid system neatly framed the setting sun, creating golden glows New Yorkers rarely see.</p>
+<p>During the phenomenon, the Sun appears to be nestled perfectly between the skyscraper corridors, illuminating the north and south sides of the streets.</p>
+<p>Astrophysicist Neil deGrasse Tyson coined the term Manhattanhenge in 1996, inspired by its likeness to Stonehenge, where the sun aligns with concentric circles of vertical stones on each of the solstices.</p>
+<p>&quot;As a kid, I visited Stonehenge in the Salisbury Plain of England and did research on other stone monuments across the British Isles. It was deep within me,&quot; says deGrasse Tyson.</p>
+<p>&quot;So I was, in a way, imprinted by the emotional power that terrestrial alignments with the Sun can have on a culture or civilization.&quot;</p>
+<p>After coining the term, deGrasse Tyson later published dates and times in Natural History magazine.</p>
+<p>Similar &quot;henge&quot; phenomena also occur in other cities with large numbers of skyscrapers and long straight streets &#8211; such as Chicago, Montreal and Toronto.</p>
+<p>As far as sunset goes &#8211; which is the fans&#8217; true Manhattanhenge &#8211; the event happens in May and July, and for two nights each. There&#8217;s also the winter version, but that&#8217;s sunrise.</p>
+<p>New York-based photographer Emon Hassan has celebrated Manhattanhenge in his work.</p>
+<p>&quot;You&#8217;ll see photographers on both sides, lined up, just waiting. In one area, I could go in the middle of the street and get the shot. Photographers risk their lives to get the perfect shot.</p>
+<p>&quot;It&#8217;s cut-throat. You only have a 15 to 20 minute window. It happens pretty quick after you consider dodging traffic.</p>
+<p>&quot;I don&#8217;t even know how to articulate that feeling. It&#8217;s almost like seeing an eclipse.&quot;</p>
+<p>Getty photographer Mario Tama shot the event earlier this year. He says the event provides residents with a moment of clarity and beauty in a chaotic world.</p>
+<p>&quot;Basically, people in Manhattan are trapped in an island of tall buildings and sometimes can&#8217;t even see the sky really.</p>
+<p>&quot;It&#8217;s a brilliant moment when Manhattanites can connect with the rest of the world and with the Earth. If you get out of the subway at 34th Street, you&#8217;ll see two or three hundred people with tripods jumping in the street. Usually when this happens, there has been a shooting or something, so this is really a beautiful thing,&quot; says Tama.</p>
+<p>The event has become a social phenomenon in New York City.</p>
+<p>&quot;Amateur and professional photographers can meet up, they tag each other&#8217;s work on Twitter and meet other people &#8211; people with other interests,&quot; says Hassan.</p>
+<p>&quot;Manhattan is one of the most fascinating places and this is such a unique event.&quot;</p>
+<p>Its distinctiveness lies in the positioning of the city&#8217;s layout.</p>
+<p>Manhattan&#8217;s Commissioner&#8217;s Plan of 1811 established its grid system, which is rotated 29 degrees from true east-west. If Manhattan&#8217;s streets were perfectly laid out on an east-west grid, Manhattanhenge would occur facing both east and west on the vernal and autumnal equinoxes.</p>
+<p>It also has the advantage over other skyscraper cities because of a relatively clear view to the horizon down some of its streets.</p>
+<p>For photographers and people taking an early evening stroll, it is just a beautiful effect of light.</p>
+<p>But for astronomers, it&#8217;s something more &#8211; a chance to engage laymen and enthusiasts with the studies of the cosmos.</p>
+<p>DeGrasse Tyson uses the event to make people more interested in astronomy.</p>
+<p>&quot;I&#8217;ll take any excuse I can get to get people to look up and notice our cosmic environment,&quot; deGrasse Tyson recently told PBS television.</p>
+<p>The best vantage point to view the event, which he describes as &quot;the greatest of the cosmos together with the greatest of our urban icons&quot;, is on Park Avenue and 34th Street, looking west, he says.</p>
+<p>via <a href='http://www.bbc.co.uk/news/mobile/magazine-14150550'>BBC News &#8211; Just what is Manhattanhenge?</a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136067">
+	<title>GUESS WHAT FAMOUS BEAUTY CHICAGO GOT TODAY?</title>
+	<link>http://extragoodshit.phlap.net/?p=136067</link>
+	 <dc:date>2011-07-15T15:33:16Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>SEE THIS AMAZING WOMAN HERE</description>
+	<content:encoded><![CDATA[<p><A HREF="http://www.9news.com/video/default.aspx?bctid=1052369523001"><strong>SEE THIS AMAZING WOMAN HERE</strong></A><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136065">
+	<title>Harry Potter and the Deathly Hallows</title>
+	<link>http://extragoodshit.phlap.net/?p=136065</link>
+	 <dc:date>2011-07-15T15:29:10Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>screen shot. go to link for video Watch a scene from &#8220;Harry Potter and the Deathly Hallows: Part 2,&#8221;the final film in the series. Video courtesy of Warner Bros. Pictures. So many good films come to bad ends, but not the tales of Harry Potter. The final episode of Harry&#8217;s epic journey, part 2 of [...]</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/4FFbH.png" alt="" title="Hosted by imgur.com" /><br />
+screen shot. go to link for video
+<p>Watch a scene from &#8220;Harry Potter and the Deathly Hallows: Part 2,&#8221;the final film in the series. Video courtesy of Warner Bros. Pictures.</p>
+<p>So many good films come to bad ends, but not the tales of Harry Potter. The final episode of Harry&#8217;s epic journey, part 2 of &quot;The Deathly Hallows,&quot; is the best possible end for the series that began a decade ago. In contrast to part 1, which was a ponderous exercise in stage-setting and dramatic incipience, this film, directed by David Yates and adapted by Steve Kloves, is a climax worthy of the term. It&#8217;s a dark and thunderous pageant that sets its bespectacled hero in the midst of vast forces, yet never loses track of who he is—a brave boy, to borrow both parts of Dumbledore&#8217;s fond phrase, on the way to becoming a wonderful man. (Daniel Radcliffe, in his turn, has grown from likeably bland at the outset to impressively—and still likeably—confident.)</p>
+<p> <a href='http://online.wsj.com/article/SB10001424052702304911104576445650566902060.html'><B>READ MORE</B></a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136061">
+	<title>Mission Mind Control: ABC Documentary (1979)</title>
+	<link>http://extragoodshit.phlap.net/?p=136061</link>
+	 <dc:date>2011-07-15T14:16:23Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>In 1979, just two years after U.S. Senate hearings revealed disturbing information about a secret government mind control program code-named Project MKULTRA, ABC News produced an excellent, one-hour documentary covering some of the clandestine, illegal activities involved in this mind control project. You can watch the entire documentary &#8220;Mission Mind Control&#8221; at the link below. [...]</description>
+	<content:encoded><![CDATA[<p>In 1979, just two years after U.S. Senate hearings revealed disturbing information about a secret government mind control program code-named Project MKULTRA, ABC News produced an excellent, one-hour documentary covering some of the clandestine, illegal activities involved in this mind control project. You can watch the entire documentary &#8220;Mission Mind Control&#8221; at the link below.
+<p><a href='http://www.personalgrowthcourses.net/video/mind_control/mission_mind_control_abc'><B>VIDEO HERE</b></a><P>more to this story<P><span id="more-136061"></span>One of the topics covered by this intriguing film is the bizarre activity of a man named George White, who operated outside of the law while directly under CIA direction.</p>
+<p>At minute 47 in &#8220;Mission Mind Control,&#8221; ABC News correspondent Paul Altmeyer states, &#8220;And what of George White, the man who helped the agency in so many of its programs. Shortly before his death, he wrote to his boss at the CIA, Dr. Sidney Gottlieb, and summed up his career by saying, &#8216;It was fun, fun, fun. Where else could a red-blooded American boy lie, kill and cheat, steal, deceive, rape and pillage with the sanction and blessing of the all highest.&#8217;&#8221;</p>
+<p>The film also mentions that Dr. Gottlieb destroyed the records of the mind control programs in 1973. He and many others involved in these projects did not want the public to ever know about the many illegal and immoral activities they had sponsored in their quest of control over the mind. Thankfully, he forgot to destroy the financial records, which contain highly incriminating information. These declassified documents can be ordered by anyone using the information at this link.</p>
+<p>Though the CIA denies that the mind control techniques developed in their secretive projects were successful, an abundance of evidence in this film and elsewhere suggests otherwise. Another riveting documentary produced by the History Channel provides even more solid, revealing evidence. Titled: &#8220;Mind Control – America&#8217;s Secret War,&#8221; you can watch this amazing film at<a href="http://www.wanttoknow.info/mindcontrolvideo"> this link</a><P>. </p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136059">
+	<title>Bill Monroe</title>
+	<link>http://extragoodshit.phlap.net/?p=136059</link>
+	 <dc:date>2011-07-15T14:07:33Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>batch of nice tracks here</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/5J0ry.jpg" alt="" title="Hosted by imgur.com" />
+<p><a href='http://suncircle.org/tunes/Bill%20Monroe/In%20the%20lines/'><B>batch of nice tracks here</b></a><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136057">
+	<title>the world: is it getting bad, worse, or is it just me?</title>
+	<link>http://extragoodshit.phlap.net/?p=136057</link>
+	 <dc:date>2011-07-15T14:04:17Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>Want a downer? Read this about our world</description>
+	<content:encoded><![CDATA[<p>Want a downer? <a href="http://www.globalpost.com/dispatch/news/business-tech/110714/global-economy-u.s.-debt-ceiling"><strong>Read this about our world</strong></a><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136054">
+	<title>Baboon Study Shows Benefits for Nice Guys, Who Finish 2nd</title>
+	<link>http://extragoodshit.phlap.net/?p=136054</link>
+	 <dc:date>2011-07-15T13:41:13Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>At last, good news for the beta male. From the wild to Wall Street, as everyone knows, the alpha maleruns the show, enjoying power over other males and, as a field biologist might put it, the best access to mating opportunities. The beta is No. 2 in the wolf pack or the baboon troop, not [...]</description>
+	<content:encoded><![CDATA[<p> At last, good news for the beta male.</p>
+<p>From the wild to Wall Street, as everyone knows, the alpha male<a href="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/15baboon_337-articleInline.jpg"><img src="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/15baboon_337-articleInline.jpg" alt="" title="15baboon_337-articleInline" width="190" height="127" class="alignright size-full wp-image-136055" /></a>runs the show, enjoying power over other males and, as a field biologist might put it, the best access to mating opportunities.</p>
+<p>The beta is No. 2 in the wolf pack or the baboon troop, not such a bad position. But conversationally, the term has become an almost derisive label for the nice guy, the good boy all grown up, the husband women look for after the fling with Russell Crowe.</p>
+<p>It may now be time to take a step back from alpha worship. Field biologists, the people who gave the culture the alpha/beta trope in the first place, have found there can be a big downside to being No. 1.<P><span id="more-136054"></span></p>
+<p>Laurence R. Gesquiere, a research associate in the department of ecology and evolutionary biology at Princeton, and colleagues report in the journal Science that in five troops of wild baboons in Kenya studied over nine years, alpha males showed very high stress levels, as high as those of the lowest-ranking males.</p>
+<p>The stress, they suggested, was probably because of the demands of fighting off challengers and guarding access to fertile females. Beta males, who fought less and had considerably less mate guarding to do, had much lower stress levels. They had fewer mating opportunities than the alphas, but they did get some mating in, more than any lower-ranking males. After all, when the alpha gets in another baboon bar fight, who’s going to take the girl home?</p>
+<p>Behavioral researchers have not ignored the female baboons: other studies have shown that the females have a whole different system of rank, which is inherited from the mother and rarely subject to challenge, so that is one kind of stress they do not have.</p>
+<p>The study is both impressive and surprising, said Robert Sapolsky of Stanford, a neurobiologist who did groundbreaking studies on stress in baboons and was not involved in the new study. “What’s cool about this paper is that being an alpha and being a beta are very different experiences physiologically,” Dr. Sapolsky said.</p>
+<p>Robert M. Seyfarth of the University of Pennsylvania, who studies baboon and other primate behavior, said, “I think it’s a great paper.”</p>
+<p>“It’s a wonderful sample size over many, many years,” said Dr. Seyfarth, who was not part of the new research, and it shows that “the males at the top are under a lot of stress, and there’s a cost.”</p>
+<p>Earlier work by Dr. Sapolsky showed that in baboons, the lower the social rank, the greater the stress. The one exception was during periods of instability, when top males faced many challenges and their stress increased. It was good to be king, he found, but a lot better when the realm was quiet.</p>
+<p>The new study showed that top-ranking males had higher levels of stress whether the social structure of their group was stable or in tumult. Researchers collected fecal samples to measure levels of stress hormones called glucocorticoids.</p>
+<p>Levels of stress are important partly because of the health effects of stress hormones. In the short term, in immediate fight-or-flight situations, the hormones work to energize the individual. Long-term stress levels are a different matter. “In the long term, you fall apart, or are subject to diseases,” said Jeanne Altmann, an emeritus professor of ecology and evolutionary biology at Princeton, and senior author of the new report.</p>
+<p>The health effects are unclear for the subjects of the new study. “Wild baboons are getting lots of exercise and not getting cardiovascular disease,” Dr. Altmann said. And baboons do not stay at the top very long.</p>
+<p>For humans, chronic long-term high levels of stress hormones can increase the risks of disease or worsen existing diseases. Dr. Sapolsky argued, in a major review paper in 2005 in Science, that socioeconomic status in humans, the best equivalent to social rank in other primates, affected health not just because of access to medical care, but because low status meant more chronic stress.</p>
+<p>That does not mean that the new findings can be used to draw conclusions about the health of vice presidents and lieutenant governors compared with that of their bosses. “We’re not sort of a strict dominance hierarchy species,” Dr. Sapolsky said. Humans pick and choose among many hierarchies. A low-ranking employee, for instance, might run a youth baseball league, or be the top skydiver in his local club.</p>
+<p>While the new study does not have a direct application to human health or social structure, Dr. Sapolsky and Dr. Seyfarth said, it certainly raises questions about possible unstudied costs of being at the top.</p>
+<p>And it does suggest some reproductive strategies among baboons that may be worth thinking about for the majority of men who plan for the future, worry about gas mileage and slip out the back when the fighting starts.</p>
+<p>What if, Dr. Seyfarth said, the beta males are hanging around and doing “pretty well for a long time, rather than very well for a short time?”</p>
+<p>      nytimes.com by JAMES GORMAN  •  July 14, 2011  </p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136051">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=136051</link>
+	 <dc:date>2011-07-15T11:58:33Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description></description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/RjF4j.jpg" alt="" title="Hosted by imgur.com" /></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136049">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=136049</link>
+	 <dc:date>2011-07-15T11:56:52Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>Christina VIA.</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/tj65b.jpg" alt="" title="Hosted by imgur.com" />
+<p>Christina</p>
+<p> <a href='http://thingsthatexciteme.tumblr.com/'>VIA</a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136046">
+	<title>The Big Picture &#8211; Boston.com&#8211;40 PHOTOS</title>
+	<link>http://extragoodshit.phlap.net/?p=136046</link>
+	 <dc:date>2011-07-15T11:53:47Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>Those mad adrenaline- (and sometimes alcohol-) infused half-mile dashes dodging 1,800-pound stampeding bulls have begun through the streets of Pamplona, Spain. Part-spectacle, part-tradition, the Running of the Bulls is the most celebrated slice of the nine-day San Fermin Festival. In addition to the daily runs, events include bullfighting and a parade featuring a statue of [...]</description>
+	<content:encoded><![CDATA[<p>Those mad adrenaline- (and sometimes alcohol-) infused half-mile dashes dodging 1,800-pound stampeding bulls have begun through the streets of Pamplona, Spain. Part-spectacle, part-tradition, the Running of the Bulls is the most celebrated slice of the nine-day San Fermin Festival. In addition to the daily runs, events include bullfighting and a parade featuring a statue of Pamplona&#8217;s first bishop, St. Fermin. Pleads for safety and prayers of thanksgiving to St. Fermin traditionally begin and end the run through the streets, which was famously depicted in Ernest Hemingway&#8217;s &#8220;The Sun Also Rises.&#8221;Concluding on the 14th of July every year, attendees gather on the town hall plaza at midnight for singing by candlelight.(40 photos total)</p>
+<p><img src="http://i.imgur.com/nCEOC.jpg" alt="" title="Hosted by imgur.com" /><P><br />
+ <a href='http://www.boston.com/bigpicture/'><B>GALLERY HERE</B></A><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136043">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=136043</link>
+	 <dc:date>2011-07-15T11:46:26Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>CAN&#8217;T THINK OF A BETTER WAY TO CLOSE OUT A WEEK THAN A WHOLE BIG BATCH OF TUNES BY GOOD OLD HANK WILLIAMS, ONE OF THE GREATS OF COUNTRY/WESTERN MUSIC</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/16whS.jpg" alt="" title="Hosted by imgur.com" /><P>CAN&#8217;T THINK OF A BETTER WAY TO CLOSE OUT A WEEK THAN A WHOLE BIG <A HREF="http://prostopleer.com/search?q=Hank+Williams"><strong>BATCH OF TUNES BY GOOD OLD HANK WILLIAMS</strong></A>, ONE OF THE GREATS OF COUNTRY/WESTERN MUSIC</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136038">
+	<title>Gallery: America’s Secret Space Arsenal</title>
+	<link>http://extragoodshit.phlap.net/?p=136038</link>
+	 <dc:date>2011-07-15T11:34:52Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>After 30 years and 135 missions, it&#8217;s curtains for NASA&#8217;s Space Shuttle. The Shuttle Atlantis blasted off on Friday for one last rendezvous with the International Space Station, bringing to an end the current era of impressive &#8212; but pricey and dangerous &#8212; manned spaceflight. But never fear! America&#8217;s space arsenal might be down four [...]</description>
+	<content:encoded><![CDATA[<p><a href="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/stss2_0.jpg"><img src="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/stss2_0.jpg" alt="" title="stss2_0" width="640" height="620" class="aligncenter size-full wp-image-136040" /></a>
+<p>After 30 years and 135 missions, it&#8217;s curtains for NASA&#8217;s Space Shuttle. The Shuttle Atlantis blasted off on Friday for one last rendezvous with the International Space Station, bringing to an end the current era of impressive &#8212; but pricey and dangerous &#8212; manned spaceflight. But never fear! America&#8217;s space arsenal might be down four giant Shuttles, but there&#8217;s still plenty of U.S. government hardware orbiting the Earth, much of it top secret.</p>
+<p>Counting commercial satellites with government missions, Washington has access to around 400 spacecraft &#8212; four times as many as the number-two space power, Moscow. U.S. spacecraft include communications satellites, orbital cameras and other sensors, craft designed to eavesdrop on radio traffic and at least one secretive, robotic space plane similar to in shape to the retiring Shuttle.</p>
+<p>Here&#8217;s a sampling of some of the &quot;blackest&quot; of America&#8217;s secret space fleet.</p>
+<p><a href='http://www.wired.com/dangerroom/'><B>READ MORE</B></A><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136036">
+	<title>innerSuper: THE LIFE OF A CELL</title>
+	<link>http://extragoodshit.phlap.net/?p=136036</link>
+	 <dc:date>2011-07-15T11:33:01Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>VIDEO HERE.</description>
+	<content:encoded><![CDATA[<p><a href='http://multimedia.mcb.harvard.edu/anim_innerlife.html'>VIDEO HERE</a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136032">
+	<title>The Subject Talks Back</title>
+	<link>http://extragoodshit.phlap.net/?p=136032</link>
+	 <dc:date>2011-07-15T11:30:09Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>Notes from a Biographer July 7, 2011 &#124; by Deborah Baker Maryam Jameelah, the subject of Baker’s biography The Convert. Anyone who has ever written about a living person knows the wait. Sometimes you receive a laundry list of grievances. Sometimes word trickles back of rage and feelings of betrayal. There might be a letter [...]</description>
+	<content:encoded><![CDATA[<p>Notes from a Biographer</p>
+<p>July 7, 2011 | by Deborah Baker</p>
+<p><a href="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/BLOG_maryamjameelah1.jpg"><img src="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/BLOG_maryamjameelah1.jpg" alt="" title="BLOG_maryamjameelah" width="300" height="404" class="alignleft size-full wp-image-136034" /></a>Maryam Jameelah, the subject of Baker’s biography The Convert.<br />
+Anyone who has ever written about a living person knows the wait. Sometimes you receive a laundry list of grievances. Sometimes word trickles back of rage and feelings of betrayal. There might be a letter from a law firm or simply a punishing silence. When all is said and done, the person you have written about has a kind of hold over your work that a reviewer can only dream of. I’d nearly given up waiting when there it was, wedged between the water bill and a bank statement, an airmail envelope addressed to me. Familiar handwriting, familiar return address in Lahore, Pakistan.</p>
+<p>My first book was a biography of an obscure American poet born in 1901. When I approached her in 1989, she was living as a recluse in a Florida citrus grove. Fifty years before, she had not merely renounced her own poetry but everybody else’s as well. Through an intermediary, she conveyed to me that I should write a sample chapter (she assigned the topic). If it met with her approval, we would work together on her biography. She could use a secretary, she said.</p>
+<p>But before I could reply, she fell ill. When she heard I had proceeded without her, she wrote me angrily, calling me “sluttish.” Her minions sent me lengthy poison-pen missives, dissecting my character. She never read a word of what I’d written. The day after I sent the final manuscript to the publisher, she had a heart attack, as if my book and her life were paired like Siamese twins and I had killed her by finishing it. This is the kind of magical thinking that binds the biographer to her subject.<P><A HREF="http://www.theparisreview.org/blog/2011/07/07/the-subject-talks-back/"><B>CONTINUED HERE</B></A><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=134074">
+	<title>How &#8220;Super Sand&#8221; Could Provide Drinking Water To Millions Of People </title>
+	<link>http://extragoodshit.phlap.net/?p=134074</link>
+	 <dc:date>2011-07-15T11:22:12Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>[GO TO URL FOR MULTIMEDIA] Sand is a cheap and easy to find water filter. It&#8217;s also not a very good water filter. But a new development&#8211;coating sand in graphite&#8211;could make it possible for everyone in the world to have easy access to clean water. When Rice University researchers ran two model contaminants (mercury and [...]</description>
+	<content:encoded><![CDATA[<p>[GO TO URL FOR MULTIMEDIA]
+<p>Sand is a cheap and easy to find water filter. It&#8217;s also not a very good water filter. But a new development&#8211;coating sand in graphite&#8211;could make it possible for everyone in the world to have easy access to clean water.</p>
+<p><img src="http://i.imgur.com/aGmep.jpg" alt="" title="Hosted by imgur.com" /><P>When Rice University researchers ran two model contaminants (mercury and Rhodamine B dye) through the super sand, they found that the coated substance removed contaminants as well as commercially available active carbon filtration systems. The big difference: The super sand is cheap. Graphite is inexpensive (waste graphite from mining operations could even be used), and the coating process can occur at room temperature. <P><br />
+ <a href='http://www.fastcompany.com/1763872/how-super-sand-could-provide-drinking-water-to-millions-of-people?partner=rss'><B>READ MORE HERE</B></A><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=134078">
+	<title>Who can&#8217;t empathize with whom? &#124; MetaFilter</title>
+	<link>http://extragoodshit.phlap.net/?p=134078</link>
+	 <dc:date>2011-07-15T11:21:19Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>Who can&#8217;t empathize with whom? &#124; MetaFilter.</description>
+	<content:encoded><![CDATA[<p><a href='http://www.metafilter.com/105175/Who-cant-empathize-with-whom'>Who can&#8217;t empathize with whom? | MetaFilter</a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136028">
+	<title>TECHNOLOGY UPDATES</title>
+	<link>http://extragoodshit.phlap.net/?p=136028</link>
+	 <dc:date>2011-07-15T11:20:28Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>READ HERE</description>
+	<content:encoded><![CDATA[<p><a href='http://tidyread.com/td/index.php?r=site/read&#038;url=http%3A%2F%2Fwww.dailyrotation.com%2F'><B>READ HERE</B></A><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136026">
+	<title>PhysOrg.com:: SCIENCE UPDATES</title>
+	<link>http://extragoodshit.phlap.net/?p=136026</link>
+	 <dc:date>2011-07-15T11:16:07Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>READ HERE</description>
+	<content:encoded><![CDATA[<p><a href='http://tidyread.com/td/index.php?r=site/read&#038;url=http%3A%2F%2Fwww.physorg.com%2F'><B>READ HERE</B></A><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136024">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=136024</link>
+	 <dc:date>2011-07-15T11:14:10Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description></description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/W8L0s.jpg" alt="" title="Hosted by imgur.com" /></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=134090">
+	<title> The 14 Most Dominant Performances </title>
+	<link>http://extragoodshit.phlap.net/?p=134090</link>
+	 <dc:date>2011-07-15T11:11:05Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>So, this is an attempt to come up with my 14 most dominant performances in sports history. The idea — thought up by my friend Tommy Tomlinson* — began with the simple question: Was Tiger Woods’ amazing performance at Pebble Beach in 2000 more impressive than Rory McIlroy’s amazing performance at the U.S. Open this [...]</description>
+	<content:encoded><![CDATA[<p>So, this is an attempt to come up with my 14 most dominant performances in sports history. The idea — thought up by my <a href="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/mike-tyson-c.jpg"><img src="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/mike-tyson-c.jpg" alt="" title="mike-tyson-c" width="298" height="378" class="alignright size-full wp-image-134092" /></a>friend Tommy Tomlinson* — began with the simple question: Was Tiger Woods’ amazing performance at Pebble Beach in 2000 more impressive than Rory McIlroy’s amazing performance at the U.S. Open this year? This led to the question: What are the most dominating performances ever?</p>
+<p>*<I>If you want to read the single saddest story you will read this year, well,<a href="http://www.charlotteobserver.com/2011/06/15/2381634/nina-kristopher-a-story-of-love.html"> here you go</a></i>.</p>
+<p>There were a couple of issues with putting together the list. First: What does dominant mean? I mean, if it’s simply the best performances ever, then it can get pretty boring. Most strikeouts. Lowest score. Most yards. Etc. These are easy enough to just look up in the record books.</p>
+<p>So I think we want to go with something entirely subjective. This is all art, no science. Most of my lists have some basis, some anchor in reality. Not this one. It’s all about how dominance feels to me.
+<p><a href='http://joeposnanski.si.com/2011/06/24/the-14-most-dominant-performances/'><B>CONTINUED</b></a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=134082">
+	<title>Bush gardens&#8230;snack time</title>
+	<link>http://extragoodshit.phlap.net/?p=134082</link>
+	 <dc:date>2011-07-15T11:09:56Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>When I happen to post a nude with BUSH rather than shaved, I get a thanks via email&#8230;a look back, it seems, at &#8220;the good old days.&#8221; well, then, as public (or pubic) service, here is not only bush but a well known actress!</description>
+	<content:encoded><![CDATA[<p>When I happen to post a nude with BUSH rather than shaved, I get a thanks via email&#8230;a look back, it seems, at &#8220;the good old days.&#8221;<br />
+well, then, as public (or pubic) service, here is <a href="http://www.idontlikeyouinthatway.com/pictures/20080626/demi%20moore%20nude%20naked/demi%20moore%20nude%20naked%20pictures%206.jpg"><strong>not only bush but a well known actress!</strong></a><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136018">
+	<title>Beck</title>
+	<link>http://extragoodshit.phlap.net/?p=136018</link>
+	 <dc:date>2011-07-15T11:08:59Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>TRACKS HERE</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/WPZVg.jpg" alt="" title="Hosted by imgur.com" />
+<p><a href='http://www.mp3index.net/album/Beck%20-%20Sea%20Change/'>TRACKS HERE</A><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136015">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=136015</link>
+	 <dc:date>2011-07-15T11:02:00Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>GREAT GALLERY OF CELEBRITIES, a repost sonny, cher, dylanclick for more</description>
+	<content:encoded><![CDATA[<p>GREAT GALLERY OF CELEBRITIES, a repost
+<p><P><img src="http://i.imgur.com/5cRlz.jpg" alt="" title="Hosted by imgur.com" /><br />
+sonny, cher, dylan<a href='http://www.fishki.net/print.php?id=63602'><P><B>click for more</B></a><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=136013">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=136013</link>
+	 <dc:date>2011-07-15T10:59:27Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>Quote of the Day Everything comes in time to those who can wait. Francois Rabelais</description>
+	<content:encoded><![CDATA[<p>Quote of the Day<br />
+Everything comes in time to those who can wait.<br />
+Francois Rabelais </p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135070">
+	<title>Vanishing Act</title>
+	<link>http://extragoodshit.phlap.net/?p=135070</link>
+	 <dc:date>2011-07-15T10:54:53Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>We’re all familiar with Spalding Gray’s demons—venting his despair was his art and profession. But after a crippling car crash in 2001, his depression began to overwhelm him. So when he went missing earlier this month, after several previous suicide attempts, his wife, children, and friends were left to fear the worst. By Alex Williams [...]</description>
+	<content:encoded><![CDATA[<p><I>We’re all familiar with Spalding Gray’s demons—venting his despair was his art <a href="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/spaldinggray040126_1751.jpg"><img src="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/spaldinggray040126_1751.jpg" alt="" title="spaldinggray040126_175" width="175" height="175" class="alignleft size-full wp-image-135073" /></a>and profession. But after a crippling car crash in 2001, his depression began to overwhelm him. So when he went missing earlier this month, after several previous suicide attempts, his wife, children, and friends were left to fear the worst.</i></p>
+<p>    By Alex Williams</p>
+<p>If there’s anything abnormal about the mood at this two-story white clapboard home, it’s the normality. It’s not a funeral. It’s not even a wake. It’s just a void, and an eerie one. A rabbit named Thumper sits in a cage on the dining-room floor, ignored by the children since the family bought a miniature Australian Shepherd puppy, named Bowie, in a half-successful attempt at “pet therapy” for their dad, who had been seriously—even publicly—depressed since he was injured in an accident two and a half years ago. At a small breakfast nook off the kitchen, Kathie’s parents sit, her father stoically reading the Times.
+<p>Don’t mind the balloons,” Kathie Russo says, brushing a few helium-filled strays from the doorway as she swings open the door into the kitchen of the rambling Federal-style house in North Haven she shared—or perhaps shares—with her husband, Spalding Gray. “We’re having a party.</p>
+<p>“I know, I know,” she says, aware of the painfully incongruent timing. It’s day six since Gray, the performance artist and actor, 62, disappeared into the dark, eleven-degree Manhattan night. “Today is my son Theo’s birthday,” she says with a shrug. “I’m just living very much in the present, and trying to keep things normal for the kids.”</p>
+<p>If there’s anything abnormal about the mood at this two-story white clapboard home, it’s the normality. It’s not a funeral. It’s not even a wake. It’s just a void, and an eerie one. A rabbit named Thumper sits in a cage on the dining-room floor, ignored by the children since the family bought a miniature Australian Shepherd puppy, named Bowie, in a half-successful attempt at “pet therapy” for their dad, who had been seriously—even publicly—depressed since he was injured in an accident two and a half years ago. At a small breakfast nook off the kitchen, Kathie’s parents sit, her father stoically reading the Times.anishing Act</p>
+<p>We’re all familiar with Spalding Gray’s demons—venting his despair was his art and profession. But after a crippling car crash in 2001, his depression began to overwhelm him. So when he went missing earlier this month, after several previous suicide attempts, his wife, children, and friends were left to fear the worst.</p>
+<p> <a href='http://nymag.com/print/?/nymetro/news/features/n_9787/'><strong>CONTINUED</strong></a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=134351">
+	<title>Fuchsia Dunlop on Chinese Food &#124; FiveBooks </title>
+	<link>http://extragoodshit.phlap.net/?p=134351</link>
+	 <dc:date>2011-07-15T10:54:01Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>The English chef who studied cooking in Sichuan tells us that there is no one Chinese cuisine, how Western perceptions of Chinese food are changing, and why carrots are called &#34;barbarian radishes&#34; in Mandarin via READ HERE.</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/NvR9e.jpg" alt="" title="Hosted by imgur.com" />
+<p>The English chef who studied cooking in Sichuan tells us that there is no one Chinese cuisine, how Western perceptions of Chinese food are changing, and why carrots are called &quot;barbarian radishes&quot; in Mandarin</p>
+<p>via <a href='http://thebrowser.com/interviews/fuschia-dunlop-on-chinese-food'><B>READ HERE</B></a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135860">
+	<title>photo of me at my high school prom</title>
+	<link>http://extragoodshit.phlap.net/?p=135860</link>
+	 <dc:date>2011-07-15T10:53:00Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description></description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/7Sbtb.png" alt="" title="Hosted by imgur.com" /></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135895">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=135895</link>
+	 <dc:date>2011-07-15T10:49:33Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description></description>
+	<content:encoded><![CDATA[<p><a href=http://www.glowfoto.com/user_imageredirect.php?iid=3901828><img src="http://img4.glowfoto.com/images/2011/07/14-1419458280M.jpg" alt="free image hosting" border=0 /></a><a href=http://www.glowfoto.com/user_imageredirect.php?iid=3901829><img src="http://img4.glowfoto.com/images/2011/07/14-1419472901M.jpg" alt="free image hosting" border=0 /></a><a href=http://www.glowfoto.com/user_imageredirect.php?iid=3901830><img src="http://img4.glowfoto.com/images/2011/07/14-1419482637M.jpg" alt="free image hosting" border=0 /></a><a href=http://www.glowfoto.com/user_imageredirect.php?iid=3901831><img src="http://img4.glowfoto.com/images/2011/07/14-1419505298M.jpg" alt="free image hosting" border=0 /></a><a href=http://www.glowfoto.com/user_imageredirect.php?iid=3901832><img src="http://img4.glowfoto.com/images/2011/07/14-1419526497M.jpg" alt="free image hosting" border=0 /></a><a href=http://www.glowfoto.com/user_imageredirect.php?iid=3901833><img src="http://img4.glowfoto.com/images/2011/07/14-1419539099M.jpg" alt="free image hosting" border=0 /></a></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135735">
+	<title>Two Japanese Imperial Marines who committed suicide rather than surrender, Tarawa, Gilbert Islands in the Pacific</title>
+	<link>http://extragoodshit.phlap.net/?p=135735</link>
+	 <dc:date>2011-07-15T10:48:48Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>via.</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/egPML.jpg" alt="" title="Hosted by imgur.com" />
+<p><a href='http://ookaboo.com/o/pictures/picture.large/13408203/Two_Japanese_Imperial_Marines_who_commit'>via</a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135743">
+	<title> Science articles from Time Magazine</title>
+	<link>http://extragoodshit.phlap.net/?p=135743</link>
+	 <dc:date>2011-07-15T10:48:07Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>ARTICLE TITLES/ LINKS HERE</description>
+	<content:encoded><![CDATA[<p><a href='http://tidyread.com/td/index.php?r=site%2Fread&#038;url=http%3A%2F%2Fwww.time.com%2Ftime%2Fscience&#038;submit=Read'><B>ARTICLE TITLES/ LINKS HERE</B></A><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135840">
+	<title>R.I.P.</title>
+	<link>http://extragoodshit.phlap.net/?p=135840</link>
+	 <dc:date>2011-07-15T10:44:56Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>R.I.P.&#8211;T.LUX FEININGER, 101, ARTIST, PHOTOGRAPHERIMAGES HERE</description>
+	<content:encoded><![CDATA[<p><A HREF="https://www.nytimes.com/2011/07/14/arts/t-lux-feininger-photographer-and-painter-dies-at-101.html"><strong>R.I.P.&#8211;T.LUX FEININGER, 101, ARTIST, PHOTOGRAPHER</strong><P><img src="http://i.imgur.com/D4m4b.jpg" alt="" title="Hosted by imgur.com" /><P><a href="http://dearcomputer.nl/gir/?q=t.+lux+feininger&#038;s=4&#038;imgtype=any"><strong>IMAGES HERE</strong></A></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135849">
+	<title>music</title>
+	<link>http://extragoodshit.phlap.net/?p=135849</link>
+	 <dc:date>2011-07-15T10:44:23Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>ADELE TRACKS</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/l5ovb.jpg" alt="" title="Hosted by imgur.com" /><P><a href="http://grooveshark.com/#/search?q=adele"><strong>ADELE TRACKS</strong></a><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135889">
+	<title>bin Laden raid</title>
+	<link>http://extragoodshit.phlap.net/?p=135889</link>
+	 <dc:date>2011-07-15T10:42:41Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>CIA organized fake vaccination drive to get bin Laden family DNA. Speaking of Osama bin Laden, British newspaper The Guardian reported earlier this week that the CIA tried to collect DNA evidence on the late al-Qaeda founder by running a phony vaccination program in Abbottabad, the quiet Pakistani town where bin Laden was believed to [...]</description>
+	<content:encoded><![CDATA[<p><A HREF="https://intelligencenews.files.wordpress.com/2011/05/first-post.jpg?w=106&#038;h=142">
+<p><A HREF="http://www.guardian.co.uk/world/2011/jul/11/cia-fake-vaccinations-osama-bin-ladens-dna?INTCMP=SRCH">CIA organized fake vaccination drive to get bin Laden family DNA</A>. Speaking of Osama bin Laden, British newspaper The Guardian reported earlier this week that the CIA tried to collect DNA evidence on the late al-Qaeda founder by running a phony vaccination program in Abbottabad, the quiet Pakistani town where bin Laden was believed to be hiding along with his family. But Shakil Afridi, the Pakistani doctor who administered the vaccination program, failed to get access to bin Laden’s family DNA, even though he managed to enter the family’s compound, said the paper. It is worth noting that, as soon as Pakistani authorities learned of the fake vaccination program, they arrested Dr Afridi for collaborating with a foreign intelligence agency. ►►<A HREF="http://www.politico.com/news/stories/0711/58778.html">CIA moves to protect key analyst in bin Laden raid</A>. Bin Laden may be dead, but it seems that he still haunts the CIA. The Agency had to move one of its senior analysts undercover this week, after he was identified in a photograph that was published by US media, following the Obama administrator’s celebratory announcement of the al-Qaeda leader’s assassination. The photo showed President Obama and other national security officials gathered in the White House situation room on the night of the bin Laden raid. Most media outlets have been referring to the analyst by his middle name, John.</p>
+<p> <a href='https://intelligencenews.wordpress.com/tag/0-cia-moves-to-protect-key-analyst-in-bin-laden-raid/'>via</a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135901">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=135901</link>
+	 <dc:date>2011-07-15T10:41:50Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>via.</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/RMbjd.jpg" alt="" title="Hosted by imgur.com" />
+<p><a href='http://ookaboo.com/o/pictures/picture.large/1964305/The_eastern_side'> via</a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135851">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=135851</link>
+	 <dc:date>2011-07-15T10:39:58Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>outsourced: clinical trials overseas Instead of testing trial medicines on Americans, more and more of these tests are being carried out on poor people in faraway places. Russia, China, Brazil, Poland, Uganda and Romania are all hot spots for what is called clinical research or clinical trials. Now employing CROs &#8211; or clinical research organisations [...]</description>
+	<content:encoded><![CDATA[<p><B>outsourced: clinical trials overseas</b>
+<p>Instead of testing trial medicines on Americans, more and more of these tests are being carried out on poor people in faraway places. Russia, China, Brazil, Poland, Uganda and Romania are all hot spots for what is called clinical research or clinical trials.</p>
+<p>Now employing CROs &#8211; or clinical research organisations &#8211; the industry is big business, worth as much as $30bn today.</p>
+<p>One country has experienced a boom like no other in this industry &#8211; India. Spoken English, an established medical infrastructure, welcoming attitudes toward foreign industry and, most importantly, legions of poor, illiterate test subjects that are willing to try out new drugs have transformed the Indian landscape into a massive testing ground for pharmaceuticals.</p>
+<p><a href='http://english.aljazeera.net/programmes/faultlines/2011/07/2011711112453541600.html'><B>READ MORE</b></a><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135903">
+	<title>guthrie</title>
+	<link>http://extragoodshit.phlap.net/?p=135903</link>
+	 <dc:date>2011-07-15T10:34:31Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>Woody Guthrie &#8211; the ultimate working man’s folk singer: July 14, 1912 &#8211; 1967… “Take it easy, but take it.” — Woody Guthrie via via . TRACKS</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/2Fpvq.jpg" alt="" title="Hosted by imgur.com" />
+<p>Woody Guthrie &#8211; the ultimate working man’s folk singer: July 14, 1912 &#8211; 1967…</p>
+<p>“Take it easy, but take it.” — Woody Guthrie</p>
+<p>via <a href='http://i12bent.tumblr.com/'>via </a>.</p>
+<p><a href="http://grooveshark.com/#/search?q=woody+guthrie"><strong>TRACKS</strong></A><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135935">
+	<title>Phantoms of the East River</title>
+	<link>http://extragoodshit.phlap.net/?p=135935</link>
+	 <dc:date>2011-07-15T10:33:50Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>[...snip...] The word “birding” doesn’t normally suggest “thrill ride.” The average birder in this country is 50 years old. So there is something almost transgressive about Gabriel, young and exuberantly metrosexual in his newsboy cap and hoop earrings, teaching us about herring gulls. In addition to his knowledge of the peregrine falcon’s nesting habits, he [...]</description>
+	<content:encoded><![CDATA[<p>[...snip...]</p>
+<p>The word “birding” doesn’t normally suggest “thrill ride.” The average birder in this country is 50 years old. So there is something almost transgressive about Gabriel, young and exuberantly metrosexual in his newsboy cap and hoop earrings, teaching us about herring gulls. In addition to his knowledge of the peregrine falcon’s nesting habits, he has an unusual penchant for limning the history of the rocks and ruins where the birds come to roost. The story of the East River, I soon learn, is one of abandoned quarantine hospitals and fiery shipwrecks, of exploding islands and dirty, dirty water.<br />
+<a href="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/OlX3O.jpg"><img src="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/OlX3O.jpg" alt="" title="OlX3O" width="392" height="295" class="aligncenter size-full wp-image-135936" /></a><br />
+Angie Wang</p>
+<p>We drift over to Roosevelt Island and past the remains of the Civil-War era Smallpox Hospital. There our guide pauses to express sympathy for the smallpox virus, now relegated to one lonely petri dish at the Centers for Disease Control in Atlanta and one in Siberia. “It’s still a part of nature … ” he trails off, melancholy, only perking up when he spots a congregation of black-crowned night herons in the distance, flying near what was once Flood Rock — the now-tranquil site of an 1885 detonation that cleared the shallows for ship traffic.</p>
+<p>At the northern tip of Roosevelt Island, Gabriel points out the Octagon — once the entrance to the Lunatic Asylum for paupers, now the lobby to a luxury rental community. Then we’re squeezing under Hell Gate Bridge. To our left, lovely Wards Island, a quarter of which is a sewage treatment plant. Next: a desolate stretch of land the fire department uses for practice burns.<P><span id="more-135935"></span></p>
+<p>The water taxi idles just off South Brother Island so we can train our binoculars on the great egret nests. I learn you can tell a snowy egret from a great egret by its black bill, then instantly forget this factoid as soon as I’m instructed to look up at some flying overhead. It was apparently fashionable for 19th-century women to wear a Museum of Natural History’s worth of birds on their heads, and the egrets were hunted almost to extinction for their long, lacy plumes. “Those hats were as common as trucker caps are in Williamsburg,” Gabriel explains. Meanwhile, an Audubon Society volunteer holds up a photo of an egret for those of us too lazy to turn our heads 90 degrees and observe the real thing. The society was founded to help save the egrets (earlier members pledged to “not molest birds”), and they have since made a modest comeback.</p>
+<p>We loop around to North Brother Island, where the disintegrating ruins of Riverside, the old quarantine hospital, are easily visible from the water. The taxi stops, and Gabriel tells the story of Typhoid Mary. For three years, a cook named Mary Mallon was quarantined here in isolation after infecting almost two dozen New Yorkers with typhoid. She petitioned the city and, remarkably, was set free in 1910 on the condition she abandon the food industry. Feeling unfairly persecuted, Mary instead changed her name and returned to the city’s kitchens. After causing at least 25 more infections, she was once again forced to return to Riverside in 1915, where she remained until her death, 23 years later.</p>
+<p>    The story of the East River, I learn, is one of abandoned quarantine hospitals and fiery shipwrecks, of exploding islands and dirty, dirty water.</p>
+<p>We stare into the island’s thick foliage, rapt. A yellow warbler sings. A spotted sandpiper flies by. Barn swallows swoop in and out of the ruined building’s dark eyes. We work the zooms on our cameras furiously, and many long minutes pass before we realize that we are still here, in New York City, breathing exhaust as the water taxi idles.</p>
+<p>Finally, it starts up again. We glide past the site where the paddle steamer General Slocum sank in 1904, killing more than a thousand people. On the way back to lower Manhattan, Gabriel tries to interest us in the story of Newtown Creek, which was recently designated a Superfund site. But by now we are all too busy taking pictures of the sun setting behind the Brooklyn Bridge. Our digital cameras make us feel like geniuses. Our memory cards, full of birds and ghosts.</p>
+<p>I can’t help but think that it would be easy enough to keep these birders happy without all the Sturm und Drang. “Why the dark undercurrent to the tour?” I ask him later.</p>
+<p>“I think of myself as a storyteller first,” he says. “Look at fairy tales — there’s some kind of redemption, but there’s also a lot of darkness. Like this story — it has a redemptive end with the return of the great egret and the rise of the Audubon Society.” The East River, he notes, is almost swimmable again, after decades of environmental clean-up.</p>
+<p>We disembark at Pier 17 of South Street Seaport — known to New Yorkers as The Place Families Go to Walk Slowly — and I find myself fighting the simultaneous urges to get my name inscribed on a grain of rice, have my 3D portrait taken and buy a sound-activated T-shirt. Five minutes later, I am walking back up Fulton Street toward the subway. These city blocks all harbor their own dark histories, and, quite likely, their own exotic wildlife as well, but as for me? I am back to living happily in oblivion.</p>
+<p>After all, there’s a lot to admire about a pigeon.<br />
+Alina Simone</p>
+<p>Alina Simone, a singer, is the author of the essay collection “You Must Go and Win.”<br />
+ <a href="http://opinionator.blogs.nytimes.com/2011/07/13/phantoms-of-the-east-river/?hp">source </a><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135899">
+	<title>spotify?</title>
+	<link>http://extragoodshit.phlap.net/?p=135899</link>
+	 <dc:date>2011-07-15T10:31:20Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>View Here</description>
+	<content:encoded><![CDATA[<p><a href="http://bcove.me/28vlatic">View Here</a><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135984">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=135984</link>
+	 <dc:date>2011-07-15T10:28:41Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description></description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/9AXBQ.jpg" alt="" title="Hosted by imgur.com" /></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135981">
+	<title>White House admits war with Iran</title>
+	<link>http://extragoodshit.phlap.net/?p=135981</link>
+	 <dc:date>2011-07-15T10:27:57Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>The United States is engaged in a deadly but seldom mentioned proxy war with Iran. In a rare act of candor, two senior Obama administration defense officials have addressed the open secret of Iran&#8217;s active support for insurgent groups fighting U.S. troops overseas. Earlier this week, during a visit to Iraq, newly confirmed Secretary of [...]</description>
+	<content:encoded><![CDATA[<p><a href="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/us-afghanistan-panett_lea_s160x240.jpg"><img src="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/us-afghanistan-panett_lea_s160x240.jpg" alt="" title="us-afghanistan-panett_lea_s160x240" width="160" height="240" class="alignleft size-full wp-image-135982" /></a>The United States is engaged in a deadly but seldom mentioned proxy war with Iran. In a rare act of candor, two senior Obama administration defense officials have addressed the open secret of Iran&#8217;s active support for insurgent groups fighting U.S. troops overseas.</p>
+<p>Earlier this week, during a visit to Iraq, newly confirmed Secretary of Defense Leon Panetta strongly denounced Iranian support for increasingly violent Shiite militia groups in that country. &#8220;We are very concerned about Iran and the weapons they are providing to extremists here in Iraq,&#8221; he said. &#8220;We&#8217;re seeing more of those weapons going in from Iran, and they&#8217;ve really hurt us.&#8221; Mr. Panetta pledged that America would take action against Iran&#8217;s provocations. &#8220;We cannot sit back and simply allow this to continue to happen,&#8221; he said. &#8220;This is not something we&#8217;re going to walk away from. It&#8217;s something we&#8217;re going to take on head-on.&#8221;</p>
+<p>Last week, Adm. Mike Mullen, chairman of the Joint Chiefs of Staff, raised the alarm against Iran&#8217;s support for insurgents. He told the Pentagon Press Association, &#8220;Iran is very directly supporting extremist Shiite groups, which are killing our troops. There is no question they are shipping high-tech weapons in there &#8230; that are killing our people. And the forensics prove that.&#8221;<P><span id="more-135981"></span></p>
+<p>Iranian support for insurgencies is rarely raised so publicly at such high levels. Iran has been directly or indirectly responsible for more U.S. combat deaths than any other country since the end of the Vietnam War. For years, Iran has supplied arms and other support to insurgents in Iraq and Afghanistan. Unlike the improvised explosive devices (IEDs) that threaten coalition troops in overseas war zones, there is nothing improvised about the explosively formed penetrators (EFPs) that Iran has been supplying to militant groups. These sophisticated weapons are powerful enough to defeat the heaviest U.S. armored vehicles, and a 2006 classified intelligence report leaked in the New York Times asserted, &#8220;All source reporting since 2004 indicates that Iran&#8217;s Islamic Revolutionary Corps-Quds Force is providing professionally-built EFPs and components to Iraqi Shia militants.&#8221;</p>
+<p>The latest State Department report on Iranian support for international terrorism states, &#8220;Iran&#8217;s Quds Force provided training to the Taliban in Afghanistan on small unit tactics, small arms, explosives and indirect fire weapons. Since at least 2006, Iran has arranged arms shipments to select Taliban members, including small arms and associated ammunition, rocket propelled grenades, mortar rounds, 107 mm rockets and plastic explosives.&#8221; A 2010 story in the London Sunday Times reported that Iranian front companies in Afghanistan funnel salaries of $233 a month to Taliban fighters with bonuses of $1,000 for killing American troops and $6,000 for knocking out American military vehicles.</p>
+<p>The Obama administration has been reticent to draw attention to Iran&#8217;s support for insurgents. Early in 2009, the White House initiated a high-profile outreach effort to Tehran, which was rebuffed quickly and foundered after the brutal crackdown on Iranian pro-reform demonstrators that same summer. Since then, relations have grown steadily worse because of Iran&#8217;s nuclear program and dismal human rights record. With U.S. forces exiting the region, it would be strategically sound to signal the Islamic republic that America won&#8217;t tolerate continued support for insurgent groups that threaten our allies and interests. As Mr. Panetta said, it&#8217;s about time the United States takes this issue head-on.</p>
+<p>© Copyright 2011 The Washington Times, LLC. Click here for reprint permission.<br />
+washingtontimes.comby THE WASHINGTON TIMES  •  July 14, 2011<br />
+hat tip: warnews</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135912">
+	<title>Daniel Ek’s Spotify: Music’s Last Best Hope </title>
+	<link>http://extragoodshit.phlap.net/?p=135912</link>
+	 <dc:date>2011-07-15T10:20:33Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>Spotify founder Daniel Ek and Christina Aguilera, photographed in Los Angeles on July 8 Photograph By Art Streiber (Corrects price of subscription fee in Europe in 10th paragraph.) “You can’t work in music. You have to find another job.” Per Sundin’s concerned mother was on the phone. It was the summer of 2006, and both [...]</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/Jqm4n.jpg" alt="" title="Hosted by imgur.com" /></p>
+<p>Spotify founder Daniel Ek and Christina Aguilera, photographed in Los Angeles on July 8 Photograph By Art Streiber</p>
+<p>(Corrects price of subscription fee in Europe in 10th paragraph.)</p>
+<p>“You can’t work in music. You have to find another job.”</p>
+<p>Per Sundin’s concerned mother was on the phone. It was the summer of 2006, and both Sundins were watching a debate between Sweden’s two major party candidates for Prime Minister. Earlier that year, police in Stockholm had confiscated servers and questioned the founders of The Pirate Bay, a file sharing site that had been ignoring increasingly piqued letters from the American entertainment industry. Media piracy had become a national campaign issue in Sweden, which according to Harvard’s Berkman Center is second only to Japan in speed, price, and availability of broadband Internet access. During the debate, the moderator asked the candidates how they felt about file sharing. Both agreed that piracy was too easy, and that it didn’t make sense to criminalize an entire generation of music lovers.</p>
+<p> <a href='http://www.businessweek.com/magazine/daniel-eks-spotify-musics-last-best-hope-07142011.html'><strong>CONTINUED</strong></a><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135976">
+	<title>American Experience . The Murder of Emmett Till </title>
+	<link>http://extragoodshit.phlap.net/?p=135976</link>
+	 <dc:date>2011-07-15T10:18:32Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>> Killers&#8217; Confession The confession in Look &#124; Letters to the Editor The Shocking Story of Approved Killing in Mississippi By William Bradford Huie Editors Note: In the long history of man&#8217;s inhumanity to man, racial conflict has produced some of the most horrible examples of brutality. The recent slayingof Emmett Till in Mississippi is [...]</description>
+	<content:encoded><![CDATA[<p>	>
+<p>Killers&#8217; Confession</p>
+<p>  The confession in Look | Letters to the Editor</p>
+<p>The Shocking Story of Approved Killing in Mississippi</p>
+<p>By William Bradford Huie</p>
+<p>Editors Note: In the long history of man&#8217;s inhumanity to man, racial conflict has produced some of the most horrible examples of brutality. The recent slaying<a href="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/sf_look_mag_image01.jpg"><img src="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/sf_look_mag_image01.jpg" alt="" title="sf_look_mag_image01" width="182" height="246" class="alignright size-full wp-image-135978" /></a>of Emmett Till in Mississippi is a case in point. The editors of Look are convinced that they are presenting here, for the first time, the real story of that killing &#8212; the story no jury heard and no newspaper reader saw.</p>
+<p>Disclosed here is the true account of the slaying in Mississippi of a Negro youth named Emmett Till.</p>
+<p>Last September in Sumner, Miss., a petit jury found the youth&#8217;s admitted abductors not guilty of murder. In November, in Greenwood, a grand jury declined to indict them for kidnapping.</p>
+<p>Of the murder trial, the Memphis Commercial Appeal said: &quot;Evidence necessary for convicting on a murder charge was lacking.&quot; But with truth absent, hypocrisy and myth have flourished. Now, hypocrisy can be exposed; myth dispelled. Here are the facts.</p>
+<p>Carolyn Holloway Bryant is 21, five feet tall, weighs 103 pounds. An Irish girl, with black hair and black eyes, she is a small farmer&#8217;s daughter who, at 17, quit high school at Indianola, Miss., to marry a soldier, Roy Bryant, then 20, now 24. The couple have two boys, three and two; and they operate a store at a dusty crossroads called Money: post office, filling station and three stores clustered around a school and a gin, and set in the vast, lonely cotton patch that is the Mississippi Delta.</p>
+<p>Carolyn and Roy Bryant are poor: no car, no TV. They live in the back of the store which Roy&#8217;s brothers helped set up when he got out of the 82nd Airborne in 1953. They sell &quot;snuff-and-fatback&quot; to Negro field hands on credit: and they earn little because, for one reason, the government has been giving the Negroes food they formerly bought.</p>
+<p>Carolyn and Roy Bryant&#8217;s social life is visits to their families, to the Baptist church, and, whenever they can borrow a car, to a drive-in, with the kids sleeping in the back seat. They call Shane the best picture they ever saw.</p>
+<p>For extra money, Carolyn tends store when Roy works outside &#8212; like truck driving for a brother. And he has many brothers. His mother had two husbands, 11 children. The first five &#8212; all boys &#8212; were &quot;Milam children&quot;; the next six &#8212; three boys, three girls &#8212; were &quot;Bryant children.&quot;</p>
+<p>This is a lusty and devoted clan. They work, fight, vote and play as a family. The &quot;half&quot; in their fraternity is forgotten. For years, they have operated a chain of cottonfield stores, as well as trucks and mechanical cotton pickers. In relation to the Negroes, they are somewhat like white traders in portions of Africa today; and they are determined to resist the revolt of colored men against white rule.</p>
+<p>On Wednesday evening, August 24, 1955, Roy was in Texas, on a brother&#8217;s truck. He had carted shrimp from New Orleans to San Antonio, proceeded to Brownsville. Carolyn was alone in the store. But back in the living quarters was her sister-in-law Juanita Milam, 27, with her two small sons and Carolyn&#8217;s two. The store was kept open till 9 on week nights, 11 on Saturday.</p>
+<p> <a href='http://www.pbs.org/wgbh/amex/till/sfeature/sf_look_confession.html'><strong>READ MORE</strong></a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135925">
+	<title>facundo cabral</title>
+	<link>http://extragoodshit.phlap.net/?p=135925</link>
+	 <dc:date>2011-07-15T10:15:43Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>THIS talented and beloved Argentian singer was found shot dead a few days ago. MUSIC VIDEOS HERE.</description>
+	<content:encoded><![CDATA[<p>THIS talented and beloved Argentian singer was found shot dead a few days ago.
+<p><a href='https://encrypted.google.com/#q=facundo+cabral&#038;hl=en&#038;safe=off&#038;prmd=ivnsuob&#038;source=lnms&#038;tbm=vid&#038;ei=WlEfTqH8AcXNswai_tz_AQ&#038;sa=X&#038;oi=mode_link&#038;ct=mode&#038;cd=3&#038;ved=0CBcQ_AUoAg&#038;fp=1&#038;biw=1395&#038;bih=783&#038;bav=on.2,or.r_gc.r_pw.&#038;cad=b'><strong>MUSIC VIDEOS HERE</strong></a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135972">
+	<title>Writing is bad for you &#124; Rick Gekoski </title>
+	<link>http://extragoodshit.phlap.net/?p=135972</link>
+	 <dc:date>2011-07-15T10:15:16Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>Writing is bad for you I&#8217;m not sure about the improving influence of reading, but I&#8217;m certain that writing brings out the worst in me Typewriter Shadowy occupation &#8230; a typewriter. Photograph: Corbis We live in a literary environment that – a little uneasily, I often think – feels the need to justify the reading [...]</description>
+	<content:encoded><![CDATA[<p>Writing is bad for you</p>
+<p>I&#8217;m not sure about the improving influence of reading, but I&#8217;m certain that writing brings out the worst in me</p>
+<p><a href="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/Typewriter-007.jpg"><img src="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/Typewriter-007.jpg" alt="" title="Typewriter-007" width="460" height="276" class="aligncenter size-full wp-image-135974" /></a></p>
+<p>Typewriter</p>
+<p>Shadowy occupation &#8230; a typewriter. Photograph: Corbis</p>
+<p>We live in a literary environment that – a little uneasily, I often think – feels the need to justify the reading and study of imaginative literature. That is understandable, for writers and readers often have to stand up and fight for what they care passionately about. We believe it is good for us, it must be good for us, this force we attribute to the enterprise of reading and writing. A wide exposure to great literature, it is claimed, provides a basis upon which we may feel more deeply, understand more widely, become better.</p>
+<p>If this is an empirical proposition, I rather doubt it, though I have no substantial evidence for my scepticism. I have not interviewed thousands of teachers, novelists and critics in order to quantify their goodness on some objective scale. Horrible thought. So I rely, here, on some degree of self-examination. I am pickled in the brine of literature, as an academic, critic, and writer. I have read pretty carefully and widely for 50 years. If there is something enhancing about such an exposure, I should be showing some signs of it by now.</p>
+<p> <a href='http://www.guardian.co.uk/books/booksblog/2011/jul/07/writing-bad-for-your-rick-gekoski'><B>continued</b></a><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135922">
+	<title>Afghan Heroin: The Lost War &#124; Watch  Documentary Online</title>
+	<link>http://extragoodshit.phlap.net/?p=135922</link>
+	 <dc:date>2011-07-15T10:12:27Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>visdeo at this link: Afghan Heroin: The Lost War is a documentary which investigates how the war on terror in Afghanistan has unleashed heroin into the mainstream. Heroin is one of the most addictive drugs on Earth. Some 90 per cent of the drug is grown in Afghanistan and this hard hitting documentary investigates how [...]</description>
+	<content:encoded><![CDATA[<p>visdeo at this link:
+<p><a href="http://www.youtube.com/watch?v=-lyiu_c_190&#038;feature=player_embedded">Afghan Heroin: The Lost War</a> is a documentary which investigates how the war on terror in Afghanistan has unleashed heroin into the mainstream.</p>
+<p>Heroin is one of the most addictive drugs on Earth. Some 90 per cent of the drug is grown in Afghanistan and this hard hitting documentary investigates how the War on Terror has inadvertently unleashed a massive supply of the deadly drug.</p>
+<p>After the Western coalition troops started their hunt for terrorist Osama Bin Laden and his Taliban allies in late 2001, the country torn apart from decades of war once more became the world’s opium growing capital.</p>
+<p>Many impoverished farmers had no choice but to grow the opium poppy to feed their families.</p>
+<p>The documentary delve into the devastating effects of addiction that includes shocking scenes of a young Norwegian couple hustling, scoring and shooting up several times a day in order to appease the monster inside them.</p>
+<p><a href='http://topdocumentaryfilms.com/afghan-heroin-the-lost-war/'>via</a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135970">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=135970</link>
+	 <dc:date>2011-07-15T10:12:00Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description></description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/EZYTc.jpg" alt="" title="Hosted by imgur.com" /></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135932">
+	<title>Poppy Crops Set To Bloom If Afghanistan Aid Withers </title>
+	<link>http://extragoodshit.phlap.net/?p=135932</link>
+	 <dc:date>2011-07-15T10:11:37Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>In case you missed it, June 26 was the International Day against Drug Abuse and Illicit Trafficking. Afghanistan, the world&#8217;s largest provider of opium poppy, did mark the occasion — with a bonfire. Standing near an 11-ton mountain of seized opium, hashish and alcohol on the outskirts of Kabul, Gen. Baz Mohammad Ahmadi welcomed officials [...]</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/gu6eq.jpg" alt="" title="Hosted by imgur.com" />
+<p>In case you missed it, June 26 was the International Day against Drug Abuse and Illicit Trafficking. Afghanistan, the world&#8217;s largest provider of opium poppy, did mark the occasion — with a bonfire.</p>
+<p>Standing near an 11-ton mountain of seized opium, hashish and alcohol on the outskirts of Kabul, Gen. Baz Mohammad Ahmadi welcomed officials to the drug-burning ceremony.</p>
+<p>Ahmadi, the country&#8217;s deputy minister for counternarcotics, appealed for a strong international effort against narcotrafficking. He also asked for more cooperation from his own government on the issue.</p>
+<p>Afghanistan&#8217;s opium poppy turns up as heroin in cities across the world. It pumps billions of dollars into the Afghan economy and is rivaled only by the billions that come in as foreign aid money. As that aid money starts to shrink, the drug money may overwhelm attempts at a legitimate economy.</p>
+<p><a href='http://www.npr.org/2011/07/13/137678642/poppy-crops-set-to-bloom-if-afghanistan-aid-withers'><strong>READ MORE</strong></a><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135968">
+	<title>TODAY&#8217;S POEM</title>
+	<link>http://extragoodshit.phlap.net/?p=135968</link>
+	 <dc:date>2011-07-15T10:10:46Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>How Big? &#8220;This,&#8221; she says, &#8220;you have to see.&#8221; She crouches before her refrigerator and among the photos held up by magnets (including one of Nan and me) a strip of black-and-whites that shows a looming alien head, bowed towards its chest as if in solemn concentration. &#8220;It&#8221;—since they don&#8217;t want to know the sex. [...]</description>
+	<content:encoded><![CDATA[<p>How Big?</p>
+<p>&#8220;This,&#8221; she says, &#8220;you have to see.&#8221;<br />
+She crouches before her refrigerator<br />
+and among the photos held up by magnets<br />
+(including one of Nan and me)<br />
+a strip of black-and-whites that shows<br />
+a looming alien head, bowed towards its chest<br />
+as if in solemn concentration.<P><span id="more-135968"></span></p>
+<p>&#8220;It&#8221;—since they don&#8217;t want to know<br />
+the sex. So one magnet says Aaron<br />
+and the other says Charlotte—<br />
+our grandchild Aaron/Charlotte!—<br />
+and I&#8217;m staring at her mass of wavy hair<br />
+as she crouches in front of the nebula<br />
+of her approaching child, the features<br />
+like clouds. She knows about sonograms<br />
+from her training as a nurse. &#8220;In theory &#8230; &#8221;<br />
+She holds her fingers as far apart<br />
+as you would to measure out, say,<br />
+half a loaf. &#8221;And he&#8217;s a squirmer.<br />
+Or she. Must take after Mom.<br />
+Not me.&#8221; Then she&#8217;s off to work<br />
+the graveyard shift at the hospital.</p>
+<p>She stands sideways so I can see<br />
+the arc of her stomach where it&#8217;s swimming<br />
+in darkness, in silence—all anticipation<br />
+and no memory?—while I&#8217;m all memory:<br />
+the clatter when she dropped her schoolbag,<br />
+the angry outbursts, the sobs, the singing,<br />
+the escape to the piano, the storms of chords &#8230;</p>
+<p>Walking home, I try to imagine her<br />
+stationed in her flowered smock,<br />
+on the locked ward, her patients<br />
+sleeping, her desk lamp lighting<br />
+her reports, her thoughts<br />
+blooming, the hallway<br />
+before her pinging with silence &#8230;</p>
+<p>It&#8217;s like waiting for a storm—<br />
+a really big one—not even named yet—<br />
+one that could last<br />
+the rest of her life.</p>
+<p>Alan Feldman</p>
+<p>Salamander<br />
+Winter 2010 / 2011</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135929">
+	<title>Great Wall of China</title>
+	<link>http://extragoodshit.phlap.net/?p=135929</link>
+	 <dc:date>2011-07-15T10:10:32Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>read more here.</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/0pu6A.jpg" alt="" title="Hosted by imgur.com" />
+<p><a href='http://www.hillmanwonders.com/great_wall_china/great_wall_china.htm'>read more here</a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135965">
+	<title>TODAY IN LITERATURE</title>
+	<link>http://extragoodshit.phlap.net/?p=135965</link>
+	 <dc:date>2011-07-15T10:09:53Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>Attending to Iris Murdoch On this day in 1919, the novelist and philosopher Iris Murdoch was born in Dublin. Many of Murdoch&#8217;s twenty-six novels present the horrors of modern egomania, so given the chance she may not have enjoyed all the attention that her life has received since her death in 1999: her husband, John [...]</description>
+	<content:encoded><![CDATA[<p>Attending to Iris Murdoch<br />
+<a href="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/iris-murdoch-by-tom-phillips-154x210.jpg"><img src="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/iris-murdoch-by-tom-phillips-154x210.jpg" alt="" title="iris-murdoch-by-tom-phillips-154x210" width="154" height="210" class="alignleft size-full wp-image-135966" /></a><br />
+On this day in 1919, the novelist and philosopher Iris Murdoch was born in Dublin. Many of Murdoch&#8217;s twenty-six novels present the horrors of modern egomania, so given the chance she may not have enjoyed all the attention that her life has received since her death in 1999: her husband, John Bayley&#8217;s, Elegy for Iris and Iris and her Friends; Peter Conradi&#8217;s authorized biography, Iris Murdoch; and the Oscar-nominated movie, Iris.<P><span id="more-135965"></span></p>
+<p>The movie was based on the Elegy memoirs, and Conradi was a friend of Murdoch and her husband; one common ground in all three works is water. In his review of the film, Martin Amis notes the prevalence of water imagery, and that one of Murdoch&#8217;s more famous philosophical essays was &#8220;Against Dryness,&#8221; as one of her most famous books, the 1978 Booker Prize winner, is The Sea, The Sea. Amis&#8217;s review also forewarns of other water, as we witness how the abundant mind &#8212; Murdoch was a professor of philosophy at Oxford, as well as a novelist &#8212; is inexorably reduced by Alzheimer&#8217;s Disease: &#8220;Hold yourself in readiness, too, for the floods of your tears.&#8221;</p>
+<p>In her journal, Murdoch says that her earliest memory, from the age of 3 or 4, is of swimming with her father. Conradi cites this, saying that &#8220;Swimming was the secret family religion.&#8221; Bayley&#8217;s Elegy begins with a skinny-dip memory from 45 years earlier, a hot summer&#8217;s day at the beginning of their courting life:</p>
+<p>    Crouching in the shelter of the reeds, we tore our clothes off and slipped in like water rats. A kingfisher flashed past our noses as we lay soundlessly in the dark, sluggish current. A moment after we had crawled out and were drying ourselves on Iris&#8217;s half-slip, a big pleasure boat chugged past within a few feet of the bank. . . .</p>
+<p>    I still have the half-slip, I rediscovered it the other day, bunched up at the back of a drawer, stiff with powdery traces of dry mud. It is faded to a yellowish colour, with a wrinkled ribbon, once blue, decorating the hem. . . . </p>
+<p>As bookend to that, Bayley also recalls their last swim, Murdoch now very ill:</p>
+<p>    In her shabby old one-piece swimsuit . . . she was an awkward and anxious figure, her socks trailing round her ankles. She was obstinate about not taking these off, and I gave up the struggle. A pleasure barge chugged slowly past, an elegant girl in a bikini sunning herself on the deck, a young man in white shorts at the steering wheel. . . . We must have presented a comic spectacle &#8212; an elderly man struggling to remove the garments from an old lady. . . . </p>
+<p>In her last years, Murdoch could startle: &#8220;Who am I?&#8221; and &#8220;How did this anguish start?&#8221; and a series of unfinished letters always beginning with &#8220;My dear, I am now going away for some time. I hope you will be well.&#8221; Whether as anchor to or escape from memory, swimming seems to bring relief: she writes of one last dip, &#8220;Indescribable. Holiness.&#8221;</p>
+<p>— SK </p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135942">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=135942</link>
+	 <dc:date>2011-07-15T10:09:37Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>you can find these at times at roadside stands in Pennsaylvania</description>
+	<content:encoded><![CDATA[<p>you can find these at times at roadside stands in Pennsaylvania</p>
+<p><img src="http://i.imgur.com/xxeOM.png" alt="" title="Hosted by imgur.com" /></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135963">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=135963</link>
+	 <dc:date>2011-07-15T10:07:47Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description></description>
+	<content:encoded><![CDATA[]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135961">
+	<title>mental floss magazine</title>
+	<link>http://extragoodshit.phlap.net/?p=135961</link>
+	 <dc:date>2011-07-15T10:07:38Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>READ HERE.</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/wLYYV.jpg" alt="" title="Hosted by imgur.com" />
+<p><a href='http://www.mentalfloss.com/'>READ HERE</a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135959">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=135959</link>
+	 <dc:date>2011-07-15T10:05:55Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>&#8230;picture of Eddie Guerin. Eddie was a notorious thief of the late 1800&#8242;s. In 1888 the New York times described him as a &#34;not so successful&#34; criminal, but at the same time &#34;daring and industrious&#34;. In 1888 he was tracked to a saloon, and an officer attempted to make an arrest. Eddie shot the officer [...]</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/GZ07n.jpg" alt="" title="Hosted by imgur.com" />
+<p>&#8230;picture of Eddie Guerin. Eddie was a notorious thief of the late 1800&#8242;s. In 1888 the New York times described him as a &quot;not so successful&quot; criminal, but at the same time &quot;daring and industrious&quot;. In 1888 he was tracked to a saloon, and an officer attempted to make an arrest. Eddie shot the officer and made his escape. He then went to London, where Scotland Yard was soon on his tail. He was captured in London after a high speed chase. He then escaped again. In 1901 he was captured in the US, and accused of robbing an express office in Paris. He was convicted and sentenced to life in prison.</p>
+<p>via <a href='http://old-photos.blogspot.com/'>Old Picture of the Day</a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135957">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=135957</link>
+	 <dc:date>2011-07-15T10:04:38Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>Date unknown Marilyn Monroe reading fan mail. via Black and WTF.</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/VunRG.jpg" alt="" title="Hosted by imgur.com" />
+<p>Date unknown</p>
+<p>Marilyn Monroe reading fan mail.</p>
+<p>via <a href='http://blackandwtf.tumblr.com/'>Black and WTF</a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135955">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=135955</link>
+	 <dc:date>2011-07-15T10:01:52Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>Lee Friedlander (b. July 14, 1934) is one of the great American photographers… Above &#8211; Lee Friedlander: New York City, 1966 &#8211; Gelatin silver print (Carl Jacobs Fund) via Ordinary finds.</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/Baepa.jpg" alt="" title="Hosted by imgur.com" />
+<p>Lee Friedlander (b. July 14, 1934) is one of the great American photographers…</p>
+<p>Above &#8211; Lee Friedlander: New York City, 1966 &#8211; Gelatin silver print (Carl Jacobs Fund)</p>
+<p>via <a href='http://i12bent.tumblr.com/'>Ordinary finds</a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135953">
+	<title>Simon Baron-Cohen on Empathy &#124; FiveBooks </title>
+	<link>http://extragoodshit.phlap.net/?p=135953</link>
+	 <dc:date>2011-07-15T10:00:03Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>The autism expert tells us about the links between empathy and language, and says our acts of cruelty to one another have at their root a failure to empathise You are well known for your research into autism. Recently you have been exploring the concept of empathy. Can you explain how the two are linked? [...]</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/l2lxf.jpg" alt="" title="Hosted by imgur.com" /><br />
+The autism expert tells us about the links between empathy and language, and says our acts of cruelty to one another have at their root a failure to empathise</p>
+<p>You are well known for your research into autism. Recently you have been exploring the concept of empathy. Can you explain how the two are linked?</p>
+<p>The link between empathy and autism derives from the idea that difficulty with empathy is the main characteristic in autism. It is because people with autism struggle with empathy that they have trouble forming social relationships and interacting in the social world. The focus on empathy in my new book is not a real departure from the research I have been doing into autism, which goes back several decades. But what I do in this new book is widen the focus. Autism isn’t the only psychiatric condition where empathy is an area of difficulty. I have included a range of these conditions, including various personality disorders, to understand how empathy can go wrong either in terms of its development or its functioning.</p>
+<p>So you look at how empathy can be the source of many problems in different medical conditions and how we can help people in that situation?</p>
+<p><a href='http://thebrowser.com/interviews/simon-baron-cohen-on-empathy'><B>CONTINUED</b></a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135949">
+	<title>Surprise Sector for Job Growth</title>
+	<link>http://extragoodshit.phlap.net/?p=135949</link>
+	 <dc:date>2011-07-15T09:57:33Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>A new National Endowment for the Arts analysis projects a healthy rate of growth in arts jobs through the year 2018. Is your heart set on a career in the arts while your head points you in a more practical direction? If so, a newly published research report by the National Endowment for the Arts [...]</description>
+	<content:encoded><![CDATA[<p>A new National Endowment for the Arts analysis projects a healthy rate of growth in arts jobs through the year 2018.</p>
+<p>Is your heart set on a career in the arts while your head points you in a more <a href="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/mmw-arts-jobs.jpg"><img src="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/mmw-arts-jobs.jpg" alt="" title="mmw-arts-jobs" width="475" height="329" class="alignright size-full wp-image-135950" /></a>practical direction? If so, a newly published research report by the National Endowment for the Arts should help get those warring organs in synch.</p>
+<p>Using data from the Bureau of Labor Statistics, the NEA projects a growth rate of 11 percent for arts-related occupations over the next seven years. Perhaps surprisingly, that’s a bit higher than the projected increase of 10 percent for the overall labor force.<P><span id="more-135949"></span></p>
+<p>Granted, the figure is lower than many other fields in the “professional and related occupations” category, such as the 72 percent projected increase in jobs for biomedical engineers. Nevertheless, the need for qualified professionals in many arts-related occupations is expected to grow as fast, or faster, than the job market as a whole through the year 2018.</p>
+<p>Museum professionals will be particularly in demand. Projected growth rates are highest for museum technicians and conservators, as 26 percent; curators, at 23 percent; landscape architects, at 20 percent; interior designers, at 19 percent; and architects, at 16 percent.</p>
+<p>Immediately behind are writers and authors, with an expected growth rate of 15 percent; multimedia artists and animators, at 14 percent; graphic designers and actors, at 13 percent; and art directors, photographers, and film and video editors, at 12 percent.</p>
+<p>In contrast, jobs for painters, sculptors and illustrators are expected to grow at only a 9 percent rate, and fashion designer jobs will grow at a miniscule 1 percent rate.</p>
+<p>The report doesn’t specify why the growth rate among curators and museum technicians and conservators — a relatively small category made up of highly educated professionals — is expected to be so high; it simply cites “continued public interest in arts, science and history.” Perhaps it has something to do with the fact some longtime collectors are establishing their own major museums, including Eli Broad in Los Angeles and Alice Walton in Arkansas.</p>
+<p>The projected growth rate for other arts-related occupations is driven by demographics. The report points out that architects — both of the building and landscape varieties — “are essential in building health care facilities, nursing homes and retirement communities.”</p>
+<p>“Employment of interior designers is expected to grow faster than average, primarily due to the health care industry,” the report states. “With a rapidly aging U.S. population, there is growing demand for health care facilities, and interior designers will be needed to ensure pleasant surroundings for patients.”</p>
+<p>The report looks at “long-term structural changes” in the economy, rather than the temporary effects of recessions or periods of economic expansion. In a less-than-comforting aside, the authors note: “The projections assume that the U.S. economy and labor force will have fully recovered from the effects of the 2007-09 recession by 2018.”</p>
+<p>Let us hope.</p>
+<p>Sign up for the free Miller-McCune.com e-newsletter.<br />
+miller-mccune.com</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135947">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=135947</link>
+	 <dc:date>2011-07-15T09:54:48Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>Scott Moore via this isn&#8217;t happiness™.</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/ui4Lx.jpg" alt="" title="Hosted by imgur.com" />
+<p>Scott Moore</p>
+<p>via <a href='http://thisisnthappiness.com/'>this isn&#8217;t happiness™</a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135887">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=135887</link>
+	 <dc:date>2011-07-14T19:59:00Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description></description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/xj9cO.jpg" alt="" title="Hosted by imgur.com" /></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135880">
+	<title>WESTERN &amp; BOP: Jimmie Rodgers-Classic Sides\Recordings 1927-1933 Disc 3</title>
+	<link>http://extragoodshit.phlap.net/?p=135880</link>
+	 <dc:date>2011-07-14T19:41:27Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>NOW IF YOU HAVE THE TIME AND PATIENCE, YOU CAN DOWNLOAD ALL 23 OF THESE TUNES, FREE. CLICK HERE.</description>
+	<content:encoded><![CDATA[<p>NOW IF YOU HAVE THE TIME AND PATIENCE, YOU CAN DOWNLOAD ALL 23 OF THESE TUNES, FREE.
+<p><img src="http://i.imgur.com/93ZHA.jpg" alt="" title="Hosted by imgur.com" /><P><a href='http://western-swing.blogspot.com/2010/08/jimmie-rodgers-classic-sidesrecordings_3158.html'>CLICK HERE</a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135878">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=135878</link>
+	 <dc:date>2011-07-14T19:37:48Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>3 PEOPLE I CAN DO WITHOUT</description>
+	<content:encoded><![CDATA[<p>3 PEOPLE I CAN DO WITHOUT</p>
+<p><img src="http://i.imgur.com/L3e6U.jpg" alt="" title="Hosted by imgur.com" /></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135876">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=135876</link>
+	 <dc:date>2011-07-14T19:28:31Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description></description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/BuYC3.jpg" alt="" title="Hosted by imgur.com" /></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135874">
+	<title>Are You Tired of Me Darling: Nanci Griffith and Iris Dement «</title>
+	<link>http://extragoodshit.phlap.net/?p=135874</link>
+	 <dc:date>2011-07-14T19:26:40Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>Are You Tired of Me Darling: Nanci Griffith and Iris Dement CLICK HERE.</description>
+	<content:encoded><![CDATA[<p>Are You Tired of Me Darling: Nanci Griffith and Iris Dement</p>
+<p> <a href='https://keepthecoffeecoming.wordpress.com/2011/05/27/are-you-tired-of-me-darling-nanci-griffit-and-iris-dement/'>CLICK HERE</a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135872">
+	<title>La 3e heure!</title>
+	<link>http://extragoodshit.phlap.net/?p=135872</link>
+	 <dc:date>2011-07-14T19:19:58Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>10 tunes to listen to GO HERE.</description>
+	<content:encoded><![CDATA[<p>10 tunes to listen to
+<p><a href='http://la3eheure.tumblr.com/post/7574259530/buzz-office-60'>GO HERE</a>.</p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135870">
+	<title>MetaFilter &#124; Community Weblog</title>
+	<link>http://extragoodshit.phlap.net/?p=135870</link>
+	 <dc:date>2011-07-14T19:17:38Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>Meanwhile, this is what is going on at Big Blue READ HERE</description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/DX53h.png" alt="" title="Hosted by imgur.com" /><br />
+Meanwhile, this is what is going on at Big Blue
+<p><a href='http://tidyread.com/td/index.php?r=site/read&#038;url=http%3A%2F%2Fwww.metafilter.com%2F&#038;title=MetaFilter%20%7C%20Community%20Weblog'><strong>READ HERE</strong></a><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135866">
+	<title>◼ The Cults &#8211; Go Outside</title>
+	<link>http://extragoodshit.phlap.net/?p=135866</link>
+	 <dc:date>2011-07-14T17:35:58Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>batch of music. go to link. click triangle at far right to listen to tunes. enjoy CLICK HERE</description>
+	<content:encoded><![CDATA[<p>batch of music. go to link. click triangle at far right to listen to tunes. enjoy
+<p><a href='http://hypem.com/blog/stark%20online/6127'><B>CLICK HERE</B></A><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135834">
+	<title></title>
+	<link>http://extragoodshit.phlap.net/?p=135834</link>
+	 <dc:date>2011-07-14T13:44:35Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description></description>
+	<content:encoded><![CDATA[<p><img src="http://i.imgur.com/5X0YO.jpg" alt="" title="Hosted by imgur.com" /></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135832">
+	<title>Ten Bastille Day Must-Reads</title>
+	<link>http://extragoodshit.phlap.net/?p=135832</link>
+	 <dc:date>2011-07-14T13:43:47Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>[emphasis in this site is connection between Jews and France] On July 14, France celebrates Bastille Day, commemorating the storming of the Bastille, back in 1789, during the French Revolution. To mark the occasion,&#8230; READ MORE</description>
+	<content:encoded><![CDATA[<p>[emphasis in this site is connection between Jews and France]<P><img src="http://i.imgur.com/HAQem.jpg" alt="" title="Hosted by imgur.com" />
+<p>On July 14, France celebrates Bastille Day, commemorating the storming of the Bastille, back in 1789, during the French Revolution. To mark the occasion,&#8230;</p>
+<p> <a href='http://forward.com/articles/139858/?utm_source=Sailthru&#038;utm_medium=email&#038;utm_term=The%2520Forward%2520Today%2520%2528Monday-Friday%2529&#038;utm_campaign=Newsletter%2520Template'><B>READ MORE</B></A><P></p>
+]]></content:encoded>
+	</item>
+<item rdf:about="http://extragoodshit.phlap.net/?p=135827">
+	<title>Look Twice &#124;  the intersection of race and pop culture</title>
+	<link>http://extragoodshit.phlap.net/?p=135827</link>
+	 <dc:date>2011-07-14T13:33:59Z</dc:date>
+	<dc:creator>postroad</dc:creator>
+			<dc:subject><![CDATA[Uncategorized]]></dc:subject>
+	<description>by Guest Contributor Joseph Shahadi, also published at VSthePomegranate A few months ago, I got into a fistfight on the subway. I was coming home from work and it was packed. There was this gawky twelve year old kid standing nearby. I’d noticed him earlier in the ride clowning around with a friend: Skinny kid, [...]</description>
+	<content:encoded><![CDATA[<p>by Guest Contributor Joseph Shahadi, also published at VSthePomegranate</p>
+<p>A few months ago, I got into a fistfight on the subway.</p>
+<p>I was coming home from work and it was packed. There was this gawky twelve year old kid <a href="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/VJGDI.jpg"><img src="http://extragoodshit.phlap.net/wp-content/uploads/extragoodshit.phlap.net/2011/07/VJGDI.jpg" alt="" title="VJGDI" width="240" height="180" class="alignright size-full wp-image-135829" /></a>standing nearby. I’d noticed him earlier in the ride clowning around with a friend: Skinny kid, all fingers and toes, awash in the dorkiness of an actual pre-teen who does not have his own show on the Disney channel. I was tired and spacing out when the door slid open and people shifted to get off. The kid made a move for the door but I had a few stops left so I twisted out of the way to let him exit but instead of moving forward he just stood there, blinking and stammering. Just as I was asking him, “are you getting off?” someone behind me gave me a hard shove out of the way. I fell forward, the guy walked around me, and out the door…but not before I gave him a hard shove back.</p>
+<p>Then he whirled around and sucker punched me in the face.</p>
+<p>In retrospect, the dorky kid was probably paralyzed because he could see past me to the impatient guy who, it turns out was big. Very big. But I didn’t really have time to process any of that in the moment because when he punched me I saw red and…do you remember how Garfield the cartoon cat used to sail through the air to throw himself on to a cartoon lasagna? I did that. “Hello,” said my lizard brain, “I will be taking it from here.” Impatient guy was surprised. The people around us, who were streaming off of the subway, were surprised. Hell, I surprised myself. We stumbled out on to the subway platform as New York commuters, disinterested but ready to move away in case one of us pulled out a weapon, watched blankly.</p>
+<p>For some reason, this is the part of the story where everyone wants to know if the guy was black.</p>
+<p> <a href='http://www.racialicious.com/2009/03/19/look-twice/'><b>READ MORE</b></a><P></p>
+]]></content:encoded>
+	</item>
+</rdf:RDF>
