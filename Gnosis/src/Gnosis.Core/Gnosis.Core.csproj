@@ -96,6 +96,7 @@
     <Compile Include="Atom\IAtomPerson.cs" />
     <Compile Include="DictionaryExtensions.cs" />
     <Compile Include="DublinCore\IDcCreator.cs" />
+    <Compile Include="DublinCore\IDcDescription.cs" />
     <Compile Include="DublinCore\IDcSubject.cs" />
     <Compile Include="DublinCore\IDcTitle.cs" />
     <Compile Include="FileInfoExtensions.cs" />
