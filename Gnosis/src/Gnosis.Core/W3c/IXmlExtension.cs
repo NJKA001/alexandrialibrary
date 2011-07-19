@@ -11,6 +11,5 @@ namespace Gnosis.Core.W3c
         IXmlNamespace PrimaryNamespace { get; }
         string Prefix { get; }
         string Name { get; }
-        string Content { get; }
     }
 }

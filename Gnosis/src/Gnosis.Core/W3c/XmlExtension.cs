@@ -8,23 +8,23 @@ namespace Gnosis.Core.W3c
     public class XmlExtension
         : IXmlExtension
     {
-        public XmlExtension(IEnumerable<IXmlNamespace> namespaces, IXmlNamespace primaryNamespace, string prefix, string name, string content)
+        public XmlExtension(IEnumerable<IXmlNamespace> namespaces, IXmlNamespace primaryNamespace, string prefix, string name, string outerXml)
         {
-            if (content == null)
-                throw new ArgumentNullException("content");
+            if (outerXml == null)
+                throw new ArgumentNullException("outerXml");
 
             this.namespaces = namespaces;
             this.primaryNamespace = primaryNamespace;
             this.prefix = prefix;
             this.name = name;
-            this.content = content;
+            this.outerXml = outerXml;
         }
 
         private readonly IEnumerable<IXmlNamespace> namespaces;
         private readonly IXmlNamespace primaryNamespace;
         private readonly string prefix;
         private readonly string name;
-        private readonly string content;
+        private readonly string outerXml;
 
         #region IXmlExtension Members
 
@@ -48,16 +48,11 @@ namespace Gnosis.Core.W3c
             get { return name; }
         }
 
-        public string Content
-        {
-            get { return content; }
-        }
-
         #endregion
 
         public override string ToString()
         {
-            return content;
+            return outerXml;
         }
     }
 }

@@ -7,7 +7,7 @@ using Gnosis.Core.W3c;
 
 namespace Gnosis.Core.DublinCore
 {
-    public interface IDcTitle
+    public interface IDcPublisher
         : IXmlExtension
     {
         string Content { get; }

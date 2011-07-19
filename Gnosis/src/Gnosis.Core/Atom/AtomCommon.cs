@@ -71,7 +71,7 @@ namespace Gnosis.Core.Atom
                 xml.AppendLine();
 
                 foreach (var extension in extensions)
-                    xml.AppendLine(extension.Content);
+                    xml.AppendLine(extension.ToString());
             }
         }
 

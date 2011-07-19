@@ -136,7 +136,7 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(5, firstItem.Categories.Count());
             var firstMediaContentExt = firstItem.Extensions.Where(x => x.Prefix == "media" && x.Name == "content").FirstOrDefault();
             Assert.IsNotNull(firstMediaContentExt);
-            Assert.IsTrue(firstMediaContentExt.Content.Contains(item1MediaContentUrl));
+            Assert.IsTrue(firstMediaContentExt.ToString().Contains(item1MediaContentUrl));
             var lastItem = feed.Channel.Items.Last();
             Assert.IsNotNull(lastItem);
         }

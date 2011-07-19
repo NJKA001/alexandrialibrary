@@ -10,6 +10,6 @@ namespace Gnosis.Core.DublinCore
     public interface IDcSubject
         : IXmlExtension
     {
-        string Subject { get; }
+        string Content { get; }
     }
 }

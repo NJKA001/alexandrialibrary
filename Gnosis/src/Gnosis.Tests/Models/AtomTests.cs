@@ -144,7 +144,7 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(3, feed.Extensions.Count());
             Assert.AreEqual(lastExtPrefix, feed.Extensions.Last().Prefix);
             Assert.AreEqual(lastExtName, feed.Extensions.Last().Name);
-            Assert.IsTrue(feed.Extensions.Last().Content.Contains(lastExtContent));
+            Assert.IsTrue(feed.Extensions.Last().ToString().Contains(lastExtContent));
 
             Assert.AreEqual(6, feed.Entries.Count());
             Assert.IsNotNull(feed.Entries.First());
@@ -154,7 +154,7 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(1, feed.Entries.First().Authors.First().Extensions.Count());
             Assert.AreEqual(entryAuthorExtPrefix, feed.Entries.First().Authors.First().Extensions.First().Prefix);
             Assert.AreEqual(entryAuthorExtName, feed.Entries.First().Authors.First().Extensions.First().Name);
-            Assert.AreEqual(entryAuthorExtContent, feed.Entries.First().Authors.First().Extensions.First().Content);
+            Assert.AreEqual(entryAuthorExtContent, feed.Entries.First().Authors.First().Extensions.First().ToString());
 
             Assert.AreEqual(1, feed.Entries.First().Categories.Count());
             Assert.AreEqual(entryCategoryTerm, feed.Entries.First().Categories.First().Term);

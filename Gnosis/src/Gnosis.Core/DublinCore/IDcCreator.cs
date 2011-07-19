@@ -10,6 +10,6 @@ namespace Gnosis.Core.DublinCore
     public interface IDcCreator
         : IXmlExtension
     {
-        string Creator { get; }
+        string Content { get; }
     }
 }
