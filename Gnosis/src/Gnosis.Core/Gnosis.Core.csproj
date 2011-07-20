@@ -95,10 +95,14 @@
     <Compile Include="Atom\IAtomFeed.cs" />
     <Compile Include="Atom\IAtomPerson.cs" />
     <Compile Include="DictionaryExtensions.cs" />
+    <Compile Include="DublinCore\IDcContributor.cs" />
     <Compile Include="DublinCore\IDcCreator.cs" />
+    <Compile Include="DublinCore\IDcDate.cs" />
     <Compile Include="DublinCore\IDcDescription.cs" />
+    <Compile Include="DublinCore\IDcPublisher.cs" />
     <Compile Include="DublinCore\IDcSubject.cs" />
     <Compile Include="DublinCore\IDcTitle.cs" />
+    <Compile Include="DublinCore\IDcType.cs" />
     <Compile Include="FileInfoExtensions.cs" />
     <Compile Include="GuidExtensions.cs" />
     <Compile Include="Id3\IId3Tag.cs" />
