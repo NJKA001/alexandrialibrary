@@ -7,7 +7,7 @@ using Gnosis.Core.W3c;
 
 namespace Gnosis.Core.DublinCore
 {
-    public interface IDcDescription
+    public interface IDcCoverage
         : ISimpleDublinCoreElement
     {
     }

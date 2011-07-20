@@ -7,8 +7,9 @@ using Gnosis.Core.W3c;
 
 namespace Gnosis.Core.DublinCore
 {
-    public interface IDcDescription
-        : ISimpleDublinCoreElement
+    public interface IDublinCoreElement
+        : IXmlExtension
     {
+        string Content { get; }
     }
 }
