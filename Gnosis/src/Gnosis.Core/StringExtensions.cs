@@ -951,6 +951,19 @@ namespace Gnosis.Core
             return hasAlpha && hasNumeric;
         }
 
+        public static string RemoveQuotes(this string self)
+        {
+            if (string.IsNullOrEmpty(self))
+                return self;
+
+            if (self.StartsWith("'") && self.EndsWith("'"))
+                return self.Replace("'", string.Empty);
+            else if (self.StartsWith("\"") && self.EndsWith("\""))
+                return self.Replace("\"", string.Empty);
+
+            return self;
+        }
+
         public static bool StartsWith(this string self, StringComparison comparison, params string[] strings)
         {
             foreach (string str in strings)
