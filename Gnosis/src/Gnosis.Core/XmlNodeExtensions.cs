@@ -228,5 +228,24 @@ namespace Gnosis.Core
                 new XmlStyleSheet(type, media, href)
                 : null;
         }
+
+        public static Core.Xml.IXmlElement ToXmlElement(this XmlNode self, Core.Xml.XmlElement parent)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            string prefix = null;
+            string name = self.Name;
+            if (name.Contains(':'))
+            {
+                var tokens = name.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+                if (tokens != null && tokens.Length == 2)
+                {
+                }
+            }
+
+            //return new Core.Xml.XmlElement(prefix, name, 
+            return null;
+        }
     }
 }

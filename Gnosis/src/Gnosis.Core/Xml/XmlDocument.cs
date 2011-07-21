@@ -10,12 +10,10 @@ namespace Gnosis.Core.Xml
     public class XmlDocument
         : IXmlDocument
     {
-        public XmlDocument(string xmlVersion, ICharacterSet encoding, bool standalone, IEnumerable<IXmlProcessingInstruction> processingInstructions, IEnumerable<IXmlComment> comments, IXmlElement root)
+        private XmlDocument(IXmlDeclaration declaration, IEnumerable<IXmlProcessingInstruction> processingInstructions, IEnumerable<IXmlComment> comments, IXmlElement root)
         {
-            if (xmlVersion == null)
-                throw new ArgumentNullException("xmlVersion");
-            if (encoding == null)
-                throw new ArgumentNullException("encoding");
+            if (declaration == null)
+                throw new ArgumentNullException("declaration");
             if (processingInstructions == null)
                 throw new ArgumentNullException("processingInstructions");
             if (comments == null)
@@ -23,36 +21,22 @@ namespace Gnosis.Core.Xml
             if (root == null)
                 throw new ArgumentNullException("root");
 
-            this.xmlVersion = xmlVersion;
-            this.encoding = encoding;
-            this.standalone = standalone;
+            this.declaration = declaration;
             this.processingInstructions = processingInstructions;
             this.comments = comments;
             this.root = root;
         }
 
-        private readonly string xmlVersion;
-        private readonly ICharacterSet encoding;
-        private readonly bool standalone;
+        private readonly IXmlDeclaration declaration;
         private readonly IEnumerable<IXmlProcessingInstruction> processingInstructions;
         private readonly IEnumerable<IXmlComment> comments;
         private readonly IXmlElement root;
 
         #region IXmlDocument Members
 
-        public string XmlVersion
+        public IXmlDeclaration Declaration
         {
-            get { return xmlVersion; }
-        }
-
-        public ICharacterSet Encoding
-        {
-            get { return encoding; }
-        }
-
-        public bool Standalone
-        {
-            get { return standalone; }
+            get { return declaration; }
         }
 
         public IEnumerable<IXmlProcessingInstruction> ProcessingInstructions
@@ -76,8 +60,7 @@ namespace Gnosis.Core.Xml
         {
             var xml = new StringBuilder();
 
-            xml.AppendFormat("<?xml version=\"{0}\" encoding=\"{1}\" standalone=\"{2}\" ?>", xmlVersion, encoding, standalone);
-            xml.AppendLine();
+            xml.AppendLine(declaration.ToString());
 
             foreach (var instruction in processingInstructions)
                 xml.AppendLine(instruction.ToString());
@@ -88,6 +71,55 @@ namespace Gnosis.Core.Xml
             xml.AppendLine(root.ToString());
 
             return xml.ToString();
+        }
+
+        public static IXmlDocument Parse(string xml)
+        {
+            if (xml == null)
+                throw new ArgumentNullException("xml");
+
+            IXmlDeclaration declaration = null;
+            var processingInstructions = new List<IXmlProcessingInstruction>();
+            var comments = new List<IXmlComment>();
+            IXmlElement root = null;
+
+            var xmlDoc = new System.Xml.XmlDocument();
+            xmlDoc.LoadXml(xml);
+
+            foreach (var child in xmlDoc.ChildNodes.Cast<System.Xml.XmlNode>().Where(node => node != null))
+            {
+                switch (child.NodeType)
+                {
+                    case System.Xml.XmlNodeType.XmlDeclaration:
+                        //encoding = child.ToEncoding();
+                        break;
+                    case System.Xml.XmlNodeType.ProcessingInstruction:
+                        {
+                            var instructionNode = child as System.Xml.XmlProcessingInstruction;
+                            if (instructionNode == null)
+                                break;
+
+                            var instruction = XmlProcessingInstruction.Parse(instructionNode.Target, instructionNode.InnerText);
+                            if (instruction != null)
+                                processingInstructions.Add(instruction);
+                            break;
+                        }
+                    case System.Xml.XmlNodeType.Comment:
+                        comments.Add(new XmlComment(child.InnerText));
+                        break;
+                    case System.Xml.XmlNodeType.Element:
+
+
+                            //root = new XmlElement(
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return declaration != null && root != null ?
+                new XmlDocument(declaration, processingInstructions, comments, root)
+                : null;
         }
     }
 }

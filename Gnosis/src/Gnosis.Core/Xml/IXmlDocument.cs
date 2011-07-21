@@ -9,9 +9,7 @@ namespace Gnosis.Core.Xml
 {
     public interface IXmlDocument
     {
-        string XmlVersion { get; }
-        ICharacterSet Encoding { get; }
-        bool Standalone { get; }
+        IXmlDeclaration Declaration { get; }
         IEnumerable<IXmlProcessingInstruction> ProcessingInstructions { get; }
         IEnumerable<IXmlComment> Comments { get; }
         IXmlElement Root { get; }

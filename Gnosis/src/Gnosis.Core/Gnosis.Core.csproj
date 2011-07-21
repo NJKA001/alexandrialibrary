@@ -197,6 +197,7 @@
     <Compile Include="Xml\IXmlCDataSection.cs" />
     <Compile Include="Xml\IXmlCharacterData.cs" />
     <Compile Include="Xml\IXmlComment.cs" />
+    <Compile Include="Xml\IXmlDeclaration.cs" />
     <Compile Include="Xml\IXmlDocument.cs" />
     <Compile Include="Xml\IXmlElement.cs" />
     <Compile Include="Xml\IXmlEscapedSection.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="Xml\XmlAttribute.cs" />
     <Compile Include="Xml\XmlCDataSection.cs" />
     <Compile Include="Xml\XmlComment.cs" />
+    <Compile Include="Xml\XmlDeclaration.cs" />
     <Compile Include="Xml\XmlDocument.cs" />
     <Compile Include="Xml\XmlElement.cs" />
     <Compile Include="Xml\XmlEscapedSection.cs" />
