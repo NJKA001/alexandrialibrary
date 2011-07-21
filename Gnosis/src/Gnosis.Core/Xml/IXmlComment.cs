@@ -6,6 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Xml
 {
     public interface IXmlComment
+        : IXmlMarkup
     {
         string Content { get; }
     }

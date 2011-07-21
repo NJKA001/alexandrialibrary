@@ -8,6 +8,7 @@ using Gnosis.Core.W3c;
 namespace Gnosis.Core.Xml
 {
     public interface IXmlDeclaration
+        : IXmlMarkup
     {
         string Version { get; }
         ICharacterSet Encoding { get; }

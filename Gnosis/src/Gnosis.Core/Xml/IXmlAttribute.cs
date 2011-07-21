@@ -6,6 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Xml
 {
     public interface IXmlAttribute
+        : IXmlMarkup
     {
         IXmlQualifiedName Name { get; }
         string Value { get; }

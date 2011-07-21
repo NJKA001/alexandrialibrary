@@ -123,6 +123,7 @@
     <Compile Include="DublinCore\IDcTitle.cs" />
     <Compile Include="DublinCore\IDcType.cs" />
     <Compile Include="DublinCore\ISimpleDublinCoreElement.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="FileInfoExtensions.cs" />
     <Compile Include="GuidExtensions.cs" />
     <Compile Include="Id3\IId3Tag.cs" />
@@ -201,7 +202,9 @@
     <Compile Include="Xml\IXmlDocument.cs" />
     <Compile Include="Xml\IXmlElement.cs" />
     <Compile Include="Xml\IXmlEscapedSection.cs" />
+    <Compile Include="Xml\IXmlMarkup.cs" />
     <Compile Include="Xml\IXmlNamespace.cs" />
+    <Compile Include="Xml\IXmlNode.cs" />
     <Compile Include="Xml\IXmlProcessingInstruction.cs" />
     <Compile Include="Xml\IXmlQualifiedName.cs" />
     <Compile Include="Xml\IXmlStyleSheet.cs" />

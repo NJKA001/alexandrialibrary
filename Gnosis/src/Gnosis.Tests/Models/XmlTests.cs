@@ -14,6 +14,32 @@ namespace Gnosis.Tests.Models
     [TestFixture]
     public class XmlTests
     {
+        private void MakeArsXmlAssertions(IXmlDocument xml)
+        {
+            #region Constants
+            
+            const int linksCount = 30;
+            const int atomLinksCount = 2;
+            const int commentsCount = 3;
+            const int mediaCreditCount = 22;
+            const int escapedCount = 412;
+            const int namespaceCount = 3;
+
+            #endregion
+
+            Assert.IsNotNull(xml);
+
+            foreach (var child in xml.Root.Children)
+                Assert.IsNotNull(child.Parent);
+
+            Assert.AreEqual(linksCount, xml.Root.Where<IXmlElement>(elem => elem.Name.LocalPart == "link").Count());
+            Assert.AreEqual(atomLinksCount, xml.Root.Where<IXmlElement>(elem => elem.Name.Prefix == "atom10" && elem.Name.LocalPart == "link").Count());
+            Assert.AreEqual(commentsCount, xml.Root.Where<IXmlComment>(comment => comment != null).Count());
+            Assert.AreEqual(mediaCreditCount, xml.Root.Where<IXmlElement>(elem => elem.Name.ToString() == "media:credit").Count());
+            Assert.AreEqual(escapedCount, xml.Root.Where<IXmlEscapedSection>(esc => esc != null).Count());
+            Assert.AreEqual(namespaceCount, xml.Root.Where<IXmlNamespace>(ns => ns != null).DistinctBy(ns => ns.Name.ToString()).Count());
+        }
+
         [Test]
         public void CreateXmlDocumentFromLocalFile()
         {
@@ -24,7 +50,7 @@ namespace Gnosis.Tests.Models
 
             var location = new Uri(fileInfo.FullName);
             var xml = location.ToXmlDocument();
-            Assert.IsNotNull(xml);
+            MakeArsXmlAssertions(xml);
         }
 
         [Test]
@@ -43,7 +69,7 @@ namespace Gnosis.Tests.Models
             System.Diagnostics.Debug.WriteLine(output);
 
             var xml = XmlDocument.Parse(output);
-            Assert.IsNotNull(xml);
+            MakeArsXmlAssertions(xml);
         }
 
         [Test]

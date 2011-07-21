@@ -367,8 +367,8 @@ namespace Gnosis.Core
                 return null;
 
             var name = self.ToXmlQualifiedName();
-            var attributes = self.ToXmlAttributes();
             var comments = self.ToXmlComments();
+            var attributes = self.ToXmlAttributes();
             var characterData = self.ToXmlCharacterData();
 
             var element = new Core.Xml.XmlElement(name, parent, comments, attributes, characterData);

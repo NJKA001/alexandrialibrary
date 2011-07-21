@@ -5,10 +5,7 @@ using System.Text;
 
 namespace Gnosis.Core.Xml
 {
-    public interface IXmlProcessingInstruction
-        : IXmlMarkup
+    public interface IXmlNode
     {
-        string Target { get; }
-        string Content { get; }
     }
 }

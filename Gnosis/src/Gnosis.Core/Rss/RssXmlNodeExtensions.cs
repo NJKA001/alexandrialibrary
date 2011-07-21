@@ -315,7 +315,7 @@ namespace Gnosis.Core.Rss
             var namespaces = self.ToXmlNamespaces();
             var primaryNamespace = namespaces.Where(x => x != null && string.IsNullOrEmpty(x.Prefix)).FirstOrDefault();
 
-            foreach (var child in self.ChildNodes.Cast<XmlElement>())
+            foreach (var child in self.ChildNodes.OfType<XmlElement>())
             {
                 if (child != null)
                 {

@@ -6,6 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Xml
 {
     public interface IXmlElement
+        : IXmlMarkup
     {
         IXmlQualifiedName Name { get; }
         IXmlElement Parent { get; }
@@ -13,10 +14,12 @@ namespace Gnosis.Core.Xml
         IEnumerable<IXmlAttribute> Attributes { get; }
         IEnumerable<IXmlElement> Children { get; }
         IXmlCharacterData CharacterData { get; }
+        IEnumerable<IXmlNamespace> Namespaces { get; }
 
-        IXmlAttribute GetAttribute(string name);
-        IEnumerable<IXmlNamespace> GetNamespaces();
+        IEnumerable<T> Where<T>(Func<T, bool> predicate) where T : class, IXmlNode;
 
-        void AddChild(IXmlElement child);
+        void AddChild(IXmlElement element);
+        //TODO: Implement this instead to support having a sequence of IMarkup that preserves the order of the original document
+        //void SetParent(IXmlElement parent);
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Xml
 {
     public interface IXmlCharacterData
+        : IXmlNode
     {
         string Content { get; }
     }
