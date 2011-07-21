@@ -203,6 +203,7 @@
     <Compile Include="Xml\IXmlEscapedSection.cs" />
     <Compile Include="Xml\IXmlNamespace.cs" />
     <Compile Include="Xml\IXmlProcessingInstruction.cs" />
+    <Compile Include="Xml\IXmlQualifiedName.cs" />
     <Compile Include="Xml\IXmlStyleSheet.cs" />
     <Compile Include="Xml\XmlAttribute.cs" />
     <Compile Include="Xml\XmlCDataSection.cs" />
@@ -213,6 +214,8 @@
     <Compile Include="Xml\XmlEscapedSection.cs" />
     <Compile Include="Xml\XmlNamespace.cs" />
     <Compile Include="Xml\XmlProcessingInstruction.cs" />
+    <Compile Include="Xml\XmlQualifiedName.cs" />
+    <Compile Include="Xml\XmlStandalone.cs" />
     <Compile Include="Xml\XmlStyleSheet.cs" />
   </ItemGroup>
   <ItemGroup>

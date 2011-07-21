@@ -12,6 +12,8 @@ namespace Gnosis.Core.Xml
         {
             if (target == null)
                 throw new ArgumentNullException("target");
+            if (content == null)
+                throw new ArgumentNullException("content");
 
             this.target = target;
             this.content = content;

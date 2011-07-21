@@ -8,8 +8,8 @@ namespace Gnosis.Core.Xml
     public class XmlNamespace
         : XmlAttribute, IXmlNamespace
     {
-        private XmlNamespace(string name, Uri identifier, string prefix)
-            : base(name, identifier.ToString(), prefix)
+        private XmlNamespace(IXmlQualifiedName name, Uri identifier)
+            : base(name, identifier.ToString())
         {
             this.identifier = identifier;
         }
@@ -25,18 +25,18 @@ namespace Gnosis.Core.Xml
 
         #endregion
 
-        public static IXmlNamespace Parse(string name, string value, string prefix)
+        public static IXmlNamespace Parse(IXmlQualifiedName name, string value)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
             if (value == null)
                 throw new ArgumentNullException("value");
-            if (name != "xmlns" && prefix != "xmlns")
-                throw new ArgumentException("Either the name or prefix of a namespace must be 'xmlns'");
+            if (name.Prefix != "xmlns" && name.LocalPart != "xmlns")
+                throw new ArgumentException("Either the prefix or local part of a namespace must be 'xmlns'");
 
             var identifier = new Uri(value, UriKind.Absolute);
 
-            return new XmlNamespace(name, identifier, prefix);
+            return new XmlNamespace(name, identifier);
         }
     }
 }

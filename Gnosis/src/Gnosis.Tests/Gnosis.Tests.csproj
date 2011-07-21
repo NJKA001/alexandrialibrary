@@ -63,6 +63,7 @@
     <Compile Include="Models\RssTests.cs" />
     <Compile Include="Models\ScriptTests.cs" />
     <Compile Include="Models\TrackTests.cs" />
+    <Compile Include="Models\XmlTests.cs" />
     <Compile Include="Repositories\TrackRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\FeedRepositoryTests.cs" />

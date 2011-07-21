@@ -229,23 +229,153 @@ namespace Gnosis.Core
                 : null;
         }
 
-        public static Core.Xml.IXmlElement ToXmlElement(this XmlNode self, Core.Xml.XmlElement parent)
+        public static Core.Xml.IXmlQualifiedName ToXmlQualifiedName(this XmlNode self)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
 
-            string prefix = null;
-            string name = self.Name;
-            if (name.Contains(':'))
+            return self.Name != null ?
+                Core.Xml.XmlQualifiedName.Parse(self.Name)
+                : null;
+        }
+
+        public static Core.Xml.IXmlDeclaration ToXmlDeclaration(this XmlNode self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var node = self as XmlDeclaration;
+            if (node == null)
+                return null;
+
+            var version = node.Version ?? "1.0";
+            var encoding = CharacterSet.Parse(node.Encoding);
+            var standalone = Core.Xml.XmlStandalone.Undefined;
+            if (node.Standalone != null)
             {
-                var tokens = name.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
-                if (tokens != null && tokens.Length == 2)
-                {
-                }
+                if (node.Standalone.ToLower() == "yes")
+                    standalone = Core.Xml.XmlStandalone.Yes;
+                else if (node.Standalone.ToLower() == "no")
+                    standalone = Core.Xml.XmlStandalone.No;
             }
 
-            //return new Core.Xml.XmlElement(prefix, name, 
-            return null;
+            return new Core.Xml.XmlDeclaration(version, encoding, standalone);
+        }
+
+        public static Core.Xml.IXmlProcessingInstruction ToXmlProcessingInstruction(this XmlNode self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var node = self as System.Xml.XmlProcessingInstruction;
+            if (node == null || node.Target == null)
+                return null;
+
+            return Core.Xml.XmlProcessingInstruction.Parse(node.Target, node.InnerText);
+        }
+
+        public static Core.Xml.IXmlComment ToXmlComment(this XmlNode self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var node = self as System.Xml.XmlComment;
+            if (node == null)
+                return null;
+
+            return new Core.Xml.XmlComment(node.InnerText);
+        }
+
+        public static IEnumerable<Core.Xml.IXmlComment> ToXmlComments(this XmlNode self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var comments = new List<Core.Xml.IXmlComment>();
+
+            foreach (var node in self.ChildNodes.OfType<System.Xml.XmlComment>())
+                comments.AddIfNotNull(node.ToXmlComment());
+
+            return comments;
+        }
+
+        public static IEnumerable<Core.Xml.IXmlAttribute> ToXmlAttributes(this XmlNode self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var attributes = new List<Core.Xml.IXmlAttribute>();
+
+            foreach (var node in self.Attributes.OfType<System.Xml.XmlAttribute>())
+                attributes.AddIfNotNull(Core.Xml.XmlAttribute.Parse(node.Name, node.Value));
+
+            return attributes;
+        }
+
+        public static Core.Xml.IXmlCharacterData ToXmlCharacterData(this XmlNode self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            switch (self.NodeType)
+            {
+                case XmlNodeType.CDATA:
+                    return new Core.Xml.XmlCDataSection(self.InnerText);
+                case XmlNodeType.Element:
+                    {
+                        var count = self.ChildNodes.OfType<XmlElement>().Count();
+                        return count == 0 && self.InnerText != null ?
+                            new Core.Xml.XmlEscapedSection(self.InnerText)
+                            : null;
+                    }
+                case XmlNodeType.Text:
+                    return new Core.Xml.XmlEscapedSection(self.InnerText);
+                default:
+                    return null;
+            }
+        }
+
+        public static Core.Xml.IXmlElement ToXmlElement(this XmlNode self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            return self.ToXmlElement(null);
+        }
+
+        public static void AddChildren(this XmlNode self, Core.Xml.IXmlElement parent)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+            if (parent == null)
+                throw new ArgumentNullException("parent");
+
+            foreach (var node in self.ChildNodes.OfType<XmlNode>().Where(x => x.NodeType == XmlNodeType.Element))
+            {
+                var child = node.ToXmlElement(parent);
+                if (child != null)
+                    parent.AddChild(child);
+            }
+        }
+
+        public static Core.Xml.IXmlElement ToXmlElement(this XmlNode self, Core.Xml.IXmlElement parent)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            if (self.NodeType != XmlNodeType.Element)
+                return null;
+
+            var name = self.ToXmlQualifiedName();
+            var attributes = self.ToXmlAttributes();
+            var comments = self.ToXmlComments();
+            var characterData = self.ToXmlCharacterData();
+
+            var element = new Core.Xml.XmlElement(name, parent, comments, attributes, characterData);
+
+            self.AddChildren(element);
+
+            return element;
         }
     }
 }

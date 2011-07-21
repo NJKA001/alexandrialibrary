@@ -8,28 +8,21 @@ namespace Gnosis.Core.Xml
     public class XmlAttribute
         : IXmlAttribute
     {
-        protected XmlAttribute(string name, string value, string prefix)
+        protected XmlAttribute(IXmlQualifiedName name, string value)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
 
             this.name = name;
             this.value = value;
-            this.prefix = prefix;
         }
 
-        private readonly string name;
+        private readonly IXmlQualifiedName name;
         private readonly string value;
-        private readonly string prefix;
 
         #region IXmlAttribute Members
 
-        public string Prefix
-        {
-            get { return prefix; }
-        }
-
-        public string Name
+        public IXmlQualifiedName Name
         {
             get { return name; }
         }
@@ -45,9 +38,7 @@ namespace Gnosis.Core.Xml
         {
             var escapedValue = value != null ? value.ToXmlEscapedString() : string.Empty;
 
-            return prefix != null ? 
-                string.Format("{0}:{1}=\"{2}\"", prefix, name, escapedValue) : 
-                string.Format("{0}=\"{1}\"", name, escapedValue);
+            return string.Format("{0}=\"{1}\"", name.ToString(), escapedValue);
         }
 
         public static IXmlAttribute Parse(string name, string value)
@@ -55,22 +46,13 @@ namespace Gnosis.Core.Xml
             if (name == null)
                 throw new ArgumentNullException("name");
 
-            var localName = name;
-            string prefix = null;
+            var qName = XmlQualifiedName.Parse(name);
+            if (qName == null)
+                return null;
 
-            if (name.Contains(':'))
-            {
-                var tokens = name.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
-                if (tokens == null || tokens.Length != 2)
-                    throw new ArgumentException("Invalid attribute name");
-
-                prefix = tokens[0];
-                localName = tokens[1];
-            }
-
-            return (prefix == "xmlns" || localName == "xmlns") ?
-                XmlNamespace.Parse(localName, value, prefix) as IXmlAttribute:
-                new XmlAttribute(localName, value, prefix);
+            return (qName.Prefix == "xmlns" || qName.LocalPart == "xmlns") ?
+                XmlNamespace.Parse(qName, value) as IXmlAttribute:
+                new XmlAttribute(qName, value);
         }
     }
 }

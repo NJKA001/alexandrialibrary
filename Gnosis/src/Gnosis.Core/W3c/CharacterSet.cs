@@ -94,13 +94,8 @@ namespace Gnosis.Core.W3c
                 return Unknown;
 
             var key = name.ToUpper().Trim();
-            //System.Diagnostics.Debug.WriteLine("key=" + key);
-            //System.Diagnostics.Debug.WriteLine("contains key=" + byName.ContainsKey(name));
-
-            var charSet = byName.ContainsKey(key) ? byName[key] : Unknown;
-
-            //System.Diagnostics.Debug.WriteLine("charSet is not null=" + (charSet != null));
-            return charSet;
+            
+            return byName.ContainsKey(key) ? byName[key] : Unknown;
         }
 
         public static ICharacterSet GetCharacterSet(Encoding encoding)

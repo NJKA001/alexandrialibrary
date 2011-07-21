@@ -124,8 +124,20 @@ namespace Gnosis.Core
             }
         }
 
+        public static Core.Xml.IXmlDocument ToXmlDocument(this Uri self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var xml = self.ToContentString();
+            return Core.Xml.XmlDocument.Parse(xml);
+        }
+
         public static IRssFeed ToRssFeed(this Uri location)
         {
+            if (location == null)
+                throw new ArgumentNullException("location");
+
             var contentType = location.ToContentType();
             if (contentType.Type != MediaType.ApplicationRssXml)
                 throw new InvalidOperationException("The resource at this location is not a valid RSS feed");
@@ -161,6 +173,26 @@ namespace Gnosis.Core
             return feed;
         }
 
+        public static string ToContentString(this Uri self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            if (self.IsFile)
+            {
+                using (var reader = new StreamReader(self.LocalPath))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+            else
+            {
+                var request = HttpWebRequest.Create(self);
+                var response = request.GetResponse();
+                return response.GetResponseStream().ToContentString();
+            }
+        }
+
         public static XmlDocument ToXml(this Uri location)
         {
             var xml = new XmlDocument();
@@ -189,6 +221,21 @@ namespace Gnosis.Core
                 return null;
 
             return location.ToString().ToXmlEscapedString();
+        }
+
+        public static bool TryParse(string value, out Uri result)
+        {
+            try
+            {
+                var uri = new Uri(value, UriKind.RelativeOrAbsolute);
+                result = uri;
+                return true;
+            }
+            catch (Exception)
+            {
+                result = null;
+                return false;
+            }
         }
     }
 }

@@ -11,6 +11,6 @@ namespace Gnosis.Core.Xml
     {
         string Version { get; }
         ICharacterSet Encoding { get; }
-        bool Standalone { get; }
+        XmlStandalone Standalone { get; }
     }
 }

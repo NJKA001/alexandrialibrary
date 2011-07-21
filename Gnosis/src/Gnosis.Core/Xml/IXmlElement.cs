@@ -7,8 +7,7 @@ namespace Gnosis.Core.Xml
 {
     public interface IXmlElement
     {
-        string Prefix { get; }
-        string Name { get; }
+        IXmlQualifiedName Name { get; }
         IXmlElement Parent { get; }
         IEnumerable<IXmlComment> Comments { get; }
         IEnumerable<IXmlAttribute> Attributes { get; }
@@ -16,7 +15,8 @@ namespace Gnosis.Core.Xml
         IXmlCharacterData CharacterData { get; }
 
         IXmlAttribute GetAttribute(string name);
-        IXmlAttribute GetAttribute(string name, string prefix);
         IEnumerable<IXmlNamespace> GetNamespaces();
+
+        void AddChild(IXmlElement child);
     }
 }

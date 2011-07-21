@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Gnosis.Core.Xml
 {
-    public interface IXmlAttribute
+    public interface IXmlQualifiedName
     {
-        IXmlQualifiedName Name { get; }
-        string Value { get; }
+        string Prefix { get; }
+        string LocalPart { get; }
     }
 }

@@ -91,33 +91,23 @@ namespace Gnosis.Core.Xml
                 switch (child.NodeType)
                 {
                     case System.Xml.XmlNodeType.XmlDeclaration:
-                        //encoding = child.ToEncoding();
+                        declaration = child.ToXmlDeclaration();
                         break;
                     case System.Xml.XmlNodeType.ProcessingInstruction:
-                        {
-                            var instructionNode = child as System.Xml.XmlProcessingInstruction;
-                            if (instructionNode == null)
-                                break;
-
-                            var instruction = XmlProcessingInstruction.Parse(instructionNode.Target, instructionNode.InnerText);
-                            if (instruction != null)
-                                processingInstructions.Add(instruction);
-                            break;
-                        }
+                        processingInstructions.AddIfNotNull(child.ToXmlProcessingInstruction());
+                        break;
                     case System.Xml.XmlNodeType.Comment:
-                        comments.Add(new XmlComment(child.InnerText));
+                        comments.AddIfNotNull(child.ToXmlComment());
                         break;
                     case System.Xml.XmlNodeType.Element:
-
-
-                            //root = new XmlElement(
+                        root = child.ToXmlElement();
                         break;
                     default:
                         break;
                 }
             }
 
-            return declaration != null && root != null ?
+            return (declaration != null && root != null) ?
                 new XmlDocument(declaration, processingInstructions, comments, root)
                 : null;
         }

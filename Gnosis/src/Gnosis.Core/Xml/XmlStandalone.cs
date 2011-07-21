@@ -5,9 +5,10 @@ using System.Text;
 
 namespace Gnosis.Core.Xml
 {
-    public interface IXmlAttribute
+    public enum XmlStandalone
     {
-        IXmlQualifiedName Name { get; }
-        string Value { get; }
+        Undefined = -1,
+        No = 0,
+        Yes = 1
     }
 }

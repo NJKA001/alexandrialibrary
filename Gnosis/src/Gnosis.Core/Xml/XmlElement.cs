@@ -8,7 +8,7 @@ namespace Gnosis.Core.Xml
     public class XmlElement
         : IXmlElement
     {
-        public XmlElement(string prefix, string name, IXmlElement parent, IEnumerable<IXmlComment> comments, IEnumerable<IXmlAttribute> attributes, IEnumerable<IXmlElement> children, IXmlCharacterData characterData)
+        public XmlElement(IXmlQualifiedName name, IXmlElement parent, IEnumerable<IXmlComment> comments, IEnumerable<IXmlAttribute> attributes, IXmlCharacterData characterData)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -16,39 +16,40 @@ namespace Gnosis.Core.Xml
                 throw new ArgumentNullException("comments");
             if (attributes == null)
                 throw new ArgumentNullException("attributes");
-            if (children == null)
-                throw new ArgumentNullException("children");
 
-            this.prefix = prefix;
             this.name = name;
             this.parent = parent;
             this.comments = comments;
-            this.children = children;
             this.characterData = characterData;
 
             foreach (var attribute in attributes)
-            {
-                var key = attribute.Prefix != null ? string.Format("{0}:{1}", attribute.Prefix, attribute.Name) : attribute.Name;
-                this.attributes.Add(key, attribute);
-            }
+                this.attributes.Add(attribute.Name.ToString(), attribute);
         }
 
-        private readonly string prefix;
-        private readonly string name;
+        private readonly IXmlQualifiedName name;
         private readonly IXmlElement parent;
         private readonly IEnumerable<IXmlComment> comments;
         private readonly IDictionary<string, IXmlAttribute> attributes = new Dictionary<string, IXmlAttribute>();
-        private readonly IEnumerable<IXmlElement> children;
+        private readonly IList<IXmlElement> children = new List<IXmlElement>();
         private readonly IXmlCharacterData characterData;
+
+        private int GetDepth()
+        {
+            var depth = 0;
+
+            var currentParent = parent;
+            while (currentParent != null)
+            {
+                depth++;
+                currentParent = currentParent.Parent;
+            }
+
+            return depth;
+        }
 
         #region IXmlElement Members
 
-        public string Prefix
-        {
-            get { return prefix; }
-        }
-
-        public string Name
+        public IXmlQualifiedName Name
         {
             get { return name; }
         }
@@ -83,23 +84,25 @@ namespace Gnosis.Core.Xml
             if (name == null)
                 throw new ArgumentNullException("name");
 
-            return attributes.ContainsKey(name) ? attributes[name] : null;
-        }
+            var qName = XmlQualifiedName.Parse(name);
+            if (qName == null)
+                return null;
 
-        public IXmlAttribute GetAttribute(string name, string prefix)
-        {
-            if (name == null)
-                throw new ArgumentNullException("name");
-            if (prefix == null)
-                throw new ArgumentNullException("prefix");
-
-            var key = string.Format("{0}:{1}", prefix, name);
-            return GetAttribute(key);
+            var key = qName.ToString();
+            return attributes.ContainsKey(key) ? attributes[key] : null;
         }
 
         public IEnumerable<IXmlNamespace> GetNamespaces()
         {
             return attributes.OfType<IXmlNamespace>();
+        }
+
+        public void AddChild(IXmlElement child)
+        {
+            if (child == null)
+                throw new ArgumentNullException("child");
+
+            children.Add(child);
         }
 
         #endregion
@@ -108,8 +111,12 @@ namespace Gnosis.Core.Xml
         {
             var xml = new StringBuilder();
 
-            var tag = prefix != null ? string.Format("{0}:{1}", prefix, name) : name;
-            xml.AppendFormat("<{0}", tag);
+            const int multiplier = 2;
+            var depth = GetDepth();
+            var indent = (depth > 0) ? string.Empty.PadLeft(depth * multiplier) : string.Empty;
+            var childIndent = string.Empty.PadLeft((depth + 1) * multiplier);
+
+            xml.AppendFormat("{0}<{1}", indent, name);
 
             foreach (var attribute in attributes.Values)
                 xml.AppendFormat(" {0}", attribute.ToString());
@@ -118,18 +125,30 @@ namespace Gnosis.Core.Xml
             {
                 xml.AppendLine(">");
                 foreach (var child in children)
-                    xml.AppendLine(child.ToString());
-                xml.AppendFormat("</{0}>", tag);
-                xml.AppendLine();
+                {
+                    xml.AppendFormat("{0}{1}", childIndent, child);
+                    xml.AppendLine();
+                }
+
+                xml.AppendFormat("{0}</{1}>", indent, name);
             }
             else if (characterData != null)
             {
-                xml.AppendFormat(">{0}</{1}>", characterData.ToString(), tag);
-                xml.AppendLine();
+                var characterContent = characterData.ToString();
+                if (characterContent.Length > 120 || characterContent.Contains("\r") || characterContent.Contains("\n") || characterContent.Contains("\t"))
+                {
+                    xml.Append(">");
+                    xml.Append(characterContent);
+                    xml.AppendFormat("{0}</{1}>", indent, name);
+                }
+                else
+                {
+                    xml.AppendFormat(">{0}</{1}>", characterContent, name);
+                }
             }
             else
             {
-                xml.AppendLine("/>");
+                xml.Append("/>");
             }
 
             return xml.ToString();

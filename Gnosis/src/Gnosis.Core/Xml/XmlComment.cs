@@ -26,7 +26,8 @@ namespace Gnosis.Core.Xml
 
         public override string ToString()
         {
-            return string.Format("<!-- {0} -->", (content ?? string.Empty));
+            var normalized = content ?? string.Empty;
+            return string.Format("<!-- {0} -->", normalized);
         }
     }
 }

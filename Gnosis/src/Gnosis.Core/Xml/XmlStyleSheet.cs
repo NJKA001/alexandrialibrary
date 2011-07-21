@@ -27,6 +27,14 @@ namespace Gnosis.Core.Xml
         private static string GetContent(IMediaType type, IMedia media, Uri href)
         {
             var content = new StringBuilder();
+
+            if (type != null)
+                content.AppendFormat(" type=\"{0}\"", type);
+            if (media != null)
+                content.AppendFormat(" media=\"{0}\"", media);
+            if (href != null)
+                content.AppendFormat(" href=\"{0}\"", href);
+
             return content.ToString();
         }
 
@@ -59,7 +67,7 @@ namespace Gnosis.Core.Xml
             IMediaType type = null;
             IMedia media = null;
             Uri href = null;
-            var fields = content.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var fields = content.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
             foreach (var field in fields)
             {
                 if (field.Contains('='))
@@ -67,9 +75,10 @@ namespace Gnosis.Core.Xml
                     var tokens = field.Split(new char[] { '=' }, StringSplitOptions.RemoveEmptyEntries);
                     if (tokens != null && tokens.Length == 2 && tokens[0] != null && tokens[1] != null)
                     {
+                        var name = tokens[0].Trim();
                         var value = tokens[1].Trim().RemoveQuotes();
-
-                        switch (tokens[0].Trim())
+                        
+                        switch (name)
                         {
                             case "type":
                                 type = MediaType.Parse(value);
@@ -78,7 +87,7 @@ namespace Gnosis.Core.Xml
                                 media = W3c.Media.Parse(value);
                                 break;
                             case "href":
-                                href = new Uri(value);
+                                UriExtensions.TryParse(value, out href);
                                 break;
                             default:
                                 break;

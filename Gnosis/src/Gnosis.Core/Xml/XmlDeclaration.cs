@@ -10,12 +10,10 @@ namespace Gnosis.Core.Xml
     public class XmlDeclaration
         : IXmlDeclaration
     {
-        public XmlDeclaration(string version, ICharacterSet encoding, bool standalone)
+        public XmlDeclaration(string version, ICharacterSet encoding, XmlStandalone standalone)
         {
             if (version == null)
                 throw new ArgumentNullException("version");
-            if (encoding == null)
-                throw new ArgumentNullException("encoding");
 
             this.version = version;
             this.encoding = encoding;
@@ -24,8 +22,7 @@ namespace Gnosis.Core.Xml
 
         private readonly string version;
         private readonly ICharacterSet encoding;
-        private readonly bool standalone;
-
+        private readonly XmlStandalone standalone;
 
         #region IXmlDeclaration Members
 
@@ -39,7 +36,7 @@ namespace Gnosis.Core.Xml
             get { return encoding; }
         }
 
-        public bool Standalone
+        public XmlStandalone Standalone
         {
             get { return standalone; }
         }
@@ -48,7 +45,18 @@ namespace Gnosis.Core.Xml
 
         public override string ToString()
         {
-            return string.Format("<?xml version=\"{0}\" encoding=\"{1}\" standalone=\"{2}\" ?>", version, encoding, standalone);
+            var xml = new StringBuilder();
+            xml.AppendFormat("<?xml version=\"{0}\"", version);
+
+            if (encoding != null)
+                xml.AppendFormat(" encoding=\"{0}\"", encoding);
+
+            if (standalone != XmlStandalone.Undefined)
+                xml.AppendFormat(" standalone=\"{0}\"", standalone.ToString().ToLower());
+
+            xml.Append("?>");
+
+            return xml.ToString();
         }
     }
 }
