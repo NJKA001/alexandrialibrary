@@ -6,7 +6,6 @@ using System.Text;
 namespace Gnosis.Core.Xml
 {
     public interface IXmlProcessingInstruction
-        : IXmlMarkup
     {
         string Target { get; }
         string Content { get; }

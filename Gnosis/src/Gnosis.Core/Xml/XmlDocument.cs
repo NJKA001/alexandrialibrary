@@ -8,29 +8,24 @@ using Gnosis.Core.W3c;
 namespace Gnosis.Core.Xml
 {
     public class XmlDocument
-        : IXmlDocument
+        : XmlNode, IXmlDocument
     {
-        private XmlDocument(IXmlDeclaration declaration, IEnumerable<IXmlProcessingInstruction> processingInstructions, IEnumerable<IXmlComment> comments, IXmlElement root)
+        private XmlDocument(IXmlDeclaration declaration, IEnumerable<IXmlProcessingInstruction> processingInstructions, IEnumerable<IXmlNode> children)
+            : base(children)
         {
             if (declaration == null)
                 throw new ArgumentNullException("declaration");
             if (processingInstructions == null)
                 throw new ArgumentNullException("processingInstructions");
-            if (comments == null)
-                throw new ArgumentNullException("comments");
-            if (root == null)
-                throw new ArgumentNullException("root");
+            if (children == null)
+                throw new ArgumentNullException("children");
 
             this.declaration = declaration;
             this.processingInstructions = processingInstructions;
-            this.comments = comments;
-            this.root = root;
         }
 
         private readonly IXmlDeclaration declaration;
         private readonly IEnumerable<IXmlProcessingInstruction> processingInstructions;
-        private readonly IEnumerable<IXmlComment> comments;
-        private readonly IXmlElement root;
 
         #region IXmlDocument Members
 
@@ -46,12 +41,12 @@ namespace Gnosis.Core.Xml
 
         public IEnumerable<IXmlComment> Comments
         {
-            get { return comments; }
+            get { return Children.OfType<IXmlComment>(); }
         }
 
         public IXmlElement Root
         {
-            get { return root; }
+            get { return Children.OfType<IXmlElement>().FirstOrDefault(); }
         }
 
         #endregion
@@ -65,10 +60,8 @@ namespace Gnosis.Core.Xml
             foreach (var instruction in processingInstructions)
                 xml.AppendLine(instruction.ToString());
 
-            foreach (var comment in comments)
-                xml.AppendLine(comment.ToString());
-
-            xml.AppendLine(root.ToString());
+            foreach (var child in Children)
+                xml.AppendLine(child.ToString());
 
             return xml.ToString();
         }
@@ -80,8 +73,7 @@ namespace Gnosis.Core.Xml
 
             IXmlDeclaration declaration = null;
             var processingInstructions = new List<IXmlProcessingInstruction>();
-            var comments = new List<IXmlComment>();
-            IXmlElement root = null;
+            var children = new List<IXmlNode>();
 
             var xmlDoc = new System.Xml.XmlDocument();
             xmlDoc.LoadXml(xml);
@@ -97,18 +89,18 @@ namespace Gnosis.Core.Xml
                         processingInstructions.AddIfNotNull(child.ToXmlProcessingInstruction());
                         break;
                     case System.Xml.XmlNodeType.Comment:
-                        comments.AddIfNotNull(child.ToXmlComment());
+                        children.AddIfNotNull(child.ToXmlComment());
                         break;
                     case System.Xml.XmlNodeType.Element:
-                        root = child.ToXmlElement();
+                        children.AddIfNotNull(child.ToXmlElement());
                         break;
                     default:
                         break;
                 }
             }
 
-            return (declaration != null && root != null) ?
-                new XmlDocument(declaration, processingInstructions, comments, root)
+            return (declaration != null && children.Count > 0) ?
+                new XmlDocument(declaration, processingInstructions, children)
                 : null;
         }
     }

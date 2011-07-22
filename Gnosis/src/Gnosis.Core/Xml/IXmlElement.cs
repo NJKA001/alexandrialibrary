@@ -9,17 +9,11 @@ namespace Gnosis.Core.Xml
         : IXmlMarkup
     {
         IXmlQualifiedName Name { get; }
-        IXmlElement Parent { get; }
-        IEnumerable<IXmlComment> Comments { get; }
+        IXmlElement ParentElement { get; }
         IEnumerable<IXmlAttribute> Attributes { get; }
-        IEnumerable<IXmlElement> Children { get; }
-        IXmlCharacterData CharacterData { get; }
+        IEnumerable<IXmlComment> Comments { get; }
+        IEnumerable<IXmlElement> ChildElements { get; }
         IEnumerable<IXmlNamespace> Namespaces { get; }
-
-        IEnumerable<T> Where<T>(Func<T, bool> predicate) where T : class, IXmlNode;
-
-        void AddChild(IXmlElement element);
-        //TODO: Implement this instead to support having a sequence of IMarkup that preserves the order of the original document
-        //void SetParent(IXmlElement parent);
+        IEnumerable<IXmlCharacterData> CharacterDataSections { get; }
     }
 }

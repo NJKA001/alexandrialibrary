@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Xml
 {
     public class XmlAttribute
-        : IXmlAttribute
+        : XmlNode, IXmlAttribute
     {
         protected XmlAttribute(IXmlQualifiedName name, string value)
         {

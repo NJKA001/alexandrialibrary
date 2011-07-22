@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Xml
 {
     public class XmlEscapedSection
-        : IXmlEscapedSection
+        : XmlNode, IXmlEscapedSection
     {
         public XmlEscapedSection(string content)
         {

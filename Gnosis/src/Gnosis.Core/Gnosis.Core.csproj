@@ -216,6 +216,7 @@
     <Compile Include="Xml\XmlElement.cs" />
     <Compile Include="Xml\XmlEscapedSection.cs" />
     <Compile Include="Xml\XmlNamespace.cs" />
+    <Compile Include="Xml\XmlNode.cs" />
     <Compile Include="Xml\XmlProcessingInstruction.cs" />
     <Compile Include="Xml\XmlQualifiedName.cs" />
     <Compile Include="Xml\XmlStandalone.cs" />

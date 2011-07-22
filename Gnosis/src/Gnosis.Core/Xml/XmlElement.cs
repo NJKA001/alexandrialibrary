@@ -6,30 +6,24 @@ using System.Text;
 namespace Gnosis.Core.Xml
 {
     public class XmlElement
-        : IXmlElement
+        : XmlNode, IXmlElement
     {
-        public XmlElement(IXmlQualifiedName name, IXmlElement parent, IEnumerable<IXmlComment> comments, IEnumerable<IXmlAttribute> attributes, IXmlCharacterData characterData)
+        public XmlElement(IXmlNode parent, IEnumerable<IXmlNode> children, IXmlQualifiedName name, IEnumerable<IXmlAttribute> attributes)
+            : base(parent, children)
         {
+            if (children == null)
+                throw new ArgumentNullException("children");
             if (name == null)
                 throw new ArgumentNullException("name");
-            if (comments == null)
-                throw new ArgumentNullException("comments");
             if (attributes == null)
                 throw new ArgumentNullException("attributes");
 
             this.name = name;
-            this.parent = parent;
-            this.comments = comments;
             this.attributes = attributes;
-            this.characterData = characterData;
         }
 
         private readonly IXmlQualifiedName name;
-        private readonly IXmlElement parent;
-        private readonly IEnumerable<IXmlComment> comments;
         private readonly IEnumerable<IXmlAttribute> attributes;
-        private readonly IXmlCharacterData characterData;
-        private readonly IList<IXmlElement> children = new List<IXmlElement>();
 
         #region Private Methods
 
@@ -37,7 +31,7 @@ namespace Gnosis.Core.Xml
         {
             var depth = 0;
 
-            var currentParent = parent;
+            var currentParent = Parent;
             while (currentParent != null)
             {
                 depth++;
@@ -56,14 +50,9 @@ namespace Gnosis.Core.Xml
             get { return name; }
         }
 
-        public IXmlElement Parent
+        public IXmlElement ParentElement
         {
-            get { return parent; }
-        }
-
-        public IEnumerable<IXmlComment> Comments
-        {
-            get { return comments; }
+            get { return Parent as IXmlElement; }
         }
 
         public IEnumerable<IXmlAttribute> Attributes
@@ -71,14 +60,14 @@ namespace Gnosis.Core.Xml
             get { return attributes; }
         }
 
-        public IEnumerable<IXmlElement> Children
+        public IEnumerable<IXmlComment> Comments
         {
-            get { return children; }
+            get { return Children.OfType<IXmlComment>(); }
         }
 
-        public IXmlCharacterData CharacterData
+        public IEnumerable<IXmlElement> ChildElements
         {
-            get { return characterData; }
+            get { return Children.OfType<IXmlElement>(); }
         }
 
         public IEnumerable<IXmlNamespace> Namespaces
@@ -86,6 +75,12 @@ namespace Gnosis.Core.Xml
             get { return attributes.OfType<IXmlNamespace>(); }
         }
 
+        public IEnumerable<IXmlCharacterData> CharacterDataSections
+        {
+            get { return Children.OfType<IXmlCharacterData>(); }
+        }
+
+        /*
         public IEnumerable<T> Where<T>(Func<T, bool> predicate)
             where T : class, IXmlNode
         {
@@ -147,14 +142,7 @@ namespace Gnosis.Core.Xml
 
             return results;
         }
-
-        public void AddChild(IXmlElement child)
-        {
-            if (child == null)
-                throw new ArgumentNullException("child");
-
-            children.Add(child);
-        }
+        */
 
         #endregion
 
@@ -167,9 +155,31 @@ namespace Gnosis.Core.Xml
             const int multiplier = 2;
             var depth = GetDepth();
             var indent = (depth > 0) ? string.Empty.PadLeft(depth * multiplier) : string.Empty;
-            var childIndent = string.Empty.PadLeft((depth + 1) * multiplier);
-            var closeIndent = string.Empty.PadLeft((depth + 2) * multiplier);
+            //var childIndent = string.Empty.PadLeft((depth + 1) * multiplier);
+            //var closeIndent = string.Empty.PadLeft((depth + 2) * multiplier);
 
+            xml.AppendFormat("{0}<{1}", indent, name);
+
+            foreach (var attribute in attributes)
+                xml.AppendFormat(" {0}", attribute.ToString());
+
+            var count = Children.Count();
+            if (count > 0)
+            {
+                xml.AppendLine(">");
+                foreach (var child in Children)
+                    xml.Append(child.ToString());
+                xml.AppendFormat("{0}</{1}>", indent, name);
+                xml.AppendLine();
+            }
+            else
+            {
+                xml.AppendLine("/>");
+            }
+
+            return xml.ToString();
+
+            /*
             xml.AppendFormat("{0}<{1}", indent, name);
 
             foreach (var attribute in attributes)
@@ -231,6 +241,7 @@ namespace Gnosis.Core.Xml
                 xml.Append("/>");
 
             return xml.ToString();
+             */
         }
 
         #endregion

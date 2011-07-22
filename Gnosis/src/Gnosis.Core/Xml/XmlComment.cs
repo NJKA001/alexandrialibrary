@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Xml
 {
     public class XmlComment
-        : IXmlComment
+        : XmlNode, IXmlComment
     {
         public XmlComment(string content)
         {

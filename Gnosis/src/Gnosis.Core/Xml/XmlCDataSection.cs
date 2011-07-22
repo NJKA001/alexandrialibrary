@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Xml
 {
     public class XmlCDataSection
-        : IXmlCDataSection
+        : XmlNode, IXmlCDataSection
     {
         public XmlCDataSection(string content)
         {

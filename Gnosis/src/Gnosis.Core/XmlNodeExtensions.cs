@@ -343,20 +343,43 @@ namespace Gnosis.Core
             return self.ToXmlElement(null);
         }
 
-        public static void AddChildren(this XmlNode self, Core.Xml.IXmlElement parent)
+        public static Core.Xml.IXmlNode ToXmlNode(this XmlNode self)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
-            if (parent == null)
-                throw new ArgumentNullException("parent");
 
-            foreach (var node in self.ChildNodes.OfType<XmlNode>().Where(x => x.NodeType == XmlNodeType.Element))
+            switch (self.NodeType)
             {
-                var child = node.ToXmlElement(parent);
-                if (child != null)
-                    parent.AddChild(child);
+                case XmlNodeType.Comment:
+                    return self.ToXmlComment();
+                case XmlNodeType.Element:
+                    if (self.ChildNodes.Count == 0 && self.InnerText != null)
+                        return self.ToXmlCharacterData();
+                    else
+                        return self.ToXmlElement();
+                case XmlNodeType.CDATA:
+                    return self.ToXmlCharacterData();
+                case XmlNodeType.Text:
+                    return self.ToXmlCharacterData();
+                default:
+                    return null;
             }
         }
+
+        //public static void AddChildren(this XmlNode self, Core.Xml.IXmlElement parent)
+        //{
+        //    if (self == null)
+        //        throw new ArgumentNullException("self");
+        //    if (parent == null)
+        //        throw new ArgumentNullException("parent");
+
+        //    foreach (var node in self.ChildNodes.OfType<XmlNode>().Where(x => x.NodeType == XmlNodeType.Element))
+        //    {
+        //        var child = node.ToXmlElement(parent);
+        //        if (child != null)
+        //            parent.AddChild(child);
+        //    }
+        //}
 
         public static Core.Xml.IXmlElement ToXmlElement(this XmlNode self, Core.Xml.IXmlElement parent)
         {
@@ -366,14 +389,19 @@ namespace Gnosis.Core
             if (self.NodeType != XmlNodeType.Element)
                 return null;
 
+            var children = new List<Core.Xml.IXmlNode>();
             var name = self.ToXmlQualifiedName();
-            var comments = self.ToXmlComments();
             var attributes = self.ToXmlAttributes();
-            var characterData = self.ToXmlCharacterData();
 
-            var element = new Core.Xml.XmlElement(name, parent, comments, attributes, characterData);
+            foreach (var child in self.ChildNodes.OfType<System.Xml.XmlNode>())
+                children.AddIfNotNull(child.ToXmlNode());
 
-            self.AddChildren(element);
+            //var comments = self.ToXmlComments();
+            //var characterData = self.ToXmlCharacterData();
+
+
+
+            var element = new Core.Xml.XmlElement(parent, children, name, attributes);
 
             return element;
         }
