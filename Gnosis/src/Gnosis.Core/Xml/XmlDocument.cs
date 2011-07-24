@@ -78,7 +78,7 @@ namespace Gnosis.Core.Xml
             var xmlDoc = new System.Xml.XmlDocument();
             xmlDoc.LoadXml(xml);
 
-            foreach (var child in xmlDoc.ChildNodes.Cast<System.Xml.XmlNode>().Where(node => node != null))
+            foreach (var child in xmlDoc.ChildNodes.OfType<System.Xml.XmlNode>().Where(node => node != null))
             {
                 switch (child.NodeType)
                 {

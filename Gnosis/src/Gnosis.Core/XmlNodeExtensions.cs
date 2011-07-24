@@ -353,10 +353,7 @@ namespace Gnosis.Core
                 case XmlNodeType.Comment:
                     return self.ToXmlComment();
                 case XmlNodeType.Element:
-                    if (self.ChildNodes.Count == 0 && self.InnerText != null)
-                        return self.ToXmlCharacterData();
-                    else
-                        return self.ToXmlElement();
+                    return self.ToXmlElement();
                 case XmlNodeType.CDATA:
                     return self.ToXmlCharacterData();
                 case XmlNodeType.Text:
@@ -365,21 +362,6 @@ namespace Gnosis.Core
                     return null;
             }
         }
-
-        //public static void AddChildren(this XmlNode self, Core.Xml.IXmlElement parent)
-        //{
-        //    if (self == null)
-        //        throw new ArgumentNullException("self");
-        //    if (parent == null)
-        //        throw new ArgumentNullException("parent");
-
-        //    foreach (var node in self.ChildNodes.OfType<XmlNode>().Where(x => x.NodeType == XmlNodeType.Element))
-        //    {
-        //        var child = node.ToXmlElement(parent);
-        //        if (child != null)
-        //            parent.AddChild(child);
-        //    }
-        //}
 
         public static Core.Xml.IXmlElement ToXmlElement(this XmlNode self, Core.Xml.IXmlElement parent)
         {
@@ -393,8 +375,24 @@ namespace Gnosis.Core
             var name = self.ToXmlQualifiedName();
             var attributes = self.ToXmlAttributes();
 
+            //var hasAtom10 = false;
             foreach (var child in self.ChildNodes.OfType<System.Xml.XmlNode>())
-                children.AddIfNotNull(child.ToXmlNode());
+            {
+                var childNode = child.ToXmlNode();
+                //if (child.Name == "atom10:link")
+                //{
+                    //hasAtom10 = true;
+                    //System.Diagnostics.Debug.WriteLine("childName=" + child.Name);
+                    //System.Diagnostics.Debug.WriteLine("childNode exists=" + (childNode != null));
+                    //System.Diagnostics.Debug.WriteLine("nodeType=" + child.NodeType);
+
+                    //TODO: Fix This!!! We are creating atom10:link nodes as EscapedXml instead of Elements
+                    //System.Diagnostics.Debug.WriteLine("childNodeType=" + childNode.GetType().Name);
+                //}
+                //children.AddIfNotNull(childNode);
+                if (childNode != null)
+                    children.Add(childNode);
+            }
 
             //var comments = self.ToXmlComments();
             //var characterData = self.ToXmlCharacterData();
@@ -402,6 +400,7 @@ namespace Gnosis.Core
 
 
             var element = new Core.Xml.XmlElement(parent, children, name, attributes);
+            //System.Diagnostics.Debug.WriteLine("hasAtom10Child=" + element.Children.OfType<Core.Xml.IXmlElement>().Any(x => x.Name.Prefix == "atom10"));
 
             return element;
         }

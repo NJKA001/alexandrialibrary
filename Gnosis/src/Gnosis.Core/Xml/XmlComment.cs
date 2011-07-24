@@ -26,8 +26,9 @@ namespace Gnosis.Core.Xml
 
         public override string ToString()
         {
+            var indent = GetIndent();
             var normalized = content ?? string.Empty;
-            return string.Format("<!-- {0} -->", normalized);
+            return string.Format("{0}{1}<!-- {2} -->", Environment.NewLine, indent, normalized);
         }
     }
 }

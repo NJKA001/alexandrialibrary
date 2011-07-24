@@ -31,6 +31,31 @@ namespace Gnosis.Core.Xml
         private IXmlNode parent;
         private readonly IEnumerable<IXmlNode> children;
 
+        #region Protected Methods
+
+        protected int GetDepth()
+        {
+            var depth = -1;
+
+            var currentParent = Parent;
+            while (currentParent != null)
+            {
+                depth++;
+                currentParent = currentParent.Parent;
+            }
+
+            return depth;
+        }
+
+        protected string GetIndent()
+        {
+            const int multiplier = 2;
+            var depth = GetDepth();
+            return (depth > 0) ? string.Empty.PadLeft(depth * multiplier) : string.Empty;
+        }
+
+        #endregion
+
         #region IXmlNode Members
 
         public IXmlNode Parent
@@ -50,7 +75,7 @@ namespace Gnosis.Core.Xml
             get { return children; }
         }
 
-        public IEnumerable<T> Where<T>(Func<T, bool> predicate)
+        public virtual IEnumerable<T> Where<T>(Func<T, bool> predicate)
             where T : class, IXmlNode
         {
             var results = new List<T>();

@@ -22,7 +22,8 @@ namespace Gnosis.Tests.Models
             const int atomLinksCount = 2;
             const int commentsCount = 3;
             const int mediaCreditCount = 22;
-            const int escapedCount = 412;
+            const int escapedCount = 364;
+            const int rootNamespaceCount = 2;
             const int namespaceCount = 3;
 
             #endregion
@@ -37,6 +38,7 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(commentsCount, xml.Root.Where<IXmlComment>(comment => comment != null).Count());
             Assert.AreEqual(mediaCreditCount, xml.Root.Where<IXmlElement>(elem => elem.Name.ToString() == "media:credit").Count());
             Assert.AreEqual(escapedCount, xml.Root.Where<IXmlEscapedSection>(esc => esc != null).Count());
+            Assert.AreEqual(rootNamespaceCount, xml.Root.Namespaces.Count());
             Assert.AreEqual(namespaceCount, xml.Root.Where<IXmlNamespace>(ns => ns != null).DistinctBy(ns => ns.Name.ToString()).Count());
         }
 

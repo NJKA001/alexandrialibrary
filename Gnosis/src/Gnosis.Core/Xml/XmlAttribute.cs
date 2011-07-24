@@ -50,8 +50,8 @@ namespace Gnosis.Core.Xml
             if (qName == null)
                 return null;
 
-            return (qName.Prefix == "xmlns" || qName.LocalPart == "xmlns") ?
-                XmlNamespace.Parse(qName, value) as IXmlAttribute:
+            return (qName.Prefix == "xmlns" || (qName.Prefix == null && qName.LocalPart == "xmlns")) ?
+                XmlNamespace.Parse(qName, value) as IXmlAttribute :
                 new XmlAttribute(qName, value);
         }
     }
