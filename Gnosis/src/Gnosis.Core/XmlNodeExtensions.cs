@@ -11,6 +11,40 @@ namespace Gnosis.Core
 {
     public static class XmlNodeExtensions
     {
+        #region Element Factory Members
+
+        static XmlNodeExtensions()
+        {
+            AddAttributeFactory("xml:base", attrib => Core.Xml.XmlBaseAttribute.Parse(attrib));
+        }
+
+        private static readonly IDictionary<string, Func<System.Xml.XmlAttribute, Core.Xml.IXmlAttribute>> attributeFactories = new Dictionary<string, Func<System.Xml.XmlAttribute, Core.Xml.IXmlAttribute>>();
+        private static readonly IDictionary<string, Func<System.Xml.XmlNode, Core.Xml.IXmlElement>> elementFactories = new Dictionary<string, Func<System.Xml.XmlNode, Core.Xml.IXmlElement>>();
+
+        public static void AddAttributeFactory(string name, Func<System.Xml.XmlAttribute, Core.Xml.IXmlAttribute> factory)
+        {
+            if (name == null)
+                throw new ArgumentNullException("name");
+            if (factory == null)
+                throw new ArgumentNullException("factory");
+
+            attributeFactories[name] = factory;
+        }
+
+        public static void AddElementFactory(string name, Func<System.Xml.XmlNode, Core.Xml.IXmlElement> factory)
+        {
+            if (name == null)
+                throw new ArgumentNullException("name");
+            if (factory == null)
+                throw new ArgumentNullException("factory");
+
+            elementFactories[name] = factory;
+        }
+
+        #endregion
+
+
+
         public static XmlAttribute FindAttribute(this XmlNode self, string name)
         {
             return (self != null && self.Attributes != null && !string.IsNullOrEmpty(name)) ?
@@ -375,32 +409,15 @@ namespace Gnosis.Core
             var name = self.ToXmlQualifiedName();
             var attributes = self.ToXmlAttributes();
 
-            //var hasAtom10 = false;
             foreach (var child in self.ChildNodes.OfType<System.Xml.XmlNode>())
             {
                 var childNode = child.ToXmlNode();
-                //if (child.Name == "atom10:link")
-                //{
-                    //hasAtom10 = true;
-                    //System.Diagnostics.Debug.WriteLine("childName=" + child.Name);
-                    //System.Diagnostics.Debug.WriteLine("childNode exists=" + (childNode != null));
-                    //System.Diagnostics.Debug.WriteLine("nodeType=" + child.NodeType);
 
-                    //TODO: Fix This!!! We are creating atom10:link nodes as EscapedXml instead of Elements
-                    //System.Diagnostics.Debug.WriteLine("childNodeType=" + childNode.GetType().Name);
-                //}
-                //children.AddIfNotNull(childNode);
                 if (childNode != null)
                     children.Add(childNode);
             }
 
-            //var comments = self.ToXmlComments();
-            //var characterData = self.ToXmlCharacterData();
-
-
-
             var element = new Core.Xml.XmlElement(parent, children, name, attributes);
-            //System.Diagnostics.Debug.WriteLine("hasAtom10Child=" + element.Children.OfType<Core.Xml.IXmlElement>().Any(x => x.Name.Prefix == "atom10"));
 
             return element;
         }
