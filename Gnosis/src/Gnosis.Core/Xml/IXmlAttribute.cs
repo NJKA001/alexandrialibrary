@@ -8,6 +8,7 @@ namespace Gnosis.Core.Xml
     public interface IXmlAttribute
         : IXmlMarkup
     {
+        IXmlElement ParentElement { get; }
         IXmlQualifiedName Name { get; }
         string Value { get; }
     }

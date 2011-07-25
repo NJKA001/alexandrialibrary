@@ -22,6 +22,11 @@ namespace Gnosis.Core.Xml
 
         #region IXmlAttribute Members
 
+        public IXmlElement ParentElement
+        {
+            get { return Parent as IXmlElement; }
+        }
+
         public IXmlQualifiedName Name
         {
             get { return name; }

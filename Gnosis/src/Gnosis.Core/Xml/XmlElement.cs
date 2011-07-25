@@ -20,6 +20,12 @@ namespace Gnosis.Core.Xml
 
             this.name = name;
             this.attributes = attributes;
+
+            foreach (var attribute in attributes)
+            {
+                if (attribute.Parent == null)
+                    attribute.Parent = this;
+            }
         }
 
         private readonly IXmlQualifiedName name;

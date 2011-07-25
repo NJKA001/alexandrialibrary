@@ -15,20 +15,22 @@ namespace Gnosis.Core
 
         static XmlNodeExtensions()
         {
-            AddAttributeFactory("xml:base", attrib => Core.Xml.XmlBaseAttribute.Parse(attrib));
+            AddAttributeFactory("xml:base", attrib => true, attrib => Core.Xml.XmlBaseAttribute.Parse(attrib));
         }
 
-        private static readonly IDictionary<string, Func<System.Xml.XmlAttribute, Core.Xml.IXmlAttribute>> attributeFactories = new Dictionary<string, Func<System.Xml.XmlAttribute, Core.Xml.IXmlAttribute>>();
+        private static readonly IDictionary<string, Core.Xml.IXmlAttributeFactory> attributeFactories = new Dictionary<string, Core.Xml.IXmlAttributeFactory>();
         private static readonly IDictionary<string, Func<System.Xml.XmlNode, Core.Xml.IXmlElement>> elementFactories = new Dictionary<string, Func<System.Xml.XmlNode, Core.Xml.IXmlElement>>();
 
-        public static void AddAttributeFactory(string name, Func<System.Xml.XmlAttribute, Core.Xml.IXmlAttribute> factory)
+        public static void AddAttributeFactory(string attributeName, Func<Core.Xml.IXmlAttribute, bool> predicate, Func<System.Xml.XmlAttribute, Core.Xml.IXmlAttribute> create)
         {
-            if (name == null)
-                throw new ArgumentNullException("name");
-            if (factory == null)
-                throw new ArgumentNullException("factory");
+            if (attributeName == null)
+                throw new ArgumentNullException("attributeName");
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
+            if (create == null)
+                throw new ArgumentNullException("create");
 
-            attributeFactories[name] = factory;
+            attributeFactories[attributeName] = new Core.Xml.XmlAttributeFactory(attributeName, predicate, create);
         }
 
         public static void AddElementFactory(string name, Func<System.Xml.XmlNode, Core.Xml.IXmlElement> factory)
@@ -145,10 +147,10 @@ namespace Gnosis.Core
 
         public static IXmlExtension ToXmlExtension(this XmlNode self, IEnumerable<IXmlNamespace> globalNamespaces)
         {
-            if (self != null)
-            {
-                System.Diagnostics.Debug.WriteLine(self.Name);
-            }
+            //if (self != null)
+            //{
+            //    System.Diagnostics.Debug.WriteLine(self.Name);
+            //}
 
             var nameTokens = self.Name.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
             if (nameTokens == null || nameTokens.Length != 2)
@@ -158,9 +160,9 @@ namespace Gnosis.Core
             var name = nameTokens[1];
 
             var namespaces = self.ToXmlNamespaces();
-            System.Diagnostics.Debug.WriteLine("  prefix=" + prefix);
-            System.Diagnostics.Debug.WriteLine("  local namespaces count=" + namespaces.Count());
-            System.Diagnostics.Debug.WriteLine("  global namespaces count=" + globalNamespaces.Count());
+            //System.Diagnostics.Debug.WriteLine("  prefix=" + prefix);
+            //System.Diagnostics.Debug.WriteLine("  local namespaces count=" + namespaces.Count());
+            //System.Diagnostics.Debug.WriteLine("  global namespaces count=" + globalNamespaces.Count());
             var primaryNamespace = namespaces.Where(x => x != null && x.Prefix == prefix).FirstOrDefault();
             if (primaryNamespace == null)
                 primaryNamespace = globalNamespaces.Where(x => x != null && x.Prefix == prefix).FirstOrDefault();
@@ -341,7 +343,17 @@ namespace Gnosis.Core
             var attributes = new List<Core.Xml.IXmlAttribute>();
 
             foreach (var node in self.Attributes.OfType<System.Xml.XmlAttribute>())
-                attributes.AddIfNotNull(Core.Xml.XmlAttribute.Parse(node.Name, node.Value));
+            {
+                var attribute = Core.Xml.XmlAttribute.Parse(node.Name, node.Value);
+                if (attributeFactories.ContainsKey(node.Name) && attributeFactories[node.Name].IsValidFor(attribute))
+                {
+                    attributes.AddIfNotNull(attributeFactories[node.Name].Create(node));
+                }
+                else
+                {
+                    attributes.AddIfNotNull(attribute);
+                }
+            }
 
             return attributes;
         }

@@ -17,7 +17,8 @@ namespace Gnosis.Tests.Models
         private void MakeArsXmlAssertions(IXmlDocument xml)
         {
             #region Constants
-            
+
+            const int attribCount = 4;
             const int linksCount = 30;
             const int atomLinksCount = 2;
             const int commentsCount = 3;
@@ -25,6 +26,7 @@ namespace Gnosis.Tests.Models
             const int escapedCount = 364;
             const int rootNamespaceCount = 2;
             const int namespaceCount = 3;
+            const string xmlBaseUri = "http://arstechnica.com/";
 
             #endregion
 
@@ -40,6 +42,15 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(escapedCount, xml.Root.Where<IXmlEscapedSection>(esc => esc != null).Count());
             Assert.AreEqual(rootNamespaceCount, xml.Root.Namespaces.Count());
             Assert.AreEqual(namespaceCount, xml.Root.Where<IXmlNamespace>(ns => ns != null).DistinctBy(ns => ns.Name.ToString()).Count());
+            Assert.AreEqual(attribCount, xml.Root.Attributes.Count());
+            Assert.IsTrue(xml.Root.Attributes.All(attrib => attrib != null && attrib.Parent == xml.Root));
+            Assert.IsNotNull(xml.Root.Attributes.Where(x => x.Name.ToString() == "xml:base").FirstOrDefault() as XmlBaseAttribute);
+            Assert.IsNotNull(xml.Root.Attributes.Where(x => x.Name.Prefix == "xmlns").FirstOrDefault() as IXmlNamespace);
+            
+            var xmlBaseAttrib = xml.Root.Where<IXmlAttribute>(attrib => attrib != null && attrib.Name.ToString() == "xml:base").FirstOrDefault() as IXmlBaseAttribute;
+            Assert.IsNotNull(xmlBaseAttrib);
+            Assert.IsNotNull(xmlBaseAttrib.Value);
+            Assert.AreEqual(xmlBaseUri, xmlBaseAttrib.Value.ToString());
         }
 
         [Test]

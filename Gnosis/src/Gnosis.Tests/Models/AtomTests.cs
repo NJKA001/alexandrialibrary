@@ -304,9 +304,9 @@ namespace Gnosis.Tests.Models
             const string generatorUri = "https://bloged.dev.java.net/";
 
             var location = new Uri("http://bblfish.net/blog/blog.atom");
-            System.Diagnostics.Debug.WriteLine("before ToAtomFeed");
+            //System.Diagnostics.Debug.WriteLine("before ToAtomFeed");
             var feed = location.ToAtomFeed();
-            System.Diagnostics.Debug.WriteLine("after ToAtomFeed");
+            //System.Diagnostics.Debug.WriteLine("after ToAtomFeed");
 
             Assert.IsNotNull(feed);
             Assert.IsNotNull(feed.Generator);

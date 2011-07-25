@@ -212,6 +212,7 @@
     <Compile Include="Xml\IXmlQualifiedName.cs" />
     <Compile Include="Xml\IXmlStyleSheet.cs" />
     <Compile Include="Xml\XmlAttribute.cs" />
+    <Compile Include="Xml\XmlAttributeFactory.cs" />
     <Compile Include="Xml\XmlBaseAttribute.cs" />
     <Compile Include="Xml\XmlCDataSection.cs" />
     <Compile Include="Xml\XmlComment.cs" />
