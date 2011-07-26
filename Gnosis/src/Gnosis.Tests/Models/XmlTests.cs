@@ -27,6 +27,7 @@ namespace Gnosis.Tests.Models
             const int rootNamespaceCount = 2;
             const int namespaceCount = 3;
             const string xmlBaseUri = "http://arstechnica.com/";
+            const int channelChildCount = 47;
 
             #endregion
 
@@ -51,6 +52,12 @@ namespace Gnosis.Tests.Models
             Assert.IsNotNull(xmlBaseAttrib);
             Assert.IsNotNull(xmlBaseAttrib.Value);
             Assert.AreEqual(xmlBaseUri, xmlBaseAttrib.Value.ToString());
+            var channel = xml.Root.Where<IXmlElement>(elem => elem.Name.ToString() == "channel").FirstOrDefault();
+            Assert.IsNotNull(channel);
+            Assert.AreEqual(channelChildCount, channel.ChildElements.Count());
+            var link = channel.Where<IXmlElement>(elem => elem.Name.ToString() == "link").FirstOrDefault();
+            Assert.IsNotNull(link);
+            Assert.IsNotNull(link.Children.FirstOrDefault());
         }
 
         [Test]

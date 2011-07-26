@@ -211,6 +211,8 @@
     <Compile Include="Xml\IXmlProcessingInstruction.cs" />
     <Compile Include="Xml\IXmlQualifiedName.cs" />
     <Compile Include="Xml\IXmlStyleSheet.cs" />
+    <Compile Include="Xml\Rss\IRssLinkElement.cs" />
+    <Compile Include="Xml\Rss\RssLinkElement.cs" />
     <Compile Include="Xml\XmlAttribute.cs" />
     <Compile Include="Xml\XmlAttributeFactory.cs" />
     <Compile Include="Xml\XmlBaseAttribute.cs" />
@@ -229,6 +231,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Google\" />
+    <Folder Include="Xml\Atom\" />
     <Folder Include="Yahoo\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
