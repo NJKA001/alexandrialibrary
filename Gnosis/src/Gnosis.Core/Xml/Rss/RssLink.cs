@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Gnosis.Core.Xml.Rss
 {
-    public class RssLinkElement
+    public class RssLink
         : XmlElement
     {
-        public RssLinkElement(IXmlNode parent, IEnumerable<IXmlNode> children, IXmlQualifiedName name, IEnumerable<IXmlAttribute> attributes)
+        public RssLink(IXmlNode parent, IEnumerable<IXmlNode> children, IXmlQualifiedName name, IEnumerable<IXmlAttribute> attributes)
             : base(parent, children, name, attributes)
         {
         }
