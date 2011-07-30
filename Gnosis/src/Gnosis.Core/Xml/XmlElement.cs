@@ -31,6 +31,110 @@ namespace Gnosis.Core.Xml
         private readonly IXmlQualifiedName name;
         private readonly IEnumerable<IXmlAttribute> attributes;
 
+        protected T GetAttributeEnum<T>(string name, T defaultValue)
+            where T : struct
+        {
+            var s = GetAttributeString(name);
+
+            var result = defaultValue;
+            Enum.TryParse<T>(s, out result);
+            return result;
+        }
+
+        protected int GetAttributeInt32(string name)
+        {
+            var s = GetAttributeString(name);
+
+            var number = 0;
+            int.TryParse(s, out number);
+            return number;
+        }
+
+        protected string GetAttributeString(string name)
+        {
+            var attrib = attributes.Where(x => x.Name.ToString() == name).FirstOrDefault();
+
+            return attrib != null ?
+                attrib.Value
+                : null;
+        }
+
+        protected Uri GetAttributeUri(string name)
+        {
+            var s = GetAttributeString(name);
+
+            return s != null ?
+                s.ToUri()
+                : null;
+        }
+
+        protected bool GetAttributeBoolean(string name, bool defaultValue)
+        {
+            var s = GetAttributeString(name);
+
+            var result = defaultValue;
+            bool.TryParse(s, out result);
+            return result;
+        }
+
+        protected string GetContentString()
+        {
+            var child = Children.FirstOrDefault() as IXmlCharacterData;
+
+            return child != null ?
+                child.Content
+                : null;
+        }
+
+        protected Uri GetContentUri()
+        {
+            var s = GetContentString();
+
+            return s != null ?
+                s.ToUri()
+                : null;
+        }
+
+        protected string GetChildString(string name)
+        {
+            var child = ChildElements.Where(elem => elem.Name.ToString() == name).FirstOrDefault();
+            if (child == null)
+                return null;
+
+            var charData = child.Children.FirstOrDefault() as IXmlCharacterData;
+
+            return charData != null ?
+                charData.Content
+                : null;
+        }
+
+        protected DateTime GetChildDateTime(string name)
+        {
+            var s = GetChildString(name);
+
+            var result = DateTime.MinValue;
+            DateTime.TryParse(s, out result);
+            return result;
+        }
+
+        protected int GetChildInt32(string name, int defaultValue)
+        {
+            var s = GetChildString(name);
+
+            var result = defaultValue;
+            int.TryParse(s, out result);
+            return result;
+        }
+
+        protected Uri GetChildUri(string name)
+        {
+            var s = GetChildString(name);
+
+            return s != null ?
+                s.ToUri()
+                : null;
+        }
+
         #region IXmlElement Members
 
         public IXmlQualifiedName Name

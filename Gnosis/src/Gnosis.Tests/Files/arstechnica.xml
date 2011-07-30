@@ -2,7 +2,7 @@
 
 <?xml-stylesheet type="text/xsl" media="screen" href="/~d/styles/rss2full.xsl"?>
 <?xml-stylesheet type="text/css" media="screen" href="http://feeds.arstechnica.com/~d/styles/itemcontent.css"?>
-<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" version="2.0" xml:base="http://arstechnica.com/">
+<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" version="2.0" xml:base="http://arstechnica.com/" xml:lang="en-US">
 
   <channel>
 

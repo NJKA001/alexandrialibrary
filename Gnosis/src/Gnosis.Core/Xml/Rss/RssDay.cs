@@ -5,14 +5,24 @@ using System.Text;
 
 namespace Gnosis.Core.Xml.Rss
 {
-    public enum RssDay
+    public class RssDay
+        : XmlElement, IRssDay
     {
-        Sunday = 1,
-        Monday = 2,
-        Tuesday = 3,
-        Wednesday = 4,
-        Thursday = 5,
-        Friday = 6,
-        Saturday = 7
+        public RssDay(IXmlNode parent, IEnumerable<IXmlNode> children, IXmlQualifiedName name, IEnumerable<IXmlAttribute> attributes)
+            : base(parent, children, name, attributes)
+        {
+        }
+
+        public Day Value
+        {
+            get
+            {
+                var child = Children.FirstOrDefault() as IXmlCharacterData;
+
+                return (child != null && child.Content != null && Enum.IsDefined(typeof(Day), child.Content)) ?
+                    (Day)Enum.Parse(typeof(Day), child.Content)
+                    : Day.Unknown;
+            }
+        }
     }
 }

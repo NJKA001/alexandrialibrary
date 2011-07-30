@@ -157,7 +157,14 @@ namespace Gnosis.Core
 
         public static Uri ToUri(this object self)
         {
-            return new Uri(self.ToString(), UriKind.RelativeOrAbsolute);
+            try
+            {
+                return new Uri(self.ToString(), UriKind.RelativeOrAbsolute);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

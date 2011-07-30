@@ -18,7 +18,7 @@ namespace Gnosis.Tests.Models
         {
             #region Constants
 
-            const int attribCount = 4;
+            const int attribCount = 5;
             const int linksCount = 30;
             const int atomLinksCount = 2;
             const int commentsCount = 3;
@@ -27,6 +27,7 @@ namespace Gnosis.Tests.Models
             const int rootNamespaceCount = 2;
             const int namespaceCount = 3;
             const string xmlBaseUri = "http://arstechnica.com/";
+            const string xmlLang = "en-US";
             const int channelChildCount = 47;
 
             #endregion
@@ -52,6 +53,12 @@ namespace Gnosis.Tests.Models
             Assert.IsNotNull(xmlBaseAttrib);
             Assert.IsNotNull(xmlBaseAttrib.Value);
             Assert.AreEqual(xmlBaseUri, xmlBaseAttrib.Value.ToString());
+
+            var xmlLangAttrib = xml.Root.Where<IXmlAttribute>(attrib => attrib != null && attrib.Name.ToString() == "xml:lang").FirstOrDefault() as IXmlLangAttribute;
+            Assert.IsNotNull(xmlLangAttrib);
+            Assert.IsNotNull(xmlLangAttrib.Value);
+            Assert.AreEqual(xmlLang, xmlLangAttrib.Value.ToString());
+
             var channel = xml.Root.Where<IXmlElement>(elem => elem.Name.ToString() == "channel").FirstOrDefault();
             Assert.IsNotNull(channel);
             Assert.AreEqual(channelChildCount, channel.ChildElements.Count());

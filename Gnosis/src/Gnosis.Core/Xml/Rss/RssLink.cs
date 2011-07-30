@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Xml.Rss
 {
     public class RssLink
-        : XmlElement
+        : XmlElement, IRssLink
     {
         public RssLink(IXmlNode parent, IEnumerable<IXmlNode> children, IXmlQualifiedName name, IEnumerable<IXmlAttribute> attributes)
             : base(parent, children, name, attributes)
@@ -15,14 +15,7 @@ namespace Gnosis.Core.Xml.Rss
 
         public Uri Content
         {
-            get
-            {
-                var child = Children.FirstOrDefault() as IXmlEscapedSection;
-
-                return (child != null && child.Content != null) ? 
-                    child.Content.ToUri() 
-                    : null;
-            }
+            get { return GetContentUri(); }
         }
     }
 }

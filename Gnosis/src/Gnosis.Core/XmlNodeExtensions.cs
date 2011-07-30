@@ -16,6 +16,8 @@ namespace Gnosis.Core
         static XmlNodeExtensions()
         {
             AddAttributeFactory("xml:base", attrib => true, attrib => Core.Xml.XmlBaseAttribute.Parse(attrib));
+            AddAttributeFactory("xml:lang", attrib => true, attrib => Core.Xml.XmlLangAttribute.Parse(attrib));
+            //AddElementFactory("
         }
 
         private static readonly IDictionary<string, Core.Xml.IXmlAttributeFactory> attributeFactories = new Dictionary<string, Core.Xml.IXmlAttributeFactory>();

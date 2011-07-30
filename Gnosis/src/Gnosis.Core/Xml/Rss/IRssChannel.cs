@@ -25,13 +25,12 @@ namespace Gnosis.Core.Xml.Rss
         IRssCloud Cloud { get; }
         TimeSpan Ttl { get; }
         IRssImage Image { get; }
-        IPicsRating Rating { get; }
+        string Rating { get; }
         IRssTextInput TextInput { get; }
-        IEnumerable<RssHour> SkipHours { get; }
-        IEnumerable<RssDay> SkipDays { get; }
+        IRssSkipHours SkipHours { get; }
+        IRssSkipDays SkipDays { get; }
 
         IEnumerable<IRssCategory> Categories { get; }
         IEnumerable<IRssItem> Items { get; }
-        IEnumerable<IXmlExtension> Extensions { get; }
     }
 }
