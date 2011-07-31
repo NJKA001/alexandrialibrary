@@ -8,8 +8,8 @@ namespace Gnosis.Core.Xml
     public class Namespace
         : Attribute, INamespace
     {
-        private Namespace(IQualifiedName name, Uri identifier)
-            : base(name, identifier.ToString())
+        private Namespace(INode parent, IQualifiedName name, Uri identifier)
+            : base(parent, name, identifier.ToString())
         {
             this.identifier = identifier;
         }
@@ -25,18 +25,14 @@ namespace Gnosis.Core.Xml
 
         #endregion
 
-        public static INamespace ParseNamespace(IQualifiedName name, string value)
+        public static INamespace ParseNamespace(INode parent, IQualifiedName name, string value)
         {
-            if (name == null)
-                throw new ArgumentNullException("name");
-            if (value == null)
-                throw new ArgumentNullException("value");
             if (name.Prefix != "xmlns" && name.LocalPart != "xmlns")
                 throw new ArgumentException("Either the prefix or local part of a namespace must be 'xmlns'");
 
             var identifier = new Uri(value, UriKind.Absolute);
 
-            return new Namespace(name, identifier);
+            return new Namespace(parent, name, identifier);
         }
     }
 }

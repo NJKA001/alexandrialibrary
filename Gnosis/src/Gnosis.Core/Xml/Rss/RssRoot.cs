@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Gnosis.Core.Xml.Rss
 {
-    public class Rss
-        : Element, IRss
+    public class RssRoot
+        : Element, IRssRoot
     {
-        public Rss(INode parent, IEnumerable<INode> children, IQualifiedName name, IEnumerable<IAttribute> attributes)
-            : base(parent, children, name, attributes)
+        public RssRoot(INode parent, IQualifiedName name)
+            : base(parent, name)
         {
         }
 

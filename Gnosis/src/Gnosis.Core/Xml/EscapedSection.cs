@@ -8,7 +8,8 @@ namespace Gnosis.Core.Xml
     public class EscapedSection
         : Node, IEscapedSection
     {
-        public EscapedSection(string content)
+        public EscapedSection(INode parent, string content)
+            : base(parent)
         {
             this.content = content;
         }

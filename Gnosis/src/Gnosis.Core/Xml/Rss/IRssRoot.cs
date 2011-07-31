@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis.Core.Xml.Rss
 {
-    public interface IRss
+    public interface IRssRoot
         : IElement
     {
         string Version { get; }

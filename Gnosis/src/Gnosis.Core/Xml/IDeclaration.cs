@@ -8,6 +8,7 @@ using Gnosis.Core.W3c;
 namespace Gnosis.Core.Xml
 {
     public interface IDeclaration
+        : INode
     {
         string Version { get; }
         ICharacterSet Encoding { get; }

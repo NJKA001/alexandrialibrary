@@ -8,7 +8,8 @@ namespace Gnosis.Core.Xml
     public class CDataSection
         : Node, ICDataSection
     {
-        public CDataSection(string content)
+        public CDataSection(INode parent, string content)
+            : base(parent)
         {
             this.content = content;
         }

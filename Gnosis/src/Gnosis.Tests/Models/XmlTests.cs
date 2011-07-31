@@ -8,6 +8,8 @@ using NUnit.Framework;
 
 using Gnosis.Core;
 using Gnosis.Core.Xml;
+using Gnosis.Core.Xml.Atom;
+using Gnosis.Core.Xml.Rss;
 
 namespace Gnosis.Tests.Models
 {
@@ -20,6 +22,8 @@ namespace Gnosis.Tests.Models
 
             const int attribCount = 5;
             const int linksCount = 30;
+            const int rssLinksCount = 26;
+            const int rootRssLinkCount = 1;
             const int atomLinksCount = 2;
             const int commentsCount = 3;
             const int mediaCreditCount = 22;
@@ -59,15 +63,30 @@ namespace Gnosis.Tests.Models
             Assert.IsNotNull(xmlLangAttrib.Value);
             Assert.AreEqual(xmlLang, xmlLangAttrib.Value.ToString());
 
-            var channel = xml.Root.Where<IElement>(elem => elem.Name.ToString() == "channel").FirstOrDefault();
-            Assert.IsNotNull(channel);
-            Assert.AreEqual(channelChildCount, channel.ChildElements.Count());
-            var link = channel.Where<IElement>(elem => elem.Name.ToString() == "link").FirstOrDefault();
+            var channelElem = xml.Root.Where<IElement>(elem => elem.Name.ToString() == "channel").FirstOrDefault();
+            Assert.IsNotNull(channelElem);
+            Assert.AreEqual(channelChildCount, channelElem.ChildElements.Count());
+            var link = channelElem.Where<IElement>(elem => elem.Name.ToString() == "link").FirstOrDefault();
             Assert.IsNotNull(link);
             Assert.IsNotNull(link.Children.FirstOrDefault());
 
-            var rss = xml.Root as Core.Xml.Rss.IRss;
+            var rss = xml.Root as IRssRoot;
             Assert.IsNotNull(rss);
+
+            var channel = rss.Children.FirstOrDefault() as IRssChannel;
+            Assert.IsNotNull(channel);
+
+            var links = rss.Where<IRssLink>(x => x != null);
+            Assert.AreEqual(rssLinksCount, links.Count());
+
+            var rootLinks = rss.Where<IRssLink>(x => x != null && x.Parent is IRssChannel);
+            Assert.AreEqual(rootRssLinkCount, rootLinks.Count());
+
+            var atomLinks = rss.Where<IAtomLink>(x => x != null);
+            Assert.AreEqual(atomLinksCount, atomLinks.Count());
+
+            var allLinks = rss.Where<IElement>(x => x != null && x.Name.LocalPart == "link");
+            Assert.AreEqual(linksCount, allLinks.Count());
         }
 
         [Test]

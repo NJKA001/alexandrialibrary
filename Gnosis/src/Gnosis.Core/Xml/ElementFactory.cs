@@ -8,7 +8,7 @@ namespace Gnosis.Core.Xml
     public class ElementFactory
         : IElementFactory
     {
-        public ElementFactory(string elementName, Func<IElement, bool> validate, Func<INode, IEnumerable<INode>, IQualifiedName, IEnumerable<IAttribute>, IElement> create)
+        public ElementFactory(string elementName, Func<IElement, bool> validate, Func<INode, IQualifiedName, IElement> create)
         {
             if (elementName == null)
                 throw new ArgumentNullException("elementName");
@@ -24,7 +24,7 @@ namespace Gnosis.Core.Xml
 
         private readonly string elementName;
         private readonly Func<IElement, bool> validate;
-        private readonly Func<INode, IEnumerable<INode>, IQualifiedName, IEnumerable<IAttribute>, IElement> create;
+        private readonly Func<INode, IQualifiedName, IElement> create;
 
         public string ElementName
         {
@@ -36,9 +36,9 @@ namespace Gnosis.Core.Xml
             return validate(element);
         }
 
-        public IElement Create(INode parent, IEnumerable<INode> children, IQualifiedName name, IEnumerable<IAttribute> attributes)
+        public IElement Create(INode parent, IQualifiedName name)
         {
-            return create(parent, children, name, attributes);
+            return create(parent, name);
         }
     }
 }

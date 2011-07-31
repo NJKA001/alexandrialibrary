@@ -8,8 +8,8 @@ namespace Gnosis.Core.Xml.Rss
     public class RssCloud
         : Element, IRssCloud
     {
-        public RssCloud(INode parent, IEnumerable<INode> children, IQualifiedName name, IEnumerable<IAttribute> attributes)
-            : base(parent, children, name, attributes)
+        public RssCloud(INode parent, IQualifiedName name)
+            : base(parent, name)
         {
         }
 

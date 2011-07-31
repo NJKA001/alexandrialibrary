@@ -8,7 +8,7 @@ namespace Gnosis.Core.Xml
     public class AttributeFactory
         : IAttributeFactory
     {
-        public AttributeFactory(string attributeName, Func<IAttribute, bool> predicate, Func<IQualifiedName, string, IAttribute> create)
+        public AttributeFactory(string attributeName, Func<IAttribute, bool> predicate, Func<INode, IQualifiedName, string, IAttribute> create)
         {
             this.attributeName = attributeName;
             this.predicate = predicate;
@@ -17,7 +17,7 @@ namespace Gnosis.Core.Xml
 
         private readonly string attributeName;
         private readonly Func<IAttribute, bool> predicate;
-        private readonly Func<IQualifiedName, string, IAttribute> create;
+        private readonly Func<INode, IQualifiedName, string, IAttribute> create;
 
         #region IXmlAttributeFactory Members
 
@@ -31,9 +31,9 @@ namespace Gnosis.Core.Xml
             return predicate(attribute);
         }
 
-        public IAttribute Create(IQualifiedName name, string value)
+        public IAttribute Create(INode parent, IQualifiedName name, string value)
         {
-            return create(name, value);
+            return create(parent, name, value);
         }
 
         #endregion

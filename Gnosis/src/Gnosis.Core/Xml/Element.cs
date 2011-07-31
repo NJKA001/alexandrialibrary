@@ -3,30 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core.Ietf;
+using Gnosis.Core.W3c;
+
 namespace Gnosis.Core.Xml
 {
     public class Element
         : Node, IElement
     {
-        public Element(INode parent, IEnumerable<INode> children, IQualifiedName name, IEnumerable<IAttribute> attributes)
-            : base(parent, children)
+        public Element(INode parent, IQualifiedName name)
+            : base(parent)
         {
-            if (children == null)
-                throw new ArgumentNullException("children");
             if (name == null)
                 throw new ArgumentNullException("name");
-            if (attributes == null)
-                throw new ArgumentNullException("attributes");
 
             this.name = name;
-            this.attributes = attributes;
-
-            foreach (var attribute in attributes)
-                attribute.Parent = this;
         }
 
         private readonly IQualifiedName name;
-        private readonly IEnumerable<IAttribute> attributes;
+        private readonly IList<IAttribute> attributes = new List<IAttribute>();
 
         protected T GetAttributeEnum<T>(string name, T defaultValue)
             where T : struct
@@ -72,6 +67,24 @@ namespace Gnosis.Core.Xml
             var result = defaultValue;
             bool.TryParse(s, out result);
             return result;
+        }
+
+        protected ILanguageTag GetAttributeLanguageTag(string name)
+        {
+            var s = GetAttributeString(name);
+
+            return s != null ?
+                LanguageTag.Parse(s)
+                : null;
+        }
+
+        protected IMediaType GetAttributeMediaType(string name)
+        {
+            var s = GetAttributeString(name);
+
+            return s != null ?
+                MediaType.Parse(s)
+                : null;
         }
 
         protected string GetContentString()
@@ -184,6 +197,14 @@ namespace Gnosis.Core.Xml
                 results.AddRange(child.Where(predicate));
 
             return results;
+        }
+
+        public void AddAttribute(IAttribute attribute)
+        {
+            if (attribute == null)
+                throw new ArgumentNullException("attribute");
+
+            attributes.Add(attribute);
         }
 
         #endregion

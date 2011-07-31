@@ -8,8 +8,8 @@ namespace Gnosis.Core.Xml.Rss
     public class RssHour
         : Element, IRssHour
     {
-        public RssHour(INode parent, IEnumerable<INode> children, IQualifiedName name, IEnumerable<IAttribute> attributes)
-            : base(parent, children, name, attributes)
+        public RssHour(INode parent, IQualifiedName name)
+            : base(parent, name)
         {
         }
 

@@ -10,8 +10,8 @@ namespace Gnosis.Core.Xml
     public class LangAttribute
         : Attribute, ILangAttribute
     {
-        public LangAttribute(IQualifiedName name, string value)
-            : base(name, value)
+        public LangAttribute(INode parent, IQualifiedName name, string value)
+            : base(parent, name, value)
         {
             if (value == null)
                 throw new ArgumentNullException("value");

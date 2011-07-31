@@ -10,8 +10,8 @@ namespace Gnosis.Core.Xml.Rss
     public class RssEnclosure
         : Element, IRssEnclosure
     {
-        public RssEnclosure(INode parent, IEnumerable<INode> children, IQualifiedName name, IEnumerable<IAttribute> attributes)
-            : base(parent, children, name, attributes)
+        public RssEnclosure(INode parent, IQualifiedName name)
+            : base(parent, name)
         {
         }
 

@@ -8,8 +8,8 @@ namespace Gnosis.Core.Xml.Rss
     public class RssSource
         : Element, IRssSource
     {
-        public RssSource(INode parent, IEnumerable<INode> children, IQualifiedName name, IEnumerable<IAttribute> attributes)
-            : base(parent, children, name, attributes)
+        public RssSource(INode parent, IQualifiedName name)
+            : base(parent, name)
         {
         }
 

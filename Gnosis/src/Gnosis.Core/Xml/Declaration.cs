@@ -8,9 +8,10 @@ using Gnosis.Core.W3c;
 namespace Gnosis.Core.Xml
 {
     public class Declaration
-        : IDeclaration
+        : Node, IDeclaration
     {
-        public Declaration(string version, ICharacterSet encoding, Standalone standalone)
+        public Declaration(INode parent, string version, ICharacterSet encoding, Standalone standalone)
+            : base(parent)
         {
             if (version == null)
                 throw new ArgumentNullException("version");

@@ -8,8 +8,8 @@ namespace Gnosis.Core.Xml.Rss
     public class RssLink
         : Element, IRssLink
     {
-        public RssLink(INode parent, IEnumerable<INode> children, IQualifiedName name, IEnumerable<IAttribute> attributes)
-            : base(parent, children, name, attributes)
+        public RssLink(INode parent, IQualifiedName name)
+            : base(parent, name)
         {
         }
 

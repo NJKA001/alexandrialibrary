@@ -9,27 +9,20 @@ namespace Gnosis.Core.Xml
         : INode
     {
         protected Node()
-            : this(new List<INode>())
         {
+            this.parent = null;
         }
 
-        protected Node(IEnumerable<INode> children)
-            : this(null, children)
+        protected Node(INode parent)
         {
-        }
+            if (parent == null)
+                throw new ArgumentNullException("parent");
 
-        protected Node(INode parent, IEnumerable<INode> children)
-        {
             this.parent = parent;
-            this.children = children;
-
-            foreach (var child in children)
-                if (child.Parent == null)
-                    child.Parent = this;
         }
 
-        private INode parent;
-        private readonly IEnumerable<INode> children;
+        private readonly INode parent;
+        private readonly List<INode> children = new List<INode>();
 
         #region Protected Methods
 
@@ -61,7 +54,6 @@ namespace Gnosis.Core.Xml
         public INode Parent
         {
             get { return parent; }
-            set { parent = value; }
         }
 
         public IEnumerable<INode> Children
@@ -82,6 +74,14 @@ namespace Gnosis.Core.Xml
                 results.AddRange(child.Where(predicate));
 
             return results;
+        }
+
+        public void AddChild(INode child)
+        {
+            if (child == null)
+                throw new ArgumentNullException("child");
+
+            children.Add(child);
         }
 
         #endregion

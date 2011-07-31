@@ -194,6 +194,31 @@
     <Compile Include="W3c\Rfc822DateTime.cs" />
     <Compile Include="W3c\XmlStyleSheet.cs" />
     <Compile Include="XmlNodeExtensions.cs" />
+    <Compile Include="Xml\Atom\AtomCommon.cs" />
+    <Compile Include="Xml\Atom\AtomLink.cs" />
+    <Compile Include="Xml\Atom\AtomTextType.cs" />
+    <Compile Include="Xml\Atom\IAtomAuthor.cs" />
+    <Compile Include="Xml\Atom\IAtomCategory.cs" />
+    <Compile Include="Xml\Atom\IAtomCommon.cs" />
+    <Compile Include="Xml\Atom\IAtomContent.cs" />
+    <Compile Include="Xml\Atom\IAtomContributor.cs" />
+    <Compile Include="Xml\Atom\IAtomDateConstruct.cs" />
+    <Compile Include="Xml\Atom\IAtomEntry.cs" />
+    <Compile Include="Xml\Atom\IAtomFeed.cs" />
+    <Compile Include="Xml\Atom\IAtomGenerator.cs" />
+    <Compile Include="Xml\Atom\IAtomIcon.cs" />
+    <Compile Include="Xml\Atom\IAtomId.cs" />
+    <Compile Include="Xml\Atom\IAtomLink.cs" />
+    <Compile Include="Xml\Atom\IAtomLogo.cs" />
+    <Compile Include="Xml\Atom\IAtomPerson.cs" />
+    <Compile Include="Xml\Atom\IAtomPublished.cs" />
+    <Compile Include="Xml\Atom\IAtomRights.cs" />
+    <Compile Include="Xml\Atom\IAtomSource.cs" />
+    <Compile Include="Xml\Atom\IAtomSubtitle.cs" />
+    <Compile Include="Xml\Atom\IAtomSummary.cs" />
+    <Compile Include="Xml\Atom\IAtomTextConstruct.cs" />
+    <Compile Include="Xml\Atom\IAtomTitle.cs" />
+    <Compile Include="Xml\Atom\IAtomUpdated.cs" />
     <Compile Include="Xml\ElementFactory.cs" />
     <Compile Include="Xml\IAttribute.cs" />
     <Compile Include="Xml\IAttributeFactory.cs" />
@@ -213,7 +238,7 @@
     <Compile Include="Xml\IProcessingInstruction.cs" />
     <Compile Include="Xml\IQualifiedName.cs" />
     <Compile Include="Xml\IStyleSheet.cs" />
-    <Compile Include="Xml\Rss\IRss.cs" />
+    <Compile Include="Xml\Rss\IRssRoot.cs" />
     <Compile Include="Xml\Rss\IRssCategory.cs" />
     <Compile Include="Xml\Rss\IRssChannel.cs" />
     <Compile Include="Xml\Rss\IRssCloud.cs" />
@@ -228,7 +253,7 @@
     <Compile Include="Xml\Rss\IRssSkipHours.cs" />
     <Compile Include="Xml\Rss\IRssSource.cs" />
     <Compile Include="Xml\Rss\IRssTextInput.cs" />
-    <Compile Include="Xml\Rss\Rss.cs" />
+    <Compile Include="Xml\Rss\RssRoot.cs" />
     <Compile Include="Xml\Rss\RssCategory.cs" />
     <Compile Include="Xml\Rss\RssChannel.cs" />
     <Compile Include="Xml\Rss\RssCloud.cs" />
@@ -266,7 +291,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Google\" />
-    <Folder Include="Xml\Atom\" />
     <Folder Include="Yahoo\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

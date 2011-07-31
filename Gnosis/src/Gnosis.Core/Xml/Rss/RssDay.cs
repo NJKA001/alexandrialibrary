@@ -8,8 +8,8 @@ namespace Gnosis.Core.Xml.Rss
     public class RssDay
         : Element, IRssDay
     {
-        public RssDay(INode parent, IEnumerable<INode> children, IQualifiedName name, IEnumerable<IAttribute> attributes)
-            : base(parent, children, name, attributes)
+        public RssDay(INode parent, IQualifiedName name)
+            : base(parent, name)
         {
         }
 

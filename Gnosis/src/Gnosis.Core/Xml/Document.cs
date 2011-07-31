@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
 
 using Gnosis.Core.W3c;
 
@@ -10,33 +11,26 @@ namespace Gnosis.Core.Xml
     public class Document
         : Node, IDocument
     {
-        private Document(IDeclaration declaration, IEnumerable<IProcessingInstruction> processingInstructions, IEnumerable<INode> children)
-            : base(children)
+        private Document()
+            : base()
         {
-            if (declaration == null)
-                throw new ArgumentNullException("declaration");
-            if (processingInstructions == null)
-                throw new ArgumentNullException("processingInstructions");
-            if (children == null)
-                throw new ArgumentNullException("children");
-
-            this.declaration = declaration;
-            this.processingInstructions = processingInstructions;
         }
 
-        private readonly IDeclaration declaration;
-        private readonly IEnumerable<IProcessingInstruction> processingInstructions;
+        private IEnumerable<INode> CommentsAndElements
+        {
+            get { return Children.Where(node => node != null && (node is IComment || node is IElement)); }
+        }
 
         #region IXmlDocument Members
 
         public IDeclaration Declaration
         {
-            get { return declaration; }
+            get { return Children.OfType<IDeclaration>().FirstOrDefault(); }
         }
 
         public IEnumerable<IProcessingInstruction> ProcessingInstructions
         {
-            get { return processingInstructions; }
+            get { return Children.OfType<IProcessingInstruction>(); }
         }
 
         public IEnumerable<IComment> Comments
@@ -55,12 +49,13 @@ namespace Gnosis.Core.Xml
         {
             var xml = new StringBuilder();
 
-            xml.AppendLine(declaration.ToString());
+            if (Declaration != null)
+                xml.AppendLine(Declaration.ToString());
 
-            foreach (var instruction in processingInstructions)
+            foreach (var instruction in ProcessingInstructions)
                 xml.AppendLine(instruction.ToString());
 
-            foreach (var child in Children)
+            foreach (var child in CommentsAndElements)
                 xml.AppendLine(child.ToString());
 
             return xml.ToString();
@@ -71,37 +66,41 @@ namespace Gnosis.Core.Xml
             if (xml == null)
                 throw new ArgumentNullException("xml");
 
-            IDeclaration declaration = null;
-            var processingInstructions = new List<IProcessingInstruction>();
-            var children = new List<INode>();
-
-            var xmlDoc = new System.Xml.XmlDocument();
+            var xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(xml);
 
-            foreach (var child in xmlDoc.ChildNodes.OfType<System.Xml.XmlNode>().Where(node => node != null))
+            var doc = new Document();
+
+            foreach (var child in xmlDoc.ChildNodes.OfType<XmlNode>().Where(node => node != null))
             {
                 switch (child.NodeType)
                 {
-                    case System.Xml.XmlNodeType.XmlDeclaration:
-                        declaration = child.ToDeclaration();
+                    case XmlNodeType.XmlDeclaration:
+                        var declaration = child.ToDeclaration(doc);
+                        if (declaration != null)
+                            doc.AddChild(declaration);
                         break;
-                    case System.Xml.XmlNodeType.ProcessingInstruction:
-                        processingInstructions.AddIfNotNull(child.ToProcessingInstruction());
+                    case XmlNodeType.ProcessingInstruction:
+                        var processingInstruction = child.ToProcessingInstruction(doc);
+                        if (processingInstruction != null)
+                            doc.AddChild(processingInstruction);
                         break;
-                    case System.Xml.XmlNodeType.Comment:
-                        children.AddIfNotNull(child.ToComment());
+                    case XmlNodeType.Comment:
+                        var comment = child.ToComment(doc);
+                        if (comment != null)
+                            doc.AddChild(comment);
                         break;
-                    case System.Xml.XmlNodeType.Element:
-                        children.AddIfNotNull(child.ToElement());
+                    case XmlNodeType.Element:
+                        var element = child.ToElement(doc);
+                        if (element != null)
+                            doc.AddChild(element);
                         break;
                     default:
                         break;
                 }
             }
 
-            return (declaration != null && children.Count > 0) ?
-                new Document(declaration, processingInstructions, children)
-                : null;
+            return doc;
         }
     }
 }

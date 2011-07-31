@@ -8,7 +8,8 @@ namespace Gnosis.Core.Xml
     public class Comment
         : Node, IComment
     {
-        public Comment(string content)
+        public Comment(INode parent, string content)
+            : base(parent)
         {
             this.content = content;
         }

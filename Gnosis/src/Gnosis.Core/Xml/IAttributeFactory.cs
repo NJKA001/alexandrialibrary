@@ -9,6 +9,6 @@ namespace Gnosis.Core.Xml
     {
         string AttributeName { get; }
         bool IsValidFor(IAttribute attribute);
-        IAttribute Create(IQualifiedName name, string value);
+        IAttribute Create(INode parent, IQualifiedName name, string value);
     }
 }

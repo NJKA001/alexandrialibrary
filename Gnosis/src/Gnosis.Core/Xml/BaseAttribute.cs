@@ -10,8 +10,8 @@ namespace Gnosis.Core.Xml
     public class BaseAttribute
         : Attribute, IBaseAttribute
     {
-        public BaseAttribute(IQualifiedName name, string value)
-            : base(name, value)
+        public BaseAttribute(INode parent, IQualifiedName name, string value)
+            : base(parent, name, value)
         {
             if (value == null)
                 throw new ArgumentNullException("value");

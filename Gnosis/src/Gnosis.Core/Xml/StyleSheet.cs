@@ -10,8 +10,8 @@ namespace Gnosis.Core.Xml
     public class StyleSheet
         : ProcessingInstruction, IStyleSheet
     {
-        private StyleSheet(IMediaType type, IMedia media, Uri href)
-            : base(XmlStyleSheetTarget, GetContent(type, media, href))
+        private StyleSheet(INode parent, IMediaType type, IMedia media, Uri href)
+            : base(parent, XmlStyleSheetTarget, GetContent(type, media, href))
         {
             this.type = type;
             this.media = media;
@@ -57,12 +57,10 @@ namespace Gnosis.Core.Xml
 
         #endregion
 
-        new public static IStyleSheet Parse(string target, string content)
+        new public static IStyleSheet Parse(INode parent, string target, string content)
         {
             if (target != XmlStyleSheetTarget)
                 throw new ArgumentException("target must be " + XmlStyleSheetTarget);
-            if (content == null)
-                throw new ArgumentNullException("content");
 
             IMediaType type = null;
             IMedia media = null;
@@ -96,7 +94,7 @@ namespace Gnosis.Core.Xml
                 }
             }
 
-            return new StyleSheet(type, media, href);
+            return new StyleSheet(parent, type, media, href);
         }
     }
 }

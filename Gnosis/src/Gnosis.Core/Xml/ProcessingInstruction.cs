@@ -6,14 +6,13 @@ using System.Text;
 namespace Gnosis.Core.Xml
 {
     public class ProcessingInstruction
-        : IProcessingInstruction
+        : Node, IProcessingInstruction
     {
-        protected ProcessingInstruction(string target, string content)
+        protected ProcessingInstruction(INode parent, string target, string content)
+            : base(parent)
         {
             if (target == null)
                 throw new ArgumentNullException("target");
-            if (content == null)
-                throw new ArgumentNullException("content");
 
             this.target = target;
             this.content = content;
@@ -42,14 +41,11 @@ namespace Gnosis.Core.Xml
             return string.Format("<?{0} {1}?>", target, normalized);
         }
 
-        public static IProcessingInstruction Parse(string target, string content)
+        public static IProcessingInstruction Parse(INode parent, string target, string content)
         {
-            if (target == null)
-                throw new ArgumentNullException("target");
-
             return target == StyleSheet.XmlStyleSheetTarget ?
-                StyleSheet.Parse(target, content) as IProcessingInstruction:
-                new ProcessingInstruction(target, content);
+                StyleSheet.Parse(parent, target, content) as IProcessingInstruction:
+                new ProcessingInstruction(parent, target, content);
         }
     }
 }

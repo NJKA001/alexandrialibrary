@@ -8,8 +8,12 @@ namespace Gnosis.Core.Xml
     public class Attribute
         : Node, IAttribute
     {
-        protected Attribute(IQualifiedName name, string value)
+        protected Attribute(INode parent, IQualifiedName name, string value)
+            : base(parent)
         {
+            if (parent == null)
+                throw new ArgumentNullException("parent");
+
             if (name == null)
                 throw new ArgumentNullException("name");
 
@@ -46,16 +50,11 @@ namespace Gnosis.Core.Xml
             return string.Format("{0}=\"{1}\"", name.ToString(), escapedValue);
         }
 
-        public static IAttribute Parse(IQualifiedName name, string value)
+        public static IAttribute Parse(INode parent, IQualifiedName name, string value)
         {
-            if (name == null)
-                throw new ArgumentNullException("name");
-            if (value == null)
-                throw new ArgumentNullException("value");
-
             return (name.Prefix == "xmlns" || (name.Prefix == null && name.LocalPart == "xmlns")) ?
-                Namespace.ParseNamespace(name, value) as IAttribute :
-                new Attribute(name, value);
+                Namespace.ParseNamespace(parent, name, value) as IAttribute :
+                new Attribute(parent, name, value);
         }
     }
 }
