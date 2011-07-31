@@ -6,9 +6,9 @@ using System.Text;
 namespace Gnosis.Core.Xml.Rss
 {
     public class RssSkipHours
-        : XmlElement, IRssSkipHours
+        : Element, IRssSkipHours
     {
-        public RssSkipHours(IXmlNode parent, IEnumerable<IXmlNode> children, IXmlQualifiedName name, IEnumerable<IXmlAttribute> attributes)
+        public RssSkipHours(INode parent, IEnumerable<INode> children, IQualifiedName name, IEnumerable<IAttribute> attributes)
             : base(parent, children, name, attributes)
         {
         }

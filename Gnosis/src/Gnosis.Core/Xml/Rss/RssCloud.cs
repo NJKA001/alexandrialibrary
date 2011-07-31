@@ -6,9 +6,9 @@ using System.Text;
 namespace Gnosis.Core.Xml.Rss
 {
     public class RssCloud
-        : XmlElement, IRssCloud
+        : Element, IRssCloud
     {
-        public RssCloud(IXmlNode parent, IEnumerable<IXmlNode> children, IXmlQualifiedName name, IEnumerable<IXmlAttribute> attributes)
+        public RssCloud(INode parent, IEnumerable<INode> children, IQualifiedName name, IEnumerable<IAttribute> attributes)
             : base(parent, children, name, attributes)
         {
         }

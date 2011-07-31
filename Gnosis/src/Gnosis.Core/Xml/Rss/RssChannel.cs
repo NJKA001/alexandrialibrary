@@ -9,9 +9,9 @@ using Gnosis.Core.W3c;
 namespace Gnosis.Core.Xml.Rss
 {
     public class RssChannel
-        : XmlElement, IRssChannel
+        : Element, IRssChannel
     {
-        public RssChannel(IXmlNode parent, IEnumerable<IXmlNode> children, IXmlQualifiedName name, IEnumerable<IXmlAttribute> attributes)
+        public RssChannel(INode parent, IEnumerable<INode> children, IQualifiedName name, IEnumerable<IAttribute> attributes)
             : base(parent, children, name, attributes)
         {
         }

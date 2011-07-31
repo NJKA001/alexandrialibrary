@@ -6,64 +6,28 @@ using System.Xml;
 
 using Gnosis.Core.Ietf;
 using Gnosis.Core.W3c;
+using Gnosis.Core.Xml;
+using Gnosis.Core.Xml.Rss;
 
 namespace Gnosis.Core
 {
     public static class XmlNodeExtensions
     {
-        #region Element Factory Members
-
-        static XmlNodeExtensions()
-        {
-            AddAttributeFactory("xml:base", attrib => true, attrib => Core.Xml.XmlBaseAttribute.Parse(attrib));
-            AddAttributeFactory("xml:lang", attrib => true, attrib => Core.Xml.XmlLangAttribute.Parse(attrib));
-            //AddElementFactory("
-        }
-
-        private static readonly IDictionary<string, Core.Xml.IXmlAttributeFactory> attributeFactories = new Dictionary<string, Core.Xml.IXmlAttributeFactory>();
-        private static readonly IDictionary<string, Func<System.Xml.XmlNode, Core.Xml.IXmlElement>> elementFactories = new Dictionary<string, Func<System.Xml.XmlNode, Core.Xml.IXmlElement>>();
-
-        public static void AddAttributeFactory(string attributeName, Func<Core.Xml.IXmlAttribute, bool> predicate, Func<System.Xml.XmlAttribute, Core.Xml.IXmlAttribute> create)
-        {
-            if (attributeName == null)
-                throw new ArgumentNullException("attributeName");
-            if (predicate == null)
-                throw new ArgumentNullException("predicate");
-            if (create == null)
-                throw new ArgumentNullException("create");
-
-            attributeFactories[attributeName] = new Core.Xml.XmlAttributeFactory(attributeName, predicate, create);
-        }
-
-        public static void AddElementFactory(string name, Func<System.Xml.XmlNode, Core.Xml.IXmlElement> factory)
-        {
-            if (name == null)
-                throw new ArgumentNullException("name");
-            if (factory == null)
-                throw new ArgumentNullException("factory");
-
-            elementFactories[name] = factory;
-        }
-
-        #endregion
-
-
-
-        public static XmlAttribute FindAttribute(this XmlNode self, string name)
+        public static System.Xml.XmlAttribute FindAttribute(this System.Xml.XmlNode self, string name)
         {
             return (self != null && self.Attributes != null && !string.IsNullOrEmpty(name)) ?
-                self.Attributes.Cast<XmlAttribute>().Where(attrib => attrib != null && attrib.Name == name).FirstOrDefault()
+                self.Attributes.Cast<System.Xml.XmlAttribute>().Where(attrib => attrib != null && attrib.Name == name).FirstOrDefault()
                 : null;
         }
 
-        public static XmlNode FindChild(this XmlNode self, string name)
+        public static System.Xml.XmlNode FindChild(this System.Xml.XmlNode self, string name)
         {
             return (self != null && !string.IsNullOrEmpty(name)) ?
-                self.ChildNodes.Cast<XmlNode>().Where(node => node != null && node.Name == name).FirstOrDefault()
+                self.ChildNodes.Cast<System.Xml.XmlNode>().Where(node => node != null && node.Name == name).FirstOrDefault()
                 : null;
         }
 
-        public static int GetAttributeInt32(this XmlNode self, string name)
+        public static int GetAttributeInt32(this System.Xml.XmlNode self, string name)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
@@ -77,7 +41,7 @@ namespace Gnosis.Core
             return number;
         }
 
-        public static ILanguageTag GetAttributeLanguageTag(this XmlNode self, string name)
+        public static ILanguageTag GetAttributeLanguageTag(this System.Xml.XmlNode self, string name)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
@@ -89,7 +53,7 @@ namespace Gnosis.Core
                 : null;
         }
 
-        public static string GetAttributeString(this XmlNode self, string name)
+        public static string GetAttributeString(this System.Xml.XmlNode self, string name)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
@@ -101,7 +65,7 @@ namespace Gnosis.Core
                 : null;
         }
 
-        public static IMediaType GetAttributeMediaType(this XmlNode self, string name)
+        public static IMediaType GetAttributeMediaType(this System.Xml.XmlNode self, string name)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
@@ -113,7 +77,7 @@ namespace Gnosis.Core
                 : null;
         }
 
-        public static Uri GetAttributeUri(this XmlNode self, string name)
+        public static Uri GetAttributeUri(this System.Xml.XmlNode self, string name)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
@@ -125,18 +89,18 @@ namespace Gnosis.Core
                 : null;
         }
 
-        public static ICharacterSet ToEncoding(this XmlNode node)
+        public static ICharacterSet ToEncoding(this System.Xml.XmlNode node)
         {
-            if (node == null || !(node is XmlDeclaration))
+            if (node == null || !(node is System.Xml.XmlDeclaration))
                 return CharacterSet.Utf8;
 
-            var declaration = node as XmlDeclaration;
+            var declaration = node as System.Xml.XmlDeclaration;
             var encoding = declaration.Encoding.ToCharacterSet();
 
             return (encoding != CharacterSet.Unknown) ? encoding : CharacterSet.Utf8;
         }
 
-        public static Uri ToXmlBase(this XmlNode self)
+        public static Uri ToXmlBase(this System.Xml.XmlNode self)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
@@ -147,13 +111,8 @@ namespace Gnosis.Core
                 : null;
         }
 
-        public static IXmlExtension ToXmlExtension(this XmlNode self, IEnumerable<IXmlNamespace> globalNamespaces)
+        public static Core.W3c.IXmlExtension ToXmlExtension(this System.Xml.XmlNode self, IEnumerable<Core.W3c.IXmlNamespace> globalNamespaces)
         {
-            //if (self != null)
-            //{
-            //    System.Diagnostics.Debug.WriteLine(self.Name);
-            //}
-
             var nameTokens = self.Name.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
             if (nameTokens == null || nameTokens.Length != 2)
                 return null;
@@ -162,9 +121,6 @@ namespace Gnosis.Core
             var name = nameTokens[1];
 
             var namespaces = self.ToXmlNamespaces();
-            //System.Diagnostics.Debug.WriteLine("  prefix=" + prefix);
-            //System.Diagnostics.Debug.WriteLine("  local namespaces count=" + namespaces.Count());
-            //System.Diagnostics.Debug.WriteLine("  global namespaces count=" + globalNamespaces.Count());
             var primaryNamespace = namespaces.Where(x => x != null && x.Prefix == prefix).FirstOrDefault();
             if (primaryNamespace == null)
                 primaryNamespace = globalNamespaces.Where(x => x != null && x.Prefix == prefix).FirstOrDefault();
@@ -174,20 +130,20 @@ namespace Gnosis.Core
                 : null;
         }
 
-        public static IEnumerable<IXmlExtension> ToXmlExtensions(this XmlNode self, IEnumerable<IXmlNamespace> globalNamespaces)
+        public static IEnumerable<IXmlExtension> ToXmlExtensions(this System.Xml.XmlNode self, IEnumerable<Core.W3c.IXmlNamespace> globalNamespaces)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
 
             var extensions = new List<IXmlExtension>();
 
-            foreach (var child in self.ChildNodes.Cast<XmlNode>().Where(node => node != null && node.Name.Contains(':')))
+            foreach (var child in self.ChildNodes.Cast<System.Xml.XmlNode>().Where(node => node != null && node.Name.Contains(':')))
                 extensions.AddIfNotNull(child.ToXmlExtension(globalNamespaces));
 
             return extensions;
         }
 
-        public static ILanguageTag ToXmlLang(this XmlNode self)
+        public static ILanguageTag ToXmlLang(this System.Xml.XmlNode self)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
@@ -198,13 +154,13 @@ namespace Gnosis.Core
                 : null;
         }
 
-        public static IEnumerable<IXmlNamespace> ToXmlNamespaces(this XmlNode node)
+        public static IEnumerable<Core.W3c.IXmlNamespace> ToXmlNamespaces(this System.Xml.XmlNode node)
         {
-            var namespaces = new List<IXmlNamespace>();
+            var namespaces = new List<Core.W3c.IXmlNamespace>();
             if (node == null || node.Attributes == null)
                 return namespaces;
 
-            var attribs = node.Attributes.Cast<XmlAttribute>().Where(x => x != null && x.Name.StartsWith("xmlns"));
+            var attribs = node.Attributes.Cast<System.Xml.XmlAttribute>().Where(x => x != null && x.Name.StartsWith("xmlns"));
 
             foreach (var attrib in attribs)
             {
@@ -212,14 +168,14 @@ namespace Gnosis.Core
 
                 if (attrib.Name == "xmlns")
                 {
-                    namespaces.Add(new XmlNamespace(identifier));
+                    namespaces.Add(new Core.W3c.XmlNamespace(identifier));
                 }
                 else if (attrib.Name.Contains(':'))
                 {
                     var tokens = attrib.Name.Split(':');
                     if (tokens != null && tokens.Length == 2)
                     {
-                        namespaces.Add(new XmlNamespace(identifier, tokens[1]));
+                        namespaces.Add(new Core.W3c.XmlNamespace(identifier, tokens[1]));
                     }
                 }
             }
@@ -227,9 +183,9 @@ namespace Gnosis.Core
             return namespaces;
         }
 
-        public static IXmlStyleSheet ToXmlStyleSheet(this XmlNode node)
+        public static Core.W3c.IXmlStyleSheet ToXmlStyleSheet(this System.Xml.XmlNode node)
         {
-            if (node == null || !(node is XmlProcessingInstruction) || node.Name != "xml-stylesheet")
+            if (node == null || !(node is System.Xml.XmlProcessingInstruction) || node.Name != "xml-stylesheet")
                 return null;
 
             var type = MediaType.TextCss;
@@ -263,177 +219,8 @@ namespace Gnosis.Core
             }
 
             return (href != null) ?
-                new XmlStyleSheet(type, media, href)
+                new Core.W3c.XmlStyleSheet(type, media, href)
                 : null;
-        }
-
-        public static Core.Xml.IXmlQualifiedName ToXmlQualifiedName(this XmlNode self)
-        {
-            if (self == null)
-                throw new ArgumentNullException("self");
-
-            return self.Name != null ?
-                Core.Xml.XmlQualifiedName.Parse(self.Name)
-                : null;
-        }
-
-        public static Core.Xml.IXmlDeclaration ToXmlDeclaration(this XmlNode self)
-        {
-            if (self == null)
-                throw new ArgumentNullException("self");
-
-            var node = self as XmlDeclaration;
-            if (node == null)
-                return null;
-
-            var version = node.Version ?? "1.0";
-            var encoding = CharacterSet.Parse(node.Encoding);
-            var standalone = Core.Xml.XmlStandalone.Undefined;
-            if (node.Standalone != null)
-            {
-                if (node.Standalone.ToLower() == "yes")
-                    standalone = Core.Xml.XmlStandalone.Yes;
-                else if (node.Standalone.ToLower() == "no")
-                    standalone = Core.Xml.XmlStandalone.No;
-            }
-
-            return new Core.Xml.XmlDeclaration(version, encoding, standalone);
-        }
-
-        public static Core.Xml.IXmlProcessingInstruction ToXmlProcessingInstruction(this XmlNode self)
-        {
-            if (self == null)
-                throw new ArgumentNullException("self");
-
-            var node = self as System.Xml.XmlProcessingInstruction;
-            if (node == null || node.Target == null)
-                return null;
-
-            return Core.Xml.XmlProcessingInstruction.Parse(node.Target, node.InnerText);
-        }
-
-        public static Core.Xml.IXmlComment ToXmlComment(this XmlNode self)
-        {
-            if (self == null)
-                throw new ArgumentNullException("self");
-
-            var node = self as System.Xml.XmlComment;
-            if (node == null)
-                return null;
-
-            return new Core.Xml.XmlComment(node.InnerText);
-        }
-
-        public static IEnumerable<Core.Xml.IXmlComment> ToXmlComments(this XmlNode self)
-        {
-            if (self == null)
-                throw new ArgumentNullException("self");
-
-            var comments = new List<Core.Xml.IXmlComment>();
-
-            foreach (var node in self.ChildNodes.OfType<System.Xml.XmlComment>())
-                comments.AddIfNotNull(node.ToXmlComment());
-
-            return comments;
-        }
-
-        public static IEnumerable<Core.Xml.IXmlAttribute> ToXmlAttributes(this XmlNode self)
-        {
-            if (self == null)
-                throw new ArgumentNullException("self");
-
-            var attributes = new List<Core.Xml.IXmlAttribute>();
-
-            foreach (var node in self.Attributes.OfType<System.Xml.XmlAttribute>())
-            {
-                var attribute = Core.Xml.XmlAttribute.Parse(node.Name, node.Value);
-                if (attributeFactories.ContainsKey(node.Name) && attributeFactories[node.Name].IsValidFor(attribute))
-                {
-                    attributes.AddIfNotNull(attributeFactories[node.Name].Create(node));
-                }
-                else
-                {
-                    attributes.AddIfNotNull(attribute);
-                }
-            }
-
-            return attributes;
-        }
-
-        public static Core.Xml.IXmlCharacterData ToXmlCharacterData(this XmlNode self)
-        {
-            if (self == null)
-                throw new ArgumentNullException("self");
-
-            switch (self.NodeType)
-            {
-                case XmlNodeType.CDATA:
-                    return new Core.Xml.XmlCDataSection(self.InnerText);
-                case XmlNodeType.Element:
-                    {
-                        var count = self.ChildNodes.OfType<XmlElement>().Count();
-                        return count == 0 && self.InnerText != null ?
-                            new Core.Xml.XmlEscapedSection(self.InnerText)
-                            : null;
-                    }
-                case XmlNodeType.Text:
-                    return new Core.Xml.XmlEscapedSection(self.InnerText);
-                default:
-                    return null;
-            }
-        }
-
-        public static Core.Xml.IXmlElement ToXmlElement(this XmlNode self)
-        {
-            if (self == null)
-                throw new ArgumentNullException("self");
-
-            return self.ToXmlElement(null);
-        }
-
-        public static Core.Xml.IXmlNode ToXmlNode(this XmlNode self)
-        {
-            if (self == null)
-                throw new ArgumentNullException("self");
-
-            switch (self.NodeType)
-            {
-                case XmlNodeType.Comment:
-                    return self.ToXmlComment();
-                case XmlNodeType.Element:
-                    return self.ToXmlElement();
-                case XmlNodeType.CDATA:
-                    return self.ToXmlCharacterData();
-                case XmlNodeType.Text:
-                    return self.ToXmlCharacterData();
-                default:
-                    return null;
-            }
-        }
-
-        public static Core.Xml.IXmlElement ToXmlElement(this XmlNode self, Core.Xml.IXmlElement parent)
-        {
-            if (self == null)
-                throw new ArgumentNullException("self");
-
-            if (self.NodeType != XmlNodeType.Element)
-                return null;
-
-            var children = new List<Core.Xml.IXmlNode>();
-            var name = self.ToXmlQualifiedName();
-            var attributes = self.ToXmlAttributes();
-
-            foreach (var child in self.ChildNodes.OfType<System.Xml.XmlNode>())
-            {
-                var childNode = child.ToXmlNode();
-
-                if (childNode != null)
-                    children.Add(childNode);
-            }
-
-            var element = new Core.Xml.XmlElement(parent, children, name, attributes);
-
-            return element;
         }
     }
 }

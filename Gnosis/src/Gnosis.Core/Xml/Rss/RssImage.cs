@@ -6,9 +6,9 @@ using System.Text;
 namespace Gnosis.Core.Xml.Rss
 {
     public class RssImage
-        : XmlElement, IRssImage
+        : Element, IRssImage
     {
-        public RssImage(IXmlNode parent, IEnumerable<IXmlNode> children, IXmlQualifiedName name, IEnumerable<IXmlAttribute> attributes)
+        public RssImage(INode parent, IEnumerable<INode> children, IQualifiedName name, IEnumerable<IAttribute> attributes)
             : base(parent, children, name, attributes)
         {
         }

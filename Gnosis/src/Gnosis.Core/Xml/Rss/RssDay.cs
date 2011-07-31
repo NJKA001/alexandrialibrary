@@ -6,9 +6,9 @@ using System.Text;
 namespace Gnosis.Core.Xml.Rss
 {
     public class RssDay
-        : XmlElement, IRssDay
+        : Element, IRssDay
     {
-        public RssDay(IXmlNode parent, IEnumerable<IXmlNode> children, IXmlQualifiedName name, IEnumerable<IXmlAttribute> attributes)
+        public RssDay(INode parent, IEnumerable<INode> children, IQualifiedName name, IEnumerable<IAttribute> attributes)
             : base(parent, children, name, attributes)
         {
         }
@@ -17,7 +17,7 @@ namespace Gnosis.Core.Xml.Rss
         {
             get
             {
-                var child = Children.FirstOrDefault() as IXmlCharacterData;
+                var child = Children.FirstOrDefault() as ICharacterData;
 
                 return (child != null && child.Content != null && Enum.IsDefined(typeof(Day), child.Content)) ?
                     (Day)Enum.Parse(typeof(Day), child.Content)

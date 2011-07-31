@@ -9,7 +9,7 @@ using Gnosis.Core.W3c;
 namespace Gnosis.Core.Xml.Rss
 {
     public interface IRssChannel
-        : IXmlElement
+        : IElement
     {
         string Title { get; }
         Uri Link { get; }

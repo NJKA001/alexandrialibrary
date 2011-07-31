@@ -14,7 +14,7 @@ namespace Gnosis.Tests.Models
     [TestFixture]
     public class XmlTests
     {
-        private void MakeArsXmlAssertions(IXmlDocument xml)
+        private void MakeArsXmlAssertions(IDocument xml)
         {
             #region Constants
 
@@ -37,34 +37,37 @@ namespace Gnosis.Tests.Models
             foreach (var child in xml.Root.Children)
                 Assert.IsNotNull(child.Parent);
 
-            Assert.AreEqual(linksCount, xml.Root.Where<IXmlElement>(elem => elem.Name.LocalPart == "link").Count());
-            Assert.AreEqual(atomLinksCount, xml.Root.Where<IXmlElement>(elem => elem.Name.Prefix == "atom10" && elem.Name.LocalPart == "link").Count());
-            Assert.AreEqual(commentsCount, xml.Root.Where<IXmlComment>(comment => comment != null).Count());
-            Assert.AreEqual(mediaCreditCount, xml.Root.Where<IXmlElement>(elem => elem.Name.ToString() == "media:credit").Count());
-            Assert.AreEqual(escapedCount, xml.Root.Where<IXmlEscapedSection>(esc => esc != null).Count());
+            Assert.AreEqual(linksCount, xml.Root.Where<IElement>(elem => elem.Name.LocalPart == "link").Count());
+            Assert.AreEqual(atomLinksCount, xml.Root.Where<IElement>(elem => elem.Name.Prefix == "atom10" && elem.Name.LocalPart == "link").Count());
+            Assert.AreEqual(commentsCount, xml.Root.Where<IComment>(comment => comment != null).Count());
+            Assert.AreEqual(mediaCreditCount, xml.Root.Where<IElement>(elem => elem.Name.ToString() == "media:credit").Count());
+            Assert.AreEqual(escapedCount, xml.Root.Where<IEscapedSection>(esc => esc != null).Count());
             Assert.AreEqual(rootNamespaceCount, xml.Root.Namespaces.Count());
-            Assert.AreEqual(namespaceCount, xml.Root.Where<IXmlNamespace>(ns => ns != null).DistinctBy(ns => ns.Name.ToString()).Count());
+            Assert.AreEqual(namespaceCount, xml.Root.Where<INamespace>(ns => ns != null).DistinctBy(ns => ns.Name.ToString()).Count());
             Assert.AreEqual(attribCount, xml.Root.Attributes.Count());
             Assert.IsTrue(xml.Root.Attributes.All(attrib => attrib != null && attrib.Parent == xml.Root));
-            Assert.IsNotNull(xml.Root.Attributes.Where(x => x.Name.ToString() == "xml:base").FirstOrDefault() as XmlBaseAttribute);
-            Assert.IsNotNull(xml.Root.Attributes.Where(x => x.Name.Prefix == "xmlns").FirstOrDefault() as IXmlNamespace);
+            Assert.IsNotNull(xml.Root.Attributes.Where(x => x.Name.ToString() == "xml:base").FirstOrDefault() as BaseAttribute);
+            Assert.IsNotNull(xml.Root.Attributes.Where(x => x.Name.Prefix == "xmlns").FirstOrDefault() as INamespace);
             
-            var xmlBaseAttrib = xml.Root.Where<IXmlAttribute>(attrib => attrib != null && attrib.Name.ToString() == "xml:base").FirstOrDefault() as IXmlBaseAttribute;
+            var xmlBaseAttrib = xml.Root.Where<IAttribute>(attrib => attrib != null && attrib.Name.ToString() == "xml:base").FirstOrDefault() as IBaseAttribute;
             Assert.IsNotNull(xmlBaseAttrib);
             Assert.IsNotNull(xmlBaseAttrib.Value);
             Assert.AreEqual(xmlBaseUri, xmlBaseAttrib.Value.ToString());
 
-            var xmlLangAttrib = xml.Root.Where<IXmlAttribute>(attrib => attrib != null && attrib.Name.ToString() == "xml:lang").FirstOrDefault() as IXmlLangAttribute;
+            var xmlLangAttrib = xml.Root.Where<IAttribute>(attrib => attrib != null && attrib.Name.ToString() == "xml:lang").FirstOrDefault() as ILangAttribute;
             Assert.IsNotNull(xmlLangAttrib);
             Assert.IsNotNull(xmlLangAttrib.Value);
             Assert.AreEqual(xmlLang, xmlLangAttrib.Value.ToString());
 
-            var channel = xml.Root.Where<IXmlElement>(elem => elem.Name.ToString() == "channel").FirstOrDefault();
+            var channel = xml.Root.Where<IElement>(elem => elem.Name.ToString() == "channel").FirstOrDefault();
             Assert.IsNotNull(channel);
             Assert.AreEqual(channelChildCount, channel.ChildElements.Count());
-            var link = channel.Where<IXmlElement>(elem => elem.Name.ToString() == "link").FirstOrDefault();
+            var link = channel.Where<IElement>(elem => elem.Name.ToString() == "link").FirstOrDefault();
             Assert.IsNotNull(link);
             Assert.IsNotNull(link.Children.FirstOrDefault());
+
+            var rss = xml.Root as Core.Xml.Rss.IRss;
+            Assert.IsNotNull(rss);
         }
 
         [Test]
@@ -95,7 +98,7 @@ namespace Gnosis.Tests.Models
             var output = original.ToString();
             System.Diagnostics.Debug.WriteLine(output);
 
-            var xml = XmlDocument.Parse(output);
+            var xml = Document.Parse(output);
             MakeArsXmlAssertions(xml);
         }
 

@@ -6,9 +6,9 @@ using System.Text;
 namespace Gnosis.Core.Xml.Rss
 {
     public class RssHour
-        : XmlElement, IRssHour
+        : Element, IRssHour
     {
-        public RssHour(IXmlNode parent, IEnumerable<IXmlNode> children, IXmlQualifiedName name, IEnumerable<IXmlAttribute> attributes)
+        public RssHour(INode parent, IEnumerable<INode> children, IQualifiedName name, IEnumerable<IAttribute> attributes)
             : base(parent, children, name, attributes)
         {
         }
@@ -17,7 +17,7 @@ namespace Gnosis.Core.Xml.Rss
         {
             get
             {
-                var child = Children.FirstOrDefault() as IXmlCharacterData;
+                var child = Children.FirstOrDefault() as ICharacterData;
 
                 return (child != null && child.Content != null && Enum.IsDefined(typeof(Hour), child.Content)) ?
                     (Hour)Enum.Parse(typeof(Hour), child.Content)

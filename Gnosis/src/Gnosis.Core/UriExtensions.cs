@@ -124,13 +124,13 @@ namespace Gnosis.Core
             }
         }
 
-        public static Core.Xml.IXmlDocument ToXmlDocument(this Uri self)
+        public static Core.Xml.IDocument ToXmlDocument(this Uri self)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
 
             var xml = self.ToContentString();
-            return Core.Xml.XmlDocument.Parse(xml);
+            return Core.Xml.Document.Parse(xml);
         }
 
         public static IRssFeed ToRssFeed(this Uri location)

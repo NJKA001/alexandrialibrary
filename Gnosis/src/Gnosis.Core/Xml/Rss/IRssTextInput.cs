@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Xml.Rss
 {
     public interface IRssTextInput
-        : IXmlElement
+        : IElement
     {
         string Title { get; }
         string Description { get; }

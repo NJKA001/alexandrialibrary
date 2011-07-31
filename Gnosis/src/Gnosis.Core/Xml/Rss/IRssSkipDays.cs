@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Xml.Rss
 {
     public interface IRssSkipDays
-        : IXmlElement
+        : IElement
     {
         IEnumerable<IRssDay> Days { get; }
     }
