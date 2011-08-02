@@ -6,6 +6,8 @@ using System.Xml;
 
 using Gnosis.Core.W3c;
 
+using HtmlAgilityPack;
+
 namespace Gnosis.Core.Xml
 {
     public class Document
@@ -59,6 +61,32 @@ namespace Gnosis.Core.Xml
                 xml.AppendLine(child.ToString());
 
             return xml.ToString();
+        }
+
+        public static IDocument ParseHtml(Uri location)
+        {
+            if (location == null)
+                throw new ArgumentNullException("location");
+
+            var html = location.ToXhtml();
+
+            foreach (var childNode in html.DocumentNode.ChildNodes.OfType<HtmlNode>())
+            {
+                System.Diagnostics.Debug.WriteLine("childNode. HtmlNodeType=" + childNode.NodeType + " name=" + childNode.Name);
+                switch (childNode.NodeType)
+                {
+                    case HtmlNodeType.Comment:
+                        System.Diagnostics.Debug.WriteLine("  comment. text=" + childNode.InnerText);
+                        break;
+                    case HtmlNodeType.Element:
+                        System.Diagnostics.Debug.WriteLine("  element. html=" + childNode.InnerHtml);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return null;
         }
 
         public static IDocument Parse(string xml)

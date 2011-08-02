@@ -133,6 +133,28 @@ namespace Gnosis.Core
             return Core.Xml.Document.Parse(xml);
         }
 
+        public static HtmlAgilityPack.HtmlDocument ToXhtml(this Uri self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var html = self.ToContentString();
+            var doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(html);
+            return doc;
+        }
+
+        public static Core.Xml.Xhtml.XhtmlDocument ToXhtmlDocument(this Uri self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var html = self.ToContentString();
+            var doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(html);
+            return new Core.Xml.Xhtml.XhtmlDocument(doc);
+        }
+
         public static IRssFeed ToRssFeed(this Uri location)
         {
             if (location == null)

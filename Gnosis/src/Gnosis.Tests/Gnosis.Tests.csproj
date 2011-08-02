@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.4.0.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\HtmlAgilityPack\1.4.0\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\lib\NUnit\NUnit-2.5.10.11092\bin\net-2.0\nunit.framework.dll</HintPath>
     </Reference>
@@ -63,6 +67,7 @@
     <Compile Include="Models\RssTests.cs" />
     <Compile Include="Models\ScriptTests.cs" />
     <Compile Include="Models\TrackTests.cs" />
+    <Compile Include="Models\XhtmlTests.cs" />
     <Compile Include="Models\XmlTests.cs" />
     <Compile Include="Repositories\TrackRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,6 +100,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Files\13 - Loca %28Featuring Dizzee Rascal%29.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\arstechnica.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Files\arstechnica.xml">
