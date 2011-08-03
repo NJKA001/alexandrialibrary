@@ -8,7 +8,7 @@ namespace Gnosis.Core.Xml
     public class Namespace
         : Attribute, INamespace
     {
-        private Namespace(INode parent, IQualifiedName name, Uri identifier)
+        protected Namespace(INode parent, IQualifiedName name, Uri identifier)
             : base(parent, name, identifier.ToString())
         {
             this.identifier = identifier;

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core.DublinCore
+namespace Gnosis.Core.Xml.DublinCore
 {
-    public interface IDcProvenance
-        : IQualifiedDublinCoreElement
+    public interface ISimpleDublinCoreElement
+        : IDublinCoreElement
     {
     }
 }

@@ -5,9 +5,9 @@ using System.Text;
 
 using Gnosis.Core.W3c;
 
-namespace Gnosis.Core.DublinCore
+namespace Gnosis.Core.Xml.DublinCore
 {
-    public interface IDcDescription
+    public interface IDcFormat
         : ISimpleDublinCoreElement
     {
     }
