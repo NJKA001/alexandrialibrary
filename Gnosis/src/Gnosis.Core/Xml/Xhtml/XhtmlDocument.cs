@@ -29,7 +29,7 @@ namespace Gnosis.Core.Xml.Xhtml
 
             foreach (var childNode in htmlDoc.DocumentNode.ChildNodes.OfType<HtmlNode>())
             {
-                System.Diagnostics.Debug.WriteLine("childNode. HtmlNodeType=" + childNode.NodeType + " name=" + childNode.Name);
+                System.Diagnostics.Debug.WriteLine("childNode. HtmlNodeType=" + childNode.NodeType + " name=" + childNode.Name + " type=" + childNode.GetType().Name);
                 switch (childNode.NodeType)
                 {
                     case HtmlNodeType.Comment:
