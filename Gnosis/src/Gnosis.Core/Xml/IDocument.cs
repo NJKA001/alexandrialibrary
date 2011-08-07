@@ -11,6 +11,7 @@ namespace Gnosis.Core.Xml
         : IMarkup
     {
         IDeclaration Declaration { get; }
+        IDocumentType DocumentType { get; }
         IEnumerable<IProcessingInstruction> ProcessingInstructions { get; }
         IEnumerable<IComment> Comments { get; }
         IElement Root { get; }

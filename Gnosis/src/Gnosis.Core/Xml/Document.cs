@@ -23,11 +23,16 @@ namespace Gnosis.Core.Xml
             get { return Children.Where(node => node != null && (node is IComment || node is IElement)); }
         }
 
-        #region IXmlDocument Members
+        #region IDocument Members
 
         public IDeclaration Declaration
         {
             get { return Children.OfType<IDeclaration>().FirstOrDefault(); }
+        }
+
+        public IDocumentType DocumentType
+        {
+            get { return Children.OfType<IDocumentType>().FirstOrDefault(); }
         }
 
         public IEnumerable<IProcessingInstruction> ProcessingInstructions
@@ -63,31 +68,31 @@ namespace Gnosis.Core.Xml
             return xml.ToString();
         }
 
-        public static IDocument ParseHtml(Uri location)
-        {
-            if (location == null)
-                throw new ArgumentNullException("location");
+        //public static IDocument ParseHtml(Uri location)
+        //{
+        //    if (location == null)
+        //        throw new ArgumentNullException("location");
 
-            var html = location.ToXhtml();
+        //    var html = location.ToXhtml();
 
-            foreach (var childNode in html.DocumentNode.ChildNodes.OfType<HtmlNode>())
-            {
-                System.Diagnostics.Debug.WriteLine("childNode. HtmlNodeType=" + childNode.NodeType + " name=" + childNode.Name);
-                switch (childNode.NodeType)
-                {
-                    case HtmlNodeType.Comment:
-                        System.Diagnostics.Debug.WriteLine("  comment. text=" + childNode.InnerText);
-                        break;
-                    case HtmlNodeType.Element:
-                        System.Diagnostics.Debug.WriteLine("  element. html=" + childNode.InnerHtml);
-                        break;
-                    default:
-                        break;
-                }
-            }
+        //    foreach (var childNode in html.DocumentNode.ChildNodes.OfType<HtmlNode>())
+        //    {
+        //        System.Diagnostics.Debug.WriteLine("childNode. HtmlNodeType=" + childNode.NodeType + " name=" + childNode.Name);
+        //        switch (childNode.NodeType)
+        //        {
+        //            case HtmlNodeType.Comment:
+        //                System.Diagnostics.Debug.WriteLine("  comment. text=" + childNode.InnerText);
+        //                break;
+        //            case HtmlNodeType.Element:
+        //                System.Diagnostics.Debug.WriteLine("  element. html=" + childNode.InnerHtml);
+        //                break;
+        //            default:
+        //                break;
+        //        }
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
         public static IDocument Parse(string xml)
         {

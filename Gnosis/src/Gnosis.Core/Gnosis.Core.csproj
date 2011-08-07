@@ -231,8 +231,10 @@
     <Compile Include="Xml\IComment.cs" />
     <Compile Include="Xml\IDeclaration.cs" />
     <Compile Include="Xml\IDocument.cs" />
+    <Compile Include="Xml\IDocumentType.cs" />
     <Compile Include="Xml\IElement.cs" />
     <Compile Include="Xml\IElementFactory.cs" />
+    <Compile Include="Xml\IEntity.cs" />
     <Compile Include="Xml\IEscapedSection.cs" />
     <Compile Include="Xml\ILangAttribute.cs" />
     <Compile Include="Xml\IMarkup.cs" />
@@ -286,6 +288,7 @@
     <Compile Include="Xml\LangAttribute.cs" />
     <Compile Include="Xml\Namespace.cs" />
     <Compile Include="Xml\Node.cs" />
+    <Compile Include="Xml\Xhtml\HtmlNodeExtensions.cs" />
     <Compile Include="Xml\Xhtml\XhtmlDocument.cs" />
     <Compile Include="Xml\XmlNodeExtensions.cs" />
     <Compile Include="Xml\ProcessingInstruction.cs" />
