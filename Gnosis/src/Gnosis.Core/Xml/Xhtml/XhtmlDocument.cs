@@ -15,8 +15,6 @@ namespace Gnosis.Core.Xml.Xhtml
         {
         }
 
-        private readonly HtmlDocument document;
-
         public static XhtmlDocument Parse(string html)
         {
             if (html == null)

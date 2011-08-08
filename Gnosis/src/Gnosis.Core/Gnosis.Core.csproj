@@ -98,6 +98,7 @@
     <Compile Include="Atom\IAtomFeed.cs" />
     <Compile Include="Atom\IAtomPerson.cs" />
     <Compile Include="DictionaryExtensions.cs" />
+    <Compile Include="Xml\DocumentType.cs" />
     <Compile Include="Xml\DublinCore\DcAccrualMethod.cs" />
     <Compile Include="Xml\DublinCore\DublinCoreElement.cs" />
     <Compile Include="Xml\DublinCore\DublinCoreNamespace.cs" />
@@ -223,6 +224,9 @@
     <Compile Include="Xml\Atom\IAtomTitle.cs" />
     <Compile Include="Xml\Atom\IAtomUpdated.cs" />
     <Compile Include="Xml\ElementFactory.cs" />
+    <Compile Include="Xml\Entity.cs" />
+    <Compile Include="Xml\EntityType.cs" />
+    <Compile Include="Xml\EntityVisibility.cs" />
     <Compile Include="Xml\IAttribute.cs" />
     <Compile Include="Xml\IAttributeFactory.cs" />
     <Compile Include="Xml\IBaseAttribute.cs" />

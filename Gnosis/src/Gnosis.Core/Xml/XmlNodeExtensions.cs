@@ -262,6 +262,22 @@ namespace Gnosis.Core.Xml
             return children;
         }
 
+        public static IEntity ToEntity(this XmlNode self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            return null;
+        }
+
+        public static IDocumentType ToDocumentType(this XmlNode self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            return null;
+        }
+
         public static IElement ToElement(this XmlNode self)
         {
             if (self == null)
