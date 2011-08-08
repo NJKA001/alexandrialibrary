@@ -113,6 +113,11 @@ namespace Gnosis.Core.Xml
                         if (declaration != null)
                             doc.AddChild(declaration);
                         break;
+                    case XmlNodeType.DocumentType:
+                        var documentType = child.ToDocumentType(doc);
+                        if (documentType != null)
+                            doc.AddChild(documentType);
+                        break;
                     case XmlNodeType.ProcessingInstruction:
                         var processingInstruction = child.ToProcessingInstruction(doc);
                         if (processingInstruction != null)

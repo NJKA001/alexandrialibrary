@@ -52,7 +52,7 @@ namespace Gnosis.Tests.Models
             Assert.IsTrue(xml.Root.Attributes.All(attrib => attrib != null && attrib.Parent == xml.Root));
             Assert.IsNotNull(xml.Root.Attributes.Where(x => x.Name.ToString() == "xml:base").FirstOrDefault() as BaseAttribute);
             Assert.IsNotNull(xml.Root.Attributes.Where(x => x.Name.Prefix == "xmlns").FirstOrDefault() as INamespace);
-            
+
             var xmlBaseAttrib = xml.Root.Where<IAttribute>(attrib => attrib != null && attrib.Name.ToString() == "xml:base").FirstOrDefault() as IBaseAttribute;
             Assert.IsNotNull(xmlBaseAttrib);
             Assert.IsNotNull(xmlBaseAttrib.Value);

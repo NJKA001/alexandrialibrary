@@ -11,7 +11,7 @@ namespace Gnosis.Core.Xml
         string RootElement { get; }
         EntityVisibility Visibility { get; }
         string FormalPublicIdentifier { get; }
-        Uri Uri { get; }
+        string SystemIdentifier { get; }
 
         IEnumerable<IEntity> ChildEntities { get; }
     }

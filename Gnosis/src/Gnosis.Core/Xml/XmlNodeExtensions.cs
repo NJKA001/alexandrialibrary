@@ -233,6 +233,8 @@ namespace Gnosis.Core.Xml
             {
                 case XmlNodeType.Comment:
                     return self.ToComment(parent);
+                case XmlNodeType.DocumentType:
+                    return self.ToDocumentType(parent);
                 case XmlNodeType.Element:
                     return self.ToElement(parent);
                 case XmlNodeType.CDATA:
@@ -270,12 +272,21 @@ namespace Gnosis.Core.Xml
             return null;
         }
 
-        public static IDocumentType ToDocumentType(this XmlNode self)
+        public static IDocumentType ToDocumentType(this XmlNode self, INode parent)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
+            if (parent == null)
+                throw new ArgumentNullException("parent");
 
-            return null;
+            if (self.NodeType != XmlNodeType.DocumentType)
+                return null;
+
+            var docType = self as XmlDocumentType;
+            if (docType == null)
+                return null;
+
+            return DocumentType.Parse(parent, docType.Name, docType.PublicId, docType.SystemId, docType.InternalSubset, docType.OuterXml);
         }
 
         public static IElement ToElement(this XmlNode self)

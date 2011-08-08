@@ -27,22 +27,9 @@ namespace Gnosis.Core.Xml.Xhtml
 
             foreach (var childNode in htmlDoc.DocumentNode.ChildNodes.OfType<HtmlNode>())
             {
-                System.Diagnostics.Debug.WriteLine("childNode. HtmlNodeType=" + childNode.NodeType + " name=" + childNode.Name + " type=" + childNode.GetType().Name);
-                switch (childNode.NodeType)
-                {
-                    case HtmlNodeType.Comment:
-                        System.Diagnostics.Debug.WriteLine("  comment. innerText=" + childNode.InnerText);
-                        break;
-                    case HtmlNodeType.Element:
-                        System.Diagnostics.Debug.WriteLine("  element. innerHtml=" + childNode.InnerHtml);
-                        break;
-                    case HtmlNodeType.Text:
-                        System.Diagnostics.Debug.WriteLine("  text. innerText=" + childNode.InnerText);
-                        break;
-                    default:
-                        System.Diagnostics.Debug.WriteLine("  other. type=" + childNode.NodeType + " name=" + childNode.Name);
-                        break;
-                }
+                var child = childNode.ToNode(doc);
+                if (child != null)
+                    doc.AddChild(child);
             }
 
             return doc;
