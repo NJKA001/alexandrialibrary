@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Core.W3c;
 using Gnosis.Core.Xml;
 
 using NUnit.Framework;
@@ -26,10 +27,17 @@ namespace Gnosis.Tests.Models
             var xhtml = location.ToXhtmlDocument();
             Assert.IsNotNull(xhtml);
             Assert.AreEqual(2, xhtml.Children.OfType<IComment>().Count());
-            //Assert.IsNotNull(xhtml.Document);
-            //Assert.IsNotNull(xhtml.Document.DocumentNode);
 
-            //Gnosis.Core.Xml.Document.ParseHtml(location);
+            var declaration = xhtml.Children.OfType<IDeclaration>().FirstOrDefault();
+            Assert.IsNotNull(declaration);
+            Assert.AreEqual(CharacterSet.Utf8, declaration.Encoding);
+            Assert.AreEqual("1.0", declaration.Version);
+
+            var root = xhtml.Children.OfType<IElement>().FirstOrDefault();
+            Assert.IsNotNull(root);
+            Assert.AreEqual("html", root.Name.ToString());
+            Assert.AreEqual(8, xhtml.Where<IElement>(x => x.Name.ToString() == "link").Count());
+            Assert.AreEqual(277, xhtml.Where<IElement>(x => x.Name.ToString() == "div").Count());
         }
 
         [Test]
