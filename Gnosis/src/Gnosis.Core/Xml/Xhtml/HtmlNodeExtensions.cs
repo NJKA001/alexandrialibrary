@@ -151,6 +151,16 @@ namespace Gnosis.Core.Xml.Xhtml
                 return null;
         }
 
+        public static IEscapedSection ToEscapedSection(this HtmlNode self, INode parent)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+            if (parent == null)
+                throw new ArgumentNullException("parent");
+
+            return new EscapedSection(parent, self.InnerHtml ?? string.Empty);
+        }
+
         public static INode ToNode(this HtmlNode self, INode parent)
         {
             if (self == null)
@@ -167,8 +177,9 @@ namespace Gnosis.Core.Xml.Xhtml
                         return self.ToDeclaration(parent);
                     else
                         return self.ToElement(parent);
-                case HtmlNodeType.Document:
                 case HtmlNodeType.Text:
+                    return self.ToEscapedSection(parent);
+                case HtmlNodeType.Document:
                 default:
                     return null;
             }

@@ -144,7 +144,7 @@ namespace Gnosis.Core
         //    return doc;
         //}
 
-        public static Core.Xml.Xhtml.XhtmlDocument ToXhtmlDocument(this Uri self)
+        public static Core.Xml.IDocument ToXhtmlDocument(this Uri self)
         {
             if (self == null)
                 throw new ArgumentNullException("self");

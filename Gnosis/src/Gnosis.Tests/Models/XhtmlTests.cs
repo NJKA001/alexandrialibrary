@@ -6,6 +6,7 @@ using System.Text;
 using Gnosis.Core;
 using Gnosis.Core.W3c;
 using Gnosis.Core.Xml;
+using Gnosis.Core.Xml.Xhtml;
 
 using NUnit.Framework;
 
@@ -14,17 +15,10 @@ namespace Gnosis.Tests.Models
     [TestFixture]
     public class XhtmlTests
     {
-        [Test]
-        public void TestArsTechnicaXhtml()
+        private static void MakeDocumentAssertions(IDocument xhtml)
         {
-            const string path = @".\Files\arstechnica.html";
+            const string paragraphContent = "How stable will the West Antarctic Ice sheet be as";
 
-            var fileInfo = new System.IO.FileInfo(path);
-            Assert.IsTrue(fileInfo.Exists);
-
-            var location = new Uri(fileInfo.FullName);
-
-            var xhtml = location.ToXhtmlDocument();
             Assert.IsNotNull(xhtml);
             Assert.AreEqual(2, xhtml.Children.OfType<IComment>().Count());
 
@@ -38,6 +32,37 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual("html", root.Name.ToString());
             Assert.AreEqual(8, xhtml.Where<IElement>(x => x.Name.ToString() == "link").Count());
             Assert.AreEqual(277, xhtml.Where<IElement>(x => x.Name.ToString() == "div").Count());
+            var p = xhtml.Where<IElement>(x => x.Name.ToString() == "p" && x.ToString().Contains(paragraphContent)).FirstOrDefault();
+            Assert.IsNotNull(p);
+        }
+
+        [Test]
+        public void TestArsTechnicaXhtml()
+        {
+            const string path = @".\Files\arstechnica.html";
+
+            var fileInfo = new System.IO.FileInfo(path);
+            Assert.IsTrue(fileInfo.Exists);
+
+            var location = new Uri(fileInfo.FullName);
+
+            var xhtml = location.ToXhtmlDocument();
+            MakeDocumentAssertions(xhtml);
+        }
+
+        [Test]
+        public void TestArsTechnicaXhtmlFromXhtmlOutput()
+        {
+            const string path = @".\Files\arstechnica.html";
+
+            var fileInfo = new System.IO.FileInfo(path);
+            Assert.IsTrue(fileInfo.Exists);
+
+            var location = new Uri(fileInfo.FullName);
+
+            var original = location.ToXhtmlDocument();
+            var xhtml = XhtmlDocument.Parse(original.ToString());
+            MakeDocumentAssertions(xhtml);
         }
 
         [Test]
@@ -51,9 +76,10 @@ namespace Gnosis.Tests.Models
             var location = new Uri(fileInfo.FullName);
 
             var xml = location.ToXmlDocument();
-            Assert.IsNotNull(xml);
-            Assert.IsNotNull(xml.DocumentType);
-            Assert.AreEqual(EntityVisibility.Public, xml.DocumentType.Visibility);
+            MakeDocumentAssertions(xml);
+            //Assert.IsNotNull(xml);
+            //Assert.IsNotNull(xml.DocumentType);
+            //Assert.AreEqual(EntityVisibility.Public, xml.DocumentType.Visibility);
         }
 
     }
