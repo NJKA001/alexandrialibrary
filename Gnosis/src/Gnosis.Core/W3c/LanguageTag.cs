@@ -7,7 +7,7 @@ using Gnosis.Core;
 using Gnosis.Core.Iso;
 using Gnosis.Core.UN;
 
-namespace Gnosis.Core.Ietf
+namespace Gnosis.Core.W3c
 {
     public class LanguageTag
         : ILanguageTag

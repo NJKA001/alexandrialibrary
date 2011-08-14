@@ -10,6 +10,8 @@ using Gnosis.Core;
 using Gnosis.Core.Xml;
 using Gnosis.Core.Xml.Atom;
 using Gnosis.Core.Xml.Rss;
+using Gnosis.Core.Xml.Yahoo;
+using Gnosis.Core.W3c;
 
 namespace Gnosis.Tests.Models
 {
@@ -33,6 +35,7 @@ namespace Gnosis.Tests.Models
             const string xmlBaseUri = "http://arstechnica.com/";
             const string xmlLang = "en-US";
             const int channelChildCount = 47;
+            const int mediaRssContentCount = 20;
 
             #endregion
 
@@ -87,6 +90,11 @@ namespace Gnosis.Tests.Models
 
             var allLinks = rss.Where<IElement>(x => x != null && x.Name.LocalPart == "link");
             Assert.AreEqual(linksCount, allLinks.Count());
+
+            var mediaRssContents = rss.Where<IMediaContent>(x => x != null && x.Name.LocalPart == "content");
+            Assert.AreEqual(mediaRssContentCount, mediaRssContents.Count());
+            Assert.IsNotNull(mediaRssContents.FirstOrDefault());
+            Assert.AreEqual(MediaType.ImageJpeg, mediaRssContents.FirstOrDefault().Type);
         }
 
         [Test]

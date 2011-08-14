@@ -9,12 +9,12 @@ using System.Data.SQLite;
 
 using Gnosis.Core;
 using Gnosis.Core.Iso;
+using Gnosis.Core.W3c;
 using Gnosis.Data;
 using Gnosis.Data.Queries;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Feeds;
 using Gnosis.Alexandria.Repositories.Feeds;
-using Gnosis.Core.Ietf;
 
 namespace Gnosis.Tests.Repositories
 {

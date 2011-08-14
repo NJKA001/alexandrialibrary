@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core.Ietf;
 using Gnosis.Core.Iso;
 using Gnosis.Core.UN;
 using Gnosis.Core.W3c;
@@ -72,6 +71,22 @@ namespace Gnosis.Core
                 throw new InvalidOperationException("T must be an enum type");
 
             return (T)Enum.Parse(typeof(T), self.ToString());
+        }
+
+        public static T ToEnum<T>(this object self, T defaultValue)
+            where T : struct
+        {
+            if (!typeof(T).IsEnum)
+                return defaultValue;
+
+            try
+            {
+                return self.ToEnum<T>();
+            }
+            catch (Exception)
+            {
+                return defaultValue;
+            }
         }
 
         public static int ToInt32(this object self)

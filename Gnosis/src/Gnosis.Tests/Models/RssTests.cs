@@ -8,7 +8,6 @@ using System.Xml;
 using NUnit.Framework;
 
 using Gnosis.Core;
-using Gnosis.Core.Ietf;
 using Gnosis.Core.Iso;
 using Gnosis.Core.Rss;
 using Gnosis.Core.W3c;

@@ -131,8 +131,8 @@
     <Compile Include="FileInfoExtensions.cs" />
     <Compile Include="GuidExtensions.cs" />
     <Compile Include="Id3\IId3Tag.cs" />
-    <Compile Include="Ietf\ILanguageTag.cs" />
-    <Compile Include="Ietf\LanguageTag.cs" />
+    <Compile Include="W3c\ILanguageTag.cs" />
+    <Compile Include="W3c\LanguageTag.cs" />
     <Compile Include="ImageExtensions.cs" />
     <Compile Include="Iso\ICountry.cs" />
     <Compile Include="Iso\ILanguage.cs" />
@@ -299,10 +299,22 @@
     <Compile Include="Xml\QualifiedName.cs" />
     <Compile Include="Xml\Standalone.cs" />
     <Compile Include="Xml\StyleSheet.cs" />
+    <Compile Include="Xml\Yahoo\IMediaContent.cs" />
+    <Compile Include="Xml\Yahoo\IMediaGroup.cs" />
+    <Compile Include="Xml\Yahoo\IMediaRating.cs" />
+    <Compile Include="Xml\Yahoo\IMediaRssElement.cs" />
+    <Compile Include="Xml\Yahoo\IMediaTitle.cs" />
+    <Compile Include="Xml\Yahoo\IOptionalMediaRssElement.cs" />
+    <Compile Include="Xml\Yahoo\IPrimaryMediaRssElement.cs" />
+    <Compile Include="Xml\Yahoo\MediaContent.cs" />
+    <Compile Include="Xml\Yahoo\MediaRssExpression.cs" />
+    <Compile Include="Xml\Yahoo\MediaRssMedium.cs" />
+    <Compile Include="Xml\Yahoo\MediaRssNamespace.cs" />
+    <Compile Include="Xml\Yahoo\MediaRssTextType.cs" />
+    <Compile Include="Xml\Yahoo\MediaTitle.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Xml\Google\" />
-    <Folder Include="Xml\Yahoo\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

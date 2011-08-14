@@ -5,7 +5,6 @@ using System.Text;
 using System.Xml;
 
 using Gnosis.Core;
-using Gnosis.Core.Ietf;
 using Gnosis.Core.W3c;
 
 namespace Gnosis.Core.Rss

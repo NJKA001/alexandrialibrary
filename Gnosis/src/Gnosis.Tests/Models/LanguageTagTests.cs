@@ -6,9 +6,9 @@ using System.Text;
 using NUnit.Framework;
 
 using Gnosis.Core;
-using Gnosis.Core.Ietf;
 using Gnosis.Core.Iso;
 using Gnosis.Core.UN;
+using Gnosis.Core.W3c;
 
 namespace Gnosis.Tests.Models
 {

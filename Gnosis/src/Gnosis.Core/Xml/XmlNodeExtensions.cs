@@ -6,6 +6,7 @@ using System.Xml;
 
 using Gnosis.Core.Xml.Atom;
 using Gnosis.Core.Xml.Rss;
+using Gnosis.Core.Xml.Yahoo;
 
 namespace Gnosis.Core.Xml
 {
@@ -38,6 +39,10 @@ namespace Gnosis.Core.Xml
             MapCustomElement("skipHours", elem => elem.Parent is IRssChannel, (parent, name) => new RssSkipHours(parent, name));
             MapCustomElement("source", elem => elem.Parent is IRssItem, (parent, name) => new RssSource(parent, name));
             MapCustomElement("textInput", elem => elem.Parent is IRssChannel, (parent, name) => new RssImage(parent, name));
+
+            //Media RSS
+            MapCustomElement("content", elem => elem.Name.ToString() == "media:content", (parent, name) => new MediaContent(parent, name));
+            MapCustomElement("title", elem => elem.Namespaces.Where(ns => ns != null && ns.Identifier.ToString() == "http://search.yahoo.com/mrss/").FirstOrDefault() != null, (parent, name) => new MediaTitle(parent, name));
         }
 
         private static readonly IDictionary<string, IList<IAttributeFactory>> customAttributeFactories = new Dictionary<string, IList<IAttributeFactory>>();

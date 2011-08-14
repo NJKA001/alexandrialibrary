@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core.Ietf;
 using Gnosis.Core.W3c;
 
 namespace Gnosis.Core.Xml
@@ -39,6 +38,15 @@ namespace Gnosis.Core.Xml
 
             var number = 0;
             int.TryParse(s, out number);
+            return number;
+        }
+
+        protected long GetAttributeInt64(string name)
+        {
+            var s = GetAttributeString(name);
+
+            long number = 0;
+            long.TryParse(s, out number);
             return number;
         }
 
