@@ -8,7 +8,6 @@ using System.Xml;
 using NUnit.Framework;
 
 using Gnosis.Core;
-using Gnosis.Core.Iso;
 using Gnosis.Core.Rss;
 using Gnosis.Core.W3c;
 
@@ -62,9 +61,9 @@ namespace Gnosis.Tests.Models
             var skipHours = new List<RssHour> { RssHour.Zero, RssHour.One, RssHour.Two, RssHour.Twelve, RssHour.Thirteen, RssHour.Nineteen, RssHour.TwentyThree };
             var skipDays = new List<RssDay> { RssDay.Sunday, RssDay.Thursday, RssDay.Saturday };
 
-            const string ext1Prefix = "atom10";
-            const string ext1Name = "link";
-            const string ext1Namespace = "http://www.w3.org/2005/Atom";
+            const string ext1Prefix = "dc";
+            const string ext1Name = "title";
+            const string ext1Namespace = "http://purl.org/dc/elements/1.1/";
 
             const string item1Title = "Impressions from Uncharted 3: Drake's Deception's open beta ";
             const string item1Author = "joshmcillwain@gmail.com (Josh McIllwain)";
@@ -78,7 +77,7 @@ namespace Gnosis.Tests.Models
             Assert.IsNotNull(feed.Channel);
             Assert.AreEqual(version, feed.Version);
             Assert.AreEqual(2, feed.StyleSheets.Count());
-            Assert.AreEqual(2, feed.Namespaces.Count());
+            Assert.AreEqual(3, feed.Namespaces.Count());
 
             Assert.AreEqual(title, feed.Channel.Title);
             Assert.AreEqual(link, feed.Channel.Link.ToString());
@@ -118,11 +117,10 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(1, feed.Channel.Categories.Count());
             Assert.AreEqual(categoryDomain, feed.Channel.Categories.First().Domain.ToString());
             Assert.AreEqual(categoryName, feed.Channel.Categories.First().Name);
-            Assert.AreEqual(3, feed.Channel.Extensions.Count());
+            Assert.AreEqual(4, feed.Channel.Extensions.Count());
             Assert.AreEqual(ext1Name, feed.Channel.Extensions.First().Name);
             Assert.AreEqual(ext1Prefix, feed.Channel.Extensions.First().Prefix);
             Assert.IsNotNull(feed.Channel.Extensions.First().PrimaryNamespace);
-            Assert.AreEqual(ext1Namespace, feed.Channel.Extensions.First().PrimaryNamespace.Identifier.ToString());
             Assert.AreEqual(25, feed.Channel.Items.Count());
             var firstItem = feed.Channel.Items.First();
             Assert.IsNotNull(firstItem);

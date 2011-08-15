@@ -5,8 +5,11 @@ using System.Text;
 using System.Xml;
 
 using Gnosis.Core.Xml.Atom;
+using Gnosis.Core.Xml.DublinCore;
+using Gnosis.Core.Xml.FeedBurner;
 using Gnosis.Core.Xml.Rss;
-using Gnosis.Core.Xml.Yahoo;
+using Gnosis.Core.Xml.MediaRss;
+using Gnosis.Core.Xml.OpenSearch;
 
 namespace Gnosis.Core.Xml
 {
@@ -43,6 +46,15 @@ namespace Gnosis.Core.Xml
             //Media RSS
             MapCustomElement("content", elem => elem.Name.ToString() == "media:content", (parent, name) => new MediaContent(parent, name));
             MapCustomElement("title", elem => elem.Namespaces.Where(ns => ns != null && ns.Identifier.ToString() == "http://search.yahoo.com/mrss/").FirstOrDefault() != null, (parent, name) => new MediaTitle(parent, name));
+
+            //Open Search
+            MapCustomElement("totalResults", elem => elem.CurrentNamespace != null && elem.CurrentNamespace.Identifier.ToString().StartsWith("http://a9.com/-/spec/opensearchrss/"), (parent, name) => new OpenSearchTotalResults(parent, name));
+
+            //Feed Burner
+            MapCustomElement("info", elem => elem.CurrentNamespace != null && elem.CurrentNamespace.Identifier.ToString().StartsWith("http://rssnamespace.org/feedburner/ext/"), (parent, name) => new FeedBurnerInfo(parent, name));
+
+            //Dublin Core
+            MapCustomElement("title", elem => elem.CurrentNamespace != null && elem.CurrentNamespace.Identifier.ToString().StartsWith("http://purl.org/dc/elements/"), (parent, name) => new DcTitle(parent, name));
         }
 
         private static readonly IDictionary<string, IList<IAttributeFactory>> customAttributeFactories = new Dictionary<string, IList<IAttributeFactory>>();
@@ -124,7 +136,7 @@ namespace Gnosis.Core.Xml
                 return null;
 
             var version = node.Version ?? "1.0";
-            var encoding = Gnosis.Core.W3c.CharacterSet.Parse(node.Encoding);
+            var encoding = Gnosis.Core.CharacterSet.Parse(node.Encoding);
             var standalone = Core.Xml.Standalone.Undefined;
             if (node.Standalone != null)
             {

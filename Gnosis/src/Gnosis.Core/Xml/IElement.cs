@@ -15,7 +15,10 @@ namespace Gnosis.Core.Xml
         IEnumerable<IElement> ChildElements { get; }
         IEnumerable<INamespace> Namespaces { get; }
         IEnumerable<ICharacterData> CharacterDataSections { get; }
+        INamespace CurrentNamespace { get; }
 
         void AddAttribute(IAttribute attribute);
+
+        INamespace FindNamespace(string alias);
     }
 }

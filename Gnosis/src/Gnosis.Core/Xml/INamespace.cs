@@ -8,6 +8,7 @@ namespace Gnosis.Core.Xml
     public interface INamespace
         : IAttribute
     {
+        string Alias { get; }
         Uri Identifier { get; }
     }
 }

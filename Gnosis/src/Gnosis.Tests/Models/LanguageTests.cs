@@ -6,7 +6,6 @@ using System.Text;
 using NUnit.Framework;
 
 using Gnosis.Core;
-using Gnosis.Core.Iso;
 
 namespace Gnosis.Tests.Models
 {

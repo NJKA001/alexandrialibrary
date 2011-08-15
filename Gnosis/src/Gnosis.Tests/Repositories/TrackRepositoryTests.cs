@@ -10,7 +10,6 @@ using NUnit.Framework;
 using System.Data.SQLite;
 
 using Gnosis.Core;
-using Gnosis.Core.Iso;
 using Gnosis.Data;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Tracks;

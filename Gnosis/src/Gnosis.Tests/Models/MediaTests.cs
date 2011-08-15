@@ -5,7 +5,7 @@ using System.Text;
 
 using NUnit.Framework;
 
-using Gnosis.Core.W3c;
+using Gnosis.Core;
 
 namespace Gnosis.Tests.Models
 {

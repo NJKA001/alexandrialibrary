@@ -18,6 +18,11 @@ namespace Gnosis.Core.Xml
 
         #region IXmlNamespace Members
 
+        public string Alias
+        {
+            get { return Name.Prefix == null ? null : Name.LocalPart; }
+        }
+
         public Uri Identifier
         {
             get { return identifier; }

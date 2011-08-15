@@ -9,8 +9,11 @@ using NUnit.Framework;
 using Gnosis.Core;
 using Gnosis.Core.Xml;
 using Gnosis.Core.Xml.Atom;
+using Gnosis.Core.Xml.DublinCore;
+using Gnosis.Core.Xml.FeedBurner;
 using Gnosis.Core.Xml.Rss;
-using Gnosis.Core.Xml.Yahoo;
+using Gnosis.Core.Xml.MediaRss;
+using Gnosis.Core.Xml.OpenSearch;
 using Gnosis.Core.W3c;
 
 namespace Gnosis.Tests.Models
@@ -22,20 +25,23 @@ namespace Gnosis.Tests.Models
         {
             #region Constants
 
-            const int attribCount = 5;
+            const int attribCount = 6;
             const int linksCount = 30;
             const int rssLinksCount = 26;
             const int rootRssLinkCount = 1;
             const int atomLinksCount = 2;
             const int commentsCount = 3;
             const int mediaCreditCount = 22;
-            const int escapedCount = 364;
-            const int rootNamespaceCount = 2;
-            const int namespaceCount = 3;
+            const int escapedCount = 365;
+            const int rootNamespaceCount = 3;
+            const int namespaceCount = 4;
             const string xmlBaseUri = "http://arstechnica.com/";
             const string xmlLang = "en-US";
-            const int channelChildCount = 47;
+            const int channelChildCount = 48;
+            const string mediaRssNamespace = "http://search.yahoo.com/mrss/";
             const int mediaRssContentCount = 20;
+            const string feedBurnerInfoUri = "arstechnica/index";
+            const string dcTitleContent = "Ars Technica";
 
             #endregion
 
@@ -78,6 +84,7 @@ namespace Gnosis.Tests.Models
 
             var channel = rss.Children.FirstOrDefault() as IRssChannel;
             Assert.IsNotNull(channel);
+            Assert.IsNull(channel.CurrentNamespace);
 
             var links = rss.Where<IRssLink>(x => x != null);
             Assert.AreEqual(rssLinksCount, links.Count());
@@ -95,10 +102,36 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(mediaRssContentCount, mediaRssContents.Count());
             Assert.IsNotNull(mediaRssContents.FirstOrDefault());
             Assert.AreEqual(MediaType.ImageJpeg, mediaRssContents.FirstOrDefault().Type);
+            var firstContents = mediaRssContents.FirstOrDefault();
+            Assert.IsNotNull(firstContents.CurrentNamespace);
+            Assert.AreEqual(mediaRssNamespace, firstContents.CurrentNamespace.Identifier.ToString());
+
+            var feedBurnerInfo = rss.Where<IFeedBurnerInfo>(x => x != null).FirstOrDefault();
+            Assert.IsNotNull(feedBurnerInfo);
+            Assert.AreEqual(feedBurnerInfoUri, feedBurnerInfo.Uri.ToString());
+
+            var dcTitle = rss.Where<IDcTitle>(x => x != null).FirstOrDefault();
+            Assert.IsNotNull(dcTitle);
+            Assert.AreEqual(dcTitleContent, dcTitle.Content);
+        }
+
+        private void MakeAtomXmlAssertions(IDocument xml)
+        {
+            const string atomNamespace = "http://www.w3.org/2005/Atom";
+            const string openSearchNamespace = "http://a9.com/-/spec/opensearchrss/1.0/";
+
+            Assert.IsNotNull(xml);
+            var feed = xml.Where<IElement>(x => x.Name.LocalPart == "feed").FirstOrDefault();
+            Assert.IsNotNull(feed);
+            Assert.IsNotNull(feed.CurrentNamespace);
+            Assert.AreEqual(atomNamespace, feed.CurrentNamespace.Identifier.ToString());
+            var totalResults = feed.Where<IOpenSearchTotalResults>(x => true);
+            Assert.AreEqual(2, totalResults.Count());
+            Assert.IsTrue(totalResults.All(x => x.CurrentNamespace != null && x.CurrentNamespace.Identifier.ToString() == openSearchNamespace && x.Content > 0));
         }
 
         [Test]
-        public void CreateXmlDocumentFromLocalFile()
+        public void CreateXmlDocumentFromLocalRssFile()
         {
             const string path = @".\Files\arstechnica.xml";
 
@@ -111,7 +144,20 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateXmlDocumentFromXmlOutput()
+        public void CreateXmlDocumentFromLocalAtomFile()
+        {
+            const string path = @".\Files\bearbrarian.xml";
+
+            var fileInfo = new FileInfo(path);
+            Assert.IsTrue(fileInfo.Exists);
+
+            var location = new Uri(fileInfo.FullName);
+            var xml = location.ToXmlDocument();
+            MakeAtomXmlAssertions(xml);
+        }
+
+        [Test]
+        public void CreateXmlDocumentFromLocalRssXmlOutput()
         {
             const string path = @".\Files\arstechnica.xml";
 
@@ -130,7 +176,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateXmlDocumentFromRemoteLocation()
+        public void CreateXmlDocumentFromRemoteAtomResource()
         {
             var location = new Uri("http://bblfish.net/blog/blog.atom");
 

@@ -95,6 +95,24 @@ namespace Gnosis.Core.Xml
                 : null;
         }
 
+        protected bool GetContentBoolean(bool defaultValue)
+        {
+            var s = GetContentString();
+
+            var result = defaultValue;
+            bool.TryParse(s, out result);
+            return result;
+        }
+
+        protected int GetContentInt32(int defaultValue)
+        {
+            var s = GetContentString();
+
+            var result = defaultValue;
+            int.TryParse(s, out result);
+            return result;
+        }
+
         protected string GetContentString()
         {
             var child = Children.FirstOrDefault() as ICharacterData;
@@ -190,6 +208,11 @@ namespace Gnosis.Core.Xml
             get { return Children.OfType<ICharacterData>(); }
         }
 
+        public INamespace CurrentNamespace
+        {
+            get { return FindNamespace(this.Name.Prefix); }
+        }
+
         public override IEnumerable<T> Where<T>(Func<T, bool> predicate)
         {
             var results = new List<T>();
@@ -213,6 +236,17 @@ namespace Gnosis.Core.Xml
                 throw new ArgumentNullException("attribute");
 
             attributes.Add(attribute);
+        }
+
+        public INamespace FindNamespace(string alias)
+        {
+            var found = Namespaces.Where(ns => ns.Alias == alias).FirstOrDefault();
+            if (found != null)
+                return found;
+            else if (ParentElement != null)
+                return ParentElement.FindNamespace(alias);
+            else
+                return null;
         }
 
         #endregion

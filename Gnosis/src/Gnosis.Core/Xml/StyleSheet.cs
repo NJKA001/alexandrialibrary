@@ -82,7 +82,7 @@ namespace Gnosis.Core.Xml
                                 type = MediaType.Parse(value);
                                 break;
                             case "media":
-                                media = W3c.Media.Parse(value);
+                                media = Core.Media.Parse(value);
                                 break;
                             case "href":
                                 UriExtensions.TryParse(value, out href);

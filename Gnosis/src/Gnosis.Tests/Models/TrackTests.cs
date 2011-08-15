@@ -7,7 +7,6 @@ using NUnit.Framework;
 using TagLib;
 
 using Gnosis.Core;
-using Gnosis.Core.Iso;
 using Gnosis.Data;
 using Gnosis.Alexandria.Models.Tracks;
 
