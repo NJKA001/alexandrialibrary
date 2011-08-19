@@ -231,6 +231,9 @@
     <Compile Include="Xml\FeedBurner\FeedBurnerInfo.cs" />
     <Compile Include="Xml\FeedBurner\IFeedBurnerElement.cs" />
     <Compile Include="Xml\FeedBurner\IFeedBurnerInfo.cs" />
+    <Compile Include="Xml\Google\GoogleDataNamespace.cs" />
+    <Compile Include="Xml\Google\IGoogleDataElement.cs" />
+    <Compile Include="Xml\Google\IGoogleDataFeedLink.cs" />
     <Compile Include="Xml\IAttribute.cs" />
     <Compile Include="Xml\IAttributeFactory.cs" />
     <Compile Include="Xml\IBaseAttribute.cs" />
@@ -326,9 +329,7 @@
     <Compile Include="Xml\MediaRss\MediaRssTextType.cs" />
     <Compile Include="Xml\MediaRss\MediaTitle.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Xml\Google\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

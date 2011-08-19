@@ -1,0 +1,219 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gd='http://schemas.google.com/g/2005' xmlns:yt='http://gdata.youtube.com/schemas/2007'>
+  <id>http://gdata.youtube.com/feeds/api/users/uberweasel/playlists</id>
+  <updated>2011-08-19T03:15:18.308Z</updated>
+  <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+  <title type='text'>Playlists of uberweasel</title>
+  <logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo>
+  <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel'/>
+  <link rel='alternate' type='text/html' href='http://www.youtube.com/profile_play_list?user=uberweasel'/>
+  <link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel/playlists'/>
+  <link rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/batch'/>
+  <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel/playlists?start-index=1&amp;max-results=25'/>
+  <author>
+    <name>uberweasel</name>
+    <uri>http://gdata.youtube.com/feeds/api/users/uberweasel</uri>
+  </author>
+  <generator version='2.1' uri='http://gdata.youtube.com/'>YouTube data API</generator>
+  <openSearch:totalResults>11</openSearch:totalResults>
+  <openSearch:startIndex>1</openSearch:startIndex>
+  <openSearch:itemsPerPage>25</openSearch:itemsPerPage>
+  <entry>
+    <id>http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/5615F5EBE2BC72C2</id>
+    <published>2010-08-18T10:48:01.000Z</published>
+    <updated>2011-05-27T16:15:36.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+    <title type='text'>Music #1</title>
+    <content type='text'/>
+    <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel'/>
+    <link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=5615F5EBE2BC72C2'/>
+    <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/5615F5EBE2BC72C2'/>
+    <author>
+      <name>uberweasel</name>
+      <uri>http://gdata.youtube.com/feeds/api/users/uberweasel</uri>
+    </author>
+    <yt:description/>
+    <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#playlist' href='http://gdata.youtube.com/feeds/api/playlists/5615F5EBE2BC72C2' countHint='195'/>
+    <yt:playlistId>5615F5EBE2BC72C2</yt:playlistId>
+  </entry>
+  <entry>
+    <id>http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/1C7EF9202645F1AE</id>
+    <published>2010-12-13T22:25:15.000Z</published>
+    <updated>2011-08-18T19:33:35.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+    <title type='text'>Music #2</title>
+    <content type='text'/>
+    <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel'/>
+    <link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=1C7EF9202645F1AE'/>
+    <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/1C7EF9202645F1AE'/>
+    <author>
+      <name>uberweasel</name>
+      <uri>http://gdata.youtube.com/feeds/api/users/uberweasel</uri>
+    </author>
+    <yt:description/>
+    <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#playlist' href='http://gdata.youtube.com/feeds/api/playlists/1C7EF9202645F1AE' countHint='154'/>
+    <yt:playlistId>1C7EF9202645F1AE</yt:playlistId>
+  </entry>
+  <entry>
+    <id>http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/950CCF340EE21C6A</id>
+    <published>2011-01-01T21:17:10.000Z</published>
+    <updated>2011-01-08T19:01:34.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+    <title type='text'>Michiko To Hatchin</title>
+    <content type='text'/>
+    <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel'/>
+    <link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=950CCF340EE21C6A'/>
+    <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/950CCF340EE21C6A'/>
+    <author>
+      <name>uberweasel</name>
+      <uri>http://gdata.youtube.com/feeds/api/users/uberweasel</uri>
+    </author>
+    <yt:description/>
+    <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#playlist' href='http://gdata.youtube.com/feeds/api/playlists/950CCF340EE21C6A' countHint='66'/>
+    <yt:playlistId>950CCF340EE21C6A</yt:playlistId>
+  </entry>
+  <entry>
+    <id>http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/3F3BA14BABABB80B</id>
+    <published>2011-01-15T21:53:43.000Z</published>
+    <updated>2011-01-15T21:54:00.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+    <title type='text'>iamamiwhoami</title>
+    <content type='text'/>
+    <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel'/>
+    <link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=3F3BA14BABABB80B'/>
+    <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/3F3BA14BABABB80B'/>
+    <author>
+      <name>uberweasel</name>
+      <uri>http://gdata.youtube.com/feeds/api/users/uberweasel</uri>
+    </author>
+    <yt:description/>
+    <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#playlist' href='http://gdata.youtube.com/feeds/api/playlists/3F3BA14BABABB80B' countHint='1'/>
+    <yt:playlistId>3F3BA14BABABB80B</yt:playlistId>
+  </entry>
+  <entry>
+    <id>http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/3908D6A85B884C4D</id>
+    <published>2011-02-19T23:36:27.000Z</published>
+    <updated>2011-08-06T07:02:55.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+    <title type='text'>Best of the 80's</title>
+    <content type='text'/>
+    <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel'/>
+    <link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=3908D6A85B884C4D'/>
+    <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/3908D6A85B884C4D'/>
+    <author>
+      <name>uberweasel</name>
+      <uri>http://gdata.youtube.com/feeds/api/users/uberweasel</uri>
+    </author>
+    <yt:description/>
+    <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#playlist' href='http://gdata.youtube.com/feeds/api/playlists/3908D6A85B884C4D' countHint='37'/>
+    <yt:playlistId>3908D6A85B884C4D</yt:playlistId>
+  </entry>
+  <entry>
+    <id>http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/6CAAF110A8BA9F0E</id>
+    <published>2011-02-21T16:06:02.000Z</published>
+    <updated>2011-02-22T16:50:39.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+    <title type='text'>The King of Limbs</title>
+    <content type='text'/>
+    <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel'/>
+    <link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=6CAAF110A8BA9F0E'/>
+    <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/6CAAF110A8BA9F0E'/>
+    <author>
+      <name>uberweasel</name>
+      <uri>http://gdata.youtube.com/feeds/api/users/uberweasel</uri>
+    </author>
+    <yt:description/>
+    <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#playlist' href='http://gdata.youtube.com/feeds/api/playlists/6CAAF110A8BA9F0E' countHint='8'/>
+    <yt:playlistId>6CAAF110A8BA9F0E</yt:playlistId>
+  </entry>
+  <entry>
+    <id>http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/763CC91F232DB044</id>
+    <published>2011-05-05T01:05:41.000Z</published>
+    <updated>2011-05-05T01:05:48.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+    <title type='text'>Star Wars Begins</title>
+    <content type='text'/>
+    <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel'/>
+    <link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=763CC91F232DB044'/>
+    <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/763CC91F232DB044'/>
+    <author>
+      <name>uberweasel</name>
+      <uri>http://gdata.youtube.com/feeds/api/users/uberweasel</uri>
+    </author>
+    <yt:description/>
+    <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#playlist' href='http://gdata.youtube.com/feeds/api/playlists/763CC91F232DB044' countHint='1'/>
+    <yt:playlistId>763CC91F232DB044</yt:playlistId>
+  </entry>
+  <entry>
+    <id>http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/68C4563B2D169F24</id>
+    <published>2011-07-01T18:54:56.000Z</published>
+    <updated>2011-07-01T18:54:56.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+    <title type='text'>Tim Minchin</title>
+    <content type='text'/>
+    <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel'/>
+    <link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=68C4563B2D169F24'/>
+    <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/68C4563B2D169F24'/>
+    <author>
+      <name>uberweasel</name>
+      <uri>http://gdata.youtube.com/feeds/api/users/uberweasel</uri>
+    </author>
+    <yt:description/>
+    <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#playlist' href='http://gdata.youtube.com/feeds/api/playlists/68C4563B2D169F24' countHint='1'/>
+    <yt:playlistId>68C4563B2D169F24</yt:playlistId>
+  </entry>
+  <entry>
+    <id>http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/1806DB33DF563DE1</id>
+    <published>2011-07-07T03:55:36.000Z</published>
+    <updated>2011-07-07T22:37:37.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+    <title type='text'>Hennessy Youngman</title>
+    <content type='text'/>
+    <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel'/>
+    <link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=1806DB33DF563DE1'/>
+    <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/1806DB33DF563DE1'/>
+    <author>
+      <name>uberweasel</name>
+      <uri>http://gdata.youtube.com/feeds/api/users/uberweasel</uri>
+    </author>
+    <yt:description/>
+    <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#playlist' href='http://gdata.youtube.com/feeds/api/playlists/1806DB33DF563DE1' countHint='16'/>
+    <yt:playlistId>1806DB33DF563DE1</yt:playlistId>
+  </entry>
+  <entry>
+    <id>http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/E265FF050C05A650</id>
+    <published>2011-07-18T19:26:32.000Z</published>
+    <updated>2011-07-22T04:16:50.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+    <title type='text'>Random</title>
+    <content type='text'/>
+    <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel'/>
+    <link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=E265FF050C05A650'/>
+    <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/E265FF050C05A650'/>
+    <author>
+      <name>uberweasel</name>
+      <uri>http://gdata.youtube.com/feeds/api/users/uberweasel</uri>
+    </author>
+    <yt:description/>
+    <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#playlist' href='http://gdata.youtube.com/feeds/api/playlists/E265FF050C05A650' countHint='2'/>
+    <yt:playlistId>E265FF050C05A650</yt:playlistId>
+  </entry>
+  <entry>
+    <id>http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/AE3CAB6FAA0DC25F</id>
+    <published>2011-08-15T18:43:09.000Z</published>
+    <updated>2011-08-17T20:36:35.000Z</updated>
+    <category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+    <title type='text'>The Water</title>
+    <content type='text'/>
+    <link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel'/>
+    <link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=AE3CAB6FAA0DC25F'/>
+    <link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/uberweasel/playlists/AE3CAB6FAA0DC25F'/>
+    <author>
+      <name>uberweasel</name>
+      <uri>http://gdata.youtube.com/feeds/api/users/uberweasel</uri>
+    </author>
+    <yt:description/>
+    <gd:feedLink rel='http://gdata.youtube.com/schemas/2007#playlist' href='http://gdata.youtube.com/feeds/api/playlists/AE3CAB6FAA0DC25F' countHint='11'/>
+    <yt:playlistId>AE3CAB6FAA0DC25F</yt:playlistId>
+  </entry>
+</feed>
