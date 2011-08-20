@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Xml.Google
 {
     public class GoogleDataNamespace
-        : Namespace
+        : NamespaceDeclaration
     {
         public GoogleDataNamespace(INode parent)
             : base(parent, name, identifier)

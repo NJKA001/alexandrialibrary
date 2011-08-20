@@ -252,6 +252,7 @@
     <Compile Include="Xml\ILangAttribute.cs" />
     <Compile Include="Xml\IMarkup.cs" />
     <Compile Include="Xml\INamespace.cs" />
+    <Compile Include="Xml\INamespaceDeclaration.cs" />
     <Compile Include="Xml\INode.cs" />
     <Compile Include="Xml\IProcessingInstruction.cs" />
     <Compile Include="Xml\IQualifiedName.cs" />
@@ -259,6 +260,7 @@
     <Compile Include="Xml\MediaRss\IMediaAdult.cs" />
     <Compile Include="Xml\MediaRss\MediaAdult.cs" />
     <Compile Include="Xml\MediaRss\MediaRating.cs" />
+    <Compile Include="Xml\Namespace.cs" />
     <Compile Include="Xml\OpenSearch\IOpenSearchItemsPerPage.cs" />
     <Compile Include="Xml\OpenSearch\IOpenSearchElement.cs" />
     <Compile Include="Xml\OpenSearch\IOpenSearchQuery.cs" />
@@ -308,7 +310,7 @@
     <Compile Include="Xml\Element.cs" />
     <Compile Include="Xml\EscapedSection.cs" />
     <Compile Include="Xml\LangAttribute.cs" />
-    <Compile Include="Xml\Namespace.cs" />
+    <Compile Include="Xml\NamespaceDeclaration.cs" />
     <Compile Include="Xml\Node.cs" />
     <Compile Include="Xml\Xhtml\HtmlNodeExtensions.cs" />
     <Compile Include="Xml\Xhtml\XhtmlDocument.cs" />

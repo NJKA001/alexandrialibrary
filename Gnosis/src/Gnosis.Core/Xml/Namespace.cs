@@ -5,22 +5,27 @@ using System.Text;
 
 namespace Gnosis.Core.Xml
 {
-    public class Namespace
-        : Attribute, INamespace
+    public abstract class Namespace
+        : INamespace
     {
-        protected Namespace(INode parent, IQualifiedName name, Uri identifier)
-            : base(parent, name, identifier.ToString())
+        protected Namespace(string alias, Uri identifier)
         {
+            this.alias = alias;
             this.identifier = identifier;
         }
 
+        private readonly string alias;
         private readonly Uri identifier;
+        private readonly IDictionary<string, Func<INode, IQualifiedName, IElement>> elementFunctions = new Dictionary<string, Func<INode, IQualifiedName, IElement>>();
 
-        #region IXmlNamespace Members
+        protected void AddElementFunction(string name, Func<INode, IQualifiedName, IElement> function)
+        {
+            elementFunctions[name] = function;
+        }
 
         public string Alias
         {
-            get { return Name.Prefix == null ? null : Name.LocalPart; }
+            get { return alias; }
         }
 
         public Uri Identifier
@@ -28,16 +33,16 @@ namespace Gnosis.Core.Xml
             get { return identifier; }
         }
 
-        #endregion
-
-        public static INamespace ParseNamespace(INode parent, IQualifiedName name, string value)
+        public IElement GetElement(INode parent, IQualifiedName name)
         {
-            if (name.Prefix != "xmlns" && name.LocalPart != "xmlns")
-                throw new ArgumentException("Either the prefix or local part of a namespace must be 'xmlns'");
+            if (parent == null)
+                throw new ArgumentNullException("parent");
+            if (name == null)
+                throw new ArgumentNullException("name");
 
-            var identifier = new Uri(value, UriKind.Absolute);
-
-            return new Namespace(parent, name, identifier);
+            return (elementFunctions.ContainsKey(name.LocalPart)) ?
+                elementFunctions[name.LocalPart](parent, name)
+                : null;
         }
     }
 }

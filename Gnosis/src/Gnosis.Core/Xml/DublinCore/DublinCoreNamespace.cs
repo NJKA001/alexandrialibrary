@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Xml.DublinCore
 {
     public class DublinCoreNamespace
-        : Namespace
+        : NamespaceDeclaration
     {
         public DublinCoreNamespace(INode parent)
             : base(parent, name, identifier)

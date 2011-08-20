@@ -53,7 +53,7 @@ namespace Gnosis.Core.Xml
         public static IAttribute Parse(INode parent, IQualifiedName name, string value)
         {
             return (name.Prefix == "xmlns" || (name.Prefix == null && name.LocalPart == "xmlns")) ?
-                Namespace.ParseNamespace(parent, name, value) as IAttribute :
+                NamespaceDeclaration.ParseNamespace(parent, name, value) as IAttribute :
                 new Attribute(parent, name, value);
         }
     }

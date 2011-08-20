@@ -198,9 +198,9 @@ namespace Gnosis.Core.Xml
             get { return Children.OfType<IElement>(); }
         }
 
-        public IEnumerable<INamespace> Namespaces
+        public IEnumerable<INamespaceDeclaration> Namespaces
         {
-            get { return attributes.OfType<INamespace>(); }
+            get { return attributes.OfType<INamespaceDeclaration>(); }
         }
 
         public IEnumerable<ICharacterData> CharacterDataSections
@@ -208,7 +208,7 @@ namespace Gnosis.Core.Xml
             get { return Children.OfType<ICharacterData>(); }
         }
 
-        public INamespace CurrentNamespace
+        public INamespaceDeclaration CurrentNamespace
         {
             get { return FindNamespace(this.Name.Prefix); }
         }
@@ -238,7 +238,7 @@ namespace Gnosis.Core.Xml
             attributes.Add(attribute);
         }
 
-        public INamespace FindNamespace(string alias)
+        public INamespaceDeclaration FindNamespace(string alias)
         {
             var found = Namespaces.Where(ns => ns.Alias == alias).FirstOrDefault();
             if (found != null)

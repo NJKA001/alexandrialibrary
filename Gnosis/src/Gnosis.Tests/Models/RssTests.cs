@@ -63,7 +63,7 @@ namespace Gnosis.Tests.Models
 
             const string ext1Prefix = "dc";
             const string ext1Name = "title";
-            const string ext1Namespace = "http://purl.org/dc/elements/1.1/";
+            //const string ext1Namespace = "http://purl.org/dc/elements/1.1/";
 
             const string item1Title = "Impressions from Uncharted 3: Drake's Deception's open beta ";
             const string item1Author = "joshmcillwain@gmail.com (Josh McIllwain)";

@@ -57,11 +57,11 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(mediaCreditCount, xml.Root.Where<IElement>(elem => elem.Name.ToString() == "media:credit").Count());
             Assert.AreEqual(escapedCount, xml.Root.Where<IEscapedSection>(esc => esc != null).Count());
             Assert.AreEqual(rootNamespaceCount, xml.Root.Namespaces.Count());
-            Assert.AreEqual(namespaceCount, xml.Root.Where<INamespace>(ns => ns != null).DistinctBy(ns => ns.Name.ToString()).Count());
+            Assert.AreEqual(namespaceCount, xml.Root.Where<INamespaceDeclaration>(ns => ns != null).DistinctBy(ns => ns.Name.ToString()).Count());
             Assert.AreEqual(attribCount, xml.Root.Attributes.Count());
             Assert.IsTrue(xml.Root.Attributes.All(attrib => attrib != null && attrib.Parent == xml.Root));
             Assert.IsNotNull(xml.Root.Attributes.Where(x => x.Name.ToString() == "xml:base").FirstOrDefault() as BaseAttribute);
-            Assert.IsNotNull(xml.Root.Attributes.Where(x => x.Name.Prefix == "xmlns").FirstOrDefault() as INamespace);
+            Assert.IsNotNull(xml.Root.Attributes.Where(x => x.Name.Prefix == "xmlns").FirstOrDefault() as INamespaceDeclaration);
 
             var xmlBaseAttrib = xml.Root.Where<IAttribute>(attrib => attrib != null && attrib.Name.ToString() == "xml:base").FirstOrDefault() as IBaseAttribute;
             Assert.IsNotNull(xmlBaseAttrib);

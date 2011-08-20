@@ -5,11 +5,10 @@ using System.Text;
 
 namespace Gnosis.Core.Xml
 {
-    public interface INamespace
+    public interface INamespaceDeclaration
+        : IAttribute
     {
         string Alias { get; }
         Uri Identifier { get; }
-
-        IElement GetElement(INode parent, IQualifiedName name);
     }
 }

@@ -13,12 +13,12 @@ namespace Gnosis.Core.Xml
         IEnumerable<IAttribute> Attributes { get; }
         IEnumerable<IComment> Comments { get; }
         IEnumerable<IElement> ChildElements { get; }
-        IEnumerable<INamespace> Namespaces { get; }
+        IEnumerable<INamespaceDeclaration> Namespaces { get; }
         IEnumerable<ICharacterData> CharacterDataSections { get; }
-        INamespace CurrentNamespace { get; }
+        INamespaceDeclaration CurrentNamespace { get; }
 
         void AddAttribute(IAttribute attribute);
 
-        INamespace FindNamespace(string alias);
+        INamespaceDeclaration FindNamespace(string alias);
     }
 }

@@ -8,7 +8,7 @@ using Gnosis.Core.Xml;
 namespace Gnosis.Core.Xml.MediaRss
 {
     public class MediaRssNamespace
-        : Namespace
+        : NamespaceDeclaration
     {
         public MediaRssNamespace(INode parent)
             : base(parent, name, identifier)
