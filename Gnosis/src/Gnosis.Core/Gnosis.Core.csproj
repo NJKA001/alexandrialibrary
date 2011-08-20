@@ -100,6 +100,7 @@
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Xml\DocumentType.cs" />
     <Compile Include="Xml\DublinCore\DcAccrualMethod.cs" />
+    <Compile Include="Xml\DublinCore\DcAccrualPeriodicity.cs" />
     <Compile Include="Xml\DublinCore\DcTitle.cs" />
     <Compile Include="Xml\DublinCore\DublinCoreElement.cs" />
     <Compile Include="Xml\DublinCore\DublinCoreNamespace.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Xml\FeedBurner\FeedBurnerInfo.cs" />
     <Compile Include="Xml\FeedBurner\IFeedBurnerElement.cs" />
     <Compile Include="Xml\FeedBurner\IFeedBurnerInfo.cs" />
+    <Compile Include="Xml\Google\GoogleDataFeedLink.cs" />
     <Compile Include="Xml\Google\GoogleDataNamespace.cs" />
     <Compile Include="Xml\Google\IGoogleDataElement.cs" />
     <Compile Include="Xml\Google\IGoogleDataFeedLink.cs" />

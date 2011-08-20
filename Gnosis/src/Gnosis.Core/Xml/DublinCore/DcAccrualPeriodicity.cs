@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Gnosis.Core.Xml.DublinCore
 {
-    public class DcAccrualMethod
-        : DublinCoreElement, IDcAccrualMethod
+    public class DcAccrualPeriodicity
+        : DublinCoreElement, IDcAccrualPeriodicity
     {
-        public DcAccrualMethod(INode parent, IQualifiedName name)
+        public DcAccrualPeriodicity(INode parent, IQualifiedName name)
             : base(parent, name)
         {
         }

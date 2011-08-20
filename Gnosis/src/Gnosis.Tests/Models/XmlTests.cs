@@ -11,6 +11,7 @@ using Gnosis.Core.Xml;
 using Gnosis.Core.Xml.Atom;
 using Gnosis.Core.Xml.DublinCore;
 using Gnosis.Core.Xml.FeedBurner;
+using Gnosis.Core.Xml.Google;
 using Gnosis.Core.Xml.Rss;
 using Gnosis.Core.Xml.MediaRss;
 using Gnosis.Core.Xml.OpenSearch;
@@ -154,6 +155,26 @@ namespace Gnosis.Tests.Models
             var location = new Uri(fileInfo.FullName);
             var xml = location.ToXmlDocument();
             MakeAtomXmlAssertions(xml);
+        }
+
+        [Test]
+        public void CreateXmlDocumentFromLocalYouTubePlaylistsFile()
+        {
+            const string path = @".\Files\youtube_playlists.xml";
+            const string feedLinkHref = "http://gdata.youtube.com/feeds/api/playlists/5615F5EBE2BC72C2";
+            const int feedLinkCountHint = 195;
+
+            var fileInfo = new FileInfo(path);
+            Assert.IsTrue(fileInfo.Exists);
+
+            var location = new Uri(fileInfo.FullName);
+            var xml = location.ToXmlDocument();
+
+            Assert.IsNotNull(xml);
+            var feedLink = xml.Where<IGoogleDataFeedLink>(x => x != null).FirstOrDefault();
+            Assert.IsNotNull(feedLink);
+            Assert.AreEqual(feedLinkHref, feedLink.Href.ToString());
+            Assert.AreEqual(feedLinkCountHint, feedLink.CountHint);
         }
 
         [Test]

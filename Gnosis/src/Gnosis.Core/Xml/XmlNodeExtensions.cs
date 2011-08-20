@@ -7,6 +7,7 @@ using System.Xml;
 using Gnosis.Core.Xml.Atom;
 using Gnosis.Core.Xml.DublinCore;
 using Gnosis.Core.Xml.FeedBurner;
+using Gnosis.Core.Xml.Google;
 using Gnosis.Core.Xml.Rss;
 using Gnosis.Core.Xml.MediaRss;
 using Gnosis.Core.Xml.OpenSearch;
@@ -55,6 +56,9 @@ namespace Gnosis.Core.Xml
 
             //Dublin Core
             MapCustomElement("title", elem => elem.CurrentNamespace != null && elem.CurrentNamespace.Identifier.ToString().StartsWith("http://purl.org/dc/elements/"), (parent, name) => new DcTitle(parent, name));
+
+            //Google Data
+            MapCustomElement("feedLink", elem => elem.CurrentNamespace != null && elem.CurrentNamespace.Identifier.ToString().StartsWith("http://schemas.google.com/g/2005"), (parent, name) => new GoogleDataFeedLink(parent, name));
         }
 
         private static readonly IDictionary<string, IList<IAttributeFactory>> customAttributeFactories = new Dictionary<string, IList<IAttributeFactory>>();
