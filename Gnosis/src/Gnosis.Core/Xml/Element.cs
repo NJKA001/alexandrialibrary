@@ -104,6 +104,16 @@ namespace Gnosis.Core.Xml
             return result;
         }
 
+        protected T GetContentEnum<T>(T defaultValue)
+            where T : struct
+        {
+            var s = GetContentString();
+
+            var result = defaultValue;
+            Enum.TryParse<T>(s, out result);
+            return result;
+        }
+
         protected int GetContentInt32(int defaultValue)
         {
             var s = GetContentString();

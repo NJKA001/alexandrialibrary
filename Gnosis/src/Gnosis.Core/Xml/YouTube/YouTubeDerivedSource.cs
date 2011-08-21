@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core.Xml.MediaRss
+namespace Gnosis.Core.Xml.YouTube
 {
-    public enum MediaRssTextType
+    public enum YouTubeDerivedSource
     {
         unspecified = 0,
-        html,
-        plain
+        speechRecognition
     }
 }

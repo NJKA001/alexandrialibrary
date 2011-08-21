@@ -6,14 +6,12 @@ using System.Text;
 namespace Gnosis.Core.Xml.Google
 {
     public class GoogleDataNamespace
-        : NamespaceDeclaration
+        : Namespace
     {
-        public GoogleDataNamespace(INode parent)
-            : base(parent, name, identifier)
+        public GoogleDataNamespace()
+            : base("gd", new Uri("http://schemas.google.com/g/2005"))
         {
+            AddElementConstructor("feedLink", (parent, name) => new GoogleDataFeedLink(parent, name));
         }
-
-        private static readonly IQualifiedName name = QualifiedName.Parse("xmlns:gd");
-        private static readonly Uri identifier = new Uri("http://schemas.google.com/g/2005");
     }
 }

@@ -12,9 +12,10 @@ using Gnosis.Core.Xml.Atom;
 using Gnosis.Core.Xml.DublinCore;
 using Gnosis.Core.Xml.FeedBurner;
 using Gnosis.Core.Xml.Google;
-using Gnosis.Core.Xml.Rss;
 using Gnosis.Core.Xml.MediaRss;
 using Gnosis.Core.Xml.OpenSearch;
+using Gnosis.Core.Xml.Rss;
+using Gnosis.Core.Xml.YouTube;
 using Gnosis.Core.W3c;
 
 namespace Gnosis.Tests.Models
@@ -163,6 +164,7 @@ namespace Gnosis.Tests.Models
             const string path = @".\Files\youtube_playlists.xml";
             const string feedLinkHref = "http://gdata.youtube.com/feeds/api/playlists/5615F5EBE2BC72C2";
             const int feedLinkCountHint = 195;
+            const string playlistIdContent = "5615F5EBE2BC72C2";
 
             var fileInfo = new FileInfo(path);
             Assert.IsTrue(fileInfo.Exists);
@@ -171,10 +173,15 @@ namespace Gnosis.Tests.Models
             var xml = location.ToXmlDocument();
 
             Assert.IsNotNull(xml);
+            
             var feedLink = xml.Where<IGoogleDataFeedLink>(x => x != null).FirstOrDefault();
             Assert.IsNotNull(feedLink);
             Assert.AreEqual(feedLinkHref, feedLink.Href.ToString());
             Assert.AreEqual(feedLinkCountHint, feedLink.CountHint);
+
+            var playlistId = xml.Where<IYouTubePlaylistId>(x => x != null).FirstOrDefault();
+            Assert.IsNotNull(playlistId);
+            Assert.AreEqual(playlistIdContent, playlistId.Content);
         }
 
         [Test]

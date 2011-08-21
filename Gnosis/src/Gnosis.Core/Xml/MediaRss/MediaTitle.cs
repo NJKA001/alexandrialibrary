@@ -15,7 +15,7 @@ namespace Gnosis.Core.Xml.MediaRss
 
         public MediaRssTextType Type
         {
-            get { return GetAttributeEnum<MediaRssTextType>("type", MediaRssTextType.Plain); }
+            get { return GetAttributeEnum<MediaRssTextType>("type", MediaRssTextType.plain); }
         }
 
         public string Content

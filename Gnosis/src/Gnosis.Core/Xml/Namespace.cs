@@ -16,11 +16,11 @@ namespace Gnosis.Core.Xml
 
         private readonly string alias;
         private readonly Uri identifier;
-        private readonly IDictionary<string, Func<INode, IQualifiedName, IElement>> elementFunctions = new Dictionary<string, Func<INode, IQualifiedName, IElement>>();
+        private readonly IDictionary<string, Func<INode, IQualifiedName, IElement>> elementConstructors = new Dictionary<string, Func<INode, IQualifiedName, IElement>>();
 
-        protected void AddElementFunction(string name, Func<INode, IQualifiedName, IElement> function)
+        protected void AddElementConstructor(string name, Func<INode, IQualifiedName, IElement> function)
         {
-            elementFunctions[name] = function;
+            elementConstructors[name] = function;
         }
 
         public string Alias
@@ -40,8 +40,8 @@ namespace Gnosis.Core.Xml
             if (name == null)
                 throw new ArgumentNullException("name");
 
-            return (elementFunctions.ContainsKey(name.LocalPart)) ?
-                elementFunctions[name.LocalPart](parent, name)
+            return (elementConstructors.ContainsKey(name.LocalPart)) ?
+                elementConstructors[name.LocalPart](parent, name)
                 : null;
         }
     }

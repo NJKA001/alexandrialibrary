@@ -8,9 +8,10 @@ using Gnosis.Core.Xml.Atom;
 using Gnosis.Core.Xml.DublinCore;
 using Gnosis.Core.Xml.FeedBurner;
 using Gnosis.Core.Xml.Google;
-using Gnosis.Core.Xml.Rss;
 using Gnosis.Core.Xml.MediaRss;
 using Gnosis.Core.Xml.OpenSearch;
+using Gnosis.Core.Xml.Rss;
+using Gnosis.Core.Xml.YouTube;
 
 namespace Gnosis.Core.Xml
 {
@@ -58,11 +59,14 @@ namespace Gnosis.Core.Xml
             MapCustomElement("title", elem => elem.CurrentNamespace != null && elem.CurrentNamespace.Identifier.ToString().StartsWith("http://purl.org/dc/elements/"), (parent, name) => new DcTitle(parent, name));
 
             //Google Data
-            MapCustomElement("feedLink", elem => elem.CurrentNamespace != null && elem.CurrentNamespace.Identifier.ToString().StartsWith("http://schemas.google.com/g/2005"), (parent, name) => new GoogleDataFeedLink(parent, name));
+            AddNamespace(new GoogleDataNamespace());
+            AddNamespace(new YouTubeNamespace());
+            //MapCustomElement("feedLink", elem => elem.CurrentNamespace != null && elem.CurrentNamespace.Identifier.ToString().StartsWith("http://schemas.google.com/g/2005"), (parent, name) => new GoogleDataFeedLink(parent, name));
         }
 
         private static readonly IDictionary<string, IList<IAttributeFactory>> customAttributeFactories = new Dictionary<string, IList<IAttributeFactory>>();
         private static readonly IDictionary<string, IList<IElementFactory>> customElementFactories = new Dictionary<string, IList<IElementFactory>>();
+        private static readonly IDictionary<Uri, INamespace> namespaces = new Dictionary<Uri, INamespace>();
 
         public static IAttribute GetCustomAttribute(IAttribute attribute, INode parent, IQualifiedName name, string value)
         {
@@ -82,6 +86,13 @@ namespace Gnosis.Core.Xml
 
         public static IElement GetCustomElement(IElement element, INode parent, IQualifiedName name)
         {
+            if (element.CurrentNamespace != null && namespaces.ContainsKey(element.CurrentNamespace.Identifier))
+            {
+                var customElement = namespaces[element.CurrentNamespace.Identifier].GetElement(parent, name);
+                if (customElement != null)
+                    return customElement;
+            }
+
             var elementName = element.Name.LocalPart;
 
             if (!customElementFactories.ContainsKey(elementName))
@@ -114,6 +125,14 @@ namespace Gnosis.Core.Xml
                 customElementFactories[elementName] = new List<IElementFactory> { factory };
             else
                 customElementFactories[elementName].Add(factory);
+        }
+
+        public static void AddNamespace(INamespace ns)
+        {
+            if (ns == null)
+                throw new ArgumentNullException("ns");
+
+            namespaces[ns.Identifier] = ns;
         }
 
         #endregion
