@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Gnosis.Core.Xml.YouTube
 {
-    public interface IYouTubeDescription
-        : IYouTubeSimpleContentElement
+    public enum YouTubeAspectRatioContent
     {
+        unspecified = 0,
+        widescreen
     }
 }

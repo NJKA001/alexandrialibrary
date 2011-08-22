@@ -5,8 +5,10 @@ using System.Text;
 
 namespace Gnosis.Core.Xml.YouTube
 {
-    public interface IYouTubeDescription
-        : IYouTubeSimpleContentElement
+    public enum YouTubeGenderContent
     {
+        unspecified = 0,
+        f,
+        m
     }
 }

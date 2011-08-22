@@ -5,8 +5,10 @@ using System.Text;
 
 namespace Gnosis.Core.Xml.YouTube
 {
-    public interface IYouTubeDescription
-        : IYouTubeSimpleContentElement
+    public interface IYouTubeAvailability
+        : IYouTubeElement
     {
+        DateTime Start { get; }
+        DateTime End { get; }
     }
 }

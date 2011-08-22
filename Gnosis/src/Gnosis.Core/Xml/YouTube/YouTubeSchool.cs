@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Gnosis.Core.Xml.YouTube
 {
-    public class YouTubePlaylistId
-        : YouTubeSimpleContentElement, IYouTubePlaylistId
+    public class YouTubeSchool
+        : YouTubeSimpleContentElement, IYouTubeSchool
     {
-        public YouTubePlaylistId(INode parent, IQualifiedName name)
+        public YouTubeSchool(INode parent, IQualifiedName name)
             : base(parent, name)
         {
         }

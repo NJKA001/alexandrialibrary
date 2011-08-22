@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Gnosis.Core.Xml.YouTube
 {
-    public interface IYouTubeDescription
-        : IYouTubeSimpleContentElement
+    public interface IYouTubeIncomplete
+        : IYouTubeEmptyElement
     {
     }
 }

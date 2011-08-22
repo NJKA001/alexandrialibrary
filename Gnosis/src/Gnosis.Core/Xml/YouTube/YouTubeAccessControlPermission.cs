@@ -5,8 +5,11 @@ using System.Text;
 
 namespace Gnosis.Core.Xml.YouTube
 {
-    public interface IYouTubeDescription
-        : IYouTubeSimpleContentElement
+    public enum YouTubeAccessControlPermission
     {
+        unspecified = 0,
+        allowed,
+        denied,
+        moderated
     }
 }

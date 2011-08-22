@@ -77,6 +77,15 @@ namespace Gnosis.Core.Xml
             return result;
         }
 
+        protected DateTime GetAttributeDateTime(string name, DateTime defaultValue)
+        {
+            var s = GetAttributeString(name);
+
+            var result = defaultValue;
+            DateTime.TryParse(s, out result);
+            return result;
+        }
+
         protected ILanguageTag GetAttributeLanguageTag(string name)
         {
             var s = GetAttributeString(name);
@@ -101,6 +110,15 @@ namespace Gnosis.Core.Xml
 
             var result = defaultValue;
             bool.TryParse(s, out result);
+            return result;
+        }
+
+        protected DateTime GetContentDateTime(DateTime defaultValue)
+        {
+            var s = GetContentString();
+
+            var result = defaultValue;
+            DateTime.TryParse(s, out result);
             return result;
         }
 

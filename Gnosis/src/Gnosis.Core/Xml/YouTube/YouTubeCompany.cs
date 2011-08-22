@@ -6,16 +6,11 @@ using System.Text;
 namespace Gnosis.Core.Xml.YouTube
 {
     public class YouTubeCompany
-        : Element, IYouTubeCompany
+        : YouTubeSimpleContentElement, IYouTubeCompany
     {
         public YouTubeCompany(INode parent, IQualifiedName name)
             : base(parent, name)
         {
-        }
-
-        public string Content
-        {
-            get { return GetContentString(); }
         }
     }
 }
