@@ -98,6 +98,11 @@
     <Compile Include="Atom\IAtomFeed.cs" />
     <Compile Include="Atom\IAtomPerson.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="Xml\Atom\AtomAuthor.cs" />
+    <Compile Include="Xml\Atom\AtomCategory.cs" />
+    <Compile Include="Xml\Atom\AtomContributor.cs" />
+    <Compile Include="Xml\Atom\AtomNamespace.cs" />
+    <Compile Include="Xml\Atom\AtomPerson.cs" />
     <Compile Include="Xml\DocumentType.cs" />
     <Compile Include="Xml\DublinCore\DcAccrualMethod.cs" />
     <Compile Include="Xml\DublinCore\DcAccrualPeriodicity.cs" />
