@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
-using Gnosis.Core.W3c;
 using Gnosis.Core.Xml;
+using Gnosis.Core.Xml.Atom;
 using Gnosis.Core.Xml.Rss;
 
 namespace Gnosis.Core
@@ -110,37 +110,37 @@ namespace Gnosis.Core
                 : null;
         }
 
-        public static Core.W3c.IXmlExtension ToXmlExtension(this System.Xml.XmlNode self, IEnumerable<Core.W3c.IXmlNamespace> globalNamespaces)
-        {
-            var nameTokens = self.Name.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
-            if (nameTokens == null || nameTokens.Length != 2)
-                return null;
+        //public static Core.W3c.IXmlExtension ToXmlExtension(this System.Xml.XmlNode self, IEnumerable<Core.W3c.IXmlNamespace> globalNamespaces)
+        //{
+        //    var nameTokens = self.Name.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+        //    if (nameTokens == null || nameTokens.Length != 2)
+        //        return null;
 
-            var prefix = nameTokens[0];
-            var name = nameTokens[1];
+        //    var prefix = nameTokens[0];
+        //    var name = nameTokens[1];
 
-            var namespaces = self.ToXmlNamespaces();
-            var primaryNamespace = namespaces.Where(x => x != null && x.Prefix == prefix).FirstOrDefault();
-            if (primaryNamespace == null)
-                primaryNamespace = globalNamespaces.Where(x => x != null && x.Prefix == prefix).FirstOrDefault();
+        //    var namespaces = self.ToXmlNamespaces();
+        //    var primaryNamespace = namespaces.Where(x => x != null && x.Prefix == prefix).FirstOrDefault();
+        //    if (primaryNamespace == null)
+        //        primaryNamespace = globalNamespaces.Where(x => x != null && x.Prefix == prefix).FirstOrDefault();
 
-            return (primaryNamespace != null) ?
-                new XmlExtension(namespaces, primaryNamespace, prefix, name, self.OuterXml)
-                : null;
-        }
+        //    return (primaryNamespace != null) ?
+        //        new XmlExtension(namespaces, primaryNamespace, prefix, name, self.OuterXml)
+        //        : null;
+        //}
 
-        public static IEnumerable<IXmlExtension> ToXmlExtensions(this System.Xml.XmlNode self, IEnumerable<Core.W3c.IXmlNamespace> globalNamespaces)
-        {
-            if (self == null)
-                throw new ArgumentNullException("self");
+        //public static IEnumerable<IXmlExtension> ToXmlExtensions(this System.Xml.XmlNode self, IEnumerable<Core.W3c.IXmlNamespace> globalNamespaces)
+        //{
+        //    if (self == null)
+        //        throw new ArgumentNullException("self");
 
-            var extensions = new List<IXmlExtension>();
+        //    var extensions = new List<IXmlExtension>();
 
-            foreach (var child in self.ChildNodes.Cast<System.Xml.XmlNode>().Where(node => node != null && node.Name.Contains(':')))
-                extensions.AddIfNotNull(child.ToXmlExtension(globalNamespaces));
+        //    foreach (var child in self.ChildNodes.Cast<System.Xml.XmlNode>().Where(node => node != null && node.Name.Contains(':')))
+        //        extensions.AddIfNotNull(child.ToXmlExtension(globalNamespaces));
 
-            return extensions;
-        }
+        //    return extensions;
+        //}
 
         public static ILanguageTag ToXmlLang(this System.Xml.XmlNode self)
         {
@@ -153,73 +153,73 @@ namespace Gnosis.Core
                 : null;
         }
 
-        public static IEnumerable<Core.W3c.IXmlNamespace> ToXmlNamespaces(this System.Xml.XmlNode node)
-        {
-            var namespaces = new List<Core.W3c.IXmlNamespace>();
-            if (node == null || node.Attributes == null)
-                return namespaces;
+        //public static IEnumerable<Core.W3c.IXmlNamespace> ToXmlNamespaces(this System.Xml.XmlNode node)
+        //{
+        //    var namespaces = new List<Core.W3c.IXmlNamespace>();
+        //    if (node == null || node.Attributes == null)
+        //        return namespaces;
 
-            var attribs = node.Attributes.Cast<System.Xml.XmlAttribute>().Where(x => x != null && x.Name.StartsWith("xmlns"));
+        //    var attribs = node.Attributes.Cast<System.Xml.XmlAttribute>().Where(x => x != null && x.Name.StartsWith("xmlns"));
 
-            foreach (var attrib in attribs)
-            {
-                var identifier = new Uri(attrib.Value, UriKind.RelativeOrAbsolute);
+        //    foreach (var attrib in attribs)
+        //    {
+        //        var identifier = new Uri(attrib.Value, UriKind.RelativeOrAbsolute);
 
-                if (attrib.Name == "xmlns")
-                {
-                    namespaces.Add(new Core.W3c.XmlNamespace(identifier));
-                }
-                else if (attrib.Name.Contains(':'))
-                {
-                    var tokens = attrib.Name.Split(':');
-                    if (tokens != null && tokens.Length == 2)
-                    {
-                        namespaces.Add(new Core.W3c.XmlNamespace(identifier, tokens[1]));
-                    }
-                }
-            }
+        //        if (attrib.Name == "xmlns")
+        //        {
+        //            namespaces.Add(new Core.W3c.XmlNamespace(identifier));
+        //        }
+        //        else if (attrib.Name.Contains(':'))
+        //        {
+        //            var tokens = attrib.Name.Split(':');
+        //            if (tokens != null && tokens.Length == 2)
+        //            {
+        //                namespaces.Add(new Core.W3c.XmlNamespace(identifier, tokens[1]));
+        //            }
+        //        }
+        //    }
 
-            return namespaces;
-        }
+        //    return namespaces;
+        //}
 
-        public static Core.W3c.IXmlStyleSheet ToXmlStyleSheet(this System.Xml.XmlNode node)
-        {
-            if (node == null || !(node is System.Xml.XmlProcessingInstruction) || node.Name != "xml-stylesheet")
-                return null;
+        //public static Core.W3c.IXmlStyleSheet ToXmlStyleSheet(this System.Xml.XmlNode node)
+        //{
+        //    if (node == null || !(node is System.Xml.XmlProcessingInstruction) || node.Name != "xml-stylesheet")
+        //        return null;
 
-            var type = MediaType.TextCss;
-            var media = Media.All;
-            Uri href = null;
+        //    var type = MediaType.TextCss;
+        //    var media = Media.All;
+        //    Uri href = null;
 
-            var tokens = node.InnerText.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var token in tokens)
-            {
-                if (token != null && token.Contains('='))
-                {
-                    var pieces = token.Split('=');
-                    var name = pieces[0];
-                    var value = pieces[1].Replace("'", string.Empty).Replace("\"", string.Empty);
+        //    var tokens = node.InnerText.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        //    foreach (var token in tokens)
+        //    {
+        //        if (token != null && token.Contains('='))
+        //        {
+        //            var pieces = token.Split('=');
+        //            var name = pieces[0];
+        //            var value = pieces[1].Replace("'", string.Empty).Replace("\"", string.Empty);
 
-                    switch (name.ToLower())
-                    {
-                        case "type":
-                            type = MediaType.Parse(value);
-                            break;
-                        case "media":
-                            media = Media.Parse(value);
-                            break;
-                        case "href":
-                            href = new Uri(value, UriKind.RelativeOrAbsolute);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
+        //            switch (name.ToLower())
+        //            {
+        //                case "type":
+        //                    type = MediaType.Parse(value);
+        //                    break;
+        //                case "media":
+        //                    media = Media.Parse(value);
+        //                    break;
+        //                case "href":
+        //                    href = new Uri(value, UriKind.RelativeOrAbsolute);
+        //                    break;
+        //                default:
+        //                    break;
+        //            }
+        //        }
+        //    }
 
-            return (href != null) ?
-                new Core.W3c.XmlStyleSheet(type, media, href)
-                : null;
-        }
+        //    return (href != null) ?
+        //        new Core.W3c.XmlStyleSheet(type, media, href)
+        //        : null;
+        //}
     }
 }

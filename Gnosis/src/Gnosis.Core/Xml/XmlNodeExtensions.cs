@@ -29,13 +29,13 @@ namespace Gnosis.Core.Xml
             MapCustomElement("link", elem => elem.Namespaces.Where(ns => ns != null && ns.Identifier.ToString() == "http://www.w3.org/2005/Atom").FirstOrDefault() != null, (parent, name) => new AtomLink(parent, name));
 
             //RSS
-            MapCustomElement("rss", elem => elem.Parent is IDocument, (parent, name) => new RssRoot(parent, name));
+            MapCustomElement("rss", elem => elem.Parent is IDocument, (parent, name) => new RssFeed(parent, name));
             MapCustomElement("category", elem => (elem.Parent is IRssChannel || elem.Parent is IRssItem), (parent, name) => new RssCategory(parent, name));
-            MapCustomElement("channel", elem => elem.Parent is IRssRoot, (parent, name) => new RssChannel(parent, name));
+            MapCustomElement("channel", elem => elem.Parent is IRssFeed, (parent, name) => new RssChannel(parent, name));
             MapCustomElement("cloud", elem => elem.Parent is IRssChannel, (parent, name) => new RssCloud(parent, name));
             MapCustomElement("day", elem => elem.Parent is IRssSkipDays, (parent, name) => new RssDay(parent, name));
             MapCustomElement("enclosure", elem => elem.Parent is IRssItem, (parent, name) => new RssEnclosure(parent, name));
-            MapCustomElement("guid", elem => elem.Parent is IRssChannel, (parent, name) => new RssGuid(parent, name));
+            MapCustomElement("guid", elem => elem.Parent is IRssItem, (parent, name) => new RssGuid(parent, name));
             MapCustomElement("hour", elem => elem.Parent is IRssSkipHours, (parent, name) => new RssHour(parent, name));
             MapCustomElement("image", elem => elem.Parent is IRssChannel, (parent, name) => new RssImage(parent, name));
             MapCustomElement("item", elem => elem.Parent is IRssChannel, (parent, name) => new RssItem(parent, name));
@@ -43,7 +43,7 @@ namespace Gnosis.Core.Xml
             MapCustomElement("skipDays", elem => elem.Parent is IRssChannel, (parent, name) => new RssSkipDays(parent, name));
             MapCustomElement("skipHours", elem => elem.Parent is IRssChannel, (parent, name) => new RssSkipHours(parent, name));
             MapCustomElement("source", elem => elem.Parent is IRssItem, (parent, name) => new RssSource(parent, name));
-            MapCustomElement("textInput", elem => elem.Parent is IRssChannel, (parent, name) => new RssImage(parent, name));
+            MapCustomElement("textInput", elem => elem.Parent is IRssChannel, (parent, name) => new RssTextInput(parent, name));
 
             //Media RSS
             MapCustomElement("content", elem => elem.Name.ToString() == "media:content", (parent, name) => new MediaContent(parent, name));
@@ -59,6 +59,7 @@ namespace Gnosis.Core.Xml
             MapCustomElement("title", elem => elem.CurrentNamespace != null && elem.CurrentNamespace.Identifier.ToString().StartsWith("http://purl.org/dc/elements/"), (parent, name) => new DcTitle(parent, name));
 
             //Google Data
+            AddNamespace(new AtomNamespace());
             AddNamespace(new GoogleDataNamespace());
             AddNamespace(new YouTubeNamespace());
             //MapCustomElement("feedLink", elem => elem.CurrentNamespace != null && elem.CurrentNamespace.Identifier.ToString().StartsWith("http://schemas.google.com/g/2005"), (parent, name) => new GoogleDataFeedLink(parent, name));

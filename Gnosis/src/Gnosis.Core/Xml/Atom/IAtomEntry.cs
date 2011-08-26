@@ -8,7 +8,7 @@ namespace Gnosis.Core.Xml.Atom
     public interface IAtomEntry
         : IAtomCommon
     {
-        IEnumerable<IAtomPerson> Authors { get; }
+        IEnumerable<IAtomAuthor> Authors { get; }
         IAtomContent Content { get; }
         IAtomId Id { get; }
         IEnumerable<IAtomLink> Links { get; }
@@ -17,7 +17,7 @@ namespace Gnosis.Core.Xml.Atom
         IAtomUpdated Updated { get; }
 
         IEnumerable<IAtomCategory> Categories { get; }
-        IEnumerable<IAtomPerson> Contributors { get; }
+        IEnumerable<IAtomContributor> Contributors { get; }
         IAtomPublished Published { get; }
         IAtomRights Rights { get; }
         IAtomSource Source { get; }

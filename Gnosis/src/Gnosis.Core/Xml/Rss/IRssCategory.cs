@@ -6,8 +6,9 @@ using System.Text;
 namespace Gnosis.Core.Xml.Rss
 {
     public interface IRssCategory
+        : IRssElement
     {
         Uri Domain { get; }
-        string Name { get; }
+        string CategoryName { get; }
     }
 }

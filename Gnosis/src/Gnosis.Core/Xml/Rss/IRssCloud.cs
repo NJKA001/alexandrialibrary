@@ -6,6 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Xml.Rss
 {
     public interface IRssCloud
+        : IRssElement
     {
         string Domain { get; }
         int Port { get; }

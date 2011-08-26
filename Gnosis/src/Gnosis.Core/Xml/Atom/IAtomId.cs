@@ -8,6 +8,6 @@ namespace Gnosis.Core.Xml.Atom
     public interface IAtomId
         : IAtomCommon
     {
-        Uri Value { get; }
+        Uri Content { get; }
     }
 }

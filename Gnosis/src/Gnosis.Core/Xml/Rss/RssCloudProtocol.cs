@@ -7,9 +7,9 @@ namespace Gnosis.Core.Xml.Rss
 {
     public enum RssCloudProtocol
     {
-        None = 0,
-        HttpPost,
-        Soap,
-        XmlRpc
+        none = 0,
+        http_post,
+        soap,
+        xml_rpc
     }
 }

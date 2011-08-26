@@ -4,8 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core.W3c;
-
 namespace Gnosis.Core
 {
     public static class ObjectExtensions

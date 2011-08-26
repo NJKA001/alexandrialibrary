@@ -7,8 +7,9 @@ namespace Gnosis.Core.Xml.Atom
 {
     public enum AtomTextType
     {
-        Text = 0,
-        Html,
-        XHtml
+        None = 0,
+        text,
+        html,
+        xhtml
     }
 }

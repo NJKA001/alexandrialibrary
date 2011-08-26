@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core.W3c;
-
 namespace Gnosis.Core.Xml.Atom
 {
     /// <summary>
@@ -12,7 +10,7 @@ namespace Gnosis.Core.Xml.Atom
     /// </summary>
     /// <remarks>http://tools.ietf.org/html/rfc4287</remarks>
     public interface IAtomFeed
-        : IAtomCommon, IXmlDocument
+        : IAtomCommon
     {
         IEnumerable<IAtomAuthor> Authors { get; }
         IAtomId Id { get; }

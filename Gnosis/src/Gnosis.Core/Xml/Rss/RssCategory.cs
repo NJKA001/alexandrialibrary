@@ -18,7 +18,7 @@ namespace Gnosis.Core.Xml.Rss
             get { return GetAttributeUri("domain"); }
         }
 
-        public new string Name
+        public string CategoryName
         {
             get { return GetContentString(); }
         }

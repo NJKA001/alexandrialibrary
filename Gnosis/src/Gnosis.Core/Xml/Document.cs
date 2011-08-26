@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
-using Gnosis.Core.W3c;
-
 using HtmlAgilityPack;
 
 namespace Gnosis.Core.Xml

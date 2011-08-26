@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core.W3c;
-
 namespace Gnosis.Core.Xml
 {
     public class Element
@@ -25,7 +23,7 @@ namespace Gnosis.Core.Xml
         protected T GetAttributeEnum<T>(string name, T defaultValue)
             where T : struct
         {
-            var s = GetAttributeString(name);
+            var s = GetAttributeString(name).Replace("-", "_");
 
             var result = defaultValue;
             Enum.TryParse<T>(s, out result);

@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Xml.Rss
 {
     public interface IRssGuid
-        : IElement
+        : IRssElement
     {
         string Value { get; }
         bool IsPermaLink { get; }

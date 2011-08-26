@@ -8,15 +8,15 @@ using System.Xml;
 using NUnit.Framework;
 
 using Gnosis.Core;
-using Gnosis.Core.Rss;
-using Gnosis.Core.W3c;
+using Gnosis.Core.Xml;
+using Gnosis.Core.Xml.Rss;
 
 namespace Gnosis.Tests.Models
 {
     [TestFixture]
     public class RssTests
     {
-        private void MakeRssFeedAssertions(IRssFeed feed)
+        private void MakeRssFeedAssertions(IDocument document)
         {
             #region Constants
 
@@ -40,7 +40,7 @@ namespace Gnosis.Tests.Models
             const int cloudPort = 80;
             const string cloudPath = "/RPC2";
             const string cloudProc = "xmlStorageSystem.rssPleaseNotify";
-            var cloudProcotol = RssCloudProtocol.XmlRpc;
+            var cloudProcotol = RssCloudProtocol.xml_rpc;
 
             const int ttl = 45;
 
@@ -58,25 +58,27 @@ namespace Gnosis.Tests.Models
             const string textInputName = "Submit";
             const string textInputLink = "http://arstechnica.com/contact-us.php";
 
-            var skipHours = new List<RssHour> { RssHour.Zero, RssHour.One, RssHour.Two, RssHour.Twelve, RssHour.Thirteen, RssHour.Nineteen, RssHour.TwentyThree };
-            var skipDays = new List<RssDay> { RssDay.Sunday, RssDay.Thursday, RssDay.Saturday };
+            var skipHours = new List<Hour> { Hour.Zero, Hour.One, Hour.Two, Hour.Twelve, Hour.Thirteen, Hour.Nineteen, Hour.TwentyThree };
+            var skipDays = new List<Day> { Day.Sunday, Day.Thursday, Day.Saturday };
 
-            const string ext1Prefix = "dc";
-            const string ext1Name = "title";
+            //const string ext1Prefix = "dc";
+            //const string ext1Name = "title";
             //const string ext1Namespace = "http://purl.org/dc/elements/1.1/";
 
             const string item1Title = "Impressions from Uncharted 3: Drake's Deception's open beta ";
             const string item1Author = "joshmcillwain@gmail.com (Josh McIllwain)";
-            const string item1MediaContentUrl = "http://static.arstechnica.net/assets/2011/06/uncharted-3-thumb-300x169-23017-f.jpg";
+            //const string item1MediaContentUrl = "http://static.arstechnica.net/assets/2011/06/uncharted-3-thumb-300x169-23017-f.jpg";
             const string item1Guid = "http://arstechnica.com/gaming/news/2011/06/impressions-from-uncharted-3-drakes-deceptions-open-beta.ars?utm_source=rss&utm_medium=rss&utm_campaign=rss";
             var item1PubDate = new DateTime(2011, 6, 29, 16, 47, 00); //Wed, 29 Jun 2011 11:47:00 -0500
 
             #endregion
 
+            var feed = document.Root as IRssFeed;
+
             Assert.IsNotNull(feed);
             Assert.IsNotNull(feed.Channel);
             Assert.AreEqual(version, feed.Version);
-            Assert.AreEqual(2, feed.StyleSheets.Count());
+            Assert.AreEqual(2, document.Where<IStyleSheet>(x => x != null).Count());
             Assert.AreEqual(3, feed.Namespaces.Count());
 
             Assert.AreEqual(title, feed.Channel.Title);
@@ -105,22 +107,21 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(imageWidth, feed.Channel.Image.Width);
             Assert.AreEqual(imageDescription, feed.Channel.Image.Description);
             Assert.IsNotNull(feed.Channel.Rating);
-            Assert.IsNotNull(feed.Channel.Rating.Value);
-            Assert.IsTrue(feed.Channel.Rating.Value.Contains(ratingExcerpt));
+            Assert.IsTrue(feed.Channel.Rating.Contains(ratingExcerpt));
             Assert.IsNotNull(feed.Channel.TextInput);
             Assert.AreEqual(textInputTitle, feed.Channel.TextInput.Title);
             Assert.AreEqual(textInputDescription, feed.Channel.TextInput.Description);
-            Assert.AreEqual(textInputName, feed.Channel.TextInput.Name);
+            Assert.AreEqual(textInputName, feed.Channel.TextInput.InputName);
             Assert.AreEqual(textInputLink, feed.Channel.TextInput.Link.ToString());
-            Assert.IsTrue(skipHours.SequenceEqual(feed.Channel.SkipHours));
-            Assert.IsTrue(skipDays.SequenceEqual(feed.Channel.SkipDays));
+            Assert.IsTrue(skipHours.SequenceEqual(feed.Channel.SkipHours.Hours.Select(x => x.Value)));
+            Assert.IsTrue(skipDays.SequenceEqual(feed.Channel.SkipDays.Days.Select(x => x.Value)));
             Assert.AreEqual(1, feed.Channel.Categories.Count());
             Assert.AreEqual(categoryDomain, feed.Channel.Categories.First().Domain.ToString());
-            Assert.AreEqual(categoryName, feed.Channel.Categories.First().Name);
-            Assert.AreEqual(4, feed.Channel.Extensions.Count());
-            Assert.AreEqual(ext1Name, feed.Channel.Extensions.First().Name);
-            Assert.AreEqual(ext1Prefix, feed.Channel.Extensions.First().Prefix);
-            Assert.IsNotNull(feed.Channel.Extensions.First().PrimaryNamespace);
+            Assert.AreEqual(categoryName, feed.Channel.Categories.First().CategoryName);
+            //Assert.AreEqual(4, feed.Channel.Extensions.Count());
+            //Assert.AreEqual(ext1Name, feed.Channel.Extensions.First().Name);
+            //Assert.AreEqual(ext1Prefix, feed.Channel.Extensions.First().Prefix);
+            //Assert.IsNotNull(feed.Channel.Extensions.First().PrimaryNamespace);
             Assert.AreEqual(25, feed.Channel.Items.Count());
             var firstItem = feed.Channel.Items.First();
             Assert.IsNotNull(firstItem);
@@ -131,9 +132,9 @@ namespace Gnosis.Tests.Models
             Assert.IsFalse(firstItem.Guid.IsPermaLink);
             Assert.AreEqual(item1PubDate, firstItem.PubDate);
             Assert.AreEqual(5, firstItem.Categories.Count());
-            var firstMediaContentExt = firstItem.Extensions.Where(x => x.Prefix == "media" && x.Name == "content").FirstOrDefault();
-            Assert.IsNotNull(firstMediaContentExt);
-            Assert.IsTrue(firstMediaContentExt.ToString().Contains(item1MediaContentUrl));
+            //var firstMediaContentExt = firstItem.Extensions.Where(x => x.Prefix == "media" && x.Name == "content").FirstOrDefault();
+            //Assert.IsNotNull(firstMediaContentExt);
+            //Assert.IsTrue(firstMediaContentExt.ToString().Contains(item1MediaContentUrl));
             var lastItem = feed.Channel.Items.Last();
             Assert.IsNotNull(lastItem);
         }
@@ -151,12 +152,16 @@ namespace Gnosis.Tests.Models
             var contentType = location.ToContentType();
             Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
 
-            var feed = location.ToRssFeed();
+            var document = location.ToXmlDocument();
+            Assert.IsNotNull(document);
+
+            var feed = document.Root as IRssFeed;
 
             Assert.IsNotNull(feed);
             Assert.IsNotNull(feed.Channel);
             Assert.AreEqual(version, feed.Version);
-            Assert.AreEqual(CharacterSet.Latin1, feed.Encoding);
+            Assert.IsNotNull(document.Declaration);
+            Assert.AreEqual(CharacterSet.Latin1, document.Declaration.Encoding);
         }
 
         [Test]
@@ -172,8 +177,10 @@ namespace Gnosis.Tests.Models
             var contentType = location.ToContentType();
             Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
 
-            var feed = location.ToRssFeed();
+            var document = location.ToXmlDocument();
+            Assert.IsNotNull(document);
 
+            var feed = document.Root as IRssFeed;
             Assert.IsNotNull(feed);
             Assert.IsNotNull(feed.Channel);
             Assert.AreEqual(version, feed.Version);
@@ -192,8 +199,10 @@ namespace Gnosis.Tests.Models
             var contentType = location.ToContentType();
             Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
 
-            var feed = location.ToRssFeed();
+            var document = location.ToXmlDocument();
+            Assert.IsNotNull(document);
 
+            var feed = document.Root as IRssFeed;
             Assert.IsNotNull(feed);
             Assert.IsNotNull(feed.Channel);
             Assert.AreEqual(version, feed.Version);
@@ -209,10 +218,11 @@ namespace Gnosis.Tests.Models
             var location = new Uri(fileInfo.FullName);
             var contentType = location.ToContentType();
             Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
-            
-            var feed = location.ToRssFeed();
 
-            MakeRssFeedAssertions(feed);
+            var document = location.ToXmlDocument();
+            Assert.IsNotNull(document);
+
+            MakeRssFeedAssertions(document);
         }
 
         [Test]
@@ -222,7 +232,11 @@ namespace Gnosis.Tests.Models
             var language = LanguageTag.Parse("en-us");
 
             var location = new Uri("http://search.espn.go.com/rss/bill-simmons/");
-            var feed = location.ToRssFeed();
+
+            var document = location.ToXmlDocument();
+            Assert.IsNotNull(document);
+
+            var feed = document.Root as IRssFeed;
             Assert.IsNotNull(feed);
             Assert.IsNotNull(feed.Channel);
             Assert.AreEqual(generator, feed.Channel.Generator);
@@ -236,7 +250,10 @@ namespace Gnosis.Tests.Models
             const string generator = "http://wordpress.org/?v=3.2.1";
 
             var location = new Uri("http://www.nerdist.com/category/podcast/feed/");
-            var feed = location.ToRssFeed();
+            var document = location.ToXmlDocument();
+            Assert.IsNotNull(document);
+
+            var feed = document.Root as IRssFeed;
             Assert.IsNotNull(feed);
             Assert.IsNotNull(feed.Channel);
             Assert.AreEqual(generator, feed.Channel.Generator);
@@ -245,13 +262,19 @@ namespace Gnosis.Tests.Models
         [Test]
         public void CreateRssFeedFromRemoteUnspecifiedSourceWithXmlBase()
         {
-            const string baseId = "http://www.thisamericanlife.org/";
+            const string baseId = "http://www.thisamericanlife.org";
 
             var location = new Uri("http://feeds.thisamericanlife.org/talpodcast");
-            var feed = location.ToRssFeed();
+
+            var document = location.ToXmlDocument();
+            Assert.IsNotNull(document);
+
+            var feed = document.Root as IRssFeed;
             Assert.IsNotNull(feed);
-            Assert.IsNotNull(feed.BaseId);
-            Assert.AreEqual(baseId, feed.BaseId.ToString());
+
+            var xmlBase = feed.Attributes.Where(x => x.Name.ToString() == "xml:base").FirstOrDefault();
+            Assert.IsNotNull(xmlBase);
+            Assert.AreEqual(baseId, xmlBase.Value);
             Assert.IsNotNull(feed.Channel);
         }
 
@@ -266,39 +289,45 @@ namespace Gnosis.Tests.Models
             var contentType = location.ToContentType();
             Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
 
-            var original = location.ToRssFeed();
+            var original = location.ToXmlDocument();
+            Assert.IsNotNull(original);
 
-            IRssFeed feed = null;
-            var encoding = CharacterSet.Utf8;
-            IEnumerable<IXmlNamespace> namespaces = new List<IXmlNamespace>();
-            var styleSheets = new List<IXmlStyleSheet>();
             var xmlString = original.ToString();
-            var xml = new XmlDocument();
-            xml.LoadXml(xmlString);
+            Assert.IsNotNull(xmlString);
 
-            foreach (var child in xml.ChildNodes.Cast<XmlNode>().Where(node => node != null))
-            {
-                switch (child.NodeType)
-                {
-                    case XmlNodeType.XmlDeclaration:
-                        encoding = child.ToEncoding();
-                        break;
-                    case XmlNodeType.ProcessingInstruction:
-                        styleSheets.AddIfNotNull(child.ToXmlStyleSheet());
-                        break;
-                    case XmlNodeType.Element:
-                        if (child.Name != "rss")
-                            break;
+            var document = Document.Parse(xmlString);
 
-                        namespaces = child.ToXmlNamespaces();
-                        feed = child.ToRssFeed(encoding, namespaces, styleSheets);
-                        break;
-                    default:
-                        break;
-                }
-            }
+            //IRssFeed feed = null;
+            //var encoding = CharacterSet.Utf8;
+            //IEnumerable<IXmlNamespace> namespaces = new List<IXmlNamespace>();
+            //var styleSheets = new List<IXmlStyleSheet>();
+            //var xmlString = original.ToString();
+            //var xml = new XmlDocument();
+            //xml.LoadXml(xmlString);
 
-            MakeRssFeedAssertions(feed);
+            //foreach (var child in xml.ChildNodes.Cast<XmlNode>().Where(node => node != null))
+            //{
+            //    switch (child.NodeType)
+            //    {
+            //        case XmlNodeType.XmlDeclaration:
+            //            encoding = child.ToEncoding();
+            //            break;
+            //        case XmlNodeType.ProcessingInstruction:
+            //            styleSheets.AddIfNotNull(child.ToXmlStyleSheet());
+            //            break;
+            //        case XmlNodeType.Element:
+            //            if (child.Name != "rss")
+            //                break;
+
+            //            namespaces = child.ToXmlNamespaces();
+            //            feed = child.ToRssFeed(encoding, namespaces, styleSheets);
+            //            break;
+            //        default:
+            //            break;
+            //    }
+            //}
+
+            MakeRssFeedAssertions(document);
         }
     }
 }

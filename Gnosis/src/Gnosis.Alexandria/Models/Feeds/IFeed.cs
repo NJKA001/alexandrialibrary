@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
-using Gnosis.Core.W3c;
 using Gnosis.Data;
 
 namespace Gnosis.Alexandria.Models.Feeds

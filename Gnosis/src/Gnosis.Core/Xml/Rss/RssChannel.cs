@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core.W3c;
-
 namespace Gnosis.Core.Xml.Rss
 {
     public class RssChannel
@@ -58,12 +56,12 @@ namespace Gnosis.Core.Xml.Rss
 
         public DateTime PubDate
         {
-            get { return GetChildDateTime("pubDate"); }
+            get { return GetChildDateTime("pubDate").ToUniversalTime(); }
         }
 
         public DateTime LastBuildDate
         {
-            get { return GetChildDateTime("lastBuildDate"); }
+            get { return GetChildDateTime("lastBuildDate").ToUniversalTime(); }
         }
 
         public string Generator

@@ -6,6 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Xml.Rss
 {
     public interface IRssImage
+        : IRssElement
     {
         Uri Url { get; }
         string Title { get; }

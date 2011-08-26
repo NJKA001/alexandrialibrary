@@ -8,7 +8,6 @@ using NUnit.Framework;
 using System.Data.SQLite;
 
 using Gnosis.Core;
-using Gnosis.Core.W3c;
 using Gnosis.Data;
 using Gnosis.Data.Queries;
 using Gnosis.Alexandria.Models;

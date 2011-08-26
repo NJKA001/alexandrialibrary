@@ -35,7 +35,7 @@ namespace Gnosis.Core.Xml.Rss
 
         public RssCloudProtocol Protocol
         {
-            get { return GetAttributeEnum<RssCloudProtocol>("protocol", RssCloudProtocol.None); }
+            get { return GetAttributeEnum<RssCloudProtocol>("protocol", RssCloudProtocol.none); }
         }
     }
 }

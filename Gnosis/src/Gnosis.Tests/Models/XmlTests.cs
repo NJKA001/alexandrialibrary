@@ -16,7 +16,6 @@ using Gnosis.Core.Xml.MediaRss;
 using Gnosis.Core.Xml.OpenSearch;
 using Gnosis.Core.Xml.Rss;
 using Gnosis.Core.Xml.YouTube;
-using Gnosis.Core.W3c;
 
 namespace Gnosis.Tests.Models
 {
@@ -81,7 +80,7 @@ namespace Gnosis.Tests.Models
             Assert.IsNotNull(link);
             Assert.IsNotNull(link.Children.FirstOrDefault());
 
-            var rss = xml.Root as IRssRoot;
+            var rss = xml.Root as IRssFeed;
             Assert.IsNotNull(rss);
 
             var channel = rss.Children.FirstOrDefault() as IRssChannel;

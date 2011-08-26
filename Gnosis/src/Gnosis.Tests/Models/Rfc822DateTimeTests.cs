@@ -5,8 +5,6 @@ using System.Text;
 
 using NUnit.Framework;
 
-using Gnosis.Core.W3c;
-
 namespace Gnosis.Tests.Models
 {
     [TestFixture]

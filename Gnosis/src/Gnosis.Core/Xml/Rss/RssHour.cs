@@ -18,9 +18,15 @@ namespace Gnosis.Core.Xml.Rss
             get
             {
                 var child = Children.FirstOrDefault() as ICharacterData;
+                if (child == null)
+                    return Hour.Unknown;
 
-                return (child != null && child.Content != null && Enum.IsDefined(typeof(Hour), child.Content)) ?
-                    (Hour)Enum.Parse(typeof(Hour), child.Content)
+                var value = 0;
+                if (!int.TryParse(child.Content, out value))
+                    return Hour.Unknown;
+
+                return (Enum.IsDefined(typeof(Hour), value)) ?
+                    (Hour)value
                     : Hour.Unknown;
             }
         }

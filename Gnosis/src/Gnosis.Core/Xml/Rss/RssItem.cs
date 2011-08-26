@@ -50,7 +50,7 @@ namespace Gnosis.Core.Xml.Rss
 
         public DateTime PubDate
         {
-            get { return GetChildDateTime("pubDate"); }
+            get { return GetChildDateTime("pubDate").ToUniversalTime(); }
         }
 
         public IRssSource Source

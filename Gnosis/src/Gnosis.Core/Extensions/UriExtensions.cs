@@ -7,14 +7,11 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
 
-using Gnosis.Core.Atom;
-using Gnosis.Core.Rss;
-using Gnosis.Core.W3c;
-
 namespace Gnosis.Core
 {
     public static class UriExtensions
     {
+        /*
         public static IAtomFeed ToAtomFeed(this Uri location)
         {
             var contentType = location.ToContentType();
@@ -50,6 +47,7 @@ namespace Gnosis.Core
 
             return feed;
         }
+        */
 
         public static IContentType ToContentType(this Uri location)
         {
@@ -133,17 +131,6 @@ namespace Gnosis.Core
             return Core.Xml.Document.Parse(xml);
         }
 
-        //public static HtmlAgilityPack.HtmlDocument ToXhtml(this Uri self)
-        //{
-        //    if (self == null)
-        //        throw new ArgumentNullException("self");
-
-        //    var html = self.ToContentString();
-        //    var doc = new HtmlAgilityPack.HtmlDocument();
-        //    doc.LoadHtml(html);
-        //    return doc;
-        //}
-
         public static Core.Xml.IDocument ToXhtmlDocument(this Uri self)
         {
             if (self == null)
@@ -153,6 +140,7 @@ namespace Gnosis.Core
             return Core.Xml.Xhtml.XhtmlDocument.Parse(html);
         }
 
+        /*
         public static IRssFeed ToRssFeed(this Uri location)
         {
             if (location == null)
@@ -192,6 +180,7 @@ namespace Gnosis.Core
 
             return feed;
         }
+        */
 
         public static string ToContentString(this Uri self)
         {
