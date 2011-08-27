@@ -107,7 +107,7 @@
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\FileInfoExtensions.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
-    <Compile Include="Id3\IId3Tag.cs" />
+    <Compile Include="Audio\Id3\IId3Tag.cs" />
     <Compile Include="ILanguageTag.cs" />
     <Compile Include="LanguageTag.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
@@ -126,7 +126,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\TimeSpanExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
-    <Compile Include="VCard\IVCard.cs" />
+    <Compile Include="Xml\VCard\IVCard.cs" />
     <Compile Include="CharacterSet.cs" />
     <Compile Include="ContentType.cs" />
     <Compile Include="ICharacterSet.cs" />
@@ -334,7 +334,7 @@
     <Compile Include="Xml\Node.cs" />
     <Compile Include="Xml\Xhtml\HtmlNodeExtensions.cs" />
     <Compile Include="Xml\Xhtml\XhtmlDocument.cs" />
-    <Compile Include="Xml\XmlNodeExtensions.cs" />
+    <Compile Include="Xml\Extensions\XmlNodeExtensions.cs" />
     <Compile Include="Xml\ProcessingInstruction.cs" />
     <Compile Include="Xml\QualifiedName.cs" />
     <Compile Include="Xml\Standalone.cs" />
@@ -373,7 +373,11 @@
     <Compile Include="Xml\YouTube\YouTubeVideoId.cs" />
     <Compile Include="Xml\YouTube\YouTubeWhen.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Geography\" />
+    <Folder Include="Time\" />
+    <Folder Include="Video\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
