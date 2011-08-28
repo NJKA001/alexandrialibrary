@@ -10,12 +10,12 @@ namespace Gnosis.Core
 {
     public static class ImageExtensions
     {
-        public static byte[] ToBytes(this Image self)
+        public static byte[] ToBytes(this System.Drawing.Image self)
         {
-            return self.ToBytes(ImageFormat.Bmp);
+            return self.ToBytes(System.Drawing.Imaging.ImageFormat.Bmp);
         }
 
-        public static byte[] ToBytes(this Image self, ImageFormat format)
+        public static byte[] ToBytes(this System.Drawing.Image self, System.Drawing.Imaging.ImageFormat format)
         {
             if (self == null)
                 throw new ArgumentNullException("self");

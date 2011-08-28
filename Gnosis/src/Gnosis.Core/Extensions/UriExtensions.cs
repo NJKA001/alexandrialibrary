@@ -5,7 +5,9 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
-using System.Xml;
+
+using Gnosis.Core.Document.Xml;
+using Gnosis.Core.Document.Xml.Xhtml;
 
 namespace Gnosis.Core
 {
@@ -122,22 +124,22 @@ namespace Gnosis.Core
             }
         }
 
-        public static Core.Xml.IDocument ToXmlDocument(this Uri self)
+        public static IXmlDocument ToXmlDocument(this Uri self)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
 
             var xml = self.ToContentString();
-            return Core.Xml.Document.Parse(xml);
+            return XmlDocument.Parse(xml);
         }
 
-        public static Core.Xml.IDocument ToXhtmlDocument(this Uri self)
+        public static IXmlDocument ToXhtmlDocument(this Uri self)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
 
             var html = self.ToContentString();
-            return Core.Xml.Xhtml.XhtmlDocument.Parse(html);
+            return XhtmlDocument.Parse(html);
         }
 
         /*
@@ -202,13 +204,13 @@ namespace Gnosis.Core
             }
         }
 
-        public static XmlDocument ToXml(this Uri location)
+        public static System.Xml.XmlDocument ToXml(this Uri location)
         {
-            var xml = new XmlDocument();
+            var xml = new System.Xml.XmlDocument();
 
             if (location.IsFile)
             {
-                using (var reader = XmlReader.Create(location.LocalPath))
+                using (var reader = System.Xml.XmlReader.Create(location.LocalPath))
                 {
                     xml.Load(reader);
                 }

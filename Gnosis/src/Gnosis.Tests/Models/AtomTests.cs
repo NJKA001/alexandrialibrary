@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Xml;
 
 using NUnit.Framework;
 
 using Gnosis.Core;
-using Gnosis.Core.Xml;
-using Gnosis.Core.Xml.Atom;
+using Gnosis.Core.Document.Xml;
+using Gnosis.Core.Document.Xml.Atom;
 
 namespace Gnosis.Tests.Models
 {
     [TestFixture]
     public class AtomTests
     {
-        private void MakeAtomFeedAssertions(IDocument document)
+        private void MakeAtomFeedAssertions(IXmlDocument document)
         {
             #region Constants
 
@@ -220,7 +219,7 @@ namespace Gnosis.Tests.Models
             var xmlString = original.ToString();
             Assert.IsNotNull(xmlString);
 
-            var document = Document.Parse(xmlString);
+            var document = XmlDocument.Parse(xmlString);
             //var xml = new XmlDocument();
             //xml.LoadXml(xmlString);
             //IAtomFeed feed = null;

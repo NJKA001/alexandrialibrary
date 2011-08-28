@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Xml;
 
 using NUnit.Framework;
 
 using Gnosis.Core;
-using Gnosis.Core.Xml;
-using Gnosis.Core.Xml.Rss;
+using Gnosis.Core.Document.Xml;
+using Gnosis.Core.Document.Xml.Rss;
 
 namespace Gnosis.Tests.Models
 {
     [TestFixture]
     public class RssTests
     {
-        private void MakeRssFeedAssertions(IDocument document)
+        private void MakeRssFeedAssertions(IXmlDocument document)
         {
             #region Constants
 
@@ -295,7 +294,7 @@ namespace Gnosis.Tests.Models
             var xmlString = original.ToString();
             Assert.IsNotNull(xmlString);
 
-            var document = Document.Parse(xmlString);
+            var document = XmlDocument.Parse(xmlString);
 
             //IRssFeed feed = null;
             //var encoding = CharacterSet.Utf8;

@@ -21,7 +21,7 @@ namespace Gnosis.Core
             return builder.ToString().Trim();
         }
 
-        public static void ToDebugString(this byte[] self, string prefix)
+        public static void WriteDebugString(this byte[] self, string prefix)
         {
             if (self != null)
                 System.Diagnostics.Debug.WriteLine(prefix + self.ToFormattedString());

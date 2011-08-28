@@ -7,22 +7,22 @@ using System.Text;
 using NUnit.Framework;
 
 using Gnosis.Core;
-using Gnosis.Core.Xml;
-using Gnosis.Core.Xml.Atom;
-using Gnosis.Core.Xml.DublinCore;
-using Gnosis.Core.Xml.FeedBurner;
-using Gnosis.Core.Xml.Google;
-using Gnosis.Core.Xml.MediaRss;
-using Gnosis.Core.Xml.OpenSearch;
-using Gnosis.Core.Xml.Rss;
-using Gnosis.Core.Xml.YouTube;
+using Gnosis.Core.Document.Xml;
+using Gnosis.Core.Document.Xml.Atom;
+using Gnosis.Core.Document.Xml.DublinCore;
+using Gnosis.Core.Document.Xml.FeedBurner;
+using Gnosis.Core.Document.Xml.Google;
+using Gnosis.Core.Document.Xml.MediaRss;
+using Gnosis.Core.Document.Xml.OpenSearch;
+using Gnosis.Core.Document.Xml.Rss;
+using Gnosis.Core.Document.Xml.YouTube;
 
 namespace Gnosis.Tests.Models
 {
     [TestFixture]
     public class XmlTests
     {
-        private void MakeArsXmlAssertions(IDocument xml)
+        private void MakeArsXmlAssertions(IXmlDocument xml)
         {
             #region Constants
 
@@ -116,7 +116,7 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(dcTitleContent, dcTitle.Content);
         }
 
-        private void MakeAtomXmlAssertions(IDocument xml)
+        private void MakeAtomXmlAssertions(IXmlDocument xml)
         {
             const string atomNamespace = "http://www.w3.org/2005/Atom";
             const string openSearchNamespace = "http://a9.com/-/spec/opensearchrss/1.0/";
@@ -198,7 +198,7 @@ namespace Gnosis.Tests.Models
             var output = original.ToString();
             System.Diagnostics.Debug.WriteLine(output);
 
-            var xml = Document.Parse(output);
+            var xml = XmlDocument.Parse(output);
             MakeArsXmlAssertions(xml);
         }
 

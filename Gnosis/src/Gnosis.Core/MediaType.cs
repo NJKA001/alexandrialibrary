@@ -137,6 +137,7 @@ namespace Gnosis.Core
             mediaTypes.Add(ApplicationXml);
             mediaTypes.Add(ApplicationUnknown);
             mediaTypes.Add(AudioMpeg);
+            mediaTypes.Add(ImageBmp);
             mediaTypes.Add(ImageGif);
             mediaTypes.Add(ImageJpeg);
             mediaTypes.Add(ImagePng);
@@ -220,6 +221,7 @@ namespace Gnosis.Core
 
         public static readonly IMediaType AudioMpeg = new MediaType(TypeAudio, "mpeg", new List<string> { ".mp3", ".mp2", ".mp1" });
 
+        public static readonly IMediaType ImageBmp = new MediaType(TypeImage, "x-bmp", new List<string> { ".bmp", ".dib" }, new List<string> { "image/x-ms_bmp", "image/bmp" }, new List<byte[]> { new byte[] { 66, 77 } });
         public static readonly IMediaType ImageGif = new MediaType(TypeImage, "gif", new List<string> { ".gif" }, new List<string>(), new List<byte[]> { new byte[] { 71, 73, 70, 56, 55, 97 }, new byte[] { 71, 73, 70, 56, 57, 97 } });        
         public static readonly IMediaType ImageJpeg = new MediaType(TypeImage, "jpeg", new List<string> { ".jpg", ".jpeg", ".jpe", ".jif", ".jfif", ".jfi" }, new List<string>(), new List<byte[]> { new byte[] { 255, 216, 255, 224 } });
         public static readonly IMediaType ImagePng = new MediaType(TypeImage, "png", new List<string> { ".png" }, new List<string> { "image/x-png" }, new List<byte[]> { new byte[] { 137, 80, 78, 71, 13, 10, 26, 10} });

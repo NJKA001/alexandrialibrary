@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
-using Gnosis.Core.Xml;
-using Gnosis.Core.Xml.Xhtml;
+using Gnosis.Core.Document.Xml;
+using Gnosis.Core.Document.Xml.Xhtml;
 
 using NUnit.Framework;
 
@@ -14,7 +14,7 @@ namespace Gnosis.Tests.Models
     [TestFixture]
     public class XhtmlTests
     {
-        private static void MakeDocumentAssertions(IDocument xhtml)
+        private static void MakeDocumentAssertions(IXmlDocument xhtml)
         {
             const string paragraphContent = "How stable will the West Antarctic Ice sheet be as";
 

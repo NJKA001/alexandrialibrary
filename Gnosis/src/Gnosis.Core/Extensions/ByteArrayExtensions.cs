@@ -9,10 +9,10 @@ namespace Gnosis.Core
 {
     public static class ByteArrayExtensions
     {
-        public static Image ToImage(this byte[] self)
+        public static System.Drawing.Image ToImage(this byte[] self)
         {
             var stream = new MemoryStream(self);
-            return Image.FromStream(stream);
+            return System.Drawing.Image.FromStream(stream);
         }
     }
 }
