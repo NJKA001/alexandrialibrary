@@ -109,6 +109,10 @@
     <Compile Include="Extensions\FileInfoExtensions.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
     <Compile Include="Audio\Id3\IId3Tag.cs" />
+    <Compile Include="IDomainName.cs" />
+    <Compile Include="IHost.cs" />
+    <Compile Include="IIpV4Address.cs" />
+    <Compile Include="IIpV6Address.cs" />
     <Compile Include="ILanguageTag.cs" />
     <Compile Include="Image\BitmapImage.cs" />
     <Compile Include="Image\IImage.cs" />
@@ -119,7 +123,11 @@
     <Compile Include="IResourceIdentifier.cs" />
     <Compile Include="IResourceLocation.cs" />
     <Compile Include="IResourceName.cs" />
+    <Compile Include="IResourcePath.cs" />
+    <Compile Include="IResourceQuery.cs" />
     <Compile Include="IResourceScheme.cs" />
+    <Compile Include="IResourceUserInfo.cs" />
+    <Compile Include="ITopLevelDomain.cs" />
     <Compile Include="LanguageTag.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="ICountry.cs" />

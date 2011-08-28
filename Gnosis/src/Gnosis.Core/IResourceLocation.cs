@@ -8,10 +8,11 @@ namespace Gnosis.Core
     public interface IResourceLocation
         : IResourceIdentifier
     {
-        string Host { get; }
-        string User { get; }
-        string Password { get; }
+        IResourceUserInfo UserInfo { get; }
+        IHost Host { get; }
         int Port { get; }
-        string Path { get; }
+        IResourcePath Path { get; }
+        IResourceQuery Query { get; }
+        string Fragment { get; }
     }
 }
