@@ -138,6 +138,63 @@ namespace Gnosis.Core
             AddScheme(content);
             AddScheme(cvs);
             AddScheme(doi);
+            AddScheme(ed2k);
+            AddScheme(facetime);
+            AddScheme(feed);
+            AddScheme(finger);
+            AddScheme(fish);
+            AddScheme(git);
+            AddScheme(gg);
+            AddScheme(gizmoproject);
+            AddScheme(gtalk);
+            AddScheme(irc);
+            AddScheme(ircs);
+            AddScheme(irc6);
+            AddScheme(itms);
+            AddScheme(itms_apps);
+            AddScheme(jar);
+            AddScheme(javascript);
+            AddScheme(keyparc);
+            AddScheme(ldaps);
+            AddScheme(magnet);
+            AddScheme(maps);
+            AddScheme(market);
+            AddScheme(message);
+            AddScheme(mms);
+            AddScheme(msnim);
+            AddScheme(mumble);
+            AddScheme(mvn);
+            AddScheme(notes);
+            AddScheme(palm);
+            AddScheme(paparazzi);
+            AddScheme(psyc);
+            AddScheme(rmi);
+            AddScheme(rtmp);
+            AddScheme(secondlife);
+            AddScheme(sgn);
+            AddScheme(skype);
+            AddScheme(spotify);
+            AddScheme(ssh);
+            AddScheme(sftp);
+            AddScheme(smb);
+            AddScheme(soldat);
+            AddScheme(steam);
+            AddScheme(svn);
+            AddScheme(teamspeak);
+            AddScheme(things);
+            AddScheme(udp);
+            AddScheme(unreal);
+            AddScheme(ut2004);
+            AddScheme(ventrilio);
+            AddScheme(view_source);
+            AddScheme(webcal);
+            AddScheme(ws);
+            AddScheme(wss);
+            AddScheme(wtai);
+            AddScheme(wyciwyg);
+            AddScheme(xfire);
+            AddScheme(xri);
+            AddScheme(ymsgr);
         }
 
         private static void AddScheme(IResourceScheme scheme)
@@ -1577,6 +1634,17 @@ namespace Gnosis.Core
         /// </remarks>
         public static IResourceScheme things = new ResourceScheme("things", "Things Protocol", false);
 
+        /// <summary>
+        /// BitTorrent Protocol
+        /// </summary>
+        /// <example>
+        /// udp://<server>[:<port>]/
+        /// </example>
+        /// <remarks>
+        ///  UDP tracker protocol
+        /// Based on UDP
+        /// </remarks>
+        public static IResourceScheme udp = new ResourceScheme("udp", "BitTorrent Protocol", false);
 
         /// <summary>
         /// Unreal Legacy Protocol
