@@ -8,7 +8,7 @@ namespace Gnosis.Core
     public class RepresentationFactory
         : IRepresentationFactory
     {
-        public IRepresentation Create(IResourceLocation location)
+        public IRepresentation Create(Uri location)
         {
             if (location == null)
                 throw new ArgumentNullException("location");

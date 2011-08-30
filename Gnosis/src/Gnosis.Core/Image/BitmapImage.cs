@@ -8,7 +8,7 @@ namespace Gnosis.Core.Image
     public class BitmapImage
         : ImageBase
     {
-        public BitmapImage(IResourceLocation location)
+        public BitmapImage(Uri location)
             : base(Core.MediaType.ImageBmp, location)
         {
         }

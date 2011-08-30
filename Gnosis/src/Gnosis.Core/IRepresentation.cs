@@ -7,7 +7,7 @@ namespace Gnosis.Core
 {
     public interface IRepresentation
     {
-        IResourceLocation Location { get; }
+        Uri Location { get; }
         IMediaType MediaType { get; }
     }
 }

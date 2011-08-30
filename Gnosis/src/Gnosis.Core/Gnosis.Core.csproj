@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Document\IDocument.cs" />
-    <Compile Include="DomainName.cs" />
     <Compile Include="Extensions\ByteArrayExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\DebugExtensions.cs" />
@@ -110,26 +109,13 @@
     <Compile Include="Extensions\FileInfoExtensions.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
     <Compile Include="Audio\Id3\IId3Tag.cs" />
-    <Compile Include="IDomainName.cs" />
-    <Compile Include="IHost.cs" />
-    <Compile Include="IIPAddress4.cs" />
-    <Compile Include="IIPAddress6.cs" />
     <Compile Include="ILanguageTag.cs" />
     <Compile Include="Image\BitmapImage.cs" />
     <Compile Include="Image\IImage.cs" />
     <Compile Include="Image\ImageBase.cs" />
     <Compile Include="Image\JpegImage.cs" />
-    <Compile Include="IPAddress4.cs" />
-    <Compile Include="IPAddress6.cs" />
     <Compile Include="IRepresentation.cs" />
     <Compile Include="IRepresentationFactory.cs" />
-    <Compile Include="IResourceIdentifier.cs" />
-    <Compile Include="IResourceLocation.cs" />
-    <Compile Include="IResourceName.cs" />
-    <Compile Include="IResourcePath.cs" />
-    <Compile Include="IResourceQuery.cs" />
-    <Compile Include="IResourceScheme.cs" />
-    <Compile Include="IResourceUserInfo.cs" />
     <Compile Include="ITopLevelDomain.cs" />
     <Compile Include="LanguageTag.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
@@ -139,11 +125,6 @@
     <Compile Include="IScript.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="RepresentationFactory.cs" />
-    <Compile Include="ResourceIdentifier.cs" />
-    <Compile Include="ResourceLocation.cs" />
-    <Compile Include="ResourceQuery.cs" />
-    <Compile Include="ResourceScheme.cs" />
-    <Compile Include="ResourceUserInfo.cs" />
     <Compile Include="Script.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringBuilderExtensions.cs" />

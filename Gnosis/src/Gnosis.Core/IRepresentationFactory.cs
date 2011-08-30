@@ -7,6 +7,6 @@ namespace Gnosis.Core
 {
     public interface IRepresentationFactory
     {
-        IRepresentation Create(IResourceLocation location);
+        IRepresentation Create(Uri location);
     }
 }
