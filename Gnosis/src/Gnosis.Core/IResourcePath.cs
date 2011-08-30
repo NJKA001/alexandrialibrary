@@ -8,5 +8,7 @@ namespace Gnosis.Core
     public interface IResourcePath
     {
         IEnumerable<string> Parts { get; }
+        string FileName { get; }
+        string Extension { get; }
     }
 }
