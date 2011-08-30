@@ -6,12 +6,8 @@ using System.Text;
 namespace Gnosis.Core.Document.Xml
 {
     public interface IXmlDocument
-        : IMarkup
+        : IDocument
     {
-        IDeclaration Declaration { get; }
-        IDocumentType DocumentType { get; }
-        IEnumerable<IProcessingInstruction> ProcessingInstructions { get; }
-        IEnumerable<IComment> Comments { get; }
-        IElement Root { get; }
+        IXmlElement Xml { get; }
     }
 }

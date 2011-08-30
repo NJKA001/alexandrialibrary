@@ -22,7 +22,7 @@ namespace Gnosis.Tests.Models
     [TestFixture]
     public class XmlTests
     {
-        private void MakeArsXmlAssertions(IXmlDocument xml)
+        private void MakeArsXmlAssertions(IXmlElement xml)
         {
             #region Constants
 
@@ -116,7 +116,7 @@ namespace Gnosis.Tests.Models
             Assert.AreEqual(dcTitleContent, dcTitle.Content);
         }
 
-        private void MakeAtomXmlAssertions(IXmlDocument xml)
+        private void MakeAtomXmlAssertions(IXmlElement xml)
         {
             const string atomNamespace = "http://www.w3.org/2005/Atom";
             const string openSearchNamespace = "http://a9.com/-/spec/opensearchrss/1.0/";
@@ -198,7 +198,7 @@ namespace Gnosis.Tests.Models
             var output = original.ToString();
             System.Diagnostics.Debug.WriteLine(output);
 
-            var xml = XmlDocument.Parse(output);
+            var xml = XmlElement.Parse(output);
             MakeArsXmlAssertions(xml);
         }
 

@@ -8,6 +8,6 @@ namespace Gnosis.Core
     public interface IRepresentation
     {
         Uri Location { get; }
-        IMediaType MediaType { get; }
+        IContentType ContentType { get; }
     }
 }

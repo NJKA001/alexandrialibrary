@@ -47,6 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Document\IDocument.cs" />
+    <Compile Include="Document\Xml\IXmlDocument.cs" />
+    <Compile Include="Document\Xml\Xhtml\XhtmlDocument.cs" />
+    <Compile Include="Document\Xml\XmlDocument.cs" />
     <Compile Include="Extensions\ByteArrayExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\DebugExtensions.cs" />
@@ -111,9 +114,11 @@
     <Compile Include="Audio\Id3\IId3Tag.cs" />
     <Compile Include="ILanguageTag.cs" />
     <Compile Include="Image\BitmapImage.cs" />
+    <Compile Include="Image\GifImage.cs" />
     <Compile Include="Image\IImage.cs" />
     <Compile Include="Image\ImageBase.cs" />
     <Compile Include="Image\JpegImage.cs" />
+    <Compile Include="Image\PngImage.cs" />
     <Compile Include="IRepresentation.cs" />
     <Compile Include="IRepresentationFactory.cs" />
     <Compile Include="ITopLevelDomain.cs" />
@@ -271,7 +276,7 @@
     <Compile Include="Document\Xml\ICharacterData.cs" />
     <Compile Include="Document\Xml\IComment.cs" />
     <Compile Include="Document\Xml\IDeclaration.cs" />
-    <Compile Include="Document\Xml\IXmlDocument.cs" />
+    <Compile Include="Document\Xml\IXmlElement.cs" />
     <Compile Include="Document\Xml\IDocumentType.cs" />
     <Compile Include="Document\Xml\IElement.cs" />
     <Compile Include="Document\Xml\IElementFactory.cs" />
@@ -334,14 +339,14 @@
     <Compile Include="Document\Xml\CDataSection.cs" />
     <Compile Include="Document\Xml\Comment.cs" />
     <Compile Include="Document\Xml\Declaration.cs" />
-    <Compile Include="Document\Xml\XmlDocument.cs" />
+    <Compile Include="Document\Xml\XmlElement.cs" />
     <Compile Include="Document\Xml\Element.cs" />
     <Compile Include="Document\Xml\EscapedSection.cs" />
     <Compile Include="Document\Xml\LangAttribute.cs" />
     <Compile Include="Document\Xml\NamespaceDeclaration.cs" />
     <Compile Include="Document\Xml\Node.cs" />
     <Compile Include="Document\Xml\Xhtml\HtmlNodeExtensions.cs" />
-    <Compile Include="Document\Xml\Xhtml\XhtmlDocument.cs" />
+    <Compile Include="Document\Xml\Xhtml\XhtmlElement.cs" />
     <Compile Include="Document\Xml\Extensions\XmlNodeExtensions.cs" />
     <Compile Include="Document\Xml\ProcessingInstruction.cs" />
     <Compile Include="Document\Xml\QualifiedName.cs" />

@@ -15,7 +15,7 @@ namespace Gnosis.Tests.Models
     [TestFixture]
     public class AtomTests
     {
-        private void MakeAtomFeedAssertions(IXmlDocument document)
+        private void MakeAtomFeedAssertions(IXmlElement document)
         {
             #region Constants
 
@@ -219,7 +219,7 @@ namespace Gnosis.Tests.Models
             var xmlString = original.ToString();
             Assert.IsNotNull(xmlString);
 
-            var document = XmlDocument.Parse(xmlString);
+            var document = XmlElement.Parse(xmlString);
             //var xml = new XmlDocument();
             //xml.LoadXml(xmlString);
             //IAtomFeed feed = null;

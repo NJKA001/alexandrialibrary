@@ -8,8 +8,8 @@ namespace Gnosis.Core.Image
     public class JpegImage
         : ImageBase
     {
-        public JpegImage(Uri location)
-            : base(Core.MediaType.ImageJpeg, location)
+        public JpegImage(Uri location, IContentType contentType)
+            : base(location, contentType)
         {
         }
     }

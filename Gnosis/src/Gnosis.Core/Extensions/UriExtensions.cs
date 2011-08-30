@@ -124,22 +124,22 @@ namespace Gnosis.Core
             }
         }
 
-        public static IXmlDocument ToXmlDocument(this Uri self)
+        public static IXmlElement ToXmlDocument(this Uri self)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
 
             var xml = self.ToContentString();
-            return XmlDocument.Parse(xml);
+            return XmlElement.Parse(xml);
         }
 
-        public static IXmlDocument ToXhtmlDocument(this Uri self)
+        public static IXmlElement ToXhtmlDocument(this Uri self)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
 
             var html = self.ToContentString();
-            return XhtmlDocument.Parse(html);
+            return XhtmlElement.Parse(html);
         }
 
         /*
@@ -204,7 +204,7 @@ namespace Gnosis.Core
             }
         }
 
-        public static System.Xml.XmlDocument ToXml(this Uri location)
+        private static System.Xml.XmlDocument ToXml(this Uri location)
         {
             var xml = new System.Xml.XmlDocument();
 

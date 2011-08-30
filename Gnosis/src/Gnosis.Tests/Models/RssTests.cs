@@ -15,7 +15,7 @@ namespace Gnosis.Tests.Models
     [TestFixture]
     public class RssTests
     {
-        private void MakeRssFeedAssertions(IXmlDocument document)
+        private void MakeRssFeedAssertions(IXmlElement document)
         {
             #region Constants
 
@@ -294,7 +294,7 @@ namespace Gnosis.Tests.Models
             var xmlString = original.ToString();
             Assert.IsNotNull(xmlString);
 
-            var document = XmlDocument.Parse(xmlString);
+            var document = XmlElement.Parse(xmlString);
 
             //IRssFeed feed = null;
             //var encoding = CharacterSet.Utf8;

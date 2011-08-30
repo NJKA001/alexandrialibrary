@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Gnosis.Core.Image
 {
-    public class BitmapImage
+    public class PngImage
         : ImageBase
     {
-        public BitmapImage(Uri location, IContentType contentType)
+        public PngImage(Uri location, IContentType contentType)
             : base(location, contentType)
         {
         }

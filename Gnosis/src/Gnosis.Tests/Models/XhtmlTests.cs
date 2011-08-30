@@ -14,7 +14,7 @@ namespace Gnosis.Tests.Models
     [TestFixture]
     public class XhtmlTests
     {
-        private static void MakeDocumentAssertions(IXmlDocument xhtml)
+        private static void MakeDocumentAssertions(IXmlElement xhtml)
         {
             const string paragraphContent = "How stable will the West Antarctic Ice sheet be as";
 
@@ -60,7 +60,7 @@ namespace Gnosis.Tests.Models
             var location = new Uri(fileInfo.FullName);
 
             var original = location.ToXhtmlDocument();
-            var xhtml = XhtmlDocument.Parse(original.ToString());
+            var xhtml = XhtmlElement.Parse(original.ToString());
             MakeDocumentAssertions(xhtml);
         }
 

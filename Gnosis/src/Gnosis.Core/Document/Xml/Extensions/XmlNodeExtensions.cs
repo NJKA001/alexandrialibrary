@@ -29,7 +29,7 @@ namespace Gnosis.Core.Document.Xml
             MapCustomElement("link", elem => elem.Namespaces.Where(ns => ns != null && ns.Identifier.ToString() == "http://www.w3.org/2005/Atom").FirstOrDefault() != null, (parent, name) => new AtomLink(parent, name));
 
             //RSS
-            MapCustomElement("rss", elem => elem.Parent is IXmlDocument, (parent, name) => new RssFeed(parent, name));
+            MapCustomElement("rss", elem => elem.Parent is IXmlElement, (parent, name) => new RssFeed(parent, name));
             MapCustomElement("category", elem => (elem.Parent is IRssChannel || elem.Parent is IRssItem), (parent, name) => new RssCategory(parent, name));
             MapCustomElement("channel", elem => elem.Parent is IRssFeed, (parent, name) => new RssChannel(parent, name));
             MapCustomElement("cloud", elem => elem.Parent is IRssChannel, (parent, name) => new RssCloud(parent, name));
