@@ -111,8 +111,8 @@
     <Compile Include="Audio\Id3\IId3Tag.cs" />
     <Compile Include="IDomainName.cs" />
     <Compile Include="IHost.cs" />
-    <Compile Include="IIpV4Address.cs" />
-    <Compile Include="IIpV6Address.cs" />
+    <Compile Include="IIPAddress4.cs" />
+    <Compile Include="IIPAddress6.cs" />
     <Compile Include="ILanguageTag.cs" />
     <Compile Include="Image\BitmapImage.cs" />
     <Compile Include="Image\IImage.cs" />

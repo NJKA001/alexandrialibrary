@@ -7,6 +7,6 @@ namespace Gnosis.Core
 {
     public interface IHost
     {
-        string Name { get; }
+        bool IsLocalhost { get; }
     }
 }

@@ -8,8 +8,8 @@ namespace Gnosis.Core
     public interface IDomainName
         : IHost
     {
-        ITopLevelDomain TopLevelDomain { get; }
         string PrimaryDomain { get; }
+        ITopLevelDomain TopLevelDomain { get; }
         IEnumerable<string> Subdomains { get; }
     }
 }
