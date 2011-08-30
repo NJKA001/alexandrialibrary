@@ -10,9 +10,7 @@ namespace Gnosis.Core
     {
         IResourceUserInfo UserInfo { get; }
         IHost Host { get; }
-        int Port { get; }
+        uint Port { get; }
         IResourcePath Path { get; }
-        IResourceQuery Query { get; }
-        string Fragment { get; }
     }
 }

@@ -7,6 +7,9 @@ namespace Gnosis.Core
 {
     public interface IResourceQuery
     {
-        IEnumerable<KeyValuePair<string, string>> Parameters { get; }
+        IEnumerable<KeyValuePair<string, IEnumerable<string>>> Parameters { get; }
+
+        bool ContainsKey(string key);
+        IEnumerable<string> GetValues(string key);
     }
 }

@@ -12,6 +12,7 @@ namespace Gnosis.Core
         ICountry Country { get; }
         bool IsGeneric { get; }
         bool IsInternational { get; }
+        bool IsRecognized { get; }
         //.परीक्षा
     }
 }

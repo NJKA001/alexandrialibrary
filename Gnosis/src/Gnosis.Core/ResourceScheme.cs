@@ -211,8 +211,8 @@ namespace Gnosis.Core
 
         public static IResourceScheme Parse(string name)
         {
-            if (name == null)
-                throw new ArgumentNullException("name");
+            if (string.IsNullOrEmpty(name))
+                return null;
 
             var lower = name.ToLower();
 
