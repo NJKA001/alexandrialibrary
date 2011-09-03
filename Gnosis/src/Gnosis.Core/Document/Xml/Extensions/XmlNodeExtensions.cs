@@ -58,7 +58,7 @@ namespace Gnosis.Core.Document.Xml
             //Dublin Core
             MapCustomElement("title", elem => elem.CurrentNamespace != null && elem.CurrentNamespace.Identifier.ToString().StartsWith("http://purl.org/dc/elements/"), (parent, name) => new DcTitle(parent, name));
 
-            //Google Data
+            //Namespaces
             AddNamespace(new AtomNamespace());
             AddNamespace(new GoogleDataNamespace());
             AddNamespace(new YouTubeNamespace());

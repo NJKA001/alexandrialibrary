@@ -84,6 +84,15 @@ namespace Gnosis.Core.Document.Xml
             return result;
         }
 
+        protected ICharacterSet GetAttributeCharacterSet(string name)
+        {
+            var s = GetAttributeString(name);
+
+            return s != null ?
+                CharacterSet.Parse(s)
+                : null;
+        }
+
         protected ILanguageTag GetAttributeLanguageTag(string name)
         {
             var s = GetAttributeString(name);

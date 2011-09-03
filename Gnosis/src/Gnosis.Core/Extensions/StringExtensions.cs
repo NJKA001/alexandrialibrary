@@ -926,7 +926,7 @@ namespace Gnosis.Core
         public static DateTime AsRfc822DateTime(this string self)
         {
             var date = DateTime.MinValue;
-            Rfc822DateTime.TryParse(self, out date);
+            Time.Rfc822DateTime.TryParse(self, out date);
             return date;
         }
 

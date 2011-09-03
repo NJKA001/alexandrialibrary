@@ -9,6 +9,60 @@ namespace Gnosis.Core.Document.Xml.Xhtml
 {
     public static class HtmlNodeExtensions
     {
+        #region Custom Namespaces, Elements and Attributes
+
+        static HtmlNodeExtensions()
+        {
+            MapCustomElement("a", elem => true, (parent, name) => new HtmlAnchor(parent, name));
+        }
+
+        private static readonly IDictionary<string, IList<IAttributeFactory>> customAttributeFactories = new Dictionary<string, IList<IAttributeFactory>>();
+        private static readonly IDictionary<string, IList<IElementFactory>> customElementFactories = new Dictionary<string, IList<IElementFactory>>();
+        private static readonly IDictionary<Uri, INamespace> namespaces = new Dictionary<Uri, INamespace>();
+
+        public static void MapCustomElement(string elementName, Func<IElement, bool> validate, Func<INode, IQualifiedName, IElement> create)
+        {
+            var factory = new ElementFactory(elementName, validate, create);
+
+            if (!customElementFactories.ContainsKey(elementName))
+                customElementFactories[elementName] = new List<IElementFactory> { factory };
+            else
+                customElementFactories[elementName].Add(factory);
+        }
+
+        public static IElement GetCustomElement(IElement element, INode parent, IQualifiedName name)
+        {
+            if (element.CurrentNamespace != null && namespaces.ContainsKey(element.CurrentNamespace.Identifier))
+            {
+                var customElement = namespaces[element.CurrentNamespace.Identifier].GetElement(parent, name);
+                if (customElement != null)
+                    return customElement;
+            }
+
+            var elementName = element.Name.LocalPart;
+
+            if (!customElementFactories.ContainsKey(elementName))
+                return null;
+
+            foreach (var factory in customElementFactories[elementName])
+            {
+                if (factory.IsValidFor(element))
+                    return factory.Create(parent, name);
+            }
+
+            return null;
+        }
+
+        public static void AddNamespace(INamespace ns)
+        {
+            if (ns == null)
+                throw new ArgumentNullException("ns");
+
+            namespaces[ns.Identifier] = ns;
+        }
+
+        #endregion
+
         public static IQualifiedName ToQualifiedName(this HtmlNode self)
         {
             if (self == null)
@@ -75,6 +129,18 @@ namespace Gnosis.Core.Document.Xml.Xhtml
 
             foreach (var child in self.ToChildren(element))
                 element.AddChild(child);
+
+            var customElement = GetCustomElement(element, parent, name);
+            if (customElement != null)
+            {
+                foreach (var attribute in self.ToAttributes(customElement))
+                    customElement.AddAttribute(attribute);
+
+                foreach (var child in self.ToChildren(customElement))
+                    customElement.AddChild(child);
+
+                return customElement;
+            }
 
             return element;
         }

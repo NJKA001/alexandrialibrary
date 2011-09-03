@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Globalization;
 
-namespace Gnosis.Core
+namespace Gnosis.Core.Time
 {
     /// <summary>
     /// Provides methods for converting <see cref="DateTime"/> structures 

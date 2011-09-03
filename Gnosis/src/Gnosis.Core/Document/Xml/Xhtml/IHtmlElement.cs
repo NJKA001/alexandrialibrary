@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core
+namespace Gnosis.Core.Document.Xml.Xhtml
 {
-    public interface IPicsRating
+    public interface IHtmlElement
+        : IElement
     {
-        string Value { get; }
     }
 }

@@ -14,7 +14,7 @@ namespace Gnosis.Core
 
         public static string ToRfc822String(this DateTime self)
         {
-            return Rfc822DateTime.ToString(self.ToUniversalTime());
+            return Time.Rfc822DateTime.ToString(self.ToUniversalTime());
         }
     }
 }

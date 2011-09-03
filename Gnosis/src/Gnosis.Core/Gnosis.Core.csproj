@@ -48,6 +48,10 @@
   <ItemGroup>
     <Compile Include="Document\IDocument.cs" />
     <Compile Include="Document\Xml\IXmlDocument.cs" />
+    <Compile Include="Document\Xml\Xhtml\AnchorDirection.cs" />
+    <Compile Include="Document\Xml\Xhtml\HtmlAnchor.cs" />
+    <Compile Include="Document\Xml\Xhtml\IHtmlAnchor.cs" />
+    <Compile Include="Document\Xml\Xhtml\IHtmlElement.cs" />
     <Compile Include="Document\Xml\Xhtml\XhtmlDocument.cs" />
     <Compile Include="Document\Xml\XmlDocument.cs" />
     <Compile Include="Extensions\ByteArrayExtensions.cs" />
@@ -121,7 +125,9 @@
     <Compile Include="Image\PngImage.cs" />
     <Compile Include="IRepresentation.cs" />
     <Compile Include="IRepresentationFactory.cs" />
-    <Compile Include="ITopLevelDomain.cs" />
+    <Compile Include="IRepresentationGraph.cs" />
+    <Compile Include="IRepresentationLink.cs" />
+    <Compile Include="ISpider.cs" />
     <Compile Include="LanguageTag.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="ICountry.cs" />
@@ -130,6 +136,8 @@
     <Compile Include="IScript.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="RepresentationFactory.cs" />
+    <Compile Include="RepresentationGraph.cs" />
+    <Compile Include="RepresentationLink.cs" />
     <Compile Include="Script.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringBuilderExtensions.cs" />
@@ -147,15 +155,14 @@
     <Compile Include="IContentType.cs" />
     <Compile Include="IMedia.cs" />
     <Compile Include="IMediaType.cs" />
-    <Compile Include="IPicsRating.cs" />
     <Compile Include="Media.cs" />
     <Compile Include="MediaContinuityGroup.cs" />
     <Compile Include="MediaInteractivityGroup.cs" />
     <Compile Include="MediaLayoutGroup.cs" />
     <Compile Include="MediaSensoryGroup.cs" />
     <Compile Include="MediaType.cs" />
-    <Compile Include="PicsRating.cs" />
-    <Compile Include="Rfc822DateTime.cs" />
+    <Compile Include="Spiders\LyricsWikia\ArtistsCategorySpider.cs" />
+    <Compile Include="Time\Rfc822DateTime.cs" />
     <Compile Include="Document\Xml\Atom\AtomCommon.cs" />
     <Compile Include="Document\Xml\Atom\AtomLink.cs" />
     <Compile Include="Document\Xml\Atom\AtomTextType.cs" />
@@ -385,11 +392,9 @@
     <Compile Include="Document\Xml\YouTube\YouTubeUsername.cs" />
     <Compile Include="Document\Xml\YouTube\YouTubeVideoId.cs" />
     <Compile Include="Document\Xml\YouTube\YouTubeWhen.cs" />
-    <Compile Include="TopLevelDomain.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Geography\" />
-    <Folder Include="Time\" />
     <Folder Include="Video\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

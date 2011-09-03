@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Spiders\LyricsWikiaSpiderTests.cs" />
     <Compile Include="Models\AtomTests.cs" />
     <Compile Include="Models\CharacterSetTests.cs" />
     <Compile Include="Models\ContentTypeTests.cs" />

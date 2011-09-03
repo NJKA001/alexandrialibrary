@@ -54,7 +54,7 @@ namespace Gnosis.Core
 
             var date = DateTime.MinValue;
             var s = self.ToString();
-            if (Rfc822DateTime.TryParse(s, out date))
+            if (Time.Rfc822DateTime.TryParse(s, out date))
                 return date;
 
             return DateTime.Parse(s);
@@ -130,14 +130,6 @@ namespace Gnosis.Core
                 return new List<string>();
 
             return ((string)self.ToString()).ToNames();
-        }
-
-        public static IPicsRating ToPicsRating(this object self)
-        {
-            if (self == null)
-                return null;
-
-            return new PicsRating(self.ToString());
         }
 
         public static IRegion ToRegion(this object self)
