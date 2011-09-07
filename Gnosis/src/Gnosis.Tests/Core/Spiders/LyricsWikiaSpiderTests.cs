@@ -22,7 +22,7 @@ namespace Gnosis.Tests.Core.Spiders
             var graph = new RepresentationGraph();
             spider.Crawl(graph);
 
-            Assert.AreEqual(1, graph.Representations.Count());
+            Assert.AreEqual(1, graph.GetRepresentations().Count());
         }
     }
 }

@@ -7,12 +7,12 @@ namespace Gnosis.Core
 {
     public interface IRepresentationGraph
     {
-        IEnumerable<IRepresentation> Representations { get; }
-        IEnumerable<IRepresentationLink> Links { get; }
-        IEnumerable<IRepresentation> Sources { get; }
-        IEnumerable<IRepresentation> Targets { get; }
-
         void AddLink(IRepresentationLink link);
         void AddRepresentation(IRepresentation representation);
+
+        IEnumerable<IRepresentationLink> GetLinks();
+        IEnumerable<IRepresentation> GetRepresentations();
+        IEnumerable<IRepresentation> GetSources();
+        IEnumerable<IRepresentation> GetTargets();
     }
 }
