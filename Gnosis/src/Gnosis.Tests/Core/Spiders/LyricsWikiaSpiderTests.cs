@@ -18,11 +18,14 @@ namespace Gnosis.Tests.Core.Spiders
         [Test]
         public void TestArtistsCategorySpider()
         {
-            var spider = new ArtistsCategorySpider(factory);
-            var graph = new RepresentationGraph();
-            spider.Crawl(graph);
+            const int categoryCount = 44;
 
-            Assert.AreEqual(1, graph.GetRepresentations().Count());
+            var spider = new ArtistsMainCategorySpider(factory);
+            var root = new Uri("http://lyrics.wikia.com/Category:Artists");
+            var graph = new LinkGraph(root, "Artists Categories", null, null);
+            spider.Crawl(graph, root);
+
+            Assert.AreEqual(categoryCount, graph.Children.Count());
         }
     }
 }

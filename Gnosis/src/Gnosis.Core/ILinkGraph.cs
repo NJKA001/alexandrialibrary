@@ -5,12 +5,14 @@ using System.Text;
 
 namespace Gnosis.Core
 {
-    public interface IRepresentationLink
+    public interface ILinkGraph
     {
-        string Content { get; }
+        Uri Source { get; }
+        string Name { get; }
         string Rel { get; }
         string Rev { get; }
-        IRepresentation Source { get; }
-        IRepresentation Target { get; }
+        IEnumerable<ILinkGraph> Children { get; }
+
+        void AddChild(ILinkGraph child);
     }
 }

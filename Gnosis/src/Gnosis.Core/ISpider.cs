@@ -7,7 +7,6 @@ namespace Gnosis.Core
 {
     public interface ISpider
     {
-        void Crawl(IRepresentationGraph graph);
-        void Crawl(IRepresentationGraph graph, Uri location);
+        void Crawl(ILinkGraph graph, Uri location);
     }
 }

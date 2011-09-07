@@ -9,10 +9,10 @@ using Gnosis.Core.Document.Xml.Xhtml;
 
 namespace Gnosis.Core.Spiders.LyricsWikia
 {
-    public class ArtistsCategorySpider
+    public class ArtistsMainCategorySpider
         : ISpider
     {
-        public ArtistsCategorySpider(IRepresentationFactory factory)
+        public ArtistsMainCategorySpider(IRepresentationFactory factory)
         {
             if (factory == null)
                 throw new ArgumentNullException("factory");
@@ -24,12 +24,7 @@ namespace Gnosis.Core.Spiders.LyricsWikia
         private readonly IRepresentationFactory factory;
         private readonly Uri defaultLocation = new Uri("http://lyrics.wikia.com/Category:Artists");
 
-        public void Crawl(IRepresentationGraph graph)
-        {
-            Crawl(graph, defaultLocation);
-        }
-
-        public void Crawl(IRepresentationGraph graph, Uri location)
+        public void Crawl(ILinkGraph graph, Uri location)
         {
             if (graph == null)
                 throw new ArgumentNullException("graph");
@@ -40,12 +35,14 @@ namespace Gnosis.Core.Spiders.LyricsWikia
             if (document == null)
                 return;
 
-            graph.AddRepresentation(document);
-
-            foreach (var anchor in document.Xml.Root.Where<IHtmlAnchor>(x => x != null))
+            foreach (var anchor in document.Xml.Root.Where<IHtmlAnchor>(x => x != null && x.Href.ToString().StartsWith("/Category:Artists_")))
             {
                 System.Diagnostics.Debug.WriteLine("anchor. href=" + anchor.Href.ToString());
-                //TODO: filter anchors for the Aritst letter links
+                graph.AddChild(new LinkGraph(anchor.Href, anchor.Content, anchor.Rel, anchor.Rev));
+                //var subCategory = factory.Create(anchor.Href);
+                //var link = new RepresentationLink(anchor.Content, anchor.Rel, anchor.Rev, document, subCategory);
+                //graph.AddLink(link);
+                //System.Threading.Thread.Sleep(2000);
             }
         }
     }
