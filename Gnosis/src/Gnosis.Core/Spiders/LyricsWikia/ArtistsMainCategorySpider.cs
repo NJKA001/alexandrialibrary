@@ -22,16 +22,14 @@ namespace Gnosis.Core.Spiders.LyricsWikia
 
 
         private readonly IRepresentationFactory factory;
-        private readonly Uri defaultLocation = new Uri("http://lyrics.wikia.com/Category:Artists");
+        //private readonly Uri defaultLocation = new Uri("http://lyrics.wikia.com/Category:Artists");
 
-        public void Crawl(ILinkGraph graph, Uri location)
+        public void Crawl(ILinkGraph graph)
         {
             if (graph == null)
                 throw new ArgumentNullException("graph");
-            if (location == null)
-                throw new ArgumentNullException("location");
-
-            var document = factory.Create(location) as IXmlDocument;
+            
+            var document = factory.Create(graph.Source) as IXmlDocument;
             if (document == null)
                 return;
 

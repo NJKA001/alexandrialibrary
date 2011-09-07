@@ -23,7 +23,7 @@ namespace Gnosis.Tests.Core.Spiders
             var spider = new ArtistsMainCategorySpider(factory);
             var root = new Uri("http://lyrics.wikia.com/Category:Artists");
             var graph = new LinkGraph(root, "Artists Categories", null, null);
-            spider.Crawl(graph, root);
+            spider.Crawl(graph);
 
             Assert.AreEqual(categoryCount, graph.Children.Count());
         }
