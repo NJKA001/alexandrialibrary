@@ -125,6 +125,9 @@
     <Compile Include="Image\PngImage.cs" />
     <Compile Include="IRepresentation.cs" />
     <Compile Include="IRepresentationFactory.cs" />
+    <Compile Include="ITag.cs" />
+    <Compile Include="ITagNamespace.cs" />
+    <Compile Include="ITagType.cs" />
     <Compile Include="LanguageTag.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="ICountry.cs" />
@@ -389,6 +392,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Geography\" />
+    <Folder Include="Tags\" />
     <Folder Include="Video\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

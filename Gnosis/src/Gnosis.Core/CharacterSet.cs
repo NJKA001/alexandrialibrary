@@ -15,6 +15,11 @@ namespace Gnosis.Core
 
         private CharacterSet(string name, string description, byte[] byteOrderMark)
         {
+            if (name == null)
+                throw new ArgumentNullException("name");
+            if (description == null)
+                throw new ArgumentNullException("description");
+
             this.name = name;
             this.description = description;
             this.byteOrderMark = byteOrderMark;
@@ -25,6 +30,11 @@ namespace Gnosis.Core
         private readonly byte[] byteOrderMark;
 
         #region ICharacterSet Members
+
+        public long Id
+        {
+            get { return ToString().GetHashCode(); }
+        }
 
         public string Name
         {

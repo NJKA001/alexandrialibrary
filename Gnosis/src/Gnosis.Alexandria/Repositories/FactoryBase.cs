@@ -14,7 +14,7 @@ namespace Gnosis.Alexandria.Repositories
     {
         protected FactoryBase()
         {
-            MapValueConstructor<ITag>(() => new Tag());
+            MapValueConstructor<Models.ITag>(() => new Tag());
         }
 
         private readonly IDictionary<Type, Func<IEntity>> entityConstructors = new Dictionary<Type, Func<IEntity>>();

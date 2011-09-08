@@ -21,7 +21,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         IEnumerable<IFeedItem> SearchFeedItemsByParent(Guid parent);
         IEnumerable<IFeedItem> SearchFeedItemsByKeyword(string keyword);
 
-        IEnumerable<ITag> SearchForTitleTags(Uri scheme, string value);
+        IEnumerable<Models.ITag> SearchForTitleTags(Uri scheme, string value);
         IEnumerable<IFeed> SearchByTitleTags(Uri scheme, string value);
 
         IEnumerable<IFeedOutline> SearchOutlinesByTitle(string title);

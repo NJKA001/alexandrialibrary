@@ -11,7 +11,7 @@ using Gnosis.Alexandria.Models.Feeds;
 namespace Gnosis.Alexandria.Repositories.Feeds
 {
     public class SearchAuthorTagsBySchemeAndValue
-        : ValueSearchBase<IFeed, ITag>
+        : ValueSearchBase<IFeed, Models.ITag>
     {
         public SearchAuthorTagsBySchemeAndValue()
             : base("Feed_AuthorTags.Scheme = @Scheme and Feed_AuthorTags.Value like @Value", feed => feed.TitleTags, tag => tag.Scheme, tag => tag.Value)

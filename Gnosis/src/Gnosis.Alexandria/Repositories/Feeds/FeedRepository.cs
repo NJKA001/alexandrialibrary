@@ -86,10 +86,10 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             return Search(query);
         }
 
-        public IEnumerable<ITag> SearchForTitleTags(Uri scheme, string value)
+        public IEnumerable<Models.ITag> SearchForTitleTags(Uri scheme, string value)
         {
-            var query = new ValueQuery<IFeed, ITag>(Factory, titleTagsBySchemeAndValue.GetFilter(scheme, value), feed => feed.TitleTags);
-            return SelectValues<ITag>(query);
+            var query = new ValueQuery<IFeed, Models.ITag>(Factory, titleTagsBySchemeAndValue.GetFilter(scheme, value), feed => feed.TitleTags);
+            return SelectValues<Models.ITag>(query);
             //return Select<ITag>(titleTagsBySchemeAndValue.GetFilter(scheme, value), feed => feed.TitleTags);
         }
 
@@ -103,7 +103,7 @@ namespace Gnosis.Alexandria.Repositories.Feeds
         public IEnumerable<IFeed> SearchByTitleTags(Uri scheme, string value)
         {
             var filter = titleTagsBySchemeAndValue.GetFilter(scheme, value);
-            var query = new ReverseQuery<IFeed, ITag>(Factory, filter, feed => feed.TitleTags);
+            var query = new ReverseQuery<IFeed, Models.ITag>(Factory, filter, feed => feed.TitleTags);
             return Search(query);
             //return SelectReverse<ITag>(titleTagsBySchemeAndValue.GetFilter(scheme, value), "Feed.Authors ASC, Feed.PublishedDate ASC, Feed.Title ASC", feed => feed.TitleTags);
         }

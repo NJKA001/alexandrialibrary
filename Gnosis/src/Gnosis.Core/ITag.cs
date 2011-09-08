@@ -5,11 +5,13 @@ using System.Text;
 
 namespace Gnosis.Core
 {
-    public interface ICharacterSet
+    public interface ITag
     {
         long Id { get; }
         string Name { get; }
-        string Description { get; }
-        byte[] ByteOrderMark { get; }
+        string NameSoundsLike { get; }
+        string NameAmericanized { get; }
+        ITagType Type { get; }
+        Uri Target { get; }
     }
 }
