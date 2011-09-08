@@ -117,7 +117,6 @@
     <Compile Include="Extensions\GuidExtensions.cs" />
     <Compile Include="Audio\Id3\IId3Tag.cs" />
     <Compile Include="ILanguageTag.cs" />
-    <Compile Include="ILinkGraph.cs" />
     <Compile Include="Image\BitmapImage.cs" />
     <Compile Include="Image\GifImage.cs" />
     <Compile Include="Image\IImage.cs" />
@@ -126,7 +125,6 @@
     <Compile Include="Image\PngImage.cs" />
     <Compile Include="IRepresentation.cs" />
     <Compile Include="IRepresentationFactory.cs" />
-    <Compile Include="ISpider.cs" />
     <Compile Include="LanguageTag.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="ICountry.cs" />
@@ -134,7 +132,6 @@
     <Compile Include="Country.cs" />
     <Compile Include="IScript.cs" />
     <Compile Include="Language.cs" />
-    <Compile Include="LinkGraph.cs" />
     <Compile Include="RepresentationFactory.cs" />
     <Compile Include="Script.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
@@ -159,7 +156,6 @@
     <Compile Include="MediaLayoutGroup.cs" />
     <Compile Include="MediaSensoryGroup.cs" />
     <Compile Include="MediaType.cs" />
-    <Compile Include="Spiders\LyricsWikia\ArtistsMainCategorySpider.cs" />
     <Compile Include="Time\Rfc822DateTime.cs" />
     <Compile Include="Document\Xml\Atom\AtomCommon.cs" />
     <Compile Include="Document\Xml\Atom\AtomLink.cs" />

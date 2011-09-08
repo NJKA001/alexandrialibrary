@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
-using Gnosis.Core.Spiders.LyricsWikia;
+using Gnosis.Spiders;
+using Gnosis.Spiders.LyricsWikia;
 
 using NUnit.Framework;
 

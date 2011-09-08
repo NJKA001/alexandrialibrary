@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core;
 using Gnosis.Core.Document;
 using Gnosis.Core.Document.Xml;
 using Gnosis.Core.Document.Xml.Xhtml;
 
-namespace Gnosis.Core.Spiders.LyricsWikia
+namespace Gnosis.Spiders.LyricsWikia
 {
     public class ArtistsMainCategorySpider
         : ISpider

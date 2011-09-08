@@ -96,6 +96,10 @@
       <Project>{1629B512-34A2-4F04-AB9A-EBD30228EBDC}</Project>
       <Name>Gnosis.Fmod</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gnosis.Spiders\Gnosis.Spiders.csproj">
+      <Project>{9A1CF5CE-B0ED-4A35-9061-93710B0FE57D}</Project>
+      <Name>Gnosis.Spiders</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Files\03 - Antes De Las Seis.mp3">
