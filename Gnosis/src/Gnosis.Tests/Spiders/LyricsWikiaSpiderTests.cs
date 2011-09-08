@@ -9,7 +9,7 @@ using Gnosis.Spiders.LyricsWikia;
 
 using NUnit.Framework;
 
-namespace Gnosis.Tests.Core.Spiders
+namespace Gnosis.Tests.Spiders
 {
     [TestFixture]
     public class LyricsWikiaSpiderTests
