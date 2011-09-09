@@ -64,7 +64,7 @@
     <OutputPath>bin\x64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
@@ -102,18 +102,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(Platform)' == 'x86' ">
-    <Reference Include="System.Data.SQLite, Version=1.0.60.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\SQLite\SQLite-1.0.60.0\bin\System.Data.SQLite.DLL</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(Platform)' == 'x64' ">
-    <Reference Include="System.Data.SQLite, Version=1.0.60.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\SQLite\SQLite-1.0.60.0\bin\x64\System.Data.SQLite.DLL</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -342,13 +330,9 @@
       <Project>{37091600-5BFE-4FCB-8A69-F016FF451462}</Project>
       <Name>Gnosis.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Gnosis.Data.SQLite32\Gnosis.Data.SQLite32.csproj">
-      <Project>{9324A27A-9BD3-482E-ABBE-F8B7B97B0AB8}</Project>
-      <Name>Gnosis.Data.SQLite32</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Gnosis.Data.SQLite64\Gnosis.Data.SQLite64.csproj">
-      <Project>{3C11B573-A014-4DC0-8396-34DD0EAA32FF}</Project>
-      <Name>Gnosis.Data.SQLite64</Name>
+    <ProjectReference Include="..\Gnosis.Data.SQLite\Gnosis.Data.SQLite.csproj">
+      <Project>{38A3C867-546C-45A6-891F-E901FB855206}</Project>
+      <Name>Gnosis.Data.SQLite</Name>
     </ProjectReference>
     <ProjectReference Include="..\Gnosis.Data\Gnosis.Data.csproj">
       <Project>{B36EA69D-F61D-4002-9E0E-FB0F897C6977}</Project>

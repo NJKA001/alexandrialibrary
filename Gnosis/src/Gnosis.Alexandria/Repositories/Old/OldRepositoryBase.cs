@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SQLite;
 using System.Linq;
 using System.Text;
+
+using Gnosis.Data;
+using Gnosis.Data.SQLite;
 
 namespace Gnosis.Alexandria.Repositories
 {
@@ -14,12 +16,14 @@ namespace Gnosis.Alexandria.Repositories
             this.database = database;
             this.table = table;
             this.orderBy = orderBy;
+            this.connectionFactory = new SQLiteConnectionFactory();
             Initialize();
         }
 
         private string database;
         private string table;
         private string orderBy;
+        private IConnectionFactory connectionFactory;
 
         private void Initialize()
         {
@@ -44,7 +48,8 @@ namespace Gnosis.Alexandria.Repositories
 
         protected IDbConnection GetConnection()
         {
-            return new SQLiteConnection(string.Format("Data Source={0};Version=3;", database));
+            return connectionFactory.Create(string.Format("Data Source={0};Version=3;", database));
+                //SQLiteConnection(string.Format("Data Source={0};Version=3;", database));
         }
 
         protected virtual IDbCommand GetDeleteCommand(IDbConnection connection, Guid id)

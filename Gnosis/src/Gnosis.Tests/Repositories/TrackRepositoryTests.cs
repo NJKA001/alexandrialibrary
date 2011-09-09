@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 
 using NUnit.Framework;
-using System.Data.SQLite;
 
 using Gnosis.Core;
 using Gnosis.Data;
+using Gnosis.Data.SQLite;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Tracks;
 using Gnosis.Alexandria.Repositories.Tracks;
@@ -21,6 +21,7 @@ namespace Gnosis.Tests.Repositories
     public class TrackRepositoryTests
     {
         private ITrackRepository repository;
+        private IConnectionFactory connectionFactory = new SQLiteConnectionFactory();
         private IDbConnection connection;
 
         private const string location = @"C:\Users\Dan\Music\Tool\Undertow\01 Intolerance.mp3";
@@ -120,7 +121,7 @@ namespace Gnosis.Tests.Repositories
         [SetUp]
         public void SetUp()
         {
-            connection = new SQLiteConnection("Data Source=:memory:;Version=3;");
+            connection = connectionFactory.Create("Data Source=:memory:;Version=3;");
             connection.Open();
 
             repository = new TrackRepository(connection);

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SQLite;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -12,6 +11,7 @@ using Gnosis.Data;
 using Gnosis.Data.Batches;
 using Gnosis.Data.Commands;
 using Gnosis.Data.Queries;
+using Gnosis.Data.SQLite;
 
 namespace Gnosis.Alexandria.Repositories
 {
@@ -29,6 +29,7 @@ namespace Gnosis.Alexandria.Repositories
             this.factory = factory;
             this.defaultConnection = defaultConnection;
             this.baseType = typeof(T);
+            this.connectionFactory = new SQLiteConnectionFactory();
         }
 
         private readonly IFactory factory;
@@ -36,6 +37,7 @@ namespace Gnosis.Alexandria.Repositories
         private readonly IList<ILookup> lookups = new List<ILookup>();
         private readonly IList<ISearch> searches = new List<ISearch>();
         private readonly IDbConnection defaultConnection;
+        private readonly IConnectionFactory connectionFactory;
 
         protected IFactory Factory
         {
@@ -58,7 +60,8 @@ namespace Gnosis.Alexandria.Repositories
                 return defaultConnection;
             else
             {
-                var connection = new SQLiteConnection("Data Source=Catalog.db;Version=3;");
+                var connection = connectionFactory.Create("Data Source=Catalog.db;Version=3;");
+                    //new SQLiteConnection("Data Source=Catalog.db;Version=3;");
                 connection.Open();
                 return connection;
             }

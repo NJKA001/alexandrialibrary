@@ -6,16 +6,19 @@ using System.Text;
 
 namespace Gnosis.Data.SQLite
 {
-    public abstract class SQLiteRepositoryBase
+    public class SQLiteConnectionFactory
+        : IConnectionFactory
     {
-        protected IDbConnection GetConnection(string connectionString)
+        public IDbConnection Create(string connectionString)
         {
             if (connectionString == null)
                 throw new ArgumentNullException("connectionString");
 
 #if x64
+            System.Diagnostics.Debug.WriteLine("x64");
             return Gnosis.Data.SQLite64.ConnectionFactory.Create(connectionString);
 #else
+            System.Diagnostics.Debug.WriteLine("x86");
             return Gnosis.Data.SQLite32.ConnectionFactory.Create(connectionString);
 #endif
         }

@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 
 using NUnit.Framework;
-using System.Data.SQLite;
 
 using Gnosis.Core;
 using Gnosis.Data;
 using Gnosis.Data.Queries;
+using Gnosis.Data.SQLite;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Feeds;
 using Gnosis.Alexandria.Repositories.Feeds;
@@ -19,9 +19,8 @@ namespace Gnosis.Tests.Repositories
     [TestFixture]
     public class FeedRepositoryTests
     {
-        //private IContext context;
-        //private ILogger logger;
         private IFeedRepository repository;
+        private IConnectionFactory connectionFactory = new SQLiteConnectionFactory();
         private IDbConnection connection;
 
         private readonly Uri feedLocation = new Uri("http://espn.go.com/espnradio/feeds/rss/podcast.xml?id=2864045");
@@ -158,8 +157,6 @@ namespace Gnosis.Tests.Repositories
         [TestFixtureSetUp]
         public void FixtureSetUp()
         {
-            //context = new SingleThreadedContext();
-            //logger = new DebugLogger();
         }
 
         [TestFixtureTearDown]
@@ -170,7 +167,7 @@ namespace Gnosis.Tests.Repositories
         [SetUp]
         public void SetUp()
         {
-            connection = new SQLiteConnection("Data Source=:memory:;Version=3;");
+            connection = connectionFactory.Create("Data Source=:memory:;Version=3;");
             connection.Open();
 
             repository = new FeedRepository(connection);
