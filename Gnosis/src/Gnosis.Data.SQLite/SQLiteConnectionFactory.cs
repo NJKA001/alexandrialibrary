@@ -1,7 +1,5 @@
 ﻿#if x64
 extern alias sqlite64;
-#else
-extern alias sqlite32;
 #endif
 
 using System;
@@ -24,7 +22,7 @@ namespace Gnosis.Data.SQLite
             return new sqlite64.System.Data.SQLite.SQLiteConnection(connectionString);
             //return Gnosis.Data.SQLite64.ConnectionFactory.Create(connectionString);
 #else
-            return new sqlite32.System.Data.SQLite.SQLiteConnection(connectionString);
+            return new System.Data.SQLite.SQLiteConnection(connectionString);
             //return Gnosis.Data.SQLite32.ConnectionFactory.Create(connectionString);
 #endif
         }

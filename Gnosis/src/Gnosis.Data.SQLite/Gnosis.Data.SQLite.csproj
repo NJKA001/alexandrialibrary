@@ -77,7 +77,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite32">
       <HintPath>..\..\lib\SQLite\SQLite-1.0.60.0\bin\System.Data.SQLite32.DLL</HintPath>
-      <Aliases>sqlite32</Aliases>
+      <Aliases>global</Aliases>
     </Reference>
     <Reference Include="System.Data.SQLite64">
       <HintPath>..\..\lib\SQLite\SQLite-1.0.60.0\bin\x64\System.Data.SQLite64.DLL</HintPath>
@@ -107,9 +107,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="postbuild.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy System.Data.SQLite64.DLL System.Data.SQLite.DLL</PostBuildEvent>
+    <PostBuildEvent>postbuild.bat</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
