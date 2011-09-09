@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Data.SQLite64", "Gno
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Data.SQLite32", "Gnosis.Data.SQLite32\Gnosis.Data.SQLite32.csproj", "{9324A27A-9BD3-482E-ABBE-F8B7B97B0AB8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Data.SQLite", "Gnosis.Data.SQLite\Gnosis.Data.SQLite.csproj", "{38A3C867-546C-45A6-891F-E901FB855206}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -149,6 +151,18 @@ Global
 		{9324A27A-9BD3-482E-ABBE-F8B7B97B0AB8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9324A27A-9BD3-482E-ABBE-F8B7B97B0AB8}.Release|x64.ActiveCfg = Release|Any CPU
 		{9324A27A-9BD3-482E-ABBE-F8B7B97B0AB8}.Release|x86.ActiveCfg = Release|Any CPU
+		{38A3C867-546C-45A6-891F-E901FB855206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38A3C867-546C-45A6-891F-E901FB855206}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38A3C867-546C-45A6-891F-E901FB855206}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{38A3C867-546C-45A6-891F-E901FB855206}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{38A3C867-546C-45A6-891F-E901FB855206}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{38A3C867-546C-45A6-891F-E901FB855206}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{38A3C867-546C-45A6-891F-E901FB855206}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38A3C867-546C-45A6-891F-E901FB855206}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38A3C867-546C-45A6-891F-E901FB855206}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{38A3C867-546C-45A6-891F-E901FB855206}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{38A3C867-546C-45A6-891F-E901FB855206}.Release|x64.ActiveCfg = Release|Any CPU
+		{38A3C867-546C-45A6-891F-E901FB855206}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
