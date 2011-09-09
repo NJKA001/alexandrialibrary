@@ -86,6 +86,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Gnosis.Data.SQLite32\Gnosis.Data.SQLite32.csproj">
+      <Project>{9324A27A-9BD3-482E-ABBE-F8B7B97B0AB8}</Project>
+      <Name>Gnosis.Data.SQLite32</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Gnosis.Data.SQLite64\Gnosis.Data.SQLite64.csproj">
       <Project>{3C11B573-A014-4DC0-8396-34DD0EAA32FF}</Project>
       <Name>Gnosis.Data.SQLite64</Name>

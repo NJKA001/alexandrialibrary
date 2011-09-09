@@ -15,10 +15,8 @@ namespace Gnosis.Data.SQLite
                 throw new ArgumentNullException("connectionString");
 
 #if x64
-            System.Diagnostics.Debug.WriteLine("x64");
             return Gnosis.Data.SQLite64.ConnectionFactory.Create(connectionString);
 #else
-            System.Diagnostics.Debug.WriteLine("x86");
             return Gnosis.Data.SQLite32.ConnectionFactory.Create(connectionString);
 #endif
         }
