@@ -52,6 +52,10 @@
       <Project>{3C11B573-A014-4DC0-8396-34DD0EAA32FF}</Project>
       <Name>Gnosis.Data.SQLite64</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gnosis.Data\Gnosis.Data.csproj">
+      <Project>{B36EA69D-F61D-4002-9E0E-FB0F897C6977}</Project>
+      <Name>Gnosis.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
