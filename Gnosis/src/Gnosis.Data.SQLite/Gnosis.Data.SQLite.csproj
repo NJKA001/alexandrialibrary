@@ -75,14 +75,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SQLite32">
-      <HintPath>..\..\lib\SQLite\SQLite-1.0.60.0\bin\System.Data.SQLite32.DLL</HintPath>
-      <Aliases>global</Aliases>
-    </Reference>
-    <Reference Include="System.Data.SQLite64">
-      <HintPath>..\..\lib\SQLite\SQLite-1.0.60.0\bin\x64\System.Data.SQLite64.DLL</HintPath>
-      <Aliases>sqlite64</Aliases>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -94,27 +86,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Gnosis.Data.SQLite32\Gnosis.Data.SQLite32.csproj">
+      <Project>{C066F01A-5F53-4F12-8B4E-31ACE09DF597}</Project>
+      <Name>Gnosis.Data.SQLite32</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gnosis.Data.SQLite64\Gnosis.Data.SQLite64.csproj">
+      <Project>{51EFC6C5-BF28-428C-848C-36297EB2B2AA}</Project>
+      <Name>Gnosis.Data.SQLite64</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Gnosis.Data\Gnosis.Data.csproj">
       <Project>{B36EA69D-F61D-4002-9E0E-FB0F897C6977}</Project>
       <Name>Gnosis.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="System.Data.SQLite32.DLL">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="System.Data.SQLite64.DLL">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="postbuild.bat">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>postbuild.bat</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
