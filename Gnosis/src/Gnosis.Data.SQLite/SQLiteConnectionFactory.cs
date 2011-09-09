@@ -1,4 +1,10 @@
-﻿using System;
+﻿#if x64
+extern alias sqlite64;
+#else
+extern alias sqlite32;
+#endif
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -15,9 +21,11 @@ namespace Gnosis.Data.SQLite
                 throw new ArgumentNullException("connectionString");
 
 #if x64
-            return Gnosis.Data.SQLite64.ConnectionFactory.Create(connectionString);
+            return new sqlite64.System.Data.SQLite.SQLiteConnection(connectionString);
+            //return Gnosis.Data.SQLite64.ConnectionFactory.Create(connectionString);
 #else
-            return Gnosis.Data.SQLite32.ConnectionFactory.Create(connectionString);
+            return new sqlite32.System.Data.SQLite.SQLiteConnection(connectionString);
+            //return Gnosis.Data.SQLite32.ConnectionFactory.Create(connectionString);
 #endif
         }
     }
