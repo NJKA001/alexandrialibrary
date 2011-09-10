@@ -14,11 +14,7 @@ namespace Gnosis.Data.SQLite
             if (connectionString == null)
                 throw new ArgumentNullException("connectionString");
 
-#if x64
-            return Gnosis.Data.SQLite64.ConnectionFactory.Create(connectionString);
-#else
-            return Gnosis.Data.SQLite32.ConnectionFactory.Create(connectionString);
-#endif
+            return new System.Data.SQLite.SQLiteConnection(connectionString);
         }
     }
 }
