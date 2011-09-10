@@ -135,6 +135,8 @@
     <Compile Include="Extensions\FileInfoExtensions.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
     <Compile Include="Audio\Id3\IId3Tag.cs" />
+    <Compile Include="IRepresentationRequest.cs" />
+    <Compile Include="IRepresentationResolver.cs" />
     <Compile Include="ILanguageTag.cs" />
     <Compile Include="Image\BitmapImage.cs" />
     <Compile Include="Image\GifImage.cs" />
