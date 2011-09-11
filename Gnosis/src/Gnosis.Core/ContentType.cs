@@ -133,6 +133,10 @@ namespace Gnosis.Core
                                         {
                                             newMediaType = MediaType.ApplicationAtomXml;
                                         }
+                                        else if (element.Name == "playlist")
+                                        {
+                                            newMediaType = MediaType.ApplicationXspfXml;
+                                        }
                                     }
                                 }
                             }

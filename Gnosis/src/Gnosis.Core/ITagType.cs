@@ -10,5 +10,6 @@ namespace Gnosis.Core
         long Id { get; }
         string Name { get; }
         ITagNamespace Namespace { get; }
+        int SearchWeight { get; }
     }
 }

@@ -11,6 +11,7 @@ using Gnosis.Core.Document.Xml.Google;
 using Gnosis.Core.Document.Xml.MediaRss;
 using Gnosis.Core.Document.Xml.OpenSearch;
 using Gnosis.Core.Document.Xml.Rss;
+using Gnosis.Core.Document.Xml.Xspf;
 using Gnosis.Core.Document.Xml.YouTube;
 
 namespace Gnosis.Core.Document.Xml
@@ -61,6 +62,7 @@ namespace Gnosis.Core.Document.Xml
             //Namespaces
             AddNamespace(new AtomNamespace());
             AddNamespace(new GoogleDataNamespace());
+            AddNamespace(new XspfNamespace());
             AddNamespace(new YouTubeNamespace());
             //MapCustomElement("feedLink", elem => elem.CurrentNamespace != null && elem.CurrentNamespace.Identifier.ToString().StartsWith("http://schemas.google.com/g/2005"), (parent, name) => new GoogleDataFeedLink(parent, name));
         }

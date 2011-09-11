@@ -148,6 +148,15 @@ namespace Gnosis.Core.Document.Xml
             return result;
         }
 
+        protected uint GetContentUInt32(uint defaultValue)
+        {
+            var s = GetContentString();
+
+            var result = defaultValue;
+            uint.TryParse(s, out result);
+            return result;
+        }
+
         protected string GetContentString()
         {
             var child = Children.FirstOrDefault() as ICharacterData;

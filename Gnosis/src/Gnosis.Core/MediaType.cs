@@ -139,6 +139,7 @@ namespace Gnosis.Core
             mediaTypes.Add(ApplicationAtomXml);
             mediaTypes.Add(ApplicationRssXml);
             mediaTypes.Add(ApplicationXhtmlXml);
+            mediaTypes.Add(ApplicationXspfXml);
             mediaTypes.Add(ApplicationXml);
             mediaTypes.Add(ApplicationUnknown);
             mediaTypes.Add(AudioMpeg);
@@ -221,6 +222,7 @@ namespace Gnosis.Core
         public static readonly IMediaType ApplicationAtomXml = new MediaType(TypeApplication, "atom+xml", new List<string> { ".atom", ".xml" });
         public static readonly IMediaType ApplicationRssXml = new MediaType(TypeApplication, "rss+xml", new List<string> { ".rss", ".xml" });
         public static readonly IMediaType ApplicationXhtmlXml = new MediaType(TypeApplication, "xhtml+xml", new List<string> { ".xhtml", "" }, new List<string> { "text/html" });
+        public static readonly IMediaType ApplicationXspfXml = new MediaType(TypeApplication, "xspf+xml", new List<string> { ".xspf" });
         public static readonly IMediaType ApplicationXml = new MediaType(TypeApplication, "xml", new List<string> { ".xml" }, new List<string> { "text/xml" });
         public static readonly IMediaType ApplicationUnknown = new MediaType(TypeApplication, "unknown");
 

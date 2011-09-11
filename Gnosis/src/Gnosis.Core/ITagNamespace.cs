@@ -11,5 +11,6 @@ namespace Gnosis.Core
         string Name { get; }
         Uri Uri { get; }
         string Version { get; }
+        int SearchWeight { get; }
     }
 }
