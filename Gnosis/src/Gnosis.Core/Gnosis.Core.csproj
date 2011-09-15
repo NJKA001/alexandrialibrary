@@ -221,6 +221,7 @@
     <Compile Include="MediaLayoutGroup.cs" />
     <Compile Include="MediaSensoryGroup.cs" />
     <Compile Include="MediaType.cs" />
+    <Compile Include="Tag.cs" />
     <Compile Include="Time\Rfc822DateTime.cs" />
     <Compile Include="Document\Xml\Atom\AtomCommon.cs" />
     <Compile Include="Document\Xml\Atom\AtomLink.cs" />

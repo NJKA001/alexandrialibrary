@@ -243,8 +243,8 @@ namespace Gnosis.Tests.Repositories
             var updatedDate = new DateTime(2011, 4, 27);
             const string testCategoryName = "ABC Some Category";
 
-            var titleNameHash = feed.TitleTags.Where(x => x.Scheme == Tag.SchemeAmericanizedGraph).FirstOrDefault().Value;
-            var titleDoubleMetaphone = feed.TitleTags.Where(x => x.Scheme == Tag.SchemeDoubleMetaphone).FirstOrDefault().Value;
+            var titleNameHash = feed.TitleTags.Where(x => x.Scheme == Gnosis.Alexandria.Models.Tag.SchemeAmericanizedGraph).FirstOrDefault().Value;
+            var titleDoubleMetaphone = feed.TitleTags.Where(x => x.Scheme == Gnosis.Alexandria.Models.Tag.SchemeDoubleMetaphone).FirstOrDefault().Value;
 
             feed.Title = title;
             Assert.AreEqual(feed.Title, title);
@@ -286,8 +286,8 @@ namespace Gnosis.Tests.Repositories
             Assert.AreEqual(18, GetCount(string.Format("select count() from Feed_AuthorTags where Parent = '{0}';", id)));
             Assert.AreEqual(6, changedFeed.TitleTags.Count());
             Assert.AreEqual(18, changedFeed.AuthorTags.Count());
-            Assert.AreNotEqual(titleNameHash, changedFeed.TitleTags.Where(x => x.Scheme == Tag.SchemeAmericanizedGraph).FirstOrDefault().Value);
-            Assert.AreNotEqual(titleDoubleMetaphone, changedFeed.TitleTags.Where(x => x.Scheme == Tag.SchemeDoubleMetaphone).FirstOrDefault().Value);
+            Assert.AreNotEqual(titleNameHash, changedFeed.TitleTags.Where(x => x.Scheme == Gnosis.Alexandria.Models.Tag.SchemeAmericanizedGraph).FirstOrDefault().Value);
+            Assert.AreNotEqual(titleDoubleMetaphone, changedFeed.TitleTags.Where(x => x.Scheme == Gnosis.Alexandria.Models.Tag.SchemeDoubleMetaphone).FirstOrDefault().Value);
             Assert.IsNotNull(changedFeed);
             Assert.AreEqual(title, changedFeed.Title);
             Assert.AreEqual(description, changedFeed.Description);
@@ -429,20 +429,20 @@ namespace Gnosis.Tests.Repositories
             repository.Save(new List<IFeed> { feedA, feedB, feedC, feedD, feedE });
 
             var keyword1 = "W.X.Y-Z".AsNameHash();
-            var results1 = repository.SearchForTitleTags(Tag.SchemeAmericanizedGraph, keyword1);
+            var results1 = repository.SearchForTitleTags(Gnosis.Alexandria.Models.Tag.SchemeAmericanizedGraph, keyword1);
             Assert.AreEqual(1, results1.Count());
 
             var keyword2 = "Steven".AsDoubleMetaphone();
-            var results2 = repository.SearchForTitleTags(Tag.SchemeDoubleMetaphone, keyword2);
+            var results2 = repository.SearchForTitleTags(Gnosis.Alexandria.Models.Tag.SchemeDoubleMetaphone, keyword2);
             Assert.AreEqual(1, results2.Count());
 
             var keyword3 = "%BJORK%";
-            var results3 = repository.SearchForTitleTags(Tag.SchemeAmericanizedGraph, keyword3);
+            var results3 = repository.SearchForTitleTags(Gnosis.Alexandria.Models.Tag.SchemeAmericanizedGraph, keyword3);
             Assert.AreEqual(2, results3.Count());
             Assert.IsNotNull(results3.Where(tag => tag.Value == "BJORKSPODCAST").FirstOrDefault());
             Assert.IsNotNull(results3.Where(tag => tag.Value == "BJORKS").FirstOrDefault());
 
-            var results4 = repository.SearchByTitleTags(Tag.SchemeAmericanizedGraph, keyword3);
+            var results4 = repository.SearchByTitleTags(Gnosis.Alexandria.Models.Tag.SchemeAmericanizedGraph, keyword3);
             Assert.AreEqual(1, results4.Count());
             Assert.AreEqual(titleB, results4.FirstOrDefault().Title);
 

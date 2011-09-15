@@ -56,8 +56,8 @@ namespace Gnosis.Alexandria.Repositories.Feeds
             parameters.Add("@pattern", '%' + keyword + '%');
             parameters.Add("@patternDM", '%' + keyword.AsDoubleMetaphone() + '%');
             parameters.Add("@patternNH", '%' + keyword.AsNameHash() + '%');
-            parameters.Add("@schemeDM", Tag.SchemeDoubleMetaphone.ToString());
-            parameters.Add("@schemeNH", Tag.SchemeAmericanizedGraph.ToString());
+            parameters.Add("@schemeDM", Models.Tag.SchemeDoubleMetaphone.ToString());
+            parameters.Add("@schemeNH", Models.Tag.SchemeAmericanizedGraph.ToString());
 
             return GetFilter(parameters);
         }
