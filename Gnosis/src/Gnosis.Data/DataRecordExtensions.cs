@@ -42,6 +42,11 @@ namespace Gnosis.Data
             return int.Parse(record[name].ToString());
         }
 
+        public static long GetInt64(this IDataRecord record, string name)
+        {
+            return long.Parse(record[name].ToString());
+        }
+
         public static string GetString(this IDataRecord record, string name)
         {
             return record[name].ToString();

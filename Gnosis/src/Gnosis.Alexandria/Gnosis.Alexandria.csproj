@@ -125,7 +125,6 @@
     <Compile Include="Loggers\DebugLogger.cs" />
     <Compile Include="Loggers\Log4NetLogger.cs" />
     <Compile Include="DependencyObjectExtensions.cs" />
-    <Compile Include="Loggers\ILogger.cs" />
     <Compile Include="Models\ChildBase.cs" />
     <Compile Include="Models\Devices\IDevice.cs" />
     <Compile Include="Models\Devices\IDeviceItem.cs" />

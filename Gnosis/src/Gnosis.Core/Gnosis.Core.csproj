@@ -176,6 +176,7 @@
     <Compile Include="Extensions\FileInfoExtensions.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
     <Compile Include="Audio\Id3\IId3Tag.cs" />
+    <Compile Include="ILogger.cs" />
     <Compile Include="IRepresentationRequest.cs" />
     <Compile Include="IRepresentationResolver.cs" />
     <Compile Include="ILanguageTag.cs" />
@@ -222,6 +223,7 @@
     <Compile Include="MediaSensoryGroup.cs" />
     <Compile Include="MediaType.cs" />
     <Compile Include="Tag.cs" />
+    <Compile Include="TagType.cs" />
     <Compile Include="Time\Rfc822DateTime.cs" />
     <Compile Include="Document\Xml\Atom\AtomCommon.cs" />
     <Compile Include="Document\Xml\Atom\AtomLink.cs" />

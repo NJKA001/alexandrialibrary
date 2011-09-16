@@ -13,6 +13,5 @@ namespace Gnosis.Core
         string NameAmericanized { get; }
         ITagType Type { get; }
         Uri Target { get; }
-        int SearchWeight { get; }
     }
 }
