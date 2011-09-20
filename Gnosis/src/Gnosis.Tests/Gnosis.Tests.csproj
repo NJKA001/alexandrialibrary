@@ -88,6 +88,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\FirebirdTests.cs" />
     <Compile Include="Data\SQLiteTests.cs" />
     <Compile Include="Models\XspfTests.cs" />
     <Compile Include="Spiders\LyricsWikiaSpiderTests.cs" />
@@ -124,6 +125,10 @@
     <ProjectReference Include="..\Gnosis.Core\Gnosis.Core.csproj">
       <Project>{37091600-5BFE-4FCB-8A69-F016FF451462}</Project>
       <Name>Gnosis.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gnosis.Data.Firebird\Gnosis.Data.Firebird.csproj">
+      <Project>{DA3853ED-7664-4B7D-BCA5-3781E9DC1CC9}</Project>
+      <Name>Gnosis.Data.Firebird</Name>
     </ProjectReference>
     <ProjectReference Include="..\Gnosis.Data.SQLite\Gnosis.Data.SQLite.csproj">
       <Project>{38A3C867-546C-45A6-891F-E901FB855206}</Project>
