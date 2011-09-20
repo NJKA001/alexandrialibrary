@@ -9,5 +9,6 @@ namespace Gnosis.Data
     public interface IConnectionFactory
     {
         IDbConnection Create(string connectionString);
+        void CreateDatabase(string connectionString);
     }
 }

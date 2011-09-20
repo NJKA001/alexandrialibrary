@@ -14,13 +14,24 @@ namespace Gnosis.Tests.Data
     public class FirebirdTests
     {
         private readonly IConnectionFactory factory = new FirebirdConnectionFactory();
+        private const string connectionString = @"Database=.\Alexandria.fbd;ServerType=1;User='';Password='';Charset=UTF8";
 
         [Test]
         public void TestConnection()
         {
+
             try
             {
-                using (var connection = factory.Create("Database=Alexandria.fbd;ServerType=1;User='';Password='';Charset=UTF8"))
+                factory.CreateDatabase(connectionString);
+            }
+            catch (Exception)
+            {
+                System.Diagnostics.Debug.WriteLine("Database already exists");
+            }
+
+            try
+            {
+                using (var connection = factory.Create(connectionString))
                 {
                     connection.Open();
                 }

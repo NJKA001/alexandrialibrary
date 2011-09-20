@@ -15,5 +15,10 @@ namespace Gnosis.Data.Firebird
         {
             return new FbConnection(connectionString);
         }
+
+        public void CreateDatabase(string connectionString)
+        {
+            FbConnection.CreateDatabase(connectionString, false);
+        }
     }
 }

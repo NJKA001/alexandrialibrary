@@ -59,6 +59,7 @@
     <Content Include="icuuc30.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="intl\fbintl.dll" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gnosis.Data\Gnosis.Data.csproj">

@@ -16,5 +16,10 @@ namespace Gnosis.Data.SQLite
 
             return new System.Data.SQLite.SQLiteConnection(connectionString);
         }
+
+        public void CreateDatabase(string connectionString)
+        {
+            throw new InvalidOperationException("SQLite does not require databases to be created explicitly");
+        }
     }
 }
