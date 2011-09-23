@@ -21,11 +21,14 @@ namespace Gnosis.Core
         {
         }
 
-        private ContentType(IMediaType type, ICharacterSet charSet, string boundary)
+        public ContentType(IMediaType type, ICharacterSet charSet, string boundary)
         {
+            if (type == null)
+                throw new ArgumentNullException("type");
+
             this.type = type;
-            this.boundary = boundary;
             this.charSet = charSet;
+            this.boundary = boundary;
         }
 
         private readonly IMediaType type;

@@ -31,11 +31,6 @@ namespace Gnosis.Core
 
         #region ICharacterSet Members
 
-        public long Id
-        {
-            get { return ToString().GetHashCode(); }
-        }
-
         public string Name
         {
             get { return name; }
@@ -132,12 +127,9 @@ namespace Gnosis.Core
             if (header == null || header.Length < minimumHeaderSize)
                 return Unknown;
 
-            //header.ToDebugString("header=");
-
             var length = minimumHeaderSize;
             while (length > 1)
             {
-                //System.Diagnostics.Debug.WriteLine("contains length key=" + byLengthAndBom.ContainsKey(length) + " length=" + length);
                 if (byLengthAndBom.ContainsKey(length))
                 {
                     var bomMap = byLengthAndBom[length];
@@ -146,9 +138,6 @@ namespace Gnosis.Core
                     
                     foreach (var pair in bomMap)
                     {
-                        //System.Diagnostics.Debug.WriteLine(string.Empty);
-                        //pair.Key.ToDebugString("key=");
-                        //bom.ToDebugString("bom=");
                         if (bom.SequenceEqual(pair.Key))
                             return pair.Value;
                     }

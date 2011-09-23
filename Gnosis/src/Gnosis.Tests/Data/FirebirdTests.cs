@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Alexandria.Loggers;
+using Gnosis.Core;
 using Gnosis.Data;
 using Gnosis.Data.Firebird;
 
@@ -13,6 +15,7 @@ namespace Gnosis.Tests.Data
     [TestFixture]
     public class FirebirdTests
     {
+        private readonly ILogger logger = new DebugLogger();
         private readonly IConnectionFactory factory = new FirebirdConnectionFactory();
         private const string databaseFile = @".\ALEXANDRIA.FDB";
         private const string connectionString = @"Database=.\ALEXANDRIA.FDB;ServerType=1;User='';Password='';Charset=UTF8";
@@ -70,6 +73,20 @@ END";
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 throw;
+            }
+        }
+
+        [Test]
+        public void TestTagRepository()
+        {
+            try
+            {
+                var repository = new FirebirdTagRepository(logger);
+                repository.Initialize();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  repository.Initialize", ex);
             }
         }
     }

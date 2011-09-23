@@ -9,6 +9,6 @@ namespace Gnosis.Core
     {
         long Id { get; }
         string Name { get; }
-        Uri Namespace { get; }
+        Uri Scheme { get; }
     }
 }

@@ -8,27 +8,24 @@ namespace Gnosis.Core
     public class Tag
         : ITag
     {
-        public Tag(string name, string nameSoundsLike, string nameAmericanized, ITagType type, Uri target)
-            : this(name, nameSoundsLike, nameAmericanized, type, target, 0)
+        public Tag(Uri target, ITagType type, string name)
+            : this(target, type, name, 0)
         {
         }
 
-        public Tag(string name, string nameSoundsLike, string nameAmericanized, ITagType type, Uri target, long id)
+        public Tag(Uri target, ITagType type, string name, long id)
         {
-            this.name = name;
-            this.nameSoundsLike = nameSoundsLike;
-            this.nameAmericanized = nameAmericanized;
-            this.type = type;
             this.target = target;
+            this.type = type;
+            this.name = name;
             this.id = id;
         }
 
         private readonly long id;
-        private readonly string name;
-        private readonly string nameSoundsLike;
-        private readonly string nameAmericanized;
-        private readonly ITagType type;
         private readonly Uri target;
+        private readonly ITagType type;
+        private readonly string name;
+        
 
         #region ITag Members
 
@@ -37,19 +34,9 @@ namespace Gnosis.Core
             get { return id; }
         }
 
-        public string Name
+        public Uri Target
         {
-            get { return name; }
-        }
-
-        public string NameSoundsLike
-        {
-            get { return nameSoundsLike; }
-        }
-
-        public string NameAmericanized
-        {
-            get { return nameAmericanized; }
+            get { return target; }
         }
 
         public ITagType Type
@@ -57,9 +44,9 @@ namespace Gnosis.Core
             get { return type; }
         }
 
-        public Uri Target
+        public string Name
         {
-            get { return target; }
+            get { return name; }
         }
 
         #endregion

@@ -8,16 +8,16 @@ namespace Gnosis.Core
     public class TagType
         : ITagType
     {
-        private TagType(long id, string name, Uri @namespace)
+        private TagType(long id, string name, Uri scheme)
         {
             this.id = id;
             this.name = name;
-            this.@namespace = @namespace;
+            this.scheme = scheme;
         }
 
         private readonly long id;
         private readonly string name;
-        private readonly Uri @namespace;
+        private readonly Uri scheme;
 
         public long Id
         {
@@ -29,9 +29,9 @@ namespace Gnosis.Core
             get { return name; }
         }
 
-        public Uri Namespace
+        public Uri Scheme
         {
-            get { return @namespace; }
+            get { return scheme; }
         }
 
         static TagType()
@@ -40,9 +40,12 @@ namespace Gnosis.Core
                 byId[tagType.Id] = tagType;
         }
 
-        public static ITagType GeneralTagType = new TagType(1, "General", new Uri("http://gn0s1s.com/alexandria/ns/1/tags/default"));
-        public static ITagType Id3v2TitleTagType = new TagType(2, "Title", new Uri("http://gn0s1s.com/alexandria/ns/1/tags/id3v2"));
-        public static ITagType Id3v2ArtistTagType = new TagType(3, "Artist", new Uri("http://gn0s1s.com/alexandria/ns/1/tags/id3v2"));
+        public static readonly Uri DefaultScheme = new Uri("http://gn0s1s.com/alexandria/ns/1/tags/default");
+        public static readonly Uri Id3v2Scheme = new Uri("http://gn0s1s.com/alexandria/ns/1/tags/id3v2");
+
+        public static ITagType GeneralTagType = new TagType(1, "General", DefaultScheme);
+        public static ITagType Id3v2TitleTagType = new TagType(2, "Title", Id3v2Scheme);
+        public static ITagType Id3v2ArtistTagType = new TagType(3, "Artist", Id3v2Scheme);
 
         private static readonly IList<ITagType> tagTypes = new List<ITagType>()
         {

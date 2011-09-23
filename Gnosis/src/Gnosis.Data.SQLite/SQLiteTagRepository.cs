@@ -27,12 +27,11 @@ namespace Gnosis.Data.SQLite
         private readonly IConnectionFactory connectionFactory;
         private readonly Func<IDataRecord, ITag> readTag = (record) =>
             {
+                var id = record.GetInt64("Id");
                 var name = record.GetString("Name");
-                var nameAmericanized = record.GetString("NameAmericanized");
-                var nameSoundsLike = record.GetString("NameSoundsLike");
                 var type = TagType.Parse(record.GetInt64("Type"));
                 var target = record.GetUri("Target");
-                return new Tag(name, nameSoundsLike, nameAmericanized, type, target);
+                return new Tag(target, type, name, id);
             };
 
 
@@ -68,10 +67,8 @@ namespace Gnosis.Data.SQLite
 
         private void BuildSaveCommand(IDbCommand command, StringBuilder sql, ITag tag, int count)
         {
-            sql.AppendFormat("insert into Tag (Name, NameAmericanized, NameSoundsLike, Type, Target) values (@Name{0}, @NameAmericanized{0}, @NameSoundsLike{0}, @Type{0}, @Target{0})", count);
+            sql.AppendFormat("insert into Tag (Name, Type, Target) values (@Name{0}, @Type{0}, @Target{0})", count);
             AddParameter(command, count, "Name", tag.Name);
-            AddParameter(command, count, "NameAmericanized", tag.NameAmericanized);
-            AddParameter(command, count, "NameSoundsLike", tag.NameSoundsLike);
             AddParameter(command, count, "Type", tag.Type.Id);
             AddParameter(command, count, "Target", tag.Target.ToString());
         }
