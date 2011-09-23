@@ -15,11 +15,18 @@ namespace Gnosis.Tests.Data
     [TestFixture]
     public class FirebirdTests
     {
-        private readonly ILogger logger = new DebugLogger();
-        private readonly IConnectionFactory factory = new FirebirdConnectionFactory();
-        private const string databaseFile = @".\ALEXANDRIA.FDB";
-        private const string connectionString = @"Database=.\ALEXANDRIA.FDB;ServerType=1;User='';Password='';Charset=UTF8";
+        public FirebirdTests()
+        {
+            tagRepository = new FirebirdTagRepository(logger);
+        }
 
+        private readonly ILogger logger = new DebugLogger();
+        private readonly FirebirdTagRepository tagRepository;
+        //private readonly IConnectionFactory factory = new FirebirdConnectionFactory();
+        //private const string databaseFile = @".\ALEXANDRIA.FDB";
+        //private const string connectionString = @"Database=.\ALEXANDRIA.FDB;ServerType=1;User='';Password='';Charset=UTF8";
+
+        /*
         [Test]
         public void TestConnection()
         {
@@ -75,19 +82,33 @@ END";
                 throw;
             }
         }
+        */
 
         [Test]
-        public void TestTagRepository()
+        public void TagRepositoryInitializeTest()
         {
-            try
-            {
-                var repository = new FirebirdTagRepository(logger);
-                repository.Initialize();
-            }
-            catch (Exception ex)
-            {
-                logger.Error("  repository.Initialize", ex);
-            }
+            tagRepository.Initialize();
+        }
+
+        [Test]
+        public void TagRepositorySaveTest()
+        {
+            var tag1 = new Tag(new Uri("http://arstechnica.com/index.ars"), TagType.GeneralTagType, "Sample Tag #1");
+            var tag2 = new Tag(new Uri(@"C:\Users\dpoage\Music\Queen\bicycle.mp3"), TagType.Id3v2ArtistTagType, "Queen");
+
+            tagRepository.Save(new List<ITag> { tag1, tag2 });
+        }
+
+        [Test]
+        public void TagRepositoryCountTest()
+        {
+            var count = tagRepository.Count();
+            Assert.IsTrue(count > 0);
+
+            var tags = tagRepository.Search();
+            Assert.IsNotNull(tags);
+            Assert.IsTrue(tags.Count() > 0);
+            Assert.IsTrue(tags.All(x => x.Id > 0));
         }
     }
 }

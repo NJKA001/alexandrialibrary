@@ -11,165 +11,29 @@ using Gnosis.Data.Queries;
 namespace Gnosis.Data.SQLite
 {
     public class SQLiteTagRepository
+        : SQLiteRepositoryBase
     {
-        public SQLiteTagRepository(ILogger logger, IDbConnection defaultConnection)
+        public SQLiteTagRepository(ILogger logger)
+            : base(logger, connectionString)
         {
-            if (logger == null)
-                throw new ArgumentNullException("logger");
-
-            this.logger = logger;
-            this.defaultConnection = defaultConnection;
-            this.connectionFactory = new SQLiteConnectionFactory();
         }
 
-        private readonly ILogger logger;
-        private readonly IDbConnection defaultConnection;
-        private readonly IConnectionFactory connectionFactory;
-        private readonly Func<IDataRecord, ITag> readTag = (record) =>
-            {
-                var id = record.GetInt64("Id");
-                var name = record.GetString("Name");
-                var type = TagType.Parse(record.GetInt64("Type"));
-                var target = record.GetUri("Target");
-                return new Tag(target, type, name, id);
-            };
-
+        public SQLiteTagRepository(ILogger logger, IDbConnection defaultConnection)
+            : base(logger, connectionString, defaultConnection)
+        {
+        }
 
         private const string connectionString = "Data Source=Tag.db;Version=3;";
 
         #region Private Methods
 
-        private IDbConnection GetConnection()
+        private ITag ReadTag(IDataRecord record)
         {
-            if (defaultConnection != null)
-                return defaultConnection;
-            else
-            {
-                var connection = connectionFactory.Create(connectionString);
-                connection.Open();
-                return connection;
-            }
-        }
-
-        private void AddParameter(IDbCommand command, int count, string name, object value)
-        {
-            var parameter = command.CreateParameter();
-            parameter.ParameterName = string.Format("@{0}{1}", name, count);
-            parameter.Value = value;
-            command.Parameters.Add(parameter);
-        }
-
-        private void BuildDeleteCommand(IDbCommand command, StringBuilder sql, ITag tag, int count)
-        {
-            sql.AppendFormat("delete from Tag where Id = @Id{0}", count);
-            AddParameter(command, count, "Id", tag.Id);
-        }
-
-        private void BuildSaveCommand(IDbCommand command, StringBuilder sql, ITag tag, int count)
-        {
-            sql.AppendFormat("insert into Tag (Name, Type, Target) values (@Name{0}, @Type{0}, @Target{0})", count);
-            AddParameter(command, count, "Name", tag.Name);
-            AddParameter(command, count, "Type", tag.Type.Id);
-            AddParameter(command, count, "Target", tag.Target.ToString());
-        }
-
-        private void Execute(Action<IDbConnection> action)
-        {
-            if (action == null)
-                throw new ArgumentNullException("action");
-
-            IDbConnection connection = null;
-
-            try
-            {
-                logger.Info("SQLiteTagRepository.Execute");
-            }
-            catch (Exception ex)
-            {
-                logger.Error("  Execute", ex);
-                throw;
-            }
-            finally
-            {
-                if (defaultConnection == null && connection != null)
-                    connection.Close();
-            }
-        }
-
-        private void ExecuteReader(Func<IDbConnection, IDataReader> getReader, Action<IDataRecord> recordAction)
-        {
-            if (getReader == null)
-                throw new ArgumentNullException("getReader");
-            if (recordAction == null)
-                throw new ArgumentNullException("recordAction");
-
-            IDbConnection connection = null;
-
-            try
-            {
-                logger.Info("SQLiteTagRepository.ExecuteReader");
-
-                connection = GetConnection();
-
-                using (var reader = getReader(connection))
-                {
-                    while (reader.Read())
-                    {
-                        recordAction(reader);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.Error("  ExecuteReader", ex);
-                throw;
-            }
-            finally
-            {
-                if (defaultConnection == null && connection != null)
-                    connection.Close();
-            }
-        }
-
-        private void ExecuteTransaction(Action<IDbConnection> action)
-        {
-            if (action == null)
-                throw new ArgumentNullException("action");
-
-            IDbConnection connection = null;
-            IDbTransaction transaction = null;
-
-            try
-            {
-                logger.Info("SQLiteTagRepository.ExecuteTransaction");
-                
-                connection = GetConnection();
-                transaction = connection.BeginTransaction();
-
-                action(connection);
-
-                transaction.Commit();
-            }
-            catch (Exception ex)
-            {
-                logger.Error("  ExecuteTransaction", ex);
-                if (transaction != null)
-                {
-                    try
-                    {
-                        transaction.Rollback();
-                    }
-                    catch (Exception rollbackEx)
-                    {
-                        logger.Error("  Could not rollback transaction", rollbackEx);
-                    }
-                }
-            }
-            finally
-            {
-                if (defaultConnection == null && connection != null)
-                    connection.Close();
-            }
+            var target = record.GetUri("Target");
+            var type = record.GetInt64Lookup<ITagType>("Type", typeId => TagType.Parse(typeId));
+            var name = record.GetString("Name");
+            var id = record.GetInt64("Id");
+            return new Tag(target, type, name, id);
         }
 
         #endregion
@@ -180,26 +44,10 @@ namespace Gnosis.Data.SQLite
             {
                 logger.Info("SQLiteTagRepository.Lookup");
 
-                ITag tag = null;
+                var builder = new SimpleCommandBuilder("select * from Tag where Id = @Id;");
+                builder.AddUnquotedParameter("@Id", id);
 
-                ExecuteReader(connection =>
-                    {
-                        var command = connection.CreateCommand();
-                        command.CommandType = CommandType.Text;
-                        command.CommandText = "select * from Tag where Id = @Id";
-                        var parameter = command.CreateParameter();
-                        parameter.ParameterName = "@Id";
-                        parameter.Value = id;
-                        command.Parameters.Add(parameter);
-                        return command.ExecuteReader();
-                    },
-                    record =>
-                    {
-                        tag = readTag(record);
-                    }
-                );
-
-                return tag;
+                return GetRecord(builder, record => ReadTag(record));
             }
             catch (Exception ex)
             {
@@ -214,22 +62,9 @@ namespace Gnosis.Data.SQLite
             {
                 logger.Info("SQLiteTagRepository.All()");
 
-                var tags = new List<ITag>();
-               
-                ExecuteReader(connection =>
-                {
-                    var command = connection.CreateCommand();
-                    command.CommandType = CommandType.Text;
-                    command.CommandText = "select * from Tag";
-                    return command.ExecuteReader();
-                },
-                    record =>
-                    {
-                        tags.Add(readTag(record));
-                    }
-                );
+                var builder = new SimpleCommandBuilder("select * from Tag;");
 
-                return tags;
+                return GetRecords(builder, record => ReadTag(record));
             }
             catch (Exception ex)
             {
@@ -244,23 +79,15 @@ namespace Gnosis.Data.SQLite
             {
                 logger.Info("SQLiteTagRepository.Initialize");
 
-                Execute(
-                connection =>
-                    {
-                        var command = connection.CreateCommand();
-                        command.CommandType = CommandType.Text;
-                        var sql = new StringBuilder();
-                        sql.Append("create table if not exists Tag (Id integer primary key not null, Name text not null, NameAmericanized text not null, NameSoundsLike text not null, Type integer not null, Target text not null);");
-                        sql.Append("create index if not exists Tag_Name on Tag (Name asc);");
-                        sql.Append("create index if not exists Tag_NameAmericanized on Tag (NameAmericanized asc);");
-                        sql.Append("create index if not exists Tag_NameSoundsLike on Tag (NameSoundsLike asc);");
-                        sql.Append("create index if not exists Tag_Type on Tag (Type asc);");
-                        sql.Append("create index if not exists Tag_Target on Tag (Target asc);");
+                var builder = new SimpleCommandBuilder();
+                builder.AppendLine("create table if not exists Tag (Id integer primary key not null, Name text not null, Type integer not null, Target text not null);");
+                builder.AppendLine("create index if not exists Tag_Name on Tag (Name asc);");
+                builder.AppendLine("create index if not exists Tag_Type on Tag (Type asc);");
+                builder.AppendLine("create index if not exists Tag_Type_Name on Tag (Type asc, Name asc);");
+                builder.AppendLine("create index if not exists Tag_Target on Tag (Target asc);");
+                builder.AppendLine("create index if not exists Tag_Target_Type on Tag (Target asc, Type asc);");
 
-                        command.CommandText = sql.ToString();
-                        command.ExecuteNonQuery();
-                    }
-                );
+                ExecuteNonQuery(builder);
             }
             catch (Exception ex)
             {
@@ -269,23 +96,22 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public void Save(ITag item)
+        public void Save(ITag tag)
         {
-            if (item == null)
-                throw new ArgumentNullException("item");
+            if (tag == null)
+                throw new ArgumentNullException("tag");
 
             try
             {
                 logger.Info("SQLiteTagRepository.Save(ITag)");
 
-                Execute(connection =>
-                    {
-                        var command = connection.CreateCommand();
-                        command.CommandType = CommandType.Text;
-                        var sql = new StringBuilder();
-                        BuildSaveCommand(command, sql, item, 1);
-                        command.ExecuteNonQuery();
-                    });
+                var builder = new SimpleCommandBuilder();
+                builder.Append("insert into Tag (Target, Type, Name) values (@Target, @Type, @Name);");
+                builder.AddQuotedParameter("@Target", tag.Target.ToString());
+                builder.AddUnquotedParameter("@Type", tag.Type.Id);
+                builder.AddQuotedParameter("@Name", tag.Name);
+
+                ExecuteNonQuery(builder);
             }
             catch (Exception ex)
             {
@@ -294,27 +120,31 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public void Save(IEnumerable<ITag> items)
+        public void Save(IEnumerable<ITag> tags)
         {
+            if (tags == null)
+                throw new ArgumentNullException("tags");
+
             try
             {
                 logger.Info("SQLiteTagRepository.Save(IEnumerable<ITag>)");
 
-                ExecuteTransaction(connection =>
+                var builder = new SimpleCommandBuilder();
+
+                var count = 0;
+                foreach (var tag in tags)
                 {
-                    var command = connection.CreateCommand();
-                    command.CommandType = CommandType.Text;
-                    var sql = new StringBuilder();
+                    count++;
+                    builder.AppendFormatLine("insert into Tag (Target, Type, Name) values (@Target{0}, @Type{0}, @Name{0});", count);
+                    builder.AddQuotedParameter(string.Format("@Target{0}", count), tag.Target.ToString());
+                    builder.AddUnquotedParameter(string.Format("@Type{0}", count), tag.Type.Id);
+                    builder.AddQuotedParameter(string.Format("@Name{0}", count), tag.Name);
+                }
 
-                    var count = 0;
-                    foreach (var item in items)
-                    {
-                        count++;
-                        BuildSaveCommand(command, sql, item, count);
-                    }
+                if (count == 0)
+                    return;
 
-                    command.ExecuteNonQuery();
-                });
+                ExecuteTransaction(builder);
             }
             catch (Exception ex)
             {
@@ -323,23 +153,20 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public void Delete(ITag item)
+        public void Delete(ITag tag)
         {
-            if (item == null)
-                throw new ArgumentNullException("item");
+            if (tag == null)
+                throw new ArgumentNullException("tag");
 
             try
             {
                 logger.Info("SQLiteTagRepository.Delete(ITag)");
 
-                Execute(connection =>
-                {
-                    var command = connection.CreateCommand();
-                    command.CommandType = CommandType.Text;
-                    var sql = new StringBuilder();
-                    BuildDeleteCommand(command, sql, item, 1);
-                    command.ExecuteNonQuery();
-                });
+                var builder = new SimpleCommandBuilder();
+                builder.Append("delete from Tag where Id = @Id;");
+                builder.AddUnquotedParameter("@Id", tag.Id);
+
+                ExecuteNonQuery(builder);
             }
             catch (Exception ex)
             {
@@ -348,27 +175,29 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public void Delete(IEnumerable<ITag> items)
+        public void Delete(IEnumerable<ITag> tags)
         {
+            if (tags == null)
+                throw new ArgumentNullException("tags");
+
             try
             {
                 logger.Info("SQLiteTagRepository.Delete(IEnumerable<ITag>)");
 
-                ExecuteTransaction(connection =>
+                var builder = new SimpleCommandBuilder();
+
+                var count = 0;
+                foreach (var tag in tags)
                 {
-                    var command = connection.CreateCommand();
-                    command.CommandType = CommandType.Text;
-                    var sql = new StringBuilder();
+                    count++;
+                    builder.AppendFormatLine("delete from Tag where Id = @Id{0};", count);
+                    builder.AddUnquotedParameter(string.Format("@Id{0}", count), tag.Id);
+                }
 
-                    var count = 0;
-                    foreach (var item in items)
-                    {
-                        count++;
-                        BuildDeleteCommand(command, sql, item, count);
-                    }
+                if (count == 0)
+                    return;
 
-                    command.ExecuteNonQuery();
-                });
+                ExecuteTransaction(builder);
             }
             catch (Exception ex)
             {

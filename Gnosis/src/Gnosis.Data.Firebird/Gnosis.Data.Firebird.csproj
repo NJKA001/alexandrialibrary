@@ -99,7 +99,11 @@
       <Name>Gnosis.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="firebird.msg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="intl\fbintl.conf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

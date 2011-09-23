@@ -42,9 +42,19 @@ namespace Gnosis.Data
             return int.Parse(record[name].ToString());
         }
 
+        public static T GetInt32Lookup<T>(this IDataRecord record, string name, Func<int, T> lookup)
+        {
+            return lookup(record.GetInt32(name));
+        }
+
         public static long GetInt64(this IDataRecord record, string name)
         {
             return long.Parse(record[name].ToString());
+        }
+
+        public static T GetInt64Lookup<T>(this IDataRecord record, string name, Func<long, T> lookup)
+        {
+            return lookup(record.GetInt64(name));
         }
 
         public static string GetString(this IDataRecord record, string name)
@@ -64,7 +74,7 @@ namespace Gnosis.Data
 
         public static Uri GetUri(this IDataRecord record, string name)
         {
-            return new Uri(record[name].ToString());
+            return new Uri(record[name].ToString(), UriKind.RelativeOrAbsolute);
         }
     }
 }

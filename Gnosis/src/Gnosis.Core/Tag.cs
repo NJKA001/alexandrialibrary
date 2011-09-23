@@ -15,6 +15,13 @@ namespace Gnosis.Core
 
         public Tag(Uri target, ITagType type, string name, long id)
         {
+            if (target == null)
+                throw new ArgumentNullException("target");
+            if (type == null)
+                throw new ArgumentNullException("type");
+            if (name == null)
+                throw new ArgumentNullException("name");
+
             this.target = target;
             this.type = type;
             this.name = name;
