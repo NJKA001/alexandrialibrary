@@ -88,6 +88,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\ExtensionTests.cs" />
     <Compile Include="Data\FirebirdTests.cs" />
     <Compile Include="Data\SQLiteTests.cs" />
     <Compile Include="Models\XspfTests.cs" />
