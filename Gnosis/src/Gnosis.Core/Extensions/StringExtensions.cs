@@ -87,6 +87,26 @@ namespace Gnosis.Core
 
         #endregion
 
+        public static int ToHammingDistance(this string self, string value)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+            if (value == null)
+                throw new ArgumentNullException("value");
+
+            if (self.Length != value.Length)
+                return -1;
+
+            var d = 0;
+            for (var i = 0; i < self.Length; i++)
+            {
+                if (self[i] != value[i])
+                    d++;
+            }
+
+            return d;
+        }
+
         public static int ToLevenshteinDistance(this string self, string value)
         {
             if (self == null)
