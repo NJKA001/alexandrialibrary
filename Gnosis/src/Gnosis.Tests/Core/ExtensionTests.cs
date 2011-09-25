@@ -18,6 +18,7 @@ namespace Gnosis.Tests.Core
             Assert.AreEqual(3, "kitten".ToLevenshteinDistance("sitting"));
             Assert.AreEqual(2, "CHROMEO".ToLevenshteinDistance("ROMEO"));
             Assert.AreEqual(5, "adz".ToLevenshteinDistance("hazard"));
+            Assert.AreEqual(0, "apples".ToLevenshteinDistance("apples"));
         }
     }
 }
