@@ -54,8 +54,8 @@ namespace Gnosis.Alexandria.Repositories.Feeds
 
             var parameters = new Dictionary<string, object>();
             parameters.Add("@pattern", '%' + keyword + '%');
-            parameters.Add("@patternDM", '%' + keyword.AsDoubleMetaphone() + '%');
-            parameters.Add("@patternNH", '%' + keyword.AsNameHash() + '%');
+            parameters.Add("@patternDM", '%' + keyword.ToDoubleMetaphoneString() + '%');
+            parameters.Add("@patternNH", '%' + keyword.ToAmericanizedString() + '%');
             parameters.Add("@schemeDM", Models.Tag.SchemeDoubleMetaphone.ToString());
             parameters.Add("@schemeNH", Models.Tag.SchemeAmericanizedGraph.ToString());
 

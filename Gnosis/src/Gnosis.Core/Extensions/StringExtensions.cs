@@ -87,7 +87,7 @@ namespace Gnosis.Core
 
         #endregion
 
-        public static string AsDoubleMetaphone(this string self)
+        public static string ToDoubleMetaphoneString(this string self)
         {
 			MetaphoneData metaphoneData = new MetaphoneData();
 			int current = 0;
@@ -805,7 +805,7 @@ namespace Gnosis.Core
 			return metaphoneData.ToString();
 		}
 
-        public static string AsMd5Hash(this string self)
+        public static string ToMd5Hash(this string self)
         {
             try
             {
@@ -826,7 +826,7 @@ namespace Gnosis.Core
             }
         }
 
-        public static string AsNameHash(this string self)
+        public static string ToAmericanizedString(this string self)
         {
             if (string.IsNullOrEmpty(self))
                 return string.Empty;
@@ -923,7 +923,7 @@ namespace Gnosis.Core
             return result.ToString();
         }
 
-        public static DateTime AsRfc822DateTime(this string self)
+        public static DateTime ToRfc822DateTime(this string self)
         {
             var date = DateTime.MinValue;
             Time.Rfc822DateTime.TryParse(self, out date);

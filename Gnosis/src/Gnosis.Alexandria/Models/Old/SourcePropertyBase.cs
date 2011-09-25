@@ -92,8 +92,8 @@ namespace Gnosis.Alexandria.Models
                 if (this.value != value)
                 {
                     this.value = value;
-                    ValueHash = value != null ? value.ToString().AsNameHash() : string.Empty;
-                    ValueMetaphone = value != null ? value.ToString().AsDoubleMetaphone() : string.Empty;
+                    ValueHash = value != null ? value.ToString().ToAmericanizedString() : string.Empty;
+                    ValueMetaphone = value != null ? value.ToString().ToDoubleMetaphoneString() : string.Empty;
                     OnPropertyChanged("Value");
                     OnPropertyChanged("ValueHash");
                     OnPropertyChanged("ValueMetaphone");

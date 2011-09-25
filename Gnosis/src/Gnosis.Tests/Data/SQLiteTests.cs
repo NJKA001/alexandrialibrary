@@ -44,8 +44,8 @@ namespace Gnosis.Tests.Data
         [Test]
         public void TagRepositorySaveTest()
         {
-            var tag1 = new Tag(new Uri("http://arstechnica.com/index.ars"), TagType.GeneralTagType, "Some Tag #1");
-            var tag2 = new Tag(new Uri(@"C:\Users\dpoage\Music\Tool\Undertown\Bottom.mp3"), TagType.Id3v2ArtistTagType, "Tool");
+            var tag1 = new Tag(new Uri("http://arstechnica.com/index.ars"), Algorithm.Default, TagType.GeneralTagType, "Some Tag #1");
+            var tag2 = new Tag(new Uri(@"C:\Users\dpoage\Music\Tool\Undertown\Bottom.mp3"), Algorithm.Default, TagType.Id3v2ArtistTagType, "Tool");
 
             tagRepository.Save(new List<ITag> { tag1, tag2 });
 

@@ -50,7 +50,7 @@ namespace Gnosis.Alexandria.Models
             if (string.IsNullOrEmpty(originalString))
                 return null;
 
-            var value = originalString.AsDoubleMetaphone();
+            var value = originalString.ToDoubleMetaphoneString();
             
             return (!string.IsNullOrEmpty(value)) ? new Tag(parent, SchemeDoubleMetaphone, value) : null;
         }
@@ -66,7 +66,7 @@ namespace Gnosis.Alexandria.Models
             if (string.IsNullOrEmpty(originalString))
                 return null;
 
-            var value = originalString.AsMd5Hash();
+            var value = originalString.ToMd5Hash();
 
             return (!string.IsNullOrEmpty(value)) ? new Tag(parent, SchemeMd5, value) : null;
         }
@@ -92,7 +92,7 @@ namespace Gnosis.Alexandria.Models
             if (string.IsNullOrEmpty(originalString))
                 return null;
 
-            var value = originalString.AsNameHash();
+            var value = originalString.ToAmericanizedString();
 
             return (!string.IsNullOrEmpty(value)) ? new Tag(parent, SchemeAmericanizedGraph, value) : null;
         }

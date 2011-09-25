@@ -5,10 +5,11 @@ using System.Text;
 
 namespace Gnosis.Core
 {
-    public interface ITagType
+    public interface IAlgorithm
     {
         int Id { get; }
         string Name { get; }
-        Uri Scheme { get; }
+        string Execute(string value);
+        string Execute(byte[] value);
     }
 }

@@ -18,12 +18,12 @@ namespace Gnosis.Alexandria.Models
         public OldTrack(Guid id)
         {
             this.id = id;
-            TitleHash = title.AsNameHash();
-            TitleMetaphone = title.AsDoubleMetaphone();
-            ArtistHash = artist.AsNameHash();
-            ArtistMetaphone = artist.AsDoubleMetaphone();
-            AlbumHash = album.AsNameHash();
-            AlbumMetaphone = album.AsDoubleMetaphone();
+            TitleHash = title.ToAmericanizedString();
+            TitleMetaphone = title.ToDoubleMetaphoneString();
+            ArtistHash = artist.ToAmericanizedString();
+            ArtistMetaphone = artist.ToDoubleMetaphoneString();
+            AlbumHash = album.ToAmericanizedString();
+            AlbumMetaphone = album.ToDoubleMetaphoneString();
         }
 
         public const string DEFAULT_TITLE = "Untitled";
@@ -140,8 +140,8 @@ namespace Gnosis.Alexandria.Models
                 {
                     title = value;
                     OnPropertyChanged("Title");
-                    TitleHash = title.AsNameHash();
-                    TitleMetaphone = title.AsDoubleMetaphone();
+                    TitleHash = title.ToAmericanizedString();
+                    TitleMetaphone = title.ToDoubleMetaphoneString();
                 }
             }
         }
@@ -170,8 +170,8 @@ namespace Gnosis.Alexandria.Models
                 {
                     artist = value;
                     OnPropertyChanged("Artist");
-                    ArtistHash = artist.AsNameHash();
-                    ArtistMetaphone = artist.AsDoubleMetaphone();
+                    ArtistHash = artist.ToAmericanizedString();
+                    ArtistMetaphone = artist.ToDoubleMetaphoneString();
                 }
             }
         }
@@ -200,8 +200,8 @@ namespace Gnosis.Alexandria.Models
                 {
                     album = value;
                     OnPropertyChanged("Album");
-                    AlbumHash = album.AsNameHash();
-                    AlbumMetaphone = album.AsDoubleMetaphone();
+                    AlbumHash = album.ToAmericanizedString();
+                    AlbumMetaphone = album.ToDoubleMetaphoneString();
                 }
             }
         }

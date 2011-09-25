@@ -30,10 +30,11 @@ namespace Gnosis.Data.SQLite
         private ITag ReadTag(IDataRecord record)
         {
             var target = record.GetUri("Target");
-            var type = record.GetInt64Lookup<ITagType>("Type", typeId => TagType.Parse(typeId));
+            var algorithm = record.GetInt32Lookup<IAlgorithm>("Algorithm", algorithmId => Algorithm.Parse(algorithmId));
+            var type = record.GetInt32Lookup<ITagType>("Type", typeId => TagType.Parse(typeId));
             var name = record.GetString("Name");
             var id = record.GetInt64("Id");
-            return new Tag(target, type, name, id);
+            return new Tag(target, algorithm, type, name, id);
         }
 
         #endregion
@@ -80,12 +81,13 @@ namespace Gnosis.Data.SQLite
                 logger.Info("SQLiteTagRepository.Initialize");
 
                 var builder = new SimpleCommandBuilder();
-                builder.AppendLine("create table if not exists Tag (Id integer primary key not null, Name text not null, Type integer not null, Target text not null);");
-                builder.AppendLine("create index if not exists Tag_Name on Tag (Name asc);");
-                builder.AppendLine("create index if not exists Tag_Type on Tag (Type asc);");
-                builder.AppendLine("create index if not exists Tag_Type_Name on Tag (Type asc, Name asc);");
+                builder.AppendLine("create table if not exists Tag (Id integer primary key not null, Target text not null, Algorithm integer not null, Type integer not null, Name text not null);");
                 builder.AppendLine("create index if not exists Tag_Target on Tag (Target asc);");
                 builder.AppendLine("create index if not exists Tag_Target_Type on Tag (Target asc, Type asc);");
+                builder.AppendLine("create index if not exists Tag_Algorithm on Tag (Algorithm asc);");
+                builder.AppendLine("create index if not exists Tag_Type on Tag (Type asc);");
+                builder.AppendLine("create index if not exists Tag_Type_Name on Tag (Type asc, Name asc);");
+                builder.AppendLine("create index if not exists Tag_Name on Tag (Name asc);");
 
                 ExecuteNonQuery(builder);
             }
@@ -106,8 +108,9 @@ namespace Gnosis.Data.SQLite
                 logger.Info("SQLiteTagRepository.Save(ITag)");
 
                 var builder = new SimpleCommandBuilder();
-                builder.Append("insert into Tag (Target, Type, Name) values (@Target, @Type, @Name);");
+                builder.Append("insert into Tag (Target, Algorithm, Type, Name) values (@Target, @Algorithm, @Type, @Name);");
                 builder.AddQuotedParameter("@Target", tag.Target.ToString());
+                builder.AddUnquotedParameter("@Algorithm", tag.Algorithm.Id);
                 builder.AddUnquotedParameter("@Type", tag.Type.Id);
                 builder.AddQuotedParameter("@Name", tag.Name);
 
@@ -135,8 +138,9 @@ namespace Gnosis.Data.SQLite
                 foreach (var tag in tags)
                 {
                     count++;
-                    builder.AppendFormatLine("insert into Tag (Target, Type, Name) values (@Target{0}, @Type{0}, @Name{0});", count);
+                    builder.AppendFormatLine("insert into Tag (Target, Algorithm, Type, Name) values (@Target{0}, @Algorithm{0}, @Type{0}, @Name{0});", count);
                     builder.AddQuotedParameter(string.Format("@Target{0}", count), tag.Target.ToString());
+                    builder.AddUnquotedParameter(string.Format("@Algorithm{0}", count), tag.Algorithm.Id);
                     builder.AddUnquotedParameter(string.Format("@Type{0}", count), tag.Type.Id);
                     builder.AddQuotedParameter(string.Format("@Name{0}", count), tag.Name);
                 }

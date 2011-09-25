@@ -428,11 +428,11 @@ namespace Gnosis.Tests.Repositories
 
             repository.Save(new List<IFeed> { feedA, feedB, feedC, feedD, feedE });
 
-            var keyword1 = "W.X.Y-Z".AsNameHash();
+            var keyword1 = "W.X.Y-Z".ToAmericanizedString();
             var results1 = repository.SearchForTitleTags(Gnosis.Alexandria.Models.Tag.SchemeAmericanizedGraph, keyword1);
             Assert.AreEqual(1, results1.Count());
 
-            var keyword2 = "Steven".AsDoubleMetaphone();
+            var keyword2 = "Steven".ToDoubleMetaphoneString();
             var results2 = repository.SearchForTitleTags(Gnosis.Alexandria.Models.Tag.SchemeDoubleMetaphone, keyword2);
             Assert.AreEqual(1, results2.Count());
 

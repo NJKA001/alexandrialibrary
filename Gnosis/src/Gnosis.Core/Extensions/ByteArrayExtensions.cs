@@ -14,5 +14,18 @@ namespace Gnosis.Core
             var stream = new MemoryStream(self);
             return System.Drawing.Image.FromStream(stream);
         }
+
+        public static string ToMd5Hash(this byte[] self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var builder = new StringBuilder();
+            for (int i = 0; i < self.Length; i++)
+            {
+                builder.Append(self[i].ToString("x2"));
+            }
+            return builder.ToString();
+        }
     }
 }

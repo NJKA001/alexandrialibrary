@@ -8,7 +8,8 @@ namespace Gnosis.Core
     public interface ITag
     {
         long Id { get; }
-        Uri Target { get; }        
+        Uri Target { get; }
+        IAlgorithm Algorithm { get; }
         ITagType Type { get; }
         string Name { get; }
     }

@@ -203,8 +203,8 @@ namespace Gnosis.Alexandria.Controllers
             var criteria = new Dictionary<string, object>();
 
             var searchLike = string.Format("%{0}%", search);
-            var searchHash = search.AsNameHash();
-            var searchMetaphone = search.AsDoubleMetaphone();
+            var searchHash = search.ToAmericanizedString();
+            var searchMetaphone = search.ToDoubleMetaphoneString();
 
             criteria.Add("Title", searchLike);
             criteria.Add("TitleHash", searchHash);

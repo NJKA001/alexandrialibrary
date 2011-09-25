@@ -8,18 +8,18 @@ namespace Gnosis.Core
     public class TagType
         : ITagType
     {
-        private TagType(long id, string name, Uri scheme)
+        private TagType(int id, string name, Uri scheme)
         {
             this.id = id;
             this.name = name;
             this.scheme = scheme;
         }
 
-        private readonly long id;
+        private readonly int id;
         private readonly string name;
         private readonly Uri scheme;
 
-        public long Id
+        public int Id
         {
             get { return id; }
         }
@@ -37,11 +37,14 @@ namespace Gnosis.Core
         static TagType()
         {
             foreach (var tagType in tagTypes)
+            {
                 byId[tagType.Id] = tagType;
+                byName[tagType.Name] = tagType;
+            }
         }
 
-        public static readonly Uri DefaultScheme = new Uri("http://gn0s1s.com/alexandria/ns/1/tags/default");
-        public static readonly Uri Id3v2Scheme = new Uri("http://gn0s1s.com/alexandria/ns/1/tags/id3v2");
+        public static readonly Uri DefaultScheme = new Uri("http://gn0s1s.com/alexandria/ns/1/tags/default/");
+        public static readonly Uri Id3v2Scheme = new Uri("http://gn0s1s.com/alexandria/ns/1/tags/id3v2/");
 
         public static ITagType GeneralTagType = new TagType(1, "General", DefaultScheme);
         public static ITagType Id3v2TitleTagType = new TagType(2, "Title", Id3v2Scheme);
@@ -53,17 +56,29 @@ namespace Gnosis.Core
             Id3v2TitleTagType,
             Id3v2ArtistTagType
         };
-        private static readonly IDictionary<long, ITagType> byId = new Dictionary<long, ITagType>();
+
+        private static readonly IDictionary<int, ITagType> byId = new Dictionary<int, ITagType>();
+        private static readonly IDictionary<string, ITagType> byName = new Dictionary<string, ITagType>();
 
         public static IEnumerable<ITagType> TagTypes
         {
             get { return tagTypes; }
         }
 
-        public static ITagType Parse(long id)
+        public static ITagType Parse(int id)
         {
             return byId.ContainsKey(id) ?
                 byId[id]
+                : null;
+        }
+
+        public static ITagType Parse(string name)
+        {
+            if (name == null)
+                throw new ArgumentNullException("name");
+
+            return byName.ContainsKey(name) ?
+                byName[name]
                 : null;
         }
     }

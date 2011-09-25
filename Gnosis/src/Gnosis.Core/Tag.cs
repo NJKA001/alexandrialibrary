@@ -8,21 +8,24 @@ namespace Gnosis.Core
     public class Tag
         : ITag
     {
-        public Tag(Uri target, ITagType type, string name)
-            : this(target, type, name, 0)
+        public Tag(Uri target, IAlgorithm algorithm, ITagType type, string name)
+            : this(target, algorithm, type, name, 0)
         {
         }
 
-        public Tag(Uri target, ITagType type, string name, long id)
+        public Tag(Uri target, IAlgorithm algorithm, ITagType type, string name, long id)
         {
             if (target == null)
                 throw new ArgumentNullException("target");
+            if (algorithm == null)
+                throw new ArgumentNullException("algorithm");
             if (type == null)
                 throw new ArgumentNullException("type");
             if (name == null)
                 throw new ArgumentNullException("name");
 
             this.target = target;
+            this.algorithm = algorithm;
             this.type = type;
             this.name = name;
             this.id = id;
@@ -30,10 +33,10 @@ namespace Gnosis.Core
 
         private readonly long id;
         private readonly Uri target;
+        private readonly IAlgorithm algorithm;
         private readonly ITagType type;
         private readonly string name;
         
-
         #region ITag Members
 
         public long Id
@@ -44,6 +47,11 @@ namespace Gnosis.Core
         public Uri Target
         {
             get { return target; }
+        }
+
+        public IAlgorithm Algorithm
+        {
+            get { return algorithm; }
         }
 
         public ITagType Type

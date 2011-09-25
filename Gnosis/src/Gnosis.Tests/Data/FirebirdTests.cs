@@ -93,8 +93,8 @@ END";
         [Test]
         public void TagRepositorySaveTest()
         {
-            var tag1 = new Tag(new Uri("http://arstechnica.com/index.ars"), TagType.GeneralTagType, "Sample Tag #1");
-            var tag2 = new Tag(new Uri(@"C:\Users\dpoage\Music\Queen\bicycle.mp3"), TagType.Id3v2ArtistTagType, "Queen");
+            var tag1 = new Tag(new Uri("http://arstechnica.com/index.ars"), Algorithm.Default, TagType.GeneralTagType, "Sample Tag #1");
+            var tag2 = new Tag(new Uri(@"C:\Users\dpoage\Music\Queen\bicycle.mp3"), Algorithm.Default, TagType.Id3v2ArtistTagType, "Queen");
 
             tagRepository.Save(new List<ITag> { tag1, tag2 });
         }

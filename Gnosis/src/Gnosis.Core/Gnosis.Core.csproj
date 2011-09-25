@@ -65,6 +65,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithm.cs" />
     <Compile Include="Document\IDocument.cs" />
     <Compile Include="Document\Xml\IXmlDocument.cs" />
     <Compile Include="Document\Xml\Xhtml\AnchorDirection.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Extensions\FileInfoExtensions.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
     <Compile Include="Audio\Id3\IId3Tag.cs" />
+    <Compile Include="IAlgorithm.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="IRepresentationRequest.cs" />
     <Compile Include="IRepresentationResolver.cs" />
