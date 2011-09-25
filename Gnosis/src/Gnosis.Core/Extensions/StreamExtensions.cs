@@ -94,7 +94,12 @@ namespace Gnosis.Core
             var md5 = new MD5CryptoServiceProvider();
             var bytes = md5.ComputeHash(self);
 
-            return bytes.ToMd5Hash();
+            var builder = new StringBuilder();
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                builder.Append(bytes[i].ToString("x2"));
+            }
+            return builder.ToString();
         }
     }
 }

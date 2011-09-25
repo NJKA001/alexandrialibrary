@@ -807,23 +807,14 @@ namespace Gnosis.Core
 
         public static string ToMd5Hash(this string self)
         {
-            try
-            {
-                var md5 = System.Security.Cryptography.MD5.Create();
-                byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(self);
-                byte[] hash = md5.ComputeHash(inputBytes);
+            var bytes = System.Text.Encoding.UTF8.GetBytes(self);
+            return bytes.ToMd5Hash();
+        }
 
-                var sb = new StringBuilder();
-                for (int i = 0; i < hash.Length; i++)
-                {
-                    sb.Append(hash[i].ToString("x2"));
-                }
-                return sb.ToString();
-            }
-            catch
-            {
-                return null;
-            }
+        public static string ToSha1Hash(this string self)
+        {
+            var bytes = System.Text.Encoding.UTF8.GetBytes(self);
+            return bytes.ToSha1Hash();
         }
 
         public static string ToAmericanizedString(this string self)

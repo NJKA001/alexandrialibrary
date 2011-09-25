@@ -75,6 +75,7 @@ namespace Gnosis.Core
             algorithms.Add(DoubleMetaphone);
             algorithms.Add(Americanized);
             algorithms.Add(Md5);
+            algorithms.Add(Sha1);
         }
 
         private static readonly IList<IAlgorithm> algorithms = new List<IAlgorithm>();
@@ -92,6 +93,7 @@ namespace Gnosis.Core
         public static IAlgorithm DoubleMetaphone = new Algorithm(2, "Double Metaphone", x => x.ToDoubleMetaphoneString(), null);
         public static IAlgorithm Americanized = new Algorithm(3, "Americanized", x => x.ToAmericanizedString(), null);
         public static IAlgorithm Md5 = new Algorithm(4, "MD5", x => x.ToMd5Hash(), x => x.ToMd5Hash());
+        public static IAlgorithm Sha1 = new Algorithm(5, "SHA1", x => x.ToSha1Hash(), x => x.ToSha1Hash());
 
         #endregion
 
