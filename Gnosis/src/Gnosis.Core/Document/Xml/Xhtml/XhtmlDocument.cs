@@ -8,21 +8,21 @@ namespace Gnosis.Core.Document.Xml.Xhtml
     public class XhtmlDocument
         : IXmlDocument
     {
-        public XhtmlDocument(Uri location, IContentType contentType)
+        public XhtmlDocument(Uri location, IMediaType type)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
-            if (contentType == null)
-                throw new ArgumentNullException("contentType");
+            if (type == null)
+                throw new ArgumentNullException("type");
 
             this.location = location;
-            this.contentType = contentType;
+            this.type = type;
 
             this.xml = location.ToXhtmlDocument();
         }
 
         private Uri location;
-        private IContentType contentType;
+        private IMediaType type;
         private IXmlElement xml;
 
         public Uri Location
@@ -30,9 +30,9 @@ namespace Gnosis.Core.Document.Xml.Xhtml
             get { return location; }
         }
 
-        public IContentType ContentType
+        public IMediaType Type
         {
-            get { return contentType; }
+            get { return type; }
         }
 
         public IXmlElement Xml

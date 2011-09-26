@@ -89,10 +89,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\ExtensionTests.cs" />
-    <Compile Include="Data\FirebirdTests.cs" />
-    <Compile Include="Data\SQLiteTests.cs" />
+    <Compile Include="Data\Firebird\FirebirdTests.cs" />
+    <Compile Include="Data\SQLite\SQLiteTests.cs" />
     <Compile Include="Models\XspfTests.cs" />
-    <Compile Include="Spiders\LyricsWikiaSpiderTests.cs" />
+    <Compile Include="Network\Spiders\LyricsWikiaSpiderTests.cs" />
     <Compile Include="Models\AtomTests.cs" />
     <Compile Include="Models\CharacterSetTests.cs" />
     <Compile Include="Models\ContentTypeTests.cs" />
@@ -100,7 +100,7 @@
     <Compile Include="Models\FeedTests.cs" />
     <Compile Include="Models\LanguageTagTests.cs" />
     <Compile Include="Models\LanguageTests.cs" />
-    <Compile Include="Models\MediaTests.cs" />
+    <Compile Include="Core\Document\Xml\StyleMediaTests.cs" />
     <Compile Include="Models\MediaTypeTests.cs" />
     <Compile Include="Models\RegionTests.cs" />
     <Compile Include="Models\RepresentationFactoryTests.cs" />

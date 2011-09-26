@@ -8,8 +8,8 @@ namespace Gnosis.Core.Image
     public class PngImage
         : ImageBase
     {
-        public PngImage(Uri location, IContentType contentType)
-            : base(location, contentType)
+        public PngImage(Uri location)
+            : base(location, MediaType.ImagePng)
         {
         }
     }

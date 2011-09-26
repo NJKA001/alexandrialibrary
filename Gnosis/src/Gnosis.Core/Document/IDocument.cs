@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Document
 {
     public interface IDocument
-        : IRepresentation
+        : IMedia
     {
     }
 }

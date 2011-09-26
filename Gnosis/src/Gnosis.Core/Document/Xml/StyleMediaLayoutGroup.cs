@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core
+namespace Gnosis.Core.Document.Xml
 {
-    public enum MediaInteractivityGroup
+    public enum StyleMediaLayoutGroup
     {
+        Bitmap,
         Both,
-        Interactive,
-        NA,
-        Static
+        Grid,
+        NA
     }
 }

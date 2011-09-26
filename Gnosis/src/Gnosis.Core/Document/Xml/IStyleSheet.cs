@@ -9,7 +9,7 @@ namespace Gnosis.Core.Document.Xml
         : IProcessingInstruction
     {
         IMediaType Type { get; }
-        IMedia Media { get; }
+        IStyleMedia Media { get; }
         Uri Href { get; }
     }
 }

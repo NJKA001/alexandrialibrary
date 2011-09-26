@@ -12,7 +12,7 @@ namespace Gnosis.Tests.Models
     [TestFixture]
     public class RepresentationFactoryTests
     {
-        private readonly IRepresentationFactory factory = new RepresentationFactory();
+        private readonly IMediaFactory factory = new MediaFactory();
 
         const string pathBearAtom = @".\Files\bearbrarian.xml";
         const string pathArsRss = @".\Files\arstechnica.xml";
@@ -29,9 +29,9 @@ namespace Gnosis.Tests.Models
             var doc = factory.Create(url);
             Assert.IsNotNull(doc);
             Assert.IsNotNull(doc.Location);
-            Assert.IsNotNull(doc.ContentType);
+            Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual(MediaType.ApplicationAtomXml, doc.ContentType.Type);
+            Assert.AreEqual(MediaType.ApplicationAtomXml, doc.Type);
         }
 
         [Test]
@@ -41,9 +41,9 @@ namespace Gnosis.Tests.Models
             var doc = factory.Create(url);
             Assert.IsNotNull(doc);
             Assert.IsNotNull(doc.Location);
-            Assert.IsNotNull(doc.ContentType);
+            Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual(MediaType.ApplicationRssXml, doc.ContentType.Type);
+            Assert.AreEqual(MediaType.ApplicationRssXml, doc.Type);
         }
 
         [Test]
@@ -53,9 +53,9 @@ namespace Gnosis.Tests.Models
             var doc = factory.Create(url);
             Assert.IsNotNull(doc);
             Assert.IsNotNull(doc.Location);
-            Assert.IsNotNull(doc.ContentType);
+            Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual(MediaType.TextHtml, doc.ContentType.Type);
+            Assert.AreEqual(MediaType.TextHtml, doc.Type);
         }
 
         [Test]
@@ -65,9 +65,9 @@ namespace Gnosis.Tests.Models
             var doc = factory.Create(url);
             Assert.IsNotNull(doc);
             Assert.IsNotNull(doc.Location);
-            Assert.IsNotNull(doc.ContentType);
+            Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual(MediaType.ApplicationAtomXml, doc.ContentType.Type);
+            Assert.AreEqual(MediaType.ApplicationAtomXml, doc.Type);
         }
 
         [Test]
@@ -77,9 +77,9 @@ namespace Gnosis.Tests.Models
             var doc = factory.Create(url);
             Assert.IsNotNull(doc);
             Assert.IsNotNull(doc.Location);
-            Assert.IsNotNull(doc.ContentType);
+            Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual(MediaType.ImageGif, doc.ContentType.Type);
+            Assert.AreEqual(MediaType.ImageGif, doc.Type);
         }
 
         [Test]
@@ -89,9 +89,9 @@ namespace Gnosis.Tests.Models
             var doc = factory.Create(url);
             Assert.IsNotNull(doc);
             Assert.IsNotNull(doc.Location);
-            Assert.IsNotNull(doc.ContentType);
+            Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual(MediaType.ImageJpeg, doc.ContentType.Type);
+            Assert.AreEqual(MediaType.ImageJpeg, doc.Type);
         }
 
         [Test]
@@ -101,9 +101,9 @@ namespace Gnosis.Tests.Models
             var doc = factory.Create(url);
             Assert.IsNotNull(doc);
             Assert.IsNotNull(doc.Location);
-            Assert.IsNotNull(doc.ContentType);
+            Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual(MediaType.ImagePng, doc.ContentType.Type);
+            Assert.AreEqual(MediaType.ImagePng, doc.Type);
         }
     }
 }

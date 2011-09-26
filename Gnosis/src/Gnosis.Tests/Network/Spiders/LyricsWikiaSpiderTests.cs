@@ -9,12 +9,12 @@ using Gnosis.Spiders.LyricsWikia;
 
 using NUnit.Framework;
 
-namespace Gnosis.Tests.Spiders
+namespace Gnosis.Tests.Network.Spiders
 {
     [TestFixture]
     public class LyricsWikiaSpiderTests
     {
-        private readonly IRepresentationFactory factory = new RepresentationFactory();
+        private readonly IMediaFactory factory = new MediaFactory();
 
         [Test]
         public void TestArtistsCategorySpider()

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis.Core
 {
-    public interface IRepresentationRequest
+    public interface IMediaRequest
     {
         IEnumerable<ITag> Tags { get; }
     }

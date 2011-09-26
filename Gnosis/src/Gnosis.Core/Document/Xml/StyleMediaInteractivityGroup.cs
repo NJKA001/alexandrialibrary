@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core
+namespace Gnosis.Core.Document.Xml
 {
-    public enum MediaContinuityGroup
+    public enum StyleMediaInteractivityGroup
     {
         Both,
-        Continuous,
+        Interactive,
         NA,
-        Paged
+        Static
     }
 }

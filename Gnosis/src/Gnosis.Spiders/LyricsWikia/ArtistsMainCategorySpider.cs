@@ -13,7 +13,7 @@ namespace Gnosis.Spiders.LyricsWikia
     public class ArtistsMainCategorySpider
         : ISpider
     {
-        public ArtistsMainCategorySpider(IRepresentationFactory factory)
+        public ArtistsMainCategorySpider(IMediaFactory factory)
         {
             if (factory == null)
                 throw new ArgumentNullException("factory");
@@ -22,7 +22,7 @@ namespace Gnosis.Spiders.LyricsWikia
         }
 
 
-        private readonly IRepresentationFactory factory;
+        private readonly IMediaFactory factory;
         //private readonly Uri defaultLocation = new Uri("http://lyrics.wikia.com/Category:Artists");
 
         public void Crawl(ILinkGraph graph)

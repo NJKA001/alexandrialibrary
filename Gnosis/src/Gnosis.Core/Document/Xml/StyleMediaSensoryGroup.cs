@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core
+namespace Gnosis.Core.Document.Xml
 {
-    public enum MediaSensoryGroup
+    public enum StyleMediaSensoryGroup
     {
         Audio,
         AudioSpeechVisual,

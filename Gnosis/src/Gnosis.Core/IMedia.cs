@@ -7,11 +7,7 @@ namespace Gnosis.Core
 {
     public interface IMedia
     {
-        string Name { get; }
-        string Description { get; }
-        MediaContinuityGroup ContinuityGroup { get; }
-        MediaSensoryGroup SensoryGroup { get; }
-        MediaLayoutGroup LayoutGroup { get; }
-        MediaInteractivityGroup InteractivityGroup { get; }
+        Uri Location { get; }
+        IMediaType Type { get; }
     }
 }

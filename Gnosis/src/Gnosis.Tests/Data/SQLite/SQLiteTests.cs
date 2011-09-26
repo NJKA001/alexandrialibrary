@@ -11,7 +11,7 @@ using Gnosis.Data.SQLite;
 
 using NUnit.Framework;
 
-namespace Gnosis.Tests.Data
+namespace Gnosis.Tests.Data.SQLite
 {
     [TestFixture]
     public class SQLiteTests

@@ -8,28 +8,28 @@ namespace Gnosis.Core.Image
     public abstract class ImageBase
         : IImage
     {
-        protected ImageBase(Uri location, IContentType contentType)
+        protected ImageBase(Uri location, IMediaType type)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
-            if (contentType == null)
-                throw new ArgumentNullException("contentType");
+            if (type == null)
+                throw new ArgumentNullException("type");
 
             this.location = location;
-            this.contentType = contentType;
+            this.type = type;
         }
 
         private Uri location;
-        private IContentType contentType;
+        private IMediaType type;
 
         public Uri Location
         {
             get { return location; }
         }
 
-        public IContentType ContentType
+        public IMediaType Type
         {
-            get { return contentType; }
+            get { return type; }
         }
     }
 }

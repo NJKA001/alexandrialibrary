@@ -5,9 +5,8 @@ using System.Text;
 
 namespace Gnosis.Core
 {
-    public interface IRepresentation
+    public interface IMediaFactory
     {
-        Uri Location { get; }
-        IContentType ContentType { get; }
+        IMedia Create(Uri location);
     }
 }

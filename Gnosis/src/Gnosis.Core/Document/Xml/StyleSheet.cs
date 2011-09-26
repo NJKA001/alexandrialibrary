@@ -8,7 +8,7 @@ namespace Gnosis.Core.Document.Xml
     public class StyleSheet
         : ProcessingInstruction, IStyleSheet
     {
-        private StyleSheet(INode parent, IMediaType type, IMedia media, Uri href)
+        private StyleSheet(INode parent, IMediaType type, IStyleMedia media, Uri href)
             : base(parent, XmlStyleSheetTarget, GetContent(type, media, href))
         {
             this.type = type;
@@ -17,12 +17,12 @@ namespace Gnosis.Core.Document.Xml
         }
 
         private readonly IMediaType type;
-        private readonly IMedia media;
+        private readonly IStyleMedia media;
         private readonly Uri href;
 
         public const string XmlStyleSheetTarget = "xml-stylesheet";
 
-        private static string GetContent(IMediaType type, IMedia media, Uri href)
+        private static string GetContent(IMediaType type, IStyleMedia media, Uri href)
         {
             var content = new StringBuilder();
 
@@ -43,7 +43,7 @@ namespace Gnosis.Core.Document.Xml
             get { return type; }
         }
 
-        public IMedia Media
+        public IStyleMedia Media
         {
             get { return media; }
         }
@@ -61,7 +61,7 @@ namespace Gnosis.Core.Document.Xml
                 throw new ArgumentException("target must be " + XmlStyleSheetTarget);
 
             IMediaType type = null;
-            IMedia media = null;
+            IStyleMedia media = null;
             Uri href = null;
             var fields = content.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
             foreach (var field in fields)
@@ -80,7 +80,7 @@ namespace Gnosis.Core.Document.Xml
                                 type = MediaType.Parse(value);
                                 break;
                             case "media":
-                                media = Core.Media.Parse(value);
+                                media = StyleMedia.Parse(value);
                                 break;
                             case "href":
                                 UriExtensions.TryParse(value, out href);
