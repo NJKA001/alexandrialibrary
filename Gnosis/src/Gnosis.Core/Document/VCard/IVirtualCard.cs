@@ -9,7 +9,7 @@ namespace Gnosis.Core.Document.VCard
     /// Defines a vCard based on version 3.0 of IETF RFC 2426 
     /// </summary>
     /// <remarks>http://www.ietf.org/rfc/rfc2426.txt</remarks>
-    public interface IVCard
+    public interface IVirtualCard
     {
         string Version { get; }
         string N { get; }
