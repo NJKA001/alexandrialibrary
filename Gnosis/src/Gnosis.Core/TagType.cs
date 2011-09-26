@@ -36,11 +36,24 @@ namespace Gnosis.Core
 
         static TagType()
         {
-            foreach (var tagType in tagTypes)
+            InitializeTagTypes();
+
+            foreach (var tagType in all)
             {
                 byId[tagType.Id] = tagType;
                 byName[tagType.Name] = tagType;
             }
+        }
+
+        private static readonly IList<ITagType> all = new List<ITagType>();
+        private static readonly IDictionary<int, ITagType> byId = new Dictionary<int, ITagType>();
+        private static readonly IDictionary<string, ITagType> byName = new Dictionary<string, ITagType>();
+
+        private static void InitializeTagTypes()
+        {
+            all.Add(GeneralTagType);
+            all.Add(Id3v2TitleTagType);
+            all.Add(Id3v2ArtistTagType);
         }
 
         public static readonly Uri DefaultScheme = new Uri("http://gn0s1s.com/alexandria/ns/1/tags/default/");
@@ -50,19 +63,9 @@ namespace Gnosis.Core
         public static ITagType Id3v2TitleTagType = new TagType(2, "Title", Id3v2Scheme);
         public static ITagType Id3v2ArtistTagType = new TagType(3, "Artist", Id3v2Scheme);
 
-        private static readonly IList<ITagType> tagTypes = new List<ITagType>()
+        public static IEnumerable<ITagType> GetAll()
         {
-            GeneralTagType,
-            Id3v2TitleTagType,
-            Id3v2ArtistTagType
-        };
-
-        private static readonly IDictionary<int, ITagType> byId = new Dictionary<int, ITagType>();
-        private static readonly IDictionary<string, ITagType> byName = new Dictionary<string, ITagType>();
-
-        public static IEnumerable<ITagType> TagTypes
-        {
-            get { return tagTypes; }
+            return all;
         }
 
         public static ITagType Parse(int id)

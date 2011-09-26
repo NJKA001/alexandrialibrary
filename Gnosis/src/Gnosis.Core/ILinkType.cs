@@ -5,12 +5,10 @@ using System.Text;
 
 namespace Gnosis.Core
 {
-    public interface ITagNamespace
+    public interface ILinkType
     {
-        long Id { get; }
+        int Id { get; }
         string Name { get; }
-        Uri Uri { get; }
-        string Version { get; }
-        int SearchWeight { get; }
+        Uri Scheme { get; }
     }
 }

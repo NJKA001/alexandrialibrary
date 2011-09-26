@@ -178,6 +178,8 @@
     <Compile Include="Extensions\GuidExtensions.cs" />
     <Compile Include="Audio\Id3\IId3Tag.cs" />
     <Compile Include="IAlgorithm.cs" />
+    <Compile Include="ILink.cs" />
+    <Compile Include="ILinkType.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="IMediaRequest.cs" />
     <Compile Include="IMediaResolver.cs" />
@@ -191,7 +193,6 @@
     <Compile Include="IMedia.cs" />
     <Compile Include="IMediaFactory.cs" />
     <Compile Include="ITag.cs" />
-    <Compile Include="ITagNamespace.cs" />
     <Compile Include="ITagType.cs" />
     <Compile Include="LanguageTag.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
@@ -200,6 +201,7 @@
     <Compile Include="Country.cs" />
     <Compile Include="IScript.cs" />
     <Compile Include="Language.cs" />
+    <Compile Include="LinkType.cs" />
     <Compile Include="MediaFactory.cs" />
     <Compile Include="Script.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
