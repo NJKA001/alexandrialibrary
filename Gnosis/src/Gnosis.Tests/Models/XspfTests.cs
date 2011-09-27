@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Core.Document.Xml;
 using Gnosis.Core.Document.Xml.Xspf;
 
 using NUnit.Framework;
@@ -20,6 +21,8 @@ namespace Gnosis.Tests.Models
             const string path = @".\Files\playlist.xspf";
             const int trackCount = 3;
 
+            var mediaFactory = new MediaFactory();
+
             var fileInfo = new FileInfo(path);
             Assert.IsTrue(fileInfo.Exists);
 
@@ -27,11 +30,15 @@ namespace Gnosis.Tests.Models
             var contentType = location.ToContentType();
             Assert.AreEqual(MediaType.ApplicationXspfXml, contentType.Type);
 
-            var document = location.ToXmlDocument();
+            var document = mediaFactory.Create(location, contentType.Type) as IXmlDocument;
             Assert.IsNotNull(document);
-            Assert.IsNotNull(document.Root);
+            Assert.IsNull(document.Xml);
+            
+            document.Load();
+            Assert.IsNotNull(document.Xml);
+            Assert.IsNotNull(document.Xml.Root);
 
-            var playlist = document.Root as IXspfPlaylist;
+            var playlist = document.Xml.Root as IXspfPlaylist;
             Assert.IsNotNull(playlist);
 
             var tracks = playlist.Where<IXspfTrack>(x => x != null);

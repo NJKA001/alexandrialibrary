@@ -62,6 +62,11 @@ namespace Gnosis.Data
             return record[name].ToString();
         }
 
+        public static T GetStringLookup<T>(this IDataRecord record, string name, Func<string, T> lookup)
+        {
+            return lookup(record.GetString(name));
+        }
+
         public static TimeSpan GetTimeSpan(this IDataRecord record, string name)
         {
             return new TimeSpan(long.Parse(record[name].ToString()));

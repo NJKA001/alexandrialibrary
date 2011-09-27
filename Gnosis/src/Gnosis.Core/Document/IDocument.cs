@@ -8,5 +8,6 @@ namespace Gnosis.Core.Document
     public interface IDocument
         : IMedia
     {
+        void Load();
     }
 }

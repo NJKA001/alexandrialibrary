@@ -17,8 +17,6 @@ namespace Gnosis.Core.Document.Xml.Xhtml
 
             this.location = location;
             this.type = type;
-
-            this.xml = location.ToXhtmlDocument();
         }
 
         private Uri location;
@@ -38,6 +36,11 @@ namespace Gnosis.Core.Document.Xml.Xhtml
         public IXmlElement Xml
         {
             get { return xml; }
+        }
+
+        public void Load()
+        {
+            this.xml = location.ToXhtmlDocument();
         }
     }
 }

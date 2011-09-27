@@ -66,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithm.cs" />
+    <Compile Include="Audio\AudioBase.cs" />
+    <Compile Include="Audio\MpegAudio.cs" />
     <Compile Include="Document\IDocument.cs" />
     <Compile Include="Document\Xml\IXmlDocument.cs" />
     <Compile Include="Document\Xml\Xhtml\AnchorDirection.cs" />

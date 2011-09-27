@@ -83,8 +83,11 @@ namespace Gnosis.Data.SQLite
                 var builder = new SimpleCommandBuilder();
                 builder.AppendLine("create table if not exists Tag (Id integer primary key not null, Target text not null, Algorithm integer not null, Type integer not null, Name text not null);");
                 builder.AppendLine("create index if not exists Tag_Target on Tag (Target asc);");
+                builder.AppendLine("create index if not exists Tag_Target_Algorithm on Tag (Target asc, Algorithm asc);");
                 builder.AppendLine("create index if not exists Tag_Target_Type on Tag (Target asc, Type asc);");
                 builder.AppendLine("create index if not exists Tag_Algorithm on Tag (Algorithm asc);");
+                builder.AppendLine("create index if not exists Tag_Algorithm_Type on Tag (Algorithm asc, Type asc);");
+                builder.AppendLine("create index if not exists Tag_Algorithm_Name on Tag (Algorithm asc, Name asc);");
                 builder.AppendLine("create index if not exists Tag_Type on Tag (Type asc);");
                 builder.AppendLine("create index if not exists Tag_Type_Name on Tag (Type asc, Name asc);");
                 builder.AppendLine("create index if not exists Tag_Name on Tag (Name asc);");

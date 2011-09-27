@@ -8,5 +8,6 @@ namespace Gnosis.Core
     public interface IMediaFactory
     {
         IMedia Create(Uri location);
+        IMedia Create(Uri location, IMediaType type);
     }
 }
