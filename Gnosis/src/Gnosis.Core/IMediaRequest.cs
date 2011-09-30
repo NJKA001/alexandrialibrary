@@ -8,5 +8,7 @@ namespace Gnosis.Core
     public interface IMediaRequest
     {
         IEnumerable<ITag> Tags { get; }
+        Action<IMedia> ItemFoundCallback { get; }
+        Action CompletedCallback { get; }
     }
 }

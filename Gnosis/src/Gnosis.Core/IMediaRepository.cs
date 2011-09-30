@@ -9,7 +9,6 @@ namespace Gnosis.Core
     {
         IMedia Lookup(Uri location);
         IEnumerable<IMedia> All();
-        IEnumerable<IMedia> Search(IMediaRequest request);
 
         void Delete(IMedia media);
         void Delete(IEnumerable<IMedia> media);
