@@ -178,13 +178,13 @@
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\FileInfoExtensions.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
-    <Compile Include="Audio\Id3\IId3Tag.cs" />
+    <Compile Include="Tags\Id3\IId3Tag.cs" />
     <Compile Include="IAlgorithm.cs" />
     <Compile Include="ILink.cs" />
     <Compile Include="ILinkType.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="IMediaRequest.cs" />
-    <Compile Include="IMediaResolver.cs" />
+    <Compile Include="IMediaRepository.cs" />
     <Compile Include="ILanguageTag.cs" />
     <Compile Include="Image\BitmapImage.cs" />
     <Compile Include="Image\GifImage.cs" />
@@ -464,7 +464,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Geography\" />
-    <Folder Include="Tags\" />
     <Folder Include="Video\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
