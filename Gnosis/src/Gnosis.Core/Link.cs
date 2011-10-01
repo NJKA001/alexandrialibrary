@@ -8,12 +8,12 @@ namespace Gnosis.Core
     public class Link
         : ILink
     {
-        public Link(Uri source, Uri target, ILinkType type, string name)
+        public Link(Uri source, Uri target, Uri type, string name)
             : this(source, target, type, name, 0)
         {
         }
 
-        public Link(Uri source, Uri target, ILinkType type, string name, long id)
+        public Link(Uri source, Uri target, Uri type, string name, long id)
         {
             if (source == null)
                 throw new ArgumentNullException("source");
@@ -34,8 +34,10 @@ namespace Gnosis.Core
         private readonly long id;
         private readonly Uri source;
         private readonly Uri target;
-        private readonly ILinkType type;
+        private readonly Uri type;
         private readonly string name;
+
+        #region ILink Members
 
         public long Id
         {
@@ -52,7 +54,7 @@ namespace Gnosis.Core
             get { return target; }
         }
 
-        public ILinkType Type
+        public Uri Type
         {
             get { return type; }
         }
@@ -60,6 +62,13 @@ namespace Gnosis.Core
         public string Name
         {
             get { return name; }
+        }
+
+        #endregion
+
+        public override string ToString()
+        {
+            return string.Format("link name='{0}' target='{1}' source='{2}'", name, target, source);  
         }
     }
 }

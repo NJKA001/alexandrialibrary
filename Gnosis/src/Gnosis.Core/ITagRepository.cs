@@ -9,9 +9,9 @@ namespace Gnosis.Core
     {
         ITag Lookup(long id);
         IEnumerable<ITag> All();
-        IEnumerable<ITag> Search(IAlgorithm algorithm, ITagType type);
-        IEnumerable<ITag> Search(IAlgorithm algorithm, ITagType type, string name);
-        IEnumerable<ITag> Search(IAlgorithm algorithm, Uri scheme);
+        IEnumerable<ITag> Search(IAlgorithm algorithm, Uri type);
+        IEnumerable<ITag> Search(IAlgorithm algorithm, Uri type, string name);
+        IEnumerable<ITag> Search(IAlgorithm algorithm, string name);
 
         void Initialize();
         void Delete(ITag tag);

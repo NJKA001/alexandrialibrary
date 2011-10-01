@@ -178,12 +178,16 @@
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\FileInfoExtensions.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
+    <Compile Include="ILinkFactory.cs" />
     <Compile Include="IMediaSearch.cs" />
+    <Compile Include="ITagFactory.cs" />
     <Compile Include="ITagRepository.cs" />
+    <Compile Include="Links\Html\HtmlLink.cs" />
+    <Compile Include="Tags\Generic\GenericTagTypes.cs" />
+    <Compile Include="Tags\Id3\Id3TagTypes.cs" />
     <Compile Include="Tags\Id3\IId3Tag.cs" />
     <Compile Include="IAlgorithm.cs" />
     <Compile Include="ILink.cs" />
-    <Compile Include="ILinkType.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="IMediaRequest.cs" />
     <Compile Include="IMediaRepository.cs" />
@@ -197,7 +201,6 @@
     <Compile Include="IMedia.cs" />
     <Compile Include="IMediaFactory.cs" />
     <Compile Include="ITag.cs" />
-    <Compile Include="ITagType.cs" />
     <Compile Include="LanguageTag.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="ICountry.cs" />
@@ -206,7 +209,6 @@
     <Compile Include="IScript.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="Link.cs" />
-    <Compile Include="LinkType.cs" />
     <Compile Include="MediaFactory.cs" />
     <Compile Include="Script.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
@@ -232,7 +234,6 @@
     <Compile Include="Document\Xml\StyleMediaSensoryGroup.cs" />
     <Compile Include="MediaType.cs" />
     <Compile Include="Tag.cs" />
-    <Compile Include="TagType.cs" />
     <Compile Include="Time\Rfc822DateTime.cs" />
     <Compile Include="Document\Xml\Atom\AtomCommon.cs" />
     <Compile Include="Document\Xml\Atom\AtomLink.cs" />

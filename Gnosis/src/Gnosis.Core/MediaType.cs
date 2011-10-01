@@ -54,11 +54,6 @@ namespace Gnosis.Core
 
         #region IMediaType Members
 
-        public long Id
-        {
-            get { return ToString().GetHashCode(); }
-        }
-
         public string Type
         {
             get { return type; }

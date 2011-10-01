@@ -27,11 +27,9 @@ namespace Gnosis.Data.Firebird
                 var tableSql = new StringBuilder();
                 tableSql.AppendLine("EXECUTE BLOCK AS BEGIN");
                 tableSql.AppendLine("if (not exists(select 1 from rdb$relations where rdb$relation_name = 'TAG')) then");
-                //CHARACTER SET UNICODE_FSS
-                tableSql.AppendLine("execute statement 'create table Tag (Id BIGINT NOT NULL, Target VARCHAR(4000) NOT NULL, Algorithm INTEGER NOT NULL, Type BIGINT NOT NULL, Name VARCHAR(4000) NOT NULL, PRIMARY KEY (Id));';");
+                tableSql.AppendLine("execute statement 'create table Tag (Id BIGINT NOT NULL, Target VARCHAR(4000) NOT NULL, Algorithm INTEGER NOT NULL, Type VARCHAR(4000) NOT NULL, Name VARCHAR(4000) NOT NULL, PRIMARY KEY (Id));';");
                 tableSql.AppendLine("END");
                 Execute(tableSql.ToString());
-                //commandInfo.Add(new Tuple<string,IEnumerable<KeyValuePair<string,object>>>(tableSql.ToString(), null));
 
                 var generatorSql = new StringBuilder();
                 generatorSql.AppendLine("EXECUTE BLOCK AS BEGIN");
@@ -82,7 +80,7 @@ namespace Gnosis.Data.Firebird
                     {
                         var target = reader.GetUri("Target");
                         var algorithm = reader.GetInt32Lookup<IAlgorithm>("Algorithm", algorithmId => Algorithm.Parse(algorithmId));
-                        var type = reader.GetInt32Lookup<ITagType>("Type", typeId => TagType.Parse(typeId));
+                        var type = reader.GetUri("Type");
                         var name = reader.GetString("Name");
                         var id = reader.GetInt64("Id");
 
@@ -130,7 +128,7 @@ namespace Gnosis.Data.Firebird
                     sql.AppendLine("insert into Tag (Target, Algorithm, Type, Name) values (@Target, @Algorithm, @Type, @Name)");
                     parameters.Add("@Target", string.Format("'{0}'", tag.Target.ToString())); //tag.Target.IsFile ? tag.Target.LocalPath : tag.Target.ToString()));
                     parameters.Add("@Algorithm", tag.Algorithm.Id);
-                    parameters.Add("@Type", tag.Type.Id);
+                    parameters.Add("@Type", tag.Type.ToString());
                     parameters.Add("@Name", string.Format("'{0}'", tag.Name));
                     commandInfo.Add(new Tuple<string, IEnumerable<KeyValuePair<string, object>>>(sql.ToString(), parameters));
                     Execute(sql.ToString(), parameters);

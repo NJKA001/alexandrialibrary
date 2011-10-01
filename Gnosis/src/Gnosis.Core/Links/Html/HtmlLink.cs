@@ -3,48 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core
+namespace Gnosis.Core.Links.Html
 {
-    public class LinkType
-        : ILinkType
-    {
-        private LinkType(int id, string name, Uri scheme)
-        {
-            this.id = id;
-            this.name = name;
-            this.scheme = scheme;
-        }
-
-        private readonly int id;
-        private readonly string name;
-        private readonly Uri scheme;
-
-        public int Id
-        {
-            get { return id; }
-        }
-
-        public string Name
-        {
-            get { return name; }
-        }
-
-        public Uri Scheme
-        {
-            get { return scheme; }
-        }
-
-        static LinkType()
-        {
-            InitializeLinkTypes();
-
-            foreach (var linkType in all)
-            {
-                byId[linkType.Id] = linkType;
-                byName[linkType.Name] = linkType;
-            }
-        }
-
+    /*
         private static readonly IList<ILinkType> all = new List<ILinkType>();
         private static readonly IDictionary<int, ILinkType> byId = new Dictionary<int, ILinkType>();
         private static readonly IDictionary<string, ILinkType> byName = new Dictionary<string, ILinkType>();
@@ -91,27 +52,5 @@ namespace Gnosis.Core
         public static readonly ILinkType Bookmark = new LinkType(15, "Bookmark", Html4LinkTypeScheme);
         public static readonly ILinkType NoFollow = new LinkType(16, "NoFollow", NoFollowScheme);
         public static readonly ILinkType Tag = new LinkType(17, "Tag", TagScheme);
-
-        public static IEnumerable<ILinkType> GetAll()
-        {
-            return all;
-        }
-
-        public static ILinkType Parse(int id)
-        {
-            return byId.ContainsKey(id) ?
-                byId[id]
-                : null;
-        }
-
-        public static ILinkType Parse(string name)
-        {
-            if (name == null)
-                throw new ArgumentNullException("name");
-
-            return byName.ContainsKey(name) ?
-                byName[name]
-                : null;
-        }
-    }
+    */
 }

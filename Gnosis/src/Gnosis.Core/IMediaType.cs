@@ -11,7 +11,6 @@ namespace Gnosis.Core
     /// <remarks>http://tools.ietf.org/html/rfc2046</remarks>
     public interface IMediaType
     {
-        long Id { get; }
         string Type { get; }
         string SubType { get; }
         IEnumerable<string> FileExtensions { get; }

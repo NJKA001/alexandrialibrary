@@ -8,12 +8,12 @@ namespace Gnosis.Core
     public class Tag
         : ITag
     {
-        public Tag(Uri target, IAlgorithm algorithm, ITagType type, string name)
+        public Tag(Uri target, IAlgorithm algorithm, Uri type, string name)
             : this(target, algorithm, type, name, 0)
         {
         }
 
-        public Tag(Uri target, IAlgorithm algorithm, ITagType type, string name, long id)
+        public Tag(Uri target, IAlgorithm algorithm, Uri type, string name, long id)
         {
             if (target == null)
                 throw new ArgumentNullException("target");
@@ -34,7 +34,7 @@ namespace Gnosis.Core
         private readonly long id;
         private readonly Uri target;
         private readonly IAlgorithm algorithm;
-        private readonly ITagType type;
+        private readonly Uri type;
         private readonly string name;
         
         #region ITag Members
@@ -54,7 +54,7 @@ namespace Gnosis.Core
             get { return algorithm; }
         }
 
-        public ITagType Type
+        public Uri Type
         {
             get { return type; }
         }
@@ -65,5 +65,10 @@ namespace Gnosis.Core
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            return string.Format("tag name='{0}' target='{1}'", name, target);
+        }
     }
 }
