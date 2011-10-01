@@ -179,6 +179,7 @@
     <Compile Include="Extensions\FileInfoExtensions.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
     <Compile Include="IMediaSearch.cs" />
+    <Compile Include="ITagRepository.cs" />
     <Compile Include="Tags\Id3\IId3Tag.cs" />
     <Compile Include="IAlgorithm.cs" />
     <Compile Include="ILink.cs" />

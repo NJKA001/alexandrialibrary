@@ -56,13 +56,20 @@ namespace Gnosis.Tests.Data.SQLite
         {
             var tag1 = new Tag(uri1, Algorithm.Default, TagType.GeneralTagType, "Some Tag #1");
             var tag2 = new Tag(uri2, Algorithm.Default, TagType.Id3v2ArtistTagType, "Tool");
+            var tag3 = new Tag(new Uri("http://blah.com/1234"), Algorithm.Americanized, TagType.Id3v2ArtistTagType, "Tool".ToAmericanizedString());
+            var tag4 = new Tag(new Uri("http://blah.com/4567"), Algorithm.Americanized, TagType.Id3v2TitleTagType, "Oil & Water 1".ToAmericanizedString());
 
-            tagRepository.Save(new List<ITag> { tag1, tag2 });
+
+            var tags = new List<ITag> { tag1, tag2, tag3, tag4 };
+            tagRepository.Save(tags);
 
             var all = tagRepository.All();
+            var americanized = tagRepository.Search(Algorithm.Americanized, TagType.Id3v2Scheme);
 
             Assert.IsNotNull(all);
-            Assert.IsTrue(all.Count() == 2);
+            Assert.AreEqual(tags.Count, all.Count());
+            Assert.IsNotNull(americanized);
+            Assert.AreEqual(tags.Where(x => x.Algorithm == Algorithm.Americanized).Count(), americanized.Count());
         }
 
         [Test]

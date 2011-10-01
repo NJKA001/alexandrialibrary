@@ -9,7 +9,7 @@ using Gnosis.Core;
 namespace Gnosis.Data.SQLite
 {
     public class SQLiteMediaRepository
-        : SQLiteRepositoryBase
+        : SQLiteRepositoryBase, IMediaRepository
     {
         public SQLiteMediaRepository(ILogger logger)
             : base(logger, connectionString)
@@ -26,20 +26,27 @@ namespace Gnosis.Data.SQLite
 
         private IMedia ReadMedia(IDataRecord record)
         {
-            Uri location = null;
+            Uri location = record.GetUri("Location");
+            var type = record.GetStringLookup<IMediaType>("Type", typeName => MediaType.Parse(typeName));
+            return factory.Create(location, type);
+        }
+
+        public IMedia Lookup(Uri location)
+        {
             try
             {
-                location = record.GetUri("Location");
-                //var l = record.GetString("Location");
+                logger.Info("SQLiteMediaRepository.Lookup(Uri)");
+
+                var builder = new SimpleCommandBuilder("select * from Media where Location = @Location;");
+                builder.AddUnquotedParameter("@Location", location.ToString());
+
+                return GetRecord(builder, record => ReadMedia(record));
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("URL=" + record.GetString("Location"));
-                System.Diagnostics.Debug.WriteLine(ex.Message);
+                logger.Error("  Lookup", ex);
+                throw;
             }
-            //Uri location = new Uri("http://cnn.com");
-            var type = record.GetStringLookup<IMediaType>("Type", typeName => MediaType.Parse(typeName));
-            return factory.Create(location, type);
         }
 
         public IEnumerable<IMedia> All()
@@ -63,7 +70,7 @@ namespace Gnosis.Data.SQLite
         {
             try
             {
-                logger.Info("SQLiteMediaRepository.Initialize");
+                logger.Info("SQLiteMediaRepository.Initialize()");
 
                 var builder = new SimpleCommandBuilder();
 
@@ -74,24 +81,60 @@ namespace Gnosis.Data.SQLite
             }
             catch (Exception ex)
             {
-                logger.Error("  SQLiteMediaRepository.Initialize", ex);
+                logger.Error("  Initialize", ex);
+                throw;
             }
         }
 
-        public IMedia Lookup(Uri location)
+        public void Delete(IMedia media)
         {
+            if (media == null)
+                throw new ArgumentNullException("media");
+
             try
             {
-                logger.Info("SQLiteMediaRepository.Lookup");
+                logger.Info("SQLiteMediaRepository.Delete(IMedia)");
 
-                var builder = new SimpleCommandBuilder("select * from Media where Location = @Location;");
-                builder.AddUnquotedParameter("@Location", location.ToString());
+                var builder = new SimpleCommandBuilder();
+                builder.AppendLine("delete from Media where Location = @Location;");
+                builder.AddQuotedParameter("@Location", media.Location.ToString());
 
-                return GetRecord(builder, record => ReadMedia(record));
+                ExecuteNonQuery(builder);
             }
             catch (Exception ex)
             {
-                logger.Error("  Lookup", ex);
+                logger.Error("  Delete(IMedia)", ex);
+                throw;
+            }
+        }
+
+        public void Delete(IEnumerable<IMedia> media)
+        {
+            if (media == null)
+                throw new ArgumentNullException("media");
+
+            try
+            {
+                logger.Info("SQLiteMediaRepository.Delete(IEnumerable<IMedia>)");
+
+                var builder = new SimpleCommandBuilder();
+
+                var count = 0;
+                foreach (var medium in media)
+                {
+                    count++;
+                    builder.AppendFormatLine("delete from Media where Location = @Location{0};", count);
+                    builder.AddQuotedParameter(string.Format("@Location{0}", count), medium.Location.ToString());
+                }
+
+                if (count == 0)
+                    return;
+
+                ExecuteTransaction(builder);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(" Delete(IEnumerable<IMedia>)", ex);
                 throw;
             }
         }
@@ -107,14 +150,15 @@ namespace Gnosis.Data.SQLite
 
                 var builder = new SimpleCommandBuilder();
                 builder.Append("insert into Media (Location, Type) values (@Location, @Type);");
-                builder.AddUnquotedParameter("@Location", media.Location.ToString());
-                builder.AddUnquotedParameter("@Type", media.Type.ToString());
+                builder.AddQuotedParameter("@Location", media.Location.ToString());
+                builder.AddQuotedParameter("@Type", media.Type.ToString());
 
                 ExecuteNonQuery(builder);
             }
             catch (Exception ex)
             {
                 logger.Error("  Save(IMedia)", ex);
+                throw;
             }
         }
 
@@ -135,7 +179,7 @@ namespace Gnosis.Data.SQLite
                     count++;
                     builder.AppendFormatLine("insert into Media (Location, Type) values (@Location{0}, @Type{0});", count);
                     builder.AddQuotedParameter(string.Format("@Location{0}", count), medium.Location.ToString());
-                    builder.AddUnquotedParameter(string.Format("@Type{0}", count), medium.Type.ToString());
+                    builder.AddQuotedParameter(string.Format("@Type{0}", count), medium.Type.ToString());
                 }
 
                 if (count == 0)
@@ -145,7 +189,6 @@ namespace Gnosis.Data.SQLite
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("  SQLiteMediaRepository.Save(IEnumerable<IMedia>) Failed: " + ex.Message);
                 logger.Error("  Save(IEnumerable<IMedia>)", ex);
                 throw;
             }
