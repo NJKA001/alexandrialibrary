@@ -181,7 +181,6 @@
     <Compile Include="ILinkFactory.cs" />
     <Compile Include="IMediaSearch.cs" />
     <Compile Include="ISchema.cs" />
-    <Compile Include="ISchemaFactory.cs" />
     <Compile Include="ISchemaRepository.cs" />
     <Compile Include="ITagFactory.cs" />
     <Compile Include="ITagRepository.cs" />

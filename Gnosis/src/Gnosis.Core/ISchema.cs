@@ -7,8 +7,12 @@ namespace Gnosis.Core
 {
     public interface ISchema
     {
-        long LocalId { get; }
         Uri Identifier { get; }
         string Name { get; }
+
+        ISchema Parent { get; }
+        IEnumerable<ISchema> Children { get; }
+
+        ISchema GetChild(string name);
     }
 }

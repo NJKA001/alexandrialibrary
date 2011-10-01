@@ -7,10 +7,9 @@ namespace Gnosis.Core
 {
     public interface ISchemaRepository
     {
-        ISchema Lookup(long localId);
-        ISchema Lookup(Uri identifier);
+        ISchema Get(Uri identifier);
 
-        void Delete(ISchema schema);
-        void Save(ISchema schema);
+        void Add(ISchema schema);
+        void Remove(ISchema schema);
     }
 }
