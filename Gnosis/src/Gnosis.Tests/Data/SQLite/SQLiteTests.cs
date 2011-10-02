@@ -6,7 +6,6 @@ using System.Text;
 
 using Gnosis.Alexandria.Loggers;
 using Gnosis.Core;
-using Gnosis.Core.Tags.Generic;
 using Gnosis.Core.Tags.Id3;
 using Gnosis.Data;
 using Gnosis.Data.SQLite;
@@ -56,7 +55,7 @@ namespace Gnosis.Tests.Data.SQLite
         [Test]
         public void TagRepositorySaveTest()
         {
-            var tag1 = new Tag(uri1, Algorithm.Default, GenericTagTypes.Generic1Default.ToUri(), "Some Tag #1");
+            var tag1 = new Tag(uri1, Algorithm.Default, Schema.Default.Identifier, "Some Tag #1");
             var tag2 = new Tag(uri2, Algorithm.Default, Id3v1Schema.Id3v1Artist.ToUri(), "Tool");
             var tag3 = new Tag(new Uri("http://blah.com/1234"), Algorithm.Americanized, Id3v1Schema.Id3v1Artist.ToUri(), "Tool".ToAmericanizedString());
             var tag4 = new Tag(new Uri("http://blah.com/4567"), Algorithm.Americanized, Id3v1Schema.Id3v1Title.ToUri(), "Oil & Water 1".ToAmericanizedString());

@@ -187,7 +187,6 @@
     <Compile Include="Links\Html\HtmlLink.cs" />
     <Compile Include="Schema.cs" />
     <Compile Include="SchemaRepository.cs" />
-    <Compile Include="Tags\Generic\GenericTagTypes.cs" />
     <Compile Include="Tags\Id3\Id3Schema.cs" />
     <Compile Include="Tags\Id3\Id3v1Schema.cs" />
     <Compile Include="Tags\Id3\Id3v2Schema.cs" />
