@@ -57,16 +57,16 @@ namespace Gnosis.Tests.Data.SQLite
         public void TagRepositorySaveTest()
         {
             var tag1 = new Tag(uri1, Algorithm.Default, GenericTagTypes.Generic1Default.ToUri(), "Some Tag #1");
-            var tag2 = new Tag(uri2, Algorithm.Default, Id3TagTypes.Id3v1Artist.ToUri(), "Tool");
-            var tag3 = new Tag(new Uri("http://blah.com/1234"), Algorithm.Americanized, Id3TagTypes.Id3v1Artist.ToUri(), "Tool".ToAmericanizedString());
-            var tag4 = new Tag(new Uri("http://blah.com/4567"), Algorithm.Americanized, Id3TagTypes.Id3v1Title.ToUri(), "Oil & Water 1".ToAmericanizedString());
+            var tag2 = new Tag(uri2, Algorithm.Default, Id3v1Schema.Id3v1Artist.ToUri(), "Tool");
+            var tag3 = new Tag(new Uri("http://blah.com/1234"), Algorithm.Americanized, Id3v1Schema.Id3v1Artist.ToUri(), "Tool".ToAmericanizedString());
+            var tag4 = new Tag(new Uri("http://blah.com/4567"), Algorithm.Americanized, Id3v1Schema.Id3v1Title.ToUri(), "Oil & Water 1".ToAmericanizedString());
 
 
             var tags = new List<ITag> { tag1, tag2, tag3, tag4 };
             tagRepository.Save(tags);
 
             var all = tagRepository.All();
-            var americanized = tagRepository.Search(Algorithm.Americanized, Id3TagTypes.Id3v1.ToUri());
+            var americanized = tagRepository.Search(Algorithm.Americanized, Id3v1Schema.Id3v1.ToUri());
 
             Assert.IsNotNull(all);
             Assert.AreEqual(tags.Count, all.Count());

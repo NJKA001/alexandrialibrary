@@ -8,12 +8,12 @@ namespace Gnosis.Core
     public class Schema
         : ISchema
     {
-        protected Schema(Uri identifier, string name)
+        public Schema(Uri identifier, string name)
             : this(identifier, name, null)
         {
         }
 
-        protected Schema(Uri identifier, string name, ISchema parent)
+        public Schema(Uri identifier, string name, ISchema parent)
         {
             if (identifier == null)
                 throw new ArgumentNullException("identifier");

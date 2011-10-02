@@ -188,7 +188,9 @@
     <Compile Include="Schema.cs" />
     <Compile Include="SchemaRepository.cs" />
     <Compile Include="Tags\Generic\GenericTagTypes.cs" />
-    <Compile Include="Tags\Id3\Id3TagTypes.cs" />
+    <Compile Include="Tags\Id3\Id3Schema.cs" />
+    <Compile Include="Tags\Id3\Id3v1Schema.cs" />
+    <Compile Include="Tags\Id3\Id3v2Schema.cs" />
     <Compile Include="Tags\Id3\IId3Tag.cs" />
     <Compile Include="IAlgorithm.cs" />
     <Compile Include="ILink.cs" />
