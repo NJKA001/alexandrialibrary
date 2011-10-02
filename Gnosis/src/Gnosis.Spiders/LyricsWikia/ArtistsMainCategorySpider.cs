@@ -34,6 +34,7 @@ namespace Gnosis.Spiders.LyricsWikia
             if (document == null)
                 return;
 
+            document.Load();
             foreach (var anchor in document.Xml.Root.Where<IHtmlAnchor>(x => x != null && x.Href.ToString().StartsWith("/Category:Artists_")))
             {
                 System.Diagnostics.Debug.WriteLine("anchor. href=" + anchor.Href.ToString());
