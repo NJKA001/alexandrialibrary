@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core.Tags.Id3;
+
 namespace Gnosis.Core
 {
     public class SchemaRepository
         : ISchemaRepository
     {
+        public SchemaRepository()
+        {
+            Add(new Id3Schema());
+        }
+
         private IDictionary<string, ISchema> byIdentifier = new Dictionary<string, ISchema>();
 
         #region ISchemaRepository Members

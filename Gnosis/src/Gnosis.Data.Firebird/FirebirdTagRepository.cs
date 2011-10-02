@@ -11,10 +11,16 @@ namespace Gnosis.Data.Firebird
     public class FirebirdTagRepository
         : FirebirdRepositoryBase
     {
-        public FirebirdTagRepository(ILogger logger)
+        public FirebirdTagRepository(ILogger logger, ISchemaRepository schemaRepository)
             : base(logger)
         {
+            if (schemaRepository == null)
+                throw new ArgumentNullException("schemaRepository");
+
+            this.schemaRepository = schemaRepository;
         }
+
+        private ISchemaRepository schemaRepository;
 
         public void Initialize()
         {
@@ -27,7 +33,7 @@ namespace Gnosis.Data.Firebird
                 var tableSql = new StringBuilder();
                 tableSql.AppendLine("EXECUTE BLOCK AS BEGIN");
                 tableSql.AppendLine("if (not exists(select 1 from rdb$relations where rdb$relation_name = 'TAG')) then");
-                tableSql.AppendLine("execute statement 'create table Tag (Id BIGINT NOT NULL, Target VARCHAR(4000) NOT NULL, Algorithm INTEGER NOT NULL, Type VARCHAR(4000) NOT NULL, Name VARCHAR(4000) NOT NULL, PRIMARY KEY (Id));';");
+                tableSql.AppendLine("execute statement 'create table Tag (Id BIGINT NOT NULL, Target VARCHAR(4000) NOT NULL, Algorithm INTEGER NOT NULL, Schema VARCHAR(4000) NOT NULL, Name VARCHAR(4000) NOT NULL, PRIMARY KEY (Id));';");
                 tableSql.AppendLine("END");
                 Execute(tableSql.ToString());
 
@@ -80,11 +86,11 @@ namespace Gnosis.Data.Firebird
                     {
                         var target = reader.GetUri("Target");
                         var algorithm = reader.GetInt32Lookup<IAlgorithm>("Algorithm", algorithmId => Algorithm.Parse(algorithmId));
-                        var type = reader.GetUri("Type");
+                        var schema = schemaRepository.Get(reader.GetUri("Schema"));
                         var name = reader.GetString("Name");
                         var id = reader.GetInt64("Id");
 
-                        tags.Add(new Tag(target, algorithm, type, name, id));
+                        tags.Add(new Tag(target, algorithm, schema, name, id));
                     }
                 }
             }
@@ -125,10 +131,10 @@ namespace Gnosis.Data.Firebird
                     //count++;
                     var sql = new StringBuilder();
                     var parameters = new Dictionary<string, object>();
-                    sql.AppendLine("insert into Tag (Target, Algorithm, Type, Name) values (@Target, @Algorithm, @Type, @Name)");
+                    sql.AppendLine("insert into Tag (Target, Algorithm, Schema, Name) values (@Target, @Algorithm, @Schema, @Name)");
                     parameters.Add("@Target", string.Format("'{0}'", tag.Target.ToString())); //tag.Target.IsFile ? tag.Target.LocalPath : tag.Target.ToString()));
                     parameters.Add("@Algorithm", tag.Algorithm.Id);
-                    parameters.Add("@Type", tag.Type.ToString());
+                    parameters.Add("@Schema", string.Format("'{0}'", tag.Schema.Identifier.ToString()));
                     parameters.Add("@Name", string.Format("'{0}'", tag.Name));
                     commandInfo.Add(new Tuple<string, IEnumerable<KeyValuePair<string, object>>>(sql.ToString(), parameters));
                     Execute(sql.ToString(), parameters);

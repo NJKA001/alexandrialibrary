@@ -8,25 +8,25 @@ namespace Gnosis.Core
     public class Link
         : ILink
     {
-        public Link(Uri source, Uri target, Uri type, string name)
-            : this(source, target, type, name, 0)
+        public Link(Uri source, Uri target, ISchema schema, string name)
+            : this(source, target, schema, name, 0)
         {
         }
 
-        public Link(Uri source, Uri target, Uri type, string name, long id)
+        public Link(Uri source, Uri target, ISchema schema, string name, long id)
         {
             if (source == null)
                 throw new ArgumentNullException("source");
             if (target == null)
                 throw new ArgumentNullException("target");
-            if (type == null)
-                throw new ArgumentNullException("type");
+            if (schema == null)
+                throw new ArgumentNullException("schema");
             if (name == null)
                 throw new ArgumentNullException("name");
 
             this.source = source;
             this.target = target;
-            this.type = type;
+            this.schema = schema;
             this.name = name;
             this.id = id;
         }
@@ -34,7 +34,7 @@ namespace Gnosis.Core
         private readonly long id;
         private readonly Uri source;
         private readonly Uri target;
-        private readonly Uri type;
+        private readonly ISchema schema;
         private readonly string name;
 
         #region ILink Members
@@ -54,9 +54,9 @@ namespace Gnosis.Core
             get { return target; }
         }
 
-        public Uri Type
+        public ISchema Schema
         {
-            get { return type; }
+            get { return schema; }
         }
 
         public string Name
