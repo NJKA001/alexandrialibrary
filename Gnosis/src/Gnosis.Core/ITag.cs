@@ -10,7 +10,7 @@ namespace Gnosis.Core
         long Id { get; }
         Uri Target { get; }
         IAlgorithm Algorithm { get; }
-        ISchema Schema { get; }
+        ITagSchema Schema { get; }
         string Name { get; }
     }
 }

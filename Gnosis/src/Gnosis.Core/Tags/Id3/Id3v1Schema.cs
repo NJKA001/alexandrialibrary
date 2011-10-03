@@ -6,25 +6,25 @@ using System.Text;
 namespace Gnosis.Core.Tags.Id3
 {
     public class Id3v1Schema
-        : Schema
+        : TagSchema
     {
         public Id3v1Schema()
             : base(Id3v1.ToUri(), "ID3v1")
         {
-            AddChild(new Schema(Id3v1Title.ToUri(), "Title"));
-            AddChild(new Schema(Id3v1Artist.ToUri(), "Artist"));
-            AddChild(new Schema(Id3v1Album.ToUri(), "Album"));
-            AddChild(new Schema(Id3v1Year.ToUri(), "Year"));
-            AddChild(new Schema(Id3v1Comment.ToUri(), "Comment"));
-            AddChild(new Schema(Id3v1Track.ToUri(), "Track"));
-            AddChild(new Schema(Id3v1Genre.ToUri(), "Genre"));
-            AddChild(new Schema(Id3v1TitleExtension.ToUri(), "Title Extension"));
-            AddChild(new Schema(Id3v1ArtistExtension.ToUri(), "Artist Extension"));
-            AddChild(new Schema(Id3v1AlbumExtension.ToUri(), "Album Extension"));
-            AddChild(new Schema(Id3v1Speed.ToUri(), "Speed"));
-            AddChild(new Schema(Id3v1GenreExtension.ToUri(), "Genre Extension"));
-            AddChild(new Schema(Id3v1StartTime.ToUri(), "Start Time"));
-            AddChild(new Schema(Id3v1EndTime.ToUri(), "End Time"));
+            AddChild(new TagSchema(Id3v1Title.ToUri(), "Title"));
+            AddChild(new TagSchema(Id3v1Artist.ToUri(), "Artist"));
+            AddChild(new TagSchema(Id3v1Album.ToUri(), "Album"));
+            AddChild(new TagSchema(Id3v1Year.ToUri(), "Year"));
+            AddChild(new TagSchema(Id3v1Comment.ToUri(), "Comment"));
+            AddChild(new TagSchema(Id3v1Track.ToUri(), "Track"));
+            AddChild(new TagSchema(Id3v1Genre.ToUri(), "Genre"));
+            AddChild(new TagSchema(Id3v1TitleExtension.ToUri(), "Title Extension"));
+            AddChild(new TagSchema(Id3v1ArtistExtension.ToUri(), "Artist Extension"));
+            AddChild(new TagSchema(Id3v1AlbumExtension.ToUri(), "Album Extension"));
+            AddChild(new TagSchema(Id3v1Speed.ToUri(), "Speed"));
+            AddChild(new TagSchema(Id3v1GenreExtension.ToUri(), "Genre Extension"));
+            AddChild(new TagSchema(Id3v1StartTime.ToUri(), "Start Time"));
+            AddChild(new TagSchema(Id3v1EndTime.ToUri(), "End Time"));
         }
 
         public const string Id3v1 = "http://gn0s1s.com/ns/1/tag-types/id3/v1/";

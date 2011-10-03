@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Core.Tags.Id3
 {
     public class Id3v2Schema
-        : Schema
+        : TagSchema
     {
         public Id3v2Schema()
             : base(Id3v2.ToUri(), "ID3v2")

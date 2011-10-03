@@ -18,12 +18,12 @@ namespace Gnosis.Tests.Data.Firebird
     {
         public FirebirdTests()
         {
-            schemaRepository = new SchemaRepository();
+            schemaRepository = new TagSchemaRepository();
             tagRepository = new FirebirdTagRepository(logger, schemaRepository);
         }
 
         private readonly ILogger logger = new DebugLogger();
-        private readonly ISchemaRepository schemaRepository;
+        private readonly ITagSchemaFactory schemaRepository;
         private readonly FirebirdTagRepository tagRepository;
 
         [TestFixtureSetUp]
@@ -41,7 +41,7 @@ namespace Gnosis.Tests.Data.Firebird
         [Test]
         public void TagRepositorySaveTest()
         {
-            var tag1 = new Tag(new Uri("http://arstechnica.com/index.ars"), Algorithm.Default, Schema.Default, "Sample Tag #1");
+            var tag1 = new Tag(new Uri("http://arstechnica.com/index.ars"), Algorithm.Default, TagSchema.Default, "Sample Tag #1");
             var tag2 = new Tag(new Uri(@"C:\Users\dpoage\Music\Queen\bicycle.mp3"), Algorithm.Default, schemaRepository.Get(Id3v1Schema.Id3v1Artist.ToUri()), "Queen");
 
             tagRepository.Save(new List<ITag> { tag1, tag2 });

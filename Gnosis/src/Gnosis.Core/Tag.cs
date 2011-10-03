@@ -8,12 +8,12 @@ namespace Gnosis.Core
     public class Tag
         : ITag
     {
-        public Tag(Uri target, IAlgorithm algorithm, ISchema schema, string name)
+        public Tag(Uri target, IAlgorithm algorithm, ITagSchema schema, string name)
             : this(target, algorithm, schema, name, 0)
         {
         }
 
-        public Tag(Uri target, IAlgorithm algorithm, ISchema schema, string name, long id)
+        public Tag(Uri target, IAlgorithm algorithm, ITagSchema schema, string name, long id)
         {
             if (target == null)
                 throw new ArgumentNullException("target");
@@ -34,7 +34,7 @@ namespace Gnosis.Core
         private readonly long id;
         private readonly Uri target;
         private readonly IAlgorithm algorithm;
-        private readonly ISchema schema;
+        private readonly ITagSchema schema;
         private readonly string name;
         
         #region ITag Members
@@ -54,7 +54,7 @@ namespace Gnosis.Core
             get { return algorithm; }
         }
 
-        public ISchema Schema
+        public ITagSchema Schema
         {
             get { return schema; }
         }

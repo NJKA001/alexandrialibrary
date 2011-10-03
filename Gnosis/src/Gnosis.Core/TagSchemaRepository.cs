@@ -7,19 +7,19 @@ using Gnosis.Core.Tags.Id3;
 
 namespace Gnosis.Core
 {
-    public class SchemaRepository
-        : ISchemaRepository
+    public class TagSchemaRepository
+        : ITagSchemaFactory
     {
-        public SchemaRepository()
+        public TagSchemaRepository()
         {
             Add(new Id3Schema());
         }
 
-        private IDictionary<string, ISchema> byIdentifier = new Dictionary<string, ISchema>();
+        private IDictionary<string, ITagSchema> byIdentifier = new Dictionary<string, ITagSchema>();
 
         #region ISchemaRepository Members
 
-        public ISchema Get(Uri identifier)
+        public ITagSchema Get(Uri identifier)
         {
             if (identifier == null)
                 throw new ArgumentNullException("identifier");
@@ -28,10 +28,10 @@ namespace Gnosis.Core
 
             return byIdentifier.ContainsKey(key) ?
                 byIdentifier[key]
-                : Schema.Default;
+                : TagSchema.Default;
         }
 
-        public void Add(ISchema schema)
+        public void Add(ITagSchema schema)
         {
             if (schema == null)
                 throw new ArgumentNullException("schema");
@@ -44,7 +44,7 @@ namespace Gnosis.Core
                 Add(child);
         }
 
-        public void Remove(ISchema schema)
+        public void Remove(ITagSchema schema)
         {
             if (schema == null)
                 throw new ArgumentNullException("schema");

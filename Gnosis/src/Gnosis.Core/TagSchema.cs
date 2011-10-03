@@ -5,15 +5,15 @@ using System.Text;
 
 namespace Gnosis.Core
 {
-    public class Schema
-        : ISchema
+    public class TagSchema
+        : ITagSchema
     {
-        public Schema(Uri identifier, string name)
+        public TagSchema(Uri identifier, string name)
             : this(identifier, name, null)
         {
         }
 
-        public Schema(Uri identifier, string name, ISchema parent)
+        public TagSchema(Uri identifier, string name, ITagSchema parent)
         {
             if (identifier == null)
                 throw new ArgumentNullException("identifier");
@@ -27,10 +27,10 @@ namespace Gnosis.Core
 
         private readonly Uri identifier;
         private readonly string name;
-        private readonly ISchema parent;
-        private readonly IDictionary<string, ISchema> children = new Dictionary<string, ISchema>();
+        private readonly ITagSchema parent;
+        private readonly IDictionary<string, ITagSchema> children = new Dictionary<string, ITagSchema>();
 
-        protected void AddChild(ISchema child)
+        protected void AddChild(ITagSchema child)
         {
             if (child == null)
                 throw new ArgumentNullException("child");
@@ -50,17 +50,17 @@ namespace Gnosis.Core
             get { return name; }
         }
 
-        public ISchema Parent
+        public ITagSchema Parent
         {
             get { return parent; }
         }
 
-        public IEnumerable<ISchema> Children
+        public IEnumerable<ITagSchema> Children
         {
             get { return children.Values; }
         }
 
-        public ISchema GetChild(string name)
+        public ITagSchema GetChild(string name)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -72,6 +72,6 @@ namespace Gnosis.Core
 
         #endregion
 
-        public static readonly ISchema Default = new Schema(new Uri("http://gn0s1s.com/ns/1/schemas/default"), "Default");
+        public static readonly ITagSchema Default = new TagSchema(new Uri("http://gn0s1s.com/ns/1/schemas/default"), "Default");
     }
 }

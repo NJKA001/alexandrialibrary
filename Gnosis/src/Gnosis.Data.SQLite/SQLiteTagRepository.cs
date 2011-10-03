@@ -13,7 +13,7 @@ namespace Gnosis.Data.SQLite
     public class SQLiteTagRepository
         : SQLiteRepositoryBase, ITagRepository
     {
-        public SQLiteTagRepository(ILogger logger, ISchemaRepository schemaRepository)
+        public SQLiteTagRepository(ILogger logger, ITagSchemaFactory schemaRepository)
             : base(logger, connectionString)
         {
             if (schemaRepository == null)
@@ -22,7 +22,7 @@ namespace Gnosis.Data.SQLite
             this.schemaRepository = schemaRepository;
         }
 
-        public SQLiteTagRepository(ILogger logger, ISchemaRepository schemaRepository, IDbConnection defaultConnection)
+        public SQLiteTagRepository(ILogger logger, ITagSchemaFactory schemaRepository, IDbConnection defaultConnection)
             : base(logger, connectionString, defaultConnection)
         {
             if (schemaRepository == null)
@@ -32,7 +32,7 @@ namespace Gnosis.Data.SQLite
         }
 
         private const string connectionString = "Data Source=Tag.db;Version=3;";
-        private readonly ISchemaRepository schemaRepository;
+        private readonly ITagSchemaFactory schemaRepository;
 
         #region Private Methods
 

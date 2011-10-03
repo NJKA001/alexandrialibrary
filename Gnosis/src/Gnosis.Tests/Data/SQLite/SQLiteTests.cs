@@ -21,7 +21,7 @@ namespace Gnosis.Tests.Data.SQLite
         {
             connection = connectionFactory.Create("Data Source=:memory:;Version=3;");
             connection.Open();
-            schemaRepository = new SchemaRepository();
+            schemaRepository = new TagSchemaRepository();
             tagRepository = new SQLiteTagRepository(logger, schemaRepository, connection);
             mediaRepository = new SQLiteMediaRepository(logger, connection);
             mediaFactory = new MediaFactory();
@@ -30,7 +30,7 @@ namespace Gnosis.Tests.Data.SQLite
         private readonly ILogger logger = new DebugLogger();
         private readonly IConnectionFactory connectionFactory = new SQLiteConnectionFactory();
         private readonly IDbConnection connection;
-        private readonly ISchemaRepository schemaRepository;
+        private readonly ITagSchemaFactory schemaRepository;
         private readonly SQLiteTagRepository tagRepository;
         private readonly SQLiteMediaRepository mediaRepository;
         private readonly MediaFactory mediaFactory;
@@ -57,7 +57,7 @@ namespace Gnosis.Tests.Data.SQLite
         [Test]
         public void TagRepositorySaveTest()
         {
-            var tag1 = new Tag(uri1, Algorithm.Default, Schema.Default, "Some Tag #1");
+            var tag1 = new Tag(uri1, Algorithm.Default, TagSchema.Default, "Some Tag #1");
             var tag2 = new Tag(uri2, Algorithm.Default, schemaRepository.Get(Id3v1Schema.Id3v1Artist.ToUri()), "Tool");
             var tag3 = new Tag(new Uri("http://blah.com/1234"), Algorithm.Americanized, schemaRepository.Get(Id3v1Schema.Id3v1Artist.ToUri()), "Tool".ToAmericanizedString());
             var tag4 = new Tag(new Uri("http://blah.com/4567"), Algorithm.Americanized, schemaRepository.Get(Id3v1Schema.Id3v1Title.ToUri()), "Oil & Water 1".ToAmericanizedString());

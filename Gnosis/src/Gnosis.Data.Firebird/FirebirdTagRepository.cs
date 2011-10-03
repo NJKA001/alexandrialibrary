@@ -11,7 +11,7 @@ namespace Gnosis.Data.Firebird
     public class FirebirdTagRepository
         : FirebirdRepositoryBase
     {
-        public FirebirdTagRepository(ILogger logger, ISchemaRepository schemaRepository)
+        public FirebirdTagRepository(ILogger logger, ITagSchemaFactory schemaRepository)
             : base(logger)
         {
             if (schemaRepository == null)
@@ -20,7 +20,7 @@ namespace Gnosis.Data.Firebird
             this.schemaRepository = schemaRepository;
         }
 
-        private ISchemaRepository schemaRepository;
+        private ITagSchemaFactory schemaRepository;
 
         public void Initialize()
         {
