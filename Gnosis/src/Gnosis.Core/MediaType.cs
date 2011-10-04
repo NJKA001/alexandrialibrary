@@ -175,10 +175,6 @@ namespace Gnosis.Core
 
         public static IMediaType GetMediaTypeByMagicNumber(byte[] header)
         {
-            //System.Diagnostics.Debug.WriteLine("magicNumber=" + header);
-            //foreach (var b in header)
-                //System.Diagnostics.Debug.WriteLine(b);
-
             //TODO: Optimize this algorithm
             byte[] lookup = null;
             foreach (var pair in byMagicNumber)
@@ -198,6 +194,7 @@ namespace Gnosis.Core
                 //if (lookup == pair.Key || Encoding.UTF8.GetString(lookup) == Encoding.UTF8.GetString(pair.Key))
                 if (lookup.SequenceEqual(pair.Key))
                 {
+                    System.Diagnostics.Debug.WriteLine("Found MediaType by magic number: " + pair.Value.ToString());
                     return pair.Value;
                 }
             }
@@ -221,7 +218,7 @@ namespace Gnosis.Core
         public static readonly IMediaType ApplicationXml = new MediaType(TypeApplication, "xml", new List<string> { ".xml" }, new List<string> { "text/xml" });
         public static readonly IMediaType ApplicationUnknown = new MediaType(TypeApplication, "unknown");
 
-        public static readonly IMediaType AudioMpeg = new MediaType(TypeAudio, "mpeg", new List<string> { ".mp3", ".mp2", ".mp1" });
+        public static readonly IMediaType AudioMpeg = new MediaType(TypeAudio, "mpeg", new List<string> { ".mp3", ".mp2", ".mp1" }, new List<string> { "audio/mp3" }, new List<byte[]> { new byte[] { 0x49, 0x44, 0x33 }});
 
         public static readonly IMediaType ImageBmp = new MediaType(TypeImage, "x-bmp", new List<string> { ".bmp", ".dib" }, new List<string> { "image/x-ms_bmp", "image/bmp" }, new List<byte[]> { new byte[] { 66, 77 } });
         public static readonly IMediaType ImageGif = new MediaType(TypeImage, "gif", new List<string> { ".gif" }, new List<string>(), new List<byte[]> { new byte[] { 71, 73, 70, 56, 55, 97 }, new byte[] { 71, 73, 70, 56, 57, 97 } });        

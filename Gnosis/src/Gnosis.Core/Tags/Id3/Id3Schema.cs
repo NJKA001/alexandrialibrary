@@ -15,6 +15,6 @@ namespace Gnosis.Core.Tags.Id3
             AddChild(new Id3v2Schema());
         }
 
-        public const string Id3 = "http://gn0s1s.com/ns/1/tag-types/id3/";
+        public const string Id3 = "http://gn0s1s.com/ns/1/tag-schema/id3/";
     }
 }

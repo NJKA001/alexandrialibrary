@@ -9,18 +9,19 @@ namespace Gnosis.Core
         : ITagSchema
     {
         public TagSchema(Uri identifier, string name)
-            : this(identifier, name, null)
         {
+            this.identifier = identifier;
+            this.name = name;
         }
 
-        public TagSchema(Uri identifier, string name, ITagSchema parent)
+        public TagSchema(string name, ITagSchema parent)
         {
             if (identifier == null)
                 throw new ArgumentNullException("identifier");
             if (name == null)
                 throw new ArgumentNullException("name");
 
-            this.identifier = identifier;
+            this.identifier = new Uri(parent.ToString() + name);
             this.name = name;
             this.parent = parent;
         }

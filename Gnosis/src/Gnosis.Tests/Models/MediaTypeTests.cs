@@ -161,5 +161,27 @@ namespace Gnosis.Tests.Models
             var mediaType = location.ToMediaType();
             Assert.AreEqual(MediaType.TextHtml, mediaType);
         }
+
+        [Test]
+        public void GetMediaTypeForLocalMp3ByMagicNumber()
+        {
+            var path = @".\Files\03 - Antes De Las Seis.mp3";
+            var fileInfo = new System.IO.FileInfo(path);
+            Assert.IsTrue(System.IO.File.Exists(path));
+            var location = new Uri(fileInfo.FullName, UriKind.Absolute);
+            var mediaType = location.ToMediaType();
+            Assert.AreEqual(MediaType.AudioMpeg, mediaType);
+        }
+
+        [Test]
+        public void GetMediaTypeForLocalMp3ByMagicNumber2()
+        {
+            var path = @".\Files\13 - Loca (Featuring Dizzee Rascal).mp3";
+            var fileInfo = new System.IO.FileInfo(path);
+            Assert.IsTrue(System.IO.File.Exists(path));
+            var location = new Uri(fileInfo.FullName, UriKind.Absolute);
+            var mediaType = location.ToMediaType();
+            Assert.AreEqual(MediaType.AudioMpeg, mediaType);
+        }
     }
 }
