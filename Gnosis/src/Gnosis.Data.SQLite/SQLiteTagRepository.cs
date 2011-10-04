@@ -40,7 +40,7 @@ namespace Gnosis.Data.SQLite
         {
             var target = record.GetUri("Target");
             var algorithm = record.GetInt32Lookup<IAlgorithm>("Algorithm", algorithmId => Algorithm.Parse(algorithmId));
-            var schema = schemaRepository.Get(record.GetUri("Schema"));
+            var schema = record.GetUriLookup<ITagSchema>("Schema", schemaId => schemaRepository.Create(schemaId));
             var name = record.GetString("Name");
             var id = record.GetInt64("Id");
             return new Tag(target, algorithm, schema, name, id);

@@ -7,7 +7,7 @@ namespace Gnosis.Core
 {
     public interface ILinkSchemaFactory
     {
-        ILinkSchema Get(Uri identifier);
+        ILinkSchema Create(Uri identifier);
 
         void Add(ILinkSchema schema);
         void Remove(ILinkSchema schema);

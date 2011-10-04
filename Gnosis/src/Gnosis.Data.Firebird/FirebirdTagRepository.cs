@@ -86,7 +86,7 @@ namespace Gnosis.Data.Firebird
                     {
                         var target = reader.GetUri("Target");
                         var algorithm = reader.GetInt32Lookup<IAlgorithm>("Algorithm", algorithmId => Algorithm.Parse(algorithmId));
-                        var schema = schemaRepository.Get(reader.GetUri("Schema"));
+                        var schema = reader.GetUriLookup<ITagSchema>("Schema", schemaId => schemaRepository.Create(schemaId));
                         var name = reader.GetString("Name");
                         var id = reader.GetInt64("Id");
 

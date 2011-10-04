@@ -81,5 +81,10 @@ namespace Gnosis.Data
         {
             return new Uri(record[name].ToString(), UriKind.RelativeOrAbsolute);
         }
+
+        public static T GetUriLookup<T>(this IDataRecord record, string name, Func<Uri, T> lookup)
+        {
+            return lookup(record.GetUri(name));
+        }
     }
 }

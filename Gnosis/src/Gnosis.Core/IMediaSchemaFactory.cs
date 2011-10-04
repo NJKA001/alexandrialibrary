@@ -7,7 +7,7 @@ namespace Gnosis.Core
 {
     public interface IMediaSchemaFactory
     {
-        IMediaSchema Get(Uri identifier);
+        IMediaSchema Create(Uri identifier);
 
         void Add(IMediaSchema schema);
         void Remove(IMediaSchema schema);

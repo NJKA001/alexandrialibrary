@@ -19,7 +19,7 @@ namespace Gnosis.Core
 
         #region ISchemaRepository Members
 
-        public ITagSchema Get(Uri identifier)
+        public ITagSchema Create(Uri identifier)
         {
             if (identifier == null)
                 throw new ArgumentNullException("identifier");
