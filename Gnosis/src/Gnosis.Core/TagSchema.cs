@@ -30,6 +30,22 @@ namespace Gnosis.Core
             get { return name; }
         }
 
+        static TagSchema()
+        {
+            all.Add(Default);
+            all.Add(Id3v1);
+            all.Add(Id3v2);
+        }
+
+        private static readonly IList<ITagSchema> all = new List<ITagSchema>();
+
         public static readonly ITagSchema Default = new TagSchema(1, "Default");
+        public static readonly ITagSchema Id3v1 = new TagSchema(2, "ID3v1");
+        public static readonly ITagSchema Id3v2 = new TagSchema(3, "ID3v2");
+
+        public static IEnumerable<ITagSchema> GetAll()
+        {
+            return all;
+        }
     }
 }

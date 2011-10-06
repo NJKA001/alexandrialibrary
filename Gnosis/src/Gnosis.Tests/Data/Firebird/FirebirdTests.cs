@@ -6,6 +6,7 @@ using System.Text;
 using Gnosis.Alexandria.Loggers;
 using Gnosis.Core;
 using Gnosis.Core.Tags.Id3;
+using Gnosis.Core.Tags.Id3.Id3v1;
 using Gnosis.Data;
 
 using NUnit.Framework;
@@ -58,7 +59,7 @@ namespace Gnosis.Tests.Data.Firebird
         public void TagRepositorySaveTest()
         {
             var tag1 = new Tag(new Uri("http://arstechnica.com/index.ars"), Algorithm.Default, TagType.Default, "Sample Tag #1");
-            var tag2 = new Tag(new Uri(@"C:\Users\dpoage\Music\Queen\bicycle.mp3"), Algorithm.Default, Id3v1TagTypes.Id3v1Artist, "Queen");
+            var tag2 = new Tag(new Uri(@"C:\Users\dpoage\Music\Queen\bicycle.mp3"), Algorithm.Default, Id3v1TagType.Artist, "Queen");
 
             tagRepository.Save(new List<ITag> { tag1, tag2 });
             var count = tagRepository.Count();

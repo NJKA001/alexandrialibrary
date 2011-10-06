@@ -7,6 +7,8 @@ using System.Text;
 using Gnosis.Alexandria.Loggers;
 using Gnosis.Core;
 using Gnosis.Core.Tags.Id3;
+using Gnosis.Core.Tags.Id3.Id3v1;
+using Gnosis.Core.Tags.Id3.Id3v2;
 using Gnosis.Data;
 using Gnosis.Data.SQLite;
 
@@ -58,22 +60,32 @@ namespace Gnosis.Tests.Data.SQLite
         [Test]
         public void TagRepositorySaveTest()
         {
-            var tag1 = new Tag(uri1, Algorithm.Default, TagType.Default, "Some Tag #1");
-            var tag2 = new Tag(uri2, Algorithm.Default, Id3v1TagTypes.Id3v1Artist, "Tool");
-            var tag3 = new Tag(new Uri("http://blah.com/1234"), Algorithm.Americanized, Id3v1TagTypes.Id3v1Artist, "Tool".ToAmericanizedString());
-            var tag4 = new Tag(new Uri("http://blah.com/4567"), Algorithm.Americanized, Id3v1TagTypes.Id3v1Title, "Oil & Water 1".ToAmericanizedString());
+            var uri3 = new Uri("http://blah.com/music/Ticks-And-Leeches");
+            var uri4 = new Uri("http://meh.org/index/Tool/The+Bottom.mp3");
 
+            var tag1 = new Tag(uri1, Algorithm.Default, TagType.Default, "Kicks Ass!");
+            var tag2 = new Tag(uri2, Algorithm.Default, Id3v1TagType.Artist, "Tool");
+            var tag3 = new Tag(uri3, Algorithm.Americanized, Id3v1TagType.Artist, "Tool".ToAmericanizedString());
+            var tag4 = new Tag(uri3, Algorithm.Americanized, Id3v1TagType.Title, "Ticks & Leeches 1".ToAmericanizedString());
+            var tag5 = new Tag(uri4, Algorithm.Default, Id3v2TagType.Artist, "Tool");
+            var tag6 = new Tag(uri4, Algorithm.Default, Id3v2TagType.Title, "The Bottom");
+            var tag7 = new Tag(uri4, Algorithm.Default, Id3v2TagType.Album, "Undertow");
 
-            var tags = new List<ITag> { tag1, tag2, tag3, tag4 };
+            var tags = new List<ITag> { tag1, tag2, tag3, tag4, tag5, tag6, tag7 };
             tagRepository.Save(tags);
 
             var all = tagRepository.All();
-            var americanized = tagRepository.Search(Algorithm.Americanized, Id3Schemas.Id3v1Schema);
+            var americanized = tagRepository.Search(Algorithm.Americanized, TagSchema.Id3v1);
+            var v2 = tagRepository.Search(Algorithm.Default, TagSchema.Id3v2);
 
             Assert.IsNotNull(all);
             Assert.AreEqual(tags.Count, all.Count());
             Assert.IsNotNull(americanized);
             Assert.AreEqual(tags.Where(x => x.Algorithm == Algorithm.Americanized).Count(), americanized.Count());
+            Assert.IsTrue(americanized.All(x => x.Type.Schema == TagSchema.Id3v1));
+            Assert.IsNotNull(v2);
+            Assert.AreEqual(tags.Where(x => x.Type.Schema == TagSchema.Id3v2).Count(), v2.Count());
+            Assert.IsTrue(v2.All(x => x != null && x.Type.Schema == TagSchema.Id3v2));
         }
 
         [Test]

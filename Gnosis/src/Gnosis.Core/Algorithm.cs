@@ -84,9 +84,9 @@ namespace Gnosis.Core
 
         #region Algorithms
 
-        public static IEnumerable<IAlgorithm> Algorithms
+        public static IEnumerable<IAlgorithm> GetAll()
         {
-            get { return algorithms; }
+            return algorithms;
         }
 
         public static IAlgorithm Default = new Algorithm(1, "Default", x => x, null);
