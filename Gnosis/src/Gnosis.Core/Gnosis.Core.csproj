@@ -187,7 +187,9 @@
     <Compile Include="ITagTypeFactory.cs" />
     <Compile Include="ITagFactory.cs" />
     <Compile Include="ITagRepository.cs" />
-    <Compile Include="Links\Html\HtmlLink.cs" />
+    <Compile Include="Links\Html\HtmlLinkType.cs" />
+    <Compile Include="LinkType.cs" />
+    <Compile Include="LinkTypeFactory.cs" />
     <Compile Include="TagSchema.cs" />
     <Compile Include="Tags\Id3\Id3v1\Id3v1TagType.cs" />
     <Compile Include="Tags\Id3\Id3v2\Id3v2TagType.cs" />
