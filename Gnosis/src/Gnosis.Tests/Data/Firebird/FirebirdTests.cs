@@ -20,19 +20,31 @@ namespace Gnosis.Tests.Data.Firebird
     {
         public FirebirdTests()
         {
-            schemaFactory = new TagSchemaFactory();
             typeFactory = new TagTypeFactory();
-            tagRepository = new FirebirdTagRepository(logger, schemaFactory, typeFactory);
+            tagRepository = new FirebirdTagRepository(logger, typeFactory);
         }
 
         private readonly ILogger logger = new DebugLogger();
-        private readonly ITagSchemaFactory schemaFactory;
         private readonly ITagTypeFactory typeFactory;
         private readonly FirebirdTagRepository tagRepository;
 
         [TestFixtureSetUp]
         public void FixtureSetUp()
         {
+            const string databaseFile = "ALEXANDRIA.FDB";
+            if (System.IO.File.Exists(databaseFile))
+            {
+                try
+                {
+                    System.Diagnostics.Debug.WriteLine("Deleting Firebird test database");
+                    System.IO.File.Delete(databaseFile);
+                }
+                catch (Exception)
+                {
+                    System.Diagnostics.Debug.WriteLine("Could not delete Firebird test database: file in use");
+                }
+            }
+
             tagRepository.Initialize();
         }
 
@@ -45,8 +57,8 @@ namespace Gnosis.Tests.Data.Firebird
         [Test]
         public void TagRepositorySaveTest()
         {
-            var tag1 = new Tag(new Uri("http://arstechnica.com/index.ars"), Algorithm.Default, TagSchema.Default, TagType.Default, "Sample Tag #1");
-            var tag2 = new Tag(new Uri(@"C:\Users\dpoage\Music\Queen\bicycle.mp3"), Algorithm.Default, Id3Schemas.Id3v1Schema, Id3v1TagTypes.Id3v1Artist, "Queen");
+            var tag1 = new Tag(new Uri("http://arstechnica.com/index.ars"), Algorithm.Default, TagType.Default, "Sample Tag #1");
+            var tag2 = new Tag(new Uri(@"C:\Users\dpoage\Music\Queen\bicycle.mp3"), Algorithm.Default, Id3v1TagTypes.Id3v1Artist, "Queen");
 
             tagRepository.Save(new List<ITag> { tag1, tag2 });
             var count = tagRepository.Count();

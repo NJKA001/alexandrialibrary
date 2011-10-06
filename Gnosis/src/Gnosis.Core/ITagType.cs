@@ -9,5 +9,6 @@ namespace Gnosis.Core
     {
         long Id { get; }
         string Name { get; }
+        ITagSchema Schema { get; }
     }
 }

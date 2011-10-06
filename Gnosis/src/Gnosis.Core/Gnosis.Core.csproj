@@ -183,14 +183,12 @@
     <Compile Include="ILinkTypeFactory.cs" />
     <Compile Include="IMediaSearch.cs" />
     <Compile Include="ITagSchema.cs" />
-    <Compile Include="ITagSchemaFactory.cs" />
     <Compile Include="ITagType.cs" />
     <Compile Include="ITagTypeFactory.cs" />
     <Compile Include="ITagFactory.cs" />
     <Compile Include="ITagRepository.cs" />
     <Compile Include="Links\Html\HtmlLink.cs" />
     <Compile Include="TagSchema.cs" />
-    <Compile Include="TagSchemaFactory.cs" />
     <Compile Include="Tags\Id3\Id3Schemas.cs" />
     <Compile Include="Tags\Id3\Id3v1TagTypes.cs" />
     <Compile Include="Tags\Id3\IId3Tag.cs" />
@@ -477,6 +475,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Geography\" />
+    <Folder Include="Tags\Id3\Id3v1\" />
+    <Folder Include="Tags\Id3\Id3v2\" />
     <Folder Include="Video\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

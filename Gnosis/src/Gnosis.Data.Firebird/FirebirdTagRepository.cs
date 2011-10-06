@@ -11,19 +11,15 @@ namespace Gnosis.Data.Firebird
     public class FirebirdTagRepository
         : FirebirdRepositoryBase
     {
-        public FirebirdTagRepository(ILogger logger, ITagSchemaFactory schemaFactory, ITagTypeFactory typeFactory)
+        public FirebirdTagRepository(ILogger logger, ITagTypeFactory typeFactory)
             : base(logger)
         {
-            if (schemaFactory == null)
-                throw new ArgumentNullException("schemaFactory");
             if (typeFactory == null)
                 throw new ArgumentNullException("typeFactory");
 
-            this.schemaFactory = schemaFactory;
             this.typeFactory = typeFactory;
         }
 
-        private ITagSchemaFactory schemaFactory;
         private ITagTypeFactory typeFactory;
 
         public void Initialize()
@@ -90,12 +86,11 @@ namespace Gnosis.Data.Firebird
                     {
                         var target = reader.GetUri("Target");
                         var algorithm = reader.GetInt32Lookup<IAlgorithm>("Algorithm", algorithmId => Algorithm.Parse(algorithmId));
-                        var schema = reader.GetInt64Lookup<ITagSchema>("Schema", schemaId => schemaFactory.Create(schemaId));
                         var type = reader.GetInt64Lookup<ITagType>("Type", typeId => typeFactory.Create(typeId));
                         var name = reader.GetString("Name");
                         var id = reader.GetInt64("Id");
 
-                        tags.Add(new Tag(target, algorithm, schema, type, name, id));
+                        tags.Add(new Tag(target, algorithm, type, name, id));
                     }
                 }
             }
@@ -139,7 +134,7 @@ namespace Gnosis.Data.Firebird
                     sql.AppendLine("insert into Tag (Target, Algorithm, Schema, Type, Name) values (@Target, @Algorithm, @Schema, @Type, @Name)");
                     parameters.Add("@Target", string.Format("'{0}'", tag.Target.ToString())); //tag.Target.IsFile ? tag.Target.LocalPath : tag.Target.ToString()));
                     parameters.Add("@Algorithm", tag.Algorithm.Id);
-                    parameters.Add("@Schema", tag.Schema.Id);
+                    parameters.Add("@Schema", tag.Type.Schema.Id);
                     parameters.Add("@Type", tag.Type.Id);
                     parameters.Add("@Name", string.Format("'{0}'", tag.Name));
                     commandInfo.Add(new Tuple<string, IEnumerable<KeyValuePair<string, object>>>(sql.ToString(), parameters));

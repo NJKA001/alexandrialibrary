@@ -8,19 +8,17 @@ namespace Gnosis.Core
     public class Tag
         : ITag
     {
-        public Tag(Uri target, IAlgorithm algorithm, ITagSchema schema, ITagType type, string name)
-            : this(target, algorithm, schema, type, name, 0)
+        public Tag(Uri target, IAlgorithm algorithm, ITagType type, string name)
+            : this(target, algorithm, type, name, 0)
         {
         }
 
-        public Tag(Uri target, IAlgorithm algorithm, ITagSchema schema, ITagType type, string name, long id)
+        public Tag(Uri target, IAlgorithm algorithm, ITagType type, string name, long id)
         {
             if (target == null)
                 throw new ArgumentNullException("target");
             if (algorithm == null)
                 throw new ArgumentNullException("algorithm");
-            if (schema == null)
-                throw new ArgumentNullException("schema");
             if (type == null)
                 throw new ArgumentNullException("type");
             if (name == null)
@@ -28,7 +26,6 @@ namespace Gnosis.Core
 
             this.target = target;
             this.algorithm = algorithm;
-            this.schema = schema;
             this.type = type;
             this.name = name;
             this.id = id;
@@ -37,7 +34,6 @@ namespace Gnosis.Core
         private readonly long id;
         private readonly Uri target;
         private readonly IAlgorithm algorithm;
-        private readonly ITagSchema schema;
         private readonly ITagType type;
         private readonly string name;
         
@@ -56,11 +52,6 @@ namespace Gnosis.Core
         public IAlgorithm Algorithm
         {
             get { return algorithm; }
-        }
-
-        public ITagSchema Schema
-        {
-            get { return schema; }
         }
 
         public ITagType Type
