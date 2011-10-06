@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Gnosis.Core
 {
-    public class TagSchema
-        : ITagSchema
+    public class TagType
+        : ITagType
     {
-        public TagSchema(long id, string name)
+        public TagType(long id, string name)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -30,6 +30,6 @@ namespace Gnosis.Core
             get { return name; }
         }
 
-        public static readonly ITagSchema Default = new TagSchema(1, "Default");
+        public static readonly ITagType Default = new TagType(1, "Default");
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis.Core
 {
-    public interface ITagSchema
+    public interface ILinkType
     {
         long Id { get; }
         string Name { get; }

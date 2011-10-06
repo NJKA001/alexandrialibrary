@@ -7,7 +7,7 @@ namespace Gnosis.Core
 {
     public interface ITagSchemaFactory
     {
-        ITagSchema Create(Uri identifier);
+        ITagSchema Create(long id);
 
         void Add(ITagSchema schema);
         void Remove(ITagSchema schema);
