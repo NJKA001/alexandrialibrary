@@ -67,6 +67,8 @@
   <ItemGroup>
     <Compile Include="Algorithm.cs" />
     <Compile Include="Audio\AudioBase.cs" />
+    <Compile Include="Audio\IAudio.cs" />
+    <Compile Include="Audio\IMpegAudio.cs" />
     <Compile Include="Audio\MpegAudio.cs" />
     <Compile Include="Document\IDocument.cs" />
     <Compile Include="Document\Xml\IXmlDocument.cs" />
@@ -192,6 +194,7 @@
     <Compile Include="LinkTypeFactory.cs" />
     <Compile Include="TagSchema.cs" />
     <Compile Include="Tags\Id3\Id3v1\Id3v1TagType.cs" />
+    <Compile Include="Tags\Id3\Id3v1\IId3v1Tag.cs" />
     <Compile Include="Tags\Id3\Id3v2\Id3v2TagType.cs" />
     <Compile Include="IAlgorithm.cs" />
     <Compile Include="ILink.cs" />
@@ -241,6 +244,8 @@
     <Compile Include="Document\Xml\StyleMediaSensoryGroup.cs" />
     <Compile Include="MediaType.cs" />
     <Compile Include="Tag.cs" />
+    <Compile Include="Tags\Id3\Id3v2\IId3v2Tag.cs" />
+    <Compile Include="Tags\Id3\IId3Tag.cs" />
     <Compile Include="TagType.cs" />
     <Compile Include="TagTypeFactory.cs" />
     <Compile Include="Time\Rfc822DateTime.cs" />
@@ -477,6 +482,12 @@
   <ItemGroup>
     <Folder Include="Geography\" />
     <Folder Include="Video\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\lib\taglib-sharp\2.0.3.7\taglib-sharp.csproj">
+      <Project>{4CC18776-125E-4318-9D24-D60110AD9697}</Project>
+      <Name>taglib-sharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
