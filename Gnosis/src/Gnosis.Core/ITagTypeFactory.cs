@@ -7,7 +7,7 @@ namespace Gnosis.Core
 {
     public interface ITagTypeFactory
     {
-        ITagType Create(long id);
+        ITagType Create(int id);
 
         void Add(ITagType type);
         void Remove(ITagType type);

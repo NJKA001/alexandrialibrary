@@ -21,9 +21,9 @@ namespace Gnosis.Core
                 Add(id3v2Type);
         }
 
-        private readonly IDictionary<long, ITagType> byId = new Dictionary<long, ITagType>();
+        private readonly IDictionary<int, ITagType> byId = new Dictionary<int, ITagType>();
 
-        public ITagType Create(long id)
+        public ITagType Create(int id)
         {
             return byId.ContainsKey(id) ?
                 byId[id]

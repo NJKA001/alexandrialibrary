@@ -40,10 +40,11 @@ namespace Gnosis.Data.SQLite
         {
             var target = record.GetUri("Target");
             var algorithm = record.GetInt32Lookup<IAlgorithm>("Algorithm", algorithmId => Algorithm.Parse(algorithmId));
-            var type = record.GetInt64Lookup<ITagType>("Type", typeId => typeFactory.Create(typeId));
+            var type = record.GetInt32Lookup<ITagType>("Type", typeId => typeFactory.Create(typeId));
             var name = record.GetString("Name");
+            var value = type.Domain.GetValue(name);
             var id = record.GetInt64("Id");
-            return new Tag(target, algorithm, type, name, id);
+            return new Tag(target, algorithm, type, value, id);
         }
 
         #endregion
@@ -165,14 +166,16 @@ namespace Gnosis.Data.SQLite
                 logger.Info("SQLiteTagRepository.Initialize");
 
                 var builder = new SimpleCommandBuilder();
-                builder.AppendLine("create table if not exists Tag (Id integer primary key not null, Target text not null, Algorithm integer not null, Schema integer not null, Type integer not null, Name text not null);");
+                builder.AppendLine("create table if not exists Tag (Id integer primary key not null, Target text not null, Algorithm integer not null, Schema integer not null, Domain integer not null, Type integer not null, Name text not null);");
                 builder.AppendLine("create index if not exists Tag_Target on Tag (Target asc);");
                 builder.AppendLine("create index if not exists Tag_Target_Algorithm on Tag (Target asc, Algorithm asc);");
                 builder.AppendLine("create index if not exists Tag_Target_Schema on Tag (Target asc, Schema asc);");
                 builder.AppendLine("create index if not exists Tag_Algorithm on Tag (Algorithm asc);");
                 builder.AppendLine("create index if not exists Tag_Algorithm_Schema on Tag (Algorithm asc, Schema asc);");
-                builder.AppendLine("create index if not exists Tag_Algorithm_Schema_Type on Tag (Algorithm asc, Schema asc, Type asc);");
+                builder.AppendLine("create index if not exists Tag_Algorithm_Domain_Name on Tag (Algorithm asc, Domain asc, Name asc);");
+                builder.AppendLine("create index if not exists Tag_Algorithm_Type on Tag (Algorithm asc, Type asc);");
                 builder.AppendLine("create index if not exists Tag_Algorithm_Schema_Name on Tag (Algorithm asc, Schema asc, Name asc);");
+                builder.AppendLine("create index if not exists Tag_Algorithm_Schema_Domain_Name on Tag (Algorithm asc, Schema asc, Domain asc, Name asc);");
                 builder.AppendLine("create index if not exists Tag_Algorithm_Name on Tag (Algorithm asc, Name asc);");
                 builder.AppendLine("create index if not exists Tag_Name on Tag (Name asc);");
 
@@ -195,10 +198,11 @@ namespace Gnosis.Data.SQLite
                 logger.Info("SQLiteTagRepository.Save(ITag)");
 
                 var builder = new SimpleCommandBuilder();
-                builder.Append("insert into Tag (Target, Algorithm, Schema, Type, Name) values (@Target, @Algorithm, @Schema, @Type, @Name);");
+                builder.Append("insert into Tag (Target, Algorithm, Schema, Domain, Type, Name) values (@Target, @Algorithm, @Schema, @Domain, @Type, @Name);");
                 builder.AddQuotedParameter("@Target", tag.Target.ToString());
                 builder.AddUnquotedParameter("@Algorithm", tag.Algorithm.Id);
                 builder.AddUnquotedParameter("@Schema", tag.Type.Schema.Id);
+                builder.AddUnquotedParameter("@Domain", tag.Type.Domain.Id);
                 builder.AddUnquotedParameter("@Type", tag.Type.Id);
                 builder.AddQuotedParameter("@Name", tag.Name);
 
@@ -226,10 +230,11 @@ namespace Gnosis.Data.SQLite
                 foreach (var tag in tags)
                 {
                     count++;
-                    builder.AppendFormatLine("insert into Tag (Target, Algorithm, Schema, Type, Name) values (@Target{0}, @Algorithm{0}, @Schema{0}, @Type{0}, @Name{0});", count);
+                    builder.AppendFormatLine("insert into Tag (Target, Algorithm, Schema, Domain, Type, Name) values (@Target{0}, @Algorithm{0}, @Schema{0}, @Domain{0}, @Type{0}, @Name{0});", count);
                     builder.AddQuotedParameter(string.Format("@Target{0}", count), tag.Target.ToString());
                     builder.AddUnquotedParameter(string.Format("@Algorithm{0}", count), tag.Algorithm.Id);
                     builder.AddUnquotedParameter(string.Format("@Schema{0}", count), tag.Type.Schema.Id);
+                    builder.AddUnquotedParameter(string.Format("@Domain{0}", count), tag.Type.Domain.Id);
                     builder.AddUnquotedParameter(string.Format("@Type{0}", count), tag.Type.Id);
                     builder.AddQuotedParameter(string.Format("@Name{0}", count), tag.Name);
                 }

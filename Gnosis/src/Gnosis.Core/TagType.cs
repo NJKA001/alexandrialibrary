@@ -8,23 +8,27 @@ namespace Gnosis.Core
     public class TagType
         : ITagType
     {
-        public TagType(long id, string name, ITagSchema schema)
+        public TagType(int id, string name, ITagSchema schema, ITagDomain domain)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
             if (schema == null)
                 throw new ArgumentNullException("schema");
+            if (domain == null)
+                throw new ArgumentNullException("domain");
 
             this.id = id;
             this.name = name;
             this.schema = schema;
+            this.domain = domain;
         }
 
-        private readonly long id;
+        private readonly int id;
         private readonly string name;
         private readonly ITagSchema schema;
+        private readonly ITagDomain domain;
 
-        public long Id
+        public int Id
         {
             get { return id; }
         }
@@ -39,6 +43,11 @@ namespace Gnosis.Core
             get { return schema; }
         }
 
-        public static readonly ITagType Default = new TagType(1, "Default", TagSchema.Default);
+        public ITagDomain Domain
+        {
+            get { return domain; }
+        }
+
+        public static readonly ITagType Default = new TagType(1, "Default", TagSchema.Default, TagDomain.String);
     }
 }

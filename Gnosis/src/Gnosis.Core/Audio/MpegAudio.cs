@@ -45,6 +45,7 @@ namespace Gnosis.Core.Audio
                     System.Diagnostics.Debug.WriteLine("ID3v2 tag is null or empty");
                 else
                 {
+                    var x = id3v2Tag.Duration;
                 }
             }
         }

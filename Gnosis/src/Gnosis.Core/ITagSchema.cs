@@ -7,7 +7,7 @@ namespace Gnosis.Core
 {
     public interface ITagSchema
     {
-        long Id { get; }
+        int Id { get; }
         string Name { get; }
     }
 }

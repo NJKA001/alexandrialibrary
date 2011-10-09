@@ -7,7 +7,7 @@ namespace Gnosis.Core
 {
     public interface ITagFactory
     {
-        ITag Create(Uri target, IAlgorithm algorithm, Uri type, string name);
-        ITag Create(Uri target, IAlgorithm algorithm, Uri type, string name, long id);
+        ITag Create(Uri target, IAlgorithm algorithm, ITagType type, object value);
+        ITag Create(Uri target, IAlgorithm algorithm, ITagType type, object value, long id);
     }
 }

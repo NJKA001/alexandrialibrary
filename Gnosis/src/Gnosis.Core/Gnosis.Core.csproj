@@ -184,6 +184,7 @@
     <Compile Include="ILinkType.cs" />
     <Compile Include="ILinkTypeFactory.cs" />
     <Compile Include="IMediaSearch.cs" />
+    <Compile Include="ITagDomain.cs" />
     <Compile Include="ITagSchema.cs" />
     <Compile Include="ITagType.cs" />
     <Compile Include="ITagTypeFactory.cs" />
@@ -192,6 +193,8 @@
     <Compile Include="Links\Html\HtmlLinkType.cs" />
     <Compile Include="LinkType.cs" />
     <Compile Include="LinkTypeFactory.cs" />
+    <Compile Include="TagDomain.cs" />
+    <Compile Include="TagFactory.cs" />
     <Compile Include="TagSchema.cs" />
     <Compile Include="Tags\Id3\Id3v1\Id3v1TagType.cs" />
     <Compile Include="Tags\Id3\Id3v1\IId3v1Tag.cs" />
