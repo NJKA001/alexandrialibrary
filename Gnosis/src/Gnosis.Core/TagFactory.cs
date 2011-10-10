@@ -20,6 +20,16 @@ namespace Gnosis.Core
             return new Tag(target, algorithm, type, value, id);
         }
 
+        public ITag Create<T>(Uri target, IAlgorithm algorithm, ITagType<T> type, T value)
+        {
+            return new Tag(target, algorithm, type, value);
+        }
+
+        public ITag Create<T>(Uri target, IAlgorithm algorithm, ITagType<T> type, T value, long id)
+        {
+            return new Tag(target, algorithm, type, value, id);
+        }
+
         #endregion
     }
 }

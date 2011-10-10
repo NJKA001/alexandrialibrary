@@ -12,4 +12,9 @@ namespace Gnosis.Core
         ITagSchema Schema { get; }
         ITagDomain Domain { get; }
     }
+
+    public interface ITagType<T>
+        : ITagType
+    {
+    }
 }

@@ -6,7 +6,12 @@ using System.Text;
 namespace Gnosis.Core
 {
     public class TagType
-        : ITagType
+    {
+        public static readonly ITagType Default = new TagType<string>(1, "Default", TagSchema.Default, TagDomain.String);
+    }
+
+    public class TagType<T>
+        : ITagType<T>
     {
         public TagType(int id, string name, ITagSchema schema, ITagDomain domain)
         {
@@ -47,7 +52,5 @@ namespace Gnosis.Core
         {
             get { return domain; }
         }
-
-        public static readonly ITagType Default = new TagType(1, "Default", TagSchema.Default, TagDomain.String);
     }
 }

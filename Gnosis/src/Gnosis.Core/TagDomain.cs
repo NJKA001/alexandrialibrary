@@ -83,7 +83,7 @@ namespace Gnosis.Core
             all.Add(StringArray);
             all.Add(PositiveInteger);
             all.Add(Date);
-            all.Add(Milliseconds);
+            all.Add(Duration);
 
             foreach (var domain in all)
                 byId[domain.Id] = domain;
@@ -110,7 +110,7 @@ namespace Gnosis.Core
             return d.ToString("s");
         }
 
-        private static string MillisecondsToName(object value)
+        private static string DurationToName(object value)
         {
             if (!(value is TimeSpan))
                 return string.Empty;
@@ -123,7 +123,8 @@ namespace Gnosis.Core
         public static readonly ITagDomain StringArray = new TagDomain(2, "StringArray", typeof(string[]), new string[0], x => x != null, x => StringArrayToName(x), x => x.ToString().Split(new string[] { "; " }, StringSplitOptions.RemoveEmptyEntries));
         public static readonly ITagDomain PositiveInteger = new TagDomain(3, "PositiveInteger", typeof(uint), (uint)0, x => { if (x == null) return false; uint result = 0; return uint.TryParse(x.ToString(), out result); }, x => x.ToString(), x => uint.Parse(x));
         public static readonly ITagDomain Date = new TagDomain(4, "Date", typeof(DateTime), DateTime.MinValue, x => { if (x == null) return false; var result = DateTime.MinValue; return DateTime.TryParse(x.ToString(), out result); }, x => DateToName(x), x => DateTime.Parse(x));
-        public static readonly ITagDomain Milliseconds = new TagDomain(5, "Milliseconds", typeof(TimeSpan), TimeSpan.Zero, x => { if (x == null) return false; var result = 0; return int.TryParse(x.ToString(), out result); }, x => MillisecondsToName(x), x => { var ms = int.Parse(x); return new TimeSpan(0, 0, 0, 0, ms); });
+        public static readonly ITagDomain Duration = new TagDomain(5, "Duration", typeof(TimeSpan), TimeSpan.Zero, x => { if (x == null) return false; var result = 0; return int.TryParse(x.ToString(), out result); }, x => DurationToName(x), x => { var ms = int.Parse(x); return new TimeSpan(0, 0, 0, 0, ms); });
+        public static readonly ITagDomain ByteArray = new TagDomain(6, "ByteArray", typeof(byte[]), new byte[0], x => x != null && x is byte[], x => ((byte[])x).ToHexString(), x => x.ToHexByteArray());
 
         public static IEnumerable<ITagDomain> GetAll()
         {

@@ -153,7 +153,6 @@ namespace Gnosis.Core
             return d[n, m];
         }
 
-
         public static string ToDoubleMetaphoneString(this string self)
         {
 			MetaphoneData metaphoneData = new MetaphoneData();
@@ -1078,6 +1077,16 @@ namespace Gnosis.Core
                 .Replace("<", "&lt;")
                 .Replace(">", "&gt;");
 
+        }
+
+        public static byte[] ToHexByteArray(this string self)
+        {
+            var length = self.Length;
+            var bytes = new byte[length / 2];
+            for (int i = 0; i < length; i += 2)
+                bytes[i / 2] = Convert.ToByte(self.Substring(i, 2), 16);
+            
+            return bytes;
         }
     }
 }
