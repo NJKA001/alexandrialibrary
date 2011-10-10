@@ -45,12 +45,12 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        protected T GetRecord<T>(ISimpleCommandBuilder builder, Func<IDataRecord, T> readRecord)
+        protected T GetRecord<T>(ICommandBuilder builder, Func<IDataRecord, T> readRecord)
         {
             return GetRecords<T>(builder, readRecord).FirstOrDefault();
         }
 
-        protected IEnumerable<T> GetRecords<T>(ISimpleCommandBuilder builder, Func<IDataRecord, T> readRecord)
+        protected IEnumerable<T> GetRecords<T>(ICommandBuilder builder, Func<IDataRecord, T> readRecord)
         {
             IDbConnection connection = null;
             var records = new List<T>();
@@ -79,7 +79,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        protected void ExecuteNonQuery(ISimpleCommandBuilder builder)
+        protected void ExecuteNonQuery(ICommandBuilder builder)
         {
             IDbConnection connection = null;
 
@@ -96,7 +96,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        protected object ExecuteScalar(ISimpleCommandBuilder builder)
+        protected object ExecuteScalar(ICommandBuilder builder)
         {
             IDbConnection connection = null;
 
@@ -113,7 +113,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        protected void ExecuteTransaction(IEnumerable<ISimpleCommandBuilder> builders)
+        protected void ExecuteTransaction(IEnumerable<ICommandBuilder> builders)
         {
 
             IDbConnection connection = null;

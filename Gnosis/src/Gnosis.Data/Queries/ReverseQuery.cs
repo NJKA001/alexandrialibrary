@@ -23,7 +23,7 @@ namespace Gnosis.Data.Queries
 
             //this.logger = logger;
             this.factory = factory;
-            this.valueBuilder = new CommandBuilder(valueInfo.Name, valueInfo.Type);
+            this.valueBuilder = new ComplexCommandBuilder(valueInfo.Name, valueInfo.Type);
 
             rootName = "T_" + Guid.NewGuid().ToString().Replace("-", string.Empty);
             var selectStatement = new SelectStatement(valueInfo, filter, parent, rootIdAlias);
@@ -34,7 +34,7 @@ namespace Gnosis.Data.Queries
                 valueBuilder.AddParameter(parameter);
             }
 
-            builder = new CommandBuilder(parent.Name, parent.Type);
+            builder = new ComplexCommandBuilder(parent.Name, parent.Type);
             builder.AddStatement(new SelectStatement(parent, rootName, rootIdAlias));
 
             AddChildStatements(builder, parent);
@@ -52,7 +52,7 @@ namespace Gnosis.Data.Queries
         {
             foreach (var childInfo in entityInfo.Children)
             {
-                var childBuilder = new CommandBuilder(childInfo.Name, childInfo.Type);
+                var childBuilder = new ComplexCommandBuilder(childInfo.Name, childInfo.Type);
                 childBuilder.AddStatement(new SelectStatement(childInfo, rootName, rootIdAlias));
 
                 parentBuilder.AddChild(childBuilder);
@@ -62,7 +62,7 @@ namespace Gnosis.Data.Queries
 
             foreach (var valueInfo in entityInfo.Values)
             {
-                var valueBuilder = new CommandBuilder(valueInfo.Name, valueInfo.Type);
+                var valueBuilder = new ComplexCommandBuilder(valueInfo.Name, valueInfo.Type);
                 valueBuilder.AddStatement(new SelectStatement(valueInfo, rootName, rootIdAlias));
 
                 parentBuilder.AddChild(valueBuilder);

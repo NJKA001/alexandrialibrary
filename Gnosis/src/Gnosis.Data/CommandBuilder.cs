@@ -6,15 +6,15 @@ using System.Text;
 
 namespace Gnosis.Data
 {
-    public class SimpleCommandBuilder
-        : ISimpleCommandBuilder
+    public class CommandBuilder
+        : ICommandBuilder
     {
-        public SimpleCommandBuilder()
+        public CommandBuilder()
         {
             this.CommandType = CommandType.Text;
         }
 
-        public SimpleCommandBuilder(string commandText)
+        public CommandBuilder(string commandText)
             : this()
         {
             sql.Append(commandText);

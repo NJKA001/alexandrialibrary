@@ -23,7 +23,7 @@ namespace Gnosis.Data.Batches
 
         private void AddRootCommandBuilder(EntityInfo entityInfo)
         {
-            var builder = new CommandBuilder();
+            var builder = new ComplexCommandBuilder();
             builder.AddStatement(new CreateTableStatement(entityInfo));
             
             Add(builder);
@@ -33,7 +33,7 @@ namespace Gnosis.Data.Batches
         {
             foreach (var valueInfo in entityInfo.Values)
             {
-                var builder = new CommandBuilder();
+                var builder = new ComplexCommandBuilder();
                 builder.AddStatement(new CreateTableStatement(valueInfo));
 
                 Add(builder);
@@ -41,7 +41,7 @@ namespace Gnosis.Data.Batches
 
             foreach (var childInfo in entityInfo.Children)
             {
-                var builder = new CommandBuilder();
+                var builder = new ComplexCommandBuilder();
                 builder.AddStatement(new CreateTableStatement(childInfo));
 
                 Add(builder);
@@ -54,7 +54,7 @@ namespace Gnosis.Data.Batches
         {
             foreach (var lookup in lookups)
             {
-                var builder = new CommandBuilder();
+                var builder = new ComplexCommandBuilder();
                 //var tableName = new EntityInfo(lookup.BaseType).Name;
                 //var indexName = string.Format("{0}_{1}", tableName, lookup.Name);
                 //builder.AddStatement(new CreateIndexStatement(tableName, indexName, true, lookup.Columns));
@@ -67,7 +67,7 @@ namespace Gnosis.Data.Batches
         {
             foreach (var search in searches)
             {
-                var builder = new CommandBuilder();
+                var builder = new ComplexCommandBuilder();
                 //var tableName = new EntityInfo(search.BaseType).Name;
                 //var indexName = string.Format("{0}_{1}", tableName, search.Name);
                 //builder.AddStatement(new CreateIndexStatement(search.SourceName, search.Name, false, search.Columns));

@@ -39,7 +39,7 @@ namespace Gnosis.Data.Batches
 
         private void AddEntityInsertStatement(IEntity entity, EntityInfo entityInfo, DateTime timeStamp)
         {
-            var builder = new CommandBuilder();
+            var builder = new ComplexCommandBuilder();
             var statement = new InsertStatement(entityInfo.Name);
 
             foreach (var element in entityInfo.Elements)
@@ -71,7 +71,7 @@ namespace Gnosis.Data.Batches
 
         private void AddEntityInsertStatement(IChild child, EntityInfo childInfo, DateTime timeStamp)
         {
-            var builder = new CommandBuilder();
+            var builder = new ComplexCommandBuilder();
             var statement = new InsertStatement(childInfo.Name);
 
             foreach (var element in childInfo.Elements)
@@ -108,7 +108,7 @@ namespace Gnosis.Data.Batches
 
         private void AddEntityUpdateStatement(IEntity entity, EntityInfo entityInfo, DateTime timeStamp)
         {
-            var builder = new CommandBuilder();
+            var builder = new ComplexCommandBuilder();
             var idParameter = entity.Id.ToParameter();
             builder.AddParameter(idParameter);
             var whereClause = string.Format("{0}.{1} = {2}", entityInfo.Name, entityInfo.Identifier.Name, idParameter.Name);
@@ -147,7 +147,7 @@ namespace Gnosis.Data.Batches
 
         private void AddEntityUpdateStatement(IChild child, EntityInfo childInfo, DateTime timeStamp)
         {
-            var builder = new CommandBuilder();
+            var builder = new ComplexCommandBuilder();
 
             var idParameter = child.Id.ToParameter();
             builder.AddParameter(idParameter);
@@ -191,7 +191,7 @@ namespace Gnosis.Data.Batches
 
         private void AddValueInsertStatement(IValue value, ValueInfo valueInfo)
         {
-            var builder = new CommandBuilder();
+            var builder = new ComplexCommandBuilder();
             var statement = new InsertStatement(valueInfo.Name);
 
             foreach (var element in valueInfo.Elements)
@@ -214,7 +214,7 @@ namespace Gnosis.Data.Batches
 
         private void AddValueMoveStatement(IValue value, ValueInfo valueInfo)
         {
-            var builder = new CommandBuilder();
+            var builder = new ComplexCommandBuilder();
 
             var idParameter = value.Id.ToParameter();
             builder.AddParameter(idParameter);

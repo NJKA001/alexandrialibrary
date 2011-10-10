@@ -65,7 +65,7 @@ namespace Gnosis.Data.SQLite
             {
                 logger.Info("SQLiteTagRepository.Lookup");
 
-                var builder = new SimpleCommandBuilder("select * from Tag where Id = @Id;");
+                var builder = new CommandBuilder("select * from Tag where Id = @Id;");
                 builder.AddUnquotedParameter("@Id", id);
 
                 return GetRecord(builder, record => ReadTag(record));
@@ -83,7 +83,7 @@ namespace Gnosis.Data.SQLite
             {
                 logger.Info("SQLiteTagRepository.All()");
 
-                var builder = new SimpleCommandBuilder("select * from Tag;");
+                var builder = new CommandBuilder("select * from Tag;");
 
                 return GetRecords(builder, record => ReadTag(record));
             }
@@ -105,7 +105,7 @@ namespace Gnosis.Data.SQLite
             {
                 logger.Info("SQLiteTagRepository.Search(IAlgorithm, ITagSchema)");
 
-                var builder = new SimpleCommandBuilder("select * from Tag where Algorithm = @Algorithm and Schema = @Schema;");
+                var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Schema = @Schema;");
                 builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
                 builder.AddUnquotedParameter("@Schema", schema.Id);
 
@@ -131,7 +131,7 @@ namespace Gnosis.Data.SQLite
             {
                 logger.Info("SQLiteTagRepository.Search(IAlgorithm, ITagSchema, string)");
 
-                var builder = new SimpleCommandBuilder("select * from Tag where Algorithm = @Algorithm and Schema = @Schema and Name like @Name;");
+                var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Schema = @Schema and Name like @Name;");
                 builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
                 builder.AddUnquotedParameter("@Schema", schema.Id);
                 builder.AddQuotedParameter("@Name", name);
@@ -156,7 +156,7 @@ namespace Gnosis.Data.SQLite
             {
                 logger.Info("SQLiteTagRepository.Search(IAlgorithm, ITagType)");
 
-                var builder = new SimpleCommandBuilder("select * from Tag where Algorithm = @Algorithm and Type = @Type;");
+                var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Type = @Type;");
                 builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
                 builder.AddUnquotedParameter("@Type", type.Id);
 
@@ -180,7 +180,7 @@ namespace Gnosis.Data.SQLite
             {
                 logger.Info("SQLiteTagRepository.Search(IAlgorithm, string)");
 
-                var builder = new SimpleCommandBuilder("select * from Tag where Algorithm = @Algorithm and Name like @Name;");
+                var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Name like @Name;");
                 builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
                 builder.AddQuotedParameter("@Name", name);
 
@@ -199,7 +199,7 @@ namespace Gnosis.Data.SQLite
             {
                 logger.Info("SQLiteTagRepository.Initialize");
 
-                var builder = new SimpleCommandBuilder();
+                var builder = new CommandBuilder();
                 builder.AppendLine("create table if not exists Tag (Id integer primary key not null, Target text not null, Algorithm integer not null, Schema integer not null, Domain integer not null, Type integer not null, Name text not null, Data blob);");
                 builder.AppendLine("create index if not exists Tag_Target on Tag (Target asc);");
                 builder.AppendLine("create index if not exists Tag_Target_Algorithm on Tag (Target asc, Algorithm asc);");
@@ -239,11 +239,11 @@ namespace Gnosis.Data.SQLite
             {
                 logger.Info("SQLiteTagRepository.Save(IEnumerable<ITag>)");
 
-                var builders = new List<ISimpleCommandBuilder>();
+                var builders = new List<ICommandBuilder>();
 
                 foreach (var tag in tags)
                 {
-                    var builder = new SimpleCommandBuilder();
+                    var builder = new CommandBuilder();
                     builder.AppendLine("insert into Tag (Target, Algorithm, Schema, Domain, Type, Name, Data) values (@Target, @Algorithm, @Schema, @Domain, @Type, @Name, @Data);");
                     builder.AddQuotedParameter("@Target", tag.Target.ToString());
                     builder.AddUnquotedParameter("@Algorithm", tag.Algorithm.Id);
@@ -289,11 +289,11 @@ namespace Gnosis.Data.SQLite
             {
                 logger.Info("SQLiteTagRepository.Delete(IEnumerable<ITag>)");
 
-                var builders = new List<ISimpleCommandBuilder>();
+                var builders = new List<ICommandBuilder>();
 
                 foreach (var tag in tags)
                 {
-                    var builder = new SimpleCommandBuilder();
+                    var builder = new CommandBuilder();
                     builder.AppendLine("delete from Tag where Id = @Id;");
                     builder.AddUnquotedParameter("@Id", tag.Id);
                     builders.Add(builder);

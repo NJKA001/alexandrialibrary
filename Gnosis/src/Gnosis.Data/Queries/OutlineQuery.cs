@@ -19,7 +19,7 @@ namespace Gnosis.Data.Queries
 
             //this.logger = logger;
             this.factory = factory;
-            this.builder = new CommandBuilder(entityInfo.Name, entityInfo.Type);
+            this.builder = new ComplexCommandBuilder(entityInfo.Name, entityInfo.Type);
 
             builder.AddStatement(new SelectStatement(entityInfo, filter));
             foreach (var parameter in filter.Parameters)

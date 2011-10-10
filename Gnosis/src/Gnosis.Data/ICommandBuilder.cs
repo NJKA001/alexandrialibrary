@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Gnosis.Data
 {
-    public interface ISimpleCommandBuilder
+    public interface ICommandBuilder
     {
         void AddQuotedParameter(string name, object value);
         void AddUnquotedParameter(string name, object value);

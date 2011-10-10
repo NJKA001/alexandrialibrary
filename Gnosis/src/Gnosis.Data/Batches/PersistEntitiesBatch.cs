@@ -22,7 +22,7 @@ namespace Gnosis.Data.Batches
             {
                 foreach (var value in entity.GetValues(valueInfo))
                 {
-                    var builder = new CommandBuilder();
+                    var builder = new ComplexCommandBuilder();
                     var idParameter = value.Id.ToParameter();
                     builder.AddParameter(idParameter);
                     var whereClause = string.Format("{0}.{1} = {2}", valueInfo.Name, valueInfo.Identifer.Name, idParameter.Name);
@@ -36,7 +36,7 @@ namespace Gnosis.Data.Batches
             {
                 foreach (var child in entity.GetChildren(childInfo))
                 {
-                    var builder = new CommandBuilder();
+                    var builder = new ComplexCommandBuilder();
                     var idParameter = child.Id.ToParameter();
                     builder.AddParameter(idParameter);
                     var whereClause = string.Format("{0}.{1} = {2}", childInfo.Name, childInfo.Identifier.Name, idParameter.Name);
@@ -53,7 +53,7 @@ namespace Gnosis.Data.Batches
 
         protected void AddEntityDeleteStatement(IEntity entity, EntityInfo entityInfo)
         {
-            var builder = new CommandBuilder();
+            var builder = new ComplexCommandBuilder();
 
             var idParameter = entity.Id.ToParameter();
             builder.AddParameter(idParameter);
@@ -68,7 +68,7 @@ namespace Gnosis.Data.Batches
 
         protected void AddEntityDeleteStatement(IChild child, EntityInfo childInfo)
         {
-            var builder = new CommandBuilder();
+            var builder = new ComplexCommandBuilder();
 
             var idParameter = child.Id.ToParameter();
             builder.AddParameter(idParameter);
@@ -87,7 +87,7 @@ namespace Gnosis.Data.Batches
 
         protected void AddValueDeleteStatement(IValue value, ValueInfo valueInfo)
         {
-            var builder = new CommandBuilder();
+            var builder = new ComplexCommandBuilder();
 
             var idParameter = value.Id.ToParameter();
             builder.AddParameter(idParameter);

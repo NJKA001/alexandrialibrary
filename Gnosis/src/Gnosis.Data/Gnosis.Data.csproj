@@ -64,7 +64,7 @@
     <Compile Include="Batches\InitializeTypeBatch.cs" />
     <Compile Include="Batches\PersistEntitiesBatch.cs" />
     <Compile Include="Batches\SaveEntitiesBatch.cs" />
-    <Compile Include="Commands\CommandBuilder.cs" />
+    <Compile Include="Commands\ComplexCommandBuilder.cs" />
     <Compile Include="Commands\CreateIndexStatement.cs" />
     <Compile Include="Commands\CreateTableStatement.cs" />
     <Compile Include="Commands\DeleteStatement.cs" />
@@ -93,7 +93,7 @@
     <Compile Include="IOutline.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ISearch.cs" />
-    <Compile Include="ISimpleCommandBuilder.cs" />
+    <Compile Include="ICommandBuilder.cs" />
     <Compile Include="IValue.cs" />
     <Compile Include="IValueInitialState.cs" />
     <Compile Include="ObjectExtensions.cs" />
@@ -108,7 +108,7 @@
     <Compile Include="Queries\ReverseQuery.cs" />
     <Compile Include="Queries\ValueQuery.cs" />
     <Compile Include="ExpressionExtensions.cs" />
-    <Compile Include="SimpleCommandBuilder.cs" />
+    <Compile Include="CommandBuilder.cs" />
     <Compile Include="TypeAffinity.cs" />
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="ValueInfo.cs" />

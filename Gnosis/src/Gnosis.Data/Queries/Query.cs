@@ -18,7 +18,7 @@ namespace Gnosis.Data.Queries
 
             //this.logger = logger;
             this.factory = factory;
-            this.builder = new CommandBuilder(entityInfo.Name, entityInfo.Type);
+            this.builder = new ComplexCommandBuilder(entityInfo.Name, entityInfo.Type);
 
             builder.AddStatement(new SelectStatement(entityInfo, filter));
             foreach (var parameter in filter.Parameters)
@@ -38,7 +38,7 @@ namespace Gnosis.Data.Queries
         {
             foreach (var childInfo in entityInfo.Children)
             {
-                var childBuilder = new CommandBuilder(childInfo.Name, childInfo.Type);
+                var childBuilder = new ComplexCommandBuilder(childInfo.Name, childInfo.Type);
                 childBuilder.AddStatement(new SelectStatement(childInfo, filter));
                 foreach (var parameter in filter.Parameters)
                 {
@@ -53,7 +53,7 @@ namespace Gnosis.Data.Queries
 
             foreach (var valueInfo in entityInfo.Values)
             {
-                var valueBuilder = new CommandBuilder(valueInfo.Name, valueInfo.Type);
+                var valueBuilder = new ComplexCommandBuilder(valueInfo.Name, valueInfo.Type);
                 valueBuilder.AddStatement(new SelectStatement(valueInfo, filter));
                 foreach (var parameter in filter.Parameters)
                 {

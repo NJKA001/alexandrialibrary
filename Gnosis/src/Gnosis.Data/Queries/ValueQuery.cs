@@ -22,7 +22,7 @@ namespace Gnosis.Data.Queries
             var valueInfo = new ValueInfo(parent, property.ToPropertyInfo(), valueType);
 
             this.factory = factory;
-            this.builder = new CommandBuilder(valueInfo.Name, valueType);
+            this.builder = new ComplexCommandBuilder(valueInfo.Name, valueType);
             this.whereClause = filter.WhereClause;
             this.orderByClause = filter.OrderByClause;
             this.parameters = filter.Parameters;
