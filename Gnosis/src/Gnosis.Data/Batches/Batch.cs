@@ -17,9 +17,9 @@ namespace Gnosis.Data.Batches
         }
 
         private readonly IDbConnection connection;
-        private readonly IList<ICommandBuilder> builders = new List<ICommandBuilder>();
+        private readonly IList<IComplexCommandBuilder> builders = new List<IComplexCommandBuilder>();
 
-        public void Add(ICommandBuilder builder)
+        public void Add(IComplexCommandBuilder builder)
         {
             builders.Add(builder);
         }

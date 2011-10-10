@@ -68,7 +68,7 @@
     <Compile Include="Commands\CreateIndexStatement.cs" />
     <Compile Include="Commands\CreateTableStatement.cs" />
     <Compile Include="Commands\DeleteStatement.cs" />
-    <Compile Include="Commands\ICommandBuilder.cs" />
+    <Compile Include="Commands\IComplexCommandBuilder.cs" />
     <Compile Include="Commands\InsertStatement.cs" />
     <Compile Include="IConnectionFactory.cs" />
     <Compile Include="IParameter.cs" />

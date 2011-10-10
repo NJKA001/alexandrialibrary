@@ -11,6 +11,7 @@ namespace Gnosis.Core
         IEnumerable<ITag> All();
         IEnumerable<ITag> Search(IAlgorithm algorithm, ITagSchema schema);
         IEnumerable<ITag> Search(IAlgorithm algorithm, ITagSchema schema, string name);
+        IEnumerable<ITag> Search(IAlgorithm algorithm, ITagType type);
         IEnumerable<ITag> Search(IAlgorithm algorithm, string name);
 
         void Initialize();

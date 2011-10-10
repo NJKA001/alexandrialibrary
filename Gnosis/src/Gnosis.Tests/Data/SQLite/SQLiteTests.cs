@@ -63,6 +63,11 @@ namespace Gnosis.Tests.Data.SQLite
             var uri3 = new Uri("http://blah.com/music/Ticks-And-Leeches");
             var uri4 = new Uri("http://meh.org/index/Tool/The+Bottom.mp3");
 
+            var image = System.Drawing.Image.FromFile(@".\Files\Undertow.jpg");
+            Assert.IsNotNull(image);
+            var imageData = image.ToBytes();
+            Assert.IsNotNull(imageData);
+
             var tag1 = new Tag(uri1, Algorithm.Default, TagType.Default, "Kicks Ass!");
             var tag2 = new Tag(uri2, Algorithm.Default, Id3v1TagType.Artist, "Tool");
             var tag3 = new Tag(uri3, Algorithm.Americanized, Id3v1TagType.Artist, "Tool".ToAmericanizedString());
@@ -70,13 +75,15 @@ namespace Gnosis.Tests.Data.SQLite
             var tag5 = new Tag(uri4, Algorithm.Default, Id3v2TagType.Artist, "Tool");
             var tag6 = new Tag(uri4, Algorithm.Default, Id3v2TagType.Title, "The Bottom");
             var tag7 = new Tag(uri4, Algorithm.Default, Id3v2TagType.Album, "Undertow");
+            var tag8 = new Tag(uri4, Algorithm.Default, Id3v2TagType.AttachedPicture, imageData);
 
-            var tags = new List<ITag> { tag1, tag2, tag3, tag4, tag5, tag6, tag7 };
+            var tags = new List<ITag> { tag1, tag2, tag3, tag4, tag5, tag6, tag7, tag8 };
             tagRepository.Save(tags);
 
             var all = tagRepository.All();
             var americanized = tagRepository.Search(Algorithm.Americanized, TagSchema.Id3v1);
             var v2 = tagRepository.Search(Algorithm.Default, TagSchema.Id3v2);
+            var apic = tagRepository.Search(Algorithm.Default, Id3v2TagType.AttachedPicture).FirstOrDefault();
 
             Assert.IsNotNull(all);
             Assert.AreEqual(tags.Count, all.Count());
@@ -86,6 +93,8 @@ namespace Gnosis.Tests.Data.SQLite
             Assert.IsNotNull(v2);
             Assert.AreEqual(tags.Where(x => x.Type.Schema == TagSchema.Id3v2).Count(), v2.Count());
             Assert.IsTrue(v2.All(x => x != null && x.Type.Schema == TagSchema.Id3v2));
+            Assert.IsNotNull(apic);
+            Assert.AreEqual(imageData, apic.Value);
         }
 
         [Test]

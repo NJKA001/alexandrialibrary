@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Data;
 
 namespace Gnosis.Data.SQLite
 {
@@ -112,7 +113,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        protected void ExecuteTransaction(ISimpleCommandBuilder builder)
+        protected void ExecuteTransaction(IEnumerable<ISimpleCommandBuilder> builders)
         {
 
             IDbConnection connection = null;
@@ -122,9 +123,13 @@ namespace Gnosis.Data.SQLite
             {
                 connection = GetConnection();
                 transaction = connection.BeginTransaction();
-                var command = builder.ToCommand(connection);
-                command.Transaction = transaction;
-                command.ExecuteNonQuery();
+
+                foreach (var builder in builders)
+                {
+                    var command = builder.ToCommand(connection);
+                    command.Transaction = transaction;
+                    command.ExecuteNonQuery();
+                }
 
                 transaction.Commit();
             }

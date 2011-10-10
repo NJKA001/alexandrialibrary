@@ -9,7 +9,7 @@ namespace Gnosis.Data.Batches
 {
     public interface IBatch
     {
-        void Add(ICommandBuilder builder);
+        void Add(IComplexCommandBuilder builder);
         void Execute();
     }
 }

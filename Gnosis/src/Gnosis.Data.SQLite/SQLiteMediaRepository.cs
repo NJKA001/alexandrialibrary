@@ -91,21 +91,7 @@ namespace Gnosis.Data.SQLite
             if (media == null)
                 throw new ArgumentNullException("media");
 
-            try
-            {
-                logger.Info("SQLiteMediaRepository.Delete(IMedia)");
-
-                var builder = new SimpleCommandBuilder();
-                builder.AppendLine("delete from Media where Location = @Location;");
-                builder.AddQuotedParameter("@Location", media.Location.ToString());
-
-                ExecuteNonQuery(builder);
-            }
-            catch (Exception ex)
-            {
-                logger.Error("  Delete(IMedia)", ex);
-                throw;
-            }
+            Delete(new List<IMedia> { media });
         }
 
         public void Delete(IEnumerable<IMedia> media)
@@ -117,20 +103,20 @@ namespace Gnosis.Data.SQLite
             {
                 logger.Info("SQLiteMediaRepository.Delete(IEnumerable<IMedia>)");
 
-                var builder = new SimpleCommandBuilder();
+                var builders = new List<ISimpleCommandBuilder>();
 
-                var count = 0;
                 foreach (var medium in media)
                 {
-                    count++;
-                    builder.AppendFormatLine("delete from Media where Location = @Location{0};", count);
-                    builder.AddQuotedParameter(string.Format("@Location{0}", count), medium.Location.ToString());
+                    var builder = new SimpleCommandBuilder();
+                    builder.AppendLine("delete from Media where Location = @Location;");
+                    builder.AddQuotedParameter("@Location", medium.Location.ToString());
+                    builders.Add(builder);
                 }
 
-                if (count == 0)
+                if (builders.Count == 0)
                     return;
 
-                ExecuteTransaction(builder);
+                ExecuteTransaction(builders);
             }
             catch (Exception ex)
             {
@@ -171,21 +157,21 @@ namespace Gnosis.Data.SQLite
             {
                 logger.Info("SQLiteMediaRepository.Save(IEnumerable<IMedia>)");
 
-                var builder = new SimpleCommandBuilder();
+                var builders = new List<ISimpleCommandBuilder>();
 
-                var count = 0;
                 foreach (var medium in media)
                 {
-                    count++;
-                    builder.AppendFormatLine("insert into Media (Location, Type) values (@Location{0}, @Type{0});", count);
-                    builder.AddQuotedParameter(string.Format("@Location{0}", count), medium.Location.ToString());
-                    builder.AddQuotedParameter(string.Format("@Type{0}", count), medium.Type.ToString());
+                    var builder = new SimpleCommandBuilder();
+                    builder.AppendLine("insert into Media (Location, Type) values (@Location, @Type);");
+                    builder.AddQuotedParameter("@Location", medium.Location.ToString());
+                    builder.AddQuotedParameter("@Type", medium.Type.ToString());
+                    builders.Add(builder);
                 }
 
-                if (count == 0)
+                if (builders.Count == 0)
                     return;
 
-                ExecuteTransaction(builder);
+                ExecuteTransaction(builders);
             }
             catch (Exception ex)
             {

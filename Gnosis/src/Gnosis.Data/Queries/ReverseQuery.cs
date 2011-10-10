@@ -41,14 +41,14 @@ namespace Gnosis.Data.Queries
         }
 
         private readonly IFactory factory;
-        private readonly ICommandBuilder valueBuilder;
-        private readonly ICommandBuilder builder;
+        private readonly IComplexCommandBuilder valueBuilder;
+        private readonly IComplexCommandBuilder builder;
         private readonly string rootName;
         const string rootIdAlias = "Root_Id";
 
         #region Private Methods
 
-        private void AddChildStatements(ICommandBuilder parentBuilder, EntityInfo entityInfo)
+        private void AddChildStatements(IComplexCommandBuilder parentBuilder, EntityInfo entityInfo)
         {
             foreach (var childInfo in entityInfo.Children)
             {
@@ -69,7 +69,7 @@ namespace Gnosis.Data.Queries
             }
         }
 
-        private void AddChildren(IDbConnection connection, ICommandBuilder parentBuilder, IEnumerable<IEntity> parents)
+        private void AddChildren(IDbConnection connection, IComplexCommandBuilder parentBuilder, IEnumerable<IEntity> parents)
         {
             //logger.Info("  ReverseLookupQuery.AddChildren");
             foreach (var childBuilder in parentBuilder.Children)

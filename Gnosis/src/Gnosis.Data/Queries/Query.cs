@@ -30,11 +30,11 @@ namespace Gnosis.Data.Queries
         }
 
         private readonly IFactory factory;
-        private readonly ICommandBuilder builder;
+        private readonly IComplexCommandBuilder builder;
 
         #region Private Methods
 
-        private void AddChildStatements(ICommandBuilder parentBuilder, EntityInfo entityInfo, IFilter filter)
+        private void AddChildStatements(IComplexCommandBuilder parentBuilder, EntityInfo entityInfo, IFilter filter)
         {
             foreach (var childInfo in entityInfo.Children)
             {
@@ -65,7 +65,7 @@ namespace Gnosis.Data.Queries
             }
         }
 
-        private void AddChildren(IDbConnection connection, ICommandBuilder parentBuilder, IEnumerable<IEntity> parents)
+        private void AddChildren(IDbConnection connection, IComplexCommandBuilder parentBuilder, IEnumerable<IEntity> parents)
         {
             //logger.Info("  Query.AddChildren");
             foreach (var childBuilder in parentBuilder.Children)

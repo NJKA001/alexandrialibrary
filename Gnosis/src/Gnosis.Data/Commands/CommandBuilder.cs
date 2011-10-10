@@ -7,7 +7,7 @@ using System.Text;
 namespace Gnosis.Data.Commands
 {
     public class CommandBuilder
-        : ICommandBuilder
+        : IComplexCommandBuilder
     {
         public CommandBuilder()
             : this(string.Empty, null)
@@ -22,7 +22,7 @@ namespace Gnosis.Data.Commands
 
         private readonly string name;
         private readonly Type type;
-        private readonly IList<ICommandBuilder> children = new List<ICommandBuilder>();
+        private readonly IList<IComplexCommandBuilder> children = new List<IComplexCommandBuilder>();
         private readonly IDictionary<string, object> parameters = new Dictionary<string, object>();
         private readonly IList<IStatement> statements = new List<IStatement>();
         
@@ -46,7 +46,7 @@ namespace Gnosis.Data.Commands
             get { return type; }
         }
 
-        public void AddChild(ICommandBuilder child)
+        public void AddChild(IComplexCommandBuilder child)
         {
             children.Add(child);
         }
@@ -78,7 +78,7 @@ namespace Gnosis.Data.Commands
             return command;
         }
 
-        public IEnumerable<ICommandBuilder> Children
+        public IEnumerable<IComplexCommandBuilder> Children
         {
             get { return children; }
         }

@@ -41,9 +41,19 @@ namespace Gnosis.Data.SQLite
             var target = record.GetUri("Target");
             var algorithm = record.GetInt32Lookup<IAlgorithm>("Algorithm", algorithmId => Algorithm.Parse(algorithmId));
             var type = record.GetInt32Lookup<ITagType>("Type", typeId => typeFactory.Create(typeId));
-            var name = record.GetString("Name");
-            var value = type.Domain.GetValue(name);
             var id = record.GetInt64("Id");
+            object value = null;
+
+            if (type.Domain.BaseType == typeof(byte[]))
+            {
+                value = record.GetBytes("Data");
+            }
+            else
+            {
+                var name = record.GetString("Name");
+                value = type.Domain.GetValue(name);
+            }
+
             return new Tag(target, algorithm, type, value, id);
         }
 
@@ -135,6 +145,30 @@ namespace Gnosis.Data.SQLite
             }
         }
 
+        public IEnumerable<ITag> Search(IAlgorithm algorithm, ITagType type)
+        {
+            if (algorithm == null)
+                throw new ArgumentNullException("algorithm");
+            if (type == null)
+                throw new ArgumentNullException("type");
+
+            try
+            {
+                logger.Info("SQLiteTagRepository.Search(IAlgorithm, ITagType)");
+
+                var builder = new SimpleCommandBuilder("select * from Tag where Algorithm = @Algorithm and Type = @Type;");
+                builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
+                builder.AddUnquotedParameter("@Type", type.Id);
+
+                return GetRecords(builder, record => ReadTag(record));
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  Search(IAlgorithm, ITagType)", ex);
+                throw;
+            }
+        }
+
         public IEnumerable<ITag> Search(IAlgorithm algorithm, string name)
         {
             if (algorithm == null)
@@ -166,7 +200,7 @@ namespace Gnosis.Data.SQLite
                 logger.Info("SQLiteTagRepository.Initialize");
 
                 var builder = new SimpleCommandBuilder();
-                builder.AppendLine("create table if not exists Tag (Id integer primary key not null, Target text not null, Algorithm integer not null, Schema integer not null, Domain integer not null, Type integer not null, Name text not null);");
+                builder.AppendLine("create table if not exists Tag (Id integer primary key not null, Target text not null, Algorithm integer not null, Schema integer not null, Domain integer not null, Type integer not null, Name text not null, Data blob);");
                 builder.AppendLine("create index if not exists Tag_Target on Tag (Target asc);");
                 builder.AppendLine("create index if not exists Tag_Target_Algorithm on Tag (Target asc, Algorithm asc);");
                 builder.AppendLine("create index if not exists Tag_Target_Schema on Tag (Target asc, Schema asc);");
@@ -193,26 +227,7 @@ namespace Gnosis.Data.SQLite
             if (tag == null)
                 throw new ArgumentNullException("tag");
 
-            try
-            {
-                logger.Info("SQLiteTagRepository.Save(ITag)");
-
-                var builder = new SimpleCommandBuilder();
-                builder.Append("insert into Tag (Target, Algorithm, Schema, Domain, Type, Name) values (@Target, @Algorithm, @Schema, @Domain, @Type, @Name);");
-                builder.AddQuotedParameter("@Target", tag.Target.ToString());
-                builder.AddUnquotedParameter("@Algorithm", tag.Algorithm.Id);
-                builder.AddUnquotedParameter("@Schema", tag.Type.Schema.Id);
-                builder.AddUnquotedParameter("@Domain", tag.Type.Domain.Id);
-                builder.AddUnquotedParameter("@Type", tag.Type.Id);
-                builder.AddQuotedParameter("@Name", tag.Name);
-
-                ExecuteNonQuery(builder);
-            }
-            catch (Exception ex)
-            {
-                logger.Error("  Save(ITag)", ex);
-                throw;
-            }
+            Save(new List<ITag> { tag });
         }
 
         public void Save(IEnumerable<ITag> tags)
@@ -224,25 +239,31 @@ namespace Gnosis.Data.SQLite
             {
                 logger.Info("SQLiteTagRepository.Save(IEnumerable<ITag>)");
 
-                var builder = new SimpleCommandBuilder();
+                var builders = new List<ISimpleCommandBuilder>();
 
-                var count = 0;
                 foreach (var tag in tags)
                 {
-                    count++;
-                    builder.AppendFormatLine("insert into Tag (Target, Algorithm, Schema, Domain, Type, Name) values (@Target{0}, @Algorithm{0}, @Schema{0}, @Domain{0}, @Type{0}, @Name{0});", count);
-                    builder.AddQuotedParameter(string.Format("@Target{0}", count), tag.Target.ToString());
-                    builder.AddUnquotedParameter(string.Format("@Algorithm{0}", count), tag.Algorithm.Id);
-                    builder.AddUnquotedParameter(string.Format("@Schema{0}", count), tag.Type.Schema.Id);
-                    builder.AddUnquotedParameter(string.Format("@Domain{0}", count), tag.Type.Domain.Id);
-                    builder.AddUnquotedParameter(string.Format("@Type{0}", count), tag.Type.Id);
-                    builder.AddQuotedParameter(string.Format("@Name{0}", count), tag.Name);
+                    var builder = new SimpleCommandBuilder();
+                    builder.AppendLine("insert into Tag (Target, Algorithm, Schema, Domain, Type, Name, Data) values (@Target, @Algorithm, @Schema, @Domain, @Type, @Name, @Data);");
+                    builder.AddQuotedParameter("@Target", tag.Target.ToString());
+                    builder.AddUnquotedParameter("@Algorithm", tag.Algorithm.Id);
+                    builder.AddUnquotedParameter("@Schema", tag.Type.Schema.Id);
+                    builder.AddUnquotedParameter("@Domain", tag.Type.Domain.Id);
+                    builder.AddUnquotedParameter("@Type", tag.Type.Id);
+                    builder.AddQuotedParameter("@Name", tag.Name);
+                    
+                    var data = tag.Type.Domain.BaseType == typeof(byte[]) ?
+                        tag.Value
+                        : new byte[0];
+
+                    builder.AddUnquotedParameter("@Data", data);
+                    builders.Add(builder);
                 }
 
-                if (count == 0)
+                if (builders.Count == 0)
                     return;
 
-                ExecuteTransaction(builder);
+                ExecuteTransaction(builders);
             }
             catch (Exception ex)
             {
@@ -256,21 +277,7 @@ namespace Gnosis.Data.SQLite
             if (tag == null)
                 throw new ArgumentNullException("tag");
 
-            try
-            {
-                logger.Info("SQLiteTagRepository.Delete(ITag)");
-
-                var builder = new SimpleCommandBuilder();
-                builder.Append("delete from Tag where Id = @Id;");
-                builder.AddUnquotedParameter("@Id", tag.Id);
-
-                ExecuteNonQuery(builder);
-            }
-            catch (Exception ex)
-            {
-                logger.Error("  Delete(ITag)", ex);
-                throw;
-            }
+            Delete(new List<ITag> { tag });
         }
 
         public void Delete(IEnumerable<ITag> tags)
@@ -282,20 +289,20 @@ namespace Gnosis.Data.SQLite
             {
                 logger.Info("SQLiteTagRepository.Delete(IEnumerable<ITag>)");
 
-                var builder = new SimpleCommandBuilder();
+                var builders = new List<ISimpleCommandBuilder>();
 
-                var count = 0;
                 foreach (var tag in tags)
                 {
-                    count++;
-                    builder.AppendFormatLine("delete from Tag where Id = @Id{0};", count);
-                    builder.AddUnquotedParameter(string.Format("@Id{0}", count), tag.Id);
+                    var builder = new SimpleCommandBuilder();
+                    builder.AppendLine("delete from Tag where Id = @Id;");
+                    builder.AddUnquotedParameter("@Id", tag.Id);
+                    builders.Add(builder);
                 }
 
-                if (count == 0)
+                if (builders.Count == 0)
                     return;
 
-                ExecuteTransaction(builder);
+                ExecuteTransaction(builders);
             }
             catch (Exception ex)
             {

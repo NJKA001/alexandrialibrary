@@ -31,7 +31,7 @@ namespace Gnosis.Data.Queries
         //private readonly ILogger logger;
         private readonly Func<TOutline> factory;
 
-        private readonly ICommandBuilder builder;
+        private readonly IComplexCommandBuilder builder;
 
         #region IQuery Members
 

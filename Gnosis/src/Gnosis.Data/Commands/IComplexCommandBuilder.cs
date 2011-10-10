@@ -6,16 +6,16 @@ using System.Text;
 
 namespace Gnosis.Data.Commands
 {
-    public interface ICommandBuilder
+    public interface IComplexCommandBuilder
     {
         string Name { get; }
         Type Type { get; }
 
-        void AddChild(ICommandBuilder builder);
+        void AddChild(IComplexCommandBuilder builder);
         void AddParameter(IParameter parameter);
         void AddStatement(IStatement statement);
 
         IDbCommand GetCommand(IDbConnection connection);
-        IEnumerable<ICommandBuilder> Children { get; }
+        IEnumerable<IComplexCommandBuilder> Children { get; }
     }
 }

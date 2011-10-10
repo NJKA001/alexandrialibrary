@@ -35,7 +35,7 @@ namespace Gnosis.Data.Queries
         }
 
         private readonly IFactory factory;
-        private readonly ICommandBuilder builder;
+        private readonly IComplexCommandBuilder builder;
         private readonly string whereClause;
         private readonly string orderByClause;
         private readonly IEnumerable<IParameter> parameters;

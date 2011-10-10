@@ -124,7 +124,7 @@ namespace Gnosis.Core
         public static readonly ITagDomain PositiveInteger = new TagDomain(3, "PositiveInteger", typeof(uint), (uint)0, x => { if (x == null) return false; uint result = 0; return uint.TryParse(x.ToString(), out result); }, x => x.ToString(), x => uint.Parse(x));
         public static readonly ITagDomain Date = new TagDomain(4, "Date", typeof(DateTime), DateTime.MinValue, x => { if (x == null) return false; var result = DateTime.MinValue; return DateTime.TryParse(x.ToString(), out result); }, x => DateToName(x), x => DateTime.Parse(x));
         public static readonly ITagDomain Duration = new TagDomain(5, "Duration", typeof(TimeSpan), TimeSpan.Zero, x => { if (x == null) return false; var result = 0; return int.TryParse(x.ToString(), out result); }, x => DurationToName(x), x => { var ms = int.Parse(x); return new TimeSpan(0, 0, 0, 0, ms); });
-        public static readonly ITagDomain ByteArray = new TagDomain(6, "ByteArray", typeof(byte[]), new byte[0], x => x != null && x is byte[], x => ((byte[])x).ToHexString(), x => x.ToHexByteArray());
+        public static readonly ITagDomain ByteArray = new TagDomain(6, "ByteArray", typeof(byte[]), new byte[0], x => x != null && x is byte[], x => string.Empty, x => x);
 
         public static IEnumerable<ITagDomain> GetAll()
         {
