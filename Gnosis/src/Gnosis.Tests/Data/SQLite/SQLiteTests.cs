@@ -68,33 +68,40 @@ namespace Gnosis.Tests.Data.SQLite
             var imageData = image.ToBytes();
             Assert.IsNotNull(imageData);
 
-            var tag1 = new Tag(uri1, Algorithm.Default, TagType.Default, "Kicks Ass!");
-            var tag2 = new Tag(uri2, Algorithm.Default, Id3v1TagType.Artist, "Tool");
-            var tag3 = new Tag(uri3, Algorithm.Americanized, Id3v1TagType.Artist, "Tool".ToAmericanizedString());
-            var tag4 = new Tag(uri3, Algorithm.Americanized, Id3v1TagType.Title, "Ticks & Leeches 1".ToAmericanizedString());
-            var tag5 = new Tag(uri4, Algorithm.Default, Id3v2TagType.Artist, "Tool");
-            var tag6 = new Tag(uri4, Algorithm.Default, Id3v2TagType.Title, "The Bottom");
-            var tag7 = new Tag(uri4, Algorithm.Default, Id3v2TagType.Album, "Undertow");
-            var tag8 = new Tag(uri4, Algorithm.Default, Id3v2TagType.AttachedPicture, imageData);
+            var tag1 = new Tag(uri1, TagType.Default, "Tool Kicks Ass!");
+            var tag2 = new Tag(uri2, Id3v1TagType.Artist, "Tool");
+            var tag3 = new Tag(uri3, Id3v1TagType.Artist, "Tool");
+            var tag4 = new Tag(uri3, Id3v1TagType.Title, "Ticks & Leeches 1".ToAmericanizedString());
+            var tag5 = new Tag(uri4, Id3v2TagType.Artist, "Tool");
+            var tag6 = new Tag(uri4, Id3v2TagType.Title, "The Bottom");
+            var tag7 = new Tag(uri4, Id3v2TagType.Album, "Undertow");
+            var tag8 = new Tag(uri4, Id3v2TagType.AttachedPicture, imageData);
 
             var tags = new List<ITag> { tag1, tag2, tag3, tag4, tag5, tag6, tag7, tag8 };
             tagRepository.Save(tags);
 
-            var all = tagRepository.All();
-            var americanized = tagRepository.Search(Algorithm.Americanized, TagSchema.Id3v1);
-            var v2 = tagRepository.Search(Algorithm.Default, TagSchema.Id3v2);
-            var apic = tagRepository.Search(Algorithm.Default, Id3v2TagType.AttachedPicture).FirstOrDefault();
+            var tool = tagRepository.GetByAlgorithm(Algorithm.Default, TagDomain.String, "Tool%");
+            Assert.IsNotNull(tool);
+            Assert.AreEqual(4, tool.Count());
 
-            Assert.IsNotNull(all);
-            Assert.AreEqual(tags.Count, all.Count());
-            Assert.IsNotNull(americanized);
-            Assert.AreEqual(tags.Where(x => x.Algorithm == Algorithm.Americanized).Count(), americanized.Count());
-            Assert.IsTrue(americanized.All(x => x.Type.Schema == TagSchema.Id3v1));
-            Assert.IsNotNull(v2);
-            Assert.AreEqual(tags.Where(x => x.Type.Schema == TagSchema.Id3v2).Count(), v2.Count());
-            Assert.IsTrue(v2.All(x => x != null && x.Type.Schema == TagSchema.Id3v2));
-            Assert.IsNotNull(apic);
-            Assert.AreEqual(imageData, apic.Value);
+            var pic = tagRepository.GetByTarget(uri4, Id3v2TagType.AttachedPicture).FirstOrDefault();
+            Assert.IsNotNull(pic);
+            Assert.AreEqual(imageData, pic.Value);
+
+            //var americanized = tagRepository.Search(Algorithm.Americanized, TagSchema.Id3v1);
+            //var v2 = tagRepository.Search(Algorithm.Default, TagSchema.Id3v2);
+            //var apic = tagRepository.Search(Algorithm.Default, Id3v2TagType.AttachedPicture).FirstOrDefault();
+
+            //Assert.IsNotNull(all);
+            //Assert.AreEqual(tags.Where(x => x.Type.Schema == TagSchema.Id3v2).Count(), ;
+            //Assert.IsNotNull(americanized);
+            //Assert.AreEqual(tags.Where(x => x.Algorithm == Algorithm.Americanized).Count(), americanized.Count());
+            //Assert.IsTrue(americanized.All(x => x.Type.Schema == TagSchema.Id3v1));
+            //Assert.IsNotNull(v2);
+            //Assert.AreEqual(tags.Where(x => x.Type.Schema == TagSchema.Id3v2).Count(), v2.Count());
+            //Assert.IsTrue(v2.All(x => x != null && x.Type.Schema == TagSchema.Id3v2));
+            //Assert.IsNotNull(apic);
+            //Assert.AreEqual(imageData, apic.Value);
         }
 
         [Test]

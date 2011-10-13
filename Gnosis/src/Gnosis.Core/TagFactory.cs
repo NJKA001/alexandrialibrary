@@ -10,24 +10,24 @@ namespace Gnosis.Core
     {
         #region ITagFactory Members
 
-        public ITag Create(Uri target, IAlgorithm algorithm, ITagType type, object value)
+        public ITag Create(Uri target, ITagType type, object value)
         {
-            return new Tag(target, algorithm, type, value);
+            return new Tag(target, type, value);
         }
 
-        public ITag Create(Uri target, IAlgorithm algorithm, ITagType type, object value, long id)
+        public ITag Create(Uri target, ITagType type, object value, long id)
         {
-            return new Tag(target, algorithm, type, value, id);
+            return new Tag(target, type, value, id);
         }
 
-        public ITag Create<T>(Uri target, IAlgorithm algorithm, ITagType<T> type, T value)
+        public ITag Create<T>(Uri target, ITagType<T> type, T value)
         {
-            return new Tag(target, algorithm, type, value);
+            return new Tag(target, type, value);
         }
 
-        public ITag Create<T>(Uri target, IAlgorithm algorithm, ITagType<T> type, T value, long id)
+        public ITag Create<T>(Uri target, ITagType<T> type, T value, long id)
         {
-            return new Tag(target, algorithm, type, value, id);
+            return new Tag(target, type, value, id);
         }
 
         #endregion

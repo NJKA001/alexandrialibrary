@@ -39,7 +39,6 @@ namespace Gnosis.Data.SQLite
         private ITag ReadTag(IDataRecord record)
         {
             var target = record.GetUri("Target");
-            var algorithm = record.GetInt32Lookup<IAlgorithm>("Algorithm", algorithmId => Algorithm.Parse(algorithmId));
             var type = record.GetInt32Lookup<ITagType>("Type", typeId => typeFactory.Create(typeId));
             var id = record.GetInt64("Id");
             object value = null;
@@ -54,141 +53,121 @@ namespace Gnosis.Data.SQLite
                 value = type.Domain.GetValue(name);
             }
 
-            return new Tag(target, algorithm, type, value, id);
+            return new Tag(target, type, value, id);
         }
 
         #endregion
 
-        public ITag Lookup(long id)
+        public ITag GetById(long id)
         {
             try
             {
-                logger.Info("SQLiteTagRepository.Lookup");
+                logger.Info("SQLiteTagRepository.GetById");
 
-                var builder = new CommandBuilder("select * from Tag where Id = @Id;");
+                var builder = new CommandBuilder("select Id, Target, Type, Name, Data from Tag where Id = @Id;");
                 builder.AddUnquotedParameter("@Id", id);
 
                 return GetRecord(builder, record => ReadTag(record));
             }
             catch (Exception ex)
             {
-                logger.Error("  Lookup", ex);
+                logger.Error("  GetById", ex);
                 throw;
             }
         }
 
-        public IEnumerable<ITag> All()
+        public IEnumerable<ITag> GetByTarget(Uri target)
         {
+            if (target == null)
+                throw new ArgumentNullException("target");
+
             try
             {
-                logger.Info("SQLiteTagRepository.All()");
+                logger.Info("SQLiteTagRepository.GetByTarget(Uri)");
 
-                var builder = new CommandBuilder("select * from Tag;");
+                var builder = new CommandBuilder("select Id, Target, Type, Name, Data from Tag where Target = @Target;");
+                builder.AddQuotedParameter("@Target", target.ToString());
 
                 return GetRecords(builder, record => ReadTag(record));
             }
             catch (Exception ex)
             {
-                logger.Error("  All", ex);
+                logger.Error("  GetByTarget(Uri)", ex);
                 throw;
             }
         }
 
-        public IEnumerable<ITag> Search(IAlgorithm algorithm, ITagSchema schema)
+        public IEnumerable<ITag> GetByTarget(Uri target, ITagSchema schema)
         {
-            if (algorithm == null)
-                throw new ArgumentNullException("algorithm");
+            if (target == null)
+                throw new ArgumentNullException("target");
             if (schema == null)
                 throw new ArgumentNullException("schema");
 
             try
             {
-                logger.Info("SQLiteTagRepository.Search(IAlgorithm, ITagSchema)");
+                logger.Info("SQLiteTagRepository.GetByTarget(Uri, ITagSchema)");
 
-                var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Schema = @Schema;");
-                builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
+                var builder = new CommandBuilder("select Id, Target, Type, Name, Data from Tag where Target = @Target and Schema = @Schema;");
+                builder.AddQuotedParameter("@Target", target.ToString());
                 builder.AddUnquotedParameter("@Schema", schema.Id);
 
                 return GetRecords(builder, record => ReadTag(record));
             }
             catch (Exception ex)
             {
-                logger.Error("  Search(IAlgorithm, ITagSchema)", ex);
+                logger.Error("  GetByTarget(Uri, ITagSchema)", ex);
                 throw;
             }
         }
 
-        public IEnumerable<ITag> Search(IAlgorithm algorithm, ITagSchema schema, string name)
+        public IEnumerable<ITag> GetByTarget(Uri target, ITagType type)
         {
-            if (algorithm == null)
-                throw new ArgumentNullException("algorithm");
-            if (schema == null)
-                throw new ArgumentNullException("schema");
-            if (name == null)
-                throw new ArgumentNullException("name");
-
-            try
-            {
-                logger.Info("SQLiteTagRepository.Search(IAlgorithm, ITagSchema, string)");
-
-                var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Schema = @Schema and Name like @Name;");
-                builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
-                builder.AddUnquotedParameter("@Schema", schema.Id);
-                builder.AddQuotedParameter("@Name", name);
-
-                return GetRecords(builder, record => ReadTag(record));
-            }
-            catch (Exception ex)
-            {
-                logger.Error("  Search(IAlgorithm, ITagSchema, string)", ex);
-                throw;
-            }
-        }
-
-        public IEnumerable<ITag> Search(IAlgorithm algorithm, ITagType type)
-        {
-            if (algorithm == null)
-                throw new ArgumentNullException("algorithm");
+            if (target == null)
+                throw new ArgumentNullException("target");
             if (type == null)
                 throw new ArgumentNullException("type");
 
             try
             {
-                logger.Info("SQLiteTagRepository.Search(IAlgorithm, ITagType)");
+                logger.Info("SQLiteTagRepository.GetByTarget(Uri, ITagType)");
 
-                var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Type = @Type;");
-                builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
+                var builder = new CommandBuilder("select Id, Target, Type, Name, Data from Tag where Target = @Target and Type = @Type;");
+                builder.AddQuotedParameter("@Target", target.ToString());
                 builder.AddUnquotedParameter("@Type", type.Id);
 
                 return GetRecords(builder, record => ReadTag(record));
             }
             catch (Exception ex)
             {
-                logger.Error("  Search(IAlgorithm, ITagType)", ex);
+                logger.Error("  GetByTarget(Uri, ITagType)", ex);
                 throw;
             }
         }
 
-        public IEnumerable<ITag> Search(IAlgorithm algorithm, string name)
+        public IEnumerable<ITag> GetByAlgorithm(IAlgorithm algorithm, ITagDomain domain, string name)
         {
             if (algorithm == null)
                 throw new ArgumentNullException("algorithm");
+            if (domain == null)
+                throw new ArgumentNullException("domain");
             if (name == null)
                 throw new ArgumentNullException("name");
 
             try
             {
-                logger.Info("SQLiteTagRepository.Search(IAlgorithm, string)");
+                logger.Info("SQLiteTagRepository.GetByAlgorithm(IAlgorithm, ITagDomain, string)");
 
-                var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Name like @Name;");
+                var builder = new CommandBuilder("select Id, Target, Type, Name, Data from Tag where Algorithm = @Algorithm and Domain = @Domain and Name like @Name;");
                 builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
+                builder.AddUnquotedParameter("@Domain", domain.Id);
                 builder.AddQuotedParameter("@Name", name);
 
                 return GetRecords(builder, record => ReadTag(record));
             }
             catch (Exception ex)
             {
-                logger.Error("  Search(IAlgorithm, string)", ex);
+                logger.Error("  GetByAlgorithm(IAlgorithm, ITagDomain, string)", ex);
                 throw;
             }
         }
@@ -202,16 +181,21 @@ namespace Gnosis.Data.SQLite
                 var builder = new CommandBuilder();
                 builder.AppendLine("create table if not exists Tag (Id integer primary key not null, Target text not null, Algorithm integer not null, Schema integer not null, Domain integer not null, Type integer not null, Name text not null, Data blob);");
                 builder.AppendLine("create index if not exists Tag_Target on Tag (Target asc);");
-                builder.AppendLine("create index if not exists Tag_Target_Algorithm on Tag (Target asc, Algorithm asc);");
                 builder.AppendLine("create index if not exists Tag_Target_Schema on Tag (Target asc, Schema asc);");
-                builder.AppendLine("create index if not exists Tag_Algorithm on Tag (Algorithm asc);");
-                builder.AppendLine("create index if not exists Tag_Algorithm_Schema on Tag (Algorithm asc, Schema asc);");
+                builder.AppendLine("create index if not exists Tag_Target_Type on Tag (Target asc, Type asc);");
                 builder.AppendLine("create index if not exists Tag_Algorithm_Domain_Name on Tag (Algorithm asc, Domain asc, Name asc);");
-                builder.AppendLine("create index if not exists Tag_Algorithm_Type on Tag (Algorithm asc, Type asc);");
-                builder.AppendLine("create index if not exists Tag_Algorithm_Schema_Name on Tag (Algorithm asc, Schema asc, Name asc);");
-                builder.AppendLine("create index if not exists Tag_Algorithm_Schema_Domain_Name on Tag (Algorithm asc, Schema asc, Domain asc, Name asc);");
-                builder.AppendLine("create index if not exists Tag_Algorithm_Name on Tag (Algorithm asc, Name asc);");
-                builder.AppendLine("create index if not exists Tag_Name on Tag (Name asc);");
+                
+
+                //builder.AppendLine("create index if not exists Tag_Target_Algorithm on Tag (Target asc, Algorithm asc);");
+                
+                //builder.AppendLine("create index if not exists Tag_Algorithm on Tag (Algorithm asc);");
+                //builder.AppendLine("create index if not exists Tag_Algorithm_Schema on Tag (Algorithm asc, Schema asc);");
+                
+                //builder.AppendLine("create index if not exists Tag_Algorithm_Type on Tag (Algorithm asc, Type asc);");
+                //builder.AppendLine("create index if not exists Tag_Algorithm_Schema_Name on Tag (Algorithm asc, Schema asc, Name asc);");
+                //builder.AppendLine("create index if not exists Tag_Algorithm_Schema_Domain_Name on Tag (Algorithm asc, Schema asc, Domain asc, Name asc);");
+                //builder.AppendLine("create index if not exists Tag_Algorithm_Name on Tag (Algorithm asc, Name asc);");
+                //builder.AppendLine("create index if not exists Tag_Name on Tag (Name asc);");
 
                 ExecuteNonQuery(builder);
             }
@@ -246,7 +230,7 @@ namespace Gnosis.Data.SQLite
                     var builder = new CommandBuilder();
                     builder.AppendLine("insert into Tag (Target, Algorithm, Schema, Domain, Type, Name, Data) values (@Target, @Algorithm, @Schema, @Domain, @Type, @Name, @Data);");
                     builder.AddQuotedParameter("@Target", tag.Target.ToString());
-                    builder.AddUnquotedParameter("@Algorithm", tag.Algorithm.Id);
+                    builder.AddUnquotedParameter("@Algorithm", tag.Type.Algorithm.Id);
                     builder.AddUnquotedParameter("@Schema", tag.Type.Schema.Id);
                     builder.AddUnquotedParameter("@Domain", tag.Type.Domain.Id);
                     builder.AddUnquotedParameter("@Type", tag.Type.Id);

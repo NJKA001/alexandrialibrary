@@ -85,13 +85,12 @@ namespace Gnosis.Data.Firebird
                     while (reader.Read())
                     {
                         var target = reader.GetUri("Target");
-                        var algorithm = reader.GetInt32Lookup<IAlgorithm>("Algorithm", algorithmId => Algorithm.Parse(algorithmId));
                         var type = reader.GetInt32Lookup<ITagType>("Type", typeId => typeFactory.Create(typeId));
                         var name = reader.GetString("Name");
                         var value = type.Domain.GetValue(name);
                         var id = reader.GetInt64("Id");
 
-                        tags.Add(new Tag(target, algorithm, type, value, id));
+                        tags.Add(new Tag(target, type, value, id));
                     }
                 }
             }
@@ -134,7 +133,7 @@ namespace Gnosis.Data.Firebird
                     var parameters = new Dictionary<string, object>();
                     sql.AppendLine("insert into Tag (Target, Algorithm, Schema, Domain, Type, Name) values (@Target, @Algorithm, @Schema, @Domain, @Type, @Name)");
                     parameters.Add("@Target", string.Format("'{0}'", tag.Target.ToString())); //tag.Target.IsFile ? tag.Target.LocalPath : tag.Target.ToString()));
-                    parameters.Add("@Algorithm", tag.Algorithm.Id);
+                    parameters.Add("@Algorithm", tag.Type.Algorithm.Id);
                     parameters.Add("@Schema", tag.Type.Schema.Id);
                     parameters.Add("@Domain", tag.Type.Domain.Id);
                     parameters.Add("@Type", tag.Type.Id);

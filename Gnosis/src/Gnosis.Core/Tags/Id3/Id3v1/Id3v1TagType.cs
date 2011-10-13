@@ -38,7 +38,7 @@ namespace Gnosis.Core.Tags.Id3.Id3v1
         : TagType<T>
     {
         public Id3v1TagType(int id, string name, ITagDomain domain)
-            : base(id, name, TagSchema.Id3v1, domain)
+            : base(id, name, Core.Algorithm.Default, TagSchema.Id3v1, domain)
         {
         }
     }

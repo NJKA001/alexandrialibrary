@@ -58,8 +58,8 @@ namespace Gnosis.Tests.Data.Firebird
         [Test]
         public void TagRepositorySaveTest()
         {
-            var tag1 = new Tag(new Uri("http://arstechnica.com/index.ars"), Algorithm.Default, TagType.Default, "Sample Tag #1");
-            var tag2 = new Tag(new Uri(@"C:\Users\dpoage\Music\Queen\bicycle.mp3"), Algorithm.Default, Id3v1TagType.Artist, "Queen");
+            var tag1 = new Tag(new Uri("http://arstechnica.com/index.ars"), TagType.Default, "Sample Tag #1");
+            var tag2 = new Tag(new Uri(@"C:\Users\dpoage\Music\Queen\bicycle.mp3"), Id3v1TagType.Artist, "Queen");
 
             tagRepository.Save(new List<ITag> { tag1, tag2 });
             var count = tagRepository.Count();

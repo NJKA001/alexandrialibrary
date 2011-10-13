@@ -7,12 +7,11 @@ namespace Gnosis.Core
 {
     public interface ITagRepository
     {
-        ITag Lookup(long id);
-        IEnumerable<ITag> All();
-        IEnumerable<ITag> Search(IAlgorithm algorithm, ITagSchema schema);
-        IEnumerable<ITag> Search(IAlgorithm algorithm, ITagSchema schema, string name);
-        IEnumerable<ITag> Search(IAlgorithm algorithm, ITagType type);
-        IEnumerable<ITag> Search(IAlgorithm algorithm, string name);
+        ITag GetById(long id);
+        IEnumerable<ITag> GetByTarget(Uri target);
+        IEnumerable<ITag> GetByTarget(Uri target, ITagSchema schema);
+        IEnumerable<ITag> GetByTarget(Uri target, ITagType type);
+        IEnumerable<ITag> GetByAlgorithm(IAlgorithm algorithm, ITagDomain domain, string name);
 
         void Initialize();
         void Delete(ITag tag);
