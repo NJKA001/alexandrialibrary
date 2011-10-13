@@ -133,7 +133,7 @@ namespace Gnosis.Data.Firebird
                     var parameters = new Dictionary<string, object>();
                     sql.AppendLine("insert into Tag (Target, Algorithm, Schema, Domain, Type, Name) values (@Target, @Algorithm, @Schema, @Domain, @Type, @Name)");
                     parameters.Add("@Target", string.Format("'{0}'", tag.Target.ToString())); //tag.Target.IsFile ? tag.Target.LocalPath : tag.Target.ToString()));
-                    parameters.Add("@Algorithm", tag.Type.Algorithm.Id);
+                    parameters.Add("@Algorithm", tag.Type.Schema.Algorithm.Id);
                     parameters.Add("@Schema", tag.Type.Schema.Id);
                     parameters.Add("@Domain", tag.Type.Domain.Id);
                     parameters.Add("@Type", tag.Type.Id);

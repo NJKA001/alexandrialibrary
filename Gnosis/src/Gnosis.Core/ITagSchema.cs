@@ -9,5 +9,6 @@ namespace Gnosis.Core
     {
         int Id { get; }
         string Name { get; }
+        IAlgorithm Algorithm { get; }
     }
 }

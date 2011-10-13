@@ -31,7 +31,6 @@ namespace Gnosis.Core
 
         private readonly long id;
         private readonly Uri target;
-        private readonly IAlgorithm algorithm;
         private readonly ITagType type;
         private readonly object value;
         private readonly string name;

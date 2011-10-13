@@ -230,7 +230,7 @@ namespace Gnosis.Data.SQLite
                     var builder = new CommandBuilder();
                     builder.AppendLine("insert into Tag (Target, Algorithm, Schema, Domain, Type, Name, Data) values (@Target, @Algorithm, @Schema, @Domain, @Type, @Name, @Data);");
                     builder.AddQuotedParameter("@Target", tag.Target.ToString());
-                    builder.AddUnquotedParameter("@Algorithm", tag.Type.Algorithm.Id);
+                    builder.AddUnquotedParameter("@Algorithm", tag.Type.Schema.Algorithm.Id);
                     builder.AddUnquotedParameter("@Schema", tag.Type.Schema.Id);
                     builder.AddUnquotedParameter("@Domain", tag.Type.Domain.Id);
                     builder.AddUnquotedParameter("@Type", tag.Type.Id);

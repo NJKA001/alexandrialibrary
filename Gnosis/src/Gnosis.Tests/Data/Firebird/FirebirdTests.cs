@@ -11,7 +11,7 @@ using Gnosis.Data;
 
 using NUnit.Framework;
 
-//#if FIREBIRD
+#if FIREBIRD
 using Gnosis.Data.Firebird;
 
 namespace Gnosis.Tests.Data.Firebird
@@ -73,4 +73,4 @@ namespace Gnosis.Tests.Data.Firebird
     }
 }
 
-//#endif
+#endif

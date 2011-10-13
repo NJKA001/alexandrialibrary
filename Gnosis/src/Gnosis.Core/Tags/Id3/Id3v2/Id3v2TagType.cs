@@ -193,7 +193,7 @@ namespace Gnosis.Core.Tags.Id3.Id3v2
         : TagType<T>
     {
         public Id3v2TagType(int id, string name, string code, ITagDomain domain)
-            : base(id, name, Core.Algorithm.Default, TagSchema.Id3v2, domain)
+            : base(id, name, TagSchema.Id3v2, domain)
         {
             if (code == null)
                 throw new ArgumentNullException("code");
