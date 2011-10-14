@@ -82,7 +82,7 @@ namespace Gnosis.Tests.Data.SQLite
             var tags = new List<ITag> { tag1, tag2, tag3, tag4, tag5, tag6, tag7, tag8, tag9 };
             tagRepository.Save(tags);
 
-            var tool = tagRepository.GetByDomain(TagDomain.String, "Tool%");
+            var tool = tagRepository.GetByAlgorithm(Algorithm.Default, TagDomain.String, "Tool%");
             Assert.IsNotNull(tool);
             Assert.AreEqual(4, tool.Count());
 
@@ -93,6 +93,17 @@ namespace Gnosis.Tests.Data.SQLite
             var dateTag = tagRepository.GetByTarget(uri4, Id3v2TagType.ReleaseTime).FirstOrDefault();
             Assert.IsNotNull(dateTag);
             Assert.AreEqual(releaseDate, dateTag.Value);
+
+            var taskResults = new List<ITag>();
+            var task = tagRepository.GetSearchTask(Algorithm.Default, TagDomain.String, "Tool%");
+            task.ContinueWith(x => taskResults.AddRange(x.Result));
+            task.Start();
+
+            //NOTE: For some reason task.Wait() is not working here
+            //      so we need to sleep the main thread for a bit
+            System.Threading.Thread.Sleep(500);
+
+            Assert.AreEqual(4, taskResults.Count);
 
             //var americanized = tagRepository.Search(Algorithm.Americanized, TagSchema.Id3v1);
             //var v2 = tagRepository.Search(Algorithm.Default, TagSchema.Id3v2);

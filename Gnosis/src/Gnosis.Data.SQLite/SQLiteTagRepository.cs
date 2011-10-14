@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 using Gnosis.Core;
 using Gnosis.Data;
@@ -35,6 +36,35 @@ namespace Gnosis.Data.SQLite
         private readonly ITagTypeFactory typeFactory;
 
         #region Private Methods
+
+        private IEnumerable<ITag> GetTags(ICommandBuilder builder)
+        {
+            IDbConnection connection = null;
+            var tags = new List<ITag>();
+
+            try
+            {
+                connection = GetConnection();
+                
+                var command = builder.ToCommand(connection);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var tag = ReadTag(reader);
+                        tags.Add(tag);
+                    }
+                }
+                
+                return tags;
+            }
+            finally
+            {
+                if (defaultConnection == null && connection != null)
+                    connection.Close();
+            }
+        }
 
         private ITag ReadTag(IDataRecord record)
         {
@@ -72,7 +102,7 @@ namespace Gnosis.Data.SQLite
                 var builder = new CommandBuilder("select * from Tag where Id = @Id;");
                 builder.AddUnquotedParameter("@Id", id);
 
-                return GetRecord(builder, record => ReadTag(record));
+                return GetTags(builder).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -93,7 +123,7 @@ namespace Gnosis.Data.SQLite
                 var builder = new CommandBuilder("select * from Tag where Target = @Target;");
                 builder.AddQuotedParameter("@Target", target.ToString());
 
-                return GetRecords(builder, record => ReadTag(record));
+                return GetTags(builder);
             }
             catch (Exception ex)
             {
@@ -117,7 +147,7 @@ namespace Gnosis.Data.SQLite
                 builder.AddQuotedParameter("@Target", target.ToString());
                 builder.AddUnquotedParameter("@Schema", schema.Id);
 
-                return GetRecords(builder, record => ReadTag(record));
+                return GetTags(builder);
             }
             catch (Exception ex)
             {
@@ -141,7 +171,7 @@ namespace Gnosis.Data.SQLite
                 builder.AddQuotedParameter("@Target", target.ToString());
                 builder.AddUnquotedParameter("@Type", type.Id);
 
-                return GetRecords(builder, record => ReadTag(record));
+                return GetTags(builder);
             }
             catch (Exception ex)
             {
@@ -150,26 +180,49 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<ITag> GetByDomain(ITagDomain domain, string name)
+        public IEnumerable<ITag> GetByAlgorithm(IAlgorithm algorithm, ITagDomain domain, string pattern)
         {
+            if (algorithm == null)
+                throw new ArgumentNullException("algorithm");
             if (domain == null)
                 throw new ArgumentNullException("domain");
-            if (name == null)
-                throw new ArgumentNullException("name");
+            if (pattern == null)
+                throw new ArgumentNullException("pattern");
 
             try
             {
                 logger.Info("SQLiteTagRepository.GetByAlgorithm(IAlgorithm, ITagDomain, string)");
 
-                var builder = new CommandBuilder("select * from Tag where Domain = @Domain and Value1 like @Name;");
+                var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value1 like @Pattern;");
+                builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
                 builder.AddUnquotedParameter("@Domain", domain.Id);
-                builder.AddQuotedParameter("@Name", name);
+                builder.AddQuotedParameter("@Pattern", pattern);
 
-                return GetRecords(builder, record => ReadTag(record));
+                return GetTags(builder);
             }
             catch (Exception ex)
             {
                 logger.Error("  GetByAlgorithm(IAlgorithm, ITagDomain, string)", ex);
+                throw;
+            }
+        }
+
+        public Task<IEnumerable<ITag>> GetSearchTask(IAlgorithm algorithm, ITagDomain domain, string pattern)
+        {
+            if (algorithm == null)
+                throw new ArgumentNullException("algorithm");
+            if (domain == null)
+                throw new ArgumentNullException("domain");
+            if (pattern == null)
+                throw new ArgumentNullException("pattern");
+
+            try
+            {
+                return new Task<IEnumerable<ITag>>(() => GetByAlgorithm(algorithm, domain, pattern));
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  Search", ex);
                 throw;
             }
         }
@@ -185,13 +238,13 @@ namespace Gnosis.Data.SQLite
                 builder.AppendLine("create index if not exists Tag_Target on Tag (Target asc);");
                 builder.AppendLine("create index if not exists Tag_Target_Schema on Tag (Target asc, Schema asc);");
                 builder.AppendLine("create index if not exists Tag_Target_Type on Tag (Target asc, Type asc);");
-                builder.AppendLine("create index if not exists Tag_Domain_Value1 on Tag (Algorithm asc, Domain asc, Value1 asc);");
-                builder.AppendLine("create index if not exists Tag_Domain_Value2 on Tag (Algorithm asc, Domain asc, Value2 asc);");
-                builder.AppendLine("create index if not exists Tag_Domain_Value3 on Tag (Algorithm asc, Domain asc, Value3 asc);");
-                builder.AppendLine("create index if not exists Tag_Domain_Value4 on Tag (Algorithm asc, Domain asc, Value4 asc);");
-                builder.AppendLine("create index if not exists Tag_Domain_Value5 on Tag (Algorithm asc, Domain asc, Value5 asc);");
-                builder.AppendLine("create index if not exists Tag_Domain_Value6 on Tag (Algorithm asc, Domain asc, Value6 asc);");
-                builder.AppendLine("create index if not exists Tag_Domain_Value7 on Tag (Algorithm asc, Domain asc, Value7 asc);");
+                builder.AppendLine("create index if not exists Tag_Algorithm_Domain_Value1 on Tag (Algorithm asc, Domain asc, Value1 asc);");
+                builder.AppendLine("create index if not exists Tag_Algorithm_Domain_Value2 on Tag (Algorithm asc, Domain asc, Value2 asc);");
+                builder.AppendLine("create index if not exists Tag_Algorithm_Domain_Value3 on Tag (Algorithm asc, Domain asc, Value3 asc);");
+                builder.AppendLine("create index if not exists Tag_Algorithm_Domain_Value4 on Tag (Algorithm asc, Domain asc, Value4 asc);");
+                builder.AppendLine("create index if not exists Tag_Algorithm_Domain_Value5 on Tag (Algorithm asc, Domain asc, Value5 asc);");
+                builder.AppendLine("create index if not exists Tag_Algorithm_Domain_Value6 on Tag (Algorithm asc, Domain asc, Value6 asc);");
+                builder.AppendLine("create index if not exists Tag_Algorithm_Domain_Value7 on Tag (Algorithm asc, Domain asc, Value7 asc);");
 
                 //builder.AppendLine("create index if not exists Tag_Target_Algorithm on Tag (Target asc, Algorithm asc);");
                 

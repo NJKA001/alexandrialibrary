@@ -29,7 +29,7 @@ namespace Gnosis.Data.SQLite
         }
 
         protected readonly ILogger logger;
-        private readonly IDbConnection defaultConnection;
+        protected readonly IDbConnection defaultConnection;
         private readonly string connectionString;
         private readonly IConnectionFactory connectionFactory = new SQLiteConnectionFactory();
 
