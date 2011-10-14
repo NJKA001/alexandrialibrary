@@ -16,5 +16,13 @@ namespace Gnosis.Core
         {
             return Time.Rfc822DateTime.ToString(self.ToUniversalTime());
         }
+
+        public static TagTuple ToTagTuple(this DateTime self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            return new TagTuple(self.Year, self.Month, self.Day);
+        }
     }
 }

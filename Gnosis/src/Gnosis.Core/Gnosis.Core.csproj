@@ -180,6 +180,7 @@
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\FileInfoExtensions.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
+    <Compile Include="Extensions\StringArrayExtensions.cs" />
     <Compile Include="ILinkFactory.cs" />
     <Compile Include="ILinkType.cs" />
     <Compile Include="ILinkTypeFactory.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Links\Html\HtmlLinkType.cs" />
     <Compile Include="LinkType.cs" />
     <Compile Include="LinkTypeFactory.cs" />
+    <Compile Include="TagTuple.cs" />
     <Compile Include="TagDomain.cs" />
     <Compile Include="TagFactory.cs" />
     <Compile Include="TagSchema.cs" />

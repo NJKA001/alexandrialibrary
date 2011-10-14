@@ -32,9 +32,8 @@ namespace Gnosis.Data
             if (name == null)
                 throw new ArgumentNullException("name");
             if (value == null)
-                throw new ArgumentNullException("value");
-
-            parameters.Add(name, string.Format("'{0}'", value));
+                parameters.Add(name, "null");
+            else parameters.Add(name, string.Format("'{0}'", value));
         }
 
         public void AddUnquotedParameter(string name, object value)

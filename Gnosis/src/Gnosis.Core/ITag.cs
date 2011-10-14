@@ -11,6 +11,6 @@ namespace Gnosis.Core
         Uri Target { get; }
         ITagType Type { get; }
         object Value { get; }
-        string Name { get; }
+        TagTuple Tuple { get; }
     }
 }

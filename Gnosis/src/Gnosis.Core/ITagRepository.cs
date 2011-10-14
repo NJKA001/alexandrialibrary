@@ -11,7 +11,7 @@ namespace Gnosis.Core
         IEnumerable<ITag> GetByTarget(Uri target);
         IEnumerable<ITag> GetByTarget(Uri target, ITagSchema schema);
         IEnumerable<ITag> GetByTarget(Uri target, ITagType type);
-        IEnumerable<ITag> GetByAlgorithm(IAlgorithm algorithm, ITagDomain domain, string name);
+        IEnumerable<ITag> GetByDomain(ITagDomain domain, string name);
 
         void Initialize();
         void Delete(ITag tag);

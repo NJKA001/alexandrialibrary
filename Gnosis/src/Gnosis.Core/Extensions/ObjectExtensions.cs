@@ -18,7 +18,7 @@ namespace Gnosis.Core
             return byte.Parse(self.ToString());
         }
 
-        public static byte[] ToBytes(this object self)
+        public static byte[] ToByteArray(this object self)
         {
             return (byte[])self;
         }
@@ -51,6 +51,9 @@ namespace Gnosis.Core
         {
             if (self == null)
                 throw new ArgumentNullException("self");
+
+            if (self is DateTime)
+                return (DateTime)self;
 
             var date = DateTime.MinValue;
             var s = self.ToString();
@@ -87,11 +90,17 @@ namespace Gnosis.Core
 
         public static int ToInt32(this object self)
         {
+            if (self is int)
+                return (int)self;
+
             return int.Parse(self.ToString());
         }
 
         public static long ToInt64(this object self)
         {
+            if (self is long)
+                return (long)self;
+
             return long.Parse(self.ToString());
         }
 
@@ -150,16 +159,25 @@ namespace Gnosis.Core
 
         public static uint ToUInt32(this object self)
         {
+            if (self is uint)
+                return (uint)self;
+
             return uint.Parse(self.ToString());
         }
 
         public static ulong ToUInt64(this object self)
         {
+            if (self is ulong)
+                return (ulong)self;
+
             return ulong.Parse(self.ToString());
         }
 
         public static Uri ToUri(this object self)
         {
+            if (self is Uri)
+                return (Uri)self;
+
             try
             {
                 return new Uri(self.ToString(), UriKind.RelativeOrAbsolute);
@@ -168,6 +186,49 @@ namespace Gnosis.Core
             {
                 return null;
             }
+        }
+
+        public static string[] ToStringArray(this object self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            if (self is string[])
+                return (string[])self;
+            else if (self is string)
+                return new string[] { (string)self };
+
+            return new string[0];
+        }
+
+        public static bool IsByteArray(this object self)
+        {
+            return (self != null && self is byte[]);
+        }
+
+        public static bool IsDateTime(this object self)
+        {
+            return (self != null && self is DateTime);
+        }
+
+        public static bool IsTimeSpan(this object self)
+        {
+            return (self != null && self is TimeSpan);
+        }
+
+        public static bool IsString(this object self)
+        {
+            return (self != null && self is string);
+        }
+
+        public static bool IsStringArray(this object self)
+        {
+            return (self != null && self is string[]);
+        }
+
+        public static bool IsUInt32(this object self)
+        {
+            return (self != null && self is uint);
         }
     }
 }

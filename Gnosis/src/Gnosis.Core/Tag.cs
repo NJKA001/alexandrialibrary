@@ -25,7 +25,7 @@ namespace Gnosis.Core
             this.target = target;
             this.type = type;
             this.value = value;
-            this.name = type.Domain.GetName(value);
+            this.tuple = type.Domain.GetTuple(value);
             this.id = id;
         }
 
@@ -33,8 +33,8 @@ namespace Gnosis.Core
         private readonly Uri target;
         private readonly ITagType type;
         private readonly object value;
-        private readonly string name;
-        
+        private readonly TagTuple tuple;
+
         #region ITag Members
 
         public long Id
@@ -57,16 +57,16 @@ namespace Gnosis.Core
             get { return value; }
         }
 
-        public string Name
+        public TagTuple Tuple
         {
-            get { return name; }
+            get { return tuple; }
         }
 
         #endregion
 
         public override string ToString()
         {
-            return string.Format("tag name='{0}' target='{1}'", name, target);
+            return string.Format("tag value='{0}' target='{1}'", value, target);
         }
     }
 }

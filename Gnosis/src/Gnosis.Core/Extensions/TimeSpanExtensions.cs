@@ -13,5 +13,10 @@ namespace Gnosis.Core
                 return string.Format("{0}:{1:00}:{2:00}", self.Hours, self.Minutes, self.Seconds);
             else return string.Format("{0}:{1:00}", self.Minutes, self.Seconds);
         }
+
+        public static TagTuple ToTagTuple(this TimeSpan self)
+        {
+            return new TagTuple(self.Days, self.Hours, self.Minutes, self.Seconds, self.Milliseconds);
+        }
     }
 }

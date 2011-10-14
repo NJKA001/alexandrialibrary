@@ -8,7 +8,7 @@ namespace Gnosis.Core
     public class TagDomain
         : ITagDomain
     {
-        private TagDomain(int id, string name, Type baseType, object defaultValue, Func<object, bool> isValid, Func<object, string> getName, Func<string, object> getValue)
+        private TagDomain(int id, string name, Type baseType, object defaultValue, Func<object, bool> isValid, Func<object, TagTuple> getTuple, Func<TagTuple, object> getValue)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -18,8 +18,8 @@ namespace Gnosis.Core
                 throw new ArgumentNullException("defaultValue");
             if (isValid == null)
                 throw new ArgumentNullException("isValid");
-            if (getName == null)
-                throw new ArgumentNullException("getName");
+            if (getTuple == null)
+                throw new ArgumentNullException("getTuple");
             if (getValue == null)
                 throw new ArgumentNullException("getValue");
 
@@ -28,7 +28,7 @@ namespace Gnosis.Core
             this.baseType = baseType;
             this.defaultValue = defaultValue;
             this.isValid = isValid;
-            this.getName = getName;
+            this.getTuple = getTuple;
             this.getValue = getValue;
         }
 
@@ -37,8 +37,8 @@ namespace Gnosis.Core
         private readonly Type baseType;
         private readonly object defaultValue;
         private readonly Func<object, bool> isValid;
-        private readonly Func<object, string> getName;
-        private readonly Func<string, object> getValue;
+        private readonly Func<object, TagTuple> getTuple;
+        private readonly Func<TagTuple, object> getValue;
 
         public int Id
         {
@@ -65,16 +65,14 @@ namespace Gnosis.Core
             return isValid(value);
         }
 
-        public string GetName(object value)
+        public TagTuple GetTuple(object value)
         {
-            return IsValid(value) ?
-                getName(value)
-                : getName(defaultValue);
+            return getTuple(value);
         }
 
-        public object GetValue(string name)
+        public object GetValue(TagTuple tuple)
         {
-            return getValue(name);
+            return getValue(tuple);
         }
 
         static TagDomain()
@@ -92,15 +90,6 @@ namespace Gnosis.Core
         private static readonly IList<ITagDomain> all = new List<ITagDomain>();
         private static readonly IDictionary<int, ITagDomain> byId = new Dictionary<int, ITagDomain>();
 
-        private static string StringArrayToName(object value)
-        {
-            if (!(value is string[]))
-                return string.Empty;
-
-            var a = (string[])value;
-            return string.Join("; ", a);
-        }
-
         private static string DateToName(object value)
         {
             if (!(value is DateTime))
@@ -110,21 +99,12 @@ namespace Gnosis.Core
             return d.ToString("s");
         }
 
-        private static string DurationToName(object value)
-        {
-            if (!(value is TimeSpan))
-                return string.Empty;
-
-            var t = (TimeSpan)value;
-            return t.TotalMilliseconds.ToString();
-        }
-
-        public static readonly ITagDomain String = new TagDomain(1, "String", typeof(string), string.Empty, x => x != null, x => x.ToString(), x => x);
-        public static readonly ITagDomain StringArray = new TagDomain(2, "StringArray", typeof(string[]), new string[0], x => x != null, x => StringArrayToName(x), x => x.ToString().Split(new string[] { "; " }, StringSplitOptions.RemoveEmptyEntries));
-        public static readonly ITagDomain PositiveInteger = new TagDomain(3, "PositiveInteger", typeof(uint), (uint)0, x => { if (x == null) return false; uint result = 0; return uint.TryParse(x.ToString(), out result); }, x => x.ToString(), x => uint.Parse(x));
-        public static readonly ITagDomain Date = new TagDomain(4, "Date", typeof(DateTime), DateTime.MinValue, x => { if (x == null) return false; var result = DateTime.MinValue; return DateTime.TryParse(x.ToString(), out result); }, x => DateToName(x), x => DateTime.Parse(x));
-        public static readonly ITagDomain Duration = new TagDomain(5, "Duration", typeof(TimeSpan), TimeSpan.Zero, x => { if (x == null) return false; var result = 0; return int.TryParse(x.ToString(), out result); }, x => DurationToName(x), x => { var ms = int.Parse(x); return new TimeSpan(0, 0, 0, 0, ms); });
-        public static readonly ITagDomain ByteArray = new TagDomain(6, "ByteArray", typeof(byte[]), new byte[0], x => x != null && x is byte[], x => string.Empty, x => x);
+        public static readonly ITagDomain String = new TagDomain(1, "String", typeof(string), string.Empty, value => value.IsString(), value => new TagTuple(value), tuple => tuple.ToString());
+        public static readonly ITagDomain StringArray = new TagDomain(2, "StringArray", typeof(string[]), new string[0], value => value.IsStringArray(), value => value.ToStringArray().ToTagTuple(), tuple => tuple.ToStringArray());
+        public static readonly ITagDomain PositiveInteger = new TagDomain(3, "PositiveInteger", typeof(uint), (uint)0, value => value.IsUInt32(), value => new TagTuple(value), tuple => tuple.ToUInt32());
+        public static readonly ITagDomain Date = new TagDomain(4, "Date", typeof(DateTime), DateTime.MinValue, value => value.IsDateTime(), value => value.ToDateTime().ToTagTuple(), tuple => tuple.ToDateTime());
+        public static readonly ITagDomain Duration = new TagDomain(5, "Duration", typeof(TimeSpan), TimeSpan.Zero, value => value.IsTimeSpan(), value => new TagTuple(value), tuple => tuple.ToTimeSpan());
+        public static readonly ITagDomain ByteArray = new TagDomain(6, "ByteArray", typeof(byte[]), new byte[0], value => value.IsByteArray(), value => new TagTuple(value), tuple => tuple.ToByteArray());
 
         public static IEnumerable<ITagDomain> GetAll()
         {

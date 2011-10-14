@@ -80,7 +80,7 @@ namespace Gnosis.Tests.Data.SQLite
             var tags = new List<ITag> { tag1, tag2, tag3, tag4, tag5, tag6, tag7, tag8 };
             tagRepository.Save(tags);
 
-            var tool = tagRepository.GetByAlgorithm(Algorithm.Default, TagDomain.String, "Tool%");
+            var tool = tagRepository.GetByDomain(TagDomain.String, "Tool%");
             Assert.IsNotNull(tool);
             Assert.AreEqual(4, tool.Count());
 
