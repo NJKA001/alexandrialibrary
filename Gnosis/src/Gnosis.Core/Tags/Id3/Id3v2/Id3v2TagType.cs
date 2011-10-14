@@ -131,7 +131,7 @@ namespace Gnosis.Core.Tags.Id3.Id3v2
         public static ITagType PlaylistDelay = new Id3v2TagType<string>(47, "Playlist Delay", "TDLY", TagDomain.String);
         public static ITagType OriginalReleaseTime = new Id3v2TagType<string>(48, "Original Release time", "TDOR", TagDomain.String);
         public static ITagType RecordingTime = new Id3v2TagType<string>(49, "Recording Time", "TDRC", TagDomain.String);
-        public static ITagType ReleaseTime = new Id3v2TagType<string>(50, "Release Time", "TDRL", TagDomain.String);
+        public static ITagType ReleaseTime = new Id3v2TagType<string>(50, "Release Time", "TDRL", TagDomain.Date);
         public static ITagType TaggingTime = new Id3v2TagType<string>(51, "Tagging Time", "TDTG", TagDomain.String);
         public static ITagType EncodedBy = new Id3v2TagType<string>(52, "Encoded By", "TENC", TagDomain.String);
         public static ITagType LyricistOrWriter = new Id3v2TagType<string>(53, "Lyricist or Writer", "TEXT", TagDomain.String);

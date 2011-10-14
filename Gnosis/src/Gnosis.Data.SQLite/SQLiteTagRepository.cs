@@ -242,8 +242,12 @@ namespace Gnosis.Data.SQLite
                     builder.AddUnquotedParameter("@Domain", tag.Type.Domain.Id);
                     builder.AddUnquotedParameter("@Type", tag.Type.Id);
 
-                    if (tag.Type.Domain.BaseType == typeof(byte) || tag.Type.Domain.BaseType == typeof(uint))
+                    //System.Diagnostics.Debug.WriteLine("Saving tag. Domain name=" + tag.Type.Domain.Name + " baseType=" + tag.Type.Domain.BaseType.Name);
+                    if (tag.Type.Domain.BaseType == typeof(byte[]))
+                    {
+                        //System.Diagnostics.Debug.WriteLine("Saving byte[]. type=" + tag.Tuple.Item1.GetType().Name);
                         builder.AddUnquotedParameter("@Value1", tag.Tuple.Item1);
+                    }
                     else
                         builder.AddQuotedParameter("@Value1", tag.Tuple.Item1);
 

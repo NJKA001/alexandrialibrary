@@ -67,6 +67,7 @@ namespace Gnosis.Tests.Data.SQLite
             Assert.IsNotNull(image);
             var imageData = image.ToBytes();
             Assert.IsNotNull(imageData);
+            var releaseDate = new DateTime(2011, 2, 19);
 
             var tag1 = new Tag(uri1, TagType.Default, "Tool Kicks Ass!");
             var tag2 = new Tag(uri2, Id3v1TagType.Artist, "Tool");
@@ -76,8 +77,9 @@ namespace Gnosis.Tests.Data.SQLite
             var tag6 = new Tag(uri4, Id3v2TagType.Title, "The Bottom");
             var tag7 = new Tag(uri4, Id3v2TagType.Album, "Undertow");
             var tag8 = new Tag(uri4, Id3v2TagType.AttachedPicture, imageData);
+            var tag9 = new Tag(uri4, Id3v2TagType.ReleaseTime, releaseDate);
 
-            var tags = new List<ITag> { tag1, tag2, tag3, tag4, tag5, tag6, tag7, tag8 };
+            var tags = new List<ITag> { tag1, tag2, tag3, tag4, tag5, tag6, tag7, tag8, tag9 };
             tagRepository.Save(tags);
 
             var tool = tagRepository.GetByDomain(TagDomain.String, "Tool%");
@@ -87,6 +89,10 @@ namespace Gnosis.Tests.Data.SQLite
             var pic = tagRepository.GetByTarget(uri4, Id3v2TagType.AttachedPicture).FirstOrDefault();
             Assert.IsNotNull(pic);
             Assert.AreEqual(imageData, pic.Value);
+
+            var dateTag = tagRepository.GetByTarget(uri4, Id3v2TagType.ReleaseTime).FirstOrDefault();
+            Assert.IsNotNull(dateTag);
+            Assert.AreEqual(releaseDate, dateTag.Value);
 
             //var americanized = tagRepository.Search(Algorithm.Americanized, TagSchema.Id3v1);
             //var v2 = tagRepository.Search(Algorithm.Default, TagSchema.Id3v2);
