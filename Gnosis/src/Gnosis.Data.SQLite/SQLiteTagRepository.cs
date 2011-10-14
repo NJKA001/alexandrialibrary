@@ -242,21 +242,28 @@ namespace Gnosis.Data.SQLite
                     builder.AddUnquotedParameter("@Domain", tag.Type.Domain.Id);
                     builder.AddUnquotedParameter("@Type", tag.Type.Id);
 
-                    //System.Diagnostics.Debug.WriteLine("Saving tag. Domain name=" + tag.Type.Domain.Name + " baseType=" + tag.Type.Domain.BaseType.Name);
-                    if (tag.Type.Domain.BaseType == typeof(byte[]))
+
+                    if (tag.Type.Domain.BaseType == typeof(string) || tag.Type.Domain.BaseType == typeof(string[]))
                     {
-                        //System.Diagnostics.Debug.WriteLine("Saving byte[]. type=" + tag.Tuple.Item1.GetType().Name);
-                        builder.AddUnquotedParameter("@Value1", tag.Tuple.Item1);
+                        builder.AddQuotedParameter("@Value1", tag.Tuple.Item1);
+                        builder.AddQuotedParameter("@Value2", tag.Tuple.Item2);
+                        builder.AddQuotedParameter("@Value3", tag.Tuple.Item3);
+                        builder.AddQuotedParameter("@Value4", tag.Tuple.Item4);
+                        builder.AddQuotedParameter("@Value5", tag.Tuple.Item5);
+                        builder.AddQuotedParameter("@Value6", tag.Tuple.Item6);
+                        builder.AddQuotedParameter("@Value7", tag.Tuple.Item7);
                     }
                     else
-                        builder.AddQuotedParameter("@Value1", tag.Tuple.Item1);
-
-                    builder.AddQuotedParameter("@Value2", tag.Tuple.Item2);
-                    builder.AddQuotedParameter("@Value3", tag.Tuple.Item3);
-                    builder.AddQuotedParameter("@Value4", tag.Tuple.Item4);
-                    builder.AddQuotedParameter("@Value5", tag.Tuple.Item5);
-                    builder.AddQuotedParameter("@Value6", tag.Tuple.Item6);
-                    builder.AddQuotedParameter("@Value7", tag.Tuple.Item7);
+                    {
+                        builder.AddUnquotedParameter("@Value1", tag.Tuple.Item1);
+                        builder.AddUnquotedParameter("@Value2", tag.Tuple.Item2);
+                        builder.AddUnquotedParameter("@Value3", tag.Tuple.Item3);
+                        builder.AddUnquotedParameter("@Value4", tag.Tuple.Item4);
+                        builder.AddUnquotedParameter("@Value5", tag.Tuple.Item5);
+                        builder.AddUnquotedParameter("@Value6", tag.Tuple.Item6);
+                        builder.AddUnquotedParameter("@Value7", tag.Tuple.Item7);
+                    }
+                    
                     builders.Add(builder);
                 }
 
