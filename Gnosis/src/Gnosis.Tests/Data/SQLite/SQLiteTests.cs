@@ -138,13 +138,15 @@ namespace Gnosis.Tests.Data.SQLite
 
             var taskResults = new List<ITag>();
             var completed = false;
+            //System.Diagnostics.Debug.WriteLine("Before=" + DateTime.Now);
             var cancel = tagRepository.SearchAsync(Algorithm.Default, "Tool%", t => taskResults.AddRange(t), () => completed = true);
             
             while(!completed)
             {
                 System.Diagnostics.Debug.WriteLine("Completed=" + completed + " Count=" + taskResults.Count);
-                System.Threading.Thread.Sleep(200);
+                System.Threading.Thread.Sleep(100);
             }
+            //System.Diagnostics.Debug.WriteLine("After=" + DateTime.Now);
 
             Assert.AreEqual(4, taskResults.Count);
 
