@@ -79,10 +79,25 @@ namespace Gnosis.Core
 
         public string[] ToStringArray()
         {
-            return ToArray()
+            var array = ToArray()
                 .Where(item => item != null)
                 .Select(item => item.ToString())
                 .ToArray();
+
+            if (array[6] != null && array[6].Contains("; "))
+            {
+                var extras = array[6].Split(new string[] { "; " }, StringSplitOptions.RemoveEmptyEntries);
+                if (extras == null || extras.Length == 0)
+                    return array;
+
+                var length = extras.Length + 6;
+                var all = new string[length];
+                Array.Copy(array, all, 6);
+                Array.Copy(extras, 0, all, 6, extras.Length);
+                return all;
+            }
+            else
+                return array;
         }
 
         public uint ToUInt32()

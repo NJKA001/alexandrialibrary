@@ -29,8 +29,12 @@ namespace Gnosis.Core
                 case 6:
                     return new TagTuple(self[0], self[1], self[2], self[3], self[4], self[5]);
                 case 7:
-                default:
                     return new TagTuple(self[0], self[1], self[2], self[3], self[4], self[5], self[6]);
+                default:
+                    var length = self.Length - 6;
+                    var remaining = new string[length];
+                    Array.Copy(self, 6, remaining, 0, length);
+                    return new TagTuple(self[0], self[1], self[2], self[3], self[4], self[5], string.Join("; ", remaining));
             }
         }
     }

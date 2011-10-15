@@ -83,28 +83,13 @@ namespace Gnosis.Data.SQLite
                     values[i] = record.GetBytes(columnName);
                 else if (type.Domain.BaseTypes[i] == typeof(uint))
                     values[i] = record.GetUInt32(columnName);
+                else if (type.Domain.BaseTypes[i] == typeof(string))
+                    values[i] = record.GetString(columnName);
                 else
                     values[i] = record[columnName];
 
             }
 
-            /*
-            object value1 = null;
-
-            if (type.Domain.BaseTypes[0] == typeof(byte[]))
-                value1 = record.GetBytes("Value1");
-            else if (type.Domain.BaseTypes[0] == typeof(uint))
-                value1 = record.GetUInt32("Value1");
-            else
-                value1 = record["Value1"];
-            
-            var value2 = record["Value2"];
-            var value3 = record["Value3"];
-            var value4 = record["Value4"];
-            var value5 = record["Value5"];
-            var value6 = record["Value6"];
-            var value7 = record["Value7"];
-             */
             var value = type.Domain.GetValue(TagTuple.FromArray(values));
 
             return new Tag(target, type, value, id);
@@ -115,7 +100,7 @@ namespace Gnosis.Data.SQLite
             var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value1 like @Pattern;");
             builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
             builder.AddUnquotedParameter("@Domain", TagDomain.String.Id);
-            builder.AddQuotedParameter("@Pattern", pattern);
+            builder.AddUnquotedParameter("@Pattern", pattern);
             return GetTags(builder);
         }
 
@@ -124,7 +109,7 @@ namespace Gnosis.Data.SQLite
             var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value1 like @Pattern;");
             builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
             builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
-            builder.AddQuotedParameter("@Pattern", pattern);
+            builder.AddUnquotedParameter("@Pattern", pattern);
             return GetTags(builder);
         }
 
@@ -133,7 +118,7 @@ namespace Gnosis.Data.SQLite
             var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value2 like @Pattern;");
             builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
             builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
-            builder.AddQuotedParameter("@Pattern", pattern);
+            builder.AddUnquotedParameter("@Pattern", pattern);
             return GetTags(builder);
         }
 
@@ -142,7 +127,7 @@ namespace Gnosis.Data.SQLite
             var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value3 like @Pattern;");
             builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
             builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
-            builder.AddQuotedParameter("@Pattern", pattern);
+            builder.AddUnquotedParameter("@Pattern", pattern);
             return GetTags(builder);
         }
 
@@ -151,7 +136,7 @@ namespace Gnosis.Data.SQLite
             var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value4 like @Pattern;");
             builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
             builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
-            builder.AddQuotedParameter("@Pattern", pattern);
+            builder.AddUnquotedParameter("@Pattern", pattern);
             return GetTags(builder);
         }
 
@@ -160,7 +145,7 @@ namespace Gnosis.Data.SQLite
             var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value5 like @Pattern;");
             builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
             builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
-            builder.AddQuotedParameter("@Pattern", pattern);
+            builder.AddUnquotedParameter("@Pattern", pattern);
             return GetTags(builder);
         }
 
@@ -169,7 +154,7 @@ namespace Gnosis.Data.SQLite
             var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value6 like @Pattern;");
             builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
             builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
-            builder.AddQuotedParameter("@Pattern", pattern);
+            builder.AddUnquotedParameter("@Pattern", pattern);
             return GetTags(builder);
         }
 
@@ -178,7 +163,7 @@ namespace Gnosis.Data.SQLite
             var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value7 like @Pattern;");
             builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
             builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
-            builder.AddQuotedParameter("@Pattern", pattern);
+            builder.AddUnquotedParameter("@Pattern", pattern);
             return GetTags(builder);
         }
 
@@ -287,7 +272,7 @@ namespace Gnosis.Data.SQLite
                 var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value1 like @Pattern;");
                 builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
                 builder.AddUnquotedParameter("@Domain", domain.Id);
-                builder.AddQuotedParameter("@Pattern", pattern);
+                builder.AddUnquotedParameter("@Pattern", pattern);
 
                 return GetTags(builder);
             }
@@ -397,7 +382,7 @@ namespace Gnosis.Data.SQLite
                 logger.Info("SQLiteTagRepository.Initialize");
 
                 var builder = new CommandBuilder();
-                builder.AppendLine("create table if not exists Tag (Id integer primary key not null, Target text not null, Algorithm integer not null, Schema integer not null, Domain integer not null, Type integer not null, Value1 numeric not null, Value2 numeric, Value3 numeric, Value4 numeric, Value5 numeric, Value6 numeric, Value7 numeric);");
+                builder.AppendLine("create table if not exists Tag (Id integer primary key not null, Target text not null, Algorithm integer not null, Schema integer not null, Domain integer not null, Type integer not null, Value1 text not null, Value2 text, Value3 text, Value4 text, Value5 text, Value6 text, Value7 text);");
                 builder.AppendLine("create index if not exists Tag_Target on Tag (Target asc);");
                 builder.AppendLine("create index if not exists Tag_Target_Schema on Tag (Target asc, Schema asc);");
                 builder.AppendLine("create index if not exists Tag_Target_Type on Tag (Target asc, Type asc);");
@@ -463,10 +448,14 @@ namespace Gnosis.Data.SQLite
                     for(var i=0; i < length; i++)
                     {
                         var paramName = string.Format("@Value{0}", i + 1);
-                        if (tag.Type.Domain.BaseTypes[i] == typeof(string))
-                            builder.AddQuotedParameter(paramName, values[i]);
-                        else
-                            builder.AddUnquotedParameter(paramName, values[i]);
+                        builder.AddUnquotedParameter(paramName, values[i]);
+                        //if (tag.Type.Domain.BaseTypes[i] == typeof(string))
+                        //{
+                        //    var value = values[i].ToString();
+                        //    builder.AddQuotedParameter(paramName, value);
+                        //}
+                        //else
+                            
                     }
 
                     builders.Add(builder);

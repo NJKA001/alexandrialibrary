@@ -104,29 +104,33 @@ namespace Gnosis.Tests.Data.SQLite
         {
             var uri3 = new Uri("http://blah.com/music/Ticks-And-Leeches");
             var uri4 = new Uri("http://meh.org/index/Tool/The+Bottom.mp3");
+            var uri5 = new Uri("http://meh.org/index/Blah/abcdefghi.mp3");
 
             var image = System.Drawing.Image.FromFile(@".\Files\Undertow.jpg");
             Assert.IsNotNull(image);
             var imageData = image.ToBytes();
             Assert.IsNotNull(imageData);
             var releaseDate = new DateTime(2011, 2, 19);
+            var artists = new string[] { "Aa", "Bb", "Cc", "Dd", "Ee", "Ff", "Gg", "Hi", "Ii" };
+
 
             var tag1 = new Tag(uri1, TagType.DefaultString, "Tool Kicks Ass!");
             var tag2 = new Tag(uri2, Id3v1TagType.Artist, "Tool");
             var tag3 = new Tag(uri3, Id3v1TagType.Artist, "Tool");
             var tag4 = new Tag(uri3, Id3v1TagType.Title, "Ticks & Leeches 1".ToAmericanizedString());
-            var tag5 = new Tag(uri4, Id3v2TagType.Artist, "Tool");
+            var tag5 = new Tag(uri4, Id3v2TagType.Artist, new string[] { "Tool" });
             var tag6 = new Tag(uri4, Id3v2TagType.Title, "The Bottom");
             var tag7 = new Tag(uri4, Id3v2TagType.Album, "Undertow");
             var tag8 = new Tag(uri4, Id3v2TagType.AttachedPicture, imageData);
             var tag9 = new Tag(uri4, Id3v2TagType.ReleaseTime, releaseDate);
+            var tag10 = new Tag(uri5, Id3v2TagType.Artist, artists);
 
-            var tags = new List<ITag> { tag1, tag2, tag3, tag4, tag5, tag6, tag7, tag8, tag9 };
+            var tags = new List<ITag> { tag1, tag2, tag3, tag4, tag5, tag6, tag7, tag8, tag9, tag10 };
             tagRepository.Save(tags);
 
             var tool = tagRepository.GetByAlgorithm(Algorithm.Default, TagDomain.String, "Tool%");
             Assert.IsNotNull(tool);
-            Assert.AreEqual(4, tool.Count());
+            Assert.AreEqual(3, tool.Count());
 
             var pic = tagRepository.GetByTarget(uri4, Id3v2TagType.AttachedPicture).FirstOrDefault();
             Assert.IsNotNull(pic);
@@ -136,9 +140,12 @@ namespace Gnosis.Tests.Data.SQLite
             Assert.IsNotNull(dateTag);
             Assert.AreEqual(releaseDate, dateTag.Value);
 
+            var arrayTag = tagRepository.GetByTarget(uri5, Id3v2TagType.Artist).FirstOrDefault();
+            Assert.IsNotNull(arrayTag);
+            Assert.AreEqual(artists, arrayTag.Value);
+
             var taskResults = new List<ITag>();
             var completed = false;
-            //System.Diagnostics.Debug.WriteLine("Before=" + DateTime.Now);
             var cancel = tagRepository.SearchAsync(Algorithm.Default, "Tool%", t => taskResults.AddRange(t), () => completed = true);
             
             while(!completed)
@@ -146,9 +153,9 @@ namespace Gnosis.Tests.Data.SQLite
                 System.Diagnostics.Debug.WriteLine("Completed=" + completed + " Count=" + taskResults.Count);
                 System.Threading.Thread.Sleep(100);
             }
-            //System.Diagnostics.Debug.WriteLine("After=" + DateTime.Now);
-
             Assert.AreEqual(4, taskResults.Count);
+
+
 
             //var americanized = tagRepository.Search(Algorithm.Americanized, TagSchema.Id3v1);
             //var v2 = tagRepository.Search(Algorithm.Default, TagSchema.Id3v2);
