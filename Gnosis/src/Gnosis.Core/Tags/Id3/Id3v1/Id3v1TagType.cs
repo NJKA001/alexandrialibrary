@@ -20,13 +20,13 @@ namespace Gnosis.Core.Tags.Id3.Id3v1
 
         private static readonly IList<ITagType> all = new List<ITagType>();
 
-        public static readonly ITagType Title = new Id3v1TagType<string>(2, "Title", TagDomain.String);
-        public static readonly ITagType Artist = new Id3v1TagType<string>(3, "Artist", TagDomain.String);
-        public static readonly ITagType Album = new Id3v1TagType<string>(4, "Album", TagDomain.String);
-        public static readonly ITagType Year = new Id3v1TagType<uint>(5, "Year", TagDomain.PositiveInteger);
-        public static readonly ITagType Comment = new Id3v1TagType<string>(6, "Comment", TagDomain.String);
-        public static readonly ITagType Track = new Id3v1TagType<uint>(7, "Track", TagDomain.PositiveInteger);
-        public static readonly ITagType Genre = new Id3v1TagType<uint>(8, "Genre", TagDomain.PositiveInteger);
+        public static readonly ITagType Title = new Id3v1TagType<string>(102, "Title", TagDomain.String);
+        public static readonly ITagType Artist = new Id3v1TagType<string>(103, "Artist", TagDomain.String);
+        public static readonly ITagType Album = new Id3v1TagType<string>(104, "Album", TagDomain.String);
+        public static readonly ITagType Year = new Id3v1TagType<uint>(105, "Year", TagDomain.PositiveInteger);
+        public static readonly ITagType Comment = new Id3v1TagType<string>(106, "Comment", TagDomain.String);
+        public static readonly ITagType Track = new Id3v1TagType<uint>(107, "Track", TagDomain.PositiveInteger);
+        public static readonly ITagType Genre = new Id3v1TagType<uint>(108, "Genre", TagDomain.PositiveInteger);
 
         public static IEnumerable<ITagType> GetAll()
         {

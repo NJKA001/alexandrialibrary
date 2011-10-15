@@ -91,6 +91,78 @@ namespace Gnosis.Data.SQLite
             return new Tag(target, type, value, id);
         }
 
+        private IEnumerable<ITag> GetStringTags(IAlgorithm algorithm, string pattern)
+        {
+            var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value1 like @Pattern;");
+            builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
+            builder.AddUnquotedParameter("@Domain", TagDomain.String.Id);
+            builder.AddQuotedParameter("@Pattern", pattern);
+            return GetTags(builder);
+        }
+
+        private IEnumerable<ITag> GetStringArrayTags1(IAlgorithm algorithm, string pattern)
+        {
+            var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value1 like @Pattern;");
+            builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
+            builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
+            builder.AddQuotedParameter("@Pattern", pattern);
+            return GetTags(builder);
+        }
+
+        private IEnumerable<ITag> GetStringArrayTags2(IAlgorithm algorithm, string pattern)
+        {
+            var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value2 like @Pattern;");
+            builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
+            builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
+            builder.AddQuotedParameter("@Pattern", pattern);
+            return GetTags(builder);
+        }
+
+        private IEnumerable<ITag> GetStringArrayTags3(IAlgorithm algorithm, string pattern)
+        {
+            var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value3 like @Pattern;");
+            builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
+            builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
+            builder.AddQuotedParameter("@Pattern", pattern);
+            return GetTags(builder);
+        }
+
+        private IEnumerable<ITag> GetStringArrayTags4(IAlgorithm algorithm, string pattern)
+        {
+            var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value4 like @Pattern;");
+            builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
+            builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
+            builder.AddQuotedParameter("@Pattern", pattern);
+            return GetTags(builder);
+        }
+
+        private IEnumerable<ITag> GetStringArrayTags5(IAlgorithm algorithm, string pattern)
+        {
+            var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value5 like @Pattern;");
+            builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
+            builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
+            builder.AddQuotedParameter("@Pattern", pattern);
+            return GetTags(builder);
+        }
+
+        private IEnumerable<ITag> GetStringArrayTags6(IAlgorithm algorithm, string pattern)
+        {
+            var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value6 like @Pattern;");
+            builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
+            builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
+            builder.AddQuotedParameter("@Pattern", pattern);
+            return GetTags(builder);
+        }
+
+        private IEnumerable<ITag> GetStringArrayTags7(IAlgorithm algorithm, string pattern)
+        {
+            var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value7 like @Pattern;");
+            builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
+            builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
+            builder.AddQuotedParameter("@Pattern", pattern);
+            return GetTags(builder);
+        }
+
         #endregion
 
         public ITag GetById(long id)
@@ -207,18 +279,90 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public Task<IEnumerable<ITag>> GetSearchTask(IAlgorithm algorithm, ITagDomain domain, string pattern)
+        private void StartSearch(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            var options = e.Argument as SearchOptions;
+            if (options == null)
+                return;
+
+            options.TagCallback(GetStringTags(options.Algorithm, options.Pattern));
+
+            if (e.Cancel)
+                return;
+
+            options.TagCallback(GetStringArrayTags1(options.Algorithm, options.Pattern));
+
+            if (e.Cancel)
+                return;
+
+            options.TagCallback(GetStringArrayTags2(options.Algorithm, options.Pattern));
+
+            if (e.Cancel)
+                return;
+
+            options.TagCallback(GetStringArrayTags3(options.Algorithm, options.Pattern));
+
+            if (e.Cancel)
+                return;
+
+            options.TagCallback(GetStringArrayTags4(options.Algorithm, options.Pattern));
+
+            if (e.Cancel)
+                return;
+
+            options.TagCallback(GetStringArrayTags5(options.Algorithm, options.Pattern));
+
+            if (e.Cancel)
+                return;
+
+            options.TagCallback(GetStringArrayTags6(options.Algorithm, options.Pattern));
+
+            if (e.Cancel)
+                return;
+
+            options.TagCallback(GetStringArrayTags7(options.Algorithm, options.Pattern));
+
+            if (e.Cancel)
+                return;
+
+            if (options.CompletedCallback != null)
+                options.CompletedCallback();
+        }
+
+        private class SearchOptions
+        {
+            public SearchOptions(IAlgorithm algorithm, string pattern, Action<IEnumerable<ITag>> tagCallback, Action completedCallback)
+            {
+                Algorithm = algorithm;
+                Pattern = pattern;
+                TagCallback = tagCallback;
+                CompletedCallback = completedCallback;
+            }
+
+            public IAlgorithm Algorithm { get; set; }
+            public string Pattern { get; set; }
+            public Action<IEnumerable<ITag>> TagCallback { get; set; }
+            public Action CompletedCallback { get; set; }
+        }
+
+        public Action SearchAsync(IAlgorithm algorithm, string pattern, Action<IEnumerable<ITag>> tagCallback, Action completedCallback)
         {
             if (algorithm == null)
                 throw new ArgumentNullException("algorithm");
-            if (domain == null)
-                throw new ArgumentNullException("domain");
             if (pattern == null)
                 throw new ArgumentNullException("pattern");
+            if (tagCallback == null)
+                throw new ArgumentNullException("tagCallback");
 
             try
             {
-                return new Task<IEnumerable<ITag>>(() => GetByAlgorithm(algorithm, domain, pattern));
+                var options = new SearchOptions(algorithm, pattern, tagCallback, completedCallback);
+                var worker = new System.ComponentModel.BackgroundWorker();
+                Action cancelAction = () => worker.CancelAsync();
+                worker.WorkerSupportsCancellation = true;
+                worker.DoWork += StartSearch;
+                worker.RunWorkerAsync(options);
+                return cancelAction;
             }
             catch (Exception ex)
             {

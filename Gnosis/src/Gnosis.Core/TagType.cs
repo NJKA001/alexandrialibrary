@@ -7,7 +7,12 @@ namespace Gnosis.Core
 {
     public class TagType
     {
-        public static readonly ITagType Default = new TagType<string>(1, "Default", TagSchema.Default, TagDomain.String);
+        public static readonly ITagType DefaultString = new TagType<string>(1, "Default", TagSchema.Default, TagDomain.String);
+        public static readonly ITagType DefaultStringArray = new TagType<string[]>(2, "DefaultStringArray", TagSchema.Default, TagDomain.StringArray);
+        public static readonly ITagType DefaultPositiveInteger = new TagType<uint>(3, "DefaultPositiveInteger", TagSchema.Default, TagDomain.PositiveInteger);
+        public static readonly ITagType DefaultDate = new TagType<DateTime>(4, "DefaultDate", TagSchema.Default, TagDomain.Date);
+        public static readonly ITagType DefaultDuration = new TagType<TimeSpan>(5, "DefaultDuration", TagSchema.Default, TagDomain.Duration);
+        public static readonly ITagType DefaultByteArray = new TagType<byte[]>(6, "DefaultByteArray", TagSchema.Default, TagDomain.ByteArray);
     }
 
     public class TagType<T>

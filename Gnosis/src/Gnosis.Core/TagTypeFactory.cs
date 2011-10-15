@@ -27,7 +27,7 @@ namespace Gnosis.Core
         {
             return byId.ContainsKey(id) ?
                 byId[id]
-                : TagType.Default;
+                : TagType.DefaultString;
         }
 
         public void Add(ITagType type)

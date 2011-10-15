@@ -58,6 +58,48 @@ namespace Gnosis.Tests.Data.SQLite
         }
 
         [Test]
+        public void BulkTagTest()
+        {
+            var random = new Random(57);
+
+            using (var reader = new System.IO.StreamReader(@".\Files\words1.txt"))
+            {
+                const string urlBase = "http://example.com/media/random/";
+                var line = string.Empty;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    var tags = new List<ITag>();
+                    //var words = new Stack<string>(line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
+                    //var num = random.Next(7) + 1;
+                    //while (words.Count > num)
+                    //{
+
+                    //}
+
+                    //if (words.Count > 0)
+                    //{
+                    //    //tags.Add(new Tag(new Uri(urlBase + Guid.NewGuid().ToString()), TagType.
+                    //}
+
+                    foreach (var word in line.Split(' '))
+                    {
+                        System.Diagnostics.Debug.WriteLine("tag for word: " + word);
+                        tags.Add(new Tag(new Uri(urlBase + Guid.NewGuid().ToString()), TagType.DefaultString, word));
+                    }
+                    tagRepository.Save(tags);
+                }
+
+                System.Diagnostics.Debug.WriteLine("Before: " + DateTime.Now.Millisecond);
+                var tagsA = tagRepository.GetByAlgorithm(Algorithm.Default, TagDomain.String, "a%");
+                System.Diagnostics.Debug.WriteLine("After: " + DateTime.Now.Millisecond);
+
+                var count = tagsA.Count();
+                System.Diagnostics.Debug.WriteLine("count=" + count);
+                Assert.IsTrue(count > 0);
+            }
+        }
+
+        [Test]
         public void TagRepositorySaveTest()
         {
             var uri3 = new Uri("http://blah.com/music/Ticks-And-Leeches");
@@ -69,7 +111,7 @@ namespace Gnosis.Tests.Data.SQLite
             Assert.IsNotNull(imageData);
             var releaseDate = new DateTime(2011, 2, 19);
 
-            var tag1 = new Tag(uri1, TagType.Default, "Tool Kicks Ass!");
+            var tag1 = new Tag(uri1, TagType.DefaultString, "Tool Kicks Ass!");
             var tag2 = new Tag(uri2, Id3v1TagType.Artist, "Tool");
             var tag3 = new Tag(uri3, Id3v1TagType.Artist, "Tool");
             var tag4 = new Tag(uri3, Id3v1TagType.Title, "Ticks & Leeches 1".ToAmericanizedString());
@@ -95,13 +137,14 @@ namespace Gnosis.Tests.Data.SQLite
             Assert.AreEqual(releaseDate, dateTag.Value);
 
             var taskResults = new List<ITag>();
-            var task = tagRepository.GetSearchTask(Algorithm.Default, TagDomain.String, "Tool%");
-            task.ContinueWith(x => taskResults.AddRange(x.Result));
-            task.Start();
-
-            //NOTE: For some reason task.Wait() is not working here
-            //      so we need to sleep the main thread for a bit
-            System.Threading.Thread.Sleep(500);
+            var completed = false;
+            var cancel = tagRepository.SearchAsync(Algorithm.Default, "Tool%", t => taskResults.AddRange(t), () => completed = true);
+            
+            while(!completed)
+            {
+                System.Diagnostics.Debug.WriteLine("Completed=" + completed + " Count=" + taskResults.Count);
+                System.Threading.Thread.Sleep(200);
+            }
 
             Assert.AreEqual(4, taskResults.Count);
 

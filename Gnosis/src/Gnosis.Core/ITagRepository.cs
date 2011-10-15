@@ -14,7 +14,7 @@ namespace Gnosis.Core
         IEnumerable<ITag> GetByTarget(Uri target, ITagType type);
         IEnumerable<ITag> GetByAlgorithm(IAlgorithm algorithm, ITagDomain domain, string pattern);
 
-        Task<IEnumerable<ITag>> GetSearchTask(IAlgorithm algorithm, ITagDomain domain, string pattern);
+        Action SearchAsync(IAlgorithm algorithm, string pattern, Action<IEnumerable<ITag>> tagCallback, Action completedCallback);
 
         void Initialize();
         void Delete(ITag tag);
