@@ -9,7 +9,7 @@ namespace Gnosis.Core
     {
         int Id { get; }
         string Name { get; }
-        Type BaseType { get; }
+        Type[] BaseTypes { get; }
         object DefaultValue { get; }
 
         bool IsValid(object value);

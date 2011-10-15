@@ -71,11 +71,29 @@ namespace Gnosis.Data.SQLite
             var target = record.GetUri("Target");
             var type = record.GetInt32Lookup<ITagType>("Type", typeId => typeFactory.Create(typeId));
             var id = record.GetInt64("Id");
+            var length = type.Domain.BaseTypes.Length;
+            object[] values = new object[length];
+
+            for (var i = 0; i < length; i++)
+            {
+                var columnName = string.Format("Value{0}", i + 1);
+                if (type.Domain.BaseTypes[i] == null)
+                    values[i] = null;
+                else if (type.Domain.BaseTypes[i] == typeof(byte[]))
+                    values[i] = record.GetBytes(columnName);
+                else if (type.Domain.BaseTypes[i] == typeof(uint))
+                    values[i] = record.GetUInt32(columnName);
+                else
+                    values[i] = record[columnName];
+
+            }
+
+            /*
             object value1 = null;
 
-            if (type.Domain.BaseType == typeof(byte[]))
+            if (type.Domain.BaseTypes[0] == typeof(byte[]))
                 value1 = record.GetBytes("Value1");
-            else if (type.Domain.BaseType == typeof(uint))
+            else if (type.Domain.BaseTypes[0] == typeof(uint))
                 value1 = record.GetUInt32("Value1");
             else
                 value1 = record["Value1"];
@@ -86,7 +104,8 @@ namespace Gnosis.Data.SQLite
             var value5 = record["Value5"];
             var value6 = record["Value6"];
             var value7 = record["Value7"];
-            var value = type.Domain.GetValue(new TagTuple(value1, value2, value3, value4, value5, value6, value7));
+             */
+            var value = type.Domain.GetValue(TagTuple.FromArray(values));
 
             return new Tag(target, type, value, id);
         }
@@ -439,28 +458,17 @@ namespace Gnosis.Data.SQLite
                     builder.AddUnquotedParameter("@Domain", tag.Type.Domain.Id);
                     builder.AddUnquotedParameter("@Type", tag.Type.Id);
 
+                    var values = tag.Tuple.ToArray();
+                    var length = values.Length;
+                    for(var i=0; i < length; i++)
+                    {
+                        var paramName = string.Format("@Value{0}", i + 1);
+                        if (tag.Type.Domain.BaseTypes[i] == typeof(string))
+                            builder.AddQuotedParameter(paramName, values[i]);
+                        else
+                            builder.AddUnquotedParameter(paramName, values[i]);
+                    }
 
-                    if (tag.Type.Domain.BaseType == typeof(string) || tag.Type.Domain.BaseType == typeof(string[]))
-                    {
-                        builder.AddQuotedParameter("@Value1", tag.Tuple.Item1);
-                        builder.AddQuotedParameter("@Value2", tag.Tuple.Item2);
-                        builder.AddQuotedParameter("@Value3", tag.Tuple.Item3);
-                        builder.AddQuotedParameter("@Value4", tag.Tuple.Item4);
-                        builder.AddQuotedParameter("@Value5", tag.Tuple.Item5);
-                        builder.AddQuotedParameter("@Value6", tag.Tuple.Item6);
-                        builder.AddQuotedParameter("@Value7", tag.Tuple.Item7);
-                    }
-                    else
-                    {
-                        builder.AddUnquotedParameter("@Value1", tag.Tuple.Item1);
-                        builder.AddUnquotedParameter("@Value2", tag.Tuple.Item2);
-                        builder.AddUnquotedParameter("@Value3", tag.Tuple.Item3);
-                        builder.AddUnquotedParameter("@Value4", tag.Tuple.Item4);
-                        builder.AddUnquotedParameter("@Value5", tag.Tuple.Item5);
-                        builder.AddUnquotedParameter("@Value6", tag.Tuple.Item6);
-                        builder.AddUnquotedParameter("@Value7", tag.Tuple.Item7);
-                    }
-                    
                     builders.Add(builder);
                 }
 

@@ -57,6 +57,16 @@ namespace Gnosis.Core
                 throw new ArgumentNullException("value1");
         }
 
+        public static TagTuple FromArray(object[] values)
+        {
+            if (values == null)
+                throw new ArgumentNullException("values");
+            if (values.Length != 7)
+                throw new ArgumentException("values must have 7 items");
+
+            return new TagTuple(values[0], values[1], values[2], values[3], values[4], values[5], values[6]);
+        }
+
         public object[] ToArray()
         {
             return new object[] { Item1, Item2, Item3, Item4, Item5, Item6, Item7 };

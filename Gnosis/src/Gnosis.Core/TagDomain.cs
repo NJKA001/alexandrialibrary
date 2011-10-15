@@ -8,12 +8,14 @@ namespace Gnosis.Core
     public class TagDomain
         : ITagDomain
     {
-        private TagDomain(int id, string name, Type baseType, object defaultValue, Func<object, bool> isValid, Func<object, TagTuple> getTuple, Func<TagTuple, object> getValue)
+        private TagDomain(int id, string name, Type[] baseTypes, object defaultValue, Func<object, bool> isValid, Func<object, TagTuple> getTuple, Func<TagTuple, object> getValue)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
-            if (baseType == null)
-                throw new ArgumentNullException("baseType");
+            if (baseTypes == null)
+                throw new ArgumentNullException("baseTypes");
+            if (baseTypes.Length != 7)
+                throw new ArgumentException("baseTypes must have 7 items");
             if (defaultValue == null)
                 throw new ArgumentNullException("defaultValue");
             if (isValid == null)
@@ -25,7 +27,7 @@ namespace Gnosis.Core
 
             this.id = id;
             this.name = name;
-            this.baseType = baseType;
+            this.baseTypes = baseTypes;
             this.defaultValue = defaultValue;
             this.isValid = isValid;
             this.getTuple = getTuple;
@@ -34,7 +36,7 @@ namespace Gnosis.Core
 
         private readonly int id;
         private readonly string name;
-        private readonly Type baseType;
+        private readonly Type[] baseTypes;
         private readonly object defaultValue;
         private readonly Func<object, bool> isValid;
         private readonly Func<object, TagTuple> getTuple;
@@ -50,9 +52,9 @@ namespace Gnosis.Core
             get { return name; }
         }
 
-        public Type BaseType
+        public Type[] BaseTypes
         {
-            get { return baseType; }
+            get { return baseTypes; }
         }
 
         public object DefaultValue
@@ -99,12 +101,12 @@ namespace Gnosis.Core
             return d.ToString("s");
         }
 
-        public static readonly ITagDomain String = new TagDomain(1, "String", typeof(string), string.Empty, value => value.IsString(), value => new TagTuple(value), tuple => tuple.ToString());
-        public static readonly ITagDomain StringArray = new TagDomain(2, "StringArray", typeof(string[]), new string[0], value => value.IsStringArray(), value => value.ToStringArray().ToTagTuple(), tuple => tuple.ToStringArray());
-        public static readonly ITagDomain PositiveInteger = new TagDomain(3, "PositiveInteger", typeof(uint), (uint)0, value => value.IsUInt32(), value => new TagTuple(value), tuple => tuple.ToUInt32());
-        public static readonly ITagDomain Date = new TagDomain(4, "Date", typeof(DateTime), DateTime.MinValue, value => value.IsDateTime(), value => value.ToDateTime().ToTagTuple(), tuple => tuple.ToDateTime());
-        public static readonly ITagDomain Duration = new TagDomain(5, "Duration", typeof(TimeSpan), TimeSpan.Zero, value => value.IsTimeSpan(), value => new TagTuple(value), tuple => tuple.ToTimeSpan());
-        public static readonly ITagDomain ByteArray = new TagDomain(6, "ByteArray", typeof(byte[]), new byte[0], value => value.IsByteArray(), value => new TagTuple(value), tuple => tuple.ToByteArray());
+        public static readonly ITagDomain String = new TagDomain(1, "String", new Type[] { typeof(string), null, null, null, null, null, null}, string.Empty, value => value.IsString(), value => new TagTuple(value), tuple => tuple.ToString());
+        public static readonly ITagDomain StringArray = new TagDomain(2, "StringArray", new Type[] { typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string) }, new string[0], value => value.IsStringArray(), value => value.ToStringArray().ToTagTuple(), tuple => tuple.ToStringArray());
+        public static readonly ITagDomain PositiveInteger = new TagDomain(3, "PositiveInteger", new Type[] { typeof(uint), null, null, null, null, null, null }, (uint)0, value => value.IsUInt32(), value => new TagTuple(value), tuple => tuple.ToUInt32());
+        public static readonly ITagDomain Date = new TagDomain(4, "Date", new Type[] { typeof(int), typeof(int), typeof(int), null, null, null, null }, DateTime.MinValue, value => value.IsDateTime(), value => value.ToDateTime().ToTagTuple(), tuple => tuple.ToDateTime());
+        public static readonly ITagDomain Duration = new TagDomain(5, "Duration", new Type[] { typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), null, null }, TimeSpan.Zero, value => value.IsTimeSpan(), value => new TagTuple(value), tuple => tuple.ToTimeSpan());
+        public static readonly ITagDomain ByteArray = new TagDomain(6, "ByteArray", new Type[] { typeof(byte[]), null, null, null, null, null, null }, new byte[0], value => value.IsByteArray(), value => new TagTuple(value), tuple => tuple.ToByteArray());
 
         public static IEnumerable<ITagDomain> GetAll()
         {
