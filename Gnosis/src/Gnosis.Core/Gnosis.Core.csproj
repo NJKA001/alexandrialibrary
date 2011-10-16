@@ -194,6 +194,8 @@
     <Compile Include="Links\Html\HtmlLinkType.cs" />
     <Compile Include="LinkType.cs" />
     <Compile Include="LinkTypeFactory.cs" />
+    <Compile Include="Tags\Id3\Id3v1\Id3v1Extensions.cs" />
+    <Compile Include="Tags\Id3\Id3v1\Id3v1Genre.cs" />
     <Compile Include="TagTuple.cs" />
     <Compile Include="TagDomain.cs" />
     <Compile Include="TagFactory.cs" />

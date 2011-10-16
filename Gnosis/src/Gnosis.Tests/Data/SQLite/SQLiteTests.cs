@@ -124,8 +124,9 @@ namespace Gnosis.Tests.Data.SQLite
             var tag8 = new Tag(uri4, Id3v2TagType.AttachedPicture, imageData);
             var tag9 = new Tag(uri4, Id3v2TagType.ReleaseTime, releaseDate);
             var tag10 = new Tag(uri5, Id3v2TagType.Artist, artists);
+            var tag11 = new Tag(uri5, Id3v1TagType.Genre, Id3v1Genre.Rock_and_Roll);
 
-            var tags = new List<ITag> { tag1, tag2, tag3, tag4, tag5, tag6, tag7, tag8, tag9, tag10 };
+            var tags = new List<ITag> { tag1, tag2, tag3, tag4, tag5, tag6, tag7, tag8, tag9, tag10, tag11 };
             tagRepository.Save(tags);
 
             var tool = tagRepository.GetByAlgorithm(Algorithm.Default, TagDomain.String, "Tool%");
@@ -143,6 +144,10 @@ namespace Gnosis.Tests.Data.SQLite
             var arrayTag = tagRepository.GetByTarget(uri5, Id3v2TagType.Artist).FirstOrDefault();
             Assert.IsNotNull(arrayTag);
             Assert.AreEqual(artists, arrayTag.Value);
+
+            var genreTag = tagRepository.GetByTarget(uri5, Id3v1TagType.Genre).FirstOrDefault();
+            Assert.IsNotNull(genreTag);
+            Assert.AreEqual(Id3v1Genre.Rock_and_Roll, genreTag.Value);
 
             var taskResults = new List<ITag>();
             var completed = false;

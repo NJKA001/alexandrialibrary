@@ -66,26 +66,18 @@ namespace Gnosis.Core
         public static T ToEnum<T>(this object self)
             where T : struct
         {
-            if (!typeof(T).IsEnum)
-                throw new InvalidOperationException("T must be an enum type");
-
-            return (T)Enum.Parse(typeof(T), self.ToString());
+            return self.ToEnum<T>(default(T));
         }
 
         public static T ToEnum<T>(this object self, T defaultValue)
             where T : struct
         {
             if (!typeof(T).IsEnum)
-                return defaultValue;
+                throw new ArgumentException("Generic type must be a valid enum type");
 
-            try
-            {
-                return self.ToEnum<T>();
-            }
-            catch (Exception)
-            {
-                return defaultValue;
-            }
+            var result = defaultValue;
+            Enum.TryParse<T>(self.ToString(), out result);
+            return result;
         }
 
         public static int ToInt32(this object self)
@@ -229,6 +221,19 @@ namespace Gnosis.Core
         public static bool IsUInt32(this object self)
         {
             return (self != null && self is uint);
+        }
+
+        public static bool IsEnum<T>(this object self)
+            where T : struct
+        {
+            if (self == null || !typeof(T).IsEnum)
+                return false;
+
+            if (self is T)
+                return true;
+
+            var result = default(T);
+            return Enum.TryParse(self.ToString(), out result);
         }
     }
 }

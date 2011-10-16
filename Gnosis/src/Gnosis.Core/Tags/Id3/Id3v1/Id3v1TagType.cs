@@ -26,7 +26,7 @@ namespace Gnosis.Core.Tags.Id3.Id3v1
         public static readonly ITagType Year = new Id3v1TagType<uint>(105, "Year", TagDomain.PositiveInteger);
         public static readonly ITagType Comment = new Id3v1TagType<string>(106, "Comment", TagDomain.String);
         public static readonly ITagType Track = new Id3v1TagType<uint>(107, "Track", TagDomain.PositiveInteger);
-        public static readonly ITagType Genre = new Id3v1TagType<uint>(108, "Genre", TagDomain.PositiveInteger);
+        public static readonly ITagType Genre = new Id3v1TagType<uint>(108, "Genre", TagDomain.Id3v1SimpleGenre);
 
         public static IEnumerable<ITagType> GetAll()
         {

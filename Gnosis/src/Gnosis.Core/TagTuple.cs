@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core.Tags.Id3.Id3v1;
+
 namespace Gnosis.Core
 {
     public class TagTuple
@@ -118,6 +120,11 @@ namespace Gnosis.Core
         public TimeSpan ToTimeSpan()
         {
             return new TimeSpan(Item1.ToInt32(), Item2.ToInt32(), Item3.ToInt32(), Item4.ToInt32(), Item5.ToInt32());
+        }
+
+        public Id3v1Genre ToId3v1Genre()
+        {
+            return Item1.ToEnum<Id3v1Genre>();
         }
     }
 }
