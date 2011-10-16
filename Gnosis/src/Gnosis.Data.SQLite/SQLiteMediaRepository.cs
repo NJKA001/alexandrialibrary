@@ -38,7 +38,7 @@ namespace Gnosis.Data.SQLite
                 logger.Info("SQLiteMediaRepository.Lookup(Uri)");
 
                 var builder = new CommandBuilder("select * from Media where Location = @Location;");
-                builder.AddUnquotedParameter("@Location", location.ToString());
+                builder.AddParameter("@Location", location.ToString());
 
                 return GetRecord(builder, record => ReadMedia(record));
             }
@@ -109,7 +109,7 @@ namespace Gnosis.Data.SQLite
                 {
                     var builder = new CommandBuilder();
                     builder.AppendLine("delete from Media where Location = @Location;");
-                    builder.AddQuotedParameter("@Location", medium.Location.ToString());
+                    builder.AddParameter("@Location", medium.Location.ToString());
                     builders.Add(builder);
                 }
 
@@ -136,8 +136,8 @@ namespace Gnosis.Data.SQLite
 
                 var builder = new CommandBuilder();
                 builder.Append("insert into Media (Location, Type) values (@Location, @Type);");
-                builder.AddQuotedParameter("@Location", media.Location.ToString());
-                builder.AddQuotedParameter("@Type", media.Type.ToString());
+                builder.AddParameter("@Location", media.Location.ToString());
+                builder.AddParameter("@Type", media.Type.ToString());
 
                 ExecuteNonQuery(builder);
             }
@@ -163,8 +163,8 @@ namespace Gnosis.Data.SQLite
                 {
                     var builder = new CommandBuilder();
                     builder.AppendLine("insert into Media (Location, Type) values (@Location, @Type);");
-                    builder.AddQuotedParameter("@Location", medium.Location.ToString());
-                    builder.AddQuotedParameter("@Type", medium.Type.ToString());
+                    builder.AddParameter("@Location", medium.Location.ToString());
+                    builder.AddParameter("@Type", medium.Type.ToString());
                     builders.Add(builder);
                 }
 

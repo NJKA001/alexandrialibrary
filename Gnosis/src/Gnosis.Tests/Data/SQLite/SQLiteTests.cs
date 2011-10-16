@@ -154,13 +154,21 @@ namespace Gnosis.Tests.Data.SQLite
             var cancel = tagRepository.SearchAsync(Algorithm.Default, "Tool%", t => taskResults.AddRange(t), () => completed = true);
             
             while(!completed)
-            {
-                System.Diagnostics.Debug.WriteLine("Completed=" + completed + " Count=" + taskResults.Count);
                 System.Threading.Thread.Sleep(100);
-            }
+            
             Assert.AreEqual(4, taskResults.Count);
 
+            var genreResults = new List<ITag>();
+            var genreCompleted = false;
+            var genreCancel = tagRepository.SearchAsync(Algorithm.Default, "Rock%", t => genreResults.AddRange(t), () => genreCompleted = true);
 
+            while (!genreCompleted)
+                System.Threading.Thread.Sleep(100);
+
+            var filteredGenreResults = genreResults.Where(x => x.Type == Id3v1TagType.Genre);
+            Assert.AreEqual(1, filteredGenreResults.Count());
+            Assert.IsNotNull(genreResults.First());
+            Assert.AreEqual(Id3v1Genre.Rock_and_Roll, filteredGenreResults.First().Value);
 
             //var americanized = tagRepository.Search(Algorithm.Americanized, TagSchema.Id3v1);
             //var v2 = tagRepository.Search(Algorithm.Default, TagSchema.Id3v2);

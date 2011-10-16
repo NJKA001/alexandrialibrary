@@ -182,6 +182,7 @@
     <Compile Include="Extensions\GuidExtensions.cs" />
     <Compile Include="Extensions\StringArrayExtensions.cs" />
     <Compile Include="ILinkFactory.cs" />
+    <Compile Include="ILinkRepository.cs" />
     <Compile Include="ILinkType.cs" />
     <Compile Include="ILinkTypeFactory.cs" />
     <Compile Include="IMediaSearch.cs" />

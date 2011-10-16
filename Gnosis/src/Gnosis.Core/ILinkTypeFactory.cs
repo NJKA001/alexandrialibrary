@@ -7,7 +7,7 @@ namespace Gnosis.Core
 {
     public interface ILinkTypeFactory
     {
-        ILinkType Create(long id);
+        ILinkType Create(int id);
 
         void Add(ILinkType type);
         void Remove(ILinkType type);

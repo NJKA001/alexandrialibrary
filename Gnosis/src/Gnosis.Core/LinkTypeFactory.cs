@@ -12,13 +12,16 @@ namespace Gnosis.Core
     {
         public LinkTypeFactory()
         {
+            Add(LinkType.Default);
+            Add(LinkType.ThumbnailImage);
+
             foreach (var htmlLinkType in HtmlLinkType.GetAll())
                 Add(htmlLinkType);
         }
 
-        private readonly IDictionary<long, ILinkType> byId = new Dictionary<long, ILinkType>();
+        private readonly IDictionary<int, ILinkType> byId = new Dictionary<int, ILinkType>();
 
-        public ILinkType Create(long id)
+        public ILinkType Create(int id)
         {
             return byId.ContainsKey(id) ?
                 byId[id]

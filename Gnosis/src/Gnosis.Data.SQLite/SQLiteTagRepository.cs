@@ -95,75 +95,84 @@ namespace Gnosis.Data.SQLite
             return new Tag(target, type, value, id);
         }
 
+        private IEnumerable<ITag> GetId3v1SimpleGenreTags(IAlgorithm algorithm, string pattern)
+        {
+            var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value1 like @Pattern;");
+            builder.AddParameter("@Algorithm", algorithm.Id);
+            builder.AddParameter("@Domain", TagDomain.Id3v1SimpleGenre.Id);
+            builder.AddParameter("@Pattern", pattern);
+            return GetTags(builder);
+        }
+
         private IEnumerable<ITag> GetStringTags(IAlgorithm algorithm, string pattern)
         {
             var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value1 like @Pattern;");
-            builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
-            builder.AddUnquotedParameter("@Domain", TagDomain.String.Id);
-            builder.AddUnquotedParameter("@Pattern", pattern);
+            builder.AddParameter("@Algorithm", algorithm.Id);
+            builder.AddParameter("@Domain", TagDomain.String.Id);
+            builder.AddParameter("@Pattern", pattern);
             return GetTags(builder);
         }
 
         private IEnumerable<ITag> GetStringArrayTags1(IAlgorithm algorithm, string pattern)
         {
             var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value1 like @Pattern;");
-            builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
-            builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
-            builder.AddUnquotedParameter("@Pattern", pattern);
+            builder.AddParameter("@Algorithm", algorithm.Id);
+            builder.AddParameter("@Domain", TagDomain.StringArray.Id);
+            builder.AddParameter("@Pattern", pattern);
             return GetTags(builder);
         }
 
         private IEnumerable<ITag> GetStringArrayTags2(IAlgorithm algorithm, string pattern)
         {
             var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value2 like @Pattern;");
-            builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
-            builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
-            builder.AddUnquotedParameter("@Pattern", pattern);
+            builder.AddParameter("@Algorithm", algorithm.Id);
+            builder.AddParameter("@Domain", TagDomain.StringArray.Id);
+            builder.AddParameter("@Pattern", pattern);
             return GetTags(builder);
         }
 
         private IEnumerable<ITag> GetStringArrayTags3(IAlgorithm algorithm, string pattern)
         {
             var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value3 like @Pattern;");
-            builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
-            builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
-            builder.AddUnquotedParameter("@Pattern", pattern);
+            builder.AddParameter("@Algorithm", algorithm.Id);
+            builder.AddParameter("@Domain", TagDomain.StringArray.Id);
+            builder.AddParameter("@Pattern", pattern);
             return GetTags(builder);
         }
 
         private IEnumerable<ITag> GetStringArrayTags4(IAlgorithm algorithm, string pattern)
         {
             var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value4 like @Pattern;");
-            builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
-            builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
-            builder.AddUnquotedParameter("@Pattern", pattern);
+            builder.AddParameter("@Algorithm", algorithm.Id);
+            builder.AddParameter("@Domain", TagDomain.StringArray.Id);
+            builder.AddParameter("@Pattern", pattern);
             return GetTags(builder);
         }
 
         private IEnumerable<ITag> GetStringArrayTags5(IAlgorithm algorithm, string pattern)
         {
             var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value5 like @Pattern;");
-            builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
-            builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
-            builder.AddUnquotedParameter("@Pattern", pattern);
+            builder.AddParameter("@Algorithm", algorithm.Id);
+            builder.AddParameter("@Domain", TagDomain.StringArray.Id);
+            builder.AddParameter("@Pattern", pattern);
             return GetTags(builder);
         }
 
         private IEnumerable<ITag> GetStringArrayTags6(IAlgorithm algorithm, string pattern)
         {
             var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value6 like @Pattern;");
-            builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
-            builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
-            builder.AddUnquotedParameter("@Pattern", pattern);
+            builder.AddParameter("@Algorithm", algorithm.Id);
+            builder.AddParameter("@Domain", TagDomain.StringArray.Id);
+            builder.AddParameter("@Pattern", pattern);
             return GetTags(builder);
         }
 
         private IEnumerable<ITag> GetStringArrayTags7(IAlgorithm algorithm, string pattern)
         {
             var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value7 like @Pattern;");
-            builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
-            builder.AddUnquotedParameter("@Domain", TagDomain.StringArray.Id);
-            builder.AddUnquotedParameter("@Pattern", pattern);
+            builder.AddParameter("@Algorithm", algorithm.Id);
+            builder.AddParameter("@Domain", TagDomain.StringArray.Id);
+            builder.AddParameter("@Pattern", pattern);
             return GetTags(builder);
         }
 
@@ -176,7 +185,7 @@ namespace Gnosis.Data.SQLite
                 logger.Info("SQLiteTagRepository.GetById");
 
                 var builder = new CommandBuilder("select * from Tag where Id = @Id;");
-                builder.AddUnquotedParameter("@Id", id);
+                builder.AddParameter("@Id", id);
 
                 return GetTags(builder).FirstOrDefault();
             }
@@ -197,7 +206,7 @@ namespace Gnosis.Data.SQLite
                 logger.Info("SQLiteTagRepository.GetByTarget(Uri)");
 
                 var builder = new CommandBuilder("select * from Tag where Target = @Target;");
-                builder.AddQuotedParameter("@Target", target.ToString());
+                builder.AddParameter("@Target", target.ToString());
 
                 return GetTags(builder);
             }
@@ -220,8 +229,8 @@ namespace Gnosis.Data.SQLite
                 logger.Info("SQLiteTagRepository.GetByTarget(Uri, ITagSchema)");
 
                 var builder = new CommandBuilder("select * Tag where Target = @Target and Schema = @Schema;");
-                builder.AddQuotedParameter("@Target", target.ToString());
-                builder.AddUnquotedParameter("@Schema", schema.Id);
+                builder.AddParameter("@Target", target.ToString());
+                builder.AddParameter("@Schema", schema.Id);
 
                 return GetTags(builder);
             }
@@ -244,8 +253,8 @@ namespace Gnosis.Data.SQLite
                 logger.Info("SQLiteTagRepository.GetByTarget(Uri, ITagType)");
 
                 var builder = new CommandBuilder("select * from Tag where Target = @Target and Type = @Type;");
-                builder.AddQuotedParameter("@Target", target.ToString());
-                builder.AddUnquotedParameter("@Type", type.Id);
+                builder.AddParameter("@Target", target.ToString());
+                builder.AddParameter("@Type", type.Id);
 
                 return GetTags(builder);
             }
@@ -270,9 +279,9 @@ namespace Gnosis.Data.SQLite
                 logger.Info("SQLiteTagRepository.GetByAlgorithm(IAlgorithm, ITagDomain, string)");
 
                 var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value1 like @Pattern;");
-                builder.AddUnquotedParameter("@Algorithm", algorithm.Id);
-                builder.AddUnquotedParameter("@Domain", domain.Id);
-                builder.AddUnquotedParameter("@Pattern", pattern);
+                builder.AddParameter("@Algorithm", algorithm.Id);
+                builder.AddParameter("@Domain", domain.Id);
+                builder.AddParameter("@Pattern", pattern);
 
                 return GetTags(builder);
             }
@@ -325,6 +334,11 @@ namespace Gnosis.Data.SQLite
                 return;
 
             options.TagCallback(GetStringArrayTags7(options.Algorithm, options.Pattern));
+
+            if (e.Cancel)
+                return;
+
+            options.TagCallback(GetId3v1SimpleGenreTags(options.Algorithm, options.Pattern));
 
             if (e.Cancel)
                 return;
@@ -394,17 +408,6 @@ namespace Gnosis.Data.SQLite
                 builder.AppendLine("create index if not exists Tag_Algorithm_Domain_Value6 on Tag (Algorithm asc, Domain asc, Value6 asc);");
                 builder.AppendLine("create index if not exists Tag_Algorithm_Domain_Value7 on Tag (Algorithm asc, Domain asc, Value7 asc);");
 
-                //builder.AppendLine("create index if not exists Tag_Target_Algorithm on Tag (Target asc, Algorithm asc);");
-                
-                //builder.AppendLine("create index if not exists Tag_Algorithm on Tag (Algorithm asc);");
-                //builder.AppendLine("create index if not exists Tag_Algorithm_Schema on Tag (Algorithm asc, Schema asc);");
-                
-                //builder.AppendLine("create index if not exists Tag_Algorithm_Type on Tag (Algorithm asc, Type asc);");
-                //builder.AppendLine("create index if not exists Tag_Algorithm_Schema_Name on Tag (Algorithm asc, Schema asc, Name asc);");
-                //builder.AppendLine("create index if not exists Tag_Algorithm_Schema_Domain_Name on Tag (Algorithm asc, Schema asc, Domain asc, Name asc);");
-                //builder.AppendLine("create index if not exists Tag_Algorithm_Name on Tag (Algorithm asc, Name asc);");
-                //builder.AppendLine("create index if not exists Tag_Name on Tag (Name asc);");
-
                 ExecuteNonQuery(builder);
             }
             catch (Exception ex)
@@ -412,14 +415,6 @@ namespace Gnosis.Data.SQLite
                 logger.Error("  Initialize", ex);
                 throw;
             }
-        }
-
-        public void Save(ITag tag)
-        {
-            if (tag == null)
-                throw new ArgumentNullException("tag");
-
-            Save(new List<ITag> { tag });
         }
 
         public void Save(IEnumerable<ITag> tags)
@@ -437,26 +432,15 @@ namespace Gnosis.Data.SQLite
                 {
                     var builder = new CommandBuilder();
                     builder.AppendLine("insert into Tag (Target, Algorithm, Schema, Domain, Type, Value1, Value2, Value3, Value4, Value5, Value6, Value7) values (@Target, @Algorithm, @Schema, @Domain, @Type, @Value1, @Value2, @Value3, @Value4, @Value5, @Value6, @Value7);");
-                    builder.AddQuotedParameter("@Target", tag.Target.ToString());
-                    builder.AddUnquotedParameter("@Algorithm", tag.Type.Schema.Algorithm.Id);
-                    builder.AddUnquotedParameter("@Schema", tag.Type.Schema.Id);
-                    builder.AddUnquotedParameter("@Domain", tag.Type.Domain.Id);
-                    builder.AddUnquotedParameter("@Type", tag.Type.Id);
+                    builder.AddParameter("@Target", tag.Target.ToString());
+                    builder.AddParameter("@Algorithm", tag.Type.Schema.Algorithm.Id);
+                    builder.AddParameter("@Schema", tag.Type.Schema.Id);
+                    builder.AddParameter("@Domain", tag.Type.Domain.Id);
+                    builder.AddParameter("@Type", tag.Type.Id);
 
                     var values = tag.Tuple.ToArray();
-                    var length = values.Length;
-                    for(var i=0; i < length; i++)
-                    {
-                        var paramName = string.Format("@Value{0}", i + 1);
-                        builder.AddUnquotedParameter(paramName, values[i]);
-                        //if (tag.Type.Domain.BaseTypes[i] == typeof(string))
-                        //{
-                        //    var value = values[i].ToString();
-                        //    builder.AddQuotedParameter(paramName, value);
-                        //}
-                        //else
-                            
-                    }
+                    for(var i=0; i < values.Length; i++)
+                        builder.AddParameter(string.Format("@Value{0}", i + 1), values[i]);
 
                     builders.Add(builder);
                 }
@@ -471,14 +455,6 @@ namespace Gnosis.Data.SQLite
                 logger.Error("  Save(IEnumerable<ITag>)", ex);
                 throw;
             }
-        }
-
-        public void Delete(ITag tag)
-        {
-            if (tag == null)
-                throw new ArgumentNullException("tag");
-
-            Delete(new List<ITag> { tag });
         }
 
         public void Delete(IEnumerable<ITag> tags)
@@ -496,7 +472,7 @@ namespace Gnosis.Data.SQLite
                 {
                     var builder = new CommandBuilder();
                     builder.AppendLine("delete from Tag where Id = @Id;");
-                    builder.AddUnquotedParameter("@Id", tag.Id);
+                    builder.AddParameter("@Id", tag.Id);
                     builders.Add(builder);
                 }
 

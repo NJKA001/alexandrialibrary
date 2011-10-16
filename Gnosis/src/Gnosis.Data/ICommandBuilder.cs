@@ -8,8 +8,7 @@ namespace Gnosis.Data
 {
     public interface ICommandBuilder
     {
-        void AddQuotedParameter(string name, object value);
-        void AddUnquotedParameter(string name, object value);
+        void AddParameter(string name, object value);
 
         void Append(string value);
         void AppendFormat(string format, params object[] args);

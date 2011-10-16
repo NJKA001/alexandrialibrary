@@ -124,7 +124,7 @@ namespace Gnosis.Core
 
         public Id3v1Genre ToId3v1Genre()
         {
-            return Item1.ToEnum<Id3v1Genre>();
+            return Item2.ToEnum<Id3v1Genre>();
         }
     }
 }

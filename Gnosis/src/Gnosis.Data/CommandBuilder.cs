@@ -27,21 +27,14 @@ namespace Gnosis.Data
         public int CommandTimeout { get; set; }
         public CommandType CommandType { get; set; }
 
-        public void AddQuotedParameter(string name, object value)
-        {
-            if (name == null)
-                throw new ArgumentNullException("name");
-            if (value == null)
-                parameters.Add(name, "null");
-            else parameters.Add(name, string.Format("'{0}'", value));
-        }
-
-        public void AddUnquotedParameter(string name, object value)
+        public void AddParameter(string name, object value)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
 
-            parameters.Add(name, value);
+            var paramValue = value ?? "null";
+
+            parameters.Add(name, paramValue);
         }
 
         public void Append(string value)

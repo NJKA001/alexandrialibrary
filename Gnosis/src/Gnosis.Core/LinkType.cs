@@ -8,7 +8,7 @@ namespace Gnosis.Core
     public class LinkType
         : ILinkType
     {
-        public LinkType(long id, string name)
+        public LinkType(int id, string name)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -17,10 +17,10 @@ namespace Gnosis.Core
             this.name = name;
         }
 
-        private readonly long id;
+        private readonly int id;
         private readonly string name;
 
-        public long Id
+        public int Id
         {
             get { return id; }
         }
@@ -31,5 +31,6 @@ namespace Gnosis.Core
         }
 
         public static readonly ILinkType Default = new LinkType(1, "Default");
+        public static readonly ILinkType ThumbnailImage = new LinkType(2, "ThumbnailImage");
     }
 }

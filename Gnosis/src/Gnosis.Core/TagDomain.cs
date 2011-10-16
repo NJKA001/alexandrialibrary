@@ -109,7 +109,7 @@ namespace Gnosis.Core
         public static readonly ITagDomain Date = new TagDomain(4, "Date", new Type[] { typeof(int), typeof(int), typeof(int), null, null, null, null }, DateTime.MinValue, value => value.IsDateTime(), value => value.ToDateTime().ToTagTuple(), tuple => tuple.ToDateTime());
         public static readonly ITagDomain Duration = new TagDomain(5, "Duration", new Type[] { typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), null, null }, TimeSpan.Zero, value => value.IsTimeSpan(), value => new TagTuple(value), tuple => tuple.ToTimeSpan());
         public static readonly ITagDomain ByteArray = new TagDomain(6, "ByteArray", new Type[] { typeof(byte[]), null, null, null, null, null, null }, new byte[0], value => value.IsByteArray(), value => new TagTuple(value), tuple => tuple.ToByteArray());
-        public static readonly ITagDomain Id3v1SimpleGenre = new TagDomain(7, "Id3v1SimpleGenre", new Type[] { typeof(byte), typeof(string), null, null, null, null, null }, Id3v1Genre.Blues, value => value.IsEnum<Id3v1Genre>(), value => value.ToEnum<Id3v1Genre>().ToTagTuple(), tuple => tuple.ToId3v1Genre());
+        public static readonly ITagDomain Id3v1SimpleGenre = new TagDomain(7, "Id3v1SimpleGenre", new Type[] { typeof(string), typeof(byte), null, null, null, null, null }, Id3v1Genre.Blues, value => value.IsEnum<Id3v1Genre>(), value => value.ToEnum<Id3v1Genre>().ToTagTuple(), tuple => tuple.ToId3v1Genre());
 
         public static IEnumerable<ITagDomain> GetAll()
         {

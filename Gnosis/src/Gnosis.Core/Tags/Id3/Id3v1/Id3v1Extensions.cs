@@ -14,7 +14,7 @@ namespace Gnosis.Core.Tags.Id3.Id3v1
 
         public static TagTuple ToTagTuple(this Id3v1Genre self)
         {
-            return new TagTuple((byte)self, self.ToFriendlyString());
+            return new TagTuple(self.ToFriendlyString(), (byte)self);
         }
     }
 }
