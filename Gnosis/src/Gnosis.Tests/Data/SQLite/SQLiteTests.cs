@@ -151,7 +151,7 @@ namespace Gnosis.Tests.Data.SQLite
 
             var taskResults = new List<ITag>();
             var completed = false;
-            var cancel = tagRepository.SearchAsync(Algorithm.Default, "Tool%", t => taskResults.AddRange(t), () => completed = true);
+            var cancel = tagRepository.Search(Algorithm.Default, "Tool%", t => taskResults.AddRange(t), () => completed = true);
             
             while(!completed)
                 System.Threading.Thread.Sleep(100);
@@ -160,7 +160,7 @@ namespace Gnosis.Tests.Data.SQLite
 
             var genreResults = new List<ITag>();
             var genreCompleted = false;
-            var genreCancel = tagRepository.SearchAsync(Algorithm.Default, "Rock%", t => genreResults.AddRange(t), () => genreCompleted = true);
+            var genreCancel = tagRepository.Search(Algorithm.Default, "Rock%", t => genreResults.AddRange(t), () => genreCompleted = true);
 
             while (!genreCompleted)
                 System.Threading.Thread.Sleep(100);

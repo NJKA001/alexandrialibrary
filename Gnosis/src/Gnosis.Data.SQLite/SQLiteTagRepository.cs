@@ -363,7 +363,7 @@ namespace Gnosis.Data.SQLite
             public Action CompletedCallback { get; set; }
         }
 
-        public Action SearchAsync(IAlgorithm algorithm, string pattern, Action<IEnumerable<ITag>> tagCallback, Action completedCallback)
+        public Action Search(IAlgorithm algorithm, string pattern, Action<IEnumerable<ITag>> tagCallback, Action completedCallback)
         {
             if (algorithm == null)
                 throw new ArgumentNullException("algorithm");
