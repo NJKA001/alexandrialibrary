@@ -92,6 +92,7 @@
     <Compile Include="Core\ExtensionTests.cs" />
     <Compile Include="Data\Firebird\FirebirdTests.cs" />
     <Compile Include="Data\SQLite\LinkTests.cs" />
+    <Compile Include="Data\SQLite\MediaDetailTests.cs" />
     <Compile Include="Data\SQLite\SQLiteTests.cs" />
     <Compile Include="Models\XspfTests.cs" />
     <Compile Include="Network\Spiders\LyricsWikiaSpiderTests.cs" />

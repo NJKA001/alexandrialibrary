@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Gnosis.Core
 {
-    public interface IMediaSummaryRequest
+    public interface IMediaDetailRequest
     {
         string Pattern { get; }
-        Action<IMediaSummary> ItemCallback { get; }
+        Action<IMediaDetail> ItemCallback { get; }
         Action CompletedCallback { get; }
     }
 }

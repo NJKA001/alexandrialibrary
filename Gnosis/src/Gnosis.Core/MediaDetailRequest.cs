@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Gnosis.Core
 {
-    public class MediaSummaryRequest
-        : IMediaSummaryRequest
+    public class MediaDetailRequest
+        : IMediaDetailRequest
     {
-        public MediaSummaryRequest(string pattern, Action<IMediaSummary> itemCallback, Action completedCallback)
+        public MediaDetailRequest(string pattern, Action<IMediaDetail> itemCallback, Action completedCallback)
         {
             if (pattern == null)
                 throw new ArgumentNullException("pattern");
@@ -21,7 +21,7 @@ namespace Gnosis.Core
         }
 
         private readonly string pattern;
-        private readonly Action<IMediaSummary> itemCallback;
+        private readonly Action<IMediaDetail> itemCallback;
         private readonly Action completedCallback;
 
         public string Pattern
@@ -29,7 +29,7 @@ namespace Gnosis.Core
             get { return pattern; }
         }
 
-        public Action<IMediaSummary> ItemCallback
+        public Action<IMediaDetail> ItemCallback
         {
             get { return itemCallback; }
         }

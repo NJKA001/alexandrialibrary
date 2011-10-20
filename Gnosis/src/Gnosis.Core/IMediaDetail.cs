@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core.Image;
+
 namespace Gnosis.Core
 {
-    public interface IMediaSummaryRepository
+    public interface IMediaDetail
     {
-        Action Search(IMediaSummaryRequest request);
+        ITag Tag { get; }
+        IImage Thumbnail { get; }
     }
 }

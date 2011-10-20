@@ -8,5 +8,6 @@ namespace Gnosis.Core.Image
     public interface IImage
         : IMedia
     {
+        //byte[] GetData();
     }
 }
