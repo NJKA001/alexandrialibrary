@@ -215,20 +215,20 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public void Delete(IEnumerable<ILink> links)
+        public void Delete(IEnumerable<long> ids)
         {
-            if (links == null)
-                throw new ArgumentNullException("links");
+            if (ids == null)
+                throw new ArgumentNullException("ids");
 
             try
             {
                 var builders = new List<ICommandBuilder>();
 
-                foreach (var link in links)
+                foreach (var id in ids)
                 {
                     var builder = new CommandBuilder();
                     builder.AppendLine("delete from Link where Id = @Id;");
-                    builder.AddParameter("@Id", link.Id);
+                    builder.AddParameter("@Id", id);
 
                     builders.Add(builder);
                 }
@@ -256,7 +256,8 @@ namespace Gnosis.Data.SQLite
                 foreach (var link in links)
                 {
                     var builder = new CommandBuilder();
-                    builder.AppendLine("insert into Link (Source, Target, Type, Name) values (@Source, @Target, @Type, @Name);");
+                    builder.AppendLine("replace into Link (Id, Source, Target, Type, Name) values (@Id, @Source, @Target, @Type, @Name);");
+                    builder.AddParameter("@Id", link.Id > 0 ? (object)link.Id : (object)DBNull.Value);
                     builder.AddParameter("@Source", link.Source.ToString());
                     builder.AddParameter("@Target", link.Target.ToString());
                     builder.AddParameter("@Type", link.Type.Id);

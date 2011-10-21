@@ -16,7 +16,7 @@ namespace Gnosis.Core
         IEnumerable<ILink> GetBySourceAndTarget(Uri source, Uri target, ILinkType type);
 
         void Initialize();
-        void Delete(IEnumerable<ILink> links);
+        void Delete(IEnumerable<long> ids);
         void Save(IEnumerable<ILink> links);
     }
 }

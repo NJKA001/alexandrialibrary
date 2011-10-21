@@ -35,6 +35,9 @@ namespace Gnosis.Tests.Data.SQLite
             link10 = new Link(source5, target10, type10, name10);
             link11 = new Link(source11, target11, type11, name11);
             link12 = new Link(source12, target2, type5, name12);
+            link13 = new Link(source13, target13, type13, name13);
+            link14 = new Link(source14, target14, type14, name14);
+            link15 = new Link(source15, target15, type15, name15);
 
             links.Add(link1);
             links.Add(link2);
@@ -48,6 +51,9 @@ namespace Gnosis.Tests.Data.SQLite
             links.Add(link10);
             links.Add(link11);
             links.Add(link12);
+            links.Add(link13);
+            links.Add(link14);
+            links.Add(link15);
         }
 
         private readonly IDbConnection connection;
@@ -69,6 +75,9 @@ namespace Gnosis.Tests.Data.SQLite
         protected readonly Uri source10 = new Uri("http://example.com/sources/10");
         protected readonly Uri source11 = new Uri("http://example.com/sources/11");
         protected readonly Uri source12 = new Uri("http://example.com/sources/12");
+        protected readonly Uri source13 = new Uri("http://example.com/sources/13");
+        protected readonly Uri source14 = new Uri("http://example.com/sources/14");
+        protected readonly Uri source15 = new Uri("http://example.com/sources/15");
 
         protected readonly Uri target1 = new Uri("http://example.com/targets/1");
         protected readonly Uri target2 = new Uri("http://example.com/targets/2");
@@ -82,6 +91,9 @@ namespace Gnosis.Tests.Data.SQLite
         protected readonly Uri target10 = new Uri("http://example.com/targets/10");
         protected readonly Uri target11 = new Uri("http://example.com/targets/11");
         protected readonly Uri target12 = new Uri("http://example.com/targets/12");
+        protected readonly Uri target13 = new Uri("http://example.com/targets/13");
+        protected readonly Uri target14 = new Uri("http://example.com/targets/14");
+        protected readonly Uri target15 = new Uri("http://example.com/targets/15");
 
         protected readonly ILinkType type1 = LinkType.Default;
         protected readonly ILinkType type2 = LinkType.ThumbnailImage;
@@ -95,6 +107,9 @@ namespace Gnosis.Tests.Data.SQLite
         protected readonly ILinkType type10 = LinkType.ThumbnailImage;
         protected readonly ILinkType type11 = HtmlLinkType.Alternate;
         protected readonly ILinkType type12 = HtmlLinkType.NoFollow;
+        protected readonly ILinkType type13 = HtmlLinkType.Chapter;
+        protected readonly ILinkType type14 = HtmlLinkType.Chapter;
+        protected readonly ILinkType type15 = HtmlLinkType.Chapter;
 
         protected readonly string name1 = "Abe";
         protected readonly string name2 = "Betty";
@@ -108,6 +123,9 @@ namespace Gnosis.Tests.Data.SQLite
         protected readonly string name10 = "Jenny";
         protected readonly string name11 = "Kurt";
         protected readonly string name12 = "Laura";
+        protected readonly string name13 = "Morris";
+        protected readonly string name14 = "Naomi";
+        protected readonly string name15 = "Orson";
 
         protected readonly ILink link1;
         protected readonly ILink link2;
@@ -121,6 +139,9 @@ namespace Gnosis.Tests.Data.SQLite
         protected readonly ILink link10;
         protected readonly ILink link11;
         protected readonly ILink link12;
+        protected readonly ILink link13;
+        protected readonly ILink link14;
+        protected readonly ILink link15;
 
         protected readonly IList<ILink> links = new List<ILink>(); 
 
@@ -133,7 +154,7 @@ namespace Gnosis.Tests.Data.SQLite
     }
 
     [TestFixture]
-    public class Saved_Links : LinkTestBase
+    public class SavedLinks : LinkTestBase
     {
         [TestFixtureSetUp]
         public void SetUp()
@@ -157,6 +178,43 @@ namespace Gnosis.Tests.Data.SQLite
             Assert.AreEqual(link1.Target.ToString(), byId.Target.ToString());
             Assert.AreEqual(link1.Type, byId.Type);
             Assert.AreEqual(link1.Name, byId.Name);
+        }
+
+        [Test]
+        public void CanBeOverwrittenById()
+        {
+            const string name = "This link name is different";
+            const long id = 15;
+            var byId = repository.GetById(id);
+            Assert.IsNotNull(byId);
+            Assert.AreEqual(id, byId.Id);
+            Assert.AreNotEqual(HtmlLinkType.Glossary, byId.Type);
+            Assert.AreNotEqual(name, byId.Name);
+            var different = new Link(byId.Source, byId.Target, HtmlLinkType.Glossary, name, id);
+            repository.Save(new List<ILink> { different });
+            var check = repository.GetById(id);
+            Assert.IsNotNull(check);
+            Assert.AreEqual(id, check.Id);
+            Assert.AreEqual(name, check.Name);
+            Assert.AreEqual(HtmlLinkType.Glossary, check.Type);
+        }
+
+        [Test]
+        public void CanBeDeleted()
+        {
+            const long id1 = 13;
+            const long id2 = 14;
+            var byId1 = repository.GetById(id1);
+            Assert.IsNotNull(byId1);
+            var byId2 = repository.GetById(id2);
+            Assert.IsNotNull(byId2);
+
+            repository.Delete(new List<long> { id1, id2 });
+
+            var check1 = repository.GetById(id1);
+            Assert.IsNull(check1);
+            var check2 = repository.GetById(id2);
+            Assert.IsNull(check2);
         }
 
         [Test]

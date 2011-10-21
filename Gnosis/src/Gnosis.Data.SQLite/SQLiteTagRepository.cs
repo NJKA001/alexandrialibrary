@@ -431,7 +431,8 @@ namespace Gnosis.Data.SQLite
                 foreach (var tag in tags)
                 {
                     var builder = new CommandBuilder();
-                    builder.AppendLine("insert into Tag (Target, Algorithm, Schema, Domain, Type, Value1, Value2, Value3, Value4, Value5, Value6, Value7) values (@Target, @Algorithm, @Schema, @Domain, @Type, @Value1, @Value2, @Value3, @Value4, @Value5, @Value6, @Value7);");
+                    builder.AppendLine("replace into Tag (Id, Target, Algorithm, Schema, Domain, Type, Value1, Value2, Value3, Value4, Value5, Value6, Value7) values (@Id, @Target, @Algorithm, @Schema, @Domain, @Type, @Value1, @Value2, @Value3, @Value4, @Value5, @Value6, @Value7);");
+                    builder.AddParameter("@Id", tag.Id > 0 ? (object)tag.Id : (object)DBNull.Value);
                     builder.AddParameter("@Target", tag.Target.ToString());
                     builder.AddParameter("@Algorithm", tag.Type.Schema.Algorithm.Id);
                     builder.AddParameter("@Schema", tag.Type.Schema.Id);
@@ -457,22 +458,22 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public void Delete(IEnumerable<ITag> tags)
+        public void Delete(IEnumerable<long> ids)
         {
-            if (tags == null)
-                throw new ArgumentNullException("tags");
+            if (ids == null)
+                throw new ArgumentNullException("ids");
 
             try
             {
-                logger.Info("SQLiteTagRepository.Delete(IEnumerable<ITag>)");
+                logger.Info("SQLiteTagRepository.Delete(IEnumerable<long>)");
 
                 var builders = new List<ICommandBuilder>();
 
-                foreach (var tag in tags)
+                foreach (var id in ids)
                 {
                     var builder = new CommandBuilder();
                     builder.AppendLine("delete from Tag where Id = @Id;");
-                    builder.AddParameter("@Id", tag.Id);
+                    builder.AddParameter("@Id", id);
                     builders.Add(builder);
                 }
 
@@ -483,7 +484,7 @@ namespace Gnosis.Data.SQLite
             }
             catch (Exception ex)
             {
-                logger.Error("  Delete(IEnumerable<ITag>)", ex);
+                logger.Error("  Delete(IEnumerable<long>)", ex);
                 throw;
             }
         }

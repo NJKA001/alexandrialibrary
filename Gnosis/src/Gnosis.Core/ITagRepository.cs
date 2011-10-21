@@ -17,7 +17,7 @@ namespace Gnosis.Core
         Action Search(IAlgorithm algorithm, string pattern, Action<IEnumerable<ITag>> tagCallback, Action completedCallback);
 
         void Initialize();
-        void Delete(IEnumerable<ITag> tags);
+        void Delete(IEnumerable<long> ids);
         void Save(IEnumerable<ITag> tags);
     }
 }
