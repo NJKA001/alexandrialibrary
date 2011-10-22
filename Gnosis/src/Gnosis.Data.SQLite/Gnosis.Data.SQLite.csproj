@@ -94,6 +94,7 @@
     <Compile Include="SQLiteConnectionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLiteLinkRepository.cs" />
+    <Compile Include="SQLiteMediaDetailRepository.cs" />
     <Compile Include="SQLiteMediaRepository.cs" />
     <Compile Include="SQLiteRepositoryBase.cs" />
     <Compile Include="SQLiteTagRepository.cs" />

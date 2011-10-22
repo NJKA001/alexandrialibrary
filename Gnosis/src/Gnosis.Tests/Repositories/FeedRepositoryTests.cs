@@ -16,6 +16,7 @@ using Gnosis.Alexandria.Repositories.Feeds;
 
 namespace Gnosis.Tests.Repositories
 {
+    /*
     [TestFixture]
     public class FeedRepositoryTests
     {
@@ -568,4 +569,5 @@ namespace Gnosis.Tests.Repositories
 
         #endregion
     }
+    */
 }

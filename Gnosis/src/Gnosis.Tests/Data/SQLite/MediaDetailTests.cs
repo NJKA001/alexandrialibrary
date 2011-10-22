@@ -21,7 +21,7 @@ namespace Gnosis.Tests.Data.SQLite
             connection.Open();
             tagRepository = new SQLiteTagRepository(logger, tagTypeFactory, connection);
             linkRepository = new SQLiteLinkRepository(logger, linkTypeFactory, connection);
-            detailRepository = new MediaDetailRepository(logger, tagRepository, linkRepository);
+            detailRepository = new SQLiteMediaDetailRepository(logger, tagRepository, linkRepository);
 
             tagRepository.Initialize();
             linkRepository.Initialize();
@@ -48,17 +48,19 @@ namespace Gnosis.Tests.Data.SQLite
         {
             link1 = new Link(trackUri1, thumbUri1, LinkType.ThumbnailImage, "Album Cover Image");
             linkRepository.Save(new List<ILink> { link1 });
-            System.Diagnostics.Debug.WriteLine("Save Link");
 
-            tag1 = new Tag(trackUri1, Id3v2TagType.Artist, new string[] { "Nine Inch Nails", string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty });
-            tagRepository.Save(new List<ITag> { tag1 });
-            System.Diagnostics.Debug.WriteLine("Save Tag");
+            tag1 = new Tag(trackUri1, Id3v2TagType.Artist, new string[] { "Björk", string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty });
+            tag2 = new Tag(trackUri1, TagType.AmericanizedStringArray, new string[] { "Björk".ToAmericanizedString(), string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty });
+            tag3 = new Tag(trackUri1, TagType.DefaultString, "Bjork is awesome!");
+            tagRepository.Save(new List<ITag> { tag1, tag2, tag3 });
         }
 
         protected Uri trackUri1 = new Uri("http://example.com/bands/nin/broken/pinion.mp3");
         protected Uri thumbUri1 = new Uri("http://example.com/images/nin/broken/cover.jpg");
         protected ILink link1;
         protected ITag tag1;
+        protected ITag tag2;
+        protected ITag tag3;
 
         #endregion
     }
@@ -71,20 +73,15 @@ namespace Gnosis.Tests.Data.SQLite
         public void Can_Be_Read_As_Details()
         {
             var details = new List<IMediaDetail>();
-            var completed = false;
-            var request = new MediaDetailRequest("Nine%", item => details.Add(item), () => completed = true);
+            
+            var task = detailRepository.Search("Bjork%");
+            task.AddResultsCallback(x => details.AddRange(x));
+            task.StartSynchronously();
 
-            detailRepository.Search(request);
-
-            while (!completed)
-            {
-                System.Threading.Thread.Sleep(100);
-            }
-
-            Assert.AreEqual(1, details.Count);
+            Assert.AreEqual(2, details.Count);
             var first = details.FirstOrDefault();
             Assert.IsNotNull(first);
-            Assert.AreEqual(tag1.Value, first.Tag.Value);
+            Assert.AreEqual(tag3.Value, first.Tag.Value);
             Assert.AreEqual(link1.Target, first.Thumbnail.Location);
         }
 

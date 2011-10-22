@@ -188,7 +188,6 @@
     <Compile Include="IMediaSearch.cs" />
     <Compile Include="IMediaDetail.cs" />
     <Compile Include="IMediaDetailRepository.cs" />
-    <Compile Include="IMediaDetailRequest.cs" />
     <Compile Include="ITagDomain.cs" />
     <Compile Include="ITagSchema.cs" />
     <Compile Include="ITagType.cs" />
@@ -200,8 +199,6 @@
     <Compile Include="LinkType.cs" />
     <Compile Include="LinkTypeFactory.cs" />
     <Compile Include="MediaDetail.cs" />
-    <Compile Include="MediaDetailRepository.cs" />
-    <Compile Include="MediaDetailRequest.cs" />
     <Compile Include="Tags\Id3\Id3v1\Id3v1Extensions.cs" />
     <Compile Include="Tags\Id3\Id3v1\Id3v1Genre.cs" />
     <Compile Include="TagTuple.cs" />

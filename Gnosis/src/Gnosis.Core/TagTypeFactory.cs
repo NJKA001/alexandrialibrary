@@ -14,6 +14,9 @@ namespace Gnosis.Core
     {
         public TagTypeFactory()
         {
+            foreach (var defType in TagType.GetAllDefault())
+                Add(defType);
+
             foreach (var id3v1Type in Id3v1TagType.GetAll())
                 Add(id3v1Type);
 
