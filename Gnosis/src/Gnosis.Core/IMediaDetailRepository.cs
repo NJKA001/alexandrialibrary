@@ -7,6 +7,6 @@ namespace Gnosis.Core
 {
     public interface IMediaDetailRepository
     {
-        Action Search(IMediaDetailRequest request);
+        ITask<IEnumerable<IMediaDetail>> Search(IMediaDetailRequest request);
     }
 }

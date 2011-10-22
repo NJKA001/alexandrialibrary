@@ -278,12 +278,31 @@ namespace Gnosis.Data.SQLite
             {
                 logger.Info("SQLiteTagRepository.GetByAlgorithm(IAlgorithm, ITagDomain, string)");
 
-                var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value1 like @Pattern;");
-                builder.AddParameter("@Algorithm", algorithm.Id);
-                builder.AddParameter("@Domain", domain.Id);
-                builder.AddParameter("@Pattern", pattern);
+                if (domain == TagDomain.StringArray)
+                {
+                    var tags = new List<ITag>();
 
-                return GetTags(builder);
+                    for (var i = 1; i < 8; i++)
+                    {
+                        var builder = new CommandBuilder(string.Format("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value{0} like @Pattern;", i));
+                        builder.AddParameter("@Algorithm", algorithm.Id);
+                        builder.AddParameter("@Domain", domain.Id);
+                        builder.AddParameter("@Pattern", pattern);
+
+                        tags.AddRange(GetTags(builder));
+                    }
+
+                    return tags;
+                }
+                else
+                {
+                    var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value1 like @Pattern;");
+                    builder.AddParameter("@Algorithm", algorithm.Id);
+                    builder.AddParameter("@Domain", domain.Id);
+                    builder.AddParameter("@Pattern", pattern);
+
+                    return GetTags(builder);
+                }
             }
             catch (Exception ex)
             {
@@ -363,24 +382,29 @@ namespace Gnosis.Data.SQLite
             public Action CompletedCallback { get; set; }
         }
 
-        public Action Search(IAlgorithm algorithm, string pattern, Action<IEnumerable<ITag>> tagCallback, Action completedCallback)
+        public ITask<IEnumerable<ITag>> Search(IAlgorithm algorithm, string pattern)
         {
             if (algorithm == null)
                 throw new ArgumentNullException("algorithm");
             if (pattern == null)
                 throw new ArgumentNullException("pattern");
-            if (tagCallback == null)
-                throw new ArgumentNullException("tagCallback");
 
             try
             {
-                var options = new SearchOptions(algorithm, pattern, tagCallback, completedCallback);
-                var worker = new System.ComponentModel.BackgroundWorker();
-                Action cancelAction = () => worker.CancelAsync();
-                worker.WorkerSupportsCancellation = true;
-                worker.DoWork += StartSearch;
-                worker.RunWorkerAsync(options);
-                return cancelAction;
+                return new TagSearchTask(logger, this, algorithm, pattern);
+                //var startAction = () => 
+                //    {
+
+                //    };
+
+                //var handle = new TaskHandle<IEnumerable<ITag>>(
+                //var options = new SearchOptions(algorithm, pattern, tagCallback, completedCallback);
+                //var worker = new System.ComponentModel.BackgroundWorker();
+                //Action cancelAction = () => worker.CancelAsync();
+                //worker.WorkerSupportsCancellation = true;
+                //worker.DoWork += StartSearch;
+                //worker.RunWorkerAsync(options);
+                //return cancelAction;
             }
             catch (Exception ex)
             {

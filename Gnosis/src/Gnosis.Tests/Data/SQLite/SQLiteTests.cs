@@ -150,20 +150,27 @@ namespace Gnosis.Tests.Data.SQLite
             Assert.AreEqual(Id3v1Genre.Rock_and_Roll, genreTag.Value);
 
             var taskResults = new List<ITag>();
-            var completed = false;
-            var cancel = tagRepository.Search(Algorithm.Default, "Tool%", t => taskResults.AddRange(t), () => completed = true);
+            //var completed = false;
+            var task1 = tagRepository.Search(Algorithm.Default, "Tool%");
+            task1.AddResultsCallback(t => taskResults.AddRange(t));
+            task1.StartSynchronously();
+
+            //t => taskResults.AddRange(t), () => completed = true);
             
-            while(!completed)
-                System.Threading.Thread.Sleep(100);
+            //while(!completed)
+                //System.Threading.Thread.Sleep(100);
             
             Assert.AreEqual(4, taskResults.Count);
 
             var genreResults = new List<ITag>();
-            var genreCompleted = false;
-            var genreCancel = tagRepository.Search(Algorithm.Default, "Rock%", t => genreResults.AddRange(t), () => genreCompleted = true);
+            //var genreCompleted = false;
+            var genreTask = tagRepository.Search(Algorithm.Default, "Rock%");
+            genreTask.AddResultsCallback(x => genreResults.AddRange(x));
+            genreTask.StartSynchronously();
+                //t => genreResults.AddRange(t), () => genreCompleted = true);
 
-            while (!genreCompleted)
-                System.Threading.Thread.Sleep(100);
+            //while (!genreCompleted)
+                //System.Threading.Thread.Sleep(100);
 
             var filteredGenreResults = genreResults.Where(x => x.Type == Id3v1TagType.Genre);
             Assert.AreEqual(1, filteredGenreResults.Count());

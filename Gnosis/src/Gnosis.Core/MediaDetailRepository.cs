@@ -39,35 +39,40 @@ namespace Gnosis.Core
 
         #region IMediaSummaryRepository Members
 
-        public Action Search(IMediaDetailRequest request)
+        public ITask<IEnumerable<IMediaDetail>> Search(IMediaDetailRequest request)
         {
             try
             {
-                var isRunning = true;
+                return null;
 
-                Action<IEnumerable<ITag>> tagCallback = tags =>
-                    {
-                        try
-                        {
-                            logger.Debug("In tagCallback");
-                            if (isRunning)
-                            {
-                                foreach (var tag in tags)
-                                {
-                                    var thumbnail = GetThumbnail(tag.Target);
-                                    request.ItemCallback(new MediaDetail(tag, thumbnail));
-                                }
-                            }
-                        }
-                        catch (Exception callbackEx)
-                        {
-                            logger.Error("  Error in tagCallback", callbackEx);
-                        }
-                    };
+                //var isRunning = true;
 
-                var cancelTagSearch = tagRepository.Search(Algorithm.Default, request.Pattern, tagCallback, () => { request.CompletedCallback(); });
+                //Action<IEnumerable<ITag>> tagCallback = tags =>
+                //    {
+                //        try
+                //        {
+                //            logger.Debug("In tagCallback");
+                //            if (isRunning)
+                //            {
+                //                foreach (var tag in tags)
+                //                {
+                //                    var thumbnail = GetThumbnail(tag.Target);
+                //                    request.ItemCallback(new MediaDetail(tag, thumbnail));
+                //                }
+                //            }
+                //        }
+                //        catch (Exception callbackEx)
+                //        {
+                //            logger.Error("  Error in tagCallback", callbackEx);
+                //        }
+                //    };
 
-                return () => { isRunning = false; cancelTagSearch(); };
+                //logger.Debug("Before Search");
+                //var task = tagRepository.Search(Algorithm.Default, request.Pattern); //, //tagCallback, () => { request.CompletedCallback(); });
+                //task.AddResultsCallback(tagCallback);
+                //task.AddCompletedCallback(() => request.CompletedCallback());
+
+                //return () => { isRunning = false; task.Cancel(); };
             }
             catch (Exception ex)
             {

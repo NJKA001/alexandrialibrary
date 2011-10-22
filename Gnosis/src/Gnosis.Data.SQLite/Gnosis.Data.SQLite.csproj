@@ -90,12 +90,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MediaDetailSearchTask.cs" />
     <Compile Include="SQLiteConnectionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLiteLinkRepository.cs" />
     <Compile Include="SQLiteMediaRepository.cs" />
     <Compile Include="SQLiteRepositoryBase.cs" />
     <Compile Include="SQLiteTagRepository.cs" />
+    <Compile Include="TagSearchTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gnosis.Core\Gnosis.Core.csproj">

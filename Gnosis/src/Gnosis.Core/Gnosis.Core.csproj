@@ -195,6 +195,7 @@
     <Compile Include="ITagTypeFactory.cs" />
     <Compile Include="ITagFactory.cs" />
     <Compile Include="ITagRepository.cs" />
+    <Compile Include="ITask.cs" />
     <Compile Include="Links\Html\HtmlLinkType.cs" />
     <Compile Include="LinkType.cs" />
     <Compile Include="LinkTypeFactory.cs" />
@@ -262,6 +263,8 @@
     <Compile Include="Tags\Id3\IId3Tag.cs" />
     <Compile Include="TagType.cs" />
     <Compile Include="TagTypeFactory.cs" />
+    <Compile Include="TaskBase.cs" />
+    <Compile Include="TaskStatus.cs" />
     <Compile Include="Time\Rfc822DateTime.cs" />
     <Compile Include="Document\Xml\Atom\AtomCommon.cs" />
     <Compile Include="Document\Xml\Atom\AtomLink.cs" />

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Gnosis.Core
 {
@@ -14,7 +13,7 @@ namespace Gnosis.Core
         IEnumerable<ITag> GetByTarget(Uri target, ITagType type);
         IEnumerable<ITag> GetByAlgorithm(IAlgorithm algorithm, ITagDomain domain, string pattern);
 
-        Action Search(IAlgorithm algorithm, string pattern, Action<IEnumerable<ITag>> tagCallback, Action completedCallback);
+        ITask<IEnumerable<ITag>> Search(IAlgorithm algorithm, string pattern);
 
         void Initialize();
         void Delete(IEnumerable<long> ids);
