@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Xml;
 
-namespace Gnosis.Core
+namespace Gnosis.Core.Document
 {
     public class ContentType
         : IContentType

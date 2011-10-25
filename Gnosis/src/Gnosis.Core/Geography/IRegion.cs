@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core
+namespace Gnosis.Core.Geography
 {
     /// <summary>
     /// Defines a supranational region or geographic area based on UN standard M.49

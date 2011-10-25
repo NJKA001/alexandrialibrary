@@ -8,12 +8,9 @@ namespace Gnosis.Core
     public interface IMediaRepository
     {
         IMedia Lookup(Uri location);
-        IEnumerable<IMedia> All();
-
+        
         void Initialize();
-        void Delete(IMedia media);
-        void Delete(IEnumerable<IMedia> media);
-        void Save(IMedia media);
+        void Delete(IEnumerable<Uri> locations);
         void Save(IEnumerable<IMedia> media);
     }
 }

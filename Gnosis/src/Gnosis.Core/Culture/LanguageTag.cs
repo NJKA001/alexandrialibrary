@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core
+using Gnosis.Core.Geography;
+
+namespace Gnosis.Core.Culture
 {
     public class LanguageTag
         : ILanguageTag
@@ -291,7 +293,7 @@ namespace Gnosis.Core
                                     else
                                     {
                                         if (int.TryParse(token, out regionCode))
-                                            region = Core.Region.GetRegionByCode(regionCode);
+                                            region = Core.Geography.Region.GetRegionByCode(regionCode);
                                         else
                                             extendedLanguage = token;
                                     }
@@ -305,7 +307,7 @@ namespace Gnosis.Core
                                     }
                                     else
                                     {
-                                        script = Core.Script.GetScriptByCode(token);
+                                        script = Core.Culture.Script.GetScriptByCode(token);
                                     }
                                     break;
                                 }

@@ -5,8 +5,10 @@ using System.Text;
 
 using Gnosis.Core;
 using Gnosis.Core.Image;
+using Gnosis.Core.Tags;
+using Gnosis.Core.Utilities;
 
-namespace Gnosis.Data.SQLite
+namespace Gnosis.Core.Tasks
 {
     public class MediaDetailSearchTask
         : TaskBase<IEnumerable<IMediaDetail>>

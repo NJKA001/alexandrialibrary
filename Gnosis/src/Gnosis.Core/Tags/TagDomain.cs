@@ -5,7 +5,7 @@ using System.Text;
 
 using Gnosis.Core.Tags.Id3.Id3v1;
 
-namespace Gnosis.Core
+namespace Gnosis.Core.Tags
 {
     public class TagDomain
         : ITagDomain

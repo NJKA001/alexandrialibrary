@@ -7,7 +7,7 @@ using Gnosis.Core.Tags.Id3;
 using Gnosis.Core.Tags.Id3.Id3v1;
 using Gnosis.Core.Tags.Id3.Id3v2;
 
-namespace Gnosis.Core
+namespace Gnosis.Core.Tags
 {
     public class TagTypeFactory
         : ITagTypeFactory

@@ -4,6 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core.Culture;
+using Gnosis.Core.Document;
+using Gnosis.Core.Geography;
+
 namespace Gnosis.Core
 {
     public static class ObjectExtensions

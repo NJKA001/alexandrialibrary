@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Core.Tags;
+using Gnosis.Core.Utilities;
 
-namespace Gnosis.Data.SQLite
+namespace Gnosis.Core.Tasks
 {
     public class TagSearchTask
         : TaskBase<IEnumerable<ITag>>

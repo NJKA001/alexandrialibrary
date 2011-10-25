@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
+using Gnosis.Core.Culture;
 using Gnosis.Core.Document.Xml.Atom;
 using Gnosis.Core.Document.Xml.DublinCore;
 using Gnosis.Core.Document.Xml.FeedBurner;
@@ -271,7 +272,7 @@ namespace Gnosis.Core.Document.Xml
                 return null;
 
             var version = node.Version ?? "1.0";
-            var encoding = Gnosis.Core.CharacterSet.Parse(node.Encoding);
+            var encoding = Gnosis.Core.Document.CharacterSet.Parse(node.Encoding);
             var standalone = Standalone.Undefined;
             if (node.Standalone != null)
             {

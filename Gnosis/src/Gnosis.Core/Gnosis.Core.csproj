@@ -54,6 +54,9 @@
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\..\lib\HtmlAgilityPack\1.4.0\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\lib\log4net\1.2.10.0\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -185,9 +188,11 @@
     <Compile Include="ILinkRepository.cs" />
     <Compile Include="ILinkType.cs" />
     <Compile Include="ILinkTypeFactory.cs" />
-    <Compile Include="IMediaSearch.cs" />
     <Compile Include="IMediaDetail.cs" />
     <Compile Include="IMediaDetailRepository.cs" />
+    <Compile Include="ISpider.cs" />
+    <Compile Include="IMediaSummary.cs" />
+    <Compile Include="IMediaSummaryRepository.cs" />
     <Compile Include="ITagDomain.cs" />
     <Compile Include="ITagSchema.cs" />
     <Compile Include="ITagType.cs" />
@@ -202,18 +207,20 @@
     <Compile Include="Tags\Id3\Id3v1\Id3v1Extensions.cs" />
     <Compile Include="Tags\Id3\Id3v1\Id3v1Genre.cs" />
     <Compile Include="TagTuple.cs" />
-    <Compile Include="TagDomain.cs" />
-    <Compile Include="TagFactory.cs" />
-    <Compile Include="TagSchema.cs" />
+    <Compile Include="Tags\TagDomain.cs" />
+    <Compile Include="Tags\TagFactory.cs" />
+    <Compile Include="Tags\TagSchema.cs" />
     <Compile Include="Tags\Id3\Id3v1\Id3v1TagType.cs" />
     <Compile Include="Tags\Id3\Id3v1\IId3v1Tag.cs" />
     <Compile Include="Tags\Id3\Id3v2\Id3v2TagType.cs" />
     <Compile Include="IAlgorithm.cs" />
     <Compile Include="ILink.cs" />
-    <Compile Include="ILogger.cs" />
-    <Compile Include="IMediaRequest.cs" />
+    <Compile Include="Tasks\MediaDetailSearchTask.cs" />
+    <Compile Include="Tasks\TagSearchTask.cs" />
+    <Compile Include="Utilities\DebugLogger.cs" />
+    <Compile Include="Utilities\ILogger.cs" />
     <Compile Include="IMediaRepository.cs" />
-    <Compile Include="ILanguageTag.cs" />
+    <Compile Include="Culture\ILanguageTag.cs" />
     <Compile Include="Image\BitmapImage.cs" />
     <Compile Include="Image\GifImage.cs" />
     <Compile Include="Image\IImage.cs" />
@@ -223,30 +230,30 @@
     <Compile Include="IMedia.cs" />
     <Compile Include="IMediaFactory.cs" />
     <Compile Include="ITag.cs" />
-    <Compile Include="LanguageTag.cs" />
+    <Compile Include="Culture\LanguageTag.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
-    <Compile Include="ICountry.cs" />
-    <Compile Include="ILanguage.cs" />
-    <Compile Include="Country.cs" />
-    <Compile Include="IScript.cs" />
-    <Compile Include="Language.cs" />
+    <Compile Include="Geography\ICountry.cs" />
+    <Compile Include="Culture\ILanguage.cs" />
+    <Compile Include="Geography\Country.cs" />
+    <Compile Include="Culture\IScript.cs" />
+    <Compile Include="Culture\Language.cs" />
     <Compile Include="Link.cs" />
     <Compile Include="MediaFactory.cs" />
-    <Compile Include="Script.cs" />
+    <Compile Include="Culture\Script.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringBuilderExtensions.cs" />
-    <Compile Include="IRegion.cs" />
-    <Compile Include="Region.cs" />
+    <Compile Include="Geography\IRegion.cs" />
+    <Compile Include="Geography\Region.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\TimeSpanExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="Document\VCard\IVirtualCard.cs" />
-    <Compile Include="CharacterSet.cs" />
-    <Compile Include="ContentType.cs" />
-    <Compile Include="ICharacterSet.cs" />
-    <Compile Include="IContentType.cs" />
+    <Compile Include="Document\CharacterSet.cs" />
+    <Compile Include="Document\ContentType.cs" />
+    <Compile Include="Document\ICharacterSet.cs" />
+    <Compile Include="Document\IContentType.cs" />
     <Compile Include="Document\Xml\IStyleMedia.cs" />
     <Compile Include="IMediaType.cs" />
     <Compile Include="Document\Xml\StyleMedia.cs" />
@@ -258,9 +265,9 @@
     <Compile Include="Tag.cs" />
     <Compile Include="Tags\Id3\Id3v2\IId3v2Tag.cs" />
     <Compile Include="Tags\Id3\IId3Tag.cs" />
-    <Compile Include="TagType.cs" />
-    <Compile Include="TagTypeFactory.cs" />
-    <Compile Include="TaskBase.cs" />
+    <Compile Include="Tags\TagType.cs" />
+    <Compile Include="Tags\TagTypeFactory.cs" />
+    <Compile Include="Tasks\TaskBase.cs" />
     <Compile Include="TaskStatus.cs" />
     <Compile Include="Time\Rfc822DateTime.cs" />
     <Compile Include="Document\Xml\Atom\AtomCommon.cs" />
@@ -492,9 +499,9 @@
     <Compile Include="Document\Xml\YouTube\YouTubeUsername.cs" />
     <Compile Include="Document\Xml\YouTube\YouTubeVideoId.cs" />
     <Compile Include="Document\Xml\YouTube\YouTubeWhen.cs" />
+    <Compile Include="Utilities\Log4NetLogger.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Geography\" />
     <Folder Include="Video\" />
   </ItemGroup>
   <ItemGroup>

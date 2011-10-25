@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core
+using Gnosis.Core.Utilities;
+
+namespace Gnosis.Core.Tasks
 {
     #region TaskBase
 

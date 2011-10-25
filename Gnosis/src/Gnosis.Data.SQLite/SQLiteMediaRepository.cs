@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Core.Utilities;
 
 namespace Gnosis.Data.SQLite
 {
@@ -49,22 +50,22 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<IMedia> All()
-        {
-            try
-            {
-                logger.Info("SQLiteMediaRepository.All()");
+        //public IEnumerable<IMedia> All()
+        //{
+        //    try
+        //    {
+        //        logger.Info("SQLiteMediaRepository.All()");
 
-                var builder = new CommandBuilder("select * from Media;");
+        //        var builder = new CommandBuilder("select * from Media;");
 
-                return GetRecords(builder, record => ReadMedia(record));
-            }
-            catch (Exception ex)
-            {
-                logger.Error("  All", ex);
-                throw;
-            }
-        }
+        //        return GetRecords(builder, record => ReadMedia(record));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logger.Error("  All", ex);
+        //        throw;
+        //    }
+        //}
 
         public void Initialize()
         {
@@ -86,18 +87,18 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public void Delete(IMedia media)
-        {
-            if (media == null)
-                throw new ArgumentNullException("media");
+        //public void Delete(IMedia media)
+        //{
+        //    if (media == null)
+        //        throw new ArgumentNullException("media");
 
-            Delete(new List<IMedia> { media });
-        }
+        //    Delete(new List<IMedia> { media });
+        //}
 
-        public void Delete(IEnumerable<IMedia> media)
+        public void Delete(IEnumerable<Uri> locations)
         {
-            if (media == null)
-                throw new ArgumentNullException("media");
+            if (locations == null)
+                throw new ArgumentNullException("locations");
 
             try
             {
@@ -105,11 +106,11 @@ namespace Gnosis.Data.SQLite
 
                 var builders = new List<ICommandBuilder>();
 
-                foreach (var medium in media)
+                foreach (var location in locations)
                 {
                     var builder = new CommandBuilder();
                     builder.AppendLine("delete from Media where Location = @Location;");
-                    builder.AddParameter("@Location", medium.Location.ToString());
+                    builder.AddParameter("@Location", location.ToString());
                     builders.Add(builder);
                 }
 
@@ -125,28 +126,28 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public void Save(IMedia media)
-        {
-            if (media == null)
-                throw new ArgumentNullException("media");
+        //public void Save(IMedia media)
+        //{
+        //    if (media == null)
+        //        throw new ArgumentNullException("media");
 
-            try
-            {
-                logger.Info("SQLiteMediaRepository.Save(IMedia)");
+        //    try
+        //    {
+        //        logger.Info("SQLiteMediaRepository.Save(IMedia)");
 
-                var builder = new CommandBuilder();
-                builder.Append("insert into Media (Location, Type) values (@Location, @Type);");
-                builder.AddParameter("@Location", media.Location.ToString());
-                builder.AddParameter("@Type", media.Type.ToString());
+        //        var builder = new CommandBuilder();
+        //        builder.Append("insert into Media (Location, Type) values (@Location, @Type);");
+        //        builder.AddParameter("@Location", media.Location.ToString());
+        //        builder.AddParameter("@Type", media.Type.ToString());
 
-                ExecuteNonQuery(builder);
-            }
-            catch (Exception ex)
-            {
-                logger.Error("  Save(IMedia)", ex);
-                throw;
-            }
-        }
+        //        ExecuteNonQuery(builder);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logger.Error("  Save(IMedia)", ex);
+        //        throw;
+        //    }
+        //}
 
         public void Save(IEnumerable<IMedia> media)
         {
@@ -162,7 +163,7 @@ namespace Gnosis.Data.SQLite
                 foreach (var medium in media)
                 {
                     var builder = new CommandBuilder();
-                    builder.AppendLine("insert into Media (Location, Type) values (@Location, @Type);");
+                    builder.AppendLine("replace into Media (Location, Type) values (@Location, @Type);");
                     builder.AddParameter("@Location", medium.Location.ToString());
                     builder.AddParameter("@Type", medium.Type.ToString());
                     builders.Add(builder);

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core
+using Gnosis.Core.Geography;
+
+namespace Gnosis.Core.Culture
 {
     /// <summary>
     /// Defines a language tag based on IETF standard BCP 47

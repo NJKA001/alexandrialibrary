@@ -122,8 +122,6 @@
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Extensions\TreeViewExtensions.cs" />
     <Compile Include="Extensions\UIElementExtensions.cs" />
-    <Compile Include="Loggers\DebugLogger.cs" />
-    <Compile Include="Loggers\Log4NetLogger.cs" />
     <Compile Include="DependencyObjectExtensions.cs" />
     <Compile Include="Models\ChildBase.cs" />
     <Compile Include="Models\Devices\IDevice.cs" />

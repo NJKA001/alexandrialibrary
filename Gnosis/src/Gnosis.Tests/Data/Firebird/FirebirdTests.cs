@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Alexandria.Loggers;
 using Gnosis.Core;
 using Gnosis.Core.Tags.Id3;
 using Gnosis.Core.Tags.Id3.Id3v1;
+using Gnosis.Core.Utilities;
 using Gnosis.Data;
 
 using NUnit.Framework;

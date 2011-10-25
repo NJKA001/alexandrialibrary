@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core.Image;
+
 namespace Gnosis.Core
 {
-    public interface IMediaRequest
+    public interface IMediaSummary
     {
         IEnumerable<ITag> Tags { get; }
-        Action<IMedia> ItemFoundCallback { get; }
-        Action CompletedCallback { get; }
+        IImage Thumbnail { get; }
     }
 }

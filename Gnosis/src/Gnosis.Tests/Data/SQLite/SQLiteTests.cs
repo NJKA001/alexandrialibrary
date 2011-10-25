@@ -4,11 +4,12 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Alexandria.Loggers;
 using Gnosis.Core;
+using Gnosis.Core.Tags;
 using Gnosis.Core.Tags.Id3;
 using Gnosis.Core.Tags.Id3.Id3v1;
 using Gnosis.Core.Tags.Id3.Id3v2;
+using Gnosis.Core.Utilities;
 using Gnosis.Data;
 using Gnosis.Data.SQLite;
 
@@ -202,10 +203,13 @@ namespace Gnosis.Tests.Data.SQLite
 
             mediaRepository.Save(new List<IMedia> { media1, media2, media3 });
 
-            var all = mediaRepository.All();
+            var check1 = mediaRepository.Lookup(uri1);
+            var check2 = mediaRepository.Lookup(uri3);
+            var check3 = mediaRepository.Lookup(uri2);
 
-            Assert.IsNotNull(all);
-            Assert.IsTrue(all.Count() == 3);
+            Assert.IsNotNull(check1);
+            Assert.IsNotNull(check2);
+            Assert.IsNotNull(check3);
         }
     }
 }

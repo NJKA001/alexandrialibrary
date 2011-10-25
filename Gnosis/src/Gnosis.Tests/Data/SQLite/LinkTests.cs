@@ -8,9 +8,9 @@ using NUnit.Framework;
 
 using Gnosis.Core;
 using Gnosis.Core.Links.Html;
+using Gnosis.Core.Utilities;
 using Gnosis.Data;
 using Gnosis.Data.SQLite;
-using Gnosis.Alexandria.Loggers;
 
 namespace Gnosis.Tests.Data.SQLite
 {

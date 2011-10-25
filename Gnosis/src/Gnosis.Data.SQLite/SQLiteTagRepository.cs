@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Gnosis.Core;
+using Gnosis.Core.Tags;
+using Gnosis.Core.Tasks;
+using Gnosis.Core.Utilities;
 using Gnosis.Data;
 using Gnosis.Data.Queries;
 

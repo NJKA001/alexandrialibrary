@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core
+namespace Gnosis.Core.Culture
 {
     /// <summary>
     /// Defines a language based on the ISO 639-1 and 639-2 standards

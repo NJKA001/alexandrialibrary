@@ -6,9 +6,10 @@ using System.Text;
 
 using NUnit.Framework;
 
-using Gnosis.Alexandria.Loggers;
 using Gnosis.Core;
+using Gnosis.Core.Tags;
 using Gnosis.Core.Tags.Id3.Id3v2;
+using Gnosis.Core.Utilities;
 using Gnosis.Data.SQLite;
 
 namespace Gnosis.Tests.Data.SQLite

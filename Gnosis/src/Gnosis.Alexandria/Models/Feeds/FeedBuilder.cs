@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml;
 
 using Gnosis.Core;
+using Gnosis.Core.Culture;
 using Gnosis.Data;
 
 namespace Gnosis.Alexandria.Models.Feeds

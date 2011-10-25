@@ -6,6 +6,7 @@ using System.Text;
 using NUnit.Framework;
 
 using Gnosis.Core;
+using Gnosis.Core.Document;
 
 namespace Gnosis.Tests.Models
 {
@@ -16,7 +17,7 @@ namespace Gnosis.Tests.Models
         public void GetContentTypeForRssFeedWithInvalidContentType()
         {
             var location = new Uri("http://feeds.arstechnica.com/arstechnica/index");
-            var contentType = location.ToContentType();
+            var contentType = ContentType.GetContentType(location); //location.ToContentType();
             Assert.IsNotNull(contentType);
             Assert.AreNotEqual(ContentType.Empty, contentType);
             Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
@@ -28,7 +29,7 @@ namespace Gnosis.Tests.Models
         public void GetContentTypeForAtomFeed()
         {
             var location = new Uri("http://www.blogger.com/feeds/8677504/posts/default");
-            var contentType = location.ToContentType();
+            var contentType = ContentType.GetContentType(location);
             Assert.IsNotNull(contentType);
             Assert.AreNotEqual(ContentType.Empty, contentType);
             Assert.AreEqual(MediaType.ApplicationAtomXml, contentType.Type);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core
+namespace Gnosis.Core.Culture
 {
     public class Language
         : ILanguage

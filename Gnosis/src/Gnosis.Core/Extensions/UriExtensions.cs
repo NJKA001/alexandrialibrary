@@ -6,6 +6,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 
+using Gnosis.Core.Document;
 using Gnosis.Core.Document.Xml;
 using Gnosis.Core.Document.Xml.Xhtml;
 
@@ -51,20 +52,20 @@ namespace Gnosis.Core
         }
         */
 
-        public static IContentType ToContentType(this Uri location)
-        {
-            if (location == null)
-                return ContentType.Empty;
+        //public static IContentType ToContentType(this Uri location)
+        //{
+        //    if (location == null)
+        //        return ContentType.Empty;
 
-            try
-            {
-                return ContentType.GetContentType(location);
-            }
-            catch
-            {
-                return ContentType.Empty;
-            }
-        }
+        //    try
+        //    {
+        //        return ContentType.GetContentType(location);
+        //    }
+        //    catch
+        //    {
+        //        return ContentType.Empty;
+        //    }
+        //}
 
         public static string ToFileExtension(this Uri location)
         {
@@ -115,7 +116,7 @@ namespace Gnosis.Core
 
             try
             {
-                var contentType = location.ToContentType();
+                var contentType = ContentType.GetContentType(location); // location.ToContentType();
                 return contentType.Type;
             }
             catch

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Core.Document;
 using Gnosis.Core.Document.Xml;
 using Gnosis.Core.Document.Xml.Xspf;
 
@@ -27,7 +28,7 @@ namespace Gnosis.Tests.Models
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var contentType = location.ToContentType();
+            var contentType = ContentType.GetContentType(location); //.ToContentType();
             Assert.AreEqual(MediaType.ApplicationXspfXml, contentType.Type);
 
             var document = mediaFactory.Create(location, contentType.Type) as IXmlDocument;

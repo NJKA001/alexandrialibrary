@@ -20,12 +20,12 @@ using TagLib;
 
 using Gnosis.Alexandria.Contexts;
 using Gnosis.Alexandria.Controllers;
-using Gnosis.Alexandria.Loggers;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Repositories;
 using Gnosis.Alexandria.Repositories.Feeds;
 using Gnosis.Alexandria.Repositories.Tracks;
 using Gnosis.Core;
+using Gnosis.Core.Utilities;
 using Gnosis.Fmod;
 using log4net;
 using Gnosis.Alexandria.Events;

@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core;
-
 using log4net;
 
-namespace Gnosis.Alexandria.Loggers
+namespace Gnosis.Core.Utilities
 {
     public class Log4NetLogger
         : ILogger

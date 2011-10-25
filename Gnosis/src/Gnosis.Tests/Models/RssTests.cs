@@ -7,6 +7,8 @@ using System.Text;
 using NUnit.Framework;
 
 using Gnosis.Core;
+using Gnosis.Core.Culture;
+using Gnosis.Core.Document;
 using Gnosis.Core.Document.Xml;
 using Gnosis.Core.Document.Xml.Rss;
 
@@ -148,7 +150,7 @@ namespace Gnosis.Tests.Models
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var contentType = location.ToContentType();
+            var contentType = ContentType.GetContentType(location);
             Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
 
             var document = location.ToXmlDocument();
@@ -173,7 +175,7 @@ namespace Gnosis.Tests.Models
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var contentType = location.ToContentType();
+            var contentType = ContentType.GetContentType(location);
             Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
 
             var document = location.ToXmlDocument();
@@ -195,7 +197,7 @@ namespace Gnosis.Tests.Models
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var contentType = location.ToContentType();
+            var contentType = ContentType.GetContentType(location);
             Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
 
             var document = location.ToXmlDocument();
@@ -215,7 +217,7 @@ namespace Gnosis.Tests.Models
             Assert.IsTrue(fileInfo.Exists);
             
             var location = new Uri(fileInfo.FullName);
-            var contentType = location.ToContentType();
+            var contentType = ContentType.GetContentType(location);
             Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
 
             var document = location.ToXmlDocument();
@@ -285,7 +287,7 @@ namespace Gnosis.Tests.Models
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var contentType = location.ToContentType();
+            var contentType = ContentType.GetContentType(location);
             Assert.AreEqual(MediaType.ApplicationRssXml, contentType.Type);
 
             var original = location.ToXmlDocument();
