@@ -7,6 +7,6 @@ namespace Gnosis
 {
     public interface ISpider
     {
-        ITask<IEnumerable<IMedia>> Crawl(Uri target);
+        ITask<IEnumerable<IMedia>> Crawl(Uri target, int depth);
     }
 }

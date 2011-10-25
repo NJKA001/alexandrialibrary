@@ -206,6 +206,7 @@
     <Compile Include="Links\LinkType.cs" />
     <Compile Include="Links\LinkTypeFactory.cs" />
     <Compile Include="MediaDetail.cs" />
+    <Compile Include="Spiders\LocalFilesystemSpider.cs" />
     <Compile Include="Tags\Id3\Id3v1\Id3v1Extensions.cs" />
     <Compile Include="Tags\Id3\Id3v1\Id3v1Genre.cs" />
     <Compile Include="Tags\TagTuple.cs" />
@@ -217,6 +218,7 @@
     <Compile Include="Tags\Id3\Id3v2\Id3v2TagType.cs" />
     <Compile Include="IAlgorithm.cs" />
     <Compile Include="ILink.cs" />
+    <Compile Include="Tasks\MediaCrawlTask.cs" />
     <Compile Include="Tasks\MediaDetailSearchTask.cs" />
     <Compile Include="Tasks\TagSearchTask.cs" />
     <Compile Include="Utilities\DebugLogger.cs" />
