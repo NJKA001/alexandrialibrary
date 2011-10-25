@@ -630,9 +630,9 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        private Image GetMenuIcon(string path)
+        private System.Windows.Controls.Image GetMenuIcon(string path)
         {
-            var icon = new Image();
+            var icon = new System.Windows.Controls.Image();
             icon.Width = 16;
             icon.Height = 16;
 

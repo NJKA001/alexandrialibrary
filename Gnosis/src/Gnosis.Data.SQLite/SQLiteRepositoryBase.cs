@@ -4,8 +4,6 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core;
-using Gnosis.Core.Utilities;
 using Gnosis.Data;
 
 namespace Gnosis.Data.SQLite

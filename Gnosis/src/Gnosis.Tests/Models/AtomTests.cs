@@ -6,11 +6,10 @@ using System.Text;
 
 using NUnit.Framework;
 
-using Gnosis.Core;
-using Gnosis.Core.Culture;
-using Gnosis.Core.Document;
-using Gnosis.Core.Document.Xml;
-using Gnosis.Core.Document.Xml.Atom;
+using Gnosis.Culture;
+using Gnosis.Document;
+using Gnosis.Document.Xml;
+using Gnosis.Document.Xml.Atom;
 
 namespace Gnosis.Tests.Models
 {

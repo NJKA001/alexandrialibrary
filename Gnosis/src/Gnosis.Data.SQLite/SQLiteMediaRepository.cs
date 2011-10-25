@@ -4,10 +4,6 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core;
-using Gnosis.Core.Media;
-using Gnosis.Core.Utilities;
-
 namespace Gnosis.Data.SQLite
 {
     public class SQLiteMediaRepository

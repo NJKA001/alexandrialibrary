@@ -5,8 +5,7 @@ using System.Text;
 
 using NUnit.Framework;
 
-using Gnosis.Core;
-using Gnosis.Core.Document.Xml;
+using Gnosis.Document.Xml;
 
 namespace Gnosis.Tests.Core.Document.Xml
 {

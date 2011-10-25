@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core;
-using Gnosis.Core.Media;
-
 using NUnit.Framework;
 
 namespace Gnosis.Tests.Models

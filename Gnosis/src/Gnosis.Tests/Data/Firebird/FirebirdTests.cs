@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
-using Gnosis.Core.Tags.Id3;
-using Gnosis.Core.Tags.Id3.Id3v1;
-using Gnosis.Core.Utilities;
+using Gnosis.Tags.Id3;
+using Gnosis.Tags.Id3.Id3v1;
+using Gnosis.Utilities;
 using Gnosis.Data;
 
 using NUnit.Framework;

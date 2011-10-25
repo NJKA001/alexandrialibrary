@@ -102,7 +102,7 @@ namespace Gnosis.Alexandria.Views
 
                 if (track != null)
                 {
-                    var image = e.Data.GetData(DataFormats.Bitmap) as Image;
+                    var image = e.Data.GetData(DataFormats.Bitmap) as System.Windows.Controls.Image;
                     if (image != null)
                     {
                         return;

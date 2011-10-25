@@ -4,11 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core;
-using Gnosis.Core.Document;
-using Gnosis.Core.Document.Xml;
-using Gnosis.Core.Document.Xml.Xspf;
-using Gnosis.Core.Media;
+using Gnosis.Document;
+using Gnosis.Document.Xml;
+using Gnosis.Document.Xml.Xspf;
 
 using NUnit.Framework;
 

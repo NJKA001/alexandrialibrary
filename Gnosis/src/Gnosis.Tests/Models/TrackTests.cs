@@ -6,8 +6,7 @@ using System.Text;
 using NUnit.Framework;
 using TagLib;
 
-using Gnosis.Core;
-using Gnosis.Core.Culture;
+using Gnosis.Culture;
 using Gnosis.Data;
 using Gnosis.Alexandria.Models.Tracks;
 

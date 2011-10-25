@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Gnosis.Data.SQLite</RootNamespace>
-    <AssemblyName>Gnosis.Data.SQLite</AssemblyName>
+    <AssemblyName>gnosis.data.sqlite</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -99,13 +99,13 @@
     <Compile Include="SQLiteTagRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Gnosis.Core\Gnosis.Core.csproj">
-      <Project>{37091600-5BFE-4FCB-8A69-F016FF451462}</Project>
-      <Name>Gnosis.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Gnosis.Data\Gnosis.Data.csproj">
       <Project>{B36EA69D-F61D-4002-9E0E-FB0F897C6977}</Project>
       <Name>Gnosis.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gnosis\Gnosis.csproj">
+      <Project>{37091600-5BFE-4FCB-8A69-F016FF451462}</Project>
+      <Name>Gnosis</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

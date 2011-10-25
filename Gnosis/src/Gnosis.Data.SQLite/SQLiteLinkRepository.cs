@@ -4,9 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core;
-using Gnosis.Core.Links;
-using Gnosis.Core.Utilities;
+using Gnosis.Links;
 
 namespace Gnosis.Data.SQLite
 {

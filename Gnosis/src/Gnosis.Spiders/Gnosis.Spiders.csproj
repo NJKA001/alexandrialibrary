@@ -68,12 +68,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Gnosis.Core\Gnosis.Core.csproj">
+    <ProjectReference Include="..\Gnosis\Gnosis.csproj">
       <Project>{37091600-5BFE-4FCB-8A69-F016FF451462}</Project>
-      <Name>Gnosis.Core</Name>
+      <Name>Gnosis</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

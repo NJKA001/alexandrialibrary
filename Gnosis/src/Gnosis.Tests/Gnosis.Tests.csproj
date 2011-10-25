@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Gnosis.Tests</RootNamespace>
-    <AssemblyName>Gnosis.Tests</AssemblyName>
+    <AssemblyName>gnosis.tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -95,7 +95,6 @@
     <Compile Include="Data\SQLite\MediaDetailTests.cs" />
     <Compile Include="Data\SQLite\SQLiteTests.cs" />
     <Compile Include="Models\XspfTests.cs" />
-    <Compile Include="Network\Spiders\LyricsWikiaSpiderTests.cs" />
     <Compile Include="Models\AtomTests.cs" />
     <Compile Include="Models\CharacterSetTests.cs" />
     <Compile Include="Models\ContentTypeTests.cs" />
@@ -126,10 +125,6 @@
       <Project>{1307CB13-F914-4DEC-8198-BBBC571D821C}</Project>
       <Name>Gnosis.Alexandria</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Gnosis.Core\Gnosis.Core.csproj">
-      <Project>{37091600-5BFE-4FCB-8A69-F016FF451462}</Project>
-      <Name>Gnosis.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Gnosis.Data.SQLite\Gnosis.Data.SQLite.csproj">
       <Project>{38A3C867-546C-45A6-891F-E901FB855206}</Project>
       <Name>Gnosis.Data.SQLite</Name>
@@ -142,9 +137,9 @@
       <Project>{1629B512-34A2-4F04-AB9A-EBD30228EBDC}</Project>
       <Name>Gnosis.Fmod</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Gnosis.Spiders\Gnosis.Spiders.csproj">
-      <Project>{9A1CF5CE-B0ED-4A35-9061-93710B0FE57D}</Project>
-      <Name>Gnosis.Spiders</Name>
+    <ProjectReference Include="..\Gnosis\Gnosis.csproj">
+      <Project>{37091600-5BFE-4FCB-8A69-F016FF451462}</Project>
+      <Name>Gnosis</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

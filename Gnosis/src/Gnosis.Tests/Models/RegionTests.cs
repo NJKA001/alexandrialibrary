@@ -5,8 +5,7 @@ using System.Text;
 
 using NUnit.Framework;
 
-using Gnosis.Core;
-using Gnosis.Core.Geography;
+using Gnosis.Geography;
 
 namespace Gnosis.Tests.Models
 {

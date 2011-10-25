@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core;
-using Gnosis.Core.Audio;
-using Gnosis.Core.Media;
-using Gnosis.Core.Tags.Id3;
+using Gnosis.Audio;
+using Gnosis.Tags.Id3;
 
 using NUnit.Framework;
 

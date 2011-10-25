@@ -6,16 +6,15 @@ using System.Text;
 
 using NUnit.Framework;
 
-using Gnosis.Core;
-using Gnosis.Core.Document.Xml;
-using Gnosis.Core.Document.Xml.Atom;
-using Gnosis.Core.Document.Xml.DublinCore;
-using Gnosis.Core.Document.Xml.FeedBurner;
-using Gnosis.Core.Document.Xml.Google;
-using Gnosis.Core.Document.Xml.MediaRss;
-using Gnosis.Core.Document.Xml.OpenSearch;
-using Gnosis.Core.Document.Xml.Rss;
-using Gnosis.Core.Document.Xml.YouTube;
+using Gnosis.Document.Xml;
+using Gnosis.Document.Xml.Atom;
+using Gnosis.Document.Xml.DublinCore;
+using Gnosis.Document.Xml.FeedBurner;
+using Gnosis.Document.Xml.Google;
+using Gnosis.Document.Xml.MediaRss;
+using Gnosis.Document.Xml.OpenSearch;
+using Gnosis.Document.Xml.Rss;
+using Gnosis.Document.Xml.YouTube;
 
 namespace Gnosis.Tests.Models
 {

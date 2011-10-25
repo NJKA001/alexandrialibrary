@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Gnosis.Core;
-using Gnosis.Core.Culture;
+using Gnosis.Culture;
 using Gnosis.Data;
 
 namespace Gnosis.Alexandria.Models.Tracks

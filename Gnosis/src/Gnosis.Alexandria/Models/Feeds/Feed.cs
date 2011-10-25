@@ -4,8 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core;
-using Gnosis.Core.Culture;
+using Gnosis.Culture;
 
 namespace Gnosis.Alexandria.Models.Feeds
 {

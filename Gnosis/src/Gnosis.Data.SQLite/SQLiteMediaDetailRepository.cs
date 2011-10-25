@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core;
-using Gnosis.Core.Tasks;
-using Gnosis.Core.Utilities;
+using Gnosis.Tasks;
 
 namespace Gnosis.Data.SQLite
 {
