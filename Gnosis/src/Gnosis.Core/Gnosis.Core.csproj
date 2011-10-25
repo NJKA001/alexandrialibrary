@@ -70,10 +70,10 @@
   <ItemGroup>
     <Compile Include="Algorithm.cs" />
     <Compile Include="Audio\AudioBase.cs" />
-    <Compile Include="Audio\IAudio.cs" />
+    <Compile Include="IAudio.cs" />
     <Compile Include="Audio\IMpegAudio.cs" />
     <Compile Include="Audio\MpegAudio.cs" />
-    <Compile Include="Document\IDocument.cs" />
+    <Compile Include="IDocument.cs" />
     <Compile Include="Document\Xml\IXmlDocument.cs" />
     <Compile Include="Document\Xml\Xhtml\AnchorDirection.cs" />
     <Compile Include="Document\Xml\Xhtml\HtmlAnchor.cs" />
@@ -200,6 +200,7 @@
     <Compile Include="ITagFactory.cs" />
     <Compile Include="ITagRepository.cs" />
     <Compile Include="ITask.cs" />
+    <Compile Include="IVideo.cs" />
     <Compile Include="Links\Html\HtmlLinkType.cs" />
     <Compile Include="LinkType.cs" />
     <Compile Include="LinkTypeFactory.cs" />
@@ -223,7 +224,7 @@
     <Compile Include="Culture\ILanguageTag.cs" />
     <Compile Include="Image\BitmapImage.cs" />
     <Compile Include="Image\GifImage.cs" />
-    <Compile Include="Image\IImage.cs" />
+    <Compile Include="IImage.cs" />
     <Compile Include="Image\ImageBase.cs" />
     <Compile Include="Image\JpegImage.cs" />
     <Compile Include="Image\PngImage.cs" />

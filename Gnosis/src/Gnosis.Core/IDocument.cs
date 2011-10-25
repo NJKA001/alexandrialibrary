@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core.Document
+namespace Gnosis.Core
 {
     public interface IDocument
         : IMedia

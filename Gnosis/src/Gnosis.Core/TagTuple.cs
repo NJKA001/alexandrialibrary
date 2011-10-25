@@ -122,9 +122,9 @@ namespace Gnosis.Core
             return new TimeSpan(Item1.ToInt32(), Item2.ToInt32(), Item3.ToInt32(), Item4.ToInt32(), Item5.ToInt32());
         }
 
-        public Id3v1Genre ToId3v1Genre()
+        public T ToEnum<T>() where T : struct
         {
-            return Item2.ToEnum<Id3v1Genre>();
+            return Item2.ToEnum<T>();
         }
     }
 }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core.Audio
+namespace Gnosis.Core
 {
-    public interface IAudio
+    public interface IImage
         : IMedia
     {
-        void Load();
+        //byte[] GetData();
     }
 }
