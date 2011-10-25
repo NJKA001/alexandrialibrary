@@ -68,7 +68,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algorithm.cs" />
+    <Compile Include="Algorithms\Algorithm.cs" />
     <Compile Include="Audio\AudioBase.cs" />
     <Compile Include="IAudio.cs" />
     <Compile Include="Audio\IMpegAudio.cs" />
@@ -195,6 +195,7 @@
     <Compile Include="IMediaSummaryRepository.cs" />
     <Compile Include="ITagDomain.cs" />
     <Compile Include="ITagSchema.cs" />
+    <Compile Include="ITagTuple.cs" />
     <Compile Include="ITagType.cs" />
     <Compile Include="ITagTypeFactory.cs" />
     <Compile Include="ITagFactory.cs" />
@@ -202,12 +203,12 @@
     <Compile Include="ITask.cs" />
     <Compile Include="IVideo.cs" />
     <Compile Include="Links\Html\HtmlLinkType.cs" />
-    <Compile Include="LinkType.cs" />
-    <Compile Include="LinkTypeFactory.cs" />
-    <Compile Include="MediaDetail.cs" />
+    <Compile Include="Links\LinkType.cs" />
+    <Compile Include="Links\LinkTypeFactory.cs" />
+    <Compile Include="Media\MediaDetail.cs" />
     <Compile Include="Tags\Id3\Id3v1\Id3v1Extensions.cs" />
     <Compile Include="Tags\Id3\Id3v1\Id3v1Genre.cs" />
-    <Compile Include="TagTuple.cs" />
+    <Compile Include="Tags\TagTuple.cs" />
     <Compile Include="Tags\TagDomain.cs" />
     <Compile Include="Tags\TagFactory.cs" />
     <Compile Include="Tags\TagSchema.cs" />
@@ -238,8 +239,8 @@
     <Compile Include="Geography\Country.cs" />
     <Compile Include="Culture\IScript.cs" />
     <Compile Include="Culture\Language.cs" />
-    <Compile Include="Link.cs" />
-    <Compile Include="MediaFactory.cs" />
+    <Compile Include="Links\Link.cs" />
+    <Compile Include="Media\MediaFactory.cs" />
     <Compile Include="Culture\Script.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringBuilderExtensions.cs" />
@@ -263,7 +264,7 @@
     <Compile Include="Document\Xml\StyleMediaLayoutGroup.cs" />
     <Compile Include="Document\Xml\StyleMediaSensoryGroup.cs" />
     <Compile Include="MediaType.cs" />
-    <Compile Include="Tag.cs" />
+    <Compile Include="Tags\Tag.cs" />
     <Compile Include="Tags\Id3\Id3v2\IId3v2Tag.cs" />
     <Compile Include="Tags\Id3\IId3Tag.cs" />
     <Compile Include="Tags\TagType.cs" />

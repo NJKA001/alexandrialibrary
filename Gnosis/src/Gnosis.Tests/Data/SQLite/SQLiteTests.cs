@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Core.Algorithms;
+using Gnosis.Core.Media;
 using Gnosis.Core.Tags;
 using Gnosis.Core.Tags.Id3;
 using Gnosis.Core.Tags.Id3.Id3v1;

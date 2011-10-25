@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Core
+namespace Gnosis.Core.Tags
 {
     public class Tag
         : ITag
@@ -33,7 +33,7 @@ namespace Gnosis.Core
         private readonly Uri target;
         private readonly ITagType type;
         private readonly object value;
-        private readonly TagTuple tuple;
+        private readonly ITagTuple tuple;
 
         #region ITag Members
 
@@ -57,7 +57,7 @@ namespace Gnosis.Core
             get { return value; }
         }
 
-        public TagTuple Tuple
+        public ITagTuple Tuple
         {
             get { return tuple; }
         }

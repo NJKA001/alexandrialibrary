@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core.Tags;
+
 namespace Gnosis.Core
 {
     public static class StringArrayExtensions
     {
-        public static TagTuple ToTagTuple(this string[] self)
+        public static ITagTuple ToTagTuple(this string[] self)
         {
             if (self == null)
                 throw new ArgumentNullException("self");

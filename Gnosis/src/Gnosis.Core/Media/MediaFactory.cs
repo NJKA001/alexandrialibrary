@@ -9,7 +9,7 @@ using Gnosis.Core.Document.Xml;
 using Gnosis.Core.Document.Xml.Xhtml;
 using Gnosis.Core.Image;
 
-namespace Gnosis.Core
+namespace Gnosis.Core.Media
 {
     public class MediaFactory
         : IMediaFactory

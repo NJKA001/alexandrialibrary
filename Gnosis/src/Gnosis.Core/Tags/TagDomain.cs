@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core.Tags;
 using Gnosis.Core.Tags.Id3.Id3v1;
 
 namespace Gnosis.Core.Tags
@@ -10,7 +11,7 @@ namespace Gnosis.Core.Tags
     public class TagDomain
         : ITagDomain
     {
-        private TagDomain(int id, string name, Type[] baseTypes, object defaultValue, Func<object, bool> isValid, Func<object, TagTuple> getTuple, Func<TagTuple, object> getValue)
+        private TagDomain(int id, string name, Type[] baseTypes, object defaultValue, Func<object, bool> isValid, Func<object, ITagTuple> getTuple, Func<ITagTuple, object> getValue)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -41,8 +42,8 @@ namespace Gnosis.Core.Tags
         private readonly Type[] baseTypes;
         private readonly object defaultValue;
         private readonly Func<object, bool> isValid;
-        private readonly Func<object, TagTuple> getTuple;
-        private readonly Func<TagTuple, object> getValue;
+        private readonly Func<object, ITagTuple> getTuple;
+        private readonly Func<ITagTuple, object> getValue;
 
         public int Id
         {
@@ -69,12 +70,12 @@ namespace Gnosis.Core.Tags
             return isValid(value);
         }
 
-        public TagTuple GetTuple(object value)
+        public ITagTuple GetTuple(object value)
         {
             return getTuple(value);
         }
 
-        public object GetValue(TagTuple tuple)
+        public object GetValue(ITagTuple tuple)
         {
             return getValue(tuple);
         }

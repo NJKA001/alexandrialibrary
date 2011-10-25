@@ -5,7 +5,7 @@ using System.Text;
 
 using Gnosis.Core.Links.Html;
 
-namespace Gnosis.Core
+namespace Gnosis.Core.Links
 {
     public class LinkTypeFactory
         : ILinkTypeFactory

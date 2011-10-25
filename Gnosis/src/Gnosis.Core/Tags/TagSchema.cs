@@ -53,10 +53,10 @@ namespace Gnosis.Core.Tags
         private static readonly IList<ITagSchema> all = new List<ITagSchema>();
         private static readonly IDictionary<int, ITagSchema> byId = new Dictionary<int, ITagSchema>();
 
-        public static readonly ITagSchema Default = new TagSchema(1, "Default", Core.Algorithm.Default);
-        public static readonly ITagSchema Americanized = new TagSchema(21, "Americanized", Core.Algorithm.Americanized);
-        public static readonly ITagSchema Id3v1 = new TagSchema(101, "ID3v1", Core.Algorithm.Default);
-        public static readonly ITagSchema Id3v2 = new TagSchema(102, "ID3v2", Core.Algorithm.Default);
+        public static readonly ITagSchema Default = new TagSchema(1, "Default", Core.Algorithms.Algorithm.Default);
+        public static readonly ITagSchema Americanized = new TagSchema(21, "Americanized", Core.Algorithms.Algorithm.Americanized);
+        public static readonly ITagSchema Id3v1 = new TagSchema(101, "ID3v1", Core.Algorithms.Algorithm.Default);
+        public static readonly ITagSchema Id3v2 = new TagSchema(102, "ID3v2", Core.Algorithms.Algorithm.Default);
 
         public static IEnumerable<ITagSchema> GetAll()
         {

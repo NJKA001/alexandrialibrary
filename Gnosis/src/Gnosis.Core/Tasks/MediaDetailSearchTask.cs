@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Core;
+using Gnosis.Core.Algorithms;
 using Gnosis.Core.Image;
+using Gnosis.Core.Links;
+using Gnosis.Core.Media;
 using Gnosis.Core.Tags;
 using Gnosis.Core.Utilities;
 

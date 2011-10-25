@@ -5,7 +5,7 @@ using System.Text;
 
 using Gnosis.Core.Image;
 
-namespace Gnosis.Core
+namespace Gnosis.Core.Media
 {
     public class MediaDetail
         : IMediaDetail

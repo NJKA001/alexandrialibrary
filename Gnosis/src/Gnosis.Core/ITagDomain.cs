@@ -13,7 +13,7 @@ namespace Gnosis.Core
         object DefaultValue { get; }
 
         bool IsValid(object value);
-        TagTuple GetTuple(object value);
-        object GetValue(TagTuple tuple);
+        ITagTuple GetTuple(object value);
+        object GetValue(ITagTuple tuple);
     }
 }

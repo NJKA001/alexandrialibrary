@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Core.Tags;
+
 namespace Gnosis.Core
 {
     public static class TimeSpanExtensions
@@ -14,7 +16,7 @@ namespace Gnosis.Core
             else return string.Format("{0}:{1:00}", self.Minutes, self.Seconds);
         }
 
-        public static TagTuple ToTagTuple(this TimeSpan self)
+        public static ITagTuple ToTagTuple(this TimeSpan self)
         {
             return new TagTuple(self.Days, self.Hours, self.Minutes, self.Seconds, self.Milliseconds);
         }

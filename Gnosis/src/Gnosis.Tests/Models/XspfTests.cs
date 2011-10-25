@@ -8,6 +8,7 @@ using Gnosis.Core;
 using Gnosis.Core.Document;
 using Gnosis.Core.Document.Xml;
 using Gnosis.Core.Document.Xml.Xspf;
+using Gnosis.Core.Media;
 
 using NUnit.Framework;
 
