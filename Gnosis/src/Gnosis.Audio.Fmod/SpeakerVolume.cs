@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Gnosis.Fmod
+namespace Gnosis.Audio.Fmod
 {
 	public class SpeakerVolume
 	{

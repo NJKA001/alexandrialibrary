@@ -28,7 +28,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Gnosis.Fmod
+namespace Gnosis.Audio.Fmod
 {
 	public interface IAudioPlayer : IDisposable
 	{

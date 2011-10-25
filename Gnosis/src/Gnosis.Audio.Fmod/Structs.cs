@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Text;
 
-namespace Gnosis.Fmod
+namespace Gnosis.Audio.Fmod
 {
 	#region CreateSoundExtendedInfo
 	/// WAS CREATE_SOUND_EX_INFO

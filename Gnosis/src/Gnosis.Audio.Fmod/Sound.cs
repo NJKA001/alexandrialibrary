@@ -7,7 +7,7 @@ using System.Security.Permissions;
 using System.Text;
 using System.Timers;
 
-namespace Gnosis.Fmod
+namespace Gnosis.Audio.Fmod
 {
 	internal class Sound : IDisposable, ILoopable, IHasRange, IHasDefault
 	{

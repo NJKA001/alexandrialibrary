@@ -28,7 +28,7 @@
 using System;
 using System.IO;
 
-namespace Gnosis.Fmod
+namespace Gnosis.Audio.Fmod
 {
 	public interface IMediaStream : IDisposable
 	{

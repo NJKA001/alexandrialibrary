@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Gnosis.Core;
 
-namespace Gnosis.Fmod
+namespace Gnosis.Audio.Fmod
 {
 	public class AudioStreamFactory : IAudioStreamFactory
 	{

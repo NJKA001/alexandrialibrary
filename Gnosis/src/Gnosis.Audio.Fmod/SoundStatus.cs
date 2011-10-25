@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Gnosis.Core;
 
-namespace Gnosis.Fmod
+namespace Gnosis.Audio.Fmod
 {
 	public abstract class SoundStatus
 	{

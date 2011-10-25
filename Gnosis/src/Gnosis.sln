@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{F1E21BC9-CF8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "taglib-sharp", "..\lib\taglib-sharp\2.0.3.7\taglib-sharp.csproj", "{4CC18776-125E-4318-9D24-D60110AD9697}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Fmod", "Gnosis.Fmod\Gnosis.Fmod.csproj", "{1629B512-34A2-4F04-AB9A-EBD30228EBDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Audio.Fmod", "Gnosis.Audio.Fmod\Gnosis.Audio.Fmod.csproj", "{1629B512-34A2-4F04-AB9A-EBD30228EBDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Tests", "Gnosis.Tests\Gnosis.Tests.csproj", "{CA62A344-0BEB-4DD3-9BF7-0F7D8D850CCB}"
 EndProject

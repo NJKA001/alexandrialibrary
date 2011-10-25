@@ -4,7 +4,7 @@ using System.Net.Mime;
 using System.Text;
 using Gnosis.Core;
 
-namespace Gnosis.Fmod
+namespace Gnosis.Audio.Fmod
 {
 	public class SoundFormat : IMediaFormat
 	{

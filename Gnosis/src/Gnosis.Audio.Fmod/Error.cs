@@ -6,7 +6,7 @@
 /*                                                                                                 */
 /* =============================================================================================== */
 
-namespace Gnosis.Fmod
+namespace Gnosis.Audio.Fmod
 {
 	public abstract class Error
 	{

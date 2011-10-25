@@ -27,7 +27,7 @@
 
 using System;
 
-namespace Gnosis.Fmod
+namespace Gnosis.Audio.Fmod
 {
 	/// <summary>
 	/// The network state of a media stream

@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.Net.Mime;
 using System.Text;
 
-namespace Gnosis.Fmod
+namespace Gnosis.Audio.Fmod
 {
 	public interface IMediaFormat
 	{

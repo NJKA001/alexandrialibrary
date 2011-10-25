@@ -27,7 +27,7 @@
 
 using System;
 
-namespace Gnosis.Fmod
+namespace Gnosis.Audio.Fmod
 {
 	/// <summary>
 	/// The buffer state of a media stream

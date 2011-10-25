@@ -26,7 +26,7 @@ using Gnosis.Alexandria.Repositories.Feeds;
 using Gnosis.Alexandria.Repositories.Tracks;
 using Gnosis.Core;
 using Gnosis.Utilities;
-using Gnosis.Fmod;
+using Gnosis.Audio.Fmod;
 using log4net;
 using Gnosis.Alexandria.Events;
 

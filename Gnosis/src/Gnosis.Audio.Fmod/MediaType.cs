@@ -27,7 +27,7 @@
 
 using System;
 
-namespace Gnosis.Fmod
+namespace Gnosis.Audio.Fmod
 {
 	public enum MediaType
 	{

@@ -4,7 +4,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Gnosis.Core;
 
-namespace Gnosis.Fmod
+namespace Gnosis.Audio.Fmod
 {
 	public class CompactDiscSound : IDisposable, IAudioStream
 	{
