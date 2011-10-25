@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 using Gnosis.Culture;
 
-namespace Gnosis.Tests.Models
+namespace Gnosis.Tests.Culture
 {
     [TestFixture]
     public class ScriptTests

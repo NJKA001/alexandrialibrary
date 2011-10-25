@@ -7,34 +7,42 @@ using NUnit.Framework;
 
 using Gnosis.Geography;
 
-namespace Gnosis.Tests.Models
+namespace Gnosis.Tests.Geography
 {
     [TestFixture]
-    public class RegionTests
+    public class RegionItems
     {
-        [Test]
-        public void LookupRegion()
-        {
-            const int count = 31;
+        const int count = 31;
 
+        [Test]
+        public void CanBeReadByCode()
+        {
             var mapCode = new Dictionary<int, IRegion>();
-            var mapName = new Dictionary<string, IRegion>();
 
             foreach (var region in Region.GetRegions())
             {
                 mapCode.Add(region.Code, region);
                 Assert.AreEqual(region, Region.GetRegionByCode(region.Code));
+            }
 
+            Assert.AreEqual(count, mapCode.Count);
+            Assert.AreEqual(Region.Unknown, Region.GetRegionByCode(888));
+        }
+
+        [Test]
+        public void CanBeReadByName()
+        {
+            var mapName = new Dictionary<string, IRegion>();
+
+            foreach (var region in Region.GetRegions())
+            {
                 mapName.Add(region.Name, region);
                 Assert.AreEqual(region, Region.GetRegionByName(region.Name));
             }
 
-            Assert.AreEqual(Region.Unknown, Region.GetRegionByCode(888));
+            Assert.AreEqual(count, mapName.Count);
             Assert.AreEqual(Region.Unknown, Region.GetRegionByName(null));
             Assert.AreEqual(Region.Unknown, Region.GetRegionByName("Narnia"));
-
-            Assert.AreEqual(count, mapCode.Count);
-            Assert.AreEqual(count, mapName.Count);
         }
     }
 }

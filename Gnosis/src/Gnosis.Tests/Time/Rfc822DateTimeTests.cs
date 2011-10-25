@@ -7,13 +7,13 @@ using Gnosis.Time;
 
 using NUnit.Framework;
 
-namespace Gnosis.Tests.Models
+namespace Gnosis.Tests.Time
 {
     [TestFixture]
-    public class Rfc822DateTimeTests
+    public class Rfc822DateTimes
     {
         [Test]
-        public void ParseDateTimeWithNumericOffset()
+        public void CanBeParsedWithNumericOffset()
         {
             var s = "Wed, 29 Jun 2011 11:47:00 -0500";
             var rfc822Date = DateTime.MinValue;
@@ -23,7 +23,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void ParseDateTimeWithTimeZoneName()
+        public void CanBeParsedWithTimeZoneName()
         {
             var s = "June 21, 2011 16:54:20 PDT";
             var rfc822Date = DateTime.MinValue;

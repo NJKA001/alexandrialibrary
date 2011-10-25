@@ -67,11 +67,11 @@ namespace Gnosis.Tests.Data.SQLite
     }
 
     [TestFixture]
-    public class Saved_Tags_And_Links
+    public class SavedTagsAndLinks
         : MediaDetailTestBase
     {
         [Test]
-        public void Can_Be_Read_As_Details()
+        public void CanBeReadAsDetails()
         {
             var details = new List<IMediaDetail>();
             

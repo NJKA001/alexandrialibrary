@@ -10,13 +10,13 @@ using Gnosis.Document.Xml.Xspf;
 
 using NUnit.Framework;
 
-namespace Gnosis.Tests.Models
+namespace Gnosis.Tests.Document.Xml
 {
     [TestFixture]
-    public class XspfTests
+    public class XspfDocuments
     {
         [Test]
-        public void LoadLocalXspfDocument()
+        public void CanBeParsedFromLocalXspfFile()
         {
             const string path = @".\Files\playlist.xspf";
             const int trackCount = 3;
@@ -27,7 +27,7 @@ namespace Gnosis.Tests.Models
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var contentType = ContentType.GetContentType(location); //.ToContentType();
+            var contentType = ContentType.GetContentType(location);
             Assert.AreEqual(MediaType.ApplicationXspfXml, contentType.Type);
 
             var document = mediaFactory.Create(location, contentType.Type) as IXmlDocument;

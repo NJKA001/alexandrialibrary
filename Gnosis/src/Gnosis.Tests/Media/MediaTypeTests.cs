@@ -5,20 +5,15 @@ using System.Text;
 
 using NUnit.Framework;
 
-using Gnosis.Core;
-
-namespace Gnosis.Tests.Models
+namespace Gnosis.Tests.Media
 {
     [TestFixture]
-    public class MediaTypeTests
+    public class MediaTypeItems
     {
         [Test]
-        public void LookupMediaType()
+        public void CanBeReadByName()
         {
-            //const int total = 8;
-            //const int magicNumberTotal = 3;
             var list = new List<IMediaType>();
-            var byMagicNumber = new Dictionary<byte[], IMediaType>();
 
             foreach (var mediaType in MediaType.GetMediaTypes())
             {
@@ -28,27 +23,52 @@ namespace Gnosis.Tests.Models
                 Assert.AreEqual(mediaType, MediaType.Parse(mediaType.ToString()));
                 Assert.AreEqual(mediaType, MediaType.Parse(mediaType.Type + "/" + mediaType.SubType));
 
-                var byTypeList = MediaType.GetMediaTypesByType(mediaType.Type);
-                Assert.IsNotNull(byTypeList);
-                Assert.IsTrue(byTypeList.Contains(mediaType));
+            }
+        }
 
+        [Test]
+        public void CanBeReadByFileExtension()
+        {
+            foreach (var mediaType in MediaType.GetMediaTypes())
+            {
                 foreach (var fileExtension in mediaType.FileExtensions)
                 {
                     var types = MediaType.GetMediaTypesByFileExtension(fileExtension);
                     Assert.IsNotNull(types);
                     Assert.IsTrue(types.Contains(mediaType));
                 }
-
-                foreach (var magicNumber in mediaType.MagicNumbers)
-                    byMagicNumber.Add(magicNumber, mediaType);
             }
-
-            //Assert.AreEqual(total, list.Count());
-            //Assert.AreEqual(magicNumberTotal, byMagicNumber.Count);
         }
 
         [Test]
-        public void GetMediaTypeForRemoteRssFeedWithInvalidContentType()
+        public void CanBeReadBySuperType()
+        {
+            foreach (var mediaType in MediaType.GetMediaTypes())
+            {
+                var byTypeList = MediaType.GetMediaTypesByType(mediaType.Type);
+                Assert.IsNotNull(byTypeList);
+                Assert.IsTrue(byTypeList.Contains(mediaType));
+            }
+        }
+
+        [Test]
+        public void CanBeReadByMagicNumber()
+        {
+            var byMagicNumber = new Dictionary<byte[], IMediaType>();
+
+            foreach (var mediaType in MediaType.GetMediaTypes())
+            {
+                foreach (var magicNumber in mediaType.MagicNumbers)
+                {
+                    byMagicNumber.Add(magicNumber, mediaType);
+                    var check = MediaType.GetMediaTypeByMagicNumber(magicNumber);
+                    Assert.AreEqual(mediaType, check);
+                }
+            }
+        }
+
+        [Test]
+        public void CanGetMediaTypeForRemoteRssFeedWithInvalidContentType()
         {
             var location = new Uri("http://feeds.arstechnica.com/arstechnica/index");
             var mediaType = location.ToMediaType();
@@ -56,7 +76,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void GetMediaTypeForRemoteAtomFeed()
+        public void CanGetMediaTypeForRemoteAtomFeed()
         {
             var location = new Uri("http://www.blogger.com/feeds/8677504/posts/default");
             var mediaType = location.ToMediaType();
@@ -64,7 +84,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void GetMediaTypeForLocalPng()
+        public void CanGetMediaTypeForLocalPng()
         {
             var path = @".\Files\radiohead.png";
             var fileInfo = new System.IO.FileInfo(path);
@@ -75,7 +95,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void GetMediaTypeForLocalPngWithInvalidFileExtension()
+        public void CanGetMediaTypeForLocalPngWithInvalidFileExtension()
         {
             var path = @".\Files\radiohead";
             var fileInfo = new System.IO.FileInfo(path);
@@ -95,7 +115,7 @@ namespace Gnosis.Tests.Models
         //}
 
         [Test]
-        public void GetMediaTypeForLocalGif()
+        public void CanGetMediaTypeForLocalGif()
         {
             var path = @".\Files\nin.gif";
             var fileInfo = new System.IO.FileInfo(path);
@@ -106,7 +126,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void GetMediaTypeForLocalGifWithInvalidFileExtension()
+        public void CanGetMediaTypeForLocalGifWithInvalidFileExtension()
         {
             var path = @".\Files\nin";
             var fileInfo = new System.IO.FileInfo(path);
@@ -117,7 +137,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void GetMediaTypeForRemoteGif()
+        public void CanGetMediaTypeForRemoteGif()
         {
             var location = new Uri("http://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Rotating_earth_%28large%29.gif/200px-Rotating_earth_%28large%29.gif");
             var mediaType = location.ToMediaType();
@@ -125,7 +145,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void GetMediaTypeForLocalJpeg()
+        public void CanGetMediaTypeForLocalJpeg()
         {
             var path = @".\Files\Undertow.jpg";
             var fileInfo = new System.IO.FileInfo(path);
@@ -136,7 +156,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void GetMediaTypeForLocalJpegWithInvalidFileExtension()
+        public void CanGetMediaTypeForLocalJpegWithInvalidFileExtension()
         {
             var path = @".\Files\Undertow";
             var fileInfo = new System.IO.FileInfo(path);
@@ -147,7 +167,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void GetMediaTypeForRemoteJpg()
+        public void CanGetMediaTypeForRemoteJpg()
         {
             var location = new Uri("http://upload.wikimedia.org/wikipedia/commons/b/b4/JPEG_example_JPG_RIP_100.jpg");
             var mediaType = location.ToMediaType();
@@ -155,7 +175,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void GetMediaTypeForRemoteHtml()
+        public void CanGetMediaTypeForRemoteHtml()
         {
             var location = new Uri("http://arstechnica.com/");
             var mediaType = location.ToMediaType();
@@ -163,7 +183,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void GetMediaTypeForLocalMp3ByMagicNumber()
+        public void CanGetMediaTypeForLocalMp3ByMagicNumber()
         {
             var path = @".\Files\03 - Antes De Las Seis.mp3";
             var fileInfo = new System.IO.FileInfo(path);
@@ -174,7 +194,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void GetMediaTypeForLocalMp3ByMagicNumber2()
+        public void CanGetMediaTypeForLocalMp3ByMagicNumber2()
         {
             var path = @".\Files\13 - Loca (Featuring Dizzee Rascal).mp3";
             var fileInfo = new System.IO.FileInfo(path);

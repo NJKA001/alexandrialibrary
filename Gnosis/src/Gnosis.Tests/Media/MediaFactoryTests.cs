@@ -5,10 +5,10 @@ using System.Text;
 
 using NUnit.Framework;
 
-namespace Gnosis.Tests.Models
+namespace Gnosis.Tests.Media
 {
     [TestFixture]
-    public class RepresentationFactoryTests
+    public class MediaFactories
     {
         private readonly IMediaFactory factory = new MediaFactory();
 
@@ -21,7 +21,7 @@ namespace Gnosis.Tests.Models
         const string pathPng = @".\Files\radiohead.png";
 
         [Test]
-        public void CreateApplicationAtom()
+        public void CanCreateApplicationAtomMedia()
         {
             var url = new Uri(new System.IO.FileInfo(pathBearAtom).FullName);
             var doc = factory.Create(url);
@@ -33,7 +33,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateApplicationRss()
+        public void CanCreateApplicationRssMedia()
         {
             var url = new Uri(new System.IO.FileInfo(pathArsRss).FullName);
             var doc = factory.Create(url);
@@ -45,7 +45,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateTextXhtml()
+        public void CanCreateTextXhtmlMedia()
         {
             var url = new Uri(new System.IO.FileInfo(pathArsHtml).FullName);
             var doc = factory.Create(url);
@@ -57,7 +57,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateApplicationRdfAtom()
+        public void CanCreateApplicationRdfAtomMedia()
         {
             var url = new Uri(new System.IO.FileInfo(pathPostroadRdf).FullName);
             var doc = factory.Create(url);
@@ -69,7 +69,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateImageGif()
+        public void CanCreateImageGifMedia()
         {
             var url = new Uri(new System.IO.FileInfo(pathGif).FullName);
             var doc = factory.Create(url);
@@ -81,7 +81,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateImageJpg()
+        public void CanCreateImageJpgMedia()
         {
             var url = new Uri(new System.IO.FileInfo(pathJpg).FullName);
             var doc = factory.Create(url);
@@ -93,7 +93,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateImagePng()
+        public void CanCreateImagePngMedia()
         {
             var url = new Uri(new System.IO.FileInfo(pathPng).FullName);
             var doc = factory.Create(url);

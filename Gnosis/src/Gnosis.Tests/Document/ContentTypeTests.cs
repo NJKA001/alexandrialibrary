@@ -7,13 +7,13 @@ using NUnit.Framework;
 
 using Gnosis.Document;
 
-namespace Gnosis.Tests.Models
+namespace Gnosis.Tests.Document
 {
     [TestFixture]
-    public class ContentTypeTests
+    public class ContentTypeItems
     {
         [Test]
-        public void GetContentTypeForRssFeedWithInvalidContentType()
+        public void CanBeParsedForRssFeedsWithInvalidContentType()
         {
             var location = new Uri("http://feeds.arstechnica.com/arstechnica/index");
             var contentType = ContentType.GetContentType(location); //location.ToContentType();
@@ -25,7 +25,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void GetContentTypeForAtomFeed()
+        public void CanBeParsedForAtomFeeds()
         {
             var location = new Uri("http://www.blogger.com/feeds/8677504/posts/default");
             var contentType = ContentType.GetContentType(location);

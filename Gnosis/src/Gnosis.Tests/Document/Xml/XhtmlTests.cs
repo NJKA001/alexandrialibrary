@@ -9,10 +9,10 @@ using Gnosis.Document.Xml.Xhtml;
 
 using NUnit.Framework;
 
-namespace Gnosis.Tests.Models
+namespace Gnosis.Tests.Document.Xml
 {
     [TestFixture]
-    public class XhtmlTests
+    public class XhtmlDocuments
     {
         private static void MakeDocumentAssertions(IXmlElement xhtml)
         {
@@ -36,7 +36,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void TestArsTechnicaXhtml()
+        public void CanBeParsedFromLocalFiles()
         {
             const string path = @".\Files\arstechnica.html";
 
@@ -50,7 +50,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void TestArsTechnicaXhtmlFromXhtmlOutput()
+        public void CanBeParsedByDocumentOutput()
         {
             const string path = @".\Files\arstechnica.html";
 
@@ -65,7 +65,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void TestArsTechnicaXhtmlAsXml()
+        public void CanBeParsedAsXml()
         {
             const string path = @".\Files\arstechnica.html";
 

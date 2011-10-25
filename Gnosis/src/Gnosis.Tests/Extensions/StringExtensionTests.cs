@@ -7,10 +7,10 @@ using Gnosis.Core;
 
 using NUnit.Framework;
 
-namespace Gnosis.Tests.Core
+namespace Gnosis.Tests.Extensions
 {
     [TestFixture]
-    public class ExtensionTests
+    public class StringExtensionTests
     {
         [Test]
         public void StringToLevenshteinDistanceTest()

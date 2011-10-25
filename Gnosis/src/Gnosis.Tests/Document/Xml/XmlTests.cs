@@ -16,10 +16,10 @@ using Gnosis.Document.Xml.OpenSearch;
 using Gnosis.Document.Xml.Rss;
 using Gnosis.Document.Xml.YouTube;
 
-namespace Gnosis.Tests.Models
+namespace Gnosis.Tests.Document.Xml
 {
     [TestFixture]
-    public class XmlTests
+    public class XmlDocuments
     {
         private void MakeArsXmlAssertions(IXmlElement xml)
         {
@@ -131,7 +131,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateXmlDocumentFromLocalRssFile()
+        public void CanBeParsedFromLocalRssFile()
         {
             const string path = @".\Files\arstechnica.xml";
 
@@ -144,7 +144,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateXmlDocumentFromLocalAtomFile()
+        public void CanBeParsedFromLocalAtomFile()
         {
             const string path = @".\Files\bearbrarian.xml";
 
@@ -157,7 +157,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateXmlDocumentFromLocalYouTubePlaylistsFile()
+        public void CanBeParsedFromLocalYouTubePlaylistsFile()
         {
             const string path = @".\Files\youtube_playlists.xml";
             const string feedLinkHref = "http://gdata.youtube.com/feeds/api/playlists/5615F5EBE2BC72C2";
@@ -183,7 +183,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateXmlDocumentFromLocalRssXmlOutput()
+        public void CanBeParsedFromLocalRssXmlOutput()
         {
             const string path = @".\Files\arstechnica.xml";
 
@@ -202,7 +202,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateXmlDocumentFromRemoteAtomResource()
+        public void CanBeParsedFromRemoteAtomResource()
         {
             var location = new Uri("http://bblfish.net/blog/blog.atom");
 

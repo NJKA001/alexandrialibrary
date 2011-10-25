@@ -10,10 +10,10 @@ using Gnosis.Culture;
 using Gnosis.Data;
 using Gnosis.Alexandria.Models.Tracks;
 
-namespace Gnosis.Tests.Models
+namespace Gnosis.Tests.Tags
 {
     [TestFixture]
-    public class TrackTests
+    public class TagTests
     {
         #region Constants
         private const string location1 = @"Files\03 - Antes De Las Seis.mp3";

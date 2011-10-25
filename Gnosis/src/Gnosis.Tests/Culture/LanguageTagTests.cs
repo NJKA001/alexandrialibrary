@@ -8,7 +8,7 @@ using NUnit.Framework;
 using Gnosis.Culture;
 using Gnosis.Geography;
 
-namespace Gnosis.Tests.Models
+namespace Gnosis.Tests.Culture
 {
     [TestFixture]
     public class LanguageTagTests

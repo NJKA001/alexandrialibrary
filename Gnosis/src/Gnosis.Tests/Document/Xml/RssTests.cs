@@ -11,10 +11,10 @@ using Gnosis.Document;
 using Gnosis.Document.Xml;
 using Gnosis.Document.Xml.Rss;
 
-namespace Gnosis.Tests.Models
+namespace Gnosis.Tests.Document.Xml
 {
     [TestFixture]
-    public class RssTests
+    public class RssDocuments
     {
         private void MakeRssFeedAssertions(IXmlElement document)
         {
@@ -140,7 +140,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateExampleRss091FeedFromLocalXml()
+        public void CanBeCreatedFromLocalRss091Xml()
         {
             const string path = @".\Files\example0.91.rss";
             const string version = "0.91";
@@ -165,7 +165,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateExampleRss092FeedFromLocalXml()
+        public void CanBeCreatedFromLocalRss092Xml()
         {
             const string path = @".\Files\example0.92.rss";
             const string version = "0.92";
@@ -187,7 +187,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateExampleRss20FeedFromLocalXml()
+        public void CanBeCreatedFromLocalRss20Xml()
         {
             const string path = @".\Files\example2.0.rss";
             const string version = "2.0";
@@ -209,7 +209,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateRssFeedFromLocalXml()
+        public void CanBeCreatedFromLocalArstechnicaXml()
         {
             const string path = @".\Files\arstechnica.xml";
             var fileInfo = new FileInfo(path);
@@ -226,7 +226,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateRssFeedFromRemoteCustomSource()
+        public void CanBeCreatedFromRemoteCustomSource()
         {
             const string generator = "ESPN Inc. http://espn.go.com/";
             var language = LanguageTag.Parse("en-us");
@@ -245,7 +245,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateRssFeedFromRemoteWordPressSource()
+        public void CanBeCreatedFromRemoteWordPressSource()
         {
             const string generator = "http://wordpress.org/?v=3.2.1";
 
@@ -260,7 +260,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateRssFeedFromRemoteUnspecifiedSourceWithXmlBase()
+        public void CanBeCreatedFromRemoteUnspecifiedSourceWithXmlBase()
         {
             const string baseId = "http://www.thisamericanlife.org";
 
@@ -279,7 +279,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateRssFeedFromXmlOutput()
+        public void CanBeCreatedFromXmlOutput()
         {
             const string path = @".\Files\arstechnica.xml";
             var fileInfo = new FileInfo(path);

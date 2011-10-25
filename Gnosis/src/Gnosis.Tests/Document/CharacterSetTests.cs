@@ -7,13 +7,13 @@ using NUnit.Framework;
 
 using Gnosis.Document;
 
-namespace Gnosis.Tests.Models
+namespace Gnosis.Tests.Document
 {
     [TestFixture]
-    public class CharacterSetTests
+    public class CharacterSetItems
     {
         [Test]
-        public void LookupCharacterSet()
+        public void CanBeParsedByName()
         {
             foreach (var characterSet in CharacterSet.GetCharacterSets())
             {
@@ -27,6 +27,19 @@ namespace Gnosis.Tests.Models
 
                     Assert.AreEqual(characterSet, CharacterSet.GetCharacterSet(bom));
                 }
+            }
+        }
+
+        [Test]
+        public void CanBeParsedByByteOrderMark()
+        {
+            foreach (var characterSet in CharacterSet.GetCharacterSets().Where(x => x.ByteOrderMark != null))
+            {                
+                //NOTE: header has to be at least 4 bytes long in order to validate byte order marks
+                var bom = new byte[4] { 1, 1, 1, 1 };
+                Array.Copy(characterSet.ByteOrderMark, bom, characterSet.ByteOrderMark.Length);
+
+                Assert.AreEqual(characterSet, CharacterSet.GetCharacterSet(bom));
             }
         }
     }

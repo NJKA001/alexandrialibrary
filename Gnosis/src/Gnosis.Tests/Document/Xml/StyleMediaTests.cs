@@ -7,13 +7,13 @@ using NUnit.Framework;
 
 using Gnosis.Document.Xml;
 
-namespace Gnosis.Tests.Core.Document.Xml
+namespace Gnosis.Tests.Document.Xml
 {
     [TestFixture]
-    public class StyleMediaTests
+    public class StyleMediaItems
     {
         [Test]
-        public void LookupStyleMedia()
+        public void CanBeParsedByName()
         {
             var byName = new Dictionary<string, IStyleMedia>();
 

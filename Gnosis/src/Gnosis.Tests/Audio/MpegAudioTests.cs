@@ -8,17 +8,17 @@ using Gnosis.Tags.Id3;
 
 using NUnit.Framework;
 
-namespace Gnosis.Tests.Core.Audio
+namespace Gnosis.Tests.Audio
 {
     [TestFixture]
-    public class MpegAudioTests
+    public class MpegAudio
     {
         private const string location1 = @"Files\03 - Antes De Las Seis.mp3";
 
         private readonly IMediaFactory mediaFactory = new MediaFactory();
 
         [Test]
-        public void LoadTest()
+        public void CanBeLoaded()
         {
             var file = new System.IO.FileInfo(location1);
             Assert.IsTrue(file.Exists);

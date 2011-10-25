@@ -11,10 +11,10 @@ using Gnosis.Document;
 using Gnosis.Document.Xml;
 using Gnosis.Document.Xml.Atom;
 
-namespace Gnosis.Tests.Models
+namespace Gnosis.Tests.Document.Xml
 {
     [TestFixture]
-    public class AtomTests
+    public class AtomDocuments
     {
         private void MakeAtomFeedAssertions(IXmlElement document)
         {
@@ -205,7 +205,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateAtomFeedFromXmlOutput()
+        public void CanBeCreatedFromXmlOutput()
         {
             const string path = @".\Files\bearbrarian.xml";
 
@@ -252,7 +252,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateAtomFeedFromLocalXml()
+        public void CanBeCreatedFromLocalXml()
         {
             const string path = @".\Files\bearbrarian.xml";
 
@@ -269,7 +269,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateAtomFeedFromRemoteFeedBurnerSource()
+        public void CanBeCreatedFromRemoteFeedBurnerSource()
         {
             #region Constants
 
@@ -306,7 +306,7 @@ namespace Gnosis.Tests.Models
         }
 
         [Test]
-        public void CreateAtomFeedFromRemoteBlogEdSource()
+        public void CanBeCreatedFromRemoteBlogEdSource()
         {
             const string generatorName = "BlogEd 008";
             const string generatorUri = "https://bloged.dev.java.net/";
