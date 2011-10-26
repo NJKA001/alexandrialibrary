@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Gnosis
 {
-    public interface ISpider
+    public interface ILinkReader
     {
-        ITask<IEnumerable<IMedia>> Crawl(Uri target);
+        IEnumerable<ILink> Read(Uri target);
     }
 }
