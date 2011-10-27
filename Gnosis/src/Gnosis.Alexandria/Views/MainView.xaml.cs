@@ -35,9 +35,9 @@ namespace Gnosis.Alexandria.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainView : Window
     {
-        public MainWindow()
+        public MainView()
         {
             try
             {
@@ -104,7 +104,7 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        private static readonly log4net.ILog log = LogManager.GetLogger(typeof(MainWindow));
+        private static readonly log4net.ILog log = LogManager.GetLogger(typeof(MainView));
         
         private readonly IContext context;
         private readonly ILogger logger = new Log4NetLogger(log);
