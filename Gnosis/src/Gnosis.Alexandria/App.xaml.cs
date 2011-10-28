@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 
+using Gnosis.Alexandria.Views;
+
 namespace Gnosis.Alexandria
 {
     /// <summary>
@@ -12,5 +14,17 @@ namespace Gnosis.Alexandria
     /// </summary>
     public partial class App : Application
     {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            try
+            {
+                var main = new MainWindow();
+                main.Show();
+            }
+            catch (Exception ex)
+            {
+                var m = ex.Message;
+            }
+        }
     }
 }

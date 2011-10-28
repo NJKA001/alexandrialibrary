@@ -1,0 +1,11 @@
+﻿<Window x:Class="Gnosis.Alexandria.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vlc="clr-namespace:Gnosis.Video.Vlc;assembly=gnosis-vlc"
+        Title="Alexandria" Height="300" Width="300">
+    <Grid>
+        <TextBlock Text="Test"/>
+        <Button x:Name="launchVideoPlayerButton" Click="launchVideoPlayerButton_Click">Launch Video Player</Button>
+        <!--<vlc:VideoPlayer x:Name="videoPlayer" />-->
+    </Grid>
+</Window>

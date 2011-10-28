@@ -18,7 +18,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -80,6 +80,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Gnosis.Alexandria.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
@@ -244,6 +247,9 @@
     <Compile Include="Repositories\Tracks\TrackRepository.cs" />
     <Compile Include="Repositories\ValueSearchBase.cs" />
     <Compile Include="ViewModels\ITreeNode.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MediaListView.xaml.cs">
       <DependentUpon>MediaListView.xaml</DependentUpon>
     </Compile>
@@ -272,6 +278,10 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\MediaListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -333,7 +343,11 @@
     </ProjectReference>
     <ProjectReference Include="..\Gnosis.Audio.Fmod\Gnosis.Audio.Fmod.csproj">
       <Project>{1629B512-34A2-4F04-AB9A-EBD30228EBDC}</Project>
-      <Name>Gnosis.Fmod</Name>
+      <Name>Gnosis.Audio.Fmod</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gnosis.Video.Vlc\Gnosis.Video.Vlc.csproj">
+      <Project>{C86B2640-A028-4296-953B-9EC52AB3B0C0}</Project>
+      <Name>Gnosis.Video.Vlc</Name>
     </ProjectReference>
     <ProjectReference Include="..\Gnosis\Gnosis.csproj">
       <Project>{37091600-5BFE-4FCB-8A69-F016FF451462}</Project>

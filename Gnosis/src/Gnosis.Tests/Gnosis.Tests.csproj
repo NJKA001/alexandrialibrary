@@ -134,7 +134,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Gnosis.Audio.Fmod\Gnosis.Audio.Fmod.csproj">
       <Project>{1629B512-34A2-4F04-AB9A-EBD30228EBDC}</Project>
-      <Name>Gnosis.Fmod</Name>
+      <Name>Gnosis.Audio.Fmod</Name>
     </ProjectReference>
     <ProjectReference Include="..\Gnosis\Gnosis.csproj">
       <Project>{37091600-5BFE-4FCB-8A69-F016FF451462}</Project>
