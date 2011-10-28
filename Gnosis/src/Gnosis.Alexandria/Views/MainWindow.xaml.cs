@@ -26,15 +26,15 @@ namespace Gnosis.Alexandria.Views
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             base.OnClosing(e);
-            //videoPlayer.ShutDown();
+            videoPlayerControl.ShutDown();
         }
 
         private void launchVideoPlayerButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var videoPlayer = new Gnosis.Video.Vlc.VideoPlayer();
-                videoPlayer.Show();
+                //var videoPlayer = new Gnosis.Video.Vlc.VideoPlayer();
+                //videoPlayer.Show();
             }
             catch (Exception ex)
             {
