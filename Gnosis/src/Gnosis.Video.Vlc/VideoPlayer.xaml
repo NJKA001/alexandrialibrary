@@ -25,6 +25,7 @@
         <GridSplitter />
         <Grid Grid.Row="1">
             <Border BorderThickness="1" BorderBrush="#FF836565">
+                <!--
                 <Viewport3D>
                     <Viewport3D.Camera>
                         <PerspectiveCamera Position="7,7,7" LookDirection="-1,-1,-1" />
@@ -76,7 +77,7 @@
                             </ModelVisual3D.Content>
                         </ModelVisual3D>
                     </Viewport3D.Children>
-                </Viewport3D>
+                </Viewport3D>-->
             </Border>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" >
                 <TextBlock Margin="5,3,5,0">Volume:</TextBlock>
