@@ -48,13 +48,13 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="Vlc.DotNet.Core">
-      <HintPath>..\..\..\..\Downloads\VideoLan DotNet for WinForm and WPF - 2011.7.20\Vlc.DotNet.Core.dll</HintPath>
+      <HintPath>..\..\lib\VlcDotNet\1.2.0.0\x86\Vlc.DotNet.Core.dll</HintPath>
     </Reference>
     <Reference Include="Vlc.DotNet.Core.Interops">
-      <HintPath>..\..\..\..\Downloads\VideoLan DotNet for WinForm and WPF - 2011.7.20\Vlc.DotNet.Core.Interops.dll</HintPath>
+      <HintPath>..\..\lib\VlcDotNet\1.2.0.0\x86\Vlc.DotNet.Core.Interops.dll</HintPath>
     </Reference>
     <Reference Include="Vlc.DotNet.Wpf">
-      <HintPath>..\..\..\..\Downloads\VideoLan DotNet for WinForm and WPF - 2011.7.20\Vlc.DotNet.Wpf.dll</HintPath>
+      <HintPath>..\..\lib\VlcDotNet\1.2.0.0\x86\Vlc.DotNet.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
