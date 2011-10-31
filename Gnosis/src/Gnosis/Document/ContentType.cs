@@ -181,12 +181,15 @@ namespace Gnosis.Document
                     mediaType = MediaType.GetMediaTypesByFileExtension(extension).FirstOrDefault();
                 }
 
-                using (var stream = new FileStream(location.LocalPath, FileMode.Open, FileAccess.Read))
+                if (mediaType != MediaType.ApplicationXmlDtd)
                 {
-                    charSet = GetCharacterSet(stream, mediaType, charSet);
-                    var ext = GetXmlExtendedType(stream, mediaType, charSet);
-                    mediaType = ext.Item1;
-                    charSet = ext.Item2;
+                    using (var stream = new FileStream(location.LocalPath, FileMode.Open, FileAccess.Read))
+                    {
+                        charSet = GetCharacterSet(stream, mediaType, charSet);
+                        var ext = GetXmlExtendedType(stream, mediaType, charSet);
+                        mediaType = ext.Item1;
+                        charSet = ext.Item2;
+                    }
                 }
 
                 return new ContentType(mediaType, charSet, boundary);

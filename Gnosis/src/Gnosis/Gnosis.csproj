@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="Algorithms\Algorithm.cs" />
     <Compile Include="Application\FilesystemDirectory.cs" />
+    <Compile Include="Application\Xml\XmlDtdDocument.cs" />
     <Compile Include="Audio\AudioBase.cs" />
     <Compile Include="IAudio.cs" />
     <Compile Include="Audio\IMpegAudio.cs" />
@@ -246,6 +247,7 @@
     <Compile Include="Tasks\MediaCrawlTask.cs" />
     <Compile Include="Tasks\MediaDetailSearchTask.cs" />
     <Compile Include="Tasks\TagSearchTask.cs" />
+    <Compile Include="Text\PlainText.cs" />
     <Compile Include="Utilities\DebugLogger.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="IMediaRepository.cs" />
@@ -529,9 +531,13 @@
     <Compile Include="Document\Xml\YouTube\YouTubeVideoId.cs" />
     <Compile Include="Document\Xml\YouTube\YouTubeWhen.cs" />
     <Compile Include="Utilities\Log4NetLogger.cs" />
+    <Compile Include="Video\AviVideo.cs" />
+    <Compile Include="Video\MpegVideo.cs" />
+    <Compile Include="Video\VideoBase.cs" />
+    <Compile Include="Video\WmvVideo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Video\" />
+    <Folder Include="Application\Gnosis\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\lib\taglib-sharp\2.0.3.7\taglib-sharp.csproj">

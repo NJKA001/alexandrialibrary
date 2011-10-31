@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Application;
+using Gnosis.Application.Xml;
 using Gnosis.Audio;
 using Gnosis.Document;
 using Gnosis.Document.Xml;
 using Gnosis.Document.Xml.Xhtml;
 using Gnosis.Image;
+using Gnosis.Text;
+using Gnosis.Video;
 
 namespace Gnosis
 {
@@ -21,6 +24,7 @@ namespace Gnosis
             AddFactoryFunction(MediaType.ApplicationRssXml, (location, type) => new XmlDocument(location, type));
             AddFactoryFunction(MediaType.ApplicationXhtmlXml, (location, type) => new XhtmlDocument(location, type));
             AddFactoryFunction(MediaType.ApplicationXml, (location, type) => new XmlDocument(location, type));
+            AddFactoryFunction(MediaType.ApplicationXmlDtd, (location, type) => new XmlDtdDocument(location));
             AddFactoryFunction(MediaType.ApplicationXspfXml, (location, type) => new XmlDocument(location, type));
 
             AddFactoryFunction(MediaType.AudioMpeg, (location, type) => new MpegAudio(location));
@@ -31,6 +35,11 @@ namespace Gnosis
             AddFactoryFunction(MediaType.ImagePng, (location, type) => new PngImage(location));
 
             AddFactoryFunction(MediaType.TextHtml, (location, type) => new XhtmlDocument(location, type));
+            AddFactoryFunction(MediaType.TextPlain, (location, type) => new PlainText(location));
+
+            AddFactoryFunction(MediaType.VideoAvi, (location, type) => new AviVideo(location));
+            AddFactoryFunction(MediaType.VideoMpeg, (location, type) => new MpegVideo(location));
+            AddFactoryFunction(MediaType.VideoWmv, (location, type) => new WmvVideo(location));
         }
 
         private readonly IDictionary<string, Func<Uri, IMediaType, IMedia>> factoryFunctions = new Dictionary<string, Func<Uri, IMediaType, IMedia>>();

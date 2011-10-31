@@ -136,6 +136,7 @@ namespace Gnosis
             mediaTypes.Add(ApplicationXhtmlXml);
             mediaTypes.Add(ApplicationXspfXml);
             mediaTypes.Add(ApplicationXml);
+            mediaTypes.Add(ApplicationXmlDtd);
             mediaTypes.Add(ApplicationUnknown);
             mediaTypes.Add(ApplicationFilesystemDirectory);
             mediaTypes.Add(AudioMpeg);
@@ -145,7 +146,11 @@ namespace Gnosis
             mediaTypes.Add(ImagePng);
             mediaTypes.Add(TextCss);
             mediaTypes.Add(TextHtml);
+            mediaTypes.Add(TextPlain);
             mediaTypes.Add(TextXsl);
+            mediaTypes.Add(VideoAvi);
+            mediaTypes.Add(VideoMpeg);
+            mediaTypes.Add(VideoWmv);
         }
 
         #endregion
@@ -217,8 +222,9 @@ namespace Gnosis
         public static readonly IMediaType ApplicationXhtmlXml = new MediaType(TypeApplication, "xhtml+xml", new List<string> { ".xhtml", "" }, new List<string> { "text/html" });
         public static readonly IMediaType ApplicationXspfXml = new MediaType(TypeApplication, "xspf+xml", new List<string> { ".xspf" });
         public static readonly IMediaType ApplicationXml = new MediaType(TypeApplication, "xml", new List<string> { ".xml" }, new List<string> { "text/xml" });
+        public static readonly IMediaType ApplicationXmlDtd = new MediaType(TypeApplication, "xml-dtd", new List<string> { ".dtd", ".ent" });
         public static readonly IMediaType ApplicationUnknown = new MediaType(TypeApplication, "unknown");
-        public static readonly IMediaType ApplicationFilesystemDirectory = new MediaType(TypeApplication, "vnd.gnosis.fs-dir");
+        public static readonly IMediaType ApplicationFilesystemDirectory = new MediaType(TypeApplication, "vnd.gnosis.fs+dir");
 
         public static readonly IMediaType AudioMpeg = new MediaType(TypeAudio, "mpeg", new List<string> { ".mp3", ".mp2", ".mp1" }, new List<string> { "audio/mp3" }, new List<byte[]> { new byte[] { 0x49, 0x44, 0x33 }});
 
@@ -229,7 +235,12 @@ namespace Gnosis
 
         public static readonly IMediaType TextCss = new MediaType(TypeText, "css", new List<string> { ".css" });
         public static readonly IMediaType TextHtml = new MediaType(TypeText, "html", new List<string> { ".html", ".htm" }, new List<string> { "text/html" });
+        public static readonly IMediaType TextPlain = new MediaType(TypeText, "plain", new List<string> { ".txt" });
         public static readonly IMediaType TextXsl = new MediaType(TypeText, "xsl", new List<string> { ".xsl" });
+
+        public static readonly IMediaType VideoAvi = new MediaType(TypeVideo, "avi", new List<string> { ".avi" }, new List<string> { "video/x-msvideo", "video/msvideo" }, new List<byte[]> { new byte[] { 0x52, 0x49, 0x46, 0x46 } });
+        public static readonly IMediaType VideoMpeg = new MediaType(TypeVideo, "mpeg", new List<string> { ".mpeg", ".mpe", ".mpg", ".mpga" }, new List<string>(), new List<byte[]> { new byte[] { 0x00, 0x00, 0x01 } } );
+        public static readonly IMediaType VideoWmv = new MediaType(TypeVideo, "x-ms-wmv", new List<string> { ".wmv" }, new List<string>(), new List<byte[]> { new byte[] { 0x30, 0x26, 0xB2, 0x75 } }); //, 0x8E, 0x66, 0xCF, 0x11, 0xA6, 0xD9, 0x00, 0xAA, 0x00, 0x62, 0xCE, 0x6C } });
 
         public const string TypeApplication = "application";
         public const string TypeAudio = "audio";
