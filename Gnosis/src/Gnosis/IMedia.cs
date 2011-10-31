@@ -9,5 +9,8 @@ namespace Gnosis
     {
         Uri Location { get; }
         IMediaType Type { get; }
+
+        IEnumerable<ILink> GetLinks();
+        IEnumerable<ITag> GetTags();
     }
 }

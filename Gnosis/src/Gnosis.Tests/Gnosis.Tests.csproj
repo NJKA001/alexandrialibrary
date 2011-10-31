@@ -107,6 +107,7 @@
     <Compile Include="Geography\RegionTests.cs" />
     <Compile Include="Media\MediaFactoryTests.cs" />
     <Compile Include="Performance\TagPerformanceTests.cs" />
+    <Compile Include="Spiders\LocalFilesystemSpiderTests.cs" />
     <Compile Include="Time\Rfc822DateTimeTests.cs" />
     <Compile Include="Document\Xml\RssTests.cs" />
     <Compile Include="Culture\ScriptTests.cs" />

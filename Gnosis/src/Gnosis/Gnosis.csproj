@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\Algorithm.cs" />
+    <Compile Include="Application\FilesystemDirectory.cs" />
     <Compile Include="Audio\AudioBase.cs" />
     <Compile Include="IAudio.cs" />
     <Compile Include="Audio\IMpegAudio.cs" />
@@ -207,9 +208,9 @@
     <Compile Include="Extensions\StringArrayExtensions.cs" />
     <Compile Include="ILinkFactory.cs" />
     <Compile Include="ILinkRepository.cs" />
-    <Compile Include="ILinkReader.cs" />
     <Compile Include="ILinkType.cs" />
     <Compile Include="ILinkTypeFactory.cs" />
+    <Compile Include="IMediaAggregate.cs" />
     <Compile Include="IMediaDetail.cs" />
     <Compile Include="IMediaDetailRepository.cs" />
     <Compile Include="ISpider.cs" />
@@ -223,6 +224,8 @@
     <Compile Include="ITagFactory.cs" />
     <Compile Include="ITagRepository.cs" />
     <Compile Include="ITask.cs" />
+    <Compile Include="MediaAggregate.cs" />
+    <Compile Include="TaskProgress.cs" />
     <Compile Include="IVideo.cs" />
     <Compile Include="Links\Html\HtmlLinkType.cs" />
     <Compile Include="Links\LinkType.cs" />

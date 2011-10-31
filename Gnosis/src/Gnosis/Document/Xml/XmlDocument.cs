@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Links;
+using Gnosis.Links.Html;
+using Gnosis.Document.Xml.Xhtml;
+
 namespace Gnosis.Document.Xml
 {
     public class XmlDocument
@@ -22,6 +26,7 @@ namespace Gnosis.Document.Xml
         private Uri location;
         private IMediaType type;
         private IXmlElement xml;
+        private bool isLoaded;
 
         public Uri Location
         {
@@ -38,9 +43,32 @@ namespace Gnosis.Document.Xml
             get { return xml; }
         }
 
+        public IEnumerable<ILink> GetLinks()
+        {
+            if (!isLoaded)
+                Load();
+
+            foreach (var elem in Xml.Where<IHtmlAnchor>(x => x != null))
+            {
+                //TODO: use the rel attribute to get the actual link type
+                Uri target = null;
+                if (Uri.TryCreate(elem.Target, UriKind.RelativeOrAbsolute, out target))
+                    yield return new Link(location, target, HtmlLinkType.DefaultLink, elem.Content);
+            }
+        }
+
+        public IEnumerable<ITag> GetTags()
+        {
+            return Enumerable.Empty<ITag>();
+        }
+
         public void Load()
         {
-            this.xml = location.ToXmlDocument();
+            if (!isLoaded)
+            {
+                isLoaded = true;
+                this.xml = location.ToXmlDocument();
+            }
         }
     }
 }

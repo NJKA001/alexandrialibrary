@@ -26,7 +26,7 @@ namespace Gnosis.Tasks
 
         #region Private Members
 
-        private int progress;
+        private TaskProgress progress;
         private TaskStatus status = TaskStatus.Ready;
         private Exception error;
         private readonly IList<Action> startedCalledbacks = new List<Action>();
@@ -34,7 +34,7 @@ namespace Gnosis.Tasks
         private readonly IList<Action> resumedCallbacks = new List<Action>();
         private readonly IList<Action> cancelledCallbacks = new List<Action>();
         private readonly IList<Action> completedCallbacks = new List<Action>();
-        private readonly IList<Action<int>> progressCallbacks = new List<Action<int>>();
+        private readonly IList<Action<TaskProgress>> progressCallbacks = new List<Action<TaskProgress>>();
         private readonly IList<Action<Exception>> failedCallbacks = new List<Action<Exception>>();
         private readonly BackgroundWorker worker = new BackgroundWorker();
 
@@ -80,6 +80,18 @@ namespace Gnosis.Tasks
                 callback(error);
         }
 
+        private void DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                DoWork();
+            }
+            catch (Exception ex)
+            {
+                Fail(ex);
+            }
+        }
+
         private void Wait(TimeSpan timeout)
         {
             if (status != TaskStatus.Running)
@@ -94,24 +106,20 @@ namespace Gnosis.Tasks
             }
         }
 
-        private void DoWork(object sender, DoWorkEventArgs e)
-        {
-            try
-            {
-                DoWork();
-            }
-            catch (Exception ex)
-            {
-                Fail(ex);
-            }
-        }
-
         #endregion
 
         protected readonly ILogger logger;
 
         protected abstract void DoWork();
-        
+
+        protected void BlockIfPaused()
+        {
+            while (status == TaskStatus.Paused)
+            {
+                System.Threading.Thread.Sleep(100);
+            }
+        }
+
         protected virtual void WorkCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
@@ -129,9 +137,9 @@ namespace Gnosis.Tasks
             }
         }
 
-        protected virtual void UpdateProgress(int progress)
+        protected virtual void UpdateProgress(int number, string description)
         {
-            this.progress = progress;
+            this.progress = new TaskProgress(number, description);
 
             OnProgressUpdated();
         }
@@ -144,7 +152,16 @@ namespace Gnosis.Tasks
             OnFailed();
         }
 
-        public int Progress
+        protected virtual void Fail(Exception error, string message)
+        {
+            status = TaskStatus.Failed;
+            var errorWrapper = new ApplicationException(message, error);
+            this.error = errorWrapper;
+
+            OnFailed();
+        }
+
+        public TaskProgress Progress
         {
             get { return progress; }
         }
@@ -191,7 +208,7 @@ namespace Gnosis.Tasks
             cancelledCallbacks.Add(callback);
         }
 
-        public void AddProgressCallback(Action<int> callback)
+        public void AddProgressCallback(Action<TaskProgress> callback)
         {
             if (callback == null)
                 throw new ArgumentNullException("callback");

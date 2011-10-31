@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Application;
 using Gnosis.Audio;
 using Gnosis.Document;
 using Gnosis.Document.Xml;
@@ -51,8 +52,10 @@ namespace Gnosis
             if (location == null)
                 throw new ArgumentNullException("location");
 
-            var contentType = ContentType.GetContentType(location);
+            if (location.IsFile && System.IO.Directory.Exists(location.LocalPath))
+                return new FilesystemDirectory(location);
 
+            var contentType = ContentType.GetContentType(location);
 
             if (contentType == null)
             {

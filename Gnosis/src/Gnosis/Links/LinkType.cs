@@ -32,5 +32,7 @@ namespace Gnosis.Links
 
         public static readonly ILinkType Default = new LinkType(1, "Default");
         public static readonly ILinkType ThumbnailImage = new LinkType(2, "ThumbnailImage");
+        public static readonly ILinkType Directory = new LinkType(21, "Directory");
+        public static readonly ILinkType File = new LinkType(22, "File");
     }
 }

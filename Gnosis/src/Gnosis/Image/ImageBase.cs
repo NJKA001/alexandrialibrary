@@ -27,6 +27,16 @@ namespace Gnosis.Image
             get { return location; }
         }
 
+        public virtual IEnumerable<ILink> GetLinks()
+        {
+            return Enumerable.Empty<ILink>();
+        }
+
+        public virtual IEnumerable<ITag> GetTags()
+        {
+            return Enumerable.Empty<ITag>();
+        }
+
         public IMediaType Type
         {
             get { return type; }

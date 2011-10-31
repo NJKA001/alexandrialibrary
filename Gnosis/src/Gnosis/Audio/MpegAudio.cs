@@ -50,9 +50,14 @@ namespace Gnosis.Audio
             }
         }
 
-        public IEnumerable<IId3Tag> GetTags()
+        public override IEnumerable<ITag> GetTags()
         {
-            throw new NotImplementedException();
+            return GetId3Tags();
+        }
+
+        public IEnumerable<IId3Tag> GetId3Tags()
+        {
+            return new List<IId3Tag>();
         }
 
         public void SetTag(IId3Tag tag)

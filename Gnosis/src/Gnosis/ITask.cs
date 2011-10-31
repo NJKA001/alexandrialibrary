@@ -7,7 +7,7 @@ namespace Gnosis
 {
     public interface ITask
     {
-        int Progress { get; }
+        TaskProgress Progress { get; }
         TaskStatus Status { get; }
         Exception Error { get; }
 
@@ -16,7 +16,7 @@ namespace Gnosis
         void AddPausedCallback(Action callback);
         void AddResumedCallback(Action callback);
         void AddCompletedCallback(Action callback);
-        void AddProgressCallback(Action<int> callback);
+        void AddProgressCallback(Action<TaskProgress> callback);
         void AddFailedCallback(Action<Exception> callback);
 
         void Start();

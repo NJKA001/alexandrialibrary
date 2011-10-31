@@ -17,8 +17,6 @@ namespace Gnosis.Audio
         private readonly Uri location;
         private readonly IMediaType type;
 
-        #region IMedia Members
-
         public Uri Location
         {
             get { return location; }
@@ -29,6 +27,14 @@ namespace Gnosis.Audio
             get { return type; }
         }
 
-        #endregion
+        public virtual IEnumerable<ILink> GetLinks()
+        {
+            return Enumerable.Empty<ILink>();
+        }
+
+        public virtual IEnumerable<ITag> GetTags()
+        {
+            return Enumerable.Empty<ITag>();
+        }
     }
 }

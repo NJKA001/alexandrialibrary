@@ -11,7 +11,7 @@ namespace Gnosis.Audio
     public interface IMpegAudio
         : IAudio
     {
-        IEnumerable<IId3Tag> GetTags();
+        IEnumerable<IId3Tag> GetId3Tags();
 
         void SetTag(IId3Tag tag);
         void RemoveTag(IId3Tag tag);
