@@ -71,7 +71,7 @@ namespace Gnosis.Tests.Spiders
         {
             const string path = @".\Files";
             const int timeoutSeconds = 60;
-            const int mediaCount = 34;
+            const int mediaCount = 39;
 
             var directory = new DirectoryInfo(path);
             Assert.IsTrue(directory.Exists);

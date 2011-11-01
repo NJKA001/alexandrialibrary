@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Culture;
-using Gnosis.Document;
 using Gnosis.Geography;
 
 namespace Gnosis

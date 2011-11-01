@@ -132,6 +132,7 @@ namespace Gnosis
         private static void InitializeMediaTypes()
         {
             mediaTypes.Add(ApplicationAtomXml);
+            mediaTypes.Add(ApplicationPdf);
             mediaTypes.Add(ApplicationRssXml);
             mediaTypes.Add(ApplicationXhtmlXml);
             mediaTypes.Add(ApplicationXspfXml);
@@ -156,6 +157,22 @@ namespace Gnosis
         #endregion
 
         #region Public Static Methods
+
+        public static IMediaType GetMediaType(Uri location)
+        {
+            if (location == null)
+                throw new ArgumentNullException("location");
+
+            try
+            {
+                var contentType = ContentType.GetContentType(location);
+                return contentType.Type;
+            }
+            catch
+            {
+                return MediaType.ApplicationUnknown;
+            }
+        }
 
         public static IMediaType Parse(string value)
         {
@@ -218,13 +235,14 @@ namespace Gnosis
         #region Media Types
 
         public static readonly IMediaType ApplicationAtomXml = new MediaType(TypeApplication, "atom+xml", new List<string> { ".atom", ".xml" });
+        public static readonly IMediaType ApplicationPdf = new MediaType(TypeApplication, "pdf", new List<string> { ".pdf" }, new List<string> { "application/x-pdf", "application/x-bzpdf", "application/x-gxpdf" }, new List<byte[]> { new byte[] { 0x25, 0x50, 0x44, 0x46 } });
         public static readonly IMediaType ApplicationRssXml = new MediaType(TypeApplication, "rss+xml", new List<string> { ".rss", ".xml" });
         public static readonly IMediaType ApplicationXhtmlXml = new MediaType(TypeApplication, "xhtml+xml", new List<string> { ".xhtml", "" }, new List<string> { "text/html" });
         public static readonly IMediaType ApplicationXspfXml = new MediaType(TypeApplication, "xspf+xml", new List<string> { ".xspf" });
         public static readonly IMediaType ApplicationXml = new MediaType(TypeApplication, "xml", new List<string> { ".xml" }, new List<string> { "text/xml" });
         public static readonly IMediaType ApplicationXmlDtd = new MediaType(TypeApplication, "xml-dtd", new List<string> { ".dtd", ".ent" });
         public static readonly IMediaType ApplicationUnknown = new MediaType(TypeApplication, "unknown");
-        public static readonly IMediaType ApplicationFilesystemDirectory = new MediaType(TypeApplication, "vnd.gnosis.fs+dir");
+        public static readonly IMediaType ApplicationFilesystemDirectory = new MediaType(TypeApplication, "vnd.gnosis.fs.dir");
 
         public static readonly IMediaType AudioMpeg = new MediaType(TypeAudio, "mpeg", new List<string> { ".mp3", ".mp2", ".mp1" }, new List<string> { "audio/mp3" }, new List<byte[]> { new byte[] { 0x49, 0x44, 0x33 }});
 

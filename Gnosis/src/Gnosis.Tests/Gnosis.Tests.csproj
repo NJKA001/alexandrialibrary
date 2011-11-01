@@ -95,25 +95,25 @@
     <Compile Include="Data\SQLite\MediaDetailTests.cs" />
     <Compile Include="Data\SQLite\MediaTests.cs" />
     <Compile Include="Data\SQLite\TagTests.cs" />
-    <Compile Include="Document\Xml\XspfTests.cs" />
-    <Compile Include="Document\Xml\AtomTests.cs" />
-    <Compile Include="Document\CharacterSetTests.cs" />
-    <Compile Include="Document\ContentTypeTests.cs" />
+    <Compile Include="Application\Xml\XspfTests.cs" />
+    <Compile Include="Application\Xml\AtomTests.cs" />
+    <Compile Include="Media\CharacterSetTests.cs" />
+    <Compile Include="Media\ContentTypeTests.cs" />
     <Compile Include="Geography\CountryTests.cs" />
     <Compile Include="Culture\LanguageTagTests.cs" />
     <Compile Include="Culture\LanguageTests.cs" />
-    <Compile Include="Document\Xml\StyleMediaTests.cs" />
+    <Compile Include="Application\Xml\StyleMediaTests.cs" />
     <Compile Include="Media\MediaTypeTests.cs" />
     <Compile Include="Geography\RegionTests.cs" />
     <Compile Include="Media\MediaFactoryTests.cs" />
     <Compile Include="Performance\TagPerformanceTests.cs" />
     <Compile Include="Spiders\LocalFilesystemSpiderTests.cs" />
     <Compile Include="Time\Rfc822DateTimeTests.cs" />
-    <Compile Include="Document\Xml\RssTests.cs" />
+    <Compile Include="Application\Xml\RssTests.cs" />
     <Compile Include="Culture\ScriptTests.cs" />
     <Compile Include="Tags\TagTests.cs" />
-    <Compile Include="Document\Xml\XhtmlTests.cs" />
-    <Compile Include="Document\Xml\XmlTests.cs" />
+    <Compile Include="Application\Xml\XhtmlTests.cs" />
+    <Compile Include="Application\Xml\XmlTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -264,6 +264,23 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Integration\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Files\fw4.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\HelloWorld %28protected%29.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\HelloWorld.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\Portable Document Format.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\SomeLayout.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

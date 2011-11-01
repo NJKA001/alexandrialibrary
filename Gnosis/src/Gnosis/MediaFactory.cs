@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Application;
+using Gnosis.Application.Vendor;
+using Gnosis.Application.Pdf;
 using Gnosis.Application.Xml;
+using Gnosis.Application.Xml.Xhtml;
 using Gnosis.Audio;
-using Gnosis.Document;
-using Gnosis.Document.Xml;
-using Gnosis.Document.Xml.Xhtml;
 using Gnosis.Image;
 using Gnosis.Text;
 using Gnosis.Video;
@@ -21,6 +21,7 @@ namespace Gnosis
         public MediaFactory()
         {
             AddFactoryFunction(MediaType.ApplicationAtomXml, (location, type) => new XmlDocument(location, type));
+            AddFactoryFunction(MediaType.ApplicationPdf, (location, type) => new PdfDocument(location));
             AddFactoryFunction(MediaType.ApplicationRssXml, (location, type) => new XmlDocument(location, type));
             AddFactoryFunction(MediaType.ApplicationXhtmlXml, (location, type) => new XhtmlDocument(location, type));
             AddFactoryFunction(MediaType.ApplicationXml, (location, type) => new XmlDocument(location, type));
@@ -62,7 +63,7 @@ namespace Gnosis
                 throw new ArgumentNullException("location");
 
             if (location.IsFile && System.IO.Directory.Exists(location.LocalPath))
-                return new FilesystemDirectory(location);
+                return new GnosisFilesystemDirectory(location);
 
             var contentType = ContentType.GetContentType(location);
 
@@ -87,6 +88,9 @@ namespace Gnosis
                 throw new ArgumentNullException("location");
             if (type == null)
                 throw new ArgumentNullException("type");
+
+            if (type == MediaType.ApplicationFilesystemDirectory)
+                return new GnosisFilesystemDirectory(location);
 
             var mediaType = type.ToString();
 

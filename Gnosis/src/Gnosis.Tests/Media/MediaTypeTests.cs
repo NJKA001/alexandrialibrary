@@ -71,7 +71,7 @@ namespace Gnosis.Tests.Media
         public void CanGetMediaTypeForRemoteRssFeedWithInvalidContentType()
         {
             var location = new Uri("http://feeds.arstechnica.com/arstechnica/index");
-            var mediaType = location.ToMediaType();
+            var mediaType = MediaType.GetMediaType(location);
             Assert.AreEqual(MediaType.ApplicationRssXml, mediaType);
         }
 
@@ -79,7 +79,7 @@ namespace Gnosis.Tests.Media
         public void CanGetMediaTypeForRemoteAtomFeed()
         {
             var location = new Uri("http://www.blogger.com/feeds/8677504/posts/default");
-            var mediaType = location.ToMediaType();
+            var mediaType = MediaType.GetMediaType(location);
             Assert.AreEqual(MediaType.ApplicationAtomXml, mediaType);
         }
 
@@ -90,7 +90,7 @@ namespace Gnosis.Tests.Media
             var fileInfo = new System.IO.FileInfo(path);
             Assert.IsTrue(System.IO.File.Exists(path));
             var location = new Uri(fileInfo.FullName, UriKind.Absolute);
-            var mediaType = location.ToMediaType();
+            var mediaType = MediaType.GetMediaType(location);
             Assert.AreEqual(MediaType.ImagePng, mediaType);
         }
 
@@ -101,7 +101,7 @@ namespace Gnosis.Tests.Media
             var fileInfo = new System.IO.FileInfo(path);
             Assert.IsTrue(System.IO.File.Exists(path));
             var location = new Uri(fileInfo.FullName, UriKind.Absolute);
-            var mediaType = location.ToMediaType();
+            var mediaType = MediaType.GetMediaType(location);
             Assert.AreEqual(MediaType.ImagePng, mediaType);
         }
 
@@ -121,7 +121,7 @@ namespace Gnosis.Tests.Media
             var fileInfo = new System.IO.FileInfo(path);
             Assert.IsTrue(System.IO.File.Exists(path));
             var location = new Uri(fileInfo.FullName, UriKind.Absolute);
-            var mediaType = location.ToMediaType();
+            var mediaType = MediaType.GetMediaType(location);
             Assert.AreEqual(MediaType.ImageGif, mediaType);
         }
 
@@ -132,7 +132,7 @@ namespace Gnosis.Tests.Media
             var fileInfo = new System.IO.FileInfo(path);
             Assert.IsTrue(System.IO.File.Exists(path));
             var location = new Uri(fileInfo.FullName, UriKind.Absolute);
-            var mediaType = location.ToMediaType();
+            var mediaType = MediaType.GetMediaType(location);
             Assert.AreEqual(MediaType.ImageGif, mediaType);
         }
 
@@ -140,7 +140,7 @@ namespace Gnosis.Tests.Media
         public void CanGetMediaTypeForRemoteGif()
         {
             var location = new Uri("http://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Rotating_earth_%28large%29.gif/200px-Rotating_earth_%28large%29.gif");
-            var mediaType = location.ToMediaType();
+            var mediaType = MediaType.GetMediaType(location);
             Assert.AreEqual(MediaType.ImageGif, mediaType);
         }
 
@@ -151,7 +151,7 @@ namespace Gnosis.Tests.Media
             var fileInfo = new System.IO.FileInfo(path);
             Assert.IsTrue(System.IO.File.Exists(path));
             var location = new Uri(fileInfo.FullName, UriKind.Absolute);
-            var mediaType = location.ToMediaType();
+            var mediaType = MediaType.GetMediaType(location);
             Assert.AreEqual(MediaType.ImageJpeg, mediaType);
         }
 
@@ -162,7 +162,7 @@ namespace Gnosis.Tests.Media
             var fileInfo = new System.IO.FileInfo(path);
             Assert.IsTrue(System.IO.File.Exists(path));
             var location = new Uri(fileInfo.FullName, UriKind.Absolute);
-            var mediaType = location.ToMediaType();
+            var mediaType = MediaType.GetMediaType(location);
             Assert.AreEqual(MediaType.ImageJpeg, mediaType);
         }
 
@@ -170,7 +170,7 @@ namespace Gnosis.Tests.Media
         public void CanGetMediaTypeForRemoteJpg()
         {
             var location = new Uri("http://upload.wikimedia.org/wikipedia/commons/b/b4/JPEG_example_JPG_RIP_100.jpg");
-            var mediaType = location.ToMediaType();
+            var mediaType = MediaType.GetMediaType(location);
             Assert.AreEqual(MediaType.ImageJpeg, mediaType);
         }
 
@@ -178,7 +178,7 @@ namespace Gnosis.Tests.Media
         public void CanGetMediaTypeForRemoteHtml()
         {
             var location = new Uri("http://arstechnica.com/");
-            var mediaType = location.ToMediaType();
+            var mediaType = MediaType.GetMediaType(location);
             Assert.AreEqual(MediaType.TextHtml, mediaType);
         }
 
@@ -189,7 +189,7 @@ namespace Gnosis.Tests.Media
             var fileInfo = new System.IO.FileInfo(path);
             Assert.IsTrue(System.IO.File.Exists(path));
             var location = new Uri(fileInfo.FullName, UriKind.Absolute);
-            var mediaType = location.ToMediaType();
+            var mediaType = MediaType.GetMediaType(location);
             Assert.AreEqual(MediaType.AudioMpeg, mediaType);
         }
 
@@ -200,7 +200,7 @@ namespace Gnosis.Tests.Media
             var fileInfo = new System.IO.FileInfo(path);
             Assert.IsTrue(System.IO.File.Exists(path));
             var location = new Uri(fileInfo.FullName, UriKind.Absolute);
-            var mediaType = location.ToMediaType();
+            var mediaType = MediaType.GetMediaType(location);
             Assert.AreEqual(MediaType.AudioMpeg, mediaType);
         }
     }

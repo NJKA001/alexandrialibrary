@@ -1088,5 +1088,26 @@ namespace Gnosis
             
             return bytes;
         }
+
+        public static bool TryParseUri(this string self, out Uri result)
+        {
+            if (self == null)
+            {
+                result = null;
+                return false;
+            }
+
+            try
+            {
+                var uri = new Uri(self, UriKind.RelativeOrAbsolute);
+                result = uri;
+                return true;
+            }
+            catch (Exception)
+            {
+                result = null;
+                return false;
+            }
+        }
     }
 }
