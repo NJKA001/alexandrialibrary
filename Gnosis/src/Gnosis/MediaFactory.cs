@@ -89,7 +89,7 @@ namespace Gnosis
             if (type == null)
                 throw new ArgumentNullException("type");
 
-            if (type == MediaType.ApplicationFilesystemDirectory)
+            if (type == MediaType.ApplicationGnosisFilesystemDirectory)
                 return new GnosisFilesystemDirectory(location);
 
             var mediaType = type.ToString();

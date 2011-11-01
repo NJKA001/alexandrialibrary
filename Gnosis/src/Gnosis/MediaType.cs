@@ -139,7 +139,7 @@ namespace Gnosis
             mediaTypes.Add(ApplicationXml);
             mediaTypes.Add(ApplicationXmlDtd);
             mediaTypes.Add(ApplicationUnknown);
-            mediaTypes.Add(ApplicationFilesystemDirectory);
+            mediaTypes.Add(ApplicationGnosisFilesystemDirectory);
             mediaTypes.Add(AudioMpeg);
             mediaTypes.Add(ImageBmp);
             mediaTypes.Add(ImageGif);
@@ -242,7 +242,7 @@ namespace Gnosis
         public static readonly IMediaType ApplicationXml = new MediaType(TypeApplication, "xml", new List<string> { ".xml" }, new List<string> { "text/xml" });
         public static readonly IMediaType ApplicationXmlDtd = new MediaType(TypeApplication, "xml-dtd", new List<string> { ".dtd", ".ent" });
         public static readonly IMediaType ApplicationUnknown = new MediaType(TypeApplication, "unknown");
-        public static readonly IMediaType ApplicationFilesystemDirectory = new MediaType(TypeApplication, "vnd.gnosis.fs.dir");
+        public static readonly IMediaType ApplicationGnosisFilesystemDirectory = new MediaType(TypeApplication, "vnd.gnosis.fs.dir");
 
         public static readonly IMediaType AudioMpeg = new MediaType(TypeAudio, "mpeg", new List<string> { ".mp3", ".mp2", ".mp1" }, new List<string> { "audio/mp3" }, new List<byte[]> { new byte[] { 0x49, 0x44, 0x33 }});
 
