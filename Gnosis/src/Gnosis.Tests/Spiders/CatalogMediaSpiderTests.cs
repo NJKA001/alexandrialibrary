@@ -18,9 +18,9 @@ using Gnosis.Tasks;
 namespace Gnosis.Tests.Spiders
 {
     [TestFixture]
-    public class LocalFilesystemSpiderTest
+    public class CatalogMediaSpiderTests
     {
-        public LocalFilesystemSpiderTest()
+        public CatalogMediaSpiderTests()
         {
         }
 
@@ -35,7 +35,7 @@ namespace Gnosis.Tests.Spiders
         private IDbConnection linkConnection;
         private IDbConnection tagConnection;
         private IDbConnection mediaConnection;
-        private LocalFilesystemSpider spider;
+        private CatalogMediaSpider spider;
 
         [TestFixtureSetUp]
         public void SetUp()
@@ -55,7 +55,7 @@ namespace Gnosis.Tests.Spiders
             mediaRepository = new SQLiteMediaRepository(logger, mediaConnection);
             mediaRepository.Initialize();
 
-            spider = new LocalFilesystemSpider(logger, mediaFactory, linkRepository, tagRepository, mediaRepository);
+            spider = new CatalogMediaSpider(logger, mediaFactory, linkRepository, tagRepository, mediaRepository);
         }
 
         [TestFixtureTearDown]
@@ -84,7 +84,7 @@ namespace Gnosis.Tests.Spiders
 
             var task = spider.Crawl(target);
             task.AddResultsCallback(results => media.AddRange(results));
-            task.AddProgressCallback(progress => logger.Info(string.Format("{0} {1}", progress.Number, progress.Description)));
+            task.AddProgressCallback(progress => logger.Info(string.Format("PROGRESS: {0} {1}", progress.Number, progress.Description)));
             //task.AddFailedCallback(
 
             task.StartSynchronously(TimeSpan.FromSeconds(timeoutSeconds));

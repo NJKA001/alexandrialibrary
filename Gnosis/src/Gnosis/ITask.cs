@@ -9,12 +9,13 @@ namespace Gnosis
     {
         TaskProgress Progress { get; }
         TaskStatus Status { get; }
-        Exception Error { get; }
+        Exception LastError { get; }
 
         void AddStartedCallback(Action callback);
         void AddCancelledCallback(Action callback);
         void AddPausedCallback(Action callback);
         void AddResumedCallback(Action callback);
+        void AddErrorCallback(Action<Exception> callback);
         void AddCompletedCallback(Action callback);
         void AddProgressCallback(Action<TaskProgress> callback);
         void AddFailedCallback(Action<Exception> callback);

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Threading;
 
 using Gnosis.Links;
 
 namespace Gnosis.Tasks
 {
-    public class MediaCrawlTask
+    public class CatalogMediaTask
         : TaskBase<IEnumerable<IMedia>>
     {
-        public MediaCrawlTask(ILogger logger, ISpider spider, Uri target)
+        public CatalogMediaTask(ILogger logger, ISpider spider, Uri target, TimeSpan delay, uint maxErrors)
             : base(logger)
         {
             if (spider == null)
@@ -20,14 +20,18 @@ namespace Gnosis.Tasks
 
             this.spider = spider;
             this.target = target;
+            this.delayMilliseconds = Convert.ToInt32(delay.TotalMilliseconds);
+            this.maxErrors = maxErrors;
         }
 
         private readonly ISpider spider;
         private readonly Uri target;
-        private int progressNumber = 0;
-        private int errorCount = 0;
-        private const int maxErrors = 10;
+        private readonly int delayMilliseconds;
+        private readonly uint maxErrors;
 
+        private int progressNumber = 0;
+        private uint errorCount = 0;
+        
         private void AddProgress(string description)
         {
             progressNumber++;
@@ -37,22 +41,18 @@ namespace Gnosis.Tasks
         private void AddError(Exception ex)
         {
             errorCount++;
-            if (errorCount > maxErrors)
-                Fail(ex, "Exceeded maximum number of allowable errors");
+            if (maxErrors > 0 && errorCount > maxErrors)
+                Fail(ex, "CatalogMediaTask Failed: Exceeded maximum number of allowable errors");
+            else
+                Error(ex);
         }
 
-        private IMedia ReadMedia(Uri location)
+        private IMedia GetMedia(Uri location)
         {
-            //var media = new List<IMedia>();
-
-            //var distinctTargets = locations.DistinctBy(x => x.ToString());
-            //foreach (var target in distinctTargets)
-            //{
-
-            AddProgress("Reading Media At: " + location.ToString());
+            AddProgress("Media At: " + location.ToString());
             try
             {
-                var medium = spider.ReadMedia(location);
+                var medium = spider.GetMedia(location);
                 if (medium != null)
                     return medium;
                 else
@@ -60,16 +60,16 @@ namespace Gnosis.Tasks
             }
             catch (Exception ex)
             {
-                logger.Error("Could not read media at: " + location.ToString(), ex);
+                logger.Error("Could not get media at: " + location.ToString(), ex);
                 AddError(ex);
             }
             
             return null;
         }
 
-        private IEnumerable<ILink> ReadLinks(IMedia medium)
+        private IEnumerable<ILink> GetLinks(IMedia medium)
         {
-            AddProgress("Reading Links For: " + medium.Location.ToString());
+            AddProgress("Links For: " + medium.Location.ToString());
 
             var links = Enumerable.Empty<ILink>();
             try
@@ -78,15 +78,15 @@ namespace Gnosis.Tasks
             }
             catch (Exception ex)
             {
-                logger.Error("Could not read links for: " + medium.Location.ToString(), ex);
+                logger.Error("Could not get links for: " + medium.Location.ToString(), ex);
                 AddError(ex);
             }
             return links;
         }
 
-        private IEnumerable<ITag> ReadTags(IMedia medium)
+        private IEnumerable<ITag> GetTags(IMedia medium)
         {
-            AddProgress("Reading Tags For: " + medium.Location.ToString());
+            AddProgress("Tags For: " + medium.Location.ToString());
             
             var tags = Enumerable.Empty<ITag>();
             try
@@ -95,7 +95,7 @@ namespace Gnosis.Tasks
             }
             catch (Exception ex)
             {
-                logger.Error("Could not read tags for: " + medium.Location.ToString(), ex);
+                logger.Error("Could not get tags for: " + medium.Location.ToString(), ex);
                 AddError(ex);
             }
             return tags;
@@ -106,7 +106,7 @@ namespace Gnosis.Tasks
             try
             {
                 AddProgress("Saving Media At: " + medium.Location.ToString());
-                spider.SaveMedia(medium);
+                spider.HandleMedia(medium);
             }
             catch (Exception ex)
             {
@@ -121,7 +121,7 @@ namespace Gnosis.Tasks
 
             try
             {
-                spider.SaveLinks(links);
+                spider.HandleLinks(links);
             }
             catch (Exception ex)
             {
@@ -136,7 +136,7 @@ namespace Gnosis.Tasks
 
             try
             {
-                spider.SaveTags(tags);
+                spider.HandleTags(tags);
             }
             catch (Exception ex)
             {
@@ -151,8 +151,7 @@ namespace Gnosis.Tasks
             if (Status == TaskStatus.Cancelled)
                 return;
 
-            //logger.Info("  Getting media for: " + location.ToString());
-            var medium = ReadMedia(location);
+            var medium = GetMedia(location);
             if (medium == null)
             {
                 logger.Warn("Media undefined for location: " + location.ToString());
@@ -163,17 +162,13 @@ namespace Gnosis.Tasks
             if (Status == TaskStatus.Cancelled)
                 return;
 
-            var links = ReadLinks(medium);
-
-            //logger.Debug("  link count: " + links.Count());
+            var links = GetLinks(medium);
 
             BlockIfPaused();
             if (Status == TaskStatus.Cancelled)
                 return;
 
-            var tags = ReadTags(medium);
-
-            //logger.Debug("  tag count: " + tags.Count());
+            var tags = GetTags(medium);
 
             BlockIfPaused();
             if (Status == TaskStatus.Cancelled)
@@ -197,16 +192,17 @@ namespace Gnosis.Tasks
             if (Status == TaskStatus.Cancelled)
                 return;
 
-            //logger.Debug("*** UPDATING RESULTS: " + medium.Location.ToString());
             UpdateResults(new List<IMedia> { medium });
 
-            //Recursively call Process for each distinct child URL
             foreach (var childLocation in links.Select(x => x.Target).DistinctBy(x => x.ToString()))
             {
-                System.Diagnostics.Debug.WriteLine(string.Format("*** Link of {0} is {1}", location, childLocation));
+                //System.Diagnostics.Debug.WriteLine(string.Format("*** Link of {0} is {1}", location, childLocation));
                 BlockIfPaused();
                 if (Status == TaskStatus.Cancelled)
                     return;
+
+                if (delayMilliseconds > 0)
+                    Thread.Sleep(delayMilliseconds);
 
                 Process(childLocation);
             }

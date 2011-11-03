@@ -28,11 +28,12 @@ namespace Gnosis.Tasks
 
         private TaskProgress progress;
         private TaskStatus status = TaskStatus.Ready;
-        private Exception error;
+        private Exception lastError;
         private readonly IList<Action> startedCalledbacks = new List<Action>();
+        private readonly IList<Action> cancelledCallbacks = new List<Action>();
         private readonly IList<Action> pausedCallbacks = new List<Action>();
         private readonly IList<Action> resumedCallbacks = new List<Action>();
-        private readonly IList<Action> cancelledCallbacks = new List<Action>();
+        private readonly IList<Action<Exception>> errorCallbacks = new List<Action<Exception>>();
         private readonly IList<Action> completedCallbacks = new List<Action>();
         private readonly IList<Action<TaskProgress>> progressCallbacks = new List<Action<TaskProgress>>();
         private readonly IList<Action<Exception>> failedCallbacks = new List<Action<Exception>>();
@@ -41,6 +42,12 @@ namespace Gnosis.Tasks
         private void OnStarted()
         {
             foreach (var callback in startedCalledbacks)
+                callback();
+        }
+
+        private void OnCancelled()
+        {
+            foreach (var callback in cancelledCallbacks)
                 callback();
         }
 
@@ -56,10 +63,10 @@ namespace Gnosis.Tasks
                 callback();
         }
 
-        private void OnCancelled()
+        private void OnError()
         {
-            foreach (var callback in cancelledCallbacks)
-                callback();
+            foreach (var callback in errorCallbacks)
+                callback(lastError);
         }
 
         private void OnProgressUpdated()
@@ -77,7 +84,7 @@ namespace Gnosis.Tasks
         private void OnFailed()
         {
             foreach (var callback in failedCallbacks)
-                callback(error);
+                callback(lastError);
         }
 
         private void DoWork(object sender, DoWorkEventArgs e)
@@ -144,10 +151,25 @@ namespace Gnosis.Tasks
             OnProgressUpdated();
         }
 
+        protected virtual void Error(Exception error)
+        {
+            lastError = error;
+
+            OnError();
+        }
+
+        protected virtual void Error(Exception error, string message)
+        {
+            var applicationError = new ApplicationException(message, error);
+            lastError = applicationError;
+
+            OnError();
+        }
+
         protected virtual void Fail(Exception error)
         {
             status = TaskStatus.Failed;
-            this.error = error;
+            lastError = error;
 
             OnFailed();
         }
@@ -155,8 +177,8 @@ namespace Gnosis.Tasks
         protected virtual void Fail(Exception error, string message)
         {
             status = TaskStatus.Failed;
-            var errorWrapper = new ApplicationException(message, error);
-            this.error = errorWrapper;
+            var applicationError = new ApplicationException(message, error);
+            lastError = applicationError;
 
             OnFailed();
         }
@@ -171,9 +193,9 @@ namespace Gnosis.Tasks
             get { return status; }
         }
 
-        public Exception Error
+        public Exception LastError
         {
-            get { return error; }
+            get { return lastError; }
         }
 
         public void AddStartedCallback(Action callback)
@@ -182,6 +204,14 @@ namespace Gnosis.Tasks
                 throw new ArgumentNullException("callback");
 
             startedCalledbacks.Add(callback);
+        }
+
+        public void AddCancelledCallback(Action callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            cancelledCallbacks.Add(callback);
         }
 
         public void AddPausedCallback(Action callback)
@@ -200,12 +230,12 @@ namespace Gnosis.Tasks
             resumedCallbacks.Add(callback);
         }
 
-        public void AddCancelledCallback(Action callback)
+        public void AddErrorCallback(Action<Exception> callback)
         {
             if (callback == null)
                 throw new ArgumentNullException("callback");
 
-            cancelledCallbacks.Add(callback);
+            errorCallbacks.Add(callback);
         }
 
         public void AddProgressCallback(Action<TaskProgress> callback)

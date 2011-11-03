@@ -7,11 +7,14 @@ namespace Gnosis
 {
     public interface ISpider
     {
-        IMedia ReadMedia(Uri target);
+        TimeSpan Delay { get; set; }
+        uint MaxErrors { get; set; }
 
-        void SaveMedia(IMedia media);
-        void SaveLinks(IEnumerable<ILink> links);
-        void SaveTags(IEnumerable<ITag> tags);
+        IMedia GetMedia(Uri location);
+
+        void HandleMedia(IMedia media);
+        void HandleLinks(IEnumerable<ILink> links);
+        void HandleTags(IEnumerable<ITag> tags);
         
         ITask<IEnumerable<IMedia>> Crawl(Uri target);
     }

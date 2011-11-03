@@ -9,10 +9,10 @@ using Gnosis.Tasks;
 
 namespace Gnosis.Spiders
 {
-    public class LocalFilesystemSpider
+    public class CatalogMediaSpider
         : ISpider
     {
-        public LocalFilesystemSpider(ILogger logger, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository)
+        public CatalogMediaSpider(ILogger logger, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -30,6 +30,9 @@ namespace Gnosis.Spiders
             this.linkRepository = linkRepository;
             this.tagRepository = tagRepository;
             this.mediaRepository = mediaRepository;
+
+            Delay = TimeSpan.Zero;
+            MaxErrors = 100;
         }
 
         private readonly ILogger logger;
@@ -38,15 +41,27 @@ namespace Gnosis.Spiders
         private readonly ITagRepository tagRepository;
         private readonly IMediaRepository mediaRepository;
 
-        public IMedia ReadMedia(Uri target)
+        public TimeSpan Delay
         {
-            if (target == null)
-                throw new ArgumentNullException("target");
-
-            return mediaFactory.Create(target);
+            get;
+            set;
         }
 
-        public void SaveMedia(IMedia media)
+        public uint MaxErrors
+        {
+            get;
+            set;
+        }
+
+        public IMedia GetMedia(Uri location)
+        {
+            if (location == null)
+                throw new ArgumentNullException("location");
+
+            return mediaFactory.Create(location);
+        }
+
+        public void HandleMedia(IMedia media)
         {
             if (media == null)
                 throw new ArgumentNullException("media");
@@ -54,7 +69,7 @@ namespace Gnosis.Spiders
             mediaRepository.Save(new List<IMedia> { media });
         }
 
-        public void SaveLinks(IEnumerable<ILink> links)
+        public void HandleLinks(IEnumerable<ILink> links)
         {
             if (links == null)
                 throw new ArgumentNullException("links");
@@ -62,7 +77,7 @@ namespace Gnosis.Spiders
             linkRepository.Save(links);
         }
 
-        public void SaveTags(IEnumerable<ITag> tags)
+        public void HandleTags(IEnumerable<ITag> tags)
         {
             if (tags == null)
                 throw new ArgumentNullException("tags");
@@ -77,7 +92,7 @@ namespace Gnosis.Spiders
             if (!target.IsFile)
                 throw new ArgumentException("target must be a local file path");
 
-            return new MediaCrawlTask(logger, this, target);
+            return new CatalogMediaTask(logger, this, target, Delay, MaxErrors);
         }
     }
 }
