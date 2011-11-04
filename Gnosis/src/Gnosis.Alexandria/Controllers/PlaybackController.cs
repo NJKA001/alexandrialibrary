@@ -31,7 +31,7 @@ namespace Gnosis.Alexandria.Controllers
 
         private static readonly ILog log = LogManager.GetLogger(typeof(PlaybackController));
         private readonly ITrackController trackController;
-        private readonly IAudioPlayer player = new AudioPlayer(new AudioStreamFactory()) { PlayToggles = true };
+        private readonly Gnosis.Audio.Fmod.IAudioPlayer player = new AudioPlayer(new AudioStreamFactory()) { PlayToggles = true };
         private readonly Timer playbackTimer = new Timer(1000);
         private readonly IPlaybackStatus playbackStatus = new PlaybackStatus();
         private IOldTrack currentTrack;

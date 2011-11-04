@@ -9,10 +9,10 @@ using Gnosis.Tasks;
 
 namespace Gnosis.Spiders
 {
-    public class CatalogMediaSpider
+    public class CatalogSpider
         : ISpider
     {
-        public CatalogMediaSpider(ILogger logger, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository)
+        public CatalogSpider(ILogger logger, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");

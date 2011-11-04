@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Application.Pdf
+namespace Gnosis
 {
-    public interface IPdfDocument
-        : IApplication
+    public interface IApplication
+        : IMedia
     {
+        void Load();
     }
 }

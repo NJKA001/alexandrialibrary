@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Text
+namespace Gnosis
 {
-    public interface ITextDocument
-        : IDocument
+    public interface IText
+        : IMedia
     {
         string Body { get; }
+
+        void Load();
     }
 }

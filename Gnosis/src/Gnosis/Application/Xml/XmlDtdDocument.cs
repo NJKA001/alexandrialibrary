@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Application.Xml
 {
     public class XmlDtdDocument
-        : IDocument
+        : IApplication
     {
         public XmlDtdDocument(Uri location)
         {

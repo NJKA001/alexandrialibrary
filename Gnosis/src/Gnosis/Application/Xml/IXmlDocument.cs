@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Application.Xml
 {
     public interface IXmlDocument
-        : IDocument
+        : IApplication
     {
         IXmlElement Xml { get; }
     }

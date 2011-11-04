@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Text
 {
     public class PlainText
-        : ITextDocument
+        : IText
     {
         public PlainText(Uri location)
         {

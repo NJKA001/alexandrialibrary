@@ -5,9 +5,8 @@ using System.Text;
 
 namespace Gnosis
 {
-    public interface IDocument
-        : IMedia
+    public interface IImageViewer
     {
-        void Load();
+        void Load(IImage image);
     }
 }

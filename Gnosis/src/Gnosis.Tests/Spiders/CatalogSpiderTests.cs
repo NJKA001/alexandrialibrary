@@ -18,9 +18,9 @@ using Gnosis.Tasks;
 namespace Gnosis.Tests.Spiders
 {
     [TestFixture]
-    public class CatalogMediaSpiderTests
+    public class CatalogSpiderTests
     {
-        public CatalogMediaSpiderTests()
+        public CatalogSpiderTests()
         {
         }
 
@@ -35,7 +35,7 @@ namespace Gnosis.Tests.Spiders
         private IDbConnection linkConnection;
         private IDbConnection tagConnection;
         private IDbConnection mediaConnection;
-        private CatalogMediaSpider spider;
+        private CatalogSpider spider;
 
         [TestFixtureSetUp]
         public void SetUp()
@@ -55,7 +55,7 @@ namespace Gnosis.Tests.Spiders
             mediaRepository = new SQLiteMediaRepository(logger, mediaConnection);
             mediaRepository.Initialize();
 
-            spider = new CatalogMediaSpider(logger, mediaFactory, linkRepository, tagRepository, mediaRepository);
+            spider = new CatalogSpider(logger, mediaFactory, linkRepository, tagRepository, mediaRepository);
         }
 
         [TestFixtureTearDown]
