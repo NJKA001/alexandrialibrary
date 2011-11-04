@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Gnosis.Alexandria
+namespace Gnosis.Alexandria.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
