@@ -21,10 +21,42 @@ namespace Gnosis.Image
 
         private Uri location;
         private IMediaType type;
+        
+        protected bool isLoaded;
+        protected byte[] data;
 
         public Uri Location
         {
             get { return location; }
+        }
+
+        public IMediaType Type
+        {
+            get { return type; }
+        }
+
+        public bool IsLoaded
+        {
+            get { return isLoaded; }
+        }
+
+        public virtual void Load()
+        {
+            if (isLoaded)
+                return;
+            
+            isLoaded = true;
+            data = location.ToContentData();
+        }
+
+        public virtual byte[] GetData()
+        {
+            return data;
+        }
+
+        public virtual object GetImageSource()
+        {
+            return isLoaded ? data : (object)location;
         }
 
         public virtual IEnumerable<ILink> GetLinks()
@@ -35,11 +67,6 @@ namespace Gnosis.Image
         public virtual IEnumerable<ITag> GetTags()
         {
             return Enumerable.Empty<ITag>();
-        }
-
-        public IMediaType Type
-        {
-            get { return type; }
         }
     }
 }

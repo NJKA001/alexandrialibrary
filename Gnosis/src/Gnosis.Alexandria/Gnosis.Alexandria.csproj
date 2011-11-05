@@ -45,6 +45,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -62,6 +63,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\TaskViewModel.cs" />
+    <Compile Include="Views\TaskManagerView.xaml.cs">
+      <DependentUpon>TaskManagerView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -70,10 +75,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\ImageSourceConverter.cs" />
+    <Compile Include="Extensions\ControlExtensions.cs" />
+    <Compile Include="Extensions\TreeViewExtensions.cs" />
+    <Compile Include="Extensions\UIElementExtensions.cs" />
+    <Compile Include="ViewModels\ITaskViewModel.cs" />
+    <Compile Include="Views\AnimatedGifImageControl.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\TaskManagerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -127,7 +142,40 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\placeholder.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\back.png" />
+    <Resource Include="Images\cd.png" />
+    <Resource Include="Images\feed.png" />
+    <Resource Include="Images\File Audio AIFF-01.png" />
+    <Resource Include="Images\File Audio MP3-01.png" />
+    <Resource Include="Images\File Audio WAV-01.png" />
+    <Resource Include="Images\File Audio WMA-01.png" />
+    <Resource Include="Images\File Audio-01.png" />
+    <Resource Include="Images\File Video 3GP-01.png" />
+    <Resource Include="Images\File Video AVI-01.png" />
+    <Resource Include="Images\File Video MOV-01.png" />
+    <Resource Include="Images\File Video MPEG-01.png" />
+    <Resource Include="Images\File Video WMV-01.png" />
+    <Resource Include="Images\File Video-01.png" />
+    <Resource Include="Images\first.png" />
+    <Resource Include="Images\forward.png" />
+    <Resource Include="Images\Gear-01.png" />
+    <Resource Include="Images\Image BMP-01.png" />
+    <Resource Include="Images\Image GIF-01.png" />
+    <Resource Include="Images\Image JPEG-01.png" />
+    <Resource Include="Images\Image PNG-01.png" />
+    <Resource Include="Images\Image TIFF-01.png" />
+    <Resource Include="Images\pause.png" />
+    <Resource Include="Images\play.png" />
+    <Resource Include="Images\Web HTML-01.png" />
+    <Resource Include="Images\Web XML-01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\throbber20.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

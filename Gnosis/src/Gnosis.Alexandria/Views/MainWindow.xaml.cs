@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -12,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Gnosis.Alexandria.ViewModels;
+
 namespace Gnosis.Alexandria.Views
 {
     /// <summary>
@@ -22,6 +25,12 @@ namespace Gnosis.Alexandria.Views
         public MainWindow()
         {
             InitializeComponent();
+
+            taskViewModels.Add(new TaskViewModel("Building Catalog"));
+            taskViewModels.Add(new TaskViewModel("Tagging Audio", "pack://application:,,,/Images/File Audio-01.png"));
+            taskManagerView.taskItemsControl.ItemsSource = taskViewModels;
         }
+
+        private readonly ObservableCollection<ITaskViewModel> taskViewModels = new ObservableCollection<ITaskViewModel>();
     }
 }

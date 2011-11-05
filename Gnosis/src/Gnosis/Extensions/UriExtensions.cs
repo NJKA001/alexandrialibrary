@@ -51,6 +51,23 @@ namespace Gnosis
             }
         }
 
+        public static byte[] ToContentData(this Uri self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            if (self.IsFile)
+            {
+                return File.ReadAllBytes(self.LocalPath);
+            }
+            else
+            {
+                var request = HttpWebRequest.Create(self);
+                var response = request.GetResponse();
+                return response.GetResponseStream().ToBuffer();
+            }
+        }
+
         public static string ToContentString(this Uri self)
         {
             if (self == null)

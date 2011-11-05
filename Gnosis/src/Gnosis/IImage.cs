@@ -8,6 +8,10 @@ namespace Gnosis
     public interface IImage
         : IMedia
     {
-        //byte[] GetData();
+        bool IsLoaded { get; }
+        
+        void Load();
+        byte[] GetData();
+        object GetImageSource();
     }
 }
