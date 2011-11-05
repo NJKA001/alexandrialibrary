@@ -36,8 +36,8 @@
                     <Border>
                         <StackPanel Orientation="Vertical" Margin="8 2 8 2">
                             <Image Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="64" Width="64"/>
-                            <TextBlock Text="{Binding Name}"/>
-                            <StackPanel Orientation="Horizontal" Background="LightGray">
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                            <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding ProgressDescription}"/>
                                 <local:AnimatedGifImageControl Source="{Binding Path=StatusIconSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="20" Width="20"/>
                             </StackPanel>

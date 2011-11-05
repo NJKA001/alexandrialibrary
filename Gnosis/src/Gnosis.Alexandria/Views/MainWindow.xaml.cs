@@ -13,7 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Gnosis.Alexandria.ViewModels;
+using Gnosis.Alexandria.Controllers;
+
+using Gnosis.Data.SQLite;
+using Gnosis.Links;
+using Gnosis.Tags;
 
 namespace Gnosis.Alexandria.Views
 {
@@ -26,13 +30,53 @@ namespace Gnosis.Alexandria.Views
         {
             InitializeComponent();
 
-            taskViewModels.Add(new TaskViewModel("Building Catalog"));
-            taskViewModels.Add(new TaskViewModel("Tagging Audio", "pack://application:,,,/Images/File Audio-01.png"));
-            taskViewModels.Add(new TaskViewModel("Tagging Video", "pack://application:,,,/Images/File Video-01.png"));
-            taskViewModels.Add(new TaskViewModel("Tagging Images", "pack://application:,,,/Images/Image JPEG-01.png"));
-            taskManagerView.taskItemsControl.ItemsSource = taskViewModels;
+            try
+            {
+                this.logger = Gnosis.Utilities.Log4NetLogger.GetDefaultLogger(typeof(MainWindow));
+            }
+            catch (Exception loggerEx)
+            {
+                throw new ApplicationException("Could not initialize logger", loggerEx);
+            }
+
+            try
+            {
+                logger.Info("Initializing Alexandria");
+                mediaFactory = new MediaFactory();
+                linkTypeFactory = new LinkTypeFactory();
+                tagTypeFactory = new TagTypeFactory();
+
+                mediaRepository = new SQLiteMediaRepository(logger);
+                mediaRepository.Initialize();
+
+                linkRepository = new SQLiteLinkRepository(logger, linkTypeFactory);
+                linkRepository.Initialize();
+
+                tagRepository = new SQLiteTagRepository(logger, tagTypeFactory);
+                tagRepository.Initialize();
+
+                mediaDetailRepository = new SQLiteMediaDetailRepository(logger, tagRepository, linkRepository);
+
+                catalogController = new CatalogController(logger, mediaFactory, mediaRepository, linkRepository, tagRepository);
+                mediaController = new MediaController(logger, mediaDetailRepository);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("MainWindow.ctor", ex);
+            }
         }
 
-        private readonly ObservableCollection<ITaskViewModel> taskViewModels = new ObservableCollection<ITaskViewModel>();
+        private readonly ILogger logger;
+        private readonly IMediaFactory mediaFactory;
+        private readonly ILinkTypeFactory linkTypeFactory;
+        private readonly ITagTypeFactory tagTypeFactory;
+
+        private readonly IMediaRepository mediaRepository;
+        private readonly IMediaDetailRepository mediaDetailRepository;
+        private readonly ILinkRepository linkRepository;
+        private readonly ITagRepository tagRepository;
+
+        private readonly ICatalogController catalogController;
+        private readonly IMediaController mediaController;
     }
 }

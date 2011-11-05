@@ -41,5 +41,11 @@ namespace Gnosis.Utilities
         {
             log.Warn(message);
         }
+
+        public static ILogger GetDefaultLogger(Type type)
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            return new Log4NetLogger(LogManager.GetLogger(type));
+        }
     }
 }
