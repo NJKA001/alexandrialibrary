@@ -8,6 +8,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
+        <BitmapImage x:Key="playIcon" UriSource="../Images/play-simple.png"/>
+        <BitmapImage x:Key="pauseIcon" UriSource="../Images/pause-simple.png"/>
+        <BitmapImage x:Key="stopIcon" UriSource="../Images/stop-simple.png"/>
+        <BitmapImage x:Key="previousIcon" UriSource="../Images/previous-simple.png"/>
+        <BitmapImage x:Key="nextIcon" UriSource="../Images/next-simple.png"/>
+        <BitmapImage x:Key="throbberIcon" UriSource="../Images/throbber20.gif"/>
+        
         <converters:ImageSourceConverter x:Key="imageConverter"/>
         <Style x:Key="taskItemStyle" TargetType="{x:Type ListBoxItem}">
             <!--
@@ -35,11 +42,33 @@
                 <DataTemplate>
                     <Border>
                         <StackPanel Orientation="Vertical" Margin="8 2 8 2">
-                            <Image Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="64" Width="64"/>
-                            <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                            <Image Source="{Binding Path=Icon, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="72" Width="128"/>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding ProgressDescription}"/>
-                                <local:AnimatedGifImageControl Source="{Binding Path=StatusIconSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="20" Width="20"/>
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="4"/>
+                                <TextBlock Text="{Binding Status}" Margin="6 4 4 4"/>
+                                <!--<local:AnimatedGifImage Source="{StaticResource throbberIcon}" Visibility="{Binding RunningVisibility}"/>-->
+                            </StackPanel>
+
+                            <TextBlock Text="{Binding LastError}" Margin="4" Background="Salmon" Visibility="{Binding ErrorVisibility}" Width="200" />
+                            <TextBlock Text="{Binding LastProgress}" Margin="4" Visibility="{Binding ProgressVisibility}" Width="200"/>
+
+                            
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="previousButton" Margin="4" Visibility="{Binding PreviousVisibility}" Click="previousButton_Click">
+                                    <Image Source="{StaticResource previousIcon}" Width="20" Height="20" />
+                                </Button>
+                                <Button x:Name="playButton" Margin="4" Visibility="{Binding StartVisibility}" Click="playButton_Click">
+                                    <Image Source="{StaticResource playIcon}" Width="20" Height="20" />
+                                </Button>
+                                <Button x:Name="pauseButton" Margin="4" Visibility="{Binding PauseVisibility}" Click="pauseButton_Click">
+                                    <Image Source="{StaticResource pauseIcon}" Width="20" Height="20"/>
+                                </Button>
+                                <Button x:Name="stopButton" Margin="4" Visibility="{Binding StopVisibility}" Click="stopButton_Click">
+                                    <Image  Source="{StaticResource stopIcon}" Width="20" Height="20"/>
+                                </Button>
+                                <Button x:Name="nextButton" Margin="4" Visibility="{Binding NextVisibility}" Click="nextButton_Click">
+                                    <Image  Source="{StaticResource nextIcon}" Width="20" Height="20" />
+                                </Button>
                             </StackPanel>
                         </StackPanel>
                     </Border>

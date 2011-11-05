@@ -10,6 +10,7 @@ namespace Gnosis
         TaskProgress Progress { get; }
         TaskStatus Status { get; }
         Exception LastError { get; }
+        IEnumerable<object> Items { get; }
 
         void AddStartedCallback(Action callback);
         void AddCancelledCallback(Action callback);
@@ -20,6 +21,7 @@ namespace Gnosis
         void AddProgressCallback(Action<TaskProgress> callback);
         void AddFailedCallback(Action<Exception> callback);
 
+        void Reset();
         void Start();
         void StartSynchronously();
         void StartSynchronously(TimeSpan timeout);

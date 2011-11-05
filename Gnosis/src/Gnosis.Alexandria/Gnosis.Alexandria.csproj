@@ -67,6 +67,8 @@
     <Compile Include="Controllers\ICatalogController.cs" />
     <Compile Include="Controllers\IMediaController.cs" />
     <Compile Include="Controllers\MediaController.cs" />
+    <Compile Include="Controllers\SpiderFactory.cs" />
+    <Compile Include="ViewModels\CatalogMediaTaskViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="Views\SearchView.xaml.cs">
       <DependentUpon>SearchView.xaml</DependentUpon>
@@ -87,7 +89,7 @@
     <Compile Include="Extensions\TreeViewExtensions.cs" />
     <Compile Include="Extensions\UIElementExtensions.cs" />
     <Compile Include="ViewModels\ITaskViewModel.cs" />
-    <Compile Include="Views\AnimatedGifImageControl.cs" />
+    <Compile Include="Views\AnimatedGifImage.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -151,7 +153,13 @@
       <Name>Gnosis</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\next-simple.png" />
+    <Resource Include="Images\pause-simple.png" />
+    <Resource Include="Images\play-simple.png" />
+    <Resource Include="Images\previous-simple.png" />
+    <Resource Include="Images\stop-simple.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\placeholder.jpg" />
   </ItemGroup>
@@ -185,6 +193,20 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\throbber20.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\spider.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\catalog_building.jpg" />
+    <Resource Include="Images\pyramid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\anubis_horus_scroll.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\anubis_scroll.jpg" />
+    <Resource Include="Images\blank_scroll.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

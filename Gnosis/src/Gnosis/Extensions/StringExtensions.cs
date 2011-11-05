@@ -1109,5 +1109,19 @@ namespace Gnosis
                 return false;
             }
         }
+
+        public static string ElideString(this string self, int halfSize)
+        {
+            if (self == null)
+                return null;
+
+            var max = halfSize * 2;
+            var length = self.Length;
+
+            if (length <= max)
+                return self;
+
+            return string.Format("{0}...{1}", self.Substring(0, halfSize), self.Substring(length - halfSize, halfSize));
+        }
     }
 }

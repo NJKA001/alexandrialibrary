@@ -12,7 +12,7 @@ namespace Gnosis.Alexandria.Views
     /// <summary>
     /// An extension to the standard Image control with support for animated GIFs
     /// </summary>
-    public class AnimatedGifImageControl : System.Windows.Controls.Image
+    public class AnimatedGifImage : System.Windows.Controls.Image
     {
         private Int32Animation Animation { get; set; }
         private GifBitmapDecoder Decoder { get; set; }
@@ -112,7 +112,7 @@ namespace Gnosis.Alexandria.Views
         private static void ChangingFrameIndex
             (DependencyObject aObject, DependencyPropertyChangedEventArgs aEventArgs)
         {
-            var animatedImage = aObject as AnimatedGifImageControl;
+            var animatedImage = aObject as AnimatedGifImage;
 
             if (animatedImage == null || !animatedImage.IsAnimationWorking)
             {
@@ -130,7 +130,7 @@ namespace Gnosis.Alexandria.Views
         private static void OnSourceChanged
             (DependencyObject aObject, DependencyPropertyChangedEventArgs aEventArgs)
         {
-            ((AnimatedGifImageControl)aObject).OnSourceChanged(aEventArgs);
+            ((AnimatedGifImage)aObject).OnSourceChanged(aEventArgs);
         }
 
         #endregion
@@ -191,7 +191,7 @@ namespace Gnosis.Alexandria.Views
             DependencyProperty.Register(
                 "FrameIndex",
                 typeof(int),
-                typeof(AnimatedGifImageControl),
+                typeof(AnimatedGifImage),
                 new UIPropertyMetadata(0, ChangingFrameIndex));
 
         /// <summary>
@@ -201,7 +201,7 @@ namespace Gnosis.Alexandria.Views
             DependencyProperty.Register(
                 "Source",
                 typeof(ImageSource),
-                typeof(AnimatedGifImageControl),
+                typeof(AnimatedGifImage),
                 new FrameworkPropertyMetadata(
                     null,
                     FrameworkPropertyMetadataOptions.AffectsRender |

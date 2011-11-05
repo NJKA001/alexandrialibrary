@@ -26,9 +26,10 @@ namespace Gnosis.Tasks
 
         #region Private Members
 
-        private TaskProgress progress;
+        private TaskProgress progress = default(TaskProgress);
         private TaskStatus status = TaskStatus.Ready;
         private Exception lastError;
+        private readonly IList<object> items = new List<object>();
         private readonly IList<Action> startedCalledbacks = new List<Action>();
         private readonly IList<Action> cancelledCallbacks = new List<Action>();
         private readonly IList<Action> pausedCallbacks = new List<Action>();
@@ -119,6 +120,23 @@ namespace Gnosis.Tasks
 
         protected abstract void DoWork();
 
+        protected void AddItem(object item)
+        {
+            if (item == null)
+                throw new ArgumentNullException("item");
+
+            items.Add(item);
+        }
+
+        protected void RemoveItem(object item)
+        {
+            if (item == null)
+                throw new ArgumentNullException("item");
+
+            if (items.Contains(item))
+                items.Remove(item);
+        }
+
         protected void BlockIfPaused()
         {
             while (status == TaskStatus.Paused)
@@ -198,6 +216,11 @@ namespace Gnosis.Tasks
             get { return lastError; }
         }
 
+        public IEnumerable<object> Items
+        {
+            get { return items; }
+        }
+
         public void AddStartedCallback(Action callback)
         {
             if (callback == null)
@@ -260,6 +283,16 @@ namespace Gnosis.Tasks
                 throw new ArgumentNullException("callback");
 
             failedCallbacks.Add(callback);
+        }
+
+        public void Reset()
+        {
+            if (status == TaskStatus.Cancelled || status == TaskStatus.Completed || status == TaskStatus.Failed)
+            {
+                status = TaskStatus.Ready;
+                progress = default(TaskProgress);
+                lastError = null;
+            }
         }
 
         public void Start()

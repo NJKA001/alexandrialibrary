@@ -45,96 +45,103 @@ namespace Gnosis.Alexandria.Converters
             if (value == null)
                 return placeholder;
 
-            if (value is ImageSource)
+            try
             {
-                return value as ImageSource;
-            }
-
-            if (value is string || value is Uri)
-            {
-                var path = value.ToString();
-
-                if (path.EndsWith(".svg"))
+                if (value is ImageSource)
                 {
-                    return placeholder;
+                    return value as ImageSource;
                 }
-                else
+
+                if (value is string || value is Uri)
                 {
+                    var path = value.ToString();
+
+                    if (path.EndsWith(".svg"))
+                    {
+                        return placeholder;
+                    }
+                    else
+                    {
+                        BitmapImage image = new BitmapImage();
+                        image.BeginInit();
+                        image.CacheOption = BitmapCacheOption.OnLoad;
+                        image.CreateOptions = BitmapCreateOptions.None;
+                        image.UriSource = new Uri(path, UriKind.Absolute);
+                        image.EndInit();
+                        return image;
+                    }
+                }
+
+                if (value is IImage)
+                {
+                    return GetImage(((IImage)value).GetData());
+                }
+
+                if (value is byte[])
+                {
+                    return GetImage((byte[])value);
+                }
+
+                if (value is IEnumerable<byte>)
+                {
+                    return GetImage(((IEnumerable<byte>)value).ToArray());
+                }
+
+                if (value is Bitmap)
+                {
+                    var bitmap = value as Bitmap;
+                    var stream = new MemoryStream();
+                    bitmap.Save(stream, ImageFormat.Png);
+                    stream.Position = 0;
                     BitmapImage image = new BitmapImage();
                     image.BeginInit();
-                    image.CacheOption = BitmapCacheOption.OnLoad;
-                    image.CreateOptions = BitmapCreateOptions.None;
-                    image.UriSource = new Uri(path, UriKind.Absolute);
+                    image.StreamSource = stream;
                     image.EndInit();
+
                     return image;
                 }
-            }
 
-            if (value is IImage)
+                if (value is System.Windows.Controls.Image)
+                {
+                    var imageControl = value as System.Windows.Controls.Image;
+                    if (imageControl != null)
+                        return imageControl.Source;
+                }
+
+                if (value is System.Drawing.Image)
+                {
+                    var originalImage = value as System.Drawing.Image;
+                    var stream = new MemoryStream();
+                    originalImage.Save(stream, ImageFormat.Bmp);
+                    stream.Position = 0;
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.StreamSource = stream;
+                    image.EndInit();
+
+                    return image;
+                }
+
+                if (value is Icon)
+                {
+                    var icon = value as Icon;
+                    var stream = new MemoryStream();
+                    icon.Save(stream);
+                    stream.Position = 0;
+                    BitmapImage image = new BitmapImage();
+                    image.BeginInit();
+                    image.StreamSource = stream;
+                    image.EndInit();
+
+                    return image;
+                }
+
+                return placeholder;
+            }
+            catch (Exception)
             {
-                return GetImage(((IImage)value).GetData());
+                return placeholder;
             }
-
-            if (value is byte[])
-            {
-                return GetImage((byte[])value);
-            }
-            
-            if (value is IEnumerable<byte>)
-            {
-                return GetImage(((IEnumerable<byte>)value).ToArray());
-            }
-
-            if (value is Bitmap)
-            {
-                var bitmap = value as Bitmap;
-                var stream = new MemoryStream();
-                bitmap.Save(stream, ImageFormat.Png);
-                stream.Position = 0;
-                BitmapImage image = new BitmapImage();
-                image.BeginInit();
-                image.StreamSource = stream;
-                image.EndInit();
-
-                return image;
-            }
-
-            if (value is System.Windows.Controls.Image)
-            {
-                var imageControl = value as System.Windows.Controls.Image;
-                if (imageControl != null)
-                    return imageControl.Source;
-            }
-
-            if (value is System.Drawing.Image)
-            {
-                var originalImage = value as System.Drawing.Image;
-                var stream = new MemoryStream();
-                originalImage.Save(stream, ImageFormat.Bmp);
-                stream.Position = 0;
-                BitmapImage image = new BitmapImage();
-                image.BeginInit();
-                image.StreamSource = stream;
-                image.EndInit();
-
-                return image;
-            }
-
-            if (value is Icon)
-            {
-                var icon = value as Icon;
-                var stream = new MemoryStream();
-                icon.Save(stream);
-                stream.Position = 0;
-                BitmapImage image = new BitmapImage();
-                image.BeginInit();
-                image.StreamSource = stream;
-                image.EndInit();
-
-                return image;
-            }
-
-            return placeholder;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
