@@ -28,6 +28,8 @@ namespace Gnosis.Alexandria.Views
 
             taskViewModels.Add(new TaskViewModel("Building Catalog"));
             taskViewModels.Add(new TaskViewModel("Tagging Audio", "pack://application:,,,/Images/File Audio-01.png"));
+            taskViewModels.Add(new TaskViewModel("Tagging Video", "pack://application:,,,/Images/File Video-01.png"));
+            taskViewModels.Add(new TaskViewModel("Tagging Images", "pack://application:,,,/Images/Image JPEG-01.png"));
             taskManagerView.taskItemsControl.ItemsSource = taskViewModels;
         }
 
