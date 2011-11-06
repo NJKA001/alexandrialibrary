@@ -12,11 +12,17 @@ namespace Gnosis.Tasks
         : ITask
     {
         protected TaskBase(ILogger logger)
+            : this(logger, false)
+        {
+        }
+
+        protected TaskBase(ILogger logger, bool supportsPlayback)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
 
             this.logger = logger;
+            this.supportsPlayback = supportsPlayback;
 
             worker.DoWork += DoWork;
             worker.RunWorkerCompleted += WorkCompleted;
@@ -29,7 +35,10 @@ namespace Gnosis.Tasks
         private TaskProgress progress = default(TaskProgress);
         private TaskStatus status = TaskStatus.Ready;
         private Exception lastError;
-        private readonly IList<object> items = new List<object>();
+        private ITaskItem currentItem;
+
+        private readonly bool supportsPlayback;
+        private readonly IList<ITaskItem> items = new List<ITaskItem>();
         private readonly IList<Action> startedCalledbacks = new List<Action>();
         private readonly IList<Action> cancelledCallbacks = new List<Action>();
         private readonly IList<Action> pausedCallbacks = new List<Action>();
@@ -120,7 +129,7 @@ namespace Gnosis.Tasks
 
         protected abstract void DoWork();
 
-        protected void AddItem(object item)
+        protected void AddItem(ITaskItem item)
         {
             if (item == null)
                 throw new ArgumentNullException("item");
@@ -128,13 +137,22 @@ namespace Gnosis.Tasks
             items.Add(item);
         }
 
-        protected void RemoveItem(object item)
+        protected void RemoveItem(ITaskItem item)
         {
             if (item == null)
                 throw new ArgumentNullException("item");
 
             if (items.Contains(item))
                 items.Remove(item);
+        }
+
+        protected void SelectItem(ITaskItem item)
+        {
+            if (item == null)
+                throw new ArgumentNullException("item");
+
+            if (items.Contains(item))
+                currentItem = item;
         }
 
         protected void BlockIfPaused()
@@ -216,9 +234,19 @@ namespace Gnosis.Tasks
             get { return lastError; }
         }
 
-        public IEnumerable<object> Items
+        public IEnumerable<ITaskItem> Items
         {
             get { return items; }
+        }
+
+        public ITaskItem CurrentItem
+        {
+            get { return currentItem; }
+        }
+
+        public bool SupportsPlayback
+        {
+            get { return supportsPlayback; }
         }
 
         public void AddStartedCallback(Action callback)
@@ -364,6 +392,30 @@ namespace Gnosis.Tasks
             {
                 logger.Error("  TaskHandle.Cancel", ex);
             }
+        }
+
+        public void PreviousItem()
+        {
+            if (items.Count == 0 || currentItem == null)
+                return;
+
+            var index = items.IndexOf(currentItem);
+            if (index == 0)
+                return;
+
+            SelectItem(items[index - 1]);
+        }
+
+        public void NextItem()
+        {
+            if (items.Count == 0 || currentItem == null)
+                return;
+
+            var index = items.IndexOf(currentItem);
+            if (index == items.Count - 1)
+                return;
+
+            SelectItem(items[index + 1]);
         }
     }
 

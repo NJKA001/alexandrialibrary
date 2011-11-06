@@ -232,6 +232,7 @@
     <Compile Include="ITagFactory.cs" />
     <Compile Include="ITagRepository.cs" />
     <Compile Include="ITask.cs" />
+    <Compile Include="ITaskItem.cs" />
     <Compile Include="IText.cs" />
     <Compile Include="ITextViewer.cs" />
     <Compile Include="IVideoPlayer.cs" />

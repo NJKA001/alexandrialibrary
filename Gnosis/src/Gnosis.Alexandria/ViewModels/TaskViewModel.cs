@@ -10,6 +10,11 @@ namespace Gnosis.Alexandria.ViewModels
         : ITaskViewModel, INotifyPropertyChanged
     {
         protected TaskViewModel(ILogger logger, ITask task, string name, object startingIcon, object completedIcon)
+            : this(logger, task, name, startingIcon, completedIcon, false)
+        {
+        }
+
+        protected TaskViewModel(ILogger logger, ITask task, string name, object startingIcon, object completedIcon, bool showElapsed)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -28,6 +33,7 @@ namespace Gnosis.Alexandria.ViewModels
             this.startingIcon = startingIcon;
             this.completedIcon = completedIcon;
             this.itemCount = task.Items.Count();
+            this.showElapsed = showElapsed;
 
             task.AddCancelledCallback(() => OnCancelled());
             task.AddCompletedCallback(() => OnCompleted());
@@ -44,10 +50,11 @@ namespace Gnosis.Alexandria.ViewModels
         private readonly string name;
         private readonly object startingIcon;
         private readonly object completedIcon;
+        private readonly bool showElapsed;
         private string lastProgress;
         private string lastError;
         private Exception lastException;
-        private int progressCount;
+        private int progressCount = 0;
         private int progressMaximum;
         private int errorCount;
         private int itemCount;
@@ -153,6 +160,16 @@ namespace Gnosis.Alexandria.ViewModels
             get { return task.Status; }
         }
 
+        public ITaskItem CurrentItem
+        {
+            get { return task.CurrentItem; }
+        }
+
+        public bool SupportsPlayback
+        {
+            get { return task.SupportsPlayback; }
+        }
+
         public string LastError
         {
             get { return lastError; }
@@ -237,7 +254,17 @@ namespace Gnosis.Alexandria.ViewModels
         {
             get
             {
-                return (progressCount > 0 || lastProgress != null) ?
+                return !showElapsed ?
+                    Visibility.Visible
+                    : Visibility.Collapsed;
+            }
+        }
+
+        public Visibility ElapsedVisibility
+        {
+            get
+            {
+                return showElapsed ?
                     Visibility.Visible
                     : Visibility.Collapsed;
             }
@@ -277,7 +304,7 @@ namespace Gnosis.Alexandria.ViewModels
         {
             get
             {
-                return itemCount > 0 ?
+                return itemCount > 1 ?
                     Visibility.Visible
                     : Visibility.Collapsed;
             }
@@ -287,7 +314,7 @@ namespace Gnosis.Alexandria.ViewModels
         {
             get
             {
-                return itemCount > 0 ?
+                return itemCount > 1 ?
                     Visibility.Visible
                     : Visibility.Collapsed;
             }
@@ -328,6 +355,16 @@ namespace Gnosis.Alexandria.ViewModels
         public void Cancel()
         {
             task.Cancel();
+        }
+
+        public void Previous()
+        {
+            task.PreviousItem();
+        }
+
+        public void Next()
+        {
+            task.NextItem();
         }
     }
 }

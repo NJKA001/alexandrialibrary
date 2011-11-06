@@ -35,12 +35,26 @@ namespace Gnosis.Alexandria.Views
         private SpiderFactory spiderFactory;
 
         private readonly ObservableCollection<ITaskViewModel> taskViewModels = new ObservableCollection<ITaskViewModel>();
-        
+        private readonly IList<Action<ITaskViewModel>> startedCallbacks = new List<Action<ITaskViewModel>>();
+        private readonly IList<Action<ITaskViewModel>> cancelledCallbacks = new List<Action<ITaskViewModel>>();
 
         private void previousButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                var element = sender as UIElement;
+                if (element == null)
+                    return;
+
+                var item = element.FindContainingItem<ListBoxItem>();
+                if (item == null)
+                    return;
+
+                var viewModel = item.DataContext as ITaskViewModel;
+                if (viewModel == null)
+                    return;
+
+                viewModel.Previous();
             }
             catch (Exception ex)
             {
@@ -147,6 +161,19 @@ namespace Gnosis.Alexandria.Views
         {
             try
             {
+                var element = sender as UIElement;
+                if (element == null)
+                    return;
+
+                var item = element.FindContainingItem<ListBoxItem>();
+                if (item == null)
+                    return;
+
+                var viewModel = item.DataContext as ITaskViewModel;
+                if (viewModel == null)
+                    return;
+
+                viewModel.Next();
             }
             catch (Exception ex)
             {
@@ -178,6 +205,21 @@ namespace Gnosis.Alexandria.Views
             {
                 logger.Error("TaskManagerView.Initialize", ex);
             }
+        }
+
+        private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void elapsedSlider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        {
+
+        }
+
+        private void elapsedSlider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+
         }
     }
 }

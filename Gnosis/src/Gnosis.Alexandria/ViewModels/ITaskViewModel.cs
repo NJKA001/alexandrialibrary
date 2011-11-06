@@ -14,6 +14,8 @@ namespace Gnosis.Alexandria.ViewModels
         string Name { get; }
         object Icon { get; }
         TaskStatus Status { get; }
+        ITaskItem CurrentItem { get; }
+        bool SupportsPlayback { get; }
         string LastError { get; }
         string LastProgress { get; }
         int ErrorCount { get; }
@@ -23,6 +25,7 @@ namespace Gnosis.Alexandria.ViewModels
         Visibility RunningVisibility { get; }
         Visibility ErrorVisibility { get; }
         Visibility ProgressVisibility { get; }
+        Visibility ElapsedVisibility { get; }
 
         Visibility StartVisibility { get; }
         Visibility PauseVisibility { get; }
@@ -37,5 +40,7 @@ namespace Gnosis.Alexandria.ViewModels
         void Pause();
         void Resume();
         void Cancel();
+        void Previous();
+        void Next();
     }
 }

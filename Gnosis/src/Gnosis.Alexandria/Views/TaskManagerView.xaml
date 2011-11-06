@@ -178,8 +178,11 @@
                     <Border>
                         <StackPanel Orientation="Vertical" Margin="8 2 8 2">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="4"/>
-                                <TextBlock Text="{Binding Status}" Margin="6 4 4 4"/>
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="4" Width="150"/>
+                                <TextBlock Text="{Binding Status}" Margin="6 4 4 4" Width="50"/>
+                                <Button x:Name="closeButton" Margin="4" Click="closeButton_Click">
+                                    Close
+                                </Button>
                                 <!--<local:AnimatedGifImage Source="{StaticResource throbberIcon}" Visibility="{Binding RunningVisibility}"/>-->
                             </StackPanel>
 
@@ -187,7 +190,9 @@
                             
                             <TextBlock Text="{Binding LastError}" Margin="4" Background="Salmon" Visibility="{Binding ErrorVisibility}" Width="220" />
                             <!--<TextBlock Text="{Binding LastProgress}" Margin="4" Visibility="{Binding ProgressVisibility}" Width="200"/>-->
-                            <ProgressBar Margin="4" Visibility="{Binding ProgressVisibility}" Height="28" Width="220" Tag="{Binding LastProgress}" Foreground="Blue" Style="{DynamicResource progressBarStyle}" Value="{Binding ProgressCount, Mode=OneWay}" Maximum="{Binding ProgressMaximum, Mode=OneWay}"/>
+                            <ProgressBar x:Name="progressBar" Margin="4 4 4 8" Visibility="{Binding ProgressVisibility}" Height="28" Width="220" Tag="{Binding LastProgress}" Foreground="Blue" Style="{DynamicResource progressBarStyle}" Value="{Binding ProgressCount, Mode=OneWay}" Maximum="{Binding ProgressMaximum, Mode=OneWay}"/>
+                            <Slider x:Name="elapsedSlider" Margin="4 4 4 8" Visibility="{Binding ElapsedVisibility}" Value="{Binding ProgressCount, Mode=OneWay}" Maximum="{Binding ProgressMaximum, Mode=OneWay}" Orientation="Horizontal" Width="220" Thumb.DragStarted="elapsedSlider_DragStarted" Thumb.DragCompleted="elapsedSlider_DragCompleted"/>
+                            <!--<TickBar x:Name="elapsedTickBar" Margin="4" Visibility="{Binding ElapsedVisibility}" Height="28" Width="220"/>-->
                             
                             <StackPanel Orientation="Horizontal">
                                 <Button x:Name="previousButton" Margin="4" Visibility="{Binding PreviousVisibility}" Click="previousButton_Click">

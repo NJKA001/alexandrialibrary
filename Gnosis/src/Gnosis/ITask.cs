@@ -10,7 +10,9 @@ namespace Gnosis
         TaskProgress Progress { get; }
         TaskStatus Status { get; }
         Exception LastError { get; }
-        IEnumerable<object> Items { get; }
+        IEnumerable<ITaskItem> Items { get; }
+        ITaskItem CurrentItem { get; }
+        bool SupportsPlayback { get; }
 
         void AddStartedCallback(Action callback);
         void AddCancelledCallback(Action callback);
@@ -28,6 +30,8 @@ namespace Gnosis
         void Pause();
         void Resume();
         void Cancel();
+        void PreviousItem();
+        void NextItem();
     }
 
     public interface ITask<T>
