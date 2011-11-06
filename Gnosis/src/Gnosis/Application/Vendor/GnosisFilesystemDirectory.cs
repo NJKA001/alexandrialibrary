@@ -20,6 +20,7 @@ namespace Gnosis.Application.Vendor
         }
 
         private readonly Uri location;
+        private DirectoryInfo info;
 
         public Uri Location
         {
@@ -31,19 +32,25 @@ namespace Gnosis.Application.Vendor
             get { return MediaType.ApplicationGnosisFilesystemDirectory; }
         }
 
+        public void Load()
+        {
+        }
+
         public IEnumerable<ILink> GetLinks()
         {
+            var info = (location.IsFile && Directory.Exists(location.LocalPath)) ?
+                new DirectoryInfo(location.LocalPath)
+                : null;
+
+            if (info == null)
+                return Enumerable.Empty<ILink>();
+
             var links = new List<ILink>();
 
-            if (!location.IsFile || !Directory.Exists(location.LocalPath))
-                return links;
-
-            var current = new DirectoryInfo(location.LocalPath);
-
-            foreach (var directory in current.GetDirectories())
+            foreach (var directory in info.GetDirectories())
                 links.Add(new Link(location, new Uri(directory.FullName), LinkType.Directory, directory.Name));
 
-            foreach (var file in current.GetFiles())
+            foreach (var file in info.GetFiles())
                 links.Add(new Link(location, new Uri(file.FullName), LinkType.File, file.Name));
 
             return links;

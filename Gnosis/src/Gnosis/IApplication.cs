@@ -8,6 +8,5 @@ namespace Gnosis
     public interface IApplication
         : IMedia
     {
-        void Load();
     }
 }

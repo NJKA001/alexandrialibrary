@@ -182,31 +182,6 @@ namespace Gnosis.Alexandria.Views
 
         }
 
-        public void Initialize(ILogger logger, SpiderFactory spiderFactory)
-        {
-            if (logger == null)
-                throw new ArgumentNullException("logger");
-            if (spiderFactory == null)
-                throw new ArgumentNullException("spiderFactory");
-
-            try
-            {
-                this.logger = logger;
-                this.spiderFactory = spiderFactory;
-
-                var catalogSpider = spiderFactory.CreateCatalogSpider();
-                var defaultCatalogUrl = new Uri(@"C:\Documents and Settings\Administrator\My Documents\My Music"); //"C:\Users\Dan\Music");
-
-                var task = new Gnosis.Tasks.CatalogMediaTask(logger, catalogSpider, defaultCatalogUrl, TimeSpan.Zero, 0);
-                var taskViewModel = new CatalogMediaTaskViewModel(logger, task);
-                taskViewModels.Add(taskViewModel);
-            }
-            catch (Exception ex)
-            {
-                logger.Error("TaskManagerView.Initialize", ex);
-            }
-        }
-
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -220,6 +195,32 @@ namespace Gnosis.Alexandria.Views
         private void elapsedSlider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
         {
 
+        }
+
+        public void Initialize(ILogger logger, SpiderFactory spiderFactory)
+        {
+            if (logger == null)
+                throw new ArgumentNullException("logger");
+            if (spiderFactory == null)
+                throw new ArgumentNullException("spiderFactory");
+
+            try
+            {
+                this.logger = logger;
+                this.spiderFactory = spiderFactory;
+
+                var catalogSpider = spiderFactory.CreateCatalogSpider();
+                var defaultCatalogUrl = new Uri(@"C:\Users\Dan\Music\Air");
+                //"C:\Documents and Settings\Administrator\My Documents\My Music"); 
+
+                var task = new Gnosis.Tasks.CatalogMediaTask(logger, catalogSpider, defaultCatalogUrl, TimeSpan.Zero, 0);
+                var taskViewModel = new CatalogMediaTaskViewModel(logger, task);
+                taskViewModels.Add(taskViewModel);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("TaskManagerView.Initialize", ex);
+            }
         }
     }
 }

@@ -27,6 +27,10 @@ namespace Gnosis.Audio
             get { return type; }
         }
 
+        public virtual void Load()
+        {
+        }
+
         public virtual IEnumerable<ILink> GetLinks()
         {
             return Enumerable.Empty<ILink>();

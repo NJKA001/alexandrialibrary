@@ -61,7 +61,10 @@ namespace Gnosis.Alexandria.Views
                 mediaController = new MediaController(logger, mediaDetailRepository);
                 spiderFactory = new SpiderFactory(logger, mediaFactory, linkRepository, tagRepository, mediaRepository);
 
+                taskController = new TaskController(logger);
+
                 taskManagerView.Initialize(logger, spiderFactory);
+                searchView.Initialize(logger, mediaDetailRepository, taskController);
             }
             catch (Exception ex)
             {
@@ -82,5 +85,6 @@ namespace Gnosis.Alexandria.Views
         private readonly SpiderFactory spiderFactory;
         private readonly ICatalogController catalogController;
         private readonly IMediaController mediaController;
+        private readonly ITaskController taskController;
     }
 }

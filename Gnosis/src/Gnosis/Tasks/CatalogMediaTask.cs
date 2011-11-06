@@ -158,8 +158,18 @@ namespace Gnosis.Tasks
             var medium = GetMedia(location);
             if (medium == null)
             {
-                logger.Warn("Media undefined for location: " + location.ToString());
+                logger.Warn("Media undefined or invalid at: " + location.ToString());
                 return;
+            }
+
+            try
+            {
+                medium.Load();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Could not load media at: " + location.ToString(), ex);
+                AddError(ex);
             }
 
             BlockIfPaused();

@@ -68,8 +68,12 @@
     <Compile Include="Controllers\IMediaController.cs" />
     <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="Controllers\SpiderFactory.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Converters\RectConverter.cs" />
+    <Compile Include="Controllers\ITaskController.cs" />
     <Compile Include="ViewModels\CatalogMediaTaskViewModel.cs" />
+    <Compile Include="ViewModels\IMediaDetailViewModel.cs" />
+    <Compile Include="ViewModels\MediaDetailViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="Views\SearchView.xaml.cs">
       <DependentUpon>SearchView.xaml</DependentUpon>

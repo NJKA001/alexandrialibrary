@@ -9,7 +9,5 @@ namespace Gnosis
         : IMedia
     {
         string Body { get; }
-
-        void Load();
     }
 }
