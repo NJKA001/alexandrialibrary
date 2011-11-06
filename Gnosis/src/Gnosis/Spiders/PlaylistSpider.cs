@@ -51,7 +51,7 @@ namespace Gnosis.Spiders
             set;
         }
 
-        public uint MaxErrors
+        public int MaxErrors
         {
             get;
             set;

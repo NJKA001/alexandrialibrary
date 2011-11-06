@@ -160,6 +160,9 @@ namespace Gnosis
             if (location == null)
                 return ContentType.Empty;
 
+            if (location.ToString().EndsWith(".db"))
+                System.Diagnostics.Debug.WriteLine("+++GetContentType");
+
             var mediaType = MediaType.ApplicationUnknown;
             ICharacterSet charSet = null;
             string boundary = null;
@@ -172,8 +175,11 @@ namespace Gnosis
                 var fileInfo = new FileInfo(location.LocalPath);
                 var header = fileInfo.ToHeader();
                 mediaType = MediaType.GetMediaTypeByMagicNumber(header);
-                if (mediaType != MediaType.ApplicationUnknown)
+                if (mediaType != null && mediaType != MediaType.ApplicationUnknown)
                     return new ContentType(mediaType);
+
+                if (location.ToString().EndsWith(".db"))
+                    System.Diagnostics.Debug.WriteLine("+++GetContentType after magic number check");
 
                 var extension = location.ToFileExtension();
                 if (!string.IsNullOrEmpty(extension))
@@ -183,12 +189,19 @@ namespace Gnosis
 
                 if (mediaType != MediaType.ApplicationXmlDtd)
                 {
-                    using (var stream = new FileStream(location.LocalPath, FileMode.Open, FileAccess.Read))
+                    try
                     {
-                        charSet = GetCharacterSet(stream, mediaType, charSet);
-                        var ext = GetXmlExtendedType(stream, mediaType, charSet);
-                        mediaType = ext.Item1;
-                        charSet = ext.Item2;
+                        using (var stream = new FileStream(location.LocalPath, FileMode.Open, FileAccess.Read))
+                        {
+                            charSet = GetCharacterSet(stream, mediaType, charSet);
+                            var ext = GetXmlExtendedType(stream, mediaType, charSet);
+                            mediaType = ext.Item1;
+                            charSet = ext.Item2;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine("ContentType.GetContentType - Could not open file to read content: " + location.ToString() + Environment.NewLine + ex.Message);
                     }
                 }
 

@@ -205,6 +205,7 @@ namespace Gnosis.Data.SQLite
                 builder.AppendLine("create index if not exists Link_Target_Type on Link (Target asc, Type asc);");
                 builder.AppendLine("create index if not exists Link_Source_Target on Link (Source asc, Target asc);");
                 builder.AppendLine("create index if not exists Link_Source_Target_Type on Link (Source asc, Target asc, Type asc);");
+                builder.AppendLine("create unique index if not exists Link_Source_Target_Type_Name on Link (Source asc, Target asc, Type asc, Name asc);");
 
                 ExecuteNonQuery(builder);
             }

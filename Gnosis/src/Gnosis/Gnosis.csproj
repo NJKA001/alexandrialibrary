@@ -93,6 +93,8 @@
     <Compile Include="Application\Pdf\IPdfDocument.cs" />
     <Compile Include="Application\Pdf\PdfDocument.cs" />
     <Compile Include="Application\Vendor\GnosisFilesystemDirectory.cs" />
+    <Compile Include="Application\Vendor\MicrosoftShortcut.cs" />
+    <Compile Include="Application\UnknownApplication.cs" />
     <Compile Include="Application\Xml\XmlDtdDocument.cs" />
     <Compile Include="Audio\AudioBase.cs" />
     <Compile Include="IApplicationRunner.cs" />

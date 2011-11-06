@@ -27,6 +27,7 @@ namespace Gnosis
             AddFactoryFunction(MediaType.ApplicationXml, (location, type) => new XmlDocument(location, type));
             AddFactoryFunction(MediaType.ApplicationXmlDtd, (location, type) => new XmlDtdDocument(location));
             AddFactoryFunction(MediaType.ApplicationXspfXml, (location, type) => new XmlDocument(location, type));
+            AddFactoryFunction(MediaType.ApplicationMicrosoftShortcut, (location, type) => new MicrosoftShortcut(location));
 
             AddFactoryFunction(MediaType.AudioMpeg, (location, type) => new MpegAudio(location));
 
@@ -70,13 +71,13 @@ namespace Gnosis
             if (contentType == null)
             {
                 System.Diagnostics.Debug.WriteLine("contentType is null");
-                return null;
+                return new UnknownApplication(location);
             }
 
             if (contentType == ContentType.Empty || contentType.Type == null)
             {
                 System.Diagnostics.Debug.WriteLine("contentType=" + contentType.ToString());
-                return null;
+                return new UnknownApplication(location);
             }
 
             return Create(location, contentType.Type);
@@ -99,7 +100,7 @@ namespace Gnosis
 
             return factoryFunctions.ContainsKey(mediaType) ?
                 factoryFunctions[mediaType](location, type)
-                : null;
+                : new UnknownApplication(location);
         }
 
         #endregion

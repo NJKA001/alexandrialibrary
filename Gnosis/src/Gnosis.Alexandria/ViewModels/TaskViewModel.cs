@@ -22,6 +22,7 @@ namespace Gnosis.Alexandria.ViewModels
             if (completedIcon == null)
                 throw new ArgumentNullException("completedIcon");
 
+            this.logger = logger;
             this.task = task;
             this.name = name;
             this.startingIcon = startingIcon;
@@ -47,6 +48,7 @@ namespace Gnosis.Alexandria.ViewModels
         private string lastError;
         private Exception lastException;
         private int progressCount;
+        private int progressMaximum;
         private int errorCount;
         private int itemCount;
 
@@ -81,7 +83,9 @@ namespace Gnosis.Alexandria.ViewModels
             try
             {
                 LastProgress = progress.Description;
-                ProgressCount = progress.Number;
+                ProgressCount = progress.Count;
+                ProgressMaximum = progress.Maximum;
+                System.Diagnostics.Debug.WriteLine("progress: {0:000}/{1:000} {2}", progress.Count, progress.Maximum, progress.Description);
             }
             catch (Exception ex)
             {
@@ -192,6 +196,20 @@ namespace Gnosis.Alexandria.ViewModels
 
                 OnPropertyChanged("ProgressCount");
                 OnPropertyChanged("ProgressVisibility");
+            }
+        }
+
+        public int ProgressMaximum
+        {
+            get { return progressMaximum; }
+            set
+            {
+                if (progressMaximum != value)
+                {
+                    progressMaximum = value;
+
+                    OnPropertyChanged("ProgressMaximum");
+                }
             }
         }
 

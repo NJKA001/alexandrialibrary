@@ -84,7 +84,7 @@ namespace Gnosis.Tests.Spiders
 
             var task = spider.Crawl(target);
             task.AddResultsCallback(results => media.AddRange(results));
-            task.AddProgressCallback(progress => logger.Info(string.Format("PROGRESS: {0} {1}", progress.Number, progress.Description)));
+            task.AddProgressCallback(progress => logger.Info(string.Format("PROGRESS: {0} {1}", progress.Count, progress.Description)));
             //task.AddFailedCallback(
 
             task.StartSynchronously(TimeSpan.FromSeconds(timeoutSeconds));

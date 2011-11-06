@@ -11,15 +11,18 @@ using System.Windows.Media.Imaging;
 
 namespace Gnosis.Alexandria.Converters
 {
-    //reference: - http://cromwellhaus.com/blogs/ryanc/archive/2007/07/26/binding-to-the-byte-of-an-image-in-wpf.aspx
+    /// <summary>
+    /// Convert various types into an ImageSource
+    /// </summary>
+    /// <remarks>
+    /// See http://cromwellhaus.com/blogs/ryanc/archive/2007/07/26/binding-to-the-byte-of-an-image-in-wpf.aspx
+    /// </remarks>
     internal class ImageSourceConverter : IValueConverter
     {
         private BitmapImage GetImage(byte[] data)
         {
             try
             {
-                //var buffer = new byte[data.Length];
-                //data.CopyTo(buffer, 0);
                 var stream = new MemoryStream(data);
                 var image = new BitmapImage();
                 image.BeginInit();

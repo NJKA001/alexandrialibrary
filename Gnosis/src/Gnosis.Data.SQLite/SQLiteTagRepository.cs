@@ -393,19 +393,6 @@ namespace Gnosis.Data.SQLite
             try
             {
                 return new TagSearchTask(logger, this, algorithm, pattern);
-                //var startAction = () => 
-                //    {
-
-                //    };
-
-                //var handle = new TaskHandle<IEnumerable<ITag>>(
-                //var options = new SearchOptions(algorithm, pattern, tagCallback, completedCallback);
-                //var worker = new System.ComponentModel.BackgroundWorker();
-                //Action cancelAction = () => worker.CancelAsync();
-                //worker.WorkerSupportsCancellation = true;
-                //worker.DoWork += StartSearch;
-                //worker.RunWorkerAsync(options);
-                //return cancelAction;
             }
             catch (Exception ex)
             {
@@ -424,7 +411,7 @@ namespace Gnosis.Data.SQLite
                 builder.AppendLine("create table if not exists Tag (Id integer primary key not null, Target text not null, Algorithm integer not null, Schema integer not null, Domain integer not null, Type integer not null, Value1 text not null, Value2 text, Value3 text, Value4 text, Value5 text, Value6 text, Value7 text);");
                 builder.AppendLine("create index if not exists Tag_Target on Tag (Target asc);");
                 builder.AppendLine("create index if not exists Tag_Target_Schema on Tag (Target asc, Schema asc);");
-                builder.AppendLine("create index if not exists Tag_Target_Type on Tag (Target asc, Type asc);");
+                builder.AppendLine("create unique index if not exists Tag_Target_Type on Tag (Target asc, Type asc);");
                 builder.AppendLine("create index if not exists Tag_Algorithm_Domain_Value1 on Tag (Algorithm asc, Domain asc, Value1 asc);");
                 builder.AppendLine("create index if not exists Tag_Algorithm_Domain_Value2 on Tag (Algorithm asc, Domain asc, Value2 asc);");
                 builder.AppendLine("create index if not exists Tag_Algorithm_Domain_Value3 on Tag (Algorithm asc, Domain asc, Value3 asc);");

@@ -10,7 +10,7 @@ namespace Gnosis.Tasks
     public class CatalogMediaTask
         : TaskBase<IEnumerable<IMedia>>
     {
-        public CatalogMediaTask(ILogger logger, ISpider spider, Uri target, TimeSpan delay, uint maxErrors)
+        public CatalogMediaTask(ILogger logger, ISpider spider, Uri target, TimeSpan delay, int maxErrors)
             : base(logger)
         {
             if (spider == null)
@@ -27,15 +27,19 @@ namespace Gnosis.Tasks
         private readonly ISpider spider;
         private readonly Uri target;
         private readonly int delayMilliseconds;
-        private readonly uint maxErrors;
+        private readonly int maxErrors;
+        private const int maxProgress = 100;
 
-        private int progressNumber = 0;
-        private uint errorCount = 0;
-        
+        private int progressCount = 0;
+        private int errorCount = 0;
+
         private void AddProgress(string description)
         {
-            progressNumber++;
-            UpdateProgress(progressNumber, description);
+            progressCount = progressCount < maxProgress ?
+                progressCount + 1
+                : 0;
+
+            UpdateProgress(progressCount, maxProgress, description);
         }
 
         private void AddError(Exception ex)
@@ -211,6 +215,8 @@ namespace Gnosis.Tasks
         protected override void DoWork()
         {
             Process(target);
+
+            UpdateProgress(maxProgress, maxProgress, "Completed");
         }
     }
 }

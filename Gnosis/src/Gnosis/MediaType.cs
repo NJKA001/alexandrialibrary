@@ -140,6 +140,7 @@ namespace Gnosis
             mediaTypes.Add(ApplicationXmlDtd);
             mediaTypes.Add(ApplicationUnknown);
             mediaTypes.Add(ApplicationGnosisFilesystemDirectory);
+            mediaTypes.Add(ApplicationMicrosoftShortcut);
             mediaTypes.Add(AudioMpeg);
             mediaTypes.Add(ImageBmp);
             mediaTypes.Add(ImageGif);
@@ -242,7 +243,9 @@ namespace Gnosis
         public static readonly IMediaType ApplicationXml = new MediaType(TypeApplication, "xml", new List<string> { ".xml" }, new List<string> { "text/xml" });
         public static readonly IMediaType ApplicationXmlDtd = new MediaType(TypeApplication, "xml-dtd", new List<string> { ".dtd", ".ent" });
         public static readonly IMediaType ApplicationUnknown = new MediaType(TypeApplication, "unknown");
+        
         public static readonly IMediaType ApplicationGnosisFilesystemDirectory = new MediaType(TypeApplication, "vnd.gnosis.fs.dir");
+        public static readonly IMediaType ApplicationMicrosoftShortcut = new MediaType(TypeApplication, "x-ms-shortcut", new List<string> { ".lnk" }, new List<string>(), new List<byte[]> { new byte[] { 0x4C, 0x00, 0x00, 0x00, 0x01, 0x14, 0x02 } });
 
         public static readonly IMediaType AudioMpeg = new MediaType(TypeAudio, "mpeg", new List<string> { ".mp3", ".mp2", ".mp1" }, new List<string> { "audio/mp3" }, new List<byte[]> { new byte[] { 0x49, 0x44, 0x33 }});
 
@@ -253,7 +256,7 @@ namespace Gnosis
 
         public static readonly IMediaType TextCss = new MediaType(TypeText, "css", new List<string> { ".css" });
         public static readonly IMediaType TextHtml = new MediaType(TypeText, "html", new List<string> { ".html", ".htm" }, new List<string> { "text/html" });
-        public static readonly IMediaType TextPlain = new MediaType(TypeText, "plain", new List<string> { ".txt" });
+        public static readonly IMediaType TextPlain = new MediaType(TypeText, "plain", new List<string> { ".txt", ".text", ".ini" });
         public static readonly IMediaType TextXsl = new MediaType(TypeText, "xsl", new List<string> { ".xsl" });
 
         public static readonly IMediaType VideoAvi = new MediaType(TypeVideo, "avi", new List<string> { ".avi" }, new List<string> { "video/x-msvideo", "video/msvideo" }, new List<byte[]> { new byte[] { 0x52, 0x49, 0x46, 0x46 } });

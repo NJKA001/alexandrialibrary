@@ -8,7 +8,7 @@ namespace Gnosis
     public interface ISpider
     {
         TimeSpan Delay { get; set; }
-        uint MaxErrors { get; set; }
+        int MaxErrors { get; set; }
 
         IMedia GetMedia(Uri location);
 

@@ -68,6 +68,7 @@
     <Compile Include="Controllers\IMediaController.cs" />
     <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="Controllers\SpiderFactory.cs" />
+    <Compile Include="Converters\RectConverter.cs" />
     <Compile Include="ViewModels\CatalogMediaTaskViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="Views\SearchView.xaml.cs">

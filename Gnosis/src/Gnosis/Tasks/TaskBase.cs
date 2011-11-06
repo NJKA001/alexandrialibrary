@@ -162,9 +162,9 @@ namespace Gnosis.Tasks
             }
         }
 
-        protected virtual void UpdateProgress(int number, string description)
+        protected virtual void UpdateProgress(int count, int maximum, string description)
         {
-            this.progress = new TaskProgress(number, description);
+            this.progress = new TaskProgress(count, maximum, description);
 
             OnProgressUpdated();
         }

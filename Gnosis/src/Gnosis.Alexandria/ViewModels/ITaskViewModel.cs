@@ -18,6 +18,7 @@ namespace Gnosis.Alexandria.ViewModels
         string LastProgress { get; }
         int ErrorCount { get; }
         int ProgressCount { get; }
+        int ProgressMaximum { get; }
 
         Visibility RunningVisibility { get; }
         Visibility ErrorVisibility { get; }
