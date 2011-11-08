@@ -34,7 +34,7 @@ namespace Gnosis.Alexandria.Views
         private ITaskController taskController;
         private readonly ObservableCollection<IMediaDetailViewModel> viewModels = new ObservableCollection<IMediaDetailViewModel>();
 
-        private readonly IDictionary<int, IList<string>> resultsByTarget = new Dictionary<int, IList<string>>();
+        private readonly IDictionary<int, IDictionary<string, IList<string>>> resultsByType = new Dictionary<int, IDictionary<string, IList<string>>>();
 
         private void HandleSearchResults(IEnumerable<IMediaDetail> results)
         {
@@ -55,30 +55,52 @@ namespace Gnosis.Alexandria.Views
                             {
                                 var type = detail.Tag.Type.Id;
                                 var value = detail.Tag.Tuple.ToString();
-                                if (resultsByTarget.ContainsKey(type))
+                                var thumbnailPath = detail.Thumbnail != null ? detail.Thumbnail.Location.ToString() : null;
+                                if (resultsByType.ContainsKey(type))
                                 {
-                                    if (!resultsByTarget[type].Contains(value))
+                                    if (!resultsByType[type].ContainsKey(value))
                                     {
-                                        resultsByTarget[type].Add(value);
+                                        resultsByType[type][value] = new List<string> { thumbnailPath };
                                         viewModels.Add(new MediaDetailViewModel(detail));
                                         //if (detail.Thumbnail != null)
                                             //detail.Thumbnail.Load();
                                     }
                                     else
                                     {
-                                        var existing = viewModels.Where(x => x.Detail.Tag.Type.Id == detail.Tag.Type.Id && x.Value == value).FirstOrDefault();
-                                        if (existing != null && existing.Thumbnail == null && detail.Thumbnail != null)
+                                        if (!resultsByType[type][value].Contains(thumbnailPath))
                                         {
-                                            var index = viewModels.IndexOf(existing);
-                                            viewModels.RemoveAt(index);
-                                            viewModels.Insert(index, new MediaDetailViewModel(detail));
+                                            resultsByType[type][value].Add(thumbnailPath);
+                                            viewModels.Add(new MediaDetailViewModel(detail));
                                         }
+                                        //else if (resultsByType[type][value].All(x => x == null) && thumbnailPath != null)
+                                        //{
+
+                                        //}
+                                        //else
+                                        //{
+                                        //    var existing = viewModels.Where(x => x.Detail.Tag.Type.Id == detail.Tag.Type.Id && x.Value == value).FirstOrDefault();
+                                        //    if (existing != null && existing.Thumbnail == null && thumbnailPath != null)
+                                        //    {
+                                        //        var index = viewModels.IndexOf(existing);
+                                        //        viewModels.RemoveAt(index);
+                                        //        viewModels.Insert(index, new MediaDetailViewModel(detail));
+                                        //    }
+                                        //}
                                     }
                                 }
                                 else
                                 {
-                                    resultsByTarget[type] = new List<string> { value };
-                                    viewModels.Add(new MediaDetailViewModel(detail));
+                                    //if (thumbnailPath != null)
+                                    //{
+                                    var list = new List<string>();
+                                    if (thumbnailPath != null)
+                                    {
+                                        list.Add(thumbnailPath);
+                                        viewModels.Add(new MediaDetailViewModel(detail));
+                                    }
+
+                                    resultsByType[type] = new Dictionary<string, IList<string>> { { value, list } };
+                                    //}
                                 }
                             }
                         };
@@ -92,7 +114,7 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        private void searchButton_Click(object sender, RoutedEventArgs e)
+        private void DoSearch()
         {
             try
             {
@@ -100,7 +122,7 @@ namespace Gnosis.Alexandria.Views
                 if (string.IsNullOrEmpty(search))
                     return;
 
-                var task = repository.Search(search);
+                var task = repository.Search(search + "%");
                 task.AddResultsCallback(results => HandleSearchResults(results));
                 var taskViewModel = new SearchTaskViewModel(logger, task, search);
                 taskController.AddTask(taskViewModel);
@@ -108,8 +130,29 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                logger.Error("  searchButton_Click", ex);
+                logger.Error("  DoSearch", ex);
             }
+        }
+
+        private void searchTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.Key == Key.Return || e.Key == Key.Enter)
+                {
+                    e.Handled = true;
+                    DoSearch();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  searchTextBox_KeyUp", ex);
+            }
+        }
+
+        private void searchButton_Click(object sender, RoutedEventArgs e)
+        {
+            DoSearch();
         }
 
         public void Initialize(ILogger logger, IMediaDetailRepository repository, ITaskController taskController)
