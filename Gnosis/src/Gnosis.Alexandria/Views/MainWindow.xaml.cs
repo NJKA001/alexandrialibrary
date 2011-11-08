@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using Gnosis.Alexandria.Controllers;
+using Gnosis.Alexandria.ViewModels;
 
 using Gnosis.Data.SQLite;
 using Gnosis.Links;
@@ -63,7 +64,7 @@ namespace Gnosis.Alexandria.Views
 
                 taskController = new TaskController(logger);
 
-                taskManagerView.Initialize(logger, spiderFactory);
+                taskManagerView.Initialize(logger, spiderFactory, taskController);
                 searchView.Initialize(logger, mediaDetailRepository, taskController);
             }
             catch (Exception ex)

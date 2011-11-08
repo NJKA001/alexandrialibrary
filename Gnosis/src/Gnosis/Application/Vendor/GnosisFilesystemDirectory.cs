@@ -20,7 +20,6 @@ namespace Gnosis.Application.Vendor
         }
 
         private readonly Uri location;
-        private DirectoryInfo info;
 
         public Uri Location
         {

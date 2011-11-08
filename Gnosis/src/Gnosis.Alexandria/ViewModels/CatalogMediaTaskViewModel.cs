@@ -11,7 +11,7 @@ namespace Gnosis.Alexandria.ViewModels
         : TaskViewModel
     {
         public CatalogMediaTaskViewModel(ILogger logger, CatalogMediaTask task)
-            : base(logger, task, "Building Media Catalog", "pack://application:,,,/Images/blank_scroll.png", "pack://application:,,,/Images/anubis_horus_scroll.jpg")
+            : base(logger, task, "Cataloging Media", "pack://application:,,,/Images/Sphinx.png")
         {
         }
     }

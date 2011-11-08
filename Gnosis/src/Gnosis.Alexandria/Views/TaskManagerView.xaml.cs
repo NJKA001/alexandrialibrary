@@ -28,13 +28,14 @@ namespace Gnosis.Alexandria.Views
         {
             InitializeComponent();
 
-            this.taskItemsControl.ItemsSource = taskViewModels;
+            //this.taskItemsControl.ItemsSource = taskViewModels;
         }
 
         private ILogger logger;
         private SpiderFactory spiderFactory;
+        private ITaskController taskController;
 
-        private readonly ObservableCollection<ITaskViewModel> taskViewModels = new ObservableCollection<ITaskViewModel>();
+        //private readonly ObservableCollection<ITaskViewModel> taskViewModels = new ObservableCollection<ITaskViewModel>();
         private readonly IList<Action<ITaskViewModel>> startedCallbacks = new List<Action<ITaskViewModel>>();
         private readonly IList<Action<ITaskViewModel>> cancelledCallbacks = new List<Action<ITaskViewModel>>();
 
@@ -184,7 +185,34 @@ namespace Gnosis.Alexandria.Views
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                var element = sender as UIElement;
+                if (element == null)
+                    return;
 
+                var item = element.FindContainingItem<ListBoxItem>();
+                if (item == null)
+                    return;
+
+                var viewModel = item.DataContext as ITaskViewModel;
+                if (viewModel == null)
+                    return;
+
+                if (viewModel.Status == TaskStatus.Running)
+                {
+                    var result = MessageBox.Show("This task is currently running.\r\nAre you sure that you want to cancel it?", "Cancel Running Task?", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.No)
+                        return;
+                }
+
+                viewModel.Cancel();
+                taskController.RemoveTask(viewModel);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  closeButton_Click", ex);
+            }
         }
 
         private void elapsedSlider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
@@ -197,25 +225,28 @@ namespace Gnosis.Alexandria.Views
 
         }
 
-        public void Initialize(ILogger logger, SpiderFactory spiderFactory)
+        public void Initialize(ILogger logger, SpiderFactory spiderFactory, ITaskController taskController)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
             if (spiderFactory == null)
                 throw new ArgumentNullException("spiderFactory");
+            if (taskController == null)
+                throw new ArgumentNullException("taskController");
 
             try
             {
                 this.logger = logger;
                 this.spiderFactory = spiderFactory;
+                this.taskController = taskController;
+                this.taskItemsControl.ItemsSource = taskController.Tasks;
 
                 var catalogSpider = spiderFactory.CreateCatalogSpider();
                 var defaultCatalogUrl = new Uri(@"C:\Users\Dan\Music\Air");
-                //"C:\Documents and Settings\Administrator\My Documents\My Music"); 
-
                 var task = new Gnosis.Tasks.CatalogMediaTask(logger, catalogSpider, defaultCatalogUrl, TimeSpan.Zero, 0);
                 var taskViewModel = new CatalogMediaTaskViewModel(logger, task);
-                taskViewModels.Add(taskViewModel);
+                taskController.AddTask(taskViewModel);
+                //"C:\Documents and Settings\Administrator\My Documents\My Music");
             }
             catch (Exception ex)
             {

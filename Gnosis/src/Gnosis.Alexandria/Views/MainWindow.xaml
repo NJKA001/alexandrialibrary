@@ -5,11 +5,10 @@
         Title="Alexandria" Height="480" Width="640" Icon="pack://application:,,,/App.ico">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="32"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="200"/>
         </Grid.RowDefinitions>
         <local:SearchView x:Name="searchView" Grid.Row="0"/>
-        <local:TaskManagerView x:Name="taskManagerView" Grid.Row="2"/>
+        <local:TaskManagerView x:Name="taskManagerView" Grid.Row="1"/>
     </Grid>
 </Window>

@@ -9,6 +9,11 @@ namespace Gnosis.Alexandria.ViewModels
     public abstract class TaskViewModel
         : ITaskViewModel, INotifyPropertyChanged
     {
+        protected TaskViewModel(ILogger logger, ITask task, string name, object startingIcon)
+            : this(logger, task, name, startingIcon, startingIcon, false)
+        {
+        }
+
         protected TaskViewModel(ILogger logger, ITask task, string name, object startingIcon, object completedIcon)
             : this(logger, task, name, startingIcon, completedIcon, false)
         {
@@ -39,10 +44,10 @@ namespace Gnosis.Alexandria.ViewModels
             task.AddCompletedCallback(() => OnCompleted());
             task.AddErrorCallback(error => OnError(error));
             task.AddFailedCallback(error => OnFailed(error));
-            task.AddPausedCallback(() => OnStatusChanged());
+            task.AddPausedCallback(() => OnPaused());
             task.AddProgressCallback(progress => OnProgressChanged(progress));
-            task.AddResumedCallback(() => OnStatusChanged());
-            task.AddStartedCallback(() => OnStatusChanged());
+            task.AddResumedCallback(() => OnResumed());
+            task.AddStartedCallback(() => OnStarted());
         }
 
         private readonly ILogger logger;
@@ -127,6 +132,42 @@ namespace Gnosis.Alexandria.ViewModels
             }
         }
 
+        private void OnStarted()
+        {
+            try
+            {
+                OnStatusChanged();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  OnStarted", ex);
+            }
+        }
+
+        private void OnPaused()
+        {
+            try
+            {
+                OnStatusChanged();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  OnPaused", ex);
+            }
+        }
+
+        private void OnResumed()
+        {
+            try
+            {
+                OnStatusChanged();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  OnResumed", ex);
+            }
+        }
+
         private void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
@@ -136,6 +177,7 @@ namespace Gnosis.Alexandria.ViewModels
         private void OnStatusChanged()
         {
             OnPropertyChanged("Status");
+            OnPropertyChanged("StatusName");
             OnPropertyChanged("Icon");
             OnPropertyChanged("RunningVisibility");
             OnPropertyChanged("StartVisibility");
@@ -158,6 +200,11 @@ namespace Gnosis.Alexandria.ViewModels
         public TaskStatus Status
         {
             get { return task.Status; }
+        }
+
+        public string StatusName
+        {
+            get { return task.Status.ToString(); }
         }
 
         public ITaskItem CurrentItem

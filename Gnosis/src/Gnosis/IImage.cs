@@ -10,7 +10,6 @@ namespace Gnosis
     {
         bool IsLoaded { get; }
         
-        void Load();
         byte[] GetData();
         object GetImageSource();
     }

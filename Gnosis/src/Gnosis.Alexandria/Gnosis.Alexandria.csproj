@@ -74,6 +74,7 @@
     <Compile Include="ViewModels\CatalogMediaTaskViewModel.cs" />
     <Compile Include="ViewModels\IMediaDetailViewModel.cs" />
     <Compile Include="ViewModels\MediaDetailViewModel.cs" />
+    <Compile Include="ViewModels\SearchTaskViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="Views\SearchView.xaml.cs">
       <DependentUpon>SearchView.xaml</DependentUpon>
@@ -212,6 +213,15 @@
   <ItemGroup>
     <Resource Include="Images\anubis_scroll.jpg" />
     <Resource Include="Images\blank_scroll.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Eye_Of_Horus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Sphinx.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\close-circle-small.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

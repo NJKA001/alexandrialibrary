@@ -14,6 +14,7 @@ namespace Gnosis.Alexandria.ViewModels
         string Name { get; }
         object Icon { get; }
         TaskStatus Status { get; }
+        string StatusName { get; }
         ITaskItem CurrentItem { get; }
         bool SupportsPlayback { get; }
         string LastError { get; }
