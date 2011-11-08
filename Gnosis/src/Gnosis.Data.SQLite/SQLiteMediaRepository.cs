@@ -22,7 +22,36 @@ namespace Gnosis.Data.SQLite
         private const string connectionString = "Data Source=Media.db;Version=3;";
         private readonly IMediaFactory factory = new MediaFactory();
 
-        private IMedia ReadMedia(IDataRecord record)
+        private IEnumerable<IMedia> GetMedia(ICommandBuilder builder)
+        {
+            IDbConnection connection = null;
+            var media = new List<IMedia>();
+
+            try
+            {
+                connection = GetConnection();
+
+                var command = builder.ToCommand(connection);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var medium = ReadMedium(reader);
+                        media.Add(medium);
+                    }
+                }
+
+                return media;
+            }
+            finally
+            {
+                if (defaultConnection == null && connection != null)
+                    connection.Close();
+            }
+        }
+
+        private IMedia ReadMedium(IDataRecord record)
         {
             Uri location = record.GetUri("Location");
             var type = record.GetStringLookup<IMediaType>("Type", typeName => MediaType.Parse(typeName));
@@ -31,18 +60,40 @@ namespace Gnosis.Data.SQLite
 
         public IMedia Lookup(Uri location)
         {
+            if (location == null)
+                throw new ArgumentNullException("location");
+
             try
             {
-                logger.Info("SQLiteMediaRepository.Lookup(Uri)");
+                //logger.Info("SQLiteMediaRepository.Lookup(Uri)");
 
                 var builder = new CommandBuilder("select * from Media where Location = @Location;");
                 builder.AddParameter("@Location", location.ToString());
 
-                return GetRecord(builder, record => ReadMedia(record));
+                return GetRecord(builder, record => ReadMedium(record));
             }
             catch (Exception ex)
             {
                 logger.Error("  Lookup", ex);
+                throw;
+            }
+        }
+
+        public IEnumerable<IMedia> ByLocation(string pattern)
+        {
+            if (pattern == null)
+                throw new ArgumentNullException("pattern");
+
+            try
+            {
+                var builder = new CommandBuilder("select * from Media where Location like @Location;");
+                builder.AddParameter("@Location", pattern);
+
+                return GetMedia(builder);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  SQLiteMediaRepository.ByLocation", ex);
                 throw;
             }
         }

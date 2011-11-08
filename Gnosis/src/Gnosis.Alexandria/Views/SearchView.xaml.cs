@@ -61,6 +61,18 @@ namespace Gnosis.Alexandria.Views
                                     {
                                         resultsByTarget[type].Add(value);
                                         viewModels.Add(new MediaDetailViewModel(detail));
+                                        //if (detail.Thumbnail != null)
+                                            //detail.Thumbnail.Load();
+                                    }
+                                    else
+                                    {
+                                        var existing = viewModels.Where(x => x.Detail.Tag.Type.Id == detail.Tag.Type.Id && x.Value == value).FirstOrDefault();
+                                        if (existing != null && existing.Thumbnail == null && detail.Thumbnail != null)
+                                        {
+                                            var index = viewModels.IndexOf(existing);
+                                            viewModels.RemoveAt(index);
+                                            viewModels.Insert(index, new MediaDetailViewModel(detail));
+                                        }
                                     }
                                 }
                                 else

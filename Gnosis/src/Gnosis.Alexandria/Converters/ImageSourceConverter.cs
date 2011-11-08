@@ -19,6 +19,17 @@ namespace Gnosis.Alexandria.Converters
     /// </remarks>
     internal class ImageSourceConverter : IValueConverter
     {
+        private BitmapImage GetImage(string path)
+        {
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.CacheOption = BitmapCacheOption.OnLoad;
+            image.CreateOptions = BitmapCreateOptions.None;
+            image.UriSource = new Uri(path, UriKind.Absolute);
+            image.EndInit();
+            return image;
+        }
+
         private BitmapImage GetImage(byte[] data)
         {
             try
@@ -65,19 +76,17 @@ namespace Gnosis.Alexandria.Converters
                     }
                     else
                     {
-                        BitmapImage image = new BitmapImage();
-                        image.BeginInit();
-                        image.CacheOption = BitmapCacheOption.OnLoad;
-                        image.CreateOptions = BitmapCreateOptions.None;
-                        image.UriSource = new Uri(path, UriKind.Absolute);
-                        image.EndInit();
-                        return image;
+                        return GetImage(path);
                     }
                 }
 
                 if (value is IImage)
                 {
-                    return GetImage(((IImage)value).GetData());
+                    var image = value as IImage;
+                    if (image.IsLoaded)
+                        return GetImage(image.GetData());
+                    else
+                        return GetImage(image.Location.ToString());
                 }
 
                 if (value is byte[])

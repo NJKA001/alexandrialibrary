@@ -26,6 +26,11 @@ namespace Gnosis.Alexandria.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public IMediaDetail Detail
+        {
+            get { return detail; }
+        }
+
         public string Type
         {
             get { return detail.Tag.Type.Name; }

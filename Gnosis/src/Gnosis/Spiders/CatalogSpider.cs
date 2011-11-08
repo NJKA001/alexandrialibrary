@@ -67,6 +67,22 @@ namespace Gnosis.Spiders
                 throw new ArgumentNullException("media");
 
             mediaRepository.Save(new List<IMedia> { media });
+
+            var location = media.Location;
+            if (location.IsFile && (location.ToString().ToLower().EndsWith("folder.jpg") || location.ToString().EndsWith("folder.jpeg")))
+            {
+                var fileInfo = new System.IO.FileInfo(location.LocalPath);
+                var pattern = new Uri(fileInfo.DirectoryName).ToString() + "%";
+
+                var thumbnails = new List<ILink>();
+                foreach (var related in mediaRepository.ByLocation(pattern))
+                {
+                    thumbnails.Add(new Link(related.Location, media.Location, LinkType.ThumbnailImage, fileInfo.Name));
+                }
+
+                System.Diagnostics.Debug.WriteLine("Saving thumbnail links: " + thumbnails.Count());
+                linkRepository.Save(thumbnails);
+            }
         }
 
         public void HandleLinks(IEnumerable<ILink> links)
