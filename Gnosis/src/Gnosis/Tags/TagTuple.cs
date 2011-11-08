@@ -76,7 +76,15 @@ namespace Gnosis.Tags
 
         public override string ToString()
         {
-            return Item1.ToString();
+            //return Item1.ToString();
+            
+            var sb = new StringBuilder();
+
+            foreach (var element in ToArray())
+                if (element != null && !string.IsNullOrEmpty(element.ToString()))
+                    sb.AppendLine(element.ToString());
+
+            return sb.ToString().Trim();
         }
 
         public string[] ToStringArray()

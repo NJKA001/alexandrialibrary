@@ -452,8 +452,11 @@ namespace Gnosis.Data.SQLite
                     builder.AddParameter("@Type", tag.Type.Id);
 
                     var values = tag.Tuple.ToArray();
-                    for(var i=0; i < values.Length; i++)
-                        builder.AddParameter(string.Format("@Value{0}", i + 1), values[i]);
+                    for (var i = 0; i < values.Length; i++)
+                    {
+                        var value = values[i] ?? string.Empty;
+                        builder.AddParameter(string.Format("@Value{0}", i + 1), value);
+                    }
 
                     builders.Add(builder);
                 }

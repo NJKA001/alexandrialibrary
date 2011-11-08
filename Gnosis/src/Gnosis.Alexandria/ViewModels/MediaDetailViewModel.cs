@@ -33,7 +33,7 @@ namespace Gnosis.Alexandria.ViewModels
 
         public string Value
         {
-            get { return detail.Tag.Value.ToString(); }
+            get { return detail.Tag.Tuple.ToString(); }
         }
 
         public object Thumbnail

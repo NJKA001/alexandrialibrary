@@ -34,6 +34,8 @@ namespace Gnosis.Alexandria.Views
         private ITaskController taskController;
         private readonly ObservableCollection<IMediaDetailViewModel> viewModels = new ObservableCollection<IMediaDetailViewModel>();
 
+        private readonly IDictionary<int, IList<string>> resultsByTarget = new Dictionary<int, IList<string>>();
+
         private void HandleSearchResults(IEnumerable<IMediaDetail> results)
         {
             try
@@ -50,7 +52,23 @@ namespace Gnosis.Alexandria.Views
                     Action action = () =>
                         {
                             foreach (var detail in results)
-                                viewModels.Add(new MediaDetailViewModel(detail));
+                            {
+                                var type = detail.Tag.Type.Id;
+                                var value = detail.Tag.Tuple.ToString();
+                                if (resultsByTarget.ContainsKey(type))
+                                {
+                                    if (!resultsByTarget[type].Contains(value))
+                                    {
+                                        resultsByTarget[type].Add(value);
+                                        viewModels.Add(new MediaDetailViewModel(detail));
+                                    }
+                                }
+                                else
+                                {
+                                    resultsByTarget[type] = new List<string> { value };
+                                    viewModels.Add(new MediaDetailViewModel(detail));
+                                }
+                            }
                         };
 
                     this.Dispatcher.Invoke(action, DispatcherPriority.DataBind);

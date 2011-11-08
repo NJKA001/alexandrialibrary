@@ -242,11 +242,13 @@ namespace Gnosis.Alexandria.Views
                 this.taskItemsControl.ItemsSource = taskController.Tasks;
 
                 var catalogSpider = spiderFactory.CreateCatalogSpider();
-                var defaultCatalogUrl = new Uri(@"C:\Users\Dan\Music\Air");
+                var defaultCatalogUrl = new Uri(@"C:\Documents and Settings\Administrator\My Documents\My Music");
+                //"C:\Users\Dan\Music\Air");
+                
                 var task = new Gnosis.Tasks.CatalogMediaTask(logger, catalogSpider, defaultCatalogUrl, TimeSpan.Zero, 0);
                 var taskViewModel = new CatalogMediaTaskViewModel(logger, task);
                 taskController.AddTask(taskViewModel);
-                //"C:\Documents and Settings\Administrator\My Documents\My Music");
+                //");
             }
             catch (Exception ex)
             {
