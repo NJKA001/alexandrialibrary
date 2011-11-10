@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Gnosis.Alexandria.Views"
              xmlns:converters="clr-namespace:Gnosis.Alexandria.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -23,7 +24,8 @@
         <Button x:Name="searchButton" Grid.Row="0" Grid.Column="1" Margin="4" Click="searchButton_Click">
             Search
         </Button>
-        <ListView x:Name="searchList" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+        <local:SearchResultView x:Name="searchResultView" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <ListView x:Name="searchList" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Collapsed">
             <ListView.View>
                 <GridView>
                     <GridViewColumn>

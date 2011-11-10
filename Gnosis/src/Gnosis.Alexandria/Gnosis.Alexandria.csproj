@@ -71,11 +71,22 @@
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Converters\RectConverter.cs" />
     <Compile Include="Controllers\ITaskController.cs" />
+    <Compile Include="ViewModels\AlbumViewModel.cs" />
+    <Compile Include="ViewModels\ArtistSearchResultViewModel.cs" />
+    <Compile Include="ViewModels\ArtistViewModel.cs" />
+    <Compile Include="ViewModels\AudioViewModel.cs" />
     <Compile Include="ViewModels\CatalogMediaTaskViewModel.cs" />
+    <Compile Include="ViewModels\IAlbumViewModel.cs" />
+    <Compile Include="ViewModels\IArtistViewModel.cs" />
+    <Compile Include="ViewModels\IAudioViewModel.cs" />
     <Compile Include="ViewModels\IMediaDetailViewModel.cs" />
+    <Compile Include="ViewModels\ISearchResultViewModel.cs" />
     <Compile Include="ViewModels\MediaDetailViewModel.cs" />
     <Compile Include="ViewModels\SearchTaskViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
+    <Compile Include="Views\SearchResultView.xaml.cs">
+      <DependentUpon>SearchResultView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SearchView.xaml.cs">
       <DependentUpon>SearchView.xaml</DependentUpon>
     </Compile>
@@ -100,6 +111,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\SearchResultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SearchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
