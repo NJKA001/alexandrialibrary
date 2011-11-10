@@ -84,6 +84,12 @@
     <Compile Include="ViewModels\MediaDetailViewModel.cs" />
     <Compile Include="ViewModels\SearchTaskViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
+    <Compile Include="Views\HoveringCloseIcon.xaml.cs">
+      <DependentUpon>HoveringCloseIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchResultItemView.xaml.cs">
+      <DependentUpon>SearchResultItemView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SearchResultView.xaml.cs">
       <DependentUpon>SearchResultView.xaml</DependentUpon>
     </Compile>
@@ -93,6 +99,10 @@
     <Compile Include="Views\TaskManagerView.xaml.cs">
       <DependentUpon>TaskManagerView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\HoveringCloseIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -111,6 +121,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\SearchResultItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SearchResultView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -237,6 +251,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\close-circle-small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\close-circle-small-unselected.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -18,12 +18,21 @@ namespace Gnosis.Alexandria.ViewModels
         }
 
         private readonly IArtistViewModel artist;
+        private bool mouseIsOverCloseIcon;
+        private bool isClosed;
         private bool isSelected;
+        private readonly IList<Action<ISearchResultViewModel>> closeCallbacks = new List<Action<ISearchResultViewModel>>();
 
         private void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void OnClosed()
+        {
+            foreach (var callback in closeCallbacks)
+                callback(this);
         }
 
         public string Name
@@ -41,14 +50,24 @@ namespace Gnosis.Alexandria.ViewModels
             get { return "ARTIST"; }
         }
 
-        public Visibility ArtistVisibility
+        public Visibility AlbumArtistVisibility
         {
             get { return Visibility.Collapsed; }
         }
 
-        public string ArtistName
+        public string AlbumArtistName
         {
-            get { return artist.Name; }
+            get { return null; }
+        }
+
+        public Visibility TrackAlbumVisibility
+        {
+            get { return Visibility.Collapsed; }
+        }
+
+        public string TrackAlbumTitle
+        {
+            get { return null; }
         }
 
         public IImage Image
@@ -86,6 +105,22 @@ namespace Gnosis.Alexandria.ViewModels
             get { return artist.Albums; }
         }
 
+        public bool IsClosed
+        {
+            get { return isClosed; }
+            set
+            {
+                if (isClosed != value)
+                {
+                    isClosed = value;
+                    OnPropertyChanged("IsClosed");
+
+                    if (isClosed)
+                        OnClosed();
+                }
+            }
+        }
+
         public bool IsSelected
         {
             get { return isSelected; }
@@ -100,5 +135,13 @@ namespace Gnosis.Alexandria.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public void AddCloseCallback(Action<ISearchResultViewModel> callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            closeCallbacks.Add(callback);
+        }
     }
 }

@@ -11,105 +11,20 @@
         <converters:ImageSourceConverter x:Key="imageConverter"/>
     </UserControl.Resources>
     <Grid>
-        <ListBox x:Name="searchResultListBox" ItemsSource="{Binding Results}">
+        <ListBox x:Name="searchResultContainer" ItemsSource="{Binding Results}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Background="LightSkyBlue" Width="360" Margin="4">
-                        <Grid x:Name="nameGrid" Margin="4">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="80" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="15" />
-                                <RowDefinition Height="15" />
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Text="{Binding Name}" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" />
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ResultType}" FontSize="10" Margin="4 4 4 0" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Years}" FontSize="10" Margin="4 4 4 0" HorizontalAlignment="Center" />
-                        </Grid>                        
-                        <Grid x:Name="artistGrid" Margin="4" Visibility="{Binding ArtistVisibility}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding ArtistName}"/>
-                        </Grid>
-                        <Grid x:Name="imageGrid" Margin="4" HorizontalAlignment="Stretch">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="120"/>
-                                <ColumnDefinition Width="4"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="120"/>
-                            </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Grid.Column="0" Source="{Binding Path=Image, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Width="120" Height="120"/>
-                            <TabControl x:Name="tabControl" Grid.Row="0" Grid.Column="2">
-                                <TabItem x:Name="bioTab" Header="Bio" Visibility="{Binding BioVisibility}">
-                                    <ScrollViewer>
-                                        <TextBlock Text="{Binding Bio}" TextWrapping="Wrap" />
-                                    </ScrollViewer>
-                                </TabItem>
-                                <TabItem x:Name="tracksTab" Header="Tracks" Visibility="{Binding TracksVisibility}">
-                                    <ListBox ItemsSource="{Binding Tracks}">
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Number}" Width="32" Margin="4"/>
-                                                    <TextBlock Text="{Binding Title}" Margin="4"/>
-                                                    <TextBlock Text="{Binding Duration}" Width="64" Margin="8 4 4 4"/>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                    </ListBox>
-                                </TabItem>
-                                <TabItem x:Name="linksTab" Header="Links">
-                                    
-                                </TabItem>
-                                <TabItem x:Name="tagsTab" Header="Tags">
-
-                                </TabItem>
-                                <TabItem x:Name="moreTab" Header="More">
-
-                                </TabItem>
-                            </TabControl>
-                        </Grid>
-                        <Grid x:Name="albumGrid" Margin="4" Visibility="{Binding AlbumsVisibility}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="32"/>
-                                <RowDefinition Height="32"/>
-                                <RowDefinition Height="32"/>
-                                <RowDefinition Height="32"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="4"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Button x:Name="audioFilterButton" Grid.Row="0" Grid.Column="0" Margin="0 4 0 4" Content="Audio" Click="audioFilterButton_Click"/>
-                            <Button x:Name="videoFilterButton" Grid.Row="1" Grid.Column="0" Margin="0 4 0 4" Content="Video" Click="videoFilterButton_Click" />
-                            <Button x:Name="imageFilterButton" Grid.Row="2" Grid.Column="0" Margin="0 4 0 4" Content="Image" Click="imageFilterButton_Click"/>
-                            <Button x:Name="textFilterButton" Grid.Row="3" Grid.Column="0" Margin="0 4 0 4" Content="Text" Click="textFilterButton_Click"/>
-                            <ListBox x:Name="albumListBox" Grid.Row="0" Grid.RowSpan="4" Grid.Column="2" ItemsSource="{Binding Albums}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Horizontal"/>
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Vertical" Margin="4">
-                                            <Image Source="{Binding Path=Image, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="64" Width="64"/>
-                                            <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="10"/>
-                                            <TextBlock Text="{Binding Year}" FontSize="10"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ListBox>
-                        </Grid>
-                    </StackPanel>
+                    <local:SearchResultItemView />
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel 
+                        Orientation="Horizontal" 
+                        Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}},Path=ActualWidth}" 
+                        />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
         </ListBox>
     </Grid>
 </UserControl>

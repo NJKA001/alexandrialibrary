@@ -13,8 +13,10 @@ namespace Gnosis.Alexandria.ViewModels
         string Years { get; }
         string ResultType { get; }
 
-        Visibility ArtistVisibility { get; }
-        string ArtistName { get; }
+        Visibility AlbumArtistVisibility { get; }
+        string AlbumArtistName { get; }
+        Visibility TrackAlbumVisibility { get; }
+        string TrackAlbumTitle { get; }
 
         IImage Image { get; }
 
@@ -26,6 +28,9 @@ namespace Gnosis.Alexandria.ViewModels
         Visibility AlbumsVisibility { get; }
         IEnumerable<IAlbumViewModel> Albums { get; }
 
+        bool IsClosed { get; set; }
         bool IsSelected { get; set; }
+
+        void AddCloseCallback(Action<ISearchResultViewModel> callback);
     }
 }
