@@ -97,15 +97,15 @@ namespace Gnosis.Tests.Data.SQLite
         protected readonly Uri target15 = new Uri("http://example.com/targets/15");
 
         protected readonly ILinkType type1 = LinkType.Default;
-        protected readonly ILinkType type2 = LinkType.ThumbnailImage;
+        protected readonly ILinkType type2 = LinkType.AlbumThumbnail;
         protected readonly ILinkType type3 = LinkType.Default;
-        protected readonly ILinkType type4 = LinkType.ThumbnailImage;
-        protected readonly ILinkType type5 = LinkType.ThumbnailImage;
-        protected readonly ILinkType type6 = LinkType.ThumbnailImage;
-        protected readonly ILinkType type7 = LinkType.ThumbnailImage;
-        protected readonly ILinkType type8 = LinkType.ThumbnailImage;
+        protected readonly ILinkType type4 = LinkType.AlbumThumbnail;
+        protected readonly ILinkType type5 = LinkType.AlbumThumbnail;
+        protected readonly ILinkType type6 = LinkType.AlbumThumbnail;
+        protected readonly ILinkType type7 = LinkType.AlbumThumbnail;
+        protected readonly ILinkType type8 = LinkType.AlbumThumbnail;
         protected readonly ILinkType type9 = LinkType.Default;
-        protected readonly ILinkType type10 = LinkType.ThumbnailImage;
+        protected readonly ILinkType type10 = LinkType.AlbumThumbnail;
         protected readonly ILinkType type11 = HtmlLinkType.Alternate;
         protected readonly ILinkType type12 = HtmlLinkType.NoFollow;
         protected readonly ILinkType type13 = HtmlLinkType.Chapter;

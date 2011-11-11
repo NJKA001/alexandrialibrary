@@ -47,7 +47,7 @@ namespace Gnosis.Tests.Data.SQLite
 
         protected void InitializeData()
         {
-            link1 = new Link(trackUri1, thumbUri1, LinkType.ThumbnailImage, "Album Cover Image");
+            link1 = new Link(trackUri1, thumbUri1, LinkType.AlbumThumbnail, "Album Cover Image");
             linkRepository.Save(new List<ILink> { link1 });
 
             tag1 = new Tag(trackUri1, Id3v2TagType.Artist, new string[] { "Björk", string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty });

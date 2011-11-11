@@ -47,7 +47,7 @@ namespace Gnosis.Tasks
 
         private IImage GetThumbnail(Uri location)
         {
-            var link = linkRepository.GetBySource(location, LinkType.ThumbnailImage).FirstOrDefault();
+            var link = linkRepository.GetBySource(location, LinkType.AlbumThumbnail).FirstOrDefault();
 
             return link != null ?
                 new BitmapImage(link.Target)

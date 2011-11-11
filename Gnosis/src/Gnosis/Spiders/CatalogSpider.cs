@@ -61,6 +61,31 @@ namespace Gnosis.Spiders
             return mediaFactory.Create(location);
         }
 
+        private string GetArtistThumbnailPath(FileInfo fileInfo)
+        {
+            //TODO: Go back a directory with fileInfo and look for folder.jpg for the artist
+            if (fileInfo.Directory.Parent != null)
+            {
+                var artistThumbnailPath = Path.Combine(fileInfo.Directory.Parent.FullName, "folder.jpg");
+                if (File.Exists(artistThumbnailPath))
+                    return artistThumbnailPath;
+
+                artistThumbnailPath = Path.Combine(fileInfo.Directory.Parent.FullName, "folder.jpeg");
+                if (File.Exists(artistThumbnailPath))
+                    return artistThumbnailPath;
+
+                artistThumbnailPath = Path.Combine(fileInfo.Directory.Parent.FullName, "Folder.jpg");
+                if (File.Exists(artistThumbnailPath))
+                    return artistThumbnailPath;
+
+                artistThumbnailPath = Path.Combine(fileInfo.Directory.Parent.FullName, "Folder.jpeg");
+                if (File.Exists(artistThumbnailPath))
+                    return artistThumbnailPath;
+            }
+
+            return null;
+        }
+
         public void HandleMedia(IMedia media)
         {
             if (media == null)
@@ -77,8 +102,10 @@ namespace Gnosis.Spiders
                 var thumbnails = new List<ILink>();
                 foreach (var related in mediaRepository.ByLocation(pattern))
                 {
-                    thumbnails.Add(new Link(related.Location, media.Location, LinkType.ThumbnailImage, fileInfo.Name));
+                    thumbnails.Add(new Link(related.Location, media.Location, LinkType.AlbumThumbnail, fileInfo.Name));
                 }
+
+                var artistThumbnailPath = GetArtistThumbnailPath(fileInfo);
 
                 System.Diagnostics.Debug.WriteLine("Saving thumbnail links: " + thumbnails.Count());
                 linkRepository.Save(thumbnails);

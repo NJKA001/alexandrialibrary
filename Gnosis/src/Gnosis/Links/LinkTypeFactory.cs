@@ -13,7 +13,8 @@ namespace Gnosis.Links
         public LinkTypeFactory()
         {
             Add(LinkType.Default);
-            Add(LinkType.ThumbnailImage);
+            Add(LinkType.AlbumThumbnail);
+            Add(LinkType.ArtistThumbnail);
 
             foreach (var htmlLinkType in HtmlLinkType.GetAll())
                 Add(htmlLinkType);
