@@ -8,26 +8,33 @@ namespace Gnosis
     public class MediaDetail
         : IMediaDetail
     {
-        public MediaDetail(ITag tag, IImage thumbnail)
+        public MediaDetail(ITag tag, IImage artistThumbnail, IImage collectionThumbnail)
         {
             if (tag == null)
                 throw new ArgumentNullException("tag");
 
             this.tag = tag;
-            this.thumbnail = thumbnail;
+            this.artistThumbnail = artistThumbnail;
+            this.collectionThumbnail = collectionThumbnail;
         }
 
         private readonly ITag tag;
-        private readonly IImage thumbnail;
+        private readonly IImage artistThumbnail;
+        private readonly IImage collectionThumbnail;
 
         public ITag Tag
         {
             get { return tag; }
         }
 
-        public IImage Thumbnail
+        public IImage ArtistThumbnail
         {
-            get { return thumbnail; }
+            get { return artistThumbnail; }
+        }
+
+        public IImage CollectionThumbnail
+        {
+            get { return collectionThumbnail; }
         }
     }
 }

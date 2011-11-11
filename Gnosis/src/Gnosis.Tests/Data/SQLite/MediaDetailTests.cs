@@ -83,7 +83,7 @@ namespace Gnosis.Tests.Data.SQLite
             var first = details.FirstOrDefault();
             Assert.IsNotNull(first);
             Assert.AreEqual(tag3.Value, first.Tag.Value);
-            Assert.AreEqual(link1.Target, first.Thumbnail.Location);
+            Assert.AreEqual(link1.Target, first.CollectionThumbnail.Location);
         }
 
         [TestFixtureTearDown]

@@ -99,13 +99,18 @@ namespace Gnosis.Spiders
                 var fileInfo = new System.IO.FileInfo(location.LocalPath);
                 var pattern = new Uri(fileInfo.DirectoryName).ToString() + "%";
 
+                var artistThumbnailPath = GetArtistThumbnailPath(fileInfo);
+
                 var thumbnails = new List<ILink>();
                 foreach (var related in mediaRepository.ByLocation(pattern))
                 {
                     thumbnails.Add(new Link(related.Location, media.Location, LinkType.AlbumThumbnail, fileInfo.Name));
-                }
 
-                var artistThumbnailPath = GetArtistThumbnailPath(fileInfo);
+                    if (artistThumbnailPath != null)
+                    {
+                        thumbnails.Add(new Link(related.Location, new Uri(artistThumbnailPath), LinkType.ArtistThumbnail, fileInfo.Name));
+                    }
+                }
 
                 System.Diagnostics.Debug.WriteLine("Saving thumbnail links: " + thumbnails.Count());
                 linkRepository.Save(thumbnails);

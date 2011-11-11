@@ -31,7 +31,6 @@ namespace Gnosis.Alexandria.Views
 
         private bool mouseIsOverClose;
         private bool clickedOnClose;
-        private bool isClosed;
 
         private void PropertyHasChanged(string propertyName)
         {

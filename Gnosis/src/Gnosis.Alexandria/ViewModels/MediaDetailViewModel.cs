@@ -41,9 +41,14 @@ namespace Gnosis.Alexandria.ViewModels
             get { return detail.Tag.Tuple.ToString(); }
         }
 
-        public object Thumbnail
+        public object ArtistThumbnail
         {
-            get { return detail.Thumbnail; }
+            get { return detail.ArtistThumbnail; }
+        }
+
+        public object CollectionThumbnail
+        {
+            get { return detail.CollectionThumbnail; }
         }
 
         public bool IsSelected

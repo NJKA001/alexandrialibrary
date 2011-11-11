@@ -38,19 +38,29 @@ namespace Gnosis.Tasks
 
             foreach (var tag in tags)
             {
-                var thumbnail = GetThumbnail(tag.Target);
-                results.Add(new MediaDetail(tag, thumbnail));
+                var artistThumbnail = GetArtistThumbnail(tag.Target);
+                var albumThumbnail = GetAlbumThumbnail(tag.Target);
+                results.Add(new MediaDetail(tag, artistThumbnail, albumThumbnail));
             }
 
             return results;
         }
 
-        private IImage GetThumbnail(Uri location)
+        private IImage GetArtistThumbnail(Uri location)
+        {
+            var link = linkRepository.GetBySource(location, LinkType.ArtistThumbnail).FirstOrDefault();
+
+            return link != null ?
+                new JpegImage(link.Target)
+                : null;
+        }
+
+        private IImage GetAlbumThumbnail(Uri location)
         {
             var link = linkRepository.GetBySource(location, LinkType.AlbumThumbnail).FirstOrDefault();
 
             return link != null ?
-                new BitmapImage(link.Target)
+                new JpegImage(link.Target)
                 : null;
         }
 

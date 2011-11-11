@@ -55,7 +55,7 @@ namespace Gnosis.Alexandria.Views
                             {
                                 var type = detail.Tag.Type.Id;
                                 var value = detail.Tag.Tuple.ToString();
-                                var thumbnailPath = detail.Thumbnail != null ? detail.Thumbnail.Location.ToString() : null;
+                                var thumbnailPath = detail.CollectionThumbnail != null ? detail.CollectionThumbnail.Location.ToString() : null;
                                 if (resultsByType.ContainsKey(type))
                                 {
                                     if (!resultsByType[type].ContainsKey(value))

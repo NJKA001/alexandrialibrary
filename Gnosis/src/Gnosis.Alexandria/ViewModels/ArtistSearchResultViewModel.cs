@@ -18,7 +18,6 @@ namespace Gnosis.Alexandria.ViewModels
         }
 
         private readonly IArtistViewModel artist;
-        private bool mouseIsOverCloseIcon;
         private bool isClosed;
         private bool isSelected;
         private readonly IList<Action<ISearchResultViewModel>> closeCallbacks = new List<Action<ISearchResultViewModel>>();

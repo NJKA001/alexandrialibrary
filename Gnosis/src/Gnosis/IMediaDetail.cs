@@ -8,6 +8,7 @@ namespace Gnosis
     public interface IMediaDetail
     {
         ITag Tag { get; }
-        IImage Thumbnail { get; }
+        IImage ArtistThumbnail { get; }
+        IImage CollectionThumbnail { get; }
     }
 }

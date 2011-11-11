@@ -12,7 +12,8 @@ namespace Gnosis.Alexandria.ViewModels
         IMediaDetail Detail { get; }
         string Type { get; }
         string Value { get; }
-        object Thumbnail { get; }
+        object ArtistThumbnail { get; }
+        object CollectionThumbnail { get; }
 
         bool IsSelected { get; set; }
     }
