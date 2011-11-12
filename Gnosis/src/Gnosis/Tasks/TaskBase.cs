@@ -170,15 +170,29 @@ namespace Gnosis.Tasks
             }
         }
 
+        protected bool IsActive()
+        {
+            while (status == TaskStatus.Paused)
+            {
+                System.Threading.Thread.Sleep(100);
+            }
+
+            return (status == TaskStatus.Running);
+        }
+
         protected virtual void WorkCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {
-                if (status != TaskStatus.Cancelled && status != TaskStatus.Failed)
+                if (status == TaskStatus.Running) //!= TaskStatus.Cancelled && status != TaskStatus.Failed)
                 {
                     status = TaskStatus.Completed;
 
                     OnCompleted();
+                }
+                else
+                {
+                    UpdateProgress(0, 100, string.Empty);
                 }
             }
             catch (Exception ex)
@@ -375,12 +389,13 @@ namespace Gnosis.Tasks
             if (status != TaskStatus.Running && status != TaskStatus.Paused)
                 return;
 
+            status = TaskStatus.Ready;
+
             worker.CancelAsync();
 
             OnStopped();
 
-            progress = new TaskProgress(0, 100, string.Empty);
-            status = TaskStatus.Ready;
+            UpdateProgress(0, 100, string.Empty);
         }
 
         public void Pause()

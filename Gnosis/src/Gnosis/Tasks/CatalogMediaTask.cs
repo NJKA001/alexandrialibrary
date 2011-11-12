@@ -151,8 +151,7 @@ namespace Gnosis.Tasks
 
         private void Process(Uri location)
         {
-            BlockIfPaused();
-            if (Status == TaskStatus.Cancelled)
+            if (!IsActive())
                 return;
 
             var medium = GetMedia(location);
@@ -161,6 +160,9 @@ namespace Gnosis.Tasks
                 logger.Warn("Media undefined or invalid at: " + location.ToString());
                 return;
             }
+
+            if (!IsActive())
+                return;
 
             try
             {
@@ -172,38 +174,32 @@ namespace Gnosis.Tasks
                 AddError(ex);
             }
 
-            BlockIfPaused();
-            if (Status == TaskStatus.Cancelled)
+            if (!IsActive())
                 return;
 
             var links = GetLinks(medium);
 
-            BlockIfPaused();
-            if (Status == TaskStatus.Cancelled)
+            if (!IsActive())
                 return;
 
             var tags = GetTags(medium);
 
-            BlockIfPaused();
-            if (Status == TaskStatus.Cancelled)
+            if (!IsActive())
                 return;
 
             SaveMedia(medium);
 
-            BlockIfPaused();
-            if (Status == TaskStatus.Cancelled)
+            if (!IsActive())
                 return;
 
             SaveLinks(location, links);
 
-            BlockIfPaused();
-            if (Status == TaskStatus.Cancelled)
+            if (!IsActive())
                 return;
 
             SaveTags(location, tags);
 
-            BlockIfPaused();
-            if (Status == TaskStatus.Cancelled)
+            if (!IsActive())
                 return;
 
             UpdateResults(new List<IMedia> { medium });
@@ -211,8 +207,7 @@ namespace Gnosis.Tasks
             foreach (var childLocation in links.Select(x => x.Target).DistinctBy(x => x.ToString()))
             {
                 //System.Diagnostics.Debug.WriteLine(string.Format("*** Link of {0} is {1}", location, childLocation));
-                BlockIfPaused();
-                if (Status == TaskStatus.Cancelled)
+                if (!IsActive())
                     return;
 
                 if (delayMilliseconds > 0)
