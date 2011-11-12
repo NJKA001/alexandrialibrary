@@ -39,6 +39,7 @@ namespace Gnosis.Alexandria.ViewModels
 
         void Reset();
         void Start();
+        void Stop();
         void Pause();
         void Resume();
         void Cancel();

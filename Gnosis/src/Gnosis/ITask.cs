@@ -15,6 +15,7 @@ namespace Gnosis
         bool SupportsPlayback { get; }
 
         void AddStartedCallback(Action callback);
+        void AddStoppedCallback(Action callback);
         void AddCancelledCallback(Action callback);
         void AddPausedCallback(Action callback);
         void AddResumedCallback(Action callback);
@@ -27,6 +28,7 @@ namespace Gnosis
         void Start();
         void StartSynchronously();
         void StartSynchronously(TimeSpan timeout);
+        void Stop();
         void Pause();
         void Resume();
         void Cancel();

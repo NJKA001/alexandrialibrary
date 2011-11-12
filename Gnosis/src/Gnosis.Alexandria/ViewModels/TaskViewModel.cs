@@ -40,6 +40,7 @@ namespace Gnosis.Alexandria.ViewModels
             this.itemCount = task.Items.Count();
             this.showElapsed = showElapsed;
 
+            task.AddStoppedCallback(() => OnStopped());
             task.AddCancelledCallback(() => OnCancelled());
             task.AddCompletedCallback(() => OnCompleted());
             task.AddErrorCallback(error => OnError(error));
@@ -81,6 +82,18 @@ namespace Gnosis.Alexandria.ViewModels
             catch (Exception ex)
             {
                 logger.Error("  OnCancelled", ex);
+            }
+        }
+
+        private void OnStopped()
+        {
+            try
+            {
+                OnStatusChanged();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  OnStopped", ex);
             }
         }
 
@@ -406,6 +419,11 @@ namespace Gnosis.Alexandria.ViewModels
         public void Start()
         {
             task.Start();
+        }
+
+        public void Stop()
+        {
+            task.Stop();
         }
 
         public void Pause()

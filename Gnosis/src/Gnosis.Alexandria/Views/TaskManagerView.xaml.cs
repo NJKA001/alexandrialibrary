@@ -149,7 +149,7 @@ namespace Gnosis.Alexandria.Views
                     return;
 
                 if (viewModel.Status == TaskStatus.Paused || viewModel.Status == TaskStatus.Running)
-                    viewModel.Cancel();
+                    viewModel.Stop();
             }
             catch (Exception ex)
             {

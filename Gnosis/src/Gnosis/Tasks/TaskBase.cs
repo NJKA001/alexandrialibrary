@@ -40,6 +40,7 @@ namespace Gnosis.Tasks
         private readonly bool supportsPlayback;
         private readonly IList<ITaskItem> items = new List<ITaskItem>();
         private readonly IList<Action> startedCalledbacks = new List<Action>();
+        private readonly IList<Action> stoppedCallbacks = new List<Action>();
         private readonly IList<Action> cancelledCallbacks = new List<Action>();
         private readonly IList<Action> pausedCallbacks = new List<Action>();
         private readonly IList<Action> resumedCallbacks = new List<Action>();
@@ -52,6 +53,12 @@ namespace Gnosis.Tasks
         private void OnStarted()
         {
             foreach (var callback in startedCalledbacks)
+                callback();
+        }
+
+        private void OnStopped()
+        {
+            foreach (var callback in stoppedCallbacks)
                 callback();
         }
 
@@ -257,6 +264,14 @@ namespace Gnosis.Tasks
             startedCalledbacks.Add(callback);
         }
 
+        public void AddStoppedCallback(Action callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            stoppedCallbacks.Add(callback);
+        }
+
         public void AddCancelledCallback(Action callback)
         {
             if (callback == null)
@@ -353,6 +368,19 @@ namespace Gnosis.Tasks
             Start();
 
             Wait(timeout);
+        }
+
+        public void Stop()
+        {
+            if (status != TaskStatus.Running && status != TaskStatus.Paused)
+                return;
+
+            worker.CancelAsync();
+
+            OnStopped();
+
+            progress = new TaskProgress(0, 100, string.Empty);
+            status = TaskStatus.Ready;
         }
 
         public void Pause()
