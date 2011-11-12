@@ -377,9 +377,6 @@ namespace Gnosis.Tasks
 
         public void Cancel()
         {
-            if (status != TaskStatus.Paused && status != TaskStatus.Running)
-                return;
-
             try
             {
                 status = TaskStatus.Cancelled;

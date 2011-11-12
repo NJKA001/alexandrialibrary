@@ -183,6 +183,25 @@ namespace Gnosis.Alexandria.Views
 
         }
 
+        private void catalogMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var dialog = new System.Windows.Forms.FolderBrowserDialog();
+                dialog.RootFolder = Environment.SpecialFolder.MyMusic;
+                var result = dialog.ShowDialog();
+
+                if (result != System.Windows.Forms.DialogResult.OK)
+                    return;
+
+                AddCatalogTask(dialog.SelectedPath);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  catalogMenuItem_Click", ex);
+            }
+        }
+
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -225,6 +244,19 @@ namespace Gnosis.Alexandria.Views
 
         }
 
+        private void AddCatalogTask(string path)
+        {
+            if (path == null)
+                throw new ArgumentNullException("path");
+
+            var target = new Uri(path);
+            if (target.IsFile && !System.IO.Directory.Exists(path))
+                throw new ArgumentException("path does not exist");
+
+            var task = new Gnosis.Tasks.CatalogMediaTask(logger, spiderFactory.CreateCatalogSpider(), target, TimeSpan.Zero, 0);
+            AddTaskViewModel(new CatalogMediaTaskViewModel(logger, task));
+        }
+
         public void Initialize(ILogger logger, SpiderFactory spiderFactory, ITaskController taskController)
         {
             if (logger == null)
@@ -241,19 +273,26 @@ namespace Gnosis.Alexandria.Views
                 this.taskController = taskController;
                 this.taskItemsControl.ItemsSource = taskController.Tasks;
 
-                var catalogSpider = spiderFactory.CreateCatalogSpider();
-                var defaultCatalogUrl = new Uri(@"C:\Documents and Settings\Administrator\My Documents\My Music");
-                //"C:\Users\Dan\Music\Air");
-                
-                var task = new Gnosis.Tasks.CatalogMediaTask(logger, catalogSpider, defaultCatalogUrl, TimeSpan.Zero, 0);
-                var taskViewModel = new CatalogMediaTaskViewModel(logger, task);
-                taskController.AddTask(taskViewModel);
-                //");
+                AddCatalogTask(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic));
             }
             catch (Exception ex)
             {
                 logger.Error("TaskManagerView.Initialize", ex);
             }
+        }
+
+        public void AddTaskViewModel(ITaskViewModel taskViewModel)
+        {
+            if (taskViewModel == null)
+                throw new ArgumentNullException("taskViewModel");
+
+            taskViewModel.AddCancelCallback(x => RemoveTaskViewModel(x));
+            taskController.AddTask(taskViewModel);
+        }
+
+        public void RemoveTaskViewModel(ITaskViewModel taskViewModel)
+        {
+            taskController.RemoveTask(taskViewModel);
         }
     }
 }

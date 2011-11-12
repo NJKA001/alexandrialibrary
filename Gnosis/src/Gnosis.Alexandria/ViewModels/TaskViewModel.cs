@@ -56,21 +56,27 @@ namespace Gnosis.Alexandria.ViewModels
         private readonly object startingIcon;
         private readonly object completedIcon;
         private readonly bool showElapsed;
+        private readonly IList<Action<ITaskViewModel>> cancelCallbacks = new List<Action<ITaskViewModel>>();
+
         private string lastProgress;
         private string lastError;
         private Exception lastException;
         private int progressCount = 0;
-        private int progressMaximum;
+        private int progressMaximum = 100;
         private int errorCount;
         private int itemCount;
 
         private bool isSelected;
+        private bool isCancelled;
 
         private void OnCancelled()
         {
             try
             {
                 OnStatusChanged();
+                OnPropertyChanged("IsCancelled");
+                foreach (var callback in cancelCallbacks)
+                    callback(this);
             }
             catch (Exception ex)
             {
@@ -377,6 +383,19 @@ namespace Gnosis.Alexandria.ViewModels
             }
         }
 
+        public bool IsCancelled
+        {
+            get { return isCancelled; }
+            set
+            {
+                if (!isCancelled && value)
+                {
+                    isCancelled = true;
+                    Cancel();
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void Reset()
@@ -412,6 +431,14 @@ namespace Gnosis.Alexandria.ViewModels
         public void Next()
         {
             task.NextItem();
+        }
+
+        public void AddCancelCallback(Action<ITaskViewModel> callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            cancelCallbacks.Add(callback);
         }
     }
 }

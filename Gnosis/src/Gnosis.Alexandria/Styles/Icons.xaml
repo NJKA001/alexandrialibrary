@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <BitmapImage x:Key="playIcon" UriSource="../Images/play-simple.png"/>
+    <BitmapImage x:Key="pauseIcon" UriSource="../Images/pause-simple.png"/>
+    <BitmapImage x:Key="stopIcon" UriSource="../Images/stop-simple.png"/>
+    <BitmapImage x:Key="previousIcon" UriSource="../Images/previous-simple.png"/>
+    <BitmapImage x:Key="nextIcon" UriSource="../Images/next-simple.png"/>
+    <BitmapImage x:Key="throbberIcon" UriSource="../Images/throbber20.gif"/>
+    <BitmapImage x:Key="closeIcon" UriSource="../Images/close-circle-small.png"/>
+    <BitmapImage x:Key="sphinxIcon" UriSource="../Images/Sphinx.png"/>
+</ResourceDictionary>

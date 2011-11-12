@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="taskItemStyle" TargetType="{x:Type ListBoxItem}">
+        <!--
+            <EventSetter Event="KeyUp" Handler="item_KeyUp"/>
+            <EventSetter Event="MouseDoubleClick" Handler="item_MouseDoubleClick"/>-->
+        <!--<EventSetter Event="PreviewMouseRightButtonDown" Handler="item_PreviewMouseRightButtonDown" />-->
+        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+        <!--
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="Foreground" Value="{Binding Foreground}"/>
+            <Setter Property="Background" Value="{Binding Background}"/>
+            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=OneWay}"/>
+            <Setter Property="Visibility" Value="{Binding Visibility}"/>-->
+    </Style>
+</ResourceDictionary>

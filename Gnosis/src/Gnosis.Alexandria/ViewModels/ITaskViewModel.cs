@@ -35,6 +35,7 @@ namespace Gnosis.Alexandria.ViewModels
         Visibility NextVisibility { get; }
         
         bool IsSelected { get; set; }
+        bool IsCancelled { get; set; }
 
         void Reset();
         void Start();
@@ -43,5 +44,7 @@ namespace Gnosis.Alexandria.ViewModels
         void Cancel();
         void Previous();
         void Next();
+
+        void AddCancelCallback(Action<ITaskViewModel> callback);
     }
 }
