@@ -56,8 +56,11 @@ namespace Gnosis.Audio
 
             if (id3v2Tag != null)
             {
-                if (id3v2Tag.Performers != null)
+                if (id3v2Tag.Performers != null && id3v2Tag.Performers.Length > 0)
+                {
                     tags.Add(new Gnosis.Tags.Tag(Location, Id3v2TagType.Artist, id3v2Tag.Performers));
+                    tags.Add(new Gnosis.Tags.Tag(Location, Gnosis.Tags.TagType.DefaultStringArray, id3v2Tag.Performers[0].Split(' ')));
+                }
                 if (id3v2Tag.Album != null)
                     tags.Add(new Gnosis.Tags.Tag(Location, Id3v2TagType.Album, id3v2Tag.Album));
                 if (id3v2Tag.Year > 0)

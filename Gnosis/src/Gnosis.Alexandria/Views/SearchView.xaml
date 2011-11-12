@@ -25,20 +25,5 @@
             Search
         </Button>
         <local:SearchResultView x:Name="searchResultView" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
-        <ListView x:Name="searchList" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Collapsed">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Image Source="{Binding Path=Thumbnail, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Width="64" Height="64" Margin="4"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}"/>
-                    <GridViewColumn Header="Value" DisplayMemberBinding="{Binding Value}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
     </Grid>
 </UserControl>

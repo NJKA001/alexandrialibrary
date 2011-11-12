@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
+using Gnosis.Tags;
+using Gnosis.Tags.Id3.Id3v2;
 using Gnosis.Alexandria.Controllers;
 using Gnosis.Alexandria.ViewModels;
 
@@ -32,11 +34,50 @@ namespace Gnosis.Alexandria.Views
         private ILogger logger;
         private IMediaDetailRepository repository;
         private ITaskController taskController;
-        private readonly ObservableCollection<IMediaDetailViewModel> viewModels = new ObservableCollection<IMediaDetailViewModel>();
+        //private readonly ObservableCollection<IMediaDetailViewModel> viewModels = new ObservableCollection<IMediaDetailViewModel>();
+        //private readonly IDictionary<int, IDictionary<string, IList<string>>> resultsByType = new Dictionary<int, IDictionary<string, IList<string>>>();
+        private readonly IDictionary<string, ArtistSearchResultViewModel> artistResults = new Dictionary<string, ArtistSearchResultViewModel>();
 
-        private readonly IDictionary<int, IDictionary<string, IList<string>>> resultsByType = new Dictionary<int, IDictionary<string, IList<string>>>();
+        private void AddAlbumViewModel(ArtistSearchResultViewModel artistResult, IMediaDetail detail)
+        {
+            //var existing = artistResult.Albums.Where(x => x.Title == d
+        }
 
         private void HandleSearchResults(IEnumerable<IMediaDetail> results)
+        {
+            try
+            {
+                foreach (var detailResult in results)
+                {
+                    var name = detailResult.Tag.Tuple.ToString().Replace("\r\n", " ").Replace("\n", " ");
+                    var key = name.ToLower();
+                    System.Diagnostics.Debug.WriteLine("HandleSearchResults: value=" + name.ToString());
+                    if (detailResult.Tag.Type == Id3v2TagType.Artist || detailResult.Tag.Type == Gnosis.Tags.TagType.DefaultStringArray)
+                    {
+                        if (!artistResults.ContainsKey(key))
+                        {
+                            var artist = new ArtistViewModel(name, DateTime.MinValue, DateTime.MaxValue, detailResult.ArtistThumbnail, string.Empty);
+                            var artistResult = new ArtistSearchResultViewModel(artist);
+                            artistResults[key] = artistResult;
+                            AddAlbumViewModel(artistResult, detailResult);
+
+                            Dispatcher.Invoke(new Action(() => searchResultView.AddViewModel(artistResult)), DispatcherPriority.DataBind);
+                        }
+                        else
+                        {
+                            AddAlbumViewModel(artistResults[key], detailResult);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  HandleSearchResults", ex);
+            }
+        }
+
+        /*
+        private void HandleSearchResultsOld(IEnumerable<IMediaDetail> results)
         {
             try
             {
@@ -113,6 +154,7 @@ namespace Gnosis.Alexandria.Views
                 logger.Error("  HandleSearchResults", ex);
             }
         }
+         */
 
         private void DoSearch()
         {
@@ -170,7 +212,7 @@ namespace Gnosis.Alexandria.Views
 
             try
             {
-                searchList.ItemsSource = viewModels;
+                //searchList.ItemsSource = viewModels;
             }
             catch (Exception ex)
             {

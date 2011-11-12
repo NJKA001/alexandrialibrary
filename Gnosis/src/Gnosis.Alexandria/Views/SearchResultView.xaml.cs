@@ -47,8 +47,8 @@ namespace Gnosis.Alexandria.Views
             //Return+To+Cookie+Mountain 2006/9/12 http://ecx.images-amazon.com/images/I/61Rh-pOVPtL._SS500_.jpg
             //Desperate Youth, Bloddthirsty Babes 2004/3/9 http://ecx.images-amazon.com/images/I/41FE%2BcKqTnL._SS500_.jpg
 
-            AddRadioheadResults();
-            AddTvOnTheRadioResults();
+            //AddRadioheadResults();
+            //AddTvOnTheRadioResults();
         }
 
         private void AddTvOnTheRadioResults()
@@ -108,6 +108,15 @@ namespace Gnosis.Alexandria.Views
         public IEnumerable<ISearchResultViewModel> Results
         {
             get { return results; }
+        }
+
+        public void AddViewModel(ISearchResultViewModel viewModel)
+        {
+            if (viewModel == null)
+                throw new ArgumentNullException("viewModel");
+
+            viewModel.AddCloseCallback(x => CloseViewModel(x));
+            results.Add(viewModel);
         }
     }
 }

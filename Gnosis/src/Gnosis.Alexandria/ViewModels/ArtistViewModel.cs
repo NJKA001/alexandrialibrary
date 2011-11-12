@@ -13,8 +13,6 @@ namespace Gnosis.Alexandria.ViewModels
         {
             if (name == null)
                 throw new ArgumentNullException("name");
-            if (image == null)
-                throw new ArgumentNullException("image");
 
             this.name = name;
             this.image = image;

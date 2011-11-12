@@ -202,37 +202,37 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        private void closeButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var element = sender as UIElement;
-                if (element == null)
-                    return;
+        //private void closeButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        var element = sender as UIElement;
+        //        if (element == null)
+        //            return;
 
-                var item = element.FindContainingItem<ListBoxItem>();
-                if (item == null)
-                    return;
+        //        var item = element.FindContainingItem<ListBoxItem>();
+        //        if (item == null)
+        //            return;
 
-                var viewModel = item.DataContext as ITaskViewModel;
-                if (viewModel == null)
-                    return;
+        //        var viewModel = item.DataContext as ITaskViewModel;
+        //        if (viewModel == null)
+        //            return;
 
-                if (viewModel.Status == TaskStatus.Running)
-                {
-                    var result = MessageBox.Show("This task is currently running.\r\nAre you sure that you want to cancel it?", "Cancel Running Task?", MessageBoxButton.YesNo);
-                    if (result == MessageBoxResult.No)
-                        return;
-                }
+        //        if (viewModel.Status == TaskStatus.Running)
+        //        {
+        //            var result = MessageBox.Show("This task is currently running.\r\nAre you sure that you want to cancel it?", "Cancel Running Task?", MessageBoxButton.YesNo);
+        //            if (result == MessageBoxResult.No)
+        //                return;
+        //        }
 
-                viewModel.Cancel();
-                taskController.RemoveTask(viewModel);
-            }
-            catch (Exception ex)
-            {
-                logger.Error("  closeButton_Click", ex);
-            }
-        }
+        //        viewModel.Cancel();
+        //        taskController.RemoveTask(viewModel);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logger.Error("  closeButton_Click", ex);
+        //    }
+        //}
 
         private void elapsedSlider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
         {
@@ -292,6 +292,9 @@ namespace Gnosis.Alexandria.Views
 
         public void RemoveTaskViewModel(ITaskViewModel taskViewModel)
         {
+            if (taskViewModel == null)
+                throw new ArgumentNullException("taskViewModel");
+
             taskController.RemoveTask(taskViewModel);
         }
     }

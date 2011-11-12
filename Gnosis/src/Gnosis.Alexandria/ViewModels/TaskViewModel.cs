@@ -403,6 +403,13 @@ namespace Gnosis.Alexandria.ViewModels
             {
                 if (!isCancelled && value)
                 {
+                    if (task.Status == TaskStatus.Running)
+                    {
+                        var result = MessageBox.Show("This task is currently running.\r\nAre you sure that you want to cancel it?", "Cancel Running Task?", MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.No)
+                            return;
+                    }
+
                     isCancelled = true;
                     Cancel();
                 }
