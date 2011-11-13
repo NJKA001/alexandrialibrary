@@ -10,26 +10,24 @@ namespace Gnosis.Data.SQLite
 {
     public abstract class SQLiteRepositoryBase
     {
-        protected SQLiteRepositoryBase(ILogger logger, string connectionString)
-            : this(logger, connectionString, null)
+        protected SQLiteRepositoryBase(ILogger logger)
+            : this(logger, null)
         {
         }
 
-        protected SQLiteRepositoryBase(ILogger logger, string connectionString, IDbConnection defaultConnection)
+        protected SQLiteRepositoryBase(ILogger logger, IDbConnection defaultConnection)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
-            if (connectionString == null)
-                throw new ArgumentNullException("connectionString");
 
             this.logger = logger;
-            this.connectionString = connectionString;
             this.defaultConnection = defaultConnection;
         }
 
+        private const string connectionString = "Data Source=Alexandria.db;Version=3;";
+
         protected readonly ILogger logger;
         protected readonly IDbConnection defaultConnection;
-        private readonly string connectionString;
         private readonly IConnectionFactory connectionFactory = new SQLiteConnectionFactory();
 
         protected IDbConnection GetConnection()

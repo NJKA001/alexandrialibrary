@@ -121,10 +121,6 @@
       <Project>{4CC18776-125E-4318-9D24-D60110AD9697}</Project>
       <Name>taglib-sharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Gnosis.AlexandriaProto\Gnosis.AlexandriaProto.csproj">
-      <Project>{1307CB13-F914-4DEC-8198-BBBC571D821C}</Project>
-      <Name>Gnosis.AlexandriaProto</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Gnosis.Alexandria\Gnosis.Alexandria.csproj">
       <Project>{3470F959-B781-459C-932A-EECA1B1429F8}</Project>
       <Name>Gnosis.Alexandria</Name>

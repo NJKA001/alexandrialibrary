@@ -5,20 +5,15 @@ using System.Text;
 
 namespace Gnosis
 {
-    public interface ITrack
+    public interface IAlbum
     {
         Guid Id { get; }
         string Title { get; }
-        uint Number { get; }
-        TimeSpan Duration { get; }
-
+        DateTime Released { get; }
+        
         Guid Artist { get; }
         string ArtistName { get; }
-        Guid Album { get; }
-        string AlbumTitle { get; }
         
-        Uri AudioLocation { get; }
-        IMediaType AudioType { get; }
         IImage Thumbnail { get; }
     }
 }

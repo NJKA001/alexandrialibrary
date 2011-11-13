@@ -12,7 +12,7 @@ namespace Gnosis.Data.SQLite
         : SQLiteRepositoryBase, ILinkRepository
     {
         public SQLiteLinkRepository(ILogger logger, ILinkTypeFactory typeFactory)
-            : base(logger, connectionString)
+            : base(logger)
         {
             if (typeFactory == null)
                 throw new ArgumentNullException("typeFactory");
@@ -21,7 +21,7 @@ namespace Gnosis.Data.SQLite
         }
 
         public SQLiteLinkRepository(ILogger logger, ILinkTypeFactory typeFactory, IDbConnection defaultConnection)
-            : base(logger, connectionString, defaultConnection)
+            : base(logger, defaultConnection)
         {
             if (typeFactory == null)
                 throw new ArgumentNullException("typeFactory");
@@ -29,7 +29,6 @@ namespace Gnosis.Data.SQLite
             this.typeFactory = typeFactory;
         }
 
-        private const string connectionString = "Data Source=Alexandria.db;Version=3;";
         private readonly ILinkTypeFactory typeFactory;
 
         #region Private Methods

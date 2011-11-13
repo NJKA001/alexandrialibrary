@@ -97,6 +97,7 @@
     <Compile Include="SQLiteMediaRepository.cs" />
     <Compile Include="SQLiteRepositoryBase.cs" />
     <Compile Include="SQLiteTagRepository.cs" />
+    <Compile Include="SQLiteTrackRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gnosis.Data\Gnosis.Data.csproj">

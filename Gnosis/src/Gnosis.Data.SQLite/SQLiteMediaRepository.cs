@@ -10,16 +10,15 @@ namespace Gnosis.Data.SQLite
         : SQLiteRepositoryBase, IMediaRepository
     {
         public SQLiteMediaRepository(ILogger logger)
-            : base(logger, connectionString)
+            : base(logger)
         {
         }
 
         public SQLiteMediaRepository(ILogger logger, IDbConnection defaultConnection)
-            : base(logger, connectionString, defaultConnection)
+            : base(logger, defaultConnection)
         {
         }
 
-        private const string connectionString = "Data Source=Alexandria.db;Version=3;";
         private readonly IMediaFactory factory = new MediaFactory();
 
         private IEnumerable<IMedia> GetMedia(ICommandBuilder builder)
