@@ -13,7 +13,7 @@ using Gnosis.Alexandria.Models.Tracks;
 namespace Gnosis.Alexandria.Repositories.Tracks
 {
     public class TrackRepository
-        : RepositoryBase<ITrack>, ITrackRepository
+        : RepositoryBase<Gnosis.Alexandria.Models.Tracks.ITrack>, ITrackRepository
     {
         public TrackRepository()
             : this(null)
@@ -32,16 +32,16 @@ namespace Gnosis.Alexandria.Repositories.Tracks
         private readonly SearchAll all = new SearchAll();
         private readonly SearchByTitle byTitle = new SearchByTitle();
 
-        public ITrack LookupByLocation(Uri location)
+        public Gnosis.Alexandria.Models.Tracks.ITrack LookupByLocation(Uri location)
         {
-            var query = new Query<ITrack>(Factory, byLocation.GetFilter(location));
+            var query = new Query<Gnosis.Alexandria.Models.Tracks.ITrack>(Factory, byLocation.GetFilter(location));
             return Lookup(query);
             //return Lookup(byLocation, new Dictionary<string, object> { { "@Location", location } });
         }
 
-        public IEnumerable<ITrack> SearchByTitle(string title)
+        public IEnumerable<Gnosis.Alexandria.Models.Tracks.ITrack> SearchByTitle(string title)
         {
-            var query = new Query<ITrack>(Factory, byTitle.GetFilter(title));
+            var query = new Query<Gnosis.Alexandria.Models.Tracks.ITrack>(Factory, byTitle.GetFilter(title));
             return Search(query);
         }
     }

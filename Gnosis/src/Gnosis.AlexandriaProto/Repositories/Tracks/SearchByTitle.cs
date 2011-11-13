@@ -10,7 +10,7 @@ using Gnosis.Alexandria.Models.Tracks;
 namespace Gnosis.Alexandria.Repositories.Tracks
 {
     public class SearchByTitle
-        : EntitySearchBase<ITrack>
+        : EntitySearchBase<Gnosis.Alexandria.Models.Tracks.ITrack>
     {
         public SearchByTitle()
             : base("Track.Title LIKE @Title", track => track.Title)

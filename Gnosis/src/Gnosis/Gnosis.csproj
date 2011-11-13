@@ -238,6 +238,7 @@
     <Compile Include="ITaskItem.cs" />
     <Compile Include="IText.cs" />
     <Compile Include="ITextViewer.cs" />
+    <Compile Include="ITrack.cs" />
     <Compile Include="IVideoPlayer.cs" />
     <Compile Include="MediaAggregate.cs" />
     <Compile Include="Spiders\PlaylistSpider.cs" />

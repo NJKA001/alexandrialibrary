@@ -8,7 +8,7 @@ using Gnosis.Alexandria.Models.Tracks;
 namespace Gnosis.Alexandria.Repositories.Tracks
 {
     public class SearchAll
-        : EntitySearchBase<ITrack>
+        : EntitySearchBase<Gnosis.Alexandria.Models.Tracks.ITrack>
     {
         public SearchAll()
             : base(x => x.Artists, x => x.ReleaseDate, x => x.Album, x => x.DiscNumber, x => x.TrackNumber)

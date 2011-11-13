@@ -10,7 +10,7 @@ using Gnosis.Alexandria.Models.Tracks;
 namespace Gnosis.Alexandria.Repositories.Tracks
 {
     public class LookupByLocation
-        : LookupBase<ITrack>
+        : LookupBase<Gnosis.Alexandria.Models.Tracks.ITrack>
     {
         public LookupByLocation()
             : base("Track.Location = @Location", track => track.Location)

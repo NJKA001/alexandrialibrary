@@ -10,10 +10,10 @@ using Gnosis.Alexandria.Models.Tracks;
 namespace Gnosis.Alexandria.Repositories.Tracks
 {
     public interface ITrackRepository
-        : IRepository<ITrack>
+        : IRepository<Gnosis.Alexandria.Models.Tracks.ITrack>
     {
-        ITrack LookupByLocation(Uri location);
+        Gnosis.Alexandria.Models.Tracks.ITrack LookupByLocation(Uri location);
 
-        IEnumerable<ITrack> SearchByTitle(string title);
+        IEnumerable<Gnosis.Alexandria.Models.Tracks.ITrack> SearchByTitle(string title);
     }
 }

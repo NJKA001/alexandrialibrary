@@ -14,7 +14,7 @@ namespace Gnosis.Alexandria.Repositories.Tracks
         public TrackFactory()
             : base()
         {
-            MapEntityConstructor<ITrack>(() => new Track());
+            MapEntityConstructor<Gnosis.Alexandria.Models.Tracks.ITrack>(() => new Track());
             MapChildConstructor<ITrackPicture>(() => new TrackPicture());
             MapChildConstructor<ITrackRating>(() => new TrackRating());
             MapChildConstructor<ITrackSynchronizedLyrics>(() => new TrackSynchronizedLyrics());
