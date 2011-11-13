@@ -29,7 +29,7 @@ namespace Gnosis.Data.SQLite
             this.typeFactory = typeFactory;
         }
 
-        private const string connectionString = "Data Source=Link.db;Version=3;";
+        private const string connectionString = "Data Source=Alexandria.db;Version=3;";
         private readonly ILinkTypeFactory typeFactory;
 
         #region Private Methods

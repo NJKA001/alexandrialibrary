@@ -65,7 +65,7 @@ namespace Gnosis.Alexandria.Views
                 taskController = new TaskController(logger);
 
                 taskManagerView.Initialize(logger, spiderFactory, taskController);
-                searchView.Initialize(logger, mediaDetailRepository, taskController);
+                searchView.Initialize(logger, mediaDetailRepository, tagRepository, taskController);
             }
             catch (Exception ex)
             {

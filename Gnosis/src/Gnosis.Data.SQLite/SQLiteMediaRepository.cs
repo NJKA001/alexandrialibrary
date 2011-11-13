@@ -19,7 +19,7 @@ namespace Gnosis.Data.SQLite
         {
         }
 
-        private const string connectionString = "Data Source=Media.db;Version=3;";
+        private const string connectionString = "Data Source=Alexandria.db;Version=3;";
         private readonly IMediaFactory factory = new MediaFactory();
 
         private IEnumerable<IMedia> GetMedia(ICommandBuilder builder)

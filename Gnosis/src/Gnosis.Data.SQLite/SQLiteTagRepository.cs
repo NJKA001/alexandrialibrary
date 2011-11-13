@@ -33,7 +33,7 @@ namespace Gnosis.Data.SQLite
             this.typeFactory = typeFactory;
         }
 
-        private const string connectionString = "Data Source=Tag.db;Version=3;";
+        private const string connectionString = "Data Source=Alexandria.db;Version=3;";
         private readonly ITagTypeFactory typeFactory;
 
         #region Private Methods
@@ -94,6 +94,64 @@ namespace Gnosis.Data.SQLite
             var value = type.Domain.GetValue(TagTuple.FromArray(values));
 
             return new Tag(target, type, value, id);
+        }
+
+        private IEnumerable<IArtistSummary> GetArtists(ICommandBuilder builder)
+        {
+            IDbConnection connection = null;
+            var artists = new List<IArtistSummary>();
+
+            try
+            {
+                connection = GetConnection();
+
+                var command = builder.ToCommand(connection);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var artist = ReadArtist(reader);
+                        artists.Add(artist);
+                    }
+                }
+
+                return artists;
+            }
+            finally
+            {
+                if (defaultConnection == null && connection != null)
+                    connection.Close();
+            }
+        }
+
+        private IArtistSummary ReadArtist(IDataRecord record)
+        {
+            var image = record.GetUri("Image");
+
+            var type = record.GetInt32Lookup<ITagType>("Type", typeId => typeFactory.Create(typeId));
+            var length = type.Domain.BaseTypes.Length;
+            object[] values = new object[length];
+
+            for (var i = 0; i < length; i++)
+            {
+                var columnName = string.Format("Value{0}", i + 1);
+                if (type.Domain.BaseTypes[i] == null)
+                    values[i] = null;
+                else if (type.Domain.BaseTypes[i] == typeof(byte[]))
+                    values[i] = record.GetBytes(columnName);
+                else if (type.Domain.BaseTypes[i] == typeof(uint))
+                    values[i] = record.GetUInt32(columnName);
+                else if (type.Domain.BaseTypes[i] == typeof(string))
+                    values[i] = record.GetString(columnName);
+                else
+                    values[i] = record[columnName];
+
+            }
+
+            var name = TagTuple.FromArray(values).ToString();
+
+            return new ArtistSummary(name, image);
         }
 
         private IEnumerable<ITag> GetId3v1SimpleGenreTags(IAlgorithm algorithm, string pattern)
@@ -312,6 +370,34 @@ namespace Gnosis.Data.SQLite
             }
         }
 
+        public IEnumerable<IArtistSummary> GetArtists(string pattern)
+        {
+            if (pattern == null)
+                throw new ArgumentNullException("pattern");
+
+            try
+            {
+                var builder = new CommandBuilder();
+                builder.Append("select t.Type, t.Value1, t.Value2, t.Value3, t.Value4, t.Value5, t.Value6, t.Value7, l.Target as Image");
+                builder.Append(" from Tag t left outer join Link l on t.Target = l.Source and l.Type = @LinkType");
+                builder.Append(" where t.Algorithm = @Algorithm and t.Domain = @Domain and (t.Value1 like @Pattern or t.Value2 like @Pattern");
+                builder.Append(" or t.Value3 like @Pattern or t.Value4 like @Pattern or t.Value5 like @Pattern");
+                builder.Append(" or t.Value6 like @Pattern or t.Value7 like @Pattern);");
+                builder.AddParameter("@Algorithm", Algorithms.Algorithm.Default.Id);
+                builder.AddParameter("@Domain", TagDomain.StringArray.Id);
+                builder.AddParameter("@LinkType", Gnosis.Links.LinkType.ArtistThumbnail.Id);
+                builder.AddParameter("@Pattern", pattern);
+
+                return GetArtists(builder);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  GetArtists", ex);
+                throw;
+            }
+        }
+
+        /*
         private void StartSearch(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             var options = e.Argument as SearchOptions;
@@ -382,6 +468,7 @@ namespace Gnosis.Data.SQLite
             public Action<IEnumerable<ITag>> TagCallback { get; set; }
             public Action CompletedCallback { get; set; }
         }
+        */
 
         public ITask<IEnumerable<ITag>> Search(IAlgorithm algorithm, string pattern)
         {

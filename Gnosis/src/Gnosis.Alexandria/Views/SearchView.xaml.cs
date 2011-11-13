@@ -14,8 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-using Gnosis.Tags;
-using Gnosis.Tags.Id3.Id3v2;
+//using Gnosis.Tags;
+//using Gnosis.Tags.Id3.Id3v2;
+using Gnosis.Tasks;
 using Gnosis.Alexandria.Controllers;
 using Gnosis.Alexandria.ViewModels;
 
@@ -32,18 +33,37 @@ namespace Gnosis.Alexandria.Views
         }
 
         private ILogger logger;
+        private ITagRepository tagRepository;
         private IMediaDetailRepository repository;
         private ITaskController taskController;
-        //private readonly ObservableCollection<IMediaDetailViewModel> viewModels = new ObservableCollection<IMediaDetailViewModel>();
-        //private readonly IDictionary<int, IDictionary<string, IList<string>>> resultsByType = new Dictionary<int, IDictionary<string, IList<string>>>();
         private readonly IDictionary<string, ArtistSearchResultViewModel> artistResults = new Dictionary<string, ArtistSearchResultViewModel>();
 
-        private void AddAlbumViewModel(ArtistSearchResultViewModel artistResult, IMediaDetail detail)
+        private void AddResult(ISearchResultViewModel result)
         {
-            //var existing = artistResult.Albums.Where(x => x.Title == d
+            Dispatcher.Invoke(new Action(() => searchResultView.AddViewModel(result)), DispatcherPriority.DataBind);
         }
 
-        private void HandleSearchResults(IEnumerable<IMediaDetail> results)
+        private void HandleSearchResults(IEnumerable<IArtistSummary> artists)
+        {
+            foreach (var artist in artists)
+            {
+                var key = artist.Name.ToLower().Replace("\r\n", " ").Replace("\n", " ");
+                if (!artistResults.ContainsKey(key))
+                {
+                    var name = artist.Name.Replace("\r\n", " ").Replace("\n", " ");
+                    IImage image = artist.Image != null ? new Gnosis.Image.JpegImage(artist.Image) : null;
+                    var artistViewModel = new ArtistViewModel(name, DateTime.MinValue, DateTime.MaxValue, image, string.Empty);
+                    var artistResult = new ArtistSearchResultViewModel(artistViewModel);
+                    artistResults[key] = artistResult;
+
+                    AddResult(artistResult);
+                }
+            }
+        }
+
+
+        /*
+        private void HandleSearchResultsOld2(IEnumerable<IMediaDetail> results)
         {
             try
             {
@@ -75,9 +95,10 @@ namespace Gnosis.Alexandria.Views
                 logger.Error("  HandleSearchResults", ex);
             }
         }
+        */
 
         /*
-        private void HandleSearchResultsOld(IEnumerable<IMediaDetail> results)
+        private void HandleSearchResultsOld1(IEnumerable<IMediaDetail> results)
         {
             try
             {
@@ -164,7 +185,10 @@ namespace Gnosis.Alexandria.Views
                 if (string.IsNullOrEmpty(search))
                     return;
 
-                var task = repository.Search(search + "%");
+                //var task = repository.Search(search + "%");
+                //task.AddResultsCallback(results => HandleSearchResults(results));
+
+                var task = new ArtistSearchTask(logger, tagRepository, search + "%");
                 task.AddResultsCallback(results => HandleSearchResults(results));
                 var taskViewModel = new SearchTaskViewModel(logger, task, search);
                 taskController.AddTask(taskViewModel);
@@ -197,17 +221,20 @@ namespace Gnosis.Alexandria.Views
             DoSearch();
         }
 
-        public void Initialize(ILogger logger, IMediaDetailRepository repository, ITaskController taskController)
+        public void Initialize(ILogger logger, IMediaDetailRepository repository, ITagRepository tagRepository, ITaskController taskController)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
             if (repository == null)
                 throw new ArgumentNullException("repository");
+            if (tagRepository == null)
+                throw new ArgumentNullException("tagRepository:");
             if (taskController == null)
                 throw new ArgumentNullException("taskController");
 
             this.logger = logger;
             this.repository = repository;
+            this.tagRepository = tagRepository;
             this.taskController = taskController;
 
             try

@@ -96,8 +96,11 @@
     <Compile Include="Application\Vendor\MicrosoftShortcut.cs" />
     <Compile Include="Application\UnknownApplication.cs" />
     <Compile Include="Application\Xml\XmlDtdDocument.cs" />
+    <Compile Include="ArtistSummary.cs" />
     <Compile Include="Audio\AudioBase.cs" />
+    <Compile Include="IAlbumSummary.cs" />
     <Compile Include="IApplicationRunner.cs" />
+    <Compile Include="IArtistSummary.cs" />
     <Compile Include="IAudio.cs" />
     <Compile Include="Audio\IMpegAudio.cs" />
     <Compile Include="Audio\MpegAudio.cs" />
@@ -256,6 +259,7 @@
     <Compile Include="Tags\Id3\Id3v2\Id3v2TagType.cs" />
     <Compile Include="IAlgorithm.cs" />
     <Compile Include="ILink.cs" />
+    <Compile Include="Tasks\ArtistSearchTask.cs" />
     <Compile Include="Tasks\CatalogMediaTask.cs" />
     <Compile Include="Tasks\MediaDetailSearchTask.cs" />
     <Compile Include="Tasks\TagSearchTask.cs" />
