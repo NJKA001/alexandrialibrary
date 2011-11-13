@@ -9,14 +9,74 @@ namespace Gnosis.Data.SQLite
     public class SQLiteTrackRepository
         : SQLiteRepositoryBase, ITrackRepository
     {
-        public SQLiteTrackRepository(ILogger logger)
+        public SQLiteTrackRepository(ILogger logger, IMediaFactory mediaFactory)
             : base(logger)
         {
+            if (mediaFactory == null)
+                throw new ArgumentNullException("mediaFactory");
+
+            this.mediaFactory = mediaFactory;
         }
 
-        public SQLiteTrackRepository(ILogger logger, IDbConnection defaultConnection)
+        public SQLiteTrackRepository(ILogger logger, IMediaFactory mediaFactory, IDbConnection defaultConnection)
             : base(logger, defaultConnection)
         {
+            if (mediaFactory == null)
+                throw new ArgumentNullException("mediaFactory");
+
+            this.mediaFactory = mediaFactory;
+        }
+
+        private readonly IMediaFactory mediaFactory;
+
+        private IEnumerable<ITrack> GetTracks(ICommandBuilder builder)
+        {
+            IDbConnection connection = null;
+            var tracks = new List<ITrack>();
+
+            try
+            {
+                connection = GetConnection();
+
+                var command = builder.ToCommand(connection);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var track = ReadTrack(reader);
+                        tracks.Add(track);
+                    }
+                }
+
+                return tracks;
+            }
+            finally
+            {
+                if (defaultConnection == null && connection != null)
+                    connection.Close();
+            }
+        }
+
+        private ITrack ReadTrack(IDataRecord record)
+        {
+            var id = record.GetGuid("Id");
+            var title = record.GetString("Title");
+            var number = record.GetUInt32("Number");
+            var duration = TimeSpan.FromMilliseconds((double)record.GetInt32("Duration"));
+            var artist = record.GetGuid("Artist");
+            var artistName = record.GetString("ArtistName");
+            var album = record.GetGuid("Album");
+            var albumTitle = record.GetString("AlbumTitle");
+            var audioLocation = record.GetUri("AudioLocation");
+            var audioType = record.GetStringLookup<IMediaType>("AudioType", typeName => MediaType.Parse(typeName));
+            var thumbnailLocation = record.GetUri("ThumbnailLocation");
+            var thumbnailType = record.GetStringLookup<IMediaType>("ThumbnailType", typeName => MediaType.Parse(typeName));
+            var thumbnail = (thumbnailLocation != null && thumbnailType != null) ?
+                mediaFactory.Create(thumbnailLocation, thumbnailType) as IImage
+                : (IImage)null;
+
+            return new Track(title, number, duration, artist, artistName, album, albumTitle, audioLocation, audioType, thumbnail);
         }
 
         public void Initialize()
@@ -119,17 +179,50 @@ namespace Gnosis.Data.SQLite
 
         public ITrack GetById(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var builder = new CommandBuilder("select * from Track where Id = @Id;");
+                builder.AddParameter("@Id", id.ToString());
+
+                return GetTracks(builder).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  GetById", ex);
+                throw;
+            }
         }
 
         public IEnumerable<ITrack> GetByAlbum(Guid album)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var builder = new CommandBuilder("select * from Track where Album = @Album order by Number;");
+                builder.AddParameter("@Album", album.ToString());
+
+                return GetTracks(builder);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  GetByAlbum", ex);
+                throw;
+            }
         }
 
         public IEnumerable<ITrack> GetByTitle(string pattern)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var builder = new CommandBuilder("select * from Track where Title like @Title order by Title;");
+                builder.AddParameter("@Title", pattern);
+
+                return GetTracks(builder);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  GetByTitle", ex);
+                throw;
+            }
         }
     }
 }
