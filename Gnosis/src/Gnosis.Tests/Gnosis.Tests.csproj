@@ -98,7 +98,7 @@
     <Compile Include="Application\Xml\XspfTests.cs" />
     <Compile Include="Application\Xml\AtomTests.cs" />
     <Compile Include="Media\CharacterSetTests.cs" />
-    <Compile Include="Media\ContentTypeTests.cs" />
+    <Compile Include="Network\RemoteContentTypeTests.cs" />
     <Compile Include="Geography\CountryTests.cs" />
     <Compile Include="Culture\LanguageTagTests.cs" />
     <Compile Include="Culture\LanguageTests.cs" />
@@ -106,6 +106,9 @@
     <Compile Include="Media\MediaTypeTests.cs" />
     <Compile Include="Geography\RegionTests.cs" />
     <Compile Include="Media\MediaFactoryTests.cs" />
+    <Compile Include="Network\RemoteAtomTests.cs" />
+    <Compile Include="Network\RemoteMediaTypeTests.cs" />
+    <Compile Include="Network\RemoteRssTests.cs" />
     <Compile Include="Performance\TagPerformanceTests.cs" />
     <Compile Include="Spiders\CatalogSpiderTests.cs" />
     <Compile Include="Time\Rfc822DateTimeTests.cs" />

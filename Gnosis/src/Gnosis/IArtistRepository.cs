@@ -12,6 +12,6 @@ namespace Gnosis
         void Delete(IEnumerable<Guid> artists);
 
         IArtist GetById(Guid id);
-        IEnumerable<IArtist> GetByName(string pattern);
+        IEnumerable<IArtist> GetByName(string name);
     }
 }

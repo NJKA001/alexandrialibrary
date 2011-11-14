@@ -11,6 +11,6 @@ namespace Gnosis
         string Name { get; }
         DateTime ActiveFrom { get; }
         DateTime ActiveTo { get; }
-        IImage Thumbnail { get; }
+        Uri Thumbnail { get; }
     }
 }

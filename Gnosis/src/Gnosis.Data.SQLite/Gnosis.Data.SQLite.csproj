@@ -90,6 +90,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SQLiteAlbumRepository.cs" />
+    <Compile Include="SQLiteArtistRepository.cs" />
     <Compile Include="SQLiteConnectionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLiteLinkRepository.cs" />

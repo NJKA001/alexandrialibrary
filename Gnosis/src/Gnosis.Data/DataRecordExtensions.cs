@@ -59,7 +59,10 @@ namespace Gnosis.Data
 
         public static string GetString(this IDataRecord record, string name)
         {
-            return record[name].ToString();
+            var value = record[name];
+            return (value != null) ?
+                value.ToString()
+                : null;
         }
 
         public static T GetStringLookup<T>(this IDataRecord record, string name, Func<string, T> lookup)
@@ -79,7 +82,10 @@ namespace Gnosis.Data
 
         public static Uri GetUri(this IDataRecord record, string name)
         {
-            return new Uri(record[name].ToString(), UriKind.RelativeOrAbsolute);
+            var value = record[name];
+            return (value != null) ?
+                new Uri(value.ToString(), UriKind.RelativeOrAbsolute)
+                : null;
         }
 
         public static T GetUriLookup<T>(this IDataRecord record, string name, Func<Uri, T> lookup)

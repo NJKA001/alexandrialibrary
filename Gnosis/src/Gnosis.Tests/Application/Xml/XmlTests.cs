@@ -200,14 +200,5 @@ namespace Gnosis.Tests.Application.Xml
             var xml = XmlElement.Parse(output);
             MakeArsXmlAssertions(xml);
         }
-
-        [Test]
-        public void CanBeParsedFromRemoteAtomResource()
-        {
-            var location = new Uri("http://bblfish.net/blog/blog.atom");
-
-            var xml = XmlElement.Parse(location);
-            Assert.IsNotNull(xml);
-        }
     }
 }

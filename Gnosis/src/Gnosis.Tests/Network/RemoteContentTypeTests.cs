@@ -5,7 +5,7 @@ using System.Text;
 
 using NUnit.Framework;
 
-namespace Gnosis.Tests.Media
+namespace Gnosis.NetworkTests
 {
     [TestFixture]
     public class ContentTypeItems

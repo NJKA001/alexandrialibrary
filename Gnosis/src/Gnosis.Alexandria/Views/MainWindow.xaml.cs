@@ -56,11 +56,20 @@ namespace Gnosis.Alexandria.Views
                 tagRepository = new SQLiteTagRepository(logger, tagTypeFactory);
                 tagRepository.Initialize();
 
+                artistRepository = new SQLiteArtistRepository(logger);
+                artistRepository.Initialize();
+
+                albumRepository = new SQLiteAlbumRepository(logger);
+                albumRepository.Initialize();
+
+                trackRepository = new SQLiteTrackRepository(logger);
+                trackRepository.Initialize();
+
                 mediaDetailRepository = new SQLiteMediaDetailRepository(logger, tagRepository, linkRepository);
 
-                catalogController = new CatalogController(logger, mediaFactory, mediaRepository, linkRepository, tagRepository);
+                catalogController = new CatalogController(logger, mediaFactory, mediaRepository, linkRepository, tagRepository, artistRepository, albumRepository, trackRepository);
                 mediaController = new MediaController(logger, mediaDetailRepository);
-                spiderFactory = new SpiderFactory(logger, mediaFactory, linkRepository, tagRepository, mediaRepository);
+                spiderFactory = new SpiderFactory(logger, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository);
 
                 taskController = new TaskController(logger);
 
@@ -82,6 +91,9 @@ namespace Gnosis.Alexandria.Views
         private readonly IMediaDetailRepository mediaDetailRepository;
         private readonly ILinkRepository linkRepository;
         private readonly ITagRepository tagRepository;
+        private readonly IArtistRepository artistRepository;
+        private readonly IAlbumRepository albumRepository;
+        private readonly ITrackRepository trackRepository;
 
         private readonly SpiderFactory spiderFactory;
         private readonly ICatalogController catalogController;

@@ -13,6 +13,6 @@ namespace Gnosis
 
         IAlbum GetById(Guid id);
         IEnumerable<IAlbum> GetByArtist(Guid artist);
-        IEnumerable<IAlbum> GetByTitle(string pattern);
+        IEnumerable<IAlbum> GetByTitle(string title);
     }
 }

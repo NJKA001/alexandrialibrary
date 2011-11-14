@@ -24,38 +24,61 @@ namespace Gnosis.Tests.Spiders
         {
         }
 
+        private const string connectionString = "Data Source=:memory:;Version=3;";
+
         private IConnectionFactory connectionFactory = new SQLiteConnectionFactory();
         private ILogger logger = new DebugLogger();
         private ITagRepository tagRepository;
         private ILinkRepository linkRepository;
         private IMediaRepository mediaRepository;
+        private IArtistRepository artistRepository;
+        private IAlbumRepository albumRepository;
+        private ITrackRepository trackRepository;
         private IMediaFactory mediaFactory = new MediaFactory();
         private ILinkTypeFactory linkTypeFactory = new LinkTypeFactory();
         private ITagTypeFactory tagTypeFactory = new TagTypeFactory();
         private IDbConnection linkConnection;
         private IDbConnection tagConnection;
         private IDbConnection mediaConnection;
+        private IDbConnection artistConnection;
+        private IDbConnection albumConnection;
+        private IDbConnection trackConnection;
         private CatalogSpider spider;
 
         [TestFixtureSetUp]
         public void SetUp()
         {
-            linkConnection = connectionFactory.Create("Data Source=:memory:;Version=3;");
+            linkConnection = connectionFactory.Create(connectionString);
             linkConnection.Open();
             linkRepository = new SQLiteLinkRepository(logger, linkTypeFactory, linkConnection);
             linkRepository.Initialize();
 
-            tagConnection = connectionFactory.Create("Data Source=:memory:;Version=3;");
+            tagConnection = connectionFactory.Create(connectionString);
             tagConnection.Open();
             tagRepository = new SQLiteTagRepository(logger, tagTypeFactory, tagConnection);
             tagRepository.Initialize();
 
-            mediaConnection = connectionFactory.Create("Data Source=:memory:;Version=3;");
+            mediaConnection = connectionFactory.Create(connectionString);
             mediaConnection.Open();
             mediaRepository = new SQLiteMediaRepository(logger, mediaConnection);
             mediaRepository.Initialize();
 
-            spider = new CatalogSpider(logger, mediaFactory, linkRepository, tagRepository, mediaRepository);
+            artistConnection = connectionFactory.Create(connectionString);
+            artistConnection.Open();
+            artistRepository = new SQLiteArtistRepository(logger, artistConnection);
+            artistRepository.Initialize();
+
+            albumConnection = connectionFactory.Create(connectionString);
+            albumConnection.Open();
+            albumRepository = new SQLiteAlbumRepository(logger, albumConnection);
+            albumRepository.Initialize();
+
+            trackConnection = connectionFactory.Create(connectionString);
+            trackConnection.Open();
+            trackRepository = new SQLiteTrackRepository(logger, trackConnection);
+            trackRepository.Initialize();
+
+            spider = new CatalogSpider(logger, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository);
         }
 
         [TestFixtureTearDown]
@@ -64,6 +87,9 @@ namespace Gnosis.Tests.Spiders
             linkConnection.Close();
             tagConnection.Close();
             mediaConnection.Close();
+            artistConnection.Close();
+            albumConnection.Close();
+            trackConnection.Close();
         }
 
         [Test]

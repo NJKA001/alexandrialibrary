@@ -12,7 +12,7 @@ namespace Gnosis.Spiders
     public class CatalogSpider
         : ISpider
     {
-        public CatalogSpider(ILogger logger, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository)
+        public CatalogSpider(ILogger logger, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IArtistRepository artistRepository, IAlbumRepository albumRepository, ITrackRepository trackRepository)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -24,15 +24,24 @@ namespace Gnosis.Spiders
                 throw new ArgumentNullException("tagRepository");
             if (mediaRepository == null)
                 throw new ArgumentNullException("mediaRepository");
+            if (artistRepository == null)
+                throw new ArgumentNullException("artistRepository");
+            if (albumRepository == null)
+                throw new ArgumentNullException("albumRepository");
+            if (trackRepository == null)
+                throw new ArgumentNullException("trackRepository");
 
             this.logger = logger;
             this.mediaFactory = mediaFactory;
             this.linkRepository = linkRepository;
             this.tagRepository = tagRepository;
             this.mediaRepository = mediaRepository;
+            this.artistRepository = artistRepository;
+            this.albumRepository = albumRepository;
+            this.trackRepository = trackRepository;
 
             Delay = TimeSpan.Zero;
-            MaxErrors = 100;
+            MaxErrors = 0;
         }
 
         private readonly ILogger logger;
@@ -40,6 +49,9 @@ namespace Gnosis.Spiders
         private readonly ILinkRepository linkRepository;
         private readonly ITagRepository tagRepository;
         private readonly IMediaRepository mediaRepository;
+        private readonly IArtistRepository artistRepository;
+        private readonly IAlbumRepository albumRepository;
+        private readonly ITrackRepository trackRepository;
 
         public TimeSpan Delay
         {

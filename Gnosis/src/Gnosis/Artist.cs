@@ -8,12 +8,12 @@ namespace Gnosis
     public class Artist
         : IArtist
     {
-        public Artist(string name, DateTime activeFrom, DateTime activeTo, IImage thumbnail)
+        public Artist(string name, DateTime activeFrom, DateTime activeTo, Uri thumbnail)
             : this(name, activeFrom, activeTo, thumbnail, Guid.NewGuid())
         {
         }
 
-        public Artist(string name, DateTime activeFrom, DateTime activeTo, IImage thumbnail, Guid id)
+        public Artist(string name, DateTime activeFrom, DateTime activeTo, Uri thumbnail, Guid id)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -29,7 +29,7 @@ namespace Gnosis
         private readonly string name;
         private readonly DateTime activeFrom;
         private readonly DateTime activeTo;
-        private readonly IImage thumbnail;
+        private readonly Uri thumbnail;
 
         public Guid Id
         {
@@ -51,7 +51,7 @@ namespace Gnosis
             get { return activeTo; }
         }
 
-        public IImage Thumbnail
+        public Uri Thumbnail
         {
             get { return thumbnail; }
         }

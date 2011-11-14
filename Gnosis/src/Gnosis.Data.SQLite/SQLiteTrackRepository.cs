@@ -9,25 +9,15 @@ namespace Gnosis.Data.SQLite
     public class SQLiteTrackRepository
         : SQLiteRepositoryBase, ITrackRepository
     {
-        public SQLiteTrackRepository(ILogger logger, IMediaFactory mediaFactory)
+        public SQLiteTrackRepository(ILogger logger)
             : base(logger)
         {
-            if (mediaFactory == null)
-                throw new ArgumentNullException("mediaFactory");
-
-            this.mediaFactory = mediaFactory;
         }
 
-        public SQLiteTrackRepository(ILogger logger, IMediaFactory mediaFactory, IDbConnection defaultConnection)
+        public SQLiteTrackRepository(ILogger logger, IDbConnection defaultConnection)
             : base(logger, defaultConnection)
         {
-            if (mediaFactory == null)
-                throw new ArgumentNullException("mediaFactory");
-
-            this.mediaFactory = mediaFactory;
         }
-
-        private readonly IMediaFactory mediaFactory;
 
         private IEnumerable<ITrack> GetTracks(ICommandBuilder builder)
         {
@@ -70,11 +60,7 @@ namespace Gnosis.Data.SQLite
             var albumTitle = record.GetString("AlbumTitle");
             var audioLocation = record.GetUri("AudioLocation");
             var audioType = record.GetStringLookup<IMediaType>("AudioType", typeName => MediaType.Parse(typeName));
-            var thumbnailLocation = record.GetUri("ThumbnailLocation");
-            var thumbnailType = record.GetStringLookup<IMediaType>("ThumbnailType", typeName => MediaType.Parse(typeName));
-            var thumbnail = (thumbnailLocation != null && thumbnailType != null) ?
-                mediaFactory.Create(thumbnailLocation, thumbnailType) as IImage
-                : (IImage)null;
+            var thumbnail = record.GetUri("Thumbnail");
 
             return new Track(title, number, duration, artist, artistName, album, albumTitle, audioLocation, audioType, thumbnail);
         }
@@ -87,10 +73,11 @@ namespace Gnosis.Data.SQLite
             builder.Append("Artist text not null, ArtistName text not null, ");
             builder.Append("Album text not null, AlbumTitle text not null, ");
             builder.Append("AudioLocation text not null, AudioType text not null, ");
-            builder.AppendLine("ThumbnailLocation text, ThumbnailType text);");
+            builder.AppendLine("Thumbnail text);");
 
             builder.AppendLine("create index if not exists Track_Title on Track (Title asc);");
             builder.AppendLine("create index if not exists Track_Album on Track (Album asc);");
+            builder.AppendLine("create unique index if not exists Track_AudioLocation on Track (AudioLocation asc);");
 
             ExecuteNonQuery(builder);
         }
@@ -109,10 +96,10 @@ namespace Gnosis.Data.SQLite
                 {
                     var builder = new CommandBuilder("replace into Track (Id, Title, Number, ");
                     builder.Append("Duration, Artist, ArtistName, Album, AlbumTitle, AudioLocation, ");
-                    builder.Append("AudioType, ThumbnnailLocation, ThumbnailType) ");
-                    builder.Append("values (@Id, @Title, @Number, @Duration, @Artist, ");
+                    builder.Append("AudioType, Thumbnnail) values ");
+                    builder.Append("(@Id, @Title, @Number, @Duration, @Artist, ");
                     builder.Append("@ArtistName, @Album, @AlbumTitle, @AudioLocation, ");
-                    builder.Append("@AudioType, @ThumbnailLocation @ThumbnailType);");
+                    builder.Append("@AudioType, @Thumbnail);");
                     builder.AddParameter("@Id", track.Id.ToString());
                     builder.AddParameter("@Title", track.Title);
                     builder.AddParameter("@Number", track.Number);
@@ -123,15 +110,12 @@ namespace Gnosis.Data.SQLite
                     builder.AddParameter("@AlbumTitle", track.AlbumTitle);
                     builder.AddParameter("@AudioLocation", track.AudioLocation.ToString());
                     builder.AddParameter("@AudioType", track.AudioType.ToString());
-                    string thumbnailLocation = null;
-                    string thumbnailType = null;
-                    if (track.Thumbnail != null)
-                    {
-                        thumbnailLocation = track.Thumbnail.Location.ToString();
-                        thumbnailType = track.Thumbnail.Type.ToString();
-                    }
-                    builder.AddParameter("@ThumbnailLocation", thumbnailLocation);
-                    builder.AddParameter("@ThumbnailType", thumbnailType);
+
+                    var thumbnail = track.Thumbnail != null ?
+                        track.Thumbnail.ToString()
+                        : null;
+
+                    builder.AddParameter("@Thumbnail", thumbnail);
                     
                     builders.Add(builder);
                 }
@@ -193,6 +177,25 @@ namespace Gnosis.Data.SQLite
             }
         }
 
+        public ITrack GetByAudioLocation(Uri location)
+        {
+            if (location == null)
+                throw new ArgumentNullException("location");
+
+            try
+            {
+                var builder = new CommandBuilder("select * from Track where AudioLocation like @Location;");
+                builder.AddParameter("@Location", location.ToString());
+
+                return GetTracks(builder).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  GetByAudioLocation", ex);
+                throw;
+            }
+        }
+
         public IEnumerable<ITrack> GetByAlbum(Guid album)
         {
             try
@@ -209,12 +212,15 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<ITrack> GetByTitle(string pattern)
+        public IEnumerable<ITrack> GetByTitle(string title)
         {
+            if (title == null)
+                throw new ArgumentNullException("title");
+
             try
             {
                 var builder = new CommandBuilder("select * from Track where Title like @Title order by Title;");
-                builder.AddParameter("@Title", pattern);
+                builder.AddParameter("@Title", title);
 
                 return GetTracks(builder);
             }

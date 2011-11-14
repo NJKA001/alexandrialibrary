@@ -12,7 +12,8 @@ namespace Gnosis
         void Delete(IEnumerable<Guid> tracks);
 
         ITrack GetById(Guid id);
+        ITrack GetByAudioLocation(Uri location);
         IEnumerable<ITrack> GetByAlbum(Guid album);
-        IEnumerable<ITrack> GetByTitle(string pattern);
+        IEnumerable<ITrack> GetByTitle(string title);
     }
 }

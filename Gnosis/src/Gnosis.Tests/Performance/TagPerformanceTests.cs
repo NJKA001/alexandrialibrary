@@ -11,7 +11,7 @@ using Gnosis.Utilities;
 using Gnosis.Data;
 using Gnosis.Data.SQLite;
 
-namespace Gnosis.Tests.Performance
+namespace Gnosis.PerformanceTests
 {
     public abstract class TagPerformanceTestBase
     {

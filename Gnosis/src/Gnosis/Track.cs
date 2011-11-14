@@ -8,12 +8,12 @@ namespace Gnosis
     public class Track
         : ITrack
     {
-        public Track(string title, uint number, TimeSpan duration, Guid artist, string artistName, Guid album, string albumTitle, Uri audioLocation, IMediaType audioType, IImage thumbnail)
+        public Track(string title, uint number, TimeSpan duration, Guid artist, string artistName, Guid album, string albumTitle, Uri audioLocation, IMediaType audioType, Uri thumbnail)
             : this(title, number, duration, artist, artistName, album, albumTitle, audioLocation, audioType, thumbnail, Guid.NewGuid())
         {
         }
 
-        public Track(string title, uint number, TimeSpan duration, Guid artist, string artistName, Guid album, string albumTitle, Uri audioLocation, IMediaType audioType, IImage thumbnail, Guid id)
+        public Track(string title, uint number, TimeSpan duration, Guid artist, string artistName, Guid album, string albumTitle, Uri audioLocation, IMediaType audioType, Uri thumbnail, Guid id)
         {
             if (title == null)
                 throw new ArgumentNullException("title");
@@ -49,7 +49,7 @@ namespace Gnosis
         private readonly string albumTitle;
         private readonly Uri audioLocation;
         private readonly IMediaType audioType;
-        private readonly IImage thumbnail;
+        private readonly Uri thumbnail;
 
         public Guid Id
         {
@@ -101,7 +101,7 @@ namespace Gnosis
             get { return audioType; }
         }
 
-        public IImage Thumbnail
+        public Uri Thumbnail
         {
             get { return thumbnail; }
         }

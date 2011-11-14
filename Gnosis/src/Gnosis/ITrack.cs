@@ -19,6 +19,6 @@ namespace Gnosis
         
         Uri AudioLocation { get; }
         IMediaType AudioType { get; }
-        IImage Thumbnail { get; }
+        Uri Thumbnail { get; }
     }
 }

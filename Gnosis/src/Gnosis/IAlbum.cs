@@ -14,6 +14,6 @@ namespace Gnosis
         Guid Artist { get; }
         string ArtistName { get; }
         
-        IImage Thumbnail { get; }
+        Uri Thumbnail { get; }
     }
 }
