@@ -116,7 +116,6 @@
     <Compile Include="IHasRange.cs" />
     <Compile Include="ILoopable.cs" />
     <Compile Include="IMediaFormat.cs" />
-    <Compile Include="IMediaPlayer.cs" />
     <Compile Include="IMediaStream.cs" />
     <Compile Include="InputDsp.cs" />
     <Compile Include="InputDspCollection.cs" />

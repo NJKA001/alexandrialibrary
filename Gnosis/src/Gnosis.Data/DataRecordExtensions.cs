@@ -83,7 +83,7 @@ namespace Gnosis.Data
         public static Uri GetUri(this IDataRecord record, string name)
         {
             var value = record[name];
-            return (value != null) ?
+            return (value != null && value != DBNull.Value && value.ToString() != string.Empty) ?
                 new Uri(value.ToString(), UriKind.RelativeOrAbsolute)
                 : null;
         }

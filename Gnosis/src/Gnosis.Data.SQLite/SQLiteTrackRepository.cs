@@ -73,7 +73,7 @@ namespace Gnosis.Data.SQLite
             builder.Append("Artist text not null, ArtistName text not null, ");
             builder.Append("Album text not null, AlbumTitle text not null, ");
             builder.Append("AudioLocation text not null, AudioType text not null, ");
-            builder.AppendLine("Thumbnail text);");
+            builder.AppendLine("Thumbnail text not null);");
 
             builder.AppendLine("create index if not exists Track_Title on Track (Title asc);");
             builder.AppendLine("create index if not exists Track_Album on Track (Album asc);");
@@ -96,11 +96,11 @@ namespace Gnosis.Data.SQLite
                 {
                     var builder = new CommandBuilder("replace into Track (Location, Title, Number, ");
                     builder.Append("Duration, Artist, ArtistName, Album, AlbumTitle, AudioLocation, ");
-                    builder.Append("AudioType, Thumbnnail) values ");
+                    builder.Append("AudioType, Thumbnail) values ");
                     builder.Append("(@Location, @Title, @Number, @Duration, @Artist, ");
                     builder.Append("@ArtistName, @Album, @AlbumTitle, @AudioLocation, ");
                     builder.Append("@AudioType, @Thumbnail);");
-                    builder.AddParameter("@Id", track.Location.ToString());
+                    builder.AddParameter("@Location", track.Location.ToString());
                     builder.AddParameter("@Title", track.Title);
                     builder.AddParameter("@Number", track.Number);
                     builder.AddParameter("@Duration", track.Duration.TotalMilliseconds);
@@ -111,10 +111,7 @@ namespace Gnosis.Data.SQLite
                     builder.AddParameter("@AudioLocation", track.AudioLocation.ToString());
                     builder.AddParameter("@AudioType", track.AudioType.ToString());
 
-                    var thumbnail = track.Thumbnail != null ?
-                        track.Thumbnail.ToString()
-                        : null;
-
+                    var thumbnail = track.Thumbnail != null ? track.Thumbnail.ToString() : string.Empty;
                     builder.AddParameter("@Thumbnail", thumbnail);
                     
                     builders.Add(builder);
@@ -141,9 +138,6 @@ namespace Gnosis.Data.SQLite
             {
                 var builders = new List<ICommandBuilder>();
 
-                if (builders.Count == 0)
-                    return;
-
                 foreach (var location in tracks)
                 {
                     var builder = new CommandBuilder("delete from Track where Location = @Location;");
@@ -151,6 +145,9 @@ namespace Gnosis.Data.SQLite
 
                     builders.Add(builder);
                 }
+
+                if (builders.Count == 0)
+                    return;
 
                 ExecuteTransaction(builders);
             }
@@ -187,7 +184,7 @@ namespace Gnosis.Data.SQLite
 
             try
             {
-                var builder = new CommandBuilder("select * from Track where AudioLocation like @Location;");
+                var builder = new CommandBuilder("select * from Track where AudioLocation = @Location;");
                 builder.AddParameter("@Location", location.ToString());
 
                 return GetTracks(builder).FirstOrDefault();

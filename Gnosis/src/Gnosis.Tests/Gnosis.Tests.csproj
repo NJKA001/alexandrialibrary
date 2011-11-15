@@ -89,6 +89,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Unit\Audio\MpegAudioTests.cs" />
+    <Compile Include="Unit\Data\SQLite\ArtistTests.cs" />
+    <Compile Include="Unit\Data\SQLite\AlbumTests.cs" />
+    <Compile Include="Unit\Data\SQLite\TrackTests.cs" />
     <Compile Include="Unit\Extensions\StringExtensionTests.cs" />
     <Compile Include="Unit\Data\Firebird\FirebirdTests.cs" />
     <Compile Include="Unit\Data\SQLite\LinkTests.cs" />

@@ -6,7 +6,6 @@ using System.Text;
 
 using NUnit.Framework;
 
-using Gnosis.Core;
 using Gnosis.Links;
 using Gnosis.Links.Html;
 using Gnosis.Utilities;

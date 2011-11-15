@@ -65,10 +65,11 @@ namespace Gnosis.Data.SQLite
             var builder = new CommandBuilder("create table if not exists Album (");
             builder.Append("Location text not null primary key, Title text not null, ");
             builder.Append("Released text not null, Artist text not null, ");
-            builder.AppendLine("ArtistName text not null, Thumbnail text);");
+            builder.AppendLine("ArtistName text not null, Thumbnail text not null);");
 
             builder.AppendLine("create index if not exists Album_Title on Album (Title asc);");
             builder.AppendLine("create index if not exists Album_Artist on Album (Artist asc);");
+            builder.AppendLine("create unique index if not exists Album_Artist_Title_Released on Album (Artist asc, Title asc, Released asc);");
 
             ExecuteNonQuery(builder);
         }
@@ -88,11 +89,11 @@ namespace Gnosis.Data.SQLite
                     builder.AppendLine("values (@Location, @Title, @Released, @Artist, @ArtistName, @Thumbnail);");
                     builder.AddParameter("@Location", album.Location.ToString());
                     builder.AddParameter("@Title", album.Title);
-                    builder.AddParameter("@Released", album.Released.ToString("s"));
+                    builder.AddParameter("@Released", album.Released.ToString("o"));
                     builder.AddParameter("@Artist", album.Artist.ToString());
                     builder.AddParameter("@ArtistName", album.ArtistName);
 
-                    var thumbnail = album.Thumbnail != null ? album.Thumbnail.ToString() : (string)null;
+                    var thumbnail = album.Thumbnail != null ? album.Thumbnail.ToString() : string.Empty;
                     builder.AddParameter("@Thumbnail", thumbnail);
 
                     builders.Add(builder);

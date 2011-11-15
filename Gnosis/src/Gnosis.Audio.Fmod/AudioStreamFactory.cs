@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Gnosis.Core;
 
 namespace Gnosis.Audio.Fmod
 {

@@ -64,9 +64,11 @@ namespace Gnosis.Data.SQLite
             var builder = new CommandBuilder("create table if not exists Artist (");
             builder.Append("Location text not null primary key, Name text not null, ");
             builder.Append("ActiveFrom text not null, ActiveTo text not null, ");
-            builder.AppendLine("Thumbnail text);");
+            builder.AppendLine("Thumbnail text not null);");
 
-            builder.AppendLine("create index if not exists Artist_Name on Artist (Name asc);");
+            builder.AppendLine("create unique index if not exists Artist_Name on Artist (Name asc);");
+
+            ExecuteNonQuery(builder);
         }
 
         public void Save(IEnumerable<IArtist> artists)
@@ -84,12 +86,10 @@ namespace Gnosis.Data.SQLite
                     builder.AppendLine("values (@Location, @Name, @ActiveFrom, @ActiveTo, @Thumbnail);");
                     builder.AddParameter("@Location", artist.Location.ToString());
                     builder.AddParameter("@Name", artist.Name);
-                    builder.AddParameter("@ActiveFrom", artist.ActiveFrom.ToString("s"));
-                    builder.AddParameter("@ActiveTo", artist.ActiveTo.ToString("s"));
+                    builder.AddParameter("@ActiveFrom", artist.ActiveFrom.ToString("o"));
+                    builder.AddParameter("@ActiveTo", artist.ActiveTo.ToString("o"));
                     
-                    var thumbnail = artist.Thumbnail != null ?
-                        artist.Thumbnail.ToString()
-                        : null;
+                    var thumbnail = artist.Thumbnail != null ? artist.Thumbnail.ToString() : string.Empty;
                     builder.AddParameter("@Thumbnail", thumbnail);
 
                     builders.Add(builder);

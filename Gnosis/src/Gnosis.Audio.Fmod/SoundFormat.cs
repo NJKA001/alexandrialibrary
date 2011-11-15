@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Net.Mime;
 using System.Text;
-using Gnosis.Core;
 
 namespace Gnosis.Audio.Fmod
 {

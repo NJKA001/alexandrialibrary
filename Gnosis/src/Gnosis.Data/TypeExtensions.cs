@@ -5,10 +5,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-//using Gnosis.Core.Ietf;
-//using Gnosis.Core.Iso;
-//using Gnosis.Core.UN;
-
 namespace Gnosis.Data
 {
     public static class TypeExtensions
