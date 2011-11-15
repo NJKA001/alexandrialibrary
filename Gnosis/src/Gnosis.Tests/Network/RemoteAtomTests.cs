@@ -9,7 +9,7 @@ using Gnosis.Application.Xml;
 using Gnosis.Application.Xml.Atom;
 using Gnosis.Culture;
 
-namespace Gnosis.NetworkTests
+namespace Gnosis.Tests.Network
 {
     [TestFixture]
     public class RemoteAtomTests

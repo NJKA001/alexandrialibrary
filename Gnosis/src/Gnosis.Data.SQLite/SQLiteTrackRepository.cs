@@ -50,25 +50,25 @@ namespace Gnosis.Data.SQLite
 
         private ITrack ReadTrack(IDataRecord record)
         {
-            var id = record.GetGuid("Id");
+            var location = record.GetUri("Location");
             var title = record.GetString("Title");
             var number = record.GetUInt32("Number");
             var duration = TimeSpan.FromMilliseconds((double)record.GetInt32("Duration"));
-            var artist = record.GetGuid("Artist");
+            var artist = record.GetUri("Artist");
             var artistName = record.GetString("ArtistName");
-            var album = record.GetGuid("Album");
+            var album = record.GetUri("Album");
             var albumTitle = record.GetString("AlbumTitle");
             var audioLocation = record.GetUri("AudioLocation");
             var audioType = record.GetStringLookup<IMediaType>("AudioType", typeName => MediaType.Parse(typeName));
             var thumbnail = record.GetUri("Thumbnail");
 
-            return new Track(title, number, duration, artist, artistName, album, albumTitle, audioLocation, audioType, thumbnail);
+            return new Track(title, number, duration, artist, artistName, album, albumTitle, audioLocation, audioType, thumbnail, location);
         }
 
         public void Initialize()
         {
             var builder = new CommandBuilder("create table if not exists Track (");
-            builder.Append("Id text not null primary key, Title text not null, "); 
+            builder.Append("Location text not null primary key, Title text not null, "); 
             builder.Append("Number integer not null, Duration integer not null, ");
             builder.Append("Artist text not null, ArtistName text not null, ");
             builder.Append("Album text not null, AlbumTitle text not null, ");
@@ -94,13 +94,13 @@ namespace Gnosis.Data.SQLite
 
                 foreach (var track in tracks)
                 {
-                    var builder = new CommandBuilder("replace into Track (Id, Title, Number, ");
+                    var builder = new CommandBuilder("replace into Track (Location, Title, Number, ");
                     builder.Append("Duration, Artist, ArtistName, Album, AlbumTitle, AudioLocation, ");
                     builder.Append("AudioType, Thumbnnail) values ");
-                    builder.Append("(@Id, @Title, @Number, @Duration, @Artist, ");
+                    builder.Append("(@Location, @Title, @Number, @Duration, @Artist, ");
                     builder.Append("@ArtistName, @Album, @AlbumTitle, @AudioLocation, ");
                     builder.Append("@AudioType, @Thumbnail);");
-                    builder.AddParameter("@Id", track.Id.ToString());
+                    builder.AddParameter("@Id", track.Location.ToString());
                     builder.AddParameter("@Title", track.Title);
                     builder.AddParameter("@Number", track.Number);
                     builder.AddParameter("@Duration", track.Duration.TotalMilliseconds);
@@ -132,7 +132,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public void Delete(IEnumerable<Guid> tracks)
+        public void Delete(IEnumerable<Uri> tracks)
         {
             if (tracks == null)
                 throw new ArgumentNullException("tracks");
@@ -144,10 +144,10 @@ namespace Gnosis.Data.SQLite
                 if (builders.Count == 0)
                     return;
 
-                foreach (var id in tracks)
+                foreach (var location in tracks)
                 {
-                    var builder = new CommandBuilder("delete from Track where Id = @Id;");
-                    builder.AddParameter("@Id", id.ToString());
+                    var builder = new CommandBuilder("delete from Track where Location = @Location;");
+                    builder.AddParameter("@Location", location.ToString());
 
                     builders.Add(builder);
                 }
@@ -161,18 +161,21 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public ITrack GetById(Guid id)
+        public ITrack GetByLocation(Uri location)
         {
+            if (location == null)
+                throw new ArgumentNullException("location");
+
             try
             {
-                var builder = new CommandBuilder("select * from Track where Id = @Id;");
-                builder.AddParameter("@Id", id.ToString());
+                var builder = new CommandBuilder("select * from Track where Location = @Location;");
+                builder.AddParameter("@Location", location.ToString());
 
                 return GetTracks(builder).FirstOrDefault();
             }
             catch (Exception ex)
             {
-                logger.Error("  GetById", ex);
+                logger.Error("  GetByLocation", ex);
                 throw;
             }
         }
@@ -196,8 +199,11 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<ITrack> GetByAlbum(Guid album)
+        public IEnumerable<ITrack> GetByAlbum(Uri album)
         {
+            if (album == null)
+                throw new ArgumentNullException("album");
+
             try
             {
                 var builder = new CommandBuilder("select * from Track where Album = @Album order by Number;");

@@ -50,19 +50,19 @@ namespace Gnosis.Data.SQLite
 
         private IArtist ReadArtist(IDataRecord record)
         {
-            var id = record.GetGuid("Id");
+            var location = record.GetUri("Location");
             var name = record.GetString("Name");
             var activeFrom = record.GetDateTime("ActiveFrom");
             var activeTo = record.GetDateTime("ActiveTo");
             var thumbnail = record.GetUri("Thumbnail");
 
-            return new Artist(name, activeFrom, activeTo, thumbnail, id);
+            return new Artist(name, activeFrom, activeTo, thumbnail, location);
         }
 
         public void Initialize()
         {
             var builder = new CommandBuilder("create table if not exists Artist (");
-            builder.Append("Id text not null primary key, Name text not null, ");
+            builder.Append("Location text not null primary key, Name text not null, ");
             builder.Append("ActiveFrom text not null, ActiveTo text not null, ");
             builder.AppendLine("Thumbnail text);");
 
@@ -80,9 +80,9 @@ namespace Gnosis.Data.SQLite
 
                 foreach (var artist in artists)
                 {
-                    var builder = new CommandBuilder("replace into Artist (Id, Name, ActiveFrom, ActiveTo, Thumbnail) ");
-                    builder.AppendLine("values (@Id, @Name, @ActiveFrom, @ActiveTo, @Thumbnail);");
-                    builder.AddParameter("@Id", artist.Id.ToString());
+                    var builder = new CommandBuilder("replace into Artist (Location, Name, ActiveFrom, ActiveTo, Thumbnail) ");
+                    builder.AppendLine("values (@Location, @Name, @ActiveFrom, @ActiveTo, @Thumbnail);");
+                    builder.AddParameter("@Location", artist.Location.ToString());
                     builder.AddParameter("@Name", artist.Name);
                     builder.AddParameter("@ActiveFrom", artist.ActiveFrom.ToString("s"));
                     builder.AddParameter("@ActiveTo", artist.ActiveTo.ToString("s"));
@@ -107,7 +107,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public void Delete(IEnumerable<Guid> artists)
+        public void Delete(IEnumerable<Uri> artists)
         {
             if (artists == null)
                 throw new ArgumentNullException("artists");
@@ -116,10 +116,10 @@ namespace Gnosis.Data.SQLite
             {
                 var builders = new List<ICommandBuilder>();
 
-                foreach (var id in artists)
+                foreach (var location in artists)
                 {
-                    var builder = new CommandBuilder("delete from Artist where Id = @Id;");
-                    builder.AddParameter("@Id", id.ToString());
+                    var builder = new CommandBuilder("delete from Artist where Location = @Location;");
+                    builder.AddParameter("@Location", location.ToString());
 
                     builders.Add(builder);
                 }
@@ -136,18 +136,21 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IArtist GetById(Guid id)
+        public IArtist GetByLocation(Uri location)
         {
+            if (location == null)
+                throw new ArgumentNullException("location");
+
             try
             {
-                var builder = new CommandBuilder("select * from Artist where Id = @Id;");
-                builder.AddParameter("@Id", id.ToString());
+                var builder = new CommandBuilder("select * from Artist where Location = @Location;");
+                builder.AddParameter("@Location", location.ToString());
 
                 return GetArtists(builder).FirstOrDefault();
             }
             catch (Exception ex)
             {
-                logger.Error("  GetById", ex);
+                logger.Error("  GetByLocation", ex);
                 throw;
             }
         }

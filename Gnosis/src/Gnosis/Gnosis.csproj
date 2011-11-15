@@ -230,6 +230,7 @@
     <Compile Include="IMediaAggregate.cs" />
     <Compile Include="IMediaDetail.cs" />
     <Compile Include="IMediaDetailRepository.cs" />
+    <Compile Include="IPlaylist.cs" />
     <Compile Include="ISpider.cs" />
     <Compile Include="IMediaSummary.cs" />
     <Compile Include="IMediaSummaryRepository.cs" />
@@ -246,6 +247,7 @@
     <Compile Include="ITextViewer.cs" />
     <Compile Include="ITrack.cs" />
     <Compile Include="ITrackRepository.cs" />
+    <Compile Include="IUser.cs" />
     <Compile Include="IVideoPlayer.cs" />
     <Compile Include="MediaAggregate.cs" />
     <Compile Include="Spiders\PlaylistSpider.cs" />

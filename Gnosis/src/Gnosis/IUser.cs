@@ -5,12 +5,9 @@ using System.Text;
 
 namespace Gnosis
 {
-    public interface IArtist
+    public interface IUser
         : IApplication
     {
         string Name { get; }
-        DateTime ActiveFrom { get; }
-        DateTime ActiveTo { get; }
-        Uri Thumbnail { get; }
     }
 }

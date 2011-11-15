@@ -9,9 +9,9 @@ namespace Gnosis
     {
         void Initialize();
         void Save(IEnumerable<IArtist> artists);
-        void Delete(IEnumerable<Guid> artists);
+        void Delete(IEnumerable<Uri> artists);
 
-        IArtist GetById(Guid id);
+        IArtist GetByLocation(Uri location);
         IEnumerable<IArtist> GetByName(string name);
     }
 }

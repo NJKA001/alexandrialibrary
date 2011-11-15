@@ -6,15 +6,15 @@ using System.Text;
 namespace Gnosis
 {
     public interface ITrack
+        : IApplication
     {
-        Guid Id { get; }
         string Title { get; }
         uint Number { get; }
         TimeSpan Duration { get; }
 
-        Guid Artist { get; }
+        Uri Artist { get; }
         string ArtistName { get; }
-        Guid Album { get; }
+        Uri Album { get; }
         string AlbumTitle { get; }
         
         Uri AudioLocation { get; }

@@ -50,20 +50,20 @@ namespace Gnosis.Data.SQLite
 
         private IAlbum ReadAlbum(IDataRecord record)
         {
-            var id = record.GetGuid("Id");
+            var location = record.GetUri("Location");
             var title = record.GetString("Title");
             var released = record.GetDateTime("Released");
-            var artist = record.GetGuid("Artist");
+            var artist = record.GetUri("Artist");
             var artistName = record.GetString("ArtistName");
             var thumbnail = record.GetUri("Thumbnail");
 
-            return new Album(title, released, artist, artistName, thumbnail, id);
+            return new Album(title, released, artist, artistName, thumbnail, location);
         }
 
         public void Initialize()
         {
             var builder = new CommandBuilder("create table if not exists Album (");
-            builder.Append("Id text not null primary key, Title text not null, ");
+            builder.Append("Location text not null primary key, Title text not null, ");
             builder.Append("Released text not null, Artist text not null, ");
             builder.AppendLine("ArtistName text not null, Thumbnail text);");
 
@@ -84,9 +84,9 @@ namespace Gnosis.Data.SQLite
 
                 foreach (var album in albums)
                 {
-                    var builder = new CommandBuilder("replace into Album (Id, Title, Released, Artist, ArtistName, Thumbnail) ");
-                    builder.AppendLine("values (@Id, @Title, @Released, @Artist, @ArtistName, @Thumbnail);");
-                    builder.AddParameter("@Id", album.Id.ToString());
+                    var builder = new CommandBuilder("replace into Album (Location, Title, Released, Artist, ArtistName, Thumbnail) ");
+                    builder.AppendLine("values (@Location, @Title, @Released, @Artist, @ArtistName, @Thumbnail);");
+                    builder.AddParameter("@Location", album.Location.ToString());
                     builder.AddParameter("@Title", album.Title);
                     builder.AddParameter("@Released", album.Released.ToString("s"));
                     builder.AddParameter("@Artist", album.Artist.ToString());
@@ -110,7 +110,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public void Delete(IEnumerable<Guid> albums)
+        public void Delete(IEnumerable<Uri> albums)
         {
             if (albums == null)
                 throw new ArgumentNullException("albums");
@@ -119,10 +119,10 @@ namespace Gnosis.Data.SQLite
             {
                 var builders = new List<ICommandBuilder>();
 
-                foreach (var id in albums)
+                foreach (var location in albums)
                 {
-                    var builder = new CommandBuilder("delete from Album where Id = @Id;");
-                    builder.AddParameter("@Id", id.ToString());
+                    var builder = new CommandBuilder("delete from Album where Location = @Location;");
+                    builder.AddParameter("@Location", location.ToString());
 
                     builders.Add(builder);
                 }
@@ -139,24 +139,30 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IAlbum GetById(Guid id)
+        public IAlbum GetByLocation(Uri location)
         {
+            if (location == null)
+                throw new ArgumentNullException("location");
+
             try
             {
-                var builder = new CommandBuilder("select * from Album where Id = @Id;");
-                builder.AddParameter("@Id", id.ToString());
+                var builder = new CommandBuilder("select * from Album where Location = @Location;");
+                builder.AddParameter("@Location", location.ToString());
 
                 return GetAlbums(builder).FirstOrDefault();
             }
             catch (Exception ex)
             {
-                logger.Error("  GetById", ex);
+                logger.Error("  GetByLocation", ex);
                 throw;
             }
         }
 
-        public IEnumerable<IAlbum> GetByArtist(Guid artist)
+        public IEnumerable<IAlbum> GetByArtist(Uri artist)
         {
+            if (artist == null)
+                throw new ArgumentNullException("artist");
+
             try
             {
                 var builder = new CommandBuilder("select * from Album where Artist = @Artist order by Released;");

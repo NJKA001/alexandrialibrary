@@ -9,11 +9,11 @@ namespace Gnosis
     {
         void Initialize();
         void Save(IEnumerable<ITrack> tracks);
-        void Delete(IEnumerable<Guid> tracks);
+        void Delete(IEnumerable<Uri> tracks);
 
-        ITrack GetById(Guid id);
+        ITrack GetByLocation(Uri location);
         ITrack GetByAudioLocation(Uri location);
-        IEnumerable<ITrack> GetByAlbum(Guid album);
+        IEnumerable<ITrack> GetByAlbum(Uri album);
         IEnumerable<ITrack> GetByTitle(string title);
     }
 }

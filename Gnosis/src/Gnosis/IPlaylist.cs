@@ -5,15 +5,14 @@ using System.Text;
 
 namespace Gnosis
 {
-    public interface IAlbum
+    public interface IPlaylist
         : IApplication
     {
         string Title { get; }
-        DateTime Released { get; }
-        
-        Uri Artist { get; }
-        string ArtistName { get; }
-        
+        DateTime Created { get; }
+        Uri Creator { get; }
+        string CreatorName { get; }
+
         Uri Thumbnail { get; }
     }
 }

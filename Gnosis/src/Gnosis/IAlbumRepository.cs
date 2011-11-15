@@ -9,10 +9,10 @@ namespace Gnosis
     {
         void Initialize();
         void Save(IEnumerable<IAlbum> albums);
-        void Delete(IEnumerable<Guid> albums);
+        void Delete(IEnumerable<Uri> albums);
 
-        IAlbum GetById(Guid id);
-        IEnumerable<IAlbum> GetByArtist(Guid artist);
+        IAlbum GetByLocation(Uri location);
+        IEnumerable<IAlbum> GetByArtist(Uri artist);
         IEnumerable<IAlbum> GetByTitle(string title);
     }
 }

@@ -8,23 +8,29 @@ namespace Gnosis
     public class Track
         : ITrack
     {
-        public Track(string title, uint number, TimeSpan duration, Guid artist, string artistName, Guid album, string albumTitle, Uri audioLocation, IMediaType audioType, Uri thumbnail)
-            : this(title, number, duration, artist, artistName, album, albumTitle, audioLocation, audioType, thumbnail, Guid.NewGuid())
+        public Track(string title, uint number, TimeSpan duration, Uri artist, string artistName, Uri album, string albumTitle, Uri audioLocation, IMediaType audioType, Uri thumbnail)
+            : this(title, number, duration, artist, artistName, album, albumTitle, audioLocation, audioType, thumbnail, Guid.NewGuid().ToUrn())
         {
         }
 
-        public Track(string title, uint number, TimeSpan duration, Guid artist, string artistName, Guid album, string albumTitle, Uri audioLocation, IMediaType audioType, Uri thumbnail, Guid id)
+        public Track(string title, uint number, TimeSpan duration, Uri artist, string artistName, Uri album, string albumTitle, Uri audioLocation, IMediaType audioType, Uri thumbnail, Uri location)
         {
             if (title == null)
                 throw new ArgumentNullException("title");
+            if (artist == null)
+                throw new ArgumentNullException("artist");
             if (artistName == null)
                 throw new ArgumentNullException("artistName");
+            if (album == null)
+                throw new ArgumentNullException("album");
             if (albumTitle == null)
                 throw new ArgumentNullException("albumTitle");
             if (audioLocation == null)
                 throw new ArgumentNullException("audioLocation");
             if (audioType == null)
                 throw new ArgumentNullException("audioType");
+            if (location == null)
+                throw new ArgumentNullException("location");
 
             this.title = title;
             this.number = number;
@@ -36,24 +42,29 @@ namespace Gnosis
             this.audioLocation = audioLocation;
             this.audioType = audioType;
             this.thumbnail = thumbnail;
-            this.id = id;
+            this.location = location;
         }
 
-        private readonly Guid id;
+        private readonly Uri location;
         private readonly string title;
         private readonly uint number;
         private readonly TimeSpan duration;
-        private readonly Guid artist;
+        private readonly Uri artist;
         private readonly string artistName;
-        private readonly Guid album;
+        private readonly Uri album;
         private readonly string albumTitle;
         private readonly Uri audioLocation;
         private readonly IMediaType audioType;
         private readonly Uri thumbnail;
 
-        public Guid Id
+        public Uri Location
         {
-            get { return id; }
+            get { return location; }
+        }
+
+        public IMediaType Type
+        {
+            get { return MediaType.ApplicationGnosisTrack; }
         }
 
         public string Title
@@ -71,7 +82,7 @@ namespace Gnosis
             get { return duration; }
         }
 
-        public Guid Artist
+        public Uri Artist
         {
             get { return artist; }
         }
@@ -81,7 +92,7 @@ namespace Gnosis
             get { return artistName; }
         }
 
-        public Guid Album
+        public Uri Album
         {
             get { return album; }
         }
@@ -104,6 +115,20 @@ namespace Gnosis
         public Uri Thumbnail
         {
             get { return thumbnail; }
+        }
+
+        public void Load()
+        {
+        }
+
+        public IEnumerable<ILink> GetLinks()
+        {
+            return Enumerable.Empty<ILink>();
+        }
+
+        public IEnumerable<ITag> GetTags()
+        {
+            return Enumerable.Empty<ITag>();
         }
     }
 }

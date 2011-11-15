@@ -5,10 +5,10 @@ using System.Text;
 
 using NUnit.Framework;
 
-namespace Gnosis.NetworkTests
+namespace Gnosis.Tests.Network
 {
     [TestFixture]
-    public class ContentTypeItems
+    public class RemoteContentTypeItems
     {
         [Test]
         public void CanBeParsedForRssFeedsWithInvalidContentType()

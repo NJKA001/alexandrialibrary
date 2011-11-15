@@ -5,7 +5,7 @@ using System.Text;
 
 using NUnit.Framework;
 
-namespace Gnosis.NetworkTests
+namespace Gnosis.Tests.Network
 {
     [TestFixture]
     public class RemoteMediaTypeTests

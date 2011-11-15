@@ -8,36 +8,45 @@ namespace Gnosis
     public class Album
         : IAlbum
     {
-        public Album(string title, DateTime released, Guid artist, string artistName, Uri thumbnail)
-            : this(title, released, artist, artistName, thumbnail, Guid.NewGuid())
+        public Album(string title, DateTime released, Uri artist, string artistName, Uri thumbnail)
+            : this(title, released, artist, artistName, thumbnail, Guid.NewGuid().ToUrn())
         {
         }
 
-        public Album(string title, DateTime released, Guid artist, string artistName, Uri thumbnail, Guid id)
+        public Album(string title, DateTime released, Uri artist, string artistName, Uri thumbnail, Uri location)
         {
             if (title == null)
                 throw new ArgumentNullException("title");
+            if (artist == null)
+                throw new ArgumentNullException("artist");
             if (artistName == null)
                 throw new ArgumentNullException("artistName");
+            if (location == null)
+                throw new ArgumentNullException("location");
 
             this.title = title;
             this.released = released;
             this.artist = artist;
             this.artistName = artistName;
             this.thumbnail = thumbnail;
-            this.id = id;
+            this.location = location;
         }
 
-        private readonly Guid id;
+        private readonly Uri location;
         private readonly string title;
         private readonly DateTime released;
-        private readonly Guid artist;
+        private readonly Uri artist;
         private readonly string artistName;
         private readonly Uri thumbnail;
 
-        public Guid Id
+        public Uri Location
         {
-            get { return id; }
+            get { return location; }
+        }
+
+        public IMediaType Type
+        {
+            get { return MediaType.ApplicationGnosisAlbum; }
         }
 
         public string Title
@@ -50,7 +59,7 @@ namespace Gnosis
             get { return released; }
         }
 
-        public Guid Artist
+        public Uri Artist
         {
             get { return artist; }
         }
@@ -63,6 +72,20 @@ namespace Gnosis
         public Uri Thumbnail
         {
             get { return thumbnail; }
+        }
+
+        public void Load()
+        {
+        }
+
+        public IEnumerable<ILink> GetLinks()
+        {
+            return Enumerable.Empty<ILink>();
+        }
+
+        public IEnumerable<ITag> GetTags()
+        {
+            return Enumerable.Empty<ITag>();
         }
     }
 }
