@@ -5,20 +5,26 @@ using System.Text;
 
 namespace Gnosis
 {
-    public interface ITrack
+    public interface ICut
         : IApplication
     {
         string Title { get; }
-        uint Number { get; }
+        int Sequence { get; }
         TimeSpan Duration { get; }
+
+        Uri Playlist { get; }
+        string PlaylistTitle { get; }
 
         Uri Creator { get; }
         string CreatorName { get; }
         Uri Album { get; }
         string AlbumTitle { get; }
-        
-        Uri AudioLocation { get; }
-        IMediaType AudioType { get; }
+
+        Uri MediaLocation { get; }
+        IMediaType MediaType { get; }
+
+        Uri User { get; }
+        string UserName { get; }
         Uri Thumbnail { get; }
     }
 }

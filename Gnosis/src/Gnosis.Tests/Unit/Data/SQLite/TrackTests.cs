@@ -7,6 +7,7 @@ using System.Text;
 using NUnit.Framework;
 
 using Gnosis;
+using Gnosis.Application.Vendor;
 using Gnosis.Data;
 using Gnosis.Data.SQLite;
 using Gnosis.Utilities;
@@ -34,11 +35,11 @@ namespace Gnosis.Tests.Unit.Data.SQLite
 
         private const string radioheadUrn = "urn:uuid:27A19456-E6E9-463F-951D-98BB44356C65";
         private const string okComputerUrn = "urn:uuid:FA6A7FD0-74A3-4D83-A363-13733C04BB85";
-        private ITrack track1 = new Track("Paranoid Android", 2, TimeSpan.FromSeconds(220), new Uri(radioheadUrn), "Radiohead", new Uri(okComputerUrn), "OK Computer", new Uri("file:///audio/radiohead/paranoid_android.mp3"), MediaType.AudioMpeg, new Uri("http://example.com/image.jpg"));
-        private ITrack track2 = new Track("Sober", 4, TimeSpan.FromSeconds(306),  Guid.NewGuid().ToUrn(), "Tool", Guid.NewGuid().ToUrn(), "Undertow", new Uri("file:///audio/tool/sober.mp3"), MediaType.AudioMpeg, null);
-        private ITrack track3 = new Track("Maybe Not", 7, TimeSpan.FromSeconds(189), Guid.NewGuid().ToUrn(), "Cat Power", Guid.NewGuid().ToUrn(), "Free", new Uri("file:///audio/cat_power/maybe_not.mp3"), MediaType.AudioMpeg, null);
-        private ITrack track4 = new Track("Silence", 5, TimeSpan.FromSeconds(423), Guid.NewGuid().ToUrn(), "PJ Harvey", Guid.NewGuid().ToUrn(), "White Chalk", new Uri("file:///audio/pj_harvey/paranoid_android.mp3"), MediaType.AudioMpeg, new Uri("http://other.org/blah.png"));
-        private ITrack track5 = new Track("Airbag", 1, TimeSpan.FromSeconds(291), new Uri(radioheadUrn), "Radiohead", new Uri(okComputerUrn), "OK Computer", new Uri("file:///audio/radiohead/airbag.mp3"), MediaType.AudioMpeg, new Uri("file:///some-stuff/blah/ph.jpg"));
+        private ITrack track1 = new GnosisTrack("Paranoid Android", 2, TimeSpan.FromSeconds(220), new Uri(radioheadUrn), "Radiohead", new Uri(okComputerUrn), "OK Computer", new Uri("file:///audio/radiohead/paranoid_android.mp3"), MediaType.AudioMpeg, new Uri("http://example.com/image.jpg"));
+        private ITrack track2 = new GnosisTrack("Sober", 4, TimeSpan.FromSeconds(306),  Guid.NewGuid().ToUrn(), "Tool", Guid.NewGuid().ToUrn(), "Undertow", new Uri("file:///audio/tool/sober.mp3"), MediaType.AudioMpeg, null);
+        private ITrack track3 = new GnosisTrack("Maybe Not", 7, TimeSpan.FromSeconds(189), Guid.NewGuid().ToUrn(), "Cat Power", Guid.NewGuid().ToUrn(), "Free", new Uri("file:///audio/cat_power/maybe_not.mp3"), MediaType.AudioMpeg, null);
+        private ITrack track4 = new GnosisTrack("Silence", 5, TimeSpan.FromSeconds(423), Guid.NewGuid().ToUrn(), "PJ Harvey", Guid.NewGuid().ToUrn(), "White Chalk", new Uri("file:///audio/pj_harvey/paranoid_android.mp3"), MediaType.AudioMpeg, new Uri("http://other.org/blah.png"));
+        private ITrack track5 = new GnosisTrack("Airbag", 1, TimeSpan.FromSeconds(291), new Uri(radioheadUrn), "Radiohead", new Uri(okComputerUrn), "OK Computer", new Uri("file:///audio/radiohead/airbag.mp3"), MediaType.AudioMpeg, new Uri("file:///some-stuff/blah/ph.jpg"));
 
         [TestFixtureSetUp]
         public void Setup()
@@ -59,8 +60,8 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.AreEqual(track1.Title, check1.Title);
             Assert.AreEqual(track1.Number, check1.Number);
             Assert.AreEqual(track1.Duration, check1.Duration);
-            Assert.AreEqual(track1.Artist, check1.Artist);
-            Assert.AreEqual(track1.ArtistName, track1.ArtistName);
+            Assert.AreEqual(track1.Creator, check1.Creator);
+            Assert.AreEqual(track1.CreatorName, track1.CreatorName);
             Assert.AreEqual(track1.Album, check1.Album);
             Assert.AreEqual(track1.AlbumTitle, check1.AlbumTitle);
             Assert.AreEqual(track1.AudioLocation, check1.AudioLocation);
@@ -71,8 +72,8 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.AreEqual(track2.Title, check2.Title);
             Assert.AreEqual(track2.Number, check2.Number);
             Assert.AreEqual(track2.Duration, check2.Duration);
-            Assert.AreEqual(track2.Artist, check2.Artist);
-            Assert.AreEqual(track2.ArtistName, check2.ArtistName);
+            Assert.AreEqual(track2.Creator, check2.Creator);
+            Assert.AreEqual(track2.CreatorName, check2.CreatorName);
             Assert.AreEqual(track2.Album, check2.Album);
             Assert.AreEqual(track2.AlbumTitle, check2.AlbumTitle);
             Assert.AreEqual(track2.AudioLocation, check2.AudioLocation);
@@ -89,8 +90,8 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.AreEqual(track1.Title, check1.Title);
             Assert.AreEqual(track1.Number, check1.Number);
             Assert.AreEqual(track1.Duration, check1.Duration);
-            Assert.AreEqual(track1.Artist, check1.Artist);
-            Assert.AreEqual(track1.ArtistName, track1.ArtistName);
+            Assert.AreEqual(track1.Creator, check1.Creator);
+            Assert.AreEqual(track1.CreatorName, track1.CreatorName);
             Assert.AreEqual(track1.Album, check1.Album);
             Assert.AreEqual(track1.AlbumTitle, check1.AlbumTitle);
             Assert.AreEqual(track1.AudioLocation, check1.AudioLocation);
@@ -103,8 +104,8 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.AreEqual(track2.Title, check2.Title);
             Assert.AreEqual(track2.Number, check2.Number);
             Assert.AreEqual(track2.Duration, check2.Duration);
-            Assert.AreEqual(track2.Artist, check2.Artist);
-            Assert.AreEqual(track2.ArtistName, check2.ArtistName);
+            Assert.AreEqual(track2.Creator, check2.Creator);
+            Assert.AreEqual(track2.CreatorName, check2.CreatorName);
             Assert.AreEqual(track2.Album, check2.Album);
             Assert.AreEqual(track2.AlbumTitle, check2.AlbumTitle);
             Assert.AreEqual(track2.AudioLocation, check2.AudioLocation);

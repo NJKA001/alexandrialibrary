@@ -9,5 +9,6 @@ namespace Gnosis
         : IApplication
     {
         string Name { get; }
+        Uri Thumbnail { get; }
     }
 }

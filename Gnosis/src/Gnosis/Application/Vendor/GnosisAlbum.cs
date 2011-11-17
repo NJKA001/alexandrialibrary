@@ -3,40 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis
+namespace Gnosis.Application.Vendor
 {
-    public class Album
+    public class GnosisAlbum
         : IAlbum
     {
-        public Album(string title, DateTime released, Uri artist, string artistName, Uri thumbnail)
-            : this(title, released, artist, artistName, thumbnail, Guid.NewGuid().ToUrn())
+        public GnosisAlbum(string title, DateTime created, Uri creator, string creatorName, Uri thumbnail)
+            : this(title, created, creator, creatorName, thumbnail, Guid.NewGuid().ToUrn())
         {
         }
 
-        public Album(string title, DateTime released, Uri artist, string artistName, Uri thumbnail, Uri location)
+        public GnosisAlbum(string title, DateTime created, Uri creator, string creatorName, Uri thumbnail, Uri location)
         {
             if (title == null)
                 throw new ArgumentNullException("title");
-            if (artist == null)
-                throw new ArgumentNullException("artist");
-            if (artistName == null)
-                throw new ArgumentNullException("artistName");
+            if (creator == null)
+                throw new ArgumentNullException("creator");
+            if (creatorName == null)
+                throw new ArgumentNullException("creatorName");
             if (location == null)
                 throw new ArgumentNullException("location");
 
             this.title = title;
-            this.released = released;
-            this.artist = artist;
-            this.artistName = artistName;
+            this.created = created;
+            this.creator = creator;
+            this.creatorName = creatorName;
             this.thumbnail = thumbnail;
             this.location = location;
         }
 
         private readonly Uri location;
         private readonly string title;
-        private readonly DateTime released;
-        private readonly Uri artist;
-        private readonly string artistName;
+        private readonly DateTime created;
+        private readonly Uri creator;
+        private readonly string creatorName;
         private readonly Uri thumbnail;
 
         public Uri Location
@@ -54,19 +54,19 @@ namespace Gnosis
             get { return title; }
         }
 
-        public DateTime Released
+        public DateTime Created
         {
-            get { return released; }
+            get { return created; }
         }
 
-        public Uri Artist
+        public Uri Creator
         {
-            get { return artist; }
+            get { return creator; }
         }
 
-        public string ArtistName
+        public string CreatorName
         {
-            get { return artistName; }
+            get { return creatorName; }
         }
 
         public Uri Thumbnail

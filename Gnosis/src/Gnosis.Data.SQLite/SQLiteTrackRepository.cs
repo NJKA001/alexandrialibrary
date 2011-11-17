@@ -4,6 +4,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Application.Vendor;
+
 namespace Gnosis.Data.SQLite
 {
     public class SQLiteTrackRepository
@@ -54,15 +56,15 @@ namespace Gnosis.Data.SQLite
             var title = record.GetString("Title");
             var number = record.GetUInt32("Number");
             var duration = TimeSpan.FromMilliseconds((double)record.GetInt32("Duration"));
-            var artist = record.GetUri("Artist");
-            var artistName = record.GetString("ArtistName");
+            var creator = record.GetUri("Creator");
+            var creatorName = record.GetString("CreatorName");
             var album = record.GetUri("Album");
             var albumTitle = record.GetString("AlbumTitle");
             var audioLocation = record.GetUri("AudioLocation");
             var audioType = record.GetStringLookup<IMediaType>("AudioType", typeName => MediaType.Parse(typeName));
             var thumbnail = record.GetUri("Thumbnail");
 
-            return new Track(title, number, duration, artist, artistName, album, albumTitle, audioLocation, audioType, thumbnail, location);
+            return new GnosisTrack(title, number, duration, creator, creatorName, album, albumTitle, audioLocation, audioType, thumbnail, location);
         }
 
         public void Initialize()
@@ -70,12 +72,13 @@ namespace Gnosis.Data.SQLite
             var builder = new CommandBuilder("create table if not exists Track (");
             builder.Append("Location text not null primary key, Title text not null, "); 
             builder.Append("Number integer not null, Duration integer not null, ");
-            builder.Append("Artist text not null, ArtistName text not null, ");
+            builder.Append("Creator text not null, CreatorName text not null, ");
             builder.Append("Album text not null, AlbumTitle text not null, ");
             builder.Append("AudioLocation text not null, AudioType text not null, ");
             builder.AppendLine("Thumbnail text not null);");
 
             builder.AppendLine("create index if not exists Track_Title on Track (Title asc);");
+            builder.AppendLine("create index if not exists Track_Creator on Track (Creator asc);");
             builder.AppendLine("create index if not exists Track_Album on Track (Album asc);");
             builder.AppendLine("create unique index if not exists Track_AudioLocation on Track (AudioLocation asc);");
 
@@ -95,17 +98,17 @@ namespace Gnosis.Data.SQLite
                 foreach (var track in tracks)
                 {
                     var builder = new CommandBuilder("replace into Track (Location, Title, Number, ");
-                    builder.Append("Duration, Artist, ArtistName, Album, AlbumTitle, AudioLocation, ");
+                    builder.Append("Duration, Creator, CreatorName, Album, AlbumTitle, AudioLocation, ");
                     builder.Append("AudioType, Thumbnail) values ");
-                    builder.Append("(@Location, @Title, @Number, @Duration, @Artist, ");
-                    builder.Append("@ArtistName, @Album, @AlbumTitle, @AudioLocation, ");
+                    builder.Append("(@Location, @Title, @Number, @Duration, @Creator, ");
+                    builder.Append("@CreatorName, @Album, @AlbumTitle, @AudioLocation, ");
                     builder.Append("@AudioType, @Thumbnail);");
                     builder.AddParameter("@Location", track.Location.ToString());
                     builder.AddParameter("@Title", track.Title);
                     builder.AddParameter("@Number", track.Number);
                     builder.AddParameter("@Duration", track.Duration.TotalMilliseconds);
-                    builder.AddParameter("@Artist", track.Artist.ToString());
-                    builder.AddParameter("@ArtistName", track.ArtistName);
+                    builder.AddParameter("@Creator", track.Creator.ToString());
+                    builder.AddParameter("@CreatorName", track.CreatorName);
                     builder.AddParameter("@Album", track.Album.ToString());
                     builder.AddParameter("@AlbumTitle", track.AlbumTitle);
                     builder.AddParameter("@AudioLocation", track.AudioLocation.ToString());

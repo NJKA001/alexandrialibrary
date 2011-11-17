@@ -4,6 +4,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Application.Vendor;
+
 namespace Gnosis.Data.SQLite
 {
     public class SQLiteAlbumRepository
@@ -52,24 +54,24 @@ namespace Gnosis.Data.SQLite
         {
             var location = record.GetUri("Location");
             var title = record.GetString("Title");
-            var released = record.GetDateTime("Released");
-            var artist = record.GetUri("Artist");
-            var artistName = record.GetString("ArtistName");
+            var created = record.GetDateTime("Created");
+            var creator = record.GetUri("Creator");
+            var creatorName = record.GetString("CreatorName");
             var thumbnail = record.GetUri("Thumbnail");
 
-            return new Album(title, released, artist, artistName, thumbnail, location);
+            return new GnosisAlbum(title, created, creator, creatorName, thumbnail, location);
         }
 
         public void Initialize()
         {
             var builder = new CommandBuilder("create table if not exists Album (");
             builder.Append("Location text not null primary key, Title text not null, ");
-            builder.Append("Released text not null, Artist text not null, ");
-            builder.AppendLine("ArtistName text not null, Thumbnail text not null);");
+            builder.Append("Created text not null, Creator text not null, ");
+            builder.AppendLine("CreatorName text not null, Thumbnail text not null);");
 
             builder.AppendLine("create index if not exists Album_Title on Album (Title asc);");
-            builder.AppendLine("create index if not exists Album_Artist on Album (Artist asc);");
-            builder.AppendLine("create unique index if not exists Album_Artist_Title_Released on Album (Artist asc, Title asc, Released asc);");
+            builder.AppendLine("create index if not exists Album_Creator on Album (Creator asc);");
+            builder.AppendLine("create unique index if not exists Album_Creator_Title on Album (Creator asc, Title asc);");
 
             ExecuteNonQuery(builder);
         }
@@ -85,13 +87,13 @@ namespace Gnosis.Data.SQLite
 
                 foreach (var album in albums)
                 {
-                    var builder = new CommandBuilder("replace into Album (Location, Title, Released, Artist, ArtistName, Thumbnail) ");
-                    builder.AppendLine("values (@Location, @Title, @Released, @Artist, @ArtistName, @Thumbnail);");
+                    var builder = new CommandBuilder("replace into Album (Location, Title, Created, Creator, CreatorName, Thumbnail) ");
+                    builder.AppendLine("values (@Location, @Title, @Created, @Creator, @CreatorName, @Thumbnail);");
                     builder.AddParameter("@Location", album.Location.ToString());
                     builder.AddParameter("@Title", album.Title);
-                    builder.AddParameter("@Released", album.Released.ToString("o"));
-                    builder.AddParameter("@Artist", album.Artist.ToString());
-                    builder.AddParameter("@ArtistName", album.ArtistName);
+                    builder.AddParameter("@Created", album.Created.ToString("o"));
+                    builder.AddParameter("@Creator", album.Creator.ToString());
+                    builder.AddParameter("@CreatorName", album.CreatorName);
 
                     var thumbnail = album.Thumbnail != null ? album.Thumbnail.ToString() : string.Empty;
                     builder.AddParameter("@Thumbnail", thumbnail);
@@ -159,21 +161,43 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<IAlbum> GetByArtist(Uri artist)
+        public IAlbum GetByCreatorTitle(Uri creator, string title)
         {
-            if (artist == null)
-                throw new ArgumentNullException("artist");
+            if (creator == null)
+                throw new ArgumentNullException("creator");
+            if (title == null)
+                throw new ArgumentNullException("title");
 
             try
             {
-                var builder = new CommandBuilder("select * from Album where Artist = @Artist order by Released;");
-                builder.AddParameter("@Artist", artist.ToString());
+                var builder = new CommandBuilder("select * from Album where Creator = @Creator and Title = @Title;");
+                builder.AddParameter("@Creator", creator.ToString());
+                builder.AddParameter("@Title", title);
+
+                return GetAlbums(builder).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  GetByCreatorTitle", ex);
+                throw;
+            }
+        }
+
+        public IEnumerable<IAlbum> GetByCreator(Uri creator)
+        {
+            if (creator == null)
+                throw new ArgumentNullException("creator");
+
+            try
+            {
+                var builder = new CommandBuilder("select * from Album where Creator = @Creator order by Created;");
+                builder.AddParameter("@Creator", creator.ToString());
 
                 return GetAlbums(builder);
             }
             catch (Exception ex)
             {
-                logger.Error("  GetByArtist", ex);
+                logger.Error("  GetByCreator", ex);
                 throw;
             }
         }

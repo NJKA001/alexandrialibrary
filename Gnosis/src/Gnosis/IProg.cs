@@ -5,14 +5,19 @@ using System.Text;
 
 namespace Gnosis
 {
-    public interface IAlbum
+    public interface IProg
         : IApplication
     {
         string Title { get; }
-        DateTime Created { get; }
+        uint Number { get; }
+        
         Uri Creator { get; }
         string CreatorName { get; }
-        
+        Uri Album { get; }
+        string AlbumTitle { get; }
+
+        Uri ApplicationLocation { get; }
+        IMediaType ApplicationType { get; }
         Uri Thumbnail { get; }
     }
 }

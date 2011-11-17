@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis
+namespace Gnosis.Application.Vendor
 {
-    public class Track
+    public class GnosisTrack
         : ITrack
     {
-        public Track(string title, uint number, TimeSpan duration, Uri artist, string artistName, Uri album, string albumTitle, Uri audioLocation, IMediaType audioType, Uri thumbnail)
-            : this(title, number, duration, artist, artistName, album, albumTitle, audioLocation, audioType, thumbnail, Guid.NewGuid().ToUrn())
+        public GnosisTrack(string title, uint number, TimeSpan duration, Uri creator, string creatorName, Uri album, string albumTitle, Uri audioLocation, IMediaType audioType, Uri thumbnail)
+            : this(title, number, duration, creator, creatorName, album, albumTitle, audioLocation, audioType, thumbnail, Guid.NewGuid().ToUrn())
         {
         }
 
-        public Track(string title, uint number, TimeSpan duration, Uri artist, string artistName, Uri album, string albumTitle, Uri audioLocation, IMediaType audioType, Uri thumbnail, Uri location)
+        public GnosisTrack(string title, uint number, TimeSpan duration, Uri creator, string creatorName, Uri album, string albumTitle, Uri audioLocation, IMediaType audioType, Uri thumbnail, Uri location)
         {
             if (title == null)
                 throw new ArgumentNullException("title");
-            if (artist == null)
-                throw new ArgumentNullException("artist");
-            if (artistName == null)
-                throw new ArgumentNullException("artistName");
+            if (creator == null)
+                throw new ArgumentNullException("creator");
+            if (creatorName == null)
+                throw new ArgumentNullException("creatorName");
             if (album == null)
                 throw new ArgumentNullException("album");
             if (albumTitle == null)
@@ -35,8 +35,8 @@ namespace Gnosis
             this.title = title;
             this.number = number;
             this.duration = duration;
-            this.artist = artist;
-            this.artistName = artistName;
+            this.creator = creator;
+            this.creatorName = creatorName;
             this.album = album;
             this.albumTitle = albumTitle;
             this.audioLocation = audioLocation;
@@ -49,8 +49,8 @@ namespace Gnosis
         private readonly string title;
         private readonly uint number;
         private readonly TimeSpan duration;
-        private readonly Uri artist;
-        private readonly string artistName;
+        private readonly Uri creator;
+        private readonly string creatorName;
         private readonly Uri album;
         private readonly string albumTitle;
         private readonly Uri audioLocation;
@@ -82,14 +82,14 @@ namespace Gnosis
             get { return duration; }
         }
 
-        public Uri Artist
+        public Uri Creator
         {
-            get { return artist; }
+            get { return creator; }
         }
 
-        public string ArtistName
+        public string CreatorName
         {
-            get { return artistName; }
+            get { return creatorName; }
         }
 
         public Uri Album

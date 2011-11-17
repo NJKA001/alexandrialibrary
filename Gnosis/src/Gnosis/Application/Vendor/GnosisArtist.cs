@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis
+namespace Gnosis.Application.Vendor
 {
-    public class Artist
+    public class GnosisArtist
         : IArtist
     {
-        public Artist(string name, DateTime activeFrom, DateTime activeTo, Uri thumbnail)
+        public GnosisArtist(string name, DateTime activeFrom, DateTime activeTo, Uri thumbnail)
             : this(name, activeFrom, activeTo, thumbnail, Guid.NewGuid().ToUrn())
         {
         }
 
-        public Artist(string name, DateTime activeFrom, DateTime activeTo, Uri thumbnail, Uri location)
+        public GnosisArtist(string name, DateTime activeFrom, DateTime activeTo, Uri thumbnail, Uri location)
         {
             if (name == null)
                 throw new ArgumentNullException("name");

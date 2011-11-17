@@ -4,7 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Application.Vendor;
 using Gnosis.Links;
+using Gnosis.Tags.Id3.Id3v2;
 using Gnosis.Tasks;
 
 namespace Gnosis.Spiders
@@ -98,12 +100,49 @@ namespace Gnosis.Spiders
             return null;
         }
 
+        private void SaveTrack(IAudio audio)
+        {
+            var track = trackRepository.GetByAudioLocation(audio.Location);
+            if (track == null)
+            {
+                IArtist artist = null;
+                IAlbum album = null;
+
+                var tags = audio.GetTags();
+                var titleTag = tags.Where(x => x.Type == Id3v2TagType.Title).FirstOrDefault();
+                var artistTag = tags.Where(x => x.Type == Id3v2TagType.Artist).FirstOrDefault();
+                var albumTag = tags.Where(x => x.Type == Id3v2TagType.Album).FirstOrDefault();
+                
+                if (artistTag != null)
+                {
+                    var artistName = artistTag.Tuple.ToString();
+                    artist = artistRepository.GetByName(artistName).FirstOrDefault();
+                    if (artist == null)
+                    {
+                        artist = new GnosisArtist(artistName, DateTime.MinValue, DateTime.MaxValue, null);
+                        artistRepository.Save(new List<IArtist> { artist });
+                    }
+                }
+
+                if (albumTag != null)
+                {
+                    var albumTitle = albumTag.Tuple.ToString();
+                    //album = albumRepository.GetByTitle(albumTitle
+                }
+            }
+        }
+
         public void HandleMedia(IMedia media)
         {
             if (media == null)
                 throw new ArgumentNullException("media");
 
             mediaRepository.Save(new List<IMedia> { media });
+
+            if (media is IAudio)
+            {
+                SaveTrack(media as IAudio);
+            }
 
             var location = media.Location;
             if (location.IsFile && (location.ToString().ToLower().EndsWith("folder.jpg") || location.ToString().EndsWith("folder.jpeg")))

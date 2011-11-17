@@ -10,9 +10,9 @@ namespace Gnosis
     {
         string Title { get; }
         DateTime Created { get; }
-        Uri Creator { get; }
-        string CreatorName { get; }
-
+        
+        Uri User { get; }
+        string UserName { get; }
         Uri Thumbnail { get; }
     }
 }

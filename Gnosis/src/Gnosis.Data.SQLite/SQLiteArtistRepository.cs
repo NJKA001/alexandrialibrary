@@ -4,6 +4,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Application.Vendor;
+
 namespace Gnosis.Data.SQLite
 {
     public class SQLiteArtistRepository
@@ -56,7 +58,7 @@ namespace Gnosis.Data.SQLite
             var activeTo = record.GetDateTime("ActiveTo");
             var thumbnail = record.GetUri("Thumbnail");
 
-            return new Artist(name, activeFrom, activeTo, thumbnail, location);
+            return new GnosisArtist(name, activeFrom, activeTo, thumbnail, location);
         }
 
         public void Initialize()

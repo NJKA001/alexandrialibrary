@@ -5,20 +5,22 @@ using System.Text;
 
 namespace Gnosis
 {
-    public interface ITrack
+    public interface IClip
         : IApplication
     {
         string Title { get; }
         uint Number { get; }
         TimeSpan Duration { get; }
+        int Height { get; }
+        int Width { get; }
 
         Uri Creator { get; }
         string CreatorName { get; }
         Uri Album { get; }
         string AlbumTitle { get; }
-        
-        Uri AudioLocation { get; }
-        IMediaType AudioType { get; }
+
+        Uri VideoLocation { get; }
+        IMediaType VideoType { get; }
         Uri Thumbnail { get; }
     }
 }

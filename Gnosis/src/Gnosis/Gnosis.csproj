@@ -89,7 +89,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Album.cs" />
+    <Compile Include="Application\Vendor\GnosisAlbum.cs" />
     <Compile Include="Algorithms\Algorithm.cs" />
     <Compile Include="Application\Pdf\IPdfDocument.cs" />
     <Compile Include="Application\Pdf\PdfDocument.cs" />
@@ -97,12 +97,13 @@
     <Compile Include="Application\Vendor\MicrosoftShortcut.cs" />
     <Compile Include="Application\UnknownApplication.cs" />
     <Compile Include="Application\Xml\XmlDtdDocument.cs" />
-    <Compile Include="Artist.cs" />
+    <Compile Include="Application\Vendor\GnosisArtist.cs" />
     <Compile Include="ArtistSummary.cs" />
     <Compile Include="Audio\AudioBase.cs" />
     <Compile Include="IAlbum.cs" />
     <Compile Include="IAlbumRepository.cs" />
     <Compile Include="IAlbumSummary.cs" />
+    <Compile Include="IProg.cs" />
     <Compile Include="IApplicationRunner.cs" />
     <Compile Include="IArtist.cs" />
     <Compile Include="IArtistRepository.cs" />
@@ -222,6 +223,9 @@
     <Compile Include="Extensions\FileInfoExtensions.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
     <Compile Include="Extensions\StringArrayExtensions.cs" />
+    <Compile Include="IClip.cs" />
+    <Compile Include="ICut.cs" />
+    <Compile Include="IDoc.cs" />
     <Compile Include="IImageViewer.cs" />
     <Compile Include="ILinkFactory.cs" />
     <Compile Include="ILinkRepository.cs" />
@@ -230,6 +234,7 @@
     <Compile Include="IMediaAggregate.cs" />
     <Compile Include="IMediaDetail.cs" />
     <Compile Include="IMediaDetailRepository.cs" />
+    <Compile Include="IPic.cs" />
     <Compile Include="IPlaylist.cs" />
     <Compile Include="ISpider.cs" />
     <Compile Include="IMediaSummary.cs" />
@@ -274,7 +279,7 @@
     <Compile Include="Tasks\MediaDetailSearchTask.cs" />
     <Compile Include="Tasks\TagSearchTask.cs" />
     <Compile Include="Text\PlainText.cs" />
-    <Compile Include="Track.cs" />
+    <Compile Include="Application\Vendor\GnosisTrack.cs" />
     <Compile Include="Utilities\DebugLogger.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="IMediaRepository.cs" />
