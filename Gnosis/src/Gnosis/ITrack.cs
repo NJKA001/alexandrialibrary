@@ -17,8 +17,8 @@ namespace Gnosis
         Uri Album { get; }
         string AlbumTitle { get; }
         
-        Uri AudioLocation { get; }
-        IMediaType AudioType { get; }
+        Uri Target { get; }
+        IMediaType TargetType { get; }
         Uri Thumbnail { get; }
     }
 }

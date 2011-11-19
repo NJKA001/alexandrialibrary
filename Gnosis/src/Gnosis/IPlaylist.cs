@@ -10,7 +10,9 @@ namespace Gnosis
     {
         string Title { get; }
         DateTime Created { get; }
-        
+
+        Uri Target { get; }
+        IMediaType TargetType { get; }
         Uri User { get; }
         string UserName { get; }
         Uri Thumbnail { get; }

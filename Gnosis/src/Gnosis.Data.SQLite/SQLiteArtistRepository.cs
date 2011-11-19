@@ -56,17 +56,19 @@ namespace Gnosis.Data.SQLite
             var name = record.GetString("Name");
             var activeFrom = record.GetDateTime("ActiveFrom");
             var activeTo = record.GetDateTime("ActiveTo");
+            var target = record.GetUri("Target");
+            var targetType = record.GetStringLookup<IMediaType>("TargetType", x => MediaType.Parse(x));
             var thumbnail = record.GetUri("Thumbnail");
 
-            return new GnosisArtist(name, activeFrom, activeTo, thumbnail, location);
+            return new GnosisArtist(name, activeFrom, activeTo, target, targetType, thumbnail, location);
         }
 
         public void Initialize()
         {
             var builder = new CommandBuilder("create table if not exists Artist (");
             builder.Append("Location text not null primary key, Name text not null, ");
-            builder.Append("ActiveFrom text not null, ActiveTo text not null, ");
-            builder.AppendLine("Thumbnail text not null);");
+            builder.Append("ActiveFrom text not null, ActiveTo text not null, Target text null,");
+            builder.AppendLine("TargetType text null, Thumbnail text not null);");
 
             builder.AppendLine("create unique index if not exists Artist_Name on Artist (Name asc);");
 
@@ -90,7 +92,12 @@ namespace Gnosis.Data.SQLite
                     builder.AddParameter("@Name", artist.Name);
                     builder.AddParameter("@ActiveFrom", artist.ActiveFrom.ToString("o"));
                     builder.AddParameter("@ActiveTo", artist.ActiveTo.ToString("o"));
-                    
+
+                    var target = artist.Target != null ? artist.Target.ToString() : string.Empty;
+                    builder.AddParameter("@Target", target);
+                    var targetType = artist.TargetType != null ? artist.TargetType.ToString() : MediaType.ApplicationUnknown.ToString();
+                    builder.AddParameter("@TargetType", targetType);
+
                     var thumbnail = artist.Thumbnail != null ? artist.Thumbnail.ToString() : string.Empty;
                     builder.AddParameter("@Thumbnail", thumbnail);
 

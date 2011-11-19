@@ -8,12 +8,12 @@ namespace Gnosis.Application.Vendor
     public class GnosisArtist
         : IArtist
     {
-        public GnosisArtist(string name, DateTime activeFrom, DateTime activeTo, Uri thumbnail)
-            : this(name, activeFrom, activeTo, thumbnail, Guid.NewGuid().ToUrn())
+        public GnosisArtist(string name, DateTime activeFrom, DateTime activeTo, Uri target, IMediaType targetType, Uri thumbnail)
+            : this(name, activeFrom, activeTo, target, targetType, thumbnail, Guid.NewGuid().ToUrn())
         {
         }
 
-        public GnosisArtist(string name, DateTime activeFrom, DateTime activeTo, Uri thumbnail, Uri location)
+        public GnosisArtist(string name, DateTime activeFrom, DateTime activeTo, Uri target, IMediaType targetType, Uri thumbnail, Uri location)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -23,6 +23,9 @@ namespace Gnosis.Application.Vendor
             this.name = name;
             this.activeFrom = activeFrom;
             this.activeTo = activeTo;
+            this.target = target;
+            this.targetType = targetType;
+
             this.thumbnail = thumbnail;
             this.location = location;
         }
@@ -31,6 +34,8 @@ namespace Gnosis.Application.Vendor
         private readonly string name;
         private readonly DateTime activeFrom;
         private readonly DateTime activeTo;
+        private readonly Uri target;
+        private readonly IMediaType targetType;
         private readonly Uri thumbnail;
 
         public Uri Location
@@ -58,6 +63,16 @@ namespace Gnosis.Application.Vendor
             get { return activeTo; }
         }
 
+        public Uri Target
+        {
+            get { return target; }
+        }
+
+        public IMediaType TargetType
+        {
+            get { return targetType; }
+        }
+
         public Uri Thumbnail
         {
             get { return thumbnail; }
@@ -76,5 +91,7 @@ namespace Gnosis.Application.Vendor
         {
             return Enumerable.Empty<ITag>();
         }
+
+        public static readonly IArtist Unknown = new GnosisArtist("Unknown", DateTime.MinValue, DateTime.MaxValue, null, null, null, Guid.Empty.ToUrn());
     }
 }

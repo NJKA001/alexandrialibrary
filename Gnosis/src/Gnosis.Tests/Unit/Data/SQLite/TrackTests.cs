@@ -64,8 +64,8 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.AreEqual(track1.CreatorName, track1.CreatorName);
             Assert.AreEqual(track1.Album, check1.Album);
             Assert.AreEqual(track1.AlbumTitle, check1.AlbumTitle);
-            Assert.AreEqual(track1.AudioLocation, check1.AudioLocation);
-            Assert.AreEqual(track1.AudioType, check1.AudioType);
+            Assert.AreEqual(track1.Target, check1.Target);
+            Assert.AreEqual(track1.TargetType, check1.TargetType);
             Assert.AreEqual(track1.Thumbnail, check1.Thumbnail);
             var check2 = repository.GetByLocation(track2.Location);
             Assert.IsNotNull(check2);
@@ -76,8 +76,8 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.AreEqual(track2.CreatorName, check2.CreatorName);
             Assert.AreEqual(track2.Album, check2.Album);
             Assert.AreEqual(track2.AlbumTitle, check2.AlbumTitle);
-            Assert.AreEqual(track2.AudioLocation, check2.AudioLocation);
-            Assert.AreEqual(track2.AudioType, check2.AudioType);
+            Assert.AreEqual(track2.Target, check2.Target);
+            Assert.AreEqual(track2.TargetType, check2.TargetType);
             Assert.AreEqual(track2.Thumbnail, check2.Thumbnail);
         }
 
@@ -94,8 +94,8 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.AreEqual(track1.CreatorName, track1.CreatorName);
             Assert.AreEqual(track1.Album, check1.Album);
             Assert.AreEqual(track1.AlbumTitle, check1.AlbumTitle);
-            Assert.AreEqual(track1.AudioLocation, check1.AudioLocation);
-            Assert.AreEqual(track1.AudioType, check1.AudioType);
+            Assert.AreEqual(track1.Target, check1.Target);
+            Assert.AreEqual(track1.TargetType, check1.TargetType);
             Assert.AreEqual(track1.Thumbnail, check1.Thumbnail);
             var checks2 = repository.GetByTitle(track2.Title);
             Assert.AreEqual(1, checks2.Count());
@@ -108,8 +108,8 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.AreEqual(track2.CreatorName, check2.CreatorName);
             Assert.AreEqual(track2.Album, check2.Album);
             Assert.AreEqual(track2.AlbumTitle, check2.AlbumTitle);
-            Assert.AreEqual(track2.AudioLocation, check2.AudioLocation);
-            Assert.AreEqual(track2.AudioType, check2.AudioType);
+            Assert.AreEqual(track2.Target, check2.Target);
+            Assert.AreEqual(track2.TargetType, check2.TargetType);
             Assert.AreEqual(track2.Thumbnail, check2.Thumbnail);
         }
 
@@ -132,9 +132,9 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         }
 
         [Test]
-        public void CanBeReadByAudioLocation()
+        public void CanBeReadByTarget()
         {
-            var check = repository.GetByAudioLocation(track1.AudioLocation);
+            var check = repository.GetByTarget(track1.Target);
             Assert.IsNotNull(check);
             Assert.AreEqual(track1.Title, check.Title);
         }

@@ -11,6 +11,9 @@ namespace Gnosis
         string Name { get; }
         DateTime ActiveFrom { get; }
         DateTime ActiveTo { get; }
+
+        Uri Target { get; }
+        IMediaType TargetType { get; }
         Uri Thumbnail { get; }
     }
 }

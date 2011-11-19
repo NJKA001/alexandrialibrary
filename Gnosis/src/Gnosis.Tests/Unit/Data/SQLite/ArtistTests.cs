@@ -33,10 +33,10 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected readonly IDbConnection connection;
         protected readonly IArtistRepository repository;
 
-        private IArtist artist1 = new GnosisArtist("Radiohead", new DateTime(1985, 1, 2), DateTime.MaxValue, new Uri("http://example.com/image.jpg"));
-        private IArtist artist2 = new GnosisArtist("Tool", new DateTime(1991, 2, 28), DateTime.MaxValue, null);
-        private IArtist artist3 = new GnosisArtist("Cat Power", new DateTime(1997, 10, 15), DateTime.MaxValue, null);
-        private IArtist artist4 = new GnosisArtist("PJ Harvey", new DateTime(2011, 11, 11), DateTime.MaxValue, new Uri("http://other.org/blah.png"));
+        private IArtist artist1 = new GnosisArtist("Radiohead", new DateTime(1985, 1, 2), DateTime.MaxValue, null, null, new Uri("http://example.com/image.jpg"));
+        private IArtist artist2 = new GnosisArtist("Tool", new DateTime(1991, 2, 28), DateTime.MaxValue, null, null, null);
+        private IArtist artist3 = new GnosisArtist("Cat Power", new DateTime(1997, 10, 15), DateTime.MaxValue, null, null, null);
+        private IArtist artist4 = new GnosisArtist("PJ Harvey", new DateTime(2011, 11, 11), DateTime.MaxValue, null, null, new Uri("http://other.org/blah.png"));
 
         [TestFixtureSetUp]
         public void Setup()

@@ -20,8 +20,8 @@ namespace Gnosis
         Uri Album { get; }
         string AlbumTitle { get; }
 
-        Uri MediaLocation { get; }
-        IMediaType MediaType { get; }
+        Uri TargetLocation { get; }
+        IMediaType TargetType { get; }
 
         Uri User { get; }
         string UserName { get; }

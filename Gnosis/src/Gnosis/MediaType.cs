@@ -249,12 +249,17 @@ namespace Gnosis
         public static readonly IMediaType ApplicationXmlDtd = new MediaType(TypeApplication, "xml-dtd", new List<string> { ".dtd", ".ent" });
         public static readonly IMediaType ApplicationUnknown = new MediaType(TypeApplication, "unknown");
         
-        public static readonly IMediaType ApplicationGnosisFilesystemDirectory = new MediaType(TypeApplication, "vnd.gnosis.fs.dir");
-        public static readonly IMediaType ApplicationGnosisArtist = new MediaType(TypeApplication, "vnd.gnosis.artist");
         public static readonly IMediaType ApplicationGnosisAlbum = new MediaType(TypeApplication, "vnd.gnosis.album");
+        public static readonly IMediaType ApplicationGnosisArtist = new MediaType(TypeApplication, "vnd.gnosis.artist");
+        public static readonly IMediaType ApplicationGnosisCut = new MediaType(TypeApplication, "vnd.gnosis.cut");
+        public static readonly IMediaType ApplicationGnosisDoc = new MediaType(TypeApplication, "vnd.gosis.doc");
+        public static readonly IMediaType ApplicationGnosisFilesystemDirectory = new MediaType(TypeApplication, "vnd.gnosis.fs.dir");
+        public static readonly IMediaType ApplicationGnosisPic = new MediaType(TypeApplication, "vnd.gnosis.pic");
         public static readonly IMediaType ApplicationGnosisPlaylist = new MediaType(TypeApplication, "vnd.gnosis.playlist");
+        public static readonly IMediaType ApplicationGnosisProgram = new MediaType(TypeApplication, "vnd.gnosis.program");
         public static readonly IMediaType ApplicationGnosisTrack = new MediaType(TypeApplication, "vnd.gnosis.track");
         public static readonly IMediaType ApplicationGnosisUser = new MediaType(TypeApplication, "vnd.gnosis.user");
+        
         public static readonly IMediaType ApplicationMicrosoftShortcut = new MediaType(TypeApplication, "x-ms-shortcut", new List<string> { ".lnk" }, new List<string>(), new List<byte[]> { new byte[] { 0x4C, 0x00, 0x00, 0x00, 0x01, 0x14, 0x02 } });
 
         public static readonly IMediaType AudioMpeg = new MediaType(TypeAudio, "mpeg", new List<string> { ".mp3", ".mp2", ".mp1" }, new List<string> { "audio/mp3" }, new List<byte[]> { new byte[] { 0x49, 0x44, 0x33 }});

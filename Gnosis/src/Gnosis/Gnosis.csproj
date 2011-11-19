@@ -94,6 +94,8 @@
     <Compile Include="Application\Pdf\IPdfDocument.cs" />
     <Compile Include="Application\Pdf\PdfDocument.cs" />
     <Compile Include="Application\Vendor\GnosisFilesystemDirectory.cs" />
+    <Compile Include="Application\Vendor\GnosisPlaylist.cs" />
+    <Compile Include="Application\Vendor\GnosisUser.cs" />
     <Compile Include="Application\Vendor\MicrosoftShortcut.cs" />
     <Compile Include="Application\UnknownApplication.cs" />
     <Compile Include="Application\Xml\XmlDtdDocument.cs" />
@@ -103,6 +105,8 @@
     <Compile Include="IAlbum.cs" />
     <Compile Include="IAlbumRepository.cs" />
     <Compile Include="IAlbumSummary.cs" />
+    <Compile Include="IClip.cs" />
+    <Compile Include="IDoc.cs" />
     <Compile Include="IProg.cs" />
     <Compile Include="IApplicationRunner.cs" />
     <Compile Include="IArtist.cs" />
@@ -223,9 +227,7 @@
     <Compile Include="Extensions\FileInfoExtensions.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
     <Compile Include="Extensions\StringArrayExtensions.cs" />
-    <Compile Include="IClip.cs" />
     <Compile Include="ICut.cs" />
-    <Compile Include="IDoc.cs" />
     <Compile Include="IImageViewer.cs" />
     <Compile Include="ILinkFactory.cs" />
     <Compile Include="ILinkRepository.cs" />

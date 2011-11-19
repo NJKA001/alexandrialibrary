@@ -10,15 +10,14 @@ namespace Gnosis
     {
         string Title { get; }
         uint Number { get; }
-        uint Length { get; }
 
         Uri Creator { get; }
         string CreatorName { get; }
         Uri Album { get; }
         string AlbumTitle { get; }
 
-        Uri TextLocation { get; }
-        IMediaType TextType { get; }
+        Uri Target { get; }
+        IMediaType TargetType { get; }
         Uri Thumbnail { get; }
     }
 }

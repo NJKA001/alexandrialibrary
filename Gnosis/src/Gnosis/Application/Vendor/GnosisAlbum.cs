@@ -87,5 +87,7 @@ namespace Gnosis.Application.Vendor
         {
             return Enumerable.Empty<ITag>();
         }
+
+        public static readonly IAlbum Unknown = new GnosisAlbum("Unknown", DateTime.MinValue, GnosisArtist.Unknown.Location, GnosisArtist.Unknown.Name, null, Guid.Empty.ToUrn());
     }
 }

@@ -8,12 +8,12 @@ namespace Gnosis.Application.Vendor
     public class GnosisTrack
         : ITrack
     {
-        public GnosisTrack(string title, uint number, TimeSpan duration, Uri creator, string creatorName, Uri album, string albumTitle, Uri audioLocation, IMediaType audioType, Uri thumbnail)
-            : this(title, number, duration, creator, creatorName, album, albumTitle, audioLocation, audioType, thumbnail, Guid.NewGuid().ToUrn())
+        public GnosisTrack(string title, uint number, TimeSpan duration, Uri creator, string creatorName, Uri album, string albumTitle, Uri target, IMediaType targetType, Uri thumbnail)
+            : this(title, number, duration, creator, creatorName, album, albumTitle, target, targetType, thumbnail, Guid.NewGuid().ToUrn())
         {
         }
 
-        public GnosisTrack(string title, uint number, TimeSpan duration, Uri creator, string creatorName, Uri album, string albumTitle, Uri audioLocation, IMediaType audioType, Uri thumbnail, Uri location)
+        public GnosisTrack(string title, uint number, TimeSpan duration, Uri creator, string creatorName, Uri album, string albumTitle, Uri target, IMediaType targetType, Uri thumbnail, Uri location)
         {
             if (title == null)
                 throw new ArgumentNullException("title");
@@ -25,10 +25,10 @@ namespace Gnosis.Application.Vendor
                 throw new ArgumentNullException("album");
             if (albumTitle == null)
                 throw new ArgumentNullException("albumTitle");
-            if (audioLocation == null)
-                throw new ArgumentNullException("audioLocation");
-            if (audioType == null)
-                throw new ArgumentNullException("audioType");
+            if (target == null)
+                throw new ArgumentNullException("target");
+            if (targetType == null)
+                throw new ArgumentNullException("targetType");
             if (location == null)
                 throw new ArgumentNullException("location");
 
@@ -39,8 +39,8 @@ namespace Gnosis.Application.Vendor
             this.creatorName = creatorName;
             this.album = album;
             this.albumTitle = albumTitle;
-            this.audioLocation = audioLocation;
-            this.audioType = audioType;
+            this.target = target;
+            this.targetType = targetType;
             this.thumbnail = thumbnail;
             this.location = location;
         }
@@ -53,8 +53,8 @@ namespace Gnosis.Application.Vendor
         private readonly string creatorName;
         private readonly Uri album;
         private readonly string albumTitle;
-        private readonly Uri audioLocation;
-        private readonly IMediaType audioType;
+        private readonly Uri target;
+        private readonly IMediaType targetType;
         private readonly Uri thumbnail;
 
         public Uri Location
@@ -102,14 +102,14 @@ namespace Gnosis.Application.Vendor
             get { return albumTitle; }
         }
 
-        public Uri AudioLocation
+        public Uri Target
         {
-            get { return audioLocation; }
+            get { return target; }
         }
 
-        public IMediaType AudioType
+        public IMediaType TargetType
         {
-            get { return audioType; }
+            get { return targetType; }
         }
 
         public Uri Thumbnail

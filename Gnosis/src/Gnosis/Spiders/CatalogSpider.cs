@@ -102,7 +102,7 @@ namespace Gnosis.Spiders
 
         private void SaveTrack(IAudio audio)
         {
-            var track = trackRepository.GetByAudioLocation(audio.Location);
+            var track = trackRepository.GetByTarget(audio.Location);
             if (track == null)
             {
                 IArtist artist = null;
@@ -112,22 +112,29 @@ namespace Gnosis.Spiders
                 var titleTag = tags.Where(x => x.Type == Id3v2TagType.Title).FirstOrDefault();
                 var artistTag = tags.Where(x => x.Type == Id3v2TagType.Artist).FirstOrDefault();
                 var albumTag = tags.Where(x => x.Type == Id3v2TagType.Album).FirstOrDefault();
-                
+                var releasedTag = tags.Where(x => x.Type == Id3v2TagType.ReleaseTime).FirstOrDefault();
+
                 if (artistTag != null)
                 {
                     var artistName = artistTag.Tuple.ToString();
                     artist = artistRepository.GetByName(artistName).FirstOrDefault();
                     if (artist == null)
                     {
-                        artist = new GnosisArtist(artistName, DateTime.MinValue, DateTime.MaxValue, null);
+                        artist = new GnosisArtist(artistName, DateTime.MinValue, DateTime.MaxValue, null, null, null);
                         artistRepository.Save(new List<IArtist> { artist });
                     }
-                }
 
-                if (albumTag != null)
-                {
-                    var albumTitle = albumTag.Tuple.ToString();
-                    //album = albumRepository.GetByTitle(albumTitle
+                    if (albumTag != null)
+                    {
+                        var albumTitle = albumTag.Tuple.ToString();
+                        var created = releasedTag != null ? releasedTag.Tuple.ToDateTime() : DateTime.MinValue;
+                        album = albumRepository.GetByCreatorTitle(artist.Location, albumTitle);
+                        if (album == null)
+                        {
+                            album = new GnosisAlbum(albumTitle, created, artist.Location, artist.Name, null);
+                            albumRepository.Save(new List<IAlbum> { album });
+                        }
+                    }
                 }
             }
         }
