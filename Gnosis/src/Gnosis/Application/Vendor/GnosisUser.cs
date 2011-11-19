@@ -63,6 +63,6 @@ namespace Gnosis.Application.Vendor
             return Enumerable.Empty<ITag>();
         }
 
-        public static readonly IUser Administrator = new GnosisUser("Administrator", null, Guid.Empty.ToUrn());
+        public static readonly IUser Administrator = new GnosisUser("Administrator", Guid.Empty.ToUrn(), Guid.Empty.ToUrn());
     }
 }

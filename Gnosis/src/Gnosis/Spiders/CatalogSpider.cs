@@ -120,7 +120,7 @@ namespace Gnosis.Spiders
                     artist = artistRepository.GetByName(artistName).FirstOrDefault();
                     if (artist == null)
                     {
-                        artist = new GnosisArtist(artistName, DateTime.MinValue, DateTime.MaxValue, null, null, null);
+                        artist = new GnosisArtist(artistName, DateTime.MinValue, DateTime.MaxValue, GnosisArtist.Unknown.Location, GnosisArtist.Unknown.Name, Guid.NewGuid().ToUrn(), "Unknown", Guid.NewGuid().ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, Guid.NewGuid().ToUrn());
                         artistRepository.Save(new List<IArtist> { artist });
                     }
 
@@ -128,10 +128,10 @@ namespace Gnosis.Spiders
                     {
                         var albumTitle = albumTag.Tuple.ToString();
                         var created = releasedTag != null ? releasedTag.Tuple.ToDateTime() : DateTime.MinValue;
-                        album = albumRepository.GetByCreatorTitle(artist.Location, albumTitle);
+                        album = albumRepository.GetByCreatorAndName(artist.Location, albumTitle);
                         if (album == null)
                         {
-                            album = new GnosisAlbum(albumTitle, created, artist.Location, artist.Name, null);
+                            album = new GnosisAlbum(albumTitle, created, artist.Location, artist.Name, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, Guid.Empty.ToUrn());
                             albumRepository.Save(new List<IAlbum> { album });
                         }
                     }

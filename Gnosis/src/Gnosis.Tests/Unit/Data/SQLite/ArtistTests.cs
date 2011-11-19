@@ -33,10 +33,10 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected readonly IDbConnection connection;
         protected readonly IArtistRepository repository;
 
-        private IArtist artist1 = new GnosisArtist("Radiohead", new DateTime(1985, 1, 2), DateTime.MaxValue, null, null, new Uri("http://example.com/image.jpg"));
-        private IArtist artist2 = new GnosisArtist("Tool", new DateTime(1991, 2, 28), DateTime.MaxValue, null, null, null);
-        private IArtist artist3 = new GnosisArtist("Cat Power", new DateTime(1997, 10, 15), DateTime.MaxValue, null, null, null);
-        private IArtist artist4 = new GnosisArtist("PJ Harvey", new DateTime(2011, 11, 11), DateTime.MaxValue, null, null, new Uri("http://other.org/blah.png"));
+        private IArtist artist1 = new GnosisArtist("Radiohead", new DateTime(1985, 1, 2), DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image.jpg"));
+        private IArtist artist2 = new GnosisArtist("Tool", new DateTime(1991, 2, 28), DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image2.jpg"));
+        private IArtist artist3 = new GnosisArtist("Cat Power", new DateTime(1997, 10, 15), DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image3.jpg"));
+        private IArtist artist4 = new GnosisArtist("PJ Harvey", new DateTime(2011, 11, 11), DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image4.jpg"));
 
         [TestFixtureSetUp]
         public void Setup()
@@ -55,14 +55,14 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             var check1 = repository.GetByLocation(artist1.Location);
             Assert.IsNotNull(check1);
             Assert.AreEqual(artist1.Name, check1.Name);
-            Assert.AreEqual(artist1.ActiveFrom, check1.ActiveFrom);
-            Assert.AreEqual(artist1.ActiveTo, check1.ActiveTo);
+            Assert.AreEqual(artist1.FromDate, check1.FromDate);
+            Assert.AreEqual(artist1.ToDate, check1.ToDate);
             Assert.AreEqual(artist1.Thumbnail, check1.Thumbnail);
             var check2 = repository.GetByLocation(artist2.Location);
             Assert.IsNotNull(check2);
             Assert.AreEqual(artist2.Name, check2.Name);
-            Assert.AreEqual(artist2.ActiveFrom, check2.ActiveFrom);
-            Assert.AreEqual(artist2.ActiveTo, check2.ActiveTo);
+            Assert.AreEqual(artist2.FromDate, check2.FromDate);
+            Assert.AreEqual(artist2.ToDate, check2.ToDate);
             Assert.AreEqual(artist2.Thumbnail, check2.Thumbnail);
         }
 
@@ -74,16 +74,16 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             var check1 = checks1.FirstOrDefault();
             Assert.IsNotNull(check1);
             Assert.AreEqual(artist1.Name, check1.Name);
-            Assert.AreEqual(artist1.ActiveFrom, check1.ActiveFrom);
-            Assert.AreEqual(artist1.ActiveTo, check1.ActiveTo);
+            Assert.AreEqual(artist1.FromDate, check1.FromDate);
+            Assert.AreEqual(artist1.ToDate, check1.ToDate);
             Assert.AreEqual(artist1.Thumbnail, check1.Thumbnail);
             var checks2 = repository.GetByName(artist2.Name);
             Assert.AreEqual(1, checks2.Count());
             var check2 = checks2.FirstOrDefault();
             Assert.IsNotNull(check2);
             Assert.AreEqual(artist2.Name, check2.Name);
-            Assert.AreEqual(artist2.ActiveFrom, check2.ActiveFrom);
-            Assert.AreEqual(artist2.ActiveTo, check2.ActiveTo);
+            Assert.AreEqual(artist2.FromDate, check2.FromDate);
+            Assert.AreEqual(artist2.ToDate, check2.ToDate);
             Assert.AreEqual(artist2.Thumbnail, check2.Thumbnail);
         }
 

@@ -9,6 +9,14 @@ namespace Gnosis
 {
     public static class UriExtensions
     {
+        public static bool IsEmptyUrn(this Uri self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            return self.ToString() == Guid.NewGuid().ToUrn().ToString();
+        }
+
         public static string ToFileExtension(this Uri location)
         {
             if (location == null)

@@ -6,14 +6,9 @@ using System.Text;
 namespace Gnosis
 {
     public interface IArtist
-        : IApplication
+        : IMediaItem
     {
-        string Name { get; }
-        DateTime ActiveFrom { get; }
-        DateTime ActiveTo { get; }
-
-        Uri Target { get; }
-        IMediaType TargetType { get; }
-        Uri Thumbnail { get; }
+        DateTime FromDate { get; }
+        DateTime ToDate { get; }
     }
 }

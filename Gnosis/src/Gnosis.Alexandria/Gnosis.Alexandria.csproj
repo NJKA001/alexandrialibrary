@@ -67,6 +67,7 @@
     <Compile Include="Controllers\CatalogController.cs" />
     <Compile Include="Controllers\ICatalogController.cs" />
     <Compile Include="Controllers\IMediaController.cs" />
+    <Compile Include="Controllers\ISecurityController.cs" />
     <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="Controllers\SpiderFactory.cs" />
     <Compile Include="Controllers\TaskController.cs" />

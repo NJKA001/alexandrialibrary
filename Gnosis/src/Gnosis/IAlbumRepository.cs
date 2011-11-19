@@ -12,8 +12,8 @@ namespace Gnosis
         void Delete(IEnumerable<Uri> albums);
 
         IAlbum GetByLocation(Uri location);
-        IAlbum GetByCreatorTitle(Uri creator, string title);
+        IAlbum GetByCreatorAndName(Uri creator, string name);
         IEnumerable<IAlbum> GetByCreator(Uri creator);
-        IEnumerable<IAlbum> GetByTitle(string title);
+        IEnumerable<IAlbum> GetByName(string name);
     }
 }

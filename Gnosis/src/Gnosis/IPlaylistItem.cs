@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Gnosis
 {
-    public interface ICut
+    public interface IPlaylistItem
         : IApplication
     {
         string Title { get; }
-        int Sequence { get; }
+        uint Sequence { get; }
         TimeSpan Duration { get; }
 
         Uri Playlist { get; }
@@ -20,7 +20,7 @@ namespace Gnosis
         Uri Album { get; }
         string AlbumTitle { get; }
 
-        Uri TargetLocation { get; }
+        Uri Target { get; }
         IMediaType TargetType { get; }
 
         Uri User { get; }

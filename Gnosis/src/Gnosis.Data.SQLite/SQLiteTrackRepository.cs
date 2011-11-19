@@ -80,7 +80,7 @@ namespace Gnosis.Data.SQLite
             builder.AppendLine("create index if not exists Track_Title on Track (Title asc);");
             builder.AppendLine("create index if not exists Track_Creator on Track (Creator asc);");
             builder.AppendLine("create index if not exists Track_Album on Track (Album asc);");
-            builder.AppendLine("create unique index if not exists Track_Target on Track (Target asc);");
+            builder.AppendLine("create index if not exists Track_Target on Track (Target asc);");
 
             ExecuteNonQuery(builder);
         }

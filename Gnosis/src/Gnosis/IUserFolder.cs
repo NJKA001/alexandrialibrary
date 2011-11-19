@@ -5,9 +5,8 @@ using System.Text;
 
 namespace Gnosis
 {
-    public interface IAlbum
+    public interface IUserFolder
         : IMediaItem
     {
-        DateTime Date { get; }
     }
 }

@@ -79,7 +79,6 @@ namespace Gnosis.Tests.Performance
                     repository.Save(tags);
                     var elapsed = DateTime.Now.Subtract(start);
                     
-                    //We should always be able to save tags (in memory) in less than 50 milliseconds
                     Assert.IsTrue(elapsed.TotalMilliseconds < 100);
                 }
 

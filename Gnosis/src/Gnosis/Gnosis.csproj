@@ -93,8 +93,14 @@
     <Compile Include="Algorithms\Algorithm.cs" />
     <Compile Include="Application\Pdf\IPdfDocument.cs" />
     <Compile Include="Application\Pdf\PdfDocument.cs" />
+    <Compile Include="Application\Vendor\GnosisClip.cs" />
+    <Compile Include="Application\Vendor\GnosisDoc.cs" />
     <Compile Include="Application\Vendor\GnosisFilesystemDirectory.cs" />
+    <Compile Include="Application\Vendor\GnosisMediaItemBase.cs" />
+    <Compile Include="Application\Vendor\GnosisPic.cs" />
     <Compile Include="Application\Vendor\GnosisPlaylist.cs" />
+    <Compile Include="Application\Vendor\GnosisPlaylistItem.cs" />
+    <Compile Include="Application\Vendor\GnosisProgram.cs" />
     <Compile Include="Application\Vendor\GnosisUser.cs" />
     <Compile Include="Application\Vendor\MicrosoftShortcut.cs" />
     <Compile Include="Application\UnknownApplication.cs" />
@@ -105,9 +111,16 @@
     <Compile Include="IAlbum.cs" />
     <Compile Include="IAlbumRepository.cs" />
     <Compile Include="IAlbumSummary.cs" />
+    <Compile Include="IUserFolder.cs" />
     <Compile Include="IClip.cs" />
+    <Compile Include="IClipRepository.cs" />
     <Compile Include="IDoc.cs" />
-    <Compile Include="IProg.cs" />
+    <Compile Include="IDocRepository.cs" />
+    <Compile Include="IMediaItem.cs" />
+    <Compile Include="IMediaItemRepository.cs" />
+    <Compile Include="IPicRepository.cs" />
+    <Compile Include="IPlaylistRepository.cs" />
+    <Compile Include="IProgram.cs" />
     <Compile Include="IApplicationRunner.cs" />
     <Compile Include="IArtist.cs" />
     <Compile Include="IArtistRepository.cs" />
@@ -227,7 +240,7 @@
     <Compile Include="Extensions\FileInfoExtensions.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
     <Compile Include="Extensions\StringArrayExtensions.cs" />
-    <Compile Include="ICut.cs" />
+    <Compile Include="IPlaylistItem.cs" />
     <Compile Include="IImageViewer.cs" />
     <Compile Include="ILinkFactory.cs" />
     <Compile Include="ILinkRepository.cs" />
@@ -238,6 +251,7 @@
     <Compile Include="IMediaDetailRepository.cs" />
     <Compile Include="IPic.cs" />
     <Compile Include="IPlaylist.cs" />
+    <Compile Include="IProgramRepository.cs" />
     <Compile Include="ISpider.cs" />
     <Compile Include="IMediaSummary.cs" />
     <Compile Include="IMediaSummaryRepository.cs" />
@@ -255,6 +269,7 @@
     <Compile Include="ITrack.cs" />
     <Compile Include="ITrackRepository.cs" />
     <Compile Include="IUser.cs" />
+    <Compile Include="IUserCatalog.cs" />
     <Compile Include="IVideoPlayer.cs" />
     <Compile Include="MediaAggregate.cs" />
     <Compile Include="Spiders\PlaylistSpider.cs" />

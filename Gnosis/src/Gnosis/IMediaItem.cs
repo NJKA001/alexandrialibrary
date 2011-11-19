@@ -5,22 +5,18 @@ using System.Text;
 
 namespace Gnosis
 {
-    public interface IClip
-        : IApplication
+    public interface IMediaItem
+        : IMedia
     {
-        string Title { get; }
-        uint Number { get; }
-        TimeSpan Duration { get; }
-        uint Height { get; }
-        uint Width { get; }
-
+        string Name { get; }
         Uri Creator { get; }
         string CreatorName { get; }
-        Uri Album { get; }
-        string AlbumTitle { get; }
-
+        Uri Catalog { get; }
+        string CatalogName { get; }
         Uri Target { get; }
         IMediaType TargetType { get; }
+        Uri User { get; }
+        string UserName { get; }
         Uri Thumbnail { get; }
     }
 }

@@ -12,7 +12,7 @@ namespace Gnosis
         void Delete(IEnumerable<Uri> tracks);
 
         ITrack GetByLocation(Uri location);
-        ITrack GetByTarget(Uri location);
+        ITrack GetByTarget(Uri target);
         IEnumerable<ITrack> GetByAlbum(Uri album);
         IEnumerable<ITrack> GetByTitle(string title);
     }

@@ -34,11 +34,11 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected readonly IAlbumRepository repository;
 
         private const string radioheadUrn = "urn:uuid:27A19456-E6E9-463F-951D-98BB44356C65";
-        private IAlbum album1 = new GnosisAlbum("OK Computer", new DateTime(1997, 9, 22), new Uri(radioheadUrn), "Radiohead", new Uri("http://example.com/image.jpg"));
-        private IAlbum album2 = new GnosisAlbum("Undertow", new DateTime(1992, 3, 28), Guid.NewGuid().ToUrn(), "Tool", null);
-        private IAlbum album3 = new GnosisAlbum("Free", new DateTime(2002, 7, 9), Guid.NewGuid().ToUrn(), "Cat Power", null);
-        private IAlbum album4 = new GnosisAlbum("White Chalk", new DateTime(2008, 4, 30), Guid.NewGuid().ToUrn(), "PJ Harvey", new Uri("http://other.org/blah.png"));
-        private IAlbum album5 = new GnosisAlbum("Pablo Honey", new DateTime(1993, 4, 4), new Uri(radioheadUrn), "Radiohead", new Uri("file:///some-stuff/blah/ph.jpg"));
+        private IAlbum album1 = new GnosisAlbum("OK Computer", new DateTime(1997, 9, 22), new Uri(radioheadUrn), "Radiohead", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image1.jpg"));
+        private IAlbum album2 = new GnosisAlbum("Undertow", new DateTime(1992, 3, 28), Guid.NewGuid().ToUrn(), "Tool", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image2.jpg"));
+        private IAlbum album3 = new GnosisAlbum("Free", new DateTime(2002, 7, 9), Guid.NewGuid().ToUrn(), "Cat Power", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image3.jpg"));
+        private IAlbum album4 = new GnosisAlbum("White Chalk", new DateTime(2008, 4, 30), Guid.NewGuid().ToUrn(), "PJ Harvey", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image4.jpg"));
+        private IAlbum album5 = new GnosisAlbum("Pablo Honey", new DateTime(1993, 4, 4), new Uri(radioheadUrn), "Radiohead", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image5.jpg"));
 
         [TestFixtureSetUp]
         public void Setup()
@@ -56,15 +56,15 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         {
             var check1 = repository.GetByLocation(album1.Location);
             Assert.IsNotNull(check1);
-            Assert.AreEqual(album1.Title, check1.Title);
-            Assert.AreEqual(album1.Created, check1.Created);
+            Assert.AreEqual(album1.Name, check1.Name);
+            Assert.AreEqual(album1.Date, check1.Date);
             Assert.AreEqual(album1.Creator, check1.Creator);
             Assert.AreEqual(album1.CreatorName, album1.CreatorName);
             Assert.AreEqual(album1.Thumbnail, check1.Thumbnail);
             var check2 = repository.GetByLocation(album2.Location);
             Assert.IsNotNull(check2);
-            Assert.AreEqual(album2.Title, check2.Title);
-            Assert.AreEqual(album2.Created, check2.Created);
+            Assert.AreEqual(album2.Name, check2.Name);
+            Assert.AreEqual(album2.Date, check2.Date);
             Assert.AreEqual(album2.Creator, check2.Creator);
             Assert.AreEqual(album2.CreatorName, check2.CreatorName);
             Assert.AreEqual(album2.Thumbnail, check2.Thumbnail);
@@ -73,21 +73,21 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void CanBeReadByTitle()
         {
-            var checks1 = repository.GetByTitle("OK%");
+            var checks1 = repository.GetByName("OK%");
             Assert.AreEqual(1, checks1.Count());
             var check1 = checks1.FirstOrDefault();
             Assert.IsNotNull(check1);
-            Assert.AreEqual(album1.Title, check1.Title);
-            Assert.AreEqual(album1.Created, check1.Created);
+            Assert.AreEqual(album1.Name, check1.Name);
+            Assert.AreEqual(album1.Date, check1.Date);
             Assert.AreEqual(album1.Creator, check1.Creator);
             Assert.AreEqual(album1.CreatorName, album1.CreatorName);
             Assert.AreEqual(album1.Thumbnail, check1.Thumbnail);
-            var checks2 = repository.GetByTitle(album2.Title);
+            var checks2 = repository.GetByName(album2.Name);
             Assert.AreEqual(1, checks2.Count());
             var check2 = checks2.FirstOrDefault();
             Assert.IsNotNull(check2);
-            Assert.AreEqual(album2.Title, check2.Title);
-            Assert.AreEqual(album2.Created, check2.Created);
+            Assert.AreEqual(album2.Name, check2.Name);
+            Assert.AreEqual(album2.Date, check2.Date);
             Assert.AreEqual(album2.Creator, check2.Creator);
             Assert.AreEqual(album2.CreatorName, check2.CreatorName);
             Assert.AreEqual(album2.Thumbnail, check2.Thumbnail);
@@ -98,8 +98,8 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         {
             var check = repository.GetByCreator(new Uri(radioheadUrn));
             Assert.AreEqual(2, check.Count());
-            Assert.AreEqual(album5.Title, check.First().Title);
-            Assert.AreEqual(album1.Title, check.Last().Title);
+            Assert.AreEqual(album5.Name, check.First().Name);
+            Assert.AreEqual(album1.Name, check.Last().Name);
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         {
             repository.Save(new List<IAlbum> { album2 });
 
-            var check = repository.GetByTitle("Undertow");
+            var check = repository.GetByName("Undertow");
             Assert.AreEqual(1, check.Count());
         }
 

@@ -90,7 +90,7 @@ namespace Gnosis
         {
             InitializeMediaTypes();
 
-            foreach (var mediaType in mediaTypes)
+            foreach (var mediaType in all)
             {
                 byCode.Add(mediaType.ToString(), mediaType);
 
@@ -120,7 +120,7 @@ namespace Gnosis
             }
         }
 
-        private static readonly IList<IMediaType> mediaTypes = new List<IMediaType>();
+        private static readonly IList<IMediaType> all = new List<IMediaType>();
         private static readonly IDictionary<string, IMediaType> byCode = new Dictionary<string, IMediaType>();
         private static readonly IDictionary<string, IList<IMediaType>> byType = new Dictionary<string, IList<IMediaType>>();
         private static readonly IDictionary<string, IList<IMediaType>> byLegacyType = new Dictionary<string, IList<IMediaType>>();
@@ -131,33 +131,34 @@ namespace Gnosis
 
         private static void InitializeMediaTypes()
         {
-            mediaTypes.Add(ApplicationAtomXml);
-            mediaTypes.Add(ApplicationPdf);
-            mediaTypes.Add(ApplicationRssXml);
-            mediaTypes.Add(ApplicationXhtmlXml);
-            mediaTypes.Add(ApplicationXspfXml);
-            mediaTypes.Add(ApplicationXml);
-            mediaTypes.Add(ApplicationXmlDtd);
-            mediaTypes.Add(ApplicationUnknown);
-            mediaTypes.Add(ApplicationGnosisAlbum);
-            mediaTypes.Add(ApplicationGnosisArtist);
-            mediaTypes.Add(ApplicationGnosisFilesystemDirectory);
-            mediaTypes.Add(ApplicationGnosisPlaylist);
-            mediaTypes.Add(ApplicationGnosisTrack);
-            mediaTypes.Add(ApplicationGnosisUser);
-            mediaTypes.Add(ApplicationMicrosoftShortcut);
-            mediaTypes.Add(AudioMpeg);
-            mediaTypes.Add(ImageBmp);
-            mediaTypes.Add(ImageGif);
-            mediaTypes.Add(ImageJpeg);
-            mediaTypes.Add(ImagePng);
-            mediaTypes.Add(TextCss);
-            mediaTypes.Add(TextHtml);
-            mediaTypes.Add(TextPlain);
-            mediaTypes.Add(TextXsl);
-            mediaTypes.Add(VideoAvi);
-            mediaTypes.Add(VideoMpeg);
-            mediaTypes.Add(VideoWmv);
+            all.Add(ApplicationAtomXml);
+            all.Add(ApplicationPdf);
+            all.Add(ApplicationRssXml);
+            all.Add(ApplicationXhtmlXml);
+            all.Add(ApplicationXspfXml);
+            all.Add(ApplicationXml);
+            all.Add(ApplicationXmlDtd);
+            all.Add(ApplicationUnknown);
+            all.Add(ApplicationGnosisAlbum);
+            all.Add(ApplicationGnosisArtist);
+            all.Add(ApplicationGnosisFilesystemDirectory);
+            all.Add(ApplicationGnosisPlaylist);
+            all.Add(ApplicationGnosisPlaylistItem);
+            all.Add(ApplicationGnosisTrack);
+            all.Add(ApplicationGnosisUser);
+            all.Add(ApplicationMicrosoftShortcut);
+            all.Add(AudioMpeg);
+            all.Add(ImageBmp);
+            all.Add(ImageGif);
+            all.Add(ImageJpeg);
+            all.Add(ImagePng);
+            all.Add(TextCss);
+            all.Add(TextHtml);
+            all.Add(TextPlain);
+            all.Add(TextXsl);
+            all.Add(VideoAvi);
+            all.Add(VideoMpeg);
+            all.Add(VideoWmv);
         }
 
         #endregion
@@ -233,7 +234,7 @@ namespace Gnosis
 
         public static IEnumerable<IMediaType> GetMediaTypes()
         {
-            return mediaTypes;
+            return all;
         }
 
         #endregion
@@ -251,14 +252,17 @@ namespace Gnosis
         
         public static readonly IMediaType ApplicationGnosisAlbum = new MediaType(TypeApplication, "vnd.gnosis.album");
         public static readonly IMediaType ApplicationGnosisArtist = new MediaType(TypeApplication, "vnd.gnosis.artist");
-        public static readonly IMediaType ApplicationGnosisCut = new MediaType(TypeApplication, "vnd.gnosis.cut");
+        public static readonly IMediaType ApplicationGnosisClip = new MediaType(TypeApplication, "vnd.gosis.clip");
         public static readonly IMediaType ApplicationGnosisDoc = new MediaType(TypeApplication, "vnd.gosis.doc");
         public static readonly IMediaType ApplicationGnosisFilesystemDirectory = new MediaType(TypeApplication, "vnd.gnosis.fs.dir");
         public static readonly IMediaType ApplicationGnosisPic = new MediaType(TypeApplication, "vnd.gnosis.pic");
         public static readonly IMediaType ApplicationGnosisPlaylist = new MediaType(TypeApplication, "vnd.gnosis.playlist");
+        public static readonly IMediaType ApplicationGnosisPlaylistItem = new MediaType(TypeApplication, "vnd.gnosis.playlist.item");
         public static readonly IMediaType ApplicationGnosisProgram = new MediaType(TypeApplication, "vnd.gnosis.program");
         public static readonly IMediaType ApplicationGnosisTrack = new MediaType(TypeApplication, "vnd.gnosis.track");
         public static readonly IMediaType ApplicationGnosisUser = new MediaType(TypeApplication, "vnd.gnosis.user");
+        public static readonly IMediaType ApplicationGnosisUserCatalog = new MediaType(TypeApplication, "vnd.gnosis.user.catalog");
+        public static readonly IMediaType ApplicationGnosisUserFolder = new MediaType(TypeApplication, "vnd.gnosis.user.folder");
         
         public static readonly IMediaType ApplicationMicrosoftShortcut = new MediaType(TypeApplication, "x-ms-shortcut", new List<string> { ".lnk" }, new List<string>(), new List<byte[]> { new byte[] { 0x4C, 0x00, 0x00, 0x00, 0x01, 0x14, 0x02 } });
 

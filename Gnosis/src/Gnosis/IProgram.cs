@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis
 {
-    public interface IProg
+    public interface IProgram
         : IApplication
     {
         string Title { get; }
