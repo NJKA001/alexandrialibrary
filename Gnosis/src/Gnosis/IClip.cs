@@ -6,21 +6,7 @@ using System.Text;
 namespace Gnosis
 {
     public interface IClip
-        : IApplication
+        : IMediaItem
     {
-        string Title { get; }
-        uint Number { get; }
-        TimeSpan Duration { get; }
-        uint Height { get; }
-        uint Width { get; }
-
-        Uri Creator { get; }
-        string CreatorName { get; }
-        Uri Album { get; }
-        string AlbumTitle { get; }
-
-        Uri Target { get; }
-        IMediaType TargetType { get; }
-        Uri Thumbnail { get; }
     }
 }

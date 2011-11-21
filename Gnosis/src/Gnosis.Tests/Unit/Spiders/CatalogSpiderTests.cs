@@ -31,9 +31,9 @@ namespace Gnosis.Tests.Unit.Spiders
         private ITagRepository tagRepository;
         private ILinkRepository linkRepository;
         private IMediaRepository mediaRepository;
-        private IArtistRepository artistRepository;
-        private IAlbumRepository albumRepository;
-        private ITrackRepository trackRepository;
+        private IMediaItemRepository<IArtist> artistRepository;
+        private IMediaItemRepository<IAlbum> albumRepository;
+        private IMediaItemRepository<ITrack> trackRepository;
         private IMediaFactory mediaFactory = new MediaFactory();
         private ILinkTypeFactory linkTypeFactory = new LinkTypeFactory();
         private ITagTypeFactory tagTypeFactory = new TagTypeFactory();

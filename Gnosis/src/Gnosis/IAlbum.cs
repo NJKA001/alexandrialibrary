@@ -8,6 +8,5 @@ namespace Gnosis
     public interface IAlbum
         : IMediaItem
     {
-        DateTime Date { get; }
     }
 }

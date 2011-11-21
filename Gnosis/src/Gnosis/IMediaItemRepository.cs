@@ -13,9 +13,10 @@ namespace Gnosis
         void Delete(IEnumerable<Uri> items);
 
         T GetByLocation(Uri location);
-        T GetByTarget(Uri target);
+        T GetByCreatorAndName(Uri creator, string name);
         IEnumerable<T> GetByCatalog(Uri catalog);
         IEnumerable<T> GetByCreator(Uri creator);
-        IEnumerable<T> GetByTitle(string title);
+        IEnumerable<T> GetByName(string name);
+        IEnumerable<T> GetByTarget(Uri target);
     }
 }

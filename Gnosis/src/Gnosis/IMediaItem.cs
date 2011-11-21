@@ -9,6 +9,12 @@ namespace Gnosis
         : IMedia
     {
         string Name { get; }
+        DateTime FromDate { get; }
+        DateTime ToDate { get; }
+        uint Number { get; }
+        TimeSpan Duration { get; }
+        uint Height { get; }
+        uint Width { get; }
         Uri Creator { get; }
         string CreatorName { get; }
         Uri Catalog { get; }

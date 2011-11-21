@@ -14,7 +14,7 @@ namespace Gnosis.Spiders
     public class CatalogSpider
         : ISpider
     {
-        public CatalogSpider(ILogger logger, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IArtistRepository artistRepository, IAlbumRepository albumRepository, ITrackRepository trackRepository)
+        public CatalogSpider(ILogger logger, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -51,9 +51,9 @@ namespace Gnosis.Spiders
         private readonly ILinkRepository linkRepository;
         private readonly ITagRepository tagRepository;
         private readonly IMediaRepository mediaRepository;
-        private readonly IArtistRepository artistRepository;
-        private readonly IAlbumRepository albumRepository;
-        private readonly ITrackRepository trackRepository;
+        private readonly IMediaItemRepository<IArtist> artistRepository;
+        private readonly IMediaItemRepository<IAlbum> albumRepository;
+        private readonly IMediaItemRepository<ITrack> trackRepository;
 
         public TimeSpan Delay
         {
@@ -127,11 +127,11 @@ namespace Gnosis.Spiders
                     if (albumTag != null)
                     {
                         var albumTitle = albumTag.Tuple.ToString();
-                        var created = releasedTag != null ? releasedTag.Tuple.ToDateTime() : DateTime.MinValue;
+                        var releaseDate = releasedTag != null ? releasedTag.Tuple.ToDateTime() : DateTime.MinValue;
                         album = albumRepository.GetByCreatorAndName(artist.Location, albumTitle);
                         if (album == null)
                         {
-                            album = new GnosisAlbum(albumTitle, created, artist.Location, artist.Name, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, Guid.Empty.ToUrn());
+                            album = new GnosisAlbum(albumTitle, releaseDate, 0, artist.Location, artist.Name, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, Guid.Empty.ToUrn());
                             albumRepository.Save(new List<IAlbum> { album });
                         }
                     }

@@ -8,7 +8,7 @@ namespace Gnosis.Application.Vendor
     public abstract class GnosisMediaItemBase
         : IMediaItem, IApplication
     {
-        protected GnosisMediaItemBase(string name, Uri creator, string creatorName, Uri catalog, string catalogName, Uri target, IMediaType targetType, Uri user, string userName, Uri thumbnail, IMediaType type, Uri location)
+        protected GnosisMediaItemBase(string name, DateTime fromDate, DateTime toDate, uint number, TimeSpan duration, uint height, uint width, Uri creator, string creatorName, Uri catalog, string catalogName, Uri target, IMediaType targetType, Uri user, string userName, Uri thumbnail, IMediaType type, Uri location)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -36,6 +36,12 @@ namespace Gnosis.Application.Vendor
                 throw new ArgumentNullException("location");
 
             this.name = name;
+            this.fromDate = fromDate;
+            this.toDate = toDate;
+            this.number = number;
+            this.duration = duration;
+            this.height = height;
+            this.width = width;
             this.creator = creator;
             this.creatorName = creatorName;
             this.catalog = catalog;
@@ -50,6 +56,12 @@ namespace Gnosis.Application.Vendor
         }
 
         private readonly string name;
+        private readonly DateTime fromDate;
+        private readonly DateTime toDate;
+        private readonly uint number;
+        private readonly TimeSpan duration;
+        private readonly uint height;
+        private readonly uint width;
         private readonly Uri creator;
         private readonly string creatorName;
         private readonly Uri catalog;
@@ -65,6 +77,36 @@ namespace Gnosis.Application.Vendor
         public string Name
         {
             get { return name; }
+        }
+
+        public DateTime FromDate
+        {
+            get { return fromDate; }
+        }
+
+        public DateTime ToDate
+        {
+            get { return toDate; }
+        }
+
+        public uint Number
+        {
+            get { return number; }
+        }
+
+        public TimeSpan Duration
+        {
+            get { return duration; }
+        }
+
+        public uint Height
+        {
+            get { return height; }
+        }
+
+        public uint Width
+        {
+            get { return width; }
         }
 
         public Uri Creator

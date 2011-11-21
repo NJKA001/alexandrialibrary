@@ -91,9 +91,9 @@ namespace Gnosis.Alexandria.Views
         private readonly IMediaDetailRepository mediaDetailRepository;
         private readonly ILinkRepository linkRepository;
         private readonly ITagRepository tagRepository;
-        private readonly IArtistRepository artistRepository;
-        private readonly IAlbumRepository albumRepository;
-        private readonly ITrackRepository trackRepository;
+        private readonly IMediaItemRepository<IArtist> artistRepository;
+        private readonly IMediaItemRepository<IAlbum> albumRepository;
+        private readonly IMediaItemRepository<ITrack> trackRepository;
 
         private readonly SpiderFactory spiderFactory;
         private readonly ICatalogController catalogController;

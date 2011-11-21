@@ -109,7 +109,6 @@
     <Compile Include="ArtistSummary.cs" />
     <Compile Include="Audio\AudioBase.cs" />
     <Compile Include="IAlbum.cs" />
-    <Compile Include="IAlbumRepository.cs" />
     <Compile Include="IAlbumSummary.cs" />
     <Compile Include="IUserFolder.cs" />
     <Compile Include="IClip.cs" />
@@ -123,7 +122,6 @@
     <Compile Include="IProgram.cs" />
     <Compile Include="IApplicationRunner.cs" />
     <Compile Include="IArtist.cs" />
-    <Compile Include="IArtistRepository.cs" />
     <Compile Include="IArtistSummary.cs" />
     <Compile Include="IAudio.cs" />
     <Compile Include="Audio\IMpegAudio.cs" />
@@ -246,7 +244,6 @@
     <Compile Include="ILinkRepository.cs" />
     <Compile Include="ILinkType.cs" />
     <Compile Include="ILinkTypeFactory.cs" />
-    <Compile Include="IMediaAggregate.cs" />
     <Compile Include="IMediaDetail.cs" />
     <Compile Include="IMediaDetailRepository.cs" />
     <Compile Include="IPic.cs" />
@@ -267,11 +264,10 @@
     <Compile Include="IText.cs" />
     <Compile Include="ITextViewer.cs" />
     <Compile Include="ITrack.cs" />
-    <Compile Include="ITrackRepository.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="IUserCatalog.cs" />
+    <Compile Include="IUserRepsository.cs" />
     <Compile Include="IVideoPlayer.cs" />
-    <Compile Include="MediaAggregate.cs" />
     <Compile Include="Spiders\PlaylistSpider.cs" />
     <Compile Include="TaskProgress.cs" />
     <Compile Include="IVideo.cs" />

@@ -6,19 +6,7 @@ using System.Text;
 namespace Gnosis
 {
     public interface ITrack
-        : IApplication
+        : IMediaItem
     {
-        string Title { get; }
-        uint Number { get; }
-        TimeSpan Duration { get; }
-
-        Uri Creator { get; }
-        string CreatorName { get; }
-        Uri Album { get; }
-        string AlbumTitle { get; }
-        
-        Uri Target { get; }
-        IMediaType TargetType { get; }
-        Uri Thumbnail { get; }
     }
 }

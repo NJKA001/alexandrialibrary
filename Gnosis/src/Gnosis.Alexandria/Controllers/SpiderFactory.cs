@@ -9,7 +9,7 @@ namespace Gnosis.Alexandria.Controllers
 {
     public class SpiderFactory
     {
-        public SpiderFactory(ILogger logger, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IArtistRepository artistRepository, IAlbumRepository albumRepository, ITrackRepository trackRepository)
+        public SpiderFactory(ILogger logger, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -43,9 +43,9 @@ namespace Gnosis.Alexandria.Controllers
         private readonly ILinkRepository linkRepository;
         private readonly ITagRepository tagRepository;
         private readonly IMediaRepository mediaRepository;
-        private readonly IArtistRepository artistRepository;
-        private readonly IAlbumRepository albumRepository;
-        private readonly ITrackRepository trackRepository;
+        private readonly IMediaItemRepository<IArtist> artistRepository;
+        private readonly IMediaItemRepository<IAlbum> albumRepository;
+        private readonly IMediaItemRepository<ITrack> trackRepository;
 
         public ISpider CreateCatalogSpider()
         {

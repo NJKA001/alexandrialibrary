@@ -31,7 +31,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
 
         protected readonly ILogger logger = new DebugLogger();
         protected readonly IDbConnection connection;
-        protected readonly IArtistRepository repository;
+        protected readonly IMediaItemRepository<IArtist> repository;
 
         private IArtist artist1 = new GnosisArtist("Radiohead", new DateTime(1985, 1, 2), DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image.jpg"));
         private IArtist artist2 = new GnosisArtist("Tool", new DateTime(1991, 2, 28), DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image2.jpg"));
@@ -47,6 +47,15 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         public void TearDown()
         {
             connection.Close();
+        }
+
+        [Test]
+        public void DefaultArtistCannotBeDeleted()
+        {
+            repository.Delete(new List<Uri> { GnosisArtist.Unknown.Location });
+            var check = repository.GetByLocation(GnosisArtist.Unknown.Location);
+            Assert.IsNotNull(check);
+            Assert.AreEqual(check, GnosisArtist.Unknown);
         }
 
         [Test]

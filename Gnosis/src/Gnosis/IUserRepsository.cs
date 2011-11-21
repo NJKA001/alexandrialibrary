@@ -5,8 +5,7 @@ using System.Text;
 
 namespace Gnosis
 {
-    public interface IProgram
-        : IMediaItem
+    public interface IUserRepsository
     {
     }
 }

@@ -8,7 +8,5 @@ namespace Gnosis
     public interface IArtist
         : IMediaItem
     {
-        DateTime FromDate { get; }
-        DateTime ToDate { get; }
     }
 }
