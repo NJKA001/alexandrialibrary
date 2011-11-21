@@ -23,7 +23,7 @@ namespace Gnosis.Data.SQLite
 
         protected override ITrack GetItem(Uri location, string name, DateTime fromDate, DateTime toDate, uint number, TimeSpan duration, uint height, uint width, Uri creator, string creatorName, Uri catalog, string catalogName, Uri target, IMediaType targetType, Uri user, string userName, Uri thumbnail)
         {
-            return new GnosisTrack(name, number, duration, creator, creatorName, catalog, catalogName, target, targetType, user, userName, thumbnail, location);
+            return new GnosisTrack(name, fromDate, toDate, number, duration, creator, creatorName, catalog, catalogName, target, targetType, user, userName, thumbnail, location);
         }
 
         protected override ITrack GetDefaultItem()

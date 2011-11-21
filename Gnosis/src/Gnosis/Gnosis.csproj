@@ -95,6 +95,8 @@
     <Compile Include="Application\Pdf\PdfDocument.cs" />
     <Compile Include="Application\Vendor\GnosisClip.cs" />
     <Compile Include="Application\Vendor\GnosisDoc.cs" />
+    <Compile Include="Application\Vendor\GnosisFeed.cs" />
+    <Compile Include="Application\Vendor\GnosisFeedItem.cs" />
     <Compile Include="Application\Vendor\GnosisFilesystemDirectory.cs" />
     <Compile Include="Application\Vendor\GnosisMediaItemBase.cs" />
     <Compile Include="Application\Vendor\GnosisPic.cs" />
@@ -110,6 +112,8 @@
     <Compile Include="Audio\AudioBase.cs" />
     <Compile Include="IAlbum.cs" />
     <Compile Include="IAlbumSummary.cs" />
+    <Compile Include="IFeed.cs" />
+    <Compile Include="IFeedItem.cs" />
     <Compile Include="IUserFolder.cs" />
     <Compile Include="IClip.cs" />
     <Compile Include="IClipRepository.cs" />
@@ -117,8 +121,6 @@
     <Compile Include="IDocRepository.cs" />
     <Compile Include="IMediaItem.cs" />
     <Compile Include="IMediaItemRepository.cs" />
-    <Compile Include="IPicRepository.cs" />
-    <Compile Include="IPlaylistRepository.cs" />
     <Compile Include="IProgram.cs" />
     <Compile Include="IApplicationRunner.cs" />
     <Compile Include="IArtist.cs" />
@@ -248,7 +250,6 @@
     <Compile Include="IMediaDetailRepository.cs" />
     <Compile Include="IPic.cs" />
     <Compile Include="IPlaylist.cs" />
-    <Compile Include="IProgramRepository.cs" />
     <Compile Include="ISpider.cs" />
     <Compile Include="IMediaSummary.cs" />
     <Compile Include="IMediaSummaryRepository.cs" />
@@ -268,6 +269,7 @@
     <Compile Include="IUserCatalog.cs" />
     <Compile Include="IUserRepsository.cs" />
     <Compile Include="IVideoPlayer.cs" />
+    <Compile Include="SecurityContext.cs" />
     <Compile Include="Spiders\PlaylistSpider.cs" />
     <Compile Include="TaskProgress.cs" />
     <Compile Include="IVideo.cs" />

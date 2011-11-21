@@ -102,40 +102,17 @@ namespace Gnosis.Spiders
 
         private void SaveTrack(IAudio audio)
         {
-            var track = trackRepository.GetByTarget(audio.Location);
+            var track = trackRepository.GetByTarget(audio.Location).FirstOrDefault();
             if (track == null)
             {
-                IArtist artist = null;
-                IAlbum album = null;
+                var artist = audio.GetArtist(artistRepository);
+                artistRepository.Save(new List<IArtist> { artist });
 
-                var tags = audio.GetTags();
-                var titleTag = tags.Where(x => x.Type == Id3v2TagType.Title).FirstOrDefault();
-                var artistTag = tags.Where(x => x.Type == Id3v2TagType.Artist).FirstOrDefault();
-                var albumTag = tags.Where(x => x.Type == Id3v2TagType.Album).FirstOrDefault();
-                var releasedTag = tags.Where(x => x.Type == Id3v2TagType.ReleaseTime).FirstOrDefault();
+                var album = audio.GetAlbum(albumRepository, artist);
+                albumRepository.Save(new List<IAlbum> { album });
 
-                if (artistTag != null)
-                {
-                    var artistName = artistTag.Tuple.ToString();
-                    artist = artistRepository.GetByName(artistName).FirstOrDefault();
-                    if (artist == null)
-                    {
-                        artist = new GnosisArtist(artistName, DateTime.MinValue, DateTime.MaxValue, GnosisArtist.Unknown.Location, GnosisArtist.Unknown.Name, Guid.NewGuid().ToUrn(), "Unknown", Guid.NewGuid().ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, Guid.NewGuid().ToUrn());
-                        artistRepository.Save(new List<IArtist> { artist });
-                    }
-
-                    if (albumTag != null)
-                    {
-                        var albumTitle = albumTag.Tuple.ToString();
-                        var releaseDate = releasedTag != null ? releasedTag.Tuple.ToDateTime() : DateTime.MinValue;
-                        album = albumRepository.GetByCreatorAndName(artist.Location, albumTitle);
-                        if (album == null)
-                        {
-                            album = new GnosisAlbum(albumTitle, releaseDate, 0, artist.Location, artist.Name, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, Guid.Empty.ToUrn());
-                            albumRepository.Save(new List<IAlbum> { album });
-                        }
-                    }
-                }
+                track = audio.GetTrack(trackRepository, artist, album);
+                trackRepository.Save(new List<ITrack> { track });
             }
         }
 

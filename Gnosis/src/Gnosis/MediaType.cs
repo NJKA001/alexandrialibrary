@@ -141,11 +141,19 @@ namespace Gnosis
             all.Add(ApplicationUnknown);
             all.Add(ApplicationGnosisAlbum);
             all.Add(ApplicationGnosisArtist);
+            all.Add(ApplicationGnosisClip);
+            all.Add(ApplicationGnosisDoc);
+            all.Add(ApplicationGnosisFeed);
+            all.Add(ApplicationGnosisFeedItem);
             all.Add(ApplicationGnosisFilesystemDirectory);
+            all.Add(ApplicationGnosisPic);
             all.Add(ApplicationGnosisPlaylist);
             all.Add(ApplicationGnosisPlaylistItem);
+            all.Add(ApplicationGnosisProgram);
             all.Add(ApplicationGnosisTrack);
             all.Add(ApplicationGnosisUser);
+            all.Add(ApplicationGnosisUserCatalog);
+            all.Add(ApplicationGnosisUserFolder);
             all.Add(ApplicationMicrosoftShortcut);
             all.Add(AudioMpeg);
             all.Add(ImageBmp);
@@ -254,6 +262,8 @@ namespace Gnosis
         public static readonly IMediaType ApplicationGnosisArtist = new MediaType(TypeApplication, "vnd.gnosis.artist");
         public static readonly IMediaType ApplicationGnosisClip = new MediaType(TypeApplication, "vnd.gosis.clip");
         public static readonly IMediaType ApplicationGnosisDoc = new MediaType(TypeApplication, "vnd.gosis.doc");
+        public static readonly IMediaType ApplicationGnosisFeed = new MediaType(TypeApplication, "vnd.gnosis.feed");
+        public static readonly IMediaType ApplicationGnosisFeedItem = new MediaType(TypeApplication, "vnd.gnosis.feed.item");
         public static readonly IMediaType ApplicationGnosisFilesystemDirectory = new MediaType(TypeApplication, "vnd.gnosis.fs.dir");
         public static readonly IMediaType ApplicationGnosisPic = new MediaType(TypeApplication, "vnd.gnosis.pic");
         public static readonly IMediaType ApplicationGnosisPlaylist = new MediaType(TypeApplication, "vnd.gnosis.playlist");

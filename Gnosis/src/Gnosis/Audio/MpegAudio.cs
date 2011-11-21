@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Application.Vendor;
 using Gnosis.Tags.Id3;
 using Gnosis.Tags.Id3.Id3v1;
 using Gnosis.Tags.Id3.Id3v2;
@@ -78,6 +79,56 @@ namespace Gnosis.Audio
         public IEnumerable<IId3Tag> GetId3Tags()
         {
             throw new NotImplementedException();
+        }
+
+        public IArtist GetArtist(IMediaItemRepository<IArtist> artistRepository)
+        {
+            var artistTag = GetTags().Where(x => x.Type == Id3v2TagType.Artist).FirstOrDefault();
+            if (artistTag == null)
+                return GnosisArtist.Unknown;
+
+            var artistName = artistTag.Tuple.ToString();
+            var artist = artistRepository.GetByName(artistName).FirstOrDefault();
+            if (artist != null)
+                return artist;
+
+            return new GnosisArtist(artistName, DateTime.MinValue, DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown Artist", Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, SecurityContext.CurrentUser.Location, SecurityContext.CurrentUser.Name, Guid.Empty.ToUrn());
+        }
+
+        public IAlbum GetAlbum(IMediaItemRepository<IAlbum> albumRepository, IArtist artist)
+        {
+            var albumTitle = "Unknown Album";
+            var albumTag = GetTags().Where(x => x.Type == Id3v2TagType.Album).FirstOrDefault();
+            if (albumTag != null)
+            {
+                albumTitle = albumTag.Tuple.ToString();
+                var album = albumRepository.GetByCreatorAndName(artist.Location, albumTitle);
+                if (album != null)
+                    return album;
+            }
+
+            return new GnosisAlbum(albumTitle, DateTime.MinValue, 0, artist.Location, artist.Name, Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, SecurityContext.CurrentUser.Location, SecurityContext.CurrentUser.Name, Guid.Empty.ToUrn());
+        }
+
+        public ITrack GetTrack(IMediaItemRepository<ITrack> trackRepository, IArtist artist, IAlbum album)
+        {
+            var track = trackRepository.GetByTarget(Location).FirstOrDefault();
+            if (track != null)
+                return track;
+
+            var name = "Unknown Track";
+            var recordDate = DateTime.MinValue;
+            var releaseDate = DateTime.MaxValue;
+            uint number = 0;
+            var duration = TimeSpan.Zero;
+            var thumbnail = Guid.Empty.ToUrn();
+
+            var tags = GetTags();
+            var titleTag = tags.Where(x => x.Type == Id3v2TagType.Title).FirstOrDefault();
+            var recordTag = tags.Where(x => x.Type == Id3v2TagType.RecordingTime).FirstOrDefault();
+            var releasedTag = tags.Where(x => x.Type == Id3v2TagType.ReleaseTime).FirstOrDefault();
+
+            return new GnosisTrack(name, recordDate, releaseDate, number, duration, artist.Location, artist.Name, album.Location, album.Name, Location, Type, SecurityContext.CurrentUser.Location, SecurityContext.CurrentUser.Name, thumbnail);
         }
 
         public void SetTag(IId3Tag tag)
