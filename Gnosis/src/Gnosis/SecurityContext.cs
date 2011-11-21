@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Application.Vendor;
+
 namespace Gnosis
 {
     public static class SecurityContext
     {
-        private static IUser currentUser;
+        private static IUser currentUser = GnosisUser.Administrator;
 
         public static IUser CurrentUser
         {
