@@ -8,7 +8,7 @@ namespace Gnosis.Application.Vendor
     public abstract class GnosisMediaItemBase
         : IMediaItem, IApplication
     {
-        protected GnosisMediaItemBase(string name, DateTime fromDate, DateTime toDate, uint number, TimeSpan duration, uint height, uint width, Uri creator, string creatorName, Uri catalog, string catalogName, Uri target, IMediaType targetType, Uri user, string userName, Uri thumbnail, IMediaType type, Uri location)
+        protected GnosisMediaItemBase(string name, DateTime fromDate, DateTime toDate, uint number, TimeSpan duration, uint height, uint width, Uri creator, string creatorName, Uri catalog, string catalogName, Uri target, IMediaType targetType, Uri user, string userName, Uri thumbnail, byte[] thumbnailData, IMediaType type, Uri location)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -30,6 +30,8 @@ namespace Gnosis.Application.Vendor
                 throw new ArgumentNullException("userName");
             if (thumbnail == null)
                 throw new ArgumentNullException("thumbnail");
+            if (thumbnailData == null)
+                throw new ArgumentNullException("thumbnailData");
             if (type == null)
                 throw new ArgumentNullException("type");
             if (location == null)
@@ -51,6 +53,7 @@ namespace Gnosis.Application.Vendor
             this.user = user;
             this.userName = userName;
             this.thumbnail = thumbnail;
+            this.thumbnailData = thumbnailData;
             this.type = type;
             this.location = location;
         }
@@ -71,6 +74,7 @@ namespace Gnosis.Application.Vendor
         private readonly Uri user;
         private readonly string userName;
         private readonly Uri thumbnail;
+        private readonly byte[] thumbnailData;
         private readonly IMediaType type;
         private readonly Uri location;
 
@@ -152,6 +156,11 @@ namespace Gnosis.Application.Vendor
         public Uri Thumbnail
         {
             get { return thumbnail; }
+        }
+
+        public byte[] ThumbnailData
+        {
+            get { return thumbnailData; }
         }
 
         public Uri Location

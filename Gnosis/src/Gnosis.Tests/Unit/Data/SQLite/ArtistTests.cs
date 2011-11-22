@@ -33,10 +33,10 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected readonly IDbConnection connection;
         protected readonly IMediaItemRepository<IArtist> repository;
 
-        private IArtist artist1 = new GnosisArtist("Radiohead", new DateTime(1985, 1, 2), DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image.jpg"));
-        private IArtist artist2 = new GnosisArtist("Tool", new DateTime(1991, 2, 28), DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image2.jpg"));
-        private IArtist artist3 = new GnosisArtist("Cat Power", new DateTime(1997, 10, 15), DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image3.jpg"));
-        private IArtist artist4 = new GnosisArtist("PJ Harvey", new DateTime(2011, 11, 11), DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image4.jpg"));
+        private IArtist artist1 = new GnosisArtist("Radiohead", new DateTime(1985, 1, 2), DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image.jpg"), new byte[0]);
+        private IArtist artist2 = new GnosisArtist("Tool", new DateTime(1991, 2, 28), DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image2.jpg"), new byte[0]);
+        private IArtist artist3 = new GnosisArtist("Cat Power", new DateTime(1997, 10, 15), DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image3.jpg"), new byte[0]);
+        private IArtist artist4 = new GnosisArtist("PJ Harvey", new DateTime(2011, 11, 11), DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image4.jpg"), new byte[0]);
 
         [TestFixtureSetUp]
         public void Setup()

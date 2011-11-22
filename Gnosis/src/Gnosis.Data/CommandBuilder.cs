@@ -31,10 +31,10 @@ namespace Gnosis.Data
         {
             if (name == null)
                 throw new ArgumentNullException("name");
+            //if (value == null)
+                //throw new ArgumentNullException("value");
 
-            var paramValue = value ?? "null";
-
-            parameters.Add(name, paramValue);
+            parameters.Add(name, value);
         }
 
         public void Append(string value)

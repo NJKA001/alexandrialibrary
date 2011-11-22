@@ -24,5 +24,6 @@ namespace Gnosis
         Uri User { get; }
         string UserName { get; }
         Uri Thumbnail { get; }
+        byte[] ThumbnailData { get; }
     }
 }

@@ -28,7 +28,7 @@ namespace Gnosis.Data.SQLite
         private readonly string tableName;
         private readonly T defaultItem;
 
-        protected abstract T GetItem(Uri location, string name, DateTime fromDate, DateTime toDate, uint number, TimeSpan duration, uint height, uint width, Uri creator, string creatorName, Uri catalog, string catalogName, Uri target, IMediaType targetType, Uri user, string userName, Uri thumbnail);
+        protected abstract T GetItem(Uri location, string name, DateTime fromDate, DateTime toDate, uint number, TimeSpan duration, uint height, uint width, Uri creator, string creatorName, Uri catalog, string catalogName, Uri target, IMediaType targetType, Uri user, string userName, Uri thumbnail, byte[] thumbnailData);
 
         protected virtual ICommandBuilder GetInitializeBuilder()
         {
@@ -42,7 +42,7 @@ namespace Gnosis.Data.SQLite
             builder.Append("Catalog text not null, CatalogName text not null, ");
             builder.Append("Target text not null, TargetType text not null, ");
             builder.Append("User text not null, UserName text not null, ");
-            builder.AppendLine("Thumbnail text not null);");
+            builder.AppendLine("Thumbnail text not null, ThumbnailData blob not null);");
 
             builder.AppendFormatLine("create index if not exists {0}_Name on {0} (Name asc);", tableName);
             builder.AppendFormatLine("create index if not exists {0}_Catalog on {0} (Catalog asc);", tableName);
@@ -75,10 +75,10 @@ namespace Gnosis.Data.SQLite
             builder.AppendFormat("replace into {0} (", tableName);
             builder.Append("Location, Name, FromDate, ToDate, Number, Duration, Height, Width, ");
             builder.Append("Creator, CreatorName, Catalog, CatalogName, Target, TargetType, ");
-            builder.Append("User, UserName, Thumbnail) values (");
+            builder.Append("User, UserName, Thumbnail, ThumbnailData) values (");
             builder.Append("@Location, @Name, @FromDate, @ToDate, @Number, @Duration, @Height, @Width, ");
             builder.Append("@Creator, @CreatorName, @Catalog, @CatalogName, @Target, @TargetType, ");
-            builder.Append("@User, @UserName, @Thumbnail);");
+            builder.Append("@User, @UserName, @Thumbnail, @ThumbnailData);");
             
             builder.AddParameter("@Location", item.Location.ToString());
             builder.AddParameter("@Name", item.Name);
@@ -97,6 +97,7 @@ namespace Gnosis.Data.SQLite
             builder.AddParameter("@User", item.User.ToString());
             builder.AddParameter("@UserName", item.UserName);
             builder.AddParameter("@Thumbnail", item.Thumbnail.ToString());
+            builder.AddParameter("@ThumbnailData", item.ThumbnailData);
 
             return builder;
         }
@@ -202,8 +203,9 @@ namespace Gnosis.Data.SQLite
             var user = record.GetUri("User");
             var userName = record.GetString("UserName");
             var thumbnail = record.GetUri("Thumbnail");
+            var thumbnailData = record.GetBytes("ThumbnailData");
 
-            return GetItem(location, name, fromDate, toDate, number, duration, height, width, creator, creatorName, catalog, catalogName, target, targetType, user, userName, thumbnail);
+            return GetItem(location, name, fromDate, toDate, number, duration, height, width, creator, creatorName, catalog, catalogName, target, targetType, user, userName, thumbnail, thumbnailData);
         }
 
         public void Initialize()
