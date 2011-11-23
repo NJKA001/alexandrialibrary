@@ -146,10 +146,12 @@ namespace Gnosis
             all.Add(ApplicationGnosisFeed);
             all.Add(ApplicationGnosisFeedItem);
             all.Add(ApplicationGnosisFilesystemDirectory);
+            all.Add(ApplicationGnosisLink);
             all.Add(ApplicationGnosisPic);
             all.Add(ApplicationGnosisPlaylist);
             all.Add(ApplicationGnosisPlaylistItem);
             all.Add(ApplicationGnosisProgram);
+            all.Add(ApplicationGnosisTag);
             all.Add(ApplicationGnosisTrack);
             all.Add(ApplicationGnosisUser);
             all.Add(ApplicationGnosisUserCatalog);
@@ -265,10 +267,12 @@ namespace Gnosis
         public static readonly IMediaType ApplicationGnosisFeed = new MediaType(TypeApplication, "vnd.gnosis.feed");
         public static readonly IMediaType ApplicationGnosisFeedItem = new MediaType(TypeApplication, "vnd.gnosis.feed.item");
         public static readonly IMediaType ApplicationGnosisFilesystemDirectory = new MediaType(TypeApplication, "vnd.gnosis.fs.dir");
+        public static readonly IMediaType ApplicationGnosisLink = new MediaType(TypeApplication, "vnd.gnosis.link");
         public static readonly IMediaType ApplicationGnosisPic = new MediaType(TypeApplication, "vnd.gnosis.pic");
         public static readonly IMediaType ApplicationGnosisPlaylist = new MediaType(TypeApplication, "vnd.gnosis.playlist");
         public static readonly IMediaType ApplicationGnosisPlaylistItem = new MediaType(TypeApplication, "vnd.gnosis.playlist.item");
         public static readonly IMediaType ApplicationGnosisProgram = new MediaType(TypeApplication, "vnd.gnosis.program");
+        public static readonly IMediaType ApplicationGnosisTag = new MediaType(TypeApplication, "vnd.gnosis.tag");
         public static readonly IMediaType ApplicationGnosisTrack = new MediaType(TypeApplication, "vnd.gnosis.track");
         public static readonly IMediaType ApplicationGnosisUser = new MediaType(TypeApplication, "vnd.gnosis.user");
         public static readonly IMediaType ApplicationGnosisUserCatalog = new MediaType(TypeApplication, "vnd.gnosis.user.catalog");

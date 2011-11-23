@@ -583,19 +583,7 @@
     <Compile Include="Video\VideoBase.cs" />
     <Compile Include="Video\WmvVideo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Document\Xml\Atom\" />
-    <Folder Include="Document\Xml\DublinCore\" />
-    <Folder Include="Document\Xml\Extensions\" />
-    <Folder Include="Document\Xml\FeedBurner\" />
-    <Folder Include="Document\Xml\Google\" />
-    <Folder Include="Document\Xml\MediaRss\" />
-    <Folder Include="Document\Xml\OpenSearch\" />
-    <Folder Include="Document\Xml\Rss\" />
-    <Folder Include="Document\Xml\Xhtml\" />
-    <Folder Include="Document\Xml\Xspf\" />
-    <Folder Include="Document\Xml\YouTube\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\lib\taglib-sharp\2.0.3.7\taglib-sharp.csproj">
       <Project>{4CC18776-125E-4318-9D24-D60110AD9697}</Project>
