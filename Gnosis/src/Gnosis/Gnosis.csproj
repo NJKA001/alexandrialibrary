@@ -239,12 +239,7 @@
     <Compile Include="Extensions\GuidExtensions.cs" />
     <Compile Include="IPlaylistItem.cs" />
     <Compile Include="IImageViewer.cs" />
-    <Compile Include="ILinkFactory.cs" />
     <Compile Include="ILinkRepository.cs" />
-    <Compile Include="ILinkType.cs" />
-    <Compile Include="ILinkTypeFactory.cs" />
-    <Compile Include="IMediaDetail.cs" />
-    <Compile Include="IMediaDetailRepository.cs" />
     <Compile Include="IPic.cs" />
     <Compile Include="IPlaylist.cs" />
     <Compile Include="ISpider.cs" />
@@ -269,10 +264,6 @@
     <Compile Include="Spiders\PlaylistSpider.cs" />
     <Compile Include="TaskProgress.cs" />
     <Compile Include="IVideo.cs" />
-    <Compile Include="Links\Html\HtmlLinkType.cs" />
-    <Compile Include="Links\LinkType.cs" />
-    <Compile Include="Links\LinkTypeFactory.cs" />
-    <Compile Include="MediaDetail.cs" />
     <Compile Include="Spiders\CatalogSpider.cs" />
     <Compile Include="Tags\Id3\Id3v1\Id3v1Extensions.cs" />
     <Compile Include="Tags\Id3\Id3v1\Id3v1Genre.cs" />
@@ -285,7 +276,6 @@
     <Compile Include="IAlgorithm.cs" />
     <Compile Include="ILink.cs" />
     <Compile Include="Tasks\CatalogMediaTask.cs" />
-    <Compile Include="Tasks\MediaDetailSearchTask.cs" />
     <Compile Include="Tasks\TagSearchTask.cs" />
     <Compile Include="Text\PlainText.cs" />
     <Compile Include="Application\Vendor\GnosisTrack.cs" />

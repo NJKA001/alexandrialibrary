@@ -9,11 +9,11 @@ namespace Gnosis
     {
         ILink GetById(long id);
         IEnumerable<ILink> GetBySource(Uri source);
-        IEnumerable<ILink> GetBySource(Uri source, ILinkType type);
+        IEnumerable<ILink> GetBySource(Uri source, string relationship);
         IEnumerable<ILink> GetByTarget(Uri target);
-        IEnumerable<ILink> GetByTarget(Uri target, ILinkType type);
+        IEnumerable<ILink> GetByTarget(Uri target, string relationship);
         IEnumerable<ILink> GetBySourceAndTarget(Uri source, Uri target);
-        IEnumerable<ILink> GetBySourceAndTarget(Uri source, Uri target, ILinkType type);
+        IEnumerable<ILink> GetBySourceAndTarget(Uri source, Uri target, string relationship);
 
         void Initialize();
         void Delete(IEnumerable<long> ids);

@@ -95,7 +95,6 @@
     <Compile Include="Unit\Extensions\StringExtensionTests.cs" />
     <Compile Include="Unit\Data\Firebird\FirebirdTests.cs" />
     <Compile Include="Unit\Data\SQLite\LinkTests.cs" />
-    <Compile Include="Unit\Data\SQLite\MediaDetailTests.cs" />
     <Compile Include="Unit\Data\SQLite\MediaTests.cs" />
     <Compile Include="Unit\Data\SQLite\TagTests.cs" />
     <Compile Include="Unit\Application\Xml\XspfTests.cs" />

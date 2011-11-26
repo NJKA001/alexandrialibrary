@@ -10,7 +10,7 @@ namespace Gnosis
         long Id { get; }
         Uri Source { get; }
         Uri Target { get; }
-        ILinkType Type{ get; }
+        string Relationship { get; }
         string Name { get; }
     }
 }

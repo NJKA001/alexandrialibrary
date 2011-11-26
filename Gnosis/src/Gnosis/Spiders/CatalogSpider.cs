@@ -139,11 +139,11 @@ namespace Gnosis.Spiders
                 var thumbnails = new List<ILink>();
                 foreach (var related in mediaRepository.ByLocation(pattern))
                 {
-                    thumbnails.Add(new Link(related.Location, media.Location, LinkType.AlbumThumbnail, fileInfo.Name));
+                    thumbnails.Add(new Link(related.Location, media.Location, MediaType.ApplicationGnosisAlbumThumbnail.ToString(), fileInfo.Name));
 
                     if (artistThumbnailPath != null)
                     {
-                        thumbnails.Add(new Link(related.Location, new Uri(artistThumbnailPath), LinkType.ArtistThumbnail, fileInfo.Name));
+                        thumbnails.Add(new Link(related.Location, new Uri(artistThumbnailPath), MediaType.ApplicationGnosisArtistThumbnail.ToString(), fileInfo.Name));
                     }
                 }
 

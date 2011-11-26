@@ -44,13 +44,12 @@ namespace Gnosis.Alexandria.Views
             {
                 logger.Info("Initializing Alexandria");
                 mediaFactory = new MediaFactory();
-                linkTypeFactory = new LinkTypeFactory();
                 tagTypeFactory = new TagTypeFactory();
 
                 mediaRepository = new SQLiteMediaRepository(logger);
                 mediaRepository.Initialize();
 
-                linkRepository = new SQLiteLinkRepository(logger, linkTypeFactory);
+                linkRepository = new SQLiteLinkRepository(logger);
                 linkRepository.Initialize();
 
                 tagRepository = new SQLiteTagRepository(logger, tagTypeFactory);
@@ -65,16 +64,13 @@ namespace Gnosis.Alexandria.Views
                 trackRepository = new SQLiteTrackRepository(logger);
                 trackRepository.Initialize();
 
-                mediaDetailRepository = new SQLiteMediaDetailRepository(logger, tagRepository, linkRepository);
-
                 catalogController = new CatalogController(logger, mediaFactory, mediaRepository, linkRepository, tagRepository, artistRepository, albumRepository, trackRepository);
-                mediaController = new MediaController(logger, mediaDetailRepository);
                 spiderFactory = new SpiderFactory(logger, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository);
 
                 taskController = new TaskController(logger);
 
                 taskManagerView.Initialize(logger, spiderFactory, taskController);
-                searchView.Initialize(logger, mediaDetailRepository, tagRepository, taskController);
+                searchView.Initialize(logger, tagRepository, taskController);
             }
             catch (Exception ex)
             {
@@ -84,11 +80,9 @@ namespace Gnosis.Alexandria.Views
 
         private readonly ILogger logger;
         private readonly IMediaFactory mediaFactory;
-        private readonly ILinkTypeFactory linkTypeFactory;
         private readonly ITagTypeFactory tagTypeFactory;
 
         private readonly IMediaRepository mediaRepository;
-        private readonly IMediaDetailRepository mediaDetailRepository;
         private readonly ILinkRepository linkRepository;
         private readonly ITagRepository tagRepository;
         private readonly IMediaItemRepository<IArtist> artistRepository;
@@ -97,7 +91,6 @@ namespace Gnosis.Alexandria.Views
 
         private readonly SpiderFactory spiderFactory;
         private readonly ICatalogController catalogController;
-        private readonly IMediaController mediaController;
         private readonly ITaskController taskController;
     }
 }

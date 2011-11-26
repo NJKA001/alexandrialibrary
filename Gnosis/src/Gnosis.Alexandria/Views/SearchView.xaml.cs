@@ -34,7 +34,6 @@ namespace Gnosis.Alexandria.Views
 
         private ILogger logger;
         private ITagRepository tagRepository;
-        private IMediaDetailRepository repository;
         private ITaskController taskController;
         private readonly IDictionary<string, ArtistSearchResultViewModel> artistResults = new Dictionary<string, ArtistSearchResultViewModel>();
 
@@ -221,19 +220,16 @@ namespace Gnosis.Alexandria.Views
             DoSearch();
         }
 
-        public void Initialize(ILogger logger, IMediaDetailRepository repository, ITagRepository tagRepository, ITaskController taskController)
+        public void Initialize(ILogger logger, ITagRepository tagRepository, ITaskController taskController)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
-            if (repository == null)
-                throw new ArgumentNullException("repository");
             if (tagRepository == null)
                 throw new ArgumentNullException("tagRepository:");
             if (taskController == null)
                 throw new ArgumentNullException("taskController");
 
             this.logger = logger;
-            this.repository = repository;
             this.tagRepository = tagRepository;
             this.taskController = taskController;
 

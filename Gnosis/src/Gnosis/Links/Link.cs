@@ -8,25 +8,25 @@ namespace Gnosis.Links
     public class Link
         : ILink
     {
-        public Link(Uri source, Uri target, ILinkType type, string name)
-            : this(source, target, type, name, 0)
+        public Link(Uri source, Uri target, string relationship, string name)
+            : this(source, target, relationship, name, 0)
         {
         }
 
-        public Link(Uri source, Uri target, ILinkType type, string name, long id)
+        public Link(Uri source, Uri target, string relationship, string name, long id)
         {
             if (source == null)
                 throw new ArgumentNullException("source");
             if (target == null)
                 throw new ArgumentNullException("target");
-            if (type == null)
-                throw new ArgumentNullException("type");
+            if (relationship == null)
+                throw new ArgumentNullException("relationship");
             if (name == null)
                 throw new ArgumentNullException("name");
 
             this.source = source;
             this.target = target;
-            this.type = type;
+            this.relationship = relationship;
             this.name = name;
             this.id = id;
         }
@@ -34,7 +34,7 @@ namespace Gnosis.Links
         private readonly long id;
         private readonly Uri source;
         private readonly Uri target;
-        private readonly ILinkType type;
+        private readonly string relationship;
         private readonly string name;
 
         public long Id
@@ -52,9 +52,9 @@ namespace Gnosis.Links
             get { return target; }
         }
 
-        public ILinkType Type
+        public string Relationship
         {
-            get { return type; }
+            get { return relationship; }
         }
 
         public string Name

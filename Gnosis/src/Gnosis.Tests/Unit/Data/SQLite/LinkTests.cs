@@ -7,7 +7,6 @@ using System.Text;
 using NUnit.Framework;
 
 using Gnosis.Links;
-using Gnosis.Links.Html;
 using Gnosis.Utilities;
 using Gnosis.Data;
 using Gnosis.Data.SQLite;
@@ -20,7 +19,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         {
             connection = new SQLiteConnectionFactory().Create("Data Source=:memory:;Version=3;");
             connection.Open();
-            repository = new SQLiteLinkRepository(logger, typeFactory, connection);
+            repository = new SQLiteLinkRepository(logger, connection);
             repository.Initialize();
 
             link1 = new Link(source1, target1, type5, name1);
@@ -57,7 +56,6 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         }
 
         private readonly IDbConnection connection;
-        private readonly ILinkTypeFactory typeFactory = new LinkTypeFactory();
         protected readonly ILogger logger = new DebugLogger();
         protected readonly ILinkRepository repository;
 
@@ -95,21 +93,21 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected readonly Uri target14 = new Uri("http://example.com/targets/14");
         protected readonly Uri target15 = new Uri("http://example.com/targets/15");
 
-        protected readonly ILinkType type1 = LinkType.Default;
-        protected readonly ILinkType type2 = LinkType.AlbumThumbnail;
-        protected readonly ILinkType type3 = LinkType.Default;
-        protected readonly ILinkType type4 = LinkType.AlbumThumbnail;
-        protected readonly ILinkType type5 = LinkType.AlbumThumbnail;
-        protected readonly ILinkType type6 = LinkType.AlbumThumbnail;
-        protected readonly ILinkType type7 = LinkType.AlbumThumbnail;
-        protected readonly ILinkType type8 = LinkType.AlbumThumbnail;
-        protected readonly ILinkType type9 = LinkType.Default;
-        protected readonly ILinkType type10 = LinkType.AlbumThumbnail;
-        protected readonly ILinkType type11 = HtmlLinkType.Alternate;
-        protected readonly ILinkType type12 = HtmlLinkType.NoFollow;
-        protected readonly ILinkType type13 = HtmlLinkType.Chapter;
-        protected readonly ILinkType type14 = HtmlLinkType.Chapter;
-        protected readonly ILinkType type15 = HtmlLinkType.Chapter;
+        protected readonly string type1 = string.Empty;
+        protected readonly string type2 = MediaType.ApplicationGnosisAlbumThumbnail.ToString();
+        protected readonly string type3 = string.Empty;
+        protected readonly string type4 = MediaType.ApplicationGnosisAlbumThumbnail.ToString();
+        protected readonly string type5 = MediaType.ApplicationGnosisAlbumThumbnail.ToString();
+        protected readonly string type6 = MediaType.ApplicationGnosisAlbumThumbnail.ToString();
+        protected readonly string type7 = MediaType.ApplicationGnosisAlbumThumbnail.ToString();
+        protected readonly string type8 = MediaType.ApplicationGnosisAlbumThumbnail.ToString();
+        protected readonly string type9 = string.Empty;
+        protected readonly string type10 = MediaType.ApplicationGnosisAlbumThumbnail.ToString();
+        protected readonly string type11 = "alternate";
+        protected readonly string type12 = "NoFollow";
+        protected readonly string type13 = "chapter";
+        protected readonly string type14 = "chapter";
+        protected readonly string type15 = "chapter";
 
         protected readonly string name1 = "Abe";
         protected readonly string name2 = "Betty";
@@ -176,7 +174,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.AreEqual(1, byId.Id);
             Assert.AreEqual(link1.Source.ToString(), byId.Source.ToString());
             Assert.AreEqual(link1.Target.ToString(), byId.Target.ToString());
-            Assert.AreEqual(link1.Type, byId.Type);
+            Assert.AreEqual(link1.Relationship, byId.Relationship);
             Assert.AreEqual(link1.Name, byId.Name);
         }
 
@@ -188,15 +186,15 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             var byId = repository.GetById(id);
             Assert.IsNotNull(byId);
             Assert.AreEqual(id, byId.Id);
-            Assert.AreNotEqual(HtmlLinkType.Glossary, byId.Type);
+            Assert.AreNotEqual("glossary", byId.Relationship);
             Assert.AreNotEqual(name, byId.Name);
-            var different = new Link(byId.Source, byId.Target, HtmlLinkType.Glossary, name, id);
+            var different = new Link(byId.Source, byId.Target, "glossary", name, id);
             repository.Save(new List<ILink> { different });
             var check = repository.GetById(id);
             Assert.IsNotNull(check);
             Assert.AreEqual(id, check.Id);
             Assert.AreEqual(name, check.Name);
-            Assert.AreEqual(HtmlLinkType.Glossary, check.Type);
+            Assert.AreEqual("glossary", check.Relationship);
         }
 
         [Test]
@@ -230,7 +228,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         {
             var bySource = repository.GetBySource(source1, type6);
             Assert.IsNotNull(bySource);
-            Assert.AreEqual(links.Where(x => x.Source.ToString() == source1.ToString() && x.Type == type6).Count(), bySource.Count());
+            Assert.AreEqual(links.Where(x => x.Source.ToString() == source1.ToString() && x.Relationship == type6).Count(), bySource.Count());
         }
 
         [Test]
@@ -246,7 +244,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         {
             var byTarget = repository.GetByTarget(target2, type5);
             Assert.IsNotNull(byTarget);
-            Assert.AreEqual(links.Where(x => x.Target.ToString() == target2.ToString() && x.Type == type5).Count(), byTarget.Count());
+            Assert.AreEqual(links.Where(x => x.Target.ToString() == target2.ToString() && x.Relationship == type5).Count(), byTarget.Count());
         }
 
         [Test]
@@ -262,7 +260,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         {
             var bySourceAndTarget = repository.GetBySourceAndTarget(source5, target2, type5);
             Assert.IsNotNull(bySourceAndTarget);
-            Assert.AreEqual(links.Where(x => x.Source.ToString() == source5.ToString() && x.Target.ToString() == target2.ToString() && x.Type == type5).Count(), bySourceAndTarget.Count());
+            Assert.AreEqual(links.Where(x => x.Source.ToString() == source5.ToString() && x.Target.ToString() == target2.ToString() && x.Relationship == type5).Count(), bySourceAndTarget.Count());
         }
     }
 }

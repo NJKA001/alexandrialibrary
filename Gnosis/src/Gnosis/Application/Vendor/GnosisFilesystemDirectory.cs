@@ -47,10 +47,10 @@ namespace Gnosis.Application.Vendor
             var links = new List<ILink>();
 
             foreach (var directory in info.GetDirectories())
-                links.Add(new Link(location, new Uri(directory.FullName), LinkType.Directory, directory.Name));
+                links.Add(new Link(location, new Uri(directory.FullName), MediaType.ApplicationGnosisFilesystemDirectory.ToString(), directory.Name));
 
             foreach (var file in info.GetFiles())
-                links.Add(new Link(location, new Uri(file.FullName), LinkType.File, file.Name));
+                links.Add(new Link(location, new Uri(file.FullName), MediaType.ApplicationGnosisFilesystemFile.ToString(), file.Name));
 
             return links;
         }

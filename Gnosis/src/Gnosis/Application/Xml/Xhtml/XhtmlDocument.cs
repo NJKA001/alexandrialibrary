@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Links;
-using Gnosis.Links.Html;
 
 namespace Gnosis.Application.Xml.Xhtml
 {
@@ -54,7 +53,7 @@ namespace Gnosis.Application.Xml.Xhtml
                 //TODO: use the rel attribute to get the actual link type
                 Uri target = new Uri("http://example.com/index.html");
                 if (Uri.TryCreate(elem.Target, UriKind.RelativeOrAbsolute, out target))
-                    yield return new Link(location, target, HtmlLinkType.DefaultLink, elem.Content);
+                    yield return new Link(location, target, elem.Rel, elem.Content);
             }
 
             //return links;

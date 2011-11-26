@@ -140,12 +140,15 @@ namespace Gnosis
             all.Add(ApplicationXmlDtd);
             all.Add(ApplicationUnknown);
             all.Add(ApplicationGnosisAlbum);
+            all.Add(ApplicationGnosisAlbumThumbnail);
             all.Add(ApplicationGnosisArtist);
+            all.Add(ApplicationGnosisArtistThumbnail);
             all.Add(ApplicationGnosisClip);
             all.Add(ApplicationGnosisDoc);
             all.Add(ApplicationGnosisFeed);
             all.Add(ApplicationGnosisFeedItem);
             all.Add(ApplicationGnosisFilesystemDirectory);
+            all.Add(ApplicationGnosisFilesystemFile);
             all.Add(ApplicationGnosisLink);
             all.Add(ApplicationGnosisPic);
             all.Add(ApplicationGnosisPlaylist);
@@ -261,12 +264,15 @@ namespace Gnosis
         public static readonly IMediaType ApplicationUnknown = new MediaType(TypeApplication, "unknown");
         
         public static readonly IMediaType ApplicationGnosisAlbum = new MediaType(TypeApplication, "vnd.gnosis.album");
+        public static readonly IMediaType ApplicationGnosisAlbumThumbnail = new MediaType(TypeApplication, "vnd.gnosis.album.thumbnail");
         public static readonly IMediaType ApplicationGnosisArtist = new MediaType(TypeApplication, "vnd.gnosis.artist");
+        public static readonly IMediaType ApplicationGnosisArtistThumbnail = new MediaType(TypeApplication, "vnd.gnosis.artist.thumbnail");
         public static readonly IMediaType ApplicationGnosisClip = new MediaType(TypeApplication, "vnd.gosis.clip");
         public static readonly IMediaType ApplicationGnosisDoc = new MediaType(TypeApplication, "vnd.gosis.doc");
         public static readonly IMediaType ApplicationGnosisFeed = new MediaType(TypeApplication, "vnd.gnosis.feed");
         public static readonly IMediaType ApplicationGnosisFeedItem = new MediaType(TypeApplication, "vnd.gnosis.feed.item");
         public static readonly IMediaType ApplicationGnosisFilesystemDirectory = new MediaType(TypeApplication, "vnd.gnosis.fs.dir");
+        public static readonly IMediaType ApplicationGnosisFilesystemFile = new MediaType(TypeApplication, "vnd.gnosis.fs.file");
         public static readonly IMediaType ApplicationGnosisLink = new MediaType(TypeApplication, "vnd.gnosis.link");
         public static readonly IMediaType ApplicationGnosisPic = new MediaType(TypeApplication, "vnd.gnosis.pic");
         public static readonly IMediaType ApplicationGnosisPlaylist = new MediaType(TypeApplication, "vnd.gnosis.playlist");

@@ -66,9 +66,7 @@
     </ApplicationDefinition>
     <Compile Include="Controllers\CatalogController.cs" />
     <Compile Include="Controllers\ICatalogController.cs" />
-    <Compile Include="Controllers\IMediaController.cs" />
     <Compile Include="Controllers\ISecurityController.cs" />
-    <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="Controllers\SpiderFactory.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Converters\RectConverter.cs" />
@@ -81,9 +79,7 @@
     <Compile Include="ViewModels\IAlbumViewModel.cs" />
     <Compile Include="ViewModels\IArtistViewModel.cs" />
     <Compile Include="ViewModels\IAudioViewModel.cs" />
-    <Compile Include="ViewModels\IMediaDetailViewModel.cs" />
     <Compile Include="ViewModels\ISearchResultViewModel.cs" />
-    <Compile Include="ViewModels\MediaDetailViewModel.cs" />
     <Compile Include="ViewModels\SearchTaskViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="Views\HoveringCloseIcon.xaml.cs">

@@ -11,25 +11,15 @@ namespace Gnosis.Data.SQLite
     public class SQLiteLinkRepository
         : SQLiteRepositoryBase, ILinkRepository
     {
-        public SQLiteLinkRepository(ILogger logger, ILinkTypeFactory typeFactory)
+        public SQLiteLinkRepository(ILogger logger)
             : base(logger)
         {
-            if (typeFactory == null)
-                throw new ArgumentNullException("typeFactory");
-
-            this.typeFactory = typeFactory;
         }
 
-        public SQLiteLinkRepository(ILogger logger, ILinkTypeFactory typeFactory, IDbConnection defaultConnection)
+        public SQLiteLinkRepository(ILogger logger, IDbConnection defaultConnection)
             : base(logger, defaultConnection)
         {
-            if (typeFactory == null)
-                throw new ArgumentNullException("typeFactory");
-
-            this.typeFactory = typeFactory;
         }
-
-        private readonly ILinkTypeFactory typeFactory;
 
         #region Private Methods
 
@@ -66,11 +56,11 @@ namespace Gnosis.Data.SQLite
         {
             var source = record.GetUri("Source");
             var target = record.GetUri("Target");
-            var type = record.GetInt32Lookup<ILinkType>("Type", typeId => typeFactory.Create(typeId));
+            var relationship = record.GetString("Relationship");
             var name = record.GetString("Name");
             var id = record.GetInt64("Id");
 
-            return new Link(source, target, type, name, id);
+            return new Link(source, target, relationship, name, id);
         }
 
         #endregion
@@ -93,6 +83,9 @@ namespace Gnosis.Data.SQLite
 
         public IEnumerable<ILink> GetBySource(Uri source)
         {
+            if (source == null)
+                throw new ArgumentNullException("source");
+
             try
             {
                 var builder = new CommandBuilder("select * from Link where Source = @Source;");
@@ -107,25 +100,33 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<ILink> GetBySource(Uri source, ILinkType type)
+        public IEnumerable<ILink> GetBySource(Uri source, string relationship)
         {
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (relationship == null)
+                throw new ArgumentNullException("relationship");
+
             try
             {
-                var builder = new CommandBuilder("select * from Link where Source = @Source and Type = @Link;");
+                var builder = new CommandBuilder("select * from Link where Source = @Source and Relationship = @Relationship;");
                 builder.AddParameter("@Source", source.ToString());
-                builder.AddParameter("@Link", type.Id);
+                builder.AddParameter("@Relationship", relationship);
 
                 return GetLinks(builder);
             }
             catch (Exception ex)
             {
-                logger.Error("  GetBySource(Uri, ILinkType)", ex);
+                logger.Error("  GetBySource(Uri, string)", ex);
                 throw;
             }
         }
 
         public IEnumerable<ILink> GetByTarget(Uri target)
         {
+            if (target == null)
+                throw new ArgumentNullException("target");
+
             try
             {
                 var builder = new CommandBuilder("select * from Link where Target = @Target;");
@@ -140,25 +141,35 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<ILink> GetByTarget(Uri target, ILinkType type)
+        public IEnumerable<ILink> GetByTarget(Uri target, string relationship)
         {
+            if (target == null)
+                throw new ArgumentNullException("target");
+            if (relationship == null)
+                throw new ArgumentNullException("relationship");
+
             try
             {
-                var builder = new CommandBuilder("select * from Link where Target = @Target and Type = @Type;");
+                var builder = new CommandBuilder("select * from Link where Target = @Target and Relationship = @Relationship;");
                 builder.AddParameter("@Target", target.ToString());
-                builder.AddParameter("@Type", type.Id);
+                builder.AddParameter("@Relationship", relationship);
 
                 return GetLinks(builder);
             }
             catch (Exception ex)
             {
-                logger.Error("  GetByTarget(Uri, ILinkType)", ex);
+                logger.Error("  GetByTarget(Uri, string)", ex);
                 throw;
             }
         }
 
         public IEnumerable<ILink> GetBySourceAndTarget(Uri source, Uri target)
         {
+            if (target == null)
+                throw new ArgumentNullException("target");
+            if (source == null)
+                throw new ArgumentNullException("source");
+
             try
             {
                 var builder = new CommandBuilder("select * from Link where Source = @Source and Target = @Target;");
@@ -174,20 +185,27 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<ILink> GetBySourceAndTarget(Uri source, Uri target, ILinkType type)
+        public IEnumerable<ILink> GetBySourceAndTarget(Uri source, Uri target, string relationship)
         {
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (target == null)
+                throw new ArgumentNullException("target");
+            if (relationship == null)
+                throw new ArgumentNullException("relationship");
+
             try
             {
-                var builder = new CommandBuilder("select * from Link where Source = @Source and Target = @Target and Type = @Type;");
+                var builder = new CommandBuilder("select * from Link where Source = @Source and Target = @Target and Relationship = @Relationship;");
                 builder.AddParameter("@Source", source.ToString());
                 builder.AddParameter("@Target", target.ToString());
-                builder.AddParameter("@Type", type.Id);
+                builder.AddParameter("@Relationship", relationship);
 
                 return GetLinks(builder);
             }
             catch (Exception ex)
             {
-                logger.Error("  GetBySourceAndTarget(Uri, Uri, ILinkType)", ex);
+                logger.Error("  GetBySourceAndTarget(Uri, Uri, string)", ex);
                 throw;
             }
         }
@@ -197,14 +215,14 @@ namespace Gnosis.Data.SQLite
             try
             {
                 var builder = new CommandBuilder();
-                builder.AppendLine("create table if not exists Link (Id integer primary key not null, Source text not null, Target text not null, Type integer not null, Name text not null);");
+                builder.AppendLine("create table if not exists Link (Id integer primary key not null, Source text not null, Target text not null, Relationship text not null, Name text not null);");
                 builder.AppendLine("create index if not exists Link_Source on Link (Source asc);");
-                builder.AppendLine("create index if not exists Link_Source_Type on Link (Source asc, Type asc);");
+                builder.AppendLine("create index if not exists Link_Source_Relationship on Link (Source asc, Relationship asc);");
                 builder.AppendLine("create index if not exists Link_Target on Link (Target asc);");
-                builder.AppendLine("create index if not exists Link_Target_Type on Link (Target asc, Type asc);");
+                builder.AppendLine("create index if not exists Link_Target_Relationship on Link (Target asc, Relationship asc);");
                 builder.AppendLine("create index if not exists Link_Source_Target on Link (Source asc, Target asc);");
-                builder.AppendLine("create index if not exists Link_Source_Target_Type on Link (Source asc, Target asc, Type asc);");
-                builder.AppendLine("create unique index if not exists Link_Source_Target_Type_Name on Link (Source asc, Target asc, Type asc, Name asc);");
+                builder.AppendLine("create index if not exists Link_Source_Target_Relationship on Link (Source asc, Target asc, Relationship asc);");
+                builder.AppendLine("create unique index if not exists Link_Source_Target_Relationship_Name on Link (Source asc, Target asc, Relationship asc, Name asc);");
 
                 ExecuteNonQuery(builder);
             }
@@ -256,11 +274,11 @@ namespace Gnosis.Data.SQLite
                 foreach (var link in links)
                 {
                     var builder = new CommandBuilder();
-                    builder.AppendLine("replace into Link (Id, Source, Target, Type, Name) values (@Id, @Source, @Target, @Type, @Name);");
+                    builder.AppendLine("replace into Link (Id, Source, Target, Relationship, Name) values (@Id, @Source, @Target, @Relationship, @Name);");
                     builder.AddParameter("@Id", link.Id > 0 ? (object)link.Id : (object)DBNull.Value);
                     builder.AddParameter("@Source", link.Source.ToString());
                     builder.AddParameter("@Target", link.Target.ToString());
-                    builder.AddParameter("@Type", link.Type.Id);
+                    builder.AddParameter("@Relationship", link.Relationship);
                     builder.AddParameter("@Name", link.Name);
 
                     builders.Add(builder);
