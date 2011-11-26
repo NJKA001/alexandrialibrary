@@ -145,5 +145,35 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.IsNotNull(results.First());
             Assert.AreEqual("Rock & Roll", filteredResults.First().Value);
         }
+
+        [Test]
+        public void CanBeOverwritten()
+        {
+            var target1 = Guid.NewGuid().ToUrn();
+            var target2 = Guid.NewGuid().ToUrn();
+
+            var tag1 = new Tag(target1, TagType.Artist, "R.E.M.");
+            var tag2 = new Tag(target1, TagType.Artist, tag1.Value.ToAmericanizedString(), Algorithm.Americanized);
+            var tag3 = new Tag(target1, TagType.Artist, "Eddie Vedder");
+            var tag4 = new Tag(target1, TagType.Artist, "Natalie Merchant");
+            var tag5 = new Tag(target1, TagType.Artist, tag4.Value.ToAmericanizedString(), Algorithm.Americanized);
+            var tag6 = new Tag(target2, TagType.Artist, "PJ Harvey");
+            var tag7 = new Tag(target1, TagType.Album, "In Time: Best of R.E.M.");
+
+            repository.Save( new List<ITag> { tag1, tag2, tag3, tag4, tag5, tag6, tag7 });
+
+            var checkByType1 = repository.GetByTarget(target1, TagType.Artist);
+            Assert.AreEqual(5, checkByType1.Count());
+
+            var tag8 = new Tag(target1, TagType.Artist, "Patti Smith");
+            var tag9 = new Tag(target1, TagType.Artist, "REM");
+
+            repository.Overwrite(target1, TagType.Artist, new List<ITag> { tag8, tag9 });
+
+            var checkByType2 = repository.GetByTarget(target1, TagType.Artist).OrderByDescending(x => x.Value);
+            Assert.AreEqual(2, checkByType2.Count());
+            Assert.AreEqual("REM", checkByType2.First().Value);
+            Assert.AreEqual("Patti Smith", checkByType2.Last().Value);
+        }
     }
 }

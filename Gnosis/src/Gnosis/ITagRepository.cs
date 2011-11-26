@@ -18,5 +18,6 @@ namespace Gnosis
         void Initialize();
         void Delete(IEnumerable<long> ids);
         void Save(IEnumerable<ITag> tags);
+        void Overwrite(Uri target, ITagType type, IEnumerable<ITag> tags);
     }
 }

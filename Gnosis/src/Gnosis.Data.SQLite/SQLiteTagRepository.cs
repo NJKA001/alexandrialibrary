@@ -303,6 +303,7 @@ namespace Gnosis.Data.SQLite
                 builder.AppendLine("create index if not exists Tag_Target on Tag (Target asc);");
                 builder.AppendLine("create index if not exists Tag_Target_Domain on Tag (Target asc, Domain asc);");
                 builder.AppendLine("create unique index if not exists Tag_Target_Algorithm_Type_Value on Tag (Target asc, Algorithm asc, Type asc, Value asc);");
+                builder.AppendLine("create index if not exists Tag_Target_Type on Tag (Target asc, Type asc);");
                 builder.AppendLine("create index if not exists Tag_Target_Type_Value on Tag (Target asc, Type asc, Value asc);");
                 builder.AppendLine("create index if not exists Tag_Algorithm_Domain_Value on Tag (Algorithm asc, Domain asc, Value asc);");
 
@@ -380,6 +381,47 @@ namespace Gnosis.Data.SQLite
             catch (Exception ex)
             {
                 logger.Error("  Delete(IEnumerable<long>)", ex);
+                throw;
+            }
+        }
+
+        public void Overwrite(Uri target, ITagType type, IEnumerable<ITag> tags)
+        {
+            if (target == null)
+                throw new ArgumentNullException("target");
+            if (type == null)
+                throw new ArgumentNullException("type");
+
+            try
+            {
+                var builders = new List<ICommandBuilder>();
+
+                var deleteBuilder = new CommandBuilder("delete from Tag where Target = @Target and Type = @Type;");
+                deleteBuilder.AddParameter("@Target", target.ToString());
+                deleteBuilder.AddParameter("@Type", type.Id);
+                builders.Add(deleteBuilder);
+                
+                foreach (var tag in tags.Where(x => x.Target == target && x.Type == type))
+                {
+                    var insertBuilder = new CommandBuilder("insert into Tag (Target, Algorithm, Domain, Type, Value, Data) values (@Target, @Algorithm, @Domain, @Type, @Value, @Data);");
+                    insertBuilder.AddParameter("@Target", tag.Target.ToString());
+                    insertBuilder.AddParameter("@Algorithm", tag.Algorithm.Id);
+                    insertBuilder.AddParameter("@Domain", (int)tag.Type.Domain);
+                    insertBuilder.AddParameter("@Type", tag.Type.Id);
+                    insertBuilder.AddParameter("@Value", tag.Value);
+                    insertBuilder.AddParameter("@Data", tag.Data);
+
+                    builders.Add(insertBuilder);
+                }
+
+                if (builders.Count < 2)
+                    return;
+
+                ExecuteTransaction(builders);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  Overwrite", ex);
                 throw;
             }
         }
