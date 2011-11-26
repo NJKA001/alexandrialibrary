@@ -32,7 +32,6 @@ namespace Gnosis.Tasks
         protected override void DoWork()
         {
             UpdateResults(repository.GetByAlgorithm(algorithm, TagDomain.String, pattern));
-            UpdateResults(repository.GetByAlgorithm(algorithm, TagDomain.StringArray, pattern));
             UpdateResults(repository.GetByAlgorithm(algorithm, TagDomain.Id3v1SimpleGenre, pattern));
         }
     }

@@ -151,7 +151,7 @@ namespace Gnosis.Tags.Id3.Id3v2
         public static ITagType OriginalLyricstsOrWriters = new Id3v2TagType<string>(167, "Original Lyricists or Writers", "TOLY", TagDomain.String);
         public static ITagType OriginalArtists = new Id3v2TagType<string>(168, "Original Artists", "TOPE", TagDomain.String);
         public static ITagType FileOwner = new Id3v2TagType<string>(169, "File Owner", "TOWN", TagDomain.String);
-        public static ITagType Artist = new Id3v2TagType<string>(170, "Artist", "TPE1", TagDomain.StringArray);
+        public static ITagType Artist = new Id3v2TagType<string>(170, "Artist", "TPE1", TagDomain.String);
         public static ITagType BandAccompaniment = new Id3v2TagType<string>(171, "Band Accompaniment", "TPE2", TagDomain.String);
         public static ITagType Conductor = new Id3v2TagType<string>(172, "Conductor", "TPE3", TagDomain.String);
         public static ITagType InterpretedOrRemixedBy = new Id3v2TagType<string>(173, "Interpreted or Remixed By", "TPE4", TagDomain.String);

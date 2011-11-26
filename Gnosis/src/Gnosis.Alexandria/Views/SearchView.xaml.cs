@@ -43,23 +43,23 @@ namespace Gnosis.Alexandria.Views
             Dispatcher.Invoke(new Action(() => searchResultView.AddViewModel(result)), DispatcherPriority.DataBind);
         }
 
-        private void HandleSearchResults(IEnumerable<IArtistSummary> artists)
-        {
-            foreach (var artist in artists)
-            {
-                var key = artist.Name.ToLower().Replace("\r\n", " ").Replace("\n", " ");
-                if (!artistResults.ContainsKey(key))
-                {
-                    var name = artist.Name.Replace("\r\n", " ").Replace("\n", " ");
-                    IImage image = artist.Image != null ? new Gnosis.Image.JpegImage(artist.Image) : null;
-                    var artistViewModel = new ArtistViewModel(name, DateTime.MinValue, DateTime.MaxValue, image, string.Empty);
-                    var artistResult = new ArtistSearchResultViewModel(artistViewModel);
-                    artistResults[key] = artistResult;
+        //private void HandleSearchResults(IEnumerable<IArtistSummary> artists)
+        //{
+        //    foreach (var artist in artists)
+        //    {
+        //        var key = artist.Name.ToLower().Replace("\r\n", " ").Replace("\n", " ");
+        //        if (!artistResults.ContainsKey(key))
+        //        {
+        //            var name = artist.Name.Replace("\r\n", " ").Replace("\n", " ");
+        //            IImage image = artist.Image != null ? new Gnosis.Image.JpegImage(artist.Image) : null;
+        //            var artistViewModel = new ArtistViewModel(name, DateTime.MinValue, DateTime.MaxValue, image, string.Empty);
+        //            var artistResult = new ArtistSearchResultViewModel(artistViewModel);
+        //            artistResults[key] = artistResult;
 
-                    AddResult(artistResult);
-                }
-            }
-        }
+        //            AddResult(artistResult);
+        //        }
+        //    }
+        //}
 
 
         /*
@@ -188,11 +188,11 @@ namespace Gnosis.Alexandria.Views
                 //var task = repository.Search(search + "%");
                 //task.AddResultsCallback(results => HandleSearchResults(results));
 
-                var task = new ArtistSearchTask(logger, tagRepository, search + "%");
-                task.AddResultsCallback(results => HandleSearchResults(results));
-                var taskViewModel = new SearchTaskViewModel(logger, task, search);
-                taskController.AddTask(taskViewModel);
-                task.Start();
+                //var task = new ArtistSearchTask(logger, tagRepository, search + "%");
+                //task.AddResultsCallback(results => HandleSearchResults(results));
+                //var taskViewModel = new SearchTaskViewModel(logger, task, search);
+                //taskController.AddTask(taskViewModel);
+                //task.Start();
             }
             catch (Exception ex)
             {

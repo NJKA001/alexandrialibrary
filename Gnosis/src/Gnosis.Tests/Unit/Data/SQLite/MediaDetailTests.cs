@@ -50,9 +50,9 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             link1 = new Link(trackUri1, thumbUri1, LinkType.AlbumThumbnail, "Album Cover Image");
             linkRepository.Save(new List<ILink> { link1 });
 
-            tag1 = new Tag(trackUri1, Id3v2TagType.Artist, new string[] { "Björk", string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty });
-            tag2 = new Tag(trackUri1, TagType.AmericanizedStringArray, new string[] { "Björk".ToAmericanizedString(), string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty });
-            tag3 = new Tag(trackUri1, TagType.DefaultString, "Bjork is awesome!");
+            tag1 = new Tag(trackUri1, Id3v2TagType.Artist, "TPE1", 0, "Björk");
+            tag2 = new Tag(trackUri1, TagType.AmericanizedString, "Artist", 0 ,"Björk".ToAmericanizedString());
+            tag3 = new Tag(trackUri1, TagType.DefaultString, "Default", 0, "Bjork is awesome!");
             tagRepository.Save(new List<ITag> { tag1, tag2, tag3 });
         }
 

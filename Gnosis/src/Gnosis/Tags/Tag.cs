@@ -8,34 +8,36 @@ namespace Gnosis.Tags
     public class Tag
         : ITag
     {
-        public Tag(Uri target, ITagType type, object value)
-            : this(target, type, value, 0)
+        public Tag(Uri target, ITagType type, string name, uint number, object value)
+            : this(target, type, name, number, value, 0)
         {
         }
 
-        public Tag(Uri target, ITagType type, object value, long id)
+        public Tag(Uri target, ITagType type, string name, uint number, object value, long id)
         {
             if (target == null)
                 throw new ArgumentNullException("target");
             if (type == null)
                 throw new ArgumentNullException("type");
+            if (name == null)
+                throw new ArgumentNullException("name");
             if (value == null)
                 throw new ArgumentNullException("value");
 
             this.target = target;
             this.type = type;
+            this.name = name;
+            this.number = number;
             this.value = value;
-            this.tuple = type.Domain.GetTuple(value);
             this.id = id;
         }
 
         private readonly long id;
         private readonly Uri target;
         private readonly ITagType type;
+        private readonly string name;
+        private readonly uint number;
         private readonly object value;
-        private readonly ITagTuple tuple;
-
-        #region ITag Members
 
         public long Id
         {
@@ -52,21 +54,19 @@ namespace Gnosis.Tags
             get { return type; }
         }
 
+        public string Name
+        {
+            get { return name; }
+        }
+
+        public uint Number
+        {
+            get { return number; }
+        }
+
         public object Value
         {
             get { return value; }
-        }
-
-        public ITagTuple Tuple
-        {
-            get { return tuple; }
-        }
-
-        #endregion
-
-        public override string ToString()
-        {
-            return string.Format("tag value='{0}' target='{1}'", value, target);
         }
     }
 }

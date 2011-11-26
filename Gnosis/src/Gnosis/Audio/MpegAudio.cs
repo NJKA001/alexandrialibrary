@@ -59,15 +59,23 @@ namespace Gnosis.Audio
             {
                 if (id3v2Tag.Performers != null && id3v2Tag.Performers.Length > 0)
                 {
-                    tags.Add(new Gnosis.Tags.Tag(Location, Id3v2TagType.Artist, id3v2Tag.Performers));
-                    tags.Add(new Gnosis.Tags.Tag(Location, Gnosis.Tags.TagType.DefaultStringArray, id3v2Tag.Performers[0].Split(' ')));
+                    tags.Add(new Gnosis.Tags.Tag(Location, Id3v2TagType.Artist, "TPE1", 0, id3v2Tag.Performers));
+                    uint number = 0;
+                    foreach (var artist in id3v2Tag.Performers)
+                    {
+                        tags.Add(new Gnosis.Tags.Tag(Location, Gnosis.Tags.TagType.DefaultString, "Artist", number, id3v2Tag.Performers[number]));
+                        number++;
+                    }
+                    //tags.Add(new Gnosis.Tags.Tag(Location, Gnosis.Tags.TagType.DefaultString, id3v2Tag.Performers[0].Split(' ')));
                 }
                 if (id3v2Tag.Album != null)
-                    tags.Add(new Gnosis.Tags.Tag(Location, Id3v2TagType.Album, id3v2Tag.Album));
+                    tags.Add(new Gnosis.Tags.Tag(Location, Id3v2TagType.Album, "TALB", 0, id3v2Tag.Album));
                 if (id3v2Tag.Year > 0)
-                    tags.Add(new Gnosis.Tags.Tag(Location, Id3v2TagType.ReleaseTime, new DateTime((int)id3v2Tag.Year, 1, 1)));
+                    tags.Add(new Gnosis.Tags.Tag(Location, Id3v2TagType.ReleaseTime, "TDRL", 0, new DateTime((int)id3v2Tag.Year, 1, 1)));
                 if (id3v2Tag.Track > 0)
-                    tags.Add(new Gnosis.Tags.Tag(Location, Id3v2TagType.TrackNumber, new uint[] { id3v2Tag.Track, id3v2Tag.TrackCount }));
+                    tags.Add(new Gnosis.Tags.Tag(Location, Id3v2TagType.TrackNumber, "TRCK", 1, id3v2Tag.Track));
+                if (id3v2Tag.TrackCount > 0)
+                    tags.Add(new Gnosis.Tags.Tag(Location, Id3v2TagType.TrackNumber, "TRCK", 2, id3v2Tag.TrackCount));
             }
             else if (id3v1Tag != null)
             {

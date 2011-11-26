@@ -12,8 +12,6 @@ namespace Gnosis
         IEnumerable<ITag> GetByTarget(Uri target, ITagSchema schema);
         IEnumerable<ITag> GetByTarget(Uri target, ITagType type);
         IEnumerable<ITag> GetByAlgorithm(IAlgorithm algorithm, ITagDomain domain, string pattern);
-        
-        IEnumerable<IArtistSummary> GetArtists(string pattern);
 
         ITask<IEnumerable<ITag>> Search(IAlgorithm algorithm, string pattern);
 

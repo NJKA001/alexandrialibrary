@@ -9,11 +9,12 @@ namespace Gnosis
     {
         int Id { get; }
         string Name { get; }
-        Type[] BaseTypes { get; }
+        Type BaseType { get; }
         object DefaultValue { get; }
 
         bool IsValid(object value);
-        ITagTuple GetTuple(object value);
-        object GetValue(ITagTuple tuple);
+        string GetToken(object value);
+        byte[] GetData(object value);
+        object GetValue(string token, byte[] data);
     }
 }

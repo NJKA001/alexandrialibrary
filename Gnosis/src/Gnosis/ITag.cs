@@ -10,7 +10,8 @@ namespace Gnosis
         long Id { get; }
         Uri Target { get; }
         ITagType Type { get; }
+        string Name { get; }
+        uint Number { get; }
         object Value { get; }
-        ITagTuple Tuple { get; }
     }
 }

@@ -108,7 +108,6 @@
     <Compile Include="Application\UnknownApplication.cs" />
     <Compile Include="Application\Xml\XmlDtdDocument.cs" />
     <Compile Include="Application\Vendor\GnosisArtist.cs" />
-    <Compile Include="ArtistSummary.cs" />
     <Compile Include="Audio\AudioBase.cs" />
     <Compile Include="IAlbum.cs" />
     <Compile Include="IAlbumSummary.cs" />
@@ -124,7 +123,6 @@
     <Compile Include="IProgram.cs" />
     <Compile Include="IApplicationRunner.cs" />
     <Compile Include="IArtist.cs" />
-    <Compile Include="IArtistSummary.cs" />
     <Compile Include="IAudio.cs" />
     <Compile Include="Audio\IMpegAudio.cs" />
     <Compile Include="Audio\MpegAudio.cs" />
@@ -239,7 +237,6 @@
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\FileInfoExtensions.cs" />
     <Compile Include="Extensions\GuidExtensions.cs" />
-    <Compile Include="Extensions\StringArrayExtensions.cs" />
     <Compile Include="IPlaylistItem.cs" />
     <Compile Include="IImageViewer.cs" />
     <Compile Include="ILinkFactory.cs" />
@@ -255,7 +252,6 @@
     <Compile Include="IMediaSummaryRepository.cs" />
     <Compile Include="ITagDomain.cs" />
     <Compile Include="ITagSchema.cs" />
-    <Compile Include="ITagTuple.cs" />
     <Compile Include="ITagType.cs" />
     <Compile Include="ITagTypeFactory.cs" />
     <Compile Include="ITagFactory.cs" />
@@ -280,7 +276,6 @@
     <Compile Include="Spiders\CatalogSpider.cs" />
     <Compile Include="Tags\Id3\Id3v1\Id3v1Extensions.cs" />
     <Compile Include="Tags\Id3\Id3v1\Id3v1Genre.cs" />
-    <Compile Include="Tags\TagTuple.cs" />
     <Compile Include="Tags\TagDomain.cs" />
     <Compile Include="Tags\TagFactory.cs" />
     <Compile Include="Tags\TagSchema.cs" />
@@ -289,7 +284,6 @@
     <Compile Include="Tags\Id3\Id3v2\Id3v2TagType.cs" />
     <Compile Include="IAlgorithm.cs" />
     <Compile Include="ILink.cs" />
-    <Compile Include="Tasks\ArtistSearchTask.cs" />
     <Compile Include="Tasks\CatalogMediaTask.cs" />
     <Compile Include="Tasks\MediaDetailSearchTask.cs" />
     <Compile Include="Tasks\TagSearchTask.cs" />

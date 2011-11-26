@@ -11,39 +11,37 @@ namespace Gnosis.Tags
     public class TagDomain
         : ITagDomain
     {
-        private TagDomain(int id, string name, Type[] baseTypes, object defaultValue, Func<object, bool> isValid, Func<object, ITagTuple> getTuple, Func<ITagTuple, object> getValue)
+        private TagDomain(int id, string name, Type baseType, object defaultValue, Func<object, bool> isValid, Func<object, string> getToken, Func<string, object> getValue)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
-            if (baseTypes == null)
-                throw new ArgumentNullException("baseTypes");
-            if (baseTypes.Length != 7)
-                throw new ArgumentException("baseTypes must have 7 items");
+            if (baseType == null)
+                throw new ArgumentNullException("baseType");
             if (defaultValue == null)
                 throw new ArgumentNullException("defaultValue");
             if (isValid == null)
                 throw new ArgumentNullException("isValid");
-            if (getTuple == null)
-                throw new ArgumentNullException("getTuple");
+            if (getToken == null)
+                throw new ArgumentNullException("getToken");
             if (getValue == null)
                 throw new ArgumentNullException("getValue");
 
             this.id = id;
             this.name = name;
-            this.baseTypes = baseTypes;
+            this.baseType = baseType;
             this.defaultValue = defaultValue;
             this.isValid = isValid;
-            this.getTuple = getTuple;
+            this.getToken = getToken;
             this.getValue = getValue;
         }
 
         private readonly int id;
         private readonly string name;
-        private readonly Type[] baseTypes;
+        private readonly Type baseType;
         private readonly object defaultValue;
         private readonly Func<object, bool> isValid;
-        private readonly Func<object, ITagTuple> getTuple;
-        private readonly Func<ITagTuple, object> getValue;
+        private readonly Func<object, string> getToken;
+        private readonly Func<string, object> getValue;
 
         public int Id
         {
@@ -55,9 +53,9 @@ namespace Gnosis.Tags
             get { return name; }
         }
 
-        public Type[] BaseTypes
+        public Type BaseType
         {
-            get { return baseTypes; }
+            get { return baseType; }
         }
 
         public object DefaultValue
@@ -70,20 +68,30 @@ namespace Gnosis.Tags
             return isValid(value);
         }
 
-        public ITagTuple GetTuple(object value)
+        public string GetToken(object value)
         {
-            return getTuple(value);
+            return baseType == typeof(byte[]) && value is byte[] ?
+                string.Empty :
+                getToken(value);
         }
 
-        public object GetValue(ITagTuple tuple)
+        public byte[] GetData(object value)
         {
-            return getValue(tuple);
+            return baseType == typeof(byte[]) && value is byte[] ?
+                (byte[])value :
+                new byte[0];
+        }
+
+        public object GetValue(string token, byte[] data)
+        {
+            return baseType == typeof(byte[]) ?
+                (object)data :
+                getValue(token);
         }
 
         static TagDomain()
         {
             all.Add(String);
-            all.Add(StringArray);
             all.Add(PositiveInteger);
             all.Add(Date);
             all.Add(Duration);
@@ -104,13 +112,12 @@ namespace Gnosis.Tags
             return d.ToString("s");
         }
 
-        public static readonly ITagDomain String = new TagDomain(1, "String", new Type[] { typeof(string), null, null, null, null, null, null}, string.Empty, value => value.IsString(), value => new TagTuple(value), tuple => tuple.ToString());
-        public static readonly ITagDomain StringArray = new TagDomain(2, "StringArray", new Type[] { typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string) }, new string[0], value => value.IsStringArray(), value => value.ToStringArray().ToTagTuple(), tuple => tuple.ToStringArray());
-        public static readonly ITagDomain PositiveInteger = new TagDomain(3, "PositiveInteger", new Type[] { typeof(uint), null, null, null, null, null, null }, (uint)0, value => value.IsUInt32(), value => new TagTuple(value), tuple => tuple.ToUInt32());
-        public static readonly ITagDomain Date = new TagDomain(4, "Date", new Type[] { typeof(int), typeof(int), typeof(int), null, null, null, null }, DateTime.MinValue, value => value.IsDateTime(), value => value.ToDateTime().ToTagTuple(), tuple => tuple.ToDateTime());
-        public static readonly ITagDomain Duration = new TagDomain(5, "Duration", new Type[] { typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), null, null }, TimeSpan.Zero, value => value.IsTimeSpan(), value => new TagTuple(value), tuple => tuple.ToTimeSpan());
-        public static readonly ITagDomain ByteArray = new TagDomain(6, "ByteArray", new Type[] { typeof(byte[]), null, null, null, null, null, null }, new byte[0], value => value.IsByteArray(), value => new TagTuple(value), tuple => tuple.ToByteArray());
-        public static readonly ITagDomain Id3v1SimpleGenre = new TagDomain(7, "Id3v1SimpleGenre", new Type[] { typeof(string), typeof(byte), null, null, null, null, null }, Id3v1Genre.Blues, value => value.IsEnum<Id3v1Genre>(), value => value.ToEnum<Id3v1Genre>().ToTagTuple(), tuple => tuple.ToEnum<Id3v1Genre>());
+        public static readonly ITagDomain String = new TagDomain(1, "String", typeof(string), string.Empty, value => value.IsString(), value => value.ToString(), token => token);
+        public static readonly ITagDomain PositiveInteger = new TagDomain(2, "PositiveInteger", typeof(uint), (uint)0, value => value.IsUInt32(), value => value.ToString(), token => token.ToUInt32());
+        public static readonly ITagDomain Date = new TagDomain(3, "Date", typeof(DateTime), DateTime.MinValue, value => value.IsDateTime(), value => value.ToDateTime().ToString("o"), token => token.ToDateTime());
+        public static readonly ITagDomain Duration = new TagDomain(4, "Duration", typeof(TimeSpan), TimeSpan.Zero, value => value.IsTimeSpan(), value => value.ToTimeSpan().Ticks.ToString(), token => TimeSpan.FromTicks(token.ToInt64()));
+        public static readonly ITagDomain ByteArray = new TagDomain(5, "ByteArray", typeof(byte[]), new byte[0], value => value.IsByteArray(), value => string.Empty, token => token);
+        public static readonly ITagDomain Id3v1SimpleGenre = new TagDomain(101, "Id3v1SimpleGenre", typeof(Id3v1Genre), Id3v1Genre.Blues, value => value.IsEnum<Id3v1Genre>(), value => value.ToEnum<Id3v1Genre>().ToString(), token => token.ToEnum<Id3v1Genre>());
 
         public static IEnumerable<ITagDomain> GetAll()
         {

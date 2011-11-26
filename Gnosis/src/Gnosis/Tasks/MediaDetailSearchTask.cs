@@ -67,11 +67,9 @@ namespace Gnosis.Tasks
         protected override void DoWork()
         {
             UpdateResults(GetResults(tagRepository.GetByAlgorithm(Algorithm.Default, TagDomain.String, pattern)));
-            UpdateResults(GetResults(tagRepository.GetByAlgorithm(Algorithm.Default, TagDomain.StringArray, pattern)));
             UpdateResults(GetResults(tagRepository.GetByAlgorithm(Algorithm.Default, TagDomain.Id3v1SimpleGenre, pattern)));
 
             UpdateResults(GetResults(tagRepository.GetByAlgorithm(Algorithm.Americanized, TagDomain.String, pattern.ToAmericanizedString() + "%")));
-            UpdateResults(GetResults(tagRepository.GetByAlgorithm(Algorithm.Americanized, TagDomain.StringArray, pattern.ToAmericanizedString() + "%")));
             UpdateResults(GetResults(tagRepository.GetByAlgorithm(Algorithm.Americanized, TagDomain.Id3v1SimpleGenre, pattern.ToAmericanizedString() + "%")));
         }
     }
