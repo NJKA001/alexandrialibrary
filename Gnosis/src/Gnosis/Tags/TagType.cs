@@ -29,11 +29,11 @@ namespace Gnosis.Tags
         public static readonly ITagType DefaultDuration = new TagType<TimeSpan>(4, "DefaultDuration", TagSchema.Default, TagDomain.Duration);
         public static readonly ITagType DefaultByteArray = new TagType<byte[]>(5, "DefaultByteArray", TagSchema.Default, TagDomain.ByteArray);
 
-        public static readonly ITagType AmericanizedString = new TagType<string>(101, "Americanized", TagSchema.Americanized, TagDomain.String);
-        public static readonly ITagType AmericanizedPositiveInteger = new TagType<uint>(102, "AmericanizedPositiveInteger", TagSchema.Americanized, TagDomain.PositiveInteger);
-        public static readonly ITagType AmericanizedDate = new TagType<DateTime>(103, "AmericanizedDate", TagSchema.Americanized, TagDomain.Date);
-        public static readonly ITagType AmericanizedDuration = new TagType<TimeSpan>(104, "AmericanizedDuration", TagSchema.Americanized, TagDomain.Duration);
-        public static readonly ITagType AmericanizedByteArray = new TagType<byte[]>(105, "AmericanizedByteArray", TagSchema.Americanized, TagDomain.ByteArray);
+        public static readonly ITagType AmericanizedString = new TagType<string>(21, "Americanized", TagSchema.Americanized, TagDomain.String);
+        public static readonly ITagType AmericanizedPositiveInteger = new TagType<uint>(22, "AmericanizedPositiveInteger", TagSchema.Americanized, TagDomain.PositiveInteger);
+        public static readonly ITagType AmericanizedDate = new TagType<DateTime>(23, "AmericanizedDate", TagSchema.Americanized, TagDomain.Date);
+        public static readonly ITagType AmericanizedDuration = new TagType<TimeSpan>(24, "AmericanizedDuration", TagSchema.Americanized, TagDomain.Duration);
+        public static readonly ITagType AmericanizedByteArray = new TagType<byte[]>(25, "AmericanizedByteArray", TagSchema.Americanized, TagDomain.ByteArray);
 
         public static IEnumerable<ITagType> GetAllDefault()
         {

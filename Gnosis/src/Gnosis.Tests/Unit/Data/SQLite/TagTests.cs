@@ -100,7 +100,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         {
             var tool = repository.GetByAlgorithm(Algorithm.Default, TagDomain.String, "Tool%");
             Assert.IsNotNull(tool);
-            Assert.AreEqual(3, tool.Count());
+            Assert.AreEqual(4, tool.Count());
         }
 
         [Test]
