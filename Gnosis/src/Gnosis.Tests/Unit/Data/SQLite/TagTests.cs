@@ -6,9 +6,6 @@ using System.Text;
 
 using Gnosis.Algorithms;
 using Gnosis.Tags;
-using Gnosis.Tags.Id3;
-using Gnosis.Tags.Id3.Id3v1;
-using Gnosis.Tags.Id3.Id3v2;
 using Gnosis.Utilities;
 using Gnosis.Data;
 using Gnosis.Data.SQLite;
@@ -63,17 +60,17 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             imageData = image.ToBytes();
             //Assert.IsNotNull(imageData);
 
-            var tag1 = new Tag(uri1, TagType.DefaultString, "Default", 0, "Tool Kicks Ass!");
-            var tag2 = new Tag(uri2, Id3v1TagType.Artist, "TPE1", 0, "Tool");
-            var tag3 = new Tag(uri3, Id3v1TagType.Artist, "TPE1", 0, "Tool");
-            var tag4 = new Tag(uri3, Id3v1TagType.Title, "Title", 0, "Ticks & Leeches 1".ToAmericanizedString());
-            var tag5 = new Tag(uri4, Id3v2TagType.Artist, "TPE1", 0, "Tool");
-            var tag6 = new Tag(uri4, Id3v2TagType.Title, "TIT1", 0, "The Bottom");
-            var tag7 = new Tag(uri4, Id3v2TagType.Album, "TALB", 0, "Undertow");
-            var tag8 = new Tag(uri4, Id3v2TagType.AttachedPicture, "Album Cover", 0, imageData);
-            var tag9 = new Tag(uri4, Id3v2TagType.ReleaseTime, "TDRL", 0, releaseDate);
-            var tag10 = new Tag(uri5, Id3v2TagType.Artist, "TPE1", 0, artist);
-            var tag11 = new Tag(uri5, Id3v1TagType.Genre, "Genre", 0, Id3v1Genre.Rock_and_Roll);
+            var tag1 = new Tag(uri1, TagType.DefaultString, "Tool Kicks Ass!");
+            var tag2 = new Tag(uri2, TagType.Artist, "Tool");
+            var tag3 = new Tag(uri3, TagType.Artist, "Tool");
+            var tag4 = new Tag(uri3, TagType.Title, "Ticks & Leeches 1".ToAmericanizedString());
+            var tag5 = new Tag(uri4, TagType.Artist, "Tool");
+            var tag6 = new Tag(uri4, TagType.Title, "The Bottom");
+            var tag7 = new Tag(uri4, TagType.Album, "Undertow");
+            var tag8 = new Tag(uri4, TagType.AttachedPicture, "Album Cover", Algorithm.Default, imageData);
+            var tag9 = new Tag(uri4, TagType.ReleaseTime, releaseDate);
+            var tag10 = new Tag(uri5, TagType.Artist, artist);
+            var tag11 = new Tag(uri5, TagType.Genre, "Rock & Roll");
 
             var tags = new List<ITag> { tag1, tag2, tag3, tag4, tag5, tag6, tag7, tag8, tag9, tag10, tag11 };
             repository.Save(tags);
@@ -82,7 +79,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         //protected string[] artists = new string[] { "Aa", "Bb", "Cc", "Dd", "Ee", "Ff", "Gg", "Hi", "Ii" };
         protected string artist = "Some Example Artist Name";
         protected byte[] imageData;
-        protected DateTime releaseDate = new DateTime(2011, 2, 19);
+        protected string releaseDate = new DateTime(2011, 2, 19).ToString("o");
 
         [TestFixtureSetUp]
         public void SetUp()
@@ -106,21 +103,21 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void CanBeReadByTarget()
         {
-            var pic = repository.GetByTarget(uri4, Id3v2TagType.AttachedPicture).FirstOrDefault();
+            var pic = repository.GetByTarget(uri4, TagType.AttachedPicture).FirstOrDefault();
             Assert.IsNotNull(pic);
-            Assert.AreEqual(imageData, pic.Value);
+            Assert.AreEqual(imageData, pic.Data);
 
-            var dateTag = repository.GetByTarget(uri4, Id3v2TagType.ReleaseTime).FirstOrDefault();
+            var dateTag = repository.GetByTarget(uri4, TagType.ReleaseTime).FirstOrDefault();
             Assert.IsNotNull(dateTag);
             Assert.AreEqual(releaseDate, dateTag.Value);
 
-            var arrayTag = repository.GetByTarget(uri5, Id3v2TagType.Artist).FirstOrDefault();
+            var arrayTag = repository.GetByTarget(uri5, TagType.Artist).FirstOrDefault();
             Assert.IsNotNull(arrayTag);
             Assert.AreEqual(artist, arrayTag.Value);
 
-            var genreTag = repository.GetByTarget(uri5, Id3v1TagType.Genre).FirstOrDefault();
+            var genreTag = repository.GetByTarget(uri5, TagType.Genre).FirstOrDefault();
             Assert.IsNotNull(genreTag);
-            Assert.AreEqual(Id3v1Genre.Rock_and_Roll, genreTag.Value);
+            Assert.AreEqual("Rock & Roll", genreTag.Value);
         }
 
         [Test]
@@ -143,10 +140,10 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             task.AddResultsCallback(x => results.AddRange(x));
             task.StartSynchronously();
 
-            var filteredResults = results.Where(x => x.Type == Id3v1TagType.Genre);
+            var filteredResults = results.Where(x => x.Type == TagType.Genre);
             Assert.AreEqual(1, filteredResults.Count());
             Assert.IsNotNull(results.First());
-            Assert.AreEqual(Id3v1Genre.Rock_and_Roll, filteredResults.First().Value);
+            Assert.AreEqual("Rock & Roll", filteredResults.First().Value);
         }
     }
 }

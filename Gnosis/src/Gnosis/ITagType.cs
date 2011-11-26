@@ -9,12 +9,6 @@ namespace Gnosis
     {
         int Id { get; }
         string Name { get; }
-        ITagSchema Schema { get; }
-        ITagDomain Domain { get; }
-    }
-
-    public interface ITagType<T>
-        : ITagType
-    {
+        TagDomain Domain { get; }
     }
 }

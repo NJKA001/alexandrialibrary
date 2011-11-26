@@ -6,7 +6,6 @@ using System.Text;
 
 using Gnosis.Application.Vendor;
 using Gnosis.Links;
-using Gnosis.Tags.Id3.Id3v2;
 using Gnosis.Tasks;
 
 namespace Gnosis.Spiders

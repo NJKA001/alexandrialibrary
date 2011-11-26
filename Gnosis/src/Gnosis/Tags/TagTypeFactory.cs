@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Tags.Id3;
-using Gnosis.Tags.Id3.Id3v1;
-using Gnosis.Tags.Id3.Id3v2;
-
 namespace Gnosis.Tags
 {
     public class TagTypeFactory
@@ -14,14 +10,8 @@ namespace Gnosis.Tags
     {
         public TagTypeFactory()
         {
-            foreach (var defType in TagType.GetAllDefault())
-                Add(defType);
-
-            foreach (var id3v1Type in Id3v1TagType.GetAll())
-                Add(id3v1Type);
-
-            foreach (var id3v2Type in Id3v2TagType.GetAll())
-                Add(id3v2Type);
+            foreach (var type in TagType.GetAll())
+                Add(type);
         }
 
         private readonly IDictionary<int, ITagType> byId = new Dictionary<int, ITagType>();

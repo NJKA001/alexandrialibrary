@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Algorithms;
 using Gnosis.Application.Vendor;
-using Gnosis.Tags.Id3;
-using Gnosis.Tags.Id3.Id3v1;
-using Gnosis.Tags.Id3.Id3v2;
+using Gnosis.Tags;
 
 using TagLib;
 
@@ -59,34 +58,30 @@ namespace Gnosis.Audio
             {
                 if (id3v2Tag.Performers != null && id3v2Tag.Performers.Length > 0)
                 {
-                    tags.Add(new Gnosis.Tags.Tag(Location, Id3v2TagType.Artist, "TPE1", 0, id3v2Tag.Performers));
-                    uint number = 0;
-                    foreach (var artist in id3v2Tag.Performers)
+                    tags.Add(new Gnosis.Tags.Tag(Location, TagType.Artist, id3v2Tag.JoinedPerformers));
+
+                    if (id3v1Tag.Performers.Length > 1)
                     {
-                        tags.Add(new Gnosis.Tags.Tag(Location, Gnosis.Tags.TagType.DefaultString, "Artist", number, id3v2Tag.Performers[number]));
-                        number++;
+                        for (var i = 0; i < id3v1Tag.Performers.Length; i++)
+                        {
+                            tags.Add(new Gnosis.Tags.Tag(Location, TagType.Artist, id3v2Tag.Performers[i]));
+                        }
                     }
-                    //tags.Add(new Gnosis.Tags.Tag(Location, Gnosis.Tags.TagType.DefaultString, id3v2Tag.Performers[0].Split(' ')));
                 }
                 if (id3v2Tag.Album != null)
-                    tags.Add(new Gnosis.Tags.Tag(Location, Id3v2TagType.Album, "TALB", 0, id3v2Tag.Album));
+                    tags.Add(new Gnosis.Tags.Tag(Location, TagType.Album, id3v2Tag.Album));
                 if (id3v2Tag.Year > 0)
-                    tags.Add(new Gnosis.Tags.Tag(Location, Id3v2TagType.ReleaseTime, "TDRL", 0, new DateTime((int)id3v2Tag.Year, 1, 1)));
+                    tags.Add(new Gnosis.Tags.Tag(Location, TagType.ReleaseTime, id3v2Tag.ReleaseDate.ToString("o")));
                 if (id3v2Tag.Track > 0)
-                    tags.Add(new Gnosis.Tags.Tag(Location, Id3v2TagType.TrackNumber, "TRCK", 1, id3v2Tag.Track));
+                    tags.Add(new Gnosis.Tags.Tag(Location, TagType.TrackNumber, id3v2Tag.Track.ToString()));
                 if (id3v2Tag.TrackCount > 0)
-                    tags.Add(new Gnosis.Tags.Tag(Location, Id3v2TagType.TrackNumber, "TRCK", 2, id3v2Tag.TrackCount));
+                    tags.Add(new Gnosis.Tags.Tag(Location, TagType.TrackCount, id3v2Tag.TrackCount.ToString()));
             }
             else if (id3v1Tag != null)
             {
             }
 
             return tags;
-        }
-
-        public IEnumerable<IId3Tag> GetId3Tags()
-        {
-            throw new NotImplementedException();
         }
 
         public IArtist GetArtist(IMediaItemRepository<IArtist> artistRepository)
@@ -139,12 +134,12 @@ namespace Gnosis.Audio
             return new GnosisTrack(name, recordDate, releaseDate, number, duration, artist.Location, artist.Name, album.Location, album.Name, Location, Type, SecurityContext.CurrentUser.Location, SecurityContext.CurrentUser.Name, thumbnail, thumbnailData);
         }
 
-        public void SetTag(IId3Tag tag)
+        public void SetTag(ITag tag)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveTag(IId3Tag tag)
+        public void RemoveTag(ITag tag)
         {
             throw new NotImplementedException();
         }

@@ -69,55 +69,33 @@ namespace Gnosis.Data.SQLite
 
         private ITag ReadTag(IDataRecord record)
         {
-            var target = record.GetUri("Target");
-            var type = record.GetInt32Lookup<ITagType>("Type", typeId => typeFactory.Create(typeId));
             var id = record.GetInt64("Id");
-            var name = record.GetString("Name");
-            var number = record.GetUInt32("Number");
-            var token = record.GetString("Token");
+            var target = record.GetUri("Target");
+            var algorithm = record.GetInt32Lookup<IAlgorithm>("Algorithm", algorithmId => Algorithms.Algorithm.Parse(algorithmId));
+            var type = record.GetInt32Lookup<ITagType>("Type", typeId => typeFactory.Create(typeId));
+            var value = record.GetString("Value");
             var data = record.GetBytes("Data");
-            var value = type.Domain.GetValue(token, data);
-            //var length = type.Domain.BaseTypes.Length;
-            //object[] values = new object[length];
 
-            //for (var i = 0; i < length; i++)
-            //{
-            //    var columnName = string.Format("Value{0}", i + 1);
-            //    if (type.Domain.BaseTypes[i] == null)
-            //        values[i] = null;
-            //    else if (type.Domain.BaseTypes[i] == typeof(byte[]))
-            //        values[i] = record.GetBytes(columnName);
-            //    else if (type.Domain.BaseTypes[i] == typeof(uint))
-            //        values[i] = record.GetUInt32(columnName);
-            //    else if (type.Domain.BaseTypes[i] == typeof(string))
-            //        values[i] = record.GetString(columnName);
-            //    else
-            //        values[i] = record[columnName];
-
-            //}
-
-            //var value = type.Domain.GetValue(TagTuple.FromArray(values));
-
-            return new Tag(target, type, name, number, value, id);
+            return new Tag(target, type, value, algorithm, data, id);
         }
 
-        private IEnumerable<ITag> GetId3v1SimpleGenreTags(IAlgorithm algorithm, string pattern)
-        {
-            var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value1 like @Pattern;");
-            builder.AddParameter("@Algorithm", algorithm.Id);
-            builder.AddParameter("@Domain", TagDomain.Id3v1SimpleGenre.Id);
-            builder.AddParameter("@Pattern", pattern);
-            return GetTags(builder);
-        }
+        //private IEnumerable<ITag> GetId3v1SimpleGenreTags(IAlgorithm algorithm, string pattern)
+        //{
+        //    var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value1 like @Pattern;");
+        //    builder.AddParameter("@Algorithm", algorithm.Id);
+        //    builder.AddParameter("@Domain", TagDomain.Id3v1SimpleGenre.Id);
+        //    builder.AddParameter("@Pattern", pattern);
+        //    return GetTags(builder);
+        //}
 
-        private IEnumerable<ITag> GetStringTags(IAlgorithm algorithm, string pattern)
-        {
-            var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value1 like @Pattern;");
-            builder.AddParameter("@Algorithm", algorithm.Id);
-            builder.AddParameter("@Domain", TagDomain.String.Id);
-            builder.AddParameter("@Pattern", pattern);
-            return GetTags(builder);
-        }
+        //private IEnumerable<ITag> GetStringTags(IAlgorithm algorithm, string pattern)
+        //{
+        //    var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value1 like @Pattern;");
+        //    builder.AddParameter("@Algorithm", algorithm.Id);
+        //    builder.AddParameter("@Domain", TagDomain.String.Id);
+        //    builder.AddParameter("@Pattern", pattern);
+        //    return GetTags(builder);
+        //}
 
         /*
         private IEnumerable<ITag> GetStringArrayTags1(IAlgorithm algorithm, string pattern)
@@ -225,26 +203,24 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<ITag> GetByTarget(Uri target, ITagSchema schema)
+        public IEnumerable<ITag> GetByTarget(Uri target, TagDomain domain)
         {
             if (target == null)
                 throw new ArgumentNullException("target");
-            if (schema == null)
-                throw new ArgumentNullException("schema");
 
             try
             {
-                logger.Info("SQLiteTagRepository.GetByTarget(Uri, ITagSchema)");
+                logger.Info("SQLiteTagRepository.GetByTarget(Uri, TagDomain)");
 
-                var builder = new CommandBuilder("select * Tag where Target = @Target and Schema = @Schema;");
+                var builder = new CommandBuilder("select * Tag where Target = @Target and Domain = @Domain;");
                 builder.AddParameter("@Target", target.ToString());
-                builder.AddParameter("@Schema", schema.Id);
+                builder.AddParameter("@Domain", (int)domain);
 
                 return GetTags(builder);
             }
             catch (Exception ex)
             {
-                logger.Error("  GetByTarget(Uri, ITagSchema)", ex);
+                logger.Error("  GetByTarget(Uri, TagDomain)", ex);
                 throw;
             }
         }
@@ -273,29 +249,27 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<ITag> GetByAlgorithm(IAlgorithm algorithm, ITagDomain domain, string pattern)
+        public IEnumerable<ITag> GetByAlgorithm(IAlgorithm algorithm, TagDomain domain, string pattern)
         {
             if (algorithm == null)
                 throw new ArgumentNullException("algorithm");
-            if (domain == null)
-                throw new ArgumentNullException("domain");
             if (pattern == null)
                 throw new ArgumentNullException("pattern");
 
             try
             {
-                logger.Info("SQLiteTagRepository.GetByAlgorithm(IAlgorithm, ITagDomain, string)");
+                logger.Info("SQLiteTagRepository.GetByAlgorithm(IAlgorithm, TagDomain, string)");
 
-                var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Token like @Pattern;");
+                var builder = new CommandBuilder("select * from Tag where Algorithm = @Algorithm and Domain = @Domain and Value like @Pattern;");
                 builder.AddParameter("@Algorithm", algorithm.Id);
-                builder.AddParameter("@Domain", domain.Id);
+                builder.AddParameter("@Domain", (int)domain);
                 builder.AddParameter("@Pattern", pattern);
 
                 return GetTags(builder);
             }
             catch (Exception ex)
             {
-                logger.Error("  GetByAlgorithm(IAlgorithm, ITagDomain, string)", ex);
+                logger.Error("  GetByAlgorithm(IAlgorithm, TagDomain, string)", ex);
                 throw;
             }
         }
@@ -325,12 +299,12 @@ namespace Gnosis.Data.SQLite
                 logger.Info("SQLiteTagRepository.Initialize");
 
                 var builder = new CommandBuilder();
-                builder.AppendLine("create table if not exists Tag (Id integer primary key not null, Target text not null, Algorithm integer not null, Schema integer not null, Domain integer not null, Type integer not null, Name text not null, Number integer not null, Token text not null, Data blob not null);");
+                builder.AppendLine("create table if not exists Tag (Id integer primary key not null, Target text not null, Algorithm integer not null, Domain integer not null, Type integer not null, Value text not null, Data blob not null);");
                 builder.AppendLine("create index if not exists Tag_Target on Tag (Target asc);");
-                builder.AppendLine("create index if not exists Tag_Target_Schema on Tag (Target asc, Schema asc);");
-                builder.AppendLine("create unique index if not exists Tag_Target_Type_Name_Number on Tag (Target asc, Type asc, Name asc, Number asc);");
-                builder.AppendLine("create index if not exists Tag_Target_Type_Name on Tag (Target asc, Type asc, Name asc);");
-                builder.AppendLine("create index if not exists Tag_Algorithm_Domain_Token on Tag (Algorithm asc, Domain asc, Token asc);");
+                builder.AppendLine("create index if not exists Tag_Target_Domain on Tag (Target asc, Domain asc);");
+                builder.AppendLine("create unique index if not exists Tag_Target_Algorithm_Type_Value on Tag (Target asc, Algorithm asc, Type asc, Value asc);");
+                builder.AppendLine("create index if not exists Tag_Target_Type_Value on Tag (Target asc, Type asc, Value asc);");
+                builder.AppendLine("create index if not exists Tag_Algorithm_Domain_Value on Tag (Algorithm asc, Domain asc, Value asc);");
 
                 ExecuteNonQuery(builder);
             }
@@ -355,17 +329,14 @@ namespace Gnosis.Data.SQLite
                 foreach (var tag in tags)
                 {
                     var builder = new CommandBuilder();
-                    builder.AppendLine("replace into Tag (Id, Target, Algorithm, Schema, Domain, Type, Name, Number, Token, Data) values (@Id, @Target, @Algorithm, @Schema, @Domain, @Type, @Name, @Number, @Token, @Data);");
+                    builder.AppendLine("replace into Tag (Id, Target, Algorithm, Domain, Type, Value, Data) values (@Id, @Target, @Algorithm, @Domain, @Type, @Value, @Data);");
                     builder.AddParameter("@Id", tag.Id > 0 ? (object)tag.Id : (object)DBNull.Value);
                     builder.AddParameter("@Target", tag.Target.ToString());
-                    builder.AddParameter("@Algorithm", tag.Type.Schema.Algorithm.Id);
-                    builder.AddParameter("@Schema", tag.Type.Schema.Id);
-                    builder.AddParameter("@Domain", tag.Type.Domain.Id);
+                    builder.AddParameter("@Algorithm", tag.Algorithm.Id);
+                    builder.AddParameter("@Domain", (int)tag.Type.Domain);
                     builder.AddParameter("@Type", tag.Type.Id);
-                    builder.AddParameter("@Name", tag.Name);
-                    builder.AddParameter("@Number", tag.Number);
-                    builder.AddParameter("@Token", tag.Type.Domain.GetToken(tag.Value));
-                    builder.AddParameter("@Data", tag.Type.Domain.GetData(tag.Value));
+                    builder.AddParameter("@Value", tag.Value);
+                    builder.AddParameter("@Data", tag.Data);
 
                     builders.Add(builder);
                 }

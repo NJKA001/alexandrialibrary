@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Audio;
-using Gnosis.Tags.Id3;
 
 using NUnit.Framework;
 

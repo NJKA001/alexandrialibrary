@@ -9,9 +9,9 @@ namespace Gnosis
     {
         long Id { get; }
         Uri Target { get; }
+        IAlgorithm Algorithm { get; }
         ITagType Type { get; }
-        string Name { get; }
-        uint Number { get; }
-        object Value { get; }
+        string Value { get; }
+        byte[] Data { get; }
     }
 }

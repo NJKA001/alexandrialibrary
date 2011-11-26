@@ -8,24 +8,14 @@ namespace Gnosis.Tags
     public class TagFactory
         : ITagFactory
     {
-        public ITag Create(Uri target, ITagType type, string name, uint number, object value)
+        public ITag Create(Uri target, IAlgorithm algorithm, ITagType type, string value, byte[] data)
         {
-            return new Tag(target, type, name, number, value);
+            return new Tag(target, type, value, algorithm, data);
         }
 
-        public ITag Create(Uri target, ITagType type, string name, uint number, object value, long id)
+        public ITag Create(Uri target, IAlgorithm algorithm, ITagType type, string value, byte[] data, long id)
         {
-            return new Tag(target, type, name, number, value, id);
+            return new Tag(target, type, value, algorithm, data, id);
         }
-
-        //public ITag Create<T>(Uri target, ITagType<T> type, T value)
-        //{
-        //    return new Tag(target, type, value);
-        //}
-
-        //public ITag Create<T>(Uri target, ITagType<T> type, T value, long id)
-        //{
-        //    return new Tag(target, type, value, id);
-        //}
     }
 }

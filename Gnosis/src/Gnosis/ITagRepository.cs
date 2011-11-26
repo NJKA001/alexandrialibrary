@@ -9,9 +9,9 @@ namespace Gnosis
     {
         ITag GetById(long id);
         IEnumerable<ITag> GetByTarget(Uri target);
-        IEnumerable<ITag> GetByTarget(Uri target, ITagSchema schema);
+        IEnumerable<ITag> GetByTarget(Uri target, TagDomain domain);
         IEnumerable<ITag> GetByTarget(Uri target, ITagType type);
-        IEnumerable<ITag> GetByAlgorithm(IAlgorithm algorithm, ITagDomain domain, string pattern);
+        IEnumerable<ITag> GetByAlgorithm(IAlgorithm algorithm, TagDomain domain, string pattern);
 
         ITask<IEnumerable<ITag>> Search(IAlgorithm algorithm, string pattern);
 

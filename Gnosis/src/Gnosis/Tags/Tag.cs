@@ -8,36 +8,48 @@ namespace Gnosis.Tags
     public class Tag
         : ITag
     {
-        public Tag(Uri target, ITagType type, string name, uint number, object value)
-            : this(target, type, name, number, value, 0)
+        public Tag(Uri target, ITagType type, string value)
+            : this(target, type, value, Algorithms.Algorithm.Default, new byte[0], 0)
         {
         }
 
-        public Tag(Uri target, ITagType type, string name, uint number, object value, long id)
+        public Tag(Uri target, ITagType type, string value, IAlgorithm algorithm)
+            : this(target, type, value, algorithm, new byte[0], 0)
+        {
+        }
+
+        public Tag(Uri target, ITagType type, string value, IAlgorithm algorithm, byte[] data)
+            : this(target, type, value, algorithm, data, 0)
+        {
+        }
+
+        public Tag(Uri target, ITagType type, string value, IAlgorithm algorithm, byte[] data, long id)
         {
             if (target == null)
                 throw new ArgumentNullException("target");
+            if (algorithm == null)
+                throw new ArgumentNullException("algorithm");
             if (type == null)
                 throw new ArgumentNullException("type");
-            if (name == null)
-                throw new ArgumentNullException("name");
             if (value == null)
                 throw new ArgumentNullException("value");
+            if (data == null)
+                throw new ArgumentNullException("data");
 
             this.target = target;
+            this.algorithm = algorithm;
             this.type = type;
-            this.name = name;
-            this.number = number;
             this.value = value;
+            this.data = data;
             this.id = id;
         }
 
         private readonly long id;
         private readonly Uri target;
+        private readonly IAlgorithm algorithm;
         private readonly ITagType type;
-        private readonly string name;
-        private readonly uint number;
-        private readonly object value;
+        private readonly string value;
+        private readonly byte[] data;
 
         public long Id
         {
@@ -49,24 +61,24 @@ namespace Gnosis.Tags
             get { return target; }
         }
 
+        public IAlgorithm Algorithm
+        {
+            get { return algorithm; }
+        }
+
         public ITagType Type
         {
             get { return type; }
         }
 
-        public string Name
-        {
-            get { return name; }
-        }
-
-        public uint Number
-        {
-            get { return number; }
-        }
-
-        public object Value
+        public string Value
         {
             get { return value; }
+        }
+
+        public byte[] Data
+        {
+            get { return data; }
         }
     }
 }

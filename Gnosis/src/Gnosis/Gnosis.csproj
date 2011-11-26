@@ -245,8 +245,6 @@
     <Compile Include="ISpider.cs" />
     <Compile Include="IMediaSummary.cs" />
     <Compile Include="IMediaSummaryRepository.cs" />
-    <Compile Include="ITagDomain.cs" />
-    <Compile Include="ITagSchema.cs" />
     <Compile Include="ITagType.cs" />
     <Compile Include="ITagTypeFactory.cs" />
     <Compile Include="ITagFactory.cs" />
@@ -262,17 +260,11 @@
     <Compile Include="IVideoPlayer.cs" />
     <Compile Include="SecurityContext.cs" />
     <Compile Include="Spiders\PlaylistSpider.cs" />
+    <Compile Include="TagDomain.cs" />
     <Compile Include="TaskProgress.cs" />
     <Compile Include="IVideo.cs" />
     <Compile Include="Spiders\CatalogSpider.cs" />
-    <Compile Include="Tags\Id3\Id3v1\Id3v1Extensions.cs" />
-    <Compile Include="Tags\Id3\Id3v1\Id3v1Genre.cs" />
-    <Compile Include="Tags\TagDomain.cs" />
     <Compile Include="Tags\TagFactory.cs" />
-    <Compile Include="Tags\TagSchema.cs" />
-    <Compile Include="Tags\Id3\Id3v1\Id3v1TagType.cs" />
-    <Compile Include="Tags\Id3\Id3v1\IId3v1Tag.cs" />
-    <Compile Include="Tags\Id3\Id3v2\Id3v2TagType.cs" />
     <Compile Include="IAlgorithm.cs" />
     <Compile Include="ILink.cs" />
     <Compile Include="Tasks\CatalogMediaTask.cs" />
@@ -325,8 +317,6 @@
     <Compile Include="Application\Xml\StyleMediaSensoryGroup.cs" />
     <Compile Include="MediaType.cs" />
     <Compile Include="Tags\Tag.cs" />
-    <Compile Include="Tags\Id3\Id3v2\IId3v2Tag.cs" />
-    <Compile Include="Tags\Id3\IId3Tag.cs" />
     <Compile Include="Tags\TagType.cs" />
     <Compile Include="Tags\TagTypeFactory.cs" />
     <Compile Include="Tasks\TaskBase.cs" />
