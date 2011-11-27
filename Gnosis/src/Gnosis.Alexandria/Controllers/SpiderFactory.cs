@@ -9,10 +9,12 @@ namespace Gnosis.Alexandria.Controllers
 {
     public class SpiderFactory
     {
-        public SpiderFactory(ILogger logger, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository)
+        public SpiderFactory(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
+            if (securityContext == null)
+                throw new ArgumentNullException("securityContext");
             if (mediaFactory == null)
                 throw new ArgumentNullException("mediaFactory");
             if (linkRepository == null)
@@ -29,6 +31,8 @@ namespace Gnosis.Alexandria.Controllers
                 throw new ArgumentNullException("trackRepository");
 
             this.logger = logger;
+            this.securityContext = securityContext;
+            this.securityContext = securityContext;
             this.mediaFactory = mediaFactory;
             this.linkRepository = linkRepository;
             this.tagRepository = tagRepository;
@@ -39,6 +43,7 @@ namespace Gnosis.Alexandria.Controllers
         }
 
         private readonly ILogger logger;
+        private readonly ISecurityContext securityContext;
         private readonly IMediaFactory mediaFactory;
         private readonly ILinkRepository linkRepository;
         private readonly ITagRepository tagRepository;
@@ -49,7 +54,7 @@ namespace Gnosis.Alexandria.Controllers
 
         public ISpider CreateCatalogSpider()
         {
-            return new CatalogSpider(logger, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository);
+            return new CatalogSpider(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository);
         }
     }
 }

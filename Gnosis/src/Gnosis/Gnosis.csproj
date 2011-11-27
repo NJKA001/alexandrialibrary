@@ -113,6 +113,7 @@
     <Compile Include="IAlbumSummary.cs" />
     <Compile Include="IFeed.cs" />
     <Compile Include="IFeedItem.cs" />
+    <Compile Include="ISecurityContext.cs" />
     <Compile Include="IUserFolder.cs" />
     <Compile Include="IClip.cs" />
     <Compile Include="IClipRepository.cs" />
@@ -268,6 +269,7 @@
     <Compile Include="IAlgorithm.cs" />
     <Compile Include="ILink.cs" />
     <Compile Include="Tasks\CatalogMediaTask.cs" />
+    <Compile Include="Tasks\MediaItemSearchTask.cs" />
     <Compile Include="Tasks\TagSearchTask.cs" />
     <Compile Include="Text\PlainText.cs" />
     <Compile Include="Application\Vendor\GnosisTrack.cs" />

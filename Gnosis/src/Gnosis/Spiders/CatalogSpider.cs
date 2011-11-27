@@ -13,10 +13,12 @@ namespace Gnosis.Spiders
     public class CatalogSpider
         : ISpider
     {
-        public CatalogSpider(ILogger logger, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository)
+        public CatalogSpider(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
+            if (securityContext == null)
+                throw new ArgumentNullException("securityContext");
             if (mediaFactory == null)
                 throw new ArgumentNullException("mediaFactory");
             if (linkRepository == null)
@@ -33,6 +35,7 @@ namespace Gnosis.Spiders
                 throw new ArgumentNullException("trackRepository");
 
             this.logger = logger;
+            this.securityContext = securityContext;
             this.mediaFactory = mediaFactory;
             this.linkRepository = linkRepository;
             this.tagRepository = tagRepository;
@@ -46,6 +49,7 @@ namespace Gnosis.Spiders
         }
 
         private readonly ILogger logger;
+        private readonly ISecurityContext securityContext;
         private readonly IMediaFactory mediaFactory;
         private readonly ILinkRepository linkRepository;
         private readonly ITagRepository tagRepository;
@@ -99,18 +103,18 @@ namespace Gnosis.Spiders
             return null;
         }
 
-        private void SaveTrack(IAudio audio)
+        private void SaveMediaItems(IAudio audio)
         {
             var track = trackRepository.GetByTarget(audio.Location).FirstOrDefault();
             if (track == null)
             {
-                var artist = audio.GetArtist(artistRepository);
+                var artist = audio.GetArtist(securityContext, artistRepository);
                 artistRepository.Save(new List<IArtist> { artist });
 
-                var album = audio.GetAlbum(albumRepository, artist);
+                var album = audio.GetAlbum(securityContext, albumRepository, artist);
                 albumRepository.Save(new List<IAlbum> { album });
 
-                track = audio.GetTrack(trackRepository, artist, album);
+                track = audio.GetTrack(securityContext, trackRepository, artist, album);
                 trackRepository.Save(new List<ITrack> { track });
             }
         }
@@ -124,7 +128,7 @@ namespace Gnosis.Spiders
 
             if (media is IAudio)
             {
-                SaveTrack(media as IAudio);
+                SaveMediaItems(media as IAudio);
             }
 
             var location = media.Location;

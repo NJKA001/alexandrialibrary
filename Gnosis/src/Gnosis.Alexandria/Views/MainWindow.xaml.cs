@@ -43,6 +43,9 @@ namespace Gnosis.Alexandria.Views
             try
             {
                 logger.Info("Initializing Alexandria");
+
+                securityContext = new SecurityContext();
+
                 mediaFactory = new MediaFactory();
                 tagTypeFactory = new TagTypeFactory();
 
@@ -64,13 +67,13 @@ namespace Gnosis.Alexandria.Views
                 trackRepository = new SQLiteTrackRepository(logger);
                 trackRepository.Initialize();
 
-                catalogController = new CatalogController(logger, mediaFactory, mediaRepository, linkRepository, tagRepository, artistRepository, albumRepository, trackRepository);
-                spiderFactory = new SpiderFactory(logger, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository);
+                catalogController = new CatalogController(logger, securityContext, mediaFactory, mediaRepository, linkRepository, tagRepository, artistRepository, albumRepository, trackRepository);
+                spiderFactory = new SpiderFactory(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository);
 
                 taskController = new TaskController(logger);
 
                 taskManagerView.Initialize(logger, spiderFactory, taskController);
-                searchView.Initialize(logger, tagRepository, taskController);
+                searchView.Initialize(logger, tagRepository, artistRepository, albumRepository, trackRepository, taskController);
             }
             catch (Exception ex)
             {
@@ -79,6 +82,7 @@ namespace Gnosis.Alexandria.Views
         }
 
         private readonly ILogger logger;
+        private readonly ISecurityContext securityContext;
         private readonly IMediaFactory mediaFactory;
         private readonly ITagTypeFactory tagTypeFactory;
 

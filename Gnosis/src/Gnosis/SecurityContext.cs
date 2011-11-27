@@ -7,16 +7,17 @@ using Gnosis.Application.Vendor;
 
 namespace Gnosis
 {
-    public static class SecurityContext
+    public class SecurityContext
+        : ISecurityContext
     {
-        private static IUser currentUser = GnosisUser.Administrator;
+        private IUser currentUser = GnosisUser.Administrator;
 
-        public static IUser CurrentUser
+        public IUser CurrentUser
         {
             get { return currentUser; }
         }
 
-        public static void ChangeCurrentUser(IUser user)
+        public void ChangeCurrentUser(IUser user)
         {
             if (user == null)
                 throw new ArgumentNullException("user");

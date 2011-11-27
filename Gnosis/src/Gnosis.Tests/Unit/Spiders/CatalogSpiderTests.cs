@@ -28,6 +28,7 @@ namespace Gnosis.Tests.Unit.Spiders
 
         private IConnectionFactory connectionFactory = new SQLiteConnectionFactory();
         private ILogger logger = new DebugLogger();
+        private ISecurityContext securityContext = new SecurityContext();
         private ITagRepository tagRepository;
         private ILinkRepository linkRepository;
         private IMediaRepository mediaRepository;
@@ -77,7 +78,7 @@ namespace Gnosis.Tests.Unit.Spiders
             trackRepository = new SQLiteTrackRepository(logger, trackConnection);
             trackRepository.Initialize();
 
-            spider = new CatalogSpider(logger, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository);
+            spider = new CatalogSpider(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository);
         }
 
         [TestFixtureTearDown]

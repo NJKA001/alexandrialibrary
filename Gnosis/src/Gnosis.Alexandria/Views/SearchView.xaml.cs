@@ -34,8 +34,12 @@ namespace Gnosis.Alexandria.Views
 
         private ILogger logger;
         private ITagRepository tagRepository;
+        private IMediaItemRepository<IArtist> artistRepository;
+        private IMediaItemRepository<IAlbum> albumRepository;
+        private IMediaItemRepository<ITrack> trackRepository;
         private ITaskController taskController;
         private readonly IDictionary<string, ArtistSearchResultViewModel> artistResults = new Dictionary<string, ArtistSearchResultViewModel>();
+        //private readonly IList<string, ISearchResultViewModel> viewModels = new List<ISearchResultViewModel>();
 
         private void AddResult(ISearchResultViewModel result)
         {
@@ -60,6 +64,30 @@ namespace Gnosis.Alexandria.Views
         //    }
         //}
 
+
+        private void HandleSearchResult(IMediaItem result)
+        {
+            try
+            {
+                if (result is IArtist)
+                {
+                    if (!artistResults.ContainsKey(result.Name))
+                    {
+                        //var artistViewModel = new ArtistViewModel(result.Name, result.FromDate, result.ToDate, result.th
+                    }
+                }
+                else if (result is IAlbum)
+                {
+                }
+                else if (result is ITrack)
+                {
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  HandleSearchResults", ex);
+            }
+        }
 
         /*
         private void HandleSearchResultsOld2(IEnumerable<IMediaDetail> results)
@@ -184,14 +212,14 @@ namespace Gnosis.Alexandria.Views
                 if (string.IsNullOrEmpty(search))
                     return;
 
-                //var task = repository.Search(search + "%");
-                //task.AddResultsCallback(results => HandleSearchResults(results));
+                var pattern = search + "%";
+                var task = new MediaItemSearchTask(logger, pattern, artistRepository, albumRepository, trackRepository);
+                task.AddResultsCallback(result => HandleSearchResult(result));
+                
+                var taskViewModel = new SearchTaskViewModel(logger, task, search);
+                taskController.AddTask(taskViewModel);
 
-                //var task = new ArtistSearchTask(logger, tagRepository, search + "%");
-                //task.AddResultsCallback(results => HandleSearchResults(results));
-                //var taskViewModel = new SearchTaskViewModel(logger, task, search);
-                //taskController.AddTask(taskViewModel);
-                //task.Start();
+                task.Start();
             }
             catch (Exception ex)
             {
@@ -220,7 +248,7 @@ namespace Gnosis.Alexandria.Views
             DoSearch();
         }
 
-        public void Initialize(ILogger logger, ITagRepository tagRepository, ITaskController taskController)
+        public void Initialize(ILogger logger, ITagRepository tagRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, ITaskController taskController)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -231,16 +259,10 @@ namespace Gnosis.Alexandria.Views
 
             this.logger = logger;
             this.tagRepository = tagRepository;
+            this.artistRepository = artistRepository;
+            this.albumRepository = albumRepository;
+            this.trackRepository = trackRepository;
             this.taskController = taskController;
-
-            try
-            {
-                //searchList.ItemsSource = viewModels;
-            }
-            catch (Exception ex)
-            {
-                logger.Error("  SearchView.Initialize", ex);
-            }
         }
     }
 }

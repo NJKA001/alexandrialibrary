@@ -79,7 +79,7 @@ namespace Gnosis.Tests.Performance
                     repository.Save(tags);
                     var elapsed = DateTime.Now.Subtract(start);
                     
-                    Assert.IsTrue(elapsed.TotalMilliseconds < 100);
+                    Assert.IsTrue(elapsed.TotalMilliseconds < 150);
                 }
 
                 //var tagsA = repository.GetByAlgorithm(Algorithms.Algorithm.Default, TagDomain.String, "a%");

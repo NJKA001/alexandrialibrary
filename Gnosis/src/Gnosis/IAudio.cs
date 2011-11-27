@@ -8,8 +8,8 @@ namespace Gnosis
     public interface IAudio
         : IMedia
     {
-        IArtist GetArtist(IMediaItemRepository<IArtist> artistRepository);
-        IAlbum GetAlbum(IMediaItemRepository<IAlbum> albumRepository, IArtist artist);
-        ITrack GetTrack(IMediaItemRepository<ITrack> trackRepository, IArtist artist, IAlbum album);
+        IArtist GetArtist(ISecurityContext securityContext, IMediaItemRepository<IArtist> artistRepository);
+        IAlbum GetAlbum(ISecurityContext securityContext, IMediaItemRepository<IAlbum> albumRepository, IArtist artist);
+        ITrack GetTrack(ISecurityContext securityContext, IMediaItemRepository<ITrack> trackRepository, IArtist artist, IAlbum album);
     }
 }
