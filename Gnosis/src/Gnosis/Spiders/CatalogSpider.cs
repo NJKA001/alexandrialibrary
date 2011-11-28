@@ -78,6 +78,11 @@ namespace Gnosis.Spiders
             return mediaFactory.Create(location);
         }
 
+        private bool HasDefaultThumbnail(IMediaItem item)
+        {
+            return (item.Thumbnail.IsEmptyUrn() || item.Thumbnail.ToString().EndsWith(".jpg.to/")) && item.ThumbnailData.Length == 0;
+        }
+
         private string GetArtistThumbnailPath(FileInfo fileInfo)
         {
             //TODO: Go back a directory with fileInfo and look for folder.jpg for the artist
@@ -105,17 +110,70 @@ namespace Gnosis.Spiders
 
         private void SaveMediaItems(IAudio audio)
         {
-            var track = trackRepository.GetByTarget(audio.Location).FirstOrDefault();
-            if (track == null)
+            try
             {
-                var artist = audio.GetArtist(securityContext, artistRepository);
-                artistRepository.Save(new List<IArtist> { artist });
+                var track = trackRepository.GetByTarget(audio.Location).FirstOrDefault();
+                if (track == null)
+                {
+                    var artist = audio.GetArtist(securityContext, artistRepository);
+                    artistRepository.Save(new List<IArtist> { artist });
 
-                var album = audio.GetAlbum(securityContext, albumRepository, artist);
-                albumRepository.Save(new List<IAlbum> { album });
+                    var album = audio.GetAlbum(securityContext, albumRepository, artist);
+                    albumRepository.Save(new List<IAlbum> { album });
 
-                track = audio.GetTrack(securityContext, trackRepository, artist, album);
-                trackRepository.Save(new List<ITrack> { track });
+                    track = audio.GetTrack(securityContext, trackRepository, artist, album);
+                    trackRepository.Save(new List<ITrack> { track });
+                }
+                else if (!HasDefaultThumbnail(track))
+                {
+                    var artist = artistRepository.GetByLocation(track.Creator);
+                    if (artist != null && HasDefaultThumbnail(artist))
+                    {
+                        var fromDate = artist.FromDate;
+                        if (fromDate == DateTime.MinValue)
+                        {
+                        }
+
+                        var toDate = artist.ToDate;
+                        if (toDate == DateTime.MaxValue)
+                        {
+                        }
+
+                        //var updated = new GnosisArtist(artist.Name, artist.FromDate, artist
+                    }
+
+                    var album = albumRepository.GetByLocation(track.Catalog);
+                    if (album != null && HasDefaultThumbnail(album))
+                    {
+                        var fromDate = album.FromDate;
+                        if (album.FromDate == DateTime.MinValue || album.FromDate == DateTime.MaxValue)
+                        {
+                            fromDate = track.ToDate != DateTime.MinValue && track.ToDate != DateTime.MaxValue ?
+                                track.ToDate
+                                : track.FromDate;
+                        }
+
+                        var number = album.Number;
+                        if (album.Name.Contains("#") && !album.Name.EndsWith("#"))
+                        {
+                            var suffix = album.Name.Substring(album.Name.LastIndexOf('#') + 1).Trim();
+                            uint.TryParse(suffix, out number);
+                        }
+                        else if (album.Name.Contains("(") && !album.Name.EndsWith("("))
+                        {
+                            var suffix = album.Name.Substring(album.Name.LastIndexOf("(") + 1);
+                            var cleaned = System.Text.RegularExpressions.Regex.Replace(suffix, "[^0-9]", string.Empty);
+                            uint.TryParse(cleaned, out number);
+                        }
+
+                        var updated = new GnosisAlbum(album.Name, fromDate, number, album.Creator, album.CreatorName, album.Catalog, album.CatalogName, album.Target, album.TargetType, album.User, album.UserName, track.Thumbnail, track.ThumbnailData, album.Location);
+                        albumRepository.Save(new List<IAlbum> { updated });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  SaveMediaItems", ex);
             }
         }
 

@@ -188,7 +188,7 @@ namespace Gnosis.Alexandria.Views
             try
             {
                 var dialog = new System.Windows.Forms.FolderBrowserDialog();
-                dialog.RootFolder = Environment.SpecialFolder.MyMusic;
+                dialog.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
                 var result = dialog.ShowDialog();
 
                 if (result != System.Windows.Forms.DialogResult.OK)

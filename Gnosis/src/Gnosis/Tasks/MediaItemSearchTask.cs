@@ -25,7 +25,7 @@ namespace Gnosis.Tasks
         private const int maxProgress = 100;
 
         private int progressCount = 0;
-        private int errorCount = 0;
+        //private int errorCount = 0;
 
         private void AddProgress(string description)
         {

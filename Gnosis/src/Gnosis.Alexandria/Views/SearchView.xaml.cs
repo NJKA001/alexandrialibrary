@@ -47,6 +47,18 @@ namespace Gnosis.Alexandria.Views
             Dispatcher.Invoke(new Action(() => searchResultView.AddViewModel(result)), DispatcherPriority.DataBind);
         }
 
+        private void AddAlbum(ArtistSearchResultViewModel artist, AlbumViewModel album)
+        {
+            Action action = () => artist.AddAlbum(album);
+            Dispatcher.Invoke(action, DispatcherPriority.DataBind);
+        }
+
+        private void AddTrack(AlbumSearchResultViewModel album, TrackViewModel track)
+        {
+            Action action = () => album.AddTrack(track);
+            Dispatcher.Invoke(action, DispatcherPriority.DataBind);
+        }
+
         private void HandleSearchResult(IMediaItem result)
         {
             try
@@ -86,7 +98,7 @@ namespace Gnosis.Alexandria.Views
                         var existing = artistResults[artistKey].Albums.Where(x => x.Album.ToString() == albumViewModel.Album.ToString()).FirstOrDefault();
                         if (existing == null)
                         {
-                            artistResults[artistKey].AddAlbum(albumViewModel);
+                            AddAlbum(artistResults[artistKey], albumViewModel);
                         }
                     }
                 }
@@ -106,7 +118,7 @@ namespace Gnosis.Alexandria.Views
                         var existing = albumResults[albumKey].Tracks.Where(x => x.Album.ToString() == trackViewModel.Album.ToString()).FirstOrDefault();
                         if (existing == null)
                         {
-                            albumResults[albumKey].AddTrack(trackViewModel);
+                            AddTrack(albumResults[albumKey], trackViewModel);
                         }
                     }
                 }
