@@ -22,24 +22,46 @@ namespace Gnosis.Tasks
         private readonly IMediaItemRepository<IAlbum> albumRepository;
         private readonly IMediaItemRepository<ITrack> trackRepository;
 
+        private const int maxProgress = 100;
+
+        private int progressCount = 0;
+        private int errorCount = 0;
+
+        private void AddProgress(string description)
+        {
+            progressCount = progressCount < maxProgress ?
+                progressCount + 1
+                : 0;
+
+            UpdateProgress(progressCount, maxProgress, description);
+        }
+
         protected override void DoWork()
         {
             foreach (var artist in artistRepository.GetByName(pattern))
             {
+                AddProgress("Artist: " + artist.Name);
                 UpdateResults(artist);
                 foreach (var album in albumRepository.GetByCreator(artist.Location))
+                {
+                    AddProgress("Album: " + album.Name);
                     UpdateResults(album);
+                }
             }
 
             foreach (var album in albumRepository.GetByName(pattern))
             {
+                AddProgress("Album: " + album.Name);
                 UpdateResults(album);
             }
 
             foreach (var track in trackRepository.GetByName(pattern))
             {
+                AddProgress("Track: " + track.Name);
                 UpdateResults(track);
             }
+
+            UpdateProgress(maxProgress, maxProgress, "Completed");
         }
     }
 }

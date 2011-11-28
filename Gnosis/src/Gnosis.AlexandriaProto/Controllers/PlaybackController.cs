@@ -8,7 +8,6 @@ using System.Timers;
 using log4net;
 
 using Gnosis.Alexandria.Models;
-using Gnosis.Core;
 using Gnosis.Audio.Fmod;
 using System.Net;
 

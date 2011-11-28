@@ -286,16 +286,16 @@ namespace Gnosis.Alexandria.Views
             if (taskViewModel == null)
                 throw new ArgumentNullException("taskViewModel");
 
-            taskViewModel.AddCancelCallback(x => RemoveTaskViewModel(x));
+            //taskViewModel.AddCancelCallback(x => RemoveTaskViewModel(x));
             taskController.AddTask(taskViewModel);
         }
 
-        public void RemoveTaskViewModel(ITaskViewModel taskViewModel)
-        {
-            if (taskViewModel == null)
-                throw new ArgumentNullException("taskViewModel");
+        //public void RemoveTaskViewModel(ITaskViewModel taskViewModel)
+        //{
+        //    if (taskViewModel == null)
+        //        throw new ArgumentNullException("taskViewModel");
 
-            taskController.RemoveTask(taskViewModel);
-        }
+        //    taskController.RemoveTask(taskViewModel);
+        //}
     }
 }

@@ -1123,5 +1123,22 @@ namespace Gnosis
 
             return string.Format("{0}...{1}", self.Substring(0, halfSize), self.Substring(length - halfSize, halfSize));
         }
+
+        public static string RemoveNonAlphaNumerics(this string self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            var regex = new System.Text.RegularExpressions.Regex("[^a-zA-Z 0-9]");
+            return regex.Replace(self, string.Empty);
+        }
+
+        public static string ToUrlEscapedString(this string self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            return System.Web.HttpUtility.UrlEncode(self);
+        }
     }
 }

@@ -6,7 +6,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-using Gnosis.Core;
 using Gnosis.Data;
 
 namespace Gnosis.Alexandria.Models

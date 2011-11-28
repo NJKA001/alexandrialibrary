@@ -23,6 +23,24 @@ namespace Gnosis.Audio
         {
         }
 
+        private Uri GetJpgToUrl(string name)
+        {
+            if (name == null)
+                throw new ArgumentNullException("name");
+
+            var escaped = name.RemoveNonAlphaNumerics().Replace(" ", "_");
+
+            try
+            {
+                return new Uri(string.Format("http://{0}.jpg.to", escaped), UriKind.Absolute);
+            }
+            catch (Exception ex)
+            {
+                var m = ex.Message;
+                return Guid.Empty.ToUrn();
+            }
+        }
+
         public override void Load()
         {
             if (Location.IsFile)
@@ -96,7 +114,8 @@ namespace Gnosis.Audio
             if (artist != null)
                 return artist;
 
-            return new GnosisArtist(artistName, DateTime.MinValue, DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown Artist", Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, new Uri(string.Format("http://{0}.jpg.to", artistName)), new byte[0]);
+            var thumbnail = GetJpgToUrl(artistName); 
+            return new GnosisArtist(artistName, DateTime.MinValue, DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown Artist", Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, new byte[0]);
         }
 
         public IAlbum GetAlbum(ISecurityContext securityContext, IMediaItemRepository<IAlbum> albumRepository, IArtist artist)
@@ -111,7 +130,8 @@ namespace Gnosis.Audio
                     return album;
             }
 
-            return new GnosisAlbum(albumTitle, DateTime.MinValue, 0, artist.Location, artist.Name, Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, new Uri(string.Format("http://{0}.jpg.to", albumTitle)), new byte[0]);
+            var thumbnail = GetJpgToUrl(albumTitle);
+            return new GnosisAlbum(albumTitle, DateTime.MinValue, 0, artist.Location, artist.Name, Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, new byte[0]);
         }
 
         public ITrack GetTrack(ISecurityContext securityContext, IMediaItemRepository<ITrack> trackRepository, IArtist artist, IAlbum album)

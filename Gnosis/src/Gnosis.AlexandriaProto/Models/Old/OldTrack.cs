@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-using Gnosis.Core;
+
 
 namespace Gnosis.Alexandria.Models
 {

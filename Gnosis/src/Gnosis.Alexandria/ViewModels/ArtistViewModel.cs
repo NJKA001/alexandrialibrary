@@ -9,13 +9,17 @@ namespace Gnosis.Alexandria.ViewModels
     public class ArtistViewModel
         : IArtistViewModel
     {
-        public ArtistViewModel(string name, DateTime startDate, DateTime endDate, IImage image, string bio)
+        public ArtistViewModel(Uri artist, string name, DateTime startDate, DateTime endDate, Uri thumbnail, byte[] thumbnailData, string bio)
         {
+            if (artist == null)
+                throw new ArgumentNullException("artist");
             if (name == null)
                 throw new ArgumentNullException("name");
 
+            this.artist = artist;
             this.name = name;
-            this.image = image;
+            this.thumbnail = thumbnail;
+            this.thumbnailData = thumbnailData;
             this.bio = bio ?? string.Empty;
 
             var years = new StringBuilder();
@@ -31,15 +35,20 @@ namespace Gnosis.Alexandria.ViewModels
             this.years = years.ToString();
         }
 
+        private readonly Uri artist;
         private readonly string name;
-        //private readonly DateTime startDate;
-        //private readonly DateTime endDate;
         private readonly string years;
-        private readonly IImage image;
+        private readonly Uri thumbnail;
+        private readonly byte[] thumbnailData;
         private readonly string bio;
         private readonly ObservableCollection<ILink> links = new ObservableCollection<ILink>();
         private readonly ObservableCollection<ITag> tags = new ObservableCollection<ITag>();
         private readonly ObservableCollection<IAlbumViewModel> albums = new ObservableCollection<IAlbumViewModel>();
+
+        public Uri Artist
+        {
+            get { return artist; }
+        }
 
         public string Name
         {
@@ -51,9 +60,9 @@ namespace Gnosis.Alexandria.ViewModels
             get { return years; }
         }
 
-        public IImage Image
+        public object Image
         {
-            get { return image; }
+            get { return thumbnailData != null && thumbnailData.Length > 0 ? (object)thumbnailData : thumbnail; }
         }
 
         public string Bio

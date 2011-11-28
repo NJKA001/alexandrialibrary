@@ -19,18 +19,27 @@ namespace Gnosis.Alexandria.Converters
     /// </remarks>
     internal class ImageSourceConverter : IValueConverter
     {
-        private BitmapImage GetImage(string path)
+        private const string placeholder = "pack://application:,,,/Images/placeholder.jpg";
+
+        private object GetImage(string path)
         {
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.CacheOption = BitmapCacheOption.OnLoad;
-            image.CreateOptions = BitmapCreateOptions.None;
-            image.UriSource = new Uri(path, UriKind.Absolute);
-            image.EndInit();
-            return image;
+            try
+            {
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.CreateOptions = BitmapCreateOptions.None;
+                image.UriSource = new Uri(path, UriKind.Absolute);
+                image.EndInit();
+                return image;
+            }
+            catch (Exception)
+            {
+                return placeholder;
+            }
         }
 
-        private BitmapImage GetImage(byte[] data)
+        private object GetImage(byte[] data)
         {
             try
             {
@@ -43,7 +52,7 @@ namespace Gnosis.Alexandria.Converters
             }
             catch (Exception)
             {
-                return null;
+                return placeholder;
             }
         }
 
@@ -53,8 +62,6 @@ namespace Gnosis.Alexandria.Converters
         {
             if (targetType != typeof(ImageSource))
                 throw new InvalidOperationException("The target must be ImageSource or derived types");
-
-            const string placeholder = "pack://application:,,,/Images/placeholder.jpg";
 
             if (value == null)
                 return placeholder;

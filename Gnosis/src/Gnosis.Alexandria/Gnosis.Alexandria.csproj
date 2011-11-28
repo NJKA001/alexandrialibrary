@@ -66,27 +66,29 @@
     </ApplicationDefinition>
     <Compile Include="Controllers\CatalogController.cs" />
     <Compile Include="Controllers\ICatalogController.cs" />
+    <Compile Include="Controllers\IMediaItemController.cs" />
     <Compile Include="Controllers\ISecurityController.cs" />
+    <Compile Include="Controllers\MediaItemController.cs" />
     <Compile Include="Controllers\SpiderFactory.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Converters\RectConverter.cs" />
     <Compile Include="Controllers\ITaskController.cs" />
+    <Compile Include="ViewModels\AlbumSearchResultViewModel.cs" />
     <Compile Include="ViewModels\AlbumViewModel.cs" />
     <Compile Include="ViewModels\ArtistSearchResultViewModel.cs" />
     <Compile Include="ViewModels\ArtistViewModel.cs" />
-    <Compile Include="ViewModels\AudioViewModel.cs" />
     <Compile Include="ViewModels\CatalogMediaTaskViewModel.cs" />
     <Compile Include="ViewModels\IAlbumViewModel.cs" />
     <Compile Include="ViewModels\IArtistViewModel.cs" />
-    <Compile Include="ViewModels\IAudioViewModel.cs" />
+    <Compile Include="ViewModels\IMediaItemViewModel.cs" />
     <Compile Include="ViewModels\ISearchResultViewModel.cs" />
+    <Compile Include="ViewModels\ITrackViewModel.cs" />
     <Compile Include="ViewModels\SearchTaskViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
+    <Compile Include="ViewModels\TrackSearchResultViewModel.cs" />
+    <Compile Include="ViewModels\TrackViewModel.cs" />
     <Compile Include="Views\HoveringCloseIcon.xaml.cs">
       <DependentUpon>HoveringCloseIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SearchResultItemView.xaml.cs">
-      <DependentUpon>SearchResultItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchResultView.xaml.cs">
       <DependentUpon>SearchResultView.xaml</DependentUpon>
@@ -139,10 +141,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\SearchResultItemView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\SearchResultView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

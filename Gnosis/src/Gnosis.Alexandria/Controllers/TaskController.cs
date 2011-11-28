@@ -29,6 +29,7 @@ namespace Gnosis.Alexandria.Controllers
 
         public void AddTask(ITaskViewModel task)
         {
+            task.AddCancelCallback(x => RemoveTask(x));
             taskViewModels.Add(task);
         }
 

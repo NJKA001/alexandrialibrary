@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core;
+
 using Gnosis.Data;
 using Gnosis.Data.Queries;
 using Gnosis.Alexandria.Models;

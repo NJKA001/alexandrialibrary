@@ -81,6 +81,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -110,7 +111,6 @@
     <Compile Include="Application\Vendor\GnosisArtist.cs" />
     <Compile Include="Audio\AudioBase.cs" />
     <Compile Include="IAlbum.cs" />
-    <Compile Include="IAlbumSummary.cs" />
     <Compile Include="IFeed.cs" />
     <Compile Include="IFeedItem.cs" />
     <Compile Include="ISecurityContext.cs" />

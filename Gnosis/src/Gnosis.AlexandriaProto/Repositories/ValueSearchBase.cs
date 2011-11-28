@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
-using Gnosis.Core;
+
 using Gnosis.Data;
 
 namespace Gnosis.Alexandria.Repositories

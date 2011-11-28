@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Text;
 using System.Windows;
 
 namespace Gnosis.Alexandria.ViewModels
 {
-    public class ArtistSearchResultViewModel
+    public class AlbumSearchResultViewModel
         : ISearchResultViewModel
     {
-        public ArtistSearchResultViewModel(IArtistViewModel artist)
+        public AlbumSearchResultViewModel(IAlbumViewModel album)
         {
-            if (artist == null)
-                throw new ArgumentNullException("artist");
+            if (album == null)
+                throw new ArgumentNullException("album");
 
-            this.artist = artist;
+            this.album = album;
         }
 
-        private readonly IArtistViewModel artist;
+        private readonly IAlbumViewModel album;
         private bool isClosed;
         private bool isSelected;
         private object imageOverride;
@@ -37,32 +38,32 @@ namespace Gnosis.Alexandria.ViewModels
 
         public Uri MediaItem
         {
-            get { return artist.Artist; }
+            get { return album.Album; }
         }
 
         public string Name
         {
-            get { return artist.Name; }
+            get { return album.Title; }
         }
 
         public string Years
         {
-            get { return artist.Years; }
+            get { return album.Year; }
         }
 
         public string ResultType
         {
-            get { return "ARTIST"; }
+            get { return "ALBUM"; }
         }
 
         public Visibility AlbumArtistVisibility
         {
-            get { return Visibility.Collapsed; }
+            get { return Visibility.Visible; }
         }
 
         public string AlbumArtistName
         {
-            get { return null; }
+            get { return album.ArtistName; }
         }
 
         public Visibility TrackAlbumVisibility
@@ -72,12 +73,12 @@ namespace Gnosis.Alexandria.ViewModels
 
         public string TrackAlbumTitle
         {
-            get { return null; }
+            get { return album.Title; }
         }
 
         public object Image
         {
-            get { return imageOverride != null ? imageOverride : artist.Image; }
+            get { return imageOverride != null ? imageOverride : album.Image; }
             private set
             {
                 imageOverride = value;
@@ -87,7 +88,7 @@ namespace Gnosis.Alexandria.ViewModels
 
         public string Bio
         {
-            get { return artist.Bio; }
+            get { return string.Empty; }
         }
 
         public Visibility BioVisibility
@@ -97,22 +98,22 @@ namespace Gnosis.Alexandria.ViewModels
 
         public Visibility TracksVisibility
         {
-            get { return Visibility.Collapsed; }
+            get { return Visibility.Visible; }
         }
 
         public IEnumerable<ITrackViewModel> Tracks
         {
-            get { return Enumerable.Empty<ITrackViewModel>(); }
+            get { return album.Tracks; }
         }
 
         public Visibility AlbumsVisibility
         {
-            get { return Visibility.Visible; }
+            get { return Visibility.Collapsed; }
         }
 
         public IEnumerable<IAlbumViewModel> Albums
         {
-            get { return artist.Albums; }
+            get { return Enumerable.Empty<IAlbumViewModel>(); }
         }
 
         public bool IsClosed
@@ -156,14 +157,14 @@ namespace Gnosis.Alexandria.ViewModels
         {
             if (album == null)
                 throw new ArgumentNullException("album");
-
-            artist.AddAlbum(album);
         }
 
         public void AddTrack(ITrackViewModel track)
         {
             if (track == null)
                 throw new ArgumentNullException("track");
+
+            album.AddTrack(track);
         }
 
         public void UpdateThumbnail(Uri thumbnail, byte[] thumbnailData)

@@ -5,19 +5,19 @@ using System.Text;
 
 namespace Gnosis.Alexandria.ViewModels
 {
-    public interface IAlbumViewModel
+    public interface ITrackViewModel
         : IMediaItemViewModel
     {
-        Uri Album { get; }
+        Uri Track { get; }
         string Title { get; }
+        string Number { get; }
+        string Duration { get; }
+        string Year { get; }
         Uri Artist { get; }
         string ArtistName { get; }
-        string Year { get; }
+        Uri Album { get; }
+        string AlbumTitle { get; }
         string Bio { get; }
         object Image { get; }
-        IEnumerable<ITrackViewModel> Tracks { get; }
-
-        void AddTrack(ITrackViewModel track);
-        void RemoveTrack(ITrackViewModel track);
     }
 }

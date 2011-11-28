@@ -6,10 +6,12 @@ using System.Text;
 namespace Gnosis.Alexandria.ViewModels
 {
     public interface IArtistViewModel
+        : IMediaItemViewModel
     {
+        Uri Artist { get; }
         string Name { get; }
         string Years { get; }
-        IImage Image { get; }
+        object Image { get; }
         string Bio { get; }
         IEnumerable<ILink> Links { get; }
         IEnumerable<ITag> Tags { get; }

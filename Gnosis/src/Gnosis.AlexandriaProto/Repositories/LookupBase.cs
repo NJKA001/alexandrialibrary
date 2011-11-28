@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 
-using Gnosis.Core;
+
 using Gnosis.Data;
 
 namespace Gnosis.Alexandria.Repositories

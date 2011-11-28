@@ -7,7 +7,7 @@ using System.Text;
 using Gnosis.Alexandria;
 using Gnosis.Alexandria.Models;
 using Gnosis.Alexandria.Models.Feeds;
-using Gnosis.Core;
+
 using Gnosis.Data.Commands;
 using Gnosis.Data.Queries;
 

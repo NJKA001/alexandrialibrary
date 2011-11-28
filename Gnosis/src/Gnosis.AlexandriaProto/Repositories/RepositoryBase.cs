@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
-using Gnosis.Core;
+
 using Gnosis.Data;
 using Gnosis.Data.Batches;
 using Gnosis.Data.Commands;
