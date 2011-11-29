@@ -11,6 +11,7 @@ namespace Gnosis.Alexandria.ViewModels
     public interface ITaskViewModel
         : INotifyPropertyChanged
     {
+        Guid Id { get; }
         string Name { get; }
         object Icon { get; }
         TaskStatus Status { get; }
@@ -47,5 +48,11 @@ namespace Gnosis.Alexandria.ViewModels
         void Next();
 
         void AddCancelCallback(Action<ITaskViewModel> callback);
+    }
+
+    public interface ITaskViewModel<T>
+        : ITaskViewModel
+    {
+        void AddResultsCallback(Action<T> callback);
     }
 }

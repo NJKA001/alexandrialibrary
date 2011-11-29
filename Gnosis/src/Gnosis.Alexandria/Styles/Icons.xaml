@@ -8,4 +8,5 @@
     <BitmapImage x:Key="throbberIcon" UriSource="../Images/throbber20.gif"/>
     <BitmapImage x:Key="closeIcon" UriSource="../Images/close-circle-small.png"/>
     <BitmapImage x:Key="sphinxIcon" UriSource="../Images/Sphinx.png"/>
+    <BitmapImage x:Key="eyeOfHorusIcon" UriSource="../Images/Eye_Of_Horus.png"/>
 </ResourceDictionary>

@@ -13,8 +13,6 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="4"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -24,6 +22,5 @@
         <Button x:Name="searchButton" Grid.Row="0" Grid.Column="1" Margin="4" Click="searchButton_Click">
             Search
         </Button>
-        <local:SearchResultView x:Name="searchResultView" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
     </Grid>
 </UserControl>

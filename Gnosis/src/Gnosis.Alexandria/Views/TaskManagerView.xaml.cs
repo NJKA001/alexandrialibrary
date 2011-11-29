@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using Gnosis.Alexandria.Controllers;
 using Gnosis.Alexandria.Extensions;
 using Gnosis.Alexandria.ViewModels;
+using Gnosis.Tasks;
 
 namespace Gnosis.Alexandria.Views
 {
@@ -32,7 +33,6 @@ namespace Gnosis.Alexandria.Views
         }
 
         private ILogger logger;
-        private SpiderFactory spiderFactory;
         private ITaskController taskController;
 
         //private readonly ObservableCollection<ITaskViewModel> taskViewModels = new ObservableCollection<ITaskViewModel>();
@@ -194,45 +194,13 @@ namespace Gnosis.Alexandria.Views
                 if (result != System.Windows.Forms.DialogResult.OK)
                     return;
 
-                AddCatalogTask(dialog.SelectedPath);
+                taskController.Catalog(dialog.SelectedPath);
             }
             catch (Exception ex)
             {
                 logger.Error("  catalogMenuItem_Click", ex);
             }
         }
-
-        //private void closeButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        var element = sender as UIElement;
-        //        if (element == null)
-        //            return;
-
-        //        var item = element.FindContainingItem<ListBoxItem>();
-        //        if (item == null)
-        //            return;
-
-        //        var viewModel = item.DataContext as ITaskViewModel;
-        //        if (viewModel == null)
-        //            return;
-
-        //        if (viewModel.Status == TaskStatus.Running)
-        //        {
-        //            var result = MessageBox.Show("This task is currently running.\r\nAre you sure that you want to cancel it?", "Cancel Running Task?", MessageBoxButton.YesNo);
-        //            if (result == MessageBoxResult.No)
-        //                return;
-        //        }
-
-        //        viewModel.Cancel();
-        //        taskController.RemoveTask(viewModel);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        logger.Error("  closeButton_Click", ex);
-        //    }
-        //}
 
         private void elapsedSlider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
         {
@@ -244,50 +212,25 @@ namespace Gnosis.Alexandria.Views
 
         }
 
-        private void AddCatalogTask(string path)
-        {
-            if (path == null)
-                throw new ArgumentNullException("path");
-
-            var target = new Uri(path);
-            if (target.IsFile && !System.IO.Directory.Exists(path))
-                throw new ArgumentException("path does not exist");
-
-            var task = new Gnosis.Tasks.CatalogMediaTask(logger, spiderFactory.CreateCatalogSpider(), target, TimeSpan.Zero, 0);
-            AddTaskViewModel(new CatalogMediaTaskViewModel(logger, task));
-        }
-
-        public void Initialize(ILogger logger, SpiderFactory spiderFactory, ITaskController taskController)
+        public void Initialize(ILogger logger, ITaskController taskController)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
-            if (spiderFactory == null)
-                throw new ArgumentNullException("spiderFactory");
             if (taskController == null)
                 throw new ArgumentNullException("taskController");
 
             try
             {
                 this.logger = logger;
-                this.spiderFactory = spiderFactory;
                 this.taskController = taskController;
                 this.taskItemsControl.ItemsSource = taskController.Tasks;
 
-                AddCatalogTask(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic));
+                taskController.Catalog(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic));
             }
             catch (Exception ex)
             {
                 logger.Error("TaskManagerView.Initialize", ex);
             }
-        }
-
-        public void AddTaskViewModel(ITaskViewModel taskViewModel)
-        {
-            if (taskViewModel == null)
-                throw new ArgumentNullException("taskViewModel");
-
-            //taskViewModel.AddCancelCallback(x => RemoveTaskViewModel(x));
-            taskController.AddTask(taskViewModel);
         }
 
         //public void RemoveTaskViewModel(ITaskViewModel taskViewModel)

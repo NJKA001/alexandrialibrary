@@ -17,7 +17,7 @@ namespace Gnosis.Tasks
             this.trackRepository = trackRepository;
         }
 
-        private readonly string pattern;
+        private string pattern;
         private readonly IMediaItemRepository<IArtist> artistRepository;
         private readonly IMediaItemRepository<IAlbum> albumRepository;
         private readonly IMediaItemRepository<ITrack> trackRepository;
@@ -62,6 +62,14 @@ namespace Gnosis.Tasks
             }
 
             UpdateProgress(maxProgress, maxProgress, "Completed");
+        }
+
+        public void SetPattern(string pattern)
+        {
+            if (pattern == null)
+                throw new ArgumentNullException("pattern");
+
+            this.pattern = pattern;
         }
     }
 }

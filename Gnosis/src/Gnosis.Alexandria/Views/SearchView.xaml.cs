@@ -33,101 +33,8 @@ namespace Gnosis.Alexandria.Views
         }
 
         private ILogger logger;
-        private ITagRepository tagRepository;
-        private IMediaItemRepository<IArtist> artistRepository;
-        private IMediaItemRepository<IAlbum> albumRepository;
-        private IMediaItemRepository<ITrack> trackRepository;
         private ITaskController taskController;
-        private IMediaItemController mediaItemController;
-        private readonly IDictionary<string, ArtistSearchResultViewModel> artistResults = new Dictionary<string, ArtistSearchResultViewModel>();
-        private readonly IDictionary<string, AlbumSearchResultViewModel> albumResults = new Dictionary<string, AlbumSearchResultViewModel>();
-
-        private void AddResult(ISearchResultViewModel result)
-        {
-            Dispatcher.Invoke(new Action(() => searchResultView.AddViewModel(result)), DispatcherPriority.DataBind);
-        }
-
-        private void AddAlbum(ArtistSearchResultViewModel artist, AlbumViewModel album)
-        {
-            Action action = () => artist.AddAlbum(album);
-            Dispatcher.Invoke(action, DispatcherPriority.DataBind);
-        }
-
-        private void AddTrack(AlbumSearchResultViewModel album, TrackViewModel track)
-        {
-            Action action = () => album.AddTrack(track);
-            Dispatcher.Invoke(action, DispatcherPriority.DataBind);
-        }
-
-        private void HandleSearchResult(IMediaItem result)
-        {
-            try
-            {
-                if (result == null)
-                    return;
-
-                if (result is IArtist)
-                {
-                    var artistKey = result.Location.ToString();
-                    if (!artistResults.ContainsKey(artistKey))
-                    {
-                        var artistViewModel = new ArtistViewModel(result.Location, result.Name, result.FromDate, result.ToDate, result.Thumbnail, result.ThumbnailData, string.Empty);
-                        var resultViewModel = new ArtistSearchResultViewModel(artistViewModel);
-                        artistResults.Add(artistKey, resultViewModel);
-                        AddResult(resultViewModel);
-                    }
-                }
-                else if (result is IAlbum)
-                {
-                    var albumViewModel = new AlbumViewModel(result.Location, result.Name, result.Creator, result.CreatorName, result.FromDate, result.Thumbnail, result.ThumbnailData, string.Empty);
-
-                    var artistKey = result.Creator.ToString();
-                    var albumKey = result.Location.ToString();
-                    if (!artistResults.ContainsKey(artistKey))
-                    {
-                        var resultViewModel = new AlbumSearchResultViewModel(albumViewModel);
-                        if (!albumResults.ContainsKey(albumKey))
-                        {
-                            albumResults.Add(albumKey, resultViewModel);
-                        }
-
-                        AddResult(resultViewModel);
-                    }
-                    else
-                    {
-                        var existing = artistResults[artistKey].Albums.Where(x => x.Album.ToString() == albumViewModel.Album.ToString()).FirstOrDefault();
-                        if (existing == null)
-                        {
-                            AddAlbum(artistResults[artistKey], albumViewModel);
-                        }
-                    }
-                }
-                else if (result is ITrack)
-                {
-                    var trackViewModel = new TrackViewModel(result.Location, result.Name, result.Number, result.Duration, result.FromDate, result.Creator, result.CreatorName, result.Catalog, result.CatalogName, result.Thumbnail, result.ThumbnailData, string.Empty);
-
-                    var albumKey = result.Catalog.ToString();
-                    if (!albumResults.ContainsKey(albumKey))
-                    {
-                        var resultViewModel = new TrackSearchResultViewModel(trackViewModel);
-
-                        AddResult(resultViewModel);
-                    }
-                    else
-                    {
-                        var existing = albumResults[albumKey].Tracks.Where(x => x.Album.ToString() == trackViewModel.Album.ToString()).FirstOrDefault();
-                        if (existing == null)
-                        {
-                            AddTrack(albumResults[albumKey], trackViewModel);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.Error("  HandleSearchResults", ex);
-            }
-        }
+        private TaskResultView taskResultView;
 
         private void DoSearch()
         {
@@ -137,14 +44,8 @@ namespace Gnosis.Alexandria.Views
                 if (string.IsNullOrEmpty(search))
                     return;
 
-                var pattern = search + "%";
-                var task = new MediaItemSearchTask(logger, pattern, artistRepository, albumRepository, trackRepository);
-                task.AddResultsCallback(result => HandleSearchResult(result));
-                
-                var taskViewModel = new SearchTaskViewModel(logger, task, search);
-                taskController.AddTask(taskViewModel);
-
-                task.Start();
+                var searchViewModel = taskController.GetSearch(search);
+                taskResultView.Search(searchViewModel);
             }
             catch (Exception ex)
             {
@@ -173,33 +74,18 @@ namespace Gnosis.Alexandria.Views
             DoSearch();
         }
 
-        public void Initialize(ILogger logger, ITagRepository tagRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, ITaskController taskController, IMediaItemController mediaItemController)
+        public void Initialize(ILogger logger, ITaskController taskController, TaskResultView taskResultView)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
-            if (tagRepository == null)
-                throw new ArgumentNullException("tagRepository:");
             if (taskController == null)
                 throw new ArgumentNullException("taskController");
-            if (mediaItemController == null)
-                throw new ArgumentNullException("mediaItemController");
-
+            if (taskResultView == null)
+                throw new ArgumentNullException("taskResultView");
+            
             this.logger = logger;
-            this.tagRepository = tagRepository;
-            this.artistRepository = artistRepository;
-            this.albumRepository = albumRepository;
-            this.trackRepository = trackRepository;
             this.taskController = taskController;
-            this.mediaItemController = mediaItemController;
-
-            try
-            {
-                searchResultView.Initialize(logger, mediaItemController);
-            }
-            catch (Exception ex)
-            {
-                logger.Error("  SearchView.Initialize", ex);
-            }
+            this.taskResultView = taskResultView;
         }
     }
 }

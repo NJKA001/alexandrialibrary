@@ -26,6 +26,12 @@
                             <Image Source="{StaticResource sphinxIcon}" Width="16" Height="16"/>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <!--
+                    <MenuItem x:Name="searchMenuItem" Header="New Search Task" Click="searchMenuItem_Click">
+                        <MenuItem.Icon>
+                            <Image Source="{StaticResource eyeOfHorusIcon}" Width="16" Height="16"/>
+                        </MenuItem.Icon>
+                    </MenuItem>-->
                 </ContextMenu>
             </ListBox.ContextMenu>
             <ItemsControl.ItemsPanel>

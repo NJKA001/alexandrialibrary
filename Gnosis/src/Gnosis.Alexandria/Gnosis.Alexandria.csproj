@@ -99,6 +99,9 @@
     <Compile Include="Views\TaskManagerView.xaml.cs">
       <DependentUpon>TaskManagerView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\TaskResultView.xaml.cs">
+      <DependentUpon>TaskResultView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Styles\Converters.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -150,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TaskManagerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TaskResultView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

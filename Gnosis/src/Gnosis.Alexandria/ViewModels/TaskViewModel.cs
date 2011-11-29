@@ -51,9 +51,10 @@ namespace Gnosis.Alexandria.ViewModels
             task.AddStartedCallback(() => OnStarted());
         }
 
+        private readonly Guid id = Guid.NewGuid();
         private readonly ILogger logger;
         private readonly ITask task;
-        private readonly string name;
+        private string name;
         private readonly object startingIcon;
         private readonly object completedIcon;
         private readonly bool showElapsed;
@@ -206,9 +207,19 @@ namespace Gnosis.Alexandria.ViewModels
             OnPropertyChanged("NextVisibility");
         }
 
+        public Guid Id
+        {
+            get { return id; }
+        }
+
         public string Name
         {
             get { return name; }
+            set
+            {
+                name = value;
+                OnPropertyChanged("Name");
+            }
         }
 
         public object Icon
@@ -466,4 +477,39 @@ namespace Gnosis.Alexandria.ViewModels
             cancelCallbacks.Add(callback);
         }
     }
+
+    public abstract class TaskViewModel<T>
+        : TaskViewModel, ITaskViewModel<T>, INotifyPropertyChanged
+    {
+        protected TaskViewModel(ILogger logger, ITask<T> task, string name, object startingIcon)
+            : this(logger, task, name, startingIcon, startingIcon, false)
+        {
+        }
+
+        protected TaskViewModel(ILogger logger, ITask<T> task, string name, object startingIcon, object completedIcon)
+            : this(logger, task, name, startingIcon, completedIcon, false)
+        {
+        }
+
+        protected TaskViewModel(ILogger logger, ITask<T> task, string name, object startingIcon, object completedIcon, bool showElapsed)
+            : base(logger, task, name, startingIcon, completedIcon, showElapsed)
+        {
+            resultTask = task;
+        }
+
+        protected readonly ITask<T> resultTask;
+
+        #region ITaskViewModel<T> Members
+
+        public void AddResultsCallback(Action<T> callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            resultTask.AddResultsCallback(callback);
+        }
+
+        #endregion
+    }
+
 }
