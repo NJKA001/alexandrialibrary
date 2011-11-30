@@ -5,7 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/TabStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/Converters.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-        <TabControl x:Name="resultControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <TabControl x:Name="resultControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemContainerStyle="{StaticResource closableTabItemStyle}"/>
     </Grid>
 </UserControl>

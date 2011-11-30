@@ -223,5 +223,10 @@ namespace Gnosis.Tasks
 
             UpdateProgress(maxProgress, maxProgress, "Completed");
         }
+
+        public Uri Target
+        {
+            get { return target; }
+        }
     }
 }

@@ -9,17 +9,17 @@ namespace Gnosis.Alexandria.ViewModels
     public abstract class TaskViewModel
         : ITaskViewModel, INotifyPropertyChanged
     {
-        protected TaskViewModel(ILogger logger, ITask task, string name, object startingIcon)
-            : this(logger, task, name, startingIcon, startingIcon, false)
+        protected TaskViewModel(ILogger logger, ITask task, string name, string description, object startingIcon)
+            : this(logger, task, name, description, startingIcon, startingIcon, false)
         {
         }
 
-        protected TaskViewModel(ILogger logger, ITask task, string name, object startingIcon, object completedIcon)
-            : this(logger, task, name, startingIcon, completedIcon, false)
+        protected TaskViewModel(ILogger logger, ITask task, string name, string description, object startingIcon, object completedIcon)
+            : this(logger, task, name, description, startingIcon, completedIcon, false)
         {
         }
 
-        protected TaskViewModel(ILogger logger, ITask task, string name, object startingIcon, object completedIcon, bool showElapsed)
+        protected TaskViewModel(ILogger logger, ITask task, string name, string description, object startingIcon, object completedIcon, bool showElapsed)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -27,6 +27,8 @@ namespace Gnosis.Alexandria.ViewModels
                 throw new ArgumentNullException("task");
             if (name == null)
                 throw new ArgumentNullException("name");
+            if (description == null)
+                throw new ArgumentNullException("description");
             if (startingIcon == null)
                 throw new ArgumentNullException("startingIcon");
             if (completedIcon == null)
@@ -35,6 +37,7 @@ namespace Gnosis.Alexandria.ViewModels
             this.logger = logger;
             this.task = task;
             this.name = name;
+            this.description = description;
             this.startingIcon = startingIcon;
             this.completedIcon = completedIcon;
             this.itemCount = task.Items.Count();
@@ -55,6 +58,7 @@ namespace Gnosis.Alexandria.ViewModels
         private readonly ILogger logger;
         private readonly ITask task;
         private string name;
+        private string description;
         private readonly object startingIcon;
         private readonly object completedIcon;
         private readonly bool showElapsed;
@@ -215,10 +219,20 @@ namespace Gnosis.Alexandria.ViewModels
         public string Name
         {
             get { return name; }
-            set
+            private set
             {
                 name = value;
                 OnPropertyChanged("Name");
+            }
+        }
+
+        public string Description
+        {
+            get { return description; }
+            private set
+            {
+                description = value;
+                OnPropertyChanged("Description");
             }
         }
 
@@ -481,18 +495,18 @@ namespace Gnosis.Alexandria.ViewModels
     public abstract class TaskViewModel<T>
         : TaskViewModel, ITaskViewModel<T>, INotifyPropertyChanged
     {
-        protected TaskViewModel(ILogger logger, ITask<T> task, string name, object startingIcon)
-            : this(logger, task, name, startingIcon, startingIcon, false)
+        protected TaskViewModel(ILogger logger, ITask<T> task, string name, string description, object startingIcon)
+            : this(logger, task, name, description, startingIcon, startingIcon, false)
         {
         }
 
-        protected TaskViewModel(ILogger logger, ITask<T> task, string name, object startingIcon, object completedIcon)
-            : this(logger, task, name, startingIcon, completedIcon, false)
+        protected TaskViewModel(ILogger logger, ITask<T> task, string name, string description, object startingIcon, object completedIcon)
+            : this(logger, task, name, description, startingIcon, completedIcon, false)
         {
         }
 
-        protected TaskViewModel(ILogger logger, ITask<T> task, string name, object startingIcon, object completedIcon, bool showElapsed)
-            : base(logger, task, name, startingIcon, completedIcon, showElapsed)
+        protected TaskViewModel(ILogger logger, ITask<T> task, string name, string description, object startingIcon, object completedIcon, bool showElapsed)
+            : base(logger, task, name, description, startingIcon, completedIcon, showElapsed)
         {
             resultTask = task;
         }

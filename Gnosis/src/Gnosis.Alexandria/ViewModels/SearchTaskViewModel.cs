@@ -11,7 +11,7 @@ namespace Gnosis.Alexandria.ViewModels
         : TaskViewModel<IMediaItem>
     {
         public SearchTaskViewModel(ILogger logger, MediaItemSearchTask task, string search)
-            : base(logger, task, "Search: " + search, "pack://application:,,,/Images/Eye_Of_Horus.png")
+            : base(logger, task, "Search", search, "pack://application:,,,/Images/Eye_Of_Horus.png")
         {
             searchTask = task;
         }

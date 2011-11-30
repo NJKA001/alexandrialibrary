@@ -42,21 +42,17 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Border>
-                        <StackPanel Orientation="Vertical" Margin="8 2 8 2">
+                        <StackPanel Orientation="Vertical" Margin="8 2 8 2">                            
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="4" Width="100"/>
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="12" Margin="4" Width="100"/>
                                 <local:HoveringCloseIcon x:Name="closeButton" IsClosed="{Binding IsCancelled, Mode=TwoWay}"/>
-                                <!--
-                                <Button x:Name="closeButton" Margin="2" Click="closeButton_Click">
-                                    <Image Source="{StaticResource closeIcon}" Height="16" Width="16" />
-                                </Button>
-                                -->
-                                <!--<local:AnimatedGifImage Source="{StaticResource throbberIcon}" Visibility="{Binding RunningVisibility}"/>-->
                             </StackPanel>
+                            
+                            <TextBlock Text="{Binding Description}" FontSize="10" Width="140"/>
 
                             <Image Source="{Binding Path=Icon, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="72" Width="72"/>
                             
-                            <TextBlock Text="{Binding LastError}" Margin="4" Background="Salmon" Visibility="{Binding ErrorVisibility}" Width="120" />
+                            <!--<TextBlock Text="{Binding LastError}" Margin="4" Background="Salmon" Visibility="{Binding ErrorVisibility}" Width="120" />-->
                             <!--<TextBlock Text="{Binding LastProgress}" Margin="4" Visibility="{Binding ProgressVisibility}" Width="200"/>-->
                             <ProgressBar x:Name="progressBar" Margin="4 4 4 8" Visibility="{Binding ProgressVisibility}" Height="28" Width="120" Tag="{Binding StatusName}" Foreground="Blue" Style="{DynamicResource progressBarStyle}" Value="{Binding ProgressCount, Mode=OneWay}" Maximum="{Binding ProgressMaximum, Mode=OneWay}"/>
                             <Slider x:Name="elapsedSlider" Margin="4 4 4 8" Visibility="{Binding ElapsedVisibility}" Value="{Binding ProgressCount, Mode=OneWay}" Maximum="{Binding ProgressMaximum, Mode=OneWay}" Orientation="Horizontal" Width="100" Thumb.DragStarted="elapsedSlider_DragStarted" Thumb.DragCompleted="elapsedSlider_DragCompleted"/>

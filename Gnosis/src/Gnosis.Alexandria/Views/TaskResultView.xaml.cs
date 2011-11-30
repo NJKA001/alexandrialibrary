@@ -61,7 +61,7 @@ namespace Gnosis.Alexandria.Views
                     searchViewModel.AddResultsCallback(result => searchResultView.HandleSearchResult(result));
 
                     var tabItem = new TabItem();
-                    tabItem.Header = searchViewModel.Name;
+                    tabItem.Header = searchViewModel.Description;
                     tabItem.Content = searchResultView;
                     resultControl.Items.Add(tabItem);
                     tabItem.IsSelected = true;

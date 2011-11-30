@@ -13,6 +13,7 @@ namespace Gnosis.Alexandria.ViewModels
     {
         Guid Id { get; }
         string Name { get; }
+        string Description { get; }
         object Icon { get; }
         TaskStatus Status { get; }
         string StatusName { get; }

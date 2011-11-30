@@ -48,7 +48,7 @@
                             </StackPanel>
                         </StackPanel>
                         <local:HoveringCloseIcon x:Name="itemCloseIcon" Grid.Row="0" Grid.Column="2" IsClosed="{Binding IsClosed, Mode=TwoWay}"/>
-                        <TabControl x:Name="tabControl" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Margin="4 4 0 8" Background="LightBlue">
+                        <TabControl x:Name="tabControl" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Margin="4 4 0 8" Background="LightBlue" ItemContainerStyle="{StaticResource tabItemStyle}">
                             <TabItem x:Name="albumTab" Visibility="{Binding AlbumsVisibility}" Style="{StaticResource tabItemStyle}">
                                 <TabItem.Header>
                                     <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
