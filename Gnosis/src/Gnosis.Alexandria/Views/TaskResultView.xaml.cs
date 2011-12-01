@@ -30,7 +30,7 @@ namespace Gnosis.Alexandria.Views
         private ILogger logger;
         private ITaskController taskController;
         private IMediaItemController mediaItemController;
-        private readonly IDictionary<Guid, Tuple<ITaskViewModel,TabItem>> tabMap = new Dictionary<Guid, Tuple<ITaskViewModel, TabItem>>();
+        private readonly IDictionary<Guid, ITaskResultViewModel> tabMap = new Dictionary<Guid, ITaskResultViewModel>();
 
         public void Initialize(ILogger logger, ITaskController taskController, IMediaItemController mediaItemController)
         {
@@ -44,6 +44,30 @@ namespace Gnosis.Alexandria.Views
             this.logger = logger;
             this.taskController = taskController;
             this.mediaItemController = mediaItemController;
+        }
+
+        private void CloseTab(ITaskResultViewModel taskResultViewModel)
+        {
+            var key = taskResultViewModel.Id;
+            if (taskResultViewModel != null && tabMap.ContainsKey(key))
+            {
+                resultControl.Items.Remove(taskResultViewModel.Control);
+                tabMap.Remove(key);
+            }
+        }
+
+        private void AddViewModel(ITaskViewModel taskViewModel, TabItem tabItem)
+        {
+            if (tabMap.ContainsKey(taskViewModel.Id))
+                throw new InvalidOperationException("There is already a tab for this task. name=" + taskViewModel.Name + " description=" + taskViewModel.Description);
+
+            var taskResultViewModel = new TaskResultViewModel(taskViewModel, tabItem);
+
+            tabItem.DataContext = taskResultViewModel;
+            taskResultViewModel.AddClosedCallback(x => CloseTab(x));
+
+            tabMap.Add(taskViewModel.Id, taskResultViewModel);
+            taskController.AddTaskViewModel(taskViewModel);
         }
 
         public void Search(SearchTaskViewModel searchViewModel)
@@ -66,8 +90,7 @@ namespace Gnosis.Alexandria.Views
                     resultControl.Items.Add(tabItem);
                     tabItem.IsSelected = true;
 
-                    tabMap.Add(searchViewModel.Id, new Tuple<ITaskViewModel, TabItem>(searchViewModel, tabItem));
-                    taskController.AddTaskViewModel(searchViewModel);
+                    AddViewModel(searchViewModel, tabItem);
 
                     searchViewModel.Start();
                 }

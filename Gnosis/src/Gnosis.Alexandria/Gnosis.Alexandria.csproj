@@ -85,6 +85,7 @@
     <Compile Include="ViewModels\ITaskResultViewModel.cs" />
     <Compile Include="ViewModels\ITrackViewModel.cs" />
     <Compile Include="ViewModels\SearchTaskViewModel.cs" />
+    <Compile Include="ViewModels\TaskResultViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="ViewModels\TrackSearchResultViewModel.cs" />
     <Compile Include="ViewModels\TrackViewModel.cs" />

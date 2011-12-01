@@ -22,7 +22,7 @@
                                     <ColumnDefinition Width="20"/>
                                 </Grid.ColumnDefinitions>
                                 <ContentPresenter x:Name="ContentSite" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12 2 12 2"/>
-                                <views:HoveringCloseIcon x:Name="tabCloseIcon" Grid.Column="1" />
+                                <views:HoveringCloseIcon x:Name="tabCloseIcon" Grid.Column="1" IsClosed="{Binding IsClosed, Mode=TwoWay}"/>
                             </Grid>
                         </Border>
                     </Grid>
