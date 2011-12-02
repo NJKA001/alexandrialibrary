@@ -262,6 +262,7 @@
     <Compile Include="SecurityContext.cs" />
     <Compile Include="Spiders\PlaylistSpider.cs" />
     <Compile Include="TagDomain.cs" />
+    <Compile Include="TaskError.cs" />
     <Compile Include="TaskProgress.cs" />
     <Compile Include="IVideo.cs" />
     <Compile Include="Spiders\CatalogSpider.cs" />

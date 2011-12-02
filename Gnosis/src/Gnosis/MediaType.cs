@@ -218,31 +218,38 @@ namespace Gnosis
 
         public static IMediaType GetMediaTypeByMagicNumber(byte[] header)
         {
-            //TODO: Optimize this algorithm
-            byte[] lookup = null;
-            foreach (var pair in byMagicNumber)
+            try
             {
-                var keyLength = pair.Key.Length;
-                if (keyLength < header.Length)
+                //TODO: Optimize this algorithm
+                byte[] lookup = null;
+                foreach (var pair in byMagicNumber)
                 {
-                    lookup = new byte[keyLength];
-                    Array.Copy(header, lookup, keyLength);
-                }
-                else lookup = header;
+                    var keyLength = pair.Key.Length;
+                    if (keyLength < header.Length)
+                    {
+                        lookup = new byte[keyLength];
+                        Array.Copy(header, lookup, keyLength);
+                    }
+                    else lookup = header;
 
-                //System.Diagnostics.Debug.WriteLine("lookup=" + Encoding.UTF8.GetString(lookup) + " key=" + Encoding.UTF8.GetString(pair.Key));
+                    //System.Diagnostics.Debug.WriteLine("lookup=" + Encoding.UTF8.GetString(lookup) + " key=" + Encoding.UTF8.GetString(pair.Key));
 
-                //NOTE: In the case of GIF images, even when the byte arrays look identical,
-                //      they don't match unless I compare them as UTF-8 encoded strings.
-                //if (lookup == pair.Key || Encoding.UTF8.GetString(lookup) == Encoding.UTF8.GetString(pair.Key))
-                if (lookup.SequenceEqual(pair.Key))
-                {
-                    System.Diagnostics.Debug.WriteLine("Found MediaType by magic number: " + pair.Value.ToString());
-                    return pair.Value;
+                    //NOTE: In the case of GIF images, even when the byte arrays look identical,
+                    //      they don't match unless I compare them as UTF-8 encoded strings.
+                    //if (lookup == pair.Key || Encoding.UTF8.GetString(lookup) == Encoding.UTF8.GetString(pair.Key))
+                    if (lookup.SequenceEqual(pair.Key))
+                    {
+                        System.Diagnostics.Debug.WriteLine("Found MediaType by magic number: " + pair.Value.ToString());
+                        return pair.Value;
+                    }
                 }
+
+                return MediaType.ApplicationUnknown;
             }
-
-            return MediaType.ApplicationUnknown;
+            catch (Exception)
+            {
+                return MediaType.ApplicationUnknown;
+            }
         }
 
         public static IEnumerable<IMediaType> GetMediaTypes()

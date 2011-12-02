@@ -12,10 +12,10 @@ namespace Gnosis.Alexandria.Controllers
     {
         IEnumerable<ITaskViewModel> Tasks { get; }
         
-        void Catalog(string path);
         void AddTaskViewModel(ITaskViewModel taskViewModel);
         void RemoveTaskViewModel(ITaskViewModel taskViewModel);
 
-        SearchTaskViewModel GetSearch(string search);
+        CatalogMediaTaskViewModel GetCatalogViewModel(string path);
+        SearchTaskViewModel GetSearchViewModel(string search);
     }
 }

@@ -44,7 +44,7 @@ namespace Gnosis.Alexandria.Views
                 if (string.IsNullOrEmpty(search))
                     return;
 
-                var searchViewModel = taskController.GetSearch(search);
+                var searchViewModel = taskController.GetSearchViewModel(search);
                 taskResultView.Search(searchViewModel);
             }
             catch (Exception ex)

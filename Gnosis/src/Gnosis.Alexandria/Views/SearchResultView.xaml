@@ -16,7 +16,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <ListBox x:Name="searchResultContainer" ItemsSource="{Binding Results}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListBox x:Name="searchResultControl" ItemsSource="{Binding Results}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid x:Name="itemGrid" Background="LightSteelBlue" Margin="4">

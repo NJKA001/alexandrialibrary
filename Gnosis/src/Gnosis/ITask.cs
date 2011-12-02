@@ -9,7 +9,7 @@ namespace Gnosis
     {
         TaskProgress Progress { get; }
         TaskStatus Status { get; }
-        Exception LastError { get; }
+        TaskError LastError { get; }
         IEnumerable<ITaskItem> Items { get; }
         ITaskItem CurrentItem { get; }
         bool SupportsPlayback { get; }
@@ -19,10 +19,10 @@ namespace Gnosis
         void AddCancelledCallback(Action callback);
         void AddPausedCallback(Action callback);
         void AddResumedCallback(Action callback);
-        void AddErrorCallback(Action<Exception> callback);
+        void AddErrorCallback(Action<TaskError> callback);
         void AddCompletedCallback(Action callback);
         void AddProgressCallback(Action<TaskProgress> callback);
-        void AddFailedCallback(Action<Exception> callback);
+        void AddFailedCallback(Action callback);
 
         void Reset();
         void Start();

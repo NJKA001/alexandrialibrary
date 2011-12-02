@@ -28,14 +28,12 @@ namespace Gnosis.Alexandria.Views
         public TaskManagerView()
         {
             InitializeComponent();
-
-            //this.taskItemsControl.ItemsSource = taskViewModels;
         }
 
         private ILogger logger;
         private ITaskController taskController;
+        private TaskResultView taskResultView;
 
-        //private readonly ObservableCollection<ITaskViewModel> taskViewModels = new ObservableCollection<ITaskViewModel>();
         private readonly IList<Action<ITaskViewModel>> startedCallbacks = new List<Action<ITaskViewModel>>();
         private readonly IList<Action<ITaskViewModel>> cancelledCallbacks = new List<Action<ITaskViewModel>>();
 
@@ -194,7 +192,8 @@ namespace Gnosis.Alexandria.Views
                 if (result != System.Windows.Forms.DialogResult.OK)
                     return;
 
-                taskController.Catalog(dialog.SelectedPath);
+                var catalogViewModel = taskController.GetCatalogViewModel(dialog.SelectedPath);
+                taskResultView.Catalog(catalogViewModel);
             }
             catch (Exception ex)
             {
@@ -212,33 +211,35 @@ namespace Gnosis.Alexandria.Views
 
         }
 
-        public void Initialize(ILogger logger, ITaskController taskController)
+        private void AddDefaultMusicCatalogTask()
+        {
+            var catalogViewModel = taskController.GetCatalogViewModel(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic));
+            taskResultView.Catalog(catalogViewModel);
+        }
+
+        public void Initialize(ILogger logger, ITaskController taskController, TaskResultView taskResultView)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
             if (taskController == null)
                 throw new ArgumentNullException("taskController");
+            if (taskResultView == null)
+                throw new ArgumentNullException("taskResultView");
 
             try
             {
                 this.logger = logger;
                 this.taskController = taskController;
+                this.taskResultView = taskResultView;
+
                 this.taskItemsControl.ItemsSource = taskController.Tasks;
 
-                taskController.Catalog(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic));
+                AddDefaultMusicCatalogTask();
             }
             catch (Exception ex)
             {
                 logger.Error("TaskManagerView.Initialize", ex);
             }
         }
-
-        //public void RemoveTaskViewModel(ITaskViewModel taskViewModel)
-        //{
-        //    if (taskViewModel == null)
-        //        throw new ArgumentNullException("taskViewModel");
-
-        //    taskController.RemoveTask(taskViewModel);
-        //}
     }
 }

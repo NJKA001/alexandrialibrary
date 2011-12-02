@@ -34,7 +34,7 @@ namespace Gnosis.Tasks
 
         private TaskProgress progress = default(TaskProgress);
         private TaskStatus status = TaskStatus.Ready;
-        private Exception lastError;
+        private TaskError lastError = default(TaskError);
         private ITaskItem currentItem;
 
         private readonly bool supportsPlayback;
@@ -44,10 +44,10 @@ namespace Gnosis.Tasks
         private readonly IList<Action> cancelledCallbacks = new List<Action>();
         private readonly IList<Action> pausedCallbacks = new List<Action>();
         private readonly IList<Action> resumedCallbacks = new List<Action>();
-        private readonly IList<Action<Exception>> errorCallbacks = new List<Action<Exception>>();
+        private readonly IList<Action<TaskError>> errorCallbacks = new List<Action<TaskError>>();
         private readonly IList<Action> completedCallbacks = new List<Action>();
         private readonly IList<Action<TaskProgress>> progressCallbacks = new List<Action<TaskProgress>>();
-        private readonly IList<Action<Exception>> failedCallbacks = new List<Action<Exception>>();
+        private readonly IList<Action> failedCallbacks = new List<Action>();
         private readonly BackgroundWorker worker = new BackgroundWorker();
 
         private void OnStarted()
@@ -101,7 +101,7 @@ namespace Gnosis.Tasks
         private void OnFailed()
         {
             foreach (var callback in failedCallbacks)
-                callback(lastError);
+                callback();
         }
 
         private void DoWork(object sender, DoWorkEventArgs e)
@@ -112,7 +112,10 @@ namespace Gnosis.Tasks
             }
             catch (Exception ex)
             {
-                Fail(ex);
+                var description = "TaskBase.DoWork failed with an unhandled exception";
+                logger.Error(description, ex);
+                Error(1, 1, description, ex);
+                Fail();
             }
         }
 
@@ -208,34 +211,16 @@ namespace Gnosis.Tasks
             OnProgressUpdated();
         }
 
-        protected virtual void Error(Exception error)
+        protected virtual void Error(int count, int maximum, string description, Exception exception)
         {
-            lastError = error;
+            lastError = new TaskError(count, maximum, description, exception);
 
             OnError();
         }
 
-        protected virtual void Error(Exception error, string message)
-        {
-            var applicationError = new ApplicationException(message, error);
-            lastError = applicationError;
-
-            OnError();
-        }
-
-        protected virtual void Fail(Exception error)
+        protected virtual void Fail()
         {
             status = TaskStatus.Failed;
-            lastError = error;
-
-            OnFailed();
-        }
-
-        protected virtual void Fail(Exception error, string message)
-        {
-            status = TaskStatus.Failed;
-            var applicationError = new ApplicationException(message, error);
-            lastError = applicationError;
 
             OnFailed();
         }
@@ -250,7 +235,7 @@ namespace Gnosis.Tasks
             get { return status; }
         }
 
-        public Exception LastError
+        public TaskError LastError
         {
             get { return lastError; }
         }
@@ -310,7 +295,7 @@ namespace Gnosis.Tasks
             resumedCallbacks.Add(callback);
         }
 
-        public void AddErrorCallback(Action<Exception> callback)
+        public void AddErrorCallback(Action<TaskError> callback)
         {
             if (callback == null)
                 throw new ArgumentNullException("callback");
@@ -334,7 +319,7 @@ namespace Gnosis.Tasks
             completedCallbacks.Add(callback);
         }
 
-        public void AddFailedCallback(Action<Exception> callback)
+        public void AddFailedCallback(Action callback)
         {
             if (callback == null)
                 throw new ArgumentNullException("callback");
@@ -348,7 +333,7 @@ namespace Gnosis.Tasks
             {
                 status = TaskStatus.Ready;
                 progress = default(TaskProgress);
-                lastError = null;
+                lastError = default(TaskError);
             }
         }
 

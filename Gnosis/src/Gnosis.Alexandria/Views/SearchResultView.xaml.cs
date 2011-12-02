@@ -30,7 +30,7 @@ namespace Gnosis.Alexandria.Views
         {
             InitializeComponent();
 
-            searchResultContainer.DataContext = this;
+            searchResultControl.DataContext = this;
         }
 
         private ILogger logger;

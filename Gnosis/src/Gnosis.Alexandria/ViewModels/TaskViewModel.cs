@@ -47,7 +47,7 @@ namespace Gnosis.Alexandria.ViewModels
             task.AddCancelledCallback(() => OnCancelled());
             task.AddCompletedCallback(() => OnCompleted());
             task.AddErrorCallback(error => OnError(error));
-            task.AddFailedCallback(error => OnFailed(error));
+            task.AddFailedCallback(() => OnFailed());
             task.AddPausedCallback(() => OnPaused());
             task.AddProgressCallback(progress => OnProgressChanged(progress));
             task.AddResumedCallback(() => OnResumed());
@@ -62,11 +62,10 @@ namespace Gnosis.Alexandria.ViewModels
         private readonly object startingIcon;
         private readonly object completedIcon;
         private readonly bool showElapsed;
+
+        private readonly IList<Action<ITaskViewModel>> startedCallbacks = new List<Action<ITaskViewModel>>();
         private readonly IList<Action<ITaskViewModel>> cancelCallbacks = new List<Action<ITaskViewModel>>();
 
-        private string lastProgress;
-        private string lastError;
-        private Exception lastException;
         private int progressCount = 0;
         private int progressMaximum = 100;
         private int errorCount;
@@ -118,7 +117,6 @@ namespace Gnosis.Alexandria.ViewModels
         {
             try
             {
-                LastProgress = progress.Description;
                 ProgressCount = progress.Count;
                 ProgressMaximum = progress.Maximum;
                 System.Diagnostics.Debug.WriteLine("progress: {0:000}/{1:000} {2}", progress.Count, progress.Maximum, progress.Description);
@@ -129,13 +127,11 @@ namespace Gnosis.Alexandria.ViewModels
             }
         }
 
-        private void OnError(Exception error)
+        private void OnError(TaskError error)
         {
             try
             {
-                LastError = error.Message;
                 ErrorCount += 1;
-                lastException = error;
             }
             catch (Exception ex)
             {
@@ -143,11 +139,10 @@ namespace Gnosis.Alexandria.ViewModels
             }
         }
 
-        private void OnFailed(Exception error)
+        private void OnFailed()
         {
             try
             {
-                OnError(error);
                 OnStatusChanged();
             }
             catch (Exception ex)
@@ -161,6 +156,9 @@ namespace Gnosis.Alexandria.ViewModels
             try
             {
                 OnStatusChanged();
+
+                foreach (var callback in startedCallbacks)
+                    callback(this);
             }
             catch (Exception ex)
             {
@@ -261,28 +259,6 @@ namespace Gnosis.Alexandria.ViewModels
             get { return task.SupportsPlayback; }
         }
 
-        public string LastError
-        {
-            get { return lastError; }
-            private set
-            {
-                lastError = value.ElideString(20);
-
-                OnPropertyChanged("LastError");
-            }
-        }
-
-        public string LastProgress
-        {
-            get { return lastProgress; }
-            private set
-            {
-                lastProgress = value.ElideString(20);
-
-                OnPropertyChanged("LastProgress");
-            }
-        }
-
         public int ErrorCount
         {
             get { return errorCount; }
@@ -326,26 +302,6 @@ namespace Gnosis.Alexandria.ViewModels
             get
             {
                 return (task.Status == TaskStatus.Running) ?
-                    Visibility.Visible
-                    : Visibility.Collapsed;
-            }
-        }
-
-        public Visibility ErrorVisibility
-        {
-            get
-            {
-                return (errorCount > 0 || lastError != null) ?
-                    Visibility.Visible
-                    : Visibility.Collapsed;
-            }
-        }
-
-        public Visibility ProgressVisibility
-        {
-            get
-            {
-                return !showElapsed ?
                     Visibility.Visible
                     : Visibility.Collapsed;
             }
@@ -483,12 +439,36 @@ namespace Gnosis.Alexandria.ViewModels
             task.NextItem();
         }
 
+        public void AddStartedCallback(Action<ITaskViewModel> callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            startedCallbacks.Add(callback);
+        }
+
         public void AddCancelCallback(Action<ITaskViewModel> callback)
         {
             if (callback == null)
                 throw new ArgumentNullException("callback");
 
             cancelCallbacks.Add(callback);
+        }
+
+        public void AddProgressCallback(Action<TaskProgress> callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            task.AddProgressCallback(callback);
+        }
+
+        public void AddErrorCallback(Action<TaskError> callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            task.AddErrorCallback(callback);
         }
     }
 

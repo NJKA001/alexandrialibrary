@@ -73,8 +73,8 @@ namespace Gnosis.Alexandria.Views
                 mediaItemController = new MediaItemController(logger, artistRepository, albumRepository, trackRepository);
                 taskController = new TaskController(logger, spiderFactory, mediaItemController, artistRepository, albumRepository, trackRepository);
 
-                taskManagerView.Initialize(logger, taskController);
                 taskResultView.Initialize(logger, taskController, mediaItemController);
+                taskManagerView.Initialize(logger, taskController, taskResultView);
                 searchView.Initialize(logger, taskController, taskResultView);
             }
             catch (Exception ex)

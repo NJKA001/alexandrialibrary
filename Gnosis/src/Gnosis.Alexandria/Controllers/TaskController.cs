@@ -48,7 +48,7 @@ namespace Gnosis.Alexandria.Controllers
             get { return taskViewModels; }
         }
 
-        public void Catalog(string path)
+        public CatalogMediaTaskViewModel GetCatalogViewModel(string path)
         {
             if (path == null)
                 throw new ArgumentNullException("path");
@@ -58,11 +58,10 @@ namespace Gnosis.Alexandria.Controllers
                 throw new ArgumentException("path does not exist");
 
             var task = new CatalogMediaTask(logger, spiderFactory.CreateCatalogSpider(), target, TimeSpan.Zero, 0);
-            var taskViewModel = new CatalogMediaTaskViewModel(logger, task);
-            AddTaskViewModel(taskViewModel);
+            return new CatalogMediaTaskViewModel(logger, task);
         }
 
-        public SearchTaskViewModel GetSearch(string search)
+        public SearchTaskViewModel GetSearchViewModel(string search)
         {
             if (search == null)
                 throw new ArgumentNullException("search");

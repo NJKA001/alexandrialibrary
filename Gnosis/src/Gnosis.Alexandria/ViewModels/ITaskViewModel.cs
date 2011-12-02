@@ -19,15 +19,11 @@ namespace Gnosis.Alexandria.ViewModels
         string StatusName { get; }
         ITaskItem CurrentItem { get; }
         bool SupportsPlayback { get; }
-        string LastError { get; }
-        string LastProgress { get; }
         int ErrorCount { get; }
         int ProgressCount { get; }
         int ProgressMaximum { get; }
 
         Visibility RunningVisibility { get; }
-        Visibility ErrorVisibility { get; }
-        Visibility ProgressVisibility { get; }
         Visibility ElapsedVisibility { get; }
 
         Visibility StartVisibility { get; }
@@ -48,7 +44,11 @@ namespace Gnosis.Alexandria.ViewModels
         void Previous();
         void Next();
 
+        void AddStartedCallback(Action<ITaskViewModel> callback);
         void AddCancelCallback(Action<ITaskViewModel> callback);
+
+        void AddProgressCallback(Action<TaskProgress> callback);
+        void AddErrorCallback(Action<TaskError> callback);
     }
 
     public interface ITaskViewModel<T>

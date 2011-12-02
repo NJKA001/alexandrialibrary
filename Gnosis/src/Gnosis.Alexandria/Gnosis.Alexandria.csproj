@@ -82,16 +82,23 @@
     <Compile Include="ViewModels\IArtistViewModel.cs" />
     <Compile Include="ViewModels\IMediaItemViewModel.cs" />
     <Compile Include="ViewModels\ISearchResultViewModel.cs" />
+    <Compile Include="ViewModels\ITaskDetailViewModel.cs" />
     <Compile Include="ViewModels\ITaskResultViewModel.cs" />
     <Compile Include="ViewModels\ITrackViewModel.cs" />
     <Compile Include="ViewModels\SearchTaskViewModel.cs" />
+    <Compile Include="ViewModels\TaskErrorDetailViewModel.cs" />
+    <Compile Include="ViewModels\TaskProgressDetailViewModel.cs" />
     <Compile Include="ViewModels\TaskResultViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="ViewModels\TrackSearchResultViewModel.cs" />
     <Compile Include="ViewModels\TrackViewModel.cs" />
+    <Compile Include="Views\CatalogResultView.xaml.cs">
+      <DependentUpon>CatalogResultView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HoveringCloseIcon.xaml.cs">
       <DependentUpon>HoveringCloseIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ListBoxBehavior.cs" />
     <Compile Include="Views\SearchResultView.xaml.cs">
       <DependentUpon>SearchResultView.xaml</DependentUpon>
     </Compile>
@@ -121,6 +128,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\TaskStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CatalogResultView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

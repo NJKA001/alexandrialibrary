@@ -35,6 +35,8 @@ namespace Gnosis.Tasks
 
         private void AddProgress(string description)
         {
+            logger.Debug(description);
+
             progressCount = progressCount < maxProgress ?
                 progressCount + 1
                 : 0;
@@ -42,13 +44,16 @@ namespace Gnosis.Tasks
             UpdateProgress(progressCount, maxProgress, description);
         }
 
-        private void AddError(Exception ex)
+        private void AddError(string description, Exception exception)
         {
+            logger.Error(description, exception);
+
             errorCount++;
+
+            Error(errorCount, maxErrors, description, exception);
+
             if (maxErrors > 0 && errorCount > maxErrors)
-                Fail(ex, "CatalogMediaTask Failed: Exceeded maximum number of allowable errors");
-            else
-                Error(ex);
+                Fail();
         }
 
         private IMedia GetMedia(Uri location)
@@ -64,8 +69,8 @@ namespace Gnosis.Tasks
             }
             catch (Exception ex)
             {
-                logger.Error("Could not get media at: " + location.ToString(), ex);
-                AddError(ex);
+                var description = "Could not get media at: " + location.ToString();
+                AddError(description, ex);
             }
             
             return null;
@@ -82,8 +87,8 @@ namespace Gnosis.Tasks
             }
             catch (Exception ex)
             {
-                logger.Error("Could not get links for: " + medium.Location.ToString(), ex);
-                AddError(ex);
+                var description = "Could not get links for: " + medium.Location.ToString();
+                AddError(description, ex);
             }
             return links;
         }
@@ -99,8 +104,8 @@ namespace Gnosis.Tasks
             }
             catch (Exception ex)
             {
-                logger.Error("Could not get tags for: " + medium.Location.ToString(), ex);
-                AddError(ex);
+                var description = "Could not get tags for: " + medium.Location.ToString();
+                AddError(description, ex);
             }
             return tags;
         }
@@ -114,8 +119,8 @@ namespace Gnosis.Tasks
             }
             catch (Exception ex)
             {
-                logger.Error("Could not save media at: " + medium.Location.ToString(), ex);
-                AddError(ex);
+                var description = "Could not save media at: " + medium.Location.ToString();
+                AddError(description, ex);
             }
         }
 
@@ -129,8 +134,8 @@ namespace Gnosis.Tasks
             }
             catch (Exception ex)
             {
-                logger.Error("Could not save links for: " + location.ToString(), ex);
-                AddError(ex);
+                var description = "Could not save links for: " + location.ToString();
+                AddError(description, ex);
             }
         }
 
@@ -144,8 +149,8 @@ namespace Gnosis.Tasks
             }
             catch (Exception ex)
             {
-                logger.Error("Could not saved tags for: " + location.ToString(), ex);
-                AddError(ex);
+                var description = "Could not saved tags for: " + location.ToString();
+                AddError(description, ex);
             }
         }
 
@@ -170,8 +175,8 @@ namespace Gnosis.Tasks
             }
             catch (Exception ex)
             {
-                logger.Error("Could not load media at: " + location.ToString(), ex);
-                AddError(ex);
+                var description = "Could not load media at: " + location.ToString();
+                AddError(description, ex);
             }
 
             if (!IsActive())
