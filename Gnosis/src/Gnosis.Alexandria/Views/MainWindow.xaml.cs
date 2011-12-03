@@ -16,6 +16,8 @@ using System.Windows.Shapes;
 using Gnosis.Alexandria.Controllers;
 using Gnosis.Alexandria.ViewModels;
 
+using Gnosis.Audio;
+using Gnosis.Audio.Fmod;
 using Gnosis.Data.SQLite;
 using Gnosis.Links;
 using Gnosis.Tags;
@@ -67,8 +69,10 @@ namespace Gnosis.Alexandria.Views
                 trackRepository = new SQLiteTrackRepository(logger);
                 trackRepository.Initialize();
 
-                catalogController = new CatalogController(logger, securityContext, mediaFactory, mediaRepository, linkRepository, tagRepository, artistRepository, albumRepository, trackRepository);
-                spiderFactory = new SpiderFactory(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository);
+                audioStreamFactory = new AudioStreamFactory();
+
+                catalogController = new CatalogController(logger, securityContext, mediaFactory, mediaRepository, linkRepository, tagRepository, artistRepository, albumRepository, trackRepository, audioStreamFactory);
+                spiderFactory = new SpiderFactory(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository, audioStreamFactory);
 
                 mediaItemController = new MediaItemController(logger, artistRepository, albumRepository, trackRepository);
                 taskController = new TaskController(logger, spiderFactory, mediaItemController, artistRepository, albumRepository, trackRepository);
@@ -94,6 +98,8 @@ namespace Gnosis.Alexandria.Views
         private readonly IMediaItemRepository<IArtist> artistRepository;
         private readonly IMediaItemRepository<IAlbum> albumRepository;
         private readonly IMediaItemRepository<ITrack> trackRepository;
+
+        private readonly IAudioStreamFactory audioStreamFactory;
 
         private readonly SpiderFactory spiderFactory;
         private readonly ICatalogController catalogController;

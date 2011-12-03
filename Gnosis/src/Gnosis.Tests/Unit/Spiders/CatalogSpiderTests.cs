@@ -7,6 +7,8 @@ using System.Text;
 
 using NUnit.Framework;
 
+using Gnosis.Audio;
+using Gnosis.Audio.Fmod;
 using Gnosis.Data;
 using Gnosis.Data.SQLite;
 using Gnosis.Links;
@@ -35,6 +37,7 @@ namespace Gnosis.Tests.Unit.Spiders
         private IMediaItemRepository<IArtist> artistRepository;
         private IMediaItemRepository<IAlbum> albumRepository;
         private IMediaItemRepository<ITrack> trackRepository;
+        private IAudioStreamFactory audioStreamFactory;
         private IMediaFactory mediaFactory = new MediaFactory();
         private ITagTypeFactory tagTypeFactory = new TagTypeFactory();
         private IDbConnection linkConnection;
@@ -78,7 +81,9 @@ namespace Gnosis.Tests.Unit.Spiders
             trackRepository = new SQLiteTrackRepository(logger, trackConnection);
             trackRepository.Initialize();
 
-            spider = new CatalogSpider(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository);
+            audioStreamFactory = new AudioStreamFactory();
+
+            spider = new CatalogSpider(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository, audioStreamFactory);
         }
 
         [TestFixtureTearDown]

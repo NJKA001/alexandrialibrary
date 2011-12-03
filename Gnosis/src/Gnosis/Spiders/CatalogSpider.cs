@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Application.Vendor;
+using Gnosis.Audio;
 using Gnosis.Links;
 using Gnosis.Tasks;
 
@@ -13,7 +14,7 @@ namespace Gnosis.Spiders
     public class CatalogSpider
         : ISpider
     {
-        public CatalogSpider(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository)
+        public CatalogSpider(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, IAudioStreamFactory audioStreamFactory)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -33,6 +34,8 @@ namespace Gnosis.Spiders
                 throw new ArgumentNullException("albumRepository");
             if (trackRepository == null)
                 throw new ArgumentNullException("trackRepository");
+            if (audioStreamFactory == null)
+                throw new ArgumentNullException("audioStreamFactory");
 
             this.logger = logger;
             this.securityContext = securityContext;
@@ -43,6 +46,7 @@ namespace Gnosis.Spiders
             this.artistRepository = artistRepository;
             this.albumRepository = albumRepository;
             this.trackRepository = trackRepository;
+            this.audioStreamFactory = audioStreamFactory;
 
             Delay = TimeSpan.Zero;
             MaxErrors = 0;
@@ -57,6 +61,7 @@ namespace Gnosis.Spiders
         private readonly IMediaItemRepository<IArtist> artistRepository;
         private readonly IMediaItemRepository<IAlbum> albumRepository;
         private readonly IMediaItemRepository<ITrack> trackRepository;
+        private readonly IAudioStreamFactory audioStreamFactory;
 
         public TimeSpan Delay
         {
@@ -112,22 +117,28 @@ namespace Gnosis.Spiders
         {
             try
             {
-                var track = trackRepository.GetByTarget(audio.Location).FirstOrDefault();
-                if (track == null)
-                {
-                    var artist = audio.GetArtist(securityContext, artistRepository);
-                    artistRepository.Save(new List<IArtist> { artist });
+                var artist = audio.GetArtist(securityContext, artistRepository);
+                artistRepository.Save(new List<IArtist> { artist });
 
-                    var album = audio.GetAlbum(securityContext, albumRepository, artist);
+                var album = audio.GetAlbum(securityContext, albumRepository, artist);
+                albumRepository.Save(new List<IAlbum> { album });
+
+                var track = audio.GetTrack(securityContext, trackRepository, audioStreamFactory, artist, album);
+                trackRepository.Save(new List<ITrack> { track });
+
+                var trackDate = track.FromDate > DateTime.MinValue ? track.FromDate : track.ToDate;
+                if (album.FromDate == DateTime.MinValue && trackDate != DateTime.MinValue)
+                {
+                    album = new GnosisAlbum(album.Name, trackDate, album.Number, album.Creator, album.CreatorName, album.Catalog, album.CatalogName, album.Target, album.TargetType, album.User, album.UserName, album.Thumbnail, album.ThumbnailData, album.Location);
                     albumRepository.Save(new List<IAlbum> { album });
-
-                    track = audio.GetTrack(securityContext, trackRepository, artist, album);
-                    trackRepository.Save(new List<ITrack> { track });
                 }
-                else if (!HasDefaultThumbnail(track))
+
+                //if (album.ToDate == DateTime.MinValue && track.ToDate != DateTime.
+
+                if (!HasDefaultThumbnail(track))
                 {
-                    var artist = artistRepository.GetByLocation(track.Creator);
-                    if (artist != null && HasDefaultThumbnail(artist))
+                    //var artist = artistRepository.GetByLocation(track.Creator);
+                    if (HasDefaultThumbnail(artist))
                     {
                         var fromDate = artist.FromDate;
                         if (fromDate == DateTime.MinValue)
@@ -142,8 +153,8 @@ namespace Gnosis.Spiders
                         //var updated = new GnosisArtist(artist.Name, artist.FromDate, artist
                     }
 
-                    var album = albumRepository.GetByLocation(track.Catalog);
-                    if (album != null && HasDefaultThumbnail(album))
+                    //var album = albumRepository.GetByLocation(track.Catalog);
+                    if (HasDefaultThumbnail(album))
                     {
                         var fromDate = album.FromDate;
                         if (album.FromDate == DateTime.MinValue || album.FromDate == DateTime.MaxValue)

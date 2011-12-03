@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Audio;
+
 namespace Gnosis
 {
     public interface IAudio
@@ -10,6 +12,6 @@ namespace Gnosis
     {
         IArtist GetArtist(ISecurityContext securityContext, IMediaItemRepository<IArtist> artistRepository);
         IAlbum GetAlbum(ISecurityContext securityContext, IMediaItemRepository<IAlbum> albumRepository, IArtist artist);
-        ITrack GetTrack(ISecurityContext securityContext, IMediaItemRepository<ITrack> trackRepository, IArtist artist, IAlbum album);
+        ITrack GetTrack(ISecurityContext securityContext, IMediaItemRepository<ITrack> trackRepository, IAudioStreamFactory audioStreamFactory, IArtist artist, IAlbum album);
     }
 }
