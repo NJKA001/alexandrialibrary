@@ -29,12 +29,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Gnosis.Audio.Fmod
+namespace Gnosis.Audio
 {
-	public interface IAudioStream : IMediaStream
+	public interface IAudioStreamFactory
 	{
-		float Volume { get; set; }
-		bool IsMuted { get; set; }
-		EventHandler<AudioStateChangedEventArgs> VolumeChanged { get; set; }
+		IAudioStream CreateAudioStream(Uri path);
 	}
 }

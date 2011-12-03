@@ -80,6 +80,7 @@
     <Compile Include="ViewModels\CatalogMediaTaskViewModel.cs" />
     <Compile Include="ViewModels\IAlbumViewModel.cs" />
     <Compile Include="ViewModels\IArtistViewModel.cs" />
+    <Compile Include="ViewModels\IAudioPlayerViewModel.cs" />
     <Compile Include="ViewModels\IMediaItemViewModel.cs" />
     <Compile Include="ViewModels\ISearchResultViewModel.cs" />
     <Compile Include="ViewModels\ITaskDetailViewModel.cs" />

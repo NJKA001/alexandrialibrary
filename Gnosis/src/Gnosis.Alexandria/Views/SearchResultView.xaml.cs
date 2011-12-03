@@ -189,11 +189,11 @@ namespace Gnosis.Alexandria.Views
                     }
                     else
                     {
-                        var existing = albumResults[albumKey].Tracks.Where(x => x.Album.ToString() == trackViewModel.Album.ToString()).FirstOrDefault();
-                        if (existing == null)
-                        {
+                        //var existing = albumResults[albumKey].Tracks.Where(x => x.Album.ToString() == trackViewModel.Album.ToString()).FirstOrDefault();
+                        //if (existing == null)
+                        //{
                             AddTrack(albumResults[albumKey], trackViewModel);
-                        }
+                        //}
                     }
                 }
             }

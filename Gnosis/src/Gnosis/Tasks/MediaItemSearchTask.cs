@@ -53,6 +53,11 @@ namespace Gnosis.Tasks
             {
                 AddProgress("Album: " + album.Name);
                 UpdateResults(album);
+                foreach (var track in trackRepository.GetByCatalog(album.Location))
+                {
+                    AddProgress("Track: " + track.Name);
+                    UpdateResults(track);
+                }
             }
 
             foreach (var track in trackRepository.GetByName(pattern))

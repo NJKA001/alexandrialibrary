@@ -26,18 +26,15 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Gnosis.Audio.Fmod
+namespace Gnosis.Audio
 {
-	/// <summary>
-	/// The playback state of a media stream
-	/// </summary>
-	public enum PlaybackState
+	public interface IAudioStream : IMediaStream
 	{
-		None = 0,
-		Error,
-		Playing,
-		Paused,
-		Stopped
+		float Volume { get; set; }
+		bool IsMuted { get; set; }
+		EventHandler<AudioStateChangedEventArgs> VolumeChanged { get; set; }
 	}
 }

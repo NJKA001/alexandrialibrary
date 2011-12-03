@@ -27,13 +27,17 @@
 
 using System;
 
-namespace Gnosis.Audio.Fmod
+namespace Gnosis
 {
-	public enum SeekState
+	/// <summary>
+	/// The network state of a media stream
+	/// </summary>
+	public enum NetworkState
 	{
 		None = 0,
-		Backward,
+		Connecting,
 		Error,
-		Forward
+		Reconnecting,
+		Streaming,
 	}
 }

@@ -110,9 +110,14 @@
     <Compile Include="Application\Xml\XmlDtdDocument.cs" />
     <Compile Include="Application\Vendor\GnosisArtist.cs" />
     <Compile Include="Audio\AudioBase.cs" />
+    <Compile Include="Audio\AudioStateChangedEventArgs.cs" />
+    <Compile Include="Audio\IAudioStream.cs" />
+    <Compile Include="Audio\IAudioStreamFactory.cs" />
+    <Compile Include="BufferState.cs" />
     <Compile Include="IAlbum.cs" />
     <Compile Include="IFeed.cs" />
     <Compile Include="IFeedItem.cs" />
+    <Compile Include="IMediaStream.cs" />
     <Compile Include="ISecurityContext.cs" />
     <Compile Include="IUserFolder.cs" />
     <Compile Include="IClip.cs" />
@@ -259,7 +264,11 @@
     <Compile Include="IUserCatalog.cs" />
     <Compile Include="IUserRepsository.cs" />
     <Compile Include="IVideoPlayer.cs" />
+    <Compile Include="MediaStateChangedEventArgs.cs" />
+    <Compile Include="NetworkState.cs" />
+    <Compile Include="PlaybackState.cs" />
     <Compile Include="SecurityContext.cs" />
+    <Compile Include="SeekState.cs" />
     <Compile Include="Spiders\PlaylistSpider.cs" />
     <Compile Include="TagDomain.cs" />
     <Compile Include="TaskError.cs" />

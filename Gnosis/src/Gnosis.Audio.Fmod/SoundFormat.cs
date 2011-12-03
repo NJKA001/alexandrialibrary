@@ -18,8 +18,8 @@ namespace Gnosis.Audio.Fmod
 				case FmodSoundType.Aac:
 					name = "AAC";
 					description = "Advanced Audio Codec";
-					contentTypes.Add(new ContentType("audio/aac"));
-					contentTypes.Add(new ContentType("audio/m4a"));
+					//contentTypes.Add(new ContentType("audio/aac"));
+					//contentTypes.Add(new ContentType("audio/m4a"));
 					fileExtensions.Add("aac");
 					fileExtensions.Add("m4a");
 					break;
@@ -38,7 +38,7 @@ namespace Gnosis.Audio.Fmod
 				case FmodSoundType.Flac:
 					name = "FLAC";
 					description = "Free Lossless Audio Codec";
-					contentTypes.Add(new ContentType("audio/flac"));
+					//contentTypes.Add(new ContentType("audio/flac"));
 					fileExtensions.Add("flac");
 					break;
 				case FmodSoundType.Fsb:
@@ -54,13 +54,13 @@ namespace Gnosis.Audio.Fmod
 				case FmodSoundType.Mpeg:
 					name = "MP3";
 					description = "MPEG III Layer I";
-					contentTypes.Add(new ContentType("audio/mp3"));
+					//contentTypes.Add(new ContentType("audio/mp3"));
 					fileExtensions.Add("mp3");
 					break;
 				case FmodSoundType.OggVorbis:
 					name = "Vorbis";
 					description = "Ogg Vorbis";
-					contentTypes.Add(new ContentType("audio/vorbis"));
+					//contentTypes.Add(new ContentType("audio/vorbis"));
 					fileExtensions.Add("ogg");
 					break;
 				case FmodSoundType.Playlist:
@@ -76,7 +76,7 @@ namespace Gnosis.Audio.Fmod
 				case FmodSoundType.Wav:
 					name = "WAV";
 					description = "PCM Wave Audio";
-					contentTypes.Add(new ContentType("audio/wav"));
+					//contentTypes.Add(new ContentType("audio/wav"));
 					fileExtensions.Add("wav");
 					break;
 				case FmodSoundType.XM:

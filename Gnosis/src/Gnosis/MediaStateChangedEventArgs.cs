@@ -26,35 +26,47 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Gnosis.Audio.Fmod
+namespace Gnosis
 {
-	public class AudioStateChangedEventArgs : EventArgs
+	public class MediaStateChangedEventArgs : EventArgs
 	{
 		#region Constructors
-		public AudioStateChangedEventArgs(float volume, bool isMuted)
+		public MediaStateChangedEventArgs(BufferState bufferState, NetworkState networkState, PlaybackState playbackState, SeekState seekState)
 		{
-			this.volume = volume;
-			this.isMuted = isMuted;
+			this.bufferState = bufferState;
+			this.networkState = networkState;
+			this.playbackState = playbackState;
+			this.seekState = seekState;
 		}
 		#endregion
 
 		#region Private Fields
-		private float volume;
-		private bool isMuted;
+		private BufferState bufferState = BufferState.None;
+		private NetworkState networkState = NetworkState.None;
+		private PlaybackState playbackState = PlaybackState.None;
+		private SeekState seekState = SeekState.None;
 		#endregion
 
 		#region Public Properties
-		public float Volume
+		public BufferState BufferState
 		{
-			get { return volume; }
+			get { return bufferState; }
 		}
 
-		public bool IsMuted
+		public NetworkState NetworkState
 		{
-			get { return isMuted; }
+			get { return networkState; }
+		}
+
+		public PlaybackState PlaybackState
+		{
+			get { return playbackState; }
+		}
+
+		public SeekState SeekState
+		{
+			get { return seekState; }
 		}
 		#endregion
 	}

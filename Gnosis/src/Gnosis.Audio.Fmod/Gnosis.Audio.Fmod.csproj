@@ -87,10 +87,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AudioPlayer.cs" />
-    <Compile Include="AudioStateChangedEventArgs.cs" />
     <Compile Include="AudioStreamFactory.cs" />
     <Compile Include="BitRateType.cs" />
-    <Compile Include="BufferState.cs" />
     <Compile Include="Channel.cs" />
     <Compile Include="ChannelCollection.cs" />
     <Compile Include="ChannelGroup.cs" />
@@ -109,14 +107,11 @@
     <Compile Include="Error.cs" />
     <Compile Include="Geometry.cs" />
     <Compile Include="IAudioPlayer.cs" />
-    <Compile Include="IAudioStream.cs" />
-    <Compile Include="IAudioStreamFactory.cs" />
     <Compile Include="ICodec.cs" />
     <Compile Include="IHasDefault.cs" />
     <Compile Include="IHasRange.cs" />
     <Compile Include="ILoopable.cs" />
     <Compile Include="IMediaFormat.cs" />
-    <Compile Include="IMediaStream.cs" />
     <Compile Include="InputDsp.cs" />
     <Compile Include="InputDspCollection.cs" />
     <Compile Include="Listener.cs" />
@@ -124,16 +119,13 @@
     <Compile Include="LocalSound.cs" />
     <Compile Include="LocalSoundLoaded.cs" />
     <Compile Include="LocalSoundNotLoaded.cs" />
-    <Compile Include="MediaStateChangedEventArgs.cs" />
     <Compile Include="MediaType.cs" />
     <Compile Include="NativeMethods.cs" />
-    <Compile Include="NetworkState.cs" />
     <Compile Include="OpticalDrive.cs" />
     <Compile Include="OpticalDriveCollection.cs" />
     <Compile Include="OutputDsp.cs" />
     <Compile Include="OutputDspCollection.cs" />
     <Compile Include="PlaybackFunction.cs" />
-    <Compile Include="PlaybackState.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginCollection.cs" />
     <Compile Include="Polygon.cs" />
@@ -147,7 +139,6 @@
     <Compile Include="ReverbFlags.cs" />
     <Compile Include="ReverbPreset.cs" />
     <Compile Include="ReverbProperties.cs" />
-    <Compile Include="SeekState.cs" />
     <Compile Include="Sound.cs" />
     <Compile Include="SoundBuffer.cs" />
     <Compile Include="SoundCollection.cs" />
@@ -170,6 +161,12 @@
     <None Include="fmodex.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gnosis\Gnosis.csproj">
+      <Project>{37091600-5BFE-4FCB-8A69-F016FF451462}</Project>
+      <Name>Gnosis</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

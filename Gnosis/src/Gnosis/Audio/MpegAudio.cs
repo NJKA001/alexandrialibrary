@@ -144,10 +144,14 @@ namespace Gnosis.Audio
                 return new GnosisTrack("Unknown Track", DateTime.MinValue, DateTime.MaxValue, 0, TimeSpan.Zero, artist.Location, artist.Name, album.Location, album.Name, Location, Type, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, Guid.Empty.ToUrn(), new byte[0]);
 
             var name = id3v2Tag.Title != null ? id3v2Tag.Title : "Unknown Track";
-            var recordDate = id3v2Tag.RecordingDate;
-            var releaseDate = id3v2Tag.ReleaseDate;
+            var recordDate = id3v2Tag.RecordingDate > DateTime.MinValue ? id3v2Tag.RecordingDate : new DateTime((int)id3v1Tag.Year, 1, 1);
+            var releaseDate = id3v2Tag.ReleaseDate > DateTime.MinValue ? id3v2Tag.ReleaseDate : new DateTime((int)id3v1Tag.Year, 1, 1);
             var number = id3v2Tag.Track;
             var duration = id3v2Tag.Duration;
+            if (duration == TimeSpan.Zero)
+            {
+            }
+
             var thumbnail = Guid.Empty.ToUrn();
             var thumbnailData = id3v2Tag.Pictures != null && id3v2Tag.Pictures.Length > 0 ? id3v2Tag.Pictures[0].Data.ToArray() : new byte[0];
 
