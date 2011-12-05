@@ -12,7 +12,13 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Styles/TabStyles.xaml"/>
                 <ResourceDictionary Source="../Styles/Converters.xaml"/>
+                <ResourceDictionary Source="../Styles/ItemStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <Style x:Name="albumListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                <EventSetter Event="MouseDoubleClick" Handler="albumListBoxItem_DoubleClick"/>
+                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="albumListBoxItem_PreviewLeftMouseButtonDown"/>
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -60,7 +66,7 @@
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                     </Grid.ColumnDefinitions>
-                                    <ListBox x:Name="albumListBox" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Albums}" >
+                                    <ListBox x:Name="albumListBox" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Albums}" ItemContainerStyle="{StaticResource albumListBoxItemStyle}" >
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <StackPanel Orientation="Horizontal"/>

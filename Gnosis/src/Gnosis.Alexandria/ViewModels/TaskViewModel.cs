@@ -297,6 +297,11 @@ namespace Gnosis.Alexandria.ViewModels
             }
         }
 
+        public Visibility ProgressVisibility
+        {
+            get { return showElapsed ? Visibility.Collapsed : Visibility.Visible; }
+        }
+
         public Visibility RunningVisibility
         {
             get

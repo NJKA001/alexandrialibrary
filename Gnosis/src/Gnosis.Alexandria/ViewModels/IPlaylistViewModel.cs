@@ -6,15 +6,18 @@ using System.Text;
 
 namespace Gnosis.Alexandria.ViewModels
 {
-    public interface IAudioPlayerViewModel
+    public interface IPlaylistViewModel
         : INotifyPropertyChanged
     {
-        Uri MediaItem { get; }
+        Uri Id { get; }
         string CreatorName { get; }
-        string CatalogTitle { get; }
-        string CatalogYear { get; }
+        string Name { get; }
+        string Number { get; }
+        string Year { get; }
         object Image { get; }
 
-        IEnumerable<ITrackViewModel> Tracks { get; }
+        IEnumerable<IPlaylistItemViewModel> Items { get; }
+
+        void AddItem(IPlaylistItemViewModel item);
     }
 }

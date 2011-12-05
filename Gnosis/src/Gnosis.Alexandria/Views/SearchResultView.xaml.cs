@@ -40,6 +40,60 @@ namespace Gnosis.Alexandria.Views
         private readonly IDictionary<string, ArtistSearchResultViewModel> artistResults = new Dictionary<string, ArtistSearchResultViewModel>();
         private readonly IDictionary<string, AlbumSearchResultViewModel> albumResults = new Dictionary<string, AlbumSearchResultViewModel>();
 
+        private void albumListBoxItem_PreviewLeftMouseButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                var element = e.OriginalSource as UIElement;
+                if (element == null)
+                    return;
+
+                var listBoxItem = element.FindContainingItem<ListBoxItem>();
+                if (listBoxItem == null)
+                    return;
+
+                var album = listBoxItem.DataContext as IAlbumViewModel;
+                if (album == null)
+                    return;
+
+                album.IsSelected = true;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  albumListBoxItem_PreviewLeftMouseButtonDown", ex);
+            }
+        }
+
+        private void albumListBoxItem_DoubleClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                var item = sender as ListBoxItem;
+                if (item == null)
+                    return;
+
+                //var albumListBox = item.FindName("albumListBox");
+                //if (albumListBox != null)
+                //{
+                //    var selected = albumListBox;
+                //}
+
+                var result = item.DataContext as ISearchResultViewModel;
+                if (result == null)
+                    return;
+                
+                var album = result.Albums.Where(x => x.IsSelected).FirstOrDefault();
+                if (album == null)
+                    return;
+
+                //TODO: Get tracks for this album, create a new playlist and start playing it                
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  albumListBoxItem_DoubleClick", ex);
+            }
+        }
+
         private void itemNamePanel_Drop(object sender, DragEventArgs e)
         {
             try

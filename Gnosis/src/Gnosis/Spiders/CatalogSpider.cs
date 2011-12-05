@@ -137,32 +137,15 @@ namespace Gnosis.Spiders
 
                 if (!HasDefaultThumbnail(track))
                 {
-                    //var artist = artistRepository.GetByLocation(track.Creator);
-                    if (HasDefaultThumbnail(artist))
-                    {
-                        var fromDate = artist.FromDate;
-                        if (fromDate == DateTime.MinValue)
-                        {
-                        }
-
-                        var toDate = artist.ToDate;
-                        if (toDate == DateTime.MaxValue)
-                        {
-                        }
-
-                        //var updated = new GnosisArtist(artist.Name, artist.FromDate, artist
-                    }
-
-                    //var album = albumRepository.GetByLocation(track.Catalog);
                     if (HasDefaultThumbnail(album))
                     {
-                        var fromDate = album.FromDate;
-                        if (album.FromDate == DateTime.MinValue || album.FromDate == DateTime.MaxValue)
-                        {
-                            fromDate = track.ToDate != DateTime.MinValue && track.ToDate != DateTime.MaxValue ?
-                                track.ToDate
-                                : track.FromDate;
-                        }
+                        //var fromDate = album.FromDate;
+                        //if (album.FromDate == DateTime.MinValue || album.FromDate == DateTime.MaxValue)
+                        //{
+                        //    fromDate = track.ToDate != DateTime.MinValue && track.ToDate != DateTime.MaxValue ?
+                        //        track.ToDate
+                        //        : track.FromDate;
+                        //}
 
                         var number = album.Number;
                         if (album.Name.Contains("#") && !album.Name.EndsWith("#"))
@@ -177,7 +160,7 @@ namespace Gnosis.Spiders
                             uint.TryParse(cleaned, out number);
                         }
 
-                        var updated = new GnosisAlbum(album.Name, fromDate, number, album.Creator, album.CreatorName, album.Catalog, album.CatalogName, album.Target, album.TargetType, album.User, album.UserName, track.Thumbnail, track.ThumbnailData, album.Location);
+                        var updated = new GnosisAlbum(album.Name, album.FromDate, number, album.Creator, album.CreatorName, album.Catalog, album.CatalogName, album.Target, album.TargetType, album.User, album.UserName, track.Thumbnail, track.ThumbnailData, album.Location);
                         albumRepository.Save(new List<IAlbum> { updated });
                     }
                 }

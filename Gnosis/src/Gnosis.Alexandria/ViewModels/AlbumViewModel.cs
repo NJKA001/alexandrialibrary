@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -38,8 +39,15 @@ namespace Gnosis.Alexandria.ViewModels
         private readonly string bio;
         private readonly Uri thumbnail;
         private readonly byte[] thumbnailData;
-
         private readonly ObservableCollection<ITrackViewModel> tracks = new ObservableCollection<ITrackViewModel>();
+
+        private bool isSelected;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public Uri Album
         {
@@ -81,6 +89,16 @@ namespace Gnosis.Alexandria.ViewModels
             get { return tracks; }
         }
 
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set
+            {
+                isSelected = value;
+                OnPropertyChanged("IsSelected");
+            }
+        }
+
         public void AddTrack(ITrackViewModel track)
         {
             if (track == null)
@@ -97,5 +115,12 @@ namespace Gnosis.Alexandria.ViewModels
             if (tracks.Contains(track))
                 tracks.Remove(track);
         }
+
+        public override string ToString()
+        {
+            return string.Format("Album: {0}. IsSelected={1}", Title, IsSelected);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

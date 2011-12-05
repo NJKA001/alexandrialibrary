@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -50,6 +51,14 @@ namespace Gnosis.Alexandria.ViewModels
         private readonly byte[] thumbnailData;
         private readonly string bio;
 
+        private bool isSelected;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public Uri Track
         {
             get { return track; }
@@ -67,15 +76,7 @@ namespace Gnosis.Alexandria.ViewModels
 
         public string Duration
         {
-            get
-            {
-                if (duration.TotalHours >= 1)
-                    return string.Format("{0}:{1:00}:{2:00}", Math.Floor(duration.TotalHours), Math.Floor(duration.TotalMinutes % 60), Math.Floor(duration.TotalSeconds % 60));
-                else if (duration.TotalMinutes >= 1)
-                    return string.Format("{0}:{1:00}", Math.Floor(duration.TotalMinutes), Math.Floor(duration.TotalSeconds % 60));
-                else
-                    return string.Format("{0:00}", Math.Floor(duration.TotalSeconds));
-            }
+            get { return duration.ToFormattedString(); }
         }
 
         public string Year
@@ -112,5 +113,17 @@ namespace Gnosis.Alexandria.ViewModels
         {
             get { return thumbnailData != null && thumbnailData.Length > 0 ? (object)thumbnailData : thumbnail; }
         }
+
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set
+            {
+                isSelected = value;
+                OnPropertyChanged("IsSelected");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
