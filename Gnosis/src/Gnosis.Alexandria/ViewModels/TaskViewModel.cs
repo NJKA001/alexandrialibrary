@@ -9,17 +9,7 @@ namespace Gnosis.Alexandria.ViewModels
     public abstract class TaskViewModel
         : ITaskViewModel, INotifyPropertyChanged
     {
-        protected TaskViewModel(ILogger logger, ITask task, string name, string description, object startingIcon)
-            : this(logger, task, name, description, startingIcon, startingIcon, false)
-        {
-        }
-
-        protected TaskViewModel(ILogger logger, ITask task, string name, string description, object startingIcon, object completedIcon)
-            : this(logger, task, name, description, startingIcon, completedIcon, false)
-        {
-        }
-
-        protected TaskViewModel(ILogger logger, ITask task, string name, string description, object startingIcon, object completedIcon, bool showElapsed)
+        protected TaskViewModel(ILogger logger, ITask task, string name, string description, object icon)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -29,19 +19,14 @@ namespace Gnosis.Alexandria.ViewModels
                 throw new ArgumentNullException("name");
             if (description == null)
                 throw new ArgumentNullException("description");
-            if (startingIcon == null)
-                throw new ArgumentNullException("startingIcon");
-            if (completedIcon == null)
-                throw new ArgumentNullException("completedIcon");
+            if (icon == null)
+                throw new ArgumentNullException("icon");
 
             this.logger = logger;
             this.task = task;
             this.name = name;
             this.description = description;
-            this.startingIcon = startingIcon;
-            this.completedIcon = completedIcon;
-            this.itemCount = task.Items.Count();
-            this.showElapsed = showElapsed;
+            this.icon = icon;
 
             task.AddStoppedCallback(() => OnStopped());
             task.AddCancelledCallback(() => OnCancelled());
@@ -59,9 +44,7 @@ namespace Gnosis.Alexandria.ViewModels
         private readonly ITask task;
         private string name;
         private string description;
-        private readonly object startingIcon;
-        private readonly object completedIcon;
-        private readonly bool showElapsed;
+        private object icon;
 
         private readonly IList<Action<ITaskViewModel>> startedCallbacks = new List<Action<ITaskViewModel>>();
         private readonly IList<Action<ITaskViewModel>> cancelCallbacks = new List<Action<ITaskViewModel>>();
@@ -69,7 +52,7 @@ namespace Gnosis.Alexandria.ViewModels
         private int progressCount = 0;
         private int progressMaximum = 100;
         private int errorCount;
-        private int itemCount;
+        private ITaskItem item;
 
         private bool isSelected;
         private bool isCancelled;
@@ -119,11 +102,28 @@ namespace Gnosis.Alexandria.ViewModels
             {
                 ProgressCount = progress.Count;
                 ProgressMaximum = progress.Maximum;
-                System.Diagnostics.Debug.WriteLine("progress: {0:000}/{1:000} {2}", progress.Count, progress.Maximum, progress.Description);
             }
             catch (Exception ex)
             {
                 logger.Error("  OnProgressChanged", ex);
+            }
+        }
+
+        private void OnItemChanged(ITaskItem item)
+        {
+            try
+            {
+                this.item = item;
+                
+                if (item.Image != null)
+                {
+                    Icon = item.Image;
+                }
+                OnPropertyChanged("ElapsedVisibility");
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  OnItemChanged", ex);
             }
         }
 
@@ -236,7 +236,12 @@ namespace Gnosis.Alexandria.ViewModels
 
         public object Icon
         {
-            get { return task.Status == TaskStatus.Completed ? completedIcon : startingIcon; }
+            get { return icon; }
+            protected set
+            {
+                icon = value;
+                OnPropertyChanged("Icon");
+            }
         }
 
         public TaskStatus Status
@@ -251,12 +256,7 @@ namespace Gnosis.Alexandria.ViewModels
 
         public ITaskItem CurrentItem
         {
-            get { return task.CurrentItem; }
-        }
-
-        public bool SupportsPlayback
-        {
-            get { return task.SupportsPlayback; }
+            get { return task.Item; }
         }
 
         public int ErrorCount
@@ -299,7 +299,7 @@ namespace Gnosis.Alexandria.ViewModels
 
         public Visibility ProgressVisibility
         {
-            get { return showElapsed ? Visibility.Collapsed : Visibility.Visible; }
+            get { return item != null && item.Duration > TimeSpan.Zero ? Visibility.Collapsed : Visibility.Visible; }
         }
 
         public Visibility RunningVisibility
@@ -316,7 +316,7 @@ namespace Gnosis.Alexandria.ViewModels
         {
             get
             {
-                return showElapsed ?
+                return item != null && item.Duration > TimeSpan.Zero ?
                     Visibility.Visible
                     : Visibility.Collapsed;
             }
@@ -356,7 +356,7 @@ namespace Gnosis.Alexandria.ViewModels
         {
             get
             {
-                return itemCount > 1 ?
+                return item != null ?
                     Visibility.Visible
                     : Visibility.Collapsed;
             }
@@ -366,7 +366,7 @@ namespace Gnosis.Alexandria.ViewModels
         {
             get
             {
-                return itemCount > 1 ?
+                return item != null ?
                     Visibility.Visible
                     : Visibility.Collapsed;
             }
@@ -480,20 +480,9 @@ namespace Gnosis.Alexandria.ViewModels
     public abstract class TaskViewModel<T>
         : TaskViewModel, ITaskViewModel<T>, INotifyPropertyChanged
     {
-        protected TaskViewModel(ILogger logger, ITask<T> task, string name, string description, object startingIcon)
-            : this(logger, task, name, description, startingIcon, startingIcon, false)
+        protected TaskViewModel(ILogger logger, ITask<T> task, string name, string description, object icon)
+            : base(logger, task, name, description, icon)
         {
-        }
-
-        protected TaskViewModel(ILogger logger, ITask<T> task, string name, string description, object startingIcon, object completedIcon)
-            : this(logger, task, name, description, startingIcon, completedIcon, false)
-        {
-        }
-
-        protected TaskViewModel(ILogger logger, ITask<T> task, string name, string description, object startingIcon, object completedIcon, bool showElapsed)
-            : base(logger, task, name, description, startingIcon, completedIcon, showElapsed)
-        {
-            resultTask = task;
         }
 
         protected readonly ITask<T> resultTask;

@@ -158,7 +158,7 @@ namespace Gnosis.Alexandria.Views
                 if (!tabMap.ContainsKey(searchViewModel.Id))
                 {
                     var searchResultView = new SearchResultView();
-                    searchResultView.Initialize(logger, mediaItemController);
+                    searchResultView.Initialize(logger, mediaItemController, taskController, this);
 
                     searchViewModel.AddResultsCallback(result => searchResultView.HandleSearchResult(result));
 

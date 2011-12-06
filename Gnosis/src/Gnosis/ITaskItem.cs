@@ -7,8 +7,10 @@ namespace Gnosis
 {
     public interface ITaskItem
     {
+        Uri Id { get; }
+        uint Number { get; }
         string Name { get; }
-        int Number { get; }
-        IMedia Media { get; }
+        TimeSpan Duration { get; }
+        object Image { get; }
     }
 }

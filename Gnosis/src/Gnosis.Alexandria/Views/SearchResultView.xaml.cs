@@ -35,6 +35,8 @@ namespace Gnosis.Alexandria.Views
 
         private ILogger logger;
         private IMediaItemController mediaItemController;
+        private ITaskController taskController;
+        private TaskResultView taskResultView;
         private readonly ObservableCollection<ISearchResultViewModel> results = new ObservableCollection<ISearchResultViewModel>();
 
         private readonly IDictionary<string, ArtistSearchResultViewModel> artistResults = new Dictionary<string, ArtistSearchResultViewModel>();
@@ -285,15 +287,21 @@ namespace Gnosis.Alexandria.Views
             get { return results; }
         }
 
-        public void Initialize(ILogger logger, IMediaItemController mediaItemController)
+        public void Initialize(ILogger logger, IMediaItemController mediaItemController, ITaskController taskController, TaskResultView taskResultView)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
             if (mediaItemController == null)
                 throw new ArgumentNullException("mediaItemController");
+            if (taskController == null)
+                throw new ArgumentNullException("taskController");
+            if (taskResultView == null)
+                throw new ArgumentNullException("taskResultView");
 
             this.logger = logger;
             this.mediaItemController = mediaItemController;
+            this.taskController = taskController;
+            this.taskResultView = taskResultView;
         }
 
         public void AddViewModel(ISearchResultViewModel viewModel)

@@ -12,17 +12,11 @@ namespace Gnosis.Tasks
         : ITask
     {
         protected TaskBase(ILogger logger)
-            : this(logger, false)
-        {
-        }
-
-        protected TaskBase(ILogger logger, bool supportsPlayback)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
 
             this.logger = logger;
-            this.supportsPlayback = supportsPlayback;
 
             worker.DoWork += DoWork;
             worker.RunWorkerCompleted += WorkCompleted;
@@ -32,22 +26,22 @@ namespace Gnosis.Tasks
 
         #region Private Members
 
-        private TaskProgress progress = default(TaskProgress);
         private TaskStatus status = TaskStatus.Ready;
-        private TaskError lastError = default(TaskError);
-        private ITaskItem currentItem;
+        private TaskError error = default(TaskError);
+        private TaskProgress progress = default(TaskProgress);
+        private ITaskItem item;
 
-        private readonly bool supportsPlayback;
-        private readonly IList<ITaskItem> items = new List<ITaskItem>();
         private readonly IList<Action> startedCalledbacks = new List<Action>();
         private readonly IList<Action> stoppedCallbacks = new List<Action>();
         private readonly IList<Action> cancelledCallbacks = new List<Action>();
         private readonly IList<Action> pausedCallbacks = new List<Action>();
         private readonly IList<Action> resumedCallbacks = new List<Action>();
         private readonly IList<Action<TaskError>> errorCallbacks = new List<Action<TaskError>>();
-        private readonly IList<Action> completedCallbacks = new List<Action>();
         private readonly IList<Action<TaskProgress>> progressCallbacks = new List<Action<TaskProgress>>();
+        private readonly IList<Action<ITaskItem>> itemChangedCallbacks = new List<Action<ITaskItem>>();
         private readonly IList<Action> failedCallbacks = new List<Action>();
+        private readonly IList<Action> completedCallbacks = new List<Action>();
+
         private readonly BackgroundWorker worker = new BackgroundWorker();
 
         private void OnStarted()
@@ -83,7 +77,7 @@ namespace Gnosis.Tasks
         private void OnError()
         {
             foreach (var callback in errorCallbacks)
-                callback(lastError);
+                callback(error);
         }
 
         private void OnProgressUpdated()
@@ -114,7 +108,7 @@ namespace Gnosis.Tasks
             {
                 var description = "TaskBase.DoWork failed with an unhandled exception";
                 logger.Error(description, ex);
-                Error(1, 1, description, ex);
+                UpdateError(1, 1, description, ex);
                 Fail();
             }
         }
@@ -139,30 +133,12 @@ namespace Gnosis.Tasks
 
         protected abstract void DoWork();
 
-        protected void AddItem(ITaskItem item)
+        protected void ChangeItem(ITaskItem item)
         {
-            if (item == null)
-                throw new ArgumentNullException("item");
+            this.item = item;
 
-            items.Add(item);
-        }
-
-        protected void RemoveItem(ITaskItem item)
-        {
-            if (item == null)
-                throw new ArgumentNullException("item");
-
-            if (items.Contains(item))
-                items.Remove(item);
-        }
-
-        protected void SelectItem(ITaskItem item)
-        {
-            if (item == null)
-                throw new ArgumentNullException("item");
-
-            if (items.Contains(item))
-                currentItem = item;
+            foreach (var callback in itemChangedCallbacks)
+                callback(item);
         }
 
         protected void BlockIfPaused()
@@ -187,7 +163,7 @@ namespace Gnosis.Tasks
         {
             try
             {
-                if (status == TaskStatus.Running) //!= TaskStatus.Cancelled && status != TaskStatus.Failed)
+                if (status == TaskStatus.Running)
                 {
                     status = TaskStatus.Completed;
 
@@ -211,11 +187,21 @@ namespace Gnosis.Tasks
             OnProgressUpdated();
         }
 
-        protected virtual void Error(int count, int maximum, string description, Exception exception)
+        protected virtual void UpdateError(int count, int maximum, string description, Exception exception)
         {
-            lastError = new TaskError(count, maximum, description, exception);
+            error = new TaskError(count, maximum, description, exception);
 
             OnError();
+        }
+
+        protected virtual ITaskItem GetPreviousItem()
+        {
+            return null;
+        }
+
+        protected virtual ITaskItem GetNextItem()
+        {
+            return null;
         }
 
         protected virtual void Fail()
@@ -225,34 +211,24 @@ namespace Gnosis.Tasks
             OnFailed();
         }
 
-        public TaskProgress Progress
-        {
-            get { return progress; }
-        }
-
         public TaskStatus Status
         {
             get { return status; }
         }
 
-        public TaskError LastError
+        public TaskError Error
         {
-            get { return lastError; }
+            get { return error; }
         }
 
-        public IEnumerable<ITaskItem> Items
+        public TaskProgress Progress
         {
-            get { return items; }
+            get { return progress; }
         }
 
-        public ITaskItem CurrentItem
+        public ITaskItem Item
         {
-            get { return currentItem; }
-        }
-
-        public bool SupportsPlayback
-        {
-            get { return supportsPlayback; }
+            get { return item; }
         }
 
         public void AddStartedCallback(Action callback)
@@ -311,12 +287,12 @@ namespace Gnosis.Tasks
             progressCallbacks.Add(callback);
         }
 
-        public void AddCompletedCallback(Action callback)
+        public void AddItemChangedCallback(Action<ITaskItem> callback)
         {
             if (callback == null)
                 throw new ArgumentNullException("callback");
 
-            completedCallbacks.Add(callback);
+            itemChangedCallbacks.Add(callback);
         }
 
         public void AddFailedCallback(Action callback)
@@ -327,13 +303,21 @@ namespace Gnosis.Tasks
             failedCallbacks.Add(callback);
         }
 
+        public void AddCompletedCallback(Action callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            completedCallbacks.Add(callback);
+        }
+
         public void Reset()
         {
             if (status == TaskStatus.Cancelled || status == TaskStatus.Completed || status == TaskStatus.Failed)
             {
                 status = TaskStatus.Ready;
                 progress = default(TaskProgress);
-                lastError = default(TaskError);
+                error = default(TaskError);
             }
         }
 
@@ -421,26 +405,16 @@ namespace Gnosis.Tasks
 
         public void PreviousItem()
         {
-            if (items.Count == 0 || currentItem == null)
-                return;
+            var previous = GetPreviousItem();
 
-            var index = items.IndexOf(currentItem);
-            if (index == 0)
-                return;
-
-            SelectItem(items[index - 1]);
+            ChangeItem(previous);
         }
 
         public void NextItem()
         {
-            if (items.Count == 0 || currentItem == null)
-                return;
+            var next = GetNextItem();
 
-            var index = items.IndexOf(currentItem);
-            if (index == items.Count - 1)
-                return;
-
-            SelectItem(items[index + 1]);
+            ChangeItem(next);
         }
     }
 

@@ -18,7 +18,6 @@ namespace Gnosis.Alexandria.ViewModels
         TaskStatus Status { get; }
         string StatusName { get; }
         ITaskItem CurrentItem { get; }
-        bool SupportsPlayback { get; }
         int ErrorCount { get; }
         int ProgressCount { get; }
         int ProgressMaximum { get; }

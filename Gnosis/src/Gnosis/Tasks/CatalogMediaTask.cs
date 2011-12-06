@@ -50,7 +50,7 @@ namespace Gnosis.Tasks
 
             errorCount++;
 
-            Error(errorCount, maxErrors, description, exception);
+            UpdateError(errorCount, maxErrors, description, exception);
 
             if (maxErrors > 0 && errorCount > maxErrors)
                 Fail();

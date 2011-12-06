@@ -119,6 +119,7 @@
     <Compile Include="IFeedItem.cs" />
     <Compile Include="IMediaStream.cs" />
     <Compile Include="ISecurityContext.cs" />
+    <Compile Include="ITaskItem.cs" />
     <Compile Include="IUserFolder.cs" />
     <Compile Include="IClip.cs" />
     <Compile Include="IClipRepository.cs" />
@@ -256,7 +257,6 @@
     <Compile Include="ITagFactory.cs" />
     <Compile Include="ITagRepository.cs" />
     <Compile Include="ITask.cs" />
-    <Compile Include="ITaskItem.cs" />
     <Compile Include="IText.cs" />
     <Compile Include="ITextViewer.cs" />
     <Compile Include="ITrack.cs" />
@@ -272,6 +272,7 @@
     <Compile Include="Spiders\PlaylistSpider.cs" />
     <Compile Include="TagDomain.cs" />
     <Compile Include="TaskError.cs" />
+    <Compile Include="TaskItem.cs" />
     <Compile Include="TaskProgress.cs" />
     <Compile Include="IVideo.cs" />
     <Compile Include="Spiders\CatalogSpider.cs" />
@@ -280,6 +281,7 @@
     <Compile Include="ILink.cs" />
     <Compile Include="Tasks\CatalogMediaTask.cs" />
     <Compile Include="Tasks\MediaItemSearchTask.cs" />
+    <Compile Include="Tasks\PlaylistTask.cs" />
     <Compile Include="Tasks\TagSearchTask.cs" />
     <Compile Include="Text\PlainText.cs" />
     <Compile Include="Application\Vendor\GnosisTrack.cs" />
