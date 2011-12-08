@@ -50,6 +50,7 @@ namespace Gnosis.Alexandria.ViewModels
         void AddStartedCallback(Action<ITaskViewModel> callback);
         void AddCancelCallback(Action<ITaskViewModel> callback);
 
+        void AddItemChangedCallback(Action<TaskItem> callback);
         void AddProgressCallback(Action<TaskProgress> callback);
         void AddErrorCallback(Action<TaskError> callback);
     }

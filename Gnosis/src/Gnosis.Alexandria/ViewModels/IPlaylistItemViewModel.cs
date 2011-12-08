@@ -18,9 +18,11 @@ namespace Gnosis.Alexandria.ViewModels
         string CreatorName { get; }
         string CatalogName { get; }
         object Image { get; }
+        object PlaybackIcon { get; }
         Visibility DurationVisibility { get; }
         Visibility SizeVisibility { get; }
 
+        bool IsPlaying { get; set; }
         bool IsSelected { get; set; }
 
         TaskItem ToTaskItem();

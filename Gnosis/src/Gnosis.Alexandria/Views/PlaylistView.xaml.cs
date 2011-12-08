@@ -46,6 +46,7 @@ namespace Gnosis.Alexandria.Views
                 var first = playlist.Items.FirstOrDefault();
                 if (first != null)
                 {
+                    first.IsPlaying = true;
                     first.IsSelected = true;
                 }
             }
@@ -55,15 +56,45 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        public void OnTrackStart(TaskItem item)
+        public void OnItemStarted(ITaskViewModel task)
         {
-            //var track = playlist.Items.
+            var existing = playlist.Items.Where(x => x.IsPlaying).FirstOrDefault();
+            if (existing != null)
+            {
+                existing.IsPlaying = false;
+            }
+
+            var playing = playlist.Items.Where(x => x.Id == task.CurrentItem.Id).FirstOrDefault();
+            if (playing != null)
+            {
+                playing.IsPlaying = true;
+            }
         }
 
-        public void HandlePlaylistResult(TaskItem item)
+        public void OnItemChanged(TaskItem item)
+        {
+            var existing = playlist.Items.Where(x => x.IsPlaying).FirstOrDefault();
+            if (existing != null)
+            {
+                existing.IsPlaying = false;
+            }
+
+            var playing = playlist.Items.Where(x => x.Id == item.Id).FirstOrDefault();
+            if (playing != null)
+            {
+                playing.IsPlaying = true;
+            }
+        }
+
+        public void OnItemEnded(TaskItem item)
         {
             try
             {
+                var playing = playlist.Items.Where(x => x.Id == item.Id).FirstOrDefault();
+                if (playing != null)
+                {
+                    playing.IsPlaying = false;
+                }
             }
             catch (Exception ex)
             {

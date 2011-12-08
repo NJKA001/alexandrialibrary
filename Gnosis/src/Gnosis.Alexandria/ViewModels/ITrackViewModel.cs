@@ -22,6 +22,9 @@ namespace Gnosis.Alexandria.ViewModels
         Uri Target { get; }
         IMediaType TargetType { get; }
         object Image { get; }
+        object PlaybackIcon { get; }
+
+        bool IsPlaying { get; set; }
 
         IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext);
     }

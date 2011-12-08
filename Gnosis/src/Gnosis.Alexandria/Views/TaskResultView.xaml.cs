@@ -166,7 +166,9 @@ namespace Gnosis.Alexandria.Views
                     var playlistView = new PlaylistView();
                     playlistView.Initialize(logger, playlist);
 
-                    taskViewModel.AddResultsCallback(result => playlistView.HandlePlaylistResult(result));
+                    taskViewModel.AddStartedCallback(task => playlistView.OnItemStarted(task));
+                    taskViewModel.AddResultsCallback(item => playlistView.OnItemEnded(item));
+                    taskViewModel.AddItemChangedCallback(item => playlistView.OnItemChanged(item));
 
                     var tabItem = new TabItem();
 

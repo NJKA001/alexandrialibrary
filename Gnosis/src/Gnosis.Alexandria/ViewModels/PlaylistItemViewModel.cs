@@ -18,7 +18,8 @@ namespace Gnosis.Alexandria.ViewModels
         }
 
         private readonly IPlaylistItem item;
-        private readonly Uri id = Guid.NewGuid().ToUrn();
+
+        private bool isPlaying;
         private bool isSelected;
 
         private void OnPropertyChanged(string propertyName)
@@ -29,7 +30,7 @@ namespace Gnosis.Alexandria.ViewModels
 
         public Uri Id
         {
-            get { return id; }
+            get { return item.Location; }
         }
 
         public uint Number
@@ -87,6 +88,33 @@ namespace Gnosis.Alexandria.ViewModels
             get { return Height > 0 && Width > 0 ? Visibility.Visible : Visibility.Collapsed; }
         }
 
+        public object PlaybackIcon
+        {
+            get
+            {
+                if (isPlaying)
+                    return "pack://application:,,,/Images/play-simple.png";
+
+                var type = item.TargetType.ToString();
+
+                if (type == MediaType.AudioMpeg.ToString())
+                    return "pack://application:,,,/Images/File Audio MP3-01.png";
+
+                return "pack://application:,,,/Images/File Audio-01.png";
+            }
+        }
+
+        public bool IsPlaying
+        {
+            get { return isPlaying; }
+            set
+            {
+                isPlaying = value;
+                OnPropertyChanged("IsPlaying");
+                OnPropertyChanged("PlaybackIcon");
+            }
+        }
+
         public bool IsSelected
         {
             get { return isSelected; }
@@ -101,7 +129,7 @@ namespace Gnosis.Alexandria.ViewModels
 
         public TaskItem ToTaskItem()
         {
-            return new TaskItem(Guid.NewGuid().ToUrn(), item.Number, item.Name, item.Duration, item.Target, item.TargetType, true, true, Image);
+            return new TaskItem(item.Location, item.Number, item.Name, item.Duration, item.Target, item.TargetType, true, true, Image);
         }
     }
 }

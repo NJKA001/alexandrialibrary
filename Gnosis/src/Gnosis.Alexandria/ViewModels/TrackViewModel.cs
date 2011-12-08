@@ -61,6 +61,7 @@ namespace Gnosis.Alexandria.ViewModels
         private readonly byte[] thumbnailData;
         private readonly string bio;
 
+        private bool isPlaying;
         private bool isSelected;
 
         private void OnPropertyChanged(string propertyName)
@@ -129,14 +130,41 @@ namespace Gnosis.Alexandria.ViewModels
             get { return targetType; }
         }
 
+        public string Bio
+        {
+            get { return bio; }
+        }
+
         public object Image
         {
             get { return thumbnailData != null && thumbnailData.Length > 0 ? (object)thumbnailData : thumbnail; }
         }
 
-        public string Bio
+        public object PlaybackIcon
         {
-            get { return bio; }
+            get
+            {
+                if (isPlaying)
+                    return "pack://application:,,,/Images/play-simple.png";
+
+                var type = targetType.ToString();
+
+                if (type == MediaType.AudioMpeg.ToString())
+                    return "pack://application:,,,/Images/File Audio MP3-01.png";
+
+                return "pack://application:,,,/Images/File Audio-01.png";
+            }
+        }
+
+        public bool IsPlaying
+        {
+            get { return isPlaying; }
+            set
+            {
+                isPlaying = value;
+                OnPropertyChanged("IsPlaying");
+                OnPropertyChanged("PlaybackIcon");
+            }
         }
 
         public bool IsSelected

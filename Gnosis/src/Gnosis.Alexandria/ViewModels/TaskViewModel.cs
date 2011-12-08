@@ -486,6 +486,14 @@ namespace Gnosis.Alexandria.ViewModels
             cancelCallbacks.Add(callback);
         }
 
+        public void AddItemChangedCallback(Action<TaskItem> callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            task.AddItemChangedCallback(callback);
+        }
+
         public void AddProgressCallback(Action<TaskProgress> callback)
         {
             if (callback == null)
