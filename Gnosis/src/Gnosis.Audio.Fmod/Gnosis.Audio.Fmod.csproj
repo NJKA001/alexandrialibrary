@@ -106,7 +106,6 @@
     <Compile Include="Enums.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="Geometry.cs" />
-    <Compile Include="IAudioPlayer.cs" />
     <Compile Include="ICodec.cs" />
     <Compile Include="IHasDefault.cs" />
     <Compile Include="IHasRange.cs" />

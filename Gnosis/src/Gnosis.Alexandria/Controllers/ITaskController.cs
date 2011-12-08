@@ -16,6 +16,7 @@ namespace Gnosis.Alexandria.Controllers
         void RemoveTaskViewModel(ITaskViewModel taskViewModel);
 
         CatalogMediaTaskViewModel GetCatalogViewModel(string path);
+        PlaylistTaskViewModel GetPlaylistViewModel(IPlaylistViewModel playlistViewModel);
         SearchTaskViewModel GetSearchViewModel(string search);
     }
 }

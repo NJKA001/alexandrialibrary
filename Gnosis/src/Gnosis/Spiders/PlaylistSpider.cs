@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Audio;
+
 namespace Gnosis.Spiders
 {
     public class PlaylistSpider
@@ -76,7 +78,7 @@ namespace Gnosis.Spiders
                     applicationRunner.Load(media as IApplication);
                     break;
                 case MediaType.TypeAudio:
-                    audioPlayer.Load(media as IAudio);
+                    //audioPlayer.Load(media as IAudio);
                     break;
                 case MediaType.TypeImage:
                     imageViewer.Load(media as IImage);

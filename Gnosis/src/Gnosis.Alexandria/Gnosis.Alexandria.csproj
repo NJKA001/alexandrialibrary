@@ -88,6 +88,7 @@
     <Compile Include="ViewModels\ITaskResultViewModel.cs" />
     <Compile Include="ViewModels\ITrackViewModel.cs" />
     <Compile Include="ViewModels\PlaylistItemViewModel.cs" />
+    <Compile Include="ViewModels\PlaylistTaskViewModel.cs" />
     <Compile Include="ViewModels\PlaylistViewModel.cs" />
     <Compile Include="ViewModels\SearchTaskViewModel.cs" />
     <Compile Include="ViewModels\TaskErrorDetailViewModel.cs" />

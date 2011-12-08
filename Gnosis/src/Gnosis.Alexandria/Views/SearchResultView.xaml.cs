@@ -34,6 +34,7 @@ namespace Gnosis.Alexandria.Views
         }
 
         private ILogger logger;
+        private ISecurityContext securityContext;
         private IMediaItemController mediaItemController;
         private ITaskController taskController;
         private TaskResultView taskResultView;
@@ -70,8 +71,8 @@ namespace Gnosis.Alexandria.Views
         {
             try
             {
-                var item = sender as ListBoxItem;
-                if (item == null)
+                var listBoxItem = sender as ListBoxItem;
+                if (listBoxItem == null)
                     return;
 
                 //var albumListBox = item.FindName("albumListBox");
@@ -80,7 +81,7 @@ namespace Gnosis.Alexandria.Views
                 //    var selected = albumListBox;
                 //}
 
-                var result = item.DataContext as ISearchResultViewModel;
+                var result = listBoxItem.DataContext as ISearchResultViewModel;
                 if (result == null)
                     return;
                 
@@ -88,7 +89,16 @@ namespace Gnosis.Alexandria.Views
                 if (album == null)
                     return;
 
-                //TODO: Get tracks for this album, create a new playlist and start playing it                
+                if (album.Tracks.Count() == 0)
+                {
+                    var tracks = mediaItemController.GetTracks(album.Album);
+                    album.Initialize(tracks);
+                }
+
+                var playlist = album.ToPlaylist(securityContext);
+
+                var taskViewModel = taskController.GetPlaylistViewModel(playlist);
+                taskResultView.Playlist(taskViewModel, playlist);
             }
             catch (Exception ex)
             {
@@ -234,7 +244,7 @@ namespace Gnosis.Alexandria.Views
                 }
                 else if (result is ITrack)
                 {
-                    var trackViewModel = new TrackViewModel(result.Location, result.Name, result.Number, result.Duration, result.FromDate, result.Creator, result.CreatorName, result.Catalog, result.CatalogName, result.Thumbnail, result.ThumbnailData, string.Empty);
+                    var trackViewModel = new TrackViewModel(result.Location, result.Name, result.Number, result.Duration, result.FromDate, result.Creator, result.CreatorName, result.Catalog, result.CatalogName, result.Target, result.TargetType, result.Thumbnail, result.ThumbnailData, string.Empty);
 
                     var albumKey = result.Catalog.ToString();
                     if (!albumResults.ContainsKey(albumKey))
@@ -287,10 +297,12 @@ namespace Gnosis.Alexandria.Views
             get { return results; }
         }
 
-        public void Initialize(ILogger logger, IMediaItemController mediaItemController, ITaskController taskController, TaskResultView taskResultView)
+        public void Initialize(ILogger logger, ISecurityContext securityContext, IMediaItemController mediaItemController, ITaskController taskController, TaskResultView taskResultView)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
+            if (securityContext == null)
+                throw new ArgumentNullException("securityContext");
             if (mediaItemController == null)
                 throw new ArgumentNullException("mediaItemController");
             if (taskController == null)
@@ -299,6 +311,7 @@ namespace Gnosis.Alexandria.Views
                 throw new ArgumentNullException("taskResultView");
 
             this.logger = logger;
+            this.securityContext = securityContext;
             this.mediaItemController = mediaItemController;
             this.taskController = taskController;
             this.taskResultView = taskResultView;

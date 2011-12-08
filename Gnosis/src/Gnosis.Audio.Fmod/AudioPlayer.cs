@@ -226,7 +226,7 @@ namespace Gnosis.Audio.Fmod
 			seekIsPending = false;
 		}
 
-		public void LoadAudioStream(IAudioStream audioStream)
+		public void Load(IAudioStream audioStream)
 		{
 			if (currentAudioStream != null)
 			{
@@ -252,12 +252,12 @@ namespace Gnosis.Audio.Fmod
 			}
 		}
 
-		public void LoadAudioStream(Uri path)
+		public void Load(Uri path)
 		{
 			if (path != null && audioStreamFactory != null)
 			{
 				IAudioStream audioStream = audioStreamFactory.CreateAudioStream(path);
-				LoadAudioStream(audioStream);
+				Load(audioStream);
 			}
 		}
 

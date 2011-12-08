@@ -17,7 +17,8 @@ namespace Gnosis.Alexandria.ViewModels
         object Icon { get; }
         TaskStatus Status { get; }
         string StatusName { get; }
-        ITaskItem CurrentItem { get; }
+        TaskItem CurrentItem { get; }
+        string CurrentItemName { get; }
         int ErrorCount { get; }
         int ProgressCount { get; }
         int ProgressMaximum { get; }
@@ -42,6 +43,9 @@ namespace Gnosis.Alexandria.ViewModels
         void Cancel();
         void Previous();
         void Next();
+
+        void BeginProgressUpdate();
+        void UpdateProgress(int value);
 
         void AddStartedCallback(Action<ITaskViewModel> callback);
         void AddCancelCallback(Action<ITaskViewModel> callback);

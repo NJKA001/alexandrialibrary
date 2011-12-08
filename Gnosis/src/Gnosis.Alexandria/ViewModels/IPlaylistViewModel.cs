@@ -17,7 +17,16 @@ namespace Gnosis.Alexandria.ViewModels
         object Image { get; }
 
         IEnumerable<IPlaylistItemViewModel> Items { get; }
+        IPlaylistItemViewModel CurrentItem { get; }
 
         void AddItem(IPlaylistItemViewModel item);
+        void InsertItem(int index, IPlaylistItemViewModel item);
+        void RemoveItem(IPlaylistItemViewModel item);
+        void PreviousItem();
+        void NextItem();
+
+        TaskItem GetPreviousTaskItem();
+        TaskItem GetCurrentTaskItem();
+        TaskItem GetNextTaskItem();
     }
 }

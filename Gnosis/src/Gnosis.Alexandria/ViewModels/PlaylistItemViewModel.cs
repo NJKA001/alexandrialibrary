@@ -18,6 +18,7 @@ namespace Gnosis.Alexandria.ViewModels
         }
 
         private readonly IPlaylistItem item;
+        private readonly Uri id = Guid.NewGuid().ToUrn();
         private bool isSelected;
 
         private void OnPropertyChanged(string propertyName)
@@ -28,7 +29,7 @@ namespace Gnosis.Alexandria.ViewModels
 
         public Uri Id
         {
-            get { return item.Location; }
+            get { return id; }
         }
 
         public uint Number
@@ -36,7 +37,7 @@ namespace Gnosis.Alexandria.ViewModels
             get { return item.Number; }
         }
 
-        public string Title
+        public string Name
         {
             get { return item.Name; }
         }
@@ -54,6 +55,16 @@ namespace Gnosis.Alexandria.ViewModels
         public uint Width
         {
             get { return item.Width; }
+        }
+
+        public string CreatorName
+        {
+            get { return item.CreatorName; }
+        }
+
+        public string CatalogName
+        {
+            get { return item.CatalogName; }
         }
 
         public object Image
@@ -87,5 +98,10 @@ namespace Gnosis.Alexandria.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public TaskItem ToTaskItem()
+        {
+            return new TaskItem(Guid.NewGuid().ToUrn(), item.Number, item.Name, item.Duration, item.Target, item.TargetType, true, true, Image);
+        }
     }
 }

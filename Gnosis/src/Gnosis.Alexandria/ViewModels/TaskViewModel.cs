@@ -35,6 +35,7 @@ namespace Gnosis.Alexandria.ViewModels
             task.AddFailedCallback(() => OnFailed());
             task.AddPausedCallback(() => OnPaused());
             task.AddProgressCallback(progress => OnProgressChanged(progress));
+            task.AddItemChangedCallback(item => OnItemChanged(item));
             task.AddResumedCallback(() => OnResumed());
             task.AddStartedCallback(() => OnStarted());
         }
@@ -52,7 +53,6 @@ namespace Gnosis.Alexandria.ViewModels
         private int progressCount = 0;
         private int progressMaximum = 100;
         private int errorCount;
-        private ITaskItem item;
 
         private bool isSelected;
         private bool isCancelled;
@@ -109,17 +109,23 @@ namespace Gnosis.Alexandria.ViewModels
             }
         }
 
-        private void OnItemChanged(ITaskItem item)
+        private void OnItemChanged(TaskItem item)
         {
             try
             {
-                this.item = item;
-                
                 if (item.Image != null)
                 {
                     Icon = item.Image;
                 }
+                OnPropertyChanged("CurrentItem");
+                OnPropertyChanged("CurrentItemName");
                 OnPropertyChanged("ElapsedVisibility");
+                OnPropertyChanged("ProgressVisibility");
+                OnPropertyChanged("PreviousVisibility");
+                OnPropertyChanged("NextVisibility");
+                OnPropertyChanged("PlayVisibility");
+                OnPropertyChanged("PauseVisibility");
+                OnPropertyChanged("StopVisibility");
             }
             catch (Exception ex)
             {
@@ -254,9 +260,14 @@ namespace Gnosis.Alexandria.ViewModels
             get { return task.Status.ToString(); }
         }
 
-        public ITaskItem CurrentItem
+        public TaskItem CurrentItem
         {
             get { return task.Item; }
+        }
+
+        public string CurrentItemName
+        {
+            get { return task.Item.Name; }
         }
 
         public int ErrorCount
@@ -299,7 +310,12 @@ namespace Gnosis.Alexandria.ViewModels
 
         public Visibility ProgressVisibility
         {
-            get { return item != null && item.Duration > TimeSpan.Zero ? Visibility.Collapsed : Visibility.Visible; }
+            get
+            {
+                return task.Item.Duration > TimeSpan.Zero ?
+                    Visibility.Collapsed 
+                    : Visibility.Visible;
+            }
         }
 
         public Visibility RunningVisibility
@@ -316,7 +332,7 @@ namespace Gnosis.Alexandria.ViewModels
         {
             get
             {
-                return item != null && item.Duration > TimeSpan.Zero ?
+                return task.Item.Duration > TimeSpan.Zero ?
                     Visibility.Visible
                     : Visibility.Collapsed;
             }
@@ -356,7 +372,7 @@ namespace Gnosis.Alexandria.ViewModels
         {
             get
             {
-                return item != null ?
+                return task.Item.HasPrevious ?
                     Visibility.Visible
                     : Visibility.Collapsed;
             }
@@ -366,7 +382,7 @@ namespace Gnosis.Alexandria.ViewModels
         {
             get
             {
-                return item != null ?
+                return task.Item.HasNext ?
                     Visibility.Visible
                     : Visibility.Collapsed;
             }
@@ -444,6 +460,16 @@ namespace Gnosis.Alexandria.ViewModels
             task.NextItem();
         }
 
+        public void BeginProgressUpdate()
+        {
+            task.BeginProgressUpdate();
+        }
+
+        public void UpdateProgress(int value)
+        {
+            task.UpdateProgress(value);
+        }
+
         public void AddStartedCallback(Action<ITaskViewModel> callback)
         {
             if (callback == null)
@@ -483,11 +509,10 @@ namespace Gnosis.Alexandria.ViewModels
         protected TaskViewModel(ILogger logger, ITask<T> task, string name, string description, object icon)
             : base(logger, task, name, description, icon)
         {
+            resultTask = task;
         }
 
         protected readonly ITask<T> resultTask;
-
-        #region ITaskViewModel<T> Members
 
         public void AddResultsCallback(Action<T> callback)
         {
@@ -496,8 +521,6 @@ namespace Gnosis.Alexandria.ViewModels
 
             resultTask.AddResultsCallback(callback);
         }
-
-        #endregion
     }
 
 }

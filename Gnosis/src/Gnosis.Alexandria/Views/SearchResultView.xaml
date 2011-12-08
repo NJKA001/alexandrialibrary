@@ -32,8 +32,8 @@
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="160"/>
-                            <ColumnDefinition Width="278"/> <!--328 -->
-                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="278*"/>
+                            <ColumnDefinition Width="32"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel x:Name="itemNamePanel" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Orientation="Vertical" AllowDrop="True" Drop="itemNamePanel_Drop">
                             <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontSize="16" FontWeight="Bold" Margin="8 4 4 0" />
@@ -53,7 +53,7 @@
                                 <TextBlock Text="{Binding Years}" FontSize="10" Margin="12 8 8 8" />
                             </StackPanel>
                         </StackPanel>
-                        <local:HoveringCloseIcon x:Name="itemCloseIcon" Grid.Row="0" Grid.Column="2" IsClosed="{Binding IsClosed, Mode=TwoWay}"/>
+                        <local:HoveringCloseIcon x:Name="itemCloseIcon" Grid.Row="0" Grid.Column="2" IsClosed="{Binding IsClosed, Mode=TwoWay}" HorizontalAlignment="Left" Margin="0 0 16 0"/>
                         <TabControl x:Name="tabControl" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Margin="4 4 0 8" Background="LightBlue" ItemContainerStyle="{StaticResource tabItemStyle}">
                             <TabItem x:Name="albumTab" Visibility="{Binding AlbumsVisibility}" Style="{StaticResource tabItemStyle}">
                                 <TabItem.Header>

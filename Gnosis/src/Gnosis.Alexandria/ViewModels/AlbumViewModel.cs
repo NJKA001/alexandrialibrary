@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Application.Vendor;
+
 namespace Gnosis.Alexandria.ViewModels
 {
     public class AlbumViewModel
@@ -99,6 +101,23 @@ namespace Gnosis.Alexandria.ViewModels
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void Initialize(IEnumerable<ITrack> tracks)
+        {
+            if (tracks == null)
+                throw new ArgumentNullException("tracks");
+
+            if (this.tracks.Count > 0)
+                return;
+
+            foreach (var track in tracks)
+            {
+                var trackViewModel = new TrackViewModel(track.Location, track.Name, track.Number, track.Duration, track.FromDate, track.Creator, track.CreatorName, track.Catalog, track.CatalogName, track.Target, track.TargetType, track.Thumbnail, track.ThumbnailData, string.Empty);
+                this.tracks.Add(trackViewModel);
+            }
+        }
+
         public void AddTrack(ITrackViewModel track)
         {
             if (track == null)
@@ -121,6 +140,20 @@ namespace Gnosis.Alexandria.ViewModels
             return string.Format("Album: {0}. IsSelected={1}", Title, IsSelected);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext)
+        {
+            if (securityContext == null)
+                throw new ArgumentNullException("securityContext");
+
+            var playlist = new GnosisPlaylist(title, DateTime.Now, 0, TimeSpan.Zero, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, thumbnailData);
+            var items = new List<IPlaylistItemViewModel>();
+            foreach (var track in tracks)
+            {
+                var item = track.ToPlaylistItem(securityContext);
+                items.Add(item);
+            }
+
+            return new PlaylistViewModel(playlist, items);
+        }
     }
 }

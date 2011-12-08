@@ -106,5 +106,10 @@ namespace Gnosis.Alexandria.Controllers
                 throw;
             }
         }
+
+        public IEnumerable<ITrack> GetTracks(Uri album)
+        {
+            return trackRepository.GetByCatalog(album);
+        }
     }
 }

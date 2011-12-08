@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Gnosis.Alexandria.ViewModels;
+
 namespace Gnosis.Alexandria.Views
 {
     /// <summary>
@@ -22,6 +24,51 @@ namespace Gnosis.Alexandria.Views
         public PlaylistView()
         {
             InitializeComponent();
+        }
+
+        private ILogger logger;
+        private IPlaylistViewModel playlist;
+
+        public void Initialize(ILogger logger, IPlaylistViewModel playlist)
+        {
+            if (logger == null)
+                throw new ArgumentNullException("logger");
+            if (playlist == null)
+                throw new ArgumentNullException("playlist");
+
+            this.logger = logger;
+
+            try
+            {
+                this.playlist = playlist;
+                this.DataContext = playlist;
+
+                var first = playlist.Items.FirstOrDefault();
+                if (first != null)
+                {
+                    first.IsSelected = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("PlaylistView.Initialize", ex);
+            }
+        }
+
+        public void OnTrackStart(TaskItem item)
+        {
+            //var track = playlist.Items.
+        }
+
+        public void HandlePlaylistResult(TaskItem item)
+        {
+            try
+            {
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  PlaylistView.HandlePlaylistResult", ex);
+            }
         }
     }
 }

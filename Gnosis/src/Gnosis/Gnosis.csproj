@@ -111,6 +111,7 @@
     <Compile Include="Application\Vendor\GnosisArtist.cs" />
     <Compile Include="Audio\AudioBase.cs" />
     <Compile Include="Audio\AudioStateChangedEventArgs.cs" />
+    <Compile Include="Audio\IAudioPlayer.cs" />
     <Compile Include="Audio\IAudioStream.cs" />
     <Compile Include="Audio\IAudioStreamFactory.cs" />
     <Compile Include="BufferState.cs" />
@@ -119,7 +120,6 @@
     <Compile Include="IFeedItem.cs" />
     <Compile Include="IMediaStream.cs" />
     <Compile Include="ISecurityContext.cs" />
-    <Compile Include="ITaskItem.cs" />
     <Compile Include="IUserFolder.cs" />
     <Compile Include="IClip.cs" />
     <Compile Include="IClipRepository.cs" />
@@ -133,7 +133,6 @@
     <Compile Include="IAudio.cs" />
     <Compile Include="Audio\IMpegAudio.cs" />
     <Compile Include="Audio\MpegAudio.cs" />
-    <Compile Include="IAudioPlayer.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="Application\Xml\IXmlDocument.cs" />
     <Compile Include="Application\Xml\Xhtml\AnchorDirection.cs" />

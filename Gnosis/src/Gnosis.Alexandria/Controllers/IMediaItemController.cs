@@ -10,5 +10,7 @@ namespace Gnosis.Alexandria.Controllers
         void SetArtistThumbnail(Uri artist, Uri thumbnail, byte[] thumbnailData);
         void SetAlbumThumbnail(Uri album, Uri thumbnail, byte[] thumbnailData);
         void SetTrackThumbnail(Uri track, Uri thumbnail, byte[] thumbnailData);
+
+        IEnumerable<ITrack> GetTracks(Uri album);
     }
 }

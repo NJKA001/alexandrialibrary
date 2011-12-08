@@ -28,7 +28,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Gnosis.Audio.Fmod
+namespace Gnosis.Audio
 {
 	public interface IAudioPlayer : IDisposable
 	{
@@ -50,8 +50,8 @@ namespace Gnosis.Audio.Fmod
 		EventHandler<AudioStateChangedEventArgs> VolumeChanged { get; set; }
 		void BeginSeek();
 		void CancelSeek();
-		void LoadAudioStream(Uri path);
-		void LoadAudioStream(IAudioStream audioStream);
+		void Load(Uri path);
+		void Load(IAudioStream audioStream);
 		void Mute();
 		void Pause();
 		void Play();

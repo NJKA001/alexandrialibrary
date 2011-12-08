@@ -28,20 +28,24 @@ namespace Gnosis.Alexandria.Views
         }
 
         private ILogger logger;
+        private ISecurityContext securityContext;
         private ITaskController taskController;
         private IMediaItemController mediaItemController;
         private readonly IDictionary<Guid, ITaskResultViewModel> tabMap = new Dictionary<Guid, ITaskResultViewModel>();
 
-        public void Initialize(ILogger logger, ITaskController taskController, IMediaItemController mediaItemController)
+        public void Initialize(ILogger logger, ISecurityContext securityContext, ITaskController taskController, IMediaItemController mediaItemController)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
+            if (securityContext == null)
+                throw new ArgumentNullException("securityContext");
             if (taskController == null)
                 throw new ArgumentNullException("taskController");
             if (mediaItemController == null)
                 throw new ArgumentNullException("mediaItemController");
 
             this.logger = logger;
+            this.securityContext = securityContext;
             this.taskController = taskController;
             this.mediaItemController = mediaItemController;
         }
@@ -148,36 +152,77 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        public void Search(SearchTaskViewModel searchViewModel)
+        public void Playlist(PlaylistTaskViewModel taskViewModel, IPlaylistViewModel playlist)
         {
-            if (searchViewModel == null)
-                throw new ArgumentNullException("searchViewModel");
+            if (taskViewModel == null)
+                throw new ArgumentNullException("taskViewModel");
+            if (playlist == null)
+                throw new ArgumentNullException("playlist");
 
             try
             {
-                if (!tabMap.ContainsKey(searchViewModel.Id))
+                if (!tabMap.ContainsKey(taskViewModel.Id))
                 {
-                    var searchResultView = new SearchResultView();
-                    searchResultView.Initialize(logger, mediaItemController, taskController, this);
+                    var playlistView = new PlaylistView();
+                    playlistView.Initialize(logger, playlist);
 
-                    searchViewModel.AddResultsCallback(result => searchResultView.HandleSearchResult(result));
+                    taskViewModel.AddResultsCallback(result => playlistView.HandlePlaylistResult(result));
 
                     var tabItem = new TabItem();
 
                     TextBlock header = new TextBlock();
-                    header.Inlines.Add(searchViewModel.Description);
-                    header.ToolTip = string.Format("{0}: {1}", searchViewModel.Name, searchViewModel.Description);
+                    header.Inlines.Add(taskViewModel.Description);
+                    header.ToolTip = string.Format("{0}: {1}", taskViewModel.Name, taskViewModel.Description);
+                    tabItem.Header = header;
+
+                    tabItem.Content = playlistView;
+                    resultControl.Items.Add(tabItem);
+                    tabItem.IsSelected = true;
+
+                    AddViewModel(taskViewModel, tabItem);
+
+                    if (taskViewModel.Status == TaskStatus.Ready)
+                    {
+                        taskViewModel.Start();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  TaskResultView.Playlist", ex);
+            }
+        }
+
+        public void Search(SearchTaskViewModel taskViewModel)
+        {
+            if (taskViewModel == null)
+                throw new ArgumentNullException("searchViewModel");
+
+            try
+            {
+                if (!tabMap.ContainsKey(taskViewModel.Id))
+                {
+                    var searchResultView = new SearchResultView();
+                    searchResultView.Initialize(logger, securityContext, mediaItemController, taskController, this);
+
+                    taskViewModel.AddResultsCallback(result => searchResultView.HandleSearchResult(result));
+
+                    var tabItem = new TabItem();
+
+                    TextBlock header = new TextBlock();
+                    header.Inlines.Add(taskViewModel.Description);
+                    header.ToolTip = string.Format("{0}: {1}", taskViewModel.Name, taskViewModel.Description);
                     tabItem.Header = header;
                     
                     tabItem.Content = searchResultView;
                     resultControl.Items.Add(tabItem);
                     tabItem.IsSelected = true;
 
-                    AddViewModel(searchViewModel, tabItem);
+                    AddViewModel(taskViewModel, tabItem);
 
-                    if (searchViewModel.Status == TaskStatus.Ready)
+                    if (taskViewModel.Status == TaskStatus.Ready)
                     {
-                        searchViewModel.Start();
+                        taskViewModel.Start();
                     }
                 }
             }

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Alexandria.ViewModels;
+using Gnosis.Audio;
+using Gnosis.Audio.Fmod;
 using Gnosis.Tasks;
 
 namespace Gnosis.Alexandria.Controllers
@@ -33,6 +35,7 @@ namespace Gnosis.Alexandria.Controllers
             this.artistRepository = artistRepository;
             this.albumRepository = albumRepository;
             this.trackRepository = trackRepository;
+            this.audioStreamFactory = new AudioStreamFactory();
         }
 
         private readonly ILogger logger;
@@ -42,6 +45,7 @@ namespace Gnosis.Alexandria.Controllers
         private readonly IMediaItemRepository<IAlbum> albumRepository;
         private readonly IMediaItemRepository<ITrack> trackRepository;
         private readonly ObservableCollection<ITaskViewModel> taskViewModels = new ObservableCollection<ITaskViewModel>();
+        private readonly IAudioStreamFactory audioStreamFactory;
 
         public IEnumerable<ITaskViewModel> Tasks
         {
@@ -59,6 +63,18 @@ namespace Gnosis.Alexandria.Controllers
 
             var task = new CatalogMediaTask(logger, spiderFactory.CreateCatalogSpider(), target, TimeSpan.Zero, 0);
             return new CatalogMediaTaskViewModel(logger, task);
+        }
+
+        public PlaylistTaskViewModel GetPlaylistViewModel(IPlaylistViewModel playlist)
+        {
+            if (playlist == null)
+                throw new ArgumentNullException("playlist");
+
+            var audioPlayer = new AudioPlayer(audioStreamFactory);
+            var first = playlist.GetCurrentTaskItem();
+            var task = new PlaylistTask(logger, audioPlayer, first, TimeSpan.Zero, () => playlist.GetPreviousTaskItem(), () => playlist.GetNextTaskItem());
+            
+            return new PlaylistTaskViewModel(logger, task, playlist.Name, first.Image);
         }
 
         public SearchTaskViewModel GetSearchViewModel(string search)

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -201,14 +202,54 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        private void elapsedSlider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        private void elapsedSlider_DragStarted(object sender, DragStartedEventArgs e)
         {
+            try
+            {
+                var element = sender as UIElement;
+                if (element == null)
+                    return;
 
+                var item = element.FindContainingItem<ListBoxItem>();
+                if (item == null)
+                    return;
+
+                var viewModel = item.DataContext as ITaskViewModel;
+                if (viewModel == null)
+                    return;
+
+                viewModel.BeginProgressUpdate();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  TaskManagerView.elapsedSlider_DragStarted", ex);
+            }
         }
 
-        private void elapsedSlider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        private void elapsedSlider_DragCompleted(object sender, DragCompletedEventArgs e)
         {
+            try
+            {
+                var slider = sender as Slider;
+                if (slider == null)
+                    return;
 
+                var item = slider.FindContainingItem<ListBoxItem>();
+                if (item == null)
+                    return;
+
+                var viewModel = item.DataContext as ITaskViewModel;
+                if (viewModel == null)
+                    return;
+
+                var value = (int)Math.Ceiling(slider.Value);
+
+                viewModel.UpdateProgress(value);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  TaskManagerView.elapsedSlider_DragCompleted", ex);
+            }
         }
 
         private void AddDefaultMusicCatalogTask()

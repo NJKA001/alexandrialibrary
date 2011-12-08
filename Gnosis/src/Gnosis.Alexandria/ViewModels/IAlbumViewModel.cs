@@ -17,7 +17,10 @@ namespace Gnosis.Alexandria.ViewModels
         object Image { get; }
         IEnumerable<ITrackViewModel> Tracks { get; }
 
+        void Initialize(IEnumerable<ITrack> tracks);
         void AddTrack(ITrackViewModel track);
         void RemoveTrack(ITrackViewModel track);
+
+        IPlaylistViewModel ToPlaylist(ISecurityContext securityContext);
     }
 }

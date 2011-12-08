@@ -11,14 +11,18 @@ namespace Gnosis.Alexandria.ViewModels
     {
         Uri Id { get; }
         uint Number { get; }
-        string Title { get; }
+        string Name { get; }
         string Duration { get; }
         uint Height { get; }
         uint Width { get; }
+        string CreatorName { get; }
+        string CatalogName { get; }
         object Image { get; }
         Visibility DurationVisibility { get; }
         Visibility SizeVisibility { get; }
 
         bool IsSelected { get; set; }
+
+        TaskItem ToTaskItem();
     }
 }

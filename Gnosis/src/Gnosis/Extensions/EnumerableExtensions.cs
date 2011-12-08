@@ -9,6 +9,9 @@ namespace Gnosis
     {
         public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> self, Func<TSource, TKey> getKey)
         {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
             var keys = new HashSet<TKey>();
             foreach (var item in self)
                 if (keys.Add(getKey(item)))

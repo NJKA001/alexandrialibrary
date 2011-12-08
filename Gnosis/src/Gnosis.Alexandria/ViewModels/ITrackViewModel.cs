@@ -10,14 +10,19 @@ namespace Gnosis.Alexandria.ViewModels
     {
         Uri Track { get; }
         string Title { get; }
-        string Number { get; }
-        string Duration { get; }
+        uint Number { get; }
+        TimeSpan Duration { get; }
+        string DurationString { get; }
         string Year { get; }
         Uri Artist { get; }
         string ArtistName { get; }
         Uri Album { get; }
         string AlbumTitle { get; }
         string Bio { get; }
+        Uri Target { get; }
+        IMediaType TargetType { get; }
         object Image { get; }
+
+        IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext);
     }
 }
