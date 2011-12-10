@@ -18,19 +18,9 @@ namespace Gnosis.Application.Vendor
 
         private readonly Uri location;
 
-        #region IApplication Members
-
-        public void Load()
-        {
-        }
-
-        #endregion
-
-        #region IMedia Members
-
         public Uri Location
         {
-            get { throw new NotImplementedException(); }
+            get { return location; }
         }
 
         public IMediaType Type
@@ -48,6 +38,8 @@ namespace Gnosis.Application.Vendor
             return Enumerable.Empty<ITag>();
         }
 
-        #endregion
+        public void Load()
+        {
+        }
     }
 }
