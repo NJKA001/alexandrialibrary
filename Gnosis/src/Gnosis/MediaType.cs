@@ -159,6 +159,7 @@ namespace Gnosis
             all.Add(ApplicationGnosisUser);
             all.Add(ApplicationGnosisUserCatalog);
             all.Add(ApplicationGnosisUserFolder);
+            all.Add(ApplicationMicrosoftExecutable);
             all.Add(ApplicationMicrosoftShortcut);
             all.Add(AudioMpeg);
             all.Add(ImageBmp);
@@ -291,6 +292,7 @@ namespace Gnosis
         public static readonly IMediaType ApplicationGnosisUserCatalog = new MediaType(TypeApplication, "vnd.gnosis.user.catalog");
         public static readonly IMediaType ApplicationGnosisUserFolder = new MediaType(TypeApplication, "vnd.gnosis.user.folder");
         
+        public static readonly IMediaType ApplicationMicrosoftExecutable = new MediaType(TypeApplication, "x-winexe", new List<string> { ".exe" }, new List<string> { "x-exe", "x-msdownload", "dos-exe" }, new List<byte[]> { new byte[] { 0x4D, 0x5A } });
         public static readonly IMediaType ApplicationMicrosoftShortcut = new MediaType(TypeApplication, "x-ms-shortcut", new List<string> { ".lnk" }, new List<string>(), new List<byte[]> { new byte[] { 0x4C, 0x00, 0x00, 0x00, 0x01, 0x14, 0x02 } });
 
         public static readonly IMediaType AudioMpeg = new MediaType(TypeAudio, "mpeg", new List<string> { ".mp3", ".mp2", ".mp1" }, new List<string> { "audio/mp3" }, new List<byte[]> { new byte[] { 0x49, 0x44, 0x33 }});

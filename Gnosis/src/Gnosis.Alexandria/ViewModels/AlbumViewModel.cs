@@ -42,6 +42,7 @@ namespace Gnosis.Alexandria.ViewModels
         private readonly Uri thumbnail;
         private readonly byte[] thumbnailData;
         private readonly ObservableCollection<ITrackViewModel> tracks = new ObservableCollection<ITrackViewModel>();
+        private readonly ObservableCollection<IClipViewModel> clips = new ObservableCollection<IClipViewModel>();
 
         private bool isSelected;
 
@@ -91,6 +92,11 @@ namespace Gnosis.Alexandria.ViewModels
             get { return tracks; }
         }
 
+        public IEnumerable<IClipViewModel> Clips
+        {
+            get { return clips; }
+        }
+
         public bool IsSelected
         {
             get { return isSelected; }
@@ -135,6 +141,38 @@ namespace Gnosis.Alexandria.ViewModels
                 tracks.Remove(track);
         }
 
+        public void Initialize(IEnumerable<IClip> clips)
+        {
+            if (clips == null)
+                throw new ArgumentNullException("clips");
+
+            if (this.clips.Count > 0)
+                return;
+
+            foreach (var clip in clips)
+            {
+                var clipViewModel = new ClipViewModel(clip.Location, clip.Name, clip.Number, clip.Duration, clip.Height, clip.Width, clip.FromDate, clip.Creator, clip.CreatorName, clip.Catalog, clip.CatalogName, clip.Target, clip.TargetType, clip.Thumbnail, clip.ThumbnailData, string.Empty);
+                this.clips.Add(clipViewModel);
+            }
+        }
+
+        public void AddClip(IClipViewModel clip)
+        {
+            if (clip == null)
+                throw new ArgumentNullException("clip");
+
+            clips.Add(clip);
+        }
+
+        public void RemoveClip(IClipViewModel clip)
+        {
+            if (clip == null)
+                throw new ArgumentNullException("clip");
+
+            if (clips.Contains(clip))
+                clips.Remove(clip);
+        }
+
         public override string ToString()
         {
             return string.Format("Album: {0}. IsSelected={1}", Title, IsSelected);
@@ -150,6 +188,11 @@ namespace Gnosis.Alexandria.ViewModels
             foreach (var track in tracks)
             {
                 var item = track.ToPlaylistItem(securityContext);
+                items.Add(item);
+            }
+            foreach (var clip in clips)
+            {
+                var item = clip.ToPlaylistItem(securityContext);
                 items.Add(item);
             }
 

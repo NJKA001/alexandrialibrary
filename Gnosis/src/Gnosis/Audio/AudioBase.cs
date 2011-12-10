@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Audio
 {
     public abstract class AudioBase
-        : IMedia
+        : IAudio
     {
         protected AudioBase(Uri location, IMediaType type)
         {
@@ -39,6 +39,21 @@ namespace Gnosis.Audio
         public virtual IEnumerable<ITag> GetTags()
         {
             return Enumerable.Empty<ITag>();
+        }
+
+        public virtual IArtist GetArtist(ISecurityContext securityContext, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IArtist> artistRepository)
+        {
+            return null;
+        }
+
+        public virtual IAlbum GetAlbum(ISecurityContext securityContext, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IAlbum> albumRepository, IArtist artist)
+        {
+            return null;
+        }
+
+        public virtual ITrack GetTrack(ISecurityContext securityContext, IMediaItemRepository<ITrack> trackRepository, IAudioStreamFactory audioStreamFactory, IArtist artist, IAlbum album)
+        {
+            return null;
         }
     }
 }

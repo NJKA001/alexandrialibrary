@@ -14,7 +14,7 @@ namespace Gnosis.Alexandria.Controllers
     public class TaskController
         : ITaskController
     {
-        public TaskController(ILogger logger, SpiderFactory spiderFactory, IMediaItemController mediaItemController, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository)
+        public TaskController(ILogger logger, SpiderFactory spiderFactory, IMediaItemController mediaItemController, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IClip> clipRepository)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -28,6 +28,8 @@ namespace Gnosis.Alexandria.Controllers
                 throw new ArgumentNullException("albumRepository");
             if (trackRepository == null)
                 throw new ArgumentNullException("trackRepository");
+            if (clipRepository == null)
+                throw new ArgumentNullException("clipRepository");
 
             this.logger = logger;
             this.spiderFactory = spiderFactory;
@@ -35,6 +37,7 @@ namespace Gnosis.Alexandria.Controllers
             this.artistRepository = artistRepository;
             this.albumRepository = albumRepository;
             this.trackRepository = trackRepository;
+            this.clipRepository = clipRepository;
             this.audioStreamFactory = new AudioStreamFactory();
         }
 
@@ -44,6 +47,7 @@ namespace Gnosis.Alexandria.Controllers
         private readonly IMediaItemRepository<IArtist> artistRepository;
         private readonly IMediaItemRepository<IAlbum> albumRepository;
         private readonly IMediaItemRepository<ITrack> trackRepository;
+        private readonly IMediaItemRepository<IClip> clipRepository;
         private readonly ObservableCollection<ITaskViewModel> taskViewModels = new ObservableCollection<ITaskViewModel>();
         private readonly IAudioStreamFactory audioStreamFactory;
 
@@ -83,7 +87,7 @@ namespace Gnosis.Alexandria.Controllers
                 throw new ArgumentNullException("search");
 
             var pattern = search + "%";
-            var task = new MediaItemSearchTask(logger, pattern, artistRepository, albumRepository, trackRepository);
+            var task = new MediaItemSearchTask(logger, pattern, artistRepository, albumRepository, trackRepository, clipRepository);
             return new SearchTaskViewModel(logger, task, search);
         }
 

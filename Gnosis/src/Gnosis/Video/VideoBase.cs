@@ -40,5 +40,20 @@ namespace Gnosis.Video
         {
             return Enumerable.Empty<ITag>();
         }
+
+        public virtual IArtist GetArtist(ISecurityContext securityContext, IMediaItemRepository<IClip> clipRepository, IMediaItemRepository<IArtist> artistRepository)
+        {
+            return null;
+        }
+        
+        public virtual IAlbum GetAlbum(ISecurityContext securityContext, IMediaItemRepository<IClip> clipRepository, IMediaItemRepository<IAlbum> albumRepository, IArtist artist)
+        {
+            return null;
+        }
+
+        public virtual IClip GetClip(ISecurityContext securityContext, IMediaItemRepository<IClip> clipRepository, IArtist artist, IAlbum album)
+        {
+            return null;
+        }
     }
 }

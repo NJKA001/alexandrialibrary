@@ -8,19 +8,21 @@ namespace Gnosis.Tasks
     public class MediaItemSearchTask
         : TaskBase<IMediaItem>
     {
-        public MediaItemSearchTask(ILogger logger, string pattern, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository)
+        public MediaItemSearchTask(ILogger logger, string pattern, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IClip> clipRepository)
             : base(logger)
         {
             this.pattern = pattern;
             this.artistRepository = artistRepository;
             this.albumRepository = albumRepository;
             this.trackRepository = trackRepository;
+            this.clipRepository = clipRepository;
         }
 
         private string pattern;
         private readonly IMediaItemRepository<IArtist> artistRepository;
         private readonly IMediaItemRepository<IAlbum> albumRepository;
         private readonly IMediaItemRepository<ITrack> trackRepository;
+        private readonly IMediaItemRepository<IClip> clipRepository;
 
         private const int maxProgress = 100;
 
@@ -58,12 +60,23 @@ namespace Gnosis.Tasks
                     AddProgress("Track: " + track.Name);
                     UpdateResults(track);
                 }
+                foreach (var clip in clipRepository.GetByCatalog(album.Location))
+                {
+                    AddProgress("Clip: " + clip.Name);
+                    UpdateResults(clip);
+                }
             }
 
             foreach (var track in trackRepository.GetByName(pattern))
             {
                 AddProgress("Track: " + track.Name);
                 UpdateResults(track);
+            }
+
+            foreach (var clip in clipRepository.GetByName(pattern))
+            {
+                AddProgress("Clip: " + clip.Name);
+                UpdateResults(clip);
             }
 
             UpdateProgress(maxProgress, maxProgress, "Completed");

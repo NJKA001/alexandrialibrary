@@ -27,6 +27,7 @@ namespace Gnosis
             AddFactoryFunction(MediaType.ApplicationXml, (location, type) => new XmlDocument(location, type));
             AddFactoryFunction(MediaType.ApplicationXmlDtd, (location, type) => new XmlDtdDocument(location));
             AddFactoryFunction(MediaType.ApplicationXspfXml, (location, type) => new XmlDocument(location, type));
+            AddFactoryFunction(MediaType.ApplicationMicrosoftExecutable, (location, type) => new MicrosoftExecutable(location));
             AddFactoryFunction(MediaType.ApplicationMicrosoftShortcut, (location, type) => new MicrosoftShortcut(location));
 
             AddFactoryFunction(MediaType.AudioMpeg, (location, type) => new MpegAudio(location));

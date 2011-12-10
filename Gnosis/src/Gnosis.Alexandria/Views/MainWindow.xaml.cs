@@ -78,7 +78,7 @@ namespace Gnosis.Alexandria.Views
                 spiderFactory = new SpiderFactory(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository, clipRepository, audioStreamFactory);
 
                 mediaItemController = new MediaItemController(logger, artistRepository, albumRepository, trackRepository);
-                taskController = new TaskController(logger, spiderFactory, mediaItemController, artistRepository, albumRepository, trackRepository);
+                taskController = new TaskController(logger, spiderFactory, mediaItemController, artistRepository, albumRepository, trackRepository, clipRepository);
 
                 taskResultView.Initialize(logger, securityContext, taskController, mediaItemController);
                 taskManagerView.Initialize(logger, taskController, taskResultView);

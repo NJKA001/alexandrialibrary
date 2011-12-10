@@ -12,7 +12,7 @@ using TagLib;
 namespace Gnosis.Audio
 {
     public class MpegAudio
-        : AudioBase, IMpegAudio
+        : AudioBase
     {
         private TagLib.File file;
         private TagLib.Id3v1.Tag id3v1Tag;
@@ -102,15 +102,22 @@ namespace Gnosis.Audio
             return tags;
         }
 
-        public IArtist GetArtist(ISecurityContext securityContext, IMediaItemRepository<IArtist> artistRepository)
+        public override IArtist GetArtist(ISecurityContext securityContext, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IArtist> artistRepository)
         {
-            //var artistTag = GetTags().Where(x => x.Type == Id3v2TagType.Artist).FirstOrDefault();
-            //if (artistTag == null)
+            IArtist artist = null;
+            var track = trackRepository.GetByTarget(Location).FirstOrDefault();
+            if (track != null)
+            {
+                artist = artistRepository.GetByLocation(track.Creator);
+                if (artist != null)
+                    return artist;
+            }
+            
             if (id3v2Tag == null || id3v2Tag.JoinedPerformers == null)
                 return GnosisArtist.Unknown;
 
             var artistName = id3v2Tag.JoinedPerformers;
-            var artist = artistRepository.GetByName(artistName).FirstOrDefault();
+            artist = artistRepository.GetByName(artistName).FirstOrDefault();
             if (artist != null)
                 return artist;
 
@@ -118,14 +125,23 @@ namespace Gnosis.Audio
             return new GnosisArtist(artistName, DateTime.MinValue, DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown Artist", Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, new byte[0]);
         }
 
-        public IAlbum GetAlbum(ISecurityContext securityContext, IMediaItemRepository<IAlbum> albumRepository, IArtist artist)
+        public override IAlbum GetAlbum(ISecurityContext securityContext, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IAlbum> albumRepository, IArtist artist)
         {
+            IAlbum album = null;
+            var track = trackRepository.GetByTarget(Location).FirstOrDefault();
+            if (track != null)
+            {
+                album = albumRepository.GetByLocation(track.Catalog);
+                if (album != null)
+                    return album;
+            }
+
             var albumTitle = "Unknown Album";
             //var albumTag = GetTags().Where(x => x.Type == Id3v2TagType.Album).FirstOrDefault();
             if (id3v2Tag != null && id3v2Tag.Album != null)
             {
                 albumTitle = id3v2Tag.Album; //albumTag.Tuple.ToString();
-                var album = albumRepository.GetByCreatorAndName(artist.Location, albumTitle);
+                album = albumRepository.GetByCreatorAndName(artist.Location, albumTitle);
                 if (album != null)
                     return album;
             }
@@ -134,14 +150,16 @@ namespace Gnosis.Audio
             return new GnosisAlbum(albumTitle, DateTime.MinValue, 0, artist.Location, artist.Name, Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, new byte[0]);
         }
 
-        public ITrack GetTrack(ISecurityContext securityContext, IMediaItemRepository<ITrack> trackRepository, IAudioStreamFactory audioStreamFactory, IArtist artist, IAlbum album)
+        public override ITrack GetTrack(ISecurityContext securityContext, IMediaItemRepository<ITrack> trackRepository, IAudioStreamFactory audioStreamFactory, IArtist artist, IAlbum album)
         {
             var track = trackRepository.GetByTarget(Location).FirstOrDefault();
             //if (track != null)
                 //return track;
 
             if (id3v2Tag == null)
-                return new GnosisTrack("Unknown Track", DateTime.MinValue, DateTime.MaxValue, 0, TimeSpan.Zero, artist.Location, artist.Name, album.Location, album.Name, Location, Type, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, Guid.Empty.ToUrn(), new byte[0]);
+            {
+                return track != null ? track : new GnosisTrack("Unknown Track", DateTime.MinValue, DateTime.MaxValue, 0, TimeSpan.Zero, artist.Location, artist.Name, album.Location, album.Name, Location, Type, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, Guid.Empty.ToUrn(), new byte[0]);
+            }
 
             var name = id3v2Tag.Title != null ? id3v2Tag.Title : "Unknown Track";
             var recordDate = id3v2Tag.RecordingDate > DateTime.MinValue ? id3v2Tag.RecordingDate : new DateTime((int)id3v1Tag.Year, 1, 1);
@@ -164,21 +182,6 @@ namespace Gnosis.Audio
 
             var trackId = track != null ? track.Location : Guid.NewGuid().ToUrn();
             return new GnosisTrack(name, recordDate, releaseDate, number, duration, artist.Location, artist.Name, album.Location, album.Name, Location, Type, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, thumbnailData, trackId);
-        }
-
-        public void SetTag(ITag tag)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveTag(ITag tag)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Save()
-        {
-            throw new NotImplementedException();
         }
     }
 }

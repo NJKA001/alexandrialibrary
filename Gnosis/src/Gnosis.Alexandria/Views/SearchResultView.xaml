@@ -25,146 +25,162 @@
         <ListBox x:Name="searchResultControl" ItemsSource="{Binding Results}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border Background="LightSteelBlue" Margin="4 4 8 4">
-                    <Expander>
-                        <Expander.Header>
-                            <Grid x:Name="itemNameControl" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" AllowDrop="True" Drop="itemImage_Drop">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="30"/>
-                                    <ColumnDefinition Width="100*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="16"/>
-                                </Grid.ColumnDefinitions>
+                    <Grid x:Name="itemNameControl" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="LightSkyBlue" HorizontalAlignment="Stretch" Margin="4" AllowDrop="True" Drop="itemImage_Drop">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="200*"/>
+                            <ColumnDefinition Width="100*"/>
+                            <ColumnDefinition Width="100*"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="16"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="itemIcon" Grid.Column="0" Source="{Binding Path=Image, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="24" Width="24" Margin="2"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Name}" FontSize="20" FontWeight="Bold" Margin="4" />
+                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="8 8 4 0" Orientation="Horizontal" Visibility="{Binding AlbumArtistVisibility}">
+                            <TextBlock Text="BY" FontSize="12" Foreground="DarkGray" Margin="0 4 8 0"/>
+                            <TextBlock Text="{Binding AlbumArtistName}" FontSize="14" Margin="0 2 0 0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="3" Margin="4 8 4 0" Orientation="Horizontal" Visibility="{Binding TrackAlbumVisibility}">
+                            <TextBlock Text="FROM" FontSize="12" Foreground="DarkGray" Margin="0 4 8 0"/>
+                            <TextBlock Text="{Binding TrackAlbumTitle}" FontSize="14" Margin="0 2 0 0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="4" Margin="4" Orientation="Vertical" >
+                            <TextBlock Text="{Binding ResultType}" FontSize="10" HorizontalAlignment="Center" />
+                            <TextBlock Text="{Binding Years}" FontSize="10" HorizontalAlignment="Center" />
+                        </StackPanel>
+                        <local:HoveringCloseIcon x:Name="itemCloseIcon" Grid.Row="0" Grid.Column="5" VerticalAlignment="Top" IsClosed="{Binding IsClosed, Mode=TwoWay}"/>
+                        <Expander Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Header="Details">
+                            <Grid x:Name="itemGrid">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="224"/>
                                 </Grid.RowDefinitions>
-                                <Image x:Name="itemIcon" Grid.Column="0" Source="{Binding Path=Image, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="24" Width="24" Margin="2"/>
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Name}" FontSize="20" FontWeight="Bold" Margin="4" />
-                                <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Visibility="{Binding AlbumArtistVisibility}">
-                                    <TextBlock Text="BY" FontSize="12" Foreground="DarkGray" Margin="4 0 8 0"/>
-                                    <TextBlock Text="{Binding AlbumArtistName}" FontSize="14" TextWrapping="Wrap"/>
-                                </StackPanel>
-                                <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Horizontal" Visibility="{Binding TrackAlbumVisibility}">
-                                    <TextBlock Text="FROM" FontSize="12" Foreground="DarkGray" Margin="4 0 8 0"/>
-                                    <TextBlock Text="{Binding TrackAlbumTitle}" FontSize="14" TextWrapping="Wrap"/>
-                                </StackPanel>
-                                <StackPanel Grid.Row="0" Grid.Column="4" Orientation="Vertical" Margin="2">
-                                    <TextBlock Text="{Binding ResultType}" FontSize="10" Margin="0" HorizontalAlignment="Center" />
-                                    <TextBlock Text="{Binding Years}" FontSize="10" Margin="0" HorizontalAlignment="Center" />
-                                </StackPanel>
-                                <local:HoveringCloseIcon x:Name="itemCloseIcon" Grid.Row="0" Grid.Column="5" IsClosed="{Binding IsClosed, Mode=TwoWay}"/>
-                            </Grid>
-                        </Expander.Header>
-                        <Grid x:Name="itemGrid">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="224"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100*"/>
-                                <ColumnDefinition Width="278"/>
-                                <ColumnDefinition Width="20"/>
-                            </Grid.ColumnDefinitions>
-                            <Border x:Name="itemImageBorder" Grid.Row="0" Grid.Column="0" Margin="8" AllowDrop="True" Drop="itemImage_Drop">
-                                <Image x:Name="itemImage" Source="{Binding Path=Image, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" AllowDrop="True" Drop="itemImage_Drop" />
-                            </Border>
-                            <TabControl x:Name="tabControl" Grid.Row="0" Grid.Column="1" Margin="4 4 0 8" Background="LightBlue" ItemContainerStyle="{StaticResource tabItemStyle}">
-                                <TabItem x:Name="albumTab" Visibility="{Binding AlbumsVisibility}" Style="{StaticResource tabItemStyle}">
-                                    <TabItem.Header>
-                                        <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
-                                            <TextBlock Text="Albums"/>
-                                        </HeaderedContentControl>
-                                    </TabItem.Header>
-                                    <Grid x:Name="albumGrid" Margin="4">
-                                        <Grid.RowDefinitions>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                        </Grid.ColumnDefinitions>
-                                        <ListBox x:Name="albumListBox" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Albums}" ItemContainerStyle="{StaticResource albumListBoxItemStyle}" >
-                                            <ItemsControl.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel Orientation="Horizontal"/>
-                                                </ItemsPanelTemplate>
-                                            </ItemsControl.ItemsPanel>
-                                            <ItemsControl.ItemTemplate>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100*"/>
+                                    <ColumnDefinition Width="278"/>
+                                    <ColumnDefinition Width="20"/>
+                                </Grid.ColumnDefinitions>
+                                <Border x:Name="itemImageBorder" Grid.Row="0" Grid.Column="0" Margin="8" AllowDrop="True" Drop="itemImage_Drop">
+                                    <Image x:Name="itemImage" Source="{Binding Path=Image, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" AllowDrop="True" Drop="itemImage_Drop" />
+                                </Border>
+                                <TabControl x:Name="tabControl" Grid.Row="0" Grid.Column="1" Margin="4 4 0 8" Background="LightBlue" ItemContainerStyle="{StaticResource tabItemStyle}">
+                                    <TabItem x:Name="albumTab" Visibility="{Binding AlbumsVisibility}" Style="{StaticResource tabItemStyle}">
+                                        <TabItem.Header>
+                                            <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
+                                                <TextBlock Text="Albums"/>
+                                            </HeaderedContentControl>
+                                        </TabItem.Header>
+                                        <Grid x:Name="albumGrid" Margin="4">
+                                            <Grid.RowDefinitions>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                            </Grid.ColumnDefinitions>
+                                            <ListBox x:Name="albumListBox" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Albums}" ItemContainerStyle="{StaticResource albumListBoxItemStyle}" >
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel Orientation="Horizontal"/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid Margin="4" VerticalAlignment="Top">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="72"/>
+                                                                <RowDefinition Height="60"/>
+                                                            </Grid.RowDefinitions>
+                                                            <Image Grid.Row="0" VerticalAlignment="Top" Source="{Binding Path=Image, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="72" Width="72"/>
+                                                            <StackPanel Grid.Row="1" Margin="4" Orientation="Vertical" VerticalAlignment="Top">
+                                                                <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="10" TextWrapping="Wrap" Width="88"/>
+                                                                <TextBlock Text="{Binding Year}" FontSize="10" />
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ListBox>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem x:Name="tracksTab" Visibility="{Binding TracksVisibility}" Style="{StaticResource tabItemStyle}">
+                                        <TabItem.Header>
+                                            <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
+                                                <TextBlock Text="Tracks"/>
+                                            </HeaderedContentControl>
+                                        </TabItem.Header>
+                                        <ListBox ItemsSource="{Binding Tracks}">
+                                            <ListBox.ItemTemplate>
                                                 <DataTemplate>
-                                                    <Grid Margin="4" VerticalAlignment="Top">
-                                                        <Grid.RowDefinitions>
-                                                            <RowDefinition Height="72"/>
-                                                            <RowDefinition Height="60"/>
-                                                        </Grid.RowDefinitions>
-                                                        <Image Grid.Row="0" VerticalAlignment="Top" Source="{Binding Path=Image, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="72" Width="72"/>
-                                                        <StackPanel Grid.Row="1" Margin="4" Orientation="Vertical" VerticalAlignment="Top">
-                                                            <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="10" TextWrapping="Wrap" Width="88"/>
-                                                            <TextBlock Text="{Binding Year}" FontSize="10" />
-                                                        </StackPanel>
-                                                    </Grid>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Number}" Width="32" Margin="4"/>
+                                                        <TextBlock Text="{Binding Title}" Margin="4"/>
+                                                        <TextBlock Text="{Binding Duration}" Width="64" Margin="8 4 4 4"/>
+                                                    </StackPanel>
                                                 </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
+                                            </ListBox.ItemTemplate>
                                         </ListBox>
-                                    </Grid>
-                                </TabItem>
-                                <TabItem x:Name="tracksTab" Visibility="{Binding TracksVisibility}" Style="{StaticResource tabItemStyle}">
-                                    <TabItem.Header>
-                                        <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
-                                            <TextBlock Text="Tracks"/>
-                                        </HeaderedContentControl>
-                                    </TabItem.Header>
-                                    <ListBox ItemsSource="{Binding Tracks}">
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Number}" Width="32" Margin="4"/>
-                                                    <TextBlock Text="{Binding Title}" Margin="4"/>
-                                                    <TextBlock Text="{Binding Duration}" Width="64" Margin="8 4 4 4"/>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                    </ListBox>
-                                </TabItem>
-                                <TabItem x:Name="bioTab" Visibility="{Binding BioVisibility}" Style="{StaticResource tabItemStyle}">
-                                    <TabItem.Header>
-                                        <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
-                                            <TextBlock Text="Bio"/>
-                                        </HeaderedContentControl>
-                                    </TabItem.Header>
-                                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                        <TextBlock Text="{Binding Bio}" TextWrapping="Wrap" Width="300" Margin="4" />
-                                    </ScrollViewer>
-                                </TabItem>
-                                <TabItem x:Name="linksTab" Style="{StaticResource tabItemStyle}">
-                                    <TabItem.Header>
-                                        <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
-                                            <TextBlock Text="Links"/>
-                                        </HeaderedContentControl>
-                                    </TabItem.Header>
-                                </TabItem>
-                                <TabItem x:Name="tagsTab" Style="{StaticResource tabItemStyle}">
-                                    <TabItem.Header>
-                                        <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
-                                            <TextBlock Text="Tags"/>
-                                        </HeaderedContentControl>
-                                    </TabItem.Header>
-                                </TabItem>
-                                <TabItem x:Name="moreTab" Style="{StaticResource tabItemStyle}">
-                                    <TabItem.Header>
-                                        <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
-                                            <TextBlock Text="More"/>
-                                        </HeaderedContentControl>
-                                    </TabItem.Header>
-                                </TabItem>
-                            </TabControl>
-                        </Grid>
-                    </Expander>
-                    </Border>
+                                    </TabItem>
+                                    <TabItem x:Name="clipsTab" Visibility="{Binding TracksVisibility}" Style="{StaticResource tabItemStyle}">
+                                        <TabItem.Header>
+                                            <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
+                                                <TextBlock Text="Clips"/>
+                                            </HeaderedContentControl>
+                                        </TabItem.Header>
+                                        <ListBox ItemsSource="{Binding Clips}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Number}" Width="32" Margin="4"/>
+                                                        <TextBlock Text="{Binding Title}" Margin="4"/>
+                                                        <TextBlock Text="{Binding Duration}" Width="64" Margin="8 4 4 4"/>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </TabItem>
+                                    <TabItem x:Name="bioTab" Visibility="{Binding BioVisibility}" Style="{StaticResource tabItemStyle}">
+                                        <TabItem.Header>
+                                            <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
+                                                <TextBlock Text="Summary"/>
+                                            </HeaderedContentControl>
+                                        </TabItem.Header>
+                                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                            <TextBlock Text="{Binding Bio}" TextWrapping="Wrap" Width="300" Margin="4" />
+                                        </ScrollViewer>
+                                    </TabItem>
+                                    <TabItem x:Name="linksTab" Style="{StaticResource tabItemStyle}">
+                                        <TabItem.Header>
+                                            <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
+                                                <TextBlock Text="Links"/>
+                                            </HeaderedContentControl>
+                                        </TabItem.Header>
+                                    </TabItem>
+                                    <TabItem x:Name="tagsTab" Style="{StaticResource tabItemStyle}">
+                                        <TabItem.Header>
+                                            <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
+                                                <TextBlock Text="Tags"/>
+                                            </HeaderedContentControl>
+                                        </TabItem.Header>
+                                    </TabItem>
+                                    <TabItem x:Name="moreTab" Style="{StaticResource tabItemStyle}">
+                                        <TabItem.Header>
+                                            <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
+                                                <TextBlock Text="More"/>
+                                            </HeaderedContentControl>
+                                        </TabItem.Header>
+                                    </TabItem>
+                                </TabControl>
+                            </Grid>
+                        </Expander>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            <!--
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}},Path=ActualWidth}" />
+                    <WrapPanel Orientation="Horizontal" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Border}},Path=ActualWidth}" />
                 </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
+            </ListBox.ItemsPanel>-->
         </ListBox>
     </Grid>
 </UserControl>

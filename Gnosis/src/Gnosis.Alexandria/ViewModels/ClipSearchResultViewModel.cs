@@ -2,24 +2,22 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Windows;
 
 namespace Gnosis.Alexandria.ViewModels
 {
-    public class AlbumSearchResultViewModel
+    public class ClipSearchResultViewModel
         : ISearchResultViewModel
     {
-        public AlbumSearchResultViewModel(IAlbumViewModel album)
+        public ClipSearchResultViewModel(IClipViewModel clip)
         {
-            if (album == null)
-                throw new ArgumentNullException("album");
+            if (clip == null)
+                throw new ArgumentNullException("clip");
 
-            this.album = album;
+            this.clip = clip;
         }
 
-        private readonly IAlbumViewModel album;
-        private string icon = "pack://application:,,,/Images/cd.png";
+        private readonly IClipViewModel clip;
         private bool isClosed;
         private bool isSelected;
         private object imageOverride;
@@ -39,22 +37,22 @@ namespace Gnosis.Alexandria.ViewModels
 
         public Uri MediaItem
         {
-            get { return album.Album; }
+            get { return clip.Clip; }
         }
 
         public string Name
         {
-            get { return album.Title; }
+            get { return clip.Title; }
         }
 
         public string Years
         {
-            get { return album.Year; }
+            get { return clip.Year; }
         }
 
         public string ResultType
         {
-            get { return "ALBUM"; }
+            get { return "CLIP"; }
         }
 
         public Visibility AlbumArtistVisibility
@@ -64,27 +62,43 @@ namespace Gnosis.Alexandria.ViewModels
 
         public string AlbumArtistName
         {
-            get { return album.ArtistName; }
+            get { return clip.ArtistName; }
         }
 
         public Visibility TrackAlbumVisibility
         {
-            get { return Visibility.Collapsed; }
+            get { return Visibility.Visible; }
         }
 
         public string TrackAlbumTitle
         {
-            get { return album.Title; }
+            get { return clip.AlbumTitle; }
         }
 
         public object Icon
         {
-            get { return icon; }
+            get
+            {
+                if (clip.TargetType == MediaType.VideoAvi)
+                {
+                    return "pack://application:,,,/Images/File Video AVI-01.png";
+                }
+                else if (clip.TargetType == MediaType.VideoMpeg)
+                {
+                    return "pack://application:,,,/Images/File Video MPEG-01.png";
+                }
+                else if (clip.TargetType == MediaType.VideoWmv)
+                {
+                    return "pack://application:,,,/Images/File Video WMV-01.png";
+                }
+
+                return "pack://application:,,,/Images/File Video-01.png";
+            }
         }
 
         public object Image
         {
-            get { return imageOverride != null ? imageOverride : album.Image; }
+            get { return imageOverride != null ? imageOverride : clip.Image; }
             private set
             {
                 imageOverride = value;
@@ -94,7 +108,7 @@ namespace Gnosis.Alexandria.ViewModels
 
         public string Bio
         {
-            get { return string.Empty; }
+            get { return clip.Bio; }
         }
 
         public Visibility BioVisibility
@@ -104,17 +118,12 @@ namespace Gnosis.Alexandria.ViewModels
 
         public Visibility TracksVisibility
         {
-            get { return Visibility.Visible; }
+            get { return Visibility.Collapsed; }
         }
 
         public IEnumerable<ITrackViewModel> Tracks
         {
-            get { return album.Tracks; }
-        }
-
-        public IEnumerable<IClipViewModel> Clips
-        {
-            get { return album.Clips; }
+            get { return Enumerable.Empty<ITrackViewModel>(); }
         }
 
         public Visibility AlbumsVisibility
@@ -174,16 +183,6 @@ namespace Gnosis.Alexandria.ViewModels
         {
             if (track == null)
                 throw new ArgumentNullException("track");
-
-            album.AddTrack(track);
-        }
-
-        public void AddClip(IClipViewModel clip)
-        {
-            if (clip == null)
-                throw new ArgumentNullException("clip");
-
-            album.AddClip(clip);
         }
 
         public void UpdateThumbnail(Uri thumbnail, byte[] thumbnailData)

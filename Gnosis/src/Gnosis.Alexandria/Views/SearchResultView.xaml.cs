@@ -195,7 +195,21 @@ namespace Gnosis.Alexandria.Views
 
         private void AddTrack(AlbumSearchResultViewModel album, TrackViewModel track)
         {
+            var existing = album.Tracks.Where(x => x.Track == track.Track).FirstOrDefault();
+            if (existing != null)
+                return;
+
             Action action = () => album.AddTrack(track);
+            Dispatcher.Invoke(action, DispatcherPriority.DataBind);
+        }
+
+        private void AddClip(AlbumSearchResultViewModel album, ClipViewModel clip)
+        {
+            var existing = album.Clips.Where(x => x.Clip == clip.Clip).FirstOrDefault();
+            if (existing != null)
+                return;
+
+            Action action = () => album.AddClip(clip);
             Dispatcher.Invoke(action, DispatcherPriority.DataBind);
         }
 
@@ -259,6 +273,26 @@ namespace Gnosis.Alexandria.Views
                         //if (existing == null)
                         //{
                             AddTrack(albumResults[albumKey], trackViewModel);
+                        //}
+                    }
+                }
+                else if (result is IClip)
+                {
+                    var clipViewModel = new ClipViewModel(result.Location, result.Name, result.Number, result.Duration, result.Height, result.Width, result.FromDate, result.Creator, result.CreatorName, result.Catalog, result.CatalogName, result.Target, result.TargetType, result.Thumbnail, result.ThumbnailData, string.Empty);
+
+                    var albumKey = result.Catalog.ToString();
+                    if (!albumResults.ContainsKey(albumKey))
+                    {
+                        var resultViewModel = new ClipSearchResultViewModel(clipViewModel);
+
+                        AddResult(resultViewModel);
+                    }
+                    else
+                    {
+                        //var existing = albumResults[albumKey].Tracks.Where(x => x.Album.ToString() == trackViewModel.Album.ToString()).FirstOrDefault();
+                        //if (existing == null)
+                        //{
+                        AddClip(albumResults[albumKey], clipViewModel);
                         //}
                     }
                 }

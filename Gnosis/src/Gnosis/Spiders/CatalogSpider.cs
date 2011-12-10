@@ -121,10 +121,10 @@ namespace Gnosis.Spiders
         {
             try
             {
-                var artist = audio.GetArtist(securityContext, artistRepository);
+                var artist = audio.GetArtist(securityContext, trackRepository, artistRepository);
                 artistRepository.Save(new List<IArtist> { artist });
 
-                var album = audio.GetAlbum(securityContext, albumRepository, artist);
+                var album = audio.GetAlbum(securityContext, trackRepository, albumRepository, artist);
                 albumRepository.Save(new List<IAlbum> { album });
 
                 var track = audio.GetTrack(securityContext, trackRepository, audioStreamFactory, artist, album);
@@ -179,8 +179,21 @@ namespace Gnosis.Spiders
         {
             try
             {
-                var tags = video.GetTags();
-                var x = tags.Count();
+                var artist = video.GetArtist(securityContext, clipRepository, artistRepository);
+                artistRepository.Save(new List<IArtist> { artist });
+
+                var album = video.GetAlbum(securityContext, clipRepository, albumRepository, artist);
+                albumRepository.Save(new List<IAlbum> { album });
+
+                var clip = video.GetClip(securityContext, clipRepository, artist, album);
+                clipRepository.Save(new List<IClip> { clip });
+
+                var clipDate = clip.FromDate > DateTime.MinValue ? clip.FromDate : clip.ToDate;
+                if (album.FromDate == DateTime.MinValue && clipDate != DateTime.MinValue)
+                {
+                    album = new GnosisAlbum(album.Name, clipDate, album.Number, album.Creator, album.CreatorName, album.Catalog, album.CatalogName, album.Target, album.TargetType, album.User, album.UserName, album.Thumbnail, album.ThumbnailData, album.Location);
+                    albumRepository.Save(new List<IAlbum> { album });
+                }
             }
             catch (Exception ex)
             {

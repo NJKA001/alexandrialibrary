@@ -105,6 +105,7 @@
     <Compile Include="Application\Vendor\GnosisPlaylistItem.cs" />
     <Compile Include="Application\Vendor\GnosisProgram.cs" />
     <Compile Include="Application\Vendor\GnosisUser.cs" />
+    <Compile Include="Application\Vendor\MicrosoftExecutable.cs" />
     <Compile Include="Application\Vendor\MicrosoftShortcut.cs" />
     <Compile Include="Application\UnknownApplication.cs" />
     <Compile Include="Application\Xml\XmlDtdDocument.cs" />
@@ -131,7 +132,6 @@
     <Compile Include="IApplicationRunner.cs" />
     <Compile Include="IArtist.cs" />
     <Compile Include="IAudio.cs" />
-    <Compile Include="Audio\IMpegAudio.cs" />
     <Compile Include="Audio\MpegAudio.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="Application\Xml\IXmlDocument.cs" />

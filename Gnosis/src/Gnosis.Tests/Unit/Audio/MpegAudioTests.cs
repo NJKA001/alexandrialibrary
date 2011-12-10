@@ -21,7 +21,7 @@ namespace Gnosis.Tests.Unit.Audio
         {
             var file = new System.IO.FileInfo(location1);
             Assert.IsTrue(file.Exists);
-            var audio = mediaFactory.Create(new Uri(file.FullName)) as IMpegAudio;
+            var audio = mediaFactory.Create(new Uri(file.FullName)) as IAudio;
             Assert.IsNotNull(audio);
             audio.Load();
         }

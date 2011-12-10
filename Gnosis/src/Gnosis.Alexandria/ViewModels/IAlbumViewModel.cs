@@ -16,10 +16,14 @@ namespace Gnosis.Alexandria.ViewModels
         string Bio { get; }
         object Image { get; }
         IEnumerable<ITrackViewModel> Tracks { get; }
+        IEnumerable<IClipViewModel> Clips { get; }
 
         void Initialize(IEnumerable<ITrack> tracks);
         void AddTrack(ITrackViewModel track);
         void RemoveTrack(ITrackViewModel track);
+        void Initialize(IEnumerable<IClip> clips);
+        void AddClip(IClipViewModel clip);
+        void RemoveClip(IClipViewModel clip);
 
         IPlaylistViewModel ToPlaylist(ISecurityContext securityContext);
     }

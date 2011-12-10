@@ -78,8 +78,11 @@
     <Compile Include="ViewModels\ArtistSearchResultViewModel.cs" />
     <Compile Include="ViewModels\ArtistViewModel.cs" />
     <Compile Include="ViewModels\CatalogMediaTaskViewModel.cs" />
+    <Compile Include="ViewModels\ClipSearchResultViewModel.cs" />
+    <Compile Include="ViewModels\ClipViewModel.cs" />
     <Compile Include="ViewModels\IAlbumViewModel.cs" />
     <Compile Include="ViewModels\IArtistViewModel.cs" />
+    <Compile Include="ViewModels\IClipViewModel.cs" />
     <Compile Include="ViewModels\IPlaylistItemViewModel.cs" />
     <Compile Include="ViewModels\IPlaylistViewModel.cs" />
     <Compile Include="ViewModels\IMediaItemViewModel.cs" />
