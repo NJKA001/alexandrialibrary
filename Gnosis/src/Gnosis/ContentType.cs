@@ -157,108 +157,113 @@ namespace Gnosis
 
         public static IContentType GetContentType(Uri location)
         {
-            if (location == null)
-                return ContentType.Empty;
-
-            if (location.ToString().EndsWith(".db"))
-                System.Diagnostics.Debug.WriteLine("+++GetContentType");
-
-            var mediaType = MediaType.ApplicationUnknown;
-            ICharacterSet charSet = null;
-            string boundary = null;
-
-            if (location.IsFile)
+            try
             {
-                if (!System.IO.File.Exists(location.LocalPath))
+                if (location == null)
                     return ContentType.Empty;
 
-                var fileInfo = new FileInfo(location.LocalPath);
-                var header = fileInfo.ToHeader();
-                mediaType = MediaType.GetMediaTypeByMagicNumber(header);
-                if (mediaType != null && mediaType != MediaType.ApplicationUnknown)
-                    return new ContentType(mediaType);
+                var mediaType = MediaType.ApplicationUnknown;
+                ICharacterSet charSet = null;
+                string boundary = null;
 
-                if (location.ToString().EndsWith(".db"))
-                    System.Diagnostics.Debug.WriteLine("+++GetContentType after magic number check");
-
-                var extension = location.ToFileExtension();
-                if (!string.IsNullOrEmpty(extension))
+                if (location.IsFile)
                 {
-                    mediaType = MediaType.GetMediaTypesByFileExtension(extension).FirstOrDefault();
-                }
+                    if (!System.IO.File.Exists(location.LocalPath))
+                        return ContentType.Empty;
 
-                if (mediaType != MediaType.ApplicationXmlDtd)
-                {
-                    try
+                    var fileInfo = new FileInfo(location.LocalPath);
+                    var header = fileInfo.ToHeader();
+                    mediaType = MediaType.GetMediaTypeByMagicNumber(header);
+                    if (mediaType != null && mediaType != MediaType.ApplicationUnknown)
+                        return new ContentType(mediaType);
+
+                    if (location.ToString().EndsWith(".db"))
+                        System.Diagnostics.Debug.WriteLine("+++GetContentType after magic number check");
+
+                    var extension = location.ToFileExtension();
+                    if (!string.IsNullOrEmpty(extension))
                     {
-                        using (var stream = new FileStream(location.LocalPath, FileMode.Open, FileAccess.Read))
+                        mediaType = MediaType.GetMediaTypesByFileExtension(extension).FirstOrDefault();
+                    }
+
+                    if (mediaType != MediaType.ApplicationXmlDtd)
+                    {
+                        try
                         {
-                            charSet = GetCharacterSet(stream, mediaType, charSet);
-                            var ext = GetXmlExtendedType(stream, mediaType, charSet);
-                            mediaType = ext.Item1;
-                            charSet = ext.Item2;
+                            using (var stream = new FileStream(location.LocalPath, FileMode.Open, FileAccess.Read))
+                            {
+                                charSet = GetCharacterSet(stream, mediaType, charSet);
+                                var ext = GetXmlExtendedType(stream, mediaType, charSet);
+                                mediaType = ext.Item1;
+                                charSet = ext.Item2;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.WriteLine("ContentType.GetContentType - Could not open file to read content: " + location.ToString() + Environment.NewLine + ex.Message);
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        System.Diagnostics.Debug.WriteLine("ContentType.GetContentType - Could not open file to read content: " + location.ToString() + Environment.NewLine + ex.Message);
-                    }
-                }
 
-                return new ContentType(mediaType, charSet, boundary);
-            }
-
-            var request = HttpWebRequest.Create(location);
-            var response = request.GetResponse();
-
-            if (!string.IsNullOrEmpty(response.ContentType))
-            {
-                var tokens = response.ContentType.Split(new string[] { "; ", " ", ";" }, StringSplitOptions.RemoveEmptyEntries);
-                mediaType = MediaType.Parse(tokens[0].Trim());
-                
-                if (tokens.Length > 1)
-                {
-                    var token = string.Empty;
-                    for (var i = 1; i < tokens.Length; i++)
-                    {
-                        token = tokens[i].Trim();
-
-                        if (token.Contains(charSetFieldName) && token.Length > 8)
-                        {
-                            charSet = CharacterSet.Parse(token.Substring(8).Trim());
-                        }
-                        else if (token.Contains(boundaryFieldName) && token.Length > 9)
-                        {
-                            boundary = token.Substring(9);
-                        }
-                    }
-                }
-
-                using (var stream = response.GetResponseStream())
-                {
-                    charSet = GetCharacterSet(stream, mediaType, charSet);
-                    var ext = GetXmlExtendedType(stream, mediaType, charSet);
-                    mediaType = ext.Item1;
-                    charSet = ext.Item2;
-                }
-
-                return new ContentType(mediaType, charSet, boundary);
-            }
-            else
-            {
-                var header = response.GetResponseStream().ToHeader();
-                mediaType = MediaType.GetMediaTypeByMagicNumber(header);
-                if (mediaType != MediaType.ApplicationUnknown)
                     return new ContentType(mediaType, charSet, boundary);
-
-                var extension = location.ToFileExtension();
-                if (!string.IsNullOrEmpty(extension))
-                {
-                    mediaType = MediaType.GetMediaTypesByFileExtension(extension).FirstOrDefault();
                 }
-            }
 
-            return new ContentType(mediaType, charSet, boundary);
+                var request = HttpWebRequest.Create(location);
+                var response = request.GetResponse();
+
+                if (!string.IsNullOrEmpty(response.ContentType))
+                {
+                    var tokens = response.ContentType.Split(new string[] { "; ", " ", ";" }, StringSplitOptions.RemoveEmptyEntries);
+                    mediaType = MediaType.Parse(tokens[0].Trim());
+
+                    if (tokens.Length > 1)
+                    {
+                        var token = string.Empty;
+                        for (var i = 1; i < tokens.Length; i++)
+                        {
+                            token = tokens[i].Trim();
+
+                            if (token.Contains(charSetFieldName) && token.Length > 8)
+                            {
+                                charSet = CharacterSet.Parse(token.Substring(8).Trim());
+                            }
+                            else if (token.Contains(boundaryFieldName) && token.Length > 9)
+                            {
+                                boundary = token.Substring(9);
+                            }
+                        }
+                    }
+
+                    using (var stream = response.GetResponseStream())
+                    {
+                        charSet = GetCharacterSet(stream, mediaType, charSet);
+                        var ext = GetXmlExtendedType(stream, mediaType, charSet);
+                        mediaType = ext.Item1;
+                        charSet = ext.Item2;
+                    }
+
+                    return new ContentType(mediaType, charSet, boundary);
+                }
+                else
+                {
+                    var header = response.GetResponseStream().ToHeader();
+                    mediaType = MediaType.GetMediaTypeByMagicNumber(header);
+                    if (mediaType != MediaType.ApplicationUnknown)
+                        return new ContentType(mediaType, charSet, boundary);
+
+                    var extension = location.ToFileExtension();
+                    if (!string.IsNullOrEmpty(extension))
+                    {
+                        mediaType = MediaType.GetMediaTypesByFileExtension(extension).FirstOrDefault();
+                    }
+                }
+
+                return new ContentType(mediaType, charSet, boundary);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("ContentType.GetContentType() Failed: " + ex.Message + Environment.NewLine + ex.StackTrace);
+                return ContentType.Empty;
+            }
         }
 
         #endregion

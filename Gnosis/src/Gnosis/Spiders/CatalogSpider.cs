@@ -14,7 +14,7 @@ namespace Gnosis.Spiders
     public class CatalogSpider
         : ISpider
     {
-        public CatalogSpider(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, IAudioStreamFactory audioStreamFactory)
+        public CatalogSpider(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IClip> clipRepository, IAudioStreamFactory audioStreamFactory)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -34,6 +34,8 @@ namespace Gnosis.Spiders
                 throw new ArgumentNullException("albumRepository");
             if (trackRepository == null)
                 throw new ArgumentNullException("trackRepository");
+            if (clipRepository == null)
+                throw new ArgumentNullException("clipRepository");
             if (audioStreamFactory == null)
                 throw new ArgumentNullException("audioStreamFactory");
 
@@ -46,6 +48,7 @@ namespace Gnosis.Spiders
             this.artistRepository = artistRepository;
             this.albumRepository = albumRepository;
             this.trackRepository = trackRepository;
+            this.clipRepository = clipRepository;
             this.audioStreamFactory = audioStreamFactory;
 
             Delay = TimeSpan.Zero;
@@ -61,6 +64,7 @@ namespace Gnosis.Spiders
         private readonly IMediaItemRepository<IArtist> artistRepository;
         private readonly IMediaItemRepository<IAlbum> albumRepository;
         private readonly IMediaItemRepository<ITrack> trackRepository;
+        private readonly IMediaItemRepository<IClip> clipRepository;
         private readonly IAudioStreamFactory audioStreamFactory;
 
         public TimeSpan Delay
@@ -171,6 +175,19 @@ namespace Gnosis.Spiders
             }
         }
 
+        private void SaveMediaItems(IVideo video)
+        {
+            try
+            {
+                var tags = video.GetTags();
+                var x = tags.Count();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  CatalogSpider.SaveMediaItems", ex);
+            }
+        }
+
         public void HandleMedia(IMedia media)
         {
             if (media == null)
@@ -181,6 +198,10 @@ namespace Gnosis.Spiders
             if (media is IAudio)
             {
                 SaveMediaItems(media as IAudio);
+            }
+            else if (media is IVideo)
+            {
+                SaveMediaItems(media as IVideo);
             }
 
             var location = media.Location;

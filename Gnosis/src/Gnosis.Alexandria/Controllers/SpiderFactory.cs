@@ -10,7 +10,7 @@ namespace Gnosis.Alexandria.Controllers
 {
     public class SpiderFactory
     {
-        public SpiderFactory(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, IAudioStreamFactory audioStreamFactory)
+        public SpiderFactory(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IClip> clipRepository, IAudioStreamFactory audioStreamFactory)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -30,6 +30,8 @@ namespace Gnosis.Alexandria.Controllers
                 throw new ArgumentNullException("albumRepository");
             if (trackRepository == null)
                 throw new ArgumentNullException("trackRepository");
+            if (clipRepository == null)
+                throw new ArgumentNullException("clipRepository");
             if (audioStreamFactory == null)
                 throw new ArgumentNullException("audioStreamFactory");
 
@@ -43,6 +45,7 @@ namespace Gnosis.Alexandria.Controllers
             this.artistRepository = artistRepository;
             this.albumRepository = albumRepository;
             this.trackRepository = trackRepository;
+            this.clipRepository = clipRepository;
             this.audioStreamFactory = audioStreamFactory;
         }
 
@@ -55,11 +58,12 @@ namespace Gnosis.Alexandria.Controllers
         private readonly IMediaItemRepository<IArtist> artistRepository;
         private readonly IMediaItemRepository<IAlbum> albumRepository;
         private readonly IMediaItemRepository<ITrack> trackRepository;
+        private readonly IMediaItemRepository<IClip> clipRepository;
         private readonly IAudioStreamFactory audioStreamFactory;
         
         public ISpider CreateCatalogSpider()
         {
-            return new CatalogSpider(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository, audioStreamFactory);
+            return new CatalogSpider(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository, clipRepository, audioStreamFactory);
         }
     }
 }

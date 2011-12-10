@@ -37,6 +37,7 @@ namespace Gnosis.Tests.Unit.Spiders
         private IMediaItemRepository<IArtist> artistRepository;
         private IMediaItemRepository<IAlbum> albumRepository;
         private IMediaItemRepository<ITrack> trackRepository;
+        private IMediaItemRepository<IClip> clipRepository;
         private IAudioStreamFactory audioStreamFactory;
         private IMediaFactory mediaFactory = new MediaFactory();
         private ITagTypeFactory tagTypeFactory = new TagTypeFactory();
@@ -46,6 +47,7 @@ namespace Gnosis.Tests.Unit.Spiders
         private IDbConnection artistConnection;
         private IDbConnection albumConnection;
         private IDbConnection trackConnection;
+        private IDbConnection clipConnection;
         private CatalogSpider spider;
 
         [TestFixtureSetUp]
@@ -81,9 +83,14 @@ namespace Gnosis.Tests.Unit.Spiders
             trackRepository = new SQLiteTrackRepository(logger, trackConnection);
             trackRepository.Initialize();
 
+            clipConnection = connectionFactory.Create(connectionString);
+            clipConnection.Open();
+            clipRepository = new SQLiteClipRepository(logger, clipConnection);
+            clipRepository.Initialize();
+
             audioStreamFactory = new AudioStreamFactory();
 
-            spider = new CatalogSpider(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository, audioStreamFactory);
+            spider = new CatalogSpider(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository, clipRepository, audioStreamFactory);
         }
 
         [TestFixtureTearDown]

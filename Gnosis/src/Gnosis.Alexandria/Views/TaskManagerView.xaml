@@ -21,7 +21,7 @@
         <ListBox x:Name="taskItemsControl" ItemContainerStyle="{StaticResource taskItemStyle}">
             <ListBox.ContextMenu>
                 <ContextMenu>
-                    <MenuItem x:Name="catalogMenuItem" Header="New Catalog Task..." Click="catalogMenuItem_Click">
+                    <MenuItem x:Name="catalogMenuItem" Header="Catalog..." Click="catalogMenuItem_Click">
                         <MenuItem.Icon>
                             <Image Source="{StaticResource sphinxIcon}" Width="16" Height="16"/>
                         </MenuItem.Icon>
