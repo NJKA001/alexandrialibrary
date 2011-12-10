@@ -19,6 +19,7 @@ namespace Gnosis.Alexandria.ViewModels
         }
 
         private readonly IAlbumViewModel album;
+        private string icon = "pack://application:,,,/Images/cd.png";
         private bool isClosed;
         private bool isSelected;
         private object imageOverride;
@@ -74,6 +75,11 @@ namespace Gnosis.Alexandria.ViewModels
         public string TrackAlbumTitle
         {
             get { return album.Title; }
+        }
+
+        public object Icon
+        {
+            get { return icon; }
         }
 
         public object Image

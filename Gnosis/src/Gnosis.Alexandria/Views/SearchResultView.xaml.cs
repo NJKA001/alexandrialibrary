@@ -106,7 +106,7 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        private void itemNamePanel_Drop(object sender, DragEventArgs e)
+        private void itemImage_Drop(object sender, DragEventArgs e)
         {
             try
             {

@@ -76,6 +76,19 @@ namespace Gnosis.Alexandria.ViewModels
             get { return track.AlbumTitle; }
         }
 
+        public object Icon
+        {
+            get
+            {
+                if (track.TargetType == MediaType.AudioMpeg)
+                {
+                    return "pack://application:,,,/Images/File Audio MP3-01.png";
+                }
+
+                return "pack://application:,,,/Images/File Audio-01.png";
+            }
+        }
+
         public object Image
         {
             get { return imageOverride != null ? imageOverride : track.Image; }

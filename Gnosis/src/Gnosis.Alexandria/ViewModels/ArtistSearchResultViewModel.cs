@@ -18,6 +18,7 @@ namespace Gnosis.Alexandria.ViewModels
         }
 
         private readonly IArtistViewModel artist;
+        private string icon = "pack://application:,,,/Images/artist.png";
         private bool isClosed;
         private bool isSelected;
         private object imageOverride;
@@ -73,6 +74,11 @@ namespace Gnosis.Alexandria.ViewModels
         public string TrackAlbumTitle
         {
             get { return null; }
+        }
+
+        public object Icon
+        {
+            get { return icon; }
         }
 
         public object Image

@@ -7,7 +7,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="32"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="212"/>
+            <RowDefinition Height="232"/>
         </Grid.RowDefinitions>
         <local:SearchView x:Name="searchView" Grid.Row="0"/>
         <local:TaskResultView x:Name="taskResultView" Grid.Row="1"/>

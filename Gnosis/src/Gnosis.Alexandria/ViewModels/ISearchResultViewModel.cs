@@ -19,6 +19,7 @@ namespace Gnosis.Alexandria.ViewModels
         Visibility TrackAlbumVisibility { get; }
         string TrackAlbumTitle { get; }
 
+        object Icon { get; }
         object Image { get; }
 
         string Bio { get; }
