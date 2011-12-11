@@ -7,10 +7,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="32"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="232"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <local:SearchView x:Name="searchView" Grid.Row="0"/>
         <local:TaskResultView x:Name="taskResultView" Grid.Row="1"/>
-        <local:TaskManagerView x:Name="taskManagerView" Grid.Row="2"/>
+        <Expander Grid.Row="2" ExpandDirection="Up" IsExpanded="True" Header="Tasks">
+            <local:TaskManagerView x:Name="taskManagerView" Height="248"/>
+        </Expander>
     </Grid>
 </Window>

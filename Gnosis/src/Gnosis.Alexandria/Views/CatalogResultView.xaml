@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <ListBox x:Name="catalogResultControl" views:ListBoxBehavior.ScrollOnNewItem="True">
+        <ListBox x:Name="catalogResultControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"> <!-- views:ListBoxBehavior.ScrollOnNewItem="True"-->
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">

@@ -8,8 +8,8 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="100*" />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
         <wpf:VlcControl x:Name="myVlcControl" />
