@@ -47,7 +47,7 @@ namespace Gnosis.Alexandria.Controllers
                 if (item == null)
                     return;
 
-                var updated = new GnosisArtist(item.Name, item.FromDate, item.ToDate, item.Creator, item.CreatorName, item.Catalog, item.CatalogName, item.Target, item.TargetType, item.User, item.UserName, thumbnail, thumbnailData, item.Location);
+                var updated = new GnosisArtist(item.Name, item.Summary, item.FromDate, item.ToDate, item.Creator, item.CreatorName, item.Catalog, item.CatalogName, item.Target, item.TargetType, item.User, item.UserName, thumbnail, thumbnailData, item.Location);
                 artistRepository.Save(new List<IArtist> { updated });
             }
             catch (Exception ex)
@@ -72,7 +72,7 @@ namespace Gnosis.Alexandria.Controllers
                 if (item == null)
                     return;
 
-                var updated = new GnosisAlbum(item.Name, item.FromDate, item.Number, item.Creator, item.CreatorName, item.Catalog, item.CatalogName, item.Target, item.TargetType, item.User, item.UserName, thumbnail, thumbnailData, item.Location);
+                var updated = new GnosisAlbum(item.Name, item.Summary, item.FromDate, item.Number, item.Creator, item.CreatorName, item.Catalog, item.CatalogName, item.Target, item.TargetType, item.User, item.UserName, thumbnail, thumbnailData, item.Location);
                 albumRepository.Save(new List<IAlbum> { updated });
             }
             catch (Exception ex)
@@ -97,7 +97,7 @@ namespace Gnosis.Alexandria.Controllers
                 if (item == null)
                     return;
 
-                var updated = new GnosisTrack(item.Name, item.FromDate, item.ToDate, item.Number, item.Duration, item.Creator, item.CreatorName, item.Catalog, item.CatalogName, item.Target, item.TargetType, item.User, item.UserName, thumbnail, thumbnailData, item.Location);
+                var updated = new GnosisTrack(item.Name, item.Summary, item.FromDate, item.ToDate, item.Number, item.Duration, item.Creator, item.CreatorName, item.Catalog, item.CatalogName, item.Target, item.TargetType, item.User, item.UserName, thumbnail, thumbnailData, item.Location);
                 trackRepository.Save(new List<ITrack> { updated });
             }
             catch (Exception ex)

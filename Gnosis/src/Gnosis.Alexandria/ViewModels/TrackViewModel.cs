@@ -11,12 +11,14 @@ namespace Gnosis.Alexandria.ViewModels
     public class TrackViewModel
         : ITrackViewModel
     {
-        public TrackViewModel(Uri track, string title, uint number, TimeSpan duration, DateTime date, Uri artist, string artistName, Uri album, string albumTitle, Uri target, IMediaType targetType, Uri thumbnail, byte[] thumbnailData, string bio)
+        public TrackViewModel(Uri track, string title, string summary, uint number, TimeSpan duration, DateTime date, Uri artist, string artistName, Uri album, string albumTitle, Uri target, IMediaType targetType, Uri thumbnail, byte[] thumbnailData)
         {
             if (track == null)
                 throw new ArgumentNullException("track");
             if (title == null)
                 throw new ArgumentNullException("title");
+            if (summary == null)
+                throw new ArgumentNullException("summary");
             if (artist == null)
                 throw new ArgumentNullException("artist");
             if (artistName == null)
@@ -32,6 +34,7 @@ namespace Gnosis.Alexandria.ViewModels
 
             this.track = track;
             this.title = title;
+            this.summary = summary;
             this.number = number;
             this.duration = duration;
             this.date = date;
@@ -43,11 +46,11 @@ namespace Gnosis.Alexandria.ViewModels
             this.targetType = targetType;
             this.thumbnail = thumbnail;
             this.thumbnailData = thumbnailData;
-            this.bio = bio;
         }
 
         private readonly Uri track;
         private readonly string title;
+        private readonly string summary;
         private readonly uint number;
         private readonly TimeSpan duration;
         private readonly DateTime date;
@@ -59,7 +62,6 @@ namespace Gnosis.Alexandria.ViewModels
         private readonly IMediaType targetType;
         private readonly Uri thumbnail;
         private readonly byte[] thumbnailData;
-        private readonly string bio;
 
         private bool isPlaying;
         private bool isSelected;
@@ -78,6 +80,11 @@ namespace Gnosis.Alexandria.ViewModels
         public string Title
         {
             get { return title; }
+        }
+
+        public string Summary
+        {
+            get { return summary; }
         }
 
         public uint Number
@@ -130,11 +137,6 @@ namespace Gnosis.Alexandria.ViewModels
             get { return targetType; }
         }
 
-        public string Bio
-        {
-            get { return bio; }
-        }
-
         public object Image
         {
             get { return thumbnailData != null && thumbnailData.Length > 0 ? (object)thumbnailData : thumbnail; }
@@ -181,7 +183,7 @@ namespace Gnosis.Alexandria.ViewModels
 
         public IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext)
         {
-            var item = new GnosisPlaylistItem(title, date, number, duration, artist, artistName, album, albumTitle, target, targetType, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, thumbnailData);
+            var item = new GnosisPlaylistItem(title, summary, date, number, duration, artist, artistName, album, albumTitle, target, targetType, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, thumbnailData);
             return new PlaylistItemViewModel(item);
         }
     }

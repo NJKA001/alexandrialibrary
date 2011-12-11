@@ -10,7 +10,7 @@ namespace Gnosis.Alexandria.ViewModels
     public class ArtistViewModel
         : IArtistViewModel
     {
-        public ArtistViewModel(Uri artist, string name, DateTime startDate, DateTime endDate, Uri thumbnail, byte[] thumbnailData, string bio)
+        public ArtistViewModel(Uri artist, string name, string summary, DateTime startDate, DateTime endDate, Uri thumbnail, byte[] thumbnailData)
         {
             if (artist == null)
                 throw new ArgumentNullException("artist");
@@ -19,9 +19,9 @@ namespace Gnosis.Alexandria.ViewModels
 
             this.artist = artist;
             this.name = name;
+            this.summary = summary;
             this.thumbnail = thumbnail;
             this.thumbnailData = thumbnailData;
-            this.bio = bio ?? string.Empty;
 
             var years = new StringBuilder();
             if (startDate != DateTime.MinValue)
@@ -38,10 +38,10 @@ namespace Gnosis.Alexandria.ViewModels
 
         private readonly Uri artist;
         private readonly string name;
+        private readonly string summary;
         private readonly string years;
         private readonly Uri thumbnail;
         private readonly byte[] thumbnailData;
-        private readonly string bio;
         private readonly ObservableCollection<ILink> links = new ObservableCollection<ILink>();
         private readonly ObservableCollection<ITag> tags = new ObservableCollection<ITag>();
         private readonly ObservableCollection<IAlbumViewModel> albums = new ObservableCollection<IAlbumViewModel>();
@@ -64,6 +64,11 @@ namespace Gnosis.Alexandria.ViewModels
             get { return name; }
         }
 
+        public string Summary
+        {
+            get { return summary; }
+        }
+
         public string Years
         {
             get { return years; }
@@ -72,11 +77,6 @@ namespace Gnosis.Alexandria.ViewModels
         public object Image
         {
             get { return thumbnailData != null && thumbnailData.Length > 0 ? (object)thumbnailData : thumbnail; }
-        }
-
-        public string Bio
-        {
-            get { return bio; }
         }
 
         public IEnumerable<ILink> Links

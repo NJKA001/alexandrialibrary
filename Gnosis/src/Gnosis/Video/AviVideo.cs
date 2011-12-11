@@ -188,6 +188,7 @@ namespace Gnosis.Video
             }
 
             var albumName = GetAlbumName();
+            var summary = string.Empty;
             album = albumRepository.GetByName(albumName).FirstOrDefault();
             if (album != null)
             {
@@ -198,7 +199,7 @@ namespace Gnosis.Video
             var albumNumber = GetAlbumNumber();
             var date = GetDate();
 
-            return new GnosisAlbum(albumName, date, albumNumber, artist.Location, artist.Name, catalog.Location, catalog.Name, Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, Guid.Empty.ToUrn(), new byte[0]); 
+            return new GnosisAlbum(albumName, summary, date, albumNumber, artist.Location, artist.Name, catalog.Location, catalog.Name, Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, Guid.Empty.ToUrn(), new byte[0]); 
         }
 
         public override IClip GetClip(ISecurityContext securityContext, IMediaItemRepository<IClip> clipRepository, IArtist artist, IAlbum album)
@@ -210,6 +211,7 @@ namespace Gnosis.Video
             }
 
             var name = GetClipName();
+            var summary = string.Empty;
             var number = GetClipNumber();
             var date = GetDate();
             var duration = file != null && file.Properties != null ? file.Properties.Duration : TimeSpan.FromMinutes(5);
@@ -217,7 +219,7 @@ namespace Gnosis.Video
             var width = file != null && file.Properties != null ? (uint)file.Properties.VideoWidth : 640;
             var user = securityContext.CurrentUser;
 
-            return new GnosisClip(name, date, number, duration, height, width, artist.Location, artist.Name, album.Location, album.Name, Location, Type, user.Location, user.Name, Guid.Empty.ToUrn(), new byte[0]);
+            return new GnosisClip(name, summary, date, number, duration, height, width, artist.Location, artist.Name, album.Location, album.Name, Location, Type, user.Location, user.Name, Guid.Empty.ToUrn(), new byte[0]);
         }
     }
 }

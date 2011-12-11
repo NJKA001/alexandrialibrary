@@ -10,6 +10,7 @@ namespace Gnosis.Alexandria.ViewModels
     {
         Uri Track { get; }
         string Title { get; }
+        string Summary { get; }
         uint Number { get; }
         TimeSpan Duration { get; }
         string DurationString { get; }
@@ -18,7 +19,6 @@ namespace Gnosis.Alexandria.ViewModels
         string ArtistName { get; }
         Uri Album { get; }
         string AlbumTitle { get; }
-        string Bio { get; }
         Uri Target { get; }
         IMediaType TargetType { get; }
         object Image { get; }

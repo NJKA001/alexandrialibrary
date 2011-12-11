@@ -80,6 +80,7 @@ namespace Gnosis.Alexandria.Views
                 if (clipViewModel == null)
                     return;
 
+                var summary = string.Empty;
                 var thumbnail = Guid.Empty.ToUrn();
                 var thumbnailData = new byte[0];
                 //if (clipViewModel.Image == null || clipViewModel.Image == byte[0] || clipViewModel.Image = Guid.Empty.ToUrn())
@@ -87,12 +88,13 @@ namespace Gnosis.Alexandria.Views
                     var album = mediaItemController.GetAlbum(clipViewModel.Album);
                     if (album != null)
                     {
+                        summary = "Based on: " + album.Name;
                         thumbnail = album.Thumbnail;
                         thumbnailData = album.ThumbnailData;
                     }
                 //}
 
-                var playlist = new GnosisPlaylist("New Playlist", DateTime.Now.ToUniversalTime(), 1, clipViewModel.Duration, Guid.Empty.ToUrn(), "Unknown Creator", Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, thumbnailData);
+                var playlist = new GnosisPlaylist("New Playlist", summary, DateTime.Now.ToUniversalTime(), 1, clipViewModel.Duration, Guid.Empty.ToUrn(), "Unknown Creator", Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, thumbnailData);
                 var playlistViewModel = new PlaylistViewModel(playlist, new List<IPlaylistItemViewModel> { clipViewModel.ToPlaylistItem(securityContext) });
 
                 var taskViewModel = taskController.GetPlaylistViewModel(playlistViewModel);
@@ -262,7 +264,7 @@ namespace Gnosis.Alexandria.Views
                     var artistKey = result.Location.ToString();
                     if (!artistResults.ContainsKey(artistKey))
                     {
-                        var artistViewModel = new ArtistViewModel(result.Location, result.Name, result.FromDate, result.ToDate, result.Thumbnail, result.ThumbnailData, string.Empty);
+                        var artistViewModel = new ArtistViewModel(result.Location, result.Name, result.Summary, result.FromDate, result.ToDate, result.Thumbnail, result.ThumbnailData);
                         var resultViewModel = new ArtistSearchResultViewModel(artistViewModel);
                         artistResults.Add(artistKey, resultViewModel);
                         AddResult(resultViewModel);
@@ -270,7 +272,7 @@ namespace Gnosis.Alexandria.Views
                 }
                 else if (result is IAlbum)
                 {
-                    var albumViewModel = new AlbumViewModel(result.Location, result.Name, result.Creator, result.CreatorName, result.FromDate, result.Thumbnail, result.ThumbnailData, string.Empty);
+                    var albumViewModel = new AlbumViewModel(result.Location, result.Name, result.Summary, result.Creator, result.CreatorName, result.FromDate, result.Thumbnail, result.ThumbnailData);
 
                     var artistKey = result.Creator.ToString();
                     var albumKey = result.Location.ToString();
@@ -295,7 +297,7 @@ namespace Gnosis.Alexandria.Views
                 }
                 else if (result is ITrack)
                 {
-                    var trackViewModel = new TrackViewModel(result.Location, result.Name, result.Number, result.Duration, result.FromDate, result.Creator, result.CreatorName, result.Catalog, result.CatalogName, result.Target, result.TargetType, result.Thumbnail, result.ThumbnailData, string.Empty);
+                    var trackViewModel = new TrackViewModel(result.Location, result.Name, result.Summary, result.Number, result.Duration, result.FromDate, result.Creator, result.CreatorName, result.Catalog, result.CatalogName, result.Target, result.TargetType, result.Thumbnail, result.ThumbnailData);
 
                     var albumKey = result.Catalog.ToString();
                     if (!albumResults.ContainsKey(albumKey))
@@ -315,7 +317,7 @@ namespace Gnosis.Alexandria.Views
                 }
                 else if (result is IClip)
                 {
-                    var clipViewModel = new ClipViewModel(result.Location, result.Name, result.Number, result.Duration, result.Height, result.Width, result.FromDate, result.Creator, result.CreatorName, result.Catalog, result.CatalogName, result.Target, result.TargetType, result.Thumbnail, result.ThumbnailData, string.Empty);
+                    var clipViewModel = new ClipViewModel(result.Location, result.Name, result.Summary, result.Number, result.Duration, result.Height, result.Width, result.FromDate, result.Creator, result.CreatorName, result.Catalog, result.CatalogName, result.Target, result.TargetType, result.Thumbnail, result.ThumbnailData);
 
                     var albumKey = result.Catalog.ToString();
                     if (!albumResults.ContainsKey(albumKey))

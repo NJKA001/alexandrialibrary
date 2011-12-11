@@ -8,10 +8,12 @@ namespace Gnosis.Application.Vendor
     public abstract class GnosisMediaItemBase
         : IMediaItem, IApplication
     {
-        protected GnosisMediaItemBase(string name, DateTime fromDate, DateTime toDate, uint number, TimeSpan duration, uint height, uint width, Uri creator, string creatorName, Uri catalog, string catalogName, Uri target, IMediaType targetType, Uri user, string userName, Uri thumbnail, byte[] thumbnailData, IMediaType type, Uri location)
+        protected GnosisMediaItemBase(string name, string summary, DateTime fromDate, DateTime toDate, uint number, TimeSpan duration, uint height, uint width, Uri creator, string creatorName, Uri catalog, string catalogName, Uri target, IMediaType targetType, Uri user, string userName, Uri thumbnail, byte[] thumbnailData, IMediaType type, Uri location)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
+            if (summary == null)
+                throw new ArgumentNullException("summary");
             if (creator == null)
                 throw new ArgumentNullException("creator");
             if (creatorName == null)
@@ -38,6 +40,7 @@ namespace Gnosis.Application.Vendor
                 throw new ArgumentNullException("location");
 
             this.name = name;
+            this.summary = summary;
             this.fromDate = fromDate;
             this.toDate = toDate;
             this.number = number;
@@ -59,6 +62,7 @@ namespace Gnosis.Application.Vendor
         }
 
         private readonly string name;
+        private readonly string summary;
         private readonly DateTime fromDate;
         private readonly DateTime toDate;
         private readonly uint number;
@@ -81,6 +85,11 @@ namespace Gnosis.Application.Vendor
         public string Name
         {
             get { return name; }
+        }
+
+        public string Summary
+        {
+            get { return summary; }
         }
 
         public DateTime FromDate

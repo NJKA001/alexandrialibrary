@@ -21,9 +21,9 @@ namespace Gnosis.Data.SQLite
         {
         }
 
-        protected override IAlbum GetItem(Uri location, string name, DateTime fromDate, DateTime toDate, uint number, TimeSpan duration, uint height, uint width, Uri creator, string creatorName, Uri catalog, string catalogName, Uri target, IMediaType targetType, Uri user, string userName, Uri thumbnail, byte[] thumbnailData)
+        protected override IAlbum GetItem(Uri location, string name, string summary, DateTime fromDate, DateTime toDate, uint number, TimeSpan duration, uint height, uint width, Uri creator, string creatorName, Uri catalog, string catalogName, Uri target, IMediaType targetType, Uri user, string userName, Uri thumbnail, byte[] thumbnailData)
         {
-            return new GnosisAlbum(name, fromDate, number, creator, creatorName, catalog, catalogName, target, targetType, user, userName, thumbnail, thumbnailData, location);
+            return new GnosisAlbum(name, summary, fromDate, number, creator, creatorName, catalog, catalogName, target, targetType, user, userName, thumbnail, thumbnailData, location);
         }
 
         protected override IAlbum GetDefaultItem()

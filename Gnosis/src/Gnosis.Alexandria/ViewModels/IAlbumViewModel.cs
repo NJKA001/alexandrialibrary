@@ -10,10 +10,10 @@ namespace Gnosis.Alexandria.ViewModels
     {
         Uri Album { get; }
         string Title { get; }
+        string Summary { get; }
         Uri Artist { get; }
         string ArtistName { get; }
         string Year { get; }
-        string Bio { get; }
         object Image { get; }
         IEnumerable<ITrackViewModel> Tracks { get; }
         IEnumerable<IClipViewModel> Clips { get; }

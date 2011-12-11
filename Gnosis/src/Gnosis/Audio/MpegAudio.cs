@@ -117,12 +117,13 @@ namespace Gnosis.Audio
                 return GnosisArtist.Unknown;
 
             var artistName = id3v2Tag.JoinedPerformers;
+            var summary = string.Empty;
             artist = artistRepository.GetByName(artistName).FirstOrDefault();
             if (artist != null)
                 return artist;
 
             var thumbnail = GetJpgToUrl(artistName); 
-            return new GnosisArtist(artistName, DateTime.MinValue, DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown Artist", Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, new byte[0]);
+            return new GnosisArtist(artistName, summary, DateTime.MinValue, DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown Artist", Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, new byte[0]);
         }
 
         public override IAlbum GetAlbum(ISecurityContext securityContext, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IAlbum> albumRepository, IArtist artist)
@@ -137,6 +138,7 @@ namespace Gnosis.Audio
             }
 
             var albumTitle = "Unknown Album";
+            var summary = string.Empty;
             //var albumTag = GetTags().Where(x => x.Type == Id3v2TagType.Album).FirstOrDefault();
             if (id3v2Tag != null && id3v2Tag.Album != null)
             {
@@ -147,7 +149,7 @@ namespace Gnosis.Audio
             }
 
             var thumbnail = GetJpgToUrl(albumTitle);
-            return new GnosisAlbum(albumTitle, DateTime.MinValue, 0, artist.Location, artist.Name, Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, new byte[0]);
+            return new GnosisAlbum(albumTitle, summary, DateTime.MinValue, 0, artist.Location, artist.Name, Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, new byte[0]);
         }
 
         public override ITrack GetTrack(ISecurityContext securityContext, IMediaItemRepository<ITrack> trackRepository, IAudioStreamFactory audioStreamFactory, IArtist artist, IAlbum album)
@@ -158,10 +160,11 @@ namespace Gnosis.Audio
 
             if (id3v2Tag == null)
             {
-                return track != null ? track : new GnosisTrack("Unknown Track", DateTime.MinValue, DateTime.MaxValue, 0, TimeSpan.Zero, artist.Location, artist.Name, album.Location, album.Name, Location, Type, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, Guid.Empty.ToUrn(), new byte[0]);
+                return track != null ? track : new GnosisTrack("Unknown Track", string.Empty, DateTime.MinValue, DateTime.MaxValue, 0, TimeSpan.Zero, artist.Location, artist.Name, album.Location, album.Name, Location, Type, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, Guid.Empty.ToUrn(), new byte[0]);
             }
 
             var name = id3v2Tag.Title != null ? id3v2Tag.Title : "Unknown Track";
+            var summary = id3v2Tag.Lyrics ?? string.Empty;
             var recordDate = id3v2Tag.RecordingDate > DateTime.MinValue ? id3v2Tag.RecordingDate : new DateTime((int)id3v1Tag.Year, 1, 1);
             var releaseDate = id3v2Tag.ReleaseDate > DateTime.MinValue ? id3v2Tag.ReleaseDate : new DateTime((int)id3v1Tag.Year, 1, 1);
             var number = id3v2Tag.Track;
@@ -181,7 +184,7 @@ namespace Gnosis.Audio
             var thumbnailData = id3v2Tag.Pictures != null && id3v2Tag.Pictures.Length > 0 ? id3v2Tag.Pictures[0].Data.ToArray() : new byte[0];
 
             var trackId = track != null ? track.Location : Guid.NewGuid().ToUrn();
-            return new GnosisTrack(name, recordDate, releaseDate, number, duration, artist.Location, artist.Name, album.Location, album.Name, Location, Type, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, thumbnailData, trackId);
+            return new GnosisTrack(name, summary, recordDate, releaseDate, number, duration, artist.Location, artist.Name, album.Location, album.Name, Location, Type, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, thumbnailData, trackId);
         }
     }
 }

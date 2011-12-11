@@ -133,7 +133,7 @@ namespace Gnosis.Spiders
                 var trackDate = track.FromDate > DateTime.MinValue ? track.FromDate : track.ToDate;
                 if (album.FromDate == DateTime.MinValue && trackDate != DateTime.MinValue)
                 {
-                    album = new GnosisAlbum(album.Name, trackDate, album.Number, album.Creator, album.CreatorName, album.Catalog, album.CatalogName, album.Target, album.TargetType, album.User, album.UserName, album.Thumbnail, album.ThumbnailData, album.Location);
+                    album = new GnosisAlbum(album.Name, album.Summary, trackDate, album.Number, album.Creator, album.CreatorName, album.Catalog, album.CatalogName, album.Target, album.TargetType, album.User, album.UserName, album.Thumbnail, album.ThumbnailData, album.Location);
                     albumRepository.Save(new List<IAlbum> { album });
                 }
 
@@ -164,7 +164,7 @@ namespace Gnosis.Spiders
                             uint.TryParse(cleaned, out number);
                         }
 
-                        var updated = new GnosisAlbum(album.Name, album.FromDate, number, album.Creator, album.CreatorName, album.Catalog, album.CatalogName, album.Target, album.TargetType, album.User, album.UserName, track.Thumbnail, track.ThumbnailData, album.Location);
+                        var updated = new GnosisAlbum(album.Name, album.Summary, album.FromDate, number, album.Creator, album.CreatorName, album.Catalog, album.CatalogName, album.Target, album.TargetType, album.User, album.UserName, track.Thumbnail, track.ThumbnailData, album.Location);
                         albumRepository.Save(new List<IAlbum> { updated });
                     }
                 }
@@ -191,7 +191,7 @@ namespace Gnosis.Spiders
                 var clipDate = clip.FromDate > DateTime.MinValue ? clip.FromDate : clip.ToDate;
                 if (album.FromDate == DateTime.MinValue && clipDate != DateTime.MinValue)
                 {
-                    album = new GnosisAlbum(album.Name, clipDate, album.Number, album.Creator, album.CreatorName, album.Catalog, album.CatalogName, album.Target, album.TargetType, album.User, album.UserName, album.Thumbnail, album.ThumbnailData, album.Location);
+                    album = new GnosisAlbum(album.Name, string.Empty, clipDate, album.Number, album.Creator, album.CreatorName, album.Catalog, album.CatalogName, album.Target, album.TargetType, album.User, album.UserName, album.Thumbnail, album.ThumbnailData, album.Location);
                     albumRepository.Save(new List<IAlbum> { album });
                 }
             }

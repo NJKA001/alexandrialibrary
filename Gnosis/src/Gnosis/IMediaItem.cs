@@ -9,6 +9,7 @@ namespace Gnosis
         : IMedia
     {
         string Name { get; }
+        string Summary { get; }
         DateTime FromDate { get; }
         DateTime ToDate { get; }
         uint Number { get; }

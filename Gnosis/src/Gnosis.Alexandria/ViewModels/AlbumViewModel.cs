@@ -12,12 +12,14 @@ namespace Gnosis.Alexandria.ViewModels
     public class AlbumViewModel
         : IAlbumViewModel
     {
-        public AlbumViewModel(Uri album, string title, Uri artist, string artistName, DateTime date, Uri thumbnail, byte[] thumbnailData, string bio)
+        public AlbumViewModel(Uri album, string title, string summary, Uri artist, string artistName, DateTime date, Uri thumbnail, byte[] thumbnailData)
         {
             if (album == null)
                 throw new ArgumentNullException("album");
             if (title == null)
                 throw new ArgumentNullException("title");
+            if (summary == null)
+                throw new ArgumentNullException("summary");
             if (artist == null)
                 throw new ArgumentNullException("artist");
             if (artistName == null)
@@ -25,20 +27,20 @@ namespace Gnosis.Alexandria.ViewModels
 
             this.album = album;
             this.title = title;
+            this.summary = summary;
             this.artist = artist;
             this.artistName = artistName;
             this.date = date;
-            this.bio = bio;
             this.thumbnail = thumbnail;
             this.thumbnailData = thumbnailData;
         }
 
         private readonly Uri album;
         private readonly string title;
+        private readonly string summary;
         private readonly Uri artist;
         private readonly string artistName;
         private readonly DateTime date;
-        private readonly string bio;
         private readonly Uri thumbnail;
         private readonly byte[] thumbnailData;
         private readonly ObservableCollection<ITrackViewModel> tracks = new ObservableCollection<ITrackViewModel>();
@@ -62,6 +64,11 @@ namespace Gnosis.Alexandria.ViewModels
             get { return title; }
         }
 
+        public string Summary
+        {
+            get { return summary; }
+        }
+
         public Uri Artist
         {
             get { return artist; }
@@ -75,11 +82,6 @@ namespace Gnosis.Alexandria.ViewModels
         public string Year
         {
             get { return date.Year.ToString(); }
-        }
-
-        public string Bio
-        {
-            get { return bio; }
         }
 
         public object Image
@@ -119,7 +121,7 @@ namespace Gnosis.Alexandria.ViewModels
 
             foreach (var track in tracks)
             {
-                var trackViewModel = new TrackViewModel(track.Location, track.Name, track.Number, track.Duration, track.FromDate, track.Creator, track.CreatorName, track.Catalog, track.CatalogName, track.Target, track.TargetType, track.Thumbnail, track.ThumbnailData, string.Empty);
+                var trackViewModel = new TrackViewModel(track.Location, track.Name, track.Summary, track.Number, track.Duration, track.FromDate, track.Creator, track.CreatorName, track.Catalog, track.CatalogName, track.Target, track.TargetType, track.Thumbnail, track.ThumbnailData);
                 this.tracks.Add(trackViewModel);
             }
         }
@@ -151,7 +153,7 @@ namespace Gnosis.Alexandria.ViewModels
 
             foreach (var clip in clips)
             {
-                var clipViewModel = new ClipViewModel(clip.Location, clip.Name, clip.Number, clip.Duration, clip.Height, clip.Width, clip.FromDate, clip.Creator, clip.CreatorName, clip.Catalog, clip.CatalogName, clip.Target, clip.TargetType, clip.Thumbnail, clip.ThumbnailData, string.Empty);
+                var clipViewModel = new ClipViewModel(clip.Location, clip.Name, clip.Summary, clip.Number, clip.Duration, clip.Height, clip.Width, clip.FromDate, clip.Creator, clip.CreatorName, clip.Catalog, clip.CatalogName, clip.Target, clip.TargetType, clip.Thumbnail, clip.ThumbnailData);
                 this.clips.Add(clipViewModel);
             }
         }
@@ -183,7 +185,7 @@ namespace Gnosis.Alexandria.ViewModels
             if (securityContext == null)
                 throw new ArgumentNullException("securityContext");
 
-            var playlist = new GnosisPlaylist(title, DateTime.Now, 0, TimeSpan.Zero, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, thumbnailData);
+            var playlist = new GnosisPlaylist(title, summary, DateTime.Now, 0, TimeSpan.Zero, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, thumbnailData);
             var items = new List<IPlaylistItemViewModel>();
             foreach (var track in tracks)
             {

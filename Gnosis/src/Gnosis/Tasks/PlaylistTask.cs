@@ -124,8 +124,6 @@ namespace Gnosis.Tasks
         {
             if (Status == TaskStatus.Running)
             {
-                logger.Debug("PlaylistTask.timer_Elapsed: " + e.SignalTime.ToString("o"));
-
                 if (Item.Target != null && Item.TargetType != null)
                 {
                     if (Item.TargetType.Type == MediaType.TypeAudio)

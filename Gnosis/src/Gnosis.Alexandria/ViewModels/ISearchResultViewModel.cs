@@ -22,8 +22,8 @@ namespace Gnosis.Alexandria.ViewModels
         object Icon { get; }
         object Image { get; }
 
-        string Bio { get; }
-        Visibility BioVisibility { get; }
+        string Summary { get; }
+        Visibility SummaryVisibility { get; }
         Visibility TracksVisibility { get; }
         IEnumerable<ITrackViewModel> Tracks { get; }
 

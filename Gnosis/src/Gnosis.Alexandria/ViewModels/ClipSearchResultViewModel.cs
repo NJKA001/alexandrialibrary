@@ -106,12 +106,12 @@ namespace Gnosis.Alexandria.ViewModels
             }
         }
 
-        public string Bio
+        public string Summary
         {
-            get { return clip.Bio; }
+            get { return clip.Summary; }
         }
 
-        public Visibility BioVisibility
+        public Visibility SummaryVisibility
         {
             get { return Visibility.Visible; }
         }
