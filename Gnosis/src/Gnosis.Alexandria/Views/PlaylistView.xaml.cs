@@ -29,6 +29,7 @@ namespace Gnosis.Alexandria.Views
         private ILogger logger;
         private IPlaylistViewModel playlist;
         private IVideoPlayer videoPlayer;
+        private VideoPlayerWindow videoPlayerWindow;
 
         public void Initialize(ILogger logger, IPlaylistViewModel playlist, IVideoPlayer videoPlayer)
         {
@@ -57,7 +58,9 @@ namespace Gnosis.Alexandria.Views
                 var child = videoPlayer as UIElement;
                 if (child != null)
                 {
-                    videoHost.Children.Add(child); //.Child = uiChild;
+                    videoPlayerWindow = new VideoPlayerWindow();
+                    videoPlayerWindow.SetVideoPlayerElement(child);
+                    videoPlayerWindow.Show();
                 }
                 else
                 {

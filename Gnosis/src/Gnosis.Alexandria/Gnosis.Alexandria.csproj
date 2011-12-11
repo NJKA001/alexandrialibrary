@@ -47,6 +47,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Microsoft\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -103,6 +107,7 @@
     <Compile Include="Views\CatalogResultView.xaml.cs">
       <DependentUpon>CatalogResultView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FullScreenBehavior.cs" />
     <Compile Include="Views\HoveringCloseIcon.xaml.cs">
       <DependentUpon>HoveringCloseIcon.xaml</DependentUpon>
     </Compile>
@@ -121,6 +126,9 @@
     </Compile>
     <Compile Include="Views\TaskResultView.xaml.cs">
       <DependentUpon>TaskResultView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VideoPlayerWindow.xaml.cs">
+      <DependentUpon>VideoPlayerWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Styles\Converters.xaml">
       <SubType>Designer</SubType>
@@ -189,6 +197,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TaskResultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VideoPlayerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

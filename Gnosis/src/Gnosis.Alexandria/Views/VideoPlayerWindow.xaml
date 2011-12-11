@@ -1,0 +1,16 @@
+﻿<Window x:Class="Gnosis.Alexandria.Views.VideoPlayerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:views="clr-namespace:Gnosis.Alexandria.Views"
+        Title="Alexandria" 
+        Height="480" Width="640">
+        <!--:FullScreenBehavior.IsFullScreen="{Binding Path=IsChecked, ElementName=FullScreenButton, Mode=TwoWay}"-->
+    <i:Interaction.Behaviors>
+        <views:FullScreenBehavior
+            FullScreenOnDoubleClick="True"
+            FullScreenOnMaximize="True"
+            RestoreOnEscape="True"/>
+    </i:Interaction.Behaviors>
+    <Border x:Name="videoHost" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+</Window>
