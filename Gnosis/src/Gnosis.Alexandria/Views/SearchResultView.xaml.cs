@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
+using Gnosis.Application.Vendor;
 using Gnosis.Alexandria.Controllers;
 using Gnosis.Alexandria.Extensions;
 using Gnosis.Alexandria.ViewModels;
@@ -64,6 +65,42 @@ namespace Gnosis.Alexandria.Views
             catch (Exception ex)
             {
                 logger.Error("  albumListBoxItem_PreviewLeftMouseButtonDown", ex);
+            }
+        }
+
+        private void clipListBoxItem_DoubleClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                var listBoxItem = sender as ListBoxItem;
+                if (listBoxItem == null)
+                    return;
+
+                var clipViewModel = listBoxItem.DataContext as IClipViewModel;
+                if (clipViewModel == null)
+                    return;
+
+                var thumbnail = Guid.Empty.ToUrn();
+                var thumbnailData = new byte[0];
+                //if (clipViewModel.Image == null || clipViewModel.Image == byte[0] || clipViewModel.Image = Guid.Empty.ToUrn())
+                //{
+                    var album = mediaItemController.GetAlbum(clipViewModel.Album);
+                    if (album != null)
+                    {
+                        thumbnail = album.Thumbnail;
+                        thumbnailData = album.ThumbnailData;
+                    }
+                //}
+
+                var playlist = new GnosisPlaylist("New Playlist", DateTime.Now.ToUniversalTime(), 1, clipViewModel.Duration, Guid.Empty.ToUrn(), "Unknown Creator", Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, thumbnailData);
+                var playlistViewModel = new PlaylistViewModel(playlist, new List<IPlaylistItemViewModel> { clipViewModel.ToPlaylistItem(securityContext) });
+
+                var taskViewModel = taskController.GetPlaylistViewModel(playlistViewModel);
+                taskResultView.Playlist(taskViewModel, playlistViewModel);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  SearchResultView.clipListBoxItem_DoubleClick", ex);
             }
         }
 

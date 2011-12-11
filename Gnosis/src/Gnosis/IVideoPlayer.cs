@@ -7,7 +7,6 @@ namespace Gnosis
 {
     public interface IVideoPlayer
     {
-        void Load(IAudio audio);
-        void Load(IVideo video);
+        void Load(Uri location);
     }
 }

@@ -22,7 +22,7 @@
                     </VisualBrush.Visual>
                 </VisualBrush >
             </Grid.Background>
-            <TextBlock Name="textBlockOpen"  TextAlignment="Center" FontSize="18">Please, open a media file.</TextBlock>
+            <!--<TextBlock Name="textBlockOpen"  TextAlignment="Center" FontSize="18">Please, open a media file.</TextBlock>-->
         </Grid>
         
         <StackPanel Grid.Row="1" Orientation="Vertical">

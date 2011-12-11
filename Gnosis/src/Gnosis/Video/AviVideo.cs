@@ -94,16 +94,17 @@ namespace Gnosis.Video
                     var fileInfo = new System.IO.FileInfo(Location.LocalPath);
                     if (fileInfo.Exists && fileInfo.Name != null)
                     {
-                        if (fileInfo.Name.Contains('.'))
+                        var name = fileInfo.Name;
+                        if (name.Contains('.'))
                         {
-                            return fileInfo.Name.Substring(0, fileInfo.Name.LastIndexOf('.'));
+                            name = name.Substring(0, fileInfo.Name.LastIndexOf('.'));
                         }
-                        else return fileInfo.Name;
-                        //var tokens = fileInfo.Name.Split('-');
-                        //if (tokens == null || tokens.Length == 0)
-                        //    return fileInfo.Name;
 
-                        //return tokens[tokens.Length - 1];
+                        var tokens = name.Split('-');
+                        if (tokens == null || tokens.Length < 2)
+                            return name;
+
+                        return tokens[tokens.Length - 1];
                     }
                 }
                 catch (Exception)

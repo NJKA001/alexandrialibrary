@@ -24,7 +24,8 @@ namespace Gnosis.Video.VideoLan
     /// <summary>
     /// Interaction logic for VideoPlayerControl.xaml
     /// </summary>
-    public partial class VideoPlayerControl : UserControl
+    public partial class VideoPlayerControl
+        : UserControl, IVideoPlayer
     {
         #region Properties
 
@@ -61,7 +62,9 @@ namespace Gnosis.Video.VideoLan
             VlcContext.StartupOptions.LogOptions.LogInFile = true;
 
             // Shows the VLC log console (in addition to the applications window)
+#if DEBUG 
             VlcContext.StartupOptions.LogOptions.ShowLoggerConsole = true;
+#endif
 
             // Set the log level for the VLC instance
             VlcContext.StartupOptions.LogOptions.Verbosity = VlcLogVerbosities.Debug;
@@ -159,7 +162,7 @@ namespace Gnosis.Video.VideoLan
             if (openFileDialog.ShowDialog() != true)
                 return;
 
-            textBlockOpen.Visibility = Visibility.Collapsed;
+            //textBlockOpen.Visibility = Visibility.Collapsed;
 
             myVlcControl.Media = new PathMedia(openFileDialog.FileName);
             myVlcControl.Media.ParsedChanged += MediaOnParsedChanged;
@@ -305,5 +308,19 @@ namespace Gnosis.Video.VideoLan
         }
 
         #endregion
+
+        public void Load(Uri location)
+        {
+            if (location == null)
+                throw new ArgumentNullException("location");
+
+            if (location.IsFile)
+            {
+                myVlcControl.Stop();
+                myVlcControl.Media = new PathMedia(location.LocalPath);
+                myVlcControl.Media.ParsedChanged += MediaOnParsedChanged;
+                myVlcControl.Play();
+            }
+        }
     }
 }

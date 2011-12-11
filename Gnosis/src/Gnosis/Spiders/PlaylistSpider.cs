@@ -87,7 +87,7 @@ namespace Gnosis.Spiders
                     textViewer.Load(media as IText);
                     break;
                 case MediaType.TypeVideo:
-                    videoPlayer.Load(media as IVideo);
+                    //videoPlayer.Load(media as IVideo);
                     break;
                 default:
                     throw new InvalidOperationException("Invalid media type: " + media.Type.ToString());

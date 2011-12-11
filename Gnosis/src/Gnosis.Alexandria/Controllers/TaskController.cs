@@ -8,16 +8,19 @@ using Gnosis.Alexandria.ViewModels;
 using Gnosis.Audio;
 using Gnosis.Audio.Fmod;
 using Gnosis.Tasks;
+using Gnosis.Video.VideoLan;
 
 namespace Gnosis.Alexandria.Controllers
 {
     public class TaskController
         : ITaskController
     {
-        public TaskController(ILogger logger, SpiderFactory spiderFactory, IMediaItemController mediaItemController, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IClip> clipRepository)
+        public TaskController(ILogger logger, IVideoPlayer videoPlayer, SpiderFactory spiderFactory, IMediaItemController mediaItemController, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IClip> clipRepository)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
+            if (videoPlayer == null)
+                throw new ArgumentNullException("videoPlayer");
             if (spiderFactory == null)
                 throw new ArgumentNullException("spiderFactory");
             if (mediaItemController == null)
@@ -32,6 +35,7 @@ namespace Gnosis.Alexandria.Controllers
                 throw new ArgumentNullException("clipRepository");
 
             this.logger = logger;
+            this.videoPlayer = videoPlayer;
             this.spiderFactory = spiderFactory;
             this.mediaItemController = mediaItemController;
             this.artistRepository = artistRepository;
@@ -42,6 +46,7 @@ namespace Gnosis.Alexandria.Controllers
         }
 
         private readonly ILogger logger;
+        private readonly IVideoPlayer videoPlayer;
         private readonly SpiderFactory spiderFactory;
         private readonly IMediaItemController mediaItemController;
         private readonly IMediaItemRepository<IArtist> artistRepository;
@@ -74,11 +79,19 @@ namespace Gnosis.Alexandria.Controllers
             if (playlist == null)
                 throw new ArgumentNullException("playlist");
 
-            var audioPlayer = new AudioPlayer(audioStreamFactory);
-            var first = playlist.GetCurrentTaskItem();
-            var task = new PlaylistTask(logger, audioPlayer, first, TimeSpan.Zero, () => playlist.GetPreviousTaskItem(), () => playlist.GetNextTaskItem());
-            
-            return new PlaylistTaskViewModel(logger, task, playlist.Name, first.Image);
+            try
+            {
+                var audioPlayer = new AudioPlayer(audioStreamFactory);
+                var first = playlist.GetCurrentTaskItem();
+                var task = new PlaylistTask(logger, audioPlayer, videoPlayer, first, TimeSpan.Zero, () => playlist.GetPreviousTaskItem(), () => playlist.GetNextTaskItem());
+
+                return new PlaylistTaskViewModel(logger, task, playlist.Name, first.Image);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  TaskController.GetPlaylistViewModel", ex);
+                throw;
+            }
         }
 
         public SearchTaskViewModel GetSearchViewModel(string search)

@@ -12,7 +12,7 @@ namespace Gnosis.Tasks
     public class PlaylistTask
         : TaskBase<TaskItem>
     {
-        public PlaylistTask(ILogger logger, IAudioPlayer audioPlayer, TaskItem item, TimeSpan delay, Func<TaskItem> getPreviousItem, Func<TaskItem> getNextItem)
+        public PlaylistTask(ILogger logger, IAudioPlayer audioPlayer, IVideoPlayer videoPlayer, TaskItem item, TimeSpan delay, Func<TaskItem> getPreviousItem, Func<TaskItem> getNextItem)
             : base(logger, item)
         {
             if (audioPlayer == null)
@@ -23,6 +23,7 @@ namespace Gnosis.Tasks
                 throw new ArgumentNullException("getNextItem");
 
             this.audioPlayer = audioPlayer;
+            this.videoPlayer = videoPlayer;
             this.delay = delay;
             this.getPreviousItem = getPreviousItem;
             this.getNextItem = getNextItem;
@@ -39,11 +40,13 @@ namespace Gnosis.Tasks
         }
 
         private readonly IAudioPlayer audioPlayer;
+        private readonly IVideoPlayer videoPlayer;
         private readonly Timer timer;
-        //private readonly IDictionary<string, IAudioStream> audioStreams = new Dictionary<string, IAudioStream>();
         private readonly TimeSpan delay;
         private readonly Func<TaskItem> getPreviousItem;
         private readonly Func<TaskItem> getNextItem;
+
+        //private readonly IDictionary<string, IAudioStream> audioStreams = new Dictionary<string, IAudioStream>();
 
         private int errorCount;
         private int errorMax = 0;
@@ -156,6 +159,10 @@ namespace Gnosis.Tasks
                     {
                         LoadAudioStream(Item.Target);
                         PlayAudioStream();
+                    }
+                    else if (Item.TargetType.Type == MediaType.TypeVideo)
+                    {
+                        videoPlayer.Load(Item.Target);
                     }
                 }
             }

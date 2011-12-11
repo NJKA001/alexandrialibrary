@@ -28,19 +28,23 @@ namespace Gnosis.Alexandria.Views
 
         private ILogger logger;
         private IPlaylistViewModel playlist;
+        private IVideoPlayer videoPlayer;
 
-        public void Initialize(ILogger logger, IPlaylistViewModel playlist)
+        public void Initialize(ILogger logger, IPlaylistViewModel playlist, IVideoPlayer videoPlayer)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
             if (playlist == null)
                 throw new ArgumentNullException("playlist");
+            if (videoPlayer == null)
+                throw new ArgumentNullException("videoPlayer");
 
             this.logger = logger;
-
+            
             try
             {
                 this.playlist = playlist;
+                this.videoPlayer = videoPlayer;
                 this.DataContext = playlist;
 
                 var first = playlist.Items.FirstOrDefault();
@@ -48,6 +52,16 @@ namespace Gnosis.Alexandria.Views
                 {
                     first.IsPlaying = true;
                     first.IsSelected = true;
+                }
+
+                var child = videoPlayer as UIElement;
+                if (child != null)
+                {
+                    videoHost.Children.Add(child); //.Child = uiChild;
+                }
+                else
+                {
+                    logger.Warn("  PlaylistView.Initialize: videoPlayer is not a valid UIEelement");
                 }
             }
             catch (Exception ex)

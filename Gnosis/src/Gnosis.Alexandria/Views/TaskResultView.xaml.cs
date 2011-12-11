@@ -31,9 +31,11 @@ namespace Gnosis.Alexandria.Views
         private ISecurityContext securityContext;
         private ITaskController taskController;
         private IMediaItemController mediaItemController;
+        private IVideoPlayer videoPlayer;
+
         private readonly IDictionary<Guid, ITaskResultViewModel> tabMap = new Dictionary<Guid, ITaskResultViewModel>();
 
-        public void Initialize(ILogger logger, ISecurityContext securityContext, ITaskController taskController, IMediaItemController mediaItemController)
+        public void Initialize(ILogger logger, ISecurityContext securityContext, ITaskController taskController, IMediaItemController mediaItemController, IVideoPlayer videoPlayer)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -43,11 +45,14 @@ namespace Gnosis.Alexandria.Views
                 throw new ArgumentNullException("taskController");
             if (mediaItemController == null)
                 throw new ArgumentNullException("mediaItemController");
+            if (videoPlayer == null)
+                throw new ArgumentNullException("videoPlayer");
 
             this.logger = logger;
             this.securityContext = securityContext;
             this.taskController = taskController;
             this.mediaItemController = mediaItemController;
+            this.videoPlayer = videoPlayer;
         }
 
         private void CloseTab(ITaskResultViewModel taskResultViewModel)
@@ -164,7 +169,7 @@ namespace Gnosis.Alexandria.Views
                 if (!tabMap.ContainsKey(taskViewModel.Id))
                 {
                     var playlistView = new PlaylistView();
-                    playlistView.Initialize(logger, playlist);
+                    playlistView.Initialize(logger, playlist, videoPlayer);
 
                     taskViewModel.AddStartedCallback(task => playlistView.OnItemStarted(task));
                     taskViewModel.AddResultsCallback(item => playlistView.OnItemEnded(item));

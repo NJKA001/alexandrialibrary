@@ -21,6 +21,7 @@ using Gnosis.Audio.Fmod;
 using Gnosis.Data.SQLite;
 using Gnosis.Links;
 using Gnosis.Tags;
+using Gnosis.Video.VideoLan;
 
 namespace Gnosis.Alexandria.Views
 {
@@ -74,13 +75,15 @@ namespace Gnosis.Alexandria.Views
 
                 audioStreamFactory = new AudioStreamFactory();
 
+                videoPlayer = new VideoPlayerControl();
+
                 catalogController = new CatalogController(logger, securityContext, mediaFactory, mediaRepository, linkRepository, tagRepository, artistRepository, albumRepository, trackRepository, clipRepository, audioStreamFactory);
                 spiderFactory = new SpiderFactory(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository, clipRepository, audioStreamFactory);
 
                 mediaItemController = new MediaItemController(logger, artistRepository, albumRepository, trackRepository);
-                taskController = new TaskController(logger, spiderFactory, mediaItemController, artistRepository, albumRepository, trackRepository, clipRepository);
+                taskController = new TaskController(logger, videoPlayer, spiderFactory, mediaItemController, artistRepository, albumRepository, trackRepository, clipRepository);
 
-                taskResultView.Initialize(logger, securityContext, taskController, mediaItemController);
+                taskResultView.Initialize(logger, securityContext, taskController, mediaItemController, videoPlayer);
                 taskManagerView.Initialize(logger, taskController, taskResultView);
                 searchView.Initialize(logger, taskController, taskResultView);
             }
@@ -104,6 +107,7 @@ namespace Gnosis.Alexandria.Views
         private readonly IMediaItemRepository<IClip> clipRepository;
 
         private readonly IAudioStreamFactory audioStreamFactory;
+        private readonly IVideoPlayer videoPlayer;
 
         private readonly SpiderFactory spiderFactory;
         private readonly ICatalogController catalogController;
