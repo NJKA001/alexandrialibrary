@@ -32,10 +32,11 @@
                     <Grid x:Name="itemNameControl" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="LightSkyBlue" HorizontalAlignment="Stretch" Margin="4" AllowDrop="True" Drop="itemImage_Drop">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="30"/>
-                            <ColumnDefinition Width="200*"/>
-                            <ColumnDefinition Width="100*"/>
-                            <ColumnDefinition Width="100*"/>
-                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="16"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -52,25 +53,25 @@
                             <TextBlock Text="FROM" FontSize="12" Foreground="DarkGray" Margin="0 4 8 0"/>
                             <TextBlock Text="{Binding TrackAlbumTitle}" FontSize="14" Margin="0 2 0 0"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="4" Margin="4" Orientation="Vertical" >
+                        <StackPanel Grid.Row="0" Grid.Column="5" Margin="4" Orientation="Vertical" >
                             <TextBlock Text="{Binding ResultType}" FontSize="10" HorizontalAlignment="Center" />
                             <TextBlock Text="{Binding Years}" FontSize="10" HorizontalAlignment="Center" />
                         </StackPanel>
-                        <local:HoveringCloseIcon x:Name="itemCloseIcon" Grid.Row="0" Grid.Column="5" VerticalAlignment="Top" IsClosed="{Binding IsClosed, Mode=TwoWay}"/>
+                        <local:HoveringCloseIcon x:Name="itemCloseIcon" Grid.Row="0" Grid.Column="6" VerticalAlignment="Top" IsClosed="{Binding IsClosed, Mode=TwoWay}"/>
                         <Expander Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Header="Details">
                             <Grid x:Name="itemGrid">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="224"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100*"/>
-                                    <ColumnDefinition Width="278"/>
-                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="224"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="16"/>
                                 </Grid.ColumnDefinitions>
                                 <Border x:Name="itemImageBorder" Grid.Row="0" Grid.Column="0" Margin="8" AllowDrop="True" Drop="itemImage_Drop">
                                     <Image x:Name="itemImage" Source="{Binding Path=Image, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" AllowDrop="True" Drop="itemImage_Drop" />
                                 </Border>
-                                <TabControl x:Name="tabControl" Grid.Row="0" Grid.Column="1" Margin="4 4 0 8" Background="LightBlue" ItemContainerStyle="{StaticResource tabItemStyle}">
+                                <TabControl x:Name="tabControl" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="4 4 8 4" Background="LightBlue" ItemContainerStyle="{StaticResource tabItemStyle}">
                                     <TabItem x:Name="albumTab" Visibility="{Binding AlbumsVisibility}" Style="{StaticResource tabItemStyle}">
                                         <TabItem.Header>
                                             <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
