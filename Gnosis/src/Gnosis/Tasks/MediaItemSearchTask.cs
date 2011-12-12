@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Algorithms;
+
 namespace Gnosis.Tasks
 {
     public class MediaItemSearchTask
@@ -38,9 +40,9 @@ namespace Gnosis.Tasks
             UpdateProgress(progressCount, maxProgress, description);
         }
 
-        protected override void DoWork()
+        private void AddArtistResults(IEnumerable<IArtist> artists)
         {
-            foreach (var artist in artistRepository.GetByName(pattern))
+            foreach (var artist in artists)
             {
                 AddProgress("Artist: " + artist.Name);
                 UpdateResults(artist);
@@ -50,8 +52,11 @@ namespace Gnosis.Tasks
                     UpdateResults(album);
                 }
             }
+        }
 
-            foreach (var album in albumRepository.GetByName(pattern))
+        private void AddAlbumResults(IEnumerable<IAlbum> albums)
+        {
+            foreach (var album in albums)
             {
                 AddProgress("Album: " + album.Name);
                 UpdateResults(album);
@@ -66,18 +71,53 @@ namespace Gnosis.Tasks
                     UpdateResults(clip);
                 }
             }
+        }
 
-            foreach (var track in trackRepository.GetByName(pattern))
+        private void AddTrackResults(IEnumerable<ITrack> tracks)
+        {
+            foreach (var track in tracks)
             {
                 AddProgress("Track: " + track.Name);
                 UpdateResults(track);
             }
+        }
 
-            foreach (var clip in clipRepository.GetByName(pattern))
+        private void AddClipResults(IEnumerable<IClip> clips)
+        {
+            foreach (var clip in clips)
             {
                 AddProgress("Clip: " + clip.Name);
                 UpdateResults(clip);
             }
+        }
+
+        protected override void DoWork()
+        {
+            var americanized = pattern.ToAmericanizedString();
+
+            AddArtistResults(artistRepository.GetByName(pattern));
+            AddArtistResults(artistRepository.GetByTag(TagDomain.String, pattern));
+
+            if (!string.IsNullOrEmpty(americanized))
+                AddArtistResults(artistRepository.GetByTag(TagDomain.String, americanized, Algorithm.Americanized));
+
+            AddAlbumResults(albumRepository.GetByName(pattern));
+            AddAlbumResults(albumRepository.GetByTag(TagDomain.String, pattern));
+            
+            if (!string.IsNullOrEmpty(americanized))
+                AddAlbumResults(albumRepository.GetByTag(TagDomain.String, americanized, Algorithm.Americanized));
+
+            AddTrackResults(trackRepository.GetByName(pattern));
+            AddTrackResults(trackRepository.GetByTag(TagDomain.String, pattern));
+
+            if (!string.IsNullOrEmpty(americanized))
+                AddTrackResults(trackRepository.GetByTag(TagDomain.String, americanized, Algorithm.Americanized));
+
+            AddClipResults(clipRepository.GetByName(pattern));
+            AddClipResults(clipRepository.GetByTag(TagDomain.String, pattern));
+
+            if (!string.IsNullOrEmpty(americanized))
+                AddClipResults(clipRepository.GetByTag(TagDomain.String, americanized, Algorithm.Americanized));
 
             UpdateProgress(maxProgress, maxProgress, "Completed");
         }

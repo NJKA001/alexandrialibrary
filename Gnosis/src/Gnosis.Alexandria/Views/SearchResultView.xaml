@@ -151,9 +151,11 @@
                                         </TabItem.Header>
                                         <ScrollViewer VerticalScrollBarVisibility="Auto">
                                             <TextBlock x:Name="summaryTextBlock" Text="{Binding Summary}" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4" >
-                                                <ContextMenu>
-                                                    <MenuItem x:Name="summaryPasteMenuItem" Header="Paste" Click="summaryPasteMenuItem_Click"/>
-                                                </ContextMenu>
+                                                <TextBlock.ContextMenu>
+                                                    <ContextMenu>
+                                                        <MenuItem x:Name="summaryPasteMenuItem" Header="Paste" Click="summaryPasteMenuItem_Click"/>
+                                                    </ContextMenu>
+                                                </TextBlock.ContextMenu>
                                             </TextBlock>
                                         </ScrollViewer>
                                     </TabItem>
