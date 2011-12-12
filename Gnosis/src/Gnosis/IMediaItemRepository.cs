@@ -18,5 +18,8 @@ namespace Gnosis
         IEnumerable<T> GetByCreator(Uri creator);
         IEnumerable<T> GetByName(string name);
         IEnumerable<T> GetByTarget(Uri target);
+
+        IEnumerable<T> GetByTag(TagDomain domain, string pattern);
+        IEnumerable<T> GetByTag(TagDomain domain, string pattern, IAlgorithm algorithm);
     }
 }

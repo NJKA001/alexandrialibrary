@@ -152,6 +152,16 @@ namespace Gnosis.Data.SQLite
             return builder;
         }
 
+        protected virtual ICommandBuilder GetSelectByTagBuilder(TagDomain domain, string pattern, IAlgorithm algorithm)
+        {
+            var builder = new CommandBuilder();
+            builder.AppendFormatLine("select {0}.* from {0} inner join Tag on {0}.Location = Tag.Target where Tag.Algorithm = @Algorithm and Tag.Domain = @Domain and Tag.Value like @Pattern;", tableName);
+            builder.AddParameter("@Algorithm", algorithm.Id);
+            builder.AddParameter("@Domain", (int)domain);
+            builder.AddParameter("@Pattern", pattern);
+            return builder;
+        }
+
         protected virtual IEnumerable<T> GetItems(ICommandBuilder builder)
         {
             IDbConnection connection = null;
@@ -376,6 +386,31 @@ namespace Gnosis.Data.SQLite
             try
             {
                 var builder = GetSelectByTargetBuilder(target);
+
+                return GetItems(builder);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(string.Format("  {0}.GetByTarget", this.GetType().Name), ex);
+                throw;
+            }
+        }
+        
+        public IEnumerable<T> GetByTag(TagDomain domain, string pattern)
+        {
+            return GetByTag(domain, pattern, Algorithms.Algorithm.Default);
+        }
+
+        public IEnumerable<T> GetByTag(TagDomain domain, string pattern, IAlgorithm algorithm)
+        {
+            if (pattern == null)
+                throw new ArgumentNullException("pattern");
+            if (algorithm == null)
+                throw new ArgumentNullException("algorithm");
+
+            try
+            {
+                var builder = GetSelectByTagBuilder(domain, pattern, algorithm);
 
                 return GetItems(builder);
             }

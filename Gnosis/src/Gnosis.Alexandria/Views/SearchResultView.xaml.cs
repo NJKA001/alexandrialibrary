@@ -44,6 +44,37 @@ namespace Gnosis.Alexandria.Views
         private readonly IDictionary<string, ArtistSearchResultViewModel> artistResults = new Dictionary<string, ArtistSearchResultViewModel>();
         private readonly IDictionary<string, AlbumSearchResultViewModel> albumResults = new Dictionary<string, AlbumSearchResultViewModel>();
 
+        private void summaryPasteMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var element = sender as UIElement;
+                if (element == null)
+                    return;
+
+                var listBoxItem = element.FindContainingItem<ListBoxItem>();
+                if (listBoxItem == null)
+                    return;
+
+                var resultViewModel = listBoxItem.DataContext as ISearchResultViewModel;
+                if (resultViewModel == null)
+                    return;
+
+                if (Clipboard.ContainsText(TextDataFormat.Text))
+                {
+                    var text = Clipboard.GetText(TextDataFormat.Text);
+                    if (text != null)
+                    {
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  SearchResultView.summaryPasteMenuItem_Click", ex);
+            }
+        }
+
         private void albumListBoxItem_PreviewLeftMouseButtonDown(object sender, MouseButtonEventArgs e)
         {
             try
@@ -64,7 +95,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                logger.Error("  albumListBoxItem_PreviewLeftMouseButtonDown", ex);
+                logger.Error("  SearchResultView.albumListBoxItem_PreviewLeftMouseButtonDown", ex);
             }
         }
 
@@ -189,17 +220,22 @@ namespace Gnosis.Alexandria.Views
                                     {
                                         if (viewModel is ArtistSearchResultViewModel)
                                         {
-                                            mediaItemController.SetArtistThumbnail(viewModel.MediaItem, thumbnail, thumbnailData);
+                                            mediaItemController.UpdateThumbnail<IArtist>(viewModel.MediaItem, thumbnail, thumbnailData);
                                             viewModel.UpdateThumbnail(thumbnail, thumbnailData);
                                         }
                                         else if (viewModel is AlbumSearchResultViewModel)
                                         {
-                                            mediaItemController.SetAlbumThumbnail(viewModel.MediaItem, thumbnail, thumbnailData);
+                                            mediaItemController.UpdateThumbnail<IAlbum>(viewModel.MediaItem, thumbnail, thumbnailData);
                                             viewModel.UpdateThumbnail(thumbnail, thumbnailData);
                                         }
                                         else if (viewModel is TrackSearchResultViewModel)
                                         {
-                                            mediaItemController.SetTrackThumbnail(viewModel.MediaItem, thumbnail, thumbnailData);
+                                            mediaItemController.UpdateThumbnail<ITrack>(viewModel.MediaItem, thumbnail, thumbnailData);
+                                            viewModel.UpdateThumbnail(thumbnail, thumbnailData);
+                                        }
+                                        else if (viewModel is ClipSearchResultViewModel)
+                                        {
+                                            mediaItemController.UpdateThumbnail<IClip>(viewModel.MediaItem, thumbnail, thumbnailData);
                                             viewModel.UpdateThumbnail(thumbnail, thumbnailData);
                                         }
                                         else

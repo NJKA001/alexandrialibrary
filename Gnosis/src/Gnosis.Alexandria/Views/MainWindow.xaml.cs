@@ -80,7 +80,7 @@ namespace Gnosis.Alexandria.Views
                 catalogController = new CatalogController(logger, securityContext, mediaFactory, mediaRepository, linkRepository, tagRepository, artistRepository, albumRepository, trackRepository, clipRepository, audioStreamFactory);
                 spiderFactory = new SpiderFactory(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository, clipRepository, audioStreamFactory);
 
-                mediaItemController = new MediaItemController(logger, artistRepository, albumRepository, trackRepository);
+                mediaItemController = new MediaItemController(logger, artistRepository, albumRepository, trackRepository, clipRepository);
                 taskController = new TaskController(logger, videoPlayer, spiderFactory, mediaItemController, artistRepository, albumRepository, trackRepository, clipRepository);
 
                 taskResultView.Initialize(logger, securityContext, taskController, mediaItemController, videoPlayer);

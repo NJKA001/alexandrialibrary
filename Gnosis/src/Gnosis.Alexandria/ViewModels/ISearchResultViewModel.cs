@@ -23,7 +23,7 @@ namespace Gnosis.Alexandria.ViewModels
         object Image { get; }
 
         string Summary { get; }
-        Visibility SummaryVisibility { get; }
+        string SummaryLabel { get; }
         Visibility TracksVisibility { get; }
         IEnumerable<ITrackViewModel> Tracks { get; }
 
@@ -38,5 +38,6 @@ namespace Gnosis.Alexandria.ViewModels
         void AddTrack(ITrackViewModel track);
 
         void UpdateThumbnail(Uri thumbnail, byte[] thumbnailData);
+        void UpdateSummary(string summary);
     }
 }

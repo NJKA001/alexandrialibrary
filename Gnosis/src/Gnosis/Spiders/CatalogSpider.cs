@@ -123,12 +123,15 @@ namespace Gnosis.Spiders
             {
                 var artist = audio.GetArtist(securityContext, trackRepository, artistRepository);
                 artistRepository.Save(new List<IArtist> { artist });
+                tagRepository.Save(artist.GetTags());
 
                 var album = audio.GetAlbum(securityContext, trackRepository, albumRepository, artist);
                 albumRepository.Save(new List<IAlbum> { album });
+                tagRepository.Save(album.GetTags());
 
                 var track = audio.GetTrack(securityContext, trackRepository, audioStreamFactory, artist, album);
                 trackRepository.Save(new List<ITrack> { track });
+                tagRepository.Save(track.GetTags());
 
                 var trackDate = track.FromDate > DateTime.MinValue ? track.FromDate : track.ToDate;
                 if (album.FromDate == DateTime.MinValue && trackDate != DateTime.MinValue)
@@ -181,12 +184,15 @@ namespace Gnosis.Spiders
             {
                 var artist = video.GetArtist(securityContext, clipRepository, artistRepository);
                 artistRepository.Save(new List<IArtist> { artist });
+                tagRepository.Save(artist.GetTags());
 
                 var album = video.GetAlbum(securityContext, clipRepository, albumRepository, artist);
                 albumRepository.Save(new List<IAlbum> { album });
+                tagRepository.Save(album.GetTags());
 
                 var clip = video.GetClip(securityContext, clipRepository, artist, album);
                 clipRepository.Save(new List<IClip> { clip });
+                tagRepository.Save(clip.GetTags());
 
                 var clipDate = clip.FromDate > DateTime.MinValue ? clip.FromDate : clip.ToDate;
                 if (album.FromDate == DateTime.MinValue && clipDate != DateTime.MinValue)

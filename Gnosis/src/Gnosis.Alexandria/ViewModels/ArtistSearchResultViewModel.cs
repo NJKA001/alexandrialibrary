@@ -21,8 +21,10 @@ namespace Gnosis.Alexandria.ViewModels
         private string icon = "pack://application:,,,/Images/artist.png";
         private bool isClosed;
         private bool isSelected;
-        private object imageOverride;
         private readonly IList<Action<ISearchResultViewModel>> closeCallbacks = new List<Action<ISearchResultViewModel>>();
+
+        private object imageOverride;
+        private string summaryOverride;
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -93,12 +95,17 @@ namespace Gnosis.Alexandria.ViewModels
 
         public string Summary
         {
-            get { return artist.Summary; }
+            get { return summaryOverride != null ? summaryOverride : artist.Summary; }
+            private set
+            {
+                summaryOverride = value;
+                OnPropertyChanged("Summary");
+            }
         }
 
-        public Visibility SummaryVisibility
+        public string SummaryLabel
         {
-            get { return Visibility.Visible; }
+            get { return "Summary"; }
         }
 
         public Visibility TracksVisibility
@@ -182,6 +189,14 @@ namespace Gnosis.Alexandria.ViewModels
             {
                 Image = thumbnail;
             }
+        }
+
+        public void UpdateSummary(string summary)
+        {
+            if (summary == null)
+                throw new ArgumentNullException("summary");
+
+            Summary = summary;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

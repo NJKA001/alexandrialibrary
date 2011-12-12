@@ -143,14 +143,18 @@
                                             </ListBox.ItemTemplate>
                                         </ListBox>
                                     </TabItem>
-                                    <TabItem x:Name="bioTab" Visibility="{Binding BioVisibility}" Style="{StaticResource tabItemStyle}">
+                                    <TabItem x:Name="summaryTab" Style="{StaticResource tabItemStyle}">
                                         <TabItem.Header>
                                             <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
-                                                <TextBlock Text="Summary"/>
+                                                <TextBlock Text="{Binding SummaryLabel}"/>
                                             </HeaderedContentControl>
                                         </TabItem.Header>
                                         <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                            <TextBlock Text="{Binding Bio}" TextWrapping="Wrap" Width="300" Margin="4" />
+                                            <TextBlock x:Name="summaryTextBlock" Text="{Binding Summary}" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4" >
+                                                <ContextMenu>
+                                                    <MenuItem x:Name="summaryPasteMenuItem" Header="Paste" Click="summaryPasteMenuItem_Click"/>
+                                                </ContextMenu>
+                                            </TextBlock>
                                         </ScrollViewer>
                                     </TabItem>
                                     <TabItem x:Name="linksTab" Style="{StaticResource tabItemStyle}">

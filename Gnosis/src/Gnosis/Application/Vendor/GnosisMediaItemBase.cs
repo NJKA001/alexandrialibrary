@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Algorithms;
+using Gnosis.Tags;
+
 namespace Gnosis.Application.Vendor
 {
     public abstract class GnosisMediaItemBase
@@ -193,7 +196,23 @@ namespace Gnosis.Application.Vendor
 
         public virtual IEnumerable<ITag> GetTags()
         {
-            return Enumerable.Empty<ITag>();
+            var tags = new List<ITag>();
+
+            tags.Add(new Tag(Location, TagType.DefaultString, Name.ToAmericanizedString(), Algorithm.Americanized));
+            foreach (var token in Name.Split(' '))
+            {
+                if (token == null)
+                    continue;
+                
+                var trimmed = token.Trim();
+                if (trimmed == string.Empty)
+                    continue;
+
+                tags.Add(new Tag(Location, TagType.DefaultString, trimmed));
+                tags.Add(new Tag(Location, TagType.DefaultString, trimmed.ToAmericanizedString()));
+            }
+
+            return tags;
         }
     }
 }
