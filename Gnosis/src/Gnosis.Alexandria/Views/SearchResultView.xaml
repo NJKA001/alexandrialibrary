@@ -31,7 +31,7 @@
                 <DataTemplate>
                     <Grid x:Name="itemNameControl" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="LightSkyBlue" HorizontalAlignment="Stretch" Margin="4" AllowDrop="True" Drop="itemImage_Drop">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="36"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -40,7 +40,7 @@
                             <ColumnDefinition Width="16"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="36"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Image x:Name="itemIcon" Grid.Column="0" Source="{Binding Path=Image, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="24" Width="24" Margin="2"/>
@@ -179,6 +179,24 @@
                                                 <TextBlock Text="More"/>
                                             </HeaderedContentControl>
                                         </TabItem.Header>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="40"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Row="0" Grid.Column="0" Text="ID" Margin="4"/>
+                                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding MediaItem}" Margin="4"/>
+                                            <!--
+                                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Target" Margin="4"/>
+                                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Target}" Margin="4"/>
+                                            <TextBlock Grid.Row="2" Grid.Column="0" Text="TargetType" Margin="4"/>
+                                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding TargetType}" Margin="4"/>-->
+                                        </Grid>
                                     </TabItem>
                                 </TabControl>
                             </Grid>

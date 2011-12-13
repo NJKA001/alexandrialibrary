@@ -43,6 +43,8 @@ namespace Gnosis.Alexandria.Views
 
         private readonly IDictionary<string, ArtistSearchResultViewModel> artistResults = new Dictionary<string, ArtistSearchResultViewModel>();
         private readonly IDictionary<string, AlbumSearchResultViewModel> albumResults = new Dictionary<string, AlbumSearchResultViewModel>();
+        private readonly IDictionary<string, TrackSearchResultViewModel> trackResults = new Dictionary<string, TrackSearchResultViewModel>();
+        private readonly IDictionary<string, ClipSearchResultViewModel> clipResults = new Dictionary<string, ClipSearchResultViewModel>();
 
         private void summaryPasteMenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -314,20 +316,22 @@ namespace Gnosis.Alexandria.Views
                     var albumKey = result.Location.ToString();
                     if (!artistResults.ContainsKey(artistKey))
                     {
-                        var resultViewModel = new AlbumSearchResultViewModel(albumViewModel);
                         if (!albumResults.ContainsKey(albumKey))
                         {
+                            var resultViewModel = new AlbumSearchResultViewModel(albumViewModel);
+                            AddResult(resultViewModel);
                             albumResults.Add(albumKey, resultViewModel);
                         }
-
-                        AddResult(resultViewModel);
                     }
                     else
                     {
-                        var existing = artistResults[artistKey].Albums.Where(x => x.Album.ToString() == albumViewModel.Album.ToString()).FirstOrDefault();
-                        if (existing == null)
+                        if (!albumResults.ContainsKey(albumKey))
                         {
-                            AddAlbum(artistResults[artistKey], albumViewModel);
+                            var existing = artistResults[artistKey].Albums.Where(x => x.Album.ToString() == albumViewModel.Album.ToString()).FirstOrDefault();
+                            if (existing == null)
+                            {
+                                AddAlbum(artistResults[artistKey], albumViewModel);
+                            }
                         }
                     }
                 }
@@ -336,19 +340,26 @@ namespace Gnosis.Alexandria.Views
                     var trackViewModel = new TrackViewModel(result.Location, result.Name, result.Summary, result.Number, result.Duration, result.FromDate, result.Creator, result.CreatorName, result.Catalog, result.CatalogName, result.Target, result.TargetType, result.Thumbnail, result.ThumbnailData);
 
                     var albumKey = result.Catalog.ToString();
+                    var trackKey = result.Location.ToString();
                     if (!albumResults.ContainsKey(albumKey))
                     {
-                        var resultViewModel = new TrackSearchResultViewModel(trackViewModel);
-
-                        AddResult(resultViewModel);
+                        if (!trackResults.ContainsKey(trackKey))
+                        {
+                            var resultViewModel = new TrackSearchResultViewModel(trackViewModel);
+                            trackResults.Add(trackKey, resultViewModel);
+                            AddResult(resultViewModel);
+                        }
                     }
                     else
                     {
-                        //var existing = albumResults[albumKey].Tracks.Where(x => x.Album.ToString() == trackViewModel.Album.ToString()).FirstOrDefault();
-                        //if (existing == null)
-                        //{
+                        if (!trackResults.ContainsKey(trackKey))
+                        {
+                            //var existing = albumResults[albumKey].Tracks.Where(x => x.Album.ToString() == trackViewModel.Album.ToString()).FirstOrDefault();
+                            //if (existing == null)
+                            //{
                             AddTrack(albumResults[albumKey], trackViewModel);
-                        //}
+                            //}
+                        }
                     }
                 }
                 else if (result is IClip)
@@ -356,19 +367,26 @@ namespace Gnosis.Alexandria.Views
                     var clipViewModel = new ClipViewModel(result.Location, result.Name, result.Summary, result.Number, result.Duration, result.Height, result.Width, result.FromDate, result.Creator, result.CreatorName, result.Catalog, result.CatalogName, result.Target, result.TargetType, result.Thumbnail, result.ThumbnailData);
 
                     var albumKey = result.Catalog.ToString();
+                    var clipKey = result.Location.ToString();
                     if (!albumResults.ContainsKey(albumKey))
                     {
-                        var resultViewModel = new ClipSearchResultViewModel(clipViewModel);
-
-                        AddResult(resultViewModel);
+                        if (!clipResults.ContainsKey(clipKey))
+                        {
+                            var resultViewModel = new ClipSearchResultViewModel(clipViewModel);
+                            clipResults.Add(clipKey, resultViewModel);
+                            AddResult(resultViewModel);
+                        }
                     }
                     else
                     {
-                        //var existing = albumResults[albumKey].Tracks.Where(x => x.Album.ToString() == trackViewModel.Album.ToString()).FirstOrDefault();
-                        //if (existing == null)
-                        //{
-                        AddClip(albumResults[albumKey], clipViewModel);
-                        //}
+                        if (!clipResults.ContainsKey(clipKey))
+                        {
+                            //var existing = albumResults[albumKey].Tracks.Where(x => x.Album.ToString() == trackViewModel.Album.ToString()).FirstOrDefault();
+                            //if (existing == null)
+                            //{
+                            AddClip(albumResults[albumKey], clipViewModel);
+                            //}
+                        }
                     }
                 }
             }
