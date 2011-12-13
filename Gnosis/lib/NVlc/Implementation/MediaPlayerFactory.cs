@@ -82,7 +82,7 @@ namespace Implementation
                 throw new LibVlcInitException();
             }
 
-            m_log = new Log(m_hMediaLib, new NLogger());
+            m_log = new Log(m_hMediaLib, new Logger());
             m_log.Enabled = true;
         }
 

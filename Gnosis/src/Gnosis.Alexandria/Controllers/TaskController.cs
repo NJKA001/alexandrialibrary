@@ -8,7 +8,6 @@ using Gnosis.Alexandria.ViewModels;
 using Gnosis.Audio;
 using Gnosis.Audio.Fmod;
 using Gnosis.Tasks;
-using Gnosis.Video.VideoLan;
 
 namespace Gnosis.Alexandria.Controllers
 {

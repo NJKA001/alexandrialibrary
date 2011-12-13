@@ -142,10 +142,6 @@
       <Project>{1629B512-34A2-4F04-AB9A-EBD30228EBDC}</Project>
       <Name>Gnosis.Audio.Fmod</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Gnosis.Video.VideoLan\Gnosis.Video.VideoLan.csproj">
-      <Project>{0D617442-C1BF-42D5-AC8A-E93C0068B086}</Project>
-      <Name>Gnosis.Video.VideoLan</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Gnosis\Gnosis.csproj">
       <Project>{37091600-5BFE-4FCB-8A69-F016FF451462}</Project>
       <Name>Gnosis</Name>

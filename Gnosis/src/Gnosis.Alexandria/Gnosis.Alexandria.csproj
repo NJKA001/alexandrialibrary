@@ -223,7 +223,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -246,9 +248,9 @@
       <Project>{B36EA69D-F61D-4002-9E0E-FB0F897C6977}</Project>
       <Name>Gnosis.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Gnosis.Video.VideoLan\Gnosis.Video.VideoLan.csproj">
-      <Project>{0D617442-C1BF-42D5-AC8A-E93C0068B086}</Project>
-      <Name>Gnosis.Video.VideoLan</Name>
+    <ProjectReference Include="..\Gnosis.Video.Vlc\Gnosis.Video.Vlc.csproj">
+      <Project>{5B68690D-78AC-48E1-ACC2-38999CCEDC06}</Project>
+      <Name>Gnosis.Video.Vlc</Name>
     </ProjectReference>
     <ProjectReference Include="..\Gnosis\Gnosis.csproj">
       <Project>{37091600-5BFE-4FCB-8A69-F016FF451462}</Project>

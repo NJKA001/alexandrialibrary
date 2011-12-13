@@ -21,7 +21,6 @@ using Gnosis.Audio.Fmod;
 using Gnosis.Data.SQLite;
 using Gnosis.Links;
 using Gnosis.Tags;
-using Gnosis.Video.VideoLan;
 
 namespace Gnosis.Alexandria.Views
 {
@@ -75,7 +74,7 @@ namespace Gnosis.Alexandria.Views
 
                 audioStreamFactory = new AudioStreamFactory();
 
-                videoPlayer = new VideoPlayerControl();
+                videoPlayer = new Gnosis.Video.Vlc.VideoPlayerControl();
 
                 catalogController = new CatalogController(logger, securityContext, mediaFactory, mediaRepository, linkRepository, tagRepository, artistRepository, albumRepository, trackRepository, clipRepository, audioStreamFactory);
                 spiderFactory = new SpiderFactory(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository, clipRepository, audioStreamFactory);

@@ -75,7 +75,7 @@ namespace Gnosis.Video.VideoLan
             // Pauses the playback of a movie on the last frame
             VlcContext.StartupOptions.AddOption("--play-and-pause");
 
-            VlcContext.StartupOptions.AddOption("--file-caching=1000");
+            VlcContext.StartupOptions.AddOption("--file-caching=2000");
             VlcContext.StartupOptions.AddOption("--ffmpeg-skiploopfilter=4");
 
             // Initialize the VlcContext
