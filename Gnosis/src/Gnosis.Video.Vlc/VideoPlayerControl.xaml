@@ -8,20 +8,24 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="356*" />
-            <RowDefinition Height="170*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Button Height="23" HorizontalAlignment="Left" Margin="92,0,0,12" Name="button1" VerticalAlignment="Bottom" Width="50" Click="button1_Click" Grid.Row="1">Open</Button>
-        <Button Height="23" HorizontalAlignment="Left" Margin="270,0,0,54" Name="button2" VerticalAlignment="Bottom" Width="54" Click="button2_Click" Grid.Row="1">Pause</Button>
-        <Button Height="23" Margin="330,0,297,54" Name="button3" VerticalAlignment="Bottom" Click="button3_Click" Grid.Row="1">Play</Button>
-        <Button Height="23" Margin="0,0,242,54" Name="button4" VerticalAlignment="Bottom" Click="button4_Click" HorizontalAlignment="Right" Width="49" Grid.Row="1">Stop</Button>
-        <Button Height="23" HorizontalAlignment="Left" Margin="92,0,0,53" Name="button5" VerticalAlignment="Bottom" Width="45" Click="button5_Click" Grid.Row="1">Mute</Button>
-        <Slider Margin="92,65,81,83" Name="slider1" Maximum="1" Minimum="0" Thumb.DragCompleted="slider1_DragCompleted" Thumb.DragStarted="slider1_DragStarted" Grid.Row="1" Value="{Binding Mode=OneWay, Path=Position}" />
-        <fi:WindowsFormsHost Margin="92,14,81,119" Name="windowsFormsHost1" Grid.RowSpan="2" />
-        <Slider Height="22" HorizontalAlignment="Left" Margin="143,0,0,54" Name="slider2" VerticalAlignment="Bottom" Width="100" Grid.Row="1" ValueChanged="slider2_ValueChanged" Maximum="100" />
-        <TextBlock Height="21" Margin="157,0,81,12" Name="textBlock1" VerticalAlignment="Bottom" Grid.Row="1" />
-        <Label Height="28" HorizontalAlignment="Right" Margin="0,0,157,49" Name="label1" VerticalAlignment="Bottom" Width="60" Grid.Row="1">00:00:00</Label>
-        <Label Height="28" HorizontalAlignment="Right" Margin="0,0,136,49" Name="label2" VerticalAlignment="Bottom" Width="34" Grid.Row="1">/</Label>
-        <Label Height="28" HorizontalAlignment="Right" Margin="0,0,98,49" Name="label3" VerticalAlignment="Bottom" Width="62" Grid.Row="1">00:00:00</Label>
+        <fi:WindowsFormsHost Grid.Row="0" Name="windowsFormsHost1" />
+        <WrapPanel Orientation="Horizontal" Grid.Row="1">
+            <Button Height="23" HorizontalAlignment="Left" Margin="4" Name="button1" VerticalAlignment="Bottom" Width="50" Click="button1_Click" Grid.Row="1">Open</Button>
+            <Button Height="23" HorizontalAlignment="Left" Margin="4" Name="button2" VerticalAlignment="Bottom" Width="50" Click="button2_Click" Grid.Row="1">Pause</Button>
+            <Button Height="23" Margin="4" Name="button3" VerticalAlignment="Bottom" Click="button3_Click" Grid.Row="1" Width="50">Play</Button>
+            <Button Height="23" Margin="4" Name="button4" VerticalAlignment="Bottom" Click="button4_Click" HorizontalAlignment="Right" Width="50" Grid.Row="1">Stop</Button>
+            <Button Height="23" HorizontalAlignment="Left" Margin="4" Name="button5" VerticalAlignment="Bottom" Width="50" Click="button5_Click" Grid.Row="1">Mute</Button>
+            <Label Margin="4">Position</Label>
+            <Slider Height="22" Margin="4" Width="200" Name="slider1" Maximum="1" Minimum="0" Thumb.DragCompleted="slider1_DragCompleted" Thumb.DragStarted="slider1_DragStarted" Grid.Row="1" Value="{Binding Mode=OneWay, Path=Position}" />
+            <Label Margin="12 4 4 4">Volume</Label>
+            <Slider Height="22"  Margin="4" Name="slider2" VerticalAlignment="Bottom" Width="100" Grid.Row="1" ValueChanged="slider2_ValueChanged" Maximum="100" />
+            <!--<TextBlock Height="21" Margin="157,0,81,12" Name="textBlock1" VerticalAlignment="Bottom" Grid.Row="1" />-->
+            <Label Height="28" HorizontalAlignment="Right" Margin="4" Name="label1" VerticalAlignment="Bottom" Width="60" Grid.Row="1">00:00:00</Label>
+            <Label Height="28" HorizontalAlignment="Right" Margin="4" Name="label2" VerticalAlignment="Bottom" Width="10" Grid.Row="1">/</Label>
+            <Label Height="28" HorizontalAlignment="Right" Margin="4" Name="label3" VerticalAlignment="Bottom" Width="60" Grid.Row="1">00:00:00</Label>
+        </WrapPanel>
     </Grid>
 </UserControl>

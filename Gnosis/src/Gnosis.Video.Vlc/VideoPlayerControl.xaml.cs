@@ -98,7 +98,7 @@ namespace Gnosis.Video.Vlc
 
         private void Open(string fileName)
         {
-            Dispatcher.Invoke(new Action(() => textBlock1.Text = fileName), DispatcherPriority.DataBind);
+            //Dispatcher.Invoke(new Action(() => textBlock1.Text = fileName), DispatcherPriority.DataBind);
 
             m_media = m_factory.CreateMedia<IMediaFromFile>(fileName);
             m_media.Events.DurationChanged += new EventHandler<MediaDurationChange>(Events_DurationChanged);
