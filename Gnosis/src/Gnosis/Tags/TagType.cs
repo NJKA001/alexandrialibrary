@@ -44,6 +44,11 @@ namespace Gnosis.Tags
             get { return domain; }
         }
 
+        public override string ToString()
+        {
+            return name;
+        }
+
         static TagType()
         {
             all.Add(DefaultString);

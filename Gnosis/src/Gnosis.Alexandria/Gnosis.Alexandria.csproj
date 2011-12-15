@@ -91,6 +91,7 @@
     <Compile Include="ViewModels\IPlaylistViewModel.cs" />
     <Compile Include="ViewModels\IMediaItemViewModel.cs" />
     <Compile Include="ViewModels\ISearchResultViewModel.cs" />
+    <Compile Include="ViewModels\ITagViewModel.cs" />
     <Compile Include="ViewModels\ITaskDetailViewModel.cs" />
     <Compile Include="ViewModels\ITaskResultViewModel.cs" />
     <Compile Include="ViewModels\ITrackViewModel.cs" />

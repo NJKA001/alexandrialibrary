@@ -30,6 +30,10 @@ namespace Gnosis.Alexandria.ViewModels
         Visibility AlbumsVisibility { get; }
         IEnumerable<IAlbumViewModel> Albums { get; }
 
+        //IEnumerable<ITagViewModel> Tags { get; }
+        //void AddTag(ITag tag);
+        //void RemoveTag(ITag tag);
+
         bool IsClosed { get; set; }
         bool IsSelected { get; set; }
 

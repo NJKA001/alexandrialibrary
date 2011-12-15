@@ -172,6 +172,32 @@
                                                 <TextBlock Text="Tags"/>
                                             </HeaderedContentControl>
                                         </TabItem.Header>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                                
+                                            </StackPanel>
+                                            <ListBox Grid.Row="1" ItemsSource="{Binding Tags}">
+                                                <ListBox.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel Orientation="Horizontal" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Border}},Path=ActualWidth}" />
+                                                    </ItemsPanelTemplate>
+                                                </ListBox.ItemsPanel>
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border Background="#719CC1" CornerRadius="4">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Background="#4CC0A9" Text="{Binding Type}" Margin="4"/>
+                                                            <TextBlock Text="{Binding Value}" Margin="4"/>
+                                                        </StackPanel>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                            </ListBox>
+                                        </Grid>
                                     </TabItem>
                                     <TabItem x:Name="moreTab" Style="{StaticResource tabItemStyle}">
                                         <TabItem.Header>
