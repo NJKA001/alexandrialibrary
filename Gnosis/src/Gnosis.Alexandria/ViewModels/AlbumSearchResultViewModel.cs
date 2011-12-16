@@ -110,12 +110,17 @@ namespace Gnosis.Alexandria.ViewModels
 
         public Visibility TracksVisibility
         {
-            get { return Visibility.Visible; }
+            get { return album.Tracks.Count() > 0 ? Visibility.Visible: Visibility.Collapsed; }
         }
 
         public IEnumerable<ITrackViewModel> Tracks
         {
             get { return album.Tracks; }
+        }
+
+        public Visibility ClipsVisibility
+        {
+            get { return album.Clips.Count() > 0 ? Visibility.Visible : Visibility.Collapsed; }
         }
 
         public IEnumerable<IClipViewModel> Clips
@@ -182,6 +187,8 @@ namespace Gnosis.Alexandria.ViewModels
                 throw new ArgumentNullException("track");
 
             album.AddTrack(track);
+
+            OnPropertyChanged("TracksVisibility");
         }
 
         public void AddClip(IClipViewModel clip)
@@ -190,6 +197,8 @@ namespace Gnosis.Alexandria.ViewModels
                 throw new ArgumentNullException("clip");
 
             album.AddClip(clip);
+
+            OnPropertyChanged("ClipsVisibility");
         }
 
         public void UpdateThumbnail(Uri thumbnail, byte[] thumbnailData)

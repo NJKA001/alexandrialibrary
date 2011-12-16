@@ -147,17 +147,7 @@ namespace Gnosis.Alexandria.Views
                 if (listBoxItem == null)
                     return;
 
-                //var albumListBox = item.FindName("albumListBox");
-                //if (albumListBox != null)
-                //{
-                //    var selected = albumListBox;
-                //}
-
-                var result = listBoxItem.DataContext as ISearchResultViewModel;
-                if (result == null)
-                    return;
-                
-                var album = result.Albums.Where(x => x.IsSelected).FirstOrDefault();
+                var album = listBoxItem.DataContext as IAlbumViewModel;
                 if (album == null)
                     return;
 

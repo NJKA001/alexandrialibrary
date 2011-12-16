@@ -125,6 +125,16 @@ namespace Gnosis.Alexandria.ViewModels
             get { return Enumerable.Empty<ITrackViewModel>(); }
         }
 
+        public Visibility ClipsVisibility
+        {
+            get { return Visibility.Collapsed; }
+        }
+
+        public IEnumerable<IClipViewModel> Clips
+        {
+            get { return Enumerable.Empty<IClipViewModel>(); }
+        }
+
         public Visibility AlbumsVisibility
         {
             get { return Visibility.Collapsed; }

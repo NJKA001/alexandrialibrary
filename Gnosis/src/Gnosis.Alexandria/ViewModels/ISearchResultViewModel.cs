@@ -24,8 +24,12 @@ namespace Gnosis.Alexandria.ViewModels
 
         string Summary { get; }
         string SummaryLabel { get; }
+        
         Visibility TracksVisibility { get; }
         IEnumerable<ITrackViewModel> Tracks { get; }
+
+        Visibility ClipsVisibility { get; }
+        IEnumerable<IClipViewModel> Clips { get; }
 
         Visibility AlbumsVisibility { get; }
         IEnumerable<IAlbumViewModel> Albums { get; }

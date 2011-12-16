@@ -3,7 +3,7 @@
                     xmlns:views="clr-namespace:Gnosis.Alexandria.Views">
     <Style x:Key="tabHeaderStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="FontWeight" Value="Normal"/>
-        <Setter Property="Foreground" Value="LightSlateGray"/>
+        <Setter Property="Foreground" Value="#87CCCC"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType={x:Type TabItem}}}" Value="True">
                 <Setter Property="Foreground" Value="Black"/>
@@ -51,10 +51,10 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="itemBorder" Property="Background" Value="LightBlue" />
+                            <Setter TargetName="itemBorder" Property="Background" Value="#6FCCCC" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="False">
-                            <Setter TargetName="itemBorder" Property="Background" Value="LightGray" />
+                            <Setter TargetName="itemBorder" Property="Background" Value="#3C9999" />
                             <!--<Setter TargetName="itemBorder" Property="BorderThickness" Value="1"/>-->
                         </Trigger>
                     </ControlTemplate.Triggers>

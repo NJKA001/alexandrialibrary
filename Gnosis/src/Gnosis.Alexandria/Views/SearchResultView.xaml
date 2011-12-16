@@ -29,7 +29,7 @@
         <ListBox x:Name="searchResultControl" ItemsSource="{Binding Results}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid x:Name="itemNameControl" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="LightSkyBlue" HorizontalAlignment="Stretch" Margin="4" AllowDrop="True" Drop="itemImage_Drop">
+                    <Grid x:Name="itemNameControl" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#AAD2FF" HorizontalAlignment="Stretch" Margin="4" AllowDrop="True" Drop="itemImage_Drop">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="36"/>
                             <ColumnDefinition Width="Auto"/>
@@ -72,7 +72,7 @@
                                     <Image x:Name="itemImage" Source="{Binding Path=Image, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" AllowDrop="True" Drop="itemImage_Drop" />
                                 </Border>
                                 <TabControl x:Name="tabControl" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="4 4 8 4" Background="LightBlue" ItemContainerStyle="{StaticResource tabItemStyle}">
-                                    <TabItem x:Name="albumTab" Visibility="{Binding AlbumsVisibility}" Style="{StaticResource tabItemStyle}">
+                                    <TabItem x:Name="albumTab" Visibility="{Binding AlbumsVisibility}" Style="{StaticResource tabItemStyle}" IsSelected="True">
                                         <TabItem.Header>
                                             <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
                                                 <TextBlock Text="Albums"/>
@@ -107,7 +107,7 @@
                                             </ListBox>
                                         </Grid>
                                     </TabItem>
-                                    <TabItem x:Name="tracksTab" Visibility="{Binding TracksVisibility}" Style="{StaticResource tabItemStyle}">
+                                    <TabItem x:Name="tracksTab" Visibility="{Binding TracksVisibility}" Style="{StaticResource tabItemStyle}" IsSelected="True">
                                         <TabItem.Header>
                                             <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
                                                 <TextBlock Text="Tracks"/>
@@ -125,7 +125,7 @@
                                             </ListBox.ItemTemplate>
                                         </ListBox>
                                     </TabItem>
-                                    <TabItem x:Name="clipsTab" Visibility="{Binding TracksVisibility}" Style="{StaticResource tabItemStyle}">
+                                    <TabItem x:Name="clipsTab" Visibility="{Binding ClipsVisibility}" Style="{StaticResource tabItemStyle}" IsSelected="True">
                                         <TabItem.Header>
                                             <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
                                                 <TextBlock Text="Clips"/>
@@ -143,7 +143,7 @@
                                             </ListBox.ItemTemplate>
                                         </ListBox>
                                     </TabItem>
-                                    <TabItem x:Name="summaryTab" Style="{StaticResource tabItemStyle}">
+                                    <TabItem x:Name="summaryTab" Style="{StaticResource tabItemStyle}" IsSelected="True">
                                         <TabItem.Header>
                                             <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
                                                 <TextBlock Text="{Binding SummaryLabel}"/>
