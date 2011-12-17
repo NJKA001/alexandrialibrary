@@ -4,7 +4,7 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:views="clr-namespace:Gnosis.Alexandria.Views"
         Title="Alexandria" 
-        Height="480" Width="640">
+        Height="480" Width="640" MinHeight="480" MinWidth="640">
         <!--:FullScreenBehavior.IsFullScreen="{Binding Path=IsChecked, ElementName=FullScreenButton, Mode=TwoWay}"-->
     <i:Interaction.Behaviors>
         <views:FullScreenBehavior

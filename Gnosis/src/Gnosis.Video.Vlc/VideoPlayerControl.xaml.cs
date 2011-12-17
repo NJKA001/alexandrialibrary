@@ -27,13 +27,15 @@ namespace Gnosis.Video.Vlc
         Declarations.Media.IMedia m_media;
         private volatile bool m_isDrag;
 
+        private System.Windows.Forms.Panel panel;
+
         public VideoPlayerControl()
         {
             InitializeComponent();
 
-            System.Windows.Forms.Panel p = new System.Windows.Forms.Panel();
-            p.BackColor = System.Drawing.Color.Black;
-            windowsFormsHost1.Child = p;
+            panel = new System.Windows.Forms.Panel();
+            panel.BackColor = System.Drawing.Color.Black;
+            formHost.Child = panel;
 
             m_factory = new MediaPlayerFactory();
             m_player = m_factory.CreatePlayer<Declarations.Players.IVideoPlayer>();
@@ -45,7 +47,7 @@ namespace Gnosis.Video.Vlc
             m_player.Events.MediaEnded += new EventHandler(Events_MediaEnded);
             m_player.Events.PlayerStopped += new EventHandler(Events_PlayerStopped);
 
-            m_player.WindowHandle = p.Handle;
+            m_player.WindowHandle = panel.Handle;
             slider2.Value = m_player.Volume;
         }
 
@@ -165,6 +167,40 @@ namespace Gnosis.Video.Vlc
         private void slider1_DragStarted(object sender, DragStartedEventArgs e)
         {
             m_isDrag = true;
+        }
+
+        private void placeholderLabel_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            try
+            {
+                playbackPanel.Visibility = Visibility.Visible;
+                placeholderLabel.Visibility = Visibility.Collapsed;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  VideoPlayerControl.placeholderLabel_MouseEnter", ex);
+            }
+        }
+
+        private void playbackPanel_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            try
+            {
+                var position = e.GetPosition(null);
+
+                var bounds = panel.Height + 30;
+                System.Diagnostics.Debug.WriteLine("  position=" + position.Y + " bounds=" + bounds);
+
+                if (position.Y < bounds)
+                {
+                    playbackPanel.Visibility = Visibility.Collapsed;
+                    placeholderLabel.Visibility = Visibility.Visible;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  VideoPlayerControl.placeholderLabel_MouseEnter", ex);
+            }
         }
 
         public void Initialize(ILogger logger, Func<IVideoHost> getHost)
