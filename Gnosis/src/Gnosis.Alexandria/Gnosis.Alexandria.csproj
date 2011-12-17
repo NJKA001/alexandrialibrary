@@ -79,12 +79,9 @@
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Converters\RectConverter.cs" />
     <Compile Include="Controllers\ITaskController.cs" />
-    <Compile Include="ViewModels\AlbumSearchResultViewModel.cs" />
     <Compile Include="ViewModels\AlbumViewModel.cs" />
-    <Compile Include="ViewModels\ArtistSearchResultViewModel.cs" />
     <Compile Include="ViewModels\ArtistViewModel.cs" />
     <Compile Include="ViewModels\CatalogMediaTaskViewModel.cs" />
-    <Compile Include="ViewModels\ClipSearchResultViewModel.cs" />
     <Compile Include="ViewModels\ClipViewModel.cs" />
     <Compile Include="ViewModels\IAlbumContainerViewModel.cs" />
     <Compile Include="ViewModels\IAlbumViewModel.cs" />
@@ -121,7 +118,6 @@
     <Compile Include="ViewModels\TaskProgressDetailViewModel.cs" />
     <Compile Include="ViewModels\TaskResultViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
-    <Compile Include="ViewModels\TrackSearchResultViewModel.cs" />
     <Compile Include="ViewModels\TrackViewModel.cs" />
     <Compile Include="Views\CatalogResultView.xaml.cs">
       <DependentUpon>CatalogResultView.xaml</DependentUpon>

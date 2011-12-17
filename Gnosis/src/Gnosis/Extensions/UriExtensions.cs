@@ -14,7 +14,7 @@ namespace Gnosis
             if (self == null)
                 throw new ArgumentNullException("self");
 
-            return self.ToString() == Guid.NewGuid().ToUrn().ToString();
+            return self.ToString() == Guid.Empty.ToUrn().ToString();
         }
 
         public static string ToFileExtension(this Uri location)
