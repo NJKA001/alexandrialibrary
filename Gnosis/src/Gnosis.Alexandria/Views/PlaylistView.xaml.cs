@@ -60,7 +60,7 @@ namespace Gnosis.Alexandria.Views
                 {
                     videoPlayerWindow = new VideoPlayerWindow();
                     videoPlayerWindow.SetVideoPlayerElement(child);
-                    videoPlayerWindow.Show();
+                    //videoPlayerWindow.Show();
                 }
                 else
                 {

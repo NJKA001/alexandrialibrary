@@ -34,7 +34,7 @@
             <TextBlock Text="{Binding Year}" Foreground="Gray" FontSize="10" Margin="4"/>
         </StackPanel>
         <Image Grid.Row="1" Grid.Column="0" Source="{Binding Path=Image, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}"/>
-        <ListBox x:Name="itemControl" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Items}" ItemContainerStyle="{StaticResource playlistItemStyle}">
+        <ListBox x:Name="itemControl" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" ItemsSource="{Binding PlaylistItems}" ItemContainerStyle="{StaticResource playlistItemStyle}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
