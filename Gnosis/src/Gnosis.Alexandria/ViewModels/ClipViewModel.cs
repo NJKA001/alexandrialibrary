@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Alexandria.Controllers;
 using Gnosis.Application.Vendor;
 
 namespace Gnosis.Alexandria.ViewModels
@@ -11,8 +12,8 @@ namespace Gnosis.Alexandria.ViewModels
     public class ClipViewModel
         : MediaItemViewModel, IClipViewModel
     {
-        public ClipViewModel(IClip clip)
-            : base(clip, GetType(clip), GetIcon(clip))
+        public ClipViewModel(IMediaItemController controller, IClip clip)
+            : base(controller, clip, GetType(clip), GetIcon(clip))
         {
         }
 
@@ -71,7 +72,7 @@ namespace Gnosis.Alexandria.ViewModels
         public IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext)
         {
             var playlistItem = new GnosisPlaylistItem(Name, Summary, item.FromDate, item.Number, item.Duration, item.Creator, item.CreatorName, item.Catalog, item.CatalogName, item.Target, item.TargetType, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, item.Thumbnail, item.ThumbnailData);
-            return new PlaylistItemViewModel(playlistItem);
+            return new PlaylistItemViewModel(controller, playlistItem);
         }
     }
 }

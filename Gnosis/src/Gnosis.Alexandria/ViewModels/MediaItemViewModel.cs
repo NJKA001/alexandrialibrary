@@ -5,13 +5,17 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 
+using Gnosis.Alexandria.Controllers;
+
 namespace Gnosis.Alexandria.ViewModels
 {
     public abstract class MediaItemViewModel
         : IMediaItemViewModel
     {
-        protected MediaItemViewModel(IMediaItem item, string type, object icon)
+        protected MediaItemViewModel(IMediaItemController controller, IMediaItem item, string type, object icon)
         {
+            if (controller == null)
+                throw new ArgumentNullException("controller");
             if (item == null)
                 throw new ArgumentNullException("item");
             if (type == null)
@@ -19,15 +23,20 @@ namespace Gnosis.Alexandria.ViewModels
             if (icon == null)
                 throw new ArgumentNullException("icon");
 
+            this.controller = controller;
             this.item = item;
             this.type = type;
             this.icon = icon;
         }
 
+        protected readonly IMediaItemController controller;
         protected readonly IMediaItem item;
         
         private readonly string type;
         private readonly object icon;
+
+        private bool linksInitialized;
+        private bool tagsInitialized;
 
         private readonly ObservableCollection<ILinkViewModel> links = new ObservableCollection<ILinkViewModel>();
         private readonly ObservableCollection<ITagViewModel> tags = new ObservableCollection<ITagViewModel>();
@@ -152,12 +161,32 @@ namespace Gnosis.Alexandria.ViewModels
 
         public IEnumerable<ILinkViewModel> Links
         {
-            get { return links; }
+            get
+            {
+                if (!linksInitialized)
+                {
+                    linksInitialized = true;
+                    foreach (var link in controller.GetLinksBySource(item.Location))
+                        links.Add(new LinkViewModel(link));
+                }
+
+                return links;
+            }
         }
 
         public IEnumerable<ITagViewModel> Tags
         {
-            get { return tags; }
+            get
+            {
+                if (!tagsInitialized)
+                {
+                    tagsInitialized = true;
+                    foreach (var tag in controller.GetTags(item.Location))
+                        tags.Add(new TagViewModel(tag));
+                }
+
+                return tags;
+            }
         }
 
         public bool IsSelected
@@ -202,6 +231,11 @@ namespace Gnosis.Alexandria.ViewModels
 
             if (tags.Contains(tag))
                 tags.Remove(tag);
+        }
+
+        public IEnumerable<ITag> GetSystemTags()
+        {
+            return item.GetTags();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

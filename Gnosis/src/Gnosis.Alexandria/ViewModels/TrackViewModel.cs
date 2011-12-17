@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Alexandria.Controllers;
 using Gnosis.Application.Vendor;
 
 namespace Gnosis.Alexandria.ViewModels
@@ -11,8 +12,8 @@ namespace Gnosis.Alexandria.ViewModels
     public class TrackViewModel
         : MediaItemViewModel, ITrackViewModel
     {
-        public TrackViewModel(ITrack track)
-            : base(track, "TRACK", GetIcon(track))
+        public TrackViewModel(IMediaItemController controller, ITrack track)
+            : base(controller, track, "TRACK", GetIcon(track))
         {
         }
 
@@ -58,7 +59,7 @@ namespace Gnosis.Alexandria.ViewModels
         public IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext)
         {
             var playlistItem = new GnosisPlaylistItem(Name, Summary, item.FromDate, Number, Duration, item.Creator, item.CreatorName, item.Catalog, item.CatalogName, item.Target, item.TargetType, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, item.Thumbnail, item.ThumbnailData);
-            return new PlaylistItemViewModel(playlistItem);
+            return new PlaylistItemViewModel(controller, playlistItem);
         }
     }
 }

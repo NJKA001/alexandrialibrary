@@ -5,13 +5,15 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Alexandria.Controllers;
+
 namespace Gnosis.Alexandria.ViewModels
 {
     public class PlaylistViewModel
         : MediaItemViewModel, IPlaylistViewModel
     {
-        public PlaylistViewModel(IPlaylist playlist, IEnumerable<IPlaylistItemViewModel> playlistItems)
-            : base(playlist, "PLAYLIST", "pack://application:,,,/Images/play-simple.png")
+        public PlaylistViewModel(IMediaItemController controller, IPlaylist playlist, IEnumerable<IPlaylistItemViewModel> playlistItems)
+            : base(controller, playlist, "PLAYLIST", "pack://application:,,,/Images/play-simple.png")
         {
             if (playlistItems == null)
                 throw new ArgumentNullException("playlistItems");

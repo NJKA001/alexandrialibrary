@@ -43,5 +43,7 @@ namespace Gnosis.Alexandria.ViewModels
         void RemoveLink(ILinkViewModel link);
         void AddTag(ITagViewModel tag);
         void RemoveTag(ITagViewModel tag);
+
+        IEnumerable<ITag> GetSystemTags();
     }
 }

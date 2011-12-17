@@ -42,6 +42,7 @@ namespace Gnosis.Alexandria.ViewModels
         IEnumerable<ITagViewModel> Tags { get; }
         void AddTag(ITagViewModel tag);
         void RemoveTag(ITagViewModel tag);
+        IEnumerable<ITag> GetSystemTags();
 
         bool IsClosed { get; set; }
         bool IsSelected { get; set; }
@@ -52,6 +53,6 @@ namespace Gnosis.Alexandria.ViewModels
         void AddClip(IClipViewModel clip);
 
         void UpdateThumbnail(IMediaItemController controller, Uri thumbnail, byte[] thumbnailData);
-        void UpdateSummary(string summary);
+        void UpdateSummary(IMediaItemController controller, string summary);
     }
 }

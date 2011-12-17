@@ -4,13 +4,15 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 
+using Gnosis.Alexandria.Controllers;
+
 namespace Gnosis.Alexandria.ViewModels
 {
     public class PlaylistItemViewModel
         : MediaItemViewModel, IPlaylistItemViewModel
     {
-        public PlaylistItemViewModel(IPlaylistItem playlistItem)
-            : base(playlistItem, "PLAYLIST ITEM", "pack://application:,,,/Images/play-simple.png")
+        public PlaylistItemViewModel(IMediaItemController controller, IPlaylistItem playlistItem)
+            : base(controller, playlistItem, "PLAYLIST ITEM", "pack://application:,,,/Images/play-simple.png")
         {
         }
 

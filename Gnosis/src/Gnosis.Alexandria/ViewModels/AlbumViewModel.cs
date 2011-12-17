@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Alexandria.Controllers;
 using Gnosis.Application.Vendor;
 
 namespace Gnosis.Alexandria.ViewModels
@@ -12,8 +13,8 @@ namespace Gnosis.Alexandria.ViewModels
     public class AlbumViewModel
         : MediaItemViewModel, IAlbumViewModel
     {
-        public AlbumViewModel(IAlbum album)
-            : base(album, "ALBUM", "pack://application:,,,/Images/cd.png")
+        public AlbumViewModel(IMediaItemController controller, IAlbum album)
+            : base(controller, album, "ALBUM", "pack://application:,,,/Images/cd.png")
         {
         }
 
@@ -87,7 +88,7 @@ namespace Gnosis.Alexandria.ViewModels
                 playlistItems.Add(playlistItem);
             }
 
-            return new PlaylistViewModel(playlist, playlistItems);
+            return new PlaylistViewModel(controller, playlist, playlistItems);
         }
     }
 }

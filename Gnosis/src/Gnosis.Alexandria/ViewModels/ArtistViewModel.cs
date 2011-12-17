@@ -5,13 +5,15 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Alexandria.Controllers;
+
 namespace Gnosis.Alexandria.ViewModels
 {
     public class ArtistViewModel
         : MediaItemViewModel, IArtistViewModel
     {
-        public ArtistViewModel(IArtist artist)
-            : base(artist, "ARTIST", "pack://application:,,,/Images/artist.png")
+        public ArtistViewModel(IMediaItemController controller, IArtist artist)
+            : base(controller, artist, "ARTIST", "pack://application:,,,/Images/artist.png")
         {
             var years = new StringBuilder();
             if (item.FromDate != DateTime.MinValue)

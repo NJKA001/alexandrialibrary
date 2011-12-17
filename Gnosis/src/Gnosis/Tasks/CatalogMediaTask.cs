@@ -59,6 +59,7 @@ namespace Gnosis.Tasks
         private IMedia GetMedia(Uri location)
         {
             AddProgress("Media At: " + location.ToString());
+            UpdateItem(new TaskItem(location, (uint)progressCount, location.ToString().ElideString(10), TimeSpan.Zero, Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, false, false, null));
             try
             {
                 var medium = spider.GetMedia(location);

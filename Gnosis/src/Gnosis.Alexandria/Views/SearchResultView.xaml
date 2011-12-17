@@ -149,15 +149,17 @@
                                                 <TextBlock Text="Summary"/>
                                             </HeaderedContentControl>
                                         </TabItem.Header>
-                                        <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                            <TextBlock x:Name="summaryTextBlock" Text="{Binding Summary}" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4" >
-                                                <TextBlock.ContextMenu>
-                                                    <ContextMenu>
-                                                        <MenuItem x:Name="summaryPasteMenuItem" Header="Paste" Click="summaryPasteMenuItem_Click"/>
-                                                    </ContextMenu>
-                                                </TextBlock.ContextMenu>
-                                            </TextBlock>
-                                        </ScrollViewer>
+                                        <Border BorderThickness="1" BorderBrush="DarkGray" Margin="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                                <TextBlock x:Name="summaryTextBlock" Background="White" Text="{Binding Summary}" TextWrapping="Wrap" Margin="4" >
+                                                    <TextBlock.ContextMenu>
+                                                        <ContextMenu>
+                                                            <MenuItem x:Name="summaryPasteMenuItem" Header="Paste" Click="summaryPasteMenuItem_Click"/>
+                                                        </ContextMenu>
+                                                    </TextBlock.ContextMenu>
+                                                </TextBlock>
+                                            </ScrollViewer>
+                                        </Border>
                                     </TabItem>
                                     <TabItem x:Name="linksTab" Style="{StaticResource tabItemStyle}">
                                         <TabItem.Header>

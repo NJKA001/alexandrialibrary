@@ -165,8 +165,19 @@ namespace Gnosis.Audio
 
             var name = id3v2Tag.Title != null ? id3v2Tag.Title : "Unknown Track";
             var summary = id3v2Tag.Lyrics ?? string.Empty;
-            var recordDate = id3v2Tag.RecordingDate > DateTime.MinValue ? id3v2Tag.RecordingDate : new DateTime((int)id3v1Tag.Year, 1, 1);
-            var releaseDate = id3v2Tag.ReleaseDate > DateTime.MinValue ? id3v2Tag.ReleaseDate : new DateTime((int)id3v1Tag.Year, 1, 1);
+            
+            var recordDate = DateTime.MinValue;
+            if (id3v2Tag != null && id3v2Tag.RecordingDate > DateTime.MinValue)
+                recordDate = id3v2Tag.RecordingDate;
+            else if (id3v1Tag != null && id3v1Tag.Year >= DateTime.MinValue.Year && id3v1Tag.Year <= DateTime.MaxValue.Year)
+                recordDate = new DateTime((int)id3v1Tag.Year, 1, 1);
+
+            var releaseDate = DateTime.MinValue;
+            if (id3v2Tag != null && id3v2Tag.ReleaseDate > DateTime.MinValue)
+                releaseDate = id3v2Tag.ReleaseDate;
+            else if (id3v1Tag != null && id3v1Tag.Year >= DateTime.MinValue.Year && id3v1Tag.Year <= DateTime.MaxValue.Year)
+                releaseDate = new DateTime((int)id3v1Tag.Year, 1, 1);
+
             var number = id3v2Tag.Track;
             var duration = id3v2Tag.Duration;
             if (duration == TimeSpan.Zero)

@@ -30,6 +30,8 @@ namespace Gnosis.Alexandria.Views
             catalogResultControl.ItemsSource = viewModels;
         }
 
+        private const int maxViewModels = 50;
+
         private ILogger logger;
         private readonly ObservableCollection<ITaskDetailViewModel> viewModels = new ObservableCollection<ITaskDetailViewModel>();
 
@@ -41,11 +43,22 @@ namespace Gnosis.Alexandria.Views
             this.logger = logger;
         }
 
+        private void LimitTotalSize()
+        {
+            if (viewModels.Count >= maxViewModels)
+                viewModels.RemoveAt(0);
+        }
+
         public void AddErrorDetail(TaskError error)
         {
             var viewModel = new TaskErrorDetailViewModel(error);
- 
-            Action action = () => viewModels.Add(viewModel);
+
+            Action action = () =>
+                {
+                    LimitTotalSize();
+                    viewModels.Add(viewModel);
+                };
+
             Dispatcher.Invoke(action, DispatcherPriority.DataBind);
             
         }
@@ -53,8 +66,13 @@ namespace Gnosis.Alexandria.Views
         public void AddProgressDetail(TaskProgress progress)
         {
             var viewModel = new TaskProgressDetailViewModel(progress);
-            
-            Action action = () => viewModels.Add(viewModel);
+
+            Action action = () =>
+                {
+                    LimitTotalSize();
+                    viewModels.Add(viewModel);
+                };
+
             Dispatcher.Invoke(action, DispatcherPriority.DataBind);
         }
     }

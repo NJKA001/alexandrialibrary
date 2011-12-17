@@ -10,10 +10,14 @@ namespace Gnosis.Alexandria.Controllers
     public class MediaItemController
         : IMediaItemController
     {
-        public MediaItemController(ILogger logger, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IClip> clipRepository)
+        public MediaItemController(ILogger logger, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IClip> clipRepository)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
+            if (linkRepository == null)
+                throw new ArgumentNullException("linkRepository");
+            if (tagRepository == null)
+                throw new ArgumentNullException("tagRepository");
             if (artistRepository == null)
                 throw new ArgumentNullException("artistRepository");
             if (albumRepository == null)
@@ -24,6 +28,8 @@ namespace Gnosis.Alexandria.Controllers
                 throw new ArgumentNullException("clipRepository");
 
             this.logger = logger;
+            this.linkRepository = linkRepository;
+            this.tagRepository = tagRepository;
             this.artistRepository = artistRepository;
             this.albumRepository = albumRepository;
             this.trackRepository = trackRepository;
@@ -31,6 +37,8 @@ namespace Gnosis.Alexandria.Controllers
         }
 
         private readonly ILogger logger;
+        private readonly ILinkRepository linkRepository;
+        private readonly ITagRepository tagRepository;
         private readonly IMediaItemRepository<IArtist> artistRepository;
         private readonly IMediaItemRepository<IAlbum> albumRepository;
         private readonly IMediaItemRepository<ITrack> trackRepository;
@@ -146,6 +154,30 @@ namespace Gnosis.Alexandria.Controllers
             }
         }
 
+        public IEnumerable<ILink> GetLinksBySource(Uri source)
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
+
+            return linkRepository.GetBySource(source);
+        }
+
+        public IEnumerable<ILink> GetLinksByTarget(Uri target)
+        {
+            if (target == null)
+                throw new ArgumentNullException("target");
+
+            return linkRepository.GetByTarget(target);
+        }
+        
+        public IEnumerable<ITag> GetTags(Uri target)
+        {
+            if (target == null)
+                throw new ArgumentNullException("target");
+
+            return tagRepository.GetByTarget(target);
+        }
+
         public IAlbum GetAlbum(Uri album)
         {
             return albumRepository.GetByLocation(album);
@@ -154,6 +186,14 @@ namespace Gnosis.Alexandria.Controllers
         public IEnumerable<ITrack> GetTracks(Uri album)
         {
             return trackRepository.GetByCatalog(album);
+        }
+
+        public void SaveTags(IEnumerable<ITag> tags)
+        {
+            if (tags == null)
+                throw new ArgumentNullException("tags");
+
+            tagRepository.Save(tags);
         }
     }
 }

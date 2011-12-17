@@ -214,6 +214,11 @@ namespace Gnosis.Alexandria.ViewModels
             item.RemoveTag(tag);
         }
 
+        public IEnumerable<ITag> GetSystemTags()
+        {
+            return item.GetSystemTags();
+        }
+
         public bool IsClosed
         {
             get { return isClosed; }
@@ -307,12 +312,29 @@ namespace Gnosis.Alexandria.ViewModels
             }
         }
 
-        public void UpdateSummary(string summary)
+        public void UpdateSummary(IMediaItemController controller, string summary)
         {
             if (summary == null)
                 throw new ArgumentNullException("summary");
 
             Summary = summary;
+
+            if (item is IArtistViewModel)
+            {
+                controller.UpdateSummary<IArtist>(item.Id, summary);
+            }
+            else if (item is IAlbumViewModel)
+            {
+                controller.UpdateSummary<IAlbum>(item.Id, summary);
+            }
+            else if (item is ITrackViewModel)
+            {
+                controller.UpdateSummary<ITrack>(item.Id, summary);
+            }
+            else if (item is IClipViewModel)
+            {
+                controller.UpdateSummary<IClip>(item.Id, summary);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
