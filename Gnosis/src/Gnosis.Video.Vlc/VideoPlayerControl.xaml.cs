@@ -169,37 +169,51 @@ namespace Gnosis.Video.Vlc
             m_isDrag = true;
         }
 
-        private void placeholderLabel_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        private void centerLabel_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             try
             {
-                playbackPanel.Visibility = Visibility.Visible;
-                placeholderLabel.Visibility = Visibility.Collapsed;
-            }
-            catch (Exception ex)
-            {
-                logger.Error("  VideoPlayerControl.placeholderLabel_MouseEnter", ex);
-            }
-        }
-
-        private void playbackPanel_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            try
-            {
-                var position = e.GetPosition(null);
-
-                var bounds = panel.Height + 30;
-                System.Diagnostics.Debug.WriteLine("  position=" + position.Y + " bounds=" + bounds);
-
-                if (position.Y < bounds)
+                if (playbackPanel.Visibility == Visibility.Collapsed)
                 {
-                    playbackPanel.Visibility = Visibility.Collapsed;
-                    placeholderLabel.Visibility = Visibility.Visible;
+                    playbackPanel.Visibility = Visibility.Visible;
+                    centerLabel.Visibility = Visibility.Collapsed;
                 }
             }
             catch (Exception ex)
             {
-                logger.Error("  VideoPlayerControl.placeholderLabel_MouseEnter", ex);
+                logger.Error("  VideoPlayerControl.centerLabel_MouseEnter", ex);
+            }
+        }
+
+        private void leftSideLabel_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            try
+            {
+                if (playbackPanel.Visibility == Visibility.Visible)
+                {
+                    playbackPanel.Visibility = Visibility.Collapsed;
+                    centerLabel.Visibility = Visibility.Visible;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  VideoPlayerControl.leftSideLabel_MouseEnter", ex);
+            }
+        }
+
+        private void rightSideLabel_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            try
+            {
+                if (playbackPanel.Visibility == Visibility.Visible)
+                {
+                    playbackPanel.Visibility = Visibility.Collapsed;
+                    centerLabel.Visibility = Visibility.Visible;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  VideoPlayerControl.rightSideLabel_MouseEnter", ex);
             }
         }
 

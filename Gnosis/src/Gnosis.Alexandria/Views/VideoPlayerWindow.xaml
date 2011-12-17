@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:views="clr-namespace:Gnosis.Alexandria.Views"
-        Title="Alexandria" 
-        Height="480" Width="640" MinHeight="480" MinWidth="640">
+        Title="Alexandria Video" 
+        Height="480" Width="640" MinHeight="480" MinWidth="640" Icon="pack://application:,,,/Images/pyramid.ico">
         <!--:FullScreenBehavior.IsFullScreen="{Binding Path=IsChecked, ElementName=FullScreenButton, Mode=TwoWay}"-->
     <i:Interaction.Behaviors>
         <views:FullScreenBehavior
