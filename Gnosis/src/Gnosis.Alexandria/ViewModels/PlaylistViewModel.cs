@@ -40,8 +40,6 @@ namespace Gnosis.Alexandria.ViewModels
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public void AddPlaylistItem(IPlaylistItemViewModel item)
         {
             if (item == null)

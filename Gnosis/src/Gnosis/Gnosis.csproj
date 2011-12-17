@@ -262,6 +262,7 @@
     <Compile Include="IUser.cs" />
     <Compile Include="IUserCatalog.cs" />
     <Compile Include="IUserRepsository.cs" />
+    <Compile Include="IVideoHost.cs" />
     <Compile Include="IVideoPlayer.cs" />
     <Compile Include="MediaStateChangedEventArgs.cs" />
     <Compile Include="NetworkState.cs" />

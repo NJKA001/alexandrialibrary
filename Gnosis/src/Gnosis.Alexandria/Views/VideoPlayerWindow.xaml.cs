@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -16,16 +17,52 @@ namespace Gnosis.Alexandria.Views
     /// <summary>
     /// Interaction logic for VideoPlayerWindow.xaml
     /// </summary>
-    public partial class VideoPlayerWindow : Window
+    public partial class VideoPlayerWindow
+        : Window, IVideoHost
     {
         public VideoPlayerWindow()
         {
             InitializeComponent();
         }
 
-        public void SetVideoPlayerElement(UIElement element)
+        private IVideoPlayer videoPlayer;
+
+        protected override void OnClosed(EventArgs e)
         {
-            videoHost.Child = element;
+            IsOpen = false;
+
+            if (videoHost.Child != null)
+            {
+                videoHost.Child = null;
+            }
+
+            base.OnClosed(e);
+        }
+
+
+        public bool IsOpen
+        {
+            get;
+            private set;
+        }
+
+        public void Open(IVideoPlayer videoPlayer)
+        {
+            if (videoPlayer == null)
+                throw new ArgumentNullException("videoPlayer");
+
+            this.videoPlayer = videoPlayer;
+
+            if (videoHost.Child != null)
+            {
+                var x = videoHost.Child;
+            }
+
+            videoHost.Child = videoPlayer as UIElement;
+
+            IsOpen = true;
+
+            Show();
         }
     }
 }

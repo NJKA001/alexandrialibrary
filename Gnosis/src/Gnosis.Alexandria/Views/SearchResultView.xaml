@@ -118,8 +118,8 @@
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
                                                         <TextBlock Text="{Binding Number}" Width="32" Margin="4"/>
-                                                        <TextBlock Text="{Binding Title}" Margin="4"/>
-                                                        <TextBlock Text="{Binding Duration}" Width="64" Margin="8 4 4 4"/>
+                                                        <TextBlock Text="{Binding Name}" Margin="4"/>
+                                                        <TextBlock Text="{Binding DurationString}" Width="64" Margin="8 4 4 4"/>
                                                     </StackPanel>
                                                 </DataTemplate>
                                             </ListBox.ItemTemplate>
@@ -136,8 +136,8 @@
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
                                                         <TextBlock Text="{Binding Number}" Width="32" Margin="4"/>
-                                                        <TextBlock Text="{Binding Title}" Margin="4"/>
-                                                        <TextBlock Text="{Binding Duration}" Width="64" Margin="8 4 4 4"/>
+                                                        <TextBlock Text="{Binding Name}" Margin="4"/>
+                                                        <TextBlock Text="{Binding DurationString}" Width="64" Margin="8 4 4 4"/>
                                                     </StackPanel>
                                                 </DataTemplate>
                                             </ListBox.ItemTemplate>

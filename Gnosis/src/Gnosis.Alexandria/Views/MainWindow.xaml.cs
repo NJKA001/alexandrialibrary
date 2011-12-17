@@ -75,6 +75,7 @@ namespace Gnosis.Alexandria.Views
                 audioStreamFactory = new AudioStreamFactory();
 
                 videoPlayer = new Gnosis.Video.Vlc.VideoPlayerControl();
+                videoPlayer.Initialize(logger, () => GetVideoHost());
 
                 catalogController = new CatalogController(logger, securityContext, mediaFactory, mediaRepository, linkRepository, tagRepository, artistRepository, albumRepository, trackRepository, clipRepository, audioStreamFactory);
                 spiderFactory = new SpiderFactory(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository, clipRepository, audioStreamFactory);
@@ -114,5 +115,11 @@ namespace Gnosis.Alexandria.Views
         private readonly IMediaItemController mediaItemController;
         private readonly ITaskController taskController;
         private readonly ITagController tagController;
+
+        private IVideoHost GetVideoHost()
+        {
+            Func<IVideoHost> func = () => new VideoPlayerWindow();
+            return Dispatcher.Invoke(func) as IVideoHost;
+        }
     }
 }

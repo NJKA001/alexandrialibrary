@@ -31,7 +31,7 @@
             <TextBlock Text="{Binding Name}" Margin="4"/>
             <TextBlock Text="BY" Foreground="Gray" FontSize="10" Margin="4"/>
             <TextBlock Text="{Binding CreatorName}" Margin="4"/>
-            <TextBlock Text="{Binding Year}" Foreground="Gray" FontSize="10" Margin="4"/>
+            <TextBlock Text="{Binding Years}" Foreground="Gray" FontSize="10" Margin="4"/>
         </StackPanel>
         <Image Grid.Row="1" Grid.Column="0" Source="{Binding Path=Image, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}"/>
         <ListBox x:Name="itemControl" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" ItemsSource="{Binding PlaylistItems}" ItemContainerStyle="{StaticResource playlistItemStyle}">
@@ -41,7 +41,7 @@
                         <Image Source="{Binding Path=PlaybackIcon, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="24" Width="24" Margin="4"/>
                         <TextBlock Text="{Binding Name}" Margin="4"/>
                         <TextBlock Text="{Binding CreatorName}" Margin="4"/>
-                        <TextBlock Text="{Binding Duration}" Margin="4" Visibility="{Binding DurationVisibility}"/>
+                        <TextBlock Text="{Binding DurationString}" Margin="4" Visibility="{Binding DurationVisibility}"/>
                         <StackPanel Orientation="Horizontal" Visibility="{Binding SizeVisibility}">
                             <TextBlock Text="{Binding Width}" Margin="4"/>
                             <TextBlock Text="x" Foreground="Gray" FontSize="10"/>

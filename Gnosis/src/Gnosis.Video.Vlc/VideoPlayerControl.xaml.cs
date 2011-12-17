@@ -18,6 +18,10 @@ namespace Gnosis.Video.Vlc
     /// </summary>
     public partial class VideoPlayerControl : System.Windows.Controls.UserControl, Gnosis.IVideoPlayer
     {
+        private ILogger logger;
+        private Func<IVideoHost> getHost;
+        private IVideoHost currentHost;
+
         IMediaPlayerFactory m_factory;
         Declarations.Players.IVideoPlayer m_player;
         Declarations.Media.IMedia m_media;
@@ -163,16 +167,43 @@ namespace Gnosis.Video.Vlc
             m_isDrag = true;
         }
 
+        public void Initialize(ILogger logger, Func<IVideoHost> getHost)
+        {
+            if (logger == null)
+                throw new ArgumentNullException("logger");
+            if (getHost == null)
+                throw new ArgumentNullException("getHost");
+
+            this.logger = logger;
+            this.getHost = getHost;
+        }
+
         public void Load(Uri location)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
 
-            if (location.IsFile)
+            try
             {
-                System.Diagnostics.Debug.WriteLine("VideoPlayerControl.Load: " + location.LocalPath);
+                logger.Info("VideoPlayerControl.Load: " + location.LocalPath);
+
+                if (currentHost == null || !currentHost.IsOpen)
+                {
+                    currentHost = getHost();
+                    Action openAction = () => currentHost.Open(this);
+                    Dispatcher.Invoke(openAction);
+                }
+
+                //if (location.IsFile)
+                //{
+                
                 Open(location.LocalPath);
                 m_player.Play();
+                //}
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  VideoPlayerControl.Load", ex);
             }
         }
     }
