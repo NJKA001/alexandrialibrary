@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Gnosis.Alexandria.ViewModels
 {
-    public interface ITrackViewModel
-        : IMediaItemViewModel, IPlayableViewModel
+    public interface IFeedItemViewModel
+        : IMediaItemViewModel
     {
     }
 }

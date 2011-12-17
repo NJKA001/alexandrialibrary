@@ -38,13 +38,28 @@ namespace Gnosis.Alexandria.Views
         private ISecurityContext securityContext;
         private IMediaItemController mediaItemController;
         private ITaskController taskController;
+        private ITagController tagController;
         private TaskResultView taskResultView;
         private readonly ObservableCollection<ISearchResultViewModel> results = new ObservableCollection<ISearchResultViewModel>();
 
-        private readonly IDictionary<string, ArtistSearchResultViewModel> artistResults = new Dictionary<string, ArtistSearchResultViewModel>();
-        private readonly IDictionary<string, AlbumSearchResultViewModel> albumResults = new Dictionary<string, AlbumSearchResultViewModel>();
-        private readonly IDictionary<string, TrackSearchResultViewModel> trackResults = new Dictionary<string, TrackSearchResultViewModel>();
-        private readonly IDictionary<string, ClipSearchResultViewModel> clipResults = new Dictionary<string, ClipSearchResultViewModel>();
+        private readonly IDictionary<string, ISearchResultViewModel> artistResults = new Dictionary<string, ISearchResultViewModel>();
+        private readonly IDictionary<string, ISearchResultViewModel> albumResults = new Dictionary<string, ISearchResultViewModel>();
+        private readonly IDictionary<string, ISearchResultViewModel> trackResults = new Dictionary<string, ISearchResultViewModel>();
+        private readonly IDictionary<string, ISearchResultViewModel> clipResults = new Dictionary<string, ISearchResultViewModel>();
+
+        private void tagsTab_GotFocus(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var element = sender as UIElement;
+                if (element == null)
+                    return;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  SearchResultView.tagsTab_GotFocus", ex);
+            }
+        }
 
         private void summaryPasteMenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -118,7 +133,7 @@ namespace Gnosis.Alexandria.Views
                 var thumbnailData = new byte[0];
                 //if (clipViewModel.Image == null || clipViewModel.Image == byte[0] || clipViewModel.Image = Guid.Empty.ToUrn())
                 //{
-                    var album = mediaItemController.GetAlbum(clipViewModel.Album);
+                    var album = mediaItemController.GetAlbum(clipViewModel.Id);
                     if (album != null)
                     {
                         summary = "Based on: " + album.Name;
@@ -153,8 +168,11 @@ namespace Gnosis.Alexandria.Views
 
                 if (album.Tracks.Count() == 0)
                 {
-                    var tracks = mediaItemController.GetTracks(album.Album);
-                    album.Initialize(tracks);
+                    var tracks = mediaItemController.GetTracks(album.Id);
+                    foreach (var track in tracks)
+                    {
+                        album.AddTrack(new TrackViewModel(track));
+                    }
                 }
 
                 var playlist = album.ToPlaylist(securityContext);
@@ -210,28 +228,7 @@ namespace Gnosis.Alexandria.Views
                                     var thumbnailData = stream.ToBuffer();
                                     if (thumbnailData != null)
                                     {
-                                        if (viewModel is ArtistSearchResultViewModel)
-                                        {
-                                            mediaItemController.UpdateThumbnail<IArtist>(viewModel.MediaItem, thumbnail, thumbnailData);
-                                            viewModel.UpdateThumbnail(thumbnail, thumbnailData);
-                                        }
-                                        else if (viewModel is AlbumSearchResultViewModel)
-                                        {
-                                            mediaItemController.UpdateThumbnail<IAlbum>(viewModel.MediaItem, thumbnail, thumbnailData);
-                                            viewModel.UpdateThumbnail(thumbnail, thumbnailData);
-                                        }
-                                        else if (viewModel is TrackSearchResultViewModel)
-                                        {
-                                            mediaItemController.UpdateThumbnail<ITrack>(viewModel.MediaItem, thumbnail, thumbnailData);
-                                            viewModel.UpdateThumbnail(thumbnail, thumbnailData);
-                                        }
-                                        else if (viewModel is ClipSearchResultViewModel)
-                                        {
-                                            mediaItemController.UpdateThumbnail<IClip>(viewModel.MediaItem, thumbnail, thumbnailData);
-                                            viewModel.UpdateThumbnail(thumbnail, thumbnailData);
-                                        }
-                                        else
-                                            logger.Warn("  Cannot set thumbnail - unknown search result type: " + viewModel.GetType().Name);
+                                        viewModel.UpdateThumbnail(mediaItemController, thumbnail, thumbnailData);
                                     }
 
                                     //var data = new ByteVector(buffer);
@@ -254,15 +251,15 @@ namespace Gnosis.Alexandria.Views
             Dispatcher.Invoke(new Action(() => AddViewModel(result)), DispatcherPriority.DataBind);
         }
 
-        private void AddAlbum(ArtistSearchResultViewModel artist, AlbumViewModel album)
+        private void AddAlbum(ISearchResultViewModel artist, AlbumViewModel album)
         {
             Action action = () => artist.AddAlbum(album);
             Dispatcher.Invoke(action, DispatcherPriority.DataBind);
         }
 
-        private void AddTrack(AlbumSearchResultViewModel album, TrackViewModel track)
+        private void AddTrack(ISearchResultViewModel album, TrackViewModel track)
         {
-            var existing = album.Tracks.Where(x => x.Track == track.Track).FirstOrDefault();
+            var existing = album.Tracks.Where(x => x.Id == track.Id).FirstOrDefault();
             if (existing != null)
                 return;
 
@@ -270,9 +267,9 @@ namespace Gnosis.Alexandria.Views
             Dispatcher.Invoke(action, DispatcherPriority.DataBind);
         }
 
-        private void AddClip(AlbumSearchResultViewModel album, ClipViewModel clip)
+        private void AddClip(ISearchResultViewModel album, ClipViewModel clip)
         {
-            var existing = album.Clips.Where(x => x.Clip == clip.Clip).FirstOrDefault();
+            var existing = album.Clips.Where(x => x.Id == clip.Id).FirstOrDefault();
             if (existing != null)
                 return;
 
@@ -292,15 +289,15 @@ namespace Gnosis.Alexandria.Views
                     var artistKey = result.Location.ToString();
                     if (!artistResults.ContainsKey(artistKey))
                     {
-                        var artistViewModel = new ArtistViewModel(result.Location, result.Name, result.Summary, result.FromDate, result.ToDate, result.Thumbnail, result.ThumbnailData);
-                        var resultViewModel = new ArtistSearchResultViewModel(artistViewModel);
+                        var artistViewModel = new ArtistViewModel(result as IArtist); //result.Location, result.Name, result.Summary, result.FromDate, result.ToDate, result.Thumbnail, result.ThumbnailData);
+                        var resultViewModel = new SearchResultViewModel(artistViewModel);
                         artistResults.Add(artistKey, resultViewModel);
                         AddResult(resultViewModel);
                     }
                 }
                 else if (result is IAlbum)
                 {
-                    var albumViewModel = new AlbumViewModel(result.Location, result.Name, result.Summary, result.Creator, result.CreatorName, result.FromDate, result.Thumbnail, result.ThumbnailData);
+                    var albumViewModel = new AlbumViewModel(result as IAlbum); //result.Location, result.Name, result.Summary, result.Creator, result.CreatorName, result.FromDate, result.Thumbnail, result.ThumbnailData);
 
                     var artistKey = result.Creator.ToString();
                     var albumKey = result.Location.ToString();
@@ -308,7 +305,7 @@ namespace Gnosis.Alexandria.Views
                     {
                         if (!albumResults.ContainsKey(albumKey))
                         {
-                            var resultViewModel = new AlbumSearchResultViewModel(albumViewModel);
+                            var resultViewModel = new SearchResultViewModel(albumViewModel);
                             AddResult(resultViewModel);
                             albumResults.Add(albumKey, resultViewModel);
                         }
@@ -317,7 +314,7 @@ namespace Gnosis.Alexandria.Views
                     {
                         if (!albumResults.ContainsKey(albumKey))
                         {
-                            var existing = artistResults[artistKey].Albums.Where(x => x.Album.ToString() == albumViewModel.Album.ToString()).FirstOrDefault();
+                            var existing = artistResults[artistKey].Albums.Where(x => x.Id.ToString() == albumViewModel.Id.ToString()).FirstOrDefault();
                             if (existing == null)
                             {
                                 AddAlbum(artistResults[artistKey], albumViewModel);
@@ -327,7 +324,7 @@ namespace Gnosis.Alexandria.Views
                 }
                 else if (result is ITrack)
                 {
-                    var trackViewModel = new TrackViewModel(result.Location, result.Name, result.Summary, result.Number, result.Duration, result.FromDate, result.Creator, result.CreatorName, result.Catalog, result.CatalogName, result.Target, result.TargetType, result.Thumbnail, result.ThumbnailData);
+                    var trackViewModel = new TrackViewModel(result as ITrack); //result.Location, result.Name, result.Summary, result.Number, result.Duration, result.FromDate, result.Creator, result.CreatorName, result.Catalog, result.CatalogName, result.Target, result.TargetType, result.Thumbnail, result.ThumbnailData);
 
                     var albumKey = result.Catalog.ToString();
                     var trackKey = result.Location.ToString();
@@ -335,7 +332,7 @@ namespace Gnosis.Alexandria.Views
                     {
                         if (!trackResults.ContainsKey(trackKey))
                         {
-                            var resultViewModel = new TrackSearchResultViewModel(trackViewModel);
+                            var resultViewModel = new SearchResultViewModel(trackViewModel);
                             trackResults.Add(trackKey, resultViewModel);
                             AddResult(resultViewModel);
                         }
@@ -354,7 +351,7 @@ namespace Gnosis.Alexandria.Views
                 }
                 else if (result is IClip)
                 {
-                    var clipViewModel = new ClipViewModel(result.Location, result.Name, result.Summary, result.Number, result.Duration, result.Height, result.Width, result.FromDate, result.Creator, result.CreatorName, result.Catalog, result.CatalogName, result.Target, result.TargetType, result.Thumbnail, result.ThumbnailData);
+                    var clipViewModel = new ClipViewModel(result as IClip); //result.Location, result.Name, result.Summary, result.Number, result.Duration, result.Height, result.Width, result.FromDate, result.Creator, result.CreatorName, result.Catalog, result.CatalogName, result.Target, result.TargetType, result.Thumbnail, result.ThumbnailData);
 
                     var albumKey = result.Catalog.ToString();
                     var clipKey = result.Location.ToString();
@@ -362,7 +359,7 @@ namespace Gnosis.Alexandria.Views
                     {
                         if (!clipResults.ContainsKey(clipKey))
                         {
-                            var resultViewModel = new ClipSearchResultViewModel(clipViewModel);
+                            var resultViewModel = new SearchResultViewModel(clipViewModel);
                             clipResults.Add(clipKey, resultViewModel);
                             AddResult(resultViewModel);
                         }
@@ -390,12 +387,12 @@ namespace Gnosis.Alexandria.Views
         {
             try
             {
-                var key = viewModel.MediaItem.ToString();
-                if (viewModel is ArtistSearchResultViewModel && artistResults.ContainsKey(key))
+                var key = viewModel.Id.ToString();
+                if (artistResults.ContainsKey(key))
                 {
                     artistResults.Remove(key);
                 }
-                else if (viewModel is AlbumSearchResultViewModel && albumResults.ContainsKey(key))
+                else if (albumResults.ContainsKey(key))
                 {
                     albumResults.Remove(key);
                 }
@@ -414,7 +411,7 @@ namespace Gnosis.Alexandria.Views
             get { return results; }
         }
 
-        public void Initialize(ILogger logger, ISecurityContext securityContext, IMediaItemController mediaItemController, ITaskController taskController, TaskResultView taskResultView)
+        public void Initialize(ILogger logger, ISecurityContext securityContext, IMediaItemController mediaItemController, ITaskController taskController, ITagController tagController, TaskResultView taskResultView)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -424,6 +421,8 @@ namespace Gnosis.Alexandria.Views
                 throw new ArgumentNullException("mediaItemController");
             if (taskController == null)
                 throw new ArgumentNullException("taskController");
+            if (tagController == null)
+                throw new ArgumentNullException("tagController");
             if (taskResultView == null)
                 throw new ArgumentNullException("taskResultView");
 
@@ -431,6 +430,7 @@ namespace Gnosis.Alexandria.Views
             this.securityContext = securityContext;
             this.mediaItemController = mediaItemController;
             this.taskController = taskController;
+            this.tagController = tagController;
             this.taskResultView = taskResultView;
         }
 

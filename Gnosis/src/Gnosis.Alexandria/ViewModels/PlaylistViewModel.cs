@@ -8,160 +8,118 @@ using System.Text;
 namespace Gnosis.Alexandria.ViewModels
 {
     public class PlaylistViewModel
-        : IPlaylistViewModel
+        : MediaItemViewModel, IPlaylistViewModel
     {
-        public PlaylistViewModel(IPlaylist playlist, IEnumerable<IPlaylistItemViewModel> items)
+        public PlaylistViewModel(IPlaylist playlist, IEnumerable<IPlaylistItemViewModel> playlistItems)
+            : base(playlist, "PLAYLIST", "pack://application:,,,/Images/play-simple.png")
         {
-            if (playlist == null)
-                throw new ArgumentNullException("playlist");
-            if (items == null)
-                throw new ArgumentNullException("items");
+            if (playlistItems == null)
+                throw new ArgumentNullException("playlistItems");
 
-            this.playlist = playlist;
-            this.items = new ObservableCollection<IPlaylistItemViewModel>(items);
-            currentItem = this.items.FirstOrDefault();
+            this.playlistItems = new ObservableCollection<IPlaylistItemViewModel>(playlistItems);
+            currentPlaylistItem = this.playlistItems.FirstOrDefault();
         }
 
-        private readonly IPlaylist playlist;
-        private readonly ObservableCollection<IPlaylistItemViewModel> items;
-        private IPlaylistItemViewModel currentItem;
+        private readonly ObservableCollection<IPlaylistItemViewModel> playlistItems;
+        private IPlaylistItemViewModel currentPlaylistItem;
         private int currentIndex = 0;
 
-        private void OnPropertyChanged(string propertyName)
+        public IEnumerable<IPlaylistItemViewModel> PlaylistItems
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            get { return playlistItems; }
         }
 
-        public Uri Id
+        public IPlaylistItemViewModel CurrentPlaylistItem
         {
-            get { return playlist.Location; }
-        }
-
-        public string CreatorName
-        {
-            get { return playlist.CreatorName; }
-        }
-
-        public string Name
-        {
-            get { return playlist.Name; }
-        }
-
-        public string Number
-        {
-            get { return playlist.Number > 0 ? playlist.Number.ToString() : string.Empty; }
-        }
-
-        public string Year
-        {
-            get { return playlist.FromDate.Year.ToString(); }
-        }
-
-        public object Image
-        {
-            get { return playlist.ThumbnailData != null && playlist.ThumbnailData.Length > 0 ?
-                (object)playlist.ThumbnailData
-                : playlist.Thumbnail;
-            }
-        }
-
-        public IEnumerable<IPlaylistItemViewModel> Items
-        {
-            get { return items; }
-        }
-
-        public IPlaylistItemViewModel CurrentItem
-        {
-            get { return currentItem; }
+            get { return currentPlaylistItem; }
             private set
             {
-                currentItem = value;
-                currentIndex = items.IndexOf(currentItem);
-                OnPropertyChanged("CurrentItem");
+                currentPlaylistItem = value;
+                currentIndex = playlistItems.IndexOf(currentPlaylistItem);
+                OnPropertyChanged("CurrentPlaylistItem");
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void AddItem(IPlaylistItemViewModel item)
+        public void AddPlaylistItem(IPlaylistItemViewModel item)
         {
             if (item == null)
                 throw new ArgumentNullException("item");
 
-            items.Add(item);
+            playlistItems.Add(item);
         }
 
-        public void InsertItem(int index, IPlaylistItemViewModel item)
+        public void InsertPlaylistItem(int index, IPlaylistItemViewModel item)
         {
             if (item == null)
                 throw new ArgumentNullException("item");
 
-            items.Insert(index, item);
+            playlistItems.Insert(index, item);
         }
 
-        public void RemoveItem(IPlaylistItemViewModel item)
+        public void RemovePlaylistItem(IPlaylistItemViewModel item)
         {
             if (item == null)
                 throw new ArgumentNullException("item");
 
-            if (items.Contains(item))
-                items.Remove(item);
+            if (playlistItems.Contains(item))
+                playlistItems.Remove(item);
         }
 
-        public void PreviousItem()
+        public void SelectPreviousPlaylistItem()
         {
-            if (items.Count > 0)
+            if (playlistItems.Count > 0)
             {
-                if (items.Count == 1)
+                if (playlistItems.Count == 1)
                 {
-                    CurrentItem = currentItem;
+                    CurrentPlaylistItem = currentPlaylistItem;
                 }
                 else
                 {
-                    var index = items.IndexOf(currentItem);
+                    var index = playlistItems.IndexOf(currentPlaylistItem);
                     switch (index)
                     {
                         case -1:
-                            CurrentItem = items.FirstOrDefault();
+                            CurrentPlaylistItem = playlistItems.FirstOrDefault();
                             return;
                         case 0:
-                            CurrentItem = items.LastOrDefault();
+                            CurrentPlaylistItem = playlistItems.LastOrDefault();
                             return;
                         default:
-                            CurrentItem = items.ElementAtOrDefault(index -1);
+                            CurrentPlaylistItem = playlistItems.ElementAtOrDefault(index -1);
                             return;
                     }
                 }
             }
         }
 
-        public void NextItem()
+        public void SelectNextPlaylistItem()
         {
-            if (items.Count > 0)
+            if (playlistItems.Count > 0)
             {
-                if (items.Count == 1)
+                if (playlistItems.Count == 1)
                 {
-                    CurrentItem = currentItem;
+                    CurrentPlaylistItem = currentPlaylistItem;
                 }
                 else
                 {
-                    var index = items.IndexOf(currentItem);
+                    var index = playlistItems.IndexOf(currentPlaylistItem);
                     if (index == -1)
                     {
-                        CurrentItem = items.FirstOrDefault();
+                        CurrentPlaylistItem = playlistItems.FirstOrDefault();
                         return;
                     }
                     else
                     {
-                        var lastIndex = items.Count - 1;
+                        var lastIndex = playlistItems.Count - 1;
                         if (index < lastIndex)
                         {
-                            CurrentItem = items.ElementAtOrDefault(index + 1);
+                            CurrentPlaylistItem = playlistItems.ElementAtOrDefault(index + 1);
                         }
                         else
                         {
-                            CurrentItem = items.FirstOrDefault();
+                            CurrentPlaylistItem = playlistItems.FirstOrDefault();
                         }
                     }
                 }
@@ -170,19 +128,19 @@ namespace Gnosis.Alexandria.ViewModels
 
         public TaskItem GetPreviousTaskItem()
         {
-            PreviousItem();
+            SelectPreviousPlaylistItem();
 
             return GetCurrentTaskItem();
         }
 
         public TaskItem GetCurrentTaskItem()
         {
-            return currentItem != null ? currentItem.ToTaskItem() : default(TaskItem);
+            return currentPlaylistItem != null ? currentPlaylistItem.ToTaskItem() : default(TaskItem);
         }
 
         public TaskItem GetNextTaskItem()
         {
-            NextItem();
+            SelectNextPlaylistItem();
 
             return GetCurrentTaskItem();
         }

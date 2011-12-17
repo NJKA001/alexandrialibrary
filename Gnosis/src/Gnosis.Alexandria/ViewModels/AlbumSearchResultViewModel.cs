@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
-
+/*
 namespace Gnosis.Alexandria.ViewModels
 {
     public class AlbumSearchResultViewModel
@@ -224,3 +224,4 @@ namespace Gnosis.Alexandria.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }
+*/

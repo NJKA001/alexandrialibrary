@@ -6,22 +6,7 @@ using System.Text;
 namespace Gnosis.Alexandria.ViewModels
 {
     public interface IArtistViewModel
-        : IMediaItemViewModel
+        : IMediaItemViewModel, IAlbumContainerViewModel
     {
-        Uri Artist { get; }
-        string Name { get; }
-        string Summary { get; }
-        string Years { get; }
-        object Image { get; }
-        IEnumerable<ILink> Links { get; }
-        IEnumerable<ITag> Tags { get; }
-        IEnumerable<IAlbumViewModel> Albums { get; }
-
-        void AddLink(ILink link);
-        void RemoveLink(ILink link);
-        void AddTag(ITag tag);
-        void RemoveTag(ITag tag);
-        void AddAlbum(IAlbumViewModel album);
-        void RemoveAlbum(IAlbumViewModel album);
     }
 }

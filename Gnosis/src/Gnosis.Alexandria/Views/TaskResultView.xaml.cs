@@ -30,21 +30,24 @@ namespace Gnosis.Alexandria.Views
         private ILogger logger;
         private ISecurityContext securityContext;
         private ITaskController taskController;
+        private ITagController tagController;
         private IMediaItemController mediaItemController;
         private IVideoPlayer videoPlayer;
 
         private readonly IDictionary<Guid, ITaskResultViewModel> tabMap = new Dictionary<Guid, ITaskResultViewModel>();
 
-        public void Initialize(ILogger logger, ISecurityContext securityContext, ITaskController taskController, IMediaItemController mediaItemController, IVideoPlayer videoPlayer)
+        public void Initialize(ILogger logger, ISecurityContext securityContext, IMediaItemController mediaItemController, ITaskController taskController, ITagController tagController, IVideoPlayer videoPlayer)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
             if (securityContext == null)
                 throw new ArgumentNullException("securityContext");
-            if (taskController == null)
-                throw new ArgumentNullException("taskController");
             if (mediaItemController == null)
                 throw new ArgumentNullException("mediaItemController");
+            if (taskController == null)
+                throw new ArgumentNullException("taskController");
+            if (tagController == null)
+                throw new ArgumentNullException("tagController");
             if (videoPlayer == null)
                 throw new ArgumentNullException("videoPlayer");
 
@@ -52,6 +55,7 @@ namespace Gnosis.Alexandria.Views
             this.securityContext = securityContext;
             this.taskController = taskController;
             this.mediaItemController = mediaItemController;
+            this.tagController = tagController;
             this.videoPlayer = videoPlayer;
         }
 
@@ -210,7 +214,7 @@ namespace Gnosis.Alexandria.Views
                 if (!tabMap.ContainsKey(taskViewModel.Id))
                 {
                     var searchResultView = new SearchResultView();
-                    searchResultView.Initialize(logger, securityContext, mediaItemController, taskController, this);
+                    searchResultView.Initialize(logger, securityContext, mediaItemController, taskController, tagController, this);
 
                     taskViewModel.AddResultsCallback(result => searchResultView.HandleSearchResult(result));
 

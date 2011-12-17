@@ -10,84 +10,15 @@ using Gnosis.Application.Vendor;
 namespace Gnosis.Alexandria.ViewModels
 {
     public class AlbumViewModel
-        : IAlbumViewModel
+        : MediaItemViewModel, IAlbumViewModel
     {
-        public AlbumViewModel(Uri album, string title, string summary, Uri artist, string artistName, DateTime date, Uri thumbnail, byte[] thumbnailData)
+        public AlbumViewModel(IAlbum album)
+            : base(album, "ALBUM", "pack://application:,,,/Images/cd.png")
         {
-            if (album == null)
-                throw new ArgumentNullException("album");
-            if (title == null)
-                throw new ArgumentNullException("title");
-            if (summary == null)
-                throw new ArgumentNullException("summary");
-            if (artist == null)
-                throw new ArgumentNullException("artist");
-            if (artistName == null)
-                throw new ArgumentNullException("artistName");
-
-            this.album = album;
-            this.title = title;
-            this.summary = summary;
-            this.artist = artist;
-            this.artistName = artistName;
-            this.date = date;
-            this.thumbnail = thumbnail;
-            this.thumbnailData = thumbnailData;
         }
 
-        private readonly Uri album;
-        private readonly string title;
-        private readonly string summary;
-        private readonly Uri artist;
-        private readonly string artistName;
-        private readonly DateTime date;
-        private readonly Uri thumbnail;
-        private readonly byte[] thumbnailData;
         private readonly ObservableCollection<ITrackViewModel> tracks = new ObservableCollection<ITrackViewModel>();
         private readonly ObservableCollection<IClipViewModel> clips = new ObservableCollection<IClipViewModel>();
-
-        private bool isSelected;
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public Uri Album
-        {
-            get { return album; }
-        }
-
-        public string Title
-        {
-            get { return title; }
-        }
-
-        public string Summary
-        {
-            get { return summary; }
-        }
-
-        public Uri Artist
-        {
-            get { return artist; }
-        }
-
-        public string ArtistName
-        {
-            get { return artistName; }
-        }
-
-        public string Year
-        {
-            get { return date.Year.ToString(); }
-        }
-
-        public object Image
-        {
-            get { return thumbnailData != null && thumbnailData.Length > 0 ? (object)thumbnailData : thumbnail; }
-        }
 
         public IEnumerable<ITrackViewModel> Tracks
         {
@@ -97,33 +28,6 @@ namespace Gnosis.Alexandria.ViewModels
         public IEnumerable<IClipViewModel> Clips
         {
             get { return clips; }
-        }
-
-        public bool IsSelected
-        {
-            get { return isSelected; }
-            set
-            {
-                isSelected = value;
-                OnPropertyChanged("IsSelected");
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void Initialize(IEnumerable<ITrack> tracks)
-        {
-            if (tracks == null)
-                throw new ArgumentNullException("tracks");
-
-            if (this.tracks.Count > 0)
-                return;
-
-            foreach (var track in tracks)
-            {
-                var trackViewModel = new TrackViewModel(track.Location, track.Name, track.Summary, track.Number, track.Duration, track.FromDate, track.Creator, track.CreatorName, track.Catalog, track.CatalogName, track.Target, track.TargetType, track.Thumbnail, track.ThumbnailData);
-                this.tracks.Add(trackViewModel);
-            }
         }
 
         public void AddTrack(ITrackViewModel track)
@@ -141,21 +45,6 @@ namespace Gnosis.Alexandria.ViewModels
 
             if (tracks.Contains(track))
                 tracks.Remove(track);
-        }
-
-        public void Initialize(IEnumerable<IClip> clips)
-        {
-            if (clips == null)
-                throw new ArgumentNullException("clips");
-
-            if (this.clips.Count > 0)
-                return;
-
-            foreach (var clip in clips)
-            {
-                var clipViewModel = new ClipViewModel(clip.Location, clip.Name, clip.Summary, clip.Number, clip.Duration, clip.Height, clip.Width, clip.FromDate, clip.Creator, clip.CreatorName, clip.Catalog, clip.CatalogName, clip.Target, clip.TargetType, clip.Thumbnail, clip.ThumbnailData);
-                this.clips.Add(clipViewModel);
-            }
         }
 
         public void AddClip(IClipViewModel clip)
@@ -177,7 +66,7 @@ namespace Gnosis.Alexandria.ViewModels
 
         public override string ToString()
         {
-            return string.Format("Album: {0}. IsSelected={1}", Title, IsSelected);
+            return string.Format("Album: {0}. IsSelected={1}", Name, IsSelected);
         }
 
         public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext)
@@ -185,20 +74,20 @@ namespace Gnosis.Alexandria.ViewModels
             if (securityContext == null)
                 throw new ArgumentNullException("securityContext");
 
-            var playlist = new GnosisPlaylist(title, summary, DateTime.Now, 0, TimeSpan.Zero, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, thumbnailData);
-            var items = new List<IPlaylistItemViewModel>();
+            var playlist = new GnosisPlaylist(Name, Summary, DateTime.Now, 0, TimeSpan.Zero, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, item.Thumbnail, item.ThumbnailData);
+            var playlistItems = new List<IPlaylistItemViewModel>();
             foreach (var track in tracks)
             {
-                var item = track.ToPlaylistItem(securityContext);
-                items.Add(item);
+                var playlistItem = track.ToPlaylistItem(securityContext);
+                playlistItems.Add(playlistItem);
             }
             foreach (var clip in clips)
             {
-                var item = clip.ToPlaylistItem(securityContext);
-                items.Add(item);
+                var playlistItem = clip.ToPlaylistItem(securityContext);
+                playlistItems.Add(playlistItem);
             }
 
-            return new PlaylistViewModel(playlist, items);
+            return new PlaylistViewModel(playlist, playlistItems);
         }
     }
 }

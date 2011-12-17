@@ -45,16 +45,16 @@
                         </Grid.RowDefinitions>
                         <Image x:Name="itemIcon" Grid.Column="0" Source="{Binding Path=Image, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="24" Width="24" Margin="2"/>
                         <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Name}" FontSize="20" FontWeight="Bold" Margin="4" />
-                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="8 8 4 0" Orientation="Horizontal" Visibility="{Binding AlbumArtistVisibility}">
+                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="8 8 4 0" Orientation="Horizontal" Visibility="{Binding CreatorVisibility}">
                             <TextBlock Text="BY" FontSize="12" Foreground="DarkGray" Margin="0 4 8 0"/>
-                            <TextBlock Text="{Binding AlbumArtistName}" FontSize="14" Margin="0 2 0 0"/>
+                            <TextBlock Text="{Binding CreatorName}" FontSize="14" Margin="0 2 0 0"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="3" Margin="4 8 4 0" Orientation="Horizontal" Visibility="{Binding TrackAlbumVisibility}">
+                        <StackPanel Grid.Row="0" Grid.Column="3" Margin="4 8 4 0" Orientation="Horizontal" Visibility="{Binding CatalogVisibility}">
                             <TextBlock Text="FROM" FontSize="12" Foreground="DarkGray" Margin="0 4 8 0"/>
-                            <TextBlock Text="{Binding TrackAlbumTitle}" FontSize="14" Margin="0 2 0 0"/>
+                            <TextBlock Text="{Binding CatalogName}" FontSize="14" Margin="0 2 0 0"/>
                         </StackPanel>
                         <StackPanel Grid.Row="0" Grid.Column="5" Margin="4" Orientation="Vertical" >
-                            <TextBlock Text="{Binding ResultType}" FontSize="10" HorizontalAlignment="Center" />
+                            <TextBlock Text="{Binding Type}" FontSize="10" HorizontalAlignment="Center" />
                             <TextBlock Text="{Binding Years}" FontSize="10" HorizontalAlignment="Center" />
                         </StackPanel>
                         <local:HoveringCloseIcon x:Name="itemCloseIcon" Grid.Row="0" Grid.Column="6" VerticalAlignment="Top" IsClosed="{Binding IsClosed, Mode=TwoWay}"/>
@@ -98,8 +98,8 @@
                                                             </Grid.RowDefinitions>
                                                             <Image Grid.Row="0" VerticalAlignment="Top" Source="{Binding Path=Image, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="72" Width="72"/>
                                                             <StackPanel Grid.Row="1" Margin="4" Orientation="Vertical" VerticalAlignment="Top">
-                                                                <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="10" TextWrapping="Wrap" Width="88"/>
-                                                                <TextBlock Text="{Binding Year}" FontSize="10" />
+                                                                <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="10" TextWrapping="Wrap" Width="88"/>
+                                                                <TextBlock Text="{Binding Years}" FontSize="10" />
                                                             </StackPanel>
                                                         </Grid>
                                                     </DataTemplate>
@@ -146,7 +146,7 @@
                                     <TabItem x:Name="summaryTab" Style="{StaticResource tabItemStyle}" IsSelected="True">
                                         <TabItem.Header>
                                             <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
-                                                <TextBlock Text="{Binding SummaryLabel}"/>
+                                                <TextBlock Text="Summary"/>
                                             </HeaderedContentControl>
                                         </TabItem.Header>
                                         <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -166,7 +166,7 @@
                                             </HeaderedContentControl>
                                         </TabItem.Header>
                                     </TabItem>
-                                    <TabItem x:Name="tagsTab" Style="{StaticResource tabItemStyle}">
+                                    <TabItem x:Name="tagsTab" Style="{StaticResource tabItemStyle}" GotFocus="tagsTab_GotFocus">
                                         <TabItem.Header>
                                             <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
                                                 <TextBlock Text="Tags"/>

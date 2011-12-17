@@ -81,8 +81,9 @@ namespace Gnosis.Alexandria.Views
 
                 mediaItemController = new MediaItemController(logger, artistRepository, albumRepository, trackRepository, clipRepository);
                 taskController = new TaskController(logger, videoPlayer, spiderFactory, mediaItemController, artistRepository, albumRepository, trackRepository, clipRepository);
+                tagController = new TagController(logger, tagRepository);
 
-                taskResultView.Initialize(logger, securityContext, taskController, mediaItemController, videoPlayer);
+                taskResultView.Initialize(logger, securityContext, mediaItemController, taskController, tagController, videoPlayer);
                 taskManagerView.Initialize(logger, taskController, taskResultView);
                 searchView.Initialize(logger, taskController, taskResultView);
             }
@@ -110,7 +111,8 @@ namespace Gnosis.Alexandria.Views
 
         private readonly SpiderFactory spiderFactory;
         private readonly ICatalogController catalogController;
-        private readonly ITaskController taskController;
         private readonly IMediaItemController mediaItemController;
+        private readonly ITaskController taskController;
+        private readonly ITagController tagController;
     }
 }

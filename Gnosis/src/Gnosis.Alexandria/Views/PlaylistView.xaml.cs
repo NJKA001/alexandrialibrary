@@ -48,7 +48,7 @@ namespace Gnosis.Alexandria.Views
                 this.videoPlayer = videoPlayer;
                 this.DataContext = playlist;
 
-                var first = playlist.Items.FirstOrDefault();
+                var first = playlist.PlaylistItems.FirstOrDefault();
                 if (first != null)
                 {
                     first.IsPlaying = true;
@@ -75,13 +75,13 @@ namespace Gnosis.Alexandria.Views
 
         public void OnItemStarted(ITaskViewModel task)
         {
-            var existing = playlist.Items.Where(x => x.IsPlaying).FirstOrDefault();
+            var existing = playlist.PlaylistItems.Where(x => x.IsPlaying).FirstOrDefault();
             if (existing != null)
             {
                 existing.IsPlaying = false;
             }
 
-            var playing = playlist.Items.Where(x => x.Id == task.CurrentItem.Id).FirstOrDefault();
+            var playing = playlist.PlaylistItems.Where(x => x.Id == task.CurrentItem.Id).FirstOrDefault();
             if (playing != null)
             {
                 playing.IsPlaying = true;
@@ -90,13 +90,13 @@ namespace Gnosis.Alexandria.Views
 
         public void OnItemChanged(TaskItem item)
         {
-            var existing = playlist.Items.Where(x => x.IsPlaying).FirstOrDefault();
+            var existing = playlist.PlaylistItems.Where(x => x.IsPlaying).FirstOrDefault();
             if (existing != null)
             {
                 existing.IsPlaying = false;
             }
 
-            var playing = playlist.Items.Where(x => x.Id == item.Id).FirstOrDefault();
+            var playing = playlist.PlaylistItems.Where(x => x.Id == item.Id).FirstOrDefault();
             if (playing != null)
             {
                 playing.IsPlaying = true;
@@ -107,7 +107,7 @@ namespace Gnosis.Alexandria.Views
         {
             try
             {
-                var playing = playlist.Items.Where(x => x.Id == item.Id).FirstOrDefault();
+                var playing = playlist.PlaylistItems.Where(x => x.Id == item.Id).FirstOrDefault();
                 if (playing != null)
                 {
                     playing.IsPlaying = false;

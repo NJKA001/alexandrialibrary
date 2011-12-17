@@ -4,26 +4,27 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 
+using Gnosis.Alexandria.Controllers;
+
 namespace Gnosis.Alexandria.ViewModels
 {
     public interface ISearchResultViewModel
         : INotifyPropertyChanged
     {
-        Uri MediaItem { get; }
+        Uri Id { get; }
         string Name { get; }
         string Years { get; }
-        string ResultType { get; }
+        string Type { get; }
 
-        Visibility AlbumArtistVisibility { get; }
-        string AlbumArtistName { get; }
-        Visibility TrackAlbumVisibility { get; }
-        string TrackAlbumTitle { get; }
+        Visibility CreatorVisibility { get; }
+        string CreatorName { get; }
+        Visibility CatalogVisibility { get; }
+        string CatalogName { get; }
 
         object Icon { get; }
         object Image { get; }
 
         string Summary { get; }
-        string SummaryLabel { get; }
         
         Visibility TracksVisibility { get; }
         IEnumerable<ITrackViewModel> Tracks { get; }
@@ -34,9 +35,13 @@ namespace Gnosis.Alexandria.ViewModels
         Visibility AlbumsVisibility { get; }
         IEnumerable<IAlbumViewModel> Albums { get; }
 
-        //IEnumerable<ITagViewModel> Tags { get; }
-        //void AddTag(ITag tag);
-        //void RemoveTag(ITag tag);
+        IEnumerable<ILinkViewModel> Links { get; }
+        void AddLink(ILinkViewModel link);
+        void RemoveLink(ILinkViewModel link);
+
+        IEnumerable<ITagViewModel> Tags { get; }
+        void AddTag(ITagViewModel tag);
+        void RemoveTag(ITagViewModel tag);
 
         bool IsClosed { get; set; }
         bool IsSelected { get; set; }
@@ -44,8 +49,9 @@ namespace Gnosis.Alexandria.ViewModels
         void AddCloseCallback(Action<ISearchResultViewModel> callback);
         void AddAlbum(IAlbumViewModel album);
         void AddTrack(ITrackViewModel track);
+        void AddClip(IClipViewModel clip);
 
-        void UpdateThumbnail(Uri thumbnail, byte[] thumbnailData);
+        void UpdateThumbnail(IMediaItemController controller, Uri thumbnail, byte[] thumbnailData);
         void UpdateSummary(string summary);
     }
 }

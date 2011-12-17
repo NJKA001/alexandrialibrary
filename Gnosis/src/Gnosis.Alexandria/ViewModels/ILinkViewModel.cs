@@ -6,15 +6,14 @@ using System.Text;
 
 namespace Gnosis.Alexandria.ViewModels
 {
-    public interface ITagViewModel
+    public interface ILinkViewModel
         : INotifyPropertyChanged
     {
         long Id { get; }
-        IAlgorithm Algorithm { get; }
-        string AlgorithmName { get; }
-        ITagType Type { get; }
-        string TypeName { get; }
-        string Value { get; }
+        string Name { get; }
+        string Relationship { get; }
+        Uri Source { get; }
+        Uri Target { get; }
 
         bool IsClosed { get; set; }
         bool IsSelected { get; set; }

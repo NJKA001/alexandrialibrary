@@ -6,29 +6,7 @@ using System.Text;
 namespace Gnosis.Alexandria.ViewModels
 {
     public interface IClipViewModel
-        : IMediaItemViewModel
+        : IMediaItemViewModel, IPlayableViewModel
     {
-        Uri Clip { get; }
-        string Title { get; }
-        string Summary { get; }
-        uint Number { get; }
-        TimeSpan Duration { get; }
-        string DurationString { get; }
-        uint Height { get; }
-        uint Width { get; }
-        string Dimensions { get; }
-        string Year { get; }
-        Uri Artist { get; }
-        string ArtistName { get; }
-        Uri Album { get; }
-        string AlbumTitle { get; }
-        Uri Target { get; }
-        IMediaType TargetType { get; }
-        object Image { get; }
-        object PlaybackIcon { get; }
-
-        bool IsPlaying { get; set; }
-
-        IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext);
     }
 }

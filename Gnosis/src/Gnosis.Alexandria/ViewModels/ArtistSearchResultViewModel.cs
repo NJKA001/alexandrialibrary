@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-
+/*
 namespace Gnosis.Alexandria.ViewModels
 {
     public class ArtistSearchResultViewModel
@@ -212,3 +212,4 @@ namespace Gnosis.Alexandria.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }
+*/

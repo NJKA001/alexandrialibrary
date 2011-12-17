@@ -9,138 +9,24 @@ using Gnosis.Application.Vendor;
 namespace Gnosis.Alexandria.ViewModels
 {
     public class TrackViewModel
-        : ITrackViewModel
+        : MediaItemViewModel, ITrackViewModel
     {
-        public TrackViewModel(Uri track, string title, string summary, uint number, TimeSpan duration, DateTime date, Uri artist, string artistName, Uri album, string albumTitle, Uri target, IMediaType targetType, Uri thumbnail, byte[] thumbnailData)
+        public TrackViewModel(ITrack track)
+            : base(track, "TRACK", GetIcon(track))
         {
-            if (track == null)
-                throw new ArgumentNullException("track");
-            if (title == null)
-                throw new ArgumentNullException("title");
-            if (summary == null)
-                throw new ArgumentNullException("summary");
-            if (artist == null)
-                throw new ArgumentNullException("artist");
-            if (artistName == null)
-                throw new ArgumentNullException("artistName");
-            if (album == null)
-                throw new ArgumentNullException("album");
-            if (albumTitle == null)
-                throw new ArgumentNullException("albumTitle");
-            if (target == null)
-                throw new ArgumentNullException("target");
-            if (targetType == null)
-                throw new ArgumentNullException("targetType");
-
-            this.track = track;
-            this.title = title;
-            this.summary = summary;
-            this.number = number;
-            this.duration = duration;
-            this.date = date;
-            this.artist = artist;
-            this.artistName = artistName;
-            this.album = album;
-            this.albumTitle = albumTitle;
-            this.target = target;
-            this.targetType = targetType;
-            this.thumbnail = thumbnail;
-            this.thumbnailData = thumbnailData;
         }
 
-        private readonly Uri track;
-        private readonly string title;
-        private readonly string summary;
-        private readonly uint number;
-        private readonly TimeSpan duration;
-        private readonly DateTime date;
-        private readonly Uri artist;
-        private readonly string artistName;
-        private readonly Uri album;
-        private readonly string albumTitle;
-        private readonly Uri target;
-        private readonly IMediaType targetType;
-        private readonly Uri thumbnail;
-        private readonly byte[] thumbnailData;
+        private static object GetIcon(ITrack track)
+        {
+            if (track.TargetType == MediaType.AudioMpeg)
+            {
+                return "pack://application:,,,/Images/File Audio MP3-01.png";
+            }
+
+            return "pack://application:,,,/Images/File Audio-01.png";
+        }
 
         private bool isPlaying;
-        private bool isSelected;
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public Uri Track
-        {
-            get { return track; }
-        }
-
-        public string Title
-        {
-            get { return title; }
-        }
-
-        public string Summary
-        {
-            get { return summary; }
-        }
-
-        public uint Number
-        {
-            get { return number; }
-        }
-
-        public TimeSpan Duration
-        {
-            get { return duration; }
-        }
-
-        public string DurationString
-        {
-            get { return duration.ToFormattedString(); }
-        }
-
-        public string Year
-        {
-            get { return date.ToString("yyyy"); }
-        }
-
-        public Uri Artist
-        {
-            get { return artist; }
-        }
-
-        public string ArtistName
-        {
-            get { return artistName; }
-        }
-
-        public Uri Album
-        {
-            get { return album; }
-        }
-
-        public string AlbumTitle
-        {
-            get { return albumTitle; }
-        }
-
-        public Uri Target
-        {
-            get { return target; }
-        }
-
-        public IMediaType TargetType
-        {
-            get { return targetType; }
-        }
-
-        public object Image
-        {
-            get { return thumbnailData != null && thumbnailData.Length > 0 ? (object)thumbnailData : thumbnail; }
-        }
 
         public object PlaybackIcon
         {
@@ -149,7 +35,7 @@ namespace Gnosis.Alexandria.ViewModels
                 if (isPlaying)
                     return "pack://application:,,,/Images/play-simple.png";
 
-                var type = targetType.ToString();
+                var type = TargetType.ToString();
 
                 if (type == MediaType.AudioMpeg.ToString())
                     return "pack://application:,,,/Images/File Audio MP3-01.png";
@@ -169,22 +55,10 @@ namespace Gnosis.Alexandria.ViewModels
             }
         }
 
-        public bool IsSelected
-        {
-            get { return isSelected; }
-            set
-            {
-                isSelected = value;
-                OnPropertyChanged("IsSelected");
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext)
         {
-            var item = new GnosisPlaylistItem(title, summary, date, number, duration, artist, artistName, album, albumTitle, target, targetType, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, thumbnailData);
-            return new PlaylistItemViewModel(item);
+            var playlistItem = new GnosisPlaylistItem(Name, Summary, item.FromDate, Number, Duration, item.Creator, item.CreatorName, item.Catalog, item.CatalogName, item.Target, item.TargetType, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, item.Thumbnail, item.ThumbnailData);
+            return new PlaylistItemViewModel(playlistItem);
         }
     }
 }
