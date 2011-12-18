@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Algorithms;
+using Gnosis.Links;
 using Gnosis.Tags;
 
 namespace Gnosis.Application.Vendor
@@ -191,25 +192,42 @@ namespace Gnosis.Application.Vendor
 
         public virtual IEnumerable<ILink> GetLinks()
         {
-            return Enumerable.Empty<ILink>();
+            var links = new List<ILink>();
+
+            if (target != null && !target.IsEmptyUrn())
+            {
+                links.Add(new Link(location, target, "enclosure", targetType.ToString()));
+            }
+
+            return links;
         }
 
         public virtual IEnumerable<ITag> GetTags()
         {
             var tags = new List<ITag>();
 
-            tags.Add(new Tag(Location, TagType.DefaultString, Name.ToAmericanizedString(), Algorithm.Americanized));
-            foreach (var token in Name.Split(' '))
+            var americanized = Name.ToAmericanizedString();
+            if (americanized != Name.ToUpper())
+                tags.Add(new Tag(Location, TagType.DefaultString, Name.ToAmericanizedString(), Algorithm.Americanized));
+
+            var tokens = Name.Split(' ');
+            if (tokens.Length == 1)
+                return tags;
+
+            foreach (var token in tokens)
             {
                 if (token == null)
                     continue;
                 
-                var trimmed = token.Trim();
-                if (trimmed == string.Empty)
+                var tokenTrimmed = token.Trim();
+                if (string.IsNullOrEmpty(tokenTrimmed))
                     continue;
 
-                tags.Add(new Tag(Location, TagType.DefaultString, trimmed));
-                tags.Add(new Tag(Location, TagType.DefaultString, trimmed.ToAmericanizedString()));
+                tags.Add(new Tag(Location, TagType.MediaName, tokenTrimmed));
+
+                var tokenAmericanized = tokenTrimmed.ToAmericanizedString();
+                if (!string.IsNullOrEmpty(tokenAmericanized.Trim()) && tokenAmericanized != tokenTrimmed.ToUpper())
+                    tags.Add(new Tag(Location, TagType.MediaName, tokenAmericanized));
             }
 
             return tags;

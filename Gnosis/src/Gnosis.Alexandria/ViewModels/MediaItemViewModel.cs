@@ -216,6 +216,11 @@ namespace Gnosis.Alexandria.ViewModels
                 links.Remove(link);
         }
 
+        public IEnumerable<ILink> GetSystemLinks()
+        {
+            return item.GetLinks();
+        }
+
         public void AddTag(ITagViewModel tag)
         {
             if (tag == null)

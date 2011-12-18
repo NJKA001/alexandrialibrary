@@ -161,12 +161,44 @@
                                             </ScrollViewer>
                                         </Border>
                                     </TabItem>
-                                    <TabItem x:Name="linksTab" Style="{StaticResource tabItemStyle}">
+                                    <TabItem x:Name="linksTab" Style="{StaticResource tabItemStyle}" GotFocus="linksTab_GotFocus">
                                         <TabItem.Header>
                                             <HeaderedContentControl Style="{StaticResource tabHeaderStyle}">
                                                 <TextBlock Text="Links"/>
                                             </HeaderedContentControl>
                                         </TabItem.Header>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <WrapPanel Grid.Row="0" Orientation="Horizontal">
+                                                <Label Margin="4">Name</Label>
+                                                <TextBox x:Name="linkNameTextBox" Margin="4" Width="120" Text="{Binding CurrentLinkName}"/>
+                                                <Label Margin="8 4 4 4">Relationship</Label>
+                                                <TextBox x:Name="linkRelationshipTextBox" Margin="4" Width="120" Text="{Binding CurrentLinkRelationship}"/>
+                                                <Label Margin="8 4 4 4">URL</Label>
+                                                <TextBox x:Name="linkTargetTextBox" Margin="4" Width="240" Text="{Binding CurrentLinkTarget}"/>
+                                                <Button x:Name="addLinkButton" Margin="4" Click="addLinkButton_Click">Add Link</Button>
+                                            </WrapPanel>
+                                            <ListBox Grid.Row="1" Margin="4" ItemsSource="{Binding Links}">
+                                                <ListBox.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel Orientation="Horizontal" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Border}},Path=ActualWidth}" />
+                                                    </ItemsPanelTemplate>
+                                                </ListBox.ItemsPanel>
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border Background="#719CC1" CornerRadius="4" Margin="4">
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Background="#4CC0A9" Text="{Binding Relationship}" Margin="4"/>
+                                                                <TextBlock Text="{Binding Name}" ToolTip="{Binding Target}" Margin="4"/>
+                                                            </StackPanel>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                            </ListBox>
+                                        </Grid>
                                     </TabItem>
                                     <TabItem x:Name="tagsTab" Style="{StaticResource tabItemStyle}" GotFocus="tagsTab_GotFocus">
                                         <TabItem.Header>
@@ -176,13 +208,15 @@
                                         </TabItem.Header>
                                         <Grid>
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="30"/>
+                                                <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="*"/>
                                             </Grid.RowDefinitions>
-                                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                                
-                                            </StackPanel>
-                                            <ListBox Grid.Row="1" ItemsSource="{Binding Tags}">
+                                            <WrapPanel Grid.Row="0">
+                                                <Label Margin="4">Tag</Label>
+                                                <TextBox x:Name="tagValueTextBox" Margin="4" Width="120" Text="{Binding CurrentTagValue}"/>
+                                                <Button x:Name="addTagButton" Margin="4" Click="addTagButton_Click">Add Tag</Button>
+                                            </WrapPanel>
+                                            <ListBox Grid.Row="1" Margin="4" ItemsSource="{Binding Tags}">
                                                 <ListBox.ItemsPanel>
                                                     <ItemsPanelTemplate>
                                                         <WrapPanel Orientation="Horizontal" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Border}},Path=ActualWidth}" />
@@ -190,7 +224,7 @@
                                                 </ListBox.ItemsPanel>
                                                 <ListBox.ItemTemplate>
                                                     <DataTemplate>
-                                                        <Border Background="#719CC1" CornerRadius="4">
+                                                        <Border Background="#719CC1" CornerRadius="4" Margin="4">
                                                         <StackPanel Orientation="Horizontal">
                                                             <TextBlock Background="#4CC0A9" Text="{Binding Type}" Margin="4"/>
                                                             <TextBlock Text="{Binding Value}" Margin="4"/>
@@ -218,7 +252,7 @@
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
                                             <TextBlock Grid.Row="0" Grid.Column="0" Text="ID" Margin="4"/>
-                                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding MediaItem}" Margin="4"/>
+                                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Id}" Margin="4"/>
                                             <!--
                                             <TextBlock Grid.Row="1" Grid.Column="0" Text="Target" Margin="4"/>
                                             <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Target}" Margin="4"/>

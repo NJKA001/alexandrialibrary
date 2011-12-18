@@ -38,6 +38,7 @@ namespace Gnosis.Alexandria.ViewModels
         IEnumerable<ILinkViewModel> Links { get; }
         void AddLink(ILinkViewModel link);
         void RemoveLink(ILinkViewModel link);
+        IEnumerable<ILink> GetSystemLinks();
 
         IEnumerable<ITagViewModel> Tags { get; }
         void AddTag(ITagViewModel tag);
@@ -46,6 +47,11 @@ namespace Gnosis.Alexandria.ViewModels
 
         bool IsClosed { get; set; }
         bool IsSelected { get; set; }
+        
+        string CurrentLinkName { get; set; }
+        string CurrentLinkRelationship { get; set; }
+        string CurrentLinkTarget { get; set; }
+        string CurrentTagValue { get; set; }
 
         void AddCloseCallback(Action<ISearchResultViewModel> callback);
         void AddAlbum(IAlbumViewModel album);

@@ -56,6 +56,7 @@ namespace Gnosis.Tags
             all.Add(DefaultDateTime);
             all.Add(DefaultTimeSpan);
             all.Add(DefaultByteArray);
+            all.Add(MediaName);
 
             all.Add(Year);
             all.Add(TrackCount);
@@ -154,6 +155,8 @@ namespace Gnosis.Tags
         public static readonly ITagType DefaultDateTime = new TagType(3, "Tag", string.Empty, TagDomain.DateTime);
         public static readonly ITagType DefaultTimeSpan = new TagType(4, "Tag", string.Empty, TagDomain.TimeSpan);
         public static readonly ITagType DefaultByteArray = new TagType(5, "Tag", string.Empty, TagDomain.ByteArray);
+
+        public static readonly ITagType MediaName = new TagType(11, "Name", string.Empty, TagDomain.String);
 
         public static readonly ITagType Year = new TagType(101, "Year", string.Empty, TagDomain.PositiveInteger);
         public static readonly ITagType TrackCount = new TagType(102, "TrackCount", string.Empty, TagDomain.PositiveInteger);

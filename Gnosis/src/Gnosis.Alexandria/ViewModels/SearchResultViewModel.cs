@@ -46,6 +46,11 @@ namespace Gnosis.Alexandria.ViewModels
         private bool isClosed;
         private bool isSelected;
 
+        private string currentLinkName;
+        private string currentLinkRelationship;
+        private string currentLinkTarget;
+        private string currentTagValue;
+
         private readonly IList<Action<ISearchResultViewModel>> closeCallbacks = new List<Action<ISearchResultViewModel>>();
 
         private void OnClosed()
@@ -193,6 +198,11 @@ namespace Gnosis.Alexandria.ViewModels
             item.RemoveLink(link);
         }
 
+        public IEnumerable<ILink> GetSystemLinks()
+        {
+            return item.GetSystemLinks();
+        }
+
         public IEnumerable<ITagViewModel> Tags
         {
             get { return item.Tags; }
@@ -242,6 +252,46 @@ namespace Gnosis.Alexandria.ViewModels
             {
                 isSelected = value;
                 OnPropertyChanged("IsSelected");
+            }
+        }
+
+        public string CurrentLinkName
+        {
+            get { return currentLinkName; }
+            set
+            {
+                currentLinkName = value;
+                OnPropertyChanged("CurrentLinkName");
+            }
+        }
+
+        public string CurrentLinkRelationship
+        {
+            get { return currentLinkRelationship; }
+            set
+            {
+                currentLinkRelationship = value;
+                OnPropertyChanged("CurrentLinkRelationship");
+            }
+        }
+
+        public string CurrentLinkTarget
+        {
+            get { return currentLinkTarget; }
+            set
+            {
+                currentLinkTarget = value;
+                OnPropertyChanged("CurrentLinkTarget");
+            }
+        }
+
+        public string CurrentTagValue
+        {
+            get { return currentTagValue; }
+            set
+            {
+                currentTagValue = value;
+                OnPropertyChanged("CurrentTagValue");
             }
         }
 

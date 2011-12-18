@@ -14,11 +14,13 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-using Gnosis.Application.Vendor;
 using Gnosis.Alexandria.Controllers;
 using Gnosis.Alexandria.Extensions;
 using Gnosis.Alexandria.ViewModels;
+using Gnosis.Application.Vendor;
 using Gnosis.Image;
+using Gnosis.Links;
+using Gnosis.Tags;
 
 namespace Gnosis.Alexandria.Views
 {
@@ -46,6 +48,114 @@ namespace Gnosis.Alexandria.Views
         private readonly IDictionary<string, ISearchResultViewModel> albumResults = new Dictionary<string, ISearchResultViewModel>();
         private readonly IDictionary<string, ISearchResultViewModel> trackResults = new Dictionary<string, ISearchResultViewModel>();
         private readonly IDictionary<string, ISearchResultViewModel> clipResults = new Dictionary<string, ISearchResultViewModel>();
+
+        private void addTagButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var element = sender as UIElement;
+                if (element == null)
+                    return;
+
+                var listBoxItem = element.FindContainingItem<ListBoxItem>();
+                if (listBoxItem == null)
+                    return;
+
+                var resultViewModel = listBoxItem.DataContext as ISearchResultViewModel;
+                if (resultViewModel == null)
+                    return;
+
+                if (string.IsNullOrEmpty(resultViewModel.CurrentTagValue))
+                {
+                    MessageBox.Show("Tag value is required.", "Cannot Add Tag");
+                    return;
+                }
+
+                var tagValue = resultViewModel.CurrentTagValue;
+                var tag = new Tag(resultViewModel.Id, TagType.DefaultString, tagValue);
+                mediaItemController.SaveTags(new List<ITag> { tag });
+                resultViewModel.AddTag(new TagViewModel(tag));
+                resultViewModel.CurrentTagValue = null;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  SearchResultView.addTagButton_Click", ex);
+            }
+        }
+
+        private void addLinkButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var element = sender as UIElement;
+                if (element == null)
+                    return;
+
+                var listBoxItem = element.FindContainingItem<ListBoxItem>();
+                if (listBoxItem == null)
+                    return;
+
+                var resultViewModel = listBoxItem.DataContext as ISearchResultViewModel;
+                if (resultViewModel == null)
+                    return;
+
+                if (string.IsNullOrEmpty(resultViewModel.CurrentLinkName))
+                {
+                    MessageBox.Show("Link name is required.", "Cannot Save Link");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(resultViewModel.CurrentLinkTarget))
+                {
+                    MessageBox.Show("Link URL is required.", "Cannot Save Link");
+                    return;
+                }
+
+                Uri linkTarget = null;
+                if (!Uri.TryCreate(resultViewModel.CurrentLinkTarget, UriKind.Absolute, out linkTarget))
+                {
+                    MessageBox.Show("Link URL is not valid.", "Cannot Save Link");
+                    return;
+                }
+
+                var name = resultViewModel.CurrentLinkName;
+                var relationship = resultViewModel.CurrentLinkRelationship ?? string.Empty;
+                var link = new Link(resultViewModel.Id, linkTarget, relationship, name);
+                mediaItemController.SaveLinks(new List<ILink> { link });
+                resultViewModel.AddLink(new LinkViewModel(link));
+                resultViewModel.CurrentLinkName = null;
+                resultViewModel.CurrentLinkRelationship = null;
+                resultViewModel.CurrentLinkTarget = null;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  SearchResultView.addLinkButton_Click", ex);
+            }
+        }
+
+        private void linksTab_GotFocus(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var element = sender as UIElement;
+                if (element == null)
+                    return;
+
+                var listBoxItem = element.FindContainingItem<ListBoxItem>();
+                if (listBoxItem == null)
+                    return;
+
+                var resultViewModel = listBoxItem.DataContext as ISearchResultViewModel;
+                if (resultViewModel == null)
+                    return;
+
+                mediaItemController.SaveLinks(resultViewModel.GetSystemLinks());
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  SearchResultView.linksTab_GotFocus", ex);
+            }
+        }
 
         private void tagsTab_GotFocus(object sender, RoutedEventArgs e)
         {
