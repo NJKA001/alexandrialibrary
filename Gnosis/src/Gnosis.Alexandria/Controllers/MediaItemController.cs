@@ -188,6 +188,14 @@ namespace Gnosis.Alexandria.Controllers
             return trackRepository.GetByCatalog(album);
         }
 
+        public void SaveLinks(IEnumerable<ILink> links)
+        {
+            if (links == null)
+                throw new ArgumentNullException("links");
+
+            linkRepository.Save(links);
+        }
+
         public void SaveTags(IEnumerable<ITag> tags)
         {
             if (tags == null)

@@ -16,6 +16,7 @@ namespace Gnosis.Alexandria.Controllers
         IEnumerable<ITrack> GetTracks(Uri album);
         IAlbum GetAlbum(Uri album);
 
+        void SaveLinks(IEnumerable<ILink> links);
         void SaveTags(IEnumerable<ITag> tags);
     }
 }
