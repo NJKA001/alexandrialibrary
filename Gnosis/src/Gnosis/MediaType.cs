@@ -265,7 +265,7 @@ namespace Gnosis
         public static readonly IMediaType ApplicationAtomXml = new MediaType(TypeApplication, "atom+xml", new List<string> { ".atom", ".xml" });
         public static readonly IMediaType ApplicationPdf = new MediaType(TypeApplication, "pdf", new List<string> { ".pdf" }, new List<string> { "application/x-pdf", "application/x-bzpdf", "application/x-gxpdf" }, new List<byte[]> { new byte[] { 0x25, 0x50, 0x44, 0x46 } });
         public static readonly IMediaType ApplicationRssXml = new MediaType(TypeApplication, "rss+xml", new List<string> { ".rss", ".xml" });
-        public static readonly IMediaType ApplicationXhtmlXml = new MediaType(TypeApplication, "xhtml+xml", new List<string> { ".xhtml", "" }, new List<string> { "text/html" });
+        public static readonly IMediaType ApplicationXhtmlXml = new MediaType(TypeApplication, "xhtml+xml", new List<string> { ".xhtml" }, new List<string> { "text/html" });
         public static readonly IMediaType ApplicationXspfXml = new MediaType(TypeApplication, "xspf+xml", new List<string> { ".xspf" });
         public static readonly IMediaType ApplicationXml = new MediaType(TypeApplication, "xml", new List<string> { ".xml" }, new List<string> { "text/xml" });
         public static readonly IMediaType ApplicationXmlDtd = new MediaType(TypeApplication, "xml-dtd", new List<string> { ".dtd", ".ent" });
