@@ -9,5 +9,6 @@ namespace Gnosis
     {
         void Initialize(ILogger logger, Func<IVideoHost> getHost);
         void Load(Uri location);
+        void Stop();
     }
 }

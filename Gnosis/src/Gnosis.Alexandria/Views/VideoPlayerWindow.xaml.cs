@@ -31,6 +31,11 @@ namespace Gnosis.Alexandria.Views
         {
             IsOpen = false;
 
+            if (videoPlayer != null)
+            {
+                videoPlayer.Stop();
+            }
+
             if (videoHost.Child != null)
             {
                 videoHost.Child = null;

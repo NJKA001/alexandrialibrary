@@ -256,5 +256,17 @@ namespace Gnosis.Video.Vlc
                 logger.Error("  VideoPlayerControl.Load", ex);
             }
         }
+
+        public void Stop()
+        {
+            try
+            {
+                m_player.Stop();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  VideoPlayerControl.Stop", ex);
+            }
+        }
     }
 }
