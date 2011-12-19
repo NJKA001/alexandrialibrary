@@ -259,10 +259,6 @@
       <Project>{38A3C867-546C-45A6-891F-E901FB855206}</Project>
       <Name>Gnosis.Data.SQLite</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Gnosis.Data\Gnosis.Data.csproj">
-      <Project>{B36EA69D-F61D-4002-9E0E-FB0F897C6977}</Project>
-      <Name>Gnosis.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Gnosis.Video.Vlc\Gnosis.Video.Vlc.csproj">
       <Project>{5B68690D-78AC-48E1-ACC2-38999CCEDC06}</Project>
       <Name>Gnosis.Video.Vlc</Name>

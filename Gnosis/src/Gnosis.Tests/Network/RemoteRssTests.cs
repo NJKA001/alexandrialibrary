@@ -36,7 +36,7 @@ namespace Gnosis.Tests.Network
         [Test]
         public void CanBeCreatedFromRemoteWordPressSource()
         {
-            const string generator = "http://wordpress.org/?v=3.2.1";
+            const string generator = "http://wordpress.org/?v=";
 
             var location = new Uri("http://www.nerdist.com/category/podcast/feed/");
             var document = XmlElement.Parse(location);
@@ -45,7 +45,8 @@ namespace Gnosis.Tests.Network
             var feed = document.Root as IRssFeed;
             Assert.IsNotNull(feed);
             Assert.IsNotNull(feed.Channel);
-            Assert.AreEqual(generator, feed.Channel.Generator);
+            Assert.IsNotNull(feed.Channel.Generator);
+            Assert.IsTrue(feed.Channel.Generator.Contains(generator));
         }
 
         [Test]

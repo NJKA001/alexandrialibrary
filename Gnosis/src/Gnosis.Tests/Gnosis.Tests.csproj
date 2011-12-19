@@ -134,10 +134,6 @@
       <Project>{38A3C867-546C-45A6-891F-E901FB855206}</Project>
       <Name>Gnosis.Data.SQLite</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Gnosis.Data\Gnosis.Data.csproj">
-      <Project>{B36EA69D-F61D-4002-9E0E-FB0F897C6977}</Project>
-      <Name>Gnosis.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Gnosis.Audio.Fmod\Gnosis.Audio.Fmod.csproj">
       <Project>{1629B512-34A2-4F04-AB9A-EBD30228EBDC}</Project>
       <Name>Gnosis.Audio.Fmod</Name>

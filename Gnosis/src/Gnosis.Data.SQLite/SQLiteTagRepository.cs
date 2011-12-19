@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Gnosis.Tags;
 using Gnosis.Tasks;
 using Gnosis.Data;
-using Gnosis.Data.Queries;
 
 namespace Gnosis.Data.SQLite
 {

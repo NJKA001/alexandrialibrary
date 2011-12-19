@@ -116,6 +116,11 @@
     <Compile Include="Audio\IAudioStream.cs" />
     <Compile Include="Audio\IAudioStreamFactory.cs" />
     <Compile Include="BufferState.cs" />
+    <Compile Include="Data\CommandBuilder.cs" />
+    <Compile Include="Data\DataReaderExtensions.cs" />
+    <Compile Include="Data\DataRecordExtensions.cs" />
+    <Compile Include="Data\ICommandBuilder.cs" />
+    <Compile Include="Data\IConnectionFactory.cs" />
     <Compile Include="IAlbum.cs" />
     <Compile Include="IFeed.cs" />
     <Compile Include="IFeedItem.cs" />
