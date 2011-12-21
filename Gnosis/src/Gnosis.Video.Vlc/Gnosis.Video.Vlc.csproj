@@ -40,6 +40,7 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -69,24 +70,106 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AudioRenderer.cs" />
+    <Compile Include="BitmapFormat.cs" />
+    <Compile Include="Exceptions\LibVlcException.cs" />
+    <Compile Include="Exceptions\LibVlcInitException.cs" />
+    <Compile Include="Exceptions\LibVlcNotFoundException.cs" />
+    <Compile Include="Filters\AdjustFilter.cs" />
+    <Compile Include="Filters\CropFilter.cs" />
+    <Compile Include="Filters\DeinterlaceFilter.cs" />
+    <Compile Include="Filters\LogoFilter.cs" />
+    <Compile Include="Filters\MarqueeFilter.cs" />
+    <Compile Include="Interop\Delegates.cs" />
+    <Compile Include="Delegates.cs" />
+    <Compile Include="DisposableBase.cs" />
+    <Compile Include="Enums\AspectRatioMode.cs" />
+    <Compile Include="Enums\AudioChannelType.cs" />
+    <Compile Include="Enums\ChromaType.cs" />
+    <Compile Include="Enums\DeinterlaceMode.cs" />
+    <Compile Include="Enums\MediaState.cs" />
+    <Compile Include="Enums\MetaDataType.cs" />
+    <Compile Include="Enums\NavigationMode.cs" />
+    <Compile Include="Enums\PlaybackMode.cs" />
+    <Compile Include="Enums\Position.cs" />
+    <Compile Include="Enums\SoundType.cs" />
+    <Compile Include="Enums\TrackType.cs" />
+    <Compile Include="Enums\VlcColor.cs" />
+    <Compile Include="Events\EventBroker.cs" />
+    <Compile Include="Events\EventManager.cs" />
+    <Compile Include="Events\EventTypes.cs" />
+    <Compile Include="Events\IEventBroker.cs" />
+    <Compile Include="Events\IEventProvider.cs" />
+    <Compile Include="Events\IMediaEvents.cs" />
+    <Compile Include="Events\IMediaListEvents.cs" />
+    <Compile Include="Events\IMediaListPlayerEvents.cs" />
+    <Compile Include="Events\MediaEventManager.cs" />
+    <Compile Include="Events\MediaListEventManager.cs" />
+    <Compile Include="Events\MediaListEvents.cs" />
+    <Compile Include="Events\MediaListPlayerEventManager.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="FilterInfo.cs" />
+    <Compile Include="Filters\IAdjustFilter.cs" />
+    <Compile Include="Filters\ICropFilter.cs" />
+    <Compile Include="Filters\IDeinterlaceFilter.cs" />
+    <Compile Include="Filters\ILogoFilter.cs" />
+    <Compile Include="Filters\IMarqueeFilter.cs" />
+    <Compile Include="IAudioRenderer.cs" />
+    <Compile Include="IMediaPlayerFactory.cs" />
+    <Compile Include="IMemoryRenderer.cs" />
+    <Compile Include="IMemoryRendererEx.cs" />
+    <Compile Include="Interop\INativePointer.cs" />
+    <Compile Include="Interop\IReferenceCount.cs" />
+    <Compile Include="Interop\LibVlcEnums.cs" />
+    <Compile Include="Interop\LibVlcMethods.cs" />
+    <Compile Include="Interop\LibVlcStructs.cs" />
+    <Compile Include="Interop\MinimalLibVlcVersionAttribute.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="Manager\IVideoLanManager.cs" />
+    <Compile Include="Manager\IVlmEventManager.cs" />
+    <Compile Include="Manager\VideoLanManager.cs" />
+    <Compile Include="Manager\VlmEvent.cs" />
+    <Compile Include="Manager\VlmEventManager.cs" />
+    <Compile Include="MediaPlayerFactory.cs" />
+    <Compile Include="MediaStatistics.cs" />
+    <Compile Include="MediaStrings.cs" />
+    <Compile Include="MediaTrackInfo.cs" />
+    <Compile Include="Media\IVlcMedia.cs" />
+    <Compile Include="Media\IVlcMediaFromFile.cs" />
+    <Compile Include="Media\IMediaList.cs" />
+    <Compile Include="Media\IScreenCaptureMedia.cs" />
+    <Compile Include="Media\IVideoInputMedia.cs" />
+    <Compile Include="Media\Media.cs" />
+    <Compile Include="Media\MediaFromFile.cs" />
+    <Compile Include="Media\MediaList.cs" />
+    <Compile Include="Media\ScreenCaptureMedia.cs" />
+    <Compile Include="Media\VideoInputMedia.cs" />
+    <Compile Include="MemoryRenderer.cs" />
+    <Compile Include="MemoryRendererEx.cs" />
+    <Compile Include="PixelData.cs" />
+    <Compile Include="PlanarFrame.cs" />
+    <Compile Include="PlanarPixelData.cs" />
+    <Compile Include="Players\AudioPlayer.cs" />
+    <Compile Include="Players\BasicPlayer.cs" />
+    <Compile Include="Players\DiskPlayer.cs" />
+    <Compile Include="Players\IVlcAudioPlayer.cs" />
+    <Compile Include="Players\IVlcDiskPlayer.cs" />
+    <Compile Include="Players\IVlcMediaListPlayer.cs" />
+    <Compile Include="Players\IVlcPlayer.cs" />
+    <Compile Include="Players\IVlcVideoPlayer.cs" />
+    <Compile Include="Players\MediaListPlayer.cs" />
+    <Compile Include="Players\VideoPlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReferenceCountAction.cs" />
+    <Compile Include="Sound.cs" />
+    <Compile Include="SoundFormat.cs" />
+    <Compile Include="Utilities\EnumUtils.cs" />
+    <Compile Include="Utilities\MemoryHeap.cs" />
     <Compile Include="VideoPlayerControl.xaml.cs">
       <DependentUpon>VideoPlayerControl.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\lib\NVlc\Declarations\Declarations.csproj">
-      <Project>{819C4BAB-8FD0-463F-BB5F-119731840390}</Project>
-      <Name>Declarations</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\lib\NVlc\Implementation\Implementation.csproj">
-      <Project>{6BA02CCA-2E14-4A64-8AB6-594E600D80C9}</Project>
-      <Name>Implementation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\lib\NVlc\LibVlcWrapper\LibVlcWrapper.csproj">
-      <Project>{57F08087-B175-4C96-BE36-83FBC4A21065}</Project>
-      <Name>LibVlcWrapper</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Gnosis\Gnosis.csproj">
       <Project>{37091600-5BFE-4FCB-8A69-F016FF451462}</Project>
       <Name>Gnosis</Name>
@@ -915,10 +998,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Implementation\" />
-    <Folder Include="Interop\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

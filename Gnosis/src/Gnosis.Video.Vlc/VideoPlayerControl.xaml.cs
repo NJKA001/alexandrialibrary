@@ -5,11 +5,9 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using System.Windows.Threading;
 
-using Declarations;
-using Declarations.Events;
-using Declarations.Media;
-using Declarations.Players;
-using Implementation;
+using Gnosis.Video.Vlc.Events;
+using Gnosis.Video.Vlc.Media;
+using Gnosis.Video.Vlc.Players;
 
 namespace Gnosis.Video.Vlc
 {
@@ -23,8 +21,8 @@ namespace Gnosis.Video.Vlc
         private IVideoHost currentHost;
 
         IMediaPlayerFactory m_factory;
-        Declarations.Players.IVideoPlayer m_player;
-        Declarations.Media.IMedia m_media;
+        IVlcVideoPlayer m_player;
+        IVlcMedia m_media;
         private volatile bool m_isDrag;
 
         private System.Windows.Forms.Panel panel;
@@ -32,23 +30,6 @@ namespace Gnosis.Video.Vlc
         public VideoPlayerControl()
         {
             InitializeComponent();
-
-            panel = new System.Windows.Forms.Panel();
-            panel.BackColor = System.Drawing.Color.Black;
-            formHost.Child = panel;
-
-            m_factory = new MediaPlayerFactory();
-            m_player = m_factory.CreatePlayer<Declarations.Players.IVideoPlayer>();
-
-            this.DataContext = m_player;
-
-            m_player.Events.PlayerPositionChanged += new EventHandler<MediaPlayerPositionChanged>(Events_PlayerPositionChanged);
-            m_player.Events.TimeChanged += new EventHandler<MediaPlayerTimeChanged>(Events_TimeChanged);
-            m_player.Events.MediaEnded += new EventHandler(Events_MediaEnded);
-            m_player.Events.PlayerStopped += new EventHandler(Events_PlayerStopped);
-
-            m_player.WindowHandle = panel.Handle;
-            slider2.Value = m_player.Volume;
         }
 
         void Events_PlayerStopped(object sender, EventArgs e)
@@ -106,7 +87,7 @@ namespace Gnosis.Video.Vlc
         {
             //Dispatcher.Invoke(new Action(() => textBlock1.Text = fileName), DispatcherPriority.DataBind);
 
-            m_media = m_factory.CreateMedia<IMediaFromFile>(fileName);
+            m_media = m_factory.CreateMedia<IVlcMediaFromFile>(fileName);
             m_media.Events.DurationChanged += new EventHandler<MediaDurationChange>(Events_DurationChanged);
             m_media.Events.StateChanged += new EventHandler<MediaStateChange>(Events_StateChanged);
 
@@ -226,6 +207,23 @@ namespace Gnosis.Video.Vlc
 
             this.logger = logger;
             this.getHost = getHost;
+
+            panel = new System.Windows.Forms.Panel();
+            panel.BackColor = System.Drawing.Color.Black;
+            formHost.Child = panel;
+
+            m_factory = new MediaPlayerFactory(logger);
+            m_player = m_factory.CreatePlayer<IVlcVideoPlayer>();
+
+            this.DataContext = m_player;
+
+            m_player.Events.PlayerPositionChanged += new EventHandler<MediaPlayerPositionChanged>(Events_PlayerPositionChanged);
+            m_player.Events.TimeChanged += new EventHandler<MediaPlayerTimeChanged>(Events_TimeChanged);
+            m_player.Events.MediaEnded += new EventHandler(Events_MediaEnded);
+            m_player.Events.PlayerStopped += new EventHandler(Events_PlayerStopped);
+
+            m_player.WindowHandle = panel.Handle;
+            slider2.Value = m_player.Volume;
         }
 
         public void Load(Uri location)
