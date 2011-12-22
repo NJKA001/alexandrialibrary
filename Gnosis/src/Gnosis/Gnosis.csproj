@@ -72,9 +72,6 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>..\..\lib\HtmlAgilityPack\1.4.0\HtmlAgilityPack.dll</HintPath>
-    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\lib\log4net\1.2.10.0\log4net.dll</HintPath>
     </Reference>
@@ -580,6 +577,10 @@
     <ProjectReference Include="..\Gnosis.Tags.TagLib\Gnosis.Tags.TagLib.csproj">
       <Project>{822EDA39-22B0-494C-BFED-33EDC82EDE2F}</Project>
       <Name>Gnosis.Tags.TagLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gnosis.Text.Html.HtmlAgility\Gnosis.Text.Html.HtmlAgility.csproj">
+      <Project>{56E3F598-4D55-4C04-B9C1-85E583A66860}</Project>
+      <Name>Gnosis.Text.Html.HtmlAgility</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

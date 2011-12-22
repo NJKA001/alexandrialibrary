@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Video.Vlc", "Gnosis.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Tags.TagLib", "Gnosis.Tags.TagLib\Gnosis.Tags.TagLib.csproj", "{822EDA39-22B0-494C-BFED-33EDC82EDE2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Text.Html.HtmlAgility", "Gnosis.Text.Html.HtmlAgility\Gnosis.Text.Html.HtmlAgility.csproj", "{56E3F598-4D55-4C04-B9C1-85E583A66860}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,18 @@ Global
 		{822EDA39-22B0-494C-BFED-33EDC82EDE2F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{822EDA39-22B0-494C-BFED-33EDC82EDE2F}.Release|x64.ActiveCfg = Release|Any CPU
 		{822EDA39-22B0-494C-BFED-33EDC82EDE2F}.Release|x86.ActiveCfg = Release|Any CPU
+		{56E3F598-4D55-4C04-B9C1-85E583A66860}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56E3F598-4D55-4C04-B9C1-85E583A66860}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56E3F598-4D55-4C04-B9C1-85E583A66860}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{56E3F598-4D55-4C04-B9C1-85E583A66860}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{56E3F598-4D55-4C04-B9C1-85E583A66860}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{56E3F598-4D55-4C04-B9C1-85E583A66860}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{56E3F598-4D55-4C04-B9C1-85E583A66860}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56E3F598-4D55-4C04-B9C1-85E583A66860}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56E3F598-4D55-4C04-B9C1-85E583A66860}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{56E3F598-4D55-4C04-B9C1-85E583A66860}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{56E3F598-4D55-4C04-B9C1-85E583A66860}.Release|x64.ActiveCfg = Release|Any CPU
+		{56E3F598-4D55-4C04-B9C1-85E583A66860}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
