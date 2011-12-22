@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Gnosis.Data.SQLite</RootNamespace>
-    <AssemblyName>gnosis.data.sqlite</AssemblyName>
+    <AssemblyName>gnosis-sqlite</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

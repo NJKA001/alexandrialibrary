@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Gnosis.Audio.Fmod</RootNamespace>
-    <AssemblyName>gnosis.audio.fmod</AssemblyName>
+    <AssemblyName>gnosis-fmod</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

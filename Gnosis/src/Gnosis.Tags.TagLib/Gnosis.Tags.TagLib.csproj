@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Gnosis.Tags.TagLib</RootNamespace>
-    <AssemblyName>Gnosis.Tags.TagLib</AssemblyName>
+    <AssemblyName>gnosis-taglib</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
