@@ -15,15 +15,15 @@ namespace Gnosis.Video
         {
         }
 
-        private TagLib.File file;
-        private TagLib.Tag riffTag;
+        private Gnosis.Tags.TagLib.File file;
+        private Gnosis.Tags.TagLib.Tag riffTag;
 
         public override void Load()
         {
             if (Location.IsFile)
             {
-                file = TagLib.File.Create(Location.LocalPath);
-                riffTag = file.GetTag(TagLib.TagTypes.RiffInfo);
+                file = Gnosis.Tags.TagLib.File.Create(Location.LocalPath);
+                riffTag = file.GetTag(Gnosis.Tags.TagLib.TagTypes.RiffInfo);
             }
         }
 

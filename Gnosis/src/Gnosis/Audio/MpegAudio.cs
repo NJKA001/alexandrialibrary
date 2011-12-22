@@ -6,17 +6,16 @@ using System.Text;
 using Gnosis.Algorithms;
 using Gnosis.Application.Vendor;
 using Gnosis.Tags;
-
-using TagLib;
+using Gnosis.Tags.TagLib;
 
 namespace Gnosis.Audio
 {
     public class MpegAudio
         : AudioBase
     {
-        private TagLib.File file;
-        private TagLib.Id3v1.Tag id3v1Tag;
-        private TagLib.Id3v2.Tag id3v2Tag;
+        private Gnosis.Tags.TagLib.File file;
+        private Gnosis.Tags.TagLib.Id3v1.Tag id3v1Tag;
+        private Gnosis.Tags.TagLib.Id3v2.Tag id3v2Tag;
 
         public MpegAudio(Uri location)
             : base(location, MediaType.AudioMpeg)
@@ -45,9 +44,9 @@ namespace Gnosis.Audio
         {
             if (Location.IsFile)
             {
-                file = TagLib.File.Create(Location.LocalPath);
-                id3v1Tag = file.GetTag(TagTypes.Id3v1) as TagLib.Id3v1.Tag;
-                id3v2Tag = file.GetTag(TagTypes.Id3v2) as TagLib.Id3v2.Tag;
+                file = Gnosis.Tags.TagLib.File.Create(Location.LocalPath);
+                id3v1Tag = file.GetTag(TagTypes.Id3v1) as Gnosis.Tags.TagLib.Id3v1.Tag;
+                id3v2Tag = file.GetTag(TagTypes.Id3v2) as Gnosis.Tags.TagLib.Id3v2.Tag;
 
                 //if (id3v1Tag == null || id3v1Tag.IsEmpty)
                 //    System.Diagnostics.Debug.WriteLine("ID3v1 tag is null or empty");
