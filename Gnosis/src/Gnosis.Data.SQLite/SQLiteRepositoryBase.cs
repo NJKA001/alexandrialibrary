@@ -24,7 +24,7 @@ namespace Gnosis.Data.SQLite
             this.defaultConnection = defaultConnection;
         }
 
-        private const string connectionString = "Data Source=Alexandria.db;Version=3;";
+        private const string connectionString = @"Data Source=.\data\alexandria.db;Version=3;";
 
         protected readonly ILogger logger;
         protected readonly IDbConnection defaultConnection;
