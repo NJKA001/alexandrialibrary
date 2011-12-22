@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 
 using NUnit.Framework;
-using TagLib;
 
 using Gnosis.Culture;
 using Gnosis.Data;
+using Gnosis.Tags.TagLib;
 
 namespace Gnosis.Tests.Unit.Tags
 {
@@ -67,8 +67,8 @@ namespace Gnosis.Tests.Unit.Tags
         //private IContext context = new SingleThreadedContext();
         //private ILogger logger = new DebugLogger();
 
-        private TagLib.File file;
-        private TagLib.Id3v2.Tag tag;
+        private Gnosis.Tags.TagLib.File file;
+        private Gnosis.Tags.TagLib.Id3v2.Tag tag;
 
         private void InitializeTag()
         {
@@ -124,8 +124,8 @@ namespace Gnosis.Tests.Unit.Tags
         [Test]
         public void ReadTag()
         {
-            file = TagLib.File.Create(location2);
-            tag = file.GetTag(TagTypes.Id3v2) as TagLib.Id3v2.Tag;
+            file = Gnosis.Tags.TagLib.File.Create(location2);
+            tag = file.GetTag(TagTypes.Id3v2) as Gnosis.Tags.TagLib.Id3v2.Tag;
 
             Assert.IsTrue(System.IO.File.Exists(location2));
             Assert.IsNotNull(file);
@@ -179,8 +179,8 @@ namespace Gnosis.Tests.Unit.Tags
         [Test]
         public void ReadLyrics()
         {
-            file = TagLib.File.Create(location1);
-            tag = file.GetTag(TagTypes.Id3v2) as TagLib.Id3v2.Tag;
+            file = Gnosis.Tags.TagLib.File.Create(location1);
+            tag = file.GetTag(TagTypes.Id3v2) as Gnosis.Tags.TagLib.Id3v2.Tag;
             Assert.IsTrue(System.IO.File.Exists(location1));
             Assert.IsNotNull(file);
             Assert.IsNotNull(tag);
