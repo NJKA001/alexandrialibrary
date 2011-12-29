@@ -13,6 +13,7 @@
             </ResourceDictionary.MergedDictionaries>
             <Style x:Key="playlistItemStyle" TargetType="{x:Type ListBoxItem}">
                 <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                <EventSetter Event="MouseDoubleClick" Handler="playlistItem_MouseDoubleClick"/>
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>

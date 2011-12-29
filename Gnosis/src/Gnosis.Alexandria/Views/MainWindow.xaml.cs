@@ -87,6 +87,8 @@ namespace Gnosis.Alexandria.Views
                 taskResultView.Initialize(logger, securityContext, mediaItemController, taskController, tagController, videoPlayer);
                 taskManagerView.Initialize(logger, taskController, taskResultView);
                 searchView.Initialize(logger, taskController, taskResultView);
+
+                ScreenSaver.Disable();
             }
             catch (Exception ex)
             {

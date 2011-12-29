@@ -269,6 +269,7 @@
     <Compile Include="MediaStateChangedEventArgs.cs" />
     <Compile Include="NetworkState.cs" />
     <Compile Include="PlaybackState.cs" />
+    <Compile Include="ScreenSaver.cs" />
     <Compile Include="SecurityContext.cs" />
     <Compile Include="SeekState.cs" />
     <Compile Include="Spiders\PlaylistSpider.cs" />

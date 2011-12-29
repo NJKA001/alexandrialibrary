@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Gnosis.Alexandria.Extensions;
 using Gnosis.Alexandria.ViewModels;
 
 namespace Gnosis.Alexandria.Views
@@ -29,6 +30,28 @@ namespace Gnosis.Alexandria.Views
         private ILogger logger;
         private IPlaylistViewModel playlist;
         private IVideoPlayer videoPlayer;
+
+        private void playlistItem_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                var element = sender as UIElement;
+                if (element == null)
+                    return;
+
+                var listBoxItem = element.FindContainingItem<ListBoxItem>();
+                if (listBoxItem == null)
+                    return;
+
+                var viewModel = listBoxItem.DataContext as IPlaylistItemViewModel;
+                if (viewModel == null)
+                    return;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  PlaylistView.playlistItem_MouseDoubleClick", ex);
+            }
+        }
 
         public void Initialize(ILogger logger, IPlaylistViewModel playlist, IVideoPlayer videoPlayer)
         {
