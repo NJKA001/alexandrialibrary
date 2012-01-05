@@ -71,6 +71,7 @@
     <Compile Include="Controllers\CatalogController.cs" />
     <Compile Include="Controllers\ICatalogController.cs" />
     <Compile Include="Controllers\IMediaItemController.cs" />
+    <Compile Include="Controllers\IPlaylistController.cs" />
     <Compile Include="Controllers\ISecurityController.cs" />
     <Compile Include="Controllers\ITagController.cs" />
     <Compile Include="Controllers\MediaItemController.cs" />
@@ -350,6 +351,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="logs\alexandria.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="temp\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
