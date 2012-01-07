@@ -58,11 +58,6 @@ namespace Gnosis.Alexandria.Views
 
             this.videoPlayer = videoPlayer;
 
-            if (videoHost.Child != null)
-            {
-                var x = videoHost.Child;
-            }
-
             videoHost.Child = videoPlayer as UIElement;
 
             IsOpen = true;

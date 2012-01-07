@@ -64,9 +64,19 @@ namespace Gnosis.Tasks
             //}
         }
 
+        private void LoadVideoStream(Uri target)
+        {
+            videoPlayer.Load(target);
+        }
+
         private void PlayAudioStream()
         {
             audioPlayer.Play();
+        }
+
+        private void PlayVideoStream()
+        {
+            videoPlayer.Play();
         }
 
         private void PlayCurrentStream()
@@ -79,6 +89,12 @@ namespace Gnosis.Tasks
                     PlayAudioStream();
                     UpdateAudioProgress();
                 }
+                else if (Item.TargetType.Type == MediaType.TypeVideo)
+                {
+                    LoadVideoStream(Item.Target);
+                    PlayVideoStream();
+                    UpdateVideoProgress();
+                }
             }
             else
             {
@@ -89,25 +105,56 @@ namespace Gnosis.Tasks
 
         private void PauseCurrentStream()
         {
-            if (audioPlayer.CurrentAudioStream != null && audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing)
+            if (Item.Target != null && Item.TargetType != null)
             {
-                audioPlayer.CurrentAudioStream.Pause();
+                if (Item.TargetType.Type == MediaType.TypeAudio)
+                {
+                    if (audioPlayer.CurrentAudioStream != null && audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing)
+                    {
+                        audioPlayer.CurrentAudioStream.Pause();
+                        //audioPlayer.Pause();
+                    }
+                }
+                else if (Item.TargetType.Type == MediaType.TypeVideo)
+                {
+                    videoPlayer.Pause();
+                }
             }
         }
 
         private void ResumeCurrentStream()
         {
-            if (audioPlayer.CurrentAudioStream != null && audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Paused)
+            if (Item.Target != null && Item.TargetType != null)
             {
-                audioPlayer.CurrentAudioStream.Resume();
+                if (Item.TargetType.Type == MediaType.TypeAudio)
+                {
+                    if (audioPlayer.CurrentAudioStream != null && audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Paused)
+                    {
+                        //audioPlayer.Resume();
+                        audioPlayer.CurrentAudioStream.Resume();
+                    }
+                }
+                else if (Item.TargetType.Type == MediaType.TypeVideo)
+                {
+                    videoPlayer.Resume();
+                }
             }
         }
 
         private void StopCurrentStream()
         {
-            if (audioPlayer.CurrentAudioStream != null)
+            if (Item.Target != null && Item.TargetType != null)
             {
-                audioPlayer.CurrentAudioStream.Stop();
+                if (Item.TargetType.Type == MediaType.TypeAudio)
+                {
+                    if (audioPlayer.CurrentAudioStream != null)
+                        audioPlayer.CurrentAudioStream.Stop();
+                    //audioPlayer.Stop();
+                }
+                else if (Item.TargetType.Type == MediaType.TypeVideo)
+                {
+                    videoPlayer.Stop();
+                }
             }
         }
 
@@ -118,6 +165,16 @@ namespace Gnosis.Tasks
                 var count = (int)Math.Ceiling(audioPlayer.Elapsed.TotalMilliseconds);
                 var maximum = (int)Math.Ceiling(audioPlayer.Duration.TotalMilliseconds);
                 UpdateProgress(count, maximum, "Playing Audio: " + Item.Target);
+            }
+        }
+
+        private void UpdateVideoProgress()
+        {
+            if (Item.Target != null)
+            {
+                var count = (int)Math.Ceiling(videoPlayer.Elapsed.TotalMilliseconds);
+                var maximum = (int)Math.Ceiling(videoPlayer.Duration.TotalMilliseconds);
+                UpdateProgress(count, maximum, "Playing Video: " + Item.Target);
             }
         }
 
@@ -144,6 +201,22 @@ namespace Gnosis.Tasks
                                 streamEnded = false;
                                 UpdateAudioProgress();
                             }
+                        }
+                    }
+                    else if (Item.TargetType.Type == MediaType.TypeVideo)
+                    {
+                        if (videoPlayer.Elapsed > TimeSpan.Zero && videoPlayer.Elapsed == videoPlayer.Duration)
+                        {
+                            if (!streamEnded)
+                            {
+                                streamEnded = true;
+                                //videoPlayer_CurrentVideoStreamEnded(this, EventArgs.Empty);
+                            }
+                        }
+                        else
+                        {
+                            streamEnded = false;
+                            UpdateVideoProgress();
                         }
                     }
                 }

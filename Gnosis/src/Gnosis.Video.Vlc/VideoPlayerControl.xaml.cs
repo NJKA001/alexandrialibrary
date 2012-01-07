@@ -25,6 +25,9 @@ namespace Gnosis.Video.Vlc
         IVlcMedia m_media;
         private volatile bool m_isDrag;
 
+        private TimeSpan duration;
+        private TimeSpan elapsed;
+
         private System.Windows.Forms.Panel panel;
 
         public VideoPlayerControl()
@@ -59,7 +62,9 @@ namespace Gnosis.Video.Vlc
         {
             this.Dispatcher.BeginInvoke(new Action(delegate
             {
-                label1.Content = TimeSpan.FromMilliseconds(e.NewTime).ToString().Substring(0, 8);
+                var elapsed = TimeSpan.FromMilliseconds(e.NewTime);
+                label1.Content = elapsed.ToString().Substring(0, 8);
+                this.elapsed = elapsed;
             }));
         }
 
@@ -112,7 +117,9 @@ namespace Gnosis.Video.Vlc
         {
             this.Dispatcher.BeginInvoke(new Action(delegate
             {
-                label3.Content = TimeSpan.FromMilliseconds(e.NewDuration).ToString().Substring(0, 8);
+                var duration = TimeSpan.FromMilliseconds(e.NewDuration);
+                label3.Content = duration.ToString().Substring(0, 8);
+                this.duration = duration;
             }));
         }
 
@@ -226,6 +233,23 @@ namespace Gnosis.Video.Vlc
             slider2.Value = m_player.Volume;
         }
 
+        private PlaybackState playbackState = PlaybackState.None;
+
+        public PlaybackState PlaybackState
+        {
+            get { return playbackState; }
+        }
+
+        public TimeSpan Duration
+        {
+            get { return duration; }
+        }
+
+        public TimeSpan Elapsed
+        {
+            get { return elapsed; }
+        }
+
         public void Load(Uri location)
         {
             if (location == null)
@@ -253,6 +277,18 @@ namespace Gnosis.Video.Vlc
             {
                 logger.Error("  VideoPlayerControl.Load", ex);
             }
+        }
+
+        public void Play()
+        {
+        }
+
+        public void Pause()
+        {
+        }
+
+        public void Resume()
+        {
         }
 
         public void Stop()
