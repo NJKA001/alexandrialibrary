@@ -244,7 +244,11 @@ namespace Gnosis.Alexandria.Views
         {
             try
             {
-                var listBoxItem = sender as ListBoxItem;
+                var element = e.OriginalSource as UIElement;
+                if (element == null)
+                    return;
+
+                var listBoxItem = element.FindContainingItem<ListBoxItem>();
                 if (listBoxItem == null)
                     return;
 
@@ -269,7 +273,11 @@ namespace Gnosis.Alexandria.Views
         {
             try
             {
-                var listBoxItem = sender as ListBoxItem;
+                var element = e.OriginalSource as UIElement;
+                if (element == null)
+                    return;
+
+                var listBoxItem = element.FindContainingItem<ListBoxItem>();
                 if (listBoxItem == null)
                     return;
 
@@ -305,7 +313,11 @@ namespace Gnosis.Alexandria.Views
         {
             try
             {
-                var listBoxItem = sender as ListBoxItem;
+                var element = e.OriginalSource as UIElement;
+                if (element == null)
+                    return;
+
+                var listBoxItem = element.FindContainingItem<ListBoxItem>();
                 if (listBoxItem == null)
                     return;
 

@@ -37,6 +37,12 @@ namespace Gnosis.Alexandria.ViewModels
 
                 if (type == MediaType.AudioMpeg.ToString())
                     return "pack://application:,,,/Images/File Audio MP3-01.png";
+                else if (type == MediaType.VideoAvi.ToString())
+                    return "pack://application:,,,/Images/File Video AVI-01.png";
+                else if (item.TargetType.Type == MediaType.TypeAudio)
+                    return "pack://application:,,,/Images/File Audio-01.png";
+                else if (item.TargetType.Type == MediaType.TypeVideo)
+                    return "pack://application:,,,/Images/File Video-01.png";
 
                 return "pack://application:,,,/Images/File Audio-01.png";
             }
