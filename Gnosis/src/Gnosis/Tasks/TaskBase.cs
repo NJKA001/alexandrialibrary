@@ -139,14 +139,6 @@ namespace Gnosis.Tasks
 
         protected abstract void DoWork();
 
-        protected void UpdateItem(TaskItem item)
-        {
-            this.item = item;
-
-            foreach (var callback in itemChangedCallbacks)
-                callback(item);
-        }
-
         protected void BlockIfPaused()
         {
             while (status == TaskStatus.Paused)
@@ -418,6 +410,14 @@ namespace Gnosis.Tasks
             var next = GetNextItem();
 
             UpdateItem(next);
+        }
+
+        public void UpdateItem(TaskItem item)
+        {
+            this.item = item;
+
+            foreach (var callback in itemChangedCallbacks)
+                callback(item);
         }
 
         public virtual void BeginProgressUpdate()

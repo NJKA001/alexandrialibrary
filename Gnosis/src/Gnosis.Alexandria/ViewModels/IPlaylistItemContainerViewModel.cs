@@ -13,6 +13,7 @@ namespace Gnosis.Alexandria.ViewModels
         void AddPlaylistItem(IPlaylistItemViewModel playlistItem);
         void InsertPlaylistItem(int index, IPlaylistItemViewModel item);
         void RemovePlaylistItem(IPlaylistItemViewModel playlistItem);
+        void SelectPlaylistItem(IPlaylistItemViewModel item);
         void SelectPreviousPlaylistItem();
         void SelectNextPlaylistItem();
 

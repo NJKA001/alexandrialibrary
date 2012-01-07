@@ -172,12 +172,10 @@ namespace Gnosis.Alexandria.Views
             {
                 if (!tabMap.ContainsKey(taskViewModel.Id))
                 {
-                    var playlistView = new PlaylistView();
-                    playlistView.Initialize(logger, playlist, videoPlayer);
+                    var playlistController = new PlaylistController(logger, playlist, taskViewModel, videoPlayer);
 
-                    taskViewModel.AddStartedCallback(task => playlistView.OnItemStarted(task));
-                    taskViewModel.AddResultsCallback(item => playlistView.OnItemEnded(item));
-                    taskViewModel.AddItemChangedCallback(item => playlistView.OnItemChanged(item));
+                    var playlistView = new PlaylistView();
+                    playlistView.Initialize(logger, playlistController);
 
                     var tabItem = new TabItem();
 

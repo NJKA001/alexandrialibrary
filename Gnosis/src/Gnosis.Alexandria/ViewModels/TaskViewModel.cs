@@ -48,6 +48,9 @@ namespace Gnosis.Alexandria.ViewModels
         private object icon;
 
         private readonly IList<Action<ITaskViewModel>> startedCallbacks = new List<Action<ITaskViewModel>>();
+        private readonly IList<Action<ITaskViewModel>> pausedCallbacks = new List<Action<ITaskViewModel>>();
+        private readonly IList<Action<ITaskViewModel>> resumedCallbacks = new List<Action<ITaskViewModel>>();
+        private readonly IList<Action<ITaskViewModel>> stoppedCallbacks = new List<Action<ITaskViewModel>>();
         private readonly IList<Action<ITaskViewModel>> cancelCallbacks = new List<Action<ITaskViewModel>>();
 
         private int progressCount = 0;
@@ -77,6 +80,8 @@ namespace Gnosis.Alexandria.ViewModels
             try
             {
                 OnStatusChanged();
+                foreach (var callback in stoppedCallbacks)
+                    callback(this);
             }
             catch (Exception ex)
             {
@@ -177,6 +182,9 @@ namespace Gnosis.Alexandria.ViewModels
             try
             {
                 OnStatusChanged();
+
+                foreach (var callback in pausedCallbacks)
+                    callback(this);
             }
             catch (Exception ex)
             {
@@ -189,6 +197,9 @@ namespace Gnosis.Alexandria.ViewModels
             try
             {
                 OnStatusChanged();
+
+                foreach (var callback in resumedCallbacks)
+                    callback(this);
             }
             catch (Exception ex)
             {
@@ -460,6 +471,11 @@ namespace Gnosis.Alexandria.ViewModels
             task.NextItem();
         }
 
+        public void UpdateItem(TaskItem item)
+        {
+            task.UpdateItem(item);
+        }
+
         public void BeginProgressUpdate()
         {
             task.BeginProgressUpdate();
@@ -476,6 +492,30 @@ namespace Gnosis.Alexandria.ViewModels
                 throw new ArgumentNullException("callback");
 
             startedCallbacks.Add(callback);
+        }
+
+        public void AddPausedCallback(Action<ITaskViewModel> callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            pausedCallbacks.Add(callback);
+        }
+
+        public void AddResumedCallback(Action<ITaskViewModel> callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            resumedCallbacks.Add(callback);
+        }
+
+        public void AddStoppedCallback(Action<ITaskViewModel> callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            stoppedCallbacks.Add(callback);
         }
 
         public void AddCancelCallback(Action<ITaskViewModel> callback)

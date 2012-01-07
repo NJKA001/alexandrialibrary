@@ -31,8 +31,10 @@ namespace Gnosis
         void Pause();
         void Resume();
         void Cancel();
+
         void PreviousItem();
         void NextItem();
+        void UpdateItem(TaskItem item);
 
         void BeginProgressUpdate();
         void UpdateProgress(int value);

@@ -136,7 +136,12 @@ namespace Gnosis.Audio.Fmod
 
 		public TimeSpan Elapsed
 		{
-			get { return new TimeSpan(0, 0, 0, 0, (int)sound.Channel.Position); }
+			get
+            {
+                return (sound == null || sound.Channel == null) ?
+                    TimeSpan.Zero
+                    :new TimeSpan(0, 0, 0, 0, (int)sound.Channel.Position);
+            }
 			set
 			{
 				lock(sound)

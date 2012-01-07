@@ -14,6 +14,9 @@
                 <ResourceDictionary Source="../Styles/Converters.xaml"/>
                 <ResourceDictionary Source="../Styles/ItemStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="searchResultItemStyle" TargetType="{x:Type ListBoxItem}">
+                <EventSetter Event="MouseDoubleClick" Handler="searchResultItem_DoubleClick"/>
+            </Style>
             <Style x:Key="albumListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
                 <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
                 <EventSetter Event="MouseDoubleClick" Handler="albumListBoxItem_DoubleClick"/>
@@ -26,7 +29,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <ListBox x:Name="searchResultControl" ItemsSource="{Binding Results}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch">
+        <ListBox x:Name="searchResultControl" ItemsSource="{Binding Results}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" ItemContainerStyle="{StaticResource searchResultItemStyle}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid x:Name="itemNameControl" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#AAD2FF" HorizontalAlignment="Stretch" Margin="4" AllowDrop="True" Drop="itemImage_Drop">

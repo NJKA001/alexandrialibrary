@@ -44,10 +44,14 @@ namespace Gnosis.Alexandria.ViewModels
         void Previous();
         void Next();
 
+        void UpdateItem(TaskItem item);
         void BeginProgressUpdate();
         void UpdateProgress(int value);
 
         void AddStartedCallback(Action<ITaskViewModel> callback);
+        void AddPausedCallback(Action<ITaskViewModel> callback);
+        void AddResumedCallback(Action<ITaskViewModel> callback);
+        void AddStoppedCallback(Action<ITaskViewModel> callback);
         void AddCancelCallback(Action<ITaskViewModel> callback);
 
         void AddItemChangedCallback(Action<TaskItem> callback);

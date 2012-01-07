@@ -67,6 +67,17 @@ namespace Gnosis.Alexandria.ViewModels
                 playlistItems.Remove(item);
         }
 
+        public void SelectPlaylistItem(IPlaylistItemViewModel item)
+        {
+            if (item == null)
+                throw new ArgumentNullException("item");
+
+            if (!playlistItems.Contains(item))
+                throw new ArgumentException("Cannot select playlist item, it is not contained in this playlist");
+
+            CurrentPlaylistItem = item;
+        }
+
         public void SelectPreviousPlaylistItem()
         {
             if (playlistItems.Count > 0)

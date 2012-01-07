@@ -28,7 +28,7 @@ namespace Gnosis.Tasks
             this.getPreviousItem = getPreviousItem;
             this.getNextItem = getNextItem;
 
-            audioPlayer.CurrentAudioStreamEnded += audioPlayer_CurrentAudioStreamEnded;
+            //audioPlayer.CurrentAudioStreamEnded += audioPlayer_CurrentAudioStreamEnded;
 
             AddPausedCallback(() => PauseCurrentStream());
             AddResumedCallback(() => ResumeCurrentStream());
@@ -48,6 +48,7 @@ namespace Gnosis.Tasks
 
         //private readonly IDictionary<string, IAudioStream> audioStreams = new Dictionary<string, IAudioStream>();
 
+        private bool streamEnded = false;
         private int errorCount;
         private int errorMax = 0;
 
@@ -130,7 +131,19 @@ namespace Gnosis.Tasks
                     {
                         if (audioPlayer.CurrentAudioStream != null && !audioPlayer.SeekIsPending)
                         {
-                            UpdateAudioProgress();
+                            if (audioPlayer.CurrentAudioStream.Elapsed == audioPlayer.CurrentAudioStream.Duration)
+                            {
+                                if (!streamEnded)
+                                {
+                                    streamEnded = true;
+                                    audioPlayer_CurrentAudioStreamEnded(this, EventArgs.Empty);
+                                }
+                            }
+                            else
+                            {
+                                streamEnded = false;
+                                UpdateAudioProgress();
+                            }
                         }
                     }
                 }
@@ -143,6 +156,7 @@ namespace Gnosis.Tasks
             {
                 var next = getNextItem();
                 UpdateItem(next);
+                UpdateResults(next);
                 PlayCurrentStream();
             }
         }

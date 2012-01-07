@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Gnosis.Alexandria.Controllers;
 using Gnosis.Alexandria.Extensions;
 using Gnosis.Alexandria.ViewModels;
 
@@ -28,8 +29,7 @@ namespace Gnosis.Alexandria.Views
         }
 
         private ILogger logger;
-        private IPlaylistViewModel playlist;
-        private IVideoPlayer videoPlayer;
+        private IPlaylistController playlistController;
 
         private void playlistItem_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -43,9 +43,11 @@ namespace Gnosis.Alexandria.Views
                 if (listBoxItem == null)
                     return;
 
-                var viewModel = listBoxItem.DataContext as IPlaylistItemViewModel;
-                if (viewModel == null)
+                var item = listBoxItem.DataContext as IPlaylistItemViewModel;
+                if (item == null)
                     return;
+
+                playlistController.SelectItem(item);
             }
             catch (Exception ex)
             {
@@ -53,79 +55,121 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        public void Initialize(ILogger logger, IPlaylistViewModel playlist, IVideoPlayer videoPlayer)
+        private void ClearExistingItemStatus()
+        {
+            foreach (var existing in playlistController.Items.Where(x => x.IsPaused || x.IsPlaying || x.IsStopped))
+            {
+                existing.ClearStatus();
+            }
+        }
+
+        private void OnItemStarted(ITaskViewModel task)
+        {
+            try
+            {
+                ClearExistingItemStatus();
+
+                var playing = playlistController.Items.Where(x => x.Id == task.CurrentItem.Id).FirstOrDefault();
+                if (playing != null)
+                {
+                    playing.IsPlaying = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  PlaylistView.OnItemStarted", ex);
+            }
+        }
+
+        private void OnItemPaused(ITaskViewModel taskViewModel)
+        {
+            if (playlistController.CurrentItem == null)
+                return;
+
+            playlistController.CurrentItem.IsPaused = true;
+        }
+
+        public void OnItemResumed(ITaskViewModel taskViewModel)
+        {
+            if (playlistController.CurrentItem == null)
+                return;
+
+            playlistController.CurrentItem.IsPlaying = true;
+        }
+
+        private void OnItemStopped(ITaskViewModel taskViewModel)
+        {
+            if (playlistController.CurrentItem == null)
+                return;
+
+            playlistController.CurrentItem.IsStopped = true;
+        }
+
+        private void OnItemChanged(TaskItem item)
+        {
+            try
+            {
+                ClearExistingItemStatus();
+
+                var playing = playlistController.Items.Where(x => x.Id == item.Id).FirstOrDefault();
+                if (playing != null)
+                {
+                    playing.IsPlaying = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  PlaylistView.OnItemChanged", ex);
+            }
+        }
+
+        //private void OnItemEnded(TaskItem item)
+        //{
+        //    try
+        //    {
+        //        var playing = playlistController.Items.Where(x => x.Id == item.Id).FirstOrDefault();
+        //        if (playing != null)
+        //        {
+        //            playing.ClearStatus();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        logger.Error("  PlaylistView.OnItemEnded", ex);
+        //    }
+        //}
+
+        public void Initialize(ILogger logger, IPlaylistController playlistController)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
-            if (playlist == null)
-                throw new ArgumentNullException("playlist");
-            if (videoPlayer == null)
-                throw new ArgumentNullException("videoPlayer");
+            if (playlistController == null)
+                throw new ArgumentNullException("playlistController");
 
             this.logger = logger;
-            
+            this.playlistController = playlistController;
+
             try
             {
-                this.playlist = playlist;
-                this.videoPlayer = videoPlayer;
-                this.DataContext = playlist;
+                playlistController.AddStartedCallback(OnItemStarted);
+                playlistController.AddPausedCallback(OnItemPaused);
+                playlistController.AddResumedCallback(OnItemResumed);
+                playlistController.AddStoppedCallback(OnItemStopped);
+                playlistController.AddItemChangedCallback(OnItemChanged);
+                //playlistController.AddResultsCallback(OnItemEnded);
 
-                var first = playlist.PlaylistItems.FirstOrDefault();
+                this.DataContext = playlistController.Playlist;
+
+                var first = playlistController.Items.FirstOrDefault();
                 if (first != null)
                 {
-                    first.IsPlaying = true;
+                    //first.IsPlaying = true;
                     first.IsSelected = true;
                 }
             }
             catch (Exception ex)
             {
                 logger.Error("PlaylistView.Initialize", ex);
-            }
-        }
-
-        public void OnItemStarted(ITaskViewModel task)
-        {
-            var existing = playlist.PlaylistItems.Where(x => x.IsPlaying).FirstOrDefault();
-            if (existing != null)
-            {
-                existing.IsPlaying = false;
-            }
-
-            var playing = playlist.PlaylistItems.Where(x => x.Id == task.CurrentItem.Id).FirstOrDefault();
-            if (playing != null)
-            {
-                playing.IsPlaying = true;
-            }
-        }
-
-        public void OnItemChanged(TaskItem item)
-        {
-            var existing = playlist.PlaylistItems.Where(x => x.IsPlaying).FirstOrDefault();
-            if (existing != null)
-            {
-                existing.IsPlaying = false;
-            }
-
-            var playing = playlist.PlaylistItems.Where(x => x.Id == item.Id).FirstOrDefault();
-            if (playing != null)
-            {
-                playing.IsPlaying = true;
-            }
-        }
-
-        public void OnItemEnded(TaskItem item)
-        {
-            try
-            {
-                var playing = playlist.PlaylistItems.Where(x => x.Id == item.Id).FirstOrDefault();
-                if (playing != null)
-                {
-                    playing.IsPlaying = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.Error("  PlaylistView.HandlePlaylistResult", ex);
             }
         }
     }

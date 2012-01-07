@@ -387,6 +387,16 @@ namespace Gnosis.Alexandria.ViewModels
             }
         }
 
+        public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext)
+        {
+            if (securityContext == null)
+                throw new ArgumentNullException("securityContext");
+
+            var album = item as IAlbumViewModel;
+
+            return album != null ? album.ToPlaylist(securityContext) : null;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

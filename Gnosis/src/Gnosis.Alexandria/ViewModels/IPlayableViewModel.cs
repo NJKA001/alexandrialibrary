@@ -11,7 +11,11 @@ namespace Gnosis.Alexandria.ViewModels
     {
         object PlaybackIcon { get; }
 
+        bool IsPaused { get; set; }
         bool IsPlaying { get; set; }
+        bool IsStopped { get; set; }
+
+        void ClearStatus();
 
         IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext);
     }

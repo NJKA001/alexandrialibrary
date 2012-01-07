@@ -75,6 +75,7 @@
     <Compile Include="Controllers\ISecurityController.cs" />
     <Compile Include="Controllers\ITagController.cs" />
     <Compile Include="Controllers\MediaItemController.cs" />
+    <Compile Include="Controllers\PlaylistController.cs" />
     <Compile Include="Controllers\SpiderFactory.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\TaskController.cs" />

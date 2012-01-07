@@ -60,5 +60,7 @@ namespace Gnosis.Alexandria.ViewModels
 
         void UpdateThumbnail(IMediaItemController controller, Uri thumbnail, byte[] thumbnailData);
         void UpdateSummary(IMediaItemController controller, string summary);
+
+        IPlaylistViewModel ToPlaylist(ISecurityContext securityContext);
     }
 }

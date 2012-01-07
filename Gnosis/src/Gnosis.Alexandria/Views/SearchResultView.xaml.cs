@@ -240,6 +240,31 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
+        private void searchResultItem_DoubleClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                var listBoxItem = sender as ListBoxItem;
+                if (listBoxItem == null)
+                    return;
+
+                var viewModel = listBoxItem.DataContext as ISearchResultViewModel;
+                if (viewModel == null)
+                    return;
+
+                var playlist = viewModel.ToPlaylist(securityContext);
+                if (playlist == null)
+                    return;
+
+                var taskViewModel = taskController.GetPlaylistViewModel(playlist);
+                taskResultView.Playlist(taskViewModel, playlist);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  SearchResultView.searchResultItem_DoubleClick", ex);
+            }
+        }
+
         private void clipListBoxItem_DoubleClick(object sender, MouseEventArgs e)
         {
             try

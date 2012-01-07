@@ -16,12 +16,20 @@ namespace Gnosis.Alexandria.ViewModels
         {
         }
 
+        private bool isPaused;
+        private bool isStopped;
         private bool isPlaying;
 
         public object PlaybackIcon
         {
             get
             {
+                if (isStopped)
+                    return "pack://application:,,,/Images/stop-simple.png";
+
+                if (isPaused)
+                    return "pack://application:,,,/Images/pause-simple.png";
+
                 if (isPlaying)
                     return "pack://application:,,,/Images/play-simple.png";
 
@@ -34,15 +42,73 @@ namespace Gnosis.Alexandria.ViewModels
             }
         }
 
+        public bool IsPaused
+        {
+            get { return isPaused; }
+            set
+            {
+                isPaused = value;
+                if (isPaused)
+                {
+                    isPlaying = false;
+                    OnPropertyChanged("IsPlaying");
+                    isStopped = false;
+                    OnPropertyChanged("IsStopped");
+                }
+
+                OnPropertyChanged("IsPaused");
+                OnPropertyChanged("PlaybackIcon");
+            }
+        }
+
         public bool IsPlaying
         {
             get { return isPlaying; }
             set
             {
                 isPlaying = value;
+                if (isPlaying)
+                {
+                    isPaused = false;
+                    OnPropertyChanged("IsPaused");
+                    isStopped = false;
+                    OnPropertyChanged("IsStopped");
+                }
+
                 OnPropertyChanged("IsPlaying");
                 OnPropertyChanged("PlaybackIcon");
             }
+        }
+
+        public bool IsStopped
+        {
+            get { return isStopped; }
+            set
+            {
+                isStopped = value;
+                if (isStopped)
+                {
+                    isPaused = false;
+                    OnPropertyChanged("IsPaused");
+                    isPlaying = false;
+                    OnPropertyChanged("IsPlaying");
+                }
+
+                OnPropertyChanged("IsStopped");
+                OnPropertyChanged("PlaybackIcon");
+            }
+        }
+
+        public void ClearStatus()
+        {
+            isPaused = false;
+            isPlaying = false;
+            isStopped = false;
+
+            OnPropertyChanged("IsPaused");
+            OnPropertyChanged("IsPlaying");
+            OnPropertyChanged("IsStopped");
+            OnPropertyChanged("PlaybackIcon");
         }
 
         public IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext)
