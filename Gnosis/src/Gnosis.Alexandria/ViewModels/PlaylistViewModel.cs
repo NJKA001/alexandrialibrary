@@ -12,8 +12,13 @@ namespace Gnosis.Alexandria.ViewModels
     public class PlaylistViewModel
         : MediaItemViewModel, IPlaylistViewModel
     {
+        //public PlaylistViewModel(IMediaItemController controller, IPlaylist playlist, IEnumerable<IPlaylistItemViewModel> playlistItems)
+        //    : this(controller, playlist, playlistItems, "pack://application:,,,/Images/play-simple.png")
+        //{
+        //}
+
         public PlaylistViewModel(IMediaItemController controller, IPlaylist playlist, IEnumerable<IPlaylistItemViewModel> playlistItems)
-            : base(controller, playlist, "PLAYLIST", "pack://application:,,,/Images/play-simple.png")
+            : base(controller, playlist, "PLAYLIST", GetIcon(playlist))
         {
             if (playlistItems == null)
                 throw new ArgumentNullException("playlistItems");
@@ -25,6 +30,11 @@ namespace Gnosis.Alexandria.ViewModels
         private readonly ObservableCollection<IPlaylistItemViewModel> playlistItems;
         private IPlaylistItemViewModel currentPlaylistItem;
         private int currentIndex = 0;
+
+        private static object GetIcon(IPlaylist playlist)
+        {
+            return playlist.ThumbnailData != null && playlist.ThumbnailData.Length > 0 ? playlist.ThumbnailData : (object)playlist.Thumbnail;
+        }
 
         public IEnumerable<IPlaylistItemViewModel> PlaylistItems
         {

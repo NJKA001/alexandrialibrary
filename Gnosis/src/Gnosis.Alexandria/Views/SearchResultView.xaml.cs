@@ -280,18 +280,16 @@ namespace Gnosis.Alexandria.Views
                 var summary = string.Empty;
                 var thumbnail = Guid.Empty.ToUrn();
                 var thumbnailData = new byte[0];
-                //if (clipViewModel.Image == null || clipViewModel.Image == byte[0] || clipViewModel.Image = Guid.Empty.ToUrn())
-                //{
-                    var album = mediaItemController.GetAlbum(clipViewModel.Id);
-                    if (album != null)
-                    {
-                        summary = "Based on: " + album.Name;
-                        thumbnail = album.Thumbnail;
-                        thumbnailData = album.ThumbnailData;
-                    }
-                //}
 
-                var playlist = new GnosisPlaylist("New Playlist", summary, DateTime.Now.ToUniversalTime(), 1, clipViewModel.Duration, Guid.Empty.ToUrn(), "Unknown Creator", Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, thumbnailData);
+                var album = mediaItemController.GetAlbum(clipViewModel.Id);
+                if (album != null)
+                {
+                    summary = "Based on: " + album.Name;
+                    thumbnail = album.Thumbnail;
+                    thumbnailData = album.ThumbnailData;
+                }
+
+                var playlist = new GnosisPlaylist(clipViewModel.Name, summary, DateTime.Now.ToUniversalTime(), 1, clipViewModel.Duration, Guid.Empty.ToUrn(), "Unknown Creator", Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, thumbnailData);
                 var playlistViewModel = new PlaylistViewModel(mediaItemController, playlist, new List<IPlaylistItemViewModel> { clipViewModel.ToPlaylistItem(securityContext) });
 
                 var taskViewModel = taskController.GetPlaylistViewModel(playlistViewModel);

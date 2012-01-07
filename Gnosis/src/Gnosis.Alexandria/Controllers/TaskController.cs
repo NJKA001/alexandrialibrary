@@ -84,7 +84,17 @@ namespace Gnosis.Alexandria.Controllers
                 var first = playlist.GetCurrentTaskItem();
                 var task = new PlaylistTask(logger, audioPlayer, videoPlayer, first, TimeSpan.Zero, () => playlist.GetPreviousTaskItem(), () => playlist.GetNextTaskItem());
 
-                return new PlaylistTaskViewModel(logger, task, playlist.Name, first.Image);
+                var icon = playlist.Icon;
+
+                var iconPath = first.Image as Uri;
+                if (iconPath != null && !iconPath.IsEmptyUrn())
+                    icon = iconPath;
+
+                var iconData = first.Image as byte[];
+                if (iconData != null && iconData.Length > 0)
+                    icon = iconData;
+
+                return new PlaylistTaskViewModel(logger, task, playlist.Name, icon);
             }
             catch (Exception ex)
             {

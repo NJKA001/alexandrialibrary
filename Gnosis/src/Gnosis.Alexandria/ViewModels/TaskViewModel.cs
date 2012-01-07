@@ -120,7 +120,22 @@ namespace Gnosis.Alexandria.ViewModels
             {
                 if (item.Image != null)
                 {
-                    Icon = item.Image;
+                    var iconPath = item.Image as Uri;
+                    if (iconPath != null)
+                    {
+                        if (!iconPath.IsEmptyUrn())
+                        {
+                            Icon = item.Image;
+                        }
+                    }
+                    else
+                    {
+                        var iconData = item.Image as byte[];
+                        if (iconData != null && iconData.Length > 0)
+                        {
+                            Icon = item.Image;
+                        }
+                    }
                 }
                 OnPropertyChanged("CurrentItem");
                 OnPropertyChanged("CurrentItemName");
