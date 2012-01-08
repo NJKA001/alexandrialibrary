@@ -259,13 +259,9 @@ namespace Gnosis.Video.Vlc
 
         private void EnsureHostIsOpen()
         {
-            if (currentHost == null)
+            if (currentHost == null || !currentHost.IsOpen)
             {
                 currentHost = getHost();
-            }
-
-            if (!currentHost.IsOpen)
-            {
                 Action openAction = () => currentHost.Open(this);
                 Dispatcher.Invoke(openAction);
             }
