@@ -334,7 +334,7 @@ namespace Gnosis.Tasks
         public void StartSynchronously()
         {
             if (status != TaskStatus.Ready)
-                return;
+                throw new InvalidOperationException("Cannot start a task that is not ready. status: " + status);
 
             Start();
 
@@ -344,7 +344,7 @@ namespace Gnosis.Tasks
         public void StartSynchronously(TimeSpan timeout)
         {
             if (status != TaskStatus.Ready)
-                return;
+                throw new InvalidOperationException("Cannot start a task that is not ready. status: " + status);
 
             Start();
 
@@ -364,8 +364,8 @@ namespace Gnosis.Tasks
 
         public void Pause()
         {
-            if (status != TaskStatus.Running)
-                return;
+            //if (status != TaskStatus.Running)
+                //return;
 
             status = TaskStatus.Paused;
 
@@ -374,8 +374,8 @@ namespace Gnosis.Tasks
 
         public void Resume()
         {
-            if (status != TaskStatus.Paused)
-                return;
+            //if (status != TaskStatus.Paused)
+                //return;
 
             status = TaskStatus.Running;
 
@@ -384,18 +384,11 @@ namespace Gnosis.Tasks
 
         public void Cancel()
         {
-            try
-            {
-                status = TaskStatus.Cancelled;
+            status = TaskStatus.Cancelled;
 
-                worker.CancelAsync();
+            worker.CancelAsync();
 
-                OnCancelled();
-            }
-            catch (Exception ex)
-            {
-                logger.Error("  TaskHandle.Cancel", ex);
-            }
+            OnCancelled();
         }
 
         public virtual void PreviousItem()

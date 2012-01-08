@@ -51,6 +51,8 @@ namespace Gnosis.Video.Vlc
             {
                 InitControls();
             }));
+
+            OnEnded();
         }
 
         private void InitControls()
@@ -104,7 +106,15 @@ namespace Gnosis.Video.Vlc
 
         private void button3_Click(object sender, RoutedEventArgs e)
         {
-            m_player.Play();
+            if (playbackState != Gnosis.PlaybackState.Paused)
+            {
+                Play();
+            }
+            else
+            {
+                Resume();
+            }
+            //m_player.Play();
         }
 
         void Events_StateChanged(object sender, MediaStateChange e)
@@ -127,17 +137,29 @@ namespace Gnosis.Video.Vlc
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            m_player.Pause();
+            Pause();
+            //m_player.Pause();
         }
 
         private void button4_Click(object sender, RoutedEventArgs e)
         {
-            m_player.Stop();
+            Stop();
+            //m_player.Stop();
         }
 
         private void button5_Click(object sender, RoutedEventArgs e)
         {
-            m_player.ToggleMute();
+            ToggleMute();
+            //if (m_player.Mute
+            //m_player.ToggleMute();
+        }
+
+        private void ToggleMute()
+        {
+            if (m_player.Mute)
+                Unmute();
+            else
+                Mute();
         }
 
         private void slider2_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

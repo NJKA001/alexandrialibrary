@@ -28,7 +28,14 @@ namespace Gnosis.Tasks
             this.getPreviousItem = getPreviousItem;
             this.getNextItem = getNextItem;
 
-            //audioPlayer.CurrentAudioStreamEnded += audioPlayer_CurrentAudioStreamEnded;
+            videoPlayer.AddEndedCallback(() => CurrentStreamEnded());
+            videoPlayer.AddPlayedCallback(() => PlayCurrentStream());
+            videoPlayer.AddPausedCallback(() => PauseCurrentStream());
+            videoPlayer.AddPausedCallback(() => PauseVideo());
+            videoPlayer.AddResumedCallback(() => ResumeCurrentStream());
+            videoPlayer.AddResumedCallback(() => ResumeVideo());
+            videoPlayer.AddStoppedCallback(() => StopCurrentStream());
+            videoPlayer.AddStoppedCallback(() => StopVideo());
 
             AddPausedCallback(() => PauseCurrentStream());
             AddResumedCallback(() => ResumeCurrentStream());
@@ -52,16 +59,25 @@ namespace Gnosis.Tasks
         private int errorCount;
         private int errorMax = 0;
 
+        private void PauseVideo()
+        {
+            Pause();
+        }
+
+        private void ResumeVideo()
+        {
+            Resume();
+        }
+
+        private void StopVideo()
+        {
+            Stop();
+        }
+
         private void LoadAudioStream(Uri target)
         {
-            //TODO: Implement a cache of audio streams
-            //var key = Item.Target.ToString();
-            //if (!audioStreams.ContainsKey(key))
-            //{
-                var audioStream = audioPlayer.AudioStreamFactory.CreateAudioStream(Item.Target);
-                //audioStreams.Add(key, audioStream);
-                audioPlayer.Load(audioStream);
-            //}
+            var audioStream = audioPlayer.AudioStreamFactory.CreateAudioStream(Item.Target);
+            audioPlayer.Load(audioStream);
         }
 
         private void LoadVideoStream(Uri target)
@@ -91,9 +107,12 @@ namespace Gnosis.Tasks
                 }
                 else if (Item.TargetType.Type == MediaType.TypeVideo)
                 {
-                    LoadVideoStream(Item.Target);
-                    PlayVideoStream();
-                    UpdateVideoProgress();
+                    if (videoPlayer.PlaybackState != PlaybackState.Playing)
+                    {
+                        LoadVideoStream(Item.Target);
+                        PlayVideoStream();
+                        UpdateVideoProgress();
+                    }
                 }
             }
             else
@@ -117,7 +136,10 @@ namespace Gnosis.Tasks
                 }
                 else if (Item.TargetType.Type == MediaType.TypeVideo)
                 {
-                    videoPlayer.Pause();
+                    if (videoPlayer.PlaybackState == PlaybackState.Playing)
+                    {
+                        videoPlayer.Pause();
+                    }
                 }
             }
         }
@@ -136,7 +158,10 @@ namespace Gnosis.Tasks
                 }
                 else if (Item.TargetType.Type == MediaType.TypeVideo)
                 {
-                    videoPlayer.Resume();
+                    if (videoPlayer.PlaybackState == PlaybackState.Paused)
+                    {
+                        videoPlayer.Resume();
+                    }
                 }
             }
         }
@@ -147,13 +172,18 @@ namespace Gnosis.Tasks
             {
                 if (Item.TargetType.Type == MediaType.TypeAudio)
                 {
-                    if (audioPlayer.CurrentAudioStream != null)
+                    if (audioPlayer.CurrentAudioStream != null && audioPlayer.CurrentAudioStream.PlaybackState != PlaybackState.Stopped)
+                    {
                         audioPlayer.CurrentAudioStream.Stop();
+                    }
                     //audioPlayer.Stop();
                 }
                 else if (Item.TargetType.Type == MediaType.TypeVideo)
                 {
-                    videoPlayer.Stop();
+                    if (videoPlayer.PlaybackState != PlaybackState.Stopped)
+                    {
+                        videoPlayer.Stop();
+                    }
                 }
             }
         }
@@ -193,7 +223,7 @@ namespace Gnosis.Tasks
                                 if (!streamEnded)
                                 {
                                     streamEnded = true;
-                                    audioPlayer_CurrentAudioStreamEnded(this, EventArgs.Empty);
+                                    CurrentStreamEnded();
                                 }
                             }
                             else
@@ -210,7 +240,7 @@ namespace Gnosis.Tasks
                             if (!streamEnded)
                             {
                                 streamEnded = true;
-                                //videoPlayer_CurrentVideoStreamEnded(this, EventArgs.Empty);
+                                CurrentStreamEnded();
                             }
                         }
                         else
@@ -223,7 +253,7 @@ namespace Gnosis.Tasks
             }
         }
 
-        private void audioPlayer_CurrentAudioStreamEnded(object sender, EventArgs e)
+        private void CurrentStreamEnded()
         {
             if (Status == TaskStatus.Running)
             {
@@ -264,11 +294,28 @@ namespace Gnosis.Tasks
         {
         }
 
+        private bool IsPlaying()
+        {
+            if (Item.TargetType != null)
+            {
+                if (Item.TargetType.Type == MediaType.TypeAudio)
+                {
+                    return audioPlayer.CurrentAudioStream != null && audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing;
+                }
+                else if (Item.TargetType.Type == MediaType.TypeVideo)
+                {
+                    return videoPlayer.PlaybackState == PlaybackState.Playing;
+                }
+            }
+
+            return false;
+        }
+
         public override void PreviousItem()
         {
             var previous = getPreviousItem();
 
-            var isPlaying = audioPlayer.CurrentAudioStream != null && audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing;
+            var isPlaying = IsPlaying();
             StopCurrentStream();
             UpdateItem(previous);
 
@@ -280,7 +327,7 @@ namespace Gnosis.Tasks
         {
             var next = getNextItem();
 
-            var isPlaying = audioPlayer.CurrentAudioStream != null && audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing;
+            var isPlaying = IsPlaying();
             StopCurrentStream();
             UpdateItem(next);
 
@@ -290,17 +337,37 @@ namespace Gnosis.Tasks
 
         public override void BeginProgressUpdate()
         {
-            if (audioPlayer.CurrentAudioStream != null)
+            if (Item.TargetType != null)
             {
-                audioPlayer.BeginSeek();
+                if (Item.TargetType.Type == MediaType.TypeAudio)
+                {
+                    if (audioPlayer.CurrentAudioStream != null)
+                    {
+                        audioPlayer.BeginSeek();
+                    }
+                }
+                else if (Item.TargetType.Type == MediaType.TypeVideo)
+                {
+                    //videoPlayer.BeginSeek();
+                }
             }
         }
 
         public override void UpdateProgress(int value)
         {
-            if (audioPlayer.CurrentAudioStream != null)
+            if (Item.TargetType != null)
             {
-                audioPlayer.Seek(value);
+                if (Item.TargetType.Type == MediaType.TypeAudio)
+                {
+                    if (audioPlayer.CurrentAudioStream != null)
+                    {
+                        audioPlayer.Seek(value);
+                    }
+                }
+                else if (Item.TargetType.Type == MediaType.TypeVideo)
+                {
+                    //videoPlayer.Seek(value);
+                }
             }
         }
     }
