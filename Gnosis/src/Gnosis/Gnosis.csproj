@@ -570,6 +570,7 @@
     <Compile Include="Application\Xml\Namespaces\YouTube\YouTubeWhen.cs" />
     <Compile Include="Utilities\Log4NetLogger.cs" />
     <Compile Include="Video\AviVideo.cs" />
+    <Compile Include="Video\Mpeg4Video.cs" />
     <Compile Include="Video\MpegVideo.cs" />
     <Compile Include="Video\VideoBase.cs" />
     <Compile Include="Video\WmvVideo.cs" />

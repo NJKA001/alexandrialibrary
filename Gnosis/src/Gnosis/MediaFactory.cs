@@ -42,6 +42,7 @@ namespace Gnosis
 
             AddFactoryFunction(MediaType.VideoAvi, (location, type) => new AviVideo(location));
             AddFactoryFunction(MediaType.VideoMpeg, (location, type) => new MpegVideo(location));
+            AddFactoryFunction(MediaType.VideoMpeg4, (location, type) => new Mpeg4Video(location));
             AddFactoryFunction(MediaType.VideoWmv, (location, type) => new WmvVideo(location));
         }
 

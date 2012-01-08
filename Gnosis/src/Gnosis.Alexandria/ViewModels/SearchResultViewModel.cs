@@ -393,8 +393,14 @@ namespace Gnosis.Alexandria.ViewModels
                 throw new ArgumentNullException("securityContext");
 
             var album = item as IAlbumViewModel;
+            if (album != null)
+                return album.ToPlaylist(securityContext);
 
-            return album != null ? album.ToPlaylist(securityContext) : null;
+            var playable = item as IPlayableViewModel;
+            if (playable != null)
+                return playable.ToPlaylist(securityContext);
+
+            return null;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

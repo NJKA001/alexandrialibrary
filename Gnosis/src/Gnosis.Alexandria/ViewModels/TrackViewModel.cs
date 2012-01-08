@@ -122,6 +122,13 @@ namespace Gnosis.Alexandria.ViewModels
             OnPropertyChanged("PlaybackIcon");
         }
 
+        public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext)
+        {
+            var playlist = new GnosisPlaylist(Name, Summary, DateTime.Now, 0, TimeSpan.Zero, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, item.Thumbnail, item.ThumbnailData);
+            var playlistItems = new List<IPlaylistItemViewModel> { ToPlaylistItem(securityContext) };
+            return new PlaylistViewModel(controller, playlist, playlistItems);
+        }
+
         public IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext)
         {
             var playlistItem = new GnosisPlaylistItem(Name, Summary, item.FromDate, Number, Duration, item.Creator, item.CreatorName, item.Catalog, item.CatalogName, item.Target, item.TargetType, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, item.Thumbnail, item.ThumbnailData);

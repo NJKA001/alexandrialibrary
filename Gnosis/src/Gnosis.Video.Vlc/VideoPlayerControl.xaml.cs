@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls.Primitives;
@@ -14,7 +15,8 @@ namespace Gnosis.Video.Vlc
     /// <summary>
     /// Interaction logic for VideoPlayerControl.xaml
     /// </summary>
-    public partial class VideoPlayerControl : System.Windows.Controls.UserControl, Gnosis.IVideoPlayer
+    public partial class VideoPlayerControl
+        : System.Windows.Controls.UserControl, Gnosis.IVideoPlayer
     {
         private ILogger logger;
         private Func<IVideoHost> getHost;
@@ -250,6 +252,25 @@ namespace Gnosis.Video.Vlc
             get { return elapsed; }
         }
 
+        public bool SeekIsPending
+        {
+            get { return m_isDrag; }
+        }
+
+        private void EnsureHostIsOpen()
+        {
+            if (currentHost == null)
+            {
+                currentHost = getHost();
+            }
+
+            if (!currentHost.IsOpen)
+            {
+                Action openAction = () => currentHost.Open(this);
+                Dispatcher.Invoke(openAction);
+            }
+        }
+
         public void Load(Uri location)
         {
             if (location == null)
@@ -259,19 +280,14 @@ namespace Gnosis.Video.Vlc
             {
                 logger.Info("VideoPlayerControl.Load: " + location.LocalPath);
 
-                if (currentHost == null || !currentHost.IsOpen)
-                {
-                    currentHost = getHost();
-                    Action openAction = () => currentHost.Open(this);
-                    Dispatcher.Invoke(openAction);
-                }
+                EnsureHostIsOpen();
 
-                //if (location.IsFile)
-                //{
-                
-                Open(location.LocalPath);
-                m_player.Play();
-                //}
+                if (location.IsFile)
+                {
+                    Open(location.LocalPath);
+                    OnLoaded();
+                    //m_player.Play();
+                }
             }
             catch (Exception ex)
             {
@@ -281,14 +297,52 @@ namespace Gnosis.Video.Vlc
 
         public void Play()
         {
+            try
+            {
+                EnsureHostIsOpen();
+
+                m_player.Play();
+                playbackState = Gnosis.PlaybackState.Playing;
+                OnPlayed();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  VideoPlayerControl.Play", ex);
+            }
         }
 
         public void Pause()
         {
+            try
+            {
+                if (playbackState == Gnosis.PlaybackState.Playing)
+                {
+                    m_player.Pause();
+                    playbackState = Gnosis.PlaybackState.Paused;
+                    OnPaused();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  VideoPlayerControl.Pause", ex);
+            }
         }
 
         public void Resume()
         {
+            try
+            {
+                if (playbackState == Gnosis.PlaybackState.Paused)
+                {
+                    m_player.Play();
+                    playbackState = Gnosis.PlaybackState.Playing;
+                    OnResumed();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  VideoPlayerControl.Resume", ex);
+            }
         }
 
         public void Stop()
@@ -296,11 +350,226 @@ namespace Gnosis.Video.Vlc
             try
             {
                 m_player.Stop();
+                playbackState = Gnosis.PlaybackState.Stopped;
+                OnStopped();
             }
             catch (Exception ex)
             {
                 logger.Error("  VideoPlayerControl.Stop", ex);
             }
+        }
+
+        public void Mute()
+        {
+            try
+            {
+                m_player.Mute = true;
+                OnVolumeChanged();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  VideoPlayerControl.Mute", ex);
+            }
+        }
+
+        public void Unmute()
+        {
+            try
+            {
+                m_player.Mute = false;
+                OnVolumeChanged();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  VideoPlayerControl.Unmute", ex);
+            }
+        }
+
+        public void SetVolume(int volume)
+        {
+            if (volume < 0)
+                throw new ArgumentException("volume cannot be less than zero");
+            if (volume > 100)
+                throw new ArgumentException("volume cannot be greater than 100");
+
+            try
+            {
+                m_player.Volume = volume;
+                OnVolumeChanged();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  VideoPlayerControl.SetVolume", ex);
+            }
+        }
+
+        private readonly IList<Action> loadedCallbacks = new List<Action>();
+        private readonly IList<Action> playedCallbacks = new List<Action>();
+        private readonly IList<Action> pausedCallbacks = new List<Action>();
+        private readonly IList<Action> resumedCallbacks = new List<Action>();
+        private readonly IList<Action> stoppedCallbacks = new List<Action>();
+        private readonly IList<Action> endedCallbacks = new List<Action>();
+        private readonly IList<Action> volumeChangedCallbacks = new List<Action>();
+
+        private void OnLoaded()
+        {
+            foreach (var callback in loadedCallbacks)
+            {
+                try
+                {
+                    callback();
+                }
+                catch (Exception ex)
+                {
+                    logger.Error("  VideoPlayerControl: Error in loaded callback", ex);
+                }
+            }
+        }
+
+        private void OnPlayed()
+        {
+            foreach (var callback in playedCallbacks)
+            {
+                try
+                {
+                    callback();
+                }
+                catch (Exception ex)
+                {
+                    logger.Error("  VideoPlayerControl: Error in played callback", ex);
+                }
+            }
+        }
+
+        private void OnPaused()
+        {
+            foreach (var callback in pausedCallbacks)
+            {
+                try
+                {
+                    callback();
+                }
+                catch (Exception ex)
+                {
+                    logger.Error("  VideoPlayerControl: Error in paused callback", ex);
+                }
+            }
+        }
+
+        private void OnResumed()
+        {
+            foreach (var callback in resumedCallbacks)
+            {
+                try
+                {
+                    callback();
+                }
+                catch (Exception ex)
+                {
+                    logger.Error("  VideoPlayerControl: Error in resumed callback", ex);
+                }
+            }
+        }
+
+        private void OnStopped()
+        {
+            foreach (var callback in stoppedCallbacks)
+            {
+                try
+                {
+                    callback();
+                }
+                catch (Exception ex)
+                {
+                    logger.Error("  VideoPlayerControl: Error in stopped callback", ex);
+                }
+            }
+        }
+
+        private void OnEnded()
+        {
+            foreach (var callback in endedCallbacks)
+            {
+                try
+                {
+                    callback();
+                }
+                catch (Exception ex)
+                {
+                    logger.Error("  VideoPlayerControl: Error in ended callback", ex);
+                }
+            }
+        }
+
+        private void OnVolumeChanged()
+        {
+            foreach (var callback in volumeChangedCallbacks)
+            {
+                try
+                {
+                    callback();
+                }
+                catch (Exception ex)
+                {
+                    logger.Error("  VideoPlayerControl: Error in volume changed callback", ex);
+                }
+            }
+        }
+
+        public void AddLoadedCallback(Action callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            loadedCallbacks.Add(callback);
+        }
+
+        public void AddPlayedCallback(Action callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            playedCallbacks.Add(callback);
+        }
+
+        public void AddPausedCallback(Action callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            pausedCallbacks.Add(callback);
+        }
+
+        public void AddResumedCallback(Action callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            resumedCallbacks.Add(callback);
+        }
+
+        public void AddStoppedCallback(Action callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            stoppedCallbacks.Add(callback);
+        }
+
+        public void AddEndedCallback(Action callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            endedCallbacks.Add(callback);
+        }
+
+        public void AddVolumeChangedCallback(Action callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            volumeChangedCallbacks.Add(callback);
         }
     }
 }

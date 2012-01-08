@@ -172,6 +172,7 @@ namespace Gnosis
             all.Add(TextXsl);
             all.Add(VideoAvi);
             all.Add(VideoMpeg);
+            all.Add(VideoMpeg4);
             all.Add(VideoWmv);
         }
 
@@ -309,6 +310,7 @@ namespace Gnosis
 
         public static readonly IMediaType VideoAvi = new MediaType(TypeVideo, "avi", new List<string> { ".avi" }, new List<string> { "video/x-msvideo", "video/msvideo" }, new List<byte[]> { new byte[] { 0x52, 0x49, 0x46, 0x46 } });
         public static readonly IMediaType VideoMpeg = new MediaType(TypeVideo, "mpeg", new List<string> { ".mpeg", ".mpe", ".mpg", ".mpga" }, new List<string>(), new List<byte[]> { new byte[] { 0x00, 0x00, 0x01 } } );
+        public static readonly IMediaType VideoMpeg4 = new MediaType(TypeVideo, "mp4", new List<string> { ".mp4" });
         public static readonly IMediaType VideoWmv = new MediaType(TypeVideo, "x-ms-wmv", new List<string> { ".wmv" }, new List<string>(), new List<byte[]> { new byte[] { 0x30, 0x26, 0xB2, 0x75 } }); //, 0x8E, 0x66, 0xCF, 0x11, 0xA6, 0xD9, 0x00, 0xAA, 0x00, 0x62, 0xCE, 0x6C } });
 
         public const string TypeApplication = "application";

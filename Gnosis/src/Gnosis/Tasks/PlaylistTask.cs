@@ -247,7 +247,8 @@ namespace Gnosis.Tasks
                     }
                     else if (Item.TargetType.Type == MediaType.TypeVideo)
                     {
-                        videoPlayer.Load(Item.Target);
+                        LoadVideoStream(Item.Target);
+                        PlayVideoStream();
                     }
                 }
             }

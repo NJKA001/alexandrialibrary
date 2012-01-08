@@ -7,6 +7,7 @@ namespace Gnosis
 {
     public interface IVideoPlayer
     {
+        bool SeekIsPending { get; }
         PlaybackState PlaybackState { get; }
         TimeSpan Elapsed { get; }
         TimeSpan Duration { get; }
@@ -18,5 +19,16 @@ namespace Gnosis
         void Pause();
         void Resume();
         void Stop();
+        void Mute();
+        void Unmute();
+        void SetVolume(int volume);
+
+        void AddLoadedCallback(Action callback);
+        void AddPlayedCallback(Action callback);
+        void AddPausedCallback(Action callback);
+        void AddResumedCallback(Action callback);
+        void AddStoppedCallback(Action callback);
+        void AddEndedCallback(Action callback);
+        void AddVolumeChangedCallback(Action callback);
     }
 }
