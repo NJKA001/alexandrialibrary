@@ -16,16 +16,16 @@ namespace Gnosis.Video.Vlc
     /// Interaction logic for VideoPlayerControl.xaml
     /// </summary>
     public partial class VideoPlayerControl
-        : System.Windows.Controls.UserControl, Gnosis.IVideoPlayer
+        : System.Windows.Controls.UserControl, Gnosis.IVideoPlayer, INotifyPropertyChanged
     {
         private ILogger logger;
         private Func<IVideoHost> getHost;
         private IVideoHost currentHost;
 
-        IMediaPlayerFactory m_factory;
-        IVlcVideoPlayer m_player;
-        IVlcMedia m_media;
-        private volatile bool m_isDrag;
+        IMediaPlayerFactory playerFactory;
+        IVlcVideoPlayer player;
+        IVlcMedia media;
+        private volatile bool seekIsPending;
 
         private TimeSpan duration;
         private TimeSpan elapsed;
@@ -35,6 +35,10 @@ namespace Gnosis.Video.Vlc
         public VideoPlayerControl()
         {
             InitializeComponent();
+
+            playButton.DataContext = this;
+            pauseButton.DataContext = this;
+            volumeSlider.DataContext = this;
         }
 
         void Events_PlayerStopped(object sender, EventArgs e)
@@ -57,9 +61,9 @@ namespace Gnosis.Video.Vlc
 
         private void InitControls()
         {
-            slider1.Value = 0;
-            label1.Content = "00:00:00";
-            label3.Content = "00:00:00";
+            elapsedSlider.Value = 0;
+            elapsedLabel.Content = "00:00:00";
+            durationLabel.Content = "00:00:00";
         }
 
         void Events_TimeChanged(object sender, MediaPlayerTimeChanged e)
@@ -67,7 +71,7 @@ namespace Gnosis.Video.Vlc
             this.Dispatcher.BeginInvoke(new Action(delegate
             {
                 var elapsed = TimeSpan.FromMilliseconds(e.NewTime);
-                label1.Content = elapsed.ToString().Substring(0, 8);
+                elapsedLabel.Content = elapsed.ToString().Substring(0, 8);
                 this.elapsed = elapsed;
             }));
         }
@@ -76,9 +80,9 @@ namespace Gnosis.Video.Vlc
         {
             this.Dispatcher.BeginInvoke(new Action(delegate
             {
-                if (!m_isDrag)
+                if (!seekIsPending)
                 {
-                    slider1.Value = (double)e.NewPosition;
+                    elapsedSlider.Value = (double)e.NewPosition;
                 }
             }));
         }
@@ -96,15 +100,15 @@ namespace Gnosis.Video.Vlc
         {
             //Dispatcher.Invoke(new Action(() => textBlock1.Text = fileName), DispatcherPriority.DataBind);
 
-            m_media = m_factory.CreateMedia<IVlcMediaFromFile>(fileName);
-            m_media.Events.DurationChanged += new EventHandler<MediaDurationChange>(Events_DurationChanged);
-            m_media.Events.StateChanged += new EventHandler<MediaStateChange>(Events_StateChanged);
+            media = playerFactory.CreateMedia<IVlcMediaFromFile>(fileName);
+            media.Events.DurationChanged += new EventHandler<MediaDurationChange>(Events_DurationChanged);
+            media.Events.StateChanged += new EventHandler<MediaStateChange>(Events_StateChanged);
 
-            m_player.Open(m_media);
-            m_media.Parse(true);
+            player.Open(media);
+            media.Parse(true);
         }
 
-        private void button3_Click(object sender, RoutedEventArgs e)
+        private void playButton_Click(object sender, RoutedEventArgs e)
         {
             if (playbackState != Gnosis.PlaybackState.Paused)
             {
@@ -130,55 +134,72 @@ namespace Gnosis.Video.Vlc
             this.Dispatcher.BeginInvoke(new Action(delegate
             {
                 var duration = TimeSpan.FromMilliseconds(e.NewDuration);
-                label3.Content = duration.ToString().Substring(0, 8);
+                durationLabel.Content = duration.ToString().Substring(0, 8);
                 this.duration = duration;
             }));
         }
 
-        private void button2_Click(object sender, RoutedEventArgs e)
+        private void pauseButton_Click(object sender, RoutedEventArgs e)
         {
-            Pause();
-            //m_player.Pause();
+            try
+            {
+                Pause();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  VideoPlayerControl.pauseButton_Click", ex);
+            }
         }
 
-        private void button4_Click(object sender, RoutedEventArgs e)
+        private void stopButton_Click(object sender, RoutedEventArgs e)
         {
-            Stop();
-            //m_player.Stop();
+            try
+            {
+                Stop();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  VideoPlayerControl.stopButton_Click", ex);
+            }
         }
 
-        private void button5_Click(object sender, RoutedEventArgs e)
+        private void muteButton_Click(object sender, RoutedEventArgs e)
         {
-            ToggleMute();
-            //if (m_player.Mute
-            //m_player.ToggleMute();
+            try
+            {
+                ToggleMute();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  VideoPlayerControl.muteButton_Click", ex);
+            }
         }
 
         private void ToggleMute()
         {
-            if (m_player.Mute)
+            if (player.Mute)
                 Unmute();
             else
                 Mute();
         }
 
-        private void slider2_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void volumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (m_player != null)
+            if (player != null)
             {
-                m_player.Volume = (int)e.NewValue;
+                player.Volume = (int)e.NewValue;
             }
         }
 
-        private void slider1_DragCompleted(object sender, DragCompletedEventArgs e)
+        private void elapsedSlider_DragCompleted(object sender, DragCompletedEventArgs e)
         {
-            m_player.Position = (float)slider1.Value;
-            m_isDrag = false;
+            player.Position = (float)elapsedSlider.Value;
+            seekIsPending = false;
         }
 
-        private void slider1_DragStarted(object sender, DragStartedEventArgs e)
+        private void elapsedSlider_DragStarted(object sender, DragStartedEventArgs e)
         {
-            m_isDrag = true;
+            seekIsPending = true;
         }
 
         private void centerLabel_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -229,6 +250,30 @@ namespace Gnosis.Video.Vlc
             }
         }
 
+        private void previousButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OnPreviousItemSelected();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  VideoPlayerControl.previousButton_Click", ex);
+            }
+        }
+
+        private void nextButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OnNextItemSelected();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  VideoPlayerControl.nextButton_Click", ex);
+            }
+        }
+
         public void Initialize(ILogger logger, Func<IVideoHost> getHost)
         {
             if (logger == null)
@@ -243,18 +288,18 @@ namespace Gnosis.Video.Vlc
             panel.BackColor = System.Drawing.Color.Black;
             formHost.Child = panel;
 
-            m_factory = new MediaPlayerFactory(logger);
-            m_player = m_factory.CreatePlayer<IVlcVideoPlayer>();
+            playerFactory = new MediaPlayerFactory(logger);
+            player = playerFactory.CreatePlayer<IVlcVideoPlayer>();
 
-            this.DataContext = m_player;
+            this.DataContext = player;
 
-            m_player.Events.PlayerPositionChanged += new EventHandler<MediaPlayerPositionChanged>(Events_PlayerPositionChanged);
-            m_player.Events.TimeChanged += new EventHandler<MediaPlayerTimeChanged>(Events_TimeChanged);
-            m_player.Events.MediaEnded += new EventHandler(Events_MediaEnded);
-            m_player.Events.PlayerStopped += new EventHandler(Events_PlayerStopped);
+            player.Events.PlayerPositionChanged += new EventHandler<MediaPlayerPositionChanged>(Events_PlayerPositionChanged);
+            player.Events.TimeChanged += new EventHandler<MediaPlayerTimeChanged>(Events_TimeChanged);
+            player.Events.MediaEnded += new EventHandler(Events_MediaEnded);
+            player.Events.PlayerStopped += new EventHandler(Events_PlayerStopped);
 
-            m_player.WindowHandle = panel.Handle;
-            slider2.Value = m_player.Volume;
+            player.WindowHandle = panel.Handle;
+            volumeSlider.Value = player.Volume;
         }
 
         private PlaybackState playbackState = PlaybackState.None;
@@ -262,6 +307,13 @@ namespace Gnosis.Video.Vlc
         public PlaybackState PlaybackState
         {
             get { return playbackState; }
+            private set
+            {
+                playbackState = value;
+                PropertyHasChanged("PlaybackState");
+                PropertyHasChanged("PlayVisibility");
+                PropertyHasChanged("PauseVisibility");
+            }
         }
 
         public TimeSpan Duration
@@ -276,7 +328,12 @@ namespace Gnosis.Video.Vlc
 
         public bool SeekIsPending
         {
-            get { return m_isDrag; }
+            get { return seekIsPending; }
+        }
+
+        public bool IsMuted
+        {
+            get { return player != null && player.Mute; }
         }
 
         private void EnsureHostIsOpen()
@@ -319,8 +376,8 @@ namespace Gnosis.Video.Vlc
             {
                 EnsureHostIsOpen();
 
-                m_player.Play();
-                playbackState = Gnosis.PlaybackState.Playing;
+                player.Play();
+                PlaybackState = Gnosis.PlaybackState.Playing;
                 OnPlayed();
             }
             catch (Exception ex)
@@ -335,8 +392,8 @@ namespace Gnosis.Video.Vlc
             {
                 if (playbackState == Gnosis.PlaybackState.Playing)
                 {
-                    m_player.Pause();
-                    playbackState = Gnosis.PlaybackState.Paused;
+                    player.Pause();
+                    PlaybackState = Gnosis.PlaybackState.Paused;
                     OnPaused();
                 }
             }
@@ -352,8 +409,8 @@ namespace Gnosis.Video.Vlc
             {
                 if (playbackState == Gnosis.PlaybackState.Paused)
                 {
-                    m_player.Play();
-                    playbackState = Gnosis.PlaybackState.Playing;
+                    player.Play();
+                    PlaybackState = Gnosis.PlaybackState.Playing;
                     OnResumed();
                 }
             }
@@ -367,8 +424,8 @@ namespace Gnosis.Video.Vlc
         {
             try
             {
-                m_player.Stop();
-                playbackState = Gnosis.PlaybackState.Stopped;
+                player.Stop();
+                PlaybackState = Gnosis.PlaybackState.Stopped;
                 OnStopped();
             }
             catch (Exception ex)
@@ -381,7 +438,8 @@ namespace Gnosis.Video.Vlc
         {
             try
             {
-                m_player.Mute = true;
+                player.Mute = true;
+                PropertyHasChanged("VolumeEnabled");
                 OnVolumeChanged();
             }
             catch (Exception ex)
@@ -394,7 +452,8 @@ namespace Gnosis.Video.Vlc
         {
             try
             {
-                m_player.Mute = false;
+                player.Mute = false;
+                PropertyHasChanged("VolumeEnabled");
                 OnVolumeChanged();
             }
             catch (Exception ex)
@@ -412,7 +471,7 @@ namespace Gnosis.Video.Vlc
 
             try
             {
-                m_player.Volume = volume;
+                player.Volume = volume;
                 OnVolumeChanged();
             }
             catch (Exception ex)
@@ -428,6 +487,8 @@ namespace Gnosis.Video.Vlc
         private readonly IList<Action> stoppedCallbacks = new List<Action>();
         private readonly IList<Action> endedCallbacks = new List<Action>();
         private readonly IList<Action> volumeChangedCallbacks = new List<Action>();
+        private readonly IList<Action> previousItemCallbacks = new List<Action>();
+        private readonly IList<Action> nextItemCallbacks = new List<Action>();
 
         private void OnLoaded()
         {
@@ -534,6 +595,36 @@ namespace Gnosis.Video.Vlc
             }
         }
 
+        private void OnPreviousItemSelected()
+        {
+            foreach (var callback in previousItemCallbacks)
+            {
+                try
+                {
+                    callback();
+                }
+                catch (Exception ex)
+                {
+                    logger.Error("  VideoPlayerControl: Error in previous item selected callback", ex);
+                }
+            }
+        }
+
+        private void OnNextItemSelected()
+        {
+            foreach (var callback in nextItemCallbacks)
+            {
+                try
+                {
+                    callback();
+                }
+                catch (Exception ex)
+                {
+                    logger.Error("  VideoPlayerControl: Error in next item selected callback", ex);
+                }
+            }
+        }
+
         public void AddLoadedCallback(Action callback)
         {
             if (callback == null)
@@ -589,5 +680,48 @@ namespace Gnosis.Video.Vlc
 
             volumeChangedCallbacks.Add(callback);
         }
+
+        public void AddPreviousItemCallback(Action callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            previousItemCallbacks.Add(callback);
+        }
+
+        public void AddNextItemCallback(Action callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            nextItemCallbacks.Add(callback);
+        }
+
+        public Visibility PlayVisibility
+        {
+            get { return playbackState == Gnosis.PlaybackState.Playing ? Visibility.Collapsed : Visibility.Visible; }
+        }
+
+        public Visibility PauseVisibility
+        {
+            get { return playbackState == Gnosis.PlaybackState.Playing ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
+        public bool VolumeEnabled
+        {
+            get { return player != null && player.Mute ? false : true; }
+        }
+
+        #region INotifyPropertyChanged Members
+
+        private void PropertyHasChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
     }
 }

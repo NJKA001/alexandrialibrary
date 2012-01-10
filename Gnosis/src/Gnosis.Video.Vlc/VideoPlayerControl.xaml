@@ -6,13 +6,28 @@
              xmlns:fi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <!-- pack://application:,,,/Images/play.png -->
+                    <BitmapImage x:Key="muteIcon" UriSource="Images/vlc-mute.png"/>
+                    <BitmapImage x:Key="playIcon" UriSource="Images/vlc-play.png"/>
+                    <BitmapImage x:Key="pauseIcon" UriSource="Images/vlc-pause.png"/>
+                    <BitmapImage x:Key="stopIcon" UriSource="Images/vlc-stop.png"/>
+                    <BitmapImage x:Key="previousIcon" UriSource="Images/vlc-previous.png"/>
+                    <BitmapImage x:Key="nextIcon" UriSource="Images/vlc-next.png"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Name="playbackControlGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <fi:WindowsFormsHost x:Name="formHost" Grid.Row="0" />
-        <Grid Grid.Row="1" Height="30">
+        <Grid Grid.Row="1" Height="36">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="580"/>
@@ -21,20 +36,35 @@
             <Label x:Name="leftSideLabel" Grid.Column="0" Background="Black" MouseEnter="leftSideLabel_MouseEnter"/>
             <Label x:Name="centerLabel" Grid.Column="1" Background="Black" MouseEnter="centerLabel_MouseEnter"/>
             <Label x:Name="rightSideLabel" Grid.Column="2" Background="Black" MouseEnter="rightSideLabel_MouseEnter"/>
-            <StackPanel x:Name="playbackPanel" Orientation="Horizontal" Grid.Column="1" Height="30" Visibility="Collapsed">
+            <StackPanel x:Name="playbackPanel" Orientation="Horizontal" Grid.Column="1" Height="36" Visibility="Collapsed">
                 <!--<Button Height="23" HorizontalAlignment="Left" Margin="4" Name="button1" VerticalAlignment="Bottom" Width="40" Click="button1_Click" Grid.Row="1">Open</Button>-->
-                <Button Height="23" HorizontalAlignment="Left" Margin="4" Name="button2" VerticalAlignment="Bottom" Width="40" Click="button2_Click" Grid.Row="1">Pause</Button>
-                <Button Height="23" Margin="4" Name="button3" VerticalAlignment="Bottom" Click="button3_Click" Grid.Row="1" Width="40">Play</Button>
-                <Button Height="23" Margin="4" Name="button4" VerticalAlignment="Bottom" Click="button4_Click" HorizontalAlignment="Right" Width="40" Grid.Row="1">Stop</Button>
+                <Button Name="previousButton" Margin="4" Click="previousButton_Click">
+                    <Image Source="{StaticResource previousIcon}" Height="20" Width="20"/>
+                </Button>
+                <Button Name="pauseButton" Margin="4" Visibility="{Binding PauseVisibility}" Click="pauseButton_Click">
+                    <Image Source="{StaticResource pauseIcon}" Height="20" Width="20"/>
+                </Button>
+                <Button Name="playButton" Margin="4" Visibility="{Binding PlayVisibility}" Click="playButton_Click">
+                    <Image Source="{StaticResource playIcon}" Height="20" Width="20"/>
+                </Button>
+                <Button Name="stopButton" Margin="4" Click="stopButton_Click">
+                    <Image Source="{StaticResource stopIcon}" Height="20" Width="20"/>
+                </Button>
+                <Button Name="nextButton" Margin="4" Click="nextButton_Click">
+                    <Image Source="{StaticResource nextIcon}" Height="20" Width="20"/>
+                </Button>
                 <!--<Button Height="23" HorizontalAlignment="Left" Margin="4" Name="button5" VerticalAlignment="Bottom" Width="40" Click="button5_Click" Grid.Row="1">Mute</Button>-->
                 <!--<Label Margin="4">Seek</Label>-->
-                <Slider Height="23" Margin="4" Width="160" Name="slider1" Maximum="1" Minimum="0" Thumb.DragCompleted="slider1_DragCompleted" Thumb.DragStarted="slider1_DragStarted" Grid.Row="1" Value="{Binding Mode=OneWay, Path=Position}" />
+                <Slider Height="23" Margin="4" Width="160" Name="elapsedSlider" Minimum="0" Maximum="1" Thumb.DragStarted="elapsedSlider_DragStarted" Thumb.DragCompleted="elapsedSlider_DragCompleted" Value="{Binding Mode=OneWay, Path=Position}" />
                 <!--<TextBlock Height="21" Margin="157,0,81,12" Name="textBlock1" VerticalAlignment="Bottom" Grid.Row="1" />-->
-                <Label Height="23" HorizontalAlignment="Right" Margin="0 4 0 4" Name="label1" VerticalAlignment="Bottom" Grid.Row="1">00:00:00</Label>
-                <Label Height="23" HorizontalAlignment="Right" Margin="0 4 0 4" Name="label2" VerticalAlignment="Bottom" Grid.Row="1">/</Label>
-                <Label Height="23" HorizontalAlignment="Right" Margin="0 4 0 4" Name="label3" VerticalAlignment="Bottom" Grid.Row="1">00:00:00</Label>
-                <Label Margin="4 4 0 4">Volume</Label>
-                <Slider Height="23" Margin="0 4 0 4" Name="slider2" VerticalAlignment="Bottom" Width="80" Grid.Row="1" ValueChanged="slider2_ValueChanged" Maximum="100" />
+                <Label Height="23" Margin="0 4 0 4" Name="elapsedLabel">00:00:00</Label>
+                <Label Height="23" Margin="0 4 0 4" Name="elapsedSeparatorLabel">/</Label>
+                <Label Height="23" Margin="0 4 0 4" Name="durationLabel">00:00:00</Label>
+                <!--<Label Margin="4 4 0 4">Volume</Label>-->
+                <Button Name="muteButton" Margin="24 4 4 4" Click="muteButton_Click">
+                    <Image Source="{StaticResource muteIcon}" Height="20" Width="20"/>
+                </Button>
+                <Slider Name="volumeSlider" IsEnabled="{Binding VolumeEnabled}" Height="23" Width="80" Margin="0 4 0 4" ValueChanged="volumeSlider_ValueChanged" Maximum="100" />
                 <!--<Button x:Name="hideButton" Height="23" Margin="4" Click="hideButton_Click">Hide</Button>-->
             </StackPanel>
         </Grid>

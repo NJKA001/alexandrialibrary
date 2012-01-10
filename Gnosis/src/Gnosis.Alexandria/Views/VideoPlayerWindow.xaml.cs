@@ -27,6 +27,31 @@ namespace Gnosis.Alexandria.Views
 
         private IVideoPlayer videoPlayer;
 
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (videoPlayer == null)
+                return;
+
+            if (e.Key == Key.Space)
+            {
+                switch (videoPlayer.PlaybackState)
+                {
+                    case PlaybackState.Paused:
+                        videoPlayer.Resume();
+                        break;
+                    case PlaybackState.Playing:
+                        videoPlayer.Pause();
+                        break;
+                    case PlaybackState.None:
+                    case PlaybackState.Stopped:
+                        videoPlayer.Play();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
         protected override void OnClosed(EventArgs e)
         {
             IsOpen = false;

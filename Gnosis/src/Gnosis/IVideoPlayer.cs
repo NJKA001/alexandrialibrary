@@ -11,6 +11,7 @@ namespace Gnosis
         PlaybackState PlaybackState { get; }
         TimeSpan Elapsed { get; }
         TimeSpan Duration { get; }
+        bool IsMuted { get; }
 
         void Initialize(ILogger logger, Func<IVideoHost> getHost);
         void Load(Uri location);
@@ -30,5 +31,7 @@ namespace Gnosis
         void AddStoppedCallback(Action callback);
         void AddEndedCallback(Action callback);
         void AddVolumeChangedCallback(Action callback);
+        void AddPreviousItemCallback(Action callback);
+        void AddNextItemCallback(Action callback);
     }
 }

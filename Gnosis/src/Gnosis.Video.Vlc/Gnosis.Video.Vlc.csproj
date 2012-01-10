@@ -1005,6 +1005,16 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\vlc-mute.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\vlc-next.png" />
+    <Resource Include="Images\vlc-pause.png" />
+    <Resource Include="Images\vlc-play.png" />
+    <Resource Include="Images\vlc-previous.png" />
+    <Resource Include="Images\vlc-stop.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
