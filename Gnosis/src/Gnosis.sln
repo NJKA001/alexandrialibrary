@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Tags.TagLib", "Gnosi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Text.Html.HtmlAgility", "Gnosis.Text.Html.HtmlAgility\Gnosis.Text.Html.HtmlAgility.csproj", "{56E3F598-4D55-4C04-B9C1-85E583A66860}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Application.Pdf.Ghostscript", "Gnosis.Application.Pdf.Ghostscript\Gnosis.Application.Pdf.Ghostscript.csproj", "{CF885E52-214A-402D-B6D9-1DD461DC47A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -143,6 +145,18 @@ Global
 		{56E3F598-4D55-4C04-B9C1-85E583A66860}.Release|x64.ActiveCfg = Release|Any CPU
 		{56E3F598-4D55-4C04-B9C1-85E583A66860}.Release|x86.ActiveCfg = Release|x86
 		{56E3F598-4D55-4C04-B9C1-85E583A66860}.Release|x86.Build.0 = Release|x86
+		{CF885E52-214A-402D-B6D9-1DD461DC47A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF885E52-214A-402D-B6D9-1DD461DC47A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF885E52-214A-402D-B6D9-1DD461DC47A3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CF885E52-214A-402D-B6D9-1DD461DC47A3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CF885E52-214A-402D-B6D9-1DD461DC47A3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CF885E52-214A-402D-B6D9-1DD461DC47A3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CF885E52-214A-402D-B6D9-1DD461DC47A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF885E52-214A-402D-B6D9-1DD461DC47A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF885E52-214A-402D-B6D9-1DD461DC47A3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CF885E52-214A-402D-B6D9-1DD461DC47A3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CF885E52-214A-402D-B6D9-1DD461DC47A3}.Release|x64.ActiveCfg = Release|Any CPU
+		{CF885E52-214A-402D-B6D9-1DD461DC47A3}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
