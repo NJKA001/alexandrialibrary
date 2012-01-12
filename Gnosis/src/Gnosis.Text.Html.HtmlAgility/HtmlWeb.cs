@@ -865,7 +865,7 @@ namespace Gnosis.Text.Html.HtmlAgility
 		#endregion
 
 		#region Public Methods
-
+        /*
 		/// <summary>
 		/// Gets the MIME content type for a given path extension.
 		/// </summary>
@@ -944,6 +944,7 @@ namespace Gnosis.Text.Html.HtmlAgility
 			}
 			return ext;
 		}
+        */
 
 		/// <summary>
 		/// Creates an instance of the given type from the specified Internet resource.
@@ -1453,11 +1454,11 @@ namespace Gnosis.Text.Html.HtmlAgility
 			return GetCachePath(uri) + ".h.xml";
 		}
 
-		private bool IsCacheHtmlContent(string path)
-		{
-			string ct = GetContentTypeForExtension(Path.GetExtension(path), null);
-			return IsHtmlContent(ct);
-		}
+        //private bool IsCacheHtmlContent(string path)
+        //{
+        //    string ct = GetContentTypeForExtension(Path.GetExtension(path), null);
+        //    return IsHtmlContent(ct);
+        //}
 
 		private bool IsHtmlContent(string contentType)
 		{

@@ -20,7 +20,7 @@ namespace Gnosis.Text.Html.HtmlAgility
         private HtmlDocument _doc = new HtmlDocument();
         private HtmlNameTable _nametable = new HtmlNameTable();
 
-        internal bool Trace;
+        //internal bool Trace;
 
         #endregion
 
@@ -716,10 +716,10 @@ namespace Gnosis.Text.Html.HtmlAgility
         [Conditional("TRACE")]
         internal void InternalTrace(object traceValue)
         {
-            if (!Trace)
-            {
-                return;
-            }
+            //if (!Trace)
+            //{
+            //    return;
+            //}
             StackFrame sf = new StackFrame(1, true);
             string name = sf.GetMethod().Name;
             string nodename = _currentnode == null ? "(null)" : _currentnode.Name;
