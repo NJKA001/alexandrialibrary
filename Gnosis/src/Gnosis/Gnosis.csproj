@@ -267,6 +267,13 @@
     <Compile Include="IVideoHost.cs" />
     <Compile Include="IVideoPlayer.cs" />
     <Compile Include="MediaStateChangedEventArgs.cs" />
+    <Compile Include="Metadata\CatalogInfo.cs" />
+    <Compile Include="Metadata\CreatorInfo.cs" />
+    <Compile Include="Metadata\IdentityInfo.cs" />
+    <Compile Include="Metadata\SizeInfo.cs" />
+    <Compile Include="Metadata\TargetInfo.cs" />
+    <Compile Include="Metadata\ThumbnailInfo.cs" />
+    <Compile Include="Metadata\UserInfo.cs" />
     <Compile Include="NetworkState.cs" />
     <Compile Include="PlaybackState.cs" />
     <Compile Include="ScreenSaver.cs" />
@@ -585,6 +592,7 @@
       <Name>Gnosis.Text.Html.HtmlAgility</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

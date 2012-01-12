@@ -126,6 +126,10 @@
       <Project>{3470F959-B781-459C-932A-EECA1B1429F8}</Project>
       <Name>Gnosis.Alexandria</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gnosis.Application.Pdf.Ghostscript\Gnosis.Application.Pdf.Ghostscript.csproj">
+      <Project>{CF885E52-214A-402D-B6D9-1DD461DC47A3}</Project>
+      <Name>Gnosis.Application.Pdf.Ghostscript</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Gnosis.Data.SQLite\Gnosis.Data.SQLite.csproj">
       <Project>{38A3C867-546C-45A6-891F-E901FB855206}</Project>
       <Name>Gnosis.Data.SQLite</Name>

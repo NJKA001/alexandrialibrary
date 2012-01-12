@@ -11,24 +11,10 @@
     <Name>gnosis-taglib</Name>
     <Name>gnosis-htmlagility</Name>
   </Assemblies>
-  <FrameworkAssemblies>
-    <Name>mscorlib</Name>
-    <Name>System</Name>
-    <Name>System.Data</Name>
-    <Name>System.Core</Name>
-    <Name>System.Data.SQLite</Name>
-    <Name>PresentationFramework</Name>
-    <Name>System.Xaml</Name>
-    <Name>System.Windows.Forms</Name>
-    <Name>PresentationCore</Name>
-    <Name>WindowsFormsIntegration</Name>
-    <Name>System.Drawing</Name>
-    <Name>WindowsBase</Name>
-    <Name>System.Xml</Name>
-  </FrameworkAssemblies>
+  <FrameworkAssemblies />
   <Dirs>
-    <Dir>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319</Dir>
-    <Dir>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\WPF</Dir>
+    <Dir>C:\Windows\Microsoft.NET\Framework\v4.0.30319</Dir>
+    <Dir>C:\Windows\Microsoft.NET\Framework\v4.0.30319\WPF</Dir>
     <Dir>C:\dev\Gnosis\src\Gnosis\bin\Debug</Dir>
     <Dir>C:\dev\Gnosis\src\Gnosis.Audio.Fmod\bin\Debug</Dir>
     <Dir>C:\dev\Gnosis\src\Gnosis.Tests\bin\Debug</Dir>
