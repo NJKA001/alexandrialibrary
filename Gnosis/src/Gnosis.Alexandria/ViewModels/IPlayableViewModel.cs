@@ -18,6 +18,6 @@ namespace Gnosis.Alexandria.ViewModels
         void ClearStatus();
 
         IPlaylistViewModel ToPlaylist(ISecurityContext securityContext);
-        IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext);
+        IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext, uint number);
     }
 }

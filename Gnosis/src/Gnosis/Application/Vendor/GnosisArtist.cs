@@ -3,21 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Metadata;
+
 namespace Gnosis.Application.Vendor
 {
     public class GnosisArtist
         : GnosisMediaItemBase, IArtist
     {
-        public GnosisArtist(string name, string summary, DateTime fromDate, DateTime toDate, Uri creator, string creatorName, Uri catalog, string catalogName, Uri target, IMediaType targetType, Uri user, string userName, Uri thumbnail, byte[] thumbnailData)
-            : this(name, summary, fromDate, toDate, creator, creatorName, catalog, catalogName, target, targetType, user, userName, thumbnail, thumbnailData, Guid.NewGuid().ToUrn())
+        public GnosisArtist(IdentityInfo identityInfo, SizeInfo sizeInfo, CreatorInfo creatorInfo, CatalogInfo catalogInfo, TargetInfo targetInfo, UserInfo userInfo, ThumbnailInfo thumbnailInfo)
+            : base(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo)
         {
         }
-
-        public GnosisArtist(string name, string summary, DateTime fromDate, DateTime toDate, Uri creator, string creatorName, Uri catalog, string catalogName, Uri target, IMediaType targetType, Uri user, string userName, Uri thumbnail, byte[] thumbnailData, Uri location)
-            : base(name, summary, fromDate, toDate, 0, TimeSpan.Zero, 0, 0, creator, creatorName, catalog, catalogName, target, targetType, user, userName, thumbnail, thumbnailData, MediaType.ApplicationGnosisArtist, location)
-        {
-        }
-
-        public static readonly IArtist Unknown = new GnosisArtist("Unknown Artist", string.Empty, DateTime.MinValue, DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown Creator", Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, Guid.Empty.ToUrn(), "Administrator", Guid.Empty.ToUrn(), new byte[0], Guid.Empty.ToUrn());
+        
+        public static readonly IArtist Unknown = new GnosisArtist(IdentityInfo.GetDefault(MediaType.ApplicationGnosisArtist), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, ThumbnailInfo.Default);
     }
 }

@@ -7,16 +7,19 @@ namespace Gnosis.Metadata
 {
     public struct IdentityInfo
     {
-        public IdentityInfo(Uri location, string name, string summary, DateTime fromDate, DateTime toDate, uint number)
+        public IdentityInfo(Uri location, IMediaType type, string name, string summary, DateTime fromDate, DateTime toDate, uint number)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
+            if (type == null)
+                throw new ArgumentNullException("type");
             if (name == null)
                 throw new ArgumentNullException("name");
             if (summary == null)
                 throw new ArgumentNullException("summary");
 
             this.location = location;
+            this.type = type;
             this.name = name;
             this.summary = summary;
             this.fromDate = fromDate;
@@ -25,6 +28,7 @@ namespace Gnosis.Metadata
         }
 
         private Uri location;
+        private IMediaType type;
         private string name;
         private string summary;
         private DateTime fromDate;
@@ -34,6 +38,11 @@ namespace Gnosis.Metadata
         public Uri Location
         {
             get { return location; }
+        }
+
+        public IMediaType Type
+        {
+            get { return type; }
         }
 
         public string Name
@@ -61,6 +70,14 @@ namespace Gnosis.Metadata
             get { return number; }
         }
 
-        public static readonly IdentityInfo Default = new IdentityInfo(Guid.Empty.ToUrn(), "Unknown", string.Empty, DateTime.MinValue, DateTime.MaxValue, 0);
+        public static IdentityInfo GetDefault(IMediaType type)
+        {    
+            return new IdentityInfo(Guid.Empty.ToUrn(), type, "Unknown", string.Empty, DateTime.MinValue, DateTime.MaxValue, 0);
+        }
+
+        public static IdentityInfo GetNew(IMediaType type)
+        {
+            return new IdentityInfo(Guid.NewGuid().ToUrn(), type, "Unknown", string.Empty, DateTime.MinValue, DateTime.MaxValue, 0);
+        }
     }
 }

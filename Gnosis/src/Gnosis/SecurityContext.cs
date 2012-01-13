@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Application.Vendor;
+using Gnosis.Metadata;
 
 namespace Gnosis
 {
@@ -11,10 +12,16 @@ namespace Gnosis
         : ISecurityContext
     {
         private IUser currentUser = GnosisUser.Administrator;
+        private UserInfo currentUserInfo = UserInfo.Default;
 
         public IUser CurrentUser
         {
             get { return currentUser; }
+        }
+
+        public UserInfo CurrentUserInfo
+        {
+            get { return currentUserInfo; }
         }
 
         public void ChangeCurrentUser(IUser user)
@@ -23,6 +30,7 @@ namespace Gnosis
                 throw new ArgumentNullException("user");
 
             currentUser = user;
+            currentUserInfo = new UserInfo(user.Location, user.Name);
         }
     }
 }

@@ -31,6 +31,6 @@ namespace Gnosis.Metadata
             get { return name; }
         }
 
-        public static readonly UserInfo Default = new UserInfo(Guid.Empty.ToUrn(), "Unknown User");
+        public static readonly UserInfo Default = new UserInfo(Guid.Empty.ToUrn(), "Administrator");
     }
 }

@@ -4,6 +4,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Metadata;
+
 namespace Gnosis.Data.SQLite
 {
     public abstract class SQLiteMediaItemRepositoryBase<T>
@@ -28,7 +30,7 @@ namespace Gnosis.Data.SQLite
         private readonly string tableName;
         private readonly T defaultItem;
 
-        protected abstract T GetItem(Uri location, string name, string summary, DateTime fromDate, DateTime toDate, uint number, TimeSpan duration, uint height, uint width, Uri creator, string creatorName, Uri catalog, string catalogName, Uri target, IMediaType targetType, Uri user, string userName, Uri thumbnail, byte[] thumbnailData);
+        protected abstract T GetItem(IdentityInfo identityInfo, SizeInfo sizeInfo, CreatorInfo creatorInfo, CatalogInfo catalogInfo, TargetInfo targetInfo, UserInfo userInfo, ThumbnailInfo thumbnailInfo);
 
         protected virtual ICommandBuilder GetInitializeBuilder()
         {
@@ -217,7 +219,15 @@ namespace Gnosis.Data.SQLite
             var thumbnail = record.GetUri("Thumbnail");
             var thumbnailData = record.GetBytes("ThumbnailData");
 
-            return GetItem(location, name, summary, fromDate, toDate, number, duration, height, width, creator, creatorName, catalog, catalogName, target, targetType, user, userName, thumbnail, thumbnailData);
+            var identityInfo = new IdentityInfo(location, defaultItem.Type, name, summary, fromDate, toDate, number);
+            var sizeInfo = new SizeInfo(duration, height, width);
+            var creatorInfo = new CreatorInfo(creator, creatorName);
+            var catalogInfo = new CatalogInfo(catalog, catalogName);
+            var targetInfo = new TargetInfo(target, targetType);
+            var userInfo = new UserInfo(user, userName);
+            var thumbnailInfo = new ThumbnailInfo(thumbnail, thumbnailData);
+
+            return GetItem(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
         }
 
         public void Initialize()

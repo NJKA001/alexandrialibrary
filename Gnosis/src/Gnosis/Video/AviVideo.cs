@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Application.Vendor;
+using Gnosis.Metadata;
 
 namespace Gnosis.Video
 {
@@ -53,9 +54,12 @@ namespace Gnosis.Video
             var duration = file != null && file.Properties != null ? file.Properties.Duration : TimeSpan.FromMinutes(5);
             var height = file != null && file.Properties != null ? (uint)file.Properties.VideoHeight : 480;
             var width = file != null && file.Properties != null ? (uint)file.Properties.VideoWidth : 640;
-            var user = securityContext.CurrentUser;
-
-            return new GnosisClip(name, summary, date, number, duration, height, width, artist.Location, artist.Name, album.Location, album.Name, Location, Type, user.Location, user.Name, Guid.Empty.ToUrn(), new byte[0]);
+            
+            var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisClip, name, summary, date, date, number);
+            var sizeInfo = new SizeInfo(duration, height, width);
+            var targetInfo = new TargetInfo(Location, Type);
+            var userInfo = securityContext.CurrentUserInfo;
+            return new GnosisClip(identityInfo, sizeInfo, CreatorInfo.Default, CatalogInfo.Default, targetInfo, userInfo, ThumbnailInfo.Default);
         }
     }
 }

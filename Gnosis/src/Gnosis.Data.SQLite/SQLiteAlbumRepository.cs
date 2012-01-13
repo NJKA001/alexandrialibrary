@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Application.Vendor;
+using Gnosis.Metadata;
 
 namespace Gnosis.Data.SQLite
 {
@@ -21,9 +22,9 @@ namespace Gnosis.Data.SQLite
         {
         }
 
-        protected override IAlbum GetItem(Uri location, string name, string summary, DateTime fromDate, DateTime toDate, uint number, TimeSpan duration, uint height, uint width, Uri creator, string creatorName, Uri catalog, string catalogName, Uri target, IMediaType targetType, Uri user, string userName, Uri thumbnail, byte[] thumbnailData)
+        protected override IAlbum GetItem(IdentityInfo identityInfo, SizeInfo sizeInfo, CreatorInfo creatorInfo, CatalogInfo catalogInfo, TargetInfo targetInfo, UserInfo userInfo, ThumbnailInfo thumbnailInfo)
         {
-            return new GnosisAlbum(name, summary, fromDate, number, creator, creatorName, catalog, catalogName, target, targetType, user, userName, thumbnail, thumbnailData, location);
+            return new GnosisAlbum(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
         }
 
         protected override IAlbum GetDefaultItem()

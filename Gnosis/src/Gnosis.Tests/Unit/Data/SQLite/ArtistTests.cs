@@ -10,6 +10,7 @@ using Gnosis;
 using Gnosis.Application.Vendor;
 using Gnosis.Data;
 using Gnosis.Data.SQLite;
+using Gnosis.Metadata;
 using Gnosis.Utilities;
 
 namespace Gnosis.Tests.Unit.Data.SQLite
@@ -33,10 +34,10 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected readonly IDbConnection connection;
         protected readonly IMediaItemRepository<IArtist> repository;
 
-        private IArtist artist1 = new GnosisArtist("Radiohead", string.Empty, new DateTime(1985, 1, 2), DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image.jpg"), new byte[0]);
-        private IArtist artist2 = new GnosisArtist("Tool", string.Empty, new DateTime(1991, 2, 28), DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image2.jpg"), new byte[0]);
-        private IArtist artist3 = new GnosisArtist("Cat Power", string.Empty, new DateTime(1997, 10, 15), DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image3.jpg"), new byte[0]);
-        private IArtist artist4 = new GnosisArtist("PJ Harvey", string.Empty, new DateTime(2011, 11, 11), DateTime.MaxValue, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, new Uri("http://example.com/image4.jpg"), new byte[0]);
+        private IArtist artist1 = new GnosisArtist(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisArtist, "Radiohead", string.Empty, new DateTime(1985, 1, 2), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image.jpg"), new byte[0]));
+        private IArtist artist2 = new GnosisArtist(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisArtist, "Tool", string.Empty, new DateTime(1991, 2, 28), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image2.jpg"), new byte[0]));
+        private IArtist artist3 = new GnosisArtist(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisArtist, "Cat Power", string.Empty, new DateTime(1997, 10, 15), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image3.jpg"), new byte[0]));
+        private IArtist artist4 = new GnosisArtist(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisArtist, "PJ Harvey", string.Empty, new DateTime(2011, 11, 11), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image4.jpg"), new byte[0]));
 
         [TestFixtureSetUp]
         public void Setup()

@@ -6,6 +6,7 @@ using System.Windows;
 
 using Gnosis.Application.Vendor;
 using Gnosis.Alexandria.Controllers;
+using Gnosis.Metadata;
 
 namespace Gnosis.Alexandria.ViewModels
 {
@@ -120,12 +121,15 @@ namespace Gnosis.Alexandria.ViewModels
 
         public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext)
         {
-            var playlist = new GnosisPlaylist(Name, Summary, DateTime.Now, 0, TimeSpan.Zero, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, item.Thumbnail, item.ThumbnailData);
-            var playlistItems = new List<IPlaylistItemViewModel> { ToPlaylistItem(securityContext) };
+            var date = DateTime.Now.ToUniversalTime();
+            var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisPlaylist, Name, Summary, date, date, 0);
+            var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
+            var playlist = new GnosisPlaylist(identityInfo, SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, securityContext.CurrentUserInfo, thumbnailInfo);
+            var playlistItems = new List<IPlaylistItemViewModel> { ToPlaylistItem(securityContext, 1) };
             return new PlaylistViewModel(controller, playlist, playlistItems);
         }
 
-        public IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext)
+        public IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext, uint number)
         {
             return this;
         }

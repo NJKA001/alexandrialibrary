@@ -5,6 +5,7 @@ using System.Text;
 
 using Gnosis.Algorithms;
 using Gnosis.Links;
+using Gnosis.Metadata;
 using Gnosis.Tags;
 
 namespace Gnosis.Application.Vendor
@@ -12,57 +13,28 @@ namespace Gnosis.Application.Vendor
     public abstract class GnosisMediaItemBase
         : IMediaItem, IApplication
     {
-        protected GnosisMediaItemBase(string name, string summary, DateTime fromDate, DateTime toDate, uint number, TimeSpan duration, uint height, uint width, Uri creator, string creatorName, Uri catalog, string catalogName, Uri target, IMediaType targetType, Uri user, string userName, Uri thumbnail, byte[] thumbnailData, IMediaType type, Uri location)
+        protected GnosisMediaItemBase(IdentityInfo identityInfo, SizeInfo sizeInfo, CreatorInfo creatorInfo, CatalogInfo catalogInfo, TargetInfo targetInfo, UserInfo userInfo, ThumbnailInfo thumbnailInfo)
         {
-            if (name == null)
-                throw new ArgumentNullException("name");
-            if (summary == null)
-                throw new ArgumentNullException("summary");
-            if (creator == null)
-                throw new ArgumentNullException("creator");
-            if (creatorName == null)
-                throw new ArgumentNullException("creatorName");
-            if (catalog == null)
-                throw new ArgumentNullException("catalog");
-            if (catalogName == null)
-                throw new ArgumentNullException("catalogName");
-            if (target == null)
-                throw new ArgumentNullException("target");
-            if (targetType == null)
-                throw new ArgumentNullException("targetType");
-            if (user == null)
-                throw new ArgumentNullException("user");
-            if (userName == null)
-                throw new ArgumentNullException("userName");
-            if (thumbnail == null)
-                throw new ArgumentNullException("thumbnail");
-            if (thumbnailData == null)
-                throw new ArgumentNullException("thumbnailData");
-            if (type == null)
-                throw new ArgumentNullException("type");
-            if (location == null)
-                throw new ArgumentNullException("location");
-
-            this.name = name;
-            this.summary = summary;
-            this.fromDate = fromDate;
-            this.toDate = toDate;
-            this.number = number;
-            this.duration = duration;
-            this.height = height;
-            this.width = width;
-            this.creator = creator;
-            this.creatorName = creatorName;
-            this.catalog = catalog;
-            this.catalogName = catalogName;
-            this.target = target;
-            this.targetType = targetType;
-            this.user = user;
-            this.userName = userName;
-            this.thumbnail = thumbnail;
-            this.thumbnailData = thumbnailData;
-            this.type = type;
-            this.location = location;
+            this.name = identityInfo.Name;
+            this.summary = identityInfo.Summary;
+            this.fromDate = identityInfo.FromDate;
+            this.toDate = identityInfo.ToDate;
+            this.number = identityInfo.Number;
+            this.duration = sizeInfo.Duration;
+            this.height = sizeInfo.Height;
+            this.width = sizeInfo.Width;
+            this.creator = creatorInfo.Location;
+            this.creatorName = creatorInfo.Name;
+            this.catalog = catalogInfo.Location;
+            this.catalogName = catalogInfo.Name;
+            this.target = targetInfo.Location;
+            this.targetType = targetInfo.Type;
+            this.user = userInfo.Location;
+            this.userName = userInfo.Name;
+            this.thumbnail = thumbnailInfo.Location;
+            this.thumbnailData = thumbnailInfo.Data;
+            this.type = identityInfo.Type;
+            this.location = identityInfo.Location;
         }
 
         private readonly string name;

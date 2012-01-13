@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Application.Vendor;
+using Gnosis.Metadata;
 
 namespace Gnosis.Video
 {
@@ -204,7 +205,10 @@ namespace Gnosis.Video
             var albumNumber = GetAlbumNumber();
             var date = GetDate();
 
-            return new GnosisAlbum(albumName, summary, date, albumNumber, artist.Location, artist.Name, catalog.Location, catalog.Name, Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, Guid.Empty.ToUrn(), new byte[0]);
+            var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisAlbum, albumName, summary, date, date, albumNumber);
+            var creatorInfo = new CreatorInfo(artist.Location, artist.Name);
+            var catalogInfo = new CatalogInfo(catalog.Location, catalog.Name);
+            return new GnosisAlbum(identityInfo, SizeInfo.Default, creatorInfo, catalogInfo, TargetInfo.Default, securityContext.CurrentUserInfo, ThumbnailInfo.Default);
         }
 
         public virtual IClip GetClip(ISecurityContext securityContext, IMediaItemRepository<IClip> clipRepository, IArtist artist, IAlbum album)
@@ -222,9 +226,13 @@ namespace Gnosis.Video
             var duration = TimeSpan.FromMinutes(10); //file != null && file.Properties != null ? file.Properties.Duration : TimeSpan.FromMinutes(5);
             uint height = 480; //file != null && file.Properties != null ? (uint)file.Properties.VideoHeight : 480;
             uint width = 640; //file != null && file.Properties != null ? (uint)file.Properties.VideoWidth : 640;
-            var user = securityContext.CurrentUser;
 
-            return new GnosisClip(name, summary, date, number, duration, height, width, artist.Location, artist.Name, album.Location, album.Name, Location, Type, user.Location, user.Name, Guid.Empty.ToUrn(), new byte[0]);
+            var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisClip, name, summary, date, date, number);
+            var sizeInfo = new SizeInfo(duration, height, width);
+            var creatorInfo = new CreatorInfo(artist.Location, artist.Name);
+            var catalogInfo = new CatalogInfo(album.Location, album.Name);
+            var targetInfo = new TargetInfo(Location, Type);
+            return new GnosisClip(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, securityContext.CurrentUserInfo, ThumbnailInfo.Default);
         }
     }
 }

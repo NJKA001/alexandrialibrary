@@ -3,21 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Metadata;
+
 namespace Gnosis.Application.Vendor
 {
     public class GnosisAlbum
         : GnosisMediaItemBase, IAlbum
     {
-        public GnosisAlbum(string name, string summary, DateTime fromDate, uint number, Uri creator, string creatorName, Uri catalog, string catalogName, Uri target, IMediaType targetType, Uri user, string userName, Uri thumbnail, byte[] thumbnailData)
-            : this(name, summary, fromDate, number, creator, creatorName, catalog, catalogName, target, targetType, user, userName, thumbnail, thumbnailData, Guid.NewGuid().ToUrn())
+        public GnosisAlbum(IdentityInfo identityInfo, SizeInfo sizeInfo, CreatorInfo creatorInfo, CatalogInfo catalogInfo, TargetInfo targetInfo, UserInfo userInfo, ThumbnailInfo thumbnailInfo)
+            : base(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo)
         {
         }
-
-        public GnosisAlbum(string name, string summary, DateTime fromDate, uint number, Uri creator, string creatorName, Uri catalog, string catalogName, Uri target, IMediaType targetType, Uri user, string userName, Uri thumbnail, byte[] thumbnailData, Uri location)
-            : base(name, summary, fromDate, DateTime.MaxValue, number, TimeSpan.Zero, 0, 0, creator, creatorName, catalog, catalogName, target, targetType, user, userName, thumbnail, thumbnailData, MediaType.ApplicationGnosisAlbum, location)
-        {
-        }
-
-        public static readonly IAlbum Unknown = new GnosisAlbum("Unknown Album", string.Empty, DateTime.MinValue, 0, Guid.Empty.ToUrn(), "Unknown Creator", Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, Guid.Empty.ToUrn(), "Administrator", Guid.Empty.ToUrn(), new byte[0], Guid.Empty.ToUrn());
+        
+        public static readonly IAlbum Unknown = new GnosisAlbum(IdentityInfo.GetDefault(MediaType.ApplicationGnosisAlbum), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, ThumbnailInfo.Default);
     }
 }

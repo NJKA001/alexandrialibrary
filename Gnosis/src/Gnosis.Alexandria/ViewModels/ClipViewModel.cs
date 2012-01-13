@@ -6,6 +6,7 @@ using System.Text;
 
 using Gnosis.Alexandria.Controllers;
 using Gnosis.Application.Vendor;
+using Gnosis.Metadata;
 
 namespace Gnosis.Alexandria.ViewModels
 {
@@ -137,14 +138,23 @@ namespace Gnosis.Alexandria.ViewModels
 
         public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext)
         {
-            var playlist = new GnosisPlaylist(Name, Summary, DateTime.Now, 0, TimeSpan.Zero, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, item.Thumbnail, item.ThumbnailData);
-            var playlistItems = new List<IPlaylistItemViewModel> { ToPlaylistItem(securityContext) };
+            var date = DateTime.Now.ToUniversalTime();
+            var identityInfo = new IdentityInfo(item.Location, item.Type, Name, Summary, date, date, 0);
+            var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
+            var playlist = new GnosisPlaylist(identityInfo, SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, securityContext.CurrentUserInfo, thumbnailInfo);
+            var playlistItems = new List<IPlaylistItemViewModel> { ToPlaylistItem(securityContext, 1) };
             return new PlaylistViewModel(controller, playlist, playlistItems);
         }
 
-        public IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext)
+        public IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext, uint number)
         {
-            var playlistItem = new GnosisPlaylistItem(Name, Summary, item.FromDate, item.Number, item.Duration, item.Creator, item.CreatorName, item.Catalog, item.CatalogName, item.Target, item.TargetType, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, item.Thumbnail, item.ThumbnailData);
+            var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisPlaylistItem, Name, Summary, item.FromDate, item.ToDate, number);
+            var sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
+            var creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
+            var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
+            var targetInfo = new TargetInfo(item.Target, item.TargetType);
+            var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
+            var playlistItem = new GnosisPlaylistItem(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, securityContext.CurrentUserInfo, thumbnailInfo);
             return new PlaylistItemViewModel(controller, playlistItem);
         }
     }

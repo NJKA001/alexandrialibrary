@@ -7,6 +7,7 @@ using System.Text;
 
 using Gnosis.Alexandria.Controllers;
 using Gnosis.Application.Vendor;
+using Gnosis.Metadata;
 
 namespace Gnosis.Alexandria.ViewModels
 {
@@ -75,16 +76,22 @@ namespace Gnosis.Alexandria.ViewModels
             if (securityContext == null)
                 throw new ArgumentNullException("securityContext");
 
-            var playlist = new GnosisPlaylist(Name, Summary, DateTime.Now, 0, TimeSpan.Zero, GnosisUser.Administrator.Location, GnosisUser.Administrator.Name, Guid.Empty.ToUrn(), "Unknown", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, item.Thumbnail, item.ThumbnailData);
+            var date = DateTime.Now.ToUniversalTime();
+            var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisPlaylist, Name, Summary, date, date, 0);
+            var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
+            var playlist = new GnosisPlaylist(identityInfo, SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, securityContext.CurrentUserInfo, thumbnailInfo);
             var playlistItems = new List<IPlaylistItemViewModel>();
+            uint number = 0;
             foreach (var track in tracks)
             {
-                var playlistItem = track.ToPlaylistItem(securityContext);
+                number++;
+                var playlistItem = track.ToPlaylistItem(securityContext, number);
                 playlistItems.Add(playlistItem);
             }
             foreach (var clip in clips)
             {
-                var playlistItem = clip.ToPlaylistItem(securityContext);
+                number++;
+                var playlistItem = clip.ToPlaylistItem(securityContext, number);
                 playlistItems.Add(playlistItem);
             }
 

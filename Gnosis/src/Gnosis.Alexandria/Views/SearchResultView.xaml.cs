@@ -20,6 +20,7 @@ using Gnosis.Alexandria.ViewModels;
 using Gnosis.Application.Vendor;
 using Gnosis.Image;
 using Gnosis.Links;
+using Gnosis.Metadata;
 using Gnosis.Tags;
 
 namespace Gnosis.Alexandria.Views
@@ -297,8 +298,15 @@ namespace Gnosis.Alexandria.Views
                     thumbnailData = album.ThumbnailData;
                 }
 
-                var playlist = new GnosisPlaylist(clipViewModel.Name, summary, DateTime.Now.ToUniversalTime(), 1, clipViewModel.Duration, Guid.Empty.ToUrn(), "Unknown Creator", Guid.Empty.ToUrn(), "Unknown Catalog", Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, securityContext.CurrentUser.Location, securityContext.CurrentUser.Name, thumbnail, thumbnailData);
-                var playlistViewModel = new PlaylistViewModel(mediaItemController, playlist, new List<IPlaylistItemViewModel> { clipViewModel.ToPlaylistItem(securityContext) });
+                var date = DateTime.Now.ToUniversalTime();
+                var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisPlaylist, clipViewModel.Name, summary, date, date, 1);
+                var sizeInfo = new SizeInfo(clipViewModel.Duration, 0, 0);
+                var creatorInfo = CreatorInfo.Default;
+                var catalogInfo = CatalogInfo.Default;
+                var targetInfo = TargetInfo.Default;
+                var thumbnailInfo = new ThumbnailInfo(thumbnail, thumbnailData);
+                var playlist = new GnosisPlaylist(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, securityContext.CurrentUserInfo, thumbnailInfo);
+                var playlistViewModel = new PlaylistViewModel(mediaItemController, playlist, new List<IPlaylistItemViewModel> { clipViewModel.ToPlaylistItem(securityContext, 1) });
 
                 var taskViewModel = taskController.GetPlaylistViewModel(playlistViewModel);
                 taskResultView.Playlist(taskViewModel, playlistViewModel);
