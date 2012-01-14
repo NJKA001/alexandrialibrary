@@ -60,17 +60,38 @@ namespace Gnosis.Alexandria.Views
                 tagRepository = new SQLiteTagRepository(logger, tagTypeFactory);
                 tagRepository.Initialize();
 
-                artistRepository = new SQLiteArtistRepository(logger);
-                artistRepository.Initialize();
-
                 albumRepository = new SQLiteAlbumRepository(logger);
                 albumRepository.Initialize();
 
-                trackRepository = new SQLiteTrackRepository(logger);
-                trackRepository.Initialize();
+                artistRepository = new SQLiteArtistRepository(logger);
+                artistRepository.Initialize();
 
                 clipRepository = new SQLiteClipRepository(logger);
                 clipRepository.Initialize();
+
+                docRepository = new SQLiteDocRepository(logger);
+                docRepository.Initialize();
+
+                feedRepository = new SQLiteFeedRepository(logger);
+                feedRepository.Initialize();
+
+                feedItemRepository = new SQLiteFeedItemRepository(logger);
+                feedItemRepository.Initialize();
+
+                picRepository = new SQLitePicRepository(logger);
+                picRepository.Initialize();
+
+                playlistRepository = new SQLitePlaylistRepository(logger);
+                playlistRepository.Initialize();
+
+                playlistItemRepository = new SQLitePlaylistItemRepository(logger);
+                playlistItemRepository.Initialize();
+
+                programRepository = new SQLiteProgramRepository(logger);
+                programRepository.Initialize();
+
+                trackRepository = new SQLiteTrackRepository(logger);
+                trackRepository.Initialize();
 
                 audioStreamFactory = new AudioStreamFactory();
 
@@ -80,7 +101,7 @@ namespace Gnosis.Alexandria.Views
                 catalogController = new CatalogController(logger, securityContext, mediaFactory, mediaRepository, linkRepository, tagRepository, artistRepository, albumRepository, trackRepository, clipRepository, audioStreamFactory);
                 spiderFactory = new SpiderFactory(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository, clipRepository, audioStreamFactory);
 
-                mediaItemController = new MediaItemController(logger, linkRepository, tagRepository, artistRepository, albumRepository, trackRepository, clipRepository);
+                mediaItemController = new MediaItemController(logger, linkRepository, tagRepository, albumRepository, artistRepository, clipRepository, docRepository, feedRepository, feedItemRepository, picRepository, playlistRepository, playlistItemRepository, programRepository, trackRepository);
                 taskController = new TaskController(logger, videoPlayer, spiderFactory, mediaItemController, artistRepository, albumRepository, trackRepository, clipRepository);
                 tagController = new TagController(logger, tagRepository);
 
@@ -104,10 +125,17 @@ namespace Gnosis.Alexandria.Views
         private readonly IMediaRepository mediaRepository;
         private readonly ILinkRepository linkRepository;
         private readonly ITagRepository tagRepository;
-        private readonly IMediaItemRepository<IArtist> artistRepository;
         private readonly IMediaItemRepository<IAlbum> albumRepository;
-        private readonly IMediaItemRepository<ITrack> trackRepository;
+        private readonly IMediaItemRepository<IArtist> artistRepository;
         private readonly IMediaItemRepository<IClip> clipRepository;
+        private readonly IMediaItemRepository<IDoc> docRepository;
+        private readonly IMediaItemRepository<IFeed> feedRepository;
+        private readonly IMediaItemRepository<IFeedItem> feedItemRepository;
+        private readonly IMediaItemRepository<IPic> picRepository;
+        private readonly IMediaItemRepository<IPlaylist> playlistRepository;
+        private readonly IMediaItemRepository<IPlaylistItem> playlistItemRepository;
+        private readonly IMediaItemRepository<IProgram> programRepository;
+        private readonly IMediaItemRepository<ITrack> trackRepository;
 
         private readonly IAudioStreamFactory audioStreamFactory;
         private readonly IVideoPlayer videoPlayer;

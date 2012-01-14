@@ -11,7 +11,7 @@ namespace Gnosis.Alexandria.Controllers
     public class MediaItemController
         : IMediaItemController
     {
-        public MediaItemController(ILogger logger, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IClip> clipRepository)
+        public MediaItemController(ILogger logger, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IClip> clipRepository, IMediaItemRepository<IDoc> docRepository, IMediaItemRepository<IFeed> feedRepository, IMediaItemRepository<IFeedItem> feedItemRepository, IMediaItemRepository<IPic> picRepository, IMediaItemRepository<IPlaylist> playlistRepository, IMediaItemRepository<IPlaylistItem> playlistItemRepository, IMediaItemRepository<IProgram> programRepository, IMediaItemRepository<ITrack> trackRepository)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -23,27 +23,56 @@ namespace Gnosis.Alexandria.Controllers
                 throw new ArgumentNullException("artistRepository");
             if (albumRepository == null)
                 throw new ArgumentNullException("albumRepository");
-            if (trackRepository == null)
-                throw new ArgumentNullException("trackRepository");
             if (clipRepository == null)
                 throw new ArgumentNullException("clipRepository");
+            if (docRepository == null)
+                throw new ArgumentNullException("docRepository");
+            if (feedRepository == null)
+                throw new ArgumentNullException("feedRepository");
+            if (feedItemRepository == null)
+                throw new ArgumentNullException("feedItemRepository");
+            if (picRepository == null)
+                throw new ArgumentNullException("picRepository");
+            if (playlistRepository == null)
+                throw new ArgumentNullException("playlistRepository");
+            if (playlistItemRepository == null)
+                throw new ArgumentNullException("playlistItemRepository");
+            if (programRepository == null)
+                throw new ArgumentNullException("programRepository");
+            if (trackRepository == null)
+                throw new ArgumentNullException("trackRepository");
+            
 
             this.logger = logger;
             this.linkRepository = linkRepository;
             this.tagRepository = tagRepository;
             this.artistRepository = artistRepository;
             this.albumRepository = albumRepository;
-            this.trackRepository = trackRepository;
             this.clipRepository = clipRepository;
+            this.docRepository = docRepository;
+            this.feedRepository = feedRepository;
+            this.feedItemRepository = feedItemRepository;
+            this.picRepository = picRepository;
+            this.playlistRepository = playlistRepository;
+            this.playlistItemRepository = playlistItemRepository;
+            this.programRepository = programRepository;
+            this.trackRepository = trackRepository;
         }
 
         private readonly ILogger logger;
         private readonly ILinkRepository linkRepository;
         private readonly ITagRepository tagRepository;
-        private readonly IMediaItemRepository<IArtist> artistRepository;
         private readonly IMediaItemRepository<IAlbum> albumRepository;
-        private readonly IMediaItemRepository<ITrack> trackRepository;
+        private readonly IMediaItemRepository<IArtist> artistRepository;
         private readonly IMediaItemRepository<IClip> clipRepository;
+        private readonly IMediaItemRepository<IDoc> docRepository;
+        private readonly IMediaItemRepository<IFeed> feedRepository;
+        private readonly IMediaItemRepository<IFeedItem> feedItemRepository;
+        private readonly IMediaItemRepository<IPic> picRepository;
+        private readonly IMediaItemRepository<IPlaylist> playlistRepository;
+        private readonly IMediaItemRepository<IPlaylistItem> playlistItemRepository;
+        private readonly IMediaItemRepository<IProgram> programRepository;
+        private readonly IMediaItemRepository<ITrack> trackRepository;
 
         public void UpdateThumbnail<T>(Uri id, Uri thumbnail, byte[] thumbnailData)
             where T : IMediaItem
