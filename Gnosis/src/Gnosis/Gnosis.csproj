@@ -100,7 +100,7 @@
     <Compile Include="Metadata\Pic.cs" />
     <Compile Include="Metadata\Playlist.cs" />
     <Compile Include="Metadata\PlaylistItem.cs" />
-    <Compile Include="Metadata\Prog.cs" />
+    <Compile Include="Metadata\Program.cs" />
     <Compile Include="Metadata\User.cs" />
     <Compile Include="Application\Vendor\MicrosoftExecutable.cs" />
     <Compile Include="Application\Vendor\MicrosoftShortcut.cs" />

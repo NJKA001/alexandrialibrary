@@ -24,12 +24,12 @@ namespace Gnosis.Data.SQLite
 
         protected override IProgram GetItem(IdentityInfo identityInfo, SizeInfo sizeInfo, CreatorInfo creatorInfo, CatalogInfo catalogInfo, TargetInfo targetInfo, UserInfo userInfo, ThumbnailInfo thumbnailInfo)
         {
-            return new Prog(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+            return new Program(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
         }
 
         protected override IProgram GetDefaultItem()
         {
-            return Prog.Unknown;
+            return Program.Unknown;
         }
     }
 }
