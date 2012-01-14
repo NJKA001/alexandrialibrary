@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis
 {
     public interface IMediaItem
-        : IMedia
+        : IApplication
     {
         string Name { get; }
         string Summary { get; }

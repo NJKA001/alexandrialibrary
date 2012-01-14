@@ -305,7 +305,7 @@ namespace Gnosis.Alexandria.Views
                 var catalogInfo = CatalogInfo.Default;
                 var targetInfo = TargetInfo.Default;
                 var thumbnailInfo = new ThumbnailInfo(thumbnail, thumbnailData);
-                var playlist = new GnosisPlaylist(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, securityContext.CurrentUserInfo, thumbnailInfo);
+                var playlist = new Playlist(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, securityContext.CurrentUserInfo, thumbnailInfo);
                 var playlistViewModel = new PlaylistViewModel(mediaItemController, playlist, new List<IPlaylistItemViewModel> { clipViewModel.ToPlaylistItem(securityContext, 1) });
 
                 var taskViewModel = taskController.GetPlaylistViewModel(playlistViewModel);

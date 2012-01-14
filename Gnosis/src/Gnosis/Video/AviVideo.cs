@@ -59,7 +59,7 @@ namespace Gnosis.Video
             var sizeInfo = new SizeInfo(duration, height, width);
             var targetInfo = new TargetInfo(Location, Type);
             var userInfo = securityContext.CurrentUserInfo;
-            return new GnosisClip(identityInfo, sizeInfo, CreatorInfo.Default, CatalogInfo.Default, targetInfo, userInfo, ThumbnailInfo.Default);
+            return new Clip(identityInfo, sizeInfo, CreatorInfo.Default, CatalogInfo.Default, targetInfo, userInfo, ThumbnailInfo.Default);
         }
     }
 }

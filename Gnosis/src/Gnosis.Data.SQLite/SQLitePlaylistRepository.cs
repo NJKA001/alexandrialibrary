@@ -24,12 +24,12 @@ namespace Gnosis.Data.SQLite
 
         protected override IPlaylist GetItem(IdentityInfo identityInfo, SizeInfo sizeInfo, CreatorInfo creatorInfo, CatalogInfo catalogInfo, TargetInfo targetInfo, UserInfo userInfo, ThumbnailInfo thumbnailInfo)
         {
-            return new GnosisPlaylist(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+            return new Playlist(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
         }
 
         protected override IPlaylist GetDefaultItem()
         {
-            return GnosisPlaylist.Unknown;
+            return Playlist.Unknown;
         }
     }
 }

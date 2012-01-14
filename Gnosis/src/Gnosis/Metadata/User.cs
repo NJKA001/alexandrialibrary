@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Application.Vendor
+namespace Gnosis.Metadata
 {
-    public class GnosisUser
+    public class User
         : IUser
     {
-        public GnosisUser(string name, Uri thumbnail)
+        public User(string name, Uri thumbnail)
             : this(name, thumbnail, Guid.NewGuid().ToUrn())
         {
         }
 
-        public GnosisUser(string name, Uri thumbnail, Uri location)
+        public User(string name, Uri thumbnail, Uri location)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -63,6 +63,6 @@ namespace Gnosis.Application.Vendor
             return Enumerable.Empty<ITag>();
         }
 
-        public static readonly IUser Administrator = new GnosisUser("Administrator", Guid.Empty.ToUrn(), Guid.Empty.ToUrn());
+        public static readonly IUser Administrator = new User("Administrator", Guid.Empty.ToUrn(), Guid.Empty.ToUrn());
     }
 }

@@ -179,7 +179,7 @@ namespace Gnosis.Video
                     return artist;
             }
 
-            return GnosisArtist.Unknown;
+            return Artist.Unknown;
         }
         
         public virtual IAlbum GetAlbum(ISecurityContext securityContext, IMediaItemRepository<IClip> clipRepository, IMediaItemRepository<IAlbum> albumRepository, IArtist artist)
@@ -201,14 +201,14 @@ namespace Gnosis.Video
                 return album;
             }
 
-            var catalog = GnosisAlbum.Unknown;
+            var catalog = Album.Unknown;
             var albumNumber = GetAlbumNumber();
             var date = GetDate();
 
             var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisAlbum, albumName, summary, date, date, albumNumber);
             var creatorInfo = new CreatorInfo(artist.Location, artist.Name);
             var catalogInfo = new CatalogInfo(catalog.Location, catalog.Name);
-            return new GnosisAlbum(identityInfo, SizeInfo.Default, creatorInfo, catalogInfo, TargetInfo.Default, securityContext.CurrentUserInfo, ThumbnailInfo.Default);
+            return new Album(identityInfo, SizeInfo.Default, creatorInfo, catalogInfo, TargetInfo.Default, securityContext.CurrentUserInfo, ThumbnailInfo.Default);
         }
 
         public virtual IClip GetClip(ISecurityContext securityContext, IMediaItemRepository<IClip> clipRepository, IArtist artist, IAlbum album)
@@ -232,7 +232,7 @@ namespace Gnosis.Video
             var creatorInfo = new CreatorInfo(artist.Location, artist.Name);
             var catalogInfo = new CatalogInfo(album.Location, album.Name);
             var targetInfo = new TargetInfo(Location, Type);
-            return new GnosisClip(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, securityContext.CurrentUserInfo, ThumbnailInfo.Default);
+            return new Clip(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, securityContext.CurrentUserInfo, ThumbnailInfo.Default);
         }
     }
 }

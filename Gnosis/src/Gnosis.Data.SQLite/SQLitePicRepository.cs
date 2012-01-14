@@ -24,12 +24,12 @@ namespace Gnosis.Data.SQLite
 
         protected override IPic GetItem(IdentityInfo identityInfo, SizeInfo sizeInfo, CreatorInfo creatorInfo, CatalogInfo catalogInfo, TargetInfo targetInfo, UserInfo userInfo, ThumbnailInfo thumbnailInfo)
         {
-            return new GnosisPic(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+            return new Pic(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
         }
 
         protected override IPic GetDefaultItem()
         {
-            return GnosisPic.Unknown;
+            return Pic.Unknown;
         }
     }
 }

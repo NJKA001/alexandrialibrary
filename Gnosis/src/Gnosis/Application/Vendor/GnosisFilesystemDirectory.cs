@@ -9,7 +9,7 @@ using Gnosis.Links;
 namespace Gnosis.Application.Vendor
 {
     public class GnosisFilesystemDirectory
-        : IMedia
+        : IApplication
     {
         public GnosisFilesystemDirectory(Uri location)
         {

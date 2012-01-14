@@ -8,12 +8,12 @@ using Gnosis.Links;
 using Gnosis.Metadata;
 using Gnosis.Tags;
 
-namespace Gnosis.Application.Vendor
+namespace Gnosis.Metadata
 {
-    public abstract class GnosisMediaItemBase
-        : IMediaItem, IApplication
+    public abstract class MediaItemBase
+        : IMediaItem
     {
-        protected GnosisMediaItemBase(IdentityInfo identityInfo, SizeInfo sizeInfo, CreatorInfo creatorInfo, CatalogInfo catalogInfo, TargetInfo targetInfo, UserInfo userInfo, ThumbnailInfo thumbnailInfo)
+        protected MediaItemBase(IdentityInfo identityInfo, SizeInfo sizeInfo, CreatorInfo creatorInfo, CatalogInfo catalogInfo, TargetInfo targetInfo, UserInfo userInfo, ThumbnailInfo thumbnailInfo)
         {
             this.name = identityInfo.Name;
             this.summary = identityInfo.Summary;

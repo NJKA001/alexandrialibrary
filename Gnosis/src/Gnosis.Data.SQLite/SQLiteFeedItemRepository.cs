@@ -24,12 +24,12 @@ namespace Gnosis.Data.SQLite
 
         protected override IFeedItem GetItem(IdentityInfo identityInfo, SizeInfo sizeInfo, CreatorInfo creatorInfo, CatalogInfo catalogInfo, TargetInfo targetInfo, UserInfo userInfo, ThumbnailInfo thumbnailInfo)
         {
-            return new GnosisFeedItem(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+            return new FeedItem(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
         }
 
         protected override IFeedItem GetDefaultItem()
         {
-            return GnosisFeedItem.Unknown;
+            return FeedItem.Unknown;
         }
     }
 }

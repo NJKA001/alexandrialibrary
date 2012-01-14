@@ -36,11 +36,11 @@ namespace Gnosis.Tests.Unit.Data.SQLite
 
         private const string radioheadUrn = "urn:uuid:27A19456-E6E9-463F-951D-98BB44356C65";
         private const string okComputerUrn = "urn:uuid:FA6A7FD0-74A3-4D83-A363-13733C04BB85";
-        private ITrack track1 = new GnosisTrack(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisTrack, "Paranoid Android", string.Empty, DateTime.MinValue, DateTime.MaxValue, 2), new SizeInfo(TimeSpan.FromSeconds(220), 0, 0), new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), new CatalogInfo(new Uri(okComputerUrn), "OK Computer"), new TargetInfo(new Uri("file:///audio/radiohead/paranoid_android.mp3"), MediaType.AudioMpeg), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image1.jpg"), new byte[0]));
-        private ITrack track2 = new GnosisTrack(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisTrack, "Sober", string.Empty, DateTime.MinValue, DateTime.MaxValue, 4), new SizeInfo(TimeSpan.FromSeconds(306), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "Tool"), new CatalogInfo(Guid.NewGuid().ToUrn(), "Undertow"), new TargetInfo(new Uri("file:///audio/tool/sober.mp3"), MediaType.AudioMpeg), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image2.jpg"), new byte[0]));
-        private ITrack track3 = new GnosisTrack(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisTrack, "Maybe Not", string.Empty, DateTime.MinValue, DateTime.MaxValue, 7), new SizeInfo(TimeSpan.FromSeconds(189), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "Cat Power"), new CatalogInfo(Guid.NewGuid().ToUrn(), "Free"), new TargetInfo(new Uri("file:///audio/cat_power/maybe_not.mp3"), MediaType.AudioMpeg), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image3.jpg"), new byte[0]));
-        private ITrack track4 = new GnosisTrack(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisTrack, "Silence", string.Empty, DateTime.MinValue, DateTime.MaxValue, 5), new SizeInfo(TimeSpan.FromSeconds(423), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "PJ Harvey"), new CatalogInfo(Guid.NewGuid().ToUrn(), "White Chalk"), new TargetInfo(new Uri("file:///audio/pj_harvey/paranoid_android.mp3"), MediaType.AudioMpeg), UserInfo.Default, new ThumbnailInfo(new Uri("http://other.org/blah.png"), new byte[0]));
-        private ITrack track5 = new GnosisTrack(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisTrack, "Airbag", string.Empty, DateTime.MinValue, DateTime.MaxValue, 1), new SizeInfo(TimeSpan.FromSeconds(291), 0, 0), new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), new CatalogInfo(new Uri(okComputerUrn), "OK Computer"), new TargetInfo(new Uri("file:///audio/radiohead/airbag.mp3"), MediaType.AudioMpeg), UserInfo.Default, new ThumbnailInfo(new Uri("file:///some-stuff/blah/ph.jpg"), new byte[0]));
+        private ITrack track1 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisTrack, "Paranoid Android", string.Empty, DateTime.MinValue, DateTime.MaxValue, 2), new SizeInfo(TimeSpan.FromSeconds(220), 0, 0), new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), new CatalogInfo(new Uri(okComputerUrn), "OK Computer"), new TargetInfo(new Uri("file:///audio/radiohead/paranoid_android.mp3"), MediaType.AudioMpeg), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image1.jpg"), new byte[0]));
+        private ITrack track2 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisTrack, "Sober", string.Empty, DateTime.MinValue, DateTime.MaxValue, 4), new SizeInfo(TimeSpan.FromSeconds(306), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "Tool"), new CatalogInfo(Guid.NewGuid().ToUrn(), "Undertow"), new TargetInfo(new Uri("file:///audio/tool/sober.mp3"), MediaType.AudioMpeg), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image2.jpg"), new byte[0]));
+        private ITrack track3 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisTrack, "Maybe Not", string.Empty, DateTime.MinValue, DateTime.MaxValue, 7), new SizeInfo(TimeSpan.FromSeconds(189), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "Cat Power"), new CatalogInfo(Guid.NewGuid().ToUrn(), "Free"), new TargetInfo(new Uri("file:///audio/cat_power/maybe_not.mp3"), MediaType.AudioMpeg), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image3.jpg"), new byte[0]));
+        private ITrack track4 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisTrack, "Silence", string.Empty, DateTime.MinValue, DateTime.MaxValue, 5), new SizeInfo(TimeSpan.FromSeconds(423), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "PJ Harvey"), new CatalogInfo(Guid.NewGuid().ToUrn(), "White Chalk"), new TargetInfo(new Uri("file:///audio/pj_harvey/paranoid_android.mp3"), MediaType.AudioMpeg), UserInfo.Default, new ThumbnailInfo(new Uri("http://other.org/blah.png"), new byte[0]));
+        private ITrack track5 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisTrack, "Airbag", string.Empty, DateTime.MinValue, DateTime.MaxValue, 1), new SizeInfo(TimeSpan.FromSeconds(291), 0, 0), new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), new CatalogInfo(new Uri(okComputerUrn), "OK Computer"), new TargetInfo(new Uri("file:///audio/radiohead/airbag.mp3"), MediaType.AudioMpeg), UserInfo.Default, new ThumbnailInfo(new Uri("file:///some-stuff/blah/ph.jpg"), new byte[0]));
 
         [TestFixtureSetUp]
         public void Setup()
@@ -56,10 +56,10 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void DefaultTrackCannotBeDeleted()
         {
-            repository.Delete(new List<Uri> { GnosisTrack.Unknown.Location });
-            var check = repository.GetByLocation(GnosisTrack.Unknown.Location);
+            repository.Delete(new List<Uri> { Track.Unknown.Location });
+            var check = repository.GetByLocation(Track.Unknown.Location);
             Assert.IsNotNull(check);
-            Assert.AreEqual(check, GnosisTrack.Unknown);
+            Assert.AreEqual(check, Track.Unknown);
         }
 
         [Test]

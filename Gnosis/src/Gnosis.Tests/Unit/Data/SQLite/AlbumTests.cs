@@ -35,11 +35,11 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected readonly IMediaItemRepository<IAlbum> repository;
 
         private const string radioheadUrn = "urn:uuid:27A19456-E6E9-463F-951D-98BB44356C65";
-        private IAlbum album1 = new GnosisAlbum(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisAlbum, "OK Computer", string.Empty, new DateTime(1997, 9, 22), new DateTime(1997, 9, 22), 0), SizeInfo.Default, new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image1.jpg"), new byte[0]));
-        private IAlbum album2 = new GnosisAlbum(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisAlbum, "Undertow", string.Empty, new DateTime(1992, 3, 28), new DateTime(1992, 3, 28), 0), SizeInfo.Default, new CreatorInfo(Guid.NewGuid().ToUrn(), "Tool"), CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image2.jpg"), new byte[0]));
-        private IAlbum album3 = new GnosisAlbum(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisAlbum, "Free", string.Empty, new DateTime(2002, 7, 9), new DateTime(2002, 7, 9), 0), SizeInfo.Default, new CreatorInfo(Guid.NewGuid().ToUrn(), "Cat Power"), CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image3.jpg"), new byte[0]));
-        private IAlbum album4 = new GnosisAlbum(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisAlbum, "White Chalk", string.Empty, new DateTime(2008, 4, 30), new DateTime(2008, 4, 30), 0), SizeInfo.Default, new CreatorInfo(Guid.NewGuid().ToUrn(), "PJ Harvey"), CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image4.jpg"), new byte[0]));
-        private IAlbum album5 = new GnosisAlbum(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisAlbum, "Pablo Honey", string.Empty, new DateTime(1993, 4, 4), new DateTime(1993, 4, 4), 0), SizeInfo.Default, new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image5.jpg"), new byte[0]));
+        private IAlbum album1 = new Album(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisAlbum, "OK Computer", string.Empty, new DateTime(1997, 9, 22), new DateTime(1997, 9, 22), 0), SizeInfo.Default, new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image1.jpg"), new byte[0]));
+        private IAlbum album2 = new Album(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisAlbum, "Undertow", string.Empty, new DateTime(1992, 3, 28), new DateTime(1992, 3, 28), 0), SizeInfo.Default, new CreatorInfo(Guid.NewGuid().ToUrn(), "Tool"), CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image2.jpg"), new byte[0]));
+        private IAlbum album3 = new Album(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisAlbum, "Free", string.Empty, new DateTime(2002, 7, 9), new DateTime(2002, 7, 9), 0), SizeInfo.Default, new CreatorInfo(Guid.NewGuid().ToUrn(), "Cat Power"), CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image3.jpg"), new byte[0]));
+        private IAlbum album4 = new Album(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisAlbum, "White Chalk", string.Empty, new DateTime(2008, 4, 30), new DateTime(2008, 4, 30), 0), SizeInfo.Default, new CreatorInfo(Guid.NewGuid().ToUrn(), "PJ Harvey"), CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image4.jpg"), new byte[0]));
+        private IAlbum album5 = new Album(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisAlbum, "Pablo Honey", string.Empty, new DateTime(1993, 4, 4), new DateTime(1993, 4, 4), 0), SizeInfo.Default, new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image5.jpg"), new byte[0]));
 
         [TestFixtureSetUp]
         public void Setup()
@@ -55,10 +55,10 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void DefaultAlbumCannotBeDeleted()
         {
-            repository.Delete(new List<Uri> { GnosisAlbum.Unknown.Location });
-            var check = repository.GetByLocation(GnosisAlbum.Unknown.Location);
+            repository.Delete(new List<Uri> { Album.Unknown.Location });
+            var check = repository.GetByLocation(Album.Unknown.Location);
             Assert.IsNotNull(check);
-            Assert.AreEqual(check, GnosisAlbum.Unknown);
+            Assert.AreEqual(check, Album.Unknown);
         }
 
         [Test]

@@ -144,7 +144,7 @@ namespace Gnosis.Spiders
                     var targetInfo = new TargetInfo(album.Target, album.TargetType);
                     var userInfo = new UserInfo(album.User, album.UserName);
                     var thumbnailInfo = new ThumbnailInfo(album.Thumbnail, album.ThumbnailData);
-                    album = new GnosisAlbum(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                    album = new Album(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
                     albumRepository.Save(new List<IAlbum> { album });
                 }
 
@@ -182,7 +182,7 @@ namespace Gnosis.Spiders
                         var targetInfo = new TargetInfo(album.Target, album.TargetType);
                         var userInfo = new UserInfo(album.User, album.UserName);
                         var thumbnailInfo = new ThumbnailInfo(track.Thumbnail, track.ThumbnailData);
-                        var updated = new GnosisAlbum(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                        var updated = new Album(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
                         albumRepository.Save(new List<IAlbum> { updated });
                     }
                 }
@@ -219,7 +219,7 @@ namespace Gnosis.Spiders
                     var targetInfo = new TargetInfo(album.Target, album.TargetType);
                     var userInfo = new UserInfo(album.User, album.UserName);
                     var thumbnailInfo = new ThumbnailInfo(album.Thumbnail, album.ThumbnailData);
-                    album = new GnosisAlbum(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                    album = new Album(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
                     albumRepository.Save(new List<IAlbum> { album });
                 }
             }

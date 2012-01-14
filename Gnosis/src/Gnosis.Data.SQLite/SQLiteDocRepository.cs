@@ -24,12 +24,12 @@ namespace Gnosis.Data.SQLite
 
         protected override IDoc GetItem(IdentityInfo identityInfo, SizeInfo sizeInfo, CreatorInfo creatorInfo, CatalogInfo catalogInfo, TargetInfo targetInfo, UserInfo userInfo, ThumbnailInfo thumbnailInfo)
         {
-            return new GnosisDoc(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+            return new Doc(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
         }
 
         protected override IDoc GetDefaultItem()
         {
-            return GnosisDoc.Unknown;
+            return Doc.Unknown;
         }
     }
 }

@@ -86,7 +86,7 @@ namespace Gnosis.Alexandria.Controllers
 
             try
             {
-                if (typeof(T) == typeof(IArtist) || typeof(T) == typeof(GnosisArtist))
+                if (typeof(T) == typeof(IArtist) || typeof(T) == typeof(Artist))
                 {
                     var item = artistRepository.GetByLocation(id);
                     if (item == null)
@@ -99,10 +99,10 @@ namespace Gnosis.Alexandria.Controllers
                     var targetInfo = new TargetInfo(item.Target, item.TargetType);
                     var userInfo = new UserInfo(item.User, item.UserName);
                     var thumbnailInfo = new ThumbnailInfo(thumbnail, thumbnailData);
-                    var updated = new GnosisArtist(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                    var updated = new Artist(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
                     artistRepository.Save(new List<IArtist> { updated });
                 }
-                else if (typeof(T) == typeof(IAlbum) || typeof(T) == typeof(GnosisAlbum))
+                else if (typeof(T) == typeof(IAlbum) || typeof(T) == typeof(Album))
                 {
                     var item = albumRepository.GetByLocation(id);
                     if (item == null)
@@ -114,10 +114,10 @@ namespace Gnosis.Alexandria.Controllers
                     var targetInfo = new TargetInfo(item.Target, item.TargetType);
                     var userInfo = new UserInfo(item.User, item.UserName);
                     var thumbnailInfo = new ThumbnailInfo(thumbnail, thumbnailData);
-                    var updated = new GnosisAlbum(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                    var updated = new Album(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
                     albumRepository.Save(new List<IAlbum> { updated });
                 }
-                else if (typeof(T) == typeof(ITrack) || typeof(T) == typeof(GnosisTrack))
+                else if (typeof(T) == typeof(ITrack) || typeof(T) == typeof(Track))
                 {
                     var item = trackRepository.GetByLocation(id);
                     if (item == null)
@@ -130,10 +130,10 @@ namespace Gnosis.Alexandria.Controllers
                     var targetInfo = new TargetInfo(item.Target, item.TargetType);
                     var userInfo = new UserInfo(item.User, item.UserName);
                     var thumbnailInfo = new ThumbnailInfo(thumbnail, thumbnailData);
-                    var updated = new GnosisTrack(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                    var updated = new Track(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
                     trackRepository.Save(new List<ITrack> { updated });
                 }
-                else if (typeof(T) == typeof(IClip) || typeof(T) == typeof(GnosisClip))
+                else if (typeof(T) == typeof(IClip) || typeof(T) == typeof(Clip))
                 {
                     var item = clipRepository.GetByLocation(id);
                     if (item == null)
@@ -146,7 +146,7 @@ namespace Gnosis.Alexandria.Controllers
                     var targetInfo = new TargetInfo(item.Target, item.TargetType);
                     var userInfo = new UserInfo(item.User, item.UserName);
                     var thumbnailInfo = new ThumbnailInfo(thumbnail, thumbnailData);
-                    var updated = new GnosisClip(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                    var updated = new Clip(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
                     clipRepository.Save(new List<IClip> { updated });
                 }
             }
@@ -167,7 +167,7 @@ namespace Gnosis.Alexandria.Controllers
 
             try
             {
-                if (typeof(T) == typeof(IArtist) || typeof(T) == typeof(GnosisArtist))
+                if (typeof(T) == typeof(IArtist) || typeof(T) == typeof(Artist))
                 {
                     var item = artistRepository.GetByLocation(id);
                     if (item == null)
@@ -180,10 +180,10 @@ namespace Gnosis.Alexandria.Controllers
                     var targetInfo = new TargetInfo(item.Target, item.TargetType);
                     var userInfo = new UserInfo(item.User, item.UserName);
                     var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
-                    var updated = new GnosisArtist(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                    var updated = new Artist(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
                     artistRepository.Save(new List<IArtist> { updated });
                 }
-                else if (typeof(T) == typeof(IAlbum) || typeof(T) == typeof(GnosisAlbum))
+                else if (typeof(T) == typeof(IAlbum) || typeof(T) == typeof(Album))
                 {
                     var item = albumRepository.GetByLocation(id);
                     if (item == null)
@@ -196,10 +196,10 @@ namespace Gnosis.Alexandria.Controllers
                     var targetInfo = new TargetInfo(item.Target, item.TargetType);
                     var userInfo = new UserInfo(item.User, item.UserName);
                     var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
-                    var updated = new GnosisAlbum(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                    var updated = new Album(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
                     albumRepository.Save(new List<IAlbum> { updated });
                 }
-                else if (typeof(T) == typeof(ITrack) || typeof(T) == typeof(GnosisTrack))
+                else if (typeof(T) == typeof(ITrack) || typeof(T) == typeof(Track))
                 {
                     var item = trackRepository.GetByLocation(id);
                     if (item == null)
@@ -212,10 +212,10 @@ namespace Gnosis.Alexandria.Controllers
                     var targetInfo = new TargetInfo(item.Target, item.TargetType);
                     var userInfo = new UserInfo(item.User, item.UserName);
                     var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
-                    var updated = new GnosisTrack(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                    var updated = new Track(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
                     trackRepository.Save(new List<ITrack> { updated });
                 }
-                else if (typeof(T) == typeof(IClip) || typeof(T) == typeof(GnosisClip))
+                else if (typeof(T) == typeof(IClip) || typeof(T) == typeof(Clip))
                 {
                     var item = clipRepository.GetByLocation(id);
                     if (item == null)
@@ -228,7 +228,7 @@ namespace Gnosis.Alexandria.Controllers
                     var targetInfo = new TargetInfo(item.Target, item.TargetType);
                     var userInfo = new UserInfo(item.User, item.UserName);
                     var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
-                    var updated = new GnosisClip(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                    var updated = new Clip(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
                     clipRepository.Save(new List<IClip> { updated });
                 }
             }

@@ -24,12 +24,12 @@ namespace Gnosis.Data.SQLite
 
         protected override IAlbum GetItem(IdentityInfo identityInfo, SizeInfo sizeInfo, CreatorInfo creatorInfo, CatalogInfo catalogInfo, TargetInfo targetInfo, UserInfo userInfo, ThumbnailInfo thumbnailInfo)
         {
-            return new GnosisAlbum(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+            return new Album(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
         }
 
         protected override IAlbum GetDefaultItem()
         {
-            return GnosisAlbum.Unknown;
+            return Album.Unknown;
         }
     }
 }

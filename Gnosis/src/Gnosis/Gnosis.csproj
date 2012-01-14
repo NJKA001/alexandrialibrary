@@ -87,26 +87,26 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\Vendor\GnosisAlbum.cs" />
+    <Compile Include="Metadata\Album.cs" />
     <Compile Include="Algorithms\Algorithm.cs" />
     <Compile Include="Application\Pdf\IPdfDocument.cs" />
     <Compile Include="Application\Pdf\PdfDocument.cs" />
-    <Compile Include="Application\Vendor\GnosisClip.cs" />
-    <Compile Include="Application\Vendor\GnosisDoc.cs" />
-    <Compile Include="Application\Vendor\GnosisFeed.cs" />
-    <Compile Include="Application\Vendor\GnosisFeedItem.cs" />
+    <Compile Include="Metadata\Clip.cs" />
+    <Compile Include="Metadata\Doc.cs" />
+    <Compile Include="Metadata\Feed.cs" />
+    <Compile Include="Metadata\FeedItem.cs" />
     <Compile Include="Application\Vendor\GnosisFilesystemDirectory.cs" />
-    <Compile Include="Application\Vendor\GnosisMediaItemBase.cs" />
-    <Compile Include="Application\Vendor\GnosisPic.cs" />
-    <Compile Include="Application\Vendor\GnosisPlaylist.cs" />
-    <Compile Include="Application\Vendor\GnosisPlaylistItem.cs" />
-    <Compile Include="Application\Vendor\GnosisProgram.cs" />
-    <Compile Include="Application\Vendor\GnosisUser.cs" />
+    <Compile Include="Metadata\MediaItemBase.cs" />
+    <Compile Include="Metadata\Pic.cs" />
+    <Compile Include="Metadata\Playlist.cs" />
+    <Compile Include="Metadata\PlaylistItem.cs" />
+    <Compile Include="Metadata\Prog.cs" />
+    <Compile Include="Metadata\User.cs" />
     <Compile Include="Application\Vendor\MicrosoftExecutable.cs" />
     <Compile Include="Application\Vendor\MicrosoftShortcut.cs" />
     <Compile Include="Application\UnknownApplication.cs" />
     <Compile Include="Application\Xml\XmlDtdDocument.cs" />
-    <Compile Include="Application\Vendor\GnosisArtist.cs" />
+    <Compile Include="Metadata\Artist.cs" />
     <Compile Include="Audio\AudioBase.cs" />
     <Compile Include="Audio\AudioStateChangedEventArgs.cs" />
     <Compile Include="Audio\IAudioPlayer.cs" />
@@ -294,7 +294,7 @@
     <Compile Include="Tasks\PlaylistTask.cs" />
     <Compile Include="Tasks\TagSearchTask.cs" />
     <Compile Include="Text\PlainText.cs" />
-    <Compile Include="Application\Vendor\GnosisTrack.cs" />
+    <Compile Include="Metadata\Track.cs" />
     <Compile Include="Utilities\DebugLogger.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="IMediaRepository.cs" />

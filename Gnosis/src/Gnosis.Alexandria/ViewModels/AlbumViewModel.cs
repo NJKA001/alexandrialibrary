@@ -79,7 +79,7 @@ namespace Gnosis.Alexandria.ViewModels
             var date = DateTime.Now.ToUniversalTime();
             var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisPlaylist, Name, Summary, date, date, 0);
             var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
-            var playlist = new GnosisPlaylist(identityInfo, SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, securityContext.CurrentUserInfo, thumbnailInfo);
+            var playlist = new Playlist(identityInfo, SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, securityContext.CurrentUserInfo, thumbnailInfo);
             var playlistItems = new List<IPlaylistItemViewModel>();
             uint number = 0;
             foreach (var track in tracks)

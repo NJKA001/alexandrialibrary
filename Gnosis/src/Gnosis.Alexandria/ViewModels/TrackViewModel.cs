@@ -128,7 +128,7 @@ namespace Gnosis.Alexandria.ViewModels
             var date = DateTime.Now.ToUniversalTime();
             var identityInfo = new IdentityInfo(item.Location, item.Type, Name, Summary, date, date, 0);
             var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
-            var playlist = new GnosisPlaylist(identityInfo, SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, securityContext.CurrentUserInfo, thumbnailInfo);
+            var playlist = new Playlist(identityInfo, SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, securityContext.CurrentUserInfo, thumbnailInfo);
             var playlistItems = new List<IPlaylistItemViewModel> { ToPlaylistItem(securityContext, 1) };
             return new PlaylistViewModel(controller, playlist, playlistItems);
         }
@@ -141,7 +141,7 @@ namespace Gnosis.Alexandria.ViewModels
             var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
             var targetInfo = new TargetInfo(item.Target, item.TargetType);
             var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
-            var playlistItem = new GnosisPlaylistItem(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, securityContext.CurrentUserInfo, thumbnailInfo);
+            var playlistItem = new PlaylistItem(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, securityContext.CurrentUserInfo, thumbnailInfo);
             return new PlaylistItemViewModel(controller, playlistItem);
         }
     }

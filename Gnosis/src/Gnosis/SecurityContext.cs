@@ -11,7 +11,7 @@ namespace Gnosis
     public class SecurityContext
         : ISecurityContext
     {
-        private IUser currentUser = GnosisUser.Administrator;
+        private IUser currentUser = User.Administrator;
         private UserInfo currentUserInfo = UserInfo.Default;
 
         public IUser CurrentUser
