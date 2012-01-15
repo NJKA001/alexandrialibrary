@@ -372,6 +372,45 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\sphinx_circle.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\eye_of_horus_square.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\pyramid_circle.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\eye_of_horus_circle2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ouroboros.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ouroboros.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\lyre.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\pyramid_black.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\pyramid_black2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cat.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\vulture.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\owl.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\abacus.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

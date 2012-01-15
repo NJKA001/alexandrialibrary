@@ -21,7 +21,7 @@
                 <DataTemplate>
                     <Border Margin="4">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="{Binding Path=Icon, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="40" Width="40" ToolTip="{Binding Description}"/>
+                            <Image Source="{Binding Path=Icon, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="44" Width="44" ToolTip="{Binding Description}"/>
                             <TextBlock Text="{Binding Name}" ToolTip="{Binding Description}" Margin="4" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Border>
