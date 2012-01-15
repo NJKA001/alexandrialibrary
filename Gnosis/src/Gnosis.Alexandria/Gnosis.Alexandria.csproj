@@ -69,7 +69,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controllers\CatalogController.cs" />
+    <Compile Include="Controllers\CommandController.cs" />
     <Compile Include="Controllers\ICatalogController.cs" />
+    <Compile Include="Controllers\ICommandController.cs" />
     <Compile Include="Controllers\IMediaItemController.cs" />
     <Compile Include="Controllers\IPlaylistController.cs" />
     <Compile Include="Controllers\ISecurityController.cs" />
@@ -85,12 +87,14 @@
     <Compile Include="ViewModels\ArtistViewModel.cs" />
     <Compile Include="ViewModels\CatalogMediaTaskViewModel.cs" />
     <Compile Include="ViewModels\ClipViewModel.cs" />
+    <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\IAlbumContainerViewModel.cs" />
     <Compile Include="ViewModels\IAlbumViewModel.cs" />
     <Compile Include="ViewModels\IArtistContainerViewModel.cs" />
     <Compile Include="ViewModels\IArtistViewModel.cs" />
     <Compile Include="ViewModels\IClipContainerViewModel.cs" />
     <Compile Include="ViewModels\IClipViewModel.cs" />
+    <Compile Include="ViewModels\ICommandViewModel.cs" />
     <Compile Include="ViewModels\IFeedContainerViewModel.cs" />
     <Compile Include="ViewModels\IFeedItemContainerViewModel.cs" />
     <Compile Include="ViewModels\IFeedItemViewModel.cs" />
@@ -123,6 +127,9 @@
     <Compile Include="ViewModels\TrackViewModel.cs" />
     <Compile Include="Views\CatalogResultView.xaml.cs">
       <DependentUpon>CatalogResultView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CommandView.xaml.cs">
+      <DependentUpon>CommandView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FullScreenBehavior.cs" />
     <Compile Include="Views\HoveringCloseIcon.xaml.cs">
@@ -172,6 +179,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CatalogResultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CommandView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -344,7 +355,13 @@
   <ItemGroup>
     <Resource Include="Images\pyramid.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\abacus.png" />
+    <Resource Include="Images\ankh.jpg" />
+    <Resource Include="Images\ankh.png" />
+    <Resource Include="Images\eye_of_horus_circle.jpg" />
+    <Resource Include="Images\scarab.gif" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="data\version.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

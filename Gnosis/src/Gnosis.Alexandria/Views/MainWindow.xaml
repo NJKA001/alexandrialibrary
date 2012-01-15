@@ -9,9 +9,16 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <local:SearchView x:Name="searchView" Grid.Row="0"/>
-        <local:TaskResultView x:Name="taskResultView" Grid.Row="1"/>
-        <Expander Grid.Row="2" ExpandDirection="Up" IsExpanded="True" Header="Tasks">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--<Expander Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" ExpandDirection="Left" IsExpanded="True" Header="Commands">-->
+            <local:CommandView x:Name="commandView" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"/>
+        <!--</Expander>-->
+        <local:SearchView x:Name="searchView" Grid.Row="0" Grid.Column="1"/>
+        <local:TaskResultView x:Name="taskResultView" Grid.Row="1" Grid.Column="1"/>
+        <Expander Grid.Row="2" Grid.Column="1" ExpandDirection="Up" IsExpanded="True" Header="Tasks">
             <local:TaskManagerView x:Name="taskManagerView" Height="248"/>
         </Expander>
     </Grid>
