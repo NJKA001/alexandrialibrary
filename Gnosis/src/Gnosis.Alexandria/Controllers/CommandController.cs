@@ -18,19 +18,19 @@ namespace Gnosis.Alexandria.Controllers
 
             this.logger = logger;
 
-            commands.Add(new CommandViewModel("Search", "Search your catalogs and the internet for media", "pack://application:,,,/Images/sphinx_circle.jpg"));
+            commands.Add(new CommandViewModel("Search", "Search your catalogs and the internet for media", "pack://application:,,,/Images/sphinx_circle.png"));
             commands.Add(new CommandViewModel("Catalogs", "Locate, identify, store and synchronize your media", "pack://application:,,,/Images/pyramid_black2.jpg"));
-            commands.Add(new CommandViewModel("Artists", "The individuals and groups who create and contribute to media", "pack://application:,,,/Images/eye_of_horus_square.jpg"));
-            commands.Add(new CommandViewModel("Albums", "Collections of media that artists have named and released", "pack://application:,,,/Images/ankh.jpg"));
+            commands.Add(new CommandViewModel("Artists", "The individuals and groups who create and contribute to media", "pack://application:,,,/Images/crown.png"));
+            commands.Add(new CommandViewModel("Albums", "Collections of media that artists have named and released", "pack://application:,,,/Images/scarab.gif"));
             commands.Add(new CommandViewModel("Tracks", "Music, spoken word, sounds and other audio media", "pack://application:,,,/Images/lyre.jpg"));
-            commands.Add(new CommandViewModel("Clips", "Movies, TV shows, music videos and other video media", "pack://application:,,,/Images/owl.gif"));
-            commands.Add(new CommandViewModel("Docs", "Web Pages, Books, Letters and other document media", "pack://application:,,,/Images/ouroboros.jpg"));
-            commands.Add(new CommandViewModel("Pics", "Photographs, paintings, drawings and other image media", "pack://application:,,,/Images/scarab.gif"));
+            commands.Add(new CommandViewModel("Clips", "Movies, TV shows, music videos and other video media", "pack://application:,,,/Images/eye_of_horus_square.jpg"));
+            commands.Add(new CommandViewModel("Docs", "Web Pages, Books, Letters and other document media", "pack://application:,,,/Images/scroll.gif"));
+            commands.Add(new CommandViewModel("Pics", "Photographs, paintings, drawings and other image media", "pack://application:,,,/Images/tablet.gif"));
             commands.Add(new CommandViewModel("Apps", "Applications, utlities, games and other executable media", "pack://application:,,,/Images/abacus.gif"));
-            commands.Add(new CommandViewModel("Feeds", "RSS, Atom and other syndicated feed media", "pack://application:,,,/Images/feed.png"));
-            commands.Add(new CommandViewModel("Playlists", "User defined collections of media", "pack://application:,,,/Images/blank_scroll.png"));
+            commands.Add(new CommandViewModel("Feeds", "RSS, Atom and other syndicated feed media", "pack://application:,,,/Images/ouroboros.jpg"));
+            commands.Add(new CommandViewModel("Playlists", "User defined collections of media", "pack://application:,,,/Images/hawk.gif"));
             commands.Add(new CommandViewModel("Users", "User profiles and accounts", "pack://application:,,,/Images/cat.jpg"));
-            commands.Add(new CommandViewModel("Settings", "Configure system settings", "pack://application:,,,/Images/Gear-01.png"));
+            commands.Add(new CommandViewModel("Settings", "Configure system settings", "pack://application:,,,/Images/ankh.png"));
         }
 
         private readonly ILogger logger;

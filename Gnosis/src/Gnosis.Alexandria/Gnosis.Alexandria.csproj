@@ -411,6 +411,21 @@
   <ItemGroup>
     <Resource Include="Images\abacus.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\scroll.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\crown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\hawk.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\tablet.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\sphinx_circle.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
