@@ -109,7 +109,7 @@ namespace Gnosis.Alexandria.Controllers
                 throw new ArgumentNullException("search");
 
             var pattern = search + "%";
-            var task = new MediaItemSearchTask(logger, pattern, artistRepository, albumRepository, trackRepository, clipRepository);
+            var task = new SearchTask(logger, pattern, artistRepository, albumRepository, trackRepository, clipRepository);
             return new SearchTaskViewModel(logger, task, search);
         }
 

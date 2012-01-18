@@ -4,9 +4,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Alexandria.Controllers;
+using Gnosis.Alexandria.Views;
+
 namespace Gnosis.Alexandria.ViewModels
 {
-    public class CommandViewModel
+    public abstract class CommandViewModel
         : ICommandViewModel
     {
         public CommandViewModel(string name, string description, object icon)
@@ -21,6 +24,8 @@ namespace Gnosis.Alexandria.ViewModels
         private object icon;
 
         private bool isSelected;
+
+        protected abstract void DoExecute(ITaskController taskController, TaskResultView taskResultView);
 
         public string Name
         {
@@ -45,6 +50,16 @@ namespace Gnosis.Alexandria.ViewModels
                 isSelected = value;
                 OnPropertyChanged("IsSelected");
             }
+        }
+
+        public void Execute(ITaskController taskController, TaskResultView taskResultView)
+        {
+            if (taskController == null)
+                throw new ArgumentNullException("taskController");
+            if (taskResultView == null)
+                throw new ArgumentNullException("taskResultView");
+
+            DoExecute(taskController, taskResultView);
         }
 
         #region INotifyPropertyChanged Members

@@ -104,13 +104,12 @@ namespace Gnosis.Alexandria.Views
                 mediaItemController = new MediaItemController(logger, linkRepository, tagRepository, albumRepository, artistRepository, clipRepository, docRepository, feedRepository, feedItemRepository, picRepository, playlistRepository, playlistItemRepository, programRepository, trackRepository);
                 taskController = new TaskController(logger, videoPlayer, spiderFactory, mediaItemController, artistRepository, albumRepository, trackRepository, clipRepository);
                 tagController = new TagController(logger, tagRepository);
-
                 commandController = new CommandController(logger);
-                commandView.Initialize(logger, commandController);
 
                 taskResultView.Initialize(logger, securityContext, mediaItemController, taskController, tagController, videoPlayer);
                 taskManagerView.Initialize(logger, taskController, taskResultView);
                 searchView.Initialize(logger, taskController, taskResultView);
+                commandView.Initialize(logger, commandController, taskController, taskResultView);
 
                 ScreenSaver.Disable();
             }

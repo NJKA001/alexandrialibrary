@@ -10,13 +10,19 @@ namespace Gnosis.Alexandria.ViewModels
     public class SearchTaskViewModel
         : TaskViewModel<IMediaItem>
     {
-        public SearchTaskViewModel(ILogger logger, MediaItemSearchTask task, string search)
+        public SearchTaskViewModel(ILogger logger, ISearchTask task, string search)
             : base(logger, task, "Search", search, "pack://application:,,,/Images/sphinx_circle.png")
         {
             searchTask = task;
         }
 
-        private readonly MediaItemSearchTask searchTask;
+        private readonly ISearchTask searchTask;
+
+        public SearchFilters Filters
+        {
+            get { return searchTask.Filters; }
+            set { searchTask.Filters = value; }
+        }
 
         public void SetPattern(string pattern)
         {

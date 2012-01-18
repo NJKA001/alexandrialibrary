@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using Gnosis.Alexandria.Controllers;
+using Gnosis.Alexandria.ViewModels;
 
 namespace Gnosis.Alexandria.Views
 {
@@ -28,16 +29,44 @@ namespace Gnosis.Alexandria.Views
 
         private ILogger logger;
         private ICommandController commandController;
+        private ITaskController taskController;
+        private TaskResultView taskResultView;
 
-        public void Initialize(ILogger logger, ICommandController commandController)
+        private void commandItem_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                var item = sender as ListBoxItem;
+                if (item == null)
+                    return;
+
+                var viewModel = item.DataContext as ICommandViewModel;
+                if (viewModel == null)
+                    return;
+
+                viewModel.Execute(taskController, taskResultView);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  commandItem_MouseDoubleClick", ex);
+            }
+        }
+
+        public void Initialize(ILogger logger, ICommandController commandController, ITaskController taskController, TaskResultView taskResultView)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
             if (commandController == null)
                 throw new ArgumentNullException("commandController");
+            if (taskController == null)
+                throw new ArgumentNullException("taskController");
+            if (taskResultView == null)
+                throw new ArgumentNullException("taskResultView");
 
             this.logger = logger;
             this.commandController = commandController;
+            this.taskController = taskController;
+            this.taskResultView = taskResultView;
 
             try
             {

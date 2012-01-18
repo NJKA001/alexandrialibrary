@@ -12,11 +12,16 @@
                 <ResourceDictionary Source="../Styles/Icons.xaml"/>
                 <ResourceDictionary Source="../Styles/ProgressBarStyles.xaml"/>
                 <ResourceDictionary Source="../Styles/TaskStyles.xaml"/>
+                <ResourceDictionary>
+                    <Style x:Key="commandItemStyle" TargetType="{x:Type ListBoxItem}">
+                        <EventSetter Event="MouseDoubleClick" Handler="commandItem_MouseDoubleClick"/>
+                    </Style>
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <ListBox x:Name="commandItemContainer" Margin="4">
+        <ListBox x:Name="commandItemContainer" Margin="4" ItemContainerStyle="{StaticResource commandItemStyle}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border Margin="4">

@@ -290,7 +290,9 @@
     <Compile Include="IAlgorithm.cs" />
     <Compile Include="ILink.cs" />
     <Compile Include="Tasks\CatalogMediaTask.cs" />
-    <Compile Include="Tasks\MediaItemSearchTask.cs" />
+    <Compile Include="Tasks\ISearchTask.cs" />
+    <Compile Include="Tasks\SearchFilters.cs" />
+    <Compile Include="Tasks\SearchTask.cs" />
     <Compile Include="Tasks\PlaylistTask.cs" />
     <Compile Include="Tasks\TagSearchTask.cs" />
     <Compile Include="Text\PlainText.cs" />
