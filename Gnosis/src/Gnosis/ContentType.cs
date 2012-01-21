@@ -78,9 +78,9 @@ namespace Gnosis
 
         private static ICharacterSet GetCharacterSet(Stream stream, IMediaType mediaType, ICharacterSet charSet)
         {
-            if (mediaType != MediaType.ApplicationUnknown && !mediaType.SubType.Contains("xml"))
+            if (mediaType != MediaType.ApplicationUnknown && !mediaType.Subtype.Contains("xml"))
             {
-                if (mediaType.Type == MediaType.TypeText && charSet == null)
+                if (mediaType.Supertype == MediaSupertype.Text && charSet == null)
                 {
                     using (var reader = new StreamReader(stream, true))
                     {
@@ -103,7 +103,7 @@ namespace Gnosis
             var newCharSet = charSet;
 
             //System.Diagnostics.Debug.WriteLine("GetXmlExtendedType. mediaType=" + mediaType);
-            if (mediaType.SubType.Contains("xml"))
+            if (mediaType.Subtype.Contains("xml"))
             {
                 try
                 {

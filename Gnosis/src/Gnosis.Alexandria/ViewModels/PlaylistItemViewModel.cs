@@ -41,9 +41,9 @@ namespace Gnosis.Alexandria.ViewModels
                     return "pack://application:,,,/Images/File Audio MP3-01.png";
                 else if (type == MediaType.VideoAvi.ToString())
                     return "pack://application:,,,/Images/File Video AVI-01.png";
-                else if (item.TargetType.Type == MediaType.TypeAudio)
+                else if (item.TargetType.Supertype == MediaSupertype.Audio)
                     return "pack://application:,,,/Images/File Audio-01.png";
-                else if (item.TargetType.Type == MediaType.TypeVideo)
+                else if (item.TargetType.Supertype == MediaSupertype.Video)
                     return "pack://application:,,,/Images/File Video-01.png";
 
                 return "pack://application:,,,/Images/File Audio-01.png";

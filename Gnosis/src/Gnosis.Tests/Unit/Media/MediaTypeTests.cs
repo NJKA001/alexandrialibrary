@@ -21,7 +21,7 @@ namespace Gnosis.Tests.Unit.Media
                 list.Add(mediaType);
 
                 Assert.AreEqual(mediaType, MediaType.Parse(mediaType.ToString()));
-                Assert.AreEqual(mediaType, MediaType.Parse(mediaType.Type + "/" + mediaType.SubType));
+                Assert.AreEqual(mediaType, MediaType.Parse(mediaType.Supertype.ToString().ToLower() + "/" + mediaType.Subtype));
 
             }
         }
@@ -41,11 +41,11 @@ namespace Gnosis.Tests.Unit.Media
         }
 
         [Test]
-        public void CanBeReadBySuperType()
+        public void CanBeReadBySupertype()
         {
             foreach (var mediaType in MediaType.GetMediaTypes())
             {
-                var byTypeList = MediaType.GetMediaTypesByType(mediaType.Type);
+                var byTypeList = MediaType.GetMediaTypesBySupertype(mediaType.Supertype);
                 Assert.IsNotNull(byTypeList);
                 Assert.IsTrue(byTypeList.Contains(mediaType));
             }

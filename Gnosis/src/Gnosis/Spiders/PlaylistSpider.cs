@@ -72,21 +72,21 @@ namespace Gnosis.Spiders
             if (media == null)
                 throw new ArgumentNullException("media");
 
-            switch (media.Type.Type)
+            switch (media.Type.Supertype)
             {
-                case MediaType.TypeApplication:
+                case MediaSupertype.Application:
                     applicationRunner.Load(media as IApplication);
                     break;
-                case MediaType.TypeAudio:
+                case MediaSupertype.Audio:
                     //audioPlayer.Load(media as IAudio);
                     break;
-                case MediaType.TypeImage:
+                case MediaSupertype.Image:
                     imageViewer.Load(media as IImage);
                     break;
-                case MediaType.TypeText:
+                case MediaSupertype.Text:
                     textViewer.Load(media as IText);
                     break;
-                case MediaType.TypeVideo:
+                case MediaSupertype.Video:
                     //videoPlayer.Load(media as IVideo);
                     break;
                 default:

@@ -23,23 +23,23 @@ namespace Gnosis.Audio
         {
         }
 
-        private Uri GetJpgToUrl(string name)
-        {
-            if (name == null)
-                throw new ArgumentNullException("name");
+        //private Uri GetJpgToUrl(string name)
+        //{
+        //    if (name == null)
+        //        throw new ArgumentNullException("name");
 
-            var escaped = name.RemoveNonAlphaNumerics().Replace(" ", "_");
+        //    var escaped = name.RemoveNonAlphaNumerics().Replace(" ", "_");
 
-            try
-            {
-                return new Uri(string.Format("http://{0}.jpg.to", escaped), UriKind.Absolute);
-            }
-            catch (Exception ex)
-            {
-                var m = ex.Message;
-                return Guid.Empty.ToUrn();
-            }
-        }
+        //    try
+        //    {
+        //        return new Uri(string.Format("http://{0}.jpg.to", escaped), UriKind.Absolute);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        var m = ex.Message;
+        //        return Guid.Empty.ToUrn();
+        //    }
+        //}
 
         public override void Load()
         {
@@ -122,7 +122,7 @@ namespace Gnosis.Audio
             if (artist != null)
                 return artist;
 
-            var thumbnail = GetJpgToUrl(artistName);
+            //var thumbnail = GetJpgToUrl(artistName);
 
             var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisTrack, artistName, summary, DateTime.MinValue, DateTime.MaxValue, 0);
             return new Artist(identityInfo, SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, securityContext.CurrentUserInfo, ThumbnailInfo.Default);
@@ -150,10 +150,10 @@ namespace Gnosis.Audio
                     return album;
             }
 
-            var thumbnail = GetJpgToUrl(albumTitle);
+            //var thumbnail = GetJpgToUrl(albumTitle);
             var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisAlbum, albumTitle, summary, DateTime.MinValue, DateTime.MaxValue, 0);
             var creatorInfo = new CreatorInfo(artist.Location, artist.Name);
-            var thumbnailInfo = new ThumbnailInfo(thumbnail, new byte[0]);
+            var thumbnailInfo = ThumbnailInfo.Default; //new ThumbnailInfo(thumbnail, new byte[0]);
             return new Album(identityInfo, SizeInfo.Default, creatorInfo, CatalogInfo.Default, TargetInfo.Default, securityContext.CurrentUserInfo, thumbnailInfo);
         }
 

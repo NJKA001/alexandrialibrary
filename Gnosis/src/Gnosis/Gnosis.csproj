@@ -87,6 +87,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMediaMarquee.cs" />
+    <Compile Include="MediaCategory.cs" />
+    <Compile Include="MediaSupertype.cs" />
     <Compile Include="Metadata\Album.cs" />
     <Compile Include="Algorithms\Algorithm.cs" />
     <Compile Include="Application\Pdf\IPdfDocument.cs" />

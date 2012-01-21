@@ -41,14 +41,13 @@ namespace Gnosis.Tests.Network
             Assert.AreEqual(generatorName, feed.Generator.GeneratorName);
             Assert.AreEqual(generatorUri, feed.Generator.Uri.ToString());
 
-            Assert.IsTrue(feed.Entries.Count() > 0);
-            Assert.IsTrue(feed.Entries.First().Categories.Count() > 0);
+            var entryCount = feed.Entries.Count();
+            Assert.IsTrue(entryCount > 0);
             Assert.IsNotNull(feed.Entries.First().Content);
             Assert.AreEqual(entry1ContentLang, feed.Entries.First().Content.Lang);
             Assert.AreEqual(entry1ContentBase, feed.Entries.First().Content.BaseId.ToString());
             Assert.AreEqual(entry1ContentType, feed.Entries.First().Content.Type);
             Assert.IsTrue(feed.Links.Count() > 0);
-            //Assert.IsTrue(feed.Extensions.Count() > 0);
         }
 
         [Test]
