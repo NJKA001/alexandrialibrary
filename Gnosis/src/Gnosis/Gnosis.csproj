@@ -88,6 +88,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IMediaMarquee.cs" />
+    <Compile Include="IMediaMarqueePage.cs" />
+    <Compile Include="IMediaMarqueeRepository.cs" />
     <Compile Include="MediaCategory.cs" />
     <Compile Include="MediaSupertype.cs" />
     <Compile Include="Metadata\Album.cs" />
@@ -100,6 +102,8 @@
     <Compile Include="Metadata\FeedItem.cs" />
     <Compile Include="Application\Vendor\GnosisFilesystemDirectory.cs" />
     <Compile Include="Metadata\MediaItemBase.cs" />
+    <Compile Include="Metadata\MediaMarquee.cs" />
+    <Compile Include="Metadata\MediaMarqueePage.cs" />
     <Compile Include="Metadata\Pic.cs" />
     <Compile Include="Metadata\Playlist.cs" />
     <Compile Include="Metadata\PlaylistItem.cs" />

@@ -28,8 +28,6 @@ namespace Gnosis
 
         private MediaType(MediaSupertype supertype, string subtype, IEnumerable<string> fileExtensions, IEnumerable<string> legacyTypes, IEnumerable<byte[]> magicNumbers)
         {
-            if (supertype == null)
-                throw new ArgumentNullException("supertype");
             if (subtype == null)
                 throw new ArgumentNullException("subtype");
             if (fileExtensions == null)
