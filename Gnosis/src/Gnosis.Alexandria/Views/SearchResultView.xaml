@@ -64,10 +64,10 @@
                         <Expander Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Header="Details">
                             <Grid x:Name="itemGrid">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="224"/>
+                                    <RowDefinition Height="234"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="224"/>
+                                    <ColumnDefinition Width="234"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="16"/>
                                 </Grid.ColumnDefinitions>

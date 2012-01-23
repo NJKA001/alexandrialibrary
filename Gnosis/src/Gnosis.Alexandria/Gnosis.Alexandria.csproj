@@ -84,6 +84,7 @@
     <Compile Include="Converters\RectConverter.cs" />
     <Compile Include="Controllers\ITaskController.cs" />
     <Compile Include="ViewModels\AlbumViewModel.cs" />
+    <Compile Include="ViewModels\BrowseTaskViewModel.cs" />
     <Compile Include="ViewModels\ArtistViewModel.cs" />
     <Compile Include="ViewModels\CatalogMediaTaskViewModel.cs" />
     <Compile Include="ViewModels\ClipViewModel.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="ViewModels\IFeedItemViewModel.cs" />
     <Compile Include="ViewModels\IFeedViewModel.cs" />
     <Compile Include="ViewModels\ILinkViewModel.cs" />
+    <Compile Include="ViewModels\IMediaMarqueeViewModel.cs" />
     <Compile Include="ViewModels\IPlayableViewModel.cs" />
     <Compile Include="ViewModels\IPlaylistContainerViewModel.cs" />
     <Compile Include="ViewModels\IPlaylistItemContainerViewModel.cs" />
@@ -116,6 +118,7 @@
     <Compile Include="ViewModels\ITrackViewModel.cs" />
     <Compile Include="ViewModels\LinkViewModel.cs" />
     <Compile Include="ViewModels\MediaItemViewModel.cs" />
+    <Compile Include="ViewModels\MediaMarqueeViewModel.cs" />
     <Compile Include="ViewModels\PlaylistItemViewModel.cs" />
     <Compile Include="ViewModels\PlaylistTaskViewModel.cs" />
     <Compile Include="ViewModels\PlaylistViewModel.cs" />
@@ -138,6 +141,9 @@
       <DependentUpon>HoveringCloseIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ListBoxBehavior.cs" />
+    <Compile Include="Views\MediaMarqueeView.xaml.cs">
+      <DependentUpon>MediaMarqueeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlaylistView.xaml.cs">
       <DependentUpon>PlaylistView.xaml</DependentUpon>
     </Compile>
@@ -210,6 +216,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\MediaMarqueeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PlaylistView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
