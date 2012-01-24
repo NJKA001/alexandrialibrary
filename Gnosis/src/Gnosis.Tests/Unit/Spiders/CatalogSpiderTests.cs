@@ -24,13 +24,19 @@ namespace Gnosis.Tests.Unit.Spiders
     {
         public CatalogSpiderTests()
         {
+            logger = new DebugLogger();
+            mediaTypeFactory = new MediaTypeFactory(logger);
+            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+            securityContext = new SecurityContext(mediaTypeFactory);
         }
 
         private const string connectionString = "Data Source=:memory:;Version=3;";
 
         private IConnectionFactory connectionFactory = new SQLiteConnectionFactory();
-        private ILogger logger = new DebugLogger();
-        private ISecurityContext securityContext = new SecurityContext();
+        private ILogger logger;
+        private IMediaTypeFactory mediaTypeFactory;
+        private IContentTypeFactory contentTypeFactory;
+        private ISecurityContext securityContext;
         private ITagRepository tagRepository;
         private ILinkRepository linkRepository;
         private IMediaRepository mediaRepository;
@@ -39,7 +45,7 @@ namespace Gnosis.Tests.Unit.Spiders
         private IMediaItemRepository<ITrack> trackRepository;
         private IMediaItemRepository<IClip> clipRepository;
         private IAudioStreamFactory audioStreamFactory;
-        private IMediaFactory mediaFactory = new MediaFactory();
+        //private IMediaFactory mediaFactory = new MediaFactory();
         private ITagTypeFactory tagTypeFactory = new TagTypeFactory();
         private IDbConnection linkConnection;
         private IDbConnection tagConnection;
@@ -65,32 +71,32 @@ namespace Gnosis.Tests.Unit.Spiders
 
             mediaConnection = connectionFactory.Create(connectionString);
             mediaConnection.Open();
-            mediaRepository = new SQLiteMediaRepository(logger, mediaConnection);
+            mediaRepository = new SQLiteMediaRepository(logger, mediaTypeFactory, mediaConnection);
             mediaRepository.Initialize();
 
             artistConnection = connectionFactory.Create(connectionString);
             artistConnection.Open();
-            artistRepository = new SQLiteArtistRepository(logger, artistConnection);
+            artistRepository = new SQLiteArtistRepository(logger, mediaTypeFactory, artistConnection);
             artistRepository.Initialize();
 
             albumConnection = connectionFactory.Create(connectionString);
             albumConnection.Open();
-            albumRepository = new SQLiteAlbumRepository(logger, albumConnection);
+            albumRepository = new SQLiteAlbumRepository(logger, mediaTypeFactory, albumConnection);
             albumRepository.Initialize();
 
             trackConnection = connectionFactory.Create(connectionString);
             trackConnection.Open();
-            trackRepository = new SQLiteTrackRepository(logger, trackConnection);
+            trackRepository = new SQLiteTrackRepository(logger, mediaTypeFactory, trackConnection);
             trackRepository.Initialize();
 
             clipConnection = connectionFactory.Create(connectionString);
             clipConnection.Open();
-            clipRepository = new SQLiteClipRepository(logger, clipConnection);
+            clipRepository = new SQLiteClipRepository(logger, mediaTypeFactory, clipConnection);
             clipRepository.Initialize();
 
             audioStreamFactory = new AudioStreamFactory();
 
-            spider = new CatalogSpider(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository, clipRepository, audioStreamFactory);
+            spider = new CatalogSpider(logger, securityContext, contentTypeFactory, mediaTypeFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository, clipRepository, audioStreamFactory);
         }
 
         [TestFixtureTearDown]

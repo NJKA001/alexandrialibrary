@@ -12,13 +12,13 @@ namespace Gnosis.Data.SQLite
     public class SQLiteProgramRepository
         : SQLiteMediaItemRepositoryBase<IProgram>
     {
-        public SQLiteProgramRepository(ILogger logger)
-            : this(logger, null)
+        public SQLiteProgramRepository(ILogger logger, IMediaTypeFactory mediaTypeFactory)
+            : this(logger, mediaTypeFactory, null)
         {
         }
 
-        public SQLiteProgramRepository(ILogger logger, IDbConnection defaultConnection)
-            : base(logger, "Program", defaultConnection)
+        public SQLiteProgramRepository(ILogger logger, IMediaTypeFactory mediaTypeFactory, IDbConnection defaultConnection)
+            : base(logger, mediaTypeFactory, "Program", defaultConnection)
         {
         }
 

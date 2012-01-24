@@ -10,18 +10,29 @@ namespace Gnosis.Tests.Unit.Media
     [TestFixture]
     public class MediaTypeItems
     {
+        public MediaTypeItems()
+        {
+            logger = new Gnosis.Utilities.DebugLogger();
+            mediaTypeFactory = new MediaTypeFactory(logger);
+            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+        }
+
+        private ILogger logger;
+        private IMediaTypeFactory mediaTypeFactory;
+        private IContentTypeFactory contentTypeFactory;
+
         [Test]
         public void CanBeReadByName()
         {
             var list = new List<IMediaType>();
 
-            foreach (var mediaType in MediaType.GetMediaTypes())
+            foreach (var mediaType in mediaTypeFactory.GetAll())
             {
                 Assert.IsNotNull(mediaType);
                 list.Add(mediaType);
 
-                Assert.AreEqual(mediaType, MediaType.Parse(mediaType.ToString()));
-                Assert.AreEqual(mediaType, MediaType.Parse(mediaType.Supertype.ToString().ToLower() + "/" + mediaType.Subtype));
+                Assert.AreEqual(mediaType, mediaTypeFactory.GetByCode(mediaType.ToString()));
+                Assert.AreEqual(mediaType, mediaTypeFactory.GetByCode(mediaType.Supertype.ToString().ToLower() + "/" + mediaType.Subtype));
 
             }
         }

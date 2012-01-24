@@ -39,6 +39,7 @@ namespace Gnosis.Alexandria.Views
 
         private ILogger logger;
         private ISecurityContext securityContext;
+        private IMediaTypeFactory mediaTypeFactory;
         private IMediaItemController mediaItemController;
         private ITaskController taskController;
         private ITagController tagController;
@@ -257,7 +258,7 @@ namespace Gnosis.Alexandria.Views
                 if (viewModel == null)
                     return;
 
-                var playlist = viewModel.ToPlaylist(securityContext);
+                var playlist = viewModel.ToPlaylist(securityContext, mediaTypeFactory);
                 if (playlist == null)
                     return;
 
@@ -299,14 +300,14 @@ namespace Gnosis.Alexandria.Views
                 }
 
                 var date = DateTime.Now.ToUniversalTime();
-                var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisPlaylist, clipViewModel.Name, summary, date, date, 1);
-                var sizeInfo = new SizeInfo(clipViewModel.Duration, 0, 0);
-                var creatorInfo = CreatorInfo.Default;
-                var catalogInfo = CatalogInfo.Default;
-                var targetInfo = TargetInfo.Default;
-                var thumbnailInfo = new ThumbnailInfo(thumbnail, thumbnailData);
-                var playlist = new Playlist(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, securityContext.CurrentUserInfo, thumbnailInfo);
-                var playlistViewModel = new PlaylistViewModel(mediaItemController, playlist, new List<IPlaylistItemViewModel> { clipViewModel.ToPlaylistItem(securityContext, 1) });
+
+                var builder = new MediaItemBuilder<IPlaylist>(securityContext, mediaTypeFactory)
+                    .Identity(clipViewModel.Name, summary, date, date, 1)
+                    .Size(clipViewModel.Duration)
+                    .Thumbnail(thumbnail, thumbnailData);
+
+                var playlist = builder.ToMediaItem();
+                var playlistViewModel = new PlaylistViewModel(mediaItemController, playlist, new List<IPlaylistItemViewModel> { clipViewModel.ToPlaylistItem(securityContext, mediaTypeFactory, 1) });
 
                 var taskViewModel = taskController.GetPlaylistViewModel(playlistViewModel);
                 taskResultView.Playlist(taskViewModel, playlistViewModel);
@@ -342,7 +343,7 @@ namespace Gnosis.Alexandria.Views
                     }
                 }
 
-                var playlist = album.ToPlaylist(securityContext);
+                var playlist = album.ToPlaylist(securityContext, mediaTypeFactory);
 
                 var taskViewModel = taskController.GetPlaylistViewModel(playlist);
                 taskResultView.Playlist(taskViewModel, playlist);
@@ -578,12 +579,14 @@ namespace Gnosis.Alexandria.Views
             get { return results; }
         }
 
-        public void Initialize(ILogger logger, ISecurityContext securityContext, IMediaItemController mediaItemController, ITaskController taskController, ITagController tagController, TaskResultView taskResultView)
+        public void Initialize(ILogger logger, ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemController mediaItemController, ITaskController taskController, ITagController tagController, TaskResultView taskResultView)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
             if (securityContext == null)
                 throw new ArgumentNullException("securityContext");
+            if (mediaTypeFactory == null)
+                throw new ArgumentNullException("mediaTypeFactory");
             if (mediaItemController == null)
                 throw new ArgumentNullException("mediaItemController");
             if (taskController == null)
@@ -595,6 +598,7 @@ namespace Gnosis.Alexandria.Views
 
             this.logger = logger;
             this.securityContext = securityContext;
+            this.mediaTypeFactory = mediaTypeFactory;
             this.mediaItemController = mediaItemController;
             this.taskController = taskController;
             this.tagController = tagController;

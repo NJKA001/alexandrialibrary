@@ -20,9 +20,19 @@ namespace Gnosis.Tests.Unit.Data.SQLite
     {
         public SavedArtists()
         {
+            logger = new DebugLogger();
+            mediaTypeFactory = new MediaTypeFactory(logger);
+            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+            mediaType = mediaTypeFactory.GetByCode("application/vnd.gnosis.artist");
+
+            artist1 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Radiohead", string.Empty, new DateTime(1985, 1, 2), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(mediaTypeFactory), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image.jpg"), new byte[0]));
+            artist2 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Tool", string.Empty, new DateTime(1991, 2, 28), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(mediaTypeFactory), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image2.jpg"), new byte[0]));
+            artist3 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Cat Power", string.Empty, new DateTime(1997, 10, 15), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(mediaTypeFactory), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image3.jpg"), new byte[0]));
+            artist4 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "PJ Harvey", string.Empty, new DateTime(2011, 11, 11), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(mediaTypeFactory), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image4.jpg"), new byte[0]));
+
             connection = connectionFactory.Create(connectionString);
             connection.Open();
-            repository = new SQLiteArtistRepository(logger, connection);
+            repository = new SQLiteArtistRepository(logger, mediaTypeFactory, connection);
             repository.Initialize();
             repository.Save(new List<IArtist> { artist1, artist2 });
         }
@@ -31,13 +41,17 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         private readonly IConnectionFactory connectionFactory = new SQLiteConnectionFactory();
 
         protected readonly ILogger logger = new DebugLogger();
+        protected readonly IMediaTypeFactory mediaTypeFactory;
+        protected readonly IContentTypeFactory contentTypeFactory;
         protected readonly IDbConnection connection;
         protected readonly IMediaItemRepository<IArtist> repository;
+        protected readonly IMediaType mediaType;
+        protected readonly Uri unknownLocation = Guid.Empty.ToUrn();
 
-        private IArtist artist1 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisArtist, "Radiohead", string.Empty, new DateTime(1985, 1, 2), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image.jpg"), new byte[0]));
-        private IArtist artist2 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisArtist, "Tool", string.Empty, new DateTime(1991, 2, 28), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image2.jpg"), new byte[0]));
-        private IArtist artist3 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisArtist, "Cat Power", string.Empty, new DateTime(1997, 10, 15), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image3.jpg"), new byte[0]));
-        private IArtist artist4 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisArtist, "PJ Harvey", string.Empty, new DateTime(2011, 11, 11), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image4.jpg"), new byte[0]));
+        private IArtist artist1;
+        private IArtist artist2;
+        private IArtist artist3;
+        private IArtist artist4;
 
         [TestFixtureSetUp]
         public void Setup()
@@ -53,10 +67,10 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void DefaultArtistCannotBeDeleted()
         {
-            repository.Delete(new List<Uri> { Artist.Unknown.Location });
-            var check = repository.GetByLocation(Artist.Unknown.Location);
+            repository.Delete(new List<Uri> { unknownLocation });
+            var check = repository.GetByLocation(unknownLocation);
             Assert.IsNotNull(check);
-            Assert.AreEqual(check, Artist.Unknown);
+            Assert.AreEqual(check.Name, "Unknown");
         }
 
         [Test]

@@ -12,13 +12,13 @@ namespace Gnosis.Data.SQLite
     public class SQLiteTrackRepository
         : SQLiteMediaItemRepositoryBase<ITrack>
     {
-        public SQLiteTrackRepository(ILogger logger)
-            : this(logger, null)
+        public SQLiteTrackRepository(ILogger logger, IMediaTypeFactory mediaTypeFactory)
+            : this(logger, mediaTypeFactory, null)
         {
         }
 
-        public SQLiteTrackRepository(ILogger logger, IDbConnection defaultConnection)
-            : base(logger, "Track", defaultConnection)
+        public SQLiteTrackRepository(ILogger logger, IMediaTypeFactory mediaTypeFactory, IDbConnection defaultConnection)
+            : base(logger, mediaTypeFactory, "Track", defaultConnection)
         {
         }
 

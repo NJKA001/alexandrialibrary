@@ -10,7 +10,16 @@ namespace Gnosis.Tests.Unit.Media
     [TestFixture]
     public class MediaFactories
     {
-        private readonly IMediaFactory factory = new MediaFactory();
+        public MediaFactories()
+        {
+            logger = new Gnosis.Utilities.DebugLogger();
+            mediaTypeFactory = new MediaTypeFactory(logger);
+            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+        }
+
+        private readonly ILogger logger;
+        private readonly IMediaTypeFactory mediaTypeFactory;
+        private readonly IContentTypeFactory contentTypeFactory;
 
         const string pathBearAtom = @".\Files\bearbrarian.xml";
         const string pathArsRss = @".\Files\arstechnica.xml";
@@ -20,88 +29,97 @@ namespace Gnosis.Tests.Unit.Media
         const string pathJpg = @".\Files\Undertow.jpg";
         const string pathPng = @".\Files\radiohead.png";
 
+        private IMedia CreateMedia(Uri location)
+        {
+            var type = mediaTypeFactory.GetByLocation(location, contentTypeFactory);
+
+            return type != null ?
+                type.CreateMedia(location)
+                : null;
+        }
+
         [Test]
         public void CanCreateApplicationAtomMedia()
         {
             var url = new Uri(new System.IO.FileInfo(pathBearAtom).FullName);
-            var doc = factory.Create(url);
+            var doc = CreateMedia(url);
             Assert.IsNotNull(doc);
             Assert.IsNotNull(doc.Location);
             Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual(MediaType.ApplicationAtomXml, doc.Type);
+            Assert.AreEqual("application/atom+xml", doc.Type.ToString());
         }
 
         [Test]
         public void CanCreateApplicationRssMedia()
         {
             var url = new Uri(new System.IO.FileInfo(pathArsRss).FullName);
-            var doc = factory.Create(url);
+            var doc = CreateMedia(url);
             Assert.IsNotNull(doc);
             Assert.IsNotNull(doc.Location);
             Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual(MediaType.ApplicationRssXml, doc.Type);
+            Assert.AreEqual("application/rss+xml", doc.Type.ToString());
         }
 
         [Test]
         public void CanCreateTextXhtmlMedia()
         {
             var url = new Uri(new System.IO.FileInfo(pathArsHtml).FullName);
-            var doc = factory.Create(url);
+            var doc = CreateMedia(url);
             Assert.IsNotNull(doc);
             Assert.IsNotNull(doc.Location);
             Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual(MediaType.TextHtml, doc.Type);
+            Assert.AreEqual("text/html", doc.Type.ToString());
         }
 
         [Test]
         public void CanCreateApplicationRdfAtomMedia()
         {
             var url = new Uri(new System.IO.FileInfo(pathPostroadRdf).FullName);
-            var doc = factory.Create(url);
+            var doc = CreateMedia(url);
             Assert.IsNotNull(doc);
             Assert.IsNotNull(doc.Location);
             Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual(MediaType.ApplicationAtomXml, doc.Type);
+            Assert.AreEqual("application/atom+xml", doc.Type.ToString());
         }
 
         [Test]
         public void CanCreateImageGifMedia()
         {
             var url = new Uri(new System.IO.FileInfo(pathGif).FullName);
-            var doc = factory.Create(url);
+            var doc = CreateMedia(url);
             Assert.IsNotNull(doc);
             Assert.IsNotNull(doc.Location);
             Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual(MediaType.ImageGif, doc.Type);
+            Assert.AreEqual("image/gif", doc.Type.ToString());
         }
 
         [Test]
         public void CanCreateImageJpgMedia()
         {
             var url = new Uri(new System.IO.FileInfo(pathJpg).FullName);
-            var doc = factory.Create(url);
+            var doc = CreateMedia(url);
             Assert.IsNotNull(doc);
             Assert.IsNotNull(doc.Location);
             Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual(MediaType.ImageJpeg, doc.Type);
+            Assert.AreEqual("image/jpeg", doc.Type.ToString());
         }
 
         [Test]
         public void CanCreateImagePngMedia()
         {
             var url = new Uri(new System.IO.FileInfo(pathPng).FullName);
-            var doc = factory.Create(url);
+            var doc = CreateMedia(url);
             Assert.IsNotNull(doc);
             Assert.IsNotNull(doc.Location);
             Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual(MediaType.ImagePng, doc.Type);
+            Assert.AreEqual("image/png", doc.Type.ToString());
         }
     }
 }

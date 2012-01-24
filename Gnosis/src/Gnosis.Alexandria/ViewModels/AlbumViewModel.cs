@@ -71,27 +71,32 @@ namespace Gnosis.Alexandria.ViewModels
             return string.Format("Album: {0}. IsSelected={1}", Name, IsSelected);
         }
 
-        public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext)
+        public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory)
         {
             if (securityContext == null)
                 throw new ArgumentNullException("securityContext");
+            if (mediaTypeFactory == null)
+                throw new ArgumentNullException("mediaTypeFactory");
 
             var date = DateTime.Now.ToUniversalTime();
-            var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisPlaylist, Name, Summary, date, date, 0);
-            var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
-            var playlist = new Playlist(identityInfo, SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, securityContext.CurrentUserInfo, thumbnailInfo);
+
+            var builder = new MediaItemBuilder<IPlaylist>(securityContext, mediaTypeFactory)
+            .Identity(Name, Summary, date, date, 0)
+            .Thumbnail(item.Thumbnail, item.ThumbnailData);
+
+            var playlist = builder.ToMediaItem();
             var playlistItems = new List<IPlaylistItemViewModel>();
             uint number = 0;
             foreach (var track in tracks)
             {
                 number++;
-                var playlistItem = track.ToPlaylistItem(securityContext, number);
+                var playlistItem = track.ToPlaylistItem(securityContext, mediaTypeFactory, number);
                 playlistItems.Add(playlistItem);
             }
             foreach (var clip in clips)
             {
                 number++;
-                var playlistItem = clip.ToPlaylistItem(securityContext, number);
+                var playlistItem = clip.ToPlaylistItem(securityContext, mediaTypeFactory, number);
                 playlistItems.Add(playlistItem);
             }
 

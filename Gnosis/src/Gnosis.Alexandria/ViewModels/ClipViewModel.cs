@@ -60,8 +60,8 @@ namespace Gnosis.Alexandria.ViewModels
 
                 var type = TargetType.ToString();
 
-                if (type == MediaType.AudioMpeg.ToString())
-                    return "pack://application:,,,/Images/File Audio MP3-01.png";
+                //if (type == MediaType.AudioMpeg.ToString())
+                //    return "pack://application:,,,/Images/File Audio MP3-01.png";
 
                 return "pack://application:,,,/Images/File Audio-01.png";
             }
@@ -136,25 +136,30 @@ namespace Gnosis.Alexandria.ViewModels
             OnPropertyChanged("PlaybackIcon");
         }
 
-        public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext)
+        public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory)
         {
             var date = DateTime.Now.ToUniversalTime();
-            var identityInfo = new IdentityInfo(item.Location, item.Type, Name, Summary, date, date, 0);
-            var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
-            var playlist = new Playlist(identityInfo, SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, securityContext.CurrentUserInfo, thumbnailInfo);
-            var playlistItems = new List<IPlaylistItemViewModel> { ToPlaylistItem(securityContext, 1) };
+
+            var builder = new MediaItemBuilder<IPlaylist>(securityContext, mediaTypeFactory)
+                .Identity(Name, Summary, date, date, 0, item.Location)
+                .Thumbnail(item.Thumbnail, item.ThumbnailData);
+
+            var playlist = builder.ToMediaItem();
+            var playlistItems = new List<IPlaylistItemViewModel> { ToPlaylistItem(securityContext, mediaTypeFactory, 1) };
             return new PlaylistViewModel(controller, playlist, playlistItems);
         }
 
-        public IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext, uint number)
+        public IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, uint number)
         {
-            var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisPlaylistItem, Name, Summary, item.FromDate, item.ToDate, number);
-            var sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
-            var creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
-            var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
-            var targetInfo = new TargetInfo(item.Target, item.TargetType);
-            var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
-            var playlistItem = new PlaylistItem(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, securityContext.CurrentUserInfo, thumbnailInfo);
+            var builder = new MediaItemBuilder<IPlaylistItem>(securityContext, mediaTypeFactory)
+                .Identity(Name, Summary, item.FromDate, item.ToDate, number)
+                .Size(item.Duration, item.Height, item.Width)
+                .Creator(item.Creator, item.CreatorName)
+                .Catalog(item.Catalog, item.CatalogName)
+                .Target(item.Target, item.TargetType)
+                .Thumbnail(item.Thumbnail, item.ThumbnailData);
+
+            var playlistItem = builder.ToMediaItem();
             return new PlaylistItemViewModel(controller, playlistItem);
         }
     }

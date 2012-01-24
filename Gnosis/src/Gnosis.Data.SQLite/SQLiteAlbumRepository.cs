@@ -12,13 +12,13 @@ namespace Gnosis.Data.SQLite
     public class SQLiteAlbumRepository
         : SQLiteMediaItemRepositoryBase<IAlbum>
     {
-        public SQLiteAlbumRepository(ILogger logger)
-            : this(logger, null)
+        public SQLiteAlbumRepository(ILogger logger, IMediaTypeFactory mediaTypeFactory)
+            : this(logger, mediaTypeFactory, null)
         {
         }
 
-        public SQLiteAlbumRepository(ILogger logger, IDbConnection defaultConnection)
-            : base(logger, "Album", defaultConnection)
+        public SQLiteAlbumRepository(ILogger logger, IMediaTypeFactory mediaTypeFactory, IDbConnection defaultConnection)
+            : base(logger, mediaTypeFactory, "Album", defaultConnection)
         {
         }
 

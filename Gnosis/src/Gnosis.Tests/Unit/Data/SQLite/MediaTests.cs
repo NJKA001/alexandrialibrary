@@ -15,16 +15,21 @@ namespace Gnosis.Tests.Unit.Data.SQLite
     {
         protected MediaTestBase()
         {
+            logger = new DebugLogger();
+            mediaTypeFactory = new MediaTypeFactory(logger);
+            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+
             connection = new SQLiteConnectionFactory().Create("Data Source=:memory:;Version=3;");
             connection.Open();
-            repository = new SQLiteMediaRepository(logger, connection);
+            repository = new SQLiteMediaRepository(logger, mediaTypeFactory, connection);
             repository.Initialize();
         }
 
         private readonly IDbConnection connection;
-        protected readonly ILogger logger = new DebugLogger();
+        protected readonly ILogger logger;
         protected readonly IMediaRepository repository;
-        protected readonly IMediaFactory factory = new MediaFactory();
+        protected readonly IMediaTypeFactory mediaTypeFactory;
+        protected readonly IContentTypeFactory contentTypeFactory;
 
         #region Test Values
 
@@ -34,6 +39,13 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected readonly Uri uri4 = new Uri(@"C:\Users\dpoage\Pictures\icon.gif");
 
         #endregion
+
+        protected IMedia CreateMedia(Uri location)
+        {
+            var type = mediaTypeFactory.GetByLocation(location, contentTypeFactory);
+
+            return type != null ? type.CreateMedia(location) : null;
+        }
 
         protected void Cleanup()
         {
@@ -59,9 +71,9 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void CanBeRead()
         {
-            var media1 = factory.Create(uri1, MediaType.TextHtml);
-            var media2 = factory.Create(uri2, MediaType.AudioMpeg);
-            var media3 = factory.Create(uri3, MediaType.ImageJpeg);
+            var media1 = CreateMedia(uri1);
+            var media2 = CreateMedia(uri2);
+            var media3 = CreateMedia(uri3);
 
             repository.Save(new List<IMedia> { media1, media2, media3 });
 
@@ -77,9 +89,9 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void CanBeDeleted()
         {
-            var media1 = factory.Create(uri1, MediaType.TextHtml);
-            var media2 = factory.Create(uri2, MediaType.AudioMpeg);
-            var media3 = factory.Create(uri3, MediaType.ImageJpeg);
+            var media1 = CreateMedia(uri1);
+            var media2 = CreateMedia(uri2);
+            var media3 = CreateMedia(uri3);
 
             repository.Save(new List<IMedia> { media1, media2, media3 });
 

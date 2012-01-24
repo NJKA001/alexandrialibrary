@@ -20,9 +20,20 @@ namespace Gnosis.Tests.Unit.Data.SQLite
     {
         public SavedTracks()
         {
+            mediaTypeFactory = new MediaTypeFactory(logger);
+            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+            mediaType = mediaTypeFactory.GetByCode("application/vnd.gnosis.track");
+            mpegAudioType = mediaTypeFactory.GetByCode("audio/mp3");
+
+            track1 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Paranoid Android", string.Empty, DateTime.MinValue, DateTime.MaxValue, 2), new SizeInfo(TimeSpan.FromSeconds(220), 0, 0), new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), new CatalogInfo(new Uri(okComputerUrn), "OK Computer"), new TargetInfo(new Uri("file:///audio/radiohead/paranoid_android.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image1.jpg"), new byte[0]));
+            track2 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Sober", string.Empty, DateTime.MinValue, DateTime.MaxValue, 4), new SizeInfo(TimeSpan.FromSeconds(306), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "Tool"), new CatalogInfo(Guid.NewGuid().ToUrn(), "Undertow"), new TargetInfo(new Uri("file:///audio/tool/sober.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image2.jpg"), new byte[0]));
+            track3 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Maybe Not", string.Empty, DateTime.MinValue, DateTime.MaxValue, 7), new SizeInfo(TimeSpan.FromSeconds(189), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "Cat Power"), new CatalogInfo(Guid.NewGuid().ToUrn(), "Free"), new TargetInfo(new Uri("file:///audio/cat_power/maybe_not.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image3.jpg"), new byte[0]));
+            track4 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Silence", string.Empty, DateTime.MinValue, DateTime.MaxValue, 5), new SizeInfo(TimeSpan.FromSeconds(423), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "PJ Harvey"), new CatalogInfo(Guid.NewGuid().ToUrn(), "White Chalk"), new TargetInfo(new Uri("file:///audio/pj_harvey/paranoid_android.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("http://other.org/blah.png"), new byte[0]));
+            track5 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Airbag", string.Empty, DateTime.MinValue, DateTime.MaxValue, 1), new SizeInfo(TimeSpan.FromSeconds(291), 0, 0), new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), new CatalogInfo(new Uri(okComputerUrn), "OK Computer"), new TargetInfo(new Uri("file:///audio/radiohead/airbag.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("file:///some-stuff/blah/ph.jpg"), new byte[0]));
+
             connection = connectionFactory.Create(connectionString);
             connection.Open();
-            repository = new SQLiteTrackRepository(logger, connection);
+            repository = new SQLiteTrackRepository(logger, mediaTypeFactory, connection);
             repository.Initialize();
             repository.Save(new List<ITrack> { track1, track2, track5 });
         }
@@ -31,16 +42,21 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         private readonly IConnectionFactory connectionFactory = new SQLiteConnectionFactory();
 
         protected readonly ILogger logger = new DebugLogger();
+        protected readonly IMediaTypeFactory mediaTypeFactory;
+        protected readonly IContentTypeFactory contentTypeFactory;
         protected readonly IDbConnection connection;
         protected readonly IMediaItemRepository<ITrack> repository;
+        protected readonly IMediaType mediaType;
+        protected readonly IMediaType mpegAudioType;
+        protected readonly Uri unknownLocation = Guid.Empty.ToUrn();
 
         private const string radioheadUrn = "urn:uuid:27A19456-E6E9-463F-951D-98BB44356C65";
         private const string okComputerUrn = "urn:uuid:FA6A7FD0-74A3-4D83-A363-13733C04BB85";
-        private ITrack track1 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisTrack, "Paranoid Android", string.Empty, DateTime.MinValue, DateTime.MaxValue, 2), new SizeInfo(TimeSpan.FromSeconds(220), 0, 0), new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), new CatalogInfo(new Uri(okComputerUrn), "OK Computer"), new TargetInfo(new Uri("file:///audio/radiohead/paranoid_android.mp3"), MediaType.AudioMpeg), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image1.jpg"), new byte[0]));
-        private ITrack track2 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisTrack, "Sober", string.Empty, DateTime.MinValue, DateTime.MaxValue, 4), new SizeInfo(TimeSpan.FromSeconds(306), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "Tool"), new CatalogInfo(Guid.NewGuid().ToUrn(), "Undertow"), new TargetInfo(new Uri("file:///audio/tool/sober.mp3"), MediaType.AudioMpeg), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image2.jpg"), new byte[0]));
-        private ITrack track3 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisTrack, "Maybe Not", string.Empty, DateTime.MinValue, DateTime.MaxValue, 7), new SizeInfo(TimeSpan.FromSeconds(189), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "Cat Power"), new CatalogInfo(Guid.NewGuid().ToUrn(), "Free"), new TargetInfo(new Uri("file:///audio/cat_power/maybe_not.mp3"), MediaType.AudioMpeg), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image3.jpg"), new byte[0]));
-        private ITrack track4 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisTrack, "Silence", string.Empty, DateTime.MinValue, DateTime.MaxValue, 5), new SizeInfo(TimeSpan.FromSeconds(423), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "PJ Harvey"), new CatalogInfo(Guid.NewGuid().ToUrn(), "White Chalk"), new TargetInfo(new Uri("file:///audio/pj_harvey/paranoid_android.mp3"), MediaType.AudioMpeg), UserInfo.Default, new ThumbnailInfo(new Uri("http://other.org/blah.png"), new byte[0]));
-        private ITrack track5 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisTrack, "Airbag", string.Empty, DateTime.MinValue, DateTime.MaxValue, 1), new SizeInfo(TimeSpan.FromSeconds(291), 0, 0), new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), new CatalogInfo(new Uri(okComputerUrn), "OK Computer"), new TargetInfo(new Uri("file:///audio/radiohead/airbag.mp3"), MediaType.AudioMpeg), UserInfo.Default, new ThumbnailInfo(new Uri("file:///some-stuff/blah/ph.jpg"), new byte[0]));
+        private ITrack track1;
+        private ITrack track2;
+        private ITrack track3;
+        private ITrack track4;
+        private ITrack track5;
 
         [TestFixtureSetUp]
         public void Setup()
@@ -56,10 +72,10 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void DefaultTrackCannotBeDeleted()
         {
-            repository.Delete(new List<Uri> { Track.Unknown.Location });
-            var check = repository.GetByLocation(Track.Unknown.Location);
+            repository.Delete(new List<Uri> { unknownLocation });
+            var check = repository.GetByLocation(unknownLocation);
             Assert.IsNotNull(check);
-            Assert.AreEqual(check, Track.Unknown);
+            Assert.AreEqual(check.Name, "Unknown");
         }
 
         [Test]

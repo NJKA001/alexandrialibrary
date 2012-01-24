@@ -12,13 +12,13 @@ namespace Gnosis.Data.SQLite
     public class SQLitePlaylistRepository
         : SQLiteMediaItemRepositoryBase<IPlaylist>
     {
-        public SQLitePlaylistRepository(ILogger logger)
-            : this(logger, null)
+        public SQLitePlaylistRepository(ILogger logger, IMediaTypeFactory mediaTypeFactory)
+            : this(logger, mediaTypeFactory, null)
         {
         }
 
-        public SQLitePlaylistRepository(ILogger logger, IDbConnection defaultConnection)
-            : base(logger, "Playlist", defaultConnection)
+        public SQLitePlaylistRepository(ILogger logger, IMediaTypeFactory mediaTypeFactory, IDbConnection defaultConnection)
+            : base(logger, mediaTypeFactory, "Playlist", defaultConnection)
         {
         }
 

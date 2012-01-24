@@ -15,6 +15,17 @@ namespace Gnosis.Tests.Unit.Application.Xml
     [TestFixture]
     public class XspfDocuments
     {
+        public XspfDocuments()
+        {
+            logger = new Gnosis.Utilities.DebugLogger();
+            mediaTypeFactory = new MediaTypeFactory(logger);
+            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+        }
+
+        private ILogger logger;
+        private IMediaTypeFactory mediaTypeFactory;
+        private IContentTypeFactory contentTypeFactory;
+
         [Test]
         public void CanBeParsedFromLocalXspfFile()
         {
@@ -27,8 +38,8 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var contentType = ContentType.GetContentType(location);
-            Assert.AreEqual(MediaType.ApplicationXspfXml, contentType.Type);
+            var contentType = contentTypeFactory.GetByLocation(location);
+            Assert.AreEqual("application/xspf+xml", contentType.Type.ToString());
 
             var document = mediaFactory.Create(location, contentType.Type) as IXmlDocument;
             Assert.IsNotNull(document);
