@@ -61,6 +61,8 @@ namespace Gnosis.Tests.Unit.Data.SQLite
 
         #region Test Values
 
+        protected const string albumThumbnailType = "application/vnd.gnosis.album.thumbnail";
+
         protected readonly Uri source1 = new Uri("http://example.com/sources/1");
         protected readonly Uri source2 = new Uri("http://example.com/sources/2");
         protected readonly Uri source3 = new Uri("http://example.com/sources/3");
@@ -94,15 +96,15 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected readonly Uri target15 = new Uri("http://example.com/targets/15");
 
         protected readonly string type1 = string.Empty;
-        protected readonly string type2 = MediaType.ApplicationGnosisAlbumThumbnail.ToString();
+        protected readonly string type2 = albumThumbnailType;
         protected readonly string type3 = string.Empty;
-        protected readonly string type4 = MediaType.ApplicationGnosisAlbumThumbnail.ToString();
-        protected readonly string type5 = MediaType.ApplicationGnosisAlbumThumbnail.ToString();
-        protected readonly string type6 = MediaType.ApplicationGnosisAlbumThumbnail.ToString();
-        protected readonly string type7 = MediaType.ApplicationGnosisAlbumThumbnail.ToString();
-        protected readonly string type8 = MediaType.ApplicationGnosisAlbumThumbnail.ToString();
+        protected readonly string type4 = albumThumbnailType;
+        protected readonly string type5 = albumThumbnailType;
+        protected readonly string type6 = albumThumbnailType;
+        protected readonly string type7 = albumThumbnailType;
+        protected readonly string type8 = albumThumbnailType;
         protected readonly string type9 = string.Empty;
-        protected readonly string type10 = MediaType.ApplicationGnosisAlbumThumbnail.ToString();
+        protected readonly string type10 = albumThumbnailType;
         protected readonly string type11 = "alternate";
         protected readonly string type12 = "NoFollow";
         protected readonly string type13 = "chapter";

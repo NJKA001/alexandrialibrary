@@ -76,22 +76,22 @@ namespace Gnosis.Tests.Unit.Spiders
 
             artistConnection = connectionFactory.Create(connectionString);
             artistConnection.Open();
-            artistRepository = new SQLiteArtistRepository(logger, mediaTypeFactory, artistConnection);
+            artistRepository = new SQLiteArtistRepository(logger, securityContext, mediaTypeFactory, artistConnection);
             artistRepository.Initialize();
 
             albumConnection = connectionFactory.Create(connectionString);
             albumConnection.Open();
-            albumRepository = new SQLiteAlbumRepository(logger, mediaTypeFactory, albumConnection);
+            albumRepository = new SQLiteAlbumRepository(logger, securityContext, mediaTypeFactory, albumConnection);
             albumRepository.Initialize();
 
             trackConnection = connectionFactory.Create(connectionString);
             trackConnection.Open();
-            trackRepository = new SQLiteTrackRepository(logger, mediaTypeFactory, trackConnection);
+            trackRepository = new SQLiteTrackRepository(logger, securityContext, mediaTypeFactory, trackConnection);
             trackRepository.Initialize();
 
             clipConnection = connectionFactory.Create(connectionString);
             clipConnection.Open();
-            clipRepository = new SQLiteClipRepository(logger, mediaTypeFactory, clipConnection);
+            clipRepository = new SQLiteClipRepository(logger, securityContext, mediaTypeFactory, clipConnection);
             clipRepository.Initialize();
 
             audioStreamFactory = new AudioStreamFactory();
@@ -116,10 +116,17 @@ namespace Gnosis.Tests.Unit.Spiders
             const string path = @".\Files";
             const int timeoutSeconds = 60;
             const int mediaCount = 39;
+            const int fileCount = 28;
 
             var directory = new DirectoryInfo(path);
             Assert.IsTrue(directory.Exists);
+            System.Diagnostics.Debug.WriteLine("CanCrawl() directory path=" + directory.FullName);
 
+            var fileTally = 0;
+            foreach (var file in System.IO.Directory.GetFiles(path))
+                fileTally++;
+
+            Assert.AreEqual(fileCount, fileTally);
 
             var target = new Uri(directory.FullName);
             Assert.IsTrue(target.IsFile);

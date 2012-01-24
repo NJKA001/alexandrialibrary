@@ -55,7 +55,7 @@ namespace Gnosis.Application.Xml
 
         #endregion
 
-        public static IStyleSheet Parse(INode parent, string target, string content, IMediaTypeFactory mediaTypeFactory)
+        public static IStyleSheet ParseStyleSheet(INode parent, string target, string content, IMediaTypeFactory mediaTypeFactory)
         {
             if (mediaTypeFactory == null)
                 throw new ArgumentNullException("mediaTypeFactory");

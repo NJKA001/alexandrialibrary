@@ -12,24 +12,28 @@ namespace Gnosis.Data.SQLite
         : SQLiteRepositoryBase, IMediaItemRepository<T>
         where T : class, IMediaItem
     {
-        protected SQLiteMediaItemRepositoryBase(ILogger logger, IMediaTypeFactory mediaTypeFactory, string tableName)
-            : this(logger, mediaTypeFactory, tableName, null)
+        protected SQLiteMediaItemRepositoryBase(ILogger logger, ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, string tableName)
+            : this(logger, securityContext, mediaTypeFactory, tableName, null)
         {
         }
 
-        protected SQLiteMediaItemRepositoryBase(ILogger logger, IMediaTypeFactory mediaTypeFactory, string tableName, IDbConnection defaultConnection)
+        protected SQLiteMediaItemRepositoryBase(ILogger logger, ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, string tableName, IDbConnection defaultConnection)
             : base(logger, defaultConnection)
         {
+            if (securityContext == null)
+                throw new ArgumentNullException("securityContext");
             if (mediaTypeFactory == null)
                 throw new ArgumentNullException("mediaTypeFactory");
             if (tableName == null)
                 throw new ArgumentNullException("tableName");
 
+            this.securityContext = securityContext;
             this.mediaTypeFactory = mediaTypeFactory;
             this.tableName = tableName;
             this.defaultItem = GetDefaultItem();
         }
 
+        private readonly ISecurityContext securityContext;
         private readonly IMediaTypeFactory mediaTypeFactory;
         private readonly string tableName;
         private readonly T defaultItem;
@@ -59,9 +63,9 @@ namespace Gnosis.Data.SQLite
             return builder;
         }
 
-        protected virtual T GetDefaultItem()
+        protected T GetDefaultItem()
         {
-            return null;
+            return new MediaItemBuilder<T>(securityContext, mediaTypeFactory).GetDefault();
         }
 
         protected virtual ICommandBuilder GetDeleteBuilder(Uri location)

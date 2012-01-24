@@ -65,16 +65,18 @@ namespace Gnosis.Application.Xml
             return xml.ToString();
         }
 
-        public static IXmlElement Parse(Uri location)
+        public static IXmlElement Parse(Uri location, IMediaTypeFactory mediaTypeFactory)
         {
             var xml = location.ToContentString();
-            return Parse(xml);
+            return Parse(xml, mediaTypeFactory);
         }
 
-        public static IXmlElement Parse(string xml)
+        public static IXmlElement Parse(string xml, IMediaTypeFactory mediaTypeFactory)
         {
             if (xml == null)
                 throw new ArgumentNullException("xml");
+            if (mediaTypeFactory == null)
+                throw new ArgumentNullException("mediaTypeFactory");
 
             var xmlDoc = new System.Xml.XmlDocument();
             xmlDoc.LoadXml(xml);
@@ -96,7 +98,7 @@ namespace Gnosis.Application.Xml
                             doc.AddChild(documentType);
                         break;
                     case System.Xml.XmlNodeType.ProcessingInstruction:
-                        var processingInstruction = child.ToProcessingInstruction(doc);
+                        var processingInstruction = child.ToProcessingInstruction(doc, mediaTypeFactory);
                         if (processingInstruction != null)
                             doc.AddChild(processingInstruction);
                         break;

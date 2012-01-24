@@ -30,6 +30,12 @@ namespace Gnosis
             this.logger = logger;
             this.defaultMediaType = ApplicationUnknown;
 
+            ApplicationAtomXml = new MediaType(MediaSupertype.Application, "atom+xml", false, (uri, type) => new XmlDocument(uri, type, this),  new List<string> { ".atom", ".xml" });
+            ApplicationRssXml = new MediaType(MediaSupertype.Application, "rss+xml", false, (uri, type) => new XmlDocument(uri, type, this), new List<string> { ".rss", ".xml" });
+            ApplicationXspfXml = new MediaType(MediaSupertype.Application, "xspf+xml", false, (uri, type) => new XmlDocument(uri, type, this), new List<string> { ".xspf" });
+            ApplicationXml = new MediaType(MediaSupertype.Application, "xml", false, (uri, type) => new XmlDocument(uri, type, this), new List<string> { ".xml" }, new List<string> { "text/xml" });
+            TextXsl = new MediaType(MediaSupertype.Text, "xsl", false, (uri, type) => new XmlDocument(uri, type, this), new List<string> { ".xsl" });
+
             InitializeMediaTypes();
         }
 
@@ -45,12 +51,14 @@ namespace Gnosis
 
         #region Media Types
 
-        private readonly IMediaType ApplicationAtomXml = new MediaType(MediaSupertype.Application, "atom+xml", false, (uri, type) => new XmlDocument(uri, type),  new List<string> { ".atom", ".xml" });
+        private readonly IMediaType ApplicationAtomXml;
+        private readonly IMediaType ApplicationRssXml;
+        private readonly IMediaType ApplicationXspfXml;
+        private readonly IMediaType ApplicationXml;
+        private readonly IMediaType TextXsl;
+
         private readonly IMediaType ApplicationPdf = new MediaType(MediaSupertype.Application, "pdf", false, (uri, type) => new PdfDocument(uri, type), new List<string> { ".pdf" }, new List<string> { "application/x-pdf", "application/x-bzpdf", "application/x-gxpdf" }, new List<byte[]> { new byte[] { 0x25, 0x50, 0x44, 0x46 } });
-        private readonly IMediaType ApplicationRssXml = new MediaType(MediaSupertype.Application, "rss+xml", false, (uri, type) => new XmlDocument(uri, type), new List<string> { ".rss", ".xml" });
         private readonly IMediaType ApplicationXhtmlXml = new MediaType(MediaSupertype.Application, "xhtml+xml", false, (uri, type) => new XhtmlDocument(uri, type), new List<string> { ".xhtml" }, new List<string> { "text/html" });
-        private readonly IMediaType ApplicationXspfXml = new MediaType(MediaSupertype.Application, "xspf+xml", false, (uri, type) => new XmlDocument(uri, type), new List<string> { ".xspf" });
-        private readonly IMediaType ApplicationXml = new MediaType(MediaSupertype.Application, "xml", false, (uri, type) => new XmlDocument(uri, type), new List<string> { ".xml" }, new List<string> { "text/xml" });
         private readonly IMediaType ApplicationXmlDtd = new MediaType(MediaSupertype.Application, "xml-dtd", false, (uri, type) => new XmlDtdDocument(uri, type), new List<string> { ".dtd", ".ent" });
         private readonly IMediaType ApplicationUnknown = new MediaType(MediaSupertype.Application, "unknown", true, (uri, type) => new UnknownApplication(uri, type));
 
@@ -88,7 +96,6 @@ namespace Gnosis
         private readonly IMediaType TextCss = new MediaType(MediaSupertype.Text, "css", false, (uri, type) => new PlainText(uri, type), new List<string> { ".css" });
         private readonly IMediaType TextHtml = new MediaType(MediaSupertype.Text, "html", false, (uri, type) => new XhtmlDocument(uri, type), new List<string> { ".html", ".htm" }, new List<string> { "text/html" });
         private readonly IMediaType TextPlain = new MediaType(MediaSupertype.Text, "plain", false, (uri, type) => new PlainText(uri, type), new List<string> { ".txt", ".text", ".ini" });
-        private readonly IMediaType TextXsl = new MediaType(MediaSupertype.Text, "xsl", false, (uri, type) => new XmlDocument(uri, type), new List<string> { ".xsl" });
 
         private readonly IMediaType VideoAvi = new MediaType(MediaSupertype.Video, "avi", false, (uri, type) => new AviVideo(uri, type), new List<string> { ".avi" }, new List<string> { "video/x-msvideo", "video/msvideo" }, new List<byte[]> { new byte[] { 0x52, 0x49, 0x46, 0x46 } });
         private readonly IMediaType VideoMpeg = new MediaType(MediaSupertype.Video, "mpeg", false, (uri, type) => new MpegVideo(uri, type), new List<string> { ".mpeg", ".mpe", ".mpg", ".mpga" }, new List<string>(), new List<byte[]> { new byte[] { 0x00, 0x00, 0x01 } });

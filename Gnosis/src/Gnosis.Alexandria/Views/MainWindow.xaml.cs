@@ -60,37 +60,37 @@ namespace Gnosis.Alexandria.Views
                 tagRepository = new SQLiteTagRepository(logger, tagTypeFactory);
                 tagRepository.Initialize();
 
-                albumRepository = new SQLiteAlbumRepository(logger, mediaTypeFactory);
+                albumRepository = new SQLiteAlbumRepository(logger, securityContext, mediaTypeFactory);
                 albumRepository.Initialize();
 
-                artistRepository = new SQLiteArtistRepository(logger, mediaTypeFactory);
+                artistRepository = new SQLiteArtistRepository(logger, securityContext, mediaTypeFactory);
                 artistRepository.Initialize();
 
-                clipRepository = new SQLiteClipRepository(logger, mediaTypeFactory);
+                clipRepository = new SQLiteClipRepository(logger, securityContext, mediaTypeFactory);
                 clipRepository.Initialize();
 
-                docRepository = new SQLiteDocRepository(logger, mediaTypeFactory);
+                docRepository = new SQLiteDocRepository(logger, securityContext, mediaTypeFactory);
                 docRepository.Initialize();
 
-                feedRepository = new SQLiteFeedRepository(logger, mediaTypeFactory);
+                feedRepository = new SQLiteFeedRepository(logger, securityContext, mediaTypeFactory);
                 feedRepository.Initialize();
 
-                feedItemRepository = new SQLiteFeedItemRepository(logger, mediaTypeFactory);
+                feedItemRepository = new SQLiteFeedItemRepository(logger, securityContext, mediaTypeFactory);
                 feedItemRepository.Initialize();
 
-                picRepository = new SQLitePicRepository(logger, mediaTypeFactory);
+                picRepository = new SQLitePicRepository(logger, securityContext, mediaTypeFactory);
                 picRepository.Initialize();
 
-                playlistRepository = new SQLitePlaylistRepository(logger, mediaTypeFactory);
+                playlistRepository = new SQLitePlaylistRepository(logger, securityContext, mediaTypeFactory);
                 playlistRepository.Initialize();
 
-                playlistItemRepository = new SQLitePlaylistItemRepository(logger, mediaTypeFactory);
+                playlistItemRepository = new SQLitePlaylistItemRepository(logger, securityContext, mediaTypeFactory);
                 playlistItemRepository.Initialize();
 
-                programRepository = new SQLiteProgramRepository(logger, mediaTypeFactory);
+                programRepository = new SQLiteProgramRepository(logger, securityContext, mediaTypeFactory);
                 programRepository.Initialize();
 
-                trackRepository = new SQLiteTrackRepository(logger, mediaTypeFactory);
+                trackRepository = new SQLiteTrackRepository(logger, securityContext, mediaTypeFactory);
                 trackRepository.Initialize();
 
                 audioStreamFactory = new AudioStreamFactory();

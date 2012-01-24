@@ -12,24 +12,19 @@ namespace Gnosis.Data.SQLite
     public class SQLiteClipRepository
         : SQLiteMediaItemRepositoryBase<IClip>
     {
-        public SQLiteClipRepository(ILogger logger, IMediaTypeFactory mediaTypeFactory)
-            : this(logger, mediaTypeFactory, null)
+        public SQLiteClipRepository(ILogger logger, ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory)
+            : this(logger, securityContext, mediaTypeFactory, null)
         {
         }
 
-        public SQLiteClipRepository(ILogger logger, IMediaTypeFactory mediaTypeFactory, IDbConnection defaultConnection)
-            : base(logger, mediaTypeFactory, "Clip", defaultConnection)
+        public SQLiteClipRepository(ILogger logger, ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IDbConnection defaultConnection)
+            : base(logger, securityContext, mediaTypeFactory, "Clip", defaultConnection)
         {
         }
 
         protected override IClip GetItem(IdentityInfo identityInfo, SizeInfo sizeInfo, CreatorInfo creatorInfo, CatalogInfo catalogInfo, TargetInfo targetInfo, UserInfo userInfo, ThumbnailInfo thumbnailInfo)
         {
             return new Clip(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
-        }
-
-        protected override IClip GetDefaultItem()
-        {
-            return null;
         }
     }
 }

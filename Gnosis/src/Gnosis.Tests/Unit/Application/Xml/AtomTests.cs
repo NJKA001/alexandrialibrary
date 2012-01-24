@@ -16,6 +16,17 @@ namespace Gnosis.Tests.Unit.Application.Xml
     [TestFixture]
     public class AtomDocuments
     {
+        public AtomDocuments()
+        {
+            logger = new Gnosis.Utilities.DebugLogger();
+            mediaTypeFactory = new MediaTypeFactory(logger);
+            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+        }
+
+        private ILogger logger;
+        private IMediaTypeFactory mediaTypeFactory;
+        private IContentTypeFactory contentTypeFactory;
+
         private void MakeAtomFeedAssertions(IXmlElement document)
         {
             #region Constants
@@ -34,7 +45,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             const string iconUri = "http://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/PNG_transparency_demonstration_2.png/280px-PNG_transparency_demonstration_1.png";
             const string id = "tag:blogger.com,1999:blog-8677504";
             const string link1Rel = "http://schemas.google.com/g/2005#feed";
-            var link1Type = MediaType.ApplicationAtomXml;
+            var link1Type = "application/atom+xml";
             const string logoUri = "http://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/PNG_transparency_demonstration_2.png/280px-PNG_transparency_demonstration_2.png";
             var feedLang = LanguageTag.Parse("en-GB");
             const string rightsBaseId = "http://example.co.uk/license";
@@ -66,7 +77,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             const string entryId = "tag:blogger.com,1999:blog-8677504.post-112778942212704032";
             const string entryLink5Rel = "alternate";
             const string entryLink5Href = "http://bearbrarian.blogspot.com/2005/09/ways-down-road.html";
-            var entryLink5MediaType = MediaType.TextHtml;
+            var entryLink5MediaType = "text/html";
             const string entryLink5Title = "A ways down the road...";
             var entryLink5HrefLang = LanguageTag.Parse("en-US");
             var entryPublished = new DateTime(2005, 9, 27, 2, 31, 0); //2005-09-26T19:31:00.000-07:00
@@ -122,7 +133,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             Assert.AreEqual(4, feed.Links.Count());
             Assert.AreEqual(link1Rel, feed.Links.First().Rel);
-            Assert.AreEqual(link1Type, feed.Links.First().Type);
+            Assert.AreEqual(link1Type, feed.Links.First().GetMediaType(mediaTypeFactory).ToString());
 
             Assert.IsNotNull(feed.Logo);
             Assert.AreEqual(logoUri, feed.Logo.Uri.ToString());
@@ -175,7 +186,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.AreEqual(5, feed.Entries.First().Links.Count());
             Assert.AreEqual(entryLink5Href, feed.Entries.First().Links.Last().Href.ToString());
             Assert.AreEqual(entryLink5HrefLang, feed.Entries.First().Links.Last().HrefLang);
-            Assert.AreEqual(entryLink5MediaType, feed.Entries.First().Links.Last().Type);
+            Assert.AreEqual(entryLink5MediaType, feed.Entries.First().Links.Last().GetMediaType(mediaTypeFactory).ToString());
             Assert.AreEqual(entryLink5Title, feed.Entries.First().Links.Last().Title);
             Assert.AreEqual(entryLink5Rel, feed.Entries.First().Links.Last().Rel);
 
@@ -213,14 +224,14 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var contentType = ContentType.GetContentType(location);
-            Assert.AreEqual(MediaType.ApplicationAtomXml, contentType.Type);
+            var contentType = contentTypeFactory.GetByLocation(location);
+            Assert.AreEqual("application/atom+xml", contentType.Type.ToString());
 
-            var original = XmlElement.Parse(location);
+            var original = XmlElement.Parse(location, mediaTypeFactory);
             var xmlString = original.ToString();
             Assert.IsNotNull(xmlString);
 
-            var document = XmlElement.Parse(xmlString);
+            var document = XmlElement.Parse(xmlString, mediaTypeFactory);
             //var xml = new XmlDocument();
             //xml.LoadXml(xmlString);
             //IAtomFeed feed = null;
@@ -260,10 +271,10 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var contentType = ContentType.GetContentType(location);
-            Assert.AreEqual(MediaType.ApplicationAtomXml, contentType.Type);
+            var contentType = contentTypeFactory.GetByLocation(location);
+            Assert.AreEqual("application/atom+xml", contentType.Type.ToString());
 
-            var document = XmlElement.Parse(location);
+            var document = XmlElement.Parse(location, mediaTypeFactory);
 
             MakeAtomFeedAssertions(document);
         }

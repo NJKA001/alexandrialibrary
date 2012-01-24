@@ -14,6 +14,17 @@ namespace Gnosis.Tests.Unit.Application.Xml
     [TestFixture]
     public class XhtmlDocuments
     {
+        public XhtmlDocuments()
+        {
+            logger = new Gnosis.Utilities.DebugLogger();
+            mediaTypeFactory = new MediaTypeFactory(logger);
+            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+        }
+
+        private ILogger logger;
+        private IMediaTypeFactory mediaTypeFactory;
+        private IContentTypeFactory contentTypeFactory;
+
         private static void MakeDocumentAssertions(IXmlElement xhtml)
         {
             const string paragraphContent = "How stable will the West Antarctic Ice sheet be as";
@@ -74,7 +85,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             var location = new Uri(fileInfo.FullName);
 
-            var xml = XmlElement.Parse(location);
+            var xml = XmlElement.Parse(location, mediaTypeFactory);
             MakeDocumentAssertions(xml);
             //Assert.IsNotNull(xml);
             //Assert.IsNotNull(xml.DocumentType);

@@ -12,24 +12,19 @@ namespace Gnosis.Data.SQLite
     public class SQLiteAlbumRepository
         : SQLiteMediaItemRepositoryBase<IAlbum>
     {
-        public SQLiteAlbumRepository(ILogger logger, IMediaTypeFactory mediaTypeFactory)
-            : this(logger, mediaTypeFactory, null)
+        public SQLiteAlbumRepository(ILogger logger, ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory)
+            : this(logger, securityContext, mediaTypeFactory, null)
         {
         }
 
-        public SQLiteAlbumRepository(ILogger logger, IMediaTypeFactory mediaTypeFactory, IDbConnection defaultConnection)
-            : base(logger, mediaTypeFactory, "Album", defaultConnection)
+        public SQLiteAlbumRepository(ILogger logger, ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IDbConnection defaultConnection)
+            : base(logger, securityContext, mediaTypeFactory, "Album", defaultConnection)
         {
         }
 
         protected override IAlbum GetItem(IdentityInfo identityInfo, SizeInfo sizeInfo, CreatorInfo creatorInfo, CatalogInfo catalogInfo, TargetInfo targetInfo, UserInfo userInfo, ThumbnailInfo thumbnailInfo)
         {
             return new Album(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
-        }
-
-        protected override IAlbum GetDefaultItem()
-        {
-            return null;
         }
     }
 }

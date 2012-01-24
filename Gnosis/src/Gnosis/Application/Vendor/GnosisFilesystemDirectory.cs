@@ -53,8 +53,8 @@ namespace Gnosis.Application.Vendor
             foreach (var directory in info.GetDirectories())
                 links.Add(new Link(location, new Uri(directory.FullName), type.ToString(), directory.Name));
 
-            //foreach (var file in info.GetFiles())
-            //    links.Add(new Link(location, new Uri(file.FullName), MediaType.ApplicationGnosisFilesystemFile.ToString(), file.Name));
+            foreach (var file in info.GetFiles())
+                links.Add(new Link(location, new Uri(file.FullName), "application/vnd.gnosis.fs.file", file.Name));
 
             return links;
         }

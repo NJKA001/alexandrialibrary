@@ -285,7 +285,7 @@ namespace Gnosis.Application.Xml
             return new Declaration(parent, version, encoding, standalone);
         }
 
-        public static IProcessingInstruction ToProcessingInstruction(this XmlNode self, INode parent)
+        public static IProcessingInstruction ToProcessingInstruction(this XmlNode self, INode parent, IMediaTypeFactory mediaTypeFactory)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
@@ -296,7 +296,7 @@ namespace Gnosis.Application.Xml
             if (node == null || node.Target == null)
                 return null;
 
-            return ProcessingInstruction.Parse(parent, node.Target, node.InnerText);
+            return ProcessingInstruction.Parse(parent, node.Target, node.InnerText, mediaTypeFactory);
         }
 
         public static IComment ToComment(this XmlNode self, INode parent)

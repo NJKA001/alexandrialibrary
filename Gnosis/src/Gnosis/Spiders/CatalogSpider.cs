@@ -91,6 +91,11 @@ namespace Gnosis.Spiders
 
             var type = mediaTypeFactory.GetByLocation(location, contentTypeFactory);
 
+            if (type == null)
+                System.Diagnostics.Debug.WriteLine("  CatalogSpider.GetMedia: type is null for location=" + location.LocalPath);
+            else
+                System.Diagnostics.Debug.WriteLine("  CatalogSpider.GetMedia: location=" + location.LocalPath + " type=" + type.ToString());
+
             return type != null ?
                 type.CreateMedia(location)
                 : null;

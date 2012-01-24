@@ -22,6 +22,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         {
             logger = new DebugLogger();
             mediaTypeFactory = new MediaTypeFactory(logger);
+            securityContext = new SecurityContext(mediaTypeFactory);
             contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
             mediaType = mediaTypeFactory.GetByCode("application/vnd.gnosis.artist");
 
@@ -32,7 +33,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
 
             connection = connectionFactory.Create(connectionString);
             connection.Open();
-            repository = new SQLiteArtistRepository(logger, mediaTypeFactory, connection);
+            repository = new SQLiteArtistRepository(logger, securityContext, mediaTypeFactory, connection);
             repository.Initialize();
             repository.Save(new List<IArtist> { artist1, artist2 });
         }
@@ -42,6 +43,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
 
         protected readonly ILogger logger = new DebugLogger();
         protected readonly IMediaTypeFactory mediaTypeFactory;
+        protected readonly ISecurityContext securityContext;
         protected readonly IContentTypeFactory contentTypeFactory;
         protected readonly IDbConnection connection;
         protected readonly IMediaItemRepository<IArtist> repository;

@@ -14,6 +14,17 @@ namespace Gnosis.Tests.Network
     [TestFixture]
     public class RemoteRssTests
     {
+        public RemoteRssTests()
+        {
+            logger = new Gnosis.Utilities.DebugLogger();
+            mediaTypeFactory = new MediaTypeFactory(logger);
+            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+        }
+
+        private ILogger logger;
+        private IMediaTypeFactory mediaTypeFactory;
+        private IContentTypeFactory contentTypeFactory;
+
         [Test]
         public void CanBeCreatedFromRemoteCustomSource()
         {
@@ -22,7 +33,7 @@ namespace Gnosis.Tests.Network
 
             var location = new Uri("http://search.espn.go.com/rss/bill-simmons/");
 
-            var document = XmlElement.Parse(location);
+            var document = XmlElement.Parse(location, mediaTypeFactory);
             Assert.IsNotNull(document);
 
             var feed = document.Root as IRssFeed;
@@ -39,7 +50,7 @@ namespace Gnosis.Tests.Network
             const string generator = "http://wordpress.org/?v=";
 
             var location = new Uri("http://www.nerdist.com/category/podcast/feed/");
-            var document = XmlElement.Parse(location);
+            var document = XmlElement.Parse(location, mediaTypeFactory);
             Assert.IsNotNull(document);
 
             var feed = document.Root as IRssFeed;
@@ -56,7 +67,7 @@ namespace Gnosis.Tests.Network
 
             var location = new Uri("http://feeds.thisamericanlife.org/talpodcast");
 
-            var document = XmlElement.Parse(location);
+            var document = XmlElement.Parse(location, mediaTypeFactory);
             Assert.IsNotNull(document);
 
             var feed = document.Root as IRssFeed;

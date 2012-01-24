@@ -127,6 +127,9 @@ namespace Gnosis
 
                 if (location.IsFile)
                 {
+                    if (System.IO.Directory.Exists(location.LocalPath))
+                        return new ContentType(mediaTypeFactory.GetByCode("application/vnd.gnosis.fs.dir"));
+
                     if (!System.IO.File.Exists(location.LocalPath))
                         return Default;
 
