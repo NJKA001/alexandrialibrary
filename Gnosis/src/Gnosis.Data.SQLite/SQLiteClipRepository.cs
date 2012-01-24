@@ -29,7 +29,7 @@ namespace Gnosis.Data.SQLite
 
         protected override IClip GetDefaultItem()
         {
-            return Clip.Unknown;
+            return null;
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Gnosis.Data.SQLite
 
         protected override IAlbum GetDefaultItem()
         {
-            return Album.Unknown;
+            return null;
         }
     }
 }

@@ -12,7 +12,5 @@ namespace Gnosis.Metadata
             : base(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo)
         {
         }
-        
-        public static readonly IPlaylist Unknown = new Playlist(IdentityInfo.GetDefault(MediaType.ApplicationGnosisPlaylist), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, ThumbnailInfo.Default);
     }
 }

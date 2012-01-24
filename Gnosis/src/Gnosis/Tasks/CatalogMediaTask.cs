@@ -10,20 +10,24 @@ namespace Gnosis.Tasks
     public class CatalogMediaTask
         : TaskBase<IEnumerable<IMedia>>
     {
-        public CatalogMediaTask(ILogger logger, ISpider spider, Uri target, TimeSpan delay, int maxErrors)
+        public CatalogMediaTask(ILogger logger, IMediaTypeFactory mediaTypeFactory, ISpider spider, Uri target, TimeSpan delay, int maxErrors)
             : base(logger)
         {
+            if (mediaTypeFactory == null)
+                throw new ArgumentNullException("mediaTypeFactory");
             if (spider == null)
                 throw new ArgumentNullException("spider");
             if (target == null)
                 throw new ArgumentNullException("target");
 
+            this.mediaTypeFactory = mediaTypeFactory;
             this.spider = spider;
             this.target = target;
             this.delayMilliseconds = Convert.ToInt32(delay.TotalMilliseconds);
             this.maxErrors = maxErrors;
         }
 
+        private readonly IMediaTypeFactory mediaTypeFactory;
         private readonly ISpider spider;
         private readonly Uri target;
         private readonly int delayMilliseconds;
@@ -59,7 +63,7 @@ namespace Gnosis.Tasks
         private IMedia GetMedia(Uri location)
         {
             AddProgress("Media At: " + location.ToString());
-            UpdateItem(new TaskItem(location, (uint)progressCount, location.ToString().ElideString(10), TimeSpan.Zero, Guid.Empty.ToUrn(), MediaType.ApplicationUnknown, false, false, null));
+            UpdateItem(new TaskItem(location, (uint)progressCount, location.ToString().ElideString(10), TimeSpan.Zero, Guid.Empty.ToUrn(), mediaTypeFactory.Default, false, false, null));
             try
             {
                 var medium = spider.GetMedia(location);

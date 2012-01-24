@@ -18,14 +18,15 @@ namespace Gnosis.Application.Xml.Rss
             get { return GetAttributeUri("url"); }
         }
 
-        public IMediaType Type
-        {
-            get { return MediaType.Parse(GetAttributeString("type")); }
-        }
-
         public int Length
         {
             get { return GetAttributeInt32("length"); }
+        }
+
+        public IMediaType GetMediaType(IMediaTypeFactory mediaTypeFactory)
+        {                
+            var code = GetAttributeString("type");
+            return code != null ? mediaTypeFactory.GetByCode(code) : mediaTypeFactory.Default;
         }
     }
 }

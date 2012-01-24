@@ -87,11 +87,15 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContentTypeFactory.cs" />
+    <Compile Include="IContentTypeFactory.cs" />
     <Compile Include="IMediaMarquee.cs" />
     <Compile Include="IMediaMarqueePage.cs" />
     <Compile Include="IMediaMarqueeRepository.cs" />
+    <Compile Include="IMediaTypeFactory.cs" />
     <Compile Include="MediaCategory.cs" />
     <Compile Include="MediaSupertype.cs" />
+    <Compile Include="MediaTypeFactory.cs" />
     <Compile Include="Metadata\Album.cs" />
     <Compile Include="Algorithms\Algorithm.cs" />
     <Compile Include="Application\Pdf\IPdfDocument.cs" />
@@ -101,7 +105,9 @@
     <Compile Include="Metadata\Feed.cs" />
     <Compile Include="Metadata\FeedItem.cs" />
     <Compile Include="Application\Vendor\GnosisFilesystemDirectory.cs" />
+    <Compile Include="Metadata\IMediaItemBuilder.cs" />
     <Compile Include="Metadata\MediaItemBase.cs" />
+    <Compile Include="Metadata\MediaItemBuilder.cs" />
     <Compile Include="Metadata\MediaMarquee.cs" />
     <Compile Include="Metadata\MediaMarqueePage.cs" />
     <Compile Include="Metadata\Pic.cs" />
@@ -602,7 +608,9 @@
       <Name>Gnosis.Text.Html.HtmlAgility</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="MediaTypes\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

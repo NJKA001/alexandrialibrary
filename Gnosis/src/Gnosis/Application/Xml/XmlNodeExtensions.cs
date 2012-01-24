@@ -214,7 +214,7 @@ namespace Gnosis.Application.Xml
                 : null;
         }
 
-        public static IMediaType GetAttributeMediaType(this System.Xml.XmlNode self, string name)
+        public static IMediaType GetAttributeMediaType(this System.Xml.XmlNode self, string name, IMediaTypeFactory mediaTypeFactory)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
@@ -222,7 +222,7 @@ namespace Gnosis.Application.Xml
             var attrib = self.FindAttribute(name);
 
             return (attrib != null && attrib.Value != null) ?
-                MediaType.Parse(attrib.Value)
+                mediaTypeFactory.GetByCode(attrib.Value)
                 : null;
         }
 

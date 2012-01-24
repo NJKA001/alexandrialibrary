@@ -9,7 +9,8 @@ namespace Gnosis.Application.Xml.Rss
         : IRssElement
     {
         Uri Url { get; }
-        IMediaType Type { get; }
         int Length { get; }
+
+        IMediaType GetMediaType(IMediaTypeFactory mediaTypeFactory);
     }
 }

@@ -29,7 +29,7 @@ namespace Gnosis.Data.SQLite
 
         protected override IProgram GetDefaultItem()
         {
-            return Program.Unknown;
+            return null;
         }
     }
 }

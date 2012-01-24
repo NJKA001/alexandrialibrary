@@ -29,7 +29,7 @@ namespace Gnosis.Data.SQLite
 
         protected override IFeed GetDefaultItem()
         {
-            return Feed.Unknown;
+            return null;
         }
     }
 }

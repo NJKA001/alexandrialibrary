@@ -12,7 +12,5 @@ namespace Gnosis.Metadata
             : base(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo)
         {
         }
-        
-        public static readonly IFeed Unknown = new Feed(IdentityInfo.GetDefault(MediaType.ApplicationGnosisFeed), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, ThumbnailInfo.Default);
     }
 }

@@ -15,14 +15,16 @@ namespace Gnosis.Spiders
     public class CatalogSpider
         : ISpider
     {
-        public CatalogSpider(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IClip> clipRepository, IAudioStreamFactory audioStreamFactory)
+        public CatalogSpider(ILogger logger, ISecurityContext securityContext, IContentTypeFactory contentTypeFactory, IMediaTypeFactory mediaTypeFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IClip> clipRepository, IAudioStreamFactory audioStreamFactory)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
             if (securityContext == null)
                 throw new ArgumentNullException("securityContext");
-            if (mediaFactory == null)
-                throw new ArgumentNullException("mediaFactory");
+            if (contentTypeFactory == null)
+                throw new ArgumentNullException("contentTypeFactory");
+            if (mediaTypeFactory == null)
+                throw new ArgumentNullException("mediaTypeFactory");
             if (linkRepository == null)
                 throw new ArgumentNullException("linkRepository");
             if (tagRepository == null)
@@ -42,7 +44,8 @@ namespace Gnosis.Spiders
 
             this.logger = logger;
             this.securityContext = securityContext;
-            this.mediaFactory = mediaFactory;
+            this.contentTypeFactory = contentTypeFactory;
+            this.mediaTypeFactory = mediaTypeFactory;
             this.linkRepository = linkRepository;
             this.tagRepository = tagRepository;
             this.mediaRepository = mediaRepository;
@@ -58,7 +61,8 @@ namespace Gnosis.Spiders
 
         private readonly ILogger logger;
         private readonly ISecurityContext securityContext;
-        private readonly IMediaFactory mediaFactory;
+        private readonly IContentTypeFactory contentTypeFactory;
+        private readonly IMediaTypeFactory mediaTypeFactory;
         private readonly ILinkRepository linkRepository;
         private readonly ITagRepository tagRepository;
         private readonly IMediaRepository mediaRepository;
@@ -85,7 +89,11 @@ namespace Gnosis.Spiders
             if (location == null)
                 throw new ArgumentNullException("location");
 
-            return mediaFactory.Create(location);
+            var type = mediaTypeFactory.GetByLocation(location, contentTypeFactory);
+
+            return type != null ?
+                type.CreateMedia(location)
+                : null;
         }
 
         private bool HasDefaultThumbnail(IMediaItem item)
@@ -122,15 +130,15 @@ namespace Gnosis.Spiders
         {
             try
             {
-                var artist = audio.GetArtist(securityContext, trackRepository, artistRepository);
+                var artist = audio.GetArtist(securityContext, mediaTypeFactory, trackRepository, artistRepository);
                 artistRepository.Save(new List<IArtist> { artist });
                 tagRepository.Save(artist.GetTags());
 
-                var album = audio.GetAlbum(securityContext, trackRepository, albumRepository, artist);
+                var album = audio.GetAlbum(securityContext, mediaTypeFactory, trackRepository, albumRepository, artist);
                 albumRepository.Save(new List<IAlbum> { album });
                 tagRepository.Save(album.GetTags());
 
-                var track = audio.GetTrack(securityContext, trackRepository, audioStreamFactory, artist, album);
+                var track = audio.GetTrack(securityContext, mediaTypeFactory, trackRepository, audioStreamFactory, artist, album);
                 trackRepository.Save(new List<ITrack> { track });
                 tagRepository.Save(track.GetTags());
 
@@ -197,15 +205,15 @@ namespace Gnosis.Spiders
         {
             try
             {
-                var artist = video.GetArtist(securityContext, clipRepository, artistRepository);
+                var artist = video.GetArtist(securityContext, mediaTypeFactory, clipRepository, artistRepository);
                 artistRepository.Save(new List<IArtist> { artist });
                 tagRepository.Save(artist.GetTags());
 
-                var album = video.GetAlbum(securityContext, clipRepository, albumRepository, artist);
+                var album = video.GetAlbum(securityContext, mediaTypeFactory, clipRepository, albumRepository, artist);
                 albumRepository.Save(new List<IAlbum> { album });
                 tagRepository.Save(album.GetTags());
 
-                var clip = video.GetClip(securityContext, clipRepository, artist, album);
+                var clip = video.GetClip(securityContext, mediaTypeFactory, clipRepository, artist, album);
                 clipRepository.Save(new List<IClip> { clip });
                 tagRepository.Save(clip.GetTags());
 
@@ -256,11 +264,11 @@ namespace Gnosis.Spiders
                 var thumbnails = new List<ILink>();
                 foreach (var related in mediaRepository.ByLocation(pattern))
                 {
-                    thumbnails.Add(new Link(related.Location, media.Location, MediaType.ApplicationGnosisAlbumThumbnail.ToString(), fileInfo.Name));
+                    thumbnails.Add(new Link(related.Location, media.Location, "album-thumbnail", fileInfo.Name));
 
                     if (artistThumbnailPath != null)
                     {
-                        thumbnails.Add(new Link(related.Location, new Uri(artistThumbnailPath), MediaType.ApplicationGnosisArtistThumbnail.ToString(), fileInfo.Name));
+                        thumbnails.Add(new Link(related.Location, new Uri(artistThumbnailPath), "artist-thumbnail", fileInfo.Name));
                     }
                 }
 
@@ -292,7 +300,7 @@ namespace Gnosis.Spiders
             if (!target.IsFile)
                 throw new ArgumentException("target must be a local file path");
 
-            return new CatalogMediaTask(logger, this, target, Delay, MaxErrors);
+            return new CatalogMediaTask(logger, mediaTypeFactory, this, target, Delay, MaxErrors);
         }
     }
 }

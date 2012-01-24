@@ -25,11 +25,6 @@ namespace Gnosis.Application.Xml.Namespaces.MediaRss
             get { return GetAttributeInt64("fileSize"); }
         }
 
-        public IMediaType Type
-        {
-            get { return MediaType.Parse(GetAttributeString("type")); }
-        }
-
         public MediaRssMedium Medium
         {
             get { return GetAttributeEnum<MediaRssMedium>("medium", MediaRssMedium.Unspecified); }
@@ -78,6 +73,12 @@ namespace Gnosis.Application.Xml.Namespaces.MediaRss
         public ILanguageTag Lang
         {
             get { return LanguageTag.Parse(GetAttributeString("lang")); }
+        }
+
+        public IMediaType GetMediaType(IMediaTypeFactory mediaTypeFactory)
+        {
+            var code = GetAttributeString("type");
+            return code != null ? mediaTypeFactory.GetByCode(code) : mediaTypeFactory.Default;
         }
     }
 }

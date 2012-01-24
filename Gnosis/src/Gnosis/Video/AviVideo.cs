@@ -11,8 +11,8 @@ namespace Gnosis.Video
     public class AviVideo
         : VideoBase
     {
-        public AviVideo(Uri location)
-            : base(location, MediaType.VideoAvi)
+        public AviVideo(Uri location, IMediaType mediaType)
+            : base(location, mediaType)
         {
         }
 
@@ -39,7 +39,7 @@ namespace Gnosis.Video
             return tags;
         }
 
-        public override IClip GetClip(ISecurityContext securityContext, IMediaItemRepository<IClip> clipRepository, IArtist artist, IAlbum album)
+        public override IClip GetClip(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository<IClip> clipRepository, IArtist artist, IAlbum album)
         {
             var clip = clipRepository.GetByTarget(Location).FirstOrDefault();
             if (clip != null)
@@ -54,12 +54,13 @@ namespace Gnosis.Video
             var duration = file != null && file.Properties != null ? file.Properties.Duration : TimeSpan.FromMinutes(5);
             var height = file != null && file.Properties != null ? (uint)file.Properties.VideoHeight : 480;
             var width = file != null && file.Properties != null ? (uint)file.Properties.VideoWidth : 640;
-            
-            var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisClip, name, summary, date, date, number);
-            var sizeInfo = new SizeInfo(duration, height, width);
-            var targetInfo = new TargetInfo(Location, Type);
-            var userInfo = securityContext.CurrentUserInfo;
-            return new Clip(identityInfo, sizeInfo, CreatorInfo.Default, CatalogInfo.Default, targetInfo, userInfo, ThumbnailInfo.Default);
+
+            var builder = new MediaItemBuilder<IClip>(securityContext, mediaTypeFactory)
+                .Identity(name, summary, date, date, number)
+                .Size(duration, height, width)
+                .Target(Location, Type);
+
+            return builder.ToMediaItem();
         }
     }
 }

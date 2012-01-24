@@ -29,7 +29,7 @@ namespace Gnosis.Data.SQLite
 
         protected override IDoc GetDefaultItem()
         {
-            return Doc.Unknown;
+            return null;
         }
     }
 }

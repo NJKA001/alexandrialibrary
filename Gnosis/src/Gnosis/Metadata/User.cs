@@ -8,23 +8,27 @@ namespace Gnosis.Metadata
     public class User
         : IUser
     {
-        public User(string name, Uri thumbnail)
-            : this(name, thumbnail, Guid.NewGuid().ToUrn())
+        public User(IMediaType type, string name, Uri thumbnail)
+            : this(type, name, thumbnail, Guid.NewGuid().ToUrn())
         {
         }
 
-        public User(string name, Uri thumbnail, Uri location)
+        public User(IMediaType type, string name, Uri thumbnail, Uri location)
         {
+            if (type == null)
+                throw new ArgumentNullException("type");
             if (name == null)
                 throw new ArgumentNullException("name");
             if (location == null)
                 throw new ArgumentNullException("location");
 
+            this.type = type;
             this.name = name;
             this.thumbnail = thumbnail;
             this.location = location;
         }
 
+        private readonly IMediaType type;
         private readonly string name;
         private readonly Uri thumbnail;
         private readonly Uri location;
@@ -46,7 +50,7 @@ namespace Gnosis.Metadata
 
         public IMediaType Type
         {
-            get { return MediaType.ApplicationGnosisUser; }
+            get { return type; }
         }
 
         public void Load()
@@ -63,6 +67,9 @@ namespace Gnosis.Metadata
             return Enumerable.Empty<ITag>();
         }
 
-        public static readonly IUser Administrator = new User("Administrator", Guid.Empty.ToUrn(), Guid.Empty.ToUrn());
+        public static IUser GetAdministrator(IMediaTypeFactory mediaTypeFactory)
+        {
+            return new User(mediaTypeFactory.GetByCode("vnd.gnosis.user"), "Administrator", Guid.Empty.ToUrn(), Guid.Empty.ToUrn());
+        }
     }
 }

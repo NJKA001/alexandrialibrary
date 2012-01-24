@@ -8,25 +8,19 @@ namespace Gnosis.Application.Vendor
     public class MicrosoftShortcut
         : IApplication
     {
-        public MicrosoftShortcut(Uri location)
+        public MicrosoftShortcut(Uri location, IMediaType type)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
+            if (type == null)
+                throw new ArgumentNullException("type");
 
             this.location = location;
+            this.type = type;
         }
 
         private readonly Uri location;
-
-        #region IApplication Members
-
-        public void Load()
-        {
-        }
-
-        #endregion
-
-        #region IMedia Members
+        private readonly IMediaType type;
 
         public Uri Location
         {
@@ -35,7 +29,7 @@ namespace Gnosis.Application.Vendor
 
         public IMediaType Type
         {
-            get { return MediaType.ApplicationMicrosoftShortcut; }
+            get { return type; }
         }
 
         public IEnumerable<ILink> GetLinks()
@@ -48,6 +42,8 @@ namespace Gnosis.Application.Vendor
             return Enumerable.Empty<ITag>();
         }
 
-        #endregion
+        public void Load()
+        {
+        }
     }
 }

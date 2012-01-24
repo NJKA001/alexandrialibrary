@@ -104,12 +104,12 @@ namespace Gnosis.Application.Xml
                 : null;
         }
 
-        protected IMediaType GetAttributeMediaType(string name)
+        protected IMediaType GetAttributeMediaType(string name, IMediaTypeFactory mediaTypeFactory)
         {
-            var s = GetAttributeString(name);
+            var code = GetAttributeString(name);
 
-            return s != null ?
-                MediaType.Parse(s)
+            return code != null ?
+                mediaTypeFactory.GetByCode(code)
                 : null;
         }
 

@@ -12,7 +12,6 @@ namespace Gnosis.Application.Xml.Namespaces.MediaRss
     {
         Uri Url { get; }
         long FileSize { get; }
-        IMediaType Type { get; }
         MediaRssMedium Medium { get; }
         bool IsDefault { get; }
         MediaRssExpression Expression { get; }
@@ -23,5 +22,7 @@ namespace Gnosis.Application.Xml.Namespaces.MediaRss
         int Height { get; }
         int Width { get; }
         ILanguageTag Lang { get; }
+
+        IMediaType GetMediaType(IMediaTypeFactory mediaTypeFactory);
     }
 }

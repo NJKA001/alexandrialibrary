@@ -168,21 +168,20 @@ namespace Gnosis.Video
             return Enumerable.Empty<ITag>();
         }
 
-        public virtual IArtist GetArtist(ISecurityContext securityContext, IMediaItemRepository<IClip> clipRepository, IMediaItemRepository<IArtist> artistRepository)
+        public virtual IArtist GetArtist(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository<IClip> clipRepository, IMediaItemRepository<IArtist> artistRepository)
         {
-            IArtist artist = null;
             var clip = clipRepository.GetByTarget(Location).FirstOrDefault();
             if (clip != null)
             {
-                artist = artistRepository.GetByLocation(clip.Creator);
+                var artist = artistRepository.GetByLocation(clip.Creator);
                 if (artist != null)
                     return artist;
             }
 
-            return Artist.Unknown;
+            return new MediaItemBuilder<IArtist>(securityContext, mediaTypeFactory).GetDefault();
         }
-        
-        public virtual IAlbum GetAlbum(ISecurityContext securityContext, IMediaItemRepository<IClip> clipRepository, IMediaItemRepository<IAlbum> albumRepository, IArtist artist)
+
+        public virtual IAlbum GetAlbum(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository<IClip> clipRepository, IMediaItemRepository<IAlbum> albumRepository, IArtist artist)
         {
             IAlbum album = null;
             var clip = clipRepository.GetByTarget(Location).FirstOrDefault();
@@ -201,17 +200,17 @@ namespace Gnosis.Video
                 return album;
             }
 
-            var catalog = Album.Unknown;
             var albumNumber = GetAlbumNumber();
             var date = GetDate();
 
-            var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisAlbum, albumName, summary, date, date, albumNumber);
-            var creatorInfo = new CreatorInfo(artist.Location, artist.Name);
-            var catalogInfo = new CatalogInfo(catalog.Location, catalog.Name);
-            return new Album(identityInfo, SizeInfo.Default, creatorInfo, catalogInfo, TargetInfo.Default, securityContext.CurrentUserInfo, ThumbnailInfo.Default);
+            var builder = new MediaItemBuilder<IAlbum>(securityContext, mediaTypeFactory)
+                .Identity(albumName, summary, date, date, albumNumber)
+                .Creator(artist.Location, artist.Name);
+
+            return builder.ToMediaItem();
         }
 
-        public virtual IClip GetClip(ISecurityContext securityContext, IMediaItemRepository<IClip> clipRepository, IArtist artist, IAlbum album)
+        public virtual IClip GetClip(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository<IClip> clipRepository, IArtist artist, IAlbum album)
         {
             var clip = clipRepository.GetByTarget(Location).FirstOrDefault();
             if (clip != null)
@@ -227,12 +226,14 @@ namespace Gnosis.Video
             uint height = 480; //file != null && file.Properties != null ? (uint)file.Properties.VideoHeight : 480;
             uint width = 640; //file != null && file.Properties != null ? (uint)file.Properties.VideoWidth : 640;
 
-            var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisClip, name, summary, date, date, number);
-            var sizeInfo = new SizeInfo(duration, height, width);
-            var creatorInfo = new CreatorInfo(artist.Location, artist.Name);
-            var catalogInfo = new CatalogInfo(album.Location, album.Name);
-            var targetInfo = new TargetInfo(Location, Type);
-            return new Clip(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, securityContext.CurrentUserInfo, ThumbnailInfo.Default);
+            var builder = new MediaItemBuilder<IClip>(securityContext, mediaTypeFactory)
+                .Identity(name, summary, date, date, number)
+                .Size(duration, height, width)
+                .Creator(artist.Location, artist.Name)
+                .Catalog(album.Location, album.Name)
+                .Target(Location, Type);
+
+            return builder.ToMediaItem();
         }
     }
 }

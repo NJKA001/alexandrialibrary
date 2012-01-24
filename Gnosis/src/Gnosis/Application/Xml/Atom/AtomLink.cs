@@ -25,11 +25,6 @@ namespace Gnosis.Application.Xml.Atom
             get { return GetAttributeString("rel"); }
         }
 
-        public IMediaType Type
-        {
-            get { return GetAttributeMediaType("type"); }
-        }
-
         public ILanguageTag HrefLang
         {
             get { return GetAttributeLanguageTag("hreflang"); }
@@ -43,6 +38,11 @@ namespace Gnosis.Application.Xml.Atom
         public int Length
         {
             get { return GetAttributeInt32("length"); }
+        }
+
+        public IMediaType GetMediaType(IMediaTypeFactory mediaTypeFactory)
+        {
+            return GetAttributeMediaType("type", mediaTypeFactory);
         }
     }
 }

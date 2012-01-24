@@ -39,7 +39,7 @@ namespace Gnosis.Tests.Network
         {
             var location = new Uri("http://upload.wikimedia.org/wikipedia/commons/b/b4/JPEG_example_JPG_RIP_100.jpg");
             var mediaType = MediaType.GetMediaType(location);
-            Assert.AreEqual(MediaType.ImageJpeg, mediaType);
+            Assert.AreEqual("image/jpeg", mediaType.ToString());
         }
 
         [Test]

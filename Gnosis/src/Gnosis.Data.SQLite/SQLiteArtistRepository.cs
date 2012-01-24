@@ -29,7 +29,7 @@ namespace Gnosis.Data.SQLite
 
         protected override IArtist GetDefaultItem()
         {
-            return Artist.Unknown;
+            return null;
         }
     }
 }

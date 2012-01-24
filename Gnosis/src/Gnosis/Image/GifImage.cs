@@ -8,8 +8,8 @@ namespace Gnosis.Image
     public class GifImage
         : ImageBase
     {
-        public GifImage(Uri location)
-            : base(location, MediaType.ImageGif)
+        public GifImage(Uri location, IMediaType mediaType)
+            : base(location, mediaType)
         {
         }
 

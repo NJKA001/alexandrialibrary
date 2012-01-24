@@ -29,7 +29,7 @@ namespace Gnosis.Data.SQLite
 
         protected override ITrack GetDefaultItem()
         {
-            return Track.Unknown;
+            return null;
         }
     }
 }

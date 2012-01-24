@@ -29,7 +29,7 @@ namespace Gnosis.Data.SQLite
 
         protected override IPlaylist GetDefaultItem()
         {
-            return Playlist.Unknown;
+            return null;
         }
     }
 }

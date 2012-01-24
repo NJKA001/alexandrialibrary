@@ -25,18 +25,18 @@ namespace Gnosis.Alexandria.ViewModels
 
         private static object GetIcon(IClip clip)
         {
-            if (clip.TargetType == MediaType.VideoAvi)
-            {
-                return "pack://application:,,,/Images/File Video AVI-01.png";
-            }
-            else if (clip.TargetType == MediaType.VideoMpeg)
-            {
-                return "pack://application:,,,/Images/File Video MPEG-01.png";
-            }
-            else if (clip.TargetType == MediaType.VideoWmv)
-            {
-                return "pack://application:,,,/Images/File Video WMV-01.png";
-            }
+            //if (clip.TargetType == MediaType.VideoAvi)
+            //{
+            //    return "pack://application:,,,/Images/File Video AVI-01.png";
+            //}
+            //else if (clip.TargetType == MediaType.VideoMpeg)
+            //{
+            //    return "pack://application:,,,/Images/File Video MPEG-01.png";
+            //}
+            //else if (clip.TargetType == MediaType.VideoWmv)
+            //{
+            //    return "pack://application:,,,/Images/File Video WMV-01.png";
+            //}
 
             return "pack://application:,,,/Images/File Video-01.png";
         }

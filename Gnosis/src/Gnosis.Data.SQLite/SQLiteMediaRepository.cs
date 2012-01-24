@@ -9,17 +9,26 @@ namespace Gnosis.Data.SQLite
     public class SQLiteMediaRepository
         : SQLiteRepositoryBase, IMediaRepository
     {
-        public SQLiteMediaRepository(ILogger logger)
+        public SQLiteMediaRepository(ILogger logger, IMediaTypeFactory mediaTypeFactory)
             : base(logger)
         {
+            if (mediaTypeFactory == null)
+                throw new ArgumentNullException("mediaTypeFactory");
+
+            this.mediaTypeFactory = mediaTypeFactory;
         }
 
-        public SQLiteMediaRepository(ILogger logger, IDbConnection defaultConnection)
+        public SQLiteMediaRepository(ILogger logger, IMediaTypeFactory mediaTypeFactory, IDbConnection defaultConnection)
             : base(logger, defaultConnection)
         {
+            if (mediaTypeFactory == null)
+                throw new ArgumentNullException("mediaTypeFactory");
+
+            this.mediaTypeFactory = mediaTypeFactory;
         }
 
-        private readonly IMediaFactory factory = new MediaFactory();
+        private readonly IMediaTypeFactory mediaTypeFactory;
+        //private readonly IMediaFactory factory = new MediaFactory();
 
         private IEnumerable<IMedia> GetMedia(ICommandBuilder builder)
         {
@@ -53,8 +62,11 @@ namespace Gnosis.Data.SQLite
         private IMedia ReadMedium(IDataRecord record)
         {
             Uri location = record.GetUri("Location");
-            var type = record.GetStringLookup<IMediaType>("Type", typeName => MediaType.Parse(typeName));
-            return factory.Create(location, type);
+            var type = record.GetStringLookup<IMediaType>("Type", code => mediaTypeFactory.GetByCode(code));
+
+            return type != null ?
+                type.CreateMedia(location)
+                : null;
         }
 
         public IMedia Lookup(Uri location)

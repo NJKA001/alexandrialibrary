@@ -14,14 +14,14 @@ namespace Gnosis.Audio
     public class MpegAudio
         : AudioBase
     {
+        public MpegAudio(Uri location, IMediaType mediaType)
+            : base(location, mediaType)
+        {
+        }
+
         private Gnosis.Tags.TagLib.File file;
         private Gnosis.Tags.TagLib.Id3v1.Tag id3v1Tag;
         private Gnosis.Tags.TagLib.Id3v2.Tag id3v2Tag;
-
-        public MpegAudio(Uri location)
-            : base(location, MediaType.AudioMpeg)
-        {
-        }
 
         //private Uri GetJpgToUrl(string name)
         //{
@@ -102,7 +102,7 @@ namespace Gnosis.Audio
             return tags;
         }
 
-        public override IArtist GetArtist(ISecurityContext securityContext, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IArtist> artistRepository)
+        public override IArtist GetArtist(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IArtist> artistRepository)
         {
             IArtist artist = null;
             var track = trackRepository.GetByTarget(Location).FirstOrDefault();
@@ -112,9 +112,9 @@ namespace Gnosis.Audio
                 if (artist != null)
                     return artist;
             }
-            
+
             if (id3v2Tag == null || id3v2Tag.JoinedPerformers == null)
-                return Artist.Unknown;
+                return new MediaItemBuilder<IArtist>(securityContext, mediaTypeFactory).GetDefault(); //Artist.Unknown;
 
             var artistName = id3v2Tag.JoinedPerformers;
             var summary = string.Empty;
@@ -122,13 +122,13 @@ namespace Gnosis.Audio
             if (artist != null)
                 return artist;
 
-            //var thumbnail = GetJpgToUrl(artistName);
+            var builder = new MediaItemBuilder<IArtist>(securityContext, mediaTypeFactory)
+                .Identity(artistName, summary);
 
-            var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisTrack, artistName, summary, DateTime.MinValue, DateTime.MaxValue, 0);
-            return new Artist(identityInfo, SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, securityContext.CurrentUserInfo, ThumbnailInfo.Default);
+            return builder.ToMediaItem();
         }
 
-        public override IAlbum GetAlbum(ISecurityContext securityContext, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IAlbum> albumRepository, IArtist artist)
+        public override IAlbum GetAlbum(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IAlbum> albumRepository, IArtist artist)
         {
             IAlbum album = null;
             var track = trackRepository.GetByTarget(Location).FirstOrDefault();
@@ -150,14 +150,14 @@ namespace Gnosis.Audio
                     return album;
             }
 
-            //var thumbnail = GetJpgToUrl(albumTitle);
-            var identityInfo = new IdentityInfo(Guid.NewGuid().ToUrn(), MediaType.ApplicationGnosisAlbum, albumTitle, summary, DateTime.MinValue, DateTime.MaxValue, 0);
-            var creatorInfo = new CreatorInfo(artist.Location, artist.Name);
-            var thumbnailInfo = ThumbnailInfo.Default; //new ThumbnailInfo(thumbnail, new byte[0]);
-            return new Album(identityInfo, SizeInfo.Default, creatorInfo, CatalogInfo.Default, TargetInfo.Default, securityContext.CurrentUserInfo, thumbnailInfo);
+            var builder = new MediaItemBuilder<IAlbum>(securityContext, mediaTypeFactory)
+                .Identity(albumTitle, summary)
+                .Creator(artist.Location, artist.Name);
+
+            return builder.ToMediaItem();
         }
 
-        public override ITrack GetTrack(ISecurityContext securityContext, IMediaItemRepository<ITrack> trackRepository, IAudioStreamFactory audioStreamFactory, IArtist artist, IAlbum album)
+        public override ITrack GetTrack(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository<ITrack> trackRepository, IAudioStreamFactory audioStreamFactory, IArtist artist, IAlbum album)
         {
             var track = trackRepository.GetByTarget(Location).FirstOrDefault();
             //if (track != null)
@@ -167,8 +167,14 @@ namespace Gnosis.Audio
             {
                 if (track != null)
                     return track;
-                
-                return new Track(IdentityInfo.GetNew(MediaType.ApplicationGnosisTrack), SizeInfo.Default, new CreatorInfo(artist.Location, artist.Name), new CatalogInfo(album.Location, album.Name), new TargetInfo(Location, Type), securityContext.CurrentUserInfo, ThumbnailInfo.Default);
+
+                var builder = new MediaItemBuilder<ITrack>(securityContext, mediaTypeFactory)
+                    .Identity("Unknown", string.Empty)
+                    .Creator(artist.Location, artist.Name)
+                    .Catalog(album.Location, album.Name)
+                    .Target(Location, Type);
+
+                return builder.ToMediaItem();
             }
 
             var name = id3v2Tag.Title != null ? id3v2Tag.Title : "Unknown Track";
@@ -203,13 +209,16 @@ namespace Gnosis.Audio
             var thumbnailData = id3v2Tag.Pictures != null && id3v2Tag.Pictures.Length > 0 ? id3v2Tag.Pictures[0].Data.ToArray() : new byte[0];
 
             var trackId = track != null ? track.Location : Guid.NewGuid().ToUrn();
-            var identityInfo = new IdentityInfo(trackId, MediaType.ApplicationGnosisTrack, name, summary, recordDate, releaseDate, number);
-            var sizeInfo = new SizeInfo(duration, 0, 0);
-            var creatorInfo = new CreatorInfo(artist.Location, artist.Name);
-            var catalogInfo = new CatalogInfo(album.Location, album.Name);
-            var targetInfo = new TargetInfo(Location, Type);
-            var thumbnailInfo = new ThumbnailInfo(thumbnail, thumbnailData);
-            return new Track(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, securityContext.CurrentUserInfo, thumbnailInfo);
+
+            var fullBuilder = new MediaItemBuilder<ITrack>(securityContext, mediaTypeFactory)
+                .Identity(name, summary, recordDate, releaseDate, number, trackId)
+                .Size(duration)
+                .Creator(artist.Location, artist.Name)
+                .Catalog(album.Location, album.Name)
+                .Target(Location, Type)
+                .Thumbnail(thumbnail, thumbnailData);
+
+            return fullBuilder.ToMediaItem();
         }
     }
 }

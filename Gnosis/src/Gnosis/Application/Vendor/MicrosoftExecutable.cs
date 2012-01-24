@@ -8,15 +8,19 @@ namespace Gnosis.Application.Vendor
     public class MicrosoftExecutable
         : IApplication
     {
-        public MicrosoftExecutable(Uri location)
+        public MicrosoftExecutable(Uri location, IMediaType type)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
+            if (type == null)
+                throw new ArgumentNullException("type");
 
             this.location = location;
+            this.type = type;
         }
 
         private readonly Uri location;
+        private readonly IMediaType type;
 
         public Uri Location
         {
@@ -25,7 +29,7 @@ namespace Gnosis.Application.Vendor
 
         public IMediaType Type
         {
-            get { return MediaType.ApplicationMicrosoftExecutable; }
+            get { return type; }
         }
 
         public void Load()

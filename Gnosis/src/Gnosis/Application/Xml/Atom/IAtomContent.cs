@@ -8,7 +8,8 @@ namespace Gnosis.Application.Xml.Atom
     public interface IAtomContent
         : IAtomTextConstruct
     {
-        IMediaType MediaType { get; }
         Uri Src { get; }
+
+        IMediaType GetMediaType(IMediaTypeFactory mediaTypeFactory);
     }
 }

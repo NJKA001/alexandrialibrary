@@ -11,15 +11,19 @@ namespace Gnosis.Application.Vendor
     public class GnosisFilesystemDirectory
         : IApplication
     {
-        public GnosisFilesystemDirectory(Uri location)
+        public GnosisFilesystemDirectory(Uri location, IMediaType type)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
+            if (type == null)
+                throw new ArgumentNullException("type");
 
             this.location = location;
+            this.type = type;
         }
 
         private readonly Uri location;
+        private readonly IMediaType type;
 
         public Uri Location
         {
@@ -28,7 +32,7 @@ namespace Gnosis.Application.Vendor
 
         public IMediaType Type
         {
-            get { return MediaType.ApplicationGnosisFilesystemDirectory; }
+            get { return type; }
         }
 
         public void Load()
@@ -47,10 +51,10 @@ namespace Gnosis.Application.Vendor
             var links = new List<ILink>();
 
             foreach (var directory in info.GetDirectories())
-                links.Add(new Link(location, new Uri(directory.FullName), MediaType.ApplicationGnosisFilesystemDirectory.ToString(), directory.Name));
+                links.Add(new Link(location, new Uri(directory.FullName), type.ToString(), directory.Name));
 
-            foreach (var file in info.GetFiles())
-                links.Add(new Link(location, new Uri(file.FullName), MediaType.ApplicationGnosisFilesystemFile.ToString(), file.Name));
+            //foreach (var file in info.GetFiles())
+            //    links.Add(new Link(location, new Uri(file.FullName), MediaType.ApplicationGnosisFilesystemFile.ToString(), file.Name));
 
             return links;
         }

@@ -12,21 +12,25 @@ namespace Gnosis.Data.SQLite
         : SQLiteRepositoryBase, IMediaItemRepository<T>
         where T : class, IMediaItem
     {
-        protected SQLiteMediaItemRepositoryBase(ILogger logger, string tableName)
-            : this(logger, tableName, null)
+        protected SQLiteMediaItemRepositoryBase(ILogger logger, IMediaTypeFactory mediaTypeFactory, string tableName)
+            : this(logger, mediaTypeFactory, tableName, null)
         {
         }
 
-        protected SQLiteMediaItemRepositoryBase(ILogger logger, string tableName, IDbConnection defaultConnection)
+        protected SQLiteMediaItemRepositoryBase(ILogger logger, IMediaTypeFactory mediaTypeFactory, string tableName, IDbConnection defaultConnection)
             : base(logger, defaultConnection)
         {
+            if (mediaTypeFactory == null)
+                throw new ArgumentNullException("mediaTypeFactory");
             if (tableName == null)
                 throw new ArgumentNullException("tableName");
 
+            this.mediaTypeFactory = mediaTypeFactory;
             this.tableName = tableName;
             this.defaultItem = GetDefaultItem();
         }
 
+        private readonly IMediaTypeFactory mediaTypeFactory;
         private readonly string tableName;
         private readonly T defaultItem;
 
@@ -213,7 +217,7 @@ namespace Gnosis.Data.SQLite
             var catalog = record.GetUri("Catalog");
             var catalogName = record.GetString("CatalogName");
             var target = record.GetUri("Target");
-            var targetType = record.GetStringLookup<IMediaType>("TargetType", x => MediaType.Parse(x));
+            var targetType = record.GetStringLookup<IMediaType>("TargetType", code => mediaTypeFactory.GetByCode(code));
             var user = record.GetUri("User");
             var userName = record.GetString("UserName");
             var thumbnail = record.GetUri("Thumbnail");

@@ -8,8 +8,8 @@ namespace Gnosis.Video
     public class MpegVideo
         : VideoBase
     {
-        public MpegVideo(Uri location)
-            : base(location, MediaType.VideoMpeg)
+        public MpegVideo(Uri location, IMediaType mediaType)
+            : base(location, mediaType)
         {
         }
     }

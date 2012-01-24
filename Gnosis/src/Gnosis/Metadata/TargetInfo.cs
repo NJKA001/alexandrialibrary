@@ -31,6 +31,9 @@ namespace Gnosis.Metadata
             get { return type; }
         }
 
-        public static readonly TargetInfo Default = new TargetInfo(Guid.Empty.ToUrn(), MediaType.ApplicationUnknown);
+        public static TargetInfo GetDefault(IMediaTypeFactory mediaTypeFactory)
+        {
+            return new TargetInfo(Guid.Empty.ToUrn(), mediaTypeFactory.Default);
+        }
     }
 }

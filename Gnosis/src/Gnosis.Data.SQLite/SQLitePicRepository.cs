@@ -29,7 +29,7 @@ namespace Gnosis.Data.SQLite
 
         protected override IPic GetDefaultItem()
         {
-            return Pic.Unknown;
+            return null;
         }
     }
 }
