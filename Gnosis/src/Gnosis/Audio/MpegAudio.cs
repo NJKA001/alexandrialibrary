@@ -102,23 +102,23 @@ namespace Gnosis.Audio
             return tags;
         }
 
-        public override IArtist GetArtist(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IArtist> artistRepository)
+        public override IArtist GetArtist(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository mediaItemRepository)
         {
             IArtist artist = null;
-            var track = trackRepository.GetByTarget(Location).FirstOrDefault();
+            var track = mediaItemRepository.GetByTarget<ITrack>(Location).FirstOrDefault();
             if (track != null)
             {
-                artist = artistRepository.GetByLocation(track.Creator);
+                artist = mediaItemRepository.GetByLocation<IArtist>(track.Creator);
                 if (artist != null)
                     return artist;
             }
 
             if (id3v2Tag == null || id3v2Tag.JoinedPerformers == null)
-                return new MediaItemBuilder<IArtist>(securityContext, mediaTypeFactory).GetDefault(); //Artist.Unknown;
+                return new MediaItemBuilder<IArtist>(securityContext, mediaTypeFactory).GetDefault();
 
             var artistName = id3v2Tag.JoinedPerformers;
             var summary = string.Empty;
-            artist = artistRepository.GetByName(artistName).FirstOrDefault();
+            artist = mediaItemRepository.GetByName<IArtist>(artistName).FirstOrDefault();
             if (artist != null)
                 return artist;
 
@@ -128,13 +128,13 @@ namespace Gnosis.Audio
             return builder.ToMediaItem();
         }
 
-        public override IAlbum GetAlbum(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IAlbum> albumRepository, IArtist artist)
+        public override IAlbum GetAlbum(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository mediaItemRepository, IArtist artist)
         {
             IAlbum album = null;
-            var track = trackRepository.GetByTarget(Location).FirstOrDefault();
+            var track = mediaItemRepository.GetByTarget<ITrack>(Location).FirstOrDefault();
             if (track != null)
             {
-                album = albumRepository.GetByLocation(track.Catalog);
+                album = mediaItemRepository.GetByLocation<IAlbum>(track.Catalog);
                 if (album != null)
                     return album;
             }
@@ -145,7 +145,7 @@ namespace Gnosis.Audio
             if (id3v2Tag != null && id3v2Tag.Album != null)
             {
                 albumTitle = id3v2Tag.Album; //albumTag.Tuple.ToString();
-                album = albumRepository.GetByCreatorAndName(artist.Location, albumTitle);
+                album = mediaItemRepository.GetByCreatorAndName<IAlbum>(artist.Location, albumTitle);
                 if (album != null)
                     return album;
             }
@@ -157,9 +157,9 @@ namespace Gnosis.Audio
             return builder.ToMediaItem();
         }
 
-        public override ITrack GetTrack(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository<ITrack> trackRepository, IAudioStreamFactory audioStreamFactory, IArtist artist, IAlbum album)
+        public override ITrack GetTrack(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository mediaItemRepository, IAudioStreamFactory audioStreamFactory, IArtist artist, IAlbum album)
         {
-            var track = trackRepository.GetByTarget(Location).FirstOrDefault();
+            var track = mediaItemRepository.GetByTarget<ITrack>(Location).FirstOrDefault();
             //if (track != null)
                 //return track;
 

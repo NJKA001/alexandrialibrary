@@ -15,7 +15,7 @@ namespace Gnosis.Spiders
     public class CatalogSpider
         : ISpider
     {
-        public CatalogSpider(ILogger logger, ISecurityContext securityContext, IContentTypeFactory contentTypeFactory, IMediaTypeFactory mediaTypeFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IClip> clipRepository, IAudioStreamFactory audioStreamFactory)
+        public CatalogSpider(ILogger logger, ISecurityContext securityContext, IContentTypeFactory contentTypeFactory, IMediaTypeFactory mediaTypeFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IMediaItemRepository mediaItemRepository, IAudioStreamFactory audioStreamFactory)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -31,14 +31,8 @@ namespace Gnosis.Spiders
                 throw new ArgumentNullException("tagRepository");
             if (mediaRepository == null)
                 throw new ArgumentNullException("mediaRepository");
-            if (artistRepository == null)
-                throw new ArgumentNullException("artistRepository");
-            if (albumRepository == null)
-                throw new ArgumentNullException("albumRepository");
-            if (trackRepository == null)
-                throw new ArgumentNullException("trackRepository");
-            if (clipRepository == null)
-                throw new ArgumentNullException("clipRepository");
+            if (mediaItemRepository == null)
+                throw new ArgumentNullException("mediaItemRepository");
             if (audioStreamFactory == null)
                 throw new ArgumentNullException("audioStreamFactory");
 
@@ -49,10 +43,7 @@ namespace Gnosis.Spiders
             this.linkRepository = linkRepository;
             this.tagRepository = tagRepository;
             this.mediaRepository = mediaRepository;
-            this.artistRepository = artistRepository;
-            this.albumRepository = albumRepository;
-            this.trackRepository = trackRepository;
-            this.clipRepository = clipRepository;
+            this.mediaItemRepository = mediaItemRepository;
             this.audioStreamFactory = audioStreamFactory;
 
             Delay = TimeSpan.Zero;
@@ -66,10 +57,7 @@ namespace Gnosis.Spiders
         private readonly ILinkRepository linkRepository;
         private readonly ITagRepository tagRepository;
         private readonly IMediaRepository mediaRepository;
-        private readonly IMediaItemRepository<IArtist> artistRepository;
-        private readonly IMediaItemRepository<IAlbum> albumRepository;
-        private readonly IMediaItemRepository<ITrack> trackRepository;
-        private readonly IMediaItemRepository<IClip> clipRepository;
+        private readonly IMediaItemRepository mediaItemRepository;
         private readonly IAudioStreamFactory audioStreamFactory;
 
         public TimeSpan Delay
@@ -135,16 +123,16 @@ namespace Gnosis.Spiders
         {
             try
             {
-                var artist = audio.GetArtist(securityContext, mediaTypeFactory, trackRepository, artistRepository);
-                artistRepository.Save(new List<IArtist> { artist });
+                var artist = audio.GetArtist(securityContext, mediaTypeFactory, mediaItemRepository);
+                mediaItemRepository.Save(new List<IArtist> { artist });
                 tagRepository.Save(artist.GetTags());
 
-                var album = audio.GetAlbum(securityContext, mediaTypeFactory, trackRepository, albumRepository, artist);
-                albumRepository.Save(new List<IAlbum> { album });
+                var album = audio.GetAlbum(securityContext, mediaTypeFactory, mediaItemRepository, artist);
+                mediaItemRepository.Save(new List<IAlbum> { album });
                 tagRepository.Save(album.GetTags());
 
-                var track = audio.GetTrack(securityContext, mediaTypeFactory, trackRepository, audioStreamFactory, artist, album);
-                trackRepository.Save(new List<ITrack> { track });
+                var track = audio.GetTrack(securityContext, mediaTypeFactory, mediaItemRepository, audioStreamFactory, artist, album);
+                mediaItemRepository.Save(new List<ITrack> { track });
                 tagRepository.Save(track.GetTags());
 
                 var trackDate = track.FromDate > DateTime.MinValue ? track.FromDate : track.ToDate;
@@ -158,7 +146,7 @@ namespace Gnosis.Spiders
                     var userInfo = new UserInfo(album.User, album.UserName);
                     var thumbnailInfo = new ThumbnailInfo(album.Thumbnail, album.ThumbnailData);
                     album = new Album(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
-                    albumRepository.Save(new List<IAlbum> { album });
+                    mediaItemRepository.Save(new List<IAlbum> { album });
                 }
 
                 //if (album.ToDate == DateTime.MinValue && track.ToDate != DateTime.
@@ -196,7 +184,7 @@ namespace Gnosis.Spiders
                         var userInfo = new UserInfo(album.User, album.UserName);
                         var thumbnailInfo = new ThumbnailInfo(track.Thumbnail, track.ThumbnailData);
                         var updated = new Album(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
-                        albumRepository.Save(new List<IAlbum> { updated });
+                        mediaItemRepository.Save(new List<IAlbum> { updated });
                     }
                 }
             }
@@ -210,16 +198,16 @@ namespace Gnosis.Spiders
         {
             try
             {
-                var artist = video.GetArtist(securityContext, mediaTypeFactory, clipRepository, artistRepository);
-                artistRepository.Save(new List<IArtist> { artist });
+                var artist = video.GetArtist(securityContext, mediaTypeFactory, mediaItemRepository);
+                mediaItemRepository.Save(new List<IArtist> { artist });
                 tagRepository.Save(artist.GetTags());
 
-                var album = video.GetAlbum(securityContext, mediaTypeFactory, clipRepository, albumRepository, artist);
-                albumRepository.Save(new List<IAlbum> { album });
+                var album = video.GetAlbum(securityContext, mediaTypeFactory, mediaItemRepository, artist);
+                mediaItemRepository.Save(new List<IAlbum> { album });
                 tagRepository.Save(album.GetTags());
 
-                var clip = video.GetClip(securityContext, mediaTypeFactory, clipRepository, artist, album);
-                clipRepository.Save(new List<IClip> { clip });
+                var clip = video.GetClip(securityContext, mediaTypeFactory, mediaItemRepository, artist, album);
+                mediaItemRepository.Save(new List<IClip> { clip });
                 tagRepository.Save(clip.GetTags());
 
                 var clipDate = clip.FromDate > DateTime.MinValue ? clip.FromDate : clip.ToDate;
@@ -233,7 +221,7 @@ namespace Gnosis.Spiders
                     var userInfo = new UserInfo(album.User, album.UserName);
                     var thumbnailInfo = new ThumbnailInfo(album.Thumbnail, album.ThumbnailData);
                     album = new Album(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
-                    albumRepository.Save(new List<IAlbum> { album });
+                    mediaItemRepository.Save(new List<IAlbum> { album });
                 }
             }
             catch (Exception ex)

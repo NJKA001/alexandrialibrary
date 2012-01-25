@@ -140,7 +140,6 @@
     <Compile Include="IClip.cs" />
     <Compile Include="IClipRepository.cs" />
     <Compile Include="IDoc.cs" />
-    <Compile Include="IDocRepository.cs" />
     <Compile Include="IMediaItem.cs" />
     <Compile Include="IMediaItemRepository.cs" />
     <Compile Include="IProgram.cs" />
@@ -292,7 +291,6 @@
     <Compile Include="ScreenSaver.cs" />
     <Compile Include="SecurityContext.cs" />
     <Compile Include="SeekState.cs" />
-    <Compile Include="Spiders\PlaylistSpider.cs" />
     <Compile Include="TagDomain.cs" />
     <Compile Include="TaskError.cs" />
     <Compile Include="TaskItem.cs" />
@@ -322,7 +320,6 @@
     <Compile Include="Image\JpegImage.cs" />
     <Compile Include="Image\PngImage.cs" />
     <Compile Include="IMedia.cs" />
-    <Compile Include="IMediaFactory.cs" />
     <Compile Include="ITag.cs" />
     <Compile Include="Culture\LanguageTag.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
@@ -332,7 +329,6 @@
     <Compile Include="Culture\IScript.cs" />
     <Compile Include="Culture\Language.cs" />
     <Compile Include="Links\Link.cs" />
-    <Compile Include="MediaFactory.cs" />
     <Compile Include="Culture\Script.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringBuilderExtensions.cs" />

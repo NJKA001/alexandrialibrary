@@ -10,18 +10,17 @@ namespace Gnosis.Tasks
     public class SearchTask
         : TaskBase<IMediaItem>, ISearchTask
     {
-        public SearchTask(ILogger logger, string pattern, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IClip> clipRepository)
+        public SearchTask(ILogger logger, string pattern, IMediaItemRepository mediaItemRepository)
             : base(logger)
         {
             if (pattern == null)
                 throw new ArgumentNullException("pattern");
+            if (mediaItemRepository == null)
+                throw new ArgumentNullException("mediaItemRepository");
 
             this.pattern = pattern;
             this.americanized = pattern.ToAmericanizedString();
-            this.artistRepository = artistRepository;
-            this.albumRepository = albumRepository;
-            this.trackRepository = trackRepository;
-            this.clipRepository = clipRepository;
+            this.mediaItemRepository = mediaItemRepository;
         }
 
         private const int maxProgress = 100;
@@ -31,10 +30,7 @@ namespace Gnosis.Tasks
         private string pattern;
         private string americanized;
 
-        private readonly IMediaItemRepository<IAlbum> albumRepository;
-        private readonly IMediaItemRepository<IArtist> artistRepository;
-        private readonly IMediaItemRepository<ITrack> trackRepository;
-        private readonly IMediaItemRepository<IClip> clipRepository;
+        private readonly IMediaItemRepository mediaItemRepository;
 
         private bool IncludeAlbums { get { return (filters & SearchFilters.Albums) == SearchFilters.Albums; } }
         private bool IncludeArtists { get { return (filters & SearchFilters.Artists) == SearchFilters.Artists; } }
@@ -63,7 +59,7 @@ namespace Gnosis.Tasks
             {
                 AddProgress("Artist: " + artist.Name);
                 UpdateResults(artist);
-                foreach (var album in albumRepository.GetByCreator(artist.Location))
+                foreach (var album in mediaItemRepository.GetByCreator<IAlbum>(artist.Location))
                 {
                     AddProgress("Album: " + album.Name);
                     UpdateResults(album);
@@ -77,12 +73,12 @@ namespace Gnosis.Tasks
             {
                 AddProgress("Album: " + album.Name);
                 UpdateResults(album);
-                foreach (var track in trackRepository.GetByCatalog(album.Location))
+                foreach (var track in mediaItemRepository.GetByCatalog<ITrack>(album.Location))
                 {
                     AddProgress("Track: " + track.Name);
                     UpdateResults(track);
                 }
-                foreach (var clip in clipRepository.GetByCatalog(album.Location))
+                foreach (var clip in mediaItemRepository.GetByCatalog<IClip>(album.Location))
                 {
                     AddProgress("Clip: " + clip.Name);
                     UpdateResults(clip);
@@ -112,38 +108,38 @@ namespace Gnosis.Tasks
         {
             if (IncludeArtists)
             {
-                AddArtistResults(artistRepository.GetByName(pattern));
-                AddArtistResults(artistRepository.GetByTag(TagDomain.String, pattern));
+                AddArtistResults(mediaItemRepository.GetByName<IArtist>(pattern));
+                AddArtistResults(mediaItemRepository.GetByTag<IArtist>(TagDomain.String, pattern));
 
                 if (!string.IsNullOrEmpty(americanized))
-                    AddArtistResults(artistRepository.GetByTag(TagDomain.String, americanized, Algorithm.Americanized));
+                    AddArtistResults(mediaItemRepository.GetByTag<IArtist>(TagDomain.String, americanized, Algorithm.Americanized));
             }
 
             if (IncludeAlbums)
             {
-                AddAlbumResults(albumRepository.GetByName(pattern));
-                AddAlbumResults(albumRepository.GetByTag(TagDomain.String, pattern));
+                AddAlbumResults(mediaItemRepository.GetByName<IAlbum>(pattern));
+                AddAlbumResults(mediaItemRepository.GetByTag<IAlbum>(TagDomain.String, pattern));
 
                 if (!string.IsNullOrEmpty(americanized))
-                    AddAlbumResults(albumRepository.GetByTag(TagDomain.String, americanized, Algorithm.Americanized));
+                    AddAlbumResults(mediaItemRepository.GetByTag<IAlbum>(TagDomain.String, americanized, Algorithm.Americanized));
             }
 
             if (IncludeTracks)
             {
-                AddTrackResults(trackRepository.GetByName(pattern));
-                AddTrackResults(trackRepository.GetByTag(TagDomain.String, pattern));
+                AddTrackResults(mediaItemRepository.GetByName<ITrack>(pattern));
+                AddTrackResults(mediaItemRepository.GetByTag<ITrack>(TagDomain.String, pattern));
 
                 if (!string.IsNullOrEmpty(americanized))
-                    AddTrackResults(trackRepository.GetByTag(TagDomain.String, americanized, Algorithm.Americanized));
+                    AddTrackResults(mediaItemRepository.GetByTag<ITrack>(TagDomain.String, americanized, Algorithm.Americanized));
             }
 
             if (IncludeClips)
             {
-                AddClipResults(clipRepository.GetByName(pattern));
-                AddClipResults(clipRepository.GetByTag(TagDomain.String, pattern));
+                AddClipResults(mediaItemRepository.GetByName<IClip>(pattern));
+                AddClipResults(mediaItemRepository.GetByTag<IClip>(TagDomain.String, pattern));
 
                 if (!string.IsNullOrEmpty(americanized))
-                    AddClipResults(clipRepository.GetByTag(TagDomain.String, americanized, Algorithm.Americanized));
+                    AddClipResults(mediaItemRepository.GetByTag<IClip>(TagDomain.String, americanized, Algorithm.Americanized));
             }
 
             UpdateProgress(maxProgress, maxProgress, "Completed");

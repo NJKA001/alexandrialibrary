@@ -33,7 +33,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
 
             connection = connectionFactory.Create(connectionString);
             connection.Open();
-            repository = new SQLiteArtistRepository(logger, securityContext, mediaTypeFactory, connection);
+            repository = new SQLiteMediaItemRepository(logger, securityContext, mediaTypeFactory, connection);
             repository.Initialize();
             repository.Save(new List<IArtist> { artist1, artist2 });
         }
@@ -46,7 +46,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected readonly ISecurityContext securityContext;
         protected readonly IContentTypeFactory contentTypeFactory;
         protected readonly IDbConnection connection;
-        protected readonly IMediaItemRepository<IArtist> repository;
+        protected readonly IMediaItemRepository repository;
         protected readonly IMediaType mediaType;
         protected readonly Uri unknownLocation = Guid.Empty.ToUrn();
 
@@ -69,8 +69,8 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void DefaultArtistCannotBeDeleted()
         {
-            repository.Delete(new List<Uri> { unknownLocation });
-            var check = repository.GetByLocation(unknownLocation);
+            repository.Delete<IArtist>(new List<Uri> { unknownLocation });
+            var check = repository.GetByLocation<IArtist>(unknownLocation);
             Assert.IsNotNull(check);
             Assert.AreEqual(check.Name, "Unknown");
         }
@@ -78,13 +78,13 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void CanBeReadByLocation()
         {
-            var check1 = repository.GetByLocation(artist1.Location);
+            var check1 = repository.GetByLocation<IArtist>(artist1.Location);
             Assert.IsNotNull(check1);
             Assert.AreEqual(artist1.Name, check1.Name);
             Assert.AreEqual(artist1.FromDate, check1.FromDate);
             Assert.AreEqual(artist1.ToDate, check1.ToDate);
             Assert.AreEqual(artist1.Thumbnail, check1.Thumbnail);
-            var check2 = repository.GetByLocation(artist2.Location);
+            var check2 = repository.GetByLocation<IArtist>(artist2.Location);
             Assert.IsNotNull(check2);
             Assert.AreEqual(artist2.Name, check2.Name);
             Assert.AreEqual(artist2.FromDate, check2.FromDate);
@@ -95,7 +95,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void CanBeReadByName()
         {
-            var checks1 = repository.GetByName("Radio%");
+            var checks1 = repository.GetByName<IArtist>("Radio%");
             Assert.AreEqual(1, checks1.Count());
             var check1 = checks1.FirstOrDefault();
             Assert.IsNotNull(check1);
@@ -103,7 +103,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.AreEqual(artist1.FromDate, check1.FromDate);
             Assert.AreEqual(artist1.ToDate, check1.ToDate);
             Assert.AreEqual(artist1.Thumbnail, check1.Thumbnail);
-            var checks2 = repository.GetByName(artist2.Name);
+            var checks2 = repository.GetByName<IArtist>(artist2.Name);
             Assert.AreEqual(1, checks2.Count());
             var check2 = checks2.FirstOrDefault();
             Assert.IsNotNull(check2);
@@ -118,7 +118,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         {
             repository.Save(new List<IArtist> { artist2 });
 
-            var check = repository.GetByName("Tool");
+            var check = repository.GetByName<IArtist>("Tool");
             Assert.AreEqual(1, check.Count());
         }
 
@@ -126,12 +126,12 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         public void CanBeDeleted()
         {
             repository.Save(new List<IArtist> { artist3, artist4 });
-            Assert.IsNotNull(repository.GetByLocation(artist3.Location));
-            Assert.IsNotNull(repository.GetByLocation(artist4.Location));
+            Assert.IsNotNull(repository.GetByLocation<IArtist>(artist3.Location));
+            Assert.IsNotNull(repository.GetByLocation<IArtist>(artist4.Location));
 
-            repository.Delete(new List<Uri> { artist3.Location, artist4.Location });
-            Assert.IsNull(repository.GetByLocation(artist3.Location));
-            Assert.IsNull(repository.GetByLocation(artist4.Location));
+            repository.Delete<IArtist>(new List<Uri> { artist3.Location, artist4.Location });
+            Assert.IsNull(repository.GetByLocation<IArtist>(artist3.Location));
+            Assert.IsNull(repository.GetByLocation<IArtist>(artist4.Location));
         }
     }
 }

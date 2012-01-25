@@ -11,71 +11,38 @@ namespace Gnosis.Alexandria.Controllers
     public class MediaItemController
         : IMediaItemController
     {
-        public MediaItemController(ILogger logger, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IClip> clipRepository, IMediaItemRepository<IDoc> docRepository, IMediaItemRepository<IFeed> feedRepository, IMediaItemRepository<IFeedItem> feedItemRepository, IMediaItemRepository<IPic> picRepository, IMediaItemRepository<IPlaylist> playlistRepository, IMediaItemRepository<IPlaylistItem> playlistItemRepository, IMediaItemRepository<IProgram> programRepository, IMediaItemRepository<ITrack> trackRepository)
+        public MediaItemController(ILogger logger, ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaItemRepository mediaItemRepository)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
+            if (securityContext == null)
+                throw new ArgumentNullException("securityContext");
+            if (mediaTypeFactory == null)
+                throw new ArgumentNullException("mediaTypeFactory");
             if (linkRepository == null)
                 throw new ArgumentNullException("linkRepository");
             if (tagRepository == null)
                 throw new ArgumentNullException("tagRepository");
-            if (artistRepository == null)
-                throw new ArgumentNullException("artistRepository");
-            if (albumRepository == null)
-                throw new ArgumentNullException("albumRepository");
-            if (clipRepository == null)
-                throw new ArgumentNullException("clipRepository");
-            if (docRepository == null)
-                throw new ArgumentNullException("docRepository");
-            if (feedRepository == null)
-                throw new ArgumentNullException("feedRepository");
-            if (feedItemRepository == null)
-                throw new ArgumentNullException("feedItemRepository");
-            if (picRepository == null)
-                throw new ArgumentNullException("picRepository");
-            if (playlistRepository == null)
-                throw new ArgumentNullException("playlistRepository");
-            if (playlistItemRepository == null)
-                throw new ArgumentNullException("playlistItemRepository");
-            if (programRepository == null)
-                throw new ArgumentNullException("programRepository");
-            if (trackRepository == null)
-                throw new ArgumentNullException("trackRepository");
-            
+            if (mediaItemRepository == null)
+                throw new ArgumentNullException("mediaItemRepository");            
 
             this.logger = logger;
+            this.securityContext = securityContext;
+            this.mediaTypeFactory = mediaTypeFactory;
             this.linkRepository = linkRepository;
             this.tagRepository = tagRepository;
-            this.artistRepository = artistRepository;
-            this.albumRepository = albumRepository;
-            this.clipRepository = clipRepository;
-            this.docRepository = docRepository;
-            this.feedRepository = feedRepository;
-            this.feedItemRepository = feedItemRepository;
-            this.picRepository = picRepository;
-            this.playlistRepository = playlistRepository;
-            this.playlistItemRepository = playlistItemRepository;
-            this.programRepository = programRepository;
-            this.trackRepository = trackRepository;
+            this.mediaItemRepository = mediaItemRepository;
         }
 
         private readonly ILogger logger;
+        private readonly ISecurityContext securityContext;
+        private readonly IMediaTypeFactory mediaTypeFactory;
         private readonly ILinkRepository linkRepository;
         private readonly ITagRepository tagRepository;
-        private readonly IMediaItemRepository<IAlbum> albumRepository;
-        private readonly IMediaItemRepository<IArtist> artistRepository;
-        private readonly IMediaItemRepository<IClip> clipRepository;
-        private readonly IMediaItemRepository<IDoc> docRepository;
-        private readonly IMediaItemRepository<IFeed> feedRepository;
-        private readonly IMediaItemRepository<IFeedItem> feedItemRepository;
-        private readonly IMediaItemRepository<IPic> picRepository;
-        private readonly IMediaItemRepository<IPlaylist> playlistRepository;
-        private readonly IMediaItemRepository<IPlaylistItem> playlistItemRepository;
-        private readonly IMediaItemRepository<IProgram> programRepository;
-        private readonly IMediaItemRepository<ITrack> trackRepository;
+        private readonly IMediaItemRepository mediaItemRepository;
 
         public void UpdateThumbnail<T>(Uri id, Uri thumbnail, byte[] thumbnailData)
-            where T : IMediaItem
+            where T : class, IMediaItem
         {
             if (id == null)
                 throw new ArgumentNullException("id");
@@ -86,69 +53,79 @@ namespace Gnosis.Alexandria.Controllers
 
             try
             {
-                if (typeof(T) == typeof(IArtist) || typeof(T) == typeof(Artist))
-                {
-                    var item = artistRepository.GetByLocation(id);
-                    if (item == null)
-                        return;
+                var item = mediaItemRepository.GetByLocation<T>(id);
+                if (item == null)
+                    return;
 
-                    var identityInfo = new IdentityInfo(item.Location, item.Type, item.Name, item.Summary, item.FromDate, item.ToDate, item.Number);
-                    var sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
-                    var creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
-                    var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
-                    var targetInfo = new TargetInfo(item.Target, item.TargetType);
-                    var userInfo = new UserInfo(item.User, item.UserName);
-                    var thumbnailInfo = new ThumbnailInfo(thumbnail, thumbnailData);
-                    var updated = new Artist(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
-                    artistRepository.Save(new List<IArtist> { updated });
-                }
-                else if (typeof(T) == typeof(IAlbum) || typeof(T) == typeof(Album))
-                {
-                    var item = albumRepository.GetByLocation(id);
-                    if (item == null)
-                        return;
-                    var identityInfo = new IdentityInfo(item.Location, item.Type, item.Name, item.Summary, item.FromDate, item.ToDate, item.Number);
-                    var sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
-                    var creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
-                    var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
-                    var targetInfo = new TargetInfo(item.Target, item.TargetType);
-                    var userInfo = new UserInfo(item.User, item.UserName);
-                    var thumbnailInfo = new ThumbnailInfo(thumbnail, thumbnailData);
-                    var updated = new Album(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
-                    albumRepository.Save(new List<IAlbum> { updated });
-                }
-                else if (typeof(T) == typeof(ITrack) || typeof(T) == typeof(Track))
-                {
-                    var item = trackRepository.GetByLocation(id);
-                    if (item == null)
-                        return;
+                var builder = new MediaItemBuilder<T>(securityContext, mediaTypeFactory, item)
+                    .Thumbnail(thumbnail, thumbnailData);
 
-                    var identityInfo = new IdentityInfo(item.Location, item.Type, item.Name, item.Summary, item.FromDate, item.ToDate, item.Number);
-                    var sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
-                    var creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
-                    var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
-                    var targetInfo = new TargetInfo(item.Target, item.TargetType);
-                    var userInfo = new UserInfo(item.User, item.UserName);
-                    var thumbnailInfo = new ThumbnailInfo(thumbnail, thumbnailData);
-                    var updated = new Track(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
-                    trackRepository.Save(new List<ITrack> { updated });
-                }
-                else if (typeof(T) == typeof(IClip) || typeof(T) == typeof(Clip))
-                {
-                    var item = clipRepository.GetByLocation(id);
-                    if (item == null)
-                        return;
+                mediaItemRepository.Save<T>(new List<T> { builder.ToMediaItem() });
+                
 
-                    var identityInfo = new IdentityInfo(item.Location, item.Type, item.Name, item.Summary, item.FromDate, item.ToDate, item.Number);
-                    var sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
-                    var creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
-                    var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
-                    var targetInfo = new TargetInfo(item.Target, item.TargetType);
-                    var userInfo = new UserInfo(item.User, item.UserName);
-                    var thumbnailInfo = new ThumbnailInfo(thumbnail, thumbnailData);
-                    var updated = new Clip(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
-                    clipRepository.Save(new List<IClip> { updated });
-                }
+                //if (typeof(T) == typeof(IArtist) || typeof(T) == typeof(Artist))
+                //{
+                //    var item = artistRepository.GetByLocation(id);
+                //    if (item == null)
+                //        return;
+
+                //    var identityInfo = new IdentityInfo(item.Location, item.Type, item.Name, item.Summary, item.FromDate, item.ToDate, item.Number);
+                //    var sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
+                //    var creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
+                //    var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
+                //    var targetInfo = new TargetInfo(item.Target, item.TargetType);
+                //    var userInfo = new UserInfo(item.User, item.UserName);
+                //    var thumbnailInfo = new ThumbnailInfo(thumbnail, thumbnailData);
+                //    var updated = new Artist(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                //    artistRepository.Save(new List<IArtist> { updated });
+                //}
+                //else if (typeof(T) == typeof(IAlbum) || typeof(T) == typeof(Album))
+                //{
+                //    var item = albumRepository.GetByLocation(id);
+                //    if (item == null)
+                //        return;
+                //    var identityInfo = new IdentityInfo(item.Location, item.Type, item.Name, item.Summary, item.FromDate, item.ToDate, item.Number);
+                //    var sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
+                //    var creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
+                //    var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
+                //    var targetInfo = new TargetInfo(item.Target, item.TargetType);
+                //    var userInfo = new UserInfo(item.User, item.UserName);
+                //    var thumbnailInfo = new ThumbnailInfo(thumbnail, thumbnailData);
+                //    var updated = new Album(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                //    albumRepository.Save(new List<IAlbum> { updated });
+                //}
+                //else if (typeof(T) == typeof(ITrack) || typeof(T) == typeof(Track))
+                //{
+                //    var item = trackRepository.GetByLocation(id);
+                //    if (item == null)
+                //        return;
+
+                //    var identityInfo = new IdentityInfo(item.Location, item.Type, item.Name, item.Summary, item.FromDate, item.ToDate, item.Number);
+                //    var sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
+                //    var creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
+                //    var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
+                //    var targetInfo = new TargetInfo(item.Target, item.TargetType);
+                //    var userInfo = new UserInfo(item.User, item.UserName);
+                //    var thumbnailInfo = new ThumbnailInfo(thumbnail, thumbnailData);
+                //    var updated = new Track(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                //    trackRepository.Save(new List<ITrack> { updated });
+                //}
+                //else if (typeof(T) == typeof(IClip) || typeof(T) == typeof(Clip))
+                //{
+                //    var item = clipRepository.GetByLocation(id);
+                //    if (item == null)
+                //        return;
+
+                //    var identityInfo = new IdentityInfo(item.Location, item.Type, item.Name, item.Summary, item.FromDate, item.ToDate, item.Number);
+                //    var sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
+                //    var creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
+                //    var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
+                //    var targetInfo = new TargetInfo(item.Target, item.TargetType);
+                //    var userInfo = new UserInfo(item.User, item.UserName);
+                //    var thumbnailInfo = new ThumbnailInfo(thumbnail, thumbnailData);
+                //    var updated = new Clip(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                //    clipRepository.Save(new List<IClip> { updated });
+                //}
             }
             catch (Exception ex)
             {
@@ -158,7 +135,7 @@ namespace Gnosis.Alexandria.Controllers
         }
 
         public void UpdateSummary<T>(Uri id, string summary)
-            where T : IMediaItem
+            where T : class, IMediaItem
         {
             if (id == null)
                 throw new ArgumentNullException("id");
@@ -167,70 +144,79 @@ namespace Gnosis.Alexandria.Controllers
 
             try
             {
-                if (typeof(T) == typeof(IArtist) || typeof(T) == typeof(Artist))
-                {
-                    var item = artistRepository.GetByLocation(id);
-                    if (item == null)
-                        return;
+                var item = mediaItemRepository.GetByLocation<T>(id);
+                if (item == null)
+                    return;
 
-                    var identityInfo = new IdentityInfo(item.Location, item.Type, item.Name, summary, item.FromDate, item.ToDate, item.Number);
-                    var sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
-                    var creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
-                    var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
-                    var targetInfo = new TargetInfo(item.Target, item.TargetType);
-                    var userInfo = new UserInfo(item.User, item.UserName);
-                    var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
-                    var updated = new Artist(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
-                    artistRepository.Save(new List<IArtist> { updated });
-                }
-                else if (typeof(T) == typeof(IAlbum) || typeof(T) == typeof(Album))
-                {
-                    var item = albumRepository.GetByLocation(id);
-                    if (item == null)
-                        return;
+                var builder = new MediaItemBuilder<T>(securityContext, mediaTypeFactory, item)
+                    .Identity(item.Name, summary, item.FromDate, item.ToDate, item.Number, item.Location);
 
-                    var identityInfo = new IdentityInfo(item.Location, item.Type, item.Name, summary, item.FromDate, item.ToDate, item.Number);
-                    var sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
-                    var creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
-                    var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
-                    var targetInfo = new TargetInfo(item.Target, item.TargetType);
-                    var userInfo = new UserInfo(item.User, item.UserName);
-                    var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
-                    var updated = new Album(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
-                    albumRepository.Save(new List<IAlbum> { updated });
-                }
-                else if (typeof(T) == typeof(ITrack) || typeof(T) == typeof(Track))
-                {
-                    var item = trackRepository.GetByLocation(id);
-                    if (item == null)
-                        return;
+                mediaItemRepository.Save<T>(new List<T> { builder.ToMediaItem() });
 
-                    var identityInfo = new IdentityInfo(item.Location, item.Type, item.Name, summary, item.FromDate, item.ToDate, item.Number);
-                    var sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
-                    var creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
-                    var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
-                    var targetInfo = new TargetInfo(item.Target, item.TargetType);
-                    var userInfo = new UserInfo(item.User, item.UserName);
-                    var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
-                    var updated = new Track(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
-                    trackRepository.Save(new List<ITrack> { updated });
-                }
-                else if (typeof(T) == typeof(IClip) || typeof(T) == typeof(Clip))
-                {
-                    var item = clipRepository.GetByLocation(id);
-                    if (item == null)
-                        return;
+                //if (typeof(T) == typeof(IArtist) || typeof(T) == typeof(Artist))
+                //{
+                //    var item = artistRepository.GetByLocation(id);
+                //    if (item == null)
+                //        return;
 
-                    var identityInfo = new IdentityInfo(item.Location, item.Type, item.Name, summary, item.FromDate, item.ToDate, item.Number);
-                    var sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
-                    var creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
-                    var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
-                    var targetInfo = new TargetInfo(item.Target, item.TargetType);
-                    var userInfo = new UserInfo(item.User, item.UserName);
-                    var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
-                    var updated = new Clip(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
-                    clipRepository.Save(new List<IClip> { updated });
-                }
+                //    var identityInfo = new IdentityInfo(item.Location, item.Type, item.Name, summary, item.FromDate, item.ToDate, item.Number);
+                //    var sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
+                //    var creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
+                //    var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
+                //    var targetInfo = new TargetInfo(item.Target, item.TargetType);
+                //    var userInfo = new UserInfo(item.User, item.UserName);
+                //    var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
+                //    var updated = new Artist(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                //    artistRepository.Save(new List<IArtist> { updated });
+                //}
+                //else if (typeof(T) == typeof(IAlbum) || typeof(T) == typeof(Album))
+                //{
+                //    var item = albumRepository.GetByLocation(id);
+                //    if (item == null)
+                //        return;
+
+                //    var identityInfo = new IdentityInfo(item.Location, item.Type, item.Name, summary, item.FromDate, item.ToDate, item.Number);
+                //    var sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
+                //    var creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
+                //    var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
+                //    var targetInfo = new TargetInfo(item.Target, item.TargetType);
+                //    var userInfo = new UserInfo(item.User, item.UserName);
+                //    var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
+                //    var updated = new Album(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                //    albumRepository.Save(new List<IAlbum> { updated });
+                //}
+                //else if (typeof(T) == typeof(ITrack) || typeof(T) == typeof(Track))
+                //{
+                //    var item = trackRepository.GetByLocation(id);
+                //    if (item == null)
+                //        return;
+
+                //    var identityInfo = new IdentityInfo(item.Location, item.Type, item.Name, summary, item.FromDate, item.ToDate, item.Number);
+                //    var sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
+                //    var creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
+                //    var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
+                //    var targetInfo = new TargetInfo(item.Target, item.TargetType);
+                //    var userInfo = new UserInfo(item.User, item.UserName);
+                //    var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
+                //    var updated = new Track(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                //    trackRepository.Save(new List<ITrack> { updated });
+                //}
+                //else if (typeof(T) == typeof(IClip) || typeof(T) == typeof(Clip))
+                //{
+                //    var item = clipRepository.GetByLocation(id);
+                //    if (item == null)
+                //        return;
+
+                //    var identityInfo = new IdentityInfo(item.Location, item.Type, item.Name, summary, item.FromDate, item.ToDate, item.Number);
+                //    var sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
+                //    var creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
+                //    var catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
+                //    var targetInfo = new TargetInfo(item.Target, item.TargetType);
+                //    var userInfo = new UserInfo(item.User, item.UserName);
+                //    var thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
+                //    var updated = new Clip(identityInfo, sizeInfo, creatorInfo, catalogInfo, targetInfo, userInfo, thumbnailInfo);
+                //    clipRepository.Save(new List<IClip> { updated });
+                //}
             }
             catch (Exception ex)
             {
@@ -265,12 +251,12 @@ namespace Gnosis.Alexandria.Controllers
 
         public IAlbum GetAlbum(Uri album)
         {
-            return albumRepository.GetByLocation(album);
+            return mediaItemRepository.GetByLocation<IAlbum>(album);
         }
 
         public IEnumerable<ITrack> GetTracks(Uri album)
         {
-            return trackRepository.GetByCatalog(album);
+            return mediaItemRepository.GetByCatalog<ITrack>(album);
         }
 
         public void SaveLinks(IEnumerable<ILink> links)

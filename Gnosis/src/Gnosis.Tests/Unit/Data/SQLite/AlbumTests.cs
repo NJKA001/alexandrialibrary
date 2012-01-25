@@ -34,7 +34,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
 
             connection = connectionFactory.Create(connectionString);
             connection.Open();
-            repository = new SQLiteAlbumRepository(logger, securityContext, mediaTypeFactory, connection);
+            repository = new SQLiteMediaItemRepository(logger, securityContext, mediaTypeFactory, connection);
             repository.Initialize();
             repository.Save(new List<IAlbum> { album1, album2, album5 });
         }
@@ -47,7 +47,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected readonly ISecurityContext securityContext;
         protected readonly IContentTypeFactory contentTypeFactory;
         protected readonly IDbConnection connection;
-        protected readonly IMediaItemRepository<IAlbum> repository;
+        protected readonly IMediaItemRepository repository;
         protected readonly IMediaType mediaType;
         protected readonly Uri unknownLocation = Guid.Empty.ToUrn();
 
@@ -72,8 +72,8 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void DefaultAlbumCannotBeDeleted()
         {
-            repository.Delete(new List<Uri> { unknownLocation });
-            var check = repository.GetByLocation(unknownLocation);
+            repository.Delete<IAlbum>(new List<Uri> { unknownLocation });
+            var check = repository.GetByLocation<IAlbum>(unknownLocation);
             Assert.IsNotNull(check);
             Assert.AreEqual(check.Name, "Unknown");
         }
@@ -81,14 +81,14 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void CanBeReadByLocation()
         {
-            var check1 = repository.GetByLocation(album1.Location);
+            var check1 = repository.GetByLocation<IAlbum>(album1.Location);
             Assert.IsNotNull(check1);
             Assert.AreEqual(album1.Name, check1.Name);
             Assert.AreEqual(album1.FromDate, check1.FromDate);
             Assert.AreEqual(album1.Creator, check1.Creator);
             Assert.AreEqual(album1.CreatorName, album1.CreatorName);
             Assert.AreEqual(album1.Thumbnail, check1.Thumbnail);
-            var check2 = repository.GetByLocation(album2.Location);
+            var check2 = repository.GetByLocation<IAlbum>(album2.Location);
             Assert.IsNotNull(check2);
             Assert.AreEqual(album2.Name, check2.Name);
             Assert.AreEqual(album2.FromDate, check2.FromDate);
@@ -100,7 +100,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void CanBeReadByTitle()
         {
-            var checks1 = repository.GetByName("OK%");
+            var checks1 = repository.GetByName<IAlbum>("OK%");
             Assert.AreEqual(1, checks1.Count());
             var check1 = checks1.FirstOrDefault();
             Assert.IsNotNull(check1);
@@ -109,7 +109,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.AreEqual(album1.Creator, check1.Creator);
             Assert.AreEqual(album1.CreatorName, album1.CreatorName);
             Assert.AreEqual(album1.Thumbnail, check1.Thumbnail);
-            var checks2 = repository.GetByName(album2.Name);
+            var checks2 = repository.GetByName<IAlbum>(album2.Name);
             Assert.AreEqual(1, checks2.Count());
             var check2 = checks2.FirstOrDefault();
             Assert.IsNotNull(check2);
@@ -123,7 +123,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void CanBeReadByArtistSortedByReleaseDate()
         {
-            var check = repository.GetByCreator(new Uri(radioheadUrn));
+            var check = repository.GetByCreator<IAlbum>(new Uri(radioheadUrn));
             Assert.AreEqual(2, check.Count());
             Assert.AreEqual(album5.Name, check.First().Name);
             Assert.AreEqual(album1.Name, check.Last().Name);
@@ -134,7 +134,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         {
             repository.Save(new List<IAlbum> { album2 });
 
-            var check = repository.GetByName("Undertow");
+            var check = repository.GetByName<IAlbum>("Undertow");
             Assert.AreEqual(1, check.Count());
         }
 
@@ -142,12 +142,12 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         public void CanBeDeleted()
         {
             repository.Save(new List<IAlbum> { album3, album4 });
-            Assert.IsNotNull(repository.GetByLocation(album3.Location));
-            Assert.IsNotNull(repository.GetByLocation(album4.Location));
+            Assert.IsNotNull(repository.GetByLocation<IAlbum>(album3.Location));
+            Assert.IsNotNull(repository.GetByLocation<IAlbum>(album4.Location));
 
-            repository.Delete(new List<Uri> { album3.Location, album4.Location });
-            Assert.IsNull(repository.GetByLocation(album3.Location));
-            Assert.IsNull(repository.GetByLocation(album4.Location));
+            repository.Delete<IAlbum>(new List<Uri> { album3.Location, album4.Location });
+            Assert.IsNull(repository.GetByLocation<IAlbum>(album3.Location));
+            Assert.IsNull(repository.GetByLocation<IAlbum>(album4.Location));
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
 
             connection = connectionFactory.Create(connectionString);
             connection.Open();
-            repository = new SQLiteTrackRepository(logger, securityContext, mediaTypeFactory, connection);
+            repository = new SQLiteMediaItemRepository(logger, securityContext, mediaTypeFactory, connection);
             repository.Initialize();
             repository.Save(new List<ITrack> { track1, track2, track5 });
         }
@@ -48,7 +48,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected readonly ISecurityContext securityContext;
         protected readonly IContentTypeFactory contentTypeFactory;
         protected readonly IDbConnection connection;
-        protected readonly IMediaItemRepository<ITrack> repository;
+        protected readonly IMediaItemRepository repository;
         protected readonly IMediaType mediaType;
         protected readonly IMediaType mpegAudioType;
         protected readonly Uri unknownLocation = Guid.Empty.ToUrn();
@@ -75,8 +75,8 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void DefaultTrackCannotBeDeleted()
         {
-            repository.Delete(new List<Uri> { unknownLocation });
-            var check = repository.GetByLocation(unknownLocation);
+            repository.Delete<ITrack>(new List<Uri> { unknownLocation });
+            var check = repository.GetByLocation<ITrack>(unknownLocation);
             Assert.IsNotNull(check);
             Assert.AreEqual(check.Name, "Unknown");
         }
@@ -84,7 +84,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void CanBeReadByLocation()
         {
-            var check1 = repository.GetByLocation(track1.Location);
+            var check1 = repository.GetByLocation<ITrack>(track1.Location);
             Assert.IsNotNull(check1);
             Assert.AreEqual(track1.Name, check1.Name);
             Assert.AreEqual(track1.Number, check1.Number);
@@ -96,7 +96,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.AreEqual(track1.Target, check1.Target);
             Assert.AreEqual(track1.TargetType, check1.TargetType);
             Assert.AreEqual(track1.Thumbnail, check1.Thumbnail);
-            var check2 = repository.GetByLocation(track2.Location);
+            var check2 = repository.GetByLocation<ITrack>(track2.Location);
             Assert.IsNotNull(check2);
             Assert.AreEqual(track2.Name, check2.Name);
             Assert.AreEqual(track2.Number, check2.Number);
@@ -113,7 +113,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void CanBeReadByTitle()
         {
-            var checks1 = repository.GetByName("Paranoid%");
+            var checks1 = repository.GetByName<ITrack>("Paranoid%");
             Assert.AreEqual(1, checks1.Count());
             var check1 = checks1.FirstOrDefault();
             Assert.AreEqual(track1.Name, check1.Name);
@@ -126,7 +126,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.AreEqual(track1.Target, check1.Target);
             Assert.AreEqual(track1.TargetType, check1.TargetType);
             Assert.AreEqual(track1.Thumbnail, check1.Thumbnail);
-            var checks2 = repository.GetByName(track2.Name);
+            var checks2 = repository.GetByName<ITrack>(track2.Name);
             Assert.AreEqual(1, checks2.Count());
             var check2 = checks2.FirstOrDefault();
             Assert.IsNotNull(check2);
@@ -145,7 +145,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void CanBeReadBytrackSortedByNumber()
         {
-            var check = repository.GetByCatalog(new Uri(okComputerUrn));
+            var check = repository.GetByCatalog<ITrack>(new Uri(okComputerUrn));
             Assert.AreEqual(2, check.Count());
             Assert.AreEqual(track5.Name, check.First().Name);
             Assert.AreEqual(track5.Number, check.First().Number);
@@ -158,14 +158,14 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         {
             repository.Save(new List<ITrack> { track2 });
 
-            var check = repository.GetByName("Sober");
+            var check = repository.GetByName<ITrack>("Sober");
             Assert.AreEqual(1, check.Count());
         }
 
         [Test]
         public void CanBeReadByTarget()
         {
-            var check = repository.GetByTarget(track1.Target).FirstOrDefault();
+            var check = repository.GetByTarget<ITrack>(track1.Target).FirstOrDefault();
             Assert.IsNotNull(check);
             Assert.AreEqual(track1.Name, check.Name);
         }
@@ -174,12 +174,12 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         public void CanBeDeleted()
         {
             repository.Save(new List<ITrack> { track3, track4 });
-            Assert.IsNotNull(repository.GetByLocation(track3.Location));
-            Assert.IsNotNull(repository.GetByLocation(track4.Location));
+            Assert.IsNotNull(repository.GetByLocation<ITrack>(track3.Location));
+            Assert.IsNotNull(repository.GetByLocation<ITrack>(track4.Location));
 
-            repository.Delete(new List<Uri> { track3.Location, track4.Location });
-            Assert.IsNull(repository.GetByLocation(track3.Location));
-            Assert.IsNull(repository.GetByLocation(track4.Location));
+            repository.Delete<ITrack>(new List<Uri> { track3.Location, track4.Location });
+            Assert.IsNull(repository.GetByLocation<ITrack>(track3.Location));
+            Assert.IsNull(repository.GetByLocation<ITrack>(track4.Location));
         }
     }
 }

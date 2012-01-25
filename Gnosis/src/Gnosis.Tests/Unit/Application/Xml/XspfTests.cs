@@ -32,8 +32,6 @@ namespace Gnosis.Tests.Unit.Application.Xml
             const string path = @".\Files\playlist.xspf";
             const int trackCount = 3;
 
-            var mediaFactory = new MediaFactory();
-
             var fileInfo = new FileInfo(path);
             Assert.IsTrue(fileInfo.Exists);
 

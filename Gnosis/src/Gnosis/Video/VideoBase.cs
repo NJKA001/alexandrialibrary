@@ -168,12 +168,12 @@ namespace Gnosis.Video
             return Enumerable.Empty<ITag>();
         }
 
-        public virtual IArtist GetArtist(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository<IClip> clipRepository, IMediaItemRepository<IArtist> artistRepository)
+        public virtual IArtist GetArtist(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository mediaItemRepository)
         {
-            var clip = clipRepository.GetByTarget(Location).FirstOrDefault();
+            var clip = mediaItemRepository.GetByTarget<IClip>(Location).FirstOrDefault();
             if (clip != null)
             {
-                var artist = artistRepository.GetByLocation(clip.Creator);
+                var artist = mediaItemRepository.GetByLocation<IArtist>(clip.Creator);
                 if (artist != null)
                     return artist;
             }
@@ -181,20 +181,20 @@ namespace Gnosis.Video
             return new MediaItemBuilder<IArtist>(securityContext, mediaTypeFactory).GetDefault();
         }
 
-        public virtual IAlbum GetAlbum(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository<IClip> clipRepository, IMediaItemRepository<IAlbum> albumRepository, IArtist artist)
+        public virtual IAlbum GetAlbum(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository mediaItemRepository, IArtist artist)
         {
             IAlbum album = null;
-            var clip = clipRepository.GetByTarget(Location).FirstOrDefault();
+            var clip = mediaItemRepository.GetByTarget<IClip>(Location).FirstOrDefault();
             if (clip != null)
             {
-                album = albumRepository.GetByLocation(clip.Catalog);
+                album = mediaItemRepository.GetByLocation<IAlbum>(clip.Catalog);
                 if (album != null)
                     return album;
             }
 
             var albumName = GetAlbumName();
             var summary = string.Empty;
-            album = albumRepository.GetByName(albumName).FirstOrDefault();
+            album = mediaItemRepository.GetByName<IAlbum>(albumName).FirstOrDefault();
             if (album != null)
             {
                 return album;
@@ -210,9 +210,9 @@ namespace Gnosis.Video
             return builder.ToMediaItem();
         }
 
-        public virtual IClip GetClip(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository<IClip> clipRepository, IArtist artist, IAlbum album)
+        public virtual IClip GetClip(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository mediaItemRepository, IArtist artist, IAlbum album)
         {
-            var clip = clipRepository.GetByTarget(Location).FirstOrDefault();
+            var clip = mediaItemRepository.GetByTarget<IClip>(Location).FirstOrDefault();
             if (clip != null)
             {
                 return clip;

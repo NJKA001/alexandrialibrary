@@ -91,24 +91,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SQLiteMediaMarqueeRepository.cs" />
-    <Compile Include="SQLiteAlbumRepository.cs" />
-    <Compile Include="SQLiteArtistRepository.cs" />
-    <Compile Include="SQLiteClipRepository.cs" />
     <Compile Include="SQLiteConnectionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQLiteDocRepository.cs" />
-    <Compile Include="SQLiteFeedItemRepository.cs" />
-    <Compile Include="SQLiteFeedRepository.cs" />
     <Compile Include="SQLiteLinkRepository.cs" />
-    <Compile Include="SQLiteMediaItemRepositoryBase.cs" />
+    <Compile Include="SQLiteMediaItemRepository.cs" />
     <Compile Include="SQLiteMediaRepository.cs" />
-    <Compile Include="SQLitePicRepository.cs" />
-    <Compile Include="SQLitePlaylistItemRepository.cs" />
-    <Compile Include="SQLitePlaylistRepository.cs" />
-    <Compile Include="SQLiteProgramRepository.cs" />
     <Compile Include="SQLiteRepositoryBase.cs" />
     <Compile Include="SQLiteTagRepository.cs" />
-    <Compile Include="SQLiteTrackRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gnosis\Gnosis.csproj">

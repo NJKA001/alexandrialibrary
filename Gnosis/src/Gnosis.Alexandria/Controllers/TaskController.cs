@@ -14,7 +14,7 @@ namespace Gnosis.Alexandria.Controllers
     public class TaskController
         : ITaskController
     {
-        public TaskController(ILogger logger, IMediaTypeFactory mediaTypeFactory, IVideoPlayer videoPlayer, SpiderFactory spiderFactory, IMediaItemController mediaItemController, IMediaItemRepository<IArtist> artistRepository, IMediaItemRepository<IAlbum> albumRepository, IMediaItemRepository<ITrack> trackRepository, IMediaItemRepository<IClip> clipRepository)
+        public TaskController(ILogger logger, IMediaTypeFactory mediaTypeFactory, IVideoPlayer videoPlayer, SpiderFactory spiderFactory, IMediaItemController mediaItemController, IMediaItemRepository mediaItemRepository)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -26,24 +26,15 @@ namespace Gnosis.Alexandria.Controllers
                 throw new ArgumentNullException("spiderFactory");
             if (mediaItemController == null)
                 throw new ArgumentNullException("mediaItemController");
-            if (artistRepository == null)
-                throw new ArgumentNullException("artistRepository");
-            if (albumRepository == null)
-                throw new ArgumentNullException("albumRepository");
-            if (trackRepository == null)
-                throw new ArgumentNullException("trackRepository");
-            if (clipRepository == null)
-                throw new ArgumentNullException("clipRepository");
+            if (mediaItemRepository == null)
+                throw new ArgumentNullException("mediaItemRepository");
 
             this.logger = logger;
             this.mediaTypeFactory = mediaTypeFactory;
             this.videoPlayer = videoPlayer;
             this.spiderFactory = spiderFactory;
             this.mediaItemController = mediaItemController;
-            this.artistRepository = artistRepository;
-            this.albumRepository = albumRepository;
-            this.trackRepository = trackRepository;
-            this.clipRepository = clipRepository;
+            this.mediaItemRepository = mediaItemRepository;
             this.audioStreamFactory = new AudioStreamFactory();
         }
 
@@ -52,10 +43,7 @@ namespace Gnosis.Alexandria.Controllers
         private readonly IVideoPlayer videoPlayer;
         private readonly SpiderFactory spiderFactory;
         private readonly IMediaItemController mediaItemController;
-        private readonly IMediaItemRepository<IArtist> artistRepository;
-        private readonly IMediaItemRepository<IAlbum> albumRepository;
-        private readonly IMediaItemRepository<ITrack> trackRepository;
-        private readonly IMediaItemRepository<IClip> clipRepository;
+        private readonly IMediaItemRepository mediaItemRepository;
         private readonly ObservableCollection<ITaskViewModel> taskViewModels = new ObservableCollection<ITaskViewModel>();
         private readonly IAudioStreamFactory audioStreamFactory;
 
@@ -114,7 +102,7 @@ namespace Gnosis.Alexandria.Controllers
                 throw new ArgumentNullException("search");
 
             var pattern = search + "%";
-            var task = new SearchTask(logger, pattern, artistRepository, albumRepository, trackRepository, clipRepository);
+            var task = new SearchTask(logger, pattern, mediaItemRepository);
             return new SearchTaskViewModel(logger, task, search);
         }
 

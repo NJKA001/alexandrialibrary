@@ -60,49 +60,19 @@ namespace Gnosis.Alexandria.Views
                 tagRepository = new SQLiteTagRepository(logger, tagTypeFactory);
                 tagRepository.Initialize();
 
-                albumRepository = new SQLiteAlbumRepository(logger, securityContext, mediaTypeFactory);
-                albumRepository.Initialize();
-
-                artistRepository = new SQLiteArtistRepository(logger, securityContext, mediaTypeFactory);
-                artistRepository.Initialize();
-
-                clipRepository = new SQLiteClipRepository(logger, securityContext, mediaTypeFactory);
-                clipRepository.Initialize();
-
-                docRepository = new SQLiteDocRepository(logger, securityContext, mediaTypeFactory);
-                docRepository.Initialize();
-
-                feedRepository = new SQLiteFeedRepository(logger, securityContext, mediaTypeFactory);
-                feedRepository.Initialize();
-
-                feedItemRepository = new SQLiteFeedItemRepository(logger, securityContext, mediaTypeFactory);
-                feedItemRepository.Initialize();
-
-                picRepository = new SQLitePicRepository(logger, securityContext, mediaTypeFactory);
-                picRepository.Initialize();
-
-                playlistRepository = new SQLitePlaylistRepository(logger, securityContext, mediaTypeFactory);
-                playlistRepository.Initialize();
-
-                playlistItemRepository = new SQLitePlaylistItemRepository(logger, securityContext, mediaTypeFactory);
-                playlistItemRepository.Initialize();
-
-                programRepository = new SQLiteProgramRepository(logger, securityContext, mediaTypeFactory);
-                programRepository.Initialize();
-
-                trackRepository = new SQLiteTrackRepository(logger, securityContext, mediaTypeFactory);
-                trackRepository.Initialize();
+                mediaItemRepository = new SQLiteMediaItemRepository(logger, securityContext, mediaTypeFactory);
+                mediaItemRepository.Initialize();
 
                 audioStreamFactory = new AudioStreamFactory();
 
                 videoPlayer = new Gnosis.Video.Vlc.VideoPlayerControl();
                 videoPlayer.Initialize(logger, () => GetVideoHost());
 
-                catalogController = new CatalogController(logger, securityContext, contentTypeFactory, mediaTypeFactory, mediaRepository, linkRepository, tagRepository, artistRepository, albumRepository, trackRepository, clipRepository, audioStreamFactory);
-                spiderFactory = new SpiderFactory(logger, securityContext, contentTypeFactory, mediaTypeFactory, linkRepository, tagRepository, mediaRepository, artistRepository, albumRepository, trackRepository, clipRepository, audioStreamFactory);
+                catalogController = new CatalogController(logger, securityContext, contentTypeFactory, mediaTypeFactory, mediaRepository, linkRepository, tagRepository, mediaItemRepository, audioStreamFactory);
+                spiderFactory = new SpiderFactory(logger, securityContext, contentTypeFactory, mediaTypeFactory, linkRepository, tagRepository, mediaRepository, mediaItemRepository, audioStreamFactory);
 
-                mediaItemController = new MediaItemController(logger, linkRepository, tagRepository, albumRepository, artistRepository, clipRepository, docRepository, feedRepository, feedItemRepository, picRepository, playlistRepository, playlistItemRepository, programRepository, trackRepository);
-                taskController = new TaskController(logger, mediaTypeFactory, videoPlayer, spiderFactory, mediaItemController, artistRepository, albumRepository, trackRepository, clipRepository);
+                mediaItemController = new MediaItemController(logger, securityContext, mediaTypeFactory, linkRepository, tagRepository, mediaItemRepository);
+                taskController = new TaskController(logger, mediaTypeFactory, videoPlayer, spiderFactory, mediaItemController, mediaItemRepository);
                 tagController = new TagController(logger, tagRepository);
                 commandController = new CommandController(logger);
 
@@ -129,17 +99,7 @@ namespace Gnosis.Alexandria.Views
         private readonly IMediaRepository mediaRepository;
         private readonly ILinkRepository linkRepository;
         private readonly ITagRepository tagRepository;
-        private readonly IMediaItemRepository<IAlbum> albumRepository;
-        private readonly IMediaItemRepository<IArtist> artistRepository;
-        private readonly IMediaItemRepository<IClip> clipRepository;
-        private readonly IMediaItemRepository<IDoc> docRepository;
-        private readonly IMediaItemRepository<IFeed> feedRepository;
-        private readonly IMediaItemRepository<IFeedItem> feedItemRepository;
-        private readonly IMediaItemRepository<IPic> picRepository;
-        private readonly IMediaItemRepository<IPlaylist> playlistRepository;
-        private readonly IMediaItemRepository<IPlaylistItem> playlistItemRepository;
-        private readonly IMediaItemRepository<IProgram> programRepository;
-        private readonly IMediaItemRepository<ITrack> trackRepository;
+        private readonly IMediaItemRepository mediaItemRepository;
 
         private readonly IAudioStreamFactory audioStreamFactory;
         private readonly IVideoPlayer videoPlayer;

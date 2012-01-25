@@ -7,8 +7,8 @@ namespace Gnosis.Alexandria.Controllers
 {
     public interface IMediaItemController
     {
-        void UpdateThumbnail<T>(Uri id, Uri thumbnail, byte[] thumbnailData) where T : IMediaItem;
-        void UpdateSummary<T>(Uri id, string summary) where T : IMediaItem;
+        void UpdateThumbnail<T>(Uri id, Uri thumbnail, byte[] thumbnailData) where T : class, IMediaItem;
+        void UpdateSummary<T>(Uri id, string summary) where T : class, IMediaItem;
 
         IEnumerable<ILink> GetLinksBySource(Uri source);
         IEnumerable<ILink> GetLinksByTarget(Uri target);

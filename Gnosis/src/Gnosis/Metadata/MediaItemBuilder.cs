@@ -7,9 +7,14 @@ namespace Gnosis.Metadata
 {
     public class MediaItemBuilder<T>
         : IMediaItemBuilder<T>
-        where T : IMediaItem
+        where T : class, IMediaItem
     {
         public MediaItemBuilder(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory)
+            : this(securityContext, mediaTypeFactory, null)
+        {
+        }
+
+        public MediaItemBuilder(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, T item)
         {
             if (securityContext == null)
                 throw new ArgumentNullException("securityContext");
@@ -19,9 +24,22 @@ namespace Gnosis.Metadata
             this.securityContext = securityContext;
             this.mediaTypeFactory = mediaTypeFactory;
 
-            this.identityInfo = IdentityInfo.GetDefault(GetMediaType());
-            this.targetInfo = TargetInfo.GetDefault(mediaTypeFactory);
-            this.userInfo = securityContext.CurrentUserInfo;
+            if (item != null)
+            {
+                this.identityInfo = new IdentityInfo(item.Location, item.Type, item.Name, item.Summary, item.FromDate, item.ToDate, item.Number);
+                this.sizeInfo = new SizeInfo(item.Duration, item.Height, item.Width);
+                this.creatorInfo = new CreatorInfo(item.Creator, item.CreatorName);
+                this.catalogInfo = new CatalogInfo(item.Catalog, item.CatalogName);
+                this.targetInfo = new TargetInfo(item.Target, item.TargetType);
+                this.userInfo = new UserInfo(item.User, item.UserName);
+                this.thumbnailInfo = new ThumbnailInfo(item.Thumbnail, item.ThumbnailData);
+            }
+            else
+            {
+                this.identityInfo = IdentityInfo.GetDefault(GetMediaType());
+                this.targetInfo = TargetInfo.GetDefault(mediaTypeFactory);
+                this.userInfo = securityContext.CurrentUserInfo;
+            }
 
             InitializeCreateFunction();
         }
