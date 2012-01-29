@@ -13,23 +13,23 @@ namespace Gnosis.Identification
         {
         }
 
-        public MediaInfo(Uri location, string fileExtension, IContentType responseContentType, ICharacterSet bomCharacterSet, byte[] contentMagicNumber, IMediaType contentMediaType, ICharacterSet contentCharacterSet)
+        public MediaInfo(Uri location, IContentType responseContentType, IMediaType locationMediaType, IMediaType magicNumberMediaType, IMediaType contentMediaType, ICharacterSet bomCharacterSet, ICharacterSet contentCharacterSet)
         {
             this.location = location;
-            this.fileExtension = fileExtension;
             this.responseContentType = responseContentType;
-            this.bomCharacterSet = bomCharacterSet;
-            this.contentMagicNumber = contentMagicNumber;
+            this.locationMediaType = locationMediaType;
+            this.magicNumberMediaType = magicNumberMediaType;
             this.contentMediaType = contentMediaType;
+            this.bomCharacterSet = bomCharacterSet;
             this.contentCharacterSet = contentCharacterSet;
         }
 
-        private Uri location;
-        private string fileExtension;
+        private Uri location;        
         private IContentType responseContentType;
-        private ICharacterSet bomCharacterSet;
-        private byte[] contentMagicNumber;
+        private IMediaType locationMediaType;
+        private IMediaType magicNumberMediaType;
         private IMediaType contentMediaType;
+        private ICharacterSet bomCharacterSet;
         private ICharacterSet contentCharacterSet;
 
         public Uri Location
@@ -37,24 +37,19 @@ namespace Gnosis.Identification
             get { return location; }
         }
 
-        public string FileExtension
-        {
-            get { return fileExtension; }
-        }
-
         public IContentType ResponseContentType
         {
             get { return responseContentType; }
         }
 
-        public ICharacterSet BomCharacterSet
+        public IMediaType LocationMediaType
         {
-            get { return bomCharacterSet; }
+            get { return locationMediaType; }
         }
 
-        public byte[] ContentMagicNumber
+        public IMediaType MagicNumberMediaType
         {
-            get { return contentMagicNumber; }
+            get { return magicNumberMediaType; }
         }
 
         public IMediaType ContentMediaType
@@ -62,14 +57,14 @@ namespace Gnosis.Identification
             get { return contentMediaType; }
         }
 
+        public ICharacterSet BomCharacterSet
+        {
+            get { return bomCharacterSet; }
+        }
+
         public ICharacterSet ContentCharacterSet
         {
             get { return contentCharacterSet; }
-        }
-
-        public IContentType ToContentType()
-        {
-            throw new NotImplementedException();
         }
     }
 }

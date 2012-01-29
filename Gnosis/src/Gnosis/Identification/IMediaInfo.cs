@@ -8,16 +8,14 @@ namespace Gnosis.Identification
     public interface IMediaInfo
     {
         Uri Location { get; }
-        string FileExtension { get; }
-        
+
         IContentType ResponseContentType { get; }
-        
-        ICharacterSet BomCharacterSet { get; }
 
-        byte[] ContentMagicNumber { get; }
+        IMediaType LocationMediaType { get; }
+        IMediaType MagicNumberMediaType { get; }
         IMediaType ContentMediaType { get; }
-        ICharacterSet ContentCharacterSet { get; }
 
-        IContentType ToContentType();
+        ICharacterSet BomCharacterSet { get; }
+        ICharacterSet ContentCharacterSet { get; }
     }
 }
