@@ -12,6 +12,8 @@ namespace Gnosis
         ICharacterSet GetByEncoding(Encoding encoding);
         ICharacterSet GetByHeader(byte[] header);
 
+        IEnumerable<ICharacterSet> GetAll();
+
         void AddCharacterSet(ICharacterSet characterSet);
     }
 }

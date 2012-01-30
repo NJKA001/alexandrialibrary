@@ -11,7 +11,6 @@ namespace Gnosis.Application.Xml.Xhtml
         : IHtmlElement
     {
         string AnchorName { get; }
-        ICharacterSet CharSet { get; }
         string Class { get; }
         string Content { get; }
         AnchorDirection Dir { get; }
@@ -25,5 +24,7 @@ namespace Gnosis.Application.Xml.Xhtml
         int TabIndex { get; }
         string Title { get; }
         string Target { get; }
+
+        ICharacterSet GetCharacterSet(ICharacterSetFactory characterSetFactory);
     }
 }

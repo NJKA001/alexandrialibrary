@@ -46,8 +46,9 @@ namespace Gnosis.Alexandria.Views
             {
                 logger.Info("Initializing Alexandria");
 
-                mediaTypeFactory = new MediaTypeFactory(logger);
-                contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+                characterSetFactory = new CharacterSetFactory();
+                mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
+                contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
                 securityContext = new SecurityContext(mediaTypeFactory);
                 tagTypeFactory = new TagTypeFactory();
 
@@ -91,6 +92,7 @@ namespace Gnosis.Alexandria.Views
 
         private readonly ILogger logger;
 
+        private readonly ICharacterSetFactory characterSetFactory;
         private readonly IMediaTypeFactory mediaTypeFactory;
         private readonly IContentTypeFactory contentTypeFactory;
         private readonly ISecurityContext securityContext;

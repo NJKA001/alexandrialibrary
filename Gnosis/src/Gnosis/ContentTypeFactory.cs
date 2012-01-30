@@ -75,9 +75,9 @@ namespace Gnosis
                         foreach (var node in xml.ChildNodes)
                         {
                             var declaration = node as XmlDeclaration;
-                            if (declaration != null)
+                            if (declaration != null && declaration.Encoding != null)
                             {
-                                newCharSet = CharacterSet.Parse(declaration.Encoding);
+                                newCharSet = characterSetFactory.GetByName(declaration.Encoding);
                             }
                             else
                             {
@@ -190,10 +190,11 @@ namespace Gnosis
                         for (var i = 1; i < tokens.Length; i++)
                         {
                             token = tokens[i].Trim();
+                            var charSetName = token.Contains(charSetFieldName) && token.Length > 8 ? token.Substring(8).Trim() : string.Empty;
 
-                            if (token.Contains(charSetFieldName) && token.Length > 8)
+                            if (!string.IsNullOrEmpty(charSetName))
                             {
-                                charSet = CharacterSet.Parse(token.Substring(8).Trim());
+                                charSet = characterSetFactory.GetByName(charSetName);
                             }
                             else if (token.Contains(boundaryFieldName) && token.Length > 9)
                             {

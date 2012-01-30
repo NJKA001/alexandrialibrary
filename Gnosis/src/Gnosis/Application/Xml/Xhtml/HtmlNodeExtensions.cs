@@ -96,30 +96,34 @@ namespace Gnosis.Application.Xml.Xhtml
             return attributes;
         }
 
-        public static IEnumerable<INode> ToChildren(this HtmlNode self, IElement parent)
+        public static IEnumerable<INode> ToChildren(this HtmlNode self, IElement parent, ICharacterSetFactory characterSetFactory)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
             if (parent == null)
                 throw new ArgumentNullException("parent");
+            if (characterSetFactory == null)
+                throw new ArgumentNullException("characterSetFactory");
 
             var children = new List<INode>();
 
             foreach (var childNode in self.ChildNodes.OfType<HtmlNode>())
             {
-                var child = childNode.ToNode(parent);
+                var child = childNode.ToNode(parent, characterSetFactory);
                 children.AddIfNotNull(child);
             }
 
             return children;
         }
 
-        public static IElement ToElement(this HtmlNode self, INode parent)
+        public static IElement ToElement(this HtmlNode self, INode parent, ICharacterSetFactory characterSetFactory)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
             if (parent == null)
                 throw new ArgumentNullException("parent");
+            if (characterSetFactory == null)
+                throw new ArgumentNullException("characterSetFactory");
 
             var name = self.ToQualifiedName();
             var element = new Element(parent, name);
@@ -127,7 +131,7 @@ namespace Gnosis.Application.Xml.Xhtml
             foreach (var attribute in self.ToAttributes(element))
                 element.AddAttribute(attribute);
 
-            foreach (var child in self.ToChildren(element))
+            foreach (var child in self.ToChildren(element, characterSetFactory))
                 element.AddChild(child);
 
             var customElement = GetCustomElement(element, parent, name);
@@ -136,7 +140,7 @@ namespace Gnosis.Application.Xml.Xhtml
                 foreach (var attribute in self.ToAttributes(customElement))
                     customElement.AddAttribute(attribute);
 
-                foreach (var child in self.ToChildren(customElement))
+                foreach (var child in self.ToChildren(customElement, characterSetFactory))
                     customElement.AddChild(child);
 
                 return customElement;
@@ -228,12 +232,14 @@ namespace Gnosis.Application.Xml.Xhtml
             return new EscapedSection(parent, self.InnerHtml ?? string.Empty);
         }
 
-        public static INode ToNode(this HtmlNode self, INode parent)
+        public static INode ToNode(this HtmlNode self, INode parent, ICharacterSetFactory characterSetFactory)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
             if (parent == null)
                 throw new ArgumentNullException("parent");
+            if (characterSetFactory == null)
+                throw new ArgumentNullException("characterSetFactory");
 
             switch (self.NodeType)
             {
@@ -241,9 +247,9 @@ namespace Gnosis.Application.Xml.Xhtml
                     return self.ToCommentOrDocumentType(parent);
                 case HtmlNodeType.Element:
                     if (self.Name == "?xml")
-                        return self.ToDeclaration(parent);
+                        return self.ToDeclaration(parent, characterSetFactory);
                     else
-                        return self.ToElement(parent);
+                        return self.ToElement(parent, characterSetFactory);
                 case HtmlNodeType.Text:
                     return self.ToEscapedSection(parent);
                 case HtmlNodeType.Document:

@@ -109,6 +109,11 @@ namespace Gnosis
             return Unknown;
         }
 
+        public IEnumerable<ICharacterSet> GetAll()
+        {
+            return characterSets;
+        }
+
         public void AddCharacterSet(ICharacterSet characterSet)
         {
             if (characterSet == null)

@@ -11,7 +11,7 @@ namespace Gnosis.Application.Xml
     public class XmlDocument
         : IXmlDocument
     {
-        public XmlDocument(Uri location, IMediaType type, IMediaTypeFactory mediaTypeFactory)
+        public XmlDocument(Uri location, IMediaType type, IMediaTypeFactory mediaTypeFactory, ICharacterSetFactory characterSetFactory)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
@@ -19,15 +19,19 @@ namespace Gnosis.Application.Xml
                 throw new ArgumentNullException("type");
             if (mediaTypeFactory == null)
                 throw new ArgumentNullException("mediaTypeFactory");
+            if (characterSetFactory == null)
+                throw new ArgumentNullException("characterSetFactory");
 
             this.location = location;
             this.type = type;
             this.mediaTypeFactory = mediaTypeFactory;
+            this.characterSetFactory = characterSetFactory;
         }
 
-        private Uri location;
-        private IMediaType type;
-        private IMediaTypeFactory mediaTypeFactory;
+        private readonly Uri location;
+        private readonly IMediaType type;
+        private readonly IMediaTypeFactory mediaTypeFactory;
+        private readonly ICharacterSetFactory characterSetFactory;
 
         private IXmlElement xml;
         private bool isLoaded;
@@ -71,7 +75,7 @@ namespace Gnosis.Application.Xml
             if (!isLoaded)
             {
                 isLoaded = true;
-                this.xml = XmlElement.Parse(location, mediaTypeFactory);
+                this.xml = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
             }
         }
     }

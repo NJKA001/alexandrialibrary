@@ -21,9 +21,10 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         public SavedArtists()
         {
             logger = new DebugLogger();
-            mediaTypeFactory = new MediaTypeFactory(logger);
+            characterSetFactory = new CharacterSetFactory();
+            mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
             securityContext = new SecurityContext(mediaTypeFactory);
-            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
             mediaType = mediaTypeFactory.GetByCode("application/vnd.gnosis.artist");
 
             artist1 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Radiohead", string.Empty, new DateTime(1985, 1, 2), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(mediaTypeFactory), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image.jpg"), new byte[0]));
@@ -42,6 +43,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         private readonly IConnectionFactory connectionFactory = new SQLiteConnectionFactory();
 
         protected readonly ILogger logger = new DebugLogger();
+        protected readonly ICharacterSetFactory characterSetFactory;
         protected readonly IMediaTypeFactory mediaTypeFactory;
         protected readonly ISecurityContext securityContext;
         protected readonly IContentTypeFactory contentTypeFactory;

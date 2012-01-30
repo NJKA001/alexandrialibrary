@@ -263,19 +263,21 @@ namespace Gnosis.Application.Xml
                 : null;
         }
 
-        public static IDeclaration ToDeclaration(this XmlNode self, INode parent)
+        public static IDeclaration ToDeclaration(this XmlNode self, INode parent, ICharacterSetFactory characterSetFactory)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
             if (parent == null)
                 throw new ArgumentNullException("parent");
+            if (characterSetFactory == null)
+                throw new ArgumentNullException("characterSetFactory");
 
             var node = self as XmlDeclaration;
             if (node == null)
                 return null;
 
             var version = node.Version ?? "1.0";
-            var encoding = Gnosis.CharacterSet.Parse(node.Encoding);
+            var encoding = node.Encoding != null ? characterSetFactory.GetByName(node.Encoding) : characterSetFactory.Default;
             var standalone = Standalone.Undefined;
             if (node.Standalone != null)
             {

@@ -22,25 +22,31 @@ namespace Gnosis
     public class MediaTypeFactory
         : IMediaTypeFactory
     {
-        public MediaTypeFactory(ILogger logger)
+        public MediaTypeFactory(ILogger logger, ICharacterSetFactory characterSetFactory)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
+            if (characterSetFactory == null)
+                throw new ArgumentNullException("characterSetFactory");
 
             this.logger = logger;
+            this.characterSetFactory = characterSetFactory;
             this.defaultMediaType = ApplicationUnknown;
 
-            ApplicationAtomXml = new MediaType(MediaSupertype.Application, "atom+xml", false, (uri, type) => new XmlDocument(uri, type, this),  new List<string> { ".atom", ".xml" });
-            ApplicationRssXml = new MediaType(MediaSupertype.Application, "rss+xml", false, (uri, type) => new XmlDocument(uri, type, this), new List<string> { ".rss", ".xml" });
-            ApplicationXspfXml = new MediaType(MediaSupertype.Application, "xspf+xml", false, (uri, type) => new XmlDocument(uri, type, this), new List<string> { ".xspf" });
-            ApplicationXml = new MediaType(MediaSupertype.Application, "xml", false, (uri, type) => new XmlDocument(uri, type, this), new List<string> { ".xml" }, new List<string> { "text/xml" });
-            TextXsl = new MediaType(MediaSupertype.Text, "xsl", false, (uri, type) => new XmlDocument(uri, type, this), new List<string> { ".xsl" });
+            ApplicationAtomXml = new MediaType(MediaSupertype.Application, "atom+xml", false, (uri, type) => new XmlDocument(uri, type, this, characterSetFactory),  new List<string> { ".atom", ".xml" });
+            ApplicationRssXml = new MediaType(MediaSupertype.Application, "rss+xml", false, (uri, type) => new XmlDocument(uri, type, this, characterSetFactory), new List<string> { ".rss", ".xml" });
+            ApplicationXhtmlXml = new MediaType(MediaSupertype.Application, "xhtml+xml", false, (uri, type) => new XhtmlDocument(uri, type, characterSetFactory), new List<string> { ".xhtml" }, new List<string> { "text/html" });
+            ApplicationXspfXml = new MediaType(MediaSupertype.Application, "xspf+xml", false, (uri, type) => new XmlDocument(uri, type, this, characterSetFactory), new List<string> { ".xspf" });
+            ApplicationXml = new MediaType(MediaSupertype.Application, "xml", false, (uri, type) => new XmlDocument(uri, type, this, characterSetFactory), new List<string> { ".xml" }, new List<string> { "text/xml" });
+            TextHtml = new MediaType(MediaSupertype.Text, "html", false, (uri, type) => new XhtmlDocument(uri, type, characterSetFactory), new List<string> { ".html", ".htm" }, new List<string> { "text/html" });
+            TextXsl = new MediaType(MediaSupertype.Text, "xsl", false, (uri, type) => new XmlDocument(uri, type, this, characterSetFactory), new List<string> { ".xsl" });
 
             InitializeMediaTypes();
         }
 
-        private ILogger logger;
-        private IMediaType defaultMediaType;
+        private readonly ILogger logger;
+        private readonly ICharacterSetFactory characterSetFactory;
+        private readonly IMediaType defaultMediaType;
 
         private readonly IList<IMediaType> all = new List<IMediaType>();
         private readonly IDictionary<string, IMediaType> byCode = new Dictionary<string, IMediaType>();
@@ -53,12 +59,13 @@ namespace Gnosis
 
         private readonly IMediaType ApplicationAtomXml;
         private readonly IMediaType ApplicationRssXml;
+        private readonly IMediaType ApplicationXhtmlXml;
         private readonly IMediaType ApplicationXspfXml;
         private readonly IMediaType ApplicationXml;
+        private readonly IMediaType TextHtml; 
         private readonly IMediaType TextXsl;
 
         private readonly IMediaType ApplicationPdf = new MediaType(MediaSupertype.Application, "pdf", false, (uri, type) => new PdfDocument(uri, type), new List<string> { ".pdf" }, new List<string> { "application/x-pdf", "application/x-bzpdf", "application/x-gxpdf" }, new List<byte[]> { new byte[] { 0x25, 0x50, 0x44, 0x46 } });
-        private readonly IMediaType ApplicationXhtmlXml = new MediaType(MediaSupertype.Application, "xhtml+xml", false, (uri, type) => new XhtmlDocument(uri, type), new List<string> { ".xhtml" }, new List<string> { "text/html" });
         private readonly IMediaType ApplicationXmlDtd = new MediaType(MediaSupertype.Application, "xml-dtd", false, (uri, type) => new XmlDtdDocument(uri, type), new List<string> { ".dtd", ".ent" });
         private readonly IMediaType ApplicationUnknown = new MediaType(MediaSupertype.Application, "unknown", true, (uri, type) => new UnknownApplication(uri, type));
 
@@ -94,7 +101,6 @@ namespace Gnosis
         private readonly IMediaType ImagePng = new MediaType(MediaSupertype.Image, "png", false, (uri, type) => new PngImage(uri, type), new List<string> { ".png" }, new List<string> { "image/x-png" }, new List<byte[]> { new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 } });
 
         private readonly IMediaType TextCss = new MediaType(MediaSupertype.Text, "css", false, (uri, type) => new PlainText(uri, type), new List<string> { ".css" });
-        private readonly IMediaType TextHtml = new MediaType(MediaSupertype.Text, "html", false, (uri, type) => new XhtmlDocument(uri, type), new List<string> { ".html", ".htm" }, new List<string> { "text/html" });
         private readonly IMediaType TextPlain = new MediaType(MediaSupertype.Text, "plain", false, (uri, type) => new PlainText(uri, type), new List<string> { ".txt", ".text", ".ini" });
 
         private readonly IMediaType VideoAvi = new MediaType(MediaSupertype.Video, "avi", false, (uri, type) => new AviVideo(uri, type), new List<string> { ".avi" }, new List<string> { "video/x-msvideo", "video/msvideo" }, new List<byte[]> { new byte[] { 0x52, 0x49, 0x46, 0x46 } });

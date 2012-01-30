@@ -24,11 +24,13 @@ namespace Gnosis.Tests.Unit.Application.Xml
         public XmlDocuments()
         {
             logger = new Gnosis.Utilities.DebugLogger();
-            mediaTypeFactory = new MediaTypeFactory(logger);
-            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+            characterSetFactory = new CharacterSetFactory();
+            mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
+            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
         }
 
         private ILogger logger;
+        private ICharacterSetFactory characterSetFactory;
         private IMediaTypeFactory mediaTypeFactory;
         private IContentTypeFactory contentTypeFactory;
 
@@ -150,7 +152,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var xml = XmlElement.Parse(location, mediaTypeFactory);
+            var xml = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
             MakeArsXmlAssertions(xml);
         }
 
@@ -163,7 +165,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var xml = XmlElement.Parse(location, mediaTypeFactory);
+            var xml = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
             MakeAtomXmlAssertions(xml);
         }
 
@@ -179,7 +181,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var xml = XmlElement.Parse(location, mediaTypeFactory);
+            var xml = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
 
             Assert.IsNotNull(xml);
             
@@ -202,13 +204,13 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var original = XmlElement.Parse(location, mediaTypeFactory);
+            var original = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
             Assert.IsNotNull(original);
 
             var output = original.ToString();
             System.Diagnostics.Debug.WriteLine(output);
 
-            var xml = XmlElement.Parse(output, mediaTypeFactory);
+            var xml = XmlElement.Parse(output, mediaTypeFactory, characterSetFactory);
             MakeArsXmlAssertions(xml);
         }
     }

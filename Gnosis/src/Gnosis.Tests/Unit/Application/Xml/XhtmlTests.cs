@@ -17,11 +17,13 @@ namespace Gnosis.Tests.Unit.Application.Xml
         public XhtmlDocuments()
         {
             logger = new Gnosis.Utilities.DebugLogger();
-            mediaTypeFactory = new MediaTypeFactory(logger);
-            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+            characterSetFactory = new CharacterSetFactory();
+            mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
+            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
         }
 
         private ILogger logger;
+        private ICharacterSetFactory characterSetFactory;
         private IMediaTypeFactory mediaTypeFactory;
         private IContentTypeFactory contentTypeFactory;
 
@@ -34,7 +36,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             var declaration = xhtml.Children.OfType<IDeclaration>().FirstOrDefault();
             Assert.IsNotNull(declaration);
-            Assert.AreEqual(CharacterSet.Utf8, declaration.Encoding);
+            Assert.AreEqual("UTF-8", declaration.Encoding.Name);
             Assert.AreEqual("1.0", declaration.Version);
 
             var root = xhtml.Children.OfType<IElement>().FirstOrDefault();
@@ -56,7 +58,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             var location = new Uri(fileInfo.FullName);
 
-            var xhtml = XhtmlElement.Parse(location);
+            var xhtml = XhtmlElement.Parse(location, characterSetFactory);
             MakeDocumentAssertions(xhtml);
         }
 
@@ -70,8 +72,8 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             var location = new Uri(fileInfo.FullName);
 
-            var original = XhtmlElement.Parse(location);
-            var xhtml = XhtmlElement.Parse(original.ToString());
+            var original = XhtmlElement.Parse(location, characterSetFactory);
+            var xhtml = XhtmlElement.Parse(original.ToString(), characterSetFactory);
             MakeDocumentAssertions(xhtml);
         }
 
@@ -85,7 +87,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             var location = new Uri(fileInfo.FullName);
 
-            var xml = XmlElement.Parse(location, mediaTypeFactory);
+            var xml = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
             MakeDocumentAssertions(xml);
             //Assert.IsNotNull(xml);
             //Assert.IsNotNull(xml.DocumentType);

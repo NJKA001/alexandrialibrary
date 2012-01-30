@@ -20,10 +20,10 @@ namespace Gnosis.Application.Xml.Xhtml
             get { return GetAttributeString("name"); }
         }
 
-        public ICharacterSet CharSet
-        {
-            get { return GetAttributeCharacterSet("charset"); }
-        }
+        //public ICharacterSet CharSet
+        //{
+        //    get { return GetAttributeCharacterSet("charset"); }
+        //}
 
         public string Class
         {
@@ -88,6 +88,14 @@ namespace Gnosis.Application.Xml.Xhtml
         public string Title
         {
             get { return GetAttributeString("title"); }
+        }
+
+        public ICharacterSet GetCharacterSet(ICharacterSetFactory characterSetFactory)
+        {
+            if (characterSetFactory == null)
+                throw new ArgumentNullException("characterSetFactory");
+
+            return GetAttributeCharacterSet("charset", characterSetFactory);
         }
     }
 }

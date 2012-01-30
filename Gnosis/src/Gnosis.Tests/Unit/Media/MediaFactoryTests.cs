@@ -13,11 +13,13 @@ namespace Gnosis.Tests.Unit.Media
         public MediaFactories()
         {
             logger = new Gnosis.Utilities.DebugLogger();
-            mediaTypeFactory = new MediaTypeFactory(logger);
-            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+            characterSetFactory = new CharacterSetFactory();
+            mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
+            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
         }
 
         private readonly ILogger logger;
+        private readonly ICharacterSetFactory characterSetFactory;
         private readonly IMediaTypeFactory mediaTypeFactory;
         private readonly IContentTypeFactory contentTypeFactory;
 

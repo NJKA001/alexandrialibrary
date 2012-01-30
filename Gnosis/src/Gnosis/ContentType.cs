@@ -57,7 +57,7 @@ namespace Gnosis
 
             builder.Append(type.ToString());
 
-            if (charSet != null && charSet != CharacterSet.Unknown)
+            if (charSet != null && !charSet.IsDefault)
                 builder.AppendFormat("; charset={0}", charSet.ToString());
 
             if (!string.IsNullOrEmpty(boundary))

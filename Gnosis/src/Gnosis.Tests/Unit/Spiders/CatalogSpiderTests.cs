@@ -25,8 +25,9 @@ namespace Gnosis.Tests.Unit.Spiders
         public CatalogSpiderTests()
         {
             logger = new DebugLogger();
-            mediaTypeFactory = new MediaTypeFactory(logger);
-            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+            characterSetFactory = new CharacterSetFactory();
+            mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
+            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
             securityContext = new SecurityContext(mediaTypeFactory);
         }
 
@@ -34,6 +35,7 @@ namespace Gnosis.Tests.Unit.Spiders
 
         private IConnectionFactory connectionFactory = new SQLiteConnectionFactory();
         private ILogger logger;
+        private ICharacterSetFactory characterSetFactory;
         private IMediaTypeFactory mediaTypeFactory;
         private IContentTypeFactory contentTypeFactory;
         private ISecurityContext securityContext;

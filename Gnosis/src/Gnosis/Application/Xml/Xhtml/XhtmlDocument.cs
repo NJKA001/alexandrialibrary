@@ -10,19 +10,24 @@ namespace Gnosis.Application.Xml.Xhtml
     public class XhtmlDocument
         : IXmlDocument
     {
-        public XhtmlDocument(Uri location, IMediaType type)
+        public XhtmlDocument(Uri location, IMediaType type, ICharacterSetFactory characterSetFactory)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
             if (type == null)
                 throw new ArgumentNullException("type");
+            if (characterSetFactory == null)
+                throw new ArgumentNullException("characterSetFactory");
 
             this.location = location;
             this.type = type;
+            this.characterSetFactory = characterSetFactory;
         }
 
         private Uri location;
         private IMediaType type;
+        private ICharacterSetFactory characterSetFactory;
+
         private IXmlElement xml;
         private bool isLoaded;
 
@@ -69,7 +74,7 @@ namespace Gnosis.Application.Xml.Xhtml
             if (!isLoaded)
             {
                 isLoaded = true;
-                this.xml = XhtmlElement.Parse(location);
+                this.xml = XhtmlElement.Parse(location, characterSetFactory);
             }
         }
     }

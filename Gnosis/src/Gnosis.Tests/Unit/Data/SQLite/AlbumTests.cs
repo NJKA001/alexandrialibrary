@@ -21,9 +21,10 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         public SavedAlbums()
         {
             logger = new DebugLogger();
-            mediaTypeFactory = new MediaTypeFactory(logger);
+            characterSetFactory = new CharacterSetFactory();
+            mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
             securityContext = new SecurityContext(mediaTypeFactory);
-            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
             mediaType = mediaTypeFactory.GetByCode("application/vnd.gnosis.album");
 
             album1 = new Album(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "OK Computer", string.Empty, new DateTime(1997, 9, 22), new DateTime(1997, 9, 22), 0), SizeInfo.Default, new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), CatalogInfo.Default, TargetInfo.GetDefault(mediaTypeFactory), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image1.jpg"), new byte[0]));
@@ -43,6 +44,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         private readonly IConnectionFactory connectionFactory = new SQLiteConnectionFactory();
 
         protected readonly ILogger logger;
+        protected readonly ICharacterSetFactory characterSetFactory;
         protected readonly IMediaTypeFactory mediaTypeFactory;
         protected readonly ISecurityContext securityContext;
         protected readonly IContentTypeFactory contentTypeFactory;

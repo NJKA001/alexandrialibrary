@@ -19,11 +19,13 @@ namespace Gnosis.Tests.Unit.Application.Xml
         public AtomDocuments()
         {
             logger = new Gnosis.Utilities.DebugLogger();
-            mediaTypeFactory = new MediaTypeFactory(logger);
-            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+            characterSetFactory = new CharacterSetFactory();
+            mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
+            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
         }
 
         private ILogger logger;
+        private ICharacterSetFactory characterSetFactory;
         private IMediaTypeFactory mediaTypeFactory;
         private IContentTypeFactory contentTypeFactory;
 
@@ -227,11 +229,11 @@ namespace Gnosis.Tests.Unit.Application.Xml
             var contentType = contentTypeFactory.GetByLocation(location);
             Assert.AreEqual("application/atom+xml", contentType.Type.ToString());
 
-            var original = XmlElement.Parse(location, mediaTypeFactory);
+            var original = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
             var xmlString = original.ToString();
             Assert.IsNotNull(xmlString);
 
-            var document = XmlElement.Parse(xmlString, mediaTypeFactory);
+            var document = XmlElement.Parse(xmlString, mediaTypeFactory, characterSetFactory);
             //var xml = new XmlDocument();
             //xml.LoadXml(xmlString);
             //IAtomFeed feed = null;
@@ -274,7 +276,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             var contentType = contentTypeFactory.GetByLocation(location);
             Assert.AreEqual("application/atom+xml", contentType.Type.ToString());
 
-            var document = XmlElement.Parse(location, mediaTypeFactory);
+            var document = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
 
             MakeAtomFeedAssertions(document);
         }

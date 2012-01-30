@@ -13,11 +13,13 @@ namespace Gnosis.Tests.Network
         public RemoteContentTypeItems()
         {
             logger = new Gnosis.Utilities.DebugLogger();
-            mediaTypeFactory = new MediaTypeFactory(logger);
-            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory);
+            characterSetFactory = new CharacterSetFactory();
+            mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
+            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
         }
 
         private ILogger logger;
+        private ICharacterSetFactory characterSetFactory;
         private IMediaTypeFactory mediaTypeFactory;
         private IContentTypeFactory contentTypeFactory;
 
@@ -29,7 +31,7 @@ namespace Gnosis.Tests.Network
             Assert.IsNotNull(contentType);
             Assert.AreNotEqual(contentTypeFactory.Default, contentType);
             Assert.AreEqual("application/rss+xml", contentType.Type.ToString());
-            Assert.AreEqual(CharacterSet.Utf8, contentType.CharSet);
+            Assert.AreEqual("UTF-8", contentType.CharSet.Name);
             Assert.IsNull(contentType.Boundary);
         }
 
@@ -41,7 +43,7 @@ namespace Gnosis.Tests.Network
             Assert.IsNotNull(contentType);
             Assert.AreNotEqual(contentTypeFactory.Default, contentType);
             Assert.AreEqual("application/atom+xml", contentType.Type.ToString());
-            Assert.AreEqual(CharacterSet.Utf8, contentType.CharSet);
+            Assert.AreEqual("UTF-8", contentType.CharSet.Name);
             Assert.IsNull(contentType.Boundary);
         }
     }
