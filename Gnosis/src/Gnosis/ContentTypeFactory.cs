@@ -11,20 +11,25 @@ namespace Gnosis
     public class ContentTypeFactory
         : IContentTypeFactory
     {
-        public ContentTypeFactory(ILogger logger, IMediaTypeFactory mediaTypeFactory)
+        public ContentTypeFactory(ILogger logger, IMediaTypeFactory mediaTypeFactory, ICharacterSetFactory characterSetFactory)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
             if (mediaTypeFactory == null)
                 throw new ArgumentNullException("mediaTypeFactory");
+            if (characterSetFactory == null)
+                throw new ArgumentNullException("characterSetFactory");
 
             this.logger = logger;
             this.mediaTypeFactory = mediaTypeFactory;
+            this.characterSetFactory = characterSetFactory;
+
             defaultContentType = new ContentType(mediaTypeFactory.Default);
         }
 
         private readonly ILogger logger;
         private readonly IMediaTypeFactory mediaTypeFactory;
+        private readonly ICharacterSetFactory characterSetFactory;
         private readonly IContentType defaultContentType;
 
         private const string charSetFieldName = "charset=";
@@ -40,7 +45,7 @@ namespace Gnosis
                     {
                         var buffer = new char[20];
                         reader.Read(buffer, 0, 20);
-                        return CharacterSet.GetCharacterSet(reader.CurrentEncoding);
+                        return characterSetFactory.GetByEncoding(reader.CurrentEncoding);
                     }
                 }
 

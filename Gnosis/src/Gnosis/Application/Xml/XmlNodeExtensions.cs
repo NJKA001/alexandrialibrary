@@ -238,15 +238,18 @@ namespace Gnosis.Application.Xml
                 : null;
         }
 
-        public static ICharacterSet ToEncoding(this System.Xml.XmlNode node)
+        public static ICharacterSet ToEncoding(this System.Xml.XmlNode node, ICharacterSetFactory characterSetFactory)
         {
+            if (characterSetFactory == null)
+                throw new ArgumentNullException("characterSetFactory");
+
             if (node == null || !(node is System.Xml.XmlDeclaration))
-                return CharacterSet.Utf8;
+                return characterSetFactory.GetByName("UTF-8");
 
             var declaration = node as System.Xml.XmlDeclaration;
-            var encoding = declaration.Encoding.ToCharacterSet();
+            var encoding = declaration.Encoding.ToCharacterSet(characterSetFactory);
 
-            return (encoding != CharacterSet.Unknown) ? encoding : CharacterSet.Utf8;
+            return (encoding != characterSetFactory.Default) ? encoding : characterSetFactory.GetByName("UTF-8");
         }
 
         public static Uri ToXmlBase(this System.Xml.XmlNode self)

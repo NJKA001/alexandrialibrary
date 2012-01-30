@@ -86,13 +86,16 @@ namespace Gnosis.Application.Xml
             return result;
         }
 
-        protected ICharacterSet GetAttributeCharacterSet(string name)
+        protected ICharacterSet GetAttributeCharacterSet(string name, ICharacterSetFactory characterSetFactory)
         {
+            if (characterSetFactory == null)
+                throw new ArgumentNullException("characterSetFactory");
+
             var s = GetAttributeString(name);
 
             return s != null ?
-                CharacterSet.Parse(s)
-                : null;
+                characterSetFactory.GetByName(s)
+                : characterSetFactory.Default;
         }
 
         protected ILanguageTag GetAttributeLanguageTag(string name)
@@ -106,6 +109,9 @@ namespace Gnosis.Application.Xml
 
         protected IMediaType GetAttributeMediaType(string name, IMediaTypeFactory mediaTypeFactory)
         {
+            if (mediaTypeFactory == null)
+                throw new ArgumentNullException("mediaTypeFactory");
+
             var code = GetAttributeString(name);
 
             return code != null ?

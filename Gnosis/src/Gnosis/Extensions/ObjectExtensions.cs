@@ -26,12 +26,15 @@ namespace Gnosis
             return (byte[])self;
         }
 
-        public static ICharacterSet ToCharacterSet(this object self)
+        public static ICharacterSet ToCharacterSet(this object self, ICharacterSetFactory characterSetFactory)
         {
-            if (self == null)
-                return CharacterSet.Unknown;
+            if (characterSetFactory == null)
+                throw new ArgumentNullException("characterSetFactory");
 
-            return CharacterSet.Parse(self.ToString());
+            if (self == null)
+                return characterSetFactory.Default;
+
+            return characterSetFactory.GetByName(self.ToString());
         }
 
         public static ICountry ToCountry(this object self)

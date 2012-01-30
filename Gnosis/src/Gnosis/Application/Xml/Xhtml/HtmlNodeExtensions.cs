@@ -173,19 +173,22 @@ namespace Gnosis.Application.Xml.Xhtml
             return DocumentType.Parse(parent, self.OuterHtml);
         }
 
-        public static IDeclaration ToDeclaration(this HtmlNode self, INode parent)
+        public static IDeclaration ToDeclaration(this HtmlNode self, INode parent, ICharacterSetFactory characterSetFactory)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
             if (parent == null)
                 throw new ArgumentNullException("parent");
+            if (characterSetFactory == null)
+                throw new ArgumentNullException("characterSetFactory");
 
             var versionAttrib = self.Attributes["version"];
             var encodingAttrib = self.Attributes["encoding"];
+            var encodingName = encodingAttrib != null && encodingAttrib.Value != null ? encodingAttrib.Value : string.Empty;
             var standaloneAttrib = self.Attributes["standalone"];
 
             var version = versionAttrib != null ? versionAttrib.Value : "1.0";
-            var encoding = CharacterSet.Parse(encodingAttrib.Value);
+            var encoding = characterSetFactory.GetByName(encodingName);
             var standalone = Standalone.Undefined;
             
             
