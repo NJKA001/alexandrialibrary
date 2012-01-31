@@ -34,7 +34,7 @@ namespace Gnosis
 
         #region IContentType Members
 
-        public IMediaType Type
+        public IMediaType MediaType
         {
             get { return type; }
         }
@@ -47,6 +47,16 @@ namespace Gnosis
         public string Boundary
         {
             get { return boundary; }
+        }
+
+        public IMedia CreateMedia(Uri location)
+        {
+            if (location == null)
+                throw new ArgumentNullException("location");
+
+            return type != null ?
+                type.CreateMedia(location, this)
+                : null;
         }
 
         #endregion

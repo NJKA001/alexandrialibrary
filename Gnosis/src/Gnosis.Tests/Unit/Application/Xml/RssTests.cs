@@ -163,7 +163,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             var location = new Uri(fileInfo.FullName);
             var contentType = contentTypeFactory.GetByLocation(location);
-            Assert.AreEqual("application/rss+xml", contentType.Type.ToString());
+            Assert.AreEqual("application/rss+xml", contentType.MediaType.ToString());
 
             var document = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
             Assert.IsNotNull(document);
@@ -188,7 +188,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             var location = new Uri(fileInfo.FullName);
             var contentType = contentTypeFactory.GetByLocation(location);
-            Assert.AreEqual("application/rss+xml", contentType.Type.ToString());
+            Assert.AreEqual("application/rss+xml", contentType.MediaType.ToString());
 
             var document = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
             Assert.IsNotNull(document);
@@ -210,7 +210,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             var location = new Uri(fileInfo.FullName);
             var contentType = contentTypeFactory.GetByLocation(location);
-            Assert.AreEqual("application/rss+xml", contentType.Type.ToString());
+            Assert.AreEqual("application/rss+xml", contentType.MediaType.ToString());
 
             var document = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
             Assert.IsNotNull(document);
@@ -230,7 +230,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             
             var location = new Uri(fileInfo.FullName);
             var contentType = contentTypeFactory.GetByLocation(location);
-            Assert.AreEqual("application/rss+xml", contentType.Type.ToString());
+            Assert.AreEqual("application/rss+xml", contentType.MediaType.ToString());
 
             var document = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
             Assert.IsNotNull(document);
@@ -247,7 +247,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             var location = new Uri(fileInfo.FullName);
             var contentType = contentTypeFactory.GetByLocation(location);
-            Assert.AreEqual("application/rss+xml", contentType.Type.ToString());
+            Assert.AreEqual("application/rss+xml", contentType.MediaType.ToString());
 
             var original = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
             Assert.IsNotNull(original);

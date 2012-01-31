@@ -8,7 +8,7 @@ namespace Gnosis.Video
     public class WmvVideo
         : VideoBase
     {
-        public WmvVideo(Uri location, IMediaType mediaType)
+        public WmvVideo(Uri location, IContentType mediaType)
             : base(location, mediaType)
         {
         }

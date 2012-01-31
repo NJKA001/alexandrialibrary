@@ -119,8 +119,47 @@ namespace Gnosis
             get { return defaultContentType; }
         }
 
+        public IContentType GetByCode(string code)
+        {
+            if (code == null)
+                throw new ArgumentNullException("code");
+
+            var mediaType = mediaTypeFactory.Default;
+            ICharacterSet charSet = null;
+            string boundary = null;
+
+            var tokens = code.Split(new string[] { "; ", " ", ";" }, StringSplitOptions.RemoveEmptyEntries);
+
+            var typeCode = tokens != null && tokens.Length > 0 && tokens[0] != null ? tokens[0].Trim() : string.Empty;
+            mediaType = mediaTypeFactory.GetByCode(typeCode);
+
+            if (tokens.Length > 1)
+            {
+                var token = string.Empty;
+                for (var i = 1; i < tokens.Length; i++)
+                {
+                    token = tokens[i].Trim();
+                    var charSetName = token.Contains(charSetFieldName) && token.Length > 8 ? token.Substring(8).Trim() : string.Empty;
+
+                    if (!string.IsNullOrEmpty(charSetName))
+                    {
+                        charSet = characterSetFactory.GetByName(charSetName);
+                    }
+                    else if (token.Contains(boundaryFieldName) && token.Length > 9)
+                    {
+                        boundary = token.Substring(9);
+                    }
+                }
+            }
+
+            return new ContentType(mediaType, charSet, boundary);
+        }
+
         public IContentType GetByLocation(Uri location)
         {
+            if (location == null)
+                throw new ArgumentNullException("location");
+
             try
             {
                 if (location == null)
@@ -179,29 +218,10 @@ namespace Gnosis
 
                 if (!string.IsNullOrEmpty(response.ContentType))
                 {
-                    var tokens = response.ContentType.Split(new string[] { "; ", " ", ";" }, StringSplitOptions.RemoveEmptyEntries);
-
-                    var typeCode = tokens != null && tokens.Length > 0 && tokens[0] != null ? tokens[0].Trim() : string.Empty;
-                    mediaType = mediaTypeFactory.GetByCode(typeCode);
-
-                    if (tokens.Length > 1)
-                    {
-                        var token = string.Empty;
-                        for (var i = 1; i < tokens.Length; i++)
-                        {
-                            token = tokens[i].Trim();
-                            var charSetName = token.Contains(charSetFieldName) && token.Length > 8 ? token.Substring(8).Trim() : string.Empty;
-
-                            if (!string.IsNullOrEmpty(charSetName))
-                            {
-                                charSet = characterSetFactory.GetByName(charSetName);
-                            }
-                            else if (token.Contains(boundaryFieldName) && token.Length > 9)
-                            {
-                                boundary = token.Substring(9);
-                            }
-                        }
-                    }
+                    var contentByCode = GetByCode(response.ContentType);
+                    mediaType = contentByCode.MediaType;
+                    charSet = contentByCode.CharSet;
+                    boundary = contentByCode.Boundary;
 
                     using (var stream = response.GetResponseStream())
                     {

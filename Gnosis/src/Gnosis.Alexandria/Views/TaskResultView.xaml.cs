@@ -29,7 +29,7 @@ namespace Gnosis.Alexandria.Views
 
         private ILogger logger;
         private ISecurityContext securityContext;
-        private IMediaTypeFactory mediaTypeFactory;
+        private IContentTypeFactory contentTypeFactory;
         private ITaskController taskController;
         private ITagController tagController;
         private IMediaItemController mediaItemController;
@@ -37,14 +37,14 @@ namespace Gnosis.Alexandria.Views
 
         private readonly IDictionary<Guid, ITaskResultViewModel> tabMap = new Dictionary<Guid, ITaskResultViewModel>();
 
-        public void Initialize(ILogger logger, ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemController mediaItemController, ITaskController taskController, ITagController tagController, IVideoPlayer videoPlayer)
+        public void Initialize(ILogger logger, ISecurityContext securityContext, IContentTypeFactory contentTypeFactory, IMediaItemController mediaItemController, ITaskController taskController, ITagController tagController, IVideoPlayer videoPlayer)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
             if (securityContext == null)
                 throw new ArgumentNullException("securityContext");
-            if (mediaTypeFactory == null)
-                throw new ArgumentNullException("mediaTypeFactory");
+            if (contentTypeFactory == null)
+                throw new ArgumentNullException("contentTypeFactory");
             if (mediaItemController == null)
                 throw new ArgumentNullException("mediaItemController");
             if (taskController == null)
@@ -56,7 +56,7 @@ namespace Gnosis.Alexandria.Views
 
             this.logger = logger;
             this.securityContext = securityContext;
-            this.mediaTypeFactory = mediaTypeFactory;
+            this.contentTypeFactory = contentTypeFactory;
             this.taskController = taskController;
             this.mediaItemController = mediaItemController;
             this.tagController = tagController;
@@ -216,7 +216,7 @@ namespace Gnosis.Alexandria.Views
                 if (!tabMap.ContainsKey(taskViewModel.Id))
                 {
                     var searchResultView = new SearchResultView();
-                    searchResultView.Initialize(logger, securityContext, mediaTypeFactory, mediaItemController, taskController, tagController, this);
+                    searchResultView.Initialize(logger, securityContext, contentTypeFactory, mediaItemController, taskController, tagController, this);
 
                     taskViewModel.AddResultsCallback(result => searchResultView.HandleSearchResult(result));
 

@@ -39,7 +39,7 @@ namespace Gnosis.Alexandria.Views
 
         private ILogger logger;
         private ISecurityContext securityContext;
-        private IMediaTypeFactory mediaTypeFactory;
+        private IContentTypeFactory contentTypeFactory;
         private IMediaItemController mediaItemController;
         private ITaskController taskController;
         private ITagController tagController;
@@ -258,7 +258,7 @@ namespace Gnosis.Alexandria.Views
                 if (viewModel == null)
                     return;
 
-                var playlist = viewModel.ToPlaylist(securityContext, mediaTypeFactory);
+                var playlist = viewModel.ToPlaylist(securityContext, contentTypeFactory);
                 if (playlist == null)
                     return;
 
@@ -301,13 +301,14 @@ namespace Gnosis.Alexandria.Views
 
                 var date = DateTime.Now.ToUniversalTime();
 
-                var builder = new MediaItemBuilder<IPlaylist>(securityContext, mediaTypeFactory)
+                var builder = new MediaItemBuilder<IPlaylist>(securityContext, contentTypeFactory)
                     .Identity(clipViewModel.Name, summary, date, date, 1)
                     .Size(clipViewModel.Duration)
                     .Thumbnail(thumbnail, thumbnailData);
 
                 var playlist = builder.ToMediaItem();
-                var playlistViewModel = new PlaylistViewModel(mediaItemController, playlist, new List<IPlaylistItemViewModel> { clipViewModel.ToPlaylistItem(securityContext, mediaTypeFactory, 1) });
+                var playlistItem = clipViewModel.ToPlaylistItem(securityContext, contentTypeFactory, 1);
+                var playlistViewModel = new PlaylistViewModel(mediaItemController, playlist, new List<IPlaylistItemViewModel> { playlistItem });
 
                 var taskViewModel = taskController.GetPlaylistViewModel(playlistViewModel);
                 taskResultView.Playlist(taskViewModel, playlistViewModel);
@@ -343,7 +344,7 @@ namespace Gnosis.Alexandria.Views
                     }
                 }
 
-                var playlist = album.ToPlaylist(securityContext, mediaTypeFactory);
+                var playlist = album.ToPlaylist(securityContext, contentTypeFactory);
 
                 var taskViewModel = taskController.GetPlaylistViewModel(playlist);
                 taskResultView.Playlist(taskViewModel, playlist);
@@ -579,14 +580,14 @@ namespace Gnosis.Alexandria.Views
             get { return results; }
         }
 
-        public void Initialize(ILogger logger, ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemController mediaItemController, ITaskController taskController, ITagController tagController, TaskResultView taskResultView)
+        public void Initialize(ILogger logger, ISecurityContext securityContext, IContentTypeFactory contentTypeFactory, IMediaItemController mediaItemController, ITaskController taskController, ITagController tagController, TaskResultView taskResultView)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
             if (securityContext == null)
                 throw new ArgumentNullException("securityContext");
-            if (mediaTypeFactory == null)
-                throw new ArgumentNullException("mediaTypeFactory");
+            if (contentTypeFactory == null)
+                throw new ArgumentNullException("contentTypeFactory");
             if (mediaItemController == null)
                 throw new ArgumentNullException("mediaItemController");
             if (taskController == null)
@@ -598,7 +599,7 @@ namespace Gnosis.Alexandria.Views
 
             this.logger = logger;
             this.securityContext = securityContext;
-            this.mediaTypeFactory = mediaTypeFactory;
+            this.contentTypeFactory = contentTypeFactory;
             this.mediaItemController = mediaItemController;
             this.taskController = taskController;
             this.tagController = tagController;

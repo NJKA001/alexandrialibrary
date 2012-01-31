@@ -10,6 +10,6 @@ namespace Gnosis.Alexandria.ViewModels
     public interface IAlbumViewModel
         : IMediaItemViewModel, ITrackContainerViewModel, IClipContainerViewModel
     {
-        IPlaylistViewModel ToPlaylist(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory);
+        IPlaylistViewModel ToPlaylist(ISecurityContext securityContext, IContentTypeFactory contentTypeFactory);
     }
 }

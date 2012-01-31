@@ -16,22 +16,22 @@ namespace Gnosis
         {
         }
 
-        protected internal MediaType(MediaSupertype supertype, string subtype, bool isDefault, Func<Uri, IMediaType, IMedia> createFunction)
+        protected internal MediaType(MediaSupertype supertype, string subtype, bool isDefault, Func<Uri, IContentType, IMedia> createFunction)
             : this(supertype, subtype, isDefault, createFunction, new List<string>(), new List<string>(), new List<byte[]>())
         {
         }
 
-        protected internal MediaType(MediaSupertype supertype, string subtype, bool isDefault, Func<Uri, IMediaType, IMedia> createFunction, IEnumerable<string> fileExtensions)
+        protected internal MediaType(MediaSupertype supertype, string subtype, bool isDefault, Func<Uri, IContentType, IMedia> createFunction, IEnumerable<string> fileExtensions)
             : this(supertype, subtype, isDefault, createFunction, fileExtensions, new List<string>(), new List<byte[]>())
         {
         }
 
-        protected internal MediaType(MediaSupertype supertype, string subtype, bool isDefault, Func<Uri, IMediaType, IMedia> createFunction, IEnumerable<string> fileExtensions, IEnumerable<string> legacyTypes)
+        protected internal MediaType(MediaSupertype supertype, string subtype, bool isDefault, Func<Uri, IContentType, IMedia> createFunction, IEnumerable<string> fileExtensions, IEnumerable<string> legacyTypes)
             : this(supertype, subtype, isDefault, createFunction, fileExtensions, legacyTypes, new List<byte[]>())
         {
         }
 
-        protected internal MediaType(MediaSupertype supertype, string subtype, bool isDefault, Func<Uri, IMediaType, IMedia> createFunction, IEnumerable<string> fileExtensions, IEnumerable<string> legacyTypes, IEnumerable<byte[]> magicNumbers)
+        protected internal MediaType(MediaSupertype supertype, string subtype, bool isDefault, Func<Uri, IContentType, IMedia> createFunction, IEnumerable<string> fileExtensions, IEnumerable<string> legacyTypes, IEnumerable<byte[]> magicNumbers)
         {
             if (subtype == null)
                 throw new ArgumentNullException("subtype");
@@ -54,7 +54,7 @@ namespace Gnosis
         private readonly MediaSupertype supertype;
         private readonly string subtype;
         private readonly bool isDefault;
-        private readonly Func<Uri, IMediaType, IMedia> createFunction;
+        private readonly Func<Uri, IContentType, IMedia> createFunction;
         private readonly IEnumerable<string> fileExtensions;
         private readonly IEnumerable<string> legacyTypes;
         private readonly IEnumerable<byte[]> magicNumbers;
@@ -91,13 +91,15 @@ namespace Gnosis
             get { return magicNumbers; }
         }
 
-        public IMedia CreateMedia(Uri location)
+        public IMedia CreateMedia(Uri location, IContentType type)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
+            if (type == null)
+                throw new ArgumentNullException("type");
 
             return createFunction != null ?
-                createFunction(location, this)
+                createFunction(location, type)
                 : null;
         }
 

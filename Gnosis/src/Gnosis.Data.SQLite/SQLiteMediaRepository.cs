@@ -9,26 +9,25 @@ namespace Gnosis.Data.SQLite
     public class SQLiteMediaRepository
         : SQLiteRepositoryBase, IMediaRepository
     {
-        public SQLiteMediaRepository(ILogger logger, IMediaTypeFactory mediaTypeFactory)
+        public SQLiteMediaRepository(ILogger logger, IContentTypeFactory contentTypeFactory)
             : base(logger)
         {
-            if (mediaTypeFactory == null)
-                throw new ArgumentNullException("mediaTypeFactory");
+            if (contentTypeFactory == null)
+                throw new ArgumentNullException("contentTypeFactory");
 
-            this.mediaTypeFactory = mediaTypeFactory;
+            this.contentTypeFactory = contentTypeFactory;
         }
 
-        public SQLiteMediaRepository(ILogger logger, IMediaTypeFactory mediaTypeFactory, IDbConnection defaultConnection)
+        public SQLiteMediaRepository(ILogger logger, IContentTypeFactory contentTypeFactory, IDbConnection defaultConnection)
             : base(logger, defaultConnection)
         {
-            if (mediaTypeFactory == null)
-                throw new ArgumentNullException("mediaTypeFactory");
+            if (contentTypeFactory == null)
+                throw new ArgumentNullException("contentTypeFactory");
 
-            this.mediaTypeFactory = mediaTypeFactory;
+            this.contentTypeFactory = contentTypeFactory;
         }
 
-        private readonly IMediaTypeFactory mediaTypeFactory;
-        //private readonly IMediaFactory factory = new MediaFactory();
+        private readonly IContentTypeFactory contentTypeFactory;
 
         private IEnumerable<IMedia> GetMedia(ICommandBuilder builder)
         {
@@ -62,7 +61,7 @@ namespace Gnosis.Data.SQLite
         private IMedia ReadMedium(IDataRecord record)
         {
             Uri location = record.GetUri("Location");
-            var type = record.GetStringLookup<IMediaType>("Type", code => mediaTypeFactory.GetByCode(code));
+            var type = record.GetStringLookup<IContentType>("Type", code => contentTypeFactory.GetByCode(code));
 
             return type != null ?
                 type.CreateMedia(location)

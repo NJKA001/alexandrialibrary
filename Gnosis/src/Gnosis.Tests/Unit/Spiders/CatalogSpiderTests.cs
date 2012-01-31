@@ -28,7 +28,7 @@ namespace Gnosis.Tests.Unit.Spiders
             characterSetFactory = new CharacterSetFactory();
             mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
             contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
-            securityContext = new SecurityContext(mediaTypeFactory);
+            securityContext = new SecurityContext(contentTypeFactory);
         }
 
         private const string connectionString = "Data Source=:memory:;Version=3;";
@@ -67,12 +67,12 @@ namespace Gnosis.Tests.Unit.Spiders
 
             mediaConnection = connectionFactory.Create(connectionString);
             mediaConnection.Open();
-            mediaRepository = new SQLiteMediaRepository(logger, mediaTypeFactory, mediaConnection);
+            mediaRepository = new SQLiteMediaRepository(logger, contentTypeFactory, mediaConnection);
             mediaRepository.Initialize();
 
             itemConnection = connectionFactory.Create(connectionString);
             itemConnection.Open();
-            mediaItemRepository = new SQLiteMediaItemRepository(logger, securityContext, mediaTypeFactory, itemConnection);
+            mediaItemRepository = new SQLiteMediaItemRepository(logger, securityContext, contentTypeFactory, itemConnection);
             mediaItemRepository.Initialize();
 
             audioStreamFactory = new AudioStreamFactory();

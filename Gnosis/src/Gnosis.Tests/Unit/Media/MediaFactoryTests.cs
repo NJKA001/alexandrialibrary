@@ -33,7 +33,7 @@ namespace Gnosis.Tests.Unit.Media
 
         private IMedia CreateMedia(Uri location)
         {
-            var type = mediaTypeFactory.GetByLocation(location, contentTypeFactory);
+            var type = contentTypeFactory.GetByLocation(location);
 
             return type != null ?
                 type.CreateMedia(location)
@@ -49,7 +49,7 @@ namespace Gnosis.Tests.Unit.Media
             Assert.IsNotNull(doc.Location);
             Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual("application/atom+xml", doc.Type.ToString());
+            Assert.AreEqual("application/atom+xml; charset=UTF-8", doc.Type.ToString());
         }
 
         [Test]
@@ -61,7 +61,7 @@ namespace Gnosis.Tests.Unit.Media
             Assert.IsNotNull(doc.Location);
             Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual("application/rss+xml", doc.Type.ToString());
+            Assert.AreEqual("application/rss+xml; charset=UTF-8", doc.Type.ToString());
         }
 
         [Test]
@@ -73,7 +73,7 @@ namespace Gnosis.Tests.Unit.Media
             Assert.IsNotNull(doc.Location);
             Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual("text/html", doc.Type.ToString());
+            Assert.AreEqual("text/html; charset=UTF-8", doc.Type.ToString());
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace Gnosis.Tests.Unit.Media
             Assert.IsNotNull(doc.Location);
             Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual("application/atom+xml", doc.Type.ToString());
+            Assert.AreEqual("application/atom+xml; charset=UTF-8", doc.Type.ToString());
         }
 
         [Test]

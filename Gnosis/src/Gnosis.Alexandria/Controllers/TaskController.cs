@@ -14,12 +14,12 @@ namespace Gnosis.Alexandria.Controllers
     public class TaskController
         : ITaskController
     {
-        public TaskController(ILogger logger, IMediaTypeFactory mediaTypeFactory, IVideoPlayer videoPlayer, SpiderFactory spiderFactory, IMediaItemController mediaItemController, IMediaItemRepository mediaItemRepository)
+        public TaskController(ILogger logger, IContentTypeFactory contentTypeFactory, IVideoPlayer videoPlayer, SpiderFactory spiderFactory, IMediaItemController mediaItemController, IMediaItemRepository mediaItemRepository)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
-            if (mediaTypeFactory == null)
-                throw new ArgumentNullException("mediaTypeFactory");
+            if (contentTypeFactory == null)
+                throw new ArgumentNullException("contentTypeFactory");
             if (videoPlayer == null)
                 throw new ArgumentNullException("videoPlayer");
             if (spiderFactory == null)
@@ -30,7 +30,7 @@ namespace Gnosis.Alexandria.Controllers
                 throw new ArgumentNullException("mediaItemRepository");
 
             this.logger = logger;
-            this.mediaTypeFactory = mediaTypeFactory;
+            this.contentTypeFactory = contentTypeFactory;
             this.videoPlayer = videoPlayer;
             this.spiderFactory = spiderFactory;
             this.mediaItemController = mediaItemController;
@@ -39,7 +39,7 @@ namespace Gnosis.Alexandria.Controllers
         }
 
         private readonly ILogger logger;
-        private readonly IMediaTypeFactory mediaTypeFactory;
+        private readonly IContentTypeFactory contentTypeFactory;
         private readonly IVideoPlayer videoPlayer;
         private readonly SpiderFactory spiderFactory;
         private readonly IMediaItemController mediaItemController;
@@ -61,7 +61,7 @@ namespace Gnosis.Alexandria.Controllers
             if (target.IsFile && !System.IO.Directory.Exists(path))
                 throw new ArgumentException("path does not exist");
 
-            var task = new CatalogMediaTask(logger, mediaTypeFactory, spiderFactory.CreateCatalogSpider(), target, TimeSpan.Zero, 0);
+            var task = new CatalogMediaTask(logger, contentTypeFactory, spiderFactory.CreateCatalogSpider(), target, TimeSpan.Zero, 0);
 
             return new CatalogMediaTaskViewModel(logger, task);
         }

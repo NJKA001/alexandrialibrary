@@ -8,7 +8,7 @@ namespace Gnosis.Text
     public class PlainText
         : IText
     {
-        public PlainText(Uri location, IMediaType type)
+        public PlainText(Uri location, IContentType type)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
@@ -20,7 +20,7 @@ namespace Gnosis.Text
         }
 
         private readonly Uri location;
-        private readonly IMediaType type;
+        private readonly IContentType type;
 
         private string body;
         private bool isLoaded;
@@ -30,7 +30,7 @@ namespace Gnosis.Text
             get { return location; }
         }
 
-        public IMediaType Type
+        public IContentType Type
         {
             get { return type; }
         }

@@ -23,20 +23,20 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             logger = new DebugLogger();
             characterSetFactory = new CharacterSetFactory();
             mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
-            securityContext = new SecurityContext(mediaTypeFactory);
             contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
-            mediaType = mediaTypeFactory.GetByCode("application/vnd.gnosis.track");
-            mpegAudioType = mediaTypeFactory.GetByCode("audio/mp3");
+            securityContext = new SecurityContext(contentTypeFactory);
+            contentType = contentTypeFactory.GetByCode("application/vnd.gnosis.track");
+            mpegAudioType = contentTypeFactory.GetByCode("audio/mp3");
 
-            track1 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Paranoid Android", string.Empty, DateTime.MinValue, DateTime.MaxValue, 2), new SizeInfo(TimeSpan.FromSeconds(220), 0, 0), new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), new CatalogInfo(new Uri(okComputerUrn), "OK Computer"), new TargetInfo(new Uri("file:///audio/radiohead/paranoid_android.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image1.jpg"), new byte[0]));
-            track2 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Sober", string.Empty, DateTime.MinValue, DateTime.MaxValue, 4), new SizeInfo(TimeSpan.FromSeconds(306), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "Tool"), new CatalogInfo(Guid.NewGuid().ToUrn(), "Undertow"), new TargetInfo(new Uri("file:///audio/tool/sober.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image2.jpg"), new byte[0]));
-            track3 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Maybe Not", string.Empty, DateTime.MinValue, DateTime.MaxValue, 7), new SizeInfo(TimeSpan.FromSeconds(189), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "Cat Power"), new CatalogInfo(Guid.NewGuid().ToUrn(), "Free"), new TargetInfo(new Uri("file:///audio/cat_power/maybe_not.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image3.jpg"), new byte[0]));
-            track4 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Silence", string.Empty, DateTime.MinValue, DateTime.MaxValue, 5), new SizeInfo(TimeSpan.FromSeconds(423), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "PJ Harvey"), new CatalogInfo(Guid.NewGuid().ToUrn(), "White Chalk"), new TargetInfo(new Uri("file:///audio/pj_harvey/paranoid_android.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("http://other.org/blah.png"), new byte[0]));
-            track5 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Airbag", string.Empty, DateTime.MinValue, DateTime.MaxValue, 1), new SizeInfo(TimeSpan.FromSeconds(291), 0, 0), new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), new CatalogInfo(new Uri(okComputerUrn), "OK Computer"), new TargetInfo(new Uri("file:///audio/radiohead/airbag.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("file:///some-stuff/blah/ph.jpg"), new byte[0]));
+            track1 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), contentType, "Paranoid Android", string.Empty, DateTime.MinValue, DateTime.MaxValue, 2), new SizeInfo(TimeSpan.FromSeconds(220), 0, 0), new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), new CatalogInfo(new Uri(okComputerUrn), "OK Computer"), new TargetInfo(new Uri("file:///audio/radiohead/paranoid_android.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image1.jpg"), new byte[0]));
+            track2 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), contentType, "Sober", string.Empty, DateTime.MinValue, DateTime.MaxValue, 4), new SizeInfo(TimeSpan.FromSeconds(306), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "Tool"), new CatalogInfo(Guid.NewGuid().ToUrn(), "Undertow"), new TargetInfo(new Uri("file:///audio/tool/sober.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image2.jpg"), new byte[0]));
+            track3 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), contentType, "Maybe Not", string.Empty, DateTime.MinValue, DateTime.MaxValue, 7), new SizeInfo(TimeSpan.FromSeconds(189), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "Cat Power"), new CatalogInfo(Guid.NewGuid().ToUrn(), "Free"), new TargetInfo(new Uri("file:///audio/cat_power/maybe_not.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image3.jpg"), new byte[0]));
+            track4 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), contentType, "Silence", string.Empty, DateTime.MinValue, DateTime.MaxValue, 5), new SizeInfo(TimeSpan.FromSeconds(423), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "PJ Harvey"), new CatalogInfo(Guid.NewGuid().ToUrn(), "White Chalk"), new TargetInfo(new Uri("file:///audio/pj_harvey/paranoid_android.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("http://other.org/blah.png"), new byte[0]));
+            track5 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), contentType, "Airbag", string.Empty, DateTime.MinValue, DateTime.MaxValue, 1), new SizeInfo(TimeSpan.FromSeconds(291), 0, 0), new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), new CatalogInfo(new Uri(okComputerUrn), "OK Computer"), new TargetInfo(new Uri("file:///audio/radiohead/airbag.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("file:///some-stuff/blah/ph.jpg"), new byte[0]));
 
             connection = connectionFactory.Create(connectionString);
             connection.Open();
-            repository = new SQLiteMediaItemRepository(logger, securityContext, mediaTypeFactory, connection);
+            repository = new SQLiteMediaItemRepository(logger, securityContext, contentTypeFactory, connection);
             repository.Initialize();
             repository.Save(new List<ITrack> { track1, track2, track5 });
         }
@@ -51,8 +51,8 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected readonly IContentTypeFactory contentTypeFactory;
         protected readonly IDbConnection connection;
         protected readonly IMediaItemRepository repository;
-        protected readonly IMediaType mediaType;
-        protected readonly IMediaType mpegAudioType;
+        protected readonly IContentType contentType;
+        protected readonly IContentType mpegAudioType;
         protected readonly Uri unknownLocation = Guid.Empty.ToUrn();
 
         private const string radioheadUrn = "urn:uuid:27A19456-E6E9-463F-951D-98BB44356C65";
@@ -96,7 +96,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.AreEqual(track1.Catalog, check1.Catalog);
             Assert.AreEqual(track1.CatalogName, check1.CatalogName);
             Assert.AreEqual(track1.Target, check1.Target);
-            Assert.AreEqual(track1.TargetType, check1.TargetType);
+            Assert.AreEqual(track1.TargetType.ToString(), check1.TargetType.ToString());
             Assert.AreEqual(track1.Thumbnail, check1.Thumbnail);
             var check2 = repository.GetByLocation<ITrack>(track2.Location);
             Assert.IsNotNull(check2);
@@ -108,7 +108,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.AreEqual(track2.Catalog, check2.Catalog);
             Assert.AreEqual(track2.CatalogName, check2.CatalogName);
             Assert.AreEqual(track2.Target, check2.Target);
-            Assert.AreEqual(track2.TargetType, check2.TargetType);
+            Assert.AreEqual(track2.TargetType.ToString(), check2.TargetType.ToString());
             Assert.AreEqual(track2.Thumbnail, check2.Thumbnail);
         }
 
@@ -126,7 +126,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.AreEqual(track1.Catalog, check1.Catalog);
             Assert.AreEqual(track1.CatalogName, check1.CatalogName);
             Assert.AreEqual(track1.Target, check1.Target);
-            Assert.AreEqual(track1.TargetType, check1.TargetType);
+            Assert.AreEqual(track1.TargetType.ToString(), check1.TargetType.ToString());
             Assert.AreEqual(track1.Thumbnail, check1.Thumbnail);
             var checks2 = repository.GetByName<ITrack>(track2.Name);
             Assert.AreEqual(1, checks2.Count());
@@ -140,7 +140,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.AreEqual(track2.Catalog, check2.Catalog);
             Assert.AreEqual(track2.CatalogName, check2.CatalogName);
             Assert.AreEqual(track2.Target, check2.Target);
-            Assert.AreEqual(track2.TargetType, check2.TargetType);
+            Assert.AreEqual(track2.TargetType.ToString(), check2.TargetType.ToString());
             Assert.AreEqual(track2.Thumbnail, check2.Thumbnail);
         }
 

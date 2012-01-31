@@ -39,9 +39,9 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             var location = new Uri(fileInfo.FullName);
             var contentType = contentTypeFactory.GetByLocation(location);
-            Assert.AreEqual("application/xspf+xml", contentType.Type.ToString());
+            Assert.AreEqual("application/xspf+xml", contentType.MediaType.ToString());
 
-            var document = mediaTypeFactory.GetByLocation(location, contentTypeFactory).CreateMedia(location) as IXmlDocument;
+            var document = contentTypeFactory.GetByLocation(location).CreateMedia(location) as IXmlDocument;
             Assert.IsNotNull(document);
             Assert.IsNull(document.Xml);
             

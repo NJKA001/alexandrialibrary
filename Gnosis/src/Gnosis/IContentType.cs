@@ -7,8 +7,10 @@ namespace Gnosis
 {
     public interface IContentType
     {
-        IMediaType Type { get; }
+        IMediaType MediaType { get; }
         ICharacterSet CharSet { get; }
         string Boundary { get; }
+
+        IMedia CreateMedia(Uri location);
     }
 }

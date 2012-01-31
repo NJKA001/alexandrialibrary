@@ -33,7 +33,7 @@ namespace Gnosis.Tests.Unit.Audio
             var file = new System.IO.FileInfo(location1);
             var location = new Uri(file.FullName);
             Assert.IsTrue(file.Exists);
-            var type = mediaTypeFactory.GetByLocation(location, contentTypeFactory);
+            var type = contentTypeFactory.GetByLocation(location);
             Assert.IsNotNull(type);
             var audio = type.CreateMedia(location) as IAudio;
             Assert.IsNotNull(audio);

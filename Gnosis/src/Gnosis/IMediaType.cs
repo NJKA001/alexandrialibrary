@@ -18,6 +18,6 @@ namespace Gnosis
         IEnumerable<string> LegacyTypes { get; }
         IEnumerable<byte[]> MagicNumbers { get; }
 
-        IMedia CreateMedia(Uri location);
+        IMedia CreateMedia(Uri location, IContentType type);
     }
 }

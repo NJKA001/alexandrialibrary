@@ -21,7 +21,7 @@ namespace Gnosis
         Uri Catalog { get; }
         string CatalogName { get; }
         Uri Target { get; }
-        IMediaType TargetType { get; }
+        IContentType TargetType { get; }
         Uri User { get; }
         string UserName { get; }
         Uri Thumbnail { get; }

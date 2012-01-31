@@ -9,6 +9,7 @@ namespace Gnosis
     {
         IContentType Default { get; }
 
+        IContentType GetByCode(string code);
         IContentType GetByLocation(Uri location);
     }
 }

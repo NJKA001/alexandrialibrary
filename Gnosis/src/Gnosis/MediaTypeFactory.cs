@@ -190,7 +190,7 @@ namespace Gnosis
             try
             {
                 var contentType = contentTypeFactory.GetByLocation(location);
-                return contentType != null ? contentType.Type : Default;
+                return contentType != null ? contentType.MediaType : Default;
             }
             catch (Exception ex)
             {

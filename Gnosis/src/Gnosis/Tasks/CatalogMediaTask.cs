@@ -10,24 +10,24 @@ namespace Gnosis.Tasks
     public class CatalogMediaTask
         : TaskBase<IEnumerable<IMedia>>
     {
-        public CatalogMediaTask(ILogger logger, IMediaTypeFactory mediaTypeFactory, ISpider spider, Uri target, TimeSpan delay, int maxErrors)
+        public CatalogMediaTask(ILogger logger, IContentTypeFactory contentTypeFactory, ISpider spider, Uri target, TimeSpan delay, int maxErrors)
             : base(logger)
         {
-            if (mediaTypeFactory == null)
-                throw new ArgumentNullException("mediaTypeFactory");
+            if (contentTypeFactory == null)
+                throw new ArgumentNullException("contentTypeFactory");
             if (spider == null)
                 throw new ArgumentNullException("spider");
             if (target == null)
                 throw new ArgumentNullException("target");
 
-            this.mediaTypeFactory = mediaTypeFactory;
+            this.contentTypeFactory = contentTypeFactory;
             this.spider = spider;
             this.target = target;
             this.delayMilliseconds = Convert.ToInt32(delay.TotalMilliseconds);
             this.maxErrors = maxErrors;
         }
 
-        private readonly IMediaTypeFactory mediaTypeFactory;
+        private readonly IContentTypeFactory contentTypeFactory;
         private readonly ISpider spider;
         private readonly Uri target;
         private readonly int delayMilliseconds;
@@ -63,7 +63,8 @@ namespace Gnosis.Tasks
         private IMedia GetMedia(Uri location)
         {
             AddProgress("Media At: " + location.ToString());
-            UpdateItem(new TaskItem(location, (uint)progressCount, location.ToString().ElideString(10), TimeSpan.Zero, Guid.Empty.ToUrn(), mediaTypeFactory.Default, false, false, null));
+            var item = new TaskItem(location, (uint)progressCount, location.ToString().ElideString(10), TimeSpan.Zero, Guid.Empty.ToUrn(), contentTypeFactory.Default, false, false, null);
+            UpdateItem(item);
             try
             {
                 var medium = spider.GetMedia(location);

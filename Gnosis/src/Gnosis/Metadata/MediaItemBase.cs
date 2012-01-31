@@ -50,12 +50,12 @@ namespace Gnosis.Metadata
         private readonly Uri catalog;
         private readonly string catalogName;
         private readonly Uri target;
-        private readonly IMediaType targetType;
+        private readonly IContentType targetType;
         private readonly Uri user;
         private readonly string userName;
         private readonly Uri thumbnail;
         private readonly byte[] thumbnailData;
-        private readonly IMediaType type;
+        private readonly IContentType type;
         private readonly Uri location;
 
         public string Name
@@ -123,7 +123,7 @@ namespace Gnosis.Metadata
             get { return target; }
         }
 
-        public IMediaType TargetType
+        public IContentType TargetType
         {
             get { return targetType; }
         }
@@ -153,7 +153,7 @@ namespace Gnosis.Metadata
             get { return location; }
         }
 
-        public IMediaType Type
+        public IContentType Type
         {
             get { return type; }
         }

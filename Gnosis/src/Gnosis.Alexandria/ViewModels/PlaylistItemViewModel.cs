@@ -41,9 +41,9 @@ namespace Gnosis.Alexandria.ViewModels
                 //    return "pack://application:,,,/Images/File Audio MP3-01.png";
                 //else if (type == MediaType.VideoAvi.ToString())
                 //    return "pack://application:,,,/Images/File Video AVI-01.png";
-                if (item.TargetType.Supertype == MediaSupertype.Audio)
+                if (item.TargetType.MediaType.Supertype == MediaSupertype.Audio)
                     return "pack://application:,,,/Images/File Audio-01.png";
-                else if (item.TargetType.Supertype == MediaSupertype.Video)
+                else if (item.TargetType.MediaType.Supertype == MediaSupertype.Video)
                     return "pack://application:,,,/Images/File Video-01.png";
 
                 return "pack://application:,,,/Images/File Audio-01.png";
@@ -119,20 +119,20 @@ namespace Gnosis.Alexandria.ViewModels
             OnPropertyChanged("PlaybackIcon");
         }
 
-        public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory)
+        public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext, IContentTypeFactory contentTypeFactory)
         {
             var date = DateTime.Now.ToUniversalTime();
 
-            var builder = new MediaItemBuilder<IPlaylist>(securityContext, mediaTypeFactory)
+            var builder = new MediaItemBuilder<IPlaylist>(securityContext, contentTypeFactory)
                 .Identity(Name, Summary, date, date, 0)
                 .Thumbnail(item.Thumbnail, item.ThumbnailData);
 
             var playlist = builder.ToMediaItem();
-            var playlistItems = new List<IPlaylistItemViewModel> { ToPlaylistItem(securityContext, mediaTypeFactory, 1) };
+            var playlistItems = new List<IPlaylistItemViewModel> { ToPlaylistItem(securityContext, contentTypeFactory, 1) };
             return new PlaylistViewModel(controller, playlist, playlistItems);
         }
 
-        public IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, uint number)
+        public IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext, IContentTypeFactory contentTypeFactory, uint number)
         {
             return this;
         }

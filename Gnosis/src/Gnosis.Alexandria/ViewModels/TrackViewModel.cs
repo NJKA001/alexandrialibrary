@@ -45,7 +45,7 @@ namespace Gnosis.Alexandria.ViewModels
                 if (isPlaying)
                     return "pack://application:,,,/Images/play-simple.png";
 
-                var type = TargetType.ToString();
+                //var type = TargetType.ToString();
 
                 //if (type == MediaType.AudioMpeg.ToString())
                 //    return "pack://application:,,,/Images/File Audio MP3-01.png";
@@ -123,22 +123,22 @@ namespace Gnosis.Alexandria.ViewModels
             OnPropertyChanged("PlaybackIcon");
         }
 
-        public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory)
+        public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext, IContentTypeFactory contentTypeFactory)
         {
             var date = DateTime.Now.ToUniversalTime();
 
-            var builder = new MediaItemBuilder<IPlaylist>(securityContext, mediaTypeFactory)
+            var builder = new MediaItemBuilder<IPlaylist>(securityContext, contentTypeFactory)
                 .Identity(Name, Summary, date, date, 0)
                 .Thumbnail(item.Thumbnail, item.ThumbnailData);
 
             var playlist = builder.ToMediaItem();
-            var playlistItems = new List<IPlaylistItemViewModel> { ToPlaylistItem(securityContext, mediaTypeFactory, 1) };
+            var playlistItems = new List<IPlaylistItemViewModel> { ToPlaylistItem(securityContext, contentTypeFactory, 1) };
             return new PlaylistViewModel(controller, playlist, playlistItems);
         }
 
-        public IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, uint number)
+        public IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext, IContentTypeFactory contentTypeFactory, uint number)
         {
-            var builder = new MediaItemBuilder<IPlaylistItem>(securityContext, mediaTypeFactory)
+            var builder = new MediaItemBuilder<IPlaylistItem>(securityContext, contentTypeFactory)
                 .Identity(Name, Summary, item.FromDate, item.ToDate, 0)
                 .Size(item.Duration, item.Height, item.Width)
                 .Creator(item.Creator, item.CreatorName)

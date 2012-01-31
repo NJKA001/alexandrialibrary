@@ -8,7 +8,7 @@ namespace Gnosis.Application.Xml
     public class XmlDtdDocument
         : IApplication
     {
-        public XmlDtdDocument(Uri location, IMediaType type)
+        public XmlDtdDocument(Uri location, IContentType type)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
@@ -20,7 +20,7 @@ namespace Gnosis.Application.Xml
         }
 
         private readonly Uri location;
-        private readonly IMediaType type;
+        private readonly IContentType type;
 
         public void Load()
         {
@@ -31,7 +31,7 @@ namespace Gnosis.Application.Xml
             get { return location; }
         }
 
-        public IMediaType Type
+        public IContentType Type
         {
             get { return type; }
         }

@@ -11,13 +11,13 @@ namespace Gnosis
     public class SecurityContext
         : ISecurityContext
     {
-        public SecurityContext(IMediaTypeFactory mediaTypeFactory)
+        public SecurityContext(IContentTypeFactory contentTypeFactory)
         {
-            this.mediaTypeFactory = mediaTypeFactory;
-            this.currentUser = User.GetAdministrator(mediaTypeFactory);
+            this.contentTypeFactory = contentTypeFactory;
+            this.currentUser = User.GetAdministrator(contentTypeFactory);
         }
 
-        private readonly IMediaTypeFactory mediaTypeFactory;
+        private readonly IContentTypeFactory contentTypeFactory;
         private IUser currentUser;
         private UserInfo currentUserInfo = UserInfo.Default;
 

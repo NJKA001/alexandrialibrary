@@ -14,7 +14,7 @@ namespace Gnosis.Audio
     public class MpegAudio
         : AudioBase
     {
-        public MpegAudio(Uri location, IMediaType mediaType)
+        public MpegAudio(Uri location, IContentType mediaType)
             : base(location, mediaType)
         {
         }
@@ -102,7 +102,7 @@ namespace Gnosis.Audio
             return tags;
         }
 
-        public override IArtist GetArtist(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository mediaItemRepository)
+        public override IArtist GetArtist(ISecurityContext securityContext, IContentTypeFactory contentTypeFactory, IMediaItemRepository mediaItemRepository)
         {
             IArtist artist = null;
             var track = mediaItemRepository.GetByTarget<ITrack>(Location).FirstOrDefault();
@@ -114,7 +114,7 @@ namespace Gnosis.Audio
             }
 
             if (id3v2Tag == null || id3v2Tag.JoinedPerformers == null)
-                return new MediaItemBuilder<IArtist>(securityContext, mediaTypeFactory).GetDefault();
+                return new MediaItemBuilder<IArtist>(securityContext, contentTypeFactory).GetDefault();
 
             var artistName = id3v2Tag.JoinedPerformers;
             var summary = string.Empty;
@@ -122,13 +122,13 @@ namespace Gnosis.Audio
             if (artist != null)
                 return artist;
 
-            var builder = new MediaItemBuilder<IArtist>(securityContext, mediaTypeFactory)
+            var builder = new MediaItemBuilder<IArtist>(securityContext, contentTypeFactory)
                 .Identity(artistName, summary);
 
             return builder.ToMediaItem();
         }
 
-        public override IAlbum GetAlbum(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository mediaItemRepository, IArtist artist)
+        public override IAlbum GetAlbum(ISecurityContext securityContext, IContentTypeFactory contentTypeFactory, IMediaItemRepository mediaItemRepository, IArtist artist)
         {
             IAlbum album = null;
             var track = mediaItemRepository.GetByTarget<ITrack>(Location).FirstOrDefault();
@@ -150,14 +150,14 @@ namespace Gnosis.Audio
                     return album;
             }
 
-            var builder = new MediaItemBuilder<IAlbum>(securityContext, mediaTypeFactory)
+            var builder = new MediaItemBuilder<IAlbum>(securityContext, contentTypeFactory)
                 .Identity(albumTitle, summary)
                 .Creator(artist.Location, artist.Name);
 
             return builder.ToMediaItem();
         }
 
-        public override ITrack GetTrack(ISecurityContext securityContext, IMediaTypeFactory mediaTypeFactory, IMediaItemRepository mediaItemRepository, IAudioStreamFactory audioStreamFactory, IArtist artist, IAlbum album)
+        public override ITrack GetTrack(ISecurityContext securityContext, IContentTypeFactory contentTypeFactory, IMediaItemRepository mediaItemRepository, IAudioStreamFactory audioStreamFactory, IArtist artist, IAlbum album)
         {
             var track = mediaItemRepository.GetByTarget<ITrack>(Location).FirstOrDefault();
             //if (track != null)
@@ -168,7 +168,7 @@ namespace Gnosis.Audio
                 if (track != null)
                     return track;
 
-                var builder = new MediaItemBuilder<ITrack>(securityContext, mediaTypeFactory)
+                var builder = new MediaItemBuilder<ITrack>(securityContext, contentTypeFactory)
                     .Identity("Unknown", string.Empty)
                     .Creator(artist.Location, artist.Name)
                     .Catalog(album.Location, album.Name)
@@ -210,7 +210,7 @@ namespace Gnosis.Audio
 
             var trackId = track != null ? track.Location : Guid.NewGuid().ToUrn();
 
-            var fullBuilder = new MediaItemBuilder<ITrack>(securityContext, mediaTypeFactory)
+            var fullBuilder = new MediaItemBuilder<ITrack>(securityContext, contentTypeFactory)
                 .Identity(name, summary, recordDate, releaseDate, number, trackId)
                 .Size(duration)
                 .Creator(artist.Location, artist.Name)

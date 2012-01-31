@@ -22,7 +22,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
 
             connection = new SQLiteConnectionFactory().Create("Data Source=:memory:;Version=3;");
             connection.Open();
-            repository = new SQLiteMediaRepository(logger, mediaTypeFactory, connection);
+            repository = new SQLiteMediaRepository(logger, contentTypeFactory, connection);
             repository.Initialize();
         }
 
@@ -44,7 +44,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
 
         protected IMedia CreateMedia(Uri location)
         {
-            var type = mediaTypeFactory.GetByLocation(location, contentTypeFactory);
+            var type = contentTypeFactory.GetByLocation(location);
 
             return type != null ? type.CreateMedia(location) : null;
         }

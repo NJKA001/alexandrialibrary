@@ -30,7 +30,7 @@ namespace Gnosis.Tests.Network
             var contentType = contentTypeFactory.GetByLocation(location);
             Assert.IsNotNull(contentType);
             Assert.AreNotEqual(contentTypeFactory.Default, contentType);
-            Assert.AreEqual("application/rss+xml", contentType.Type.ToString());
+            Assert.AreEqual("application/rss+xml", contentType.MediaType.ToString());
             Assert.AreEqual("UTF-8", contentType.CharSet.Name);
             Assert.IsNull(contentType.Boundary);
         }
@@ -42,7 +42,7 @@ namespace Gnosis.Tests.Network
             var contentType = contentTypeFactory.GetByLocation(location);
             Assert.IsNotNull(contentType);
             Assert.AreNotEqual(contentTypeFactory.Default, contentType);
-            Assert.AreEqual("application/atom+xml", contentType.Type.ToString());
+            Assert.AreEqual("application/atom+xml", contentType.MediaType.ToString());
             Assert.AreEqual("UTF-8", contentType.CharSet.Name);
             Assert.IsNull(contentType.Boundary);
         }

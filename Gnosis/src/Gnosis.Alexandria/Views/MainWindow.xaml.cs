@@ -49,10 +49,10 @@ namespace Gnosis.Alexandria.Views
                 characterSetFactory = new CharacterSetFactory();
                 mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
                 contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
-                securityContext = new SecurityContext(mediaTypeFactory);
+                securityContext = new SecurityContext(contentTypeFactory);
                 tagTypeFactory = new TagTypeFactory();
 
-                mediaRepository = new SQLiteMediaRepository(logger, mediaTypeFactory);
+                mediaRepository = new SQLiteMediaRepository(logger, contentTypeFactory);
                 mediaRepository.Initialize();
 
                 linkRepository = new SQLiteLinkRepository(logger);
@@ -61,7 +61,7 @@ namespace Gnosis.Alexandria.Views
                 tagRepository = new SQLiteTagRepository(logger, tagTypeFactory);
                 tagRepository.Initialize();
 
-                mediaItemRepository = new SQLiteMediaItemRepository(logger, securityContext, mediaTypeFactory);
+                mediaItemRepository = new SQLiteMediaItemRepository(logger, securityContext, contentTypeFactory);
                 mediaItemRepository.Initialize();
 
                 audioStreamFactory = new AudioStreamFactory();
@@ -72,12 +72,12 @@ namespace Gnosis.Alexandria.Views
                 catalogController = new CatalogController(logger, securityContext, contentTypeFactory, mediaTypeFactory, mediaRepository, linkRepository, tagRepository, mediaItemRepository, audioStreamFactory);
                 spiderFactory = new SpiderFactory(logger, securityContext, contentTypeFactory, mediaTypeFactory, linkRepository, tagRepository, mediaRepository, mediaItemRepository, audioStreamFactory);
 
-                mediaItemController = new MediaItemController(logger, securityContext, mediaTypeFactory, linkRepository, tagRepository, mediaItemRepository);
-                taskController = new TaskController(logger, mediaTypeFactory, videoPlayer, spiderFactory, mediaItemController, mediaItemRepository);
+                mediaItemController = new MediaItemController(logger, securityContext, contentTypeFactory, linkRepository, tagRepository, mediaItemRepository);
+                taskController = new TaskController(logger, contentTypeFactory, videoPlayer, spiderFactory, mediaItemController, mediaItemRepository);
                 tagController = new TagController(logger, tagRepository);
                 commandController = new CommandController(logger);
 
-                taskResultView.Initialize(logger, securityContext, mediaTypeFactory, mediaItemController, taskController, tagController, videoPlayer);
+                taskResultView.Initialize(logger, securityContext, contentTypeFactory, mediaItemController, taskController, tagController, videoPlayer);
                 taskManagerView.Initialize(logger, taskController, taskResultView);
                 searchView.Initialize(logger, taskController, taskResultView);
                 commandView.Initialize(logger, commandController, taskController, taskResultView);
