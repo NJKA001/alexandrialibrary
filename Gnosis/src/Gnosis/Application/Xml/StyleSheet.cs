@@ -8,7 +8,7 @@ namespace Gnosis.Application.Xml
     public class StyleSheet
         : ProcessingInstruction, IStyleSheet
     {
-        private StyleSheet(INode parent, IMediaType type, IStyleMedia media, Uri href)
+        private StyleSheet(INode parent, string type, IStyleMedia media, Uri href)
             : base(parent, XmlStyleSheetTarget, GetContent(type, media, href))
         {
             this.type = type;
@@ -16,13 +16,13 @@ namespace Gnosis.Application.Xml
             this.href = href;
         }
 
-        private readonly IMediaType type;
+        private readonly string type;
         private readonly IStyleMedia media;
         private readonly Uri href;
 
         public const string XmlStyleSheetTarget = "xml-stylesheet";
 
-        private static string GetContent(IMediaType type, IStyleMedia media, Uri href)
+        private static string GetContent(string type, IStyleMedia media, Uri href)
         {
             var content = new StringBuilder();
 
@@ -36,9 +36,7 @@ namespace Gnosis.Application.Xml
             return content.ToString();
         }
 
-        #region IXmlStyleSheet Members
-
-        public IMediaType Type
+        public string Type
         {
             get { return type; }
         }
@@ -53,17 +51,12 @@ namespace Gnosis.Application.Xml
             get { return href; }
         }
 
-        #endregion
-
-        public static IStyleSheet ParseStyleSheet(INode parent, string target, string content, IMediaTypeFactory mediaTypeFactory)
+        public static IStyleSheet ParseStyleSheet(INode parent, string target, string content)
         {
-            if (mediaTypeFactory == null)
-                throw new ArgumentNullException("mediaTypeFactory");
-
             if (target != XmlStyleSheetTarget)
                 throw new ArgumentException("target must be " + XmlStyleSheetTarget);
 
-            IMediaType type = null;
+            string type = null;
             IStyleMedia media = null;
             Uri href = null;
             var fields = content.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
@@ -80,7 +73,7 @@ namespace Gnosis.Application.Xml
                         switch (name)
                         {
                             case "type":
-                                type = mediaTypeFactory.GetByCode(value);
+                                type = value;
                                 break;
                             case "media":
                                 media = StyleMedia.Parse(value);

@@ -214,17 +214,17 @@ namespace Gnosis.Application.Xml
                 : null;
         }
 
-        public static IMediaType GetAttributeMediaType(this System.Xml.XmlNode self, string name, IMediaTypeFactory mediaTypeFactory)
-        {
-            if (self == null)
-                throw new ArgumentNullException("self");
+        //public static IMediaType GetAttributeMediaType(this System.Xml.XmlNode self, string name, IMediaTypeFactory mediaTypeFactory)
+        //{
+        //    if (self == null)
+        //        throw new ArgumentNullException("self");
 
-            var attrib = self.FindAttribute(name);
+        //    var attrib = self.FindAttribute(name);
 
-            return (attrib != null && attrib.Value != null) ?
-                mediaTypeFactory.GetByCode(attrib.Value)
-                : null;
-        }
+        //    return (attrib != null && attrib.Value != null) ?
+        //        mediaTypeFactory.GetByCode(attrib.Value)
+        //        : null;
+        //}
 
         public static Uri GetAttributeUri(this System.Xml.XmlNode self, string name)
         {
@@ -290,7 +290,7 @@ namespace Gnosis.Application.Xml
             return new Declaration(parent, version, encoding, standalone);
         }
 
-        public static IProcessingInstruction ToProcessingInstruction(this XmlNode self, INode parent, IMediaTypeFactory mediaTypeFactory)
+        public static IProcessingInstruction ToProcessingInstruction(this XmlNode self, INode parent)
         {
             if (self == null)
                 throw new ArgumentNullException("self");
@@ -301,7 +301,7 @@ namespace Gnosis.Application.Xml
             if (node == null || node.Target == null)
                 return null;
 
-            return ProcessingInstruction.Parse(parent, node.Target, node.InnerText, mediaTypeFactory);
+            return ProcessingInstruction.Parse(parent, node.Target, node.InnerText);
         }
 
         public static IComment ToComment(this XmlNode self, INode parent)

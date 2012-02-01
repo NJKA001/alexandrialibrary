@@ -8,35 +8,33 @@ namespace Gnosis
     public class ContentType
         : IContentType
     {
-        protected internal ContentType(IMediaType type)
-            : this(type, null, null)
+        protected internal ContentType(string name)
+            : this(name, null, null)
         {
         }
 
-        protected internal ContentType(IMediaType type, ICharacterSet charSet)
-            : this(type, charSet, null)
+        protected internal ContentType(string name, ICharacterSet charSet)
+            : this(name, charSet, null)
         {
         }
 
-        protected internal ContentType(IMediaType type, ICharacterSet charSet, string boundary)
+        protected internal ContentType(string name, ICharacterSet charSet, string boundary)
         {
-            if (type == null)
-                throw new ArgumentNullException("type");
+            if (name == null)
+                throw new ArgumentNullException("name");
 
-            this.type = type;
+            this.name = name;
             this.charSet = charSet;
             this.boundary = boundary;
         }
 
-        private readonly IMediaType type;
+        private readonly string name;
         private readonly ICharacterSet charSet;
         private readonly string boundary;
 
-        #region IContentType Members
-
-        public IMediaType MediaType
+        public string Name
         {
-            get { return type; }
+            get { return name; }
         }
 
         public ICharacterSet CharSet
@@ -49,23 +47,11 @@ namespace Gnosis
             get { return boundary; }
         }
 
-        public IMedia CreateMedia(Uri location)
-        {
-            if (location == null)
-                throw new ArgumentNullException("location");
-
-            return type != null ?
-                type.CreateMedia(location, this)
-                : null;
-        }
-
-        #endregion
-
         public override string ToString()
         {
             var builder = new StringBuilder();
 
-            builder.Append(type.ToString());
+            builder.Append(name);
 
             if (charSet != null && !charSet.IsDefault)
                 builder.AppendFormat("; charset={0}", charSet.ToString());

@@ -18,13 +18,13 @@ namespace Gnosis.Tests.Network
         {
             logger = new Gnosis.Utilities.DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
-            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
+            mediaFactory = new MediaFactory();
+            contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
         }
 
         private ILogger logger;
         private ICharacterSetFactory characterSetFactory;
-        private IMediaTypeFactory mediaTypeFactory;
+        private IMediaFactory mediaFactory;
         private IContentTypeFactory contentTypeFactory;
 
         [Test]
@@ -35,7 +35,7 @@ namespace Gnosis.Tests.Network
 
             var location = new Uri("http://search.espn.go.com/rss/bill-simmons/");
 
-            var document = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
+            var document = XmlElement.Parse(location, characterSetFactory);
             Assert.IsNotNull(document);
 
             var feed = document.Root as IRssFeed;
@@ -52,7 +52,7 @@ namespace Gnosis.Tests.Network
             const string generator = "http://wordpress.org/?v=";
 
             var location = new Uri("http://www.nerdist.com/category/podcast/feed/");
-            var document = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
+            var document = XmlElement.Parse(location, characterSetFactory);
             Assert.IsNotNull(document);
 
             var feed = document.Root as IRssFeed;
@@ -69,7 +69,7 @@ namespace Gnosis.Tests.Network
 
             var location = new Uri("http://feeds.thisamericanlife.org/talpodcast");
 
-            var document = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
+            var document = XmlElement.Parse(location, characterSetFactory);
             Assert.IsNotNull(document);
 
             var feed = document.Root as IRssFeed;

@@ -101,13 +101,13 @@ namespace Gnosis.Tasks
         {
             if (Item.Target != null && Item.TargetType != null)
             {
-                if (Item.TargetType.MediaType.Supertype == MediaSupertype.Audio)
+                if (Item.TargetType.Name.StartsWith("audio/"))
                 {
                     LoadAudioStream(Item.Target);
                     PlayAudioStream();
                     UpdateAudioProgress();
                 }
-                else if (Item.TargetType.MediaType.Supertype == MediaSupertype.Video)
+                else if (Item.TargetType.Name.StartsWith("video/"))
                 {
                     if (videoPlayer.PlaybackState != PlaybackState.Playing)
                     {
@@ -128,7 +128,7 @@ namespace Gnosis.Tasks
         {
             if (Item.Target != null && Item.TargetType != null)
             {
-                if (Item.TargetType.MediaType.Supertype == MediaSupertype.Audio)
+                if (Item.TargetType.Name.StartsWith("audio/"))
                 {
                     if (audioPlayer.CurrentAudioStream != null && audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing)
                     {
@@ -136,7 +136,7 @@ namespace Gnosis.Tasks
                         //audioPlayer.Pause();
                     }
                 }
-                else if (Item.TargetType.MediaType.Supertype == MediaSupertype.Video)
+                else if (Item.TargetType.Name.StartsWith("video/"))
                 {
                     if (videoPlayer.PlaybackState == PlaybackState.Playing)
                     {
@@ -150,7 +150,7 @@ namespace Gnosis.Tasks
         {
             if (Item.Target != null && Item.TargetType != null)
             {
-                if (Item.TargetType.MediaType.Supertype == MediaSupertype.Audio)
+                if (Item.TargetType.Name.StartsWith("audio/"))
                 {
                     if (audioPlayer.CurrentAudioStream != null && audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Paused)
                     {
@@ -158,7 +158,7 @@ namespace Gnosis.Tasks
                         audioPlayer.CurrentAudioStream.Resume();
                     }
                 }
-                else if (Item.TargetType.MediaType.Supertype == MediaSupertype.Video)
+                else if (Item.TargetType.Name.StartsWith("video/"))
                 {
                     if (videoPlayer.PlaybackState == PlaybackState.Paused)
                     {
@@ -172,15 +172,14 @@ namespace Gnosis.Tasks
         {
             if (Item.Target != null && Item.TargetType != null)
             {
-                if (Item.TargetType.MediaType.Supertype == MediaSupertype.Audio)
+                if (Item.TargetType.Name.StartsWith("audio/"))
                 {
                     if (audioPlayer.CurrentAudioStream != null && audioPlayer.CurrentAudioStream.PlaybackState != PlaybackState.Stopped)
                     {
                         audioPlayer.CurrentAudioStream.Stop();
                     }
-                    //audioPlayer.Stop();
                 }
-                else if (Item.TargetType.MediaType.Supertype == MediaSupertype.Video)
+                else if (Item.TargetType.Name.StartsWith("video/"))
                 {
                     if (videoPlayer.PlaybackState != PlaybackState.Stopped)
                     {
@@ -216,7 +215,7 @@ namespace Gnosis.Tasks
             {
                 if (Item.Target != null && Item.TargetType != null)
                 {
-                    if (Item.TargetType.MediaType.Supertype == MediaSupertype.Audio)
+                    if (Item.TargetType.Name.StartsWith("audio/"))
                     {
                         if (audioPlayer.CurrentAudioStream != null && !audioPlayer.SeekIsPending)
                         {
@@ -235,7 +234,7 @@ namespace Gnosis.Tasks
                             }
                         }
                     }
-                    else if (Item.TargetType.MediaType.Supertype == MediaSupertype.Video)
+                    else if (Item.TargetType.Name.StartsWith("video/"))
                     {
                         if (videoPlayer.Elapsed > TimeSpan.Zero && videoPlayer.Elapsed == videoPlayer.Duration)
                         {
@@ -272,12 +271,12 @@ namespace Gnosis.Tasks
             {
                 if (Item.Target != null && Item.TargetType != null)
                 {
-                    if (Item.TargetType.MediaType.Supertype == MediaSupertype.Audio)
+                    if (Item.TargetType.Name.StartsWith("audio/"))
                     {
                         LoadAudioStream(Item.Target);
                         PlayAudioStream();
                     }
-                    else if (Item.TargetType.MediaType.Supertype == MediaSupertype.Video)
+                    else if (Item.TargetType.Name.StartsWith("video/"))
                     {
                         LoadVideoStream(Item.Target);
                         PlayVideoStream();
@@ -300,11 +299,11 @@ namespace Gnosis.Tasks
         {
             if (Item.TargetType != null)
             {
-                if (Item.TargetType.MediaType.Supertype == MediaSupertype.Audio)
+                if (Item.TargetType.Name.StartsWith("audio/"))
                 {
                     return audioPlayer.CurrentAudioStream != null && audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing;
                 }
-                else if (Item.TargetType.MediaType.Supertype == MediaSupertype.Video)
+                else if (Item.TargetType.Name.StartsWith("video/"))
                 {
                     return videoPlayer.PlaybackState == PlaybackState.Playing;
                 }
@@ -341,14 +340,14 @@ namespace Gnosis.Tasks
         {
             if (Item.TargetType != null)
             {
-                if (Item.TargetType.MediaType.Supertype == MediaSupertype.Audio)
+                if (Item.TargetType.Name.StartsWith("audio/"))
                 {
                     if (audioPlayer.CurrentAudioStream != null)
                     {
                         audioPlayer.BeginSeek();
                     }
                 }
-                else if (Item.TargetType.MediaType.Supertype == MediaSupertype.Video)
+                else if (Item.TargetType.Name.StartsWith("video/"))
                 {
                     //videoPlayer.BeginSeek();
                 }
@@ -359,14 +358,14 @@ namespace Gnosis.Tasks
         {
             if (Item.TargetType != null)
             {
-                if (Item.TargetType.MediaType.Supertype == MediaSupertype.Audio)
+                if (Item.TargetType.Name.StartsWith("audio/"))
                 {
                     if (audioPlayer.CurrentAudioStream != null)
                     {
                         audioPlayer.Seek(value);
                     }
                 }
-                else if (Item.TargetType.MediaType.Supertype == MediaSupertype.Video)
+                else if (Item.TargetType.Name.StartsWith("video/"))
                 {
                     //videoPlayer.Seek(value);
                 }

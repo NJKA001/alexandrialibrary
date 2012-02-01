@@ -107,18 +107,6 @@ namespace Gnosis.Application.Xml
                 : null;
         }
 
-        protected IMediaType GetAttributeMediaType(string name, IMediaTypeFactory mediaTypeFactory)
-        {
-            if (mediaTypeFactory == null)
-                throw new ArgumentNullException("mediaTypeFactory");
-
-            var code = GetAttributeString(name);
-
-            return code != null ?
-                mediaTypeFactory.GetByCode(code)
-                : null;
-        }
-
         protected bool GetContentBoolean(bool defaultValue)
         {
             var s = GetContentString();

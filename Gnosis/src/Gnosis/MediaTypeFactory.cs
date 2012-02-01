@@ -20,7 +20,7 @@ using Gnosis.Video;
 namespace Gnosis
 {
     public class MediaTypeFactory
-        : IMediaTypeFactory
+        //: IMediaTypeFactory
     {
         public MediaTypeFactory(ILogger logger, ICharacterSetFactory characterSetFactory)
         {
@@ -33,13 +33,13 @@ namespace Gnosis
             this.characterSetFactory = characterSetFactory;
             this.defaultMediaType = ApplicationUnknown;
 
-            ApplicationAtomXml = new MediaType(MediaSupertype.Application, "atom+xml", false, (uri, type) => new XmlDocument(uri, type, this, characterSetFactory),  new List<string> { ".atom", ".xml" });
-            ApplicationRssXml = new MediaType(MediaSupertype.Application, "rss+xml", false, (uri, type) => new XmlDocument(uri, type, this, characterSetFactory), new List<string> { ".rss", ".xml" });
-            ApplicationXhtmlXml = new MediaType(MediaSupertype.Application, "xhtml+xml", false, (uri, type) => new XhtmlDocument(uri, type, characterSetFactory), new List<string> { ".xhtml" }, new List<string> { "text/html" });
-            ApplicationXspfXml = new MediaType(MediaSupertype.Application, "xspf+xml", false, (uri, type) => new XmlDocument(uri, type, this, characterSetFactory), new List<string> { ".xspf" });
-            ApplicationXml = new MediaType(MediaSupertype.Application, "xml", false, (uri, type) => new XmlDocument(uri, type, this, characterSetFactory), new List<string> { ".xml" }, new List<string> { "text/xml" });
-            TextHtml = new MediaType(MediaSupertype.Text, "html", false, (uri, type) => new XhtmlDocument(uri, type, characterSetFactory), new List<string> { ".html", ".htm" }, new List<string> { "text/html" });
-            TextXsl = new MediaType(MediaSupertype.Text, "xsl", false, (uri, type) => new XmlDocument(uri, type, this, characterSetFactory), new List<string> { ".xsl" });
+            //ApplicationAtomXml = new MediaType(MediaSupertype.Application, "atom+xml", false, (uri, type) => new XmlDocument(uri, type, this, characterSetFactory),  new List<string> { ".atom", ".xml" });
+            //ApplicationRssXml = new MediaType(MediaSupertype.Application, "rss+xml", false, (uri, type) => new XmlDocument(uri, type, this, characterSetFactory), new List<string> { ".rss", ".xml" });
+            //ApplicationXhtmlXml = new MediaType(MediaSupertype.Application, "xhtml+xml", false, (uri, type) => new XhtmlDocument(uri, type, characterSetFactory), new List<string> { ".xhtml" }, new List<string> { "text/html" });
+            //ApplicationXspfXml = new MediaType(MediaSupertype.Application, "xspf+xml", false, (uri, type) => new XmlDocument(uri, type, this, characterSetFactory), new List<string> { ".xspf" });
+            //ApplicationXml = new MediaType(MediaSupertype.Application, "xml", false, (uri, type) => new XmlDocument(uri, type, this, characterSetFactory), new List<string> { ".xml" }, new List<string> { "text/xml" });
+            //TextHtml = new MediaType(MediaSupertype.Text, "html", false, (uri, type) => new XhtmlDocument(uri, type, characterSetFactory), new List<string> { ".html", ".htm" }, new List<string> { "text/html" });
+            //TextXsl = new MediaType(MediaSupertype.Text, "xsl", false, (uri, type) => new XmlDocument(uri, type, this, characterSetFactory), new List<string> { ".xsl" });
 
             InitializeMediaTypes();
         }
@@ -180,7 +180,7 @@ namespace Gnosis
             return byLegacyType.ContainsKey(normalized) ? byLegacyType[normalized].First() : Default;
         }
 
-        public IMediaType GetByLocation(Uri location, IContentTypeFactory contentTypeFactory)
+        public string GetByLocation(Uri location, IContentTypeFactory contentTypeFactory)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
@@ -190,12 +190,12 @@ namespace Gnosis
             try
             {
                 var contentType = contentTypeFactory.GetByLocation(location);
-                return contentType != null ? contentType.MediaType : Default;
+                return contentType != null ? contentType.Name : "application/unknown";
             }
             catch (Exception ex)
             {
                 logger.Error("  MediaTypeFactory.GetByLocation", ex);
-                return Default;
+                return "application/unknown";
             }
         }
 

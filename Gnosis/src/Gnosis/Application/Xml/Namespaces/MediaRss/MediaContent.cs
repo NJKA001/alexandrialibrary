@@ -75,10 +75,9 @@ namespace Gnosis.Application.Xml.Namespaces.MediaRss
             get { return LanguageTag.Parse(GetAttributeString("lang")); }
         }
 
-        public IMediaType GetMediaType(IMediaTypeFactory mediaTypeFactory)
+        public string MediaType
         {
-            var code = GetAttributeString("type");
-            return code != null ? mediaTypeFactory.GetByCode(code) : mediaTypeFactory.Default;
+            get { return GetAttributeString("type"); }
         }
     }
 }

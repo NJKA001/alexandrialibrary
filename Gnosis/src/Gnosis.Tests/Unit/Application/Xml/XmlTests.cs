@@ -25,13 +25,13 @@ namespace Gnosis.Tests.Unit.Application.Xml
         {
             logger = new Gnosis.Utilities.DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
-            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
+            mediaFactory = new MediaFactory();
+            contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
         }
 
         private ILogger logger;
         private ICharacterSetFactory characterSetFactory;
-        private IMediaTypeFactory mediaTypeFactory;
+        private IMediaFactory mediaFactory;
         private IContentTypeFactory contentTypeFactory;
 
         private void MakeArsXmlAssertions(IXmlElement xml)
@@ -114,7 +114,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             var mediaRssContents = rss.Where<IMediaContent>(x => x != null && x.Name.LocalPart == "content");
             Assert.AreEqual(mediaRssContentCount, mediaRssContents.Count());
             Assert.IsNotNull(mediaRssContents.FirstOrDefault());
-            Assert.AreEqual("image/jpeg", mediaRssContents.FirstOrDefault().GetMediaType(mediaTypeFactory).ToString());
+            Assert.AreEqual("image/jpeg", mediaRssContents.FirstOrDefault().MediaType);
             var firstContents = mediaRssContents.FirstOrDefault();
             Assert.IsNotNull(firstContents.CurrentNamespace);
             Assert.AreEqual(mediaRssNamespace, firstContents.CurrentNamespace.Identifier.ToString());
@@ -152,7 +152,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var xml = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
+            var xml = XmlElement.Parse(location, characterSetFactory);
             MakeArsXmlAssertions(xml);
         }
 
@@ -165,7 +165,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var xml = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
+            var xml = XmlElement.Parse(location, characterSetFactory);
             MakeAtomXmlAssertions(xml);
         }
 
@@ -181,7 +181,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var xml = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
+            var xml = XmlElement.Parse(location, characterSetFactory);
 
             Assert.IsNotNull(xml);
             
@@ -204,13 +204,13 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var original = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
+            var original = XmlElement.Parse(location, characterSetFactory);
             Assert.IsNotNull(original);
 
             var output = original.ToString();
             System.Diagnostics.Debug.WriteLine(output);
 
-            var xml = XmlElement.Parse(output, mediaTypeFactory, characterSetFactory);
+            var xml = XmlElement.Parse(output, characterSetFactory);
             MakeArsXmlAssertions(xml);
         }
     }

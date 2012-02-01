@@ -11,12 +11,10 @@ namespace Gnosis.Application.Xml.Atom
         : IAtomCommon
     {
         Uri Href { get; }
-
+        string MediaType { get; }
         string Rel { get; }
         ILanguageTag HrefLang { get; }
         string Title { get; }
         int Length { get; }
-
-        IMediaType GetMediaType(IMediaTypeFactory mediaTypeFactory);
     }
 }

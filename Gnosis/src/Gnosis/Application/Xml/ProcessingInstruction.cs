@@ -41,10 +41,10 @@ namespace Gnosis.Application.Xml
             return string.Format("<?{0} {1}?>", target, normalized);
         }
 
-        public static IProcessingInstruction Parse(INode parent, string target, string content, IMediaTypeFactory mediaTypeFactory)
+        public static IProcessingInstruction Parse(INode parent, string target, string content)
         {
             return target == StyleSheet.XmlStyleSheetTarget ?
-                StyleSheet.ParseStyleSheet(parent, target, content, mediaTypeFactory) as IProcessingInstruction:
+                StyleSheet.ParseStyleSheet(parent, target, content) as IProcessingInstruction:
                 new ProcessingInstruction(parent, target, content);
         }
     }

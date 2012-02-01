@@ -18,9 +18,9 @@ namespace Gnosis.Application.Xml.Atom
             get { return GetAttributeUri("src"); }
         }
 
-        public IMediaType GetMediaType(IMediaTypeFactory mediaTypeFactory)
+        public string MediaType
         {
-            return GetAttributeMediaType("type", mediaTypeFactory);
+            get { return GetAttributeString("type"); }
         }
     }
 }

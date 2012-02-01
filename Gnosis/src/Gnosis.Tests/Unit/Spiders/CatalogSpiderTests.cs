@@ -26,8 +26,8 @@ namespace Gnosis.Tests.Unit.Spiders
         {
             logger = new DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
-            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
+            mediaFactory = new MediaFactory();
+            contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
             securityContext = new SecurityContext(contentTypeFactory);
         }
 
@@ -36,7 +36,7 @@ namespace Gnosis.Tests.Unit.Spiders
         private IConnectionFactory connectionFactory = new SQLiteConnectionFactory();
         private ILogger logger;
         private ICharacterSetFactory characterSetFactory;
-        private IMediaTypeFactory mediaTypeFactory;
+        private IMediaFactory mediaFactory;
         private IContentTypeFactory contentTypeFactory;
         private ISecurityContext securityContext;
         private ITagRepository tagRepository;
@@ -67,7 +67,7 @@ namespace Gnosis.Tests.Unit.Spiders
 
             mediaConnection = connectionFactory.Create(connectionString);
             mediaConnection.Open();
-            mediaRepository = new SQLiteMediaRepository(logger, contentTypeFactory, mediaConnection);
+            mediaRepository = new SQLiteMediaRepository(logger, contentTypeFactory, mediaFactory, mediaConnection);
             mediaRepository.Initialize();
 
             itemConnection = connectionFactory.Create(connectionString);
@@ -77,7 +77,7 @@ namespace Gnosis.Tests.Unit.Spiders
 
             audioStreamFactory = new AudioStreamFactory();
 
-            spider = new CatalogSpider(logger, securityContext, contentTypeFactory, mediaTypeFactory, linkRepository, tagRepository, mediaRepository, mediaItemRepository, audioStreamFactory);
+            spider = new CatalogSpider(logger, securityContext, contentTypeFactory, mediaFactory, linkRepository, tagRepository, mediaRepository, mediaItemRepository, audioStreamFactory);
         }
 
         [TestFixtureTearDown]

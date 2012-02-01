@@ -96,11 +96,13 @@
     <Compile Include="Identification\MediaIdentifier.cs" />
     <Compile Include="Identification\MediaInfo.cs" />
     <Compile Include="Identification\MediaIsAvailable.cs" />
+    <Compile Include="IMediaFactory.cs" />
     <Compile Include="IMediaMarquee.cs" />
     <Compile Include="IMediaMarqueePage.cs" />
     <Compile Include="IMediaMarqueeRepository.cs" />
     <Compile Include="IMediaTypeFactory.cs" />
     <Compile Include="MediaCategory.cs" />
+    <Compile Include="MediaFactory.cs" />
     <Compile Include="MediaSupertype.cs" />
     <Compile Include="MediaTypeFactory.cs" />
     <Compile Include="Metadata\Album.cs" />

@@ -14,13 +14,11 @@ namespace Gnosis.Tests.Network
         {
             logger = new Gnosis.Utilities.DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
-            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
+            contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
         }
 
         private ILogger logger;
         private ICharacterSetFactory characterSetFactory;
-        private IMediaTypeFactory mediaTypeFactory;
         private IContentTypeFactory contentTypeFactory;
 
         [Test]
@@ -30,7 +28,7 @@ namespace Gnosis.Tests.Network
             var contentType = contentTypeFactory.GetByLocation(location);
             Assert.IsNotNull(contentType);
             Assert.AreNotEqual(contentTypeFactory.Default, contentType);
-            Assert.AreEqual("application/rss+xml", contentType.MediaType.ToString());
+            Assert.AreEqual("application/rss+xml", contentType.Name);
             Assert.AreEqual("UTF-8", contentType.CharSet.Name);
             Assert.IsNull(contentType.Boundary);
         }
@@ -42,7 +40,7 @@ namespace Gnosis.Tests.Network
             var contentType = contentTypeFactory.GetByLocation(location);
             Assert.IsNotNull(contentType);
             Assert.AreNotEqual(contentTypeFactory.Default, contentType);
-            Assert.AreEqual("application/atom+xml", contentType.MediaType.ToString());
+            Assert.AreEqual("application/atom+xml", contentType.Name);
             Assert.AreEqual("UTF-8", contentType.CharSet.Name);
             Assert.IsNull(contentType.Boundary);
         }

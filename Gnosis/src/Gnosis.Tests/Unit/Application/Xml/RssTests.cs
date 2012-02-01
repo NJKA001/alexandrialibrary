@@ -20,13 +20,13 @@ namespace Gnosis.Tests.Unit.Application.Xml
         {
             logger = new Gnosis.Utilities.DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
-            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
+            mediaFactory = new MediaFactory();
+            contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
         }
 
         private ILogger logger;
         private ICharacterSetFactory characterSetFactory;
-        private IMediaTypeFactory mediaTypeFactory;
+        private IMediaFactory mediaFactory;
         private IContentTypeFactory contentTypeFactory;
 
         private void MakeRssFeedAssertions(IXmlElement document)
@@ -163,9 +163,9 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             var location = new Uri(fileInfo.FullName);
             var contentType = contentTypeFactory.GetByLocation(location);
-            Assert.AreEqual("application/rss+xml", contentType.MediaType.ToString());
+            Assert.AreEqual("application/rss+xml", contentType.Name);
 
-            var document = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
+            var document = XmlElement.Parse(location, characterSetFactory);
             Assert.IsNotNull(document);
 
             var feed = document.Root as IRssFeed;
@@ -188,9 +188,9 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             var location = new Uri(fileInfo.FullName);
             var contentType = contentTypeFactory.GetByLocation(location);
-            Assert.AreEqual("application/rss+xml", contentType.MediaType.ToString());
+            Assert.AreEqual("application/rss+xml", contentType.Name);
 
-            var document = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
+            var document = XmlElement.Parse(location, characterSetFactory);
             Assert.IsNotNull(document);
 
             var feed = document.Root as IRssFeed;
@@ -210,9 +210,9 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             var location = new Uri(fileInfo.FullName);
             var contentType = contentTypeFactory.GetByLocation(location);
-            Assert.AreEqual("application/rss+xml", contentType.MediaType.ToString());
+            Assert.AreEqual("application/rss+xml", contentType.Name);
 
-            var document = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
+            var document = XmlElement.Parse(location, characterSetFactory);
             Assert.IsNotNull(document);
 
             var feed = document.Root as IRssFeed;
@@ -230,9 +230,9 @@ namespace Gnosis.Tests.Unit.Application.Xml
             
             var location = new Uri(fileInfo.FullName);
             var contentType = contentTypeFactory.GetByLocation(location);
-            Assert.AreEqual("application/rss+xml", contentType.MediaType.ToString());
+            Assert.AreEqual("application/rss+xml", contentType.Name);
 
-            var document = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
+            var document = XmlElement.Parse(location, characterSetFactory);
             Assert.IsNotNull(document);
 
             MakeRssFeedAssertions(document);
@@ -247,15 +247,15 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             var location = new Uri(fileInfo.FullName);
             var contentType = contentTypeFactory.GetByLocation(location);
-            Assert.AreEqual("application/rss+xml", contentType.MediaType.ToString());
+            Assert.AreEqual("application/rss+xml", contentType.Name);
 
-            var original = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
+            var original = XmlElement.Parse(location, characterSetFactory);
             Assert.IsNotNull(original);
 
             var xmlString = original.ToString();
             Assert.IsNotNull(xmlString);
 
-            var document = XmlElement.Parse(xmlString, mediaTypeFactory, characterSetFactory);
+            var document = XmlElement.Parse(xmlString, characterSetFactory);
 
             //IRssFeed feed = null;
             //var encoding = CharacterSet.Utf8;

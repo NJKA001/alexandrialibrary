@@ -18,13 +18,13 @@ namespace Gnosis.Tests.Network
         {
             logger = new Gnosis.Utilities.DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
-            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
+            mediaFactory = new MediaFactory();
+            contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
         }
 
         private ILogger logger;
         private ICharacterSetFactory characterSetFactory;
-        private IMediaTypeFactory mediaTypeFactory;
+        private IMediaFactory mediaFactory;
         private IContentTypeFactory contentTypeFactory;
 
         [Test]
@@ -33,7 +33,7 @@ namespace Gnosis.Tests.Network
             #region Constants
 
             var location = new Uri("http://feeds2.feedburner.com/oreilly/radar/atom");
-            var document = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
+            var document = XmlElement.Parse(location, characterSetFactory);
             Assert.IsNotNull(document);
 
             var feed = document.Root as IAtomFeed;
@@ -71,7 +71,7 @@ namespace Gnosis.Tests.Network
 
             var location = new Uri("http://bblfish.net/blog/blog.atom");
             //System.Diagnostics.Debug.WriteLine("before ToAtomFeed");
-            var document = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
+            var document = XmlElement.Parse(location, characterSetFactory);
             var feed = document.Root as IAtomFeed;
             //System.Diagnostics.Debug.WriteLine("after ToAtomFeed");
 
@@ -86,7 +86,7 @@ namespace Gnosis.Tests.Network
         {
             var location = new Uri("http://bblfish.net/blog/blog.atom");
 
-            var xml = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
+            var xml = XmlElement.Parse(location, characterSetFactory);
             Assert.IsNotNull(xml);
         }
     }

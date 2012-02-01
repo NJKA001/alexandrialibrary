@@ -20,13 +20,13 @@ namespace Gnosis.Tests.Unit.Application.Xml
         {
             logger = new Gnosis.Utilities.DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
-            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
+            mediaFactory = new MediaFactory();
+            contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
         }
 
         private ILogger logger;
         private ICharacterSetFactory characterSetFactory;
-        private IMediaTypeFactory mediaTypeFactory;
+        private IMediaFactory mediaFactory;
         private IContentTypeFactory contentTypeFactory;
 
         private void MakeAtomFeedAssertions(IXmlElement document)
@@ -135,7 +135,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             Assert.AreEqual(4, feed.Links.Count());
             Assert.AreEqual(link1Rel, feed.Links.First().Rel);
-            Assert.AreEqual(link1Type, feed.Links.First().GetMediaType(mediaTypeFactory).ToString());
+            Assert.AreEqual(link1Type, feed.Links.First().MediaType);
 
             Assert.IsNotNull(feed.Logo);
             Assert.AreEqual(logoUri, feed.Logo.Uri.ToString());
@@ -188,7 +188,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.AreEqual(5, feed.Entries.First().Links.Count());
             Assert.AreEqual(entryLink5Href, feed.Entries.First().Links.Last().Href.ToString());
             Assert.AreEqual(entryLink5HrefLang, feed.Entries.First().Links.Last().HrefLang);
-            Assert.AreEqual(entryLink5MediaType, feed.Entries.First().Links.Last().GetMediaType(mediaTypeFactory).ToString());
+            Assert.AreEqual(entryLink5MediaType, feed.Entries.First().Links.Last().MediaType);
             Assert.AreEqual(entryLink5Title, feed.Entries.First().Links.Last().Title);
             Assert.AreEqual(entryLink5Rel, feed.Entries.First().Links.Last().Rel);
 
@@ -227,13 +227,13 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             var location = new Uri(fileInfo.FullName);
             var contentType = contentTypeFactory.GetByLocation(location);
-            Assert.AreEqual("application/atom+xml", contentType.MediaType.ToString());
+            Assert.AreEqual("application/atom+xml", contentType.Name);
 
-            var original = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
+            var original = XmlElement.Parse(location, characterSetFactory);
             var xmlString = original.ToString();
             Assert.IsNotNull(xmlString);
 
-            var document = XmlElement.Parse(xmlString, mediaTypeFactory, characterSetFactory);
+            var document = XmlElement.Parse(xmlString, characterSetFactory);
             //var xml = new XmlDocument();
             //xml.LoadXml(xmlString);
             //IAtomFeed feed = null;
@@ -274,9 +274,9 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             var location = new Uri(fileInfo.FullName);
             var contentType = contentTypeFactory.GetByLocation(location);
-            Assert.AreEqual("application/atom+xml", contentType.MediaType.ToString());
+            Assert.AreEqual("application/atom+xml", contentType.Name);
 
-            var document = XmlElement.Parse(location, mediaTypeFactory, characterSetFactory);
+            var document = XmlElement.Parse(location, characterSetFactory);
 
             MakeAtomFeedAssertions(document);
         }

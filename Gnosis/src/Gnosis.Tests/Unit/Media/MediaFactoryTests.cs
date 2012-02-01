@@ -14,13 +14,13 @@ namespace Gnosis.Tests.Unit.Media
         {
             logger = new Gnosis.Utilities.DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
-            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
+            mediaFactory = new MediaFactory();
+            contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
         }
 
         private readonly ILogger logger;
         private readonly ICharacterSetFactory characterSetFactory;
-        private readonly IMediaTypeFactory mediaTypeFactory;
+        private readonly IMediaFactory mediaFactory;
         private readonly IContentTypeFactory contentTypeFactory;
 
         const string pathBearAtom = @".\Files\bearbrarian.xml";
@@ -36,7 +36,7 @@ namespace Gnosis.Tests.Unit.Media
             var type = contentTypeFactory.GetByLocation(location);
 
             return type != null ?
-                type.CreateMedia(location)
+                mediaFactory.Create(location, type)
                 : null;
         }
 

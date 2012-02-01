@@ -23,10 +23,9 @@ namespace Gnosis.Application.Xml.Rss
             get { return GetAttributeInt32("length"); }
         }
 
-        public IMediaType GetMediaType(IMediaTypeFactory mediaTypeFactory)
+        public string MediaType
         {                
-            var code = GetAttributeString("type");
-            return code != null ? mediaTypeFactory.GetByCode(code) : mediaTypeFactory.Default;
+            get { return GetAttributeString("type"); }
         }
     }
 }

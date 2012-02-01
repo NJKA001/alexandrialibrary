@@ -8,7 +8,7 @@ namespace Gnosis.Application.Xml
     public interface IStyleSheet
         : IProcessingInstruction
     {
-        IMediaType Type { get; }
+        string Type { get; }
         IStyleMedia Media { get; }
         Uri Href { get; }
     }

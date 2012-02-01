@@ -22,8 +22,8 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         {
             logger = new DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaTypeFactory = new MediaTypeFactory(logger, characterSetFactory);
-            contentTypeFactory = new ContentTypeFactory(logger, mediaTypeFactory, characterSetFactory);
+            mediaFactory = new MediaFactory();
+            contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
             securityContext = new SecurityContext(contentTypeFactory);
             contentType = contentTypeFactory.GetByCode("application/vnd.gnosis.album");
 
@@ -45,7 +45,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
 
         protected readonly ILogger logger;
         protected readonly ICharacterSetFactory characterSetFactory;
-        protected readonly IMediaTypeFactory mediaTypeFactory;
+        protected readonly IMediaFactory mediaFactory;
         protected readonly ISecurityContext securityContext;
         protected readonly IContentTypeFactory contentTypeFactory;
         protected readonly IDbConnection connection;

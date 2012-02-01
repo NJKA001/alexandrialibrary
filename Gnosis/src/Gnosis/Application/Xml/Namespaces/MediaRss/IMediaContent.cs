@@ -22,7 +22,6 @@ namespace Gnosis.Application.Xml.Namespaces.MediaRss
         int Height { get; }
         int Width { get; }
         ILanguageTag Lang { get; }
-
-        IMediaType GetMediaType(IMediaTypeFactory mediaTypeFactory);
+        string MediaType { get; }
     }
 }
