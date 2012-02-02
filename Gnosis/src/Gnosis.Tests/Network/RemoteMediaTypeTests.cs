@@ -14,7 +14,7 @@ namespace Gnosis.Tests.Network
         {
             logger = new Gnosis.Utilities.DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaFactory = new MediaFactory();
+            mediaFactory = new MediaFactory(characterSetFactory);
             contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
         }
 
@@ -28,7 +28,7 @@ namespace Gnosis.Tests.Network
         {
             var location = new Uri("http://feeds.arstechnica.com/arstechnica/index");
             var mediaType = contentTypeFactory.GetByLocation(location);
-            Assert.AreEqual("application/rss+xml", mediaType);
+            Assert.AreEqual("application/rss+xml", mediaType.Name);
         }
 
         [Test]
@@ -36,7 +36,7 @@ namespace Gnosis.Tests.Network
         {
             var location = new Uri("http://www.blogger.com/feeds/8677504/posts/default");
             var mediaType = contentTypeFactory.GetByLocation(location);
-            Assert.AreEqual("application/atom+xml", mediaType);
+            Assert.AreEqual("application/atom+xml", mediaType.Name);
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace Gnosis.Tests.Network
         {
             var location = new Uri("http://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Rotating_earth_%28large%29.gif/200px-Rotating_earth_%28large%29.gif");
             var mediaType = contentTypeFactory.GetByLocation(location);
-            Assert.AreEqual("image/gif", mediaType);
+            Assert.AreEqual("image/gif", mediaType.Name);
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace Gnosis.Tests.Network
         {
             var location = new Uri("http://upload.wikimedia.org/wikipedia/commons/b/b4/JPEG_example_JPG_RIP_100.jpg");
             var mediaType = contentTypeFactory.GetByLocation(location);
-            Assert.AreEqual("image/jpeg", mediaType.ToString());
+            Assert.AreEqual("image/jpeg", mediaType.Name);
         }
 
         [Test]
@@ -60,7 +60,7 @@ namespace Gnosis.Tests.Network
         {
             var location = new Uri("http://arstechnica.com/");
             var mediaType = contentTypeFactory.GetByLocation(location);
-            Assert.AreEqual("text/html", mediaType.ToString());
+            Assert.AreEqual("text/html", mediaType.Name);
         }
     }
 }

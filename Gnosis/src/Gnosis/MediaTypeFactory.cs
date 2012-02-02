@@ -57,13 +57,13 @@ namespace Gnosis
 
         #region Media Types
 
-        private readonly IMediaType ApplicationAtomXml;
-        private readonly IMediaType ApplicationRssXml;
-        private readonly IMediaType ApplicationXhtmlXml;
-        private readonly IMediaType ApplicationXspfXml;
-        private readonly IMediaType ApplicationXml;
-        private readonly IMediaType TextHtml; 
-        private readonly IMediaType TextXsl;
+        //private readonly IMediaType ApplicationAtomXml;
+        //private readonly IMediaType ApplicationRssXml;
+        //private readonly IMediaType ApplicationXhtmlXml;
+        //private readonly IMediaType ApplicationXspfXml;
+        //private readonly IMediaType ApplicationXml;
+        //private readonly IMediaType TextHtml; 
+        //private readonly IMediaType TextXsl;
 
         private readonly IMediaType ApplicationPdf = new MediaType(MediaSupertype.Application, "pdf", false, (uri, type) => new PdfDocument(uri, type), new List<string> { ".pdf" }, new List<string> { "application/x-pdf", "application/x-bzpdf", "application/x-gxpdf" }, new List<byte[]> { new byte[] { 0x25, 0x50, 0x44, 0x46 } });
         private readonly IMediaType ApplicationXmlDtd = new MediaType(MediaSupertype.Application, "xml-dtd", false, (uri, type) => new XmlDtdDocument(uri, type), new List<string> { ".dtd", ".ent" });
@@ -114,12 +114,12 @@ namespace Gnosis
 
         private void InitializeMediaTypes()
         {
-            AddMediaType(ApplicationAtomXml);
+            //AddMediaType(ApplicationAtomXml);
             AddMediaType(ApplicationPdf);
-            AddMediaType(ApplicationRssXml);
-            AddMediaType(ApplicationXhtmlXml);
-            AddMediaType(ApplicationXspfXml);
-            AddMediaType(ApplicationXml);
+            //AddMediaType(ApplicationRssXml);
+            //AddMediaType(ApplicationXhtmlXml);
+            //AddMediaType(ApplicationXspfXml);
+            //AddMediaType(ApplicationXml);
             AddMediaType(ApplicationXmlDtd);
             AddMediaType(ApplicationUnknown);
             AddMediaType(ApplicationGnosisAlbum);
@@ -150,9 +150,9 @@ namespace Gnosis
             AddMediaType(ImageJpeg);
             AddMediaType(ImagePng);
             AddMediaType(TextCss);
-            AddMediaType(TextHtml);
+            //AddMediaType(TextHtml);
             AddMediaType(TextPlain);
-            AddMediaType(TextXsl);
+            //AddMediaType(TextXsl);
             AddMediaType(VideoAvi);
             AddMediaType(VideoMpeg);
             AddMediaType(VideoMpeg4);

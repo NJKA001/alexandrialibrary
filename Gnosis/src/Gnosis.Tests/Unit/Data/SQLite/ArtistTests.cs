@@ -22,7 +22,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         {
             logger = new DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaFactory = new MediaFactory();
+            mediaFactory = new MediaFactory(characterSetFactory);
             contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
             securityContext = new SecurityContext(contentTypeFactory);
             contentType = contentTypeFactory.GetByCode("application/vnd.gnosis.artist");

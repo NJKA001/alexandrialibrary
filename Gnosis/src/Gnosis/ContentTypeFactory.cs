@@ -22,15 +22,240 @@ namespace Gnosis
             this.characterSetFactory = characterSetFactory;
 
             defaultContentType = new ContentType(defaultMediaType);
+
+            InitializeFileExtensions();
+            InitializeMagicNumbers();
         }
 
         private readonly ILogger logger;
         private readonly ICharacterSetFactory characterSetFactory;
         private readonly IContentType defaultContentType;
 
-        private const string defaultMediaType = "application/unknown";
+        private readonly IDictionary<string, IList<string>> byFileExtension = new Dictionary<string, IList<string>>();
+        private readonly IDictionary<byte[], string> byMagicNumber = new Dictionary<byte[], string>();
+
+        private const string defaultMediaType = mediaType_ApplicationUnknown;
         private const string charSetFieldName = "charset=";
         private const string boundaryFieldName = "boundary=";
+
+        #region FileExtension Constants
+
+        private const string fileExtension_Atom = ".atom";
+        private const string fileExtension_Avi = ".avi";
+        private const string fileExtension_Bmp = ".bmp";
+        private const string fileExtension_Css = ".css";
+        private const string fileExtension_Dib = ".dib";
+        private const string fileExtension_Dtd = ".dtd";
+        private const string fileExtension_Ent = ".ent";
+        private const string fileExtension_Exe = ".exe";
+        private const string fileExtension_Gif = ".gif";
+        private const string fileExtension_Htm = ".htm";
+        private const string fileExtension_Html = ".html";
+        private const string fileExtension_Ini = ".ini";
+        private const string fileExtension_Jpg = ".jpg";
+        private const string fileExtension_Jpeg = ".jpeg";
+        private const string fileExtension_Jpe = ".jpe";
+        private const string fileExtension_Jif = ".jif";
+        private const string fileExtension_Jfif = ".jfif";
+        private const string fileExtension_Jfi = ".jfi";
+        private const string fileExtension_Lnk = ".lnk";
+        private const string fileExtension_Mp1 = ".mp1";
+        private const string fileExtension_Mp2 = ".mp2";
+        private const string fileExtension_Mp3 = ".mp3";
+        private const string fileExtension_Mp4 = ".mp4";
+        private const string fileExtension_Mpeg = ".mpeg";
+        private const string fileExtension_Mpe = ".mpe"; 
+        private const string fileExtension_Mpg = ".mpg";
+        private const string fileExtension_Mpg4 = ".mpg4";
+        private const string fileExtension_Mpga = ".mpga";
+        private const string fileExtension_Pdf = ".pdf";
+        private const string fileExtension_Png = ".png";
+        private const string fileExtension_Rss = ".rss";
+        private const string fileExtension_Text = ".text";
+        private const string fileExtension_Txt = ".txt";
+        private const string fileExtension_Wmv = ".wmv";
+        private const string fileExtension_Xhtml = ".xhtml";
+        private const string fileExtension_Xml = ".xml";
+        private const string fileExtension_Xsl = ".xsl";
+        private const string fileExtension_Xslt = ".xslt";
+        private const string fileExtension_Xspf = ".xspf";
+
+        #endregion
+
+        #region MagicNumber Constants
+
+        private readonly byte[] magicNumber_Avi = new byte[] { 0x52, 0x49, 0x46, 0x46 };
+        private readonly byte[] magicNumber_Bmp = new byte[] { 66, 77 };
+        private readonly byte[] magicNumber_Exe = new byte[] { 0x4D, 0x5A };
+        private readonly byte[] magicNumber_Gif87 = new byte[] { 71, 73, 70, 56, 55, 97 };
+        private readonly byte[] magicNumber_Gif89 = new byte[] { 71, 73, 70, 56, 57, 97 };
+        private readonly byte[] magicNumber_Jpeg = new byte[] { 255, 216, 255, 224 };
+        private readonly byte[] magicNumber_Lnk = new byte[] { 0x4C, 0x00, 0x00, 0x00, 0x01, 0x14, 0x02 };
+        private readonly byte[] magicNumber_Mpeg = new byte[] { 0x00, 0x00, 0x01 };
+        private readonly byte[] magicNumber_Mp3 = new byte[] { 0x49, 0x44, 0x33 };
+        private readonly byte[] magicNumber_Pdf = new byte[] { 0x25, 0x50, 0x44, 0x46 };
+        private readonly byte[] magicNumber_Png = new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 };
+        private readonly byte[] magicNumber_Wmv = new byte[] { 0x30, 0x26, 0xB2, 0x75 };
+
+        #endregion
+
+        #region MediaType Constants
+
+        public const string mediaType_AudioMpeg = "audio/mpeg";
+
+        public const string mediaType_ApplicationAtomXml = "application/atom+xml";
+        
+        public const string mediaType_ApplicationGnosisAlbum = "application/vnd.gnosis.album";
+        public const string mediaType_ApplicationGnosisArtist = "application/vnd.gnosis.artist";
+        public const string mediaType_ApplicationGnosisClip = "application/vnd.gnosis.clip";
+        public const string mediaType_ApplicationGnosisDoc = "application/vnd.gnosis.doc";
+        public const string mediaType_ApplicationGnosisFeed = "application/vnd.gnosis.feed";
+        public const string mediaType_ApplicationGnosisFeedItem = "application/vnd.gnosis.feed-item";
+        public const string mediaType_ApplicationGnosisFilesystemDirectory = "application/vnd.gnosis.fs-dir";
+        public const string mediaType_ApplicationGnosisLink = "application/vnd.gnosis.link";
+        public const string mediaType_ApplicationGnosisPic = "application/vnd.gnosis.pic";
+        public const string mediaType_ApplicationGnosisPlaylist = "application/vnd.gnosis.playlist";
+        public const string mediaType_ApplicationGnosisPlaylistItem = "application/vnd.gnosis.playlist-item";
+        public const string mediaType_ApplicationGnosisProgram = "application/vnd.gnosis.program";
+        public const string mediaType_ApplicationGnosisTag = "application/vnd.gnosis.tag";
+        public const string mediaType_ApplicationGnosisTrack = "application/vnd.gnosis.track";
+        public const string mediaType_ApplicationGnosisUser = "application/vnd.gnosis.user";
+        public const string mediaType_ApplicationGnosisUserCatalog = "application/vnd.gnosis.user-catalog";
+        public const string mediaType_ApplicationGnosisUserFolder = "application/vnd.gnosis.user-folder";
+
+        public const string mediaType_ApplicationDosExe = "application/dos-exe";
+        public const string mediaType_ApplicationXExe = "application/x-exe";
+        public const string mediaType_ApplicationXMsDownload = "application/x-msdownload";
+        public const string mediaType_ApplicationXMsShortcut = "application/x-ms-shortcut";
+        public const string mediaType_ApplicationXWinExe = "application/x-winexe";
+        
+        public const string mediaType_ApplicationPdf = "application/pdf";
+        public const string mediaType_ApplicationXPdf = "application/x-pdf";
+        public const string mediaType_ApplicationXbzPdf = "application/x-bzpdf";
+        public const string mediaType_ApplicationXgxPdf = "application/x-gxpdf";
+
+        public const string mediaType_ApplicationRssXml = "application/rss+xml";
+        public const string mediaType_ApplicationUnknown = "application/unknown";
+        public const string mediaType_ApplicationXhtmlXml = "application/xhtml+xml";
+        public const string mediaType_ApplicationXsl = "application/xsl";
+        public const string mediaType_ApplicationXspfXml = "application/xspf+xml";
+        public const string mediaType_ApplicationXml = "application/xml";
+        public const string mediaType_ApplicationXmlDtd = "application/xml-dtd";
+
+        public const string mediaType_ImageXBmp = "image/x-bmp";
+        public const string mediaType_ImageXMsBmp = "image/x-ms-bmp";
+
+        public const string mediaType_ImageGif = "image/gif";
+        public const string mediaType_ImageJpeg = "image/jpeg";
+        
+        public const string mediaType_ImagePng = "image/png";
+        public const string mediaType_ImageXPng = "image/x-png";
+
+        public const string mediaType_TextCss = "text/css";
+        public const string mediaType_TextHtml = "text/html";
+        public const string mediaType_TextPlain = "text/plain";
+        public const string mediaType_TextXml = "text/xml";
+
+        public const string mediaType_ApplicationXsltXml = "application/xslt+xml";
+        public const string mediaType_TextXsl = "text/xsl";
+
+        public const string mediaType_VideoAvi = "video/avi";
+        public const string mediaType_VideoXMsVideo = "video/x-msvideo";
+        public const string mediaType_VideoMsVideo = "video/msvideo";
+
+        public const string mediaType_VideoMpeg = "video/mpeg";
+        public const string mediaType_VideoMpeg4 = "video/mp4";
+        public const string mediaType_VideoWmv = "video/x-ms-wmv";
+
+        #endregion
+
+        private void InitializeFileExtensions()
+        {
+            MapFileExtensions(mediaType_ApplicationAtomXml, new List<string> { fileExtension_Atom });
+
+            MapFileExtensions(mediaType_ApplicationDosExe, new List<string> { fileExtension_Exe });
+            MapFileExtensions(mediaType_ApplicationXMsDownload, new List<string> { fileExtension_Exe });
+            MapFileExtensions(mediaType_ApplicationXMsShortcut, new List<string> { fileExtension_Lnk });
+            MapFileExtensions(mediaType_ApplicationXExe, new List<string> { fileExtension_Exe });
+            MapFileExtensions(mediaType_ApplicationXWinExe, new List<string> { fileExtension_Exe });
+
+            MapFileExtensions(mediaType_ApplicationPdf, new List<string> { fileExtension_Pdf });
+            MapFileExtensions(mediaType_ApplicationXbzPdf, new List<string> { fileExtension_Pdf });
+            MapFileExtensions(mediaType_ApplicationXgxPdf, new List<string> { fileExtension_Pdf });
+            MapFileExtensions(mediaType_ApplicationXPdf, new List<string> { fileExtension_Pdf });
+
+            MapFileExtensions(mediaType_ApplicationRssXml, new List<string> { fileExtension_Rss });
+            
+            MapFileExtensions(mediaType_ApplicationXhtmlXml, new List<string> { fileExtension_Xhtml });
+            MapFileExtensions(mediaType_TextHtml, new List<string> { fileExtension_Html, fileExtension_Htm });
+
+            MapFileExtensions(mediaType_ApplicationXspfXml, new List<string> { fileExtension_Xspf });
+            
+            MapFileExtensions(mediaType_ApplicationXml, new List<string> { fileExtension_Xml });
+            MapFileExtensions(mediaType_TextXml, new List<string> { fileExtension_Xml });
+
+            MapFileExtensions(mediaType_ApplicationXmlDtd, new List<string> { fileExtension_Dtd, fileExtension_Ent });
+
+            MapFileExtensions(mediaType_ApplicationXsltXml, new List<string> { fileExtension_Xsl, fileExtension_Xslt });
+            MapFileExtensions(mediaType_TextXsl, new List<string> { fileExtension_Xsl, fileExtension_Xslt });
+
+            MapFileExtensions(mediaType_AudioMpeg, new List<string> { fileExtension_Mp3, fileExtension_Mp2, fileExtension_Mp1 });
+
+            MapFileExtensions(mediaType_ImageXBmp, new List<string> { fileExtension_Bmp, fileExtension_Dib });
+            MapFileExtensions(mediaType_ImageXMsBmp, new List<string> { fileExtension_Bmp, fileExtension_Dib });
+            
+            MapFileExtensions(mediaType_ImageGif, new List<string> { fileExtension_Gif });
+            MapFileExtensions(mediaType_ImageJpeg, new List<string> { fileExtension_Jpg, fileExtension_Jpeg, fileExtension_Jpe, fileExtension_Jif, fileExtension_Jfif, fileExtension_Jfi });
+            MapFileExtensions(mediaType_ImagePng, new List<string> { fileExtension_Png });
+            MapFileExtensions(mediaType_ImageXPng, new List<string> { fileExtension_Png });
+
+            MapFileExtensions(mediaType_TextCss, new List<string> { fileExtension_Css });
+            MapFileExtensions(mediaType_TextPlain, new List<string> { fileExtension_Txt, fileExtension_Text, fileExtension_Ini });
+
+            MapFileExtensions(mediaType_VideoAvi, new List<string> { fileExtension_Avi });
+            MapFileExtensions(mediaType_VideoMsVideo, new List<string> { fileExtension_Avi });
+            MapFileExtensions(mediaType_VideoXMsVideo, new List<string> { fileExtension_Avi });
+            
+            MapFileExtensions(mediaType_VideoMpeg, new List<string> { fileExtension_Mpeg, fileExtension_Mpe, fileExtension_Mpg, fileExtension_Mpga });
+            MapFileExtensions(mediaType_VideoMpeg4, new List<string> { fileExtension_Mp4, fileExtension_Mpg4 });
+
+            MapFileExtensions(mediaType_VideoWmv, new List<string> { fileExtension_Wmv });
+        }
+
+        private void InitializeMagicNumbers()
+        {
+            MapMagicNumbers(mediaType_ApplicationDosExe, magicNumber_Exe);
+            MapMagicNumbers(mediaType_ApplicationXMsDownload, magicNumber_Exe);
+            MapMagicNumbers(mediaType_ApplicationXMsShortcut, magicNumber_Lnk);
+            MapMagicNumbers(mediaType_ApplicationXExe, magicNumber_Exe);
+            MapMagicNumbers(mediaType_ApplicationXWinExe, magicNumber_Exe);
+
+            MapMagicNumbers(mediaType_ApplicationPdf, magicNumber_Pdf);
+            MapMagicNumbers(mediaType_ApplicationXbzPdf, magicNumber_Pdf);
+            MapMagicNumbers(mediaType_ApplicationXgxPdf, magicNumber_Pdf);
+            MapMagicNumbers(mediaType_ApplicationXPdf, magicNumber_Pdf);
+
+            MapMagicNumbers(mediaType_AudioMpeg, magicNumber_Mp3);
+
+            MapMagicNumbers(mediaType_ImageXBmp, magicNumber_Bmp);
+            MapMagicNumbers(mediaType_ImageXMsBmp, magicNumber_Bmp);
+
+            MapMagicNumbers(mediaType_ImageGif, magicNumber_Gif87);
+            MapMagicNumbers(mediaType_ImageGif, magicNumber_Gif89);
+
+            MapMagicNumbers(mediaType_ImageJpeg, magicNumber_Jpeg);
+
+            MapMagicNumbers(mediaType_ImagePng, magicNumber_Png);
+            MapMagicNumbers(mediaType_ImageXPng, magicNumber_Png);
+
+            MapMagicNumbers(mediaType_VideoAvi, magicNumber_Avi);
+            MapMagicNumbers(mediaType_VideoMsVideo, magicNumber_Avi);
+            MapMagicNumbers(mediaType_VideoXMsVideo, magicNumber_Avi);
+
+            MapMagicNumbers(mediaType_VideoMpeg, magicNumber_Mpeg);
+            
+            MapMagicNumbers(mediaType_VideoWmv, magicNumber_Wmv);
+        }
 
         private ICharacterSet GetCharacterSet(Stream stream, string name, ICharacterSet charSet)
         {
@@ -83,15 +308,15 @@ namespace Gnosis
                                         //System.Diagnostics.Debug.WriteLine("elementName=" + element.Name);
                                         if (element.Name == "rss")
                                         {
-                                            newName = "application/rss+xml";
+                                            newName = mediaType_ApplicationRssXml;
                                         }
                                         else if (element.Name == "feed")
                                         {
-                                            newName = "application/atom+xml";
+                                            newName = mediaType_ApplicationAtomXml;
                                         }
                                         else if (element.Name == "playlist")
                                         {
-                                            newName = "application/xspf+xml";
+                                            newName = mediaType_ApplicationXspfXml;
                                         }
                                     }
                                 }
@@ -101,15 +326,13 @@ namespace Gnosis
                 }
                 catch
                 {
-                    newName = "application/xml";
+                    newName = mediaType_ApplicationXml;
                 }
             }
 
             return new Tuple<string, ICharacterSet>(newName, newCharSet);
         }
-
-        private readonly IDictionary<byte[], string> byMagicNumber = new Dictionary<byte[], string>();
-
+        
         private string GetByMagicNumber(byte[] header)
         {
             try
@@ -138,16 +361,14 @@ namespace Gnosis
                     }
                 }
 
-                return "application/unknown";
+                return defaultMediaType;
             }
             catch (Exception ex)
             {
                 logger.Error("  MediaTypeFactory.GetByMagicNumber", ex);
-                return "application/unknown";
+                return defaultMediaType;
             }
         }
-
-        private readonly IDictionary<string, IList<string>> byFileExtension = new Dictionary<string, IList<string>>();
 
         private IEnumerable<string> GetByFileExtension(string fileExtension)
         {
@@ -169,7 +390,7 @@ namespace Gnosis
             if (code == null)
                 throw new ArgumentNullException("code");
 
-            var name = "application/default";
+            var name = defaultMediaType;
             ICharacterSet charSet = null;
             string boundary = null;
 
@@ -177,8 +398,7 @@ namespace Gnosis
 
             var typeCode = tokens != null && tokens.Length > 0 && tokens[0] != null ? tokens[0].Trim() : string.Empty;
             name = typeCode;
-            //mediaType = mediaTypeFactory.GetByCode(typeCode);
-
+            
             if (tokens.Length > 1)
             {
                 var token = string.Empty;
@@ -211,14 +431,14 @@ namespace Gnosis
                 if (location == null)
                     return Default;
 
-                var name = "application/default";
+                var name = defaultMediaType;
                 ICharacterSet charSet = null;
                 string boundary = null;
 
                 if (location.IsFile)
                 {
                     if (System.IO.Directory.Exists(location.LocalPath))
-                        return new ContentType("application/vnd.gnosis.fs.dir");
+                        return new ContentType(mediaType_ApplicationGnosisFilesystemDirectory);
 
                     if (!System.IO.File.Exists(location.LocalPath))
                         return Default;
@@ -226,7 +446,7 @@ namespace Gnosis
                     var fileInfo = new FileInfo(location.LocalPath);
                     var header = fileInfo.ToHeader();
                     name = GetByMagicNumber(header);
-                    if (name != null && name != "application/unknown")
+                    if (name != null && name != defaultMediaType)
                         return new ContentType(name);
 
                     if (location.ToString().EndsWith(".db"))
@@ -238,7 +458,7 @@ namespace Gnosis
                         name = GetByFileExtension(extension).FirstOrDefault();
                     }
 
-                    if (name != null && name != "application/xml-dtd") //MediaType.ApplicationXmlDtd)
+                    if (name != null && name != mediaType_ApplicationXmlDtd)
                     {
                         try
                         {
@@ -252,17 +472,32 @@ namespace Gnosis
                         }
                         catch (Exception ex)
                         {
-                            System.Diagnostics.Debug.WriteLine("ContentType.GetContentType - Could not open file to read content: " + location.ToString() + Environment.NewLine + ex.Message);
+                            logger.Error("ContentType.GetContentType - Could not open file to read content: " + location.ToString(), ex);
                         }
+                    }
+                    else
+                    {
+                        if (name == null)
+                            name = defaultMediaType;
                     }
 
                     return new ContentType(name, charSet, boundary);
                 }
 
                 var request = HttpWebRequest.Create(location);
-                var response = request.GetResponse();
+                WebResponse response = null;
 
-                if (!string.IsNullOrEmpty(response.ContentType))
+                try
+                {
+                    response = request.GetResponse();
+                }
+                catch (Exception)
+                {
+                    logger.Warn("  ContentTypeFactory.GetByLocation: Web request failed for URL=" + location);
+                    response = null;
+                }
+
+                if (response != null && !string.IsNullOrEmpty(response.ContentType))
                 {
                     var contentByCode = GetByCode(response.ContentType);
                     name = contentByCode.Name;
@@ -281,10 +516,13 @@ namespace Gnosis
                 }
                 else
                 {
-                    var header = response.GetResponseStream().ToHeader();
-                    name = GetByMagicNumber(header);
-                    if (name != "application/unknown")
-                        return new ContentType(name, charSet, boundary);
+                    if (response != null)
+                    {
+                        var header = response.GetResponseStream().ToHeader();
+                        name = GetByMagicNumber(header);
+                        if (name != defaultMediaType)
+                            return new ContentType(name, charSet, boundary);
+                    }
 
                     var extension = location.ToFileExtension();
                     if (!string.IsNullOrEmpty(extension))
@@ -297,9 +535,37 @@ namespace Gnosis
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("ContentType.GetContentType() Failed: " + ex.Message + Environment.NewLine + ex.StackTrace);
+                logger.Error("  ContentType.GetByLocation", ex);
                 return Default;
             }
+        }
+
+        public void MapFileExtensions(string name, IEnumerable<string> fileExtensions)
+        {
+            if (name == null)
+                throw new ArgumentNullException("name");
+            if (fileExtensions == null)
+                throw new ArgumentNullException("fileExtensions");
+
+            foreach (var fileExtension in fileExtensions)
+            {
+                if (!byFileExtension.ContainsKey(fileExtension))
+                {
+                    byFileExtension[fileExtension] = new List<string> { name };
+                }
+                else
+                    byFileExtension[fileExtension].Add(name);
+            }
+        }
+
+        public void MapMagicNumbers(string name, byte[] magicNumbers)
+        {
+            if (name == null)
+                throw new ArgumentNullException("name");
+            if (magicNumbers == null)
+                throw new ArgumentNullException("magicNumbers");
+
+            byMagicNumber[magicNumbers] = name;
         }
     }
 }

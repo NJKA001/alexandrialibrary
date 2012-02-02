@@ -19,7 +19,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
         {
             logger = new Gnosis.Utilities.DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaFactory = new MediaFactory();
+            mediaFactory = new MediaFactory(characterSetFactory);
             contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
         }
 
@@ -41,7 +41,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             var contentType = contentTypeFactory.GetByLocation(location);
             Assert.AreEqual("application/xspf+xml", contentType.Name);
 
-            var document = mediaFactory.Create(location, contentTypeFactory.GetByLocation(location)) as IXmlDocument;
+            var document = mediaFactory.Create(location, contentType) as IXmlDocument;
             Assert.IsNotNull(document);
             Assert.IsNull(document.Xml);
             

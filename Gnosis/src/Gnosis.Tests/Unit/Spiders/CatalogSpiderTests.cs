@@ -26,7 +26,7 @@ namespace Gnosis.Tests.Unit.Spiders
         {
             logger = new DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaFactory = new MediaFactory();
+            mediaFactory = new MediaFactory(characterSetFactory);
             contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
             securityContext = new SecurityContext(contentTypeFactory);
         }

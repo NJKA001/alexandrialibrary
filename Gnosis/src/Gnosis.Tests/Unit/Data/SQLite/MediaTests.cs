@@ -17,7 +17,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         {
             logger = new DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaFactory = new MediaFactory();
+            mediaFactory = new MediaFactory(characterSetFactory);
             contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
 
             connection = new SQLiteConnectionFactory().Create("Data Source=:memory:;Version=3;");
@@ -44,9 +44,15 @@ namespace Gnosis.Tests.Unit.Data.SQLite
 
         protected IMedia CreateMedia(Uri location)
         {
+            if (location == null)
+                throw new ArgumentNullException("location");
+
             var type = contentTypeFactory.GetByLocation(location);
 
-            return type != null ? mediaFactory.Create(location, type) : null;
+            if (type == null)
+                throw new InvalidOperationException("Could not determine media type for location: " + location.ToString());
+
+            return mediaFactory.Create(location, type);
         }
 
         protected void Cleanup()
@@ -76,6 +82,10 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             var media1 = CreateMedia(uri1);
             var media2 = CreateMedia(uri2);
             var media3 = CreateMedia(uri3);
+
+            Assert.IsNotNull(media1);
+            Assert.IsNotNull(media1.Type);
+            System.Diagnostics.Debug.WriteLine("media1 type=" + media1.Type.Name);
 
             repository.Save(new List<IMedia> { media1, media2, media3 });
 

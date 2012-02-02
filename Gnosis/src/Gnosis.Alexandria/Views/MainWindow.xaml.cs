@@ -47,7 +47,7 @@ namespace Gnosis.Alexandria.Views
                 logger.Info("Initializing Alexandria");
 
                 characterSetFactory = new CharacterSetFactory();
-                mediaFactory = new MediaFactory();
+                mediaFactory = new MediaFactory(characterSetFactory);
                 contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
                 securityContext = new SecurityContext(contentTypeFactory);
                 tagTypeFactory = new TagTypeFactory();
