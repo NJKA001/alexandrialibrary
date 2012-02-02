@@ -33,7 +33,7 @@ namespace Gnosis.Tests.Unit.Media
                 Assert.IsNotNull(mediaType);
                 list.Add(mediaType);
 
-                Assert.AreEqual(mediaType, contentTypeFactory.GetByCode(mediaType));
+                Assert.AreEqual(mediaType, contentTypeFactory.GetByCode(mediaType).Name);
                 //Assert.AreEqual(mediaType, contentTypeFactory.GetByCode(mediaType.Supertype.ToString().ToLower() + "/" + mediaType.Subtype));
 
             }

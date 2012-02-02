@@ -70,6 +70,7 @@ namespace Gnosis
         private const string fileExtension_Mpga = ".mpga";
         private const string fileExtension_Pdf = ".pdf";
         private const string fileExtension_Png = ".png";
+        private const string fileExtension_Rdf = ".rdf";
         private const string fileExtension_Rss = ".rss";
         private const string fileExtension_Text = ".text";
         private const string fileExtension_Txt = ".txt";
@@ -132,6 +133,7 @@ namespace Gnosis
         public const string mediaType_ApplicationXbzPdf = "application/x-bzpdf";
         public const string mediaType_ApplicationXgxPdf = "application/x-gxpdf";
 
+        public const string mediaType_ApplicationRdfXml = "application/rdf+xml";
         public const string mediaType_ApplicationRssXml = "application/rss+xml";
         public const string mediaType_ApplicationUnknown = "application/unknown";
         public const string mediaType_ApplicationXhtmlXml = "application/xhtml+xml";
@@ -174,50 +176,53 @@ namespace Gnosis
         {
             MapFileExtensions(mediaType_ApplicationAtomXml, new List<string> { fileExtension_Atom });
 
-            MapFileExtensions(mediaType_ApplicationDosExe, new List<string> { fileExtension_Exe });
-            MapFileExtensions(mediaType_ApplicationXMsDownload, new List<string> { fileExtension_Exe });
-            MapFileExtensions(mediaType_ApplicationXMsShortcut, new List<string> { fileExtension_Lnk });
-            MapFileExtensions(mediaType_ApplicationXExe, new List<string> { fileExtension_Exe });
+            //MapFileExtensions(mediaType_ApplicationDosExe, new List<string> { fileExtension_Exe });
+            //MapFileExtensions(mediaType_ApplicationXMsDownload, new List<string> { fileExtension_Exe });
+            //MapFileExtensions(mediaType_ApplicationXMsShortcut, new List<string> { fileExtension_Lnk });
+            //MapFileExtensions(mediaType_ApplicationXExe, new List<string> { fileExtension_Exe });
             MapFileExtensions(mediaType_ApplicationXWinExe, new List<string> { fileExtension_Exe });
 
+            //MapFileExtensions(mediaType_ApplicationXbzPdf, new List<string> { fileExtension_Pdf });
+            //MapFileExtensions(mediaType_ApplicationXgxPdf, new List<string> { fileExtension_Pdf });
+            //MapFileExtensions(mediaType_ApplicationXPdf, new List<string> { fileExtension_Pdf });
             MapFileExtensions(mediaType_ApplicationPdf, new List<string> { fileExtension_Pdf });
-            MapFileExtensions(mediaType_ApplicationXbzPdf, new List<string> { fileExtension_Pdf });
-            MapFileExtensions(mediaType_ApplicationXgxPdf, new List<string> { fileExtension_Pdf });
-            MapFileExtensions(mediaType_ApplicationXPdf, new List<string> { fileExtension_Pdf });
+
+            MapFileExtensions(mediaType_ApplicationRdfXml, new List<string> { fileExtension_Rdf });
 
             MapFileExtensions(mediaType_ApplicationRssXml, new List<string> { fileExtension_Rss });
-            
-            MapFileExtensions(mediaType_ApplicationXhtmlXml, new List<string> { fileExtension_Xhtml });
+
             MapFileExtensions(mediaType_TextHtml, new List<string> { fileExtension_Html, fileExtension_Htm });
+            MapFileExtensions(mediaType_ApplicationXhtmlXml, new List<string> { fileExtension_Xhtml });
 
             MapFileExtensions(mediaType_ApplicationXspfXml, new List<string> { fileExtension_Xspf });
-            
-            MapFileExtensions(mediaType_ApplicationXml, new List<string> { fileExtension_Xml });
-            MapFileExtensions(mediaType_TextXml, new List<string> { fileExtension_Xml });
 
+            //MapFileExtensions(mediaType_TextXml, new List<string> { fileExtension_Xml });
+            MapFileExtensions(mediaType_ApplicationXml, new List<string> { fileExtension_Xml });
+            
             MapFileExtensions(mediaType_ApplicationXmlDtd, new List<string> { fileExtension_Dtd, fileExtension_Ent });
 
+            //MapFileExtensions(mediaType_TextXsl, new List<string> { fileExtension_Xsl, fileExtension_Xslt });
             MapFileExtensions(mediaType_ApplicationXsltXml, new List<string> { fileExtension_Xsl, fileExtension_Xslt });
-            MapFileExtensions(mediaType_TextXsl, new List<string> { fileExtension_Xsl, fileExtension_Xslt });
 
-            MapFileExtensions(mediaType_AudioMp3, new List<string> { fileExtension_Mp3, fileExtension_Mp2, fileExtension_Mp1 });
+            //MapFileExtensions(mediaType_AudioMp3, new List<string> { fileExtension_Mp3, fileExtension_Mp2, fileExtension_Mp1 });
             MapFileExtensions(mediaType_AudioMpeg, new List<string> { fileExtension_Mp3, fileExtension_Mp2, fileExtension_Mp1 });
             
+            //MapFileExtensions(mediaType_ImageXMsBmp, new List<string> { fileExtension_Bmp, fileExtension_Dib });
             MapFileExtensions(mediaType_ImageXBmp, new List<string> { fileExtension_Bmp, fileExtension_Dib });
-            MapFileExtensions(mediaType_ImageXMsBmp, new List<string> { fileExtension_Bmp, fileExtension_Dib });
-            
+
             MapFileExtensions(mediaType_ImageGif, new List<string> { fileExtension_Gif });
             MapFileExtensions(mediaType_ImageJpeg, new List<string> { fileExtension_Jpg, fileExtension_Jpeg, fileExtension_Jpe, fileExtension_Jif, fileExtension_Jfif, fileExtension_Jfi });
+            
+            //MapFileExtensions(mediaType_ImageXPng, new List<string> { fileExtension_Png });
             MapFileExtensions(mediaType_ImagePng, new List<string> { fileExtension_Png });
-            MapFileExtensions(mediaType_ImageXPng, new List<string> { fileExtension_Png });
 
             MapFileExtensions(mediaType_TextCss, new List<string> { fileExtension_Css });
             MapFileExtensions(mediaType_TextPlain, new List<string> { fileExtension_Txt, fileExtension_Text, fileExtension_Ini });
 
+            //MapFileExtensions(mediaType_VideoMsVideo, new List<string> { fileExtension_Avi });
+            //MapFileExtensions(mediaType_VideoXMsVideo, new List<string> { fileExtension_Avi });
             MapFileExtensions(mediaType_VideoAvi, new List<string> { fileExtension_Avi });
-            MapFileExtensions(mediaType_VideoMsVideo, new List<string> { fileExtension_Avi });
-            MapFileExtensions(mediaType_VideoXMsVideo, new List<string> { fileExtension_Avi });
-            
+
             MapFileExtensions(mediaType_VideoMpeg, new List<string> { fileExtension_Mpeg, fileExtension_Mpe, fileExtension_Mpg, fileExtension_Mpga });
             MapFileExtensions(mediaType_VideoMpeg4, new List<string> { fileExtension_Mp4, fileExtension_Mpg4 });
 
@@ -226,34 +231,34 @@ namespace Gnosis
 
         private void InitializeMagicNumbers()
         {
-            MapMagicNumbers(mediaType_ApplicationDosExe, magicNumber_Exe);
-            MapMagicNumbers(mediaType_ApplicationXMsDownload, magicNumber_Exe);
-            MapMagicNumbers(mediaType_ApplicationXMsShortcut, magicNumber_Lnk);
-            MapMagicNumbers(mediaType_ApplicationXExe, magicNumber_Exe);
+            //MapMagicNumbers(mediaType_ApplicationDosExe, magicNumber_Exe);
+            //MapMagicNumbers(mediaType_ApplicationXMsDownload, magicNumber_Exe);
+            //MapMagicNumbers(mediaType_ApplicationXMsShortcut, magicNumber_Lnk);
+            //MapMagicNumbers(mediaType_ApplicationXExe, magicNumber_Exe);
             MapMagicNumbers(mediaType_ApplicationXWinExe, magicNumber_Exe);
 
+            //MapMagicNumbers(mediaType_ApplicationXbzPdf, magicNumber_Pdf);
+            //MapMagicNumbers(mediaType_ApplicationXgxPdf, magicNumber_Pdf);
+            //MapMagicNumbers(mediaType_ApplicationXPdf, magicNumber_Pdf);
             MapMagicNumbers(mediaType_ApplicationPdf, magicNumber_Pdf);
-            MapMagicNumbers(mediaType_ApplicationXbzPdf, magicNumber_Pdf);
-            MapMagicNumbers(mediaType_ApplicationXgxPdf, magicNumber_Pdf);
-            MapMagicNumbers(mediaType_ApplicationXPdf, magicNumber_Pdf);
 
-            MapMagicNumbers(mediaType_AudioMp3, magicNumber_Mp3);
+            //MapMagicNumbers(mediaType_AudioMp3, magicNumber_Mp3);
             MapMagicNumbers(mediaType_AudioMpeg, magicNumber_Mp3);
 
             MapMagicNumbers(mediaType_ImageXBmp, magicNumber_Bmp);
-            MapMagicNumbers(mediaType_ImageXMsBmp, magicNumber_Bmp);
+            //MapMagicNumbers(mediaType_ImageXMsBmp, magicNumber_Bmp);
 
             MapMagicNumbers(mediaType_ImageGif, magicNumber_Gif87);
             MapMagicNumbers(mediaType_ImageGif, magicNumber_Gif89);
 
             MapMagicNumbers(mediaType_ImageJpeg, magicNumber_Jpeg);
 
+            //MapMagicNumbers(mediaType_ImageXPng, magicNumber_Png);
             MapMagicNumbers(mediaType_ImagePng, magicNumber_Png);
-            MapMagicNumbers(mediaType_ImageXPng, magicNumber_Png);
 
+            //MapMagicNumbers(mediaType_VideoMsVideo, magicNumber_Avi);
+            //MapMagicNumbers(mediaType_VideoXMsVideo, magicNumber_Avi);
             MapMagicNumbers(mediaType_VideoAvi, magicNumber_Avi);
-            MapMagicNumbers(mediaType_VideoMsVideo, magicNumber_Avi);
-            MapMagicNumbers(mediaType_VideoXMsVideo, magicNumber_Avi);
 
             MapMagicNumbers(mediaType_VideoMpeg, magicNumber_Mpeg);
             
@@ -306,20 +311,24 @@ namespace Gnosis
                                 if (newName == name)
                                 {
                                     var element = node as XmlElement;
-                                    if (element != null)
+                                    if (element != null && element.Name != null)
                                     {
-                                        //System.Diagnostics.Debug.WriteLine("elementName=" + element.Name);
-                                        if (element.Name == "rss")
+                                        System.Diagnostics.Debug.WriteLine("elementName=" + element.LocalName.ToLower());
+                                        if (element.Name.ToLower() == "rss")
                                         {
                                             newName = mediaType_ApplicationRssXml;
                                         }
-                                        else if (element.Name == "feed")
+                                        else if (element.Name.ToLower() == "feed")
                                         {
                                             newName = mediaType_ApplicationAtomXml;
                                         }
-                                        else if (element.Name == "playlist")
+                                        else if (element.Name.ToLower() == "playlist")
                                         {
                                             newName = mediaType_ApplicationXspfXml;
+                                        }
+                                        else if (element.LocalName.ToLower() == "rdf")
+                                        {
+                                            newName = mediaType_ApplicationRdfXml;
                                         }
                                     }
                                 }
@@ -378,8 +387,9 @@ namespace Gnosis
             if (fileExtension == null)
                 throw new ArgumentNullException("fileExtension");
 
-            return (byFileExtension.ContainsKey(fileExtension)) ?
-                byFileExtension[fileExtension]
+            var key = fileExtension.ToLower();
+            return (byFileExtension.ContainsKey(key)) ?
+                byFileExtension[key]
                 : Enumerable.Empty<string>();
         }
 
@@ -469,7 +479,12 @@ namespace Gnosis
                             {
                                 charSet = GetCharacterSet(stream, name, charSet);
                                 var ext = GetXmlExtendedType(stream, name, charSet);
-                                name = ext.Item1;
+
+                                if (ext.Item1 != defaultMediaType)
+                                {
+                                    name = ext.Item1;
+                                }
+
                                 charSet = ext.Item2;
                             }
                         }

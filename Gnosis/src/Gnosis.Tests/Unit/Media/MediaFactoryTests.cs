@@ -73,7 +73,7 @@ namespace Gnosis.Tests.Unit.Media
             Assert.IsNotNull(doc.Location);
             Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual("text/html; charset=UTF-8", doc.Type.ToString());
+            Assert.AreEqual("text/html", doc.Type.ToString());
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace Gnosis.Tests.Unit.Media
             Assert.IsNotNull(doc.Location);
             Assert.IsNotNull(doc.Type);
             Assert.AreEqual(url.ToString(), doc.Location.ToString());
-            Assert.AreEqual("application/atom+xml; charset=UTF-8", doc.Type.ToString());
+            Assert.AreEqual("application/rdf+xml; charset=UTF-8", doc.Type.ToString());
         }
 
         [Test]

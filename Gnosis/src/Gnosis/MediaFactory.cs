@@ -14,6 +14,7 @@ using Gnosis.Application.Xml.Xspf;
 using Gnosis.Audio;
 using Gnosis.Image;
 using Gnosis.Metadata;
+using Gnosis.Text;
 using Gnosis.Video;
 
 namespace Gnosis
@@ -37,14 +38,22 @@ namespace Gnosis
         private void InitializeDefaultMappings()
         {
             MapMediaType(ContentTypeFactory.mediaType_ApplicationAtomXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationGnosisFilesystemDirectory, (uri, type) => new GnosisFilesystemDirectory(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ApplicationDosExe, (uri, type) => new MicrosoftExecutable(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ApplicationXMsDownload, (uri, type) => new MicrosoftExecutable(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ApplicationXMsShortcut, (uri, type) => new MicrosoftShortcut(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ApplicationXExe, (uri, type) => new MicrosoftExecutable(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ApplicationXWinExe, (uri, type) => new MicrosoftExecutable(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationPdf, (uri, type) => new PdfDocument(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationXbzPdf, (uri, type) => new PdfDocument(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationXgxPdf, (uri, type) => new PdfDocument(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationXPdf, (uri, type) => new PdfDocument(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationRdfXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
             MapMediaType(ContentTypeFactory.mediaType_ApplicationRssXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
             MapMediaType(ContentTypeFactory.mediaType_ApplicationXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationXmlDtd, (uri, type) => new PlainText(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ApplicationXspfXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationUnknown, (uri, type) => new UnknownApplication(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_AudioMp3, (uri, type) => new MpegAudio(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_AudioMpeg, (uri, type) => new MpegAudio(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ImageXBmp, (uri, type) => new BitmapImage(uri, type));
@@ -52,7 +61,9 @@ namespace Gnosis
             MapMediaType(ContentTypeFactory.mediaType_ImageGif, (uri, type) => new GifImage(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ImageJpeg, (uri, type) => new JpegImage(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ImagePng, (uri, type) => new PngImage(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ImageXPng, (uri, type) => new PngImage(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_TextHtml, (uri, type) => new XhtmlDocument(uri, type, characterSetFactory));
+            MapMediaType(ContentTypeFactory.mediaType_TextPlain, (uri, type) => new PlainText(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_TextXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
             MapMediaType(ContentTypeFactory.mediaType_VideoAvi, (uri, type) => new AviVideo(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_VideoMsVideo, (uri, type) => new AviVideo(uri, type));
@@ -70,9 +81,11 @@ namespace Gnosis
                 throw new ArgumentNullException("type");
 
             var key = type.Name.ToLower();
-            return createFunctions.ContainsKey(key) ?
-                createFunctions[key](location, type)
-                : null;
+
+            if (!createFunctions.ContainsKey(key))
+                throw new InvalidOperationException("Cannot create media for type: " + key);
+
+            return createFunctions[key](location, type);
         }
 
         public IEnumerable<string> GetMediaTypes()

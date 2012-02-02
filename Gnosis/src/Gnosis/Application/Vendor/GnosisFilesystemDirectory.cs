@@ -51,10 +51,10 @@ namespace Gnosis.Application.Vendor
             var links = new List<ILink>();
 
             foreach (var directory in info.GetDirectories())
-                links.Add(new Link(location, new Uri(directory.FullName), type.ToString(), directory.Name));
+                links.Add(new Link(location, new Uri(directory.FullName), type.Name, directory.Name));
 
             foreach (var file in info.GetFiles())
-                links.Add(new Link(location, new Uri(file.FullName), "application/vnd.gnosis.fs.file", file.Name));
+                links.Add(new Link(location, new Uri(file.FullName), "application/vnd.gnosis.fs-file", file.Name));
 
             return links;
         }
