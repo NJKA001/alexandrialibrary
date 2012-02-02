@@ -101,8 +101,6 @@ namespace Gnosis
 
         #region MediaType Constants
 
-        public const string mediaType_AudioMpeg = "audio/mpeg";
-
         public const string mediaType_ApplicationAtomXml = "application/atom+xml";
         
         public const string mediaType_ApplicationGnosisAlbum = "application/vnd.gnosis.album";
@@ -142,6 +140,9 @@ namespace Gnosis
         public const string mediaType_ApplicationXml = "application/xml";
         public const string mediaType_ApplicationXmlDtd = "application/xml-dtd";
 
+        public const string mediaType_AudioMp3 = "audio/mp3";
+        public const string mediaType_AudioMpeg = "audio/mpeg";
+        
         public const string mediaType_ImageXBmp = "image/x-bmp";
         public const string mediaType_ImageXMsBmp = "image/x-ms-bmp";
 
@@ -199,8 +200,9 @@ namespace Gnosis
             MapFileExtensions(mediaType_ApplicationXsltXml, new List<string> { fileExtension_Xsl, fileExtension_Xslt });
             MapFileExtensions(mediaType_TextXsl, new List<string> { fileExtension_Xsl, fileExtension_Xslt });
 
+            MapFileExtensions(mediaType_AudioMp3, new List<string> { fileExtension_Mp3, fileExtension_Mp2, fileExtension_Mp1 });
             MapFileExtensions(mediaType_AudioMpeg, new List<string> { fileExtension_Mp3, fileExtension_Mp2, fileExtension_Mp1 });
-
+            
             MapFileExtensions(mediaType_ImageXBmp, new List<string> { fileExtension_Bmp, fileExtension_Dib });
             MapFileExtensions(mediaType_ImageXMsBmp, new List<string> { fileExtension_Bmp, fileExtension_Dib });
             
@@ -235,6 +237,7 @@ namespace Gnosis
             MapMagicNumbers(mediaType_ApplicationXgxPdf, magicNumber_Pdf);
             MapMagicNumbers(mediaType_ApplicationXPdf, magicNumber_Pdf);
 
+            MapMagicNumbers(mediaType_AudioMp3, magicNumber_Mp3);
             MapMagicNumbers(mediaType_AudioMpeg, magicNumber_Mp3);
 
             MapMagicNumbers(mediaType_ImageXBmp, magicNumber_Bmp);

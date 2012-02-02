@@ -45,6 +45,7 @@ namespace Gnosis
             MapMediaType(ContentTypeFactory.mediaType_ApplicationRssXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
             MapMediaType(ContentTypeFactory.mediaType_ApplicationXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
             MapMediaType(ContentTypeFactory.mediaType_ApplicationXspfXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
+            MapMediaType(ContentTypeFactory.mediaType_AudioMp3, (uri, type) => new MpegAudio(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_AudioMpeg, (uri, type) => new MpegAudio(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ImageXBmp, (uri, type) => new BitmapImage(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ImageXMsBmp, (uri, type) => new BitmapImage(uri, type));
