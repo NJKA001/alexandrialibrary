@@ -16,8 +16,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected MediaTestBase()
         {
             logger = new DebugLogger();
-            characterSetFactory = new CharacterSetFactory();
-            contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
+            contentTypeFactory = new ContentTypeFactory(logger);
 
             connection = new SQLiteConnectionFactory().Create("Data Source=:memory:;Version=3;");
             connection.Open();

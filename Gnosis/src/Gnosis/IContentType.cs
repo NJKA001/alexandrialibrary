@@ -8,7 +8,7 @@ namespace Gnosis
     public interface IContentType
     {
         string Name { get; }
-        ICharacterSet CharSet { get; }
+        string CharSet { get; }
         string Boundary { get; }
     }
 }

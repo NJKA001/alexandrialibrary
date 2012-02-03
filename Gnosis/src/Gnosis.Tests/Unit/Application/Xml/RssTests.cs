@@ -19,12 +19,10 @@ namespace Gnosis.Tests.Unit.Application.Xml
         public RssDocuments()
         {
             logger = new Gnosis.Utilities.DebugLogger();
-            characterSetFactory = new CharacterSetFactory();
-            contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
+            contentTypeFactory = new ContentTypeFactory(logger);
         }
 
         private ILogger logger;
-        private ICharacterSetFactory characterSetFactory;
         private IContentTypeFactory contentTypeFactory;
 
         private void MakeRssFeedAssertions(IXmlElement document)
@@ -163,7 +161,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             var contentType = contentTypeFactory.GetByLocation(location);
             Assert.AreEqual("application/rss+xml", contentType.Name);
 
-            var document = XmlElement.Parse(location, characterSetFactory);
+            var document = XmlElement.Parse(location);
             Assert.IsNotNull(document);
 
             var feed = document.Root as IRssFeed;
@@ -172,7 +170,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsNotNull(feed.Channel);
             Assert.AreEqual(version, feed.Version);
             Assert.IsNotNull(document.Declaration);
-            Assert.AreEqual("ISO-8859-1", document.Declaration.Encoding.Name);
+            Assert.AreEqual("iso-8859-1", document.Declaration.Encoding);
         }
 
         [Test]
@@ -188,7 +186,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             var contentType = contentTypeFactory.GetByLocation(location);
             Assert.AreEqual("application/rss+xml", contentType.Name);
 
-            var document = XmlElement.Parse(location, characterSetFactory);
+            var document = XmlElement.Parse(location);
             Assert.IsNotNull(document);
 
             var feed = document.Root as IRssFeed;
@@ -210,7 +208,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             var contentType = contentTypeFactory.GetByLocation(location);
             Assert.AreEqual("application/rss+xml", contentType.Name);
 
-            var document = XmlElement.Parse(location, characterSetFactory);
+            var document = XmlElement.Parse(location);
             Assert.IsNotNull(document);
 
             var feed = document.Root as IRssFeed;
@@ -230,7 +228,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             var contentType = contentTypeFactory.GetByLocation(location);
             Assert.AreEqual("application/rss+xml", contentType.Name);
 
-            var document = XmlElement.Parse(location, characterSetFactory);
+            var document = XmlElement.Parse(location);
             Assert.IsNotNull(document);
 
             MakeRssFeedAssertions(document);
@@ -247,13 +245,13 @@ namespace Gnosis.Tests.Unit.Application.Xml
             var contentType = contentTypeFactory.GetByLocation(location);
             Assert.AreEqual("application/rss+xml", contentType.Name);
 
-            var original = XmlElement.Parse(location, characterSetFactory);
+            var original = XmlElement.Parse(location);
             Assert.IsNotNull(original);
 
             var xmlString = original.ToString();
             Assert.IsNotNull(xmlString);
 
-            var document = XmlElement.Parse(xmlString, characterSetFactory);
+            var document = XmlElement.Parse(xmlString);
 
             //IRssFeed feed = null;
             //var encoding = CharacterSet.Utf8;

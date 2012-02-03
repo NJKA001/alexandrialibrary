@@ -24,15 +24,12 @@ namespace Gnosis
     public class ContentTypeFactory
         : IContentTypeFactory
     {
-        public ContentTypeFactory(ILogger logger, ICharacterSetFactory characterSetFactory)
+        public ContentTypeFactory(ILogger logger)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
-            if (characterSetFactory == null)
-                throw new ArgumentNullException("characterSetFactory");
 
             this.logger = logger;
-            this.characterSetFactory = characterSetFactory;
 
             defaultContentType = new ContentType(defaultMediaType);
 
@@ -42,7 +39,6 @@ namespace Gnosis
         }
 
         private readonly ILogger logger;
-        private readonly ICharacterSetFactory characterSetFactory;
         private readonly IContentType defaultContentType;
 
         private readonly IDictionary<string, IList<string>> byFileExtension = new Dictionary<string, IList<string>>();
@@ -282,7 +278,7 @@ namespace Gnosis
 
         private void InitializeDefaultMappings()
         {
-            MapMediaType(ContentTypeFactory.mediaType_ApplicationAtomXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationAtomXml, (uri, type) => new XmlDocument(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ApplicationGnosisFilesystemDirectory, (uri, type) => new GnosisFilesystemDirectory(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ApplicationDosExe, (uri, type) => new MicrosoftExecutable(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ApplicationXMsDownload, (uri, type) => new MicrosoftExecutable(uri, type));
@@ -293,11 +289,11 @@ namespace Gnosis
             MapMediaType(ContentTypeFactory.mediaType_ApplicationXbzPdf, (uri, type) => new PdfDocument(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ApplicationXgxPdf, (uri, type) => new PdfDocument(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ApplicationXPdf, (uri, type) => new PdfDocument(uri, type));
-            MapMediaType(ContentTypeFactory.mediaType_ApplicationRdfXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
-            MapMediaType(ContentTypeFactory.mediaType_ApplicationRssXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
-            MapMediaType(ContentTypeFactory.mediaType_ApplicationXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationRdfXml, (uri, type) => new XmlDocument(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationRssXml, (uri, type) => new XmlDocument(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationXml, (uri, type) => new XmlDocument(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ApplicationXmlDtd, (uri, type) => new PlainText(uri, type));
-            MapMediaType(ContentTypeFactory.mediaType_ApplicationXspfXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationXspfXml, (uri, type) => new XmlDocument(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ApplicationUnknown, (uri, type) => new UnknownApplication(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_AudioMp3, (uri, type) => new MpegAudio(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_AudioMpeg, (uri, type) => new MpegAudio(uri, type));
@@ -307,9 +303,9 @@ namespace Gnosis
             MapMediaType(ContentTypeFactory.mediaType_ImageJpeg, (uri, type) => new JpegImage(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ImagePng, (uri, type) => new PngImage(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_ImageXPng, (uri, type) => new PngImage(uri, type));
-            MapMediaType(ContentTypeFactory.mediaType_TextHtml, (uri, type) => new XhtmlDocument(uri, type, characterSetFactory));
+            MapMediaType(ContentTypeFactory.mediaType_TextHtml, (uri, type) => new XhtmlDocument(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_TextPlain, (uri, type) => new PlainText(uri, type));
-            MapMediaType(ContentTypeFactory.mediaType_TextXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
+            MapMediaType(ContentTypeFactory.mediaType_TextXml, (uri, type) => new XmlDocument(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_VideoAvi, (uri, type) => new AviVideo(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_VideoMsVideo, (uri, type) => new AviVideo(uri, type));
             MapMediaType(ContentTypeFactory.mediaType_VideoXMsVideo, (uri, type) => new AviVideo(uri, type));
@@ -335,7 +331,7 @@ namespace Gnosis
             return createFunctions[key](location, type);
         }
 
-        private ICharacterSet GetCharacterSet(Stream stream, string name, ICharacterSet charSet)
+        private string GetCharacterSet(Stream stream, string name, string charSet)
         {
             if (name != null && name.Contains("xml"))
             {
@@ -345,7 +341,7 @@ namespace Gnosis
                     {
                         var buffer = new char[20];
                         reader.Read(buffer, 0, 20);
-                        return characterSetFactory.GetByEncoding(reader.CurrentEncoding);
+                        return reader.CurrentEncoding != null && reader.CurrentEncoding.EncodingName != null ? reader.CurrentEncoding.EncodingName : charSet;
                     }
                 }
             }
@@ -353,7 +349,14 @@ namespace Gnosis
             return charSet;
         }
 
-        private Tuple<string, ICharacterSet> GetXmlExtendedType(Stream stream, string name, ICharacterSet charSet)
+        /// <summary>
+        /// Return the media type and encoding
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="name"></param>
+        /// <param name="charSet"></param>
+        /// <returns>A tuple of the media type followed by the encoding</returns>
+        private Tuple<string, string> GetXmlExtendedType(Stream stream, string name, string charSet)
         {
             var newName = name;
             var newCharSet = charSet;
@@ -374,7 +377,7 @@ namespace Gnosis
                             var declaration = node as System.Xml.XmlDeclaration;
                             if (declaration != null && declaration.Encoding != null)
                             {
-                                newCharSet = characterSetFactory.GetByName(declaration.Encoding);
+                                newCharSet = declaration.Encoding;
                             }
                             else
                             {
@@ -412,7 +415,7 @@ namespace Gnosis
                 }
             }
 
-            return new Tuple<string, ICharacterSet>(newName, newCharSet);
+            return new Tuple<string, string>(newName, newCharSet);
         }
         
         private string GetByMagicNumber(byte[] header)
@@ -474,7 +477,7 @@ namespace Gnosis
                 throw new ArgumentNullException("code");
 
             var name = defaultMediaType;
-            ICharacterSet charSet = null;
+            string charSet = null;
             string boundary = null;
 
             var tokens = code.Split(new string[] { "; ", " ", ";" }, StringSplitOptions.RemoveEmptyEntries);
@@ -492,7 +495,7 @@ namespace Gnosis
 
                     if (!string.IsNullOrEmpty(charSetName))
                     {
-                        charSet = characterSetFactory.GetByName(charSetName);
+                        charSet = charSetName;
                     }
                     else if (token.Contains(boundaryFieldName) && token.Length > 9)
                     {
@@ -515,7 +518,7 @@ namespace Gnosis
                     return Default;
 
                 var name = defaultMediaType;
-                ICharacterSet charSet = null;
+                string charSet = null;
                 string boundary = null;
 
                 if (location.IsFile)

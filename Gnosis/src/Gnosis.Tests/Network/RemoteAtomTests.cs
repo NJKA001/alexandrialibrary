@@ -17,12 +17,10 @@ namespace Gnosis.Tests.Network
         public RemoteAtomTests()
         {
             logger = new Gnosis.Utilities.DebugLogger();
-            characterSetFactory = new CharacterSetFactory();
-            contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
+            contentTypeFactory = new ContentTypeFactory(logger);
         }
 
         private ILogger logger;
-        private ICharacterSetFactory characterSetFactory;
         private IContentTypeFactory contentTypeFactory;
 
         [Test]
@@ -31,7 +29,7 @@ namespace Gnosis.Tests.Network
             #region Constants
 
             var location = new Uri("http://feeds2.feedburner.com/oreilly/radar/atom");
-            var document = XmlElement.Parse(location, characterSetFactory);
+            var document = XmlElement.Parse(location);
             Assert.IsNotNull(document);
 
             var feed = document.Root as IAtomFeed;
@@ -69,7 +67,7 @@ namespace Gnosis.Tests.Network
 
             var location = new Uri("http://bblfish.net/blog/blog.atom");
             //System.Diagnostics.Debug.WriteLine("before ToAtomFeed");
-            var document = XmlElement.Parse(location, characterSetFactory);
+            var document = XmlElement.Parse(location);
             var feed = document.Root as IAtomFeed;
             //System.Diagnostics.Debug.WriteLine("after ToAtomFeed");
 
@@ -84,7 +82,7 @@ namespace Gnosis.Tests.Network
         {
             var location = new Uri("http://bblfish.net/blog/blog.atom");
 
-            var xml = XmlElement.Parse(location, characterSetFactory);
+            var xml = XmlElement.Parse(location);
             Assert.IsNotNull(xml);
         }
     }

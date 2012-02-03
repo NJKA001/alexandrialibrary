@@ -13,12 +13,10 @@ namespace Gnosis.Tests.Unit.Media
         public MediaFactories()
         {
             logger = new Gnosis.Utilities.DebugLogger();
-            characterSetFactory = new CharacterSetFactory();
-            contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
+            contentTypeFactory = new ContentTypeFactory(logger);
         }
 
         private readonly ILogger logger;
-        private readonly ICharacterSetFactory characterSetFactory;
         private readonly IContentTypeFactory contentTypeFactory;
 
         const string pathBearAtom = @".\Files\bearbrarian.xml";

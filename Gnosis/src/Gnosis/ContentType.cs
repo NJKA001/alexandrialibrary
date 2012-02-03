@@ -13,12 +13,12 @@ namespace Gnosis
         {
         }
 
-        protected internal ContentType(string name, ICharacterSet charSet)
+        protected internal ContentType(string name, string charSet)
             : this(name, charSet, null)
         {
         }
 
-        protected internal ContentType(string name, ICharacterSet charSet, string boundary)
+        protected internal ContentType(string name, string charSet, string boundary)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -29,7 +29,7 @@ namespace Gnosis
         }
 
         private readonly string name;
-        private readonly ICharacterSet charSet;
+        private readonly string charSet;
         private readonly string boundary;
 
         public string Name
@@ -37,7 +37,7 @@ namespace Gnosis
             get { return name; }
         }
 
-        public ICharacterSet CharSet
+        public string CharSet
         {
             get { return charSet; }
         }
@@ -53,7 +53,7 @@ namespace Gnosis
 
             builder.Append(name);
 
-            if (charSet != null && !charSet.IsDefault)
+            if (!string.IsNullOrEmpty(charSet))
                 builder.AppendFormat("; charset={0}", charSet.ToString());
 
             if (!string.IsNullOrEmpty(boundary))

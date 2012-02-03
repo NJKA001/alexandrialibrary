@@ -18,12 +18,10 @@ namespace Gnosis.Tests.Unit.Application.Xml
         public XspfDocuments()
         {
             logger = new Gnosis.Utilities.DebugLogger();
-            characterSetFactory = new CharacterSetFactory();
-            contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
+            contentTypeFactory = new ContentTypeFactory(logger);
         }
 
         private ILogger logger;
-        private ICharacterSetFactory characterSetFactory;
         private IContentTypeFactory contentTypeFactory;
 
         [Test]

@@ -19,6 +19,7 @@ using Gnosis.Video;
 
 namespace Gnosis
 {
+    /*
     public class MediaFactory
         //: IMediaFactory
     {
@@ -103,5 +104,5 @@ namespace Gnosis
             var key = mediaType.ToLower();
             createFunctions[key] = createFunction;
         }
-    }
+    }*/
 }

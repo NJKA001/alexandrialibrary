@@ -24,12 +24,10 @@ namespace Gnosis.Tests.Unit.Application.Xml
         public XmlDocuments()
         {
             logger = new Gnosis.Utilities.DebugLogger();
-            characterSetFactory = new CharacterSetFactory();
-            contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
+            contentTypeFactory = new ContentTypeFactory(logger);
         }
 
         private ILogger logger;
-        private ICharacterSetFactory characterSetFactory;
         private IContentTypeFactory contentTypeFactory;
 
         private void MakeArsXmlAssertions(IXmlElement xml)
@@ -150,7 +148,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var xml = XmlElement.Parse(location, characterSetFactory);
+            var xml = XmlElement.Parse(location);
             MakeArsXmlAssertions(xml);
         }
 
@@ -163,7 +161,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var xml = XmlElement.Parse(location, characterSetFactory);
+            var xml = XmlElement.Parse(location);
             MakeAtomXmlAssertions(xml);
         }
 
@@ -179,7 +177,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var xml = XmlElement.Parse(location, characterSetFactory);
+            var xml = XmlElement.Parse(location);
 
             Assert.IsNotNull(xml);
             
@@ -202,13 +200,13 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var original = XmlElement.Parse(location, characterSetFactory);
+            var original = XmlElement.Parse(location);
             Assert.IsNotNull(original);
 
             var output = original.ToString();
             System.Diagnostics.Debug.WriteLine(output);
 
-            var xml = XmlElement.Parse(output, characterSetFactory);
+            var xml = XmlElement.Parse(output);
             MakeArsXmlAssertions(xml);
         }
     }

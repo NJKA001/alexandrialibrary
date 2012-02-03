@@ -11,23 +11,19 @@ namespace Gnosis.Application.Xml
     public class XmlDocument
         : IXmlDocument
     {
-        public XmlDocument(Uri location, IContentType type, ICharacterSetFactory characterSetFactory)
+        public XmlDocument(Uri location, IContentType type)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
             if (type == null)
                 throw new ArgumentNullException("type");
-            if (characterSetFactory == null)
-                throw new ArgumentNullException("characterSetFactory");
 
             this.location = location;
             this.type = type;
-            this.characterSetFactory = characterSetFactory;
         }
 
         private readonly Uri location;
         private readonly IContentType type;
-        private readonly ICharacterSetFactory characterSetFactory;
 
         private IXmlElement xml;
         private bool isLoaded;
@@ -71,7 +67,7 @@ namespace Gnosis.Application.Xml
             if (!isLoaded)
             {
                 isLoaded = true;
-                this.xml = XmlElement.Parse(location, characterSetFactory);
+                this.xml = XmlElement.Parse(location);
             }
         }
     }

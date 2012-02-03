@@ -21,8 +21,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         public SavedTracks()
         {
             logger = new DebugLogger();
-            characterSetFactory = new CharacterSetFactory();
-            contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
+            contentTypeFactory = new ContentTypeFactory(logger);
             securityContext = new SecurityContext(contentTypeFactory);
             contentType = contentTypeFactory.GetByCode("application/vnd.gnosis.track");
             mpegAudioType = contentTypeFactory.GetByCode("audio/mp3");

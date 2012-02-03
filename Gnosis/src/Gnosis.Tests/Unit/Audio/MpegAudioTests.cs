@@ -15,12 +15,10 @@ namespace Gnosis.Tests.Unit.Audio
         public MpegAudio()
         {
             logger = new Gnosis.Utilities.DebugLogger();
-            characterSetFactory = new CharacterSetFactory();
-            contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
+            contentTypeFactory = new ContentTypeFactory(logger);
         }
 
         private ILogger logger;
-        private ICharacterSetFactory characterSetFactory;
         private IContentTypeFactory contentTypeFactory;
 
         private const string location1 = @"Files\03 - Antes De Las Seis.mp3";

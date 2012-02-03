@@ -9,7 +9,7 @@ namespace Gnosis.Application.Xml
         : INode
     {
         string Version { get; }
-        ICharacterSet Encoding { get; }
+        string Encoding { get; }
         Standalone Standalone { get; }
     }
 }

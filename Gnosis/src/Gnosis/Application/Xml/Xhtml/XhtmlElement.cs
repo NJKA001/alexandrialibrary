@@ -65,18 +65,16 @@ namespace Gnosis.Application.Xml.Xhtml
             return xml.ToString();
         }
 
-        public static XhtmlElement Parse(Uri location, ICharacterSetFactory characterSetFactory)
+        public static XhtmlElement Parse(Uri location)
         {
             var html = location.ToContentString();
-            return Parse(html, characterSetFactory);
+            return Parse(html);
         }
 
-        public static XhtmlElement Parse(string html, ICharacterSetFactory characterSetFactory)
+        public static XhtmlElement Parse(string html)
         {
             if (html == null)
                 throw new ArgumentNullException("html");
-            if (characterSetFactory == null)
-                throw new ArgumentNullException("characterSetFactory");
 
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
@@ -85,7 +83,7 @@ namespace Gnosis.Application.Xml.Xhtml
 
             foreach (var childNode in htmlDoc.DocumentNode.ChildNodes.OfType<HtmlNode>())
             {
-                var child = childNode.ToNode(doc, characterSetFactory);
+                var child = childNode.ToNode(doc);
                 if (child != null)
                     doc.AddChild(child);
             }

@@ -15,7 +15,7 @@ namespace Gnosis.Tests.Unit.Media
             logger = new Gnosis.Utilities.DebugLogger();
             characterSetFactory = new CharacterSetFactory();
             //mediaFactory = new MediaFactory(characterSetFactory);
-            contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
+            contentTypeFactory = new ContentTypeFactory(logger);
         }
 
         private ILogger logger;

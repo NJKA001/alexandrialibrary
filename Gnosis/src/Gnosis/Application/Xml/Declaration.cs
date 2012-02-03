@@ -8,7 +8,7 @@ namespace Gnosis.Application.Xml
     public class Declaration
         : Node, IDeclaration
     {
-        public Declaration(INode parent, string version, ICharacterSet encoding, Standalone standalone)
+        public Declaration(INode parent, string version, string encoding, Standalone standalone)
             : base(parent)
         {
             if (version == null)
@@ -20,7 +20,7 @@ namespace Gnosis.Application.Xml
         }
 
         private readonly string version;
-        private readonly ICharacterSet encoding;
+        private readonly string encoding;
         private readonly Standalone standalone;
 
         #region IXmlDeclaration Members
@@ -30,7 +30,7 @@ namespace Gnosis.Application.Xml
             get { return version; }
         }
 
-        public ICharacterSet Encoding
+        public string Encoding
         {
             get { return encoding; }
         }

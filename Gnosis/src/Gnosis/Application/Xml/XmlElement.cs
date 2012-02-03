@@ -65,18 +65,16 @@ namespace Gnosis.Application.Xml
             return xml.ToString();
         }
 
-        public static IXmlElement Parse(Uri location, ICharacterSetFactory characterSetFactory)
+        public static IXmlElement Parse(Uri location)
         {
             var xml = location.ToContentString();
-            return Parse(xml, characterSetFactory);
+            return Parse(xml);
         }
 
-        public static IXmlElement Parse(string xml, ICharacterSetFactory characterSetFactory)
+        public static IXmlElement Parse(string xml)
         {
             if (xml == null)
                 throw new ArgumentNullException("xml");
-            if (characterSetFactory == null)
-                throw new ArgumentNullException("characterSetFactory");
 
             var xmlDoc = new System.Xml.XmlDocument();
             xmlDoc.LoadXml(xml);
@@ -88,7 +86,7 @@ namespace Gnosis.Application.Xml
                 switch (child.NodeType)
                 {
                     case System.Xml.XmlNodeType.XmlDeclaration:
-                        var declaration = child.ToDeclaration(doc, characterSetFactory);
+                        var declaration = child.ToDeclaration(doc);
                         if (declaration != null)
                             doc.AddChild(declaration);
                         break;
