@@ -20,7 +20,7 @@ using Gnosis.Video;
 namespace Gnosis
 {
     public class MediaFactory
-        : IMediaFactory
+        //: IMediaFactory
     {
         public MediaFactory(ICharacterSetFactory characterSetFactory)
         {

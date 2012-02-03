@@ -14,15 +14,16 @@ namespace Gnosis.Tests.Unit.Media
         {
             logger = new Gnosis.Utilities.DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaFactory = new MediaFactory(characterSetFactory);
+            //mediaFactory = new MediaFactory(characterSetFactory);
             contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
         }
 
         private ILogger logger;
         private ICharacterSetFactory characterSetFactory;
-        private IMediaFactory mediaFactory;
+        //private IMediaFactory mediaFactory;
         private IContentTypeFactory contentTypeFactory;
 
+        /*
         [Test]
         public void CanBeReadByName()
         {
@@ -37,8 +38,9 @@ namespace Gnosis.Tests.Unit.Media
                 //Assert.AreEqual(mediaType, contentTypeFactory.GetByCode(mediaType.Supertype.ToString().ToLower() + "/" + mediaType.Subtype));
 
             }
-        }
+        }*/
 
+        /*
         [Test]
         public void CanBeReadByFileExtension()
         {
@@ -52,6 +54,7 @@ namespace Gnosis.Tests.Unit.Media
                 //}
             }
         }
+        */
 
         [Test]
         public void CanBeReadBySupertype()

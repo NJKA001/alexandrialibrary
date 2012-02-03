@@ -18,13 +18,11 @@ namespace Gnosis.Tests.Unit.Application.Xml
         {
             logger = new Gnosis.Utilities.DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaFactory = new MediaFactory(characterSetFactory);
             contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
         }
 
         private ILogger logger;
         private ICharacterSetFactory characterSetFactory;
-        private IMediaFactory mediaFactory;
         private IContentTypeFactory contentTypeFactory;
 
         private static void MakeDocumentAssertions(IXmlElement xhtml)
@@ -89,9 +87,6 @@ namespace Gnosis.Tests.Unit.Application.Xml
 
             var xml = XmlElement.Parse(location, characterSetFactory);
             MakeDocumentAssertions(xml);
-            //Assert.IsNotNull(xml);
-            //Assert.IsNotNull(xml.DocumentType);
-            //Assert.AreEqual(EntityVisibility.Public, xml.DocumentType.Visibility);
         }
 
     }

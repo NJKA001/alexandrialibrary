@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Gnosis
 {
-    public interface IMediaFactory
-    {
-        IMedia Create(Uri location, IContentType type);
-        IEnumerable<string> GetMediaTypes();
+    //public interface IMediaFactory
+    //{
+    //    IMedia Create(Uri location, IContentType type);
+    //    //IEnumerable<string> GetMediaTypes();
 
-        void MapMediaType(string mediaType, Func<Uri, IContentType, IMedia> createFunction);
-    }
+    //    void MapMediaType(string mediaType, Func<Uri, IContentType, IMedia> createFunction);
+    //}
 }

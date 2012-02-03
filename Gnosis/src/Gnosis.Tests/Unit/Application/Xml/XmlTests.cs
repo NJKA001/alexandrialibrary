@@ -25,13 +25,11 @@ namespace Gnosis.Tests.Unit.Application.Xml
         {
             logger = new Gnosis.Utilities.DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaFactory = new MediaFactory(characterSetFactory);
             contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
         }
 
         private ILogger logger;
         private ICharacterSetFactory characterSetFactory;
-        private IMediaFactory mediaFactory;
         private IContentTypeFactory contentTypeFactory;
 
         private void MakeArsXmlAssertions(IXmlElement xml)

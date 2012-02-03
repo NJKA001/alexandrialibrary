@@ -16,13 +16,11 @@ namespace Gnosis.Tests.Unit.Audio
         {
             logger = new Gnosis.Utilities.DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaFactory = new MediaFactory(characterSetFactory);
             contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
         }
 
         private ILogger logger;
         private ICharacterSetFactory characterSetFactory;
-        private IMediaFactory mediaFactory;
         private IContentTypeFactory contentTypeFactory;
 
         private const string location1 = @"Files\03 - Antes De Las Seis.mp3";
@@ -33,9 +31,7 @@ namespace Gnosis.Tests.Unit.Audio
             var file = new System.IO.FileInfo(location1);
             var location = new Uri(file.FullName);
             Assert.IsTrue(file.Exists);
-            var type = contentTypeFactory.GetByLocation(location);
-            Assert.IsNotNull(type);
-            var audio = mediaFactory.Create(location, type) as IAudio;
+            var audio = contentTypeFactory.Create(location) as IAudio;
             Assert.IsNotNull(audio);
             audio.Load();
         }

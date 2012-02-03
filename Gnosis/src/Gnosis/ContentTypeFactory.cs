@@ -4,7 +4,20 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Xml;
+
+using Gnosis.Application;
+using Gnosis.Application.Pdf;
+using Gnosis.Application.Vendor;
+using Gnosis.Application.Xml;
+using Gnosis.Application.Xml.Atom;
+using Gnosis.Application.Xml.Rss;
+using Gnosis.Application.Xml.Xhtml;
+using Gnosis.Application.Xml.Xspf;
+using Gnosis.Audio;
+using Gnosis.Image;
+using Gnosis.Metadata;
+using Gnosis.Text;
+using Gnosis.Video;
 
 namespace Gnosis
 {
@@ -25,6 +38,7 @@ namespace Gnosis
 
             InitializeFileExtensions();
             InitializeMagicNumbers();
+            InitializeDefaultMappings();
         }
 
         private readonly ILogger logger;
@@ -33,6 +47,7 @@ namespace Gnosis
 
         private readonly IDictionary<string, IList<string>> byFileExtension = new Dictionary<string, IList<string>>();
         private readonly IDictionary<byte[], string> byMagicNumber = new Dictionary<byte[], string>();
+        private readonly IDictionary<string, Func<Uri, IContentType, IMedia>> createFunctions = new Dictionary<string, Func<Uri, IContentType, IMedia>>();
 
         private const string defaultMediaType = mediaType_ApplicationUnknown;
         private const string charSetFieldName = "charset=";
@@ -265,6 +280,61 @@ namespace Gnosis
             MapMagicNumbers(mediaType_VideoWmv, magicNumber_Wmv);
         }
 
+        private void InitializeDefaultMappings()
+        {
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationAtomXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationGnosisFilesystemDirectory, (uri, type) => new GnosisFilesystemDirectory(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationDosExe, (uri, type) => new MicrosoftExecutable(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationXMsDownload, (uri, type) => new MicrosoftExecutable(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationXMsShortcut, (uri, type) => new MicrosoftShortcut(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationXExe, (uri, type) => new MicrosoftExecutable(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationXWinExe, (uri, type) => new MicrosoftExecutable(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationPdf, (uri, type) => new PdfDocument(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationXbzPdf, (uri, type) => new PdfDocument(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationXgxPdf, (uri, type) => new PdfDocument(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationXPdf, (uri, type) => new PdfDocument(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationRdfXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationRssXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationXmlDtd, (uri, type) => new PlainText(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationXspfXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
+            MapMediaType(ContentTypeFactory.mediaType_ApplicationUnknown, (uri, type) => new UnknownApplication(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_AudioMp3, (uri, type) => new MpegAudio(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_AudioMpeg, (uri, type) => new MpegAudio(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ImageXBmp, (uri, type) => new BitmapImage(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ImageXMsBmp, (uri, type) => new BitmapImage(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ImageGif, (uri, type) => new GifImage(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ImageJpeg, (uri, type) => new JpegImage(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ImagePng, (uri, type) => new PngImage(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_ImageXPng, (uri, type) => new PngImage(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_TextHtml, (uri, type) => new XhtmlDocument(uri, type, characterSetFactory));
+            MapMediaType(ContentTypeFactory.mediaType_TextPlain, (uri, type) => new PlainText(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_TextXml, (uri, type) => new XmlDocument(uri, type, characterSetFactory));
+            MapMediaType(ContentTypeFactory.mediaType_VideoAvi, (uri, type) => new AviVideo(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_VideoMsVideo, (uri, type) => new AviVideo(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_VideoXMsVideo, (uri, type) => new AviVideo(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_VideoMpeg, (uri, type) => new MpegVideo(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_VideoMpeg4, (uri, type) => new Mpeg4Video(uri, type));
+            MapMediaType(ContentTypeFactory.mediaType_VideoWmv, (uri, type) => new WmvVideo(uri, type));
+        }
+
+        public IMedia Create(Uri location)
+        {
+            if (location == null)
+                throw new ArgumentNullException("location");
+
+            var type = GetByLocation(location);
+            if (type == null)
+                throw new InvalidOperationException("Could not determine type for URL: " + location);
+
+            var key = type.Name.ToLower();
+
+            if (!createFunctions.ContainsKey(key))
+                throw new InvalidOperationException("Cannot create media for type: " + key);
+
+            return createFunctions[key](location, type);
+        }
+
         private ICharacterSet GetCharacterSet(Stream stream, string name, ICharacterSet charSet)
         {
             if (name != null && name.Contains("xml"))
@@ -296,12 +366,12 @@ namespace Gnosis
                     var content = stream.ToContentString();
                     if (content != null)
                     {
-                        var xml = new XmlDocument();
+                        var xml = new System.Xml.XmlDocument();
                         xml.LoadXml(content);
 
                         foreach (var node in xml.ChildNodes)
                         {
-                            var declaration = node as XmlDeclaration;
+                            var declaration = node as System.Xml.XmlDeclaration;
                             if (declaration != null && declaration.Encoding != null)
                             {
                                 newCharSet = characterSetFactory.GetByName(declaration.Encoding);
@@ -310,7 +380,7 @@ namespace Gnosis
                             {
                                 if (newName == name)
                                 {
-                                    var element = node as XmlElement;
+                                    var element = node as System.Xml.XmlElement;
                                     if (element != null && element.Name != null)
                                     {
                                         System.Diagnostics.Debug.WriteLine("elementName=" + element.LocalName.ToLower());
@@ -556,6 +626,17 @@ namespace Gnosis
                 logger.Error("  ContentType.GetByLocation", ex);
                 return Default;
             }
+        }
+
+        public void MapMediaType(string mediaType, Func<Uri, IContentType, IMedia> createFunction)
+        {
+            if (mediaType == null)
+                throw new ArgumentNullException("mediaType");
+            if (createFunction == null)
+                throw new ArgumentNullException("createFunction");
+
+            var key = mediaType.ToLower();
+            createFunctions[key] = createFunction;
         }
 
         public void MapFileExtensions(string name, IEnumerable<string> fileExtensions)

@@ -9,32 +9,25 @@ namespace Gnosis.Data.SQLite
     public class SQLiteMediaRepository
         : SQLiteRepositoryBase, IMediaRepository
     {
-        public SQLiteMediaRepository(ILogger logger, IContentTypeFactory contentTypeFactory, IMediaFactory mediaFactory)
+        public SQLiteMediaRepository(ILogger logger, IContentTypeFactory contentTypeFactory)
             : base(logger)
         {
             if (contentTypeFactory == null)
                 throw new ArgumentNullException("contentTypeFactory");
-            if (mediaFactory == null)
-                throw new ArgumentNullException("mediaFactory");
 
             this.contentTypeFactory = contentTypeFactory;
-            this.mediaFactory = mediaFactory;
         }
 
-        public SQLiteMediaRepository(ILogger logger, IContentTypeFactory contentTypeFactory, IMediaFactory mediaFactory, IDbConnection defaultConnection)
+        public SQLiteMediaRepository(ILogger logger, IContentTypeFactory contentTypeFactory, IDbConnection defaultConnection)
             : base(logger, defaultConnection)
         {
             if (contentTypeFactory == null)
                 throw new ArgumentNullException("contentTypeFactory");
-            if (mediaFactory == null)
-                throw new ArgumentNullException("mediaFactory");
 
             this.contentTypeFactory = contentTypeFactory;
-            this.mediaFactory = mediaFactory;
         }
 
         private readonly IContentTypeFactory contentTypeFactory;
-        private readonly IMediaFactory mediaFactory;
 
         private IEnumerable<IMedia> GetMedia(ICommandBuilder builder)
         {
@@ -68,11 +61,8 @@ namespace Gnosis.Data.SQLite
         private IMedia ReadMedium(IDataRecord record)
         {
             Uri location = record.GetUri("Location");
-            var type = record.GetStringLookup<IContentType>("Type", code => contentTypeFactory.GetByCode(code));
-
-            return type != null ?
-                mediaFactory.Create(location, type)
-                : null;
+            return contentTypeFactory.Create(location);
+            //var type = record.GetStringLookup<IContentType>("Type", code => contentTypeFactory.GetByCode(code));
         }
 
         public IMedia Lookup(Uri location)

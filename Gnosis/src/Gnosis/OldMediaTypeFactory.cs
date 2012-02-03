@@ -19,6 +19,7 @@ using Gnosis.Video;
 
 namespace Gnosis
 {
+    /*
     public class MediaTypeFactory
         //: IMediaTypeFactory
     {
@@ -293,5 +294,5 @@ namespace Gnosis
         }
 
         #endregion
-    }
+    }*/
 }

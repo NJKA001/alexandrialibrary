@@ -26,7 +26,6 @@ namespace Gnosis.Tests.Unit.Spiders
         {
             logger = new DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaFactory = new MediaFactory(characterSetFactory);
             contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
             securityContext = new SecurityContext(contentTypeFactory);
         }
@@ -36,7 +35,6 @@ namespace Gnosis.Tests.Unit.Spiders
         private IConnectionFactory connectionFactory = new SQLiteConnectionFactory();
         private ILogger logger;
         private ICharacterSetFactory characterSetFactory;
-        private IMediaFactory mediaFactory;
         private IContentTypeFactory contentTypeFactory;
         private ISecurityContext securityContext;
         private ITagRepository tagRepository;
@@ -67,7 +65,7 @@ namespace Gnosis.Tests.Unit.Spiders
 
             mediaConnection = connectionFactory.Create(connectionString);
             mediaConnection.Open();
-            mediaRepository = new SQLiteMediaRepository(logger, contentTypeFactory, mediaFactory, mediaConnection);
+            mediaRepository = new SQLiteMediaRepository(logger, contentTypeFactory, mediaConnection);
             mediaRepository.Initialize();
 
             itemConnection = connectionFactory.Create(connectionString);
@@ -77,7 +75,7 @@ namespace Gnosis.Tests.Unit.Spiders
 
             audioStreamFactory = new AudioStreamFactory();
 
-            spider = new CatalogSpider(logger, securityContext, contentTypeFactory, mediaFactory, linkRepository, tagRepository, mediaRepository, mediaItemRepository, audioStreamFactory);
+            spider = new CatalogSpider(logger, securityContext, contentTypeFactory, linkRepository, tagRepository, mediaRepository, mediaItemRepository, audioStreamFactory);
         }
 
         [TestFixtureTearDown]

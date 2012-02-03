@@ -8,8 +8,9 @@ using System.Xml;
 
 namespace Gnosis
 {
+    /*
     public class MediaType
-        : IMediaType
+        //: IMediaType
     {
         protected internal MediaType(MediaSupertype supertype, string subtype, bool isDefault)
             : this(supertype, subtype, isDefault, null, new List<string>(), new List<string>(), new List<byte[]>())
@@ -109,5 +110,5 @@ namespace Gnosis
         {
             return string.Format("{0}/{1}", supertype.ToString().ToLower(), subtype.ToLower());
         }
-    }
+    }*/
 }

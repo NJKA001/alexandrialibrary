@@ -17,12 +17,11 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         {
             logger = new DebugLogger();
             characterSetFactory = new CharacterSetFactory();
-            mediaFactory = new MediaFactory(characterSetFactory);
             contentTypeFactory = new ContentTypeFactory(logger, characterSetFactory);
 
             connection = new SQLiteConnectionFactory().Create("Data Source=:memory:;Version=3;");
             connection.Open();
-            repository = new SQLiteMediaRepository(logger, contentTypeFactory, mediaFactory, connection);
+            repository = new SQLiteMediaRepository(logger, contentTypeFactory, connection);
             repository.Initialize();
         }
 
@@ -30,7 +29,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected readonly ILogger logger;
         protected readonly ICharacterSetFactory characterSetFactory;
         protected readonly IMediaRepository repository;
-        protected readonly IMediaFactory mediaFactory;
+        //protected readonly IMediaFactory mediaFactory;
         protected readonly IContentTypeFactory contentTypeFactory;
 
         #region Test Values
@@ -47,12 +46,12 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             if (location == null)
                 throw new ArgumentNullException("location");
 
-            var type = contentTypeFactory.GetByLocation(location);
+            //var type = contentTypeFactory.GetByLocation(location);
 
-            if (type == null)
-                throw new InvalidOperationException("Could not determine media type for location: " + location.ToString());
+            //if (type == null)
+            //    throw new InvalidOperationException("Could not determine media type for location: " + location.ToString());
 
-            return mediaFactory.Create(location, type);
+            return contentTypeFactory.Create(location);
         }
 
         protected void Cleanup()
