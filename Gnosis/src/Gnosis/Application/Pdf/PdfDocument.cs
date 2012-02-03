@@ -8,7 +8,7 @@ namespace Gnosis.Application.Pdf
     public class PdfDocument
         : IPdfDocument
     {
-        public PdfDocument(Uri location, IContentType type)
+        public PdfDocument(Uri location, IMediaType type)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
@@ -20,7 +20,7 @@ namespace Gnosis.Application.Pdf
         }
 
         private readonly Uri location;
-        private readonly IContentType type;
+        private readonly IMediaType type;
 
         public void Load()
         {
@@ -31,7 +31,7 @@ namespace Gnosis.Application.Pdf
             get { return location; }
         }
 
-        public IContentType Type
+        public IMediaType Type
         {
             get { return type; }
         }

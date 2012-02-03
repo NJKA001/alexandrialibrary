@@ -46,11 +46,11 @@ namespace Gnosis.Alexandria.Views
             {
                 logger.Info("Initializing Alexandria");
 
-                contentTypeFactory = new ContentTypeFactory(logger);
-                securityContext = new SecurityContext(contentTypeFactory);
+                mediaFactory = new MediaFactory(logger);
+                securityContext = new SecurityContext(mediaFactory);
                 tagTypeFactory = new TagTypeFactory();
 
-                mediaRepository = new SQLiteMediaRepository(logger, contentTypeFactory);
+                mediaRepository = new SQLiteMediaRepository(logger, mediaFactory);
                 mediaRepository.Initialize();
 
                 linkRepository = new SQLiteLinkRepository(logger);
@@ -59,7 +59,7 @@ namespace Gnosis.Alexandria.Views
                 tagRepository = new SQLiteTagRepository(logger, tagTypeFactory);
                 tagRepository.Initialize();
 
-                mediaItemRepository = new SQLiteMediaItemRepository(logger, securityContext, contentTypeFactory);
+                mediaItemRepository = new SQLiteMediaItemRepository(logger, securityContext, mediaFactory);
                 mediaItemRepository.Initialize();
 
                 audioStreamFactory = new AudioStreamFactory();
@@ -67,15 +67,15 @@ namespace Gnosis.Alexandria.Views
                 videoPlayer = new Gnosis.Video.Vlc.VideoPlayerControl();
                 videoPlayer.Initialize(logger, () => GetVideoHost());
 
-                catalogController = new CatalogController(logger, securityContext, contentTypeFactory, mediaRepository, linkRepository, tagRepository, mediaItemRepository, audioStreamFactory);
-                spiderFactory = new SpiderFactory(logger, securityContext, contentTypeFactory, linkRepository, tagRepository, mediaRepository, mediaItemRepository, audioStreamFactory);
+                catalogController = new CatalogController(logger, securityContext, mediaFactory, mediaRepository, linkRepository, tagRepository, mediaItemRepository, audioStreamFactory);
+                spiderFactory = new SpiderFactory(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, mediaItemRepository, audioStreamFactory);
 
-                mediaItemController = new MediaItemController(logger, securityContext, contentTypeFactory, linkRepository, tagRepository, mediaItemRepository);
-                taskController = new TaskController(logger, contentTypeFactory, videoPlayer, spiderFactory, mediaItemController, mediaItemRepository);
+                mediaItemController = new MediaItemController(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaItemRepository);
+                taskController = new TaskController(logger, mediaFactory, videoPlayer, spiderFactory, mediaItemController, mediaItemRepository);
                 tagController = new TagController(logger, tagRepository);
                 commandController = new CommandController(logger);
 
-                taskResultView.Initialize(logger, securityContext, contentTypeFactory, mediaItemController, taskController, tagController, videoPlayer);
+                taskResultView.Initialize(logger, securityContext, mediaFactory, mediaItemController, taskController, tagController, videoPlayer);
                 taskManagerView.Initialize(logger, taskController, taskResultView);
                 searchView.Initialize(logger, taskController, taskResultView);
                 commandView.Initialize(logger, commandController, taskController, taskResultView);
@@ -89,7 +89,7 @@ namespace Gnosis.Alexandria.Views
         }
 
         private readonly ILogger logger;
-        private readonly IContentTypeFactory contentTypeFactory;
+        private readonly IMediaFactory mediaFactory;
         private readonly ISecurityContext securityContext;
         private readonly ITagTypeFactory tagTypeFactory;
 

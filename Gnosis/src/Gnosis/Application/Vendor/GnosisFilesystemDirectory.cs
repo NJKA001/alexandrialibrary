@@ -11,7 +11,7 @@ namespace Gnosis.Application.Vendor
     public class GnosisFilesystemDirectory
         : IApplication
     {
-        public GnosisFilesystemDirectory(Uri location, IContentType type)
+        public GnosisFilesystemDirectory(Uri location, IMediaType type)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
@@ -23,14 +23,14 @@ namespace Gnosis.Application.Vendor
         }
 
         private readonly Uri location;
-        private readonly IContentType type;
+        private readonly IMediaType type;
 
         public Uri Location
         {
             get { return location; }
         }
 
-        public IContentType Type
+        public IMediaType Type
         {
             get { return type; }
         }

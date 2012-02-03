@@ -9,25 +9,25 @@ namespace Gnosis.Data.SQLite
     public class SQLiteMediaRepository
         : SQLiteRepositoryBase, IMediaRepository
     {
-        public SQLiteMediaRepository(ILogger logger, IContentTypeFactory contentTypeFactory)
+        public SQLiteMediaRepository(ILogger logger, IMediaFactory mediaFactory)
             : base(logger)
         {
-            if (contentTypeFactory == null)
-                throw new ArgumentNullException("contentTypeFactory");
+            if (mediaFactory == null)
+                throw new ArgumentNullException("mediaFactory");
 
-            this.contentTypeFactory = contentTypeFactory;
+            this.mediaFactory = mediaFactory;
         }
 
-        public SQLiteMediaRepository(ILogger logger, IContentTypeFactory contentTypeFactory, IDbConnection defaultConnection)
+        public SQLiteMediaRepository(ILogger logger, IMediaFactory mediaFactory, IDbConnection defaultConnection)
             : base(logger, defaultConnection)
         {
-            if (contentTypeFactory == null)
-                throw new ArgumentNullException("contentTypeFactory");
+            if (mediaFactory == null)
+                throw new ArgumentNullException("mediaFactory");
 
-            this.contentTypeFactory = contentTypeFactory;
+            this.mediaFactory = mediaFactory;
         }
 
-        private readonly IContentTypeFactory contentTypeFactory;
+        private readonly IMediaFactory mediaFactory;
 
         private IEnumerable<IMedia> GetMedia(ICommandBuilder builder)
         {
@@ -61,8 +61,8 @@ namespace Gnosis.Data.SQLite
         private IMedia ReadMedium(IDataRecord record)
         {
             Uri location = record.GetUri("Location");
-            return contentTypeFactory.Create(location);
-            //var type = record.GetStringLookup<IContentType>("Type", code => contentTypeFactory.GetByCode(code));
+            return mediaFactory.Create(location);
+            //var type = record.GetStringLookup<IContentType>("Type", code => mediaFactory.GetByCode(code));
         }
 
         public IMedia Lookup(Uri location)

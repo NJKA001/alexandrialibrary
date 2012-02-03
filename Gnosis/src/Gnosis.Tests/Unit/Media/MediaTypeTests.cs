@@ -15,13 +15,13 @@ namespace Gnosis.Tests.Unit.Media
             logger = new Gnosis.Utilities.DebugLogger();
             characterSetFactory = new CharacterSetFactory();
             //mediaFactory = new MediaFactory(characterSetFactory);
-            contentTypeFactory = new ContentTypeFactory(logger);
+            mediaFactory = new MediaFactory(logger);
         }
 
         private ILogger logger;
         private ICharacterSetFactory characterSetFactory;
         //private IMediaFactory mediaFactory;
-        private IContentTypeFactory contentTypeFactory;
+        private IMediaFactory mediaFactory;
 
         /*
         [Test]
@@ -34,8 +34,8 @@ namespace Gnosis.Tests.Unit.Media
                 Assert.IsNotNull(mediaType);
                 list.Add(mediaType);
 
-                Assert.AreEqual(mediaType, contentTypeFactory.GetByCode(mediaType).Name);
-                //Assert.AreEqual(mediaType, contentTypeFactory.GetByCode(mediaType.Supertype.ToString().ToLower() + "/" + mediaType.Subtype));
+                Assert.AreEqual(mediaType, mediaFactory.GetByCode(mediaType).Name);
+                //Assert.AreEqual(mediaType, mediaFactory.GetByCode(mediaType.Supertype.ToString().ToLower() + "/" + mediaType.Subtype));
 
             }
         }*/
@@ -90,7 +90,7 @@ namespace Gnosis.Tests.Unit.Media
             var fileInfo = new System.IO.FileInfo(path);
             Assert.IsTrue(System.IO.File.Exists(path));
             var location = new Uri(fileInfo.FullName, UriKind.Absolute);
-            var mediaType = contentTypeFactory.GetByLocation(location);
+            var mediaType = mediaFactory.GetTypeByLocation(location);
             Assert.AreEqual("image/png", mediaType.Name);
         }
 
@@ -101,7 +101,7 @@ namespace Gnosis.Tests.Unit.Media
             var fileInfo = new System.IO.FileInfo(path);
             Assert.IsTrue(System.IO.File.Exists(path));
             var location = new Uri(fileInfo.FullName, UriKind.Absolute);
-            var mediaType = contentTypeFactory.GetByLocation(location);
+            var mediaType = mediaFactory.GetTypeByLocation(location);
             Assert.AreEqual("image/png", mediaType.Name);
         }
 
@@ -121,7 +121,7 @@ namespace Gnosis.Tests.Unit.Media
             var fileInfo = new System.IO.FileInfo(path);
             Assert.IsTrue(System.IO.File.Exists(path));
             var location = new Uri(fileInfo.FullName, UriKind.Absolute);
-            var mediaType = contentTypeFactory.GetByLocation(location);
+            var mediaType = mediaFactory.GetTypeByLocation(location);
             Assert.AreEqual("image/gif", mediaType.Name);
         }
 
@@ -132,7 +132,7 @@ namespace Gnosis.Tests.Unit.Media
             var fileInfo = new System.IO.FileInfo(path);
             Assert.IsTrue(System.IO.File.Exists(path));
             var location = new Uri(fileInfo.FullName, UriKind.Absolute);
-            var mediaType = contentTypeFactory.GetByLocation(location);
+            var mediaType = mediaFactory.GetTypeByLocation(location);
             Assert.AreEqual("image/gif", mediaType.Name);
         }
 
@@ -143,7 +143,7 @@ namespace Gnosis.Tests.Unit.Media
             var fileInfo = new System.IO.FileInfo(path);
             Assert.IsTrue(System.IO.File.Exists(path));
             var location = new Uri(fileInfo.FullName, UriKind.Absolute);
-            var mediaType = contentTypeFactory.GetByLocation(location);
+            var mediaType = mediaFactory.GetTypeByLocation(location);
             Assert.AreEqual("image/jpeg", mediaType.Name);
         }
 
@@ -154,7 +154,7 @@ namespace Gnosis.Tests.Unit.Media
             var fileInfo = new System.IO.FileInfo(path);
             Assert.IsTrue(System.IO.File.Exists(path));
             var location = new Uri(fileInfo.FullName, UriKind.Absolute);
-            var mediaType = contentTypeFactory.GetByLocation(location);
+            var mediaType = mediaFactory.GetTypeByLocation(location);
             Assert.AreEqual("image/jpeg", mediaType.Name);
         }
 
@@ -165,7 +165,7 @@ namespace Gnosis.Tests.Unit.Media
             var fileInfo = new System.IO.FileInfo(path);
             Assert.IsTrue(System.IO.File.Exists(path));
             var location = new Uri(fileInfo.FullName, UriKind.Absolute);
-            var mediaType = contentTypeFactory.GetByLocation(location);
+            var mediaType = mediaFactory.GetTypeByLocation(location);
             Assert.AreEqual("audio/mpeg", mediaType.Name);
         }
 
@@ -176,7 +176,7 @@ namespace Gnosis.Tests.Unit.Media
             var fileInfo = new System.IO.FileInfo(path);
             Assert.IsTrue(System.IO.File.Exists(path));
             var location = new Uri(fileInfo.FullName, UriKind.Absolute);
-            var mediaType = contentTypeFactory.GetByLocation(location);
+            var mediaType = mediaFactory.GetTypeByLocation(location);
             Assert.AreEqual("audio/mpeg", mediaType.Name);
         }
     }

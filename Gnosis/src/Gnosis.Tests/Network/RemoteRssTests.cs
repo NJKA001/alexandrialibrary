@@ -17,11 +17,11 @@ namespace Gnosis.Tests.Network
         public RemoteRssTests()
         {
             logger = new Gnosis.Utilities.DebugLogger();
-            contentTypeFactory = new ContentTypeFactory(logger);
+            mediaFactory = new MediaFactory(logger);
         }
 
         private ILogger logger;
-        private IContentTypeFactory contentTypeFactory;
+        private IMediaFactory mediaFactory;
 
         [Test]
         public void CanBeCreatedFromRemoteCustomSource()

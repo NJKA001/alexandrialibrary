@@ -26,7 +26,7 @@ namespace Gnosis.Alexandria.ViewModels
         Uri Catalog { get; }
         string CatalogName { get; }
         Uri Target { get; }
-        IContentType TargetType { get; }
+        IMediaType TargetType { get; }
         string UserName { get; }
         object Icon { get; }
         object Image { get; }

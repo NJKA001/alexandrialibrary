@@ -17,7 +17,7 @@ namespace Gnosis.Alexandria.ViewModels
 
         void ClearStatus();
 
-        IPlaylistViewModel ToPlaylist(ISecurityContext securityContext, IContentTypeFactory contentTypeFactory);
-        IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext, IContentTypeFactory contentTypeFactory, uint number);
+        IPlaylistViewModel ToPlaylist(ISecurityContext securityContext, IMediaFactory mediaFactory);
+        IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext, IMediaFactory mediaFactory, uint number);
     }
 }

@@ -17,11 +17,11 @@ namespace Gnosis.Tests.Network
         public RemoteAtomTests()
         {
             logger = new Gnosis.Utilities.DebugLogger();
-            contentTypeFactory = new ContentTypeFactory(logger);
+            mediaFactory = new MediaFactory(logger);
         }
 
         private ILogger logger;
-        private IContentTypeFactory contentTypeFactory;
+        private IMediaFactory mediaFactory;
 
         [Test]
         public void CanBeCreatedFromRemoteFeedBurnerSource()

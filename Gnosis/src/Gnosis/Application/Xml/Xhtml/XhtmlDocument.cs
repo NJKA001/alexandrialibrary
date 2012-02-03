@@ -10,7 +10,7 @@ namespace Gnosis.Application.Xml.Xhtml
     public class XhtmlDocument
         : IXmlDocument
     {
-        public XhtmlDocument(Uri location, IContentType type)
+        public XhtmlDocument(Uri location, IMediaType type)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
@@ -22,7 +22,7 @@ namespace Gnosis.Application.Xml.Xhtml
         }
 
         private Uri location;
-        private IContentType type;
+        private IMediaType type;
 
         private IXmlElement xml;
         private bool isLoaded;
@@ -32,7 +32,7 @@ namespace Gnosis.Application.Xml.Xhtml
             get { return location; }
         }
 
-        public IContentType Type
+        public IMediaType Type
         {
             get { return type; }
         }

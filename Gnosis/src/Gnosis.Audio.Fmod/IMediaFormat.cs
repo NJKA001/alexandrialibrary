@@ -36,7 +36,7 @@ namespace Gnosis.Audio.Fmod
 	{
 		string Name { get; }
 		string Description { get; }
-		IList<ContentType> ContentTypes { get; }
+		IList<MediaType> ContentTypes { get; }
 		IList<string> FileExtensions { get; }
 		IList<ICodec> Codecs { get; }
 	}

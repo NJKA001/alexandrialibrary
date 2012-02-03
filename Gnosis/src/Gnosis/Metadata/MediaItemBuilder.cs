@@ -9,20 +9,20 @@ namespace Gnosis.Metadata
         : IMediaItemBuilder<T>
         where T : class, IMediaItem
     {
-        public MediaItemBuilder(ISecurityContext securityContext, IContentTypeFactory contentTypeFactory)
-            : this(securityContext, contentTypeFactory, null)
+        public MediaItemBuilder(ISecurityContext securityContext, IMediaFactory mediaFactory)
+            : this(securityContext, mediaFactory, null)
         {
         }
 
-        public MediaItemBuilder(ISecurityContext securityContext, IContentTypeFactory contentTypeFactory, T item)
+        public MediaItemBuilder(ISecurityContext securityContext, IMediaFactory mediaFactory, T item)
         {
             if (securityContext == null)
                 throw new ArgumentNullException("securityContext");
-            if (contentTypeFactory == null)
-                throw new ArgumentNullException("contentTypeFactory");
+            if (mediaFactory == null)
+                throw new ArgumentNullException("mediaFactory");
 
             this.securityContext = securityContext;
-            this.contentTypeFactory = contentTypeFactory;
+            this.mediaFactory = mediaFactory;
 
             if (item != null)
             {
@@ -37,7 +37,7 @@ namespace Gnosis.Metadata
             else
             {
                 this.identityInfo = IdentityInfo.GetDefault(GetContentType());
-                this.targetInfo = TargetInfo.GetDefault(contentTypeFactory);
+                this.targetInfo = TargetInfo.GetDefault(mediaFactory);
                 this.userInfo = securityContext.CurrentUserInfo;
             }
 
@@ -45,7 +45,7 @@ namespace Gnosis.Metadata
         }
 
         private readonly ISecurityContext securityContext;
-        private readonly IContentTypeFactory contentTypeFactory;
+        private readonly IMediaFactory mediaFactory;
 
         private IdentityInfo identityInfo;
         private SizeInfo sizeInfo = SizeInfo.Default;
@@ -56,32 +56,32 @@ namespace Gnosis.Metadata
         private ThumbnailInfo thumbnailInfo = ThumbnailInfo.Default;
         private Func<IdentityInfo, SizeInfo, CreatorInfo, CatalogInfo, TargetInfo, UserInfo, ThumbnailInfo, IMediaItem> createFunction;
 
-        private IContentType GetContentType()
+        private IMediaType GetContentType()
         {
             if (typeof(T) == typeof(IAlbum))
-                return contentTypeFactory.GetByCode("vnd.gnosis.album");
+                return mediaFactory.GetTypeByCode("vnd.gnosis.album");
             else if (typeof(T) == typeof(IArtist))
-                return contentTypeFactory.GetByCode("vnd.gnosis.artist");
+                return mediaFactory.GetTypeByCode("vnd.gnosis.artist");
             else if (typeof(T) == typeof(IClip))
-                return contentTypeFactory.GetByCode("vnd.gnosis.clip");
+                return mediaFactory.GetTypeByCode("vnd.gnosis.clip");
             else if (typeof(T) == typeof(IDoc))
-                return contentTypeFactory.GetByCode("vnd.gnosis.doc");
+                return mediaFactory.GetTypeByCode("vnd.gnosis.doc");
             else if (typeof(T) == typeof(IFeed))
-                return contentTypeFactory.GetByCode("vnd.gnosis.feed");
+                return mediaFactory.GetTypeByCode("vnd.gnosis.feed");
             else if (typeof(T) == typeof(IFeedItem))
-                return contentTypeFactory.GetByCode("vnd.gnosis.feed.item");
+                return mediaFactory.GetTypeByCode("vnd.gnosis.feed.item");
             else if (typeof(T) == typeof(IPic))
-                return contentTypeFactory.GetByCode("vnd.gnosis.pic");
+                return mediaFactory.GetTypeByCode("vnd.gnosis.pic");
             else if (typeof(T) == typeof(IPlaylist))
-                return contentTypeFactory.GetByCode("vnd.gnosis.playlist");
+                return mediaFactory.GetTypeByCode("vnd.gnosis.playlist");
             else if (typeof(T) == typeof(IPlaylistItem))
-                return contentTypeFactory.GetByCode("vnd.gnosis.playlist.item");
+                return mediaFactory.GetTypeByCode("vnd.gnosis.playlist.item");
             else if (typeof(T) == typeof(IProgram))
-                return contentTypeFactory.GetByCode("vnd.gnosis.program");
+                return mediaFactory.GetTypeByCode("vnd.gnosis.program");
             else if (typeof(T) == typeof(ITrack))
-                return contentTypeFactory.GetByCode("vnd.gnosis.track");
+                return mediaFactory.GetTypeByCode("vnd.gnosis.track");
             else
-                return contentTypeFactory.Default;
+                return mediaFactory.DefaultType;
         }
 
         private void InitializeCreateFunction()
@@ -158,7 +158,7 @@ namespace Gnosis.Metadata
             return this;
         }
 
-        public IMediaItemBuilder<T> Target(Uri target, IContentType targetType)
+        public IMediaItemBuilder<T> Target(Uri target, IMediaType targetType)
         {
             targetInfo = new TargetInfo(target, targetType);
             return this;
@@ -178,7 +178,7 @@ namespace Gnosis.Metadata
 
         public T GetDefault()
         {
-            return (T)createFunction(IdentityInfo.GetDefault(GetContentType()), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(contentTypeFactory), UserInfo.Default, ThumbnailInfo.Default);
+            return (T)createFunction(IdentityInfo.GetDefault(GetContentType()), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(mediaFactory), UserInfo.Default, ThumbnailInfo.Default);
         }
 
         public T ToMediaItem()

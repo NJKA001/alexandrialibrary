@@ -11,14 +11,14 @@ namespace Gnosis.Alexandria.Controllers
     public class MediaItemController
         : IMediaItemController
     {
-        public MediaItemController(ILogger logger, ISecurityContext securityContext, IContentTypeFactory contentTypeFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaItemRepository mediaItemRepository)
+        public MediaItemController(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaItemRepository mediaItemRepository)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
             if (securityContext == null)
                 throw new ArgumentNullException("securityContext");
-            if (contentTypeFactory == null)
-                throw new ArgumentNullException("contentTypeFactory");
+            if (mediaFactory == null)
+                throw new ArgumentNullException("mediaFactory");
             if (linkRepository == null)
                 throw new ArgumentNullException("linkRepository");
             if (tagRepository == null)
@@ -28,7 +28,7 @@ namespace Gnosis.Alexandria.Controllers
 
             this.logger = logger;
             this.securityContext = securityContext;
-            this.contentTypeFactory = contentTypeFactory;
+            this.mediaFactory = mediaFactory;
             this.linkRepository = linkRepository;
             this.tagRepository = tagRepository;
             this.mediaItemRepository = mediaItemRepository;
@@ -36,7 +36,7 @@ namespace Gnosis.Alexandria.Controllers
 
         private readonly ILogger logger;
         private readonly ISecurityContext securityContext;
-        private readonly IContentTypeFactory contentTypeFactory;
+        private readonly IMediaFactory mediaFactory;
         private readonly ILinkRepository linkRepository;
         private readonly ITagRepository tagRepository;
         private readonly IMediaItemRepository mediaItemRepository;
@@ -57,7 +57,7 @@ namespace Gnosis.Alexandria.Controllers
                 if (item == null)
                     return;
 
-                var builder = new MediaItemBuilder<T>(securityContext, contentTypeFactory, item)
+                var builder = new MediaItemBuilder<T>(securityContext, mediaFactory, item)
                     .Thumbnail(thumbnail, thumbnailData);
 
                 mediaItemRepository.Save<T>(new List<T> { builder.ToMediaItem() });
@@ -148,7 +148,7 @@ namespace Gnosis.Alexandria.Controllers
                 if (item == null)
                     return;
 
-                var builder = new MediaItemBuilder<T>(securityContext, contentTypeFactory, item)
+                var builder = new MediaItemBuilder<T>(securityContext, mediaFactory, item)
                     .Identity(item.Name, summary, item.FromDate, item.ToDate, item.Number, item.Location);
 
                 mediaItemRepository.Save<T>(new List<T> { builder.ToMediaItem() });

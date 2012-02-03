@@ -94,7 +94,7 @@ namespace Gnosis.Audio.Fmod
 		private FmodSoundType fmodSoundType = FmodSoundType.Unknown;
 		private string name;
 		private string description;
-		private List<ContentType> contentTypes = new List<ContentType>();
+		private List<MediaType> contentTypes = new List<MediaType>();
 		private List<string> fileExtensions = new List<string>();
 		private List<ICodec> codecs = new List<ICodec>();
 		#endregion
@@ -110,7 +110,7 @@ namespace Gnosis.Audio.Fmod
 			get { return description; }
 		}
 
-		public IList<ContentType> ContentTypes
+		public IList<MediaType> ContentTypes
 		{
 			get { return contentTypes; }
 		}

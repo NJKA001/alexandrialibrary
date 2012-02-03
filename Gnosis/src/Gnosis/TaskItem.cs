@@ -7,7 +7,7 @@ namespace Gnosis
 {
     public struct TaskItem
     {
-        public TaskItem(Uri id, uint number, string name, TimeSpan duration, Uri target, IContentType targetType, bool hasPrevious, bool hasNext, object image)
+        public TaskItem(Uri id, uint number, string name, TimeSpan duration, Uri target, IMediaType targetType, bool hasPrevious, bool hasNext, object image)
         {
             this.id = id;
             this.number = number;
@@ -25,7 +25,7 @@ namespace Gnosis
         private readonly string name;
         private readonly TimeSpan duration;
         private readonly Uri target;
-        private readonly IContentType targetType;
+        private readonly IMediaType targetType;
         private bool hasPrevious;
         private bool hasNext;
         private readonly object image;
@@ -55,7 +55,7 @@ namespace Gnosis
             get { return target; }
         }
 
-        public IContentType TargetType
+        public IMediaType TargetType
         {
             get { return targetType; }
         }

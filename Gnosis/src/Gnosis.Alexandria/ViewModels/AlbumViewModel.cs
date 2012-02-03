@@ -71,16 +71,16 @@ namespace Gnosis.Alexandria.ViewModels
             return string.Format("Album: {0}. IsSelected={1}", Name, IsSelected);
         }
 
-        public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext, IContentTypeFactory contentTypeFactory)
+        public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext, IMediaFactory mediaFactory)
         {
             if (securityContext == null)
                 throw new ArgumentNullException("securityContext");
-            if (contentTypeFactory == null)
-                throw new ArgumentNullException("contentTypeFactory");
+            if (mediaFactory == null)
+                throw new ArgumentNullException("mediaFactory");
 
             var date = DateTime.Now.ToUniversalTime();
 
-            var builder = new MediaItemBuilder<IPlaylist>(securityContext, contentTypeFactory)
+            var builder = new MediaItemBuilder<IPlaylist>(securityContext, mediaFactory)
             .Identity(Name, Summary, date, date, 0)
             .Thumbnail(item.Thumbnail, item.ThumbnailData);
 
@@ -90,13 +90,13 @@ namespace Gnosis.Alexandria.ViewModels
             foreach (var track in tracks)
             {
                 number++;
-                var playlistItem = track.ToPlaylistItem(securityContext, contentTypeFactory, number);
+                var playlistItem = track.ToPlaylistItem(securityContext, mediaFactory, number);
                 playlistItems.Add(playlistItem);
             }
             foreach (var clip in clips)
             {
                 number++;
-                var playlistItem = clip.ToPlaylistItem(securityContext, contentTypeFactory, number);
+                var playlistItem = clip.ToPlaylistItem(securityContext, mediaFactory, number);
                 playlistItems.Add(playlistItem);
             }
 

@@ -8,7 +8,7 @@ namespace Gnosis
     public interface IMedia
     {
         Uri Location { get; }
-        IContentType Type { get; }
+        IMediaType Type { get; }
 
         void Load();
 

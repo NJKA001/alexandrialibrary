@@ -21,18 +21,18 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         public SavedArtists()
         {
             logger = new DebugLogger();
-            contentTypeFactory = new ContentTypeFactory(logger);
-            securityContext = new SecurityContext(contentTypeFactory);
-            contentType = contentTypeFactory.GetByCode("application/vnd.gnosis.artist");
+            mediaFactory = new MediaFactory(logger);
+            securityContext = new SecurityContext(mediaFactory);
+            contentType = mediaFactory.GetTypeByCode("application/vnd.gnosis.artist");
 
-            artist1 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), contentType, "Radiohead", string.Empty, new DateTime(1985, 1, 2), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(contentTypeFactory), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image.jpg"), new byte[0]));
-            artist2 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), contentType, "Tool", string.Empty, new DateTime(1991, 2, 28), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(contentTypeFactory), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image2.jpg"), new byte[0]));
-            artist3 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), contentType, "Cat Power", string.Empty, new DateTime(1997, 10, 15), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(contentTypeFactory), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image3.jpg"), new byte[0]));
-            artist4 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), contentType, "PJ Harvey", string.Empty, new DateTime(2011, 11, 11), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(contentTypeFactory), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image4.jpg"), new byte[0]));
+            artist1 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), contentType, "Radiohead", string.Empty, new DateTime(1985, 1, 2), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(mediaFactory), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image.jpg"), new byte[0]));
+            artist2 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), contentType, "Tool", string.Empty, new DateTime(1991, 2, 28), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(mediaFactory), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image2.jpg"), new byte[0]));
+            artist3 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), contentType, "Cat Power", string.Empty, new DateTime(1997, 10, 15), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(mediaFactory), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image3.jpg"), new byte[0]));
+            artist4 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), contentType, "PJ Harvey", string.Empty, new DateTime(2011, 11, 11), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(mediaFactory), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image4.jpg"), new byte[0]));
 
             connection = connectionFactory.Create(connectionString);
             connection.Open();
-            repository = new SQLiteMediaItemRepository(logger, securityContext, contentTypeFactory, connection);
+            repository = new SQLiteMediaItemRepository(logger, securityContext, mediaFactory, connection);
             repository.Initialize();
             repository.Save(new List<IArtist> { artist1, artist2 });
         }
@@ -43,10 +43,10 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected readonly ILogger logger = new DebugLogger();
         protected readonly ICharacterSetFactory characterSetFactory;
         protected readonly ISecurityContext securityContext;
-        protected readonly IContentTypeFactory contentTypeFactory;
+        protected readonly IMediaFactory mediaFactory;
         protected readonly IDbConnection connection;
         protected readonly IMediaItemRepository repository;
-        protected readonly IContentType contentType;
+        protected readonly IMediaType contentType;
         protected readonly Uri unknownLocation = Guid.Empty.ToUrn();
 
         private IArtist artist1;

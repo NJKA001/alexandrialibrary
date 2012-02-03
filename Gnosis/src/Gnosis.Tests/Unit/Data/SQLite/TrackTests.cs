@@ -21,10 +21,10 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         public SavedTracks()
         {
             logger = new DebugLogger();
-            contentTypeFactory = new ContentTypeFactory(logger);
-            securityContext = new SecurityContext(contentTypeFactory);
-            contentType = contentTypeFactory.GetByCode("application/vnd.gnosis.track");
-            mpegAudioType = contentTypeFactory.GetByCode("audio/mp3");
+            mediaFactory = new MediaFactory(logger);
+            securityContext = new SecurityContext(mediaFactory);
+            contentType = mediaFactory.GetTypeByCode("application/vnd.gnosis.track");
+            mpegAudioType = mediaFactory.GetTypeByCode("audio/mp3");
 
             track1 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), contentType, "Paranoid Android", string.Empty, DateTime.MinValue, DateTime.MaxValue, 2), new SizeInfo(TimeSpan.FromSeconds(220), 0, 0), new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), new CatalogInfo(new Uri(okComputerUrn), "OK Computer"), new TargetInfo(new Uri("file:///audio/radiohead/paranoid_android.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image1.jpg"), new byte[0]));
             track2 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), contentType, "Sober", string.Empty, DateTime.MinValue, DateTime.MaxValue, 4), new SizeInfo(TimeSpan.FromSeconds(306), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "Tool"), new CatalogInfo(Guid.NewGuid().ToUrn(), "Undertow"), new TargetInfo(new Uri("file:///audio/tool/sober.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image2.jpg"), new byte[0]));
@@ -34,7 +34,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
 
             connection = connectionFactory.Create(connectionString);
             connection.Open();
-            repository = new SQLiteMediaItemRepository(logger, securityContext, contentTypeFactory, connection);
+            repository = new SQLiteMediaItemRepository(logger, securityContext, mediaFactory, connection);
             repository.Initialize();
             repository.Save(new List<ITrack> { track1, track2, track5 });
         }
@@ -45,11 +45,11 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected readonly ILogger logger;
         protected readonly ICharacterSetFactory characterSetFactory;
         protected readonly ISecurityContext securityContext;
-        protected readonly IContentTypeFactory contentTypeFactory;
+        protected readonly IMediaFactory mediaFactory;
         protected readonly IDbConnection connection;
         protected readonly IMediaItemRepository repository;
-        protected readonly IContentType contentType;
-        protected readonly IContentType mpegAudioType;
+        protected readonly IMediaType contentType;
+        protected readonly IMediaType mpegAudioType;
         protected readonly Uri unknownLocation = Guid.Empty.ToUrn();
 
         private const string radioheadUrn = "urn:uuid:27A19456-E6E9-463F-951D-98BB44356C65";

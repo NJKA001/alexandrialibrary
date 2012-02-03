@@ -11,7 +11,7 @@ namespace Gnosis.Application.Xml
     public class XmlDocument
         : IXmlDocument
     {
-        public XmlDocument(Uri location, IContentType type)
+        public XmlDocument(Uri location, IMediaType type)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
@@ -23,7 +23,7 @@ namespace Gnosis.Application.Xml
         }
 
         private readonly Uri location;
-        private readonly IContentType type;
+        private readonly IMediaType type;
 
         private IXmlElement xml;
         private bool isLoaded;
@@ -33,7 +33,7 @@ namespace Gnosis.Application.Xml
             get { return location; }
         }
 
-        public IContentType Type
+        public IMediaType Type
         {
             get { return type; }
         }

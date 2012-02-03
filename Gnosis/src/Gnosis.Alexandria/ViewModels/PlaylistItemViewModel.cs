@@ -119,20 +119,20 @@ namespace Gnosis.Alexandria.ViewModels
             OnPropertyChanged("PlaybackIcon");
         }
 
-        public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext, IContentTypeFactory contentTypeFactory)
+        public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext, IMediaFactory mediaFactory)
         {
             var date = DateTime.Now.ToUniversalTime();
 
-            var builder = new MediaItemBuilder<IPlaylist>(securityContext, contentTypeFactory)
+            var builder = new MediaItemBuilder<IPlaylist>(securityContext, mediaFactory)
                 .Identity(Name, Summary, date, date, 0)
                 .Thumbnail(item.Thumbnail, item.ThumbnailData);
 
             var playlist = builder.ToMediaItem();
-            var playlistItems = new List<IPlaylistItemViewModel> { ToPlaylistItem(securityContext, contentTypeFactory, 1) };
+            var playlistItems = new List<IPlaylistItemViewModel> { ToPlaylistItem(securityContext, mediaFactory, 1) };
             return new PlaylistViewModel(controller, playlist, playlistItems);
         }
 
-        public IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext, IContentTypeFactory contentTypeFactory, uint number)
+        public IPlaylistItemViewModel ToPlaylistItem(ISecurityContext securityContext, IMediaFactory mediaFactory, uint number)
         {
             return this;
         }

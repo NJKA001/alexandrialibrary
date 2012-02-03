@@ -15,11 +15,11 @@ namespace Gnosis.Tests.Unit.Audio
         public MpegAudio()
         {
             logger = new Gnosis.Utilities.DebugLogger();
-            contentTypeFactory = new ContentTypeFactory(logger);
+            mediaFactory = new MediaFactory(logger);
         }
 
         private ILogger logger;
-        private IContentTypeFactory contentTypeFactory;
+        private IMediaFactory mediaFactory;
 
         private const string location1 = @"Files\03 - Antes De Las Seis.mp3";
 
@@ -29,7 +29,7 @@ namespace Gnosis.Tests.Unit.Audio
             var file = new System.IO.FileInfo(location1);
             var location = new Uri(file.FullName);
             Assert.IsTrue(file.Exists);
-            var audio = contentTypeFactory.Create(location) as IAudio;
+            var audio = mediaFactory.Create(location) as IAudio;
             Assert.IsNotNull(audio);
             audio.Load();
         }

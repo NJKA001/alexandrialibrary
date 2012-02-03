@@ -387,20 +387,20 @@ namespace Gnosis.Alexandria.ViewModels
             }
         }
 
-        public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext, IContentTypeFactory contentTypeFactory)
+        public IPlaylistViewModel ToPlaylist(ISecurityContext securityContext, IMediaFactory mediaFactory)
         {
             if (securityContext == null)
                 throw new ArgumentNullException("securityContext");
-            if (contentTypeFactory == null)
-                throw new ArgumentNullException("contentTypeFactory");
+            if (mediaFactory == null)
+                throw new ArgumentNullException("mediaFactory");
 
             var album = item as IAlbumViewModel;
             if (album != null)
-                return album.ToPlaylist(securityContext, contentTypeFactory);
+                return album.ToPlaylist(securityContext, mediaFactory);
 
             var playable = item as IPlayableViewModel;
             if (playable != null)
-                return playable.ToPlaylist(securityContext, contentTypeFactory);
+                return playable.ToPlaylist(securityContext, mediaFactory);
 
             return null;
         }

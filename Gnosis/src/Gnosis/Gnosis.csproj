@@ -88,18 +88,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CharacterSetFactory.cs" />
-    <Compile Include="ContentTypeFactory.cs" />
+    <Compile Include="MediaFactory.cs" />
     <Compile Include="ICharacterSetFactory.cs" />
-    <Compile Include="IContentTypeFactory.cs" />
     <Compile Include="IMediaFactory.cs" />
     <Compile Include="IMediaMarquee.cs" />
     <Compile Include="IMediaMarqueePage.cs" />
     <Compile Include="IMediaMarqueeRepository.cs" />
-    <Compile Include="IOldMediaTypeFactory.cs" />
     <Compile Include="MediaCategory.cs" />
-    <Compile Include="MediaFactory.cs" />
     <Compile Include="MediaSupertype.cs" />
-    <Compile Include="OldMediaTypeFactory.cs" />
     <Compile Include="Metadata\Album.cs" />
     <Compile Include="Algorithms\Algorithm.cs" />
     <Compile Include="Application\Pdf\IPdfDocument.cs" />
@@ -345,17 +341,15 @@
     <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="Text\VCard\IVirtualCard.cs" />
     <Compile Include="CharacterSet.cs" />
-    <Compile Include="ContentType.cs" />
+    <Compile Include="MediaType.cs" />
     <Compile Include="ICharacterSet.cs" />
-    <Compile Include="IContentType.cs" />
+    <Compile Include="IMediaType.cs" />
     <Compile Include="Application\Xml\IStyleMedia.cs" />
-    <Compile Include="IOldMediaType.cs" />
     <Compile Include="Application\Xml\StyleMedia.cs" />
     <Compile Include="Application\Xml\StyleMediaContinuityGroup.cs" />
     <Compile Include="Application\Xml\StyleMediaInteractivityGroup.cs" />
     <Compile Include="Application\Xml\StyleMediaLayoutGroup.cs" />
     <Compile Include="Application\Xml\StyleMediaSensoryGroup.cs" />
-    <Compile Include="OldMediaType.cs" />
     <Compile Include="Tags\Tag.cs" />
     <Compile Include="Tags\TagType.cs" />
     <Compile Include="Tags\TagTypeFactory.cs" />
@@ -608,9 +602,7 @@
       <Name>Gnosis.Text.Html.HtmlAgility</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MediaTypes\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

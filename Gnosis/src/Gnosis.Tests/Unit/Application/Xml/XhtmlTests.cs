@@ -17,11 +17,11 @@ namespace Gnosis.Tests.Unit.Application.Xml
         public XhtmlDocuments()
         {
             logger = new Gnosis.Utilities.DebugLogger();
-            contentTypeFactory = new ContentTypeFactory(logger);
+            mediaFactory = new MediaFactory(logger);
         }
 
         private ILogger logger;
-        private IContentTypeFactory contentTypeFactory;
+        private IMediaFactory mediaFactory;
 
         private static void MakeDocumentAssertions(IXmlElement xhtml)
         {

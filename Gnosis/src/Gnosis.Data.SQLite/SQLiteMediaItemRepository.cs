@@ -11,27 +11,27 @@ namespace Gnosis.Data.SQLite
     public class SQLiteMediaItemRepository
         : SQLiteRepositoryBase, IMediaItemRepository
     {
-        public SQLiteMediaItemRepository(ILogger logger, ISecurityContext securityContext, IContentTypeFactory contentTypeFactory)
-            : this(logger, securityContext, contentTypeFactory, null)
+        public SQLiteMediaItemRepository(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory)
+            : this(logger, securityContext, mediaFactory, null)
         {
         }
 
-        public SQLiteMediaItemRepository(ILogger logger, ISecurityContext securityContext, IContentTypeFactory contentTypeFactory, IDbConnection defaultConnection)
+        public SQLiteMediaItemRepository(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, IDbConnection defaultConnection)
             : base(logger, defaultConnection)
         {
             if (securityContext == null)
                 throw new ArgumentNullException("securityContext");
-            if (contentTypeFactory == null)
-                throw new ArgumentNullException("contentTypeFactory");
+            if (mediaFactory == null)
+                throw new ArgumentNullException("mediaFactory");
 
             this.securityContext = securityContext;
-            this.contentTypeFactory = contentTypeFactory;
+            this.mediaFactory = mediaFactory;
 
             InitializeTableNames();
         }
 
         private readonly ISecurityContext securityContext;
-        private readonly IContentTypeFactory contentTypeFactory;
+        private readonly IMediaFactory mediaFactory;
         private readonly IDictionary<Type, string> tables = new Dictionary<Type, string>();
 
         private void InitializeTableNames()
@@ -66,7 +66,7 @@ namespace Gnosis.Data.SQLite
         private T BuildItem<T>(IdentityInfo identityInfo, SizeInfo sizeInfo, CreatorInfo creatorInfo, CatalogInfo catalogInfo, TargetInfo targetInfo, UserInfo userInfo, ThumbnailInfo thumbnailInfo)
             where T : class, IMediaItem
         {
-            var builder = new MediaItemBuilder<T>(securityContext, contentTypeFactory)
+            var builder = new MediaItemBuilder<T>(securityContext, mediaFactory)
                 .Identity(identityInfo.Name, identityInfo.Summary, identityInfo.FromDate, identityInfo.ToDate, identityInfo.Number, identityInfo.Location)
                 .Size(sizeInfo.Duration, sizeInfo.Height, sizeInfo.Width)
                 .Creator(creatorInfo.Location, creatorInfo.Name)
@@ -147,7 +147,7 @@ namespace Gnosis.Data.SQLite
         private T GetDefaultItem<T>()
             where T : class, IMediaItem
         {
-            return new MediaItemBuilder<T>(securityContext, contentTypeFactory).GetDefault();
+            return new MediaItemBuilder<T>(securityContext, mediaFactory).GetDefault();
         }
 
         private ICommandBuilder GetDeleteBuilder<T>(Uri location)
@@ -377,7 +377,7 @@ namespace Gnosis.Data.SQLite
             var catalog = record.GetUri("Catalog");
             var catalogName = record.GetString("CatalogName");
             var target = record.GetUri("Target");
-            var targetType = record.GetStringLookup<IContentType>("TargetType", code => contentTypeFactory.GetByCode(code));
+            var targetType = record.GetStringLookup<IMediaType>("TargetType", code => mediaFactory.GetTypeByCode(code));
             var user = record.GetUri("User");
             var userName = record.GetString("UserName");
             var thumbnail = record.GetUri("Thumbnail");

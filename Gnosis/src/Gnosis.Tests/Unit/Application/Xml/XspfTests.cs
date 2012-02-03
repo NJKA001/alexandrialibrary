@@ -18,11 +18,11 @@ namespace Gnosis.Tests.Unit.Application.Xml
         public XspfDocuments()
         {
             logger = new Gnosis.Utilities.DebugLogger();
-            contentTypeFactory = new ContentTypeFactory(logger);
+            mediaFactory = new MediaFactory(logger);
         }
 
         private ILogger logger;
-        private IContentTypeFactory contentTypeFactory;
+        private IMediaFactory mediaFactory;
 
         [Test]
         public void CanBeParsedFromLocalXspfFile()
@@ -34,10 +34,10 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var contentType = contentTypeFactory.GetByLocation(location);
+            var contentType = mediaFactory.GetTypeByLocation(location);
             Assert.AreEqual("application/xspf+xml", contentType.Name);
 
-            var document = contentTypeFactory.Create(location) as IXmlDocument;
+            var document = mediaFactory.Create(location) as IXmlDocument;
             Assert.IsNotNull(document);
             Assert.IsNull(document.Xml);
             

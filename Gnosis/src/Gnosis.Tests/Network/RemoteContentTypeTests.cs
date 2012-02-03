@@ -13,19 +13,19 @@ namespace Gnosis.Tests.Network
         public RemoteContentTypeItems()
         {
             logger = new Gnosis.Utilities.DebugLogger();
-            contentTypeFactory = new ContentTypeFactory(logger);
+            mediaFactory = new MediaFactory(logger);
         }
 
         private ILogger logger;
-        private IContentTypeFactory contentTypeFactory;
+        private IMediaFactory mediaFactory;
 
         [Test]
         public void CanBeParsedForRssFeedsWithInvalidContentType()
         {
             var location = new Uri("http://feeds.arstechnica.com/arstechnica/index");
-            var contentType = contentTypeFactory.GetByLocation(location);
+            var contentType = mediaFactory.GetTypeByLocation(location);
             Assert.IsNotNull(contentType);
-            Assert.AreNotEqual(contentTypeFactory.Default, contentType);
+            Assert.AreNotEqual(mediaFactory.DefaultType, contentType);
             Assert.AreEqual("application/rss+xml", contentType.Name);
             Assert.AreEqual("UTF-8", contentType.CharSet);
             Assert.IsNull(contentType.Boundary);
@@ -35,9 +35,9 @@ namespace Gnosis.Tests.Network
         public void CanBeParsedForAtomFeeds()
         {
             var location = new Uri("http://www.blogger.com/feeds/8677504/posts/default");
-            var contentType = contentTypeFactory.GetByLocation(location);
+            var contentType = mediaFactory.GetTypeByLocation(location);
             Assert.IsNotNull(contentType);
-            Assert.AreNotEqual(contentTypeFactory.Default, contentType);
+            Assert.AreNotEqual(mediaFactory.DefaultType, contentType);
             Assert.AreEqual("application/atom+xml", contentType.Name);
             Assert.AreEqual("UTF-8", contentType.CharSet);
             Assert.IsNull(contentType.Boundary);

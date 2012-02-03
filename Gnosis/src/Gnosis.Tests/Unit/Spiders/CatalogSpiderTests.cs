@@ -25,15 +25,15 @@ namespace Gnosis.Tests.Unit.Spiders
         public CatalogSpiderTests()
         {
             logger = new DebugLogger();
-            contentTypeFactory = new ContentTypeFactory(logger);
-            securityContext = new SecurityContext(contentTypeFactory);
+            mediaFactory = new MediaFactory(logger);
+            securityContext = new SecurityContext(mediaFactory);
         }
 
         private const string connectionString = "Data Source=:memory:;Version=3;";
 
         private IConnectionFactory connectionFactory = new SQLiteConnectionFactory();
         private ILogger logger;
-        private IContentTypeFactory contentTypeFactory;
+        private IMediaFactory mediaFactory;
         private ISecurityContext securityContext;
         private ITagRepository tagRepository;
         private ILinkRepository linkRepository;
@@ -62,17 +62,17 @@ namespace Gnosis.Tests.Unit.Spiders
 
             mediaConnection = connectionFactory.Create(connectionString);
             mediaConnection.Open();
-            mediaRepository = new SQLiteMediaRepository(logger, contentTypeFactory, mediaConnection);
+            mediaRepository = new SQLiteMediaRepository(logger, mediaFactory, mediaConnection);
             mediaRepository.Initialize();
 
             itemConnection = connectionFactory.Create(connectionString);
             itemConnection.Open();
-            mediaItemRepository = new SQLiteMediaItemRepository(logger, securityContext, contentTypeFactory, itemConnection);
+            mediaItemRepository = new SQLiteMediaItemRepository(logger, securityContext, mediaFactory, itemConnection);
             mediaItemRepository.Initialize();
 
             audioStreamFactory = new AudioStreamFactory();
 
-            spider = new CatalogSpider(logger, securityContext, contentTypeFactory, linkRepository, tagRepository, mediaRepository, mediaItemRepository, audioStreamFactory);
+            spider = new CatalogSpider(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, mediaItemRepository, audioStreamFactory);
         }
 
         [TestFixtureTearDown]

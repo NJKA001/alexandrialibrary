@@ -5,11 +5,17 @@ using System.Text;
 
 namespace Gnosis
 {
-    //public interface IMediaFactory
-    //{
-    //    IMedia Create(Uri location, IContentType type);
-    //    //IEnumerable<string> GetMediaTypes();
+    public interface IMediaFactory
+    {
+        IMediaType DefaultType { get; }
 
-    //    void MapMediaType(string mediaType, Func<Uri, IContentType, IMedia> createFunction);
-    //}
+        IMediaType GetTypeByCode(string code);
+        IMediaType GetTypeByLocation(Uri location);
+        
+        IMedia Create(Uri location);
+
+        void MapCreateFunction(string mediaType, Func<Uri, IMediaType, IMedia> createFunction);
+        void MapFileExtensions(string mediaType, IEnumerable<string> fileExtensions);
+        void MapMagicNumbers(string mediaType, byte[] magicNumbers);
+    }
 }

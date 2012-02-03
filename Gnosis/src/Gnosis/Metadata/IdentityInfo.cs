@@ -7,7 +7,7 @@ namespace Gnosis.Metadata
 {
     public struct IdentityInfo
     {
-        public IdentityInfo(Uri location, IContentType type, string name, string summary, DateTime fromDate, DateTime toDate, uint number)
+        public IdentityInfo(Uri location, IMediaType type, string name, string summary, DateTime fromDate, DateTime toDate, uint number)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
@@ -28,7 +28,7 @@ namespace Gnosis.Metadata
         }
 
         private Uri location;
-        private IContentType type;
+        private IMediaType type;
         private string name;
         private string summary;
         private DateTime fromDate;
@@ -40,7 +40,7 @@ namespace Gnosis.Metadata
             get { return location; }
         }
 
-        public IContentType Type
+        public IMediaType Type
         {
             get { return type; }
         }
@@ -70,12 +70,12 @@ namespace Gnosis.Metadata
             get { return number; }
         }
 
-        public static IdentityInfo GetDefault(IContentType type)
+        public static IdentityInfo GetDefault(IMediaType type)
         {    
             return new IdentityInfo(Guid.Empty.ToUrn(), type, "Unknown", string.Empty, DateTime.MinValue, DateTime.MaxValue, 0);
         }
 
-        public static IdentityInfo GetNew(IContentType type)
+        public static IdentityInfo GetNew(IMediaType type)
         {
             return new IdentityInfo(Guid.NewGuid().ToUrn(), type, "Unknown", string.Empty, DateTime.MinValue, DateTime.MaxValue, 0);
         }

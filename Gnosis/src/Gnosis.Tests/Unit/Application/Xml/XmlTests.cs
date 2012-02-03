@@ -24,11 +24,11 @@ namespace Gnosis.Tests.Unit.Application.Xml
         public XmlDocuments()
         {
             logger = new Gnosis.Utilities.DebugLogger();
-            contentTypeFactory = new ContentTypeFactory(logger);
+            mediaFactory = new MediaFactory(logger);
         }
 
         private ILogger logger;
-        private IContentTypeFactory contentTypeFactory;
+        private IMediaFactory mediaFactory;
 
         private void MakeArsXmlAssertions(IXmlElement xml)
         {

@@ -8,7 +8,7 @@ namespace Gnosis.Application.Vendor
     public class MicrosoftShortcut
         : IApplication
     {
-        public MicrosoftShortcut(Uri location, IContentType type)
+        public MicrosoftShortcut(Uri location, IMediaType type)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
@@ -20,14 +20,14 @@ namespace Gnosis.Application.Vendor
         }
 
         private readonly Uri location;
-        private readonly IContentType type;
+        private readonly IMediaType type;
 
         public Uri Location
         {
             get { return location; }
         }
 
-        public IContentType Type
+        public IMediaType Type
         {
             get { return type; }
         }

@@ -8,7 +8,7 @@ namespace Gnosis.Image
     public class PngImage
         : ImageBase
     {
-        public PngImage(Uri location, IContentType mediaType)
+        public PngImage(Uri location, IMediaType mediaType)
             : base(location, mediaType)
         {
         }
