@@ -69,7 +69,7 @@ namespace Gnosis.Metadata
 
         public static IUser GetAdministrator(IMediaFactory mediaFactory)
         {
-            return new User(mediaFactory.GetTypeByCode("vnd.gnosis.user"), "Administrator", Guid.Empty.ToUrn(), Guid.Empty.ToUrn());
+            return new User(new MediaType("vnd.gnosis.user"), "Administrator", Guid.Empty.ToUrn(), Guid.Empty.ToUrn());
         }
     }
 }

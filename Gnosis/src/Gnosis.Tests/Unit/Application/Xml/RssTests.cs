@@ -158,12 +158,10 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var contentType = mediaFactory.GetTypeByLocation(location);
-            Assert.AreEqual("application/rss+xml", contentType.Name);
-
+            
             var document = XmlElement.Parse(location);
             Assert.IsNotNull(document);
-
+            
             var feed = document.Root as IRssFeed;
 
             Assert.IsNotNull(feed);
@@ -171,6 +169,10 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.AreEqual(version, feed.Version);
             Assert.IsNotNull(document.Declaration);
             Assert.AreEqual("iso-8859-1", document.Declaration.Encoding);
+
+            var media = mediaFactory.Create(location);
+            Assert.IsNotNull(media);
+            Assert.AreEqual("application/rss+xml", media.Type.Name);
         }
 
         [Test]
@@ -183,8 +185,6 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var contentType = mediaFactory.GetTypeByLocation(location);
-            Assert.AreEqual("application/rss+xml", contentType.Name);
 
             var document = XmlElement.Parse(location);
             Assert.IsNotNull(document);
@@ -193,6 +193,9 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsNotNull(feed);
             Assert.IsNotNull(feed.Channel);
             Assert.AreEqual(version, feed.Version);
+
+            var media = mediaFactory.Create(location);
+            Assert.AreEqual("application/rss+xml", media.Type.Name);
         }
 
         [Test]
@@ -205,9 +208,7 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var contentType = mediaFactory.GetTypeByLocation(location);
-            Assert.AreEqual("application/rss+xml", contentType.Name);
-
+            
             var document = XmlElement.Parse(location);
             Assert.IsNotNull(document);
 
@@ -215,6 +216,9 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsNotNull(feed);
             Assert.IsNotNull(feed.Channel);
             Assert.AreEqual(version, feed.Version);
+
+            var media = mediaFactory.Create(location);
+            Assert.AreEqual("application/rss+xml", media.Type.Name);
         }
 
         [Test]
@@ -225,11 +229,12 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
             
             var location = new Uri(fileInfo.FullName);
-            var contentType = mediaFactory.GetTypeByLocation(location);
-            Assert.AreEqual("application/rss+xml", contentType.Name);
-
+            
             var document = XmlElement.Parse(location);
             Assert.IsNotNull(document);
+
+            var media = mediaFactory.Create(location);
+            Assert.AreEqual("application/rss+xml", media.Type.Name);
 
             MakeRssFeedAssertions(document);
         }
@@ -242,14 +247,15 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var contentType = mediaFactory.GetTypeByLocation(location);
-            Assert.AreEqual("application/rss+xml", contentType.Name);
-
+            
             var original = XmlElement.Parse(location);
             Assert.IsNotNull(original);
 
             var xmlString = original.ToString();
             Assert.IsNotNull(xmlString);
+
+            var media = mediaFactory.Create(location);
+            Assert.AreEqual("application/rss+xml", media.Type.Name);
 
             var document = XmlElement.Parse(xmlString);
 

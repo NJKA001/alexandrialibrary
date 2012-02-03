@@ -377,7 +377,7 @@ namespace Gnosis.Data.SQLite
             var catalog = record.GetUri("Catalog");
             var catalogName = record.GetString("CatalogName");
             var target = record.GetUri("Target");
-            var targetType = record.GetStringLookup<IMediaType>("TargetType", code => mediaFactory.GetTypeByCode(code));
+            var targetType = record.GetStringLookup<IMediaType>("TargetType", targetTypeName => new MediaType(targetTypeName));
             var user = record.GetUri("User");
             var userName = record.GetString("UserName");
             var thumbnail = record.GetUri("Thumbnail");

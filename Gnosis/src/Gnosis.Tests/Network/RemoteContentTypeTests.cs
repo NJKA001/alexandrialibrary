@@ -23,24 +23,24 @@ namespace Gnosis.Tests.Network
         public void CanBeParsedForRssFeedsWithInvalidContentType()
         {
             var location = new Uri("http://feeds.arstechnica.com/arstechnica/index");
-            var contentType = mediaFactory.GetTypeByLocation(location);
-            Assert.IsNotNull(contentType);
-            Assert.AreNotEqual(mediaFactory.DefaultType, contentType);
-            Assert.AreEqual("application/rss+xml", contentType.Name);
-            Assert.AreEqual("UTF-8", contentType.CharSet);
-            Assert.IsNull(contentType.Boundary);
+            var media = mediaFactory.Create(location);
+            Assert.IsNotNull(media);
+            Assert.AreNotEqual(mediaFactory.Default.Type, media.Type);
+            Assert.AreEqual("application/rss+xml", media.Type.Name);
+            Assert.AreEqual("UTF-8", media.Type.CharSet);
+            Assert.IsNull(media.Type.Boundary);
         }
 
         [Test]
         public void CanBeParsedForAtomFeeds()
         {
             var location = new Uri("http://www.blogger.com/feeds/8677504/posts/default");
-            var contentType = mediaFactory.GetTypeByLocation(location);
-            Assert.IsNotNull(contentType);
-            Assert.AreNotEqual(mediaFactory.DefaultType, contentType);
-            Assert.AreEqual("application/atom+xml", contentType.Name);
-            Assert.AreEqual("UTF-8", contentType.CharSet);
-            Assert.IsNull(contentType.Boundary);
+            var media = mediaFactory.Create(location);
+            Assert.IsNotNull(media);
+            Assert.AreNotEqual(mediaFactory.Default.Type, media.Type);
+            Assert.AreEqual("application/atom+xml", media.Type.Name);
+            Assert.AreEqual("UTF-8", media.Type.CharSet);
+            Assert.IsNull(media.Type.Boundary);
         }
     }
 }

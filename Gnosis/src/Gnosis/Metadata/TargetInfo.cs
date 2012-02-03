@@ -33,7 +33,7 @@ namespace Gnosis.Metadata
 
         public static TargetInfo GetDefault(IMediaFactory mediaFactory)
         {
-            return new TargetInfo(Guid.Empty.ToUrn(), mediaFactory.DefaultType);
+            return new TargetInfo(Guid.Empty.ToUrn(), mediaFactory.Default.Type);
         }
     }
 }

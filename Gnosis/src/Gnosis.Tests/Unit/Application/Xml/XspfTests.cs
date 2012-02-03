@@ -34,13 +34,12 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var contentType = mediaFactory.GetTypeByLocation(location);
-            Assert.AreEqual("application/xspf+xml", contentType.Name);
 
             var document = mediaFactory.Create(location) as IXmlDocument;
             Assert.IsNotNull(document);
             Assert.IsNull(document.Xml);
-            
+            Assert.AreEqual("application/xspf+xml", document.Type.Name);
+
             document.Load();
             Assert.IsNotNull(document.Xml);
             Assert.IsNotNull(document.Xml.Root);

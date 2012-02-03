@@ -222,12 +222,13 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var contentType = mediaFactory.GetTypeByLocation(location);
-            Assert.AreEqual("application/atom+xml", contentType.Name);
 
             var original = XmlElement.Parse(location);
             var xmlString = original.ToString();
             Assert.IsNotNull(xmlString);
+
+            var media = mediaFactory.Create(location);
+            Assert.AreEqual("application/atom+xml", media.Type.Name);
 
             var document = XmlElement.Parse(xmlString);
             //var xml = new XmlDocument();
@@ -269,8 +270,9 @@ namespace Gnosis.Tests.Unit.Application.Xml
             Assert.IsTrue(fileInfo.Exists);
 
             var location = new Uri(fileInfo.FullName);
-            var contentType = mediaFactory.GetTypeByLocation(location);
-            Assert.AreEqual("application/atom+xml", contentType.Name);
+
+            var media = mediaFactory.Create(location);
+            Assert.AreEqual("application/atom+xml", media.Type.Name);
 
             var document = XmlElement.Parse(location);
 

@@ -32,6 +32,7 @@ namespace Gnosis
             this.logger = logger;
 
             defaultType = new MediaType(defaultMediaType);
+            defaultMedia = new UnknownApplication(Guid.Empty.ToUrn(), defaultType);
 
             InitializeFileExtensions();
             InitializeMagicNumbers();
@@ -40,8 +41,10 @@ namespace Gnosis
 
         private readonly ILogger logger;
         private readonly IMediaType defaultType;
+        private readonly IMedia defaultMedia;
 
         private readonly IDictionary<string, IList<string>> byFileExtension = new Dictionary<string, IList<string>>();
+        private readonly IDictionary<string, string> byLegacyMediaType = new Dictionary<string, string>();
         private readonly IDictionary<byte[], string> byMagicNumber = new Dictionary<byte[], string>();
         private readonly IDictionary<string, Func<Uri, IMediaType, IMedia>> createFunctions = new Dictionary<string, Func<Uri, IMediaType, IMedia>>();
 
@@ -453,29 +456,12 @@ namespace Gnosis
                 : Enumerable.Empty<string>();
         }
 
-        public IMediaType DefaultType
+        private IMediaType DefaultType
         {
             get { return defaultType; }
         }
 
-        public IMedia Create(Uri location)
-        {
-            if (location == null)
-                throw new ArgumentNullException("location");
-
-            var type = GetTypeByLocation(location);
-            if (type == null)
-                throw new InvalidOperationException("Could not determine type for URL: " + location);
-
-            var key = type.Name.ToLower();
-
-            if (!createFunctions.ContainsKey(key))
-                throw new InvalidOperationException("Cannot create media for type: " + key);
-
-            return createFunctions[key](location, type);
-        }
-
-        public IMediaType GetTypeByCode(string code)
+        private IMediaType GetTypeByCode(string code)
         {
             if (code == null)
                 throw new ArgumentNullException("code");
@@ -511,7 +497,7 @@ namespace Gnosis
             return new MediaType(name, charSet, boundary);
         }
 
-        public IMediaType GetTypeByLocation(Uri location)
+        private IMediaType GetTypeByLocation(Uri location)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
@@ -635,6 +621,28 @@ namespace Gnosis
             }
         }
 
+        public IMedia Default
+        {
+            get { return defaultMedia; }
+        }
+
+        public IMedia Create(Uri location)
+        {
+            if (location == null)
+                throw new ArgumentNullException("location");
+
+            var type = GetTypeByLocation(location);
+            if (type == null)
+                throw new InvalidOperationException("Could not determine type for URL: " + location);
+
+            var key = type.Name.ToLower();
+
+            if (!createFunctions.ContainsKey(key))
+                throw new InvalidOperationException("Cannot create media for type: " + key);
+
+            return createFunctions[key](location, type);
+        }
+
         public void MapCreateFunction(string mediaType, Func<Uri, IMediaType, IMedia> createFunction)
         {
             if (mediaType == null)
@@ -662,6 +670,14 @@ namespace Gnosis
                 else
                     byFileExtension[fileExtension].Add(mediaType);
             }
+        }
+
+        public void MapLegacyMediaTypes(string mediaType, IEnumerable<string> legacyMediaTypes)
+        {
+            if (mediaType == null)
+                throw new ArgumentNullException("mediaType");
+            if (legacyMediaTypes == null)
+                throw new ArgumentNullException("legacyMediaTypes");
         }
 
         public void MapMagicNumbers(string mediaType, byte[] magicNumbers)

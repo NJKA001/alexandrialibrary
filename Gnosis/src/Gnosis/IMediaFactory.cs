@@ -7,15 +7,13 @@ namespace Gnosis
 {
     public interface IMediaFactory
     {
-        IMediaType DefaultType { get; }
-
-        IMediaType GetTypeByCode(string code);
-        IMediaType GetTypeByLocation(Uri location);
+        IMedia Default { get; }
         
         IMedia Create(Uri location);
 
         void MapCreateFunction(string mediaType, Func<Uri, IMediaType, IMedia> createFunction);
         void MapFileExtensions(string mediaType, IEnumerable<string> fileExtensions);
+        void MapLegacyMediaTypes(string mediaType, IEnumerable<string> legacyMediaTypes);
         void MapMagicNumbers(string mediaType, byte[] magicNumbers);
     }
 }
