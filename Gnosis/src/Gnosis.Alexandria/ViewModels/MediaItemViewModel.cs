@@ -129,7 +129,7 @@ namespace Gnosis.Alexandria.ViewModels
             get { return item.Target; }
         }
 
-        public IMediaType TargetType
+        public string TargetType
         {
             get { return item.TargetType; }
         }

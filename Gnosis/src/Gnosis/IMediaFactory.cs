@@ -10,6 +10,7 @@ namespace Gnosis
         IMedia Default { get; }
         
         IMedia Create(Uri location);
+        IMediaType GetMediaType(string name);
 
         void MapCreateFunction(string mediaType, Func<Uri, IMediaType, IMedia> createFunction);
         void MapFileExtensions(string mediaType, IEnumerable<string> fileExtensions);

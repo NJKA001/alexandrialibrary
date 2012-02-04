@@ -643,6 +643,14 @@ namespace Gnosis
             return createFunctions[key](location, type);
         }
 
+        public IMediaType GetMediaType(string name)
+        {
+            if (name == null)
+                throw new ArgumentNullException("name");
+
+            return GetTypeByCode(name);
+        }
+
         public void MapCreateFunction(string mediaType, Func<Uri, IMediaType, IMedia> createFunction)
         {
             if (mediaType == null)

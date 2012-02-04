@@ -7,7 +7,7 @@ namespace Gnosis.Metadata
 {
     public struct TargetInfo
     {
-        public TargetInfo(Uri location, IMediaType type)
+        public TargetInfo(Uri location, string type)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
@@ -19,21 +19,18 @@ namespace Gnosis.Metadata
         }
 
         private Uri location;
-        private IMediaType type;
+        private string type;
 
         public Uri Location
         {
             get { return location; }
         }
 
-        public IMediaType Type
+        public string Type
         {
             get { return type; }
         }
 
-        public static TargetInfo GetDefault(IMediaFactory mediaFactory)
-        {
-            return new TargetInfo(Guid.Empty.ToUrn(), mediaFactory.Default.Type);
-        }
+        public static readonly TargetInfo Default = new TargetInfo(Guid.Empty.ToUrn(), "application/unknown");
     }
 }

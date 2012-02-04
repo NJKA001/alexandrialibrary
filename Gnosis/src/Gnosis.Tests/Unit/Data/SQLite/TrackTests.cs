@@ -23,8 +23,8 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             logger = new DebugLogger();
             mediaFactory = new MediaFactory(logger);
             securityContext = new SecurityContext(mediaFactory);
-            mediaType = new MediaType("application/vnd.gnosis.track");
-            mpegAudioType = new MediaType("audio/mp3");
+            mediaType = mediaFactory.GetMediaType("application/vnd.gnosis.track");
+            mpegAudioType = "audio/mp3";
 
             track1 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Paranoid Android", string.Empty, DateTime.MinValue, DateTime.MaxValue, 2), new SizeInfo(TimeSpan.FromSeconds(220), 0, 0), new CreatorInfo(new Uri(radioheadUrn), "Radiohead"), new CatalogInfo(new Uri(okComputerUrn), "OK Computer"), new TargetInfo(new Uri("file:///audio/radiohead/paranoid_android.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image1.jpg"), new byte[0]));
             track2 = new Track(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Sober", string.Empty, DateTime.MinValue, DateTime.MaxValue, 4), new SizeInfo(TimeSpan.FromSeconds(306), 0, 0), new CreatorInfo(Guid.NewGuid().ToUrn(), "Tool"), new CatalogInfo(Guid.NewGuid().ToUrn(), "Undertow"), new TargetInfo(new Uri("file:///audio/tool/sober.mp3"), mpegAudioType), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image2.jpg"), new byte[0]));
@@ -49,7 +49,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected readonly IDbConnection connection;
         protected readonly IMediaItemRepository repository;
         protected readonly IMediaType mediaType;
-        protected readonly IMediaType mpegAudioType;
+        protected readonly string mpegAudioType;
         protected readonly Uri unknownLocation = Guid.Empty.ToUrn();
 
         private const string radioheadUrn = "urn:uuid:27A19456-E6E9-463F-951D-98BB44356C65";

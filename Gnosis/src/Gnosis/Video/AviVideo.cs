@@ -58,7 +58,7 @@ namespace Gnosis.Video
             var builder = new MediaItemBuilder<IClip>(securityContext, mediaFactory)
                 .Identity(name, summary, date, date, number)
                 .Size(duration, height, width)
-                .Target(Location, Type);
+                .Target(Location, Type.Name);
 
             return builder.ToMediaItem();
         }

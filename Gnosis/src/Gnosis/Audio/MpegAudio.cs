@@ -172,7 +172,7 @@ namespace Gnosis.Audio
                     .Identity("Unknown", string.Empty)
                     .Creator(artist.Location, artist.Name)
                     .Catalog(album.Location, album.Name)
-                    .Target(Location, Type);
+                    .Target(Location, Type.Name);
 
                 return builder.ToMediaItem();
             }
@@ -215,7 +215,7 @@ namespace Gnosis.Audio
                 .Size(duration)
                 .Creator(artist.Location, artist.Name)
                 .Catalog(album.Location, album.Name)
-                .Target(Location, Type)
+                .Target(Location, Type.Name)
                 .Thumbnail(thumbnail, thumbnailData);
 
             return fullBuilder.ToMediaItem();

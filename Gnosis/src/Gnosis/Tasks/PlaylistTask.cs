@@ -101,13 +101,13 @@ namespace Gnosis.Tasks
         {
             if (Item.Target != null && Item.TargetType != null)
             {
-                if (Item.TargetType.Name.StartsWith("audio/"))
+                if (Item.TargetType.StartsWith("audio/"))
                 {
                     LoadAudioStream(Item.Target);
                     PlayAudioStream();
                     UpdateAudioProgress();
                 }
-                else if (Item.TargetType.Name.StartsWith("video/"))
+                else if (Item.TargetType.StartsWith("video/"))
                 {
                     if (videoPlayer.PlaybackState != PlaybackState.Playing)
                     {
@@ -128,7 +128,7 @@ namespace Gnosis.Tasks
         {
             if (Item.Target != null && Item.TargetType != null)
             {
-                if (Item.TargetType.Name.StartsWith("audio/"))
+                if (Item.TargetType.StartsWith("audio/"))
                 {
                     if (audioPlayer.CurrentAudioStream != null && audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing)
                     {
@@ -136,7 +136,7 @@ namespace Gnosis.Tasks
                         //audioPlayer.Pause();
                     }
                 }
-                else if (Item.TargetType.Name.StartsWith("video/"))
+                else if (Item.TargetType.StartsWith("video/"))
                 {
                     if (videoPlayer.PlaybackState == PlaybackState.Playing)
                     {
@@ -150,7 +150,7 @@ namespace Gnosis.Tasks
         {
             if (Item.Target != null && Item.TargetType != null)
             {
-                if (Item.TargetType.Name.StartsWith("audio/"))
+                if (Item.TargetType.StartsWith("audio/"))
                 {
                     if (audioPlayer.CurrentAudioStream != null && audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Paused)
                     {
@@ -158,7 +158,7 @@ namespace Gnosis.Tasks
                         audioPlayer.CurrentAudioStream.Resume();
                     }
                 }
-                else if (Item.TargetType.Name.StartsWith("video/"))
+                else if (Item.TargetType.StartsWith("video/"))
                 {
                     if (videoPlayer.PlaybackState == PlaybackState.Paused)
                     {
@@ -172,14 +172,14 @@ namespace Gnosis.Tasks
         {
             if (Item.Target != null && Item.TargetType != null)
             {
-                if (Item.TargetType.Name.StartsWith("audio/"))
+                if (Item.TargetType.StartsWith("audio/"))
                 {
                     if (audioPlayer.CurrentAudioStream != null && audioPlayer.CurrentAudioStream.PlaybackState != PlaybackState.Stopped)
                     {
                         audioPlayer.CurrentAudioStream.Stop();
                     }
                 }
-                else if (Item.TargetType.Name.StartsWith("video/"))
+                else if (Item.TargetType.StartsWith("video/"))
                 {
                     if (videoPlayer.PlaybackState != PlaybackState.Stopped)
                     {
@@ -215,7 +215,7 @@ namespace Gnosis.Tasks
             {
                 if (Item.Target != null && Item.TargetType != null)
                 {
-                    if (Item.TargetType.Name.StartsWith("audio/"))
+                    if (Item.TargetType.StartsWith("audio/"))
                     {
                         if (audioPlayer.CurrentAudioStream != null && !audioPlayer.SeekIsPending)
                         {
@@ -234,7 +234,7 @@ namespace Gnosis.Tasks
                             }
                         }
                     }
-                    else if (Item.TargetType.Name.StartsWith("video/"))
+                    else if (Item.TargetType.StartsWith("video/"))
                     {
                         if (videoPlayer.Elapsed > TimeSpan.Zero && videoPlayer.Elapsed == videoPlayer.Duration)
                         {
@@ -271,12 +271,12 @@ namespace Gnosis.Tasks
             {
                 if (Item.Target != null && Item.TargetType != null)
                 {
-                    if (Item.TargetType.Name.StartsWith("audio/"))
+                    if (Item.TargetType.StartsWith("audio/"))
                     {
                         LoadAudioStream(Item.Target);
                         PlayAudioStream();
                     }
-                    else if (Item.TargetType.Name.StartsWith("video/"))
+                    else if (Item.TargetType.StartsWith("video/"))
                     {
                         LoadVideoStream(Item.Target);
                         PlayVideoStream();
@@ -299,11 +299,11 @@ namespace Gnosis.Tasks
         {
             if (Item.TargetType != null)
             {
-                if (Item.TargetType.Name.StartsWith("audio/"))
+                if (Item.TargetType.StartsWith("audio/"))
                 {
                     return audioPlayer.CurrentAudioStream != null && audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing;
                 }
-                else if (Item.TargetType.Name.StartsWith("video/"))
+                else if (Item.TargetType.StartsWith("video/"))
                 {
                     return videoPlayer.PlaybackState == PlaybackState.Playing;
                 }
@@ -340,14 +340,14 @@ namespace Gnosis.Tasks
         {
             if (Item.TargetType != null)
             {
-                if (Item.TargetType.Name.StartsWith("audio/"))
+                if (Item.TargetType.StartsWith("audio/"))
                 {
                     if (audioPlayer.CurrentAudioStream != null)
                     {
                         audioPlayer.BeginSeek();
                     }
                 }
-                else if (Item.TargetType.Name.StartsWith("video/"))
+                else if (Item.TargetType.StartsWith("video/"))
                 {
                     //videoPlayer.BeginSeek();
                 }
@@ -358,14 +358,14 @@ namespace Gnosis.Tasks
         {
             if (Item.TargetType != null)
             {
-                if (Item.TargetType.Name.StartsWith("audio/"))
+                if (Item.TargetType.StartsWith("audio/"))
                 {
                     if (audioPlayer.CurrentAudioStream != null)
                     {
                         audioPlayer.Seek(value);
                     }
                 }
-                else if (Item.TargetType.Name.StartsWith("video/"))
+                else if (Item.TargetType.StartsWith("video/"))
                 {
                     //videoPlayer.Seek(value);
                 }

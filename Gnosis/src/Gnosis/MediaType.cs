@@ -8,17 +8,17 @@ namespace Gnosis
     public class MediaType
         : IMediaType
     {
-        public MediaType(string name)
+        protected internal MediaType(string name)
             : this(name, null, null)
         {
         }
 
-        public MediaType(string name, string charSet)
+        protected internal MediaType(string name, string charSet)
             : this(name, charSet, null)
         {
         }
 
-        public MediaType(string name, string charSet, string boundary)
+        protected internal MediaType(string name, string charSet, string boundary)
         {
             if (name == null)
                 throw new ArgumentNullException("name");

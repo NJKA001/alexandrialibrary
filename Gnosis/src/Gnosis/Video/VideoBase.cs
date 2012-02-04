@@ -231,7 +231,7 @@ namespace Gnosis.Video
                 .Size(duration, height, width)
                 .Creator(artist.Location, artist.Name)
                 .Catalog(album.Location, album.Name)
-                .Target(Location, Type);
+                .Target(Location, Type.Name);
 
             return builder.ToMediaItem();
         }

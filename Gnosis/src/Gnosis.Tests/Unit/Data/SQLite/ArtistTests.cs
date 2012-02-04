@@ -23,12 +23,12 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             logger = new DebugLogger();
             mediaFactory = new MediaFactory(logger);
             securityContext = new SecurityContext(mediaFactory);
-            mediaType = new MediaType("application/vnd.gnosis.artist");
+            mediaType = mediaFactory.GetMediaType("application/vnd.gnosis.artist");
 
-            artist1 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Radiohead", string.Empty, new DateTime(1985, 1, 2), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(mediaFactory), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image.jpg"), new byte[0]));
-            artist2 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Tool", string.Empty, new DateTime(1991, 2, 28), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(mediaFactory), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image2.jpg"), new byte[0]));
-            artist3 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Cat Power", string.Empty, new DateTime(1997, 10, 15), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(mediaFactory), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image3.jpg"), new byte[0]));
-            artist4 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "PJ Harvey", string.Empty, new DateTime(2011, 11, 11), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(mediaFactory), UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image4.jpg"), new byte[0]));
+            artist1 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Radiohead", string.Empty, new DateTime(1985, 1, 2), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image.jpg"), new byte[0]));
+            artist2 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Tool", string.Empty, new DateTime(1991, 2, 28), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image2.jpg"), new byte[0]));
+            artist3 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "Cat Power", string.Empty, new DateTime(1997, 10, 15), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image3.jpg"), new byte[0]));
+            artist4 = new Artist(new IdentityInfo(Guid.NewGuid().ToUrn(), mediaType, "PJ Harvey", string.Empty, new DateTime(2011, 11, 11), DateTime.MaxValue, 0), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, new ThumbnailInfo(new Uri("http://example.com/image4.jpg"), new byte[0]));
 
             connection = connectionFactory.Create(connectionString);
             connection.Open();

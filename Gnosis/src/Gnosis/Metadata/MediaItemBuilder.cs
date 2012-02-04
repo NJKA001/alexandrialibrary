@@ -37,7 +37,6 @@ namespace Gnosis.Metadata
             else
             {
                 this.identityInfo = IdentityInfo.GetDefault(GetMediaType());
-                this.targetInfo = TargetInfo.GetDefault(mediaFactory);
                 this.userInfo = securityContext.CurrentUserInfo;
             }
 
@@ -51,7 +50,7 @@ namespace Gnosis.Metadata
         private SizeInfo sizeInfo = SizeInfo.Default;
         private CreatorInfo creatorInfo = CreatorInfo.Default;
         private CatalogInfo catalogInfo = CatalogInfo.Default;
-        private TargetInfo targetInfo;
+        private TargetInfo targetInfo = TargetInfo.Default;
         private UserInfo userInfo;
         private ThumbnailInfo thumbnailInfo = ThumbnailInfo.Default;
         private Func<IdentityInfo, SizeInfo, CreatorInfo, CatalogInfo, TargetInfo, UserInfo, ThumbnailInfo, IMediaItem> createFunction;
@@ -158,7 +157,7 @@ namespace Gnosis.Metadata
             return this;
         }
 
-        public IMediaItemBuilder<T> Target(Uri target, IMediaType targetType)
+        public IMediaItemBuilder<T> Target(Uri target, string targetType)
         {
             targetInfo = new TargetInfo(target, targetType);
             return this;
@@ -178,7 +177,7 @@ namespace Gnosis.Metadata
 
         public T GetDefault()
         {
-            return (T)createFunction(IdentityInfo.GetDefault(GetMediaType()), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.GetDefault(mediaFactory), UserInfo.Default, ThumbnailInfo.Default);
+            return (T)createFunction(IdentityInfo.GetDefault(GetMediaType()), SizeInfo.Default, CreatorInfo.Default, CatalogInfo.Default, TargetInfo.Default, UserInfo.Default, ThumbnailInfo.Default);
         }
 
         public T ToMediaItem()

@@ -20,7 +20,7 @@ namespace Gnosis.Metadata
 
         IMediaItemBuilder<T> Catalog(Uri catalog, string catalogName);
 
-        IMediaItemBuilder<T> Target(Uri target, IMediaType targetType);
+        IMediaItemBuilder<T> Target(Uri target, string targetType);
 
         IMediaItemBuilder<T> User(Uri user, string userName);
 
