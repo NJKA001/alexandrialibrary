@@ -8,8 +8,8 @@ namespace Gnosis
     public interface IVideo
         : IMedia
     {
-        IArtist GetArtist(ISecurityContext securityContext, IMediaFactory mediaFactory, IMediaItemRepository mediaItemRepository);
-        IAlbum GetAlbum(ISecurityContext securityContext, IMediaFactory mediaFactory, IMediaItemRepository mediaItemRepository, IArtist artist);
-        IClip GetClip(ISecurityContext securityContext, IMediaFactory mediaFactory, IMediaItemRepository mediaItemRepository, IArtist artist, IAlbum album);
+        IArtist GetArtist(ISecurityContext securityContext, IMediaFactory mediaFactory, IMetadataRepository mediaItemRepository);
+        IAlbum GetAlbum(ISecurityContext securityContext, IMediaFactory mediaFactory, IMetadataRepository mediaItemRepository, IArtist artist);
+        IClip GetClip(ISecurityContext securityContext, IMediaFactory mediaFactory, IMetadataRepository mediaItemRepository, IArtist artist, IAlbum album);
     }
 }

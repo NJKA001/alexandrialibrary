@@ -10,9 +10,9 @@ using Gnosis.Alexandria.Controllers;
 namespace Gnosis.Alexandria.ViewModels
 {
     public abstract class MediaItemViewModel
-        : IMediaItemViewModel
+        : IMetadataViewModel
     {
-        protected MediaItemViewModel(IMediaItemController controller, IMediaItem item, string type, object icon)
+        protected MediaItemViewModel(IMetadataController controller, IMetadata item, string type, object icon)
         {
             if (controller == null)
                 throw new ArgumentNullException("controller");
@@ -29,8 +29,8 @@ namespace Gnosis.Alexandria.ViewModels
             this.icon = icon;
         }
 
-        protected readonly IMediaItemController controller;
-        protected readonly IMediaItem item;
+        protected readonly IMetadataController controller;
+        protected readonly IMetadata item;
         
         private readonly string type;
         private readonly object icon;

@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Controllers
 {
-    public interface IMediaItemController
+    public interface IMetadataController
     {
-        void UpdateThumbnail<T>(Uri id, Uri thumbnail, byte[] thumbnailData) where T : class, IMediaItem;
-        void UpdateSummary<T>(Uri id, string summary) where T : class, IMediaItem;
+        void UpdateThumbnail<T>(Uri id, Uri thumbnail, byte[] thumbnailData) where T : class, IMetadata;
+        void UpdateSummary<T>(Uri id, string summary) where T : class, IMetadata;
 
         IEnumerable<ILink> GetLinksBySource(Uri source);
         IEnumerable<ILink> GetLinksByTarget(Uri target);

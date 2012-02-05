@@ -32,7 +32,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
 
             connection = connectionFactory.Create(connectionString);
             connection.Open();
-            repository = new SQLiteMediaItemRepository(logger, securityContext, mediaFactory, connection);
+            repository = new SQLiteMetadataRepository(logger, securityContext, mediaFactory, connection);
             repository.Initialize();
             repository.Save(new List<IArtist> { artist1, artist2 });
         }
@@ -45,7 +45,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         protected readonly ISecurityContext securityContext;
         protected readonly IMediaFactory mediaFactory;
         protected readonly IDbConnection connection;
-        protected readonly IMediaItemRepository repository;
+        protected readonly IMetadataRepository repository;
         protected readonly IMediaType mediaType;
         protected readonly Uri unknownLocation = Guid.Empty.ToUrn();
 

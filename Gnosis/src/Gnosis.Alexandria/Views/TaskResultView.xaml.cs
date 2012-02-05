@@ -32,12 +32,12 @@ namespace Gnosis.Alexandria.Views
         private IMediaFactory mediaFactory;
         private ITaskController taskController;
         private ITagController tagController;
-        private IMediaItemController mediaItemController;
+        private IMetadataController mediaItemController;
         private IVideoPlayer videoPlayer;
 
         private readonly IDictionary<Guid, ITaskResultViewModel> tabMap = new Dictionary<Guid, ITaskResultViewModel>();
 
-        public void Initialize(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, IMediaItemController mediaItemController, ITaskController taskController, ITagController tagController, IVideoPlayer videoPlayer)
+        public void Initialize(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, IMetadataController mediaItemController, ITaskController taskController, ITagController tagController, IVideoPlayer videoPlayer)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -203,6 +203,41 @@ namespace Gnosis.Alexandria.Views
             catch (Exception ex)
             {
                 logger.Error("  TaskResultView.Playlist", ex);
+            }
+        }
+
+        public void MarqueeSearch(MetadataCategory category, string name, object icon)
+        {
+            if (name == null)
+                throw new ArgumentNullException("name");
+
+            try
+            {
+                var view = taskController.GetMarqueeView(category);
+                var description = string.Format("Browse: {0}", name);
+
+                var tabItem = new TabItem();
+                TextBlock header = new TextBlock();
+                header.Inlines.Add(name);
+                header.ToolTip = description;
+                tabItem.Header = header;
+
+                tabItem.Content = view;
+                resultControl.Items.Add(tabItem);
+                tabItem.IsSelected = true;
+
+                Action workFunction = () => view.RefreshItems();
+                var taskViewModel = new SimpleTaskViewModel(logger, workFunction, name, description, icon);
+                AddViewModel(taskViewModel, tabItem);
+
+                if (taskViewModel.Status == TaskStatus.Ready)
+                {
+                    taskViewModel.Start();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("  TaskResultView.MarqueeSearch", ex);
             }
         }
 

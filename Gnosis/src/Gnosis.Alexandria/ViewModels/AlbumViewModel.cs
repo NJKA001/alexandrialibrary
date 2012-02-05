@@ -14,7 +14,7 @@ namespace Gnosis.Alexandria.ViewModels
     public class AlbumViewModel
         : MediaItemViewModel, IAlbumViewModel
     {
-        public AlbumViewModel(IMediaItemController controller, IAlbum album)
+        public AlbumViewModel(IMetadataController controller, IAlbum album)
             : base(controller, album, "ALBUM", "pack://application:,,,/Images/cd.png")
         {
         }

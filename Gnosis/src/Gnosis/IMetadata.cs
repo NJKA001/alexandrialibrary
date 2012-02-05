@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis
 {
-    public interface IMediaItem
+    public interface IMetadata
         : IApplication
     {
         string Name { get; }

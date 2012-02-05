@@ -19,21 +19,6 @@
     </UserControl.Resources>
     <Grid>
         <ListBox x:Name="taskItemsControl" ItemContainerStyle="{StaticResource taskItemStyle}">
-            <ListBox.ContextMenu>
-                <ContextMenu>
-                    <MenuItem x:Name="catalogMenuItem" Header="Catalog..." Click="catalogMenuItem_Click">
-                        <MenuItem.Icon>
-                            <Image Source="{StaticResource sphinxIcon}" Width="16" Height="16"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <!--
-                    <MenuItem x:Name="searchMenuItem" Header="New Search Task" Click="searchMenuItem_Click">
-                        <MenuItem.Icon>
-                            <Image Source="{StaticResource eyeOfHorusIcon}" Width="16" Height="16"/>
-                        </MenuItem.Icon>
-                    </MenuItem>-->
-                </ContextMenu>
-            </ListBox.ContextMenu>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel x:Name="taskPanel" Orientation="Horizontal"/>

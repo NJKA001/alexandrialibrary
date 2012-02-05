@@ -113,7 +113,7 @@
     <Compile Include="Network\RemoteRssTests.cs" />
     <Compile Include="Performance\TagPerformanceTests.cs" />
     <Compile Include="Unit\Spiders\CatalogSpiderTests.cs" />
-    <Compile Include="Unit\Time\Rfc822DateTimeTests.cs" />
+    <Compile Include="Unit\Application\Xml\Rfc822DateTimeTests.cs" />
     <Compile Include="Unit\Application\Xml\RssTests.cs" />
     <Compile Include="Unit\Culture\ScriptTests.cs" />
     <Compile Include="Unit\Tags\TagTests.cs" />

@@ -90,11 +90,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SQLiteMediaMarqueeRepository.cs" />
+    <Compile Include="SQLiteMarqueeRepository.cs" />
     <Compile Include="SQLiteConnectionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLiteLinkRepository.cs" />
-    <Compile Include="SQLiteMediaItemRepository.cs" />
+    <Compile Include="SQLiteMetadataRepository.cs" />
     <Compile Include="SQLiteMediaRepository.cs" />
     <Compile Include="SQLiteRepositoryBase.cs" />
     <Compile Include="SQLiteTagRepository.cs" />

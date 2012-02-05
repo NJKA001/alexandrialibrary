@@ -41,17 +41,17 @@ namespace Gnosis.Audio
             return Enumerable.Empty<ITag>();
         }
 
-        public virtual IArtist GetArtist(ISecurityContext securityContext, IMediaFactory mediaFactory, IMediaItemRepository mediaItemRepository)
+        public virtual IArtist GetArtist(ISecurityContext securityContext, IMediaFactory mediaFactory, IMetadataRepository mediaItemRepository)
         {
             return null;
         }
 
-        public virtual IAlbum GetAlbum(ISecurityContext securityContext, IMediaFactory mediaFactory, IMediaItemRepository mediaItemRepository, IArtist artist)
+        public virtual IAlbum GetAlbum(ISecurityContext securityContext, IMediaFactory mediaFactory, IMetadataRepository mediaItemRepository, IArtist artist)
         {
             return null;
         }
 
-        public virtual ITrack GetTrack(ISecurityContext securityContext, IMediaFactory mediaFactory, IMediaItemRepository mediaItemRepository, IAudioStreamFactory audioStreamFactory, IArtist artist, IAlbum album)
+        public virtual ITrack GetTrack(ISecurityContext securityContext, IMediaFactory mediaFactory, IMetadataRepository mediaItemRepository, IAudioStreamFactory audioStreamFactory, IArtist artist, IAlbum album)
         {
             return null;
         }

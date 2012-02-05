@@ -38,7 +38,7 @@ namespace Gnosis.Tests.Unit.Spiders
         private ITagRepository tagRepository;
         private ILinkRepository linkRepository;
         private IMediaRepository mediaRepository;
-        private IMediaItemRepository mediaItemRepository;
+        private IMetadataRepository mediaItemRepository;
         private IAudioStreamFactory audioStreamFactory;
         private ITagTypeFactory tagTypeFactory = new TagTypeFactory();
         private IDbConnection linkConnection;
@@ -67,7 +67,7 @@ namespace Gnosis.Tests.Unit.Spiders
 
             itemConnection = connectionFactory.Create(connectionString);
             itemConnection.Open();
-            mediaItemRepository = new SQLiteMediaItemRepository(logger, securityContext, mediaFactory, itemConnection);
+            mediaItemRepository = new SQLiteMetadataRepository(logger, securityContext, mediaFactory, itemConnection);
             mediaItemRepository.Initialize();
 
             audioStreamFactory = new AudioStreamFactory();

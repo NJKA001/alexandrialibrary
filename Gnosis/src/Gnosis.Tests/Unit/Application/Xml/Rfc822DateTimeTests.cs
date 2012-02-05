@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Time;
+using Gnosis.Application.Xml.Rss;
 
 using NUnit.Framework;
 
-namespace Gnosis.Tests.Unit.Time
+namespace Gnosis.Tests.Unit.Application.Xml
 {
     [TestFixture]
     public class Rfc822DateTimes

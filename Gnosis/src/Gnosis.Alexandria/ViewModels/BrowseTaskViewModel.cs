@@ -15,31 +15,31 @@ namespace Gnosis.Alexandria.ViewModels
         {
         }
 
-        private static object GetIcon(MediaCategory category)
+        private static object GetIcon(MetadataCategory category)
         {
             switch (category)
             {
-                case MediaCategory.Album:
+                case MetadataCategory.Album:
                     return "pack://application:,,,/Images/scarab.gif";
-                case MediaCategory.Artist:
+                case MetadataCategory.Artist:
                     return "pack://application:,,,/Images/crown.png";
-                case MediaCategory.Clip:
+                case MetadataCategory.Clip:
                     return "pack://application:,,,/Images/eye_of_horus.jpg";
-                case MediaCategory.Doc:
+                case MetadataCategory.Doc:
                     return "pack://application:,,,/Images/scroll.gif";
-                case MediaCategory.Feed:
+                case MetadataCategory.Feed:
                     return "pack://application:,,,/Images/ouroboros.jpg";
-                case MediaCategory.Pic:
+                case MetadataCategory.Pic:
                     return "pack://application:,,,/Images/tablet.gif";
-                case MediaCategory.Playlist:
+                case MetadataCategory.Playlist:
                     return "pack://application:,,,/Images/hawk.gif";
-                case MediaCategory.Program:
+                case MetadataCategory.Program:
                     return "pack://application:,,,/Images/abacus.gif";
-                case MediaCategory.Track:
+                case MetadataCategory.Track:
                     return "pack://application:,,,/Images/lyre.jpg";
-                case MediaCategory.FeedItem:
-                case MediaCategory.PlaylistItem:
-                case MediaCategory.None:
+                case MetadataCategory.FeedItem:
+                case MetadataCategory.PlaylistItem:
+                case MetadataCategory.None:
                 default:
                     return "pack://application:,,,/Images/sphinx_circle.png";
             }    

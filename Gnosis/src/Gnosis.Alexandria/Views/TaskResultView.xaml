@@ -14,6 +14,6 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <TabControl x:Name="resultControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemContainerStyle="{StaticResource closableTabItemStyle}"/>
+        <TabControl x:Name="resultControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemContainerStyle="{StaticResource closableTabItemStyle}" Margin="4"/>
     </Grid>
 </UserControl>

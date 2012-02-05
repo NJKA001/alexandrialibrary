@@ -62,11 +62,8 @@ namespace Gnosis
                 return (DateTime)self;
 
             var date = DateTime.MinValue;
-            var s = self.ToString();
-            if (Time.Rfc822DateTime.TryParse(s, out date))
-                return date;
-
-            return DateTime.Parse(s);
+            DateTime.TryParse(self.ToString(), out date);
+            return date;
         }
 
         public static T ToEnum<T>(this object self)

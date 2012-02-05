@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Globalization;
 
-namespace Gnosis.Time
+namespace Gnosis.Application.Xml.Rss
 {
     /// <summary>
     /// Provides methods for converting <see cref="DateTime"/> structures 
@@ -331,5 +331,19 @@ namespace Gnosis.Time
             return wasConverted;
         }
         #endregion
+    }
+
+    public static class RssDateTimeExtensions
+    {
+
+        public static string ToRfc3339String(this DateTime self)
+        {
+            return self.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fff") + "Z";
+        }
+
+        public static string ToRfc822String(this DateTime self)
+        {
+            return Rfc822DateTime.ToString(self.ToUniversalTime());
+        }
     }
 }

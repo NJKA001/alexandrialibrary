@@ -58,8 +58,8 @@ namespace Gnosis.Alexandria.ViewModels
         void AddTrack(ITrackViewModel track);
         void AddClip(IClipViewModel clip);
 
-        void UpdateThumbnail(IMediaItemController controller, Uri thumbnail, byte[] thumbnailData);
-        void UpdateSummary(IMediaItemController controller, string summary);
+        void UpdateThumbnail(IMetadataController controller, Uri thumbnail, byte[] thumbnailData);
+        void UpdateSummary(IMetadataController controller, string summary);
 
         IPlaylistViewModel ToPlaylist(ISecurityContext securityContext, IMediaFactory mediaFactory);
     }

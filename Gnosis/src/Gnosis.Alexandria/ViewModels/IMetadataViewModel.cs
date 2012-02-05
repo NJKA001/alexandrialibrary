@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace Gnosis.Alexandria.ViewModels
 {
-    public interface IMediaItemViewModel
+    public interface IMetadataViewModel
         : INotifyPropertyChanged
     {
         string Type { get; }

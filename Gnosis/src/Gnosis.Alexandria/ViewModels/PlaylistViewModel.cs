@@ -17,7 +17,7 @@ namespace Gnosis.Alexandria.ViewModels
         //{
         //}
 
-        public PlaylistViewModel(IMediaItemController controller, IPlaylist playlist, IEnumerable<IPlaylistItemViewModel> playlistItems)
+        public PlaylistViewModel(IMetadataController controller, IPlaylist playlist, IEnumerable<IPlaylistItemViewModel> playlistItems)
             : base(controller, playlist, "PLAYLIST", GetIcon(playlist))
         {
             if (playlistItems == null)

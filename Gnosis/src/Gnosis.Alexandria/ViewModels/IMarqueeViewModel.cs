@@ -6,11 +6,11 @@ using System.Text;
 
 namespace Gnosis.Alexandria.ViewModels
 {
-    public interface IMediaMarqueeViewModel
+    public interface IMarqueeViewModel
         : INotifyPropertyChanged
     {
         Uri Location { get; }
-        MediaCategory Category { get; }
+        MetadataCategory Category { get; }
         string Name { get; }
         string Subtitle { get; }
 

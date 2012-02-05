@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis
+namespace Gnosis.Metadata
 {
-    public interface IMediaMarqueePage
+    public interface IMetadataPage
     {
-        IEnumerable<IMediaMarquee> Items { get; }
+        IEnumerable<IMetadata> Items { get; }
         int NumberOfPages { get; }
         int PageIndex { get; }
         int PageSize { get; }

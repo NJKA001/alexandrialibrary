@@ -19,6 +19,17 @@ namespace Gnosis.Alexandria.ViewModels.Commands
 
         protected override void DoExecute(ITaskController taskController, TaskResultView taskResultView)
         {
+            var dialog = new System.Windows.Forms.FolderBrowserDialog();
+            dialog.Description = "Select A Directory To Catalog";
+            dialog.ShowNewFolderButton = true;
+            dialog.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+            var result = dialog.ShowDialog();
+
+            if (result != System.Windows.Forms.DialogResult.OK)
+                return;
+
+            var catalogViewModel = taskController.GetCatalogViewModel(dialog.SelectedPath);
+            taskResultView.Catalog(catalogViewModel);
         }
     }
 }

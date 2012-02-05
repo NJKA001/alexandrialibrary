@@ -12,7 +12,7 @@ namespace Gnosis.Alexandria.ViewModels
     public class SearchResultViewModel
         : ISearchResultViewModel
     {
-        public SearchResultViewModel(IMediaItemViewModel item)
+        public SearchResultViewModel(IMetadataViewModel item)
         {
             if (item == null)
                 throw new ArgumentNullException("item");
@@ -29,7 +29,7 @@ namespace Gnosis.Alexandria.ViewModels
             feedItemsVisibility = item is IFeedItemContainerViewModel ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        protected readonly IMediaItemViewModel item;
+        protected readonly IMetadataViewModel item;
 
         private readonly Visibility artistsVisibility;
         private readonly Visibility albumsVisibility;
@@ -65,7 +65,7 @@ namespace Gnosis.Alexandria.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public IMediaItemViewModel Item
+        public IMetadataViewModel Item
         {
             get { return item; }
         }
@@ -333,7 +333,7 @@ namespace Gnosis.Alexandria.ViewModels
                 clipContainer.AddClip(clip);
         }
 
-        public void UpdateThumbnail(IMediaItemController controller, Uri thumbnail, byte[] thumbnailData)
+        public void UpdateThumbnail(IMetadataController controller, Uri thumbnail, byte[] thumbnailData)
         {
             if (thumbnailData != null && thumbnailData.Length > 0)
             {
@@ -362,7 +362,7 @@ namespace Gnosis.Alexandria.ViewModels
             }
         }
 
-        public void UpdateSummary(IMediaItemController controller, string summary)
+        public void UpdateSummary(IMetadataController controller, string summary)
         {
             if (summary == null)
                 throw new ArgumentNullException("summary");

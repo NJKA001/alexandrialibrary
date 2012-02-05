@@ -15,7 +15,7 @@ namespace Gnosis.Spiders
     public class CatalogSpider
         : ISpider
     {
-        public CatalogSpider(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IMediaItemRepository mediaItemRepository, IAudioStreamFactory audioStreamFactory)
+        public CatalogSpider(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaRepository mediaRepository, IMetadataRepository mediaItemRepository, IAudioStreamFactory audioStreamFactory)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -53,7 +53,7 @@ namespace Gnosis.Spiders
         private readonly ILinkRepository linkRepository;
         private readonly ITagRepository tagRepository;
         private readonly IMediaRepository mediaRepository;
-        private readonly IMediaItemRepository mediaItemRepository;
+        private readonly IMetadataRepository mediaItemRepository;
         private readonly IAudioStreamFactory audioStreamFactory;
 
         public TimeSpan Delay
@@ -87,7 +87,7 @@ namespace Gnosis.Spiders
             //    : null;
         }
 
-        private bool HasDefaultThumbnail(IMediaItem item)
+        private bool HasDefaultThumbnail(IMetadata item)
         {
             return (item.Thumbnail.IsEmptyUrn() || item.Thumbnail.ToString().EndsWith(".jpg.to/")) && item.ThumbnailData.Length == 0;
         }

@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis
 {
     public interface IDoc
-        : IMediaItem
+        : IMetadata
     {
     }
 }

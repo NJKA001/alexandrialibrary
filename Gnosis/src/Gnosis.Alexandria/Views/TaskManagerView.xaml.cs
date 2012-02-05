@@ -182,26 +182,6 @@ namespace Gnosis.Alexandria.Views
 
         }
 
-        private void catalogMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var dialog = new System.Windows.Forms.FolderBrowserDialog();
-                dialog.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
-                var result = dialog.ShowDialog();
-
-                if (result != System.Windows.Forms.DialogResult.OK)
-                    return;
-
-                var catalogViewModel = taskController.GetCatalogViewModel(dialog.SelectedPath);
-                taskResultView.Catalog(catalogViewModel);
-            }
-            catch (Exception ex)
-            {
-                logger.Error("  catalogMenuItem_Click", ex);
-            }
-        }
-
         private void elapsedSlider_DragStarted(object sender, DragStartedEventArgs e)
         {
             try
@@ -252,12 +232,6 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        private void AddDefaultMusicCatalogTask()
-        {
-            var catalogViewModel = taskController.GetCatalogViewModel(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic));
-            taskResultView.Catalog(catalogViewModel);
-        }
-
         public void Initialize(ILogger logger, ITaskController taskController, TaskResultView taskResultView)
         {
             if (logger == null)
@@ -274,8 +248,6 @@ namespace Gnosis.Alexandria.Views
                 this.taskResultView = taskResultView;
 
                 this.taskItemsControl.ItemsSource = taskController.Tasks;
-
-                AddDefaultMusicCatalogTask();
             }
             catch (Exception ex)
             {

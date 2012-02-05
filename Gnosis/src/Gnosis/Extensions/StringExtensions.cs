@@ -980,13 +980,6 @@ namespace Gnosis
             return result.ToString();
         }
 
-        public static DateTime ToRfc822DateTime(this string self)
-        {
-            var date = DateTime.MinValue;
-            Time.Rfc822DateTime.TryParse(self, out date);
-            return date;
-        }
-
         public static bool IsMixedAlphaNumeric(this string self)
         {
             if (self == null || self.Length < 2)

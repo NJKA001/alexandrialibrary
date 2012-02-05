@@ -13,7 +13,7 @@ namespace Gnosis.Alexandria.ViewModels
     public class ClipViewModel
         : MediaItemViewModel, IClipViewModel
     {
-        public ClipViewModel(IMediaItemController controller, IClip clip)
+        public ClipViewModel(IMetadataController controller, IClip clip)
             : base(controller, clip, GetType(clip), GetIcon(clip))
         {
         }

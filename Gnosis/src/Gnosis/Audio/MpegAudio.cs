@@ -102,7 +102,7 @@ namespace Gnosis.Audio
             return tags;
         }
 
-        public override IArtist GetArtist(ISecurityContext securityContext, IMediaFactory mediaFactory, IMediaItemRepository mediaItemRepository)
+        public override IArtist GetArtist(ISecurityContext securityContext, IMediaFactory mediaFactory, IMetadataRepository mediaItemRepository)
         {
             IArtist artist = null;
             var track = mediaItemRepository.GetByTarget<ITrack>(Location).FirstOrDefault();
@@ -128,7 +128,7 @@ namespace Gnosis.Audio
             return builder.ToMediaItem();
         }
 
-        public override IAlbum GetAlbum(ISecurityContext securityContext, IMediaFactory mediaFactory, IMediaItemRepository mediaItemRepository, IArtist artist)
+        public override IAlbum GetAlbum(ISecurityContext securityContext, IMediaFactory mediaFactory, IMetadataRepository mediaItemRepository, IArtist artist)
         {
             IAlbum album = null;
             var track = mediaItemRepository.GetByTarget<ITrack>(Location).FirstOrDefault();
@@ -157,7 +157,7 @@ namespace Gnosis.Audio
             return builder.ToMediaItem();
         }
 
-        public override ITrack GetTrack(ISecurityContext securityContext, IMediaFactory mediaFactory, IMediaItemRepository mediaItemRepository, IAudioStreamFactory audioStreamFactory, IArtist artist, IAlbum album)
+        public override ITrack GetTrack(ISecurityContext securityContext, IMediaFactory mediaFactory, IMetadataRepository mediaItemRepository, IAudioStreamFactory audioStreamFactory, IArtist artist, IAlbum album)
         {
             var track = mediaItemRepository.GetByTarget<ITrack>(Location).FirstOrDefault();
             //if (track != null)

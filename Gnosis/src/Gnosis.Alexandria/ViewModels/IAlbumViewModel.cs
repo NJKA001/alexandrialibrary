@@ -8,7 +8,7 @@ using Gnosis.Alexandria.Controllers;
 namespace Gnosis.Alexandria.ViewModels
 {
     public interface IAlbumViewModel
-        : IMediaItemViewModel, ITrackContainerViewModel, IClipContainerViewModel
+        : IMetadataViewModel, ITrackContainerViewModel, IClipContainerViewModel
     {
         IPlaylistViewModel ToPlaylist(ISecurityContext securityContext, IMediaFactory mediaFactory);
     }

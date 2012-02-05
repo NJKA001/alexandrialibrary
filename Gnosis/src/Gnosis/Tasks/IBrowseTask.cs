@@ -8,6 +8,6 @@ namespace Gnosis.Tasks
     public interface IBrowseTask
         : ITask
     {
-        MediaCategory Category { get; }
+        MetadataCategory Category { get; }
     }
 }

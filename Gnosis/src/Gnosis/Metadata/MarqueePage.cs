@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Gnosis.Metadata
 {
-    public class MediaMarqueePage
-        : IMediaMarqueePage
+    public class MarqueePage
+        : IMarqueePage
     {
-        public MediaMarqueePage(IEnumerable<IMediaMarquee> items, int numberOfPages, int pageIndex, int pageSize)
+        public MarqueePage(IEnumerable<IMarquee> items, int numberOfPages, int pageIndex, int pageSize)
         {
             if (items == null)
                 throw new ArgumentNullException("items");
@@ -25,12 +25,12 @@ namespace Gnosis.Metadata
             this.pageSize = pageSize;
         }
 
-        private readonly IEnumerable<IMediaMarquee> items;
+        private readonly IEnumerable<IMarquee> items;
         private readonly int numberOfPages;
         private readonly int pageIndex;
         private readonly int pageSize;
 
-        public IEnumerable<IMediaMarquee> Items
+        public IEnumerable<IMarquee> Items
         {
             get { return items; }
         }

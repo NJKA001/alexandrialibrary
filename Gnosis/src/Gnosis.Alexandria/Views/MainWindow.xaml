@@ -5,7 +5,7 @@
         Title="Alexandria" Height="640" Width="720" MinHeight="524" MinWidth="554" Icon="pack://application:,,,/App.ico">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="32"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -13,12 +13,10 @@
             <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <!--<Expander Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" ExpandDirection="Left" IsExpanded="True" Header="Commands">-->
-            <local:CommandView x:Name="commandView" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"/>
-        <!--</Expander>-->
-        <local:SearchView x:Name="searchView" Grid.Row="0" Grid.Column="1"/>
-        <local:TaskResultView x:Name="taskResultView" Grid.Row="1" Grid.Column="1"/>
-        <Expander Grid.Row="2" Grid.Column="1" ExpandDirection="Up" IsExpanded="True" Header="Tasks">
+        <local:CommandView x:Name="commandView" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Margin="4"/>
+        <local:SearchView x:Name="searchView" Grid.Row="0" Grid.Column="1" Margin="4 4 4 0"/>
+        <local:TaskResultView x:Name="taskResultView" Grid.Row="1" Grid.Column="1" Margin="4 0 4 4"/>
+        <Expander Grid.Row="2" Grid.Column="1" Margin="4" ExpandDirection="Up" IsExpanded="True" Header="Tasks">
             <local:TaskManagerView x:Name="taskManagerView" Height="248"/>
         </Expander>
     </Grid>

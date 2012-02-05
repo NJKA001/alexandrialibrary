@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Tasks
 {
     public interface ISearchTask
-        : ITask<IMediaItem>
+        : ITask<IMetadata>
     {
         SearchFilters Filters { get; set; }
 

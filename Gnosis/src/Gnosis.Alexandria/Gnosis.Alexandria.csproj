@@ -72,10 +72,12 @@
     <Compile Include="Controllers\CommandController.cs" />
     <Compile Include="Controllers\ICatalogController.cs" />
     <Compile Include="Controllers\ICommandController.cs" />
-    <Compile Include="Controllers\IMediaItemController.cs" />
+    <Compile Include="Controllers\IMarqueeController.cs" />
+    <Compile Include="Controllers\IMetadataController.cs" />
     <Compile Include="Controllers\IPlaylistController.cs" />
     <Compile Include="Controllers\ISecurityController.cs" />
     <Compile Include="Controllers\ITagController.cs" />
+    <Compile Include="Controllers\MarqueeController.cs" />
     <Compile Include="Controllers\MediaItemController.cs" />
     <Compile Include="Controllers\PlaylistController.cs" />
     <Compile Include="Controllers\SpiderFactory.cs" />
@@ -88,9 +90,11 @@
     <Compile Include="ViewModels\ArtistViewModel.cs" />
     <Compile Include="ViewModels\CatalogMediaTaskViewModel.cs" />
     <Compile Include="ViewModels\ClipViewModel.cs" />
+    <Compile Include="ViewModels\Commands\AlbumCommandViewModel.cs" />
     <Compile Include="ViewModels\Commands\ArtistCommandViewModel.cs" />
     <Compile Include="ViewModels\Commands\CatalogCommandViewModel.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
+    <Compile Include="ViewModels\SimpleTaskViewModel.cs" />
     <Compile Include="ViewModels\IAlbumContainerViewModel.cs" />
     <Compile Include="ViewModels\IAlbumViewModel.cs" />
     <Compile Include="ViewModels\IArtistContainerViewModel.cs" />
@@ -103,13 +107,13 @@
     <Compile Include="ViewModels\IFeedItemViewModel.cs" />
     <Compile Include="ViewModels\IFeedViewModel.cs" />
     <Compile Include="ViewModels\ILinkViewModel.cs" />
-    <Compile Include="ViewModels\IMediaMarqueeViewModel.cs" />
+    <Compile Include="ViewModels\IMarqueeViewModel.cs" />
     <Compile Include="ViewModels\IPlayableViewModel.cs" />
     <Compile Include="ViewModels\IPlaylistContainerViewModel.cs" />
     <Compile Include="ViewModels\IPlaylistItemContainerViewModel.cs" />
     <Compile Include="ViewModels\IPlaylistItemViewModel.cs" />
     <Compile Include="ViewModels\IPlaylistViewModel.cs" />
-    <Compile Include="ViewModels\IMediaItemViewModel.cs" />
+    <Compile Include="ViewModels\IMetadataViewModel.cs" />
     <Compile Include="ViewModels\ISearchResultViewModel.cs" />
     <Compile Include="ViewModels\ITagViewModel.cs" />
     <Compile Include="ViewModels\ITaskDetailViewModel.cs" />
@@ -118,7 +122,7 @@
     <Compile Include="ViewModels\ITrackViewModel.cs" />
     <Compile Include="ViewModels\LinkViewModel.cs" />
     <Compile Include="ViewModels\MediaItemViewModel.cs" />
-    <Compile Include="ViewModels\MediaMarqueeViewModel.cs" />
+    <Compile Include="ViewModels\MarqueeViewModel.cs" />
     <Compile Include="ViewModels\PlaylistItemViewModel.cs" />
     <Compile Include="ViewModels\PlaylistTaskViewModel.cs" />
     <Compile Include="ViewModels\PlaylistViewModel.cs" />
@@ -141,8 +145,11 @@
       <DependentUpon>HoveringCloseIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ListBoxBehavior.cs" />
-    <Compile Include="Views\MediaMarqueeView.xaml.cs">
-      <DependentUpon>MediaMarqueeView.xaml</DependentUpon>
+    <Compile Include="Views\MarqueeView.xaml.cs">
+      <DependentUpon>MarqueeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PageControl.xaml.cs">
+      <DependentUpon>PageControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PlaylistView.xaml.cs">
       <DependentUpon>PlaylistView.xaml</DependentUpon>
@@ -216,7 +223,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\MediaMarqueeView.xaml">
+    <Page Include="Views\MarqueeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

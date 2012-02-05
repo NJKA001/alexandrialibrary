@@ -8,9 +8,9 @@ using Gnosis.Algorithms;
 namespace Gnosis.Tasks
 {
     public class SearchTask
-        : TaskBase<IMediaItem>, ISearchTask
+        : TaskBase<IMetadata>, ISearchTask
     {
-        public SearchTask(ILogger logger, string pattern, IMediaItemRepository mediaItemRepository)
+        public SearchTask(ILogger logger, string pattern, IMetadataRepository mediaItemRepository)
             : base(logger)
         {
             if (pattern == null)
@@ -30,7 +30,7 @@ namespace Gnosis.Tasks
         private string pattern;
         private string americanized;
 
-        private readonly IMediaItemRepository mediaItemRepository;
+        private readonly IMetadataRepository mediaItemRepository;
 
         private bool IncludeAlbums { get { return (filters & SearchFilters.Albums) == SearchFilters.Albums; } }
         private bool IncludeArtists { get { return (filters & SearchFilters.Artists) == SearchFilters.Artists; } }

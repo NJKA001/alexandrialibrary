@@ -13,7 +13,7 @@ namespace Gnosis.Alexandria.ViewModels
     public class PlaylistItemViewModel
         : MediaItemViewModel, IPlaylistItemViewModel
     {
-        public PlaylistItemViewModel(IMediaItemController controller, IPlaylistItem playlistItem)
+        public PlaylistItemViewModel(IMetadataController controller, IPlaylistItem playlistItem)
             : base(controller, playlistItem, "PLAYLIST ITEM", "pack://application:,,,/Images/play-simple.png")
         {
         }

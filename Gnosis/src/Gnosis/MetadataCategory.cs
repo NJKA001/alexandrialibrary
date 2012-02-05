@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis
 {
-    public enum MediaCategory
+    public enum MetadataCategory
     {
         None = 0,
         Album = 100,

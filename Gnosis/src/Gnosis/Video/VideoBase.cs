@@ -168,7 +168,7 @@ namespace Gnosis.Video
             return Enumerable.Empty<ITag>();
         }
 
-        public virtual IArtist GetArtist(ISecurityContext securityContext, IMediaFactory mediaFactory, IMediaItemRepository mediaItemRepository)
+        public virtual IArtist GetArtist(ISecurityContext securityContext, IMediaFactory mediaFactory, IMetadataRepository mediaItemRepository)
         {
             var clip = mediaItemRepository.GetByTarget<IClip>(Location).FirstOrDefault();
             if (clip != null)
@@ -181,7 +181,7 @@ namespace Gnosis.Video
             return new MediaItemBuilder<IArtist>(securityContext, mediaFactory).GetDefault();
         }
 
-        public virtual IAlbum GetAlbum(ISecurityContext securityContext, IMediaFactory mediaFactory, IMediaItemRepository mediaItemRepository, IArtist artist)
+        public virtual IAlbum GetAlbum(ISecurityContext securityContext, IMediaFactory mediaFactory, IMetadataRepository mediaItemRepository, IArtist artist)
         {
             IAlbum album = null;
             var clip = mediaItemRepository.GetByTarget<IClip>(Location).FirstOrDefault();
@@ -210,7 +210,7 @@ namespace Gnosis.Video
             return builder.ToMediaItem();
         }
 
-        public virtual IClip GetClip(ISecurityContext securityContext, IMediaFactory mediaFactory, IMediaItemRepository mediaItemRepository, IArtist artist, IAlbum album)
+        public virtual IClip GetClip(ISecurityContext securityContext, IMediaFactory mediaFactory, IMetadataRepository mediaItemRepository, IArtist artist, IAlbum album)
         {
             var clip = mediaItemRepository.GetByTarget<IClip>(Location).FirstOrDefault();
             if (clip != null)

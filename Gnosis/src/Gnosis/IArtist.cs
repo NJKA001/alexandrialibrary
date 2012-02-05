@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis
 {
     public interface IArtist
-        : IMediaItem
+        : IMetadata
     {
     }
 }

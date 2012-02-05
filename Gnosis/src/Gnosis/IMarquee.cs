@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Gnosis
 {
-    public interface IMediaMarquee
+    public interface IMarquee
     {
         Uri Location { get; }
-        MediaCategory Category { get; }
+        MetadataCategory Category { get; }
         string Name { get; }
         string Subtitle { get; }
     }

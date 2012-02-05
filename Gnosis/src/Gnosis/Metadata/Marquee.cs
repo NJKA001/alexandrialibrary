@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Gnosis.Metadata
 {
-    public class MediaMarquee
-        : IMediaMarquee
+    public class Marquee
+        : IMarquee
     {
-        public MediaMarquee(Uri location, MediaCategory category, string name, string subtitle)
+        public Marquee(Uri location, MetadataCategory category, string name, string subtitle)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
@@ -23,17 +23,17 @@ namespace Gnosis.Metadata
             this.subtitle = subtitle;
         }
 
-        private readonly Uri location;
-        private readonly MediaCategory category;
-        private readonly string name;
-        private readonly string subtitle;
+        private Uri location;
+        private MetadataCategory category = MetadataCategory.None;
+        private string name;
+        private string subtitle;
 
         public Uri Location
         {
             get { return location; }
         }
 
-        public MediaCategory Category
+        public MetadataCategory Category
         {
             get { return category; }
         }

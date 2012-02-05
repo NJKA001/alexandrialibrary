@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Alexandria.ViewModels;
+using Gnosis.Alexandria.Views;
 using Gnosis.Audio;
 using Gnosis.Audio.Fmod;
 using Gnosis.Tasks;
@@ -14,7 +15,7 @@ namespace Gnosis.Alexandria.Controllers
     public class TaskController
         : ITaskController
     {
-        public TaskController(ILogger logger, IMediaFactory mediaFactory, IVideoPlayer videoPlayer, SpiderFactory spiderFactory, IMediaItemController mediaItemController, IMediaItemRepository mediaItemRepository)
+        public TaskController(ILogger logger, IMediaFactory mediaFactory, IVideoPlayer videoPlayer, SpiderFactory spiderFactory, IMetadataController metadataController, IMarqueeRepository marqueeRepository, IMetadataRepository mediaItemRepository)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -24,8 +25,10 @@ namespace Gnosis.Alexandria.Controllers
                 throw new ArgumentNullException("videoPlayer");
             if (spiderFactory == null)
                 throw new ArgumentNullException("spiderFactory");
-            if (mediaItemController == null)
-                throw new ArgumentNullException("mediaItemController");
+            if (metadataController == null)
+                throw new ArgumentNullException("metadataController");
+            if (marqueeRepository == null)
+                throw new ArgumentNullException("marqueeRepository");
             if (mediaItemRepository == null)
                 throw new ArgumentNullException("mediaItemRepository");
 
@@ -33,7 +36,8 @@ namespace Gnosis.Alexandria.Controllers
             this.mediaFactory = mediaFactory;
             this.videoPlayer = videoPlayer;
             this.spiderFactory = spiderFactory;
-            this.mediaItemController = mediaItemController;
+            this.metadataController = metadataController;
+            this.marqueeRepository = marqueeRepository;
             this.mediaItemRepository = mediaItemRepository;
             this.audioStreamFactory = new AudioStreamFactory();
         }
@@ -42,8 +46,9 @@ namespace Gnosis.Alexandria.Controllers
         private readonly IMediaFactory mediaFactory;
         private readonly IVideoPlayer videoPlayer;
         private readonly SpiderFactory spiderFactory;
-        private readonly IMediaItemController mediaItemController;
-        private readonly IMediaItemRepository mediaItemRepository;
+        private readonly IMetadataController metadataController;
+        private readonly IMarqueeRepository marqueeRepository;
+        private readonly IMetadataRepository mediaItemRepository;
         private readonly ObservableCollection<ITaskViewModel> taskViewModels = new ObservableCollection<ITaskViewModel>();
         private readonly IAudioStreamFactory audioStreamFactory;
 
@@ -104,6 +109,15 @@ namespace Gnosis.Alexandria.Controllers
             var pattern = search + "%";
             var task = new SearchTask(logger, pattern, mediaItemRepository);
             return new SearchTaskViewModel(logger, task, search);
+        }
+
+        public MarqueeView GetMarqueeView(MetadataCategory category)
+        {
+            var controller = new MarqueeController(logger, marqueeRepository, category);
+
+            var view = new MarqueeView();
+            view.Initialize(logger, controller);
+            return view;
         }
 
         public void AddTaskViewModel(ITaskViewModel taskViewModel)

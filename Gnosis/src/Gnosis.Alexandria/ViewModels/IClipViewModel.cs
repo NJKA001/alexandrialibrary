@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Alexandria.ViewModels
 {
     public interface IClipViewModel
-        : IMediaItemViewModel, IPlayableViewModel
+        : IMetadataViewModel, IPlayableViewModel
     {
     }
 }

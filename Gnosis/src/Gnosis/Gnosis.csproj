@@ -91,10 +91,10 @@
     <Compile Include="MediaFactory.cs" />
     <Compile Include="ICharacterSetFactory.cs" />
     <Compile Include="IMediaFactory.cs" />
-    <Compile Include="IMediaMarquee.cs" />
-    <Compile Include="IMediaMarqueePage.cs" />
-    <Compile Include="IMediaMarqueeRepository.cs" />
-    <Compile Include="MediaCategory.cs" />
+    <Compile Include="IMarquee.cs" />
+    <Compile Include="IMarqueePage.cs" />
+    <Compile Include="IMarqueeRepository.cs" />
+    <Compile Include="MetadataCategory.cs" />
     <Compile Include="MediaSupertype.cs" />
     <Compile Include="Metadata\Album.cs" />
     <Compile Include="Algorithms\Algorithm.cs" />
@@ -106,10 +106,11 @@
     <Compile Include="Metadata\FeedItem.cs" />
     <Compile Include="Application\Vendor\GnosisFilesystemDirectory.cs" />
     <Compile Include="Metadata\IMediaItemBuilder.cs" />
+    <Compile Include="Metadata\IMetadataPage.cs" />
+    <Compile Include="Metadata\Marquee.cs" />
     <Compile Include="Metadata\MediaItemBase.cs" />
     <Compile Include="Metadata\MediaItemBuilder.cs" />
-    <Compile Include="Metadata\MediaMarquee.cs" />
-    <Compile Include="Metadata\MediaMarqueePage.cs" />
+    <Compile Include="Metadata\MarqueePage.cs" />
     <Compile Include="Metadata\Pic.cs" />
     <Compile Include="Metadata\Playlist.cs" />
     <Compile Include="Metadata\PlaylistItem.cs" />
@@ -140,8 +141,8 @@
     <Compile Include="IClip.cs" />
     <Compile Include="IClipRepository.cs" />
     <Compile Include="IDoc.cs" />
-    <Compile Include="IMediaItem.cs" />
-    <Compile Include="IMediaItemRepository.cs" />
+    <Compile Include="IMetadata.cs" />
+    <Compile Include="IMetadataRepository.cs" />
     <Compile Include="IProgram.cs" />
     <Compile Include="IApplicationRunner.cs" />
     <Compile Include="IArtist.cs" />
@@ -197,7 +198,6 @@
     <Compile Include="Application\Xml\Xspf\XspfTrackList.cs" />
     <Compile Include="Application\Xml\Xspf\XspfTrackNum.cs" />
     <Compile Include="Extensions\ByteArrayExtensions.cs" />
-    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\DebugExtensions.cs" />
     <Compile Include="Extensions\CharExtensions.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
@@ -263,8 +263,6 @@
     <Compile Include="IPic.cs" />
     <Compile Include="IPlaylist.cs" />
     <Compile Include="ISpider.cs" />
-    <Compile Include="IMediaSummary.cs" />
-    <Compile Include="IMediaSummaryRepository.cs" />
     <Compile Include="ITagType.cs" />
     <Compile Include="ITagTypeFactory.cs" />
     <Compile Include="ITagFactory.cs" />
@@ -301,6 +299,7 @@
     <Compile Include="IAlgorithm.cs" />
     <Compile Include="ILink.cs" />
     <Compile Include="Tasks\CatalogMediaTask.cs" />
+    <Compile Include="Tasks\SimpleTask.cs" />
     <Compile Include="Tasks\IBrowseTask.cs" />
     <Compile Include="Tasks\ISearchTask.cs" />
     <Compile Include="Tasks\SearchFilters.cs" />
@@ -355,7 +354,7 @@
     <Compile Include="Tags\TagTypeFactory.cs" />
     <Compile Include="Tasks\TaskBase.cs" />
     <Compile Include="TaskStatus.cs" />
-    <Compile Include="Time\Rfc822DateTime.cs" />
+    <Compile Include="Application\Xml\Rss\Rfc822DateTime.cs" />
     <Compile Include="Application\Xml\Atom\AtomCommon.cs" />
     <Compile Include="Application\Xml\Atom\AtomLink.cs" />
     <Compile Include="Application\Xml\Atom\AtomTextType.cs" />

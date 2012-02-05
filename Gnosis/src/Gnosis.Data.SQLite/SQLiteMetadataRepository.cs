@@ -8,15 +8,15 @@ using Gnosis.Metadata;
 
 namespace Gnosis.Data.SQLite
 {
-    public class SQLiteMediaItemRepository
-        : SQLiteRepositoryBase, IMediaItemRepository
+    public class SQLiteMetadataRepository
+        : SQLiteRepositoryBase, IMetadataRepository
     {
-        public SQLiteMediaItemRepository(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory)
+        public SQLiteMetadataRepository(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory)
             : this(logger, securityContext, mediaFactory, null)
         {
         }
 
-        public SQLiteMediaItemRepository(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, IDbConnection defaultConnection)
+        public SQLiteMetadataRepository(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, IDbConnection defaultConnection)
             : base(logger, defaultConnection)
         {
             if (securityContext == null)
@@ -50,7 +50,7 @@ namespace Gnosis.Data.SQLite
         }
 
         private string GetTableName<T>()
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             return GetTableName(typeof(T));
         }
@@ -64,7 +64,7 @@ namespace Gnosis.Data.SQLite
         }
 
         private T BuildItem<T>(IdentityInfo identityInfo, SizeInfo sizeInfo, CreatorInfo creatorInfo, CatalogInfo catalogInfo, TargetInfo targetInfo, UserInfo userInfo, ThumbnailInfo thumbnailInfo)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             var builder = new MediaItemBuilder<T>(securityContext, mediaFactory)
                 .Identity(identityInfo.Name, identityInfo.Summary, identityInfo.FromDate, identityInfo.ToDate, identityInfo.Number, identityInfo.Location)
@@ -103,7 +103,7 @@ namespace Gnosis.Data.SQLite
             return builder;
         }
 
-        private IMediaItem GetDefaultItemByType(Type type)
+        private IMetadata GetDefaultItemByType(Type type)
         {
             if (type == null)
                 throw new ArgumentNullException("type");
@@ -145,13 +145,13 @@ namespace Gnosis.Data.SQLite
         }
 
         private T GetDefaultItem<T>()
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             return new MediaItemBuilder<T>(securityContext, mediaFactory).GetDefault();
         }
 
         private ICommandBuilder GetDeleteBuilder<T>(Uri location)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             var defaultItem = GetDefaultItem<T>();
 
@@ -166,7 +166,7 @@ namespace Gnosis.Data.SQLite
             return builder;
         }
 
-        private ICommandBuilder GetSaveBuilderByType(IMediaItem item, Type type)
+        private ICommandBuilder GetSaveBuilderByType(IMetadata item, Type type)
         {
             if (type == null)
                 throw new ArgumentNullException("type");
@@ -208,7 +208,7 @@ namespace Gnosis.Data.SQLite
         }
 
         private ICommandBuilder GetSaveBuilder<T>(T item)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             var tableName = GetTableName<T>();
 
@@ -245,7 +245,7 @@ namespace Gnosis.Data.SQLite
         }
 
         private ICommandBuilder GetSelectByLocationBuilder<T>(Uri location)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             var tableName = GetTableName<T>();
 
@@ -256,7 +256,7 @@ namespace Gnosis.Data.SQLite
         }
 
         private ICommandBuilder GetSelectByCatalogBuilder<T>(Uri catalog)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             var tableName = GetTableName<T>();
 
@@ -267,7 +267,7 @@ namespace Gnosis.Data.SQLite
         }
 
         private ICommandBuilder GetSelectByCreatorBuilder<T>(Uri creator)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             var tableName = GetTableName<T>();
 
@@ -278,7 +278,7 @@ namespace Gnosis.Data.SQLite
         }
 
         private ICommandBuilder GetSelectByCreatorAndNameBuilder<T>(Uri creator, string name)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             var tableName = GetTableName<T>();
 
@@ -290,7 +290,7 @@ namespace Gnosis.Data.SQLite
         }
 
         private ICommandBuilder GetSelectByNameBuilder<T>(string name)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             var tableName = GetTableName<T>();
 
@@ -301,7 +301,7 @@ namespace Gnosis.Data.SQLite
         }
 
         private ICommandBuilder GetSelectByTargetBuilder<T>(Uri target)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             var tableName = GetTableName<T>();
 
@@ -312,7 +312,7 @@ namespace Gnosis.Data.SQLite
         }
 
         private ICommandBuilder GetSelectByTagBuilder<T>(TagDomain domain, string pattern, IAlgorithm algorithm)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             var tableName = GetTableName<T>();
 
@@ -325,7 +325,7 @@ namespace Gnosis.Data.SQLite
         }
 
         private IEnumerable<T> GetItems<T>(ICommandBuilder builder)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             IDbConnection connection = null;
             var items = new List<T>();
@@ -355,7 +355,7 @@ namespace Gnosis.Data.SQLite
         }
 
         protected virtual T ReadItem<T>(IDataRecord record)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             var location = record.GetUri("Location");
 
@@ -421,7 +421,7 @@ namespace Gnosis.Data.SQLite
         }
 
         public void Save<T>(IEnumerable<T> items)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             if (items == null)
                 throw new ArgumentNullException("items");
@@ -446,7 +446,7 @@ namespace Gnosis.Data.SQLite
         }
 
         public void Delete<T>(IEnumerable<Uri> items)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             if (items == null)
                 throw new ArgumentNullException("items");
@@ -474,7 +474,7 @@ namespace Gnosis.Data.SQLite
         }
 
         public T GetByLocation<T>(Uri location)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             if (location == null)
                 throw new ArgumentNullException("location");
@@ -493,7 +493,7 @@ namespace Gnosis.Data.SQLite
         }
 
         public T GetByCreatorAndName<T>(Uri creator, string name)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             if (creator == null)
                 throw new ArgumentNullException("creator");
@@ -514,7 +514,7 @@ namespace Gnosis.Data.SQLite
         }
 
         public IEnumerable<T> GetByCatalog<T>(Uri catalog)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             if (catalog == null)
                 throw new ArgumentNullException("catalog");
@@ -533,7 +533,7 @@ namespace Gnosis.Data.SQLite
         }
 
         public IEnumerable<T> GetByCreator<T>(Uri creator)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             try
             {
@@ -549,7 +549,7 @@ namespace Gnosis.Data.SQLite
         }
 
         public IEnumerable<T> GetByName<T>(string name)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             try
             {
@@ -565,7 +565,7 @@ namespace Gnosis.Data.SQLite
         }
 
         public IEnumerable<T> GetByTarget<T>(Uri target)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             if (target == null)
                 throw new ArgumentNullException("target");
@@ -584,13 +584,13 @@ namespace Gnosis.Data.SQLite
         }
         
         public IEnumerable<T> GetByTag<T>(TagDomain domain, string pattern)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             return GetByTag<T>(domain, pattern, Algorithms.Algorithm.Default);
         }
 
         public IEnumerable<T> GetByTag<T>(TagDomain domain, string pattern, IAlgorithm algorithm)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             if (pattern == null)
                 throw new ArgumentNullException("pattern");

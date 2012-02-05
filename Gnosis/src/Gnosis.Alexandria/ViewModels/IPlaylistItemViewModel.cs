@@ -7,7 +7,7 @@ using System.Windows;
 namespace Gnosis.Alexandria.ViewModels
 {
     public interface IPlaylistItemViewModel
-        : IMediaItemViewModel, IPlayableViewModel
+        : IMetadataViewModel, IPlayableViewModel
     {
         TaskItem ToTaskItem();
     }

@@ -40,7 +40,7 @@ namespace Gnosis.Alexandria.Views
         private ILogger logger;
         private ISecurityContext securityContext;
         private IMediaFactory mediaFactory;
-        private IMediaItemController mediaItemController;
+        private IMetadataController mediaItemController;
         private ITaskController taskController;
         private ITagController tagController;
         private TaskResultView taskResultView;
@@ -446,7 +446,7 @@ namespace Gnosis.Alexandria.Views
             Dispatcher.Invoke(action, DispatcherPriority.DataBind);
         }
 
-        public void HandleSearchResult(IMediaItem result)
+        public void HandleSearchResult(IMetadata result)
         {
             try
             {
@@ -580,7 +580,7 @@ namespace Gnosis.Alexandria.Views
             get { return results; }
         }
 
-        public void Initialize(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, IMediaItemController mediaItemController, ITaskController taskController, ITagController tagController, TaskResultView taskResultView)
+        public void Initialize(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, IMetadataController mediaItemController, ITaskController taskController, ITagController tagController, TaskResultView taskResultView)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");

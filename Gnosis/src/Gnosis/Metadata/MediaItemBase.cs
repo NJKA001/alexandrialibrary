@@ -11,7 +11,7 @@ using Gnosis.Tags;
 namespace Gnosis.Metadata
 {
     public abstract class MediaItemBase
-        : IMediaItem
+        : IMetadata
     {
         protected MediaItemBase(IdentityInfo identityInfo, SizeInfo sizeInfo, CreatorInfo creatorInfo, CatalogInfo catalogInfo, TargetInfo targetInfo, UserInfo userInfo, ThumbnailInfo thumbnailInfo)
         {

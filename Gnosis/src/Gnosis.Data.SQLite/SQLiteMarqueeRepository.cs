@@ -8,20 +8,20 @@ using Gnosis.Metadata;
 
 namespace Gnosis.Data.SQLite
 {
-    public class SQLiteMediaMarqueeRepository
-        : SQLiteRepositoryBase, IMediaMarqueeRepository
+    public class SQLiteMarqueeRepository
+        : SQLiteRepositoryBase, IMarqueeRepository
     {
-        public SQLiteMediaMarqueeRepository(ILogger logger)
+        public SQLiteMarqueeRepository(ILogger logger)
             : base(logger)
         {
         }
 
-        public SQLiteMediaMarqueeRepository(ILogger logger, IDbConnection defaultConnection)
+        public SQLiteMarqueeRepository(ILogger logger, IDbConnection defaultConnection)
             : base(logger, defaultConnection)
         {
         }
 
-        private IMediaMarquee ReadRecord(IDataRecord record, MediaCategory category)
+        private IMarquee ReadRecord(IDataRecord record, MetadataCategory category)
         {
             var location = record.GetUri("Location");
             var name = record.GetString("Name");
@@ -39,10 +39,10 @@ namespace Gnosis.Data.SQLite
                 subtitle.Append(toDate.ToShortDateString());
             }
 
-            return new MediaMarquee(location, category, name, subtitle.ToString());
+            return new Marquee(location, category, name, subtitle.ToString());
         }
 
-        public IMediaMarqueePage GetMarqueePage(MediaCategory category, int pageIndex, int pageSize)
+        public IMarqueePage GetMarqueePage(MetadataCategory category, int pageIndex, int pageSize)
         {
             if (pageIndex < 0)
                 throw new ArgumentException("pageIndex cannot be less than 0");
@@ -52,10 +52,17 @@ namespace Gnosis.Data.SQLite
             var offset = pageIndex * pageSize;
 
             var countBuilder = new CommandBuilder();
+            countBuilder.AppendFormat("select count(Location) from {0};", category);
             var numberOfPages = 1;
             var scalar = ExecuteScalar(countBuilder);
             if (scalar != null)
-                int.TryParse(scalar.ToString(), out numberOfPages);
+            {
+                var result = 0;
+                if (int.TryParse(scalar.ToString(), out result) && result > 0)
+                {
+                    numberOfPages = (int)Math.Ceiling((double)result / (double)pageSize);
+                }
+            }
 
             var builder = new CommandBuilder();
             builder.AppendFormat("select Location, Name, FromDate, ToDate from {0} order by Name limit {1}", category, pageSize);
@@ -64,9 +71,9 @@ namespace Gnosis.Data.SQLite
             else
                 builder.Append(";");
 
-            var items = GetRecords<IMediaMarquee>(builder, record => ReadRecord(record, category));
+            var items = GetRecords<IMarquee>(builder, record => ReadRecord(record, category));
 
-            return new MediaMarqueePage(items, numberOfPages, pageIndex, pageSize);
+            return new MarqueePage(items, numberOfPages, pageIndex, pageSize);
         }
     }
 }

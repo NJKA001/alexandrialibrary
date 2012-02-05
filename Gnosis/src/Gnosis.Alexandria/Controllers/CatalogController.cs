@@ -11,7 +11,7 @@ namespace Gnosis.Alexandria.Controllers
     public class CatalogController
         : ICatalogController
     {
-        public CatalogController(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, IMediaRepository mediaRepository, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaItemRepository mediaItemRepository, IAudioStreamFactory audioStreamFactory)
+        public CatalogController(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, IMediaRepository mediaRepository, ILinkRepository linkRepository, ITagRepository tagRepository, IMetadataRepository mediaItemRepository, IAudioStreamFactory audioStreamFactory)
         {
             this.logger = logger;
             spider = new CatalogSpider(logger, securityContext, mediaFactory, linkRepository, tagRepository, mediaRepository, mediaItemRepository, audioStreamFactory);

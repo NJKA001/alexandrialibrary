@@ -7,7 +7,7 @@ using System.Text;
 namespace Gnosis.Alexandria.ViewModels
 {
     public interface IPlaylistViewModel
-        : IMediaItemViewModel, IPlaylistItemContainerViewModel
+        : IMetadataViewModel, IPlaylistItemContainerViewModel
     {
     }
 }

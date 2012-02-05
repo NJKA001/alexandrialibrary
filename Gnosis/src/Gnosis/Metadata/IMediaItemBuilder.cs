@@ -6,7 +6,7 @@ using System.Text;
 namespace Gnosis.Metadata
 {
     public interface IMediaItemBuilder<T>
-        where T : IMediaItem
+        where T : IMetadata
     {
         IMediaItemBuilder<T> Identity(string name, string summary);
         IMediaItemBuilder<T> Identity(string name, string summary, DateTime fromDate, DateTime toDate, uint number);

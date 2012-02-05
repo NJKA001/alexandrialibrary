@@ -39,7 +39,7 @@ namespace Gnosis.Video
             return tags;
         }
 
-        public override IClip GetClip(ISecurityContext securityContext, IMediaFactory mediaFactory, IMediaItemRepository mediaItemRepository, IArtist artist, IAlbum album)
+        public override IClip GetClip(ISecurityContext securityContext, IMediaFactory mediaFactory, IMetadataRepository mediaItemRepository, IArtist artist, IAlbum album)
         {
             var clip = mediaItemRepository.GetByTarget<IClip>(Location).FirstOrDefault();
             if (clip != null)

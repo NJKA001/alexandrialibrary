@@ -8,10 +8,10 @@ using Gnosis.Metadata;
 
 namespace Gnosis.Alexandria.ViewModels
 {
-    public class MediaMarqueeViewModel
-        : IMediaMarqueeViewModel
+    public class MarqueeViewModel
+        : IMarqueeViewModel
     {
-        public MediaMarqueeViewModel(IMediaMarquee marquee)
+        public MarqueeViewModel(IMarquee marquee)
         {
             if (marquee == null)
                 throw new ArgumentNullException("marquee");
@@ -23,9 +23,9 @@ namespace Gnosis.Alexandria.ViewModels
             this.subtitle = marquee.Subtitle;
         }
 
-        private IMediaMarquee marquee;
+        private IMarquee marquee;
         private Uri location;
-        private MediaCategory category;
+        private MetadataCategory category;
         private string name;
         private string subtitle;
         
@@ -42,7 +42,7 @@ namespace Gnosis.Alexandria.ViewModels
             get { return location; }
         }
 
-        public MediaCategory Category
+        public MetadataCategory Category
         {
             get { return category; }
         }

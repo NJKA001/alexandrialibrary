@@ -13,7 +13,7 @@ namespace Gnosis.Alexandria.ViewModels
     public class TrackViewModel
         : MediaItemViewModel, ITrackViewModel
     {
-        public TrackViewModel(IMediaItemController controller, ITrack track)
+        public TrackViewModel(IMetadataController controller, ITrack track)
             : base(controller, track, "TRACK", GetIcon(track))
         {
         }

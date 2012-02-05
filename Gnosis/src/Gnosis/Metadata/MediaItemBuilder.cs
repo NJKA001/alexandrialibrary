@@ -7,7 +7,7 @@ namespace Gnosis.Metadata
 {
     public class MediaItemBuilder<T>
         : IMediaItemBuilder<T>
-        where T : class, IMediaItem
+        where T : class, IMetadata
     {
         public MediaItemBuilder(ISecurityContext securityContext, IMediaFactory mediaFactory)
             : this(securityContext, mediaFactory, null)
@@ -53,7 +53,7 @@ namespace Gnosis.Metadata
         private TargetInfo targetInfo = TargetInfo.Default;
         private UserInfo userInfo;
         private ThumbnailInfo thumbnailInfo = ThumbnailInfo.Default;
-        private Func<IdentityInfo, SizeInfo, CreatorInfo, CatalogInfo, TargetInfo, UserInfo, ThumbnailInfo, IMediaItem> createFunction;
+        private Func<IdentityInfo, SizeInfo, CreatorInfo, CatalogInfo, TargetInfo, UserInfo, ThumbnailInfo, IMetadata> createFunction;
 
         private IMediaType GetMediaType()
         {

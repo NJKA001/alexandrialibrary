@@ -8,7 +8,7 @@ using Gnosis.Tasks;
 namespace Gnosis.Alexandria.ViewModels
 {
     public class SearchTaskViewModel
-        : TaskViewModel<IMediaItem>
+        : TaskViewModel<IMetadata>
     {
         public SearchTaskViewModel(ILogger logger, ISearchTask task, string search)
             : base(logger, task, "Search", search, "pack://application:,,,/Images/sphinx_circle.png")

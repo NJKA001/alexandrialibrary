@@ -9,9 +9,9 @@ using Gnosis.Metadata;
 namespace Gnosis.Alexandria.Controllers
 {
     public class MediaItemController
-        : IMediaItemController
+        : IMetadataController
     {
-        public MediaItemController(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMediaItemRepository mediaItemRepository)
+        public MediaItemController(ILogger logger, ISecurityContext securityContext, IMediaFactory mediaFactory, ILinkRepository linkRepository, ITagRepository tagRepository, IMetadataRepository mediaItemRepository)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -39,10 +39,10 @@ namespace Gnosis.Alexandria.Controllers
         private readonly IMediaFactory mediaFactory;
         private readonly ILinkRepository linkRepository;
         private readonly ITagRepository tagRepository;
-        private readonly IMediaItemRepository mediaItemRepository;
+        private readonly IMetadataRepository mediaItemRepository;
 
         public void UpdateThumbnail<T>(Uri id, Uri thumbnail, byte[] thumbnailData)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             if (id == null)
                 throw new ArgumentNullException("id");
@@ -135,7 +135,7 @@ namespace Gnosis.Alexandria.Controllers
         }
 
         public void UpdateSummary<T>(Uri id, string summary)
-            where T : class, IMediaItem
+            where T : class, IMetadata
         {
             if (id == null)
                 throw new ArgumentNullException("id");

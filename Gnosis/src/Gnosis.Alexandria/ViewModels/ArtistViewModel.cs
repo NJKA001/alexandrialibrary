@@ -12,7 +12,7 @@ namespace Gnosis.Alexandria.ViewModels
     public class ArtistViewModel
         : MediaItemViewModel, IArtistViewModel
     {
-        public ArtistViewModel(IMediaItemController controller, IArtist artist)
+        public ArtistViewModel(IMetadataController controller, IArtist artist)
             : base(controller, artist, "ARTIST", "pack://application:,,,/Images/artist.png")
         {
             var years = new StringBuilder();
