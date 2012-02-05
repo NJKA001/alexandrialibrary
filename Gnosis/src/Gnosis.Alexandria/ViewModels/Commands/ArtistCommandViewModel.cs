@@ -19,7 +19,7 @@ namespace Gnosis.Alexandria.ViewModels.Commands
 
         protected override void DoExecute(ITaskController taskController, TaskResultView taskResultView)
         {
-            taskResultView.MarqueeSearch(MetadataCategory.Artist, Name, Icon);
+            taskResultView.MarqueeBrowse(MetadataCategory.Artist, Name, Icon);
             //var viewModel = taskController.GetSearchViewModel(string.Empty);
             //viewModel.Filters = SearchFilters.Artists;
             //taskResultView.Search(viewModel);

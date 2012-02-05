@@ -206,7 +206,7 @@ namespace Gnosis.Alexandria.Views
             }
         }
 
-        public void MarqueeSearch(MetadataCategory category, string name, object icon)
+        public void MarqueeBrowse(MetadataCategory category, string name, object icon)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -237,7 +237,7 @@ namespace Gnosis.Alexandria.Views
             }
             catch (Exception ex)
             {
-                logger.Error("  TaskResultView.MarqueeSearch", ex);
+                logger.Error("  TaskResultView.MarqueeBrowse", ex);
             }
         }
 

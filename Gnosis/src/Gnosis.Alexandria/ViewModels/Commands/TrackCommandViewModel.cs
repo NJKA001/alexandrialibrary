@@ -8,17 +8,17 @@ using Gnosis.Alexandria.Views;
 
 namespace Gnosis.Alexandria.ViewModels.Commands
 {
-    public class AlbumCommandViewModel
+    public class TrackCommandViewModel
         : CommandViewModel
     {
-        public AlbumCommandViewModel()
-            : base("Albums", "Collections of media that artists have named and released", "pack://application:,,,/Images/scarab.gif")
+        public TrackCommandViewModel()
+            : base("Tracks", "Music, spoken word, sounds and other audio media", "pack://application:,,,/Images/lyre.jpg")
         {
         }
 
         protected override void DoExecute(ITaskController taskController, TaskResultView taskResultView)
         {
-            taskResultView.MarqueeBrowse(MetadataCategory.Album, Name, Icon);
+            taskResultView.MarqueeBrowse(MetadataCategory.Track, Name, Icon);
         }
     }
 }
