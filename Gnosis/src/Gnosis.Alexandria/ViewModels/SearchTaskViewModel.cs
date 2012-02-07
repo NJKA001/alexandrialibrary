@@ -11,12 +11,17 @@ namespace Gnosis.Alexandria.ViewModels
         : TaskViewModel<IMetadata>
     {
         public SearchTaskViewModel(ILogger logger, ISearchTask task, string search)
-            : base(logger, task, "Search", search, "pack://application:,,,/Images/sphinx_circle.png")
+            : base(logger, task, search, GetDescription(search), "pack://application:,,,/Images/sphinx_circle.png")
         {
             searchTask = task;
         }
 
         private readonly ISearchTask searchTask;
+
+        private static string GetDescription(string search)
+        {
+            return string.Format("Search: " + search);
+        }
 
         public SearchFilters Filters
         {

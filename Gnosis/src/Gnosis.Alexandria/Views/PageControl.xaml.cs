@@ -27,6 +27,8 @@ namespace Gnosis.Alexandria.Views
             InitializeComponent();
             numberOfPagesTextBlock.DataContext = this;
             pageIndexComboBox.DataContext = this;
+
+            Visibility = System.Windows.Visibility.Collapsed;
         }
 
         private readonly ObservableCollection<int> pages = new ObservableCollection<int>() { 1 };
@@ -95,6 +97,8 @@ namespace Gnosis.Alexandria.Views
                         for (var page = 1; page <= numberOfPages; page++)
                             pages.Add(page);
                     }
+
+                    Visibility = numberOfPages > 1 ? Visibility.Visible : Visibility.Collapsed;
                 }
             }
         }

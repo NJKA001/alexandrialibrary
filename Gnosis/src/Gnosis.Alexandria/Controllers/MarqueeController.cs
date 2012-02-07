@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Alexandria.ViewModels;
+
 namespace Gnosis.Alexandria.Controllers
 {
     public class MarqueeController
@@ -24,7 +26,7 @@ namespace Gnosis.Alexandria.Controllers
         private readonly ILogger logger;
         private readonly IMarqueeRepository repository;
         private readonly MetadataCategory category;
-        private readonly ObservableCollection<IMarquee> items = new ObservableCollection<IMarquee>();
+        private readonly ObservableCollection<IMarqueeViewModel> items = new ObservableCollection<IMarqueeViewModel>();
 
         private string filter;
         private int numberOfPages = 1;
@@ -61,7 +63,7 @@ namespace Gnosis.Alexandria.Controllers
             }
         }
 
-        public IEnumerable<IMarquee> GetItems()
+        public IEnumerable<IMarqueeViewModel> GetItems()
         {
             return string.IsNullOrEmpty(filter) ?
                 items
@@ -77,7 +79,7 @@ namespace Gnosis.Alexandria.Controllers
                 items.Clear();
 
                 foreach (var item in page.Items)
-                    items.Add(item);
+                    items.Add(new MarqueeViewModel(item));
             }
             catch (Exception ex)
             {

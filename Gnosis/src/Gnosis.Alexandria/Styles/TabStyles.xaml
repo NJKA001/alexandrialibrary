@@ -20,11 +20,11 @@
                         <Border Name="itemBorder" Background="White" BorderBrush="Black" BorderThickness="1 1 1 0" CornerRadius="4 4 0 0" >
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="80"/>
-                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <!--<ColumnDefinition Width="20"/>-->
                                 </Grid.ColumnDefinitions>
                                 <ContentPresenter x:Name="ContentSite" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12 2 12 2"/>
-                                <views:HoveringCloseIcon x:Name="tabCloseIcon" Grid.Column="1" IsClosed="{Binding IsClosed, Mode=TwoWay}"/>
+                                <!--<views:HoveringCloseIcon x:Name="tabCloseIcon" Grid.Column="1" IsClosed="{Binding IsClosed, Mode=TwoWay}"/>-->
                             </Grid>
                         </Border>
                     </Grid>

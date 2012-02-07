@@ -10,7 +10,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -22,12 +23,13 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Margin="4">
-                        <TextBlock Margin="4 0 4 4" Text="{Binding Name}" Background="LightGray"/>
-                        <TextBlock Margin="4 4 4 0" Text="{Binding Subtitle}" FontSize="10" Foreground="DarkGray"/>
+                        <TextBlock Margin="2" Text="{Binding Name}"/>
+                        <TextBlock Margin="2" Text="{Binding Subtitle}" FontSize="10" Foreground="DarkGray"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <views:PageControl x:Name="pageControl" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="4"/>
+        <views:SearchResultView x:Name="searchResultView" Grid.Row="3" Margin="4"/>
     </Grid>
 </UserControl>

@@ -59,11 +59,13 @@ namespace Gnosis.Alexandria.ViewModels
 
         private bool isSelected;
         private bool isCancelled;
+        private bool isInProgress;
 
         private void OnCancelled()
         {
             try
             {
+                isInProgress = false;
                 OnStatusChanged();
                 OnPropertyChanged("IsCancelled");
                 foreach (var callback in cancelCallbacks)
@@ -79,6 +81,7 @@ namespace Gnosis.Alexandria.ViewModels
         {
             try
             {
+                isInProgress = false;
                 OnStatusChanged();
                 foreach (var callback in stoppedCallbacks)
                     callback(this);
@@ -93,6 +96,7 @@ namespace Gnosis.Alexandria.ViewModels
         {
             try
             {
+                isInProgress = false;
                 OnStatusChanged();
             }
             catch (Exception ex)
@@ -169,6 +173,7 @@ namespace Gnosis.Alexandria.ViewModels
         {
             try
             {
+                isInProgress = true;
                 OnStatusChanged();
             }
             catch (Exception ex)
@@ -181,6 +186,7 @@ namespace Gnosis.Alexandria.ViewModels
         {
             try
             {
+                isInProgress = true;
                 OnStatusChanged();
 
                 foreach (var callback in startedCallbacks)
@@ -239,6 +245,7 @@ namespace Gnosis.Alexandria.ViewModels
             OnPropertyChanged("StopVisibility");
             OnPropertyChanged("PreviousVisibility");
             OnPropertyChanged("NextVisibility");
+            OnPropertyChanged("ProgressVisibility");
         }
 
         public Guid Id
@@ -338,9 +345,12 @@ namespace Gnosis.Alexandria.ViewModels
         {
             get
             {
-                return task.Item.Duration > TimeSpan.Zero ?
-                    Visibility.Collapsed 
-                    : Visibility.Visible;
+                if (task.Item.Duration > TimeSpan.Zero)
+                    return Visibility.Collapsed;
+                
+                return isInProgress ?
+                    Visibility.Visible
+                    : Visibility.Collapsed;
             }
         }
 

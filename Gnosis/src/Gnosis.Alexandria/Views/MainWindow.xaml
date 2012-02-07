@@ -16,8 +16,9 @@
         <local:CommandView x:Name="commandView" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Margin="4"/>
         <local:SearchView x:Name="searchView" Grid.Row="0" Grid.Column="1" Margin="4 4 4 0"/>
         <local:TaskResultView x:Name="taskResultView" Grid.Row="1" Grid.Column="1" Margin="4 0 4 4"/>
+        <!--
         <Expander Grid.Row="2" Grid.Column="1" Margin="4" ExpandDirection="Up" IsExpanded="True" Header="Tasks">
             <local:TaskManagerView x:Name="taskManagerView" Height="248"/>
-        </Expander>
+        </Expander>-->
     </Grid>
 </Window>

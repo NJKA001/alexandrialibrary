@@ -147,10 +147,10 @@ namespace Gnosis.Alexandria.Views
                     
                     var tabItem = new TabItem();
                     
-                    TextBlock header = new TextBlock();
-                    header.Inlines.Add(catalogViewModel.Name);
-                    header.ToolTip = catalogViewModel.Description;
-                    tabItem.Header = header;
+                    //TextBlock header = new TextBlock();
+                    //header.Inlines.Add(catalogViewModel.Name);
+                    //header.ToolTip = catalogViewModel.Description;
+                    tabItem.Header = new TaskHeader(logger, catalogViewModel);
                     
                     tabItem.Content = catalogResultView;
                     resultControl.Items.Add(tabItem);
@@ -183,10 +183,10 @@ namespace Gnosis.Alexandria.Views
 
                     var tabItem = new TabItem();
 
-                    TextBlock header = new TextBlock();
-                    header.Inlines.Add(taskViewModel.Description);
-                    header.ToolTip = string.Format("{0}: {1}", taskViewModel.Name, taskViewModel.Description);
-                    tabItem.Header = header;
+                    //TextBlock header = new TextBlock();
+                    //header.Inlines.Add(taskViewModel.Description);
+                    //header.ToolTip = string.Format("{0}: {1}", taskViewModel.Name, taskViewModel.Description);
+                    tabItem.Header = new TaskHeader(logger, taskViewModel);
 
                     tabItem.Content = playlistView;
                     resultControl.Items.Add(tabItem);
@@ -216,18 +216,20 @@ namespace Gnosis.Alexandria.Views
                 var view = taskController.GetMarqueeView(category);
                 var description = string.Format("Browse: {0}", name);
 
+                Action workFunction = () => view.RefreshItems();
+                var taskViewModel = new SimpleTaskViewModel(logger, workFunction, name, description, icon);
+
                 var tabItem = new TabItem();
-                TextBlock header = new TextBlock();
-                header.Inlines.Add(name);
-                header.ToolTip = description;
-                tabItem.Header = header;
+
+                //TextBlock header = new TextBlock();
+                //header.Inlines.Add(name);
+                //header.ToolTip = description;
+                tabItem.Header = new TaskHeader(logger, taskViewModel);
 
                 tabItem.Content = view;
                 resultControl.Items.Add(tabItem);
                 tabItem.IsSelected = true;
 
-                Action workFunction = () => view.RefreshItems();
-                var taskViewModel = new SimpleTaskViewModel(logger, workFunction, name, description, icon);
                 AddViewModel(taskViewModel, tabItem);
 
                 if (taskViewModel.Status == TaskStatus.Ready)
@@ -257,10 +259,10 @@ namespace Gnosis.Alexandria.Views
 
                     var tabItem = new TabItem();
 
-                    TextBlock header = new TextBlock();
-                    header.Inlines.Add(taskViewModel.Description);
-                    header.ToolTip = string.Format("{0}: {1}", taskViewModel.Name, taskViewModel.Description);
-                    tabItem.Header = header;
+                    //TextBlock header = new TextBlock();
+                    //header.Inlines.Add(taskViewModel.Description);
+                    //header.ToolTip = string.Format("{0}: {1}", taskViewModel.Name, taskViewModel.Description);
+                    tabItem.Header = new TaskHeader(logger, taskViewModel);
                     
                     tabItem.Content = searchResultView;
                     resultControl.Items.Add(tabItem);

@@ -11,7 +11,7 @@ namespace Gnosis.Alexandria.ViewModels
         : TaskViewModel<TaskItem>
     {
         public PlaylistTaskViewModel(ILogger logger, PlaylistTask task, string playlistName, object icon)
-            : base(logger, task, "Playlist", playlistName, GetIcon(icon))
+            : base(logger, task, playlistName, "Playlist", GetIcon(icon))
         {
             playlistTask = task;
         }

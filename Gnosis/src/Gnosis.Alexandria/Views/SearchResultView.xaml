@@ -256,11 +256,10 @@
                                             </Grid.ColumnDefinitions>
                                             <TextBlock Grid.Row="0" Grid.Column="0" Text="ID" Margin="4"/>
                                             <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Id}" Margin="4"/>
-                                            <!--
                                             <TextBlock Grid.Row="1" Grid.Column="0" Text="Target" Margin="4"/>
                                             <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Target}" Margin="4"/>
                                             <TextBlock Grid.Row="2" Grid.Column="0" Text="TargetType" Margin="4"/>
-                                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding TargetType}" Margin="4"/>-->
+                                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding TargetType}" Margin="4"/>
                                         </Grid>
                                     </TabItem>
                                 </TabControl>

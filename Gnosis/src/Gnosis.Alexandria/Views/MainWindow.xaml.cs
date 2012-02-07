@@ -78,7 +78,7 @@ namespace Gnosis.Alexandria.Views
                 commandController = new CommandController(logger);
 
                 taskResultView.Initialize(logger, securityContext, mediaFactory, metadataController, taskController, tagController, videoPlayer);
-                taskManagerView.Initialize(logger, taskController, taskResultView);
+                //taskManagerView.Initialize(logger, taskController, taskResultView);
                 searchView.Initialize(logger, taskController, taskResultView);
                 commandView.Initialize(logger, commandController, taskController, taskResultView);
 

@@ -39,6 +39,7 @@ namespace Gnosis.Tasks
             videoPlayer.AddPreviousItemCallback(() => PreviousItem());
             videoPlayer.AddNextItemCallback(() => NextItem());
 
+            AddCancelledCallback(() => StopCurrentStream());
             AddPausedCallback(() => PauseCurrentStream());
             AddResumedCallback(() => ResumeCurrentStream());
             AddStoppedCallback(() => StopCurrentStream());

@@ -11,13 +11,18 @@ namespace Gnosis.Alexandria.ViewModels
         : TaskViewModel
     {
         public CatalogMediaTaskViewModel(ILogger logger, CatalogMediaTask task)
-            : base(logger, task, "Catalog", GetDescription(task), "pack://application:,,,/Images/pyramid_black2.jpg")
+            : base(logger, task, GetName(task), GetDescription(task), "pack://application:,,,/Images/pyramid_black2.jpg")
         {
+        }
+
+        private static string GetName(CatalogMediaTask task)
+        {
+            return new System.IO.FileInfo(task.Target.LocalPath).FullName;
         }
 
         private static string GetDescription(CatalogMediaTask task)
         {
-            return new System.IO.FileInfo(task.Target.LocalPath).FullName;
+            return string.Format("Catalog: {0}", GetName(task));
         }
     }
 }

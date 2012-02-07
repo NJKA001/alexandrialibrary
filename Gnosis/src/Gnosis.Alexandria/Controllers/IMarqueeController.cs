@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Alexandria.ViewModels;
+
 namespace Gnosis.Alexandria.Controllers
 {
     public interface IMarqueeController
@@ -11,7 +13,7 @@ namespace Gnosis.Alexandria.Controllers
         int PageIndex { get; set; }
         int PageSize { get; set; }
 
-        IEnumerable<IMarquee> GetItems();
+        IEnumerable<IMarqueeViewModel> GetItems();
 
         void RefreshItems();
         void UpdateFilter(string filter);
