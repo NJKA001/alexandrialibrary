@@ -71,10 +71,6 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack, Version=1.4.0.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\HtmlAgilityPack\1.4.0\HtmlAgilityPack.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\lib\NUnit\NUnit-2.5.10.11092\bin\net-2.0\nunit.framework.dll</HintPath>
     </Reference>
@@ -126,9 +122,9 @@
       <Project>{3470F959-B781-459C-932A-EECA1B1429F8}</Project>
       <Name>Gnosis.Alexandria</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Gnosis.Application.Pdf.Ghostscript\Gnosis.Application.Pdf.Ghostscript.csproj">
+    <ProjectReference Include="..\Gnosis.Application.Ghostscript\Gnosis.Application.Ghostscript.csproj">
       <Project>{CF885E52-214A-402D-B6D9-1DD461DC47A3}</Project>
-      <Name>Gnosis.Application.Pdf.Ghostscript</Name>
+      <Name>Gnosis.Application.Ghostscript</Name>
     </ProjectReference>
     <ProjectReference Include="..\Gnosis.Data.SQLite\Gnosis.Data.SQLite.csproj">
       <Project>{38A3C867-546C-45A6-891F-E901FB855206}</Project>
@@ -142,9 +138,9 @@
       <Project>{822EDA39-22B0-494C-BFED-33EDC82EDE2F}</Project>
       <Name>Gnosis.Tags.TagLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Gnosis.Text.Html.HtmlAgility\Gnosis.Text.Html.HtmlAgility.csproj">
+    <ProjectReference Include="..\Gnosis.Text.HtmlAgility\Gnosis.Text.HtmlAgility.csproj">
       <Project>{56E3F598-4D55-4C04-B9C1-85E583A66860}</Project>
-      <Name>Gnosis.Text.Html.HtmlAgility</Name>
+      <Name>Gnosis.Text.HtmlAgility</Name>
     </ProjectReference>
     <ProjectReference Include="..\Gnosis.Video.Vlc\Gnosis.Video.Vlc.csproj">
       <Project>{5B68690D-78AC-48E1-ACC2-38999CCEDC06}</Project>

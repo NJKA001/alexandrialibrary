@@ -4,7 +4,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Xml.Xsl;
 
-namespace Gnosis.Text.Html.HtmlAgility
+namespace Gnosis.Text.HtmlAgility
 {
     public partial class HtmlWeb
     {

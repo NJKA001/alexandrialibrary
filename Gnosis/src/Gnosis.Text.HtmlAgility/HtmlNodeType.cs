@@ -1,5 +1,5 @@
 // HtmlAgilityPack V1.0 - Simon Mourier <simon underscore mourier at hotmail dot com>
-namespace Gnosis.Text.Html.HtmlAgility
+namespace Gnosis.Text.HtmlAgility
 {
     /// <summary>
     /// Represents the type of a node.

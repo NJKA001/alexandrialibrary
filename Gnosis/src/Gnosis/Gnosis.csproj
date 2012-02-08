@@ -596,7 +596,7 @@
       <Project>{822EDA39-22B0-494C-BFED-33EDC82EDE2F}</Project>
       <Name>Gnosis.Tags.TagLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Gnosis.Text.Html.HtmlAgility\Gnosis.Text.Html.HtmlAgility.csproj">
+    <ProjectReference Include="..\Gnosis.Text.HtmlAgility\Gnosis.Text.HtmlAgility.csproj">
       <Project>{56E3F598-4D55-4C04-B9C1-85E583A66860}</Project>
       <Name>Gnosis.Text.Html.HtmlAgility</Name>
     </ProjectReference>

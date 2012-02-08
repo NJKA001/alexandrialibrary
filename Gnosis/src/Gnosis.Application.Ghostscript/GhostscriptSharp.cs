@@ -2,7 +2,7 @@
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace Gnosis.Application.Pdf.Ghostscript
+namespace Gnosis.Application.Ghostscript
 {
     /// <summary>
     /// Wraps the Ghostscript API with a C# interface

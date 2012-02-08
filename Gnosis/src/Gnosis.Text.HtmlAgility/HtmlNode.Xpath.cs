@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.XPath;
 
-namespace Gnosis.Text.Html.HtmlAgility
+namespace Gnosis.Text.HtmlAgility
 {
     public partial class HtmlNode : IXPathNavigable
     {

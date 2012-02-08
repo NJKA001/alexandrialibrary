@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace Gnosis.Text.Html.HtmlAgility
+namespace Gnosis.Text.HtmlAgility
 {
     /// <summary>
     /// Represents a document with mixed code and text. ASP, ASPX, JSP, are good example of such documents.

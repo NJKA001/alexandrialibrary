@@ -2,7 +2,7 @@
 using System;
 using System.Text;
 
-namespace Gnosis.Text.Html.HtmlAgility
+namespace Gnosis.Text.HtmlAgility
 {
     internal class EncodingFoundException : Exception
     {

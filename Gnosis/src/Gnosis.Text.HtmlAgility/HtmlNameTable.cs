@@ -1,7 +1,7 @@
 // HtmlAgilityPack V1.0 - Simon Mourier <simon underscore mourier at hotmail dot com>
 using System.Xml;
 
-namespace Gnosis.Text.Html.HtmlAgility
+namespace Gnosis.Text.HtmlAgility
 {
     internal class HtmlNameTable : XmlNameTable
     {

@@ -15,9 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Video.Vlc", "Gnosis.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Tags.TagLib", "Gnosis.Tags.TagLib\Gnosis.Tags.TagLib.csproj", "{822EDA39-22B0-494C-BFED-33EDC82EDE2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Text.Html.HtmlAgility", "Gnosis.Text.Html.HtmlAgility\Gnosis.Text.Html.HtmlAgility.csproj", "{56E3F598-4D55-4C04-B9C1-85E583A66860}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Text.HtmlAgility", "Gnosis.Text.HtmlAgility\Gnosis.Text.HtmlAgility.csproj", "{56E3F598-4D55-4C04-B9C1-85E583A66860}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Application.Pdf.Ghostscript", "Gnosis.Application.Pdf.Ghostscript\Gnosis.Application.Pdf.Ghostscript.csproj", "{CF885E52-214A-402D-B6D9-1DD461DC47A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Application.Ghostscript", "Gnosis.Application.Ghostscript\Gnosis.Application.Ghostscript.csproj", "{CF885E52-214A-402D-B6D9-1DD461DC47A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

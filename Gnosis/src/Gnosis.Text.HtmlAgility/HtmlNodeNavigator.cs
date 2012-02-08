@@ -6,7 +6,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.XPath;
 
-namespace Gnosis.Text.Html.HtmlAgility
+namespace Gnosis.Text.HtmlAgility
 {
     /// <summary>
     /// Represents an HTML navigator on an HTML document seen as a data store.
@@ -750,7 +750,7 @@ namespace Gnosis.Text.Html.HtmlAgility
                 }
             }
            
-            Gnosis.Text.Html.HtmlAgility.Trace.WriteLine(string.Format("oid={0},n={1},a={2},v={3},{4}", GetHashCode(), nodename, _attindex, nodevalue, traceValue), "N!" + name);
+            Gnosis.Text.HtmlAgility.Trace.WriteLine(string.Format("oid={0},n={1},a={2},v={3},{4}", GetHashCode(), nodename, _attindex, nodevalue, traceValue), "N!" + name);
         }
 
         #endregion

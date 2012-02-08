@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Text.Html.HtmlAgility;
+using Gnosis.Text.HtmlAgility;
 
 namespace Gnosis.Application.Xml.Xhtml
 {

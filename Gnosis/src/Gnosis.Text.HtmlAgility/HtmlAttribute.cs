@@ -8,7 +8,7 @@ using System.Diagnostics;
 #endregion
 // ReSharper disable InconsistentNaming
 
-namespace Gnosis.Text.Html.HtmlAgility
+namespace Gnosis.Text.HtmlAgility
 {
     /// <summary>
     /// Represents an HTML attribute.

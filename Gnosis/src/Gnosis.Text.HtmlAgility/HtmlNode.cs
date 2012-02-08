@@ -6,7 +6,7 @@ using System.IO;
 using System.Xml;
 
 // ReSharper disable InconsistentNaming
-namespace Gnosis.Text.Html.HtmlAgility
+namespace Gnosis.Text.HtmlAgility
 {
     /// <summary>
     /// Represents an HTML node.

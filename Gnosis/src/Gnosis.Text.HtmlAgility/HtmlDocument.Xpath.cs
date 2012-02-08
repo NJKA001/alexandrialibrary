@@ -1,6 +1,6 @@
 ﻿using System.Xml.XPath;
 
-namespace Gnosis.Text.Html.HtmlAgility
+namespace Gnosis.Text.HtmlAgility
 {
     public partial class HtmlDocument : IXPathNavigable
     {

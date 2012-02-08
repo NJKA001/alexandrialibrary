@@ -14,7 +14,7 @@ using Microsoft.Win32;
 
 #endregion
 
-namespace Gnosis.Text.Html.HtmlAgility
+namespace Gnosis.Text.HtmlAgility
 {
 	/// <summary>
 	/// A utility class to get HTML document from HTTP.

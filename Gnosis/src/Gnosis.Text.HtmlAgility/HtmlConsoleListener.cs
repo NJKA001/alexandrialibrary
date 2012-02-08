@@ -2,7 +2,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Gnosis.Text.Html.HtmlAgility
+namespace Gnosis.Text.HtmlAgility
 {
     internal class HtmlConsoleListener : TraceListener
     {
