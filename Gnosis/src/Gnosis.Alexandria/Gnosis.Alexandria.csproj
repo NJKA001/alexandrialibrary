@@ -93,6 +93,7 @@
     <Compile Include="ViewModels\Commands\AlbumCommandViewModel.cs" />
     <Compile Include="ViewModels\Commands\ArtistCommandViewModel.cs" />
     <Compile Include="ViewModels\Commands\CatalogCommandViewModel.cs" />
+    <Compile Include="ViewModels\Commands\ClipCommandViewModel.cs" />
     <Compile Include="ViewModels\Commands\TrackCommandViewModel.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\SimpleTaskViewModel.cs" />

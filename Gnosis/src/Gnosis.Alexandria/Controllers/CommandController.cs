@@ -25,6 +25,7 @@ namespace Gnosis.Alexandria.Controllers
             commands.Add(new ArtistCommandViewModel());
             commands.Add(new AlbumCommandViewModel());
             commands.Add(new TrackCommandViewModel());
+            commands.Add(new ClipCommandViewModel());
 
             //commands.Add(new CommandViewModel("Catalogs", "Locate, identify, store and synchronize your media", "pack://application:,,,/Images/pyramid_black2.jpg"));
             //commands.Add(new CommandViewModel("Artists", "The individuals and groups who create and contribute to media", "pack://application:,,,/Images/crown.png"));
