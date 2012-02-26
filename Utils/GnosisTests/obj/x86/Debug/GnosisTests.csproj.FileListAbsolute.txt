@@ -1,0 +1,10 @@
+\\vmware-host\shared folders\documents\visual studio 2010\Projects\GnosisTests\GnosisTests\bin\Debug\GnosisTests.exe
+\\vmware-host\shared folders\documents\visual studio 2010\Projects\GnosisTests\GnosisTests\bin\Debug\GnosisTests.pdb
+\\vmware-host\shared folders\documents\visual studio 2010\Projects\GnosisTests\GnosisTests\obj\x86\Debug\ResolveAssemblyReference.cache
+\\vmware-host\shared folders\documents\visual studio 2010\Projects\GnosisTests\GnosisTests\obj\x86\Debug\GnosisTests.exe
+\\vmware-host\shared folders\documents\visual studio 2010\Projects\GnosisTests\GnosisTests\obj\x86\Debug\GnosisTests.pdb
+C:\dev\Test\GnosisTests\GnosisTests\obj\x86\Debug\GnosisTests.exe
+C:\dev\Test\GnosisTests\GnosisTests\obj\x86\Debug\GnosisTests.pdb
+C:\dev\Test\GnosisTests\GnosisTests\bin\Debug\GnosisTests.exe
+C:\dev\Test\GnosisTests\GnosisTests\bin\Debug\GnosisTests.pdb
+C:\dev\Test\GnosisTests\GnosisTests\obj\x86\Debug\ResolveAssemblyReference.cache
