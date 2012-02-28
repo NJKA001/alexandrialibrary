@@ -13,6 +13,6 @@ namespace GnosisTests.Entities
         public uint Artist;
         public byte Disc;
         public byte Number;
-        public short Duration;
+        public ushort Duration;
     }
 }

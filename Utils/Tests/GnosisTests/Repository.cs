@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 
 using GnosisTests.Entities;
+using GnosisTests.Serialization;
 
 namespace GnosisTests
 {
@@ -17,6 +18,10 @@ namespace GnosisTests
         private readonly IDictionary<uint, Artist> artistsById = new Dictionary<uint, Artist>();
         private readonly IDictionary<uint, Album> albumsById = new Dictionary<uint, Album>();
         private readonly IDictionary<uint, Track> tracksById = new Dictionary<uint, Track>();
+
+        private readonly ArtistSerializer artistSerializer = new ArtistSerializer();
+        private readonly AlbumSerializer albumSerializer = new AlbumSerializer();
+        private readonly TrackSerializer trackSerializer = new TrackSerializer();
 
         private const string createdLogFormat = "{0}-Created.txt";
         private const string deletedLogFormat = "{0}-Deleted.txt";
@@ -62,9 +67,9 @@ namespace GnosisTests
         public IEnumerable<Album> Albums { get { return albums; } }
         public IEnumerable<Track> Tracks { get { return tracks; } }
 
-        private void InitializeArtists()
+        private void InitializeEntity(string type, Action<string[]> action)
         {
-            var createdLog = string.Format(createdLogFormat, EntityType.Artist);
+            var createdLog = string.Format(createdLogFormat, type);
 
             if (File.Exists(createdLog))
             {
@@ -80,17 +85,18 @@ namespace GnosisTests
                             if (data == null || data.Length < 3)
                                 continue;
 
-                            //var art
+                            action(data);
                         }
                     }
                 }
             }
-
-
         }
 
         public void Initialize()
         {
+            InitializeEntity(EntityType.Artist, data => AddArtist(artistSerializer.Deserialize(data)));
+            InitializeEntity(EntityType.Album, data => AddAlbum(albumSerializer.Deserialize(data)));
+            InitializeEntity(EntityType.Track, data => AddTrack(trackSerializer.Deserialize(data)));
         }
 
         public void Persist()

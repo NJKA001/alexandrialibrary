@@ -51,7 +51,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Serialization\AlbumSerializer.cs" />
+    <Compile Include="Serialization\ArtistSerializer.cs" />
     <Compile Include="Serialization\SerializerBase.cs" />
+    <Compile Include="Serialization\TrackSerializer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
