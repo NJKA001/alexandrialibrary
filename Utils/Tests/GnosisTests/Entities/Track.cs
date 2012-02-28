@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GnosisTests.Entities
 {
-    public class TrackEntity
+    public class Track
     {
         public uint Id;
         public string Name;

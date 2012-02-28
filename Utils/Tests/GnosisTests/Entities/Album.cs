@@ -5,9 +5,12 @@ using System.Text;
 
 namespace GnosisTests.Entities
 {
-    public class ArtistEntity
+    public class Album
     {
         public uint Id;
         public string Name;
+        public uint Artist;
+        public ushort Year;
+        public ushort AlbumType;
     }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 
 using GnosisTests.Entities;
-using GnosisTests.Values;
 
 namespace GnosisTests
 {
@@ -18,16 +17,16 @@ namespace GnosisTests
             //1 Million Tracks = 200 MB
 
             var start = DateTime.Now;
-            var artistById = new Dictionary<uint, ArtistEntity>();
-            var artistByName = new Dictionary<string, ArtistEntity>();
-            var trackById = new Dictionary<uint, TrackEntity>();
-            var trackByName = new Dictionary<string, TrackEntity>();
+            var artistById = new Dictionary<uint, Artist>();
+            var artistByName = new Dictionary<string, Artist>();
+            var trackById = new Dictionary<uint, Track>();
+            var trackByName = new Dictionary<string, Track>();
 
             var nameToSearch = string.Empty;
 
             for (uint i = 1; i <= TOTAL; i++)
             {
-                var track = new TrackEntity() { Id = i, Album = 100, Artist = 200, Disc = 1, Number = 2, Duration = 300, Name = Guid.NewGuid().ToString().Replace('-', ' ') };
+                var track = new Track() { Id = i, Album = 100, Artist = 200, Disc = 1, Number = 2, Duration = 300, Name = Guid.NewGuid().ToString().Replace('-', ' ') };
                 if (i == TOTAL)
                     nameToSearch = track.Name;
                 //Console.WriteLine("{0:0000000} {1}", track.Id, track.Name);

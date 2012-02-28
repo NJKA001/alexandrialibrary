@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GnosisTests.Values
+namespace GnosisTests.Entities
 {
-    public struct ArtistValue
+    public class Artist
     {
         public uint Id;
         public string Name;
