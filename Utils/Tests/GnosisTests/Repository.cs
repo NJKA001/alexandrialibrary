@@ -1,73 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 
 using GnosisTests.Entities;
-using GnosisTests.Serialization;
 
 namespace GnosisTests
 {
-    public class Repository
+    public class Repository<T>
+        where T : IEntity
     {
-        private readonly ObservableCollection<Artist> artists = new ObservableCollection<Artist>();
-        private readonly ObservableCollection<Album> albums = new ObservableCollection<Album>();
-        private readonly ObservableCollection<Track> tracks = new ObservableCollection<Track>();
+        public Repository(ISerializer<T> serializer)
+        {
+            if (serializer == null)
+                throw new ArgumentNullException("serializer");
 
-        private readonly IDictionary<uint, Artist> artistsById = new Dictionary<uint, Artist>();
-        private readonly IDictionary<uint, Album> albumsById = new Dictionary<uint, Album>();
-        private readonly IDictionary<uint, Track> tracksById = new Dictionary<uint, Track>();
+            this.type = typeof(T).Name;
+            this.cache = new EntityCache<T>();
+            this.serializer = serializer;
+        }
 
-        private readonly ArtistSerializer artistSerializer = new ArtistSerializer();
-        private readonly AlbumSerializer albumSerializer = new AlbumSerializer();
-        private readonly TrackSerializer trackSerializer = new TrackSerializer();
+        private readonly string type;
+        private readonly EntityCache<T> cache;
+        private readonly ISerializer<T> serializer;
 
         private const string createdLogFormat = "{0}-Created.txt";
         private const string deletedLogFormat = "{0}-Deleted.txt";
         private const string updatedLogFormat = "{0}-Updated.txt";
 
-        private void AddArtist(Artist artist)
-        {
-            if (artist == null)
-                throw new ArgumentNullException("artist");
-
-            if (artistsById.ContainsKey(artist.Id))
-                return;
-
-            artistsById.Add(artist.Id, artist);
-            artists.Add(artist);
-        }
-
-        private void AddAlbum(Album album)
-        {
-            if (album == null)
-                throw new ArgumentNullException("album");
-
-            if (albumsById.ContainsKey(album.Id))
-                return;
-
-            albumsById.Add(album.Id, album);
-            albums.Add(album);
-        }
-
-        private void AddTrack(Track track)
-        {
-            if (track == null)
-                throw new ArgumentNullException("track");
-
-            if (tracksById.ContainsKey(track.Id))
-                return;
-
-            tracksById.Add(track.Id, track);
-            tracks.Add(track);
-        }
-
-        public IEnumerable<Artist> Artists { get { return artists; } }
-        public IEnumerable<Album> Albums { get { return albums; } }
-        public IEnumerable<Track> Tracks { get { return tracks; } }
-
-        private void InitializeEntity(string type, Action<string[]> action)
+        private void ProcessCreatedLog()
         {
             var createdLog = string.Format(createdLogFormat, type);
 
@@ -85,7 +46,30 @@ namespace GnosisTests
                             if (data == null || data.Length < 3)
                                 continue;
 
-                            action(data);
+                            var entity = serializer.Deserialize(data);
+                            cache.Add(entity);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ProcessDeletedLog()
+        {
+            var deletedLog = string.Format(deletedLogFormat, type);
+
+            if (File.Exists(deletedLog))
+            {
+                using (var reader = new StreamReader(deletedLog))
+                {
+                    var line = string.Empty;
+                    while (line != null)
+                    {
+                        line = reader.ReadLine();
+                        if (!string.IsNullOrEmpty(line))
+                        {
+                            var id = uint.Parse(line.Trim());
+                            cache.Remove(id);
                         }
                     }
                 }
@@ -94,13 +78,18 @@ namespace GnosisTests
 
         public void Initialize()
         {
-            InitializeEntity(EntityType.Artist, data => AddArtist(artistSerializer.Deserialize(data)));
-            InitializeEntity(EntityType.Album, data => AddAlbum(albumSerializer.Deserialize(data)));
-            InitializeEntity(EntityType.Track, data => AddTrack(trackSerializer.Deserialize(data)));
+            ProcessCreatedLog();
+            
         }
 
-        public void Persist()
+        public void Add(T entity)
         {
+            cache.Add(entity);
+        }
+
+        public void Remove(uint id)
+        {
+            cache.Remove(id);
         }
     }
 }

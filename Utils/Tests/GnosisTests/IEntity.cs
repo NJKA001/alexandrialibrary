@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GnosisTests.Entities
+namespace GnosisTests
 {
-    public class Artist
-        : EntityBase
+    public interface IEntity
     {
-        public string Name;
+        uint Id { get; set; }
     }
 }

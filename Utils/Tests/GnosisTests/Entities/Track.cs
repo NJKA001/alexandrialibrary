@@ -6,8 +6,8 @@ using System.Text;
 namespace GnosisTests.Entities
 {
     public class Track
+        : EntityBase
     {
-        public uint Id;
         public string Name;
         public uint Album;
         public uint Artist;

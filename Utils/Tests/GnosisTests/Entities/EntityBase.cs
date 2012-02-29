@@ -5,9 +5,9 @@ using System.Text;
 
 namespace GnosisTests.Entities
 {
-    public class Artist
-        : EntityBase
+    public abstract class EntityBase
+        : IEntity
     {
-        public string Name;
+        public uint Id { get; set; }
     }
 }

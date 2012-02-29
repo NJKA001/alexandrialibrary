@@ -5,9 +5,7 @@ using System.Text;
 
 namespace GnosisTests.Entities
 {
-    public class Artist
-        : EntityBase
+    class AlbumUpdater
     {
-        public string Name;
     }
 }

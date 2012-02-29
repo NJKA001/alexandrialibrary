@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using GnosisTests.Entities;
-
-namespace GnosisTests.Serialization
+namespace GnosisTests.Entities
 {
     public class TrackSerializer
         : SerializerBase<Track>
@@ -27,6 +25,16 @@ namespace GnosisTests.Serialization
         public override string Serialize(Track item)
         {
             return string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}", item.Id, item.Name, item.Album, item.Artist, item.Disc, item.Number, item.Duration);
+        }
+
+        public override string SerializeUpdate(Track entity, string field, object value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void ApplyUpdate(Track entity, string field, string value)
+        {
+            throw new NotImplementedException();
         }
     }
 }

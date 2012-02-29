@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using GnosisTests.Entities;
-
-namespace GnosisTests.Serialization
+namespace GnosisTests.Entities
 {
     public class AlbumSerializer
         : SerializerBase<Album>
@@ -25,6 +23,16 @@ namespace GnosisTests.Serialization
         public override string Serialize(Album item)
         {
             return string.Format("{0}\t{1}\t{2}\t{3}\t{4}", item.Id, item.Name, item.Artist, item.Year, item.AlbumType);
+        }
+
+        public override string SerializeUpdate(Album entity, string field, object value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void ApplyUpdate(Album entity, string field, string value)
+        {
+            throw new NotImplementedException();
         }
     }
 }
