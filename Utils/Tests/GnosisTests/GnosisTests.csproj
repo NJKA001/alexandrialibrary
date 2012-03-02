@@ -52,6 +52,7 @@
     <Compile Include="Entities\Track.cs" />
     <Compile Include="IEntityCache.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="ISerializer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

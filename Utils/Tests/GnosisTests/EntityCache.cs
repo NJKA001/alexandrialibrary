@@ -28,13 +28,19 @@ namespace GnosisTests
         public void Add(T entity)
         {
             if (entity == null)
-                throw new ArgumentNullException("entity");
+                return;
 
             if (byId.ContainsKey(entity.Id))
                 return;
 
             entities.Add(entity);
             byId.Add(entity.Id, entity);
+        }
+
+        public void Add(IEnumerable<T> entities)
+        {
+            foreach (var entity in entities)
+                Add(entity);
         }
 
         public void Remove(uint id)
@@ -45,6 +51,12 @@ namespace GnosisTests
             var entity = byId[id];
             entities.Remove(entity);
             byId.Remove(id);
+        }
+
+        public void Remove(IEnumerable<uint> ids)
+        {
+            foreach (var id in ids)
+                Remove(id);
         }
     }
 }

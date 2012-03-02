@@ -12,6 +12,8 @@ namespace GnosisTests
 
         T Get(uint id);
         void Add(T entity);
+        void Add(IEnumerable<T> entities);
         void Remove(uint id);
+        void Remove(IEnumerable<uint> ids);
     }
 }
