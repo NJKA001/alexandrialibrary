@@ -36,6 +36,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\..\..\Gnosis\lib\SQLite\SQLite-1.0.60.0\bin\ManagedOnly\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,6 +64,12 @@
     <Compile Include="Entities\ArtistSerializer.cs" />
     <Compile Include="Entities\SerializerBase.cs" />
     <Compile Include="Entities\TrackSerializer.cs" />
+    <Compile Include="TrackRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sqlite3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
