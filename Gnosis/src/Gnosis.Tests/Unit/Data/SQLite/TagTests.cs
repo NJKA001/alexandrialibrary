@@ -67,7 +67,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             var tag5 = new Tag(uri4, TagType.Artist, "Tool");
             var tag6 = new Tag(uri4, TagType.Title, "The Bottom");
             var tag7 = new Tag(uri4, TagType.Album, "Undertow");
-            var tag8 = new Tag(uri4, TagType.AttachedPicture, "Album Cover", Algorithm.Default, imageData);
+            var tag8 = new Tag(uri4, TagType.AttachedPicture, "Album Cover", Gnosis.Algorithms.Algorithm.Default, imageData);
             var tag9 = new Tag(uri4, TagType.ReleaseTime, releaseDate);
             var tag10 = new Tag(uri5, TagType.Artist, artist);
             var tag11 = new Tag(uri5, TagType.Genre, "Rock & Roll");
@@ -95,7 +95,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         [Test]
         public void CanBeReadByAlgorithm()
         {
-            var tool = repository.GetByAlgorithm(Algorithm.Default, TagDomain.String, "Tool%");
+            var tool = repository.GetByAlgorithm(Gnosis.Algorithms.Algorithm.Default, TagDomain.String, "Tool%");
             Assert.IsNotNull(tool);
             Assert.AreEqual(4, tool.Count());
         }
@@ -125,7 +125,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         {
             var results = new List<ITag>();
 
-            var task = repository.Search(Algorithm.Default, "Tool%");
+            var task = repository.Search(Gnosis.Algorithms.Algorithm.Default, "Tool%");
             task.AddResultsCallback(t => results.AddRange(t));
             task.StartSynchronously();
 
@@ -136,7 +136,7 @@ namespace Gnosis.Tests.Unit.Data.SQLite
         public void CanBeSearchedForGenres()
         {
             var results = new List<ITag>();
-            var task = repository.Search(Algorithm.Default, "Rock%");
+            var task = repository.Search(Gnosis.Algorithms.Algorithm.Default, "Rock%");
             task.AddResultsCallback(x => results.AddRange(x));
             task.StartSynchronously();
 
@@ -153,10 +153,10 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             var target2 = Guid.NewGuid().ToUrn();
 
             var tag1 = new Tag(target1, TagType.Artist, "R.E.M.");
-            var tag2 = new Tag(target1, TagType.Artist, tag1.Value.ToAmericanizedString(), Algorithm.Americanized);
+            var tag2 = new Tag(target1, TagType.Artist, tag1.Value.ToAmericanizedString(), Gnosis.Algorithms.Algorithm.Americanized);
             var tag3 = new Tag(target1, TagType.Artist, "Eddie Vedder");
             var tag4 = new Tag(target1, TagType.Artist, "Natalie Merchant");
-            var tag5 = new Tag(target1, TagType.Artist, tag4.Value.ToAmericanizedString(), Algorithm.Americanized);
+            var tag5 = new Tag(target1, TagType.Artist, tag4.Value.ToAmericanizedString(), Gnosis.Algorithms.Algorithm.Americanized);
             var tag6 = new Tag(target2, TagType.Artist, "PJ Harvey");
             var tag7 = new Tag(target1, TagType.Album, "In Time: Best of R.E.M.");
 

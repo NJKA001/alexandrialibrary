@@ -23,10 +23,10 @@ namespace Gnosis.Data.SQLite
 
         #region Private Methods
 
-        private IEnumerable<ILink> GetLinks(ICommandBuilder builder)
+        private IEnumerable<Gnosis.ILink> GetLinks(ICommandBuilder builder)
         {
             IDbConnection connection = null;
-            var links = new List<ILink>();
+            var links = new List<Gnosis.ILink>();
 
             try
             {
@@ -52,7 +52,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        private ILink ReadLink(IDataRecord record)
+        private Gnosis.ILink ReadLink(IDataRecord record)
         {
             var source = record.GetUri("Source");
             var target = record.GetUri("Target");
@@ -65,7 +65,7 @@ namespace Gnosis.Data.SQLite
 
         #endregion
 
-        public ILink GetById(long id)
+        public Gnosis.ILink GetById(long id)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<ILink> GetBySource(Uri source)
+        public IEnumerable<Gnosis.ILink> GetBySource(Uri source)
         {
             if (source == null)
                 throw new ArgumentNullException("source");
@@ -100,7 +100,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<ILink> GetBySource(Uri source, string relationship)
+        public IEnumerable<Gnosis.ILink> GetBySource(Uri source, string relationship)
         {
             if (source == null)
                 throw new ArgumentNullException("source");
@@ -122,7 +122,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<ILink> GetByTarget(Uri target)
+        public IEnumerable<Gnosis.ILink> GetByTarget(Uri target)
         {
             if (target == null)
                 throw new ArgumentNullException("target");
@@ -141,7 +141,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<ILink> GetByTarget(Uri target, string relationship)
+        public IEnumerable<Gnosis.ILink> GetByTarget(Uri target, string relationship)
         {
             if (target == null)
                 throw new ArgumentNullException("target");
@@ -163,7 +163,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<ILink> GetBySourceAndTarget(Uri source, Uri target)
+        public IEnumerable<Gnosis.ILink> GetBySourceAndTarget(Uri source, Uri target)
         {
             if (target == null)
                 throw new ArgumentNullException("target");
@@ -185,7 +185,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<ILink> GetBySourceAndTarget(Uri source, Uri target, string relationship)
+        public IEnumerable<Gnosis.ILink> GetBySourceAndTarget(Uri source, Uri target, string relationship)
         {
             if (source == null)
                 throw new ArgumentNullException("source");
@@ -262,7 +262,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public void Save(IEnumerable<ILink> links)
+        public void Save(IEnumerable<Gnosis.ILink> links)
         {
             if (links == null)
                 throw new ArgumentNullException("links");

@@ -88,6 +88,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CharacterSetFactory.cs" />
+    <Compile Include="Data\Algorithm.cs" />
+    <Compile Include="Data\Category.cs" />
+    <Compile Include="Data\EntityType.cs" />
+    <Compile Include="Data\IAlbum.cs" />
+    <Compile Include="Data\IArtist.cs" />
+    <Compile Include="Data\IEntity.cs" />
+    <Compile Include="Data\IEpisode.cs" />
+    <Compile Include="Data\IFeed.cs" />
+    <Compile Include="Data\IFeedItem.cs" />
+    <Compile Include="Data\ILink.cs" />
+    <Compile Include="Data\IMovie.cs" />
+    <Compile Include="Data\IPlaylist.cs" />
+    <Compile Include="Data\IRepository.cs" />
+    <Compile Include="Data\ISeason.cs" />
+    <Compile Include="Data\IShow.cs" />
+    <Compile Include="Data\ITag.cs" />
+    <Compile Include="Data\ITrack.cs" />
+    <Compile Include="Data\Relationship.cs" />
+    <Compile Include="Data\TargetType.cs" />
     <Compile Include="MediaFactory.cs" />
     <Compile Include="ICharacterSetFactory.cs" />
     <Compile Include="IMediaFactory.cs" />

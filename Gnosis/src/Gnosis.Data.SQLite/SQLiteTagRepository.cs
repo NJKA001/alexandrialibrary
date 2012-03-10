@@ -37,10 +37,10 @@ namespace Gnosis.Data.SQLite
 
         #region Private Methods
 
-        private IEnumerable<ITag> GetTags(ICommandBuilder builder)
+        private IEnumerable<Gnosis.ITag> GetTags(ICommandBuilder builder)
         {
             IDbConnection connection = null;
-            var tags = new List<ITag>();
+            var tags = new List<Gnosis.ITag>();
 
             try
             {
@@ -66,7 +66,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        private ITag ReadTag(IDataRecord record)
+        private Gnosis.ITag ReadTag(IDataRecord record)
         {
             var id = record.GetInt64("Id");
             var target = record.GetUri("Target");
@@ -163,7 +163,7 @@ namespace Gnosis.Data.SQLite
 
         #endregion
 
-        public ITag GetById(long id)
+        public Gnosis.ITag GetById(long id)
         {
             try
             {
@@ -181,7 +181,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<ITag> GetByTarget(Uri target)
+        public IEnumerable<Gnosis.ITag> GetByTarget(Uri target)
         {
             if (target == null)
                 throw new ArgumentNullException("target");
@@ -202,7 +202,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<ITag> GetByTarget(Uri target, TagDomain domain)
+        public IEnumerable<Gnosis.ITag> GetByTarget(Uri target, TagDomain domain)
         {
             if (target == null)
                 throw new ArgumentNullException("target");
@@ -224,7 +224,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<ITag> GetByTarget(Uri target, ITagType type)
+        public IEnumerable<Gnosis.ITag> GetByTarget(Uri target, ITagType type)
         {
             if (target == null)
                 throw new ArgumentNullException("target");
@@ -248,7 +248,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public IEnumerable<ITag> GetByAlgorithm(IAlgorithm algorithm, TagDomain domain, string pattern)
+        public IEnumerable<Gnosis.ITag> GetByAlgorithm(IAlgorithm algorithm, TagDomain domain, string pattern)
         {
             if (algorithm == null)
                 throw new ArgumentNullException("algorithm");
@@ -273,7 +273,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public ITask<IEnumerable<ITag>> Search(IAlgorithm algorithm, string pattern)
+        public ITask<IEnumerable<Gnosis.ITag>> Search(IAlgorithm algorithm, string pattern)
         {
             if (algorithm == null)
                 throw new ArgumentNullException("algorithm");
@@ -315,7 +315,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public void Save(IEnumerable<ITag> tags)
+        public void Save(IEnumerable<Gnosis.ITag> tags)
         {
             if (tags == null)
                 throw new ArgumentNullException("tags");
@@ -384,7 +384,7 @@ namespace Gnosis.Data.SQLite
             }
         }
 
-        public void Overwrite(Uri target, ITagType type, IEnumerable<ITag> tags)
+        public void Overwrite(Uri target, ITagType type, IEnumerable<Gnosis.ITag> tags)
         {
             if (target == null)
                 throw new ArgumentNullException("target");

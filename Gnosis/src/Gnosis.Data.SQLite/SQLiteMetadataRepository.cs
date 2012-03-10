@@ -36,17 +36,17 @@ namespace Gnosis.Data.SQLite
 
         private void InitializeTableNames()
         {
-            tables.Add(typeof(IArtist), "Artist");
-            tables.Add(typeof(IAlbum), "Album");
-            tables.Add(typeof(IClip), "Clip");
-            tables.Add(typeof(IDoc), "Doc");
-            tables.Add(typeof(IFeed), "Feed");
-            tables.Add(typeof(IFeedItem), "FeedItem");
-            tables.Add(typeof(IPic), "Pic");
-            tables.Add(typeof(IProgram), "Program");
-            tables.Add(typeof(IPlaylist), "Playlist");
-            tables.Add(typeof(IPlaylistItem), "PlaylistItem");
-            tables.Add(typeof(ITrack), "Track");
+            tables.Add(typeof(Gnosis.IArtist), "Artist");
+            tables.Add(typeof(Gnosis.IAlbum), "Album");
+            tables.Add(typeof(Gnosis.IClip), "Clip");
+            tables.Add(typeof(Gnosis.IDoc), "Doc");
+            tables.Add(typeof(Gnosis.IFeed), "Feed");
+            tables.Add(typeof(Gnosis.IFeedItem), "FeedItem");
+            tables.Add(typeof(Gnosis.IPic), "Pic");
+            tables.Add(typeof(Gnosis.IProgram), "Program");
+            tables.Add(typeof(Gnosis.IPlaylist), "Playlist");
+            tables.Add(typeof(Gnosis.IPlaylistItem), "PlaylistItem");
+            tables.Add(typeof(Gnosis.ITrack), "Track");
         }
 
         private string GetTableName<T>()
@@ -114,27 +114,27 @@ namespace Gnosis.Data.SQLite
             switch (tables[type])
             {
                 case "Album":
-                    return GetDefaultItem<IAlbum>();
+                    return GetDefaultItem<Gnosis.IAlbum>();
                 case "Artist":
-                    return GetDefaultItem<IArtist>();
+                    return GetDefaultItem<Gnosis.IArtist>();
                 case "Clip":
-                    return GetDefaultItem<IClip>();
+                    return GetDefaultItem<Gnosis.IClip>();
                 case "Doc":
-                    return GetDefaultItem<IDoc>();
+                    return GetDefaultItem<Gnosis.IDoc>();
                 case "Feed":
-                    return GetDefaultItem<IFeed>();
+                    return GetDefaultItem<Gnosis.IFeed>();
                 case "FeedItem":
-                    return GetDefaultItem<IFeedItem>();
+                    return GetDefaultItem<Gnosis.IFeedItem>();
                 case "Pic":
-                    return GetDefaultItem<IPic>();
+                    return GetDefaultItem<Gnosis.IPic>();
                 case "Playlist":
-                    return GetDefaultItem<IPlaylist>();
+                    return GetDefaultItem<Gnosis.IPlaylist>();
                 case "PlaylistItem":
-                    return GetDefaultItem<IPlaylistItem>();
+                    return GetDefaultItem<Gnosis.IPlaylistItem>();
                 case "Program":
-                    return GetDefaultItem<IProgram>();
+                    return GetDefaultItem<Gnosis.IProgram>();
                 case "Track":
-                    return GetDefaultItem<ITrack>();
+                    return GetDefaultItem<Gnosis.ITrack>();
                 default:
                     throw new InvalidOperationException("Invalid Media Item type: " + type.Name);
             }
@@ -177,27 +177,27 @@ namespace Gnosis.Data.SQLite
             switch (tables[type])
             {
                 case "Album":
-                    return GetSaveBuilder<IAlbum>((IAlbum)item);
+                    return GetSaveBuilder<Gnosis.IAlbum>((Gnosis.IAlbum)item);
                 case "Artist":
-                    return GetSaveBuilder<IArtist>((IArtist)item);
+                    return GetSaveBuilder<Gnosis.IArtist>((Gnosis.IArtist)item);
                 case "Clip":
-                    return GetSaveBuilder<IClip>((IClip)item);
+                    return GetSaveBuilder<Gnosis.IClip>((Gnosis.IClip)item);
                 case "Doc":
-                    return GetSaveBuilder<IDoc>((IDoc)item);
+                    return GetSaveBuilder<Gnosis.IDoc>((Gnosis.IDoc)item);
                 case "Feed":
-                    return GetSaveBuilder<IFeed>((IFeed)item);
+                    return GetSaveBuilder<Gnosis.IFeed>((Gnosis.IFeed)item);
                 case "FeedItem":
-                    return GetSaveBuilder<IFeedItem>((IFeedItem)item);
+                    return GetSaveBuilder<Gnosis.IFeedItem>((Gnosis.IFeedItem)item);
                 case "Pic":
-                    return GetSaveBuilder<IPic>((IPic)item);
+                    return GetSaveBuilder<Gnosis.IPic>((Gnosis.IPic)item);
                 case "Playlist":
-                    return GetSaveBuilder<IPlaylist>((IPlaylist)item);
+                    return GetSaveBuilder<Gnosis.IPlaylist>((Gnosis.IPlaylist)item);
                 case "PlaylistItem":
-                    return GetSaveBuilder<IPlaylistItem>((IPlaylistItem)item);
+                    return GetSaveBuilder<Gnosis.IPlaylistItem>((Gnosis.IPlaylistItem)item);
                 case "Program":
-                    return GetSaveBuilder<IProgram>((IProgram)item);
+                    return GetSaveBuilder<Gnosis.IProgram>((Gnosis.IProgram)item);
                 case "Track":
-                    return GetSaveBuilder<ITrack>((ITrack)item);
+                    return GetSaveBuilder<Gnosis.ITrack>((Gnosis.ITrack)item);
                 default:
                     throw new InvalidOperationException("Invalid Media Item type: " + type.Name);
             }
