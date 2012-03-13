@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GnosisTests", "GnosisTests\GnosisTests.csproj", "{B5906FF9-4969-47C5-A4B1-A44B3DAD54EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Tests2", "Gnosis.Tests2\Gnosis.Tests2.csproj", "{9A15A497-88B0-4EB1-A8E0-5CDB783D50E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,6 +15,10 @@ Global
 		{B5906FF9-4969-47C5-A4B1-A44B3DAD54EB}.Debug|x86.Build.0 = Debug|x86
 		{B5906FF9-4969-47C5-A4B1-A44B3DAD54EB}.Release|x86.ActiveCfg = Release|x86
 		{B5906FF9-4969-47C5-A4B1-A44B3DAD54EB}.Release|x86.Build.0 = Release|x86
+		{9A15A497-88B0-4EB1-A8E0-5CDB783D50E0}.Debug|x86.ActiveCfg = Debug|x86
+		{9A15A497-88B0-4EB1-A8E0-5CDB783D50E0}.Debug|x86.Build.0 = Debug|x86
+		{9A15A497-88B0-4EB1-A8E0-5CDB783D50E0}.Release|x86.ActiveCfg = Release|x86
+		{9A15A497-88B0-4EB1-A8E0-5CDB783D50E0}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
