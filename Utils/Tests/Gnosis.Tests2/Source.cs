@@ -5,8 +5,11 @@ using System.Text;
 
 namespace Gnosis.Tests2
 {
-    public class Tag
+    public enum Source : ushort
     {
-        string Name { get; set; }
+        None = 0,
+        User_Input = 1,
+        Embedded_Metadata = 2,
+        External_Metadata = 3
     }
 }

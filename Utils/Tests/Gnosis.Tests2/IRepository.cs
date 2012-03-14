@@ -8,12 +8,7 @@ namespace Gnosis.Tests2
     public interface IRepository
     {
         IEnumerable<Artist> Artists { get; }
-        IEnumerable<Album> Albums { get; }
-        IEnumerable<Track> Tracks { get; }
-        IEnumerable<Playlist> Playlists { get; }
-        IEnumerable<PlaylistItem> PlaylistItems { get; }
-        IEnumerable<Feed> Feeds { get; }
-        IEnumerable<FeedItem> FeedItems { get; }
+        IEnumerable<Work> Works { get; }
 
         void Initialize();
         void Save(IEnumerable<Entity> entities);

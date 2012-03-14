@@ -5,9 +5,11 @@ using System.Text;
 
 namespace Gnosis.Tests2
 {
-    public enum LinkRelationship
+    public enum Category : ushort
     {
         None = 0,
-        Thumbnail = 1
+        Artist = 1,
+        Title = 2,
+        Duration = 3
     }
 }

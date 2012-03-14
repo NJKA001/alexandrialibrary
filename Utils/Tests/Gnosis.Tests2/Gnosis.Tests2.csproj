@@ -46,21 +46,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Album.cs" />
-    <Compile Include="Artist.cs" />
+    <Compile Include="ArtistType.cs" />
+    <Compile Include="Category.cs" />
     <Compile Include="Entity.cs" />
-    <Compile Include="Feed.cs" />
-    <Compile Include="FeedItem.cs" />
-    <Compile Include="IEntity.cs" />
+    <Compile Include="Repository.cs" />
+    <Compile Include="Source.cs" />
+    <Compile Include="Work.cs" />
+    <Compile Include="Artist.cs" />
     <Compile Include="IRepository.cs" />
-    <Compile Include="Link.cs" />
-    <Compile Include="LinkRelationship.cs" />
-    <Compile Include="Playlist.cs" />
-    <Compile Include="PlaylistItem.cs" />
+    <Compile Include="ArtistLink.cs" />
+    <Compile Include="Relationship.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tag.cs" />
-    <Compile Include="Track.cs" />
+    <Compile Include="ArtistTag.cs" />
+    <Compile Include="WorkType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="sqlite3.dll">
