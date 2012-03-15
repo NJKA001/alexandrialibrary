@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArtistType.cs" />
+    <Compile Include="Cache.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Repository.cs" />

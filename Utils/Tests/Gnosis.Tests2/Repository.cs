@@ -11,88 +11,147 @@ namespace Gnosis.Tests2
     public class Repository
         : IRepository
     {
-        private readonly ObservableCollection<Artist> artists = new ObservableCollection<Artist>();
-        private readonly ObservableCollection<Work> works = new ObservableCollection<Work>();
-        private readonly IDictionary<uint, Artist> artistsById = new Dictionary<uint, Artist>();
-        private readonly IDictionary<uint, Work> worksById = new Dictionary<uint, Work>();
+        public Repository(Cache cache)
+        {
+            if (cache == null)
+                throw new ArgumentNullException("cache");
+
+            this.cache = cache;
+        }
+
+        private readonly Cache cache;
 
         private IDbConnection GetConnection()
         {
             return new SQLiteConnection("Data Source=alexandria.db;");
         }
 
-        private uint GetId(Artist artist)
+        private object GetParameter(string name, object value)
         {
-            if (artist == null)
-                return 0;
-
-            return artistsById.Where(x => x.Value == artist).FirstOrDefault().Key;
+            return new SQLiteParameter(name, value);
         }
 
-        private uint GetId(Work work)
+        private void AddParameter(IDbCommand command, string name, object value)
+        {
+            command.Parameters.Add(GetParameter(name, value));
+        }
+
+        private void DeleteArtist(IDbConnection connection, Artist artist)
+        {
+            var id = cache.GetId(artist);
+            if (id == 0)
+                return;
+
+            var command = connection.CreateCommand();
+            command.CommandText = "delete from Artist where Id = @Id";
+            AddParameter(command, "@Id", id);
+            command.ExecuteNonQuery();
+
+            cache.Remove(artist);
+        }
+
+        private void DeleteWork(IDbConnection connection, Work work)
         {
             if (work == null)
-                return 0;
+                return;
 
-            return worksById.Where(x => x.Value == work).FirstOrDefault().Key;
-        }
+            var id = cache.GetId(work);
+            if (id == 0)
+                return;
 
-        private IDbCommand GetDeleteCommand(IDbConnection connection, Artist artist)
-        {
-            return null;
-        }
+            var command = connection.CreateCommand();
+            command.CommandText = "delete from Work where Id = @Id";
+            AddParameter(command, "@Id", id);
+            command.ExecuteNonQuery();
 
-        private IDbCommand GetDeleteCommand(IDbConnection connection, Work work)
-        {
-            return null;
-        }
-        
-        private IDbCommand GetSaveCommand(IDbConnection connection, Artist artist)
-        {
-            return null;
-        }
+            cache.Remove(work);
 
-        private IDbCommand GetSaveCommand(IDbConnection connection, Work work)
-        {
-            return null;
+            //TODO: Decide whether or not to cascade delete works
+            //foreach (var child in work.Children)
+            //{
+            //    DeleteWork(connection, child);
+            //}
         }
 
         private void SaveArtist(IDbConnection connection, Artist artist)
         {
-        }
+            if (artist == null)
+                return;
 
-        private void SaveWork(IDbConnection connection, Work work)
-        {
-            var id = GetId(work);
-            
+            var id = cache.GetId(artist);
+
             var command = connection.CreateCommand();
-            command.Parameters.Add(new SQLiteParameter("@Type", (ushort)work.Type));
-            command.Parameters.Add(new SQLiteParameter("@Parent", GetId(work.Parent)));
+            AddParameter(command, "@Type", (ushort)artist.Type);
+            AddParameter(command, "@Name", artist.Name);
+            AddParameter(command, "@Year", artist.Year);
 
             if (id > 0)
             {
-                command.CommandText = "update Work set Type = @Type, Parent = @Parent, Artist = @Artist, Name = @Name, Year = @Year, Number = @Number where Id = @Id;";
-                command.Parameters.Add(new SQLiteParameter("@Id", id));
+                AddParameter(command, "@Id", id);
+                command.CommandText = "update Artist set Type = @Type, Name = @Name, Year = @Year where Id = @Id;";
+                command.ExecuteNonQuery();
             }
             else
             {
-                command.CommandText = "insert into Work (Type, Parent, Artist, Name, Year, Number) values (@Type, @Parent, @Artist, @Name, @Year, @Number); select last_insert_rowid();";
+                command.CommandText = "insert into Artist (Type, Name, Year) values (@Type, @Name, @Year); select last_insert_rowid();";
+                var result = command.ExecuteScalar();
+                if (result != null && uint.TryParse(result.ToString(), out id))
+                {
+                    cache.Add(id, artist);
+                }
             }
 
-            foreach (var child in work.Children)
+            foreach (var work in artist.Works)
             {
                 SaveWork(connection, work);
             }
         }
 
+        private void SaveWork(IDbConnection connection, Work work)
+        {
+            if (work == null)
+                return;
+
+            var id = cache.GetId(work);
+            
+            var command = connection.CreateCommand();
+            AddParameter(command, "@Type", (ushort)work.Type);
+            AddParameter(command, "@Parent", cache.GetId(work.Parent));
+            AddParameter(command, "@Artist", cache.GetId(work.Artist));
+            AddParameter(command, "@Name", work.Name);
+            AddParameter(command, "@Year", work.Year);
+            AddParameter(command, "@Number", work.Number);
+
+            if (id > 0)
+            {
+                AddParameter(command, "@Id", id);
+                command.CommandText = "update Work set Type = @Type, Parent = @Parent, Artist = @Artist, Name = @Name, Year = @Year, Number = @Number where Id = @Id;";
+                command.ExecuteNonQuery();
+            }
+            else
+            {
+                command.CommandText = "insert into Work (Type, Parent, Artist, Name, Year, Number) values (@Type, @Parent, @Artist, @Name, @Year, @Number); select last_insert_rowid();";
+                var result = command.ExecuteScalar();
+                if (result != null && uint.TryParse(result.ToString(), out id))
+                {
+                    cache.Add(id, work);
+                }
+            }
+
+            foreach (var child in work.Children)
+            {
+                SaveWork(connection, child);
+            }
+        }
+
         public IEnumerable<Artist> Artists
         {
-            get { return artists; }
+            get { return cache.Artists; }
         }
 
         public IEnumerable<Work> Works
         {
-            get { return works; }
+            get { return cache.Works; }
         }
 
         public void Initialize()
@@ -138,7 +197,25 @@ create unique index if not exists Work_unique on Work (Type, Parent, Artist, Nam
 
         public void Delete(IEnumerable<Entity> entities)
         {
-            throw new NotImplementedException();
+            if (entities == null)
+                throw new ArgumentNullException("entities");
+
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+
+                foreach (var entity in entities)
+                {
+                    if (entity is Artist)
+                    {
+                        DeleteArtist(connection, entity as Artist);
+                    }
+                    else if (entity is Work)
+                    {
+                        DeleteWork(connection, entity as Work);
+                    }
+                }
+            }
         }
     }
 }
