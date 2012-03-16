@@ -120,7 +120,7 @@ namespace Gnosis.Tests2
             if (workId == 0)
                 return;
 
-            artistTagsById.Add(id, tag);
+            workTagsById.Add(id, tag);
 
             if (tagsByWorkId.ContainsKey(workId))
             {

@@ -13,12 +13,11 @@ namespace Gnosis.Tests2
         {
         }
 
-        public Tag(string name, Category category, Source source, string target)
+        public Tag(string name, Category category, Source source)
         {
             this.name = name;
             this.category = category;
             this.source = source;
-            this.target = target;
         }
 
         private bool isChanged;
@@ -26,7 +25,6 @@ namespace Gnosis.Tests2
         private string name = string.Empty;
         private Category category;
         private Source source;
-        private string target = string.Empty;
 
         private void NotifyPropertyChanged(string propertyName)
         {
@@ -77,20 +75,6 @@ namespace Gnosis.Tests2
                 {
                     source = value;
                     NotifyPropertyChanged("Source");
-                }
-            }
-        }
-
-        public string Target
-        {
-            get { return target; }
-            set
-            {
-                var safe = value ?? string.Empty;
-                if (target != safe)
-                {
-                    target = safe;
-                    NotifyPropertyChanged("Target");
                 }
             }
         }

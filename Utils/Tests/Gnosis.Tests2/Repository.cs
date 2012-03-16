@@ -212,20 +212,19 @@ namespace Gnosis.Tests2
             AddParameter(command, "@Name", tag.Name);
             AddParameter(command, "@Category", (ushort)tag.Category);
             AddParameter(command, "@Source", (ushort)tag.Source);
-            AddParameter(command, "@Target", tag.Target);
 
             if (id > 0)
             {
                 if (tag.IsChanged)
                 {
                     AddParameter(command, "@Id", id);
-                    command.CommandText = "update ArtistTag set Artist = @Artist, Name = @Name, Category = @Category, Source = @Source, Target = @Target where Id = @Id;";
+                    command.CommandText = "update ArtistTag set Artist = @Artist, Name = @Name, Category = @Category, Source = @Source where Id = @Id;";
                     command.ExecuteNonQuery();
                 }
             }
             else
             {
-                command.CommandText = "insert into ArtistTag (Artist, Name, Category, Source, Target) values (@Artist, @Name, @Category, @Source, @Target); select last_insert_rowid();";
+                command.CommandText = "insert into ArtistTag (Artist, Name, Category, Source) values (@Artist, @Name, @Category, @Source); select last_insert_rowid();";
                 var result = command.ExecuteScalar();
                 if (result != null && uint.TryParse(result.ToString(), out id))
                 {
@@ -368,20 +367,19 @@ namespace Gnosis.Tests2
             AddParameter(command, "@Name", tag.Name);
             AddParameter(command, "@Category", (ushort)tag.Category);
             AddParameter(command, "@Source", (ushort)tag.Source);
-            AddParameter(command, "@Target", tag.Target);
 
             if (id > 0)
             {
                 if (tag.IsChanged)
                 {
                     AddParameter(command, "@Id", id);
-                    command.CommandText = "update WorkTag set Work = @Work, Name = @Name, Category = @Category, Source = @Source, Target = @Target where Id = @Id;";
+                    command.CommandText = "update WorkTag set Work = @Work, Name = @Name, Category = @Category, Source = @Source where Id = @Id;";
                     command.ExecuteNonQuery();
                 }
             }
             else
             {
-                command.CommandText = "insert into WorkTag (Work, Name, Category, Source, Target) values (@Work, @Name, @Category, @Source, @Target); select last_insert_rowid();";
+                command.CommandText = "insert into WorkTag (Work, Name, Category, Source) values (@Work, @Name, @Category, @Source); select last_insert_rowid();";
                 var result = command.ExecuteScalar();
                 if (result != null && uint.TryParse(result.ToString(), out id))
                 {
@@ -399,12 +397,12 @@ create table if not exists Work (Id integer primary key, Type integer not null, 
 create unique index if not exists Work_unique on Work (Type, Parent, Artist, Name, Year, Number);
 create table if not exists ArtistLink (Id integer primary key, Artist integer not null, Name text not null, Relationship integer not null, Source integer not null, Target text not null);
 create unique index if not exists ArtistLink_unique on ArtistLink (Artist, Name, Relationship, Source, Target);
-create table if not exists ArtistTag (Id integer primary key, Artist integer not null, Name text not null, Category integer not null, Source integer not null, Target text not null);
-create unique index if not exists ArtistTag_unique on ArtistTag (Artist, Name, Category, Source, Target);
+create table if not exists ArtistTag (Id integer primary key, Artist integer not null, Name text not null, Category integer not null, Source integer not null);
+create unique index if not exists ArtistTag_unique on ArtistTag (Artist, Name, Category, Source);
 create table if not exists WorkLink (Id integer primary key, Work integer not null, Name text not null, Relationship integer not null, Source integer not null, Target text not null);
 create unique index if not exists WorkLink_unique on WorkLink (Work, Name, Relationship, Source, Target);
-create table if not exists WorkTag (Id integer primary key, Work integer not null, Name text not null, Category integer not null, Source integer not null, Target text not null);
-create unique index if not exists WorkTag_unique on WorkTag (Work, Name, Category, Source, Target);");
+create table if not exists WorkTag (Id integer primary key, Work integer not null, Name text not null, Category integer not null, Source integer not null);
+create unique index if not exists WorkTag_unique on WorkTag (Work, Name, Category, Source);");
 
             command.ExecuteNonQuery();
         }
@@ -461,12 +459,11 @@ create unique index if not exists WorkTag_unique on WorkTag (Work, Name, Categor
                     var name = reader.GetString(2);
                     var category = (Category)reader.GetInt32(3);
                     var source = (Source)reader.GetInt32(4);
-                    var target = reader.GetString(5);
 
                     if (artist == null)
                         continue;
 
-                    var tag = new Tag(name, category, source, target);
+                    var tag = new Tag(name, category, source);
                     cache.Add(id, artist, tag);
                     artist.AddTag(tag);
                 }
@@ -528,12 +525,11 @@ create unique index if not exists WorkTag_unique on WorkTag (Work, Name, Categor
                     var name = reader.GetString(2);
                     var category = (Category)reader.GetInt32(3);
                     var source = (Source)reader.GetInt32(4);
-                    var target = reader.GetString(5);
 
                     if (work == null)
                         continue;
 
-                    var tag = new Tag(name, category, source, target);
+                    var tag = new Tag(name, category, source);
                     cache.Add(id, work, tag);
                     work.AddTag(tag);
                 }

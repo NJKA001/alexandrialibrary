@@ -10,6 +10,7 @@ namespace Gnosis.Tests2
         None = 0,
         Artist = 1,
         Title = 2,
-        Duration = 3
+        Duration = 3,
+        Genre = 4
     }
 }
