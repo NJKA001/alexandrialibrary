@@ -12,9 +12,8 @@ namespace Gnosis.Tests2
         private ArtistType type;
         private string name;
         private short year;
+
         private readonly ObservableCollection<Work> works = new ObservableCollection<Work>();
-        private readonly ObservableCollection<ArtistLink> links = new ObservableCollection<ArtistLink>();
-        private readonly ObservableCollection<ArtistTag> tags = new ObservableCollection<ArtistTag>();
 
         public ArtistType Type
         {
@@ -57,8 +56,6 @@ namespace Gnosis.Tests2
         }
 
         public IEnumerable<Work> Works { get { return works; } }
-        public IEnumerable<ArtistLink> Links { get { return links; } }
-        public IEnumerable<ArtistTag> Tags { get { return tags; } }
 
         public void AddWork(Work work)
         {

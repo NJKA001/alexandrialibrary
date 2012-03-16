@@ -55,11 +55,11 @@
     <Compile Include="Work.cs" />
     <Compile Include="Artist.cs" />
     <Compile Include="IRepository.cs" />
-    <Compile Include="ArtistLink.cs" />
+    <Compile Include="Link.cs" />
     <Compile Include="Relationship.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ArtistTag.cs" />
+    <Compile Include="Tag.cs" />
     <Compile Include="WorkType.cs" />
   </ItemGroup>
   <ItemGroup>
