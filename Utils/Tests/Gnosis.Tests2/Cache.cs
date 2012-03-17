@@ -53,62 +53,136 @@ namespace Gnosis.Tests2
 
         public void Add(uint id, T entity, Tag tag)
         {
-            throw new NotImplementedException();
+            if (tagsById.ContainsKey(id))
+                return;
+
+            var entityId = GetId(entity);
+            if (entityId == 0)
+                return;
+
+            tagsById.Add(id, tag);
+
+            if (tagsByEntityId.ContainsKey(entityId))
+            {
+                if (tagsByEntityId[entityId].Contains(tag))
+                    return;
+
+                tagsByEntityId[entityId].Add(tag);
+            }
+            else
+                tagsByEntityId[entityId] = new List<Tag> { tag };
         }
 
         public void Remove(T entity)
         {
-            throw new NotImplementedException();
+            var id = GetId(entity);
+            if (id == 0)
+                return;
+
+            foreach (var link in entity.Links)
+            {
+                Remove(entity, link);
+            }
+
+            foreach (var tag in entity.Tags)
+            {
+                Remove(entity, tag);
+            }
+
+            if (!entitiesById.ContainsKey(id))
+                return;
+
+            if (entities.Contains(entity))
+                entities.Remove(entity);
+
+            entitiesById.Remove(id);
         }
 
         public void Remove(T entity, Link link)
         {
-            throw new NotImplementedException();
+            var id = GetId(link);
+            if (id == 0)
+                return;
+
+            if (!linksById.ContainsKey(id))
+                return;
+
+            var entityId = GetId(entity);
+            if (linksByEntityId.ContainsKey(entityId))
+            {
+                if (linksByEntityId[entityId].Contains(link))
+                    linksByEntityId[entityId].Remove(link);
+            }
+
+            linksById.Remove(id);
         }
 
         public void Remove(T entity, Tag tag)
         {
-            throw new NotImplementedException();
+            var id = GetId(tag);
+            if (id == 0)
+                return;
+
+            if (!tagsById.ContainsKey(id))
+                return;
+
+            var entityId = GetId(entity);
+            if (tagsByEntityId.ContainsKey(entityId))
+            {
+                if (tagsByEntityId[entityId].Contains(tag))
+                    tagsByEntityId[entityId].Remove(tag);
+            }
+
+            tagsById.Remove(id);
         }
 
         public uint GetId(T entity)
         {
-            throw new NotImplementedException();
+            if (entity == null)
+                return 0;
+
+            return entitiesById.Where(x => x.Value == entity).FirstOrDefault().Key;
         }
 
-        public uint GetId(T entity, Link link)
+        public uint GetId(Link link)
         {
-            throw new NotImplementedException();
+            if (link == null)
+                return 0;
+
+            return linksById.Where(x => x.Value == link).FirstOrDefault().Key;
         }
 
-        public uint GetId(T entity, Tag tag)
+        public uint GetId(Tag tag)
         {
-            throw new NotImplementedException();
+            if (tag == null)
+                return 0;
+
+            return tagsById.Where(x => x.Value == tag).FirstOrDefault().Key;
         }
 
         public T GetEntity(uint id)
         {
-            throw new NotImplementedException();
+            return entitiesById.ContainsKey(id) ? entitiesById[id] : null;
         }
 
         public Link GetLink(uint id)
         {
-            throw new NotImplementedException();
+            return linksById.ContainsKey(id) ? linksById[id] : null;
         }
 
         public Tag GetTag(uint id)
         {
-            throw new NotImplementedException();
+            return tagsById.ContainsKey(id) ? tagsById[id] : null;
         }
 
         public IEnumerable<Link> GetLinksFor(uint entityId)
         {
-            throw new NotImplementedException();
+            return linksByEntityId.ContainsKey(entityId) ? linksByEntityId[entityId].ToList() : Enumerable.Empty<Link>();
         }
 
         public IEnumerable<Tag> GetTagsFor(uint entityId)
         {
-            throw new NotImplementedException();
+            return tagsByEntityId.ContainsKey(entityId) ? tagsByEntityId[entityId].ToList() : Enumerable.Empty<Tag>();
         }
     }
 }

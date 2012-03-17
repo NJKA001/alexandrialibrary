@@ -17,8 +17,8 @@ namespace Gnosis.Tests2
         void Remove(T entity, Tag tag);
 
         uint GetId(T entity);
-        uint GetId(T entity, Link link);
-        uint GetId(T entity, Tag tag);
+        uint GetId(Link link);
+        uint GetId(Tag tag);
 
         T GetEntity(uint id);
         Link GetLink(uint id);
