@@ -52,9 +52,10 @@
     <Compile Include="Category.cs" />
     <Compile Include="IBatch.cs" />
     <Compile Include="ICache.cs" />
-    <Compile Include="IDatabase.cs" />
+    <Compile Include="IEntityStore.cs" />
     <Compile Include="GlobalDatabase.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="IChange.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Source.cs" />
     <Compile Include="GlobalBatch.cs" />
