@@ -7,7 +7,8 @@ namespace Gnosis.Tests2
 {
     class Program
     {
-        private static Cache cache;
+        private static GlobalCache cache;
+        private static GlobalDatabase database;
         private static Repository repository;
 
         private static Artist artist;
@@ -22,9 +23,11 @@ namespace Gnosis.Tests2
 
             try
             {
-                cache = new Cache();
-                repository = new Repository(cache);
-                repository.Initialize();
+                cache = new GlobalCache();
+                database = new GlobalDatabase();
+                database.Initialize(cache);
+
+                repository = new Repository(cache, database);
 
                 //AddAlbum();
                 DisplayInfo();

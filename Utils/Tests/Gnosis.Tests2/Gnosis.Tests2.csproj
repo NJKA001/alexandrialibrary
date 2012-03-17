@@ -47,11 +47,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArtistType.cs" />
+    <Compile Include="GlobalCache.cs" />
     <Compile Include="Cache.cs" />
     <Compile Include="Category.cs" />
+    <Compile Include="IBatch.cs" />
+    <Compile Include="ICache.cs" />
+    <Compile Include="IDatabase.cs" />
+    <Compile Include="GlobalDatabase.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Source.cs" />
+    <Compile Include="GlobalBatch.cs" />
     <Compile Include="Work.cs" />
     <Compile Include="Artist.cs" />
     <Compile Include="IRepository.cs" />

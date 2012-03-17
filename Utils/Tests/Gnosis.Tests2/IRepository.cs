@@ -10,7 +10,6 @@ namespace Gnosis.Tests2
         IEnumerable<Artist> Artists { get; }
         IEnumerable<Work> Works { get; }
 
-        void Initialize();
         void Save(IEnumerable<Entity> entities);
         void Delete(IEnumerable<Entity> entities);
     }
