@@ -9,16 +9,16 @@ namespace Gnosis.Tests2
     public interface IEntityStore<T>
         where T : Entity
     {
-        void Initialize(Action entityAction, Action linkAction, Action tagAction);
+        void Initialize(Action<T> entityLoaded, Action<Link> linkLoaded, Action<Tag> tagLoaded);
         
-        IChange DeleteEntity(uint id);
-        IChange DeleteLink(uint id);
-        IChange DeleteTag(uint id);
+        void DeleteEntity(IBatch<T> batch, uint id);
+        void DeleteLink(IBatch<T> batch, uint id);
+        void DeleteTag(IBatch<T> batch, uint id);
 
-        IChange SaveEntity(uint id, T entity);
-        IChange SaveLink(uint id, Link link, uint entityId);
-        IChange SaveTag(uint id, Tag tag, uint entityId);
+        void SaveEntity(IBatch<T> batch, uint id, T entity, Action<uint> entityCreated);
+        void SaveLink(IBatch<T> batch, uint id, Link link, uint entityId, Action<uint> linkCreated);
+        void SaveTag(IBatch<T> batch, uint id, Tag tag, uint entityId, Action<uint> tagCreated);
 
-        IBatch<T> CreateBatch();
+        IBatch<T> CreateBatch(ICache<T> cache);
     }
 }

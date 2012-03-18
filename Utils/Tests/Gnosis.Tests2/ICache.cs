@@ -8,6 +8,8 @@ namespace Gnosis.Tests2
     public interface ICache<T>
         where T : Entity
     {
+        IEnumerable<T> Entities { get; }
+
         void Add(uint id, T entity);
         void Add(uint id, T entity, Link link);
         void Add(uint id, T entity, Tag tag);

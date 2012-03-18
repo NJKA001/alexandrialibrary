@@ -17,6 +17,11 @@ namespace Gnosis.Tests2
         private readonly IDictionary<uint, IList<Link>> linksByEntityId = new Dictionary<uint, IList<Link>>();
         private readonly IDictionary<uint, IList<Tag>> tagsByEntityId = new Dictionary<uint, IList<Tag>>();
 
+        public IEnumerable<T> Entities
+        {
+            get { return entities; }
+        }
+
         public void Add(uint id, T entity)
         {
             if (id == 0)

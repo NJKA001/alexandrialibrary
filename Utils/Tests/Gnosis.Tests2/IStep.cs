@@ -5,9 +5,11 @@ using System.Text;
 
 namespace Gnosis.Tests2
 {
-    public interface IChange
+    public interface IStep
     {
         string Text { get; }
-        IEnumerable<KeyValuePair<string, object>> Data { get; }
+        IEnumerable<KeyValuePair<string, object>> Items { get; }
+
+        void AddItem(string name, object value);
     }
 }

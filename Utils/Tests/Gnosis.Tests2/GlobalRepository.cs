@@ -7,10 +7,10 @@ using System.Text;
 
 namespace Gnosis.Tests2
 {
-    public class Repository
+    public class GlobalRepository
         : IRepository
     {
-        public Repository(GlobalCache cache, GlobalDatabase database)
+        public GlobalRepository(GlobalCache cache, GlobalDatabase database)
         {
             if (cache == null)
                 throw new ArgumentNullException("cache");
@@ -47,6 +47,7 @@ namespace Gnosis.Tests2
             try
             {
                 batch.Start();
+
                 foreach (var entity in entities)
                 {
                     if (entity is Artist)

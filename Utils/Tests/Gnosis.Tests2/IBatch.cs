@@ -11,7 +11,10 @@ namespace Gnosis.Tests2
         void Start();
         void Delete(T entity);
         void Save(T entity);
-        void Stop();
+        void Finish();
+        void Cancel();
         void Close();
+
+        object Execute(IStep command);
     }
 }
