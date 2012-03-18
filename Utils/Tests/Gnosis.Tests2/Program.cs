@@ -7,9 +7,15 @@ namespace Gnosis.Tests2
 {
     class Program
     {
-        private static GlobalCache cache;
-        private static GlobalDatabase database;
-        private static GlobalRepository repository;
+        //private static GlobalCache cache;
+        //private static GlobalDatabase database;
+        //private static GlobalRepository repository;
+
+        private static ICache<Artist> artistCache;
+        private static ICache<Work> workCache;
+        private static IEntityStore<Artist> artistStore;
+        private static IEntityStore<Work> workStore;
+        private static IRepository repository;
 
         private static Artist artist;
         private static Work album;
@@ -23,22 +29,30 @@ namespace Gnosis.Tests2
 
             try
             {
-                cache = new GlobalCache();
-                database = new GlobalDatabase();
-                database.Initialize(cache);
+                artistCache = new Cache<Artist>();
+                workCache = new Cache<Work>();
+                artistStore = new SQLiteArtistDatabase();
+                workStore = new SQLiteWorkDatabase(artistCache, workCache);
+                repository = new Repository(artistCache, artistStore, workCache, workStore);
+                repository.Initialize();
 
-                repository = new GlobalRepository(cache, database);
+                //cache = new GlobalCache();
+                //database = new GlobalDatabase();
+                //database.Initialize(cache);
 
-                //AddAlbum();
+                //repository = new GlobalRepository(cache, database);
+
+                AddAlbum();
                 DisplayInfo();
 
-                Console.WriteLine("Artist Count: {0}", cache.Artists.Count());
-                Console.WriteLine("Work Count: {0}", cache.Works.Count());
+                Console.WriteLine("Artist Count: {0}", artistCache.Entities.Count());
+                Console.WriteLine("Work Count: {0}", workCache.Entities.Count());
             }
             catch (Exception ex)
             {
                 Console.WriteLine("ERROR");
                 Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
             }
 
             Console.WriteLine("Press ENTER to close");
@@ -60,23 +74,24 @@ namespace Gnosis.Tests2
             album.AddChild(track3);
 
             repository.Save(new List<Entity> { artist });
+            repository.Save(artist.Works);
         }
 
         private static void DisplayInfo()
         {
-            var tool = cache.Artists.Where(x => x.Name == "Tool").FirstOrDefault();
-            var aenima = cache.Works.Where(x => x.Name == "Aenima" && x.Artist == tool).FirstOrDefault();
-            var stinkfist = cache.Works.Where(x => x.Name == "Stinkfist" && x.Artist == tool).FirstOrDefault();
-            var eulogy = cache.Works.Where(x => x.Name == "Eulogy" && x.Artist == tool).FirstOrDefault();
-            var h = cache.Works.Where(x => x.Name == "H." && x.Artist == tool).FirstOrDefault();
+            var tool = artistCache.Entities.Where(x => x.Name == "Tool").FirstOrDefault();
+            var aenima = workCache.Entities.Where(x => x.Name == "Aenima" && x.Artist == tool).FirstOrDefault();
+            var stinkfist = workCache.Entities.Where(x => x.Name == "Stinkfist" && x.Artist == tool).FirstOrDefault();
+            var eulogy = workCache.Entities.Where(x => x.Name == "Eulogy" && x.Artist == tool).FirstOrDefault();
+            var h = workCache.Entities.Where(x => x.Name == "H." && x.Artist == tool).FirstOrDefault();
 
-            Console.WriteLine("Artist Id: {0}", cache.GetArtistId(tool));
-            Console.WriteLine("Album Id: {0}", cache.GetWorkId(aenima));
-            Console.WriteLine("Track #1 Id: {0}", cache.GetWorkId(stinkfist));
-            Console.WriteLine("Track #2 Id: {0}", cache.GetWorkId(eulogy));
-            Console.WriteLine("  Track #2 Link Id: {0}", cache.GetWorkLinkId(eulogy.Links.First()));
-            Console.WriteLine("  Track #2 Tag Id: {0}", cache.GetWorkTagId(eulogy.Tags.First()));
-            Console.WriteLine("Track #3 Id: {0}", cache.GetWorkId(h));
+            Console.WriteLine("Artist Id: {0}", artistCache.GetId(tool));
+            Console.WriteLine("Album Id: {0}", workCache.GetId(aenima));
+            Console.WriteLine("Track #1 Id: {0}", workCache.GetId(stinkfist));
+            Console.WriteLine("Track #2 Id: {0}", workCache.GetId(eulogy));
+            Console.WriteLine("  Track #2 Link Id: {0}", workCache.GetId(eulogy.Links.First()));
+            Console.WriteLine("  Track #2 Tag Id: {0}", workCache.GetId(eulogy.Tags.First()));
+            Console.WriteLine("Track #3 Id: {0}", workCache.GetId(h));
         }
     }
 }

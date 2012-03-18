@@ -57,30 +57,6 @@ namespace Gnosis.Tests2
             return command;
         }
 
-        private Action<uint> GetEntityCreatedCallback(uint id, T entity)
-        {
-            if (id > 0)
-                return null;
-
-            return (newId) => cache.Add(newId, entity);
-        }
-
-        private Action<uint> GetLinkCreatedCallback(uint id, T entity, Link link)
-        {
-            if (id > 0)
-                return null;
-
-            return (newId) => cache.Add(newId, entity, link);
-        }
-
-        private Action<uint> GetTagCreatedCallback(uint id, T entity, Tag tag)
-        {
-            if (id > 0)
-                return null;
-
-            return (newId) => cache.Add(newId, entity, tag);
-        }
-
         private void SynchronizeLinks(T entity, uint id)
         {
             foreach (var link in cache.GetLinksFor(id))
@@ -144,8 +120,15 @@ namespace Gnosis.Tests2
 
             var id = cache.GetId(link);
 
-            var linkCreated = GetLinkCreatedCallback(id, entity, link);
-            database.SaveLink(this, id, link, entityId, linkCreated);
+            if (id > 0)
+            {
+                database.SaveLink(this, id, link, entityId);
+            }
+            else
+            {
+                id = database.CreateLink(this, link, entityId);
+                cache.Add(id, entity, link);
+            }
         }
 
         private void SaveTag(T entity, Tag tag)
@@ -159,8 +142,15 @@ namespace Gnosis.Tests2
 
             var id = cache.GetId(tag);
 
-            var tagCreated = GetTagCreatedCallback(id, entity, tag);
-            database.SaveTag(this, id, tag, entityId, tagCreated);
+            if (id > 0)
+            {
+                database.SaveTag(this, id, tag, entityId);
+            }
+            else
+            {
+                id = database.CreateTag(this, tag, entityId);
+                cache.Add(id, entity, tag);
+            }
         }
 
 
@@ -213,8 +203,15 @@ namespace Gnosis.Tests2
 
             var id = cache.GetId(entity);
 
-            var entityCreated = GetEntityCreatedCallback(id, entity);
-            database.SaveEntity(this, id, entity, entityCreated);
+            if (id > 0)
+            {
+                database.SaveEntity(this, id, entity);
+            }
+            else
+            {
+                id = database.CreateEntity(this, entity);
+                cache.Add(id, entity);
+            }
 
             SynchronizeLinks(entity, id);
             SynchronizeTags(entity, id);

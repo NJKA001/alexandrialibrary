@@ -9,6 +9,17 @@ namespace Gnosis.Tests2
     public class Artist
         : Entity
     {
+        public Artist()
+        {
+        }
+
+        public Artist(ArtistType type, string name, short year)
+        {
+            this.type = type;
+            this.name = name ?? string.Empty;
+            this.year = year;
+        }
+
         private ArtistType type;
         private string name;
         private short year;

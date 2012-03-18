@@ -34,6 +34,10 @@ namespace Gnosis.Tests2
             get { return cache.Works; }
         }
 
+        public void Initialize()
+        {
+        }
+
         public void Save(IEnumerable<Entity> entities)
         {
             if (entities == null)

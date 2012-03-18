@@ -9,6 +9,20 @@ namespace Gnosis.Tests2
     public class Work
         : Entity
     {
+        public Work()
+        {
+        }
+
+        public Work(WorkType type, Work parent, Artist artist, string name, short year, uint number)
+        {
+            this.type = type;
+            this.parent = parent;
+            this.artist = artist;
+            this.name = name;
+            this.year = year;
+            this.number = number;
+        }
+
         private WorkType type;
         private Work parent;
         private Artist artist;

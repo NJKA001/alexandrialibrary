@@ -47,6 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArtistType.cs" />
+    <Compile Include="Repository.cs" />
+    <Compile Include="SQLiteArtistDatabase.cs" />
+    <Compile Include="SQLiteWorkDatabase.cs" />
     <Compile Include="Step.cs" />
     <Compile Include="GlobalCache.cs" />
     <Compile Include="Cache.cs" />
