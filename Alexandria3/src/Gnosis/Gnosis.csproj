@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AEA49F04-5AA0-4D12-8D44-7CC3DE02D95D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gnosis</RootNamespace>
+    <AssemblyName>gnosis-core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\Artist.cs" />
+    <Compile Include="Data\ArtistType.cs" />
+    <Compile Include="Data\Category.cs" />
+    <Compile Include="Data\DatabaseBatch.cs" />
+    <Compile Include="Data\Entity.cs" />
+    <Compile Include="Data\EntityCache.cs" />
+    <Compile Include="Data\EntityRepository.cs" />
+    <Compile Include="Data\IArtist.cs" />
+    <Compile Include="Data\IBatch.cs" />
+    <Compile Include="Data\IEntity.cs" />
+    <Compile Include="Data\IEntityCache.cs" />
+    <Compile Include="Data\IEntityRepository.cs" />
+    <Compile Include="Data\IEntityStore.cs" />
+    <Compile Include="Data\ILink.cs" />
+    <Compile Include="Data\IStep.cs" />
+    <Compile Include="Data\ITag.cs" />
+    <Compile Include="Data\IWork.cs" />
+    <Compile Include="Data\Link.cs" />
+    <Compile Include="Data\Relationship.cs" />
+    <Compile Include="Data\Source.cs" />
+    <Compile Include="Data\Step.cs" />
+    <Compile Include="Data\Tag.cs" />
+    <Compile Include="Data\Work.cs" />
+    <Compile Include="Data\WorkType.cs" />
+    <Compile Include="Logging\DebugLogger.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
