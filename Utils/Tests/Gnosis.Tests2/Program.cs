@@ -89,6 +89,7 @@ namespace Gnosis.Tests2
             Console.WriteLine("Album Id: {0}", workCache.GetId(aenima));
             Console.WriteLine("Track #1 Id: {0}", workCache.GetId(stinkfist));
             Console.WriteLine("Track #2 Id: {0}", workCache.GetId(eulogy));
+            Console.WriteLine("  Track #2 Parent Name: {0}", eulogy.Parent.Name);
             Console.WriteLine("  Track #2 Link Id: {0}", workCache.GetId(eulogy.Links.First()));
             Console.WriteLine("  Track #2 Tag Id: {0}", workCache.GetId(eulogy.Tags.First()));
             Console.WriteLine("Track #3 Id: {0}", workCache.GetId(h));

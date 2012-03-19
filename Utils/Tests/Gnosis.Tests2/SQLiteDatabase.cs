@@ -252,10 +252,10 @@ namespace Gnosis.Tests2
 
                 LoadEntities(connection, entityLoaded);
                 LoadLinks(connection, linkLoaded);
-                LoadTags(connection, tagLoaded);
-
-                ExecutePostLoadActions();
+                LoadTags(connection, tagLoaded);    
             }
+
+            ExecutePostLoadActions();
         }
 
         public uint CreateEntity(IBatch<T> batch, T entity)
