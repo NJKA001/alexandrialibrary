@@ -60,19 +60,19 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             imageData = image.ToBytes();
             //Assert.IsNotNull(imageData);
 
-            var tag1 = new Tag(uri1, TagType.DefaultString, "Tool Kicks Ass!");
-            var tag2 = new Tag(uri2, TagType.Artist, "Tool");
-            var tag3 = new Tag(uri3, TagType.Artist, "Tool");
-            var tag4 = new Tag(uri3, TagType.Title, "Ticks & Leeches 1".ToAmericanizedString());
-            var tag5 = new Tag(uri4, TagType.Artist, "Tool");
-            var tag6 = new Tag(uri4, TagType.Title, "The Bottom");
-            var tag7 = new Tag(uri4, TagType.Album, "Undertow");
-            var tag8 = new Tag(uri4, TagType.AttachedPicture, "Album Cover", Gnosis.Algorithms.Algorithm.Default, imageData);
-            var tag9 = new Tag(uri4, TagType.ReleaseTime, releaseDate);
-            var tag10 = new Tag(uri5, TagType.Artist, artist);
-            var tag11 = new Tag(uri5, TagType.Genre, "Rock & Roll");
+            var tag1 = new Gnosis.Tags.Tag(uri1, TagType.DefaultString, "Tool Kicks Ass!");
+            var tag2 = new Gnosis.Tags.Tag(uri2, TagType.Artist, "Tool");
+            var tag3 = new Gnosis.Tags.Tag(uri3, TagType.Artist, "Tool");
+            var tag4 = new Gnosis.Tags.Tag(uri3, TagType.Title, "Ticks & Leeches 1".ToAmericanizedString());
+            var tag5 = new Gnosis.Tags.Tag(uri4, TagType.Artist, "Tool");
+            var tag6 = new Gnosis.Tags.Tag(uri4, TagType.Title, "The Bottom");
+            var tag7 = new Gnosis.Tags.Tag(uri4, TagType.Album, "Undertow");
+            var tag8 = new Gnosis.Tags.Tag(uri4, TagType.AttachedPicture, "Album Cover", Gnosis.Algorithms.Algorithm.Default, imageData);
+            var tag9 = new Gnosis.Tags.Tag(uri4, TagType.ReleaseTime, releaseDate);
+            var tag10 = new Gnosis.Tags.Tag(uri5, TagType.Artist, artist);
+            var tag11 = new Gnosis.Tags.Tag(uri5, TagType.Genre, "Rock & Roll");
 
-            var tags = new List<ITag> { tag1, tag2, tag3, tag4, tag5, tag6, tag7, tag8, tag9, tag10, tag11 };
+            var tags = new List<Gnosis.ITag> { tag1, tag2, tag3, tag4, tag5, tag6, tag7, tag8, tag9, tag10, tag11 };
             repository.Save(tags);
         }
 
@@ -152,21 +152,21 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             var target1 = Guid.NewGuid().ToUrn();
             var target2 = Guid.NewGuid().ToUrn();
 
-            var tag1 = new Tag(target1, TagType.Artist, "R.E.M.");
-            var tag2 = new Tag(target1, TagType.Artist, tag1.Value.ToAmericanizedString(), Gnosis.Algorithms.Algorithm.Americanized);
-            var tag3 = new Tag(target1, TagType.Artist, "Eddie Vedder");
-            var tag4 = new Tag(target1, TagType.Artist, "Natalie Merchant");
-            var tag5 = new Tag(target1, TagType.Artist, tag4.Value.ToAmericanizedString(), Gnosis.Algorithms.Algorithm.Americanized);
-            var tag6 = new Tag(target2, TagType.Artist, "PJ Harvey");
-            var tag7 = new Tag(target1, TagType.Album, "In Time: Best of R.E.M.");
+            var tag1 = new Gnosis.Tags.Tag(target1, TagType.Artist, "R.E.M.");
+            var tag2 = new Gnosis.Tags.Tag(target1, TagType.Artist, tag1.Value.ToAmericanizedString(), Gnosis.Algorithms.Algorithm.Americanized);
+            var tag3 = new Gnosis.Tags.Tag(target1, TagType.Artist, "Eddie Vedder");
+            var tag4 = new Gnosis.Tags.Tag(target1, TagType.Artist, "Natalie Merchant");
+            var tag5 = new Gnosis.Tags.Tag(target1, TagType.Artist, tag4.Value.ToAmericanizedString(), Gnosis.Algorithms.Algorithm.Americanized);
+            var tag6 = new Gnosis.Tags.Tag(target2, TagType.Artist, "PJ Harvey");
+            var tag7 = new Gnosis.Tags.Tag(target1, TagType.Album, "In Time: Best of R.E.M.");
 
             repository.Save( new List<ITag> { tag1, tag2, tag3, tag4, tag5, tag6, tag7 });
 
             var checkByType1 = repository.GetByTarget(target1, TagType.Artist);
             Assert.AreEqual(5, checkByType1.Count());
 
-            var tag8 = new Tag(target1, TagType.Artist, "Patti Smith");
-            var tag9 = new Tag(target1, TagType.Artist, "REM");
+            var tag8 = new Gnosis.Tags.Tag(target1, TagType.Artist, "Patti Smith");
+            var tag9 = new Gnosis.Tags.Tag(target1, TagType.Artist, "REM");
 
             repository.Overwrite(target1, TagType.Artist, new List<ITag> { tag8, tag9 });
 

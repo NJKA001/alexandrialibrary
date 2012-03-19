@@ -75,7 +75,7 @@ namespace Gnosis.Data.SQLite
             var value = record.GetString("Value");
             var data = record.GetBytes("Data");
 
-            return new Tag(target, type, value, algorithm, data, id);
+            return new Gnosis.Tags.Tag(target, type, value, algorithm, data, id);
         }
 
         //private IEnumerable<ITag> GetId3v1SimpleGenreTags(IAlgorithm algorithm, string pattern)

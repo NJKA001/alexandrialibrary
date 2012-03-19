@@ -60,7 +60,7 @@ namespace Gnosis.Data.SQLite
             var name = record.GetString("Name");
             var id = record.GetInt64("Id");
 
-            return new Link(source, target, relationship, name, id);
+            return new Gnosis.Links.Link(source, target, relationship, name, id);
         }
 
         #endregion

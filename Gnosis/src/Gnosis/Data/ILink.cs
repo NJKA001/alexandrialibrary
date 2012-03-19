@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
 namespace Gnosis.Data
 {
     public interface ILink
-        : IEntity
+        : INotifyPropertyChanged
     {
-        uint Parent { get; set; }
-        EntityType ParentType { get; set; }
         string Name { get; set; }
         Relationship Relationship { get; set; }
+        Source Source { get; set; }
         string Target { get; set; }
-        TargetType TargetType { get; set; }
     }
 }

@@ -22,21 +22,21 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             repository = new SQLiteLinkRepository(logger, connection);
             repository.Initialize();
 
-            link1 = new Link(source1, target1, type5, name1);
-            link2 = new Link(source1, target2, type2, name2);
-            link3 = new Link(source3, target3, type3, name3);
-            link4 = new Link(source4, target4, type4, name4);
-            link5 = new Link(source5, target2, type5, name5);
-            link6 = new Link(source1, target6, type6, name6);
-            link7 = new Link(source7, target7, type7, name7);
-            link8 = new Link(source5, target2, type5, name8);
-            link9 = new Link(source5, target2, type9, name9);
-            link10 = new Link(source5, target10, type10, name10);
-            link11 = new Link(source11, target11, type11, name11);
-            link12 = new Link(source12, target2, type5, name12);
-            link13 = new Link(source13, target13, type13, name13);
-            link14 = new Link(source14, target14, type14, name14);
-            link15 = new Link(source15, target15, type15, name15);
+            link1 = new Gnosis.Links.Link(source1, target1, type5, name1);
+            link2 = new Gnosis.Links.Link(source1, target2, type2, name2);
+            link3 = new Gnosis.Links.Link(source3, target3, type3, name3);
+            link4 = new Gnosis.Links.Link(source4, target4, type4, name4);
+            link5 = new Gnosis.Links.Link(source5, target2, type5, name5);
+            link6 = new Gnosis.Links.Link(source1, target6, type6, name6);
+            link7 = new Gnosis.Links.Link(source7, target7, type7, name7);
+            link8 = new Gnosis.Links.Link(source5, target2, type5, name8);
+            link9 = new Gnosis.Links.Link(source5, target2, type9, name9);
+            link10 = new Gnosis.Links.Link(source5, target10, type10, name10);
+            link11 = new Gnosis.Links.Link(source11, target11, type11, name11);
+            link12 = new Gnosis.Links.Link(source12, target2, type5, name12);
+            link13 = new Gnosis.Links.Link(source13, target13, type13, name13);
+            link14 = new Gnosis.Links.Link(source14, target14, type14, name14);
+            link15 = new Gnosis.Links.Link(source15, target15, type15, name15);
 
             links.Add(link1);
             links.Add(link2);
@@ -190,8 +190,8 @@ namespace Gnosis.Tests.Unit.Data.SQLite
             Assert.AreEqual(id, byId.Id);
             Assert.AreNotEqual("glossary", byId.Relationship);
             Assert.AreNotEqual(name, byId.Name);
-            var different = new Link(byId.Source, byId.Target, "glossary", name, id);
-            repository.Save(new List<ILink> { different });
+            var different = new Gnosis.Links.Link(byId.Source, byId.Target, "glossary", name, id);
+            repository.Save(new List<Gnosis.ILink> { different });
             var check = repository.GetById(id);
             Assert.IsNotNull(check);
             Assert.AreEqual(id, check.Id);

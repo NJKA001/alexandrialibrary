@@ -72,7 +72,7 @@ namespace Gnosis.Tests.Performance
                     foreach (var word in line.Split(' '))
                     {
                         //System.Diagnostics.Debug.WriteLine("tag for word: " + word);
-                        tags.Add(new Tag(new Uri(urlBase + Guid.NewGuid().ToString()), TagType.DefaultString, word));
+                        tags.Add(new Gnosis.Tags.Tag(new Uri(urlBase + Guid.NewGuid().ToString()), TagType.DefaultString, word));
                     }
 
                     var start = DateTime.Now;

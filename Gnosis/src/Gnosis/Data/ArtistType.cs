@@ -5,9 +5,8 @@ using System.Text;
 
 namespace Gnosis.Data
 {
-    public interface IPlaylist
-        : IEntity
+    public enum ArtistType : ushort
     {
-        string Name { get; set; }
+        None = 0
     }
 }

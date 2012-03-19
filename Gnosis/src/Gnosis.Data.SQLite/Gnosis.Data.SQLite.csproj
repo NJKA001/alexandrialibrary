@@ -90,6 +90,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SQLiteArtistDatabase.cs" />
+    <Compile Include="SQLiteEntityDatabase.cs" />
     <Compile Include="SQLiteMarqueeRepository.cs" />
     <Compile Include="SQLiteConnectionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="SQLiteMediaRepository.cs" />
     <Compile Include="SQLiteRepositoryBase.cs" />
     <Compile Include="SQLiteTagRepository.cs" />
+    <Compile Include="SQLiteWorkDatabase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gnosis\Gnosis.csproj">
