@@ -28,13 +28,22 @@ namespace Gnosis.Tests2
         {
             var id = (uint)record.GetInt64(0);
             var type = (WorkType)record.GetInt32(1);
-            var parent = workCache.GetEntity((uint)record.GetInt64(2));
+            var parentId = (uint)record.GetInt64(2);
             var artist = artistCache.GetEntity((uint)record.GetInt64(3));
             var name = record.GetString(4);
             var year = record.GetInt16(5);
             var number = (uint)record.GetInt64(6);
 
-            entityLoaded(id, new Work(type, parent, artist, name, year, number));
+            AddPostLoadAction(() =>
+            {
+                var work = workCache.GetEntity(id);
+                if (work == null)
+                    return;
+
+                work.Parent = workCache.GetEntity(parentId);
+            });
+
+            entityLoaded(id, new Work(type, null, artist, name, year, number));
         }
 
         protected override string GetInitEntityCommandText()

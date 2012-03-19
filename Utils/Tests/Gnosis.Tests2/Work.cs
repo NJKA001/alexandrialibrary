@@ -18,7 +18,7 @@ namespace Gnosis.Tests2
             this.type = type;
             this.parent = parent;
             this.artist = artist;
-            this.name = name;
+            this.name = name ?? string.Empty;
             this.year = year;
             this.number = number;
         }

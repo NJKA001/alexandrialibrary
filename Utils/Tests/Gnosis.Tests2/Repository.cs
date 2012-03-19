@@ -38,14 +38,20 @@ namespace Gnosis.Tests2
                 {
                     var entity = artistCache.GetEntity(entityId);
                     if (entity != null)
+                    {
+                        entity.AddLink(link);
                         artistCache.Add(id, entity, link);
+                    }
                 };
             
             Action<uint, Tag, uint> tagLoaded = (id, tag, entityId) =>
                 {
                     var entity = artistCache.GetEntity(entityId);
                     if (entity != null)
+                    {
+                        entity.AddTag(tag);
                         artistCache.Add(id, entity, tag);
+                    }
                 };
 
             artistStore.Initialize(entityLoaded, linkLoaded, tagLoaded);
@@ -59,14 +65,20 @@ namespace Gnosis.Tests2
             {
                 var entity = workCache.GetEntity(entityId);
                 if (entity != null)
+                {
+                    entity.AddLink(link);
                     workCache.Add(id, entity, link);
+                }
             };
 
             Action<uint, Tag, uint> tagLoaded = (id, tag, entityId) =>
             {
                 var entity = workCache.GetEntity(entityId);
                 if (entity != null)
+                {
+                    entity.AddTag(tag);
                     workCache.Add(id, entity, tag);
+                }
             };
 
             workStore.Initialize(entityLoaded, linkLoaded, tagLoaded);

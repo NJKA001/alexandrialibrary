@@ -42,7 +42,7 @@ namespace Gnosis.Tests2
 
                 //repository = new GlobalRepository(cache, database);
 
-                AddAlbum();
+                //AddAlbum();
                 DisplayInfo();
 
                 Console.WriteLine("Artist Count: {0}", artistCache.Entities.Count());

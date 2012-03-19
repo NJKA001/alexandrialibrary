@@ -55,6 +55,8 @@ namespace Gnosis.Tests2
         private readonly string updateTagCommandText;
         private readonly string parentParameterName;
 
+        private readonly IList<Action> postLoadActions = new List<Action>();
+
         protected abstract void LoadEntity(IDataRecord record, Action<uint, T> entityLoaded);
         protected abstract string GetInitEntityCommandText();
         protected abstract IStep GetInsertEntityStep(T entity);
@@ -72,6 +74,20 @@ namespace Gnosis.Tests2
             command.CommandText = commandText;
 
             return command;
+        }
+
+        protected void AddPostLoadAction(Action action)
+        {
+            if (action == null)
+                throw new ArgumentNullException("action");
+
+            postLoadActions.Add(action);
+        }
+
+        protected void ExecutePostLoadActions()
+        {
+            foreach (var action in postLoadActions)
+                action();
         }
 
         protected virtual void InitializeEntities(IDbConnection connection)
@@ -237,6 +253,8 @@ namespace Gnosis.Tests2
                 LoadEntities(connection, entityLoaded);
                 LoadLinks(connection, linkLoaded);
                 LoadTags(connection, tagLoaded);
+
+                ExecutePostLoadActions();
             }
         }
 
