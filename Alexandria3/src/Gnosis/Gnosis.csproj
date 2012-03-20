@@ -68,6 +68,7 @@
     <Compile Include="Data\WorkType.cs" />
     <Compile Include="FileInfoExtensions.cs" />
     <Compile Include="IMediaType.cs" />
+    <Compile Include="IMediaTypeFactory.cs" />
     <Compile Include="Logging\DebugLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="MediaSupertype.cs" />

@@ -18,6 +18,7 @@ namespace Gnosis.Ebla
         private static IEntityStore<IArtist> artistStore;
         private static IEntityStore<IWork> workStore;
         private static IEntityRepository repository;
+        private static IMediaTypeFactory mediaTypeFactory;
 
         const string prompt = "ebla>";
         const string commandExit = ".exit";
@@ -41,6 +42,7 @@ namespace Gnosis.Ebla
                 workStore = new SQLiteWorkDatabase(artistCache, workCache);
                 repository = new EntityRepository(logger, artistCache, artistStore, workCache, workStore);
                 repository.Initialize();
+                mediaTypeFactory = new MediaTypeFactory(logger);
 
                 var exit = false;
                 while (!exit)
@@ -68,7 +70,7 @@ namespace Gnosis.Ebla
             if (tokens == null || tokens.Length == 0)
                 return false;
 
-            var command = tokens[0];
+            var command = tokens[0] ?? string.Empty;
             var options = new List<string>();
             if (tokens.Length > 1)
             {
@@ -87,6 +89,7 @@ namespace Gnosis.Ebla
                     Import(options);
                     break;
                 default:
+                    Console.WriteLine("Unrecognized Command: {0}", command);
                     break;
             }
 
@@ -110,6 +113,9 @@ namespace Gnosis.Ebla
             const string importTypePath = "PATH";
 
             var type = (options != null && options.Count > 0 && options[0] != null) ? options[0].ToUpper() : importTypeAll;
+
+            logger.Debug("Import: " + type);
+
             switch (type)
             {
                 case importTypeAll:
@@ -187,17 +193,24 @@ namespace Gnosis.Ebla
 
             ProcessDirectory(path);
 
-            Console.WriteLine("Importing Finished: {0} files in {1} seconds", importCount, DateTime.Now.Subtract(start).TotalSeconds);
+            var finished = string.Format("Importing Finished: {0} files in {1} seconds", importCount, DateTime.Now.Subtract(start).TotalSeconds);
+            logger.Info(finished);
+            Console.WriteLine(finished);
         }
 
         private static void ProcessDirectory(string path)
         {
+            logger.Debug("Directory: " + path);
             Console.WriteLine("Directory: {0}", path);
 
             foreach (var file in System.IO.Directory.GetFiles(path))
             {
                 importCount++;
-                Console.WriteLine("  File: {0}", file);
+                var mediaType = mediaTypeFactory.GetMediaType(new Uri(file));
+                var fileDebug = string.Format("  {0, -20} {1}", mediaType.Name, file);
+
+                logger.Debug(fileDebug);
+                Console.WriteLine(fileDebug);
             }
 
             foreach (var child in System.IO.Directory.GetDirectories(path))

@@ -9,10 +9,10 @@ using Gnosis.Logging;
 
 namespace Gnosis
 {
-    public class MediaFactory
-        //: IMediaFactory
+    public class MediaTypeFactory
+        : IMediaTypeFactory
     {
-        public MediaFactory(ILogger logger)
+        public MediaTypeFactory(ILogger logger)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -61,6 +61,8 @@ namespace Gnosis
         private const string fileExtension_Jfif = ".jfif";
         private const string fileExtension_Jfi = ".jfi";
         private const string fileExtension_Lnk = ".lnk";
+        private const string fileExtension_M4a = ".m4a";
+        private const string fileExtension_M4v = ".m4v";
         private const string fileExtension_Mp1 = ".mp1";
         private const string fileExtension_Mp2 = ".mp2";
         private const string fileExtension_Mp3 = ".mp3";
@@ -106,23 +108,23 @@ namespace Gnosis
 
         public const string mediaType_ApplicationAtomXml = "application/atom+xml";
 
-        public const string mediaType_ApplicationGnosisAlbum = "application/vnd.gnosis.album";
-        public const string mediaType_ApplicationGnosisArtist = "application/vnd.gnosis.artist";
-        public const string mediaType_ApplicationGnosisClip = "application/vnd.gnosis.clip";
-        public const string mediaType_ApplicationGnosisDoc = "application/vnd.gnosis.doc";
-        public const string mediaType_ApplicationGnosisFeed = "application/vnd.gnosis.feed";
-        public const string mediaType_ApplicationGnosisFeedItem = "application/vnd.gnosis.feed-item";
+        //public const string mediaType_ApplicationGnosisAlbum = "application/vnd.gnosis.album";
+        //public const string mediaType_ApplicationGnosisArtist = "application/vnd.gnosis.artist";
+        //public const string mediaType_ApplicationGnosisClip = "application/vnd.gnosis.clip";
+        //public const string mediaType_ApplicationGnosisDoc = "application/vnd.gnosis.doc";
+        //public const string mediaType_ApplicationGnosisFeed = "application/vnd.gnosis.feed";
+        //public const string mediaType_ApplicationGnosisFeedItem = "application/vnd.gnosis.feed-item";
         public const string mediaType_ApplicationGnosisFilesystemDirectory = "application/vnd.gnosis.fs-dir";
-        public const string mediaType_ApplicationGnosisLink = "application/vnd.gnosis.link";
-        public const string mediaType_ApplicationGnosisPic = "application/vnd.gnosis.pic";
-        public const string mediaType_ApplicationGnosisPlaylist = "application/vnd.gnosis.playlist";
-        public const string mediaType_ApplicationGnosisPlaylistItem = "application/vnd.gnosis.playlist-item";
-        public const string mediaType_ApplicationGnosisProgram = "application/vnd.gnosis.program";
-        public const string mediaType_ApplicationGnosisTag = "application/vnd.gnosis.tag";
-        public const string mediaType_ApplicationGnosisTrack = "application/vnd.gnosis.track";
-        public const string mediaType_ApplicationGnosisUser = "application/vnd.gnosis.user";
-        public const string mediaType_ApplicationGnosisUserCatalog = "application/vnd.gnosis.user-catalog";
-        public const string mediaType_ApplicationGnosisUserFolder = "application/vnd.gnosis.user-folder";
+        //public const string mediaType_ApplicationGnosisLink = "application/vnd.gnosis.link";
+        //public const string mediaType_ApplicationGnosisPic = "application/vnd.gnosis.pic";
+        //public const string mediaType_ApplicationGnosisPlaylist = "application/vnd.gnosis.playlist";
+        //public const string mediaType_ApplicationGnosisPlaylistItem = "application/vnd.gnosis.playlist-item";
+        //public const string mediaType_ApplicationGnosisProgram = "application/vnd.gnosis.program";
+        //public const string mediaType_ApplicationGnosisTag = "application/vnd.gnosis.tag";
+        //public const string mediaType_ApplicationGnosisTrack = "application/vnd.gnosis.track";
+        //public const string mediaType_ApplicationGnosisUser = "application/vnd.gnosis.user";
+        //public const string mediaType_ApplicationGnosisUserCatalog = "application/vnd.gnosis.user-catalog";
+        //public const string mediaType_ApplicationGnosisUserFolder = "application/vnd.gnosis.user-folder";
 
         public const string mediaType_ApplicationDosExe = "application/dos-exe";
         public const string mediaType_ApplicationXExe = "application/x-exe";
@@ -145,6 +147,8 @@ namespace Gnosis
         public const string mediaType_ApplicationXmlDtd = "application/xml-dtd";
 
         public const string mediaType_AudioMp3 = "audio/mp3";
+        public const string mediaType_AudioMp4 = "audio/mp4";
+        public const string mediaType_AudioAac = "audio/aac";
         public const string mediaType_AudioMpeg = "audio/mpeg";
 
         public const string mediaType_ImageXBmp = "image/x-bmp";
@@ -210,6 +214,7 @@ namespace Gnosis
 
             //MapFileExtensions(mediaType_AudioMp3, new List<string> { fileExtension_Mp3, fileExtension_Mp2, fileExtension_Mp1 });
             MapFileExtensions(mediaType_AudioMpeg, new List<string> { fileExtension_Mp3, fileExtension_Mp2, fileExtension_Mp1 });
+            MapFileExtensions(mediaType_AudioMp4, new List<string> { fileExtension_M4a });
 
             //MapFileExtensions(mediaType_ImageXMsBmp, new List<string> { fileExtension_Bmp, fileExtension_Dib });
             MapFileExtensions(mediaType_ImageXBmp, new List<string> { fileExtension_Bmp, fileExtension_Dib });
@@ -228,7 +233,7 @@ namespace Gnosis
             MapFileExtensions(mediaType_VideoAvi, new List<string> { fileExtension_Avi });
 
             MapFileExtensions(mediaType_VideoMpeg, new List<string> { fileExtension_Mpeg, fileExtension_Mpe, fileExtension_Mpg, fileExtension_Mpga });
-            MapFileExtensions(mediaType_VideoMpeg4, new List<string> { fileExtension_Mp4, fileExtension_Mpg4 });
+            MapFileExtensions(mediaType_VideoMpeg4, new List<string> { fileExtension_M4v, fileExtension_Mp4, fileExtension_Mpg4 });
 
             MapFileExtensions(mediaType_VideoWmv, new List<string> { fileExtension_Wmv });
         }
@@ -606,7 +611,7 @@ namespace Gnosis
             }
             catch (Exception ex)
             {
-                logger.Error("  ContentType.GetByLocation", ex);
+                logger.Error("  MediaTypeFactory.GetTypeByLocation", ex);
                 return DefaultType;
             }
         }
