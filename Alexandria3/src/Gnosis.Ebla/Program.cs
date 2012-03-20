@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Data;
+using Gnosis.Data.SQLite;
 using Gnosis.Logging;
 using Gnosis.Logging.Log4Net;
 
@@ -11,7 +13,12 @@ namespace Gnosis.Ebla
     class Program
     {
         private static ILogger logger;
-        
+        private static IEntityCache<IArtist> artistCache;
+        private static IEntityCache<IWork> workCache;
+        private static IEntityStore<IArtist> artistStore;
+        private static IEntityStore<IWork> workStore;
+        private static IEntityRepository repository;
+
         const string prompt = "ebla>";
         const string commandExit = ".exit";
         const string commandHelp = ".help";
@@ -27,6 +34,13 @@ namespace Gnosis.Ebla
 
                 Console.WriteLine("Ebla version 3.0.0.0");
                 Console.WriteLine("Enter \"{0}\" for instructions", commandHelp);
+
+                artistCache = new EntityCache<IArtist>();
+                workCache = new EntityCache<IWork>();
+                artistStore = new SQLiteArtistDatabase();
+                workStore = new SQLiteWorkDatabase(artistCache, workCache);
+                repository = new EntityRepository(logger, artistCache, artistStore, workCache, workStore);
+                repository.Initialize();
 
                 var exit = false;
                 while (!exit)
@@ -108,14 +122,9 @@ namespace Gnosis.Ebla
                     ImportMyMusic();
                     break;
                 case importTypePath:
-                    Console.WriteLine(">path: ");
-                    var path = Console.ReadLine();
-
-                    if (!string.IsNullOrEmpty(path) && System.IO.Directory.Exists(path))
-                        ImportPath(path);
-                    else
-                        Console.WriteLine("ERROR: Path not found");
-                        break;
+                    Console.Write("Path: ");
+                    ImportPath(Console.ReadLine());
+                    break;
                 case importTypePictures:
                     ImportMyPictures();
                     break;
@@ -138,27 +147,63 @@ namespace Gnosis.Ebla
 
         private static void ImportMyDocuments()
         {
-            Console.WriteLine(System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+            var path = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            ImportPath(path);
         }
 
         private static void ImportMyMusic()
         {
-            Console.WriteLine(System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic));
+            var path = System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+            ImportPath(path);
         }
 
         private static void ImportMyPictures()
         {
-            Console.WriteLine(System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures));
+            var path = System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            ImportPath(path);
         }
 
         private static void ImportMyVideos()
         {
-            Console.WriteLine(System.Environment.GetFolderPath(Environment.SpecialFolder.MyVideos));
+            var path = System.Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+            ImportPath(path);
         }
+
+        private static int importCount;
 
         private static void ImportPath(string path)
         {
-            Console.WriteLine("Importing Path: \"{0}\"", path);
+            if (string.IsNullOrEmpty(path) || !System.IO.Directory.Exists(path))
+            {
+                Console.WriteLine("ERROR: Path not found");
+                return;
+            }
+
+            Console.WriteLine("Importing: \"{0}\"", path);
+            Console.WriteLine();
+
+            importCount = 0;
+            var start = DateTime.Now;
+
+            ProcessDirectory(path);
+
+            Console.WriteLine("Importing Finished: {0} files in {1} seconds", importCount, DateTime.Now.Subtract(start).TotalSeconds);
+        }
+
+        private static void ProcessDirectory(string path)
+        {
+            Console.WriteLine("Directory: {0}", path);
+
+            foreach (var file in System.IO.Directory.GetFiles(path))
+            {
+                importCount++;
+                Console.WriteLine("  File: {0}", file);
+            }
+
+            foreach (var child in System.IO.Directory.GetDirectories(path))
+            {
+                ProcessDirectory(child);
+            }
         }
     }
 }

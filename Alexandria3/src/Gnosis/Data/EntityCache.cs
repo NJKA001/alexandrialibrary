@@ -8,7 +8,7 @@ namespace Gnosis.Data
 {
     public class EntityCache<T>
         : IEntityCache<T>
-        where T : Entity
+        where T : class, IEntity
     {
         private readonly ObservableCollection<T> entities = new ObservableCollection<T>();
         private readonly IDictionary<uint, T> entitiesById = new Dictionary<uint, T>();
