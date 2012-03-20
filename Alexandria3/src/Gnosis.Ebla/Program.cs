@@ -18,7 +18,8 @@ namespace Gnosis.Ebla
         private static IEntityStore<IArtist> artistStore;
         private static IEntityStore<IWork> workStore;
         private static IEntityRepository repository;
-        private static IMediaTypeFactory mediaTypeFactory;
+        private static IMediaFactory mediaFactory;
+        private static IMediaImporter mediaImporter;
 
         const string prompt = "ebla>";
         const string commandExit = ".exit";
@@ -42,7 +43,9 @@ namespace Gnosis.Ebla
                 workStore = new SQLiteWorkDatabase(artistCache, workCache);
                 repository = new EntityRepository(logger, artistCache, artistStore, workCache, workStore);
                 repository.Initialize();
-                mediaTypeFactory = new MediaTypeFactory(logger);
+                
+                mediaFactory = new MediaFactory(logger);
+                mediaImporter = new MediaImporter(logger, mediaFactory, repository);
 
                 var exit = false;
                 while (!exit)
@@ -58,6 +61,7 @@ namespace Gnosis.Ebla
                 Console.WriteLine("ERROR");
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
+                Console.ReadLine();
             }
         }
 
@@ -175,8 +179,6 @@ namespace Gnosis.Ebla
             ImportPath(path);
         }
 
-        private static int importCount;
-
         private static void ImportPath(string path)
         {
             if (string.IsNullOrEmpty(path) || !System.IO.Directory.Exists(path))
@@ -188,35 +190,19 @@ namespace Gnosis.Ebla
             Console.WriteLine("Importing: \"{0}\"", path);
             Console.WriteLine();
 
-            importCount = 0;
+            uint importCount = 0;
             var start = DateTime.Now;
 
-            ProcessDirectory(path);
-
-            var finished = string.Format("Importing Finished: {0} files in {1} seconds", importCount, DateTime.Now.Subtract(start).TotalSeconds);
-            logger.Info(finished);
-            Console.WriteLine(finished);
-        }
-
-        private static void ProcessDirectory(string path)
-        {
-            logger.Debug("Directory: " + path);
-            Console.WriteLine("Directory: {0}", path);
-
-            foreach (var file in System.IO.Directory.GetFiles(path))
+            mediaImporter.SetDirectoryCallback(dir => Console.WriteLine("Directory: {0}", dir));
+            mediaImporter.SetMediaCallback(media => { importCount++; Console.WriteLine("  {0,-20} {1}", media.Type.Name, media.Path); });
+            mediaImporter.SetCompletedCallback(() =>
             {
-                importCount++;
-                var mediaType = mediaTypeFactory.GetMediaType(new Uri(file));
-                var fileDebug = string.Format("  {0, -20} {1}", mediaType.Name, file);
-
-                logger.Debug(fileDebug);
-                Console.WriteLine(fileDebug);
-            }
-
-            foreach (var child in System.IO.Directory.GetDirectories(path))
-            {
-                ProcessDirectory(child);
-            }
+                var finished = string.Format("Importing Finished: {0} files in {1} seconds", importCount, DateTime.Now.Subtract(start).TotalSeconds);
+                logger.Info(finished);
+                Console.WriteLine(finished);
+            });
+            
+            mediaImporter.Import(path);
         }
     }
 }

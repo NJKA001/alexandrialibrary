@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Gnosis
 {
-    public interface IMediaTypeFactory
+    public interface IMediaFactory
     {
-        IMediaType GetMediaType(Uri location);
+        IMedia GetMedia(Uri location);
         IMediaType GetMediaType(string name);
 
         void MapFileExtensions(string mediaType, IEnumerable<string> fileExtensions);

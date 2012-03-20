@@ -9,10 +9,10 @@ using Gnosis.Logging;
 
 namespace Gnosis
 {
-    public class MediaTypeFactory
-        : IMediaTypeFactory
+    public class MediaFactory
+        : IMediaFactory
     {
-        public MediaTypeFactory(ILogger logger)
+        public MediaFactory(ILogger logger)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -638,12 +638,14 @@ namespace Gnosis
         //    return createFunctions[key](location, type);
         //}
 
-        public IMediaType GetMediaType(Uri location)
+        public IMedia GetMedia(Uri location)
         {
             if (location == null)
                 throw new ArgumentNullException("location");
 
-            return GetTypeByLocation(location);
+            var type = GetTypeByLocation(location);
+
+            return new Media(location.ToString(), type);
         }
 
         public IMediaType GetMediaType(string name)
