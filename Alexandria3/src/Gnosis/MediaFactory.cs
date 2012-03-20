@@ -451,11 +451,6 @@ namespace Gnosis
                 : Enumerable.Empty<string>();
         }
 
-        private IMediaType DefaultType
-        {
-            get { return defaultType; }
-        }
-
         private IMediaType GetTypeByCode(string code)
         {
             if (code == null)
@@ -616,7 +611,7 @@ namespace Gnosis
             }
         }
 
-        public IMediaType Default
+        public IMediaType DefaultType
         {
             get { return defaultType; }
         }

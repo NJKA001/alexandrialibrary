@@ -179,6 +179,47 @@ namespace Gnosis.Ebla
             ImportPath(path);
         }
 
+        private static IList<string> ignoreExtensions = new List<string> { ".dll", ".exe", ".ini" };
+
+        private static bool MediaPathIsValid(string path)
+        {
+            if (path == null)
+                return false;
+
+            foreach (var extension in ignoreExtensions)
+                if (path.EndsWith(extension, StringComparison.InvariantCultureIgnoreCase))
+                    return false;
+
+            return true;
+        }
+
+        private static bool MediaIsValid(IMedia media)
+        {
+            if (media == null)
+                return false;
+
+            if (media.Type.Name == mediaFactory.DefaultType.Name)
+                return false;
+
+            return true;
+        }
+
+        private static void MediaImported(IImportInfo importInfo)
+        {
+            importCount++;
+            var entityType = "Unknown";
+            if (importInfo.Entity != null)
+            {
+                if (importInfo.Entity is IArtist)
+                    entityType = ((IArtist)importInfo.Entity).Type.ToString();
+                else if (importInfo.Entity is IWork)
+                    entityType = ((IWork)importInfo.Entity).Type.ToString();
+            }
+            Console.WriteLine("  {0,-20} {1,-10} {2}", importInfo.MediaType.Name, entityType, importInfo.Path.TruncatePath(46));
+        }
+
+        private static uint importCount;
+
         private static void ImportPath(string path)
         {
             if (string.IsNullOrEmpty(path) || !System.IO.Directory.Exists(path))
@@ -190,11 +231,13 @@ namespace Gnosis.Ebla
             Console.WriteLine("Importing: \"{0}\"", path);
             Console.WriteLine();
 
-            uint importCount = 0;
+            importCount = 0;
             var start = DateTime.Now;
 
-            mediaImporter.SetDirectoryCallback(dir => Console.WriteLine("Directory: {0}", dir));
-            mediaImporter.SetMediaCallback(media => { importCount++; Console.WriteLine("  {0,-20} {1}", media.Type.Name, media.Path); });
+            mediaImporter.SetMediaPathFilter(mediaPath => MediaPathIsValid(mediaPath));
+            mediaImporter.SetMediaFilter(media => MediaIsValid(media));
+            mediaImporter.SetDirectoryCallback(dir => Console.WriteLine(dir.TruncatePath(78)));
+            mediaImporter.SetImportCallback(importInfo => MediaImported(importInfo));
             mediaImporter.SetCompletedCallback(() =>
             {
                 var finished = string.Format("Importing Finished: {0} files in {1} seconds", importCount, DateTime.Now.Subtract(start).TotalSeconds);

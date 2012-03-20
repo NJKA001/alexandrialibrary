@@ -67,10 +67,12 @@
     <Compile Include="Data\Work.cs" />
     <Compile Include="Data\WorkType.cs" />
     <Compile Include="FileInfoExtensions.cs" />
+    <Compile Include="IImportInfo.cs" />
     <Compile Include="IMedia.cs" />
     <Compile Include="IMediaImporter.cs" />
     <Compile Include="IMediaType.cs" />
     <Compile Include="IMediaFactory.cs" />
+    <Compile Include="ImportInfo.cs" />
     <Compile Include="Logging\DebugLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="MediaImporter.cs" />

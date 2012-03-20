@@ -7,6 +7,8 @@ namespace Gnosis
 {
     public interface IMediaFactory
     {
+        IMediaType DefaultType { get; }
+
         IMedia GetMedia(Uri location);
         IMediaType GetMediaType(string name);
 

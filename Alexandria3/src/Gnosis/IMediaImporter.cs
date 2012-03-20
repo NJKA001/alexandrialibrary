@@ -12,7 +12,7 @@ namespace Gnosis
         void SetMediaFilter(Func<IMedia, bool> mediaFilter);
 
         void SetDirectoryCallback(Action<string> directoryCallback);
-        void SetMediaCallback(Action<IMedia> mediaCallback);
+        void SetImportCallback(Action<IImportInfo> importCallback);
         void SetCompletedCallback(Action completedCallback);
 
         void Import(string path);

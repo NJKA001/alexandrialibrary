@@ -1264,6 +1264,40 @@ namespace Gnosis
             return regex.Replace(self, string.Empty);
         }
 
+        public static string TruncatePath(this string path, int maxSize)
+        {
+            if (path == null)
+                throw new ArgumentNullException("path");
+
+            var normalized = path;
+
+            try
+            {
+                var uri = new Uri(path);
+                normalized = uri.IsFile ? uri.LocalPath : uri.ToString();
+            }
+            catch (Exception)
+            {
+                normalized = path.Replace("file:///", string.Empty);
+            }
+
+            var halfSize = (int)Math.Truncate((double)maxSize / 2) - 2;
+            var length = normalized.Length;
+
+            return (length > maxSize) ?
+                string.Format("{0}...{1}", normalized.Substring(0, halfSize), normalized.Substring(length - halfSize, halfSize)).Trim()
+                : normalized;
+        }
+
+        public static string RemoveExtension(this string path)
+        {
+            if (path == null || !path.Contains('.'))
+                return path;
+
+            var index = path.LastIndexOf('.');
+            return path.Substring(0, index);
+        }
+
         /*
         public static string ToUrlEncodedString(this string self)
         {

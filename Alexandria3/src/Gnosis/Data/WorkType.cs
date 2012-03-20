@@ -19,6 +19,9 @@ namespace Gnosis.Data
         Episode = 9,
         Movie = 10,
         Document = 11,
-        Bookmark = 12
+        Bookmark = 12,
+        Image = 13,
+        Text = 14,
+        Video = 15
     }
 }
