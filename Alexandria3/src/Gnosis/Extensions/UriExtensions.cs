@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Xml;
 
-namespace Gnosis
+namespace Gnosis.Extensions
 {
     public static class UriExtensions
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Gnosis
+namespace Gnosis.Extensions
 {
     public static class StreamExtensions
     {

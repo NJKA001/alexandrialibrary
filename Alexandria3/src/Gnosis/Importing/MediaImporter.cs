@@ -5,14 +5,16 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Data;
+using Gnosis.Extensions;
 using Gnosis.Logging;
+using Gnosis.Tagging;
 
-namespace Gnosis
+namespace Gnosis.Importing
 {
     public class MediaImporter
         : IMediaImporter
     {
-        public MediaImporter(ILogger logger, IMediaFactory mediaFactory, IEntityRepository repository)
+        public MediaImporter(ILogger logger, IMediaFactory mediaFactory, IEntityRepository repository, ITagger tagger)
         {
             if (logger == null)
                 throw new ArgumentNullException("logger");
@@ -20,15 +22,19 @@ namespace Gnosis
                 throw new ArgumentNullException("mediaFactory");
             if (repository == null)
                 throw new ArgumentNullException("repository");
+            if (tagger == null)
+                throw new ArgumentNullException("tagger");
 
             this.logger = logger;
             this.mediaFactory = mediaFactory;
             this.repository = repository;
+            this.tagger = tagger;
         }
 
         private readonly ILogger logger;
         private readonly IMediaFactory mediaFactory;
         private readonly IEntityRepository repository;
+        private readonly ITagger tagger;
 
         private Func<string, bool> directoryPathFilter;
         private Func<string, bool> mediaPathFilter;
@@ -64,6 +70,12 @@ namespace Gnosis
                 logger.Error("  GetDirectories failed for path: " + path, ex);
                 return Enumerable.Empty<string>();
             }
+        }
+
+        private IWork GetWorkFromTags(string path)
+        {
+            return null;
+            //var 
         }
 
         private IEntity GetEntity(IMedia media)

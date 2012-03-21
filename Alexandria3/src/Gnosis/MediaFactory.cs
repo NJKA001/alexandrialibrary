@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 
+using Gnosis.Extensions;
 using Gnosis.Logging;
 
 namespace Gnosis

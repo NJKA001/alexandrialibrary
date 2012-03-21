@@ -5,7 +5,7 @@ using System.Text;
 
 using Gnosis.Data;
 
-namespace Gnosis
+namespace Gnosis.Importing
 {
     public class ImportInfo
         : IImportInfo

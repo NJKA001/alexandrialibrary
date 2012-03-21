@@ -5,8 +5,12 @@ using System.Text;
 
 using Gnosis.Data;
 using Gnosis.Data.SQLite;
+using Gnosis.Extensions;
+using Gnosis.Importing;
 using Gnosis.Logging;
 using Gnosis.Logging.Log4Net;
+using Gnosis.Tagging;
+using Gnosis.Tagging.TagLib;
 
 namespace Gnosis.Ebla
 {
@@ -20,6 +24,7 @@ namespace Gnosis.Ebla
         private static IEntityRepository repository;
         private static IMediaFactory mediaFactory;
         private static IMediaImporter mediaImporter;
+        private static ITagger tagger;
 
         const string prompt = "ebla>";
         const string commandExit = ".exit";
@@ -43,9 +48,11 @@ namespace Gnosis.Ebla
                 workStore = new SQLiteWorkDatabase(artistCache, workCache);
                 repository = new EntityRepository(logger, artistCache, artistStore, workCache, workStore);
                 repository.Initialize();
-                
+
+                tagger = new Tagger();
+
                 mediaFactory = new MediaFactory(logger);
-                mediaImporter = new MediaImporter(logger, mediaFactory, repository);
+                mediaImporter = new MediaImporter(logger, mediaFactory, repository, tagger);
 
                 var exit = false;
                 while (!exit)
