@@ -1,0 +1,5 @@
+C:\dev\Agot\Agot.Core\bin\Debug\Agot.Core.dll
+C:\dev\Agot\Agot.Core\bin\Debug\Agot.Core.pdb
+C:\dev\Agot\Agot.Core\obj\Debug\ResolveAssemblyReference.cache
+C:\dev\Agot\Agot.Core\obj\Debug\Agot.Core.dll
+C:\dev\Agot\Agot.Core\obj\Debug\Agot.Core.pdb
