@@ -5,15 +5,9 @@ using System.Text;
 
 namespace Agot
 {
-    public enum CardType
+    public enum AgendaType
     {
         None = 0,
-        Agenda,
-        Attachment,
-        Character,
-        Event,
-        House,
-        Location,
-        Plot
+
     }
 }

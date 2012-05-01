@@ -5,11 +5,8 @@ using System.Text;
 
 namespace Agot
 {
-    public enum ChallengeIcon
+    public interface ITargetRestriction
     {
-        None = 0,
-        Military,
-        Intrigue,
-        Power
+        bool IsFulfilledBy(ICardInPlay card);
     }
 }

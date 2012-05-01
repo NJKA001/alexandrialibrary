@@ -7,6 +7,7 @@ namespace Agot
 {
     public interface IAbility
     {
+        IEnumerable<ICost> Costs { get; }
         AbilityType Type { get; }
         bool IsLimited { get; }
         bool IsImmunity { get; }

@@ -11,10 +11,9 @@ namespace Agot
         bool IsUnique { get; }
         bool IsLimited { get; }
 
-        House Affiliation { get; }
+        IEnumerable<HouseType> Affiliations { get; }
         byte Cost { get; }
 
-        IEnumerable<IAbility> Abilities { get; }
         IText Text { get; }
     }
 }

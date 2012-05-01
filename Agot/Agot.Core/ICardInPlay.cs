@@ -15,11 +15,12 @@ namespace Agot
         bool IsCompletelyBlank { get; }
         bool IsBlankExceptForTraits { get; }
 
-        CardType ActingAsCardType { get; }
+        CardType ActingAs { get; }
         ICardInPlay AttachedTo { get; }
         ICard Card { get; }
         IEnumerable<ICardInPlay> Attachments { get; }
         IEnumerable<IModifier> Modifiers { get; }
+        IEnumerable<Crest> Crests { get; }
 
         byte GoldTokens { get; }
         byte PowerTokens { get; }

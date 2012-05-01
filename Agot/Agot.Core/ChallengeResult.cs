@@ -5,15 +5,11 @@ using System.Text;
 
 namespace Agot
 {
-    public enum CardType
+    public enum ChallengeResult
     {
         None = 0,
-        Agenda,
-        Attachment,
-        Character,
-        Event,
-        House,
-        Location,
-        Plot
+        AttackerWon,
+        DefenderWon,
+        Inconclusive
     }
 }

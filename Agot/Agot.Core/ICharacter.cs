@@ -8,9 +8,9 @@ namespace Agot
     public interface ICharacter
         : IPermanent
     {
-        byte PrintedStrength { get; }
-        bool PrintedMilitaryIcon { get; }
-        bool PrintedIntrigueIcon { get; }
-        bool PrintedPowerIcon { get; }
+        IEnumerable<ChallengeIcon> Icons { get; }
+        IEnumerable<Crest> Crests { get; }
+
+        byte Strength { get; }
     }
 }

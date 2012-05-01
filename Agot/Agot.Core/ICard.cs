@@ -7,8 +7,12 @@ namespace Agot
 {
     public interface ICard
     {
-        string Name { get; }
+        string Title { get; }
         CardType Type { get; }
-        House HouseRestriction { get; }
+        CardSet Set { get; }
+        IEnumerable<IDeckRestriction> DeckRestrictions { get; }
+        IEnumerable<IPlayRestriction> PlayRestrictions { get; }
+        IEnumerable<ITargetRestriction> TargetRestrictions { get; }
+        IEnumerable<ICost> PlayCosts { get; }
     }
 }

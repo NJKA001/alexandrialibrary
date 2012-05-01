@@ -5,11 +5,8 @@ using System.Text;
 
 namespace Agot
 {
-    public enum ChallengeIcon
+    public interface IEvent
+        : ICard
     {
-        None = 0,
-        Military,
-        Intrigue,
-        Power
     }
 }

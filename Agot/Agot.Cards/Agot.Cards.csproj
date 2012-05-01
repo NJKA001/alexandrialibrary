@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F6DC2A6C-4483-4527-8079-AF8222AE1A9E}</ProjectGuid>
+    <ProjectGuid>{F58D2E71-BF3D-479A-9D00-13AAD06BD21F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Agot</RootNamespace>
-    <AssemblyName>Agot.Core</AssemblyName>
+    <AssemblyName>Agot.Cards</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,54 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbilityType.cs" />
-    <Compile Include="AgendaType.cs" />
-    <Compile Include="Card.cs" />
-    <Compile Include="CardBase.cs" />
-    <Compile Include="CardType.cs" />
-    <Compile Include="ChallengeIcon.cs" />
-    <Compile Include="ChallengeResult.cs" />
-    <Compile Include="CharacterBase.cs" />
-    <Compile Include="Crest.cs" />
-    <Compile Include="EventBase.cs" />
-    <Compile Include="HouseType.cs" />
-    <Compile Include="IAbility.cs" />
-    <Compile Include="IAgenda.cs" />
-    <Compile Include="ICard.cs" />
-    <Compile Include="ICardInHand.cs" />
-    <Compile Include="ICardInPlay.cs" />
-    <Compile Include="ICardInShadows.cs" />
-    <Compile Include="CardSet.cs" />
-    <Compile Include="IChallenge.cs" />
-    <Compile Include="ICharacter.cs" />
-    <Compile Include="ICost.cs" />
-    <Compile Include="IDeck.cs" />
-    <Compile Include="IDeckRestriction.cs" />
-    <Compile Include="IEvent.cs" />
-    <Compile Include="IGame.cs" />
-    <Compile Include="IHouse.cs" />
-    <Compile Include="IPhase.cs" />
-    <Compile Include="IPhaseEffect.cs" />
-    <Compile Include="IPile.cs" />
-    <Compile Include="IAbilityEffect.cs" />
-    <Compile Include="IHand.cs" />
-    <Compile Include="IModifier.cs" />
-    <Compile Include="IPermanent.cs" />
-    <Compile Include="IPlayer.cs" />
-    <Compile Include="IPlayRestriction.cs" />
-    <Compile Include="IPlot.cs" />
-    <Compile Include="ITargetRestriction.cs" />
-    <Compile Include="ITitle.cs" />
-    <Compile Include="IRound.cs" />
-    <Compile Include="IText.cs" />
-    <Compile Include="IRoundEffect.cs" />
-    <Compile Include="Keyword.cs" />
-    <Compile Include="PermanentBase.cs" />
-    <Compile Include="PhaseType.cs" />
+    <Compile Include="Core2008Set\AegonsBlade.cs" />
+    <Compile Include="Core2008Set\ALannisterPaysHisDebts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SeasonType.cs" />
-    <Compile Include="Title.cs" />
-    <Compile Include="Trait.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Agot.Core\Agot.Core.csproj">
+      <Project>{F6DC2A6C-4483-4527-8079-AF8222AE1A9E}</Project>
+      <Name>Agot.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ASongOfSummerSet\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

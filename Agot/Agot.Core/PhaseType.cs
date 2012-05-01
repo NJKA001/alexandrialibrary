@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Agot
 {
-    public enum Phase
+    public enum PhaseType
     {
         None = 0,
         Plot,

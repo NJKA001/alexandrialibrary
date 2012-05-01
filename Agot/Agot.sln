@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agot.Core", "Agot.Core\Agot.Core.csproj", "{F6DC2A6C-4483-4527-8079-AF8222AE1A9E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agot.Cards", "Agot.Cards\Agot.Cards.csproj", "{F58D2E71-BF3D-479A-9D00-13AAD06BD21F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{F6DC2A6C-4483-4527-8079-AF8222AE1A9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6DC2A6C-4483-4527-8079-AF8222AE1A9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6DC2A6C-4483-4527-8079-AF8222AE1A9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F58D2E71-BF3D-479A-9D00-13AAD06BD21F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F58D2E71-BF3D-479A-9D00-13AAD06BD21F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F58D2E71-BF3D-479A-9D00-13AAD06BD21F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F58D2E71-BF3D-479A-9D00-13AAD06BD21F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

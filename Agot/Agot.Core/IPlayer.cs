@@ -9,21 +9,18 @@ namespace Agot
     public interface IPlayer
         : INotifyPropertyChanged
     {
-        ICard House { get; }
-        IEnumerable<ICard> Agendas { get; }
-        IEnumerable<Title> CurrentTitles { get; }
-
-        byte TotalGold { get; }
-        byte TotalPower { get; }
+        IHouse House { get; }
+        IEnumerable<IAgenda> Agendas { get; }
+        IEnumerable<ITitle> CurrentTitles { get; }
+        IPlot RevealedPlot { get; }
 
         IHand Hand { get; }
-        IDeck Deck { get; }
+        IDeck DrawDeck { get; }
+        IDeck PlotDeck { get; }
+        IPile UsedPlotPile { get; }
         IPile DiscardPile { get; }
         IPile DeadPile { get; }
         IPile RemovedFromGamePile { get; }
-
-        ICard DrawCardFromDeck();
-        void DiscardTopCardFromDeck();
 
         void AddTitle(Title title);
         void RemoveTitle(Title title);

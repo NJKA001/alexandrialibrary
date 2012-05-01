@@ -5,11 +5,7 @@ using System.Text;
 
 namespace Agot
 {
-    public enum ChallengeIcon
+    public interface IDeckRestriction
     {
-        None = 0,
-        Military,
-        Intrigue,
-        Power
     }
 }

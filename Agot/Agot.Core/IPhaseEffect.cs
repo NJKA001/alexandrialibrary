@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Agot
 {
-    public interface IEffect
+    public interface IPhaseEffect
     {
     }
 }

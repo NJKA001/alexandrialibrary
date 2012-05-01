@@ -5,11 +5,7 @@ using System.Text;
 
 namespace Agot
 {
-    public enum ChallengeIcon
+    public interface IRoundEffect
     {
-        None = 0,
-        Military,
-        Intrigue,
-        Power
     }
 }

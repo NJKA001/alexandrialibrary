@@ -8,6 +8,7 @@ namespace Agot
     public interface IText
     {
         string FlavorText { get; }
+        IEnumerable<Keyword> Keywords { get; }
         IEnumerable<Crest> Crests { get; }
         IEnumerable<Trait> Traits { get; }
         IEnumerable<IAbility> Abilities { get; }

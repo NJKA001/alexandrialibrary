@@ -5,11 +5,8 @@ using System.Text;
 
 namespace Agot
 {
-    public enum ChallengeIcon
+    public interface ITitle
     {
-        None = 0,
-        Military,
-        Intrigue,
-        Power
+        string Name { get; }
     }
 }

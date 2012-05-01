@@ -5,15 +5,10 @@ using System.Text;
 
 namespace Agot
 {
-    public enum CardType
+    public enum SeasonType
     {
         None = 0,
-        Agenda,
-        Attachment,
-        Character,
-        Event,
-        House,
-        Location,
-        Plot
+        Summer,
+        Winter
     }
 }

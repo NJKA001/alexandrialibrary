@@ -5,11 +5,8 @@ using System.Text;
 
 namespace Agot
 {
-    public enum ChallengeIcon
+    public interface ICost
     {
-        None = 0,
-        Military,
-        Intrigue,
-        Power
+        void Pay(IGame game);
     }
 }
