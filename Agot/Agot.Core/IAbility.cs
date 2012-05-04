@@ -7,10 +7,9 @@ namespace Agot
 {
     public interface IAbility
     {
-        IEnumerable<ICost> Costs { get; }
         AbilityType Type { get; }
-        bool IsLimited { get; }
-        bool IsImmunity { get; }
+        PhaseType Phase { get; }
+        LimitType Limit { get; }
         string Text { get; }
     }
 }

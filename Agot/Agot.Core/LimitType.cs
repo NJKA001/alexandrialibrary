@@ -5,11 +5,13 @@ using System.Text;
 
 namespace Agot
 {
-    public enum AbilityType
+    public enum LimitType
     {
         None = 0,
-        Passive,
-        Response,
-        Phase
+        Limited,
+        LimitedResponse,
+        OncePerRound,
+        OncePerPhase,
+        OncePerChallenge
     }
 }

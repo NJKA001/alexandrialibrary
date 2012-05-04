@@ -8,8 +8,8 @@ namespace Agot
     public abstract class CharacterBase
         : PermanentBase, ICharacter
     {
-        protected CharacterBase(string title, CardSet set, byte cost, byte strength)
-            : base(title, CardType.Character, set, cost)
+        protected CharacterBase(string title, CardSet set, byte cost, byte adjustedCost, byte strength)
+            : base(title, CardType.Character, set, cost, adjustedCost)
         {
             this.strength = strength;
         }

@@ -7,7 +7,6 @@ namespace Agot
 {
     public interface IText
     {
-        string FlavorText { get; }
         IEnumerable<Keyword> Keywords { get; }
         IEnumerable<Crest> Crests { get; }
         IEnumerable<Trait> Traits { get; }
@@ -16,6 +15,6 @@ namespace Agot
         sbyte GoldBonus { get; }
         sbyte InfluenceBonus { get; }
         sbyte InitiativeBonus { get; }
-        sbyte StrengthBonus { get; }
+        string FlavorText { get; }
     }
 }

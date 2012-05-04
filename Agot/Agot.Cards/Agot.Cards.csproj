@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core2008Set\AegonsBlade.cs" />
-    <Compile Include="Core2008Set\ALannisterPaysHisDebts.cs" />
+    <Compile Include="Core2008Set\Aegons_Blade.cs" />
+    <Compile Include="Core2008Set\A_Lannister_Pays_His_Debts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

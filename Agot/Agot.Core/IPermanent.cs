@@ -13,7 +13,6 @@ namespace Agot
 
         IEnumerable<HouseType> Affiliations { get; }
         byte Cost { get; }
-
-        IText Text { get; }
+        byte AdjustedCost { get; }
     }
 }

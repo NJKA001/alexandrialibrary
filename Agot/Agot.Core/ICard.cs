@@ -10,9 +10,6 @@ namespace Agot
         string Title { get; }
         CardType Type { get; }
         CardSet Set { get; }
-        IEnumerable<IDeckRestriction> DeckRestrictions { get; }
-        IEnumerable<IPlayRestriction> PlayRestrictions { get; }
-        IEnumerable<ITargetRestriction> TargetRestrictions { get; }
-        IEnumerable<ICost> PlayCosts { get; }
+        IText Text { get; }
     }
 }

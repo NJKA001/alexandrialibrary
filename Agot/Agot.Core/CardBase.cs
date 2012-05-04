@@ -21,42 +21,7 @@ namespace Agot
         private readonly string title;
         private readonly CardType type;
         private readonly CardSet set;
-        private readonly IList<IDeckRestriction> deckRestrictions = new List<IDeckRestriction>();
-        private readonly IList<IPlayRestriction> playRestrictions = new List<IPlayRestriction>();
-        private readonly IList<ITargetRestriction> targetRestrictions = new List<ITargetRestriction>();
-        private readonly IList<ICost> playCosts = new List<ICost>();
-
-        protected void AddDeckRescriction(IDeckRestriction restriction)
-        {
-            if (restriction == null)
-                throw new ArgumentNullException("restriction");
-
-            deckRestrictions.Add(restriction);
-        }
-
-        protected void AddPlayRestriction(IPlayRestriction restriction)
-        {
-            if (restriction == null)
-                throw new ArgumentNullException("restriction");
-
-            playRestrictions.Add(restriction);
-        }
-
-        protected void AddTargetRestriction(ITargetRestriction restriction)
-        {
-            if (restriction == null)
-                throw new ArgumentNullException("restriction");
-
-            targetRestrictions.Add(restriction);
-        }
-
-        protected void AddPlayCost(ICost cost)
-        {
-            if (cost == null)
-                throw new ArgumentNullException("cost");
-
-            playCosts.Add(cost);
-        }
+        protected readonly ITextBuilder text;
 
         public string Title
         {
@@ -73,24 +38,9 @@ namespace Agot
             get { return set; }
         }
 
-        public IEnumerable<IDeckRestriction> DeckRestrictions
+        public IText Text
         {
-            get { return deckRestrictions; }
-        }
-
-        public IEnumerable<IPlayRestriction> PlayRestrictions
-        {
-            get { return playRestrictions; }
-        }
-
-        public IEnumerable<ITargetRestriction> TargetRestrictions
-        {
-            get { return targetRestrictions; }
-        }
-
-        public IEnumerable<ICost> PlayCosts
-        {
-            get { return playCosts; }
+            get { return text.ToText(); }
         }
     }
 }
