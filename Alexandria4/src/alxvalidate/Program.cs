@@ -11,19 +11,19 @@ namespace Gnosis.Alexandria.Validation
     public class Program
     {
         private static ILogger logger = new Log4NetLogger(typeof(Program));
-
+        
         private struct Options
         {
             public Options(string path, bool isVerbose)
             {
-                this.path = new Uri(path, UriKind.RelativeOrAbsolute);
+                this.path = path;
                 this.isVerbose = isVerbose;
             }
 
-            private Uri path;
+            private string path;
             private bool isVerbose;
 
-            public Uri Path
+            public string Path
             {
                 get { return path; }
             }
@@ -54,27 +54,27 @@ namespace Gnosis.Alexandria.Validation
                         return;
                     }
 
-                    var localPath = GetLocalPath(options.Path);
-                    if (localPath != null)
+                    var validation = Validate(options.Path);
+
+                    if (!validation.IsValid)
                     {
-                        if (File.Exists(localPath))
-                        {
-                            ValidateLocalFile(localPath);
-                        }
-                        else if (Directory.Exists(localPath))
-                        {
-                            ValidateLocalDirectory(localPath);
-                        }
-                        else
-                        {
-                            Console.WriteLine("  local path not found: " + localPath);
-                            return;
-                        }
+                        Console.WriteLine("  path is not valid: " + options.Path);
+                        if (validation.Error != null)
+                            Console.WriteLine("    error: " + validation.Error.Message);
+
+                        return;
                     }
-                    else
+
+                    if (!validation.Exists)
                     {
-                        //get remote media
+                        Console.WriteLine("  path does not exist: " + options.Path);
+                        if (validation.Error != null)
+                            Console.WriteLine("    error: " + validation.Error.Message);
+
+                        return;
                     }
+
+                    Console.WriteLine("  media validated successfully: " + options.Path);
                 }
                 else
                 {
@@ -141,34 +141,11 @@ namespace Gnosis.Alexandria.Validation
             return new Options(path, isVerbose);
         }
 
-        private static string GetLocalPath(Uri path)
+        private static PathValidation Validate(string path)
         {
-            if (path.IsAbsoluteUri)
-            {
-                return path.IsFile ? path.LocalPath : null;
-            }
-            else
-            {
-                try
-                {
-                    var file = new FileInfo(path.ToString());
-                    return file.FullName;
-                }
-                catch (Exception ex)
-                {
-                    return null;
-                }
-            }
-        }
-
-        private static void ValidateLocalFile(string path)
-        {
-            Console.WriteLine("  validating local file: " + path);
-        }
-
-        private static void ValidateLocalDirectory(string path)
-        {
-            Console.WriteLine("  validating local directory: " + path);
+            var validator = new UniversalPathValidator();
+            
+            return validator.Validate(path);
         }
     }
 }
