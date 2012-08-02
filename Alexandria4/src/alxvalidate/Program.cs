@@ -78,11 +78,11 @@ namespace Gnosis.Alexandria.Validation
                     Console.WriteLine("  media validated successfully: " + options.Path);
 
                     Console.WriteLine("  testing media type JSON serialization");
-                    var type1 = new MediaType() { Supertype = MediaSupertype.application, Subtype = "x-winexe", FileExtensions = new List<string> { ".exe" }, MagicNumbers = new List<byte[]> { new byte[] { 0x4D, 0x5A } } };
-                    var type2 = new MediaType() { Supertype = MediaSupertype.audio, Subtype = "mpeg", FileExtensions = new List<string> { ".mp3", ".mp2", ".mp1" }, MagicNumbers = new List<byte[]> { new byte[] { 0x49, 0x44, 0x33 } } };
+                    //var type1 = new MediaType() { Supertype = MediaSupertype.application, Subtype = "x-winexe", FileExtensions = new List<string> { ".exe" }, MagicNumbers = new List<byte[]> { new byte[] { 0x4D, 0x5A } } };
+                    //var type2 = new MediaType() { Supertype = MediaSupertype.audio, Subtype = "mpeg", FileExtensions = new List<string> { ".mp3", ".mp2", ".mp1" }, MagicNumbers = new List<byte[]> { new byte[] { 0x49, 0x44, 0x33 } } };
 
                     
-                    var json = JsonConvert.SerializeObject(new MediaType[] { type1, type2 });
+                    //var json = JsonConvert.SerializeObject(new MediaType[] { type1, type2 });
                     
                     var json2 = string.Empty;
                     using (var reader = new System.IO.StreamReader("MediaTypes.json"))
@@ -90,12 +90,12 @@ namespace Gnosis.Alexandria.Validation
                         json2 = reader.ReadToEnd();
                     }
 
-                    if (json != json2)
-                    {
-                        Console.WriteLine("  JSON output does not match");
-                    }
+                    //if (json != json2)
+                    //{
+                    //    Console.WriteLine("  JSON output does not match");
+                    //}
 
-                    Console.WriteLine(json);
+                    Console.WriteLine(json2);
                     var test = JsonConvert.DeserializeObject(json2, typeof(MediaType[]));
                     if (test == null)
                         Console.WriteLine("  failed to deserialize media type output");

@@ -1,2 +1,5 @@
-﻿[{"Supertype":0,"Subtype":"x-winexe","FileExtensions":[".exe"],"MagicNumbers":["TVo="]},{"Supertype":1,"Subtype":"mpeg","FileExtensions":[".mp3",".mp2",".mp1"],"MagicNumbers":["SUQz"]}]
+﻿[
+{"Supertype":0,"Subtype":"x-winexe","FileExtensions":[".exe"],"MagicNumbers":["TVo="]},
+{"Supertype":1,"Subtype":"mpeg","FileExtensions":[".mp3",".mp2",".mp1"],"MagicNumbers":["SUQz"]}
+]
 
