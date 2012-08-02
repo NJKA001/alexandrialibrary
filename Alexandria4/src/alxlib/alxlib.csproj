@@ -51,15 +51,23 @@
   <ItemGroup>
     <Compile Include="Data\IDatabase.cs" />
     <Compile Include="Data\SQLiteDatabase.cs" />
+    <Compile Include="IMediaPath.cs" />
+    <Compile Include="IMediaType.cs" />
     <Compile Include="Logging\DebugLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\Log4NetLogger.cs" />
+    <Compile Include="MediaPath.cs" />
+    <Compile Include="MediaSupertype.cs" />
+    <Compile Include="MediaType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Serialization\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="MediaTypes.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="sqlite3.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

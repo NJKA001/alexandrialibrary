@@ -7,6 +7,6 @@ namespace Gnosis.Alexandria.Validation
 {
     public interface IPathValidator
     {
-        PathValidation Validate(string path);
+        PathValidation Validate(IMediaPath path);
     }
 }

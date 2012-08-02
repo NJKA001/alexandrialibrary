@@ -9,7 +9,7 @@ namespace Gnosis.Alexandria.Validation
     public class LocalPathValidator
         : IPathValidator
     {
-        public PathValidation Validate(string path)
+        public PathValidation Validate(IMediaPath path)
         {
             if (path == null)
                 throw new ArgumentNullException("path");
@@ -18,7 +18,7 @@ namespace Gnosis.Alexandria.Validation
             {
                 foreach (var invalidChar in Path.GetInvalidPathChars())
                 {
-                    if (path.Contains(invalidChar))
+                    if (path.AbsolutePath.Contains(invalidChar))
                         return new PathValidation(false, false);
                 }
             }
@@ -29,9 +29,9 @@ namespace Gnosis.Alexandria.Validation
 
             try
             {
-                if (Directory.Exists(path))
+                if (Directory.Exists(path.AbsolutePath))
                     return new PathValidation(true, true);
-                else if (File.Exists(path))
+                else if (File.Exists(path.AbsolutePath))
                     return new PathValidation(true, true);
                 else
                     return new PathValidation(true, false);

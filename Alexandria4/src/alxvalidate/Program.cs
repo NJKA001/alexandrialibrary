@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Alexandria.Logging;
+using Newtonsoft.Json;
 
 namespace Gnosis.Alexandria.Validation
 {
@@ -16,14 +17,14 @@ namespace Gnosis.Alexandria.Validation
         {
             public Options(string path, bool isVerbose)
             {
-                this.path = path;
+                this.path = new MediaPath(path);
                 this.isVerbose = isVerbose;
             }
 
-            private string path;
+            private IMediaPath path;
             private bool isVerbose;
 
-            public string Path
+            public IMediaPath Path
             {
                 get { return path; }
             }
@@ -75,6 +76,29 @@ namespace Gnosis.Alexandria.Validation
                     }
 
                     Console.WriteLine("  media validated successfully: " + options.Path);
+
+                    Console.WriteLine("  testing media type JSON serialization");
+                    var type1 = new MediaType() { Supertype = MediaSupertype.application, Subtype = "x-winexe", FileExtensions = new List<string> { ".exe" }, MagicNumbers = new List<byte[]> { new byte[] { 0x4D, 0x5A } } };
+                    var type2 = new MediaType() { Supertype = MediaSupertype.audio, Subtype = "mpeg", FileExtensions = new List<string> { ".mp3", ".mp2", ".mp1" }, MagicNumbers = new List<byte[]> { new byte[] { 0x49, 0x44, 0x33 } } };
+
+                    
+                    var json = JsonConvert.SerializeObject(new MediaType[] { type1, type2 });
+                    
+                    var json2 = string.Empty;
+                    using (var reader = new System.IO.StreamReader("MediaTypes.json"))
+                    {
+                        json2 = reader.ReadToEnd();
+                    }
+
+                    if (json != json2)
+                    {
+                        Console.WriteLine("  JSON output does not match");
+                    }
+
+                    Console.WriteLine(json);
+                    var test = JsonConvert.DeserializeObject(json2, typeof(MediaType[]));
+                    if (test == null)
+                        Console.WriteLine("  failed to deserialize media type output");
                 }
                 else
                 {
@@ -141,7 +165,7 @@ namespace Gnosis.Alexandria.Validation
             return new Options(path, isVerbose);
         }
 
-        private static PathValidation Validate(string path)
+        private static PathValidation Validate(IMediaPath path)
         {
             var validator = new UniversalPathValidator();
             

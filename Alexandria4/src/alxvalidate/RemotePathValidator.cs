@@ -8,7 +8,7 @@ namespace Gnosis.Alexandria.Validation
     public class RemotePathValidator
         : IPathValidator
     {
-        public PathValidation Validate(string path)
+        public PathValidation Validate(IMediaPath path)
         {
             if (path == null)
                 throw new ArgumentNullException("path");
@@ -17,7 +17,7 @@ namespace Gnosis.Alexandria.Validation
 
             try
             {
-                location = new Uri(path, UriKind.RelativeOrAbsolute);
+                location = new Uri(path.AbsolutePath, UriKind.Absolute);
             }
             catch (Exception locationError)
             {
