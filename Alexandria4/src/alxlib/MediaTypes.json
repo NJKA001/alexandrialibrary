@@ -1,5 +1,91 @@
 ﻿[
-{"Supertype":0,"Subtype":"x-winexe","FileExtensions":[".exe"],"MagicNumbers":["TVo="]},
-{"Supertype":1,"Subtype":"mpeg","FileExtensions":[".mp3",".mp2",".mp1"],"MagicNumbers":["SUQz"]}
+{"Name":"application/atom+xml","Description":"Atom XML Feed","FileExtensions":[".atom"],"LegacyMediaTypes":[],"MagicNumbers":[]},
+{"Name":"application/x-ms-shortcut","Description":"Microsoft Desktop Shortcut","FileExtensions":[".lnk"],"LegacyMediaTypes":[],"MagicNumbers":["TAAAAAEUAg=="]},
+{"Name":"application/x-winexe","Description":"Microsoft Executable Program","FileExtensions":[".exe"],"LegacyMediaTypes":["application/dos-exe", "application/x-exe", "application/x-msdownload"],"MagicNumbers":["TVo="]},
+{"Name":"application/pdf","Description":"Adobe Portable Document Format","FileExtensions":[],"LegacyMediaTypes":["application/x-pdf", "application/x-bzpdf", "application/x-gxpdf"],"MagicNumbers":["JVBERg=="]},
+{"Name":"audio/mpeg","Description":"Moving Pictures Experts Group Audio (Version 3)","FileExtensions":[".mp3",".mp2",".mp1"],"LegacyMediaTypes":["audio/aac", "audio/mp3", "audio/mp4"],"MagicNumbers":["SUQz"]}
+{"Name":"audio/mpeg4","Description":"Moving Pictures Experts Group Audio (Version 4)","FileExtensions":[".aac","m4a"],"LegacyMediaTypes":[],"MagicNumbers":["AAAAIGZ0eXBNNEEg"]},
+{"Name":"image/x-bmp","Description":"Microsoft Device Independent Bitmap","FileExtensions":[".bmp",".dib"],"LegacyMediaTypes":["image/x-ms-bmp"],"MagicNumbers":["Qk0="]},
+{"Name":"image/gif","Description":"Graphics Interchange Format","FileExtensions":[".gif"],"LegacyMediaTypes":[],"MagicNumbers":["R0lGODdh","R0lGODlh"]},
+{"Name":"image/jpeg","Description":"Joint Photographic Experts Group Image Format (1992)","FileExtensions":[".jpg",".jpeg",".jpe",".jif",".jfif",".jfi"],"LegacyMediaTypes":[],"MagicNumbers":["/9g="]},
+{"Name":"image/jp2","Description":"Joint Photographic Experts Group Image Format (2000)","FileExtensions":[".jp2",".jpk",".jpf",".jpx",".jpm",".mj2"],"LegacyMediaTypes:["image/jpx","image/jpm","image/mj2"],"MagicNumbers":["AAAADGpQICANCg=="]},
+{"Name":"image/png","Description":"Portable Network Graphics Image","FileExtensions":[".png"],"LegacyMediaTypes":["image/x-png"],"MagicNumbers":["iVBORw0KGgo="]},
+{"Name":"video/avi","Description":"Microsoft Audio Video Interleave","FileExtensions":[".avi"],"LegacyMediaTypes":["video/vnd.avi","video/msvideo","video/x-msvideo"],"MagicNumbers":["UklGRg=="]},
+{"Name":"video/mpeg","Description":"Moving Pictures Experts Group Video (Version 2)","FileExtensions":[".mpeg",".mpg",".mpe"],"LegacyMediaTypes":[],"MagicNumbers":["AAAB"]},
+{"Name":"video/mpeg4","Description":"Moving Pictures Experts Group Video (Version 4)","FileExtensions":["mp4","mpeg4","m4v"],"LegacyMediaTypes":[],"MagicNumbers":["AAAAGGZ0eXAzZ3A1","AAAAGGZ0eXBtcDQy"]},
+{"Name":"video/x-ms-wmv","Description":"Microsoft Windows Media Video","FileExtensions":[".wmv"],"LegacyMediaTypes":[],"MagicNumbers":["MCaydQ=="]}
 ]
+        
+        private const string fileExtension_Css = ".css";
+        private const string fileExtension_Dtd = ".dtd";
+        private const string fileExtension_Ent = ".ent";
+        private const string fileExtension_Exe = ".exe";
+        private const string fileExtension_Htm = ".htm";
+        private const string fileExtension_Html = ".html";
+        private const string fileExtension_Ini = ".ini";
+        private const string fileExtension_Jpg = ".jpg";
+        private const string fileExtension_Lnk = ".lnk";
+        private const string fileExtension_M4a = ".m4a";
+        private const string fileExtension_M4v = ".m4v";
+        private const string fileExtension_Mp4 = ".mp4";
+        private const string fileExtension_Mpeg = ".mpeg";
+        private const string fileExtension_Mpe = ".mpe";
+        private const string fileExtension_Mpg = ".mpg";
+        private const string fileExtension_Mpg4 = ".mpg4";
+        private const string fileExtension_Mpga = ".mpga";
+        private const string fileExtension_Png = ".png";
+        private const string fileExtension_Rdf = ".rdf";
+        private const string fileExtension_Rss = ".rss";
+        private const string fileExtension_Text = ".text";
+        private const string fileExtension_Txt = ".txt";
+        private const string fileExtension_Wmv = ".wmv";
+        private const string fileExtension_Xhtml = ".xhtml";
+        private const string fileExtension_Xml = ".xml";
+        private const string fileExtension_Xsl = ".xsl";
+        private const string fileExtension_Xslt = ".xslt";
+        private const string fileExtension_Xspf = ".xspf";
+
+        public const string mediaType_ApplicationPdf = "application/pdf";
+        public const string mediaType_ApplicationXPdf = "application/x-pdf";
+        public const string mediaType_ApplicationXbzPdf = "application/x-bzpdf";
+        public const string mediaType_ApplicationXgxPdf = "application/x-gxpdf";
+
+        public const string mediaType_ApplicationRdfXml = "application/rdf+xml";
+        public const string mediaType_ApplicationRssXml = "application/rss+xml";
+        public const string mediaType_ApplicationUnknown = "application/unknown";
+        public const string mediaType_ApplicationXhtmlXml = "application/xhtml+xml";
+        public const string mediaType_ApplicationXsl = "application/xsl";
+        public const string mediaType_ApplicationXspfXml = "application/xspf+xml";
+        public const string mediaType_ApplicationXml = "application/xml";
+        public const string mediaType_ApplicationXmlDtd = "application/xml-dtd";
+
+        public const string mediaType_AudioMp3 = "audio/mp3";
+        public const string mediaType_AudioMp4 = "audio/mp4";
+        public const string mediaType_AudioAac = "audio/aac";
+        public const string mediaType_AudioMpeg = "audio/mpeg";
+
+        public const string mediaType_ImageXBmp = "image/x-bmp";
+        public const string mediaType_ImageXMsBmp = "image/x-ms-bmp";
+
+        public const string mediaType_ImageGif = "image/gif";
+        public const string mediaType_ImageJpeg = "image/jpeg";
+
+        public const string mediaType_ImagePng = "image/png";
+        public const string mediaType_ImageXPng = "image/x-png";
+
+        public const string mediaType_TextCss = "text/css";
+        public const string mediaType_TextHtml = "text/html";
+        public const string mediaType_TextPlain = "text/plain";
+        public const string mediaType_TextXml = "text/xml";
+
+        public const string mediaType_ApplicationXsltXml = "application/xslt+xml";
+        public const string mediaType_TextXsl = "text/xsl";
+
+        public const string mediaType_VideoAvi = "video/avi";
+        public const string mediaType_VideoXMsVideo = "video/x-msvideo";
+        public const string mediaType_VideoMsVideo = "video/msvideo";
+
+        public const string mediaType_VideoMpeg = "video/mpeg";
+        public const string mediaType_VideoMpeg4 = "video/mp4";
+        public const string mediaType_VideoWmv = "video/x-ms-wmv";
 

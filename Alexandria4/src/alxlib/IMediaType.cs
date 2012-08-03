@@ -7,6 +7,8 @@ namespace Gnosis.Alexandria
 {
     public interface IMediaType
     {
+        string Name { get; }
+        string Description { get; }
         MediaSupertype Supertype { get; }
         string Subtype { get; }
 

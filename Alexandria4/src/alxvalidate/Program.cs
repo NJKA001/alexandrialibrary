@@ -78,8 +78,8 @@ namespace Gnosis.Alexandria.Validation
                     Console.WriteLine("  media validated successfully: " + options.Path);
 
                     Console.WriteLine("  testing media type JSON serialization");
-                    //var type1 = new MediaType() { Supertype = MediaSupertype.application, Subtype = "x-winexe", FileExtensions = new List<string> { ".exe" }, MagicNumbers = new List<byte[]> { new byte[] { 0x4D, 0x5A } } };
-                    //var type2 = new MediaType() { Supertype = MediaSupertype.audio, Subtype = "mpeg", FileExtensions = new List<string> { ".mp3", ".mp2", ".mp1" }, MagicNumbers = new List<byte[]> { new byte[] { 0x49, 0x44, 0x33 } } };
+                    //var type1 = new MediaType() { Supertype = MediaSupertype.Application, Subtype = "x-winexe", FileExtensions = new List<string> { ".exe" }, MagicNumbers = new List<byte[]> { new byte[] { 0x4D, 0x5A } } };
+                    //var type2 = new MediaType() { Supertype = MediaSupertype.Audio, Subtype = "mpeg", FileExtensions = new List<string> { ".mp3", ".mp2", ".mp1" }, MagicNumbers = new List<byte[]> { new byte[] { 0x49, 0x44, 0x33 } } };
 
                     
                     //var json = JsonConvert.SerializeObject(new MediaType[] { type1, type2 });
