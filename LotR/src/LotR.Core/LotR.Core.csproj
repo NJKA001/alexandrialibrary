@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{41E8EA34-4BE9-49CF-BFE5-506DA26A2AC3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LotR.Core</RootNamespace>
+    <AssemblyName>LotR.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CardBase.cs" />
+    <Compile Include="CardSets\Core\PassageThroughMirkwood\Quest1a.cs" />
+    <Compile Include="CardSets\Core\PassageThroughMirkwood\Quest2a.cs" />
+    <Compile Include="CardSets\Core\PassageThroughMirkwood\Scenario.cs" />
+    <Compile Include="IAction.cs" />
+    <Compile Include="IAllyCard.cs" />
+    <Compile Include="IAttachableCard.cs" />
+    <Compile Include="IAttachmentCard.cs" />
+    <Compile Include="IAttachmentInPlay.cs" />
+    <Compile Include="ICard.cs" />
+    <Compile Include="ICardEffect.cs" />
+    <Compile Include="ICardInPlay.cs" />
+    <Compile Include="ICardText.cs" />
+    <Compile Include="ICharacterCard.cs" />
+    <Compile Include="IDeck.cs" />
+    <Compile Include="IEncounterCard.cs" />
+    <Compile Include="IEncounterInPlay.cs" />
+    <Compile Include="IEncounterSet.cs" />
+    <Compile Include="IEnemyCard.cs" />
+    <Compile Include="IEventCard.cs" />
+    <Compile Include="IGame.cs" />
+    <Compile Include="IHeroCard.cs" />
+    <Compile Include="IHeroInPlay.cs" />
+    <Compile Include="IKillableCard.cs" />
+    <Compile Include="ILocationCard.cs" />
+    <Compile Include="ILocationInPlay.cs" />
+    <Compile Include="IObjectiveCard.cs" />
+    <Compile Include="IOutOfPlayArea.cs" />
+    <Compile Include="IPhase.cs" />
+    <Compile Include="IPlayer.cs" />
+    <Compile Include="IPlayerCard.cs" />
+    <Compile Include="IProgressableCard.cs" />
+    <Compile Include="IProgressableInPlay.cs" />
+    <Compile Include="IQuestCard.cs" />
+    <Compile Include="IQuestCardInPlay.cs" />
+    <Compile Include="IRevealableCard.cs" />
+    <Compile Include="IRound.cs" />
+    <Compile Include="IScenario.cs" />
+    <Compile Include="IStagingArea.cs" />
+    <Compile Include="IThreateningCard.cs" />
+    <Compile Include="ITreacheryCard.cs" />
+    <Compile Include="ITreasureCard.cs" />
+    <Compile Include="IVictoryCard.cs" />
+    <Compile Include="IVictoryDisplay.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestBase.cs" />
+    <Compile Include="ScenarioBase.cs" />
+    <Compile Include="Sphere.cs" />
+    <Compile Include="Trait.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CardSets\BattleOfLakeTown\" />
+    <Folder Include="CardSets\Core\EscapeFromDulGuldur\" />
+    <Folder Include="CardSets\Core\JourneyDownTheAnduin\" />
+    <Folder Include="CardSets\Dwarrowdelf\" />
+    <Folder Include="CardSets\HobbitOverHillUnderHill\" />
+    <Folder Include="CardSets\KhazadDum\" />
+    <Folder Include="CardSets\MassingAtOsgiliath\" />
+    <Folder Include="CardSets\ShadowsOfMirkwood\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
