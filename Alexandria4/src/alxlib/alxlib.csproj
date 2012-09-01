@@ -59,11 +59,12 @@
     <Compile Include="MediaPath.cs" />
     <Compile Include="MediaSupertype.cs" />
     <Compile Include="MediaType.cs" />
+    <Compile Include="Message.cs" />
+    <Compile Include="MessageType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialization\MessageConverter.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Serialization\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="MediaTypes.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

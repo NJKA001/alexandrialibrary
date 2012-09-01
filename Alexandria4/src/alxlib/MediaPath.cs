@@ -13,6 +13,7 @@ namespace Gnosis.Alexandria
             if (path == null)
                 throw new ArgumentNullException("path");
 
+            this.path = path;
             uri = new Uri(path, UriKind.RelativeOrAbsolute);
 
             if (uri.IsAbsoluteUri)
