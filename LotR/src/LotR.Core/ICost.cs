@@ -5,8 +5,7 @@ using System.Text;
 
 namespace LotR.Core
 {
-    public interface IEventCard
-        : ICostlyCard
+    public interface ICost
     {
     }
 }

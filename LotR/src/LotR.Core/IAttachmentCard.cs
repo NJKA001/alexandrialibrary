@@ -6,8 +6,7 @@ using System.Text;
 namespace LotR.Core
 {
     public interface IAttachmentCard
-        : IPlayerCard, IAttachableCard
+        : ICostlyCard, IAttachableCard
     {
-        byte Cost { get; }
     }
 }

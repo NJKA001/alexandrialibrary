@@ -6,9 +6,8 @@ using System.Text;
 namespace LotR.Core
 {
     public interface IAllyCard
-        : ICharacterCard
+        : ICostlyCard, ICharacterCard
     {
-        byte Cost { get; }
-        Sphere SpherOfInfluence { get; }
+        Sphere SphereOfInfluence { get; }
     }
 }

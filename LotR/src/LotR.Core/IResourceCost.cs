@@ -5,8 +5,10 @@ using System.Text;
 
 namespace LotR.Core
 {
-    public interface IEventCard
-        : ICostlyCard
+    public interface IResourceCost
+        : ICost
     {
+        ICharacterInPlay Character { get; }
+        byte Resources { get; }
     }
 }
