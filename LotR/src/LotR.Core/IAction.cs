@@ -8,6 +8,5 @@ namespace LotR.Core
     public interface IAction
         : ICardEffect
     {
-        //void PayCost(IPlayer actingPlayer, ICardInPlay actingCard, IGame game);
     }
 }

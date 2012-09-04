@@ -41,10 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CardBase.cs" />
+    <Compile Include="CardSets\Core\Aragorn.cs" />
     <Compile Include="CardSets\Core\PassageThroughMirkwood\Quest1a.cs" />
     <Compile Include="CardSets\Core\PassageThroughMirkwood\Quest2a.cs" />
     <Compile Include="CardSets\Core\PassageThroughMirkwood\Scenario.cs" />
+    <Compile Include="CharacterAbilities\CharacterAbilityBase.cs" />
+    <Compile Include="CharacterAbilities\Sentinel.cs" />
+    <Compile Include="CharacterCardBase.cs" />
     <Compile Include="Duration.cs" />
+    <Compile Include="HeroCardBase.cs" />
     <Compile Include="IAction.cs" />
     <Compile Include="IAllyCard.cs" />
     <Compile Include="IAttachableCard.cs" />
@@ -54,16 +59,24 @@
     <Compile Include="ICardEffect.cs" />
     <Compile Include="ICardInPlay.cs" />
     <Compile Include="ICardText.cs" />
+    <Compile Include="ICharacterAbility.cs" />
     <Compile Include="ICharacterCard.cs" />
     <Compile Include="ICharacterInPlay.cs" />
     <Compile Include="ICost.cs" />
     <Compile Include="ICostlyCard.cs" />
     <Compile Include="IDeck.cs" />
+    <Compile Include="IDiscardFromHandPayment.cs" />
+    <Compile Include="IDiscardFromPlayPayment.cs" />
+    <Compile Include="IEffect.cs" />
     <Compile Include="IEncounterCard.cs" />
+    <Compile Include="IEncounterCardEffect.cs" />
     <Compile Include="IEncounterInPlay.cs" />
     <Compile Include="IEncounterSet.cs" />
     <Compile Include="IEnemyCard.cs" />
     <Compile Include="IEventCard.cs" />
+    <Compile Include="IExhaustableCard.cs" />
+    <Compile Include="IExhaustPayment.cs" />
+    <Compile Include="IForcedAction.cs" />
     <Compile Include="IGame.cs" />
     <Compile Include="IHeroCard.cs" />
     <Compile Include="IHeroInPlay.cs" />
@@ -72,25 +85,35 @@
     <Compile Include="ILocationCard.cs" />
     <Compile Include="ILocationInPlay.cs" />
     <Compile Include="IModifier.cs" />
+    <Compile Include="IObjectiveAllyCard.cs" />
     <Compile Include="IObjectiveCard.cs" />
     <Compile Include="IOutOfPlayArea.cs" />
+    <Compile Include="IPayment.cs" />
     <Compile Include="IPhase.cs" />
+    <Compile Include="IPhaseEffect.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="IPlayerCard.cs" />
+    <Compile Include="IPlayerCardEffect.cs" />
     <Compile Include="IProgressableCard.cs" />
     <Compile Include="IProgressableInPlay.cs" />
     <Compile Include="IQuestCard.cs" />
+    <Compile Include="IQuestCardEffect.cs" />
     <Compile Include="IQuestCardInPlay.cs" />
     <Compile Include="IResourceCost.cs" />
+    <Compile Include="IResourcefulCard.cs" />
+    <Compile Include="IResourcePayment.cs" />
+    <Compile Include="IResponse.cs" />
     <Compile Include="IRevealableCard.cs" />
     <Compile Include="IRound.cs" />
     <Compile Include="IScenario.cs" />
+    <Compile Include="IShadowEffect.cs" />
     <Compile Include="IStagingArea.cs" />
     <Compile Include="IThreateningCard.cs" />
     <Compile Include="ITreacheryCard.cs" />
     <Compile Include="ITreasureCard.cs" />
     <Compile Include="IVictoryCard.cs" />
     <Compile Include="IVictoryDisplay.cs" />
+    <Compile Include="PlayerCardBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestBase.cs" />
     <Compile Include="ScenarioBase.cs" />
@@ -106,6 +129,9 @@
     <Folder Include="CardSets\KhazadDum\" />
     <Folder Include="CardSets\MassingAtOsgiliath\" />
     <Folder Include="CardSets\ShadowsOfMirkwood\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

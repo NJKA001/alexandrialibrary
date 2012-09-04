@@ -6,7 +6,7 @@ using System.Text;
 namespace LotR.Core
 {
     public interface IHeroCard
-        : IPlayerCard
+        : ICharacterCard, IResourcefulCard
     {
         byte ThreatCost { get; }
         IEnumerable<Sphere> ResourceIcons { get; }

@@ -8,7 +8,7 @@ namespace LotR.Core
     public interface IModifier
     {
         IPhase StartPhase { get; }
-        ICardInPlay Source { get; }
+        ICard Source { get; }
         Duration Duration { get; }
         int Value { get; }
     }

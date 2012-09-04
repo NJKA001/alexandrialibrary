@@ -15,6 +15,7 @@ namespace LotR.Core
         IEnumerable<IRound> PreviousRounds { get; }
 
         IDeck<IEncounterCard> EncounterDeck { get; }
+        IDeck<IEncounterCard> EncounterDiscardPile { get; }
         IDeck<IQuestCard> QuestDeck { get; }
 
         IStagingArea StagingArea { get; }

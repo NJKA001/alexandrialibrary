@@ -6,7 +6,7 @@ using System.Text;
 namespace LotR.Core
 {
     public interface IAttachmentInPlay
-        : ICardInPlay
+        : ICardInPlay, IExhaustableCard
     {
         new IAttachableCard Card { get; }
     }

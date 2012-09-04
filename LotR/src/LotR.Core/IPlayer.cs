@@ -14,11 +14,12 @@ namespace LotR.Core
 
         byte CurrentThreat { get; }
         IEnumerable<IHeroInPlay> HeroesInPlay { get; }
-
-        IDeck<IPlayerCard> Deck { get; }
         IEnumerable<ICardInPlay> CardsInPlay { get; }
         IEnumerable<IPlayerCard> CardsInHand { get; }
 
+        IDeck<IPlayerCard> Deck { get; }
+        IDeck<IPlayerCard> DiscardPile { get; }
+        
         void IncreaseThreat(byte value);
         void DecreaseThreat(byte value);
     }
