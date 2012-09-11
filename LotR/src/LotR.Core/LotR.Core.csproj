@@ -51,9 +51,6 @@
     <Compile Include="PassiveCharacterAbilityBase.cs" />
     <Compile Include="ResponseCharacterAbilityBase.cs" />
     <Compile Include="Heroes\Aragorn_Core.cs" />
-    <Compile Include="Quests\Core\PassageThroughMirkwood\Quest1a.cs" />
-    <Compile Include="Quests\Core\PassageThroughMirkwood\Quest2a.cs" />
-    <Compile Include="Quests\Core\PassageThroughMirkwood\Scenario.cs" />
     <Compile Include="Heroes\BilboBaggins_SoM.cs" />
     <Compile Include="CardText.cs" />
     <Compile Include="CharacterAbilityBase.cs" />
@@ -199,16 +196,7 @@
     <Compile Include="Sphere.cs" />
     <Compile Include="Traits.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Quests\BattleOfLakeTown\" />
-    <Folder Include="Quests\Core\EscapeFromDulGuldur\" />
-    <Folder Include="Quests\Core\JourneyDownTheAnduin\" />
-    <Folder Include="Quests\Dwarrowdelf\" />
-    <Folder Include="Quests\HobbitOverHillUnderHill\" />
-    <Folder Include="Quests\KhazadDum\" />
-    <Folder Include="Quests\MassingAtOsgiliath\" />
-    <Folder Include="Quests\ShadowsOfMirkwood\HuntForGollum\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
