@@ -19,7 +19,9 @@ namespace LotR.Core
 
         IDeck<IPlayerCard> Deck { get; }
         IDeck<IPlayerCard> DiscardPile { get; }
-        
+
+        bool IsFirstPlayer { get; }
+
         void IncreaseThreat(byte value);
         void DecreaseThreat(byte value);
     }

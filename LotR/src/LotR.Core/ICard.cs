@@ -13,7 +13,7 @@ namespace LotR.Core
         ICardText Text { get; }
         object Image { get; }
 
-        bool HasTrait(Trait trait);
+        bool HasTrait(Traits trait);
         bool IsUnique { get; }
     }
 }

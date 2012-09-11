@@ -8,6 +8,5 @@ namespace LotR.Core
     public interface ICharacterAbility
         : IPlayerCardEffect
     {
-        string Name { get; }
     }
 }

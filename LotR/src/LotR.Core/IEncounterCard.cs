@@ -8,6 +8,6 @@ namespace LotR.Core
     public interface IEncounterCard
         : IVictoryCard, IRevealableCard
     {
-        ICardEffect ShadowEffect { get; }
+        IShadowEffect ShadowEffect { get; }
     }
 }

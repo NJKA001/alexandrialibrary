@@ -6,8 +6,10 @@ using System.Text;
 namespace LotR.Core
 {
     public interface ICardEffect
-        : ICard
     {
         ICard Source { get; }
+        string Description { get; }
+
+        ICost GetCost();
     }
 }

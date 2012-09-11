@@ -7,6 +7,7 @@ namespace LotR.Core
 {
     public interface ICost
     {
+        ICard Source { get; }
         string Description { get; }
 
         bool IsMetBy(IEnumerable<IPayment> payments);

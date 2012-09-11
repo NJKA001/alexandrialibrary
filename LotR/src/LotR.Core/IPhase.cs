@@ -7,11 +7,9 @@ namespace LotR.Core
 {
     public interface IPhase
     {
+        IRound Round { get; }
         string Name { get; }
 
-        bool IsCompleted { get; }
-
-        void Start();
-        void Complete();
+        IPhaseStep CurrentStep { get; }
     }
 }

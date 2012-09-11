@@ -8,11 +8,17 @@ namespace LotR.Core
     public abstract class CardBase
         : ICard
     {
-        private readonly List<Trait> traits = new List<Trait>();
+        private readonly CardText text = new CardText();
+        private readonly List<Traits> traits = new List<Traits>();
 
-        protected void AddTrait(Trait trait)
+        protected void Trait(Traits trait)
         {
             traits.Add(trait);
+        }
+
+        protected void Effect(ICardEffect effect)
+        {
+            text.AddEffect(effect);
         }
 
         public string Title
@@ -35,8 +41,7 @@ namespace LotR.Core
 
         public ICardText Text
         {
-            get;
-            protected set;
+            get { return text; }
         }
 
         public object Image
@@ -45,7 +50,7 @@ namespace LotR.Core
             protected set;
         }
 
-        public bool HasTrait(Trait trait)
+        public bool HasTrait(Traits trait)
         {
             return traits.Contains(trait);
         }

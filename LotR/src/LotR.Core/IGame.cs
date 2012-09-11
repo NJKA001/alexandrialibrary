@@ -27,7 +27,8 @@ namespace LotR.Core
         void ChangeActiveLocation(ILocationInPlay location);
         void ClearActiveLocation();
         void ChangeActiveQuest(IQuestCardInPlay quest);
-        
+
+        ICardInPlay GetCardInPlay(ICard card);
         int GetScore();
 
         bool IsComplete { get; }

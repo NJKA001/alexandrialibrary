@@ -8,6 +8,5 @@ namespace LotR.Core
     public interface IObjectiveCard
         : IEncounterCard, IAttachableCard
     {
-        bool IsGuarded { get; }
     }
 }

@@ -7,10 +7,7 @@ namespace LotR.Core
 {
     public interface IRound
     {
+        IGame Game { get; }
         IPhase CurrentPhase { get; }
-        bool IsCompleted { get; }
-
-        void Start();
-        void Complete();
     }
 }
