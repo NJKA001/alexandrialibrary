@@ -41,20 +41,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CardBase.cs" />
-    <Compile Include="CardEffectBase.cs" />
-    <Compile Include="AmbushEffect.cs" />
-    <Compile Include="DoomedEffect.cs" />
-    <Compile Include="IAmbushEffect.cs" />
+    <Compile Include="Effects\CardEffectBase.cs" />
+    <Compile Include="Effects\AmbushEffect.cs" />
+    <Compile Include="Effects\DoomedEffect.cs" />
+    <Compile Include="Effects\AddResources.cs" />
+    <Compile Include="Effects\EffectBase.cs" />
+    <Compile Include="Effects\ExecutableEffectBase.cs" />
+    <Compile Include="Effects\IAddResources.cs" />
+    <Compile Include="Effects\IExecutableEffect.cs" />
+    <Compile Include="Effects\IReversableEffect.cs" />
+    <Compile Include="Effects\ReadyCards.cs" />
+    <Compile Include="Effects\ReversableEffectBase.cs" />
+    <Compile Include="Effects\IAmbushEffect.cs" />
     <Compile Include="IChooseCharacterPayment.cs" />
-    <Compile Include="SurgeEffect.cs" />
-    <Compile Include="ForcedCharacterAbilityBase.cs" />
-    <Compile Include="PassiveCharacterAbilityBase.cs" />
-    <Compile Include="ResponseCharacterAbilityBase.cs" />
+    <Compile Include="Effects\IReadyCards.cs" />
+    <Compile Include="Effects\SurgeEffect.cs" />
+    <Compile Include="Effects\CharacterAbilities\ForcedCharacterAbilityBase.cs" />
+    <Compile Include="Effects\CharacterAbilities\PassiveCharacterAbilityBase.cs" />
+    <Compile Include="Effects\CharacterAbilities\ResponseCharacterAbilityBase.cs" />
     <Compile Include="Heroes\Aragorn_Core.cs" />
     <Compile Include="Heroes\BilboBaggins_SoM.cs" />
     <Compile Include="CardText.cs" />
-    <Compile Include="CharacterAbilityBase.cs" />
-    <Compile Include="RangedAbility.cs" />
+    <Compile Include="Effects\CharacterAbilities\CharacterAbilityBase.cs" />
+    <Compile Include="Effects\CharacterAbilities\RangedAbility.cs" />
     <Compile Include="SentinelAbility.cs" />
     <Compile Include="CharacterCardBase.cs" />
     <Compile Include="Duration.cs" />
@@ -77,7 +86,7 @@
     <Compile Include="IDeck.cs" />
     <Compile Include="IDiscardFromHandPayment.cs" />
     <Compile Include="IDiscardFromPlayPayment.cs" />
-    <Compile Include="IDoomedEffect.cs" />
+    <Compile Include="Effects\IDoomedEffect.cs" />
     <Compile Include="IEffect.cs" />
     <Compile Include="IEncounterCard.cs" />
     <Compile Include="IEncounterCardEffect.cs" />
@@ -124,7 +133,7 @@
     <Compile Include="IScenario.cs" />
     <Compile Include="IShadowEffect.cs" />
     <Compile Include="IStagingArea.cs" />
-    <Compile Include="ISurgeEffect.cs" />
+    <Compile Include="Effects\ISurgeEffect.cs" />
     <Compile Include="IThreateningCard.cs" />
     <Compile Include="ITreacheryCard.cs" />
     <Compile Include="ITreasureCard.cs" />
@@ -196,7 +205,10 @@
     <Compile Include="Sphere.cs" />
     <Compile Include="Traits.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Costs\" />
+    <Folder Include="Payments\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

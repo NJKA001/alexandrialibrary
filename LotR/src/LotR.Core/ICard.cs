@@ -7,6 +7,8 @@ namespace LotR.Core
 {
     public interface ICard
     {
+        Guid Id { get; }
+
         string Title { get; }
         string SetName { get; }
         uint SetNumber { get; }

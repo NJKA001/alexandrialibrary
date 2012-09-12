@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Core.Effects;
+using LotR.Core.Effects.CharacterAbilities;
 using LotR.Core.Phases.Quest;
 
 namespace LotR.Core.Heroes
@@ -26,7 +28,7 @@ namespace LotR.Core.Heroes
             : ResponseCharacterAbilityBase, IAfterCommitingToQuest
         {
             public AddResourceToCommittedHero(Theodred source)
-                : base(source, "After Theodred commits to a quest, choose a hero committed to that quest. Add 1 resource to that hero's resource pool.")
+                : base("After Theodred commits to a quest, choose a hero committed to that quest. Add 1 resource to that hero's resource pool.", source)
             {
                 theodred = source;
             }
@@ -43,9 +45,21 @@ namespace LotR.Core.Heroes
                 step.AddEffect(this);
             }
 
-            public void Resolve(ICommitToQuestStep step)
+            public void Resolve(ICommitToQuestStep step, IPayment payment)
             {
+                if (payment == null)
+                    return;
 
+                var choice = payment as IChooseCharacterPayment;
+                if (choice == null)
+                    return;
+
+                var hero = choice.Character as IHeroInPlay;
+                if (hero == null)
+                    return;
+
+                step.AddEffect(new AddResources(step, new Dictionary<Guid, byte> { { hero.Id, 1 } }));
+                //hero.AddResources(1);
             }
         }
 
@@ -60,46 +74,34 @@ namespace LotR.Core.Heroes
 
             private Theodred theodred;
             private ICommitToQuestStep step;
-            //private ICardInPlay target;
 
             public ICard Source
             {
                 get { return theodred; }
             }
 
-            //public ICardInPlay Target
-            //{
-            //    get { return target; }
-            //}
-
             public string Description
             {
                 get { return "choose a hero committed to the quest"; }
             }
 
-            public bool IsMetBy(IEnumerable<IPayment> payments)
+            public bool IsMetBy(IPayment payment)
             {
-                if (payments == null)
+                if (payment == null)
                     return false;
 
-                foreach (var payment in payments)
-                {
-                    var choosePayment = payment as IChooseCharacterPayment;
-                    if (choosePayment != null)
-                    {
-                        var hero = choosePayment.Character as IHeroInPlay;
-                        if (hero != null)
-                        {
-                            if (step.CommitedCharacters.Contains(hero))
-                            {
-                                //target = hero;
-                                return true;
-                            }
-                        }
-                    }
-                }
+                var choice = payment as IChooseCharacterPayment;
+                if (choice == null)
+                    return false;
 
-                return false;
+                var hero = choice.Character as IHeroInPlay;
+                if (hero == null)
+                    return false;
+
+                if (!step.CommitedCharacters.Contains(hero))
+                    return false;
+
+                return true;
             }
         }
 

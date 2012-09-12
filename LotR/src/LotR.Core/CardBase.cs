@@ -8,6 +8,7 @@ namespace LotR.Core
     public abstract class CardBase
         : ICard
     {
+        private readonly Guid id = Guid.NewGuid();
         private readonly CardText text = new CardText();
         private readonly List<Traits> traits = new List<Traits>();
 
@@ -19,6 +20,11 @@ namespace LotR.Core
         protected void Effect(ICardEffect effect)
         {
             text.AddEffect(effect);
+        }
+
+        public Guid Id
+        {
+            get { return id; }
         }
 
         public string Title

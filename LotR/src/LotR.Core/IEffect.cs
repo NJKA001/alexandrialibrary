@@ -7,6 +7,8 @@ namespace LotR.Core
 {
     public interface IEffect
     {
-        ICost Cost { get; }
+        string Description { get; }
+
+        ICost GetCost();
     }
 }

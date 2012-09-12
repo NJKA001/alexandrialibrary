@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Core.Effects;
+using LotR.Core.Effects.CharacterAbilities;
 using LotR.Core.Phases.Quest;
 
 namespace LotR.Core.Heroes
@@ -26,7 +28,7 @@ namespace LotR.Core.Heroes
             : ResponseCharacterAbilityBase, IAfterCommitingToQuest
         {
             public ReadyAfterCommitingToQuest(Aragorn source)
-                : base(source, "After Aragorn commits to a quest, spend 1 resource from his resource pool to ready him.")
+                : base("After Aragorn commits to a quest, spend 1 resource from his resource pool to ready him.", source)
             {
                 aragorn = source;
             }
@@ -43,14 +45,14 @@ namespace LotR.Core.Heroes
                 step.AddEffect(this);
             }
 
-            public void Resolve(ICommitToQuestStep step)
+            public void Resolve(ICommitToQuestStep step, IPayment payment)
             {
-                var inPlay = step.GetCardInPlay(aragorn) as IHeroInPlay;
+                var inPlay = step.GetCardInPlay(aragorn.Id) as IHeroInPlay;
 
                 if (inPlay == null)
                     return;
 
-                inPlay.Ready();
+                step.AddEffect(new ReadyCards(step, new List<IExhaustableCard> { inPlay }));
             }
 
             public override ICost GetCost()
@@ -79,19 +81,16 @@ namespace LotR.Core.Heroes
                 get { return "1 resource from Aragorn's resource pool"; }
             }
 
-            public bool IsMetBy(IEnumerable<IPayment> payments)
+            public bool IsMetBy(IPayment payment)
             {
-                if (payments == null)
+                if (payment == null)
                     return false;
 
-                foreach (var payment in payments)
+                var resourcePayment = payment as IResourcePayment;
+                if (resourcePayment != null)
                 {
-                    var resourcePayment = payment as IResourcePayment;
-                    if (resourcePayment != null)
-                    {
-                        if (resourcePayment.Resources == 1 && resourcePayment.Source == aragorn)
-                            return true;
-                    }
+                    if (resourcePayment.Resources == 1 && resourcePayment.Source == aragorn)
+                        return true;
                 }
 
                 return false;

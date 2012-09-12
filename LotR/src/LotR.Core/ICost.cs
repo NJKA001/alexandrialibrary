@@ -10,6 +10,6 @@ namespace LotR.Core
         ICard Source { get; }
         string Description { get; }
 
-        bool IsMetBy(IEnumerable<IPayment> payments);
+        bool IsMetBy(IPayment payment);
     }
 }

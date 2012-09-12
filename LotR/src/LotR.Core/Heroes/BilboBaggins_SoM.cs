@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Core.Effects.CharacterAbilities;
 using LotR.Core.Phases.Resource;
 
 namespace LotR.Core.Heroes
@@ -24,7 +25,7 @@ namespace LotR.Core.Heroes
             : PassiveCharacterAbilityBase, IDuringDrawingCards
         {
             public FirstPlayerDrawsAndExtraCard(BilboBaggins_SoM source)
-                : base(source, "The first player draws 1 additional card in the resource phase.")
+                : base("The first player draws 1 additional card in the resource phase.", source)
             {
             }
 
@@ -34,7 +35,7 @@ namespace LotR.Core.Heroes
                     step.NumberOfCardsToDraw += 1;
             }
 
-            public void Resolve(IDrawCardsStep step)
+            public void Resolve(IDrawCardsStep step, IPayment payment)
             {
             }
         }

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Core
+namespace LotR.Core.Effects.CharacterAbilities
 {
     public abstract class ForcedCharacterAbilityBase
         : PassiveCharacterAbilityBase, IForced
     {
-        protected ForcedCharacterAbilityBase(IPlayerCard source, string description)
-            : base(source, description)
+        protected ForcedCharacterAbilityBase(string description, IPlayerCard source)
+            : base(description, source)
         {
         }
     }

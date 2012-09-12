@@ -8,6 +8,6 @@ namespace LotR.Core.Phases.Resource
     public interface IDuringDrawingCards
     {
         void Setup(IDrawCardsStep step);
-        void Resolve(IDrawCardsStep step);
+        void Resolve(IDrawCardsStep step, IPayment payment);
     }
 }

@@ -9,6 +9,7 @@ namespace LotR.Core
     public interface ICardInPlay
         : INotifyPropertyChanged
     {
+        Guid Id { get; }
         ICard Card { get; }
 
         IEnumerable<IAttachmentInPlay> Attachments { get; }

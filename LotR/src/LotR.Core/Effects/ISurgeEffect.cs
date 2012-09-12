@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Core
+namespace LotR.Core.Effects
 {
-    public interface ICardEffect
-        : IEffect
+    public interface ISurgeEffect
+        : ICardEffect
     {
-        ICard Source { get; }
     }
 }

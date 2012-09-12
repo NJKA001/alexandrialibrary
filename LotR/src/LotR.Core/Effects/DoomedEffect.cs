@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Core
+namespace LotR.Core.Effects
 {
     public class DoomedEffect
         : CardEffectBase, IDoomedEffect
     {
         public DoomedEffect(IEncounterCard source, byte doomed)
-            : base(source, GetDoomedDescription(doomed))
+            : base(GetDoomedDescription(doomed), source)
         {
             this.Doomed = doomed;
         }

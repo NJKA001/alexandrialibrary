@@ -10,9 +10,10 @@ namespace LotR.Core
         IPhase Phase { get; }
         IPlayer Player { get; }
 
-        ICardInPlay GetCardInPlay(ICard card);
+        ICard GetCard(Guid id);
+        ICardInPlay GetCardInPlay(Guid id);
 
-        IEnumerable<ICardEffect> Effects { get; }
-        void AddEffect(ICardEffect effect);
+        IEnumerable<IEffect> Effects { get; }
+        void AddEffect(IEffect effect);
     }
 }
