@@ -6,6 +6,7 @@ using System.Text;
 namespace LotR.Core
 {
     public interface IModifier
+        : IEffect
     {
         IPhase StartPhase { get; }
         ICard Source { get; }

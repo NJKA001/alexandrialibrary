@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Core.Effects.Modifiers;
+
 namespace LotR.Core
 {
     public interface IKillableInPlay
@@ -14,8 +16,8 @@ namespace LotR.Core
         void AddDamage(byte value);
         void RemoveDamage(byte value);
 
-        IEnumerable<IModifier> HitPointModifiers { get; }
-        void AddHitPointModifier(IModifier modifier);
-        void RemoveHitPointModifier(IModifier modifier);
+        IEnumerable<IHitPointModifier> HitPointModifiers { get; }
+        void AddHitPointModifier(IHitPointModifier modifier);
+        void RemoveHitPointModifier(IHitPointModifier modifier);
     }
 }

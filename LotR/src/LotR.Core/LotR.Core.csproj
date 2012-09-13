@@ -50,9 +50,17 @@
     <Compile Include="Effects\IAddResources.cs" />
     <Compile Include="Effects\IExecutableEffect.cs" />
     <Compile Include="Effects\IReversableEffect.cs" />
+    <Compile Include="Effects\Modifiers\AttackModifier.cs" />
+    <Compile Include="Effects\Modifiers\IDefenseModifier.cs" />
+    <Compile Include="Effects\Modifiers\IHitPointModifier.cs" />
+    <Compile Include="Effects\Modifiers\IAttackModifier.cs" />
+    <Compile Include="Effects\Modifiers\IWillpowerModifier.cs" />
+    <Compile Include="Effects\Modifiers\ModifierBase.cs" />
     <Compile Include="Effects\ReadyCards.cs" />
     <Compile Include="Effects\ReversableEffectBase.cs" />
     <Compile Include="Effects\IAmbushEffect.cs" />
+    <Compile Include="Heroes\Gimli.cs" />
+    <Compile Include="Heroes\Gloin.cs" />
     <Compile Include="IChooseCharacterPayment.cs" />
     <Compile Include="Effects\IReadyCards.cs" />
     <Compile Include="Effects\SurgeEffect.cs" />
@@ -64,6 +72,7 @@
     <Compile Include="CardText.cs" />
     <Compile Include="Effects\CharacterAbilities\CharacterAbilityBase.cs" />
     <Compile Include="Effects\CharacterAbilities\RangedAbility.cs" />
+    <Compile Include="Phases\Combat\IDealDamageStep.cs" />
     <Compile Include="SentinelAbility.cs" />
     <Compile Include="CharacterCardBase.cs" />
     <Compile Include="Duration.cs" />
@@ -208,6 +217,9 @@
   <ItemGroup>
     <Folder Include="Costs\" />
     <Folder Include="Payments\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

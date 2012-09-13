@@ -59,7 +59,6 @@ namespace LotR.Core.Heroes
                     return;
 
                 step.AddEffect(new AddResources(step, new Dictionary<Guid, byte> { { hero.Id, 1 } }));
-                //hero.AddResources(1);
             }
         }
 
