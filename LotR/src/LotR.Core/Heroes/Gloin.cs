@@ -31,15 +31,15 @@ namespace LotR.Core.Heroes
             {
             }
 
-            public void Setup(IDealDamageStep step)
+            public void AfterDamageDealtSetup(IDealDamageStep step)
             {
-                if (step.Target.Id != Source.Id)
+                if (step.Target.CardId != Source.Id)
                     return;
 
                 step.AddEffect(this);
             }
 
-            public void Resolve(IDealDamageStep step)
+            public void AfterDamageDealtResolve(IDealDamageStep step)
             {
                 step.AddEffect(new AddResources(step, new Dictionary<Guid, byte> { { Source.Id, step.Damage } }));
             }

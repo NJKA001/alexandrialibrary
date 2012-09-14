@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LotR.Core.Phases.Quest
 {
-    interface IDuringCommitingToQuest
+    interface IDuringCommittingToQuest
     {
     }
 }

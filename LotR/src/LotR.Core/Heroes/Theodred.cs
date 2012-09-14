@@ -25,7 +25,7 @@ namespace LotR.Core.Heroes
         #region Abilities
 
         public class AddResourceToCommittedHero
-            : ResponseCharacterAbilityBase, IAfterCommitingToQuest
+            : ResponseCharacterAbilityBase, IAfterCommittingToQuest
         {
             public AddResourceToCommittedHero(Theodred source)
                 : base("After Theodred commits to a quest, choose a hero committed to that quest. Add 1 resource to that hero's resource pool.", source)
@@ -35,7 +35,7 @@ namespace LotR.Core.Heroes
 
             private Theodred theodred;
 
-            public void Setup(ICommitToQuestStep step)
+            public void AfterCommittingToQuestSetup(ICommitToQuestStep step)
             {
                 var self = step.CommitedCharacters.Where(x => x.Card == theodred).Select(x => x.Card).FirstOrDefault();
 
@@ -45,7 +45,7 @@ namespace LotR.Core.Heroes
                 step.AddEffect(this);
             }
 
-            public void Resolve(ICommitToQuestStep step, IPayment payment)
+            public void AfterCommittingToQuestResolve(ICommitToQuestStep step, IPayment payment)
             {
                 if (payment == null)
                     return;
@@ -58,7 +58,7 @@ namespace LotR.Core.Heroes
                 if (hero == null)
                     return;
 
-                step.AddEffect(new AddResources(step, new Dictionary<Guid, byte> { { hero.Id, 1 } }));
+                step.AddEffect(new AddResources(step, new Dictionary<Guid, byte> { { hero.CardId, 1 } }));
             }
         }
 
@@ -105,5 +105,7 @@ namespace LotR.Core.Heroes
         }
 
         #endregion
+
+
     }
 }

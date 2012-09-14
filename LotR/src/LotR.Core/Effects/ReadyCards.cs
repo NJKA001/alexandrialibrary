@@ -28,18 +28,18 @@ namespace LotR.Core.Effects
         {
             foreach (var target in Targets)
             {
-                var inPlay = step.GetCardInPlay(target.Id);
+                var inPlay = step.GetCardInPlay(target.CardId);
                 if (inPlay == null)
                     continue;
 
                 if (target.IsExhausted)
                 {
                     target.Ready();
-                    wasReadied[target.Id] = true;
+                    wasReadied[target.CardId] = true;
                 }
                 else
                 {
-                    wasReadied[target.Id] = false;
+                    wasReadied[target.CardId] = false;
                 }
             }
         }
@@ -48,11 +48,11 @@ namespace LotR.Core.Effects
         {
             foreach (var target in Targets)
             {
-                var inPlay = step.GetCardInPlay(target.Id);
+                var inPlay = step.GetCardInPlay(target.CardId);
                 if (inPlay == null)
                     continue;
 
-                if (wasReadied[target.Id])
+                if (wasReadied[target.CardId])
                     target.Exhaust();
             }
         }

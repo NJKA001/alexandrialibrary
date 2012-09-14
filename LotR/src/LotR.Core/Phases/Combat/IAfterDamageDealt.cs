@@ -7,7 +7,7 @@ namespace LotR.Core.Phases.Combat
 {
     public interface IAfterDamageDealt
     {
-        void Setup(IDealDamageStep step);
-        void Resolve(IDealDamageStep step);
+        void AfterDamageDealtSetup(IDealDamageStep step);
+        void AfterDamageDealtResolve(IDealDamageStep step);
     }
 }

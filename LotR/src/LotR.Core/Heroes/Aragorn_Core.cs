@@ -25,7 +25,7 @@ namespace LotR.Core.Heroes
         #region Abilities
 
         public class ReadyAfterCommitingToQuest
-            : ResponseCharacterAbilityBase, IAfterCommitingToQuest
+            : ResponseCharacterAbilityBase, IAfterCommittingToQuest
         {
             public ReadyAfterCommitingToQuest(Aragorn source)
                 : base("After Aragorn commits to a quest, spend 1 resource from his resource pool to ready him.", source)
@@ -35,7 +35,7 @@ namespace LotR.Core.Heroes
 
             private Aragorn aragorn;
 
-            public void Setup(ICommitToQuestStep step)
+            public void AfterCommittingToQuestSetup(ICommitToQuestStep step)
             {
                 var self = step.CommitedCharacters.Where(x => x.Card == aragorn).Select(x => x.Card).FirstOrDefault();
 
@@ -45,7 +45,7 @@ namespace LotR.Core.Heroes
                 step.AddEffect(this);
             }
 
-            public void Resolve(ICommitToQuestStep step, IPayment payment)
+            public void AfterCommittingToQuestResolve(ICommitToQuestStep step, IPayment payment)
             {
                 var inPlay = step.GetCardInPlay(aragorn.Id) as IHeroInPlay;
 
