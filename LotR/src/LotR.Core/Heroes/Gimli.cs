@@ -12,7 +12,7 @@ using LotR.Core.Phases.Combat;
 namespace LotR.Core.Heroes
 {
     public class Gimli
-        : HeroCardBase, IAfterDamageDealt, IAfterDamageHealed
+        : HeroCardBase
     {
         public Gimli()
             : base("Gimli", Sphere.Tactics)
@@ -21,7 +21,7 @@ namespace LotR.Core.Heroes
             Trait(Traits.Noble);
             Trait(Traits.Warrior);
 
-
+            Effect(new StrengthBonusForDamage(this));
         }
 
         #region Abilities
@@ -41,65 +41,22 @@ namespace LotR.Core.Heroes
             : AttackModifier
         {
             public GimliAttackModifier(IPhase startPhase, ICard source, int value)
-                : base(startPhase, source, Duration.Permanent, value)
+                : base(startPhase, source, Duration.Immediate, value)
             {
             }
         }
 
-        #region IAfterDamageDealt
-
-        public void AfterDamageDealtSetup(IDealDamageStep step)
+        public override void DetermineAttack(IDetermineAttackStep step)
         {
-        }
-
-        public void AfterDamageDealtResolve(IDealDamageStep step)
-        {
-            var hero = step.GetCardInPlay(this.Id) as IHeroInPlay;
-            if (hero == null)
-                return;
-
-            var modifier = hero.Modifiers.OfType<GimliAttackModifier>().FirstOrDefault();
-            
-            if (modifier == null || hero.Damage != modifier.Value)
+            var damageable = step.GetCardInPlay(this.Id) as IDamageableInPlay;
+            if (damageable == null)
             {
-                if (modifier != null)
-                    hero.RemoveModifier(modifier);
-
-                if (hero.Damage == 0)
-                    return;
-
-                hero.AddModifier(new GimliAttackModifier(step.Phase, this, hero.Damage));
+                step.Attack = 0;
+            }
+            else
+            {
+                step.Attack = (byte)(this.Attack + damageable.Damage);
             }
         }
-
-        #endregion
-
-        #region IAfterDamageHealed
-
-        public void AfterDamageHealedSetup(IHealDamageStep step)
-        {
-        }
-
-        public void AfterDamageHealedResolve(IHealDamageStep step, IPayment payment)
-        {
-            var hero = step.GetCardInPlay(this.Id) as IHeroInPlay;
-            if (hero == null)
-                return;
-
-            var modifier = hero.Modifiers.OfType<GimliAttackModifier>().FirstOrDefault();
-
-            if (modifier == null || hero.Damage != modifier.Value)
-            {
-                if (modifier != null)
-                    hero.RemoveModifier(modifier);
-
-                if (hero.Damage == 0)
-                    return;
-
-                hero.AddModifier(new GimliAttackModifier(step.Phase, this, hero.Damage));
-            }
-        }
-
-        #endregion
     }
 }

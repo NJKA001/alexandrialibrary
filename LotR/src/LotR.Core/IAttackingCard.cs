@@ -7,12 +7,9 @@ using LotR.Core.Phases.Any;
 
 namespace LotR.Core
 {
-    public interface ICharacterCard
-        : IPlayerCard, 
-        IWillpowerfulCard,
-        IAttackingCard, 
-        IDefendingCard, 
-        IDamageableCard
+    public interface IAttackingCard
+        : ICard
     {
+        void DetermineAttack(IDetermineAttackStep step);
     }
 }

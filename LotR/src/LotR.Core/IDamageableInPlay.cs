@@ -7,10 +7,10 @@ using LotR.Core.Effects.Modifiers;
 
 namespace LotR.Core
 {
-    public interface IKillableInPlay
+    public interface IDamageableInPlay
         : ICardInPlay
     {
-        new IKillableCard Card { get; }
+        new IDamageableCard Card { get; }
         byte Damage { get; }
 
         void AddDamage(byte value);

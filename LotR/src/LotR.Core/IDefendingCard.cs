@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Core.Phases.Any;
+
 namespace LotR.Core
 {
-    public interface IKillableCard
+    public interface IDefendingCard
         : ICard
     {
-        byte Attack { get; }
-        byte Defense { get; }
-        byte HitPoints { get; }
+        void DetermineDefense(IDetermineDefenseStep step);
     }
 }

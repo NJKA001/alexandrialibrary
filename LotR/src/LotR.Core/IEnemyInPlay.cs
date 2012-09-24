@@ -5,11 +5,9 @@ using System.Text;
 
 namespace LotR.Core
 {
-    public enum Duration
+    public interface IEnemyInPlay
+        : ICardInPlay
     {
-        Immediate,
-        Phase,
-        Round,
-        Permanent
+        new IEnemyCard Card { get; }
     }
 }

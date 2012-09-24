@@ -24,14 +24,14 @@ namespace LotR.Core.Heroes
         #region Abilities
 
         public class AddResourcesWhenTakingDamage
-            : ResponseCharacterAbilityBase, IAfterDamageDealt
+            : ResponseCharacterAbilityBase, IAfterDamageDealtToCharacter
         {
             public AddResourcesWhenTakingDamage(Gloin source)
                 : base("After Gloin suffers damage, add 1 resource to his resource pool for each point of damage he just suffered.", source)
             {
             }
 
-            public void AfterDamageDealtSetup(IDealDamageStep step)
+            public void AfterDamageDealtSetup(IDealDamageToCharacterStep step)
             {
                 if (step.Target.CardId != Source.Id)
                     return;
@@ -39,7 +39,7 @@ namespace LotR.Core.Heroes
                 step.AddEffect(this);
             }
 
-            public void AfterDamageDealtResolve(IDealDamageStep step)
+            public void AfterDamageDealtResolve(IDealDamageToCharacterStep step)
             {
                 step.AddEffect(new AddResources(step, new Dictionary<Guid, byte> { { Source.Id, step.Damage } }));
             }

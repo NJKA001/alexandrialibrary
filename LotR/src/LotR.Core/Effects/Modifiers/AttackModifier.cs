@@ -6,7 +6,7 @@ using System.Text;
 namespace LotR.Core.Effects.Modifiers
 {
     public class AttackModifier
-        : ModifierBase
+        : ModifierBase, IAttackModifier
     {
         public AttackModifier(IPhase startPhase, ICard source, Duration duration, int value)
             : base(GetDefaultDescription("Attack", value), startPhase, source, duration, value)

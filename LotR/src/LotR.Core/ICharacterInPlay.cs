@@ -6,7 +6,7 @@ using System.Text;
 namespace LotR.Core
 {
     public interface ICharacterInPlay
-        : ICardInPlay, IExhaustableCard, IKillableInPlay
+        : ICardInPlay, IExhaustableCard, IDamageableInPlay
     {
         new ICharacterCard Card { get; }
     }

@@ -12,6 +12,7 @@ namespace LotR.Core
 
         ICard GetCard(Guid id);
         ICardInPlay GetCardInPlay(Guid id);
+        bool CardIsInPlay(Guid id);
 
         IEnumerable<IEffect> Effects { get; }
         void AddEffect(IEffect effect);

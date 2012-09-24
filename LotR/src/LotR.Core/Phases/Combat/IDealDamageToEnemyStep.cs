@@ -5,7 +5,10 @@ using System.Text;
 
 namespace LotR.Core.Phases.Combat
 {
-    interface IDuringCounterattackDamageDealt
+    public interface IDealDamageToEnemyStep
+        : IPhaseStep
     {
+        IEnemyInPlay Target { get; set; }
+        byte Damage { get; set; }
     }
 }

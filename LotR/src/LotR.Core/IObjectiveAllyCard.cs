@@ -6,7 +6,7 @@ using System.Text;
 namespace LotR.Core
 {
     public interface IObjectiveAllyCard
-        : IObjectiveCard, IKillableCard
+        : IObjectiveCard, IDamageableCard
     {
     }
 }

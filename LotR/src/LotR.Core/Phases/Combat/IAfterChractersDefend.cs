@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LotR.Core.Phases.Combat
 {
-    interface IBeforeCounterattackDeclared
+    interface IAfterChractersDefend
     {
     }
 }

@@ -9,7 +9,7 @@ using LotR.Core.Phases.Combat;
 namespace LotR.Core
 {
     public class SentinelAbility
-        : CharacterAbilityBase, IDuringDefenderDeclared
+        : CharacterAbilityBase, IDuringCharactersDefend
     {
         public SentinelAbility(IPlayerCard source)
             : base("Sentinel", source)
