@@ -9,37 +9,18 @@ using LotR.Core.Phases.Resource;
 namespace LotR.Core.Heroes
 {
     public class BilboBaggins_SoM
-        : HeroCardBase
+        : HeroCardBase, IDuringDrawingCards
     {
         public BilboBaggins_SoM()
-            : base("Bilbo Baggins", Sphere.Lore)
+            : base("Bilbo Baggins", SetNames.Shadows_of_Mirkwood, 1, Sphere.Lore, 9, 1, 1, 2, 2)
         {
             Trait(Traits.Hobbit);
-            
-            Effect(new FirstPlayerDrawsAndExtraCard(this));
         }
 
-        #region Abilities
-
-        public class FirstPlayerDrawsAndExtraCard
-            : PassiveCharacterAbilityBase, IDuringDrawingCards
+        public void DuringDrawingCards(IDrawCardsStep step)
         {
-            public FirstPlayerDrawsAndExtraCard(BilboBaggins_SoM source)
-                : base("The first player draws 1 additional card in the resource phase.", source)
-            {
-            }
-
-            public void Setup(IDrawCardsStep step)
-            {
-                if (step.Player.IsFirstPlayer)
-                    step.NumberOfCardsToDraw += 1;
-            }
-
-            public void Resolve(IDrawCardsStep step, IPayment payment)
-            {
-            }
+            if (step.Player.IsFirstPlayer)
+                step.NumberOfCardsToDraw += 1;
         }
-
-        #endregion
     }
 }

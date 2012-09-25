@@ -61,6 +61,7 @@
     <Compile Include="Effects\IAmbushEffect.cs" />
     <Compile Include="Heroes\Gimli.cs" />
     <Compile Include="Heroes\Gloin.cs" />
+    <Compile Include="Heroes\Legolas.cs" />
     <Compile Include="IAttackingCard.cs" />
     <Compile Include="IChooseCharacterPayment.cs" />
     <Compile Include="Effects\IReadyCards.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Effects\CharacterAbilities\RangedAbility.cs" />
     <Compile Include="IDefendingCard.cs" />
     <Compile Include="IEnemyInPlay.cs" />
+    <Compile Include="ISetupCard.cs" />
     <Compile Include="IWillpowerfulCard.cs" />
     <Compile Include="Phases\Any\IDetermineAttackStep.cs" />
     <Compile Include="Phases\Any\IDetermineDefenseStep.cs" />
@@ -86,9 +88,13 @@
     <Compile Include="Phases\Any\IHealDamageStep.cs" />
     <Compile Include="Phases\Any\IAfterDamageHealed.cs" />
     <Compile Include="Phases\Any\IBeforeDamageHealed.cs" />
+    <Compile Include="Phases\Combat\IAfterEnemyDefeated.cs" />
+    <Compile Include="Phases\Combat\IBeforeEnemyDefeated.cs" />
     <Compile Include="Phases\Combat\ICharactersAttackStep.cs" />
     <Compile Include="Phases\Combat\IDealDamageToEnemyStep.cs" />
     <Compile Include="Phases\Combat\IDealDamageToCharacterStep.cs" />
+    <Compile Include="Phases\Combat\IDuringEnemyDefeated.cs" />
+    <Compile Include="Phases\Combat\IEnemyDefeatedStep.cs" />
     <Compile Include="SentinelAbility.cs" />
     <Compile Include="CharacterCardBase.cs" />
     <Compile Include="Duration.cs" />
@@ -227,6 +233,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestBase.cs" />
     <Compile Include="ScenarioBase.cs" />
+    <Compile Include="SetNames.cs" />
     <Compile Include="Sphere.cs" />
     <Compile Include="Traits.cs" />
   </ItemGroup>

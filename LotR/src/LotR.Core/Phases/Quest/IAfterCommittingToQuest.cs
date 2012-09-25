@@ -7,7 +7,6 @@ namespace LotR.Core.Phases.Quest
 {
     public interface IAfterCommittingToQuest
     {
-        void AfterCommittingToQuestSetup(ICommitToQuestStep step);
-        void AfterCommittingToQuestResolve(ICommitToQuestStep step, IPayment payment);
+        void AfterCommittingToQuest(ICommitToQuestStep step);
     }
 }

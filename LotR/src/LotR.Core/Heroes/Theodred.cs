@@ -10,42 +10,42 @@ using LotR.Core.Phases.Quest;
 namespace LotR.Core.Heroes
 {
     public class Theodred
-        : HeroCardBase
+        : HeroCardBase, IAfterCommittingToQuest
     {
         public Theodred()
-            : base("Theodred", Sphere.Leadership)
+            : base("Theodred", SetNames.Core, 2, Sphere.Leadership, 8, 1, 2, 1, 4)
         {
             Trait(Traits.Noble);
             Trait(Traits.Rohan);
             Trait(Traits.Warrior);
+        }
 
-            
+        public void AfterCommittingToQuest(ICommitToQuestStep step)
+        {
+            var self = step.CommitedCharacters.Where(x => x.CardId == this.Id).Select(x => x.Card).FirstOrDefault();
+
+            if (self == null)
+                return;
+
+            step.AddEffect(new AddResourceToCommittedHero(this, step));
         }
 
         #region Abilities
 
         public class AddResourceToCommittedHero
-            : ResponseCharacterAbilityBase, IAfterCommittingToQuest
+            : ResponseCharacterAbilityBase
         {
-            public AddResourceToCommittedHero(Theodred source)
+            public AddResourceToCommittedHero(Theodred source, IPhaseStep step)
                 : base("After Theodred commits to a quest, choose a hero committed to that quest. Add 1 resource to that hero's resource pool.", source)
             {
                 theodred = source;
+                this.step = step;
             }
 
-            private Theodred theodred;
+            private readonly Theodred theodred;
+            private readonly IPhaseStep step;
 
-            public void AfterCommittingToQuestSetup(ICommitToQuestStep step)
-            {
-                var self = step.CommitedCharacters.Where(x => x.Card == theodred).Select(x => x.Card).FirstOrDefault();
-
-                if (self == null)
-                    return;
-
-                step.AddEffect(this);
-            }
-
-            public void AfterCommittingToQuestResolve(ICommitToQuestStep step, IPayment payment)
+            public override void Resolve(IPayment payment)
             {
                 if (payment == null)
                     return;
@@ -105,7 +105,5 @@ namespace LotR.Core.Heroes
         }
 
         #endregion
-
-
     }
 }

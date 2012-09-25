@@ -8,34 +8,30 @@ namespace LotR.Core
     public abstract class QuestBase
         : CardBase, IQuestCard
     {
+        protected QuestBase(string title, string setName, uint setNumber, byte sequence, byte questPoints, byte victoryPoints)
+            : base(title, setName, setNumber)
+        {
+            this.Sequence = sequence;
+            this.QuestPoints = questPoints;
+            this.VictoryPoints = victoryPoints;
+        }
+
         public byte Sequence
         {
             get;
-            protected set;
-        }
-
-        public ICardEffect Setup
-        {
-            get;
-            protected set;
+            private set;
         }
 
         public byte QuestPoints
         {
             get;
-            protected set;
+            private set;
         }
 
         public byte VictoryPoints
         {
             get;
-            protected set;
-        }
-
-        public ICardEffect WhenRevealed
-        {
-            get;
-            protected set;
+            private set;
         }
     }
 }

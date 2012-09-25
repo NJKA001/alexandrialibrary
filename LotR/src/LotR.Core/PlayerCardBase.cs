@@ -8,6 +8,11 @@ namespace LotR.Core
     public abstract class PlayerCardBase
         : CardBase, IPlayerCard
     {
+        protected PlayerCardBase(string title, string setName, uint setNumber)
+            : base(title, setName, setNumber)
+        {
+        }
+
         private readonly List<Sphere> spheresOfInfluence = new List<Sphere>();
 
         protected void AddSphereOfInfluence(Sphere sphere)

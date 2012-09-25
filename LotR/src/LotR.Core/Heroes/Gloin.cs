@@ -10,41 +10,44 @@ using LotR.Core.Phases.Combat;
 namespace LotR.Core.Heroes
 {
     public class Gloin
-        : HeroCardBase
+        : HeroCardBase, IAfterDamageDealtToCharacter
     {
         public Gloin()
-            : base("Gloin", Sphere.Leadership)
+            : base("Gloin", SetNames.Core, 3, Sphere.Leadership, 9, 2, 2, 1, 4)
         {
             Trait(Traits.Dwarf);
             Trait(Traits.Noble);
-
-            Effect(new AddResourcesWhenTakingDamage(this));
         }
 
         #region Abilities
 
         public class AddResourcesWhenTakingDamage
-            : ResponseCharacterAbilityBase, IAfterDamageDealtToCharacter
+            : ResponseCharacterAbilityBase
         {
-            public AddResourcesWhenTakingDamage(Gloin source)
+            public AddResourcesWhenTakingDamage(Gloin source, ICardInPlay permanent, byte value)
                 : base("After Gloin suffers damage, add 1 resource to his resource pool for each point of damage he just suffered.", source)
             {
+                this.permanent = permanent;
+                this.value = value;
             }
 
-            public void AfterDamageDealtSetup(IDealDamageToCharacterStep step)
-            {
-                if (step.Target.CardId != Source.Id)
-                    return;
+            private readonly ICardInPlay permanent;
+            private readonly byte value;
 
-                step.AddEffect(this);
-            }
-
-            public void AfterDamageDealtResolve(IDealDamageToCharacterStep step)
+            public override void Resolve(IPayment payment)
             {
-                step.AddEffect(new AddResources(step, new Dictionary<Guid, byte> { { Source.Id, step.Damage } }));
+                permanent.AddResources(value);
             }
         }
 
         #endregion
+
+        public void AfterDamageDealtToCharacter(IDealDamageToCharacterStep step)
+        {
+            if (step.Target.CardId != this.Id)
+                return;
+
+            step.AddEffect(new AddResourcesWhenTakingDamage(this, step.Target, step.Damage));
+        }
     }
 }

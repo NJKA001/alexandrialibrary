@@ -10,10 +10,10 @@ using LotR.Core.Phases.Quest;
 namespace LotR.Core.Heroes
 {
     public sealed class Aragorn
-        : HeroCardBase
+        : HeroCardBase, IAfterCommittingToQuest
     {
         public Aragorn()
-            : base("Aragorn", Sphere.Leadership)
+            : base("Aragorn", SetNames.Core, 1, Sphere.Leadership, 12, 2, 3, 2, 5)
         {
             Trait(Traits.Dunedain);
             Trait(Traits.Noble);
@@ -22,30 +22,32 @@ namespace LotR.Core.Heroes
             Effect(new SentinelAbility(this));
         }
 
+        public void AfterCommittingToQuest(ICommitToQuestStep step)
+        {
+            var self = step.CommitedCharacters.Where(x => x.CardId == this.Id).Select(x => x.Card).FirstOrDefault();
+
+            if (self == null)
+                return;
+
+            step.AddEffect(new ReadyAfterCommitingToQuest(this, step));
+        }
+
         #region Abilities
 
         public class ReadyAfterCommitingToQuest
-            : ResponseCharacterAbilityBase, IAfterCommittingToQuest
+            : ResponseCharacterAbilityBase
         {
-            public ReadyAfterCommitingToQuest(Aragorn source)
+            public ReadyAfterCommitingToQuest(Aragorn source, ICommitToQuestStep step)
                 : base("After Aragorn commits to a quest, spend 1 resource from his resource pool to ready him.", source)
             {
                 aragorn = source;
+                this.step = step;
             }
 
-            private Aragorn aragorn;
+            private readonly Aragorn aragorn;
+            private readonly ICommitToQuestStep step;
 
-            public void AfterCommittingToQuestSetup(ICommitToQuestStep step)
-            {
-                var self = step.CommitedCharacters.Where(x => x.Card == aragorn).Select(x => x.Card).FirstOrDefault();
-
-                if (self == null)
-                    return;
-
-                step.AddEffect(this);
-            }
-
-            public void AfterCommittingToQuestResolve(ICommitToQuestStep step, IPayment payment)
+            public override void Resolve(IPayment payment)
             {
                 var inPlay = step.GetCardInPlay(aragorn.Id) as IHeroInPlay;
 

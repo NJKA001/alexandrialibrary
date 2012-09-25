@@ -8,6 +8,11 @@ namespace LotR.Core
     public abstract class ScenarioBase
         : CardBase, IScenario
     {
+        protected ScenarioBase(string title, string setName, uint setNumber)
+            : base(title, setName, setNumber)
+        {
+        }
+
         private readonly List<IQuestCard> quests = new List<IQuestCard>();
         private readonly List<IEncounterSet> encounterSets = new List<IEncounterSet>();
 

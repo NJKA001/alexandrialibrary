@@ -5,9 +5,9 @@ using System.Text;
 
 namespace LotR.Core
 {
-    public interface IQuestCard
-        : IProgressableCard
+    public interface ISetupCard
+        : ICard
     {
-        byte Sequence { get; }
+        ICardEffect Setup { get; }
     }
 }

@@ -12,5 +12,7 @@ namespace LotR.Core.Effects.CharacterAbilities
             : base(description, source)
         {
         }
+
+        public abstract void Resolve(IPayment payment);
     }
 }

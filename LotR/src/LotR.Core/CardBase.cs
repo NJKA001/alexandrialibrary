@@ -8,6 +8,13 @@ namespace LotR.Core
     public abstract class CardBase
         : ICard
     {
+        protected CardBase(string title, string setName, uint setNumber)
+        {
+            this.Title = title;
+            this.SetName = setName;
+            this.SetNumber = setNumber;
+        }
+
         private readonly Guid id = Guid.NewGuid();
         private readonly CardText text = new CardText();
         private readonly List<Traits> traits = new List<Traits>();
@@ -30,19 +37,19 @@ namespace LotR.Core
         public string Title
         {
             get;
-            protected set;
+            private set;
         }
 
         public string SetName
         {
             get;
-            protected set;
+            private set;
         }
 
         public uint SetNumber
         {
             get;
-            protected set;
+            private set;
         }
 
         public ICardText Text

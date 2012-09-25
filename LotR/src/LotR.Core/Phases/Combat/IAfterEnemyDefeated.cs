@@ -5,8 +5,8 @@ using System.Text;
 
 namespace LotR.Core.Phases.Combat
 {
-    public interface IAfterDamageDealtToCharacter
+    public interface IAfterEnemyDefeated
     {
-        void AfterDamageDealtToCharacter(IDealDamageToCharacterStep step);
+        void AfterEnemyDefeated(IEnemyDefeatedStep step);
     }
 }

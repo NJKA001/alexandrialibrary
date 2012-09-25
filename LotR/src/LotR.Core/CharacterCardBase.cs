@@ -10,28 +10,37 @@ namespace LotR.Core
     public class CharacterCardBase
         : PlayerCardBase, ICharacterCard
     {
+        protected CharacterCardBase(string title, string setName, uint setNumber, byte willpower, byte attack, byte defense, byte hitPoints)
+            : base(title, setName, setNumber)
+        {
+            this.Willpower = willpower;
+            this.Attack = attack;
+            this.Defense = defense;
+            this.HitPoints = hitPoints;
+        }
+
         protected byte Willpower
         {
             get;
-            set;
+            private set;
         }
 
         protected byte Attack
         {
             get;
-            set;
+            private set;
         }
 
         protected byte Defense
         {
             get;
-            set;
+            private set;
         }
 
         protected byte HitPoints
         {
             get;
-            set;
+            private set;
         }
 
         public virtual void DetermineWillpower(IDetermineWillpowerStep step)

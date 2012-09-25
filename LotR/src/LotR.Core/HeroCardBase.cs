@@ -8,13 +8,11 @@ namespace LotR.Core
     public abstract class HeroCardBase
         : CharacterCardBase, IHeroCard
     {
-        protected HeroCardBase()
+        protected HeroCardBase(string title, string setName, uint setNumber, Sphere sphere, byte threatCost, byte willpower, byte attack, byte defense, byte hitPoints)
+            : base(title, setName, setNumber, willpower, attack, defense, hitPoints)
         {
-        }
+            this.ThreatCost = threatCost;
 
-        protected HeroCardBase(string title, Sphere sphere)
-        {
-            Title = title;
             AddResourceIcon(sphere);
             AddSphereOfInfluence(sphere);
         }
@@ -29,7 +27,7 @@ namespace LotR.Core
         public byte ThreatCost
         {
             get;
-            protected set;
+            private set;
         }
 
         public IEnumerable<Sphere> ResourceIcons

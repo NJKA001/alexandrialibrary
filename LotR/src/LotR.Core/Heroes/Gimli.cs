@@ -15,7 +15,7 @@ namespace LotR.Core.Heroes
         : HeroCardBase
     {
         public Gimli()
-            : base("Gimli", Sphere.Tactics)
+            : base("Gimli", SetNames.Core, 4, Sphere.Tactics, 11, 2, 2, 2, 5)
         {
             Trait(Traits.Dwarf);
             Trait(Traits.Noble);
