@@ -40,6 +40,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Allies\Beorn.cs" />
+    <Compile Include="Allies\BrokIronfist.cs" />
+    <Compile Include="Allies\DaughterOfNimrodel.cs" />
+    <Compile Include="Allies\EreborHammersmith.cs" />
+    <Compile Include="Allies\Faramir.cs" />
+    <Compile Include="Allies\Gandalf_Core.cs" />
+    <Compile Include="Allies\Gleowine.cs" />
+    <Compile Include="Allies\GondorianSpearman.cs" />
+    <Compile Include="Allies\GuardOfTheCitadel.cs" />
+    <Compile Include="Allies\HenemarthRiversong.cs" />
+    <Compile Include="Allies\HorsebackArcher.cs" />
+    <Compile Include="Allies\LongbeardOrcSlayer.cs" />
+    <Compile Include="Allies\LorienGuide.cs" />
+    <Compile Include="Allies\MinerOfTheIronHills.cs" />
+    <Compile Include="Allies\NorthernTracker.cs" />
+    <Compile Include="Allies\SilverlodeArcher.cs" />
+    <Compile Include="Allies\SnowbornScout.cs" />
+    <Compile Include="Allies\SonOfArnor.cs" />
+    <Compile Include="Allies\VeteranAxehand.cs" />
+    <Compile Include="Allies\WanderingTook.cs" />
+    <Compile Include="AllyCardBase.cs" />
     <Compile Include="CardBase.cs" />
     <Compile Include="Effects\CardEffectBase.cs" />
     <Compile Include="Effects\AmbushEffect.cs" />

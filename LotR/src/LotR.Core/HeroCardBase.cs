@@ -12,6 +12,7 @@ namespace LotR.Core
             : base(title, setName, setNumber, willpower, attack, defense, hitPoints)
         {
             this.ThreatCost = threatCost;
+            this.IsUnique = true;
 
             AddResourceIcon(sphere);
             AddSphereOfInfluence(sphere);

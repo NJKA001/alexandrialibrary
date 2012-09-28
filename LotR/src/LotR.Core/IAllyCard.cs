@@ -8,6 +8,5 @@ namespace LotR.Core
     public interface IAllyCard
         : ICostlyCard, ICharacterCard
     {
-        Sphere SphereOfInfluence { get; }
     }
 }
