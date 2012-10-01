@@ -9,6 +9,5 @@ namespace LotR.Core
         : ICharacterCard, IResourcefulCard
     {
         byte ThreatCost { get; }
-        IEnumerable<Sphere> ResourceIcons { get; }
     }
 }

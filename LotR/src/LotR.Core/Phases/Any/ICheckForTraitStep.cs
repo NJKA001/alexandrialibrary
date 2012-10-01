@@ -5,10 +5,11 @@ using System.Text;
 
 namespace LotR.Core.Phases.Any
 {
-    public interface IDetermineWillpowerStep
+    public interface ICheckForTraitStep
         : IPhaseStep
     {
-        IWillpowerfulCard Source { get; }
-        byte Willpower { get; set; }
+        ICardInPlay CardInPlay { get; }
+        Traits Trait { get; }
+        bool HasTrait { get; set; }
     }
 }

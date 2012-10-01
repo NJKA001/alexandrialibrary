@@ -16,5 +16,8 @@ namespace LotR.Core
 
         IEnumerable<IEffect> Effects { get; }
         void AddEffect(IEffect effect);
+
+        void AddProgressToCurrentQuest(byte value);
+        void RemoveProgressFromCurrentQuest(byte value);
     }
 }

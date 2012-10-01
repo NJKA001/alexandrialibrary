@@ -9,6 +9,7 @@ namespace LotR.Core
     {
         string Description { get; }
 
-        ICost GetCost();
+        ICost GetCost(IPhaseStep step);
+        ILimit GetLimit();
     }
 }

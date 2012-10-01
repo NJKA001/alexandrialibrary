@@ -19,7 +19,12 @@ namespace LotR.Core.Effects
             private set;
         }
 
-        public virtual ICost GetCost()
+        public virtual ICost GetCost(IPhaseStep step)
+        {
+            return null;
+        }
+
+        public virtual ILimit GetLimit()
         {
             return null;
         }

@@ -61,9 +61,26 @@
     <Compile Include="Allies\VeteranAxehand.cs" />
     <Compile Include="Allies\WanderingTook.cs" />
     <Compile Include="AllyCardBase.cs" />
+    <Compile Include="AttachmentCardBase.cs" />
+    <Compile Include="Attachments\BladeOfGondolin.cs" />
+    <Compile Include="Attachments\CelebriansStone.cs" />
+    <Compile Include="Attachments\CitadelPlate.cs" />
+    <Compile Include="Attachments\DarkKnowledge.cs" />
+    <Compile Include="Attachments\DwarvenAxe.cs" />
+    <Compile Include="Attachments\ForestSnare.cs" />
+    <Compile Include="Attachments\HornOfGondor.cs" />
+    <Compile Include="Attachments\PowerInTheEarth.cs" />
+    <Compile Include="Attachments\ProtectorOfLorien.cs" />
+    <Compile Include="Attachments\SelfPreservation.cs" />
+    <Compile Include="Attachments\StewardOfGondor.cs" />
+    <Compile Include="Attachments\TheFavorOfTheLady.cs" />
+    <Compile Include="Attachments\UnexpectedCourage.cs" />
     <Compile Include="CardBase.cs" />
+    <Compile Include="Costs\ExhaustSelfCost.cs" />
+    <Compile Include="Effects\ActionEffect.cs" />
     <Compile Include="Effects\CardEffectBase.cs" />
     <Compile Include="Effects\AmbushEffect.cs" />
+    <Compile Include="Effects\CharacterAbilities\ActionCharacterAbilityBase.cs" />
     <Compile Include="Effects\DoomedEffect.cs" />
     <Compile Include="Effects\AddResources.cs" />
     <Compile Include="Effects\EffectBase.cs" />
@@ -77,12 +94,15 @@
     <Compile Include="Effects\Modifiers\IAttackModifier.cs" />
     <Compile Include="Effects\Modifiers\IWillpowerModifier.cs" />
     <Compile Include="Effects\Modifiers\ModifierBase.cs" />
+    <Compile Include="Effects\PassiveEffect.cs" />
     <Compile Include="Effects\ReadyCards.cs" />
+    <Compile Include="Effects\ResponseEffect.cs" />
     <Compile Include="Effects\ReversableEffectBase.cs" />
     <Compile Include="Effects\IAmbushEffect.cs" />
     <Compile Include="Heroes\Gimli.cs" />
     <Compile Include="Heroes\Gloin.cs" />
     <Compile Include="Heroes\Legolas.cs" />
+    <Compile Include="IAction.cs" />
     <Compile Include="IAttackingCard.cs" />
     <Compile Include="IChooseCharacterPayment.cs" />
     <Compile Include="Effects\IReadyCards.cs" />
@@ -97,12 +117,23 @@
     <Compile Include="Effects\CharacterAbilities\RangedAbility.cs" />
     <Compile Include="IDefendingCard.cs" />
     <Compile Include="IEnemyInPlay.cs" />
+    <Compile Include="ILimit.cs" />
     <Compile Include="ISetupCard.cs" />
     <Compile Include="IWillpowerfulCard.cs" />
+    <Compile Include="Phases\Any\CheckForTraitStep.cs" />
+    <Compile Include="Phases\Any\IAfterCharacterEntersPlay.cs" />
+    <Compile Include="Phases\Any\IAfterCharacterLeavesPlay.cs" />
+    <Compile Include="Phases\Any\ICharacterEntersPlayStep.cs" />
+    <Compile Include="Phases\Any\ICharacterLeavesPlayStep.cs" />
+    <Compile Include="Phases\Any\ICheckForResourceIcon.cs" />
+    <Compile Include="Phases\Any\ICheckForResourceIconStep.cs" />
+    <Compile Include="Phases\Any\ICheckForTrait.cs" />
+    <Compile Include="Phases\Any\IDetermineAttack.cs" />
     <Compile Include="Phases\Any\IDetermineAttackStep.cs" />
     <Compile Include="Phases\Any\IDetermineDefenseStep.cs" />
     <Compile Include="Phases\Any\IDetermineHitPoints.cs" />
     <Compile Include="Phases\Any\IDetermineHitPointsStep.cs" />
+    <Compile Include="Phases\Any\ICheckForTraitStep.cs" />
     <Compile Include="Phases\Any\IDetermineWillpower.cs" />
     <Compile Include="Phases\Any\IDetermineWillpowerStep.cs" />
     <Compile Include="Phases\Any\IDuringDamageHealed.cs" />
@@ -116,6 +147,7 @@
     <Compile Include="Phases\Combat\IDealDamageToCharacterStep.cs" />
     <Compile Include="Phases\Combat\IDuringEnemyDefeated.cs" />
     <Compile Include="Phases\Combat\IEnemyDefeatedStep.cs" />
+    <Compile Include="Phases\PhaseStepBase.cs" />
     <Compile Include="SentinelAbility.cs" />
     <Compile Include="CharacterCardBase.cs" />
     <Compile Include="Duration.cs" />
@@ -147,7 +179,7 @@
     <Compile Include="IEnemyCard.cs" />
     <Compile Include="IEventCard.cs" />
     <Compile Include="IExhaustableCard.cs" />
-    <Compile Include="IExhaustPayment.cs" />
+    <Compile Include="IExhaustCardPayment.cs" />
     <Compile Include="IForced.cs" />
     <Compile Include="IGame.cs" />
     <Compile Include="IGuardedCard.cs" />
@@ -259,7 +291,7 @@
     <Compile Include="Traits.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Costs\" />
+    <Folder Include="Events\" />
     <Folder Include="Payments\" />
   </ItemGroup>
   <ItemGroup>

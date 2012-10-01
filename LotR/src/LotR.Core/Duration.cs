@@ -7,9 +7,9 @@ namespace LotR.Core
 {
     public enum Duration
     {
-        Immediate,
+        None = 0,
         Phase,
         Round,
-        Permanent
+        Game
     }
 }

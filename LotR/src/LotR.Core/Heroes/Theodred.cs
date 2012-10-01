@@ -45,7 +45,7 @@ namespace LotR.Core.Heroes
             private readonly Theodred theodred;
             private readonly IPhaseStep step;
 
-            public override void Resolve(IPayment payment)
+            public override void Resolve(IPhaseStep step, IPayment payment)
             {
                 if (payment == null)
                     return;

@@ -8,6 +8,6 @@ namespace LotR.Core
     public interface IResponse
         : IActiveEffect
     {
-        void Resolve(IPayment payment);
+        void Resolve(IPhaseStep step, IPayment payment);
     }
 }

@@ -34,7 +34,7 @@ namespace LotR.Core.Heroes
             private readonly ICardInPlay permanent;
             private readonly byte value;
 
-            public override void Resolve(IPayment payment)
+            public override void Resolve(IPhaseStep step, IPayment payment)
             {
                 permanent.AddResources(value);
             }

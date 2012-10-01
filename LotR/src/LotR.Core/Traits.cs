@@ -23,13 +23,16 @@ namespace LotR.Core
         Minstrel,
         Noble,
         Noldor,
+        Orc,
         Ranger,
         Rohan,
         Scout,
         Silvan,
+        Skill,
         Song,
         Steward,
         Title,
+        Trap,
         Warrior,
         Weapon
     }

@@ -5,7 +5,8 @@ using System.Text;
 
 namespace LotR.Core.Phases.Combat
 {
-    interface IAfterCharactersAttack
+    public interface IAfterCharactersAttack
     {
+        void AfterCharactersAttack(ICharactersAttackStep step);
     }
 }

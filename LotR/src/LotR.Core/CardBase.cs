@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Core.Phases.Any;
+
 namespace LotR.Core
 {
     public abstract class CardBase
@@ -63,9 +65,12 @@ namespace LotR.Core
             protected set;
         }
 
-        public bool HasTrait(Traits trait)
+        public virtual void CheckForTrait(ICheckForTraitStep step)
         {
-            return traits.Contains(trait);
+            if (traits.Contains(step.Trait))
+            {
+                step.HasTrait = true;
+            }
         }
 
         public bool IsUnique

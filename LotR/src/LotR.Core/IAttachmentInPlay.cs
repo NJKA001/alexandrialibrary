@@ -8,6 +8,7 @@ namespace LotR.Core
     public interface IAttachmentInPlay
         : ICardInPlay, IExhaustableCard
     {
+        ICardInPlay AttachedTo { get; }
         new IAttachableCard Card { get; }
     }
 }

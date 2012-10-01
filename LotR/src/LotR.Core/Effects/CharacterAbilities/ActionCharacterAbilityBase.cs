@@ -5,10 +5,10 @@ using System.Text;
 
 namespace LotR.Core.Effects.CharacterAbilities
 {
-    public abstract class ResponseCharacterAbilityBase
-        : CharacterAbilityBase, IResponse
+    public abstract class ActionCharacterAbilityBase
+        : CharacterAbilityBase, IAction
     {
-        public ResponseCharacterAbilityBase(string description, IPlayerCard source)
+        protected ActionCharacterAbilityBase(string description, IPlayerCard source)
             : base(description, source)
         {
         }

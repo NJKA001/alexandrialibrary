@@ -9,6 +9,6 @@ namespace LotR.Core
         : ICard
     {
         bool IsRestricted { get; }
-        bool CanBeAttachedTo(ICardInPlay card);
+        bool CanBeAttachedTo(IPhaseStep step, ICardInPlay cardInPlay);
     }
 }

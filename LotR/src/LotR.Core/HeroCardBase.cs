@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Core.Phases.Any;
+
 namespace LotR.Core
 {
     public abstract class HeroCardBase
@@ -31,9 +33,12 @@ namespace LotR.Core
             private set;
         }
 
-        public IEnumerable<Sphere> ResourceIcons
+        public virtual void CheckForResourceIcon(ICheckForResourceIconStep step)
         {
-            get { return resourceIcons; }
+            if (resourceIcons.Contains(step.ResourceIcon))
+            {
+                step.HasResourceIcon = true;
+            }
         }
     }
 }

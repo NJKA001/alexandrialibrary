@@ -17,6 +17,8 @@ namespace LotR.Core
         IEnumerable<ICardInPlay> CardsInPlay { get; }
         IEnumerable<IPlayerCard> CardsInHand { get; }
 
+        IEnumerable<IEnemyInPlay> EngagedEnemies { get; }
+
         IDeck<IPlayerCard> Deck { get; }
         IDeck<IPlayerCard> DiscardPile { get; }
 

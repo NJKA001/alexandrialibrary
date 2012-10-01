@@ -47,7 +47,7 @@ namespace LotR.Core.Heroes
             private readonly Aragorn aragorn;
             private readonly ICommitToQuestStep step;
 
-            public override void Resolve(IPayment payment)
+            public override void Resolve(IPhaseStep step, IPayment payment)
             {
                 var inPlay = step.GetCardInPlay(aragorn.Id) as IHeroInPlay;
 
@@ -57,7 +57,7 @@ namespace LotR.Core.Heroes
                 step.AddEffect(new ReadyCards(step, new List<IExhaustableCard> { inPlay }));
             }
 
-            public override ICost GetCost()
+            public override ICost GetCost(IPhaseStep step)
             {
                 return new ReadyCost(aragorn);
             }

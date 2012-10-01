@@ -5,10 +5,8 @@ using System.Text;
 
 namespace LotR.Core.Phases.Any
 {
-    public interface IDetermineAttackStep
-        : IPhaseStep
+    public interface ICheckForTrait
     {
-        IEnemyInPlay Target { get; }
-        byte Attack { get; set; }
+        void CheckForTrait(ICheckForTraitStep step);
     }
 }

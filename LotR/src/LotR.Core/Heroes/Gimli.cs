@@ -27,36 +27,27 @@ namespace LotR.Core.Heroes
         #region Abilities
 
         public class StrengthBonusForDamage
-            : PassiveCharacterAbilityBase
+            : PassiveCharacterAbilityBase, IDetermineAttack
         {
             public StrengthBonusForDamage(Gimli source)
                 : base("Gimli gets +1 attack for each damage token on him.", source)
             {
             }
+
+            public void DetermineAttack(IDetermineAttackStep step)
+            {
+                var damageable = step.GetCardInPlay(Source.Id) as IDamageableInPlay;
+                if (damageable == null)
+                {
+                    step.Attack = 0;
+                }
+                else
+                {
+                    step.Attack = (byte)(step.Attack + damageable.Damage);
+                }
+            }
         }
 
         #endregion
-
-        public class GimliAttackModifier
-            : AttackModifier
-        {
-            public GimliAttackModifier(IPhase startPhase, ICard source, int value)
-                : base(startPhase, source, Duration.Immediate, value)
-            {
-            }
-        }
-
-        public override void DetermineAttack(IDetermineAttackStep step)
-        {
-            var damageable = step.GetCardInPlay(this.Id) as IDamageableInPlay;
-            if (damageable == null)
-            {
-                step.Attack = 0;
-            }
-            else
-            {
-                step.Attack = (byte)(this.Attack + damageable.Damage);
-            }
-        }
     }
 }

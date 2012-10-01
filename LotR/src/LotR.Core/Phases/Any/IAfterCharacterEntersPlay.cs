@@ -5,10 +5,8 @@ using System.Text;
 
 namespace LotR.Core.Phases.Any
 {
-    public interface IDetermineAttackStep
-        : IPhaseStep
+    public interface IAfterCharacterEntersPlay
     {
-        IEnemyInPlay Target { get; }
-        byte Attack { get; set; }
+        void AfterCharacterEntersPlay(ICharacterEntersPlayStep step);
     }
 }

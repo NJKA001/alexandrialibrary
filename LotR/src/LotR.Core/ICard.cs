@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Core.Phases.Any;
+
 namespace LotR.Core
 {
     public interface ICard
+        : ICheckForTrait
     {
         Guid Id { get; }
 
@@ -15,7 +18,6 @@ namespace LotR.Core
         ICardText Text { get; }
         object Image { get; }
 
-        bool HasTrait(Traits trait);
         bool IsUnique { get; }
     }
 }
