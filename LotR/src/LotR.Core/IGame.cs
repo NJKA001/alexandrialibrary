@@ -14,8 +14,7 @@ namespace LotR.Core
         IRound CurrentRound { get; }
         IEnumerable<IRound> PreviousRounds { get; }
 
-        IDeck<IEncounterCard> EncounterDeck { get; }
-        IDeck<IEncounterCard> EncounterDiscardPile { get; }
+
         IDeck<IQuestCard> QuestDeck { get; }
 
         IStagingArea StagingArea { get; }
@@ -35,5 +34,6 @@ namespace LotR.Core
         bool IsComplete { get; }
         void Start();
         void Complete();
+        void RevealEncounterCards(byte numberOfCards);
     }
 }

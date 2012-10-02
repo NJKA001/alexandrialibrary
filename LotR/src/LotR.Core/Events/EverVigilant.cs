@@ -27,7 +27,7 @@ namespace LotR.Core.Events
 
             public override ICost GetCost(IPhaseStep step)
             {
-                return new ChooseAllyCost(Source);
+                return new ChooseAlly(Source);
             }
 
             public override void Resolve(IPhaseStep step, IPayment payment)

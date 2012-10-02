@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Core
+namespace LotR.Core.Payments
 {
     public interface IResourcePayment
         : IPayment
     {
-        IResourcefulCard Source { get; }
-        byte Resources { get; }
+        IEnumerable<Tuple<IResourcefulInPlay, byte>> Payments { get; }
     }
 }

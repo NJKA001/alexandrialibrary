@@ -8,6 +8,6 @@ namespace LotR.Core
     public interface ICostlyCard
         : IPlayerCard
     {
-        byte Cost { get; }
+        ICost GetResourceCost(IPhaseStep step);
     }
 }

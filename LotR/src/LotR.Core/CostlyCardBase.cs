@@ -7,15 +7,13 @@ using LotR.Core.Costs;
 
 namespace LotR.Core
 {
-    public abstract class AllyCardBase
-        : CharacterCardBase, IAllyCard
+    public abstract class CostlyCardBase
+        : PlayerCardBase, ICostlyCard
     {
-        protected AllyCardBase(string title, string setName, uint setNumber, Sphere sphere, byte resourceCost, byte willpower, byte attack, byte defense, byte hitPoints)
-            : base(title, setName, setNumber, willpower, attack, defense, hitPoints)
+        protected CostlyCardBase(string title, string setName, uint setNumber, Sphere sphere, byte resourceCost)
+            : base(title, setName, setNumber)
         {
             this.resourceCost = resourceCost;
-
-            AddSphereOfInfluence(sphere);
         }
 
         private readonly byte resourceCost;

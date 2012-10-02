@@ -6,6 +6,7 @@ using System.Text;
 using LotR.Core.Costs;
 using LotR.Core.Effects;
 using LotR.Core.Effects.CharacterAbilities;
+using LotR.Core.Payments;
 using LotR.Core.Phases.Quest;
 
 namespace LotR.Core.Heroes
@@ -81,7 +82,17 @@ namespace LotR.Core.Heroes
                 if (resourcePayment == null)
                     return false;
 
-                if (resourcePayment.Resources != 1 || resourcePayment.Source.Id != Source.Id)
+                if (resourcePayment.Payments.Count() != 1)
+                    return false;
+
+                if (resourcePayment.Payments.Sum(x => x.Item2) != 1)
+                    return false;
+
+                var payor = resourcePayment.Payments.Select(x => x.Item1).FirstOrDefault();
+                if (payor == null)
+                    return false;
+
+                if (payor.CardId != Source.Id)
                     return false;
 
                 return true;

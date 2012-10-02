@@ -8,6 +8,6 @@ namespace LotR.Core.Phases.Any
     public interface IEncounterCardRevealedStep
         : IPhaseStep
     {
-        IEncounterInPlay CardInPlay { get; }
+        IEncounterCard Card { get; }
     }
 }

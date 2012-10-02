@@ -37,7 +37,11 @@ namespace LotR.Core.Heroes
                 if (questPhase == null)
                     return;
 
-                if (step.CardInPlay == null || (!(step.CardInPlay is IEnemyInPlay)))
+                var revealed = step.Phase.Round.Game.StagingArea.RevealedEncounterCard;
+                if (revealed == null)
+                    return;
+
+                if (!(revealed is IEnemyCard))
                     return;
 
                 if (!questPhase.CharactersCommittedToQuest.Any(x => x.Id == Source.Id))
@@ -61,7 +65,7 @@ namespace LotR.Core.Heroes
                 if (revealedStep == null)
                     return null;
 
-                return new ChooseRevealedEnemy(Source, revealedStep);
+                return new EachRevealedEnemy(Source, revealedStep);
             }
         }
 

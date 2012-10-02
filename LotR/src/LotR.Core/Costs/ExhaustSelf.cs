@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Core.Payments;
+
 namespace LotR.Core.Costs
 {
-    public class ExhaustSelfCost
+    public class ExhaustSelf
         : CostBase, ICost
     {
-        public ExhaustSelfCost(IExhaustableCard exhaustable)
+        public ExhaustSelf(IExhaustableCard exhaustable)
             : base(string.Format("Exhaust {0}", exhaustable.Card.Title), exhaustable.Card)
         {
             this.exhaustable = exhaustable;
@@ -20,7 +22,7 @@ namespace LotR.Core.Costs
         {
             var exhaustPayment = payment as IExhaustCardPayment;
 
-            return (exhaustPayment != null && exhaustPayment.Source != null && exhaustPayment.Source.CardId == Source.Id);
+            return (exhaustPayment != null && exhaustPayment.Exhaustable != null && exhaustPayment.Exhaustable.CardId == Source.Id);
         }
     }
 }

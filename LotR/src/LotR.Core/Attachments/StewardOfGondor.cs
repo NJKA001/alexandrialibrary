@@ -5,6 +5,7 @@ using System.Text;
 
 using LotR.Core.Costs;
 using LotR.Core.Effects;
+using LotR.Core.Payments;
 using LotR.Core.Phases.Any;
 
 namespace LotR.Core.Attachments
@@ -71,16 +72,16 @@ namespace LotR.Core.Attachments
                 if (exhaustable == null)
                     return null;
 
-                return new ExhaustSelfCost(exhaustable);
+                return new ExhaustSelf(exhaustable);
             }
 
             public override void Resolve(IPhaseStep step, IPayment payment)
             {
                 var exhaustPayment = payment as IExhaustCardPayment;
-                if (exhaustPayment == null || exhaustPayment.Source == null || exhaustPayment.Source.IsExhausted)
+                if (exhaustPayment == null || exhaustPayment.Exhaustable == null || exhaustPayment.Exhaustable.IsExhausted)
                     return;
 
-                var attachment = exhaustPayment.Source as IAttachmentInPlay;
+                var attachment = exhaustPayment.Exhaustable as IAttachmentInPlay;
                 if (attachment == null || attachment.AttachedTo == null)
                     return;
 

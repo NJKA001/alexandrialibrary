@@ -5,9 +5,8 @@ using System.Text;
 
 namespace LotR.Core
 {
-    public interface IExhaustCardPayment
-        : IPayment
+    public interface ICancelEffect
+        : IEffect
     {
-        IExhaustableCard Source { get; }
     }
 }

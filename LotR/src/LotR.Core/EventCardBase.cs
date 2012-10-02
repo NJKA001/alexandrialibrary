@@ -6,20 +6,12 @@ using System.Text;
 namespace LotR.Core
 {
     public abstract class EventCardBase
-        : PlayerCardBase, IEventCard
+        : CostlyCardBase, IEventCard
     {
-        protected EventCardBase(string title, string setName, uint setNumber, Sphere sphere, byte cost)
-            : base(title, setName, setNumber)
+        protected EventCardBase(string title, string setName, uint setNumber, Sphere sphere, byte resourceCost)
+            : base(title, setName, setNumber, sphere, resourceCost)
         {
-            this.Cost = cost;
-
             AddSphereOfInfluence(sphere);
-        }
-
-        public byte Cost
-        {
-            get;
-            private set;
         }
     }
 }

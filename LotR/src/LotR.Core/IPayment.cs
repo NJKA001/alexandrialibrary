@@ -8,7 +8,5 @@ namespace LotR.Core
     public interface IPayment
     {
         string Description { get; }
-
-        IEnumerable<IPayment> Children { get; }
     }
 }

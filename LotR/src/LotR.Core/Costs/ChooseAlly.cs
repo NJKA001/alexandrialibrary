@@ -7,11 +7,11 @@ using LotR.Core.Payments;
 
 namespace LotR.Core.Costs
 {
-    public class ChooseHeroCost
+    public class ChooseAlly
         : CostBase
     {
-        public ChooseHeroCost(ICard source)
-            : base("Choose a hero", source)
+        public ChooseAlly(ICard source)
+            : base("Choose an ally.", source)
         {
         }
 
@@ -24,8 +24,8 @@ namespace LotR.Core.Costs
             if (choice == null)
                 return false;
 
-            var hero = choice.Character as IHeroCard;
-            if (hero == null)
+            var ally = choice.Character as IAllyCard;
+            if (ally == null)
                 return false;
 
             return true;

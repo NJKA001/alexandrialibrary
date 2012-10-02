@@ -8,11 +8,11 @@ using LotR.Core.Phases.Any;
 
 namespace LotR.Core.Costs
 {
-    public class ChooseRevealedEnemy
+    public class EachRevealedEnemy
         : CostBase
     {
-        public ChooseRevealedEnemy(ICard source, IEncounterCardRevealedStep step)
-            : base("Choose an enemy revealed from the encounter deck", source)
+        public EachRevealedEnemy(ICard source, IEncounterCardRevealedStep step)
+            : base("Each time an enemy is revealed from the encounter deck", source)
         {
             if (step == null)
                 throw new ArgumentNullException("step");
@@ -31,7 +31,11 @@ namespace LotR.Core.Costs
             if (choice == null)
                 return false;
 
-            if (step.CardInPlay.CardId != choice.Enemy.CardId)
+            var revealed = step.Phase.Round.Game.StagingArea.RevealedEncounterCard;
+            if (revealed == null)
+                return false;
+
+            if (revealed.Id != choice.Enemy.CardId)
                 return false;
 
             return true;

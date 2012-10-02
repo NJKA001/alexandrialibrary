@@ -6,22 +6,15 @@ using System.Text;
 namespace LotR.Core
 {
     public abstract class AttachmentCardBase
-        : PlayerCardBase, IAttachmentCard
+        : CostlyCardBase, IAttachmentCard
     {
-        protected AttachmentCardBase(string title, string setName, uint setNumber, Sphere sphere, byte cost, bool isUnique, bool isRestricted)
-            : base(title, setName, setNumber)
+        protected AttachmentCardBase(string title, string setName, uint setNumber, Sphere sphere, byte resourceCost, bool isUnique, bool isRestricted)
+            : base(title, setName, setNumber, sphere, resourceCost)
         {
             AddSphereOfInfluence(sphere);
 
-            this.Cost = cost;
             this.IsUnique = isUnique;
             this.IsRestricted = isRestricted;
-        }
-
-        public byte Cost
-        {
-            get;
-            private set;
         }
 
         public bool IsRestricted

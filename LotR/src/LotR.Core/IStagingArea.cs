@@ -7,9 +7,19 @@ namespace LotR.Core
 {
     public interface IStagingArea
     {
-        IEnumerable<IEncounterInPlay> Cards { get; }
+        IDeck<IEncounterCard> EncounterDeck { get; }
+        IDeck<IEncounterCard> EncounterDiscardPile { get; }
+        IEncounterCard RevealedEncounterCard { get; }
+        IEnumerable<IEncounterInPlay> CardsInStagingArea { get; }
+
+        void RevealEncounterCards(byte numberOfCards);
+        void CancelRevealedCard(ICancelEffect effect);
+
         void AddToStagingArea(IEncounterInPlay card);
         void RemoveFromStagingArea(IEncounterInPlay card);
+        void AddToEncounterDiscardPile(IEnumerable<IEncounterCard> cards);
+        void AddToTopOfEncounterDeck(IEnumerable<IEncounterCard> cards);
+        void AddToBottomOfEncounterDeck(IEnumerable<IEncounterCard> cards);
 
         byte GetTotalThreat();
     }

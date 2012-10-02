@@ -6,11 +6,11 @@ using System.Text;
 namespace LotR.Core.Effects.Modifiers
 {
     public abstract class ModifierBase
-        : IModifier
+        : EffectBase, IModifier
     {
         protected ModifierBase(string description, IPhase startPhase, ICard source, ICard target, TimeScope duration, int value)
+            : base(description)
         {
-            this.Description = description;
             this.StartPhase = startPhase;
             this.Source = source;
             this.Target = target;
@@ -51,22 +51,6 @@ namespace LotR.Core.Effects.Modifiers
         {
             get;
             private set;
-        }
-
-        public string Description
-        {
-            get;
-            private set;
-        }
-
-        public virtual ICost GetCost(IPhaseStep step)
-        {
-            return null;
-        }
-
-        public virtual ILimit GetLimit()
-        {
-            return null;
         }
     }
 }
