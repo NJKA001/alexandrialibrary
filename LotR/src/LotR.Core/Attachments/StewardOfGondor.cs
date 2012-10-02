@@ -55,7 +55,7 @@ namespace LotR.Core.Attachments
         }
 
         public class ExhaustToAddTwoResources
-            : ActionEffect
+            : ActionEffectBase
         {
             public ExhaustToAddTwoResources(StewardOfGondor source)
                 : base("Exhaust Steward of Gondor to add 2 resources to attched hero's resource pool.", source)

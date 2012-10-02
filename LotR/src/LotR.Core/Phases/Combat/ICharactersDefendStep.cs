@@ -5,8 +5,9 @@ using System.Text;
 
 namespace LotR.Core.Phases.Combat
 {
-    public interface IDuringCharactersDefend
+    public interface ICharactersDefendStep
     {
-        void DuringCharactersDefend(ICharactersDefendStep step);
+        IEncounterInPlay Attacker { get; }
+        IEnumerable<IDefendingCard> Defenders { get; }
     }
 }

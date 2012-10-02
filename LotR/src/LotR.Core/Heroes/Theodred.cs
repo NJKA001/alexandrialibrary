@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Core.Costs;
 using LotR.Core.Effects;
 using LotR.Core.Effects.CharacterAbilities;
+using LotR.Core.Payments;
 using LotR.Core.Phases.Quest;
 
 namespace LotR.Core.Heroes
 {
     public class Theodred
-        : HeroCardBase, IAfterCommittingToQuest
+        : HeroCardBase
     {
         public Theodred()
             : base("Theodred", SetNames.Core, 2, Sphere.Leadership, 8, 1, 2, 1, 4)
@@ -18,36 +20,36 @@ namespace LotR.Core.Heroes
             Trait(Traits.Noble);
             Trait(Traits.Rohan);
             Trait(Traits.Warrior);
-        }
 
-        public void AfterCommittingToQuest(ICommitToQuestStep step)
-        {
-            var self = step.CommitedCharacters.Where(x => x.CardId == this.Id).Select(x => x.Card).FirstOrDefault();
-
-            if (self == null)
-                return;
-
-            step.AddEffect(new AddResourceToCommittedHero(this, step));
+            Effect(new AddResourceToCommittedHero(this));
         }
 
         #region Abilities
 
         public class AddResourceToCommittedHero
-            : ResponseCharacterAbilityBase
+            : ResponseCharacterAbilityBase, IAfterCommittingToQuest
         {
-            public AddResourceToCommittedHero(Theodred source, IPhaseStep step)
+            public AddResourceToCommittedHero(Theodred source)
                 : base("After Theodred commits to a quest, choose a hero committed to that quest. Add 1 resource to that hero's resource pool.", source)
             {
-                theodred = source;
-                this.step = step;
             }
 
-            private readonly Theodred theodred;
-            private readonly IPhaseStep step;
+            public void AfterCommittingToQuest(ICommitToQuestStep step)
+            {
+                var self = step.CommitedCharacters.Where(x => x.CardId == Source.Id).Select(x => x.Card).FirstOrDefault();
+
+                if (self == null)
+                    return;
+
+                step.AddEffect(this);
+            }
 
             public override void Resolve(IPhaseStep step, IPayment payment)
             {
                 if (payment == null)
+                    return;
+
+                if (!(step is ICommitToQuestStep))
                     return;
 
                 var choice = payment as IChooseCharacterPayment;
@@ -60,47 +62,14 @@ namespace LotR.Core.Heroes
 
                 step.AddEffect(new AddResources(step, new Dictionary<Guid, byte> { { hero.CardId, 1 } }));
             }
-        }
 
-        public class ChooseHeroCost
-            : ICost
-        {
-            public ChooseHeroCost(Theodred source, ICommitToQuestStep step)
+            public override ICost GetCost(IPhaseStep step)
             {
-                this.theodred = source;
-                this.step = step;
-            }
+                var commitStep = step as ICommitToQuestStep;
+                if (commitStep == null)
+                    return null;
 
-            private Theodred theodred;
-            private ICommitToQuestStep step;
-
-            public ICard Source
-            {
-                get { return theodred; }
-            }
-
-            public string Description
-            {
-                get { return "choose a hero committed to the quest"; }
-            }
-
-            public bool IsMetBy(IPayment payment)
-            {
-                if (payment == null)
-                    return false;
-
-                var choice = payment as IChooseCharacterPayment;
-                if (choice == null)
-                    return false;
-
-                var hero = choice.Character as IHeroInPlay;
-                if (hero == null)
-                    return false;
-
-                if (!step.CommitedCharacters.Contains(hero))
-                    return false;
-
-                return true;
+                return new ChooseHeroCommitedToTheQuest(Source, commitStep);
             }
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Core.Costs;
 using LotR.Core.Effects;
 using LotR.Core.Effects.CharacterAbilities;
 using LotR.Core.Phases.Quest;
@@ -64,38 +65,26 @@ namespace LotR.Core.Heroes
         }
 
         public class ReadyCost
-            : ICost
+            : CostBase, ICost
         {
             public ReadyCost(Aragorn source)
+                : base("Spend 1 resource from Aragorn's resource pool", source)
             {
-                aragorn = source;
             }
 
-            private Aragorn aragorn;
-
-            public ICard Source
-            {
-                get { return aragorn; }
-            }
-
-            public string Description
-            {
-                get { return "1 resource from Aragorn's resource pool"; }
-            }
-
-            public bool IsMetBy(IPayment payment)
+            public override bool IsMetBy(IPayment payment)
             {
                 if (payment == null)
                     return false;
 
                 var resourcePayment = payment as IResourcePayment;
-                if (resourcePayment != null)
-                {
-                    if (resourcePayment.Resources == 1 && resourcePayment.Source == aragorn)
-                        return true;
-                }
+                if (resourcePayment == null)
+                    return false;
 
-                return false;
+                if (resourcePayment.Resources != 1 || resourcePayment.Source.Id != Source.Id)
+                    return false;
+
+                return true;
             }
         }
 

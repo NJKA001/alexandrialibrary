@@ -54,7 +54,7 @@ namespace LotR.Core.Attachments
         }
 
         public class AddOneProgressTokenAfterDefeatingAnEnemy
-            : ResponseEffect, IAfterEnemyDefeated
+            : ResponseEffectBase, IAfterEnemyDefeated
         {
             public AddOneProgressTokenAfterDefeatingAnEnemy(BladeOfGondolin source)
                 : base("After attached hero attacks and destroys an enemy, place 1 progress token on the current quest", source)

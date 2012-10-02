@@ -8,5 +8,6 @@ namespace LotR.Core
     public interface ICharacterAbility
         : IPlayerCardEffect
     {
+        void Resolve(IPhaseStep step, IPayment payment);
     }
 }

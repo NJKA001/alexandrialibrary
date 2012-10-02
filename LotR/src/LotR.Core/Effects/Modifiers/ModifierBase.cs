@@ -8,11 +8,12 @@ namespace LotR.Core.Effects.Modifiers
     public abstract class ModifierBase
         : IModifier
     {
-        protected ModifierBase(string description, IPhase startPhase, ICard source, Duration duration, int value)
+        protected ModifierBase(string description, IPhase startPhase, ICard source, ICard target, TimeScope duration, int value)
         {
             this.Description = description;
             this.StartPhase = startPhase;
             this.Source = source;
+            this.Target = target;
             this.Duration = duration;
             this.Value = value;
         }
@@ -34,7 +35,13 @@ namespace LotR.Core.Effects.Modifiers
             private set;
         }
 
-        public Duration Duration
+        public ICard Target
+        {
+            get;
+            private set;
+        }
+
+        public TimeScope Duration
         {
             get;
             private set;

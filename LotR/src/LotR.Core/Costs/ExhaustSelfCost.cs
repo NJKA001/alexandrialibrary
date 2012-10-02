@@ -6,31 +6,17 @@ using System.Text;
 namespace LotR.Core.Costs
 {
     public class ExhaustSelfCost
-        : ICost
+        : CostBase, ICost
     {
         public ExhaustSelfCost(IExhaustableCard exhaustable)
+            : base(string.Format("Exhaust {0}", exhaustable.Card.Title), exhaustable.Card)
         {
-            if (exhaustable == null)
-                throw new ArgumentNullException("exhaustable");
-
-            this.Description = string.Format("Exhaust {0}", exhaustable.Card.Title);
             this.exhaustable = exhaustable;
         }
 
         private readonly IExhaustableCard exhaustable;
 
-        public ICard Source
-        {
-            get { return exhaustable.Card; }
-        }
-
-        public string Description
-        {
-            get;
-            private set;
-        }
-
-        public bool IsMetBy(IPayment payment)
+        public override bool IsMetBy(IPayment payment)
         {
             var exhaustPayment = payment as IExhaustCardPayment;
 

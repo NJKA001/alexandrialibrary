@@ -15,5 +15,13 @@ namespace LotR.Core
             : base("Sentinel", source)
         {
         }
+
+        public void DuringCharactersDefend(ICharactersDefendStep step)
+        {
+        }
+
+        public override void Resolve(IPhaseStep step, IPayment payment)
+        {
+        }
     }
 }

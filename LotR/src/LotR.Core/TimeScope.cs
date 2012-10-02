@@ -5,9 +5,11 @@ using System.Text;
 
 namespace LotR.Core
 {
-    public interface IChooseCharacterPayment
-        : IPayment
+    public enum TimeScope
     {
-        ICharacterInPlay Character { get; }
+        None = 0,
+        Phase,
+        Round,
+        Game
     }
 }

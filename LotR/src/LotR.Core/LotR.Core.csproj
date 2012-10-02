@@ -76,8 +76,14 @@
     <Compile Include="Attachments\TheFavorOfTheLady.cs" />
     <Compile Include="Attachments\UnexpectedCourage.cs" />
     <Compile Include="CardBase.cs" />
+    <Compile Include="Costs\ChooseAllyCost.cs" />
+    <Compile Include="Costs\ChooseHeroCommitedToQuest.cs" />
+    <Compile Include="Costs\ChooseHeroCost.cs" />
+    <Compile Include="Costs\ChooseRevealedEnemy.cs" />
+    <Compile Include="Costs\CostBase.cs" />
+    <Compile Include="Costs\DiscardCardsFromHand.cs" />
     <Compile Include="Costs\ExhaustSelfCost.cs" />
-    <Compile Include="Effects\ActionEffect.cs" />
+    <Compile Include="Effects\ActionEffectBase.cs" />
     <Compile Include="Effects\CardEffectBase.cs" />
     <Compile Include="Effects\AmbushEffect.cs" />
     <Compile Include="Effects\CharacterAbilities\ActionCharacterAbilityBase.cs" />
@@ -94,17 +100,24 @@
     <Compile Include="Effects\Modifiers\IAttackModifier.cs" />
     <Compile Include="Effects\Modifiers\IWillpowerModifier.cs" />
     <Compile Include="Effects\Modifiers\ModifierBase.cs" />
+    <Compile Include="Effects\Modifiers\WillpowerModifier.cs" />
     <Compile Include="Effects\PassiveEffect.cs" />
     <Compile Include="Effects\ReadyCards.cs" />
-    <Compile Include="Effects\ResponseEffect.cs" />
+    <Compile Include="Effects\ResponseEffectBase.cs" />
     <Compile Include="Effects\ReversableEffectBase.cs" />
     <Compile Include="Effects\IAmbushEffect.cs" />
+    <Compile Include="EventCardBase.cs" />
+    <Compile Include="Events\EverVigilant.cs" />
+    <Compile Include="Heroes\Eowyn.cs" />
     <Compile Include="Heroes\Gimli.cs" />
     <Compile Include="Heroes\Gloin.cs" />
     <Compile Include="Heroes\Legolas.cs" />
+    <Compile Include="Heroes\Thalin.cs" />
     <Compile Include="IAction.cs" />
     <Compile Include="IAttackingCard.cs" />
-    <Compile Include="IChooseCharacterPayment.cs" />
+    <Compile Include="Limit.cs" />
+    <Compile Include="Payments\IChooseCardInHandPayment.cs" />
+    <Compile Include="Payments\IChooseCharacterPayment.cs" />
     <Compile Include="Effects\IReadyCards.cs" />
     <Compile Include="Effects\SurgeEffect.cs" />
     <Compile Include="Effects\CharacterAbilities\ForcedCharacterAbilityBase.cs" />
@@ -120,9 +133,13 @@
     <Compile Include="ILimit.cs" />
     <Compile Include="ISetupCard.cs" />
     <Compile Include="IWillpowerfulCard.cs" />
+    <Compile Include="Payments\IChooseEnemyPayment.cs" />
     <Compile Include="Phases\Any\CheckForTraitStep.cs" />
     <Compile Include="Phases\Any\IAfterCharacterEntersPlay.cs" />
     <Compile Include="Phases\Any\IAfterCharacterLeavesPlay.cs" />
+    <Compile Include="Phases\Any\IAfterEncounterCardRevealed.cs" />
+    <Compile Include="Phases\Any\IDuringEncounterCardRevealed.cs" />
+    <Compile Include="Phases\Any\IEncounterCardRevealedStep.cs" />
     <Compile Include="Phases\Any\ICharacterEntersPlayStep.cs" />
     <Compile Include="Phases\Any\ICharacterLeavesPlayStep.cs" />
     <Compile Include="Phases\Any\ICheckForResourceIcon.cs" />
@@ -143,14 +160,17 @@
     <Compile Include="Phases\Combat\IAfterEnemyDefeated.cs" />
     <Compile Include="Phases\Combat\IBeforeEnemyDefeated.cs" />
     <Compile Include="Phases\Combat\ICharactersAttackStep.cs" />
+    <Compile Include="Phases\Combat\ICharactersDefendStep.cs" />
     <Compile Include="Phases\Combat\IDealDamageToEnemyStep.cs" />
     <Compile Include="Phases\Combat\IDealDamageToCharacterStep.cs" />
     <Compile Include="Phases\Combat\IDuringEnemyDefeated.cs" />
     <Compile Include="Phases\Combat\IEnemyDefeatedStep.cs" />
     <Compile Include="Phases\PhaseStepBase.cs" />
+    <Compile Include="Phases\Quest\IQuestPhase.cs" />
+    <Compile Include="PlayerScope.cs" />
     <Compile Include="SentinelAbility.cs" />
     <Compile Include="CharacterCardBase.cs" />
-    <Compile Include="Duration.cs" />
+    <Compile Include="TimeScope.cs" />
     <Compile Include="HeroCardBase.cs" />
     <Compile Include="Heroes\Theodred.cs" />
     <Compile Include="IActiveEffect.cs" />
@@ -290,10 +310,7 @@
     <Compile Include="Sphere.cs" />
     <Compile Include="Traits.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Events\" />
-    <Folder Include="Payments\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WebReferences Include="Web References\" />
   </ItemGroup>

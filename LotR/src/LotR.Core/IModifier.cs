@@ -10,7 +10,8 @@ namespace LotR.Core
     {
         IPhase StartPhase { get; }
         ICard Source { get; }
-        Duration Duration { get; }
+        ICard Target { get; }
+        TimeScope Duration { get; }
         int Value { get; }
     }
 }

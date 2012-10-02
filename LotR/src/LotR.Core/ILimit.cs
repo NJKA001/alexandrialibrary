@@ -7,7 +7,8 @@ namespace LotR.Core
 {
     public interface ILimit
     {
-        Duration Scope { get; }
+        PlayerScope PlayerScope { get; }
+        TimeScope TimeScope { get; }
         byte Value { get; }
     }
 }

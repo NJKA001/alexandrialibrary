@@ -5,11 +5,10 @@ using System.Text;
 
 namespace LotR.Core
 {
-    public enum Duration
+    public enum PlayerScope
     {
         None = 0,
-        Phase,
-        Round,
-        Game
+        Controller = 1,
+        AnyPlayer = 2
     }
 }

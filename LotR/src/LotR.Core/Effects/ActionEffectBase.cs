@@ -5,13 +5,12 @@ using System.Text;
 
 namespace LotR.Core.Effects
 {
-    public abstract class ResponseEffect
-        : CardEffectBase, IResponse
+    public abstract class ActionEffectBase
+        : CardEffectBase, IAction
     {
-        protected ResponseEffect(string description, ICard source)
+        protected ActionEffectBase(string description, ICard source)
             : base(description, source)
         {
-            this.Source = source;
         }
 
         public abstract void Resolve(IPhaseStep step, IPayment payment);

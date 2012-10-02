@@ -36,14 +36,19 @@ namespace LotR.Core.Heroes
 
             public void DetermineAttack(IDetermineAttackStep step)
             {
+                step.AddEffect(this);
+            }
+
+            public override void Resolve(IPhaseStep step, IPayment payment)
+            {
+                var attackStep = step as IDetermineAttackStep;
+                if (attackStep == null)
+                    return;
+
                 var damageable = step.GetCardInPlay(Source.Id) as IDamageableInPlay;
-                if (damageable == null)
+                if (damageable != null)
                 {
-                    step.Attack = 0;
-                }
-                else
-                {
-                    step.Attack = (byte)(step.Attack + damageable.Damage);
+                    attackStep.Attack += damageable.Damage;
                 }
             }
         }
