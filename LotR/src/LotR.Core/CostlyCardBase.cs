@@ -18,6 +18,12 @@ namespace LotR.Core
 
         private readonly byte resourceCost;
 
+        protected bool HasVariableCost
+        {
+            get;
+            set;
+        }
+
         public virtual ICost GetResourceCost(IPhaseStep step)
         {
             return new PayResources(this, SpheresOfInfluence.FirstOrDefault(), resourceCost);
