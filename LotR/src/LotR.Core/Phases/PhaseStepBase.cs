@@ -38,6 +38,16 @@ namespace LotR.Core.Phases
             return Phase.Round.Game.GetCardInPlay(id);
         }
 
+        public IPlayer GetController(Guid id)
+        {
+            return Phase.Round.Game.GetController(id);
+        }
+
+        public IPlayer GetOwner(Guid id)
+        {
+            return Phase.Round.Game.GetOwner(id);
+        }
+
         public bool CardIsInPlay(Guid id)
         {
             return (Phase.Round.Game.GetCardInPlay(id) != null);

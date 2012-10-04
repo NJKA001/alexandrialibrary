@@ -196,11 +196,15 @@
     <Compile Include="Phases\Any\IAfterDamageHealed.cs" />
     <Compile Include="Phases\Any\IBeforeDamageHealed.cs" />
     <Compile Include="Phases\Combat\IAfterEnemyDefeated.cs" />
+    <Compile Include="Phases\Combat\IBeforeChoosingEnemyToAttack.cs" />
     <Compile Include="Phases\Combat\IBeforeEnemyDefeated.cs" />
     <Compile Include="Phases\Combat\ICharactersAttackStep.cs" />
     <Compile Include="Phases\Combat\ICharactersDefendStep.cs" />
+    <Compile Include="Phases\Combat\IChooseAttackersStep.cs" />
+    <Compile Include="Phases\Combat\IChooseEnemyToAttackStep.cs" />
     <Compile Include="Phases\Combat\IDealDamageToEnemyStep.cs" />
     <Compile Include="Phases\Combat\IDealDamageToCharacterStep.cs" />
+    <Compile Include="Phases\Combat\IDuringChoosingEnemyToAttack.cs" />
     <Compile Include="Phases\Combat\IDuringEnemyDefeated.cs" />
     <Compile Include="Phases\Combat\IEnemyDefeatedStep.cs" />
     <Compile Include="Phases\PhaseStepBase.cs" />

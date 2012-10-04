@@ -29,6 +29,8 @@ namespace LotR.Core
 
         ICard GetCard(Guid id);
         ICardInPlay GetCardInPlay(Guid id);
+        IPlayer GetController(Guid id);
+        IPlayer GetOwner(Guid id);
         int GetScore();
 
         bool IsComplete { get; }
