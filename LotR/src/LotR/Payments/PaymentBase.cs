@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Core.Payments
+namespace LotR.Payments
 {
     public abstract class PaymentBase
         : IPayment

@@ -8,8 +8,8 @@
     <ProjectGuid>{41E8EA34-4BE9-49CF-BFE5-506DA26A2AC3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LotR.Core</RootNamespace>
-    <AssemblyName>LotR.Core</AssemblyName>
+    <RootNamespace>LotR</RootNamespace>
+    <AssemblyName>LotR</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -352,9 +352,6 @@
     <Compile Include="Traits.cs" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <WebReferences Include="Web References\" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

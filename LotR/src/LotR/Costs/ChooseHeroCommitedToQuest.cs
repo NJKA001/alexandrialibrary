@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Core.Payments;
-using LotR.Core.Phases.Quest;
+using LotR.Payments;
+using LotR.Phases.Quest;
 
-namespace LotR.Core.Costs
+namespace LotR.Costs
 {
     public class ChooseHeroCommitedToTheQuest
         : CostBase, ICost

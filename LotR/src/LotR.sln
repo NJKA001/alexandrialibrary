@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LotR.Core", "LotR.Core\LotR.Core.csproj", "{41E8EA34-4BE9-49CF-BFE5-506DA26A2AC3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LotR", "LotR\LotR.csproj", "{41E8EA34-4BE9-49CF-BFE5-506DA26A2AC3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LotR.Console", "LotR.Console\LotR.Console.csproj", "{7C3D226C-7597-419E-9AED-FC6916CF58C1}"
 EndProject

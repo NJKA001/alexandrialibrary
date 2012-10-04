@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Core.Effects.CharacterAbilities;
-using LotR.Core.Phases.Resource;
+using LotR.Effects.CharacterAbilities;
+using LotR.Phases.Resource;
 
-namespace LotR.Core.Heroes
+namespace LotR.Heroes
 {
     public class BilboBaggins_SoM
         : HeroCardBase, IDuringDrawingCards

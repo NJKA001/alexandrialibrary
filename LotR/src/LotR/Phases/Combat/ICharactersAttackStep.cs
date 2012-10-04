@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Core.Effects.Modifiers;
+using LotR.Effects.Modifiers;
 
-namespace LotR.Core.Phases.Combat
+namespace LotR.Phases.Combat
 {
     public interface ICharactersAttackStep
         : IPhaseStep

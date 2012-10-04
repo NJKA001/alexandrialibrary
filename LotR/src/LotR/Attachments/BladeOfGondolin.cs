@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Core.Effects;
-using LotR.Core.Phases.Any;
-using LotR.Core.Phases.Combat;
+using LotR.Effects;
+using LotR.Phases.Any;
+using LotR.Phases.Combat;
 
-namespace LotR.Core.Attachments
+namespace LotR.Attachments
 {
     public class BladeOfGondolin
         : AttachmentCardBase

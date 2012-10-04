@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Core
+namespace LotR
 {
     public interface ICardInPlay
         : INotifyPropertyChanged

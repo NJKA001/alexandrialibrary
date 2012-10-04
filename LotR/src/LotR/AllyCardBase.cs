@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Core.Costs;
+using LotR.Costs;
 
-namespace LotR.Core
+namespace LotR
 {
     public abstract class AllyCardBase
         : CharacterCardBase, IAllyCard

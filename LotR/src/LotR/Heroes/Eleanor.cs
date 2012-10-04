@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Core.Costs;
-using LotR.Core.Effects;
-using LotR.Core.Effects.CharacterAbilities;
-using LotR.Core.Payments;
-using LotR.Core.Phases.Any;
+using LotR.Costs;
+using LotR.Effects;
+using LotR.Effects.CharacterAbilities;
+using LotR.Payments;
+using LotR.Phases.Any;
 
-namespace LotR.Core.Heroes
+namespace LotR.Heroes
 {
     public class Eleanor
         : HeroCardBase

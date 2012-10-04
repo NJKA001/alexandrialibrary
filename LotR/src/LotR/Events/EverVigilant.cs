@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Core.Costs;
-using LotR.Core.Effects;
-using LotR.Core.Payments;
+using LotR.Costs;
+using LotR.Effects;
+using LotR.Payments;
 
-namespace LotR.Core.Events
+namespace LotR.Events
 {
     public class EverVigilant
         : EventCardBase

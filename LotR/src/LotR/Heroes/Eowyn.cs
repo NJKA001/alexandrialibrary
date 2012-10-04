@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Core.Costs;
-using LotR.Core.Effects.CharacterAbilities;
-using LotR.Core.Effects.Modifiers;
+using LotR.Costs;
+using LotR.Effects.CharacterAbilities;
+using LotR.Effects.Modifiers;
 
-namespace LotR.Core.Heroes
+namespace LotR.Heroes
 {
     public class Eowyn
         : HeroCardBase

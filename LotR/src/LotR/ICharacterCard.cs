@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Core.Phases.Any;
+using LotR.Phases.Any;
 
-namespace LotR.Core
+namespace LotR
 {
     public interface ICharacterCard
         : IPlayerCard, 

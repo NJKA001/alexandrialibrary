@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Core.Phases.Combat
+namespace LotR.Phases.Combat
 {
     public interface ICharactersDefendStep
     {

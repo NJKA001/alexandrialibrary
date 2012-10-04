@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Core.Phases.Quest
+namespace LotR.Phases.Quest
 {
     interface IDuringCommittingToQuest
     {

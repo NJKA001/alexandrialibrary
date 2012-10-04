@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Core.Effects;
-using LotR.Core.Effects.CharacterAbilities;
-using LotR.Core.Effects.Modifiers;
-using LotR.Core.Phases.Any;
-using LotR.Core.Phases.Combat;
+using LotR.Effects;
+using LotR.Effects.CharacterAbilities;
+using LotR.Effects.Modifiers;
+using LotR.Phases.Any;
+using LotR.Phases.Combat;
 
-namespace LotR.Core.Heroes
+namespace LotR.Heroes
 {
     public class Gimli
         : HeroCardBase

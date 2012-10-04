@@ -47,13 +47,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LotR.Core\LotR.Core.csproj">
+    <ProjectReference Include="..\LotR\LotR.csproj">
       <Project>{41E8EA34-4BE9-49CF-BFE5-506DA26A2AC3}</Project>
-      <Name>LotR.Core</Name>
+      <Name>LotR</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferences Include="Web References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

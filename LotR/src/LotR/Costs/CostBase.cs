@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Core.Costs
+namespace LotR.Costs
 {
     public abstract class CostBase
         : ICost

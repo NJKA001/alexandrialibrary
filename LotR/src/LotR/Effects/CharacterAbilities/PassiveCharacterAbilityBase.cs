@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Core.Effects.CharacterAbilities
+namespace LotR.Effects.CharacterAbilities
 {
     public abstract class PassiveCharacterAbilityBase
         : CharacterAbilityBase

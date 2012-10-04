@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Core.Phases
+namespace LotR.Phases
 {
     public abstract class PhaseStepBase
         : IPhaseStep

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Core.Effects.CharacterAbilities;
+using LotR.Effects.CharacterAbilities;
 
-namespace LotR.Core.Allies
+namespace LotR.Allies
 {
     public class SilverlodeArcher
         : AllyCardBase

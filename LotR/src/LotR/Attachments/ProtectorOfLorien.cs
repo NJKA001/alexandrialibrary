@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Core.Attachments
+namespace LotR.Attachments
 {
     public class ProtectorOfLorien
         : AttachmentCardBase

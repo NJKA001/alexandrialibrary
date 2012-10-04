@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Core.Heroes
+namespace LotR.Heroes
 {
     public class Beravor
         : HeroCardBase

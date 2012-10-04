@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Core.Payments;
+using LotR.Payments;
 
-namespace LotR.Core.Costs
+namespace LotR.Costs
 {
     public class ChooseAlly
         : CostBase

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Core.Effects;
-using LotR.Core.Phases.Any;
+using LotR.Effects;
+using LotR.Phases.Any;
 
-namespace LotR.Core.Attachments
+namespace LotR.Attachments
 {
     public class CelebriansStone
         : AttachmentCardBase

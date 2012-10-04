@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Core.Payments;
-using LotR.Core.Phases.Any;
+using LotR.Payments;
+using LotR.Phases.Any;
 
-namespace LotR.Core.Costs
+namespace LotR.Costs
 {
     public class EachRevealedEnemy
         : CostBase

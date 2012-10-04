@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Core.Phases.Combat;
+using LotR.Phases.Combat;
 
-namespace LotR.Core.Effects.CharacterAbilities
+namespace LotR.Effects.CharacterAbilities
 {
     public class RangedAbility
         : CharacterAbilityBase, IDuringCharactersAttack
