@@ -17,7 +17,7 @@ namespace LotR.Effects
         public ICard Source
         {
             get;
-            protected set;
+            private set;
         }
     }
 }

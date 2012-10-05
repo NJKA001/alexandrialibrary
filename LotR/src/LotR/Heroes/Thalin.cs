@@ -50,13 +50,13 @@ namespace LotR.Heroes
                 step.AddEffect(this);
             }
 
-            public override void Resolve(IPhaseStep step, IPayment payment)
+            public override void Resolve(IPhaseStep step, IChoice choice)
             {
-                var choice = payment as IChooseEnemyPayment;
-                if (choice == null)
+                var enemyChoice = choice as IChooseEnemyPayment;
+                if (enemyChoice == null)
                     return;
 
-                choice.Enemy.AddDamage(1);
+                enemyChoice.Enemy.AddDamage(1);
             }
 
             public override ICost GetCost(IPhaseStep step)

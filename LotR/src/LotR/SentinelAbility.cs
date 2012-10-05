@@ -19,9 +19,5 @@ namespace LotR
         public void DuringCharactersDefend(ICharactersDefendStep step)
         {
         }
-
-        public override void Resolve(IPhaseStep step, IPayment payment)
-        {
-        }
     }
 }

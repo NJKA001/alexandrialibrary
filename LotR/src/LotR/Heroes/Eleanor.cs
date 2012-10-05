@@ -55,15 +55,20 @@ namespace LotR.Heroes
                 step.AddEffect(this);
             }
 
-            public override void Resolve(IPhaseStep step, IPayment payment)
+            public override void Setup(IPhaseStep step, IPayment payment)
             {
                 if (payment == null)
-                    return;
+                    throw new ArgumentNullException("payment");
 
                 var exhaustPayment = payment as IExhaustCardPayment;
                 if (exhaustPayment == null)
                     return;
 
+                exhaustPayment.Exhaustable.Exhaust();
+            }
+
+            public override void Resolve(IPhaseStep step, IChoice choice)
+            {
                 var revealed = step.Phase.Round.Game.StagingArea.RevealedEncounterCard;
                 if (revealed == null)
                     return;

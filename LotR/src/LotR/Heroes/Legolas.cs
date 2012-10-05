@@ -46,7 +46,7 @@ namespace LotR.Heroes
                 }
             }
 
-            public override void Resolve(IPhaseStep step, IPayment payment)
+            public override void Resolve(IPhaseStep step, IChoice choice)
             {
                 step.AddProgressToCurrentQuest(2);
             }

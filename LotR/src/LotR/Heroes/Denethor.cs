@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Choices;
 using LotR.Costs;
 using LotR.Effects.CharacterAbilities;
 using LotR.Payments;
@@ -39,7 +40,7 @@ namespace LotR.Heroes
                 return new ExhaustSelf(exhaustable);
             }
 
-            public override void Resolve(IPhaseStep step, IPayment payment)
+            public override void Setup(IPhaseStep step, IPayment payment)
             {
                 var exhaustPayment = payment as IExhaustCardPayment;
                 if (exhaustPayment == null || exhaustPayment.Exhaustable == null || exhaustPayment.Exhaustable.IsExhausted)
@@ -50,29 +51,14 @@ namespace LotR.Heroes
                 var topCard = step.Phase.Round.Game.StagingArea.EncounterDeck.GetFromTop(1).FirstOrDefault();
                 if (topCard == null)
                     return;
-                
+
                 step.Phase.Round.Game.StagingArea.AddExaminedEncounterCards(new List<IEncounterCard> { topCard });
-                step.AddEffect(new ChooseWhereToPutExaminedEncounterCard(Source));
-            }
-        }
-
-        public class ChooseWhereToPutExaminedEncounterCard
-            : PassiveCharacterAbilityBase
-        {
-            public ChooseWhereToPutExaminedEncounterCard(IPlayerCard source)
-                : base("You may move the revealed encounter card to the bottom of the encounter deck.", source)
-            {
             }
 
-            public override ICost GetCost(IPhaseStep step)
+            public override void Resolve(IPhaseStep step, IChoice choice)
             {
-                return new ChooseCardDestination(Source);
-            }
-
-            public override void Resolve(IPhaseStep step, IPayment payment)
-            {
-                var choice = payment as IChooseCardDestinationPayment;
-                if (choice == null)
+                var topOfDeckChoice = choice as IChooseTopOrBottomOfDeck;
+                if (topOfDeckChoice == null)
                     return;
 
                 if (step.Phase.Round.Game.StagingArea.ExaminedEncounterCards.Count() != 1)
@@ -84,13 +70,14 @@ namespace LotR.Heroes
 
                 step.Phase.Round.Game.StagingArea.RemoveExaminedEncounterCards(new List<IEncounterCard> { topCard });
 
-                if (choice.BottomOfDeck)
+                if (topOfDeckChoice.TopOfDeck)
                 {
-                    step.Phase.Round.Game.StagingArea.EncounterDeck.PutOnBottom(new List<IEncounterCard> { topCard });
+                    step.Phase.Round.Game.StagingArea.EncounterDeck.PutOnTop(new List<IEncounterCard> { topCard });
                 }
                 else
                 {
-                    step.Phase.Round.Game.StagingArea.EncounterDeck.PutOnTop(new List<IEncounterCard> { topCard });
+                    step.Phase.Round.Game.StagingArea.EncounterDeck.PutOnBottom(new List<IEncounterCard> { topCard });
+                    
                 }
             }
         }

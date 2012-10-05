@@ -34,12 +34,12 @@ namespace LotR.Heroes
                 return new DiscardCardsFromHand(Source, step, 1);
             }
 
-            public override ILimit GetLimit()
+            public override ILimit GetLimit(IPhaseStep step)
             {
                 return new Limit(PlayerScope.AnyPlayer, TimeScope.Round, 1);
             }
 
-            public override void Resolve(IPhaseStep step, IPayment payment)
+            public override void Resolve(IPhaseStep step, IChoice choice)
             {
                 var willpowerful = step.GetCardInPlay(Source.Id) as IWillpowerfulCard;
                 if (willpowerful == null)

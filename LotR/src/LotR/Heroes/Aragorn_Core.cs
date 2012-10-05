@@ -49,7 +49,7 @@ namespace LotR.Heroes
             private readonly Aragorn aragorn;
             private readonly ICommitToQuestStep step;
 
-            public override void Resolve(IPhaseStep step, IPayment payment)
+            public override void Resolve(IPhaseStep step, IChoice choice)
             {
                 var inPlay = step.GetCardInPlay(aragorn.Id) as IHeroInPlay;
 

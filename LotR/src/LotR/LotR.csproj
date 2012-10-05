@@ -76,8 +76,14 @@
     <Compile Include="Attachments\TheFavorOfTheLady.cs" />
     <Compile Include="Attachments\UnexpectedCourage.cs" />
     <Compile Include="CardBase.cs" />
+    <Compile Include="Choices\ChoiceBase.cs" />
+    <Compile Include="Choices\IChooseAlly.cs" />
+    <Compile Include="Choices\IChooseCharacter.cs" />
+    <Compile Include="Choices\IChooseEnemy.cs" />
+    <Compile Include="Choices\IChooseHero.cs" />
+    <Compile Include="Choices\IChooseTopOrBottomOfDeck.cs" />
     <Compile Include="CostlyCardBase.cs" />
-    <Compile Include="Costs\ChooseAlly.cs" />
+    <Compile Include="Choices\ChooseAlly.cs" />
     <Compile Include="Costs\ChooseCardDestination.cs" />
     <Compile Include="Costs\ChooseHeroCommitedToQuest.cs" />
     <Compile Include="Costs\ChooseHero.cs" />
@@ -126,6 +132,7 @@
     <Compile Include="Heroes\Denethor.cs" />
     <Compile Include="Heroes\Dunhere.cs" />
     <Compile Include="Heroes\Glorfindel_Core.cs" />
+    <Compile Include="IAllyInPlay.cs" />
     <Compile Include="ICancelEffect.cs" />
     <Compile Include="Effects\IExecutableEffect.cs" />
     <Compile Include="Effects\IReversableEffect.cs" />
@@ -151,6 +158,7 @@
     <Compile Include="Heroes\Thalin.cs" />
     <Compile Include="IAction.cs" />
     <Compile Include="IAttackingCard.cs" />
+    <Compile Include="IChoice.cs" />
     <Compile Include="IResourcefulInPlay.cs" />
     <Compile Include="Limit.cs" />
     <Compile Include="Payments\IChooseCardDestinationPayment.cs" />
@@ -353,7 +361,6 @@
     <Compile Include="Sphere.cs" />
     <Compile Include="Traits.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

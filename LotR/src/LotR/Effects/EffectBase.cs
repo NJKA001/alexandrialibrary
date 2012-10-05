@@ -19,14 +19,27 @@ namespace LotR.Effects
             private set;
         }
 
+        public virtual IChoice GetChoice(IPhaseStep step)
+        {
+            return null;
+        }
+
         public virtual ICost GetCost(IPhaseStep step)
         {
             return null;
         }
 
-        public virtual ILimit GetLimit()
+        public virtual ILimit GetLimit(IPhaseStep step)
         {
             return null;
+        }
+
+        public virtual void Setup(IPhaseStep step, IPayment payment)
+        {
+        }
+
+        public virtual void Resolve(IPhaseStep step, IChoice choice)
+        {
         }
     }
 }

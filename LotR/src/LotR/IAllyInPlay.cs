@@ -5,8 +5,9 @@ using System.Text;
 
 namespace LotR
 {
-    public interface IResponse
-        : IActiveEffect
+    public interface IAllyInPlay
+        : IExhaustableCard
     {
+        new IAllyCard Card { get; }
     }
 }

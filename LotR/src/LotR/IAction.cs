@@ -8,6 +8,5 @@ namespace LotR
     public interface IAction
         : IActiveEffect
     {
-        void Resolve(IPhaseStep step, IPayment payment);
     }
 }

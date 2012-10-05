@@ -18,9 +18,5 @@ namespace LotR.Effects.CharacterAbilities
         public void DuringCharactersAttack(ICharactersAttackStep step)
         {
         }
-
-        public override void Resolve(IPhaseStep step, IPayment payment)
-        {
-        }
     }
 }

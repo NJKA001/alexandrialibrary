@@ -12,7 +12,5 @@ namespace LotR.Effects
             : base(description, source)
         {
         }
-
-        public abstract void Resolve(IPhaseStep step, IPayment payment);
     }
 }

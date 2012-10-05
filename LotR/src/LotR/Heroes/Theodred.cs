@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Choices;
 using LotR.Costs;
 using LotR.Effects;
 using LotR.Effects.CharacterAbilities;
@@ -44,25 +45,6 @@ namespace LotR.Heroes
                 step.AddEffect(this);
             }
 
-            public override void Resolve(IPhaseStep step, IPayment payment)
-            {
-                if (payment == null)
-                    return;
-
-                if (!(step is ICommitToQuestStep))
-                    return;
-
-                var choice = payment as IChooseCharacterPayment;
-                if (choice == null)
-                    return;
-
-                var hero = choice.Character as IHeroInPlay;
-                if (hero == null)
-                    return;
-
-                step.AddEffect(new AddResources(step, new Dictionary<Guid, byte> { { hero.CardId, 1 } }));
-            }
-
             public override ICost GetCost(IPhaseStep step)
             {
                 var commitStep = step as ICommitToQuestStep;
@@ -70,6 +52,18 @@ namespace LotR.Heroes
                     return null;
 
                 return new ChooseHeroCommitedToTheQuest(Source, commitStep);
+            }
+
+            public override void Resolve(IPhaseStep step, IChoice choice)
+            {
+                if (!(step is ICommitToQuestStep))
+                    return;
+
+                var heroChoice = choice as IChooseHero;
+                if (heroChoice == null || heroChoice.Hero == null)
+                    return;
+
+                step.AddEffect(new AddResources(step, new Dictionary<Guid, byte> { { heroChoice.Hero.CardId, 1 } }));
             }
         }
 

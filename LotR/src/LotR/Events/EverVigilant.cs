@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Costs;
+using LotR.Choices;
 using LotR.Effects;
-using LotR.Payments;
 
 namespace LotR.Events
 {
@@ -25,29 +24,18 @@ namespace LotR.Events
             {
             }
 
-            public override ICost GetCost(IPhaseStep step)
+            public override IChoice GetChoice(IPhaseStep step)
             {
                 return new ChooseAlly(Source);
             }
 
-            public override void Resolve(IPhaseStep step, IPayment payment)
+            public override void Resolve(IPhaseStep step, IChoice choice)
             {
-                if (payment == null)
+                var allyChoice = choice as IChooseAlly;
+                if (allyChoice == null || allyChoice.Ally == null)
                     return;
 
-                var choice = payment as IChooseCharacterPayment;
-                if (choice == null)
-                    return;
-
-                var ally = choice.Character as IAllyCard;
-                if (ally == null)
-                    return;
-
-                var exhaustable = step.GetCardInPlay(ally.Id) as IExhaustableCard;
-                if (exhaustable == null)
-                    return;
-
-                exhaustable.Ready();
+                allyChoice.Ally.Ready();
             }
         }
     }

@@ -5,8 +5,9 @@ using System.Text;
 
 namespace LotR
 {
-    public interface IResponse
-        : IActiveEffect
+    public interface IChoice
     {
+        string Description { get; }
+        ICard Source { get; }
     }
 }

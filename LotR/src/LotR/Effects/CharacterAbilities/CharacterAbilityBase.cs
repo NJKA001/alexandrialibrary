@@ -19,7 +19,5 @@ namespace LotR.Effects.CharacterAbilities
             get;
             private set;
         }
-
-        public abstract void Resolve(IPhaseStep step, IPayment payment);
     }
 }

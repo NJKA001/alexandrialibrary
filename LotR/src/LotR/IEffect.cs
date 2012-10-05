@@ -9,7 +9,11 @@ namespace LotR
     {
         string Description { get; }
 
+        IChoice GetChoice(IPhaseStep step);
         ICost GetCost(IPhaseStep step);
-        ILimit GetLimit();
+        ILimit GetLimit(IPhaseStep step);
+
+        void Setup(IPhaseStep step, IPayment payment);
+        void Resolve(IPhaseStep step, IChoice choice);
     }
 }

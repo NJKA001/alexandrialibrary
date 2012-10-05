@@ -39,7 +39,7 @@ namespace LotR.Heroes
                 step.AddEffect(this);
             }
 
-            public override void Resolve(IPhaseStep step, IPayment payment)
+            public override void Resolve(IPhaseStep step, IChoice choice)
             {
                 var attackStep = step as IDetermineAttackStep;
                 if (attackStep == null)

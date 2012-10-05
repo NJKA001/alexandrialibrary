@@ -75,21 +75,27 @@ namespace LotR.Attachments
                 return new ExhaustSelf(exhaustable);
             }
 
-            public override void Resolve(IPhaseStep step, IPayment payment)
+            public override void Setup(IPhaseStep step, IPayment payment)
             {
+                if (payment == null)
+                    throw new ArgumentNullException("payment");
+
                 var exhaustPayment = payment as IExhaustCardPayment;
                 if (exhaustPayment == null || exhaustPayment.Exhaustable == null || exhaustPayment.Exhaustable.IsExhausted)
                     return;
 
-                var attachment = exhaustPayment.Exhaustable as IAttachmentInPlay;
+                exhaustPayment.Exhaustable.Exhaust();
+            }
+
+            public override void Resolve(IPhaseStep step, IChoice choice)
+            {
+                var attachment = step.GetCardInPlay(Source.Id) as IAttachmentInPlay;
                 if (attachment == null || attachment.AttachedTo == null)
                     return;
 
                 var resourceful = attachment.AttachedTo.Card as IResourcefulCard;
                 if (resourceful == null)
                     return;
-
-                exhaustPayment.Exhaustable.Exhaust();
 
                 step.AddEffect(new AddResources(step, new Dictionary<Guid, byte> { { resourceful.Id, 2 } }));
             }
