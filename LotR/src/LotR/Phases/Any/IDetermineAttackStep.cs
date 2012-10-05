@@ -9,6 +9,7 @@ namespace LotR.Phases.Any
         : IPhaseStep
     {
         IEnemyInPlay Target { get; }
+        IEnumerable<IAttackingCard> Attackers { get; }
         byte Attack { get; set; }
     }
 }

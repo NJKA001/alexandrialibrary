@@ -78,6 +78,7 @@
     <Compile Include="CardBase.cs" />
     <Compile Include="CostlyCardBase.cs" />
     <Compile Include="Costs\ChooseAlly.cs" />
+    <Compile Include="Costs\ChooseCardDestination.cs" />
     <Compile Include="Costs\ChooseHeroCommitedToQuest.cs" />
     <Compile Include="Costs\ChooseHero.cs" />
     <Compile Include="Costs\EachRevealedEnemy.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="IAttackingCard.cs" />
     <Compile Include="IResourcefulInPlay.cs" />
     <Compile Include="Limit.cs" />
+    <Compile Include="Payments\IChooseCardDestinationPayment.cs" />
     <Compile Include="Payments\IChooseCardInHandPayment.cs" />
     <Compile Include="Payments\IChooseCharacterPayment.cs" />
     <Compile Include="Effects\IReadyCards.cs" />

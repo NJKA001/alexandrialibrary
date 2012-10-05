@@ -89,6 +89,8 @@ namespace LotR.Attachments
                 if (resourceful == null)
                     return;
 
+                exhaustPayment.Exhaustable.Exhaust();
+
                 step.AddEffect(new AddResources(step, new Dictionary<Guid, byte> { { resourceful.Id, 2 } }));
             }
         }

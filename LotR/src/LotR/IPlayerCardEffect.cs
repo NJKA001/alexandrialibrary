@@ -8,5 +8,6 @@ namespace LotR
     public interface IPlayerCardEffect
         : ICardEffect
     {
+        new IPlayerCard Source { get; }
     }
 }

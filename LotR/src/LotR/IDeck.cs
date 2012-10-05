@@ -12,7 +12,7 @@ namespace LotR
         uint Size { get; }
 
         T GetFirst(Func<T, bool> predicate);
-        IEnumerable<T> GetFromTop(byte number);
+        IEnumerable<T> GetFromTop(int numberOfCards);
         void PutOnTop(IEnumerable<T> cards);
         void PutOnBottom(IEnumerable<T> cards);
         void Shuffle();

@@ -11,6 +11,9 @@ namespace LotR
         IDeck<IEncounterCard> EncounterDiscardPile { get; }
         IEncounterCard RevealedEncounterCard { get; }
         IEnumerable<IEncounterInPlay> CardsInStagingArea { get; }
+        IEnumerable<IEncounterCard> ExaminedEncounterCards { get; }
+        void AddExaminedEncounterCards(IEnumerable<IEncounterCard> cards);
+        void RemoveExaminedEncounterCards(IEnumerable<IEncounterCard> cards);
 
         void RevealEncounterCards(byte numberOfCards);
         void CancelRevealedCard(ICancelEffect effect);

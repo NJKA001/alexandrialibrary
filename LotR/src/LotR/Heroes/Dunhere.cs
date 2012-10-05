@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Effects.CharacterAbilities;
+using LotR.Phases.Any;
 using LotR.Phases.Combat;
 
 namespace LotR.Heroes
@@ -18,6 +19,7 @@ namespace LotR.Heroes
             Trait(Traits.Warrior);
 
             Effect(new CanAttackEnemiesInTheStagingArea(this));
+            Effect(new PlusOneAttackWhenAttackingAnEnemyInTheStagingArea(this));
         }
 
         public class CanAttackEnemiesInTheStagingArea
@@ -53,6 +55,46 @@ namespace LotR.Heroes
                 {
                     chooseEnemyToAttackStep.AddEnemy(enemy);
                 }
+            }
+        }
+
+        public class PlusOneAttackWhenAttackingAnEnemyInTheStagingArea
+            : PassiveCharacterAbilityBase, IDetermineAttack
+        {
+            public PlusOneAttackWhenAttackingAnEnemyInTheStagingArea(Dunhere source)
+                : base("When attacking an enemy in the staging area, Dunhere gets +1 Attack.", source)
+            {
+            }
+
+            public void DetermineAttack(IDetermineAttackStep step)
+            {
+                if (step.Attackers.Count() != 1)
+                    return;
+
+                var attacker = step.Attackers.FirstOrDefault();
+                if (attacker == null)
+                    return;
+
+                if (attacker.Id != Source.Id)
+                    return;
+
+                foreach (var enemy in step.Phase.Round.Game.StagingArea.CardsInStagingArea.OfType<IEnemyInPlay>())
+                {
+                    if (enemy.CardId == step.Target.CardId)
+                    {
+                        step.AddEffect(this);
+                        return;
+                    }
+                }
+            }
+
+            public override void Resolve(IPhaseStep step, IPayment payment)
+            {
+                var determineAttackStep = step as IDetermineAttackStep;
+                if (determineAttackStep == null)
+                    return;
+
+                determineAttackStep.Attack += 1;
             }
         }
     }

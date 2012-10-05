@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Costs;
+using LotR.Effects.CharacterAbilities;
+using LotR.Payments;
+
 namespace LotR.Heroes
 {
     public class Denethor
@@ -11,6 +15,84 @@ namespace LotR.Heroes
         public Denethor()
             : base("Denethor", SetNames.Core, 10, Sphere.Lore, 8, 1, 1, 3, 3)
         {
+            Trait(Traits.Gondor);
+            Trait(Traits.Noble);
+            Trait(Traits.Steward);
+
+            Effect(new ExamineTopCardOfEncounterDeck(this));
+        }
+
+        public class ExamineTopCardOfEncounterDeck
+            : ActionCharacterAbilityBase
+        {
+            public ExamineTopCardOfEncounterDeck(Denethor source)
+                : base("Exhaust Denethor to look at the top card of the encounter deck. You may move that card to the bottom of the deck.", source)
+            {
+            }
+
+            public override ICost GetCost(IPhaseStep step)
+            {
+                var exhaustable = step.GetCardInPlay(Source.Id) as IExhaustableCard;
+                if (exhaustable == null)
+                    return null;
+
+                return new ExhaustSelf(exhaustable);
+            }
+
+            public override void Resolve(IPhaseStep step, IPayment payment)
+            {
+                var exhaustPayment = payment as IExhaustCardPayment;
+                if (exhaustPayment == null || exhaustPayment.Exhaustable == null || exhaustPayment.Exhaustable.IsExhausted)
+                    return;
+
+                exhaustPayment.Exhaustable.Exhaust();
+
+                var topCard = step.Phase.Round.Game.StagingArea.EncounterDeck.GetFromTop(1).FirstOrDefault();
+                if (topCard == null)
+                    return;
+                
+                step.Phase.Round.Game.StagingArea.AddExaminedEncounterCards(new List<IEncounterCard> { topCard });
+                step.AddEffect(new ChooseWhereToPutExaminedEncounterCard(Source));
+            }
+        }
+
+        public class ChooseWhereToPutExaminedEncounterCard
+            : PassiveCharacterAbilityBase
+        {
+            public ChooseWhereToPutExaminedEncounterCard(IPlayerCard source)
+                : base("You may move the revealed encounter card to the bottom of the encounter deck.", source)
+            {
+            }
+
+            public override ICost GetCost(IPhaseStep step)
+            {
+                return new ChooseCardDestination(Source);
+            }
+
+            public override void Resolve(IPhaseStep step, IPayment payment)
+            {
+                var choice = payment as IChooseCardDestinationPayment;
+                if (choice == null)
+                    return;
+
+                if (step.Phase.Round.Game.StagingArea.ExaminedEncounterCards.Count() != 1)
+                    return;
+
+                var topCard = step.Phase.Round.Game.StagingArea.ExaminedEncounterCards.FirstOrDefault() as IEncounterCard;
+                if (topCard == null)
+                    return;
+
+                step.Phase.Round.Game.StagingArea.RemoveExaminedEncounterCards(new List<IEncounterCard> { topCard });
+
+                if (choice.BottomOfDeck)
+                {
+                    step.Phase.Round.Game.StagingArea.EncounterDeck.PutOnBottom(new List<IEncounterCard> { topCard });
+                }
+                else
+                {
+                    step.Phase.Round.Game.StagingArea.EncounterDeck.PutOnTop(new List<IEncounterCard> { topCard });
+                }
+            }
         }
     }
 }
