@@ -7,7 +7,7 @@ namespace LotR.Phases.Any
 {
     public interface IAfterDamageHealed
     {
-        void AfterDamageHealedSetup(IHealDamageStep step);
-        void AfterDamageHealedResolve(IHealDamageStep step, IPayment payment);
+        void AfterDamageHealedSetup(IHealCharacterDamageStep step);
+        void AfterDamageHealedResolve(IHealCharacterDamageStep step, IPayment payment);
     }
 }

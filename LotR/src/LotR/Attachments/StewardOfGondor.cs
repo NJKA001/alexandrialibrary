@@ -75,16 +75,18 @@ namespace LotR.Attachments
                 return new ExhaustSelf(exhaustable);
             }
 
-            public override void Setup(IPhaseStep step, IPayment payment)
+            public override bool PaymentAccepted(IPhaseStep step, IPayment payment)
             {
                 if (payment == null)
-                    throw new ArgumentNullException("payment");
+                    return false;
 
                 var exhaustPayment = payment as IExhaustCardPayment;
                 if (exhaustPayment == null || exhaustPayment.Exhaustable == null || exhaustPayment.Exhaustable.IsExhausted)
-                    return;
+                    return false;
 
                 exhaustPayment.Exhaustable.Exhaust();
+
+                return true;
             }
 
             public override void Resolve(IPhaseStep step, IChoice choice)

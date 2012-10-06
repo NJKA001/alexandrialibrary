@@ -10,7 +10,14 @@ namespace LotR.Effects
     {
         protected EffectBase(string description)
         {
+            EffectId = Guid.NewGuid();
             Description = description;
+        }
+
+        public Guid EffectId
+        {
+            get;
+            private set;
         }
 
         public string Description
@@ -34,8 +41,9 @@ namespace LotR.Effects
             return null;
         }
 
-        public virtual void Setup(IPhaseStep step, IPayment payment)
+        public virtual bool PaymentAccepted(IPhaseStep step, IPayment payment)
         {
+            return true;
         }
 
         public virtual void Resolve(IPhaseStep step, IChoice choice)

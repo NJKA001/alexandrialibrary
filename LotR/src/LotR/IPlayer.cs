@@ -26,5 +26,8 @@ namespace LotR
 
         void IncreaseThreat(byte value);
         void DecreaseThreat(byte value);
+        void AddCardsToHand(IEnumerable<IPlayerCard> cards);
+        void RemoveCardsFromHand(IEnumerable<IPlayerCard> cards);
+        void DrawCards(byte value);
     }
 }

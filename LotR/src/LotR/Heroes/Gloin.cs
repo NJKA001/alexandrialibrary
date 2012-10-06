@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 
 using LotR.Effects;
-using LotR.Effects.CharacterAbilities;
 using LotR.Phases.Combat;
 
 namespace LotR.Heroes

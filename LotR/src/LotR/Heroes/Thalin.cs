@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Costs;
-using LotR.Effects.CharacterAbilities;
+using LotR.Effects;
 using LotR.Payments;
 using LotR.Phases.Any;
 using LotR.Phases.Quest;

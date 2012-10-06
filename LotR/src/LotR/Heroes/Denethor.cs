@@ -5,7 +5,7 @@ using System.Text;
 
 using LotR.Choices;
 using LotR.Costs;
-using LotR.Effects.CharacterAbilities;
+using LotR.Effects;
 using LotR.Payments;
 
 namespace LotR.Heroes
@@ -40,19 +40,20 @@ namespace LotR.Heroes
                 return new ExhaustSelf(exhaustable);
             }
 
-            public override void Setup(IPhaseStep step, IPayment payment)
+            public override bool PaymentAccepted(IPhaseStep step, IPayment payment)
             {
                 var exhaustPayment = payment as IExhaustCardPayment;
                 if (exhaustPayment == null || exhaustPayment.Exhaustable == null || exhaustPayment.Exhaustable.IsExhausted)
-                    return;
+                    return false;
 
                 exhaustPayment.Exhaustable.Exhaust();
 
                 var topCard = step.Phase.Round.Game.StagingArea.EncounterDeck.GetFromTop(1).FirstOrDefault();
                 if (topCard == null)
-                    return;
+                    return false;
 
                 step.Phase.Round.Game.StagingArea.AddExaminedEncounterCards(new List<IEncounterCard> { topCard });
+                return true;
             }
 
             public override void Resolve(IPhaseStep step, IChoice choice)

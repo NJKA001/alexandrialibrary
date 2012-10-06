@@ -5,10 +5,10 @@ using System.Text;
 
 namespace LotR.Phases.Any
 {
-    public interface IHealDamageStep
+    public interface IHealCharacterDamageStep
         : IPhaseStep
     {
         ICharacterInPlay Target { get; }
-        byte Damage { get; }
+        byte DamageHealed { get; }
     }
 }

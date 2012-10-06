@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Effects.CharacterAbilities;
+using LotR.Effects;
 using LotR.Phases.Combat;
 
 namespace LotR.Heroes

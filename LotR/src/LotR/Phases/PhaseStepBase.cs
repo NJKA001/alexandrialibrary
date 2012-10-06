@@ -66,6 +66,11 @@ namespace LotR.Phases
             effects.Add(effect);
         }
 
+        public void AddStep(IPhaseStep step)
+        {
+            //TODO: Determine implementation
+        }
+
         public void AddProgressToCurrentQuest(byte value)
         {
             Phase.Round.Game.ActiveQuest.AddProgressTokens(value);

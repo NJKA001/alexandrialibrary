@@ -5,7 +5,7 @@ using System.Text;
 
 using LotR.Phases.Combat;
 
-namespace LotR.Effects.CharacterAbilities
+namespace LotR.Effects
 {
     public class RangedAbility
         : CharacterAbilityBase, IDuringCharactersAttack

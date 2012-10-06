@@ -5,9 +5,9 @@ using System.Text;
 
 namespace LotR.Choices
 {
-    public interface IChooseCharacter
+    public interface IChoosePlayer
         : IChoice
     {
-        ICharacterInPlay Character { get; set; }
+        IPlayer Player { get; set; }
     }
 }

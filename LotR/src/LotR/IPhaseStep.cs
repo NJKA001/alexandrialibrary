@@ -19,6 +19,8 @@ namespace LotR
         IEnumerable<IEffect> Effects { get; }
         void AddEffect(IEffect effect);
 
+        void AddStep(IPhaseStep step);
+
         void AddProgressToCurrentQuest(byte value);
         void RemoveProgressFromCurrentQuest(byte value);
     }

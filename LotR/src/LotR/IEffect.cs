@@ -7,13 +7,14 @@ namespace LotR
 {
     public interface IEffect
     {
+        Guid EffectId { get; }
         string Description { get; }
 
         IChoice GetChoice(IPhaseStep step);
         ICost GetCost(IPhaseStep step);
         ILimit GetLimit(IPhaseStep step);
 
-        void Setup(IPhaseStep step, IPayment payment);
+        bool PaymentAccepted(IPhaseStep step, IPayment payment);
         void Resolve(IPhaseStep step, IChoice choice);
     }
 }

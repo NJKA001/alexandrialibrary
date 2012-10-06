@@ -5,7 +5,6 @@ using System.Text;
 
 using LotR.Costs;
 using LotR.Effects;
-using LotR.Effects.CharacterAbilities;
 using LotR.Payments;
 using LotR.Phases.Any;
 
@@ -55,16 +54,18 @@ namespace LotR.Heroes
                 step.AddEffect(this);
             }
 
-            public override void Setup(IPhaseStep step, IPayment payment)
+            public override bool PaymentAccepted(IPhaseStep step, IPayment payment)
             {
                 if (payment == null)
-                    throw new ArgumentNullException("payment");
+                    return false;
 
                 var exhaustPayment = payment as IExhaustCardPayment;
                 if (exhaustPayment == null)
-                    return;
+                    return false;
 
                 exhaustPayment.Exhaustable.Exhaust();
+
+                return true;
             }
 
             public override void Resolve(IPhaseStep step, IChoice choice)

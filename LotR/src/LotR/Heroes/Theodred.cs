@@ -6,7 +6,6 @@ using System.Text;
 using LotR.Choices;
 using LotR.Costs;
 using LotR.Effects;
-using LotR.Effects.CharacterAbilities;
 using LotR.Payments;
 using LotR.Phases.Quest;
 

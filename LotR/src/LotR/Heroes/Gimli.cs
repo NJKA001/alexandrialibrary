@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 
 using LotR.Effects;
-using LotR.Effects.CharacterAbilities;
 using LotR.Effects.Modifiers;
 using LotR.Phases.Any;
 using LotR.Phases.Combat;
