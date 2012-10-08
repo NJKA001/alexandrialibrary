@@ -76,6 +76,7 @@
     <Compile Include="Attachments\TheFavorOfTheLady.cs" />
     <Compile Include="Attachments\UnexpectedCourage.cs" />
     <Compile Include="CardBase.cs" />
+    <Compile Include="CardInPlayBase.cs" />
     <Compile Include="Choices\ChoiceBase.cs" />
     <Compile Include="Choices\ChooseCharacter.cs" />
     <Compile Include="Choices\ChoosePlayer.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Costs\ExhaustSelf.cs" />
     <Compile Include="Costs\PayResources.cs" />
     <Compile Include="Costs\PayResourcesFrom.cs" />
+    <Compile Include="Deck.cs" />
     <Compile Include="Effects\ActionEffectBase.cs" />
     <Compile Include="Effects\CardEffectBase.cs" />
     <Compile Include="Effects\AmbushEffect.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="IAction.cs" />
     <Compile Include="IAttackingCard.cs" />
     <Compile Include="IChoice.cs" />
+    <Compile Include="IPlayerLoader.cs" />
     <Compile Include="IResourcefulInPlay.cs" />
     <Compile Include="Limit.cs" />
     <Compile Include="Payments\IChooseCardDestinationPayment.cs" />
@@ -224,6 +227,8 @@
     <Compile Include="Phases\Combat\IEnemyDefeatedStep.cs" />
     <Compile Include="Phases\PhaseStepBase.cs" />
     <Compile Include="Phases\Quest\IQuestPhase.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="PlayerLoader.cs" />
     <Compile Include="PlayerScope.cs" />
     <Compile Include="SentinelAbility.cs" />
     <Compile Include="CharacterCardBase.cs" />

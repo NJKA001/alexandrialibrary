@@ -9,6 +9,7 @@ namespace LotR
     public interface IPlayer
         : INotifyPropertyChanged
     {
+        string Name { get; }
         byte StartingThreat { get; }
         IEnumerable<IHeroCard> StartingHeroes { get; }
 
