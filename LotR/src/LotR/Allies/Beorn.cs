@@ -9,12 +9,12 @@ namespace LotR.Allies
         : AllyCardBase
     {
         public Beorn()
-            : base("Beorn", SetNames.Core, 31, Sphere.Tactics, 6, 1, 3, 3, 6)
+            : base("Beorn", CardSet.Core, 31, Sphere.Tactics, 6, 1, 3, 3, 6)
         {
             this.IsUnique = true;
 
-            Trait(Traits.Beorning);
-            Trait(Traits.Warrior);
+            AddTrait(Trait.Beorning);
+            AddTrait(Trait.Warrior);
         }
     }
 }

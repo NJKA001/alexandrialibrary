@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public ATestOfWill()
-            : base("A Test of Will", SetNames.Core, 50, Sphere.Spirit, 1)
+            : base("A Test of Will", CardSet.Core, 50, Sphere.Spirit, 1)
         {
         }
     }

@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public SecretPaths()
-            : base("Secret Paths", SetNames.Core, 66, Sphere.Lore, 1)
+            : base("Secret Paths", CardSet.Core, 66, Sphere.Lore, 1)
         {
         }
     }

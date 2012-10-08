@@ -9,9 +9,9 @@ namespace LotR.Attachments
         : AttachmentCardBase
     {
         public DarkKnowledge()
-            : base("Dark Knowledge", SetNames.Core, 71, Sphere.Lore, 1, false, false)
+            : base("Dark Knowledge", CardSet.Core, 71, Sphere.Lore, 1, false, false)
         {
-            Trait(Traits.Condition);
+            AddTrait(Trait.Condition);
         }
 
         public override bool CanBeAttachedTo(IPhaseStep step, ICardInPlay cardInPlay)

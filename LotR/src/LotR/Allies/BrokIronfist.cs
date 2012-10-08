@@ -9,12 +9,12 @@ namespace LotR.Allies
         : AllyCardBase
     {
         public BrokIronfist()
-            : base("Brok Ironfist", SetNames.Core, 19, Sphere.Leadership, 6, 2, 2, 1, 4)
+            : base("Brok Ironfist", CardSet.Core, 19, Sphere.Leadership, 6, 2, 2, 1, 4)
         {
             this.IsUnique = true;
 
-            Trait(Traits.Dwarf);
-            Trait(Traits.Warrior);
+            AddTrait(Trait.Dwarf);
+            AddTrait(Trait.Warrior);
         }
     }
 }

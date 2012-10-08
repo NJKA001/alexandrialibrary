@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public StandTogether()
-            : base("Stand Together", SetNames.Core, 38, Sphere.Tactics, 0)
+            : base("Stand Together", CardSet.Core, 38, Sphere.Tactics, 0)
         {
         }
     }

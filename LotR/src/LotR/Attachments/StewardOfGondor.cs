@@ -14,13 +14,13 @@ namespace LotR.Attachments
         : AttachmentCardBase
     {
         public StewardOfGondor()
-            : base("Steward of Gondor", SetNames.Core, 26, Sphere.Leadership, 2, true, false)
+            : base("Steward of Gondor", CardSet.Core, 26, Sphere.Leadership, 2, true, false)
         {
-            Trait(Traits.Gondor);
-            Trait(Traits.Title);
+            AddTrait(Trait.Gondor);
+            AddTrait(Trait.Title);
 
-            Effect(new AddGondorTrait(this));
-            Effect(new ExhaustToAddTwoResources(this));
+            AddEffect(new AddGondorTrait(this));
+            AddEffect(new ExhaustToAddTwoResources(this));
         }
 
         public override bool CanBeAttachedTo(IPhaseStep step, ICardInPlay cardInPlay)
@@ -41,7 +41,7 @@ namespace LotR.Attachments
 
             public void CheckForTrait(ICheckForTraitStep step)
             {
-                if (step.CardInPlay == null || step.Trait != Traits.Gondor)
+                if (step.CardInPlay == null || step.Trait != Trait.Gondor)
                     return;
 
                 var attachment = step.GetCardInPlay(Source.Id) as IAttachmentInPlay;

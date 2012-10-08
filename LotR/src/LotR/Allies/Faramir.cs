@@ -9,13 +9,13 @@ namespace LotR.Allies
         : AllyCardBase
     {
         public Faramir()
-            : base("Faramir", SetNames.Core, 14, Sphere.Leadership, 4, 2, 1, 2, 3)
+            : base("Faramir", CardSet.Core, 14, Sphere.Leadership, 4, 2, 1, 2, 3)
         {
             IsUnique = true;
 
-            Trait(Traits.Gondor);
-            Trait(Traits.Noble);
-            Trait(Traits.Ranger);
+            AddTrait(Trait.Gondor);
+            AddTrait(Trait.Noble);
+            AddTrait(Trait.Ranger);
         }
     }
 }

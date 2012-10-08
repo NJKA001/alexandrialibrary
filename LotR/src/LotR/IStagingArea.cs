@@ -18,8 +18,9 @@ namespace LotR
         void RevealEncounterCards(byte numberOfCards);
         void CancelRevealedCard(ICancelEffect effect);
 
-        void AddToStagingArea(IEncounterInPlay card);
-        void RemoveFromStagingArea(IEncounterInPlay card);
+        void AddToStagingArea(IEncounterCard card);
+        void RemoveFromStagingArea(IEncounterCard card);
+
         void AddToEncounterDiscardPile(IEnumerable<IEncounterCard> cards);
         void AddToTopOfEncounterDeck(IEnumerable<IEncounterCard> cards);
         void AddToBottomOfEncounterDeck(IEnumerable<IEncounterCard> cards);

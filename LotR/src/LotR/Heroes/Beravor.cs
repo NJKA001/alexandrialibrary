@@ -14,12 +14,12 @@ namespace LotR.Heroes
         : HeroCardBase
     {
         public Beravor()
-            : base("Beravor", SetNames.Core, 12, Sphere.Lore, 10, 2, 2, 2, 4)
+            : base("Beravor", CardSet.Core, 12, Sphere.Lore, 10, 2, 2, 2, 4)
         {
-            Trait(Traits.Dunedain);
-            Trait(Traits.Ranger);
+            AddTrait(Trait.Dunedain);
+            AddTrait(Trait.Ranger);
 
-            Effect(new ExhaustBeravorToDrawTwoCards(this));
+            AddEffect(new ExhaustBeravorToDrawTwoCards(this));
         }
 
         private class ExhaustBeravorToDrawTwoCards

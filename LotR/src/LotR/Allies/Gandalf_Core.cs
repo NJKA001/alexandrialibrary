@@ -9,9 +9,9 @@ namespace LotR.Allies
         : AllyCardBase
     {
         public Gandalf_Core()
-            : base("Gandalf", SetNames.Core, 73, Sphere.Neutral, 5, 4, 4, 4, 4)
+            : base("Gandalf", CardSet.Core, 73, Sphere.Neutral, 5, 4, 4, 4, 4)
         {
-            Trait(Traits.Istari);
+            AddTrait(Trait.Istari);
         }
     }
 }

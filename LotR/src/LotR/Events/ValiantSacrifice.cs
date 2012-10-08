@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public ValiantSacrifice()
-            : base("Valiant Sacrifice", SetNames.Core, 24, Sphere.Leadership, 1)
+            : base("Valiant Sacrifice", CardSet.Core, 24, Sphere.Leadership, 1)
         {
         }
     }

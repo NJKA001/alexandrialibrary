@@ -10,8 +10,8 @@ namespace LotR
     public class CharacterCardBase
         : PlayerCardBase, ICharacterCard
     {
-        protected CharacterCardBase(string title, string setName, uint setNumber, byte willpower, byte attack, byte defense, byte hitPoints)
-            : base(title, setName, setNumber)
+        protected CharacterCardBase(string title, CardSet cardSet, uint cardNumber, byte willpower, byte attack, byte defense, byte hitPoints)
+            : base(title, cardSet, cardNumber)
         {
             this.Willpower = willpower;
             this.Attack = attack;

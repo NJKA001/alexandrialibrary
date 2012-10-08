@@ -12,7 +12,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public EverVigilant()
-            : base("Ever Vigilant", SetNames.Core, 20, Sphere.Leadership, 1)
+            : base("Ever Vigilant", CardSet.Core, 20, Sphere.Leadership, 1)
         {
         }
 

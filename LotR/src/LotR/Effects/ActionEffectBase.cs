@@ -6,7 +6,7 @@ using System.Text;
 namespace LotR.Effects
 {
     public abstract class ActionEffectBase
-        : CardEffectBase, IAction
+        : CardEffectBase, IActionEffect
     {
         protected ActionEffectBase(string description, ICard source)
             : base(description, source)

@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public Feint()
-            : base("Feint", SetNames.Core, 34, Sphere.Tactics, 1)
+            : base("Feint", CardSet.Core, 34, Sphere.Tactics, 1)
         {
         }
     }

@@ -11,12 +11,12 @@ namespace LotR.Allies
         : AllyCardBase
     {
         public SilverlodeArcher()
-            : base("Silverlode Archer", SetNames.Core, 17, Sphere.Leadership, 3, 1, 2, 0, 1)
+            : base("Silverlode Archer", CardSet.Core, 17, Sphere.Leadership, 3, 1, 2, 0, 1)
         {
-            Trait(Traits.Archer);
-            Trait(Traits.Silvan);
+            AddTrait(Trait.Archer);
+            AddTrait(Trait.Silvan);
 
-            Effect(new RangedAbility(this));
+            AddEffect(new RangedAbility(this));
         }
     }
 }

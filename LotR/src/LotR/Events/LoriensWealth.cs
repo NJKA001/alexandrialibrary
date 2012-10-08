@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public LoriensWealth()
-            : base("Lorien's Wealth", SetNames.Core, 64, Sphere.Lore, 3)
+            : base("Lorien's Wealth", CardSet.Core, 64, Sphere.Lore, 3)
         {
         }
     }

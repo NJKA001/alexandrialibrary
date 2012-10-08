@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public ThicketOfSpears()
-            : base("Thicket of Spears", SetNames.Core, 36, Sphere.Tactics, 3)
+            : base("Thicket of Spears", CardSet.Core, 36, Sphere.Tactics, 3)
         {
         }
     }

@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public GrimResolve()
-            : base("Grim Resolve", SetNames.Core, 25, Sphere.Leadership, 5)
+            : base("Grim Resolve", CardSet.Core, 25, Sphere.Leadership, 5)
         {
         }
     }

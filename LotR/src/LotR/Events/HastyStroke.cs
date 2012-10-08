@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public HastyStroke()
-            : base("Hasty Stroke", SetNames.Core, 48, Sphere.Spirit, 1)
+            : base("Hasty Stroke", CardSet.Core, 48, Sphere.Spirit, 1)
         {
         }
     }

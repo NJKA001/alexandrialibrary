@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR
+namespace LotR.Scenarios
 {
     public abstract class ScenarioBase
-        : CardBase, IScenario
+        : IScenario
     {
-        protected ScenarioBase(string title, string setName, uint setNumber)
-            : base(title, setName, setNumber)
+        protected ScenarioBase(string title, CardSet cardSet)
         {
+            this.Title = title;
         }
 
         private readonly List<IQuestCard> quests = new List<IQuestCard>();
@@ -24,6 +24,18 @@ namespace LotR
         protected void AddEncounterSet(IEncounterSet encounterSet)
         {
             encounterSets.Add(encounterSet);
+        }
+
+        public string Title
+        {
+            get;
+            private set;
+        }
+
+        public CardSet CardSet
+        {
+            get;
+            private set;
         }
 
         public object Symbol

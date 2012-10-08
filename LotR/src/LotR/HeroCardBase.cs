@@ -10,8 +10,8 @@ namespace LotR
     public abstract class HeroCardBase
         : CharacterCardBase, IHeroCard
     {
-        protected HeroCardBase(string title, string setName, uint setNumber, Sphere sphere, byte threatCost, byte willpower, byte attack, byte defense, byte hitPoints)
-            : base(title, setName, setNumber, willpower, attack, defense, hitPoints)
+        protected HeroCardBase(string title, CardSet cardSet, uint cardNumber, Sphere sphere, byte threatCost, byte willpower, byte attack, byte defense, byte hitPoints)
+            : base(title, cardSet, cardNumber, willpower, attack, defense, hitPoints)
         {
             this.ThreatCost = threatCost;
             this.IsUnique = true;

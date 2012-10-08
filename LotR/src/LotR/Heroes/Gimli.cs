@@ -14,13 +14,13 @@ namespace LotR.Heroes
         : HeroCardBase
     {
         public Gimli()
-            : base("Gimli", SetNames.Core, 4, Sphere.Tactics, 11, 2, 2, 2, 5)
+            : base("Gimli", CardSet.Core, 4, Sphere.Tactics, 11, 2, 2, 2, 5)
         {
-            Trait(Traits.Dwarf);
-            Trait(Traits.Noble);
-            Trait(Traits.Warrior);
+            AddTrait(Trait.Dwarf);
+            AddTrait(Trait.Noble);
+            AddTrait(Trait.Warrior);
 
-            Effect(new StrengthBonusForDamage(this));
+            AddEffect(new StrengthBonusForDamage(this));
         }
 
         #region Abilities

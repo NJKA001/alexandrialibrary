@@ -9,10 +9,10 @@ namespace LotR.Allies
         : AllyCardBase
     {
         public LorienGuide()
-            : base("Lorien Guide", SetNames.Core, 44, Sphere.Spirit, 3, 1, 1, 0, 2)
+            : base("Lorien Guide", CardSet.Core, 44, Sphere.Spirit, 3, 1, 1, 0, 2)
         {
-            Trait(Traits.Silvan);
-            Trait(Traits.Scout);
+            AddTrait(Trait.Silvan);
+            AddTrait(Trait.Scout);
         }
     }
 }

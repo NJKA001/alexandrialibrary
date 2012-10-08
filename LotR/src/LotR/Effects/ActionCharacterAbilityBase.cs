@@ -6,7 +6,7 @@ using System.Text;
 namespace LotR.Effects
 {
     public abstract class ActionCharacterAbilityBase
-        : CharacterAbilityBase, IAction
+        : CharacterAbilityBase, IActionEffect
     {
         protected ActionCharacterAbilityBase(string description, IPlayerCard source)
             : base(description, source)

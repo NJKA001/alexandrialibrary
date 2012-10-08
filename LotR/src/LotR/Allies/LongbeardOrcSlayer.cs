@@ -9,10 +9,10 @@ namespace LotR.Allies
         : AllyCardBase
     {
         public LongbeardOrcSlayer()
-            : base("Longbeard Orc Slayer", SetNames.Core, 18, Sphere.Leadership, 4, 0, 2, 1, 3)
+            : base("Longbeard Orc Slayer", CardSet.Core, 18, Sphere.Leadership, 4, 0, 2, 1, 3)
         {
-            Trait(Traits.Dwarf);
-            Trait(Traits.Warrior);
+            AddTrait(Trait.Dwarf);
+            AddTrait(Trait.Warrior);
         }
     }
 }

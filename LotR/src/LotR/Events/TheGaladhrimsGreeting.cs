@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public TheGaladhrimsGreeting()
-            : base("The Galadrim's Greeting", SetNames.Core, 46, Sphere.Spirit, 3)
+            : base("The Galadrim's Greeting", CardSet.Core, 46, Sphere.Spirit, 3)
         {
         }
     }

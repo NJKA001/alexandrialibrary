@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR
+namespace LotR.Choices
 {
-    public interface ISetupCard
-        : ICard
+    public interface IChooseCardsFromDeckSearch
     {
-        ICardEffect Setup { get; }
     }
 }

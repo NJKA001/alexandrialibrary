@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public BladeMastery()
-            : base("Blade Mastery", SetNames.Core, 32, Sphere.Tactics, 1)
+            : base("Blade Mastery", CardSet.Core, 32, Sphere.Tactics, 1)
         {
         }
     }

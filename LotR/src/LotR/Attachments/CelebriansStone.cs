@@ -12,13 +12,13 @@ namespace LotR.Attachments
         : AttachmentCardBase
     {
         public CelebriansStone()
-            : base("Celebrian's Stone", SetNames.Core, 27, Sphere.Leadership, 2, true, true)
+            : base("Celebrian's Stone", CardSet.Core, 27, Sphere.Leadership, 2, true, true)
         {
-            Trait(Traits.Artifact);
-            Trait(Traits.Item);
+            AddTrait(Trait.Artifact);
+            AddTrait(Trait.Item);
 
-            Effect(new AddTwoWillpower(this));
-            Effect(new AragornGetsASpiritResourceIcon(this));
+            AddEffect(new AddTwoWillpower(this));
+            AddEffect(new AragornGetsASpiritResourceIcon(this));
         }
 
         public override bool CanBeAttachedTo(IPhaseStep step, ICardInPlay cardInPlay)

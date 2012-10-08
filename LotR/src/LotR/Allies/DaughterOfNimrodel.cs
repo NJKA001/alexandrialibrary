@@ -9,9 +9,9 @@ namespace LotR.Allies
         : AllyCardBase
     {
         public DaughterOfNimrodel()
-            : base("Daughter of Nimrodel", SetNames.Core, 58, Sphere.Lore, 3, 1, 0, 0, 1)
+            : base("Daughter of Nimrodel", CardSet.Core, 58, Sphere.Lore, 3, 1, 0, 0, 1)
         {
-            Trait(Traits.Silvan);
+            AddTrait(Trait.Silvan);
         }
     }
 }

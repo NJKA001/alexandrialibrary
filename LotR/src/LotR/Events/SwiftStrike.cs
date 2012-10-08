@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public SwiftStrike()
-            : base("Swift Strike", SetNames.Core, 37, Sphere.Tactics, 2)
+            : base("Swift Strike", CardSet.Core, 37, Sphere.Tactics, 2)
         {
         }
     }

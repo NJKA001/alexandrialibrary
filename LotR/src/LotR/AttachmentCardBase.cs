@@ -8,8 +8,8 @@ namespace LotR
     public abstract class AttachmentCardBase
         : CostlyCardBase, IAttachmentCard
     {
-        protected AttachmentCardBase(string title, string setName, uint setNumber, Sphere sphere, byte resourceCost, bool isUnique, bool isRestricted)
-            : base(title, setName, setNumber, sphere, resourceCost)
+        protected AttachmentCardBase(string title, CardSet cardSet, uint cardNumber, Sphere sphere, byte resourceCost, bool isUnique, bool isRestricted)
+            : base(title, cardSet, cardNumber, sphere, resourceCost)
         {
             AddSphereOfInfluence(sphere);
 

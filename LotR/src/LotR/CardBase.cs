@@ -10,25 +10,31 @@ namespace LotR
     public abstract class CardBase
         : ICard
     {
-        protected CardBase(string title, string setName, uint setNumber)
+        protected CardBase(string title, CardSet cardSet, uint cardNumber)
         {
             this.Title = title;
-            this.SetName = setName;
-            this.SetNumber = setNumber;
+            this.CardSet = cardSet;
+            this.CardNumber = cardNumber;
         }
 
         private readonly Guid id = Guid.NewGuid();
         private readonly CardText text = new CardText();
-        private readonly List<Traits> traits = new List<Traits>();
+        private readonly List<Trait> traits = new List<Trait>();
 
-        protected void Trait(Traits trait)
+        protected void AddTrait(Trait trait)
         {
             traits.Add(trait);
         }
 
-        protected void Effect(ICardEffect effect)
+        protected void AddEffect(ICardEffect effect)
         {
             text.AddEffect(effect);
+        }
+
+        protected string FlavorText
+        {
+            get { return text.FlavorText; }
+            set { text.FlavorText = value; }
         }
 
         public Guid Id
@@ -42,13 +48,13 @@ namespace LotR
             private set;
         }
 
-        public string SetName
+        public CardSet CardSet
         {
             get;
             private set;
         }
 
-        public uint SetNumber
+        public uint CardNumber
         {
             get;
             private set;

@@ -9,10 +9,10 @@ namespace LotR.Allies
         : AllyCardBase
     {
         public GuardOfTheCitadel()
-            : base("Guard of the Citadel", SetNames.Core, 13, Sphere.Leadership, 2, 1, 1, 0, 2)
+            : base("Guard of the Citadel", CardSet.Core, 13, Sphere.Leadership, 2, 1, 1, 0, 2)
         {
-            Trait(Traits.Gondor);
-            Trait(Traits.Warrior);
+            AddTrait(Trait.Gondor);
+            AddTrait(Trait.Warrior);
         }
     }
 }

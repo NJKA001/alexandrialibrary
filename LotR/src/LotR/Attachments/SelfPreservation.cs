@@ -9,9 +9,9 @@ namespace LotR.Attachments
         : AttachmentCardBase
     {
         public SelfPreservation()
-            : base("Self Preservation", SetNames.Core, 72, Sphere.Lore, 3, false, false)
+            : base("Self Preservation", CardSet.Core, 72, Sphere.Lore, 3, false, false)
         {
-            Trait(Traits.Skill);
+            AddTrait(Trait.Skill);
         }
 
         public override bool CanBeAttachedTo(IPhaseStep step, ICardInPlay cardInPlay)

@@ -5,9 +5,8 @@ using System.Text;
 
 namespace LotR
 {
-    public interface ICardText
+    public interface IForcedEffect
+        : IPassiveEffect
     {
-        IEnumerable<ICardEffect> Effects { get; }
-        string FlavorText { get; }
     }
 }

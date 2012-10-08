@@ -13,8 +13,8 @@ namespace LotR
         Guid Id { get; }
 
         string Title { get; }
-        string SetName { get; }
-        uint SetNumber { get; }
+        CardSet CardSet { get; }
+        uint CardNumber { get; }
         ICardText Text { get; }
         object Image { get; }
 

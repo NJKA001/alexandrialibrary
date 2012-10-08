@@ -9,9 +9,9 @@ namespace LotR.Allies
         : AllyCardBase
     {
         public WanderingTook()
-            : base("Wandering Took", SetNames.Core, 43, Sphere.Spirit, 2, 1, 1, 1, 2)
+            : base("Wandering Took", CardSet.Core, 43, Sphere.Spirit, 2, 1, 1, 1, 2)
         {
-            Trait(Traits.Hobbit);
+            AddTrait(Trait.Hobbit);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public WillOfTheWest()
-            : base("Will of the West", SetNames.Core, 49, Sphere.Spirit, 1)
+            : base("Will of the West", CardSet.Core, 49, Sphere.Spirit, 1)
         {
         }
     }

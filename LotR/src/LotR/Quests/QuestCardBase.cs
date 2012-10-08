@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR
+namespace LotR.Quests
 {
-    public abstract class QuestBase
+    public abstract class QuestCardBase
         : CardBase, IQuestCard
     {
-        protected QuestBase(string title, string setName, uint setNumber, byte sequence, byte questPoints, byte victoryPoints)
-            : base(title, setName, setNumber)
+        protected QuestCardBase(string title, CardSet cardSet, uint cardNumber, byte sequence, byte questPoints, byte victoryPoints)
+            : base(title, cardSet, cardNumber)
         {
             this.Sequence = sequence;
             this.QuestPoints = questPoints;

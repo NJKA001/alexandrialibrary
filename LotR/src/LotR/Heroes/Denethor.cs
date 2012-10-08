@@ -14,13 +14,13 @@ namespace LotR.Heroes
         : HeroCardBase
     {
         public Denethor()
-            : base("Denethor", SetNames.Core, 10, Sphere.Lore, 8, 1, 1, 3, 3)
+            : base("Denethor", CardSet.Core, 10, Sphere.Lore, 8, 1, 1, 3, 3)
         {
-            Trait(Traits.Gondor);
-            Trait(Traits.Noble);
-            Trait(Traits.Steward);
+            AddTrait(Trait.Gondor);
+            AddTrait(Trait.Noble);
+            AddTrait(Trait.Steward);
 
-            Effect(new ExamineTopCardOfEncounterDeck(this));
+            AddEffect(new ExamineTopCardOfEncounterDeck(this));
         }
 
         public class ExamineTopCardOfEncounterDeck

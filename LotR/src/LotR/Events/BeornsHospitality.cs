@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public BeornsHospitality()
-            : base("Beorn's Hospitality", SetNames.Core, 68, Sphere.Lore, 5)
+            : base("Beorn's Hospitality", CardSet.Core, 68, Sphere.Lore, 5)
         {
         }
     }

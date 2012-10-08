@@ -9,9 +9,9 @@ namespace LotR.Attachments
         : AttachmentCardBase
     {
         public ProtectorOfLorien()
-            : base("Protector of Lorien", SetNames.Core, 70, Sphere.Lore, 1, false, false)
+            : base("Protector of Lorien", CardSet.Core, 70, Sphere.Lore, 1, false, false)
         {
-            Trait(Traits.Title);
+            AddTrait(Trait.Title);
         }
 
         public override bool CanBeAttachedTo(IPhaseStep step, ICardInPlay cardInPlay)

@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public ForGondor()
-            : base("For Gondor!", SetNames.Core, 22, Sphere.Leadership, 2)
+            : base("For Gondor!", CardSet.Core, 22, Sphere.Leadership, 2)
         {
         }
     }

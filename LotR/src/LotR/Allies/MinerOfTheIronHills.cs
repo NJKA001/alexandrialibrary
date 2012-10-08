@@ -9,9 +9,9 @@ namespace LotR.Allies
         : AllyCardBase
     {
         public MinerOfTheIronHills()
-            : base("Miner of the Iron Hills", SetNames.Core, 61, Sphere.Lore, 2, 0, 1, 1, 2)
+            : base("Miner of the Iron Hills", CardSet.Core, 61, Sphere.Lore, 2, 0, 1, 1, 2)
         {
-            Trait(Traits.Dwarf);
+            AddTrait(Trait.Dwarf);
         }
     }
 }

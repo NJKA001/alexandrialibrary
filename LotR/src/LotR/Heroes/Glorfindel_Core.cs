@@ -15,11 +15,11 @@ namespace LotR.Heroes
         : HeroCardBase
     {
         public Glorfindel_Core()
-            : base("Glorfindel", SetNames.Core, 11, Sphere.Lore, 12, 3, 3, 1, 5)
+            : base("Glorfindel", CardSet.Core, 11, Sphere.Lore, 12, 3, 3, 1, 5)
         {
-            Trait(Traits.Noble);
-            Trait(Traits.Noldor);
-            Trait(Traits.Warrior);
+            AddTrait(Trait.Noble);
+            AddTrait(Trait.Noldor);
+            AddTrait(Trait.Warrior);
         }
 
         private class PayOneResourceToHealCharacter

@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public CommonCause()
-            : base("Common Cause", SetNames.Core, 21, Sphere.Leadership, 0)
+            : base("Common Cause", CardSet.Core, 21, Sphere.Leadership, 0)
         {
         }
     }

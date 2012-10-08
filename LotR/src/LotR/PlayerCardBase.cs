@@ -8,8 +8,8 @@ namespace LotR
     public abstract class PlayerCardBase
         : CardBase, IPlayerCard
     {
-        protected PlayerCardBase(string title, string setName, uint setNumber)
-            : base(title, setName, setNumber)
+        protected PlayerCardBase(string title, CardSet cardSet, uint cardNumber)
+            : base(title, cardSet, cardNumber)
         {
         }
 

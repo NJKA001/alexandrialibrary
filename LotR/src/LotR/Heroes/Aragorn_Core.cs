@@ -14,13 +14,13 @@ namespace LotR.Heroes
         : HeroCardBase, IAfterCommittingToQuest
     {
         public Aragorn()
-            : base("Aragorn", SetNames.Core, 1, Sphere.Leadership, 12, 2, 3, 2, 5)
+            : base("Aragorn", CardSet.Core, 1, Sphere.Leadership, 12, 2, 3, 2, 5)
         {
-            Trait(Traits.Dunedain);
-            Trait(Traits.Noble);
-            Trait(Traits.Ranger);
+            AddTrait(Trait.Dunedain);
+            AddTrait(Trait.Noble);
+            AddTrait(Trait.Ranger);
 
-            Effect(new SentinelAbility(this));
+            AddEffect(new SentinelAbility(this));
         }
 
         public void AfterCommittingToQuest(ICommitToQuestStep step)

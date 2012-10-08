@@ -13,13 +13,13 @@ namespace LotR.Attachments
         : AttachmentCardBase
     {
         public BladeOfGondolin()
-            : base("Blade of Gondolin", SetNames.Core, 39, Sphere.Tactics, 1, false, true)
+            : base("Blade of Gondolin", CardSet.Core, 39, Sphere.Tactics, 1, false, true)
         {
-            Trait(Traits.Item);
-            Trait(Traits.Weapon);
+            AddTrait(Trait.Item);
+            AddTrait(Trait.Weapon);
 
-            Effect(new AddOneAttackWhenAttackingAnOrc(this));
-            Effect(new AddOneProgressTokenAfterDefeatingAnEnemy(this));
+            AddEffect(new AddOneAttackWhenAttackingAnOrc(this));
+            AddEffect(new AddOneProgressTokenAfterDefeatingAnEnemy(this));
         }
 
         public override bool CanBeAttachedTo(IPhaseStep step, ICardInPlay cardInPlay)
@@ -42,7 +42,7 @@ namespace LotR.Attachments
             {
                 if (step.Target != null)
                 {
-                    var traitStep = new CheckForTraitStep(step.Phase, step.Player, step.Target, Traits.Orc);
+                    var traitStep = new CheckForTraitStep(step.Phase, step.Player, step.Target, Trait.Orc);
                     step.Target.Card.CheckForTrait(traitStep);
 
                     if (traitStep.HasTrait)

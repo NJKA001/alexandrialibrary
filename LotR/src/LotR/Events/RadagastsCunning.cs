@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public RadagastsCunning()
-            : base("Radagast's Cunning", SetNames.Core, 65, Sphere.Lore, 1)
+            : base("Radagast's Cunning", CardSet.Core, 65, Sphere.Lore, 1)
         {
         }
     }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LotR
 {
-    public enum Traits
+    public enum Trait
     {
         Archer,
         Armor,
@@ -30,6 +30,7 @@ namespace LotR
         Silvan,
         Skill,
         Song,
+        Spider,
         Steward,
         Title,
         Trap,

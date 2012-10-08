@@ -9,9 +9,9 @@ namespace LotR.Attachments
         : AttachmentCardBase
     {
         public UnexpectedCourage()
-            : base("Unexpected Courage", SetNames.Core, 57, Sphere.Spirit, 2, false, false)
+            : base("Unexpected Courage", CardSet.Core, 57, Sphere.Spirit, 2, false, false)
         {
-            Trait(Traits.Condition);
+            AddTrait(Trait.Condition);
         }
 
         public override bool CanBeAttachedTo(IPhaseStep step, ICardInPlay cardInPlay)

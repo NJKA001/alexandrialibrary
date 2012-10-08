@@ -9,10 +9,10 @@ namespace LotR.Allies
         : AllyCardBase
     {
         public SnowbornScout()
-            : base("Snowborn Scout", SetNames.Core, 16, Sphere.Leadership, 1, 0, 0, 1, 1)
+            : base("Snowborn Scout", CardSet.Core, 16, Sphere.Leadership, 1, 0, 0, 1, 1)
         {
-            Trait(Traits.Rohan);
-            Trait(Traits.Scout);
+            AddTrait(Trait.Rohan);
+            AddTrait(Trait.Scout);
         }
     }
 }

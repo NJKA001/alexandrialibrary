@@ -9,7 +9,7 @@ namespace LotR.Phases.Any
         : IPhaseStep
     {
         ICardInPlay CardInPlay { get; }
-        Traits Trait { get; }
+        Trait Trait { get; }
         bool HasTrait { get; set; }
     }
 }

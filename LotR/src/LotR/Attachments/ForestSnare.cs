@@ -9,10 +9,10 @@ namespace LotR.Attachments
         : AttachmentCardBase
     {
         public ForestSnare()
-            : base("Forest Snare", SetNames.Core, 69, Sphere.Lore, 3, false, false)
+            : base("Forest Snare", CardSet.Core, 69, Sphere.Lore, 3, false, false)
         {
-            Trait(Traits.Item);
-            Trait(Traits.Trap);
+            AddTrait(Trait.Item);
+            AddTrait(Trait.Trap);
         }
 
         public override bool CanBeAttachedTo(IPhaseStep step, ICardInPlay cardInPlay)

@@ -12,10 +12,10 @@ namespace LotR.Heroes
         : HeroCardBase, IAfterDamageDealtToCharacter
     {
         public Gloin()
-            : base("Gloin", SetNames.Core, 3, Sphere.Leadership, 9, 2, 2, 1, 4)
+            : base("Gloin", CardSet.Core, 3, Sphere.Leadership, 9, 2, 2, 1, 4)
         {
-            Trait(Traits.Dwarf);
-            Trait(Traits.Noble);
+            AddTrait(Trait.Dwarf);
+            AddTrait(Trait.Noble);
         }
 
         #region Abilities

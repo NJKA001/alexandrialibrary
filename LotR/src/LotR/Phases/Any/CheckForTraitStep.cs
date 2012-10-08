@@ -8,7 +8,7 @@ namespace LotR.Phases.Any
     public class CheckForTraitStep
         : PhaseStepBase, ICheckForTraitStep
     {
-        public CheckForTraitStep(IPhase phase, IPlayer player, ICardInPlay cardInPlay, Traits trait)
+        public CheckForTraitStep(IPhase phase, IPlayer player, ICardInPlay cardInPlay, Trait trait)
             : base(phase, player)
         {
             this.CardInPlay = cardInPlay;
@@ -21,7 +21,7 @@ namespace LotR.Phases.Any
             private set;
         }
 
-        public Traits Trait
+        public Trait Trait
         {
             get;
             private set;

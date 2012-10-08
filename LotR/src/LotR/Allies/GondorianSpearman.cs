@@ -9,10 +9,10 @@ namespace LotR.Allies
         : AllyCardBase
     {
         public GondorianSpearman()
-            : base("Gondorian Spearman", SetNames.Core, 29, Sphere.Tactics, 2, 0, 1, 1, 1)
+            : base("Gondorian Spearman", CardSet.Core, 29, Sphere.Tactics, 2, 0, 1, 1, 1)
         {
-            Trait(Traits.Gondor);
-            Trait(Traits.Warrior);
+            AddTrait(Trait.Gondor);
+            AddTrait(Trait.Warrior);
         }
     }
 }

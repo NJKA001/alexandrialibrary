@@ -12,14 +12,14 @@ namespace LotR.Heroes
         : HeroCardBase
     {
         public Legolas()
-            : base("Legolas", SetNames.Core, 5, Sphere.Tactics, 9, 1, 3, 1, 4)
+            : base("Legolas", CardSet.Core, 5, Sphere.Tactics, 9, 1, 3, 1, 4)
         {
-            Trait(Traits.Noble);
-            Trait(Traits.Silvan);
-            Trait(Traits.Warrior);
+            AddTrait(Trait.Noble);
+            AddTrait(Trait.Silvan);
+            AddTrait(Trait.Warrior);
 
-            Effect(new RangedAbility(this));
-            Effect(new AddTwoProgressTokensAfterDefeatingAnEnemy(this));
+            AddEffect(new RangedAbility(this));
+            AddEffect(new AddTwoProgressTokensAfterDefeatingAnEnemy(this));
         }
 
         public class AddTwoProgressTokensAfterDefeatingAnEnemy

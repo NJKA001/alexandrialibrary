@@ -6,7 +6,7 @@ using System.Text;
 namespace LotR.Effects
 {
     public abstract class ForcedCharacterAbilityBase
-        : PassiveCharacterAbilityBase, IForced
+        : PassiveCharacterAbilityBase, IForcedEffect
     {
         protected ForcedCharacterAbilityBase(string description, IPlayerCard source)
             : base(description, source)

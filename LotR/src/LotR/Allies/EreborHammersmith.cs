@@ -9,10 +9,10 @@ namespace LotR.Allies
         : AllyCardBase
     {
         public EreborHammersmith()
-            : base("Erebor Hammersmith", SetNames.Core, 59, Sphere.Lore, 2, 1, 1, 1, 3)
+            : base("Erebor Hammersmith", CardSet.Core, 59, Sphere.Lore, 2, 1, 1, 1, 3)
         {
-            Trait(Traits.Dwarf);
-            Trait(Traits.Craftsman);
+            AddTrait(Trait.Dwarf);
+            AddTrait(Trait.Craftsman);
         }
     }
 }

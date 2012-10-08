@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public StrengthOfWill()
-            : base("Strength of Will", SetNames.Core, 47, Sphere.Spirit, 0)
+            : base("Strength of Will", CardSet.Core, 47, Sphere.Spirit, 0)
         {
         }
     }

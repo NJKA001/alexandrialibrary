@@ -24,6 +24,12 @@ namespace LotR
             get { return effects; }
         }
 
+        public string FlavorText
+        {
+            get;
+            set;
+        }
+
         public void AddEffect(ICardEffect effect)
         {
             effects.Add(effect);

@@ -9,10 +9,10 @@ namespace LotR.Allies
         : AllyCardBase
     {
         public VeteranAxehand()
-            : base("Veteran Axehand", SetNames.Core, 28, Sphere.Tactics, 2, 0, 2, 1, 2)
+            : base("Veteran Axehand", CardSet.Core, 28, Sphere.Tactics, 2, 0, 2, 1, 2)
         {
-            Trait(Traits.Dwarf);
-            Trait(Traits.Warrior);
+            AddTrait(Trait.Dwarf);
+            AddTrait(Trait.Warrior);
         }
     }
 }

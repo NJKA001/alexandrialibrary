@@ -43,7 +43,7 @@ namespace LotR
 
         private string GetPlayerCardKey(IPlayerCard card)
         {
-            return string.Format("{0} ({1})", card.Title, card.SetName);
+            return string.Format("{0} ({1})", card.Title, card.CardSet);
         }
 
         private void InitializeCards()
@@ -73,13 +73,18 @@ namespace LotR
             }
             else if (!title.Contains('('))
             {
-                var coreKey = title + " (Core)";
-                if (playerCardMap.ContainsKey(coreKey))
-                    return playerCardMap[coreKey];
+                var allSets = (CardSet[])Enum.GetValues(typeof(CardSet));
+                var lastSet = allSets[allSets.Length - 1];
 
-                var soMKey = title + " (SoM)";
-                if (playerCardMap.ContainsKey(soMKey))
-                    return playerCardMap[soMKey];
+                for (var i = 1; i <= (int)lastSet; i++)
+                {
+                    var cardSet = (CardSet)i;
+                    key = string.Format("{0} ({1})", title, cardSet);
+                    if (playerCardMap.ContainsKey(key))
+                    {
+                        return playerCardMap[key];
+                    }
+                }
             }
             
             return card;
@@ -207,7 +212,7 @@ namespace LotR
                                         {
                                             cards.Insert(0, card);
                                         }
-                                        else if (i == 3)
+                                        else if (i == 2)
                                         {
                                             if (cards.Count > 2)
                                             {

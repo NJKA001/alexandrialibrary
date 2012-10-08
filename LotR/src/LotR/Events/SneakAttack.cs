@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public SneakAttack()
-            : base("Sneak Attack", SetNames.Core, 23, Sphere.Leadership, 1)
+            : base("Sneak Attack", CardSet.Core, 23, Sphere.Leadership, 1)
         {
         }
     }

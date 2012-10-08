@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public StandAndFight()
-            : base("Stand and Fight", SetNames.Core, 51, Sphere.Spirit, 0)
+            : base("Stand and Fight", CardSet.Core, 51, Sphere.Spirit, 0)
         {
             HasVariableCost = true;
         }

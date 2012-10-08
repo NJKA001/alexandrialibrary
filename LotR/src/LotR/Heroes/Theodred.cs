@@ -15,13 +15,13 @@ namespace LotR.Heroes
         : HeroCardBase
     {
         public Theodred()
-            : base("Theodred", SetNames.Core, 2, Sphere.Leadership, 8, 1, 2, 1, 4)
+            : base("Theodred", CardSet.Core, 2, Sphere.Leadership, 8, 1, 2, 1, 4)
         {
-            Trait(Traits.Noble);
-            Trait(Traits.Rohan);
-            Trait(Traits.Warrior);
+            AddTrait(Trait.Noble);
+            AddTrait(Trait.Rohan);
+            AddTrait(Trait.Warrior);
 
-            Effect(new AddResourceToCommittedHero(this));
+            AddEffect(new AddResourceToCommittedHero(this));
         }
 
         #region Abilities

@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public DwarvenTomb()
-            : base("Dwarven Tomb", SetNames.Core, 53, Sphere.Spirit, 1)
+            : base("Dwarven Tomb", CardSet.Core, 53, Sphere.Spirit, 1)
         {
         }
     }

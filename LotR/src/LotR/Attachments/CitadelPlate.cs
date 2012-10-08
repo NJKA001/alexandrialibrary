@@ -9,10 +9,10 @@ namespace LotR.Attachments
         : AttachmentCardBase
     {
         public CitadelPlate()
-            : base("Citadel Plate", SetNames.Core, 40, Sphere.Tactics, 4, false, true)
+            : base("Citadel Plate", CardSet.Core, 40, Sphere.Tactics, 4, false, true)
         {
-            Trait(Traits.Item);
-            Trait(Traits.Armor);
+            AddTrait(Trait.Item);
+            AddTrait(Trait.Armor);
         }
 
         public override bool CanBeAttachedTo(IPhaseStep step, ICardInPlay cardInPlay)

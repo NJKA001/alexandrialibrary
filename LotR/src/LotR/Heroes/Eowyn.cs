@@ -13,12 +13,12 @@ namespace LotR.Heroes
         : HeroCardBase
     {
         public Eowyn()
-            : base("Eowyn", SetNames.Core, 7, Sphere.Spirit, 9, 4, 1, 1, 3)
+            : base("Eowyn", CardSet.Core, 7, Sphere.Spirit, 9, 4, 1, 1, 3)
         {
-            Trait(Traits.Noble);
-            Trait(Traits.Rohan);
+            AddTrait(Trait.Noble);
+            AddTrait(Trait.Rohan);
 
-            Effect(new DiscardACardToAddOneWillpower(this));
+            AddEffect(new DiscardACardToAddOneWillpower(this));
         }
 
         public class DiscardACardToAddOneWillpower

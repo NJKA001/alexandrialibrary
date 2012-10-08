@@ -9,6 +9,8 @@ namespace LotR
     {
         None = 0,
         Controller = 1,
-        AnyPlayer = 2
+        OnePlayer = 2,
+        AnyPlayer = 3,
+        AllPlayers = 4
     }
 }

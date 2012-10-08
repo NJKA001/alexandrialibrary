@@ -9,9 +9,9 @@ namespace LotR.Attachments
         : AttachmentCardBase
     {
         public TheFavorOfTheLady()
-            : base("The Favor of the Lady", SetNames.Core, 55, Sphere.Spirit, 2, false, false)
+            : base("The Favor of the Lady", CardSet.Core, 55, Sphere.Spirit, 2, false, false)
         {
-            Trait(Traits.Condition);
+            AddTrait(Trait.Condition);
         }
 
         public override bool CanBeAttachedTo(IPhaseStep step, ICardInPlay cardInPlay)

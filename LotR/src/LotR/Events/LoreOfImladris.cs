@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public LoreOfImladris()
-            : base("Lore of Imladris", SetNames.Core, 63, Sphere.Lore, 2)
+            : base("Lore of Imladris", CardSet.Core, 63, Sphere.Lore, 2)
         {
         }
     }

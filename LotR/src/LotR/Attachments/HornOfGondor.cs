@@ -9,10 +9,10 @@ namespace LotR.Attachments
         : AttachmentCardBase
     {
         public HornOfGondor()
-            : base("Horn of Gondor", SetNames.Core, 42, Sphere.Tactics, 1, true, true)
+            : base("Horn of Gondor", CardSet.Core, 42, Sphere.Tactics, 1, true, true)
         {
-            Trait(Traits.Item);
-            Trait(Traits.Artifact);
+            AddTrait(Trait.Item);
+            AddTrait(Trait.Artifact);
         }
 
         public override bool CanBeAttachedTo(IPhaseStep step, ICardInPlay cardInPlay)

@@ -14,12 +14,12 @@ namespace LotR.Heroes
         : HeroCardBase
     {
         public Eleanor()
-            : base("Eleanor", SetNames.Core, 8, Sphere.Spirit, 7, 1, 1, 2, 3)
+            : base("Eleanor", CardSet.Core, 8, Sphere.Spirit, 7, 1, 1, 2, 3)
         {
-            Trait(Traits.Gondor);
-            Trait(Traits.Noble);
+            AddTrait(Trait.Gondor);
+            AddTrait(Trait.Noble);
 
-            Effect(new CancelWhenRevealedTreachery(this));
+            AddEffect(new CancelWhenRevealedTreachery(this));
         }
 
         public class CancelWhenRevealedTreachery

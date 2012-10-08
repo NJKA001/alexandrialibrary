@@ -10,8 +10,8 @@ namespace LotR
     public abstract class AllyCardBase
         : CharacterCardBase, IAllyCard
     {
-        protected AllyCardBase(string title, string setName, uint setNumber, Sphere sphere, byte resourceCost, byte willpower, byte attack, byte defense, byte hitPoints)
-            : base(title, setName, setNumber, willpower, attack, defense, hitPoints)
+        protected AllyCardBase(string title, CardSet cardSet, uint cardNumber, Sphere sphere, byte resourceCost, byte willpower, byte attack, byte defense, byte hitPoints)
+            : base(title, cardSet, cardNumber, willpower, attack, defense, hitPoints)
         {
             this.resourceCost = resourceCost;
 

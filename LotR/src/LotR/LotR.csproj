@@ -81,6 +81,7 @@
     <Compile Include="Choices\ChooseCharacter.cs" />
     <Compile Include="Choices\ChoosePlayer.cs" />
     <Compile Include="Choices\IChooseAlly.cs" />
+    <Compile Include="Choices\IChooseCardsFromDeckSearch.cs" />
     <Compile Include="Choices\IChooseCharacter.cs" />
     <Compile Include="Choices\IChooseEnemy.cs" />
     <Compile Include="Choices\IChooseHero.cs" />
@@ -162,7 +163,7 @@
     <Compile Include="Heroes\Gloin.cs" />
     <Compile Include="Heroes\Legolas.cs" />
     <Compile Include="Heroes\Thalin.cs" />
-    <Compile Include="IAction.cs" />
+    <Compile Include="IActionEffect.cs" />
     <Compile Include="IAttackingCard.cs" />
     <Compile Include="IChoice.cs" />
     <Compile Include="IPlayerLoader.cs" />
@@ -184,7 +185,7 @@
     <Compile Include="IDefendingCard.cs" />
     <Compile Include="IEnemyInPlay.cs" />
     <Compile Include="ILimit.cs" />
-    <Compile Include="ISetupCard.cs" />
+    <Compile Include="ISetupEffect.cs" />
     <Compile Include="IWillpowerfulCard.cs" />
     <Compile Include="Payments\IChooseEnemyPayment.cs" />
     <Compile Include="Payments\IResourcePayment.cs" />
@@ -227,11 +228,14 @@
     <Compile Include="Phases\Combat\IEnemyDefeatedStep.cs" />
     <Compile Include="Phases\PhaseStepBase.cs" />
     <Compile Include="Phases\Quest\IQuestPhase.cs" />
+    <Compile Include="Phases\Setup\ISetupScenarioStep.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerLoader.cs" />
     <Compile Include="PlayerScope.cs" />
-    <Compile Include="SentinelAbility.cs" />
+    <Compile Include="Quests\FliesAndSpiders.cs" />
+    <Compile Include="Effects\SentinelAbility.cs" />
     <Compile Include="CharacterCardBase.cs" />
+    <Compile Include="Scenarios\PassageThroughMirkwood.cs" />
     <Compile Include="TimeScope.cs" />
     <Compile Include="HeroCardBase.cs" />
     <Compile Include="Heroes\Theodred.cs" />
@@ -262,7 +266,7 @@
     <Compile Include="IEventCard.cs" />
     <Compile Include="IExhaustableCard.cs" />
     <Compile Include="Payments\IExhaustCardPayment.cs" />
-    <Compile Include="IForced.cs" />
+    <Compile Include="IForcedEffect.cs" />
     <Compile Include="IGame.cs" />
     <Compile Include="IGuardedCard.cs" />
     <Compile Include="IGuardedInPlay.cs" />
@@ -365,11 +369,16 @@
     <Compile Include="Phases\Travel\IDuringTraveling.cs" />
     <Compile Include="PlayerCardBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QuestBase.cs" />
-    <Compile Include="ScenarioBase.cs" />
-    <Compile Include="SetNames.cs" />
+    <Compile Include="Quests\QuestCardBase.cs" />
+    <Compile Include="Scenarios\ScenarioBase.cs" />
+    <Compile Include="CardSet.cs" />
     <Compile Include="Sphere.cs" />
-    <Compile Include="Traits.cs" />
+    <Compile Include="Trait.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Enemies\" />
+    <Folder Include="Locations\" />
+    <Folder Include="Treacheries\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

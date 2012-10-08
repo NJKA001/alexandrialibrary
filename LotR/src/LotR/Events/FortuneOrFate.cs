@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public FortuneOrFate()
-            : base("Fortune or Fate", SetNames.Core, 54, Sphere.Spirit, 5)
+            : base("Fortune or Fate", CardSet.Core, 54, Sphere.Spirit, 5)
         {
         }
     }

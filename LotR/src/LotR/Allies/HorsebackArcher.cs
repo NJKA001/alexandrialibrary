@@ -11,12 +11,12 @@ namespace LotR.Allies
         : AllyCardBase
     {
         public HorsebackArcher()
-            : base("Horseback Archer", SetNames.Core, 30, Sphere.Tactics, 3, 0, 2, 1, 2)
+            : base("Horseback Archer", CardSet.Core, 30, Sphere.Tactics, 3, 0, 2, 1, 2)
         {
-            Trait(Traits.Rohan);
-            Trait(Traits.Archer);
+            AddTrait(Trait.Rohan);
+            AddTrait(Trait.Archer);
 
-            Effect(new RangedAbility(this));
+            AddEffect(new RangedAbility(this));
         }
     }
 }

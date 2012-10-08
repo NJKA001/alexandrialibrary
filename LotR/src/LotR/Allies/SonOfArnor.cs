@@ -9,9 +9,9 @@ namespace LotR.Allies
         : AllyCardBase
     {
         public SonOfArnor()
-            : base("Son of Arnor", SetNames.Core, 15, Sphere.Leadership, 3, 0, 2, 0, 2)
+            : base("Son of Arnor", CardSet.Core, 15, Sphere.Leadership, 3, 0, 2, 0, 2)
         {
-            Trait(Traits.Dunedain);
+            AddTrait(Trait.Dunedain);
         }
     }
 }

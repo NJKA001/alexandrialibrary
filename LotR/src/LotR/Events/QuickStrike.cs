@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public QuickStrike()
-            : base("Quick Strike", SetNames.Core, 35, Sphere.Tactics, 1)
+            : base("Quick Strike", CardSet.Core, 35, Sphere.Tactics, 1)
         {
         }
     }

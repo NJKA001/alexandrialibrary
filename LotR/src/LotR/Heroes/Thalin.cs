@@ -15,12 +15,12 @@ namespace LotR.Heroes
         : HeroCardBase
     {
         public Thalin()
-            : base("Thalin", SetNames.Core, 6, Sphere.Tactics, 9, 1, 2, 2, 4)
+            : base("Thalin", CardSet.Core, 6, Sphere.Tactics, 9, 1, 2, 2, 4)
         {
-            Trait(Traits.Dwarf);
-            Trait(Traits.Warrior);
+            AddTrait(Trait.Dwarf);
+            AddTrait(Trait.Warrior);
 
-            Effect(new DealOneDamageToEachEnemyRevealedWhileThalinIsCommitedToQuest(this));
+            AddEffect(new DealOneDamageToEachEnemyRevealedWhileThalinIsCommitedToQuest(this));
         }
 
         public class DealOneDamageToEachEnemyRevealedWhileThalinIsCommitedToQuest

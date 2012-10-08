@@ -9,7 +9,7 @@ namespace LotR.Events
         : EventCardBase
     {
         public RainOfArrows()
-            : base("Rain of Arrows", SetNames.Core, 33, Sphere.Tactics, 1)
+            : base("Rain of Arrows", CardSet.Core, 33, Sphere.Tactics, 1)
         {
         }
     }

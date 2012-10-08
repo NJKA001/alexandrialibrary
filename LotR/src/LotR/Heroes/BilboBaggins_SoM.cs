@@ -12,9 +12,9 @@ namespace LotR.Heroes
         : HeroCardBase, IDuringDrawingCards
     {
         public BilboBaggins_SoM()
-            : base("Bilbo Baggins", SetNames.Shadows_of_Mirkwood, 1, Sphere.Lore, 9, 1, 1, 2, 2)
+            : base("Bilbo Baggins", CardSet.SoM, 1, Sphere.Lore, 9, 1, 1, 2, 2)
         {
-            Trait(Traits.Hobbit);
+            AddTrait(Trait.Hobbit);
         }
 
         public void DuringDrawingCards(IDrawCardsStep step)

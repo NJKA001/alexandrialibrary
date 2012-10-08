@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LotR
 {
-    public interface IAction
+    public interface IActionEffect
         : IActiveEffect
     {
     }

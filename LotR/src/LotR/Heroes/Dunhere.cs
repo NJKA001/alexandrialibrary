@@ -13,13 +13,13 @@ namespace LotR.Heroes
         : HeroCardBase
     {
         public Dunhere()
-            : base("Dunhere", SetNames.Core, 9, Sphere.Spirit, 8, 1, 2, 1, 4)
+            : base("Dunhere", CardSet.Core, 9, Sphere.Spirit, 8, 1, 2, 1, 4)
         {
-            Trait(Traits.Rohan);
-            Trait(Traits.Warrior);
+            AddTrait(Trait.Rohan);
+            AddTrait(Trait.Warrior);
 
-            Effect(new CanAttackEnemiesInTheStagingArea(this));
-            Effect(new PlusOneAttackWhenAttackingAnEnemyInTheStagingArea(this));
+            AddEffect(new CanAttackEnemiesInTheStagingArea(this));
+            AddEffect(new PlusOneAttackWhenAttackingAnEnemyInTheStagingArea(this));
         }
 
         public class CanAttackEnemiesInTheStagingArea

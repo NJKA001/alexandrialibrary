@@ -10,8 +10,8 @@ namespace LotR
     public abstract class CostlyCardBase
         : PlayerCardBase, ICostlyCard
     {
-        protected CostlyCardBase(string title, string setName, uint setNumber, Sphere sphere, byte resourceCost)
-            : base(title, setName, setNumber)
+        protected CostlyCardBase(string title, CardSet cardSet, uint cardNumber, Sphere sphere, byte resourceCost)
+            : base(title, cardSet, cardNumber)
         {
             this.resourceCost = resourceCost;
         }
