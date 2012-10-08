@@ -41,6 +41,11 @@ namespace LotR
                 && testType.IsInterface == false;
         }
 
+        private string GetPlayerCardKey(IPlayerCard card)
+        {
+            return string.Format("{0} ({1})", card.Title, card.SetName);
+        }
+
         private void InitializeCards()
         {
             foreach (var type in GetPlayerCards())
@@ -52,9 +57,32 @@ namespace LotR
                 var playerCard = ctor.Invoke(null) as IPlayerCard;
                 if (playerCard == null)
                     continue;
-
-                playerCardMap[playerCard.Title] = playerCard;
+                
+                playerCardMap[GetPlayerCardKey(playerCard)] = playerCard;
             }
+        }
+
+        private IPlayerCard LookupPlayerCard(string title)
+        {
+            var key = title;
+            IPlayerCard card = null;
+            
+            if (playerCardMap.ContainsKey(key))
+            {
+                return playerCardMap[key]; 
+            }
+            else if (!title.Contains('('))
+            {
+                var coreKey = title + " (Core)";
+                if (playerCardMap.ContainsKey(coreKey))
+                    return playerCardMap[coreKey];
+
+                var soMKey = title + " (SoM)";
+                if (playerCardMap.ContainsKey(soMKey))
+                    return playerCardMap[soMKey];
+            }
+            
+            return card;
         }
 
         private enum LineMode
@@ -120,16 +148,81 @@ namespace LotR
                         {
                             if (lineMode == LineMode.Player)
                             {
-                                name = lineTokens[1];
+                                name = lineTokens[1].Trim();
                             }
                             else if (lineMode == LineMode.Heroes)
                             {
                                 var heroTokens = lineTokens[1].Split(',');
+                                foreach (var heroToken in heroTokens.Where(x => x != null))
+                                {
+                                    var heroTitle = heroToken.Trim();
+                                    var hero = LookupPlayerCard(heroTitle) as IHeroCard;
+                                    if (hero != null)
+                                    {
+                                        startingHeroes.Add(hero);
+                                    }
+                                }
                             }
                         }
                     }
                     else
                     {
+                        if (lineMode == LineMode.Player)
+                        {
+                            name = line.Trim();
+                        }
+                        else if (lineMode == LineMode.Heroes)
+                        {
+                            var hero = LookupPlayerCard(line.Trim()) as IHeroCard;
+                            if (hero != null)
+                            {
+                                startingHeroes.Add(hero);
+                            }
+                        }
+                        else if (lineMode == LineMode.Cards)
+                        {
+                            var cardTokens = line.Split(new string[] { "\t", "  " }, StringSplitOptions.RemoveEmptyEntries);
+                            if (cardTokens != null && cardTokens.Length > 0)
+                            {
+                                var number = 1;
+                                if (cardTokens.Length > 1)
+                                {
+                                    int.TryParse(cardTokens[1], out number);
+                                    if (number < 1 || number > 3)
+                                    {
+                                        number = 1;
+                                    }
+                                }
+
+                                for (var i = 0; i < number; i++)
+                                {
+                                    var card = LookupPlayerCard(cardTokens[0].Trim());
+                                    if (card != null)
+                                    {
+                                        if (i == 0)
+                                        {
+                                            cards.Add(card);
+                                        }
+                                        else if (i == 1)
+                                        {
+                                            cards.Insert(0, card);
+                                        }
+                                        else if (i == 3)
+                                        {
+                                            if (cards.Count > 2)
+                                            {
+                                                var index = (int)Math.Floor((decimal)cards.Count / 2);
+                                                cards.Insert(index, card);
+                                            }
+                                            else
+                                            {
+                                                cards.Add(card);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

@@ -24,6 +24,16 @@ namespace LotR
             set;
         }
 
+        public Sphere BaseResourceSphere
+        {
+            get { return SpheresOfInfluence.FirstOrDefault(); }
+        }
+
+        public byte BaseResourceCost
+        {
+            get { return resourceCost; }
+        }
+
         public virtual ICost GetResourceCost(IPhaseStep step)
         {
             return new PayResources(this, SpheresOfInfluence.FirstOrDefault(), resourceCost);

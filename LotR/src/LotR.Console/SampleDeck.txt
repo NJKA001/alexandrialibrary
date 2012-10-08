@@ -8,16 +8,16 @@ Beorn  1
 Faramir  1
 Veteran Axehand  3
 Snowborn Scout  3
-Gandalf (Core) 3
+Gandalf (Core)  3
 Horseback Archer  3
 Guard of the Citadel  3
 
 Attachments 15: 
-Celebrian's Stone  3
+Celebrian's Stone  1
 Steward of Gondor  3
 Blade of Gondolin  2
-Citadel Plate  2
-Dwarven Axe  2
+Citadel Plate  3
+Dwarven Axe  3
 Horn of Gondor  3
 
 
