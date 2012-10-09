@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Games;
+using LotR.Games.Phases;
+
 namespace LotR.Effects
 {
     public class ReadyCards
         : ReversableEffectBase, IReadyCards
     {
-        public ReadyCards(IPhaseStep step, IEnumerable<IExhaustableCard> targets)
+        public ReadyCards(IPhaseStep step, IEnumerable<IExhaustableInPlay> targets)
             : base("Ready cards")
         {
             this.step = step;
@@ -18,7 +21,7 @@ namespace LotR.Effects
         private readonly IPhaseStep step;
         private readonly IDictionary<Guid, bool> wasReadied = new Dictionary<Guid, bool>();
 
-        public IEnumerable<IExhaustableCard> Targets
+        public IEnumerable<IExhaustableInPlay> Targets
         {
             get;
             private set;

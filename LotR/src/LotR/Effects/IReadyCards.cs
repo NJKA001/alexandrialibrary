@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Games;
+
 namespace LotR.Effects
 {
     public interface IReadyCards
         : IReversableEffect
     {
-        IEnumerable<IExhaustableCard> Targets { get; }
+        IEnumerable<IExhaustableInPlay> Targets { get; }
     }
 }

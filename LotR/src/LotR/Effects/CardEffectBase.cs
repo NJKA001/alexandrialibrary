@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards;
+
 namespace LotR.Effects
 {
     public abstract class CardEffectBase
         : EffectBase, ICardEffect
     {
-        protected CardEffectBase(string description, ICard source)
+        protected CardEffectBase(string description, ISource source)
             : base(description)
         {
             Source = source;
         }
 
-        public ICard Source
+        public ISource Source
         {
             get;
             private set;

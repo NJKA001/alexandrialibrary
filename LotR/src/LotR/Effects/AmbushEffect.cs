@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards;
+
 namespace LotR.Effects
 {
     public class AmbushEffect
         : CardEffectBase, IAmbushEffect
     {
-        public AmbushEffect(ICard source)
+        public AmbushEffect(ISource source)
             : base("Ambush", source)
         {
         }

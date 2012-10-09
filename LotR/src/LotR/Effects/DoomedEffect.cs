@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards.Encounter;
+
 namespace LotR.Effects
 {
     public class DoomedEffect

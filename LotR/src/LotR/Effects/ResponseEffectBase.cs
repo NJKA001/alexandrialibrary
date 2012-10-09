@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards;
+
 namespace LotR.Effects
 {
     public abstract class ResponseEffectBase
-        : CardEffectBase, IResponse
+        : CardEffectBase, IResponseEffect
     {
-        protected ResponseEffectBase(string description, ICard source)
+        protected ResponseEffectBase(string description, ISource source)
             : base(description, source)
         {
         }

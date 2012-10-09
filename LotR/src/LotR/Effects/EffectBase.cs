@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Effects.Choices;
+using LotR.Effects.Costs;
+using LotR.Effects.Payments;
+using LotR.Games.Phases;
+
 namespace LotR.Effects
 {
     public abstract class EffectBase
