@@ -5,7 +5,7 @@ using System.Text;
 
 using LotR.Cards;
 using LotR.Effects.Payments;
-using LotR.Games.Phases;
+using LotR.Effects.Phases;
 
 namespace LotR.Effects.Costs
 {

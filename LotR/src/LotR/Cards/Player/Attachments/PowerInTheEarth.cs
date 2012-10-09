@@ -5,7 +5,7 @@ using System.Text;
 
 using LotR.Cards.Encounter.Locations;
 using LotR.Games;
-using LotR.Games.Phases;
+using LotR.Effects.Phases;
 
 namespace LotR.Cards.Player.Attachments
 {

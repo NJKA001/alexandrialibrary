@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
+using LotR.Cards.Player;
 using LotR.Effects.Payments;
 
 namespace LotR.Effects.Costs

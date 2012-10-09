@@ -6,8 +6,8 @@ using System.Text;
 using LotR.Cards.Player.Heroes;
 using LotR.Effects;
 using LotR.Games;
-using LotR.Games.Phases;
-using LotR.Games.Phases.Any;
+using LotR.Effects.Phases;
+using LotR.Effects.Phases.Any;
 
 namespace LotR.Cards.Player.Attachments
 {

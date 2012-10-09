@@ -5,7 +5,7 @@ using System.Text;
 
 using LotR.Effects.Choices;
 using LotR.Effects.Costs;
-using LotR.Games.Phases;
+using LotR.Effects.Phases;
 using LotR.Effects.Payments;
 
 namespace LotR.Effects

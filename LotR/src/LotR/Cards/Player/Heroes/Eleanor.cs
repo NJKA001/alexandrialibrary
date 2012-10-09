@@ -10,8 +10,8 @@ using LotR.Effects.Choices;
 using LotR.Effects.Costs;
 using LotR.Effects.Payments;
 using LotR.Games;
-using LotR.Games.Phases;
-using LotR.Games.Phases.Any;
+using LotR.Effects.Phases;
+using LotR.Effects.Phases.Any;
 
 namespace LotR.Cards.Player.Heroes
 {

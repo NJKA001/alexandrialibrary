@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Effects;
-using LotR.Games.Phases.Resource;
+using LotR.Effects.Phases.Resource;
 
 namespace LotR.Cards.Player.Heroes
 {

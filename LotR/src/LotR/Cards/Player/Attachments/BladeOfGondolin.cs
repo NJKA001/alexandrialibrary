@@ -7,9 +7,9 @@ using LotR.Cards.Player.Heroes;
 using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Games;
-using LotR.Games.Phases;
-using LotR.Games.Phases.Any;
-using LotR.Games.Phases.Combat;
+using LotR.Effects.Phases;
+using LotR.Effects.Phases.Any;
+using LotR.Effects.Phases.Combat;
 
 namespace LotR.Cards.Player.Attachments
 {

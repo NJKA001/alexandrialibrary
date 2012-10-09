@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards.Player;
-using LotR.Games.Phases.Combat;
+using LotR.Effects.Phases.Combat;
 
 namespace LotR.Effects
 {

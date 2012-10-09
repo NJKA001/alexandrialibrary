@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Games.Phases;
+using LotR.Effects.Phases;
 
 namespace LotR.Effects
 {

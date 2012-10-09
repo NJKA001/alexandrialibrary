@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Effects.Costs;
-using LotR.Games.Phases;
+using LotR.Effects.Phases;
 
 namespace LotR.Cards.Player.Allies
 {

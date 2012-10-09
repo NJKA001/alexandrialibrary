@@ -7,8 +7,8 @@ using LotR.Cards.Encounter.Enemies;
 using LotR.Cards.Encounter.Locations;
 using LotR.Effects;
 using LotR.Effects.Payments;
-using LotR.Games.Phases;
-using LotR.Games.Phases.Setup;
+using LotR.Effects.Phases;
+using LotR.Effects.Phases.Setup;
 
 namespace LotR.Cards.Quests
 {

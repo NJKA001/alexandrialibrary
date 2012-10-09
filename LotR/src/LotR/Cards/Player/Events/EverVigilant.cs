@@ -5,7 +5,7 @@ using System.Text;
 
 using LotR.Effects.Choices;
 using LotR.Effects;
-using LotR.Games.Phases;
+using LotR.Effects.Phases;
 
 namespace LotR.Cards.Player.Events
 {
