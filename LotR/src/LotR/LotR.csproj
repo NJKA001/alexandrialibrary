@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cards\Encounter\IEncounterDeck.cs" />
+    <Compile Include="Cards\ICanHaveAttachments.cs" />
     <Compile Include="Cards\Player\Allies\Beorn.cs" />
     <Compile Include="Cards\Player\Allies\BrokIronfist.cs" />
     <Compile Include="Cards\Player\Allies\DaughterOfNimrodel.cs" />
@@ -303,16 +304,17 @@
     <Compile Include="Cards\Player\IResourcefulCard.cs" />
     <Compile Include="Effects\IResponseEffect.cs" />
     <Compile Include="Cards\IRevealableCard.cs" />
-    <Compile Include="Games\IRound.cs" />
+    <Compile Include="States\IRound.cs" />
     <Compile Include="Cards\Quests\IScenario.cs" />
     <Compile Include="Effects\IShadowEffect.cs" />
-    <Compile Include="Games\IStagingArea.cs" />
+    <Compile Include="States\Areas\IActiveLocationArea.cs" />
+    <Compile Include="States\Areas\IStagingArea.cs" />
     <Compile Include="Effects\ISurgeEffect.cs" />
     <Compile Include="Cards\Encounter\IThreateningCard.cs" />
     <Compile Include="Cards\Encounter\Treacheries\ITreacheryCard.cs" />
     <Compile Include="Cards\Player\Treasures\ITreasureCard.cs" />
     <Compile Include="Cards\IVictoryCard.cs" />
-    <Compile Include="Games\IVictoryDisplay.cs" />
+    <Compile Include="States\Areas\IVictoryDisplayArea.cs" />
     <Compile Include="Effects\Phases\Combat\IAfterDamageDealtToEnemy.cs" />
     <Compile Include="Effects\Phases\Combat\IAfterCharactersAttack.cs" />
     <Compile Include="Effects\Phases\Combat\IAfterDamageDealtToCharacter.cs" />
@@ -379,14 +381,13 @@
     <Compile Include="Cards\CardSet.cs" />
     <Compile Include="Cards\Player\Sphere.cs" />
     <Compile Include="Cards\Trait.cs" />
-    <Compile Include="States\Areas\IInPlay.cs" />
+    <Compile Include="States\Areas\IArea.cs" />
+    <Compile Include="States\Areas\ICardInPlay.cs" />
+    <Compile Include="States\Areas\IPlayerArea.cs" />
     <Compile Include="States\IGameState.cs" />
     <Compile Include="States\IState.cs" />
     <Compile Include="States\Phase.cs" />
     <Compile Include="States\StateBase.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferences Include="Web References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

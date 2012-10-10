@@ -90,5 +90,10 @@ namespace LotR.Cards.Player
                 step.HitPoints = 0;
             }
         }
+
+        public virtual bool IsValidAttachment(IAttachableCard card)
+        {
+            return true;
+        }
     }
 }

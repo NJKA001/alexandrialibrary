@@ -8,7 +8,7 @@ using LotR.Cards.Player.Heroes;
 namespace LotR.Cards.Player
 {
     public interface IPlayerDeck
-        : IDeck<IPlayerCard>
+        : IDeck<IPlayerCard>, ICanHaveAttachments
     {
         string Name { get; }
         byte Threat { get; }

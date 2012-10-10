@@ -8,7 +8,10 @@ using LotR.Effects;
 namespace LotR.Cards.Encounter.Locations
 {
     public interface ILocationCard
-        : IEncounterCard, IProgressableCard, IThreateningCard
+        : IEncounterCard, 
+        IProgressableCard, 
+        IThreateningCard,
+        ICanHaveAttachments
     {
         ICardEffect Travel { get; }
     }

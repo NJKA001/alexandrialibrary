@@ -7,14 +7,15 @@ using LotR.Cards;
 using LotR.Cards.Encounter;
 using LotR.Effects;
 
-namespace LotR.Games
+namespace LotR.States.Areas
 {
     public interface IStagingArea
+        : IArea
     {
         IDeck<IEncounterCard> EncounterDeck { get; }
-        IDeck<IEncounterCard> EncounterDiscardPile { get; }
+        
         IEncounterCard RevealedEncounterCard { get; }
-        IEnumerable<IEncounterInPlay> CardsInStagingArea { get; }
+        IEnumerable<ICardInPlay<IEncounterCard>> CardsInStagingArea { get; }
         IEnumerable<IEncounterCard> ExaminedEncounterCards { get; }
         void AddExaminedEncounterCards(IEnumerable<IEncounterCard> cards);
         void RemoveExaminedEncounterCards(IEnumerable<IEncounterCard> cards);

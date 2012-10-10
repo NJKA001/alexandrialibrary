@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 
 using LotR.Effects.Phases;
+using LotR.Games;
 
-namespace LotR.Games
+namespace LotR.States
 {
     public interface IRound
     {

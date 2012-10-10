@@ -38,5 +38,10 @@ namespace LotR.Cards.Player
             get;
             private set;
         }
+
+        public bool IsValidAttachment(IAttachableCard card)
+        {
+            return true;
+        }
     }
 }

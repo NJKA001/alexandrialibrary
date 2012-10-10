@@ -12,7 +12,8 @@ namespace LotR.Cards.Player
         IWillpowerfulCard,
         IAttackingCard, 
         IDefendingCard, 
-        IDamageableCard
+        IDamageableCard,
+        ICanHaveAttachments
     {
     }
 }

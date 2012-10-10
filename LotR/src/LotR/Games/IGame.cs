@@ -5,6 +5,8 @@ using System.Text;
 
 using LotR.Cards;
 using LotR.Cards.Quests;
+using LotR.States;
+using LotR.States.Areas;
 
 namespace LotR.Games
 {
@@ -23,7 +25,7 @@ namespace LotR.Games
         IStagingArea StagingArea { get; }
         ILocationInPlay ActiveLocation { get; }
         IQuestCardInPlay ActiveQuest { get; }
-        IVictoryDisplay VictoryDisplay { get; }
+        IVictoryDisplayArea VictoryDisplay { get; }
         IOutOfPlayArea OutOfPlay { get; }
 
         void ChangeActiveLocation(ILocationInPlay location);

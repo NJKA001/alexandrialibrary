@@ -7,9 +7,9 @@ using LotR.Cards;
 
 namespace LotR.States.Areas
 {
-    public interface IInPlay<T>
-        where T : ICard
+    public interface IArea
     {
-        T Card { get; }
+        ICard GetCard(Guid id);
+        ICardInPlay<ICard> GetCardInPlay(Guid id);
     }
 }

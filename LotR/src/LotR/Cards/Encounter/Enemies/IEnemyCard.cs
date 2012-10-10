@@ -6,7 +6,10 @@ using System.Text;
 namespace LotR.Cards.Encounter.Enemies
 {
     public interface IEnemyCard
-        : IEncounterCard, IThreateningCard, IDamageableCard
+        : IEncounterCard, 
+        IThreateningCard, 
+        IDamageableCard, 
+        ICanHaveAttachments
     {
         byte EngagementCost { get; }
     }

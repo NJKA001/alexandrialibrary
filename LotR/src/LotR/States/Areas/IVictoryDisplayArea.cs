@@ -5,9 +5,10 @@ using System.Text;
 
 using LotR.Cards;
 
-namespace LotR.Games
+namespace LotR.States.Areas
 {
-    public interface IVictoryDisplay
+    public interface IVictoryDisplayArea
+        : IArea
     {
         IEnumerable<IVictoryCard> Cards { get; }
 
