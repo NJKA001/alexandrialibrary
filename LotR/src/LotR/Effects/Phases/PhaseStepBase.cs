@@ -5,7 +5,7 @@ using System.Text;
 
 using LotR.Cards;
 using LotR.Effects;
-using LotR.Games;
+using LotR.States;
 
 namespace LotR.Effects.Phases
 {
@@ -34,27 +34,27 @@ namespace LotR.Effects.Phases
 
         public ICard GetCard(Guid id)
         {
-            return Phase.Round.Game.GetCard(id);
+            return null; //Phase.Round.Game.GetCard(id);
         }
 
-        public ICardInPlay GetCardInPlay(Guid id)
+        public ICardInPlay<ICard> GetCardInPlay(Guid id)
         {
-            return Phase.Round.Game.GetCardInPlay(id);
+            return null; //Phase.Round.Game.GetCardInPlay(id);
         }
 
         public IPlayer GetController(Guid id)
         {
-            return Phase.Round.Game.GetController(id);
+            return null; //Phase.Round.Game.GetController(id);
         }
 
         public IPlayer GetOwner(Guid id)
         {
-            return Phase.Round.Game.GetOwner(id);
+            return null; //Phase.Round.Game.GetOwner(id);
         }
 
         public bool CardIsInPlay(Guid id)
         {
-            return (Phase.Round.Game.GetCardInPlay(id) != null);
+            return false; //(Phase.Round.Game.GetCardInPlay(id) != null);
         }
 
         public IEnumerable<IEffect> Effects
@@ -77,12 +77,12 @@ namespace LotR.Effects.Phases
 
         public void AddProgressToCurrentQuest(byte value)
         {
-            Phase.Round.Game.ActiveQuest.AddProgressTokens(value);
+            //Phase.Round.Game.ActiveQuest.AddProgressTokens(value);
         }
 
         public void RemoveProgressFromCurrentQuest(byte value)
         {
-            Phase.Round.Game.ActiveQuest.RemoveProgressTokens(value);
+            //Phase.Round.Game.ActiveQuest.RemoveProgressTokens(value);
         }
     }
 }

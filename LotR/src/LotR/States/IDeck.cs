@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Cards
+using LotR.Cards;
+
+namespace LotR.States
 {
     public interface IDeck<T>
         where T : ICard
@@ -12,7 +14,6 @@ namespace LotR.Cards
         IEnumerable<T> DiscardedCards { get; }
         uint Size { get; }
 
-        T GetFirst(Func<T, bool> predicate);
         IEnumerable<T> GetFromTop(int numberOfCards);
         void PutOnTop(IEnumerable<T> cards);
         void PutOnBottom(IEnumerable<T> cards);

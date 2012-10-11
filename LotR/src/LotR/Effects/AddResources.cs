@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Effects.Phases;
+using LotR.Cards.Player;
 
 namespace LotR.Effects
 {
@@ -33,7 +34,7 @@ namespace LotR.Effects
                 if (target == null)
                     continue;
 
-                target.AddResources(pair.Value);
+                //target.AddResources(pair.Value);
             }
         }
 
@@ -45,7 +46,7 @@ namespace LotR.Effects
                 if (target == null)
                     continue;
 
-                target.RemoveResources(pair.Value);
+                //target.RemoveResources(pair.Value);
             }
         }
     }

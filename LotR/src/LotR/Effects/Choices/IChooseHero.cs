@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Games;
+using LotR.Cards.Player.Heroes;
+using LotR.States;
 
 namespace LotR.Effects.Choices
 {
     public interface IChooseHero
         : IChoice
     {
-        IHeroInPlay Hero { get; set; }
+        ICardInPlay<IHeroCard> Hero { get; set; }
     }
 }

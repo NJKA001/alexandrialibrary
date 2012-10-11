@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Games;
+using LotR.Cards.Encounter.Enemies;
 using LotR.Effects.Phases;
+using LotR.States;
 
 namespace LotR.Cards.Player.Attachments
 {
@@ -18,20 +19,20 @@ namespace LotR.Cards.Player.Attachments
             AddTrait(Trait.Trap);
         }
 
-        public override bool CanBeAttachedTo(IPhaseStep step, ICardInPlay cardInPlay)
+        public override bool CanBeAttachedTo(IPhaseStep step, ICanHaveAttachments cardInPlay)
         {
             if (cardInPlay == null)
                 throw new ArgumentNullException("cardInPlay");
 
-            if (cardInPlay != null && cardInPlay is IEnemyInPlay)
+            if (cardInPlay != null && cardInPlay is IEnemyCard)
             {
-                foreach (var player in step.Phase.Round.Game.Players)
-                {
-                    if (player.EngagedEnemies.Any(x => x.CardId == cardInPlay.CardId))
-                    {
-                        return true;
-                    }
-                }
+                //foreach (var player in step.Phase.Round.Game.Players)
+                //{
+                    //if (player.EngagedEnemies.Any(x => x.CardId == cardInPlay.CardId))
+                    //{
+                    //    return true;
+                    //}
+                //}
             }
 
             return false;

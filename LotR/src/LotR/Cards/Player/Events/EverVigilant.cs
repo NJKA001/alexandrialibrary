@@ -36,7 +36,7 @@ namespace LotR.Cards.Player.Events
                 if (allyChoice == null || allyChoice.Ally == null)
                     return;
 
-                allyChoice.Ally.Ready();
+                //allyChoice.Ally.Ready();
             }
         }
     }

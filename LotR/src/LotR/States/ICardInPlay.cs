@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Effects.Phases;
-using LotR.States;
+using LotR.Cards;
 
 namespace LotR.States
 {
-    public interface IRound
+    public interface ICardInPlay<T>
+        : IState
+        where T : ICard
     {
-        IPhase CurrentPhase { get; }
+        T Card { get; }
     }
 }

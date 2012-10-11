@@ -6,7 +6,7 @@ using System.Text;
 namespace LotR.Cards.Player.Attachments
 {
     public interface IAttachmentCard
-        : ICostlyCard, IAttachableCard
+        : ICostlyCard, IExhaustableCard, IAttachableCard
     {
     }
 }

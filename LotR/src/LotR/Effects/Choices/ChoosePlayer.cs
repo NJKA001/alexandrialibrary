@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
-using LotR.Games;
+using LotR.States;
 
 namespace LotR.Effects.Choices
 {

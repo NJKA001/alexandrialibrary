@@ -10,7 +10,7 @@ using LotR.Cards.Player.Attachments;
 using LotR.Cards.Player.Events;
 using LotR.Cards.Player.Heroes;
 using LotR.Cards.Player.Treasures;
-using LotR.Games;
+using LotR.States;
 
 namespace LotR.Console
 {

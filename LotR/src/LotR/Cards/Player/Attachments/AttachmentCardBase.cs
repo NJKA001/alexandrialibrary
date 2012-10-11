@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Games;
+using LotR.States;
 using LotR.Effects.Phases;
 
 namespace LotR.Cards.Player.Attachments
@@ -26,6 +26,6 @@ namespace LotR.Cards.Player.Attachments
             private set;
         }
 
-        public abstract bool CanBeAttachedTo(IPhaseStep step, ICardInPlay cardInPlay);
+        public abstract bool CanBeAttachedTo(IPhaseStep step, ICanHaveAttachments cardInPlay);
     }
 }

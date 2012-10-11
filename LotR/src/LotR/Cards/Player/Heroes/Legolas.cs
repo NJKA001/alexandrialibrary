@@ -5,7 +5,7 @@ using System.Text;
 
 using LotR.Effects;
 using LotR.Effects.Choices;
-using LotR.Games;
+using LotR.States;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Combat;
 
@@ -35,18 +35,18 @@ namespace LotR.Cards.Player.Heroes
 
             public void AfterEnemyDefeated(IEnemyDefeatedStep step)
             {
-                var attachment = step.GetCardInPlay(Source.Id) as IAttachmentInPlay;
-                if (attachment == null || attachment.AttachedTo == null)
-                    return;
+                //var attachment = step.GetCardInPlay(Source.Id) as ICardInPlay<IAttachmentCard>;
+                //if (attachment == null || attachment.AttachedTo == null)
+                //    return;
 
-                var hero = attachment.AttachedTo as IHeroCard;
-                if (hero == null)
-                    return;
+                //var hero = attachment.AttachedTo as IHeroCard;
+                //if (hero == null)
+                //    return;
 
-                if (step.Attackers.Any(x => x.Id == hero.Id))
-                {
-                    step.AddEffect(this);
-                }
+                //if (step.Attackers.Any(x => x.Id == hero.Id))
+                //{
+                //    step.AddEffect(this);
+                //}
             }
 
             public override void Resolve(IPhaseStep step, IChoice choice)

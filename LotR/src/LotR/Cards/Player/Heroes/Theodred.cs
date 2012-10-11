@@ -7,7 +7,7 @@ using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Costs;
 using LotR.Effects.Payments;
-using LotR.Games;
+using LotR.States;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Quest;
 
@@ -38,12 +38,12 @@ namespace LotR.Cards.Player.Heroes
 
             public void AfterCommittingToQuest(ICommitToQuestStep step)
             {
-                var self = step.CommitedCharacters.Where(x => x.CardId == Source.Id).Select(x => x.Card).FirstOrDefault();
+                //var self = step.CommitedCharacters.Where(x => x.CardId == Source.Id).Select(x => x.Card).FirstOrDefault();
 
-                if (self == null)
-                    return;
+                //if (self == null)
+                //    return;
 
-                step.AddEffect(this);
+                //step.AddEffect(this);
             }
 
             public override ICost GetCost(IPhaseStep step)
@@ -64,7 +64,7 @@ namespace LotR.Cards.Player.Heroes
                 if (heroChoice == null || heroChoice.Hero == null)
                     return;
 
-                step.AddEffect(new AddResources(step, new Dictionary<Guid, byte> { { heroChoice.Hero.CardId, 1 } }));
+                //step.AddEffect(new AddResources(step, new Dictionary<Guid, byte> { { heroChoice.Hero.CardId, 1 } }));
             }
         }
 

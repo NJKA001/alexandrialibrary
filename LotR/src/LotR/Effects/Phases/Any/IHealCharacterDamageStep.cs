@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Games;
+using LotR.Cards.Player;
+using LotR.States;
 
 namespace LotR.Effects.Phases.Any
 {
     public interface IHealCharacterDamageStep
         : IPhaseStep
     {
-        ICharacterInPlay Target { get; }
+        ICardInPlay<ICharacterCard> Target { get; }
         byte DamageHealed { get; }
     }
 }

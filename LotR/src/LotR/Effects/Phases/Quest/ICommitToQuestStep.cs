@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Games;
+using LotR.Cards.Player;
+using LotR.States;
 
 namespace LotR.Effects.Phases.Quest
 {
     public interface ICommitToQuestStep
         : IPhaseStep
     {
-        IEnumerable<ICharacterInPlay> CommitedCharacters { get; }
+        IEnumerable<ICardInPlay<ICharacterCard>> CommitedCharacters { get; }
     }
 }

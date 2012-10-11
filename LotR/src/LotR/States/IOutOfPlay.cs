@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Effects.Phases;
-using LotR.States;
-
 namespace LotR.States
 {
-    public interface IRound
+    public interface IOutOfPlay
     {
-        IPhase CurrentPhase { get; }
+        Guid Id { get; }
     }
 }

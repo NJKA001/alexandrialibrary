@@ -5,7 +5,7 @@ using System.Text;
 
 using LotR.Cards;
 using LotR.Effects;
-using LotR.Games;
+using LotR.States;
 
 namespace LotR.Effects.Phases
 {
@@ -15,7 +15,7 @@ namespace LotR.Effects.Phases
         IPlayer Player { get; }
 
         ICard GetCard(Guid id);
-        ICardInPlay GetCardInPlay(Guid id);
+        ICardInPlay<ICard> GetCardInPlay(Guid id);
         bool CardIsInPlay(Guid id);
         IPlayer GetController(Guid id);
         IPlayer GetOwner(Guid id);

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Cards
+using LotR.Cards;
+
+namespace LotR.States
 {
     public class Deck<T>
         : IDeck<T>

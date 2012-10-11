@@ -44,11 +44,11 @@ namespace LotR.Effects.Costs
             if (firstPayment == null)
                 return false;
 
-            if (firstPayment.Item1.CardId != target.Id)
-                return false;
+            //if (firstPayment.Item1.CardId != target.Id)
+            //    return false;
 
-            if (firstPayment.Item2 != numberOfResources)
-                return false;
+            //if (firstPayment.Item2 != numberOfResources)
+            //    return false;
 
             return true;
         }

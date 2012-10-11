@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards.Player.Heroes;
+using LotR.States;
 
 namespace LotR.Cards.Player
 {

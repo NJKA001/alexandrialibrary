@@ -8,7 +8,7 @@ using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Costs;
 using LotR.Effects.Payments;
-using LotR.Games;
+using LotR.States;
 using LotR.Effects.Phases;
 
 namespace LotR.Cards.Player.Heroes
@@ -36,7 +36,7 @@ namespace LotR.Cards.Player.Heroes
 
             public override ICost GetCost(IPhaseStep step)
             {
-                var exhaustable = step.GetCardInPlay(Source.Id) as IExhaustableInPlay;
+                var exhaustable = step.GetCardInPlay(Source.Id) as ICardInPlay<IExhaustableCard>;
                 if (exhaustable == null)
                     return null;
 
@@ -45,17 +45,17 @@ namespace LotR.Cards.Player.Heroes
 
             public override bool PaymentAccepted(IPhaseStep step, IPayment payment)
             {
-                var exhaustPayment = payment as IExhaustCardPayment;
-                if (exhaustPayment == null || exhaustPayment.Exhaustable == null || exhaustPayment.Exhaustable.IsExhausted)
-                    return false;
+                //var exhaustPayment = payment as IExhaustCardPayment;
+                //if (exhaustPayment == null || exhaustPayment.Exhaustable == null || exhaustPayment.Exhaustable.IsExhausted)
+                //    return false;
 
-                exhaustPayment.Exhaustable.Exhaust();
+                //exhaustPayment.Exhaustable.Exhaust();
 
-                var topCard = step.Phase.Round.Game.StagingArea.EncounterDeck.GetFromTop(1).FirstOrDefault();
-                if (topCard == null)
-                    return false;
+                //var topCard = step.Phase.Round.Game.StagingArea.EncounterDeck.GetFromTop(1).FirstOrDefault();
+                //if (topCard == null)
+                //    return false;
 
-                step.Phase.Round.Game.StagingArea.AddExaminedEncounterCards(new List<IEncounterCard> { topCard });
+                //step.Phase.Round.Game.StagingArea.AddExaminedEncounterCards(new List<IEncounterCard> { topCard });
                 return true;
             }
 
@@ -65,24 +65,24 @@ namespace LotR.Cards.Player.Heroes
                 if (topOfDeckChoice == null)
                     return;
 
-                if (step.Phase.Round.Game.StagingArea.ExaminedEncounterCards.Count() != 1)
-                    return;
+                //if (step.Phase.Round.Game.StagingArea.ExaminedEncounterCards.Count() != 1)
+                //    return;
 
-                var topCard = step.Phase.Round.Game.StagingArea.ExaminedEncounterCards.FirstOrDefault() as IEncounterCard;
-                if (topCard == null)
-                    return;
+                //var topCard = step.Phase.Round.Game.StagingArea.ExaminedEncounterCards.FirstOrDefault() as IEncounterCard;
+                //if (topCard == null)
+                //    return;
 
-                step.Phase.Round.Game.StagingArea.RemoveExaminedEncounterCards(new List<IEncounterCard> { topCard });
+                //step.Phase.Round.Game.StagingArea.RemoveExaminedEncounterCards(new List<IEncounterCard> { topCard });
 
-                if (topOfDeckChoice.TopOfDeck)
-                {
-                    step.Phase.Round.Game.StagingArea.EncounterDeck.PutOnTop(new List<IEncounterCard> { topCard });
-                }
-                else
-                {
-                    step.Phase.Round.Game.StagingArea.EncounterDeck.PutOnBottom(new List<IEncounterCard> { topCard });
+                //if (topOfDeckChoice.TopOfDeck)
+                //{
+                //    step.Phase.Round.Game.StagingArea.EncounterDeck.PutOnTop(new List<IEncounterCard> { topCard });
+                //}
+                //else
+                //{
+                //    step.Phase.Round.Game.StagingArea.EncounterDeck.PutOnBottom(new List<IEncounterCard> { topCard });
                     
-                }
+                //}
             }
         }
     }

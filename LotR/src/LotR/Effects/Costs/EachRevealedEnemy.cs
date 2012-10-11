@@ -31,12 +31,12 @@ namespace LotR.Effects.Costs
             if (choice == null)
                 return false;
 
-            var revealed = step.Phase.Round.Game.StagingArea.RevealedEncounterCard;
-            if (revealed == null)
-                return false;
+            //var revealed = step.Phase.Round.Game.StagingArea.RevealedEncounterCard;
+            //if (revealed == null)
+            //    return false;
 
-            if (revealed.Id != choice.Enemy.CardId)
-                return false;
+            //if (revealed.Id != choice.Enemy.CardId)
+            //    return false;
 
             return true;
         }

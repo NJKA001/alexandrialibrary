@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards.Player;
 using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Costs;
 using LotR.Effects.Payments;
-using LotR.Games;
+using LotR.States;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Any;
 
@@ -39,7 +40,7 @@ namespace LotR.Cards.Player.Heroes
 
             public override ICost GetCost(IPhaseStep step)
             {
-                var resourceful = step.GetCardInPlay(Source.Id) as IResourcefulInPlay;
+                var resourceful = step.GetCardInPlay(Source.Id) as ICardInPlay<IResourcefulCard>;
                 if (resourceful == null || resourceful.Card == null)
                     return null;
 
@@ -64,13 +65,13 @@ namespace LotR.Cards.Player.Heroes
                 if (firstPayment == null)
                     return false;
 
-                if (firstPayment.Item1.CardId != Source.Id || firstPayment.Item2 != 1)
-                    return false;
+                //if (firstPayment.Item1.Id != Source.Id || firstPayment.Item2 != 1)
+                //    return false;
 
-                if (firstPayment.Item1.Resources < 1)
-                    return false;
+                //if (firstPayment.Item1.Resources < 1)
+                //    return false;
 
-                firstPayment.Item1.RemoveResources(1);
+                //firstPayment.Item1.RemoveResources(1);
 
                 return true;
             }
@@ -81,7 +82,7 @@ namespace LotR.Cards.Player.Heroes
                 if (characterChoice == null || characterChoice.Character == null)
                     return;
 
-                step.AddStep(new HealCharacterDamageStep(step.Phase, step.Player, characterChoice.Character, 1));
+                //step.AddStep(new HealCharacterDamageStep(step.Phase, step.Player, characterChoice.Character, 1));
             }
         }
     }

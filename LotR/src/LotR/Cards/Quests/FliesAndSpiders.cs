@@ -31,16 +31,16 @@ namespace LotR.Cards.Quests
 
             public override bool PaymentAccepted(IPhaseStep step, IPayment payment)
             {
-                var forestSpider = step.Phase.Round.Game.StagingArea.EncounterDeck.GetFirst(x => x.Title == "Forest Spider") as IEnemyCard;
-                if (forestSpider == null)
-                    return false;
+                //var forestSpider = step.Phase.Round.Game.StagingArea.EncounterDeck.GetFirst(x => x.Title == "Forest Spider") as IEnemyCard;
+                //if (forestSpider == null)
+                //    return false;
 
-                var oldForestRoad = step.Phase.Round.Game.StagingArea.EncounterDeck.GetFirst(x => x.Title == "Old Forest Road") as ILocationCard;
-                if (oldForestRoad == null)
-                    return false;
+                //var oldForestRoad = step.Phase.Round.Game.StagingArea.EncounterDeck.GetFirst(x => x.Title == "Old Forest Road") as ILocationCard;
+                //if (oldForestRoad == null)
+                //    return false;
 
-                step.Phase.Round.Game.StagingArea.AddToStagingArea(forestSpider);
-                step.Phase.Round.Game.StagingArea.AddToStagingArea(oldForestRoad);
+                //step.Phase.Round.Game.StagingArea.AddToStagingArea(forestSpider);
+                //step.Phase.Round.Game.StagingArea.AddToStagingArea(oldForestRoad);
 
                 return true;
             }

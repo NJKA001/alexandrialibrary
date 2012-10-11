@@ -5,7 +5,7 @@ using System.Text;
 
 using LotR.Effects;
 using LotR.Effects.Choices;
-using LotR.Games;
+using LotR.States;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Combat;
 
@@ -26,19 +26,19 @@ namespace LotR.Cards.Player.Heroes
         public class AddResourcesWhenTakingDamage
             : ResponseCharacterAbilityBase
         {
-            public AddResourcesWhenTakingDamage(Gloin source, ICardInPlay permanent, byte value)
+            public AddResourcesWhenTakingDamage(Gloin source, ICardInPlay<ICard> permanent, byte value)
                 : base("After Gloin suffers damage, add 1 resource to his resource pool for each point of damage he just suffered.", source)
             {
                 this.permanent = permanent;
                 this.value = value;
             }
 
-            private readonly ICardInPlay permanent;
+            private readonly ICardInPlay<ICard> permanent;
             private readonly byte value;
 
             public override void Resolve(IPhaseStep step, IChoice choice)
             {
-                permanent.AddResources(value);
+                //permanent.AddResources(value);
             }
         }
 
@@ -46,10 +46,10 @@ namespace LotR.Cards.Player.Heroes
 
         public void AfterDamageDealtToCharacter(IDealDamageToCharacterStep step)
         {
-            if (step.Target.CardId != this.Id)
-                return;
+            //if (step.Target.CardId != this.Id)
+            //    return;
 
-            step.AddEffect(new AddResourcesWhenTakingDamage(this, step.Target, step.Damage));
+            //step.AddEffect(new AddResourcesWhenTakingDamage(this, step.Target, step.Damage));
         }
     }
 }

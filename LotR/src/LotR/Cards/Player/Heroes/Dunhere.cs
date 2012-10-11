@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards.Encounter.Enemies;
 using LotR.Effects;
 using LotR.Effects.Choices;
-using LotR.Games;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Any;
 using LotR.Effects.Phases.Combat;
+using LotR.States;
 
 namespace LotR.Cards.Player.Heroes
 {
@@ -54,10 +55,10 @@ namespace LotR.Cards.Player.Heroes
                 if (chooseEnemyToAttackStep == null)
                     return;
 
-                foreach (var enemy in step.Phase.Round.Game.StagingArea.CardsInStagingArea.OfType<IEnemyInPlay>())
-                {
-                    chooseEnemyToAttackStep.AddEnemy(enemy);
-                }
+                //foreach (var enemy in step.Phase.Round.Game.StagingArea.CardsInStagingArea.OfType<ICardInPlay<IEnemyCard>>())
+                //{
+                //    chooseEnemyToAttackStep.AddEnemy(enemy);
+                //}
             }
         }
 
@@ -81,14 +82,14 @@ namespace LotR.Cards.Player.Heroes
                 if (attacker.Id != Source.Id)
                     return;
 
-                foreach (var enemy in step.Phase.Round.Game.StagingArea.CardsInStagingArea.OfType<IEnemyInPlay>())
-                {
-                    if (enemy.CardId == step.Target.CardId)
-                    {
-                        step.AddEffect(this);
-                        return;
-                    }
-                }
+                //foreach (var enemy in step.Phase.Round.Game.StagingArea.CardsInStagingArea.OfType<ICardInPlay<IEnemyCard>>())
+                //{
+                //    if (enemy.CardId == step.Target.Card.Id)
+                //    {
+                //        step.AddEffect(this);
+                //        return;
+                //    }
+                //}
             }
 
             public override void Resolve(IPhaseStep step, IChoice choice)

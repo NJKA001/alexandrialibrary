@@ -36,7 +36,7 @@ namespace LotR.Effects.Costs
 
             foreach (var card in choice.Cards)
             {
-                if (!choice.Player.CardsInHand.Any(x => x.Id == card.Id))
+                if (!choice.Player.Hand.Cards.Any(x => x.Id == card.Id))
                     return false;
             }
 

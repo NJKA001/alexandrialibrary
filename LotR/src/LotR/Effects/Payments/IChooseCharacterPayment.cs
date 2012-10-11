@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Games;
+using LotR.Cards.Player;
+using LotR.States;
 
 namespace LotR.Effects.Payments
 {
     public interface IChooseCharacterPayment
         : IPayment
     {
-        ICharacterInPlay Character { get; }
+        ICardInPlay<ICharacterCard> Character { get; }
     }
 }

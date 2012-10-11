@@ -7,7 +7,7 @@ using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Costs;
 using LotR.Effects.Payments;
-using LotR.Games;
+using LotR.States;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Quest;
 
@@ -28,7 +28,7 @@ namespace LotR.Cards.Player.Heroes
 
         public void AfterCommittingToQuest(ICommitToQuestStep step)
         {
-            var self = step.CommitedCharacters.Where(x => x.CardId == this.Id).Select(x => x.Card).FirstOrDefault();
+            var self = step.CommitedCharacters.Where(x => x.Card.Id == this.Id).Select(x => x.Card).FirstOrDefault();
 
             if (self == null)
                 return;
@@ -53,12 +53,12 @@ namespace LotR.Cards.Player.Heroes
 
             public override void Resolve(IPhaseStep step, IChoice choice)
             {
-                var inPlay = step.GetCardInPlay(aragorn.Id) as IHeroInPlay;
+                //var inPlay = step.GetCardInPlay(aragorn.Id) as ICardInPlay<IHeroCard>;
 
-                if (inPlay == null)
-                    return;
+                //if (inPlay == null)
+                //    return;
 
-                step.AddEffect(new ReadyCards(step, new List<IExhaustableInPlay> { inPlay }));
+                //step.AddEffect(new ReadyCards(step, new List<ICardInPlay<IExhaustableCard>> { inPlay }));
             }
 
             public override ICost GetCost(IPhaseStep step)
@@ -94,7 +94,7 @@ namespace LotR.Cards.Player.Heroes
                 if (payor == null)
                     return false;
 
-                if (payor.CardId != Source.Id)
+                if (payor.Card.Id != Source.Id)
                     return false;
 
                 return true;

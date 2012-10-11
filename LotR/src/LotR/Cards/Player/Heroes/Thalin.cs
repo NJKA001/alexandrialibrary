@@ -8,7 +8,7 @@ using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Costs;
 using LotR.Effects.Payments;
-using LotR.Games;
+using LotR.States;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Any;
 using LotR.Effects.Phases.Quest;
@@ -41,17 +41,17 @@ namespace LotR.Cards.Player.Heroes
                 if (questPhase == null)
                     return;
 
-                var revealed = step.Phase.Round.Game.StagingArea.RevealedEncounterCard;
-                if (revealed == null)
-                    return;
+                //var revealed = step.Phase.Round.Game.StagingArea.RevealedEncounterCard;
+                //if (revealed == null)
+                //    return;
 
-                if (!(revealed is IEnemyCard))
-                    return;
+                //if (!(revealed is IEnemyCard))
+                //    return;
 
-                if (!questPhase.CharactersCommittedToQuest.Any(x => x.Id == Source.Id))
-                    return;
+                //if (!questPhase.CharactersCommittedToQuest.Any(x => x.Id == Source.Id))
+                //    return;
 
-                step.AddEffect(this);
+                //step.AddEffect(this);
             }
 
             public override void Resolve(IPhaseStep step, IChoice choice)
@@ -60,7 +60,7 @@ namespace LotR.Cards.Player.Heroes
                 if (enemyChoice == null)
                     return;
 
-                enemyChoice.Enemy.AddDamage(1);
+                //enemyChoice.Enemy.AddDamage(1);
             }
 
             public override ICost GetCost(IPhaseStep step)

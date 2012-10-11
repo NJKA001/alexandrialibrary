@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Games;
+using LotR.Cards.Player;
 using LotR.Effects.Phases;
+using LotR.States;
 
 namespace LotR.Effects
 {
     public class ReadyCards
         : ReversableEffectBase, IReadyCards
     {
-        public ReadyCards(IPhaseStep step, IEnumerable<IExhaustableInPlay> targets)
+        public ReadyCards(IPhaseStep step, IEnumerable<ICardInPlay<IExhaustableCard>> targets)
             : base("Ready cards")
         {
             this.step = step;
@@ -21,7 +22,7 @@ namespace LotR.Effects
         private readonly IPhaseStep step;
         private readonly IDictionary<Guid, bool> wasReadied = new Dictionary<Guid, bool>();
 
-        public IEnumerable<IExhaustableInPlay> Targets
+        public IEnumerable<ICardInPlay<IExhaustableCard>> Targets
         {
             get;
             private set;
@@ -31,19 +32,19 @@ namespace LotR.Effects
         {
             foreach (var target in Targets)
             {
-                var inPlay = step.GetCardInPlay(target.CardId);
-                if (inPlay == null)
-                    continue;
+                //var inPlay = step.GetCardInPlay(target.CardId);
+                //if (inPlay == null)
+                //    continue;
 
-                if (target.IsExhausted)
-                {
-                    target.Ready();
-                    wasReadied[target.CardId] = true;
-                }
-                else
-                {
-                    wasReadied[target.CardId] = false;
-                }
+                //if (target.IsExhausted)
+                //{
+                //    target.Ready();
+                //    wasReadied[target.CardId] = true;
+                //}
+                //else
+                //{
+                //    wasReadied[target.CardId] = false;
+                //}
             }
         }
 
@@ -51,12 +52,12 @@ namespace LotR.Effects
         {
             foreach (var target in Targets)
             {
-                var inPlay = step.GetCardInPlay(target.CardId);
-                if (inPlay == null)
-                    continue;
+                //var inPlay = step.GetCardInPlay(target.CardId);
+                //if (inPlay == null)
+                //    continue;
 
-                if (wasReadied[target.CardId])
-                    target.Exhaust();
+                //if (wasReadied[target.CardId])
+                //    target.Exhaust();
             }
         }
     }

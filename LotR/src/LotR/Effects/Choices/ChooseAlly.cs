@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
+using LotR.Cards.Player.Allies;
 using LotR.Effects.Payments;
-using LotR.Games;
+using LotR.States;
 
 namespace LotR.Effects.Choices
 {
@@ -17,7 +18,7 @@ namespace LotR.Effects.Choices
         {
         }
 
-        public IAllyInPlay Ally
+        public ICardInPlay<IAllyCard> Ally
         {
             get;
             set;

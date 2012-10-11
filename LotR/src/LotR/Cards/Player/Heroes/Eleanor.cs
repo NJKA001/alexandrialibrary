@@ -9,7 +9,7 @@ using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Costs;
 using LotR.Effects.Payments;
-using LotR.Games;
+using LotR.States;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Any;
 
@@ -37,7 +37,7 @@ namespace LotR.Cards.Player.Heroes
 
             public override ICost GetCost(IPhaseStep step)
             {
-                var exhaustable = step.GetCardInPlay(Source.Id) as IExhaustableInPlay;
+                var exhaustable = step.GetCardInPlay(Source.Id) as ICardInPlay<IExhaustableCard>;
                 if (exhaustable == null)
                     return null;
 
@@ -49,14 +49,14 @@ namespace LotR.Cards.Player.Heroes
                 if (step.Card == null)
                     return;
 
-                var revealed = step.Phase.Round.Game.StagingArea.RevealedEncounterCard;
-                if (revealed == null)
-                    return;
+                //var revealed = step.Phase.Round.Game.StagingArea.RevealedEncounterCard;
+                //if (revealed == null)
+                //    return;
 
-                if ((!(revealed is IRevealableCard)) || (!(revealed is ITreacheryCard)))
-                    return;
+                //if ((!(revealed is IRevealableCard)) || (!(revealed is ITreacheryCard)))
+                //    return;
 
-                step.AddEffect(this);
+                //step.AddEffect(this);
             }
 
             public override bool PaymentAccepted(IPhaseStep step, IPayment payment)
@@ -68,20 +68,20 @@ namespace LotR.Cards.Player.Heroes
                 if (exhaustPayment == null)
                     return false;
 
-                exhaustPayment.Exhaustable.Exhaust();
+                //exhaustPayment.Exhaustable.Exhaust();
 
                 return true;
             }
 
             public override void Resolve(IPhaseStep step, IChoice choice)
             {
-                var revealed = step.Phase.Round.Game.StagingArea.RevealedEncounterCard;
-                if (revealed == null)
-                    return;
+                //var revealed = step.Phase.Round.Game.StagingArea.RevealedEncounterCard;
+                //if (revealed == null)
+                //    return;
 
-                step.Phase.Round.Game.StagingArea.CancelRevealedCard(this);
-                step.Phase.Round.Game.StagingArea.AddToEncounterDiscardPile(new List<IEncounterCard> { revealed });
-                step.Phase.Round.Game.StagingArea.RevealEncounterCards(1);
+                //step.Phase.Round.Game.StagingArea.CancelRevealedCard(this);
+                //step.Phase.Round.Game.StagingArea.AddToEncounterDiscardPile(new List<IEncounterCard> { revealed });
+                //step.Phase.Round.Game.StagingArea.RevealEncounterCards(1);
             }
         }
     }

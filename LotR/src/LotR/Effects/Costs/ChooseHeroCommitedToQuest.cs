@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards.Player;
+using LotR.Cards.Player.Heroes;
 using LotR.Effects.Payments;
-using LotR.Games;
 using LotR.Effects.Phases.Quest;
+using LotR.States;
 
 namespace LotR.Effects.Costs
 {
@@ -29,11 +31,11 @@ namespace LotR.Effects.Costs
             if (choice == null)
                 return false;
 
-            var hero = choice.Character as IHeroInPlay;
-            if (hero == null)
+            var character = choice.Character as ICardInPlay<ICharacterCard>;
+            if (character == null || !(character is IHeroCard))
                 return false;
 
-            if (!step.CommitedCharacters.Contains(hero))
+            if (!step.CommitedCharacters.Contains(character))
                 return false;
 
             return true;

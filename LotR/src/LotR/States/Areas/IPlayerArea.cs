@@ -4,16 +4,24 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
+using LotR.Cards.Encounter.Enemies;
 using LotR.Cards.Player;
+using LotR.Cards.Player.Heroes;
 
 namespace LotR.States.Areas
 {
     public interface IPlayerArea
-        : IArea
+        : IArea, IInPlay
     {
-        IPlayerDeck PlayerDeck { get; }
-        IEnumerable<IAttachableCard> PlayerDeckAttachments { get; }
+        IPlayer Player { get; }
+        IEnumerable<ICardInPlay<IAttachableCard>> PlayerDeckAttachments { get; }
 
-        ICardInPlay<IPlayerCard> GetPlayerCard(Guid id);
+        IEnumerable<ICardInPlay<ICard>> CardsInPlay { get; }
+        IEnumerable<ICardInPlay<IEnemyCard>> EngagedEnemies { get; }
+
+        void AddCard(ICardInPlay<ICard> card);
+        void RemoveCard(ICardInHand<ICard> card);
+        void AddEnemy(ICardInPlay<IEnemyCard> enemy);
+        void RemoveEnemy(ICardInPlay<IEnemyCard> enemy);
     }
 }

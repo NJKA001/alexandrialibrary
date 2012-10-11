@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
+using LotR.Cards.Encounter.Enemies;
 using LotR.Effects.Modifiers;
-using LotR.Games;
+using LotR.States;
 
 namespace LotR.Effects.Phases.Combat
 {
     public interface ICharactersAttackStep
         : IPhaseStep
     {
-        IEnemyInPlay Target { get; }
+        ICardInPlay<IEnemyCard> Target { get; }
         IEnumerable<IAttackingCard> Attackers { get; }
         IEnumerable<IAttackModifier> AttackModifiers { get; }
         IEnumerable<IDefenseModifier> DefenseModifiers { get; }

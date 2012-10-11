@@ -5,9 +5,9 @@ using System.Text;
 
 using LotR.Cards;
 
-namespace LotR.States.Areas
+namespace LotR.States
 {
-    public interface ICardInPlay<T>
+    public interface ICardInHand<T>
         where T : ICard
     {
         T Card { get; }

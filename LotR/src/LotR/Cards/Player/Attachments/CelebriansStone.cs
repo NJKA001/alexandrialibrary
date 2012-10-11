@@ -5,7 +5,7 @@ using System.Text;
 
 using LotR.Cards.Player.Heroes;
 using LotR.Effects;
-using LotR.Games;
+using LotR.States;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Any;
 
@@ -24,12 +24,12 @@ namespace LotR.Cards.Player.Attachments
             AddEffect(new AragornGetsASpiritResourceIcon(this));
         }
 
-        public override bool CanBeAttachedTo(IPhaseStep step, ICardInPlay cardInPlay)
+        public override bool CanBeAttachedTo(IPhaseStep step, ICanHaveAttachments cardInPlay)
         {
             if (cardInPlay == null)
                 throw new ArgumentNullException("cardInPlay");
 
-            return (cardInPlay.Card is IHeroCard);
+            return (cardInPlay is IHeroCard);
         }
 
         public class AddTwoWillpower
@@ -42,18 +42,18 @@ namespace LotR.Cards.Player.Attachments
 
             public void DetermineWillpower(IDetermineWillpowerStep step)
             {
-                var attachment = step.GetCardInPlay(Source.Id) as IAttachmentInPlay;
-                if (attachment == null || attachment.AttachedTo == null)
-                    return;
+                //var attachment = step.GetCardInPlay(Source.Id) as ICardInPlay<IAttachmentCard>;
+                //if (attachment == null || attachment.AttachedTo == null)
+                //    return;
 
-                var willpowerful = attachment.AttachedTo.Card as IWillpowerfulCard;
-                if (willpowerful == null)
-                    return;
+                //var willpowerful = attachment.AttachedTo.Card as IWillpowerfulCard;
+                //if (willpowerful == null)
+                //    return;
 
-                if (step.Source != null && step.Source.Id == willpowerful.Id)
-                {
-                    step.Willpower += 2;
-                }
+                //if (step.Source != null && step.Source.Id == willpowerful.Id)
+                //{
+                //    step.Willpower += 2;
+                //}
             }
         }
 
@@ -67,21 +67,21 @@ namespace LotR.Cards.Player.Attachments
 
             public void CheckForResourceIcon(ICheckForResourceIconStep step)
             {
-                var attachment = step.GetCardInPlay(Source.Id) as IAttachmentInPlay;
-                if (attachment == null || attachment.AttachedTo == null)
-                    return;
+                //var attachment = step.GetCardInPlay(Source.Id) as ICardInPlay<IAttachmentCard>;
+                //if (attachment == null || attachment.AttachedTo == null)
+                //    return;
 
-                var resourceful = attachment.AttachedTo.Card as IResourcefulCard;
-                if (resourceful == null)
-                    return;
+                //var resourceful = attachment.AttachedTo.Card as IResourcefulCard;
+                //if (resourceful == null)
+                //    return;
 
-                if (step.Source != null && step.Source.Id == resourceful.Id)
-                {
-                    if (step.ResourceIcon == Sphere.Spirit && resourceful.Title == "Aragorn")
-                    {
-                        step.HasResourceIcon = true;
-                    }
-                }
+                //if (step.Source != null && step.Source.Id == resourceful.Id)
+                //{
+                //    if (step.ResourceIcon == Sphere.Spirit && resourceful.Title == "Aragorn")
+                //    {
+                //        step.HasResourceIcon = true;
+                //    }
+                //}
             }
         }
     }

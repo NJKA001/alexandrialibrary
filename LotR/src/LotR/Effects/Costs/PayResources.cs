@@ -39,8 +39,8 @@ namespace LotR.Effects.Costs
             {
                 foreach (var source in resourcePayment.Payments.Select(x => x.Item1))
                 {
-                    if (!source.HasResourceIcon(sphere))
-                        return false;
+                    //if (!source.HasResourceIcon(sphere))
+                    //    return false;
                 }
             }
 

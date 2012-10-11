@@ -7,7 +7,7 @@ using LotR.Effects.Choices;
 using LotR.Effects.Costs;
 using LotR.Effects;
 using LotR.Effects.Modifiers;
-using LotR.Games;
+using LotR.States;
 using LotR.Effects.Phases;
 
 namespace LotR.Cards.Player.Heroes

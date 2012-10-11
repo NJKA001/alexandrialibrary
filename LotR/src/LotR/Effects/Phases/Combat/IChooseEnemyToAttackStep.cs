@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
-using LotR.Games;
+using LotR.Cards.Encounter.Enemies;
+using LotR.States;
 
 namespace LotR.Effects.Phases.Combat
 {
@@ -12,10 +13,10 @@ namespace LotR.Effects.Phases.Combat
         : IPhaseStep
     {
         IEnumerable<IAttackingCard> Attackers { get; }
-        IEnumerable<IEnemyInPlay> Enemies { get; }
-        IEnemyInPlay Choice { get; set; }
+        IEnumerable<ICardInPlay<IEnemyCard>> Enemies { get; }
+        ICardInPlay<IEnemyCard> Choice { get; set; }
 
-        void AddEnemy(IEnemyInPlay enemy);
-        void RemoveEnemy(IEnemyInPlay enemy);
+        void AddEnemy(ICardInPlay<IEnemyCard> enemy);
+        void RemoveEnemy(ICardInPlay<IEnemyCard> enemy);
     }
 }

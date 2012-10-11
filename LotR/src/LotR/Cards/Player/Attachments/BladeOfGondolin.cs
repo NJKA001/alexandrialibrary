@@ -6,7 +6,7 @@ using System.Text;
 using LotR.Cards.Player.Heroes;
 using LotR.Effects;
 using LotR.Effects.Choices;
-using LotR.Games;
+using LotR.States;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Any;
 using LotR.Effects.Phases.Combat;
@@ -26,12 +26,12 @@ namespace LotR.Cards.Player.Attachments
             AddEffect(new AddOneProgressTokenAfterDefeatingAnEnemy(this));
         }
 
-        public override bool CanBeAttachedTo(IPhaseStep step, ICardInPlay cardInPlay)
+        public override bool CanBeAttachedTo(IPhaseStep step, ICanHaveAttachments cardInPlay)
         {
             if (cardInPlay == null)
                 throw new ArgumentNullException("cardInPlay");
 
-            return (cardInPlay.Card is IHeroCard);
+            return (cardInPlay is IHeroCard);
         }
 
         public class AddOneAttackWhenAttackingAnOrc
@@ -44,16 +44,16 @@ namespace LotR.Cards.Player.Attachments
 
             public void DetermineAttack(IDetermineAttackStep step)
             {
-                if (step.Target != null)
-                {
-                    var traitStep = new CheckForTraitStep(step.Phase, step.Player, step.Target, Trait.Orc);
-                    step.Target.Card.CheckForTrait(traitStep);
+                //if (step.Target != null)
+                //{
+                //    var traitStep = new CheckForTraitStep(step.Phase, step.Player, step.Target, Trait.Orc);
+                //    step.Target.Card.CheckForTrait(traitStep);
 
-                    if (traitStep.HasTrait)
-                    {
-                        step.Attack += 1;
-                    }
-                }
+                //    if (traitStep.HasTrait)
+                //    {
+                //        step.Attack += 1;
+                //    }
+                //}
             }
         }
 
@@ -67,18 +67,18 @@ namespace LotR.Cards.Player.Attachments
 
             public void AfterEnemyDefeated(IEnemyDefeatedStep step)
             {
-                var attachment = step.GetCardInPlay(Source.Id) as IAttachmentInPlay;
-                if (attachment == null || attachment.AttachedTo == null)
-                    return;
+                var attachment = step.GetCardInPlay(Source.Id) as ICardInPlay<IAttachmentCard>;
+                //if (attachment == null || attachment.AttachedTo == null)
+                //    return;
 
-                var hero = attachment.AttachedTo as IHeroCard;
-                if (hero == null)
-                    return;
+                //var hero = attachment.AttachedTo as IHeroCard;
+                //if (hero == null)
+                //    return;
 
-                if (step.Attackers.Any(x => x.Id == hero.Id))
-                {
-                    step.AddEffect(this);
-                }
+                //if (step.Attackers.Any(x => x.Id == hero.Id))
+                //{
+                //    step.AddEffect(this);
+                //}
             }
 
             public override void Resolve(IPhaseStep step, IChoice choice)

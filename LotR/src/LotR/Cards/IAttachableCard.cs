@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Games;
 using LotR.Effects.Phases;
+using LotR.States;
 
 namespace LotR.Cards
 {
@@ -12,6 +12,6 @@ namespace LotR.Cards
         : ICard
     {
         bool IsRestricted { get; }
-        bool CanBeAttachedTo(IPhaseStep step, ICardInPlay cardInPlay);
+        bool CanBeAttachedTo(IPhaseStep step, ICanHaveAttachments cardInPlay);
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Modifiers;
-using LotR.Games;
+using LotR.States;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Any;
 using LotR.Effects.Phases.Combat;
@@ -43,15 +43,15 @@ namespace LotR.Cards.Player.Heroes
 
             public override void Resolve(IPhaseStep step, IChoice choice)
             {
-                var attackStep = step as IDetermineAttackStep;
-                if (attackStep == null)
-                    return;
+                //var attackStep = step as IDetermineAttackStep;
+                //if (attackStep == null)
+                //    return;
 
-                var damageable = step.GetCardInPlay(Source.Id) as IDamageableInPlay;
-                if (damageable != null)
-                {
-                    attackStep.Attack += damageable.Damage;
-                }
+                //var damageable = step.GetCardInPlay(Source.Id) as IDamageableInPlay;
+                //if (damageable != null)
+                //{
+                //    attackStep.Attack += damageable.Damage;
+                //}
             }
         }
 

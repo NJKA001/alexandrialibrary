@@ -6,7 +6,7 @@ using System.Text;
 using LotR.Cards;
 using LotR.Cards.Quests;
 
-namespace LotR.Games.Scenarios
+namespace LotR.States.Scenarios
 {
     public class PassageThroughMirkwood
         : ScenarioBase

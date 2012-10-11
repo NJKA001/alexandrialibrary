@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards.Player.Heroes;
-using LotR.Games;
+using LotR.States;
 using LotR.Effects.Phases;
 
 namespace LotR.Cards.Player.Attachments
@@ -18,12 +18,12 @@ namespace LotR.Cards.Player.Attachments
             AddTrait(Trait.Skill);
         }
 
-        public override bool CanBeAttachedTo(IPhaseStep step, ICardInPlay cardInPlay)
+        public override bool CanBeAttachedTo(IPhaseStep step, ICanHaveAttachments cardInPlay)
         {
             if (cardInPlay == null)
                 throw new ArgumentNullException("cardInPlay");
 
-            return (cardInPlay.Card is IHeroCard);
+            return (cardInPlay is IHeroCard);
         }
     }
 }

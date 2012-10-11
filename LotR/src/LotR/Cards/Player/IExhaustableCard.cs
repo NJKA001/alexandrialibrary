@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Cards.Encounter
+namespace LotR.Cards.Player
 {
-    public interface IEncounterDeck
-        : IDeck<IEncounterCard>
+    public interface IExhaustableCard
+        : ICard
     {
     }
 }

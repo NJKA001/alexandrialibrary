@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Games;
+using LotR.Cards.Encounter.Enemies;
+using LotR.States;
 
 namespace LotR.Effects.Phases.Combat
 {
     public interface IDealDamageToEnemyStep
         : IPhaseStep
     {
-        IEnemyInPlay Target { get; set; }
+        ICardInPlay<IEnemyCard> Target { get; set; }
         byte Damage { get; set; }
     }
 }

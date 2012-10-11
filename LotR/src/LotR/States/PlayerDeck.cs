@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards;
+using LotR.Cards.Player;
 using LotR.Cards.Player.Heroes;
 
-namespace LotR.Cards.Player
+namespace LotR.States
 {
     public class PlayerDeck
         : Deck<IPlayerCard>, IPlayerDeck

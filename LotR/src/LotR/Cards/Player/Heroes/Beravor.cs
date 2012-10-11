@@ -7,7 +7,7 @@ using LotR.Effects.Choices;
 using LotR.Effects.Costs;
 using LotR.Effects;
 using LotR.Effects.Payments;
-using LotR.Games;
+using LotR.States;
 using LotR.Effects.Phases;
 
 namespace LotR.Cards.Player.Heroes
@@ -39,7 +39,7 @@ namespace LotR.Cards.Player.Heroes
 
             public override ICost GetCost(IPhaseStep step)
             {
-                var exhaustable = step.GetCardInPlay(Source.Id) as IExhaustableInPlay;
+                var exhaustable = step.GetCardInPlay(Source.Id) as ICardInPlay<IExhaustableCard>;
                 if (exhaustable == null)
                     return null;
 
@@ -52,7 +52,7 @@ namespace LotR.Cards.Player.Heroes
                 if (exhaustPayment == null)
                     return false;
 
-                exhaustPayment.Exhaustable.Exhaust();
+                //exhaustPayment.Exhaustable.Exhaust();
                 
                 return true;
             }
@@ -63,7 +63,8 @@ namespace LotR.Cards.Player.Heroes
                 if (playerChoice == null)
                     return;
 
-                playerChoice.Player.DrawCards(2);
+                var cards = playerChoice.Player.Deck.GetFromTop(2);
+                playerChoice.Player.Hand.AddCards(cards);
             }
         }
     }

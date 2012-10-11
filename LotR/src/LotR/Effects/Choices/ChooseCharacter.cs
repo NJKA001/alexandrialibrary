@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
-using LotR.Games;
+using LotR.Cards.Player;
+using LotR.States;
 
 namespace LotR.Effects.Choices
 {
@@ -16,7 +17,7 @@ namespace LotR.Effects.Choices
         {
         }
 
-        public ICharacterInPlay Character
+        public ICardInPlay<ICharacterCard> Character
         {
             get;
             set;

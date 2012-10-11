@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
-using LotR.Games;
+using LotR.Cards.Encounter.Enemies;
+using LotR.States;
 
 namespace LotR.Effects.Phases.Any
 {
     public interface IDetermineAttackStep
         : IPhaseStep
     {
-        IEnemyInPlay Target { get; }
+        ICardInPlay<IEnemyCard> Target { get; }
         IEnumerable<IAttackingCard> Attackers { get; }
         byte Attack { get; set; }
     }
