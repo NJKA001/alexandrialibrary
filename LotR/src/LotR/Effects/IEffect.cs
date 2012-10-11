@@ -7,6 +7,7 @@ using LotR.Effects.Choices;
 using LotR.Effects.Costs;
 using LotR.Effects.Phases;
 using LotR.Effects.Payments;
+using LotR.States;
 
 namespace LotR.Effects
 {
@@ -15,11 +16,11 @@ namespace LotR.Effects
         Guid EffectId { get; }
         string Description { get; }
 
-        IChoice GetChoice(IPhaseStep step);
-        ICost GetCost(IPhaseStep step);
-        ILimit GetLimit(IPhaseStep step);
+        IChoice GetChoice(IGameState state);
+        ICost GetCost(IGameState state);
+        ILimit GetLimit(IGameState state);
 
-        bool PaymentAccepted(IPhaseStep step, IPayment payment);
-        void Resolve(IPhaseStep step, IChoice choice);
+        bool PaymentAccepted(IGameState state, IPayment payment);
+        void Resolve(IGameState state, IChoice choice);
     }
 }

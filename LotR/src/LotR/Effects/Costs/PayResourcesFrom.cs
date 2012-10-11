@@ -5,27 +5,28 @@ using System.Text;
 
 using LotR.Cards.Player;
 using LotR.Effects.Payments;
+using LotR.States;
 
 namespace LotR.Effects.Costs
 {
     public class PayResourcesFrom
         : CostBase
     {
-        public PayResourcesFrom(ISource source, IResourcefulCard target, byte numberOfResources)
+        public PayResourcesFrom(ISource source, IResourcefulInPlay target, byte numberOfResources)
             : base(GetDescription(target, numberOfResources), source)
         {
             this.target = target;
             this.numberOfResources = numberOfResources;
         }
 
-        private static string GetDescription(IResourcefulCard target, byte numberOfResources)
+        private static string GetDescription(IResourcefulInPlay target, byte numberOfResources)
         {
             return numberOfResources == 1 ?
                 string.Format("Pay 1 resource from {0}'s pool", target.Title)
                 : string.Format("Pay {0} resources from {1}'s pool", numberOfResources, target.Title);
         }
 
-        private readonly IResourcefulCard target;
+        private readonly IResourcefulInPlay target;
         private readonly byte numberOfResources;
 
         public override bool IsMetBy(IPayment payment)
@@ -44,11 +45,11 @@ namespace LotR.Effects.Costs
             if (firstPayment == null)
                 return false;
 
-            //if (firstPayment.Item1.CardId != target.Id)
-            //    return false;
+            if (firstPayment.Item1.Card.Id != target.Card.Id)
+                return false;
 
-            //if (firstPayment.Item2 != numberOfResources)
-            //    return false;
+            if (firstPayment.Item2 != numberOfResources)
+                return false;
 
             return true;
         }

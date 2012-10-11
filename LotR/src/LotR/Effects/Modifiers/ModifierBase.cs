@@ -5,13 +5,14 @@ using System.Text;
 
 using LotR.Cards;
 using LotR.Effects.Phases;
+using LotR.States;
 
 namespace LotR.Effects.Modifiers
 {
     public abstract class ModifierBase
         : EffectBase, IModifier
     {
-        protected ModifierBase(string description, IPhase startPhase, ISource source, ICard target, TimeScope duration, int value)
+        protected ModifierBase(string description, Phase startPhase, ISource source, ICard target, TimeScope duration, int value)
             : base(description)
         {
             this.StartPhase = startPhase;
@@ -26,7 +27,7 @@ namespace LotR.Effects.Modifiers
             return string.Format("{0} {1}", name, value);
         }
 
-        public IPhase StartPhase
+        public Phase StartPhase
         {
             get;
             private set;

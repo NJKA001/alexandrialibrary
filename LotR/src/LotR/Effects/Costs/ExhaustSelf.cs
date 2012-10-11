@@ -12,13 +12,13 @@ namespace LotR.Effects.Costs
     public class ExhaustSelf
         : CostBase, ICost
     {
-        public ExhaustSelf(ICardInPlay<IExhaustableCard> exhaustable)
+        public ExhaustSelf(IExhaustableInPlay exhaustable)
             : base(string.Format("Exhaust {0}", exhaustable.Card.Title), exhaustable.Card)
         {
             this.exhaustable = exhaustable;
         }
 
-        private readonly ICardInPlay<IExhaustableCard> exhaustable;
+        private readonly IExhaustableInPlay exhaustable;
 
         public override bool IsMetBy(IPayment payment)
         {

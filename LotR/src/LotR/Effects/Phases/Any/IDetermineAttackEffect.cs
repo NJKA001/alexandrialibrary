@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Effects.Phases;
 using LotR.States;
 
-namespace LotR.States
+namespace LotR.Effects.Phases.Any
 {
-    public interface IRound
+    public interface IDetermineAttackEffect
     {
-        IPhase CurrentPhase { get; }
+        void DetermineAttack(IGameState state);
     }
 }

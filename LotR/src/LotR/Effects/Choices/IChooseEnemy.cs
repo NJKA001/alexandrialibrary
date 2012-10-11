@@ -11,6 +11,6 @@ namespace LotR.Effects.Choices
     public interface IChooseEnemy
         : IChoice
     {
-        ICardInPlay<IEnemyCard> Enemy { get; set; }
+        IEnemyInPlay Enemy { get; set; }
     }
 }

@@ -12,15 +12,17 @@ namespace LotR.Effects.Costs
     public class PayResources
         : CostBase
     {
-        public PayResources(ISource source, Sphere sphere, byte numberOfResources)
+        public PayResources(ISource source, Sphere sphere, byte numberOfResources, bool isVariableCost)
             : base(string.Format("Pay {0} {1} resources", numberOfResources, sphere), source)
         {
             this.sphere = sphere;
             this.numberOfResources = numberOfResources;
+            this.isVariableCost = isVariableCost;
         }
 
         private readonly Sphere sphere;
         private readonly byte numberOfResources;
+        private readonly bool isVariableCost;
 
         public override bool IsMetBy(IPayment payment)
         {

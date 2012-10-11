@@ -8,11 +8,10 @@ using LotR.Cards.Encounter.Enemies;
 
 namespace LotR.Effects.Phases.Combat
 {
-    public interface IEnemyDefeatedStep
-        : IPhaseStep
-    {
-        IEnumerable<IAttackingCard> Attackers { get; }
-        IEnumerable<IDefendingCard> Defenders { get; }
-        IEnemyCard Enemy { get; }
-    }
+    //public interface IEnemyDefeatedStep
+    //{
+    //    IEnumerable<IAttackingCard> Attackers { get; }
+    //    IEnumerable<IDefendingCard> Defenders { get; }
+    //    IEnemyCard Enemy { get; }
+    //}
 }

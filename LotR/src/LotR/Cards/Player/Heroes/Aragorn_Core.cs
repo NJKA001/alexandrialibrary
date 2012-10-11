@@ -14,7 +14,7 @@ using LotR.Effects.Phases.Quest;
 namespace LotR.Cards.Player.Heroes
 {
     public sealed class Aragorn
-        : HeroCardBase, IAfterCommittingToQuest
+        : HeroCardBase
     {
         public Aragorn()
             : base("Aragorn", CardSet.Core, 1, Sphere.Leadership, 12, 2, 3, 2, 5)
@@ -26,32 +26,30 @@ namespace LotR.Cards.Player.Heroes
             AddEffect(new SentinelAbility(this));
         }
 
-        public void AfterCommittingToQuest(ICommitToQuestStep step)
-        {
-            var self = step.CommitedCharacters.Where(x => x.Card.Id == this.Id).Select(x => x.Card).FirstOrDefault();
-
-            if (self == null)
-                return;
-
-            step.AddEffect(new ReadyAfterCommitingToQuest(this, step));
-        }
-
         #region Abilities
 
         public class ReadyAfterCommitingToQuest
-            : ResponseCharacterAbilityBase
+            : ResponseCharacterAbilityBase, IAfterCommittingToQuest
         {
-            public ReadyAfterCommitingToQuest(Aragorn source, ICommitToQuestStep step)
+            public ReadyAfterCommitingToQuest(Aragorn source)
                 : base("After Aragorn commits to a quest, spend 1 resource from his resource pool to ready him.", source)
             {
                 aragorn = source;
-                this.step = step;
             }
 
             private readonly Aragorn aragorn;
-            private readonly ICommitToQuestStep step;
 
-            public override void Resolve(IPhaseStep step, IChoice choice)
+            public void AfterCommittingToQuest(IGameState state)
+            {
+                //var self = step.CommitedCharacters.Where(x => x.Card.Id == this.Id).Select(x => x.Card).FirstOrDefault();
+
+                //if (self == null)
+                    //return;
+
+                state.AddEffect(this);
+            }
+
+            public override void Resolve(IGameState state, IChoice choice)
             {
                 //var inPlay = step.GetCardInPlay(aragorn.Id) as ICardInPlay<IHeroCard>;
 
@@ -61,7 +59,7 @@ namespace LotR.Cards.Player.Heroes
                 //step.AddEffect(new ReadyCards(step, new List<ICardInPlay<IExhaustableCard>> { inPlay }));
             }
 
-            public override ICost GetCost(IPhaseStep step)
+            public override ICost GetCost(IGameState state)
             {
                 return new ReadyCost(aragorn);
             }

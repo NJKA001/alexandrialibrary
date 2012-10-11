@@ -12,5 +12,8 @@ namespace LotR.States
         where T : ICard
     {
         T Card { get; }
+        string Title { get; }
+
+        bool HasTrait(Trait trait);
     }
 }

@@ -72,12 +72,9 @@ namespace LotR.Cards
             protected set;
         }
 
-        public virtual void CheckForTrait(ICheckForTraitStep step)
+        public virtual bool HasTrait(Trait trait)
         {
-            if (traits.Contains(step.Trait))
-            {
-                step.HasTrait = true;
-            }
+            return traits.Any(x => x == trait);
         }
 
         public bool IsUnique

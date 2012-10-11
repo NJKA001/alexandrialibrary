@@ -9,7 +9,7 @@ using LotR.States;
 namespace LotR.Effects.Phases.Any
 {
     public interface ICheckForTraitStep
-        : IPhaseStep
+        //: IGameState
     {
         ICardInPlay<ICard> CardInPlay { get; }
         Trait Trait { get; }

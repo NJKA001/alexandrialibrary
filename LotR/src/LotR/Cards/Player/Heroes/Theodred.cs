@@ -36,33 +36,34 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public void AfterCommittingToQuest(ICommitToQuestStep step)
+            public void AfterCommittingToQuest(IGameState state)
             {
                 //var self = step.CommitedCharacters.Where(x => x.CardId == Source.Id).Select(x => x.Card).FirstOrDefault();
 
                 //if (self == null)
                 //    return;
 
-                //step.AddEffect(this);
+                state.AddEffect(this);
             }
 
-            public override ICost GetCost(IPhaseStep step)
+            public override ICost GetCost(IGameState state)
             {
-                var commitStep = step as ICommitToQuestStep;
-                if (commitStep == null)
-                    return null;
+                //var commitStep = step as ICommitToQuestStep;
+                //if (commitStep == null)
+                //    return null;
 
-                return new ChooseHeroCommitedToTheQuest(Source, commitStep);
+                //return new ChooseHeroCommitedToTheQuest(Source, commitStep);
+                return null;
             }
 
-            public override void Resolve(IPhaseStep step, IChoice choice)
+            public override void Resolve(IGameState state, IChoice choice)
             {
-                if (!(step is ICommitToQuestStep))
-                    return;
+                //if (!(step is ICommitToQuestStep))
+                //    return;
 
-                var heroChoice = choice as IChooseHero;
-                if (heroChoice == null || heroChoice.Hero == null)
-                    return;
+                //var heroChoice = choice as IChooseHero;
+                //if (heroChoice == null || heroChoice.Hero == null)
+                //    return;
 
                 //step.AddEffect(new AddResources(step, new Dictionary<Guid, byte> { { heroChoice.Hero.CardId, 1 } }));
             }

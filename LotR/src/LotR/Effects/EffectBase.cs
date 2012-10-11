@@ -7,6 +7,7 @@ using LotR.Effects.Choices;
 using LotR.Effects.Costs;
 using LotR.Effects.Payments;
 using LotR.Effects.Phases;
+using LotR.States;
 
 namespace LotR.Effects
 {
@@ -31,27 +32,27 @@ namespace LotR.Effects
             private set;
         }
 
-        public virtual IChoice GetChoice(IPhaseStep step)
+        public virtual IChoice GetChoice(IGameState state)
         {
             return null;
         }
 
-        public virtual ICost GetCost(IPhaseStep step)
+        public virtual ICost GetCost(IGameState state)
         {
             return null;
         }
 
-        public virtual ILimit GetLimit(IPhaseStep step)
+        public virtual ILimit GetLimit(IGameState state)
         {
             return null;
         }
 
-        public virtual bool PaymentAccepted(IPhaseStep step, IPayment payment)
+        public virtual bool PaymentAccepted(IGameState state, IPayment payment)
         {
             return true;
         }
 
-        public virtual void Resolve(IPhaseStep step, IChoice choice)
+        public virtual void Resolve(IGameState state, IChoice choice)
         {
         }
     }

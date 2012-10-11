@@ -6,7 +6,6 @@ using System.Text;
 namespace LotR.Effects.Phases.Any
 {
     public interface IDetermineDefenseStep
-        : IPhaseStep
     {
         byte Defense { get; set; }
     }

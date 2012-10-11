@@ -8,7 +8,6 @@ using LotR.Cards;
 namespace LotR.Effects.Phases.Any
 {
     public interface IDetermineWillpowerStep
-        : IPhaseStep
     {
         IWillpowerfulCard Source { get; }
         byte Willpower { get; set; }

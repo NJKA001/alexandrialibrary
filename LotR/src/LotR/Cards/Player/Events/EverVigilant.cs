@@ -6,6 +6,7 @@ using System.Text;
 using LotR.Effects.Choices;
 using LotR.Effects;
 using LotR.Effects.Phases;
+using LotR.States;
 
 namespace LotR.Cards.Player.Events
 {
@@ -25,12 +26,12 @@ namespace LotR.Cards.Player.Events
             {
             }
 
-            public override IChoice GetChoice(IPhaseStep step)
+            public override IChoice GetChoice(IGameState state)
             {
                 return new ChooseAlly(Source);
             }
 
-            public override void Resolve(IPhaseStep step, IChoice choice)
+            public override void Resolve(IGameState state, IChoice choice)
             {
                 var allyChoice = choice as IChooseAlly;
                 if (allyChoice == null || allyChoice.Ally == null)

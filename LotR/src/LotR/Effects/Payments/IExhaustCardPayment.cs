@@ -11,6 +11,6 @@ namespace LotR.Effects.Payments
     public interface IExhaustCardPayment
         : IPayment
     {
-        ICardInPlay<IExhaustableCard> Exhaustable { get; }
+        IExhaustableInPlay Exhaustable { get; }
     }
 }

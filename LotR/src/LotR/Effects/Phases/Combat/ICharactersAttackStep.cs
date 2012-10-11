@@ -11,7 +11,6 @@ using LotR.States;
 namespace LotR.Effects.Phases.Combat
 {
     public interface ICharactersAttackStep
-        : IPhaseStep
     {
         ICardInPlay<IEnemyCard> Target { get; }
         IEnumerable<IAttackingCard> Attackers { get; }

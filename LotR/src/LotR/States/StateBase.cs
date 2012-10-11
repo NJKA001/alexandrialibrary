@@ -6,9 +6,20 @@ using System.Text;
 
 namespace LotR.States
 {
-    public class StateBase
+    public abstract class StateBase
         : IState, INotifyPropertyChanged
     {
+        protected StateBase()
+        {
+            this.stateId = Guid.NewGuid();
+        }
+
+        protected StateBase(Guid stateId)
+        {
+            this.stateId = stateId;
+        }
+
+        private readonly Guid stateId;
         private readonly IList<IState> states = new List<IState>();
 
         protected void OnPropertyChanged(string propertyName)
@@ -34,7 +45,19 @@ namespace LotR.States
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public IEnumerable<T> GetStates<T>() where T : IState
+        public Guid StateId
+        {
+            get { return stateId; }
+        }
+
+        public T GetState<T>(Guid stateId)
+            where T : IState
+        {
+            return states.OfType<T>().Where(x => x.StateId == stateId).FirstOrDefault();
+        }
+
+        public IEnumerable<T> GetStates<T>()
+            where T : IState
         {
             return states.OfType<T>();
         }

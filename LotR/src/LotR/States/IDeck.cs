@@ -17,6 +17,7 @@ namespace LotR.States
         IEnumerable<T> GetFromTop(int numberOfCards);
         void PutOnTop(IEnumerable<T> cards);
         void PutOnBottom(IEnumerable<T> cards);
+        void Discard(IEnumerable<T> cards);
         void Shuffle();
     }
 }

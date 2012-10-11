@@ -32,32 +32,35 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public override IChoice GetChoice(IPhaseStep step)
+            public override IChoice GetChoice(IGameState state)
             {
                 return new ChoosePlayer(Source);
             }
 
-            public override ICost GetCost(IPhaseStep step)
+            public override ICost GetCost(IGameState state)
             {
-                var exhaustable = step.GetCardInPlay(Source.Id) as ICardInPlay<IExhaustableCard>;
+                var exhaustable = state.GetState<IExhaustableInPlay>(Source.Id);
                 if (exhaustable == null)
                     return null;
 
                 return new ExhaustSelf(exhaustable);
             }
 
-            public override bool PaymentAccepted(IPhaseStep step, IPayment payment)
+            public override bool PaymentAccepted(IGameState state, IPayment payment)
             {
                 var exhaustPayment = payment as IExhaustCardPayment;
                 if (exhaustPayment == null)
                     return false;
 
-                //exhaustPayment.Exhaustable.Exhaust();
+                if (exhaustPayment.Exhaustable.IsExhausted)
+                    return false;
+
+                exhaustPayment.Exhaustable.Exhaust();
                 
                 return true;
             }
 
-            public override void Resolve(IPhaseStep step, IChoice choice)
+            public override void Resolve(IGameState state, IChoice choice)
             {
                 var playerChoice = choice as IChoosePlayer;
                 if (playerChoice == null)

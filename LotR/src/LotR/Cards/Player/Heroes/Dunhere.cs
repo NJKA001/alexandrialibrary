@@ -10,6 +10,9 @@ using LotR.Effects.Phases;
 using LotR.Effects.Phases.Any;
 using LotR.Effects.Phases.Combat;
 using LotR.States;
+using LotR.States.Areas;
+using LotR.States.Phases.Any;
+using LotR.States.Phases.Combat;
 
 namespace LotR.Cards.Player.Heroes
 {
@@ -34,71 +37,75 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public void BeforeChoosingEnemyToAttack(IChooseEnemyToAttackStep step)
+            public void BeforeChoosingEnemyToAttack(IGameState state)
             {
-                if (step.Attackers.Count() != 1)
+                var chooseEnemy = state.GetStates<IChooseEnemyToAttack>().FirstOrDefault();
+                if (chooseEnemy == null)
                     return;
 
-                var attacker = step.Attackers.FirstOrDefault();
+                if (chooseEnemy.Attackers.Count() != 1)
+                    return;
+
+                var attacker = chooseEnemy.Attackers.FirstOrDefault();
                 if (attacker == null)
                     return;
 
-                if (attacker.Id != Source.Id)
+                if (attacker.Card.Id != Source.Id)
                     return;
 
-                step.AddEffect(this);
+                state.AddEffect(this);
             }
 
-            public override void Resolve(IPhaseStep step, IChoice choice)
+            public override void Resolve(IGameState state, IChoice choice)
             {
-                var chooseEnemyToAttackStep = step as IChooseEnemyToAttackStep;
-                if (chooseEnemyToAttackStep == null)
+                var chooseEnemy = state.GetStates<IChooseEnemyToAttack>().FirstOrDefault();
+                if (chooseEnemy == null)
                     return;
 
-                //foreach (var enemy in step.Phase.Round.Game.StagingArea.CardsInStagingArea.OfType<ICardInPlay<IEnemyCard>>())
-                //{
-                //    chooseEnemyToAttackStep.AddEnemy(enemy);
-                //}
+                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+
+                foreach (var enemy in stagingArea.CardsInStagingArea.OfType<IEnemyInPlay>())
+                {
+                    chooseEnemy.AddEnemy(enemy);
+                }
             }
         }
 
         public class PlusOneAttackWhenAttackingAnEnemyInTheStagingArea
-            : PassiveCharacterAbilityBase, IDetermineAttack
+            : PassiveCharacterAbilityBase, IDetermineAttackEffect
         {
             public PlusOneAttackWhenAttackingAnEnemyInTheStagingArea(Dunhere source)
                 : base("When attacking an enemy in the staging area, Dunhere gets +1 Attack.", source)
             {
             }
 
-            public void DetermineAttack(IDetermineAttackStep step)
+            public void DetermineAttack(IGameState state)
             {
-                if (step.Attackers.Count() != 1)
+                var determineAttack = state.GetStates<IDetermineAttack>().FirstOrDefault();
+                if (determineAttack == null)
                     return;
 
-                var attacker = step.Attackers.FirstOrDefault();
-                if (attacker == null)
+                if (determineAttack.Attacker.Card.Id != Source.Id)
                     return;
 
-                if (attacker.Id != Source.Id)
+                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                if (stagingArea == null)
                     return;
 
-                //foreach (var enemy in step.Phase.Round.Game.StagingArea.CardsInStagingArea.OfType<ICardInPlay<IEnemyCard>>())
-                //{
-                //    if (enemy.CardId == step.Target.Card.Id)
-                //    {
-                //        step.AddEffect(this);
-                //        return;
-                //    }
-                //}
+                var enemy = stagingArea.CardsInStagingArea.OfType<IEnemyInPlay>().Where(x => x.Card.Id == determineAttack.Defender.Card.Id).FirstOrDefault();
+                if (enemy == null)
+                    return;
+
+                state.AddEffect(this);
             }
 
-            public override void Resolve(IPhaseStep step, IChoice choice)
+            public override void Resolve(IGameState state, IChoice choice)
             {
-                var determineAttackStep = step as IDetermineAttackStep;
-                if (determineAttackStep == null)
+                var determineAttack = state.GetStates<IDetermineAttack>().FirstOrDefault();
+                if (determineAttack == null)
                     return;
 
-                determineAttackStep.Attack += 1;
+                determineAttack.Attack += 1;
             }
         }
     }

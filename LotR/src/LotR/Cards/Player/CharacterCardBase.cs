@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Effects.Phases.Any;
+using LotR.States.Phases.Any;
 
 namespace LotR.Cards.Player
 {
@@ -43,52 +43,24 @@ namespace LotR.Cards.Player
             private set;
         }
 
-        public virtual void DetermineWillpower(IDetermineWillpowerStep step)
+        public virtual void DetermineWillpower(IDetermineWillpower state)
         {
-            if (step.CardIsInPlay(this.Id))
-            {
-                step.Willpower = this.Willpower;
-            }
-            else
-            {
-                step.Willpower = 0;
-            }
+            state.Willpower = this.Willpower;
         }
 
-        public virtual void DetermineAttack(IDetermineAttackStep step)
+        public virtual void DetermineAttack(IDetermineAttack state)
         {
-            if (step.CardIsInPlay(this.Id))
-            {
-                step.Attack = this.Attack;
-            }
-            else
-            {
-                step.Attack = 0;
-            }
+            state.Attack = this.Attack;
         }
 
-        public virtual void DetermineDefense(IDetermineDefenseStep step)
+        public virtual void DetermineDefense(IDetermineDefense state)
         {
-            if (step.CardIsInPlay(this.Id))
-            {
-                step.Defense = this.Defense;
-            }
-            else
-            {
-                step.Defense = 0;
-            }
+            state.Defense = this.Defense;
         }
 
-        public virtual void DetermineHitPoints(IDetermineHitPointsStep step)
+        public virtual void DetermineHitPoints(IDetermineHitPoints state)
         {
-            if (step.CardIsInPlay(this.Id))
-            {
-                step.HitPoints = this.HitPoints;
-            }
-            else
-            {
-                step.HitPoints = 0;
-            }
+            state.HitPoints = this.HitPoints;
         }
 
         public virtual bool IsValidAttachment(IAttachableCard card)

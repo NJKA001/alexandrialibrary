@@ -9,7 +9,7 @@ using LotR.Effects.Phases.Resource;
 namespace LotR.Cards.Player.Heroes
 {
     public class BilboBaggins_SoM
-        : HeroCardBase, IDuringDrawingCards
+        : HeroCardBase
     {
         public BilboBaggins_SoM()
             : base("Bilbo Baggins", CardSet.SoM, 1, Sphere.Lore, 9, 1, 1, 2, 2)
@@ -17,10 +17,10 @@ namespace LotR.Cards.Player.Heroes
             AddTrait(Trait.Hobbit);
         }
 
-        public void DuringDrawingCards(IDrawCardsStep step)
-        {
-            if (step.Player.IsFirstPlayer)
-                step.NumberOfCardsToDraw += 1;
-        }
+        //public void DuringDrawingCards(IDrawCardsStep step)
+        //{
+        //    if (step.Player.IsFirstPlayer)
+        //        step.NumberOfCardsToDraw += 1;
+        //}
     }
 }

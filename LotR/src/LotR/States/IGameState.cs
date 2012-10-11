@@ -10,6 +10,8 @@ namespace LotR.States
     public interface IGameState
         : IState
     {
+        Phase CurrentPhase { get; }
+
         void AddEffect(IEffect effect);
     }
 }

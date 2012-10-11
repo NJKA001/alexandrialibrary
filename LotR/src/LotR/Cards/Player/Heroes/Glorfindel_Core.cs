@@ -33,26 +33,26 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public override IChoice GetChoice(IPhaseStep step)
+            public override IChoice GetChoice(IGameState state)
             {
                 return new ChooseCharacter(Source);
             }
 
-            public override ICost GetCost(IPhaseStep step)
+            public override ICost GetCost(IGameState state)
             {
-                var resourceful = step.GetCardInPlay(Source.Id) as ICardInPlay<IResourcefulCard>;
-                if (resourceful == null || resourceful.Card == null)
+                var resourceful = state.GetState<IResourcefulInPlay>(Source.Id);
+                if (resourceful == null)
                     return null;
 
-                return new PayResourcesFrom(Source, resourceful.Card, 1);
+                return new PayResourcesFrom(Source, resourceful, 1);
             }
 
-            public override ILimit GetLimit(IPhaseStep step)
+            public override ILimit GetLimit(IGameState state)
             {
                 return new Limit(PlayerScope.None, TimeScope.Round, 1);
             }
 
-            public override bool PaymentAccepted(IPhaseStep step, IPayment payment)
+            public override bool PaymentAccepted(IGameState state, IPayment payment)
             {
                 if (payment == null)
                     return false;
@@ -76,7 +76,7 @@ namespace LotR.Cards.Player.Heroes
                 return true;
             }
 
-            public override void Resolve(IPhaseStep step, IChoice choice)
+            public override void Resolve(IGameState state, IChoice choice)
             {
                 var characterChoice = choice as IChooseCharacter;
                 if (characterChoice == null || characterChoice.Character == null)

@@ -11,6 +11,6 @@ namespace LotR.Effects.Payments
     public interface IChooseEnemyPayment
         : IPayment
     {
-        ICardInPlay<IEnemyCard> Enemy { get; }
+        IEnemyInPlay Enemy { get; }
     }
 }

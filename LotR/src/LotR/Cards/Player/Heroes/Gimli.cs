@@ -6,10 +6,11 @@ using System.Text;
 using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Modifiers;
-using LotR.States;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Any;
 using LotR.Effects.Phases.Combat;
+using LotR.States;
+using LotR.States.Phases.Any;
 
 namespace LotR.Cards.Player.Heroes
 {
@@ -29,29 +30,29 @@ namespace LotR.Cards.Player.Heroes
         #region Abilities
 
         public class StrengthBonusForDamage
-            : PassiveCharacterAbilityBase, IDetermineAttack
+            : PassiveCharacterAbilityBase, IDetermineAttackEffect
         {
             public StrengthBonusForDamage(Gimli source)
                 : base("Gimli gets +1 attack for each damage token on him.", source)
             {
             }
 
-            public void DetermineAttack(IDetermineAttackStep step)
+            public void DetermineAttack(IGameState state)
             {
-                step.AddEffect(this);
+                state.AddEffect(this);
             }
 
-            public override void Resolve(IPhaseStep step, IChoice choice)
+            public override void Resolve(IGameState state, IChoice choice)
             {
-                //var attackStep = step as IDetermineAttackStep;
-                //if (attackStep == null)
-                //    return;
+                var determineStrength = state.GetStates<IDetermineAttack>().Where(x => x.Attacker.Card.Id == Source.Id).FirstOrDefault();
+                if (determineStrength == null)
+                    return;
 
-                //var damageable = step.GetCardInPlay(Source.Id) as IDamageableInPlay;
-                //if (damageable != null)
-                //{
-                //    attackStep.Attack += damageable.Damage;
-                //}
+                var damagable = state.GetState<IDamagableInPlay>(Source.Id);
+                if (damagable == null)
+                    return;
+
+                determineStrength.Attack += damagable.Damage;
             }
         }
 

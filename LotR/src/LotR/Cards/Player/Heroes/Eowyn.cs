@@ -32,23 +32,23 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public override ICost GetCost(IPhaseStep step)
+            public override ICost GetCost(IGameState state)
             {
-                return new DiscardCardsFromHand(Source, step, 1);
+                return new DiscardCardsFromHand(Source, state, 1);
             }
 
-            public override ILimit GetLimit(IPhaseStep step)
+            public override ILimit GetLimit(IGameState state)
             {
                 return new Limit(PlayerScope.AnyPlayer, TimeScope.Round, 1);
             }
 
-            public override void Resolve(IPhaseStep step, IChoice choice)
+            public override void Resolve(IGameState state, IChoice choice)
             {
-                var willpowerful = step.GetCardInPlay(Source.Id) as IWillpowerfulCard;
-                if (willpowerful == null)
-                    return;
+                //var willpowerful = step.GetCardInPlay(Source.Id) as IWillpowerfulCard;
+                //if (willpowerful == null)
+                //    return;
 
-                step.AddEffect(new WillpowerModifier(step.Phase, Source, Source, TimeScope.Phase, 1));
+                //step.AddEffect(new WillpowerModifier(step.Phase, Source, Source, TimeScope.Phase, 1));
             }
         }
     }

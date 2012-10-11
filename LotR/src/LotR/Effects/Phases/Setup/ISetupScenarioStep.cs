@@ -6,7 +6,6 @@ using System.Text;
 namespace LotR.Effects.Phases.Setup
 {
     public interface ISetupScenarioStep
-        : IPhaseStep
     {
     }
 }

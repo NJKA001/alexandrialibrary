@@ -26,6 +26,6 @@ namespace LotR.Cards.Player.Attachments
             private set;
         }
 
-        public abstract bool CanBeAttachedTo(IPhaseStep step, ICanHaveAttachments cardInPlay);
+        public abstract bool CanBeAttachedTo(IGameState state, ICanHaveAttachments cardInPlay);
     }
 }

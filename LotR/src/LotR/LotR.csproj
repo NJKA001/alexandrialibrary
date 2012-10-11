@@ -40,9 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cards\IAttachmentHostCard.cs" />
     <Compile Include="Cards\ICanHaveAttachments.cs" />
     <Compile Include="Cards\Player\IExhaustableCard.cs" />
+    <Compile Include="States\Areas\IQuestArea.cs" />
+    <Compile Include="States\CardInHand.cs" />
     <Compile Include="States\Hand.cs" />
+    <Compile Include="States\IAttachmentInPlay.cs" />
+    <Compile Include="States\IAttackingInPlay.cs" />
+    <Compile Include="States\IDamagableInPlay.cs" />
+    <Compile Include="States\IDefendingInPlay.cs" />
+    <Compile Include="States\IEffective.cs" />
+    <Compile Include="States\IEnemyInPlay.cs" />
+    <Compile Include="States\IExhaustableInPlay.cs" />
     <Compile Include="States\IHand.cs" />
     <Compile Include="Cards\Player\Allies\Beorn.cs" />
     <Compile Include="Cards\Player\Allies\BrokIronfist.cs" />
@@ -109,7 +119,6 @@
     <Compile Include="Effects\AmbushEffect.cs" />
     <Compile Include="Effects\ActionCharacterAbilityBase.cs" />
     <Compile Include="Effects\DoomedEffect.cs" />
-    <Compile Include="Effects\AddResources.cs" />
     <Compile Include="Effects\EffectBase.cs" />
     <Compile Include="Effects\ExecutableEffectBase.cs" />
     <Compile Include="Effects\IAddResources.cs" />
@@ -146,6 +155,18 @@
     <Compile Include="Cards\Player\Heroes\Dunhere.cs" />
     <Compile Include="Cards\Player\Heroes\Glorfindel_Core.cs" />
     <Compile Include="States\IPlayerDeck.cs" />
+    <Compile Include="States\IResourcefulInPlay.cs" />
+    <Compile Include="States\IThreateningInPlay.cs" />
+    <Compile Include="States\IWillpowerfulInPlay.cs" />
+    <Compile Include="States\Phases\Any\ICharacterDamageHealed.cs" />
+    <Compile Include="States\Phases\Any\IDetermineAttack.cs" />
+    <Compile Include="States\Phases\Any\IDetermineDefense.cs" />
+    <Compile Include="States\Phases\Any\IDetermineHitPoints.cs" />
+    <Compile Include="States\Phases\Any\IDetermineWillpower.cs" />
+    <Compile Include="States\Phases\Any\IEncounterCardRevealed.cs" />
+    <Compile Include="States\Phases\Combat\IChooseEnemyToAttack.cs" />
+    <Compile Include="States\Phases\Combat\IEnemyDefeated.cs" />
+    <Compile Include="States\Phases\Quest\ICharactersCommittedToQuest.cs" />
     <Compile Include="States\PlayerDeck.cs" />
     <Compile Include="Effects\ICancelEffect.cs" />
     <Compile Include="Effects\IExecutableEffect.cs" />
@@ -158,7 +179,6 @@
     <Compile Include="Effects\Modifiers\ModifierBase.cs" />
     <Compile Include="Effects\Modifiers\WillpowerModifier.cs" />
     <Compile Include="Effects\PassiveEffect.cs" />
-    <Compile Include="Effects\ReadyCards.cs" />
     <Compile Include="Effects\ResponseEffectBase.cs" />
     <Compile Include="Effects\ReversableEffectBase.cs" />
     <Compile Include="Effects\IAmbushEffect.cs" />
@@ -195,8 +215,6 @@
     <Compile Include="Effects\Payments\IChooseEnemyPayment.cs" />
     <Compile Include="Effects\Payments\IResourcePayment.cs" />
     <Compile Include="Effects\Payments\PaymentBase.cs" />
-    <Compile Include="Effects\Phases\Any\CheckForTraitStep.cs" />
-    <Compile Include="Effects\Phases\Any\HealCharacterDamageStep.cs" />
     <Compile Include="Effects\Phases\Any\IAfterCharacterEntersPlay.cs" />
     <Compile Include="Effects\Phases\Any\IAfterCharacterLeavesPlay.cs" />
     <Compile Include="Effects\Phases\Any\IAfterEncounterCardRevealed.cs" />
@@ -207,7 +225,7 @@
     <Compile Include="Effects\Phases\Any\ICheckForResourceIcon.cs" />
     <Compile Include="Effects\Phases\Any\ICheckForResourceIconStep.cs" />
     <Compile Include="Effects\Phases\Any\ICheckForTrait.cs" />
-    <Compile Include="Effects\Phases\Any\IDetermineAttack.cs" />
+    <Compile Include="Effects\Phases\Any\IDetermineAttackEffect.cs" />
     <Compile Include="Effects\Phases\Any\IDetermineAttackStep.cs" />
     <Compile Include="Effects\Phases\Any\IDetermineDefenseStep.cs" />
     <Compile Include="Effects\Phases\Any\IDetermineHitPoints.cs" />
@@ -231,8 +249,6 @@
     <Compile Include="Effects\Phases\Combat\IDuringChoosingEnemyToAttack.cs" />
     <Compile Include="Effects\Phases\Combat\IDuringEnemyDefeated.cs" />
     <Compile Include="Effects\Phases\Combat\IEnemyDefeatedStep.cs" />
-    <Compile Include="Effects\Phases\PhaseStepBase.cs" />
-    <Compile Include="Effects\Phases\Quest\IQuestPhase.cs" />
     <Compile Include="Effects\Phases\Setup\ISetupScenarioStep.cs" />
     <Compile Include="States\Player.cs" />
     <Compile Include="Cards\Player\PlayerDeckReader.cs" />
@@ -277,9 +293,6 @@
     <Compile Include="Cards\Encounter\Objectives\IObjectiveCard.cs" />
     <Compile Include="Effects\IPassiveEffect.cs" />
     <Compile Include="Effects\Payments\IPayment.cs" />
-    <Compile Include="Effects\Phases\IPhase.cs" />
-    <Compile Include="Effects\IPhaseEffect.cs" />
-    <Compile Include="Effects\Phases\IPhaseStep.cs" />
     <Compile Include="States\ICardInHand.cs" />
     <Compile Include="States\IOutOfPlay.cs" />
     <Compile Include="States\IInPlay.cs" />
@@ -293,10 +306,8 @@
     <Compile Include="Cards\Player\IResourcefulCard.cs" />
     <Compile Include="Effects\IResponseEffect.cs" />
     <Compile Include="Cards\IRevealableCard.cs" />
-    <Compile Include="States\IRound.cs" />
     <Compile Include="Cards\Quests\IScenario.cs" />
     <Compile Include="Effects\IShadowEffect.cs" />
-    <Compile Include="States\Areas\IActiveLocationArea.cs" />
     <Compile Include="States\Areas\IStagingArea.cs" />
     <Compile Include="Effects\ISurgeEffect.cs" />
     <Compile Include="Cards\Encounter\IThreateningCard.cs" />
@@ -316,7 +327,6 @@
     <Compile Include="Effects\Phases\Combat\IBeforeChractersDefend.cs" />
     <Compile Include="Effects\Phases\Combat\IBeforeEnemyAttacks.cs" />
     <Compile Include="Effects\Phases\Combat\IBeforeShadowEffectResolve.cs" />
-    <Compile Include="Effects\Phases\Combat\ICombatPhase.cs" />
     <Compile Include="Effects\Phases\Combat\IDuringDamageDealtToEnemy.cs" />
     <Compile Include="Effects\Phases\Combat\IDuringCharactersAttack.cs" />
     <Compile Include="Effects\Phases\Combat\IDuringDamageDealtToCharacter.cs" />
@@ -332,7 +342,6 @@
     <Compile Include="Effects\Phases\Encounter\IDuringEnemyEngages.cs" />
     <Compile Include="Effects\Phases\Encounter\IDuringEngagementCheck.cs" />
     <Compile Include="Effects\Phases\Encounter\IDuringOptionalEngagement.cs" />
-    <Compile Include="Effects\Phases\Encounter\IEncounterPhase.cs" />
     <Compile Include="Effects\Phases\Planning\IAfterPlayingCards.cs" />
     <Compile Include="Effects\Phases\Planning\IBeforePlayingCards.cs" />
     <Compile Include="Effects\Phases\Planning\IDuringPlayingCards.cs" />
@@ -359,7 +368,6 @@
     <Compile Include="Effects\Phases\Resource\IDrawCardsStep.cs" />
     <Compile Include="Effects\Phases\Resource\IDuringCollectingResources.cs" />
     <Compile Include="Effects\Phases\Resource\IDuringDrawingCards.cs" />
-    <Compile Include="Effects\Phases\Resource\IResourcePhase.cs" />
     <Compile Include="Effects\Phases\Travel\IAfterTraveling.cs" />
     <Compile Include="Effects\Phases\Travel\IBeforeTraveling.cs" />
     <Compile Include="Effects\Phases\Travel\IDuringTraveling.cs" />
@@ -377,6 +385,13 @@
     <Compile Include="States\IState.cs" />
     <Compile Include="States\Phase.cs" />
     <Compile Include="States\StateBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="States\Phases\Encounter\" />
+    <Folder Include="States\Phases\Planning\" />
+    <Folder Include="States\Phases\Refresh\" />
+    <Folder Include="States\Phases\Resource\" />
+    <Folder Include="States\Phases\Travel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

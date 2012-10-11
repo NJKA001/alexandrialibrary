@@ -11,6 +11,9 @@ namespace LotR.States
     public interface IState
         : INotifyPropertyChanged
     {
+        Guid StateId { get; }
+
+        T GetState<T>(Guid stateId) where T : IState;
         IEnumerable<T> GetStates<T>() where T : IState;
     }
 }

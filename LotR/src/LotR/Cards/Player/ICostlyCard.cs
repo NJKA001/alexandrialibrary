@@ -5,6 +5,7 @@ using System.Text;
 
 using LotR.Effects.Costs;
 using LotR.Effects.Phases;
+using LotR.States;
 
 namespace LotR.Cards.Player
 {
@@ -13,6 +14,6 @@ namespace LotR.Cards.Player
     {
         Sphere BaseResourceSphere { get; }
         byte BaseResourceCost { get; }
-        ICost GetResourceCost(IPhaseStep step);
+        ICost GetResourceCost(IGameState state);
     }
 }

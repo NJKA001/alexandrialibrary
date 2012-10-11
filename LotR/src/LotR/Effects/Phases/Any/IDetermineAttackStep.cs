@@ -10,7 +10,6 @@ using LotR.States;
 namespace LotR.Effects.Phases.Any
 {
     public interface IDetermineAttackStep
-        : IPhaseStep
     {
         ICardInPlay<IEnemyCard> Target { get; }
         IEnumerable<IAttackingCard> Attackers { get; }

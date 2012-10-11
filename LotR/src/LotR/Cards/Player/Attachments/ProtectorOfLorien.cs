@@ -18,7 +18,7 @@ namespace LotR.Cards.Player.Attachments
             AddTrait(Trait.Title);
         }
 
-        public override bool CanBeAttachedTo(IPhaseStep step, ICanHaveAttachments cardInPlay)
+        public override bool CanBeAttachedTo(IGameState state, ICanHaveAttachments cardInPlay)
         {
             if (cardInPlay == null)
                 throw new ArgumentNullException("cardInPlay");

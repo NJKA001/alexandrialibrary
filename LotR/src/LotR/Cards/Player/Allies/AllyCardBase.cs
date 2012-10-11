@@ -5,6 +5,7 @@ using System.Text;
 
 using LotR.Effects.Costs;
 using LotR.Effects.Phases;
+using LotR.States;
 
 namespace LotR.Cards.Player.Allies
 {
@@ -31,9 +32,9 @@ namespace LotR.Cards.Player.Allies
             get { return resourceCost; }
         }
 
-        public virtual ICost GetResourceCost(IPhaseStep step)
+        public virtual ICost GetResourceCost(IGameState state)
         {
-            return new PayResources(this, SpheresOfInfluence.FirstOrDefault(), resourceCost);
+            return new PayResources(this, SpheresOfInfluence.FirstOrDefault(), resourceCost, false);
         }
     }
 }

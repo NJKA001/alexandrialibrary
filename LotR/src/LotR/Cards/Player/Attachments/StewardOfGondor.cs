@@ -27,7 +27,7 @@ namespace LotR.Cards.Player.Attachments
             AddEffect(new ExhaustToAddTwoResources(this));
         }
 
-        public override bool CanBeAttachedTo(IPhaseStep step, ICanHaveAttachments cardInPlay)
+        public override bool CanBeAttachedTo(IGameState state, ICanHaveAttachments cardInPlay)
         {
             if (cardInPlay == null)
                 throw new ArgumentNullException("cardInPlay");
@@ -48,7 +48,7 @@ namespace LotR.Cards.Player.Attachments
                 if (step.CardInPlay == null || step.Trait != Trait.Gondor)
                     return;
 
-                var attachment = step.GetCardInPlay(Source.Id) as ICardInPlay<IAttachmentCard>;
+                //var attachment = step.GetCardInPlay(Source.Id) as ICardInPlay<IAttachmentCard>;
                 //if (attachment == null || attachment.AttachedTo == null)
                 //    return;
 
@@ -70,7 +70,7 @@ namespace LotR.Cards.Player.Attachments
 
             private readonly StewardOfGondor self;
 
-            public override ICost GetCost(IPhaseStep step)
+            public override ICost GetCost(IGameState state)
             {
                 //var exhaustable = step.GetCardInPlay(self.Id) as ICardInPlay<IExhaustableCard>;
                 //if (exhaustable == null)
@@ -79,7 +79,7 @@ namespace LotR.Cards.Player.Attachments
                 return null; //new ExhaustSelf(exhaustable);
             }
 
-            public override bool PaymentAccepted(IPhaseStep step, IPayment payment)
+            public override bool PaymentAccepted(IGameState state, IPayment payment)
             {
                 if (payment == null)
                     return false;
@@ -93,7 +93,7 @@ namespace LotR.Cards.Player.Attachments
                 return true;
             }
 
-            public override void Resolve(IPhaseStep step, IChoice choice)
+            public override void Resolve(IGameState state, IChoice choice)
             {
                 //var attachment = step.GetCardInPlay(Source.Id) as ICardInPlay<IAttachmentCard>;
                 //if (attachment == null || attachment.AttachedTo == null)

@@ -11,35 +11,35 @@ using LotR.States;
 
 namespace LotR.Effects.Costs
 {
-    public class ChooseHeroCommitedToTheQuest
-        : CostBase, ICost
-    {
-        public ChooseHeroCommitedToTheQuest(ISource source, ICommitToQuestStep step)
-            : base("Choose a hero committed to the quest", source)
-        {
-            this.step = step;
-        }
+    //public class ChooseHeroCommitedToTheQuest
+    //    : CostBase, ICost
+    //{
+    //    public ChooseHeroCommitedToTheQuest(ISource source, ICommitToQuestStep step)
+    //        : base("Choose a hero committed to the quest", source)
+    //    {
+    //        this.state = state;
+    //    }
 
-        private ICommitToQuestStep step;
+    //    private ICommitToQuestStep step;
 
-        public override bool IsMetBy(IPayment payment)
-        {
-            if (payment == null)
-                return false;
+    //    public override bool IsMetBy(IPayment payment)
+    //    {
+    //        if (payment == null)
+    //            return false;
 
-            var choice = payment as IChooseCharacterPayment;
-            if (choice == null)
-                return false;
+    //        var choice = payment as IChooseCharacterPayment;
+    //        if (choice == null)
+    //            return false;
 
-            var character = choice.Character as ICardInPlay<ICharacterCard>;
-            if (character == null || !(character is IHeroCard))
-                return false;
+    //        var character = choice.Character as ICardInPlay<ICharacterCard>;
+    //        if (character == null || !(character is IHeroCard))
+    //            return false;
 
-            if (!step.CommitedCharacters.Contains(character))
-                return false;
+    //        if (!step.CommitedCharacters.Contains(character))
+    //            return false;
 
-            return true;
-        }
-    }
+    //        return true;
+    //    }
+    //}
 
 }

@@ -9,9 +9,10 @@ using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Costs;
 using LotR.Effects.Payments;
-using LotR.States;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Any;
+using LotR.States;
+using LotR.States.Areas;
 
 namespace LotR.Cards.Player.Heroes
 {
@@ -28,38 +29,38 @@ namespace LotR.Cards.Player.Heroes
         }
 
         public class CancelWhenRevealedTreachery
-            : ResponseCharacterAbilityBase, ICancelEffect, IAfterEncounterCardRevealed
+            : ResponseCharacterAbilityBase, ICancelEffect, IDuringEncounterCardRevealed
         {
             public CancelWhenRevealedTreachery(Eleanor source)
                 : base("Exhaust Eleanor to cancel the 'when revealed' effects of a treachery card just revealed by the encounter deck. Then, discard that card, and replace it with the next card from the encounter deck.", source)
             {
             }
 
-            public override ICost GetCost(IPhaseStep step)
+            public override ICost GetCost(IGameState state)
             {
-                var exhaustable = step.GetCardInPlay(Source.Id) as ICardInPlay<IExhaustableCard>;
+                var exhaustable = state.GetState<IExhaustableInPlay>(Source.Id);
                 if (exhaustable == null)
                     return null;
 
                 return new ExhaustSelf(exhaustable);
             }
 
-            public void AfterEncounterCardRevealed(IEncounterCardRevealedStep step)
+            public void DuringEncounterCardRevealed(IGameState state)
             {
-                if (step.Card == null)
+                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                if (stagingArea == null)
                     return;
 
-                //var revealed = step.Phase.Round.Game.StagingArea.RevealedEncounterCard;
-                //if (revealed == null)
-                //    return;
+                if (stagingArea.RevealedEncounterCard == null)
+                    return;
 
-                //if ((!(revealed is IRevealableCard)) || (!(revealed is ITreacheryCard)))
-                //    return;
+                if ((!(stagingArea.RevealedEncounterCard is IRevealableCard)) || (!(stagingArea.RevealedEncounterCard is ITreacheryCard)))
+                    return;
 
-                //step.AddEffect(this);
+                state.AddEffect(this);
             }
 
-            public override bool PaymentAccepted(IPhaseStep step, IPayment payment)
+            public override bool PaymentAccepted(IGameState state, IPayment payment)
             {
                 if (payment == null)
                     return false;
@@ -68,20 +69,26 @@ namespace LotR.Cards.Player.Heroes
                 if (exhaustPayment == null)
                     return false;
 
-                //exhaustPayment.Exhaustable.Exhaust();
+                if (exhaustPayment.Exhaustable.IsExhausted)
+                    return false;
+
+                exhaustPayment.Exhaustable.Exhaust();
 
                 return true;
             }
 
-            public override void Resolve(IPhaseStep step, IChoice choice)
+            public override void Resolve(IGameState state, IChoice choice)
             {
-                //var revealed = step.Phase.Round.Game.StagingArea.RevealedEncounterCard;
-                //if (revealed == null)
-                //    return;
+                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                if (stagingArea == null)
+                    return;
 
-                //step.Phase.Round.Game.StagingArea.CancelRevealedCard(this);
-                //step.Phase.Round.Game.StagingArea.AddToEncounterDiscardPile(new List<IEncounterCard> { revealed });
-                //step.Phase.Round.Game.StagingArea.RevealEncounterCards(1);
+                if (stagingArea.RevealedEncounterCard == null)
+                    return;
+
+                stagingArea.CancelRevealedCard(this);
+                stagingArea.EncounterDeck.Discard(new List<IEncounterCard> { stagingArea.RevealedEncounterCard });
+                stagingArea.RevealEncounterCards(1);
             }
         }
     }

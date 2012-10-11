@@ -67,6 +67,14 @@ namespace LotR.States
             }
         }
 
+        public void Discard(IEnumerable<T> cards)
+        {
+            foreach (var card in cards)
+            {
+                this.discardedCards.Add(card);
+            }
+        }
+
         public void Shuffle()
         {
             var cardArray = cards.ToArray();

@@ -9,6 +9,7 @@ using LotR.Effects;
 using LotR.Effects.Payments;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Setup;
+using LotR.States;
 
 namespace LotR.Cards.Quests
 {
@@ -29,7 +30,7 @@ namespace LotR.Cards.Quests
             {
             }
 
-            public override bool PaymentAccepted(IPhaseStep step, IPayment payment)
+            public override bool PaymentAccepted(IGameState state, IPayment payment)
             {
                 //var forestSpider = step.Phase.Round.Game.StagingArea.EncounterDeck.GetFirst(x => x.Title == "Forest Spider") as IEnemyCard;
                 //if (forestSpider == null)

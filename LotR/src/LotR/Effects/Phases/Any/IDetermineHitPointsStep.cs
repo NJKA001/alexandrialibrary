@@ -6,7 +6,6 @@ using System.Text;
 namespace LotR.Effects.Phases.Any
 {
     public interface IDetermineHitPointsStep
-        : IPhaseStep
     {
         byte HitPoints { get; set; }
     }

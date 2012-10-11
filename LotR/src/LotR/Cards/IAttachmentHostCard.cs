@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Effects.Phases.Encounter
+namespace LotR.Cards
 {
-    public interface IEncounterPhase
-        : IPhase
+    public interface IAttachmentHostCard
+        : ICard, ICanHaveAttachments
     {
     }
 }

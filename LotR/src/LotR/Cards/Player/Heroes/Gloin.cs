@@ -36,7 +36,7 @@ namespace LotR.Cards.Player.Heroes
             private readonly ICardInPlay<ICard> permanent;
             private readonly byte value;
 
-            public override void Resolve(IPhaseStep step, IChoice choice)
+            public override void Resolve(IGameState state, IChoice choice)
             {
                 //permanent.AddResources(value);
             }

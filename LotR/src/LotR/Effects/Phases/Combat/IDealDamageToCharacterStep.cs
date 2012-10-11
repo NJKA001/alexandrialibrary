@@ -9,7 +9,6 @@ using LotR.States;
 namespace LotR.Effects.Phases.Combat
 {
     public interface IDealDamageToCharacterStep
-        : IPhaseStep
     {
         ICardInPlay<IDamageableCard> Target { get; }
         byte Damage { get; }

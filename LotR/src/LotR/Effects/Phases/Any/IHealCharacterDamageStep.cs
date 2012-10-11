@@ -9,7 +9,6 @@ using LotR.States;
 namespace LotR.Effects.Phases.Any
 {
     public interface IHealCharacterDamageStep
-        : IPhaseStep
     {
         ICardInPlay<ICharacterCard> Target { get; }
         byte DamageHealed { get; }

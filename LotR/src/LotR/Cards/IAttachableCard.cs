@@ -12,6 +12,6 @@ namespace LotR.Cards
         : ICard
     {
         bool IsRestricted { get; }
-        bool CanBeAttachedTo(IPhaseStep step, ICanHaveAttachments cardInPlay);
+        bool CanBeAttachedTo(IGameState state, ICanHaveAttachments cardInPlay);
     }
 }

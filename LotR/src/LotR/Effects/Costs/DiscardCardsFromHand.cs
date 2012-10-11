@@ -6,20 +6,21 @@ using System.Text;
 using LotR.Cards;
 using LotR.Effects.Payments;
 using LotR.Effects.Phases;
+using LotR.States;
 
 namespace LotR.Effects.Costs
 {
     public class DiscardCardsFromHand
         : CostBase
     {
-        public DiscardCardsFromHand(ISource source, IPhaseStep step, byte numberOfCards)
+        public DiscardCardsFromHand(ISource source, IGameState state, byte numberOfCards)
             : base(string.Format("Discard {0} cards from your hand", numberOfCards), source)
         {
-            this.step = step;
+            this.state = state;
             this.numberOfCards = numberOfCards;
         }
 
-        private readonly IPhaseStep step;
+        private readonly IGameState state;
         private readonly byte numberOfCards;
 
         public override bool IsMetBy(IPayment payment)

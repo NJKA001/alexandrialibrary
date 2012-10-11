@@ -8,10 +8,13 @@ using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Costs;
 using LotR.Effects.Payments;
-using LotR.States;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Any;
 using LotR.Effects.Phases.Quest;
+using LotR.States;
+using LotR.States.Areas;
+using LotR.States.Phases.Any;
+using LotR.States.Phases.Quest;
 
 namespace LotR.Cards.Player.Heroes
 {
@@ -35,43 +38,53 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public void DuringEncounterCardRevealed(IEncounterCardRevealedStep step)
+            public void DuringEncounterCardRevealed(IGameState state)
             {
-                var questPhase = step.Phase as IQuestPhase;
-                if (questPhase == null)
+                if (state.CurrentPhase != Phase.Quest)
                     return;
 
-                //var revealed = step.Phase.Round.Game.StagingArea.RevealedEncounterCard;
-                //if (revealed == null)
-                //    return;
-
-                //if (!(revealed is IEnemyCard))
-                //    return;
-
-                //if (!questPhase.CharactersCommittedToQuest.Any(x => x.Id == Source.Id))
-                //    return;
-
-                //step.AddEffect(this);
-            }
-
-            public override void Resolve(IPhaseStep step, IChoice choice)
-            {
-                var enemyChoice = choice as IChooseEnemyPayment;
-                if (enemyChoice == null)
+                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                if (stagingArea == null)
                     return;
 
-                //enemyChoice.Enemy.AddDamage(1);
+                var revealed = stagingArea.RevealedEncounterCard;
+                if (revealed == null)
+                    return;
+
+                if (!(revealed is IEnemyCard))
+                    return;
+
+                var committedCharacters = state.GetStates<ICharactersCommittedToQuest>().FirstOrDefault();
+                if (committedCharacters == null)
+                    return;
+
+                if (!committedCharacters.Characters.Any(x => x.Id == Source.Id))
+                    return;
+
+                state.AddEffect(this);
             }
 
-            public override ICost GetCost(IPhaseStep step)
+            public override void Resolve(IGameState state, IChoice choice)
             {
-                var revealedStep = step as IEncounterCardRevealedStep;
+                var enemyChoice = choice as IChooseEnemy;
+                if (enemyChoice == null || enemyChoice.Enemy == null)
+                    return;
+
+                var damageable = enemyChoice.Enemy as IDamagableInPlay;
+                if (damageable == null)
+                    return;
+
+                damageable.Damage += 1;
+            }
+
+            public override ICost GetCost(IGameState state)
+            {
+                var revealedStep = state.GetStates<IEncounterCardRevealed>().FirstOrDefault();
                 if (revealedStep == null)
                     return null;
 
                 return new EachRevealedEnemy(Source, revealedStep);
             }
         }
-
     }
 }

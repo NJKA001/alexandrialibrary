@@ -8,8 +8,9 @@ using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Costs;
 using LotR.Effects.Payments;
-using LotR.States;
 using LotR.Effects.Phases;
+using LotR.States;
+using LotR.States.Areas;
 
 namespace LotR.Cards.Player.Heroes
 {
@@ -34,55 +35,64 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public override ICost GetCost(IPhaseStep step)
+            public override ICost GetCost(IGameState state)
             {
-                var exhaustable = step.GetCardInPlay(Source.Id) as ICardInPlay<IExhaustableCard>;
+                var exhaustable = state.GetState<IExhaustableInPlay>(Source.Id);
                 if (exhaustable == null)
                     return null;
 
                 return new ExhaustSelf(exhaustable);
             }
 
-            public override bool PaymentAccepted(IPhaseStep step, IPayment payment)
+            public override bool PaymentAccepted(IGameState state, IPayment payment)
             {
-                //var exhaustPayment = payment as IExhaustCardPayment;
-                //if (exhaustPayment == null || exhaustPayment.Exhaustable == null || exhaustPayment.Exhaustable.IsExhausted)
-                //    return false;
+                var exhaustPayment = payment as IExhaustCardPayment;
+                if (exhaustPayment == null || exhaustPayment.Exhaustable == null || exhaustPayment.Exhaustable.IsExhausted)
+                    return false;
 
-                //exhaustPayment.Exhaustable.Exhaust();
+                exhaustPayment.Exhaustable.Exhaust();
 
-                //var topCard = step.Phase.Round.Game.StagingArea.EncounterDeck.GetFromTop(1).FirstOrDefault();
-                //if (topCard == null)
-                //    return false;
+                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                if (stagingArea == null)
+                    return false;
 
-                //step.Phase.Round.Game.StagingArea.AddExaminedEncounterCards(new List<IEncounterCard> { topCard });
+                var topCard = stagingArea.EncounterDeck.GetFromTop(1).FirstOrDefault();
+                if (topCard == null)
+                    return false;
+
+                stagingArea.AddExaminedEncounterCards(new List<IEncounterCard> { topCard });
+
                 return true;
             }
 
-            public override void Resolve(IPhaseStep step, IChoice choice)
+            public override void Resolve(IGameState state, IChoice choice)
             {
                 var topOfDeckChoice = choice as IChooseTopOrBottomOfDeck;
                 if (topOfDeckChoice == null)
                     return;
 
-                //if (step.Phase.Round.Game.StagingArea.ExaminedEncounterCards.Count() != 1)
-                //    return;
+                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                if (stagingArea == null)
+                    return;
 
-                //var topCard = step.Phase.Round.Game.StagingArea.ExaminedEncounterCards.FirstOrDefault() as IEncounterCard;
-                //if (topCard == null)
-                //    return;
+                if (stagingArea.ExaminedEncounterCards.Count() != 1)
+                    return;
 
-                //step.Phase.Round.Game.StagingArea.RemoveExaminedEncounterCards(new List<IEncounterCard> { topCard });
+                var topCard = stagingArea.ExaminedEncounterCards.FirstOrDefault() as IEncounterCard;
+                if (topCard == null)
+                    return;
 
-                //if (topOfDeckChoice.TopOfDeck)
-                //{
-                //    step.Phase.Round.Game.StagingArea.EncounterDeck.PutOnTop(new List<IEncounterCard> { topCard });
-                //}
-                //else
-                //{
-                //    step.Phase.Round.Game.StagingArea.EncounterDeck.PutOnBottom(new List<IEncounterCard> { topCard });
-                    
-                //}
+                stagingArea.RemoveExaminedEncounterCards(new List<IEncounterCard> { topCard });
+
+                if (topOfDeckChoice.TopOfDeck)
+                {
+                    stagingArea.EncounterDeck.PutOnTop(new List<IEncounterCard> { topCard });
+                }
+                else
+                {
+                    stagingArea.EncounterDeck.PutOnBottom(new List<IEncounterCard> { topCard });
+
+                }
             }
         }
     }

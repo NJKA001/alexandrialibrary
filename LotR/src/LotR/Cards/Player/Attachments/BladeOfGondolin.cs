@@ -6,10 +6,13 @@ using System.Text;
 using LotR.Cards.Player.Heroes;
 using LotR.Effects;
 using LotR.Effects.Choices;
-using LotR.States;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Any;
 using LotR.Effects.Phases.Combat;
+using LotR.States;
+using LotR.States.Areas;
+using LotR.States.Phases.Any;
+using LotR.States.Phases.Combat;
 
 namespace LotR.Cards.Player.Attachments
 {
@@ -26,7 +29,7 @@ namespace LotR.Cards.Player.Attachments
             AddEffect(new AddOneProgressTokenAfterDefeatingAnEnemy(this));
         }
 
-        public override bool CanBeAttachedTo(IPhaseStep step, ICanHaveAttachments cardInPlay)
+        public override bool CanBeAttachedTo(IGameState state, ICanHaveAttachments cardInPlay)
         {
             if (cardInPlay == null)
                 throw new ArgumentNullException("cardInPlay");
@@ -35,25 +38,27 @@ namespace LotR.Cards.Player.Attachments
         }
 
         public class AddOneAttackWhenAttackingAnOrc
-            : PassiveEffect, IDetermineAttack
+            : PassiveEffect, IDetermineAttackEffect
         {
             public AddOneAttackWhenAttackingAnOrc(BladeOfGondolin source)
                 : base("Attached hero gets +1 Attack when attacking an Orc.", source)
             {
             }
 
-            public void DetermineAttack(IDetermineAttackStep step)
+            public void DetermineAttack(IGameState state)
             {
-                //if (step.Target != null)
-                //{
-                //    var traitStep = new CheckForTraitStep(step.Phase, step.Player, step.Target, Trait.Orc);
-                //    step.Target.Card.CheckForTrait(traitStep);
+                var determineStrength = state.GetStates<IDetermineAttack>().FirstOrDefault();
+                if (determineStrength == null)
+                    return;
 
-                //    if (traitStep.HasTrait)
-                //    {
-                //        step.Attack += 1;
-                //    }
-                //}
+                var enemy = state.GetState<IEnemyInPlay>(determineStrength.Defender.Card.Id);
+                if (enemy == null)
+                    return;
+
+                if (!enemy.HasTrait(Trait.Orc))
+                    return;
+
+                determineStrength.Attack += 1;
             }
         }
 
@@ -65,25 +70,29 @@ namespace LotR.Cards.Player.Attachments
             {
             }
 
-            public void AfterEnemyDefeated(IEnemyDefeatedStep step)
+            public void AfterEnemyDefeated(IEnemyDefeated state)
             {
-                var attachment = step.GetCardInPlay(Source.Id) as ICardInPlay<IAttachmentCard>;
-                //if (attachment == null || attachment.AttachedTo == null)
-                //    return;
+                var attachment = state.GetState<IAttachmentInPlay>(Source.Id);
+                if (attachment == null)
+                    return;
 
-                //var hero = attachment.AttachedTo as IHeroCard;
-                //if (hero == null)
-                //    return;
+                var hero = attachment.AttachedTo.Card as IHeroCard;
+                if (hero == null)
+                    return;
 
-                //if (step.Attackers.Any(x => x.Id == hero.Id))
-                //{
-                //    step.AddEffect(this);
-                //}
+                if (!state.Attackers.Any(x => x.Card.Id == hero.Id))
+                    return;
+
+                state.AddEffect(this);
             }
 
-            public override void Resolve(IPhaseStep step, IChoice choice)
+            public override void Resolve(IGameState state, IChoice choice)
             {
-                step.AddProgressToCurrentQuest(1);
+                var questArea = state.GetStates<IQuestArea>().FirstOrDefault();
+                if (questArea == null)
+                    return;
+
+                questArea.AddProgress(1);
             }
         }
     }

@@ -7,9 +7,8 @@ using LotR.Cards.Encounter;
 
 namespace LotR.Effects.Phases.Any
 {
-    public interface IEncounterCardRevealedStep
-        : IPhaseStep
-    {
-        IEncounterCard Card { get; }
-    }
+    //public interface IEncounterCardRevealedStep
+    //{
+    //    IEncounterCard Card { get; }
+    //}
 }

@@ -10,7 +10,6 @@ using LotR.States;
 namespace LotR.Effects.Phases.Combat
 {
     public interface IChooseEnemyToAttackStep
-        : IPhaseStep
     {
         IEnumerable<IAttackingCard> Attackers { get; }
         IEnumerable<ICardInPlay<IEnemyCard>> Enemies { get; }
