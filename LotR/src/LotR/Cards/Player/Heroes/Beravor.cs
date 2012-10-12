@@ -60,7 +60,7 @@ namespace LotR.Cards.Player.Heroes
                 return true;
             }
 
-            public override void Resolve(IGameState state, IChoice choice)
+            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
             {
                 var playerChoice = choice as IChoosePlayer;
                 if (playerChoice == null)

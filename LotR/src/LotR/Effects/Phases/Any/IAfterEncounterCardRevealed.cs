@@ -8,6 +8,7 @@ using LotR.States;
 namespace LotR.Effects.Phases.Any
 {
     public interface IAfterEncounterCardRevealed
+        : IEffect
     {
         void AfterEncounterCardRevealed(IGameState state);
     }

@@ -56,7 +56,7 @@ namespace LotR.Cards.Player.Heroes
                 return null;
             }
 
-            public override void Resolve(IGameState state, IChoice choice)
+            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
             {
                 //if (!(step is ICommitToQuestStep))
                 //    return;

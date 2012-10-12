@@ -5,11 +5,11 @@ using System.Text;
 
 namespace LotR.States.Phases.Any
 {
-    public interface IDetermineAttack
+    public interface ICardLeavesPlay
         : IState, IEffective
     {
-        IAttackingInPlay Attacker { get; }
-        IDefendingInPlay Defender { get; }
-        byte Attack { get; set; }
+        ICardInPlay LeavingPlay { get; }
+
+        bool IsLeavingPlay { get; set; }
     }
 }

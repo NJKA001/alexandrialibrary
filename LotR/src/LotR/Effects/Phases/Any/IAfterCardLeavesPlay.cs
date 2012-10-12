@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.States;
+using LotR.States.Phases.Any;
 
 namespace LotR.Effects.Phases.Any
 {
-    public interface IDetermineAttackEffect
+    public interface IAfterCardLeavesPlay
+        : IEffect
     {
-        void DetermineAttack(IGameState state);
+        void AfterCardLeavesPlay(ICardLeavesPlay state);
     }
 }

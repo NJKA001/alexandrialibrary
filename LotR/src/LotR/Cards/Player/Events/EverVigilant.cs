@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Effects.Choices;
 using LotR.Effects;
+using LotR.Effects.Choices;
+using LotR.Effects.Payments;
 using LotR.Effects.Phases;
 using LotR.States;
 
@@ -31,13 +32,20 @@ namespace LotR.Cards.Player.Events
                 return new ChooseAlly(Source);
             }
 
-            public override void Resolve(IGameState state, IChoice choice)
+            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
             {
                 var allyChoice = choice as IChooseAlly;
                 if (allyChoice == null || allyChoice.Ally == null)
                     return;
 
-                //allyChoice.Ally.Ready();
+                var exhaustable = allyChoice.Ally as IExhaustableInPlay;
+                if (exhaustable == null)
+                    return;
+
+                if (!exhaustable.IsExhausted)
+                    return;
+
+                exhaustable.Ready();
             }
         }
     }

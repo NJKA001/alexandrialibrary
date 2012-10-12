@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
+using LotR.Cards.Player;
 using LotR.Effects.Modifiers;
+using LotR.States.Phases.Any;
 
 namespace LotR.States
 {
@@ -33,14 +35,31 @@ namespace LotR.States
             private set;
         }
 
+        public ICard BaseCard
+        {
+            get { return Card; }
+        }
+
         public string Title
         {
             get { return Card.Title; }
         }
 
-        public virtual bool HasTrait(Trait trait)
+        public virtual void DuringCheckForResourceIcon(ICheckForResourceIcon state)
         {
-            return Card.HasTrait(trait);
+            var resourceful = Card as IResourcefulCard;
+            if (resourceful == null)
+                return;
+
+            resourceful.DuringCheckForResourceIcon(state);
+        }
+
+        public virtual void DuringCheckForTrait(ICheckForTrait state)
+        {
+            if (state.Target.Card.Id != this.Card.Id)
+                return;
+
+            Card.DuringCheckForTrait(state);
         }
     }
 }

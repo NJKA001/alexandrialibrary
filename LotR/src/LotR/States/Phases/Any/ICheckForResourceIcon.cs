@@ -6,12 +6,15 @@ using System.Text;
 using LotR.Cards;
 using LotR.Cards.Player;
 
-namespace LotR.Effects.Phases.Any
+namespace LotR.States.Phases.Any
 {
-    public interface ICheckForResourceIconStep
+    public interface ICheckForResourceIcon
+        : IState
     {
+        ICostlyCard CostlyCard { get; }
+        IResourcefulInPlay Target { get; }
         Sphere ResourceIcon { get; }
-        IResourcefulCard Source { get; }
+        
         bool HasResourceIcon { get; set; }
     }
 }

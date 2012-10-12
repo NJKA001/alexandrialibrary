@@ -52,7 +52,7 @@ namespace LotR.Effects
             return true;
         }
 
-        public virtual void Resolve(IGameState state, IChoice choice)
+        public virtual void Resolve(IGameState state, IPayment payment, IChoice choice)
         {
         }
     }

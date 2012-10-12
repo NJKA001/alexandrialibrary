@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Cards;
+using LotR.States.Phases.Any;
 
 namespace LotR.Effects.Phases.Any
 {
-    public interface IDetermineWillpowerStep
+    public interface IAfterCardEntersPlay
+        : IEffect
     {
-        IWillpowerfulCard Source { get; }
-        byte Willpower { get; set; }
+        void AfterCardEntersPlay(ICardEntersPlay state);
     }
 }

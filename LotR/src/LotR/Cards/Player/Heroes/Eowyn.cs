@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Costs;
-using LotR.Effects;
+using LotR.Effects.Payments;
 using LotR.Effects.Modifiers;
 using LotR.States;
 using LotR.Effects.Phases;
@@ -42,7 +43,7 @@ namespace LotR.Cards.Player.Heroes
                 return new Limit(PlayerScope.AnyPlayer, TimeScope.Round, 1);
             }
 
-            public override void Resolve(IGameState state, IChoice choice)
+            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
             {
                 //var willpowerful = step.GetCardInPlay(Source.Id) as IWillpowerfulCard;
                 //if (willpowerful == null)

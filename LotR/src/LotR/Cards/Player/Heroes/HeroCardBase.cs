@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Effects.Phases.Any;
+using LotR.States.Phases.Any;
 
 namespace LotR.Cards.Player.Heroes
 {
@@ -33,11 +34,13 @@ namespace LotR.Cards.Player.Heroes
             private set;
         }
 
-        public virtual void CheckForResourceIcon(ICheckForResourceIconStep step)
+        public override void DuringCheckForResourceIcon(ICheckForResourceIcon state)
         {
-            if (resourceIcons.Contains(step.ResourceIcon))
+            base.DuringCheckForResourceIcon(state);
+
+            if (resourceIcons.Contains(state.ResourceIcon))
             {
-                step.HasResourceIcon = true;
+                state.HasResourceIcon = true;
             }
         }
     }

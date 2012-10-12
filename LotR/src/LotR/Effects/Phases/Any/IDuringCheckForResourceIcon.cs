@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Cards.Player;
-using LotR.States;
+using LotR.States.Phases.Any;
 
 namespace LotR.Effects.Phases.Any
 {
-    public interface ICharacterEntersPlayStep
+    public interface IDuringCheckForResourceIcon
     {
-        ICardInPlay<ICharacterCard> Character { get; }
+        void DuringCheckForResourceIcon(ICheckForResourceIcon state);
     }
 }

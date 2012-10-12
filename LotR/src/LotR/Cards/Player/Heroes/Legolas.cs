@@ -5,6 +5,7 @@ using System.Text;
 
 using LotR.Effects;
 using LotR.Effects.Choices;
+using LotR.Effects.Payments;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Combat;
 using LotR.States;
@@ -51,7 +52,7 @@ namespace LotR.Cards.Player.Heroes
                 state.AddEffect(this);
             }
 
-            public override void Resolve(IGameState state, IChoice choice)
+            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
             {
                 var questArea = state.GetStates<IQuestArea>().FirstOrDefault();
                 if (questArea == null)

@@ -5,6 +5,7 @@ using System.Text;
 
 using LotR.Effects;
 using LotR.Effects.Choices;
+using LotR.Effects.Payments;
 using LotR.States;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Combat;
@@ -36,7 +37,7 @@ namespace LotR.Cards.Player.Heroes
             private readonly ICardInPlay<ICard> permanent;
             private readonly byte value;
 
-            public override void Resolve(IGameState state, IChoice choice)
+            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
             {
                 //permanent.AddResources(value);
             }

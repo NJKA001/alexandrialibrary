@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards.Encounter.Enemies;
 using LotR.Cards.Player.Heroes;
 using LotR.Effects;
 using LotR.Effects.Choices;
+using LotR.Effects.Payments;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Any;
 using LotR.Effects.Phases.Combat;
@@ -38,14 +40,14 @@ namespace LotR.Cards.Player.Attachments
         }
 
         public class AddOneAttackWhenAttackingAnOrc
-            : PassiveEffect, IDetermineAttackEffect
+            : PassiveEffect, IDuringDetermineAttack
         {
             public AddOneAttackWhenAttackingAnOrc(BladeOfGondolin source)
                 : base("Attached hero gets +1 Attack when attacking an Orc.", source)
             {
             }
 
-            public void DetermineAttack(IGameState state)
+            public void DuringDetermineAttack(IDetermineAttack state)
             {
                 var determineStrength = state.GetStates<IDetermineAttack>().FirstOrDefault();
                 if (determineStrength == null)
@@ -55,7 +57,11 @@ namespace LotR.Cards.Player.Attachments
                 if (enemy == null)
                     return;
 
-                if (!enemy.HasTrait(Trait.Orc))
+                var gameState = state.GetStates<IGameState>().FirstOrDefault();
+                if (gameState == null)
+                    return;
+
+                if (!gameState.CardInPlayHasTrait(enemy, Trait.Orc))
                     return;
 
                 determineStrength.Attack += 1;
@@ -86,7 +92,7 @@ namespace LotR.Cards.Player.Attachments
                 state.AddEffect(this);
             }
 
-            public override void Resolve(IGameState state, IChoice choice)
+            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
             {
                 var questArea = state.GetStates<IQuestArea>().FirstOrDefault();
                 if (questArea == null)

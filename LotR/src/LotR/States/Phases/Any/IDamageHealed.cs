@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards.Player;
-using LotR.States;
 
-namespace LotR.Effects.Phases.Any
+namespace LotR.States.Phases.Any
 {
-    public interface IHealCharacterDamageStep
+    public interface IDamageHealed
+        : IState
     {
-        ICardInPlay<ICharacterCard> Target { get; }
+        IDamagableInPlay Target { get; }
         byte DamageHealed { get; }
     }
 }

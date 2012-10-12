@@ -6,6 +6,7 @@ using System.Text;
 using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Modifiers;
+using LotR.Effects.Payments;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Any;
 using LotR.Effects.Phases.Combat;
@@ -30,19 +31,19 @@ namespace LotR.Cards.Player.Heroes
         #region Abilities
 
         public class StrengthBonusForDamage
-            : PassiveCharacterAbilityBase, IDetermineAttackEffect
+            : PassiveCharacterAbilityBase, IDuringDetermineAttack
         {
             public StrengthBonusForDamage(Gimli source)
                 : base("Gimli gets +1 attack for each damage token on him.", source)
             {
             }
 
-            public void DetermineAttack(IGameState state)
+            public void DuringDetermineAttack(IDetermineAttack state)
             {
                 state.AddEffect(this);
             }
 
-            public override void Resolve(IGameState state, IChoice choice)
+            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
             {
                 var determineStrength = state.GetStates<IDetermineAttack>().Where(x => x.Attacker.Card.Id == Source.Id).FirstOrDefault();
                 if (determineStrength == null)

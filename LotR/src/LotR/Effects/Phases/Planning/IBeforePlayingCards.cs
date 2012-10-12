@@ -5,7 +5,8 @@ using System.Text;
 
 namespace LotR.Effects.Phases.Planning
 {
-    interface IBeforePlayingCards
+    public interface IBeforePlayingCards
+        : IEffect
     {
     }
 }

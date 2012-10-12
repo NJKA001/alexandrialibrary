@@ -6,6 +6,7 @@ using System.Text;
 using LotR.Cards.Encounter.Enemies;
 using LotR.Effects;
 using LotR.Effects.Choices;
+using LotR.Effects.Payments;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Any;
 using LotR.Effects.Phases.Combat;
@@ -56,7 +57,7 @@ namespace LotR.Cards.Player.Heroes
                 state.AddEffect(this);
             }
 
-            public override void Resolve(IGameState state, IChoice choice)
+            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
             {
                 var chooseEnemy = state.GetStates<IChooseEnemyToAttack>().FirstOrDefault();
                 if (chooseEnemy == null)
@@ -72,14 +73,14 @@ namespace LotR.Cards.Player.Heroes
         }
 
         public class PlusOneAttackWhenAttackingAnEnemyInTheStagingArea
-            : PassiveCharacterAbilityBase, IDetermineAttackEffect
+            : PassiveCharacterAbilityBase, IDuringDetermineAttack
         {
             public PlusOneAttackWhenAttackingAnEnemyInTheStagingArea(Dunhere source)
                 : base("When attacking an enemy in the staging area, Dunhere gets +1 Attack.", source)
             {
             }
 
-            public void DetermineAttack(IGameState state)
+            public void DuringDetermineAttack(IDetermineAttack state)
             {
                 var determineAttack = state.GetStates<IDetermineAttack>().FirstOrDefault();
                 if (determineAttack == null)
@@ -99,7 +100,7 @@ namespace LotR.Cards.Player.Heroes
                 state.AddEffect(this);
             }
 
-            public override void Resolve(IGameState state, IChoice choice)
+            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
             {
                 var determineAttack = state.GetStates<IDetermineAttack>().FirstOrDefault();
                 if (determineAttack == null)

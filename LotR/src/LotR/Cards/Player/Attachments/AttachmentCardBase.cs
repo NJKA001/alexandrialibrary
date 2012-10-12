@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.States;
-using LotR.Effects.Phases;
+using LotR.States.Phases.Any;
 
 namespace LotR.Cards.Player.Attachments
 {

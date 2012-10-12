@@ -12,11 +12,12 @@ namespace LotR.Effects.Costs
     public class PayResourcesFrom
         : CostBase
     {
-        public PayResourcesFrom(ISource source, IResourcefulInPlay target, byte numberOfResources)
+        public PayResourcesFrom(ISource source, IResourcefulInPlay target, byte numberOfResources, bool isVariableCost)
             : base(GetDescription(target, numberOfResources), source)
         {
             this.target = target;
             this.numberOfResources = numberOfResources;
+            this.isVariableCost = isVariableCost;
         }
 
         private static string GetDescription(IResourcefulInPlay target, byte numberOfResources)
@@ -28,6 +29,7 @@ namespace LotR.Effects.Costs
 
         private readonly IResourcefulInPlay target;
         private readonly byte numberOfResources;
+        private readonly bool isVariableCost;
 
         public override bool IsMetBy(IPayment payment)
         {
@@ -48,7 +50,7 @@ namespace LotR.Effects.Costs
             if (firstPayment.Item1.Card.Id != target.Card.Id)
                 return false;
 
-            if (firstPayment.Item2 != numberOfResources)
+            if (firstPayment.Item2 != numberOfResources && !isVariableCost)
                 return false;
 
             return true;

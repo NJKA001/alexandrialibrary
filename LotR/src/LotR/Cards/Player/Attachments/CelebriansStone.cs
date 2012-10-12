@@ -5,9 +5,10 @@ using System.Text;
 
 using LotR.Cards.Player.Heroes;
 using LotR.Effects;
-using LotR.States;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Any;
+using LotR.States;
+using LotR.States.Phases.Any;
 
 namespace LotR.Cards.Player.Attachments
 {
@@ -33,55 +34,55 @@ namespace LotR.Cards.Player.Attachments
         }
 
         public class AddTwoWillpower
-            : PassiveEffect, IDetermineWillpower
+            : PassiveEffect, IDuringDetermineWillpower
         {
             public AddTwoWillpower(CelebriansStone source)
                 : base("Attached hero gets +2 Willpower", source)
             {
             }
 
-            public void DetermineWillpower(IDetermineWillpowerStep step)
+            public void DuringDetermineWillpower(IDetermineWillpower state)
             {
-                //var attachment = step.GetCardInPlay(Source.Id) as ICardInPlay<IAttachmentCard>;
-                //if (attachment == null || attachment.AttachedTo == null)
-                //    return;
+                var attachment = state.GetState<IAttachmentInPlay>(Source.Id);
+                if (attachment == null || attachment.AttachedTo == null)
+                    return;
 
-                //var willpowerful = attachment.AttachedTo.Card as IWillpowerfulCard;
-                //if (willpowerful == null)
-                //    return;
+                var willpowerful = attachment.AttachedTo.Card as IWillpowerfulCard;
+                if (willpowerful == null)
+                    return;
 
-                //if (step.Source != null && step.Source.Id == willpowerful.Id)
-                //{
-                //    step.Willpower += 2;
-                //}
+                if (state.Quester.Card.Id != willpowerful.Id)
+                    return;
+
+                state.Willpower += 2;
             }
         }
 
         public class AragornGetsASpiritResourceIcon
-            : PassiveEffect, ICheckForResourceIcon
+            : PassiveEffect, IDuringCheckForResourceIcon
         {
             public AragornGetsASpiritResourceIcon(CelebriansStone source)
                 : base("If attached hero is Aragorn, he also gains a Spirit resource icon.", source)
             {
             }
 
-            public void CheckForResourceIcon(ICheckForResourceIconStep step)
+            public void DuringCheckForResourceIcon(ICheckForResourceIcon state)
             {
-                //var attachment = step.GetCardInPlay(Source.Id) as ICardInPlay<IAttachmentCard>;
-                //if (attachment == null || attachment.AttachedTo == null)
-                //    return;
+                if (state.ResourceIcon != Sphere.Spirit)
+                    return;
 
-                //var resourceful = attachment.AttachedTo.Card as IResourcefulCard;
-                //if (resourceful == null)
-                //    return;
+                var attachment = state.GetState<IAttachmentInPlay>(Source.Id);
+                if (attachment == null || attachment.AttachedTo == null)
+                    return;
 
-                //if (step.Source != null && step.Source.Id == resourceful.Id)
-                //{
-                //    if (step.ResourceIcon == Sphere.Spirit && resourceful.Title == "Aragorn")
-                //    {
-                //        step.HasResourceIcon = true;
-                //    }
-                //}
+                var resourceful = attachment.AttachedTo.Card as IResourcefulCard;
+                if (resourceful == null || resourceful.Title != "Aragorn")
+                    return;
+
+                if (state.Target.Card.Id != Source.Id)
+                    return;
+
+                state.HasResourceIcon = true;
             }
         }
     }

@@ -4,13 +4,17 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards.Player.Heroes;
+using LotR.Effects;
+using LotR.Effects.Choices;
+using LotR.Effects.Payments;
+using LotR.Effects.Phases.Any;
 using LotR.States;
-using LotR.Effects.Phases;
+using LotR.States.Phases.Any;
 
 namespace LotR.Cards.Player.Attachments
 {
     public class HornOfGondor
-        : AttachmentCardBase
+        : HeroAttachmentCardBase
     {
         public HornOfGondor()
             : base("Horn of Gondor", CardSet.Core, 42, Sphere.Tactics, 1, true, true)
@@ -19,12 +23,34 @@ namespace LotR.Cards.Player.Attachments
             AddTrait(Trait.Artifact);
         }
 
-        public override bool CanBeAttachedTo(IGameState state, ICanHaveAttachments cardInPlay)
+        public class AddOneResourceWhenACharacterLeavesPlay
+            : ResponseCharacterAbilityBase, IAfterCardLeavesPlay
         {
-            if (cardInPlay == null)
-                throw new ArgumentNullException("cardInPlay");
+            public AddOneResourceWhenACharacterLeavesPlay(HornOfGondor source)
+                : base("After a character leaves play, add 1 resource to attached hero's pool.", source)
+            {
+            }
 
-            return (cardInPlay is IHeroCard);
+            public void AfterCardLeavesPlay(ICardLeavesPlay state)
+            {
+                if (!(state.LeavingPlay.BaseCard is ICharacterCard))
+                    return;
+
+                state.AddEffect(this);
+            }
+
+            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            {
+                var attachment = state.GetState<IAttachmentInPlay>(Source.Id);
+                if (attachment == null || attachment.AttachedTo == null)
+                    return;
+
+                var resourceful = attachment.AttachedTo as IResourcefulInPlay;
+                if (resourceful == null)
+                    return;
+
+                resourceful.Resources += 1;
+            }
         }
     }
 }

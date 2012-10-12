@@ -7,9 +7,9 @@ using LotR.States.Phases.Any;
 
 namespace LotR.Effects.Phases.Any
 {
-    public interface IDuringDamageHealed
+    public interface IDuringDetermineHitPoints
         : IEffect
     {
-        void DuringDamageHealed(IDamageHealed state);
+        void DuringDetermineHitPoints(IDetermineHitPoints state);
     }
 }

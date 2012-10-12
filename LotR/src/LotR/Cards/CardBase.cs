@@ -5,6 +5,7 @@ using System.Text;
 
 using LotR.Effects;
 using LotR.Effects.Phases.Any;
+using LotR.States.Phases.Any;
 
 namespace LotR.Cards
 {
@@ -72,9 +73,29 @@ namespace LotR.Cards
             protected set;
         }
 
-        public virtual bool HasTrait(Trait trait)
+        public virtual void DuringCheckForResourceIcon(ICheckForResourceIcon state)
         {
-            return traits.Any(x => x == trait);
+            if (state.Target.Card.Id != this.id)
+                return;
+
+            foreach (var effect in text.Effects.OfType<IDuringCheckForResourceIcon>())
+            {
+                effect.DuringCheckForResourceIcon(state);
+            }
+        }
+
+        public virtual void DuringCheckForTrait(ICheckForTrait state)
+        {
+            if (state.Target.Card.Id != this.id)
+                return;
+
+            if (traits.Any(x => x == state.Trait))
+                state.HasTrait = true;
+
+            foreach (var effect in text.Effects.OfType<IDuringCheckForTrait>())
+            {
+                effect.DuringCheckForTrait(state);
+            }
         }
 
         public bool IsUnique

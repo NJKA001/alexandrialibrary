@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
-using LotR.States;
 
-namespace LotR.Effects.Phases.Any
+namespace LotR.States.Phases.Any
 {
-    public interface ICheckForTraitStep
-        //: IGameState
+    public interface ICheckForTrait
+        : IState
     {
-        ICardInPlay<ICard> CardInPlay { get; }
+        ICardInPlay<ICard> Target { get; }
         Trait Trait { get; }
+
         bool HasTrait { get; set; }
     }
 }

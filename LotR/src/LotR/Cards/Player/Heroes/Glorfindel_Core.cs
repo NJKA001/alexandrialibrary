@@ -44,7 +44,7 @@ namespace LotR.Cards.Player.Heroes
                 if (resourceful == null)
                     return null;
 
-                return new PayResourcesFrom(Source, resourceful, 1);
+                return new PayResourcesFrom(Source, resourceful, 1, false);
             }
 
             public override ILimit GetLimit(IGameState state)
@@ -76,7 +76,7 @@ namespace LotR.Cards.Player.Heroes
                 return true;
             }
 
-            public override void Resolve(IGameState state, IChoice choice)
+            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
             {
                 var characterChoice = choice as IChooseCharacter;
                 if (characterChoice == null || characterChoice.Character == null)

@@ -21,6 +21,6 @@ namespace LotR.Effects
         ILimit GetLimit(IGameState state);
 
         bool PaymentAccepted(IGameState state, IPayment payment);
-        void Resolve(IGameState state, IChoice choice);
+        void Resolve(IGameState state, IPayment payment, IChoice choice);
     }
 }

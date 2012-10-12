@@ -11,6 +11,7 @@ using LotR.Effects.Payments;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Any;
 using LotR.States;
+using LotR.States.Phases.Any;
 
 namespace LotR.Cards.Player.Attachments
 {
@@ -36,26 +37,26 @@ namespace LotR.Cards.Player.Attachments
         }
 
         public class AddGondorTrait
-            : PassiveEffect, ICheckForTrait
+            : PassiveEffect, IDuringCheckForTrait
         {
             public AddGondorTrait(StewardOfGondor source)
                 : base("Attached hero gains the Gondor trait.", source)
             {
             }
 
-            public void CheckForTrait(ICheckForTraitStep step)
+            public void DuringCheckForTrait(ICheckForTrait state)
             {
-                if (step.CardInPlay == null || step.Trait != Trait.Gondor)
+                if (state.Trait != Trait.Gondor)
                     return;
 
-                //var attachment = step.GetCardInPlay(Source.Id) as ICardInPlay<IAttachmentCard>;
-                //if (attachment == null || attachment.AttachedTo == null)
-                //    return;
+                var attachment = state.GetState<IAttachmentInPlay>(Source.Id);
+                if (attachment == null || attachment.AttachedTo == null)
+                    return;
 
-                //if (step.CardInPlay.Card.Id == attachment.AttachedTo.CardId)
-                //{
-                //    step.HasTrait = true;
-                //}
+                if (state.Target.Card.Id != attachment.AttachedTo.Card.Id)
+                    return;
+
+                state.HasTrait = true;
             }
         }
 
@@ -93,7 +94,7 @@ namespace LotR.Cards.Player.Attachments
                 return true;
             }
 
-            public override void Resolve(IGameState state, IChoice choice)
+            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
             {
                 //var attachment = step.GetCardInPlay(Source.Id) as ICardInPlay<IAttachmentCard>;
                 //if (attachment == null || attachment.AttachedTo == null)
