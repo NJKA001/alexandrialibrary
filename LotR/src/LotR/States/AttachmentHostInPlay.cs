@@ -16,7 +16,7 @@ namespace LotR.States
         {
         }
 
-        private readonly IList<IAttachmentInPlay> attachments = new List<IAttachmentInPlay>();
+        private readonly IList<IAttachableInPlay> attachments = new List<IAttachableInPlay>();
 
         public override void DuringCheckForResourceIcon(ICheckForResourceIcon state)
         {
@@ -38,17 +38,17 @@ namespace LotR.States
             }
         }
 
-        public IEnumerable<IAttachmentInPlay> Attachments
+        public IEnumerable<IAttachableInPlay> Attachments
         {
             get { return attachments; }
         }
 
-        public void AddAttachment(IAttachmentInPlay attachment)
+        public void AddAttachment(IAttachableInPlay attachment)
         {
             attachments.Add(attachment);
         }
 
-        public void RemoveAttachment(IAttachmentInPlay attachment)
+        public void RemoveAttachment(IAttachableInPlay attachment)
         {
             if (!attachments.Contains(attachment))
                 return;

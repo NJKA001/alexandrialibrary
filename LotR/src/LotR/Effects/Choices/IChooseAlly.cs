@@ -9,7 +9,7 @@ using LotR.States;
 namespace LotR.Effects.Choices
 {
     public interface IChooseAlly
-        : IChoice
+        : IPlayerChoice
     {
         ICardInPlay<IAllyCard> Ally { get; set; }
     }

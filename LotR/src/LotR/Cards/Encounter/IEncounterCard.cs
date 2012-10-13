@@ -6,7 +6,7 @@ using System.Text;
 namespace LotR.Cards.Encounter
 {
     public interface IEncounterCard
-        : ICard
+        : ICard, IRevealableCard
     {
     }
 }

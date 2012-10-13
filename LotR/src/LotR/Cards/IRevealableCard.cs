@@ -10,6 +10,6 @@ namespace LotR.Cards
     public interface IRevealableCard
         : ICard
     {
-        ICardEffect WhenRevealed { get; }
+        IWhenRevealedEffect WhenRevealed();
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
+using LotR.States;
 
 namespace LotR.Effects.Choices
 {

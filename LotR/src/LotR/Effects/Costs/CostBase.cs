@@ -29,6 +29,12 @@ namespace LotR.Effects.Costs
             private set;
         }
 
+        public bool IsOptional
+        {
+            get;
+            set;
+        }
+
         public abstract bool IsMetBy(IPayment payment);
     }
 }

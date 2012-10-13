@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Cards.Encounter.Treacheries
+namespace LotR.Effects
 {
-    public interface ITreacheryCard
-        : IEncounterCard
+    public interface IWhenRevealedEffect
+        : ICardEffect, IPassiveEffect
     {
     }
 }

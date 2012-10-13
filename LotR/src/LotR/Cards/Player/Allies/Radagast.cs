@@ -46,7 +46,7 @@ namespace LotR.Cards.Player.Allies
 
             public override IChoice GetChoice(IGameState state)
             {
-                return new ChooseCharacterWithTrait(Source, Trait.Creature);
+                return new ChooseCharacterWithTrait(Source, state.ActivePlayer, Trait.Creature);
             }
 
             public override ICost GetCost(IGameState state)

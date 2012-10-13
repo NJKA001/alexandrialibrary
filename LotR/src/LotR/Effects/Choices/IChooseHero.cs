@@ -9,8 +9,8 @@ using LotR.States;
 namespace LotR.Effects.Choices
 {
     public interface IChooseHero
-        : IChoice
+        : IPlayerChoice
     {
-        ICardInPlay<IHeroCard> Hero { get; set; }
+        IHeroInPlay Hero { get; set; }
     }
 }

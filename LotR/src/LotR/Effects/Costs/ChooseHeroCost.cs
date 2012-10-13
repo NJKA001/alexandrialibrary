@@ -9,10 +9,10 @@ using LotR.Effects.Payments;
 
 namespace LotR.Effects.Costs
 {
-    public class ChooseHero
+    public class ChooseHeroCost
         : CostBase
     {
-        public ChooseHero(ISource source)
+        public ChooseHeroCost(ISource source)
             : base("Choose a hero", source)
         {
         }

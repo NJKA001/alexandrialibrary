@@ -29,7 +29,7 @@ namespace LotR.Cards.Player.Events
 
             public override IChoice GetChoice(IGameState state)
             {
-                return new ChooseAlly(Source);
+                return new ChooseAlly(Source, state.ActivePlayer);
             }
 
             public override void Resolve(IGameState state, IPayment payment, IChoice choice)

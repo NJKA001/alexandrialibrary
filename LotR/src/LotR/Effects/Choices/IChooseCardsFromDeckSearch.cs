@@ -6,6 +6,7 @@ using System.Text;
 namespace LotR.Effects.Choices
 {
     public interface IChooseCardsFromDeckSearch
+        : IPlayerChoice
     {
     }
 }

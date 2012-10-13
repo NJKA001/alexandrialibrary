@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Cards;
 using LotR.States;
 
 namespace LotR.Effects.Choices
 {
-    public class ChoosePlayer
-        : ChoiceBase, IChoosePlayer
+    public class ChooseHero
+        : PlayerChoiceBase, IChooseHero
     {
-        public ChoosePlayer(ISource source)
-            : base("Choose a player.", source)
+        public ChooseHero(ISource source, IPlayer player)
+            : base("Choose a hero", source, player)
         {
         }
 
-        public IPlayer ChosenPlayer
+        public IHeroInPlay Hero
         {
             get;
             set;

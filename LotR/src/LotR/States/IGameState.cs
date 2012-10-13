@@ -17,5 +17,8 @@ namespace LotR.States
 
         bool CardHasTrait(ICard card, Trait trait);
         bool CardInPlayHasTrait(ICardInPlay card, Trait trait);
+
+        IPlayer ActivePlayer { get; }
+        IPlayer FirstPlayer { get; }
     }
 }

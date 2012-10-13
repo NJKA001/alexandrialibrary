@@ -35,7 +35,7 @@ namespace LotR.Cards.Player.Heroes
 
             public override IChoice GetChoice(IGameState state)
             {
-                return new ChooseCharacter(Source);
+                return new ChooseCharacter(Source, state.ActivePlayer);
             }
 
             public override ICost GetCost(IGameState state)

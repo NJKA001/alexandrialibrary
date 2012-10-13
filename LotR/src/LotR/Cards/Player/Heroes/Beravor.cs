@@ -66,8 +66,8 @@ namespace LotR.Cards.Player.Heroes
                 if (playerChoice == null)
                     return;
 
-                var cards = playerChoice.Player.Deck.GetFromTop(2);
-                playerChoice.Player.Hand.AddCards(cards);
+                var cards = playerChoice.ChosenPlayer.Deck.GetFromTop(2);
+                playerChoice.ChosenPlayer.Hand.AddCards(cards);
             }
         }
     }

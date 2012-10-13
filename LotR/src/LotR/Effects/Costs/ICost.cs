@@ -13,6 +13,7 @@ namespace LotR.Effects.Costs
         ISource Source { get; }
         string Description { get; }
 
+        bool IsOptional { get; set; }
         bool IsMetBy(IPayment payment);
     }
 }

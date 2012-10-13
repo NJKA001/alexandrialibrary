@@ -40,17 +40,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cards\Encounter\Treacheries\AttachableTreacheryCardBase.cs" />
+    <Compile Include="Cards\Encounter\Treacheries\CaughtInAWeb.cs" />
+    <Compile Include="Cards\Encounter\Treacheries\TreacheryCardBase.cs" />
     <Compile Include="Cards\IAttachmentHostCard.cs" />
     <Compile Include="Cards\ICanHaveAttachments.cs" />
     <Compile Include="Cards\Player\Allies\Radagast.cs" />
     <Compile Include="Cards\Player\Attachments\HeroAttachmentCardBase.cs" />
     <Compile Include="Cards\Player\IExhaustableCard.cs" />
     <Compile Include="Effects\Choices\ChooseCharacterWithTrait.cs" />
+    <Compile Include="Effects\Choices\ChooseHero.cs" />
     <Compile Include="Effects\Choices\IChooseCharacterWithTrait.cs" />
+    <Compile Include="Effects\Choices\IPlayerChoice.cs" />
+    <Compile Include="Effects\Choices\PlayerChoiceBase.cs" />
+    <Compile Include="Effects\IWhenRevealedEffect.cs" />
+    <Compile Include="Effects\PassiveCardEffectBase.cs" />
+    <Compile Include="Effects\WhenRevealedEffect.cs" />
     <Compile Include="States\Areas\IQuestArea.cs" />
+    <Compile Include="States\AttachableInPlay.cs" />
     <Compile Include="States\AttachmentHostInPlay.cs" />
     <Compile Include="States\CardInHand.cs" />
     <Compile Include="States\Hand.cs" />
+    <Compile Include="States\IAttachableInPlay.cs" />
     <Compile Include="States\IAttachmentHostInPlay.cs" />
     <Compile Include="States\IAttachmentInPlay.cs" />
     <Compile Include="States\IAttackingInPlay.cs" />
@@ -112,7 +123,7 @@
     <Compile Include="Effects\Choices\ChooseAlly.cs" />
     <Compile Include="Effects\Costs\ChooseCardDestination.cs" />
     <Compile Include="Effects\Costs\ChooseHeroCommitedToQuest.cs" />
-    <Compile Include="Effects\Costs\ChooseHero.cs" />
+    <Compile Include="Effects\Costs\ChooseHeroCost.cs" />
     <Compile Include="Effects\Costs\EachRevealedEnemy.cs" />
     <Compile Include="Effects\Costs\CostBase.cs" />
     <Compile Include="Effects\Costs\DiscardCardsFromHand.cs" />
@@ -179,6 +190,7 @@
     <Compile Include="States\Phases\Combat\IChooseEnemyToAttack.cs" />
     <Compile Include="States\Phases\Combat\IEnemyDefeated.cs" />
     <Compile Include="States\Phases\Quest\ICharactersCommittedToQuest.cs" />
+    <Compile Include="States\Phases\Refresh\ICardReadying.cs" />
     <Compile Include="States\PlayerDeck.cs" />
     <Compile Include="Effects\ICancelEffect.cs" />
     <Compile Include="Effects\IExecutableEffect.cs" />
@@ -361,7 +373,7 @@
     <Compile Include="Effects\Phases\Refresh\IBeforeRaisingThreat.cs" />
     <Compile Include="Effects\Phases\Refresh\IBeforeRefreshingCards.cs" />
     <Compile Include="Effects\Phases\Refresh\IDuringRaisingThreat.cs" />
-    <Compile Include="Effects\Phases\Refresh\IDuringRefreshingCards.cs" />
+    <Compile Include="Effects\Phases\Refresh\IDuringReadyingCard.cs" />
     <Compile Include="Effects\Phases\Resource\IAfterCollectingResources.cs" />
     <Compile Include="Effects\Phases\Resource\IAfterDrawingCards.cs" />
     <Compile Include="Effects\Phases\Resource\IBeforeCollectingResources.cs" />
@@ -389,7 +401,6 @@
   <ItemGroup>
     <Folder Include="States\Phases\Encounter\" />
     <Folder Include="States\Phases\Planning\" />
-    <Folder Include="States\Phases\Refresh\" />
     <Folder Include="States\Phases\Resource\" />
     <Folder Include="States\Phases\Travel\" />
   </ItemGroup>

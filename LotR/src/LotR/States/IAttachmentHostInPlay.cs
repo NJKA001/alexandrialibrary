@@ -10,9 +10,9 @@ namespace LotR.States
     public interface IAttachmentHostInPlay
         : ICardInHand<IAttachmentHostCard>
     {
-        IEnumerable<IAttachmentInPlay> Attachments { get; }
+        IEnumerable<IAttachableInPlay> Attachments { get; }
 
-        void AddAttachment(IAttachmentInPlay attachment);
-        void RemoveAttachment(IAttachmentInPlay attachment);
+        void AddAttachment(IAttachableInPlay attachment);
+        void RemoveAttachment(IAttachableInPlay attachment);
     }
 }
