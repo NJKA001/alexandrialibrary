@@ -45,22 +45,22 @@ namespace LotR.Cards.Player
 
         public virtual void DetermineWillpower(IDetermineWillpower state)
         {
-            state.Willpower = this.Willpower;
+            state.Willpower += this.Willpower;
         }
 
         public virtual void DetermineAttack(IDetermineAttack state)
         {
-            state.Attack = this.Attack;
+            state.Attack += this.Attack;
         }
 
         public virtual void DetermineDefense(IDetermineDefense state)
         {
-            state.Defense = this.Defense;
+            state.Defense += this.Defense;
         }
 
         public virtual void DetermineHitPoints(IDetermineHitPoints state)
         {
-            state.HitPoints = this.HitPoints;
+            state.HitPoints += this.HitPoints;
         }
 
         public virtual bool IsValidAttachment(IAttachableCard card)

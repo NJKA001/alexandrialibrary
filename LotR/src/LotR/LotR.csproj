@@ -160,6 +160,7 @@
     <Compile Include="Cards\Player\Heroes\Denethor.cs" />
     <Compile Include="Cards\Player\Heroes\Dunhere.cs" />
     <Compile Include="Cards\Player\Heroes\Glorfindel_Core.cs" />
+    <Compile Include="States\IHeroInPlay.cs" />
     <Compile Include="States\IPlayerDeck.cs" />
     <Compile Include="States\IResourcefulInPlay.cs" />
     <Compile Include="States\IThreateningInPlay.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="States\Phases\Any\IDetermineHitPoints.cs" />
     <Compile Include="States\Phases\Any\IDetermineWillpower.cs" />
     <Compile Include="States\Phases\Any\IEncounterCardRevealed.cs" />
+    <Compile Include="States\Phases\Any\IPlayerDrawingCards.cs" />
     <Compile Include="States\Phases\Combat\IChooseEnemyToAttack.cs" />
     <Compile Include="States\Phases\Combat\IEnemyDefeated.cs" />
     <Compile Include="States\Phases\Quest\ICharactersCommittedToQuest.cs" />
@@ -364,9 +366,8 @@
     <Compile Include="Effects\Phases\Resource\IAfterDrawingCards.cs" />
     <Compile Include="Effects\Phases\Resource\IBeforeCollectingResources.cs" />
     <Compile Include="Effects\Phases\Resource\IBeforeDrawingCards.cs" />
-    <Compile Include="Effects\Phases\Resource\IDrawCardsStep.cs" />
     <Compile Include="Effects\Phases\Resource\IDuringCollectingResources.cs" />
-    <Compile Include="Effects\Phases\Resource\IDuringDrawingCards.cs" />
+    <Compile Include="Effects\Phases\Resource\IDuringDrawingResourceCards.cs" />
     <Compile Include="Effects\Phases\Travel\IAfterTraveling.cs" />
     <Compile Include="Effects\Phases\Travel\IBeforeTraveling.cs" />
     <Compile Include="Effects\Phases\Travel\IDuringTraveling.cs" />

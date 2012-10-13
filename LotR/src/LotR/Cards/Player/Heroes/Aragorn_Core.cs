@@ -7,9 +7,10 @@ using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Costs;
 using LotR.Effects.Payments;
-using LotR.States;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Quest;
+using LotR.States;
+using LotR.States.Phases.Quest;
 
 namespace LotR.Cards.Player.Heroes
 {
@@ -41,22 +42,52 @@ namespace LotR.Cards.Player.Heroes
 
             public void AfterCommittingToQuest(IGameState state)
             {
-                //var self = step.CommitedCharacters.Where(x => x.Card.Id == this.Id).Select(x => x.Card).FirstOrDefault();
+                var committedToQuest = state.GetStates<ICharactersCommittedToQuest>().FirstOrDefault();
+                if (committedToQuest == null)
+                    return;
 
-                //if (self == null)
-                    //return;
+                var self = committedToQuest.Characters.Where(x => x.Id == Source.Id).FirstOrDefault();
+                if (self == null)
+                    return;
 
                 state.AddEffect(this);
             }
 
+            public override bool PaymentAccepted(IGameState state, IPayment payment)
+            {
+                var resourcePayment = payment as IResourcePayment;
+                if (resourcePayment == null)
+                    return false;
+
+                if (resourcePayment.Payments.Count() != 1)
+                    return false;
+
+                var firstPayment = resourcePayment.Payments.FirstOrDefault();
+                if (firstPayment == null)
+                    return false;
+
+                if (firstPayment.Item1.Card.Id != Source.Id || firstPayment.Item2 != 1)
+                    return false;
+
+                var resourceful = state.GetState<IResourcefulInPlay>(Source.Id);
+                if (resourceful == null || resourceful.Resources < 1)
+                    return false;
+
+                resourceful.Resources -= firstPayment.Item2;
+
+                return true;
+            }
+
             public override void Resolve(IGameState state, IPayment payment, IChoice choice)
             {
-                //var inPlay = step.GetCardInPlay(aragorn.Id) as ICardInPlay<IHeroCard>;
+                var exhaustable = state.GetState<IExhaustableInPlay>(Source.Id);
+                if (exhaustable == null)
+                    return;
 
-                //if (inPlay == null)
-                //    return;
+                if (!exhaustable.IsExhausted)
+                    return;
 
-                //step.AddEffect(new ReadyCards(step, new List<ICardInPlay<IExhaustableCard>> { inPlay }));
+                exhaustable.Ready();
             }
 
             public override ICost GetCost(IGameState state)
@@ -66,7 +97,7 @@ namespace LotR.Cards.Player.Heroes
         }
 
         public class ReadyCost
-            : CostBase, ICost
+            : CostBase
         {
             public ReadyCost(Aragorn source)
                 : base("Spend 1 resource from Aragorn's resource pool", source)

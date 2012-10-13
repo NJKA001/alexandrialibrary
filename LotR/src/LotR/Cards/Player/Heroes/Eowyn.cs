@@ -7,9 +7,10 @@ using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Costs;
 using LotR.Effects.Payments;
+using LotR.Effects.Phases;
 using LotR.Effects.Modifiers;
 using LotR.States;
-using LotR.Effects.Phases;
+using LotR.States.Phases.Any;
 
 namespace LotR.Cards.Player.Heroes
 {
@@ -45,11 +46,11 @@ namespace LotR.Cards.Player.Heroes
 
             public override void Resolve(IGameState state, IPayment payment, IChoice choice)
             {
-                //var willpowerful = step.GetCardInPlay(Source.Id) as IWillpowerfulCard;
-                //if (willpowerful == null)
-                //    return;
+                var willpowerful = state.GetState<IWillpowerfulInPlay>(Source.Id);
+                if (willpowerful == null)
+                    return;
 
-                //step.AddEffect(new WillpowerModifier(step.Phase, Source, Source, TimeScope.Phase, 1));
+                state.AddEffect(new WillpowerModifier(state.CurrentPhase, Source, willpowerful.Card, TimeScope.Phase, 1));
             }
         }
     }

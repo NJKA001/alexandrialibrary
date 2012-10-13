@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.States.Phases.Any;
+
 namespace LotR.Effects.Phases.Resource
 {
-    public interface IDrawCardsStep
+    public interface IDuringDrawingResourceCards
     {
-        bool CanDrawCards { get; set; }
-        byte NumberOfCardsToDraw { get; set; }
+        void DuringDrawingResourceCards(IPlayerDrawingCards state);
     }
 }
