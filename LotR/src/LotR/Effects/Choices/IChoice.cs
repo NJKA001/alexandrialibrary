@@ -12,7 +12,7 @@ namespace LotR.Effects.Choices
     {
         string Description { get; }
         ISource Source { get; }
-        IPlayer Player { get; }
+        IEnumerable<IPlayer> Players { get; }
 
         bool IsValid(IGameState state);
     }

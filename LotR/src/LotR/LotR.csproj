@@ -42,6 +42,10 @@
   <ItemGroup>
     <Compile Include="Cards\EncounterSet.cs" />
     <Compile Include="Cards\Encounter\Enemies\EnemyCardBase.cs" />
+    <Compile Include="Cards\Encounter\Enemies\Hummerhorns.cs" />
+    <Compile Include="Cards\Encounter\Enemies\KingSpider.cs" />
+    <Compile Include="Cards\Encounter\IShadowCard.cs" />
+    <Compile Include="Cards\Encounter\Locations\GreatForestWeb.cs" />
     <Compile Include="Cards\Encounter\Locations\LocationCardBase.cs" />
     <Compile Include="Cards\Encounter\Objectives\AttachableObjectiveCardBase.cs" />
     <Compile Include="Cards\Encounter\Objectives\IAttachableObjectiveCard.cs" />
@@ -60,12 +64,19 @@
     <Compile Include="Effects\Choices\ChooseCharacterWithTrait.cs" />
     <Compile Include="Effects\Choices\ChooseHero.cs" />
     <Compile Include="Effects\Choices\ChoosePlayerToChooseHero.cs" />
+    <Compile Include="Effects\Choices\PlayersChooseCharacters.cs" />
+    <Compile Include="Effects\Choices\EachPlayerChoosesReadyCharacters.cs" />
     <Compile Include="Effects\Choices\IChooseCharacterWithTrait.cs" />
     <Compile Include="Effects\Choices\IChoosePlayerToChooseHero.cs" />
+    <Compile Include="Effects\Choices\IPlayersChooseCharacters.cs" />
+    <Compile Include="Effects\ForcedCardEffectBase.cs" />
     <Compile Include="Effects\ITravelEffect.cs" />
     <Compile Include="Effects\IWhenRevealedEffect.cs" />
     <Compile Include="Effects\PassiveCardEffectBase.cs" />
-    <Compile Include="Effects\WhenRevealedEffect.cs" />
+    <Compile Include="Effects\Phases\Combat\IAfterEnemyEngages.cs" />
+    <Compile Include="Effects\ShadowEffectBase.cs" />
+    <Compile Include="Effects\TravelEffectBase.cs" />
+    <Compile Include="Effects\WhenRevealedEffectBase.cs" />
     <Compile Include="States\Areas\IQuestArea.cs" />
     <Compile Include="States\AttachableInPlay.cs" />
     <Compile Include="States\AttachmentHostInPlay.cs" />
@@ -200,7 +211,9 @@
     <Compile Include="States\Phases\Any\IEncounterCardRevealed.cs" />
     <Compile Include="States\Phases\Any\IPlayerDrawingCards.cs" />
     <Compile Include="States\Phases\Combat\IChooseEnemyToAttack.cs" />
+    <Compile Include="States\Phases\Combat\IEnemyAttack.cs" />
     <Compile Include="States\Phases\Combat\IEnemyDefeated.cs" />
+    <Compile Include="States\Phases\Combat\IEnemyEngage.cs" />
     <Compile Include="States\Phases\Quest\ICharactersCommittedToQuest.cs" />
     <Compile Include="States\Phases\Refresh\ICardReadying.cs" />
     <Compile Include="States\PlayerDeck.cs" />

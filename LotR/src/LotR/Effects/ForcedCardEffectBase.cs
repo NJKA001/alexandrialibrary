@@ -5,10 +5,10 @@ using System.Text;
 
 namespace LotR.Effects
 {
-    public abstract class WhenRevealedEffect
-        : CardEffectBase, IWhenRevealedEffect
+    public abstract class ForcedCardEffectBase
+        : PassiveCardEffectBase, IForcedEffect
     {
-        protected WhenRevealedEffect(string description, ISource source)
+        protected ForcedCardEffectBase(string description, ISource source)
             : base(description, source)
         {
         }

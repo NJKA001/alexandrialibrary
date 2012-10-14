@@ -35,9 +35,14 @@ namespace LotR.Cards.Encounter
             protected set;
         }
 
-        public IWhenRevealedEffect WhenRevealed()
+        public virtual IWhenRevealedEffect WhenRevealed()
         {
             return Text.Effects.OfType<IWhenRevealedEffect>().FirstOrDefault();
+        }
+
+        public virtual IShadowEffect Shadow()
+        {
+            return Text.Effects.OfType<IShadowEffect>().FirstOrDefault();
         }
     }
 }

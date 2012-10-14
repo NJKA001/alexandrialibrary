@@ -12,10 +12,15 @@ namespace LotR.Effects.Choices
         : IChoice
     {
         protected ChoiceBase(string description, ISource source, IPlayer player)
+            : this(description, source, new List<IPlayer> { player })
+        {
+        }
+
+        protected ChoiceBase(string description, ISource source, IEnumerable<IPlayer> players)
         {
             this.Description = description;
             this.Source = source;
-            this.Player = player;
+            this.Players = players;
         }
 
         public string Description
@@ -30,7 +35,7 @@ namespace LotR.Effects.Choices
             private set;
         }
 
-        public IPlayer Player
+        public IEnumerable<IPlayer> Players
         {
             get;
             private set;

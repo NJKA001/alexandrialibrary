@@ -17,7 +17,7 @@ namespace LotR.Cards.Encounter.Treacheries
         : AttachableTreacheryCardBase
     {
         public CaughtInAWeb()
-            : base("Caught in a Web", CardSet.Core, 80, EncounterSet.None, 2)
+            : base("Caught in a Web", CardSet.Core, 80, EncounterSet.Spiders_of_Mirkwood, 2)
         {
             AddTrait(Trait.Condition);
 
@@ -26,7 +26,7 @@ namespace LotR.Cards.Encounter.Treacheries
         }
 
         private class WhenRevealedAttachToAHero
-            : WhenRevealedEffect
+            : WhenRevealedEffectBase
         {
             public WhenRevealedAttachToAHero(CaughtInAWeb source)
                 : base("The player with the highest threat level attached this card to one of his heroes. (Counts as a Condition attachment with the text: \"Attached hero does not ready during the refresh phase unless you pay 2 resources from that hero's pool.\")", source)
