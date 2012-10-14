@@ -10,34 +10,34 @@ namespace LotR.Cards.Player
     public class CharacterCardBase
         : PlayerCardBase, ICharacterCard
     {
-        protected CharacterCardBase(string title, CardSet cardSet, uint cardNumber, byte willpower, byte attack, byte defense, byte hitPoints)
-            : base(title, cardSet, cardNumber)
+        protected CharacterCardBase(string title, CardSet cardSet, uint cardNumber, Sphere printedSphere, byte printedWillpower, byte printedAttack, byte printedDefense, byte printedHitPoints)
+            : base(title, cardSet, cardNumber, printedSphere)
         {
-            this.Willpower = willpower;
-            this.Attack = attack;
-            this.Defense = defense;
-            this.HitPoints = hitPoints;
+            this.PrintedWillpower = printedWillpower;
+            this.PrintedAttack = printedAttack;
+            this.PrintedDefense = printedDefense;
+            this.PrintedHitPoints = printedHitPoints;
         }
 
-        protected byte Willpower
-        {
-            get;
-            private set;
-        }
-
-        protected byte Attack
+        public byte PrintedWillpower
         {
             get;
             private set;
         }
 
-        protected byte Defense
+        public byte PrintedAttack
         {
             get;
             private set;
         }
 
-        protected byte HitPoints
+        public byte PrintedDefense
+        {
+            get;
+            private set;
+        }
+
+        public byte PrintedHitPoints
         {
             get;
             private set;
@@ -45,22 +45,22 @@ namespace LotR.Cards.Player
 
         public virtual void DetermineWillpower(IDetermineWillpower state)
         {
-            state.Willpower += this.Willpower;
+            state.Willpower += this.PrintedWillpower;
         }
 
         public virtual void DetermineAttack(IDetermineAttack state)
         {
-            state.Attack += this.Attack;
+            state.Attack += this.PrintedAttack;
         }
 
         public virtual void DetermineDefense(IDetermineDefense state)
         {
-            state.Defense += this.Defense;
+            state.Defense += this.PrintedDefense;
         }
 
         public virtual void DetermineHitPoints(IDetermineHitPoints state)
         {
-            state.HitPoints += this.HitPoints;
+            state.HitPoints += this.PrintedHitPoints;
         }
 
         public virtual bool IsValidAttachment(IAttachableCard card)

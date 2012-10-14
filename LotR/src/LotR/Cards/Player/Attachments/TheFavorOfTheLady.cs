@@ -13,7 +13,7 @@ namespace LotR.Cards.Player.Attachments
         : AttachmentCardBase
     {
         public TheFavorOfTheLady()
-            : base("The Favor of the Lady", CardSet.Core, 55, Sphere.Spirit, 2, false, false)
+            : base("The Favor of the Lady", CardSet.Core, 55, Sphere.Spirit, 2)
         {
             AddTrait(Trait.Condition);
         }

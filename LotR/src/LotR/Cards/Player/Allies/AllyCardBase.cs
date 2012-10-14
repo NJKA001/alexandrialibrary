@@ -12,29 +12,21 @@ namespace LotR.Cards.Player.Allies
     public abstract class AllyCardBase
         : CharacterCardBase, IAllyCard
     {
-        protected AllyCardBase(string title, CardSet cardSet, uint cardNumber, Sphere sphere, byte resourceCost, byte willpower, byte attack, byte defense, byte hitPoints)
-            : base(title, cardSet, cardNumber, willpower, attack, defense, hitPoints)
+        protected AllyCardBase(string title, CardSet cardSet, uint cardNumber, Sphere printedSphere, byte printedCost, byte printedWillpower, byte printedAttack, byte printedDefense, byte printedHitPoints)
+            : base(title, cardSet, cardNumber, printedSphere, printedWillpower, printedAttack, printedDefense, printedHitPoints)
         {
-            this.resourceCost = resourceCost;
-
-            AddSphereOfInfluence(sphere);
+            this.PrintedCost = printedCost;
         }
 
-        private readonly byte resourceCost;
-
-        public Sphere BaseResourceSphere
+        public byte PrintedCost
         {
-            get { return SpheresOfInfluence.FirstOrDefault(); }
-        }
-
-        public byte BaseResourceCost
-        {
-            get { return resourceCost; }
+            get;
+            private set;
         }
 
         public virtual ICost GetResourceCost(IGameState state)
         {
-            return new PayResources(this, SpheresOfInfluence.FirstOrDefault(), resourceCost, false);
+            return new PayResources(this, PrintedSphere, PrintedCost, false);
         }
     }
 }

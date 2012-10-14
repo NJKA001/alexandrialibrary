@@ -10,6 +10,8 @@ namespace LotR.Cards
     public interface IWillpowerfulCard
         : ICard
     {
+        byte PrintedWillpower { get; }
+
         void DetermineWillpower(IDetermineWillpower state);
     }
 }

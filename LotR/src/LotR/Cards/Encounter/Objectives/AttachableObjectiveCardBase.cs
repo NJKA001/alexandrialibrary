@@ -5,13 +5,13 @@ using System.Text;
 
 using LotR.States;
 
-namespace LotR.Cards.Encounter.Treacheries
+namespace LotR.Cards.Encounter.Objectives
 {
-    public abstract class AttachableTreacheryCardBase
-        : TreacheryCardBase, IAttachableCard
+    public class AttachableObjectiveCardBase
+        : ObjectiveCardBase, IAttachableObjectiveCard
     {
-        protected AttachableTreacheryCardBase(string title, CardSet cardSet, uint cardNumber, EncounterSet encounterSet, byte quantity)
-            : base(title, cardSet, cardNumber, encounterSet, quantity)
+        protected AttachableObjectiveCardBase(string title, CardSet cardSet, uint cardNumber, EncounterSet encounterSet, byte quantity, byte victoryPoints)
+            : base(title, cardSet, cardNumber, encounterSet, quantity, victoryPoints)
         {
         }
 

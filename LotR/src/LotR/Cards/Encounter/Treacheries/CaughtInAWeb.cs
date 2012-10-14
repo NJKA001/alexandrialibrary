@@ -17,7 +17,7 @@ namespace LotR.Cards.Encounter.Treacheries
         : AttachableTreacheryCardBase
     {
         public CaughtInAWeb()
-            : base("Caught in a Web", CardSet.Core, 80)
+            : base("Caught in a Web", CardSet.Core, 80, EncounterSet.None, 2)
         {
             AddTrait(Trait.Condition);
 

@@ -13,8 +13,10 @@ namespace LotR.Cards.Player.Attachments
         : AttachmentCardBase
     {
         public DwarvenAxe()
-            : base("Dwarven Axe", CardSet.Core, 41, Sphere.Tactics, 2, false, true)
+            : base("Dwarven Axe", CardSet.Core, 41, Sphere.Tactics, 2)
         {
+            IsRestricted = true;
+
             AddTrait(Trait.Item);
             AddTrait(Trait.Weapon);
         }

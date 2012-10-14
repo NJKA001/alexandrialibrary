@@ -8,5 +8,9 @@ namespace LotR.Cards.Encounter
     public interface IEncounterCard
         : ICard, IRevealableCard
     {
+        EncounterSet EncounterSet { get; }
+        byte Quantity { get; }
+
+        bool IsGuarded { get; }
     }
 }

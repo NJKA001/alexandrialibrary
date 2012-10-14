@@ -13,7 +13,7 @@ namespace LotR.Cards.Player.Attachments
         : AttachmentCardBase
     {
         public ProtectorOfLorien()
-            : base("Protector of Lorien", CardSet.Core, 70, Sphere.Lore, 1, false, false)
+            : base("Protector of Lorien", CardSet.Core, 70, Sphere.Lore, 1)
         {
             AddTrait(Trait.Title);
         }

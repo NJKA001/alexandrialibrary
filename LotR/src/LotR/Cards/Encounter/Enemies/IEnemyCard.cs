@@ -9,7 +9,10 @@ namespace LotR.Cards.Encounter.Enemies
         : IEncounterCard, 
         IThreateningCard, 
         IDamageableCard, 
-        ICanHaveAttachments
+        IAttackingCard, 
+        IDefendingCard,
+        ICanHaveAttachments,
+        IVictoryCard
     {
         byte EngagementCost { get; }
     }

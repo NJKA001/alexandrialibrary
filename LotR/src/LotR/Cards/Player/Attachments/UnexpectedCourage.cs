@@ -13,7 +13,7 @@ namespace LotR.Cards.Player.Attachments
         : AttachmentCardBase
     {
         public UnexpectedCourage()
-            : base("Unexpected Courage", CardSet.Core, 57, Sphere.Spirit, 2, false, false)
+            : base("Unexpected Courage", CardSet.Core, 57, Sphere.Spirit, 2)
         {
             AddTrait(Trait.Condition);
         }

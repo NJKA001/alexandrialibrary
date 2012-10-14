@@ -6,7 +6,8 @@ using System.Text;
 namespace LotR.Cards.Encounter.Objectives
 {
     public interface IObjectiveCard
-        : IEncounterCard, IAttachableCard
+        : IEncounterCard,
+        IVictoryCard
     {
     }
 }

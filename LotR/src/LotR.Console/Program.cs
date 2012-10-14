@@ -86,11 +86,11 @@ namespace LotR.Console
                 WriteLine("Starting Threat: 0");
             }
             WriteLine();
-            WriteLine("Cards: {0} with Avg. Cost {1:0.0}", deck.Cards.Count(), deck.Cards.OfType<ICostlyCard>().Average(x => x.BaseResourceCost));
-            foreach (var sphere in deck.Cards.OfType<ICostlyCard>().GroupBy(x => x.BaseResourceSphere))
+            WriteLine("Cards: {0} with Avg. Cost {1:0.0}", deck.Cards.Count(), deck.Cards.OfType<ICostlyCard>().Average(x => x.PrintedCost));
+            foreach (var sphere in deck.Cards.OfType<ICostlyCard>().GroupBy(x => x.PrintedSphere))
             {
-                var count = deck.Cards.OfType<ICostlyCard>().Where(x => x.BaseResourceSphere == sphere.Key).Count();
-                var avg = deck.Cards.OfType<ICostlyCard>().Where(x => x.BaseResourceSphere == sphere.Key).Average(x => x.BaseResourceCost);
+                var count = deck.Cards.OfType<ICostlyCard>().Where(x => x.PrintedSphere == sphere.Key).Count();
+                var avg = deck.Cards.OfType<ICostlyCard>().Where(x => x.PrintedSphere == sphere.Key).Average(x => x.PrintedCost);
                 WriteLine("{0} Sphere: {1} Cards with Avg. Cost {2:0.0}", sphere.Key, count, avg);
             }
 

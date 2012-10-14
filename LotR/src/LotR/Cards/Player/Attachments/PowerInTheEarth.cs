@@ -13,7 +13,7 @@ namespace LotR.Cards.Player.Attachments
         : AttachmentCardBase
     {
         public PowerInTheEarth()
-            : base("Power in the Earth", CardSet.Core, 56, Sphere.Spirit, 1, false, false)
+            : base("Power in the Earth", CardSet.Core, 56, Sphere.Spirit, 1)
         {
             AddTrait(Trait.Condition);
         }

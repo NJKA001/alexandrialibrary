@@ -8,6 +8,6 @@ namespace LotR.Cards.Player
     public interface IPlayerCard
         : ICard
     {
-        IEnumerable<Sphere> SpheresOfInfluence { get; }
+        Sphere PrintedSphere { get; }
     }
 }

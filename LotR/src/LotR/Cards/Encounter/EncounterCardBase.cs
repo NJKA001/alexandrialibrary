@@ -10,9 +10,29 @@ namespace LotR.Cards.Encounter
     public abstract class EncounterCardBase
         : CardBase, IEncounterCard
     {
-        protected EncounterCardBase(string title, CardSet cardSet, uint cardNumber)
+        protected EncounterCardBase(string title, CardSet cardSet, uint cardNumber, EncounterSet encounterSet, byte quantity)
             : base(title, cardSet, cardNumber)
         {
+            this.EncounterSet = encounterSet;
+            this.Quantity = quantity;
+        }
+
+        public EncounterSet EncounterSet
+        {
+            get;
+            private set;
+        }
+
+        public byte Quantity
+        {
+            get;
+            private set;
+        }
+
+        public bool IsGuarded
+        {
+            get;
+            protected set;
         }
 
         public IWhenRevealedEffect WhenRevealed()

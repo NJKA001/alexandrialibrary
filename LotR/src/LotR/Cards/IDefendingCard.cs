@@ -10,6 +10,8 @@ namespace LotR.Cards
     public interface IDefendingCard
         : ICard
     {
+        byte PrintedDefense { get; }
+
         void DetermineDefense(IDetermineDefense state);
     }
 }

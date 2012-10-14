@@ -11,8 +11,8 @@ namespace LotR.Cards.Player.Attachments
     public abstract class HeroAttachmentCardBase
         : AttachmentCardBase
     {
-        protected HeroAttachmentCardBase(string title, CardSet cardSet, uint cardNumber, Sphere sphere, byte resourceCost, bool isUnique, bool isRestricted)
-            : base(title, cardSet, cardNumber, sphere, resourceCost, isUnique, isRestricted)
+        protected HeroAttachmentCardBase(string title, CardSet cardSet, uint cardNumber, Sphere sphere, byte resourceCost)
+            : base(title, cardSet, cardNumber, sphere, resourceCost)
         {
         }
 

@@ -12,13 +12,11 @@ namespace LotR.Cards.Player
     public abstract class CostlyCardBase
         : PlayerCardBase, ICostlyCard
     {
-        protected CostlyCardBase(string title, CardSet cardSet, uint cardNumber, Sphere sphere, byte resourceCost)
-            : base(title, cardSet, cardNumber)
+        protected CostlyCardBase(string title, CardSet cardSet, uint cardNumber, Sphere printedSphere, byte printedCost)
+            : base(title, cardSet, cardNumber, printedSphere)
         {
-            this.resourceCost = resourceCost;
+            this.PrintedCost = printedCost;
         }
-
-        private readonly byte resourceCost;
 
         protected bool HasVariableCost
         {
@@ -26,19 +24,15 @@ namespace LotR.Cards.Player
             set;
         }
 
-        public Sphere BaseResourceSphere
+        public byte PrintedCost
         {
-            get { return SpheresOfInfluence.FirstOrDefault(); }
-        }
-
-        public byte BaseResourceCost
-        {
-            get { return resourceCost; }
+            get;
+            private set;
         }
 
         public virtual ICost GetResourceCost(IGameState state)
         {
-            return new PayResources(this, SpheresOfInfluence.FirstOrDefault(), resourceCost, HasVariableCost);
+            return new PayResources(this, PrintedSphere, PrintedCost, HasVariableCost);
         }
     }
 }

@@ -5,9 +5,8 @@ using System.Text;
 
 namespace LotR.Cards
 {
-    public interface IProgressableCard
-        : ICard
+    public enum EncounterSet
     {
-        byte QuestPoints { get; }
+        None = 0,
     }
 }

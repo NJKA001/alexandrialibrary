@@ -10,6 +10,8 @@ namespace LotR.Cards
     public interface IAttackingCard
         : ICard
     {
+        byte PrintedAttack { get; }
+
         void DetermineAttack(IDetermineAttack state);
     }
 }

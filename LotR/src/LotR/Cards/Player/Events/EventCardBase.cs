@@ -8,10 +8,9 @@ namespace LotR.Cards.Player.Events
     public abstract class EventCardBase
         : CostlyCardBase, IEventCard
     {
-        protected EventCardBase(string title, CardSet cardSet, uint cardNumber, Sphere sphere, byte resourceCost)
-            : base(title, cardSet, cardNumber, sphere, resourceCost)
+        protected EventCardBase(string title, CardSet cardSet, uint cardNumber, Sphere printedSphere, byte resourceCost)
+            : base(title, cardSet, cardNumber, printedSphere, resourceCost)
         {
-            AddSphereOfInfluence(sphere);
         }
     }
 }

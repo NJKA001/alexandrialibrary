@@ -12,8 +12,8 @@ namespace LotR.Cards.Player
     public interface ICostlyCard
         : IPlayerCard
     {
-        Sphere BaseResourceSphere { get; }
-        byte BaseResourceCost { get; }
+        byte PrintedCost { get; }
+
         ICost GetResourceCost(IGameState state);
     }
 }

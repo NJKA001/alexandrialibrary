@@ -16,8 +16,11 @@ namespace LotR.Cards.Player.Attachments
         : AttachmentCardBase
     {
         public CelebriansStone()
-            : base("Celebrian's Stone", CardSet.Core, 27, Sphere.Leadership, 2, true, true)
+            : base("Celebrian's Stone", CardSet.Core, 27, Sphere.Leadership, 2)
         {
+            IsUnique = true;
+            IsRestricted = true;
+
             AddTrait(Trait.Artifact);
             AddTrait(Trait.Item);
 

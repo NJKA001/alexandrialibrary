@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards.Player.Allies;
+
 namespace LotR.Cards.Encounter.Objectives
 {
-    public interface IGuardedObjectiveCard
-        : IObjectiveCard, IGuardedCard
+    public interface IAllyObjectiveCard
+        : IObjectiveCard, IAllyCard
     {
     }
 }

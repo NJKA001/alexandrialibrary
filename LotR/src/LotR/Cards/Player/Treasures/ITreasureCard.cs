@@ -6,7 +6,8 @@ using System.Text;
 namespace LotR.Cards.Player.Treasures
 {
     public interface ITreasureCard
-        : IPlayerCard, IAttachableCard
+        : IPlayerCard, ICostlyCard, IAttachableCard
     {
+        EncounterSet EncounterSet { get; }
     }
 }

@@ -11,7 +11,6 @@ namespace LotR.States
     public interface ICardInPlay
         : IState, IDuringCheckForResourceIcon, IDuringCheckForTrait
     {
-        ICard BaseCard { get; }
         string Title { get; }
     }
 

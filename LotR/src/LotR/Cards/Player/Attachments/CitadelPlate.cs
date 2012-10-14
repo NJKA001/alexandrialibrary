@@ -13,8 +13,10 @@ namespace LotR.Cards.Player.Attachments
         : AttachmentCardBase
     {
         public CitadelPlate()
-            : base("Citadel Plate", CardSet.Core, 40, Sphere.Tactics, 4, false, true)
+            : base("Citadel Plate", CardSet.Core, 40, Sphere.Tactics, 4)
         {
+            IsRestricted = true;
+
             AddTrait(Trait.Item);
             AddTrait(Trait.Armor);
         }

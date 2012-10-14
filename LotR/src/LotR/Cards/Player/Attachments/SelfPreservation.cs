@@ -13,7 +13,7 @@ namespace LotR.Cards.Player.Attachments
         : AttachmentCardBase
     {
         public SelfPreservation()
-            : base("Self Preservation", CardSet.Core, 72, Sphere.Lore, 3, false, false)
+            : base("Self Preservation", CardSet.Core, 72, Sphere.Lore, 3)
         {
             AddTrait(Trait.Skill);
         }

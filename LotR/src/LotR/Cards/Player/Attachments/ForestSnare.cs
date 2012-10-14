@@ -13,7 +13,7 @@ namespace LotR.Cards.Player.Attachments
         : AttachmentCardBase
     {
         public ForestSnare()
-            : base("Forest Snare", CardSet.Core, 69, Sphere.Lore, 3, false, false)
+            : base("Forest Snare", CardSet.Core, 69, Sphere.Lore, 3)
         {
             AddTrait(Trait.Item);
             AddTrait(Trait.Trap);

@@ -22,8 +22,10 @@ namespace LotR.Cards.Player.Attachments
         : AttachmentCardBase
     {
         public BladeOfGondolin()
-            : base("Blade of Gondolin", CardSet.Core, 39, Sphere.Tactics, 1, false, true)
+            : base("Blade of Gondolin", CardSet.Core, 39, Sphere.Tactics, 1)
         {
+            IsRestricted = true;
+
             AddTrait(Trait.Item);
             AddTrait(Trait.Weapon);
 

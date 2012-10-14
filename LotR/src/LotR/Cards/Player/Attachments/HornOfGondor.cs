@@ -17,8 +17,11 @@ namespace LotR.Cards.Player.Attachments
         : HeroAttachmentCardBase
     {
         public HornOfGondor()
-            : base("Horn of Gondor", CardSet.Core, 42, Sphere.Tactics, 1, true, true)
+            : base("Horn of Gondor", CardSet.Core, 42, Sphere.Tactics, 1)
         {
+            IsUnique = true;
+            IsRestricted = true;
+
             AddTrait(Trait.Item);
             AddTrait(Trait.Artifact);
         }
@@ -33,7 +36,7 @@ namespace LotR.Cards.Player.Attachments
 
             public void AfterCardLeavesPlay(ICardLeavesPlay state)
             {
-                if (!(state.LeavingPlay.BaseCard is ICharacterCard))
+                if (!(state.LeavingPlay is ICharacterInPlay))
                     return;
 
                 state.AddEffect(this);

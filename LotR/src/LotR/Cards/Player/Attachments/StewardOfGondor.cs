@@ -19,8 +19,10 @@ namespace LotR.Cards.Player.Attachments
         : AttachmentCardBase
     {
         public StewardOfGondor()
-            : base("Steward of Gondor", CardSet.Core, 26, Sphere.Leadership, 2, true, false)
+            : base("Steward of Gondor", CardSet.Core, 26, Sphere.Leadership, 2)
         {
+            IsUnique = true;
+
             AddTrait(Trait.Gondor);
             AddTrait(Trait.Title);
 

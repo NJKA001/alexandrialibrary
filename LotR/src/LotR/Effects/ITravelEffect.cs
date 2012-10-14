@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Cards
+namespace LotR.Effects
 {
-    public interface IProgressableCard
-        : ICard
+    public interface ITravelEffect
+        : ICardEffect, IPassiveEffect
     {
-        byte QuestPoints { get; }
     }
 }

@@ -10,6 +10,8 @@ namespace LotR.Cards
     public interface IDamageableCard
         : ICard
     {
-        void DetermineHitPoints(IDetermineHitPoints step);
+        byte PrintedHitPoints { get; }
+
+        void DetermineHitPoints(IDetermineHitPoints state);
     }
 }

@@ -11,8 +11,9 @@ namespace LotR.Cards.Encounter.Locations
         : IEncounterCard, 
         IProgressableCard, 
         IThreateningCard,
-        ICanHaveAttachments
+        ICanHaveAttachments,
+        IVictoryCard
     {
-        ICardEffect Travel { get; }
+        ITravelEffect Travel();
     }
 }
