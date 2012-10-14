@@ -20,5 +20,6 @@ namespace LotR.States
 
         IPlayer ActivePlayer { get; }
         IPlayer FirstPlayer { get; }
+        IPlayer GetController(Guid cardId);
     }
 }

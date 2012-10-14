@@ -35,25 +35,37 @@ namespace LotR.Cards.Encounter.Treacheries
 
             public override IChoice GetChoice(IGameState state)
             {
-                IPlayer mostThreateningPlayer = null;
+                var highestThreat = -1;
+                var mostThreateningPlayers = new List<IPlayer>();
                 foreach (var player in state.GetStates<IPlayer>())
                 {
-                    if (mostThreateningPlayer == null || player.CurrentThreat > mostThreateningPlayer.CurrentThreat)
+                    if (player.CurrentThreat > highestThreat)
                     {
-                        mostThreateningPlayer = player;
+                        mostThreateningPlayers.Clear();
+                        mostThreateningPlayers.Add(player);
+                        highestThreat = player.CurrentThreat;
+                    }
+                    else if (player.CurrentThreat == highestThreat)
+                    {
+                        mostThreateningPlayers.Add(player);
                     }
                 }
 
-                return new LotR.Effects.Choices.ChooseHero(Source, mostThreateningPlayer);
+                if (mostThreateningPlayers.Count() == 0)
+                    return null;
+                else if (mostThreateningPlayers.Count() == 1)
+                    return new ChooseHero(Source, mostThreateningPlayers.FirstOrDefault());
+                else
+                    return new ChoosePlayerToChooseHero(Source, state.FirstPlayer, mostThreateningPlayers);
             }
 
             public override void Resolve(IGameState state, IPayment payment, IChoice choice)
             {
                 var heroChoice = choice as IChooseHero;
-                if (heroChoice == null || heroChoice.Hero == null)
+                if (heroChoice == null || heroChoice.ChosenHero == null)
                     return;
 
-                var attachmentHost = heroChoice.Hero as IAttachmentHostInPlay;
+                var attachmentHost = heroChoice.ChosenHero as IAttachmentHostInPlay;
                 if (attachmentHost == null)
                     return;
 

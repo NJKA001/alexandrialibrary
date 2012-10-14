@@ -11,7 +11,7 @@ using LotR.States;
 namespace LotR.Effects.Choices
 {
     public class ChooseAlly
-        : PlayerChoiceBase
+        : ChoiceBase
     {
         public ChooseAlly(ISource source, IPlayer player)
             : base("Choose an ally.", source, player)

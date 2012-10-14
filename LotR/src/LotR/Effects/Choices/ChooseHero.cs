@@ -8,14 +8,14 @@ using LotR.States;
 namespace LotR.Effects.Choices
 {
     public class ChooseHero
-        : PlayerChoiceBase, IChooseHero
+        : ChoiceBase, IChooseHero
     {
         public ChooseHero(ISource source, IPlayer player)
             : base("Choose a hero", source, player)
         {
         }
 
-        public IHeroInPlay Hero
+        public IHeroInPlay ChosenHero
         {
             get;
             set;

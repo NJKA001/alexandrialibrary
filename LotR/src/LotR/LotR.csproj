@@ -50,9 +50,9 @@
     <Compile Include="Cards\Player\IExhaustableCard.cs" />
     <Compile Include="Effects\Choices\ChooseCharacterWithTrait.cs" />
     <Compile Include="Effects\Choices\ChooseHero.cs" />
+    <Compile Include="Effects\Choices\ChoosePlayerToChooseHero.cs" />
     <Compile Include="Effects\Choices\IChooseCharacterWithTrait.cs" />
-    <Compile Include="Effects\Choices\IPlayerChoice.cs" />
-    <Compile Include="Effects\Choices\PlayerChoiceBase.cs" />
+    <Compile Include="Effects\Choices\IChoosePlayerToChooseHero.cs" />
     <Compile Include="Effects\IWhenRevealedEffect.cs" />
     <Compile Include="Effects\PassiveCardEffectBase.cs" />
     <Compile Include="Effects\WhenRevealedEffect.cs" />

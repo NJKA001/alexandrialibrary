@@ -11,10 +11,11 @@ namespace LotR.Effects.Choices
     public class ChoiceBase
         : IChoice
     {
-        protected ChoiceBase(string description, ISource source)
+        protected ChoiceBase(string description, ISource source, IPlayer player)
         {
             this.Description = description;
             this.Source = source;
+            this.Player = player;
         }
 
         public string Description
@@ -27,6 +28,17 @@ namespace LotR.Effects.Choices
         {
             get;
             private set;
+        }
+
+        public IPlayer Player
+        {
+            get;
+            private set;
+        }
+
+        public virtual bool IsValid(IGameState state)
+        {
+            return true;
         }
     }
 }

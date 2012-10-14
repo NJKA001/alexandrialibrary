@@ -10,7 +10,7 @@ using LotR.States;
 namespace LotR.Effects.Choices
 {
     public class ChooseCharacterWithTrait
-        : PlayerChoiceBase, IChooseCharacterWithTrait
+        : ChoiceBase, IChooseCharacterWithTrait
     {
         public ChooseCharacterWithTrait(ISource source, IPlayer player, Trait trait)
             : base(GetDescription(trait), source, player)
