@@ -11,5 +11,6 @@ namespace LotR.Cards
     {
         IEnumerable<ICardEffect> Effects { get; }
         string FlavorText { get; }
+        string BacksideFlavorText { get; }
     }
 }

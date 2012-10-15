@@ -50,7 +50,7 @@ namespace LotR.Cards.Player.Heroes
                 if (willpowerful == null)
                     return;
 
-                state.AddEffect(new WillpowerModifier(state.CurrentPhase, Source, willpowerful.Card, TimeScope.Phase, 1));
+                state.AddEffect(new WillpowerModifier(state.CurrentPhase, Source, willpowerful, TimeScope.Phase, 1));
             }
         }
     }

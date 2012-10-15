@@ -10,5 +10,6 @@ namespace LotR.States
     public interface IDefendingInPlay
         : ICardInPlay<IDefendingCard>
     {
+        byte Defense { get; set; }
     }
 }

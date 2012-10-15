@@ -52,7 +52,7 @@ namespace LotR.Cards.Player.Heroes
                 return new Limit(PlayerScope.None, TimeScope.Round, 1);
             }
 
-            public override bool PaymentAccepted(IGameState state, IPayment payment)
+            public override bool PaymentAccepted(IGameState state, IPayment payment, IChoice choice)
             {
                 if (payment == null)
                     return false;
@@ -65,13 +65,13 @@ namespace LotR.Cards.Player.Heroes
                 if (firstPayment == null)
                     return false;
 
-                //if (firstPayment.Item1.Id != Source.Id || firstPayment.Item2 != 1)
-                //    return false;
+                if (firstPayment.Item1.Card.Id != Source.Id || firstPayment.Item2 != 1)
+                    return false;
 
-                //if (firstPayment.Item1.Resources < 1)
-                //    return false;
+                if (firstPayment.Item1.Resources < 1)
+                    return false;
 
-                //firstPayment.Item1.RemoveResources(1);
+                firstPayment.Item1.Resources -= 1;
 
                 return true;
             }
@@ -79,10 +79,14 @@ namespace LotR.Cards.Player.Heroes
             public override void Resolve(IGameState state, IPayment payment, IChoice choice)
             {
                 var characterChoice = choice as IChooseCharacter;
-                if (characterChoice == null || characterChoice.Character == null)
+                if (characterChoice == null || characterChoice.ChosenCharacter == null)
                     return;
 
-                //step.AddStep(new HealCharacterDamageStep(step.Phase, step.Player, characterChoice.Character, 1));
+                var damageable = characterChoice.ChosenCharacter as IDamagableInPlay;
+                if (damageable == null || damageable.Damage == 0)
+                    return;
+
+                damageable.Damage -= 1;
             }
         }
     }

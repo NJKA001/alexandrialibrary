@@ -11,6 +11,6 @@ namespace LotR.Effects.Choices
     public interface IChooseCharacter
         : IChoice
     {
-        ICardInPlay<ICharacterCard> Character { get; set; }
+        ICharacterInPlay ChosenCharacter { get; set; }
     }
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 
 using LotR.Effects;
+using LotR.States;
+using LotR.States.Areas;
 using LotR.States.Phases.Any;
 
 namespace LotR.Cards.Encounter.Locations

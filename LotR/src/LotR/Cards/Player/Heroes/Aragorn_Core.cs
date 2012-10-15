@@ -46,14 +46,14 @@ namespace LotR.Cards.Player.Heroes
                 if (committedToQuest == null)
                     return;
 
-                var self = committedToQuest.Characters.Where(x => x.Id == Source.Id).FirstOrDefault();
+                var self = committedToQuest.Characters.Where(x => x.Card.Id == Source.Id).FirstOrDefault();
                 if (self == null)
                     return;
 
                 state.AddEffect(this);
             }
 
-            public override bool PaymentAccepted(IGameState state, IPayment payment)
+            public override bool PaymentAccepted(IGameState state, IPayment payment, IChoice choice)
             {
                 var resourcePayment = payment as IResourcePayment;
                 if (resourcePayment == null)

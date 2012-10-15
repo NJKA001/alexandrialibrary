@@ -10,5 +10,6 @@ namespace LotR.States
     public interface IAttackingInPlay
         : ICardInPlay<IAttackingCard>
     {
+        byte Attack { get; set; }
     }
 }

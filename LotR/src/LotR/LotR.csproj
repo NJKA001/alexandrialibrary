@@ -44,9 +44,11 @@
     <Compile Include="Cards\Encounter\Enemies\EnemyCardBase.cs" />
     <Compile Include="Cards\Encounter\Enemies\Hummerhorns.cs" />
     <Compile Include="Cards\Encounter\Enemies\KingSpider.cs" />
+    <Compile Include="Cards\Encounter\Enemies\UngoliantsSpawn.cs" />
     <Compile Include="Cards\Encounter\IShadowCard.cs" />
     <Compile Include="Cards\Encounter\Locations\GreatForestWeb.cs" />
     <Compile Include="Cards\Encounter\Locations\LocationCardBase.cs" />
+    <Compile Include="Cards\Encounter\Locations\MountainsOfMirkwood.cs" />
     <Compile Include="Cards\Encounter\Objectives\AttachableObjectiveCardBase.cs" />
     <Compile Include="Cards\Encounter\Objectives\IAttachableObjectiveCard.cs" />
     <Compile Include="Cards\Encounter\Objectives\AllyObjectiveCardBase.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="Cards\Encounter\ThreateningCardBase.cs" />
     <Compile Include="Cards\Encounter\Treacheries\AttachableTreacheryCardBase.cs" />
     <Compile Include="Cards\Encounter\Treacheries\CaughtInAWeb.cs" />
+    <Compile Include="Cards\Encounter\Treacheries\EyesOfTheForest.cs" />
     <Compile Include="Cards\Encounter\Treacheries\TreacheryCardBase.cs" />
     <Compile Include="Cards\IAttachmentHostCard.cs" />
     <Compile Include="Cards\ICanHaveAttachments.cs" />
@@ -61,9 +64,12 @@
     <Compile Include="Cards\Player\Attachments\HeroAttachmentCardBase.cs" />
     <Compile Include="Cards\Player\IExhaustableCard.cs" />
     <Compile Include="Cards\Player\Treasures\TreasureCardBase.cs" />
+    <Compile Include="Cards\Scenario.cs" />
     <Compile Include="Effects\Choices\ChooseCharacterWithTrait.cs" />
     <Compile Include="Effects\Choices\ChooseHero.cs" />
     <Compile Include="Effects\Choices\ChoosePlayerToChooseHero.cs" />
+    <Compile Include="Effects\Choices\IPlayersChooseCards.cs" />
+    <Compile Include="Effects\Choices\PlayersChooseCards.cs" />
     <Compile Include="Effects\Choices\PlayersChooseCharacters.cs" />
     <Compile Include="Effects\Choices\EachPlayerChoosesReadyCharacters.cs" />
     <Compile Include="Effects\Choices\IChooseCharacterWithTrait.cs" />
@@ -72,7 +78,9 @@
     <Compile Include="Effects\ForcedCardEffectBase.cs" />
     <Compile Include="Effects\ITravelEffect.cs" />
     <Compile Include="Effects\IWhenRevealedEffect.cs" />
+    <Compile Include="Effects\Modifiers\IThreatModifier.cs" />
     <Compile Include="Effects\PassiveCardEffectBase.cs" />
+    <Compile Include="Effects\Phases\Any\IAfterLocationExplored.cs" />
     <Compile Include="Effects\Phases\Combat\IAfterEnemyEngages.cs" />
     <Compile Include="Effects\ShadowEffectBase.cs" />
     <Compile Include="Effects\TravelEffectBase.cs" />
@@ -194,6 +202,7 @@
     <Compile Include="Cards\Player\Heroes\Dunhere.cs" />
     <Compile Include="Cards\Player\Heroes\Glorfindel_Core.cs" />
     <Compile Include="States\IHeroInPlay.cs" />
+    <Compile Include="States\ILocationInPlay.cs" />
     <Compile Include="States\IPlayerDeck.cs" />
     <Compile Include="States\IResourcefulInPlay.cs" />
     <Compile Include="States\IThreateningInPlay.cs" />
@@ -209,6 +218,7 @@
     <Compile Include="States\Phases\Any\IDetermineThreat.cs" />
     <Compile Include="States\Phases\Any\IDetermineWillpower.cs" />
     <Compile Include="States\Phases\Any\IEncounterCardRevealed.cs" />
+    <Compile Include="States\Phases\Any\ILocationExplored.cs" />
     <Compile Include="States\Phases\Any\IPlayerDrawingCards.cs" />
     <Compile Include="States\Phases\Combat\IChooseEnemyToAttack.cs" />
     <Compile Include="States\Phases\Combat\IEnemyAttack.cs" />

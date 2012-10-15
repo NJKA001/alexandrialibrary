@@ -5,6 +5,7 @@ using System.Text;
 
 using LotR.Effects;
 using LotR.Effects.Choices;
+using LotR.Effects.Payments;
 using LotR.States;
 
 namespace LotR.Cards.Encounter.Locations
@@ -29,6 +30,33 @@ namespace LotR.Cards.Encounter.Locations
             public override IChoice GetChoice(IGameState state)
             {
                 return new EachPlayerChoosesReadyCharacters(Source, state, 1, true);
+            }
+
+            public override bool PaymentAccepted(IGameState state, IPayment payment, IChoice choice)
+            {
+                var characterChoice = choice as IPlayersChooseCharacters;
+                if (characterChoice == null)
+                    return false;
+
+                var players = state.GetStates<IPlayer>();
+                if (players.Count() == 0)
+                    return false;
+
+                var charactersToExhaust = new List<IExhaustableInPlay>();
+
+                foreach (var player in players)
+                {
+                    var exhaustable = characterChoice.GetChosenCharacters(player.StateId).FirstOrDefault() as IExhaustableInPlay;
+                    if (exhaustable == null || exhaustable.IsExhausted)
+                        return false;
+                    else
+                        charactersToExhaust.Add(exhaustable);
+                }
+
+                foreach (var exhaustable in charactersToExhaust)
+                    exhaustable.Exhaust();
+
+                return true;
             }
         }
     }

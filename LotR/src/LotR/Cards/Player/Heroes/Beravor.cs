@@ -46,7 +46,7 @@ namespace LotR.Cards.Player.Heroes
                 return new ExhaustSelf(exhaustable);
             }
 
-            public override bool PaymentAccepted(IGameState state, IPayment payment)
+            public override bool PaymentAccepted(IGameState state, IPayment payment, IChoice choice)
             {
                 var exhaustPayment = payment as IExhaustCardPayment;
                 if (exhaustPayment == null)

@@ -58,7 +58,7 @@ namespace LotR.Cards.Player.Heroes
                 if (committedCharacters == null)
                     return;
 
-                if (!committedCharacters.Characters.Any(x => x.Id == Source.Id))
+                if (!committedCharacters.Characters.Any(x => x.Card.Id == Source.Id))
                     return;
 
                 state.AddEffect(this);

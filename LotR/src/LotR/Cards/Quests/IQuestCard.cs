@@ -8,6 +8,8 @@ namespace LotR.Cards.Quests
     public interface IQuestCard
         : IProgressableCard
     {
+        Scenario Scenario { get; }
+        IEnumerable<EncounterSet> EncounterSets { get; }
         byte Sequence { get; }
     }
 }

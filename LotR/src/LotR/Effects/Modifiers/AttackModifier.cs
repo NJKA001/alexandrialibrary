@@ -12,7 +12,7 @@ namespace LotR.Effects.Modifiers
     public class AttackModifier
         : ModifierBase, IAttackModifier
     {
-        public AttackModifier(Phase startPhase, ISource source, ICard target, TimeScope duration, int value)
+        public AttackModifier(Phase startPhase, ISource source, ICardInPlay target, TimeScope duration, int value)
             : base(GetDefaultDescription("Attack", value), startPhase, source, target, duration, value)
         {
         }

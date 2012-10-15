@@ -82,5 +82,11 @@ namespace LotR.States
             currentThreat -= value;
             OnPropertyChanged("CurrentThreat");
         }
+
+        public void DiscardFromHand(IEnumerable<IPlayerCard> cards)
+        {
+            Hand.RemoveCards(cards);
+            Deck.Discard(cards);
+        }
     }
 }

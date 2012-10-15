@@ -47,7 +47,7 @@ namespace LotR.Effects
             return null;
         }
 
-        public virtual bool PaymentAccepted(IGameState state, IPayment payment)
+        public virtual bool PaymentAccepted(IGameState state, IPayment payment, IChoice choice)
         {
             return true;
         }

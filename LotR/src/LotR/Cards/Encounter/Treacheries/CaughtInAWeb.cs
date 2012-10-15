@@ -21,14 +21,14 @@ namespace LotR.Cards.Encounter.Treacheries
         {
             AddTrait(Trait.Condition);
 
-            AddEffect(new WhenRevealedAttachToAHero(this));
+            AddEffect(new WhenRevealedAttachToHero(this));
             AddEffect(new HeroDoesNotReadyUnlessControllerPays(this));
         }
 
-        private class WhenRevealedAttachToAHero
+        private class WhenRevealedAttachToHero
             : WhenRevealedEffectBase
         {
-            public WhenRevealedAttachToAHero(CaughtInAWeb source)
+            public WhenRevealedAttachToHero(CaughtInAWeb source)
                 : base("The player with the highest threat level attached this card to one of his heroes. (Counts as a Condition attachment with the text: \"Attached hero does not ready during the refresh phase unless you pay 2 resources from that hero's pool.\")", source)
             {
             }

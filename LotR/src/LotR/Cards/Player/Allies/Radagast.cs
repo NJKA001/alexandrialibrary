@@ -58,7 +58,7 @@ namespace LotR.Cards.Player.Allies
                 return new PayResourcesFrom(Source, resourceful, 0, true);
             }
 
-            public override bool PaymentAccepted(IGameState state, IPayment payment)
+            public override bool PaymentAccepted(IGameState state, IPayment payment, IChoice choice)
             {
                 var resourcePayment = payment as IResourcePayment;
                 if (resourcePayment == null)
@@ -93,13 +93,13 @@ namespace LotR.Cards.Player.Allies
                     return;
 
                 var creatureChoice = choice as IChooseCharacterWithTrait;
-                if (creatureChoice == null)
+                if (creatureChoice == null || creatureChoice.ChosenCharacter == null)
                     return;
 
-                if (!state.CardInPlayHasTrait(creatureChoice.Character, Trait.Creature))
+                if (!state.CardInPlayHasTrait(creatureChoice.ChosenCharacter, Trait.Creature))
                     return;
 
-                var damageable = creatureChoice.Character as IDamagableInPlay;
+                var damageable = creatureChoice.ChosenCharacter as IDamagableInPlay;
                 if (damageable == null)
                     return;
 

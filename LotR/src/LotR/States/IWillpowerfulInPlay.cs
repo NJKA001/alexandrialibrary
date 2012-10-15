@@ -10,5 +10,6 @@ namespace LotR.States
     public interface IWillpowerfulInPlay
         : ICardInPlay<IWillpowerfulCard>
     {
+        byte Willpower { get; set; }
     }
 }

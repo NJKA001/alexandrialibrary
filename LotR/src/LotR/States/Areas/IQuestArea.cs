@@ -13,7 +13,7 @@ namespace LotR.States.Areas
     {
         IDeck<IQuestCard> QuestDeck { get; }
         IQuestCard ActiveQuest { get; }
-        ICardInPlay<ILocationCard> ActiveLocation { get; }
+        ILocationInPlay ActiveLocation { get; }
         byte ActiveQuestProgress { get; }
         byte ActiveLocationProgress { get; }
 
@@ -21,7 +21,7 @@ namespace LotR.States.Areas
         void AddActiveQuestProgress(byte value);
         void RemoveActiveQuestProgress(byte value);
 
-        void SetActiveLocation(ICardInPlay<ILocationCard> location);
+        void SetActiveLocation(ILocationInPlay location);
         void RemoveActiveLocation();
         void AddActiveLocationProgress(byte value);
         void RemoveActiveLocationProgress(byte value);

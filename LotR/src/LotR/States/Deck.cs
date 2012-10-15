@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
@@ -51,6 +52,14 @@ namespace LotR.States
             return cards.Take(numberOfCards);
         }
 
+        public void RemoveFromDeck(T card)
+        {
+            if (!this.cards.Contains(card))
+                return;
+
+            this.cards.Remove(card);
+        }
+
         public void PutOnTop(IEnumerable<T> cards)
         {
             foreach (var card in cards)
@@ -76,13 +85,31 @@ namespace LotR.States
         }
 
         public void Shuffle()
-        {
+        {            
             var cardArray = cards.ToArray();
+            Shuffle(cardArray);
             Shuffle(cardArray);
             cards.Clear();
 
             foreach (var card in cardArray)
                 cards.Add(card);
+        }
+
+        public void ShuffleIn(IEnumerable<T> cards)
+        {
+            foreach (var card in cards)
+            {
+                if (this.cards.Count < 2)
+                {
+                    PutOnBottom(new List<T> { card });
+                    return;
+                }
+                else
+                {
+                    int index = random.Next(this.cards.Count - 1);
+                    this.cards.Insert(index, card);
+                }
+            }
         }
 
         private static readonly Random random = new Random();

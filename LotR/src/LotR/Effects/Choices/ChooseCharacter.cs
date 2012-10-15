@@ -17,7 +17,7 @@ namespace LotR.Effects.Choices
         {
         }
 
-        public ICardInPlay<ICharacterCard> Character
+        public ICharacterInPlay ChosenCharacter
         {
             get;
             set;

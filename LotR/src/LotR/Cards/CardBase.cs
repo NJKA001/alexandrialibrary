@@ -39,6 +39,12 @@ namespace LotR.Cards
             set { text.FlavorText = value; }
         }
 
+        protected string BacksideFlavorText
+        {
+            get { return text.BacksideFlavorText; }
+            set { text.BacksideFlavorText = value; }
+        }
+
         public Guid Id
         {
             get { return id; }

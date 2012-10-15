@@ -60,7 +60,7 @@ namespace LotR.Cards.Player.Heroes
                 state.AddEffect(this);
             }
 
-            public override bool PaymentAccepted(IGameState state, IPayment payment)
+            public override bool PaymentAccepted(IGameState state, IPayment payment, IChoice choice)
             {
                 if (payment == null)
                     return false;

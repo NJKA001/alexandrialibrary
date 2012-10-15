@@ -22,5 +22,6 @@ namespace LotR.States
         
         void IncreaseThreat(byte value);
         void DecreaseThreat(byte value);
+        void DiscardFromHand(IEnumerable<IPlayerCard> card);
     }
 }

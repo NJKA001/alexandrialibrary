@@ -32,6 +32,12 @@ namespace LotR.Cards
             set;
         }
 
+        public string BacksideFlavorText
+        {
+            get;
+            set;
+        }
+
         public void AddEffect(ICardEffect effect)
         {
             effects.Add(effect);

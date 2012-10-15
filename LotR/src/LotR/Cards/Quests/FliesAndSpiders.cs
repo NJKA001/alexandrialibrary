@@ -6,10 +6,12 @@ using System.Text;
 using LotR.Cards.Encounter.Enemies;
 using LotR.Cards.Encounter.Locations;
 using LotR.Effects;
+using LotR.Effects.Choices;
 using LotR.Effects.Payments;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Setup;
 using LotR.States;
+using LotR.States.Areas;
 
 namespace LotR.Cards.Quests
 {
@@ -17,9 +19,10 @@ namespace LotR.Cards.Quests
         : QuestCardBase
     {
         public FliesAndSpiders()
-            : base("Flies and Spiders", CardSet.Core, 119, 1, 0, 0)
+            : base("Flies and Spiders", CardSet.Core, 119, Scenario.Passage_Through_Mirkwood, new List<EncounterSet> { EncounterSet.Dol_Guldur_Orcs, EncounterSet.Spiders_of_Mirkwood }, 1, 8, 0)
         {
-            FlavorText = "You are traveling throug Mirkwood Forest, carrying an urgent message from King Thranduil to the Lady Galadriel of Lorien. As you move along the dark trail, the spiders gather around you";
+            FlavorText = "You are traveling through Mirkwood Forest, carrying an urgent message from King Thranduil to the Lady Galadriel of Lorien. As you move along the dark trail, the spiders gather around you...";
+            BacksideFlavorText = "The nastiest things they saw were the cobwebs; dark dense cobwebs the treads extraordinarily thick, often stretched from tree to tree, or tangles in the lower branches on either side of them. There were none stretched across the path, but whether because some magic kept it clear, or for what other reason they could not guess.\r\n-The Hobbit";
         }
 
         public class SetupForestSpiderAndOldForestRoadInStagingArea
@@ -30,20 +33,27 @@ namespace LotR.Cards.Quests
             {
             }
 
-            public override bool PaymentAccepted(IGameState state, IPayment payment)
+            public void Setup(IGameState state)
             {
-                //var forestSpider = step.Phase.Round.Game.StagingArea.EncounterDeck.GetFirst(x => x.Title == "Forest Spider") as IEnemyCard;
-                //if (forestSpider == null)
-                //    return false;
+                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                if (stagingArea == null)
+                    return;
 
-                //var oldForestRoad = step.Phase.Round.Game.StagingArea.EncounterDeck.GetFirst(x => x.Title == "Old Forest Road") as ILocationCard;
-                //if (oldForestRoad == null)
-                //    return false;
+                var forestSpider = stagingArea.EncounterDeck.Cards.Where(x => x.Title == "Forest Spider").FirstOrDefault() as IEnemyCard;
+                if (forestSpider == null)
+                    return;
 
-                //step.Phase.Round.Game.StagingArea.AddToStagingArea(forestSpider);
-                //step.Phase.Round.Game.StagingArea.AddToStagingArea(oldForestRoad);
+                var oldForestRoad = stagingArea.EncounterDeck.Cards.Where(x => x.Title == "Old Forest Road").FirstOrDefault() as ILocationCard;
+                if (oldForestRoad == null)
+                    return;
 
-                return true;
+                stagingArea.EncounterDeck.RemoveFromDeck(forestSpider);
+                stagingArea.EncounterDeck.RemoveFromDeck(oldForestRoad);
+                
+                stagingArea.AddToStagingArea(forestSpider);
+                stagingArea.AddToStagingArea(oldForestRoad);
+
+                stagingArea.EncounterDeck.Shuffle();
             }
         }
     }

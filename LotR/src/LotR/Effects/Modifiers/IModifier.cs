@@ -14,7 +14,7 @@ namespace LotR.Effects.Modifiers
     {
         Phase StartPhase { get; }
         ISource Source { get; }
-        ICard Target { get; }
+        ICardInPlay Target { get; }
         TimeScope Duration { get; }
         int Value { get; }
     }
