@@ -7,13 +7,14 @@ using LotR.Cards;
 
 namespace LotR.Effects.Choices
 {
-    public interface IPlayersChooseCards
+    public interface IPlayersChooseCards<T>
         : IChoice
+        where T : ICard
     {
         byte NumberOfCards { get; }
 
-        IEnumerable<ICard> GetAvailableCards(Guid playerId);
-        IEnumerable<ICard> GetChosenCards(Guid playerId);
-        void AddChosenCard(Guid playerId, ICard card);
+        IEnumerable<T> GetAvailableCards(Guid playerId);
+        IEnumerable<T> GetChosenCards(Guid playerId);
+        void AddChosenCard(Guid playerId, T card);
     }
 }

@@ -16,12 +16,13 @@ namespace LotR.States.Areas
         IPlayer Player { get; }
         IEnumerable<ICardInPlay<IAttachableCard>> PlayerDeckAttachments { get; }
 
-        IEnumerable<ICardInPlay<ICard>> CardsInPlay { get; }
-        IEnumerable<ICardInPlay<IEnemyCard>> EngagedEnemies { get; }
+        IEnumerable<ICardInPlay> CardsInPlay { get; }
+        IEnumerable<IEnemyInPlay> EngagedEnemies { get; }
 
-        void AddCard(ICardInPlay<ICard> card);
-        void RemoveCard(ICardInHand<ICard> card);
-        void AddEnemy(ICardInPlay<IEnemyCard> enemy);
-        void RemoveEnemy(ICardInPlay<IEnemyCard> enemy);
+        void AddCard(ICardInPlay card);
+        void RemoveCard(ICardInPlay card);
+
+        void AddEngagedEnemy(IEnemyInPlay enemy);
+        void RemoveEngagedEnemy(IEnemyInPlay enemy);
     }
 }

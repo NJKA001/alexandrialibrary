@@ -20,6 +20,13 @@ namespace LotR.Effects
 
         public virtual void Travel(IGameState state)
         {
+            var questArea = state.GetStates<IQuestArea>().FirstOrDefault();
+            if (questArea == null)
+                return;
+
+            if (questArea.ActiveLocation != null)
+                return;
+
             state.AddEffect(this);
         }
 

@@ -10,6 +10,11 @@ namespace LotR.States.Phases.Quest
     public interface ICharactersCommittedToQuest
         : IState
     {
-        IEnumerable<IWillpowerfulInPlay> Characters { get; }
+        bool IsCommittedToQuest(Guid cardId);
+        IEnumerable<IWillpowerfulInPlay> GetAllCharactersCommittedToQuest();
+        IEnumerable<IWillpowerfulInPlay> GetCharactersCommittedToQuest(Guid playerId);
+
+        void CommitCharacterToQuest(IWillpowerfulInPlay character);
+        void RemoveCharacterFromQuest(IWillpowerfulInPlay character);
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 namespace LotR.Effects
 {
     public interface IForcedEffect
-        : IPassiveEffect
+        : ICardEffect, IPassiveEffect
     {
     }
 }

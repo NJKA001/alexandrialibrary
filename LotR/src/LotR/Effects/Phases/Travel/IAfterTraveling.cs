@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.States.Phases.Travel;
+
 namespace LotR.Effects.Phases.Travel
 {
-    interface IAfterTraveling
+    public interface IAfterTraveling
     {
+        void AfterTraveling(ITravel state);
     }
 }

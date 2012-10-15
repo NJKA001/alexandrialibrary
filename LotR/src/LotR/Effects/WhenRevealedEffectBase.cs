@@ -8,7 +8,7 @@ using LotR.States;
 namespace LotR.Effects
 {
     public abstract class WhenRevealedEffectBase
-        : PassiveCardEffectBase, IWhenRevealedEffect
+        : ForcedCardEffectBase, IWhenRevealedEffect
     {
         protected WhenRevealedEffectBase(string description, ISource source)
             : base(description, source)

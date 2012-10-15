@@ -8,10 +8,11 @@ using LotR.States;
 
 namespace LotR.Effects.Choices
 {
-    public class PlayersChooseCards
-        : ChoiceBase, IPlayersChooseCards
+    public class PlayersChooseCards<T>
+        : ChoiceBase, IPlayersChooseCards<T>
+        where T : ICard
     {
-        public PlayersChooseCards(string description, ISource source, IEnumerable<IPlayer> players, byte numberOfCards, IDictionary<Guid, IList<ICard>> availableCards)
+        public PlayersChooseCards(string description, ISource source, IEnumerable<IPlayer> players, byte numberOfCards, IDictionary<Guid, IList<T>> availableCards)
             : base(description, source, players)
         {
             if (availableCards == null)
@@ -21,8 +22,8 @@ namespace LotR.Effects.Choices
             this.availableCards = availableCards;
         }
 
-        private readonly IDictionary<Guid, IList<ICard>> availableCards;
-        private readonly IDictionary<Guid, IList<ICard>> chosenCards = new Dictionary<Guid, IList<ICard>>();
+        private readonly IDictionary<Guid, IList<T>> availableCards;
+        private readonly IDictionary<Guid, IList<T>> chosenCards = new Dictionary<Guid, IList<T>>();
 
         public byte NumberOfCards
         {
@@ -30,17 +31,17 @@ namespace LotR.Effects.Choices
             private set;
         }
 
-        public IEnumerable<ICard> GetAvailableCards(Guid playerId)
+        public IEnumerable<T> GetAvailableCards(Guid playerId)
         {
-            return availableCards.ContainsKey(playerId) ? availableCards[playerId] : Enumerable.Empty<ICard>();
+            return availableCards.ContainsKey(playerId) ? availableCards[playerId] : Enumerable.Empty<T>();
         }
 
-        public IEnumerable<ICard> GetChosenCards(Guid playerId)
+        public IEnumerable<T> GetChosenCards(Guid playerId)
         {
-            return chosenCards.ContainsKey(playerId) ? chosenCards[playerId] : Enumerable.Empty<ICard>();
+            return chosenCards.ContainsKey(playerId) ? chosenCards[playerId] : Enumerable.Empty<T>();
         }
 
-        public void AddChosenCard(Guid playerId, ICard card)
+        public void AddChosenCard(Guid playerId, T card)
         {
             if (card == null)
                 throw new ArgumentNullException("card");
@@ -50,7 +51,7 @@ namespace LotR.Effects.Choices
 
             if (!chosenCards.ContainsKey(playerId))
             {
-                chosenCards[playerId] = new List<ICard> { card };
+                chosenCards[playerId] = new List<T> { card };
             }
             else
             {

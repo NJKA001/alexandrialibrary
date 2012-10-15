@@ -19,6 +19,7 @@ namespace LotR.Cards
         Dwarf,
         Eagle,
         Forest,
+        Goblin,
         Gondor,
         Hobbit,
         Insect,

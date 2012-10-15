@@ -64,19 +64,19 @@ namespace LotR.Cards.Encounter.Locations
                 if (players.Count() == 0)
                     return null;
 
-                var availableCards = new Dictionary<Guid, IList<ICard>>();
+                var availableCards = new Dictionary<Guid, IList<IPlayerCard>>();
                 foreach (var player in players)
                 {
-                    var topFive = player.Deck.GetFromTop(5).OfType<ICard>().ToList();
+                    var topFive = player.Deck.GetFromTop(5).ToList();
                     availableCards.Add(player.StateId, topFive);
                 }
 
-                return new PlayersChooseCards("each player may search the top 5 cards of his deck for 1 card of their choice", Source, players, 1, availableCards);
+                return new PlayersChooseCards<IPlayerCard>("each player may search the top 5 cards of his deck for 1 card of their choice", Source, players, 1, availableCards);
             }
 
             public override void Resolve(IGameState state, IPayment payment, IChoice choice)
             {
-                var cardChoice = choice as IPlayersChooseCards;
+                var cardChoice = choice as IPlayersChooseCards<IPlayerCard>;
                 if (cardChoice == null)
                     return;
 

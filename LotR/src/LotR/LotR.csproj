@@ -41,14 +41,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cards\EncounterSet.cs" />
+    <Compile Include="Cards\Encounter\Enemies\BlackForestBats.cs" />
+    <Compile Include="Cards\Encounter\Enemies\EastBightPatrol.cs" />
     <Compile Include="Cards\Encounter\Enemies\EnemyCardBase.cs" />
+    <Compile Include="Cards\Encounter\Enemies\ForestSpider.cs" />
     <Compile Include="Cards\Encounter\Enemies\Hummerhorns.cs" />
     <Compile Include="Cards\Encounter\Enemies\KingSpider.cs" />
     <Compile Include="Cards\Encounter\Enemies\UngoliantsSpawn.cs" />
     <Compile Include="Cards\Encounter\IShadowCard.cs" />
+    <Compile Include="Cards\Encounter\Locations\ForestGate.cs" />
     <Compile Include="Cards\Encounter\Locations\GreatForestWeb.cs" />
     <Compile Include="Cards\Encounter\Locations\LocationCardBase.cs" />
     <Compile Include="Cards\Encounter\Locations\MountainsOfMirkwood.cs" />
+    <Compile Include="Cards\Encounter\Locations\OldForestRoad.cs" />
     <Compile Include="Cards\Encounter\Objectives\AttachableObjectiveCardBase.cs" />
     <Compile Include="Cards\Encounter\Objectives\IAttachableObjectiveCard.cs" />
     <Compile Include="Cards\Encounter\Objectives\AllyObjectiveCardBase.cs" />
@@ -207,6 +212,7 @@
     <Compile Include="States\IResourcefulInPlay.cs" />
     <Compile Include="States\IThreateningInPlay.cs" />
     <Compile Include="States\IWillpowerfulInPlay.cs" />
+    <Compile Include="States\PhaseStep.cs" />
     <Compile Include="States\Phases\Any\ICardEntersPlay.cs" />
     <Compile Include="States\Phases\Any\ICardLeavesPlay.cs" />
     <Compile Include="States\Phases\Any\ICheckForResourceIcon.cs" />
@@ -226,6 +232,7 @@
     <Compile Include="States\Phases\Combat\IEnemyEngage.cs" />
     <Compile Include="States\Phases\Quest\ICharactersCommittedToQuest.cs" />
     <Compile Include="States\Phases\Refresh\ICardReadying.cs" />
+    <Compile Include="States\Phases\Travel\ITravel.cs" />
     <Compile Include="States\PlayerDeck.cs" />
     <Compile Include="Effects\ICancelEffect.cs" />
     <Compile Include="Effects\IExecutableEffect.cs" />
@@ -436,7 +443,9 @@
     <Folder Include="States\Phases\Encounter\" />
     <Folder Include="States\Phases\Planning\" />
     <Folder Include="States\Phases\Resource\" />
-    <Folder Include="States\Phases\Travel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

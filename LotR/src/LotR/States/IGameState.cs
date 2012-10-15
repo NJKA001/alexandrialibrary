@@ -12,6 +12,7 @@ namespace LotR.States
         : IState
     {
         Phase CurrentPhase { get; }
+        PhaseStep CurrentPhaseStep { get; }
 
         void AddEffect(IEffect effect);
 

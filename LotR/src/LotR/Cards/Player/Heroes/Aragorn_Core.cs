@@ -46,7 +46,7 @@ namespace LotR.Cards.Player.Heroes
                 if (committedToQuest == null)
                     return;
 
-                var self = committedToQuest.Characters.Where(x => x.Card.Id == Source.Id).FirstOrDefault();
+                var self = committedToQuest.GetAllCharactersCommittedToQuest().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
                 if (self == null)
                     return;
 

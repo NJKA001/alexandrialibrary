@@ -43,8 +43,10 @@ namespace LotR.Cards.Encounter.Enemies
                 if (committedCharacters == null)
                     return;
 
-                foreach (var willpowerful in committedCharacters.Characters)
+                foreach (var willpowerful in committedCharacters.GetAllCharactersCommittedToQuest())
+                {
                     state.AddEffect(new WillpowerModifier(state.CurrentPhase, Source, willpowerful, TimeScope.Phase, -1));
+                }                
             }
         }
 
