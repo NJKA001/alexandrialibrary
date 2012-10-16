@@ -69,6 +69,7 @@
     <Compile Include="Cards\Player\Attachments\HeroAttachmentCardBase.cs" />
     <Compile Include="Cards\Player\IExhaustableCard.cs" />
     <Compile Include="Cards\Player\Treasures\TreasureCardBase.cs" />
+    <Compile Include="Cards\Quests\AForkInTheRoad.cs" />
     <Compile Include="Cards\Scenario.cs" />
     <Compile Include="Effects\Choices\ChooseCharacterWithTrait.cs" />
     <Compile Include="Effects\Choices\ChooseHero.cs" />
@@ -86,6 +87,8 @@
     <Compile Include="Effects\Modifiers\IThreatModifier.cs" />
     <Compile Include="Effects\PassiveCardEffectBase.cs" />
     <Compile Include="Effects\Phases\Any\IAfterLocationExplored.cs" />
+    <Compile Include="Effects\Phases\Any\IAfterStageDefeated.cs" />
+    <Compile Include="Effects\Phases\Any\IBeforeStageDefeated.cs" />
     <Compile Include="Effects\Phases\Combat\IAfterEnemyEngages.cs" />
     <Compile Include="Effects\ShadowEffectBase.cs" />
     <Compile Include="Effects\TravelEffectBase.cs" />
@@ -209,6 +212,7 @@
     <Compile Include="States\IHeroInPlay.cs" />
     <Compile Include="States\ILocationInPlay.cs" />
     <Compile Include="States\IPlayerDeck.cs" />
+    <Compile Include="States\IQuestInPlay.cs" />
     <Compile Include="States\IResourcefulInPlay.cs" />
     <Compile Include="States\IThreateningInPlay.cs" />
     <Compile Include="States\IWillpowerfulInPlay.cs" />
@@ -217,6 +221,7 @@
     <Compile Include="States\Phases\Any\ICardLeavesPlay.cs" />
     <Compile Include="States\Phases\Any\ICheckForResourceIcon.cs" />
     <Compile Include="States\Phases\Any\ICheckForTrait.cs" />
+    <Compile Include="States\Phases\Any\ICurrentQuestStage.cs" />
     <Compile Include="States\Phases\Any\IDamageHealed.cs" />
     <Compile Include="States\Phases\Any\IDetermineAttack.cs" />
     <Compile Include="States\Phases\Any\IDetermineDefense.cs" />
@@ -443,9 +448,6 @@
     <Folder Include="States\Phases\Encounter\" />
     <Folder Include="States\Phases\Planning\" />
     <Folder Include="States\Phases\Resource\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferences Include="Web References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
