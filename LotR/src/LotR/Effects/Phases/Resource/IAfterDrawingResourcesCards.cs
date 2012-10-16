@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LotR.Effects.Phases.Resource
 {
-    interface IBeforeDrawingCards
+    interface IAfterDrawingResourcesCards
     {
     }
 }

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.States.Phases.Any;
+
 namespace LotR.Effects.Phases.Resource
 {
-    interface IAfterDrawingCards
+    public interface IBeforeDrawingResourceCards
     {
+        void BeforeDrawingResourceCards(IPlayersDrawingCards state);
     }
 }

@@ -15,5 +15,6 @@ namespace LotR.States
 
         void AddCards(IEnumerable<T> cards);
         void RemoveCards(IEnumerable<T> cards);
+        T GetRandomCard();
     }
 }

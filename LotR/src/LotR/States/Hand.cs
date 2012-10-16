@@ -24,6 +24,7 @@ namespace LotR.States
         }
 
         private readonly IList<T> cards = new List<T>();
+        private readonly Random random = new Random();
 
         public IEnumerable<T> Cards
         {
@@ -58,6 +59,12 @@ namespace LotR.States
 
                 this.cards.Remove(card);
             }
+        }
+
+        public T GetRandomCard()
+        {
+            var index = random.Next(0, this.cards.Count);
+            return cards[index];
         }
     }
 }

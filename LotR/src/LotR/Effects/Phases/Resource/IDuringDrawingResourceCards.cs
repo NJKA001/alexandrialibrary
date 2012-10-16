@@ -9,6 +9,6 @@ namespace LotR.Effects.Phases.Resource
 {
     public interface IDuringDrawingResourceCards
     {
-        void DuringDrawingResourceCards(IPlayerDrawingCards state);
+        void DuringDrawingResourceCards(IPlayersDrawingCards state);
     }
 }

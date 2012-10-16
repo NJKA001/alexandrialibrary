@@ -31,21 +31,22 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public void DuringDrawingResourceCards(IPlayerDrawingCards state)
+            public void DuringDrawingResourceCards(IPlayersDrawingCards state)
             {
-                if (!state.Player.IsFirstPlayer)
-                    return;
-
                 state.AddEffect(this);
             }
 
             public override void Resolve(IGameState state, IPayment payment, IChoice choice)
             {
-                var playerDrawEffect = state.GetStates<IPlayerDrawingCards>().FirstOrDefault();
-                if (playerDrawEffect == null)
+                var playersDrawing = state.GetStates<IPlayersDrawingCards>().FirstOrDefault();
+                if (playersDrawing == null)
                     return;
 
-                playerDrawEffect.NumberOfCards += 1;
+                var firstPlayer = playersDrawing.Players.Where(x => x.IsFirstPlayer).FirstOrDefault();
+                if (firstPlayer == null)
+                    return;
+
+                playersDrawing.NumberOfCards[firstPlayer.StateId] += 1;
             }
         }
     }

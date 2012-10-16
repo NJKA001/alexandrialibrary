@@ -10,5 +10,6 @@ namespace LotR.States
     public interface IEnemyInPlay
         : ICardInPlay<IEnemyCard>
     {
+        byte Resources { get; set; }
     }
 }

@@ -49,10 +49,12 @@
     <Compile Include="Cards\Encounter\Enemies\KingSpider.cs" />
     <Compile Include="Cards\Encounter\Enemies\UngoliantsSpawn.cs" />
     <Compile Include="Cards\Encounter\IShadowCard.cs" />
+    <Compile Include="Cards\Encounter\Locations\EnchantedStream.cs" />
     <Compile Include="Cards\Encounter\Locations\ForestGate.cs" />
     <Compile Include="Cards\Encounter\Locations\GreatForestWeb.cs" />
     <Compile Include="Cards\Encounter\Locations\LocationCardBase.cs" />
     <Compile Include="Cards\Encounter\Locations\MountainsOfMirkwood.cs" />
+    <Compile Include="Cards\Encounter\Locations\NecromancersPass.cs" />
     <Compile Include="Cards\Encounter\Locations\OldForestRoad.cs" />
     <Compile Include="Cards\Encounter\Objectives\AttachableObjectiveCardBase.cs" />
     <Compile Include="Cards\Encounter\Objectives\IAttachableObjectiveCard.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Cards\Encounter\Treacheries\AttachableTreacheryCardBase.cs" />
     <Compile Include="Cards\Encounter\Treacheries\CaughtInAWeb.cs" />
     <Compile Include="Cards\Encounter\Treacheries\EyesOfTheForest.cs" />
+    <Compile Include="Cards\Encounter\Treacheries\TheNecromancersReach.cs" />
     <Compile Include="Cards\Encounter\Treacheries\TreacheryCardBase.cs" />
     <Compile Include="Cards\IAttachmentHostCard.cs" />
     <Compile Include="Cards\ICanHaveAttachments.cs" />
@@ -90,6 +93,7 @@
     <Compile Include="Effects\PassiveCardEffectBase.cs" />
     <Compile Include="Effects\Phases\Any\IAfterLocationExplored.cs" />
     <Compile Include="Effects\Phases\Any\IAfterStageDefeated.cs" />
+    <Compile Include="Effects\Phases\Any\IDuringDrawingCards.cs" />
     <Compile Include="Effects\Phases\Any\IBeforeStageDefeated.cs" />
     <Compile Include="Effects\Phases\Combat\IAfterEnemyEngages.cs" />
     <Compile Include="Effects\ShadowEffectBase.cs" />
@@ -232,7 +236,7 @@
     <Compile Include="States\Phases\Any\IDetermineWillpower.cs" />
     <Compile Include="States\Phases\Any\IEncounterCardRevealed.cs" />
     <Compile Include="States\Phases\Any\ILocationExplored.cs" />
-    <Compile Include="States\Phases\Any\IPlayerDrawingCards.cs" />
+    <Compile Include="States\Phases\Any\IPlayersDrawingCards.cs" />
     <Compile Include="States\Phases\Combat\IChooseEnemyToAttack.cs" />
     <Compile Include="States\Phases\Combat\IEnemyAttack.cs" />
     <Compile Include="States\Phases\Combat\IEnemyDefeated.cs" />
@@ -422,9 +426,9 @@
     <Compile Include="Effects\Phases\Refresh\IDuringRaisingThreat.cs" />
     <Compile Include="Effects\Phases\Refresh\IDuringReadyingCard.cs" />
     <Compile Include="Effects\Phases\Resource\IAfterCollectingResources.cs" />
-    <Compile Include="Effects\Phases\Resource\IAfterDrawingCards.cs" />
+    <Compile Include="Effects\Phases\Resource\IAfterDrawingResourcesCards.cs" />
     <Compile Include="Effects\Phases\Resource\IBeforeCollectingResources.cs" />
-    <Compile Include="Effects\Phases\Resource\IBeforeDrawingCards.cs" />
+    <Compile Include="Effects\Phases\Resource\IBeforeDrawingResourceCards.cs" />
     <Compile Include="Effects\Phases\Resource\IDuringCollectingResources.cs" />
     <Compile Include="Effects\Phases\Resource\IDuringDrawingResourceCards.cs" />
     <Compile Include="Effects\Phases\Travel\IAfterTraveling.cs" />
