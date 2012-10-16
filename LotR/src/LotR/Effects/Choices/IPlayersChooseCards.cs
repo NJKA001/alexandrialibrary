@@ -15,6 +15,8 @@ namespace LotR.Effects.Choices
 
         IEnumerable<T> GetAvailableCards(Guid playerId);
         IEnumerable<T> GetChosenCards(Guid playerId);
+        bool ChosenCardIsValid(Guid playerId, T card);
+
         void AddChosenCard(Guid playerId, T card);
     }
 }

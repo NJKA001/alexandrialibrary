@@ -13,6 +13,6 @@ namespace LotR.Cards.Quests
         object Symbol { get; }
         byte DifficultyLevel { get; }
         IEnumerable<IQuestCard> Quests { get; }
-        IEnumerable<IEncounterSet> EncounterSets { get; }
+        IEnumerable<EncounterSet> EncounterSets { get; }
     }
 }

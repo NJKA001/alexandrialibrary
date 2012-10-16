@@ -16,14 +16,14 @@ namespace LotR.Cards.Quests
         }
 
         private readonly List<IQuestCard> quests = new List<IQuestCard>();
-        private readonly List<IEncounterSet> encounterSets = new List<IEncounterSet>();
+        private readonly List<EncounterSet> encounterSets = new List<EncounterSet>();
 
         protected void AddQuest(IQuestCard quest)
         {
             quests.Add(quest);
         }
 
-        protected void AddEncounterSet(IEncounterSet encounterSet)
+        protected void AddEncounterSet(EncounterSet encounterSet)
         {
             encounterSets.Add(encounterSet);
         }
@@ -57,7 +57,7 @@ namespace LotR.Cards.Quests
             get { return quests; }
         }
 
-        public IEnumerable<IEncounterSet> EncounterSets
+        public IEnumerable<EncounterSet> EncounterSets
         {
             get { return encounterSets; }
         }

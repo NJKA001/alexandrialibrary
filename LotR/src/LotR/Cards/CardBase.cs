@@ -73,6 +73,11 @@ namespace LotR.Cards
             get { return text; }
         }
 
+        public IEnumerable<Trait> PrintedTraits
+        {
+            get { return traits; }
+        }
+
         public object Image
         {
             get;

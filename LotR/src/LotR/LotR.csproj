@@ -70,6 +70,8 @@
     <Compile Include="Cards\Player\IExhaustableCard.cs" />
     <Compile Include="Cards\Player\Treasures\TreasureCardBase.cs" />
     <Compile Include="Cards\Quests\AForkInTheRoad.cs" />
+    <Compile Include="Cards\Quests\BeornsPath.cs" />
+    <Compile Include="Cards\Quests\DontLeaveThePath.cs" />
     <Compile Include="Cards\Scenario.cs" />
     <Compile Include="Effects\Choices\ChooseCharacterWithTrait.cs" />
     <Compile Include="Effects\Choices\ChooseHero.cs" />
@@ -338,7 +340,6 @@
     <Compile Include="Effects\IEffect.cs" />
     <Compile Include="Cards\Encounter\IEncounterCard.cs" />
     <Compile Include="Effects\IEncounterCardEffect.cs" />
-    <Compile Include="Cards\Encounter\IEncounterSet.cs" />
     <Compile Include="Cards\Encounter\Enemies\IEnemyCard.cs" />
     <Compile Include="Cards\Player\Events\IEventCard.cs" />
     <Compile Include="Effects\Payments\IExhaustCardPayment.cs" />

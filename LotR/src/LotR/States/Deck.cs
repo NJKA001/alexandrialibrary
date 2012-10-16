@@ -84,6 +84,17 @@ namespace LotR.States
             }
         }
 
+        public void RemoveFromDiscard(IEnumerable<T> cards)
+        {
+            foreach (var card in cards)
+            {
+                if (this.discardedCards.Contains(card))
+                {
+                    this.discardedCards.Remove(card);
+                }
+            }
+        }
+
         public void Shuffle()
         {            
             var cardArray = cards.ToArray();

@@ -41,12 +41,28 @@ namespace LotR.Effects.Choices
             return chosenCards.ContainsKey(playerId) ? chosenCards[playerId] : Enumerable.Empty<T>();
         }
 
-        public void AddChosenCard(Guid playerId, T card)
+        public bool ChosenCardIsValid(Guid playerId, T card)
         {
             if (card == null)
-                throw new ArgumentNullException("card");
+                return false;
 
             if (!Players.Select(x => x.StateId).Contains(playerId))
+                return false;
+
+            foreach (var pair in chosenCards)
+            {
+                if (pair.Value.Any(x => x.Id == card.Id))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public void AddChosenCard(Guid playerId, T card)
+        {
+            if (!ChosenCardIsValid(playerId, card))
                 return;
 
             if (!chosenCards.ContainsKey(playerId))
@@ -55,9 +71,6 @@ namespace LotR.Effects.Choices
             }
             else
             {
-                if (chosenCards[playerId].Any(x => x.Id == card.Id))
-                    return;
-
                 chosenCards[playerId].Add(card);
             }
         }

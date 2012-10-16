@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Cards;
-using LotR.Cards.Quests;
-
-namespace LotR.States.Scenarios
+namespace LotR.Cards.Quests
 {
     public class PassageThroughMirkwood
         : ScenarioBase
@@ -14,6 +11,13 @@ namespace LotR.States.Scenarios
         public PassageThroughMirkwood()
             : base("Passage Through Mirkwood", CardSet.Core)
         {
+            AddEncounterSet(EncounterSet.Passage_Through_Mirkwood);
+            AddEncounterSet(EncounterSet.Dol_Guldur_Orcs);
+            AddEncounterSet(EncounterSet.Spiders_of_Mirkwood);
+
+            AddQuest(new FliesAndSpiders());
+            AddQuest(new AForkInTheRoad());
+            //AddQuest(new 
         }
     }
 }
