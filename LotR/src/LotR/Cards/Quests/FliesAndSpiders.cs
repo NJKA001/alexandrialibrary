@@ -9,7 +9,6 @@ using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Payments;
 using LotR.Effects.Phases;
-using LotR.Effects.Phases.Setup;
 using LotR.States;
 using LotR.States.Areas;
 

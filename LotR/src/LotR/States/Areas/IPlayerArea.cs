@@ -24,5 +24,7 @@ namespace LotR.States.Areas
 
         void AddEngagedEnemy(IEnemyInPlay enemy);
         void RemoveEngagedEnemy(IEnemyInPlay enemy);
+
+        bool IsControlledByPlayer(ICardInPlay card);
     }
 }

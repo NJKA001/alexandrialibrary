@@ -45,7 +45,9 @@ namespace LotR.Effects.Choices
             if (ChosenHero == null)
                 return false;
 
-            if (state.GetController(ChosenHero.Card.Id) != ChosenPlayer)
+            var controller = ChosenHero.GetController(state);
+
+            if (controller == null || controller.StateId != ChosenPlayer.StateId)
                 return false;
 
             return true;

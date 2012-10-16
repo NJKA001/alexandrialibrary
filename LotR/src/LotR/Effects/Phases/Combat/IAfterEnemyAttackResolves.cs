@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.States.Phases.Any;
+using LotR.States.Phases.Combat;
 
 namespace LotR.Effects.Phases.Combat
 {
-    public interface IDuringDamageDealtToEnemy
+    public interface IAfterEnemyAttackResolves
     {
-        void DuringDamageDealtToEnemy(IDamageDealt step);
+        void AfterEnemyAttackResolves(IEnemyAttack state);
     }
 }

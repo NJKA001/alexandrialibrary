@@ -7,6 +7,7 @@ using System.Text;
 using LotR.Cards;
 using LotR.Cards.Player;
 using LotR.Effects.Modifiers;
+using LotR.States.Areas;
 using LotR.States.Phases.Any;
 
 namespace LotR.States
@@ -43,6 +44,17 @@ namespace LotR.States
         public string Title
         {
             get { return Card.Title; }
+        }
+
+        public IPlayer GetController(IGameState state)
+        {
+            foreach (var playerArea in state.GetStates<IPlayerArea>())
+            {
+                if (playerArea.IsControlledByPlayer(this))
+                    return playerArea.Player;
+            }
+
+            return null;
         }
 
         public virtual void DuringCheckForResourceIcon(ICheckForResourceIcon state)

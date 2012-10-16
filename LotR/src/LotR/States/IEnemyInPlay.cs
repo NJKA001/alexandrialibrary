@@ -11,5 +11,9 @@ namespace LotR.States
         : ICardInPlay<IEnemyCard>
     {
         byte Resources { get; set; }
+
+        IEnumerable<IShadowInPlay> ShadowCards { get; }
+        void AddShadowCard(IShadowInPlay shadow);
+        void RemoveShadowCard(IShadowInPlay shadow);
     }
 }

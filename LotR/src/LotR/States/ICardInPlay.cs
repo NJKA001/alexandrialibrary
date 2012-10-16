@@ -12,6 +12,8 @@ namespace LotR.States
         : IState, IDuringCheckForResourceIcon, IDuringCheckForTrait
     {
         string Title { get; }
+
+        IPlayer GetController(IGameState state);
     }
 
     public interface ICardInPlay<T>

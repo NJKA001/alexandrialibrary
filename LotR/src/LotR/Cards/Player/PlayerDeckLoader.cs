@@ -9,39 +9,19 @@ using LotR.States;
 
 namespace LotR.Cards.Player
 {
-    public class PlayerDeckReader
-        : IPlayerDeckReader
+    public class PlayerDeckLoader
+        : LoaderBase, IPlayerDeckLoader
     {
-        public PlayerDeckReader()
+        public PlayerDeckLoader()
         {
             InitializeCards();
         }
 
         private readonly IDictionary<string, IPlayerCard> playerCardMap = new Dictionary<string, IPlayerCard>();
 
-        private static IEnumerable<Type> GetPlayerCards()
+        private IEnumerable<Type> GetPlayerCards()
         {
             return GetTypesImplementingInterface(typeof(IPlayerCard)).Where(x => x != null && IsRealClass(x));
-        }
-
-        /// <summary>
-        /// Returns all types in the current AppDomain implementing the interface or inheriting the type. 
-        /// </summary>
-        private static IEnumerable<Type> GetTypesImplementingInterface(Type desiredType)
-        {
-            return AppDomain
-                .CurrentDomain
-                .GetAssemblies()
-                .SelectMany(assembly => assembly.GetTypes())
-                .Where(type => desiredType.IsAssignableFrom(type));
-
-        }
-
-        private static bool IsRealClass(Type testType)
-        {
-            return testType.IsAbstract == false
-                && testType.IsGenericTypeDefinition == false
-                && testType.IsInterface == false;
         }
 
         private string GetPlayerCardKey(IPlayerCard card)
@@ -106,7 +86,7 @@ namespace LotR.Cards.Player
             get { return playerCardMap.Values; }
         }
 
-        public IPlayerDeck Read(string path)
+        public IPlayerDeck Load(string path)
         {
             if (path == null)
                 throw new ArgumentNullException("path");

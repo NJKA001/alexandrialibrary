@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.States.Phases.Combat;
+
 namespace LotR.Effects.Phases.Combat
 {
     public interface IAfterCharactersAttack
     {
-        void AfterCharactersAttack(ICharactersAttackStep step);
+        void AfterCharactersAttack(ICharactersAttack state);
     }
 }

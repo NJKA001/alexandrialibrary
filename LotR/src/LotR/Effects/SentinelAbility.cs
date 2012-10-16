@@ -5,6 +5,7 @@ using System.Text;
 
 using LotR.Cards.Player;
 using LotR.Effects.Phases.Combat;
+using LotR.States.Phases.Combat;
 
 namespace LotR.Effects
 {
@@ -16,7 +17,7 @@ namespace LotR.Effects
         {
         }
 
-        public void DuringCharactersDefend(ICharactersDefendStep step)
+        public void DuringCharactersDefend(IEnemyAttack state)
         {
         }
     }

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Cards.Player.Heroes;
+using LotR.Cards.Encounter;
 
 namespace LotR.States
 {
-    public interface IHeroInPlay
-        : IPlayerCardInPlay<IHeroCard>
+    public interface IShadowInPlay
+        : ICardInPlay<IEncounterCard>
     {
     }
 }

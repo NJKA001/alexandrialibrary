@@ -24,10 +24,13 @@ namespace LotR.Console
                 WriteLine("Simulator Console v. 1.0.0.0");
                 WriteLine();
 
-                reader = new PlayerDeckReader();
+                reader = new PlayerDeckLoader();
 
                 var path = "SampleDeck.txt";
-                var deck = ReadDeck(path);
+                var deck = LoadDeck(path);
+
+                if (deck == null)
+                    return;
 
                 DisplayDeck(deck);
 
@@ -58,17 +61,25 @@ namespace LotR.Console
             }
         }
 
-        private static IPlayerDeckReader reader;
+        private static IPlayerDeckLoader reader;
 
-        private static IPlayerDeck ReadDeck(string path)
+        private static IPlayerDeck LoadDeck(string path)
         {
-            WriteLine("Reading Deck File: {0}", path);
+            WriteLine("Loading deck from file: {0}", path);
 
-            var deck = reader.Read(path);
+            try
+            {
+                var deck = reader.Load(path);
 
-            WriteLine("  File Loaded");
+                WriteLine("  Deck loaded");
 
-            return deck;
+                return deck;
+            }
+            catch (Exception ex)
+            {
+                WriteLine("  Could not load deck from file: " + ex.Message);
+                return null;
+            }
         }
 
         private static void DisplayDeck(IPlayerDeck deck)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards.Encounter;
 using LotR.Cards.Encounter.Locations;
 using LotR.Cards.Quests;
 
@@ -13,20 +14,24 @@ namespace LotR.States.Areas
     {
         IDeck<IQuestCard> QuestDeck { get; }
         IQuestCard ActiveQuest { get; }
+
+        IEnumerable<IDeck<IEncounterCard>> EncounterDecks { get; }
+        IDeck<IEncounterCard> ActiveEncounterDeck { get; }
+
         ILocationInPlay ActiveLocation { get; }
         byte ActiveQuestProgress { get; }
         byte ActiveLocationProgress { get; }
 
         void SetActiveQuest(IQuestCard card);
-        void AddActiveQuestProgress(byte value);
-        void RemoveActiveQuestProgress(byte value);
-
+        void SetActiveEncounterDeck(IDeck<IEncounterCard> deck);
         void SetActiveLocation(ILocationInPlay location);
         void RemoveActiveLocation();
-        void AddActiveLocationProgress(byte value);
-        void RemoveActiveLocationProgress(byte value);
-
+        
         void AddProgress(byte value);
-        void RemoveProgress(byte value);
+        void AddProgressBypassingActiveLocation(byte value);
+        void RemoveProgressFromQuest(byte value);
+        void RemoveProgressFromActiveLocation(byte value);
+
+        void Setup();
     }
 }

@@ -8,7 +8,7 @@ using LotR.Cards;
 namespace LotR.States
 {
     public interface IAttachmentHostInPlay
-        : ICardInHand<IAttachmentHostCard>
+        : ICardInPlay<IAttachmentHostCard>
     {
         IEnumerable<IAttachableInPlay> Attachments { get; }
 

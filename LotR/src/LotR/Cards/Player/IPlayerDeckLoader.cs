@@ -7,10 +7,10 @@ using LotR.States;
 
 namespace LotR.Cards.Player
 {
-    public interface IPlayerDeckReader
+    public interface IPlayerDeckLoader
     {
         IEnumerable<IPlayerCard> PlayerCards { get; }
 
-        IPlayerDeck Read(string path);
+        IPlayerDeck Load(string path);
     }
 }

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.States.Phases.Combat;
+
 namespace LotR.Effects.Phases.Combat
 {
-    interface IAfterShadowEffectResolve
+    public interface IAfterShadowEffectsResolve
     {
+        void AfterShadowEffectsResolve(IEnemyAttack state);
     }
 }
