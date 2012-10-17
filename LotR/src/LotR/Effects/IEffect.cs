@@ -16,11 +16,11 @@ namespace LotR.Effects
         Guid EffectId { get; }
         string Description { get; }
 
-        IChoice GetChoice(IGameState state);
-        ICost GetCost(IGameState state);
-        ILimit GetLimit(IGameState state);
+        IChoice GetChoice(IGame game);
+        ICost GetCost(IGame game);
+        ILimit GetLimit(IGame game);
 
-        bool PaymentAccepted(IGameState state, IPayment payment, IChoice choice);
-        void Resolve(IGameState state, IPayment payment, IChoice choice);
+        bool PaymentAccepted(IGame game, IPayment payment, IChoice choice);
+        void Resolve(IGame game, IPayment payment, IChoice choice);
     }
 }

@@ -14,6 +14,6 @@ namespace LotR.Effects.Choices
         ISource Source { get; }
         IEnumerable<IPlayer> Players { get; }
 
-        bool IsValid(IGameState state);
+        bool IsValid(IGame game);
     }
 }

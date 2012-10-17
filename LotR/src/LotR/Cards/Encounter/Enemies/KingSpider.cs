@@ -49,12 +49,12 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override IChoice GetChoice(IGameState state)
+            public override IChoice GetChoice(IGame game)
             {
-                return new EachPlayerChoosesReadyCharacters(Source, state, 1);
+                return new EachPlayerChoosesReadyCharacters(Source, game, 1);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
                 var characterChoice = choice as IPlayersChooseCharacters;
                 if (characterChoice == null)
@@ -75,9 +75,9 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override IChoice GetChoice(IGameState state)
+            public override IChoice GetChoice(IGame game)
             {
-                var enemyAttack = state.GetStates<IEnemyAttack>().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyAttack = game.GetStates<IEnemyAttack>().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return null;
 
@@ -86,7 +86,7 @@ namespace LotR.Cards.Encounter.Enemies
                 return new EachPlayerChoosesReadyCharacters(Source, enemyAttack.DefendingPlayer, numberOfCharacters);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
                 var characterChoice = choice as IPlayersChooseCharacters;
                 if (characterChoice == null)

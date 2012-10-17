@@ -44,9 +44,9 @@ namespace LotR.Cards.Encounter.Locations
                 state.AddEffect(this);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var playersDrawingCards = state.GetStates<IPlayersDrawingCards>().FirstOrDefault();
+                var playersDrawingCards = game.GetStates<IPlayersDrawingCards>().FirstOrDefault();
                 if (playersDrawingCards == null)
                     return;
 

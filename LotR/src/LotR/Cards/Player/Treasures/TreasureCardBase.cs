@@ -29,7 +29,7 @@ namespace LotR.Cards.Player.Treasures
             private set;
         }
 
-        public ICost GetResourceCost(IGameState state)
+        public ICost GetResourceCost(IGame game)
         {
             return new PayResources(this, PrintedSphere, PrintedCost, false);
         }
@@ -40,7 +40,7 @@ namespace LotR.Cards.Player.Treasures
             protected set;
         }
 
-        public virtual bool CanBeAttachedTo(IGameState state, ICanHaveAttachments attachmentHost)
+        public virtual bool CanBeAttachedTo(IGame game, ICanHaveAttachments attachmentHost)
         {
             if (!attachmentHost.IsValidAttachment(this))
                 return false;

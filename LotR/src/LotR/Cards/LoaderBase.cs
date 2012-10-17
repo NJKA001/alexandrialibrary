@@ -62,7 +62,10 @@ namespace LotR.Cards
             {
                 for (var i = 0; i < prototype.Quantity; i++)
                 {
-                    cards.Add(GetCard<IEncounterCard>(prototype));
+                    if (i == 0 || i == 2)
+                        cards.Add(GetCard<IEncounterCard>(prototype));
+                    else
+                        cards.Insert(0, GetCard<IEncounterCard>(prototype));
                 }
             }
 

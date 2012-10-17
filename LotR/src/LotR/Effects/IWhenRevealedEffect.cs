@@ -10,6 +10,6 @@ namespace LotR.Effects
     public interface IWhenRevealedEffect
         : IForcedEffect
     {
-        void WhenRevealed(IGameState state);
+        void WhenRevealed(IGame game);
     }
 }

@@ -10,6 +10,6 @@ namespace LotR.Effects.Phases.Any
     public interface IAfterEncounterCardRevealed
         : IEffect
     {
-        void AfterEncounterCardRevealed(IGameState state);
+        void AfterEncounterCardRevealed(IGame game);
     }
 }

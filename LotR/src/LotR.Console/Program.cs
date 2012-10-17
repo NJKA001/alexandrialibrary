@@ -13,6 +13,7 @@ using LotR.Cards.Player.Heroes;
 using LotR.Cards.Player.Treasures;
 using LotR.Cards.Quests;
 using LotR.States;
+using LotR.States.Areas;
 
 namespace LotR.Console
 {
@@ -26,37 +27,59 @@ namespace LotR.Console
                 WriteLine("Simulator Console v. 1.0.0.0");
                 WriteLine();
 
-                playerDeckLoader = new PlayerDeckLoader();
-                questLoader = new QuestLoader();
+                gameLoader = new GameLoader();
 
-                var path = "SampleDeck.txt";
-                var deck = LoadDeck(path);
-                var questArea = questLoader.Load(ScenarioCode.Passage_Through_Mirkwood);
+                var player1 = new PlayerInfo("Dan", "TheThreeHunters.txt");
 
-                if (deck == null)
+                var game = LoadGame(new List<PlayerInfo> { player1 }, ScenarioCode.Passage_Through_Mirkwood);
+
+                if (game == null)
                     return;
 
-                DisplayDeck(deck);
-                DisplayQuests(questArea.QuestDeck);
-                DisplayEncounters(questArea.EncounterDecks);
+                var players = game.GetStates<IPlayer>();
 
-                var line = "start";
-                while (!string.IsNullOrEmpty(line))
-                {
-                    WriteLine();
-                    WriteLine("Drawing 6 Cards (press ENTER to stop)");
-                    
-                    deck.Shuffle();
+                if (players.Count() == 0)
+                    return;
 
-                    foreach (var card in deck.GetFromTop(6))
-                    {
-                        WriteLine("  {0}", card.Title);
-                    }
+                WriteLine("Starting Game");
 
-                    line = System.Console.ReadLine().Trim();
-                }
+                //foreach (var player in players)
+                //{
+                    //DisplayDeck(player.Deck);
+                //}
 
-                WriteLine();
+                //var questArea = game.GetStates<IQuestArea>().FirstOrDefault();
+                //if (questArea == null)
+                //    return;
+
+                //DisplayQuests(questArea.QuestDeck);
+                //DisplayEncounters(questArea.EncounterDecks);
+
+                //var drawCards = false;
+
+                //if (drawCards)
+                //{
+                //    var deck = players.First().Deck;
+
+                //    var line = "start";
+                //    while (!string.IsNullOrEmpty(line))
+                //    {
+                //        WriteLine();
+                //        WriteLine("Drawing 6 Cards (press ENTER to stop)");
+
+                //        deck.Shuffle();
+
+                //        foreach (var card in deck.GetFromTop(6))
+                //        {
+                //            WriteLine("  {0}", card.Title);
+                //        }
+
+                //        line = System.Console.ReadLine().Trim();
+                //    }
+
+                //    WriteLine();
+                //}
+
                 WriteLine("Press ENTER to close simulator");
                 System.Console.ReadLine();
             }
@@ -66,24 +89,21 @@ namespace LotR.Console
             }
         }
 
-        private static IPlayerDeckLoader playerDeckLoader;
-        private static IQuestLoader questLoader;
+        private static IGameLoader gameLoader;
 
-        private static IPlayerDeck LoadDeck(string path)
+        private static IGame LoadGame(IEnumerable<PlayerInfo> playersInfo, ScenarioCode scenarioCode)
         {
-            WriteLine("Loading deck from file: {0}", path);
+            WriteLine("Loading Game");
 
             try
             {
-                var deck = playerDeckLoader.Load(path);
+                var game = gameLoader.Load(playersInfo, scenarioCode);
 
-                WriteLine("  Deck loaded");
-
-                return deck;
+                return game;
             }
             catch (Exception ex)
             {
-                WriteLine("  Could not load deck from file: " + ex.Message);
+                WriteLine("  Could Not Load Game: " + ex.Message);
                 return null;
             }
         }
@@ -106,17 +126,35 @@ namespace LotR.Console
         private static void DisplayEncounters(IEnumerable<IDeck<IEncounterCard>> encounterDecks)
         {
             WriteLine();
+            var number = 0;
             foreach (var encounterDeck in encounterDecks)
             {
-                var encounterSet = EncounterSet.None;
-                foreach (var encounterCard in encounterDeck.Cards.OrderBy(x => x.EncounterSet).ThenBy(x => x.Title))
+                number++;
+                WriteLine("Encounter Deck #{0}: {1} Cards", number, encounterDeck.Size);
+
+                var displayBreakdown = false;
+
+                if (displayBreakdown)
                 {
-                    if (encounterCard.EncounterSet != encounterSet)
-                        WriteLine("EncounterSet: {0}", encounterCard.EncounterSet.ToString().Replace('_', ' '));
+                    var encounterSet = EncounterSet.None;
+                    foreach (var encounterCard in encounterDeck.Cards.OrderBy(x => x.EncounterSet).ThenBy(x => x.Title))
+                    {
+                        if (encounterCard.EncounterSet != encounterSet)
+                            WriteLine("EncounterSet: {0}", encounterCard.EncounterSet.ToString().Replace('_', ' '));
 
-                    encounterSet = encounterCard.EncounterSet;
+                        encounterSet = encounterCard.EncounterSet;
 
-                    WriteLine("{0,3} {1}", encounterCard.Quantity, encounterCard.Title);
+                        WriteLine("{0,3} {1}", encounterCard.Quantity, encounterCard.Title);
+                    }
+                }
+                else
+                {
+                    var count = 0;
+                    foreach (var encounterCard in encounterDeck.Cards)
+                    {
+                        count++;
+                        WriteLine("{0,3} {1}", count, encounterCard.Title);
+                    }
                 }
             }
             WriteLine();

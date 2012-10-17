@@ -32,27 +32,27 @@ namespace LotR.Effects
             private set;
         }
 
-        public virtual IChoice GetChoice(IGameState state)
+        public virtual IChoice GetChoice(IGame game)
         {
             return null;
         }
 
-        public virtual ICost GetCost(IGameState state)
+        public virtual ICost GetCost(IGame game)
         {
             return null;
         }
 
-        public virtual ILimit GetLimit(IGameState state)
+        public virtual ILimit GetLimit(IGame game)
         {
             return null;
         }
 
-        public virtual bool PaymentAccepted(IGameState state, IPayment payment, IChoice choice)
+        public virtual bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
         {
             return true;
         }
 
-        public virtual void Resolve(IGameState state, IPayment payment, IChoice choice)
+        public virtual void Resolve(IGame game, IPayment payment, IChoice choice)
         {
         }
     }

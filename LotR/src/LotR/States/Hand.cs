@@ -11,11 +11,13 @@ namespace LotR.States
         : StateBase, IHand<T>
         where T : ICard
     {
-        public Hand()
+        public Hand(IGame gameState)
+            : base(gameState)
         {
         }
 
-        public Hand(IEnumerable<T> cards)
+        public Hand(IGame gameState, IEnumerable<T> cards)
+            : base(gameState)
         {
             foreach (var card in cards)
             {

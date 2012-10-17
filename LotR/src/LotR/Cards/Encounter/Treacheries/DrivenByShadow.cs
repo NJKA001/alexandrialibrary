@@ -33,9 +33,9 @@ namespace LotR.Cards.Encounter.Treacheries
             {
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
                 if (stagingArea == null)
                     return;
 
@@ -47,7 +47,7 @@ namespace LotR.Cards.Encounter.Treacheries
 
                 foreach (var threatening in stagingArea.CardsInStagingArea.OfType<IThreateningInPlay>())
                 {
-                    state.AddEffect(new ThreatModifier(state.CurrentPhase, Source, threatening, TimeScope.Phase, 1));
+                    game.AddEffect(new ThreatModifier(game.CurrentPhase, Source, threatening, TimeScope.Phase, 1));
                 }
             }
         }
@@ -60,9 +60,9 @@ namespace LotR.Cards.Encounter.Treacheries
             {
             }
 
-            public override IChoice GetChoice(IGameState state)
+            public override IChoice GetChoice(IGame game)
             {
-                var enemyAttack = state.GetStates<IEnemyAttack>().FirstOrDefault();
+                var enemyAttack = game.GetStates<IEnemyAttack>().FirstOrDefault();
                 if (enemyAttack == null || enemyAttack.IsUndefended)
                     return null;
 
@@ -78,7 +78,7 @@ namespace LotR.Cards.Encounter.Treacheries
                     if (attachmentHost.Attachments.Count() == 0)
                         continue;
                     
-                    var controller = attachmentHost.GetController(state);
+                    var controller = attachmentHost.GetController(game);
                     if (controller == null)
                         continue;
 
@@ -97,7 +97,7 @@ namespace LotR.Cards.Encounter.Treacheries
                 return new PlayersChooseCards<IAttachableCard>("Choose and discard 1 attachment from the defending character.", Source, players, 1, attachments);
             }
 
-            private void DiscardAllAttachmentsControlledByDefendingPlayer(IGameState state, IEnemyAttack attack)
+            private void DiscardAllAttachmentsControlledByDefendingPlayer(IGame game, IEnemyAttack attack)
             {
                 var playerArea = attack.DefendingPlayer.GetStates<IPlayerArea>().FirstOrDefault();
                 if (playerArea == null)
@@ -113,7 +113,7 @@ namespace LotR.Cards.Encounter.Treacheries
                     }
                     else if (attachable.Card is IObjectiveCard)
                     {
-                        var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                        var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
                         if (stagingArea != null)
                         {
                             stagingArea.EncounterDeck.Discard(new List<IEncounterCard> { attachable.Card as IObjectiveCard });
@@ -122,7 +122,7 @@ namespace LotR.Cards.Encounter.Treacheries
                 }
             }
 
-            private void DiscardOneAttachmentFromDefendingCharacter(IGameState state, IChoice choice, IEnemyAttack enemyAttack)
+            private void DiscardOneAttachmentFromDefendingCharacter(IGame game, IChoice choice, IEnemyAttack enemyAttack)
             {
                 var attachmentChoice = choice as IPlayersChooseCards<IAttachableCard>;
                 if (attachmentChoice == null)
@@ -159,7 +159,7 @@ namespace LotR.Cards.Encounter.Treacheries
                 }
                 else if (attachable.Card is IObjectiveCard)
                 {
-                    var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                    var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
                     if (stagingArea != null)
                     {
                         stagingArea.EncounterDeck.Discard(new List<IEncounterCard> { attachable.Card as IObjectiveCard });
@@ -167,19 +167,19 @@ namespace LotR.Cards.Encounter.Treacheries
                 }
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var enemyAttack = state.GetStates<IEnemyAttack>().FirstOrDefault();
+                var enemyAttack = game.GetStates<IEnemyAttack>().FirstOrDefault();
                 if (enemyAttack == null)
                     return;
 
                 if (enemyAttack.IsUndefended)
                 {
-                    DiscardAllAttachmentsControlledByDefendingPlayer(state, enemyAttack);
+                    DiscardAllAttachmentsControlledByDefendingPlayer(game, enemyAttack);
                 }
                 else
                 {
-                    DiscardOneAttachmentFromDefendingCharacter(state, choice, enemyAttack);
+                    DiscardOneAttachmentFromDefendingCharacter(game, choice, enemyAttack);
                 }
             }
         }

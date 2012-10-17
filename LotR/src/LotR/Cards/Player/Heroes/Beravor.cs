@@ -28,33 +28,38 @@ namespace LotR.Cards.Player.Heroes
             : ActionCharacterAbilityBase
         {
             public ExhaustBeravorToDrawTwoCards(Beravor source)
-                : base("Exhaust Beravor to choose a player. That player draws 2 cards.", source)
+                : base("Exhaust Beravor to choose a player. That player draws 2 cards. (Limit once per round)", source)
             {
             }
 
-            public override IChoice GetChoice(IGameState state)
+            public override IChoice GetChoice(IGame game)
             {
-                var character = state.GetState<IHeroInPlay>(Source.Id);
+                var character = game.GetState<IHeroInPlay>(Source.Id);
                 if (character == null)
                     return null;
 
-                var controller = character.GetController(state);
+                var controller = character.GetController(game);
                 if (controller == null)
                     return null;
 
                 return new ChoosePlayer(Source, controller);
             }
 
-            public override ICost GetCost(IGameState state)
+            public override ICost GetCost(IGame game)
             {
-                var exhaustable = state.GetState<IExhaustableInPlay>(Source.Id);
+                var exhaustable = game.GetState<IExhaustableInPlay>(Source.Id);
                 if (exhaustable == null)
                     return null;
 
                 return new ExhaustSelf(exhaustable);
             }
 
-            public override bool PaymentAccepted(IGameState state, IPayment payment, IChoice choice)
+            public override ILimit GetLimit(IGame game)
+            {
+                return new Limit(PlayerScope.Controller, TimeScope.Round, 1);
+            }
+
+            public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
             {
                 var exhaustPayment = payment as IExhaustCardPayment;
                 if (exhaustPayment == null)
@@ -68,7 +73,7 @@ namespace LotR.Cards.Player.Heroes
                 return true;
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
                 var playerChoice = choice as IChoosePlayer;
                 if (playerChoice == null)

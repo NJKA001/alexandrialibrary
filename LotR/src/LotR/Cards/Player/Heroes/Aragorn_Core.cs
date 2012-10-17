@@ -40,9 +40,9 @@ namespace LotR.Cards.Player.Heroes
 
             private readonly Aragorn aragorn;
 
-            public void AfterCommittingToQuest(IGameState state)
+            public void AfterCommittingToQuest(IGame game)
             {
-                var committedToQuest = state.GetStates<ICharactersCommittedToQuest>().FirstOrDefault();
+                var committedToQuest = game.GetStates<ICharactersCommittedToQuest>().FirstOrDefault();
                 if (committedToQuest == null)
                     return;
 
@@ -50,10 +50,10 @@ namespace LotR.Cards.Player.Heroes
                 if (self == null)
                     return;
 
-                state.AddEffect(this);
+                game.AddEffect(this);
             }
 
-            public override bool PaymentAccepted(IGameState state, IPayment payment, IChoice choice)
+            public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
             {
                 var resourcePayment = payment as IResourcePayment;
                 if (resourcePayment == null)
@@ -69,7 +69,7 @@ namespace LotR.Cards.Player.Heroes
                 if (firstPayment.Item1.Card.Id != Source.Id || firstPayment.Item2 != 1)
                     return false;
 
-                var resourceful = state.GetState<IResourcefulInPlay>(Source.Id);
+                var resourceful = game.GetState<IResourcefulInPlay>(Source.Id);
                 if (resourceful == null || resourceful.Resources < 1)
                     return false;
 
@@ -78,9 +78,9 @@ namespace LotR.Cards.Player.Heroes
                 return true;
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var exhaustable = state.GetState<IExhaustableInPlay>(Source.Id);
+                var exhaustable = game.GetState<IExhaustableInPlay>(Source.Id);
                 if (exhaustable == null)
                     return;
 
@@ -90,7 +90,7 @@ namespace LotR.Cards.Player.Heroes
                 exhaustable.Ready();
             }
 
-            public override ICost GetCost(IGameState state)
+            public override ICost GetCost(IGame game)
             {
                 return new ReadyCost(aragorn);
             }

@@ -75,7 +75,7 @@ namespace LotR.Effects.Choices
             }
         }
 
-        public override bool IsValid(IGameState state)
+        public override bool IsValid(IGame game)
         {
             foreach (var player in Players)
             {

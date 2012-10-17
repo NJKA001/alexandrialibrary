@@ -27,9 +27,9 @@ namespace LotR.Cards.Encounter.Treacheries
             {
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                foreach (var player in state.GetStates<IPlayer>())
+                foreach (var player in game.GetStates<IPlayer>())
                 {
                     var eventsToDiscard = player.Hand.Cards.OfType<IEventCard>().ToList();
                     player.DiscardFromHand(eventsToDiscard);

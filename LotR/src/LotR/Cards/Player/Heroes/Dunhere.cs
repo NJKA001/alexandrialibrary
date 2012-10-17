@@ -38,9 +38,9 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public void BeforeChoosingEnemyToAttack(IGameState state)
+            public void BeforeChoosingEnemyToAttack(IGame game)
             {
-                var chooseEnemy = state.GetStates<IChooseEnemyToAttack>().FirstOrDefault();
+                var chooseEnemy = game.GetStates<IChooseEnemyToAttack>().FirstOrDefault();
                 if (chooseEnemy == null)
                     return;
 
@@ -54,16 +54,16 @@ namespace LotR.Cards.Player.Heroes
                 if (attacker.Card.Id != Source.Id)
                     return;
 
-                state.AddEffect(this);
+                game.AddEffect(this);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var chooseEnemy = state.GetStates<IChooseEnemyToAttack>().FirstOrDefault();
+                var chooseEnemy = game.GetStates<IChooseEnemyToAttack>().FirstOrDefault();
                 if (chooseEnemy == null)
                     return;
 
-                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
 
                 foreach (var enemy in stagingArea.CardsInStagingArea.OfType<IEnemyInPlay>())
                 {
@@ -89,7 +89,11 @@ namespace LotR.Cards.Player.Heroes
                 if (determineAttack.Attacker.Card.Id != Source.Id)
                     return;
 
-                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                var game = state.GetStates<IGame>().FirstOrDefault();
+                if (game == null)
+                    return;
+
+                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
                 if (stagingArea == null)
                     return;
 
@@ -97,12 +101,12 @@ namespace LotR.Cards.Player.Heroes
                 if (enemy == null)
                     return;
 
-                state.AddEffect(this);
+                game.AddEffect(this);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var determineAttack = state.GetStates<IDetermineAttack>().FirstOrDefault();
+                var determineAttack = game.GetStates<IDetermineAttack>().FirstOrDefault();
                 if (determineAttack == null)
                     return;
 

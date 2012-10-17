@@ -36,9 +36,9 @@ namespace LotR.Cards.Player.Heroes
                 state.AddEffect(this);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var playersDrawing = state.GetStates<IPlayersDrawingCards>().FirstOrDefault();
+                var playersDrawing = game.GetStates<IPlayersDrawingCards>().FirstOrDefault();
                 if (playersDrawing == null)
                     return;
 

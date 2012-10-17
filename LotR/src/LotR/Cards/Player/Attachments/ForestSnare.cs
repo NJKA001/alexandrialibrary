@@ -19,7 +19,7 @@ namespace LotR.Cards.Player.Attachments
             AddTrait(Trait.Trap);
         }
 
-        public override bool CanBeAttachedTo(IGameState state, ICanHaveAttachments cardInPlay)
+        public override bool CanBeAttachedTo(IGame game, ICanHaveAttachments cardInPlay)
         {
             if (cardInPlay == null)
                 throw new ArgumentNullException("cardInPlay");

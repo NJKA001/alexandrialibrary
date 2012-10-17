@@ -42,9 +42,9 @@ namespace LotR.Cards.Player.Attachments
                 state.AddEffect(this);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var attachment = state.GetState<IAttachmentInPlay>(Source.Id);
+                var attachment = game.GetState<IAttachmentInPlay>(Source.Id);
                 if (attachment == null || attachment.AttachedTo == null)
                     return;
 

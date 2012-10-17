@@ -10,6 +10,6 @@ namespace LotR.Effects
     public interface ITravelEffect
         : ICardEffect, IPassiveEffect
     {
-        void Travel(IGameState state);
+        void Travel(IGame game);
     }
 }

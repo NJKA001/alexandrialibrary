@@ -13,7 +13,7 @@ namespace LotR.States
     {
         Guid StateId { get; }
 
-        T GetState<T>(Guid stateId) where T : IState;
-        IEnumerable<T> GetStates<T>() where T : IState;
+        T GetState<T>(Guid stateId) where T : class, IState;
+        IEnumerable<T> GetStates<T>() where T : class, IState;
     }
 }

@@ -34,23 +34,23 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public override ICost GetCost(IGameState state)
+            public override ICost GetCost(IGame game)
             {
-                return new DiscardCardsFromHand(Source, state, 1);
+                return new DiscardCardsFromHand(Source, game, 1);
             }
 
-            public override ILimit GetLimit(IGameState state)
+            public override ILimit GetLimit(IGame game)
             {
                 return new Limit(PlayerScope.AnyPlayer, TimeScope.Round, 1);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var willpowerful = state.GetState<IWillpowerfulInPlay>(Source.Id);
+                var willpowerful = game.GetState<IWillpowerfulInPlay>(Source.Id);
                 if (willpowerful == null)
                     return;
 
-                state.AddEffect(new WillpowerModifier(state.CurrentPhase, Source, willpowerful, TimeScope.Phase, 1));
+                game.AddEffect(new WillpowerModifier(game.CurrentPhase, Source, willpowerful, TimeScope.Phase, 1));
             }
         }
     }

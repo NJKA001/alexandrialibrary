@@ -33,11 +33,11 @@ namespace LotR.Cards.Encounter.Treacheries
             {
             }
 
-            public override IChoice GetChoice(IGameState state)
+            public override IChoice GetChoice(IGame game)
             {
                 var highestThreat = -1;
                 var mostThreateningPlayers = new List<IPlayer>();
-                foreach (var player in state.GetStates<IPlayer>())
+                foreach (var player in game.GetStates<IPlayer>())
                 {
                     if (player.CurrentThreat > highestThreat)
                     {
@@ -56,10 +56,10 @@ namespace LotR.Cards.Encounter.Treacheries
                 else if (mostThreateningPlayers.Count() == 1)
                     return new ChooseHero(Source, mostThreateningPlayers.FirstOrDefault());
                 else
-                    return new ChoosePlayerToChooseHero(Source, state.FirstPlayer, mostThreateningPlayers);
+                    return new ChoosePlayerToChooseHero(Source, game.FirstPlayer, mostThreateningPlayers);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
                 var heroChoice = choice as IChooseHero;
                 if (heroChoice == null || heroChoice.ChosenHero == null)
@@ -73,7 +73,7 @@ namespace LotR.Cards.Encounter.Treacheries
                 if (attachable == null)
                     return;
 
-                attachmentHost.AddAttachment(new AttachableInPlay(attachable, attachmentHost));
+                attachmentHost.AddAttachment(new AttachableInPlay(game, attachable, attachmentHost));
             }
         }
 
@@ -98,9 +98,9 @@ namespace LotR.Cards.Encounter.Treacheries
                 state.AddEffect(this);
             }
 
-            public override ICost GetCost(IGameState state)
+            public override ICost GetCost(IGame game)
             {
-                var attachment = state.GetState<IAttachableInPlay>(Source.Id);
+                var attachment = game.GetState<IAttachableInPlay>(Source.Id);
                 if (attachment == null || attachment.AttachedTo == null)
                     return null;
 
@@ -113,9 +113,9 @@ namespace LotR.Cards.Encounter.Treacheries
                 return cost;
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var cardReadying = state.GetStates<ICardReadying>().Where(x => x.Exhaustable.Card.Id == Source.Id).FirstOrDefault();
+                var cardReadying = game.GetStates<ICardReadying>().Where(x => x.Exhaustable.Card.Id == Source.Id).FirstOrDefault();
                 if (cardReadying == null)
                     return;
 

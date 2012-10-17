@@ -33,13 +33,13 @@ namespace LotR.Cards.Quests
             {
             }
 
-            public override IChoice GetChoice(IGameState state)
+            public override IChoice GetChoice(IGame game)
             {
-                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
                 if (stagingArea == null)
                     return null;
 
-                var players = state.GetStates<IPlayer>();
+                var players = game.GetStates<IPlayer>();
                 if (players.Count() == 0)
                     return null;
 
@@ -60,13 +60,13 @@ namespace LotR.Cards.Quests
                 return new PlayersChooseCards<IEnemyCard>("Each player must search the encounter deck and discard pile for 1 Spider of their choice", Source, players, 1, availableSpiders);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
                 var spiderChoices = choice as IPlayersChooseCards<IEnemyCard>;
                 if (spiderChoices == null)
                     return;
 
-                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
                 if (stagingArea == null)
                     return;
 
@@ -100,7 +100,11 @@ namespace LotR.Cards.Quests
 
             public void BeforeStageDefeated(ICurrentQuestStage state)
             {
-                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                var game = state.GetStates<IGame>().FirstOrDefault();
+                if (game == null)
+                    return;
+
+                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
                 if (stagingArea == null)
                     return;
 

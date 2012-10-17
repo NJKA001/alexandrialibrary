@@ -28,7 +28,7 @@ namespace LotR.Cards.Player.Attachments
             AddEffect(new AragornGetsASpiritResourceIcon(this));
         }
 
-        public override bool CanBeAttachedTo(IGameState state, ICanHaveAttachments cardInPlay)
+        public override bool CanBeAttachedTo(IGame game, ICanHaveAttachments cardInPlay)
         {
             if (cardInPlay == null)
                 throw new ArgumentNullException("cardInPlay");

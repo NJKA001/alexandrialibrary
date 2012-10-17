@@ -18,25 +18,25 @@ namespace LotR.Effects
         {
         }
 
-        public virtual void Travel(IGameState state)
+        public virtual void Travel(IGame game)
         {
-            var questArea = state.GetStates<IQuestArea>().FirstOrDefault();
+            var questArea = game.GetStates<IQuestArea>().FirstOrDefault();
             if (questArea == null)
                 return;
 
             if (questArea.ActiveLocation != null)
                 return;
 
-            state.AddEffect(this);
+            game.AddEffect(this);
         }
 
-        public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+        public override void Resolve(IGame game, IPayment payment, IChoice choice)
         {
-            var location = state.GetState<ILocationInPlay>(Source.Id);
+            var location = game.GetState<ILocationInPlay>(Source.Id);
             if (location == null)
                 return;
 
-            var questArea = state.GetStates<IQuestArea>().FirstOrDefault();
+            var questArea = game.GetStates<IQuestArea>().FirstOrDefault();
             if (questArea == null)
                 return;
 

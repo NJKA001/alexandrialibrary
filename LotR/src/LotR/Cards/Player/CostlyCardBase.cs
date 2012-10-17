@@ -30,7 +30,7 @@ namespace LotR.Cards.Player
             private set;
         }
 
-        public virtual ICost GetResourceCost(IGameState state)
+        public virtual ICost GetResourceCost(IGame game)
         {
             return new PayResources(this, PrintedSphere, PrintedCost, HasVariableCost);
         }

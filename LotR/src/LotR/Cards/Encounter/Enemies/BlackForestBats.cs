@@ -30,13 +30,13 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override IChoice GetChoice(IGameState state)
+            public override IChoice GetChoice(IGame game)
             {
-                var commitedToQuest = state.GetStates<ICharactersCommittedToQuest>().FirstOrDefault();
+                var commitedToQuest = game.GetStates<ICharactersCommittedToQuest>().FirstOrDefault();
                 if (commitedToQuest == null)
                     return null;
 
-                var players = state.GetStates<IPlayer>();
+                var players = game.GetStates<IPlayer>();
                 if (players.Count() == 0)
                     return null;
 
@@ -54,9 +54,9 @@ namespace LotR.Cards.Encounter.Enemies
                 return new PlayersChooseCards<IWillpowerfulCard>("Each player must choose 1 character currently commited to a quest", Source, players, 1, questingCharacters);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var commitedToQuest = state.GetStates<ICharactersCommittedToQuest>().FirstOrDefault();
+                var commitedToQuest = game.GetStates<ICharactersCommittedToQuest>().FirstOrDefault();
                 if (commitedToQuest == null)
                     return;
 
@@ -70,7 +70,7 @@ namespace LotR.Cards.Encounter.Enemies
                     if (removeFromQuest == null)
                         continue;
 
-                    var inPlay = state.GetState<IWillpowerfulInPlay>(removeFromQuest.Id);
+                    var inPlay = game.GetState<IWillpowerfulInPlay>(removeFromQuest.Id);
                     if (inPlay == null)
                         continue;
 

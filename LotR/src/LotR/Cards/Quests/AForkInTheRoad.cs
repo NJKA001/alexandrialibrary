@@ -34,13 +34,13 @@ namespace LotR.Cards.Quests
                 state.AddEffect(this);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var questArea = state.GetStates<IQuestArea>().FirstOrDefault();
+                var questArea = game.GetStates<IQuestArea>().FirstOrDefault();
                 if (questArea == null)
                     return;
 
-                var currentStage = state.GetStates<ICurrentQuestStage>().FirstOrDefault();
+                var currentStage = game.GetStates<ICurrentQuestStage>().FirstOrDefault();
                 if (currentStage == null)
                     return;
 

@@ -15,9 +15,9 @@ namespace LotR.Effects
         {
         }
 
-        public virtual void Shadow(IGameState state)
+        public virtual void Shadow(IGame game)
         {
-            state.AddEffect(this);
+            game.AddEffect(this);
         }
     }
 }

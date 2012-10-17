@@ -13,14 +13,14 @@ namespace LotR.Effects.Costs
     public class DiscardCardsFromHand
         : CostBase
     {
-        public DiscardCardsFromHand(ISource source, IGameState state, byte numberOfCards)
+        public DiscardCardsFromHand(ISource source, IGame game, byte numberOfCards)
             : base(string.Format("Discard {0} cards from your hand", numberOfCards), source)
         {
-            this.state = state;
+            this.game = game;
             this.numberOfCards = numberOfCards;
         }
 
-        private readonly IGameState state;
+        private readonly IGame game;
         private readonly byte numberOfCards;
 
         public override bool IsMetBy(IPayment payment)

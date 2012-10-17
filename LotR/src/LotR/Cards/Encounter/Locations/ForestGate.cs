@@ -36,10 +36,10 @@ namespace LotR.Cards.Encounter.Locations
                 state.AddEffect(this);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var topTwo = state.FirstPlayer.Deck.GetFromTop(2);
-                state.FirstPlayer.Hand.AddCards(topTwo);
+                var topTwo = game.FirstPlayer.Deck.GetFromTop(2);
+                game.FirstPlayer.Hand.AddCards(topTwo);
             }
         }
     }

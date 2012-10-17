@@ -9,6 +9,6 @@ namespace LotR.Effects.Phases.Quest
 {
     public interface IAfterCommittingToQuest
     {
-        void AfterCommittingToQuest(IGameState state);
+        void AfterCommittingToQuest(IGame game);
     }
 }

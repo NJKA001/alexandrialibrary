@@ -41,7 +41,7 @@ namespace LotR.Effects.Choices
             private set;
         }
 
-        public virtual bool IsValid(IGameState state)
+        public virtual bool IsValid(IGame game)
         {
             return true;
         }

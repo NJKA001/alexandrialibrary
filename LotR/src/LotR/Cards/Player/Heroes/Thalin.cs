@@ -38,12 +38,12 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public void DuringEncounterCardRevealed(IGameState state)
+            public void DuringEncounterCardRevealed(IGame game)
             {
-                if (state.CurrentPhase != Phase.Quest)
+                if (game.CurrentPhase != Phase.Quest)
                     return;
 
-                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
                 if (stagingArea == null)
                     return;
 
@@ -54,17 +54,17 @@ namespace LotR.Cards.Player.Heroes
                 if (!(revealed is IEnemyCard))
                     return;
 
-                var committedCharacters = state.GetStates<ICharactersCommittedToQuest>().FirstOrDefault();
+                var committedCharacters = game.GetStates<ICharactersCommittedToQuest>().FirstOrDefault();
                 if (committedCharacters == null)
                     return;
 
                 if (!committedCharacters.IsCommittedToQuest(Source.Id))
                     return;
 
-                state.AddEffect(this);
+                game.AddEffect(this);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
                 var enemyChoice = choice as IChooseEnemy;
                 if (enemyChoice == null || enemyChoice.Enemy == null)
@@ -77,9 +77,9 @@ namespace LotR.Cards.Player.Heroes
                 damageable.Damage += 1;
             }
 
-            public override ICost GetCost(IGameState state)
+            public override ICost GetCost(IGame game)
             {
-                var revealedStep = state.GetStates<IEncounterCardRevealed>().FirstOrDefault();
+                var revealedStep = game.GetStates<IEncounterCardRevealed>().FirstOrDefault();
                 if (revealedStep == null)
                     return null;
 

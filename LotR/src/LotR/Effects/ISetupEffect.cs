@@ -10,6 +10,6 @@ namespace LotR.Effects
     public interface ISetupEffect
         : IPassiveEffect
     {
-        void Setup(IGameState state);
+        void Setup(IGame game);
     }
 }

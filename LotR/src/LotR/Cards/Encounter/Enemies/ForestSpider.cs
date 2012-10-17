@@ -42,13 +42,13 @@ namespace LotR.Cards.Encounter.Enemies
                 state.AddEffect(this);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var enemy = state.GetState<IEnemyInPlay>(Source.Id);
+                var enemy = game.GetState<IEnemyInPlay>(Source.Id);
                 if (enemy == null)
                     return;
 
-                state.AddEffect(new AttackModifier(state.CurrentPhase, Source, enemy, TimeScope.Round, 1));
+                game.AddEffect(new AttackModifier(game.CurrentPhase, Source, enemy, TimeScope.Round, 1));
             }
         }
 
@@ -60,9 +60,9 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override IChoice GetChoice(IGameState state)
+            public override IChoice GetChoice(IGame game)
             {
-                var enemyAttack = state.GetStates<IEnemyAttack>().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyAttack = game.GetStates<IEnemyAttack>().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return null;
 
@@ -87,9 +87,9 @@ namespace LotR.Cards.Encounter.Enemies
                 return new PlayersChooseCards<IAttachableCard>("Defending player must choose 1 attachment he controls", Source, new List<IPlayer> { enemyAttack.DefendingPlayer }, 1, attachments);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var enemyAttack = state.GetStates<IEnemyAttack>().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyAttack = game.GetStates<IEnemyAttack>().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return;
 
@@ -116,7 +116,7 @@ namespace LotR.Cards.Encounter.Enemies
                 }
                 else if (attachmentToDiscard is IObjectiveCard)
                 {
-                    var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                    var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
                     if (stagingArea == null)
                         return;
 

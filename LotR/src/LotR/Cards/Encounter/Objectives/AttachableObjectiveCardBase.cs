@@ -21,7 +21,7 @@ namespace LotR.Cards.Encounter.Objectives
             protected set;
         }
 
-        public virtual bool CanBeAttachedTo(IGameState state, ICanHaveAttachments cardInPlay)
+        public virtual bool CanBeAttachedTo(IGame game, ICanHaveAttachments cardInPlay)
         {
             return true;
         }

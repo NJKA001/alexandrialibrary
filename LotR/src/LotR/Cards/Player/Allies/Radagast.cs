@@ -23,14 +23,14 @@ namespace LotR.Cards.Player.Allies
 
         public override void DuringCheckForResourceIcon(ICheckForResourceIcon state)
         {
-            var gameState = state.GetStates<IGameState>().FirstOrDefault();
-            if (gameState == null)
-                return;
-
             if (state.CostlyCard == null)
                 return;
 
-            if (!gameState.CardHasTrait(state.CostlyCard, Trait.Creature))
+            var game = state.GetStates<IGame>().FirstOrDefault();
+            if (game == null)
+                return;
+
+            if (!game.CardHasTrait(state.CostlyCard, Trait.Creature))
                 return;
 
             state.HasResourceIcon = true;
@@ -44,21 +44,21 @@ namespace LotR.Cards.Player.Allies
             {
             }
 
-            public override IChoice GetChoice(IGameState state)
+            public override IChoice GetChoice(IGame game)
             {
-                return new ChooseCharacterWithTrait(Source, state.ActivePlayer, Trait.Creature);
+                return new ChooseCharacterWithTrait(Source, game.ActivePlayer, Trait.Creature);
             }
 
-            public override ICost GetCost(IGameState state)
+            public override ICost GetCost(IGame game)
             {
-                var resourceful = state.GetState<IResourcefulInPlay>(Source.Id);
+                var resourceful = game.GetState<IResourcefulInPlay>(Source.Id);
                 if (resourceful == null)
                     return null;
 
                 return new PayResourcesFrom(Source, resourceful, 0, true);
             }
 
-            public override bool PaymentAccepted(IGameState state, IPayment payment, IChoice choice)
+            public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
             {
                 var resourcePayment = payment as IResourcePayment;
                 if (resourcePayment == null)
@@ -82,7 +82,7 @@ namespace LotR.Cards.Player.Allies
                 return true;
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
                 var resourcePayment = payment as IResourcePayment;
                 if (resourcePayment == null)
@@ -96,7 +96,7 @@ namespace LotR.Cards.Player.Allies
                 if (creatureChoice == null || creatureChoice.ChosenCharacter == null)
                     return;
 
-                if (!state.CardInPlayHasTrait(creatureChoice.ChosenCharacter, Trait.Creature))
+                if (!game.CardInPlayHasTrait(creatureChoice.ChosenCharacter, Trait.Creature))
                     return;
 
                 var damageable = creatureChoice.ChosenCharacter as IDamagableInPlay;

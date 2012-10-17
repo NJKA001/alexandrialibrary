@@ -31,25 +31,25 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override IChoice GetChoice(IGameState state)
+            public override IChoice GetChoice(IGame game)
             {
-                if (state.CurrentPhase != Phase.Quest)
+                if (game.CurrentPhase != Phase.Quest)
                     return null;
 
-                var committedToQuest = state.GetStates<ICharactersCommittedToQuest>().FirstOrDefault();
+                var committedToQuest = game.GetStates<ICharactersCommittedToQuest>().FirstOrDefault();
                 if (committedToQuest == null)
                     return null;
 
-                var questingCharacters = committedToQuest.GetCharactersCommittedToQuest(state.FirstPlayer.StateId);
+                var questingCharacters = committedToQuest.GetCharactersCommittedToQuest(game.FirstPlayer.StateId);
                 if (questingCharacters.Count() == 0)
                     return null;
 
-                var availableCharacters = new Dictionary<Guid, IList<IWillpowerfulCard>> { { state.FirstPlayer.StateId, questingCharacters.Select(x => x.Card).ToList() } };
+                var availableCharacters = new Dictionary<Guid, IList<IWillpowerfulCard>> { { game.FirstPlayer.StateId, questingCharacters.Select(x => x.Card).ToList() } };
 
-                return new PlayersChooseCards<IWillpowerfulCard>("The first player chooses 1 character currently commited to a quest", Source, new List<IPlayer> { state.FirstPlayer }, 1, availableCharacters);
+                return new PlayersChooseCards<IWillpowerfulCard>("The first player chooses 1 character currently commited to a quest", Source, new List<IPlayer> { game.FirstPlayer }, 1, availableCharacters);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
                 var characterChoice = choice as IPlayersChooseCards<IWillpowerfulCard>;
                 if (characterChoice == null)
@@ -65,15 +65,15 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var enemyAttack = state.GetStates<IEnemyAttack>().FirstOrDefault();
+                var enemyAttack = game.GetStates<IEnemyAttack>().FirstOrDefault();
                 if (enemyAttack == null)
                     return;
 
                 var bonus = enemyAttack.IsUndefended ? 3 : 1;
 
-                state.AddEffect(new AttackModifier(state.CurrentPhase, Source, enemyAttack.Enemy, TimeScope.None, bonus));
+                game.AddEffect(new AttackModifier(game.CurrentPhase, Source, enemyAttack.Enemy, TimeScope.None, bonus));
             }
         }
     }

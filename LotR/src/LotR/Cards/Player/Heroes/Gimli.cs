@@ -43,13 +43,13 @@ namespace LotR.Cards.Player.Heroes
                 state.AddEffect(this);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var determineStrength = state.GetStates<IDetermineAttack>().Where(x => x.Attacker.Card.Id == Source.Id).FirstOrDefault();
+                var determineStrength = game.GetStates<IDetermineAttack>().Where(x => x.Attacker.Card.Id == Source.Id).FirstOrDefault();
                 if (determineStrength == null)
                     return;
 
-                var damagable = state.GetState<IDamagableInPlay>(Source.Id);
+                var damagable = game.GetState<IDamagableInPlay>(Source.Id);
                 if (damagable == null)
                     return;
 

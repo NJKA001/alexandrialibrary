@@ -11,13 +11,16 @@ using LotR.Cards.Player.Heroes;
 namespace LotR.States.Areas
 {
     public interface IPlayerArea
-        : IArea, IInPlay
+        : IArea
     {
         IPlayer Player { get; }
-        IEnumerable<ICardInPlay<IAttachableCard>> PlayerDeckAttachments { get; }
+        IEnumerable<IAttachableInPlay> PlayerDeckAttachments { get; }
 
         IEnumerable<ICardInPlay> CardsInPlay { get; }
         IEnumerable<IEnemyInPlay> EngagedEnemies { get; }
+
+        void AddPlayerDeckAttachment(IAttachableInPlay attachment);
+        void RemovePlayerDeckAttachment(IAttachableInPlay attachment);
 
         void AddCard(ICardInPlay card);
         void RemoveCard(ICardInPlay card);

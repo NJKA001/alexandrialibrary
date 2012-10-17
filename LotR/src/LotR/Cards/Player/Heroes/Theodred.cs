@@ -36,17 +36,17 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public void AfterCommittingToQuest(IGameState state)
+            public void AfterCommittingToQuest(IGame game)
             {
                 //var self = step.CommitedCharacters.Where(x => x.CardId == Source.Id).Select(x => x.Card).FirstOrDefault();
 
                 //if (self == null)
                 //    return;
 
-                state.AddEffect(this);
+                game.AddEffect(this);
             }
 
-            public override ICost GetCost(IGameState state)
+            public override ICost GetCost(IGame game)
             {
                 //var commitStep = step as ICommitToQuestStep;
                 //if (commitStep == null)
@@ -56,7 +56,7 @@ namespace LotR.Cards.Player.Heroes
                 return null;
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
                 //if (!(step is ICommitToQuestStep))
                 //    return;

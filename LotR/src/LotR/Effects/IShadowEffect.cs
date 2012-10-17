@@ -10,6 +10,6 @@ namespace LotR.Effects
     public interface IShadowEffect
         : ICardEffect, IPassiveEffect
     {
-        void Shadow(IGameState state);
+        void Shadow(IGame game);
     }
 }

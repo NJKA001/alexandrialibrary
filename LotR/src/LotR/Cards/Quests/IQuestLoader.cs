@@ -14,6 +14,6 @@ namespace LotR.Cards.Quests
         IEnumerable<IQuestCard> QuestCards { get; }
         IEnumerable<IEncounterCard> EncounterCards { get; }
 
-        IQuestArea Load(ScenarioCode scenario);
+        IQuestArea Load(IGame game, ScenarioCode scenario);
     }
 }

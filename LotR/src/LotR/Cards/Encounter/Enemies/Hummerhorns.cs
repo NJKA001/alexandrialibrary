@@ -36,16 +36,16 @@ namespace LotR.Cards.Encounter.Enemies
                 state.AddEffect(this);
             }
 
-            public override IChoice GetChoice(IGameState state)
+            public override IChoice GetChoice(IGame game)
             {
-                var enemyEngage = state.GetStates<IEnemyEngage>().FirstOrDefault();
+                var enemyEngage = game.GetStates<IEnemyEngage>().FirstOrDefault();
                 if (enemyEngage == null)
                     return null;
 
                 return new ChooseHero(Source, enemyEngage.DefendingPlayer);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
                 var heroChoice = choice as IChooseHero;
                 if (heroChoice == null)
@@ -67,9 +67,9 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var enemyAttack = state.GetStates<IEnemyAttack>().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyAttack = game.GetStates<IEnemyAttack>().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return;
 

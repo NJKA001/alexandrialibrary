@@ -15,9 +15,9 @@ namespace LotR.Effects
         {
         }
 
-        public virtual void WhenRevealed(IGameState state)
+        public virtual void WhenRevealed(IGame game)
         {
-            state.AddEffect(this);
+            game.AddEffect(this);
         }
     }
 }

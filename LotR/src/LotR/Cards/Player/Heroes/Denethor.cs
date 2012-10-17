@@ -35,16 +35,16 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public override ICost GetCost(IGameState state)
+            public override ICost GetCost(IGame game)
             {
-                var exhaustable = state.GetState<IExhaustableInPlay>(Source.Id);
+                var exhaustable = game.GetState<IExhaustableInPlay>(Source.Id);
                 if (exhaustable == null)
                     return null;
 
                 return new ExhaustSelf(exhaustable);
             }
 
-            public override bool PaymentAccepted(IGameState state, IPayment payment, IChoice choice)
+            public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
             {
                 var exhaustPayment = payment as IExhaustCardPayment;
                 if (exhaustPayment == null || exhaustPayment.Exhaustable == null || exhaustPayment.Exhaustable.IsExhausted)
@@ -52,7 +52,7 @@ namespace LotR.Cards.Player.Heroes
 
                 exhaustPayment.Exhaustable.Exhaust();
 
-                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
                 if (stagingArea == null)
                     return false;
 
@@ -65,13 +65,13 @@ namespace LotR.Cards.Player.Heroes
                 return true;
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
                 var topOfDeckChoice = choice as IChooseTopOrBottomOfDeck;
                 if (topOfDeckChoice == null)
                     return;
 
-                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
                 if (stagingArea == null)
                     return;
 

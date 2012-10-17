@@ -9,6 +9,6 @@ namespace LotR.Effects.Phases.Combat
 {
     public interface IBeforeChoosingEnemyToAttack
     {
-        void BeforeChoosingEnemyToAttack(IGameState state);
+        void BeforeChoosingEnemyToAttack(IGame game);
     }
 }

@@ -76,7 +76,7 @@ namespace LotR.Cards.Encounter.Objectives
             get { return 0; }
         }
 
-        public ICost GetResourceCost(IGameState state)
+        public ICost GetResourceCost(IGame game)
         {
             return new PayResources(this, PrintedSphere, PrintedCost, false);
         }

@@ -11,8 +11,8 @@ namespace LotR.States
     public abstract class AttachmentHostInPlay
         : CardInPlay<IAttachmentHostCard>, IAttachmentHostInPlay
     {
-        public AttachmentHostInPlay(IAttachmentHostCard card)
-            : base(card)
+        public AttachmentHostInPlay(IGame game, IAttachmentHostCard card)
+            : base(game, card)
         {
         }
 

@@ -11,8 +11,8 @@ namespace LotR.States
         : StateBase, ICardInHand<T>
         where T : ICard
     {
-        public CardInHand(T card)
-            : base(GetStateId(card))
+        public CardInHand(IGame gameState, T card)
+            : base(gameState, GetStateId(card))
         {
             if (card == null)
                 throw new ArgumentNullException("card");

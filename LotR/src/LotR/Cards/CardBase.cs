@@ -114,5 +114,11 @@ namespace LotR.Cards
             get;
             protected set;
         }
+
+        public bool HasEffect<T>()
+            where T : IEffect
+        {
+            return (Text.Effects.OfType<T>().Count() > 0);
+        }
     }
 }

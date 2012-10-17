@@ -16,7 +16,7 @@ namespace LotR.Cards.Player.Attachments
         {
         }
 
-        public override bool CanBeAttachedTo(IGameState state, ICanHaveAttachments card)
+        public override bool CanBeAttachedTo(IGame game, ICanHaveAttachments card)
         {
             return (card is IHeroCard);
         }

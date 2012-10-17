@@ -32,9 +32,9 @@ namespace LotR.Cards.Quests
             {
             }
 
-            public void Setup(IGameState state)
+            public void Setup(IGame game)
             {
-                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
                 if (stagingArea == null)
                     return;
 

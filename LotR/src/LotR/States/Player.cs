@@ -13,7 +13,8 @@ namespace LotR.States
     public class Player
         : StateBase, IPlayer
     {
-        public Player(string name, IPlayerDeck deck)
+        public Player(IGame game, string name, IPlayerDeck deck)
+            : base(game)
         {
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -22,12 +23,13 @@ namespace LotR.States
 
             this.name = name;
             this.deck = deck;
+            this.hand = new Hand<IPlayerCard>(game);
             this.currentThreat = deck.Threat;
         }
 
         private readonly string name;
         private readonly IPlayerDeck deck;
-        private readonly IHand<IPlayerCard> hand = new Hand<IPlayerCard>();
+        private readonly IHand<IPlayerCard> hand;
 
         private byte currentThreat;
         private bool isFirstPlayer;

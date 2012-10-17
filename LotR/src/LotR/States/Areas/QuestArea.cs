@@ -12,7 +12,8 @@ namespace LotR.States.Areas
     public class QuestArea
         : AreaBase, IQuestArea
     {
-        public QuestArea(IDeck<IQuestCard> questDeck, IEnumerable<IDeck<IEncounterCard>> encounterDecks)
+        public QuestArea(IGame game, IDeck<IQuestCard> questDeck, IEnumerable<IDeck<IEncounterCard>> encounterDecks)
+            : base(game)
         {
             if (questDeck == null)
                 throw new ArgumentNullException("questDeck");

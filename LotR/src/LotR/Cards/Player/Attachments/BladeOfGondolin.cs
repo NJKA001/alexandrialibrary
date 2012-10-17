@@ -33,7 +33,7 @@ namespace LotR.Cards.Player.Attachments
             AddEffect(new AddOneProgressTokenAfterDefeatingAnEnemy(this));
         }
 
-        public override bool CanBeAttachedTo(IGameState state, ICanHaveAttachments cardInPlay)
+        public override bool CanBeAttachedTo(IGame game, ICanHaveAttachments cardInPlay)
         {
             if (cardInPlay == null)
                 throw new ArgumentNullException("cardInPlay");
@@ -55,15 +55,15 @@ namespace LotR.Cards.Player.Attachments
                 if (determineStrength == null)
                     return;
 
-                var enemy = state.GetState<IEnemyInPlay>(determineStrength.Defender.Card.Id);
+                var game = state.GetStates<IGame>().FirstOrDefault();
+                if (game == null)
+                    return;
+
+                var enemy = game.GetState<IEnemyInPlay>(determineStrength.Defender.Card.Id);
                 if (enemy == null)
                     return;
 
-                var gameState = state.GetStates<IGameState>().FirstOrDefault();
-                if (gameState == null)
-                    return;
-
-                if (!gameState.CardInPlayHasTrait(enemy, Trait.Orc))
+                if (!game.CardInPlayHasTrait(enemy, Trait.Orc))
                     return;
 
                 determineStrength.Attack += 1;
@@ -80,7 +80,11 @@ namespace LotR.Cards.Player.Attachments
 
             public void AfterEnemyDefeated(IEnemyDefeated state)
             {
-                var attachment = state.GetState<IAttachmentInPlay>(Source.Id);
+                var game = state.GetStates<IGame>().FirstOrDefault();
+                if (game == null)
+                    return;
+
+                var attachment = game.GetState<IAttachmentInPlay>(Source.Id);
                 if (attachment == null)
                     return;
 
@@ -91,12 +95,12 @@ namespace LotR.Cards.Player.Attachments
                 if (!state.Attackers.Any(x => x.Card.Id == hero.Id))
                     return;
 
-                state.AddEffect(this);
+                game.AddEffect(this);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var questArea = state.GetStates<IQuestArea>().FirstOrDefault();
+                var questArea = game.GetStates<IQuestArea>().FirstOrDefault();
                 if (questArea == null)
                     return;
 

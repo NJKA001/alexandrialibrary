@@ -32,7 +32,11 @@ namespace LotR.Cards.Quests
 
             public void BeforeStageDefeated(ICurrentQuestStage state)
             {
-                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                var game = state.GetStates<IGame>().FirstOrDefault();
+                if (game == null)
+                    return;
+
+                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
                 if (stagingArea == null)
                     return;
 

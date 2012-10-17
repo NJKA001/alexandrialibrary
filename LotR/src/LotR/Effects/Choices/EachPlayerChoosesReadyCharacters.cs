@@ -22,22 +22,22 @@ namespace LotR.Effects.Choices
             this.heroesOnly = heroesOnly;
         }
 
-        public EachPlayerChoosesReadyCharacters(ISource source, IGameState state, byte numberOfCharacters)
-            : this(source, state, numberOfCharacters, false)
+        public EachPlayerChoosesReadyCharacters(ISource source, IGame game, byte numberOfCharacters)
+            : this(source, game, numberOfCharacters, false)
         {
         }
 
-        public EachPlayerChoosesReadyCharacters(ISource source, IGameState state, byte numberOfCharacters, bool heroesOnly)
-            : base(GetDescription(state, numberOfCharacters, heroesOnly), source, GetPlayers(state), numberOfCharacters, GetAvailableCharacters(state, heroesOnly))
+        public EachPlayerChoosesReadyCharacters(ISource source, IGame game, byte numberOfCharacters, bool heroesOnly)
+            : base(GetDescription(game, numberOfCharacters, heroesOnly), source, GetPlayers(game), numberOfCharacters, GetAvailableCharacters(game, heroesOnly))
         {
             this.heroesOnly = heroesOnly;
         }
 
         private bool heroesOnly = false;
 
-        private static IEnumerable<IPlayer> GetPlayers(IGameState state)
+        private static IEnumerable<IPlayer> GetPlayers(IGame game)
         {
-            return state.GetStates<IPlayer>();
+            return game.GetStates<IPlayer>();
         }
 
         private static string GetDescription(IPlayer player, byte numberOfCharacters, bool heroesOnly)
@@ -54,9 +54,9 @@ namespace LotR.Effects.Choices
             }
         }
 
-        private static string GetDescription(IGameState state, byte numberOfCharacters, bool heroesOnly)
+        private static string GetDescription(IGame game, byte numberOfCharacters, bool heroesOnly)
         {
-            var players = GetPlayers(state);
+            var players = GetPlayers(game);
             if (players.Count() == 1)
             {
                 return GetDescription(players.First(), numberOfCharacters, heroesOnly);
@@ -98,11 +98,11 @@ namespace LotR.Effects.Choices
             }
         }
 
-        private static IDictionary<Guid, IList<ICharacterInPlay>> GetAvailableCharacters(IGameState state, bool heroesOnly)
+        private static IDictionary<Guid, IList<ICharacterInPlay>> GetAvailableCharacters(IGame game, bool heroesOnly)
         {
             var availableCharacters = new Dictionary<Guid, IList<ICharacterInPlay>>();
 
-            foreach (var player in GetPlayers(state))
+            foreach (var player in GetPlayers(game))
             {
                 AddReadyCharacters(player, availableCharacters, heroesOnly);
             }

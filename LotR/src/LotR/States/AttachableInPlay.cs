@@ -10,8 +10,8 @@ namespace LotR.States
     public class AttachableInPlay
         : CardInPlay<IAttachableCard>, IAttachableInPlay
     {
-        public AttachableInPlay(IAttachableCard card, IAttachmentHostInPlay attachedTo)
-            : base(card)
+        public AttachableInPlay(IGame gameState, IAttachableCard card, IAttachmentHostInPlay attachedTo)
+            : base(gameState, card)
         {
             this.AttachedTo = attachedTo;
         }

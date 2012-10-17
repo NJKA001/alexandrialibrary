@@ -16,8 +16,8 @@ namespace LotR.States
         : StateBase, ICardInPlay<T>
         where T : ICard
     {
-        public CardInPlay(T card)
-            : base(GetStateId(card))
+        public CardInPlay(IGame game, T card)
+            : base(game, GetStateId(card))
         {
             if (card == null)
                 throw new ArgumentNullException("card");
@@ -46,9 +46,9 @@ namespace LotR.States
             get { return Card.Title; }
         }
 
-        public IPlayer GetController(IGameState state)
+        public IPlayer GetController(IGame game)
         {
-            foreach (var playerArea in state.GetStates<IPlayerArea>())
+            foreach (var playerArea in game.GetStates<IPlayerArea>())
             {
                 if (playerArea.IsControlledByPlayer(this))
                     return playerArea.Player;

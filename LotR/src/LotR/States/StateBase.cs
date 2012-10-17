@@ -9,18 +9,21 @@ namespace LotR.States
     public abstract class StateBase
         : IState, INotifyPropertyChanged
     {
-        protected StateBase()
+        protected StateBase(IGame gameState)
+            : this(gameState, Guid.NewGuid())
         {
-            this.stateId = Guid.NewGuid();
         }
 
-        protected StateBase(Guid stateId)
+        protected StateBase(IGame gameState, Guid stateId)
         {
+            if (gameState != null)
+                AddState(gameState);
+
             this.stateId = stateId;
         }
 
         private readonly Guid stateId;
-        private readonly IList<IState> states = new List<IState>();
+        private readonly IDictionary<Guid, IState> states = new Dictionary<Guid, IState>();
 
         protected void OnPropertyChanged(string propertyName)
         {
@@ -32,15 +35,18 @@ namespace LotR.States
 
         protected void AddState(IState state)
         {
-            states.Add(state);
+            if (states.ContainsKey(state.StateId))
+                return;
+
+            states.Add(state.StateId, state);
         }
 
         protected void RemoveState(IState state)
         {
-            if (!states.Contains(state))
+            if (!states.ContainsKey(state.StateId))
                 return;
 
-            states.Remove(state);
+            states.Remove(state.StateId);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -51,13 +57,13 @@ namespace LotR.States
         }
 
         public T GetState<T>(Guid stateId)
-            where T : IState
+            where T : class, IState
         {
-            return states.OfType<T>().Where(x => x.StateId == stateId).FirstOrDefault();
+            return states.ContainsKey(stateId) ? states[stateId] as T : null;
         }
 
         public IEnumerable<T> GetStates<T>()
-            where T : IState
+            where T : class, IState
         {
             return states.OfType<T>();
         }

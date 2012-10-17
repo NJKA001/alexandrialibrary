@@ -20,5 +20,6 @@ namespace LotR.Cards
 
         bool IsUnique { get; }
         IEnumerable<Trait> PrintedTraits { get; }
+        bool HasEffect<T>() where T : IEffect;
     }
 }

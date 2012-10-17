@@ -30,9 +30,9 @@ namespace LotR.Cards.Encounter.Locations
             {
             }
 
-            public override bool PaymentAccepted(IGameState state, IPayment payment, IChoice choice)
+            public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
             {
-                var stagingArea = state.GetStates<IStagingArea>().FirstOrDefault();
+                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
                 if (stagingArea == null)
                     return false;
 
@@ -58,9 +58,9 @@ namespace LotR.Cards.Encounter.Locations
                 state.AddEffect(this);
             }
 
-            public override IChoice GetChoice(IGameState state)
+            public override IChoice GetChoice(IGame game)
             {
-                var players = state.GetStates<IPlayer>();
+                var players = game.GetStates<IPlayer>();
                 if (players.Count() == 0)
                     return null;
 
@@ -74,7 +74,7 @@ namespace LotR.Cards.Encounter.Locations
                 return new PlayersChooseCards<IPlayerCard>("each player may search the top 5 cards of his deck for 1 card of their choice", Source, players, 1, availableCards);
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
                 var cardChoice = choice as IPlayersChooseCards<IPlayerCard>;
                 if (cardChoice == null)

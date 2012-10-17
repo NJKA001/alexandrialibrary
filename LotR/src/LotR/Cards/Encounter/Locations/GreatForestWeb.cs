@@ -27,18 +27,18 @@ namespace LotR.Cards.Encounter.Locations
             {
             }
 
-            public override IChoice GetChoice(IGameState state)
+            public override IChoice GetChoice(IGame game)
             {
-                return new EachPlayerChoosesReadyCharacters(Source, state, 1, true);
+                return new EachPlayerChoosesReadyCharacters(Source, game, 1, true);
             }
 
-            public override bool PaymentAccepted(IGameState state, IPayment payment, IChoice choice)
+            public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
             {
                 var characterChoice = choice as IPlayersChooseCharacters;
                 if (characterChoice == null)
                     return false;
 
-                var players = state.GetStates<IPlayer>();
+                var players = game.GetStates<IPlayer>();
                 if (players.Count() == 0)
                     return false;
 

@@ -13,7 +13,7 @@ namespace LotR.States
     {
         string Title { get; }
 
-        IPlayer GetController(IGameState state);
+        IPlayer GetController(IGame game);
     }
 
     public interface ICardInPlay<T>

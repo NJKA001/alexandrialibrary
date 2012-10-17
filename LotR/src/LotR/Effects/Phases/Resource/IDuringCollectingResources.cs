@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.States.Phases.Resource;
+
 namespace LotR.Effects.Phases.Resource
 {
-    interface IDuringCollectingResources
+    public interface IDuringCollectingResources
     {
+        void DuringCollectingResource(ICollectingResources state);
     }
 }

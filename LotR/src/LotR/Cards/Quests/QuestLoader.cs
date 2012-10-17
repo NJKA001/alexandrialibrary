@@ -79,7 +79,7 @@ namespace LotR.Cards.Quests
             get { return questCards; }
         }
 
-        public IQuestArea Load(ScenarioCode scenario)
+        public IQuestArea Load(IGame game, ScenarioCode scenario)
         {
             var quests = GetCards<IQuestCard>(questCards);
 
@@ -94,13 +94,15 @@ namespace LotR.Cards.Quests
                 {
                     var encounters = GetCards(encounterCards.Where(x => quest.EncounterSets.Contains(x.EncounterSet)));
                     var encounterDeck = new Deck<IEncounterCard>(encounters);
+                    encounterDeck.Shuffle();
+
                     encounterDecks.Add(encounterDeck);
                 }
 
                 encounterSets = quest.EncounterSets;
             }
 
-            return new QuestArea(questDeck, encounterDecks);
+            return new QuestArea(game, questDeck, encounterDecks);
         }
     }
 }

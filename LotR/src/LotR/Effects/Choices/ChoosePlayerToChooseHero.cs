@@ -34,7 +34,7 @@ namespace LotR.Effects.Choices
             set;
         }
 
-        public override bool IsValid(IGameState state)
+        public override bool IsValid(IGame game)
         {
             if (this.ChosenPlayer == null)
                 return false;
@@ -45,7 +45,7 @@ namespace LotR.Effects.Choices
             if (ChosenHero == null)
                 return false;
 
-            var controller = ChosenHero.GetController(state);
+            var controller = ChosenHero.GetController(game);
 
             if (controller == null || controller.StateId != ChosenPlayer.StateId)
                 return false;

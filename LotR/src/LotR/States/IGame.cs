@@ -5,10 +5,11 @@ using System.Text;
 
 using LotR.Cards;
 using LotR.Effects;
+using LotR.States.Areas;
 
 namespace LotR.States
 {
-    public interface IGameState
+    public interface IGame
         : IState
     {
         Phase CurrentPhase { get; }
@@ -21,6 +22,7 @@ namespace LotR.States
 
         IPlayer ActivePlayer { get; }
         IPlayer FirstPlayer { get; }
-        //IPlayer GetController(Guid cardId);
+
+        void Setup(IQuestArea questArea, IEnumerable<IPlayer> players);
     }
 }

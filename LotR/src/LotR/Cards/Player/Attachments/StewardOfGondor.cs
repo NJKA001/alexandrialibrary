@@ -30,7 +30,7 @@ namespace LotR.Cards.Player.Attachments
             AddEffect(new ExhaustToAddTwoResources(this));
         }
 
-        public override bool CanBeAttachedTo(IGameState state, ICanHaveAttachments cardInPlay)
+        public override bool CanBeAttachedTo(IGame game, ICanHaveAttachments cardInPlay)
         {
             if (cardInPlay == null)
                 throw new ArgumentNullException("cardInPlay");
@@ -70,16 +70,16 @@ namespace LotR.Cards.Player.Attachments
             {
             }
 
-            public override ICost GetCost(IGameState state)
+            public override ICost GetCost(IGame game)
             {
-                var exhaustable = state.GetState<IExhaustableInPlay>(Source.Id);
+                var exhaustable = game.GetState<IExhaustableInPlay>(Source.Id);
                 if (exhaustable == null)
                     return null;
 
                 return new ExhaustSelf(exhaustable);
             }
 
-            public override bool PaymentAccepted(IGameState state, IPayment payment, IChoice choice)
+            public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
             {
                 if (payment == null)
                     return false;
@@ -93,9 +93,9 @@ namespace LotR.Cards.Player.Attachments
                 return true;
             }
 
-            public override void Resolve(IGameState state, IPayment payment, IChoice choice)
+            public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var attachment = state.GetState<IAttachmentInPlay>(Source.Id);
+                var attachment = game.GetState<IAttachmentInPlay>(Source.Id);
                 if (attachment == null || attachment.AttachedTo == null)
                     return;
 

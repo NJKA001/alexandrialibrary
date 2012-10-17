@@ -15,14 +15,16 @@ namespace LotR.Cards
         private readonly IQuestLoader questLoader = new QuestLoader();
         private readonly IPlayerDeckLoader playerDeckLoader = new PlayerDeckLoader();
 
-        public IGameState Load(IEnumerable<PlayerInfo> playersInfo, ScenarioCode scenario)
+        public IGame Load(IEnumerable<PlayerInfo> playersInfo, ScenarioCode scenarioCode)
         {
             if (playersInfo == null)
                 throw new ArgumentNullException("playersInfo");
             if (playersInfo.Count() == 0)
                 throw new ArgumentException("playersInfo is empty");
 
-            var questArea = questLoader.Load(scenario);
+            var game = new Game();
+
+            var questArea = questLoader.Load(game, scenarioCode);
 
             var players = new List<IPlayer>();
 
@@ -31,11 +33,13 @@ namespace LotR.Cards
                 var playerDeck = playerDeckLoader.Load(info.DeckPath);
                 if (playerDeck != null)
                 {
-                    players.Add(new LotR.States.Player(info.Name, playerDeck));
+                    players.Add(new LotR.States.Player(game, info.Name, playerDeck));
                 }
             }
 
-            return new GameState(questArea, players);
+            game.Setup(questArea, players);
+
+            return game;
         }
     }
 }

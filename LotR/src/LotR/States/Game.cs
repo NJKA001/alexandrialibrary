@@ -9,26 +9,15 @@ using LotR.States.Areas;
 
 namespace LotR.States
 {
-    public class GameState
-        : StateBase, IGameState
+    public class Game
+        : StateBase, IGame
     {
-        public GameState(IQuestArea questArea, IEnumerable<IPlayer> players)
+        public Game()
+            : base(null)
         {
-            if (questArea == null)
-                throw new ArgumentNullException("questArea");
-            if (players == null)
-                throw new ArgumentNullException("players");
-            if (players.Count() == 0)
-                throw new ArgumentException("list of players cannot be empty");
-            if (players.Any(x => x == null))
-                throw new ArgumentException("list of players cannot contain nulls");
-
-            AddState(questArea);
-
-            foreach (var player in players)
-                AddState(player);
         }
 
+        private readonly IList<IPlayer> players = new List<IPlayer>();
         private readonly IList<IEffect> currentEffects = new List<IEffect>();
 
         public Phase CurrentPhase
@@ -72,6 +61,31 @@ namespace LotR.States
         {
             get;
             private set;
+        }
+
+        public void Setup(IQuestArea questArea, IEnumerable<IPlayer> players)
+        {
+            if (questArea == null)
+                throw new ArgumentNullException("questArea");
+            if (players == null)
+                throw new ArgumentNullException("players");
+            if (players.Count() == 0)
+                throw new ArgumentException("list of players cannot be empty");
+            if (players.Any(x => x == null))
+                throw new ArgumentException("list of players cannot contain nulls");
+
+            AddState(questArea);
+
+            foreach (var player in players)
+            {
+                this.players.Add(player);
+                var playerArea = new PlayerArea(this, player);
+                AddState(player);
+                AddState(playerArea);
+            }
+
+            FirstPlayer = players.First();
+            ActivePlayer = FirstPlayer;
         }
     }
 }

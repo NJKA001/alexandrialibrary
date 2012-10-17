@@ -21,7 +21,7 @@ namespace LotR.Cards.Player.Attachments
             AddTrait(Trait.Armor);
         }
 
-        public override bool CanBeAttachedTo(IGameState state, ICanHaveAttachments cardInPlay)
+        public override bool CanBeAttachedTo(IGame game, ICanHaveAttachments cardInPlay)
         {
             if (cardInPlay == null)
                 throw new ArgumentNullException("cardInPlay");

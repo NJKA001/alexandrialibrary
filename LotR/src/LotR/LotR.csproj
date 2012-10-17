@@ -112,12 +112,14 @@
     <Compile Include="Effects\WhenRevealedEffectBase.cs" />
     <Compile Include="States\Areas\AreaBase.cs" />
     <Compile Include="States\Areas\IQuestArea.cs" />
+    <Compile Include="States\Areas\PlayerArea.cs" />
     <Compile Include="States\Areas\QuestArea.cs" />
     <Compile Include="States\AttachableInPlay.cs" />
     <Compile Include="States\AttachmentHostInPlay.cs" />
     <Compile Include="States\CardInHand.cs" />
-    <Compile Include="States\GameState.cs" />
+    <Compile Include="States\Game.cs" />
     <Compile Include="States\Hand.cs" />
+    <Compile Include="States\HeroInPlay.cs" />
     <Compile Include="States\IAllyInPlay.cs" />
     <Compile Include="States\IAttachableInPlay.cs" />
     <Compile Include="States\IAttachmentHostInPlay.cs" />
@@ -263,6 +265,7 @@
     <Compile Include="States\Phases\Combat\IEnemyEngage.cs" />
     <Compile Include="States\Phases\Quest\ICharactersCommittedToQuest.cs" />
     <Compile Include="States\Phases\Refresh\ICardReadying.cs" />
+    <Compile Include="States\Phases\Resource\ICollectingResources.cs" />
     <Compile Include="States\Phases\Travel\ITravel.cs" />
     <Compile Include="States\PlayerCardInPlay.cs" />
     <Compile Include="States\PlayerDeck.cs" />
@@ -373,7 +376,6 @@
     <Compile Include="Effects\Payments\IPayment.cs" />
     <Compile Include="States\ICardInHand.cs" />
     <Compile Include="States\IOutOfPlay.cs" />
-    <Compile Include="States\IInPlay.cs" />
     <Compile Include="States\IPlayer.cs" />
     <Compile Include="Cards\Player\IPlayerCard.cs" />
     <Compile Include="Effects\IPlayerCardEffect.cs" />
@@ -457,7 +459,7 @@
     <Compile Include="States\Areas\IArea.cs" />
     <Compile Include="States\ICardInPlay.cs" />
     <Compile Include="States\Areas\IPlayerArea.cs" />
-    <Compile Include="States\IGameState.cs" />
+    <Compile Include="States\IGame.cs" />
     <Compile Include="States\IState.cs" />
     <Compile Include="States\Phase.cs" />
     <Compile Include="States\PlayerInfo.cs" />
@@ -466,7 +468,6 @@
   <ItemGroup>
     <Folder Include="States\Phases\Encounter\" />
     <Folder Include="States\Phases\Planning\" />
-    <Folder Include="States\Phases\Resource\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
