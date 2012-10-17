@@ -9,7 +9,7 @@ namespace LotR.Cards.Quests
         : ScenarioBase
     {
         public PassageThroughMirkwood()
-            : base("Passage Through Mirkwood", CardSet.Core)
+            : base("Passage Through Mirkwood", ScenarioCode.Passage_Through_Mirkwood, CardSet.Core)
         {
             AddEncounterSet(EncounterSet.Passage_Through_Mirkwood);
             AddEncounterSet(EncounterSet.Dol_Guldur_Orcs);
@@ -17,7 +17,8 @@ namespace LotR.Cards.Quests
 
             AddQuest(new FliesAndSpiders());
             AddQuest(new AForkInTheRoad());
-            //AddQuest(new 
+            AddQuest(new DontLeaveThePath());
+            AddQuest(new BeornsPath());
         }
     }
 }

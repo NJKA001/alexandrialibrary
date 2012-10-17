@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
+using LotR.Cards.Encounter;
 using LotR.Cards.Player;
 using LotR.Cards.Player.Allies;
 using LotR.Cards.Player.Attachments;
 using LotR.Cards.Player.Events;
 using LotR.Cards.Player.Heroes;
 using LotR.Cards.Player.Treasures;
+using LotR.Cards.Quests;
 using LotR.States;
 
 namespace LotR.Console
@@ -24,15 +26,19 @@ namespace LotR.Console
                 WriteLine("Simulator Console v. 1.0.0.0");
                 WriteLine();
 
-                reader = new PlayerDeckLoader();
+                playerDeckLoader = new PlayerDeckLoader();
+                questLoader = new QuestLoader();
 
                 var path = "SampleDeck.txt";
                 var deck = LoadDeck(path);
+                var questArea = questLoader.Load(ScenarioCode.Passage_Through_Mirkwood);
 
                 if (deck == null)
                     return;
 
                 DisplayDeck(deck);
+                DisplayQuests(questArea.QuestDeck);
+                DisplayEncounters(questArea.EncounterDecks);
 
                 var line = "start";
                 while (!string.IsNullOrEmpty(line))
@@ -40,7 +46,6 @@ namespace LotR.Console
                     WriteLine();
                     WriteLine("Drawing 6 Cards (press ENTER to stop)");
                     
-                    deck.Shuffle();
                     deck.Shuffle();
 
                     foreach (var card in deck.GetFromTop(6))
@@ -61,7 +66,8 @@ namespace LotR.Console
             }
         }
 
-        private static IPlayerDeckLoader reader;
+        private static IPlayerDeckLoader playerDeckLoader;
+        private static IQuestLoader questLoader;
 
         private static IPlayerDeck LoadDeck(string path)
         {
@@ -69,7 +75,7 @@ namespace LotR.Console
 
             try
             {
-                var deck = reader.Load(path);
+                var deck = playerDeckLoader.Load(path);
 
                 WriteLine("  Deck loaded");
 
@@ -82,10 +88,44 @@ namespace LotR.Console
             }
         }
 
+        private static void DisplayQuests(IDeck<IQuestCard> questDeck)
+        {
+            WriteLine();
+            if (questDeck.Size > 0)
+                WriteLine("Quest Deck: {0}", questDeck.Cards.First().Scenario.ToString().Replace('_', ' '));
+            else
+                WriteLine("Quest Deck: Unknown Scenario");
+
+            foreach (var quest in questDeck.Cards.OrderBy(x => x.Sequence))
+            {
+                WriteLine("{0,3} {1}", quest.Sequence, quest.Title);
+            }
+            WriteLine();
+        }
+
+        private static void DisplayEncounters(IEnumerable<IDeck<IEncounterCard>> encounterDecks)
+        {
+            WriteLine();
+            foreach (var encounterDeck in encounterDecks)
+            {
+                var encounterSet = EncounterSet.None;
+                foreach (var encounterCard in encounterDeck.Cards.OrderBy(x => x.EncounterSet).ThenBy(x => x.Title))
+                {
+                    if (encounterCard.EncounterSet != encounterSet)
+                        WriteLine("EncounterSet: {0}", encounterCard.EncounterSet.ToString().Replace('_', ' '));
+
+                    encounterSet = encounterCard.EncounterSet;
+
+                    WriteLine("{0,3} {1}", encounterCard.Quantity, encounterCard.Title);
+                }
+            }
+            WriteLine();
+        }
+
         private static void DisplayDeck(IPlayerDeck deck)
         {
             WriteLine();
-            WriteLine("Deck: {0}", deck.Name);
+            WriteLine("Player Deck: {0}", deck.Name);
             if (deck.Heroes.Count() > 0)
             {
                 WriteLine("Heroes: {0}", string.Join(", ", deck.Heroes.Select(x => x.Title)));

@@ -45,14 +45,15 @@ namespace LotR.Cards.Player
             }
         }
 
-        private IPlayerCard LookupPlayerCard(string title)
+        private IPlayerCard GetPlayerCard(string title)
         {
             var key = title;
             IPlayerCard card = null;
             
             if (playerCardMap.ContainsKey(key))
             {
-                return playerCardMap[key]; 
+                var prototype = playerCardMap[key];
+                card = GetCard<IPlayerCard>(prototype);
             }
             else if (!title.Contains('('))
             {
@@ -65,7 +66,9 @@ namespace LotR.Cards.Player
                     key = string.Format("{0} ({1})", title, cardSet);
                     if (playerCardMap.ContainsKey(key))
                     {
-                        return playerCardMap[key];
+                        var prototype = playerCardMap[key];
+                        card = GetCard<IPlayerCard>(prototype);
+                        break;
                     }
                 }
             }
@@ -144,7 +147,7 @@ namespace LotR.Cards.Player
                                 foreach (var heroToken in heroTokens.Where(x => x != null))
                                 {
                                     var heroTitle = heroToken.Trim();
-                                    var hero = LookupPlayerCard(heroTitle) as IHeroCard;
+                                    var hero = GetPlayerCard(heroTitle) as IHeroCard;
                                     if (hero != null)
                                     {
                                         heroes.Add(hero);
@@ -161,7 +164,7 @@ namespace LotR.Cards.Player
                         }
                         else if (lineMode == LineMode.Heroes)
                         {
-                            var hero = LookupPlayerCard(line.Trim()) as IHeroCard;
+                            var hero = GetPlayerCard(line.Trim()) as IHeroCard;
                             if (hero != null)
                             {
                                 heroes.Add(hero);
@@ -184,7 +187,7 @@ namespace LotR.Cards.Player
 
                                 for (var i = 0; i < number; i++)
                                 {
-                                    var card = LookupPlayerCard(cardTokens[0].Trim());
+                                    var card = GetPlayerCard(cardTokens[0].Trim());
                                     if (card != null)
                                     {
                                         if (i == 0)

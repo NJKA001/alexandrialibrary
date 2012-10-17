@@ -19,7 +19,7 @@ namespace LotR.Cards.Quests
         : QuestCardBase
     {
         public DontLeaveThePath()
-            : base("Don't Leave The Path", CardSet.Core, 121, Scenario.Passage_Through_Mirkwood, new List<EncounterSet> { EncounterSet.Dol_Guldur_Orcs, EncounterSet.Spiders_of_Mirkwood }, 3, 0, 0)
+            : base("Don't Leave The Path", CardSet.Core, 121, ScenarioCode.Passage_Through_Mirkwood, new List<EncounterSet> { EncounterSet.Passage_Through_Mirkwood, EncounterSet.Dol_Guldur_Orcs, EncounterSet.Spiders_of_Mirkwood }, 3, 0, 0)
         {
             AddEffect(new WhenRevealedEachPlayerSearchesForASpider(this));
             AddEffect(new PassivePlayersMustDefeatUngoliantsSpawn(this));

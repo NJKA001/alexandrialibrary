@@ -15,7 +15,7 @@ namespace LotR.Cards
         private readonly IQuestLoader questLoader = new QuestLoader();
         private readonly IPlayerDeckLoader playerDeckLoader = new PlayerDeckLoader();
 
-        public IGameState Load(IEnumerable<PlayerInfo> playersInfo, Scenario scenario)
+        public IGameState Load(IEnumerable<PlayerInfo> playersInfo, ScenarioCode scenario)
         {
             if (playersInfo == null)
                 throw new ArgumentNullException("playersInfo");

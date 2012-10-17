@@ -17,7 +17,7 @@ namespace LotR.Cards.Quests
         : QuestCardBase
     {
         public AForkInTheRoad()
-            : base("A Fork in the Road", CardSet.Core, 120, Scenario.Passage_Through_Mirkwood, new List<EncounterSet> { EncounterSet.Dol_Guldur_Orcs, EncounterSet.Spiders_of_Mirkwood }, 2, 2, 0)
+            : base("A Fork in the Road", CardSet.Core, 120, ScenarioCode.Passage_Through_Mirkwood, new List<EncounterSet> { EncounterSet.Passage_Through_Mirkwood, EncounterSet.Dol_Guldur_Orcs, EncounterSet.Spiders_of_Mirkwood }, 2, 2, 0)
         {
         }
 

@@ -17,7 +17,7 @@ namespace LotR.Cards.Quests
         : QuestCardBase
     {
         public BeornsPath()
-            : base("Beorn's Path", CardSet.Core, 122, Scenario.Passage_Through_Mirkwood, new List<EncounterSet> { EncounterSet.Dol_Guldur_Orcs, EncounterSet.Spiders_of_Mirkwood }, 3, 10, 0)
+            : base("Beorn's Path", CardSet.Core, 122, ScenarioCode.Passage_Through_Mirkwood, new List<EncounterSet> { EncounterSet.Passage_Through_Mirkwood, EncounterSet.Dol_Guldur_Orcs, EncounterSet.Spiders_of_Mirkwood }, 3, 10, 0)
         {
             AddEffect(new PassiveCannotBeDefeatedWhileUngoliantsSpawnInPlay(this));
         }

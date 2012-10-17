@@ -84,7 +84,7 @@
     <Compile Include="Cards\Quests\AForkInTheRoad.cs" />
     <Compile Include="Cards\Quests\BeornsPath.cs" />
     <Compile Include="Cards\Quests\DontLeaveThePath.cs" />
-    <Compile Include="Cards\Scenario.cs" />
+    <Compile Include="Cards\ScenarioCode.cs" />
     <Compile Include="Effects\Choices\ChooseCharacterWithTrait.cs" />
     <Compile Include="Effects\Choices\ChooseHero.cs" />
     <Compile Include="Effects\Choices\ChoosePlayerToChooseHero.cs" />

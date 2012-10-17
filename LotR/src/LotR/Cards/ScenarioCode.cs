@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LotR.Cards
 {
-    public enum Scenario
+    public enum ScenarioCode
     {
         None = 0,
         Passage_Through_Mirkwood = 10,

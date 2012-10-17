@@ -9,6 +9,6 @@ namespace LotR.Cards
 {
     public interface IGameLoader
     {
-        IGameState Load(IEnumerable<PlayerInfo> playersInfo, Scenario scenario);
+        IGameState Load(IEnumerable<PlayerInfo> playersInfo, ScenarioCode scenario);
     }
 }
