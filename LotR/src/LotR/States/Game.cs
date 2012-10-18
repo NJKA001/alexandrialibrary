@@ -51,6 +51,11 @@ namespace LotR.States
             return cardInPlay.Card.PrintedTraits.Contains(trait);
         }
 
+        public IEnumerable<IPlayer> Players
+        {
+            get { return players; }
+        }
+
         public IPlayer ActivePlayer
         {
             get;
@@ -79,9 +84,7 @@ namespace LotR.States
             foreach (var player in players)
             {
                 this.players.Add(player);
-                var playerArea = new PlayerArea(this, player);
                 AddState(player);
-                AddState(playerArea);
             }
 
             FirstPlayer = players.First();

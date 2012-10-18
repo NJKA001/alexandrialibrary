@@ -30,6 +30,9 @@ namespace LotR.States
         private readonly string name;
         private readonly IPlayerDeck deck;
         private readonly IHand<IPlayerCard> hand;
+        private readonly IDictionary<Guid, IAttachableInPlay> deckAttachments = new Dictionary<Guid, IAttachableInPlay>();
+        private readonly IDictionary<Guid, ICardInPlay> cardsInPlay = new Dictionary<Guid, ICardInPlay>();
+        private readonly IDictionary<Guid, IEnemyInPlay> engagedEnemies = new Dictionary<Guid, IEnemyInPlay>();
 
         private byte currentThreat;
         private bool isFirstPlayer;
@@ -47,6 +50,21 @@ namespace LotR.States
         public IHand<IPlayerCard> Hand
         {
             get { return hand; }
+        }
+
+        public IEnumerable<IAttachableInPlay> DeckAttachments
+        {
+            get { return deckAttachments.Values; }
+        }
+
+        public IEnumerable<ICardInPlay> CardsInPlay
+        {
+            get { return cardsInPlay.Values; }
+        }
+
+        public IEnumerable<IEnemyInPlay> EngagedEnemies
+        {
+            get { return engagedEnemies.Values; }
         }
 
         public byte CurrentThreat
@@ -89,6 +107,35 @@ namespace LotR.States
         {
             Hand.RemoveCards(cards);
             Deck.Discard(cards);
+        }
+
+        public void AddDeckAttachment(IAttachableInPlay attachment)
+        {
+        }
+
+        public void RemoveDeckAttachment(IAttachableInPlay attachment)
+        {
+        }
+
+        public void AddCardInPlay(ICardInPlay card)
+        {
+        }
+
+        public void RemoveCardInPlay(ICardInPlay card)
+        {
+        }
+
+        public void AddEngagedEnemy(IEnemyInPlay enemy)
+        {
+        }
+
+        public void RemoveEngagedEnemy(IEnemyInPlay enemy)
+        {
+        }
+
+        public bool IsTheControllerOf(ICardInPlay card)
+        {
+            return false;
         }
     }
 }

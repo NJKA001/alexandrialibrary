@@ -29,13 +29,9 @@ namespace LotR.Cards.Encounter.Treacheries
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                foreach (var player in game.GetStates<IPlayer>())
+                foreach (var player in game.Players)
                 {
-                    var playerArea = player.GetStates<IPlayerArea>().FirstOrDefault();
-                    if (playerArea == null)
-                        continue;
-
-                    foreach (var exhaustable in playerArea.CardsInPlay.OfType<IExhaustableInPlay>())
+                    foreach (var exhaustable in player.CardsInPlay.OfType<IExhaustableInPlay>())
                     {
                         if (!exhaustable.IsExhausted)
                             continue;

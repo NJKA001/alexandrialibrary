@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
+using LotR.Effects;
 using LotR.Effects.Phases.Any;
 
 namespace LotR.States
@@ -14,6 +15,8 @@ namespace LotR.States
         string Title { get; }
 
         IPlayer GetController(IGame game);
+
+        bool HasEffect<T>() where T : IEffect;
     }
 
     public interface ICardInPlay<T>

@@ -15,7 +15,10 @@ namespace LotR.States
     {
         string Name { get; }
         IPlayerDeck Deck { get; }
+        IEnumerable<IAttachableInPlay> DeckAttachments { get; }
         IHand<IPlayerCard> Hand { get; }
+        IEnumerable<ICardInPlay> CardsInPlay { get; }
+        IEnumerable<IEnemyInPlay> EngagedEnemies { get; }
 
         byte CurrentThreat { get; }
         bool IsFirstPlayer { get; set; }
@@ -23,5 +26,16 @@ namespace LotR.States
         void IncreaseThreat(byte value);
         void DecreaseThreat(byte value);
         void DiscardFromHand(IEnumerable<IPlayerCard> card);
+
+        void AddDeckAttachment(IAttachableInPlay attachment);
+        void RemoveDeckAttachment(IAttachableInPlay attachment);
+
+        void AddCardInPlay(ICardInPlay card);
+        void RemoveCardInPlay(ICardInPlay card);
+
+        void AddEngagedEnemy(IEnemyInPlay enemy);
+        void RemoveEngagedEnemy(IEnemyInPlay enemy);
+
+        bool IsTheControllerOf(ICardInPlay card);
     }
 }

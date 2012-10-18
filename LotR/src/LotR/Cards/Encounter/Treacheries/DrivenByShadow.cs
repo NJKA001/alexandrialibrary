@@ -99,17 +99,13 @@ namespace LotR.Cards.Encounter.Treacheries
 
             private void DiscardAllAttachmentsControlledByDefendingPlayer(IGame game, IEnemyAttack attack)
             {
-                var playerArea = attack.DefendingPlayer.GetStates<IPlayerArea>().FirstOrDefault();
-                if (playerArea == null)
-                    return;
-
-                foreach (var attachable in playerArea.CardsInPlay.OfType<IAttachableInPlay>().Where(x => playerArea.IsControlledByPlayer(x) && x.AttachedTo != null))
+                foreach (var attachable in attack.DefendingPlayer.CardsInPlay.OfType<IAttachableInPlay>().Where(x => attack.DefendingPlayer.IsTheControllerOf(x) && x.AttachedTo != null))
                 {
                     attachable.AttachedTo.RemoveAttachment(attachable);
 
                     if (attachable.Card is IPlayerCard)
                     {
-                        playerArea.Player.Deck.Discard(new List<IPlayerCard> { attachable.Card as IPlayerCard });
+                        attack.DefendingPlayer.Deck.Discard(new List<IPlayerCard> { attachable.Card as IPlayerCard });
                     }
                     else if (attachable.Card is IObjectiveCard)
                     {
@@ -143,19 +139,15 @@ namespace LotR.Cards.Encounter.Treacheries
                 if (card == null || controllingPlayer == null)
                     return;
 
-                var playerArea = controllingPlayer.GetStates<IPlayerArea>().FirstOrDefault();
-                if (playerArea == null)
-                    return;
-
-                var attachable = playerArea.GetCardInPlay(card.Id) as IAttachableInPlay;
-                if (attachable == null || attachable.AttachedTo == null || !playerArea.IsControlledByPlayer(attachable))
+                var attachable = controllingPlayer.CardsInPlay.OfType<IAttachableInPlay>().Where(x => x.Card.Id == card.Id).FirstOrDefault();
+                if (attachable == null || attachable.AttachedTo == null || !controllingPlayer.IsTheControllerOf(attachable))
                     return;
 
                 attachable.AttachedTo.RemoveAttachment(attachable);
 
                 if (attachable.Card is IPlayerCard)
                 {
-                    playerArea.Player.Deck.Discard(new List<IPlayerCard> { attachable.Card as IPlayerCard });
+                    controllingPlayer.Deck.Discard(new List<IPlayerCard> { attachable.Card as IPlayerCard });
                 }
                 else if (attachable.Card is IObjectiveCard)
                 {

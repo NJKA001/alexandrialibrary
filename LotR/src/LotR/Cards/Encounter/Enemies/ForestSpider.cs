@@ -66,13 +66,9 @@ namespace LotR.Cards.Encounter.Enemies
                 if (enemyAttack == null)
                     return null;
 
-                var playerArea = enemyAttack.DefendingPlayer.GetStates<IPlayerArea>().FirstOrDefault();
-                if (playerArea == null)
-                    return null;
-
                 var attachments = new Dictionary<Guid, IList<IAttachableCard>>() { { enemyAttack.DefendingPlayer.StateId, new List<IAttachableCard>() } };
 
-                foreach (var attachable in playerArea.GetStates<IAttachableInPlay>())
+                foreach (var attachable in enemyAttack.DefendingPlayer.CardsInPlay.OfType<IAttachableInPlay>())
                 {
 
                     if ((!(attachable.Card is IPlayerCard)) && (!(attachable.Card is IObjectiveCard)))
@@ -93,10 +89,6 @@ namespace LotR.Cards.Encounter.Enemies
                 if (enemyAttack == null)
                     return;
 
-                var playerArea = enemyAttack.DefendingPlayer.GetStates<IPlayerArea>().FirstOrDefault();
-                if (playerArea == null)
-                    return;
-
                 var attachmentChoice = choice as IPlayersChooseCards<IAttachableCard>;
                 if (attachmentChoice == null)
                     return;
@@ -105,14 +97,14 @@ namespace LotR.Cards.Encounter.Enemies
                 if (attachmentToDiscard == null)
                     return;
 
-                var inPlay = playerArea.GetStates<IAttachableInPlay>().Where(x => x.Card.Id == attachmentToDiscard.Id).FirstOrDefault();
+                var inPlay = enemyAttack.DefendingPlayer.CardsInPlay.OfType<IAttachableInPlay>().Where(x => x.Card.Id == attachmentToDiscard.Id).FirstOrDefault();
                 if (inPlay == null)
                     return;
 
-                playerArea.RemoveCard(inPlay);
+                enemyAttack.DefendingPlayer.RemoveCardInPlay(inPlay);
                 if (attachmentToDiscard is IPlayerCard)
                 {
-                    playerArea.Player.Deck.Discard(new List<IPlayerCard> { attachmentToDiscard as IPlayerCard });
+                    enemyAttack.DefendingPlayer.Deck.Discard(new List<IPlayerCard> { attachmentToDiscard as IPlayerCard });
                 }
                 else if (attachmentToDiscard is IObjectiveCard)
                 {

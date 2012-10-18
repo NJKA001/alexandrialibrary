@@ -10,10 +10,10 @@ namespace LotR.States.Areas
     public interface IVictoryDisplayArea
         : IArea
     {
-        IEnumerable<IVictoryCard> Cards { get; }
+        IEnumerable<ICard> Cards { get; }
 
-        void AddVictoryCard(IVictoryCard card);
-        void RemoveVictoryCard(IVictoryCard card);
+        void AddCard(ICard card);
+        void RemoveCard(ICard card);
         byte GetTotalVictoryPoints();
     }
 }

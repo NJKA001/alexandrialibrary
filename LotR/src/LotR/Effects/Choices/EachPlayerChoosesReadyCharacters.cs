@@ -78,11 +78,8 @@ namespace LotR.Effects.Choices
 
         private static void AddReadyCharacters(IPlayer player, IDictionary<Guid, IList<ICharacterInPlay>> availableCharacters, bool heroesOnly)
         {
-            var playerArea = player.GetStates<IPlayerArea>().FirstOrDefault();
-            if (playerArea == null)
-                return;
-
-            foreach (var exhaustable in playerArea.GetStates<ICharacterInPlay>().OfType<IExhaustableInPlay>())
+            
+            foreach (var exhaustable in player.CardsInPlay.OfType<IExhaustableInPlay>())
             {
                 if (exhaustable.IsExhausted)
                     continue;

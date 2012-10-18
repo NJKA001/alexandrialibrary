@@ -6,6 +6,7 @@ using System.Text;
 
 using LotR.Cards;
 using LotR.Cards.Player;
+using LotR.Effects;
 using LotR.Effects.Modifiers;
 using LotR.States.Areas;
 using LotR.States.Phases.Any;
@@ -48,13 +49,13 @@ namespace LotR.States
 
         public IPlayer GetController(IGame game)
         {
-            foreach (var playerArea in game.GetStates<IPlayerArea>())
-            {
-                if (playerArea.IsControlledByPlayer(this))
-                    return playerArea.Player;
-            }
+            return game.Players.Where(x => x.IsTheControllerOf(this)).FirstOrDefault();
+        }
 
-            return null;
+        public virtual bool HasEffect<TEffect>()
+            where TEffect : IEffect
+        {
+            return Card.HasEffect<TEffect>();
         }
 
         public virtual void DuringCheckForResourceIcon(ICheckForResourceIcon state)

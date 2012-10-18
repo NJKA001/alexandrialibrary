@@ -27,13 +27,9 @@ namespace LotR.Cards.Encounter.Enemies
 
         private static void ExhaustReadyCharacters(IPlayer player, IPlayersChooseCharacters choice)
         {
-            var playerArea = player.GetStates<IPlayerArea>().FirstOrDefault();
-            if (playerArea == null)
-                return;
-
             foreach (var character in choice.GetChosenCharacters(player.StateId))
             {
-                var exhaustable = playerArea.GetState<IExhaustableInPlay>(character.Card.Id);
+                var exhaustable = player.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == character.Card.Id).FirstOrDefault();
                 if (exhaustable == null || exhaustable.IsExhausted)
                     continue;
 

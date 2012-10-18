@@ -55,5 +55,19 @@ namespace LotR.States
 
             attachments.Remove(attachment);
         }
+
+        public override bool HasEffect<T>()
+        {
+            if (base.HasEffect<T>())
+                return true;
+
+            foreach (var attachment in attachments)
+            {
+                if (attachment.HasEffect<T>())
+                    return true;
+            }
+
+            return false;
+        }
     }
 }

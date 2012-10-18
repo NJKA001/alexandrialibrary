@@ -73,13 +73,9 @@ namespace LotR.Cards.Encounter.Enemies
                 if (enemyAttack == null)
                     return;
 
-                var playerArea = enemyAttack.DefendingPlayer.GetStates<IPlayerArea>().FirstOrDefault();
-                if (playerArea == null)
-                    return;
-
                 var damage = enemyAttack.IsUndefended ? (byte)2 : (byte)1;
 
-                foreach (var damageable in playerArea.GetStates<IDamagableInPlay>())
+                foreach (var damageable in enemyAttack.DefendingPlayer.CardsInPlay.OfType<IDamagableInPlay>())
                 {
                     damageable.Damage += damage;
                 }
