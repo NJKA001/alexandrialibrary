@@ -245,6 +245,7 @@
     <Compile Include="States\IWillpowerfulInPlay.cs" />
     <Compile Include="States\PhaseStep.cs" />
     <Compile Include="States\Phases\Any\CheckForResourceIcon.cs" />
+    <Compile Include="States\Phases\Any\CheckForResourceMatch.cs" />
     <Compile Include="States\Phases\Any\CheckForTrait.cs" />
     <Compile Include="States\Phases\Any\ICardEntersPlay.cs" />
     <Compile Include="States\Phases\Any\ICardLeavesPlay.cs" />
