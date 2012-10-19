@@ -63,6 +63,18 @@ namespace LotR.States
             if (costlyCard == null)
                 throw new ArgumentNullException("costlyCard");
 
+            if (Card.HasEffect<IDuringCheckForResourceMatch>())
+            {
+                var check = new CheckForResourceMatch(game, costlyCard);
+
+                foreach (var effect in Card.Text.Effects.OfType<IDuringCheckForResourceMatch>())
+                {
+                    effect.DuringCheckForResourceMatch(check);
+                }
+
+                return check.IsResourceMatch;
+            }
+
             return false;
         }
 
