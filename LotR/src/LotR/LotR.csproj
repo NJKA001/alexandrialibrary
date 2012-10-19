@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cards\CardType.cs" />
     <Compile Include="Cards\GameLoader.cs" />
     <Compile Include="Cards\IGameLoader.cs" />
     <Compile Include="Cards\LoaderBase.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Effects\PassiveCardEffectBase.cs" />
     <Compile Include="Effects\Phases\Any\IAfterLocationExplored.cs" />
     <Compile Include="Effects\Phases\Any\IAfterStageDefeated.cs" />
+    <Compile Include="Effects\Phases\Any\IDuringCheckForResourceMatch.cs" />
     <Compile Include="Effects\Phases\Any\IDuringDrawingCards.cs" />
     <Compile Include="Effects\Phases\Any\IBeforeStageDefeated.cs" />
     <Compile Include="Effects\Phases\Combat\IAfterEnemyAttackResolves.cs" />
@@ -110,11 +112,12 @@
     <Compile Include="Effects\ShadowEffectBase.cs" />
     <Compile Include="Effects\TravelEffectBase.cs" />
     <Compile Include="Effects\WhenRevealedEffectBase.cs" />
+    <Compile Include="States\AllyInPlay.cs" />
     <Compile Include="States\Areas\AreaBase.cs" />
     <Compile Include="States\Areas\IQuestArea.cs" />
     <Compile Include="States\Areas\QuestArea.cs" />
     <Compile Include="States\AttachableInPlay.cs" />
-    <Compile Include="States\AttachmentHostInPlay.cs" />
+    <Compile Include="States\CharacterInPlay.cs" />
     <Compile Include="States\CardInHand.cs" />
     <Compile Include="States\Game.cs" />
     <Compile Include="States\Hand.cs" />
@@ -237,7 +240,6 @@
     <Compile Include="States\IPlayerCardInPlay.cs" />
     <Compile Include="States\IPlayerDeck.cs" />
     <Compile Include="States\IQuestInPlay.cs" />
-    <Compile Include="States\IResourcefulInPlay.cs" />
     <Compile Include="States\IShadowInPlay.cs" />
     <Compile Include="States\IThreateningInPlay.cs" />
     <Compile Include="States\IWillpowerfulInPlay.cs" />
@@ -247,6 +249,7 @@
     <Compile Include="States\Phases\Any\ICardEntersPlay.cs" />
     <Compile Include="States\Phases\Any\ICardLeavesPlay.cs" />
     <Compile Include="States\Phases\Any\ICheckForResourceIcon.cs" />
+    <Compile Include="States\Phases\Any\ICheckForResourceMatch.cs" />
     <Compile Include="States\Phases\Any\ICheckForTrait.cs" />
     <Compile Include="States\Phases\Any\ICurrentQuestStage.cs" />
     <Compile Include="States\Phases\Any\IDamageDealt.cs" />

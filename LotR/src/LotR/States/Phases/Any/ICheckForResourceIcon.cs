@@ -11,8 +11,7 @@ namespace LotR.States.Phases.Any
     public interface ICheckForResourceIcon
         : IState
     {
-        ICostlyCard CostlyCard { get; }
-        IResourcefulInPlay Target { get; }
+        ICharacterInPlay Target { get; }
         Sphere ResourceIcon { get; }
         
         bool HasResourceIcon { get; set; }

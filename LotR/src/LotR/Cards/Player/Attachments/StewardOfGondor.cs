@@ -99,7 +99,7 @@ namespace LotR.Cards.Player.Attachments
                 if (attachment == null || attachment.AttachedTo == null)
                     return;
 
-                var resourceful = attachment.AttachedTo as IResourcefulInPlay;
+                var resourceful = attachment.AttachedTo as ICharacterInPlay;
                 if (resourceful == null)
                     return;
 

@@ -9,7 +9,7 @@ namespace LotR.Cards.Quests
         : CardBase, IQuestCard
     {
         protected QuestCardBase(string title, CardSet cardSet, uint cardNumber, ScenarioCode scenario, IEnumerable<EncounterSet> encounterSets, byte sequence, byte questPoints, byte victoryPoints)
-            : base(title, cardSet, cardNumber)
+            : base(CardType.Quest, title, cardSet, cardNumber)
         {
             if (encounterSets == null)
                 throw new ArgumentNullException("encounterSets");

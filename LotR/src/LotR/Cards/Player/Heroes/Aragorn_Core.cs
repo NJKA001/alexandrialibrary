@@ -69,7 +69,7 @@ namespace LotR.Cards.Player.Heroes
                 if (firstPayment.Item1.Card.Id != Source.Id || firstPayment.Item2 != 1)
                     return false;
 
-                var resourceful = game.GetState<IResourcefulInPlay>(Source.Id);
+                var resourceful = game.GetState<ICharacterInPlay>(Source.Id);
                 if (resourceful == null || resourceful.Resources < 1)
                     return false;
 

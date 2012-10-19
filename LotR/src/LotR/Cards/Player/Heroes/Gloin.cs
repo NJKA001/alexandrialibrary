@@ -51,7 +51,7 @@ namespace LotR.Cards.Player.Heroes
                 if (damageDealt == null || damageDealt.Damage == 0)
                     return;
 
-                var resourceful = game.GetState<IResourcefulInPlay>(Source.Id);
+                var resourceful = game.GetState<ICharacterInPlay>(Source.Id);
                 if (resourceful == null)
                     return;
 

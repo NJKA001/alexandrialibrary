@@ -12,8 +12,9 @@ namespace LotR.Cards
     public abstract class CardBase
         : ICard, ISource
     {
-        protected CardBase(string title, CardSet cardSet, uint cardNumber)
+        protected CardBase(CardType printedCardType, string title, CardSet cardSet, uint cardNumber)
         {
+            this.PrintedCardType = printedCardType;
             this.Title = title;
             this.CardSet = cardSet;
             this.CardNumber = cardNumber;
@@ -71,6 +72,12 @@ namespace LotR.Cards
         public ICardText Text
         {
             get { return text; }
+        }
+
+        public CardType PrintedCardType
+        {
+            get;
+            private set;
         }
 
         public IEnumerable<Trait> PrintedTraits

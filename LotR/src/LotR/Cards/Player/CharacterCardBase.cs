@@ -10,8 +10,8 @@ namespace LotR.Cards.Player
     public class CharacterCardBase
         : PlayerCardBase, ICharacterCard
     {
-        protected CharacterCardBase(string title, CardSet cardSet, uint cardNumber, Sphere printedSphere, byte printedWillpower, byte printedAttack, byte printedDefense, byte printedHitPoints)
-            : base(title, cardSet, cardNumber, printedSphere)
+        protected CharacterCardBase(CardType printedCardType, string title, CardSet cardSet, uint cardNumber, Sphere printedSphere, byte printedWillpower, byte printedAttack, byte printedDefense, byte printedHitPoints)
+            : base(printedCardType, title, cardSet, cardNumber, printedSphere)
         {
             this.PrintedWillpower = printedWillpower;
             this.PrintedAttack = printedAttack;

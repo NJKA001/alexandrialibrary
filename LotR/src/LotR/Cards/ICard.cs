@@ -17,6 +17,8 @@ namespace LotR.Cards
         object Image { get; }
 
         bool IsUnique { get; }
+
+        CardType PrintedCardType { get; }
         IEnumerable<Trait> PrintedTraits { get; }
         bool HasEffect<T>() where T : IEffect;
     }

@@ -40,7 +40,7 @@ namespace LotR.Cards.Player.Heroes
 
             public override ICost GetCost(IGame game)
             {
-                var resourceful = game.GetState<IResourcefulInPlay>(Source.Id);
+                var resourceful = game.GetState<ICharacterInPlay>(Source.Id);
                 if (resourceful == null)
                     return null;
 

@@ -18,6 +18,9 @@ namespace LotR.States
 
         bool HasEffect<T>() where T : IEffect;
         bool HasTrait(Trait trait);
+
+        byte Damage { get; set; }
+        byte Resources { get; set; }
     }
 
     public interface ICardInPlay<T>

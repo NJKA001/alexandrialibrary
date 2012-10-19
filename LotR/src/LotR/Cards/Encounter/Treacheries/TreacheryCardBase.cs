@@ -11,7 +11,7 @@ namespace LotR.Cards.Encounter.Treacheries
         : EncounterCardBase, ITreacheryCard
     {
         protected TreacheryCardBase(string title, CardSet cardSet, uint cardNumber, EncounterSet encounterSet, byte quantity)
-            : base(title, cardSet, cardNumber, encounterSet, quantity)
+            : base(CardType.Treachery, title, cardSet, cardNumber, encounterSet, quantity)
         {
         }
     }

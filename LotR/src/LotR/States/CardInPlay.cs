@@ -26,6 +26,9 @@ namespace LotR.States
             this.Card = card;
         }
 
+        private byte damage;
+        private byte resources;
+
         private static Guid GetStateId(T card)
         {
             return card != null ? card.Id : Guid.Empty;
@@ -45,6 +48,32 @@ namespace LotR.States
         public string Title
         {
             get { return Card.Title; }
+        }
+
+        public byte Damage
+        {
+            get { return damage; }
+            set
+            {
+                if (damage == value)
+                    return;
+                
+                damage = value;
+                OnPropertyChanged("Damage");
+            }
+        }
+
+        public byte Resources
+        {
+            get { return resources; }
+            set
+            {
+                if (resources == value)
+                    return;
+
+                resources = value;
+                OnPropertyChanged("Resources");
+            }
         }
 
         public IPlayer GetController(IGame game)

@@ -11,6 +11,6 @@ namespace LotR.Effects.Payments
     public interface IResourcePayment
         : IPayment
     {
-        IEnumerable<Tuple<IResourcefulInPlay, byte>> Payments { get; }
+        IEnumerable<Tuple<ICharacterInPlay, byte>> Payments { get; }
     }
 }

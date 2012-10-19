@@ -25,6 +25,11 @@ namespace LotR.Cards.Encounter.Treacheries
             AddEffect(new HeroDoesNotReadyUnlessControllerPays(this));
         }
 
+        public override bool CanBeAttachedTo(IGame game, ICanHaveAttachments cardInPlay)
+        {
+            return (cardInPlay is IHeroInPlay);
+        }
+
         private class WhenRevealedAttachToHero
             : WhenRevealedEffectBase
         {
@@ -104,7 +109,7 @@ namespace LotR.Cards.Encounter.Treacheries
                 if (attachment == null || attachment.AttachedTo == null)
                     return null;
 
-                var resourceful = attachment.AttachedTo as IResourcefulInPlay;
+                var resourceful = attachment.AttachedTo as ICharacterInPlay;
                 if (resourceful == null)
                     return null;
 

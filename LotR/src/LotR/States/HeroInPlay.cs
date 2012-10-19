@@ -12,19 +12,11 @@ using LotR.States.Phases.Any;
 namespace LotR.States
 {
     public class HeroInPlay
-        : PlayerCardInPlay<IHeroCard>, IHeroInPlay, ICharacterInPlay, IAttachmentHostInPlay
+        : CharacterInPlay<IHeroCard>, IHeroInPlay
     {
         public HeroInPlay(IGame game, IHeroCard card, IPlayer owner)
             : base(game, card, owner)
         {
-        }
-
-        private readonly IDictionary<Guid, IAttachableInPlay> attachments = new Dictionary<Guid, IAttachableInPlay>();
-        private byte resources;
-
-        ICharacterCard ICardInPlay<ICharacterCard>.Card
-        {
-            get { return Card as ICharacterCard; }
         }
 
         IHeroCard ICardInPlay<IHeroCard>.Card
@@ -32,64 +24,22 @@ namespace LotR.States
             get { return Card as IHeroCard; }
         }
 
-        IResourcefulCard ICardInPlay<IResourcefulCard>.Card
+        public override bool CanPayFor(ICostlyCard costlyCard)
         {
-            get { return Card as IResourcefulCard; }
+            if (costlyCard == null)
+                throw new ArgumentNullException("costlyCard");
+
+            return (costlyCard.PrintedSphere == Sphere.Neutral || costlyCard.PrintedSphere == Card.PrintedSphere);
         }
 
-        IAttachmentHostCard ICardInPlay<IAttachmentHostCard>.Card
-        {
-            get { return Card as IAttachmentHostCard; }
-        }
-
-        public IEnumerable<IAttachableInPlay> Attachments
-        {
-            get { return attachments.Values; }
-        }
-
-        public byte Resources
-        {
-            get { return resources; }
-            set
-            {
-                if (resources != value)
-                {
-                    resources = value;
-                    OnPropertyChanged("Resources");
-                }
-            }
-        }
-
-        public void AddAttachment(IAttachableInPlay attachment)
-        {
-            if (attachment == null)
-                throw new ArgumentNullException("attachment");
-
-            if (attachments.ContainsKey(attachment.StateId))
-                return;
-
-            attachments.Add(attachment.StateId, attachment);
-        }
-
-        public void RemoveAttachment(IAttachableInPlay attachment)
-        {
-            if (attachment == null)
-                throw new ArgumentNullException("attachment");
-
-            if (!attachments.ContainsKey(attachment.StateId))
-                return;
-
-            attachments.Remove(attachment.StateId);
-        }
-
-        public bool HasResourceIcon(ICostlyCard costlyCard, Sphere sphere)
+        public bool HasResourceIcon(Sphere sphere)
         {
             if (Card.PrintedSphere == sphere)
                 return true;
 
-            var check = new CheckForResourceIcon(game, costlyCard, this, sphere);
+            var check = new CheckForResourceIcon(game, this, sphere);
 
-            foreach (var attachment in attachments.Values.Where(x => x.HasEffect<IDuringCheckForResourceIcon>()))
+            foreach (var attachment in Attachments.Where(x => x.HasEffect<IDuringCheckForResourceIcon>()))
             {
                 foreach (var effect in attachment.Card.Text.Effects.OfType<IDuringCheckForResourceIcon>())
                 {
@@ -107,7 +57,7 @@ namespace LotR.States
 
             var check = new CheckForTrait(game, this, trait);
 
-            foreach (var attachment in attachments.Values.Where(x => x.Card.HasEffect<IDuringCheckForTrait>()))
+            foreach (var attachment in Attachments.Where(x => x.Card.HasEffect<IDuringCheckForTrait>()))
             {
                 foreach (var effect in attachment.Card.Text.Effects.OfType<IDuringCheckForTrait>())
                 {

@@ -12,7 +12,7 @@ namespace LotR.Cards.Player.Treasures
         : PlayerCardBase, ITreasureCard
     {
         protected TreasureCardBase(string title, CardSet cardSet, uint cardNumber, EncounterSet encounterSet, byte printedCost)
-            : base(title, cardSet, cardNumber, Sphere.Neutral)
+            : base(CardType.Treasure, title, cardSet, cardNumber, Sphere.Neutral)
         {
             this.PrintedCost = printedCost;
         }

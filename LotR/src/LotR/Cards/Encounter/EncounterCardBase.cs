@@ -10,8 +10,8 @@ namespace LotR.Cards.Encounter
     public abstract class EncounterCardBase
         : CardBase, IEncounterCard
     {
-        protected EncounterCardBase(string title, CardSet cardSet, uint cardNumber, EncounterSet encounterSet, byte quantity)
-            : base(title, cardSet, cardNumber)
+        protected EncounterCardBase(CardType printedCardType, string title, CardSet cardSet, uint cardNumber, EncounterSet encounterSet, byte quantity)
+            : base(printedCardType, title, cardSet, cardNumber)
         {
             this.EncounterSet = encounterSet;
             this.Quantity = quantity;

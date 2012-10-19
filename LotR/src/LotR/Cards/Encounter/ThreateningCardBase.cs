@@ -10,8 +10,8 @@ namespace LotR.Cards.Encounter
     public abstract class ThreateningCardBase
         : EncounterCardBase, IThreateningCard
     {
-        protected ThreateningCardBase(string title, CardSet cardSet, uint cardNumber, EncounterSet encounterSet, byte quantity, byte printedThreat)
-            : base(title, cardSet, cardNumber, encounterSet, quantity)
+        protected ThreateningCardBase(CardType printedCardType, string title, CardSet cardSet, uint cardNumber, EncounterSet encounterSet, byte quantity, byte printedThreat)
+            : base(printedCardType, title, cardSet, cardNumber, encounterSet, quantity)
         {
             this.PrintedThreat = printedThreat;
         }

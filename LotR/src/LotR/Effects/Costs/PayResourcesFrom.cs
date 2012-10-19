@@ -12,7 +12,7 @@ namespace LotR.Effects.Costs
     public class PayResourcesFrom
         : CostBase
     {
-        public PayResourcesFrom(ISource source, IResourcefulInPlay target, byte numberOfResources, bool isVariableCost)
+        public PayResourcesFrom(ISource source, ICharacterInPlay target, byte numberOfResources, bool isVariableCost)
             : base(GetDescription(target, numberOfResources), source)
         {
             this.target = target;
@@ -20,14 +20,14 @@ namespace LotR.Effects.Costs
             this.isVariableCost = isVariableCost;
         }
 
-        private static string GetDescription(IResourcefulInPlay target, byte numberOfResources)
+        private static string GetDescription(ICardInPlay target, byte numberOfResources)
         {
             return numberOfResources == 1 ?
                 string.Format("Pay 1 resource from {0}'s pool", target.Title)
                 : string.Format("Pay {0} resources from {1}'s pool", numberOfResources, target.Title);
         }
 
-        private readonly IResourcefulInPlay target;
+        private readonly ICharacterInPlay target;
         private readonly byte numberOfResources;
         private readonly bool isVariableCost;
 

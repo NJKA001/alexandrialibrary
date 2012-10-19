@@ -12,7 +12,7 @@ namespace LotR.Cards.Player.Attachments
         : CostlyCardBase, IAttachmentCard
     {
         protected AttachmentCardBase(string title, CardSet cardSet, uint cardNumber, Sphere printedSphere, byte printedCost)
-            : base(title, cardSet, cardNumber, printedSphere, printedCost)
+            : base(CardType.Attachment, title, cardSet, cardNumber, printedSphere, printedCost)
         {
         }
 

@@ -12,7 +12,7 @@ namespace LotR.Cards.Player.Heroes
         : CharacterCardBase, IHeroCard
     {
         protected HeroCardBase(string title, CardSet cardSet, uint cardNumber, Sphere printedSphere, byte threatCost, byte printedWillpower, byte printedAttack, byte printedDefense, byte printedHitPoints)
-            : base(title, cardSet, cardNumber, printedSphere, printedWillpower, printedAttack, printedDefense, printedHitPoints)
+            : base(CardType.Hero, title, cardSet, cardNumber, printedSphere, printedWillpower, printedAttack, printedDefense, printedHitPoints)
         {
             this.ThreatCost = threatCost;
             this.IsUnique = true;
@@ -22,16 +22,6 @@ namespace LotR.Cards.Player.Heroes
         {
             get;
             private set;
-        }
-
-        public override void DuringCheckForResourceIcon(ICheckForResourceIcon state)
-        {
-            base.DuringCheckForResourceIcon(state);
-
-            if (PrintedSphere == state.ResourceIcon)
-            {
-                state.HasResourceIcon = true;
-            }
         }
     }
 }

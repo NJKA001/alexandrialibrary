@@ -9,7 +9,7 @@ namespace LotR.Cards.Encounter.Objectives
         : EncounterCardBase, IObjectiveCard
     {
         protected ObjectiveCardBase(string title, CardSet cardSet, uint cardNumber, EncounterSet encounterSet, byte quantity, byte victoryPoints)
-            : base(title, cardSet, cardNumber, encounterSet, quantity)
+            : base(CardType.Objective, title, cardSet, cardNumber, encounterSet, quantity)
         {
             this.VictoryPoints = victoryPoints;
         }

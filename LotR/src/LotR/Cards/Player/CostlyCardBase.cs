@@ -12,8 +12,8 @@ namespace LotR.Cards.Player
     public abstract class CostlyCardBase
         : PlayerCardBase, ICostlyCard
     {
-        protected CostlyCardBase(string title, CardSet cardSet, uint cardNumber, Sphere printedSphere, byte printedCost)
-            : base(title, cardSet, cardNumber, printedSphere)
+        protected CostlyCardBase(CardType printedCardType, string title, CardSet cardSet, uint cardNumber, Sphere printedSphere, byte printedCost)
+            : base(printedCardType, title, cardSet, cardNumber, printedSphere)
         {
             this.PrintedCost = printedCost;
         }

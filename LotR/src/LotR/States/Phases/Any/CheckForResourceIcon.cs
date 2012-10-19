@@ -11,23 +11,16 @@ namespace LotR.States.Phases.Any
     public class CheckForResourceIcon
         : StateBase, ICheckForResourceIcon
     {
-        public CheckForResourceIcon(IGame game, ICostlyCard costlyCard, IResourcefulInPlay target, Sphere resourceIcon)
+        public CheckForResourceIcon(IGame game, ICharacterInPlay target, Sphere resourceIcon)
             : base(game)
         {
-            this.CostlyCard = costlyCard;
             this.Target = target;
             this.ResourceIcon = resourceIcon;
         }
 
         private bool hasResourceIcon;
 
-        public ICostlyCard CostlyCard
-        {
-            get;
-            private set;
-        }
-
-        public IResourcefulInPlay Target
+        public ICharacterInPlay Target
         {
             get;
             private set;

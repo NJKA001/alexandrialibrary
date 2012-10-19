@@ -14,7 +14,7 @@ namespace LotR.Cards.Player
         IDefendingCard, 
         IDamageableCard,
         IExhaustableCard,
-        ICanHaveAttachments
+        IAttachmentHostCard
     {
     }
 }

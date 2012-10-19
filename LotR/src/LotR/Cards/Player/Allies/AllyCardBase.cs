@@ -13,7 +13,7 @@ namespace LotR.Cards.Player.Allies
         : CharacterCardBase, IAllyCard
     {
         protected AllyCardBase(string title, CardSet cardSet, uint cardNumber, Sphere printedSphere, byte printedCost, byte printedWillpower, byte printedAttack, byte printedDefense, byte printedHitPoints)
-            : base(title, cardSet, cardNumber, printedSphere, printedWillpower, printedAttack, printedDefense, printedHitPoints)
+            : base(CardType.Ally, title, cardSet, cardNumber, printedSphere, printedWillpower, printedAttack, printedDefense, printedHitPoints)
         {
             this.PrintedCost = printedCost;
         }

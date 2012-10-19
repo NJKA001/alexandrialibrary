@@ -7,7 +7,7 @@ namespace LotR.States.Phases.Resource
 {
     public interface ICollectingResources
     {
-        IResourcefulInPlay Resourceful { get; }
+        ICharacterInPlay Character { get; }
 
         bool IsCollectingResources { get; set; }
         byte ResourcesToCollect { get; set; }

@@ -8,8 +8,8 @@ namespace LotR.Cards.Player
     public abstract class PlayerCardBase
         : CardBase, IPlayerCard
     {
-        protected PlayerCardBase(string title, CardSet cardSet, uint cardNumber, Sphere printedSphere)
-            : base(title, cardSet, cardNumber)
+        protected PlayerCardBase(CardType cardType, string title, CardSet cardSet, uint cardNumber, Sphere printedSphere)
+            : base(cardType, title, cardSet, cardNumber)
         {
             this.PrintedSphere = printedSphere;
         }

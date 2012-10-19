@@ -10,5 +10,6 @@ namespace LotR.States
     public interface ICharacterInPlay
         : ICardInPlay<ICharacterCard>
     {
+        bool CanPayFor(ICostlyCard costlyCard);
     }
 }

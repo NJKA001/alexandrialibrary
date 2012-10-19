@@ -7,6 +7,7 @@ using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Costs;
 using LotR.Effects.Payments;
+using LotR.Effects.Phases.Any;
 using LotR.States;
 using LotR.States.Phases.Any;
 
@@ -19,24 +20,27 @@ namespace LotR.Cards.Player.Allies
             : base("Radagast", CardSet.SoM, 59, Sphere.Neutral, 5, 2, 1, 1, 3)
         {
             AddTrait(Trait.Istari);
+
+            AddEffect(new CanPayResourcesForCreatures(this));
+            AddEffect(new SpendResourcesToHealCreatures(this));
         }
 
-        public override void DuringCheckForResourceIcon(ICheckForResourceIcon state)
+        private class CanPayResourcesForCreatures
+            : PassiveCardEffectBase, IDuringCheckForResourceMatch
         {
-            if (state.CostlyCard == null)
-                return;
+            public CanPayResourcesForCreatures(Radagast source)
+                : base("Resources on Radagast can be used to pay for Creature cards played from your hand.", source)
+            {
+            }
 
-            var game = state.GetStates<IGame>().FirstOrDefault();
-            if (game == null)
-                return;
-
-            if (!state.CostlyCard.PrintedTraits.Contains(Trait.Creature))
-                return;
-
-            state.HasResourceIcon = true;
+            public void DuringCheckForResourceMatch(ICheckForResourceMatch state)
+            {
+                if (state.CostlyCard.PrintedTraits.Contains(Trait.Creature))
+                    state.IsResourceMatch = true;
+            }
         }
 
-        public class SpendResourcesToHealCreatures
+        private class SpendResourcesToHealCreatures
             : ActionCharacterAbilityBase
         {
             public SpendResourcesToHealCreatures(Radagast source)
@@ -51,7 +55,7 @@ namespace LotR.Cards.Player.Allies
 
             public override ICost GetCost(IGame game)
             {
-                var resourceful = game.GetState<IResourcefulInPlay>(Source.Id);
+                var resourceful = game.GetState<ICharacterInPlay>(Source.Id);
                 if (resourceful == null)
                     return null;
 

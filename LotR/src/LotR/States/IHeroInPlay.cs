@@ -10,7 +10,8 @@ using LotR.Cards.Player.Heroes;
 namespace LotR.States
 {
     public interface IHeroInPlay
-        : IPlayerCardInPlay<IHeroCard>, IResourcefulInPlay
+        : IPlayerCardInPlay<IHeroCard>
     {
+        bool HasResourceIcon(Sphere sphere);
     }
 }

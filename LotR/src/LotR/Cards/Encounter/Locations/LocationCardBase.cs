@@ -14,7 +14,7 @@ namespace LotR.Cards.Encounter.Locations
         : ThreateningCardBase, ILocationCard
     {
         protected LocationCardBase(string title, CardSet cardSet, uint cardNumber, EncounterSet encounterSet, byte quantity, byte printedThreat, byte questPoints, byte victoryPoints)
-            : base(title, cardSet, cardNumber, encounterSet, quantity, printedThreat)
+            : base(CardType.Location, title, cardSet, cardNumber, encounterSet, quantity, printedThreat)
         {
             this.QuestPoints = questPoints;
             this.VictoryPoints = victoryPoints;

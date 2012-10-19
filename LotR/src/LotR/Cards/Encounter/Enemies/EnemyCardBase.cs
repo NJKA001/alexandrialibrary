@@ -11,7 +11,7 @@ namespace LotR.Cards.Encounter.Enemies
         : ThreateningCardBase, IEnemyCard
     {
         protected EnemyCardBase(string title, CardSet cardSet, uint cardNumber, EncounterSet encounterSet, byte quantity, byte printedThreat, byte engagementCost, byte printedAttack, byte printedDefense, byte printedHitPoints, byte victoryPoints)
-            : base(title, cardSet, cardNumber, encounterSet, quantity, printedThreat)
+            : base(CardType.Enemy, title, cardSet, cardNumber, encounterSet, quantity, printedThreat)
         {
             this.EngagementCost = engagementCost;
             this.PrintedAttack = printedAttack;

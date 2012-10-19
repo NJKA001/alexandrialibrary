@@ -10,6 +10,5 @@ namespace LotR.States
     public interface IDamagableInPlay
         : ICardInPlay<IDamageableCard>
     {
-        byte Damage { get; set; }
     }
 }
