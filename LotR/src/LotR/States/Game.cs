@@ -32,25 +32,6 @@ namespace LotR.States
             private set;
         }
 
-        public void AddEffect(IEffect effect)
-        {
-            currentEffects.Add(effect);
-        }
-
-        public bool CardHasTrait(ICard card, Trait trait)
-        {
-            return card.PrintedTraits.Contains(trait);
-        }
-
-        public bool CardInPlayHasTrait(ICardInPlay card, Trait trait)
-        {
-            var cardInPlay = card as ICardInPlay<ICard>;
-            if (cardInPlay == null)
-                return false;
-
-            return cardInPlay.Card.PrintedTraits.Contains(trait);
-        }
-
         public IEnumerable<IPlayer> Players
         {
             get { return players; }
@@ -66,6 +47,14 @@ namespace LotR.States
         {
             get;
             private set;
+        }
+
+        public void AddEffect(IEffect effect)
+        {
+            if (effect == null)
+                throw new ArgumentNullException("effect");
+
+            currentEffects.Add(effect);
         }
 
         public void Setup(IQuestArea questArea, IEnumerable<IPlayer> players)

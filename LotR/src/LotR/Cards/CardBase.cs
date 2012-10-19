@@ -97,7 +97,7 @@ namespace LotR.Cards
 
         public virtual void DuringCheckForTrait(ICheckForTrait state)
         {
-            if (state.Target.Card.Id != this.id)
+            if (state.Target.StateId != this.id)
                 return;
 
             if (traits.Any(x => x == state.Trait))

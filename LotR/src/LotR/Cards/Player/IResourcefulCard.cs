@@ -8,7 +8,7 @@ using LotR.Effects.Phases.Any;
 namespace LotR.Cards.Player
 {
     public interface IResourcefulCard
-        : IPlayerCard, IDuringCheckForResourceIcon
+        : IPlayerCard
     {
     }
 }

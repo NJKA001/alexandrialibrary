@@ -14,16 +14,11 @@ namespace LotR.States
     {
         Phase CurrentPhase { get; }
         PhaseStep CurrentPhaseStep { get; }
-
-        void AddEffect(IEffect effect);
-
-        bool CardHasTrait(ICard card, Trait trait);
-        bool CardInPlayHasTrait(ICardInPlay card, Trait trait);
-
         IEnumerable<IPlayer> Players { get; }
         IPlayer ActivePlayer { get; }
         IPlayer FirstPlayer { get; }
 
+        void AddEffect(IEffect effect);
         void Setup(IQuestArea questArea, IEnumerable<IPlayer> players);
     }
 }

@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Effects.Phases.Any;
+using LotR.Cards;
 using LotR.Cards.Player;
+using LotR.Effects.Phases.Any;
 
 namespace LotR.States
 {
     public interface IResourcefulInPlay
-        : ICardInPlay<IResourcefulCard>, IDuringCheckForResourceIcon
+        : ICardInPlay<IResourcefulCard>
     {
         byte Resources { get; set; }
+
+        bool HasResourceIcon(ICostlyCard costlyCard, Sphere sphere);
     }
 }

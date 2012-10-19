@@ -55,7 +55,7 @@ namespace LotR.Cards.Player.Attachments
                 if (attachment == null || attachment.AttachedTo == null)
                     return;
 
-                if (state.Target.Card.Id != attachment.AttachedTo.Card.Id)
+                if (state.Target.StateId != attachment.AttachedTo.Card.Id)
                     return;
 
                 state.HasTrait = true;

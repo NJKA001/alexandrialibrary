@@ -63,7 +63,7 @@ namespace LotR.Cards.Player.Attachments
                 if (enemy == null)
                     return;
 
-                if (!game.CardInPlayHasTrait(enemy, Trait.Orc))
+                if (!enemy.HasTrait(Trait.Orc))
                     return;
 
                 determineStrength.Attack += 1;

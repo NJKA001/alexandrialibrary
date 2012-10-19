@@ -10,7 +10,7 @@ namespace LotR.States.Phases.Any
     public interface ICheckForTrait
         : IState
     {
-        ICardInPlay<ICard> Target { get; }
+        ICardInPlay Target { get; }
         Trait Trait { get; }
 
         bool HasTrait { get; set; }

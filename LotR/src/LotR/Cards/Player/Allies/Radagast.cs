@@ -30,7 +30,7 @@ namespace LotR.Cards.Player.Allies
             if (game == null)
                 return;
 
-            if (!game.CardHasTrait(state.CostlyCard, Trait.Creature))
+            if (!state.CostlyCard.PrintedTraits.Contains(Trait.Creature))
                 return;
 
             state.HasResourceIcon = true;
@@ -96,7 +96,7 @@ namespace LotR.Cards.Player.Allies
                 if (creatureChoice == null || creatureChoice.ChosenCharacter == null)
                     return;
 
-                if (!game.CardInPlayHasTrait(creatureChoice.ChosenCharacter, Trait.Creature))
+                if (!creatureChoice.ChosenCharacter.HasTrait(Trait.Creature))
                     return;
 
                 var damageable = creatureChoice.ChosenCharacter as IDamagableInPlay;

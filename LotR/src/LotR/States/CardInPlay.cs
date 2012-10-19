@@ -58,21 +58,9 @@ namespace LotR.States
             return Card.HasEffect<TEffect>();
         }
 
-        public virtual void DuringCheckForResourceIcon(ICheckForResourceIcon state)
+        public virtual bool HasTrait(Trait trait)
         {
-            var resourceful = Card as IResourcefulCard;
-            if (resourceful == null)
-                return;
-
-            resourceful.DuringCheckForResourceIcon(state);
-        }
-
-        public virtual void DuringCheckForTrait(ICheckForTrait state)
-        {
-            if (state.Target.Card.Id != this.Card.Id)
-                return;
-
-            Card.DuringCheckForTrait(state);
+            return Card.PrintedTraits.Contains(trait);
         }
     }
 }

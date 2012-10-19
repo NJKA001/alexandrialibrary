@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
+using LotR.Effects.Phases.Any;
 using LotR.States.Phases.Any;
 
 namespace LotR.States
@@ -17,26 +18,6 @@ namespace LotR.States
         }
 
         private readonly IList<IAttachableInPlay> attachments = new List<IAttachableInPlay>();
-
-        public override void DuringCheckForResourceIcon(ICheckForResourceIcon state)
-        {
-            base.DuringCheckForResourceIcon(state);
-
-            foreach (var attachment in attachments.Select(x => x.Card))
-            {
-                attachment.DuringCheckForResourceIcon(state);
-            }
-        }
-
-        public override void DuringCheckForTrait(ICheckForTrait state)
-        {
-            base.DuringCheckForTrait(state);
-
-            foreach (var attachment in attachments.Select(x => x.Card))
-            {
-                attachment.DuringCheckForTrait(state);
-            }
-        }
 
         public IEnumerable<IAttachableInPlay> Attachments
         {
@@ -68,6 +49,24 @@ namespace LotR.States
             }
 
             return false;
+        }
+
+        public override bool HasTrait(Trait trait)
+        {
+            if (base.HasTrait(trait))
+                return true;
+
+            var check = new CheckForTrait(game, this, trait);
+
+            foreach (var attachment in attachments.Where(x => x.Card.HasEffect<IDuringCheckForTrait>()))
+            {
+                foreach (var effect in attachment.Card.Text.Effects.OfType<IDuringCheckForTrait>())
+                {
+                    effect.DuringCheckForTrait(check);
+                }
+            }
+
+            return check.HasTrait;
         }
     }
 }

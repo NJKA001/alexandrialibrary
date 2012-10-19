@@ -10,13 +10,14 @@ using LotR.Effects.Phases.Any;
 namespace LotR.States
 {
     public interface ICardInPlay
-        : IState, IDuringCheckForResourceIcon, IDuringCheckForTrait
+        : IState
     {
         string Title { get; }
 
         IPlayer GetController(IGame game);
 
         bool HasEffect<T>() where T : IEffect;
+        bool HasTrait(Trait trait);
     }
 
     public interface ICardInPlay<T>

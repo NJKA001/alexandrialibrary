@@ -9,9 +9,7 @@ using LotR.Effects.Phases.Any;
 namespace LotR.Cards
 {
     public interface ICard
-        : ISource,
-        IDuringCheckForResourceIcon,
-        IDuringCheckForTrait
+        : ISource
     {
         CardSet CardSet { get; }
         uint CardNumber { get; }

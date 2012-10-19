@@ -9,20 +9,19 @@ namespace LotR.States
     public abstract class StateBase
         : IState, INotifyPropertyChanged
     {
-        protected StateBase(IGame gameState)
-            : this(gameState, Guid.NewGuid())
+        protected StateBase(IGame game)
+            : this(game, Guid.NewGuid())
         {
         }
 
-        protected StateBase(IGame gameState, Guid stateId)
+        protected StateBase(IGame game, Guid stateId)
         {
-            if (gameState != null)
-                AddState(gameState);
-
+            this.game = game;
             this.stateId = stateId;
         }
 
         private readonly Guid stateId;
+        protected readonly IGame game;
         private readonly IDictionary<Guid, IState> states = new Dictionary<Guid, IState>();
 
         protected void OnPropertyChanged(string propertyName)
