@@ -25,16 +25,16 @@ namespace LotR.States
         }
 
         private readonly IList<T> cards = new List<T>();
-        private readonly IList<T> discardedCards = new List<T>();
+        private readonly IList<T> discardPile = new List<T>();
 
         public IEnumerable<T> Cards
         {
             get { return cards; }
         }
 
-        public IEnumerable<T> DiscardedCards
+        public IEnumerable<T> DiscardPile
         {
-            get { return discardedCards; }
+            get { return discardPile; }
         }
 
         public uint Size
@@ -80,17 +80,17 @@ namespace LotR.States
         {
             foreach (var card in cards)
             {
-                this.discardedCards.Add(card);
+                this.discardPile.Add(card);
             }
         }
 
-        public void RemoveFromDiscard(IEnumerable<T> cards)
+        public void RemoveFromDiscardPile(IEnumerable<T> cards)
         {
             foreach (var card in cards)
             {
-                if (this.discardedCards.Contains(card))
+                if (this.discardPile.Contains(card))
                 {
-                    this.discardedCards.Remove(card);
+                    this.discardPile.Remove(card);
                 }
             }
         }
@@ -121,6 +121,15 @@ namespace LotR.States
                     this.cards.Insert(index, card);
                 }
             }
+        }
+
+        public void ShuffleDiscardPileIntoDeck()
+        {
+            if (discardPile.Count == 0)
+                return;
+
+            ShuffleIn(discardPile);
+            discardPile.Clear();
         }
 
         private static readonly Random random = new Random();

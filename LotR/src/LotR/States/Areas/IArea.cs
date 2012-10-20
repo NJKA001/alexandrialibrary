@@ -10,6 +10,5 @@ namespace LotR.States.Areas
     public interface IArea
         : IState
     {
-        ICardInPlay GetCardInPlay(Guid id);
     }
 }

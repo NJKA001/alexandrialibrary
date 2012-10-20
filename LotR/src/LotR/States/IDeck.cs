@@ -11,7 +11,7 @@ namespace LotR.States
         where T : ICard
     {
         IEnumerable<T> Cards { get; }
-        IEnumerable<T> DiscardedCards { get; }
+        IEnumerable<T> DiscardPile { get; }
         uint Size { get; }
 
         IEnumerable<T> GetFromTop(int numberOfCards);
@@ -19,8 +19,9 @@ namespace LotR.States
         void PutOnTop(IEnumerable<T> cards);
         void PutOnBottom(IEnumerable<T> cards);
         void Discard(IEnumerable<T> cards);
-        void RemoveFromDiscard(IEnumerable<T> cards);
+        void RemoveFromDiscardPile(IEnumerable<T> cards);
         void Shuffle();
         void ShuffleIn(IEnumerable<T> cards);
+        void ShuffleDiscardPileIntoDeck();
     }
 }

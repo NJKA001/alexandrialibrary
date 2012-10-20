@@ -15,10 +15,11 @@ namespace LotR.States.Areas
         IDeck<IEncounterCard> EncounterDeck { get; }
         
         IEncounterCard RevealedEncounterCard { get; }
-        IEnumerable<ICardInPlay<IEncounterCard>> CardsInStagingArea { get; }
+        IEnumerable<IEncounterInPlay> CardsInStagingArea { get; }
         IEnumerable<IEncounterCard> ExaminedEncounterCards { get; }
         void AddExaminedEncounterCards(IEnumerable<IEncounterCard> cards);
         void RemoveExaminedEncounterCards(IEnumerable<IEncounterCard> cards);
+        void ChangeEncounterDeck(IDeck<IEncounterCard> encounterDeck);
 
         void RevealEncounterCards(byte numberOfCards);
         void CancelRevealedCard(ICancelEffect effect);

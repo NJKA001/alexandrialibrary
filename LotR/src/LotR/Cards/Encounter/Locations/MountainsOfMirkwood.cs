@@ -32,11 +32,7 @@ namespace LotR.Cards.Encounter.Locations
 
             public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
             {
-                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
-                if (stagingArea == null)
-                    return false;
-
-                stagingArea.RevealEncounterCards(1);
+                game.StagingArea.RevealEncounterCards(1);
 
                 return true;
             }

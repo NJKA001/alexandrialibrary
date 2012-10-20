@@ -32,15 +32,7 @@ namespace LotR.Cards.Quests
 
             public void BeforeStageDefeated(ICurrentQuestStage state)
             {
-                var game = state.GetStates<IGame>().FirstOrDefault();
-                if (game == null)
-                    return;
-
-                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
-                if (stagingArea == null)
-                    return;
-
-                var ungoliantsSpawn = stagingArea.CardsInStagingArea.Where(x => x.Title == "Ungoliant's Spawn").FirstOrDefault() as IEnemyInPlay;
+                var ungoliantsSpawn = state.Game.StagingArea.CardsInStagingArea.Where(x => x.Title == "Ungoliant's Spawn").FirstOrDefault() as IEnemyInPlay;
                 if (ungoliantsSpawn == null)
                     return;
 

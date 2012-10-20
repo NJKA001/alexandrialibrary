@@ -17,7 +17,11 @@ namespace LotR.States
         {
         }
 
+        private IQuestArea questArea;
+        private IStagingArea stagingArea;
+        private IVictoryDisplay victoryDisplay;
         private readonly IList<IPlayer> players = new List<IPlayer>();
+
         private readonly IList<IEffect> currentEffects = new List<IEffect>();
 
         public Phase CurrentPhase
@@ -30,6 +34,21 @@ namespace LotR.States
         {
             get;
             private set;
+        }
+
+        public IQuestArea QuestArea
+        {
+            get { return questArea; }
+        }
+
+        public IStagingArea StagingArea
+        {
+            get { return stagingArea; }
+        }
+
+        public IVictoryDisplay VictoryDisplay
+        {
+            get { return victoryDisplay; }
         }
 
         public IEnumerable<IPlayer> Players
@@ -68,12 +87,13 @@ namespace LotR.States
             if (players.Any(x => x == null))
                 throw new ArgumentException("list of players cannot contain nulls");
 
-            AddState(questArea);
+            this.questArea = questArea;
+            this.stagingArea = new StagingArea(this, questArea.ActiveEncounterDeck);
+            this.victoryDisplay = new VictoryDisplay(this);
 
             foreach (var player in players)
             {
                 this.players.Add(player);
-                AddState(player);
             }
 
             FirstPlayer = players.First();

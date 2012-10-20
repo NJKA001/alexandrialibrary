@@ -45,7 +45,7 @@ namespace LotR.Cards.Quests
 
                 var allSpiders = 
                     stagingArea.EncounterDeck.Cards.OfType<IEnemyCard>().Where(x => x.PrintedTraits.Contains(Trait.Spider))
-                        .Concat(stagingArea.EncounterDeck.DiscardedCards.OfType<IEnemyCard>().Where(x => x.PrintedTraits.Contains(Trait.Spider))).ToList();
+                        .Concat(stagingArea.EncounterDeck.DiscardPile.OfType<IEnemyCard>().Where(x => x.PrintedTraits.Contains(Trait.Spider))).ToList();
 
                 if (allSpiders.Count == 0)
                     return null;
@@ -81,9 +81,9 @@ namespace LotR.Cards.Quests
                         stagingArea.EncounterDeck.RemoveFromDeck(spider);
                         stagingArea.AddToStagingArea(spider);
                     }
-                    else if (stagingArea.EncounterDeck.DiscardedCards.Any(x => x.Id == spider.Id))
+                    else if (stagingArea.EncounterDeck.DiscardPile.Any(x => x.Id == spider.Id))
                     {
-                        stagingArea.EncounterDeck.RemoveFromDiscard(new List<IEncounterCard> { spider });
+                        stagingArea.EncounterDeck.RemoveFromDiscardPile(new List<IEncounterCard> { spider });
                         stagingArea.AddToStagingArea(spider);
                     }
                 }
@@ -108,7 +108,7 @@ namespace LotR.Cards.Quests
                 if (stagingArea == null)
                     return;
 
-                var ungoliantsSpawn = stagingArea.EncounterDeck.DiscardedCards.Where(x => x.Title == "Ungoliant's Spawn").FirstOrDefault() as IEnemyInPlay;
+                var ungoliantsSpawn = stagingArea.EncounterDeck.DiscardPile.Where(x => x.Title == "Ungoliant's Spawn").FirstOrDefault() as IEnemyInPlay;
                 if (ungoliantsSpawn != null)
                     return;
 
