@@ -38,7 +38,7 @@ namespace LotR.Cards.Player.Heroes
 
             public override ICost GetCost(IGame game)
             {
-                var exhaustable = game.GetState<IExhaustableInPlay>(Source.Id);
+                var exhaustable = CardSource.Owner.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
                 if (exhaustable == null)
                     return null;
 
@@ -47,14 +47,10 @@ namespace LotR.Cards.Player.Heroes
 
             public void DuringEncounterCardRevealed(IGame game)
             {
-                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
-                if (stagingArea == null)
+                if (game.StagingArea.RevealedEncounterCard == null)
                     return;
 
-                if (stagingArea.RevealedEncounterCard == null)
-                    return;
-
-                if ((!(stagingArea.RevealedEncounterCard is IRevealableCard)) || (!(stagingArea.RevealedEncounterCard is ITreacheryCard)))
+                if ((!(game.StagingArea.RevealedEncounterCard is IRevealableCard)) || (!(game.StagingArea.RevealedEncounterCard is ITreacheryCard)))
                     return;
 
                 game.AddEffect(this);
@@ -79,16 +75,12 @@ namespace LotR.Cards.Player.Heroes
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
-                if (stagingArea == null)
+                if (game.StagingArea.RevealedEncounterCard == null)
                     return;
 
-                if (stagingArea.RevealedEncounterCard == null)
-                    return;
-
-                stagingArea.CancelRevealedCard(this);
-                stagingArea.EncounterDeck.Discard(new List<IEncounterCard> { stagingArea.RevealedEncounterCard });
-                stagingArea.RevealEncounterCards(1);
+                game.StagingArea.CancelRevealedCard(this);
+                game.StagingArea.EncounterDeck.Discard(new List<IEncounterCard> { game.StagingArea.RevealedEncounterCard });
+                game.StagingArea.RevealEncounterCards(1);
             }
         }
     }

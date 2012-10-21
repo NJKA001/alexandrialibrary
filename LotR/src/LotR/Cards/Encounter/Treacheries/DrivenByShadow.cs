@@ -35,19 +35,15 @@ namespace LotR.Cards.Encounter.Treacheries
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
-                if (stagingArea == null)
-                    return;
-
-                if (stagingArea.CardsInStagingArea.Count() == 0)
+                if (game.StagingArea.CardsInStagingArea.Count() == 0)
                 {
-                    stagingArea.RevealEncounterCards(1);
+                    game.StagingArea.RevealEncounterCards(1);
                     return;
                 }
 
-                foreach (var threatening in stagingArea.CardsInStagingArea.OfType<IThreateningInPlay>())
+                foreach (var threatening in game.StagingArea.CardsInStagingArea.OfType<IThreateningInPlay>())
                 {
-                    game.AddEffect(new ThreatModifier(game.CurrentPhase, Source, threatening, TimeScope.Phase, 1));
+                    game.AddEffect(new ThreatModifier(game.CurrentPhase.Code, Source, threatening, TimeScope.Phase, 1));
                 }
             }
         }
@@ -62,7 +58,7 @@ namespace LotR.Cards.Encounter.Treacheries
 
             public override IChoice GetChoice(IGame game)
             {
-                var enemyAttack = game.GetStates<IEnemyAttack>().FirstOrDefault();
+                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
                 if (enemyAttack == null || enemyAttack.IsUndefended)
                     return null;
 
@@ -109,11 +105,7 @@ namespace LotR.Cards.Encounter.Treacheries
                     }
                     else if (attachable.Card is IObjectiveCard)
                     {
-                        var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
-                        if (stagingArea != null)
-                        {
-                            stagingArea.EncounterDeck.Discard(new List<IEncounterCard> { attachable.Card as IObjectiveCard });
-                        }
+                        game.StagingArea.EncounterDeck.Discard(new List<IEncounterCard> { attachable.Card as IObjectiveCard });
                     }
                 }
             }
@@ -151,17 +143,13 @@ namespace LotR.Cards.Encounter.Treacheries
                 }
                 else if (attachable.Card is IObjectiveCard)
                 {
-                    var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
-                    if (stagingArea != null)
-                    {
-                        stagingArea.EncounterDeck.Discard(new List<IEncounterCard> { attachable.Card as IObjectiveCard });
-                    }
+                    game.StagingArea.EncounterDeck.Discard(new List<IEncounterCard> { attachable.Card as IObjectiveCard });
                 }
             }
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var enemyAttack = game.GetStates<IEnemyAttack>().FirstOrDefault();
+                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return;
 

@@ -9,6 +9,6 @@ namespace LotR.Effects.Phases.Any
 {
     public interface IAfterStageDefeated
     {
-        void AfterStageDefeated(ICurrentQuestStage state);
+        void AfterStageDefeated(IQuestStage state);
     }
 }

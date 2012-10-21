@@ -72,7 +72,7 @@ namespace LotR.Cards.Player.Attachments
 
             public override ICost GetCost(IGame game)
             {
-                var exhaustable = game.GetState<IExhaustableInPlay>(Source.Id);
+                var exhaustable = game.GetCardInPlay<IExhaustableInPlay>(Source.Id);
                 if (exhaustable == null)
                     return null;
 
@@ -95,7 +95,7 @@ namespace LotR.Cards.Player.Attachments
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var attachment = game.GetState<IAttachmentInPlay>(Source.Id);
+                var attachment = game.GetCardInPlay<IAttachmentInPlay>(Source.Id);
                 if (attachment == null || attachment.AttachedTo == null)
                     return;
 

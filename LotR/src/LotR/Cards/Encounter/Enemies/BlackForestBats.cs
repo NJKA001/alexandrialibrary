@@ -32,32 +32,28 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override IChoice GetChoice(IGame game)
             {
-                var commitedToQuest = game.GetStates<ICharactersCommittedToQuest>().FirstOrDefault();
-                if (commitedToQuest == null)
+                var questPhase = game.CurrentPhase as IQuestPhase;
+                if (questPhase == null)
                     return null;
-
-                var players = game.GetStates<IPlayer>();
-                if (players.Count() == 0)
-                    return null;
-
+                
                 var questingCharacters = new Dictionary<Guid, IList<IWillpowerfulCard>>();
 
-                foreach (var player in players)
+                foreach (var player in game.Players)
                 {
-                    var questingForPlayer = commitedToQuest.GetCharactersCommittedToQuest(player.StateId).Select(x => x.Card).ToList();
+                    var questingForPlayer = questPhase.GetCharactersCommitedToTheQuest(player.StateId).Select(x => x.Card).ToList();
                     questingCharacters.Add(player.StateId, questingForPlayer);
                 }
 
                 if (questingCharacters.All(x => x.Value.Count == 0))
                     return null;
 
-                return new PlayersChooseCards<IWillpowerfulCard>("Each player must choose 1 character currently commited to a quest", Source, players, 1, questingCharacters);
+                return new PlayersChooseCards<IWillpowerfulCard>("Each player must choose 1 character currently commited to a quest", Source, game.Players, 1, questingCharacters);
             }
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var commitedToQuest = game.GetStates<ICharactersCommittedToQuest>().FirstOrDefault();
-                if (commitedToQuest == null)
+                var questPhase = game.CurrentPhase as IQuestPhase;
+                if (questPhase == null)
                     return;
 
                 var removeChoice = choice as IPlayersChooseCards<IWillpowerfulCard>;
@@ -70,11 +66,11 @@ namespace LotR.Cards.Encounter.Enemies
                     if (removeFromQuest == null)
                         continue;
 
-                    var inPlay = game.GetState<IWillpowerfulInPlay>(removeFromQuest.Id);
-                    if (inPlay == null)
+                    var character = player.CardsInPlay.OfType<IWillpowerfulInPlay>().Where(x => x.Card.Id == removeFromQuest.Id).FirstOrDefault();
+                    if (character == null)
                         continue;
 
-                    commitedToQuest.RemoveCharacterFromQuest(inPlay);
+                    questPhase.RemoveCharacterFromQuest(character);
                 }
             }
         }

@@ -44,7 +44,15 @@ namespace LotR.Cards.Player.Attachments
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var attachment = game.GetState<IAttachmentInPlay>(Source.Id);
+                IAttachmentInPlay attachment = null;
+
+                foreach (var player in game.Players)
+                {
+                    attachment = player.CardsInPlay.OfType<IAttachmentInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
+                    if (attachment != null)
+                        continue;
+                }
+
                 if (attachment == null || attachment.AttachedTo == null)
                     return;
 

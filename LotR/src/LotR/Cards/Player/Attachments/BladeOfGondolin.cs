@@ -49,24 +49,16 @@ namespace LotR.Cards.Player.Attachments
             {
             }
 
-            public void DuringDetermineAttack(IDetermineAttack state)
+            public void DuringDetermineAttack(IDetermineAttack determineAttack)
             {
-                var determineStrength = state.GetStates<IDetermineAttack>().FirstOrDefault();
-                if (determineStrength == null)
-                    return;
-
-                var game = state.GetStates<IGame>().FirstOrDefault();
-                if (game == null)
-                    return;
-
-                var enemy = game.GetState<IEnemyInPlay>(determineStrength.Defender.Card.Id);
+                var enemy = determineAttack.Game.GetCardInPlay<IEnemyInPlay>(determineAttack.Defender.Card.Id);
                 if (enemy == null)
                     return;
 
                 if (!enemy.HasTrait(Trait.Orc))
                     return;
 
-                determineStrength.Attack += 1;
+                determineAttack.Attack += 1;
             }
         }
 
@@ -80,11 +72,7 @@ namespace LotR.Cards.Player.Attachments
 
             public void AfterEnemyDefeated(IEnemyDefeated state)
             {
-                var game = state.GetStates<IGame>().FirstOrDefault();
-                if (game == null)
-                    return;
-
-                var attachment = game.GetState<IAttachmentInPlay>(Source.Id);
+                var attachment = state.Game.GetCardInPlay<IAttachmentInPlay>(Source.Id);
                 if (attachment == null)
                     return;
 
@@ -95,16 +83,12 @@ namespace LotR.Cards.Player.Attachments
                 if (!state.Attackers.Any(x => x.Card.Id == hero.Id))
                     return;
 
-                game.AddEffect(this);
+                state.Game.AddEffect(this);
             }
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var questArea = game.GetStates<IQuestArea>().FirstOrDefault();
-                if (questArea == null)
-                    return;
-
-                questArea.AddProgress(1);
+                game.QuestArea.AddProgress(1);
             }
         }
     }

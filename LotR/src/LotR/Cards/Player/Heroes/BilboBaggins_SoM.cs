@@ -38,7 +38,7 @@ namespace LotR.Cards.Player.Heroes
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var playersDrawing = game.GetStates<IPlayersDrawingCards>().FirstOrDefault();
+                var playersDrawing = game.CurrentPhase.GetPlayersDrawingCards();
                 if (playersDrawing == null)
                     return;
 

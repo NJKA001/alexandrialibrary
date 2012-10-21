@@ -40,18 +40,19 @@ namespace LotR.Cards.Player.Heroes
 
             public void BeforeChoosingEnemyToAttack(IGame game)
             {
-                var chooseEnemy = game.GetStates<IChooseEnemyToAttack>().FirstOrDefault();
+                var combatPhase = game.CurrentPhase as ICombatPhase;
+                if (combatPhase == null)
+                    return;
+
+                var chooseEnemy = game.CurrentPhase.GetEnemiesChosenToAttack().FirstOrDefault();
                 if (chooseEnemy == null)
                     return;
 
                 if (chooseEnemy.Attackers.Count() != 1)
                     return;
 
-                var attacker = chooseEnemy.Attackers.FirstOrDefault();
+                var attacker = chooseEnemy.Attackers.Where(x => x.Card.Id == Source.Id).FirstOrDefault();
                 if (attacker == null)
-                    return;
-
-                if (attacker.Card.Id != Source.Id)
                     return;
 
                 game.AddEffect(this);
@@ -59,13 +60,11 @@ namespace LotR.Cards.Player.Heroes
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var chooseEnemy = game.GetStates<IChooseEnemyToAttack>().FirstOrDefault();
+                var chooseEnemy = game.CurrentPhase.GetEnemiesChosenToAttack().FirstOrDefault();
                 if (chooseEnemy == null)
                     return;
 
-                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
-
-                foreach (var enemy in stagingArea.CardsInStagingArea.OfType<IEnemyInPlay>())
+                foreach (var enemy in game.StagingArea.CardsInStagingArea.OfType<IEnemyInPlay>())
                 {
                     chooseEnemy.AddEnemy(enemy);
                 }
@@ -89,24 +88,16 @@ namespace LotR.Cards.Player.Heroes
                 if (determineAttack.Attacker.Card.Id != Source.Id)
                     return;
 
-                var game = state.GetStates<IGame>().FirstOrDefault();
-                if (game == null)
-                    return;
-
-                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
-                if (stagingArea == null)
-                    return;
-
-                var enemy = stagingArea.CardsInStagingArea.OfType<IEnemyInPlay>().Where(x => x.Card.Id == determineAttack.Defender.Card.Id).FirstOrDefault();
+                var enemy = state.Game.StagingArea.CardsInStagingArea.OfType<IEnemyInPlay>().Where(x => x.Card.Id == determineAttack.Defender.Card.Id).FirstOrDefault();
                 if (enemy == null)
                     return;
 
-                game.AddEffect(this);
+                state.Game.AddEffect(this);
             }
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var determineAttack = game.GetStates<IDetermineAttack>().FirstOrDefault();
+                var determineAttack = game.CurrentPhase.GetDetermineAttacks().FirstOrDefault();
                 if (determineAttack == null)
                     return;
 

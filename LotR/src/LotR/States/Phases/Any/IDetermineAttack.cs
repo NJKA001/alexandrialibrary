@@ -6,8 +6,9 @@ using System.Text;
 namespace LotR.States.Phases.Any
 {
     public interface IDetermineAttack
-        : IState, IEffective
+        : IState
     {
+        IGame Game { get; }
         IAttackingInPlay Attacker { get; }
         IDefendingInPlay Defender { get; }
         byte Attack { get; set; }

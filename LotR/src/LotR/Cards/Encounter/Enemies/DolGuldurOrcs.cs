@@ -33,20 +33,21 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override IChoice GetChoice(IGame game)
             {
-                if (game.CurrentPhase != Phase.Quest)
+                var questPhase = game.CurrentPhase as IQuestPhase;
+                if (questPhase == null)
                     return null;
 
-                var committedToQuest = game.GetStates<ICharactersCommittedToQuest>().FirstOrDefault();
-                if (committedToQuest == null)
+                var firstPlayer = game.Players.Where(x => x.IsFirstPlayer).FirstOrDefault();
+                if (firstPlayer == null)
                     return null;
 
-                var questingCharacters = committedToQuest.GetCharactersCommittedToQuest(game.FirstPlayer.StateId);
+                var questingCharacters = questPhase.GetCharactersCommitedToTheQuest(firstPlayer.StateId);
                 if (questingCharacters.Count() == 0)
                     return null;
 
-                var availableCharacters = new Dictionary<Guid, IList<IWillpowerfulCard>> { { game.FirstPlayer.StateId, questingCharacters.Select(x => x.Card).ToList() } };
+                var availableCharacters = new Dictionary<Guid, IList<IWillpowerfulCard>> { { firstPlayer.StateId, questingCharacters.Select(x => x.Card).ToList() } };
 
-                return new PlayersChooseCards<IWillpowerfulCard>("The first player chooses 1 character currently commited to a quest", Source, new List<IPlayer> { game.FirstPlayer }, 1, availableCharacters);
+                return new PlayersChooseCards<IWillpowerfulCard>("The first player chooses 1 character currently commited to a quest", Source, new List<IPlayer> { firstPlayer }, 1, availableCharacters);
             }
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
@@ -67,13 +68,13 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var enemyAttack = game.GetStates<IEnemyAttack>().FirstOrDefault();
+                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return;
 
                 var bonus = enemyAttack.IsUndefended ? 3 : 1;
 
-                game.AddEffect(new AttackModifier(game.CurrentPhase, Source, enemyAttack.Enemy, TimeScope.None, bonus));
+                game.AddEffect(new AttackModifier(game.CurrentPhase.Code, Source, enemyAttack.Enemy, TimeScope.None, bonus));
             }
         }
     }

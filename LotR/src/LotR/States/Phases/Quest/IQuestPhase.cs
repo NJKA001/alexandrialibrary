@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Cards;
-
 namespace LotR.States.Phases.Quest
 {
-    public interface ICharactersCommittedToQuest
-        : IState
+    public interface IQuestPhase
+        : IPhase
     {
         bool IsCommittedToQuest(Guid cardId);
         IEnumerable<IWillpowerfulInPlay> GetAllCharactersCommittedToQuest();
-        IEnumerable<IWillpowerfulInPlay> GetCharactersCommittedToQuest(Guid playerId);
+        IEnumerable<IWillpowerfulInPlay> GetCharactersCommitedToTheQuest(Guid playerId);
 
         void CommitCharacterToQuest(IWillpowerfulInPlay character);
         void RemoveCharacterFromQuest(IWillpowerfulInPlay character);

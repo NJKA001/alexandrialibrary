@@ -36,6 +36,7 @@ namespace LotR.States
 
         private byte currentThreat;
         private bool isFirstPlayer;
+        private bool isActivePlayer;
 
         public string Name
         {
@@ -77,11 +78,24 @@ namespace LotR.States
             get { return isFirstPlayer; }
             set
             {
-                if (isFirstPlayer != value)
-                {
-                    isFirstPlayer = value;
-                    OnPropertyChanged("IsFirstPlayer");
-                }
+                if (isFirstPlayer == value)
+                    return;
+                
+                isFirstPlayer = value;
+                OnPropertyChanged("IsFirstPlayer");
+            }
+        }
+
+        public bool IsActivePlayer
+        {
+            get { return isActivePlayer; }
+            set
+            {
+                if (isActivePlayer == value)
+                    return;
+
+                isActivePlayer = value;
+                OnPropertyChanged("IsActivePlayer");
             }
         }
 

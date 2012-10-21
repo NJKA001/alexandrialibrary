@@ -33,13 +33,17 @@ namespace LotR.Cards.Encounter.Locations
 
             public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
             {
-                if (game.FirstPlayer.Hand.Cards.Count() < 2)
+                var firstPlayer = game.Players.Where(x => x.IsFirstPlayer).FirstOrDefault();
+                if (firstPlayer == null)
                     return false;
 
-                var random1 = game.FirstPlayer.Hand.GetRandomCard();
-                var random2 = game.FirstPlayer.Hand.GetRandomCard();
+                if (firstPlayer.Hand.Cards.Count() < 2)
+                    return false;
 
-                game.FirstPlayer.DiscardFromHand(new List<IPlayerCard> { random1, random2 });
+                var random1 = firstPlayer.Hand.GetRandomCard();
+                var random2 = firstPlayer.Hand.GetRandomCard();
+
+                firstPlayer.DiscardFromHand(new List<IPlayerCard> { random1, random2 });
 
                 return true;
             }

@@ -6,6 +6,7 @@ using System.Text;
 using LotR.Cards;
 using LotR.Cards.Quests;
 using LotR.Cards.Encounter;
+using LotR.States.Phases.Any;
 
 namespace LotR.States.Areas
 {
@@ -33,7 +34,7 @@ namespace LotR.States.Areas
             private set;
         }
 
-        public IQuestCard ActiveQuest
+        public IQuestInPlay ActiveQuest
         {
             get;
             private set;
@@ -90,7 +91,7 @@ namespace LotR.States.Areas
             if (!QuestDeck.Cards.Contains(card))
                 return;
 
-            ActiveQuest = card;
+            ActiveQuest = new QuestInPlay(game, card);
         }
 
         public void SetActiveEncounterDeck(IDeck<IEncounterCard> deck)
@@ -140,6 +141,11 @@ namespace LotR.States.Areas
 
         public void Setup()
         {
+        }
+
+        public IQuestStage GetCurrentQuestStage()
+        {
+            return null;
         }
     }
 }

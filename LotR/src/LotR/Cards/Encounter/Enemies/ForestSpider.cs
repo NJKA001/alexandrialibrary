@@ -44,11 +44,19 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var enemy = game.GetState<IEnemyInPlay>(Source.Id);
+                IEnemyInPlay enemy = null;
+
+                foreach (var player in game.Players)
+                {
+                    enemy = player.EngagedEnemies.Where(x => x.Card.Id == Source.Id).FirstOrDefault();
+                    if (enemy != null)
+                        break;
+                }
+
                 if (enemy == null)
                     return;
 
-                game.AddEffect(new AttackModifier(game.CurrentPhase, Source, enemy, TimeScope.Round, 1));
+                game.AddEffect(new AttackModifier(game.CurrentPhase.Code, Source, enemy, TimeScope.Round, 1));
             }
         }
 
@@ -62,7 +70,7 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override IChoice GetChoice(IGame game)
             {
-                var enemyAttack = game.GetStates<IEnemyAttack>().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return null;
 
@@ -85,7 +93,7 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var enemyAttack = game.GetStates<IEnemyAttack>().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return;
 
@@ -108,11 +116,7 @@ namespace LotR.Cards.Encounter.Enemies
                 }
                 else if (attachmentToDiscard is IObjectiveCard)
                 {
-                    var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
-                    if (stagingArea == null)
-                        return;
-
-                    stagingArea.EncounterDeck.Discard(new List<IEncounterCard> { attachmentToDiscard as IEncounterCard });
+                    game.StagingArea.EncounterDeck.Discard(new List<IEncounterCard> { attachmentToDiscard as IEncounterCard });
                 }
             }
         }

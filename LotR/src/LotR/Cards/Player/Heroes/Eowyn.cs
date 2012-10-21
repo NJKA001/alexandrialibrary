@@ -46,11 +46,11 @@ namespace LotR.Cards.Player.Heroes
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var willpowerful = game.GetState<IWillpowerfulInPlay>(Source.Id);
+                var willpowerful = CardSource.Owner.CardsInPlay.OfType<IWillpowerfulInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
                 if (willpowerful == null)
                     return;
 
-                game.AddEffect(new WillpowerModifier(game.CurrentPhase, Source, willpowerful, TimeScope.Phase, 1));
+                game.AddEffect(new WillpowerModifier(game.CurrentPhase.Code, Source, willpowerful, TimeScope.Phase, 1));
             }
         }
     }

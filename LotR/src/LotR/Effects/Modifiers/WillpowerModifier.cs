@@ -12,7 +12,7 @@ namespace LotR.Effects.Modifiers
     public class WillpowerModifier
         : ModifierBase
     {
-        public WillpowerModifier(Phase startPhase, ISource source, ICardInPlay target, TimeScope duration, int value)
+        public WillpowerModifier(PhaseCode startPhase, ISource source, ICardInPlay target, TimeScope duration, int value)
             : base(GetDefaultDescription("Willpower", value), startPhase, source, target, duration, value)
         {
         }

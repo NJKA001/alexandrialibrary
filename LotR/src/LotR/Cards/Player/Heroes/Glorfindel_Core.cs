@@ -35,12 +35,12 @@ namespace LotR.Cards.Player.Heroes
 
             public override IChoice GetChoice(IGame game)
             {
-                return new ChooseCharacter(Source, game.ActivePlayer);
+                return new ChooseCharacter(Source, CardSource.Owner);
             }
 
             public override ICost GetCost(IGame game)
             {
-                var resourceful = game.GetState<ICharacterInPlay>(Source.Id);
+                var resourceful = CardSource.Owner.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
                 if (resourceful == null)
                     return null;
 

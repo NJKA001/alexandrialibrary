@@ -37,7 +37,7 @@ namespace LotR.Cards.Player.Heroes
 
             public override ICost GetCost(IGame game)
             {
-                var exhaustable = game.GetState<IExhaustableInPlay>(Source.Id);
+                var exhaustable = CardSource.Owner.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
                 if (exhaustable == null)
                     return null;
 
@@ -52,15 +52,11 @@ namespace LotR.Cards.Player.Heroes
 
                 exhaustPayment.Exhaustable.Exhaust();
 
-                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
-                if (stagingArea == null)
-                    return false;
-
-                var topCard = stagingArea.EncounterDeck.GetFromTop(1).FirstOrDefault();
+                var topCard = game.StagingArea.EncounterDeck.GetFromTop(1).FirstOrDefault();
                 if (topCard == null)
                     return false;
 
-                stagingArea.AddExaminedEncounterCards(new List<IEncounterCard> { topCard });
+                game.StagingArea.AddExaminedEncounterCards(new List<IEncounterCard> { topCard });
 
                 return true;
             }
@@ -71,26 +67,22 @@ namespace LotR.Cards.Player.Heroes
                 if (topOfDeckChoice == null)
                     return;
 
-                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
-                if (stagingArea == null)
+                if (game.StagingArea.ExaminedEncounterCards.Count() != 1)
                     return;
 
-                if (stagingArea.ExaminedEncounterCards.Count() != 1)
-                    return;
-
-                var topCard = stagingArea.ExaminedEncounterCards.FirstOrDefault() as IEncounterCard;
+                var topCard = game.StagingArea.ExaminedEncounterCards.FirstOrDefault() as IEncounterCard;
                 if (topCard == null)
                     return;
 
-                stagingArea.RemoveExaminedEncounterCards(new List<IEncounterCard> { topCard });
+                game.StagingArea.RemoveExaminedEncounterCards(new List<IEncounterCard> { topCard });
 
                 if (topOfDeckChoice.TopOfDeck)
                 {
-                    stagingArea.EncounterDeck.PutOnTop(new List<IEncounterCard> { topCard });
+                    game.StagingArea.EncounterDeck.PutOnTop(new List<IEncounterCard> { topCard });
                 }
                 else
                 {
-                    stagingArea.EncounterDeck.PutOnBottom(new List<IEncounterCard> { topCard });
+                    game.StagingArea.EncounterDeck.PutOnBottom(new List<IEncounterCard> { topCard });
 
                 }
             }

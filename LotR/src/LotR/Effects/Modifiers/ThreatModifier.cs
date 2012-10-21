@@ -10,7 +10,7 @@ namespace LotR.Effects.Modifiers
     public class ThreatModifier
         : ModifierBase, IThreatModifier
     {
-        public ThreatModifier(Phase startPhase, ISource source, IThreateningInPlay target, TimeScope duration, int value)
+        public ThreatModifier(PhaseCode startPhase, ISource source, IThreateningInPlay target, TimeScope duration, int value)
             : base(GetDefaultDescription("Threat", value), startPhase, source, target, duration, value)
         {
         }

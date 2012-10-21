@@ -7,8 +7,8 @@ using LotR.Cards.Quests;
 
 namespace LotR.States.Phases.Any
 {
-    public interface ICurrentQuestStage
-        : IState, IEffective
+    public interface IQuestStage
+        : IState
     {
         IGame Game { get; }
         IQuestInPlay CurrentStage { get; }

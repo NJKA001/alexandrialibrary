@@ -38,13 +38,9 @@ namespace LotR.Cards.Encounter.Locations
                 if (characterChoice == null)
                     return false;
 
-                var players = game.GetStates<IPlayer>();
-                if (players.Count() == 0)
-                    return false;
-
                 var charactersToExhaust = new List<IExhaustableInPlay>();
 
-                foreach (var player in players)
+                foreach (var player in game.Players)
                 {
                     var exhaustable = characterChoice.GetChosenCharacters(player.StateId).FirstOrDefault() as IExhaustableInPlay;
                     if (exhaustable == null || exhaustable.IsExhausted)

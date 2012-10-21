@@ -42,7 +42,7 @@ namespace LotR.Cards.Encounter.Treacheries
             {
                 var highestThreat = -1;
                 var mostThreateningPlayers = new List<IPlayer>();
-                foreach (var player in game.GetStates<IPlayer>())
+                foreach (var player in game.Players)
                 {
                     if (player.CurrentThreat > highestThreat)
                     {
@@ -105,7 +105,15 @@ namespace LotR.Cards.Encounter.Treacheries
 
             public override ICost GetCost(IGame game)
             {
-                var attachment = game.GetState<IAttachableInPlay>(Source.Id);
+                IAttachableInPlay attachment = null;
+
+                foreach (var player in game.Players)
+                {
+                    attachment = player.CardsInPlay.OfType<IAttachableInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
+                    if (attachment != null)
+                        break;
+                }
+
                 if (attachment == null || attachment.AttachedTo == null)
                     return null;
 
@@ -120,7 +128,11 @@ namespace LotR.Cards.Encounter.Treacheries
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var cardReadying = game.GetStates<ICardReadying>().Where(x => x.Exhaustable.Card.Id == Source.Id).FirstOrDefault();
+                var refreshPhase = game.CurrentPhase as IRefreshPhase;
+                if (refreshPhase == null)
+                    return;
+
+                var cardReadying = refreshPhase.GetCardsReadying().Where(x => x.Exhaustable.Card.Id == Source.Id).FirstOrDefault();
                 if (cardReadying == null)
                     return;
 

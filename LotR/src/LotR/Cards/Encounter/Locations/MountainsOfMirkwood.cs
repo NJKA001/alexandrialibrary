@@ -56,18 +56,14 @@ namespace LotR.Cards.Encounter.Locations
 
             public override IChoice GetChoice(IGame game)
             {
-                var players = game.GetStates<IPlayer>();
-                if (players.Count() == 0)
-                    return null;
-
                 var availableCards = new Dictionary<Guid, IList<IPlayerCard>>();
-                foreach (var player in players)
+                foreach (var player in game.Players)
                 {
                     var topFive = player.Deck.GetFromTop(5).ToList();
                     availableCards.Add(player.StateId, topFive);
                 }
 
-                return new PlayersChooseCards<IPlayerCard>("each player may search the top 5 cards of his deck for 1 card of their choice", Source, players, 1, availableCards);
+                return new PlayersChooseCards<IPlayerCard>("each player may search the top 5 cards of his deck for 1 card of their choice", Source, game.Players, 1, availableCards);
             }
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)

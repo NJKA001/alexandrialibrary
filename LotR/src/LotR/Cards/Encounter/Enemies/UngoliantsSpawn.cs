@@ -36,16 +36,13 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                if (game.CurrentPhase != Phase.Quest)
+                var questPhase = game.CurrentPhase as IQuestPhase;
+                if (questPhase == null)
                     return;
 
-                var committedCharacters = game.GetStates<ICharactersCommittedToQuest>().FirstOrDefault();
-                if (committedCharacters == null)
-                    return;
-
-                foreach (var willpowerful in committedCharacters.GetAllCharactersCommittedToQuest())
+                foreach (var willpowerful in questPhase.GetAllCharactersCommittedToQuest())
                 {
-                    game.AddEffect(new WillpowerModifier(game.CurrentPhase, Source, willpowerful, TimeScope.Phase, -1));
+                    game.AddEffect(new WillpowerModifier(game.CurrentPhase.Code, Source, willpowerful, TimeScope.Phase, -1));
                 }                
             }
         }
@@ -60,7 +57,7 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var enemyAttack = game.GetStates<IEnemyAttack>().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return;
 

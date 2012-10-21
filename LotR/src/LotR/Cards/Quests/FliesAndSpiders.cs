@@ -34,25 +34,21 @@ namespace LotR.Cards.Quests
 
             public void Setup(IGame game)
             {
-                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
-                if (stagingArea == null)
-                    return;
-
-                var forestSpider = stagingArea.EncounterDeck.Cards.Where(x => x.Title == "Forest Spider").FirstOrDefault() as IEnemyCard;
+                var forestSpider = game.StagingArea.EncounterDeck.Cards.Where(x => x.Title == "Forest Spider").FirstOrDefault() as IEnemyCard;
                 if (forestSpider == null)
                     return;
 
-                var oldForestRoad = stagingArea.EncounterDeck.Cards.Where(x => x.Title == "Old Forest Road").FirstOrDefault() as ILocationCard;
+                var oldForestRoad = game.StagingArea.EncounterDeck.Cards.Where(x => x.Title == "Old Forest Road").FirstOrDefault() as ILocationCard;
                 if (oldForestRoad == null)
                     return;
 
-                stagingArea.EncounterDeck.RemoveFromDeck(forestSpider);
-                stagingArea.EncounterDeck.RemoveFromDeck(oldForestRoad);
-                
-                stagingArea.AddToStagingArea(forestSpider);
-                stagingArea.AddToStagingArea(oldForestRoad);
+                game.StagingArea.EncounterDeck.RemoveFromDeck(forestSpider);
+                game.StagingArea.EncounterDeck.RemoveFromDeck(oldForestRoad);
 
-                stagingArea.EncounterDeck.Shuffle();
+                game.StagingArea.AddToStagingArea(forestSpider);
+                game.StagingArea.AddToStagingArea(oldForestRoad);
+
+                game.StagingArea.EncounterDeck.Shuffle();
             }
         }
     }

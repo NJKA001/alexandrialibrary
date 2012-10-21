@@ -14,8 +14,8 @@ namespace LotR.States
         : PlayerCardInPlay<T>, ICharacterInPlay, IAttachmentHostInPlay
         where T : IPlayerCard, IAttachmentHostCard
     {
-        public CharacterInPlay(IGame game, T card, IPlayer owner)
-            : base(game, card, owner)
+        public CharacterInPlay(IGame game, T card)
+            : base(game, card)
         {
         }
 

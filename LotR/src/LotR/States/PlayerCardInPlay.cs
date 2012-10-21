@@ -11,16 +11,9 @@ namespace LotR.States
         : CardInPlay<T>
         where T : IPlayerCard
     {
-        protected PlayerCardInPlay(IGame game, T card, IPlayer owner)
+        protected PlayerCardInPlay(IGame game, T card)
             : base(game, card)
         {
-            this.Owner = owner;
-        }
-
-        public IPlayer Owner
-        {
-            get;
-            private set;
         }
     }
 }

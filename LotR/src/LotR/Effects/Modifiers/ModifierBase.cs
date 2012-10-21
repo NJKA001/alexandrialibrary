@@ -12,7 +12,7 @@ namespace LotR.Effects.Modifiers
     public abstract class ModifierBase
         : EffectBase, IModifier
     {
-        protected ModifierBase(string description, Phase startPhase, ISource source, ICardInPlay target, TimeScope duration, int value)
+        protected ModifierBase(string description, PhaseCode startPhase, ISource source, ICardInPlay target, TimeScope duration, int value)
             : base(description)
         {
             this.StartPhase = startPhase;
@@ -27,7 +27,7 @@ namespace LotR.Effects.Modifiers
             return string.Format("{0} {1}", name, value);
         }
 
-        public Phase StartPhase
+        public PhaseCode StartPhase
         {
             get;
             private set;

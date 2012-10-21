@@ -46,7 +46,7 @@ namespace LotR.Cards.Encounter.Locations
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var playersDrawingCards = game.GetStates<IPlayersDrawingCards>().FirstOrDefault();
+                var playersDrawingCards = game.CurrentPhase.GetPlayersDrawingCards();
                 if (playersDrawingCards == null)
                     return;
 

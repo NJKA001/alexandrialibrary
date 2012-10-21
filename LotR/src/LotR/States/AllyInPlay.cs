@@ -10,8 +10,8 @@ namespace LotR.States
     public class AllyInPlay
         : CharacterInPlay<IAllyCard>, IAllyInPlay, ICharacterInPlay, IAttachmentHostInPlay
     {
-        public AllyInPlay(IGame game, IAllyCard card, IPlayer owner)
-            : base(game, card, owner)
+        public AllyInPlay(IGame game, IAllyCard card)
+            : base(game, card)
         {
         }
     }

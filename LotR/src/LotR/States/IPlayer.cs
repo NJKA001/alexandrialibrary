@@ -22,7 +22,8 @@ namespace LotR.States
 
         byte CurrentThreat { get; }
         bool IsFirstPlayer { get; set; }
-        
+        bool IsActivePlayer { get; set; }
+
         void IncreaseThreat(byte value);
         void DecreaseThreat(byte value);
         void DiscardFromHand(IEnumerable<IPlayerCard> card);

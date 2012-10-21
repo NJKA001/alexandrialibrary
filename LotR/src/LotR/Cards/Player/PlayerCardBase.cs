@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.States;
+
 namespace LotR.Cards.Player
 {
     public abstract class PlayerCardBase
@@ -12,6 +14,12 @@ namespace LotR.Cards.Player
             : base(cardType, title, cardSet, cardNumber)
         {
             this.PrintedSphere = printedSphere;
+        }
+
+        public IPlayer Owner
+        {
+            get;
+            set;
         }
 
         public Sphere PrintedSphere

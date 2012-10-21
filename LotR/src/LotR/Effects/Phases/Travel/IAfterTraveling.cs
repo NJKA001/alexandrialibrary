@@ -9,6 +9,6 @@ namespace LotR.Effects.Phases.Travel
 {
     public interface IAfterTraveling
     {
-        void AfterTraveling(ITravel state);
+        void AfterTraveling(ITravelPhase state);
     }
 }

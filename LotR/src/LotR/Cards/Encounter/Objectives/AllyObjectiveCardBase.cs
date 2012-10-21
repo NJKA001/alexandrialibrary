@@ -22,6 +22,12 @@ namespace LotR.Cards.Encounter.Objectives
             this.PrintedHitPoints = printedHitPoints;
         }
 
+        public IPlayer Owner
+        {
+            get { return null; }
+            set { }
+        }
+
         public byte PrintedHitPoints
         {
             get;

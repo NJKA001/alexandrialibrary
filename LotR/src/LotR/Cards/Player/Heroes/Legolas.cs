@@ -49,16 +49,12 @@ namespace LotR.Cards.Player.Heroes
                 if (!state.Attackers.Any(x => x.Card.Id == hero.Id))
                     return;
 
-                state.AddEffect(this);
+                state.Game.AddEffect(this);
             }
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var questArea = game.GetStates<IQuestArea>().FirstOrDefault();
-                if (questArea == null)
-                    return;
-
-                questArea.AddProgress(2);
+                game.QuestArea.AddProgress(2);
             }
         }
     }

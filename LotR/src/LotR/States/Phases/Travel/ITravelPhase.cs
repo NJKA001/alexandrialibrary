@@ -5,8 +5,8 @@ using System.Text;
 
 namespace LotR.States.Phases.Travel
 {
-    public interface ITravel
-        : IState, IEffective
+    public interface ITravelPhase
+        : IPhase
     {
         ILocationInPlay Location { get; }
 

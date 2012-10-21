@@ -42,18 +42,18 @@ namespace LotR.Cards.Encounter.Enemies
                 if (enemy == null || enemy.Resources == 0)
                     return;
 
-                state.AddEffect(this);
+                state.Game.AddEffect(this);
             }
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var enemy = game.GetState<IEnemyInPlay>(Source.Id);
+                var enemy = game.GetCardInPlay<IEnemyInPlay>(Source.Id);
                 if (enemy == null || enemy.Resources == 0)
                     return;
 
                 var bonus = enemy.Resources * 2;
 
-                game.AddEffect(new AttackModifier(game.CurrentPhase, Source, enemy, TimeScope.None, bonus));
+                game.AddEffect(new AttackModifier(game.CurrentPhase.Code, Source, enemy, TimeScope.None, bonus));
             }
         }
 
@@ -75,7 +75,7 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var enemy = game.GetState<IEnemyInPlay>(Source.Id);
+                var enemy = game.GetCardInPlay<IEnemyInPlay>(Source.Id);
                 if (enemy == null)
                     return;
 

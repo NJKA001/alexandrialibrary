@@ -29,18 +29,14 @@ namespace LotR.Cards.Quests
             {
             }
 
-            public void AfterStageDefeated(ICurrentQuestStage state)
+            public void AfterStageDefeated(IQuestStage stage)
             {
-                state.AddEffect(this);
+                stage.Game.AddEffect(this);
             }
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var questArea = game.GetStates<IQuestArea>().FirstOrDefault();
-                if (questArea == null)
-                    return;
-
-                var currentStage = game.GetStates<ICurrentQuestStage>().FirstOrDefault();
+                var currentStage = game.QuestArea.GetCurrentQuestStage();
                 if (currentStage == null)
                     return;
 
@@ -49,7 +45,7 @@ namespace LotR.Cards.Quests
 
                 if (number == 1)
                 {
-                    var dontLeaveThePath = questArea.QuestDeck.Cards.Where(x => x.Title == "Don't Leave The Path").FirstOrDefault();
+                    var dontLeaveThePath = game.QuestArea.QuestDeck.Cards.Where(x => x.Title == "Don't Leave The Path").FirstOrDefault();
                     if (dontLeaveThePath != null)
                     {
                         currentStage.NextStage = dontLeaveThePath;
@@ -57,7 +53,7 @@ namespace LotR.Cards.Quests
                 }
                 else
                 {
-                    var beornsPath = questArea.QuestDeck.Cards.Where(x => x.Title == "Beorn's Path").FirstOrDefault();
+                    var beornsPath = game.QuestArea.QuestDeck.Cards.Where(x => x.Title == "Beorn's Path").FirstOrDefault();
                     if (beornsPath != null)
                     {
                         currentStage.NextStage = beornsPath;

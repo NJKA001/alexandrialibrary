@@ -35,29 +35,21 @@ namespace LotR.Cards.Quests
 
             public override IChoice GetChoice(IGame game)
             {
-                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
-                if (stagingArea == null)
-                    return null;
-
-                var players = game.GetStates<IPlayer>();
-                if (players.Count() == 0)
-                    return null;
-
                 var allSpiders = 
-                    stagingArea.EncounterDeck.Cards.OfType<IEnemyCard>().Where(x => x.PrintedTraits.Contains(Trait.Spider))
-                        .Concat(stagingArea.EncounterDeck.DiscardPile.OfType<IEnemyCard>().Where(x => x.PrintedTraits.Contains(Trait.Spider))).ToList();
+                    game.StagingArea.EncounterDeck.Cards.OfType<IEnemyCard>().Where(x => x.PrintedTraits.Contains(Trait.Spider))
+                        .Concat(game.StagingArea.EncounterDeck.DiscardPile.OfType<IEnemyCard>().Where(x => x.PrintedTraits.Contains(Trait.Spider))).ToList();
 
                 if (allSpiders.Count == 0)
                     return null;
 
                 var availableSpiders = new Dictionary<Guid, IList<IEnemyCard>>();
 
-                foreach (var player in players)
+                foreach (var player in game.Players)
                 {
                     availableSpiders.Add(player.StateId, allSpiders);
                 }
 
-                return new PlayersChooseCards<IEnemyCard>("Each player must search the encounter deck and discard pile for 1 Spider of their choice", Source, players, 1, availableSpiders);
+                return new PlayersChooseCards<IEnemyCard>("Each player must search the encounter deck and discard pile for 1 Spider of their choice", Source, game.Players, 1, availableSpiders);
             }
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
@@ -66,25 +58,21 @@ namespace LotR.Cards.Quests
                 if (spiderChoices == null)
                     return;
 
-                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
-                if (stagingArea == null)
-                    return;
-
                 foreach (var player in spiderChoices.Players)
                 {
                     var spider = spiderChoices.GetChosenCards(player.StateId).FirstOrDefault();
                     if (spider == null)
                         continue;
 
-                    if (stagingArea.EncounterDeck.Cards.Any(x => x.Id == spider.Id))
+                    if (game.StagingArea.EncounterDeck.Cards.Any(x => x.Id == spider.Id))
                     {
-                        stagingArea.EncounterDeck.RemoveFromDeck(spider);
-                        stagingArea.AddToStagingArea(spider);
+                        game.StagingArea.EncounterDeck.RemoveFromDeck(spider);
+                        game.StagingArea.AddToStagingArea(spider);
                     }
-                    else if (stagingArea.EncounterDeck.DiscardPile.Any(x => x.Id == spider.Id))
+                    else if (game.StagingArea.EncounterDeck.DiscardPile.Any(x => x.Id == spider.Id))
                     {
-                        stagingArea.EncounterDeck.RemoveFromDiscardPile(new List<IEncounterCard> { spider });
-                        stagingArea.AddToStagingArea(spider);
+                        game.StagingArea.EncounterDeck.RemoveFromDiscardPile(new List<IEncounterCard> { spider });
+                        game.StagingArea.AddToStagingArea(spider);
                     }
                 }
             }
@@ -98,21 +86,13 @@ namespace LotR.Cards.Quests
             {
             }
 
-            public void BeforeStageDefeated(ICurrentQuestStage state)
+            public void BeforeStageDefeated(IQuestStage currentQuestStage)
             {
-                var game = state.GetStates<IGame>().FirstOrDefault();
-                if (game == null)
-                    return;
-
-                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
-                if (stagingArea == null)
-                    return;
-
-                var ungoliantsSpawn = stagingArea.EncounterDeck.DiscardPile.Where(x => x.Title == "Ungoliant's Spawn").FirstOrDefault() as IEnemyInPlay;
+                var ungoliantsSpawn = currentQuestStage.Game.StagingArea.EncounterDeck.DiscardPile.Where(x => x.Title == "Ungoliant's Spawn").FirstOrDefault() as IEnemyInPlay;
                 if (ungoliantsSpawn != null)
                     return;
 
-                state.StageIsDefeated = false;
+                currentQuestStage.StageIsDefeated = false;
             }
         }
     }

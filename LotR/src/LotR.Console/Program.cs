@@ -36,9 +36,7 @@ namespace LotR.Console
                 if (game == null)
                     return;
 
-                var players = game.GetStates<IPlayer>();
-
-                if (players.Count() == 0)
+                if (game.Players.Count() == 0)
                     return;
 
                 WriteLine("Starting Game");

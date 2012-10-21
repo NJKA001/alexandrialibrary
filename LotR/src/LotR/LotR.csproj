@@ -255,7 +255,7 @@
     <Compile Include="States\Phases\Any\ICheckForResourceIcon.cs" />
     <Compile Include="States\Phases\Any\ICheckForResourceMatch.cs" />
     <Compile Include="States\Phases\Any\ICheckForTrait.cs" />
-    <Compile Include="States\Phases\Any\ICurrentQuestStage.cs" />
+    <Compile Include="States\Phases\Any\IQuestStage.cs" />
     <Compile Include="States\Phases\Any\IDamageDealt.cs" />
     <Compile Include="States\Phases\Any\IDamageHealed.cs" />
     <Compile Include="States\Phases\Any\IDetermineAttack.cs" />
@@ -266,17 +266,26 @@
     <Compile Include="States\Phases\Any\IEncounterCardRevealed.cs" />
     <Compile Include="States\Phases\Any\ILocationExplored.cs" />
     <Compile Include="States\Phases\Any\IPlayersDrawingCards.cs" />
+    <Compile Include="States\Phases\Any\QuestStage.cs" />
     <Compile Include="States\Phases\Combat\ICharactersAttack.cs" />
     <Compile Include="States\Phases\Combat\IChooseEnemyToAttack.cs" />
+    <Compile Include="States\Phases\Combat\ICombatPhase.cs" />
     <Compile Include="States\Phases\Combat\IEnemyAttack.cs" />
     <Compile Include="States\Phases\Combat\IEnemyDefeated.cs" />
     <Compile Include="States\Phases\Combat\IEnemyEngage.cs" />
     <Compile Include="States\Phases\Encounter\EnemiesEngaged.cs" />
+    <Compile Include="States\Phases\Encounter\IEncounterPhase.cs" />
     <Compile Include="States\Phases\Encounter\IEnemiesEngaged.cs" />
-    <Compile Include="States\Phases\Quest\ICharactersCommittedToQuest.cs" />
+    <Compile Include="States\Phases\IPhase.cs" />
+    <Compile Include="States\Phases\PhaseBase.cs" />
+    <Compile Include="States\Phases\Planning\IPlanningPhase.cs" />
+    <Compile Include="States\Phases\Quest\IQuestPhase.cs" />
     <Compile Include="States\Phases\Refresh\ICardReadying.cs" />
+    <Compile Include="States\Phases\Refresh\IRefreshPhase.cs" />
     <Compile Include="States\Phases\Resource\ICollectingResources.cs" />
-    <Compile Include="States\Phases\Travel\ITravel.cs" />
+    <Compile Include="States\Phases\Resource\IResourcePhase.cs" />
+    <Compile Include="States\Phases\Resource\ResourcePhase.cs" />
+    <Compile Include="States\Phases\Travel\ITravelPhase.cs" />
     <Compile Include="States\PlayerCardInPlay.cs" />
     <Compile Include="States\PlayerDeck.cs" />
     <Compile Include="Effects\ICancelEffect.cs" />
@@ -470,13 +479,12 @@
     <Compile Include="States\ICardInPlay.cs" />
     <Compile Include="States\IGame.cs" />
     <Compile Include="States\IState.cs" />
-    <Compile Include="States\Phase.cs" />
+    <Compile Include="States\PhaseCode.cs" />
     <Compile Include="States\PlayerInfo.cs" />
+    <Compile Include="States\QuestInPlay.cs" />
     <Compile Include="States\StateBase.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="States\Phases\Planning\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

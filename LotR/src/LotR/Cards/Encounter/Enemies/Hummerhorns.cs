@@ -38,7 +38,7 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override IChoice GetChoice(IGame game)
             {
-                var enemyEngage = game.GetStates<IEnemyEngage>().FirstOrDefault();
+                var enemyEngage = game.CurrentPhase.GetEngagedEnemies().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
                 if (enemyEngage == null)
                     return null;
 
@@ -69,7 +69,7 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var enemyAttack = game.GetStates<IEnemyAttack>().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return;
 

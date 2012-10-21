@@ -47,11 +47,11 @@ namespace LotR.Cards.Player.Heroes
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var damageDealt = game.GetStates<IDamageDealt>().Where(x => x.Target.Card.Id == Source.Id).FirstOrDefault();
+                var damageDealt = game.CurrentPhase.GetDamageDealt().Where(x => x.Target.Card.Id == Source.Id).FirstOrDefault();
                 if (damageDealt == null || damageDealt.Damage == 0)
                     return;
 
-                var resourceful = game.GetState<ICharacterInPlay>(Source.Id);
+                var resourceful = game.GetCardInPlay<ICharacterInPlay>(Source.Id);
                 if (resourceful == null)
                     return;
 

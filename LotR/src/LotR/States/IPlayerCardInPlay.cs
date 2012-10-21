@@ -11,6 +11,5 @@ namespace LotR.States
         : ICardInPlay<T>
         where T : IPlayerCard
     {
-        IPlayer Owner { get; }
     }
 }

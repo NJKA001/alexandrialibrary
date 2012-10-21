@@ -40,25 +40,18 @@ namespace LotR.Cards.Player.Heroes
 
             public void DuringEncounterCardRevealed(IGame game)
             {
-                if (game.CurrentPhase != Phase.Quest)
+                var questPhase = game.CurrentPhase as IQuestPhase;
+                if (questPhase == null)
                     return;
 
-                var stagingArea = game.GetStates<IStagingArea>().FirstOrDefault();
-                if (stagingArea == null)
-                    return;
-
-                var revealed = stagingArea.RevealedEncounterCard;
+                var revealed = game.StagingArea.RevealedEncounterCard;
                 if (revealed == null)
                     return;
 
                 if (!(revealed is IEnemyCard))
                     return;
 
-                var committedCharacters = game.GetStates<ICharactersCommittedToQuest>().FirstOrDefault();
-                if (committedCharacters == null)
-                    return;
-
-                if (!committedCharacters.IsCommittedToQuest(Source.Id))
+                if (!questPhase.IsCommittedToQuest(Source.Id))
                     return;
 
                 game.AddEffect(this);
@@ -75,15 +68,6 @@ namespace LotR.Cards.Player.Heroes
                     return;
 
                 damageable.Damage += 1;
-            }
-
-            public override ICost GetCost(IGame game)
-            {
-                var revealedStep = game.GetStates<IEncounterCardRevealed>().FirstOrDefault();
-                if (revealedStep == null)
-                    return null;
-
-                return new EachRevealedEnemy(Source, revealedStep);
             }
         }
     }

@@ -6,6 +6,7 @@ using System.Text;
 using LotR.Cards.Encounter;
 using LotR.Cards.Encounter.Locations;
 using LotR.Cards.Quests;
+using LotR.States.Phases.Any;
 
 namespace LotR.States.Areas
 {
@@ -13,7 +14,7 @@ namespace LotR.States.Areas
         : IArea
     {
         IDeck<IQuestCard> QuestDeck { get; }
-        IQuestCard ActiveQuest { get; }
+        IQuestInPlay ActiveQuest { get; }
 
         IEnumerable<IDeck<IEncounterCard>> EncounterDecks { get; }
         IDeck<IEncounterCard> ActiveEncounterDeck { get; }
@@ -33,5 +34,7 @@ namespace LotR.States.Areas
         void RemoveProgressFromActiveLocation(byte value);
 
         void Setup();
+
+        IQuestStage GetCurrentQuestStage();
     }
 }

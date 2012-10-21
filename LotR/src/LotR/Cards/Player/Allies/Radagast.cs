@@ -50,12 +50,12 @@ namespace LotR.Cards.Player.Allies
 
             public override IChoice GetChoice(IGame game)
             {
-                return new ChooseCharacterWithTrait(Source, game.ActivePlayer, Trait.Creature);
+                return new ChooseCharacterWithTrait(Source, CardSource.Owner, Trait.Creature);
             }
 
             public override ICost GetCost(IGame game)
             {
-                var resourceful = game.GetState<ICharacterInPlay>(Source.Id);
+                var resourceful = game.GetCardInPlay<ICharacterInPlay>(Source.Id);
                 if (resourceful == null)
                     return null;
 

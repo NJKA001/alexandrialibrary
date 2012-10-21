@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LotR.States
 {
-    public enum Phase
+    public enum PhaseCode
         : byte
     {
         None = 0,

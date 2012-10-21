@@ -42,11 +42,11 @@ namespace LotR.Cards.Player.Heroes
 
             public void AfterCommittingToQuest(IGame game)
             {
-                var committedToQuest = game.GetStates<ICharactersCommittedToQuest>().FirstOrDefault();
-                if (committedToQuest == null)
+                var questPhase = game.CurrentPhase as IQuestPhase;
+                if (questPhase == null)
                     return;
 
-                var self = committedToQuest.GetAllCharactersCommittedToQuest().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
+                var self = questPhase.GetAllCharactersCommittedToQuest().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
                 if (self == null)
                     return;
 
@@ -69,7 +69,7 @@ namespace LotR.Cards.Player.Heroes
                 if (firstPayment.Item1.Card.Id != Source.Id || firstPayment.Item2 != 1)
                     return false;
 
-                var resourceful = game.GetState<ICharacterInPlay>(Source.Id);
+                var resourceful = game.GetCardInPlay<ICharacterInPlay>(Source.Id);
                 if (resourceful == null || resourceful.Resources < 1)
                     return false;
 
@@ -80,7 +80,7 @@ namespace LotR.Cards.Player.Heroes
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var exhaustable = game.GetState<IExhaustableInPlay>(Source.Id);
+                var exhaustable = game.GetCardInPlay<IExhaustableInPlay>(Source.Id);
                 if (exhaustable == null)
                     return;
 

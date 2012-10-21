@@ -73,7 +73,7 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override IChoice GetChoice(IGame game)
             {
-                var enemyAttack = game.GetStates<IEnemyAttack>().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return null;
 

@@ -14,8 +14,8 @@ namespace LotR.States
     public class HeroInPlay
         : CharacterInPlay<IHeroCard>, IHeroInPlay
     {
-        public HeroInPlay(IGame game, IHeroCard card, IPlayer owner)
-            : base(game, card, owner)
+        public HeroInPlay(IGame game, IHeroCard card)
+            : base(game, card)
         {
         }
 

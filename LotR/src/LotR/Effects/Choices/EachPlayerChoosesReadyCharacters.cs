@@ -37,7 +37,7 @@ namespace LotR.Effects.Choices
 
         private static IEnumerable<IPlayer> GetPlayers(IGame game)
         {
-            return game.GetStates<IPlayer>();
+            return game.Players;
         }
 
         private static string GetDescription(IPlayer player, byte numberOfCharacters, bool heroesOnly)

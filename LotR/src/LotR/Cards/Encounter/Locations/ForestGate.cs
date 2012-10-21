@@ -31,9 +31,9 @@ namespace LotR.Cards.Encounter.Locations
             {
             }
 
-            public void AfterTraveling(ITravel state)
+            public void AfterTraveling(ITravelPhase state)
             {
-                state.AddEffect(this);
+                state.Game.AddEffect(this);
             }
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)

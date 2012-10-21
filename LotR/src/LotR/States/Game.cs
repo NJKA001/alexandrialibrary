@@ -6,6 +6,8 @@ using System.Text;
 using LotR.Cards;
 using LotR.Effects;
 using LotR.States.Areas;
+using LotR.States.Phases;
+using LotR.States.Phases.Resource;
 
 namespace LotR.States
 {
@@ -17,20 +19,10 @@ namespace LotR.States
         {
         }
 
-        private IQuestArea questArea;
-        private IStagingArea stagingArea;
-        private IVictoryDisplay victoryDisplay;
         private readonly IList<IPlayer> players = new List<IPlayer>();
-
         private readonly IList<IEffect> currentEffects = new List<IEffect>();
 
-        public Phase CurrentPhase
-        {
-            get;
-            private set;
-        }
-
-        public PhaseStep CurrentPhaseStep
+        public IPhase CurrentPhase
         {
             get;
             private set;
@@ -38,17 +30,20 @@ namespace LotR.States
 
         public IQuestArea QuestArea
         {
-            get { return questArea; }
+            get;
+            private set;
         }
 
         public IStagingArea StagingArea
         {
-            get { return stagingArea; }
+            get;
+            private set;
         }
 
         public IVictoryDisplay VictoryDisplay
         {
-            get { return victoryDisplay; }
+            get;
+            private set;
         }
 
         public IEnumerable<IPlayer> Players
@@ -56,16 +51,9 @@ namespace LotR.States
             get { return players; }
         }
 
-        public IPlayer ActivePlayer
-        {
-            get;
-            private set;
-        }
-
         public IPlayer FirstPlayer
         {
-            get;
-            private set;
+            get { return players.Single(x => x.IsFirstPlayer); }
         }
 
         public void AddEffect(IEffect effect)
@@ -87,17 +75,48 @@ namespace LotR.States
             if (players.Any(x => x == null))
                 throw new ArgumentException("list of players cannot contain nulls");
 
-            this.questArea = questArea;
-            this.stagingArea = new StagingArea(this, questArea.ActiveEncounterDeck);
-            this.victoryDisplay = new VictoryDisplay(this);
+            this.QuestArea = questArea;
+            this.StagingArea = new StagingArea(this, questArea.ActiveEncounterDeck);
+            this.VictoryDisplay = new VictoryDisplay(this);
 
             foreach (var player in players)
             {
                 this.players.Add(player);
+
+                foreach (var card in player.Deck.Cards)
+                {
+                    card.Owner = player;
+                }
             }
 
-            FirstPlayer = players.First();
-            ActivePlayer = FirstPlayer;
+            players.First().IsFirstPlayer = true;
+
+            CurrentPhase = new ResourcePhase(this);
+        }
+
+        public T GetCardInPlay<T>(Guid cardId)
+            where T : class, ICardInPlay
+        {
+            T card = null;
+
+            if (QuestArea.ActiveLocation.Card.Id == cardId)
+                return QuestArea.ActiveLocation as T;
+
+            if (QuestArea.ActiveQuest.Card.Id == cardId)
+                return QuestArea.ActiveQuest as T;
+
+            card = StagingArea.CardsInStagingArea.OfType<T>().Where(x => x.StateId == cardId).FirstOrDefault();
+            if (card != null)
+                return card;
+
+            foreach (var player in players)
+            {
+                card = player.CardsInPlay.OfType<T>().Where(x => x.StateId == cardId).FirstOrDefault();
+                if (card != null)
+                    return card;
+            }
+
+            return null;
         }
     }
 }
