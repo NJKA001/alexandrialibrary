@@ -31,9 +31,9 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public void DuringDrawingResourceCards(IPlayersDrawingCards state)
+            public void DuringDrawingResourceCards(IPlayersDrawingCards playersDrawingCards)
             {
-                state.AddEffect(this);
+                playersDrawingCards.Game.AddEffect(this);
             }
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)

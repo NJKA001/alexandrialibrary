@@ -21,9 +21,8 @@ namespace LotR.States
         }
 
         private readonly Guid stateId;
-        protected readonly IGame game;
-        private readonly IDictionary<Guid, IState> states = new Dictionary<Guid, IState>();
-
+        private readonly IGame game;
+        
         protected void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged == null)
@@ -32,39 +31,16 @@ namespace LotR.States
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected void AddState(IState state)
-        {
-            if (states.ContainsKey(state.StateId))
-                return;
-
-            states.Add(state.StateId, state);
-        }
-
-        protected void RemoveState(IState state)
-        {
-            if (!states.ContainsKey(state.StateId))
-                return;
-
-            states.Remove(state.StateId);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public Guid StateId
         {
             get { return stateId; }
         }
 
-        public T GetState<T>(Guid stateId)
-            where T : class, IState
+        public IGame Game
         {
-            return states.ContainsKey(stateId) ? states[stateId] as T : null;
+            get { return game; }
         }
 
-        public IEnumerable<T> GetStates<T>()
-            where T : class, IState
-        {
-            return states.OfType<T>();
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

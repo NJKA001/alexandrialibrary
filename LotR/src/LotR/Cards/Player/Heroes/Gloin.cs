@@ -38,7 +38,7 @@ namespace LotR.Cards.Player.Heroes
                 if (state.Damage == 0 || state.Target.Card.Id != Source.Id)
                     return;
 
-                var character = state.GetState<ICharacterInPlay>(Source.Id);
+                var character = state.Game.GetCardInPlay<ICharacterInPlay>(Source.Id);
                 if (character == null)
                     return;
 

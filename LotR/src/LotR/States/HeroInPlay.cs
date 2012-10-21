@@ -37,7 +37,7 @@ namespace LotR.States
             if (Card.PrintedSphere == sphere)
                 return true;
 
-            var check = new CheckForResourceIcon(game, this, sphere);
+            var check = new CheckForResourceIcon(Game, this, sphere);
 
             foreach (var attachment in Attachments.Where(x => x.HasEffect<IDuringCheckForResourceIcon>()))
             {
@@ -55,7 +55,7 @@ namespace LotR.States
             if (base.HasTrait(trait))
                 return true;
 
-            var check = new CheckForTrait(game, this, trait);
+            var check = new CheckForTrait(Game, this, trait);
 
             foreach (var attachment in Attachments.Where(x => x.Card.HasEffect<IDuringCheckForTrait>()))
             {

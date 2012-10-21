@@ -79,20 +79,16 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public void DuringDetermineAttack(IDetermineAttack state)
+            public void DuringDetermineAttack(IDetermineAttack determineAttack)
             {
-                var determineAttack = state.GetStates<IDetermineAttack>().FirstOrDefault();
-                if (determineAttack == null)
-                    return;
-
                 if (determineAttack.Attacker.Card.Id != Source.Id)
                     return;
 
-                var enemy = state.Game.StagingArea.CardsInStagingArea.OfType<IEnemyInPlay>().Where(x => x.Card.Id == determineAttack.Defender.Card.Id).FirstOrDefault();
+                var enemy = determineAttack.Game.StagingArea.CardsInStagingArea.OfType<IEnemyInPlay>().Where(x => x.Card.Id == determineAttack.Defender.Card.Id).FirstOrDefault();
                 if (enemy == null)
                     return;
 
-                state.Game.AddEffect(this);
+                determineAttack.Game.AddEffect(this);
             }
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)

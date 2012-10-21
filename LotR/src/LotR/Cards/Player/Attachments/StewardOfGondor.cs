@@ -46,19 +46,19 @@ namespace LotR.Cards.Player.Attachments
             {
             }
 
-            public void DuringCheckForTrait(ICheckForTrait state)
+            public void DuringCheckForTrait(ICheckForTrait check)
             {
-                if (state.Trait != Trait.Gondor)
+                if (check.Trait != Trait.Gondor)
                     return;
 
-                var attachment = state.GetState<IAttachmentInPlay>(Source.Id);
+                var attachment = check.Game.GetCardInPlay<IAttachmentInPlay>(Source.Id);
                 if (attachment == null || attachment.AttachedTo == null)
                     return;
 
-                if (state.Target.StateId != attachment.AttachedTo.Card.Id)
+                if (check.Target.StateId != attachment.AttachedTo.Card.Id)
                     return;
 
-                state.HasTrait = true;
+                check.HasTrait = true;
             }
         }
 

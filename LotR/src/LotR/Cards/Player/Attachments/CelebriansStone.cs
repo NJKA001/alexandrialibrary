@@ -46,7 +46,7 @@ namespace LotR.Cards.Player.Attachments
 
             public void DuringDetermineWillpower(IDetermineWillpower state)
             {
-                var attachment = state.GetState<IAttachmentInPlay>(Source.Id);
+                var attachment = state.Game.GetCardInPlay<IAttachmentInPlay>(Source.Id);
                 if (attachment == null || attachment.AttachedTo == null)
                     return;
 
@@ -74,7 +74,7 @@ namespace LotR.Cards.Player.Attachments
                 if (state.ResourceIcon != Sphere.Spirit)
                     return;
 
-                var attachment = state.GetState<IAttachmentInPlay>(Source.Id);
+                var attachment = state.Game.GetCardInPlay<IAttachmentInPlay>(Source.Id);
                 if (attachment == null || attachment.AttachedTo == null)
                     return;
 

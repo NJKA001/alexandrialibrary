@@ -11,7 +11,6 @@ namespace LotR.States.Phases
     public interface IPhase
         : IState
     {
-        IGame Game { get; }
         PhaseCode Code { get; }
         PhaseStep Step { get; }
 

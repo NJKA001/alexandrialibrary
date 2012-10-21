@@ -20,11 +20,6 @@ namespace LotR.States.Phases
 
         private readonly IList<IEnemyAttack> enemyAttacks = new List<IEnemyAttack>();
 
-        public IGame Game
-        {
-            get { return game; }
-        }
-
         public PhaseCode Code
         {
             get;

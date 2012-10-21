@@ -10,7 +10,6 @@ namespace LotR.States.Phases.Any
     public interface IQuestStage
         : IState
     {
-        IGame Game { get; }
         IQuestInPlay CurrentStage { get; }
 
         IQuestCard PreviousStage { get; }

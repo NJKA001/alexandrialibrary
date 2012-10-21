@@ -8,7 +8,7 @@ using LotR.Cards.Player;
 namespace LotR.States
 {
     public abstract class PlayerCardInPlay<T>
-        : CardInPlay<T>
+        : CardInPlay<T>, IPlayerCardInPlay<T>
         where T : IPlayerCard
     {
         protected PlayerCardInPlay(IGame game, T card)

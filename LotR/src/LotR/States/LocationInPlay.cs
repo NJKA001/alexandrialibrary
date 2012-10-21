@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using LotR.Cards.Encounter.Locations;
+
+namespace LotR.States
+{
+    public class LocationInPlay
+        : ThreateningInPlay, ILocationInPlay, IThreateningInPlay
+    {
+        public LocationInPlay(IGame game, ILocationCard card)
+            : base(game, card)
+        {
+        }
+
+        ILocationCard ICardInPlay<ILocationCard>.Card
+        {
+            get { return Card as ILocationCard; }
+        }
+
+        private byte progress;
+
+        public byte Progress
+        {
+            get { return progress; }
+            set
+            {
+                if (progress == value)
+                    return;
+
+                progress = value;
+                OnPropertyChanged("Progress");
+            }
+        }
+    }
+}

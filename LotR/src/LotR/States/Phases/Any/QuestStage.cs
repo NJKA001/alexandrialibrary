@@ -14,7 +14,6 @@ namespace LotR.States.Phases.Any
         public QuestStage(IGame game, IQuestInPlay currentStage, IQuestCard previousStage, IQuestCard nextStage)
             : base(game)
         {
-            this.Game = game;
             this.CurrentStage = currentStage;
             this.PreviousStage = previousStage;
             this.nextStage = nextStage;
@@ -22,12 +21,6 @@ namespace LotR.States.Phases.Any
 
         private IQuestCard nextStage;
         private bool stageIsDefeated;
-
-        public IGame Game
-        {
-            get;
-            private set;
-        }
 
         public IQuestInPlay CurrentStage
         {

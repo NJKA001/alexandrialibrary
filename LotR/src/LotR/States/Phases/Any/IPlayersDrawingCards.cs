@@ -6,7 +6,7 @@ using System.Text;
 namespace LotR.States.Phases.Any
 {
     public interface IPlayersDrawingCards
-        : IState, IEffective
+        : IState
     {
         IEnumerable<IPlayer> Players { get; }
 

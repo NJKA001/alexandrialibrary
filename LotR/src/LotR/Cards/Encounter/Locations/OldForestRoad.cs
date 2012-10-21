@@ -41,7 +41,7 @@ namespace LotR.Cards.Encounter.Locations
             {
                 var exhaustedCharacters = new Dictionary<Guid, IList<ICharacterCard>>() { { game.FirstPlayer.StateId, new List<ICharacterCard>() } };
 
-                foreach (var character in game.FirstPlayer.GetStates<ICharacterInPlay>())
+                foreach (var character in game.FirstPlayer.CardsInPlay.OfType<ICharacterInPlay>())
                 {
                     var exhaustable = character as IExhaustableInPlay;
                     if (exhaustable == null || !exhaustable.IsExhausted)

@@ -91,7 +91,7 @@ namespace LotR.States.Areas
             if (!QuestDeck.Cards.Contains(card))
                 return;
 
-            ActiveQuest = new QuestInPlay(game, card);
+            ActiveQuest = new QuestInPlay(Game, card);
         }
 
         public void SetActiveEncounterDeck(IDeck<IEncounterCard> deck)

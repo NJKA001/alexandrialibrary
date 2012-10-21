@@ -65,7 +65,7 @@ namespace LotR.States
 
             if (Card.HasEffect<IDuringCheckForResourceMatch>())
             {
-                var check = new CheckForResourceMatch(game, costlyCard);
+                var check = new CheckForResourceMatch(Game, costlyCard);
 
                 foreach (var effect in Card.Text.Effects.OfType<IDuringCheckForResourceMatch>())
                 {
@@ -98,7 +98,7 @@ namespace LotR.States
             if (base.HasTrait(trait))
                 return true;
 
-            var check = new CheckForTrait(game, this, trait);
+            var check = new CheckForTrait(Game, this, trait);
 
             foreach (var attachment in attachments.Values.Where(x => x.Card.HasEffect<IDuringCheckForTrait>()))
             {

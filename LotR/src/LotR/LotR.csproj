@@ -113,14 +113,18 @@
     <Compile Include="Effects\TravelEffectBase.cs" />
     <Compile Include="Effects\WhenRevealedEffectBase.cs" />
     <Compile Include="States\AllyInPlay.cs" />
+    <Compile Include="States\AllyObjectiveInPlay.cs" />
     <Compile Include="States\Areas\AreaBase.cs" />
     <Compile Include="States\Areas\IQuestArea.cs" />
     <Compile Include="States\Areas\QuestArea.cs" />
     <Compile Include="States\Areas\StagingArea.cs" />
     <Compile Include="States\Areas\VictoryDisplay.cs" />
     <Compile Include="States\AttachableInPlay.cs" />
+    <Compile Include="States\AttachableObjectiveInPlay.cs" />
+    <Compile Include="States\AttachmentInPlay.cs" />
     <Compile Include="States\CharacterInPlay.cs" />
     <Compile Include="States\CardInHand.cs" />
+    <Compile Include="States\EnemyInPlay.cs" />
     <Compile Include="States\Game.cs" />
     <Compile Include="States\Hand.cs" />
     <Compile Include="States\HeroInPlay.cs" />
@@ -190,7 +194,6 @@
     <Compile Include="Effects\Costs\ChooseCardDestination.cs" />
     <Compile Include="Effects\Costs\ChooseHeroCommitedToQuest.cs" />
     <Compile Include="Effects\Costs\ChooseHeroCost.cs" />
-    <Compile Include="Effects\Costs\EachRevealedEnemy.cs" />
     <Compile Include="Effects\Costs\CostBase.cs" />
     <Compile Include="Effects\Costs\DiscardCardsFromHand.cs" />
     <Compile Include="Effects\Costs\ExhaustSelf.cs" />
@@ -245,7 +248,9 @@
     <Compile Include="States\IQuestInPlay.cs" />
     <Compile Include="States\IShadowInPlay.cs" />
     <Compile Include="States\IThreateningInPlay.cs" />
+    <Compile Include="States\ITreasureInPlay.cs" />
     <Compile Include="States\IWillpowerfulInPlay.cs" />
+    <Compile Include="States\LocationInPlay.cs" />
     <Compile Include="States\PhaseStep.cs" />
     <Compile Include="States\Phases\Any\CheckForResourceIcon.cs" />
     <Compile Include="States\Phases\Any\CheckForResourceMatch.cs" />
@@ -483,6 +488,8 @@
     <Compile Include="States\PlayerInfo.cs" />
     <Compile Include="States\QuestInPlay.cs" />
     <Compile Include="States\StateBase.cs" />
+    <Compile Include="States\ThreateningInPlay.cs" />
+    <Compile Include="States\TreasureInPlay.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

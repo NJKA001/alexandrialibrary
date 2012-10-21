@@ -38,7 +38,7 @@ namespace LotR.Cards.Encounter.Enemies
 
             public void DuringDetermineAttack(IDetermineAttack state)
             {
-                var enemy = state.GetState<IEnemyInPlay>(Source.Id);
+                var enemy = state.Game.GetCardInPlay<IEnemyInPlay>(Source.Id);
                 if (enemy == null || enemy.Resources == 0)
                     return;
 

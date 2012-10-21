@@ -32,16 +32,12 @@ namespace LotR.Cards.Encounter.Locations
             {
             }
 
-            public void DuringDrawingCards(IPlayersDrawingCards state)
+            public void DuringDrawingCards(IPlayersDrawingCards playersDrawingCard)
             {
-                var questArea = state.GetStates<IQuestArea>().FirstOrDefault();
-                if (questArea == null)
+                if (playersDrawingCard.Game.QuestArea.ActiveLocation == null || playersDrawingCard.Game.QuestArea.ActiveLocation.Card.Id != Source.Id)
                     return;
 
-                if (questArea.ActiveLocation == null || questArea.ActiveLocation.Card.Id != Source.Id)
-                    return;
-
-                state.AddEffect(this);
+                playersDrawingCard.Game.AddEffect(this);
             }
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)

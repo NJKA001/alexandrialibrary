@@ -12,8 +12,6 @@ namespace LotR.States
         : INotifyPropertyChanged
     {
         Guid StateId { get; }
-
-        T GetState<T>(Guid stateId) where T : class, IState;
-        IEnumerable<T> GetStates<T>() where T : class, IState;
+        IGame Game { get; }
     }
 }
