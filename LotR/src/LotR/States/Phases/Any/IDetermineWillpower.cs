@@ -9,6 +9,8 @@ namespace LotR.States.Phases.Any
         : IState
     {
         IWillpowerfulInPlay Quester { get; }
+
         byte Willpower { get; set; }
+        bool IsWillpowerCounted { get; set; }
     }
 }

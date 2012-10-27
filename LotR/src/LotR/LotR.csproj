@@ -136,7 +136,6 @@
     <Compile Include="States\ICharacterInPlay.cs" />
     <Compile Include="States\IDamagableInPlay.cs" />
     <Compile Include="States\IDefendingInPlay.cs" />
-    <Compile Include="States\IEffective.cs" />
     <Compile Include="States\IEncounterInPlay.cs" />
     <Compile Include="States\IEnemyInPlay.cs" />
     <Compile Include="States\IExhaustableInPlay.cs" />
@@ -252,9 +251,18 @@
     <Compile Include="States\IWillpowerfulInPlay.cs" />
     <Compile Include="States\LocationInPlay.cs" />
     <Compile Include="States\PhaseStep.cs" />
+    <Compile Include="States\Phases\Any\CardEntersPlay.cs" />
+    <Compile Include="States\Phases\Any\CardLeavesPlay.cs" />
     <Compile Include="States\Phases\Any\CheckForResourceIcon.cs" />
     <Compile Include="States\Phases\Any\CheckForResourceMatch.cs" />
     <Compile Include="States\Phases\Any\CheckForTrait.cs" />
+    <Compile Include="States\Phases\Any\DamageDealt.cs" />
+    <Compile Include="States\Phases\Any\DamageHealed.cs" />
+    <Compile Include="States\Phases\Any\DetermineAttack.cs" />
+    <Compile Include="States\Phases\Any\DetermineDefense.cs" />
+    <Compile Include="States\Phases\Any\DetermineHitPoints.cs" />
+    <Compile Include="States\Phases\Any\DetermineThreat.cs" />
+    <Compile Include="States\Phases\Any\DetermineWillpower.cs" />
     <Compile Include="States\Phases\Any\ICardEntersPlay.cs" />
     <Compile Include="States\Phases\Any\ICardLeavesPlay.cs" />
     <Compile Include="States\Phases\Any\ICheckForResourceIcon.cs" />
@@ -268,29 +276,35 @@
     <Compile Include="States\Phases\Any\IDetermineHitPoints.cs" />
     <Compile Include="States\Phases\Any\IDetermineThreat.cs" />
     <Compile Include="States\Phases\Any\IDetermineWillpower.cs" />
-    <Compile Include="States\Phases\Any\IEncounterCardRevealed.cs" />
     <Compile Include="States\Phases\Any\ILocationExplored.cs" />
     <Compile Include="States\Phases\Any\IPlayersDrawingCards.cs" />
+    <Compile Include="States\Phases\Any\PlayersDrawingCards.cs" />
     <Compile Include="States\Phases\Any\QuestStage.cs" />
+    <Compile Include="States\Phases\Combat\CombatPhase.cs" />
     <Compile Include="States\Phases\Combat\ICharactersAttack.cs" />
     <Compile Include="States\Phases\Combat\IChooseEnemyToAttack.cs" />
     <Compile Include="States\Phases\Combat\ICombatPhase.cs" />
     <Compile Include="States\Phases\Combat\IEnemyAttack.cs" />
     <Compile Include="States\Phases\Combat\IEnemyDefeated.cs" />
     <Compile Include="States\Phases\Combat\IEnemyEngage.cs" />
+    <Compile Include="States\Phases\Encounter\EncounterPhase.cs" />
     <Compile Include="States\Phases\Encounter\EnemiesEngaged.cs" />
     <Compile Include="States\Phases\Encounter\IEncounterPhase.cs" />
     <Compile Include="States\Phases\Encounter\IEnemiesEngaged.cs" />
     <Compile Include="States\Phases\IPhase.cs" />
     <Compile Include="States\Phases\PhaseBase.cs" />
     <Compile Include="States\Phases\Planning\IPlanningPhase.cs" />
+    <Compile Include="States\Phases\Planning\PlanningPhase.cs" />
     <Compile Include="States\Phases\Quest\IQuestPhase.cs" />
+    <Compile Include="States\Phases\Quest\QuestPhase.cs" />
     <Compile Include="States\Phases\Refresh\ICardReadying.cs" />
     <Compile Include="States\Phases\Refresh\IRefreshPhase.cs" />
+    <Compile Include="States\Phases\Refresh\RefreshPhase.cs" />
     <Compile Include="States\Phases\Resource\ICollectingResources.cs" />
     <Compile Include="States\Phases\Resource\IResourcePhase.cs" />
     <Compile Include="States\Phases\Resource\ResourcePhase.cs" />
     <Compile Include="States\Phases\Travel\ITravelPhase.cs" />
+    <Compile Include="States\Phases\Travel\TravelPhase.cs" />
     <Compile Include="States\PlayerCardInPlay.cs" />
     <Compile Include="States\PlayerDeck.cs" />
     <Compile Include="Effects\ICancelEffect.cs" />
@@ -490,8 +504,11 @@
     <Compile Include="States\StateBase.cs" />
     <Compile Include="States\ThreateningInPlay.cs" />
     <Compile Include="States\TreasureInPlay.cs" />
+    <Compile Include="States\UnclaimedObjectiveInPlay.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

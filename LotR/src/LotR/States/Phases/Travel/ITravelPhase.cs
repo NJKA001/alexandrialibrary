@@ -8,7 +8,7 @@ namespace LotR.States.Phases.Travel
     public interface ITravelPhase
         : IPhase
     {
-        ILocationInPlay Location { get; }
+        ILocationInPlay Location { get; set; }
 
         bool IsTraveledTo { get; set; }
     }

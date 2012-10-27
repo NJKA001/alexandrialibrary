@@ -6,7 +6,7 @@ using System.Text;
 namespace LotR.States.Phases.Refresh
 {
     public interface ICardReadying
-        : IState, IEffective
+        : IState
     {
         IExhaustableInPlay Exhaustable { get; }
 

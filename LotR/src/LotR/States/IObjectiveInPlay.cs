@@ -10,5 +10,10 @@ namespace LotR.States
     public interface IObjectiveInPlay
         : ICardInPlay<IObjectiveCard>
     {
+        bool HasGuards { get; }
+        IEnumerable<IEncounterInPlay> Guards { get; }
+
+        void AddGuard(IEncounterInPlay guard);
+        void RemoveGuard(IEncounterInPlay guard);
     }
 }

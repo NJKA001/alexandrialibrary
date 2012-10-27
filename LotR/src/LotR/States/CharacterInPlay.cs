@@ -11,7 +11,7 @@ using LotR.States.Phases.Any;
 namespace LotR.States
 {
     public abstract class CharacterInPlay<T>
-        : PlayerCardInPlay<T>, ICharacterInPlay, IAttachmentHostInPlay
+        : PlayerCardInPlay<T>, ICharacterInPlay, IAttachmentHostInPlay, IWillpowerfulInPlay, IAttackingInPlay, IDefendingInPlay
         where T : IPlayerCard, IAttachmentHostCard
     {
         public CharacterInPlay(IGame game, T card)
@@ -20,6 +20,9 @@ namespace LotR.States
         }
 
         private readonly IDictionary<Guid, IAttachableInPlay> attachments = new Dictionary<Guid, IAttachableInPlay>();
+        private byte willpower;
+        private byte attack;
+        private byte defense;
 
         ICharacterCard ICardInPlay<ICharacterCard>.Card
         {
@@ -31,9 +34,63 @@ namespace LotR.States
             get { return Card as IAttachmentHostCard; }
         }
 
+        IWillpowerfulCard ICardInPlay<IWillpowerfulCard>.Card
+        {
+            get { return Card as IWillpowerfulCard; }
+        }
+
+        IAttackingCard ICardInPlay<IAttackingCard>.Card
+        {
+            get { return Card as IAttackingCard; }
+        }
+
+        IDefendingCard ICardInPlay<IDefendingCard>.Card
+        {
+            get { return Card as IDefendingCard; }
+        }
+
         public IEnumerable<IAttachableInPlay> Attachments
         {
             get { return attachments.Values; }
+        }
+
+        public byte Willpower
+        {
+            get { return willpower; }
+            set
+            {
+                if (willpower == value)
+                    return;
+
+                willpower = value;
+                OnPropertyChanged("Willpower");
+            }
+        }
+
+        public byte Attack
+        {
+            get { return attack; }
+            set
+            {
+                if (attack == value)
+                    return;
+
+                attack = value;
+                OnPropertyChanged("Attack");
+            }
+        }
+
+        public byte Defense
+        {
+            get { return defense; }
+            set
+            {
+                if (defense == value)
+                    return;
+
+                defense = value;
+                OnPropertyChanged("Defense");
+            }
         }
 
         public void AddAttachment(IAttachableInPlay attachment)

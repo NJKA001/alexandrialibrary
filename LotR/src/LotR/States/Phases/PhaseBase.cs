@@ -8,7 +8,7 @@ using LotR.States.Phases.Combat;
 
 namespace LotR.States.Phases
 {
-    public class PhaseBase
+    public abstract class PhaseBase
         : StateBase, IPhase
     {
         protected PhaseBase(IGame game, PhaseCode code, PhaseStep step)

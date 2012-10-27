@@ -46,9 +46,9 @@ namespace LotR.Cards.Encounter.Locations
                 if (playersDrawingCards == null)
                     return;
 
-                foreach (var player in playersDrawingCards.Players)
+                foreach (var playerId in playersDrawingCards.Players)
                 {
-                    playersDrawingCards.PlayerCanDrawCards[player.StateId] = false;
+                    playersDrawingCards.DisablePlayerCardDraw(playerId);
                 }
             }
         }

@@ -13,5 +13,7 @@ namespace LotR.States
     {
         Guid StateId { get; }
         IGame Game { get; }
+
+        void AddEffect(IEffect effect);
     }
 }

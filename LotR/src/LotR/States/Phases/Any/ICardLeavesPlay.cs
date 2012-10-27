@@ -6,7 +6,7 @@ using System.Text;
 namespace LotR.States.Phases.Any
 {
     public interface ICardLeavesPlay
-        : IState, IEffective
+        : IState
     {
         ICardInPlay LeavingPlay { get; }
 

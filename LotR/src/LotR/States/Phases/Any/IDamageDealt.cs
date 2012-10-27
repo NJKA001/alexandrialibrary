@@ -8,7 +8,7 @@ using LotR.Cards;
 namespace LotR.States.Phases.Any
 {
     public interface IDamageDealt
-        : IState, IEffective
+        : IState
     {
         ICard Source { get; }
         IDamagableInPlay Target { get; }

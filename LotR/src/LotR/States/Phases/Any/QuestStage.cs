@@ -59,10 +59,5 @@ namespace LotR.States.Phases.Any
                 OnPropertyChanged("StageIsDefeated");
             }
         }
-
-        public void AddEffect(IEffect effect)
-        {
-            Game.AddEffect(effect);
-        }
     }
 }

@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Cards.Encounter;
 using LotR.Cards.Encounter.Objectives;
-using LotR.Cards.Player;
 
 namespace LotR.States
 {
-    public class AttachableObjectiveInPlay
-        : AttachableInPlay, IObjectiveInPlay, IEncounterInPlay
+    public class UnclaimedObjectiveInPlay
+        : CardInPlay<IObjectiveCard>, IObjectiveInPlay
     {
-        public AttachableObjectiveInPlay(IGame game, IAttachableObjectiveCard card, IAttachmentHostInPlay attachedTo)
-            : base(game, card, attachedTo)
+        public UnclaimedObjectiveInPlay(IGame game, IObjectiveCard card)
+            : base(game, card)
         {
         }
 
@@ -49,16 +47,6 @@ namespace LotR.States
                 return;
 
             guards.Remove(guard);
-        }
-
-        IEncounterCard ICardInPlay<IEncounterCard>.Card
-        {
-            get { return Card as IEncounterCard; }
-        }
-
-        IObjectiveCard ICardInPlay<IObjectiveCard>.Card
-        {
-            get { return Card as IObjectiveCard; }
         }
     }
 }

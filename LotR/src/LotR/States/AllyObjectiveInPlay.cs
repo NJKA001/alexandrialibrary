@@ -11,11 +11,45 @@ using LotR.Cards.Player.Allies;
 namespace LotR.States
 {
     public class AllyObjectiveInPlay
-        : CardInPlay<IAllyObjectiveCard>, IObjectiveInPlay, IEncounterInPlay, IAllyInPlay, ICharacterInPlay
+        : CharacterInPlay<IAllyObjectiveCard>, IObjectiveInPlay, IEncounterInPlay, IAllyInPlay, ICharacterInPlay, IWillpowerfulInPlay
     {
         public AllyObjectiveInPlay(IGame game, IAllyObjectiveCard card)
             : base(game, card)
         {
+        }
+
+        private readonly IList<IEncounterInPlay> guards = new List<IEncounterInPlay>();
+
+        public bool HasGuards
+        {
+            get { return guards.Count > 0; }
+        }
+
+        public IEnumerable<IEncounterInPlay> Guards
+        {
+            get { return guards; }
+        }
+
+        public void AddGuard(IEncounterInPlay guard)
+        {
+            if (guard == null)
+                throw new ArgumentNullException("guard");
+
+            if (guards.Contains(guard))
+                return;
+
+            guards.Add(guard);
+        }
+
+        public void RemoveGuard(IEncounterInPlay guard)
+        {
+            if (guard == null)
+                throw new ArgumentNullException("guard");
+
+            if (!guards.Contains(guard))
+                return;
+
+            guards.Remove(guard);
         }
 
         IEncounterCard ICardInPlay<IEncounterCard>.Card
@@ -36,11 +70,6 @@ namespace LotR.States
         IAllyCard ICardInPlay<IAllyCard>.Card
         {
             get { return Card as IAllyCard; }
-        }
-
-        public bool CanPayFor(ICostlyCard costlyCard)
-        {
-            return false;
         }
     }
 }

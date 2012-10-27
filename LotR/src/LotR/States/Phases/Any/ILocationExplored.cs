@@ -6,7 +6,7 @@ using System.Text;
 namespace LotR.States.Phases.Any
 {
     public interface ILocationExplored
-        : IState, IEffective
+        : IState
     {
         ILocationInPlay Location { get; }
 

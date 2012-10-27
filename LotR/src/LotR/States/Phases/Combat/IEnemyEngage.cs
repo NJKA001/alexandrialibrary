@@ -6,7 +6,7 @@ using System.Text;
 namespace LotR.States.Phases.Combat
 {
     public interface IEnemyEngage
-        : IState, IEffective
+        : IState
     {
         IPlayer DefendingPlayer { get; }
         IEnemyInPlay Enemy { get; }

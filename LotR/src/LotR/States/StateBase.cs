@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
+using LotR.Effects;
+
 namespace LotR.States
 {
     public abstract class StateBase
@@ -22,7 +24,7 @@ namespace LotR.States
 
         private readonly Guid stateId;
         private readonly IGame game;
-        
+
         protected void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged == null)
@@ -39,6 +41,14 @@ namespace LotR.States
         public IGame Game
         {
             get { return game; }
+        }
+
+        public void AddEffect(IEffect effect)
+        {
+            if (effect == null)
+                throw new ArgumentNullException("effect");
+
+            game.AddEffect(effect);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -11,6 +11,8 @@ namespace LotR.States.Phases.Any
         : IState
     {
         IDamagableInPlay Target { get; }
-        byte DamageHealed { get; }
+
+        byte Damage { get; set; }
+        bool IsDamageHealed { get; set; }
     }
 }

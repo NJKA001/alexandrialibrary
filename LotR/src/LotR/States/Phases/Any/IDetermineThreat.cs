@@ -11,5 +11,6 @@ namespace LotR.States.Phases.Any
         IThreateningInPlay Threatening { get; }
 
         byte Threat { get; set; }
+        bool IsThreatCounted { get; set; }
     }
 }

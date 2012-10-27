@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -12,15 +13,22 @@ using LotR.States.Phases.Resource;
 namespace LotR.States
 {
     public class Game
-        : StateBase, IGame
+        : IGame
     {
         public Game()
-            : base(null)
         {
         }
 
         private readonly IList<IPlayer> players = new List<IPlayer>();
         private readonly IList<IEffect> currentEffects = new List<IEffect>();
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged == null)
+                return;
+
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public IPhase CurrentPhase
         {
@@ -55,6 +63,8 @@ namespace LotR.States
         {
             get { return players.Single(x => x.IsFirstPlayer); }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void AddEffect(IEffect effect)
         {

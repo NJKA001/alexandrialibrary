@@ -42,11 +42,15 @@ namespace LotR.Cards.Player.Heroes
                 if (playersDrawing == null)
                     return;
 
-                var firstPlayer = playersDrawing.Players.Where(x => x.IsFirstPlayer).FirstOrDefault();
-                if (firstPlayer == null)
+                var firstPlayer = game.Players.Where(x => x.IsFirstPlayer).FirstOrDefault();
+                if (firstPlayer == null || !playersDrawing.Players.Contains(firstPlayer.StateId))
                     return;
 
-                playersDrawing.NumberOfCards[firstPlayer.StateId] += 1;
+                var numberOfCards = playersDrawing.GetNumberOfCards(firstPlayer.StateId);
+                
+                numberOfCards += 1;
+
+                playersDrawing.SetNumberOfCards(firstPlayer.StateId, numberOfCards);
             }
         }
     }
