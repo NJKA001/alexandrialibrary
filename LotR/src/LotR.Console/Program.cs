@@ -19,6 +19,25 @@ namespace LotR.Console
 {
     class Program
     {
+        #region Constants
+
+        const string command_exit = "exit";
+        const string command_game = "game";
+        const string command_help = "help";
+        const string command_player1 = "player1";
+        const string command_player2 = "player2";
+        const string command_player3 = "player3";
+        const string command_player4 = "player4";
+        const string command_quest = "quest";
+        const string command_staging = "staging";
+        const string command_victory = "victory";
+        const string option_hand = "hand";
+        const string option_heros = "heroes";
+        const string option_allies = "allies";
+        const string option_attachments = "attachments";
+
+        #endregion
+
         static void Main(string[] args)
         {
             try
@@ -41,53 +60,139 @@ namespace LotR.Console
 
                 WriteLine("Starting Game");
 
-                //foreach (var player in players)
-                //{
-                    //DisplayDeck(player.Deck);
-                //}
+                var line = string.Empty;
+                var cmd = string.Empty;
+                string[] options = null;
+                while (line != command_exit)
+                {
+                    Write("lotr>");
 
-                //var questArea = game.GetStates<IQuestArea>().FirstOrDefault();
-                //if (questArea == null)
-                //    return;
+                    line = System.Console.ReadLine();
+                    if (string.IsNullOrEmpty(line))
+                        continue;
+                    
+                    options = line.Split(' ');
+                    if (options == null || options.Length == 0)
+                        continue;
+                    
+                    cmd = options[0];
 
-                //DisplayQuests(questArea.QuestDeck);
-                //DisplayEncounters(questArea.EncounterDecks);
-
-                //var drawCards = false;
-
-                //if (drawCards)
-                //{
-                //    var deck = players.First().Deck;
-
-                //    var line = "start";
-                //    while (!string.IsNullOrEmpty(line))
-                //    {
-                //        WriteLine();
-                //        WriteLine("Drawing 6 Cards (press ENTER to stop)");
-
-                //        deck.Shuffle();
-
-                //        foreach (var card in deck.GetFromTop(6))
-                //        {
-                //            WriteLine("  {0}", card.Title);
-                //        }
-
-                //        line = System.Console.ReadLine().Trim();
-                //    }
-
-                //    WriteLine();
-                //}
-
-                WriteLine("Press ENTER to close simulator");
-                System.Console.ReadLine();
+                    HandleCommand(game, cmd, options);
+                }
             }
             catch (Exception ex)
             {
                 WriteLine("Error: {0}\r\n{1}", ex.Message, ex.StackTrace);
+                System.Console.ReadLine();
             }
         }
 
         private static IGameLoader gameLoader;
+
+        private static int GetPlayerCount(IGame game)
+        {
+            return game.Players.Count();
+        }
+
+        private static void DisplayPlayerInfo(IGame game, int number, string[] options)
+        {
+            if (GetPlayerCount(game) < number)
+            {
+                WriteLine("There are not {0} players in the game", number);
+                return;
+            }
+
+            var player = game.Players.ToList()[number - 1];
+
+            if (options == null)
+                return;
+            
+            if (options.Length == 1)
+            {
+                WriteLine("Player #{0}", number);
+                WriteLine(player.ToString());
+            }
+            else if (options.Length == 2 && options[1] != null)
+            {
+                var option1 = options[1].Trim();
+                var option2 = options.Length > 2 ? options[2].Trim() : string.Empty;
+                
+                switch (option1)
+                {
+                    case option_hand:
+                        if (player.Hand.Cards.Count() > 0)
+                        {
+                            WriteLine("Cards in Hand: {0}", player.Hand.Cards.Count());
+                            var seq = 0;
+                            foreach (var card in player.Hand.Cards)
+                            {
+                                seq++;
+                                WriteLine("{0,00}  {1} ({2})", seq, card.Title, card.PrintedCardType);
+                            }
+                        }
+                        else
+                        {
+                            WriteLine("No Cards in Hand");
+                        }
+                        break;
+                    default:
+                        WriteLine("unrecognized option: {0}", option1);
+                        break;
+                }
+            }
+        }
+
+        private static void DisplayGame(IGame game, string[] options)
+        {
+            WriteLine(game.ToString());
+        }
+
+        private static void HandleCommand(IGame game, string command, string[] options)
+        {
+            switch (command)
+            {
+                case command_exit:
+                    break;
+                case command_game:
+                    DisplayGame(game, options);
+                    break;
+                case command_help:
+                    WriteLine("exit     exit from simulator");
+                    WriteLine("help     display a list of valid commands");
+                    WriteLine("player1  display player #1 information");
+                    WriteLine("player2  display player #2 information");
+                    WriteLine("player3  display player #3 information");
+                    WriteLine("player4  display player #4 information");
+                    WriteLine("quest    display quest information");
+                    WriteLine("staging  display staging area information");
+                    WriteLine("victory  display victory display area information");
+                    break;
+                case command_player1:
+                    DisplayPlayerInfo(game, 1, options);
+                    break;
+                case command_player2:
+                    DisplayPlayerInfo(game, 2, options);
+                    break;
+                case command_player3:
+                    DisplayPlayerInfo(game, 3, options);
+                    break;
+                case command_player4:
+                    DisplayPlayerInfo(game, 4, options);
+                    break;
+                case command_quest:
+                    WriteLine(game.QuestArea.ToString());
+                    break;
+                case command_staging:
+                    WriteLine(game.StagingArea.ToString());
+                    break;
+                case command_victory:
+                    WriteLine(game.VictoryDisplay.ToString());
+                    break;
+                default:
+                    WriteLine("unrecognized command: {0}\r\nenter 'help' for a list of a valid commands", command);
+                    break;
+            }
+        }
 
         private static IGame LoadGame(IEnumerable<PlayerInfo> playersInfo, ScenarioCode scenarioCode)
         {
@@ -237,6 +342,16 @@ namespace LotR.Console
                 return "Treasure";
             else
                 return "Unknown";
+        }
+
+        private static void Write(string line)
+        {
+            System.Console.Write(line);
+        }
+
+        private static void Write(string format, params object[] args)
+        {
+            System.Console.Write(format, args);
         }
 
         private static void WriteLine()

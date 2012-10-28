@@ -47,9 +47,12 @@ namespace LotR.States
             return cards.FirstOrDefault(predicate);
         }
 
-        public IEnumerable<T> GetFromTop(int numberOfCards)
+        public IEnumerable<T> GetFromTop(uint numberOfCards)
         {
-            return cards.Take(numberOfCards);
+            if (numberOfCards == 0)
+                throw new ArgumentException("numberOfCards must be greater than zero");
+
+            return cards.Take((int)numberOfCards);
         }
 
         public void RemoveFromDeck(T card)
@@ -74,6 +77,22 @@ namespace LotR.States
             {
                 this.cards.Insert(0, card);
             }
+        }
+
+        public void Draw(uint numberOfCards, Action<IEnumerable<T>> drawCallback)
+        {
+            if (numberOfCards == 0)
+                throw new ArgumentException("numberOfCards must be greater than zero");
+
+            var cardsToDraw = GetFromTop(numberOfCards).ToList();
+
+            foreach (var card in cardsToDraw)
+                RemoveFromDeck(card);
+
+            if (drawCallback == null)
+                return;
+
+            drawCallback(cardsToDraw);
         }
 
         public void Discard(IEnumerable<T> cards)

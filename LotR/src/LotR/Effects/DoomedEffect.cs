@@ -26,5 +26,10 @@ namespace LotR.Effects
             get;
             protected set;
         }
+
+        public override string ToString()
+        {
+            return string.Format("Doomed {0}", Doomed);
+        }
     }
 }

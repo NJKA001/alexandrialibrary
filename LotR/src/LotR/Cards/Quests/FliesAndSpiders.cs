@@ -22,17 +22,19 @@ namespace LotR.Cards.Quests
         {
             FlavorText = "You are traveling through Mirkwood Forest, carrying an urgent message from King Thranduil to the Lady Galadriel of Lorien. As you move along the dark trail, the spiders gather around you...";
             BacksideFlavorText = "The nastiest things they saw were the cobwebs; dark dense cobwebs the treads extraordinarily thick, often stretched from tree to tree, or tangles in the lower branches on either side of them. There were none stretched across the path, but whether because some magic kept it clear, or for what other reason they could not guess.\r\n-The Hobbit";
+
+            AddEffect(new SetupForestSpiderAndOldForestRoadInStagingArea(this));
         }
 
         public class SetupForestSpiderAndOldForestRoadInStagingArea
-            : PassiveEffect, ISetupEffect
+            : SetupEffectBase, ISetupEffect
         {
             public SetupForestSpiderAndOldForestRoadInStagingArea(FliesAndSpiders source)
                 : base("Search the encounter deck for 1 copy of the Forest Spider and 1 copy of the Old Forest Road, and then add them to the staging area Then, shuffle the encounter deck.", source)
             {
             }
 
-            public void Setup(IGame game)
+            public override void Setup(IGame game)
             {
                 var forestSpider = game.StagingArea.EncounterDeck.Cards.Where(x => x.Title == "Forest Spider").FirstOrDefault() as IEnemyCard;
                 if (forestSpider == null)

@@ -12,5 +12,10 @@ namespace LotR.Effects
             : base(description, source)
         {
         }
+
+        public override string ToString()
+        {
+            return Description;
+        }
     }
 }

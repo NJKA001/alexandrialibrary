@@ -20,5 +20,10 @@ namespace LotR.Effects
         public void DuringCharactersAttack(ICharactersAttack state)
         {
         }
+
+        public override string ToString()
+        {
+            return "Ranged";
+        }
     }
 }

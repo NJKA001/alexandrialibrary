@@ -109,6 +109,7 @@
     <Compile Include="Effects\Phases\Any\IBeforeStageDefeated.cs" />
     <Compile Include="Effects\Phases\Combat\IAfterEnemyAttackResolves.cs" />
     <Compile Include="Effects\Phases\Combat\IAfterEnemyEngages.cs" />
+    <Compile Include="Effects\SetupEffectBase.cs" />
     <Compile Include="Effects\ShadowEffectBase.cs" />
     <Compile Include="Effects\TravelEffectBase.cs" />
     <Compile Include="Effects\WhenRevealedEffectBase.cs" />

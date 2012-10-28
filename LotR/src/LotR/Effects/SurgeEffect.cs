@@ -14,5 +14,10 @@ namespace LotR.Effects
             : base("Surge", source)
         {
         }
+
+        public override string ToString()
+        {
+            return "Surge";
+        }
     }
 }

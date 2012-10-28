@@ -19,5 +19,10 @@ namespace LotR.Effects
         {
             game.AddEffect(this);
         }
+
+        public override string ToString()
+        {
+            return string.Format("When Revealed: {0}", Description);
+        }
     }
 }

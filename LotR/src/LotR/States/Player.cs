@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,7 @@ namespace LotR.States
         private readonly IPlayerDeck deck;
         private readonly IHand<IPlayerCard> hand;
         private readonly IDictionary<Guid, IAttachableInPlay> deckAttachments = new Dictionary<Guid, IAttachableInPlay>();
-        private readonly IDictionary<Guid, ICardInPlay> cardsInPlay = new Dictionary<Guid, ICardInPlay>();
+        private readonly ObservableCollection<ICardInPlay> cardsInPlay = new ObservableCollection<ICardInPlay>();
         private readonly IDictionary<Guid, IEnemyInPlay> engagedEnemies = new Dictionary<Guid, IEnemyInPlay>();
 
         private byte currentThreat;
@@ -60,7 +61,7 @@ namespace LotR.States
 
         public IEnumerable<ICardInPlay> CardsInPlay
         {
-            get { return cardsInPlay.Values; }
+            get { return cardsInPlay; }
         }
 
         public IEnumerable<IEnemyInPlay> EngagedEnemies
@@ -133,10 +134,24 @@ namespace LotR.States
 
         public void AddCardInPlay(ICardInPlay card)
         {
+            if (card == null)
+                throw new ArgumentNullException("card");
+
+            if (cardsInPlay.Contains(card))
+                return;
+
+            cardsInPlay.Add(card);
         }
 
         public void RemoveCardInPlay(ICardInPlay card)
         {
+            if (card == null)
+                throw new ArgumentNullException("card");
+
+            if (!cardsInPlay.Contains(card))
+                return;
+
+            cardsInPlay.Remove(card);
         }
 
         public void AddEngagedEnemy(IEnemyInPlay enemy)
@@ -147,9 +162,57 @@ namespace LotR.States
         {
         }
 
+        public void DrawCards(uint numberOfCards)
+        {
+            Deck.Draw(numberOfCards, (cardsToDraw) => Hand.AddCards(cardsToDraw));
+        }
+
         public bool IsTheControllerOf(ICardInPlay card)
         {
             return false;
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            if (IsFirstPlayer)
+                sb.AppendFormat("\r\n{0} ({1} threat)\r\n*** First Player ***\r\n", Name, CurrentThreat);
+            else
+                sb.AppendFormat("\r\n{0} ({1} threat)\r\n", Name, CurrentThreat);
+
+            var handCount = Hand.Cards.Count();
+            var deckCount = Deck.Cards.Count();
+            var discardCount = Deck.DiscardPile.Count();
+
+            var heroCount = cardsInPlay.OfType<IHeroInPlay>().Count();
+            var allyCount = cardsInPlay.OfType<IAllyInPlay>().Count();
+
+            sb.AppendFormat("Cards in Hand: {0}\r\n", handCount);
+            sb.AppendFormat("Cards in Deck: {0}\r\n", deckCount);
+            sb.AppendFormat("Cards in Discard Pile: {0}\r\n", discardCount);
+            sb.AppendFormat("Heroes in Play: {0}\r\n", heroCount);
+
+            var number = 0;
+            foreach (var hero in cardsInPlay.OfType<IHeroInPlay>())
+            {
+                number++;
+                var currentHitPoints = hero.Card.PrintedHitPoints - hero.Damage;
+                sb.AppendFormat("{0,00}  {1} ({2} resources, {3} of {4} hit points)\r\n", number, hero.Title, hero.Resources, currentHitPoints, hero.Card.PrintedHitPoints);
+            }
+
+            if (allyCount > 0)
+            {
+                sb.AppendFormat("Allies in Play: {0}\r\n", allyCount);
+                foreach (var ally in cardsInPlay.OfType<IAllyInPlay>())
+                {
+                    number++;
+                    var currentHitPoints = ally.Card.PrintedHitPoints - ally.Damage;
+                    sb.AppendFormat("{0,00}  {1} ({2} of {3} hit points)\r\n", number, ally.Title, currentHitPoints, ally.Card.PrintedHitPoints);
+                }
+            }
+
+            return sb.ToString();
         }
     }
 }

@@ -20,5 +20,10 @@ namespace LotR.Effects
         public void DuringCharactersDefend(IEnemyAttack state)
         {
         }
+
+        public override string ToString()
+        {
+            return "Sentinel";
+        }
     }
 }

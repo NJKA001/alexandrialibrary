@@ -6,6 +6,8 @@ using System.Text;
 
 using LotR.Cards;
 using LotR.Effects;
+using LotR.Effects.Choices;
+using LotR.Effects.Payments;
 using LotR.States.Areas;
 using LotR.States.Phases;
 using LotR.States.Phases.Resource;
@@ -21,6 +23,9 @@ namespace LotR.States
 
         private readonly IList<IPlayer> players = new List<IPlayer>();
         private readonly IList<IEffect> currentEffects = new List<IEffect>();
+        private readonly IList<Action<IEffect>> effectAddedCallbacks = new List<Action<IEffect>>();
+        private readonly IList<Action<IEffect>> effectResolvedCallbacks = new List<Action<IEffect>>();
+        private readonly IList<Action<IEffect, IPayment, IChoice>> paymentRejectedCallbacks = new List<Action<IEffect, IPayment, IChoice>>();
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -28,6 +33,24 @@ namespace LotR.States
                 return;
 
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void OnEffectAdded(IEffect effect)
+        {
+            foreach (var callback in effectAddedCallbacks)
+                callback(effect);
+        }
+
+        private void OnEffectResolved(IEffect effect)
+        {
+            foreach (var callback in effectResolvedCallbacks)
+                callback(effect);
+        }
+
+        private void OnPaymentRejected(IEffect effect, IPayment payment, IChoice choice)
+        {
+            foreach (var callback in paymentRejectedCallbacks)
+                callback(effect, payment, choice);
         }
 
         public IPhase CurrentPhase
@@ -72,6 +95,21 @@ namespace LotR.States
                 throw new ArgumentNullException("effect");
 
             currentEffects.Add(effect);
+
+            OnEffectAdded(effect);
+        }
+
+        public void ResolveEffect(IEffect effect, IPayment payment, IChoice choice)
+        {
+            if (!effect.PaymentAccepted(this, payment, choice))
+            {
+                OnPaymentRejected(effect, payment, choice);
+                return;
+            }
+
+            effect.Resolve(this, payment, choice);
+
+            OnEffectResolved(effect);
         }
 
         public void Setup(IQuestArea questArea, IEnumerable<IPlayer> players)
@@ -86,6 +124,9 @@ namespace LotR.States
                 throw new ArgumentException("list of players cannot contain nulls");
 
             this.QuestArea = questArea;
+
+
+
             this.StagingArea = new StagingArea(this, questArea.ActiveEncounterDeck);
             this.VictoryDisplay = new VictoryDisplay(this);
 
@@ -93,15 +134,50 @@ namespace LotR.States
             {
                 this.players.Add(player);
 
+                player.Deck.Shuffle();
+
                 foreach (var card in player.Deck.Cards)
                 {
                     card.Owner = player;
                 }
+
+                foreach (var hero in player.Deck.Heroes)
+                {
+                    player.AddCardInPlay(new HeroInPlay(this, hero));
+                }
+
+                player.DrawCards(6);
             }
+
+            this.QuestArea.Setup();
 
             players.First().IsFirstPlayer = true;
 
             CurrentPhase = new ResourcePhase(this);
+        }
+
+        public void RegisterEffectAddedCallback(Action<IEffect> callback)
+        {
+            if (callback == null)
+                throw new ArgumentException("callback");
+
+            effectAddedCallbacks.Add(callback);
+        }
+
+        public void RegisterEffectResolvedCallback(Action<IEffect> callback)
+        {
+            if (callback == null)
+                throw new ArgumentException("callback");
+
+            effectResolvedCallbacks.Add(callback);
+        }
+
+        public void RegisterPaymentRejectedCallback(Action<IEffect, IPayment, IChoice> callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            paymentRejectedCallbacks.Add(callback);
         }
 
         public T GetCardInPlay<T>(Guid cardId)
@@ -127,6 +203,29 @@ namespace LotR.States
             }
 
             return null;
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            if (currentEffects.Count > 0)
+            {
+                sb.AppendFormat("\r\nCurrent Effects:\r\n", currentEffects.Count);
+
+                var seq = 0;
+                foreach (var effect in currentEffects)
+                {
+                    seq++;
+                    sb.AppendFormat("{0,00}  {1}", seq, effect);
+                }
+            }
+            else
+            {
+                sb.AppendLine("\r\nNo Current Effects");
+            }
+
+            return sb.ToString();
         }
     }
 }

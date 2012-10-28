@@ -37,6 +37,8 @@ namespace LotR.States
         void AddEngagedEnemy(IEnemyInPlay enemy);
         void RemoveEngagedEnemy(IEnemyInPlay enemy);
 
+        void DrawCards(uint numberOfCards);
+
         bool IsTheControllerOf(ICardInPlay card);
     }
 }

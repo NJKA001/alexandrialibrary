@@ -14,10 +14,11 @@ namespace LotR.States
         IEnumerable<T> DiscardPile { get; }
         uint Size { get; }
 
-        IEnumerable<T> GetFromTop(int numberOfCards);
+        IEnumerable<T> GetFromTop(uint numberOfCards);
         void RemoveFromDeck(T card);
         void PutOnTop(IEnumerable<T> cards);
         void PutOnBottom(IEnumerable<T> cards);
+        void Draw(uint numberOfCards, Action<IEnumerable<T>> drawCallback);
         void Discard(IEnumerable<T> cards);
         void RemoveFromDiscardPile(IEnumerable<T> cards);
         void Shuffle();

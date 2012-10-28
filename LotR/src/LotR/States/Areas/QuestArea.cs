@@ -6,6 +6,7 @@ using System.Text;
 using LotR.Cards;
 using LotR.Cards.Quests;
 using LotR.Cards.Encounter;
+using LotR.Effects;
 using LotR.States.Phases.Any;
 
 namespace LotR.States.Areas
@@ -18,11 +19,18 @@ namespace LotR.States.Areas
         {
             if (questDeck == null)
                 throw new ArgumentNullException("questDeck");
+            if (questDeck.Cards.Count() == 0)
+                throw new ArgumentException("questDeck does not contain any cards");
             if (encounterDecks == null)
                 throw new ArgumentNullException("encounterDecks");
+            if (encounterDecks.Count() == 0)
+                throw new ArgumentException("encounterDecks is an empty list");
 
             this.QuestDeck = questDeck;
             this.EncounterDecks = encounterDecks;
+
+            SetActiveQuest(QuestDeck.Cards.First());
+            SetActiveEncounterDeck(EncounterDecks.First());
         }
 
         private byte activeLocationProgress;
@@ -141,11 +149,50 @@ namespace LotR.States.Areas
 
         public void Setup()
         {
+            if (ActiveQuest.HasEffect<ISetupEffect>())
+            {
+                foreach (var setupEffect in ActiveQuest.Card.Text.Effects.OfType<ISetupEffect>())
+                {
+                    Game.AddEffect(setupEffect);
+                }
+            }
         }
 
         public IQuestStage GetCurrentQuestStage()
         {
             return null;
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            if (ActiveQuest != null)
+            {
+                sb.AppendFormat("\r\nActive Quest: {0}\r\n", ActiveQuest.Title);
+                sb.AppendFormat("Progress: {0} of {1}\r\n", ActiveQuest.Progress, ActiveQuest.Card.QuestPoints);
+                sb.AppendLine("Text:\r\n");
+                foreach (var effect in ActiveQuest.Card.Text.Effects)
+                {
+                    sb.AppendFormat("{0}\r\n", effect);
+                }
+            }
+            else
+            {
+                sb.AppendLine("No Active Quest");
+            }
+
+            if (ActiveLocation != null)
+            {
+                sb.AppendFormat("\r\nActive Location: {0} ({1} threat)\r\n", ActiveLocation.Title, ((IThreateningInPlay)ActiveLocation).Threat);
+                sb.AppendFormat("Progress: {0} of {1}\r\n", ActiveLocation.Progress, ActiveLocation.Card.QuestPoints);
+            }
+            else
+            {
+                sb.AppendLine("No Active Location");
+            }
+
+            return sb.ToString();
         }
     }
 }

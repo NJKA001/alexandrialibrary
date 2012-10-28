@@ -34,5 +34,10 @@ namespace LotR.Effects
 
             game.QuestArea.SetActiveLocation(location);
         }
+
+        public override string ToString()
+        {
+            return string.Format("Travel: {0}", Description);
+        }
     }
 }

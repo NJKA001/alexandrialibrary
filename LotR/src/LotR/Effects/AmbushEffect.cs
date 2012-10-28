@@ -14,5 +14,10 @@ namespace LotR.Effects
             : base("Ambush", source)
         {
         }
+
+        public override string ToString()
+        {
+            return "Ambush (after this enemy enters play, each player makes an engagement check against it.)";
+        }
     }
 }

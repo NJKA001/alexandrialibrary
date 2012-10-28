@@ -6,6 +6,8 @@ using System.Text;
 
 using LotR.Cards;
 using LotR.Effects;
+using LotR.Effects.Choices;
+using LotR.Effects.Payments;
 using LotR.States.Areas;
 using LotR.States.Phases;
 using LotR.States.Phases.Combat;
@@ -24,7 +26,12 @@ namespace LotR.States
         IPlayer FirstPlayer { get; }
 
         void AddEffect(IEffect effect);
+        void ResolveEffect(IEffect effect, IPayment payment, IChoice choice);
         void Setup(IQuestArea questArea, IEnumerable<IPlayer> players);
+        
+        void RegisterEffectAddedCallback(Action<IEffect> callback);
+        void RegisterEffectResolvedCallback(Action<IEffect> callback);
+        void RegisterPaymentRejectedCallback(Action<IEffect, IPayment, IChoice> callback);
 
         T GetCardInPlay<T>(Guid cardId) where T : class, ICardInPlay;
     }

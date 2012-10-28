@@ -127,5 +127,18 @@ namespace LotR.Cards
         {
             return (Text.Effects.OfType<T>().Count() > 0);
         }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendFormat("{0} ({1})\r\n", Title, PrintedCardType);
+            sb.AppendFormat("Traits: {0}\r\n", string.Join(", ", PrintedTraits));
+            foreach (var effect in Text.Effects)
+            {
+                sb.AppendLine(effect.ToString());
+            }
+            return sb.ToString();
+        }
     }
 }
