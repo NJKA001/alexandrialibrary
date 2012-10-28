@@ -8,8 +8,7 @@ namespace LotR.States.Phases.Combat
     public interface IEnemyDefeated
         : IState
     {
-        IEnumerable<IAttackingInPlay> Attackers { get; }
-        IEnumerable<IDefendingInPlay> Defenders { get; }
         IEnemyInPlay Enemy { get; }
+        IEnumerable<IAttackingInPlay> Attackers { get; }
     }
 }

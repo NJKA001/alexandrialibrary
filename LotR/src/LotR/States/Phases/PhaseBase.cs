@@ -57,7 +57,7 @@ namespace LotR.States.Phases
             return null;
         }
 
-        public IEnumerable<IEnemyEngage> GetEngagedEnemies()
+        public IEnumerable<IEnemyEngaged> GetEngagedEnemies()
         {
             return null;
         }

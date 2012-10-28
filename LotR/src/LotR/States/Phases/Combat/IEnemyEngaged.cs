@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LotR.States.Phases.Combat
 {
-    public interface IEnemyEngage
+    public interface IEnemyEngaged
         : IState
     {
         IPlayer DefendingPlayer { get; }

@@ -190,9 +190,6 @@
     <Compile Include="Effects\Choices\IChooseTopOrBottomOfDeck.cs" />
     <Compile Include="Cards\Player\CostlyCardBase.cs" />
     <Compile Include="Effects\Choices\ChooseAlly.cs" />
-    <Compile Include="Effects\Costs\ChooseCardDestination.cs" />
-    <Compile Include="Effects\Costs\ChooseHeroCommitedToQuest.cs" />
-    <Compile Include="Effects\Costs\ChooseHeroCost.cs" />
     <Compile Include="Effects\Costs\CostBase.cs" />
     <Compile Include="Effects\Costs\DiscardCardsFromHand.cs" />
     <Compile Include="Effects\Costs\ExhaustSelf.cs" />
@@ -280,13 +277,18 @@
     <Compile Include="States\Phases\Any\IPlayersDrawingCards.cs" />
     <Compile Include="States\Phases\Any\PlayersDrawingCards.cs" />
     <Compile Include="States\Phases\Any\QuestStage.cs" />
+    <Compile Include="States\Phases\Combat\CharactersAttack.cs" />
+    <Compile Include="States\Phases\Combat\ChooseEnemyToAttack.cs" />
     <Compile Include="States\Phases\Combat\CombatPhase.cs" />
+    <Compile Include="States\Phases\Combat\EnemyAttack.cs" />
+    <Compile Include="States\Phases\Combat\EnemyDefeated.cs" />
+    <Compile Include="States\Phases\Combat\EnemyEngaged.cs" />
     <Compile Include="States\Phases\Combat\ICharactersAttack.cs" />
     <Compile Include="States\Phases\Combat\IChooseEnemyToAttack.cs" />
     <Compile Include="States\Phases\Combat\ICombatPhase.cs" />
     <Compile Include="States\Phases\Combat\IEnemyAttack.cs" />
     <Compile Include="States\Phases\Combat\IEnemyDefeated.cs" />
-    <Compile Include="States\Phases\Combat\IEnemyEngage.cs" />
+    <Compile Include="States\Phases\Combat\IEnemyEngaged.cs" />
     <Compile Include="States\Phases\Encounter\EncounterPhase.cs" />
     <Compile Include="States\Phases\Encounter\EnemiesEngaged.cs" />
     <Compile Include="States\Phases\Encounter\IEncounterPhase.cs" />
@@ -297,9 +299,11 @@
     <Compile Include="States\Phases\Planning\PlanningPhase.cs" />
     <Compile Include="States\Phases\Quest\IQuestPhase.cs" />
     <Compile Include="States\Phases\Quest\QuestPhase.cs" />
+    <Compile Include="States\Phases\Refresh\CardReadying.cs" />
     <Compile Include="States\Phases\Refresh\ICardReadying.cs" />
     <Compile Include="States\Phases\Refresh\IRefreshPhase.cs" />
     <Compile Include="States\Phases\Refresh\RefreshPhase.cs" />
+    <Compile Include="States\Phases\Resource\CollectingResources.cs" />
     <Compile Include="States\Phases\Resource\ICollectingResources.cs" />
     <Compile Include="States\Phases\Resource\IResourcePhase.cs" />
     <Compile Include="States\Phases\Resource\ResourcePhase.cs" />
@@ -420,7 +424,6 @@
     <Compile Include="Cards\IProgressableCard.cs" />
     <Compile Include="Cards\Quests\IQuestCard.cs" />
     <Compile Include="Effects\IQuestCardEffect.cs" />
-    <Compile Include="Effects\Costs\IResourceCost.cs" />
     <Compile Include="Cards\Player\IResourcefulCard.cs" />
     <Compile Include="Effects\IResponseEffect.cs" />
     <Compile Include="Cards\IRevealableCard.cs" />
@@ -505,9 +508,6 @@
     <Compile Include="States\ThreateningInPlay.cs" />
     <Compile Include="States\TreasureInPlay.cs" />
     <Compile Include="States\UnclaimedObjectiveInPlay.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferences Include="Web References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

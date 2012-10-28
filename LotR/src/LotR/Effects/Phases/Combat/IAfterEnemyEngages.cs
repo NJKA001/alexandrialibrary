@@ -9,6 +9,6 @@ namespace LotR.Effects.Phases.Combat
 {
     public interface IAfterEnemyEngages
     {
-        void AfterEnemyEngages(IEnemyEngage state);
+        void AfterEnemyEngages(IEnemyEngaged state);
     }
 }

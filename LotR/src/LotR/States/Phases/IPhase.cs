@@ -17,7 +17,7 @@ namespace LotR.States.Phases
         IEnumerable<IDamageDealt> GetDamageDealt();
         IEnumerable<IEnemyDefeated> GetDefeatedEnemies();
         IEnumerable<IDetermineAttack> GetDetermineAttacks();
-        IEnumerable<IEnemyEngage> GetEngagedEnemies();
+        IEnumerable<IEnemyEngaged> GetEngagedEnemies();
         IEnumerable<IEnemyAttack> GetEnemyAttacks();
         IEnumerable<IChooseEnemyToAttack> GetEnemiesChosenToAttack();
         IPlayersDrawingCards GetPlayersDrawingCards();

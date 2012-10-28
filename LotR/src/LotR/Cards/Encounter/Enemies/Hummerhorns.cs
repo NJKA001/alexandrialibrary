@@ -31,7 +31,7 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public void AfterEnemyEngages(IEnemyEngage state)
+            public void AfterEnemyEngages(IEnemyEngaged state)
             {
                 state.AddEffect(this);
             }
