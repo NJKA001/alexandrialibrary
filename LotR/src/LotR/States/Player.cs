@@ -25,15 +25,14 @@ namespace LotR.States
             this.name = name;
             this.deck = deck;
             this.hand = new Hand<IPlayerCard>(game);
-            this.currentThreat = deck.Threat;
         }
 
         private readonly string name;
         private readonly IPlayerDeck deck;
         private readonly IHand<IPlayerCard> hand;
-        private readonly IDictionary<Guid, IAttachableInPlay> deckAttachments = new Dictionary<Guid, IAttachableInPlay>();
+        private readonly ObservableCollection<IAttachableInPlay> deckAttachments = new ObservableCollection<IAttachableInPlay>();
         private readonly ObservableCollection<ICardInPlay> cardsInPlay = new ObservableCollection<ICardInPlay>();
-        private readonly IDictionary<Guid, IEnemyInPlay> engagedEnemies = new Dictionary<Guid, IEnemyInPlay>();
+        private readonly ObservableCollection<IEnemyInPlay> engagedEnemies = new ObservableCollection<IEnemyInPlay>();
 
         private byte currentThreat;
         private bool isFirstPlayer;
@@ -56,7 +55,7 @@ namespace LotR.States
 
         public IEnumerable<IAttachableInPlay> DeckAttachments
         {
-            get { return deckAttachments.Values; }
+            get { return deckAttachments; }
         }
 
         public IEnumerable<ICardInPlay> CardsInPlay
@@ -66,7 +65,7 @@ namespace LotR.States
 
         public IEnumerable<IEnemyInPlay> EngagedEnemies
         {
-            get { return engagedEnemies.Values; }
+            get { return engagedEnemies; }
         }
 
         public byte CurrentThreat
@@ -126,10 +125,24 @@ namespace LotR.States
 
         public void AddDeckAttachment(IAttachableInPlay attachment)
         {
+            if (attachment == null)
+                throw new ArgumentNullException("attachment");
+
+            if (deckAttachments.Contains(attachment))
+                return;
+
+            deckAttachments.Add(attachment);
         }
 
         public void RemoveDeckAttachment(IAttachableInPlay attachment)
         {
+            if (attachment == null)
+                throw new ArgumentNullException("attachment");
+
+            if (!deckAttachments.Contains(attachment))
+                return;
+
+            deckAttachments.Remove(attachment);
         }
 
         public void AddCardInPlay(ICardInPlay card)
@@ -156,10 +169,24 @@ namespace LotR.States
 
         public void AddEngagedEnemy(IEnemyInPlay enemy)
         {
+            if (enemy == null)
+                throw new ArgumentNullException("enemy");
+
+            if (engagedEnemies.Contains(enemy))
+                return;
+
+            engagedEnemies.Add(enemy);
         }
 
         public void RemoveEngagedEnemy(IEnemyInPlay enemy)
         {
+            if (enemy == null)
+                throw new ArgumentNullException("enemy");
+
+            if (!engagedEnemies.Contains(enemy))
+                return;
+
+            engagedEnemies.Remove(enemy);
         }
 
         public void DrawCards(uint numberOfCards)

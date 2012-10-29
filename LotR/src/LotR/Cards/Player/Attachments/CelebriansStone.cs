@@ -37,7 +37,7 @@ namespace LotR.Cards.Player.Attachments
         }
 
         public class AddTwoWillpower
-            : PassiveEffect, IDuringDetermineWillpower
+            : PassiveEffectBase, IDuringDetermineWillpower
         {
             public AddTwoWillpower(CelebriansStone source)
                 : base("Attached hero gets +2 Willpower", source)
@@ -62,7 +62,7 @@ namespace LotR.Cards.Player.Attachments
         }
 
         public class AragornGetsASpiritResourceIcon
-            : PassiveEffect, IDuringCheckForResourceIcon
+            : PassiveEffectBase, IDuringCheckForResourceIcon
         {
             public AragornGetsASpiritResourceIcon(CelebriansStone source)
                 : base("If attached hero is Aragorn, he also gains a Spirit resource icon.", source)

@@ -7,10 +7,10 @@ using LotR.Cards;
 
 namespace LotR.Effects
 {
-    public abstract class PassiveEffect
+    public abstract class PassiveEffectBase
         : CardEffectBase, IPassiveEffect
     {
-        protected PassiveEffect(string description, ISource source)
+        protected PassiveEffectBase(string description, ISource source)
             : base(description, source)
         {
         }

@@ -55,5 +55,10 @@ namespace LotR.Effects
         public virtual void Resolve(IGame game, IPayment payment, IChoice choice)
         {
         }
+
+        public virtual string GetResolutionDescription(IGame game, IPayment payment, IChoice choice)
+        {
+            return ToString();
+        }
     }
 }

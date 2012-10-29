@@ -22,5 +22,6 @@ namespace LotR.Effects
 
         bool PaymentAccepted(IGame game, IPayment payment, IChoice choice);
         void Resolve(IGame game, IPayment payment, IChoice choice);
+        string GetResolutionDescription(IGame game, IPayment payment, IChoice choice);
     }
 }

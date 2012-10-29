@@ -87,8 +87,12 @@
     <Compile Include="Cards\Quests\DontLeaveThePath.cs" />
     <Compile Include="Cards\ScenarioCode.cs" />
     <Compile Include="Effects\Choices\ChooseCharacterWithTrait.cs" />
+    <Compile Include="Effects\Choices\ChooseFirstPlayer.cs" />
     <Compile Include="Effects\Choices\ChooseHero.cs" />
     <Compile Include="Effects\Choices\ChoosePlayerToChooseHero.cs" />
+    <Compile Include="Effects\Choices\ChooseToKeepStartingHand.cs" />
+    <Compile Include="Effects\Choices\IChooseFirstPlayer.cs" />
+    <Compile Include="Effects\Choices\IChooseToKeepStartingHand.cs" />
     <Compile Include="Effects\Choices\IPlayersChooseCards.cs" />
     <Compile Include="Effects\Choices\PlayersChooseCards.cs" />
     <Compile Include="Effects\Choices\PlayersChooseCharacters.cs" />
@@ -97,6 +101,8 @@
     <Compile Include="Effects\Choices\IChoosePlayerToChooseHero.cs" />
     <Compile Include="Effects\Choices\IPlayersChooseCharacters.cs" />
     <Compile Include="Effects\ForcedCardEffectBase.cs" />
+    <Compile Include="Effects\FrameworkEffectBase.cs" />
+    <Compile Include="Effects\IFrameworkEffect.cs" />
     <Compile Include="Effects\ITravelEffect.cs" />
     <Compile Include="Effects\IWhenRevealedEffect.cs" />
     <Compile Include="Effects\Modifiers\IThreatModifier.cs" />
@@ -109,6 +115,11 @@
     <Compile Include="Effects\Phases\Any\IBeforeStageDefeated.cs" />
     <Compile Include="Effects\Phases\Combat\IAfterEnemyAttackResolves.cs" />
     <Compile Include="Effects\Phases\Combat\IAfterEnemyEngages.cs" />
+    <Compile Include="Effects\Phases\Setup\DetermineFirstPlayer.cs" />
+    <Compile Include="Effects\Phases\Setup\IDuringSetup.cs" />
+    <Compile Include="Effects\Phases\Setup\PlayerDrawsStartingHand.cs" />
+    <Compile Include="Effects\Phases\Setup\PlayerPlacesHeroesAndSetsThreat.cs" />
+    <Compile Include="Effects\Phases\Setup\PlayerShufflesDeck.cs" />
     <Compile Include="Effects\SetupEffectBase.cs" />
     <Compile Include="Effects\ShadowEffectBase.cs" />
     <Compile Include="Effects\TravelEffectBase.cs" />
@@ -125,6 +136,7 @@
     <Compile Include="States\AttachmentInPlay.cs" />
     <Compile Include="States\CharacterInPlay.cs" />
     <Compile Include="States\CardInHand.cs" />
+    <Compile Include="States\Controllers\GameController.cs" />
     <Compile Include="States\EnemyInPlay.cs" />
     <Compile Include="States\Game.cs" />
     <Compile Include="States\Hand.cs" />
@@ -140,6 +152,7 @@
     <Compile Include="States\IEncounterInPlay.cs" />
     <Compile Include="States\IEnemyInPlay.cs" />
     <Compile Include="States\IExhaustableInPlay.cs" />
+    <Compile Include="States\Controllers\IGameController.cs" />
     <Compile Include="States\IHand.cs" />
     <Compile Include="Cards\Player\Allies\Beorn.cs" />
     <Compile Include="Cards\Player\Allies\BrokIronfist.cs" />
@@ -322,7 +335,7 @@
     <Compile Include="Effects\Modifiers\IWillpowerModifier.cs" />
     <Compile Include="Effects\Modifiers\ModifierBase.cs" />
     <Compile Include="Effects\Modifiers\WillpowerModifier.cs" />
-    <Compile Include="Effects\PassiveEffect.cs" />
+    <Compile Include="Effects\PassiveEffectBase.cs" />
     <Compile Include="Effects\ResponseEffectBase.cs" />
     <Compile Include="Effects\ReversableEffectBase.cs" />
     <Compile Include="Effects\IAmbushEffect.cs" />

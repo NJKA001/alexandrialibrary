@@ -13,8 +13,11 @@ using LotR.Cards.Player.Heroes;
 using LotR.Cards.Player.Treasures;
 using LotR.Cards.Quests;
 using LotR.Effects;
+using LotR.Effects.Choices;
+using LotR.Effects.Payments;
 using LotR.States;
 using LotR.States.Areas;
+using LotR.States.Controllers;
 
 namespace LotR.Console
 {
@@ -50,16 +53,17 @@ namespace LotR.Console
                 gameLoader = new GameLoader();
 
                 var player1 = new PlayerInfo("Dan", "TheThreeHunters.txt");
+                var player2 = new PlayerInfo("Irma", "LeadershipTactics.txt");
+                var playersInfo = new List<PlayerInfo> { player1 };
 
-                var game = LoadGame(new List<PlayerInfo> { player1 }, ScenarioCode.Passage_Through_Mirkwood, effect => EffectResolvedCallback(effect));
+                controller = GetController();
+                game = new Game(controller);
 
-                if (game == null)
-                    return;
+                WriteLine("Loading Game");
 
-                if (game.Players.Count() == 0)
-                    return;
+                gameLoader.Load(game, playersInfo, ScenarioCode.Passage_Through_Mirkwood);
 
-                WriteLine("Starting Game");
+                WriteLine("\r\nGame Is Ready\r\n");
 
                 var line = string.Empty;
                 var cmd = string.Empty;
@@ -88,23 +92,134 @@ namespace LotR.Console
             }
         }
 
+        private static IGame game;
+        private static IGameController controller;
         private static IGameLoader gameLoader;
 
-        private static void EffectResolvedCallback(IEffect effect)
+        private static IGameController GetController()
+        {
+            var controller = new GameController();
+            controller.RegisterChoiceOfferedCallback((effect, choice) => ChoiceOfferedCallback(effect, choice));
+            controller.RegisterEffectResolvedCallback((effect, payment, choice) => EffectResolvedCallback(effect, payment, choice));
+
+
+            return controller;
+        }
+
+        private static bool TryParseInputAsInt(string input, out int result)
+        {
+            return int.TryParse(input, out result);
+        }
+
+        private static void ChooseFirstPlayer(IChooseFirstPlayer choice)
+        {
+            var players = choice.Players.ToList();
+            var number = 0;
+            foreach (var player in players)
+            {
+                number++;
+                WriteLine("{0,00}  {1}", number, player.Name);
+            }
+
+            number++;
+            WriteLine("{0,00}  Choose First Player Randomly\r\n", number);
+
+            var answer = 0;
+            var input = System.Console.ReadLine();
+            if (TryParseInputAsInt(input, out answer) && answer > 0 && answer <= number)
+            {
+                if (answer < number)
+                {
+                    choice.FirstPlayer = players[answer - 1];
+                }
+                else
+                {
+                    choice.ChooseRandomFirstPlayer();
+                }
+            }
+            else
+            {
+                WriteLine("{0} is not a valid choice, please choose a number between 1 and {1}", input, number);
+            }
+        }
+
+        private static void ChooseToKeepStartingHand(IChooseToKeepStartingHand choice)
+        {
+            var inputValid = false;
+
+            while (!inputValid)
+            {
+                WriteLine("Starting Hand for Player: {0}\r\n", choice.Players.First().Name);
+                foreach (var card in choice.StartingHand)
+                {
+                    WriteLine("  {0} ({1})", card.Title, card.PrintedCardType);
+                }
+
+                WriteLine("\r\nKeep Starting Hand? (y/n)\r\n");
+                var input = System.Console.ReadLine() ?? string.Empty;
+                
+                var normalized = input.ToLower();
+                if (normalized != "y" && normalized != "n")
+                {
+                    WriteLine("{0} is not a valid answer. Please enter 'y' for yes or 'n' for no.\r\n", input);
+                    continue;
+                }
+
+                inputValid = true;
+                choice.KeepStartingHand = (normalized == "y");
+            }
+        }
+
+        private static void HandleChoice(IChoice choice)
+        {
+            WriteLine("\r\nChoice: {0}\r\n", choice.Description);
+
+            if (choice is IChooseFirstPlayer)
+            {
+                ChooseFirstPlayer(choice as IChooseFirstPlayer);
+            }
+            else if (choice is IChooseToKeepStartingHand)
+            {
+                ChooseToKeepStartingHand(choice as IChooseToKeepStartingHand);
+            }
+        }
+
+        private static void ChoiceOfferedCallback(IEffect effect, IChoice choice)
+        {
+            try
+            {
+                if (choice == null)
+                    throw new ArgumentNullException("choice");
+
+                var isValid = false;
+
+                while (!isValid)
+                {
+                    HandleChoice(choice);
+                    isValid = choice.IsValid(game);
+                }
+            }
+            catch (Exception ex)
+            {
+                WriteLine("Error in choice offered callback: {0}\r\n{1}", ex.Message, ex.StackTrace);
+            }
+        }
+
+        private static void EffectResolvedCallback(IEffect effect, IPayment payment, IChoice choice)
         {
             try
             {
                 if (effect != null)
                 {
-                    var description = effect.ToString() ?? "Undefined effect resolved";
-                    WriteLine(description);
+                    var description = effect.GetResolutionDescription(game, payment, choice) ?? "Undefined effect resolved";
+                    WriteLine("\r\n{0}", description);
                 }
                 else
-                    WriteLine("Unknown effect resolved");
+                    WriteLine("\r\nUnknown effect resolved");
             }
             catch (Exception ex)
             {
-                WriteLine("Error in effect resolved callback: {0}\r\n{1}", ex.Message, ex.StackTrace);
+                WriteLine("\r\nError in effect resolved callback: {0}\r\n{1}", ex.Message, ex.StackTrace);
             }
         }
 
@@ -210,23 +325,6 @@ namespace LotR.Console
                 default:
                     WriteLine("unrecognized command: {0}\r\nenter 'help' for a list of a valid commands", command);
                     break;
-            }
-        }
-
-        private static IGame LoadGame(IEnumerable<PlayerInfo> playersInfo, ScenarioCode scenarioCode, Action<IEffect> effectResolvedCallback)
-        {
-            WriteLine("Loading Game");
-
-            try
-            {
-                var game = gameLoader.Load(playersInfo, scenarioCode, effectResolvedCallback);
-
-                return game;
-            }
-            catch (Exception ex)
-            {
-                WriteLine("  Could Not Load Game: " + ex.Message);
-                return null;
             }
         }
 

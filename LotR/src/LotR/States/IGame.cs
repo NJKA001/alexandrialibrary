@@ -16,7 +16,7 @@ using LotR.States.Phases.Quest;
 namespace LotR.States
 {
     public interface IGame
-        : INotifyPropertyChanged
+        : ISource, INotifyPropertyChanged
     {
         IPhase CurrentPhase { get; }
         IQuestArea QuestArea { get; }
@@ -28,12 +28,6 @@ namespace LotR.States
         void AddEffect(IEffect effect);
         void ResolveEffect(IEffect effect, IPayment payment, IChoice choice);
         void Setup(IQuestArea questArea, IEnumerable<IPlayer> players);
-
-        void RegisterChoiceCallback(Action<IEffect, IChoice> callback);
-        void RegisterPaymentCallback(Action<IEffect, IPayment> callback);
-        void RegisterEffectAddedCallback(Action<IEffect> callback);
-        void RegisterEffectResolvedCallback(Action<IEffect> callback);
-        void RegisterPaymentRejectedCallback(Action<IEffect, IPayment, IChoice> callback);
 
         T GetCardInPlay<T>(Guid cardId) where T : class, ICardInPlay;
     }

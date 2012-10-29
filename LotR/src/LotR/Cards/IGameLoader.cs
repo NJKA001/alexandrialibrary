@@ -5,11 +5,12 @@ using System.Text;
 
 using LotR.Effects;
 using LotR.States;
+using LotR.States.Controllers;
 
 namespace LotR.Cards
 {
     public interface IGameLoader
     {
-        IGame Load(IEnumerable<PlayerInfo> playersInfo, ScenarioCode scenarioCode, Action<IEffect> effectResolvedCallback);
+        void Load(IGame game, IEnumerable<PlayerInfo> playersInfo, ScenarioCode scenarioCode);
     }
 }

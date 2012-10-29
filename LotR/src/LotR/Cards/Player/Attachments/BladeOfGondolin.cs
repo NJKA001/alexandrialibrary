@@ -42,7 +42,7 @@ namespace LotR.Cards.Player.Attachments
         }
 
         public class AddOneAttackWhenAttackingAnOrc
-            : PassiveEffect, IDuringDetermineAttack
+            : PassiveEffectBase, IDuringDetermineAttack
         {
             public AddOneAttackWhenAttackingAnOrc(BladeOfGondolin source)
                 : base("Attached hero gets +1 Attack when attacking an Orc.", source)

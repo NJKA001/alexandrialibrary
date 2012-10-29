@@ -26,7 +26,7 @@ namespace LotR.States
 
         void IncreaseThreat(byte value);
         void DecreaseThreat(byte value);
-        void DiscardFromHand(IEnumerable<IPlayerCard> card);
+        void DiscardFromHand(IEnumerable<IPlayerCard> cards);
 
         void AddDeckAttachment(IAttachableInPlay attachment);
         void RemoveDeckAttachment(IAttachableInPlay attachment);

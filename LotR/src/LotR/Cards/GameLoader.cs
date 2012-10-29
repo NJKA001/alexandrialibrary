@@ -7,6 +7,7 @@ using LotR.Cards.Player;
 using LotR.Cards.Quests;
 using LotR.Effects;
 using LotR.States;
+using LotR.States.Controllers;
 
 namespace LotR.Cards
 {
@@ -16,15 +17,14 @@ namespace LotR.Cards
         private readonly IQuestLoader questLoader = new QuestLoader();
         private readonly IPlayerDeckLoader playerDeckLoader = new PlayerDeckLoader();
 
-        public IGame Load(IEnumerable<PlayerInfo> playersInfo, ScenarioCode scenarioCode, Action<IEffect> effectResolvedCallback)
+        public void Load(IGame game, IEnumerable<PlayerInfo> playersInfo, ScenarioCode scenarioCode)
         {
+            if (game == null)
+                throw new ArgumentNullException("game");
             if (playersInfo == null)
                 throw new ArgumentNullException("playersInfo");
             if (playersInfo.Count() == 0)
                 throw new ArgumentException("playersInfo is empty");
-
-            var game = new Game();
-            game.RegisterEffectResolvedCallback(effectResolvedCallback);
 
             var questArea = questLoader.Load(game, scenarioCode);
 
@@ -40,8 +40,6 @@ namespace LotR.Cards
             }
 
             game.Setup(questArea, players);
-
-            return game;
         }
     }
 }

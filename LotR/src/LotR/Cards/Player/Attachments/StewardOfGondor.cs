@@ -39,7 +39,7 @@ namespace LotR.Cards.Player.Attachments
         }
 
         public class AddGondorTrait
-            : PassiveEffect, IDuringCheckForTrait
+            : PassiveEffectBase, IDuringCheckForTrait
         {
             public AddGondorTrait(StewardOfGondor source)
                 : base("Attached hero gains the Gondor trait.", source)

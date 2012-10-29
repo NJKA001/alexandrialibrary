@@ -8,7 +8,9 @@ using LotR.Cards;
 using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Payments;
+using LotR.Effects.Phases.Setup;
 using LotR.States.Areas;
+using LotR.States.Controllers;
 using LotR.States.Phases;
 using LotR.States.Phases.Resource;
 
@@ -17,15 +19,18 @@ namespace LotR.States
     public class Game
         : IGame
     {
-        public Game()
+        public Game(IGameController controller)
         {
+            if (controller == null)
+                throw new ArgumentNullException("controller");
+
+            this.controller = controller;
         }
 
+        private readonly Guid id = Guid.NewGuid();
+        private readonly IGameController controller;
         private readonly IList<IPlayer> players = new List<IPlayer>();
         private readonly IList<IEffect> currentEffects = new List<IEffect>();
-        private readonly IList<Action<IEffect>> effectAddedCallbacks = new List<Action<IEffect>>();
-        private readonly IList<Action<IEffect>> effectResolvedCallbacks = new List<Action<IEffect>>();
-        private readonly IList<Action<IEffect, IPayment, IChoice>> paymentRejectedCallbacks = new List<Action<IEffect, IPayment, IChoice>>();
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -35,22 +40,19 @@ namespace LotR.States
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void OnEffectAdded(IEffect effect)
+        public Guid Id
         {
-            foreach (var callback in effectAddedCallbacks)
-                callback(effect);
+            get { return id; }
         }
 
-        private void OnEffectResolved(IEffect effect)
+        public string Title
         {
-            foreach (var callback in effectResolvedCallbacks)
-                callback(effect);
-        }
-
-        private void OnPaymentRejected(IEffect effect, IPayment payment, IChoice choice)
-        {
-            foreach (var callback in paymentRejectedCallbacks)
-                callback(effect, payment, choice);
+            get
+            {
+                return (QuestArea != null && QuestArea.ActiveQuest != null && players.Count > 0) ?
+                    string.Format("{0} playing: {1}", string.Join(", ", players.Select(x => x.Name)), QuestArea.ActiveQuest.Card.Scenario.ToString().Replace('_', ' '))
+                    : "Uninitialized Game";
+            }
         }
 
         public IPhase CurrentPhase
@@ -96,20 +98,74 @@ namespace LotR.States
 
             currentEffects.Add(effect);
 
-            OnEffectAdded(effect);
+            controller.EffectAdded(effect);
         }
 
         public void ResolveEffect(IEffect effect, IPayment payment, IChoice choice)
         {
             if (!effect.PaymentAccepted(this, payment, choice))
             {
-                OnPaymentRejected(effect, payment, choice);
+                controller.PaymentRejected(effect, payment, choice);
                 return;
             }
 
             effect.Resolve(this, payment, choice);
 
-            OnEffectResolved(effect);
+            controller.EffectResolved(effect, payment, choice);
+
+            if (currentEffects.Contains(effect))
+                currentEffects.Remove(effect);
+        }
+
+        private void SetCardOwnership(IPlayer player)
+        {
+            foreach (var card in player.Deck.Cards)
+            {
+                card.Owner = player;
+            }
+        }
+
+        private void ShufflePlayerDeck(IPlayer player)
+        {
+            var shuffleDeck = new PlayerShufflesDeck(this, player);
+            AddEffect(shuffleDeck);
+            shuffleDeck.DuringSetup(this);
+            ResolveEffect(shuffleDeck, null, null);
+        }
+
+        private void PlaceHeroesAndSetInitialThreat(IPlayer player)
+        {
+            var placeHeroes = new PlayerPlacesHeroesAndSetsThreat(this, player);
+            AddEffect(placeHeroes);
+            placeHeroes.DuringSetup(this);
+            ResolveEffect(placeHeroes, null, null);
+        }
+
+        private void DetermineFirstPlayer()
+        {
+            var determineFirstPlayer = new DetermineFirstPlayer(this);
+            determineFirstPlayer.DuringSetup(this);
+            
+            var choice = determineFirstPlayer.GetChoice(this);
+            if (choice != null)
+            {
+                controller.ChoiceOffered(determineFirstPlayer, choice);
+            }
+
+            AddEffect(determineFirstPlayer);
+            ResolveEffect(determineFirstPlayer, null, choice);
+        }
+
+        private void DrawSetupHand(IPlayer player)
+        {
+            var drawSetupHand = new PlayerDrawsStartingHand(this, player);
+            drawSetupHand.DuringSetup(this);
+
+            var choice = drawSetupHand.GetChoice(this);
+            controller.ChoiceOffered(drawSetupHand, choice);
+
+            AddEffect(drawSetupHand);
+            ResolveEffect(drawSetupHand, null, choice);
         }
 
         public void Setup(IQuestArea questArea, IEnumerable<IPlayer> players)
@@ -131,18 +187,16 @@ namespace LotR.States
             {
                 this.players.Add(player);
 
-                foreach (var card in player.Deck.Cards)
-                {
-                    card.Owner = player;
-                }
+                SetCardOwnership(player);
+                ShufflePlayerDeck(player);
+                PlaceHeroesAndSetInitialThreat(player);
+            }
 
-                foreach (var hero in player.Deck.Heroes)
-                {
-                    player.AddCardInPlay(new HeroInPlay(this, hero));
-                }
+            DetermineFirstPlayer();
 
-                player.Deck.Shuffle();
-                player.DrawCards(6);
+            foreach (var player in players)
+            {
+                DrawSetupHand(player);
             }
 
             this.QuestArea.Setup();
@@ -159,41 +213,7 @@ namespace LotR.States
                 }
             }
 
-            players.First().IsFirstPlayer = true;
-
             CurrentPhase = new ResourcePhase(this);
-        }
-
-        public void RegisterChoiceCallback(Action<IEffect, IChoice> callback)
-        {
-        }
-
-        public void RegisterPaymentCallback(Action<IEffect, IPayment> callback)
-        {
-        }
-
-        public void RegisterEffectAddedCallback(Action<IEffect> callback)
-        {
-            if (callback == null)
-                throw new ArgumentException("callback");
-
-            effectAddedCallbacks.Add(callback);
-        }
-
-        public void RegisterEffectResolvedCallback(Action<IEffect> callback)
-        {
-            if (callback == null)
-                throw new ArgumentException("callback");
-
-            effectResolvedCallbacks.Add(callback);
-        }
-
-        public void RegisterPaymentRejectedCallback(Action<IEffect, IPayment, IChoice> callback)
-        {
-            if (callback == null)
-                throw new ArgumentNullException("callback");
-
-            paymentRejectedCallbacks.Add(callback);
         }
 
         public T GetCardInPlay<T>(Guid cardId)
