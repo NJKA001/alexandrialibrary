@@ -12,6 +12,7 @@ using LotR.Cards.Player.Events;
 using LotR.Cards.Player.Heroes;
 using LotR.Cards.Player.Treasures;
 using LotR.Cards.Quests;
+using LotR.Effects;
 using LotR.States;
 using LotR.States.Areas;
 
@@ -50,7 +51,7 @@ namespace LotR.Console
 
                 var player1 = new PlayerInfo("Dan", "TheThreeHunters.txt");
 
-                var game = LoadGame(new List<PlayerInfo> { player1 }, ScenarioCode.Passage_Through_Mirkwood);
+                var game = LoadGame(new List<PlayerInfo> { player1 }, ScenarioCode.Passage_Through_Mirkwood, effect => EffectResolvedCallback(effect));
 
                 if (game == null)
                     return;
@@ -88,6 +89,24 @@ namespace LotR.Console
         }
 
         private static IGameLoader gameLoader;
+
+        private static void EffectResolvedCallback(IEffect effect)
+        {
+            try
+            {
+                if (effect != null)
+                {
+                    var description = effect.ToString() ?? "Undefined effect resolved";
+                    WriteLine(description);
+                }
+                else
+                    WriteLine("Unknown effect resolved");
+            }
+            catch (Exception ex)
+            {
+                WriteLine("Error in effect resolved callback: {0}\r\n{1}", ex.Message, ex.StackTrace);
+            }
+        }
 
         private static int GetPlayerCount(IGame game)
         {
@@ -194,13 +213,13 @@ namespace LotR.Console
             }
         }
 
-        private static IGame LoadGame(IEnumerable<PlayerInfo> playersInfo, ScenarioCode scenarioCode)
+        private static IGame LoadGame(IEnumerable<PlayerInfo> playersInfo, ScenarioCode scenarioCode, Action<IEffect> effectResolvedCallback)
         {
             WriteLine("Loading Game");
 
             try
             {
-                var game = gameLoader.Load(playersInfo, scenarioCode);
+                var game = gameLoader.Load(playersInfo, scenarioCode, effectResolvedCallback);
 
                 return game;
             }

@@ -30,7 +30,7 @@ namespace LotR.Cards.Quests
             : SetupEffectBase, ISetupEffect
         {
             public SetupForestSpiderAndOldForestRoadInStagingArea(FliesAndSpiders source)
-                : base("Search the encounter deck for 1 copy of the Forest Spider and 1 copy of the Old Forest Road, and then add them to the staging area Then, shuffle the encounter deck.", source)
+                : base("Search the encounter deck for 1 copy of the Forest Spider and 1 copy of the Old Forest Road, and then add them to the staging area. Then, shuffle the encounter deck.", source)
             {
             }
 

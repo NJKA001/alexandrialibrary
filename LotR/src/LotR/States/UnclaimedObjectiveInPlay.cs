@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards.Encounter;
 using LotR.Cards.Encounter.Objectives;
 
 namespace LotR.States
 {
     public class UnclaimedObjectiveInPlay
-        : CardInPlay<IObjectiveCard>, IObjectiveInPlay
+        : CardInPlay<IObjectiveCard>, IObjectiveInPlay, IEncounterInPlay
     {
         public UnclaimedObjectiveInPlay(IGame game, IObjectiveCard card)
             : base(game, card)
@@ -16,6 +17,11 @@ namespace LotR.States
         }
 
         private readonly IList<IEncounterInPlay> guards = new List<IEncounterInPlay>();
+
+        IEncounterCard ICardInPlay<IEncounterCard>.Card
+        {
+            get { return Card as IEncounterCard; }
+        }
 
         public bool HasGuards
         {

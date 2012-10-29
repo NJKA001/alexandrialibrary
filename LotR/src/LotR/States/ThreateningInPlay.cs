@@ -13,6 +13,7 @@ namespace LotR.States
         protected ThreateningInPlay(IGame game, IThreateningCard card)
             : base(game, card)
         {
+            this.threat = card.PrintedThreat;
         }
 
         private byte threat;

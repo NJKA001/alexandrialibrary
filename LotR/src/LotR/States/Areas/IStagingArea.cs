@@ -25,7 +25,7 @@ namespace LotR.States.Areas
         void CancelRevealedCard(ICancelEffect effect);
 
         void AddToStagingArea(IEncounterCard card);
-        void RemoveFromStagingArea(IEncounterCard card);
+        void RemoveFromStagingArea(IEncounterInPlay card);
 
         void AddToEncounterDiscardPile(IEnumerable<IEncounterCard> cards);
         void AddToTopOfEncounterDeck(IEnumerable<IEncounterCard> cards);

@@ -29,7 +29,7 @@ namespace LotR.States.Areas
             this.QuestDeck = questDeck;
             this.EncounterDecks = encounterDecks;
 
-            SetActiveQuest(QuestDeck.Cards.First());
+            SetActiveQuest(QuestDeck.Cards.OrderBy(x => x.Sequence).First());
             SetActiveEncounterDeck(EncounterDecks.First());
         }
 

@@ -124,17 +124,12 @@ namespace LotR.States
                 throw new ArgumentException("list of players cannot contain nulls");
 
             this.QuestArea = questArea;
-
-
-
             this.StagingArea = new StagingArea(this, questArea.ActiveEncounterDeck);
             this.VictoryDisplay = new VictoryDisplay(this);
 
             foreach (var player in players)
             {
                 this.players.Add(player);
-
-                player.Deck.Shuffle();
 
                 foreach (var card in player.Deck.Cards)
                 {
@@ -146,14 +141,35 @@ namespace LotR.States
                     player.AddCardInPlay(new HeroInPlay(this, hero));
                 }
 
+                player.Deck.Shuffle();
                 player.DrawCards(6);
             }
 
             this.QuestArea.Setup();
 
+            foreach (var setupEffect in currentEffects.OfType<ISetupEffect>().ToList())
+            {
+                setupEffect.Setup(this);
+                var choice = setupEffect.GetChoice(this);
+                var cost = setupEffect.GetCost(this);
+                if (choice == null && cost == null)
+                {
+                    ResolveEffect(setupEffect, null, choice);
+                    currentEffects.Remove(setupEffect);
+                }
+            }
+
             players.First().IsFirstPlayer = true;
 
             CurrentPhase = new ResourcePhase(this);
+        }
+
+        public void RegisterChoiceCallback(Action<IEffect, IChoice> callback)
+        {
+        }
+
+        public void RegisterPaymentCallback(Action<IEffect, IPayment> callback)
+        {
         }
 
         public void RegisterEffectAddedCallback(Action<IEffect> callback)
@@ -209,9 +225,13 @@ namespace LotR.States
         {
             var sb = new StringBuilder();
 
+            sb.AppendFormat("\r\nCurrent Phase: {0}\r\n", CurrentPhase.Code);
+            sb.AppendFormat("Current Step: {0}\r\n", CurrentPhase.Step);
+            sb.AppendFormat("First Player: {0}\r\n", FirstPlayer.Name);
+
             if (currentEffects.Count > 0)
             {
-                sb.AppendFormat("\r\nCurrent Effects:\r\n", currentEffects.Count);
+                sb.AppendFormat("Current Effects:\r\n", currentEffects.Count);
 
                 var seq = 0;
                 foreach (var effect in currentEffects)

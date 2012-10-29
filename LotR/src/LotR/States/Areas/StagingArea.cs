@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
 using LotR.Cards.Encounter;
+using LotR.Cards.Encounter.Enemies;
+using LotR.Cards.Encounter.Locations;
+using LotR.Cards.Encounter.Objectives;
 using LotR.Effects;
 
 namespace LotR.States.Areas
@@ -20,8 +24,8 @@ namespace LotR.States.Areas
             this.EncounterDeck = encounterDeck;
         }
 
-        private readonly IList<IEncounterInPlay> cardsInStagingArea = new List<IEncounterInPlay>();
-        private readonly IList<IEncounterCard> examinedEncounterCards = new List<IEncounterCard>();
+        private readonly ObservableCollection<IEncounterInPlay> cardsInStagingArea = new ObservableCollection<IEncounterInPlay>();
+        private readonly ObservableCollection<IEncounterCard> examinedEncounterCards = new ObservableCollection<IEncounterCard>();
 
         public IDeck<IEncounterCard> EncounterDeck
         {
@@ -104,27 +108,50 @@ namespace LotR.States.Areas
 
         public void AddToStagingArea(IEncounterCard card)
         {
-            throw new NotImplementedException();
+            if (card == null)
+                throw new ArgumentNullException("card");
+
+            if (card is IEnemyCard)
+            {
+                cardsInStagingArea.Add(new EnemyInPlay(Game, card as IEnemyCard));
+            }
+            else if (card is ILocationCard)
+            {
+                cardsInStagingArea.Add(new LocationInPlay(Game, card as ILocationCard));
+            }
+            else if (card is IObjectiveCard)
+            {
+                cardsInStagingArea.Add(new UnclaimedObjectiveInPlay(Game, card as IObjectiveCard));
+            }
         }
 
-        public void RemoveFromStagingArea(IEncounterCard card)
+        public void RemoveFromStagingArea(IEncounterInPlay card)
         {
-            throw new NotImplementedException();
+            if (card == null)
+                throw new ArgumentNullException("card");
+
+            if (!cardsInStagingArea.Contains(card))
+                return;
+
+            cardsInStagingArea.Remove(card);
         }
 
         public void AddToEncounterDiscardPile(IEnumerable<IEncounterCard> cards)
         {
-            throw new NotImplementedException();
+            if (cards == null)
+                throw new ArgumentNullException("cards");
         }
 
         public void AddToTopOfEncounterDeck(IEnumerable<IEncounterCard> cards)
         {
-            throw new NotImplementedException();
+            if (cards == null)
+                throw new ArgumentNullException("cards");
         }
 
         public void AddToBottomOfEncounterDeck(IEnumerable<IEncounterCard> cards)
         {
-            throw new NotImplementedException();
+            if (cards == null)
+                throw new ArgumentNullException("cards");
         }
 
         public byte GetTotalThreat()
