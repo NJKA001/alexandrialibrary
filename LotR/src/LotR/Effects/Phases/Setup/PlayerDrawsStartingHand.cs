@@ -51,7 +51,7 @@ namespace LotR.Effects.Phases.Setup
                 return;
 
             var startingHand = Player.Hand.Cards.ToList();
-            Player.DiscardFromHand(startingHand);
+            Player.Hand.RemoveCards(startingHand);
             Player.Deck.ShuffleIn(startingHand);
             Player.DrawCards(6);
         }

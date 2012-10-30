@@ -55,7 +55,7 @@ namespace LotR.Console
 
                 var player1 = new PlayerInfo("Dan", "TheThreeHunters.txt");
                 var player2 = new PlayerInfo("Irma", "LeadershipTactics.txt");
-                var playersInfo = new List<PlayerInfo> { player1 };
+                var playersInfo = new List<PlayerInfo> { player1, player2 };
 
                 controller = GetController();
                 game = new Game(controller);
