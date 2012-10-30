@@ -116,10 +116,12 @@
     <Compile Include="Effects\Phases\Combat\IAfterEnemyAttackResolves.cs" />
     <Compile Include="Effects\Phases\Combat\IAfterEnemyEngages.cs" />
     <Compile Include="Effects\Phases\Setup\DetermineFirstPlayer.cs" />
+    <Compile Include="Effects\Phases\Setup\FollowScenarioSetup.cs" />
     <Compile Include="Effects\Phases\Setup\IDuringSetup.cs" />
     <Compile Include="Effects\Phases\Setup\PlayerDrawsStartingHand.cs" />
     <Compile Include="Effects\Phases\Setup\PlayerPlacesHeroesAndSetsThreat.cs" />
     <Compile Include="Effects\Phases\Setup\PlayerShufflesDeck.cs" />
+    <Compile Include="Effects\Phases\Setup\SetQuestCards.cs" />
     <Compile Include="Effects\SetupEffectBase.cs" />
     <Compile Include="Effects\ShadowEffectBase.cs" />
     <Compile Include="Effects\TravelEffectBase.cs" />

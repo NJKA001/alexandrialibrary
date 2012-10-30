@@ -21,6 +21,7 @@ namespace LotR.States
         void Draw(uint numberOfCards, Action<IEnumerable<T>> drawCallback);
         void Discard(IEnumerable<T> cards);
         void RemoveFromDiscardPile(IEnumerable<T> cards);
+        void Order<TKey>(Func<T, TKey> keySelector);
         void Shuffle();
         void ShuffleIn(IEnumerable<T> cards);
         void ShuffleDiscardPileIntoDeck();

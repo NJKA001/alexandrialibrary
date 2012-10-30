@@ -5,6 +5,7 @@ using System.Text;
 
 using LotR.Effects;
 using LotR.Effects.Choices;
+using LotR.Effects.Costs;
 using LotR.Effects.Payments;
 
 namespace LotR.States.Controllers
@@ -13,10 +14,10 @@ namespace LotR.States.Controllers
         : IGameController
     {
         private readonly IList<Action<IEffect, IChoice>> choiceOfferedCallbacks = new List<Action<IEffect, IChoice>>();
+        private readonly IList<Func<IEffect, ICost, IPayment>> getPaymentCallbacks = new List<Func<IEffect, ICost, IPayment>>();
         private readonly IList<Action<IEffect>> effectAddedCallbacks = new List<Action<IEffect>>();
         private readonly IList<Action<IEffect, IPayment, IChoice>> effectResolvedCallbacks = new List<Action<IEffect, IPayment, IChoice>>();
         private readonly IList<Action<IEffect, IPayment, IChoice>> paymentRejectedCallbacks = new List<Action<IEffect, IPayment, IChoice>>();
-        private readonly IList<Action<IEffect, IPayment>> paymentRequestedCallbacks = new List<Action<IEffect, IPayment>>();
 
         public void RegisterChoiceOfferedCallback(Action<IEffect, IChoice> callback)
         {
@@ -42,20 +43,20 @@ namespace LotR.States.Controllers
             effectResolvedCallbacks.Add(callback);
         }
 
+        public void RegisterGetPaymentCallback(Func<IEffect, ICost, IPayment> callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            getPaymentCallbacks.Add(callback);
+        }
+
         public void RegisterPaymentRejectedCallback(Action<IEffect, IPayment, IChoice> callback)
         {
             if (callback == null)
                 throw new ArgumentNullException("callback");
 
             paymentRejectedCallbacks.Add(callback);
-        }
-
-        public void RegisterPaymentRequestedCallback(Action<IEffect, IPayment> callback)
-        {
-            if (callback == null)
-                throw new ArgumentNullException("callback");
-
-            paymentRequestedCallbacks.Add(callback);
         }
 
         public void ChoiceOffered(IEffect effect, IChoice choice)
@@ -76,16 +77,24 @@ namespace LotR.States.Controllers
                 callback(effect, payment, choice);
         }
 
+        public IPayment GetPayment(IEffect effect, ICost cost)
+        {
+            IPayment payment = null;
+            foreach (var callback in getPaymentCallbacks)
+            {
+                payment = callback(effect, cost);
+                if (payment != null)
+                {
+                    return payment;
+                }
+            }
+            return payment;
+        }
+
         public void PaymentRejected(IEffect effect, IPayment payment, IChoice choice)
         {
             foreach (var callback in paymentRejectedCallbacks)
                 callback(effect, payment, choice);
-        }
-
-        public void PaymentRequested(IEffect effect, IPayment payment)
-        {
-            foreach (var callback in paymentRequestedCallbacks)
-                callback(effect, payment);
         }
     }
 }

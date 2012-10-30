@@ -15,13 +15,9 @@ namespace LotR.States.Areas
     public class StagingArea
         : AreaBase, IStagingArea
     {
-        public StagingArea(IGame game, IDeck<IEncounterCard> encounterDeck)
+        public StagingArea(IGame game)
             : base(game)
         {
-            if (encounterDeck == null)
-                throw new ArgumentNullException("encounterDeck");
-
-            this.EncounterDeck = encounterDeck;
         }
 
         private readonly ObservableCollection<IEncounterInPlay> cardsInStagingArea = new ObservableCollection<IEncounterInPlay>();

@@ -14,6 +14,7 @@ using LotR.Cards.Player.Treasures;
 using LotR.Cards.Quests;
 using LotR.Effects;
 using LotR.Effects.Choices;
+using LotR.Effects.Costs;
 using LotR.Effects.Payments;
 using LotR.States;
 using LotR.States.Areas;
@@ -70,7 +71,7 @@ namespace LotR.Console
                 string[] options = null;
                 while (line != command_exit)
                 {
-                    Write("lotr>");
+                    Write("\r\nready>");
 
                     line = System.Console.ReadLine();
                     if (string.IsNullOrEmpty(line))
@@ -101,7 +102,8 @@ namespace LotR.Console
             var controller = new GameController();
             controller.RegisterChoiceOfferedCallback((effect, choice) => ChoiceOfferedCallback(effect, choice));
             controller.RegisterEffectResolvedCallback((effect, payment, choice) => EffectResolvedCallback(effect, payment, choice));
-
+            controller.RegisterGetPaymentCallback((effect, cost) => GetPaymentCallback(effect, cost));
+            controller.RegisterPaymentRejectedCallback((effect, payment, choice) => PaymentRejectedCallback(effect, payment, choice));
 
             return controller;
         }
@@ -203,6 +205,17 @@ namespace LotR.Console
             {
                 WriteLine("Error in choice offered callback: {0}\r\n{1}", ex.Message, ex.StackTrace);
             }
+        }
+
+        private static IPayment GetPaymentCallback(IEffect effect, ICost cost)
+        {
+            WriteLine("Cost Incurred Callback - TODO");
+            return null;
+        }
+
+        private static void PaymentRejectedCallback(IEffect effect, IPayment payment, IChoice choice)
+        {
+            WriteLine("Payment Rejected Callback - TODO");
         }
 
         private static void EffectResolvedCallback(IEffect effect, IPayment payment, IChoice choice)

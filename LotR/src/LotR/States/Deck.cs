@@ -114,6 +114,16 @@ namespace LotR.States
             }
         }
 
+        public void Order<TKey>(Func<T, TKey> keySelector)
+        {
+            var ordered = cards.OrderBy(keySelector).ToList();
+            cards.Clear();
+            foreach (var card in ordered)
+            {
+                cards.Add(card);
+            }
+        }
+
         public void Shuffle()
         {            
             var cardArray = cards.ToArray();

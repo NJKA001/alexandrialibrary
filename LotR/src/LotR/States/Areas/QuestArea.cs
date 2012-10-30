@@ -28,9 +28,6 @@ namespace LotR.States.Areas
 
             this.QuestDeck = questDeck;
             this.EncounterDecks = encounterDecks;
-
-            SetActiveQuest(QuestDeck.Cards.OrderBy(x => x.Sequence).First());
-            SetActiveEncounterDeck(EncounterDecks.First());
         }
 
         private byte activeLocationProgress;
@@ -147,7 +144,14 @@ namespace LotR.States.Areas
             ActiveLocationProgress -= value;
         }
 
-        public void Setup()
+        public void SetQuestCards()
+        {
+            QuestDeck.Order(x => x.Sequence);
+            SetActiveQuest(QuestDeck.Cards.First());
+            SetActiveEncounterDeck(EncounterDecks.First());
+        }
+
+        public void SetupScenario()
         {
             if (ActiveQuest.HasEffect<ISetupEffect>())
             {

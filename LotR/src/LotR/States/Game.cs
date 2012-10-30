@@ -51,7 +51,7 @@ namespace LotR.States
             {
                 return (QuestArea != null && QuestArea.ActiveQuest != null && players.Count > 0) ?
                     string.Format("{0} playing: {1}", string.Join(", ", players.Select(x => x.Name)), QuestArea.ActiveQuest.Card.Scenario.ToString().Replace('_', ' '))
-                    : "Uninitialized Game";
+                    : "New Game";
             }
         }
 
@@ -168,6 +168,49 @@ namespace LotR.States
             ResolveEffect(drawSetupHand, null, choice);
         }
 
+        private void SetQuestCards()
+        {
+            var setQuestCards = new SetQuestCards(this);
+            setQuestCards.DuringSetup(this);
+
+            AddEffect(setQuestCards);
+            ResolveEffect(setQuestCards, null, null);
+        }
+
+        private void FollowScenarioSetup()
+        {
+            var scenarioSetup = new FollowScenarioSetup(this);
+            scenarioSetup.DuringSetup(this);
+
+            AddEffect(scenarioSetup);
+            ResolveEffect(scenarioSetup, null, null);
+
+            foreach (var effect in currentEffects.OfType<ISetupEffect>().ToList())
+            {
+                effect.Setup(this);
+
+                IPayment payment = null;
+
+                var cost = effect.GetCost(this);
+                if (cost != null)
+                {
+                    payment = controller.GetPayment(effect, cost);
+                }
+
+                var choice = effect.GetChoice(this);
+                if (choice != null)
+                {
+                    controller.ChoiceOffered(effect, choice);
+                }
+                
+                ResolveEffect(effect, payment, choice);
+            }
+        }
+
+        private void Run()
+        {
+        }
+
         public void Setup(IQuestArea questArea, IEnumerable<IPlayer> players)
         {
             if (questArea == null)
@@ -180,7 +223,7 @@ namespace LotR.States
                 throw new ArgumentException("list of players cannot contain nulls");
 
             this.QuestArea = questArea;
-            this.StagingArea = new StagingArea(this, questArea.ActiveEncounterDeck);
+            this.StagingArea = new StagingArea(this);
             this.VictoryDisplay = new VictoryDisplay(this);
 
             foreach (var player in players)
@@ -199,21 +242,11 @@ namespace LotR.States
                 DrawSetupHand(player);
             }
 
-            this.QuestArea.Setup();
-
-            foreach (var setupEffect in currentEffects.OfType<ISetupEffect>().ToList())
-            {
-                setupEffect.Setup(this);
-                var choice = setupEffect.GetChoice(this);
-                var cost = setupEffect.GetCost(this);
-                if (choice == null && cost == null)
-                {
-                    ResolveEffect(setupEffect, null, choice);
-                    currentEffects.Remove(setupEffect);
-                }
-            }
+            SetQuestCards();
+            FollowScenarioSetup();
 
             CurrentPhase = new ResourcePhase(this);
+            Run();
         }
 
         public T GetCardInPlay<T>(Guid cardId)

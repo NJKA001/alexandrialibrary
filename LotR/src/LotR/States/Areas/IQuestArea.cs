@@ -33,7 +33,8 @@ namespace LotR.States.Areas
         void RemoveProgressFromQuest(byte value);
         void RemoveProgressFromActiveLocation(byte value);
 
-        void Setup();
+        void SetQuestCards();
+        void SetupScenario();
 
         IQuestStage GetCurrentQuestStage();
     }
