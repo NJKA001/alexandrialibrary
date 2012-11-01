@@ -26,6 +26,11 @@ namespace LotR.States.Phases
             private set;
         }
 
+        public string Name
+        {
+            get { return Code.ToString(); }
+        }
+
         public PhaseStep Step
         {
             get;

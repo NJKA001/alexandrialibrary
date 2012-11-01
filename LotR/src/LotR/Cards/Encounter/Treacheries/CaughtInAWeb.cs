@@ -132,15 +132,15 @@ namespace LotR.Cards.Encounter.Treacheries
                 if (refreshPhase == null)
                     return;
 
-                var cardReadying = refreshPhase.GetCardsReadying().Where(x => x.Exhaustable.Card.Id == Source.Id).FirstOrDefault();
-                if (cardReadying == null)
+                var readyingCard = refreshPhase.GetReadyingCards().Where(x => x.Exhaustable.Card.Id == Source.Id).FirstOrDefault();
+                if (readyingCard == null)
                     return;
 
                 var resourcePayment = payment as IResourcePayment;
                 if (resourcePayment == null && resourcePayment.Payments.Count() != 1 || resourcePayment.Payments.First() == null || resourcePayment.Payments.First().Item1.Card.Id != Source.Id || resourcePayment.Payments.First().Item2 != 2)
                     return;
 
-                cardReadying.IsReadying = true;
+                readyingCard.IsReadying = true;
             }
         }
     }

@@ -18,6 +18,7 @@ namespace LotR.States
     public interface IGame
         : ISource, INotifyPropertyChanged
     {
+        byte CurrentRound { get; }
         IPhase CurrentPhase { get; }
         IQuestArea QuestArea { get; }
         IStagingArea StagingArea { get; }

@@ -115,6 +115,8 @@
     <Compile Include="Effects\Phases\Any\IBeforeStageDefeated.cs" />
     <Compile Include="Effects\Phases\Combat\IAfterEnemyAttackResolves.cs" />
     <Compile Include="Effects\Phases\Combat\IAfterEnemyEngages.cs" />
+    <Compile Include="Effects\Phases\EndOfPhase.cs" />
+    <Compile Include="Effects\Phases\Resource\CollectingResourcesEffect.cs" />
     <Compile Include="Effects\Phases\Setup\DetermineFirstPlayer.cs" />
     <Compile Include="Effects\Phases\Setup\FollowScenarioSetup.cs" />
     <Compile Include="Effects\Phases\Setup\IDuringSetup.cs" />
@@ -122,6 +124,8 @@
     <Compile Include="Effects\Phases\Setup\PlayerPlacesHeroesAndSetsThreat.cs" />
     <Compile Include="Effects\Phases\Setup\PlayerShufflesDeck.cs" />
     <Compile Include="Effects\Phases\Setup\SetQuestCards.cs" />
+    <Compile Include="Effects\Phases\StartOfPhase.cs" />
+    <Compile Include="Effects\Phases\StartOfRound.cs" />
     <Compile Include="Effects\SetupEffectBase.cs" />
     <Compile Include="Effects\ShadowEffectBase.cs" />
     <Compile Include="Effects\TravelEffectBase.cs" />
@@ -497,10 +501,6 @@
     <Compile Include="Effects\Phases\Refresh\IBeforeRefreshingCards.cs" />
     <Compile Include="Effects\Phases\Refresh\IDuringRaisingThreat.cs" />
     <Compile Include="Effects\Phases\Refresh\IDuringReadyingCard.cs" />
-    <Compile Include="Effects\Phases\Resource\IAfterCollectingResources.cs" />
-    <Compile Include="Effects\Phases\Resource\IAfterDrawingResourcesCards.cs" />
-    <Compile Include="Effects\Phases\Resource\IBeforeCollectingResources.cs" />
-    <Compile Include="Effects\Phases\Resource\IBeforeDrawingResourceCards.cs" />
     <Compile Include="Effects\Phases\Resource\IDuringCollectingResources.cs" />
     <Compile Include="Effects\Phases\Resource\IDuringDrawingResourceCards.cs" />
     <Compile Include="Effects\Phases\Travel\IAfterTraveling.cs" />

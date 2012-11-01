@@ -12,6 +12,7 @@ namespace LotR.States.Phases
         : IState
     {
         PhaseCode Code { get; }
+        string Name { get; }
         PhaseStep Step { get; }
 
         IEnumerable<IDamageDealt> GetDamageDealt();

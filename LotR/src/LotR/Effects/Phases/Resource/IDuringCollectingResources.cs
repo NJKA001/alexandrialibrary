@@ -8,6 +8,7 @@ using LotR.States.Phases.Resource;
 namespace LotR.Effects.Phases.Resource
 {
     public interface IDuringCollectingResources
+        : IEffect
     {
         void DuringCollectingResource(ICollectingResources state);
     }

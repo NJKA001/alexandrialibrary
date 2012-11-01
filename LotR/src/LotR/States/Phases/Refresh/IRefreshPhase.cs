@@ -8,6 +8,9 @@ namespace LotR.States.Phases.Refresh
     public interface IRefreshPhase
         : IPhase
     {
-        IEnumerable<ICardReadying> GetCardsReadying();
+        IEnumerable<ICardReadying> GetReadyingCards();
+
+        void AddReadyingCard(ICardReadying card);
+        void RemoveReadyingCard(ICardReadying card);
     }
 }

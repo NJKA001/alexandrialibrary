@@ -12,6 +12,8 @@ namespace LotR.States
     public interface ICardInPlay
         : IState
     {
+        ICard BaseCard { get; }
+
         string Title { get; }
 
         IPlayer GetController(IGame game);

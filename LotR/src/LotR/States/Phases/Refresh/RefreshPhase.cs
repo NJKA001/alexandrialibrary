@@ -8,20 +8,38 @@ namespace LotR.States.Phases.Refresh
     public class RefreshPhase
         : PhaseBase, IRefreshPhase
     {
-        public RefreshPhase(IGame game, IEnumerable<ICardReadying> readyingCards)
+        public RefreshPhase(IGame game)
             : base(game, PhaseCode.Refresh, PhaseStep.Refresh_Start)
         {
-            if (readyingCards == null)
-                throw new ArgumentNullException("readyingCards");
-
-            this.readyingCards = readyingCards;
         }
 
-        private readonly IEnumerable<ICardReadying> readyingCards;
+        private readonly IList<ICardReadying> readyingCards = new List<ICardReadying>();
 
-        public IEnumerable<ICardReadying> GetCardsReadying()
+        public IEnumerable<ICardReadying> GetReadyingCards()
         {
             return readyingCards;
+        }
+
+        public void AddReadyingCard(ICardReadying card)
+        {
+            if (card == null)
+                throw new ArgumentNullException("card");
+
+            if (readyingCards.Contains(card))
+                return;
+
+            readyingCards.Add(card);
+        }
+
+        public void RemoveReadyingCard(ICardReadying card)
+        {
+            if (card == null)
+                throw new ArgumentNullException("card");
+
+            if (!readyingCards.Contains(card))
+                return;
+
+            readyingCards.Remove(card);
         }
     }
 }
