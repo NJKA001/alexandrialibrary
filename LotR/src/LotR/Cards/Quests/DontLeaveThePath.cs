@@ -9,17 +9,19 @@ using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Payments;
 using LotR.Effects.Phases.Any;
+using LotR.Effects.Phases.Combat;
 using LotR.States;
 using LotR.States.Areas;
 using LotR.States.Phases.Any;
+using LotR.States.Phases.Combat;
 
 namespace LotR.Cards.Quests
 {
     public class DontLeaveThePath
-        : QuestCardBase
+        : PassageThroughMirkwoodQuestCardBase
     {
         public DontLeaveThePath()
-            : base("Don't Leave The Path", CardSet.Core, 121, ScenarioCode.Passage_Through_Mirkwood, new List<EncounterSet> { EncounterSet.Passage_Through_Mirkwood, EncounterSet.Dol_Guldur_Orcs, EncounterSet.Spiders_of_Mirkwood }, 3, 0, 0)
+            : base("Don't Leave The Path", 121, 3, 0)
         {
             AddEffect(new WhenRevealedEachPlayerSearchesForASpider(this));
             AddEffect(new PassivePlayersMustDefeatUngoliantsSpawn(this));
@@ -79,20 +81,33 @@ namespace LotR.Cards.Quests
         }
 
         private class PassivePlayersMustDefeatUngoliantsSpawn
-            : PassiveCardEffectBase, IBeforeStageDefeated
+            : PassiveCardEffectBase, IBeforeStageDefeated, IDuringCheckGameStatus
         {
             public PassivePlayersMustDefeatUngoliantsSpawn(DontLeaveThePath source)
                 : base("The Players must find and defeat Ungoliant's Spawn to win this game.", source)
             {
             }
 
-            public void BeforeStageDefeated(IQuestStage currentQuestStage)
+            public void BeforeStageDefeated(IQuestStatus questStatus)
             {
-                var ungoliantsSpawn = currentQuestStage.Game.StagingArea.EncounterDeck.DiscardPile.Where(x => x.Title == "Ungoliant's Spawn").FirstOrDefault() as IEnemyInPlay;
+                if (questStatus.Game.QuestArea.ActiveQuest == null || questStatus.Game.QuestArea.ActiveQuest.Card.Id != Source.Id)
+                    return;
+
+                var ungoliantsSpawn = questStatus.Game.VictoryDisplay.Cards.Where(x => x.Title == "Ungoliant's Spawn").FirstOrDefault() as IEnemyCard;
                 if (ungoliantsSpawn != null)
                     return;
 
-                currentQuestStage.StageIsDefeated = false;
+                questStatus.IsStageDefeated = false;
+            }
+
+            public void DuringCheckGameStatus(IGameStatus gameStatus)
+            {
+                if (gameStatus.Game.QuestArea.ActiveQuest == null || gameStatus.Game.QuestArea.ActiveQuest.Card.Id != Source.Id)
+                    return;
+
+                var ungoliantsSpawn = gameStatus.Game.VictoryDisplay.Cards.Where(x => x.Title == "Ungoliant's Spawn").FirstOrDefault() as IEnemyCard;
+
+                gameStatus.IsPlayerVictory = (ungoliantsSpawn != null);
             }
         }
     }

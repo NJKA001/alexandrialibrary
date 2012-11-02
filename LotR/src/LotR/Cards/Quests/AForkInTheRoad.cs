@@ -14,10 +14,10 @@ using LotR.States.Phases.Any;
 namespace LotR.Cards.Quests
 {
     public class AForkInTheRoad
-        : QuestCardBase
+        : PassageThroughMirkwoodQuestCardBase
     {
         public AForkInTheRoad()
-            : base("A Fork in the Road", CardSet.Core, 120, ScenarioCode.Passage_Through_Mirkwood, new List<EncounterSet> { EncounterSet.Passage_Through_Mirkwood, EncounterSet.Dol_Guldur_Orcs, EncounterSet.Spiders_of_Mirkwood }, 2, 2, 0)
+            : base("A Fork in the Road", 120, 2, 2)
         {
         }
 
@@ -29,7 +29,7 @@ namespace LotR.Cards.Quests
             {
             }
 
-            public void AfterStageDefeated(IQuestStage stage)
+            public void AfterStageDefeated(IQuestStatus stage)
             {
                 stage.Game.AddEffect(this);
             }

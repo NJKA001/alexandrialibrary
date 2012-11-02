@@ -41,8 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cards\CardType.cs" />
-    <Compile Include="Cards\GameLoader.cs" />
-    <Compile Include="Cards\IGameLoader.cs" />
     <Compile Include="Cards\LoaderBase.cs" />
     <Compile Include="Cards\EncounterSet.cs" />
     <Compile Include="Cards\Encounter\Enemies\BlackForestBats.cs" />
@@ -81,6 +79,7 @@
     <Compile Include="Cards\Player\Attachments\HeroAttachmentCardBase.cs" />
     <Compile Include="Cards\Player\IExhaustableCard.cs" />
     <Compile Include="Cards\Player\Treasures\TreasureCardBase.cs" />
+    <Compile Include="Cards\Quests\PassageThroughMirkwoodQuestCardBase.cs" />
     <Compile Include="Cards\Quests\QuestLoader.cs" />
     <Compile Include="Cards\Quests\AForkInTheRoad.cs" />
     <Compile Include="Cards\Quests\BeornsPath.cs" />
@@ -89,9 +88,11 @@
     <Compile Include="Effects\Choices\ChooseCharacterWithTrait.cs" />
     <Compile Include="Effects\Choices\ChooseFirstPlayer.cs" />
     <Compile Include="Effects\Choices\ChooseHero.cs" />
+    <Compile Include="Effects\Choices\ChoosePlayerAction.cs" />
     <Compile Include="Effects\Choices\ChoosePlayerToChooseHero.cs" />
     <Compile Include="Effects\Choices\ChooseToKeepStartingHand.cs" />
     <Compile Include="Effects\Choices\IChooseFirstPlayer.cs" />
+    <Compile Include="Effects\Choices\IChoosePlayerAction.cs" />
     <Compile Include="Effects\Choices\IChooseToKeepStartingHand.cs" />
     <Compile Include="Effects\Choices\IPlayersChooseCards.cs" />
     <Compile Include="Effects\Choices\PlayersChooseCards.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Effects\Choices\IChooseCharacterWithTrait.cs" />
     <Compile Include="Effects\Choices\IChoosePlayerToChooseHero.cs" />
     <Compile Include="Effects\Choices\IPlayersChooseCharacters.cs" />
+    <Compile Include="Effects\EffectOptions.cs" />
     <Compile Include="Effects\ForcedCardEffectBase.cs" />
     <Compile Include="Effects\FrameworkEffectBase.cs" />
     <Compile Include="Effects\IFrameworkEffect.cs" />
@@ -111,12 +113,17 @@
     <Compile Include="Effects\Phases\Any\IAfterLocationExplored.cs" />
     <Compile Include="Effects\Phases\Any\IAfterStageDefeated.cs" />
     <Compile Include="Effects\Phases\Any\IDuringCheckForResourceMatch.cs" />
+    <Compile Include="Effects\Phases\Any\IDuringCheckGameStatus.cs" />
     <Compile Include="Effects\Phases\Any\IDuringDrawingCards.cs" />
     <Compile Include="Effects\Phases\Any\IBeforeStageDefeated.cs" />
+    <Compile Include="Effects\Phases\Any\PlayerActionWindow.cs" />
+    <Compile Include="Effects\Phases\Any\PlayerDefeat.cs" />
+    <Compile Include="Effects\Phases\Any\PlayerVictory.cs" />
     <Compile Include="Effects\Phases\Combat\IAfterEnemyAttackResolves.cs" />
     <Compile Include="Effects\Phases\Combat\IAfterEnemyEngages.cs" />
     <Compile Include="Effects\Phases\EndOfPhase.cs" />
     <Compile Include="Effects\Phases\Resource\CollectingResourcesEffect.cs" />
+    <Compile Include="Effects\Phases\Resource\DrawingCardsEffect.cs" />
     <Compile Include="Effects\Phases\Setup\DetermineFirstPlayer.cs" />
     <Compile Include="Effects\Phases\Setup\FollowScenarioSetup.cs" />
     <Compile Include="Effects\Phases\Setup\IDuringSetup.cs" />
@@ -267,6 +274,9 @@
     <Compile Include="States\ITreasureInPlay.cs" />
     <Compile Include="States\IWillpowerfulInPlay.cs" />
     <Compile Include="States\LocationInPlay.cs" />
+    <Compile Include="States\Phases\Any\GameStatus.cs" />
+    <Compile Include="States\Phases\Any\IGameStatus.cs" />
+    <Compile Include="States\Phases\PhaseFactory.cs" />
     <Compile Include="States\PhaseStep.cs" />
     <Compile Include="States\Phases\Any\CardEntersPlay.cs" />
     <Compile Include="States\Phases\Any\CardLeavesPlay.cs" />
@@ -285,7 +295,7 @@
     <Compile Include="States\Phases\Any\ICheckForResourceIcon.cs" />
     <Compile Include="States\Phases\Any\ICheckForResourceMatch.cs" />
     <Compile Include="States\Phases\Any\ICheckForTrait.cs" />
-    <Compile Include="States\Phases\Any\IQuestStage.cs" />
+    <Compile Include="States\Phases\Any\IQuestStatus.cs" />
     <Compile Include="States\Phases\Any\IDamageDealt.cs" />
     <Compile Include="States\Phases\Any\IDamageHealed.cs" />
     <Compile Include="States\Phases\Any\IDetermineAttack.cs" />
@@ -296,7 +306,7 @@
     <Compile Include="States\Phases\Any\ILocationExplored.cs" />
     <Compile Include="States\Phases\Any\IPlayersDrawingCards.cs" />
     <Compile Include="States\Phases\Any\PlayersDrawingCards.cs" />
-    <Compile Include="States\Phases\Any\QuestStage.cs" />
+    <Compile Include="States\Phases\Any\QuestStatus.cs" />
     <Compile Include="States\Phases\Combat\CharactersAttack.cs" />
     <Compile Include="States\Phases\Combat\ChooseEnemyToAttack.cs" />
     <Compile Include="States\Phases\Combat\CombatPhase.cs" />
@@ -520,6 +530,7 @@
     <Compile Include="States\PhaseCode.cs" />
     <Compile Include="States\PlayerInfo.cs" />
     <Compile Include="States\QuestInPlay.cs" />
+    <Compile Include="States\Setup\GameSetup.cs" />
     <Compile Include="States\StateBase.cs" />
     <Compile Include="States\ThreateningInPlay.cs" />
     <Compile Include="States\TreasureInPlay.cs" />

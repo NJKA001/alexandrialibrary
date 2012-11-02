@@ -79,9 +79,9 @@ namespace LotR.Cards.Quests
             get { return questCards; }
         }
 
-        public IQuestArea Load(IGame game, ScenarioCode scenario)
+        public IQuestArea Load(IGame game, ScenarioCode scenarioCode)
         {
-            var quests = GetCards<IQuestCard>(questCards);
+            var quests = GetCards<IQuestCard>(questCards).Where(x => x.ScenarioCode == scenarioCode).ToList();
 
             var questDeck = new Deck<IQuestCard>(quests);
             var encounterDecks = new List<IDeck<IEncounterCard>>();

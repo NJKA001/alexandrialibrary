@@ -20,6 +20,6 @@ namespace LotR.Cards
 
         CardType PrintedCardType { get; }
         IEnumerable<Trait> PrintedTraits { get; }
-        bool HasEffect<T>() where T : IEffect;
+        bool HasEffect<T>() where T : class, IEffect;
     }
 }

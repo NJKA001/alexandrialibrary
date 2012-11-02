@@ -8,20 +8,20 @@ namespace LotR.Cards.Quests
     public abstract class QuestCardBase
         : CardBase, IQuestCard
     {
-        protected QuestCardBase(string title, CardSet cardSet, uint cardNumber, ScenarioCode scenario, IEnumerable<EncounterSet> encounterSets, byte sequence, byte questPoints, byte victoryPoints)
+        protected QuestCardBase(string title, CardSet cardSet, uint cardNumber, ScenarioCode scenarioCode, IEnumerable<EncounterSet> encounterSets, byte sequence, byte questPoints, byte victoryPoints)
             : base(CardType.Quest, title, cardSet, cardNumber)
         {
             if (encounterSets == null)
                 throw new ArgumentNullException("encounterSets");
 
-            this.Scenario = scenario;
+            this.ScenarioCode = scenarioCode;
             this.EncounterSets = encounterSets;
             this.Sequence = sequence;
             this.QuestPoints = questPoints;
             this.VictoryPoints = victoryPoints;
         }
 
-        public ScenarioCode Scenario
+        public ScenarioCode ScenarioCode
         {
             get;
             private set;

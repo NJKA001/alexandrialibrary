@@ -123,7 +123,7 @@ namespace LotR.Cards
         }
 
         public bool HasEffect<T>()
-            where T : IEffect
+            where T : class, IEffect
         {
             return (Text.Effects.OfType<T>().Count() > 0);
         }

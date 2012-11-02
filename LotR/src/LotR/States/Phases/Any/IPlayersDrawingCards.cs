@@ -10,10 +10,10 @@ namespace LotR.States.Phases.Any
     {
         IEnumerable<Guid> Players { get; }
 
-        byte GetNumberOfCards(Guid playerId);
+        uint GetNumberOfCards(Guid playerId);
         bool PlayerCanDrawCards(Guid playerId);
 
-        void SetNumberOfCards(Guid playerId, byte numberOfCards);
+        void SetNumberOfCards(Guid playerId, uint numberOfCards);
         void EnabledPlayerCardDraw(Guid playerId);
         void DisablePlayerCardDraw(Guid playerId);
     }

@@ -18,7 +18,7 @@ namespace LotR.States
 
         IPlayer GetController(IGame game);
 
-        bool HasEffect<T>() where T : IEffect;
+        bool HasEffect<T>() where T : class, IEffect;
         bool HasTrait(Trait trait);
 
         byte Damage { get; set; }

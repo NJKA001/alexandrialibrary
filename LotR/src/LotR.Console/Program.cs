@@ -51,8 +51,6 @@ namespace LotR.Console
                 WriteLine("Simulator Console v. 1.0.0.0");
                 WriteLine();
 
-                gameLoader = new GameLoader();
-
                 var player1 = new PlayerInfo("Dan", "TheThreeHunters.txt");
                 var player2 = new PlayerInfo("Irma", "LeadershipTactics.txt");
                 var playersInfo = new List<PlayerInfo> { player1, player2 };
@@ -60,10 +58,12 @@ namespace LotR.Console
                 controller = GetController();
                 game = new Game(controller);
 
-                WriteLine("Loading Game");
+                WriteLine("Setting Up Game");
 
-                gameLoader.Load(game, playersInfo, ScenarioCode.Passage_Through_Mirkwood);
+                var players = GetPlayers(game, playersInfo);
 
+                game.Setup(players, ScenarioCode.Passage_Through_Mirkwood);
+                
                 WriteLine("\r\nGame Is Ready\r\n");
 
                 var line = string.Empty;
@@ -95,7 +95,6 @@ namespace LotR.Console
 
         private static IGame game;
         private static IGameController controller;
-        private static IGameLoader gameLoader;
 
         private static IGameController GetController()
         {
@@ -106,6 +105,24 @@ namespace LotR.Console
             controller.RegisterPaymentRejectedCallback((effect, payment, choice) => PaymentRejectedCallback(effect, payment, choice));
 
             return controller;
+        }
+
+        private static IEnumerable<IPlayer> GetPlayers(IGame game, IEnumerable<PlayerInfo> playersInfo)
+        {
+            var players = new List<IPlayer>();
+
+            var playerDeckLoader = new PlayerDeckLoader();
+
+            foreach (var info in playersInfo)
+            {
+                var playerDeck = playerDeckLoader.Load(info.DeckPath);
+                if (playerDeck != null)
+                {
+                    players.Add(new Player(game, info.Name, playerDeck));
+                }
+            }
+
+            return players;
         }
 
         private static bool TryParseInputAsInt(string input, out int result)
@@ -172,6 +189,36 @@ namespace LotR.Console
             }
         }
 
+        private static void ChoosePlayerAction(IChoosePlayerAction choice)
+        {
+            var inputValid = false;
+            var isTakingAction = false;
+
+            var player = choice.Players.FirstOrDefault();
+
+            while (!inputValid)
+            {
+                WriteLine("Would you like to take an action? (y/n)\r\n");
+
+                var input = System.Console.ReadLine() ?? string.Empty;
+
+                var normalized = input.ToLower();
+                if (normalized != "y" && normalized != "n")
+                {
+                    WriteLine("{0} is not a valid answer. Please enter 'y' for yes or 'n' for no.\r\n", input);
+                    continue;
+                }
+
+                inputValid = true;
+                isTakingAction = (normalized == "y");
+            }
+
+            if (isTakingAction)
+            {
+                WriteLine("{0} is taking an action\r\n", player.Name);
+            }
+        }
+
         private static void HandleChoice(IChoice choice)
         {
             WriteLine("\r\nChoice: {0}\r\n", choice.Description);
@@ -183,6 +230,10 @@ namespace LotR.Console
             else if (choice is IChooseToKeepStartingHand)
             {
                 ChooseToKeepStartingHand(choice as IChooseToKeepStartingHand);
+            }
+            else if (choice is IChoosePlayerAction)
+            {
+                ChoosePlayerAction(choice as IChoosePlayerAction);
             }
         }
 
@@ -224,8 +275,10 @@ namespace LotR.Console
             {
                 if (effect != null)
                 {
-                    var description = effect.GetResolutionDescription(game, payment, choice) ?? "Undefined effect resolved";
-                    WriteLine("\r\n{0}", description);
+                    var description = effect.GetResolutionDescription(game, payment, choice);
+
+                    if (!string.IsNullOrEmpty(description))
+                        WriteLine("\r\n{0}", description);
                 }
                 else
                     WriteLine("\r\nUnknown effect resolved");
@@ -345,7 +398,7 @@ namespace LotR.Console
         {
             WriteLine();
             if (questDeck.Size > 0)
-                WriteLine("Quest Deck: {0}", questDeck.Cards.First().Scenario.ToString().Replace('_', ' '));
+                WriteLine("Quest Deck: {0}", questDeck.Cards.First().ScenarioCode.ToString().Replace('_', ' '));
             else
                 WriteLine("Quest Deck: Unknown Scenario");
 

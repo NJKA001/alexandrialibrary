@@ -82,7 +82,7 @@ namespace LotR.States
         }
 
         public virtual bool HasEffect<TEffect>()
-            where TEffect : IEffect
+            where TEffect : class, IEffect
         {
             return Card.HasEffect<TEffect>();
         }

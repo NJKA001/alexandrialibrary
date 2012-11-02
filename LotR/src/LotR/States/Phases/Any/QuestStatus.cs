@@ -8,10 +8,10 @@ using LotR.Effects;
 
 namespace LotR.States.Phases.Any
 {
-    public class QuestStage
-        : StateBase, IQuestStage
+    public class QuestStatus
+        : StateBase, IQuestStatus
     {
-        public QuestStage(IGame game, IQuestInPlay currentStage, IQuestCard previousStage, IQuestCard nextStage)
+        public QuestStatus(IGame game, IQuestInPlay currentStage, IQuestCard previousStage, IQuestCard nextStage)
             : base(game)
         {
             this.CurrentStage = currentStage;
@@ -20,7 +20,7 @@ namespace LotR.States.Phases.Any
         }
 
         private IQuestCard nextStage;
-        private bool stageIsDefeated;
+        private bool isStageDefeated;
 
         public IQuestInPlay CurrentStage
         {
@@ -47,16 +47,16 @@ namespace LotR.States.Phases.Any
             }
         }
 
-        public bool StageIsDefeated
+        public bool IsStageDefeated
         {
-            get { return stageIsDefeated; }
+            get { return isStageDefeated; }
             set
             {
-                if (stageIsDefeated == value)
+                if (isStageDefeated == value)
                     return;
 
-                stageIsDefeated = value;
-                OnPropertyChanged("StageIsDefeated");
+                isStageDefeated = value;
+                OnPropertyChanged("IsStageDefeated");
             }
         }
     }

@@ -162,7 +162,7 @@ namespace LotR.States.Areas
             }
         }
 
-        public IQuestStage GetCurrentQuestStage()
+        public IQuestStatus GetCurrentQuestStage()
         {
             return null;
         }

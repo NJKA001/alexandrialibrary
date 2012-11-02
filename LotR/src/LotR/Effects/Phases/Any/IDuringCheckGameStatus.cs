@@ -7,8 +7,9 @@ using LotR.States.Phases.Any;
 
 namespace LotR.Effects.Phases.Any
 {
-    public interface IBeforeStageDefeated
+    public interface IDuringCheckGameStatus
+        : IEffect
     {
-        void BeforeStageDefeated(IQuestStatus state);
+        void DuringCheckGameStatus(IGameStatus gameStatus);
     }
 }

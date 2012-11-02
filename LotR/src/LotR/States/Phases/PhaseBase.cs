@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.States.Controllers;
 using LotR.States.Phases.Any;
 using LotR.States.Phases.Combat;
 
@@ -70,6 +71,10 @@ namespace LotR.States.Phases
         public IPlayersDrawingCards GetPlayersDrawingCards()
         {
             return null;
+        }
+
+        public virtual void Run()
+        {
         }
     }
 }

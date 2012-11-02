@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
+using LotR.Cards.Player;
 using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Payments;
@@ -27,9 +28,21 @@ namespace LotR.States
         IPlayer FirstPlayer { get; }
 
         void AddEffect(IEffect effect);
-        void ResolveEffect(IEffect effect, IPayment payment, IChoice choice);
-        void Setup(IQuestArea questArea, IEnumerable<IPlayer> players);
+        void ResolveEffect(IEffect effect, EffectOptions options);
+        void ResolveEffectsForAllCardsInPlay<TCard, TEffect>()
+            where TCard : class, ICardInPlay
+            where TEffect : class, IEffect;
 
+        void Setup(IEnumerable<IPlayer> players, ScenarioCode scenarioCode);
+        void OpenPlayerActionWindow();
+        
         T GetCardInPlay<T>(Guid cardId) where T : class, ICardInPlay;
+        IEnumerable<TCard> GetCardsInPlayWithEffect<TCard, TEffect>()
+            where TCard : class, ICardInPlay
+            where TEffect : class, IEffect;
+
+        IEnumerable<T> GetEffects<T>() where T : class, IEffect;
+        EffectOptions GetOptions(IEffect effect);
+        uint GetPlayerScore();
     }
 }

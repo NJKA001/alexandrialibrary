@@ -12,25 +12,20 @@ using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Payments;
 using LotR.Effects.Phases;
-using LotR.Effects.Phases.Setup;
 using LotR.Effects.Phases.Any;
-using LotR.Effects.Phases.Resource;
-using LotR.Effects.Phases.Planning;
-using LotR.Effects.Phases.Quest;
-using LotR.Effects.Phases.Travel;
-using LotR.Effects.Phases.Encounter;
-using LotR.Effects.Phases.Combat;
-using LotR.Effects.Phases.Refresh;
+//using LotR.Effects.Phases.Setup;
+//using LotR.Effects.Phases.Resource;
+//using LotR.Effects.Phases.Planning;
+//using LotR.Effects.Phases.Quest;
+//using LotR.Effects.Phases.Travel;
+//using LotR.Effects.Phases.Encounter;
+//using LotR.Effects.Phases.Combat;
+//using LotR.Effects.Phases.Refresh;
 using LotR.States.Areas;
 using LotR.States.Controllers;
 using LotR.States.Phases;
-using LotR.States.Phases.Resource;
-using LotR.States.Phases.Planning;
-using LotR.States.Phases.Quest;
-using LotR.States.Phases.Travel;
-using LotR.States.Phases.Encounter;
-using LotR.States.Phases.Combat;
-using LotR.States.Phases.Refresh;
+using LotR.States.Phases.Any;
+using LotR.States.Setup;
 
 namespace LotR.States
 {
@@ -49,7 +44,7 @@ namespace LotR.States
         private readonly IGameController controller;
         private readonly IList<IPlayer> players = new List<IPlayer>();
         private readonly IList<IEffect> currentEffects = new List<IEffect>();
-        private readonly IList<Func<IPhase>> phaseGenerators = new List<Func<IPhase>>();
+        private readonly PhaseFactory phaseFactory = new PhaseFactory();
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -59,188 +54,75 @@ namespace LotR.States
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void SetCardOwnership(IPlayer player)
+        private void CheckGameStatus(IGameStatus gameStatus)
         {
-            foreach (var card in player.Deck.Cards)
-            {
-                card.Owner = player;
-            }
+            if (Players.All(x => x.CurrentThreat >= 50))
+                gameStatus.IsPlayerDefeat = true;
+
+            ResolveEffectsForAllCardsInPlay<ICardInPlay, IDuringCheckGameStatus>();
         }
 
-        private void ShufflePlayerDeck(IPlayer player)
+        private void ResolveImmediately(IEffect effect)
         {
-            var shuffleDeck = new PlayerShufflesDeck(this, player);
-            AddEffect(shuffleDeck);
-            shuffleDeck.DuringSetup(this);
-            ResolveEffect(shuffleDeck, null, null);
-        }
-
-        private void PlaceHeroesAndSetInitialThreat(IPlayer player)
-        {
-            var placeHeroes = new PlayerPlacesHeroesAndSetsThreat(this, player);
-            AddEffect(placeHeroes);
-            placeHeroes.DuringSetup(this);
-            ResolveEffect(placeHeroes, null, null);
-        }
-
-        private void DetermineFirstPlayer()
-        {
-            var determineFirstPlayer = new DetermineFirstPlayer(this);
-            determineFirstPlayer.DuringSetup(this);
-
-            var choice = determineFirstPlayer.GetChoice(this);
-            if (choice != null)
-            {
-                controller.ChoiceOffered(determineFirstPlayer, choice);
-            }
-
-            AddEffect(determineFirstPlayer);
-            ResolveEffect(determineFirstPlayer, null, choice);
-        }
-
-        private void DrawSetupHand(IPlayer player)
-        {
-            var drawSetupHand = new PlayerDrawsStartingHand(this, player);
-            drawSetupHand.DuringSetup(this);
-
-            var choice = drawSetupHand.GetChoice(this);
-            controller.ChoiceOffered(drawSetupHand, choice);
-
-            AddEffect(drawSetupHand);
-            ResolveEffect(drawSetupHand, null, choice);
-        }
-
-        private void SetQuestCards()
-        {
-            var setQuestCards = new SetQuestCards(this);
-            setQuestCards.DuringSetup(this);
-
-            AddEffect(setQuestCards);
-            ResolveEffect(setQuestCards, null, null);
-        }
-
-        private void FollowScenarioSetup()
-        {
-            var scenarioSetup = new FollowScenarioSetup(this);
-            scenarioSetup.DuringSetup(this);
-
-            AddEffect(scenarioSetup);
-            ResolveEffect(scenarioSetup, null, null);
-
-            foreach (var effect in currentEffects.OfType<ISetupEffect>().ToList())
-            {
-                effect.Setup(this);
-
-                IPayment payment = null;
-
-                var cost = effect.GetCost(this);
-                if (cost != null)
-                {
-                    payment = controller.GetPayment(effect, cost);
-                }
-
-                var choice = effect.GetChoice(this);
-                if (choice != null)
-                {
-                    controller.ChoiceOffered(effect, choice);
-                }
-
-                ResolveEffect(effect, payment, choice);
-            }
-        }
-
-        private void AddAndResolveEffect(IEffect effect, IPayment payment, IChoice choice)
-        {
+            var options = GetOptions(effect);
             AddEffect(effect);
-            ResolveEffect(effect, payment, choice);
+            ResolveEffect(effect, options);
         }
 
-        private IPhase GetNextPhase(PhaseCode phaseCode)
+        private IEnumerable<T> GetAllCardsInPlay<T>()
+            where T : class, ICardInPlay
         {
-            switch (phaseCode)
-            {
-                case PhaseCode.Resource:
-                    return new PlanningPhase(this);
-                case PhaseCode.Planning:
-                    return new QuestPhase(this);
-                case PhaseCode.Quest:
-                    return new TravelPhase(this);
-                case PhaseCode.Travel:
-                    return new EncounterPhase(this);
-                case PhaseCode.Encounter:
-                    return new CombatPhase(this);
-                case PhaseCode.Combat:
-                    return new RefreshPhase(this);
-                case PhaseCode.Refresh:
-                    return new ResourcePhase(this);
-                case PhaseCode.None:
-                default:
-                    throw new InvalidOperationException("Current phase is unknown");
-            }
-        }
+            var cards = new List<T>();
 
-        private void RunResourcePhase()
-        {
-            var items = new List<Tuple<CollectingResourcesEffect, CollectingResources>>();
+            if (QuestArea.ActiveLocation is T)
+                cards.Add(QuestArea.ActiveLocation as T);
 
-            foreach (var player in Players)
+            if (QuestArea.ActiveQuest is T)
+                cards.Add(QuestArea.ActiveQuest as T);
+
+            foreach (var stagingCard in StagingArea.CardsInStagingArea.OfType<T>().Where(x => x != null))
+                cards.Add(stagingCard);
+
+            foreach (var player in players)
             {
-                foreach (var resourceful in player.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.Card is IResourcefulCard))
-                {
-                    var state = new CollectingResources(this, resourceful, 1);
-                    var effect = new CollectingResourcesEffect(this, state);
-                    items.Add(new Tuple<CollectingResourcesEffect, CollectingResources>(effect, state));
-                }
+                foreach (var playerCard in player.CardsInPlay.OfType<T>().Where(x => x != null))
+                    cards.Add(playerCard);
             }
 
-
-            foreach (var player in Players)
-            {
-                foreach (var card in player.CardsInPlay.Where(x => x.HasEffect<IDuringCollectingResources>()))
-                {
-                    foreach (var duringEffect in card.BaseCard.Text.Effects.OfType<IDuringCollectingResources>())
-                    {
-                        foreach (var item in items)
-                        {
-                            duringEffect.DuringCollectingResource(item.Item2);
-                        }
-                    }
-                }
-            }
-
-            foreach (var item in items)
-            {
-                AddAndResolveEffect(item.Item1, null, null);
-            }
-        }
-
-        private void RunPlanningPhase()
-        {
-
+            return cards;
         }
 
         private void Run()
         {
-            var startOfRound = new StartOfRound(this);
-            AddAndResolveEffect(startOfRound, null, null);
+            var gameStatus = new GameStatus(this);
 
-            var startOfPhase = new StartOfPhase(this);
-            AddAndResolveEffect(startOfPhase, null, null);
-
-            switch (CurrentPhase.Code)
+            while (gameStatus.IsGameRunning)
             {
-                case PhaseCode.Resource:
-                    RunResourcePhase();
-                    break;
-                case PhaseCode.Planning:
-                    RunPlanningPhase();
-                    break;
-                default:
-                    break;
+                CurrentPhase = phaseFactory.GetNextPhase(this);
+                
+                if (CurrentPhase.Code == PhaseCode.Resource)
+                {
+                    CurrentRound += 1;
+                    ResolveImmediately(new StartOfRound(this));
+                }
+
+                ResolveImmediately(new StartOfPhase(this));
+
+                CurrentPhase.Run();
+
+                ResolveImmediately(new EndOfPhase(this));
+
+                CheckGameStatus(gameStatus);
             }
 
-            CurrentRound += 1;
-            CurrentPhase = GetNextPhase(CurrentPhase.Code);
+            if (gameStatus.IsPlayerDefeat)
+            {
+                ResolveImmediately(new PlayerDefeat(this));
+            }
+            else if (gameStatus.IsPlayerVictory)
+            {
+                ResolveImmediately(new PlayerVictory(this));
+            }
         }
 
         #region Properties
@@ -255,7 +137,7 @@ namespace LotR.States
             get
             {
                 return (QuestArea != null && QuestArea.ActiveQuest != null && players.Count > 0) ?
-                    string.Format("{0} playing: {1}", string.Join(", ", players.Select(x => x.Name)), QuestArea.ActiveQuest.Card.Scenario.ToString().Replace('_', ' '))
+                    string.Format("{0} playing: {1}", string.Join(", ", players.Select(x => x.Name)), QuestArea.ActiveQuest.Card.ScenarioCode.ToString().Replace('_', ' '))
                     : "New Game";
             }
         }
@@ -314,59 +196,78 @@ namespace LotR.States
             controller.EffectAdded(effect);
         }
 
-        public void ResolveEffect(IEffect effect, IPayment payment, IChoice choice)
+        public void ResolveEffect(IEffect effect, EffectOptions options)
         {
-            if (!effect.PaymentAccepted(this, payment, choice))
+            if (!effect.PaymentAccepted(this, options.Payment, options.Choice))
             {
-                controller.PaymentRejected(effect, payment, choice);
+                controller.PaymentRejected(effect, options.Payment, options.Choice);
                 return;
             }
 
-            effect.Resolve(this, payment, choice);
+            effect.Resolve(this, options.Payment, options.Choice);
 
-            controller.EffectResolved(effect, payment, choice);
+            controller.EffectResolved(effect, options.Payment, options.Choice);
 
             if (currentEffects.Contains(effect))
                 currentEffects.Remove(effect);
         }
 
-        public void Setup(IQuestArea questArea, IEnumerable<IPlayer> players)
+        public void ResolveEffectsForAllCardsInPlay<TCard, TEffect>()
+            where TCard : class, ICardInPlay
+            where TEffect : class, IEffect
         {
-            if (questArea == null)
-                throw new ArgumentNullException("questArea");
+            foreach (var card in GetCardsInPlayWithEffect<TCard, TEffect>())
+            {
+                foreach (var effect in card.BaseCard.Text.Effects.OfType<TEffect>().Where(x => x != null))
+                {
+                    ResolveImmediately(effect);
+                }
+            }
+        }
+
+        public void Setup(IEnumerable<IPlayer> players, ScenarioCode scenarioCode)
+        {
             if (players == null)
                 throw new ArgumentNullException("players");
             if (players.Count() == 0)
                 throw new ArgumentException("list of players cannot be empty");
             if (players.Any(x => x == null))
-                throw new ArgumentException("list of players cannot contain nulls");
+                throw new ArgumentNullException("list of players cannot contain nulls");
 
-            this.QuestArea = questArea;
-            this.StagingArea = new StagingArea(this);
-            this.VictoryDisplay = new VictoryDisplay(this);
+            this.players.Clear();
 
             foreach (var player in players)
             {
                 this.players.Add(player);
-
-                SetCardOwnership(player);
-                ShufflePlayerDeck(player);
-                PlaceHeroesAndSetInitialThreat(player);
             }
 
-            DetermineFirstPlayer();
+            var questLoader = new QuestLoader();
+            this.QuestArea = questLoader.Load(this, scenarioCode);
 
-            foreach (var player in players)
-            {
-                DrawSetupHand(player);
-            }
+            this.StagingArea = new StagingArea(this);
+            this.VictoryDisplay = new VictoryDisplay(this);
 
-            SetQuestCards();
-            FollowScenarioSetup();
+            var gameSetup = new GameSetup(this);
+            gameSetup.Run();
 
-            CurrentRound = 1;
-            CurrentPhase = new ResourcePhase(this);
+            CurrentRound = 0;
+            CurrentPhase = null;
+
             Run();
+        }
+
+        public void OpenPlayerActionWindow()
+        {
+            foreach (var player in Players)
+            {
+                var action = new PlayerActionWindow(this, player);
+                var actionOptions = GetOptions(action);
+
+                if (actionOptions.Choice != null)
+                {
+                    ResolveEffect(action, actionOptions);
+                }
+            }
         }
 
         public T GetCardInPlay<T>(Guid cardId)
@@ -392,6 +293,48 @@ namespace LotR.States
             }
 
             return null;
+        }
+
+        public IEnumerable<TCard> GetCardsInPlayWithEffect<TCard, TEffect>()
+            where TCard : class, ICardInPlay
+            where TEffect : class, IEffect
+        {
+            return GetAllCardsInPlay<TCard>().Where(x => x.HasEffect<TEffect>()).ToList();
+        }
+
+        public IEnumerable<T> GetEffects<T>()
+            where T : class, IEffect
+        {
+            return currentEffects.OfType<T>().ToList();
+        }
+
+        public EffectOptions GetOptions(IEffect effect)
+        {
+            IPayment payment = null;
+            IChoice choice = null;
+
+            var cost = effect.GetCost(this);
+            if (cost != null)
+            {
+                payment = controller.GetPayment(effect, cost);
+            }
+
+            choice = effect.GetChoice(this);
+            if (choice != null)
+            {
+                controller.ChoiceOffered(effect, choice);
+            }
+
+            return new EffectOptions(payment, choice);
+        }
+
+        public uint GetPlayerScore()
+        {
+            var victoryPoints = VictoryDisplay.GetTotalVictoryPoints();
+
+            var totalThreat = players.Sum(x => x.CurrentThreat);
+
+            return (uint)((CurrentRound * 10) + totalThreat - victoryPoints);
         }
 
         public override string ToString()

@@ -22,5 +22,7 @@ namespace LotR.States.Phases
         IEnumerable<IEnemyAttack> GetEnemyAttacks();
         IEnumerable<IChooseEnemyToAttack> GetEnemiesChosenToAttack();
         IPlayersDrawingCards GetPlayersDrawingCards();
+
+        void Run();
     }
 }

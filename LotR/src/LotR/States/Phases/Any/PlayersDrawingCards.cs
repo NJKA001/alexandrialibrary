@@ -8,7 +8,7 @@ namespace LotR.States.Phases.Any
     public class PlayersDrawingCards
         : StateBase, IPlayersDrawingCards
     {
-        public PlayersDrawingCards(IGame game, IDictionary<Guid, Tuple<bool, byte>> playerDrawOptions)
+        public PlayersDrawingCards(IGame game, IDictionary<Guid, Tuple<bool, uint>> playerDrawOptions)
             : base(game)
         {
             if (playerDrawOptions == null)
@@ -17,14 +17,14 @@ namespace LotR.States.Phases.Any
             this.playerDrawOptions = playerDrawOptions;
         }
 
-        private readonly IDictionary<Guid, Tuple<bool, byte>> playerDrawOptions;
+        private readonly IDictionary<Guid, Tuple<bool, uint>> playerDrawOptions;
 
         public IEnumerable<Guid> Players
         {
             get { return playerDrawOptions.Keys; }
         }
 
-        public byte GetNumberOfCards(Guid playerId)
+        public uint GetNumberOfCards(Guid playerId)
         {
             return playerDrawOptions.ContainsKey(playerId) ?
                 playerDrawOptions[playerId].Item2
@@ -38,13 +38,13 @@ namespace LotR.States.Phases.Any
                 : false;
         }
 
-        public void SetNumberOfCards(Guid playerId, byte numberOfCards)
+        public void SetNumberOfCards(Guid playerId, uint numberOfCards)
         {
             if (!playerDrawOptions.ContainsKey(playerId))
                 return;
 
             var existing = playerDrawOptions[playerId];
-            playerDrawOptions[playerId] = new Tuple<bool, byte>(existing.Item1, numberOfCards);
+            playerDrawOptions[playerId] = new Tuple<bool, uint>(existing.Item1, numberOfCards);
         }
 
         public void EnabledPlayerCardDraw(Guid playerId)
@@ -53,7 +53,7 @@ namespace LotR.States.Phases.Any
                 return;
 
             var existing = playerDrawOptions[playerId];
-            playerDrawOptions[playerId] = new Tuple<bool, byte>(true, existing.Item2);
+            playerDrawOptions[playerId] = new Tuple<bool, uint>(true, existing.Item2);
         }
 
         public void DisablePlayerCardDraw(Guid playerId)
@@ -62,7 +62,7 @@ namespace LotR.States.Phases.Any
                 return;
 
             var existing = playerDrawOptions[playerId];
-            playerDrawOptions[playerId] = new Tuple<bool, byte>(false, existing.Item2);
+            playerDrawOptions[playerId] = new Tuple<bool, uint>(false, existing.Item2);
         }
     }
 }

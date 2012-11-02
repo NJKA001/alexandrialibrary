@@ -36,6 +36,6 @@ namespace LotR.States.Areas
         void SetQuestCards();
         void SetupScenario();
 
-        IQuestStage GetCurrentQuestStage();
+        IQuestStatus GetCurrentQuestStage();
     }
 }

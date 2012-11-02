@@ -7,7 +7,7 @@ using LotR.Cards.Quests;
 
 namespace LotR.States.Phases.Any
 {
-    public interface IQuestStage
+    public interface IQuestStatus
         : IState
     {
         IQuestInPlay CurrentStage { get; }
@@ -15,6 +15,6 @@ namespace LotR.States.Phases.Any
         IQuestCard PreviousStage { get; }
         IQuestCard NextStage { get; set; }
 
-        bool StageIsDefeated { get; set; }
+        bool IsStageDefeated { get; set; }
     }
 }

@@ -15,10 +15,10 @@ using LotR.States.Areas;
 namespace LotR.Cards.Quests
 {
     public class FliesAndSpiders
-        : QuestCardBase
+        : PassageThroughMirkwoodQuestCardBase
     {
         public FliesAndSpiders()
-            : base("Flies and Spiders", CardSet.Core, 119, ScenarioCode.Passage_Through_Mirkwood, new List<EncounterSet> { EncounterSet.Passage_Through_Mirkwood, EncounterSet.Dol_Guldur_Orcs, EncounterSet.Spiders_of_Mirkwood }, 1, 8, 0)
+            : base("Flies and Spiders", 119, 1, 8)
         {
             FlavorText = "You are traveling through Mirkwood Forest, carrying an urgent message from King Thranduil to the Lady Galadriel of Lorien. As you move along the dark trail, the spiders gather around you...";
             BacksideFlavorText = "The nastiest things they saw were the cobwebs; dark dense cobwebs the treads extraordinarily thick, often stretched from tree to tree, or tangles in the lower branches on either side of them. There were none stretched across the path, but whether because some magic kept it clear, or for what other reason they could not guess.\r\n-The Hobbit";
