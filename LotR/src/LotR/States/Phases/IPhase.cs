@@ -13,7 +13,8 @@ namespace LotR.States.Phases
     {
         PhaseCode Code { get; }
         string Name { get; }
-        PhaseStep Step { get; }
+        PhaseStep StepCode { get; }
+        string StepName { get; }
 
         IEnumerable<IDamageDealt> GetDamageDealt();
         IEnumerable<IEnemyDefeated> GetDefeatedEnemies();

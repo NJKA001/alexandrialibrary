@@ -116,11 +116,19 @@ namespace LotR.States.Phases.Resource
 
         public override void Run()
         {
+            StepCode = PhaseStep.Resource_Add_Resources;
+
             EachPlayerCollectsResources();
-            
+
+            StepCode = PhaseStep.Resource_Draw_Cards;
+
             EachPlayerDrawsCards();
-            
+
+            StepCode = PhaseStep.Resource_Player_Actions_Before_End;
+
             Game.OpenPlayerActionWindow();
+
+            StepCode = PhaseStep.Resource_End;
         }
     }
 }

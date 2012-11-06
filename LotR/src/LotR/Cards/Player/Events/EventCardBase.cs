@@ -12,5 +12,10 @@ namespace LotR.Cards.Player.Events
             : base(CardType.Event, title, cardSet, cardNumber, printedSphere, resourceCost)
         {
         }
+
+        public byte PlayerActionCost
+        {
+            get { return PrintedCost; }
+        }
     }
 }

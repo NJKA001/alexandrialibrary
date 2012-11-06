@@ -12,8 +12,13 @@ namespace LotR.Effects.Choices
         : ChoiceBase, IChoosePlayerAction
     {
         public ChoosePlayerAction(IGame game, IPlayer player)
-            : base(player.Name + " can choose to take an action.\r\nThey may play a card from their hand or trigger an effect on a card in play", game, player)
+            : base(GetDescription(game, player), game, player)
         {
+        }
+
+        private static string GetDescription(IGame game, IPlayer player)
+        {
+            return string.Format("{0} can choose to take an action during the {1} step of the {2} phase. They may play a card from their hand, trigger an effect on a card in play or pass on taking any actions.", player.Name, game.CurrentPhase.StepName, game.CurrentPhase.Name);
         }
 
         public IPlayerCard CardToPlay { get; set; }

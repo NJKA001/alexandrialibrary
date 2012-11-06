@@ -125,98 +125,160 @@ namespace LotR.Console
             return players;
         }
 
-        private static bool TryParseInputAsInt(string input, out int result)
+        //private static bool TryParseInputAsInt(string input, out int result)
+        //{
+        //    return int.TryParse(input, out result);
+        //}
+
+        private static void DisplayList<T>(IEnumerable<T> items, Func<T, string> getDescription)
         {
-            return int.TryParse(input, out result);
+            var seq = 0;
+            foreach (var item in items)
+            {
+                seq++;
+                WriteLine("{0,00}  {1}", seq, getDescription(item));
+            }
+        }
+
+        private static uint PromptForNumber<T>(IEnumerable<T> items)
+        {
+            return PromptForNumber<T>(items, (item) => item.ToString());
+        }
+
+        private static uint PromptForNumber<T>(IEnumerable<T> items, Func<T, string> getDescription)
+        {
+            uint result = 0;
+
+            DisplayList<T>(items, getDescription);
+
+            var total = items.Count();
+
+            while (true)
+            {
+                var line = ReadLine();
+                if (!uint.TryParse(line, out result) || result < 1 || result > total)
+                {
+                    WriteLine("'{0}' is not a valid answer. Please enter a number between '1' and '{1}'", line, total);
+                    continue;
+                }
+
+                break;
+            }
+
+            return result;
+        }
+
+        private static bool PromptForBool(string message)
+        {
+            var result = false;
+
+            while (true)
+            {
+                Write("\r\n{0} (y/n): ", message);
+
+                var input = System.Console.ReadLine() ?? string.Empty;
+
+                if (input == "Y" || input == "y")
+                    input = bool.TrueString;
+
+                if (input == "N" || input == "n")
+                    input = bool.FalseString;
+
+                if (!bool.TryParse(input, out result))
+                {
+                    WriteLine("'{0}' is not a valid answer. Please enter 'y' or 'n'.", input);
+                    continue;
+                }
+
+                break;
+            }
+
+            return result;
         }
 
         private static void ChooseFirstPlayer(IChooseFirstPlayer choice)
         {
             var players = choice.Players.ToList();
-            var number = 0;
-            foreach (var player in players)
-            {
-                number++;
-                WriteLine("{0,00}  {1}", number, player.Name);
-            }
+            var playerNames = players.Select(x => x.Name).ToList();
+            playerNames.Add("Choose First Player Randomly");
 
-            number++;
-            WriteLine("{0,00}  Choose First Player Randomly\r\n", number);
-
-            var answer = 0;
-            var input = System.Console.ReadLine();
-            if (TryParseInputAsInt(input, out answer) && answer > 0 && answer <= number)
+            var result = PromptForNumber(playerNames);
+            if (result < players.Count())
             {
-                if (answer < number)
-                {
-                    choice.FirstPlayer = players[answer - 1];
-                }
-                else
-                {
-                    choice.ChooseRandomFirstPlayer();
-                }
+                choice.FirstPlayer = players[(int)(result - 1)];
             }
             else
             {
-                WriteLine("{0} is not a valid choice, please choose a number between 1 and {1}", input, number);
+                choice.ChooseRandomFirstPlayer();
             }
         }
 
         private static void ChooseToKeepStartingHand(IChooseToKeepStartingHand choice)
         {
-            var inputValid = false;
-
-            while (!inputValid)
+            WriteLine("Starting Hand for Player: {0}\r\n", choice.Players.First().Name);
+            foreach (var card in choice.StartingHand)
             {
-                WriteLine("Starting Hand for Player: {0}\r\n", choice.Players.First().Name);
-                foreach (var card in choice.StartingHand)
-                {
-                    WriteLine("  {0} ({1})", card.Title, card.PrintedCardType);
-                }
-
-                WriteLine("\r\nKeep Starting Hand? (y/n)\r\n");
-                var input = System.Console.ReadLine() ?? string.Empty;
-                
-                var normalized = input.ToLower();
-                if (normalized != "y" && normalized != "n")
-                {
-                    WriteLine("{0} is not a valid answer. Please enter 'y' for yes or 'n' for no.\r\n", input);
-                    continue;
-                }
-
-                inputValid = true;
-                choice.KeepStartingHand = (normalized == "y");
+                WriteLine("  {0} ({1})", card.Title, card.PrintedCardType);
             }
+
+            var keepStartingHand = PromptForBool("Keep Starting Hand?");
+
+            choice.KeepStartingHand = keepStartingHand;
         }
 
         private static void ChoosePlayerAction(IChoosePlayerAction choice)
         {
-            var inputValid = false;
-            var isTakingAction = false;
-
             var player = choice.Players.FirstOrDefault();
 
-            while (!inputValid)
+            var action = PromptForNumber(new List<string> { "Play a card from your hand", "Trigger an effect on a card you control", "Pass on taking actions during this step" });
+
+            switch (action)
             {
-                WriteLine("Would you like to take an action? (y/n)\r\n");
+                case 1:
+                    ChooseCardToPlay(player, choice);
+                    break;
+                case 2:
+                    ChooseCardEffectToTrigger(player, choice);
+                    break;
+                case 3:
+                default:
+                    WriteLine("{0} is passing on taking any actions during this step", player.Name);
+                    break;
+            }
+        }
 
-                var input = System.Console.ReadLine() ?? string.Empty;
-
-                var normalized = input.ToLower();
-                if (normalized != "y" && normalized != "n")
-                {
-                    WriteLine("{0} is not a valid answer. Please enter 'y' for yes or 'n' for no.\r\n", input);
-                    continue;
-                }
-
-                inputValid = true;
-                isTakingAction = (normalized == "y");
+        private static void ChooseCardToPlay(IPlayer player, IChoosePlayerAction choice)
+        {
+            var actionCards = player.Hand.Cards.OfType<IPlayerActionCard>().ToList();
+            if (actionCards.Count == 0)
+            {
+                WriteLine("You have no cards in your hand which can be played during this step");
+                return;
             }
 
-            if (isTakingAction)
+            WriteLine("Choose a card to play from your hand");
+
+            var actionCardNames = actionCards.Select(x => string.Format("{0} ({1})", x.Title, x.PrintedCardType)).ToList();
+            actionCardNames.Add("Pass on playing a card from your hand");
+
+            var actionCardNumber = PromptForNumber(actionCardNames);
+
+            if (actionCardNumber == actionCardNames.Count())
             {
-                WriteLine("{0} is taking an action\r\n", player.Name);
+                WriteLine("Passing on playing an action");
             }
+            else
+            {
+                var chosenCard = actionCards[(int)actionCardNumber - 1];
+                if (chosenCard.PrintedSphere == Sphere.Neutral)
+                    WriteLine("Playing {0} from your hand, with a cost of {1} resources", chosenCard.Title, chosenCard.PlayerActionCost);
+                else
+                    WriteLine("Playing {0} from your hand, with a cost of {1} {2} resources", chosenCard.Title, chosenCard.PlayerActionCost, chosenCard.PrintedSphere);
+            }
+        }
+
+        private static void ChooseCardEffectToTrigger(IPlayer player, IChoosePlayerAction choice)
+        {
         }
 
         private static void HandleChoice(IChoice choice)
@@ -525,6 +587,11 @@ namespace LotR.Console
                 return "Treasure";
             else
                 return "Unknown";
+        }
+
+        private static string ReadLine()
+        {
+            return System.Console.ReadLine() ?? string.Empty;
         }
 
         private static void Write(string line)

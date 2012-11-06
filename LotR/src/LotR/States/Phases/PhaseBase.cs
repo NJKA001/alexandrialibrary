@@ -12,30 +12,48 @@ namespace LotR.States.Phases
     public abstract class PhaseBase
         : StateBase, IPhase
     {
-        protected PhaseBase(IGame game, PhaseCode code, PhaseStep step)
+        protected PhaseBase(IGame game, PhaseCode code, PhaseStep stepCode)
             : base(game)
         {
-            this.Code = code;
-            this.Step = step;
+            this.code = code;
+            this.stepCode = stepCode;
         }
 
+        private readonly PhaseCode code;
+        private PhaseStep stepCode;
         private readonly IList<IEnemyAttack> enemyAttacks = new List<IEnemyAttack>();
 
         public PhaseCode Code
         {
-            get;
-            private set;
+            get { return code; }
         }
 
         public string Name
         {
-            get { return Code.ToString(); }
+            get { return code.ToString(); }
         }
 
-        public PhaseStep Step
+        public PhaseStep StepCode
         {
-            get;
-            private set;
+            get { return stepCode; }
+            protected set
+            {
+                if (stepCode == value)
+                    return;
+
+                stepCode = value;
+                OnPropertyChanged("StepCode");
+                OnPropertyChanged("StepName");
+            }
+        }
+
+        public string StepName
+        {
+            get
+            {
+                var prefix = string.Format("{0}_", code);
+                return stepCode.ToString().Replace(prefix, string.Empty).Replace('_', ' ');
+            }
         }
 
         public IEnumerable<IDamageDealt> GetDamageDealt()

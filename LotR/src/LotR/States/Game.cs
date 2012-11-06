@@ -342,7 +342,7 @@ namespace LotR.States
             var sb = new StringBuilder();
 
             sb.AppendFormat("\r\nCurrent Phase: {0}\r\n", CurrentPhase.Code);
-            sb.AppendFormat("Current Step: {0}\r\n", CurrentPhase.Step);
+            sb.AppendFormat("Current Step: {0}\r\n", CurrentPhase.StepCode);
             sb.AppendFormat("First Player: {0}\r\n", FirstPlayer.Name);
 
             if (currentEffects.Count > 0)
