@@ -25,7 +25,7 @@ namespace LotR.Cards.Encounter.Locations
         }
 
         private class ResponseAfterTravelingHereFirstPlayMayReadyOne
-            : ResponseEffectBase, IAfterTraveling
+            : ResponseCardEffectBase, IAfterTraveling
         {
             public ResponseAfterTravelingHereFirstPlayMayReadyOne(OldForestRoad source)
                 : base("After you travel to Old Forest Road, the first player may choose and ready 1 character he controls.", source)

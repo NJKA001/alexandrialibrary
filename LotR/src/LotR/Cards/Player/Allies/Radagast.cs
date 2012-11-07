@@ -50,7 +50,11 @@ namespace LotR.Cards.Player.Allies
 
             public override IChoice GetChoice(IGame game)
             {
-                return new ChooseCharacterWithTrait(Source, CardSource.Owner, Trait.Creature);
+                var controller = game.GetController(CardSource.Id);
+                if (controller == null)
+                    return null;
+
+                return new ChooseCharacterWithTrait(Source, controller, Trait.Creature);
             }
 
             public override ICost GetCost(IGame game)

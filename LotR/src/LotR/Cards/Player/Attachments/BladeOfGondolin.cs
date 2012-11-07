@@ -42,7 +42,7 @@ namespace LotR.Cards.Player.Attachments
         }
 
         public class AddOneAttackWhenAttackingAnOrc
-            : PassiveEffectBase, IDuringDetermineAttack
+            : PassiveCardEffectBase, IDuringDetermineAttack
         {
             public AddOneAttackWhenAttackingAnOrc(BladeOfGondolin source)
                 : base("Attached hero gets +1 Attack when attacking an Orc.", source)
@@ -63,7 +63,7 @@ namespace LotR.Cards.Player.Attachments
         }
 
         public class AddOneProgressTokenAfterDefeatingAnEnemy
-            : ResponseEffectBase, IAfterEnemyDefeated
+            : ResponseCardEffectBase, IAfterEnemyDefeated
         {
             public AddOneProgressTokenAfterDefeatingAnEnemy(BladeOfGondolin source)
                 : base("After attached hero attacks and destroys an enemy, place 1 progress token on the current quest", source)

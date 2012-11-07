@@ -49,7 +49,7 @@ namespace LotR.Cards.Player.Heroes
                 if (determineStrength == null)
                     return;
 
-                var damagable = CardSource.Owner.CardsInPlay.OfType<IHeroInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
+                var damagable = game.GetCardInPlay<IHeroInPlay>(CardSource.Id);
                 if (damagable == null)
                     return;
 

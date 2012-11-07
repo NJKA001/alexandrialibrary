@@ -34,12 +34,20 @@ namespace LotR.Cards.Player.Heroes
 
             public override IChoice GetChoice(IGame game)
             {
-                return new ChoosePlayer(Source, CardSource.Owner);
+                var controller = game.GetController(CardSource.Id);
+                if (controller == null)
+                    return null;
+
+                return new ChoosePlayer(Source, controller);
             }
 
             public override ICost GetCost(IGame game)
             {
-                var exhaustable = CardSource.Owner.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
+                var controller = game.GetController(CardSource.Id);
+                if (controller == null)
+                    return null;
+
+                var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
                 if (exhaustable == null)
                     return null;
 

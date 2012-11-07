@@ -8,7 +8,7 @@ using LotR.Cards.Player;
 namespace LotR.Cards.Player.Events
 {
     public interface IEventCard
-        : IPlayerActionCard, ICostlyCard
+        : ICostlyCard
     {
     }
 }

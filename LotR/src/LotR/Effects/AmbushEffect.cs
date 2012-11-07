@@ -10,8 +10,8 @@ namespace LotR.Effects
     public class AmbushEffect
         : CardEffectBase, IAmbushEffect
     {
-        public AmbushEffect(ISource source)
-            : base("Ambush", source)
+        public AmbushEffect(ICard cardSource)
+            : base("Ambush", cardSource)
         {
         }
 

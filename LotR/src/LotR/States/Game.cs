@@ -270,6 +270,17 @@ namespace LotR.States
             }
         }
 
+        public IPlayer GetController(Guid cardId)
+        {
+            foreach (var player in players)
+            {
+                if (player.CardsInPlay.Any(x => x.BaseCard.Id == cardId))
+                    return player;
+            }
+
+            return null;
+        }
+
         public T GetCardInPlay<T>(Guid cardId)
             where T : class, ICardInPlay
         {

@@ -13,7 +13,6 @@ namespace LotR.Effects.Modifiers
         : IEffect
     {
         PhaseCode StartPhase { get; }
-        ISource Source { get; }
         ICardInPlay Target { get; }
         TimeScope Duration { get; }
         int Value { get; }

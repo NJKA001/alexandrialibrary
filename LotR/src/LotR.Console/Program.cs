@@ -247,9 +247,62 @@ namespace LotR.Console
             }
         }
 
+        private static void ChooseEffectOnCardToPlay(IPlayer player, IChoosePlayerAction choice, IPlayerCard card)
+        {
+            if (card.PrintedCardType == CardType.Event)
+            {
+                var eventCard = card as IEventCard;
+
+                if (card.PrintedSphere == Sphere.Neutral)
+                {
+                    switch (eventCard.PrintedCost)
+                    {
+                        case 0:
+                            WriteLine("Playing {0} from your hand, with no cost of resources", card.Title);
+                            break;
+                        case 1:
+                            WriteLine("Playing {0} from your hand, with a cost of 1 resource", card.Title);
+                            break;
+                        default:
+                            WriteLine("Playing {0} from your hand, with a cost of {1} resources", card.Title, eventCard.PrintedCost);
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (eventCard.PrintedCost)
+                    {
+                        case 0:
+                            WriteLine("Playing {0} from your hand, with no cost of {1} resources", card.Title, card.PrintedSphere);
+                            break;
+                        case 1:
+                            WriteLine("Playing {0} from your hand, with a cost of 1 {1} resource", card.Title, card.PrintedSphere);
+                            break;
+                        default:
+                            WriteLine("Playing {0} from your hand, with a cost of {1} {2} resources", card.Title, eventCard.PrintedCost, card.PrintedSphere);
+                            break;
+                    }
+                }
+            }
+
+            /*
+
+            */
+        }
+
         private static void ChooseCardToPlay(IPlayer player, IChoosePlayerAction choice)
         {
-            var actionCards = player.Hand.Cards.OfType<IPlayerActionCard>().ToList();
+            var actionCards = new List<IPlayerCard>();
+
+            foreach (var card in player.Hand.Cards.Where(x => x.HasEffect<IPlayerActionEffect>()))
+            {
+                foreach (var effect in card.Text.Effects.OfType<IPlayerActionEffect>())
+                {
+                    if (effect.CanBePlayed(game))
+                        actionCards.Add(card);
+                }
+            }
+
             if (actionCards.Count == 0)
             {
                 WriteLine("You have no cards in your hand which can be played during this step");
@@ -269,11 +322,8 @@ namespace LotR.Console
             }
             else
             {
-                var chosenCard = actionCards[(int)actionCardNumber - 1];
-                if (chosenCard.PrintedSphere == Sphere.Neutral)
-                    WriteLine("Playing {0} from your hand, with a cost of {1} resources", chosenCard.Title, chosenCard.PlayerActionCost);
-                else
-                    WriteLine("Playing {0} from your hand, with a cost of {1} {2} resources", chosenCard.Title, chosenCard.PlayerActionCost, chosenCard.PrintedSphere);
+                var card = actionCards[(int)actionCardNumber - 1];
+                ChooseEffectOnCardToPlay(player, choice, card);
             }
         }
 

@@ -39,7 +39,7 @@ namespace LotR.Cards.Player.Attachments
         }
 
         public class AddGondorTrait
-            : PassiveEffectBase, IDuringCheckForTrait
+            : PassiveCardEffectBase, IDuringCheckForTrait
         {
             public AddGondorTrait(StewardOfGondor source)
                 : base("Attached hero gains the Gondor trait.", source)
@@ -63,7 +63,7 @@ namespace LotR.Cards.Player.Attachments
         }
 
         public class ExhaustToAddTwoResources
-            : ActionEffectBase
+            : ActionCardEffectBase
         {
             public ExhaustToAddTwoResources(StewardOfGondor source)
                 : base("Exhaust Steward of Gondor to add 2 resources to attched hero's resource pool.", source)

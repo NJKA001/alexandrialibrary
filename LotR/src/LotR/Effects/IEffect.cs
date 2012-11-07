@@ -15,6 +15,7 @@ namespace LotR.Effects
     {
         Guid EffectId { get; }
         string Description { get; }
+        ISource Source { get; }
 
         IChoice GetChoice(IGame game);
         ICost GetCost(IGame game);

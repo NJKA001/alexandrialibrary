@@ -20,7 +20,7 @@ namespace LotR.Cards.Player.Events
         }
 
         public class ReadyOneAlly
-            : ActionEffectBase
+            : ActionCardEffectBase
         {
             public ReadyOneAlly(EverVigilant source)
                 : base("Choose and ready 1 ally card.", source)

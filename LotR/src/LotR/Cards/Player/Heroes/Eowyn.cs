@@ -46,7 +46,11 @@ namespace LotR.Cards.Player.Heroes
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
             {
-                var willpowerful = CardSource.Owner.CardsInPlay.OfType<IWillpowerfulInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
+                var controller = game.GetController(CardSource.Id);
+                if (controller == null)
+                    return;
+
+                var willpowerful = controller.CardsInPlay.OfType<IWillpowerfulInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
                 if (willpowerful == null)
                     return;
 

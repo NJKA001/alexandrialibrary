@@ -35,7 +35,8 @@ namespace LotR.States
 
         void Setup(IEnumerable<IPlayer> players, ScenarioCode scenarioCode);
         void OpenPlayerActionWindow();
-        
+
+        IPlayer GetController(Guid cardId);
         T GetCardInPlay<T>(Guid cardId) where T : class, ICardInPlay;
         IEnumerable<TCard> GetCardsInPlayWithEffect<TCard, TEffect>()
             where TCard : class, ICardInPlay

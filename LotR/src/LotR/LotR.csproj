@@ -74,7 +74,6 @@
     <Compile Include="Cards\Encounter\Treacheries\TreacheryCardBase.cs" />
     <Compile Include="Cards\IAttachmentHostCard.cs" />
     <Compile Include="Cards\ICanHaveAttachments.cs" />
-    <Compile Include="Cards\Player\IPlayerActionCard.cs" />
     <Compile Include="Cards\Quests\IQuestLoader.cs" />
     <Compile Include="Cards\Player\Allies\Radagast.cs" />
     <Compile Include="Cards\Player\Attachments\HeroAttachmentCardBase.cs" />
@@ -86,12 +85,14 @@
     <Compile Include="Cards\Quests\BeornsPath.cs" />
     <Compile Include="Cards\Quests\DontLeaveThePath.cs" />
     <Compile Include="Cards\ScenarioCode.cs" />
+    <Compile Include="Effects\Choices\ChooseCardInHand.cs" />
     <Compile Include="Effects\Choices\ChooseCharacterWithTrait.cs" />
     <Compile Include="Effects\Choices\ChooseFirstPlayer.cs" />
     <Compile Include="Effects\Choices\ChooseHero.cs" />
     <Compile Include="Effects\Choices\ChoosePlayerAction.cs" />
     <Compile Include="Effects\Choices\ChoosePlayerToChooseHero.cs" />
     <Compile Include="Effects\Choices\ChooseToKeepStartingHand.cs" />
+    <Compile Include="Effects\Choices\IChooseCardInHand.cs" />
     <Compile Include="Effects\Choices\IChooseFirstPlayer.cs" />
     <Compile Include="Effects\Choices\IChoosePlayerAction.cs" />
     <Compile Include="Effects\Choices\IChooseToKeepStartingHand.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Effects\ForcedCardEffectBase.cs" />
     <Compile Include="Effects\FrameworkEffectBase.cs" />
     <Compile Include="Effects\IFrameworkEffect.cs" />
+    <Compile Include="Effects\IPlayerActionEffect.cs" />
     <Compile Include="Effects\ITravelEffect.cs" />
     <Compile Include="Effects\IWhenRevealedEffect.cs" />
     <Compile Include="Effects\Modifiers\IThreatModifier.cs" />
@@ -224,13 +226,12 @@
     <Compile Include="Effects\Costs\PayResources.cs" />
     <Compile Include="Effects\Costs\PayResourcesFrom.cs" />
     <Compile Include="States\Deck.cs" />
-    <Compile Include="Effects\ActionEffectBase.cs" />
+    <Compile Include="Effects\ActionCardEffectBase.cs" />
     <Compile Include="Effects\CardEffectBase.cs" />
     <Compile Include="Effects\AmbushEffect.cs" />
     <Compile Include="Effects\ActionCharacterAbilityBase.cs" />
     <Compile Include="Effects\DoomedEffect.cs" />
     <Compile Include="Effects\EffectBase.cs" />
-    <Compile Include="Effects\ExecutableEffectBase.cs" />
     <Compile Include="Effects\IAddResources.cs" />
     <Compile Include="Cards\Encounter\EncounterCardBase.cs" />
     <Compile Include="Cards\Player\Events\ALightInTheDark.cs" />
@@ -353,8 +354,7 @@
     <Compile Include="Effects\Modifiers\ModifierBase.cs" />
     <Compile Include="Effects\Modifiers\WillpowerModifier.cs" />
     <Compile Include="Effects\PassiveEffectBase.cs" />
-    <Compile Include="Effects\ResponseEffectBase.cs" />
-    <Compile Include="Effects\ReversableEffectBase.cs" />
+    <Compile Include="Effects\ResponseCardEffectBase.cs" />
     <Compile Include="Effects\IAmbushEffect.cs" />
     <Compile Include="Cards\Player\Events\EventCardBase.cs" />
     <Compile Include="Cards\Player\Events\EverVigilant.cs" />
@@ -536,9 +536,6 @@
     <Compile Include="States\ThreateningInPlay.cs" />
     <Compile Include="States\TreasureInPlay.cs" />
     <Compile Include="States\UnclaimedObjectiveInPlay.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferences Include="Web References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

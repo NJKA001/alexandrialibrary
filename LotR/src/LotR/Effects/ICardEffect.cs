@@ -10,6 +10,6 @@ namespace LotR.Effects
     public interface ICardEffect
         : IEffect
     {
-        ISource Source { get; }
+        ICard CardSource { get; }
     }
 }

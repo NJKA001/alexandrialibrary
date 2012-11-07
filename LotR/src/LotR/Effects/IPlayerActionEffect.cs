@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Cards.Player;
+using LotR.States;
 
 namespace LotR.Effects
 {
-    public interface IPlayerCardEffect
-        : ICardEffect
+    public interface IPlayerActionEffect
+        : IActiveEffect
     {
+        bool CanBePlayed(IGame game);
     }
 }

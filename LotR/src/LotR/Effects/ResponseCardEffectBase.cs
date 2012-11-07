@@ -7,11 +7,11 @@ using LotR.Cards;
 
 namespace LotR.Effects
 {
-    public abstract class ResponseEffectBase
+    public abstract class ResponseCardEffectBase
         : CardEffectBase, IResponseEffect
     {
-        protected ResponseEffectBase(string description, ISource source)
-            : base(description, source)
+        protected ResponseCardEffectBase(string description, ICard cardSource)
+            : base(description, cardSource)
         {
         }
 

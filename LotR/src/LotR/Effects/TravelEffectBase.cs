@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards;
 using LotR.Effects.Choices;
 using LotR.Effects.Payments;
 using LotR.States;
@@ -13,8 +14,8 @@ namespace LotR.Effects
     public abstract class TravelEffectBase
         : PassiveCardEffectBase, ITravelEffect
     {
-        protected TravelEffectBase(string description, ISource source)
-            : base(description, source)
+        protected TravelEffectBase(string description, ICard cardSource)
+            : base(description, cardSource)
         {
         }
 

@@ -14,10 +14,11 @@ namespace LotR.Effects
     public abstract class EffectBase
         : IEffect
     {
-        protected EffectBase(string description)
+        protected EffectBase(string description, ISource source)
         {
             EffectId = Guid.NewGuid();
             Description = description;
+            Source = source;
         }
 
         public Guid EffectId
@@ -27,6 +28,12 @@ namespace LotR.Effects
         }
 
         public string Description
+        {
+            get;
+            private set;
+        }
+
+        public ISource Source
         {
             get;
             private set;

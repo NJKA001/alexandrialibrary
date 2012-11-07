@@ -20,7 +20,7 @@ namespace LotR.States
         Quest_Start = 301,
         Quest_Player_Actions_Before_Commit_Characters = 309,
         Quest_Commit_Characters = 310,
-        Quest_Player_Actions_BeforeStaging = 319,
+        Quest_Player_Actions_Before_Staging = 319,
         Quest_Staging = 320,
         Quest_Player_Actions_Before_Quest_Resolution = 329,
         Quest_Quest_Resolution = 330,

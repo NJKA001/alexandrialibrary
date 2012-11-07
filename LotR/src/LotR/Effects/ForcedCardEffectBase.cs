@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards;
+
 namespace LotR.Effects
 {
     public abstract class ForcedCardEffectBase
         : PassiveCardEffectBase, IForcedEffect
     {
-        protected ForcedCardEffectBase(string description, ISource source)
-            : base(description, source)
+        protected ForcedCardEffectBase(string description, ICard cardSource)
+            : base(description, cardSource)
         {
         }
 

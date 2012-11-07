@@ -24,7 +24,7 @@ namespace LotR.Cards.Encounter.Locations
         }
 
         private class ResponseAfterTravelingHereFirstPlayerDrawsTwoCards
-            : ResponseEffectBase, IAfterTraveling
+            : ResponseCardEffectBase, IAfterTraveling
         {
             public ResponseAfterTravelingHereFirstPlayerDrawsTwoCards(ForestGate source)
                 : base("After you travel to Forest Gate, the first player may draw 2 cards.", source)

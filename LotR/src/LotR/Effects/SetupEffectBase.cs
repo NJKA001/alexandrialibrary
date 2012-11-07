@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards;
 using LotR.States;
 
 namespace LotR.Effects
@@ -10,8 +11,8 @@ namespace LotR.Effects
     public abstract class SetupEffectBase
         : PassiveCardEffectBase, ISetupEffect
     {
-        protected SetupEffectBase(string description, ISource source)
-            : base(description, source)
+        protected SetupEffectBase(string description, ICard cardSource)
+            : base(description, cardSource)
         {
         }
 
