@@ -20,7 +20,6 @@ Citadel Plate  3
 Dwarven Axe  3
 Horn of Gondor  3
 
-
 Events 15: 
 Blade Mastery  3
 Feint  3

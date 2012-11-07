@@ -28,37 +28,6 @@ namespace LotR.Cards.Player.Events
             {
             }
 
-            public bool CanBePlayed(IGame game)
-            {
-                switch (game.CurrentPhase.StepCode)
-                {
-                    case PhaseStep.Combat_Player_Actions_Before_Chosing_An_Attacking_Enemy:
-                    case PhaseStep.Combat_Player_Actions_Before_Declaring_Defenders:
-                    case PhaseStep.Combat_Player_Actions_Before_Declaring_Target_Enemy:
-                    case PhaseStep.Combat_Player_Actions_Before_Determine_Enemy_Combat_Damage:
-                    case PhaseStep.Combat_Player_Actions_Before_Determining_Character_Attack_Strength:
-                    case PhaseStep.Combat_Player_Actions_Before_Determining_Character_Combat_Damage:
-                    case PhaseStep.Combat_Player_Actions_Before_End:
-                    case PhaseStep.Combat_Player_Actions_Before_Resolve_Shadow_Effects:
-                    case PhaseStep.Encounter_Player_Actions_Before_End:
-                    case PhaseStep.Encounter_Player_Actions_Before_Engagement_Checks:
-                    case PhaseStep.Encounter_Player_Actions_Before_Optional_Engagement:
-                    case PhaseStep.Planning_Play_Allies_and_Attachments:
-                    case PhaseStep.Planning_Player_Actions_Before_End:
-                    case PhaseStep.Quest_Player_Actions_Before_Commit_Characters:
-                    case PhaseStep.Quest_Player_Actions_Before_End:
-                    case PhaseStep.Quest_Player_Actions_Before_Quest_Resolution:
-                    case PhaseStep.Quest_Player_Actions_Before_Staging:
-                    case PhaseStep.Refresh_Player_Actions_Before_End:
-                    case PhaseStep.Resource_Player_Actions_Before_End:
-                    case PhaseStep.Travel_Player_Actions_Before_End:
-                    case PhaseStep.Travel_Player_Actions_Before_Traveling:
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-
             public override IChoice GetChoice(IGame game)
             {
                 var controller = game.GetController(CardSource.Id);
@@ -86,12 +55,17 @@ namespace LotR.Cards.Player.Events
         }
 
         private class AtEndOfPhaseReturnAllyToYourHand
-            : PassiveCardEffectBase
+            : PassiveCardEffectBase, IUntilEndOfPhase
         {
             public AtEndOfPhaseReturnAllyToYourHand(ICard cardSource, Guid allyId)
                 : base("At the end of the phase, if that ally is still in play, return it to your hand.", cardSource)
             {
                 this.allyId = allyId;
+            }
+
+            public override bool CanBeTriggered(IGame game)
+            {
+                return true;
             }
 
             private readonly Guid allyId;

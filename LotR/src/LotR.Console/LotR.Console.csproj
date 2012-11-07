@@ -80,7 +80,7 @@
     <Resource Include="Images\icon_willpower.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Content Include="LeadershipTactics.txt">
+    <Content Include="SpiritLeadership.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="TheThreeHunters.txt">

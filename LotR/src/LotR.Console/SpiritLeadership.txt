@@ -1,0 +1,27 @@
+﻿Deck: Spirit Leadership Deck
+Heroes 3: Eleanor, Eowyn, Theodred
+Cards 50:
+
+Allies 20:
+Wandering Took  3
+Northern Tracker  3
+Son of Arnor  2
+Snowborn Scout  3
+Gandalf (Core)  3
+Lorien Guide  3
+Guard of the Citadel  3
+
+Attachments 9: 
+The Favor of the Lady  3
+Steward of Gondor  3
+Unexpected Courage  3
+
+Events 21: 
+The Galadhrim's Greeting  3
+Hasty Stroke  3
+Sneak Attack  3
+A Test of Will  3
+Campfire Tales  3
+Sneak Attack  3
+Stand and Fight  2
+Dwarven Tomb  1

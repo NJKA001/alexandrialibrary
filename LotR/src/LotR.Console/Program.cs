@@ -52,7 +52,7 @@ namespace LotR.Console
                 WriteLine();
 
                 var player1 = new PlayerInfo("Dan", "TheThreeHunters.txt");
-                var player2 = new PlayerInfo("Irma", "LeadershipTactics.txt");
+                var player2 = new PlayerInfo("Irma", "SpiritLeadership.txt");
                 var playersInfo = new List<PlayerInfo> { player1, player2 };
 
                 controller = GetController();
@@ -66,25 +66,17 @@ namespace LotR.Console
                 
                 WriteLine("\r\nGame Is Ready\r\n");
 
-                var line = string.Empty;
-                var cmd = string.Empty;
-                string[] options = null;
-                while (line != command_exit)
-                {
-                    Write("\r\nready>");
+                //var line = string.Empty;
+                //while (line != command_exit)
+                //{
+                //    Write("\r\nready>");
 
-                    line = System.Console.ReadLine();
-                    if (string.IsNullOrEmpty(line))
-                        continue;
-                    
-                    options = line.Split(' ');
-                    if (options == null || options.Length == 0)
-                        continue;
-                    
-                    cmd = options[0];
+                //    line = System.Console.ReadLine();
+                //    if (string.IsNullOrEmpty(line))
+                //        continue;
 
-                    HandleCommand(game, cmd, options);
-                }
+                //    CheckForCommand(line);
+                //}
             }
             catch (Exception ex)
             {
@@ -107,6 +99,67 @@ namespace LotR.Console
             return controller;
         }
 
+        private static bool CheckForCommand(string line)
+        {
+            var cmd = string.Empty;
+            string[] options = null;
+
+            options = line.Split(' ');
+            if (options == null || options.Length == 0)
+                return false;
+
+            cmd = options[0];
+
+            return HandleCommand(game, cmd, options);
+        }
+
+        private static bool HandleCommand(IGame game, string command, string[] options)
+        {
+            switch (command)
+            {
+                case command_exit:
+                    return true;
+                case command_game:
+                    DisplayGame(game, options);
+                    return true;
+                case command_help:
+                    WriteLine("exit     exit from simulator");
+                    WriteLine("help     display a list of valid commands");
+                    WriteLine("player1  display player #1 information");
+                    WriteLine("player2  display player #2 information");
+                    WriteLine("player3  display player #3 information");
+                    WriteLine("player4  display player #4 information");
+                    WriteLine("quest    display quest information");
+                    WriteLine("staging  display staging area information");
+                    WriteLine("victory  display victory display area information");
+                    return true;
+                case command_player1:
+                    DisplayPlayerInfo(game, 1, options);
+                    return true;
+                case command_player2:
+                    DisplayPlayerInfo(game, 2, options);
+                    return true;
+                case command_player3:
+                    DisplayPlayerInfo(game, 3, options);
+                    return true;
+                case command_player4:
+                    DisplayPlayerInfo(game, 4, options);
+                    return true;
+                case command_quest:
+                    WriteLine(game.QuestArea.ToString());
+                    return true;
+                case command_staging:
+                    WriteLine(game.StagingArea.ToString());
+                    return true;
+                case command_victory:
+                    WriteLine(game.VictoryDisplay.ToString());
+                    return true;
+                default:
+                    //WriteLine("unrecognized command: {0}\r\nenter 'help' for a list of a valid commands", command);
+                    return false;
+            }
+        }
+
         private static IEnumerable<IPlayer> GetPlayers(IGame game, IEnumerable<PlayerInfo> playersInfo)
         {
             var players = new List<IPlayer>();
@@ -124,11 +177,6 @@ namespace LotR.Console
 
             return players;
         }
-
-        //private static bool TryParseInputAsInt(string input, out int result)
-        //{
-        //    return int.TryParse(input, out result);
-        //}
 
         private static void DisplayList<T>(IEnumerable<T> items, Func<T, string> getDescription)
         {
@@ -153,12 +201,21 @@ namespace LotR.Console
 
             var total = items.Count();
 
+            var line = string.Empty;
+
+            var isCommand = true;
+            while (isCommand)
+            {
+                line = ReadLine();
+                isCommand = CheckForCommand(line);
+            }
+
             while (true)
             {
-                var line = ReadLine();
                 if (!uint.TryParse(line, out result) || result < 1 || result > total)
                 {
                     WriteLine("'{0}' is not a valid answer. Please enter a number between '1' and '{1}'", line, total);
+                    line = ReadLine();
                     continue;
                 }
 
@@ -172,21 +229,29 @@ namespace LotR.Console
         {
             var result = false;
 
+            Write("\r\n{0} (y/n): ", message);
+
+            var line = string.Empty;
+
+            var isCommand = true;
+            while (isCommand)
+            {
+                line = ReadLine();
+                isCommand = CheckForCommand(line);
+            }
+
             while (true)
             {
-                Write("\r\n{0} (y/n): ", message);
+                if (line == "Y" || line == "y")
+                    line = bool.TrueString;
 
-                var input = System.Console.ReadLine() ?? string.Empty;
+                if (line == "N" || line == "n")
+                    line = bool.FalseString;
 
-                if (input == "Y" || input == "y")
-                    input = bool.TrueString;
-
-                if (input == "N" || input == "n")
-                    input = bool.FalseString;
-
-                if (!bool.TryParse(input, out result))
+                if (!bool.TryParse(line, out result))
                 {
-                    WriteLine("'{0}' is not a valid answer. Please enter 'y' or 'n'.", input);
+                    WriteLine("'{0}' is not a valid answer. Please enter 'y' or 'n'.", line);
+                    line = ReadLine();
                     continue;
                 }
 
@@ -298,7 +363,7 @@ namespace LotR.Console
             {
                 foreach (var effect in card.Text.Effects.OfType<IPlayerActionEffect>())
                 {
-                    if (effect.CanBePlayed(game))
+                    if (effect.CanBeTriggered(game))
                         actionCards.Add(card);
                 }
             }
@@ -457,53 +522,6 @@ namespace LotR.Console
         private static void DisplayGame(IGame game, string[] options)
         {
             WriteLine(game.ToString());
-        }
-
-        private static void HandleCommand(IGame game, string command, string[] options)
-        {
-            switch (command)
-            {
-                case command_exit:
-                    break;
-                case command_game:
-                    DisplayGame(game, options);
-                    break;
-                case command_help:
-                    WriteLine("exit     exit from simulator");
-                    WriteLine("help     display a list of valid commands");
-                    WriteLine("player1  display player #1 information");
-                    WriteLine("player2  display player #2 information");
-                    WriteLine("player3  display player #3 information");
-                    WriteLine("player4  display player #4 information");
-                    WriteLine("quest    display quest information");
-                    WriteLine("staging  display staging area information");
-                    WriteLine("victory  display victory display area information");
-                    break;
-                case command_player1:
-                    DisplayPlayerInfo(game, 1, options);
-                    break;
-                case command_player2:
-                    DisplayPlayerInfo(game, 2, options);
-                    break;
-                case command_player3:
-                    DisplayPlayerInfo(game, 3, options);
-                    break;
-                case command_player4:
-                    DisplayPlayerInfo(game, 4, options);
-                    break;
-                case command_quest:
-                    WriteLine(game.QuestArea.ToString());
-                    break;
-                case command_staging:
-                    WriteLine(game.StagingArea.ToString());
-                    break;
-                case command_victory:
-                    WriteLine(game.VictoryDisplay.ToString());
-                    break;
-                default:
-                    WriteLine("unrecognized command: {0}\r\nenter 'help' for a list of a valid commands", command);
-                    break;
-            }
         }
 
         private static void DisplayQuests(IDeck<IQuestCard> questDeck)

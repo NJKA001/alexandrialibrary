@@ -74,6 +74,7 @@
     <Compile Include="Cards\Encounter\Treacheries\TreacheryCardBase.cs" />
     <Compile Include="Cards\IAttachmentHostCard.cs" />
     <Compile Include="Cards\ICanHaveAttachments.cs" />
+    <Compile Include="Cards\Player\Allies\Bofur_Dw.cs" />
     <Compile Include="Cards\Quests\IQuestLoader.cs" />
     <Compile Include="Cards\Player\Allies\Radagast.cs" />
     <Compile Include="Cards\Player\Attachments\HeroAttachmentCardBase.cs" />
@@ -106,9 +107,13 @@
     <Compile Include="Effects\EffectOptions.cs" />
     <Compile Include="Effects\ForcedCardEffectBase.cs" />
     <Compile Include="Effects\FrameworkEffectBase.cs" />
+    <Compile Include="Effects\ICombatActionCardEffect.cs" />
     <Compile Include="Effects\IFrameworkEffect.cs" />
     <Compile Include="Effects\IPlayerActionEffect.cs" />
+    <Compile Include="Effects\IQuestActionCardEffect.cs" />
     <Compile Include="Effects\ITravelEffect.cs" />
+    <Compile Include="Effects\IUntilEndOfPhase.cs" />
+    <Compile Include="Effects\IUntilEndOfRound.cs" />
     <Compile Include="Effects\IWhenRevealedEffect.cs" />
     <Compile Include="Effects\Modifiers\IThreatModifier.cs" />
     <Compile Include="Effects\Modifiers\ThreatModifier.cs" />
@@ -136,6 +141,7 @@
     <Compile Include="Effects\Phases\Setup\SetQuestCards.cs" />
     <Compile Include="Effects\Phases\StartOfPhase.cs" />
     <Compile Include="Effects\Phases\StartOfRound.cs" />
+    <Compile Include="Effects\QuestActionCardEffectBase.cs" />
     <Compile Include="Effects\SetupEffectBase.cs" />
     <Compile Include="Effects\ShadowEffectBase.cs" />
     <Compile Include="Effects\TravelEffectBase.cs" />
@@ -329,6 +335,7 @@
     <Compile Include="States\Phases\PhaseBase.cs" />
     <Compile Include="States\Phases\Planning\IPlanningPhase.cs" />
     <Compile Include="States\Phases\Planning\PlanningPhase.cs" />
+    <Compile Include="States\Phases\Quest\IQuestOutcome.cs" />
     <Compile Include="States\Phases\Quest\IQuestPhase.cs" />
     <Compile Include="States\Phases\Quest\QuestPhase.cs" />
     <Compile Include="States\Phases\Refresh\CardReadying.cs" />

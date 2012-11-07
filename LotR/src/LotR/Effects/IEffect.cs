@@ -21,6 +21,7 @@ namespace LotR.Effects
         ICost GetCost(IGame game);
         ILimit GetLimit(IGame game);
 
+        bool CanBeTriggered(IGame game);
         bool PaymentAccepted(IGame game, IPayment payment, IChoice choice);
         void Resolve(IGame game, IPayment payment, IChoice choice);
         string GetResolutionDescription(IGame game, IPayment payment, IChoice choice);
