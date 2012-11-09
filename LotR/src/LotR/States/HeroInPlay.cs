@@ -6,6 +6,7 @@ using System.Text;
 using LotR.Cards;
 using LotR.Cards.Player;
 using LotR.Cards.Player.Heroes;
+using LotR.Effects.Costs;
 using LotR.Effects.Phases.Any;
 using LotR.States.Phases.Any;
 
@@ -24,12 +25,20 @@ namespace LotR.States
             get { return Card as IHeroCard; }
         }
 
-        public override bool CanPayFor(ICostlyCard costlyCard)
+        public override bool CanPayFor(ICard card, ICost cost)
         {
-            if (costlyCard == null)
-                throw new ArgumentNullException("costlyCard");
+            if (card == null)
+                throw new ArgumentNullException("card");
+            if (cost == null)
+                throw new ArgumentNullException("cost");
 
-            return (costlyCard.PrintedSphere == Sphere.Neutral || costlyCard.PrintedSphere == Card.PrintedSphere);
+            var payResources = cost as IPayResources;
+            if (payResources != null)
+            {
+                return (payResources.Sphere == Sphere.Neutral || payResources.Sphere == Card.PrintedSphere);
+            }
+
+            return false;
         }
 
         public bool HasResourceIcon(Sphere sphere)

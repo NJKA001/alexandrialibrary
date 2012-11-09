@@ -3,22 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Cards.Player;
+using LotR.Cards;
+using LotR.Effects.Costs;
 
 namespace LotR.States.Phases.Any
 {
     public class CheckForResourceMatch
         : StateBase, ICheckForResourceMatch
     {
-        public CheckForResourceMatch(IGame game, ICostlyCard costlyCard)
+        public CheckForResourceMatch(IGame game, ICard card, ICost cost)
             : base(game)
         {
-            this.CostlyCard = costlyCard;
+            this.Card = card;
+            this.Cost = cost;
         }
 
         private bool isResourceMatch;
 
-        public ICostlyCard CostlyCard
+        public ICard Card
+        {
+            get;
+            private set;
+        }
+
+        public ICost Cost
         {
             get;
             private set;

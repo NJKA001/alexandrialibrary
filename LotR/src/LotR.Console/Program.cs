@@ -225,6 +225,63 @@ namespace LotR.Console
             return result;
         }
 
+        private static bool IsValidNumber(string value, int max)
+        {
+            uint result = 0;
+            return (uint.TryParse(value, out result) && result > 0 && result <= max);
+        }
+
+        private static IEnumerable<uint> PromptForNumbers<T>(IEnumerable<T> items, Func<T, string> getDescription, uint minChoices, uint maxChoices)
+        {
+            if (minChoices < 1)
+                throw new ArgumentException("minChoices must be greater than zero");
+            if (maxChoices < 2)
+                throw new ArgumentException("maxChoices must be greater than 1");
+            if (maxChoices < minChoices)
+                throw new ArgumentException("maxChoices must be greater than or equal to minChoices");
+
+            IEnumerable<uint> results = Enumerable.Empty<uint>();
+
+            DisplayList<T>(items, getDescription);
+
+            var total = items.Count();
+
+            var line = string.Empty;
+
+            var isCommand = true;
+            while (isCommand)
+            {
+                line = ReadLine();
+                isCommand = CheckForCommand(line);
+            }
+
+            while (true)
+            {
+                var tokens = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                if (tokens == null || tokens.Length == 0 || tokens.Any(x => string.IsNullOrEmpty(x)) || tokens.Length < minChoices || tokens.Length > maxChoices || !tokens.All(x => IsValidNumber(x, total)))
+                {
+                    if (minChoices == 1)
+                        WriteLine("'{0}' is not a valid answer. Please enter a comma-separated list of numbers between '1' and '{1}. The list should contain at least 1 number and at most {2}.", line, total, maxChoices);
+                    else
+                    {
+                        if (minChoices == maxChoices)
+                            WriteLine("'{0}' is not a valid answer. Please enter a comma-separated list of numbers between '1' and '{1}. The list should contain {2} numbers.", line, total, minChoices);
+                        else 
+                            WriteLine("'{0}' is not a valid answer. Please enter a comma-separated list of numbers between '1' and '{1}. The list should contain at least {2} numbers and at most {3}.", line, total, minChoices, maxChoices);
+                    }
+
+                    line = ReadLine();
+                    continue;
+                }
+
+                results = tokens.Select(x => uint.Parse(x)).ToList();
+                
+                break;
+            }
+
+            return results;
+        }
+
         private static bool PromptForBool(string message)
         {
             var result = false;
@@ -312,47 +369,46 @@ namespace LotR.Console
             }
         }
 
-        private static void ChooseEffectOnCardToPlay(IPlayer player, IChoosePlayerAction choice, IPlayerCard card)
+        private static IPayment GetPayment(IPlayer player, ICostlyCard costlyCard, IPayResourcesFrom cost)
         {
-            if (card.PrintedCardType == CardType.Event)
-            {
-                var eventCard = card as IEventCard;
+            return null;
+        }
 
-                if (card.PrintedSphere == Sphere.Neutral)
+        private static IPayment GetPayment(IPlayer player, ICostlyCard costlyCard, IPayResources cost)
+        {
+            var characters = player.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.CanPayFor(costlyCard, cost) && x.Resources > 0).ToList();
+            if (characters.Count() == 0)
+            {
+                WriteLine("{0} does not have any characters with available resources to pay for {1}", player.Name, costlyCard.Title);
+                return null;
+            }
+
+            if (characters.Count() == 1)
+            {
+                if (cost.IsVariableCost)
                 {
-                    switch (eventCard.PrintedCost)
-                    {
-                        case 0:
-                            WriteLine("Playing {0} from your hand, with no cost of resources", card.Title);
-                            break;
-                        case 1:
-                            WriteLine("Playing {0} from your hand, with a cost of 1 resource", card.Title);
-                            break;
-                        default:
-                            WriteLine("Playing {0} from your hand, with a cost of {1} resources", card.Title, eventCard.PrintedCost);
-                            break;
-                    }
+                }
+                else if (characters.First().Resources >= cost.NumberOfResources)
+                {
+                    WriteLine("Paying {0} resources from {1} for {2}", costlyCard.PrintedCost, characters.First().Title, costlyCard.Title);
+                    return new ResourcePayment(characters.First(), cost.NumberOfResources);
                 }
                 else
                 {
-                    switch (eventCard.PrintedCost)
-                    {
-                        case 0:
-                            WriteLine("Playing {0} from your hand, with no cost of {1} resources", card.Title, card.PrintedSphere);
-                            break;
-                        case 1:
-                            WriteLine("Playing {0} from your hand, with a cost of 1 {1} resource", card.Title, card.PrintedSphere);
-                            break;
-                        default:
-                            WriteLine("Playing {0} from your hand, with a cost of {1} {2} resources", card.Title, eventCard.PrintedCost, card.PrintedSphere);
-                            break;
-                    }
+                    WriteLine("{0} does not have enough resources to pay for {1}", characters.First().Title, costlyCard.Title);
+                    return null;
                 }
             }
+            else
+            {
+            }
 
-            /*
+            return null;
+        }
 
-            */
+        private static IEffect ChooseEffectOnCardToPlay(IPlayer player, IChoosePlayerAction choice, IPlayerCard card)
+        {
+            return null;
         }
 
         private static void ChooseCardToPlay(IPlayer player, IChoosePlayerAction choice)
@@ -387,8 +443,54 @@ namespace LotR.Console
             }
             else
             {
-                var card = actionCards[(int)actionCardNumber - 1];
-                ChooseEffectOnCardToPlay(player, choice, card);
+                var costlyCard = actionCards[(int)actionCardNumber - 1] as ICostlyCard;
+                if (costlyCard == null)
+                    return;
+
+                if (costlyCard.PrintedCardType == CardType.Event)
+                {
+                    var cost = costlyCard.GetResourceCost(game);
+                    if (cost != null)
+                    {
+                        IPayment payment = null;
+                        if (cost is IPayResources)
+                        {
+                            payment = GetPayment(player, costlyCard, cost as IPayResources);
+                        }
+                        else if (cost is IPayResourcesFrom)
+                        {
+                            payment = GetPayment(player, costlyCard, cost as IPayResourcesFrom);
+                        }
+                    }
+                    else
+                    {
+                        //event has no cost - play it now
+                    }
+                }
+                else
+                {
+                    var effect = ChooseEffectOnCardToPlay(player, choice, costlyCard);
+                    if (effect == null)
+                        return;
+
+                    var cost = effect.GetCost(game);
+                    if (cost != null)
+                    {
+                        IPayment payment = null;
+                        if (cost is IPayResources)
+                        {
+                            payment = GetPayment(player, costlyCard, cost as IPayResources);
+                        }
+                        else if (cost is IPayResourcesFrom)
+                        {
+                            payment = GetPayment(player, costlyCard, cost as IPayResourcesFrom);
+                        }
+                    }
+                    else
+                    {
+                        //card effect has no cost - trigger it now
+                    }
+                }
             }
         }
 

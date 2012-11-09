@@ -19,6 +19,8 @@ namespace LotR.Cards.Player.Allies
         public Bofur_Dw()
             : base("Bofur", CardSet.Dw, 6, Sphere.Spirit, 3, 2, 1, 1, 3)
         {
+            this.IsUnique = true;
+
             AddTrait(Trait.Dwarf);
         }
 
@@ -66,6 +68,8 @@ namespace LotR.Cards.Player.Allies
 
                 card.Owner.Hand.RemoveCards(new List<IPlayerCard> { ally });
                 card.Owner.AddCardInPlay(new AllyInPlay(game, ally));
+
+                game.AddEffect(new ReturnToHandAfterSuccessfulQuest(CardSource));
             }
         }
 

@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Cards.Player;
+using LotR.Cards;
+using LotR.Effects.Costs;
 
 namespace LotR.States.Phases.Any
 {
     public interface ICheckForResourceMatch
         : IState
     {
-        ICostlyCard CostlyCard { get; }
+        ICard Card { get; }
+        ICost Cost { get; }
 
         bool IsResourceMatch { get; set; }
     }

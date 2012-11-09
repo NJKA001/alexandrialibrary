@@ -5,7 +5,7 @@ using System.Text;
 
 using LotR.States;
 
-namespace LotR.Effects.Phases.Resource
+namespace LotR.Effects.Phases.Any
 {
     public class DrawingCardsEffect
         : FrameworkEffectBase

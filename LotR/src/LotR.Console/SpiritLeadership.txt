@@ -4,8 +4,8 @@ Cards 50:
 
 Allies 20:
 Wandering Took  3
-Northern Tracker  3
-Son of Arnor  2
+Northern Tracker  2
+Bofur (Dw)  3
 Snowborn Scout  3
 Gandalf (Core)  3
 Lorien Guide  3

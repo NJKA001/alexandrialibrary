@@ -5,6 +5,7 @@ using System.Text;
 
 using LotR.Cards;
 using LotR.Cards.Player;
+using LotR.Effects.Costs;
 using LotR.Effects.Phases.Any;
 using LotR.States.Phases.Any;
 
@@ -115,14 +116,16 @@ namespace LotR.States
             attachments.Remove(attachment.StateId);
         }
 
-        public virtual bool CanPayFor(ICostlyCard costlyCard)
+        public virtual bool CanPayFor(ICard card, ICost cost)
         {
-            if (costlyCard == null)
-                throw new ArgumentNullException("costlyCard");
+            if (card == null)
+                throw new ArgumentNullException("card");
+            if (cost == null)
+                throw new ArgumentNullException("cost");
 
             if (Card.HasEffect<IDuringCheckForResourceMatch>())
             {
-                var check = new CheckForResourceMatch(Game, costlyCard);
+                var check = new CheckForResourceMatch(Game, card, cost);
 
                 foreach (var effect in Card.Text.Effects.OfType<IDuringCheckForResourceMatch>())
                 {

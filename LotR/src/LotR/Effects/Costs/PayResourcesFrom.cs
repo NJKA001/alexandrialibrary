@@ -10,7 +10,7 @@ using LotR.States;
 namespace LotR.Effects.Costs
 {
     public class PayResourcesFrom
-        : CostBase
+        : CostBase, IPayResourcesFrom
     {
         public PayResourcesFrom(ISource source, ICharacterInPlay target, byte numberOfResources, bool isVariableCost)
             : base(GetDescription(target, numberOfResources), source)
@@ -30,6 +30,21 @@ namespace LotR.Effects.Costs
         private readonly ICharacterInPlay target;
         private readonly byte numberOfResources;
         private readonly bool isVariableCost;
+
+        public ICharacterInPlay Target
+        {
+            get { return target; }
+        }
+
+        public byte NumberOfResources
+        {
+            get { return numberOfResources; }
+        }
+
+        public bool IsVariableCost
+        {
+            get { return isVariableCost; }
+        }
 
         public override bool IsMetBy(IPayment payment)
         {

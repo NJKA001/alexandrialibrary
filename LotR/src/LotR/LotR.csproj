@@ -75,6 +75,7 @@
     <Compile Include="Cards\IAttachmentHostCard.cs" />
     <Compile Include="Cards\ICanHaveAttachments.cs" />
     <Compile Include="Cards\Player\Allies\Bofur_Dw.cs" />
+    <Compile Include="Cards\Player\Events\CampfireTales.cs" />
     <Compile Include="Cards\Quests\IQuestLoader.cs" />
     <Compile Include="Cards\Player\Allies\Radagast.cs" />
     <Compile Include="Cards\Player\Attachments\HeroAttachmentCardBase.cs" />
@@ -104,6 +105,8 @@
     <Compile Include="Effects\Choices\IChooseCharacterWithTrait.cs" />
     <Compile Include="Effects\Choices\IChoosePlayerToChooseHero.cs" />
     <Compile Include="Effects\Choices\IPlayersChooseCharacters.cs" />
+    <Compile Include="Effects\Costs\IPayResources.cs" />
+    <Compile Include="Effects\Costs\IPayResourcesFrom.cs" />
     <Compile Include="Effects\EffectOptions.cs" />
     <Compile Include="Effects\ForcedCardEffectBase.cs" />
     <Compile Include="Effects\FrameworkEffectBase.cs" />
@@ -118,6 +121,7 @@
     <Compile Include="Effects\Modifiers\IThreatModifier.cs" />
     <Compile Include="Effects\Modifiers\ThreatModifier.cs" />
     <Compile Include="Effects\PassiveCardEffectBase.cs" />
+    <Compile Include="Effects\Payments\ResourcePayment.cs" />
     <Compile Include="Effects\Phases\Any\IAfterLocationExplored.cs" />
     <Compile Include="Effects\Phases\Any\IAfterStageDefeated.cs" />
     <Compile Include="Effects\Phases\Any\IDuringCheckForResourceMatch.cs" />
@@ -131,7 +135,7 @@
     <Compile Include="Effects\Phases\Combat\IAfterEnemyEngages.cs" />
     <Compile Include="Effects\Phases\EndOfPhase.cs" />
     <Compile Include="Effects\Phases\Resource\CollectingResourcesEffect.cs" />
-    <Compile Include="Effects\Phases\Resource\DrawingCardsEffect.cs" />
+    <Compile Include="Effects\Phases\Any\DrawingCardsEffect.cs" />
     <Compile Include="Effects\Phases\Setup\DetermineFirstPlayer.cs" />
     <Compile Include="Effects\Phases\Setup\FollowScenarioSetup.cs" />
     <Compile Include="Effects\Phases\Setup\IDuringSetup.cs" />

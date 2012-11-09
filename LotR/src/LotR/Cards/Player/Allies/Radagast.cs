@@ -35,7 +35,7 @@ namespace LotR.Cards.Player.Allies
 
             public void DuringCheckForResourceMatch(ICheckForResourceMatch state)
             {
-                if (state.CostlyCard.PrintedTraits.Contains(Trait.Creature))
+                if (state.Card.PrintedTraits.Contains(Trait.Creature))
                     state.IsResourceMatch = true;
             }
         }
