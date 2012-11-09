@@ -87,6 +87,7 @@
     <Compile Include="Cards\Quests\BeornsPath.cs" />
     <Compile Include="Cards\Quests\DontLeaveThePath.cs" />
     <Compile Include="Cards\ScenarioCode.cs" />
+    <Compile Include="Effects\Choices\ChooseAttachmentHost.cs" />
     <Compile Include="Effects\Choices\ChooseCardInHand.cs" />
     <Compile Include="Effects\Choices\ChooseCharacterWithTrait.cs" />
     <Compile Include="Effects\Choices\ChooseFirstPlayer.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Effects\Choices\ChoosePlayerAction.cs" />
     <Compile Include="Effects\Choices\ChoosePlayerToChooseHero.cs" />
     <Compile Include="Effects\Choices\ChooseToKeepStartingHand.cs" />
+    <Compile Include="Effects\Choices\IChooseAttachmentHost.cs" />
     <Compile Include="Effects\Choices\IChooseCardInHand.cs" />
     <Compile Include="Effects\Choices\IChooseFirstPlayer.cs" />
     <Compile Include="Effects\Choices\IChoosePlayerAction.cs" />
@@ -128,6 +130,7 @@
     <Compile Include="Effects\Phases\Any\IDuringCheckGameStatus.cs" />
     <Compile Include="Effects\Phases\Any\IDuringDrawingCards.cs" />
     <Compile Include="Effects\Phases\Any\IBeforeStageDefeated.cs" />
+    <Compile Include="Effects\Phases\Any\PlayCardFromHandEffect.cs" />
     <Compile Include="Effects\Phases\Any\PlayerActionWindow.cs" />
     <Compile Include="Effects\Phases\Any\PlayerDefeat.cs" />
     <Compile Include="Effects\Phases\Any\PlayerVictory.cs" />

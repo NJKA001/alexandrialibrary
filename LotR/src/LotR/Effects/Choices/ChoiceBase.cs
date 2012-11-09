@@ -21,12 +21,20 @@ namespace LotR.Effects.Choices
             this.Description = description;
             this.Source = source;
             this.Players = players;
+
+            IsOptional = true;
         }
 
         public string Description
         {
             get;
             private set;
+        }
+
+        public bool IsOptional
+        {
+            get;
+            set;
         }
 
         public ISource Source

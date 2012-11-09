@@ -19,6 +19,7 @@ using LotR.Effects.Payments;
 using LotR.States;
 using LotR.States.Areas;
 using LotR.States.Controllers;
+using LotR.Effects.Phases.Any;
 
 namespace LotR.Console
 {
@@ -377,7 +378,7 @@ namespace LotR.Console
         private static IPayment GetPayment(IPlayer player, ICostlyCard costlyCard, IPayResources cost)
         {
             var characters = player.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.CanPayFor(costlyCard, cost) && x.Resources > 0).ToList();
-            if (characters.Count() == 0)
+            if (characters.Count == 0)
             {
                 WriteLine("{0} does not have any characters with available resources to pay for {1}", player.Name, costlyCard.Title);
                 return null;
@@ -447,12 +448,20 @@ namespace LotR.Console
                 if (costlyCard == null)
                     return;
 
+                var playCardEffect = new PlayCardFromHandEffect(game, costlyCard);
+                game.AddEffect(playCardEffect);
+                var playCardOptions = game.GetOptions(playCardEffect);
+                game.ResolveEffect(playCardEffect, playCardOptions);
+
+                #region Old Code
+                /*
+                IPayment payment = null;
+
                 if (costlyCard.PrintedCardType == CardType.Event)
                 {
                     var cost = costlyCard.GetResourceCost(game);
                     if (cost != null)
                     {
-                        IPayment payment = null;
                         if (cost is IPayResources)
                         {
                             payment = GetPayment(player, costlyCard, cost as IPayResources);
@@ -461,10 +470,6 @@ namespace LotR.Console
                         {
                             payment = GetPayment(player, costlyCard, cost as IPayResourcesFrom);
                         }
-                    }
-                    else
-                    {
-                        //event has no cost - play it now
                     }
                 }
                 else
@@ -473,29 +478,88 @@ namespace LotR.Console
                     if (effect == null)
                         return;
 
+                    var effectChoice = effect.GetChoice(game);
+
                     var cost = effect.GetCost(game);
                     if (cost != null)
                     {
-                        IPayment payment = null;
-                        if (cost is IPayResources)
+                        while (true)
                         {
-                            payment = GetPayment(player, costlyCard, cost as IPayResources);
-                        }
-                        else if (cost is IPayResourcesFrom)
-                        {
-                            payment = GetPayment(player, costlyCard, cost as IPayResourcesFrom);
+                            if (cost is IPayResources)
+                            {
+                                payment = GetPayment(player, costlyCard, cost as IPayResources);
+                            }
+                            else if (cost is IPayResourcesFrom)
+                            {
+                                payment = GetPayment(player, costlyCard, cost as IPayResourcesFrom);
+                            }
+
+                            if (payment != null && !effect.PaymentAccepted(game, payment, effectChoice))
+                            {
+                                WriteLine("This payment is not valid");
+                                continue;
+                            }
+
+                            break;
                         }
                     }
-                    else
-                    {
-                        //card effect has no cost - trigger it now
-                    }
-                }
+                }*/
+                #endregion
             }
         }
 
         private static void ChooseCardEffectToTrigger(IPlayer player, IChoosePlayerAction choice)
         {
+        }
+
+        private static string GetAttachmentHostName(IAttachmentHostInPlay host)
+        {
+            if (host.Card is IPlayerCard)
+            {
+                var playerCard = host.Card as IPlayerCard;
+                return string.Format("{0} ({1}) [controlled by {2}]", playerCard.Title, playerCard.PrintedCardType, playerCard.Owner.Name);
+            }
+            else if (host.Card is IEncounterCard)
+            {
+                var encounterCard = host.Card as IEncounterCard;
+                var desc = "not in staging area";
+                if (game.StagingArea.CardsInStagingArea.Any(x => x.Card.Id == host.Card.Id))
+                    desc = "in staging area";
+                else if (game.QuestArea.ActiveLocation != null && game.QuestArea.ActiveLocation.Card.Id == host.Card.Id)
+                    desc = "active location";
+
+                return string.Format("{0} ({1}) [{2}]", encounterCard.Title, encounterCard.PrintedCardType, desc);
+            }
+            else
+                return string.Format("{0} ({1}) [not in play]", host.Card.Title, host.Card.PrintedCardType);
+        }
+
+        private static void ChooseAttachmentHost(IChooseAttachmentHost choice)
+        {
+            var hosts = game.GetAllCardsInPlay<IAttachmentHostInPlay>().Where(x => x.Card.IsValidAttachment(choice.Attachment) && choice.Attachment.CanBeAttachedTo(game, x.Card)).ToList();
+            if (hosts.Count == 0)
+            {
+                WriteLine("There are no valid targets to which {0} can be attached", choice.Attachment.Title);
+                return;
+            }
+
+            var hostNames = hosts.Select(x => GetAttachmentHostName(x)).ToList();
+
+            if (choice.IsOptional)
+            {
+                hostNames.Add("Cancel playing this attachment");
+            }
+
+            var number = PromptForNumber(hosts, x => GetAttachmentHostName(x));
+
+            if (choice.IsOptional && number == hostNames.Count)
+            {
+                WriteLine("Cancelled playing of attachment {0}", choice.Attachment.Title);
+                return;
+            }
+
+            choice.ChosenAttachmentHost = hosts[(int)number - 1];
+            WriteLine("{0} will be attached to {1}", choice.Attachment.Title, choice.ChosenAttachmentHost.Title);
         }
 
         private static void HandleChoice(IChoice choice)
@@ -513,6 +577,10 @@ namespace LotR.Console
             else if (choice is IChoosePlayerAction)
             {
                 ChoosePlayerAction(choice as IChoosePlayerAction);
+            }
+            else if (choice is IChooseAttachmentHost)
+            {
+                ChooseAttachmentHost(choice as IChooseAttachmentHost);
             }
         }
 
@@ -539,7 +607,25 @@ namespace LotR.Console
 
         private static IPayment GetPaymentCallback(IEffect effect, ICost cost)
         {
-            WriteLine("Cost Incurred Callback - TODO");
+            WriteLine("Payment Required: {0}", cost.Description);
+
+            if (cost is IPayResources)
+            {
+                var costlyCard = effect.Source as ICostlyCard;
+                if (costlyCard == null)
+                    return null;
+
+                return GetPayment(game.ActivePlayer, costlyCard, cost as IPayResources);
+            }
+            else if (cost is IPayResourcesFrom)
+            {
+                var costlyCard = effect.Source as ICostlyCard;
+                if (costlyCard == null)
+                    return null;
+
+                return GetPayment(game.ActivePlayer, costlyCard, cost as IPayResourcesFrom);
+            }
+
             return null;
         }
 

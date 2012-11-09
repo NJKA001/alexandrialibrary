@@ -26,6 +26,7 @@ namespace LotR.States
         IVictoryDisplay VictoryDisplay { get; }
         IEnumerable<IPlayer> Players { get; }
         IPlayer FirstPlayer { get; }
+        IPlayer ActivePlayer { get; set; }
 
         void AddEffect(IEffect effect);
         void ResolveEffect(IEffect effect, EffectOptions options);
@@ -37,7 +38,12 @@ namespace LotR.States
         void OpenPlayerActionWindow();
 
         IPlayer GetController(Guid cardId);
+
+        IEnumerable<T> GetAllCardsInPlay<T>()
+            where T : class, ICardInPlay;
+
         T GetCardInPlay<T>(Guid cardId) where T : class, ICardInPlay;
+        
         IEnumerable<TCard> GetCardsInPlayWithEffect<TCard, TEffect>()
             where TCard : class, ICardInPlay
             where TEffect : class, IEffect;

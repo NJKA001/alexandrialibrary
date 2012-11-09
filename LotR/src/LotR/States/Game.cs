@@ -45,6 +45,7 @@ namespace LotR.States
         private readonly IList<IPlayer> players = new List<IPlayer>();
         private readonly IList<IEffect> currentEffects = new List<IEffect>();
         private readonly PhaseFactory phaseFactory = new PhaseFactory();
+        private IPlayer activePlayer;
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -67,29 +68,6 @@ namespace LotR.States
             var options = GetOptions(effect);
             AddEffect(effect);
             ResolveEffect(effect, options);
-        }
-
-        private IEnumerable<T> GetAllCardsInPlay<T>()
-            where T : class, ICardInPlay
-        {
-            var cards = new List<T>();
-
-            if (QuestArea.ActiveLocation is T)
-                cards.Add(QuestArea.ActiveLocation as T);
-
-            if (QuestArea.ActiveQuest is T)
-                cards.Add(QuestArea.ActiveQuest as T);
-
-            foreach (var stagingCard in StagingArea.CardsInStagingArea.OfType<T>().Where(x => x != null))
-                cards.Add(stagingCard);
-
-            foreach (var player in players)
-            {
-                foreach (var playerCard in player.CardsInPlay.OfType<T>().Where(x => x != null))
-                    cards.Add(playerCard);
-            }
-
-            return cards;
         }
 
         private void Run()
@@ -180,6 +158,22 @@ namespace LotR.States
         public IPlayer FirstPlayer
         {
             get { return players.Single(x => x.IsFirstPlayer); }
+        }
+
+        public IPlayer ActivePlayer
+        {
+            get { return activePlayer; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("ActivePlayer cannot be null");
+
+                if (activePlayer == value)
+                    return;
+
+                activePlayer = value;
+                OnPropertyChanged("ActivePlayer");
+            }
         }
 
         #endregion
@@ -304,6 +298,29 @@ namespace LotR.States
             }
 
             return null;
+        }
+
+        public IEnumerable<T> GetAllCardsInPlay<T>()
+            where T : class, ICardInPlay
+        {
+            var cards = new List<T>();
+
+            if (QuestArea.ActiveLocation is T)
+                cards.Add(QuestArea.ActiveLocation as T);
+
+            if (QuestArea.ActiveQuest is T)
+                cards.Add(QuestArea.ActiveQuest as T);
+
+            foreach (var stagingCard in StagingArea.CardsInStagingArea.OfType<T>().Where(x => x != null))
+                cards.Add(stagingCard);
+
+            foreach (var player in players)
+            {
+                foreach (var playerCard in player.CardsInPlay.OfType<T>().Where(x => x != null))
+                    cards.Add(playerCard);
+            }
+
+            return cards;
         }
 
         public IEnumerable<TCard> GetCardsInPlayWithEffect<TCard, TEffect>()
