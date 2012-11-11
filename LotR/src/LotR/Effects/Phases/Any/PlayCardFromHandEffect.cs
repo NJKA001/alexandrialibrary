@@ -20,11 +20,11 @@ namespace LotR.Effects.Phases.Any
     public class PlayCardFromHandEffect
         : FrameworkEffectBase
     {
-        public PlayCardFromHandEffect(IGame game, ICostlyCard card)
-            : base(GetDescription(card), game)
+        public PlayCardFromHandEffect(IGame game, ICostlyCard costlyCard)
+            : base(GetDescription(costlyCard), game)
         {
-            this.card = card;
-            this.cost = card.GetResourceCost(game) as IPayResources;
+            this.costlyCard = costlyCard;
+            this.cost = costlyCard.GetResourceCost(game) as IPayResources;
         }
 
         private static string GetDescription(IPlayerCard card)
@@ -32,18 +32,18 @@ namespace LotR.Effects.Phases.Any
             return string.Format("Play {0} from your hand", card.Title);
         }
 
-        private readonly ICostlyCard card;
+        private readonly ICostlyCard costlyCard;
         private readonly IPayResources cost;
 
         public override IChoice GetChoice(IGame game)
         {
-            if (card.PrintedCardType == CardType.Attachment && card.PrintedCardType == CardType.Treasure)
+            if (costlyCard.PrintedCardType == CardType.Attachment && costlyCard.PrintedCardType == CardType.Treasure)
             {
-                return new ChooseAttachmentHost(card, card.Owner, card as IAttachableCard);
+                return new ChooseAttachmentHost(costlyCard, costlyCard.Owner, costlyCard as IAttachableCard);
             }
-            else if (card.PrintedCardType == CardType.Event)
+            else if (costlyCard.PrintedCardType == CardType.Event)
             {
-                var effect = card.Text.Effects.FirstOrDefault();
+                var effect = costlyCard.Text.Effects.FirstOrDefault();
                 if (effect == null)
                     return null;
 
@@ -55,7 +55,7 @@ namespace LotR.Effects.Phases.Any
 
         public override ICost GetCost(IGame game)
         {
-            return card.GetResourceCost(game);
+            return costlyCard.GetResourceCost(game);
         }
 
         public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
@@ -67,17 +67,19 @@ namespace LotR.Effects.Phases.Any
             if (resourcePayment == null)
                 return false;
 
-            var total = resourcePayment.Payments.Select(x => (int)x.Item2).Sum();
-            if (total < card.PrintedCost)
+            if (resourcePayment.GetTotalPayment() < costlyCard.PrintedCost && !cost.IsVariableCost)
                 return false;
 
-            if (resourcePayment.Payments.Select(x => x.Item1).Any(x => !x.CanPayFor(card, cost)))
+            if (resourcePayment.Characters.Any(x => !x.CanPayFor(costlyCard)))
                 return false;
 
-            foreach (var item in resourcePayment.Payments)
+            foreach (var character in resourcePayment.Characters)
             {
-                byte remainder = (item.Item1.Resources - item.Item2 > 0) ? (byte)(item.Item1.Resources - item.Item2) : (byte)0;
-                item.Item1.Resources = remainder;
+                var numberOfResources = resourcePayment.GetPaymentBy(character.Card.Id);
+                byte remainder = (character.Resources - numberOfResources > 0) 
+                    ? (byte)(character.Resources - numberOfResources) : (byte)0;
+
+                character.Resources = remainder;
             }
 
             return true;
@@ -85,13 +87,13 @@ namespace LotR.Effects.Phases.Any
 
         public override void Resolve(IGame game, IPayment payment, IChoice choice)
         {
-            switch (card.PrintedCardType)
+            switch (costlyCard.PrintedCardType)
             {
                 case CardType.Ally:
                     {
-                        var ally = new AllyInPlay(game, card as IAllyCard);
-                        card.Owner.AddCardInPlay(ally);
-                        card.Owner.Hand.RemoveCards(new List<IPlayerCard> { card });
+                        var ally = new AllyInPlay(game, costlyCard as IAllyCard);
+                        costlyCard.Owner.AddCardInPlay(ally);
+                        costlyCard.Owner.Hand.RemoveCards(new List<IPlayerCard> { costlyCard });
                     }
                     break;
                 case CardType.Attachment:
@@ -100,20 +102,20 @@ namespace LotR.Effects.Phases.Any
                         if (hostChoice == null || hostChoice.ChosenAttachmentHost == null)
                             return;
 
-                        var attachment = new AttachmentInPlay(game, card as IAttachmentCard, hostChoice.ChosenAttachmentHost);
-                        card.Owner.AddCardInPlay(attachment);
-                        card.Owner.Hand.RemoveCards(new List<IPlayerCard> { card });
+                        var attachment = new AttachmentInPlay(game, costlyCard as IAttachmentCard, hostChoice.ChosenAttachmentHost);
+                        costlyCard.Owner.AddCardInPlay(attachment);
+                        costlyCard.Owner.Hand.RemoveCards(new List<IPlayerCard> { costlyCard });
                     }
                     break;
                 case CardType.Event:
                     {
-                        var effect = card.Text.Effects.FirstOrDefault();
+                        var effect = costlyCard.Text.Effects.FirstOrDefault();
                         if (effect == null)
                             return;
 
                         game.AddEffect(effect);
                         game.ResolveEffect(effect, new EffectOptions(payment, choice));
-                        card.Owner.Hand.RemoveCards(new List<IPlayerCard> { card });
+                        costlyCard.Owner.Hand.RemoveCards(new List<IPlayerCard> { costlyCard });
                     }
                     break;
                 case CardType.Treasure:
@@ -122,9 +124,9 @@ namespace LotR.Effects.Phases.Any
                         if (hostChoice == null || hostChoice.ChosenAttachmentHost == null)
                             return;
 
-                        var treasure = new TreasureInPlay(game, card as ITreasureCard, hostChoice.ChosenAttachmentHost);
-                        card.Owner.AddCardInPlay(treasure);
-                        card.Owner.Hand.RemoveCards(new List<IPlayerCard> { card });
+                        var treasure = new TreasureInPlay(game, costlyCard as ITreasureCard, hostChoice.ChosenAttachmentHost);
+                        costlyCard.Owner.AddCardInPlay(treasure);
+                        costlyCard.Owner.Hand.RemoveCards(new List<IPlayerCard> { costlyCard });
                     }
                     break;
                 default:

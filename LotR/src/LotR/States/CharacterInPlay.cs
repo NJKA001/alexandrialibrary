@@ -5,6 +5,7 @@ using System.Text;
 
 using LotR.Cards;
 using LotR.Cards.Player;
+using LotR.Effects;
 using LotR.Effects.Costs;
 using LotR.Effects.Phases.Any;
 using LotR.States.Phases.Any;
@@ -116,20 +117,46 @@ namespace LotR.States
             attachments.Remove(attachment.StateId);
         }
 
-        public virtual bool CanPayFor(ICard card, ICost cost)
+        public virtual bool CanPayFor(ICostlyCard costlyCard)
         {
-            if (card == null)
-                throw new ArgumentNullException("card");
-            if (cost == null)
-                throw new ArgumentNullException("cost");
+            if (costlyCard == null)
+                throw new ArgumentNullException("costlyCard");
+
+            var cost = costlyCard.GetResourceCost(Game);
+            if (cost == null && Card.PrintedCardType == CardType.Hero)
+                return true;
 
             if (Card.HasEffect<IDuringCheckForResourceMatch>())
             {
-                var check = new CheckForResourceMatch(Game, card, cost);
+                var check = new CheckForResourceMatch(Game, costlyCard);
 
-                foreach (var effect in Card.Text.Effects.OfType<IDuringCheckForResourceMatch>())
+                foreach (var checkEffect in Card.Text.Effects.OfType<IDuringCheckForResourceMatch>())
                 {
-                    effect.DuringCheckForResourceMatch(check);
+                    checkEffect.DuringCheckForResourceMatch(check);
+                }
+
+                return check.IsResourceMatch;
+            }
+
+            return false;
+        }
+
+        public virtual bool CanPayFor(ICardEffect cardEffect)
+        {
+            if (cardEffect == null)
+                throw new ArgumentNullException("cardEffect");
+
+            var cost = cardEffect.GetCost(Game);
+            if (cost == null && Card.PrintedCardType == CardType.Hero)
+                return true;
+
+            if (Card.HasEffect<IDuringCheckForResourceMatch>())
+            {
+                var check = new CheckForResourceMatch(Game, cardEffect);
+
+                foreach (var checkEffect in Card.Text.Effects.OfType<IDuringCheckForResourceMatch>())
+                {
+                    checkEffect.DuringCheckForResourceMatch(check);
                 }
 
                 return check.IsResourceMatch;

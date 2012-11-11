@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
+using LotR.Cards.Player;
+using LotR.Effects;
 using LotR.Effects.Costs;
 
 namespace LotR.States.Phases.Any
@@ -11,25 +13,32 @@ namespace LotR.States.Phases.Any
     public class CheckForResourceMatch
         : StateBase, ICheckForResourceMatch
     {
-        public CheckForResourceMatch(IGame game, ICard card, ICost cost)
+        public CheckForResourceMatch(IGame game, ICostlyCard costlyCard)
             : base(game)
         {
-            this.Card = card;
-            this.Cost = cost;
+            this.costlyCard = costlyCard;
+            this.cardEffect = null;
         }
 
+        public CheckForResourceMatch(IGame game, ICardEffect cardEffect)
+            : base(game)
+        {
+            this.costlyCard = null;
+            this.cardEffect = cardEffect;
+        }
+
+        private readonly ICostlyCard costlyCard;
+        private readonly ICardEffect cardEffect;
         private bool isResourceMatch;
 
-        public ICard Card
+        public ICostlyCard CostlyCard
         {
-            get;
-            private set;
+            get { return costlyCard; }
         }
 
-        public ICost Cost
+        public ICardEffect CardEffect
         {
-            get;
-            private set;
+            get { return cardEffect; }
         }
 
         public bool IsResourceMatch

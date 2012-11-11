@@ -65,7 +65,7 @@ namespace LotR.Console
 
                 game.Setup(players, ScenarioCode.Passage_Through_Mirkwood);
                 
-                WriteLine("\r\nGame Is Ready\r\n");
+                //WriteLine("\r\nGame Is Ready\r\n");
 
                 //var line = string.Empty;
                 //while (line != command_exit)
@@ -179,28 +179,33 @@ namespace LotR.Console
             return players;
         }
 
-        private static void DisplayList<T>(IEnumerable<T> items, Func<T, string> getDescription)
+        private static void DisplayList<T>(IEnumerable<T> items, Func<T, string> getDescription, uint minValue)
         {
-            var seq = 0;
+            var sequence = minValue;
             foreach (var item in items)
             {
-                seq++;
-                WriteLine("{0,00}  {1}", seq, getDescription(item));
+                WriteLine("{0,00}  {1}", sequence, getDescription(item));
+                sequence++;
             }
         }
 
         private static uint PromptForNumber<T>(IEnumerable<T> items)
         {
-            return PromptForNumber<T>(items, (item) => item.ToString());
+            return PromptForNumber<T>(items, 1);
         }
 
-        private static uint PromptForNumber<T>(IEnumerable<T> items, Func<T, string> getDescription)
+        private static uint PromptForNumber<T>(IEnumerable<T> items, uint minValue)
+        {
+            return PromptForNumber<T>(items, (item) => item.ToString(), minValue);
+        }
+
+        private static uint PromptForNumber<T>(IEnumerable<T> items, Func<T, string> getDescription, uint minValue)
         {
             uint result = 0;
 
-            DisplayList<T>(items, getDescription);
+            DisplayList<T>(items, getDescription, minValue);
 
-            var total = items.Count();
+            var maxValue = items.Count();
 
             var line = string.Empty;
 
@@ -213,9 +218,9 @@ namespace LotR.Console
 
             while (true)
             {
-                if (!uint.TryParse(line, out result) || result < 1 || result > total)
+                if (!uint.TryParse(line, out result) || result < minValue || result > maxValue)
                 {
-                    WriteLine("'{0}' is not a valid answer. Please enter a number between '1' and '{1}'", line, total);
+                    WriteLine("'{0}' is not a valid answer. Please enter a number between '{1}' and '{2}'", line, minValue, maxValue);
                     line = ReadLine();
                     continue;
                 }
@@ -232,7 +237,7 @@ namespace LotR.Console
             return (uint.TryParse(value, out result) && result > 0 && result <= max);
         }
 
-        private static IEnumerable<uint> PromptForNumbers<T>(IEnumerable<T> items, Func<T, string> getDescription, uint minChoices, uint maxChoices)
+        private static IEnumerable<uint> PromptForNumbers<T>(IEnumerable<T> items, Func<T, string> getDescription, uint minValue, uint minChoices, uint maxChoices)
         {
             if (minChoices < 1)
                 throw new ArgumentException("minChoices must be greater than zero");
@@ -243,7 +248,7 @@ namespace LotR.Console
 
             IEnumerable<uint> results = Enumerable.Empty<uint>();
 
-            DisplayList<T>(items, getDescription);
+            DisplayList<T>(items, getDescription, minValue);
 
             var total = items.Count();
 
@@ -325,7 +330,7 @@ namespace LotR.Console
             var playerNames = players.Select(x => x.Name).ToList();
             playerNames.Add("Choose First Player Randomly");
 
-            var result = PromptForNumber(playerNames);
+            var result = PromptForNumber(playerNames, 1);
             if (result < players.Count())
             {
                 choice.FirstPlayer = players[(int)(result - 1)];
@@ -353,31 +358,48 @@ namespace LotR.Console
         {
             var player = choice.Players.FirstOrDefault();
 
-            var action = PromptForNumber(new List<string> { "Play a card from your hand", "Trigger an effect on a card you control", "Pass on taking actions during this step" });
+            var action = PromptForNumber(new List<string> { "Play a card from your hand", "Trigger an effect on a card you control", "Pass on taking actions right now (if all players pass this action window closes)" });
 
             switch (action)
             {
                 case 1:
+                    choice.IsTakingAction = true;
                     ChooseCardToPlay(player, choice);
                     break;
                 case 2:
+                    choice.IsTakingAction = true;
                     ChooseCardEffectToTrigger(player, choice);
                     break;
                 case 3:
                 default:
+                    choice.IsTakingAction = false;
                     WriteLine("{0} is passing on taking any actions during this step", player.Name);
                     break;
             }
         }
 
-        private static IPayment GetPayment(IPlayer player, ICostlyCard costlyCard, IPayResourcesFrom cost)
+        private static IPayment GetPayment(IPlayer player, IEffect effect)
         {
             return null;
         }
 
-        private static IPayment GetPayment(IPlayer player, ICostlyCard costlyCard, IPayResources cost)
+        private static void GetVariableResourcePayment(ICharacterInPlay character, IResourcePayment payment)
         {
-            var characters = player.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.CanPayFor(costlyCard, cost) && x.Resources > 0).ToList();
+            if (character == null)
+                throw new ArgumentNullException("character");
+            if (payment == null)
+                throw new ArgumentNullException("payment");
+        }
+
+        private static IPayment GetPayment(IPlayer player, ICostlyCard costlyCard)
+        {
+            var cost = costlyCard.GetResourceCost(game) as IPayResources;
+            if (cost == null)
+                return null;
+
+            IResourcePayment payment = new ResourcePayment(costlyCard);
+
+            var characters = player.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.CanPayFor(costlyCard) && x.Resources > 0).ToList();
             if (characters.Count == 0)
             {
                 WriteLine("{0} does not have any characters with available resources to pay for {1}", player.Name, costlyCard.Title);
@@ -388,15 +410,36 @@ namespace LotR.Console
             {
                 if (cost.IsVariableCost)
                 {
+                    if (characters.First().Resources > 0)
+                    {
+                        var paymentOptions = new List<string>();
+                        for (var i = 0; i <= characters.First().Resources && i <= 255; i++)
+                        {
+                            paymentOptions.Add(string.Format("Pay {0} resources", i));
+                        }
+
+                        var numberOfResources = (byte)PromptForNumber(paymentOptions, 0);
+                        payment.AddPayment(characters.First(), numberOfResources);
+                    }
+                    else
+                    {
+                        if (PromptForBool(string.Format("{0} is the only character than pay for this card. The card has a variable cost, but {0} has no resources available. Do you want to pay zero resources for {1}?", characters.First().Title, costlyCard.Title)))
+                        {
+                            payment.AddPayment(characters.First(), 0);
+                        }
+                        return null;
+                    }
                 }
                 else if (characters.First().Resources >= cost.NumberOfResources)
                 {
-                    WriteLine("Paying {0} resources from {1} for {2}", costlyCard.PrintedCost, characters.First().Title, costlyCard.Title);
-                    return new ResourcePayment(characters.First(), cost.NumberOfResources);
+                    if (PromptForBool(string.Format("{0} is the only character that can pay for this card. Pay {1} resources from {0} for {2}?", characters.First().Title, cost.NumberOfResources, costlyCard.Title)))
+                    {
+                        payment.AddPayment(characters.First(), cost.NumberOfResources);
+                    }
                 }
                 else
                 {
-                    WriteLine("{0} does not have enough resources to pay for {1}", characters.First().Title, costlyCard.Title);
+                    WriteLine("{0} is the only character with a resource match to pay for {1} but they do not have enough resources available.", characters.First().Title, costlyCard.Title);
                     return null;
                 }
             }
@@ -404,7 +447,7 @@ namespace LotR.Console
             {
             }
 
-            return null;
+            return payment;
         }
 
         private static IEffect ChooseEffectOnCardToPlay(IPlayer player, IChoosePlayerAction choice, IPlayerCard card)
@@ -452,59 +495,6 @@ namespace LotR.Console
                 game.AddEffect(playCardEffect);
                 var playCardOptions = game.GetOptions(playCardEffect);
                 game.ResolveEffect(playCardEffect, playCardOptions);
-
-                #region Old Code
-                /*
-                IPayment payment = null;
-
-                if (costlyCard.PrintedCardType == CardType.Event)
-                {
-                    var cost = costlyCard.GetResourceCost(game);
-                    if (cost != null)
-                    {
-                        if (cost is IPayResources)
-                        {
-                            payment = GetPayment(player, costlyCard, cost as IPayResources);
-                        }
-                        else if (cost is IPayResourcesFrom)
-                        {
-                            payment = GetPayment(player, costlyCard, cost as IPayResourcesFrom);
-                        }
-                    }
-                }
-                else
-                {
-                    var effect = ChooseEffectOnCardToPlay(player, choice, costlyCard);
-                    if (effect == null)
-                        return;
-
-                    var effectChoice = effect.GetChoice(game);
-
-                    var cost = effect.GetCost(game);
-                    if (cost != null)
-                    {
-                        while (true)
-                        {
-                            if (cost is IPayResources)
-                            {
-                                payment = GetPayment(player, costlyCard, cost as IPayResources);
-                            }
-                            else if (cost is IPayResourcesFrom)
-                            {
-                                payment = GetPayment(player, costlyCard, cost as IPayResourcesFrom);
-                            }
-
-                            if (payment != null && !effect.PaymentAccepted(game, payment, effectChoice))
-                            {
-                                WriteLine("This payment is not valid");
-                                continue;
-                            }
-
-                            break;
-                        }
-                    }
-                }*/
-                #endregion
             }
         }
 
@@ -550,7 +540,7 @@ namespace LotR.Console
                 hostNames.Add("Cancel playing this attachment");
             }
 
-            var number = PromptForNumber(hosts, x => GetAttachmentHostName(x));
+            var number = PromptForNumber(hosts, x => GetAttachmentHostName(x), 1);
 
             if (choice.IsOptional && number == hostNames.Count)
             {
@@ -609,22 +599,22 @@ namespace LotR.Console
         {
             WriteLine("Payment Required: {0}", cost.Description);
 
-            if (cost is IPayResources)
-            {
-                var costlyCard = effect.Source as ICostlyCard;
-                if (costlyCard == null)
-                    return null;
+            //if (cost is IPayResources)
+            //{
+            //    var costlyCard = effect.Source as ICostlyCard;
+            //    if (costlyCard == null)
+            //        return null;
 
-                return GetPayment(game.ActivePlayer, costlyCard, cost as IPayResources);
-            }
-            else if (cost is IPayResourcesFrom)
-            {
-                var costlyCard = effect.Source as ICostlyCard;
-                if (costlyCard == null)
-                    return null;
+            //    return GetPayment(game.ActivePlayer, costlyCard, cost as IPayResources);
+            //}
+            //else if (cost is IPayResourcesFrom)
+            //{
+            //    var costlyCard = effect.Source as ICostlyCard;
+            //    if (costlyCard == null)
+            //        return null;
 
-                return GetPayment(game.ActivePlayer, costlyCard, cost as IPayResourcesFrom);
-            }
+            //    return GetPayment(game.ActivePlayer, costlyCard, cost as IPayResourcesFrom);
+            //}
 
             return null;
         }

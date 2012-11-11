@@ -69,17 +69,21 @@ namespace LotR.Cards.Player.Heroes
                 if (resourcePayment == null)
                     return false;
 
-                var firstPayment = resourcePayment.Payments.FirstOrDefault();
-                if (firstPayment == null)
+                if (resourcePayment.Characters.Count() != 1)
                     return false;
 
-                if (firstPayment.Item1.Card.Id != Source.Id || firstPayment.Item2 != 1)
+                var character = resourcePayment.Characters.First();
+
+                if (character.Card.Id != Source.Id)
                     return false;
 
-                if (firstPayment.Item1.Resources < 1)
+                if (resourcePayment.GetPaymentBy(character.Card.Id) != 1)
                     return false;
 
-                firstPayment.Item1.Resources -= 1;
+                if (character.Resources < 1)
+                    return false;
+
+                character.Resources -= 1;
 
                 return true;
             }

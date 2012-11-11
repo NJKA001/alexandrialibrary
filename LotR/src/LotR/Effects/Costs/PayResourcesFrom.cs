@@ -55,17 +55,14 @@ namespace LotR.Effects.Costs
             if (resourcePayment == null)
                 return false;
 
-            if (resourcePayment.Payments.Count() != 1)
+            if (resourcePayment.Characters.Count() != 1)
                 return false;
 
-            var firstPayment = resourcePayment.Payments.FirstOrDefault();
-            if (firstPayment == null)
+            var character = resourcePayment.Characters.First();
+            if (character.Card.Id != target.Card.Id)
                 return false;
 
-            if (firstPayment.Item1.Card.Id != target.Card.Id)
-                return false;
-
-            if (firstPayment.Item2 != numberOfResources && !isVariableCost)
+            if (resourcePayment.GetPaymentBy(character.Card.Id) != numberOfResources && !isVariableCost)
                 return false;
 
             return true;

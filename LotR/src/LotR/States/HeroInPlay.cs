@@ -6,6 +6,7 @@ using System.Text;
 using LotR.Cards;
 using LotR.Cards.Player;
 using LotR.Cards.Player.Heroes;
+using LotR.Effects;
 using LotR.Effects.Costs;
 using LotR.Effects.Phases.Any;
 using LotR.States.Phases.Any;
@@ -25,20 +26,49 @@ namespace LotR.States
             get { return Card as IHeroCard; }
         }
 
-        public override bool CanPayFor(ICard card, ICost cost)
+        public override bool CanPayFor(ICostlyCard costlyCard)
         {
-            if (card == null)
-                throw new ArgumentNullException("card");
+            if (costlyCard == null)
+                throw new ArgumentNullException("costlyCard");
+
+            if (base.CanPayFor(costlyCard))
+                return true;
+
+            var cost = costlyCard.GetResourceCost(Game) as IPayResources;
+            if (cost == null || cost.Sphere == Sphere.Neutral)
+                return true;
+
+            return HasResourceIcon(cost.Sphere);
+        }
+
+        public override bool CanPayFor(ICardEffect cardEffect)
+        {
+            if (cardEffect == null)
+                throw new ArgumentNullException("cardEffect");
+
+            if (base.CanPayFor(cardEffect))
+                return true;
+
+            var cost = cardEffect.GetCost(Game);
             if (cost == null)
-                throw new ArgumentNullException("cost");
-
-            var payResources = cost as IPayResources;
-            if (payResources != null)
             {
-                return (payResources.Sphere == Sphere.Neutral || payResources.Sphere == Card.PrintedSphere);
+                return true;
             }
+            else if (cost is IPayResources)
+            {
+                var payResources = cost as IPayResources;
+                if (payResources.Sphere == Sphere.Neutral)
+                    return true;
 
-            return false;
+                return HasResourceIcon(payResources.Sphere);
+            }
+            else if (cost is IPayResourcesFrom)
+            {
+                var payResourcesFrom = cost as IPayResourcesFrom;
+                return (payResourcesFrom.Target.Card.Id == Card.Id);
+            }
+            
+            return true;
         }
 
         public bool HasResourceIcon(Sphere sphere)

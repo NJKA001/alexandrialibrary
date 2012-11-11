@@ -43,15 +43,17 @@ namespace LotR.Cards.Player.Allies
                 if (resourcePayment == null)
                     return false;
 
-                if (resourcePayment.Payments.Count() != 1)
+                if (resourcePayment.Characters.Count() != 1)
                     return false;
 
-                var hero = resourcePayment.Payments.First().Item1 as IHeroInPlay;
-                if (!hero.HasResourceIcon(Sphere.Spirit))
+                var hero = resourcePayment.Characters.First() as IHeroInPlay;
+                if (hero == null || !hero.HasResourceIcon(Sphere.Spirit))
                     return false;
 
-                if (resourcePayment.Payments.First().Item2 != 1)
+                if (resourcePayment.GetPaymentBy(hero.Card.Id) != 1)
                     return false;
+
+                hero.Resources -= 1;
 
                 return true;
             }

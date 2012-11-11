@@ -35,8 +35,16 @@ namespace LotR.Cards.Player.Allies
 
             public void DuringCheckForResourceMatch(ICheckForResourceMatch state)
             {
-                if (state.Card.PrintedTraits.Contains(Trait.Creature))
+                if (state.CostlyCard == null)
+                {
+                    state.IsResourceMatch = false;
+                    return;
+                }
+
+                if (state.CostlyCard.PrintedTraits.Contains(Trait.Creature))
+                {
                     state.IsResourceMatch = true;
+                }
             }
         }
 
@@ -72,20 +80,22 @@ namespace LotR.Cards.Player.Allies
                 if (resourcePayment == null)
                     return false;
 
-                if (resourcePayment.Payments.Count() != 0)
+                if (resourcePayment.Characters.Count() != 0)
                     return false;
 
-                var firstPayment = resourcePayment.Payments.FirstOrDefault();
-                if (firstPayment == null)
+                var character = resourcePayment.Characters.First();
+
+                if (character.Card.Id != CardSource.Id)
                     return false;
 
-                if (firstPayment.Item1.Card.Id != Source.Id)
+                var numberOfResources = resourcePayment.GetPaymentBy(character.Card.Id);
+                if (numberOfResources == 0)
+                    return true;
+
+                if (character.Resources < numberOfResources)
                     return false;
 
-                if (firstPayment.Item2 == 0)
-                    return false;
-
-                firstPayment.Item1.Resources -= firstPayment.Item2;
+                character.Resources -= numberOfResources;
 
                 return true;
             }
@@ -96,8 +106,8 @@ namespace LotR.Cards.Player.Allies
                 if (resourcePayment == null)
                     return;
 
-                var firstPayment = resourcePayment.Payments.FirstOrDefault();
-                if (firstPayment == null || firstPayment.Item2 == 0)
+                var numberOfResources = resourcePayment.GetPaymentBy(CardSource.Id);
+                if (numberOfResources == 0)
                     return;
 
                 var creatureChoice = choice as IChooseCharacterWithTrait;
@@ -111,7 +121,7 @@ namespace LotR.Cards.Player.Allies
                 if (damageable == null)
                     return;
 
-                damageable.Damage -= firstPayment.Item2;
+                damageable.Damage -= numberOfResources;
             }
         }
     }

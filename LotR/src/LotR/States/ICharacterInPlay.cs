@@ -5,6 +5,7 @@ using System.Text;
 
 using LotR.Cards;
 using LotR.Cards.Player;
+using LotR.Effects;
 using LotR.Effects.Costs;
 
 namespace LotR.States
@@ -12,6 +13,7 @@ namespace LotR.States
     public interface ICharacterInPlay
         : ICardInPlay<ICharacterCard>
     {
-        bool CanPayFor(ICard card, ICost cost);
+        bool CanPayFor(ICostlyCard costlyCard);
+        bool CanPayFor(ICardEffect cardEffect);
     }
 }

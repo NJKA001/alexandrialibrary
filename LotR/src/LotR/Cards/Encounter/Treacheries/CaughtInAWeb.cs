@@ -137,9 +137,23 @@ namespace LotR.Cards.Encounter.Treacheries
                     return;
 
                 var resourcePayment = payment as IResourcePayment;
-                if (resourcePayment == null && resourcePayment.Payments.Count() != 1 || resourcePayment.Payments.First() == null || resourcePayment.Payments.First().Item1.Card.Id != Source.Id || resourcePayment.Payments.First().Item2 != 2)
+                if (resourcePayment == null)
                     return;
 
+                if (resourcePayment.Characters.Count() != 1)
+                    return;
+
+                var attachment = game.GetCardInPlay<IAttachableInPlay>(CardSource.Id);
+                if (attachment == null || attachment.AttachedTo == null)
+                    return;
+
+                var character = resourcePayment.Characters.First();
+                if (character.Card.Id != attachment.AttachedTo.Card.Id)
+                    return;
+
+                if (resourcePayment.GetPaymentBy(character.Card.Id) != 2)
+                    return;
+                
                 readyingCard.IsReadying = true;
             }
         }

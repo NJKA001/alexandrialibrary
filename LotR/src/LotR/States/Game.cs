@@ -252,14 +252,29 @@ namespace LotR.States
 
         public void OpenPlayerActionWindow()
         {
-            foreach (var player in Players)
+            var allPlayersPass = false;
+            while (!allPlayersPass)
             {
-                var action = new PlayerActionWindow(this, player);
-                var actionOptions = GetOptions(action);
+                allPlayersPass = true;
 
-                if (actionOptions.Choice != null)
+                foreach (var player in Players)
                 {
-                    ResolveEffect(action, actionOptions);
+                    ActivePlayer = player;
+
+                    var effect = new PlayerActionWindow(this, player);
+                    var options = GetOptions(effect);
+
+                    var choice = options.Choice as IChoosePlayerAction;
+                    if (choice != null)
+                    {
+                        if (choice.IsTakingAction)
+                        {
+                            allPlayersPass = false;
+                            ResolveEffect(effect, options);
+                        }
+                    }
+                    else
+                        break;
                 }
             }
         }

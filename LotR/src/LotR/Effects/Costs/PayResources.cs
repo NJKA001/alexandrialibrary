@@ -72,20 +72,18 @@ namespace LotR.Effects.Costs
             if (resourcePayment == null)
                 return false;
 
-            var sum = resourcePayment.Payments.Sum(x => x.Item2);
-            if (sum != numberOfResources)
+            if (resourcePayment.GetTotalPayment() != numberOfResources)
                 return false;
 
-            if (sphere != Sphere.Neutral)
+            if (resourcePayment.CostlyCard != null)
             {
-                foreach (var source in resourcePayment.Payments.Select(x => x.Item1))
-                {
-                    //if (!source.CanPayFor(
-                    //if (!source.HasResourceIcon(sphere))
-                    //    return false;
-                }
+                return resourcePayment.Characters.All(x => x.CanPayFor(resourcePayment.CostlyCard));
             }
-
+            else if (resourcePayment.CardEffect != null)
+            {
+                return resourcePayment.Characters.All(x => x.CanPayFor(resourcePayment.CardEffect));
+            }
+            
             return true;
         }
     }

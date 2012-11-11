@@ -59,21 +59,20 @@ namespace LotR.Cards.Player.Heroes
                 if (resourcePayment == null)
                     return false;
 
-                if (resourcePayment.Payments.Count() != 1)
+                if (resourcePayment.Characters.Count() != 1)
                     return false;
 
-                var firstPayment = resourcePayment.Payments.FirstOrDefault();
-                if (firstPayment == null)
+                var character = resourcePayment.Characters.First();
+                if (character.Card.Id != Source.Id)
                     return false;
 
-                if (firstPayment.Item1.Card.Id != Source.Id || firstPayment.Item2 != 1)
+                if (resourcePayment.GetPaymentBy(character.Card.Id) != 1)
                     return false;
 
-                var resourceful = game.GetCardInPlay<ICharacterInPlay>(Source.Id);
-                if (resourceful == null || resourceful.Resources < 1)
+                if (character.Resources < 1)
                     return false;
 
-                resourceful.Resources -= firstPayment.Item2;
+                character.Resources -= 1;
 
                 return true;
             }
@@ -113,17 +112,14 @@ namespace LotR.Cards.Player.Heroes
                 if (resourcePayment == null)
                     return false;
 
-                if (resourcePayment.Payments.Count() != 1)
+                if (resourcePayment.Characters.Count() != 1)
                     return false;
 
-                if (resourcePayment.Payments.Sum(x => x.Item2) != 1)
+                var character = resourcePayment.Characters.First();
+                if (character.Card.Id != Source.Id)
                     return false;
 
-                var payor = resourcePayment.Payments.Select(x => x.Item1).FirstOrDefault();
-                if (payor == null)
-                    return false;
-
-                if (payor.Card.Id != Source.Id)
+                if (resourcePayment.GetPaymentBy(character.Card.Id) != 1)
                     return false;
 
                 return true;

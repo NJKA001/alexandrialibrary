@@ -21,6 +21,8 @@ namespace LotR.Effects.Choices
             return string.Format("{0} can choose to take an action during the {1} step of the {2} phase. They may play a card from their hand, trigger an effect on a card in play or pass on taking any actions.", player.Name, game.CurrentPhase.StepName, game.CurrentPhase.Name);
         }
 
+        public bool IsTakingAction { get; set; }
+
         public IPlayerCard CardToPlay { get; set; }
 
         public ICardEffect CardEffectToTrigger { get; set; }
