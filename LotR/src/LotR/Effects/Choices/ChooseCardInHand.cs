@@ -30,6 +30,20 @@ namespace LotR.Effects.Choices
             set;
         }
 
+        public IEnumerable<IPlayerCard> PlayerCardsToChooseFrom
+        {
+            get { return CardsToChooseFrom.OfType<IPlayerCard>(); }
+        }
+
+        public IPlayerCard ChosenPlayerCard
+        {
+            get { return ChosenCard; }
+            set
+            {
+                ChosenCard = value as T;
+            }
+        }
+
         public override bool IsValid(IGame game)
         {
             return (ChosenCard != null && CardsToChooseFrom.Contains(ChosenCard));

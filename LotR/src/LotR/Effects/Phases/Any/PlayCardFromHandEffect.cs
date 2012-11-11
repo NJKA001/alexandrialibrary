@@ -18,7 +18,7 @@ using LotR.States;
 namespace LotR.Effects.Phases.Any
 {
     public class PlayCardFromHandEffect
-        : FrameworkEffectBase
+        : FrameworkEffectBase, IPlayCardFromHandEffect
     {
         public PlayCardFromHandEffect(IGame game, ICostlyCard costlyCard)
             : base(GetDescription(costlyCard), game)
@@ -34,6 +34,11 @@ namespace LotR.Effects.Phases.Any
 
         private readonly ICostlyCard costlyCard;
         private readonly IPayResources cost;
+
+        public ICostlyCard CostlyCard
+        {
+            get { return costlyCard; }
+        }
 
         public override IChoice GetChoice(IGame game)
         {

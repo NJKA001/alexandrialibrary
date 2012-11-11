@@ -130,6 +130,7 @@
     <Compile Include="Effects\Phases\Any\IDuringCheckGameStatus.cs" />
     <Compile Include="Effects\Phases\Any\IDuringDrawingCards.cs" />
     <Compile Include="Effects\Phases\Any\IBeforeStageDefeated.cs" />
+    <Compile Include="Effects\Phases\Any\IPlayCardFromHandEffect.cs" />
     <Compile Include="Effects\Phases\Any\PlayCardFromHandEffect.cs" />
     <Compile Include="Effects\Phases\Any\PlayerActionWindow.cs" />
     <Compile Include="Effects\Phases\Any\PlayerDefeat.cs" />

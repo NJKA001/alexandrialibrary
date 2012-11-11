@@ -383,12 +383,87 @@ namespace LotR.Console
             return null;
         }
 
-        private static void GetVariableResourcePayment(ICharacterInPlay character, IResourcePayment payment)
+        private static void GetResourcePayment(IPayResources cost, ICostlyCard costlyCard, IResourcePayment payment, ICharacterInPlay character)
         {
-            if (character == null)
-                throw new ArgumentNullException("character");
+            if (cost == null)
+                throw new ArgumentNullException("cost");
+            if (costlyCard == null)
+                throw new ArgumentNullException("costlyCard");
             if (payment == null)
                 throw new ArgumentNullException("payment");
+            if (character == null)
+                throw new ArgumentNullException("character");
+
+            if (character.Resources == 1)
+            {
+                if (PromptForBool(string.Format("{0} can pay for this card and only has 1 resource. Do you want to pay 1 resource from this character?", character.Title)))
+                {
+                    payment.AddPayment(character, 1);
+                }
+            }
+            else
+            {
+                var maxNumberOfResources = character.Resources;
+                var currentPayment = payment.GetTotalPayment();
+                
+
+                if (!cost.IsVariableCost)
+                {
+                    var remainder = (byte)(cost.NumberOfResources - payment.GetTotalPayment());
+                    if (character.Resources > remainder)
+                    {
+                        maxNumberOfResources = remainder;
+                    }
+
+                    if (cost.Sphere == Sphere.Neutral)
+                        WriteLine("{0} has a cost of {1} of any type of resource", costlyCard.Title, cost.NumberOfResources);
+                    else
+                        WriteLine("{0} has a cost of {1} {2} resources", costlyCard.Title, cost.NumberOfResources, cost.Sphere);
+
+                    if (currentPayment == 0)
+                        WriteLine("You have not paid any resources yet.", maxNumberOfResources);
+                    else
+                        WriteLine("You have paid {0} {1} resources so far with {2} left to pay", currentPayment, cost.Sphere, remainder);
+
+                    WriteLine("{0} has {1} {2} resources available. How many resources do you want to pay?", character.Title, cost.Sphere, character.Resources);
+                }
+                else
+                {
+                    if (cost.Sphere == Sphere.Neutral)
+                        WriteLine("{0} has a variable cost of any type of resource", costlyCard.Title);
+                    else
+                        WriteLine("{0} has a variable cost of {1} resources", costlyCard.Title, cost.Sphere);
+
+                    if (currentPayment == 0)
+                        WriteLine("You have not paid any resources yet");
+                    else
+                        WriteLine("You have paid {0} resource so far", currentPayment);
+
+                    WriteLine("{0} has {1} resources available. How many resources do you want to pay?", character.Title, character.Resources);
+                }
+                
+                var paymentOptions = new List<string>();
+                for (var i = 1; i <= maxNumberOfResources; i++)
+                {
+                    if (cost.Sphere == Sphere.Neutral)
+                    {
+                        if (i == 1)
+                            paymentOptions.Add("Pay 1 resource");
+                        else
+                            paymentOptions.Add(string.Format("Pay {0} resources", i));
+                    }
+                    else
+                    {
+                        if (i == 1)
+                            paymentOptions.Add(string.Format("Pay 1 {0} resource", cost.Sphere));
+                        else
+                            paymentOptions.Add(string.Format("Pay {0} {1} resources", i, cost.Sphere));
+                    }
+                }
+
+                var numberOfResources = (byte)PromptForNumber(paymentOptions, 1);
+                payment.AddPayment(character, numberOfResources);
+            }
         }
 
         private static IPayment GetPayment(IPlayer player, ICostlyCard costlyCard)
@@ -399,52 +474,46 @@ namespace LotR.Console
 
             IResourcePayment payment = new ResourcePayment(costlyCard);
 
-            var characters = player.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.CanPayFor(costlyCard) && x.Resources > 0).ToList();
+            var characters = player.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.CanPayFor(costlyCard) && x.Resources >= cost.NumberOfResources).ToList();
             if (characters.Count == 0)
             {
-                WriteLine("{0} does not have any characters with available resources to pay for {1}", player.Name, costlyCard.Title);
+                WriteLine("You do not have any characters with matching resources to pay for {0}", costlyCard.Title);
                 return null;
             }
 
-            if (characters.Count() == 1)
-            {
-                if (cost.IsVariableCost)
-                {
-                    if (characters.First().Resources > 0)
-                    {
-                        var paymentOptions = new List<string>();
-                        for (var i = 0; i <= characters.First().Resources && i <= 255; i++)
-                        {
-                            paymentOptions.Add(string.Format("Pay {0} resources", i));
-                        }
+            var resourcesAvailable = characters.Sum(x => x.Resources);
 
-                        var numberOfResources = (byte)PromptForNumber(paymentOptions, 0);
-                        payment.AddPayment(characters.First(), numberOfResources);
-                    }
-                    else
-                    {
-                        if (PromptForBool(string.Format("{0} is the only character than pay for this card. The card has a variable cost, but {0} has no resources available. Do you want to pay zero resources for {1}?", characters.First().Title, costlyCard.Title)))
-                        {
-                            payment.AddPayment(characters.First(), 0);
-                        }
-                        return null;
-                    }
-                }
-                else if (characters.First().Resources >= cost.NumberOfResources)
+            if (cost.IsVariableCost)
+            {
+                if (resourcesAvailable < 1)
                 {
-                    if (PromptForBool(string.Format("{0} is the only character that can pay for this card. Pay {1} resources from {0} for {2}?", characters.First().Title, cost.NumberOfResources, costlyCard.Title)))
+                    if (PromptForBool(string.Format("Your characters do not have any resources available to pay for {0} which has a variable cost. Do you want to pay zero resources for it?", costlyCard.Title)))
                     {
-                        payment.AddPayment(characters.First(), cost.NumberOfResources);
+                        payment.AddPayment(characters.First(), 0);
+                        return payment;
                     }
-                }
-                else
-                {
-                    WriteLine("{0} is the only character with a resource match to pay for {1} but they do not have enough resources available.", characters.First().Title, costlyCard.Title);
                     return null;
                 }
             }
             else
             {
+                if (cost.NumberOfResources == 0)
+                {
+                    payment.AddPayment(characters.First(), 0);
+                    return payment;
+                }
+                else if (resourcesAvailable < cost.NumberOfResources)
+                {
+                    WriteLine("Your characters do not have enough available resources to pay for {0}", costlyCard.Title);
+                    return null;
+                }
+            }
+
+            foreach (var character in characters)
+            {
+                GetResourcePayment(cost, costlyCard, payment, character);
+                if (!cost.IsVariableCost && payment.GetTotalPayment() == cost.NumberOfResources)
+                    break;
             }
 
             return payment;
@@ -540,7 +609,7 @@ namespace LotR.Console
                 hostNames.Add("Cancel playing this attachment");
             }
 
-            var number = PromptForNumber(hosts, x => GetAttachmentHostName(x), 1);
+            var number = PromptForNumber(hostNames); //hosts, x => GetAttachmentHostName(x), 1);
 
             if (choice.IsOptional && number == hostNames.Count)
             {
@@ -550,6 +619,41 @@ namespace LotR.Console
 
             choice.ChosenAttachmentHost = hosts[(int)number - 1];
             WriteLine("{0} will be attached to {1}", choice.Attachment.Title, choice.ChosenAttachmentHost.Title);
+        }
+
+        private static void ChooseCardInHand(IChooseCardInHand choice)
+        {
+            if (choice.PlayerCardsToChooseFrom.Count() == 0)
+            {
+                WriteLine("There are no valid cards in your hand to choose from");
+                return;
+            }
+
+            if (choice.PlayerCardsToChooseFrom.Count() == 1)
+            {
+                choice.ChosenPlayerCard = choice.PlayerCardsToChooseFrom.First();
+                WriteLine("Chose {0} from your hand", choice.ChosenPlayerCard.Title);
+                return;
+            }
+
+            var cards = choice.PlayerCardsToChooseFrom.ToList();
+            var cardNames = choice.PlayerCardsToChooseFrom.Select(x => string.Format("{0} ({1})", x.Title, x.PrintedCardType)).ToList();
+
+            if (choice.IsOptional)
+            {
+                cardNames.Add("Cancel choosing a card in your hand");
+            }
+
+            var number = PromptForNumber(cardNames);
+
+            if (choice.IsOptional && number == cardNames.Count)
+            {
+                WriteLine("Cancelled choosing a card in your hand");
+                return;
+            }
+
+            choice.ChosenPlayerCard = cards[(int)number - 1];
+            WriteLine("Chose {0} from your hand", choice.ChosenPlayerCard.Title);
         }
 
         private static void HandleChoice(IChoice choice)
@@ -571,6 +675,10 @@ namespace LotR.Console
             else if (choice is IChooseAttachmentHost)
             {
                 ChooseAttachmentHost(choice as IChooseAttachmentHost);
+            }
+            else if (choice is IChooseCardInHand)
+            {
+                ChooseCardInHand(choice as IChooseCardInHand);
             }
         }
 
@@ -599,24 +707,44 @@ namespace LotR.Console
         {
             WriteLine("Payment Required: {0}", cost.Description);
 
-            //if (cost is IPayResources)
-            //{
-            //    var costlyCard = effect.Source as ICostlyCard;
-            //    if (costlyCard == null)
-            //        return null;
+            IPayment payment = null;
+            var desc = string.Empty;
 
-            //    return GetPayment(game.ActivePlayer, costlyCard, cost as IPayResources);
-            //}
-            //else if (cost is IPayResourcesFrom)
-            //{
-            //    var costlyCard = effect.Source as ICostlyCard;
-            //    if (costlyCard == null)
-            //        return null;
+            while (true)
+            {
+                if (effect is IPlayCardFromHandEffect)
+                {
+                    var playCard = effect as IPlayCardFromHandEffect;
+                    if (playCard == null)
+                        return null;
 
-            //    return GetPayment(game.ActivePlayer, costlyCard, cost as IPayResourcesFrom);
-            //}
+                    desc = playCard.CostlyCard.Title;
+                    payment = GetPayment(game.ActivePlayer, playCard.CostlyCard);
+                }
+                else if (effect is ICardEffect)
+                {
+                    desc = effect.ToString();
+                }
+                else
+                    break;
 
-            return null;
+                if (payment != null)
+                {
+                    if (!cost.IsMetBy(payment))
+                    {
+                        if (PromptForBool(string.Format("This payment is not valid for {0}. Do you want to try paying for it again?", desc)))
+                        {
+                            continue;
+                        }
+
+                        break;
+                    }
+
+                    break;
+                }
+            }
+
+            return payment;
         }
 
         private static void PaymentRejectedCallback(IEffect effect, IPayment payment, IChoice choice)

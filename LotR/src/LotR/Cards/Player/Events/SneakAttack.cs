@@ -30,13 +30,17 @@ namespace LotR.Cards.Player.Events
 
             public override IChoice GetChoice(IGame game)
             {
-                var controller = game.GetController(CardSource.Id);
-                if (controller == null)
-                    return null;
+                var playerCard = CardSource as IPlayerCard;
+                if (playerCard == null)
+                    throw new InvalidOperationException();
 
-                var alliesInHand = controller.Hand.Cards.OfType<IAllyCard>().ToList();
+                var owner = playerCard.Owner;
+                if (owner == null)
+                    throw new InvalidOperationException();
 
-                return new ChooseCardInHand<IAllyCard>("Choose 1 ally card in your hand", Source, controller, alliesInHand);
+                var alliesInHand = owner.Hand.Cards.OfType<IAllyCard>().ToList();
+
+                return new ChooseCardInHand<IAllyCard>("Choose 1 ally card in your hand", Source, owner, alliesInHand);
             }
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)
@@ -45,11 +49,16 @@ namespace LotR.Cards.Player.Events
                 if (chooseAlly == null || chooseAlly.ChosenCard == null)
                     return;
 
-                var controller = game.GetController(CardSource.Id);
-                if (controller == null)
-                    return;
+                var playerCard = CardSource as IPlayerCard;
+                if (playerCard == null)
+                    throw new InvalidOperationException();
 
-                controller.AddCardInPlay(new AllyInPlay(game, chooseAlly.ChosenCard));
+                var owner = playerCard.Owner;
+                if (owner == null)
+                    throw new InvalidOperationException();
+
+                owner.Hand.RemoveCards(new List<IPlayerCard> { chooseAlly.ChosenCard });
+                owner.AddCardInPlay(new AllyInPlay(game, chooseAlly.ChosenCard));
                 game.AddEffect(new AtEndOfPhaseReturnAllyToYourHand(CardSource, chooseAlly.ChosenCard.Id));
             }
         }
