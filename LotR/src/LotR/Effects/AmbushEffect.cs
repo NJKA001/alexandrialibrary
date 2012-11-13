@@ -11,7 +11,7 @@ namespace LotR.Effects
         : CardEffectBase, IAmbushEffect
     {
         public AmbushEffect(ICard cardSource)
-            : base("Ambush", cardSource)
+            : base("Ambush", "After this enemy enters play, each player makes an engagement check against it", cardSource)
         {
         }
 

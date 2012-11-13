@@ -14,6 +14,7 @@ namespace LotR.Effects
     public interface IEffect
     {
         Guid EffectId { get; }
+        string Name { get; }
         string Description { get; }
         ISource Source { get; }
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Effects.Choices;
+using LotR.Effects.Payments;
 using LotR.States;
 
 namespace LotR.Effects.Phases.Any
@@ -11,8 +13,11 @@ namespace LotR.Effects.Phases.Any
         : FrameworkEffectBase
     {
         public DrawingCardsEffect(IGame game, IPlayer player, uint numberOfCards)
-            : base(GetDescription(player, numberOfCards), game)
+            : base("Draw cards", GetDescription(player, numberOfCards), game)
         {
+            if (numberOfCards == 0)
+                throw new ArgumentException("numberOfCards cannot be zero");
+
             this.player = player;
             this.numberOfCards = numberOfCards;
         }
@@ -22,15 +27,13 @@ namespace LotR.Effects.Phases.Any
 
         private static string GetDescription(IPlayer player, uint numberOfCards)
         {
-            if (numberOfCards == 0)
-                return string.Format("{0} does not draw any cards", player.Name);
-            else if (numberOfCards == 1)
+            if (numberOfCards == 1)
                 return string.Format("{0} draws 1 card", player.Name);
             else
                 return string.Format("{0} draws {1} cards", player.Name, numberOfCards);
         }
 
-        public override void Resolve(IGame game, Payments.IPayment payment, Choices.IChoice choice)
+        public override void Resolve(IGame game, IPayment payment, IChoice choice)
         {
             if (numberOfCards == 0)
                 return;

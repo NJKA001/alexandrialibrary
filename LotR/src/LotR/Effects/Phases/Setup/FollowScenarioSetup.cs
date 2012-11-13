@@ -13,7 +13,7 @@ namespace LotR.Effects.Phases.Setup
         : FrameworkEffectBase, IDuringSetup
     {
         public FollowScenarioSetup(IGame game)
-            : base("Follow Scenario Setup Instruction", game)
+            : base("Scenario Setup", "Follow the scenario setup instructions", game)
         {
         }
 

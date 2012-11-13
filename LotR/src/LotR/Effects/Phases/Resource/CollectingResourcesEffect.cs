@@ -14,7 +14,7 @@ namespace LotR.Effects.Phases.Resource
         : FrameworkEffectBase
     {
         public CollectingResourcesEffect(IGame game, ICollectingResources collectingResources)
-            : base(GetDescription(collectingResources), game)
+            : base("Collect Resources", GetDescription(collectingResources), game)
         {
             if (collectingResources == null)
                 throw new ArgumentNullException("collectingResources");
@@ -27,11 +27,11 @@ namespace LotR.Effects.Phases.Resource
         private static string GetDescription(ICollectingResources collectingResources)
         {
             if (!collectingResources.IsCollectingResources || collectingResources.ResourcesToCollect == 0)
-                return string.Format("Character {0} does not collect any resources", collectingResources.Character.Title);
+                return string.Format("{0} does not collect any resources", collectingResources.Character.Title);
 
             return collectingResources.ResourcesToCollect > 1 ?
-                string.Format("Character {0} collects {1} resources", collectingResources.Character.Title, collectingResources.ResourcesToCollect)
-                : string.Format("Character {0} collects 1 resource", collectingResources.Character.Title);
+                string.Format("{0} collects {1} resources", collectingResources.Character.Title, collectingResources.ResourcesToCollect)
+                : string.Format("{0} collects 1 resource", collectingResources.Character.Title);
         }
 
         public override void Resolve(IGame game, IPayment payment, IChoice choice)

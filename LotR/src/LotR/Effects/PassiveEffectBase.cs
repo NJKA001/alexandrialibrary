@@ -11,7 +11,12 @@ namespace LotR.Effects
         : EffectBase, IPassiveEffect
     {
         protected PassiveEffectBase(string description, ISource source)
-            : base(description, source)
+            : base("Passive Effect", description, source)
+        {
+        }
+
+        protected PassiveEffectBase(string name, string description, ISource source)
+            : base(name, description, source)
         {
         }
 

@@ -11,13 +11,8 @@ namespace LotR.Effects
         : CardEffectBase, IResponseEffect
     {
         protected ResponseCardEffectBase(string description, ICard cardSource)
-            : base(description, cardSource)
+            : base("Response", description, cardSource)
         {
-        }
-
-        public override string ToString()
-        {
-            return string.Format("Response: {0}", Description);
         }
     }
 }

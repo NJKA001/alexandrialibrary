@@ -11,7 +11,7 @@ namespace LotR.Effects.Phases
         : FrameworkEffectBase
     {
         public StartOfPhase(IGame game)
-            : base("Start of " + game.CurrentPhase.Name + " Phase", game)
+            : base("Start of Phase", "The start of the " + game.CurrentPhase.Name + " phase", game)
         {
         }
     }

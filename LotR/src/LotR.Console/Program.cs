@@ -330,14 +330,14 @@ namespace LotR.Console
             var playerNames = players.Select(x => x.Name).ToList();
             playerNames.Add("Choose First Player Randomly");
 
-            var result = PromptForNumber(playerNames, 1);
-            if (result < players.Count())
+            var result = PromptForNumber(playerNames);
+            if (result > players.Count())
             {
-                choice.FirstPlayer = players[(int)(result - 1)];
+                choice.ChooseRandomFirstPlayer();
             }
             else
             {
-                choice.ChooseRandomFirstPlayer();
+                choice.FirstPlayer = players[(int)(result - 1)];
             }
         }
 
@@ -358,37 +358,93 @@ namespace LotR.Console
         {
             var player = choice.Players.FirstOrDefault();
 
-            var action = PromptForNumber(new List<string> { "Play a card from your hand", "Trigger an effect on a card you control", "Pass on taking actions right now (if all players pass this action window closes)" });
+            var items = new List<string>();
+            var playableCardsInHand = GetPlayableCardsInHand(player);
+            var playableEffects = GetPlayableEffects(player);
 
-            switch (action)
+            uint playCardFromHand = 0;
+            uint playEffect = 0;
+            uint pass = 0;
+
+            if (playableCardsInHand.Count > 0)
             {
-                case 1:
-                    choice.IsTakingAction = true;
-                    ChooseCardToPlay(player, choice);
-                    break;
-                case 2:
-                    choice.IsTakingAction = true;
-                    ChooseCardEffectToTrigger(player, choice);
-                    break;
-                case 3:
-                default:
-                    choice.IsTakingAction = false;
-                    WriteLine("{0} is passing on taking any actions during this step", player.Name);
-                    break;
+                items.Add("Play a card from your hand");
+                playCardFromHand = (uint)items.Count;
+                
+            }
+
+            if (playableEffects.Count > 0)
+            {
+                items.Add("Trigger an effect on a card you control");
+                playEffect = (uint)items.Count;
+            }
+
+            if (items.Count == 0)
+            {
+                choice.IsTakingAction = false;
+                WriteLine("\r\n{0} does not have any actions that can be taken during this step", player.Name);
+                return;
+            }
+            else
+            {
+                items.Add("Pass (if all players pass, this action window closes)");
+                pass = (uint)items.Count;
+            }
+
+            var action = PromptForNumber(items);
+
+            if (action == playCardFromHand)
+            {
+                ChooseCardToPlay(player, choice, playableCardsInHand);
+                choice.IsTakingAction = true;
+            }
+            else if (action == playEffect)
+            {
+                ChooseCardEffectToTrigger(player, choice, playableEffects);
+                choice.IsTakingAction = true;
+            }
+            else if (action == pass)
+            {
+                choice.IsTakingAction = false;
+                WriteLine("\r\n{0} is passing on taking any actions right now", player.Name);
             }
         }
 
-        private static IPayment GetPayment(IPlayer player, IEffect effect)
+        private static IPayment GetPayment(IPlayer player, ICardEffect cardEffect)
         {
+            if (player == null)
+                throw new ArgumentNullException("player");
+            if (cardEffect == null)
+                throw new ArgumentNullException("cardEffect");
+
+            var cost = cardEffect.GetCost(game);
+            if (cost == null)
+                return null;
+
+            if (cost is IPayResources)
+            {
+                var resourceCost = cost as IPayResources;
+                var payment = new ResourcePayment(cardEffect);
+
+                foreach (var character in player.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.CanPayFor(cardEffect)).ToList())
+                {
+                    GetResourcePayment(resourceCost, cardEffect.Name, payment, character);
+                    if (!resourceCost.IsVariableCost && payment.GetTotalPayment() == resourceCost.NumberOfResources)
+                        break;
+                }
+
+                return payment;
+            }
+
             return null;
         }
 
-        private static void GetResourcePayment(IPayResources cost, ICostlyCard costlyCard, IResourcePayment payment, ICharacterInPlay character)
+        private static void GetResourcePayment(IPayResources cost, string costSource, IResourcePayment payment, ICharacterInPlay character)
         {
             if (cost == null)
                 throw new ArgumentNullException("cost");
-            if (costlyCard == null)
-                throw new ArgumentNullException("costlyCard");
+            if (costSource == null)
+                throw new ArgumentNullException("costSource");
             if (payment == null)
                 throw new ArgumentNullException("payment");
             if (character == null)
@@ -396,10 +452,14 @@ namespace LotR.Console
 
             if (character.Resources == 1)
             {
-                if (PromptForBool(string.Format("{0} can pay for this card and only has 1 resource. Do you want to pay 1 resource from this character?", character.Title)))
-                {
-                    payment.AddPayment(character, 1);
-                }
+                var question = (cost.Sphere == Sphere.Neutral) ?
+                    string.Format("{0} can pay for this card and only has 1 resource. Do you want to pay 1 resource from this character?", character.Title)
+                    : string.Format("{0} can pay for this card and only has 1 {1} resource. Do you want to pay 1 {1} resource from this character?", character.Title, cost.Sphere);
+                
+                    if (PromptForBool(question))
+                    {
+                        payment.AddPayment(character, 1);
+                    }
             }
             else
             {
@@ -416,30 +476,36 @@ namespace LotR.Console
                     }
 
                     if (cost.Sphere == Sphere.Neutral)
-                        WriteLine("{0} has a cost of {1} of any type of resource", costlyCard.Title, cost.NumberOfResources);
+                        WriteLine("{0} has a cost of {1} of any type of resource", costSource, cost.NumberOfResources);
                     else
-                        WriteLine("{0} has a cost of {1} {2} resources", costlyCard.Title, cost.NumberOfResources, cost.Sphere);
+                        WriteLine("{0} has a cost of {1} {2} resources", costSource, cost.NumberOfResources, cost.Sphere);
 
                     if (currentPayment == 0)
                         WriteLine("You have not paid any resources yet.", maxNumberOfResources);
                     else
                         WriteLine("You have paid {0} {1} resources so far with {2} left to pay", currentPayment, cost.Sphere, remainder);
 
-                    WriteLine("{0} has {1} {2} resources available. How many resources do you want to pay?", character.Title, cost.Sphere, character.Resources);
+                    if (cost.Sphere == Sphere.Neutral)
+                        WriteLine("{0} has {1} resources available. How many resources do you want to pay?", character.Title, character.Resources);
+                    else
+                        WriteLine("{0} has {1} {2} resources available. How many resources do you want to pay?", character.Title, character.Resources, cost.Sphere);
                 }
                 else
                 {
                     if (cost.Sphere == Sphere.Neutral)
-                        WriteLine("{0} has a variable cost of any type of resource", costlyCard.Title);
+                        WriteLine("{0} has a variable cost of any type of resource", costSource);
                     else
-                        WriteLine("{0} has a variable cost of {1} resources", costlyCard.Title, cost.Sphere);
+                        WriteLine("{0} has a variable cost of {1} resources", costSource, cost.Sphere);
 
                     if (currentPayment == 0)
                         WriteLine("You have not paid any resources yet");
                     else
                         WriteLine("You have paid {0} resource so far", currentPayment);
 
-                    WriteLine("{0} has {1} resources available. How many resources do you want to pay?", character.Title, character.Resources);
+                    if (cost.Sphere == Sphere.Neutral)
+                        WriteLine("{0} has {1} resources available. How many resources do you want to pay?", character.Title, character.Resources);
+                    else
+                        WriteLine("{0} has {1} {2} resources available. How many resources do you want to pay?", character.Title, character.Resources, cost.Sphere);
                 }
                 
                 var paymentOptions = new List<string>();
@@ -511,7 +577,7 @@ namespace LotR.Console
 
             foreach (var character in characters)
             {
-                GetResourcePayment(cost, costlyCard, payment, character);
+                GetResourcePayment(cost, costlyCard.Title, payment, character);
                 if (!cost.IsVariableCost && payment.GetTotalPayment() == cost.NumberOfResources)
                     break;
             }
@@ -524,50 +590,73 @@ namespace LotR.Console
             return null;
         }
 
-        private static void ChooseCardToPlay(IPlayer player, IChoosePlayerAction choice)
+        private static IList<IPlayerCard> GetPlayableCardsInHand(IPlayer player)
         {
-            var actionCards = new List<IPlayerCard>();
+            var cards = new List<IPlayerCard>();
 
-            foreach (var card in player.Hand.Cards.Where(x => x.HasEffect<IPlayerActionEffect>()))
+            if (game.CurrentPhase.StepCode == PhaseStep.Planning_Play_Allies_and_Attachments)
             {
-                foreach (var effect in card.Text.Effects.OfType<IPlayerActionEffect>())
+                foreach (var card in player.Hand.Cards)
+                    cards.Add(card);
+            }
+            else
+            {
+                foreach (var card in player.Hand.Cards.Where(x => x.HasEffect<IPlayerActionEffect>()))
                 {
-                    if (effect.CanBeTriggered(game))
-                        actionCards.Add(card);
+                    foreach (var effect in card.Text.Effects.OfType<IPlayerActionEffect>())
+                    {
+                        if (effect.CanBeTriggered(game))
+                            cards.Add(card);
+                    }
                 }
             }
 
-            if (actionCards.Count == 0)
+            return cards;
+        }
+
+        private static IList<ICardEffect> GetPlayableEffects(IPlayer player)
+        {
+            var effects = new List<ICardEffect>();
+
+            foreach (var card in player.CardsInPlay.Where(x => x.HasEffect<IPlayerActionEffect>()))
             {
-                WriteLine("You have no cards in your hand which can be played during this step");
-                return;
+                foreach (var effect in card.BaseCard.Text.Effects.OfType<IPlayerActionEffect>())
+                {
+                    if (effect.CanBeTriggered(game))
+                        effects.Add(effect);
+                }
             }
+
+            return effects;
+        }
+
+        private static void ChooseCardToPlay(IPlayer player, IChoosePlayerAction choice, IList<IPlayerCard> cards)
+        {
+            if (cards.Count == 0)
+                return;
 
             WriteLine("Choose a card to play from your hand");
 
-            var actionCardNames = actionCards.Select(x => string.Format("{0} ({1})", x.Title, x.PrintedCardType)).ToList();
-            actionCardNames.Add("Pass on playing a card from your hand");
+            var cardNames = cards.Select(x => string.Format("{0} ({1})", x.Title, x.PrintedCardType)).ToList();
+            cardNames.Add("Pass on playing a card from your hand");
 
-            var actionCardNumber = PromptForNumber(actionCardNames);
+            var cardNumber = PromptForNumber(cardNames);
 
-            if (actionCardNumber == actionCardNames.Count())
+            if (cardNumber == cardNames.Count())
             {
                 WriteLine("Passing on playing an action");
             }
             else
             {
-                var costlyCard = actionCards[(int)actionCardNumber - 1] as ICostlyCard;
+                var costlyCard = cards[(int)cardNumber - 1] as ICostlyCard;
                 if (costlyCard == null)
                     return;
 
-                var playCardEffect = new PlayCardFromHandEffect(game, costlyCard);
-                game.AddEffect(playCardEffect);
-                var playCardOptions = game.GetOptions(playCardEffect);
-                game.ResolveEffect(playCardEffect, playCardOptions);
+                choice.CardToPlay = costlyCard;
             }
         }
 
-        private static void ChooseCardEffectToTrigger(IPlayer player, IChoosePlayerAction choice)
+        private static void ChooseCardEffectToTrigger(IPlayer player, IChoosePlayerAction choice, IList<ICardEffect> effects)
         {
         }
 

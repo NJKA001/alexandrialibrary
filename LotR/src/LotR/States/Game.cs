@@ -152,12 +152,34 @@ namespace LotR.States
 
         public IEnumerable<IPlayer> Players
         {
-            get { return players; }
+            get
+            {
+                if (FirstPlayer == null)
+                    return players.ToList();
+
+                var orderedPlayers = new List<IPlayer>();
+
+                var index = players.IndexOf(FirstPlayer);
+                if (index < 0 || index > (players.Count - 1))
+                    throw new InvalidOperationException("First player is not contained in players list");
+
+                var currentIndex = index;
+                while (orderedPlayers.Count < players.Count)
+                {
+                    orderedPlayers.Add(players[currentIndex]);
+                    if (currentIndex == (players.Count - 1))
+                        currentIndex = 0;
+                    else
+                        currentIndex += 1;
+                }
+
+                return orderedPlayers;
+            }
         }
 
         public IPlayer FirstPlayer
         {
-            get { return players.Single(x => x.IsFirstPlayer); }
+            get { return players.SingleOrDefault(x => x.IsFirstPlayer); }
         }
 
         public IPlayer ActivePlayer
@@ -265,16 +287,14 @@ namespace LotR.States
                     var options = GetOptions(effect);
 
                     var choice = options.Choice as IChoosePlayerAction;
-                    if (choice != null)
+                    if (choice == null)
+                        throw new InvalidOperationException();
+
+                    if (choice.IsTakingAction)
                     {
-                        if (choice.IsTakingAction)
-                        {
-                            allPlayersPass = false;
-                            ResolveEffect(effect, options);
-                        }
+                        allPlayersPass = false;
+                        ResolveEffect(effect, options);
                     }
-                    else
-                        break;
                 }
             }
         }

@@ -11,14 +11,14 @@ namespace LotR.Effects.Phases.Setup
         : FrameworkEffectBase, IDuringSetup
     {
         public PlayerShufflesDeck(IGame game, IPlayer player)
-            : base(GetDescription(player), game)
+            : base("Shuffle Deck", GetDescription(player), game)
         {
             this.Player = player;
         }
 
         private static string GetDescription(IPlayer player)
         {
-            return string.Format("{0} shuffles their deck", player.Name);
+            return string.Format("{0} shuffles their player card deck", player.Name);
         }
 
         public IPlayer Player

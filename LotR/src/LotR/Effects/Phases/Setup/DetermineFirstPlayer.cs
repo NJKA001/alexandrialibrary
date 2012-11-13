@@ -13,7 +13,7 @@ namespace LotR.Effects.Phases.Setup
         : FrameworkEffectBase, IDuringSetup
     {
         public DetermineFirstPlayer(IGame game)
-            : base("Determine First Player", game)
+            : base("Determine First Player", "The players determine a FIRST PLAYER based on a majority group decision. If this proves impossible, determine a first player at random.", game)
         {
         }
 
@@ -39,10 +39,18 @@ namespace LotR.Effects.Phases.Setup
                 return;
 
             var firstPlayerChoice = choice as IChooseFirstPlayer;
-            if (firstPlayerChoice == null || firstPlayerChoice.FirstPlayer == null)
-                return;
+            if (firstPlayerChoice == null)
+                throw new InvalidOperationException("choice is not a valid IFirstPlayerChoice");
+
+            if (firstPlayerChoice.FirstPlayer == null)
+                throw new InvalidOperationException("first player choice is undefined");
 
             firstPlayerChoice.FirstPlayer.IsFirstPlayer = true;
+
+            foreach (var player in game.Players.Where(x => !x.IsFirstPlayer))
+            {
+                player.IsFirstPlayer = false;
+            }
         }
 
         public override string GetResolutionDescription(IGame game, IPayment payment, IChoice choice)

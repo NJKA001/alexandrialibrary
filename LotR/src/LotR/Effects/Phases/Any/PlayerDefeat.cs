@@ -11,7 +11,7 @@ namespace LotR.Effects.Phases.Any
         : FrameworkEffectBase
     {
         public PlayerDefeat(IGame game)
-            : base("The players have lost the game", game)
+            : base("Player Defeat", "The players have lost the game", game)
         {
         }
     }

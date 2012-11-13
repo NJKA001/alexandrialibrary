@@ -11,13 +11,8 @@ namespace LotR.Effects
         : CardEffectBase, IActionEffect
     {
         protected ActionCardEffectBase(string description, ICard cardSource)
-            : base(description, cardSource)
+            : base("Action", description, cardSource)
         {
-        }
-
-        public override string ToString()
-        {
-            return string.Format("Action: {0}", Description);
         }
     }
 }

@@ -32,6 +32,8 @@ namespace LotR.Cards.Player.Events
             {
                 foreach (var player in game.Players)
                 {
+                    //TODO: Check for IDuringDrawingCards effects here
+
                     var effect = new DrawingCardsEffect(game, player, 1);
                     game.AddEffect(effect);
                     game.ResolveEffect(effect, EffectOptions.Empty);

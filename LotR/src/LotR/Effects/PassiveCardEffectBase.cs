@@ -11,7 +11,12 @@ namespace LotR.Effects
         : CardEffectBase, IPassiveEffect
     {
         protected PassiveCardEffectBase(string description, ICard cardSource)
-            : base(description, cardSource)
+            : base("Passive Card Effect", description, cardSource)
+        {
+        }
+
+        protected PassiveCardEffectBase(string name, string description, ICard cardSource)
+            : base(name, description, cardSource)
         {
         }
 

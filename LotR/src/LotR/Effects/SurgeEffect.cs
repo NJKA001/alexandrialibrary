@@ -11,13 +11,13 @@ namespace LotR.Effects
         : CardEffectBase, ISurgeEffect
     {
         public SurgeEffect(IEncounterCard source)
-            : base("Surge", source)
+            : base("Surge", "Reveal 1 additional card from the encounter deck", source)
         {
         }
 
         public override string ToString()
         {
-            return "Surge";
+            return Description;
         }
     }
 }

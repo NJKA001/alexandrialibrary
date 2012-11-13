@@ -21,7 +21,7 @@ namespace LotR.Effects.Phases.Any
         : FrameworkEffectBase, IPlayCardFromHandEffect
     {
         public PlayCardFromHandEffect(IGame game, ICostlyCard costlyCard)
-            : base(GetDescription(costlyCard), game)
+            : base("Play card from hand", GetDescription(costlyCard), game)
         {
             this.costlyCard = costlyCard;
             this.cost = costlyCard.GetResourceCost(game) as IPayResources;
@@ -29,7 +29,7 @@ namespace LotR.Effects.Phases.Any
 
         private static string GetDescription(IPlayerCard card)
         {
-            return string.Format("Play {0} from your hand", card.Title);
+            return string.Format("Pay the cost for and play {0} from your hand", card.Title);
         }
 
         private readonly ICostlyCard costlyCard;

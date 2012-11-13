@@ -110,8 +110,11 @@ namespace LotR.States.Phases.Resource
                 uint numberOfCards = playersDrawingCards.PlayerCanDrawCards(player.StateId) ?
                     playersDrawingCards.GetNumberOfCards(player.StateId)
                     : 0;
-                
-                Game.ResolveEffect(new DrawingCardsEffect(Game, player, numberOfCards), EffectOptions.Empty);
+
+                if (numberOfCards > 0)
+                {
+                    Game.ResolveEffect(new DrawingCardsEffect(Game, player, numberOfCards), EffectOptions.Empty);
+                }
             }
         }
 

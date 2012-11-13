@@ -11,7 +11,7 @@ namespace LotR.Effects.Phases.Any
         : FrameworkEffectBase
     {
         public PlayerVictory(IGame game)
-            : base(GetDescription(game), game)
+            : base("Player Victory", GetDescription(game), game)
         {
         }
 

@@ -13,7 +13,7 @@ namespace LotR.Effects.Phases.Setup
         : FrameworkEffectBase, IDuringSetup
     {
         public SetQuestCards(IGame game)
-            : base("Set Quest Cards", game)
+            : base("Set Quest Cards", "Arrange the quest cards in sequential order, based off the numbers on the back of each card.", game)
         {
         }
 

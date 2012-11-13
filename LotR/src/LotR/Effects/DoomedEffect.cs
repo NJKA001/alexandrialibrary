@@ -11,14 +11,19 @@ namespace LotR.Effects
         : CardEffectBase, IDoomedEffect
     {
         public DoomedEffect(IEncounterCard source, byte doomed)
-            : base(GetDoomedDescription(doomed), source)
+            : base(GetName(doomed), GetDescription(doomed), source)
         {
             this.Doomed = doomed;
         }
 
-        public static string GetDoomedDescription(byte doomed)
+        private static string GetName(byte doomed)
         {
             return string.Format("Doomed {0}", doomed);
+        }
+
+        private static string GetDescription(byte doomed)
+        {
+            return string.Format("Each player must raise their threat by {0}", doomed);
         }
 
         public byte Doomed
@@ -29,7 +34,7 @@ namespace LotR.Effects
 
         public override string ToString()
         {
-            return string.Format("Doomed {0}", Doomed);
+            return Name;
         }
     }
 }

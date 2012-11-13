@@ -14,12 +14,18 @@ namespace LotR.Effects
     public abstract class EffectBase
         : IEffect
     {
-        protected EffectBase(string description, ISource source)
+        protected EffectBase(string name, string description, ISource source)
         {
-            EffectId = Guid.NewGuid();
-            Description = description;
-            Source = source;
+            this.effectId = Guid.NewGuid();
+            this.name = name;
+            this.description = description;
+            this.source = source;
         }
+
+        private readonly Guid effectId;
+        private readonly string name;
+        private readonly string description;
+        private readonly ISource source;
 
         protected bool IsPlayAlliesAndAttachmentsStep(IGame game)
         {
@@ -59,20 +65,22 @@ namespace LotR.Effects
 
         public Guid EffectId
         {
-            get;
-            private set;
+            get { return effectId; }
+        }
+
+        public string Name
+        {
+            get { return name; }
         }
 
         public string Description
         {
-            get;
-            private set;
+            get { return description; }
         }
 
         public ISource Source
         {
-            get;
-            private set;
+            get { return source; }
         }
 
         public virtual IChoice GetChoice(IGame game)

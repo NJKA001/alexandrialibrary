@@ -11,7 +11,7 @@ namespace LotR.Effects.Phases
         : FrameworkEffectBase
     {
         public StartOfRound(IGame game)
-            : base("Start of Round " + game.CurrentRound, game)
+            : base("Start of Round", "The start of game round #" + game.CurrentRound, game)
         {
         }
     }

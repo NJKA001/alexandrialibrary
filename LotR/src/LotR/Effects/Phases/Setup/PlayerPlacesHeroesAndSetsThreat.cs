@@ -11,7 +11,7 @@ namespace LotR.Effects.Phases.Setup
         : FrameworkEffectBase, IDuringSetup
     {
         public PlayerPlacesHeroesAndSetsThreat(IGame game, IPlayer player)
-            : base(GetDescription(player), game)
+            : base("Place heroes and set starting threat", GetDescription(player), game)
         {
             this.Player = player;
         }

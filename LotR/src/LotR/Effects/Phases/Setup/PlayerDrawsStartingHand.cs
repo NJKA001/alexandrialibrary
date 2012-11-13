@@ -14,7 +14,7 @@ namespace LotR.Effects.Phases.Setup
         : FrameworkEffectBase, IDuringSetup
     {
         public PlayerDrawsStartingHand(IGame game, IPlayer player)
-            : base(GetDescription(player), game)
+            : base("Draw Setup Hand", GetDescription(player), game)
         {
             if (player == null)
                 throw new ArgumentNullException("player");

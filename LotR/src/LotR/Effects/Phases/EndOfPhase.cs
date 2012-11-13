@@ -11,7 +11,7 @@ namespace LotR.Effects.Phases
         : FrameworkEffectBase
     {
         public EndOfPhase(IGame game)
-            : base("End of " + game.CurrentPhase.Name + " Phase", game)
+            : base("End of Phase", "The end of " + game.CurrentPhase.Name + " phase", game)
         {
         }
     }
