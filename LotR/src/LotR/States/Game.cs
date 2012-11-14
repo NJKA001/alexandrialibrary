@@ -324,10 +324,10 @@ namespace LotR.States
         {
             T card = null;
 
-            if (QuestArea.ActiveLocation.Card.Id == cardId)
+            if (QuestArea.ActiveLocation != null && QuestArea.ActiveLocation.Card.Id == cardId)
                 return QuestArea.ActiveLocation as T;
 
-            if (QuestArea.ActiveQuest.Card.Id == cardId)
+            if (QuestArea.ActiveQuest != null && QuestArea.ActiveQuest.Card.Id == cardId)
                 return QuestArea.ActiveQuest as T;
 
             card = StagingArea.CardsInStagingArea.OfType<T>().Where(x => x.StateId == cardId).FirstOrDefault();

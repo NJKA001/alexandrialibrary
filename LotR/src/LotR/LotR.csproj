@@ -91,6 +91,7 @@
     <Compile Include="Effects\Choices\ChooseCardInHand.cs" />
     <Compile Include="Effects\Choices\ChooseCharacterWithTrait.cs" />
     <Compile Include="Effects\Choices\ChooseFirstPlayer.cs" />
+    <Compile Include="Effects\Choices\ChooseGaladhrimsGreetingEffect.cs" />
     <Compile Include="Effects\Choices\ChooseGandalfEffect.cs" />
     <Compile Include="Effects\Choices\ChooseHero.cs" />
     <Compile Include="Effects\Choices\ChoosePlayerAction.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Effects\Choices\IChooseAttachmentHost.cs" />
     <Compile Include="Effects\Choices\IChooseCardInHand.cs" />
     <Compile Include="Effects\Choices\IChooseFirstPlayer.cs" />
+    <Compile Include="Effects\Choices\IChooseGaladhrimsGreetingEffect.cs" />
     <Compile Include="Effects\Choices\IChooseGandalfEffect.cs" />
     <Compile Include="Effects\Choices\IChoosePlayerAction.cs" />
     <Compile Include="Effects\Choices\IChooseToKeepStartingHand.cs" />

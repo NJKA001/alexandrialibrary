@@ -21,7 +21,7 @@ namespace LotR.Cards.Player.Events
         }
 
         private class EachPlayerDrawsOneCard
-            : ActionCardEffectBase
+            : ActionCardEffectBase, IPlayerActionEffect
         {
             public EachPlayerDrawsOneCard(CampfireTales cardSource)
                 : base("Each player draws 1 card.", cardSource)
