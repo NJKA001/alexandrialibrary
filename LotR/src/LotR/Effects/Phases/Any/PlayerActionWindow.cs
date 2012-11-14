@@ -47,7 +47,9 @@ namespace LotR.Effects.Phases.Any
             }
             else if (actionChoice.CardEffectToTrigger != null)
             {
-
+                game.AddEffect(actionChoice.CardEffectToTrigger);
+                var playEffectOptions = game.GetOptions(actionChoice.CardEffectToTrigger);
+                game.ResolveEffect(actionChoice.CardEffectToTrigger, playEffectOptions);
             }
         }
 

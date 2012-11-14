@@ -91,6 +91,7 @@
     <Compile Include="Effects\Choices\ChooseCardInHand.cs" />
     <Compile Include="Effects\Choices\ChooseCharacterWithTrait.cs" />
     <Compile Include="Effects\Choices\ChooseFirstPlayer.cs" />
+    <Compile Include="Effects\Choices\ChooseGandalfEffect.cs" />
     <Compile Include="Effects\Choices\ChooseHero.cs" />
     <Compile Include="Effects\Choices\ChoosePlayerAction.cs" />
     <Compile Include="Effects\Choices\ChoosePlayerToChooseHero.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Effects\Choices\IChooseAttachmentHost.cs" />
     <Compile Include="Effects\Choices\IChooseCardInHand.cs" />
     <Compile Include="Effects\Choices\IChooseFirstPlayer.cs" />
+    <Compile Include="Effects\Choices\IChooseGandalfEffect.cs" />
     <Compile Include="Effects\Choices\IChoosePlayerAction.cs" />
     <Compile Include="Effects\Choices\IChooseToKeepStartingHand.cs" />
     <Compile Include="Effects\Choices\IPlayersChooseCards.cs" />
@@ -124,6 +126,9 @@
     <Compile Include="Effects\Modifiers\ThreatModifier.cs" />
     <Compile Include="Effects\PassiveCardEffectBase.cs" />
     <Compile Include="Effects\Payments\ResourcePayment.cs" />
+    <Compile Include="Effects\Phases\Any\CardEntersPlayEffect.cs" />
+    <Compile Include="Effects\Phases\Any\CardLeavesPlayEffect.cs" />
+    <Compile Include="Effects\Phases\Any\DealDamageEffect.cs" />
     <Compile Include="Effects\Phases\Any\IAfterLocationExplored.cs" />
     <Compile Include="Effects\Phases\Any\IAfterStageDefeated.cs" />
     <Compile Include="Effects\Phases\Any\IDuringCheckForResourceMatch.cs" />
@@ -551,9 +556,6 @@
     <Compile Include="States\ThreateningInPlay.cs" />
     <Compile Include="States\TreasureInPlay.cs" />
     <Compile Include="States\UnclaimedObjectiveInPlay.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferences Include="Web References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

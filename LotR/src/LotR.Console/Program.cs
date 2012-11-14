@@ -93,6 +93,7 @@ namespace LotR.Console
         {
             var controller = new GameController();
             controller.RegisterChoiceOfferedCallback((effect, choice) => ChoiceOfferedCallback(effect, choice));
+            controller.RegisterEffectAddedCallback((effect) => EffectAddedCallback(effect));
             controller.RegisterEffectResolvedCallback((effect, payment, choice) => EffectResolvedCallback(effect, payment, choice));
             controller.RegisterGetPaymentCallback((effect, cost) => GetPaymentCallback(effect, cost));
             controller.RegisterPaymentRejectedCallback((effect, payment, choice) => PaymentRejectedCallback(effect, payment, choice));
@@ -286,6 +287,11 @@ namespace LotR.Console
             }
 
             return results;
+        }
+
+        private static bool PromptForBool(string format, params object[] args)
+        {
+            return PromptForBool(string.Format(format, args));
         }
 
         private static bool PromptForBool(string message)
@@ -642,7 +648,7 @@ namespace LotR.Console
 
             var cardNumber = PromptForNumber(cardNames);
 
-            if (cardNumber == cardNames.Count())
+            if (cardNumber == cardNames.Count)
             {
                 WriteLine("Passing on playing an action");
             }
@@ -658,6 +664,27 @@ namespace LotR.Console
 
         private static void ChooseCardEffectToTrigger(IPlayer player, IChoosePlayerAction choice, IList<ICardEffect> effects)
         {
+            if (effects.Count == 0)
+                return;
+
+            WriteLine("Choose an effect to trigger");
+
+            var effectNames = effects.Select(x => string.Format("{0} ({1} - {2})", x.Name, x.CardSource.Title, x.CardSource.PrintedCardType)).ToList();
+            effectNames.Add("Pass on triggering an effect");
+
+            var effectNumber = PromptForNumber(effectNames);
+
+            if (effectNumber == effectNames.Count)
+            {
+            }
+            else
+            {
+                var cardEffect = effects[(int)effectNumber - 1] as ICardEffect;
+                if (cardEffect == null)
+                    return;
+
+                choice.CardEffectToTrigger = cardEffect;
+            }
         }
 
         private static string GetAttachmentHostName(IAttachmentHostInPlay host)
@@ -745,6 +772,43 @@ namespace LotR.Console
             WriteLine("Chose {0} from your hand", choice.ChosenPlayerCard.Title);
         }
 
+        private static void ChooseGandalfEffect(IChooseGandalfEffect choice)
+        {
+            var items = new List<string> { "draw three cards", "reduce your threat by 5" };
+            if (choice.EnemiesToChoose.Count() > 0)
+                items.Add("deal 4 damage to 1 enemy in play");
+
+            var answer = PromptForNumber(items);
+
+            switch (answer)
+            {
+                case 1:
+                    choice.DrawCards = true;
+                    return;
+                case 2:
+                    choice.ReduceYourThreat = true;
+                    return;
+                case 3:
+                default:
+                    {
+                        if (choice.EnemiesToChoose.Count() == 1)
+                        {
+                            WriteLine("Dealing 4 damage to the only enemy that is a valid target");
+                            choice.EnemyToDamage = choice.EnemiesToChoose.First();
+                        }
+                        else
+                        {
+                            var enemies = choice.EnemiesToChoose.ToList();
+                            var enemyNames = enemies.Select(x => string.Format("{0} ({1} threat, {2} attack, {3} defense, {4}/{5} hit points)", x.Title, x.Card.PrintedThreat, x.Card.PrintedAttack, x.Card.PrintedDefense, x.Card.PrintedHitPoints - x.Damage, x.Card.PrintedHitPoints)).ToList();
+                            var enemyNumber = PromptForNumber(enemyNames);
+                            choice.EnemyToDamage = enemies[(int)enemyNumber - 1];
+                        }
+                    }
+                    return;
+            }
+            
+        }
+
         private static void HandleChoice(IChoice choice)
         {
             WriteLine("\r\nChoice: {0}\r\n", choice.Description);
@@ -768,6 +832,10 @@ namespace LotR.Console
             else if (choice is IChooseCardInHand)
             {
                 ChooseCardInHand(choice as IChooseCardInHand);
+            }
+            else if (choice is IChooseGandalfEffect)
+            {
+                ChooseGandalfEffect(choice as IChooseGandalfEffect);
             }
         }
 
@@ -838,7 +906,26 @@ namespace LotR.Console
 
         private static void PaymentRejectedCallback(IEffect effect, IPayment payment, IChoice choice)
         {
-            WriteLine("Payment Rejected Callback - TODO");
+            WriteLine("Payment for this effect was not accepted");
+        }
+
+        private static void EffectAddedCallback(IEffect effect)
+        {
+            try
+            {
+                if (effect is IResponseEffect && effect.CanBeTriggered(game))
+                {
+                    if (PromptForBool("You have a response that can be triggered right now.\r\n\r\n{0}\r\n\r\nWould you like to trigger this repsonse?", effect))
+                    {
+                        var options = game.GetOptions(effect);
+                        game.ResolveEffect(effect, options);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                WriteLine("\r\nError in effect added callback: {0}\r\n{1}", ex.Message, ex.StackTrace);
+            }
         }
 
         private static void EffectResolvedCallback(IEffect effect, IPayment payment, IChoice choice)

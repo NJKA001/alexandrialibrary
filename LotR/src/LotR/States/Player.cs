@@ -8,6 +8,8 @@ using System.Text;
 using LotR.Cards;
 using LotR.Cards.Player;
 using LotR.Cards.Player.Heroes;
+using LotR.Effects;
+using LotR.Effects.Phases.Any;
 
 namespace LotR.States
 {
@@ -154,6 +156,10 @@ namespace LotR.States
                 return;
 
             cardsInPlay.Add(card);
+
+            var entersPlayEffect = new CardEntersPlayEffect(Game, card);
+            Game.AddEffect(entersPlayEffect);
+            Game.ResolveEffect(entersPlayEffect, EffectOptions.Empty);
         }
 
         public void RemoveCardInPlay(ICardInPlay card)
@@ -165,6 +171,10 @@ namespace LotR.States
                 return;
 
             cardsInPlay.Remove(card);
+
+            var leavesPlayEffect = new CardLeavesPlayEffect(Game, card);
+            Game.AddEffect(leavesPlayEffect);
+            Game.ResolveEffect(leavesPlayEffect, EffectOptions.Empty);
         }
 
         public void AddEngagedEnemy(IEnemyInPlay enemy)

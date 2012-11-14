@@ -74,7 +74,7 @@ namespace LotR.Cards.Player.Events
 
             public override bool CanBeTriggered(IGame game)
             {
-                return true;
+                return IsEndOfPhase(game);
             }
 
             private readonly Guid allyId;

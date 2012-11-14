@@ -180,10 +180,10 @@ namespace LotR.States.Areas
             if (enemyCount > 0)
             {
                 sb.AppendFormat("  Enemies: {0} ({1} threat)\r\n", enemyCount, enemyThreat);
-                foreach (var enemy in cardsInStagingArea.OfType<IEnemyInPlay>().OfType<IThreateningInPlay>())
+                foreach (var enemy in cardsInStagingArea.OfType<IEnemyInPlay>())
                 {
                     number++;
-                    sb.AppendFormat("{0,00}  {1} ({2} threat)\r\n", number, enemy.Card.Title, enemy.Threat);
+                    sb.AppendFormat("{0,00}  {1} ({2} threat, {3}/{4} hit points)\r\n", number, enemy.Card.Title, enemy.Card.PrintedThreat, enemy.Card.PrintedHitPoints - enemy.Damage, enemy.Card.PrintedHitPoints);
                 }
             }
 
