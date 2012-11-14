@@ -10,5 +10,6 @@ namespace LotR.States.Phases.Combat
     {
         IEnemyInPlay Enemy { get; }
         IEnumerable<IAttackingInPlay> Attackers { get; }
+        bool IsEnemyDefeated { get; set; }
     }
 }

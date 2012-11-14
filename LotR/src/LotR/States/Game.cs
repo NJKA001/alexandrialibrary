@@ -103,6 +103,11 @@ namespace LotR.States
             }
         }
 
+        private void Cleanup()
+        {
+            ResolveImmediately(new CheckForDefeatedEnemiesEffect(this));
+        }
+
         #region Properties
 
         public Guid Id
@@ -294,9 +299,13 @@ namespace LotR.States
                     {
                         allPlayersPass = false;
                         ResolveEffect(effect, options);
+
+                        Cleanup();
                     }
                 }
             }
+
+            Cleanup();
         }
 
         public IPlayer GetController(Guid cardId)

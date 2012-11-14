@@ -27,11 +27,31 @@ namespace LotR.Effects.Phases.Any
 
         public override void Resolve(IGame game, IPayment payment, IChoice choice)
         {
+            if (game.StagingArea.CardsInStagingArea.Any(x => x.Card.Id == cardInPlay.BaseCard.Id))
+            {
+                game.StagingArea.RemoveFromStagingArea(cardInPlay as IEncounterInPlay);
+            }
+            else if (game.QuestArea.ActiveLocation != null && game.QuestArea.ActiveLocation.Card.Id == cardInPlay.BaseCard.Id)
+            {
+                game.QuestArea.RemoveActiveLocation();
+            }
+            else
+            {
+                foreach (var player in game.Players)
+                {
+                    if (player.CardsInPlay.Any(x => x.BaseCard.Id == cardInPlay.BaseCard.Id))
+                    {
+                        player.RemoveCardInPlay(cardInPlay);
+                        break;
+                    }
+                }
+            }
+
             var state = new CardLeavesPlay(game, cardInPlay);
 
-            foreach (var inPlay in game.GetCardsInPlayWithEffect<ICardInPlay, IAfterCardEntersPlay>())
+            foreach (var card in game.GetCardsInPlayWithEffect<ICardInPlay, IAfterCardLeavesPlay>())
             {
-                foreach (var effect in inPlay.BaseCard.Text.Effects.OfType<IAfterCardLeavesPlay>())
+                foreach (var effect in card.BaseCard.Text.Effects.OfType<IAfterCardLeavesPlay>())
                 {
                     effect.AfterCardLeavesPlay(state);
                 }

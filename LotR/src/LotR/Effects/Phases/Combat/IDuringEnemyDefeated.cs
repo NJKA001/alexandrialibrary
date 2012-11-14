@@ -8,7 +8,8 @@ using LotR.States.Phases.Combat;
 namespace LotR.Effects.Phases.Combat
 {
     public interface IDuringEnemyDefeated
+        : IEffect
     {
-        void DuringEnemyDefeated(IEnemyDefeated step);
+        void DuringEnemyDefeated(IEnemyDefeated state);
     }
 }

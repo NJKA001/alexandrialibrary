@@ -128,7 +128,9 @@
     <Compile Include="Effects\Payments\ResourcePayment.cs" />
     <Compile Include="Effects\Phases\Any\CardEntersPlayEffect.cs" />
     <Compile Include="Effects\Phases\Any\CardLeavesPlayEffect.cs" />
+    <Compile Include="Effects\Phases\Any\CheckForDefeatedEnemiesEffect.cs" />
     <Compile Include="Effects\Phases\Any\DealDamageEffect.cs" />
+    <Compile Include="Effects\Phases\Any\EnemyDefeatedEffect.cs" />
     <Compile Include="Effects\Phases\Any\IAfterLocationExplored.cs" />
     <Compile Include="Effects\Phases\Any\IAfterStageDefeated.cs" />
     <Compile Include="Effects\Phases\Any\IDuringCheckForResourceMatch.cs" />

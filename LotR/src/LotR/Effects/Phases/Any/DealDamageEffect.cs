@@ -13,10 +13,15 @@ namespace LotR.Effects.Phases.Any
         : FrameworkEffectBase
     {
         public DealDamageEffect(IGame game, ICardInPlay cardInPlay, byte damage)
-            : base("Deal Damage", "Deal " + damage + " damage to " + cardInPlay.Title, game)
+            : base("Deal Damage", GetDescription(damage, cardInPlay), game)
         {
             this.cardInPlay = cardInPlay;
             this.damage = damage;
+        }
+
+        private static string GetDescription(byte damage, ICardInPlay cardInPlay)
+        {
+            return string.Format("Deal {0} damage to {1}", damage, cardInPlay.Title);
         }
 
         private readonly ICardInPlay cardInPlay;

@@ -8,6 +8,7 @@ using LotR.States.Phases.Combat;
 namespace LotR.Effects.Phases.Combat
 {
     public interface IAfterEnemyDefeated
+        : IEffect
     {
         void AfterEnemyDefeated(IEnemyDefeated state);
     }

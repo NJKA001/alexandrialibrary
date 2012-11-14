@@ -20,6 +20,8 @@ namespace LotR.States.Phases.Combat
             this.Attackers = attackers;
         }
 
+        private bool isEnemyDefeated = true;
+
         public IEnemyInPlay Enemy
         {
             get;
@@ -30,6 +32,19 @@ namespace LotR.States.Phases.Combat
         {
             get;
             private set;
+        }
+
+        public bool IsEnemyDefeated
+        {
+            get { return isEnemyDefeated; }
+            set
+            {
+                if (isEnemyDefeated == value)
+                    return;
+
+                isEnemyDefeated = value;
+                OnPropertyChanged("IsEnemyDefeated");
+            }
         }
     }
 }

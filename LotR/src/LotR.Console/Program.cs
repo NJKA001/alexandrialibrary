@@ -64,20 +64,6 @@ namespace LotR.Console
                 var players = GetPlayers(game, playersInfo);
 
                 game.Setup(players, ScenarioCode.Passage_Through_Mirkwood);
-                
-                //WriteLine("\r\nGame Is Ready\r\n");
-
-                //var line = string.Empty;
-                //while (line != command_exit)
-                //{
-                //    Write("\r\nready>");
-
-                //    line = System.Console.ReadLine();
-                //    if (string.IsNullOrEmpty(line))
-                //        continue;
-
-                //    CheckForCommand(line);
-                //}
             }
             catch (Exception ex)
             {
@@ -157,7 +143,6 @@ namespace LotR.Console
                     WriteLine(game.VictoryDisplay.ToString());
                     return true;
                 default:
-                    //WriteLine("unrecognized command: {0}\r\nenter 'help' for a list of a valid commands", command);
                     return false;
             }
         }
