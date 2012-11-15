@@ -34,7 +34,11 @@ namespace LotR.Effects.Choices
             get { return enemyToDamage; }
             set
             {
+                if (enemyToDamage == value)
+                    return;
+
                 enemyToDamage = value;
+                OnPropertyChanged("EnemyToDamage");
 
                 if (enemyToDamage != null)
                 {
@@ -49,7 +53,11 @@ namespace LotR.Effects.Choices
             get { return drawCards; }
             set
             {
+                if (drawCards == value)
+                    return;
+
                 drawCards = value;
+                OnPropertyChanged("DrawCards");
 
                 if (drawCards)
                 {
@@ -64,7 +72,11 @@ namespace LotR.Effects.Choices
             get { return reduceYourThreat; }
             set
             {
+                if (reduceYourThreat == value)
+                    return;
+
                 reduceYourThreat = value;
+                OnPropertyChanged("ReduceYourThreat");
 
                 if (reduceYourThreat)
                 {

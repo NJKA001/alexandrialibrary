@@ -42,7 +42,7 @@ namespace LotR.Cards.Encounter.Enemies
                 if (enemyEngage == null)
                     return null;
 
-                return new ChooseHero(Source, enemyEngage.DefendingPlayer);
+                return new ChooseHero(Source, enemyEngage.DefendingPlayer, enemyEngage.DefendingPlayer.CardsInPlay.OfType<IHeroInPlay>().ToList());
             }
 
             public override void Resolve(IGame game, IPayment payment, IChoice choice)

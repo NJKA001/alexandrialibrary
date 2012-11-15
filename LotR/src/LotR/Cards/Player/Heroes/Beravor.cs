@@ -38,7 +38,7 @@ namespace LotR.Cards.Player.Heroes
                 if (controller == null)
                     return null;
 
-                return new ChoosePlayer(Source, controller);
+                return new ChoosePlayer(Source, controller, game.Players.ToList());
             }
 
             public override ICost GetCost(IGame game)

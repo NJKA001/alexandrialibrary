@@ -87,6 +87,8 @@
     <Compile Include="Cards\Quests\BeornsPath.cs" />
     <Compile Include="Cards\Quests\DontLeaveThePath.cs" />
     <Compile Include="Cards\ScenarioCode.cs" />
+    <Compile Include="Effects\Choices\Answer.cs" />
+    <Compile Include="Effects\Choices\ChoiceItemBase.cs" />
     <Compile Include="Effects\Choices\ChooseAttachmentHost.cs" />
     <Compile Include="Effects\Choices\ChooseCardInHand.cs" />
     <Compile Include="Effects\Choices\ChooseCharacterWithTrait.cs" />
@@ -97,6 +99,8 @@
     <Compile Include="Effects\Choices\ChoosePlayerAction.cs" />
     <Compile Include="Effects\Choices\ChoosePlayerToChooseHero.cs" />
     <Compile Include="Effects\Choices\ChooseToKeepStartingHand.cs" />
+    <Compile Include="Effects\Choices\IAnswer.cs" />
+    <Compile Include="Effects\Choices\IChoiceItem.cs" />
     <Compile Include="Effects\Choices\IChooseAttachmentHost.cs" />
     <Compile Include="Effects\Choices\IChooseCardInHand.cs" />
     <Compile Include="Effects\Choices\IChooseFirstPlayer.cs" />
@@ -105,12 +109,14 @@
     <Compile Include="Effects\Choices\IChoosePlayerAction.cs" />
     <Compile Include="Effects\Choices\IChooseToKeepStartingHand.cs" />
     <Compile Include="Effects\Choices\IPlayersChooseCards.cs" />
+    <Compile Include="Effects\Choices\IQuestion.cs" />
     <Compile Include="Effects\Choices\PlayersChooseCards.cs" />
     <Compile Include="Effects\Choices\PlayersChooseCharacters.cs" />
     <Compile Include="Effects\Choices\EachPlayerChoosesReadyCharacters.cs" />
     <Compile Include="Effects\Choices\IChooseCharacterWithTrait.cs" />
     <Compile Include="Effects\Choices\IChoosePlayerToChooseHero.cs" />
     <Compile Include="Effects\Choices\IPlayersChooseCharacters.cs" />
+    <Compile Include="Effects\Choices\Question.cs" />
     <Compile Include="Effects\Costs\IPayResources.cs" />
     <Compile Include="Effects\Costs\IPayResourcesFrom.cs" />
     <Compile Include="Effects\EffectOptions.cs" />
@@ -560,6 +566,9 @@
     <Compile Include="States\ThreateningInPlay.cs" />
     <Compile Include="States\TreasureInPlay.cs" />
     <Compile Include="States\UnclaimedObjectiveInPlay.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -18,10 +18,19 @@ namespace LotR.Effects.Choices
         {
         }
 
-        public ICardInPlay<IAllyCard> Ally
+        private IAllyInPlay ally;
+
+        public IAllyInPlay Ally
         {
-            get;
-            set;
+            get { return ally; }
+            set
+            {
+                if (ally == value)
+                    return;
+
+                ally = value;
+                OnPropertyChanged("Ally");
+            }
         }
     }
 }

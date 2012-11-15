@@ -21,10 +21,63 @@ namespace LotR.Effects.Choices
             return string.Format("{0} can choose to take an action during the {1} step of the {2} phase. They may play a card from their hand, trigger an effect on a card in play or pass on taking any actions.", player.Name, game.CurrentPhase.StepName, game.CurrentPhase.Name);
         }
 
-        public bool IsTakingAction { get; set; }
+        private bool isTakingAction;
+        private IPlayerCard cardToPlay;
+        private ICardEffect cardEffectToTrigger;
 
-        public IPlayerCard CardToPlay { get; set; }
+        public bool IsTakingAction
+        {
+            get { return isTakingAction; }
+            set
+            {
+                if (isTakingAction == value)
+                    return;
 
-        public ICardEffect CardEffectToTrigger { get; set; }
+                isTakingAction = value;
+                OnPropertyChanged("IsTakingAction");
+
+                if (!isTakingAction)
+                {
+                    CardToPlay = null;
+                    CardEffectToTrigger = null;
+                }
+            }
+        }
+
+        public IPlayerCard CardToPlay
+        {
+            get { return cardToPlay; }
+            set
+            {
+                if (cardToPlay == value)
+                    return;
+
+                cardToPlay = value;
+                OnPropertyChanged("CardToPlay");
+
+                if (cardToPlay != null)
+                {
+                    IsTakingAction = true;
+                }
+            }
+        }
+
+        public ICardEffect CardEffectToTrigger
+        {
+            get { return cardEffectToTrigger; }
+            set
+            {
+                if (cardEffectToTrigger == value)
+                    return;
+
+                cardEffectToTrigger = value;
+                OnPropertyChanged("CardEffectToTrigger");
+
+                if (cardEffectToTrigger != null)
+                {
+                    IsTakingAction = true;
+                }
+            }
+        }
     }
 }

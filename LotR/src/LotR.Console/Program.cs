@@ -705,10 +705,10 @@ namespace LotR.Console
 
             var hostNames = hosts.Select(x => GetAttachmentHostName(x)).ToList();
 
-            if (choice.IsOptional)
-            {
-                hostNames.Add("Cancel playing this attachment");
-            }
+            //if (choice.IsOptional)
+            //{
+            //    hostNames.Add("Cancel playing this attachment");
+            //}
 
             var number = PromptForNumber(hostNames); //hosts, x => GetAttachmentHostName(x), 1);
 
@@ -812,7 +812,7 @@ namespace LotR.Console
 
         private static void HandleChoice(IChoice choice)
         {
-            WriteLine("\r\nChoice: {0}\r\n", choice.Description);
+            WriteLine("\r\nChoice: {0}\r\n", choice.Text);
 
             if (choice is IChooseFirstPlayer)
             {

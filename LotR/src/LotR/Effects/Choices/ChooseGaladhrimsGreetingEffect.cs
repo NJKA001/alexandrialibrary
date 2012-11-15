@@ -25,7 +25,11 @@ namespace LotR.Effects.Choices
             get { return reduceOnePlayersThreatBySix; }
             set
             {
+                if (reduceOnePlayersThreatBySix == value)
+                    return;
+
                 reduceOnePlayersThreatBySix = value;
+                OnPropertyChanged("ReduceOnePlayersThreatBySix");
 
                 if (reduceOnePlayersThreatBySix != null)
                 {
@@ -39,7 +43,11 @@ namespace LotR.Effects.Choices
             get { return reduceEachPlayersThreatByTwo; }
             set
             {
+                if (reduceEachPlayersThreatByTwo == value)
+                    return;
+
                 reduceEachPlayersThreatByTwo = value;
+                OnPropertyChanged("ReduceEachPlayersThreatByTwo");
 
                 if (reduceEachPlayersThreatByTwo)
                 {

@@ -62,7 +62,9 @@ namespace LotR.Cards.Player.Allies
                 if (controller == null)
                     return null;
 
-                return new ChooseCharacterWithTrait(Source, controller, Trait.Creature);
+                var charactersToChooseFrom = game.GetAllCardsInPlay<ICharacterInPlay>().Where(x => x.HasTrait(Trait.Creature)).ToList();
+
+                return new ChooseCharacterWithTrait(Source, controller, Trait.Creature, charactersToChooseFrom);
             }
 
             public override ICost GetCost(IGame game)

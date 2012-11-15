@@ -18,6 +18,8 @@ namespace LotR.Effects.Choices
             this.CardsToChooseFrom = cardsToChooseFrom;
         }
 
+        private T chosenCard;
+
         public IEnumerable<T> CardsToChooseFrom
         {
             get;
@@ -26,8 +28,16 @@ namespace LotR.Effects.Choices
 
         public T ChosenCard
         {
-            get;
-            set;
+            get { return chosenCard; }
+            set
+            {
+                if (chosenCard == value)
+                    return;
+
+                chosenCard = value;
+                OnPropertyChanged("ChosenCard");
+                OnPropertyChanged("ChosenPlayerCard");
+            }
         }
 
         public IEnumerable<IPlayerCard> PlayerCardsToChooseFrom

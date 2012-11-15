@@ -13,25 +13,45 @@ namespace LotR.Effects.Choices
         public ChoosePlayerToChooseHero(ISource source, IPlayer player, IEnumerable<IPlayer> playersToChooseFrom)
             : base("Choose a player to choose a hero that they control.", source, player)
         {
-            this.PlayersToChooseFrom = playersToChooseFrom;
+            if (playersToChooseFrom == null)
+                throw new ArgumentNullException("playersToChooseFrom");
+
+            this.playersToChooseFrom = playersToChooseFrom;
         }
+
+        private readonly IEnumerable<IPlayer> playersToChooseFrom;
+        private IPlayer chosenPlayer;
+        private IHeroInPlay chosenHero;
 
         public IEnumerable<IPlayer> PlayersToChooseFrom
         {
-            get;
-            private set;
+            get { return playersToChooseFrom; }
         }
 
         public IPlayer ChosenPlayer
         {
-            get;
-            set;
+            get { return chosenPlayer; }
+            set
+            {
+                if (chosenPlayer == value)
+                    return;
+
+                chosenPlayer = value;
+                OnPropertyChanged("ChosenPlayer");
+            }
         }
 
         public IHeroInPlay ChosenHero
         {
-            get;
-            set;
+            get { return chosenHero; }
+            set
+            {
+                if (chosenHero == value)
+                    return;
+
+                chosenHero = value;
+                OnPropertyChanged("ChosenHero");
+            }
         }
 
         public override bool IsValid(IGame game)
@@ -39,7 +59,7 @@ namespace LotR.Effects.Choices
             if (this.ChosenPlayer == null)
                 return false;
 
-            if (!PlayersToChooseFrom.Contains(ChosenPlayer))
+            if (!playersToChooseFrom.Contains(ChosenPlayer))
                 return false;
 
             if (ChosenHero == null)

@@ -16,23 +16,31 @@ namespace LotR.Effects.Choices
         {
             if (startingHand == null)
                 throw new ArgumentNullException("startingHand");
-            if (startingHand.Count() != 6)
-                throw new ArgumentException("starting hand must consist of 6 cards");
+            if (startingHand.Count() == 0)
+                throw new ArgumentException("starting hand does not contain any cards");
 
-            StartingHand = startingHand;
-            KeepStartingHand = true;
+            this.startingHand = startingHand;
         }
+
+        private readonly IEnumerable<IPlayerCard> startingHand;
+        private bool keepStartingHand = true;
 
         public IEnumerable<IPlayerCard> StartingHand
         {
-            get;
-            private set;
+            get { return startingHand; }
         }
 
         public bool KeepStartingHand
         {
-            get;
-            set;
+            get { return keepStartingHand; }
+            set
+            {
+                if (keepStartingHand == value)
+                    return;
+
+                keepStartingHand = value;
+                OnPropertyChanged("KeepStartingHand");
+            }
         }
     }
 }

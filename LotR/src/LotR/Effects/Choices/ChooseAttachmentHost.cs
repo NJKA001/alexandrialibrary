@@ -25,6 +25,8 @@ namespace LotR.Effects.Choices
             return string.Format("Choose which card you want to attach '{0}' to", attachment.Title);
         }
 
+        private IAttachmentHostInPlay chosenAttachmentHost;
+
         public IAttachableCard Attachment
         {
             get;
@@ -33,8 +35,15 @@ namespace LotR.Effects.Choices
 
         public IAttachmentHostInPlay ChosenAttachmentHost
         {
-            get;
-            set;
+            get { return chosenAttachmentHost; }
+            set
+            {
+                if (chosenAttachmentHost == value)
+                    return;
+
+                chosenAttachmentHost = value;
+                OnPropertyChanged("ChosenAttachmentHost");
+            }
         }
 
         public override bool IsValid(IGame game)

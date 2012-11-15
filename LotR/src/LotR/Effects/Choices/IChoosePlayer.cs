@@ -10,6 +10,8 @@ namespace LotR.Effects.Choices
     public interface IChoosePlayer
         : IChoice
     {
+        IEnumerable<IPlayer> PlayersToChooseFrom { get; }
+
         IPlayer ChosenPlayer { get; set; }
     }
 }

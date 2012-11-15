@@ -15,10 +15,19 @@ namespace LotR.Effects.Choices
         {
         }
 
+        private IPlayer firstPlayer;
+
         public IPlayer FirstPlayer
         {
-            get;
-            set;
+            get { return firstPlayer; }
+            set
+            {
+                if (firstPlayer == value)
+                    return;
+
+                firstPlayer = value;
+                OnPropertyChanged("FirstPlayer");
+            }
         }
 
         public void ChooseRandomFirstPlayer()

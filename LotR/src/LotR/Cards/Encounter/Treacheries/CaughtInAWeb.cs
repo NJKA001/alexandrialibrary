@@ -56,10 +56,12 @@ namespace LotR.Cards.Encounter.Treacheries
                     }
                 }
 
-                if (mostThreateningPlayers.Count() == 0)
+                var mostThreateningPlayer = mostThreateningPlayers.FirstOrDefault();
+                if (mostThreateningPlayer == null)
                     return null;
-                else if (mostThreateningPlayers.Count() == 1)
-                    return new ChooseHero(Source, mostThreateningPlayers.FirstOrDefault());
+                
+                if (mostThreateningPlayers.Count() == 1)
+                    return new ChooseHero(Source, mostThreateningPlayer, mostThreateningPlayer.CardsInPlay.OfType<IHeroInPlay>().ToList());
                 else
                     return new ChoosePlayerToChooseHero(Source, game.FirstPlayer, mostThreateningPlayers);
             }

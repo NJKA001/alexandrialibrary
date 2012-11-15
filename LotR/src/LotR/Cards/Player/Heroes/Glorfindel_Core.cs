@@ -39,7 +39,9 @@ namespace LotR.Cards.Player.Heroes
                 if (controller == null)
                     return null;
 
-                return new ChooseCharacter(Source, controller);
+                var charactersToChooseFrom = game.GetAllCardsInPlay<ICharacterInPlay>().Where(x => x.Damage > 0).ToList();
+
+                return new ChooseCharacter(Source, controller, charactersToChooseFrom);
             }
 
             public override ICost GetCost(IGame game)
