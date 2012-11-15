@@ -27,18 +27,13 @@ namespace LotR.Cards.Player.Heroes
             AddEffect(new SentinelAbility(this));
         }
 
-        #region Abilities
-
         public class ReadyAfterCommitingToQuest
             : ResponseCharacterAbilityBase, IAfterCommittingToQuest
         {
             public ReadyAfterCommitingToQuest(Aragorn source)
                 : base("After Aragorn commits to a quest, spend 1 resource from his resource pool to ready him.", source)
             {
-                aragorn = source;
             }
-
-            private readonly Aragorn aragorn;
 
             public void AfterCommittingToQuest(IGame game)
             {
@@ -53,9 +48,19 @@ namespace LotR.Cards.Player.Heroes
                 game.AddEffect(this);
             }
 
-            public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
+            public override IEffectOptions GetOptions(IGame game)
             {
-                var resourcePayment = payment as IResourcePayment;
+                var character = game.GetCardInPlay<ICharacterInPlay>(CardSource.Id);
+                if (character == null)
+                    return base.GetOptions(game);
+
+                var cost = new PayResourcesFrom(Source, character, 1, false);
+                return new EffectOptions(cost);
+            }
+
+            public override bool PaymentAccepted(IGame game, IEffectOptions options)
+            {
+                var resourcePayment = options.Payment as IResourcePayment;
                 if (resourcePayment == null)
                     return false;
 
@@ -77,55 +82,19 @@ namespace LotR.Cards.Player.Heroes
                 return true;
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 var exhaustable = game.GetCardInPlay<IExhaustableInPlay>(Source.Id);
                 if (exhaustable == null)
-                    return;
+                    return GetCancelledString();
 
                 if (!exhaustable.IsExhausted)
-                    return;
+                    return GetCancelledString();
 
                 exhaustable.Ready();
-            }
 
-            public override ICost GetCost(IGame game)
-            {
-                return new ReadyCost(aragorn);
+                return ToString();
             }
         }
-
-        public class ReadyCost
-            : CostBase
-        {
-            public ReadyCost(Aragorn source)
-                : base("Spend 1 resource from Aragorn's resource pool", source)
-            {
-            }
-
-            public override bool IsMetBy(IPayment payment)
-            {
-                if (payment == null)
-                    return false;
-
-                var resourcePayment = payment as IResourcePayment;
-                if (resourcePayment == null)
-                    return false;
-
-                if (resourcePayment.Characters.Count() != 1)
-                    return false;
-
-                var character = resourcePayment.Characters.First();
-                if (character.Card.Id != Source.Id)
-                    return false;
-
-                if (resourcePayment.GetPaymentBy(character.Card.Id) != 1)
-                    return false;
-
-                return true;
-            }
-        }
-
-        #endregion
     }
 }

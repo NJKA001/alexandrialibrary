@@ -41,16 +41,11 @@ namespace LotR.Cards.Player.Allies
                 state.AddEffect(this);
             }
 
-            public override bool CanBeTriggered(IGame game)
-            {
-                return IsPlayerActionWindow(game);
-            }
-
-            public override IChoice GetChoice(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return null;
+                    return new EffectOptions();
 
                 var enemiesToChoose = game.StagingArea.CardsInStagingArea.OfType<IEnemyInPlay>().ToList();
 
@@ -60,55 +55,39 @@ namespace LotR.Cards.Player.Allies
                         enemiesToChoose.Add(enemy);
                 }
 
-                return new ChooseGandalfEffect(CardSource, controller, enemiesToChoose);
+                var choice = new ChooseGandalfEffect(CardSource, controller, enemiesToChoose);
+                return new EffectOptions(choice);
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return;
+                    return GetCancelledString();
 
-                var chooseEffect = choice as IChooseGandalfEffect;
+                var chooseEffect = options.Choice as IChooseGandalfEffect;
                 if (chooseEffect == null)
-                    return;
+                    return GetCancelledString();
 
                 if (chooseEffect.EnemyToDamage != null)
                 {
                     chooseEffect.EnemyToDamage.Damage += 4;
+                    return string.Format("dealt 4 damge to {0}", chooseEffect.EnemyToDamage.Title);
                 }
                 else if (chooseEffect.DrawCards)
                 {
                     controller.DrawCards(3);
+                    return string.Format("{0} drew three cards", controller.Name);
                 }
                 else if (chooseEffect.ReduceYourThreat)
                 {
                     controller.DecreaseThreat(5);
+                    return string.Format("{0} reduced their threat by 5", controller.Name);
                 }
 
                 game.AddEffect(new AtEndOfRoundDiscardGandalfFromPlay(CardSource));
-            }
 
-            public override string GetResolutionDescription(IGame game, IPayment payment, IChoice choice)
-            {
-                var chooseEffect = choice as IChooseGandalfEffect;
-                if (chooseEffect != null)
-                {
-                    if (chooseEffect.EnemyToDamage != null)
-                    {
-                        return string.Format("dealt 4 damge to {0}", chooseEffect.EnemyToDamage.Title);
-                    }
-                    else if (chooseEffect.DrawCards)
-                    {
-                        return "drew three cards";
-                    }
-                    else if (chooseEffect.ReduceYourThreat)
-                    {
-                        return "reduced your threat by 5";
-                    }
-                }
-
-                return "Effect cancelled";
+                return ToString();
             }
         }
 
@@ -125,19 +104,21 @@ namespace LotR.Cards.Player.Allies
                 return IsEndOfRound(game);
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 var allyInPlay = game.GetCardInPlay<IAllyInPlay>(CardSource.Id);
                 if (allyInPlay == null)
-                    return;
+                    return GetCancelledString();
 
                 var allyController = game.GetController(CardSource.Id);
                 if (allyController == null)
-                    return;
+                    return GetCancelledString();
 
                 allyController.RemoveCardInPlay(allyInPlay);
 
                 allyController.Deck.Discard(new List<IPlayerCard> { allyInPlay.Card });
+
+                return ToString();
             }
         }
     }

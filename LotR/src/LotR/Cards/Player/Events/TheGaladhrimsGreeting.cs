@@ -30,20 +30,21 @@ namespace LotR.Cards.Player.Events
 
             private IPlayerCard playerCard;
 
-            public override IChoice GetChoice(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
-                return new ChooseGaladhrimsGreetingEffect(game, CardSource, playerCard.Owner);
+                return new EffectOptions(new ChooseGaladhrimsGreetingEffect(game, CardSource, playerCard.Owner));
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
-                var effectChoice = choice as IChooseGaladhrimsGreetingEffect;
+                var effectChoice = options.Choice as IChooseGaladhrimsGreetingEffect;
                 if (effectChoice == null)
-                    return;
+                    return GetCancelledString();
 
                 if (effectChoice.ReduceOnePlayersThreatBySix != null)
                 {
                     effectChoice.ReduceOnePlayersThreatBySix.DecreaseThreat(6);
+                    return string.Format("{0}'s threat has been reduced by 6", effectChoice.ReduceOnePlayersThreatBySix.Name);
                 }
                 else if (effectChoice.ReduceEachPlayersThreatByTwo)
                 {
@@ -51,21 +52,10 @@ namespace LotR.Cards.Player.Events
                     {
                         player.DecreaseThreat(2);
                     }
+                    return "Each players threat has been reduced by 2";
                 }
-            }
 
-            public override string GetResolutionDescription(IGame game, IPayment payment, IChoice choice)
-            {
-                var effectChoice = choice as IChooseGaladhrimsGreetingEffect;
-                if (effectChoice != null)
-                {
-                    if (effectChoice.ReduceOnePlayersThreatBySix != null)
-                        return string.Format("{0}'s threat has been reduced by 6", effectChoice.ReduceOnePlayersThreatBySix.Name);
-                    else if (effectChoice.ReduceEachPlayersThreatByTwo)
-                        return "Each players threat has been reduced by 2";
-                }
-                
-                return "Effect cancelled";
+                return GetCancelledString();
             }
         }
     }

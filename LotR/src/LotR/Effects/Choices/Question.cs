@@ -5,16 +5,17 @@ using System.Text;
 
 namespace LotR.Effects.Choices
 {
-    public class Question
-        : ChoiceItemBase, IQuestion
+    public class Question<TSource>
+        : ChoiceItemBase<TSource>, IQuestion
+        where TSource : class, ISource
     {
-        public Question(string text, IEnumerable<IAnswer> answers)
-            : this(text, answers, 1, 1)
+        public Question(string text, TSource source, IEnumerable<IAnswer> answers)
+            : this(text, source, answers, 1, 1)
         {
         }
 
-        public Question(string text, IEnumerable<IAnswer> answers, uint minimumChosenAnswers, uint maximumChosenAnswers)
-            : base(text)
+        public Question(string text, TSource source, IEnumerable<IAnswer> answers, uint minimumChosenAnswers, uint maximumChosenAnswers)
+            : base(text, source)
         {
             if (answers == null)
                 throw new ArgumentNullException("answers");

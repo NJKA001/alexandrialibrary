@@ -29,7 +29,7 @@ namespace LotR.Effects.Phases.Any
         private readonly IEnemyInPlay enemy;
         private readonly IEnumerable<IAttackingInPlay> attackers;
 
-        public override void Resolve(IGame game, IPayment payment, IChoice choice)
+        public override string Resolve(IGame game, IEffectOptions options)
         {
             var defeatedState = new EnemyDefeated(game, enemy, attackers);
 
@@ -50,7 +50,7 @@ namespace LotR.Effects.Phases.Any
             }
 
             if (!defeatedState.IsEnemyDefeated)
-                return;
+                return GetCancelledString();
 
             foreach (var card in game.GetCardsInPlayWithEffect<ICardInPlay, IAfterEnemyDefeated>())
             {
@@ -64,6 +64,8 @@ namespace LotR.Effects.Phases.Any
             game.AddEffect(leavingPlayEffect);
             var leavingPlayOptions = game.GetOptions(leavingPlayEffect);
             game.ResolveEffect(leavingPlayEffect, leavingPlayOptions);
+
+            return ToString();
         }
     }
 }

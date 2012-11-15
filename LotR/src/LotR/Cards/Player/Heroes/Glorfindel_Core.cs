@@ -33,41 +33,29 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public override IChoice GetChoice(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
+                var limit = new Limit(PlayerScope.None, TimeScope.Round, 1);
+
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return null;
+                    return new EffectOptions(null, null, limit);
 
                 var charactersToChooseFrom = game.GetAllCardsInPlay<ICharacterInPlay>().Where(x => x.Damage > 0).ToList();
-
-                return new ChooseCharacter(Source, controller, charactersToChooseFrom);
-            }
-
-            public override ICost GetCost(IGame game)
-            {
-                var controller = game.GetController(CardSource.Id);
-                if (controller == null)
-                    return null;
+                var choice = new ChooseCharacter(Source, controller, charactersToChooseFrom);
 
                 var resourceful = controller.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
                 if (resourceful == null)
-                    return null;
+                    return new EffectOptions(choice, null, limit);
 
-                return new PayResourcesFrom(Source, resourceful, 1, false);
+                var cost = new PayResourcesFrom(Source, resourceful, 1, false);
+
+                return new EffectOptions(choice, cost, limit);
             }
 
-            public override ILimit GetLimit(IGame game)
+            public override bool PaymentAccepted(IGame game, IEffectOptions options)
             {
-                return new Limit(PlayerScope.None, TimeScope.Round, 1);
-            }
-
-            public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
-            {
-                if (payment == null)
-                    return false;
-
-                var resourcePayment = payment as IResourcePayment;
+                var resourcePayment = options.Payment as IResourcePayment;
                 if (resourcePayment == null)
                     return false;
 
@@ -90,17 +78,19 @@ namespace LotR.Cards.Player.Heroes
                 return true;
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
-                var characterChoice = choice as IChooseCharacter;
+                var characterChoice = options.Choice as IChooseCharacter;
                 if (characterChoice == null || characterChoice.ChosenCharacter == null)
-                    return;
+                    return GetCancelledString();
 
                 var damageable = characterChoice.ChosenCharacter as IDamagableInPlay;
                 if (damageable == null || damageable.Damage == 0)
-                    return;
+                    return GetCancelledString();
 
                 damageable.Damage -= 1;
+
+                return ToString();
             }
         }
     }

@@ -6,25 +6,18 @@ using System.Text;
 
 namespace LotR.Effects.Choices
 {
-    public abstract class ChoiceItemBase
+    public abstract class ChoiceItemBase<TSource>
         : IChoiceItem, INotifyPropertyChanged
+        where TSource : class, ISource
     {
-        protected ChoiceItemBase(string text)
-            : this(text, false)
+        protected ChoiceItemBase(string text, TSource source)
         {
-        }
-
-        protected ChoiceItemBase(string text, bool isOptional)
-        {
-            if (text == null)
-                throw new ArgumentNullException("text");
-
             this.text = text;
-            this.isOptional = isOptional;
+            this.source = source;
         }
 
         private readonly string text;
-        private readonly bool isOptional;
+        protected readonly TSource source;
 
         protected void OnPropertyChanged(string propertyName)
         {

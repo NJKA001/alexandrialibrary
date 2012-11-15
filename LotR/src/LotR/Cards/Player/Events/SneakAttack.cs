@@ -28,7 +28,7 @@ namespace LotR.Cards.Player.Events
             {
             }
 
-            public override IChoice GetChoice(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
                 var playerCard = CardSource as IPlayerCard;
                 if (playerCard == null)
@@ -40,14 +40,14 @@ namespace LotR.Cards.Player.Events
 
                 var alliesInHand = owner.Hand.Cards.OfType<IAllyCard>().ToList();
 
-                return new ChooseCardInHand<IAllyCard>("Choose 1 ally card in your hand", Source, owner, alliesInHand);
+                return new EffectOptions(new ChooseCardInHand<IAllyCard>("Choose 1 ally card in your hand", Source, owner, alliesInHand));
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
-                var chooseAlly = choice as IChooseCardInHand<IAllyCard>;
+                var chooseAlly = options.Choice as IChooseCardInHand<IAllyCard>;
                 if (chooseAlly == null || chooseAlly.ChosenCard == null)
-                    return;
+                    return GetCancelledString();
 
                 var playerCard = CardSource as IPlayerCard;
                 if (playerCard == null)
@@ -60,6 +60,8 @@ namespace LotR.Cards.Player.Events
                 owner.Hand.RemoveCards(new List<IPlayerCard> { chooseAlly.ChosenCard });
                 owner.AddCardInPlay(new AllyInPlay(game, chooseAlly.ChosenCard));
                 game.AddEffect(new AtEndOfPhaseReturnAllyToYourHand(CardSource, chooseAlly.ChosenCard.Id));
+
+                return ToString();
             }
         }
 
@@ -79,23 +81,25 @@ namespace LotR.Cards.Player.Events
 
             private readonly Guid allyId;
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 var allyInPlay = game.GetCardInPlay<IAllyInPlay>(allyId);
                 if (allyInPlay == null)
-                    return;
+                    return GetCancelledString();
 
                 var allyController = game.GetController(allyId);
                 if (allyController == null)
-                    return;
+                    return GetCancelledString();
 
                 allyController.RemoveCardInPlay(allyInPlay);
 
                 var eventController = game.GetController(CardSource.Id);
                 if (eventController == null)
-                    return;
+                    return GetCancelledString();
 
                 eventController.Hand.AddCards(new List<IPlayerCard> { allyInPlay.Card });
+
+                return ToString();
             }
         }
     }

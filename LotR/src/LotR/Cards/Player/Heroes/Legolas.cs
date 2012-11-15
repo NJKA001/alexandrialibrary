@@ -52,9 +52,11 @@ namespace LotR.Cards.Player.Heroes
                 state.Game.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 game.QuestArea.AddProgress(2);
+
+                return ToString();
             }
         }
     }

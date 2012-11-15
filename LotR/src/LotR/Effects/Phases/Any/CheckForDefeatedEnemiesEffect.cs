@@ -28,7 +28,7 @@ namespace LotR.Effects.Phases.Any
 
         private readonly IEnumerable<IAttackingInPlay> attackers;
 
-        public override void Resolve(IGame game, IPayment payment, IChoice choice)
+        public override string Resolve(IGame game, IEffectOptions options)
         {
             var defeatedEnemies = new List<IEnemyInPlay>();
 
@@ -57,6 +57,8 @@ namespace LotR.Effects.Phases.Any
                 game.AddEffect(defeatedEffect);
                 game.ResolveEffect(defeatedEffect, EffectOptions.Empty);
             }
+
+            return ToString();
         }
     }
 }

@@ -26,11 +26,11 @@ namespace LotR.Cards.Encounter.Locations
             : TravelEffectBase
         {
             public TravelRevealOneCardFromEncounterDeck(MountainsOfMirkwood source)
-                : base(" Reveal the top card of the encounter deck and add it to the staging area to travel here.", source)
+                : base("Reveal the top card of the encounter deck and add it to the staging area to travel here.", source)
             {
             }
 
-            public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
+            public override bool PaymentAccepted(IGame game, IEffectOptions options)
             {
                 game.StagingArea.RevealEncounterCards(1);
 
@@ -54,7 +54,7 @@ namespace LotR.Cards.Encounter.Locations
                 state.AddEffect(this);
             }
 
-            public override IChoice GetChoice(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
                 var availableCards = new Dictionary<Guid, IList<IPlayerCard>>();
                 foreach (var player in game.Players)
@@ -63,14 +63,14 @@ namespace LotR.Cards.Encounter.Locations
                     availableCards.Add(player.StateId, topFive);
                 }
 
-                return new PlayersChooseCards<IPlayerCard>("each player may search the top 5 cards of his deck for 1 card of their choice", Source, game.Players, 1, availableCards);
+                return new EffectOptions(new PlayersChooseCards<IPlayerCard>("each player may search the top 5 cards of his deck for 1 card of their choice", Source, game.Players, 1, availableCards));
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
-                var cardChoice = choice as IPlayersChooseCards<IPlayerCard>;
+                var cardChoice = options.Choice as IPlayersChooseCards<IPlayerCard>;
                 if (cardChoice == null)
-                    return;
+                    return GetCancelledString();
 
                 foreach (var player in cardChoice.Players)
                 {
@@ -90,6 +90,8 @@ namespace LotR.Cards.Encounter.Locations
                         player.Deck.ShuffleIn(availableCards.OfType<IPlayerCard>());
                     }
                 }
+
+                return ToString();
             }
         }
     }

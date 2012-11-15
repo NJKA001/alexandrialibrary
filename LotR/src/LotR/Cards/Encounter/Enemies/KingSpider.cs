@@ -45,21 +45,24 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override IChoice GetChoice(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
-                return new EachPlayerChoosesReadyCharacters(Source, game, 1);
+                var choice = new EachPlayerChoosesReadyCharacters(Source, game, 1);
+                return new EffectOptions(choice);
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
-                var characterChoice = choice as IPlayersChooseCharacters;
+                var characterChoice = options.Choice as IPlayersChooseCharacters;
                 if (characterChoice == null)
-                    return;
+                    return GetCancelledString();
 
                 foreach (var player in characterChoice.Players)
                 {
                     ExhaustReadyCharacters(player, characterChoice);
                 }
+
+                return ToString();
             }
         }
 
@@ -71,28 +74,31 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override IChoice GetChoice(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
                 var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
                 if (enemyAttack == null)
-                    return null;
+                    return base.GetOptions(game);
 
                 byte numberOfCharacters = enemyAttack.IsUndefended ? (byte)2 : (byte)1;
 
-                return new EachPlayerChoosesReadyCharacters(Source, enemyAttack.DefendingPlayer, numberOfCharacters);
+                var choice = new EachPlayerChoosesReadyCharacters(Source, enemyAttack.DefendingPlayer, numberOfCharacters);
+                return new EffectOptions(choice);
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
-                var characterChoice = choice as IPlayersChooseCharacters;
+                var characterChoice = options.Choice as IPlayersChooseCharacters;
                 if (characterChoice == null)
-                    return;
+                    return GetCancelledString();
 
                 var player = characterChoice.Players.FirstOrDefault();
                 if (player == null)
-                    return;
+                    return GetCancelledString();
 
                 ExhaustReadyCharacters(player, characterChoice);
+
+                return ToString();
             }
         }
     }

@@ -28,7 +28,7 @@ namespace LotR.Cards.Player.Events
             {
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 foreach (var player in game.Players)
                 {
@@ -38,6 +38,8 @@ namespace LotR.Cards.Player.Events
                     game.AddEffect(effect);
                     game.ResolveEffect(effect, EffectOptions.Empty);
                 }
+
+                return ToString();
             }
         }
     }

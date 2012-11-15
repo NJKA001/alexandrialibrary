@@ -27,7 +27,7 @@ namespace LotR.Cards.Encounter.Treacheries
             {
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 foreach (var player in game.Players)
                 {
@@ -43,6 +43,8 @@ namespace LotR.Cards.Encounter.Treacheries
                         damageable.Damage += 1;
                     }
                 }
+
+                return ToString();
             }
         }
     }

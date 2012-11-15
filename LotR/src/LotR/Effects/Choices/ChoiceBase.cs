@@ -10,7 +10,7 @@ using LotR.States;
 namespace LotR.Effects.Choices
 {
     public class ChoiceBase
-        : ChoiceItemBase, IChoice
+        : ChoiceItemBase<ISource>, IChoice
     {
         protected ChoiceBase(string text, ISource source, IPlayer player)
             : this(text, source, new List<IPlayer> { player })
@@ -18,18 +18,14 @@ namespace LotR.Effects.Choices
         }
 
         protected ChoiceBase(string text, ISource source, IEnumerable<IPlayer> players)
-            : base(text)
+            : base(text, source)
         {
             if (players == null)
                 throw new ArgumentNullException("players");
-
-            this.text = text;
-            this.source = source;
+            
             this.players = players;
         }
 
-        private readonly string text;
-        private readonly ISource source;
         private readonly IEnumerable<IPlayer> players;
         private readonly IList<IQuestion> questions = new List<IQuestion>();
         private bool isCancelled;

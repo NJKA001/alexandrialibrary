@@ -4,31 +4,84 @@ using System.Linq;
 using System.Text;
 
 using LotR.Effects.Choices;
+using LotR.Effects.Costs;
 using LotR.Effects.Payments;
 
 namespace LotR.Effects
 {
-    public struct EffectOptions
+    public class EffectOptions
+        : IEffectOptions
     {
-        public EffectOptions(IPayment payment, IChoice choice)
+        public EffectOptions()
+            : this(null, null, null)
         {
-            this.payment = payment;
-            this.choice = choice;
         }
 
-        private readonly IPayment payment;
+        public EffectOptions(IChoice choice)
+            : this(choice, null, null)
+        {
+        }
+
+        public EffectOptions(IChoice choice, ICost cost)
+            : this(choice, cost, null)
+        {
+        }
+
+        public EffectOptions(IChoice choice, ILimit limit)
+            : this(choice, null, limit)
+        {
+        }
+
+        public EffectOptions(ICost cost)
+            : this(null, cost, null)
+        {
+        }
+
+        public EffectOptions(ICost cost, ILimit limit)
+            : this(null, cost, limit)
+        {
+        }
+
+        public EffectOptions(IChoice choice, ICost cost, ILimit limit)
+        {
+            this.choice = choice;
+            this.cost = cost;
+            this.limit = limit;
+        }
+
         private readonly IChoice choice;
+        private readonly ICost cost;
+        private readonly ILimit limit;
+        private IPayment payment;
+        
+        public IChoice Choice
+        {
+            get { return choice; }
+        }
+
+        public ICost Cost
+        {
+            get { return cost; }
+        }
+
+        public ILimit Limit
+        {
+            get { return limit; }
+        }
 
         public IPayment Payment
         {
             get { return payment; }
         }
 
-        public IChoice Choice
-        {
-            get { return choice; }
-        }
+        public static IEffectOptions Empty = new EffectOptions();
 
-        public static EffectOptions Empty = new EffectOptions(null, null);
+        public void AddPayment(IPayment payment)
+        {
+            if (payment == null)
+                throw new ArgumentNullException("payment");
+
+            this.payment = payment;
+        }
     }
 }

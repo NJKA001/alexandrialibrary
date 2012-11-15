@@ -14,14 +14,14 @@ namespace LotR.States.Controllers
     {
         void RegisterChoiceOfferedCallback(Action<IEffect, IChoice> callback);
         void RegisterEffectAddedCallback(Action<IEffect> callback);
-        void RegisterEffectResolvedCallback(Action<IEffect, IPayment, IChoice> callback);
+        void RegisterEffectResolvedCallback(Action<IEffect, IEffectOptions, string> callback);
         void RegisterGetPaymentCallback(Func<IEffect, ICost, IPayment> callback);
-        void RegisterPaymentRejectedCallback(Action<IEffect, IPayment, IChoice> callback);
+        void RegisterPaymentRejectedCallback(Action<IEffect, IEffectOptions> callback);
 
         void ChoiceOffered(IEffect effect, IChoice choice);
         void EffectAdded(IEffect effect);
-        void EffectResolved(IEffect effect, IPayment payment, IChoice choice);
+        void EffectResolved(IEffect effect, IEffectOptions options, string status);
         IPayment GetPayment(IEffect effect, ICost cost);
-        void PaymentRejected(IEffect effect, IPayment payment, IChoice choice);
+        void PaymentRejected(IEffect effect, IEffectOptions options);
     }
 }

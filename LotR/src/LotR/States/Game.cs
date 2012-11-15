@@ -217,17 +217,17 @@ namespace LotR.States
             controller.EffectAdded(effect);
         }
 
-        public void ResolveEffect(IEffect effect, EffectOptions options)
+        public void ResolveEffect(IEffect effect, IEffectOptions options)
         {
-            if (!effect.PaymentAccepted(this, options.Payment, options.Choice))
+            if (!effect.PaymentAccepted(this, options))
             {
-                controller.PaymentRejected(effect, options.Payment, options.Choice);
+                controller.PaymentRejected(effect, options);
                 return;
             }
 
-            effect.Resolve(this, options.Payment, options.Choice);
+            var status = effect.Resolve(this, options);
 
-            controller.EffectResolved(effect, options.Payment, options.Choice);
+            controller.EffectResolved(effect, options, status);
 
             if (currentEffects.Contains(effect))
                 currentEffects.Remove(effect);
@@ -380,24 +380,25 @@ namespace LotR.States
             return currentEffects.OfType<T>().ToList();
         }
 
-        public EffectOptions GetOptions(IEffect effect)
+        public IEffectOptions GetOptions(IEffect effect)
         {
-            IPayment payment = null;
-            IChoice choice = null;
+            var options = effect.GetOptions(this);
 
-            var cost = effect.GetCost(this);
-            if (cost != null)
+            if (options.Choice != null)
             {
-                payment = controller.GetPayment(effect, cost);
+                controller.ChoiceOffered(effect, options.Choice);
             }
 
-            choice = effect.GetChoice(this);
-            if (choice != null)
+            if (options.Cost != null)
             {
-                controller.ChoiceOffered(effect, choice);
+                var payment = controller.GetPayment(effect, options.Cost);
+                if (payment != null)
+                {
+                    options.AddPayment(payment);
+                }
             }
 
-            return new EffectOptions(payment, choice);
+            return options;
         }
 
         public uint GetPlayerScore()

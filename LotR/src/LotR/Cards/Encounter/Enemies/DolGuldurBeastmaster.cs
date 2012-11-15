@@ -37,13 +37,15 @@ namespace LotR.Cards.Encounter.Enemies
                 state.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
                 if (enemyAttack == null)
-                    return;
+                    return GetCancelledString();
 
                 enemyAttack.NumberOfShadowCardsToDeal += 1;
+
+                return ToString();
             }
         }
     }

@@ -26,16 +26,16 @@ namespace LotR.Effects.Phases.Any
 
         private readonly IPlayer player;
 
-        public override IChoice GetChoice(IGame game)
+        public override IEffectOptions GetOptions(IGame game)
         {
-            return new ChoosePlayerAction(game, player);
+            return new EffectOptions(new ChoosePlayerAction(game, player));
         }
 
-        public override void Resolve(IGame game, IPayment payment, IChoice choice)
+        public override string Resolve(IGame game, IEffectOptions options)
         {
-            var actionChoice = choice as IChoosePlayerAction;
+            var actionChoice = options.Choice as IChoosePlayerAction;
             if (actionChoice == null)
-                return;
+                return GetCancelledString();
 
             if (actionChoice.CardToPlay != null && actionChoice.CardToPlay is ICostlyCard)
             {
@@ -51,11 +51,8 @@ namespace LotR.Effects.Phases.Any
                 var playEffectOptions = game.GetOptions(actionChoice.CardEffectToTrigger);
                 game.ResolveEffect(actionChoice.CardEffectToTrigger, playEffectOptions);
             }
-        }
 
-        public override string GetResolutionDescription(IGame game, IPayment payment, IChoice choice)
-        {
-            return string.Empty;
+            return ToString();
         }
     }
 }

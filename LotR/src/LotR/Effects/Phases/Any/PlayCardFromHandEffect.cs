@@ -40,35 +40,37 @@ namespace LotR.Effects.Phases.Any
             get { return costlyCard; }
         }
 
-        public override IChoice GetChoice(IGame game)
+        public override IEffectOptions GetOptions(IGame game)
         {
+            var cost = costlyCard.GetResourceCost(game);
+            IChoice choice = null;
+
             if (costlyCard.PrintedCardType == CardType.Attachment && costlyCard.PrintedCardType == CardType.Treasure)
             {
-                return new ChooseAttachmentHost(costlyCard, costlyCard.Owner, costlyCard as IAttachableCard);
+                choice = new ChooseAttachmentHost(costlyCard, costlyCard.Owner, costlyCard as IAttachableCard);
+                return new EffectOptions(choice, cost);
             }
             else if (costlyCard.PrintedCardType == CardType.Event)
             {
                 var effect = costlyCard.Text.Effects.FirstOrDefault();
                 if (effect == null)
-                    return null;
+                    return new EffectOptions(cost);
 
-                return effect.GetChoice(game);
+                var effectOptions = effect.GetOptions(game);
+                choice = effectOptions.Choice;
+
+                return new EffectOptions(choice, cost);
             }
-            
-            return null;
+
+            return new EffectOptions(cost);
         }
 
-        public override ICost GetCost(IGame game)
-        {
-            return costlyCard.GetResourceCost(game);
-        }
-
-        public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
+        public override bool PaymentAccepted(IGame game, IEffectOptions options)
         {
             if (cost.NumberOfResources == 0)
                 return true;
 
-            var resourcePayment = payment as IResourcePayment;
+            var resourcePayment = options.Payment as IResourcePayment;
             if (resourcePayment == null)
                 return false;
 
@@ -90,7 +92,7 @@ namespace LotR.Effects.Phases.Any
             return true;
         }
 
-        public override void Resolve(IGame game, IPayment payment, IChoice choice)
+        public override string Resolve(IGame game, IEffectOptions options)
         {
             switch (costlyCard.PrintedCardType)
             {
@@ -103,9 +105,9 @@ namespace LotR.Effects.Phases.Any
                     break;
                 case CardType.Attachment:
                     {
-                        var hostChoice = choice as IChooseAttachmentHost;
+                        var hostChoice = options.Choice as IChooseAttachmentHost;
                         if (hostChoice == null || hostChoice.ChosenAttachmentHost == null)
-                            return;
+                            return GetCancelledString();
 
                         var attachment = new AttachmentInPlay(game, costlyCard as IAttachmentCard, hostChoice.ChosenAttachmentHost);
                         costlyCard.Owner.AddCardInPlay(attachment);
@@ -116,18 +118,18 @@ namespace LotR.Effects.Phases.Any
                     {
                         var effect = costlyCard.Text.Effects.FirstOrDefault();
                         if (effect == null)
-                            return;
+                            return GetCancelledString();
 
                         game.AddEffect(effect);
-                        game.ResolveEffect(effect, new EffectOptions(payment, choice));
+                        game.ResolveEffect(effect, options);
                         costlyCard.Owner.Hand.RemoveCards(new List<IPlayerCard> { costlyCard });
                     }
                     break;
                 case CardType.Treasure:
                     {
-                        var hostChoice = choice as IChooseAttachmentHost;
+                        var hostChoice = options.Choice as IChooseAttachmentHost;
                         if (hostChoice == null || hostChoice.ChosenAttachmentHost == null)
-                            return;
+                            return GetCancelledString();
 
                         var treasure = new TreasureInPlay(game, costlyCard as ITreasureCard, hostChoice.ChosenAttachmentHost);
                         costlyCard.Owner.AddCardInPlay(treasure);
@@ -137,6 +139,8 @@ namespace LotR.Effects.Phases.Any
                 default:
                     break;
             }
+
+            return ToString();
         }
     }
 }

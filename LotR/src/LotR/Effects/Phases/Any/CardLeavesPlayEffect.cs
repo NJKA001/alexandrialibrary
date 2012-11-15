@@ -25,7 +25,7 @@ namespace LotR.Effects.Phases.Any
 
         private readonly ICardInPlay cardInPlay;
 
-        public override void Resolve(IGame game, IPayment payment, IChoice choice)
+        public override string Resolve(IGame game, IEffectOptions options)
         {
             if (game.StagingArea.CardsInStagingArea.Any(x => x.Card.Id == cardInPlay.BaseCard.Id))
             {
@@ -56,6 +56,8 @@ namespace LotR.Effects.Phases.Any
                     effect.AfterCardLeavesPlay(state);
                 }
             }
+
+            return ToString();
         }
     }
 }

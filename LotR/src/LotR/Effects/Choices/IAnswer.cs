@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.States;
+
 namespace LotR.Effects.Choices
 {
     public interface IAnswer
@@ -14,5 +16,7 @@ namespace LotR.Effects.Choices
         bool IsChosen { get; set; }
 
         T GetItem<T>() where T : class;
+
+        void Execute(IGame game);
     }
 }

@@ -70,21 +70,19 @@ namespace LotR.Cards.Player.Attachments
             {
             }
 
-            public override ICost GetCost(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
                 var exhaustable = game.GetCardInPlay<IExhaustableInPlay>(Source.Id);
                 if (exhaustable == null)
-                    return null;
+                    return base.GetOptions(game);
 
-                return new ExhaustSelf(exhaustable);
+                var cost = new ExhaustSelf(exhaustable);
+                return new EffectOptions(cost);
             }
 
-            public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
+            public override bool PaymentAccepted(IGame game, IEffectOptions options)
             {
-                if (payment == null)
-                    return false;
-
-                var exhaustPayment = payment as IExhaustCardPayment;
+                var exhaustPayment = options.Payment as IExhaustCardPayment;
                 if (exhaustPayment == null || exhaustPayment.Exhaustable == null || exhaustPayment.Exhaustable.IsExhausted)
                     return false;
 
@@ -93,17 +91,19 @@ namespace LotR.Cards.Player.Attachments
                 return true;
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 var attachment = game.GetCardInPlay<IAttachmentInPlay>(Source.Id);
                 if (attachment == null || attachment.AttachedTo == null)
-                    return;
+                    return GetCancelledString();
 
                 var resourceful = attachment.AttachedTo as ICharacterInPlay;
                 if (resourceful == null)
-                    return;
+                    return GetCancelledString();
 
                 resourceful.Resources += 2;
+
+                return ToString();
             }
         }
     }

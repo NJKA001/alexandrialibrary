@@ -123,6 +123,7 @@
     <Compile Include="Effects\ForcedCardEffectBase.cs" />
     <Compile Include="Effects\FrameworkEffectBase.cs" />
     <Compile Include="Effects\ICombatActionCardEffect.cs" />
+    <Compile Include="Effects\IEffectOptions.cs" />
     <Compile Include="Effects\IFrameworkEffect.cs" />
     <Compile Include="Effects\IPlayerActionEffect.cs" />
     <Compile Include="Effects\IQuestActionCardEffect.cs" />
@@ -566,9 +567,6 @@
     <Compile Include="States\ThreateningInPlay.cs" />
     <Compile Include="States\TreasureInPlay.cs" />
     <Compile Include="States\UnclaimedObjectiveInPlay.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferences Include="Web References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

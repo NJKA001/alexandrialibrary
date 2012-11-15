@@ -27,14 +27,14 @@ namespace LotR.Cards.Encounter.Locations
             {
             }
 
-            public override IChoice GetChoice(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
-                return new EachPlayerChoosesReadyCharacters(Source, game, 1, true);
+                return new EffectOptions(new EachPlayerChoosesReadyCharacters(Source, game, 1, true));
             }
 
-            public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
+            public override bool PaymentAccepted(IGame game, IEffectOptions options)
             {
-                var characterChoice = choice as IPlayersChooseCharacters;
+                var characterChoice = options.Choice as IPlayersChooseCharacters;
                 if (characterChoice == null)
                     return false;
 

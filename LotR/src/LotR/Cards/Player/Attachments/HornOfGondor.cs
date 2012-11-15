@@ -42,7 +42,7 @@ namespace LotR.Cards.Player.Attachments
                 state.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 IAttachmentInPlay attachment = null;
 
@@ -54,13 +54,15 @@ namespace LotR.Cards.Player.Attachments
                 }
 
                 if (attachment == null || attachment.AttachedTo == null)
-                    return;
+                    return GetCancelledString();
 
                 var resourceful = attachment.AttachedTo as ICharacterInPlay;
                 if (resourceful == null)
-                    return;
+                    return GetCancelledString();
 
                 resourceful.Resources += 1;
+
+                return ToString();
             }
         }
     }

@@ -24,7 +24,7 @@ namespace LotR.Effects.Phases.Any
 
         private readonly ICardInPlay cardInPlay;
 
-        public override void Resolve(IGame game, IPayment payment, IChoice choice)
+        public override string Resolve(IGame game, IEffectOptions options)
         {
             var state = new CardEntersPlay(game, cardInPlay);
 
@@ -35,6 +35,8 @@ namespace LotR.Effects.Phases.Any
                     effect.AfterCardEntersPlay(state);
                 }
             }
+
+            return ToString();
         }
     }
 }

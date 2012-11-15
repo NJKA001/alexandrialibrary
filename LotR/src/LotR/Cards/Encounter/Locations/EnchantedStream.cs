@@ -40,16 +40,18 @@ namespace LotR.Cards.Encounter.Locations
                 playersDrawingCard.Game.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 var playersDrawingCards = game.CurrentPhase.GetPlayersDrawingCards();
                 if (playersDrawingCards == null)
-                    return;
+                    return GetCancelledString();
 
                 foreach (var playerId in playersDrawingCards.Players)
                 {
                     playersDrawingCards.DisablePlayerCardDraw(playerId);
                 }
+
+                return ToString();
             }
         }
     }

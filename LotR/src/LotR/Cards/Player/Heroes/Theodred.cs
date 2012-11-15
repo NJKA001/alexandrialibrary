@@ -7,9 +7,10 @@ using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Costs;
 using LotR.Effects.Payments;
-using LotR.States;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Quest;
+using LotR.States;
+using LotR.States.Phases.Quest;
 
 namespace LotR.Cards.Player.Heroes
 {
@@ -26,8 +27,6 @@ namespace LotR.Cards.Player.Heroes
             AddEffect(new AddResourceToCommittedHero(this));
         }
 
-        #region Abilities
-
         public class AddResourceToCommittedHero
             : ResponseCharacterAbilityBase, IAfterCommittingToQuest
         {
@@ -38,37 +37,41 @@ namespace LotR.Cards.Player.Heroes
 
             public void AfterCommittingToQuest(IGame game)
             {
-                //var self = step.CommitedCharacters.Where(x => x.CardId == Source.Id).Select(x => x.Card).FirstOrDefault();
+                var questPhase = game.CurrentPhase as IQuestPhase;
+                if (questPhase == null)
+                    return;
 
-                //if (self == null)
-                //    return;
+                var committed = questPhase.GetAllCharactersCommittedToQuest().Where(x => x.Card.Id == CardSource.Id).FirstOrDefault();
+                if (committed == null)
+                    return;
 
                 game.AddEffect(this);
             }
 
-            public override ICost GetCost(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
-                //var commitStep = step as ICommitToQuestStep;
-                //if (commitStep == null)
-                //    return null;
+                var questPhase = game.CurrentPhase as IQuestPhase;
+                if (questPhase == null)
+                    return new EffectOptions();
 
-                //return new ChooseHeroCommitedToTheQuest(Source, commitStep);
-                return null;
+                var controller = game.GetController(CardSource.Id);
+                if (controller == null)
+                    return new EffectOptions();
+
+                var choice = new ChooseCharacter(CardSource, controller, questPhase.GetAllCharactersCommittedToQuest().OfType<ICharacterInPlay>().Where(x => x.Card is IHeroCard).ToList());
+                return new EffectOptions(choice);
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
-                //if (!(step is ICommitToQuestStep))
-                //    return;
+                var chooseCharacter = options.Choice as IChooseCharacter;
+                if (chooseCharacter == null || chooseCharacter.ChosenCharacter == null)
+                    return GetCancelledString();
 
-                //var heroChoice = choice as IChooseHero;
-                //if (heroChoice == null || heroChoice.Hero == null)
-                //    return;
+                chooseCharacter.ChosenCharacter.Resources += 1;
 
-                //step.AddEffect(new AddResources(step, new Dictionary<Guid, byte> { { heroChoice.Hero.CardId, 1 } }));
+                return ToString();
             }
         }
-
-        #endregion
     }
 }

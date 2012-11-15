@@ -27,8 +27,9 @@ namespace LotR.Effects.Phases.Any
         private readonly ICardInPlay cardInPlay;
         private readonly byte damage;
 
-        public override void Resolve(IGame game, IPayment payment, IChoice choice)
+        public override string Resolve(IGame game, IEffectOptions options)
         {
+            return ToString();
         }
     }
 }

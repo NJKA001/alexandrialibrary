@@ -34,11 +34,11 @@ namespace LotR.Cards.Quests
                 stage.Game.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 var currentStage = game.QuestArea.GetCurrentQuestStage();
                 if (currentStage == null)
-                    return;
+                    return GetCancelledString();
 
                 var random = new Random();
                 var number = random.Next(1, 2);
@@ -59,6 +59,8 @@ namespace LotR.Cards.Quests
                         currentStage.NextStage = beornsPath;
                     }
                 }
+
+                return ToString();
             }
         }
     }

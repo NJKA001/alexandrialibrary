@@ -25,20 +25,20 @@ namespace LotR.Effects.Phases.Setup
             }
         }
 
-        public override IChoice GetChoice(IGame game)
+        public override IEffectOptions GetOptions(IGame game)
         {
             if (game.Players.Count() == 1)
-                return null;
+                return new EffectOptions();
 
-            return new ChooseFirstPlayer(game);
+            return new EffectOptions(new ChooseFirstPlayer(game));
         }
 
-        public override void Resolve(IGame game, IPayment payment, IChoice choice)
+        public override string Resolve(IGame game, IEffectOptions options)
         {
             if (game.Players.Count() == 1)
-                return;
+                return "There is only player, skipping Determine First Player";
 
-            var firstPlayerChoice = choice as IChooseFirstPlayer;
+            var firstPlayerChoice = options.Choice as IChooseFirstPlayer;
             if (firstPlayerChoice == null)
                 throw new InvalidOperationException("choice is not a valid IFirstPlayerChoice");
 
@@ -51,10 +51,7 @@ namespace LotR.Effects.Phases.Setup
             {
                 player.IsFirstPlayer = false;
             }
-        }
 
-        public override string GetResolutionDescription(IGame game, IPayment payment, IChoice choice)
-        {
             return string.Format("Determine First Player: {0}", game.FirstPlayer.Name);
         }
     }

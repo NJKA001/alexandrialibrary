@@ -31,7 +31,7 @@ namespace LotR.Cards.Encounter.Locations
             {
             }
 
-            public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
+            public override bool PaymentAccepted(IGame game, IEffectOptions options)
             {
                 var firstPlayer = game.Players.Where(x => x.IsFirstPlayer).FirstOrDefault();
                 if (firstPlayer == null)

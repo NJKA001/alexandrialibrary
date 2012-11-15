@@ -32,14 +32,15 @@ namespace LotR.Cards.Player.Allies
             {
             }
 
-            public override ICost GetCost(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
-                return new PayResources(Source, Sphere.Spirit, 1, false);
+                var cost = new PayResources(Source, Sphere.Spirit, 1, false);
+                return new EffectOptions(null, cost);
             }
 
-            public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
+            public override bool PaymentAccepted(IGame game, IEffectOptions options)
             {
-                var resourcePayment = payment as IResourcePayment;
+                var resourcePayment = options.Payment as IResourcePayment;
                 if (resourcePayment == null)
                     return false;
 
@@ -58,20 +59,22 @@ namespace LotR.Cards.Player.Allies
                 return true;
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 var card = CardSource as IPlayerCard;
                 if (card == null || card.Owner == null)
-                    return;
+                    return GetCancelledString();
 
                 var ally = card.Owner.Hand.Cards.Where(x => x.Id == Source.Id).FirstOrDefault() as IAllyCard;
                 if (ally == null)
-                    return;
+                    return GetCancelledString();
 
                 card.Owner.Hand.RemoveCards(new List<IPlayerCard> { ally });
                 card.Owner.AddCardInPlay(new AllyInPlay(game, ally));
 
                 game.AddEffect(new ReturnToHandAfterSuccessfulQuest(CardSource));
+
+                return ToString();
             }
         }
 

@@ -36,21 +36,23 @@ namespace LotR.Cards.Player.Heroes
                 playersDrawingCards.Game.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 var playersDrawing = game.CurrentPhase.GetPlayersDrawingCards();
                 if (playersDrawing == null)
-                    return;
+                    return GetCancelledString();
 
                 var firstPlayer = game.Players.Where(x => x.IsFirstPlayer).FirstOrDefault();
                 if (firstPlayer == null || !playersDrawing.Players.Contains(firstPlayer.StateId))
-                    return;
+                    return GetCancelledString();
 
                 var numberOfCards = playersDrawing.GetNumberOfCards(firstPlayer.StateId);
                 
                 numberOfCards += 1;
 
                 playersDrawing.SetNumberOfCards(firstPlayer.StateId, numberOfCards);
+
+                return ToString();
             }
         }
     }

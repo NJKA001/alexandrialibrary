@@ -18,13 +18,10 @@ namespace LotR.Effects
         string Description { get; }
         ISource Source { get; }
 
-        IChoice GetChoice(IGame game);
-        ICost GetCost(IGame game);
-        ILimit GetLimit(IGame game);
+        IEffectOptions GetOptions(IGame game);
 
         bool CanBeTriggered(IGame game);
-        bool PaymentAccepted(IGame game, IPayment payment, IChoice choice);
-        void Resolve(IGame game, IPayment payment, IChoice choice);
-        string GetResolutionDescription(IGame game, IPayment payment, IChoice choice);
+        bool PaymentAccepted(IGame game, IEffectOptions options);
+        string Resolve(IGame game, IEffectOptions options);
     }
 }

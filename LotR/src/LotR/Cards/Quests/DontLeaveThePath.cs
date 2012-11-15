@@ -35,7 +35,7 @@ namespace LotR.Cards.Quests
             {
             }
 
-            public override IChoice GetChoice(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
                 var allSpiders = 
                     game.StagingArea.EncounterDeck.Cards.OfType<IEnemyCard>().Where(x => x.PrintedTraits.Contains(Trait.Spider))
@@ -51,14 +51,15 @@ namespace LotR.Cards.Quests
                     availableSpiders.Add(player.StateId, allSpiders);
                 }
 
-                return new PlayersChooseCards<IEnemyCard>("Each player must search the encounter deck and discard pile for 1 Spider of their choice", Source, game.Players, 1, availableSpiders);
+                var choice = new PlayersChooseCards<IEnemyCard>("Each player must search the encounter deck and discard pile for 1 Spider of their choice", Source, game.Players, 1, availableSpiders);
+                return new EffectOptions(choice);
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
-                var spiderChoices = choice as IPlayersChooseCards<IEnemyCard>;
+                var spiderChoices = options.Choice as IPlayersChooseCards<IEnemyCard>;
                 if (spiderChoices == null)
-                    return;
+                    return GetCancelledString();
 
                 foreach (var player in spiderChoices.Players)
                 {
@@ -77,6 +78,8 @@ namespace LotR.Cards.Quests
                         game.StagingArea.AddToStagingArea(spider);
                     }
                 }
+
+                return ToString();
             }
         }
 

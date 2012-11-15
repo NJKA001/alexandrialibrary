@@ -31,30 +31,47 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override IChoice GetChoice(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
                 var questPhase = game.CurrentPhase as IQuestPhase;
                 if (questPhase == null)
-                    return null;
+                    return new EffectOptions();
 
-                var firstPlayer = game.Players.Where(x => x.IsFirstPlayer).FirstOrDefault();
-                if (firstPlayer == null)
-                    return null;
+                if (game.FirstPlayer == null)
+                    return new EffectOptions();
 
-                var questingCharacters = questPhase.GetCharactersCommitedToTheQuest(firstPlayer.StateId);
+                var questingCharacters = questPhase.GetCharactersCommitedToTheQuest(game.FirstPlayer.StateId);
                 if (questingCharacters.Count() == 0)
-                    return null;
+                    return new EffectOptions();
 
-                var availableCharacters = new Dictionary<Guid, IList<IWillpowerfulCard>> { { firstPlayer.StateId, questingCharacters.Select(x => x.Card).ToList() } };
+                var availableCharacters = new Dictionary<Guid, IList<IWillpowerfulCard>> { { game.FirstPlayer.StateId, questingCharacters.Select(x => x.Card).ToList() } };
 
-                return new PlayersChooseCards<IWillpowerfulCard>("The first player chooses 1 character currently commited to a quest", Source, new List<IPlayer> { firstPlayer }, 1, availableCharacters);
+                var choice = new PlayersChooseCards<IWillpowerfulCard>("The first player chooses 1 character currently commited to a quest", Source, new List<IPlayer> { game.FirstPlayer }, 1, availableCharacters);
+
+                return new EffectOptions(choice);
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
-                var characterChoice = choice as IPlayersChooseCards<IWillpowerfulCard>;
+                var characterChoice = options.Choice as IPlayersChooseCards<IWillpowerfulCard>;
                 if (characterChoice == null)
-                    return;
+                    return GetCancelledString();
+
+                var questPhase = game.CurrentPhase as IQuestPhase;
+                if (questPhase == null || game.FirstPlayer == null)
+                    return GetCancelledString();
+
+                var characterToRemoveFromQuest = characterChoice.GetChosenCards(game.FirstPlayer.StateId).FirstOrDefault();
+                if (characterToRemoveFromQuest == null)
+                    return GetCancelledString();
+
+                var characterInPlay = game.GetAllCardsInPlay<IWillpowerfulInPlay>().Where(x => x.Card.Id == characterToRemoveFromQuest.Id).FirstOrDefault();
+                if (characterInPlay == null)
+                    return GetCancelledString();
+
+                questPhase.RemoveCharacterFromQuest(characterInPlay);
+
+                return ToString();
             }
         }
 
@@ -66,15 +83,17 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
                 if (enemyAttack == null)
-                    return;
+                    return GetCancelledString();
 
                 var bonus = enemyAttack.IsUndefended ? 3 : 1;
 
                 game.AddEffect(new AttackModifier(game.CurrentPhase.Code, Source, enemyAttack.Enemy, TimeScope.None, bonus));
+
+                return ToString();
             }
         }
     }

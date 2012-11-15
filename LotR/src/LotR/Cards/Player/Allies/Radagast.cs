@@ -56,29 +56,27 @@ namespace LotR.Cards.Player.Allies
             {
             }
 
-            public override IChoice GetChoice(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return null;
+                    return base.GetOptions(game);
 
                 var charactersToChooseFrom = game.GetAllCardsInPlay<ICharacterInPlay>().Where(x => x.HasTrait(Trait.Creature)).ToList();
+                var choice = new ChooseCharacterWithTrait(Source, controller, Trait.Creature, charactersToChooseFrom);
 
-                return new ChooseCharacterWithTrait(Source, controller, Trait.Creature, charactersToChooseFrom);
-            }
-
-            public override ICost GetCost(IGame game)
-            {
                 var resourceful = game.GetCardInPlay<ICharacterInPlay>(Source.Id);
                 if (resourceful == null)
-                    return null;
+                    return new EffectOptions(choice);
 
-                return new PayResourcesFrom(Source, resourceful, 0, true);
+                var cost = new PayResourcesFrom(Source, resourceful, 0, true);
+
+                return new EffectOptions(choice, cost);
             }
 
-            public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
+            public override bool PaymentAccepted(IGame game, IEffectOptions options)
             {
-                var resourcePayment = payment as IResourcePayment;
+                var resourcePayment = options.Payment as IResourcePayment;
                 if (resourcePayment == null)
                     return false;
 
@@ -102,28 +100,30 @@ namespace LotR.Cards.Player.Allies
                 return true;
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
-                var resourcePayment = payment as IResourcePayment;
+                var resourcePayment = options.Payment as IResourcePayment;
                 if (resourcePayment == null)
-                    return;
+                    return GetCancelledString();
 
                 var numberOfResources = resourcePayment.GetPaymentBy(CardSource.Id);
                 if (numberOfResources == 0)
-                    return;
+                    return GetCancelledString();
 
-                var creatureChoice = choice as IChooseCharacterWithTrait;
+                var creatureChoice = options.Choice as IChooseCharacterWithTrait;
                 if (creatureChoice == null || creatureChoice.ChosenCharacter == null)
-                    return;
+                    return GetCancelledString();
 
                 if (!creatureChoice.ChosenCharacter.HasTrait(Trait.Creature))
-                    return;
+                    return GetCancelledString();
 
                 var damageable = creatureChoice.ChosenCharacter as IDamagableInPlay;
                 if (damageable == null)
-                    return;
+                    return GetCancelledString();
 
                 damageable.Damage -= numberOfResources;
+
+                return ToString();
             }
         }
     }

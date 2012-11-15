@@ -36,26 +36,29 @@ namespace LotR.Cards.Encounter.Enemies
                 state.AddEffect(this);
             }
 
-            public override IChoice GetChoice(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
                 var enemyEngage = game.CurrentPhase.GetEngagedEnemies().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
                 if (enemyEngage == null)
-                    return null;
+                    return base.GetOptions(game);
 
-                return new ChooseHero(Source, enemyEngage.DefendingPlayer, enemyEngage.DefendingPlayer.CardsInPlay.OfType<IHeroInPlay>().ToList());
+                var choice = new ChooseHero(Source, enemyEngage.DefendingPlayer, enemyEngage.DefendingPlayer.CardsInPlay.OfType<IHeroInPlay>().ToList());
+                return new EffectOptions(choice);
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
-                var heroChoice = choice as IChooseHero;
+                var heroChoice = options.Choice as IChooseHero;
                 if (heroChoice == null)
-                    return;
+                    return GetCancelledString();
 
                 var damagable = heroChoice.ChosenHero as IDamagableInPlay;
                 if (damagable == null)
-                    return;
+                    return GetCancelledString();
 
                 damagable.Damage += 5;
+
+                return ToString();
             }
         }
 
@@ -67,11 +70,11 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
                 if (enemyAttack == null)
-                    return;
+                    return GetCancelledString();
 
                 var damage = enemyAttack.IsUndefended ? (byte)2 : (byte)1;
 
@@ -79,6 +82,8 @@ namespace LotR.Cards.Encounter.Enemies
                 {
                     damageable.Damage += damage;
                 }
+
+                return ToString();
             }
         }
     }

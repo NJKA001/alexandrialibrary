@@ -30,11 +30,11 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override IChoice GetChoice(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
                 var questPhase = game.CurrentPhase as IQuestPhase;
                 if (questPhase == null)
-                    return null;
+                    return new EffectOptions();
                 
                 var questingCharacters = new Dictionary<Guid, IList<IWillpowerfulCard>>();
 
@@ -45,20 +45,20 @@ namespace LotR.Cards.Encounter.Enemies
                 }
 
                 if (questingCharacters.All(x => x.Value.Count == 0))
-                    return null;
+                    return new EffectOptions();
 
-                return new PlayersChooseCards<IWillpowerfulCard>("Each player must choose 1 character currently commited to a quest", Source, game.Players, 1, questingCharacters);
+                return new EffectOptions(new PlayersChooseCards<IWillpowerfulCard>("Each player must choose 1 character currently commited to a quest", Source, game.Players, 1, questingCharacters));
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 var questPhase = game.CurrentPhase as IQuestPhase;
                 if (questPhase == null)
-                    return;
+                    return GetCancelledString();
 
-                var removeChoice = choice as IPlayersChooseCards<IWillpowerfulCard>;
+                var removeChoice = options.Choice as IPlayersChooseCards<IWillpowerfulCard>;
                 if (removeChoice == null)
-                    return;
+                    return GetCancelledString();
 
                 foreach (var player in removeChoice.Players)
                 {
@@ -72,6 +72,8 @@ namespace LotR.Cards.Encounter.Enemies
 
                     questPhase.RemoveCharacterFromQuest(character);
                 }
+
+                return ToString();
             }
         }
     }

@@ -37,7 +37,7 @@ namespace LotR.Cards.Encounter.Locations
                 state.Game.AddEffect(this);
             }
 
-            public override IChoice GetChoice(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
                 var exhaustedCharacters = new Dictionary<Guid, IList<ICharacterCard>>() { { game.FirstPlayer.StateId, new List<ICharacterCard>() } };
 
@@ -51,9 +51,29 @@ namespace LotR.Cards.Encounter.Locations
                 }
 
                 if (exhaustedCharacters[game.FirstPlayer.StateId].Count == 0)
-                    return null;
+                    return new EffectOptions();
 
-                return new PlayersChooseCards<ICharacterCard>("The first player may choose and ready 1 character he controls", Source, new List<IPlayer> { game.FirstPlayer }, 1, exhaustedCharacters);
+                var choice = new PlayersChooseCards<ICharacterCard>("The first player may choose and ready 1 character he controls", Source, new List<IPlayer> { game.FirstPlayer }, 1, exhaustedCharacters);
+                return new EffectOptions(choice);
+            }
+
+            public override string Resolve(IGame game, IEffectOptions options)
+            {
+                var chooseCard = options.Choice as IPlayersChooseCards<ICharacterCard>;
+                if (chooseCard == null)
+                    return GetCancelledString();
+
+                var character = chooseCard.GetChosenCards(game.FirstPlayer.StateId).FirstOrDefault();
+                if (character == null)
+                    return GetCancelledString();
+
+                var exhaustable = game.GetCardInPlay<IExhaustableInPlay>(character.Id);
+                if (exhaustable == null)
+                    return GetCancelledString();
+
+                exhaustable.Ready();
+
+                return ToString();
             }
         }
     }

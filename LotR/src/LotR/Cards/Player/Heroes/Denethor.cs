@@ -35,22 +35,23 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public override ICost GetCost(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return null;
+                    return base.GetOptions(game);
 
                 var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
                 if (exhaustable == null)
-                    return null;
+                    return base.GetOptions(game);
 
-                return new ExhaustSelf(exhaustable);
+                var cost = new ExhaustSelf(exhaustable);
+                return new EffectOptions(null, cost);
             }
 
-            public override bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
+            public override bool PaymentAccepted(IGame game, IEffectOptions options)
             {
-                var exhaustPayment = payment as IExhaustCardPayment;
+                var exhaustPayment = options.Payment as IExhaustCardPayment;
                 if (exhaustPayment == null || exhaustPayment.Exhaustable == null || exhaustPayment.Exhaustable.IsExhausted)
                     return false;
 
@@ -65,18 +66,18 @@ namespace LotR.Cards.Player.Heroes
                 return true;
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
-                var topOfDeckChoice = choice as IChooseTopOrBottomOfDeck;
+                var topOfDeckChoice = options.Choice as IChooseTopOrBottomOfDeck;
                 if (topOfDeckChoice == null)
-                    return;
+                    return GetCancelledString();
 
                 if (game.StagingArea.ExaminedEncounterCards.Count() != 1)
-                    return;
+                    return GetCancelledString();
 
                 var topCard = game.StagingArea.ExaminedEncounterCards.FirstOrDefault() as IEncounterCard;
                 if (topCard == null)
-                    return;
+                    return GetCancelledString();
 
                 game.StagingArea.RemoveExaminedEncounterCards(new List<IEncounterCard> { topCard });
 
@@ -89,6 +90,8 @@ namespace LotR.Cards.Player.Heroes
                     game.StagingArea.EncounterDeck.PutOnBottom(new List<IEncounterCard> { topCard });
 
                 }
+
+                return ToString();
             }
         }
     }

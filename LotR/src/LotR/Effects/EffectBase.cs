@@ -63,6 +63,11 @@ namespace LotR.Effects
             }
         }
 
+        protected string GetCancelledString()
+        {
+            return string.Format("Effect Cancelled: {0}", ToString());
+        }
+
         public Guid EffectId
         {
             get { return effectId; }
@@ -83,19 +88,9 @@ namespace LotR.Effects
             get { return source; }
         }
 
-        public virtual IChoice GetChoice(IGame game)
+        public virtual IEffectOptions GetOptions(IGame game)
         {
-            return null;
-        }
-
-        public virtual ICost GetCost(IGame game)
-        {
-            return null;
-        }
-
-        public virtual ILimit GetLimit(IGame game)
-        {
-            return null;
+            return new EffectOptions();
         }
 
         public virtual bool CanBeTriggered(IGame game)
@@ -103,16 +98,12 @@ namespace LotR.Effects
             return IsPlayerActionWindow(game);
         }
 
-        public virtual bool PaymentAccepted(IGame game, IPayment payment, IChoice choice)
+        public virtual bool PaymentAccepted(IGame game, IEffectOptions options)
         {
             return true;
         }
 
-        public virtual void Resolve(IGame game, IPayment payment, IChoice choice)
-        {
-        }
-
-        public virtual string GetResolutionDescription(IGame game, IPayment payment, IChoice choice)
+        public virtual string Resolve(IGame game, IEffectOptions options)
         {
             return ToString();
         }

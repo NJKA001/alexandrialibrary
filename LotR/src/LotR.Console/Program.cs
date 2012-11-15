@@ -82,7 +82,7 @@ namespace LotR.Console
             controller.RegisterEffectAddedCallback((effect) => EffectAddedCallback(effect));
             controller.RegisterEffectResolvedCallback((effect, payment, choice) => EffectResolvedCallback(effect, payment, choice));
             controller.RegisterGetPaymentCallback((effect, cost) => GetPaymentCallback(effect, cost));
-            controller.RegisterPaymentRejectedCallback((effect, payment, choice) => PaymentRejectedCallback(effect, payment, choice));
+            controller.RegisterPaymentRejectedCallback((effect, options) => PaymentRejectedCallback(effect, options));
 
             return controller;
         }
@@ -401,34 +401,35 @@ namespace LotR.Console
             }
         }
 
-        private static IPayment GetPayment(IPlayer player, ICardEffect cardEffect)
-        {
-            if (player == null)
-                throw new ArgumentNullException("player");
-            if (cardEffect == null)
-                throw new ArgumentNullException("cardEffect");
+        //private static IPayment GetPayment(IPlayer player, ICardEffect cardEffect)
+        //{
+        //    if (player == null)
+        //        throw new ArgumentNullException("player");
+        //    if (cardEffect == null)
+        //        throw new ArgumentNullException("cardEffect");
 
-            var cost = cardEffect.GetCost(game);
-            if (cost == null)
-                return null;
+        //    var options = cardEffect.GetOptions(game);
+        //    var cost = options.Cost;
+        //    if (cost == null)
+        //        return null;
 
-            if (cost is IPayResources)
-            {
-                var resourceCost = cost as IPayResources;
-                var payment = new ResourcePayment(cardEffect);
+        //    if (cost is IPayResources)
+        //    {
+        //        var resourceCost = cost as IPayResources;
+        //        var payment = new ResourcePayment(cardEffect);
 
-                foreach (var character in player.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.CanPayFor(cardEffect)).ToList())
-                {
-                    GetResourcePayment(resourceCost, cardEffect.Name, payment, character);
-                    if (!resourceCost.IsVariableCost && payment.GetTotalPayment() == resourceCost.NumberOfResources)
-                        break;
-                }
+        //        foreach (var character in player.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.CanPayFor(cardEffect)).ToList())
+        //        {
+        //            GetResourcePayment(resourceCost, cardEffect.Name, payment, character);
+        //            if (!resourceCost.IsVariableCost && payment.GetTotalPayment() == resourceCost.NumberOfResources)
+        //                break;
+        //        }
 
-                return payment;
-            }
+        //        return payment;
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
         private static void GetResourcePayment(IPayResources cost, string costSource, IResourcePayment payment, ICharacterInPlay character)
         {
@@ -913,7 +914,7 @@ namespace LotR.Console
             return payment;
         }
 
-        private static void PaymentRejectedCallback(IEffect effect, IPayment payment, IChoice choice)
+        private static void PaymentRejectedCallback(IEffect effect, IEffectOptions options)
         {
             WriteLine("Payment for this effect was not accepted");
         }
@@ -937,19 +938,17 @@ namespace LotR.Console
             }
         }
 
-        private static void EffectResolvedCallback(IEffect effect, IPayment payment, IChoice choice)
+        private static void EffectResolvedCallback(IEffect effect, IEffectOptions options, string status)
         {
             try
             {
-                if (effect != null)
-                {
-                    var description = effect.GetResolutionDescription(game, payment, choice);
+                if (effect == null)
+                    throw new InvalidOperationException("effect is undefined");
 
-                    if (!string.IsNullOrEmpty(description))
-                        WriteLine("\r\n{0}", description);
-                }
-                else
-                    WriteLine("\r\nUnknown effect resolved");
+                if (string.IsNullOrEmpty(status))
+                    return;
+                    
+                WriteLine("\r\n{0}", status);
             }
             catch (Exception ex)
             {

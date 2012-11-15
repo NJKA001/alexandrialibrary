@@ -27,13 +27,15 @@ namespace LotR.Cards.Encounter.Treacheries
             {
             }
 
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 foreach (var player in game.Players)
                 {
                     var eventsToDiscard = player.Hand.Cards.OfType<IEventCard>().ToList();
                     player.DiscardFromHand(eventsToDiscard);
                 }
+
+                return ToString();
             }
         }
     }

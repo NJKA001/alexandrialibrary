@@ -34,27 +34,26 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public override ICost GetCost(IGame game)
+            public override IEffectOptions GetOptions(IGame game)
             {
-                return new DiscardCardsFromHand(Source, game, 1);
+                var limit = new Limit(PlayerScope.AnyPlayer, TimeScope.Round, 1);
+                var cost = new DiscardCardsFromHand(Source, game, 1);
+                return new EffectOptions(null, cost, limit);
             }
 
-            public override ILimit GetLimit(IGame game)
-            {
-                return new Limit(PlayerScope.AnyPlayer, TimeScope.Round, 1);
-            }
-
-            public override void Resolve(IGame game, IPayment payment, IChoice choice)
+            public override string Resolve(IGame game, IEffectOptions options)
             {
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return;
+                    return GetCancelledString();
 
                 var willpowerful = controller.CardsInPlay.OfType<IWillpowerfulInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
                 if (willpowerful == null)
-                    return;
+                    return GetCancelledString();
 
                 game.AddEffect(new WillpowerModifier(game.CurrentPhase.Code, Source, willpowerful, TimeScope.Phase, 1));
+
+                return ToString();
             }
         }
     }
