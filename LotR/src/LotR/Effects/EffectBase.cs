@@ -16,13 +16,11 @@ namespace LotR.Effects
     {
         protected EffectBase(string name, string description, ISource source)
         {
-            this.effectId = Guid.NewGuid();
             this.name = name;
             this.description = description;
             this.source = source;
         }
 
-        private readonly Guid effectId;
         private readonly string name;
         private readonly string description;
         private readonly ISource source;
@@ -66,11 +64,6 @@ namespace LotR.Effects
         protected string GetCancelledString()
         {
             return string.Format("Effect Cancelled: {0}", ToString());
-        }
-
-        public Guid EffectId
-        {
-            get { return effectId; }
         }
 
         public string Name
