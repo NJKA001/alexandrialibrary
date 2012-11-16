@@ -11,7 +11,7 @@ namespace LotR.Effects
         : CharacterAbilityBase, IResponseEffect
     {
         public ResponseCharacterAbilityBase(string text, IPlayerCard source)
-            : base(EffectType.Response, text, source)
+            : base("Response", text, source)
         {
         }
     }

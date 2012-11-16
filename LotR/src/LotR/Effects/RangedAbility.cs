@@ -13,7 +13,7 @@ namespace LotR.Effects
         : CharacterAbilityBase, IDuringCharactersAttack
     {
         public RangedAbility(IPlayerCard source)
-            : base(EffectType.Ranged, "Ranged", source)
+            : base("Ranged", "This character can attack enemies that are engaged with other players", source)
         {
         }
 

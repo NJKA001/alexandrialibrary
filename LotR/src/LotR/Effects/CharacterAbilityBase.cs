@@ -10,7 +10,7 @@ namespace LotR.Effects
     public abstract class CharacterAbilityBase
         : CardEffectBase, ICharacterAbility
     {
-        protected CharacterAbilityBase(EffectType type, string text, IPlayerCard playerCard)
+        protected CharacterAbilityBase(string type, string text, IPlayerCard playerCard)
             : base(type, text, playerCard)
         {
         }

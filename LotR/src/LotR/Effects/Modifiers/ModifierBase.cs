@@ -12,8 +12,8 @@ namespace LotR.Effects.Modifiers
     public abstract class ModifierBase
         : EffectBase, IModifier
     {
-        protected ModifierBase(string name, PhaseCode startPhase, ISource source, ICardInPlay target, TimeScope duration, int value)
-            : base(EffectType.Modifier, GetDescription(target, name, value), source)
+        protected ModifierBase(string type, PhaseCode startPhase, ISource source, ICardInPlay target, TimeScope duration, int value)
+            : base("Modifier", GetText(target, type, value), source)
         {
             this.StartPhase = startPhase;
             this.Target = target;
@@ -21,11 +21,11 @@ namespace LotR.Effects.Modifiers
             this.Value = value;
         }
 
-        private static string GetDescription(ICardInPlay target, string name, int value)
+        private static string GetText(ICardInPlay target, string type, int value)
         {
             return value > -1 ?
-                string.Format("{0}: +{1} to {2}", target.Title, value, name)
-                : string.Format("{0}: -{1} to {2}", target.Title, Math.Abs(value), name);
+                string.Format("{0}: +{1} to {2}", target.Title, value, type)
+                : string.Format("{0}: -{1} to {2}", target.Title, Math.Abs(value), type);
         }
 
         public PhaseCode StartPhase

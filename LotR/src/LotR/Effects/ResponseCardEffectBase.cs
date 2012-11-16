@@ -10,8 +10,8 @@ namespace LotR.Effects
     public abstract class ResponseCardEffectBase
         : CardEffectBase, IResponseEffect
     {
-        protected ResponseCardEffectBase(string description, ICard cardSource)
-            : base(EffectType.Response, description, cardSource)
+        protected ResponseCardEffectBase(string text, ICard cardSource)
+            : base("Response", text, cardSource)
         {
         }
     }

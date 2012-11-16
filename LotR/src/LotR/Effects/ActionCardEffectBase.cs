@@ -10,8 +10,8 @@ namespace LotR.Effects
     public abstract class ActionCardEffectBase
         : CardEffectBase, IActionEffect
     {
-        protected ActionCardEffectBase(string description, ICard cardSource)
-            : base(EffectType.Action, description, cardSource)
+        protected ActionCardEffectBase(string text, ICard cardSource)
+            : base("Action", text, cardSource)
         {
         }
     }

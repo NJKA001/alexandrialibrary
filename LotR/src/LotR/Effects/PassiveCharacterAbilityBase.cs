@@ -11,8 +11,13 @@ namespace LotR.Effects
         : CharacterAbilityBase
     {
         protected PassiveCharacterAbilityBase(string text, IPlayerCard source)
-            : base(EffectType.Passive, text, source)
+            : base("Passive", text, source)
         {
+        }
+
+        public override string ToString()
+        {
+            return Text;
         }
     }
 }

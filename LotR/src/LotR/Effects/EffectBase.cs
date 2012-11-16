@@ -14,17 +14,21 @@ namespace LotR.Effects
     public abstract class EffectBase
         : IEffect
     {
-        protected EffectBase(EffectType type, string text, ISource source)
+        protected EffectBase(string type, string text, ISource source)
         {
-            if (type == EffectType.None)
-                throw new ArgumentException("type cannot be None");
+            if (type == null)
+                throw new ArgumentNullException("type");
+            if (text == null)
+                throw new ArgumentNullException("text");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             this.type = type;
             this.text = text;
             this.source = source;
         }
 
-        private readonly EffectType type;
+        protected readonly string type;
         private readonly string text;
         private readonly ISource source;
 
@@ -67,11 +71,6 @@ namespace LotR.Effects
         protected string GetCancelledString()
         {
             return string.Format("Effect Cancelled: {0}", ToString());
-        }
-
-        public EffectType Type
-        {
-            get { return type; }
         }
 
         public string Text

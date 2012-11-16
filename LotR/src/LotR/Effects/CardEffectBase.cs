@@ -10,8 +10,8 @@ namespace LotR.Effects
     public abstract class CardEffectBase
         : EffectBase, ICardEffect
     {
-        protected CardEffectBase(EffectType type, string description, ICard cardSource)
-            : base(type, description, cardSource)
+        protected CardEffectBase(string type, string text, ICard cardSource)
+            : base(type, text, cardSource)
         {
             this.cardSource = cardSource;
         }
@@ -25,8 +25,8 @@ namespace LotR.Effects
 
         public override string ToString()
         {
-            return (Type != EffectType.Passive) ?
-                string.Format("{0}: {1}", Type.ToString().Replace('_', ' '), Text)
+            return !string.IsNullOrEmpty(type) ?
+                string.Format("{0}: {1}", type, Text)
                 : Text;
         }
     }

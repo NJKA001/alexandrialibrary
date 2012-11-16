@@ -120,7 +120,6 @@
     <Compile Include="Effects\Costs\IPayResources.cs" />
     <Compile Include="Effects\Costs\IPayResourcesFrom.cs" />
     <Compile Include="Effects\EffectOptions.cs" />
-    <Compile Include="Effects\EffectType.cs" />
     <Compile Include="Effects\ForcedCardEffectBase.cs" />
     <Compile Include="Effects\FrameworkEffectBase.cs" />
     <Compile Include="Effects\ICombatActionCardEffect.cs" />

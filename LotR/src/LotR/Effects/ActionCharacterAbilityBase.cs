@@ -11,7 +11,7 @@ namespace LotR.Effects
         : CharacterAbilityBase, IActionEffect
     {
         protected ActionCharacterAbilityBase(string text, IPlayerCard source)
-            : base(EffectType.Action, text, source)
+            : base("Action", text, source)
         {
         }
     }

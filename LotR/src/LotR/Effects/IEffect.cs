@@ -13,7 +13,6 @@ namespace LotR.Effects
 {
     public interface IEffect
     {
-        EffectType Type { get; }
         string Text { get; }
         ISource Source { get; }
 

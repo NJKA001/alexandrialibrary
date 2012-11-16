@@ -12,7 +12,7 @@ namespace LotR.Effects
         : CardEffectBase, IPassiveEffect
     {
         protected PassiveCardEffectBase(string text, ICard cardSource)
-            : base(EffectType.Passive, text, cardSource)
+            : base("Passive", text, cardSource)
         {
         }
 
