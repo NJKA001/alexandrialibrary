@@ -46,7 +46,7 @@ namespace LotR.Cards.Player.Attachments
 
             public void DuringDetermineWillpower(IDetermineWillpower state)
             {
-                var attachment = state.Game.GetCardInPlay<IAttachmentInPlay>(Source.Id);
+                var attachment = state.Game.GetCardInPlay<IAttachmentInPlay>(source.Id);
                 if (attachment == null || attachment.AttachedTo == null)
                     return;
 
@@ -74,7 +74,7 @@ namespace LotR.Cards.Player.Attachments
                 if (state.ResourceIcon != Sphere.Spirit)
                     return;
 
-                var attachment = state.Game.GetCardInPlay<IAttachmentInPlay>(Source.Id);
+                var attachment = state.Game.GetCardInPlay<IAttachmentInPlay>(source.Id);
                 if (attachment == null || attachment.AttachedTo == null)
                     return;
 
@@ -82,7 +82,7 @@ namespace LotR.Cards.Player.Attachments
                 if (resourceful == null || resourceful.Title != "Aragorn")
                     return;
 
-                if (state.Target.Card.Id != Source.Id)
+                if (state.Target.Card.Id != source.Id)
                     return;
 
                 state.HasResourceIcon = true;

@@ -41,7 +41,7 @@ namespace LotR.Cards.Quests
 
             public void DuringCheckGameStatus(IGameStatus gameStatus)
             {
-                if (gameStatus.Game.QuestArea.ActiveQuest == null || gameStatus.Game.QuestArea.ActiveQuest.Card.Id != Source.Id)
+                if (gameStatus.Game.QuestArea.ActiveQuest == null || gameStatus.Game.QuestArea.ActiveQuest.Card.Id != source.Id)
                     return;
 
                 var ungoliantsSpawn = gameStatus.Game.StagingArea.CardsInStagingArea.Where(x => x.Title == "Ungoliant's Spawn").FirstOrDefault() as IEnemyInPlay;

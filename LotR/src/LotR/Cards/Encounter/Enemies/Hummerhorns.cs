@@ -38,11 +38,11 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override IEffectOptions GetOptions(IGame game)
             {
-                var enemyEngage = game.CurrentPhase.GetEngagedEnemies().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyEngage = game.CurrentPhase.GetEngagedEnemies().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyEngage == null)
                     return base.GetOptions(game);
 
-                var choice = new ChooseHero(Source, enemyEngage.DefendingPlayer, enemyEngage.DefendingPlayer.CardsInPlay.OfType<IHeroInPlay>().ToList());
+                var choice = new ChooseHero(source, enemyEngage.DefendingPlayer, enemyEngage.DefendingPlayer.CardsInPlay.OfType<IHeroInPlay>().ToList());
                 return new EffectOptions(choice);
             }
 
@@ -72,7 +72,7 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override string Resolve(IGame game, IEffectOptions options)
             {
-                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return GetCancelledString();
 

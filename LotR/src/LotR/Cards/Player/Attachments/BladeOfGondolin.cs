@@ -72,7 +72,7 @@ namespace LotR.Cards.Player.Attachments
 
             public void AfterEnemyDefeated(IEnemyDefeated state)
             {
-                var attachment = state.Game.GetCardInPlay<IAttachmentInPlay>(Source.Id);
+                var attachment = state.Game.GetCardInPlay<IAttachmentInPlay>(source.Id);
                 if (attachment == null)
                     return;
 

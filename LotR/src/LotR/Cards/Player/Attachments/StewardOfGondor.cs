@@ -51,7 +51,7 @@ namespace LotR.Cards.Player.Attachments
                 if (check.Trait != Trait.Gondor)
                     return;
 
-                var attachment = check.Game.GetCardInPlay<IAttachmentInPlay>(Source.Id);
+                var attachment = check.Game.GetCardInPlay<IAttachmentInPlay>(source.Id);
                 if (attachment == null || attachment.AttachedTo == null)
                     return;
 
@@ -72,7 +72,7 @@ namespace LotR.Cards.Player.Attachments
 
             public override IEffectOptions GetOptions(IGame game)
             {
-                var exhaustable = game.GetCardInPlay<IExhaustableInPlay>(Source.Id);
+                var exhaustable = game.GetCardInPlay<IExhaustableInPlay>(source.Id);
                 if (exhaustable == null)
                     return base.GetOptions(game);
 
@@ -93,7 +93,7 @@ namespace LotR.Cards.Player.Attachments
 
             public override string Resolve(IGame game, IEffectOptions options)
             {
-                var attachment = game.GetCardInPlay<IAttachmentInPlay>(Source.Id);
+                var attachment = game.GetCardInPlay<IAttachmentInPlay>(source.Id);
                 if (attachment == null || attachment.AttachedTo == null)
                     return GetCancelledString();
 

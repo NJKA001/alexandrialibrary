@@ -42,7 +42,7 @@ namespace LotR.Cards.Player.Heroes
                 if (controller == null)
                     return base.GetOptions(game);
 
-                var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
+                var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
                 if (exhaustable == null)
                     return base.GetOptions(game);
 

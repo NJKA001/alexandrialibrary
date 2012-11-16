@@ -51,7 +51,7 @@ namespace LotR.Cards.Player.Heroes
                 if (!(revealed is IEnemyCard))
                     return;
 
-                if (!questPhase.IsCommittedToQuest(Source.Id))
+                if (!questPhase.IsCommittedToQuest(source.Id))
                     return;
 
                 game.AddEffect(this);

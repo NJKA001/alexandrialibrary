@@ -34,7 +34,7 @@ namespace LotR.Effects
 
         public override string ToString()
         {
-            return string.Format("Doomed {0}: {1}", Doomed, Text);
+            return string.Format("Doomed {0}: {1}", Doomed, text);
         }
     }
 }

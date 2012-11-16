@@ -51,7 +51,7 @@ namespace LotR.Cards.Quests
                     availableSpiders.Add(player.StateId, allSpiders);
                 }
 
-                var choice = new PlayersChooseCards<IEnemyCard>("Each player must search the encounter deck and discard pile for 1 Spider of their choice", Source, game.Players, 1, availableSpiders);
+                var choice = new PlayersChooseCards<IEnemyCard>("Each player must search the encounter deck and discard pile for 1 Spider of their choice", source, game.Players, 1, availableSpiders);
                 return new EffectOptions(choice);
             }
 
@@ -93,7 +93,7 @@ namespace LotR.Cards.Quests
 
             public void BeforeStageDefeated(IQuestStatus questStatus)
             {
-                if (questStatus.Game.QuestArea.ActiveQuest == null || questStatus.Game.QuestArea.ActiveQuest.Card.Id != Source.Id)
+                if (questStatus.Game.QuestArea.ActiveQuest == null || questStatus.Game.QuestArea.ActiveQuest.Card.Id != source.Id)
                     return;
 
                 var ungoliantsSpawn = questStatus.Game.VictoryDisplay.Cards.Where(x => x.Title == "Ungoliant's Spawn").FirstOrDefault() as IEnemyCard;
@@ -105,7 +105,7 @@ namespace LotR.Cards.Quests
 
             public void DuringCheckGameStatus(IGameStatus gameStatus)
             {
-                if (gameStatus.Game.QuestArea.ActiveQuest == null || gameStatus.Game.QuestArea.ActiveQuest.Card.Id != Source.Id)
+                if (gameStatus.Game.QuestArea.ActiveQuest == null || gameStatus.Game.QuestArea.ActiveQuest.Card.Id != source.Id)
                     return;
 
                 var ungoliantsSpawn = gameStatus.Game.VictoryDisplay.Cards.Where(x => x.Title == "Ungoliant's Spawn").FirstOrDefault() as IEnemyCard;

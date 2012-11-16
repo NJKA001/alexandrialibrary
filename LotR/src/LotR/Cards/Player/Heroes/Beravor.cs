@@ -40,9 +40,9 @@ namespace LotR.Cards.Player.Heroes
                 if (controller == null)
                     return new EffectOptions(null, null, limit);
 
-                var choice = new ChoosePlayer(Source, controller, game.Players.ToList());
+                var choice = new ChoosePlayer(source, controller, game.Players.ToList());
 
-                var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
+                var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
                 if (exhaustable == null)
                     return new EffectOptions(choice, null, limit);
 

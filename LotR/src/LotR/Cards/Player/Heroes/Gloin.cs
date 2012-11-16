@@ -35,10 +35,10 @@ namespace LotR.Cards.Player.Heroes
 
             public void AfterDamageDealtToCharacter(IDamageDealt state)
             {
-                if (state.Damage == 0 || state.Target.Card.Id != Source.Id)
+                if (state.Damage == 0 || state.Target.Card.Id != source.Id)
                     return;
 
-                var character = state.Game.GetCardInPlay<ICharacterInPlay>(Source.Id);
+                var character = state.Game.GetCardInPlay<ICharacterInPlay>(source.Id);
                 if (character == null)
                     return;
 
@@ -47,11 +47,11 @@ namespace LotR.Cards.Player.Heroes
 
             public override string Resolve(IGame game, IEffectOptions options)
             {
-                var damageDealt = game.CurrentPhase.GetDamageDealt().Where(x => x.Target.Card.Id == Source.Id).FirstOrDefault();
+                var damageDealt = game.CurrentPhase.GetDamageDealt().Where(x => x.Target.Card.Id == source.Id).FirstOrDefault();
                 if (damageDealt == null || damageDealt.Damage == 0)
                     return GetCancelledString();
 
-                var resourceful = game.GetCardInPlay<ICharacterInPlay>(Source.Id);
+                var resourceful = game.GetCardInPlay<ICharacterInPlay>(source.Id);
                 if (resourceful == null)
                     return GetCancelledString();
 

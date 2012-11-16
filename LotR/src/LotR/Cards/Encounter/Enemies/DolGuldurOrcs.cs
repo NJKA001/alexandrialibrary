@@ -46,7 +46,7 @@ namespace LotR.Cards.Encounter.Enemies
 
                 var availableCharacters = new Dictionary<Guid, IList<IWillpowerfulCard>> { { game.FirstPlayer.StateId, questingCharacters.Select(x => x.Card).ToList() } };
 
-                var choice = new PlayersChooseCards<IWillpowerfulCard>("The first player chooses 1 character currently commited to a quest", Source, new List<IPlayer> { game.FirstPlayer }, 1, availableCharacters);
+                var choice = new PlayersChooseCards<IWillpowerfulCard>("The first player chooses 1 character currently commited to a quest", source, new List<IPlayer> { game.FirstPlayer }, 1, availableCharacters);
 
                 return new EffectOptions(choice);
             }
@@ -85,13 +85,13 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override string Resolve(IGame game, IEffectOptions options)
             {
-                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return GetCancelledString();
 
                 var bonus = enemyAttack.IsUndefended ? 3 : 1;
 
-                game.AddEffect(new AttackModifier(game.CurrentPhase.Code, Source, enemyAttack.Enemy, TimeScope.None, bonus));
+                game.AddEffect(new AttackModifier(game.CurrentPhase.Code, source, enemyAttack.Enemy, TimeScope.None, bonus));
 
                 return ToString();
             }

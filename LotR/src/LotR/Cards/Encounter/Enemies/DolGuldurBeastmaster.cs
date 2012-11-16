@@ -39,7 +39,7 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override string Resolve(IGame game, IEffectOptions options)
             {
-                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return GetCancelledString();
 

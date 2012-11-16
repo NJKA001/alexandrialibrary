@@ -48,7 +48,7 @@ namespace LotR.Cards.Encounter.Locations
 
             public void AfterLocationExplored(ILocationExplored state)
             {
-                if (state.Location.Card.Id != Source.Id || !state.IsExplored)
+                if (state.Location.Card.Id != source.Id || !state.IsExplored)
                     return;
 
                 state.AddEffect(this);
@@ -63,7 +63,7 @@ namespace LotR.Cards.Encounter.Locations
                     availableCards.Add(player.StateId, topFive);
                 }
 
-                return new EffectOptions(new PlayersChooseCards<IPlayerCard>("each player may search the top 5 cards of his deck for 1 card of their choice", Source, game.Players, 1, availableCards));
+                return new EffectOptions(new PlayersChooseCards<IPlayerCard>("each player may search the top 5 cards of his deck for 1 card of their choice", source, game.Players, 1, availableCards));
             }
 
             public override string Resolve(IGame game, IEffectOptions options)

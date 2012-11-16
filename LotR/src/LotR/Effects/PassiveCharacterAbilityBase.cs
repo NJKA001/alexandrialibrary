@@ -17,7 +17,7 @@ namespace LotR.Effects
 
         public override string ToString()
         {
-            return Text;
+            return text;
         }
     }
 }

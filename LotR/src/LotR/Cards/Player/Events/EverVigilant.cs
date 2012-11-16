@@ -29,11 +29,11 @@ namespace LotR.Cards.Player.Events
 
             public override IEffectOptions GetOptions(IGame game)
             {
-                var card = Source as IPlayerCard;
+                var card = source as IPlayerCard;
                 if (card == null)
                     return new EffectOptions();
 
-                return new EffectOptions(new ChooseAlly(Source, card.Owner));
+                return new EffectOptions(new ChooseAlly(source, card.Owner));
             }
 
             public override string Resolve(IGame game, IEffectOptions options)

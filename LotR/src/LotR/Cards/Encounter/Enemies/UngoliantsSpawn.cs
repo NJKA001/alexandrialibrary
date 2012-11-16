@@ -42,7 +42,7 @@ namespace LotR.Cards.Encounter.Enemies
 
                 foreach (var willpowerful in questPhase.GetAllCharactersCommittedToQuest())
                 {
-                    game.AddEffect(new WillpowerModifier(game.CurrentPhase.Code, Source, willpowerful, TimeScope.Phase, -1));
+                    game.AddEffect(new WillpowerModifier(game.CurrentPhase.Code, source, willpowerful, TimeScope.Phase, -1));
                 }
 
                 return ToString();
@@ -59,7 +59,7 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override string Resolve(IGame game, IEffectOptions options)
             {
-                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return GetCancelledString();
 

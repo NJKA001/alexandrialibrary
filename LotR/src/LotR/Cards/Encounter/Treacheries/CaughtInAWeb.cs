@@ -63,9 +63,9 @@ namespace LotR.Cards.Encounter.Treacheries
                 IChoice choice = null;
 
                 if (mostThreateningPlayers.Count() == 1)
-                    choice = new ChooseHero(Source, mostThreateningPlayer, mostThreateningPlayer.CardsInPlay.OfType<IHeroInPlay>().ToList());
+                    choice = new ChooseHero(source, mostThreateningPlayer, mostThreateningPlayer.CardsInPlay.OfType<IHeroInPlay>().ToList());
                 else
-                    choice = new ChoosePlayerToChooseHero(Source, game.FirstPlayer, mostThreateningPlayers);
+                    choice = new ChoosePlayerToChooseHero(source, game.FirstPlayer, mostThreateningPlayers);
 
                 return new EffectOptions(choice);
             }
@@ -80,7 +80,7 @@ namespace LotR.Cards.Encounter.Treacheries
                 if (attachmentHost == null)
                     return GetCancelledString();
 
-                var attachable = this.Source as IAttachableCard;
+                var attachable = this.source as IAttachableCard;
                 if (attachable == null)
                     return GetCancelledString();
 
@@ -100,7 +100,7 @@ namespace LotR.Cards.Encounter.Treacheries
 
             public void DuringReadyingCard(ICardReadying state)
             {
-                if (state.Exhaustable.Card.Id != Source.Id)
+                if (state.Exhaustable.Card.Id != source.Id)
                     return;
 
                 if (!state.Exhaustable.IsExhausted)
@@ -117,7 +117,7 @@ namespace LotR.Cards.Encounter.Treacheries
 
                 foreach (var player in game.Players)
                 {
-                    attachment = player.CardsInPlay.OfType<IAttachableInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
+                    attachment = player.CardsInPlay.OfType<IAttachableInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
                     if (attachment != null)
                         break;
                 }
@@ -129,7 +129,7 @@ namespace LotR.Cards.Encounter.Treacheries
                 if (resourceful == null)
                     return new EffectOptions();
 
-                var cost = new PayResourcesFrom(Source, resourceful, 2, false);
+                var cost = new PayResourcesFrom(source, resourceful, 2, false);
                 cost.IsOptional = true;
 
                 return new EffectOptions(cost);
@@ -141,7 +141,7 @@ namespace LotR.Cards.Encounter.Treacheries
                 if (refreshPhase == null)
                     return GetCancelledString();
 
-                var readyingCard = refreshPhase.GetReadyingCards().Where(x => x.Exhaustable.Card.Id == Source.Id).FirstOrDefault();
+                var readyingCard = refreshPhase.GetReadyingCards().Where(x => x.Exhaustable.Card.Id == source.Id).FirstOrDefault();
                 if (readyingCard == null)
                     return GetCancelledString();
 

@@ -47,7 +47,7 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override IEffectOptions GetOptions(IGame game)
             {
-                var choice = new EachPlayerChoosesReadyCharacters(Source, game, 1);
+                var choice = new EachPlayerChoosesReadyCharacters(source, game, 1);
                 return new EffectOptions(choice);
             }
 
@@ -76,13 +76,13 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override IEffectOptions GetOptions(IGame game)
             {
-                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return base.GetOptions(game);
 
                 byte numberOfCharacters = enemyAttack.IsUndefended ? (byte)2 : (byte)1;
 
-                var choice = new EachPlayerChoosesReadyCharacters(Source, enemyAttack.DefendingPlayer, numberOfCharacters);
+                var choice = new EachPlayerChoosesReadyCharacters(source, enemyAttack.DefendingPlayer, numberOfCharacters);
                 return new EffectOptions(choice);
             }
 

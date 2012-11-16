@@ -26,8 +26,8 @@ namespace LotR.Effects
         public override string ToString()
         {
             return !string.IsNullOrEmpty(type) ?
-                string.Format("{0}: {1}", type, Text)
-                : Text;
+                string.Format("{0}: {1}", type, text)
+                : text;
         }
     }
 }

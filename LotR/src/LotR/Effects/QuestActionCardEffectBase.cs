@@ -32,7 +32,7 @@ namespace LotR.Effects
 
         public override string ToString()
         {
-            return string.Format("Quest Action: {0}", Text);
+            return string.Format("Quest Action: {0}", text);
         }
     }
 }

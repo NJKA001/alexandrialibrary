@@ -37,7 +37,7 @@ namespace LotR.Cards.Player.Heroes
             public override IEffectOptions GetOptions(IGame game)
             {
                 var limit = new Limit(PlayerScope.AnyPlayer, TimeScope.Round, 1);
-                var cost = new DiscardCardsFromHand(Source, game, 1);
+                var cost = new DiscardCardsFromHand(source, game, 1);
                 return new EffectOptions(null, cost, limit);
             }
 
@@ -47,11 +47,11 @@ namespace LotR.Cards.Player.Heroes
                 if (controller == null)
                     return GetCancelledString();
 
-                var willpowerful = controller.CardsInPlay.OfType<IWillpowerfulInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
+                var willpowerful = controller.CardsInPlay.OfType<IWillpowerfulInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
                 if (willpowerful == null)
                     return GetCancelledString();
 
-                game.AddEffect(new WillpowerModifier(game.CurrentPhase.Code, Source, willpowerful, TimeScope.Phase, 1));
+                game.AddEffect(new WillpowerModifier(game.CurrentPhase.Code, source, willpowerful, TimeScope.Phase, 1));
 
                 return ToString();
             }

@@ -40,7 +40,7 @@ namespace LotR.Cards.Player.Events
 
                 var alliesInHand = owner.Hand.Cards.OfType<IAllyCard>().ToList();
 
-                return new EffectOptions(new ChooseCardInHand<IAllyCard>("Choose 1 ally card in your hand", Source, owner, alliesInHand));
+                return new EffectOptions(new ChooseCardInHand<IAllyCard>("Choose 1 ally card in your hand", source, owner, alliesInHand));
             }
 
             public override string Resolve(IGame game, IEffectOptions options)

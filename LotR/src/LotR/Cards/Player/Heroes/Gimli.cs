@@ -45,7 +45,7 @@ namespace LotR.Cards.Player.Heroes
 
             public override string Resolve(IGame game, IEffectOptions options)
             {
-                var determineStrength = game.CurrentPhase.GetDetermineAttacks().Where(x => x.Attacker.Card.Id == Source.Id).FirstOrDefault();
+                var determineStrength = game.CurrentPhase.GetDetermineAttacks().Where(x => x.Attacker.Card.Id == source.Id).FirstOrDefault();
                 if (determineStrength == null)
                     return GetCancelledString();
 

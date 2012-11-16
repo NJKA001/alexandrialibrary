@@ -41,7 +41,7 @@ namespace LotR.Cards.Player.Heroes
                 if (questPhase == null)
                     return;
 
-                var self = questPhase.GetAllCharactersCommittedToQuest().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
+                var self = questPhase.GetAllCharactersCommittedToQuest().Where(x => x.Card.Id == source.Id).FirstOrDefault();
                 if (self == null)
                     return;
 
@@ -54,7 +54,7 @@ namespace LotR.Cards.Player.Heroes
                 if (character == null)
                     return base.GetOptions(game);
 
-                var cost = new PayResourcesFrom(Source, character, 1, false);
+                var cost = new PayResourcesFrom(source, character, 1, false);
                 return new EffectOptions(cost);
             }
 
@@ -68,7 +68,7 @@ namespace LotR.Cards.Player.Heroes
                     return false;
 
                 var character = resourcePayment.Characters.First();
-                if (character.Card.Id != Source.Id)
+                if (character.Card.Id != source.Id)
                     return false;
 
                 if (resourcePayment.GetPaymentBy(character.Card.Id) != 1)
@@ -84,7 +84,7 @@ namespace LotR.Cards.Player.Heroes
 
             public override string Resolve(IGame game, IEffectOptions options)
             {
-                var exhaustable = game.GetCardInPlay<IExhaustableInPlay>(Source.Id);
+                var exhaustable = game.GetCardInPlay<IExhaustableInPlay>(source.Id);
                 if (exhaustable == null)
                     return GetCancelledString();
 

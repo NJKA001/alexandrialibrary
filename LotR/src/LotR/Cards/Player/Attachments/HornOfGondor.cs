@@ -48,7 +48,7 @@ namespace LotR.Cards.Player.Attachments
 
                 foreach (var player in game.Players)
                 {
-                    attachment = player.CardsInPlay.OfType<IAttachmentInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
+                    attachment = player.CardsInPlay.OfType<IAttachmentInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
                     if (attachment != null)
                         continue;
                 }

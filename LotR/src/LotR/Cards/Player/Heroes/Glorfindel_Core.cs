@@ -42,13 +42,13 @@ namespace LotR.Cards.Player.Heroes
                     return new EffectOptions(null, null, limit);
 
                 var charactersToChooseFrom = game.GetAllCardsInPlay<ICharacterInPlay>().Where(x => x.Damage > 0).ToList();
-                var choice = new ChooseCharacter(Source, controller, charactersToChooseFrom);
+                var choice = new ChooseCharacter(source, controller, charactersToChooseFrom);
 
-                var resourceful = controller.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.Card.Id == Source.Id).FirstOrDefault();
+                var resourceful = controller.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
                 if (resourceful == null)
                     return new EffectOptions(choice, null, limit);
 
-                var cost = new PayResourcesFrom(Source, resourceful, 1, false);
+                var cost = new PayResourcesFrom(source, resourceful, 1, false);
 
                 return new EffectOptions(choice, cost, limit);
             }
@@ -64,7 +64,7 @@ namespace LotR.Cards.Player.Heroes
 
                 var character = resourcePayment.Characters.First();
 
-                if (character.Card.Id != Source.Id)
+                if (character.Card.Id != source.Id)
                     return false;
 
                 if (resourcePayment.GetPaymentBy(character.Card.Id) != 1)

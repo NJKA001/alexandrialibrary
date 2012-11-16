@@ -47,7 +47,7 @@ namespace LotR.Cards.Encounter.Enemies
                 if (questingCharacters.All(x => x.Value.Count == 0))
                     return new EffectOptions();
 
-                return new EffectOptions(new PlayersChooseCards<IWillpowerfulCard>("Each player must choose 1 character currently commited to a quest", Source, game.Players, 1, questingCharacters));
+                return new EffectOptions(new PlayersChooseCards<IWillpowerfulCard>("Each player must choose 1 character currently commited to a quest", source, game.Players, 1, questingCharacters));
             }
 
             public override string Resolve(IGame game, IEffectOptions options)

@@ -29,8 +29,8 @@ namespace LotR.Effects
         }
 
         protected readonly string type;
-        private readonly string text;
-        private readonly ISource source;
+        protected readonly string text;
+        protected readonly ISource source;
 
         protected bool IsPlayAlliesAndAttachmentsStep(IGame game)
         {
@@ -71,16 +71,6 @@ namespace LotR.Effects
         protected string GetCancelledString()
         {
             return string.Format("Effect Cancelled: {0}", ToString());
-        }
-
-        public string Text
-        {
-            get { return text; }
-        }
-
-        public ISource Source
-        {
-            get { return source; }
         }
 
         public virtual IEffectOptions GetOptions(IGame game)

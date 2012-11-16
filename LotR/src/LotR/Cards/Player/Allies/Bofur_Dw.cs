@@ -34,7 +34,7 @@ namespace LotR.Cards.Player.Allies
 
             public override IEffectOptions GetOptions(IGame game)
             {
-                var cost = new PayResources(Source, Sphere.Spirit, 1, false);
+                var cost = new PayResources(source, Sphere.Spirit, 1, false);
                 return new EffectOptions(null, cost);
             }
 
@@ -65,7 +65,7 @@ namespace LotR.Cards.Player.Allies
                 if (card == null || card.Owner == null)
                     return GetCancelledString();
 
-                var ally = card.Owner.Hand.Cards.Where(x => x.Id == Source.Id).FirstOrDefault() as IAllyCard;
+                var ally = card.Owner.Hand.Cards.Where(x => x.Id == source.Id).FirstOrDefault() as IAllyCard;
                 if (ally == null)
                     return GetCancelledString();
 

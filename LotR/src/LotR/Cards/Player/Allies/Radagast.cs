@@ -63,13 +63,13 @@ namespace LotR.Cards.Player.Allies
                     return base.GetOptions(game);
 
                 var charactersToChooseFrom = game.GetAllCardsInPlay<ICharacterInPlay>().Where(x => x.HasTrait(Trait.Creature)).ToList();
-                var choice = new ChooseCharacterWithTrait(Source, controller, Trait.Creature, charactersToChooseFrom);
+                var choice = new ChooseCharacterWithTrait(source, controller, Trait.Creature, charactersToChooseFrom);
 
-                var resourceful = game.GetCardInPlay<ICharacterInPlay>(Source.Id);
+                var resourceful = game.GetCardInPlay<ICharacterInPlay>(source.Id);
                 if (resourceful == null)
                     return new EffectOptions(choice);
 
-                var cost = new PayResourcesFrom(Source, resourceful, 0, true);
+                var cost = new PayResourcesFrom(source, resourceful, 0, true);
 
                 return new EffectOptions(choice, cost);
             }

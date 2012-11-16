@@ -34,7 +34,7 @@ namespace LotR.Cards.Encounter.Locations
 
             public void DuringDrawingCards(IPlayersDrawingCards playersDrawingCard)
             {
-                if (playersDrawingCard.Game.QuestArea.ActiveLocation == null || playersDrawingCard.Game.QuestArea.ActiveLocation.Card.Id != Source.Id)
+                if (playersDrawingCard.Game.QuestArea.ActiveLocation == null || playersDrawingCard.Game.QuestArea.ActiveLocation.Card.Id != source.Id)
                     return;
 
                 playersDrawingCard.Game.AddEffect(this);

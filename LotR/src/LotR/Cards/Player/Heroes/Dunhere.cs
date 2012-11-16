@@ -44,7 +44,7 @@ namespace LotR.Cards.Player.Heroes
                 if (combatPhase == null)
                     return;
 
-                var chooseEnemy = game.CurrentPhase.GetEnemiesChosenToAttack().Where(x => x.Attackers.Any(y => y.Card.Id == Source.Id)).FirstOrDefault();
+                var chooseEnemy = game.CurrentPhase.GetEnemiesChosenToAttack().Where(x => x.Attackers.Any(y => y.Card.Id == source.Id)).FirstOrDefault();
                 if (chooseEnemy == null)
                     return;
 
@@ -56,7 +56,7 @@ namespace LotR.Cards.Player.Heroes
 
             public override string Resolve(IGame game, IEffectOptions options)
             {
-                var chooseEnemy = game.CurrentPhase.GetEnemiesChosenToAttack().Where(x => x.Attackers.Any(y => y.Card.Id == Source.Id)).FirstOrDefault();
+                var chooseEnemy = game.CurrentPhase.GetEnemiesChosenToAttack().Where(x => x.Attackers.Any(y => y.Card.Id == source.Id)).FirstOrDefault();
                 if (chooseEnemy == null)
                     return GetCancelledString();
 
@@ -79,7 +79,7 @@ namespace LotR.Cards.Player.Heroes
 
             public void DuringDetermineAttack(IDetermineAttack determineAttack)
             {
-                if (determineAttack.Attacker.Card.Id != Source.Id)
+                if (determineAttack.Attacker.Card.Id != source.Id)
                     return;
 
                 var enemy = determineAttack.Game.StagingArea.CardsInStagingArea.OfType<IEnemyInPlay>().Where(x => x.Card.Id == determineAttack.Defender.Card.Id).FirstOrDefault();

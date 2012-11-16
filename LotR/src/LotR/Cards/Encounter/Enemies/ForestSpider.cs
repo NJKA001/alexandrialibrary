@@ -48,7 +48,7 @@ namespace LotR.Cards.Encounter.Enemies
 
                 foreach (var player in game.Players)
                 {
-                    enemy = player.EngagedEnemies.Where(x => x.Card.Id == Source.Id).FirstOrDefault();
+                    enemy = player.EngagedEnemies.Where(x => x.Card.Id == source.Id).FirstOrDefault();
                     if (enemy != null)
                         break;
                 }
@@ -56,7 +56,7 @@ namespace LotR.Cards.Encounter.Enemies
                 if (enemy == null)
                     return GetCancelledString();
 
-                game.AddEffect(new AttackModifier(game.CurrentPhase.Code, Source, enemy, TimeScope.Round, 1));
+                game.AddEffect(new AttackModifier(game.CurrentPhase.Code, source, enemy, TimeScope.Round, 1));
 
                 return ToString();
             }
@@ -72,7 +72,7 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override IEffectOptions GetOptions(IGame game)
             {
-                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return null;
 
@@ -90,13 +90,13 @@ namespace LotR.Cards.Encounter.Enemies
                 if (attachments[enemyAttack.DefendingPlayer.StateId].Count == 0)
                     return null;
 
-                var choice = new PlayersChooseCards<IAttachableCard>("Defending player must choose 1 attachment he controls", Source, new List<IPlayer> { enemyAttack.DefendingPlayer }, 1, attachments);
+                var choice = new PlayersChooseCards<IAttachableCard>("Defending player must choose 1 attachment he controls", source, new List<IPlayer> { enemyAttack.DefendingPlayer }, 1, attachments);
                 return new EffectOptions(choice);
             }
 
             public override string Resolve(IGame game, IEffectOptions options)
             {
-                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return GetCancelledString();
 

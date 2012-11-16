@@ -29,7 +29,7 @@ namespace LotR.Cards.Encounter.Locations
 
             public override IEffectOptions GetOptions(IGame game)
             {
-                return new EffectOptions(new EachPlayerChoosesReadyCharacters(Source, game, 1, true));
+                return new EffectOptions(new EachPlayerChoosesReadyCharacters(source, game, 1, true));
             }
 
             public override bool PaymentAccepted(IGame game, IEffectOptions options)

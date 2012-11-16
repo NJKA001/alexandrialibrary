@@ -43,7 +43,7 @@ namespace LotR.Cards.Encounter.Treacheries
 
                 foreach (var threatening in game.StagingArea.CardsInStagingArea.OfType<IThreateningInPlay>())
                 {
-                    game.AddEffect(new ThreatModifier(game.CurrentPhase.Code, Source, threatening, TimeScope.Phase, 1));
+                    game.AddEffect(new ThreatModifier(game.CurrentPhase.Code, source, threatening, TimeScope.Phase, 1));
                 }
 
                 return ToString();
@@ -60,7 +60,7 @@ namespace LotR.Cards.Encounter.Treacheries
 
             public override IEffectOptions GetOptions(IGame game)
             {
-                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null || enemyAttack.IsUndefended)
                     return new EffectOptions();
 
@@ -92,7 +92,7 @@ namespace LotR.Cards.Encounter.Treacheries
                 if (players.Count == 0 || attachments.All(x => x.Value.Count == 0))
                     return null;
 
-                var choice = new PlayersChooseCards<IAttachableCard>("Choose and discard 1 attachment from the defending character.", Source, players, 1, attachments);
+                var choice = new PlayersChooseCards<IAttachableCard>("Choose and discard 1 attachment from the defending character.", source, players, 1, attachments);
                 return new EffectOptions(choice);
             }
 
@@ -152,7 +152,7 @@ namespace LotR.Cards.Encounter.Treacheries
 
             public override string Resolve(IGame game, IEffectOptions options)
             {
-                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == Source.Id).FirstOrDefault();
+                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null)
                     return GetCancelledString();
 

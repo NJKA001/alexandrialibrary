@@ -38,7 +38,7 @@ namespace LotR.Cards.Encounter.Enemies
 
             public void DuringDetermineAttack(IDetermineAttack state)
             {
-                var enemy = state.Game.GetCardInPlay<IEnemyInPlay>(Source.Id);
+                var enemy = state.Game.GetCardInPlay<IEnemyInPlay>(source.Id);
                 if (enemy == null || enemy.Resources == 0)
                     return;
 
@@ -47,13 +47,13 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override string Resolve(IGame game, IEffectOptions options)
             {
-                var enemy = game.GetCardInPlay<IEnemyInPlay>(Source.Id);
+                var enemy = game.GetCardInPlay<IEnemyInPlay>(source.Id);
                 if (enemy == null || enemy.Resources == 0)
                     return GetCancelledString();
 
                 var bonus = enemy.Resources * 2;
 
-                game.AddEffect(new AttackModifier(game.CurrentPhase.Code, Source, enemy, TimeScope.None, bonus));
+                game.AddEffect(new AttackModifier(game.CurrentPhase.Code, source, enemy, TimeScope.None, bonus));
 
                 return ToString();
             }
@@ -77,7 +77,7 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override string Resolve(IGame game, IEffectOptions options)
             {
-                var enemy = game.GetCardInPlay<IEnemyInPlay>(Source.Id);
+                var enemy = game.GetCardInPlay<IEnemyInPlay>(source.Id);
                 if (enemy == null)
                     return GetCancelledString();
 
