@@ -11,13 +11,8 @@ namespace LotR.Effects
     public abstract class PassiveCardEffectBase
         : CardEffectBase, IPassiveEffect
     {
-        protected PassiveCardEffectBase(string description, ICard cardSource)
-            : base("Passive Card Effect", description, cardSource)
-        {
-        }
-
-        protected PassiveCardEffectBase(string name, string description, ICard cardSource)
-            : base(name, description, cardSource)
+        protected PassiveCardEffectBase(string text, ICard cardSource)
+            : base(EffectType.Passive, text, cardSource)
         {
         }
 
@@ -45,7 +40,7 @@ namespace LotR.Effects
 
         public override string ToString()
         {
-            return Description;
+            return Text;
         }
     }
 }

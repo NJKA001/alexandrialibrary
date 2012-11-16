@@ -14,15 +14,18 @@ namespace LotR.Effects
     public abstract class EffectBase
         : IEffect
     {
-        protected EffectBase(string name, string description, ISource source)
+        protected EffectBase(EffectType type, string text, ISource source)
         {
-            this.name = name;
-            this.description = description;
+            if (type == EffectType.None)
+                throw new ArgumentException("type cannot be None");
+
+            this.type = type;
+            this.text = text;
             this.source = source;
         }
 
-        private readonly string name;
-        private readonly string description;
+        private readonly EffectType type;
+        private readonly string text;
         private readonly ISource source;
 
         protected bool IsPlayAlliesAndAttachmentsStep(IGame game)
@@ -66,14 +69,14 @@ namespace LotR.Effects
             return string.Format("Effect Cancelled: {0}", ToString());
         }
 
-        public string Name
+        public EffectType Type
         {
-            get { return name; }
+            get { return type; }
         }
 
-        public string Description
+        public string Text
         {
-            get { return description; }
+            get { return text; }
         }
 
         public ISource Source

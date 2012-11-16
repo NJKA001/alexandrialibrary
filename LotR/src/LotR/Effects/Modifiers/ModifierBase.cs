@@ -13,7 +13,7 @@ namespace LotR.Effects.Modifiers
         : EffectBase, IModifier
     {
         protected ModifierBase(string name, PhaseCode startPhase, ISource source, ICardInPlay target, TimeScope duration, int value)
-            : base(name, GetDescription(target, name, value), source)
+            : base(EffectType.Modifier, GetDescription(target, name, value), source)
         {
             this.StartPhase = startPhase;
             this.Target = target;

@@ -10,14 +10,9 @@ namespace LotR.Effects
     public abstract class ResponseCharacterAbilityBase
         : CharacterAbilityBase, IResponseEffect
     {
-        public ResponseCharacterAbilityBase(string description, IPlayerCard source)
-            : base(description, source)
+        public ResponseCharacterAbilityBase(string text, IPlayerCard source)
+            : base(EffectType.Response, text, source)
         {
-        }
-
-        public override string ToString()
-        {
-            return string.Format("Response: {0}", Description);
         }
     }
 }

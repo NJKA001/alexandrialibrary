@@ -11,7 +11,7 @@ namespace LotR.Effects
         : CardEffectBase, ISurgeEffect
     {
         public SurgeEffect(IEncounterCard source)
-            : base("Surge", "Reveal 1 additional card from the encounter deck", source)
+            : base(EffectType.Surge, "Reveal 1 additional card from the encounter deck", source)
         {
         }
     }

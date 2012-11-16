@@ -23,7 +23,7 @@ namespace LotR.Effects
 
         public override string ToString()
         {
-            return string.Format("When Revealed: {0}", Description);
+            return string.Format("When Revealed: {0}", Text);
         }
     }
 }

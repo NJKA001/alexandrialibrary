@@ -655,7 +655,7 @@ namespace LotR.Console
 
             WriteLine("Choose an effect to trigger");
 
-            var effectNames = effects.Select(x => string.Format("{0} ({1} - {2})", x.Name, x.CardSource.Title, x.CardSource.PrintedCardType)).ToList();
+            var effectNames = effects.Select(x => string.Format("{0} ({1} - {2})", x.Type.ToString().Replace('_', ' '), x.CardSource.Title, x.CardSource.PrintedCardType)).ToList();
             effectNames.Add("Pass on triggering an effect");
 
             var effectNumber = PromptForNumber(effectNames);

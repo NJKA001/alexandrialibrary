@@ -17,7 +17,7 @@ namespace LotR.Effects
 
         public override string ToString()
         {
-            return string.Format("Forced: {0}", Description);
+            return string.Format("Forced: {0}", Text);
         }
     }
 }

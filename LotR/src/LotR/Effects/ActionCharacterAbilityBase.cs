@@ -10,14 +10,9 @@ namespace LotR.Effects
     public abstract class ActionCharacterAbilityBase
         : CharacterAbilityBase, IActionEffect
     {
-        protected ActionCharacterAbilityBase(string description, IPlayerCard source)
-            : base(description, source)
+        protected ActionCharacterAbilityBase(string text, IPlayerCard source)
+            : base(EffectType.Action, text, source)
         {
-        }
-
-        public override string ToString()
-        {
-            return string.Format("Action: {0}", Description);
         }
     }
 }

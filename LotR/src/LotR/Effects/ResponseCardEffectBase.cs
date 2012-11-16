@@ -11,7 +11,7 @@ namespace LotR.Effects
         : CardEffectBase, IResponseEffect
     {
         protected ResponseCardEffectBase(string description, ICard cardSource)
-            : base("Response", description, cardSource)
+            : base(EffectType.Response, description, cardSource)
         {
         }
     }

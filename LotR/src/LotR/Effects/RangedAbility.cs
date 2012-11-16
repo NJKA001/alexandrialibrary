@@ -13,7 +13,7 @@ namespace LotR.Effects
         : CharacterAbilityBase, IDuringCharactersAttack
     {
         public RangedAbility(IPlayerCard source)
-            : base("Ranged", source)
+            : base(EffectType.Ranged, "Ranged", source)
         {
         }
 

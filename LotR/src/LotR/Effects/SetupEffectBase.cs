@@ -20,7 +20,7 @@ namespace LotR.Effects
 
         public override string ToString()
         {
-            return string.Format("Setup: {0}", Description);
+            return string.Format("Setup: {0}", Text);
         }
     }
 }

@@ -13,8 +13,8 @@ namespace LotR.Effects
 {
     public interface IEffect
     {
-        string Name { get; }
-        string Description { get; }
+        EffectType Type { get; }
+        string Text { get; }
         ISource Source { get; }
 
         IEffectOptions GetOptions(IGame game);

@@ -13,7 +13,7 @@ namespace LotR.Effects
         : CharacterAbilityBase, IDuringCharactersDefend
     {
         public SentinelAbility(IPlayerCard source)
-            : base("Sentinel", source)
+            : base(EffectType.Sentinel, "Sentinel", source)
         {
         }
 
