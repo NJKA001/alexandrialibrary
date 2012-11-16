@@ -30,11 +30,6 @@ namespace LotR.Effects.Choices
         private readonly IList<IQuestion> questions = new List<IQuestion>();
         private bool isCancelled;
 
-        public ISource Source
-        {
-            get { return source; }
-        }
-
         public IEnumerable<IPlayer> Players
         {
             get { return players; }

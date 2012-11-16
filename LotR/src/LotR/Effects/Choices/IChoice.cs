@@ -12,7 +12,6 @@ namespace LotR.Effects.Choices
     public interface IChoice
         : IChoiceItem
     {
-        ISource Source { get; }
         IEnumerable<IPlayer> Players { get; }
         IEnumerable<IQuestion> Questions { get; }
 
