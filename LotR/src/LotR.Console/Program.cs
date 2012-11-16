@@ -78,11 +78,13 @@ namespace LotR.Console
         private static IGameController GetController()
         {
             var controller = new GameController();
-            controller.RegisterChoiceOfferedCallback((effect, choice) => ChoiceOfferedCallback(effect, choice));
             controller.RegisterEffectAddedCallback((effect) => EffectAddedCallback(effect));
-            controller.RegisterEffectResolvedCallback((effect, payment, choice) => EffectResolvedCallback(effect, payment, choice));
+            controller.RegisterEffectCancelledCallback((effect, handle) => EffectCancelledCallback(effect, handle));
+            controller.RegisterEffectResolvedCallback((effect, handle) => EffectResolvedCallback(effect, handle));
             controller.RegisterGetPaymentCallback((effect, cost) => GetPaymentCallback(effect, cost));
-            controller.RegisterPaymentRejectedCallback((effect, options) => PaymentRejectedCallback(effect, options));
+            controller.RegisterOfferChoiceCallback((effect, choice) => OfferChoiceCallback(effect, choice));
+            controller.RegisterPaymentAcceptedCallback((effect, handle) => PaymentAcceptedCallback(effect, handle));
+            controller.RegisterPaymentRejectedCallback((effect, handle) => PaymentRejectedCallback(effect, handle));
 
             return controller;
         }
@@ -409,7 +411,7 @@ namespace LotR.Console
         //        throw new ArgumentNullException("cardEffect");
 
         //    var options = cardEffect.GetOptions(game);
-        //    var cost = options.Cost;
+        //    var cost = handle.Cost;
         //    if (cost == null)
         //        return null;
 
@@ -845,7 +847,7 @@ namespace LotR.Console
             }
         }
 
-        private static void ChoiceOfferedCallback(IEffect effect, IChoice choice)
+        private static void OfferChoiceCallback(IEffect effect, IChoice choice)
         {
             try
             {
@@ -862,7 +864,7 @@ namespace LotR.Console
             }
             catch (Exception ex)
             {
-                WriteLine("Error in choice offered callback: {0}\r\n{1}", ex.Message, ex.StackTrace);
+                WriteLine("Error in offer choice callback: {0}\r\n{1}", ex.Message, ex.StackTrace);
             }
         }
 
@@ -914,9 +916,14 @@ namespace LotR.Console
             return payment;
         }
 
-        private static void PaymentRejectedCallback(IEffect effect, IEffectOptions options)
+        private static void PaymentAcceptedCallback(IEffect effect, IEffectHandle handle)
         {
-            WriteLine("Payment for this effect was not accepted");
+            WriteLine("The payment for this effect was accepted");
+        }
+
+        private static void PaymentRejectedCallback(IEffect effect, IEffectHandle handle)
+        {
+            WriteLine("The payment for this effect was rejected");
         }
 
         private static void EffectAddedCallback(IEffect effect)
@@ -927,8 +934,8 @@ namespace LotR.Console
                 {
                     if (PromptForBool("You have a response that can be triggered right now.\r\n\r\n{0}\r\n\r\nWould you like to trigger this repsonse?", effect))
                     {
-                        var options = game.GetOptions(effect);
-                        game.ResolveEffect(effect, options);
+                        var handle = game.GetHandle(effect);
+                        game.TriggerEffect(effect, handle);
                     }
                 }
             }
@@ -938,17 +945,39 @@ namespace LotR.Console
             }
         }
 
-        private static void EffectResolvedCallback(IEffect effect, IEffectOptions options, string status)
+        private static void EffectCancelledCallback(IEffect effect, IEffectHandle handle)
         {
             try
             {
                 if (effect == null)
-                    throw new InvalidOperationException("effect is undefined");
+                    throw new ArgumentNullException("effect");
+                if (handle == null)
+                    throw new ArgumentNullException("handle");
 
-                if (string.IsNullOrEmpty(status))
+                if (string.IsNullOrEmpty(handle.Status))
+                    return;
+
+                WriteLine("\r\n{0}", handle.Status);
+            }
+            catch (Exception ex)
+            {
+                WriteLine("\r\nError in effect cancelled callback: {0}\r\n{1}", ex.Message, ex.StackTrace);
+            }
+        }
+
+        private static void EffectResolvedCallback(IEffect effect, IEffectHandle handle)
+        {
+            try
+            {
+                if (effect == null)
+                    throw new ArgumentNullException("effect");
+                if (handle == null)
+                    throw new ArgumentNullException("handle");
+
+                if (string.IsNullOrEmpty(handle.Status))
                     return;
                     
-                WriteLine("\r\n{0}", status);
+                WriteLine("\r\n{0}", handle.Status);
             }
             catch (Exception ex)
             {

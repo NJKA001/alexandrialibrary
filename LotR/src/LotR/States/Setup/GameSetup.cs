@@ -34,34 +34,34 @@ namespace LotR.States.Setup
         private void ShufflePlayerDeck(IPlayer player)
         {
             var shuffleDeck = new PlayerShufflesDeck(game, player);
-            var options = game.GetOptions(shuffleDeck);
+            var handle = game.GetHandle(shuffleDeck);
 
             shuffleDeck.DuringSetup(game);
 
             game.AddEffect(shuffleDeck);
-            game.ResolveEffect(shuffleDeck, options);
+            game.TriggerEffect(shuffleDeck, handle);
         }
 
         private void PlaceHeroesAndSetInitialThreat(IPlayer player)
         {
             var placeHeroes = new PlayerPlacesHeroesAndSetsThreat(game, player);
-            var options = game.GetOptions(placeHeroes);
+            var handle = game.GetHandle(placeHeroes);
 
             placeHeroes.DuringSetup(game);
 
             game.AddEffect(placeHeroes);
-            game.ResolveEffect(placeHeroes, options);
+            game.TriggerEffect(placeHeroes, handle);
         }
 
         private void DetermineFirstPlayer()
         {
             var determineFirstPlayer = new DetermineFirstPlayer(game);
-            var options = game.GetOptions(determineFirstPlayer);
+            var handle = game.GetHandle(determineFirstPlayer);
 
             determineFirstPlayer.DuringSetup(game);
 
             game.AddEffect(determineFirstPlayer);
-            game.ResolveEffect(determineFirstPlayer, options);
+            game.TriggerEffect(determineFirstPlayer, handle);
         }
 
         private void DrawSetupHand(IPlayer player)
@@ -69,39 +69,39 @@ namespace LotR.States.Setup
             var drawSetupHand = new PlayerDrawsStartingHand(game, player);
             drawSetupHand.DuringSetup(game);
 
-            var options = game.GetOptions(drawSetupHand);
+            var handle = game.GetHandle(drawSetupHand);
 
             game.AddEffect(drawSetupHand);
-            game.ResolveEffect(drawSetupHand, options);
+            game.TriggerEffect(drawSetupHand, handle);
         }
 
         private void SetQuestCards()
         {
             var setQuestCards = new SetQuestCards(game);
-            var options = game.GetOptions(setQuestCards);
+            var handle = game.GetHandle(setQuestCards);
             
             setQuestCards.DuringSetup(game);
 
             game.AddEffect(setQuestCards);
-            game.ResolveEffect(setQuestCards, options);
+            game.TriggerEffect(setQuestCards, handle);
         }
 
         private void FollowScenarioSetup()
         {
             var scenarioSetup = new FollowScenarioSetup(game);
-            var setupOptions = game.GetOptions(scenarioSetup);
+            var setupOptions = game.GetHandle(scenarioSetup);
             
             scenarioSetup.DuringSetup(game);
 
             game.AddEffect(scenarioSetup);
-            game.ResolveEffect(scenarioSetup, setupOptions);
+            game.TriggerEffect(scenarioSetup, setupOptions);
 
             foreach (var effect in game.GetEffects<ISetupEffect>())
             {
                 effect.Setup(game);
 
-                var options = game.GetOptions(effect);
-                game.ResolveEffect(effect, options);
+                var handle = game.GetHandle(effect);
+                game.TriggerEffect(effect, handle);
             }
         }
 

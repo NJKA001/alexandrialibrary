@@ -33,12 +33,12 @@ namespace LotR.Cards.Encounter.Treacheries
             {
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 if (game.StagingArea.CardsInStagingArea.Count() == 0)
                 {
                     game.StagingArea.RevealEncounterCards(1);
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
                 }
 
                 foreach (var threatening in game.StagingArea.CardsInStagingArea.OfType<IThreateningInPlay>())
@@ -46,7 +46,7 @@ namespace LotR.Cards.Encounter.Treacheries
                     game.AddEffect(new ThreatModifier(game.CurrentPhase.Code, source, threatening, TimeScope.Phase, 1));
                 }
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
 
@@ -58,11 +58,11 @@ namespace LotR.Cards.Encounter.Treacheries
             {
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null || enemyAttack.IsUndefended)
-                    return new EffectOptions();
+                    return new EffectHandle();
 
                 var players = new List<IPlayer>();
                 var attachments = new Dictionary<Guid, IList<IAttachableCard>>();
@@ -93,7 +93,7 @@ namespace LotR.Cards.Encounter.Treacheries
                     return null;
 
                 var choice = new PlayersChooseCards<IAttachableCard>("Choose and discard 1 attachment from the defending character.", source, players, 1, attachments);
-                return new EffectOptions(choice);
+                return new EffectHandle(choice);
             }
 
             private void DiscardAllAttachmentsControlledByDefendingPlayer(IGame game, IEnemyAttack attack)
@@ -150,11 +150,11 @@ namespace LotR.Cards.Encounter.Treacheries
                 }
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 if (enemyAttack.IsUndefended)
                 {
@@ -162,10 +162,10 @@ namespace LotR.Cards.Encounter.Treacheries
                 }
                 else
                 {
-                    DiscardOneAttachmentFromDefendingCharacter(game, options.Choice, enemyAttack);
+                    DiscardOneAttachmentFromDefendingCharacter(game, handle.Choice, enemyAttack);
                 }
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

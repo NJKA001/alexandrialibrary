@@ -33,64 +33,85 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var limit = new Limit(PlayerScope.None, TimeScope.Round, 1);
 
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return new EffectOptions(null, null, limit);
+                    return new EffectHandle(null, null, limit);
 
                 var charactersToChooseFrom = game.GetAllCardsInPlay<ICharacterInPlay>().Where(x => x.Damage > 0).ToList();
                 var choice = new ChooseCharacter(source, controller, charactersToChooseFrom);
 
                 var resourceful = controller.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
                 if (resourceful == null)
-                    return new EffectOptions(choice, null, limit);
+                    return new EffectHandle(choice, null, limit);
 
                 var cost = new PayResourcesFrom(source, resourceful, 1, false);
 
-                return new EffectOptions(choice, cost, limit);
+                return new EffectHandle(choice, cost, limit);
             }
 
-            public override bool PaymentAccepted(IGame game, IEffectOptions options)
+            public override void Validate(IGame game, IEffectHandle handle)
             {
-                var resourcePayment = options.Payment as IResourcePayment;
+                var resourcePayment = handle.Payment as IResourcePayment;
                 if (resourcePayment == null)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 if (resourcePayment.Characters.Count() != 1)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 var character = resourcePayment.Characters.First();
 
                 if (character.Card.Id != source.Id)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 if (resourcePayment.GetPaymentBy(character.Card.Id) != 1)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 if (character.Resources < 1)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 character.Resources -= 1;
 
-                return true;
+                handle.Accept();
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
-                var characterChoice = options.Choice as IChooseCharacter;
+                var characterChoice = handle.Choice as IChooseCharacter;
                 if (characterChoice == null || characterChoice.ChosenCharacter == null)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 var damageable = characterChoice.ChosenCharacter as IDamagableInPlay;
                 if (damageable == null || damageable.Damage == 0)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 damageable.Damage -= 1;
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

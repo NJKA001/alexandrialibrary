@@ -33,14 +33,14 @@ namespace LotR.Effects.Phases.Any
                 return string.Format("{0} draws {1} cards", player.Name, numberOfCards);
         }
 
-        public override string Resolve(IGame game, IEffectOptions options)
+        public override void Resolve(IGame game, IEffectHandle handle)
         {
             if (numberOfCards == 0)
-                return GetCancelledString();
+                { handle.Cancel(GetCancelledString()); return; }
 
             player.DrawCards(numberOfCards);
 
-            return ToString();
+            handle.Resolve(GetCompletedStatus());
         }
     }
 }

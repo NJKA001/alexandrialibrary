@@ -27,7 +27,7 @@ namespace LotR.Cards.Encounter.Treacheries
             {
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 foreach (var player in game.Players)
                 {
@@ -44,7 +44,7 @@ namespace LotR.Cards.Encounter.Treacheries
                     }
                 }
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

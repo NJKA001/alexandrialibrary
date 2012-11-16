@@ -12,16 +12,20 @@ namespace LotR.States.Controllers
 {
     public interface IGameController
     {
-        void RegisterChoiceOfferedCallback(Action<IEffect, IChoice> callback);
         void RegisterEffectAddedCallback(Action<IEffect> callback);
-        void RegisterEffectResolvedCallback(Action<IEffect, IEffectOptions, string> callback);
+        void RegisterEffectCancelledCallback(Action<IEffect, IEffectHandle> callback);
+        void RegisterEffectResolvedCallback(Action<IEffect, IEffectHandle> callback);
         void RegisterGetPaymentCallback(Func<IEffect, ICost, IPayment> callback);
-        void RegisterPaymentRejectedCallback(Action<IEffect, IEffectOptions> callback);
+        void RegisterOfferChoiceCallback(Action<IEffect, IChoice> callback);
+        void RegisterPaymentAcceptedCallback(Action<IEffect, IEffectHandle> callback);
+        void RegisterPaymentRejectedCallback(Action<IEffect, IEffectHandle> callback);
 
-        void ChoiceOffered(IEffect effect, IChoice choice);
         void EffectAdded(IEffect effect);
-        void EffectResolved(IEffect effect, IEffectOptions options, string status);
+        void EffectCancelled(IEffect effect, IEffectHandle handle);
+        void EffectResolved(IEffect effect, IEffectHandle handle);
         IPayment GetPayment(IEffect effect, ICost cost);
-        void PaymentRejected(IEffect effect, IEffectOptions options);
+        void OfferChoice(IEffect effect, IChoice choice);
+        void PaymentAccepted(IEffect effect, IEffectHandle handle);
+        void PaymentRejected(IEffect effect, IEffectHandle handle);
     }
 }

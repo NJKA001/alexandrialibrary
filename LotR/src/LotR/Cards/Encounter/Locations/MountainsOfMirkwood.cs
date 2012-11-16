@@ -30,11 +30,11 @@ namespace LotR.Cards.Encounter.Locations
             {
             }
 
-            public override bool PaymentAccepted(IGame game, IEffectOptions options)
+            public override void Validate(IGame game, IEffectHandle handle)
             {
                 game.StagingArea.RevealEncounterCards(1);
 
-                return true;
+                handle.Accept();
             }
         }
 
@@ -54,7 +54,7 @@ namespace LotR.Cards.Encounter.Locations
                 state.AddEffect(this);
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var availableCards = new Dictionary<Guid, IList<IPlayerCard>>();
                 foreach (var player in game.Players)
@@ -63,14 +63,17 @@ namespace LotR.Cards.Encounter.Locations
                     availableCards.Add(player.StateId, topFive);
                 }
 
-                return new EffectOptions(new PlayersChooseCards<IPlayerCard>("each player may search the top 5 cards of his deck for 1 card of their choice", source, game.Players, 1, availableCards));
+                return new EffectHandle(new PlayersChooseCards<IPlayerCard>("each player may search the top 5 cards of his deck for 1 card of their choice", source, game.Players, 1, availableCards));
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
-                var cardChoice = options.Choice as IPlayersChooseCards<IPlayerCard>;
+                var cardChoice = handle.Choice as IPlayersChooseCards<IPlayerCard>;
                 if (cardChoice == null)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 foreach (var player in cardChoice.Players)
                 {
@@ -91,7 +94,7 @@ namespace LotR.Cards.Encounter.Locations
                     }
                 }
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

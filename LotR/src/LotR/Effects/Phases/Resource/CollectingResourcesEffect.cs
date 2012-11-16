@@ -34,14 +34,14 @@ namespace LotR.Effects.Phases.Resource
                 : string.Format("{0} collects 1 resource", collectingResources.Character.Title);
         }
 
-        public override string Resolve(IGame game, IEffectOptions options)
+        public override void Resolve(IGame game, IEffectHandle handle)
         {
             if (!collectingResources.IsCollectingResources || collectingResources.ResourcesToCollect == 0)
-                return GetCancelledString();
+                { handle.Cancel(GetCancelledString()); return; }
 
             collectingResources.Character.Resources += collectingResources.ResourcesToCollect;
 
-            return ToString();
+            handle.Resolve(GetCompletedStatus());
         }
     }
 }

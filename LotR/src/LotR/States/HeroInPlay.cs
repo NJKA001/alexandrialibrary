@@ -49,8 +49,8 @@ namespace LotR.States
             if (base.CanPayFor(cardEffect))
                 return true;
 
-            var options = cardEffect.GetOptions(Game);
-            var cost = options.Cost;
+            var handle = cardEffect.GetHandle(Game);
+            var cost = handle.Cost;
             if (cost == null)
             {
                 return true;

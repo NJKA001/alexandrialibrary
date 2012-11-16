@@ -26,33 +26,33 @@ namespace LotR.Effects.Phases.Any
 
         private readonly IPlayer player;
 
-        public override IEffectOptions GetOptions(IGame game)
+        public override IEffectHandle GetHandle(IGame game)
         {
-            return new EffectOptions(new ChoosePlayerAction(game, player));
+            return new EffectHandle(new ChoosePlayerAction(game, player));
         }
 
-        public override string Resolve(IGame game, IEffectOptions options)
+        public override void Resolve(IGame game, IEffectHandle handle)
         {
-            var actionChoice = options.Choice as IChoosePlayerAction;
+            var actionChoice = handle.Choice as IChoosePlayerAction;
             if (actionChoice == null)
-                return GetCancelledString();
+                { handle.Cancel(GetCancelledString()); return; }
 
             if (actionChoice.CardToPlay != null && actionChoice.CardToPlay is ICostlyCard)
             {
                 var costlyCard = actionChoice.CardToPlay as ICostlyCard;
                 var playCardEffect = new PlayCardFromHandEffect(game, costlyCard);
                 game.AddEffect(playCardEffect);
-                var playCardOptions = game.GetOptions(playCardEffect);
-                game.ResolveEffect(playCardEffect, playCardOptions);
+                var playCardOptions = game.GetHandle(playCardEffect);
+                game.TriggerEffect(playCardEffect, playCardOptions);
             }
             else if (actionChoice.CardEffectToTrigger != null)
             {
                 game.AddEffect(actionChoice.CardEffectToTrigger);
-                var playEffectOptions = game.GetOptions(actionChoice.CardEffectToTrigger);
-                game.ResolveEffect(actionChoice.CardEffectToTrigger, playEffectOptions);
+                var playEffectOptions = game.GetHandle(actionChoice.CardEffectToTrigger);
+                game.TriggerEffect(actionChoice.CardEffectToTrigger, playEffectOptions);
             }
 
-            return ToString();
+            handle.Resolve(GetCompletedStatus());
         }
     }
 }

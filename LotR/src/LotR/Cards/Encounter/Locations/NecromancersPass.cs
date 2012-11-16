@@ -31,21 +31,27 @@ namespace LotR.Cards.Encounter.Locations
             {
             }
 
-            public override bool PaymentAccepted(IGame game, IEffectOptions options)
+            public override void Validate(IGame game, IEffectHandle handle)
             {
                 var firstPlayer = game.Players.Where(x => x.IsFirstPlayer).FirstOrDefault();
                 if (firstPlayer == null)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 if (firstPlayer.Hand.Cards.Count() < 2)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 var random1 = firstPlayer.Hand.GetRandomCard();
                 var random2 = firstPlayer.Hand.GetRandomCard();
 
                 firstPlayer.DiscardFromHand(new List<IPlayerCard> { random1, random2 });
 
-                return true;
+                handle.Accept();
             }
         }
     }

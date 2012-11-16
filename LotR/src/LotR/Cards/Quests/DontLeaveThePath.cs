@@ -35,7 +35,7 @@ namespace LotR.Cards.Quests
             {
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var allSpiders = 
                     game.StagingArea.EncounterDeck.Cards.OfType<IEnemyCard>().Where(x => x.PrintedTraits.Contains(Trait.Spider))
@@ -52,14 +52,14 @@ namespace LotR.Cards.Quests
                 }
 
                 var choice = new PlayersChooseCards<IEnemyCard>("Each player must search the encounter deck and discard pile for 1 Spider of their choice", source, game.Players, 1, availableSpiders);
-                return new EffectOptions(choice);
+                return new EffectHandle(choice);
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
-                var spiderChoices = options.Choice as IPlayersChooseCards<IEnemyCard>;
+                var spiderChoices = handle.Choice as IPlayersChooseCards<IEnemyCard>;
                 if (spiderChoices == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 foreach (var player in spiderChoices.Players)
                 {
@@ -79,7 +79,7 @@ namespace LotR.Cards.Quests
                     }
                 }
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
 

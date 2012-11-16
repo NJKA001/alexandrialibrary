@@ -56,74 +56,104 @@ namespace LotR.Cards.Player.Allies
             {
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return base.GetOptions(game);
+                    return base.GetHandle(game);
 
                 var charactersToChooseFrom = game.GetAllCardsInPlay<ICharacterInPlay>().Where(x => x.HasTrait(Trait.Creature)).ToList();
                 var choice = new ChooseCharacterWithTrait(source, controller, Trait.Creature, charactersToChooseFrom);
 
                 var resourceful = game.GetCardInPlay<ICharacterInPlay>(source.Id);
                 if (resourceful == null)
-                    return new EffectOptions(choice);
+                    return new EffectHandle(choice);
 
                 var cost = new PayResourcesFrom(source, resourceful, 0, true);
 
-                return new EffectOptions(choice, cost);
+                return new EffectHandle(choice, cost);
             }
 
-            public override bool PaymentAccepted(IGame game, IEffectOptions options)
+            public override void Validate(IGame game, IEffectHandle handle)
             {
-                var resourcePayment = options.Payment as IResourcePayment;
+                var resourcePayment = handle.Payment as IResourcePayment;
                 if (resourcePayment == null)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 if (resourcePayment.Characters.Count() != 0)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 var character = resourcePayment.Characters.First();
 
                 if (character.Card.Id != CardSource.Id)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 var numberOfResources = resourcePayment.GetPaymentBy(character.Card.Id);
                 if (numberOfResources == 0)
-                    return true;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 if (character.Resources < numberOfResources)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 character.Resources -= numberOfResources;
 
-                return true;
+                handle.Accept();
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
-                var resourcePayment = options.Payment as IResourcePayment;
+                var resourcePayment = handle.Payment as IResourcePayment;
                 if (resourcePayment == null)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 var numberOfResources = resourcePayment.GetPaymentBy(CardSource.Id);
                 if (numberOfResources == 0)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
-                var creatureChoice = options.Choice as IChooseCharacterWithTrait;
+                var creatureChoice = handle.Choice as IChooseCharacterWithTrait;
                 if (creatureChoice == null || creatureChoice.ChosenCharacter == null)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 if (!creatureChoice.ChosenCharacter.HasTrait(Trait.Creature))
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 var damageable = creatureChoice.ChosenCharacter as IDamagableInPlay;
                 if (damageable == null)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 damageable.Damage -= numberOfResources;
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

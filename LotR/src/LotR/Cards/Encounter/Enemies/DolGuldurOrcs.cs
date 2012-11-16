@@ -31,47 +31,47 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var questPhase = game.CurrentPhase as IQuestPhase;
                 if (questPhase == null)
-                    return new EffectOptions();
+                    return new EffectHandle();
 
                 if (game.FirstPlayer == null)
-                    return new EffectOptions();
+                    return new EffectHandle();
 
                 var questingCharacters = questPhase.GetCharactersCommitedToTheQuest(game.FirstPlayer.StateId);
                 if (questingCharacters.Count() == 0)
-                    return new EffectOptions();
+                    return new EffectHandle();
 
                 var availableCharacters = new Dictionary<Guid, IList<IWillpowerfulCard>> { { game.FirstPlayer.StateId, questingCharacters.Select(x => x.Card).ToList() } };
 
                 var choice = new PlayersChooseCards<IWillpowerfulCard>("The first player chooses 1 character currently commited to a quest", source, new List<IPlayer> { game.FirstPlayer }, 1, availableCharacters);
 
-                return new EffectOptions(choice);
+                return new EffectHandle(choice);
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
-                var characterChoice = options.Choice as IPlayersChooseCards<IWillpowerfulCard>;
+                var characterChoice = handle.Choice as IPlayersChooseCards<IWillpowerfulCard>;
                 if (characterChoice == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var questPhase = game.CurrentPhase as IQuestPhase;
                 if (questPhase == null || game.FirstPlayer == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var characterToRemoveFromQuest = characterChoice.GetChosenCards(game.FirstPlayer.StateId).FirstOrDefault();
                 if (characterToRemoveFromQuest == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var characterInPlay = game.GetAllCardsInPlay<IWillpowerfulInPlay>().Where(x => x.Card.Id == characterToRemoveFromQuest.Id).FirstOrDefault();
                 if (characterInPlay == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 questPhase.RemoveCharacterFromQuest(characterInPlay);
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
 
@@ -83,17 +83,17 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var bonus = enemyAttack.IsUndefended ? 3 : 1;
 
                 game.AddEffect(new AttackModifier(game.CurrentPhase.Code, source, enemyAttack.Enemy, TimeScope.None, bonus));
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

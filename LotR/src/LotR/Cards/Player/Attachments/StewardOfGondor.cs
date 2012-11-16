@@ -70,40 +70,49 @@ namespace LotR.Cards.Player.Attachments
             {
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var exhaustable = game.GetCardInPlay<IExhaustableInPlay>(source.Id);
                 if (exhaustable == null)
-                    return base.GetOptions(game);
+                    return base.GetHandle(game);
 
                 var cost = new ExhaustSelf(exhaustable);
-                return new EffectOptions(cost);
+                return new EffectHandle(cost);
             }
 
-            public override bool PaymentAccepted(IGame game, IEffectOptions options)
+            public override void Validate(IGame game, IEffectHandle handle)
             {
-                var exhaustPayment = options.Payment as IExhaustCardPayment;
+                var exhaustPayment = handle.Payment as IExhaustCardPayment;
                 if (exhaustPayment == null || exhaustPayment.Exhaustable == null || exhaustPayment.Exhaustable.IsExhausted)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 exhaustPayment.Exhaustable.Exhaust();
 
-                return true;
+                handle.Accept();
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 var attachment = game.GetCardInPlay<IAttachmentInPlay>(source.Id);
                 if (attachment == null || attachment.AttachedTo == null)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 var resourceful = attachment.AttachedTo as ICharacterInPlay;
                 if (resourceful == null)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 resourceful.Resources += 2;
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

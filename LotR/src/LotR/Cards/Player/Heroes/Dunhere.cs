@@ -54,18 +54,18 @@ namespace LotR.Cards.Player.Heroes
                 game.AddEffect(this);
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 var chooseEnemy = game.CurrentPhase.GetEnemiesChosenToAttack().Where(x => x.Attackers.Any(y => y.Card.Id == source.Id)).FirstOrDefault();
                 if (chooseEnemy == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 foreach (var enemy in game.StagingArea.CardsInStagingArea.OfType<IEnemyInPlay>())
                 {
                     chooseEnemy.AddEnemy(enemy);
                 }
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
 
@@ -89,15 +89,15 @@ namespace LotR.Cards.Player.Heroes
                 determineAttack.Game.AddEffect(this);
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 var determineAttack = game.CurrentPhase.GetDetermineAttacks().FirstOrDefault();
                 if (determineAttack == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 determineAttack.Attack += 1;
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

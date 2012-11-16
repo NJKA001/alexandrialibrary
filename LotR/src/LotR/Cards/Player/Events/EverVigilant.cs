@@ -27,31 +27,31 @@ namespace LotR.Cards.Player.Events
             {
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var card = source as IPlayerCard;
                 if (card == null)
-                    return new EffectOptions();
+                    return new EffectHandle();
 
-                return new EffectOptions(new ChooseAlly(source, card.Owner));
+                return new EffectHandle(new ChooseAlly(source, card.Owner));
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
-                var allyChoice = options.Choice as IChooseAlly;
+                var allyChoice = handle.Choice as IChooseAlly;
                 if (allyChoice == null || allyChoice.Ally == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var exhaustable = allyChoice.Ally as IExhaustableInPlay;
                 if (exhaustable == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 if (!exhaustable.IsExhausted)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 exhaustable.Ready();
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

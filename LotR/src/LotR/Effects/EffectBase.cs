@@ -68,14 +68,19 @@ namespace LotR.Effects
             }
         }
 
-        protected string GetCancelledString()
+        protected virtual string GetCancelledString()
         {
             return string.Format("Effect Cancelled: {0}", ToString());
         }
 
-        public virtual IEffectOptions GetOptions(IGame game)
+        protected virtual string GetCompletedStatus()
         {
-            return new EffectOptions();
+            return ToString();
+        }
+
+        public virtual IEffectHandle GetHandle(IGame game)
+        {
+            return new EffectHandle();
         }
 
         public virtual bool CanBeTriggered(IGame game)
@@ -83,14 +88,14 @@ namespace LotR.Effects
             return IsPlayerActionWindow(game);
         }
 
-        public virtual bool PaymentAccepted(IGame game, IEffectOptions options)
+        public virtual void Validate(IGame game, IEffectHandle handle)
         {
-            return true;
+            handle.Accept();
         }
 
-        public virtual string Resolve(IGame game, IEffectOptions options)
+        public virtual void Resolve(IGame game, IEffectHandle handle)
         {
-            return ToString();
+            handle.Resolve(GetCompletedStatus());
         }
     }
 }

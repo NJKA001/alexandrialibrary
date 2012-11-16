@@ -38,7 +38,7 @@ namespace LotR.Cards.Encounter.Treacheries
             {
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var highestThreat = -1;
                 var mostThreateningPlayers = new List<IPlayer>();
@@ -58,7 +58,7 @@ namespace LotR.Cards.Encounter.Treacheries
 
                 var mostThreateningPlayer = mostThreateningPlayers.FirstOrDefault();
                 if (mostThreateningPlayer == null)
-                    return new EffectOptions();
+                    return new EffectHandle();
 
                 IChoice choice = null;
 
@@ -67,26 +67,26 @@ namespace LotR.Cards.Encounter.Treacheries
                 else
                     choice = new ChoosePlayerToChooseHero(source, game.FirstPlayer, mostThreateningPlayers);
 
-                return new EffectOptions(choice);
+                return new EffectHandle(choice);
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
-                var heroChoice = options.Choice as IChooseHero;
+                var heroChoice = handle.Choice as IChooseHero;
                 if (heroChoice == null || heroChoice.ChosenHero == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var attachmentHost = heroChoice.ChosenHero as IAttachmentHostInPlay;
                 if (attachmentHost == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var attachable = this.source as IAttachableCard;
                 if (attachable == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 attachmentHost.AddAttachment(new AttachableInPlay(game, attachable, attachmentHost));
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
 
@@ -111,7 +111,7 @@ namespace LotR.Cards.Encounter.Treacheries
                 state.AddEffect(this);
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 IAttachableInPlay attachment = null;
 
@@ -123,49 +123,49 @@ namespace LotR.Cards.Encounter.Treacheries
                 }
 
                 if (attachment == null || attachment.AttachedTo == null)
-                    return new EffectOptions();
+                    return new EffectHandle();
 
                 var resourceful = attachment.AttachedTo as ICharacterInPlay;
                 if (resourceful == null)
-                    return new EffectOptions();
+                    return new EffectHandle();
 
                 var cost = new PayResourcesFrom(source, resourceful, 2, false);
                 cost.IsOptional = true;
 
-                return new EffectOptions(cost);
+                return new EffectHandle(cost);
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 var refreshPhase = game.CurrentPhase as IRefreshPhase;
                 if (refreshPhase == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var readyingCard = refreshPhase.GetReadyingCards().Where(x => x.Exhaustable.Card.Id == source.Id).FirstOrDefault();
                 if (readyingCard == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
-                var resourcePayment = options.Payment as IResourcePayment;
+                var resourcePayment = handle.Payment as IResourcePayment;
                 if (resourcePayment == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 if (resourcePayment.Characters.Count() != 1)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var attachment = game.GetCardInPlay<IAttachableInPlay>(CardSource.Id);
                 if (attachment == null || attachment.AttachedTo == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var character = resourcePayment.Characters.First();
                 if (character.Card.Id != attachment.AttachedTo.Card.Id)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 if (resourcePayment.GetPaymentBy(character.Card.Id) != 2)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
                 
                 readyingCard.IsReadying = true;
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

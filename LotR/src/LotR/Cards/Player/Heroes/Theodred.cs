@@ -48,29 +48,29 @@ namespace LotR.Cards.Player.Heroes
                 game.AddEffect(this);
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var questPhase = game.CurrentPhase as IQuestPhase;
                 if (questPhase == null)
-                    return new EffectOptions();
+                    return new EffectHandle();
 
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return new EffectOptions();
+                    return new EffectHandle();
 
                 var choice = new ChooseCharacter(CardSource, controller, questPhase.GetAllCharactersCommittedToQuest().OfType<ICharacterInPlay>().Where(x => x.Card is IHeroCard).ToList());
-                return new EffectOptions(choice);
+                return new EffectHandle(choice);
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
-                var chooseCharacter = options.Choice as IChooseCharacter;
+                var chooseCharacter = handle.Choice as IChooseCharacter;
                 if (chooseCharacter == null || chooseCharacter.ChosenCharacter == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 chooseCharacter.ChosenCharacter.Resources += 1;
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

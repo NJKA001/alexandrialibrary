@@ -30,21 +30,25 @@ namespace LotR.Cards.Player.Events
 
             private IPlayerCard playerCard;
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
-                return new EffectOptions(new ChooseGaladhrimsGreetingEffect(game, CardSource, playerCard.Owner));
+                return new EffectHandle(new ChooseGaladhrimsGreetingEffect(game, CardSource, playerCard.Owner));
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
-                var effectChoice = options.Choice as IChooseGaladhrimsGreetingEffect;
+                var effectChoice = handle.Choice as IChooseGaladhrimsGreetingEffect;
                 if (effectChoice == null)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 if (effectChoice.ReduceOnePlayersThreatBySix != null)
                 {
                     effectChoice.ReduceOnePlayersThreatBySix.DecreaseThreat(6);
-                    return string.Format("{0}'s threat has been reduced by 6", effectChoice.ReduceOnePlayersThreatBySix.Name);
+                    handle.Resolve(string.Format("{0}'s threat has been reduced by 6", effectChoice.ReduceOnePlayersThreatBySix.Name));
+                    return;
                 }
                 else if (effectChoice.ReduceEachPlayersThreatByTwo)
                 {
@@ -52,10 +56,11 @@ namespace LotR.Cards.Player.Events
                     {
                         player.DecreaseThreat(2);
                     }
-                    return "Each players threat has been reduced by 2";
+                    handle.Resolve("Each players threat has been reduced by 2");
+                    return;
                 }
 
-                return GetCancelledString();
+                handle.Cancel(GetCancelledString());
             }
         }
     }

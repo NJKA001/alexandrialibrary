@@ -35,49 +35,64 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return base.GetOptions(game);
+                    return base.GetHandle(game);
 
                 var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
                 if (exhaustable == null)
-                    return base.GetOptions(game);
+                    return base.GetHandle(game);
 
                 var cost = new ExhaustSelf(exhaustable);
-                return new EffectOptions(null, cost);
+                return new EffectHandle(null, cost);
             }
 
-            public override bool PaymentAccepted(IGame game, IEffectOptions options)
+            public override void Validate(IGame game, IEffectHandle handle)
             {
-                var exhaustPayment = options.Payment as IExhaustCardPayment;
+                var exhaustPayment = handle.Payment as IExhaustCardPayment;
                 if (exhaustPayment == null || exhaustPayment.Exhaustable == null || exhaustPayment.Exhaustable.IsExhausted)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 exhaustPayment.Exhaustable.Exhaust();
 
                 var topCard = game.StagingArea.EncounterDeck.GetFromTop(1).FirstOrDefault();
                 if (topCard == null)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 game.StagingArea.AddExaminedEncounterCards(new List<IEncounterCard> { topCard });
 
-                return true;
+                handle.Accept();
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
-                var topOfDeckChoice = options.Choice as IChooseTopOrBottomOfDeck;
+                var topOfDeckChoice = handle.Choice as IChooseTopOrBottomOfDeck;
                 if (topOfDeckChoice == null)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 if (game.StagingArea.ExaminedEncounterCards.Count() != 1)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 var topCard = game.StagingArea.ExaminedEncounterCards.FirstOrDefault() as IEncounterCard;
                 if (topCard == null)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 game.StagingArea.RemoveExaminedEncounterCards(new List<IEncounterCard> { topCard });
 
@@ -91,7 +106,7 @@ namespace LotR.Cards.Player.Heroes
 
                 }
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

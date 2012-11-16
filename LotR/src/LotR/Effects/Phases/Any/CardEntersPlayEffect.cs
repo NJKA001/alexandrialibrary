@@ -24,7 +24,7 @@ namespace LotR.Effects.Phases.Any
 
         private readonly ICardInPlay cardInPlay;
 
-        public override string Resolve(IGame game, IEffectOptions options)
+        public override void Resolve(IGame game, IEffectHandle handle)
         {
             var state = new CardEntersPlay(game, cardInPlay);
 
@@ -36,7 +36,7 @@ namespace LotR.Effects.Phases.Any
                 }
             }
 
-            return ToString();
+            handle.Resolve(GetCompletedStatus());
         }
     }
 }

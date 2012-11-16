@@ -41,11 +41,11 @@ namespace LotR.Cards.Player.Allies
                 state.AddEffect(this);
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return new EffectOptions();
+                    return new EffectHandle();
 
                 var enemiesToChoose = game.StagingArea.CardsInStagingArea.OfType<IEnemyInPlay>().ToList();
 
@@ -56,38 +56,47 @@ namespace LotR.Cards.Player.Allies
                 }
 
                 var choice = new ChooseGandalfEffect(CardSource, controller, enemiesToChoose);
-                return new EffectOptions(choice);
+                return new EffectHandle(choice);
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
-                var chooseEffect = options.Choice as IChooseGandalfEffect;
+                var chooseEffect = handle.Choice as IChooseGandalfEffect;
                 if (chooseEffect == null)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 if (chooseEffect.EnemyToDamage != null)
                 {
                     chooseEffect.EnemyToDamage.Damage += 4;
-                    return string.Format("dealt 4 damge to {0}", chooseEffect.EnemyToDamage.Title);
+                    handle.Resolve(string.Format("dealt 4 damge to {0}", chooseEffect.EnemyToDamage.Title));
+                    return;
                 }
                 else if (chooseEffect.DrawCards)
                 {
                     controller.DrawCards(3);
-                    return string.Format("{0} drew three cards", controller.Name);
+                    handle.Resolve(string.Format("{0} drew three cards", controller.Name));
+                    return;
                 }
                 else if (chooseEffect.ReduceYourThreat)
                 {
                     controller.DecreaseThreat(5);
-                    return string.Format("{0} reduced their threat by 5", controller.Name);
+                    handle.Resolve(string.Format("{0} reduced their threat by 5", controller.Name));
+                    return;
                 }
 
                 game.AddEffect(new AtEndOfRoundDiscardGandalfFromPlay(CardSource));
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
 
@@ -104,21 +113,27 @@ namespace LotR.Cards.Player.Allies
                 return IsEndOfRound(game);
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 var allyInPlay = game.GetCardInPlay<IAllyInPlay>(CardSource.Id);
                 if (allyInPlay == null)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 var allyController = game.GetController(CardSource.Id);
                 if (allyController == null)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 allyController.RemoveCardInPlay(allyInPlay);
 
                 allyController.Deck.Discard(new List<IPlayerCard> { allyInPlay.Card });
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

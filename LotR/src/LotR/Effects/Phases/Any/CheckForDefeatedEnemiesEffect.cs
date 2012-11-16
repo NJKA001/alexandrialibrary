@@ -28,7 +28,7 @@ namespace LotR.Effects.Phases.Any
 
         private readonly IEnumerable<IAttackingInPlay> attackers;
 
-        public override string Resolve(IGame game, IEffectOptions options)
+        public override void Resolve(IGame game, IEffectHandle handle)
         {
             var defeatedEnemies = new List<IEnemyInPlay>();
 
@@ -55,10 +55,10 @@ namespace LotR.Effects.Phases.Any
             {
                 var defeatedEffect = new EnemyDefeatedEffect(game, enemy, attackers);
                 game.AddEffect(defeatedEffect);
-                game.ResolveEffect(defeatedEffect, EffectOptions.Empty);
+                game.TriggerEffect(defeatedEffect, new EffectHandle());
             }
 
-            return ToString();
+            handle.Resolve(GetCompletedStatus());
         }
     }
 }

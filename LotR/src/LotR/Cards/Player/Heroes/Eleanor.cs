@@ -36,18 +36,18 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return base.GetOptions(game);
+                    return base.GetHandle(game);
 
                 var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
                 if (exhaustable == null)
-                    return base.GetOptions(game);
+                    return base.GetHandle(game);
 
                 var cost = new ExhaustSelf(exhaustable);
-                return new EffectOptions(cost);
+                return new EffectHandle(cost);
             }
 
             public void DuringEncounterCardRevealed(IGame game)
@@ -61,30 +61,36 @@ namespace LotR.Cards.Player.Heroes
                 game.AddEffect(this);
             }
 
-            public override bool PaymentAccepted(IGame game, IEffectOptions options)
+            public override void Validate(IGame game, IEffectHandle handle)
             {
-                var exhaustPayment = options.Payment as IExhaustCardPayment;
+                var exhaustPayment = handle.Payment as IExhaustCardPayment;
                 if (exhaustPayment == null)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 if (exhaustPayment.Exhaustable.IsExhausted)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 exhaustPayment.Exhaustable.Exhaust();
 
-                return true;
+                handle.Accept();
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 if (game.StagingArea.RevealedEncounterCard == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 game.StagingArea.CancelRevealedCard(this);
                 game.StagingArea.EncounterDeck.Discard(new List<IEncounterCard> { game.StagingArea.RevealedEncounterCard });
                 game.StagingArea.RevealEncounterCards(1);
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

@@ -36,15 +36,15 @@ namespace LotR.Cards.Player.Heroes
                 playersDrawingCards.Game.AddEffect(this);
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 var playersDrawing = game.CurrentPhase.GetPlayersDrawingCards();
                 if (playersDrawing == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var firstPlayer = game.Players.Where(x => x.IsFirstPlayer).FirstOrDefault();
                 if (firstPlayer == null || !playersDrawing.Players.Contains(firstPlayer.StateId))
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var numberOfCards = playersDrawing.GetNumberOfCards(firstPlayer.StateId);
                 
@@ -52,7 +52,7 @@ namespace LotR.Cards.Player.Heroes
 
                 playersDrawing.SetNumberOfCards(firstPlayer.StateId, numberOfCards);
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

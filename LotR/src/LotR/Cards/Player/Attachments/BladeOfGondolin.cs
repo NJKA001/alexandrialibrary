@@ -86,11 +86,11 @@ namespace LotR.Cards.Player.Attachments
                 state.Game.AddEffect(this);
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 game.QuestArea.AddProgress(1);
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

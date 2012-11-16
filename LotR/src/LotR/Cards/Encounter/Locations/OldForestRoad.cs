@@ -37,7 +37,7 @@ namespace LotR.Cards.Encounter.Locations
                 state.Game.AddEffect(this);
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var exhaustedCharacters = new Dictionary<Guid, IList<ICharacterCard>>() { { game.FirstPlayer.StateId, new List<ICharacterCard>() } };
 
@@ -51,29 +51,29 @@ namespace LotR.Cards.Encounter.Locations
                 }
 
                 if (exhaustedCharacters[game.FirstPlayer.StateId].Count == 0)
-                    return new EffectOptions();
+                    return new EffectHandle();
 
                 var choice = new PlayersChooseCards<ICharacterCard>("The first player may choose and ready 1 character he controls", source, new List<IPlayer> { game.FirstPlayer }, 1, exhaustedCharacters);
-                return new EffectOptions(choice);
+                return new EffectHandle(choice);
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
-                var chooseCard = options.Choice as IPlayersChooseCards<ICharacterCard>;
+                var chooseCard = handle.Choice as IPlayersChooseCards<ICharacterCard>;
                 if (chooseCard == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var character = chooseCard.GetChosenCards(game.FirstPlayer.StateId).FirstOrDefault();
                 if (character == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var exhaustable = game.GetCardInPlay<IExhaustableInPlay>(character.Id);
                 if (exhaustable == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 exhaustable.Ready();
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

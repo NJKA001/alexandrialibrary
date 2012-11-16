@@ -48,52 +48,67 @@ namespace LotR.Cards.Player.Heroes
                 game.AddEffect(this);
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var character = game.GetCardInPlay<ICharacterInPlay>(CardSource.Id);
                 if (character == null)
-                    return base.GetOptions(game);
+                    return base.GetHandle(game);
 
                 var cost = new PayResourcesFrom(source, character, 1, false);
-                return new EffectOptions(cost);
+                return new EffectHandle(cost);
             }
 
-            public override bool PaymentAccepted(IGame game, IEffectOptions options)
+            public override void Validate(IGame game, IEffectHandle handle)
             {
-                var resourcePayment = options.Payment as IResourcePayment;
+                var resourcePayment = handle.Payment as IResourcePayment;
                 if (resourcePayment == null)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 if (resourcePayment.Characters.Count() != 1)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 var character = resourcePayment.Characters.First();
                 if (character.Card.Id != source.Id)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 if (resourcePayment.GetPaymentBy(character.Card.Id) != 1)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 if (character.Resources < 1)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 character.Resources -= 1;
 
-                return true;
+                handle.Accept();
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 var exhaustable = game.GetCardInPlay<IExhaustableInPlay>(source.Id);
                 if (exhaustable == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 if (!exhaustable.IsExhausted)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 exhaustable.Ready();
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

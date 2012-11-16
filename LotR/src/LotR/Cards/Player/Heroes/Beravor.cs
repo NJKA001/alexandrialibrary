@@ -32,49 +32,58 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var limit = new Limit(PlayerScope.Controller, TimeScope.Round, 1);
 
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return new EffectOptions(null, null, limit);
+                    return new EffectHandle(null, null, limit);
 
                 var choice = new ChoosePlayer(source, controller, game.Players.ToList());
 
                 var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
                 if (exhaustable == null)
-                    return new EffectOptions(choice, null, limit);
+                    return new EffectHandle(choice, null, limit);
 
                 var cost = new ExhaustSelf(exhaustable);
 
-                return new EffectOptions(choice, cost, limit);
+                return new EffectHandle(choice, cost, limit);
             }
 
-            public override bool PaymentAccepted(IGame game, IEffectOptions options)
+            public override void Validate(IGame game, IEffectHandle handle)
             {
-                var exhaustPayment = options.Payment as IExhaustCardPayment;
+                var exhaustPayment = handle.Payment as IExhaustCardPayment;
                 if (exhaustPayment == null)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 if (exhaustPayment.Exhaustable.IsExhausted)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 exhaustPayment.Exhaustable.Exhaust();
-                
-                return true;
+
+                handle.Accept();
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
-                var playerChoice = options.Choice as IChoosePlayer;
+                var playerChoice = handle.Choice as IChoosePlayer;
                 if (playerChoice == null)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 var cards = playerChoice.ChosenPlayer.Deck.GetFromTop(2);
                 playerChoice.ChosenPlayer.Hand.AddCards(cards);
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

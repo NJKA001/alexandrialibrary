@@ -159,7 +159,7 @@ namespace LotR.States
 
             var entersPlayEffect = new CardEntersPlayEffect(Game, card);
             Game.AddEffect(entersPlayEffect);
-            Game.ResolveEffect(entersPlayEffect, EffectOptions.Empty);
+            Game.TriggerEffect(entersPlayEffect, new EffectHandle());
         }
 
         public void RemoveCardInPlay(ICardInPlay card)
@@ -174,7 +174,7 @@ namespace LotR.States
 
             var leavesPlayEffect = new CardLeavesPlayEffect(Game, card);
             Game.AddEffect(leavesPlayEffect);
-            Game.ResolveEffect(leavesPlayEffect, EffectOptions.Empty);
+            Game.TriggerEffect(leavesPlayEffect, new EffectHandle());
         }
 
         public void AddEngagedEnemy(IEnemyInPlay enemy)

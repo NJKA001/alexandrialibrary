@@ -42,7 +42,7 @@ namespace LotR.Cards.Encounter.Enemies
                 state.AddEffect(this);
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 IEnemyInPlay enemy = null;
 
@@ -54,11 +54,11 @@ namespace LotR.Cards.Encounter.Enemies
                 }
 
                 if (enemy == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 game.AddEffect(new AttackModifier(game.CurrentPhase.Code, source, enemy, TimeScope.Round, 1));
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
 
@@ -70,7 +70,7 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null)
@@ -91,26 +91,26 @@ namespace LotR.Cards.Encounter.Enemies
                     return null;
 
                 var choice = new PlayersChooseCards<IAttachableCard>("Defending player must choose 1 attachment he controls", source, new List<IPlayer> { enemyAttack.DefendingPlayer }, 1, attachments);
-                return new EffectOptions(choice);
+                return new EffectHandle(choice);
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
-                var attachmentChoice = options.Choice as IPlayersChooseCards<IAttachableCard>;
+                var attachmentChoice = handle.Choice as IPlayersChooseCards<IAttachableCard>;
                 if (attachmentChoice == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var attachmentToDiscard = attachmentChoice.GetChosenCards(enemyAttack.DefendingPlayer.StateId).FirstOrDefault();
                 if (attachmentToDiscard == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var inPlay = enemyAttack.DefendingPlayer.CardsInPlay.OfType<IAttachableInPlay>().Where(x => x.Card.Id == attachmentToDiscard.Id).FirstOrDefault();
                 if (inPlay == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 enemyAttack.DefendingPlayer.RemoveCardInPlay(inPlay);
                 if (attachmentToDiscard is IPlayerCard)
@@ -122,7 +122,7 @@ namespace LotR.Cards.Encounter.Enemies
                     game.StagingArea.EncounterDeck.Discard(new List<IEncounterCard> { attachmentToDiscard as IEncounterCard });
                 }
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

@@ -38,39 +38,34 @@ namespace LotR.Effects.Phases.Setup
             Player.DrawCards(6);
         }
 
-        public override IEffectOptions GetOptions(IGame game)
+        public override IEffectHandle GetHandle(IGame game)
         {
             var startingHand = Player.Hand.Cards.ToList();
             var choice = new ChooseToKeepStartingHand("If a player does not wish to keep their starting hand, they may take a single mulligan, by shuffling those 6 cards back into their deck and drawing 6 new cards.", game, Player, startingHand);
-            return new EffectOptions(choice);
+            return new EffectHandle(choice);
         }
 
-        public override string Resolve(IGame game, IEffectOptions options)
+        public override void Resolve(IGame game, IEffectHandle handle)
         {
-            var chooseToKeep = options.Choice as IChooseToKeepStartingHand;
+            var chooseToKeep = handle.Choice as IChooseToKeepStartingHand;
             if (chooseToKeep == null)
-                return GetCancelledString();
+                { handle.Cancel(GetCancelledString()); return; }
 
             var player = chooseToKeep.Players.FirstOrDefault();
             if (player == null)
-                return GetCancelledString();
+                { handle.Cancel(GetCancelledString()); return; }
 
             if (chooseToKeep.KeepStartingHand)
-                return string.Format("Player {0} choose to keep their starting hand", player.Name);
+            {
+                handle.Resolve(string.Format("{0} choose to keep their starting hand", player.Name));
+            }
 
             var startingHand = Player.Hand.Cards.ToList();
             Player.Hand.RemoveCards(startingHand);
             Player.Deck.ShuffleIn(startingHand);
             Player.DrawCards(6);
 
-            var sb = new StringBuilder();
-            sb.AppendFormat("Player {0} took a mulligan and received a new starting hand of\r\n", player.Name);
-            foreach (var card in Player.Hand.Cards)
-            {
-                sb.AppendFormat("\r\n  {0} ({1})", card.Title, card.PrintedCardType);
-            }
-
-            return sb.ToString();
+            handle.Resolve(string.Format("{0} took a mulligan and received a new starting hand", player.Name));
         }
     }
 }

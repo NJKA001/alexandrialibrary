@@ -27,16 +27,19 @@ namespace LotR.Cards.Encounter.Locations
             {
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
-                return new EffectOptions(new EachPlayerChoosesReadyCharacters(source, game, 1, true));
+                return new EffectHandle(new EachPlayerChoosesReadyCharacters(source, game, 1, true));
             }
 
-            public override bool PaymentAccepted(IGame game, IEffectOptions options)
+            public override void Validate(IGame game, IEffectHandle handle)
             {
-                var characterChoice = options.Choice as IPlayersChooseCharacters;
+                var characterChoice = handle.Choice as IPlayersChooseCharacters;
                 if (characterChoice == null)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 var charactersToExhaust = new List<IExhaustableInPlay>();
 
@@ -44,15 +47,20 @@ namespace LotR.Cards.Encounter.Locations
                 {
                     var exhaustable = characterChoice.GetChosenCharacters(player.StateId).FirstOrDefault() as IExhaustableInPlay;
                     if (exhaustable == null || exhaustable.IsExhausted)
-                        return false;
+                    {
+                        handle.Reject();
+                        return;
+                    }
                     else
+                    {
                         charactersToExhaust.Add(exhaustable);
+                    }
                 }
 
                 foreach (var exhaustable in charactersToExhaust)
                     exhaustable.Exhaust();
 
-                return true;
+                handle.Accept();
             }
         }
     }

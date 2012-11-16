@@ -27,15 +27,18 @@ namespace LotR.Effects
             game.AddEffect(this);
         }
 
-        public override string Resolve(IGame game, IEffectOptions options)
+        public override void Resolve(IGame game, IEffectHandle handle)
         {
             var location = game.StagingArea.CardsInStagingArea.OfType<ILocationInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
             if (location == null)
-                return GetCancelledString();
+            {
+                handle.Cancel(GetCancelledString());
+                return;
+            }
 
             game.QuestArea.SetActiveLocation(location);
 
-            return string.Format("Travel: {0}", text);
+            handle.Resolve(string.Format("Travel: {0}", text));
         }
     }
 }

@@ -146,8 +146,8 @@ namespace LotR.States
             if (cardEffect == null)
                 throw new ArgumentNullException("cardEffect");
 
-            var options = cardEffect.GetOptions(Game);
-            var cost = options.Cost;
+            var handle = cardEffect.GetHandle(Game);
+            var cost = handle.Cost;
             if (cost == null && Card.PrintedCardType == CardType.Hero)
                 return true;
 

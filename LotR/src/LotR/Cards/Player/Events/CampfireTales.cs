@@ -28,7 +28,7 @@ namespace LotR.Cards.Player.Events
             {
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 foreach (var player in game.Players)
                 {
@@ -36,10 +36,10 @@ namespace LotR.Cards.Player.Events
 
                     var effect = new DrawingCardsEffect(game, player, 1);
                     game.AddEffect(effect);
-                    game.ResolveEffect(effect, EffectOptions.Empty);
+                    game.TriggerEffect(effect, new EffectHandle());
                 }
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

@@ -34,18 +34,18 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 var questPhase = game.CurrentPhase as IQuestPhase;
                 if (questPhase == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 foreach (var willpowerful in questPhase.GetAllCharactersCommittedToQuest())
                 {
                     game.AddEffect(new WillpowerModifier(game.CurrentPhase.Code, source, willpowerful, TimeScope.Phase, -1));
                 }
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
 
@@ -57,17 +57,17 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var threat = enemyAttack.IsUndefended ? (byte)8 : (byte)4;
 
                 enemyAttack.DefendingPlayer.IncreaseThreat(threat);
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

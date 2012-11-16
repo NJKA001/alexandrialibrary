@@ -32,49 +32,67 @@ namespace LotR.Cards.Player.Allies
             {
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var cost = new PayResources(source, Sphere.Spirit, 1, false);
-                return new EffectOptions(null, cost);
+                return new EffectHandle(null, cost);
             }
 
-            public override bool PaymentAccepted(IGame game, IEffectOptions options)
+            public override void Validate(IGame game, IEffectHandle handle)
             {
-                var resourcePayment = options.Payment as IResourcePayment;
+                var resourcePayment = handle.Payment as IResourcePayment;
                 if (resourcePayment == null)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 if (resourcePayment.Characters.Count() != 1)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 var hero = resourcePayment.Characters.First() as IHeroInPlay;
                 if (hero == null || !hero.HasResourceIcon(Sphere.Spirit))
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 if (resourcePayment.GetPaymentBy(hero.Card.Id) != 1)
-                    return false;
+                {
+                    handle.Reject();
+                    return;
+                }
 
                 hero.Resources -= 1;
 
-                return true;
+                handle.Accept();
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 var card = CardSource as IPlayerCard;
                 if (card == null || card.Owner == null)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 var ally = card.Owner.Hand.Cards.Where(x => x.Id == source.Id).FirstOrDefault() as IAllyCard;
                 if (ally == null)
-                    return GetCancelledString();
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 card.Owner.Hand.RemoveCards(new List<IPlayerCard> { ally });
                 card.Owner.AddCardInPlay(new AllyInPlay(game, ally));
 
                 game.AddEffect(new ReturnToHandAfterSuccessfulQuest(CardSource));
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
 

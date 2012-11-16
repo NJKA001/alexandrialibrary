@@ -30,11 +30,11 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override IEffectOptions GetOptions(IGame game)
+            public override IEffectHandle GetHandle(IGame game)
             {
                 var questPhase = game.CurrentPhase as IQuestPhase;
                 if (questPhase == null)
-                    return new EffectOptions();
+                    return new EffectHandle();
                 
                 var questingCharacters = new Dictionary<Guid, IList<IWillpowerfulCard>>();
 
@@ -45,20 +45,20 @@ namespace LotR.Cards.Encounter.Enemies
                 }
 
                 if (questingCharacters.All(x => x.Value.Count == 0))
-                    return new EffectOptions();
+                    return new EffectHandle();
 
-                return new EffectOptions(new PlayersChooseCards<IWillpowerfulCard>("Each player must choose 1 character currently commited to a quest", source, game.Players, 1, questingCharacters));
+                return new EffectHandle(new PlayersChooseCards<IWillpowerfulCard>("Each player must choose 1 character currently commited to a quest", source, game.Players, 1, questingCharacters));
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 var questPhase = game.CurrentPhase as IQuestPhase;
                 if (questPhase == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
-                var removeChoice = options.Choice as IPlayersChooseCards<IWillpowerfulCard>;
+                var removeChoice = handle.Choice as IPlayersChooseCards<IWillpowerfulCard>;
                 if (removeChoice == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 foreach (var player in removeChoice.Players)
                 {
@@ -73,7 +73,7 @@ namespace LotR.Cards.Encounter.Enemies
                     questPhase.RemoveCharacterFromQuest(character);
                 }
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

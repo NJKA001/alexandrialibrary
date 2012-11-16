@@ -57,19 +57,19 @@ namespace LotR.Cards.Player.Heroes
                 game.AddEffect(this);
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
-                var enemyChoice = options.Choice as IChooseEnemy;
+                var enemyChoice = handle.Choice as IChooseEnemy;
                 if (enemyChoice == null || enemyChoice.Enemy == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var damageable = enemyChoice.Enemy as IDamagableInPlay;
                 if (damageable == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 damageable.Damage += 1;
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

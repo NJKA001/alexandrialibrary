@@ -34,11 +34,11 @@ namespace LotR.Cards.Quests
                 stage.Game.AddEffect(this);
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 var currentStage = game.QuestArea.GetCurrentQuestStage();
                 if (currentStage == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var random = new Random();
                 var number = random.Next(1, 2);
@@ -60,7 +60,7 @@ namespace LotR.Cards.Quests
                     }
                 }
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

@@ -45,19 +45,19 @@ namespace LotR.Cards.Player.Heroes
                 state.AddEffect(this);
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 var damageDealt = game.CurrentPhase.GetDamageDealt().Where(x => x.Target.Card.Id == source.Id).FirstOrDefault();
                 if (damageDealt == null || damageDealt.Damage == 0)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var resourceful = game.GetCardInPlay<ICharacterInPlay>(source.Id);
                 if (resourceful == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 resourceful.Resources += damageDealt.Damage;
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
     }

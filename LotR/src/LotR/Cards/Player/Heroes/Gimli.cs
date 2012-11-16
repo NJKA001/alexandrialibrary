@@ -43,19 +43,19 @@ namespace LotR.Cards.Player.Heroes
                 state.Game.AddEffect(this);
             }
 
-            public override string Resolve(IGame game, IEffectOptions options)
+            public override void Resolve(IGame game, IEffectHandle handle)
             {
                 var determineStrength = game.CurrentPhase.GetDetermineAttacks().Where(x => x.Attacker.Card.Id == source.Id).FirstOrDefault();
                 if (determineStrength == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 var damagable = game.GetCardInPlay<IHeroInPlay>(CardSource.Id);
                 if (damagable == null)
-                    return GetCancelledString();
+                    { handle.Cancel(GetCancelledString()); return; }
 
                 determineStrength.Attack += damagable.Damage;
 
-                return ToString();
+                handle.Resolve(GetCompletedStatus());
             }
         }
 

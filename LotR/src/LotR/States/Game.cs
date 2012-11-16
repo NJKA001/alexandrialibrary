@@ -60,14 +60,14 @@ namespace LotR.States
             if (Players.All(x => x.CurrentThreat >= 50))
                 gameStatus.IsPlayerDefeat = true;
 
-            ResolveEffectsForAllCardsInPlay<ICardInPlay, IDuringCheckGameStatus>();
+            TriggerEffectsForAllCardsInPlay<ICardInPlay, IDuringCheckGameStatus>();
         }
 
-        private void ResolveImmediately(IEffect effect)
+        private void TriggerImmediately(IEffect effect)
         {
-            var options = GetOptions(effect);
+            var handle = GetHandle(effect);
             AddEffect(effect);
-            ResolveEffect(effect, options);
+            TriggerEffect(effect, handle);
         }
 
         private void Run()
@@ -81,31 +81,31 @@ namespace LotR.States
                 if (CurrentPhase.Code == PhaseCode.Resource)
                 {
                     CurrentRound += 1;
-                    ResolveImmediately(new StartOfRound(this));
+                    TriggerImmediately(new StartOfRound(this));
                 }
 
-                ResolveImmediately(new StartOfPhase(this));
+                TriggerImmediately(new StartOfPhase(this));
 
                 CurrentPhase.Run();
 
-                ResolveImmediately(new EndOfPhase(this));
+                TriggerImmediately(new EndOfPhase(this));
 
                 CheckGameStatus(gameStatus);
             }
 
             if (gameStatus.IsPlayerDefeat)
             {
-                ResolveImmediately(new PlayerDefeat(this));
+                TriggerImmediately(new PlayerDefeat(this));
             }
             else if (gameStatus.IsPlayerVictory)
             {
-                ResolveImmediately(new PlayerVictory(this));
+                TriggerImmediately(new PlayerVictory(this));
             }
         }
 
         private void Cleanup()
         {
-            ResolveImmediately(new CheckForDefeatedEnemiesEffect(this));
+            TriggerImmediately(new CheckForDefeatedEnemiesEffect(this));
         }
 
         #region Properties
@@ -217,23 +217,37 @@ namespace LotR.States
             controller.EffectAdded(effect);
         }
 
-        public void ResolveEffect(IEffect effect, IEffectOptions options)
+        public void TriggerEffect(IEffect effect, IEffectHandle handle)
         {
-            if (!effect.PaymentAccepted(this, options))
+            effect.Validate(this, handle);
+
+            if (handle.IsAccepted)
             {
-                controller.PaymentRejected(effect, options);
+                controller.PaymentAccepted(effect, handle);
+            }
+            if (handle.IsRejected)
+            {
+                controller.PaymentRejected(effect, handle);
                 return;
             }
 
-            var status = effect.Resolve(this, options);
+            effect.Resolve(this, handle);
 
-            controller.EffectResolved(effect, options, status);
+            if (handle.IsResolved)
+            {
+                controller.EffectResolved(effect, handle);
+            }
+            else if (handle.IsCancelled)
+            {
+                controller.EffectCancelled(effect, handle);
+            }
+
 
             if (currentEffects.Contains(effect))
                 currentEffects.Remove(effect);
         }
 
-        public void ResolveEffectsForAllCardsInPlay<TCard, TEffect>()
+        public void TriggerEffectsForAllCardsInPlay<TCard, TEffect>()
             where TCard : class, ICardInPlay
             where TEffect : class, IEffect
         {
@@ -241,7 +255,7 @@ namespace LotR.States
             {
                 foreach (var effect in card.BaseCard.Text.Effects.OfType<TEffect>().Where(x => x != null))
                 {
-                    ResolveImmediately(effect);
+                    TriggerImmediately(effect);
                 }
             }
         }
@@ -289,16 +303,16 @@ namespace LotR.States
                     ActivePlayer = player;
 
                     var effect = new PlayerActionWindow(this, player);
-                    var options = GetOptions(effect);
+                    var handle = GetHandle(effect);
 
-                    var choice = options.Choice as IChoosePlayerAction;
+                    var choice = handle.Choice as IChoosePlayerAction;
                     if (choice == null)
                         throw new InvalidOperationException();
 
                     if (choice.IsTakingAction)
                     {
                         allPlayersPass = false;
-                        ResolveEffect(effect, options);
+                        TriggerEffect(effect, handle);
 
                         Cleanup();
                     }
@@ -380,25 +394,25 @@ namespace LotR.States
             return currentEffects.OfType<T>().ToList();
         }
 
-        public IEffectOptions GetOptions(IEffect effect)
+        public IEffectHandle GetHandle(IEffect effect)
         {
-            var options = effect.GetOptions(this);
+            var handle = effect.GetHandle(this);
 
-            if (options.Choice != null)
+            if (handle.Choice != null)
             {
-                controller.ChoiceOffered(effect, options.Choice);
+                controller.OfferChoice(effect, handle.Choice);
             }
 
-            if (options.Cost != null)
+            if (handle.Cost != null)
             {
-                var payment = controller.GetPayment(effect, options.Cost);
+                var payment = controller.GetPayment(effect, handle.Cost);
                 if (payment != null)
                 {
-                    options.AddPayment(payment);
+                    handle.AddPayment(payment);
                 }
             }
 
-            return options;
+            return handle;
         }
 
         public uint GetPlayerScore()

@@ -32,7 +32,7 @@ namespace LotR.Cards.Quests
                     return;
 
                 state.Game.VictoryDisplay.AddCard(state.Enemy.Card);
-                state.Game.ResolveEffect(this, EffectOptions.Empty);
+                state.Game.TriggerEffect(this, new EffectHandle());
             }
         }
     }

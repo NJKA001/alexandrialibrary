@@ -13,9 +13,10 @@ namespace LotR.Effects
 {
     public interface IEffect
     {
-        IEffectOptions GetOptions(IGame game);
         bool CanBeTriggered(IGame game);
-        bool PaymentAccepted(IGame game, IEffectOptions options);
-        string Resolve(IGame game, IEffectOptions options);
+        IEffectHandle GetHandle(IGame game);
+
+        void Validate(IGame game, IEffectHandle handle);
+        void Resolve(IGame game, IEffectHandle handle);
     }
 }
