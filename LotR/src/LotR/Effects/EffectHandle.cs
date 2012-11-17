@@ -13,43 +13,48 @@ namespace LotR.Effects
     public class EffectHandle
         : IEffectHandle
     {
-        public EffectHandle()
-            : this(null, null, null)
+        public EffectHandle(IEffect effect)
+            : this(effect, null, null, null)
         {
         }
 
-        public EffectHandle(IChoice choice)
-            : this(choice, null, null)
+        public EffectHandle(IEffect effect, IChoice choice)
+            : this(effect, choice, null, null)
         {
         }
 
-        public EffectHandle(IChoice choice, ICost cost)
-            : this(choice, cost, null)
+        public EffectHandle(IEffect effect, IChoice choice, ICost cost)
+            : this(effect, choice, cost, null)
         {
         }
 
-        public EffectHandle(IChoice choice, ILimit limit)
-            : this(choice, null, limit)
+        public EffectHandle(IEffect effect, IChoice choice, ILimit limit)
+            : this(effect, choice, null, limit)
         {
         }
 
-        public EffectHandle(ICost cost)
-            : this(null, cost, null)
+        public EffectHandle(IEffect effect, ICost cost)
+            : this(effect, null, cost, null)
         {
         }
 
-        public EffectHandle(ICost cost, ILimit limit)
-            : this(null, cost, limit)
+        public EffectHandle(IEffect effect, ICost cost, ILimit limit)
+            : this(effect, null, cost, limit)
         {
         }
 
-        public EffectHandle(IChoice choice, ICost cost, ILimit limit)
+        public EffectHandle(IEffect effect, IChoice choice, ICost cost, ILimit limit)
         {
+            if (effect == null)
+                throw new ArgumentNullException("effect");
+
+            this.effect = effect;
             this.choice = choice;
             this.cost = cost;
             this.limit = limit;
         }
 
+        private readonly IEffect effect;
         private readonly IChoice choice;
         private readonly ICost cost;
         private readonly ILimit limit;
@@ -67,6 +72,11 @@ namespace LotR.Effects
                 return;
 
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public IEffect Effect
+        {
+            get { return effect; }
         }
 
         public IChoice Choice

@@ -45,7 +45,7 @@ namespace LotR.Cards.Encounter.Enemies
                 state.Game.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var enemy = game.GetCardInPlay<IEnemyInPlay>(source.Id);
                 if (enemy == null || enemy.Resources == 0)
@@ -75,7 +75,7 @@ namespace LotR.Cards.Encounter.Enemies
                 state.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var enemy = game.GetCardInPlay<IEnemyInPlay>(source.Id);
                 if (enemy == null)

@@ -27,7 +27,7 @@ namespace LotR.Cards.Encounter.Treacheries
             {
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 foreach (var player in game.Players)
                 {

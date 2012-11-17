@@ -35,7 +35,7 @@ namespace LotR.Cards.Player.Allies
             public override IEffectHandle GetHandle(IGame game)
             {
                 var cost = new PayResources(source, Sphere.Spirit, 1, false);
-                return new EffectHandle(null, cost);
+                return new EffectHandle(this, null, cost);
             }
 
             public override void Validate(IGame game, IEffectHandle handle)
@@ -71,7 +71,7 @@ namespace LotR.Cards.Player.Allies
                 handle.Accept();
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var card = CardSource as IPlayerCard;
                 if (card == null || card.Owner == null)

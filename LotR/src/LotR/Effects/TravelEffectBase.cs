@@ -27,7 +27,7 @@ namespace LotR.Effects
             game.AddEffect(this);
         }
 
-        public override void Resolve(IGame game, IEffectHandle handle)
+        public override void Trigger(IGame game, IEffectHandle handle)
         {
             var location = game.StagingArea.CardsInStagingArea.OfType<ILocationInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
             if (location == null)

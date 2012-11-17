@@ -38,10 +38,10 @@ namespace LotR.Cards.Player.Heroes
             {
                 var limit = new Limit(PlayerScope.AnyPlayer, TimeScope.Round, 1);
                 var cost = new DiscardCardsFromHand(source, game, 1);
-                return new EffectHandle(null, cost, limit);
+                return new EffectHandle(this, null, cost, limit);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)

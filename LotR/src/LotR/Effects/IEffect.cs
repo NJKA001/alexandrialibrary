@@ -17,6 +17,6 @@ namespace LotR.Effects
         IEffectHandle GetHandle(IGame game);
 
         void Validate(IGame game, IEffectHandle handle);
-        void Resolve(IGame game, IEffectHandle handle);
+        void Trigger(IGame game, IEffectHandle handle);
     }
 }

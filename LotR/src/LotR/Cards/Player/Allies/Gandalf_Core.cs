@@ -45,7 +45,7 @@ namespace LotR.Cards.Player.Allies
             {
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return new EffectHandle();
+                    return new EffectHandle(this);
 
                 var enemiesToChoose = game.StagingArea.CardsInStagingArea.OfType<IEnemyInPlay>().ToList();
 
@@ -56,10 +56,10 @@ namespace LotR.Cards.Player.Allies
                 }
 
                 var choice = new ChooseGandalfEffect(CardSource, controller, enemiesToChoose);
-                return new EffectHandle(choice);
+                return new EffectHandle(this, choice);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
@@ -113,7 +113,7 @@ namespace LotR.Cards.Player.Allies
                 return IsEndOfRound(game);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var allyInPlay = game.GetCardInPlay<IAllyInPlay>(CardSource.Id);
                 if (allyInPlay == null)

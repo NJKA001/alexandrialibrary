@@ -34,7 +34,7 @@ namespace LotR.Cards.Quests
                 stage.Game.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var currentStage = game.QuestArea.GetCurrentQuestStage();
                 if (currentStage == null)

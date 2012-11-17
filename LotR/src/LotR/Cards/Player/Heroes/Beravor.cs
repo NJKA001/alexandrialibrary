@@ -38,17 +38,17 @@ namespace LotR.Cards.Player.Heroes
 
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return new EffectHandle(null, null, limit);
+                    return new EffectHandle(this, null, null, limit);
 
                 var choice = new ChoosePlayer(source, controller, game.Players.ToList());
 
                 var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
                 if (exhaustable == null)
-                    return new EffectHandle(choice, null, limit);
+                    return new EffectHandle(this, choice, null, limit);
 
                 var cost = new ExhaustSelf(exhaustable);
 
-                return new EffectHandle(choice, cost, limit);
+                return new EffectHandle(this, choice, cost, limit);
             }
 
             public override void Validate(IGame game, IEffectHandle handle)
@@ -71,7 +71,7 @@ namespace LotR.Cards.Player.Heroes
                 handle.Accept();
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var playerChoice = handle.Choice as IChoosePlayer;
                 if (playerChoice == null)

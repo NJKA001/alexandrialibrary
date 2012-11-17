@@ -34,7 +34,7 @@ namespace LotR.Effects.Phases.Resource
                 : string.Format("{0} collects 1 resource", collectingResources.Character.Title);
         }
 
-        public override void Resolve(IGame game, IEffectHandle handle)
+        public override void Trigger(IGame game, IEffectHandle handle)
         {
             if (!collectingResources.IsCollectingResources || collectingResources.ResourcesToCollect == 0)
                 { handle.Cancel(GetCancelledString()); return; }

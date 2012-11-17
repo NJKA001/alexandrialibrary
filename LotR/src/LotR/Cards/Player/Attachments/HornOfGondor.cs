@@ -42,7 +42,7 @@ namespace LotR.Cards.Player.Attachments
                 state.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 IAttachmentInPlay attachment = null;
 

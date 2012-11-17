@@ -52,10 +52,10 @@ namespace LotR.Cards.Quests
                 }
 
                 var choice = new PlayersChooseCards<IEnemyCard>("Each player must search the encounter deck and discard pile for 1 Spider of their choice", source, game.Players, 1, availableSpiders);
-                return new EffectHandle(choice);
+                return new EffectHandle(this, choice);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var spiderChoices = handle.Choice as IPlayersChooseCards<IEnemyCard>;
                 if (spiderChoices == null)

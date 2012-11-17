@@ -934,8 +934,8 @@ namespace LotR.Console
                 {
                     if (PromptForBool("You have a response that can be triggered right now.\r\n\r\n{0}\r\n\r\nWould you like to trigger this repsonse?", effect))
                     {
-                        var handle = game.GetHandle(effect);
-                        game.TriggerEffect(effect, handle);
+                        var handle = effect.GetHandle(game);
+                        game.TriggerEffect(handle);
                     }
                 }
             }

@@ -63,10 +63,10 @@ namespace LotR.Cards.Encounter.Locations
                     availableCards.Add(player.StateId, topFive);
                 }
 
-                return new EffectHandle(new PlayersChooseCards<IPlayerCard>("each player may search the top 5 cards of his deck for 1 card of their choice", source, game.Players, 1, availableCards));
+                return new EffectHandle(this, new PlayersChooseCards<IPlayerCard>("each player may search the top 5 cards of his deck for 1 card of their choice", source, game.Players, 1, availableCards));
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var cardChoice = handle.Choice as IPlayersChooseCards<IPlayerCard>;
                 if (cardChoice == null)

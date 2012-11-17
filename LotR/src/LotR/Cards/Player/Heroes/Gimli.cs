@@ -43,7 +43,7 @@ namespace LotR.Cards.Player.Heroes
                 state.Game.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var determineStrength = game.CurrentPhase.GetDetermineAttacks().Where(x => x.Attacker.Card.Id == source.Id).FirstOrDefault();
                 if (determineStrength == null)

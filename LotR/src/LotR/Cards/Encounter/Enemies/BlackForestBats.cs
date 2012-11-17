@@ -34,7 +34,7 @@ namespace LotR.Cards.Encounter.Enemies
             {
                 var questPhase = game.CurrentPhase as IQuestPhase;
                 if (questPhase == null)
-                    return new EffectHandle();
+                    return new EffectHandle(this);
                 
                 var questingCharacters = new Dictionary<Guid, IList<IWillpowerfulCard>>();
 
@@ -45,12 +45,12 @@ namespace LotR.Cards.Encounter.Enemies
                 }
 
                 if (questingCharacters.All(x => x.Value.Count == 0))
-                    return new EffectHandle();
+                    return new EffectHandle(this);
 
-                return new EffectHandle(new PlayersChooseCards<IWillpowerfulCard>("Each player must choose 1 character currently commited to a quest", source, game.Players, 1, questingCharacters));
+                return new EffectHandle(this, new PlayersChooseCards<IWillpowerfulCard>("Each player must choose 1 character currently commited to a quest", source, game.Players, 1, questingCharacters));
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var questPhase = game.CurrentPhase as IQuestPhase;
                 if (questPhase == null)

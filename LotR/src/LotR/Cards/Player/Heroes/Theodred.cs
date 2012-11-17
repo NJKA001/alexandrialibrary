@@ -52,17 +52,17 @@ namespace LotR.Cards.Player.Heroes
             {
                 var questPhase = game.CurrentPhase as IQuestPhase;
                 if (questPhase == null)
-                    return new EffectHandle();
+                    return new EffectHandle(this);
 
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return new EffectHandle();
+                    return new EffectHandle(this);
 
                 var choice = new ChooseCharacter(CardSource, controller, questPhase.GetAllCharactersCommittedToQuest().OfType<ICharacterInPlay>().Where(x => x.Card is IHeroCard).ToList());
-                return new EffectHandle(choice);
+                return new EffectHandle(this, choice);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var chooseCharacter = handle.Choice as IChooseCharacter;
                 if (chooseCharacter == null || chooseCharacter.ChosenCharacter == null)

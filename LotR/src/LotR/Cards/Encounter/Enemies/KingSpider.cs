@@ -48,10 +48,10 @@ namespace LotR.Cards.Encounter.Enemies
             public override IEffectHandle GetHandle(IGame game)
             {
                 var choice = new EachPlayerChoosesReadyCharacters(source, game, 1);
-                return new EffectHandle(choice);
+                return new EffectHandle(this, choice);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var characterChoice = handle.Choice as IPlayersChooseCharacters;
                 if (characterChoice == null)
@@ -83,10 +83,10 @@ namespace LotR.Cards.Encounter.Enemies
                 byte numberOfCharacters = enemyAttack.IsUndefended ? (byte)2 : (byte)1;
 
                 var choice = new EachPlayerChoosesReadyCharacters(source, enemyAttack.DefendingPlayer, numberOfCharacters);
-                return new EffectHandle(choice);
+                return new EffectHandle(this, choice);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var characterChoice = handle.Choice as IPlayersChooseCharacters;
                 if (characterChoice == null)

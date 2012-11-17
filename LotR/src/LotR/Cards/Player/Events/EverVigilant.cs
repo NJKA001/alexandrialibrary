@@ -31,12 +31,12 @@ namespace LotR.Cards.Player.Events
             {
                 var card = source as IPlayerCard;
                 if (card == null)
-                    return new EffectHandle();
+                    return new EffectHandle(this);
 
-                return new EffectHandle(new ChooseAlly(source, card.Owner));
+                return new EffectHandle(this, new ChooseAlly(source, card.Owner));
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var allyChoice = handle.Choice as IChooseAlly;
                 if (allyChoice == null || allyChoice.Ally == null)

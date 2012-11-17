@@ -42,10 +42,10 @@ namespace LotR.Effects.Phases.Setup
         {
             var startingHand = Player.Hand.Cards.ToList();
             var choice = new ChooseToKeepStartingHand("If a player does not wish to keep their starting hand, they may take a single mulligan, by shuffling those 6 cards back into their deck and drawing 6 new cards.", game, Player, startingHand);
-            return new EffectHandle(choice);
+            return new EffectHandle(this, choice);
         }
 
-        public override void Resolve(IGame game, IEffectHandle handle)
+        public override void Trigger(IGame game, IEffectHandle handle)
         {
             var chooseToKeep = handle.Choice as IChooseToKeepStartingHand;
             if (chooseToKeep == null)

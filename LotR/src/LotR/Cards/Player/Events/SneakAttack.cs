@@ -40,10 +40,10 @@ namespace LotR.Cards.Player.Events
 
                 var alliesInHand = owner.Hand.Cards.OfType<IAllyCard>().ToList();
 
-                return new EffectHandle(new ChooseCardInHand<IAllyCard>("Choose 1 ally card in your hand", source, owner, alliesInHand));
+                return new EffectHandle(this, new ChooseCardInHand<IAllyCard>("Choose 1 ally card in your hand", source, owner, alliesInHand));
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var chooseAlly = handle.Choice as IChooseCardInHand<IAllyCard>;
                 if (chooseAlly == null || chooseAlly.ChosenCard == null)
@@ -81,7 +81,7 @@ namespace LotR.Cards.Player.Events
 
             private readonly Guid allyId;
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var allyInPlay = game.GetCardInPlay<IAllyInPlay>(allyId);
                 if (allyInPlay == null)

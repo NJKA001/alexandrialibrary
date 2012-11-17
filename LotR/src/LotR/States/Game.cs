@@ -65,9 +65,9 @@ namespace LotR.States
 
         private void TriggerImmediately(IEffect effect)
         {
-            var handle = GetHandle(effect);
+            var handle = effect.GetHandle(this);
             AddEffect(effect);
-            TriggerEffect(effect, handle);
+            TriggerEffect(handle);
         }
 
         private void Run()
@@ -106,6 +106,36 @@ namespace LotR.States
         private void Cleanup()
         {
             TriggerImmediately(new CheckForDefeatedEnemiesEffect(this));
+        }
+
+        private void Prepare(IEffectHandle handle)
+        {
+            if (handle.Choice != null)
+            {
+                controller.OfferChoice(handle.Effect, handle.Choice);
+            }
+
+            if (handle.Cost != null)
+            {
+                var payment = controller.GetPayment(handle.Effect, handle.Cost);
+                if (payment != null)
+                {
+                    handle.AddPayment(payment);
+                }
+            }
+        }
+
+        private void TriggerEffectsForAllCardsInPlay<TCard, TEffect>()
+            where TCard : class, ICardInPlay
+            where TEffect : class, IEffect
+        {
+            foreach (var card in GetCardsInPlayWithEffect<TCard, TEffect>())
+            {
+                foreach (var effect in card.BaseCard.Text.Effects.OfType<TEffect>().Where(x => x != null))
+                {
+                    TriggerImmediately(effect);
+                }
+            }
         }
 
         #region Properties
@@ -217,8 +247,12 @@ namespace LotR.States
             controller.EffectAdded(effect);
         }
 
-        public void TriggerEffect(IEffect effect, IEffectHandle handle)
+        public void TriggerEffect(IEffectHandle handle)
         {
+            var effect = handle.Effect;
+
+            Prepare(handle);
+            
             effect.Validate(this, handle);
 
             if (handle.IsAccepted)
@@ -231,7 +265,7 @@ namespace LotR.States
                 return;
             }
 
-            effect.Resolve(this, handle);
+            effect.Trigger(this, handle);
 
             if (handle.IsResolved)
             {
@@ -245,19 +279,6 @@ namespace LotR.States
 
             if (currentEffects.Contains(effect))
                 currentEffects.Remove(effect);
-        }
-
-        public void TriggerEffectsForAllCardsInPlay<TCard, TEffect>()
-            where TCard : class, ICardInPlay
-            where TEffect : class, IEffect
-        {
-            foreach (var card in GetCardsInPlayWithEffect<TCard, TEffect>())
-            {
-                foreach (var effect in card.BaseCard.Text.Effects.OfType<TEffect>().Where(x => x != null))
-                {
-                    TriggerImmediately(effect);
-                }
-            }
         }
 
         public void Setup(IEnumerable<IPlayer> players, ScenarioCode scenarioCode)
@@ -303,7 +324,10 @@ namespace LotR.States
                     ActivePlayer = player;
 
                     var effect = new PlayerActionWindow(this, player);
-                    var handle = GetHandle(effect);
+                    var handle = effect.GetHandle(this);
+
+                    Prepare(handle);
+                    effect.Validate(this, handle);
 
                     var choice = handle.Choice as IChoosePlayerAction;
                     if (choice == null)
@@ -312,7 +336,7 @@ namespace LotR.States
                     if (choice.IsTakingAction)
                     {
                         allPlayersPass = false;
-                        TriggerEffect(effect, handle);
+                        TriggerEffect(handle);
 
                         Cleanup();
                     }
@@ -392,27 +416,6 @@ namespace LotR.States
             where T : class, IEffect
         {
             return currentEffects.OfType<T>().ToList();
-        }
-
-        public IEffectHandle GetHandle(IEffect effect)
-        {
-            var handle = effect.GetHandle(this);
-
-            if (handle.Choice != null)
-            {
-                controller.OfferChoice(effect, handle.Choice);
-            }
-
-            if (handle.Cost != null)
-            {
-                var payment = controller.GetPayment(effect, handle.Cost);
-                if (payment != null)
-                {
-                    handle.AddPayment(payment);
-                }
-            }
-
-            return handle;
         }
 
         public uint GetPlayerScore()

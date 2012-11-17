@@ -28,12 +28,12 @@ namespace LotR.Effects.Phases.Setup
         public override IEffectHandle GetHandle(IGame game)
         {
             if (game.Players.Count() == 1)
-                return new EffectHandle();
+                return new EffectHandle(this);
 
-            return new EffectHandle(new ChooseFirstPlayer(game));
+            return new EffectHandle(this, new ChooseFirstPlayer(game));
         }
 
-        public override void Resolve(IGame game, IEffectHandle handle)
+        public override void Trigger(IGame game, IEffectHandle handle)
         {
             if (game.Players.Count() == 1)
             {

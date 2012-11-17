@@ -29,7 +29,7 @@ namespace LotR.Effects.Phases.Any
         private readonly IEnemyInPlay enemy;
         private readonly IEnumerable<IAttackingInPlay> attackers;
 
-        public override void Resolve(IGame game, IEffectHandle handle)
+        public override void Trigger(IGame game, IEffectHandle handle)
         {
             var defeatedState = new EnemyDefeated(game, enemy, attackers);
 
@@ -62,8 +62,8 @@ namespace LotR.Effects.Phases.Any
 
             var leavingPlayEffect = new CardLeavesPlayEffect(game, enemy);
             game.AddEffect(leavingPlayEffect);
-            var leavingPlayOptions = game.GetHandle(leavingPlayEffect);
-            game.TriggerEffect(leavingPlayEffect, leavingPlayOptions);
+            var leavingPlayHandle = leavingPlayEffect.GetHandle(game);
+            game.TriggerEffect(leavingPlayHandle);
 
             handle.Resolve(GetCompletedStatus());
         }

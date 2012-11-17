@@ -86,7 +86,7 @@ namespace LotR.Cards.Player.Attachments
                 state.Game.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 game.QuestArea.AddProgress(1);
 

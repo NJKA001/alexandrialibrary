@@ -67,11 +67,11 @@ namespace LotR.Cards.Player.Allies
 
                 var resourceful = game.GetCardInPlay<ICharacterInPlay>(source.Id);
                 if (resourceful == null)
-                    return new EffectHandle(choice);
+                    return new EffectHandle(this, choice);
 
                 var cost = new PayResourcesFrom(source, resourceful, 0, true);
 
-                return new EffectHandle(choice, cost);
+                return new EffectHandle(this, choice, cost);
             }
 
             public override void Validate(IGame game, IEffectHandle handle)
@@ -115,7 +115,7 @@ namespace LotR.Cards.Player.Allies
                 handle.Accept();
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var resourcePayment = handle.Payment as IResourcePayment;
                 if (resourcePayment == null)

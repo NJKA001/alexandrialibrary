@@ -43,10 +43,10 @@ namespace LotR.Cards.Encounter.Enemies
                     return base.GetHandle(game);
 
                 var choice = new ChooseHero(source, enemyEngage.DefendingPlayer, enemyEngage.DefendingPlayer.CardsInPlay.OfType<IHeroInPlay>().ToList());
-                return new EffectHandle(choice);
+                return new EffectHandle(this, choice);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var heroChoice = handle.Choice as IChooseHero;
                 if (heroChoice == null)
@@ -70,7 +70,7 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null)

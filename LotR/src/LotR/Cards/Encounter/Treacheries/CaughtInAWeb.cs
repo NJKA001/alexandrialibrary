@@ -58,7 +58,7 @@ namespace LotR.Cards.Encounter.Treacheries
 
                 var mostThreateningPlayer = mostThreateningPlayers.FirstOrDefault();
                 if (mostThreateningPlayer == null)
-                    return new EffectHandle();
+                    return new EffectHandle(this);
 
                 IChoice choice = null;
 
@@ -67,10 +67,10 @@ namespace LotR.Cards.Encounter.Treacheries
                 else
                     choice = new ChoosePlayerToChooseHero(source, game.FirstPlayer, mostThreateningPlayers);
 
-                return new EffectHandle(choice);
+                return new EffectHandle(this, choice);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var heroChoice = handle.Choice as IChooseHero;
                 if (heroChoice == null || heroChoice.ChosenHero == null)
@@ -123,19 +123,19 @@ namespace LotR.Cards.Encounter.Treacheries
                 }
 
                 if (attachment == null || attachment.AttachedTo == null)
-                    return new EffectHandle();
+                    return new EffectHandle(this);
 
                 var resourceful = attachment.AttachedTo as ICharacterInPlay;
                 if (resourceful == null)
-                    return new EffectHandle();
+                    return new EffectHandle(this);
 
                 var cost = new PayResourcesFrom(source, resourceful, 2, false);
                 cost.IsOptional = true;
 
-                return new EffectHandle(cost);
+                return new EffectHandle(this, cost);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var refreshPhase = game.CurrentPhase as IRefreshPhase;
                 if (refreshPhase == null)

@@ -80,7 +80,7 @@ namespace LotR.Effects
 
         public virtual IEffectHandle GetHandle(IGame game)
         {
-            return new EffectHandle();
+            return new EffectHandle(this);
         }
 
         public virtual bool CanBeTriggered(IGame game)
@@ -93,7 +93,7 @@ namespace LotR.Effects
             handle.Accept();
         }
 
-        public virtual void Resolve(IGame game, IEffectHandle handle)
+        public virtual void Trigger(IGame game, IEffectHandle handle)
         {
             handle.Resolve(GetCompletedStatus());
         }

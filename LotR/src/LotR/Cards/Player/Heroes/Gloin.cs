@@ -45,7 +45,7 @@ namespace LotR.Cards.Player.Heroes
                 state.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var damageDealt = game.CurrentPhase.GetDamageDealt().Where(x => x.Target.Card.Id == source.Id).FirstOrDefault();
                 if (damageDealt == null || damageDealt.Damage == 0)

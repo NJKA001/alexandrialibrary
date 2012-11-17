@@ -51,13 +51,13 @@ namespace LotR.Cards.Encounter.Locations
                 }
 
                 if (exhaustedCharacters[game.FirstPlayer.StateId].Count == 0)
-                    return new EffectHandle();
+                    return new EffectHandle(this);
 
                 var choice = new PlayersChooseCards<ICharacterCard>("The first player may choose and ready 1 character he controls", source, new List<IPlayer> { game.FirstPlayer }, 1, exhaustedCharacters);
-                return new EffectHandle(choice);
+                return new EffectHandle(this, choice);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var chooseCard = handle.Choice as IPlayersChooseCards<ICharacterCard>;
                 if (chooseCard == null)

@@ -13,6 +13,7 @@ namespace LotR.Effects
     public interface IEffectHandle
         : INotifyPropertyChanged
     {
+        IEffect Effect { get; }
         IChoice Choice { get; }
         ICost Cost { get; }
         ILimit Limit { get; }

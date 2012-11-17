@@ -28,10 +28,10 @@ namespace LotR.Effects.Phases.Any
 
         public override IEffectHandle GetHandle(IGame game)
         {
-            return new EffectHandle(new ChoosePlayerAction(game, player));
+            return new EffectHandle(this, new ChoosePlayerAction(game, player));
         }
 
-        public override void Resolve(IGame game, IEffectHandle handle)
+        public override void Trigger(IGame game, IEffectHandle handle)
         {
             var actionChoice = handle.Choice as IChoosePlayerAction;
             if (actionChoice == null)
@@ -42,14 +42,14 @@ namespace LotR.Effects.Phases.Any
                 var costlyCard = actionChoice.CardToPlay as ICostlyCard;
                 var playCardEffect = new PlayCardFromHandEffect(game, costlyCard);
                 game.AddEffect(playCardEffect);
-                var playCardOptions = game.GetHandle(playCardEffect);
-                game.TriggerEffect(playCardEffect, playCardOptions);
+                var playCardHandle = playCardEffect.GetHandle(game);
+                game.TriggerEffect(playCardHandle);
             }
             else if (actionChoice.CardEffectToTrigger != null)
             {
                 game.AddEffect(actionChoice.CardEffectToTrigger);
-                var playEffectOptions = game.GetHandle(actionChoice.CardEffectToTrigger);
-                game.TriggerEffect(actionChoice.CardEffectToTrigger, playEffectOptions);
+                var playEffectHandle = actionChoice.CardEffectToTrigger.GetHandle(game);
+                game.TriggerEffect(playEffectHandle);
             }
 
             handle.Resolve(GetCompletedStatus());

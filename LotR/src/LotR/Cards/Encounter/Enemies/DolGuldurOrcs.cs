@@ -35,23 +35,23 @@ namespace LotR.Cards.Encounter.Enemies
             {
                 var questPhase = game.CurrentPhase as IQuestPhase;
                 if (questPhase == null)
-                    return new EffectHandle();
+                    return new EffectHandle(this);
 
                 if (game.FirstPlayer == null)
-                    return new EffectHandle();
+                    return new EffectHandle(this);
 
                 var questingCharacters = questPhase.GetCharactersCommitedToTheQuest(game.FirstPlayer.StateId);
                 if (questingCharacters.Count() == 0)
-                    return new EffectHandle();
+                    return new EffectHandle(this);
 
                 var availableCharacters = new Dictionary<Guid, IList<IWillpowerfulCard>> { { game.FirstPlayer.StateId, questingCharacters.Select(x => x.Card).ToList() } };
 
                 var choice = new PlayersChooseCards<IWillpowerfulCard>("The first player chooses 1 character currently commited to a quest", source, new List<IPlayer> { game.FirstPlayer }, 1, availableCharacters);
 
-                return new EffectHandle(choice);
+                return new EffectHandle(this, choice);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var characterChoice = handle.Choice as IPlayersChooseCards<IWillpowerfulCard>;
                 if (characterChoice == null)
@@ -83,7 +83,7 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null)

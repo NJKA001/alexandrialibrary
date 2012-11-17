@@ -32,10 +32,10 @@ namespace LotR.Cards.Player.Events
 
             public override IEffectHandle GetHandle(IGame game)
             {
-                return new EffectHandle(new ChooseGaladhrimsGreetingEffect(game, CardSource, playerCard.Owner));
+                return new EffectHandle(this, new ChooseGaladhrimsGreetingEffect(game, CardSource, playerCard.Owner));
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var effectChoice = handle.Choice as IChooseGaladhrimsGreetingEffect;
                 if (effectChoice == null)

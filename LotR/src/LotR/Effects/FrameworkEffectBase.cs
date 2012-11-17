@@ -14,5 +14,10 @@ namespace LotR.Effects
             : base(type, text, game)
         {
         }
+
+        public override string ToString()
+        {
+            return string.Format("{0}: {1}", type, text);
+        }
     }
 }

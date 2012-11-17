@@ -29,10 +29,7 @@ namespace LotR.States
         IPlayer ActivePlayer { get; set; }
 
         void AddEffect(IEffect effect);
-        void TriggerEffect(IEffect effect, IEffectHandle handle);
-        void TriggerEffectsForAllCardsInPlay<TCard, TEffect>()
-            where TCard : class, ICardInPlay
-            where TEffect : class, IEffect;
+        void TriggerEffect(IEffectHandle handle);
 
         void Setup(IEnumerable<IPlayer> players, ScenarioCode scenarioCode);
         void OpenPlayerActionWindow();
@@ -49,7 +46,6 @@ namespace LotR.States
             where TEffect : class, IEffect;
 
         IEnumerable<T> GetEffects<T>() where T : class, IEffect;
-        IEffectHandle GetHandle(IEffect effect);
         uint GetPlayerScore();
     }
 }

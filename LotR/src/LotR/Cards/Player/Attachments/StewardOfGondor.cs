@@ -77,7 +77,7 @@ namespace LotR.Cards.Player.Attachments
                     return base.GetHandle(game);
 
                 var cost = new ExhaustSelf(exhaustable);
-                return new EffectHandle(cost);
+                return new EffectHandle(this, cost);
             }
 
             public override void Validate(IGame game, IEffectHandle handle)
@@ -94,7 +94,7 @@ namespace LotR.Cards.Player.Attachments
                 handle.Accept();
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var attachment = game.GetCardInPlay<IAttachmentInPlay>(source.Id);
                 if (attachment == null || attachment.AttachedTo == null)

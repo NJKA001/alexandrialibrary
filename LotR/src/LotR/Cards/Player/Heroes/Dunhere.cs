@@ -54,7 +54,7 @@ namespace LotR.Cards.Player.Heroes
                 game.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var chooseEnemy = game.CurrentPhase.GetEnemiesChosenToAttack().Where(x => x.Attackers.Any(y => y.Card.Id == source.Id)).FirstOrDefault();
                 if (chooseEnemy == null)
@@ -89,7 +89,7 @@ namespace LotR.Cards.Player.Heroes
                 determineAttack.Game.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var determineAttack = game.CurrentPhase.GetDetermineAttacks().FirstOrDefault();
                 if (determineAttack == null)

@@ -42,7 +42,7 @@ namespace LotR.Cards.Encounter.Enemies
                 state.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 IEnemyInPlay enemy = null;
 
@@ -91,10 +91,10 @@ namespace LotR.Cards.Encounter.Enemies
                     return null;
 
                 var choice = new PlayersChooseCards<IAttachableCard>("Defending player must choose 1 attachment he controls", source, new List<IPlayer> { enemyAttack.DefendingPlayer }, 1, attachments);
-                return new EffectHandle(choice);
+                return new EffectHandle(this, choice);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null)

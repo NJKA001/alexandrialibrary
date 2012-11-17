@@ -36,7 +36,7 @@ namespace LotR.Cards.Player.Heroes
                 playersDrawingCards.Game.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var playersDrawing = game.CurrentPhase.GetPlayersDrawingCards();
                 if (playersDrawing == null)

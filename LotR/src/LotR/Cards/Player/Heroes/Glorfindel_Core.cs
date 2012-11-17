@@ -39,18 +39,18 @@ namespace LotR.Cards.Player.Heroes
 
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return new EffectHandle(null, null, limit);
+                    return new EffectHandle(this, null, null, limit);
 
                 var charactersToChooseFrom = game.GetAllCardsInPlay<ICharacterInPlay>().Where(x => x.Damage > 0).ToList();
                 var choice = new ChooseCharacter(source, controller, charactersToChooseFrom);
 
                 var resourceful = controller.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
                 if (resourceful == null)
-                    return new EffectHandle(choice, null, limit);
+                    return new EffectHandle(this, choice, null, limit);
 
                 var cost = new PayResourcesFrom(source, resourceful, 1, false);
 
-                return new EffectHandle(choice, cost, limit);
+                return new EffectHandle(this, choice, cost, limit);
             }
 
             public override void Validate(IGame game, IEffectHandle handle)
@@ -93,7 +93,7 @@ namespace LotR.Cards.Player.Heroes
                 handle.Accept();
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var characterChoice = handle.Choice as IChooseCharacter;
                 if (characterChoice == null || characterChoice.ChosenCharacter == null)

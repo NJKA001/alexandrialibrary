@@ -76,10 +76,10 @@ namespace LotR.States.Phases.Resource
 
             foreach (var info in infos)
             {
-                var handle = Game.GetHandle(info.Effect);
+                var handle = info.Effect.GetHandle(Game);
 
                 Game.AddEffect(info.Effect);
-                Game.TriggerEffect(info.Effect, handle);
+                Game.TriggerEffect(handle);
             }
         }
 
@@ -113,7 +113,9 @@ namespace LotR.States.Phases.Resource
 
                 if (numberOfCards > 0)
                 {
-                    Game.TriggerEffect(new DrawingCardsEffect(Game, player, numberOfCards), new EffectHandle());
+                    var drawCardsEffect = new DrawingCardsEffect(Game, player, numberOfCards);
+                    var drawCardsHandle = drawCardsEffect.GetHandle(Game);
+                    Game.TriggerEffect(drawCardsHandle);
                 }
             }
         }

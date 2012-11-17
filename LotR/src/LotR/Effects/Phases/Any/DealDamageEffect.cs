@@ -27,7 +27,7 @@ namespace LotR.Effects.Phases.Any
         private readonly ICardInPlay cardInPlay;
         private readonly byte damage;
 
-        public override void Resolve(IGame game, IEffectHandle handle)
+        public override void Trigger(IGame game, IEffectHandle handle)
         {
             handle.Resolve(GetCompletedStatus());
         }

@@ -47,7 +47,7 @@ namespace LotR.Cards.Player.Heroes
                     return base.GetHandle(game);
 
                 var cost = new ExhaustSelf(exhaustable);
-                return new EffectHandle(cost);
+                return new EffectHandle(this, cost);
             }
 
             public void DuringEncounterCardRevealed(IGame game)
@@ -81,7 +81,7 @@ namespace LotR.Cards.Player.Heroes
                 handle.Accept();
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 if (game.StagingArea.RevealedEncounterCard == null)
                     { handle.Cancel(GetCancelledString()); return; }

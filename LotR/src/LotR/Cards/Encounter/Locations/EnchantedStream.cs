@@ -40,7 +40,7 @@ namespace LotR.Cards.Encounter.Locations
                 playersDrawingCard.Game.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var playersDrawingCards = game.CurrentPhase.GetPlayersDrawingCards();
                 if (playersDrawingCards == null)

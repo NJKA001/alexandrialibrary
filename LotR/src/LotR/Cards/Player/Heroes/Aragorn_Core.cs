@@ -55,7 +55,7 @@ namespace LotR.Cards.Player.Heroes
                     return base.GetHandle(game);
 
                 var cost = new PayResourcesFrom(source, character, 1, false);
-                return new EffectHandle(cost);
+                return new EffectHandle(this, cost);
             }
 
             public override void Validate(IGame game, IEffectHandle handle)
@@ -97,7 +97,7 @@ namespace LotR.Cards.Player.Heroes
                 handle.Accept();
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var exhaustable = game.GetCardInPlay<IExhaustableInPlay>(source.Id);
                 if (exhaustable == null)

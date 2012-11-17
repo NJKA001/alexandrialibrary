@@ -25,7 +25,7 @@ namespace LotR.Effects.Phases.Any
 
         private readonly ICardInPlay cardInPlay;
 
-        public override void Resolve(IGame game, IEffectHandle handle)
+        public override void Trigger(IGame game, IEffectHandle handle)
         {
             if (game.StagingArea.CardsInStagingArea.Any(x => x.Card.Id == cardInPlay.BaseCard.Id))
             {

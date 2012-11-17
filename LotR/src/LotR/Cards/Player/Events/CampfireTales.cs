@@ -28,15 +28,16 @@ namespace LotR.Cards.Player.Events
             {
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 foreach (var player in game.Players)
                 {
                     //TODO: Check for IDuringDrawingCards effects here
 
-                    var effect = new DrawingCardsEffect(game, player, 1);
-                    game.AddEffect(effect);
-                    game.TriggerEffect(effect, new EffectHandle());
+                    var drawEffect = new DrawingCardsEffect(game, player, 1);
+                    var drawHandle = drawEffect.GetHandle(game);
+                    game.AddEffect(drawEffect);
+                    game.TriggerEffect(drawHandle);
                 }
 
                 handle.Resolve(GetCompletedStatus());

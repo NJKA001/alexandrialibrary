@@ -36,7 +36,7 @@ namespace LotR.Cards.Encounter.Locations
                 state.Game.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var topTwo = game.FirstPlayer.Deck.GetFromTop(2);
                 game.FirstPlayer.Hand.AddCards(topTwo);

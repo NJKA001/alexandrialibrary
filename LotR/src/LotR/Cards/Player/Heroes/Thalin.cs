@@ -57,7 +57,7 @@ namespace LotR.Cards.Player.Heroes
                 game.AddEffect(this);
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var enemyChoice = handle.Choice as IChooseEnemy;
                 if (enemyChoice == null || enemyChoice.Enemy == null)

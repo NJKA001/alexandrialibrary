@@ -46,7 +46,7 @@ namespace LotR.Cards.Player.Heroes
                     return base.GetHandle(game);
 
                 var cost = new ExhaustSelf(exhaustable);
-                return new EffectHandle(null, cost);
+                return new EffectHandle(this, null, cost);
             }
 
             public override void Validate(IGame game, IEffectHandle handle)
@@ -72,7 +72,7 @@ namespace LotR.Cards.Player.Heroes
                 handle.Accept();
             }
 
-            public override void Resolve(IGame game, IEffectHandle handle)
+            public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var topOfDeckChoice = handle.Choice as IChooseTopOrBottomOfDeck;
                 if (topOfDeckChoice == null)
