@@ -35,7 +35,10 @@ namespace LotR.Effects.Phases.Any
         {
             var actionChoice = handle.Choice as IChoosePlayerAction;
             if (actionChoice == null)
-                { handle.Cancel(GetCancelledString()); return; }
+            {
+                handle.Cancel(GetCancelledString());
+                return;
+            }
 
             if (actionChoice.CardToPlay != null && actionChoice.CardToPlay is ICostlyCard)
             {
@@ -43,12 +46,14 @@ namespace LotR.Effects.Phases.Any
                 var playCardEffect = new PlayCardFromHandEffect(game, costlyCard);
                 game.AddEffect(playCardEffect);
                 var playCardHandle = playCardEffect.GetHandle(game);
+                //game.Prepare(playCardHandle);
                 game.TriggerEffect(playCardHandle);
             }
             else if (actionChoice.CardEffectToTrigger != null)
             {
                 game.AddEffect(actionChoice.CardEffectToTrigger);
                 var playEffectHandle = actionChoice.CardEffectToTrigger.GetHandle(game);
+                //game.Prepare(playEffectHandle);
                 game.TriggerEffect(playEffectHandle);
             }
 

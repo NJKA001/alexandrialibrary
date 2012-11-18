@@ -534,7 +534,7 @@ namespace LotR.Console
 
             IResourcePayment payment = new ResourcePayment(costlyCard);
 
-            var characters = player.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.CanPayFor(costlyCard) && x.Resources >= cost.NumberOfResources).ToList();
+            var characters = player.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.CanPayFor(costlyCard) && (cost.NumberOfResources == 0 || x.Resources > 0)).ToList();
             if (characters.Count == 0)
             {
                 WriteLine("You do not have any characters with matching resources to pay for {0}", costlyCard.Title);

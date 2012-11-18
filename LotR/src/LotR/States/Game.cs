@@ -123,6 +123,8 @@ namespace LotR.States
                     handle.AddPayment(payment);
                 }
             }
+
+            handle.Effect.Validate(this, handle);
         }
 
         private void TriggerEffectsForAllCardsInPlay<TCard, TEffect>()
@@ -251,7 +253,10 @@ namespace LotR.States
         {
             var effect = handle.Effect;
 
-            Prepare(handle);
+            if (!handle.IsAccepted && !handle.IsRejected)
+            {
+                Prepare(handle);
+            }
             
             effect.Validate(this, handle);
 
@@ -327,7 +332,7 @@ namespace LotR.States
                     var handle = effect.GetHandle(this);
 
                     Prepare(handle);
-                    effect.Validate(this, handle);
+                    //effect.Validate(this, handle);
 
                     var choice = handle.Choice as IChoosePlayerAction;
                     if (choice == null)

@@ -38,6 +38,7 @@ namespace LotR.States.Setup
 
             shuffleEffect.DuringSetup(game);
 
+            //game.Prepare(shuffleHandle);
             game.AddEffect(shuffleEffect);
             game.TriggerEffect(shuffleHandle);
         }
@@ -49,6 +50,7 @@ namespace LotR.States.Setup
 
             placeHeroesEffect.DuringSetup(game);
 
+            //game.Prepare(placeHeroesHandle);
             game.AddEffect(placeHeroesEffect);
             game.TriggerEffect(placeHeroesHandle);
         }
@@ -60,6 +62,7 @@ namespace LotR.States.Setup
 
             determineFirstPlayer.DuringSetup(game);
 
+            //game.Prepare(determineFirstPlayerHandle);
             game.AddEffect(determineFirstPlayer);
             game.TriggerEffect(determineFirstPlayerHandle);
         }
@@ -71,6 +74,7 @@ namespace LotR.States.Setup
 
             var drawSetupHandHandle = drawSetupHand.GetHandle(game);
 
+            //game.Prepare(drawSetupHandHandle);
             game.AddEffect(drawSetupHand);
             game.TriggerEffect(drawSetupHandHandle);
         }
@@ -82,6 +86,7 @@ namespace LotR.States.Setup
             
             setQuestCards.DuringSetup(game);
 
+            //game.Prepare(setQuestCardsHandle);
             game.AddEffect(setQuestCards);
             game.TriggerEffect(setQuestCardsHandle);
         }
@@ -93,6 +98,7 @@ namespace LotR.States.Setup
             
             scenarioSetup.DuringSetup(game);
 
+            //game.Prepare(setupHandle);
             game.AddEffect(scenarioSetup);
             game.TriggerEffect(setupHandle);
 
@@ -101,6 +107,7 @@ namespace LotR.States.Setup
                 effect.Setup(game);
 
                 var handle = effect.GetHandle(game);
+                //game.Prepare(handle);
                 game.TriggerEffect(handle);
             }
         }

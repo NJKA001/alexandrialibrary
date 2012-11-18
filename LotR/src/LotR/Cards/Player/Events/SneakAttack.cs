@@ -47,7 +47,10 @@ namespace LotR.Cards.Player.Events
             {
                 var chooseAlly = handle.Choice as IChooseCardInHand<IAllyCard>;
                 if (chooseAlly == null || chooseAlly.ChosenCard == null)
-                    { handle.Cancel(GetCancelledString()); return; }
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 var playerCard = CardSource as IPlayerCard;
                 if (playerCard == null)

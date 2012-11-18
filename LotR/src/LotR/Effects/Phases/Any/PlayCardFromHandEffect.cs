@@ -56,10 +56,11 @@ namespace LotR.Effects.Phases.Any
                 if (effect == null)
                     return new EffectHandle(this, cost);
 
-                var effectHandle = effect.GetHandle(game);
-                choice = effectHandle.Choice;
+                //var effectHandle = effect.GetHandle(game);
+                //return effectHandle;
+                //choice = effectHandle.Choice;
 
-                return new EffectHandle(this, choice, cost);
+                return new EffectHandle(this, cost);
             }
 
             return new EffectHandle(this, cost);
@@ -139,6 +140,7 @@ namespace LotR.Effects.Phases.Any
                         }
 
                         var costlyHandle = costlyEffect.GetHandle(game);
+                        //game.Prepare(costlyHandle);
                         game.AddEffect(costlyEffect);
                         game.TriggerEffect(costlyHandle);
                         costlyCard.Owner.Hand.RemoveCards(new List<IPlayerCard> { costlyCard });
