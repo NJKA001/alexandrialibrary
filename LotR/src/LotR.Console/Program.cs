@@ -225,6 +225,11 @@ namespace LotR.Console
             return (uint.TryParse(value, out result) && result > 0 && result <= max);
         }
 
+        private static IEnumerable<uint> PromptForNumbers(IEnumerable<string> items, uint minChoices, uint maxChoices)
+        {
+            return PromptForNumbers(items, x => x, 1, minChoices, maxChoices);
+        }
+
         private static IEnumerable<uint> PromptForNumbers<T>(IEnumerable<T> items, Func<T, string> getDescription, uint minValue, uint minChoices, uint maxChoices)
         {
             if (minChoices < 1)
@@ -813,38 +818,76 @@ namespace LotR.Console
             }
         }
 
+        private static void HandleQuestion(IQuestion question)
+        {
+            WriteLine(question.Text);
+
+            var answers = question.Answers.ToList();
+            var answerItems = answers.Select(x => x.Text);
+            var answerNumbers = new List<uint>();
+            var chosenAnswers = new List<IAnswer>();
+
+
+            if (question.MaximumChosenAnswers == 1)
+            {
+                answerNumbers.Add(PromptForNumber(answerItems));
+            }
+            else
+            {
+                answerNumbers.AddRange(PromptForNumbers(answerItems, question.MinimumChosenAnswers, question.MaximumChosenAnswers));
+            }
+
+            foreach (var number in answerNumbers)
+            {
+                var chosenAnswer = answers[(int)number - 1];
+                chosenAnswer.IsChosen = true;
+                chosenAnswer.Execute(game);
+                chosenAnswers.Add(chosenAnswer);
+            }
+
+            foreach (var answer in chosenAnswers.Where(x => x.FollowUp != null))
+            {
+                HandleQuestion(answer.FollowUp);
+            }
+        }
+
         private static void HandleChoice(IChoice choice)
         {
             WriteLine("\r\nChoice: {0}\r\n", choice.Text);
 
-            if (choice is IChooseFirstPlayer)
+            foreach (var question in choice.Questions)
             {
-                ChooseFirstPlayer(choice as IChooseFirstPlayer);
+                HandleQuestion(question);
             }
-            else if (choice is IChooseToKeepStartingHand)
-            {
-                ChooseToKeepStartingHand(choice as IChooseToKeepStartingHand);
-            }
-            else if (choice is IChoosePlayerAction)
-            {
-                ChoosePlayerAction(choice as IChoosePlayerAction);
-            }
-            else if (choice is IChooseAttachmentHost)
-            {
-                ChooseAttachmentHost(choice as IChooseAttachmentHost);
-            }
-            else if (choice is IChooseCardInHand)
-            {
-                ChooseCardInHand(choice as IChooseCardInHand);
-            }
-            else if (choice is IChooseGandalfEffect)
-            {
-                ChooseGandalfEffect(choice as IChooseGandalfEffect);
-            }
-            else if (choice is IChooseGaladhrimsGreetingEffect)
-            {
-                ChooseGaladhrimsGreetingEffect(choice as IChooseGaladhrimsGreetingEffect);
-            }
+            
+            //if (choice is IChooseFirstPlayer)
+            //{
+            //    ChooseFirstPlayer(choice as IChooseFirstPlayer);
+            //}
+            //else if (choice is IChooseToKeepStartingHand)
+            //{
+            //    ChooseToKeepStartingHand(choice as IChooseToKeepStartingHand);
+            //}
+            //else if (choice is IChoosePlayerAction)
+            //{
+            //    ChoosePlayerAction(choice as IChoosePlayerAction);
+            //}
+            //else if (choice is IChooseAttachmentHost)
+            //{
+            //    ChooseAttachmentHost(choice as IChooseAttachmentHost);
+            //}
+            //else if (choice is IChooseCardInHand)
+            //{
+            //    ChooseCardInHand(choice as IChooseCardInHand);
+            //}
+            //else if (choice is IChooseGandalfEffect)
+            //{
+            //    ChooseGandalfEffect(choice as IChooseGandalfEffect);
+            //}
+            //else if (choice is IChooseGaladhrimsGreetingEffect)
+            //{
+            //    ChooseGaladhrimsGreetingEffect(choice as IChooseGaladhrimsGreetingEffect);
+            //}
         }
 
         private static void OfferChoiceCallback(IEffect effect, IChoice choice)

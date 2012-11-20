@@ -88,6 +88,7 @@
     <Compile Include="Cards\Quests\DontLeaveThePath.cs" />
     <Compile Include="Cards\ScenarioCode.cs" />
     <Compile Include="Effects\Choices\Answer.cs" />
+    <Compile Include="Effects\Choices\Choice.cs" />
     <Compile Include="Effects\Choices\ChoiceItemBase.cs" />
     <Compile Include="Effects\Choices\ChooseAttachmentHost.cs" />
     <Compile Include="Effects\Choices\ChooseCardInHand.cs" />
@@ -566,6 +567,9 @@
     <Compile Include="States\ThreateningInPlay.cs" />
     <Compile Include="States\TreasureInPlay.cs" />
     <Compile Include="States\UnclaimedObjectiveInPlay.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

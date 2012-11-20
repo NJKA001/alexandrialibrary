@@ -12,12 +12,12 @@ namespace LotR.Effects.Choices
         where TSource : class, ISource
         where TItem : class
     {
-        public Answer(string text, TSource source, TItem item, Action<IGame> executeFunction)
+        public Answer(string text, TSource source, TItem item, Action<IGame, TItem> executeFunction)
             : this(text, source, item, executeFunction, null)
         {
         }
 
-        public Answer(string text, TSource source, TItem item, Action<IGame> executeFunction, IQuestion followUp)
+        public Answer(string text, TSource source, TItem item, Action<IGame, TItem> executeFunction, IQuestion followUp)
             : base(text, source)
         {
             if (item == null)
@@ -33,7 +33,7 @@ namespace LotR.Effects.Choices
 
         private readonly TItem item;
         private readonly Type itemType;
-        private readonly Action<IGame> executeFunction;
+        private readonly Action<IGame, TItem> executeFunction;
         private readonly IQuestion followUp;
 
         private bool isChosen;
@@ -69,7 +69,7 @@ namespace LotR.Effects.Choices
 
         public void Execute(IGame game)
         {
-            executeFunction(game);
+            executeFunction(game, item);
         }
     }
 }

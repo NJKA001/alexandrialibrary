@@ -30,7 +30,22 @@ namespace LotR.Effects.Phases.Setup
             if (game.Players.Count() == 1)
                 return new EffectHandle(this);
 
-            return new EffectHandle(this, new ChooseFirstPlayer(game));
+            var players = game.Players.ToList();
+            var answers = new List<IAnswer>();
+            foreach (var player in players)
+            {
+                answers.Add(new Answer<IGame, IPlayer>(player.Name, game, player, (source, item) => item.IsFirstPlayer = true));
+            }
+
+            var random = new Random();
+            var randomPlayer = players[random.Next(0, players.Count - 1)];
+
+            answers.Add(new Answer<IGame, IPlayer>("Determine a first player at random", game, randomPlayer, (source, item) => item.IsFirstPlayer = true));
+
+            var question = new Question<IGame>("Who will be first player?", game, game.Players.First(), answers);
+            var choice = new Choice<IGame>("The players determine a first player based on a majority group decision. If this proves impossible, determine a first player at random.", game, new List<IQuestion> { question });
+
+            return new EffectHandle(this, choice); //new ChooseFirstPlayer(game));
         }
 
         public override void Trigger(IGame game, IEffectHandle handle)
