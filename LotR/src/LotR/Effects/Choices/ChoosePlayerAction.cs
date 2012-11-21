@@ -8,6 +8,7 @@ using LotR.States;
 
 namespace LotR.Effects.Choices
 {
+    /*
     public class ChoosePlayerAction
         : ChoiceBase, IChoosePlayerAction
     {
@@ -80,4 +81,5 @@ namespace LotR.Effects.Choices
             }
         }
     }
+    */
 }

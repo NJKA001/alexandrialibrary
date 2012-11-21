@@ -7,13 +7,13 @@ using System.Text;
 using LotR.Cards;
 using LotR.States;
 
-namespace LotR.Effects.Choices
+namespace LotR.Effects
 {
     public interface IChoice
         : IChoiceItem
     {
         IEnumerable<IPlayer> Players { get; }
-        IEnumerable<IQuestion> Questions { get; }
+        IQuestion Question { get; }
 
         bool IsCancelled { get; set; }
         bool IsOptional { get; }

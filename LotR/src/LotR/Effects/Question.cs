@@ -5,12 +5,22 @@ using System.Text;
 
 using LotR.States;
 
-namespace LotR.Effects.Choices
+namespace LotR.Effects
 {
     public class Question<TSource>
         : ChoiceItemBase<TSource>, IQuestion
         where TSource : class, ISource
     {
+        public Question(string text, TSource source, IPlayer player)
+            : this(text, source, player, Enumerable.Empty<IAnswer>(), 1, 1)
+        {
+        }
+
+        public Question(string text, TSource source, IPlayer player, uint minimumChosenAnswers, uint maximumChosenAnswers)
+            : this(text, source, player, Enumerable.Empty<IAnswer>(), minimumChosenAnswers, maximumChosenAnswers)
+        {
+        }
+
         public Question(string text, TSource source, IPlayer player, IEnumerable<IAnswer> answers)
             : this(text, source, player, answers, 1, 1)
         {
@@ -27,13 +37,13 @@ namespace LotR.Effects.Choices
                 throw new ArgumentNullException("minimumChosenAnswers cannot be greater than maximumChosenAnswers");
 
             this.player = player;
-            this.answers = answers;
+            this.answers.AddRange(answers);
             this.minimumChosenAnswers = minimumChosenAnswers;
             this.maximumChosenAnswers = maximumChosenAnswers;
         }
 
         private readonly IPlayer player;
-        private readonly IEnumerable<IAnswer> answers;
+        private readonly List<IAnswer> answers = new List<IAnswer>();
         private readonly uint minimumChosenAnswers;
         private readonly uint maximumChosenAnswers;
 
@@ -55,6 +65,14 @@ namespace LotR.Effects.Choices
         public uint MaximumChosenAnswers
         {
             get { return maximumChosenAnswers; }
+        }
+
+        public void AddAnswer(IAnswer answer)
+        {
+            if (answer == null)
+                throw new ArgumentNullException("answer");
+
+            this.answers.Add(answer);
         }
     }
 }

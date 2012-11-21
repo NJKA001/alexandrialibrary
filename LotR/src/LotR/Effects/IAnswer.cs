@@ -5,7 +5,7 @@ using System.Text;
 
 using LotR.States;
 
-namespace LotR.Effects.Choices
+namespace LotR.Effects
 {
     public interface IAnswer
         : IChoiceItem
@@ -15,8 +15,9 @@ namespace LotR.Effects.Choices
 
         bool IsChosen { get; set; }
 
-        T GetItem<T>() where T : class;
+        T GetObject<T>() where T : class;
+        T GetPrimative<T>() where T : struct;
 
-        void Execute(IGame game);
+        void Execute(IGame game, IEffectHandle handle);
     }
 }

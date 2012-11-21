@@ -25,52 +25,54 @@ namespace LotR.Effects.Phases.Setup
             }
         }
 
+        private void ChooseFirstPlayer(IEffectHandle handle, IPlayer player)
+        {
+            player.IsFirstPlayer = true;
+
+            handle.Resolve(string.Format("{0} was chosen as the first player", player.Name));
+        }
+
+        private void ChooseFirstPlayerRandomly(IEffectHandle handle, IPlayer player)
+        {
+            player.IsFirstPlayer = true;
+
+            handle.Resolve(string.Format("{0} was chosen randomly as the first player", player.Name));
+        }
+
         public override IEffectHandle GetHandle(IGame game)
         {
-            if (game.Players.Count() == 1)
-                return new EffectHandle(this);
+            var builder =
+                new ChoiceBuilder<IGame>("The players determine a first player based on a majority group decision. If this proves impossible, determine a first player at random.", game, game.Players.First())
+                    .Question("Who will be first player?")
+                        .Answers(game.Players, (player) => player.Name, (source, handle, item) => ChooseFirstPlayer(handle, item))
+                        .Answer("Determine a first player at random", game.Players.GetRandomItem(), (source, handle, item) => ChooseFirstPlayerRandomly(handle, item));
 
-            var players = game.Players.ToList();
-            var answers = new List<IAnswer>();
-            foreach (var player in players)
-            {
-                answers.Add(new Answer<IGame, IPlayer>(player.Name, game, player, (source, item) => item.IsFirstPlayer = true));
-            }
-
-            var random = new Random();
-            var randomPlayer = players[random.Next(0, players.Count - 1)];
-
-            answers.Add(new Answer<IGame, IPlayer>("Determine a first player at random", game, randomPlayer, (source, item) => item.IsFirstPlayer = true));
-
-            var question = new Question<IGame>("Who will be first player?", game, game.Players.First(), answers);
-            var choice = new Choice<IGame>("The players determine a first player based on a majority group decision. If this proves impossible, determine a first player at random.", game, new List<IQuestion> { question });
-
-            return new EffectHandle(this, choice); //new ChooseFirstPlayer(game));
+            return new EffectHandle(this, builder.ToChoice());
         }
 
-        public override void Trigger(IGame game, IEffectHandle handle)
-        {
-            if (game.Players.Count() == 1)
-            {
-                handle.Cancel("There is only player, this player will always be the first player");
-                return;
-            }
+        //public override void Trigger(IGame game, IEffectHandle handle)
+        //{
+        //    if (game.Players.Count() == 1)
+        //    {
+        //        handle.Cancel("There is only player, this player will always be the first player");
+        //        return;
+        //    }
 
-            var firstPlayerChoice = handle.Choice as IChooseFirstPlayer;
-            if (firstPlayerChoice == null)
-                throw new InvalidOperationException("choice is not a valid IFirstPlayerChoice");
+        //    var firstPlayerChoice = handle.Choice as IChooseFirstPlayer;
+        //    if (firstPlayerChoice == null)
+        //        throw new InvalidOperationException("choice is not a valid IFirstPlayerChoice");
 
-            if (firstPlayerChoice.FirstPlayer == null)
-                throw new InvalidOperationException("first player choice is undefined");
+        //    if (firstPlayerChoice.FirstPlayer == null)
+        //        throw new InvalidOperationException("first player choice is undefined");
 
-            firstPlayerChoice.FirstPlayer.IsFirstPlayer = true;
+        //    firstPlayerChoice.FirstPlayer.IsFirstPlayer = true;
 
-            foreach (var player in game.Players.Where(x => !x.IsFirstPlayer))
-            {
-                player.IsFirstPlayer = false;
-            }
+        //    foreach (var player in game.Players.Where(x => !x.IsFirstPlayer))
+        //    {
+        //        player.IsFirstPlayer = false;
+        //    }
 
-            handle.Resolve(string.Format("Determine First Player: {0}", game.FirstPlayer.Name));
-        }
+        //    handle.Resolve(string.Format("Determine First Player: {0}", game.FirstPlayer.Name));
+        //}
     }
 }

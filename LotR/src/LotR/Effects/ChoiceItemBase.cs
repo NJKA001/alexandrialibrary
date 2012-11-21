@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Effects.Choices
+namespace LotR.Effects
 {
     public abstract class ChoiceItemBase<TSource>
         : IChoiceItem, INotifyPropertyChanged
@@ -33,6 +33,5 @@ namespace LotR.Effects.Choices
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
     }
 }

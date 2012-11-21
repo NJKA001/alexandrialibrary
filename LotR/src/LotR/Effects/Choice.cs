@@ -5,28 +5,28 @@ using System.Text;
 
 using LotR.States;
 
-namespace LotR.Effects.Choices
+namespace LotR.Effects
 {
     public class Choice<TSource>
         : ChoiceItemBase<TSource>, IChoice
         where TSource : class, ISource
     {
-        public Choice(string text, TSource source, IEnumerable<IQuestion> questions)
-            : this(text, source, questions, false)
+        public Choice(string text, TSource source, IQuestion question)
+            : this(text, source, question, false)
         {
         }
 
-        public Choice(string text, TSource source, IEnumerable<IQuestion> questions, bool isOptional)
+        public Choice(string text, TSource source, IQuestion question, bool isOptional)
             : base(text, source)
         {
-            if (questions == null)
-                throw new ArgumentNullException("questions");
+            if (question == null)
+                throw new ArgumentNullException("question");
 
-            this.questions = questions;
+            this.question = question;
             this.isOptional = isOptional;
         }
 
-        private readonly IEnumerable<IQuestion> questions;
+        private readonly IQuestion question;
         private readonly bool isOptional;
 
         private bool isCancelled;
@@ -36,9 +36,9 @@ namespace LotR.Effects.Choices
             get { return Enumerable.Empty<IPlayer>(); }
         }
 
-        public IEnumerable<IQuestion> Questions
+        public IQuestion Question
         {
-            get { return questions; }
+            get { return question; }
         }
 
         public bool IsCancelled

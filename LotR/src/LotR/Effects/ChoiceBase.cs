@@ -7,7 +7,7 @@ using System.Text;
 using LotR.Cards;
 using LotR.States;
 
-namespace LotR.Effects.Choices
+namespace LotR.Effects
 {
     public class ChoiceBase
         : ChoiceItemBase<ISource>, IChoice
@@ -27,7 +27,6 @@ namespace LotR.Effects.Choices
         }
 
         private readonly IEnumerable<IPlayer> players;
-        private readonly IList<IQuestion> questions = new List<IQuestion>();
         private bool isCancelled;
 
         public IEnumerable<IPlayer> Players
@@ -35,9 +34,9 @@ namespace LotR.Effects.Choices
             get { return players; }
         }
 
-        public IEnumerable<IQuestion> Questions
+        public IQuestion Question
         {
-            get { return questions; }
+            get { return null; }
         }
 
         public bool IsCancelled

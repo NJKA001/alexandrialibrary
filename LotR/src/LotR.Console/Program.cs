@@ -322,36 +322,37 @@ namespace LotR.Console
             return result;
         }
 
-        private static void ChooseFirstPlayer(IChooseFirstPlayer choice)
-        {
-            var players = choice.Players.ToList();
-            var playerNames = players.Select(x => x.Name).ToList();
-            playerNames.Add("Choose First Player Randomly");
+        //private static void ChooseFirstPlayer(IChooseFirstPlayer choice)
+        //{
+        //    var players = choice.Players.ToList();
+        //    var playerNames = players.Select(x => x.Name).ToList();
+        //    playerNames.Add("Choose First Player Randomly");
 
-            var result = PromptForNumber(playerNames);
-            if (result > players.Count())
-            {
-                choice.ChooseRandomFirstPlayer();
-            }
-            else
-            {
-                choice.FirstPlayer = players[(int)(result - 1)];
-            }
-        }
+        //    var result = PromptForNumber(playerNames);
+        //    if (result > players.Count())
+        //    {
+        //        choice.ChooseRandomFirstPlayer();
+        //    }
+        //    else
+        //    {
+        //        choice.FirstPlayer = players[(int)(result - 1)];
+        //    }
+        //}
 
-        private static void ChooseToKeepStartingHand(IChooseToKeepStartingHand choice)
-        {
-            WriteLine("Starting Hand for Player: {0}\r\n", choice.Players.First().Name);
-            foreach (var card in choice.StartingHand)
-            {
-                WriteLine("  {0} ({1})", card.Title, card.PrintedCardType);
-            }
+        //private static void ChooseToKeepStartingHand(IChooseToKeepStartingHand choice)
+        //{
+        //    WriteLine("Starting Hand for Player: {0}\r\n", choice.Players.First().Name);
+        //    foreach (var card in choice.StartingHand)
+        //    {
+        //        WriteLine("  {0} ({1})", card.Title, card.PrintedCardType);
+        //    }
 
-            var keepStartingHand = PromptForBool("Keep Starting Hand?");
+        //    var keepStartingHand = PromptForBool("Keep Starting Hand?");
 
-            choice.KeepStartingHand = keepStartingHand;
-        }
+        //    choice.KeepStartingHand = keepStartingHand;
+        //}
 
+        /*
         private static void ChoosePlayerAction(IChoosePlayerAction choice)
         {
             var player = choice.Players.FirstOrDefault();
@@ -407,6 +408,7 @@ namespace LotR.Console
                 WriteLine("\r\n{0} is passing on taking any actions right now", player.Name);
             }
         }
+        */
 
         //private static IPayment GetPayment(IPlayer player, ICardEffect cardEffect)
         //{
@@ -589,6 +591,7 @@ namespace LotR.Console
             return null;
         }
 
+        /*
         private static IList<IPlayerCard> GetPlayableCardsInHand(IPlayer player)
         {
             var cards = new List<IPlayerCard>();
@@ -612,7 +615,9 @@ namespace LotR.Console
 
             return cards;
         }
+        */
 
+        /*
         private static IList<ICardEffect> GetPlayableEffects(IPlayer player)
         {
             var effects = new List<ICardEffect>();
@@ -628,6 +633,7 @@ namespace LotR.Console
 
             return effects;
         }
+        */
 
         private static void ChooseCardToPlay(IPlayer player, IChoosePlayerAction choice, IList<IPlayerCard> cards)
         {
@@ -827,10 +833,16 @@ namespace LotR.Console
             var answerNumbers = new List<uint>();
             var chosenAnswers = new List<IAnswer>();
 
-
             if (question.MaximumChosenAnswers == 1)
             {
-                answerNumbers.Add(PromptForNumber(answerItems));
+                if (answers.Count == 1)
+                {
+                    answerNumbers.Add(1);
+                }
+                else
+                {
+                    answerNumbers.Add(PromptForNumber(answerItems));
+                }
             }
             else
             {
@@ -841,7 +853,6 @@ namespace LotR.Console
             {
                 var chosenAnswer = answers[(int)number - 1];
                 chosenAnswer.IsChosen = true;
-                chosenAnswer.Execute(game);
                 chosenAnswers.Add(chosenAnswer);
             }
 
@@ -855,10 +866,7 @@ namespace LotR.Console
         {
             WriteLine("\r\nChoice: {0}\r\n", choice.Text);
 
-            foreach (var question in choice.Questions)
-            {
-                HandleQuestion(question);
-            }
+            HandleQuestion(choice.Question);
             
             //if (choice is IChooseFirstPlayer)
             //{

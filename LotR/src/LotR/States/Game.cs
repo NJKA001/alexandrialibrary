@@ -319,10 +319,10 @@ namespace LotR.States
 
         public void OpenPlayerActionWindow()
         {
-            var allPlayersPass = false;
-            while (!allPlayersPass)
+            var playersTakingActions = true;
+            while (playersTakingActions)
             {
-                allPlayersPass = true;
+                playersTakingActions = false;
 
                 foreach (var player in Players)
                 {
@@ -332,19 +332,15 @@ namespace LotR.States
                     var handle = effect.GetHandle(this);
 
                     Prepare(handle);
-                    //effect.Validate(this, handle);
+                    
+                    TriggerEffect(handle);
 
-                    var choice = handle.Choice as IChoosePlayerAction;
-                    if (choice == null)
-                        throw new InvalidOperationException();
-
-                    if (choice.IsTakingAction)
+                    if (handle.IsResolved)
                     {
-                        allPlayersPass = false;
-                        TriggerEffect(handle);
-
-                        Cleanup();
+                        playersTakingActions = true;
                     }
+
+                    Cleanup();
                 }
             }
 

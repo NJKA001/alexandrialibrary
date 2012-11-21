@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace LotR.Effects.Choices
+namespace LotR.Effects
 {
     public interface IChoiceItem
         : INotifyPropertyChanged

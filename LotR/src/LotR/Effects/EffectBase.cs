@@ -93,9 +93,32 @@ namespace LotR.Effects
             handle.Accept();
         }
 
+        private void ExecuteChosenAnswers(IGame game, IEffectHandle handle, IQuestion question)
+        {
+            var chosenAnswers = question.Answers.Where(x => x.IsChosen).ToList();
+
+            foreach (var answer in chosenAnswers)
+            {
+                answer.Execute(game, handle);
+
+                if (answer.FollowUp != null)
+                {
+                    ExecuteChosenAnswers(game, handle, answer.FollowUp);
+                }
+            }
+        }
+
         public virtual void Trigger(IGame game, IEffectHandle handle)
         {
-            handle.Resolve(GetCompletedStatus());
+            if (handle.Choice == null || handle.Choice.Question == null)
+            {
+                handle.Resolve(GetCompletedStatus());
+                return;
+            }
+
+            ExecuteChosenAnswers(game, handle, handle.Choice.Question);
+
+            //handle.Resolve(GetCompletedStatus());
         }
     }
 }

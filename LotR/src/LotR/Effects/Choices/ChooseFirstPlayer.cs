@@ -7,6 +7,7 @@ using LotR.States;
 
 namespace LotR.Effects.Choices
 {
+    /*
     public class ChooseFirstPlayer
         : ChoiceBase, IChooseFirstPlayer
     {
@@ -42,4 +43,5 @@ namespace LotR.Effects.Choices
             return (FirstPlayer != null && Players.Contains(FirstPlayer));
         }
     }
+    */
 }

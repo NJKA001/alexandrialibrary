@@ -5,7 +5,7 @@ using System.Text;
 
 using LotR.States;
 
-namespace LotR.Effects.Choices
+namespace LotR.Effects
 {
     public interface IQuestion
         : IChoiceItem

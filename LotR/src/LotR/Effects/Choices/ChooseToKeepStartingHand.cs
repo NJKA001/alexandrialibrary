@@ -8,6 +8,7 @@ using LotR.States;
 
 namespace LotR.Effects.Choices
 {
+    /*
     public class ChooseToKeepStartingHand
         : ChoiceBase, IChooseToKeepStartingHand
     {
@@ -43,4 +44,5 @@ namespace LotR.Effects.Choices
             }
         }
     }
+     */
 }
