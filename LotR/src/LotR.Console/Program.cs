@@ -808,21 +808,21 @@ namespace LotR.Console
             
         }
 
-        private static void ChooseGaladhrimsGreetingEffect(IChooseGaladhrimsGreetingEffect choice)
-        {
-            var answer = PromptForNumber(new List<string> { "Reduce 1 player's threat by 6", "Reduce each player's threat by 2" });
-            if (answer == 1)
-            {
-                var players = game.Players.ToList();
-                var playerNames = players.Select(x => string.Format("{0} ({1} threat)", x.Name, x.CurrentThreat)).ToList();
-                var playerNumber = PromptForNumber(playerNames);
-                choice.ReduceOnePlayersThreatBySix = players[(int)playerNumber - 1];
-            }
-            else if (answer == 2)
-            {
-                choice.ReduceEachPlayersThreatByTwo = true;
-            }
-        }
+        //private static void ChooseGaladhrimsGreetingEffect(IChooseGaladhrimsGreetingEffect choice)
+        //{
+        //    var answer = PromptForNumber(new List<string> { "Reduce 1 player's threat by 6", "Reduce each player's threat by 2" });
+        //    if (answer == 1)
+        //    {
+        //        var players = game.Players.ToList();
+        //        var playerNames = players.Select(x => string.Format("{0} ({1} threat)", x.Name, x.CurrentThreat)).ToList();
+        //        var playerNumber = PromptForNumber(playerNames);
+        //        choice.ReduceOnePlayersThreatBySix = players[(int)playerNumber - 1];
+        //    }
+        //    else if (answer == 2)
+        //    {
+        //        choice.ReduceEachPlayersThreatByTwo = true;
+        //    }
+        //}
 
         private static void HandleQuestion(IQuestion question)
         {

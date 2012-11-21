@@ -11,6 +11,7 @@ namespace LotR.Effects
     {
         IChoiceBuilder Question(string text);
         IChoiceBuilder Question(string text, uint minimumChosenAnswers, uint maximumChosenAnswers);
+        IChoiceBuilder Question(string text, uint minimumChosenAnswers, uint maximumChosenAnswers, IPlayer player);
 
         IChoiceBuilder Answer<TItem>(string text, TItem item);
         IChoiceBuilder Answer<TItem>(string text, TItem item, Action<IGame, IEffectHandle, TItem> executeFunction);

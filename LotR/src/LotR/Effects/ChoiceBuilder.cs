@@ -7,6 +7,20 @@ using LotR.States;
 
 namespace LotR.Effects
 {
+    public class ChoiceBuilder
+        : ChoiceBuilder<IGame>
+    {
+        public ChoiceBuilder(string text, IGame game, IPlayer player)
+            : base(text, game, player)
+        {
+        }
+
+        public ChoiceBuilder(string text, IGame game, IPlayer player, bool isOptional)
+            : base(text, game, player, isOptional)
+        {
+        }
+    }
+
     public class ChoiceBuilder<TSource>
         : IChoiceBuilder
         where TSource: class, ISource
@@ -46,6 +60,11 @@ namespace LotR.Effects
         }
 
         public IChoiceBuilder Question(string text, uint minimumChosenAnswers, uint maximumChosenAnswers)
+        {
+            return Question(text, minimumChosenAnswers, maximumChosenAnswers, this.player);
+        }
+
+        public IChoiceBuilder Question(string text, uint minimumChosenAnswers, uint maximumChosenAnswers, IPlayer player)
         {
             if (question == null)
             {

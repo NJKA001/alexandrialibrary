@@ -17,6 +17,8 @@ namespace LotR.Cards.Encounter.Locations
             : base("Great Forest Web", CardSet.Core, 77, EncounterSet.Spiders_of_Mirkwood, 2, 2, 2, 0)
         {
             AddTrait(Trait.Forest);
+
+            AddEffect(new TravelEachPlayerMustExhaustOneHero(this));
         }
 
         private class TravelEachPlayerMustExhaustOneHero
@@ -29,38 +31,11 @@ namespace LotR.Cards.Encounter.Locations
 
             public override IEffectHandle GetHandle(IGame game)
             {
-                return new EffectHandle(this, new EachPlayerChoosesReadyCharacters(source, game, 1, true));
-            }
+                var factory = new PlayersExhaustsCharactersChoiceFactory();
 
-            public override void Validate(IGame game, IEffectHandle handle)
-            {
-                var characterChoice = handle.Choice as IPlayersChooseCharacters;
-                if (characterChoice == null)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                var charactersToExhaust = new List<IExhaustableInPlay>();
-
-                foreach (var player in game.Players)
-                {
-                    var exhaustable = characterChoice.GetChosenCharacters(player.StateId).FirstOrDefault() as IExhaustableInPlay;
-                    if (exhaustable == null || exhaustable.IsExhausted)
-                    {
-                        handle.Reject();
-                        return;
-                    }
-                    else
-                    {
-                        charactersToExhaust.Add(exhaustable);
-                    }
-                }
-
-                foreach (var exhaustable in charactersToExhaust)
-                    exhaustable.Exhaust();
-
-                handle.Accept();
+                var choice = factory.GetChoice<IHeroInPlay>(game, game.FirstPlayer, game.Players, "travel to Great Forest Web", true, 1);
+                
+                return new EffectHandle(this, choice);
             }
         }
     }
