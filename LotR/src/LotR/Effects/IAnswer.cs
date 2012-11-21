@@ -11,6 +11,7 @@ namespace LotR.Effects
         : IChoiceItem
     {
         Type ItemType { get; }
+        IQuestion Parent { get; }
         IQuestion FollowUp { get; }
 
         bool IsChosen { get; set; }
@@ -19,5 +20,7 @@ namespace LotR.Effects
         T GetPrimative<T>() where T : struct;
 
         void Execute(IGame game, IEffectHandle handle);
+        void SetParent(IQuestion parent);
+        void SetFollowUp(IQuestion followUp);
     }
 }

@@ -7,8 +7,8 @@ using LotR.States;
 
 namespace LotR.Effects
 {
-    public class Answer<TSource>
-        : ChoiceItemBase<TSource>
+    public abstract class Answer<TSource>
+        : ChoiceItemBase<TSource>, IAnswer
         where TSource : class, ISource
     {
         protected Answer(string text, TSource source, object item, Type itemType, IQuestion followUp)
@@ -26,13 +26,19 @@ namespace LotR.Effects
 
         private readonly object item;
         private readonly Type itemType;
-        
+
+        private IQuestion parent;
         private IQuestion followUp;
         private bool isChosen;
 
         public Type ItemType
         {
             get { return itemType; }
+        }
+
+        public IQuestion Parent
+        {
+            get { return parent; }
         }
 
         public IQuestion FollowUp
@@ -65,7 +71,17 @@ namespace LotR.Effects
             return (T)item;
         }
 
-        public void AddFollowUp(IQuestion followUp)
+        public abstract void Execute(IGame game, IEffectHandle handle);
+
+        public void SetParent(IQuestion parent)
+        {
+            if (parent == null)
+                throw new ArgumentNullException("parent");
+
+            this.parent = parent;
+        }
+
+        public void SetFollowUp(IQuestion followUp)
         {
             if (followUp == null)
                 throw new ArgumentNullException("followUp");
@@ -75,7 +91,7 @@ namespace LotR.Effects
     }
 
     public class Answer<TSource, TItem>
-        : Answer<TSource>, IAnswer
+        : Answer<TSource>
         where TSource : class, ISource
     {
         public Answer(string text, TSource source, TItem item, Action<IGame, IEffectHandle, TItem> executeFunction)
@@ -93,8 +109,7 @@ namespace LotR.Effects
         private readonly Action<IGame, IEffectHandle, TItem> executeFunction;
         private readonly TItem typedItem;
 
-
-        public void Execute(IGame game, IEffectHandle handle)
+        public override void Execute(IGame game, IEffectHandle handle)
         {
             if (executeFunction == null)
                 return;

@@ -47,9 +47,16 @@ namespace LotR.Effects
         private readonly uint minimumChosenAnswers;
         private readonly uint maximumChosenAnswers;
 
+        private IAnswer parent;
+
         public IPlayer Player
         {
             get { return player; }
+        }
+
+        public IAnswer Parent
+        {
+            get { return parent; }
         }
 
         public IEnumerable<IAnswer> Answers
@@ -67,11 +74,20 @@ namespace LotR.Effects
             get { return maximumChosenAnswers; }
         }
 
+        public void SetParent(IAnswer parent)
+        {
+            if (parent == null)
+                throw new ArgumentNullException("parent");
+
+            this.parent = parent;
+        }
+
         public void AddAnswer(IAnswer answer)
         {
             if (answer == null)
                 throw new ArgumentNullException("answer");
 
+            answer.SetParent(this);
             this.answers.Add(answer);
         }
     }

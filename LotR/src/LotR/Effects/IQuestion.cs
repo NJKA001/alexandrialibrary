@@ -11,9 +11,11 @@ namespace LotR.Effects
         : IChoiceItem
     {
         IPlayer Player { get; }
+        IAnswer Parent { get; }
         IEnumerable<IAnswer> Answers { get; }
-
         uint MinimumChosenAnswers { get; }
         uint MaximumChosenAnswers { get; }
+
+        void AddAnswer(IAnswer answer);
     }
 }
