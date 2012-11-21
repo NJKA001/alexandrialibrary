@@ -773,42 +773,42 @@ namespace LotR.Console
         //    WriteLine("Chose {0} from your hand", choice.ChosenPlayerCard.Title);
         //}
 
-        private static void ChooseGandalfEffect(IChooseGandalfEffect choice)
-        {
-            var items = new List<string> { "draw three cards", "reduce your threat by 5" };
-            if (choice.EnemiesToChoose.Count() > 0)
-                items.Add("deal 4 damage to 1 enemy in play");
+        //private static void ChooseGandalfEffect(IChooseGandalfEffect choice)
+        //{
+        //    var items = new List<string> { "draw three cards", "reduce your threat by 5" };
+        //    if (choice.EnemiesToChoose.Count() > 0)
+        //        items.Add("deal 4 damage to 1 enemy in play");
 
-            var answer = PromptForNumber(items);
+        //    var answer = PromptForNumber(items);
 
-            switch (answer)
-            {
-                case 1:
-                    choice.DrawCards = true;
-                    return;
-                case 2:
-                    choice.ReduceYourThreat = true;
-                    return;
-                case 3:
-                default:
-                    {
-                        if (choice.EnemiesToChoose.Count() == 1)
-                        {
-                            WriteLine("Dealing 4 damage to the only enemy that is a valid target");
-                            choice.EnemyToDamage = choice.EnemiesToChoose.First();
-                        }
-                        else
-                        {
-                            var enemies = choice.EnemiesToChoose.ToList();
-                            var enemyNames = enemies.Select(x => string.Format("{0} ({1} threat, {2} attack, {3} defense, {4}/{5} hit points)", x.Title, x.Card.PrintedThreat, x.Card.PrintedAttack, x.Card.PrintedDefense, x.Card.PrintedHitPoints - x.Damage, x.Card.PrintedHitPoints)).ToList();
-                            var enemyNumber = PromptForNumber(enemyNames);
-                            choice.EnemyToDamage = enemies[(int)enemyNumber - 1];
-                        }
-                    }
-                    return;
-            }
+        //    switch (answer)
+        //    {
+        //        case 1:
+        //            choice.DrawCards = true;
+        //            return;
+        //        case 2:
+        //            choice.ReduceYourThreat = true;
+        //            return;
+        //        case 3:
+        //        default:
+        //            {
+        //                if (choice.EnemiesToChoose.Count() == 1)
+        //                {
+        //                    WriteLine("Dealing 4 damage to the only enemy that is a valid target");
+        //                    choice.EnemyToDamage = choice.EnemiesToChoose.First();
+        //                }
+        //                else
+        //                {
+        //                    var enemies = choice.EnemiesToChoose.ToList();
+        //                    var enemyNames = enemies.Select(x => string.Format("{0} ({1} threat, {2} attack, {3} defense, {4}/{5} hit points)", x.Title, x.Card.PrintedThreat, x.Card.PrintedAttack, x.Card.PrintedDefense, x.Card.PrintedHitPoints - x.Damage, x.Card.PrintedHitPoints)).ToList();
+        //                    var enemyNumber = PromptForNumber(enemyNames);
+        //                    choice.EnemyToDamage = enemies[(int)enemyNumber - 1];
+        //                }
+        //            }
+        //            return;
+        //    }
             
-        }
+        //}
 
         //private static void ChooseGaladhrimsGreetingEffect(IChooseGaladhrimsGreetingEffect choice)
         //{

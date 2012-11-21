@@ -21,7 +21,6 @@ namespace LotR.States.Areas
         }
 
         private readonly ObservableCollection<IEncounterInPlay> cardsInStagingArea = new ObservableCollection<IEncounterInPlay>();
-        private readonly ObservableCollection<IEncounterCard> examinedEncounterCards = new ObservableCollection<IEncounterCard>();
 
         public IDeck<IEncounterCard> EncounterDeck
         {
@@ -29,7 +28,7 @@ namespace LotR.States.Areas
             private set;
         }
 
-        public IEncounterCard RevealedEncounterCard
+        public IEncounterInPlay RevealedEncounterCard
         {
             get;
             private set;
@@ -38,39 +37,6 @@ namespace LotR.States.Areas
         public IEnumerable<IEncounterInPlay> CardsInStagingArea
         {
             get { return cardsInStagingArea; }
-        }
-
-        public IEnumerable<IEncounterCard> ExaminedEncounterCards
-        {
-            get { return examinedEncounterCards; }
-        }
-
-        public void AddExaminedEncounterCards(IEnumerable<IEncounterCard> cards)
-        {
-            if (cards == null)
-                throw new ArgumentNullException("cards");
-
-            foreach (var card in cards)
-            {
-                if (examinedEncounterCards.Contains(card))
-                    continue;
-
-                examinedEncounterCards.Add(card);
-            }
-        }
-
-        public void RemoveExaminedEncounterCards(IEnumerable<IEncounterCard> cards)
-        {
-            if (cards == null)
-                throw new ArgumentNullException("cards");
-
-            foreach (var card in cards)
-            {
-                if (!examinedEncounterCards.Contains(card))
-                    continue;
-
-                examinedEncounterCards.Remove(card);
-            }
         }
 
         public void ChangeEncounterDeck(IDeck<IEncounterCard> encounterDeck)
@@ -100,6 +66,11 @@ namespace LotR.States.Areas
             if (effect == null)
                 throw new ArgumentNullException("effect");
 
+        }
+
+        public void RemoveRevealedCard()
+        {
+            RevealedEncounterCard = null;
         }
 
         public void AddToStagingArea(IEncounterCard card)

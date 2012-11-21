@@ -41,62 +41,65 @@ namespace LotR.Cards.Player.Allies
                 state.AddEffect(this);
             }
 
+            private IEnumerable<IEnemyInPlay> GetEnemiesInPlay(IGame game)
+            {
+                var enemies = game.StagingArea.CardsInStagingArea.OfType<IEnemyInPlay>().ToList();
+
+                foreach (var player in game.Players)
+                {
+                    enemies.AddRange(player.EngagedEnemies);
+                }
+
+                return enemies;
+            }
+
+            private void DealFourDamageToEnemyInPlay(IGame game, IEffectHandle handle, IPlayer player, IEnemyInPlay enemy)
+            {
+                enemy.Damage += 4;
+
+                handle.Resolve(string.Format("{0} chose to have '{1}' deal 4 damage to '{2}'", player.Name, CardSource.Title, enemy.Title));
+            }
+
+            private void ReduceYourThreatByFive(IGame game, IEffectHandle handle, IPlayer player)
+            {
+                player.DecreaseThreat(5);
+
+                handle.Resolve(string.Format("{0} chose to reduce their threat by 5", player.Name));
+            }
+
+            private void DrawThreeCards(IGame game, IEffectHandle handle, IPlayer player)
+            {
+                player.DrawCards(3);
+
+                handle.Resolve(string.Format("{0} chose to draw 3 cards", player.Name));
+            }
+
             public override IEffectHandle GetHandle(IGame game)
             {
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return new EffectHandle(this);
+                    throw new InvalidOperationException("Could not determine the controll of Gandalf after he entered play");
 
-                var enemiesToChoose = game.StagingArea.CardsInStagingArea.OfType<IEnemyInPlay>().ToList();
+                var enemies = GetEnemiesInPlay(game);
 
-                foreach (var player in game.Players)
+                var builder =
+                    new ChoiceBuilder(string.Format("Choose which effect you want to trigger on '{0}' after he enters play", CardSource.Title), game, controller)
+                        .Question(string.Format("{0}, which effect do you want to trigger on '{1}'?", controller.Name, CardSource.Title))
+                            .Answer("Draw 3 cards", 1, (source, handle, item) => DrawThreeCards(game, handle, controller));
+
+                if (enemies.Count() > 0)
                 {
-                    foreach (var enemy in player.EngagedEnemies)
-                        enemiesToChoose.Add(enemy);
+                    builder.Answer("Deal 4 damage to 1 enemy in play", 2)
+                        .Question("Which enemy do you want to deal 4 damage to?")
+                            .LastAnswers(enemies, (item) => string.Format("'{0}' ({1} damage of {2} hit points)", item.Title, item.Damage, item.Card.PrintedHitPoints), (source, handle, enemy) => DealFourDamageToEnemyInPlay(game, handle, controller, enemy));
+
                 }
 
-                var choice = new ChooseGandalfEffect(CardSource, controller, enemiesToChoose);
+                builder.LastAnswer("Reduce your threat by 5", 3, (source, handle, item) => ReduceYourThreatByFive(game, handle, controller));
+
+                var choice = builder.ToChoice();
+
                 return new EffectHandle(this, choice);
-            }
-
-            public override void Trigger(IGame game, IEffectHandle handle)
-            {
-                var controller = game.GetController(CardSource.Id);
-                if (controller == null)
-                {
-                    handle.Cancel(GetCancelledString());
-                    return;
-                }
-
-                var chooseEffect = handle.Choice as IChooseGandalfEffect;
-                if (chooseEffect == null)
-                {
-                    handle.Cancel(GetCancelledString());
-                    return;
-                }
-
-                if (chooseEffect.EnemyToDamage != null)
-                {
-                    chooseEffect.EnemyToDamage.Damage += 4;
-                    handle.Resolve(string.Format("dealt 4 damge to {0}", chooseEffect.EnemyToDamage.Title));
-                    return;
-                }
-                else if (chooseEffect.DrawCards)
-                {
-                    controller.DrawCards(3);
-                    handle.Resolve(string.Format("{0} drew three cards", controller.Name));
-                    return;
-                }
-                else if (chooseEffect.ReduceYourThreat)
-                {
-                    controller.DecreaseThreat(5);
-                    handle.Resolve(string.Format("{0} reduced their threat by 5", controller.Name));
-                    return;
-                }
-
-                game.AddEffect(new AtEndOfRoundDiscardGandalfFromPlay(CardSource));
-
-                handle.Resolve(GetCompletedStatus());
             }
         }
 

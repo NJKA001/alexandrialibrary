@@ -35,6 +35,19 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
+            private void PutEncounterCardBackOnTopOfDeck(IGame game, IEffectHandle handle, IPlayer player, IEncounterCard encounterCard)
+            {
+                handle.Resolve(string.Format("{0} chose to put '{1}' back on the top of the encounter deck", player.Name, encounterCard.Title));
+            }
+
+            private void PutEncounterCardOnBottomOfDeck(IGame game, IEffectHandle handle, IPlayer player, IEncounterCard encounterCard)
+            {
+                game.StagingArea.EncounterDeck.RemoveFromDeck(encounterCard);
+                game.StagingArea.EncounterDeck.PutOnBottom(new List<IEncounterCard> { encounterCard });
+                
+                handle.Resolve(string.Format("{0} chose to put '{1}' on the bottom of the encounter deck", player.Name, encounterCard.Title));
+            }
+
             public override IEffectHandle GetHandle(IGame game)
             {
                 var controller = game.GetController(CardSource.Id);
@@ -45,8 +58,21 @@ namespace LotR.Cards.Player.Heroes
                 if (exhaustable == null)
                     return base.GetHandle(game);
 
+                var player = exhaustable.Card.Owner;
+
+                var encounterCard = game.StagingArea.EncounterDeck.GetFromTop(1).FirstOrDefault();
+                if (encounterCard == null)
+                    return base.GetHandle(game);
+
+                var builder =
+                    new ChoiceBuilder("Look at the top of the encounter deck. You may move that card to the bottom of the deck", game, player)
+                        .Question(string.Format("{0}, do you want to put '{1}' on the bottom of the encounter deck?", player.Name, encounterCard.Title))
+                            .Answer(string.Format("Yes, put '{0}' on the bottom of the encounter deck", encounterCard.Title), encounterCard, (source, handle, card) => PutEncounterCardOnBottomOfDeck(game, handle, player, card))
+                            .LastAnswer(string.Format("No, put '{0}' back on the top of the encounter deck", encounterCard.Title), encounterCard, (source, handle, card) => PutEncounterCardBackOnTopOfDeck(game, handle, player, card));
+
                 var cost = new ExhaustSelf(exhaustable);
-                return new EffectHandle(this, null, cost);
+
+                return new EffectHandle(this, builder.ToChoice(), cost);
             }
 
             public override void Validate(IGame game, IEffectHandle handle)
@@ -60,53 +86,7 @@ namespace LotR.Cards.Player.Heroes
 
                 exhaustPayment.Exhaustable.Exhaust();
 
-                var topCard = game.StagingArea.EncounterDeck.GetFromTop(1).FirstOrDefault();
-                if (topCard == null)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                game.StagingArea.AddExaminedEncounterCards(new List<IEncounterCard> { topCard });
-
                 handle.Accept();
-            }
-
-            public override void Trigger(IGame game, IEffectHandle handle)
-            {
-                var topOfDeckChoice = handle.Choice as IChooseTopOrBottomOfDeck;
-                if (topOfDeckChoice == null)
-                {
-                    handle.Cancel(GetCancelledString());
-                    return;
-                }
-
-                if (game.StagingArea.ExaminedEncounterCards.Count() != 1)
-                {
-                    handle.Cancel(GetCancelledString());
-                    return;
-                }
-
-                var topCard = game.StagingArea.ExaminedEncounterCards.FirstOrDefault() as IEncounterCard;
-                if (topCard == null)
-                {
-                    handle.Cancel(GetCancelledString());
-                    return;
-                }
-
-                game.StagingArea.RemoveExaminedEncounterCards(new List<IEncounterCard> { topCard });
-
-                if (topOfDeckChoice.TopOfDeck)
-                {
-                    game.StagingArea.EncounterDeck.PutOnTop(new List<IEncounterCard> { topCard });
-                }
-                else
-                {
-                    game.StagingArea.EncounterDeck.PutOnBottom(new List<IEncounterCard> { topCard });
-
-                }
-
-                handle.Resolve(GetCompletedStatus());
             }
         }
     }

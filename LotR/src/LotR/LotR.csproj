@@ -92,21 +92,14 @@
     <Compile Include="Effects\ChoiceBuilder.cs" />
     <Compile Include="Effects\ChoiceItemBase.cs" />
     <Compile Include="Effects\Choices\ChooseCharacterWithTrait.cs" />
-    <Compile Include="Effects\Choices\ChooseGandalfEffect.cs" />
-    <Compile Include="Effects\Choices\ChooseHero.cs" />
-    <Compile Include="Effects\Choices\ChoosePlayerToChooseHero.cs" />
     <Compile Include="Effects\PlayersExhaustCharactersChoiceFactory.cs" />
     <Compile Include="Effects\IAnswer.cs" />
     <Compile Include="Effects\IChoiceItem.cs" />
-    <Compile Include="Effects\Choices\IChooseFirstPlayer.cs" />
-    <Compile Include="Effects\Choices\IChooseGaladhrimsGreetingEffect.cs" />
-    <Compile Include="Effects\Choices\IChooseGandalfEffect.cs" />
     <Compile Include="Effects\Choices\IPlayersChooseCards.cs" />
     <Compile Include="Effects\IQuestion.cs" />
     <Compile Include="Effects\Choices\PlayersChooseCards.cs" />
     <Compile Include="Effects\Choices\PlayersChooseCharacters.cs" />
     <Compile Include="Effects\Choices\IChooseCharacterWithTrait.cs" />
-    <Compile Include="Effects\Choices\IChoosePlayerToChooseHero.cs" />
     <Compile Include="Effects\Choices\IPlayersChooseCharacters.cs" />
     <Compile Include="Effects\Question.cs" />
     <Compile Include="Effects\Costs\IPayResources.cs" />
@@ -233,17 +226,9 @@
     <Compile Include="Effects\ISource.cs" />
     <Compile Include="States\CardInPlay.cs" />
     <Compile Include="Effects\ChoiceBase.cs" />
-    <Compile Include="Effects\Choices\ChooseCharacter.cs" />
-    <Compile Include="Effects\Choices\ChoosePlayer.cs" />
-    <Compile Include="Effects\Choices\IChooseAlly.cs" />
     <Compile Include="Effects\Choices\IChooseCardsFromDeckSearch.cs" />
     <Compile Include="Effects\Choices\IChooseCharacter.cs" />
-    <Compile Include="Effects\Choices\IChooseEnemy.cs" />
-    <Compile Include="Effects\Choices\IChooseHero.cs" />
-    <Compile Include="Effects\Choices\IChoosePlayer.cs" />
-    <Compile Include="Effects\Choices\IChooseTopOrBottomOfDeck.cs" />
     <Compile Include="Cards\Player\CostlyCardBase.cs" />
-    <Compile Include="Effects\Choices\ChooseAlly.cs" />
     <Compile Include="Effects\Costs\CostBase.cs" />
     <Compile Include="Effects\Costs\DiscardCardsFromHand.cs" />
     <Compile Include="Effects\Costs\ExhaustSelf.cs" />
@@ -558,6 +543,7 @@
     <Compile Include="States\Setup\GameSetup.cs" />
     <Compile Include="States\StateBase.cs" />
     <Compile Include="States\ThreateningInPlay.cs" />
+    <Compile Include="States\TreacheryInPlay.cs" />
     <Compile Include="States\TreasureInPlay.cs" />
     <Compile Include="States\UnclaimedObjectiveInPlay.cs" />
   </ItemGroup>

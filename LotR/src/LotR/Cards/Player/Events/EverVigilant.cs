@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards.Player.Allies;
 using LotR.Effects;
 using LotR.Effects.Choices;
 using LotR.Effects.Payments;
@@ -27,31 +28,54 @@ namespace LotR.Cards.Player.Events
             {
             }
 
+            private IEnumerable<IExhaustableInPlay> GetExhausedAlliesInPlay(IGame game)
+            {
+                var allies = new List<IExhaustableInPlay>();
+
+                foreach (var player in game.Players)
+                {
+                    allies.AddRange(player.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card is IAllyCard && x.IsExhausted));
+                }
+
+                return allies;
+            }
+
+            private void ReadyExhaustedAlly(IGame game, IEffectHandle handle, IPlayer player, IExhaustableInPlay ally)
+            {
+                var controller = game.GetController(ally.Card.Id);
+
+                ally.Ready();
+
+                if (player == controller)
+                {
+                    handle.Resolve(string.Format("{0} chose to ready '{1}'", player.Name, ally.Title));
+                }
+                else
+                {
+                    handle.Resolve(string.Format("{0} chose to ready '{1}' controlled by {2}", player.Name, ally.Title, controller.Name));
+                }
+            }
+
             public override IEffectHandle GetHandle(IGame game)
             {
                 var card = source as IPlayerCard;
                 if (card == null)
+                    throw new InvalidOperationException();
+
+                var player = card.Owner;
+                if (player == null)
+                    throw new InvalidOperationException();
+
+                var allies = GetExhausedAlliesInPlay(game);
+                if (allies.Count() == 0)
                     return new EffectHandle(this);
 
-                return new EffectHandle(this, new ChooseAlly(source, card.Owner));
-            }
+                var builder =
+                    new ChoiceBuilder("Choose an ally to ready", game, player)
+                        .Question("Which exhausted ally will you ready?")
+                            .LastAnswers(allies, item => string.Format("'{0}' controlled by {1}", item.Title, game.GetController(item.Card.Id).Name), (src, handle, ally) => ReadyExhaustedAlly(src, handle, player, ally));
 
-            public override void Trigger(IGame game, IEffectHandle handle)
-            {
-                var allyChoice = handle.Choice as IChooseAlly;
-                if (allyChoice == null || allyChoice.Ally == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                var exhaustable = allyChoice.Ally as IExhaustableInPlay;
-                if (exhaustable == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                if (!exhaustable.IsExhausted)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                exhaustable.Ready();
-
-                handle.Resolve(GetCompletedStatus());
+                return new EffectHandle(this, builder.ToChoice());
             }
         }
     }

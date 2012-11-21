@@ -32,6 +32,20 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
+            private void PlayerDrawsTwoCards(IGame game, IEffectHandle handle, IPlayer controller, IPlayer player)
+            {
+                player.DrawCards(2);
+
+                if (controller == player)
+                {
+                    handle.Resolve(string.Format("{0} chose to draw 2 cards", controller.Name));
+                }
+                else
+                {
+                    handle.Resolve(string.Format("{0} chose to have {1} draw 2 cards", controller.Name, player.Name));
+                }
+            }
+
             public override IEffectHandle GetHandle(IGame game)
             {
                 var limit = new Limit(PlayerScope.Controller, TimeScope.Round, 1);
@@ -40,7 +54,12 @@ namespace LotR.Cards.Player.Heroes
                 if (controller == null)
                     return new EffectHandle(this, null, null, limit);
 
-                var choice = new ChoosePlayer(source, controller, game.Players.ToList());
+                var builder =
+                    new ChoiceBuilder("Choose a player to draw 2 cards", game, controller)
+                        .Question("Which player should draw 2 cards?")
+                            .LastAnswers(game.Players, item => item.Name, (source, handle, player) => PlayerDrawsTwoCards(game, handle, controller, player));
+
+                var choice = builder.ToChoice();
 
                 var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
                 if (exhaustable == null)
@@ -69,21 +88,6 @@ namespace LotR.Cards.Player.Heroes
                 exhaustPayment.Exhaustable.Exhaust();
 
                 handle.Accept();
-            }
-
-            public override void Trigger(IGame game, IEffectHandle handle)
-            {
-                var playerChoice = handle.Choice as IChoosePlayer;
-                if (playerChoice == null)
-                {
-                    handle.Cancel(GetCancelledString());
-                    return;
-                }
-
-                var cards = playerChoice.ChosenPlayer.Deck.GetFromTop(2);
-                playerChoice.ChosenPlayer.Hand.AddCards(cards);
-
-                handle.Resolve(GetCompletedStatus());
             }
         }
     }

@@ -48,7 +48,7 @@ namespace LotR.Cards.Player.Heroes
                 if (revealed == null)
                     return;
 
-                if (!(revealed is IEnemyCard))
+                if (!(revealed is IEnemyInPlay))
                     return;
 
                 if (!questPhase.IsCommittedToQuest(source.Id))
@@ -59,17 +59,29 @@ namespace LotR.Cards.Player.Heroes
 
             public override void Trigger(IGame game, IEffectHandle handle)
             {
-                var enemyChoice = handle.Choice as IChooseEnemy;
-                if (enemyChoice == null || enemyChoice.Enemy == null)
-                    { handle.Cancel(GetCancelledString()); return; }
+                var questPhase = game.CurrentPhase as IQuestPhase;
+                if (questPhase == null || !questPhase.IsCommittedToQuest(CardSource.Id))
+                {
+                    handle.Cancel(string.Format("This ability only applies while '{0}' is committed to the quest", CardSource.Title));
+                    return;
+                }
 
-                var damageable = enemyChoice.Enemy as IDamagableInPlay;
-                if (damageable == null)
-                    { handle.Cancel(GetCancelledString()); return; }
+                if (game.StagingArea.RevealedEncounterCard == null)
+                {
+                    handle.Cancel(string.Format("There is no revealed encounter card for '{0}' to deal damage to", CardSource.Title));
+                    return;
+                }
 
-                damageable.Damage += 1;
+                var enemy = game.StagingArea.RevealedEncounterCard as IEnemyInPlay;
+                if (enemy == null)
+                {
+                    handle.Cancel(string.Format("The revealed encounter card, '{0}' is not an enemy", game.StagingArea.RevealedEncounterCard.Title));
+                    return;
+                }
 
-                handle.Resolve(GetCompletedStatus());
+                enemy.Damage += 1;
+
+                handle.Resolve(string.Format("'{0}' dealt 1 damage to '{1}' as it was revealed from the encounter deck", CardSource.Title, enemy.Title));
             }
         }
     }

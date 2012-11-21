@@ -38,55 +38,56 @@ namespace LotR.Cards.Encounter.Treacheries
             {
             }
 
-            public override IEffectHandle GetHandle(IGame game)
+            private IEnumerable<IHeroInPlay> GetAttachableHeros(IGame game, IPlayer player, IAttachableCard attachable)
             {
-                var highestThreat = -1;
-                var mostThreateningPlayers = new List<IPlayer>();
-                foreach (var player in game.Players)
-                {
-                    if (player.CurrentThreat > highestThreat)
-                    {
-                        mostThreateningPlayers.Clear();
-                        mostThreateningPlayers.Add(player);
-                        highestThreat = player.CurrentThreat;
-                    }
-                    else if (player.CurrentThreat == highestThreat)
-                    {
-                        mostThreateningPlayers.Add(player);
-                    }
-                }
-
-                var mostThreateningPlayer = mostThreateningPlayers.FirstOrDefault();
-                if (mostThreateningPlayer == null)
-                    return new EffectHandle(this);
-
-                IChoice choice = null;
-
-                if (mostThreateningPlayers.Count() == 1)
-                    choice = new ChooseHero(source, mostThreateningPlayer, mostThreateningPlayer.CardsInPlay.OfType<IHeroInPlay>().ToList());
-                else
-                    choice = new ChoosePlayerToChooseHero(source, game.FirstPlayer, mostThreateningPlayers);
-
-                return new EffectHandle(this, choice);
+                return player.CardsInPlay.OfType<IHeroInPlay>().Where(x => x.Card.IsValidAttachment(attachable) && attachable.CanBeAttachedTo(game, x.Card)).ToList();
             }
 
-            public override void Trigger(IGame game, IEffectHandle handle)
+            private void AttachCaughtInAWebToHero(IGame game, IEffectHandle handle, IPlayer player, IAttachableCard attachable, IHeroInPlay hero)
             {
-                var heroChoice = handle.Choice as IChooseHero;
-                if (heroChoice == null || heroChoice.ChosenHero == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                var attachmentHost = heroChoice.ChosenHero as IAttachmentHostInPlay;
-                if (attachmentHost == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                var attachable = this.source as IAttachableCard;
-                if (attachable == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
+                var attachmentHost = hero as IAttachmentHostInPlay;
+                
                 attachmentHost.AddAttachment(new AttachableInPlay(game, attachable, attachmentHost));
 
-                handle.Resolve(GetCompletedStatus());
+                handle.Resolve(string.Format("{0} chose to attach '{1}' to '{2}'", player.Name, CardSource.Title, hero.Title));
+            }
+
+            public override IEffectHandle GetHandle(IGame game)
+            {
+                var mostThreateningPlayers = game.Players.Where(x => x.CurrentThreat == game.Players.Max(y => y.CurrentThreat)).ToList();
+
+                var attachable = CardSource as IAttachableCard;
+
+                if (mostThreateningPlayers.Count == 0)
+                {
+                    return new EffectHandle(this);
+                }
+                else if (mostThreateningPlayers.Count == 1)
+                {
+                    var player = mostThreateningPlayers.First();
+
+                    var builder =
+                        new ChoiceBuilder(string.Format("{0} has the highest threat and must choose a hero to attach '{0}' to", player.Name, CardSource.Title), game, player)
+                            .Question(string.Format("{0}, which hero do you want to attach '{1}' to?", player.Name, CardSource.Title))
+                                .LastAnswers(GetAttachableHeros(game, player, attachable), item => item.Title, (source, handle, hero) => AttachCaughtInAWebToHero(game, handle, player, attachable, hero));
+
+                    return new EffectHandle(this, builder.ToChoice());
+                }
+                else
+                {
+                    var builder =
+                        new ChoiceBuilder(string.Format("Multiple players are tied for the highest threat, The first player, {0}, must choose which of these players will attach '{1}' to one of their heroes.", game.FirstPlayer.Name, CardSource.Title), game, game.FirstPlayer)
+                            .Question(string.Format("Which player will attach '{0}' to one of their heroes?", CardSource.Title));
+
+                    foreach (var player in mostThreateningPlayers)
+                    {
+                        builder.Answer(player.Name, player)
+                            .Question(string.Format("{0}, which hero do you want to attach '{1}' to?", player.Name, CardSource.Title))
+                                .LastAnswers(GetAttachableHeros(game, player, attachable), item => item.Title, (source, handle, hero) => AttachCaughtInAWebToHero(game, handle, player, attachable, hero));
+                    }
+
+                    return new EffectHandle(this, builder.ToChoice());
+                }
             }
         }
 

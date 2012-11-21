@@ -33,20 +33,35 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
+            private void HealOneDamageOnCharacter(IGame game, IEffectHandle handle, IPlayer player, ICharacterInPlay character)
+            {
+                character.Damage -= 1;
+
+                handle.Resolve(string.Format("{0} chose to heal 1 damage on '{1}'", player.Name, character.Title));
+            }
+
             public override IEffectHandle GetHandle(IGame game)
             {
                 var limit = new Limit(PlayerScope.None, TimeScope.Round, 1);
 
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return new EffectHandle(this, null, null, limit);
+                    throw new InvalidOperationException("Could not determine controller of Glorfindel");
 
-                var charactersToChooseFrom = game.GetAllCardsInPlay<ICharacterInPlay>().Where(x => x.Damage > 0).ToList();
-                var choice = new ChooseCharacter(source, controller, charactersToChooseFrom);
+                var characters = game.GetAllCardsInPlay<ICharacterInPlay>().Where(x => x.Damage > 0).ToList();
+                if (characters.Count == 0)
+                    return new EffectHandle(this);
+
+                var builder =
+                    new ChoiceBuilder("Choose a wounded character in play to heal", game, controller)
+                        .Question("Which character do you want to heal 1 damage on?")
+                            .LastAnswers(characters, item => string.Format("{0} ({1} damage of {2} hit points)", item.Title, item.Damage, item.Card.PrintedHitPoints), (source, handle, character)  => HealOneDamageOnCharacter(game, handle, controller, character));
+                
+                var choice = builder.ToChoice();
 
                 var resourceful = controller.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
                 if (resourceful == null)
-                    return new EffectHandle(this, choice, null, limit);
+                    throw new InvalidOperationException("Could not find Glorfindel in play");
 
                 var cost = new PayResourcesFrom(source, resourceful, 1, false);
 
@@ -91,27 +106,6 @@ namespace LotR.Cards.Player.Heroes
                 character.Resources -= 1;
 
                 handle.Accept();
-            }
-
-            public override void Trigger(IGame game, IEffectHandle handle)
-            {
-                var characterChoice = handle.Choice as IChooseCharacter;
-                if (characterChoice == null || characterChoice.ChosenCharacter == null)
-                {
-                    handle.Cancel(GetCancelledString());
-                    return;
-                }
-
-                var damageable = characterChoice.ChosenCharacter as IDamagableInPlay;
-                if (damageable == null || damageable.Damage == 0)
-                {
-                    handle.Cancel(GetCancelledString());
-                    return;
-                }
-
-                damageable.Damage -= 1;
-
-                handle.Resolve(GetCompletedStatus());
             }
         }
     }

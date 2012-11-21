@@ -48,6 +48,13 @@ namespace LotR.Cards.Player.Heroes
                 game.AddEffect(this);
             }
 
+            private void AddOneResourceToQuestingHero(IGame game, IEffectHandle handle, IPlayer player, IHeroInPlay hero)
+            {
+                hero.Resources += 1;
+
+                handle.Resolve(string.Format("{0} chose to add one resource to the resource pool of '{1}'", player.Name, hero.Title));
+            }
+
             public override IEffectHandle GetHandle(IGame game)
             {
                 var questPhase = game.CurrentPhase as IQuestPhase;
@@ -56,21 +63,20 @@ namespace LotR.Cards.Player.Heroes
 
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
+                    throw new InvalidOperationException("Could not find Theodred in play");
+
+                var questingHeroes = questPhase.GetAllCharactersCommittedToQuest().OfType<IHeroInPlay>().ToList();
+                if (questingHeroes.Count == 0)
                     return new EffectHandle(this);
 
-                var choice = new ChooseCharacter(CardSource, controller, questPhase.GetAllCharactersCommittedToQuest().OfType<ICharacterInPlay>().Where(x => x.Card is IHeroCard).ToList());
+                var builder =
+                    new ChoiceBuilder("Chose a questing hero to add 1 resource to", game, controller)
+                        .Question(string.Format("{0}, which questing hero do you want to add 1 resource to?", controller.Name))
+                            .LastAnswers(questingHeroes, item => item.Title, (source, handle, hero) => AddOneResourceToQuestingHero(game, handle, controller, hero));
+
+                var choice = builder.ToChoice();
+
                 return new EffectHandle(this, choice);
-            }
-
-            public override void Trigger(IGame game, IEffectHandle handle)
-            {
-                var chooseCharacter = handle.Choice as IChooseCharacter;
-                if (chooseCharacter == null || chooseCharacter.ChosenCharacter == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                chooseCharacter.ChosenCharacter.Resources += 1;
-
-                handle.Resolve(GetCompletedStatus());
             }
         }
     }

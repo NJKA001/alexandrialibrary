@@ -84,13 +84,23 @@ namespace LotR.Cards.Player.Heroes
             public override void Trigger(IGame game, IEffectHandle handle)
             {
                 if (game.StagingArea.RevealedEncounterCard == null)
-                    { handle.Cancel(GetCancelledString()); return; }
+                {
+                    handle.Cancel(string.Format("There is no revealed encounter card for '{0}' to cancel", CardSource.Title));
+                    return;
+                }
+
+                if (!(game.StagingArea.RevealedEncounterCard.Card is ITreacheryCard) || !game.StagingArea.RevealedEncounterCard.Card.HasEffect<IWhenRevealedEffect>())
+                {
+                    handle.Cancel(string.Format("The revealed encounter card, '{0}', is not an Treachery with a 'When Revealed' effect for '{1}' to cancel", game.StagingArea.RevealedEncounterCard.Card.Title, CardSource.Title));
+                    return;
+                }
+
+                var revealedTitle = game.StagingArea.RevealedEncounterCard.Title;
 
                 game.StagingArea.CancelRevealedCard(this);
-                game.StagingArea.EncounterDeck.Discard(new List<IEncounterCard> { game.StagingArea.RevealedEncounterCard });
                 game.StagingArea.RevealEncounterCards(1);
 
-                handle.Resolve(GetCompletedStatus());
+                handle.Resolve(string.Format("'{0}' cancelled to the 'When Revealed' effect of '{1}'", CardSource.Title, revealedTitle));
             }
         }
     }
