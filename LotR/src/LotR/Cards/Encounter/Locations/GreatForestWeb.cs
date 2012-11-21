@@ -31,7 +31,7 @@ namespace LotR.Cards.Encounter.Locations
 
             public override IEffectHandle GetHandle(IGame game)
             {
-                var factory = new PlayersExhaustsCharactersChoiceFactory();
+                var factory = new PlayersExhaustCharactersChoiceFactory();
 
                 var choice = factory.GetChoice<IHeroInPlay>(game, game.FirstPlayer, game.Players, "travel to Great Forest Web", true, 1);
                 

@@ -7,7 +7,7 @@ using LotR.States;
 
 namespace LotR.Effects
 {
-    public class PlayersExhaustsCharactersChoiceFactory
+    public class PlayersExhaustCharactersChoiceFactory
     {
         #region Inner Classes
 
@@ -48,7 +48,7 @@ namespace LotR.Effects
 
         #endregion
 
-        public PlayersExhaustsCharactersChoiceFactory()
+        public PlayersExhaustCharactersChoiceFactory()
         {
         }
 
@@ -106,7 +106,7 @@ namespace LotR.Effects
         public IChoice GetChoice<T>(IGame game, IPlayer chosingPlayer, IEnumerable<IPlayer> players, string description, bool isOptional, uint minimumChosen)
             where T : ICardInPlay
         {
-            var readyHeroes = GetReadyCharacters<T>(players);
+            var readyCharacters = GetReadyCharacters<T>(players);
 
             var playerNames = GetPlayerNamesList(game, players);
 
@@ -129,29 +129,41 @@ namespace LotR.Effects
                 builder.Question(string.Format("This effect is not optional. {0} must exhaust {1} they control", playerNames, type));
             }
 
-            if (!isOptional || (isOptional && readyHeroes.All(x => x.Value.Count > 0)))
+            if (!isOptional || (isOptional && readyCharacters.All(x => x.Value.Count >= minimumChosen)))
             {
+                var totalToExhaust = 0;
                 if (isOptional)
                 {
                     builder.Answer(string.Format("Yes, each player will exhaust {0} they control", type), 1);
+
+                    var numberOfPlayers = readyCharacters.Where(x => x.Value.Count >= minimumChosen).Count();
+                    totalToExhaust = (int)(numberOfPlayers * minimumChosen);
                 }
                 else
                 {
                     builder.Answer(string.Format("Each player must exhaust {0} they control, if able", type), 1);
+
+                    foreach (var count in readyCharacters.Values.Select(x => x.Count))
+                    {
+                        if (count >= minimumChosen)
+                            totalToExhaust += (int)minimumChosen;
+                        else
+                            totalToExhaust += count;
+                    }
                 }
 
-                var numberOfPlayers = readyHeroes.Where(x => x.Value.Count >= minimumChosen).Count();
-                var totalExhausted = (int)(numberOfPlayers * minimumChosen);
-
-                var choiceStatus = new ExhaustChoiceStatus(totalExhausted);
+                var choiceStatus = new ExhaustChoiceStatus(totalToExhaust);
 
                 foreach (var player in players)
                 {
-                    var items = readyHeroes[player.StateId];
-                    if (items.Count < minimumChosen)
+                    var items = readyCharacters[player.StateId];
+                    if (items.Count == 0)
                         continue;
 
-                    builder.Question(string.Format("{0}, which character do you want to exhaust?", player.Name), minimumChosen, minimumChosen)
+                    var min = items.Count >= minimumChosen ? minimumChosen : (uint)items.Count;
+                    var max = min;
+
+                    builder.Question(string.Format("{0}, which character do you want to exhaust?", player.Name), min, max)
                         .Answers(items, (item) => item.Title, (source, handle, character) => ExhaustReadyCharacter(handle, character, player, choiceStatus));
                 }
 

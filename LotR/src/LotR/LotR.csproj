@@ -97,7 +97,7 @@
     <Compile Include="Effects\Choices\ChooseGandalfEffect.cs" />
     <Compile Include="Effects\Choices\ChooseHero.cs" />
     <Compile Include="Effects\Choices\ChoosePlayerToChooseHero.cs" />
-    <Compile Include="Effects\PlayersExhaustsCharactersChoiceFactory.cs" />
+    <Compile Include="Effects\PlayersExhaustCharactersChoiceFactory.cs" />
     <Compile Include="Effects\IAnswer.cs" />
     <Compile Include="Effects\IChoiceItem.cs" />
     <Compile Include="Effects\Choices\IChooseAttachmentHost.cs" />

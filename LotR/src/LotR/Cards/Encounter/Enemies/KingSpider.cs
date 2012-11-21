@@ -47,7 +47,7 @@ namespace LotR.Cards.Encounter.Enemies
 
             public override IEffectHandle GetHandle(IGame game)
             {
-                var factory = new PlayersExhaustsCharactersChoiceFactory();
+                var factory = new PlayersExhaustCharactersChoiceFactory();
                 
                 var choice = factory.GetChoice<ICharacterInPlay>(game, game.FirstPlayer, game.Players, "when King Spider is revealed", false, 1);
 
@@ -85,7 +85,7 @@ namespace LotR.Cards.Encounter.Enemies
 
                 uint minimumChosen = enemyAttack.IsUndefended ? (uint)2 : (uint)1;
 
-                var factory = new PlayersExhaustsCharactersChoiceFactory();
+                var factory = new PlayersExhaustCharactersChoiceFactory();
 
                 var choice = factory.GetChoice<ICharacterInPlay>(game, enemyAttack.DefendingPlayer, new List<IPlayer> { enemyAttack.DefendingPlayer }, "when King Spider shadow effect resolves", false, minimumChosen);
                     
