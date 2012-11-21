@@ -40,14 +40,93 @@ namespace LotR.Effects.Phases.Any
             get { return costlyCard; }
         }
 
+        private IEnumerable<IAttachmentHostInPlay> GetAttachmentHosts(IGame game, IAttachableCard attachment)
+        {
+            var hosts = new List<IAttachmentHostInPlay>();
+
+            foreach (var player in game.Players)
+            {
+                hosts.AddRange(player.CardsInPlay.OfType<IAttachmentHostInPlay>().Where(x => x.Card.IsValidAttachment(attachment) && attachment.CanBeAttachedTo(game, x.Card)));
+            }
+
+            hosts.AddRange(game.StagingArea.CardsInStagingArea.OfType<IAttachmentHostInPlay>().Where(x => x.Card.IsValidAttachment(attachment) && attachment.CanBeAttachedTo(game, x.Card)));
+
+            if (game.QuestArea.ActiveLocation != null && game.QuestArea.ActiveLocation.Card.IsValidAttachment(attachment) && attachment.CanBeAttachedTo(game, game.QuestArea.ActiveLocation.Card))
+            {
+                hosts.Add(game.QuestArea.ActiveLocation as IAttachmentHostInPlay);
+            }
+
+            return hosts;
+        }
+
+        private void AttachCardToHost(IGame game, IEffectHandle handle, IPlayer player, IAttachableCard attachable, IAttachmentHostInPlay host)
+        {
+            if (attachable is IAttachmentCard)
+            {
+                var attachment = attachable as IAttachmentCard;
+                var attachmentInPlay = new AttachmentInPlay(game, attachment, host);
+                player.AddCardInPlay(attachmentInPlay);
+                player.Hand.RemoveCards(new List<IPlayerCard> { attachment });
+                handle.Resolve(string.Format("{0} attached '{1}' to '{2}'", player.Name, attachment.Title, host.Title));
+            }
+            else if (attachable is ITreasureCard)
+            {
+                var treasure = attachable as ITreasureCard;
+                var treasureInPlay = new TreasureInPlay(game, treasure, host);
+                player.AddCardInPlay(treasureInPlay);
+                player.Hand.RemoveCards(new List<IPlayerCard> { treasure });
+                handle.Resolve(string.Format("{0} attached '{1}' to '{2}'", player.Name, treasure.Title, host.Title));
+            }
+        }
+
+        private void PlayAllyFromYourHand(IGame game, IEffectHandle handle, IPlayer player, IAllyCard allyCard)
+        {
+            var allyInPlay = new AllyInPlay(game, allyCard);
+            costlyCard.Owner.AddCardInPlay(allyInPlay);
+            costlyCard.Owner.Hand.RemoveCards(new List<IPlayerCard> { allyCard });
+            handle.Resolve(string.Format("{0} played '{1}' from their hand", player.Name, allyCard.Title));
+        }
+
+        private void PlayEventFromYourHand(IGame game, IEffectHandle handle, IPlayer player, IEventCard eventCard)
+        {
+            var eventEffect = eventCard.Text.Effects.FirstOrDefault();
+            if (eventEffect == null)
+            {
+                handle.Cancel(string.Format("{0} does not have a valid effect to trigger", eventCard.Title));
+                return;
+            }
+
+            var eventHandle = eventEffect.GetHandle(game);
+            
+            game.AddEffect(eventEffect);
+            game.TriggerEffect(eventHandle);
+            player.Hand.RemoveCards(new List<IPlayerCard> { eventCard });
+            handle.Resolve(string.Format("{0} played '{1}' from their hand", player.Name, eventCard.Title));
+        }
+
         public override IEffectHandle GetHandle(IGame game)
         {
             var cost = costlyCard.GetResourceCost(game);
             IChoice choice = null;
 
-            if (costlyCard.PrintedCardType == CardType.Attachment && costlyCard.PrintedCardType == CardType.Treasure)
+            if (costlyCard.PrintedCardType == CardType.Ally)
             {
-                choice = new ChooseAttachmentHost(costlyCard, costlyCard.Owner, costlyCard as IAttachableCard);
+                var allyCard = costlyCard as IAllyCard;
+
+                var builder =
+                    new ChoiceBuilder(string.Format("Play {0} from your hand", costlyCard.Title), game, costlyCard.Owner)
+                        .Question("You must play this card from your hand")
+                            .LastAnswer("Play ally from your hand", allyCard, (source, handle, card) => PlayAllyFromYourHand(game, handle, costlyCard.Owner, card));
+            }
+            if (costlyCard.PrintedCardType == CardType.Attachment || costlyCard.PrintedCardType == CardType.Treasure)
+            {
+                var attachable = costlyCard as IAttachableCard;
+
+                var builder =
+                    new ChoiceBuilder(string.Format("Choose the card to attach '{0}' to", attachable.Title), game, costlyCard.Owner)
+                        .Question(string.Format("Which card will '{0}' be attached to?", attachable.Title))
+                            .LastAnswers(GetAttachmentHosts(game, attachable), (item) => item.Title, (source, handle, host) => AttachCardToHost(game, handle, costlyCard.Owner, attachable, host));
+                
                 return new EffectHandle(this, choice, cost);
             }
             else if (costlyCard.PrintedCardType == CardType.Event)
@@ -56,11 +135,14 @@ namespace LotR.Effects.Phases.Any
                 if (effect == null)
                     return new EffectHandle(this, cost);
 
-                //var effectHandle = effect.GetHandle(game);
-                //return effectHandle;
-                //choice = effectHandle.Choice;
+                var eventCard = costlyCard as IEventCard;
 
-                return new EffectHandle(this, cost);
+                var builder =
+                    new ChoiceBuilder(string.Format("Play {0} from your hand", costlyCard.Title), game, costlyCard.Owner)
+                        .Question("You must play this card from your hand")
+                            .LastAnswer("Play event from your hand", eventCard, (source, handle, card) => PlayEventFromYourHand(game, handle, eventCard.Owner, card));
+
+                return new EffectHandle(this, choice, cost);
             }
 
             return new EffectHandle(this, cost);
@@ -105,59 +187,59 @@ namespace LotR.Effects.Phases.Any
             handle.Accept();
         }
 
+        /*
         public override void Trigger(IGame game, IEffectHandle handle)
         {
             switch (costlyCard.PrintedCardType)
             {
                 case CardType.Ally:
                     {
-                        var ally = new AllyInPlay(game, costlyCard as IAllyCard);
-                        costlyCard.Owner.AddCardInPlay(ally);
-                        costlyCard.Owner.Hand.RemoveCards(new List<IPlayerCard> { costlyCard });
+                        //var ally = new AllyInPlay(game, costlyCard as IAllyCard);
+                        //costlyCard.Owner.AddCardInPlay(ally);
+                        //costlyCard.Owner.Hand.RemoveCards(new List<IPlayerCard> { costlyCard });
                     }
                     break;
                 case CardType.Attachment:
                     {
-                        var hostChoice = handle.Choice as IChooseAttachmentHost;
-                        if (hostChoice == null || hostChoice.ChosenAttachmentHost == null)
-                        {
-                            handle.Cancel(GetCancelledString());
-                            return;
-                        }
+                        //var hostChoice = handle.Choice as IChooseAttachmentHost;
+                        //if (hostChoice == null || hostChoice.ChosenAttachmentHost == null)
+                        //{
+                        //    handle.Cancel(GetCancelledString());
+                        //    return;
+                        //}
 
-                        var attachment = new AttachmentInPlay(game, costlyCard as IAttachmentCard, hostChoice.ChosenAttachmentHost);
-                        costlyCard.Owner.AddCardInPlay(attachment);
-                        costlyCard.Owner.Hand.RemoveCards(new List<IPlayerCard> { costlyCard });
+                        //var attachment = new AttachmentInPlay(game, costlyCard as IAttachmentCard, hostChoice.ChosenAttachmentHost);
+                        //costlyCard.Owner.AddCardInPlay(attachment);
+                        //costlyCard.Owner.Hand.RemoveCards(new List<IPlayerCard> { costlyCard });
                     }
                     break;
                 case CardType.Event:
                     {
-                        var costlyEffect = costlyCard.Text.Effects.FirstOrDefault();
-                        if (costlyEffect == null)
-                        {
-                            handle.Cancel(GetCancelledString());
-                            return;
-                        }
+                        //var costlyEffect = costlyCard.Text.Effects.FirstOrDefault();
+                        //if (costlyEffect == null)
+                        //{
+                        //    handle.Cancel(GetCancelledString());
+                        //    return;
+                        //}
 
-                        var costlyHandle = costlyEffect.GetHandle(game);
-                        //game.Prepare(costlyHandle);
-                        game.AddEffect(costlyEffect);
-                        game.TriggerEffect(costlyHandle);
-                        costlyCard.Owner.Hand.RemoveCards(new List<IPlayerCard> { costlyCard });
+                        //var costlyHandle = costlyEffect.GetHandle(game);
+                        //game.AddEffect(costlyEffect);
+                        //game.TriggerEffect(costlyHandle);
+                        //costlyCard.Owner.Hand.RemoveCards(new List<IPlayerCard> { costlyCard });
                     }
                     break;
                 case CardType.Treasure:
                     {
-                        var hostChoice = handle.Choice as IChooseAttachmentHost;
-                        if (hostChoice == null || hostChoice.ChosenAttachmentHost == null)
-                        {
-                            handle.Cancel(GetCancelledString());
-                            return;
-                        }
+                        //var hostChoice = handle.Choice as IChooseAttachmentHost;
+                        //if (hostChoice == null || hostChoice.ChosenAttachmentHost == null)
+                        //{
+                        //    handle.Cancel(GetCancelledString());
+                        //    return;
+                        //}
 
-                        var treasure = new TreasureInPlay(game, costlyCard as ITreasureCard, hostChoice.ChosenAttachmentHost);
-                        costlyCard.Owner.AddCardInPlay(treasure);
-                        costlyCard.Owner.Hand.RemoveCards(new List<IPlayerCard> { costlyCard });
+                        //var treasure = new TreasureInPlay(game, costlyCard as ITreasureCard, hostChoice.ChosenAttachmentHost);
+                        //costlyCard.Owner.AddCardInPlay(treasure);
+                        //costlyCard.Owner.Hand.RemoveCards(new List<IPlayerCard> { costlyCard });
                     }
                     break;
                 default:
@@ -166,5 +248,6 @@ namespace LotR.Effects.Phases.Any
 
             handle.Resolve(GetCompletedStatus());
         }
+        */
     }
 }

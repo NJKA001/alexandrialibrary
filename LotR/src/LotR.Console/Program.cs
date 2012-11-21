@@ -586,10 +586,10 @@ namespace LotR.Console
             return payment;
         }
 
-        private static IEffect ChooseEffectOnCardToPlay(IPlayer player, IChoosePlayerAction choice, IPlayerCard card)
-        {
-            return null;
-        }
+        //private static IEffect ChooseEffectOnCardToPlay(IPlayer player, IChoosePlayerAction choice, IPlayerCard card)
+        //{
+        //    return null;
+        //}
 
         /*
         private static IList<IPlayerCard> GetPlayableCardsInHand(IPlayer player)
@@ -635,79 +635,80 @@ namespace LotR.Console
         }
         */
 
-        private static void ChooseCardToPlay(IPlayer player, IChoosePlayerAction choice, IList<IPlayerCard> cards)
-        {
-            if (cards.Count == 0)
-                return;
+        //private static void ChooseCardToPlay(IPlayer player, IChoosePlayerAction choice, IList<IPlayerCard> cards)
+        //{
+        //    if (cards.Count == 0)
+        //        return;
 
-            WriteLine("Choose a card to play from your hand");
+        //    WriteLine("Choose a card to play from your hand");
 
-            var cardNames = cards.Select(x => string.Format("{0} ({1})", x.Title, x.PrintedCardType)).ToList();
-            cardNames.Add("Pass on playing a card from your hand");
+        //    var cardNames = cards.Select(x => string.Format("{0} ({1})", x.Title, x.PrintedCardType)).ToList();
+        //    cardNames.Add("Pass on playing a card from your hand");
 
-            var cardNumber = PromptForNumber(cardNames);
+        //    var cardNumber = PromptForNumber(cardNames);
 
-            if (cardNumber == cardNames.Count)
-            {
-                WriteLine("Passing on playing an action");
-            }
-            else
-            {
-                var costlyCard = cards[(int)cardNumber - 1] as ICostlyCard;
-                if (costlyCard == null)
-                    return;
+        //    if (cardNumber == cardNames.Count)
+        //    {
+        //        WriteLine("Passing on playing an action");
+        //    }
+        //    else
+        //    {
+        //        var costlyCard = cards[(int)cardNumber - 1] as ICostlyCard;
+        //        if (costlyCard == null)
+        //            return;
 
-                choice.CardToPlay = costlyCard;
-            }
-        }
+        //        choice.CardToPlay = costlyCard;
+        //    }
+        //}
 
-        private static void ChooseCardEffectToTrigger(IPlayer player, IChoosePlayerAction choice, IList<ICardEffect> effects)
-        {
-            if (effects.Count == 0)
-                return;
+        //private static void ChooseCardEffectToTrigger(IPlayer player, IChoosePlayerAction choice, IList<ICardEffect> effects)
+        //{
+        //    if (effects.Count == 0)
+        //        return;
 
-            WriteLine("Choose an effect to trigger");
+        //    WriteLine("Choose an effect to trigger");
 
-            var effectNames = effects.Select(x => string.Format("{0} ({1} - {2})", x, x.CardSource.Title, x.CardSource.PrintedCardType)).ToList();
-            effectNames.Add("Pass on triggering an effect");
+        //    var effectNames = effects.Select(x => string.Format("{0} ({1} - {2})", x, x.CardSource.Title, x.CardSource.PrintedCardType)).ToList();
+        //    effectNames.Add("Pass on triggering an effect");
 
-            var effectNumber = PromptForNumber(effectNames);
+        //    var effectNumber = PromptForNumber(effectNames);
 
-            if (effectNumber == effectNames.Count)
-            {
-            }
-            else
-            {
-                var cardEffect = effects[(int)effectNumber - 1] as ICardEffect;
-                if (cardEffect == null)
-                    return;
+        //    if (effectNumber == effectNames.Count)
+        //    {
+        //    }
+        //    else
+        //    {
+        //        var cardEffect = effects[(int)effectNumber - 1] as ICardEffect;
+        //        if (cardEffect == null)
+        //            return;
 
-                choice.CardEffectToTrigger = cardEffect;
-            }
-        }
+        //        choice.CardEffectToTrigger = cardEffect;
+        //    }
+        //}
 
-        private static string GetAttachmentHostName(IAttachmentHostInPlay host)
-        {
-            if (host.Card is IPlayerCard)
-            {
-                var playerCard = host.Card as IPlayerCard;
-                return string.Format("{0} ({1}) [controlled by {2}]", playerCard.Title, playerCard.PrintedCardType, playerCard.Owner.Name);
-            }
-            else if (host.Card is IEncounterCard)
-            {
-                var encounterCard = host.Card as IEncounterCard;
-                var desc = "not in staging area";
-                if (game.StagingArea.CardsInStagingArea.Any(x => x.Card.Id == host.Card.Id))
-                    desc = "in staging area";
-                else if (game.QuestArea.ActiveLocation != null && game.QuestArea.ActiveLocation.Card.Id == host.Card.Id)
-                    desc = "active location";
+        //private static string GetAttachmentHostName(IAttachmentHostInPlay host)
+        //{
+        //    if (host.Card is IPlayerCard)
+        //    {
+        //        var playerCard = host.Card as IPlayerCard;
+        //        return string.Format("{0} ({1}) [controlled by {2}]", playerCard.Title, playerCard.PrintedCardType, playerCard.Owner.Name);
+        //    }
+        //    else if (host.Card is IEncounterCard)
+        //    {
+        //        var encounterCard = host.Card as IEncounterCard;
+        //        var desc = "not in staging area";
+        //        if (game.StagingArea.CardsInStagingArea.Any(x => x.Card.Id == host.Card.Id))
+        //            desc = "in staging area";
+        //        else if (game.QuestArea.ActiveLocation != null && game.QuestArea.ActiveLocation.Card.Id == host.Card.Id)
+        //            desc = "active location";
 
-                return string.Format("{0} ({1}) [{2}]", encounterCard.Title, encounterCard.PrintedCardType, desc);
-            }
-            else
-                return string.Format("{0} ({1}) [not in play]", host.Card.Title, host.Card.PrintedCardType);
-        }
+        //        return string.Format("{0} ({1}) [{2}]", encounterCard.Title, encounterCard.PrintedCardType, desc);
+        //    }
+        //    else
+        //        return string.Format("{0} ({1}) [not in play]", host.Card.Title, host.Card.PrintedCardType);
+        //}
 
+        /*
         private static void ChooseAttachmentHost(IChooseAttachmentHost choice)
         {
             var hosts = game.GetAllCardsInPlay<IAttachmentHostInPlay>().Where(x => x.Card.IsValidAttachment(choice.Attachment) && choice.Attachment.CanBeAttachedTo(game, x.Card)).ToList();
@@ -735,41 +736,42 @@ namespace LotR.Console
             choice.ChosenAttachmentHost = hosts[(int)number - 1];
             WriteLine("{0} will be attached to {1}", choice.Attachment.Title, choice.ChosenAttachmentHost.Title);
         }
+        */
 
-        private static void ChooseCardInHand(IChooseCardInHand choice)
-        {
-            if (choice.PlayerCardsToChooseFrom.Count() == 0)
-            {
-                WriteLine("There are no valid cards in your hand to choose from");
-                return;
-            }
+        //private static void ChooseCardInHand(IChooseCardInHand choice)
+        //{
+        //    if (choice.PlayerCardsToChooseFrom.Count() == 0)
+        //    {
+        //        WriteLine("There are no valid cards in your hand to choose from");
+        //        return;
+        //    }
 
-            if (choice.PlayerCardsToChooseFrom.Count() == 1)
-            {
-                choice.ChosenPlayerCard = choice.PlayerCardsToChooseFrom.First();
-                WriteLine("Chose {0} from your hand", choice.ChosenPlayerCard.Title);
-                return;
-            }
+        //    if (choice.PlayerCardsToChooseFrom.Count() == 1)
+        //    {
+        //        choice.ChosenPlayerCard = choice.PlayerCardsToChooseFrom.First();
+        //        WriteLine("Chose {0} from your hand", choice.ChosenPlayerCard.Title);
+        //        return;
+        //    }
 
-            var cards = choice.PlayerCardsToChooseFrom.ToList();
-            var cardNames = choice.PlayerCardsToChooseFrom.Select(x => string.Format("{0} ({1})", x.Title, x.PrintedCardType)).ToList();
+        //    var cards = choice.PlayerCardsToChooseFrom.ToList();
+        //    var cardNames = choice.PlayerCardsToChooseFrom.Select(x => string.Format("{0} ({1})", x.Title, x.PrintedCardType)).ToList();
 
-            if (choice.IsOptional)
-            {
-                cardNames.Add("Cancel choosing a card in your hand");
-            }
+        //    if (choice.IsOptional)
+        //    {
+        //        cardNames.Add("Cancel choosing a card in your hand");
+        //    }
 
-            var number = PromptForNumber(cardNames);
+        //    var number = PromptForNumber(cardNames);
 
-            if (choice.IsOptional && number == cardNames.Count)
-            {
-                WriteLine("Cancelled choosing a card in your hand");
-                return;
-            }
+        //    if (choice.IsOptional && number == cardNames.Count)
+        //    {
+        //        WriteLine("Cancelled choosing a card in your hand");
+        //        return;
+        //    }
 
-            choice.ChosenPlayerCard = cards[(int)number - 1];
-            WriteLine("Chose {0} from your hand", choice.ChosenPlayerCard.Title);
-        }
+        //    choice.ChosenPlayerCard = cards[(int)number - 1];
+        //    WriteLine("Chose {0} from your hand", choice.ChosenPlayerCard.Title);
+        //}
 
         private static void ChooseGandalfEffect(IChooseGandalfEffect choice)
         {

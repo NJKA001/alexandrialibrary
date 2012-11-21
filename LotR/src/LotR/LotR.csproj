@@ -91,8 +91,6 @@
     <Compile Include="Effects\Choice.cs" />
     <Compile Include="Effects\ChoiceBuilder.cs" />
     <Compile Include="Effects\ChoiceItemBase.cs" />
-    <Compile Include="Effects\Choices\ChooseAttachmentHost.cs" />
-    <Compile Include="Effects\Choices\ChooseCardInHand.cs" />
     <Compile Include="Effects\Choices\ChooseCharacterWithTrait.cs" />
     <Compile Include="Effects\Choices\ChooseGandalfEffect.cs" />
     <Compile Include="Effects\Choices\ChooseHero.cs" />
@@ -100,13 +98,9 @@
     <Compile Include="Effects\PlayersExhaustCharactersChoiceFactory.cs" />
     <Compile Include="Effects\IAnswer.cs" />
     <Compile Include="Effects\IChoiceItem.cs" />
-    <Compile Include="Effects\Choices\IChooseAttachmentHost.cs" />
-    <Compile Include="Effects\Choices\IChooseCardInHand.cs" />
     <Compile Include="Effects\Choices\IChooseFirstPlayer.cs" />
     <Compile Include="Effects\Choices\IChooseGaladhrimsGreetingEffect.cs" />
     <Compile Include="Effects\Choices\IChooseGandalfEffect.cs" />
-    <Compile Include="Effects\Choices\IChoosePlayerAction.cs" />
-    <Compile Include="Effects\Choices\IChooseToKeepStartingHand.cs" />
     <Compile Include="Effects\Choices\IPlayersChooseCards.cs" />
     <Compile Include="Effects\IQuestion.cs" />
     <Compile Include="Effects\Choices\PlayersChooseCards.cs" />

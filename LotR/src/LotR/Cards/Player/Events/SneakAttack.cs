@@ -28,6 +28,15 @@ namespace LotR.Cards.Player.Events
             {
             }
 
+            private void PutAllyIntoPlayFromYourHand(IGame game, IEffectHandle handle, IPlayer player, IAllyCard allyCard)
+            {
+                player.Hand.RemoveCards(new List<IPlayerCard> { allyCard });
+                player.AddCardInPlay(new AllyInPlay(game, allyCard));
+                game.AddEffect(new AtEndOfPhaseReturnAllyToYourHand(CardSource, allyCard.Id));
+
+                handle.Resolve(GetCompletedStatus());
+            }
+
             public override IEffectHandle GetHandle(IGame game)
             {
                 var playerCard = CardSource as IPlayerCard;
@@ -38,11 +47,15 @@ namespace LotR.Cards.Player.Events
                 if (owner == null)
                     throw new InvalidOperationException();
 
-                var alliesInHand = owner.Hand.Cards.OfType<IAllyCard>().ToList();
+                var builder =
+                    new ChoiceBuilder("Choose 1 ally card in your hand", game, owner)
+                        .Question("Which ally do you want to put into play from your hand?")
+                            .LastAnswers(owner.Hand.Cards.OfType<IAllyCard>().ToList(), (item) => item.Title, (source, handle, allyCard) => PutAllyIntoPlayFromYourHand(game, handle, owner, allyCard));
 
-                return new EffectHandle(this, new ChooseCardInHand<IAllyCard>("Choose 1 ally card in your hand", source, owner, alliesInHand));
+                return new EffectHandle(this, builder.ToChoice());
             }
 
+            /*
             public override void Trigger(IGame game, IEffectHandle handle)
             {
                 var chooseAlly = handle.Choice as IChooseCardInHand<IAllyCard>;
@@ -66,6 +79,7 @@ namespace LotR.Cards.Player.Events
 
                 handle.Resolve(GetCompletedStatus());
             }
+            */
         }
 
         private class AtEndOfPhaseReturnAllyToYourHand
