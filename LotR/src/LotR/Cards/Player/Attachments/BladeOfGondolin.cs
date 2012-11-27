@@ -6,7 +6,7 @@ using System.Text;
 using LotR.Cards.Encounter.Enemies;
 using LotR.Cards.Player.Heroes;
 using LotR.Effects;
-using LotR.Effects.Choices;
+
 using LotR.Effects.Payments;
 using LotR.Effects.Phases;
 using LotR.Effects.Phases.Any;

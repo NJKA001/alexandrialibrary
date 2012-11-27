@@ -6,7 +6,7 @@ using System.Text;
 using LotR.Effects;
 using LotR.Effects.Modifiers;
 using LotR.Effects.Payments;
-using LotR.Effects.Choices;
+
 using LotR.States;
 using LotR.States.Phases.Combat;
 using LotR.States.Phases.Quest;

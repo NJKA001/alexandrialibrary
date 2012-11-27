@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Effects;
-using LotR.Effects.Choices;
+
 using LotR.Effects.Modifiers;
 using LotR.Effects.Payments;
 using LotR.States;
@@ -31,6 +31,12 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
+            private void DealTwoDamageToChosenCharacter(IGame game, IEffectHandle handle, ICharacterInPlay character)
+            {
+                character.Damage += 2;
+                handle.Resolve(string.Format("'{0}' dealt 2 damage to '{1}'", CardSource.Title, character.Title));
+            }
+
             public override IEffectHandle GetHandle(IGame game)
             {
                 var questPhase = game.CurrentPhase as IQuestPhase;
@@ -40,38 +46,16 @@ namespace LotR.Cards.Encounter.Enemies
                 if (game.FirstPlayer == null)
                     return new EffectHandle(this);
 
-                var questingCharacters = questPhase.GetCharactersCommitedToTheQuest(game.FirstPlayer.StateId);
-                if (questingCharacters.Count() == 0)
+                var questingCharacters = questPhase.GetAllCharactersCommittedToQuest().OfType<ICharacterInPlay>().ToList();
+                if (questingCharacters.Count == 0)
                     return new EffectHandle(this);
 
-                var availableCharacters = new Dictionary<Guid, IList<IWillpowerfulCard>> { { game.FirstPlayer.StateId, questingCharacters.Select(x => x.Card).ToList() } };
+                var builder =
+                    new ChoiceBuilder("The first player chooses 1 character currently committed to a quest", game, game.FirstPlayer)
+                        .Question(string.Format("Which character will have 2 damage dealt to it by '{0}'?", CardSource.Title))
+                            .Answers(questingCharacters, (item) => string.Format("{0} ({1} damage of {2} hit points)", item.Title, item.Damage, item.Card.PrintedHitPoints), (source, handle, character) => DealTwoDamageToChosenCharacter(source, handle, character));
 
-                var choice = new PlayersChooseCards<IWillpowerfulCard>("The first player chooses 1 character currently commited to a quest", source, new List<IPlayer> { game.FirstPlayer }, 1, availableCharacters);
-
-                return new EffectHandle(this, choice);
-            }
-
-            public override void Trigger(IGame game, IEffectHandle handle)
-            {
-                var characterChoice = handle.Choice as IPlayersChooseCards<IWillpowerfulCard>;
-                if (characterChoice == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                var questPhase = game.CurrentPhase as IQuestPhase;
-                if (questPhase == null || game.FirstPlayer == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                var characterToRemoveFromQuest = characterChoice.GetChosenCards(game.FirstPlayer.StateId).FirstOrDefault();
-                if (characterToRemoveFromQuest == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                var characterInPlay = game.GetAllCardsInPlay<IWillpowerfulInPlay>().Where(x => x.Card.Id == characterToRemoveFromQuest.Id).FirstOrDefault();
-                if (characterInPlay == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                questPhase.RemoveCharacterFromQuest(characterInPlay);
-
-                handle.Resolve(GetCompletedStatus());
+                return new EffectHandle(this, builder.ToChoice());
             }
         }
 

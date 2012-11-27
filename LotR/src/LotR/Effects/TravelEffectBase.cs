@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
-using LotR.Effects.Choices;
+
 using LotR.Effects.Payments;
 using LotR.States;
 using LotR.States.Areas;

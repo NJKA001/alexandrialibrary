@@ -5,7 +5,7 @@ using System.Text;
 
 using LotR.Cards.Player;
 using LotR.Effects;
-using LotR.Effects.Choices;
+
 using LotR.Effects.Payments;
 using LotR.Effects.Phases.Travel;
 using LotR.States;
@@ -37,43 +37,25 @@ namespace LotR.Cards.Encounter.Locations
                 state.Game.AddEffect(this);
             }
 
-            public override IEffectHandle GetHandle(IGame game)
+            private void ReadyCharacterInPlay(IGame game, IEffectHandle handle, IPlayer player, IExhaustableInPlay character)
             {
-                var exhaustedCharacters = new Dictionary<Guid, IList<ICharacterCard>>() { { game.FirstPlayer.StateId, new List<ICharacterCard>() } };
-
-                foreach (var character in game.FirstPlayer.CardsInPlay.OfType<ICharacterInPlay>())
-                {
-                    var exhaustable = character as IExhaustableInPlay;
-                    if (exhaustable == null || !exhaustable.IsExhausted)
-                        continue;
-
-                    exhaustedCharacters[game.FirstPlayer.StateId].Add(character.Card);
-                }
-
-                if (exhaustedCharacters[game.FirstPlayer.StateId].Count == 0)
-                    return new EffectHandle(this);
-
-                var choice = new PlayersChooseCards<ICharacterCard>("The first player may choose and ready 1 character he controls", source, new List<IPlayer> { game.FirstPlayer }, 1, exhaustedCharacters);
-                return new EffectHandle(this, choice);
+                character.Ready();
+                handle.Resolve(string.Format("{0} chose to ready '{1}'", player.Name, character.Title));
             }
 
-            public override void Trigger(IGame game, IEffectHandle handle)
+            public override IEffectHandle GetHandle(IGame game)
             {
-                var chooseCard = handle.Choice as IPlayersChooseCards<ICharacterCard>;
-                if (chooseCard == null)
-                    { handle.Cancel(GetCancelledString()); return; }
+                var exhaustedCharacters = game.FirstPlayer.CardsInPlay.OfType<ICharacterInPlay>().OfType<IExhaustableInPlay>().Where(x => x.IsExhausted).ToList();
 
-                var character = chooseCard.GetChosenCards(game.FirstPlayer.StateId).FirstOrDefault();
-                if (character == null)
-                    { handle.Cancel(GetCancelledString()); return; }
+                if (exhaustedCharacters.Count == 0)
+                    return base.GetHandle(game);
 
-                var exhaustable = game.GetCardInPlay<IExhaustableInPlay>(character.Id);
-                if (exhaustable == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                exhaustable.Ready();
-
-                handle.Resolve(GetCompletedStatus());
+                var builder =
+                    new ChoiceBuilder("The first player may choose and ready 1 character he controls", game, game.FirstPlayer)
+                        .Question(string.Format("{0}, which character would you like to ready?"))
+                            .Answers(exhaustedCharacters, (item) => item.Title, (source, handle, character) => ReadyCharacterInPlay(source, handle, game.FirstPlayer, character));
+                
+                return new EffectHandle(this, builder.ToChoice());
             }
         }
     }

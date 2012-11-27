@@ -6,7 +6,7 @@ using System.Text;
 using LotR.Cards.Encounter.Objectives;
 using LotR.Cards.Player;
 using LotR.Effects;
-using LotR.Effects.Choices;
+
 using LotR.Effects.Modifiers;
 using LotR.Effects.Payments;
 using LotR.Effects.Phases.Combat;
@@ -70,59 +70,49 @@ namespace LotR.Cards.Encounter.Enemies
             {
             }
 
+            private void DiscardChosenAttachment(IGame game, IEffectHandle handle, IPlayer player, IAttachableInPlay attachment)
+            {
+                if (attachment.AttachedTo == null)
+                {
+                    handle.Cancel(string.Format("Could not discard '{1}', it was not attached to anything", attachment.Title));
+                    return;
+                }
+
+                attachment.AttachedTo.RemoveAttachment(attachment);
+
+                if (attachment.Card is IObjectiveCard)
+                {
+                    game.StagingArea.EncounterDeck.Discard(new List<IEncounterCard> { attachment.Card as IObjectiveCard });
+                }
+                else if (attachment.Card is IPlayerCard)
+                {
+                    player.Deck.Discard(new List<IPlayerCard> { attachment.Card as IPlayerCard });
+                }
+                else
+                {
+                    handle.Cancel(string.Format("'{0}' could not be discarded because it is not a valid attachment controlled by {1}", attachment.Title, player.Name));
+                    return;
+                }
+
+                handle.Resolve(string.Format("{0} chose to have '{1}' discarded by the shadow effect of '{2}'", player.Name, attachment.Title, CardSource.Title));
+            }
+
             public override IEffectHandle GetHandle(IGame game)
             {
                 var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
                 if (enemyAttack == null)
-                    return null;
+                    return base.GetHandle(game);
 
-                var attachments = new Dictionary<Guid, IList<IAttachableCard>>() { { enemyAttack.DefendingPlayer.StateId, new List<IAttachableCard>() } };
+                var attachments = enemyAttack.DefendingPlayer.CardsInPlay.OfType<IAttachableInPlay>().Where(x => (x.Card is IPlayerCard || x.Card is IObjectiveCard) && (x.AttachedTo != null)).ToList();
+                if (attachments.Count == 0)
+                    return base.GetHandle(game);
 
-                foreach (var attachable in enemyAttack.DefendingPlayer.CardsInPlay.OfType<IAttachableInPlay>())
-                {
-
-                    if ((!(attachable.Card is IPlayerCard)) && (!(attachable.Card is IObjectiveCard)))
-                        continue;
-
-                    attachments[enemyAttack.DefendingPlayer.StateId].Add(attachable.Card);
-                }
-
-                if (attachments[enemyAttack.DefendingPlayer.StateId].Count == 0)
-                    return null;
-
-                var choice = new PlayersChooseCards<IAttachableCard>("Defending player must choose 1 attachment he controls", source, new List<IPlayer> { enemyAttack.DefendingPlayer }, 1, attachments);
-                return new EffectHandle(this, choice);
-            }
-
-            public override void Trigger(IGame game, IEffectHandle handle)
-            {
-                var enemyAttack = game.CurrentPhase.GetEnemyAttacks().Where(x => x.Enemy.Card.Id == source.Id).FirstOrDefault();
-                if (enemyAttack == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                var attachmentChoice = handle.Choice as IPlayersChooseCards<IAttachableCard>;
-                if (attachmentChoice == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                var attachmentToDiscard = attachmentChoice.GetChosenCards(enemyAttack.DefendingPlayer.StateId).FirstOrDefault();
-                if (attachmentToDiscard == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                var inPlay = enemyAttack.DefendingPlayer.CardsInPlay.OfType<IAttachableInPlay>().Where(x => x.Card.Id == attachmentToDiscard.Id).FirstOrDefault();
-                if (inPlay == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                enemyAttack.DefendingPlayer.RemoveCardInPlay(inPlay);
-                if (attachmentToDiscard is IPlayerCard)
-                {
-                    enemyAttack.DefendingPlayer.Deck.Discard(new List<IPlayerCard> { attachmentToDiscard as IPlayerCard });
-                }
-                else if (attachmentToDiscard is IObjectiveCard)
-                {
-                    game.StagingArea.EncounterDeck.Discard(new List<IEncounterCard> { attachmentToDiscard as IEncounterCard });
-                }
-
-                handle.Resolve(GetCompletedStatus());
+                var builder =
+                    new ChoiceBuilder("Defending player must choose 1 attachment he controls", game, enemyAttack.DefendingPlayer)
+                        .Question(string.Format("{0}, which attachment will be discarded?", enemyAttack.DefendingPlayer))
+                            .Answers(attachments, item => string.Format("{0} (attached to {1}", item.AttachedTo.Title), (source, handle, attachment) => DiscardChosenAttachment(game, handle, enemyAttack.DefendingPlayer, attachment));
+                
+                return new EffectHandle(this, builder.ToChoice());
             }
         }
     }

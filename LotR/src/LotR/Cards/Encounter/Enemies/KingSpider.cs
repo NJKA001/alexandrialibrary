@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Effects;
-using LotR.Effects.Choices;
+
 using LotR.Effects.Payments;
 using LotR.States;
 using LotR.States.Areas;
@@ -25,18 +25,6 @@ namespace LotR.Cards.Encounter.Enemies
             AddEffect(new ShadowDefendingPlayerExhaustsOneReadyCharacter(this));
         }
 
-        private static void ExhaustReadyCharacters(IPlayer player, IPlayersChooseCharacters choice)
-        {
-            foreach (var character in choice.GetChosenCharacters(player.StateId))
-            {
-                var exhaustable = player.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == character.Card.Id).FirstOrDefault();
-                if (exhaustable == null || exhaustable.IsExhausted)
-                    continue;
-
-                exhaustable.Exhaust();
-            }
-        }
-
         private class WhenRevealedEachPlayerExhaustsOneReadyCharacter
             : WhenRevealedEffectBase
         {
@@ -52,20 +40,6 @@ namespace LotR.Cards.Encounter.Enemies
                 var choice = factory.GetChoice<ICharacterInPlay>(game, game.FirstPlayer, game.Players, "when King Spider is revealed", false, 1);
 
                 return new EffectHandle(this, choice);
-            }
-
-            public override void Trigger(IGame game, IEffectHandle handle)
-            {
-                var characterChoice = handle.Choice as IPlayersChooseCharacters;
-                if (characterChoice == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                foreach (var player in characterChoice.Players)
-                {
-                    ExhaustReadyCharacters(player, characterChoice);
-                }
-
-                handle.Resolve(GetCompletedStatus());
             }
         }
 
@@ -88,24 +62,8 @@ namespace LotR.Cards.Encounter.Enemies
                 var factory = new PlayersExhaustCharactersChoiceFactory();
 
                 var choice = factory.GetChoice<ICharacterInPlay>(game, enemyAttack.DefendingPlayer, new List<IPlayer> { enemyAttack.DefendingPlayer }, "when King Spider shadow effect resolves", false, minimumChosen);
-                    
-                //new EachPlayerChoosesReadyCharacters(source, enemyAttack.DefendingPlayer, numberOfCharacters);
+
                 return new EffectHandle(this, choice);
-            }
-
-            public override void Trigger(IGame game, IEffectHandle handle)
-            {
-                var characterChoice = handle.Choice as IPlayersChooseCharacters;
-                if (characterChoice == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                var player = characterChoice.Players.FirstOrDefault();
-                if (player == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                ExhaustReadyCharacters(player, characterChoice);
-
-                handle.Resolve(GetCompletedStatus());
             }
         }
     }

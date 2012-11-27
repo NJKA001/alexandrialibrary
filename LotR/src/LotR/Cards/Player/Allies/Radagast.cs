@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Effects;
-using LotR.Effects.Choices;
+
 using LotR.Effects.Costs;
 using LotR.Effects.Payments;
 using LotR.Effects.Phases.Any;
@@ -29,7 +29,7 @@ namespace LotR.Cards.Player.Allies
             : PassiveCardEffectBase, IDuringCheckForResourceMatch
         {
             public CanPayResourcesForCreatures(Radagast source)
-                : base("Resources on Radagast can be used to pay for Creature cards played from your hand.", source)
+                : base("Radagast collects 1 resource each resource phase. These resources can be used to pay for Creature cards played from your hand.", source)
             {
             }
 
@@ -44,6 +44,7 @@ namespace LotR.Cards.Player.Allies
                 if (state.CostlyCard.PrintedTraits.Contains(Trait.Creature))
                 {
                     state.IsResourceMatch = true;
+                    return;
                 }
             }
         }
@@ -56,20 +57,45 @@ namespace LotR.Cards.Player.Allies
             {
             }
 
+            private void HealCreatureInPlay(IGame game, IEffectHandle handle, ICharacterInPlay creature)
+            {
+                var payFrom = handle.Cost as IPayResourcesFrom;
+                if (payFrom == null)
+                {
+                    handle.Cancel("Could not heal a Creature, resource payment is invalid");
+                    return;
+                }
+
+                if (payFrom.NumberOfResources == 0)
+                {
+                    handle.Cancel("Could not heal a Creature, no resources were paid");
+                    return;
+                }
+
+                creature.Damage -= payFrom.NumberOfResources;
+            }
+
             public override IEffectHandle GetHandle(IGame game)
             {
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
                     return base.GetHandle(game);
 
-                var charactersToChooseFrom = game.GetAllCardsInPlay<ICharacterInPlay>().Where(x => x.HasTrait(Trait.Creature)).ToList();
-                var choice = new ChooseCharacterWithTrait(source, controller, Trait.Creature, charactersToChooseFrom);
-
-                var resourceful = game.GetCardInPlay<ICharacterInPlay>(source.Id);
+                var resourceful = game.GetCardInPlay<ICharacterInPlay>(CardSource.Id);
                 if (resourceful == null)
-                    return new EffectHandle(this, choice);
+                    return base.GetHandle(game);
 
-                var cost = new PayResourcesFrom(source, resourceful, 0, true);
+                var creatures = game.GetAllCardsInPlay<ICharacterInPlay>().Where(x => x.HasTrait(Trait.Creature)).ToList();
+                if (creatures.Count == 0)
+                    return base.GetHandle(game);
+
+                var builder =
+                    new ChoiceBuilder("Choose a Creature in play", game, controller)
+                        .Question("Which Creature do you want to heal?")
+                            .Answers(creatures, item => string.Format("{0} ({1} damage, {2} hit points)", item.Title, item.Damage, item.Card.PrintedHitPoints), (source, handle, creature) => HealCreatureInPlay(source, handle, creature));
+
+                var choice = builder.ToChoice();
+                var cost = new PayResourcesFrom(CardSource, resourceful, 0, true);
 
                 return new EffectHandle(this, choice, cost);
             }
@@ -113,47 +139,6 @@ namespace LotR.Cards.Player.Allies
                 character.Resources -= numberOfResources;
 
                 handle.Accept();
-            }
-
-            public override void Trigger(IGame game, IEffectHandle handle)
-            {
-                var resourcePayment = handle.Payment as IResourcePayment;
-                if (resourcePayment == null)
-                {
-                    handle.Cancel(GetCancelledString());
-                    return;
-                }
-
-                var numberOfResources = resourcePayment.GetPaymentBy(CardSource.Id);
-                if (numberOfResources == 0)
-                {
-                    handle.Cancel(GetCancelledString());
-                    return;
-                }
-
-                var creatureChoice = handle.Choice as IChooseCharacterWithTrait;
-                if (creatureChoice == null || creatureChoice.ChosenCharacter == null)
-                {
-                    handle.Cancel(GetCancelledString());
-                    return;
-                }
-
-                if (!creatureChoice.ChosenCharacter.HasTrait(Trait.Creature))
-                {
-                    handle.Cancel(GetCancelledString());
-                    return;
-                }
-
-                var damageable = creatureChoice.ChosenCharacter as IDamagableInPlay;
-                if (damageable == null)
-                {
-                    handle.Cancel(GetCancelledString());
-                    return;
-                }
-
-                damageable.Damage -= numberOfResources;
-
-                handle.Resolve(GetCompletedStatus());
             }
         }
     }

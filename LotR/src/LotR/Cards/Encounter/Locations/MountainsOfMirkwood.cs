@@ -5,7 +5,7 @@ using System.Text;
 
 using LotR.Cards.Player;
 using LotR.Effects;
-using LotR.Effects.Choices;
+
 using LotR.Effects.Payments;
 using LotR.Effects.Phases.Any;
 using LotR.States;
@@ -54,6 +54,13 @@ namespace LotR.Cards.Encounter.Locations
                 state.AddEffect(this);
             }
 
+            private void AddChosenCardToHand(IGame game, IEffectHandle handle, IPlayer player, IPlayerCard card)
+            {
+                player.Hand.AddCards(new List<IPlayerCard> { card });
+                player.Deck.RemoveFromDeck(card);
+                handle.Resolve(string.Format("{0} added '{1}' to their hand", player.Name, card.Title));
+            }
+
             public override IEffectHandle GetHandle(IGame game)
             {
                 var availableCards = new Dictionary<Guid, IList<IPlayerCard>>();
@@ -63,38 +70,22 @@ namespace LotR.Cards.Encounter.Locations
                     availableCards.Add(player.StateId, topFive);
                 }
 
-                return new EffectHandle(this, new PlayersChooseCards<IPlayerCard>("each player may search the top 5 cards of his deck for 1 card of their choice", source, game.Players, 1, availableCards));
-            }
+                var builder =
+                    new ChoiceBuilder("Each player may search the top 5 cards of his deck for 1 card of their choice", game, game.FirstPlayer, true)
+                        .Question("Each play searches")
+                            .Answer("Yes", 1);
 
-            public override void Trigger(IGame game, IEffectHandle handle)
-            {
-                var cardChoice = handle.Choice as IPlayersChooseCards<IPlayerCard>;
-                if (cardChoice == null)
+                foreach (var player in game.Players)
                 {
-                    handle.Cancel(GetCancelledString());
-                    return;
-                }
-
-                foreach (var player in cardChoice.Players)
-                {
-                    var availableCards = cardChoice.GetAvailableCards(player.StateId);
-                    if (availableCards.Count() == 0)
+                    var cards = player.Deck.GetFromTop(5).ToList();
+                    if (cards.Count == 0)
                         continue;
 
-                    var chosenCard = cardChoice.GetChosenCards(player.StateId).FirstOrDefault() as IPlayerCard;
-                    if (chosenCard != null)
-                    {
-                        var unchosenCards = availableCards.Where(x => x.Id != chosenCard.Id).OfType<IPlayerCard>();
-                        player.Deck.ShuffleIn(unchosenCards);
-                        player.Hand.AddCards(new List<IPlayerCard> { chosenCard });
-                    }
-                    else
-                    {
-                        player.Deck.ShuffleIn(availableCards.OfType<IPlayerCard>());
-                    }
+                    builder.Question(string.Format("{0}, which card would you like to add to your hand?", player.Name))
+                        .Answers(cards, item => item.Title, (source, handle, card) => AddChosenCardToHand(game, handle, player, card));
                 }
 
-                handle.Resolve(GetCompletedStatus());
+                return new EffectHandle(this, builder.ToChoice());
             }
         }
     }

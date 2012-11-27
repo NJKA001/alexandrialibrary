@@ -6,7 +6,7 @@ using System.Text;
 using LotR.Cards.Encounter;
 using LotR.Cards.Encounter.Treacheries;
 using LotR.Effects;
-using LotR.Effects.Choices;
+
 using LotR.Effects.Costs;
 using LotR.Effects.Payments;
 using LotR.Effects.Phases;

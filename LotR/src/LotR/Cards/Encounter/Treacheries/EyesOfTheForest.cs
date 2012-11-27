@@ -6,7 +6,7 @@ using System.Text;
 using LotR.Cards.Player.Events;
 using LotR.Effects;
 using LotR.Effects.Payments;
-using LotR.Effects.Choices;
+
 using LotR.States;
 
 namespace LotR.Cards.Encounter.Treacheries

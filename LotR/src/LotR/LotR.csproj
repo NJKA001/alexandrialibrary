@@ -91,16 +91,10 @@
     <Compile Include="Effects\Choice.cs" />
     <Compile Include="Effects\ChoiceBuilder.cs" />
     <Compile Include="Effects\ChoiceItemBase.cs" />
-    <Compile Include="Effects\Choices\ChooseCharacterWithTrait.cs" />
     <Compile Include="Effects\PlayersExhaustCharactersChoiceFactory.cs" />
     <Compile Include="Effects\IAnswer.cs" />
     <Compile Include="Effects\IChoiceItem.cs" />
-    <Compile Include="Effects\Choices\IPlayersChooseCards.cs" />
     <Compile Include="Effects\IQuestion.cs" />
-    <Compile Include="Effects\Choices\PlayersChooseCards.cs" />
-    <Compile Include="Effects\Choices\PlayersChooseCharacters.cs" />
-    <Compile Include="Effects\Choices\IChooseCharacterWithTrait.cs" />
-    <Compile Include="Effects\Choices\IPlayersChooseCharacters.cs" />
     <Compile Include="Effects\Question.cs" />
     <Compile Include="Effects\Costs\IPayResources.cs" />
     <Compile Include="Effects\Costs\IPayResourcesFrom.cs" />
@@ -225,9 +219,6 @@
     <Compile Include="Cards\CardBase.cs" />
     <Compile Include="Effects\ISource.cs" />
     <Compile Include="States\CardInPlay.cs" />
-    <Compile Include="Effects\ChoiceBase.cs" />
-    <Compile Include="Effects\Choices\IChooseCardsFromDeckSearch.cs" />
-    <Compile Include="Effects\Choices\IChooseCharacter.cs" />
     <Compile Include="Cards\Player\CostlyCardBase.cs" />
     <Compile Include="Effects\Costs\CostBase.cs" />
     <Compile Include="Effects\Costs\DiscardCardsFromHand.cs" />
@@ -546,9 +537,6 @@
     <Compile Include="States\TreacheryInPlay.cs" />
     <Compile Include="States\TreasureInPlay.cs" />
     <Compile Include="States\UnclaimedObjectiveInPlay.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferences Include="Web References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,7 +6,7 @@ using System.Text;
 using LotR.Cards.Encounter;
 using LotR.Cards.Encounter.Enemies;
 using LotR.Effects;
-using LotR.Effects.Choices;
+
 using LotR.Effects.Payments;
 using LotR.Effects.Phases.Any;
 using LotR.Effects.Phases.Combat;
@@ -35,51 +35,53 @@ namespace LotR.Cards.Quests
             {
             }
 
+            private void AddSpiderToTheStagingArea(IGame game, IEffectHandle handle, IEnemyCard spider)
+            {
+                if (game.StagingArea.EncounterDeck.Cards.Any(x => x.Id == spider.Id))
+                {
+                    game.StagingArea.EncounterDeck.RemoveFromDeck(spider);
+                    game.StagingArea.AddToStagingArea(spider);
+                    handle.Resolve(string.Format("'{0}' added to the staging area from the encounter deck", spider.Title));
+                    return;
+                }
+                else if (game.StagingArea.EncounterDeck.DiscardPile.Any(x => x.Id == spider.Id))
+                {
+                    game.StagingArea.EncounterDeck.RemoveFromDiscardPile(new List<IEncounterCard> { spider });
+                    game.StagingArea.AddToStagingArea(spider);
+                    handle.Resolve(string.Format("'{0}' added to the staging area from the encounter discard pile", spider.Title));
+                }
+
+                handle.Cancel(string.Format("'{0}' was not added to the staging area because it could not be located", spider.Title));
+            }
+
+            private string GetSpiderDescription(IGame game, IEnemyCard spider)
+            {
+                return (game.StagingArea.EncounterDeck.DiscardPile.Any(x => x.Id == spider.Id)) ?
+                    string.Format("{0} (Discard Pile", spider.Title)
+                    : string.Format("{0} (Encounter Deck", spider.Title);
+            }
+
             public override IEffectHandle GetHandle(IGame game)
             {
-                var allSpiders = 
+                var spiders = 
                     game.StagingArea.EncounterDeck.Cards.OfType<IEnemyCard>().Where(x => x.PrintedTraits.Contains(Trait.Spider))
                         .Concat(game.StagingArea.EncounterDeck.DiscardPile.OfType<IEnemyCard>().Where(x => x.PrintedTraits.Contains(Trait.Spider))).ToList();
 
-                if (allSpiders.Count == 0)
-                    return null;
+                if (spiders.Count == 0)
+                    return base.GetHandle(game);
 
-                var availableSpiders = new Dictionary<Guid, IList<IEnemyCard>>();
-
+                var builder =
+                    new ChoiceBuilder("Each player must search the encounter deck and discard pile for 1 Spider card of his choice", game, game.FirstPlayer)
+                        .Question("Each player must choose a Spider")
+                            .Answer("Yes", 1);
+                                
                 foreach (var player in game.Players)
                 {
-                    availableSpiders.Add(player.StateId, allSpiders);
+                    builder.Question(string.Format("{0}, which Spider card do you want to add to the staging area?", player.Name))
+                        .Answers(spiders, (item) => GetSpiderDescription(game, item), (source, handle, spider) => AddSpiderToTheStagingArea(source, handle, spider));
                 }
 
-                var choice = new PlayersChooseCards<IEnemyCard>("Each player must search the encounter deck and discard pile for 1 Spider of their choice", source, game.Players, 1, availableSpiders);
-                return new EffectHandle(this, choice);
-            }
-
-            public override void Trigger(IGame game, IEffectHandle handle)
-            {
-                var spiderChoices = handle.Choice as IPlayersChooseCards<IEnemyCard>;
-                if (spiderChoices == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                foreach (var player in spiderChoices.Players)
-                {
-                    var spider = spiderChoices.GetChosenCards(player.StateId).FirstOrDefault();
-                    if (spider == null)
-                        continue;
-
-                    if (game.StagingArea.EncounterDeck.Cards.Any(x => x.Id == spider.Id))
-                    {
-                        game.StagingArea.EncounterDeck.RemoveFromDeck(spider);
-                        game.StagingArea.AddToStagingArea(spider);
-                    }
-                    else if (game.StagingArea.EncounterDeck.DiscardPile.Any(x => x.Id == spider.Id))
-                    {
-                        game.StagingArea.EncounterDeck.RemoveFromDiscardPile(new List<IEncounterCard> { spider });
-                        game.StagingArea.AddToStagingArea(spider);
-                    }
-                }
-
-                handle.Resolve(GetCompletedStatus());
+                return new EffectHandle(this, builder.ToChoice());
             }
         }
 
