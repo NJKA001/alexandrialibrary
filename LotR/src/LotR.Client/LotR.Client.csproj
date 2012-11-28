@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LotR.Client</RootNamespace>
-    <AssemblyName>LotR.Client</AssemblyName>
+    <AssemblyName>lotrc</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +56,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\PlayerCardInPlayViewModel.cs" />
+    <Compile Include="ViewModels\PlayerCardViewModel.cs" />
+    <Compile Include="ViewModels\PlayerViewModel.cs" />
+    <Compile Include="ViewModels\StatusViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,6 +69,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\ImageSourceConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -97,6 +104,148 @@
       <Project>{41E8EA34-4BE9-49CF-BFE5-506DA26A2AC3}</Project>
       <Name>LotR</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Core_1.jpg" />
+    <Resource Include="Images\Core_10.jpg" />
+    <Resource Include="Images\Core_100.jpg" />
+    <Resource Include="Images\Core_101.jpg" />
+    <Resource Include="Images\Core_102.jpg" />
+    <Resource Include="Images\Core_103.jpg" />
+    <Resource Include="Images\Core_104.jpg" />
+    <Resource Include="Images\Core_105.jpg" />
+    <Resource Include="Images\Core_106.jpg" />
+    <Resource Include="Images\Core_107.jpg" />
+    <Resource Include="Images\Core_108.jpg" />
+    <Resource Include="Images\Core_109.jpg" />
+    <Resource Include="Images\Core_11.jpg" />
+    <Resource Include="Images\Core_110.jpg" />
+    <Resource Include="Images\Core_111.jpg" />
+    <Resource Include="Images\Core_112.jpg" />
+    <Resource Include="Images\Core_113.jpg" />
+    <Resource Include="Images\Core_114.jpg" />
+    <Resource Include="Images\Core_115.jpg" />
+    <Resource Include="Images\Core_116.jpg" />
+    <Resource Include="Images\Core_117.jpg" />
+    <Resource Include="Images\Core_118.jpg" />
+    <Resource Include="Images\Core_119.jpg" />
+    <Resource Include="Images\Core_12.jpg" />
+    <Resource Include="Images\Core_120.jpg" />
+    <Resource Include="Images\Core_121.jpg" />
+    <Resource Include="Images\Core_122.jpg" />
+    <Resource Include="Images\Core_123.jpg" />
+    <Resource Include="Images\Core_124.jpg" />
+    <Resource Include="Images\Core_125.jpg" />
+    <Resource Include="Images\Core_126.jpg" />
+    <Resource Include="Images\Core_127.jpg" />
+    <Resource Include="Images\Core_128.jpg" />
+    <Resource Include="Images\Core_13.jpg" />
+    <Resource Include="Images\Core_14.jpg" />
+    <Resource Include="Images\Core_15.jpg" />
+    <Resource Include="Images\Core_16.jpg" />
+    <Resource Include="Images\Core_17.jpg" />
+    <Resource Include="Images\Core_18.jpg" />
+    <Resource Include="Images\Core_19.jpg" />
+    <Resource Include="Images\Core_2.jpg" />
+    <Resource Include="Images\Core_20.jpg" />
+    <Resource Include="Images\Core_21.jpg" />
+    <Resource Include="Images\Core_22.jpg" />
+    <Resource Include="Images\Core_23.jpg" />
+    <Resource Include="Images\Core_24.jpg" />
+    <Resource Include="Images\Core_25.jpg" />
+    <Resource Include="Images\Core_26.jpg" />
+    <Resource Include="Images\Core_27.jpg" />
+    <Resource Include="Images\Core_28.jpg" />
+    <Resource Include="Images\Core_29.jpg" />
+    <Resource Include="Images\Core_3.jpg" />
+    <Resource Include="Images\Core_30.jpg" />
+    <Resource Include="Images\Core_31.jpg" />
+    <Resource Include="Images\Core_32.jpg" />
+    <Resource Include="Images\Core_33.jpg" />
+    <Resource Include="Images\Core_34.jpg" />
+    <Resource Include="Images\Core_35.jpg" />
+    <Resource Include="Images\Core_36.jpg" />
+    <Resource Include="Images\Core_37.jpg" />
+    <Resource Include="Images\Core_38.jpg" />
+    <Resource Include="Images\Core_39.jpg" />
+    <Resource Include="Images\Core_4.jpg" />
+    <Resource Include="Images\Core_40.jpg" />
+    <Resource Include="Images\Core_41.jpg" />
+    <Resource Include="Images\Core_42.jpg" />
+    <Resource Include="Images\Core_43.jpg" />
+    <Resource Include="Images\Core_44.jpg" />
+    <Resource Include="Images\Core_45.jpg" />
+    <Resource Include="Images\Core_46.jpg" />
+    <Resource Include="Images\Core_47.jpg" />
+    <Resource Include="Images\Core_48.jpg" />
+    <Resource Include="Images\Core_49.jpg" />
+    <Resource Include="Images\Core_5.jpg" />
+    <Resource Include="Images\Core_50.jpg" />
+    <Resource Include="Images\Core_51.jpg" />
+    <Resource Include="Images\Core_52.jpg" />
+    <Resource Include="Images\Core_53.jpg" />
+    <Resource Include="Images\Core_54.jpg" />
+    <Resource Include="Images\Core_55.jpg" />
+    <Resource Include="Images\Core_56.jpg" />
+    <Resource Include="Images\Core_57.jpg" />
+    <Resource Include="Images\Core_58.jpg" />
+    <Resource Include="Images\Core_59.jpg" />
+    <Resource Include="Images\Core_6.jpg" />
+    <Resource Include="Images\Core_60.jpg" />
+    <Resource Include="Images\Core_61.jpg" />
+    <Resource Include="Images\Core_62.jpg" />
+    <Resource Include="Images\Core_63.jpg" />
+    <Resource Include="Images\Core_64.jpg" />
+    <Resource Include="Images\Core_65.jpg" />
+    <Resource Include="Images\Core_66.jpg" />
+    <Resource Include="Images\Core_67.jpg" />
+    <Resource Include="Images\Core_68.jpg" />
+    <Resource Include="Images\Core_69.jpg" />
+    <Resource Include="Images\Core_7.jpg" />
+    <Resource Include="Images\Core_70.jpg" />
+    <Resource Include="Images\Core_71.jpg" />
+    <Resource Include="Images\Core_72.jpg" />
+    <Resource Include="Images\Core_73.jpg" />
+    <Resource Include="Images\Core_74.jpg" />
+    <Resource Include="Images\Core_75.jpg" />
+    <Resource Include="Images\Core_76.jpg" />
+    <Resource Include="Images\Core_77.jpg" />
+    <Resource Include="Images\Core_78.jpg" />
+    <Resource Include="Images\Core_79.jpg" />
+    <Resource Include="Images\Core_8.jpg" />
+    <Resource Include="Images\Core_80.jpg" />
+    <Resource Include="Images\Core_81.jpg" />
+    <Resource Include="Images\Core_82.jpg" />
+    <Resource Include="Images\Core_83.jpg" />
+    <Resource Include="Images\Core_84.jpg" />
+    <Resource Include="Images\Core_85.jpg" />
+    <Resource Include="Images\Core_86.jpg" />
+    <Resource Include="Images\Core_87.jpg" />
+    <Resource Include="Images\Core_88.jpg" />
+    <Resource Include="Images\Core_89.jpg" />
+    <Resource Include="Images\Core_9.jpg" />
+    <Resource Include="Images\Core_90.jpg" />
+    <Resource Include="Images\Core_91.jpg" />
+    <Resource Include="Images\Core_92.jpg" />
+    <Resource Include="Images\Core_93.jpg" />
+    <Resource Include="Images\Core_94.jpg" />
+    <Resource Include="Images\Core_95.jpg" />
+    <Resource Include="Images\Core_96.jpg" />
+    <Resource Include="Images\Core_97.jpg" />
+    <Resource Include="Images\Core_98.jpg" />
+    <Resource Include="Images\Core_99.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\encounter_back.png" />
+    <Resource Include="Images\player_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SpiritLeadership.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TheThreeHunters.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

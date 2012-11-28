@@ -47,5 +47,7 @@ namespace LotR.States
 
         IEnumerable<T> GetEffects<T>() where T : class, IEffect;
         uint GetPlayerScore();
+
+        void Pause();
     }
 }

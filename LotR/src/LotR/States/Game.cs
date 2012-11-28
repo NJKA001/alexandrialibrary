@@ -38,6 +38,7 @@ namespace LotR.States
                 throw new ArgumentNullException("controller");
 
             this.controller = controller;
+            gameStatus = new GameStatus(this);
         }
 
         private readonly Guid id = Guid.NewGuid();
@@ -46,6 +47,8 @@ namespace LotR.States
         private readonly IList<IEffect> currentEffects = new List<IEffect>();
         private readonly PhaseFactory phaseFactory = new PhaseFactory();
         private IPlayer activePlayer;
+
+        private GameStatus gameStatus;
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -72,10 +75,15 @@ namespace LotR.States
 
         private void Run()
         {
-            var gameStatus = new GameStatus(this);
-
             while (gameStatus.IsGameRunning)
             {
+                System.Threading.Thread.Sleep(200);
+                
+                if (gameStatus.IsPaused)
+                {
+                    break;
+                }
+
                 CurrentPhase = phaseFactory.GetNextPhase(this);
                 
                 if (CurrentPhase.Code == PhaseCode.Resource)
@@ -453,6 +461,11 @@ namespace LotR.States
             }
 
             return sb.ToString();
+        }
+
+        public void Pause()
+        {
+            gameStatus.IsPaused = !gameStatus.IsPaused;
         }
     }
 }

@@ -15,10 +15,24 @@ namespace LotR.States.Phases.Any
 
         private bool isPlayerDefeat;
         private bool isPlayerVictory;
+        private bool isPaused = true;
 
         public bool IsGameRunning
         {
             get { return !IsPlayerDefeat && !IsPlayerVictory; }
+        }
+
+        public bool IsPaused
+        {
+            get { return isPaused; }
+            set
+            {
+                if (isPaused == value)
+                    return;
+
+                isPaused = value;
+                OnPropertyChanged("IsPaused");
+            }
         }
 
         public bool IsPlayerDefeat
