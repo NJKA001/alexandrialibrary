@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Cards;
-using LotR.Cards.Player;
+using LotR.Cards.Encounter;
 
 namespace LotR.Client.ViewModels
 {
-    public class PlayerCardViewModel
+    public class EncounterCardViewModel
         : ViewModelBase
     {
-        public PlayerCardViewModel(IPlayerCard card)
+        public EncounterCardViewModel(IEncounterCard card)
         {
             if (card == null)
                 throw new ArgumentNullException("card");
@@ -20,9 +19,9 @@ namespace LotR.Client.ViewModels
             this.cardFrontImageSource = string.Format("pack://application:,,,/Images/{0}_{1}.jpg", card.CardSet, card.CardNumber);
         }
 
-        private readonly IPlayerCard card;
+        private readonly IEncounterCard card;
         private readonly string cardFrontImageSource;
-        private const string cardBackImageSource = "pack://application:,,,/Images/player_back.png";
+        private const string cardBackImageSource = "pack://application:,,,/Images/encounter_back.png";
         private bool isFaceUp = true;
 
         public Guid CardId
@@ -38,27 +37,6 @@ namespace LotR.Client.ViewModels
         public object ImageSource
         {
             get { return isFaceUp ? cardFrontImageSource : cardBackImageSource; }
-        }
-
-        public object ResourceIcon
-        {
-            get
-            {
-                switch (card.PrintedSphere)
-                {
-                    case Sphere.Leadership:
-                        return "pack://application:,,,/Images/leadership_small.png";
-                    case Sphere.Lore:
-                        return "pack://application:,,,/Images/lore_small.png";
-                    case Sphere.Spirit:
-                        return "pack://application:,,,/Images/spirit_small.png";
-                    case Sphere.Tactics:
-                        return "pack://application:,,,/Images/tactics_small.png";
-                    case Sphere.Neutral:
-                    default:
-                        return null;
-                }
-            }
         }
 
         public string CardText

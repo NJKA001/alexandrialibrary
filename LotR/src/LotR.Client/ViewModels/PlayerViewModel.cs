@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards;
+using LotR.Cards.Player;
 using LotR.Cards.Player.Heroes;
 using LotR.States;
 
@@ -24,10 +26,28 @@ namespace LotR.Client.ViewModels
                 var heroInPlay = new HeroInPlay(game, hero);
                 heroes.Add(new PlayerCardInPlayViewModel<IHeroCard>(heroInPlay));
             }
+
+            player.Hand.RegisterCardAddedCallback(x => CardAddedToHand(x));
+            player.Hand.RegisterCardRemovedCallback(x => CardRemovedFromHand(x));
         }
 
         private readonly IPlayer player;
         private readonly ObservableCollection<PlayerCardInPlayViewModel<IHeroCard>> heroes = new ObservableCollection<PlayerCardInPlayViewModel<IHeroCard>>();
+        private readonly ObservableCollection<PlayerCardViewModel> hand = new ObservableCollection<PlayerCardViewModel>();
+
+        private void CardAddedToHand(IPlayerCard card)
+        {
+            hand.Add(new PlayerCardViewModel(card));
+        }
+
+        private void CardRemovedFromHand(IPlayerCard card)
+        {
+            var viewModel = hand.Where(x => x.CardId == card.Id).FirstOrDefault();
+            if (viewModel == null)
+                return;
+
+            hand.Remove(viewModel);
+        }
 
         public string PlayerName
         {
@@ -42,6 +62,11 @@ namespace LotR.Client.ViewModels
         public IEnumerable<PlayerCardInPlayViewModel<IHeroCard>> Heroes
         {
             get { return heroes; }
+        }
+
+        public IEnumerable<PlayerCardViewModel> Hand
+        {
+            get { return hand; }
         }
     }
 }

@@ -37,5 +37,10 @@ namespace LotR.Effects.Phases.Any
 
             handle.Resolve(GetCompletedStatus());
         }
+
+        public override string ToString()
+        {
+            return string.Format("{0}: {1}", type, cardInPlay.Title);
+        }
     }
 }

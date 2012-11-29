@@ -27,6 +27,30 @@ namespace LotR.States
 
         private readonly IList<T> cards = new List<T>();
         private readonly Random random = new Random();
+        private readonly IList<Action<T>> cardAddedCallbacks = new List<Action<T>>();
+        private readonly IList<Action<T>> cardRemovedCallbacks = new List<Action<T>>();
+
+        private void AddCard(T card)
+        {
+            if (cards.Contains(card))
+                throw new InvalidOperationException("Cannot add card - card is already contained in hand: " + card.Title);
+
+            cards.Add(card);
+
+            foreach (var callback in cardAddedCallbacks)
+                callback(card);
+        }
+
+        private void RemoveCard(T card)
+        {
+            if (!cards.Contains(card))
+                throw new InvalidOperationException("Cannot remove card - card is not contained in hand: " + card.Title);
+
+            cards.Remove(card);
+
+            foreach (var callback in cardRemovedCallbacks)
+                callback(card);
+        }
 
         public IEnumerable<T> Cards
         {
@@ -45,7 +69,7 @@ namespace LotR.States
 
             foreach (var card in cards)
             {
-                this.cards.Add(card);
+                AddCard(card);
             }
         }
 
@@ -56,11 +80,24 @@ namespace LotR.States
 
             foreach (var card in cards)
             {
-                if (!this.cards.Contains(card))
-                    continue;
-
-                this.cards.Remove(card);
+                RemoveCard(card);
             }
+        }
+
+        public void RegisterCardAddedCallback(Action<T> callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            cardAddedCallbacks.Add(callback);
+        }
+
+        public void RegisterCardRemovedCallback(Action<T> callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            cardRemovedCallbacks.Add(callback);
         }
 
         public T GetRandomCard()

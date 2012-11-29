@@ -56,6 +56,9 @@ namespace LotR.Client
 
                 System.Threading.Thread.Sleep(1000);
                 game.Setup(players, ScenarioCode.Passage_Through_Mirkwood);
+
+                stagingAreaViewModel = new StagingAreaViewModel(game);
+                stagingAreaContainer.ItemsSource = stagingAreaViewModel.CardsInPlay;
             }
             catch (Exception ex)
             {
@@ -66,6 +69,7 @@ namespace LotR.Client
         private readonly IGame game;
         private readonly IGameController controller;
         private readonly ObservableCollection<PlayerViewModel> playerViewModels = new ObservableCollection<PlayerViewModel>();
+        private readonly StagingAreaViewModel stagingAreaViewModel;
         private readonly StatusViewModel statusViewModel = new StatusViewModel();
 
         private IGameController GetController()
@@ -102,7 +106,7 @@ namespace LotR.Client
 
         private void EffectAddedCallback(IEffect effect)
         {
-            statusViewModel.SetCurrentStatus("Added: " + effect.ToString());
+            //statusViewModel.SetCurrentStatus("Added: " + effect.ToString());
             //MessageBox.Show(effect.ToString(), "EffectAddedCallback");
         }
 

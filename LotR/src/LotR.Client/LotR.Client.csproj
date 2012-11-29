@@ -56,9 +56,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\EncounterCardInPlayViewModel.cs" />
+    <Compile Include="ViewModels\EncounterCardViewModel.cs" />
     <Compile Include="ViewModels\PlayerCardInPlayViewModel.cs" />
     <Compile Include="ViewModels\PlayerCardViewModel.cs" />
     <Compile Include="ViewModels\PlayerViewModel.cs" />
+    <Compile Include="ViewModels\StagingAreaViewModel.cs" />
     <Compile Include="ViewModels\StatusViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
@@ -240,6 +243,16 @@
     <Resource Include="Images\player_back.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Dw_6.jpg" />
+    <Resource Include="Images\SoM_3.jpg" />
+    <Resource Include="Images\spirit_small.png" />
+    <Resource Include="Images\tactics_small.png" />
+    <Resource Include="Images\threat_small.png" />
+    <Resource Include="Images\willpower_small.png" />
+    <Resource Include="Images\leadership_small.png" />
+    <Resource Include="Images\lore_small.png" />
+    <Resource Include="Images\defense_small.png" />
+    <Resource Include="Images\attack_small.png" />
     <Content Include="SpiritLeadership.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

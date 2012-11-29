@@ -42,5 +42,22 @@ namespace LotR.Cards
         {
             effects.Add(effect);
         }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            foreach (var effect in effects)
+            {
+                if (sb.Length > 0)
+                {
+                    sb.Append(Environment.NewLine);
+                }
+
+                sb.AppendLine(effect.ToString());
+            }
+
+            return sb.ToString();
+        }
     }
 }
