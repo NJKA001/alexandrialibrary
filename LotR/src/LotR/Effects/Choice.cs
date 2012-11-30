@@ -59,10 +59,27 @@ namespace LotR.Effects
             get { return isOptional; }
         }
 
+        private bool AnswersAreValid(IQuestion question)
+        {
+            if (question.MinimumChosenAnswers == 0)
+                return true;
+
+            var numberChosen = question.Answers.Where(x => x.IsChosen).Count();
+            if (numberChosen < question.MinimumChosenAnswers || numberChosen > question.MaximumChosenAnswers)
+                return false;
+
+            foreach (var answer in question.Answers.Where(x => x.FollowUp != null))
+            {
+                if (!AnswersAreValid(answer.FollowUp))
+                    return false;
+            }
+
+            return true;
+        }
+
         public bool IsValid(IGame game)
         {
-            return true;
-            //var chosen = 
+            return AnswersAreValid(question);
         }
     }
 }

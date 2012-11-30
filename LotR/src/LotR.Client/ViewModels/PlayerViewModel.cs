@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Threading;
 
 using LotR.Cards;
 using LotR.Cards.Player;
@@ -14,8 +15,11 @@ namespace LotR.Client.ViewModels
     public class PlayerViewModel
         : ViewModelBase
     {
-        public PlayerViewModel(IGame game, IPlayer player)
+        public PlayerViewModel(Dispatcher dispatcher, IGame game, IPlayer player)
+            : base(dispatcher)
         {
+            if (game == null)
+                throw new ArgumentNullException("game");
             if (player == null)
                 throw new ArgumentNullException("player");
 
@@ -24,7 +28,7 @@ namespace LotR.Client.ViewModels
             foreach (var hero in player.Deck.Heroes)
             {
                 var heroInPlay = new HeroInPlay(game, hero);
-                heroes.Add(new PlayerCardInPlayViewModel<IHeroCard>(heroInPlay));
+                heroes.Add(new PlayerCardInPlayViewModel<IHeroCard>(dispatcher, heroInPlay));
             }
 
             player.Hand.RegisterCardAddedCallback(x => CardAddedToHand(x));
@@ -37,7 +41,7 @@ namespace LotR.Client.ViewModels
 
         private void CardAddedToHand(IPlayerCard card)
         {
-            hand.Add(new PlayerCardViewModel(card));
+            Dispatch(() => hand.Add(new PlayerCardViewModel(dispatcher, card)));
         }
 
         private void CardRemovedFromHand(IPlayerCard card)
@@ -46,7 +50,7 @@ namespace LotR.Client.ViewModels
             if (viewModel == null)
                 return;
 
-            hand.Remove(viewModel);
+            Dispatch(() => hand.Remove(viewModel));
         }
 
         public string PlayerName

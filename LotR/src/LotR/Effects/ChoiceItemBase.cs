@@ -12,10 +12,12 @@ namespace LotR.Effects
     {
         protected ChoiceItemBase(string text, TSource source)
         {
+            this.itemId = Guid.NewGuid();
             this.text = text;
             this.source = source;
         }
 
+        private readonly Guid itemId;
         private readonly string text;
         protected readonly TSource source;
 
@@ -25,6 +27,11 @@ namespace LotR.Effects
                 return;
 
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public Guid ItemId
+        {
+            get { return itemId; }
         }
 
         public string Text

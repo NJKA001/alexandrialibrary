@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Threading;
 
 using LotR.States;
 
@@ -11,7 +12,8 @@ namespace LotR.Client.ViewModels
     public class StagingAreaViewModel
         : ViewModelBase
     {
-        public StagingAreaViewModel(IGame game)
+        public StagingAreaViewModel(Dispatcher dispatcher, IGame game)
+            : base(dispatcher)
         {
             if (game == null)
                 throw new ArgumentNullException("game");
@@ -35,7 +37,7 @@ namespace LotR.Client.ViewModels
             if (cardsInPlay.Any(x => x.CardId == encounterInPlay.Card.Id))
                 return;
 
-            cardsInPlay.Add(new EncounterCardInPlayViewModel(encounterInPlay));
+            cardsInPlay.Add(new EncounterCardInPlayViewModel(dispatcher, encounterInPlay));
         }
 
         private void RemoveEncounterInPlay(IEncounterInPlay encounterInPlay)

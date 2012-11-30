@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Threading;
 
 namespace LotR.Client.ViewModels
 {
     public class StatusViewModel
         : ViewModelBase
     {
+        public StatusViewModel(Dispatcher dispatcher)
+            : base(dispatcher)
+        {
+        }
+
         private string currentStatus = string.Empty;
         private readonly ObservableCollection<string> history = new ObservableCollection<string>();
 
@@ -35,7 +41,7 @@ namespace LotR.Client.ViewModels
             if (status == null)
                 throw new ArgumentNullException("status");
 
-            history.Add(status);
+            Dispatch(() => history.Add(status));
             CurrentStatus = status;
         }
     }

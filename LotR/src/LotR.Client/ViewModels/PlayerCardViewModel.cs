@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Threading;
 
 using LotR.Cards;
 using LotR.Cards.Player;
@@ -11,7 +12,8 @@ namespace LotR.Client.ViewModels
     public class PlayerCardViewModel
         : ViewModelBase
     {
-        public PlayerCardViewModel(IPlayerCard card)
+        public PlayerCardViewModel(Dispatcher dispatcher, IPlayerCard card)
+            : base(dispatcher)
         {
             if (card == null)
                 throw new ArgumentNullException("card");

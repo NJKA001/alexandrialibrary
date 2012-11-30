@@ -9,6 +9,7 @@ namespace LotR.Effects
     public interface IChoiceItem
         : INotifyPropertyChanged
     {
+        Guid ItemId { get; }
         string Text { get; }
     }
 }

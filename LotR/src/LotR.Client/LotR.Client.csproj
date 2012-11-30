@@ -56,6 +56,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ChoiceControl.xaml.cs">
+      <DependentUpon>ChoiceControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\UIElementExtensions.cs" />
+    <Compile Include="ViewModels\ChoiceItemViewModel.cs" />
     <Compile Include="ViewModels\EncounterCardInPlayViewModel.cs" />
     <Compile Include="ViewModels\EncounterCardViewModel.cs" />
     <Compile Include="ViewModels\PlayerCardInPlayViewModel.cs" />
@@ -64,6 +69,10 @@
     <Compile Include="ViewModels\StagingAreaViewModel.cs" />
     <Compile Include="ViewModels\StatusViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Page Include="Controls\ChoiceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

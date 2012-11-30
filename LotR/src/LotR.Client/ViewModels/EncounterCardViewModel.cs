@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Threading;
 
 using LotR.Cards.Encounter;
 
@@ -10,7 +11,8 @@ namespace LotR.Client.ViewModels
     public class EncounterCardViewModel
         : ViewModelBase
     {
-        public EncounterCardViewModel(IEncounterCard card)
+        public EncounterCardViewModel(Dispatcher dispatcher, IEncounterCard card)
+            : base(dispatcher)
         {
             if (card == null)
                 throw new ArgumentNullException("card");

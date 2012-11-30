@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 using LotR.Cards;
 using LotR.Cards.Player;
@@ -37,6 +38,10 @@ namespace LotR.Client
 
             try
             {
+                System.Threading.Thread.CurrentThread.Name = "UI Thread";
+
+                statusViewModel = new StatusViewModel(this.Dispatcher);
+
                 currentStatusLabel.DataContext = statusViewModel;
                 statusHistoryContainer.ItemsSource = statusViewModel.History;
                 playersContainer.ItemsSource = playerViewModels;
@@ -51,13 +56,23 @@ namespace LotR.Client
                 var players = GetPlayers(game, playersInfo);
                 foreach (var player in players)
                 {
-                    playerViewModels.Add(new PlayerViewModel(game, player));
+                    playerViewModels.Add(new PlayerViewModel(this.Dispatcher, game, player));
                 }
 
-                System.Threading.Thread.Sleep(1000);
-                game.Setup(players, ScenarioCode.Passage_Through_Mirkwood);
+                //System.Threading.Thread.Sleep(1000);
 
-                stagingAreaViewModel = new StagingAreaViewModel(game);
+                Action setupGame = () => game.Setup(players, ScenarioCode.Passage_Through_Mirkwood);
+
+                gameThread = new System.Threading.Thread(new System.Threading.ThreadStart(setupGame));
+                gameThread.Name = "Game Thread";
+                gameThread.Start();
+
+                while (game.StagingArea == null)
+                {
+                    System.Threading.Thread.Sleep(150);
+                }
+
+                stagingAreaViewModel = new StagingAreaViewModel(this.Dispatcher, game);
                 stagingAreaContainer.ItemsSource = stagingAreaViewModel.CardsInPlay;
             }
             catch (Exception ex)
@@ -67,10 +82,11 @@ namespace LotR.Client
         }
 
         private readonly IGame game;
+        private readonly System.Threading.Thread gameThread;
         private readonly IGameController controller;
         private readonly ObservableCollection<PlayerViewModel> playerViewModels = new ObservableCollection<PlayerViewModel>();
         private readonly StagingAreaViewModel stagingAreaViewModel;
-        private readonly StatusViewModel statusViewModel = new StatusViewModel();
+        private readonly StatusViewModel statusViewModel;
 
         private IGameController GetController()
         {
@@ -104,22 +120,29 @@ namespace LotR.Client
             return players;
         }
 
+        private void Dispatch(Action action)
+        {
+            this.Dispatcher.Invoke(action, DispatcherPriority.DataBind);
+        }
+
+        private void SetCurrentStatus(string status)
+        {
+            Action action = () => statusViewModel.SetCurrentStatus(status);
+            Dispatch(action);
+        }
+
         private void EffectAddedCallback(IEffect effect)
         {
-            //statusViewModel.SetCurrentStatus("Added: " + effect.ToString());
-            //MessageBox.Show(effect.ToString(), "EffectAddedCallback");
         }
 
         private void EffectResolvedCallback(IEffect effect, IEffectHandle handle)
         {
-            statusViewModel.SetCurrentStatus(handle.Status);
-            //MessageBox.Show(handle.Status, "EffectResolvedCallback");
+            SetCurrentStatus(handle.Status);
         }
 
         private void EffectCancelledCallback(IEffect effect, IEffectHandle handle)
         {
-            statusViewModel.SetCurrentStatus("Cancelled: " + effect.ToString());
-            //MessageBox.Show(effect.ToString(), "EffectCancelledCallback");
+            SetCurrentStatus("Cancelled: " + effect.ToString());
         }
 
         private IPayment GetPaymentCallback(IEffect effect, ICost cost)
@@ -129,7 +152,21 @@ namespace LotR.Client
 
         private void OfferChoiceCallback(IEffect effect, IChoice choice)
         {
-            statusViewModel.SetCurrentStatus("Choice: " + choice.Text);
+            try
+            {
+                //var x = System.Threading.Thread.CurrentThread.Name;
+                Dispatch(() => choiceControl.SetChoice(choice));
+
+                while (!choiceControl.IsValid)
+                {
+                    System.Threading.Thread.Sleep(150);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(choice.Text + Environment.NewLine + Environment.NewLine + ex.Message, "Error Offering Choice");
+            }
+            //statusViewModel.SetCurrentStatus("Choice: " + choice.Text);
             //MessageBox.Show(choice.Text, "OfferChoiceCallback");
         }
 

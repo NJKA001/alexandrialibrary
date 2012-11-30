@@ -77,12 +77,12 @@ namespace LotR.States
         {
             while (gameStatus.IsGameRunning)
             {
-                System.Threading.Thread.Sleep(200);
+                //System.Threading.Thread.Sleep(200);
                 
-                if (gameStatus.IsPaused)
-                {
-                    break;
-                }
+                //if (gameStatus.IsPaused)
+                //{
+                    //break;
+                //}
 
                 CurrentPhase = phaseFactory.GetNextPhase(this);
                 
