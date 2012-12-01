@@ -13,6 +13,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using LotR.Effects;
+using LotR.Effects.Costs;
+using LotR.Effects.Payments;
 using LotR.States;
 
 using LotR.Client.Extensions;
@@ -32,8 +34,11 @@ namespace LotR.Client.Controls
 
         private IGame game;
         private IChoice choice;
+        private ICost cost;
+        private IPayment payment;
         private ChoiceItemViewModel choiceViewModel;
         private bool isValid;
+        private bool isCancelled;
 
         private void submitButton_Click(object sender, RoutedEventArgs e)
         {
@@ -47,7 +52,29 @@ namespace LotR.Client.Controls
                 return;
             }
 
+            if (cost != null)
+            {
+
+            }
+
             isValid = true;
+        }
+
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (choice == null)
+            {
+                isCancelled = true;
+                return;
+            }
+
+            if (!choice.IsOptional)
+            {
+                MessageBox.Show("You must make this choice before the game can continue", "This Choice Is Not Optional");
+                return;
+            }
+
+            isCancelled = true;
         }
 
         private void CheckBoxChanged(object sender)
@@ -95,6 +122,16 @@ namespace LotR.Client.Controls
             get { return isValid; }
         }
 
+        public bool IsCancelled
+        {
+            get { return isCancelled; }
+        }
+
+        public IPayment Payment
+        {
+            get { return payment; }
+        }
+
         public void Initialize(IGame game)
         {
             if (game == null)
@@ -103,14 +140,18 @@ namespace LotR.Client.Controls
             this.game = game;
         }
 
-        public void SetChoice(IChoice choice)
+        public void Load(IChoice choice)
         {
             if (choice == null)
                 throw new ArgumentNullException("choice");
 
             this.choice = choice;
+            this.cost = null;
+            this.payment = null;
+
             this.choiceViewModel = new ChoiceItemViewModel(this.Dispatcher, choice);
             this.isValid = false;
+            this.isCancelled = false;
             this.statusText.Text = string.Empty;
 
             choiceContainer.DataContext = choiceViewModel;

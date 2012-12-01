@@ -453,9 +453,9 @@ namespace LotR.Console
 
             if (character.Resources == 1)
             {
-                var question = (cost.Sphere == Sphere.Neutral) ?
+                var question = (cost.ResourceSphere == Sphere.Neutral) ?
                     string.Format("{0} can pay for this card and only has 1 resource. Do you want to pay 1 resource from this character?", character.Title)
-                    : string.Format("{0} can pay for this card and only has 1 {1} resource. Do you want to pay 1 {1} resource from this character?", character.Title, cost.Sphere);
+                    : string.Format("{0} can pay for this card and only has 1 {1} resource. Do you want to pay 1 {1} resource from this character?", character.Title, cost.ResourceSphere);
                 
                     if (PromptForBool(question))
                     {
@@ -476,43 +476,43 @@ namespace LotR.Console
                         maxNumberOfResources = remainder;
                     }
 
-                    if (cost.Sphere == Sphere.Neutral)
+                    if (cost.ResourceSphere == Sphere.Neutral)
                         WriteLine("{0} has a cost of {1} of any type of resource", costSource, cost.NumberOfResources);
                     else
-                        WriteLine("{0} has a cost of {1} {2} resources", costSource, cost.NumberOfResources, cost.Sphere);
+                        WriteLine("{0} has a cost of {1} {2} resources", costSource, cost.NumberOfResources, cost.ResourceSphere);
 
                     if (currentPayment == 0)
                         WriteLine("You have not paid any resources yet.", maxNumberOfResources);
                     else
-                        WriteLine("You have paid {0} {1} resources so far with {2} left to pay", currentPayment, cost.Sphere, remainder);
+                        WriteLine("You have paid {0} {1} resources so far with {2} left to pay", currentPayment, cost.ResourceSphere, remainder);
 
-                    if (cost.Sphere == Sphere.Neutral)
+                    if (cost.ResourceSphere == Sphere.Neutral)
                         WriteLine("{0} has {1} resources available. How many resources do you want to pay?", character.Title, character.Resources);
                     else
-                        WriteLine("{0} has {1} {2} resources available. How many resources do you want to pay?", character.Title, character.Resources, cost.Sphere);
+                        WriteLine("{0} has {1} {2} resources available. How many resources do you want to pay?", character.Title, character.Resources, cost.ResourceSphere);
                 }
                 else
                 {
-                    if (cost.Sphere == Sphere.Neutral)
+                    if (cost.ResourceSphere == Sphere.Neutral)
                         WriteLine("{0} has a variable cost of any type of resource", costSource);
                     else
-                        WriteLine("{0} has a variable cost of {1} resources", costSource, cost.Sphere);
+                        WriteLine("{0} has a variable cost of {1} resources", costSource, cost.ResourceSphere);
 
                     if (currentPayment == 0)
                         WriteLine("You have not paid any resources yet");
                     else
                         WriteLine("You have paid {0} resource so far", currentPayment);
 
-                    if (cost.Sphere == Sphere.Neutral)
+                    if (cost.ResourceSphere == Sphere.Neutral)
                         WriteLine("{0} has {1} resources available. How many resources do you want to pay?", character.Title, character.Resources);
                     else
-                        WriteLine("{0} has {1} {2} resources available. How many resources do you want to pay?", character.Title, character.Resources, cost.Sphere);
+                        WriteLine("{0} has {1} {2} resources available. How many resources do you want to pay?", character.Title, character.Resources, cost.ResourceSphere);
                 }
                 
                 var paymentOptions = new List<string>();
                 for (var i = 1; i <= maxNumberOfResources; i++)
                 {
-                    if (cost.Sphere == Sphere.Neutral)
+                    if (cost.ResourceSphere == Sphere.Neutral)
                     {
                         if (i == 1)
                             paymentOptions.Add("Pay 1 resource");
@@ -522,9 +522,9 @@ namespace LotR.Console
                     else
                     {
                         if (i == 1)
-                            paymentOptions.Add(string.Format("Pay 1 {0} resource", cost.Sphere));
+                            paymentOptions.Add(string.Format("Pay 1 {0} resource", cost.ResourceSphere));
                         else
-                            paymentOptions.Add(string.Format("Pay {0} {1} resources", i, cost.Sphere));
+                            paymentOptions.Add(string.Format("Pay {0} {1} resources", i, cost.ResourceSphere));
                     }
                 }
 

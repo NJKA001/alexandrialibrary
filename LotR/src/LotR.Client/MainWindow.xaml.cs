@@ -125,6 +125,14 @@ namespace LotR.Client
             this.Dispatcher.Invoke(action, DispatcherPriority.DataBind);
         }
 
+        private void BlockUntil(Func<bool> predicate)
+        {
+            while (!predicate())
+            {
+                System.Threading.Thread.Sleep(150);
+            }
+        }
+
         private void SetCurrentStatus(string status)
         {
             Action action = () => statusViewModel.SetCurrentStatus(status);
@@ -147,6 +155,12 @@ namespace LotR.Client
 
         private IPayment GetPaymentCallback(IEffect effect, ICost cost)
         {
+            //IPayment payment = null;
+
+            //Dispatch(() => choiceControl.Load(cost));
+
+            //BlockUntil(() => choiceControl.Payment != null || choiceControl.IsCancelled);
+
             return null;
         }
 
@@ -155,12 +169,9 @@ namespace LotR.Client
             try
             {
                 //var x = System.Threading.Thread.CurrentThread.Name;
-                Dispatch(() => choiceControl.SetChoice(choice));
+                Dispatch(() => choiceControl.Load(choice));
 
-                while (!choiceControl.IsValid)
-                {
-                    System.Threading.Thread.Sleep(150);
-                }
+                BlockUntil(() => choiceControl.IsValid || choiceControl.IsCancelled);
             }
             catch (Exception ex)
             {

@@ -114,7 +114,7 @@ namespace LotR.Effects.Phases.Any
                 var allyCard = costlyCard as IAllyCard;
 
                 var builder =
-                    new ChoiceBuilder(string.Format("Play {0} from your hand", costlyCard.Title), game, costlyCard.Owner)
+                    new ChoiceBuilder(string.Format("Play '{0}' from your hand", costlyCard.Title), game, costlyCard.Owner)
                         .Question("You must play this card from your hand")
                             .LastAnswer("Play ally from your hand", allyCard, (source, handle, card) => PlayAllyFromYourHand(game, handle, costlyCard.Owner, card));
             }

@@ -40,6 +40,7 @@
         </TreeView>
         <StackPanel Orientation="Horizontal" Grid.Row="2">
             <Button x:Name="submitButton" Margin="4" Click="submitButton_Click">Submit</Button>
+            <Button x:Name="cancelButton" Margin="8 4 4 8" Click="cancelButton_Click">Cancel</Button>
             <TextBlock x:Name="statusText" Margin="4"/>
         </StackPanel>
     </Grid>

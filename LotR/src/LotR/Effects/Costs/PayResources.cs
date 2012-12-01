@@ -13,10 +13,10 @@ namespace LotR.Effects.Costs
     public class PayResources
         : CostBase, IPayResources
     {
-        public PayResources(ISource source, Sphere sphere, byte numberOfResources, bool isVariableCost)
-            : base(GetDescription(sphere, numberOfResources, isVariableCost), source)
+        public PayResources(ISource source, Sphere resourceSphere, byte numberOfResources, bool isVariableCost)
+            : base(GetDescription(resourceSphere, numberOfResources, isVariableCost), source)
         {
-            this.sphere = sphere;
+            this.resourceSphere = resourceSphere;
             this.numberOfResources = numberOfResources;
             this.isVariableCost = isVariableCost;
         }
@@ -44,13 +44,13 @@ namespace LotR.Effects.Costs
             }
         }
 
-        private readonly Sphere sphere;
+        private readonly Sphere resourceSphere;
         private readonly byte numberOfResources;
         private readonly bool isVariableCost;
 
-        public Sphere Sphere
+        public Sphere ResourceSphere
         {
-            get { return sphere; }
+            get { return resourceSphere; }
         }
 
         public byte NumberOfResources
@@ -72,7 +72,7 @@ namespace LotR.Effects.Costs
             if (resourcePayment == null)
                 return false;
 
-            if (resourcePayment.GetTotalPayment() != numberOfResources)
+            if (!isVariableCost && resourcePayment.GetTotalPayment() != numberOfResources)
                 return false;
 
             if (resourcePayment.CostlyCard != null)

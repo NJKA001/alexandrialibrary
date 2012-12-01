@@ -35,10 +35,10 @@ namespace LotR.States
                 return true;
 
             var cost = costlyCard.GetResourceCost(Game) as IPayResources;
-            if (cost == null || cost.Sphere == Sphere.Neutral)
+            if (cost == null || cost.ResourceSphere == Sphere.Neutral)
                 return true;
 
-            return HasResourceIcon(cost.Sphere);
+            return HasResourceIcon(cost.ResourceSphere);
         }
 
         public override bool CanPayFor(ICardEffect cardEffect)
@@ -58,10 +58,10 @@ namespace LotR.States
             else if (cost is IPayResources)
             {
                 var payResources = cost as IPayResources;
-                if (payResources.Sphere == Sphere.Neutral)
+                if (payResources.ResourceSphere == Sphere.Neutral)
                     return true;
 
-                return HasResourceIcon(payResources.Sphere);
+                return HasResourceIcon(payResources.ResourceSphere);
             }
             else if (cost is IPayResourcesFrom)
             {
