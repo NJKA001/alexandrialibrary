@@ -78,9 +78,7 @@ namespace LotR.Effects.Phases.Any
 
         public override IEffectHandle GetHandle(IGame game)
         {
-            //if (!isVariableCost && numberOfResources == 0)
-                //return base.GetHandle(game);
-
+            var description = costlyCard != null ? "card" : "effect";
             var numberText = isVariableCost ? "You can pay any number of" : string.Format("You must pay {0}", numberOfResources);
             var typeText = resourceSphere == Sphere.Neutral ? "resources from any sphere" : string.Format("{0} resources", resourceSphere.ToString());
             var text = string.Format("{0}, {1} {2}", player.Name, numberText, typeText);
@@ -89,13 +87,35 @@ namespace LotR.Effects.Phases.Any
                 player.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.Resources > 0 && x.CanPayFor(costlyCard)).ToList()
                 : player.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.Resources > 0 && x.CanPayFor(cardEffect)).ToList();
 
+            var sum = characters.Sum(x => x.Resources);
+
             var builder =
                 new ChoiceBuilder(text, game, player);
 
             if (characters.Count == 0)
             {
-                builder.Question("You do not have any characters that can pay this resource cost")
-                    .Answer("Ok, cancel this payment", false);
+                builder.Question("You do not have any characters with a resource match to pay this cost")
+                    .Answer("Ok, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+            }
+            else if (!isVariableCost && numberOfResources == 0)
+            {
+                if (costlyCard != null)
+                {
+                    builder.Question("This card does not have any cost. Do you want to play it?")
+                        .Answer("Yes, play this card", true, (source, handle, item) => handle.Resolve(string.Format("'{0}' has no cost to play", costlyCard.Title)))
+                        .Answer("No, cancel playing this card", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                }
+                else if (cardEffect != null)
+                {
+                    builder.Question("This card effect does not have any cost. Do you want to trigger it?")
+                        .Answer("Yes, trigger this card effect", true, (source, handle, item) => handle.Resolve(string.Format("'{0}' has no cost to trigger", cardEffect.ToString())))
+                        .Answer("No, cancel triggering this card effect", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                }
+            }
+            else if (!isVariableCost && sum < numberOfResources)
+            {
+                builder.Question("You do not have characters with enough resources available to pay this cost")
+                    .Answer("Ok, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
             }
             else if (characters.Count == 1)
             {
@@ -103,7 +123,7 @@ namespace LotR.Effects.Phases.Any
                 if (first.Resources < numberOfResources && !isVariableCost)
                 {
                     builder.Question(string.Format("'{0}' has a resource match but does not have enough resources to pay this cost", first.Title))
-                        .Answer("Ok, cancel this payment", false);
+                        .Answer("Ok, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
                 }
                 else if (!isVariableCost)
                 {
@@ -121,14 +141,26 @@ namespace LotR.Effects.Phases.Any
                         amounts.Add(i);
                     }
 
-                    var description = costlyCard != null ? "card" : "effect";
-                    builder.Question(string.Format("'{0}' has a resource match, and this {1} has a how many resources do you want to spend from their resource pool?", first.Title, description))
-                        .Answers(amounts, (item) => item == 1 ? "1 resource" : string.Format("{0} resources", item), (source, handle, number) => PayResourcesFromCharacter(source, handle, first, player, number));
-
+                    builder.Question(string.Format("'{0}' has a resource match, and this {1} has a variable cost. How many resources do you want to spend from their resource pool?", first.Title, description))
+                        .Answers(amounts, (item) => item == 1 ? "1 resource" : string.Format("{0} resources", item), (source, handle, number) => PayResourcesFromCharacter(source, handle, first, player, number))
+                        .Answer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
                 }
             }
             else
             {
+                if (!isVariableCost && numberOfResources == 1)
+                {
+                }
+
+                foreach (var character in characters)
+                {
+                    if (isVariableCost)
+                        builder.Question(string.Format("'{0}' has a resource match, and this {1} has a variable cost. How many resources do you want to spend from their resource pool?", character.Title, description));
+                    else if (numberOfResources == 1)
+                        builder.Question(string.Format("'{0}' has a resource match, and this {1} costs 1 resource. How many resources do you want to spend from their resource pool?", character.Title, description));
+                    else
+                        builder.Question(string.Format("'{0}' has a resource match, and this {1} costs {2} resources. How many resources do you want to spend from their resource pool?", character.Title, description, numberOfResources));
+                }
             }
 
             var choice = builder.ToChoice();
