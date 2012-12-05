@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards.Player.Allies;
+using LotR.Effects;
 using LotR.Effects.Costs;
+using LotR.Effects.Phases.Any;
 using LotR.States;
 using LotR.States.Phases.Any;
 
@@ -82,14 +84,19 @@ namespace LotR.Cards.Encounter.Objectives
             get { return 0; }
         }
 
+        public Sphere PrintedSphere
+        {
+            get { return Sphere.Neutral; }
+        }
+
         public ICost GetResourceCost(IGame game)
         {
             return new PayResources(this, PrintedSphere, PrintedCost, false);
         }
 
-        public Sphere PrintedSphere
+        public IEffect GetPaymentEffect(IGame game, IPlayer player)
         {
-            get { return Sphere.Neutral; }
+            return new PayResourcesEffect(game, PrintedSphere, PrintedCost, false, player, this);
         }
     }
 }

@@ -103,8 +103,80 @@ namespace LotR.Effects.Phases.Any
             return characterNames.ToString();
         }
 
-        private void AddPaymentAnswers(IChoiceBuilder builder, ICharacterInPlay character, byte numberOfResources, byte currentResources)
+        private string GetCharactersAndPaymentsString(IEnumerable<ICharacterInPlay> characters)
         {
+            return GetCharactersAndPaymentsString(characters.Select(x => new Tuple<ICharacterInPlay, byte>(x, x.Resources)).ToList());
+        }
+
+        private string GetCharactersAndPaymentsString(IEnumerable<Tuple<ICharacterInPlay, byte>> charactersAndPayments)
+        {
+            var sb = new StringBuilder();
+
+            var available = charactersAndPayments.Where(x => x.Item1.Resources >= x.Item2).ToList();
+            if (available.Count == 0)
+                return "None of these character have available resources";
+
+            var count = 0;
+            foreach (var tuple in available)
+            {
+                count++;
+
+                if (tuple.Item2 == 1)
+                {
+                    if (count == 1)
+                        sb.AppendFormat("1 resource from '{0}'", tuple.Item1.Title);
+                    else if (count < available.Count)
+                        sb.AppendFormat(", 1 resource from '{0}'", tuple.Item1.Title);
+                    else
+                        sb.AppendFormat(" and 1 resource from '{0}'", tuple.Item1.Title);
+                }
+                else
+                {
+                    if (count == 1)
+                        sb.AppendFormat("{0} resources from '{1}'", tuple.Item2, tuple.Item1.Title);
+                    else if (count < available.Count)
+                        sb.AppendFormat(", {0} resources from '{1}'", tuple.Item2, tuple.Item1.Title);
+                    else
+                        sb.AppendFormat(" and {0} resources from '{1}'", tuple.Item2, tuple.Item1.Title);
+                }
+            }
+
+            return sb.ToString();
+        }
+
+        private void AddPaymentAnswers(IChoiceBuilder builder, IEnumerable<ICharacterInPlay> characters, byte numberOfResources)
+        {
+            //NOTE: characters.Count() > 1 and numberOfResources > 1
+            var characterCount = characters.Count();
+
+            var currentAmount = numberOfResources;
+            while (currentAmount > 0)
+            {
+                var withCurrentAmount = characters.Where(x => x.Resources >= currentAmount).ToList();
+                foreach (var character in withCurrentAmount)
+                {
+                    if (currentAmount == numberOfResources)
+                    {
+                        builder.Answer(string.Format("Pay the full amount ({0} resources) from '{1}'", numberOfResources, character.Title), character, (source, handle, item) => PayResourcesFromCharacter(source, handle, item, player, numberOfResources));
+                    }
+                    else
+                    {
+                        var difference = numberOfResources - currentAmount;
+                        var otherCharacters = characters.Where(x => x.Resources >= difference && x.Card.Id != character.Card.Id).ToList();
+                        foreach (var otherCharacter in otherCharacters)
+                        {
+                            //var getPaymentText = GetCharactersAndPaymentsString(
+                        }
+
+                        if (characterCount > 2)
+                        {
+                            var charactersAndAmounts = new List<Tuple<ICharacterInPlay, byte>>();
+                        }
+                    }
+                }
+
+                currentAmount--;
+            }
         }
 
         public override IEffectHandle GetHandle(IGame game)
@@ -209,10 +281,10 @@ namespace LotR.Effects.Phases.Any
                 }
                 else
                 {
-                    var characterNames = GetCharacterNames(characters);
-
                     if (sum == numberOfResources)
                     {
+                        var charactersAndPayments = GetCharactersAndPaymentsString(characters);
+
                         Action<IGame, IEffectHandle, List<ICharacterInPlay>> action = (source, handle, chars) =>
                             {
                                 foreach (var character in chars)
@@ -222,19 +294,17 @@ namespace LotR.Effects.Phases.Any
                             };
 
                         builder.Question("You have just enough resources on your character to pay this cost. Do you want to pay all of the resources from matching characters?")
-                            .Answer(string.Format("Yes, pay for this cost from {0}", characterNames), characters, action)
+                            .Answer(string.Format("Yes, pay {0}", charactersAndPayments), characters, action)
                             .LastAnswer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
                     }
                     else
                     {
+                        var characterNames = GetCharacterNames(characters);
+
                         builder.Question("You have muliple characters with a resource match to pay this cost. Do you want to select which characters to pay for this cost?")
                             .Answer(string.Format("Yes, pay resources from {0}", characterNames), true);
 
-                        byte currentResources = 0;
-                        foreach (var character in characters)
-                        {
-                            AddPaymentAnswers(builder, character, numberOfResources, currentResources);
-                        }
+                        AddPaymentAnswers(builder, characters, numberOfResources);
 
                         builder.LastAnswer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
                     }

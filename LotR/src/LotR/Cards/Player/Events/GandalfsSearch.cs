@@ -11,7 +11,7 @@ namespace LotR.Cards.Player.Events
         public GandalfsSearch()
             : base("Gandalf's Search", CardSet.Core, 67, Sphere.Lore, 0)
         {
-            HasVariableCost = true;
+            IsVariableCost = true;
         }
     }
 }

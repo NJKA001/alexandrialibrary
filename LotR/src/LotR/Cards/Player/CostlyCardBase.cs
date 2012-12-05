@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Effects;
 using LotR.Effects.Costs;
 using LotR.Effects.Phases;
+using LotR.Effects.Phases.Any;
 using LotR.States;
 
 namespace LotR.Cards.Player
@@ -18,7 +20,7 @@ namespace LotR.Cards.Player
             this.PrintedCost = printedCost;
         }
 
-        protected bool HasVariableCost
+        protected bool IsVariableCost
         {
             get;
             set;
@@ -32,7 +34,12 @@ namespace LotR.Cards.Player
 
         public virtual ICost GetResourceCost(IGame game)
         {
-            return new PayResources(this, PrintedSphere, PrintedCost, HasVariableCost);
+            return new PayResources(this, PrintedSphere, PrintedCost, IsVariableCost);
+        }
+
+        public IEffect GetPaymentEffect(IGame game, IPlayer player)
+        {
+            return new PayResourcesEffect(game, PrintedSphere, PrintedCost, IsVariableCost, player, this);
         }
     }
 }

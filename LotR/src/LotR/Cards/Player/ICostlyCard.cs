@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Effects;
 using LotR.Effects.Costs;
 using LotR.Effects.Phases;
 using LotR.States;
@@ -15,5 +16,6 @@ namespace LotR.Cards.Player
         byte PrintedCost { get; }
 
         ICost GetResourceCost(IGame game);
+        IEffect GetPaymentEffect(IGame game, IPlayer player);
     }
 }

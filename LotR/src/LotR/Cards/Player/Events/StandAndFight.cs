@@ -11,7 +11,7 @@ namespace LotR.Cards.Player.Events
         public StandAndFight()
             : base("Stand and Fight", CardSet.Core, 51, Sphere.Spirit, 0)
         {
-            HasVariableCost = true;
+            IsVariableCost = true;
         }
     }
 }

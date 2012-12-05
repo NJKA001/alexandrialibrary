@@ -9,29 +9,17 @@ using LotR.States;
 namespace LotR.Cards.Player.Treasures
 {
     public abstract class TreasureCardBase
-        : PlayerCardBase, ITreasureCard
+        : CostlyCardBase, ITreasureCard
     {
         protected TreasureCardBase(string title, CardSet cardSet, uint cardNumber, EncounterSet encounterSet, byte printedCost)
-            : base(CardType.Treasure, title, cardSet, cardNumber, Sphere.Neutral)
+            : base(CardType.Treasure, title, cardSet, cardNumber, Sphere.Neutral, printedCost)
         {
-            this.PrintedCost = printedCost;
         }
 
         public EncounterSet EncounterSet
         {
             get;
             private set;
-        }
-
-        public byte PrintedCost
-        {
-            get;
-            private set;
-        }
-
-        public ICost GetResourceCost(IGame game)
-        {
-            return new PayResources(this, PrintedSphere, PrintedCost, false);
         }
 
         public bool IsRestricted
