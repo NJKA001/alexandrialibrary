@@ -64,6 +64,11 @@ namespace LotR.Effects.Phases.Any
             handle.Cancel(string.Format("{0} chose not to pay this resource cost", player.Name));
         }
 
+        private void UnableToPayCost(IGame game, IEffectHandle handler, IPlayer player)
+        {
+            handler.Cancel(string.Format("{0} was not able to pay this cost", player.Name));
+        }
+
         private void PayResourcesFromCharacter(IGame game, IEffectHandle handle, ICharacterInPlay character, IPlayer player, byte numberOfResources)
         {
             character.Resources -= numberOfResources;
@@ -74,6 +79,32 @@ namespace LotR.Effects.Phases.Any
                 handle.Resolve(string.Format("{0} chose to have '{1}' pay 1 resource from their resource pool", player.Name, character.Title));
             else
                 handle.Resolve(string.Format("{0} chose to have '{1}' paid {2} resources from their resource pool", player.Name, character.Title, numberOfResources));
+        }
+
+        private string GetCharacterNames(IEnumerable<ICharacterInPlay> characters)
+        {
+            var characterNames = new StringBuilder();
+
+            var total = characters.Count();
+            var count = 0;
+
+            foreach (var character in characters)
+            {
+                count++;
+
+                if (count == 1)
+                    characterNames.Append(character.Title);
+                else if (count > 1 && count < total)
+                    characterNames.AppendFormat(", {0}", character.Title);
+                else
+                    characterNames.AppendFormat(" and {0}", character.Title);
+            }
+
+            return characterNames.ToString();
+        }
+
+        private void AddPaymentAnswers(IChoiceBuilder builder, ICharacterInPlay character, byte numberOfResources, byte currentResources)
+        {
         }
 
         public override IEffectHandle GetHandle(IGame game)
@@ -95,46 +126,13 @@ namespace LotR.Effects.Phases.Any
             if (characters.Count == 0)
             {
                 builder.Question("You do not have any characters with a resource match to pay this cost")
-                    .Answer("Ok, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                    .Answer("Ok, cancel this payment", false, (source, handle, item) => UnableToPayCost(source, handle, player));
             }
-            else if (!isVariableCost && numberOfResources == 0)
+            else if (isVariableCost)
             {
-                if (costlyCard != null)
+                if (characters.Count == 1)
                 {
-                    builder.Question("This card does not have any cost. Do you want to play it?")
-                        .Answer("Yes, play this card", true, (source, handle, item) => handle.Resolve(string.Format("'{0}' has no cost to play", costlyCard.Title)))
-                        .Answer("No, cancel playing this card", false, (source, handle, item) => CancelPayingCost(source, handle, player));
-                }
-                else if (cardEffect != null)
-                {
-                    builder.Question("This card effect does not have any cost. Do you want to trigger it?")
-                        .Answer("Yes, trigger this card effect", true, (source, handle, item) => handle.Resolve(string.Format("'{0}' has no cost to trigger", cardEffect.ToString())))
-                        .Answer("No, cancel triggering this card effect", false, (source, handle, item) => CancelPayingCost(source, handle, player));
-                }
-            }
-            else if (!isVariableCost && sum < numberOfResources)
-            {
-                builder.Question("You do not have characters with enough resources available to pay this cost")
-                    .Answer("Ok, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
-            }
-            else if (characters.Count == 1)
-            {
-                var first = characters.First();
-                if (first.Resources < numberOfResources && !isVariableCost)
-                {
-                    builder.Question(string.Format("'{0}' has a resource match but does not have enough resources to pay this cost", first.Title))
-                        .Answer("Ok, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
-                }
-                else if (!isVariableCost)
-                {
-                    var paymentText = numberOfResources == 1 ? "1 resource" : string.Format("{0} resources", numberOfResources);
-
-                    builder.Question(string.Format("'{0}' has a resource match, do you want to pay {1} from their resource pool?", first.Title, paymentText))
-                        .Answer("Yes, make this payment", first, (source, handle, character) => PayResourcesFromCharacter(source, handle, character, player, numberOfResources))
-                        .Answer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
-                }
-                else
-                {
+                    var first = characters.First();
                     var amounts = new List<byte>();
                     for (byte i = 1; i <= first.Resources; i++)
                     {
@@ -143,23 +141,103 @@ namespace LotR.Effects.Phases.Any
 
                     builder.Question(string.Format("'{0}' has a resource match, and this {1} has a variable cost. How many resources do you want to spend from their resource pool?", first.Title, description))
                         .Answers(amounts, (item) => item == 1 ? "1 resource" : string.Format("{0} resources", item), (source, handle, number) => PayResourcesFromCharacter(source, handle, first, player, number))
-                        .Answer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                        .LastAnswer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                }
+                else
+                {
+                    builder.Question(string.Format("This {0} has a variable cost. Do you want to pay this cost?", description))
+                        .Answer("Yes, pay this cost", true);
+
+                    foreach (var character in characters)
+                    {
+                        var amounts = new List<byte>();
+                        for (byte i = 1; i <= character.Resources; i++)
+                        {
+                            amounts.Add(i);
+                        }
+
+                        builder.Question(string.Format("'{0}' has a resource match, and this {1} has a variable cost. How many resources do you want to spend from their resource pool?", character.Title, description))
+                            .LastAnswers(amounts, (item) => item == 1 ? "1 resource" : string.Format("{0} resources", item), (source, handle, number) => PayResourcesFromCharacter(source, handle, character, player, number));
+
+                    }
+
+                    builder.LastAnswer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                }
+            }
+            else if (numberOfResources == 0)
+            {
+                if (costlyCard != null)
+                {
+                    builder.Question("This card does not have any cost. Do you want to play it?")
+                        .LastAnswer("Yes, play this card", true, (source, handle, item) => handle.Resolve(string.Format("'{0}' has no cost to play", costlyCard.Title)));
+                }
+                else if (cardEffect != null)
+                {
+                    builder.Question("This card effect does not have any cost. Do you want to trigger it?")
+                        .LastAnswer("Yes, trigger this card effect", true, (source, handle, item) => handle.Resolve(string.Format("'{0}' has no cost to trigger", cardEffect.ToString())));
+                }
+            }
+            else if (sum < numberOfResources)
+            {
+                builder.Question("You do not have characters with enough resources available to pay this cost")
+                    .LastAnswer("Ok, cancel this payment", false, (source, handle, item) => UnableToPayCost(source, handle, player));
+            }
+            else if (characters.Count == 1)
+            {
+                var first = characters.First();
+                if (first.Resources < numberOfResources)
+                {
+                    builder.Question(string.Format("'{0}' has a resource match but does not have enough resources to pay this cost", first.Title))
+                        .LastAnswer("Ok, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                }
+                else
+                {
+                    var paymentText = numberOfResources == 1 ? "1 resource" : string.Format("{0} resources", numberOfResources);
+
+                    builder.Question(string.Format("'{0}' has a resource match, do you want to pay {1} from their resource pool?", first.Title, paymentText))
+                        .Answer("Yes, make this payment", first, (source, handle, character) => PayResourcesFromCharacter(source, handle, character, player, numberOfResources))
+                        .LastAnswer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
                 }
             }
             else
             {
-                if (!isVariableCost && numberOfResources == 1)
+                if (numberOfResources == 1)
                 {
+                    builder.Question(string.Format("Multiple characters have a resource match, and this {0} costs 1 resource. Which character do you want to use to pay this cost?", description))
+                        .Answers(characters, (item) => item.Title, (source, handle, character) => PayResourcesFromCharacter(source, handle, character, player, numberOfResources))
+                        .LastAnswer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
                 }
-
-                foreach (var character in characters)
+                else
                 {
-                    if (isVariableCost)
-                        builder.Question(string.Format("'{0}' has a resource match, and this {1} has a variable cost. How many resources do you want to spend from their resource pool?", character.Title, description));
-                    else if (numberOfResources == 1)
-                        builder.Question(string.Format("'{0}' has a resource match, and this {1} costs 1 resource. How many resources do you want to spend from their resource pool?", character.Title, description));
+                    var characterNames = GetCharacterNames(characters);
+
+                    if (sum == numberOfResources)
+                    {
+                        Action<IGame, IEffectHandle, List<ICharacterInPlay>> action = (source, handle, chars) =>
+                            {
+                                foreach (var character in chars)
+                                {
+                                    PayResourcesFromCharacter(source, handle, character, player, character.Resources);
+                                }
+                            };
+
+                        builder.Question("You have just enough resources on your character to pay this cost. Do you want to pay all of the resources from matching characters?")
+                            .Answer(string.Format("Yes, pay for this cost from {0}", characterNames), characters, action)
+                            .LastAnswer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                    }
                     else
-                        builder.Question(string.Format("'{0}' has a resource match, and this {1} costs {2} resources. How many resources do you want to spend from their resource pool?", character.Title, description, numberOfResources));
+                    {
+                        builder.Question("You have muliple characters with a resource match to pay this cost. Do you want to select which characters to pay for this cost?")
+                            .Answer(string.Format("Yes, pay resources from {0}", characterNames), true);
+
+                        byte currentResources = 0;
+                        foreach (var character in characters)
+                        {
+                            AddPaymentAnswers(builder, character, numberOfResources, currentResources);
+                        }
+
+                        builder.LastAnswer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                    }
                 }
             }
 
