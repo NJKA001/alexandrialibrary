@@ -73,12 +73,21 @@ namespace LotR.Effects.Phases.Any
         {
             character.Resources -= numberOfResources;
 
-            if (numberOfResources == 0)
-                handle.Resolve(string.Format("{0} chose to have '{1}' not pay any resources", player.Name, character.Title));
-            else if (numberOfResources == 1)
-                handle.Resolve(string.Format("{0} chose to have '{1}' pay 1 resource from their resource pool", player.Name, character.Title));
+            if (numberOfResources == 1)
+                handle.Resolve(string.Format("{0} chose to pay 1 resource from '{1}'", player.Name, character.Title));
             else
-                handle.Resolve(string.Format("{0} chose to have '{1}' paid {2} resources from their resource pool", player.Name, character.Title, numberOfResources));
+                handle.Resolve(string.Format("{0} chose to pay {1} resources from '{2}'", player.Name, numberOfResources, character.Title));
+        }
+
+        private void PayResourcesFromCharacters(IGame game, IEffectHandle handle, IEnumerable<Tuple<ICharacterInPlay, byte>> charactersAndPayments, IPlayer player)
+        {
+            foreach (var tuple in charactersAndPayments)
+            {
+                tuple.Item1.Resources -= tuple.Item2;
+            }
+
+            var paymentText = GetCharactersAndPaymentsString(charactersAndPayments);
+            handle.Resolve(string.Format("{0} chose to pay {1}", player.Name, paymentText));
         }
 
         private string GetCharacterNames(IEnumerable<ICharacterInPlay> characters)
@@ -149,34 +158,48 @@ namespace LotR.Effects.Phases.Any
             //NOTE: characters.Count() > 1 and numberOfResources > 1
             var characterCount = characters.Count();
 
-            var currentAmount = numberOfResources;
-            while (currentAmount > 0)
-            {
-                var withCurrentAmount = characters.Where(x => x.Resources >= currentAmount).ToList();
-                foreach (var character in withCurrentAmount)
-                {
-                    if (currentAmount == numberOfResources)
-                    {
-                        builder.Answer(string.Format("Pay the full amount ({0} resources) from '{1}'", numberOfResources, character.Title), character, (source, handle, item) => PayResourcesFromCharacter(source, handle, item, player, numberOfResources));
-                    }
-                    else
-                    {
-                        var difference = numberOfResources - currentAmount;
-                        var otherCharacters = characters.Where(x => x.Resources >= difference && x.Card.Id != character.Card.Id).ToList();
-                        foreach (var otherCharacter in otherCharacters)
-                        {
-                            //var getPaymentText = GetCharactersAndPaymentsString(
-                        }
+            //byte currentAmount = numberOfResources;
+            //while (currentAmount > 0)
+            //{
+            //    var withCurrentAmount = characters.Where(x => x.Resources >= currentAmount).ToList();
+            //    foreach (var character in withCurrentAmount)
+            //    {
+            //        if (currentAmount == numberOfResources)
+            //        {
+            //            builder.Answer(string.Format("Pay the full amount ({0} resources) from '{1}'", numberOfResources, character.Title), character, (source, handle, item) => PayResourcesFromCharacter(source, handle, item, player, numberOfResources));
+            //        }
+            //        else
+            //        {
+            //            byte difference = (byte)(numberOfResources - currentAmount);
+            //            var secondCharacters = characters.Where(x => x.Card.Id != character.Card.Id).ToList();
+            //            foreach (var secondCharacter in secondCharacters)
+            //            {
+            //                if (secondCharacter.Resources >= difference)
+            //                {
+            //                    var charactersAndPayments = new List<Tuple<ICharacterInPlay, byte>>() { new Tuple<ICharacterInPlay, byte>(character, currentAmount), new Tuple<ICharacterInPlay, byte>(secondCharacter, difference) };
+            //                    var paymentText = GetCharactersAndPaymentsString(charactersAndPayments);
+            //                    builder.Answer(string.Format("Pay {0}", paymentText), charactersAndPayments, (source, handle, item) => PayResourcesFromCharacters(source, handle, item, player));
+            //                }
 
-                        if (characterCount > 2)
-                        {
-                            var charactersAndAmounts = new List<Tuple<ICharacterInPlay, byte>>();
-                        }
-                    }
-                }
+            //                if (characterCount > 2 && difference > 1)
+            //                {
+            //                    byte nextDifference = (byte)(difference - 1);
+            //                    var howManyMoreThanTwo = characterCount - 2;
+            //                    var additionalCount = 0;
+            //                    while (additionalCount <= howManyMoreThanTwo)
+            //                    {
+            //                        additionalCount++;
 
-                currentAmount--;
-            }
+            //                        var threshold = (byte)(additionalCount * nextDifference);
+            //                        var additionalCharacters = characters.Where(x => x.Card.Id != character.Card.Id && x.Resources >= threshold).ToList();
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+
+            //    currentAmount--;
+            //}
         }
 
         public override IEffectHandle GetHandle(IGame game)
