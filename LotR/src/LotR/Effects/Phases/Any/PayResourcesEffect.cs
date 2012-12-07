@@ -153,6 +153,52 @@ namespace LotR.Effects.Phases.Any
             return sb.ToString();
         }
 
+        private IList<IList<byte>> GetPaymentOptions(byte numberOfResources, byte numberOfCharacters)
+        {
+            return new List<IList<byte>>();
+        }
+
+        /*
+    public static ArrayList<ArrayList<Integer>> combinationSum(int[] candidates, int target)
+         * {
+        ArrayList<ArrayList<Integer>> sol = 
+                new ArrayList<ArrayList<Integer>>();
+        Arrays.sort(candidates);
+        combSumRec(candidates, target, 
+                new ArrayList<Integer>(), sol);
+        return sol;
+    }
+         * 
+    private static void combSumRec(int[] candidates, int target, 
+            ArrayList<Integer> partial,
+            ArrayList<ArrayList<Integer>> sol) {
+        int sum = 0;
+        for(int i : partial)
+            sum += i;
+        if(sum == target) {
+            if(!sol.contains(partial))
+                sol.add(partial);
+            return;
+        }
+        else if(sum > target)
+            return;
+        else {
+            for(int i = 0; i < candidates.length; ++i) {
+                ArrayList<Integer> partial_sol = 
+                        new ArrayList<Integer>();
+                partial_sol.addAll(partial);
+                partial_sol.add(candidates[i]);
+                int[] remaining = new int[candidates.length - i ];
+                System.arraycopy(candidates, i, 
+                    remaining, 0, remaining.length);
+                combSumRec(remaining, target, 
+                    partial_sol, sol);
+            }
+        }
+    }
+
+         */
+
         private void AddPaymentAnswers(IChoiceBuilder builder, IEnumerable<ICharacterInPlay> characters, byte numberOfResources)
         {
             //NOTE: characters.Count() > 1 and numberOfResources > 1
