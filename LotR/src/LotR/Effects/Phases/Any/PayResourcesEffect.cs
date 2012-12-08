@@ -153,56 +153,163 @@ namespace LotR.Effects.Phases.Any
             return sb.ToString();
         }
 
-        private IList<IList<byte>> GetPaymentOptions(byte numberOfResources, byte numberOfCharacters)
-        {
-            return new List<IList<byte>>();
-        }
+        //private IList<IList<byte>> GetPaymentOptionsForTwoCharacters(byte numberOfResources)
+        //{
+        //    if (numberOfResources < 2 || numberOfResources > 10)
+        //        throw new ArgumentException("numberOfResources must be between 2 and 10");
 
-        /*
-    public static ArrayList<ArrayList<Integer>> combinationSum(int[] candidates, int target)
-         * {
-        ArrayList<ArrayList<Integer>> sol = 
-                new ArrayList<ArrayList<Integer>>();
-        Arrays.sort(candidates);
-        combSumRec(candidates, target, 
-                new ArrayList<Integer>(), sol);
-        return sol;
-    }
-         * 
-    private static void combSumRec(int[] candidates, int target, 
-            ArrayList<Integer> partial,
-            ArrayList<ArrayList<Integer>> sol) {
-        int sum = 0;
-        for(int i : partial)
-            sum += i;
-        if(sum == target) {
-            if(!sol.contains(partial))
-                sol.add(partial);
-            return;
-        }
-        else if(sum > target)
-            return;
-        else {
-            for(int i = 0; i < candidates.length; ++i) {
-                ArrayList<Integer> partial_sol = 
-                        new ArrayList<Integer>();
-                partial_sol.addAll(partial);
-                partial_sol.add(candidates[i]);
-                int[] remaining = new int[candidates.length - i ];
-                System.arraycopy(candidates, i, 
-                    remaining, 0, remaining.length);
-                combSumRec(remaining, target, 
-                    partial_sol, sol);
+        //    var outer = new List<IList<byte>>();
+
+        //    var total = (byte)Math.Floor((double)(numberOfResources / 2));
+        //    var highest = (byte)(numberOfResources - 1);
+
+        //    for (byte i = 1; i <= total; i++)
+        //    {
+        //        outer.Add(new List<byte> { highest, i });
+        //        highest--;
+        //    }
+
+        //    return outer;
+        //}
+
+        //private IList<IList<byte>> GetPaymentOptionsForThreeCharacters(byte numberOfResources)
+        //{
+        //    if (numberOfResources < 3 || numberOfResources > 10)
+        //        throw new ArgumentException("numberOfResources must be between 3 and 10");
+
+        //    var outer = new List<IList<byte>>();
+
+        //    var total = (byte)Math.Floor((double)(numberOfResources / 3));
+        //    var highest = (byte)(numberOfResources - 1);
+
+        //    for (byte i = 1; i <= total; i++)
+        //    {
+        //        outer.Add(new List<byte> { highest, i });
+        //        highest--;
+        //    }
+
+        //    return outer;
+        //}
+
+        private IList<IList<byte>> GetPaymentOptionsForTwoCharacters(byte numberOfResources)
+        {
+            switch (numberOfResources)
+            {
+                case 2:
+                    return new List<IList<byte>> { new List<byte> { 1, 1} };
+                case 3:
+                    return new List<IList<byte>> { new List<byte> { 2, 1 } };
+                case 4:
+                    return new List<IList<byte>> { new List<byte> { 3, 1 }, new List<byte> { 2, 2 } };
+                case 5:
+                    return new List<IList<byte>> { new List<byte> { 4, 1 }, new List<byte> { 3, 2 } };
+                case 6:
+                    return new List<IList<byte>> { new List<byte> { 5, 1 }, new List<byte> { 4, 2 }, new List<byte> { 3, 3 } };
+                case 7:
+                    return new List<IList<byte>> { new List<byte> { 6, 1 }, new List<byte> { 5, 2 }, new List<byte> { 4, 3 } };
+                case 8:
+                    return new List<IList<byte>> { new List<byte> { 7, 1 }, new List<byte> { 6, 2 }, new List<byte> { 5, 3 }, new List<byte> { 4, 4 } };
+                case 9:
+                    return new List<IList<byte>> { new List<byte> { 8, 1 }, new List<byte> { 7, 2 }, new List<byte> { 6, 3 }, new List<byte> { 5, 4 } };
+                case 10:
+                    return new List<IList<byte>> { new List<byte> { 9, 1 }, new List<byte> { 8, 2 }, new List<byte> { 7, 3 }, new List<byte> { 6,4 }, new List<byte> { 5, 5 } };
+                default:
+                    throw new ArgumentException("numberOfResources must be between 2 and 10");
             }
         }
-    }
 
-         */
+        private IList<IList<byte>> GetPaymentOptionsForThreeCharacters(byte numberOfResources)
+        {
+            switch (numberOfResources)
+            {
+                case 3:
+                    return new List<IList<byte>> { new List<byte> { 1, 1, 1 } };
+                case 4:
+                    return new List<IList<byte>> { new List<byte> { 2, 1, 1 } };
+                case 5:
+                    return new List<IList<byte>> { new List<byte> { 3, 1, 1 }, new List<byte> { 2, 2, 1 } };
+                case 6:
+                    return new List<IList<byte>> { new List<byte> { 4, 1, 1 }, new List<byte> { 3, 2, 1 }, new List<byte> { 2, 2, 2 } };
+                case 7:
+                    return new List<IList<byte>> { new List<byte> { 5, 1, 1 }, new List<byte> { 4, 2, 1 }, new List<byte> { 3, 2, 2 }, new List<byte> { 3, 3, 1 } };
+                case 8:
+                    return new List<IList<byte>> { new List<byte> { 6, 1, 1 }, new List<byte> { 5, 2, 1 }, new List<byte> { 4, 2, 2 }, new List<byte> { 4, 3, 1 }, new List<byte> { 3, 3, 2 } };
+                case 9:
+                    return new List<IList<byte>> { new List<byte> { 7, 1, 1 }, new List<byte> { 6, 2, 1 }, new List<byte> { 5, 2, 2 }, new List<byte> { 5, 3, 1 }, new List<byte> { 4, 3, 2 }, new List<byte> { 4, 4, 1 }, new List<byte> { 3, 3, 3 } };
+                case 10:
+                    return new List<IList<byte>> { new List<byte> { 8, 1, 1 }, new List<byte> { 7, 2, 1 }, new List<byte> { 6, 2, 2 }, new List<byte> { 6, 3, 2 }, new List<byte> { 5, 3, 2 }, new List<byte> { 5, 4, 1 }, new List<byte> { 4, 3, 3 }, new List<byte> { 4, 4, 2} };
+                default:
+                    throw new ArgumentException("numberOfResources must be between 3 and 10");
+            }
+        }
+
+        private IList<IList<byte>> GetPaymentOptionsForFourCharacters(byte numberOfResources)
+        {
+            switch (numberOfResources)
+            {
+                case 4:
+                    return new List<IList<byte>> { new List<byte> { 1, 1, 1, 1 } };
+                case 5:
+                    return new List<IList<byte>> { new List<byte> { 2, 1, 1, 1 } };
+                case 6:
+                    return new List<IList<byte>> { new List<byte> { 3, 1, 1, 1 }, new List<byte> { 2, 2, 1, 1 } };
+                case 7:
+                    return new List<IList<byte>> { new List<byte> { 4, 1, 1, 1 }, new List<byte> { 3, 2, 1, 1 }, new List<byte> { 2, 2, 2, 1 } };
+                case 8:
+                    return new List<IList<byte>> { new List<byte> { 5, 1, 1, 1 }, new List<byte> { 4, 2, 1, 1 }, new List<byte> { 3, 2, 2, 1 }, new List<byte> { 3, 3, 1, 1 }, new List<byte> { 2, 2, 2, 2 } };
+                case 9:
+                    return new List<IList<byte>> { new List<byte> { 6, 1, 1, 1 }, new List<byte> { 5, 2, 1, 1 }, new List<byte> { 4, 2, 2, 1 }, new List<byte> { 4, 3, 1, 1 }, new List<byte> { 3, 2, 2, 2 }, new List<byte> { 3, 3, 2, 1 } };
+                case 10:
+                    return new List<IList<byte>> { new List<byte> { 7, 1, 1, 1 }, new List<byte> { 6, 2, 1, 1 }, new List<byte> { 5, 2, 2, 1 }, new List<byte> { 5, 3, 1, 1 }, new List<byte> { 4, 4, 1, 1, }, new List<byte> { 4, 3, 2, 1 }, new List<byte> { 4, 2, 2, 2 }, new List<byte> { 3, 3, 3, 1 }, new List<byte> { 3, 3, 2, 2 } };
+                default:
+                    throw new ArgumentException("numberOfResources must be between 4 and 10");
+            }
+        }
+
+        private IList<IList<byte>> GetPaymentOptionsForFiveCharacters(byte numberOfResources)
+        {
+            switch (numberOfResources)
+            {
+                case 5:
+                    return new List<IList<byte>> { new List<byte> { 1, 1, 1, 1, 1 } };
+                case 6:
+                    return new List<IList<byte>> { new List<byte> { 2, 1, 1, 1, 1 } };
+                case 7:
+                    return new List<IList<byte>> { new List<byte> { 3, 1, 1, 1, 1 }, new List<byte> { 2, 2, 1, 1, 1 } };
+                case 8:
+                    return new List<IList<byte>> { new List<byte> { 4, 1, 1, 1, 1 }, new List<byte> { 3, 2, 1, 1, 1 }, new List<byte> { 2, 2, 2, 1, 1 } };
+                case 9:
+                    return new List<IList<byte>> { new List<byte> { 5, 1, 1, 1, 1 }, new List<byte> { 4, 2, 1, 1, 1 }, new List<byte> { 3, 2, 2, 1, 1 }, new List<byte> { 2, 2, 2, 2, 1 } };
+                case 10:
+                    return new List<IList<byte>> { new List<byte> { 6, 1, 1, 1, 1 }, new List<byte> { 5, 2, 1, 1, 1 }, new List<byte> { 4, 3, 1, 1, 1, }, new List<byte> { 4, 2, 2, 1, 1 }, new List<byte> { 3, 3, 1, 1, 1 }, new List<byte> { 3, 2, 2, 2, 1 }, new List<byte> { 2, 2, 2, 2, 2 } };
+                default:
+                    throw new ArgumentException("numberOfResources must be between 5 and 10");
+            }
+        }
+
+        private IList<IList<byte>> GetPaymentOptions(byte numberOfResources, byte numberOfCharacters)
+        {
+            switch (numberOfCharacters)
+            {
+                case 2:
+                    return GetPaymentOptionsForTwoCharacters(numberOfResources);
+                case 3:
+                    return GetPaymentOptionsForThreeCharacters(numberOfResources);
+                case 4:
+                    return GetPaymentOptionsForFourCharacters(numberOfResources);
+                case 5:
+                    return GetPaymentOptionsForFiveCharacters(numberOfResources);
+                default:
+                    throw new ArgumentException("numberOfCharacters must be between 2 and 5");
+            }
+        }
 
         private void AddPaymentAnswers(IChoiceBuilder builder, IEnumerable<ICharacterInPlay> characters, byte numberOfResources)
         {
             //NOTE: characters.Count() > 1 and numberOfResources > 1
-            var characterCount = characters.Count();
+            var numberOfCharacters = (byte)characters.Count();
+
+            var paymentOptions = GetPaymentOptions(numberOfResources, numberOfCharacters);
 
             //byte currentAmount = numberOfResources;
             //while (currentAmount > 0)
