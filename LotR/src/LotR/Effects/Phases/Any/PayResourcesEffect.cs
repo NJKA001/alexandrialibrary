@@ -289,70 +289,128 @@ namespace LotR.Effects.Phases.Any
 
         private IList<IList<byte>> GetPaymentOptions(byte numberOfResources, byte numberOfCharacters)
         {
+            var options = new List<IList<byte>>();
+
             switch (numberOfCharacters)
             {
                 case 2:
-                    return GetPaymentOptionsForTwoCharacters(numberOfResources);
+                    options.AddRange(GetPaymentOptionsForTwoCharacters(numberOfResources));
+                    break;
                 case 3:
-                    return GetPaymentOptionsForThreeCharacters(numberOfResources);
+                    options.AddRange(GetPaymentOptionsForTwoCharacters(numberOfResources));
+                    
+                    if (numberOfResources > 2)
+                        options.AddRange(GetPaymentOptionsForThreeCharacters(numberOfResources));
+
+                    break;
                 case 4:
-                    return GetPaymentOptionsForFourCharacters(numberOfResources);
+                    options.AddRange(GetPaymentOptionsForTwoCharacters(numberOfResources));
+                    
+                    if (numberOfResources > 2)
+                        options.AddRange(GetPaymentOptionsForThreeCharacters(numberOfResources));
+
+                    if (numberOfResources > 3)
+                        options.AddRange(GetPaymentOptionsForFourCharacters(numberOfResources));
+
+                    break;
                 case 5:
-                    return GetPaymentOptionsForFiveCharacters(numberOfResources);
+                    options.AddRange(GetPaymentOptionsForTwoCharacters(numberOfResources));
+                    
+                    if (numberOfResources > 2)
+                        options.AddRange(GetPaymentOptionsForThreeCharacters(numberOfResources));
+
+                    if (numberOfResources > 3)
+                        options.AddRange(GetPaymentOptionsForFourCharacters(numberOfResources));
+
+                    if (numberOfResources > 4)
+                        options.AddRange(GetPaymentOptionsForFiveCharacters(numberOfResources));
+
+                    break;
                 default:
                     throw new ArgumentException("numberOfCharacters must be between 2 and 5");
             }
+
+            return options;
         }
 
         private void AddPaymentAnswers(IChoiceBuilder builder, IEnumerable<ICharacterInPlay> characters, byte numberOfResources)
         {
-            //NOTE: characters.Count() > 1 and numberOfResources > 1
+            if (characters.Count() < 2)
+                throw new ArgumentException("characters sequence must contain at least two items");
+            if (numberOfResources < 2)
+                throw new ArgumentException("numberOfResources cannot be less than 2");
+
             var numberOfCharacters = (byte)characters.Count();
 
             var paymentOptions = GetPaymentOptions(numberOfResources, numberOfCharacters);
 
-            //byte currentAmount = numberOfResources;
-            //while (currentAmount > 0)
-            //{
-            //    var withCurrentAmount = characters.Where(x => x.Resources >= currentAmount).ToList();
-            //    foreach (var character in withCurrentAmount)
-            //    {
-            //        if (currentAmount == numberOfResources)
-            //        {
-            //            builder.Answer(string.Format("Pay the full amount ({0} resources) from '{1}'", numberOfResources, character.Title), character, (source, handle, item) => PayResourcesFromCharacter(source, handle, item, player, numberOfResources));
-            //        }
-            //        else
-            //        {
-            //            byte difference = (byte)(numberOfResources - currentAmount);
-            //            var secondCharacters = characters.Where(x => x.Card.Id != character.Card.Id).ToList();
-            //            foreach (var secondCharacter in secondCharacters)
-            //            {
-            //                if (secondCharacter.Resources >= difference)
-            //                {
-            //                    var charactersAndPayments = new List<Tuple<ICharacterInPlay, byte>>() { new Tuple<ICharacterInPlay, byte>(character, currentAmount), new Tuple<ICharacterInPlay, byte>(secondCharacter, difference) };
-            //                    var paymentText = GetCharactersAndPaymentsString(charactersAndPayments);
-            //                    builder.Answer(string.Format("Pay {0}", paymentText), charactersAndPayments, (source, handle, item) => PayResourcesFromCharacters(source, handle, item, player));
-            //                }
+            foreach (var character in characters)
+            {
+                if (character.Resources >= numberOfResources)
+                {
+                    builder.Answer(string.Format("Pay the full cost ({0} resources) from '{1}'", numberOfResources, character.Title), character, (source, handle, item) => PayResourcesFromCharacter(source, handle, item, player, numberOfResources));
+                }
+            }
 
-            //                if (characterCount > 2 && difference > 1)
-            //                {
-            //                    byte nextDifference = (byte)(difference - 1);
-            //                    var howManyMoreThanTwo = characterCount - 2;
-            //                    var additionalCount = 0;
-            //                    while (additionalCount <= howManyMoreThanTwo)
-            //                    {
-            //                        additionalCount++;
+            foreach (var optionList in paymentOptions.Where(x => x.Count >= 2))
+            {
+                foreach (var first in characters.Where(x => x.Resources >= optionList[0]))
+                {
+                    foreach (var second in characters.Where(x => x.Card.Id != first.Card.Id && x.Resources >= optionList[1]))
+                    {
+                        if (optionList.Count < 3)
+                        {
+                            var charactersAndPayments = new List<Tuple<ICharacterInPlay, byte>>();
+                            charactersAndPayments.Add(new Tuple<ICharacterInPlay, byte>(first, optionList[0]));
+                            charactersAndPayments.Add(new Tuple<ICharacterInPlay, byte>(second, optionList[1]));
 
-            //                        var threshold = (byte)(additionalCount * nextDifference);
-            //                        var additionalCharacters = characters.Where(x => x.Card.Id != character.Card.Id && x.Resources >= threshold).ToList();
-            //                    }
-            //                }
-            //            }
-            //        }
-            //    }
+                            builder.Answer(string.Format("Pay {0}", GetCharactersAndPaymentsString(charactersAndPayments)), charactersAndPayments, (source, handle, item) => PayResourcesFromCharacters(source, handle, item, player));
+                            break;
+                        }
 
-            //    currentAmount--;
-            //}
+                        foreach (var third in characters.Where(x => x.Card.Id != first.Card.Id && x.Card.Id != second.Card.Id && x.Resources >= optionList[2]))
+                        {
+                            if (optionList.Count < 4)
+                            {
+                                var charactersAndPayments = new List<Tuple<ICharacterInPlay, byte>>();
+                                charactersAndPayments.Add(new Tuple<ICharacterInPlay, byte>(first, optionList[0]));
+                                charactersAndPayments.Add(new Tuple<ICharacterInPlay, byte>(second, optionList[1]));
+                                charactersAndPayments.Add(new Tuple<ICharacterInPlay, byte>(third, optionList[2]));
+
+                                builder.Answer(string.Format("Pay {0}", GetCharactersAndPaymentsString(charactersAndPayments)), charactersAndPayments, (source, handle, item) => PayResourcesFromCharacters(source, handle, item, player));
+                                break;
+                            }
+
+                            foreach (var fourth in characters.Where(x => x.Card.Id != first.Card.Id && x.Card.Id != second.Card.Id && x.Card.Id != third.Card.Id && x.Resources >= optionList[3]))
+                            {
+                                if (optionList.Count < 5)
+                                {
+                                    var charactersAndPayments = new List<Tuple<ICharacterInPlay, byte>>();
+                                    charactersAndPayments.Add(new Tuple<ICharacterInPlay, byte>(first, optionList[0]));
+                                    charactersAndPayments.Add(new Tuple<ICharacterInPlay, byte>(second, optionList[1]));
+                                    charactersAndPayments.Add(new Tuple<ICharacterInPlay, byte>(third, optionList[2]));
+                                    charactersAndPayments.Add(new Tuple<ICharacterInPlay, byte>(fourth, optionList[3]));
+
+                                    builder.Answer(string.Format("Pay {0}", GetCharactersAndPaymentsString(charactersAndPayments)), charactersAndPayments, (source, handle, item) => PayResourcesFromCharacters(source, handle, item, player));
+                                    break;
+                                }
+
+                                foreach (var fifth in characters.Where(x => x.Card.Id != first.Card.Id && x.Card.Id != second.Card.Id && x.Card.Id != third.Card.Id && x.Card.Id != fourth.Card.Id && x.Resources >= optionList[4]))
+                                {
+                                    var charactersAndPayments = new List<Tuple<ICharacterInPlay, byte>>();
+                                    charactersAndPayments.Add(new Tuple<ICharacterInPlay, byte>(first, optionList[0]));
+                                    charactersAndPayments.Add(new Tuple<ICharacterInPlay, byte>(second, optionList[1]));
+                                    charactersAndPayments.Add(new Tuple<ICharacterInPlay, byte>(third, optionList[2]));
+                                    charactersAndPayments.Add(new Tuple<ICharacterInPlay, byte>(fourth, optionList[3]));
+                                    charactersAndPayments.Add(new Tuple<ICharacterInPlay, byte>(fifth, optionList[4]));
+
+                                    builder.Answer(string.Format("Pay {0}", GetCharactersAndPaymentsString(charactersAndPayments)), charactersAndPayments, (source, handle, item) => PayResourcesFromCharacters(source, handle, item, player));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public override IEffectHandle GetHandle(IGame game)
