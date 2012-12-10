@@ -535,8 +535,8 @@ namespace LotR.Effects.Phases.Any
                     {
                         var characterNames = GetCharacterNames(characters);
 
-                        builder.Question("You have muliple characters with a resource match to pay this cost. Do you want to select which characters to pay for this cost?")
-                            .Answer(string.Format("Yes, pay resources from {0}", characterNames), true);
+                        builder.Question("You have muliple characters with a resource match to pay this cost. Do you want to choose the resources to pay from matching characters?")
+                            .Answer(string.Format("Yes, pay resources as follows:", characterNames), true);
 
                         AddPaymentAnswers(builder, characters, numberOfResources);
 
