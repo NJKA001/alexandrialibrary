@@ -31,9 +31,9 @@ namespace LotR.Cards.Player
             private set;
         }
 
-        public IEffect GetCost(IGame game, IPlayer player)
-        {
-            return new PayResourcesEffect(game, PrintedSphere, PrintedCost, IsVariableCost, player, this);
-        }
+        //public IEffect GetCost(IGame game, IPlayer player)
+        //{
+        //    return new PayResourcesEffect(game, PrintedSphere, PrintedCost, IsVariableCost, player, this);
+        //}
     }
 }

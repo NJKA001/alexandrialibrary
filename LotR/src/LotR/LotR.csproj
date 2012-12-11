@@ -87,12 +87,13 @@
     <Compile Include="Cards\Quests\BeornsPath.cs" />
     <Compile Include="Cards\Quests\DontLeaveThePath.cs" />
     <Compile Include="Cards\ScenarioCode.cs" />
+    <Compile Include="Effects\Phases\Any\PlayAllyEffect.cs" />
     <Compile Include="Effects\Answer.cs" />
     <Compile Include="Effects\Choice.cs" />
     <Compile Include="Effects\ChoiceBuilder.cs" />
     <Compile Include="Effects\ChoiceItemBase.cs" />
     <Compile Include="Effects\ICostlyEffect.cs" />
-    <Compile Include="Effects\Phases\Any\PayResourcesEffect.cs" />
+    <Compile Include="Effects\Phases\Any\PlayCardEffectBase.cs" />
     <Compile Include="Effects\PlayersExhaustCharactersChoiceFactory.cs" />
     <Compile Include="Effects\IAnswer.cs" />
     <Compile Include="Effects\IChoiceItem.cs" />

@@ -7,26 +7,26 @@ using LotR.Cards;
 using LotR.Cards.Player;
 using LotR.States;
 
-namespace LotR.Effects.Phases.Any
+namespace LotR.Effects
 {
-    public class PayResourcesEffect
-        : EffectBase
+    public abstract class PlayCardEffectBase
+        : FrameworkEffectBase
     {
-        public PayResourcesEffect(IGame game, Sphere resourceSphere, byte numberOfResources, bool isVariableCost, IPlayer player, ICostlyCard costlyCard)
+        protected PlayCardEffectBase(IGame game, Sphere resourceSphere, byte numberOfResources, bool isVariableCost, IPlayer player, ICostlyCard costlyCard)
             : this(game, resourceSphere, numberOfResources, isVariableCost, player, costlyCard, null)
         {
             if (costlyCard == null)
                 throw new ArgumentNullException("costlyCard");
         }
 
-        public PayResourcesEffect(IGame game, Sphere resourceSphere, byte numberOfResources, bool isVariableCost, IPlayer player, ICardEffect cardEffect)
+        protected PlayCardEffectBase(IGame game, Sphere resourceSphere, byte numberOfResources, bool isVariableCost, IPlayer player, ICardEffect cardEffect)
             : this(game, resourceSphere, numberOfResources, isVariableCost, player, null, cardEffect)
         {
             if (cardEffect == null)
                 throw new ArgumentNullException("cardEffect");
         }
 
-        public PayResourcesEffect(IGame game, Sphere resourceSphere, byte numberOfResources, bool isVariableCost, IPlayer player, ICostlyCard costlyCard, ICardEffect cardEffect)
+        private PlayCardEffectBase(IGame game, Sphere resourceSphere, byte numberOfResources, bool isVariableCost, IPlayer player, ICostlyCard costlyCard, ICardEffect cardEffect)
             : base("Pay Resources", GetText(player, resourceSphere, numberOfResources, isVariableCost), game)
         {
             if (player == null)
@@ -40,12 +40,14 @@ namespace LotR.Effects.Phases.Any
             this.cardEffect = cardEffect;
         }
 
-        private readonly Sphere resourceSphere;
-        private readonly byte numberOfResources;
-        private readonly bool isVariableCost;
-        private readonly IPlayer player;
-        private readonly ICostlyCard costlyCard;
-        private readonly ICardEffect cardEffect;
+        protected readonly Sphere resourceSphere;
+        protected readonly byte numberOfResources;
+        protected readonly bool isVariableCost;
+        protected readonly IPlayer player;
+        protected readonly ICostlyCard costlyCard;
+        protected readonly ICardEffect cardEffect;
+
+        #region Private Methods
 
         private static string GetText(IPlayer player, Sphere resourceSphere, byte numberOfResources, bool isVariableCost)
         {
@@ -73,6 +75,8 @@ namespace LotR.Effects.Phases.Any
         {
             character.Resources -= numberOfResources;
 
+            ResolvePlayCardEffect();
+
             if (numberOfResources == 1)
                 handle.Resolve(string.Format("{0} chose to pay 1 resource from '{1}'", player.Name, character.Title));
             else
@@ -85,6 +89,8 @@ namespace LotR.Effects.Phases.Any
             {
                 tuple.Item1.Resources -= tuple.Item2;
             }
+
+            ResolvePlayCardEffect();
 
             var paymentText = GetCharactersAndPaymentsString(charactersAndPayments);
             handle.Resolve(string.Format("{0} chose to pay {1}", player.Name, paymentText));
@@ -412,6 +418,10 @@ namespace LotR.Effects.Phases.Any
                 }
             }
         }
+
+        #endregion
+
+        protected abstract void ResolvePlayCardEffect();
 
         public override IEffectHandle GetHandle(IGame game)
         {

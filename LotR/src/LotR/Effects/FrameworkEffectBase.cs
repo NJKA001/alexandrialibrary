@@ -13,7 +13,10 @@ namespace LotR.Effects
         protected FrameworkEffectBase(string type, string text, IGame game)
             : base(type, text, game)
         {
+            this.game = game;
         }
+
+        protected readonly IGame game;
 
         public override string ToString()
         {
