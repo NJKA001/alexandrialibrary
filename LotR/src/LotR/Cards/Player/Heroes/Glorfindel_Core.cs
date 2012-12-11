@@ -5,8 +5,6 @@ using System.Text;
 
 using LotR.Cards.Player;
 using LotR.Effects;
-
-using LotR.Effects.Costs;
 using LotR.Effects.Payments;
 using LotR.States;
 using LotR.Effects.Phases;

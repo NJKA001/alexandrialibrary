@@ -98,8 +98,6 @@
     <Compile Include="Effects\IChoiceItem.cs" />
     <Compile Include="Effects\IQuestion.cs" />
     <Compile Include="Effects\Question.cs" />
-    <Compile Include="Effects\Costs\IPayResources.cs" />
-    <Compile Include="Effects\Costs\IPayResourcesFrom.cs" />
     <Compile Include="Effects\EffectHandle.cs" />
     <Compile Include="Effects\ForcedCardEffectBase.cs" />
     <Compile Include="Effects\FrameworkEffectBase.cs" />
@@ -222,11 +220,6 @@
     <Compile Include="Effects\ISource.cs" />
     <Compile Include="States\CardInPlay.cs" />
     <Compile Include="Cards\Player\CostlyCardBase.cs" />
-    <Compile Include="Effects\Costs\CostBase.cs" />
-    <Compile Include="Effects\Costs\DiscardCardsFromHand.cs" />
-    <Compile Include="Effects\Costs\ExhaustSelf.cs" />
-    <Compile Include="Effects\Costs\PayResources.cs" />
-    <Compile Include="Effects\Costs\PayResourcesFrom.cs" />
     <Compile Include="States\Deck.cs" />
     <Compile Include="Effects\ActionCardEffectBase.cs" />
     <Compile Include="Effects\CardEffectBase.cs" />
@@ -427,7 +420,6 @@
     <Compile Include="Cards\ICardText.cs" />
     <Compile Include="Effects\ICharacterAbility.cs" />
     <Compile Include="Cards\Player\ICharacterCard.cs" />
-    <Compile Include="Effects\Costs\ICost.cs" />
     <Compile Include="Cards\Player\ICostlyCard.cs" />
     <Compile Include="States\IDeck.cs" />
     <Compile Include="Effects\Payments\IDiscardFromHandPayment.cs" />

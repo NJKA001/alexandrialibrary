@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Effects.Costs;
 using LotR.Effects.Payments;
 using LotR.Effects.Phases;
 using LotR.States;

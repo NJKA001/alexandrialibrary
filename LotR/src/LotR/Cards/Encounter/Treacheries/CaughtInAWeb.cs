@@ -5,7 +5,6 @@ using System.Text;
 
 using LotR.Effects;
 
-using LotR.Effects.Costs;
 using LotR.Effects.Payments;
 using LotR.Effects.Phases.Refresh;
 using LotR.States;

@@ -6,7 +6,6 @@ using System.Text;
 using LotR.Cards;
 using LotR.Cards.Player;
 using LotR.Effects;
-using LotR.Effects.Costs;
 
 namespace LotR.States
 {

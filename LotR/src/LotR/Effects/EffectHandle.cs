@@ -4,8 +4,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-
-using LotR.Effects.Costs;
 using LotR.Effects.Payments;
 
 namespace LotR.Effects

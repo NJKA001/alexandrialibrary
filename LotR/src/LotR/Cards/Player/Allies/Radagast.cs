@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 
 using LotR.Effects;
-
-using LotR.Effects.Costs;
 using LotR.Effects.Payments;
 using LotR.Effects.Phases.Any;
 using LotR.States;

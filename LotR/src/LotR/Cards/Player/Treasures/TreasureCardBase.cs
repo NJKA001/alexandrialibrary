@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using LotR.Effects.Costs;
 using LotR.States;
 
 namespace LotR.Cards.Player.Treasures

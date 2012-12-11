@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards.Player.Heroes;
-
-using LotR.Effects.Costs;
 using LotR.Effects;
 using LotR.Effects.Payments;
 using LotR.Effects.Phases;

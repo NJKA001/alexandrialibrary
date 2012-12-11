@@ -5,7 +5,6 @@ using System.Text;
 
 using LotR.Cards.Player.Allies;
 using LotR.Effects;
-using LotR.Effects.Costs;
 using LotR.Effects.Phases.Any;
 using LotR.States;
 using LotR.States.Phases.Any;

@@ -10,8 +10,6 @@ using LotR.Cards.Player.Attachments;
 using LotR.Cards.Player.Events;
 using LotR.Cards.Player.Treasures;
 using LotR.Effects;
-
-using LotR.Effects.Costs;
 using LotR.Effects.Payments;
 using LotR.States;
 
