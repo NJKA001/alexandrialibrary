@@ -10,7 +10,7 @@ using LotR.States;
 namespace LotR.Effects.Phases.Any
 {
     public class PayResourcesEffect
-        : FrameworkEffectBase
+        : EffectBase
     {
         public PayResourcesEffect(IGame game, Sphere resourceSphere, byte numberOfResources, bool isVariableCost, IPlayer player, ICostlyCard costlyCard)
             : this(game, resourceSphere, numberOfResources, isVariableCost, player, costlyCard, null)
@@ -26,7 +26,7 @@ namespace LotR.Effects.Phases.Any
                 throw new ArgumentNullException("cardEffect");
         }
 
-        private PayResourcesEffect(IGame game, Sphere resourceSphere, byte numberOfResources, bool isVariableCost, IPlayer player, ICostlyCard costlyCard, ICardEffect cardEffect)
+        public PayResourcesEffect(IGame game, Sphere resourceSphere, byte numberOfResources, bool isVariableCost, IPlayer player, ICostlyCard costlyCard, ICardEffect cardEffect)
             : base("Pay Resources", GetText(player, resourceSphere, numberOfResources, isVariableCost), game)
         {
             if (player == null)

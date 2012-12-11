@@ -32,12 +32,7 @@ namespace LotR.Cards.Player.Allies
             private set;
         }
 
-        public virtual ICost GetResourceCost(IGame game)
-        {
-            return new PayResources(this, PrintedSphere, PrintedCost, IsVariableCost);
-        }
-
-        public IEffect GetPaymentEffect(IGame game, IPlayer player)
+        public IEffect GetCost(IGame game, IPlayer player)
         {
             return new PayResourcesEffect(game, PrintedSphere, PrintedCost, IsVariableCost, player, this);
         }

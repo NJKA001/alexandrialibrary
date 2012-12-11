@@ -31,18 +31,25 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            private void PlayerDrawsTwoCards(IGame game, IEffectHandle handle, IPlayer controller, IPlayer player)
+            private void ExhaustAndPlayerDrawsTwoCards(IGame game, IEffectHandle handle, IPlayer controller, IExhaustableInPlay exhaustable, IPlayer player)
             {
+                exhaustable.Exhaust();
+
                 player.DrawCards(2);
 
-                if (controller == player)
+                if (controller.StateId == player.StateId)
                 {
-                    handle.Resolve(string.Format("{0} chose to draw 2 cards", controller.Name));
+                    handle.Resolve(string.Format("{0} exhausted '{1}' to draw 2 cards", controller.Name, CardSource.Title));
                 }
                 else
                 {
-                    handle.Resolve(string.Format("{0} chose to have {1} draw 2 cards", controller.Name, player.Name));
+                    handle.Resolve(string.Format("{0} exhausted '{1}' to have {2} draw 2 cards", controller.Name, CardSource.Title, player.Name));
                 }
+            }
+
+            private void CancelEffect(IGame game, IEffectHandle handle, IPlayer controller)
+            {
+                handle.Cancel(string.Format("{0} chose not to exhaust '{0}' to have a player draw 2 cards", controller.Name, CardSource.Title));
             }
 
             public override IEffectHandle GetHandle(IGame game)
@@ -51,42 +58,34 @@ namespace LotR.Cards.Player.Heroes
 
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    return new EffectHandle(this, null, null, limit);
+                    return base.GetHandle(game);
+
+                var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
+                if (exhaustable == null || exhaustable.IsExhausted)
+                    return base.GetHandle(game);
 
                 var builder =
-                    new ChoiceBuilder("Choose a player to draw 2 cards", game, controller)
-                        .Question("Which player should draw 2 cards?")
-                            .LastAnswers(game.Players, item => item.Name, (source, handle, player) => PlayerDrawsTwoCards(game, handle, controller, player));
+                    new ChoiceBuilder(string.Format("Exhaust '{0}' to have a plyer draw 2 cards", CardSource.Title), game, controller);
+                
+                if (game.Players.Count() == 1)
+                {
+                    builder.Question(string.Format("You are the only player, exhaust '{0}' to draw 2 cards?", CardSource.Title))
+                        .Answer(string.Format("Yes, I want to exhaust '{0}' to draw 2 cards", CardSource.Title), controller, (source, handle, player) => ExhaustAndPlayerDrawsTwoCards(source, handle, controller, exhaustable, player))
+                        .LastAnswer("No, I do not want to exhaust '{0}' to draw 2 cards", false, (source, handle, item) => CancelEffect(source, handle, controller));
+                }
+                else
+                {
+                    builder.Question(string.Format("{0}, do you want to exhaust '{1}' to have a player draw 2 cards?", controller.Name))
+                        .Answer(string.Format("Yes, I will exhaust '{0}' to have a player draw 2 cards", CardSource.Title), true)
+                            .Question("Which player should draw 2 cards?")
+                                .LastAnswers(game.Players.ToList(), item => item.Name, (source, handle, player) => ExhaustAndPlayerDrawsTwoCards(game, handle, controller, exhaustable, player))
+                        .LastAnswer(string.Format("No, I do not want to exhaust '{0}' to have a player draw 2 cards", CardSource.Title), false, (source, handle, item) => CancelEffect(source, handle, controller));
+                        
+                }
 
                 var choice = builder.ToChoice();
 
-                var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
-                if (exhaustable == null)
-                    return new EffectHandle(this, choice, null, limit);
-
-                var cost = new ExhaustSelf(exhaustable);
-
-                return new EffectHandle(this, choice, cost, limit);
-            }
-
-            public override void Validate(IGame game, IEffectHandle handle)
-            {
-                var exhaustPayment = handle.Payment as IExhaustCardPayment;
-                if (exhaustPayment == null)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                if (exhaustPayment.Exhaustable.IsExhausted)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                exhaustPayment.Exhaustable.Exhaust();
-
-                handle.Accept();
+                return new EffectHandle(this, choice, limit);
             }
         }
     }

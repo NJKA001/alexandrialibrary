@@ -68,7 +68,7 @@ namespace LotR.Effects.Phases.Any
 
         private void PlayCardFromHand(IGame game, IEffectHandle handle, ICostlyCard costlyCard)
         {
-            var playCardEffect = new PlayCardFromHandEffect(game, costlyCard);
+            var playCardEffect = new PlayCardFromHandEffect(game, player, costlyCard);
             game.AddEffect(playCardEffect);
             var playCardHandle = playCardEffect.GetHandle(game);
             game.TriggerEffect(playCardHandle);

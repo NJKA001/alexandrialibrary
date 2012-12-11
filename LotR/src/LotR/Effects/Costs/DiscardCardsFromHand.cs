@@ -10,38 +10,38 @@ using LotR.States;
 
 namespace LotR.Effects.Costs
 {
-    public class DiscardCardsFromHand
-        : CostBase
-    {
-        public DiscardCardsFromHand(ISource source, IGame game, byte numberOfCards)
-            : base(string.Format("Discard {0} cards from your hand", numberOfCards), source)
-        {
-            this.game = game;
-            this.numberOfCards = numberOfCards;
-        }
+    //public class DiscardCardsFromHand
+    //    : CostBase
+    //{
+    //    public DiscardCardsFromHand(ISource source, IGame game, byte numberOfCards)
+    //        : base(string.Format("Discard {0} cards from your hand", numberOfCards), source)
+    //    {
+    //        this.game = game;
+    //        this.numberOfCards = numberOfCards;
+    //    }
 
-        private readonly IGame game;
-        private readonly byte numberOfCards;
+    //    private readonly IGame game;
+    //    private readonly byte numberOfCards;
 
-        public override bool IsMetBy(IPayment payment)
-        {
-            if (payment == null)
-                return false;
+    //    public override bool IsMetBy(IPayment payment)
+    //    {
+    //        if (payment == null)
+    //            return false;
 
-            var choice = payment as IChooseCardInHandPayment;
-            if (choice == null)
-                return false;
+    //        var choice = payment as IChooseCardInHandPayment;
+    //        if (choice == null)
+    //            return false;
 
-            if (choice.Cards.Count() != numberOfCards)
-                return false;
+    //        if (choice.Cards.Count() != numberOfCards)
+    //            return false;
 
-            foreach (var card in choice.Cards)
-            {
-                if (!choice.Player.Hand.Cards.Any(x => x.Id == card.Id))
-                    return false;
-            }
+    //        foreach (var card in choice.Cards)
+    //        {
+    //            if (!choice.Player.Hand.Cards.Any(x => x.Id == card.Id))
+    //                return false;
+    //        }
 
-            return true;
-        }
-    }
+    //        return true;
+    //    }
+    //}
 }

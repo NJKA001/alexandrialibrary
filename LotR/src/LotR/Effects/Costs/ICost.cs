@@ -9,12 +9,12 @@ using LotR.States;
 
 namespace LotR.Effects.Costs
 {
-    public interface ICost
-    {
-        ISource Source { get; }
-        string Description { get; }
+    //public interface ICost
+    //{
+    //    ISource Source { get; }
+    //    string Description { get; }
 
-        bool IsOptional { get; set; }
-        bool IsMetBy(IPayment payment);
-    }
+    //    bool IsOptional { get; set; }
+    //    bool IsMetBy(IPayment payment);
+    //}
 }

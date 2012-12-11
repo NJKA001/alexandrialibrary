@@ -57,22 +57,12 @@ namespace LotR.Cards.Player.Allies
             {
             }
 
-            private void HealCreatureInPlay(IGame game, IEffectHandle handle, ICharacterInPlay creature)
+            private void HealCreatureInPlay(IGame game, IEffectHandle handle, IPlayer controller, ICharacterInPlay radagast, ICharacterInPlay creature, byte numberOfResources)
             {
-                var payFrom = handle.Cost as IPayResourcesFrom;
-                if (payFrom == null)
-                {
-                    handle.Cancel("Could not heal a Creature, resource payment is invalid");
-                    return;
-                }
+                radagast.Resources -= numberOfResources;
+                creature.Damage -= numberOfResources;
 
-                if (payFrom.NumberOfResources == 0)
-                {
-                    handle.Cancel("Could not heal a Creature, no resources were paid");
-                    return;
-                }
-
-                creature.Damage -= payFrom.NumberOfResources;
+                handle.Resolve(string.Format("{0} chose to have '{1}' heal {2} damage from '{3}'", controller.Name, CardSource.Title, numberOfResources, creature.Title));
             }
 
             public override IEffectHandle GetHandle(IGame game)
@@ -82,63 +72,43 @@ namespace LotR.Cards.Player.Allies
                     return base.GetHandle(game);
 
                 var resourceful = game.GetCardInPlay<ICharacterInPlay>(CardSource.Id);
-                if (resourceful == null)
+                if (resourceful == null || resourceful.Resources == 0)
                     return base.GetHandle(game);
 
-                var creatures = game.GetAllCardsInPlay<ICharacterInPlay>().Where(x => x.HasTrait(Trait.Creature)).ToList();
+                var creatures = game.GetAllCardsInPlay<ICharacterInPlay>().Where(x => x.HasTrait(Trait.Creature) && x.Damage > 0).ToList();
                 if (creatures.Count == 0)
                     return base.GetHandle(game);
 
                 var builder =
-                    new ChoiceBuilder("Choose a Creature in play", game, controller)
-                        .Question("Which Creature do you want to heal?")
-                            .Answers(creatures, item => string.Format("{0} ({1} damage, {2} hit points)", item.Title, item.Damage, item.Card.PrintedHitPoints), (source, handle, creature) => HealCreatureInPlay(source, handle, creature));
+                    new ChoiceBuilder("Choose a Creature in play", game, controller);
 
-                var choice = builder.ToChoice();
-                var cost = new PayResourcesFrom(CardSource, resourceful, 0, true);
-
-                return new EffectHandle(this, choice, cost);
-            }
-
-            public override void Validate(IGame game, IEffectHandle handle)
-            {
-                var resourcePayment = handle.Payment as IResourcePayment;
-                if (resourcePayment == null)
+                if (resourceful.Resources == 1)
                 {
-                    handle.Reject();
-                    return;
+                    builder.Question(string.Format("'{0}' only has 1 resource available do you want to pay that one resource to heal a creature?", CardSource.Title))
+                        .Answer(string.Format("Yes, I want to pay 1 resource from '{0}' to heal a creature", CardSource.Title), true)
+                            .Question("Which Creature do you want to heal?")
+                                .LastAnswers(creatures, item => string.Format("{0} ({1} damage, {2} hit points)", item.Title, item.Damage, item.Card.PrintedHitPoints), (source, handle, creature) => HealCreatureInPlay(source, handle, controller, resourceful, creature, 1));
+                }
+                else
+                {
+                    builder.Question("Which Creature do you want to heal?");
+
+                    foreach (var creature in creatures)
+                    {
+                        //.Answers(creatures, item => string.Format("{0} ({1} damage, {2} hit points)", item.Title, item.Damage, item.Card.PrintedHitPoints), (source, handle, creature) => HealCreatureInPlay(source, handle, controller, resourceful, creature, 1));
+
+                    //builder.Question(string.Format("How many resources do you want to pay from '{0}' to heal a creature?", CardSource.Title))
+                        //.Answer(string.Format("Yes, I want to pay 1 resource from '{0}' to heal a creature", CardSource.Title), true)
+                    }
+                            
                 }
 
-                if (resourcePayment.Characters.Count() != 0)
-                {
-                    handle.Reject();
-                    return;
-                }
+                builder.LastAnswer(string.Format("No, I do not want to pay any resources from '{0}' to heal a creature", CardSource.Title), false, (source, handle, item) => handle.Cancel(string.Format("{0} chose not to have '{1}' pay any resources to heal a creature", controller.Name, CardSource.Title)));
 
-                var character = resourcePayment.Characters.First();
+                        
 
-                if (character.Card.Id != CardSource.Id)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                var numberOfResources = resourcePayment.GetPaymentBy(character.Card.Id);
-                if (numberOfResources == 0)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                if (character.Resources < numberOfResources)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                character.Resources -= numberOfResources;
-
-                handle.Accept();
+                
+                return new EffectHandle(this, builder.ToChoice());
             }
         }
     }

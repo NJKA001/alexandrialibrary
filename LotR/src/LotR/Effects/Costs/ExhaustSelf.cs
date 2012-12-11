@@ -9,22 +9,22 @@ using LotR.States;
 
 namespace LotR.Effects.Costs
 {
-    public class ExhaustSelf
-        : CostBase, ICost
-    {
-        public ExhaustSelf(IExhaustableInPlay exhaustable)
-            : base(string.Format("Exhaust {0}", exhaustable.Card.Title), exhaustable.Card)
-        {
-            this.exhaustable = exhaustable;
-        }
+    //public class ExhaustSelf
+    //    : CostBase, ICost
+    //{
+    //    public ExhaustSelf(IExhaustableInPlay exhaustable)
+    //        : base(string.Format("Exhaust {0}", exhaustable.Card.Title), exhaustable.Card)
+    //    {
+    //        this.exhaustable = exhaustable;
+    //    }
 
-        private readonly IExhaustableInPlay exhaustable;
+    //    private readonly IExhaustableInPlay exhaustable;
 
-        public override bool IsMetBy(IPayment payment)
-        {
-            var exhaustPayment = payment as IExhaustCardPayment;
+    //    public override bool IsMetBy(IPayment payment)
+    //    {
+    //        var exhaustPayment = payment as IExhaustCardPayment;
 
-            return (exhaustPayment != null && exhaustPayment.Exhaustable != null && exhaustPayment.Exhaustable.Card.Id == Source.Id);
-        }
-    }
+    //        return (exhaustPayment != null && exhaustPayment.Exhaustable != null && exhaustPayment.Exhaustable.Card.Id == Source.Id);
+    //    }
+    //}
 }

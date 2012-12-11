@@ -89,12 +89,7 @@ namespace LotR.Cards.Encounter.Objectives
             get { return Sphere.Neutral; }
         }
 
-        public ICost GetResourceCost(IGame game)
-        {
-            return new PayResources(this, PrintedSphere, PrintedCost, false);
-        }
-
-        public IEffect GetPaymentEffect(IGame game, IPlayer player)
+        public IEffect GetCost(IGame game, IPlayer player)
         {
             return new PayResourcesEffect(game, PrintedSphere, PrintedCost, false, player, this);
         }

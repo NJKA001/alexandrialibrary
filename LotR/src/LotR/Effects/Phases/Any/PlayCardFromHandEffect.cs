@@ -20,11 +20,12 @@ namespace LotR.Effects.Phases.Any
     public class PlayCardFromHandEffect
         : FrameworkEffectBase, IPlayCardFromHandEffect
     {
-        public PlayCardFromHandEffect(IGame game, ICostlyCard costlyCard)
+        public PlayCardFromHandEffect(IGame game, IPlayer player, ICostlyCard costlyCard)
             : base("Play card from hand", GetDescription(costlyCard), game)
         {
+            this.player = player;
             this.costlyCard = costlyCard;
-            this.cost = costlyCard.GetResourceCost(game) as IPayResources;
+            //this.cost = costlyCard.GetResourceCost(game) as IPayResources;
         }
 
         private static string GetDescription(IPlayerCard card)
@@ -32,8 +33,9 @@ namespace LotR.Effects.Phases.Any
             return string.Format("Pay the cost for and play {0} from your hand", card.Title);
         }
 
+        private readonly IPlayer player;
         private readonly ICostlyCard costlyCard;
-        private readonly IPayResources cost;
+        //private readonly IPayResources cost;
 
         public ICostlyCard CostlyCard
         {
@@ -106,9 +108,6 @@ namespace LotR.Effects.Phases.Any
 
         public override IEffectHandle GetHandle(IGame game)
         {
-            var cost = costlyCard.GetResourceCost(game);
-            IChoice choice = null;
-
             if (costlyCard.PrintedCardType == CardType.Ally)
             {
                 var allyCard = costlyCard as IAllyCard;
@@ -117,6 +116,8 @@ namespace LotR.Effects.Phases.Any
                     new ChoiceBuilder(string.Format("Play '{0}' from your hand", costlyCard.Title), game, costlyCard.Owner)
                         .Question("You must play this card from your hand")
                             .LastAnswer("Play ally from your hand", allyCard, (source, handle, card) => PlayAllyFromYourHand(game, handle, costlyCard.Owner, card));
+
+                return new EffectHandle(this, builder.ToChoice());
             }
             if (costlyCard.PrintedCardType == CardType.Attachment || costlyCard.PrintedCardType == CardType.Treasure)
             {
@@ -127,13 +128,14 @@ namespace LotR.Effects.Phases.Any
                         .Question(string.Format("Which card will '{0}' be attached to?", attachable.Title))
                             .LastAnswers(GetAttachmentHosts(game, attachable), (item) => item.Title, (source, handle, host) => AttachCardToHost(game, handle, costlyCard.Owner, attachable, host));
                 
-                return new EffectHandle(this, choice, cost);
+                return new EffectHandle(this, builder.ToChoice());
             }
             else if (costlyCard.PrintedCardType == CardType.Event)
             {
                 var effect = costlyCard.Text.Effects.FirstOrDefault();
                 if (effect == null)
-                    return new EffectHandle(this, cost);
+                    return null;
+                    //return new EffectHandle(this, cost);
 
                 var eventCard = costlyCard as IEventCard;
 
@@ -142,12 +144,13 @@ namespace LotR.Effects.Phases.Any
                         .Question("You must play this card from your hand")
                             .LastAnswer("Play event from your hand", eventCard, (source, handle, card) => PlayEventFromYourHand(game, handle, eventCard.Owner, card));
 
-                return new EffectHandle(this, choice, cost);
+                return new EffectHandle(this, builder.ToChoice());
             }
 
-            return new EffectHandle(this, cost);
+            return base.GetHandle(game);
         }
 
+        /*
         public override void Validate(IGame game, IEffectHandle handle)
         {
             if (cost.NumberOfResources == 0)
@@ -186,6 +189,7 @@ namespace LotR.Effects.Phases.Any
 
             handle.Accept();
         }
+        */
 
         /*
         public override void Trigger(IGame game, IEffectHandle handle)

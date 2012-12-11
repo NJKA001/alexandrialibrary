@@ -91,6 +91,7 @@
     <Compile Include="Effects\Choice.cs" />
     <Compile Include="Effects\ChoiceBuilder.cs" />
     <Compile Include="Effects\ChoiceItemBase.cs" />
+    <Compile Include="Effects\ICostlyEffect.cs" />
     <Compile Include="Effects\Phases\Any\PayResourcesEffect.cs" />
     <Compile Include="Effects\PlayersExhaustCharactersChoiceFactory.cs" />
     <Compile Include="Effects\IAnswer.cs" />

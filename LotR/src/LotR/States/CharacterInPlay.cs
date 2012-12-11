@@ -122,9 +122,9 @@ namespace LotR.States
             if (costlyCard == null)
                 throw new ArgumentNullException("costlyCard");
 
-            var cost = costlyCard.GetResourceCost(Game);
-            if (cost == null && Card.PrintedCardType == CardType.Hero)
-                return true;
+            //var cost = costlyCard.GetResourceCost(Game);
+            //if (cost == null && Card.PrintedCardType == CardType.Hero)
+            //    return true;
 
             if (Card.HasEffect<IDuringCheckForResourceMatch>())
             {
@@ -146,10 +146,10 @@ namespace LotR.States
             if (cardEffect == null)
                 throw new ArgumentNullException("cardEffect");
 
-            var handle = cardEffect.GetHandle(Game);
-            var cost = handle.Cost;
-            if (cost == null && Card.PrintedCardType == CardType.Hero)
-                return true;
+            //var costlyEffect = cardEffect as ICostlyEffect;
+            //if (costlyEffect != null)
+            //{
+            //}
 
             if (Card.HasEffect<IDuringCheckForResourceMatch>())
             {

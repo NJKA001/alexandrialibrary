@@ -33,8 +33,9 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            private void HealOneDamageOnCharacter(IGame game, IEffectHandle handle, IPlayer player, ICharacterInPlay character)
+            private void HealOneDamageOnCharacter(IGame game, IEffectHandle handle, IPlayer player, ICharacterInPlay glorfindel, ICharacterInPlay character)
             {
+                glorfindel.Resources -= 1;
                 character.Damage -= 1;
 
                 handle.Resolve(string.Format("{0} chose to heal 1 damage on '{1}'", player.Name, character.Title));
@@ -46,66 +47,23 @@ namespace LotR.Cards.Player.Heroes
 
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    throw new InvalidOperationException("Could not determine controller of Glorfindel");
+                    return base.GetHandle(game);
+
+                var resourceful = controller.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
+                if (resourceful == null || resourceful.Resources == 0)
+                    return base.GetHandle(game);
 
                 var characters = game.GetAllCardsInPlay<ICharacterInPlay>().Where(x => x.Damage > 0).ToList();
                 if (characters.Count == 0)
-                    return new EffectHandle(this);
+                    return base.GetHandle(game);
 
                 var builder =
                     new ChoiceBuilder("Choose a wounded character in play to heal", game, controller)
                         .Question("Which character do you want to heal 1 damage on?")
-                            .LastAnswers(characters, item => string.Format("{0} ({1} damage of {2} hit points)", item.Title, item.Damage, item.Card.PrintedHitPoints), (source, handle, character)  => HealOneDamageOnCharacter(game, handle, controller, character));
+                            .Answers(characters, item => string.Format("{0} ({1} damage of {2} hit points)", item.Title, item.Damage, item.Card.PrintedHitPoints), (source, handle, character) => HealOneDamageOnCharacter(game, handle, controller, resourceful, character))
+                            .LastAnswer(string.Format("No, I do not want to pay 1 resource from '{0}' to heal a character", CardSource.Title), false, (source, handle, item) => handle.Cancel(string.Format("{0} chose not to pay 1 resource from '{1}' to heal a character", controller.Name, CardSource.Title)));
                 
-                var choice = builder.ToChoice();
-
-                var resourceful = controller.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
-                if (resourceful == null)
-                    throw new InvalidOperationException("Could not find Glorfindel in play");
-
-                var cost = new PayResourcesFrom(source, resourceful, 1, false);
-
-                return new EffectHandle(this, choice, cost, limit);
-            }
-
-            public override void Validate(IGame game, IEffectHandle handle)
-            {
-                var resourcePayment = handle.Payment as IResourcePayment;
-                if (resourcePayment == null)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                if (resourcePayment.Characters.Count() != 1)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                var character = resourcePayment.Characters.First();
-
-                if (character.Card.Id != source.Id)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                if (resourcePayment.GetPaymentBy(character.Card.Id) != 1)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                if (character.Resources < 1)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                character.Resources -= 1;
-
-                handle.Accept();
+                return new EffectHandle(this, builder.ToChoice(), limit);
             }
         }
     }

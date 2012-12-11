@@ -123,15 +123,6 @@ namespace LotR.States
                 controller.OfferChoice(handle.Effect, handle.Choice);
             }
 
-            if (handle.Cost != null)
-            {
-                var payment = controller.GetPayment(handle.Effect, handle.Cost);
-                if (payment != null)
-                {
-                    handle.AddPayment(payment);
-                }
-            }
-
             handle.Effect.Validate(this, handle);
         }
 
@@ -268,15 +259,15 @@ namespace LotR.States
             
             effect.Validate(this, handle);
 
-            if (handle.IsAccepted)
-            {
-                controller.PaymentAccepted(effect, handle);
-            }
-            if (handle.IsRejected)
-            {
-                controller.PaymentRejected(effect, handle);
-                return;
-            }
+            //if (handle.IsAccepted)
+            //{
+            //    controller.PaymentAccepted(effect, handle);
+            //}
+            //if (handle.IsRejected)
+            //{
+            //    controller.PaymentRejected(effect, handle);
+            //    return;
+            //}
 
             effect.Trigger(this, handle);
 

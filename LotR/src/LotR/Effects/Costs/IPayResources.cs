@@ -9,11 +9,11 @@ using LotR.Effects;
 
 namespace LotR.Effects.Costs
 {
-    public interface IPayResources
-        : ICost
-    {
-        Sphere ResourceSphere { get; }
-        byte NumberOfResources { get; }
-        bool IsVariableCost { get; }
-    }
+    //public interface IPayResources
+    //    : ICost
+    //{
+    //    Sphere ResourceSphere { get; }
+    //    byte NumberOfResources { get; }
+    //    bool IsVariableCost { get; }
+    //}
 }

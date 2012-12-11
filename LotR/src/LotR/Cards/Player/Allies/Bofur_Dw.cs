@@ -25,7 +25,7 @@ namespace LotR.Cards.Player.Allies
         }
 
         private class PayOneSpiritResourceToCommitToQuest
-            : QuestActionCardEffectBase, IPlayerActionEffect
+            : QuestActionCardEffectBase, IPlayerActionEffect, ICostlyEffect
         {
             public PayOneSpiritResourceToCommitToQuest(Bofur_Dw cardSource)
                 : base("Spend 1 Spirit resource to put Bofur into play from your hand, exhausted and committed to a quest. If you quest successfully this phase and Bofur is still in play, return him to your hand.", cardSource)
@@ -34,42 +34,43 @@ namespace LotR.Cards.Player.Allies
 
             public override IEffectHandle GetHandle(IGame game)
             {
-                var cost = new PayResources(source, Sphere.Spirit, 1, false);
-                return new EffectHandle(this, null, cost);
+                return base.GetHandle(game);
+                //var cost = new PayResources(source, Sphere.Spirit, 1, false);
+                //return new EffectHandle(this, //null, cost);
             }
 
-            public override void Validate(IGame game, IEffectHandle handle)
-            {
-                var resourcePayment = handle.Payment as IResourcePayment;
-                if (resourcePayment == null)
-                {
-                    handle.Reject();
-                    return;
-                }
+            //public override void Validate(IGame game, IEffectHandle handle)
+            //{
+            //    var resourcePayment = handle.Payment as IResourcePayment;
+            //    if (resourcePayment == null)
+            //    {
+            //        handle.Reject();
+            //        return;
+            //    }
 
-                if (resourcePayment.Characters.Count() != 1)
-                {
-                    handle.Reject();
-                    return;
-                }
+            //    if (resourcePayment.Characters.Count() != 1)
+            //    {
+            //        handle.Reject();
+            //        return;
+            //    }
 
-                var hero = resourcePayment.Characters.First() as IHeroInPlay;
-                if (hero == null || !hero.HasResourceIcon(Sphere.Spirit))
-                {
-                    handle.Reject();
-                    return;
-                }
+            //    var hero = resourcePayment.Characters.First() as IHeroInPlay;
+            //    if (hero == null || !hero.HasResourceIcon(Sphere.Spirit))
+            //    {
+            //        handle.Reject();
+            //        return;
+            //    }
 
-                if (resourcePayment.GetPaymentBy(hero.Card.Id) != 1)
-                {
-                    handle.Reject();
-                    return;
-                }
+            //    if (resourcePayment.GetPaymentBy(hero.Card.Id) != 1)
+            //    {
+            //        handle.Reject();
+            //        return;
+            //    }
 
-                hero.Resources -= 1;
+            //    hero.Resources -= 1;
 
-                handle.Accept();
-            }
+            //    handle.Accept();
+            //}
 
             public override void Trigger(IGame game, IEffectHandle handle)
             {
@@ -93,6 +94,21 @@ namespace LotR.Cards.Player.Allies
                 game.AddEffect(new ReturnToHandAfterSuccessfulQuest(CardSource));
 
                 handle.Resolve(GetCompletedStatus());
+            }
+
+            public Sphere ResourceSphere
+            {
+                get { return Sphere.Spirit; }
+            }
+
+            public byte NumberOfResources
+            {
+                get { return 1; }
+            }
+
+            public bool IsVariableCost
+            {
+                get { return false; }
             }
         }
 

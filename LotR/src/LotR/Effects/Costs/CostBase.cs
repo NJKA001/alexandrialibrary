@@ -9,33 +9,33 @@ using LotR.States;
 
 namespace LotR.Effects.Costs
 {
-    public abstract class CostBase
-        : ICost
-    {
-        protected CostBase(string description, ISource source)
-        {
-            this.Description = description;
-            this.Source = source;
-        }
+    //public abstract class CostBase
+    //    : ICost
+    //{
+    //    protected CostBase(string description, ISource source)
+    //    {
+    //        this.Description = description;
+    //        this.Source = source;
+    //    }
 
-        public ISource Source
-        {
-            get;
-            private set;
-        }
+    //    public ISource Source
+    //    {
+    //        get;
+    //        private set;
+    //    }
 
-        public string Description
-        {
-            get;
-            private set;
-        }
+    //    public string Description
+    //    {
+    //        get;
+    //        private set;
+    //    }
 
-        public bool IsOptional
-        {
-            get;
-            set;
-        }
+    //    public bool IsOptional
+    //    {
+    //        get;
+    //        set;
+    //    }
 
-        public abstract bool IsMetBy(IPayment payment);
-    }
+    //    public abstract bool IsMetBy(IPayment payment);
+    //}
 }

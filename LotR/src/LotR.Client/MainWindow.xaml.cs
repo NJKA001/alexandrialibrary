@@ -17,7 +17,6 @@ using System.Windows.Threading;
 using LotR.Cards;
 using LotR.Cards.Player;
 using LotR.Effects;
-using LotR.Effects.Costs;
 using LotR.Effects.Payments;
 using LotR.States;
 using LotR.States.Areas;
@@ -94,10 +93,9 @@ namespace LotR.Client
             controller.RegisterEffectAddedCallback((effect) => EffectAddedCallback(effect));
             controller.RegisterEffectCancelledCallback((effect, handle) => EffectCancelledCallback(effect, handle));
             controller.RegisterEffectResolvedCallback((effect, handle) => EffectResolvedCallback(effect, handle));
-            controller.RegisterGetPaymentCallback((effect, cost) => GetPaymentCallback(effect, cost));
             controller.RegisterOfferChoiceCallback((effect, choice) => OfferChoiceCallback(effect, choice));
-            controller.RegisterPaymentAcceptedCallback((effect, handle) => PaymentAcceptedCallback(effect, handle));
-            controller.RegisterPaymentRejectedCallback((effect, handle) => PaymentRejectedCallback(effect, handle));
+            //controller.RegisterPaymentAcceptedCallback((effect, handle) => PaymentAcceptedCallback(effect, handle));
+            //controller.RegisterPaymentRejectedCallback((effect, handle) => PaymentRejectedCallback(effect, handle));
 
             return controller;
         }
@@ -151,17 +149,6 @@ namespace LotR.Client
         private void EffectCancelledCallback(IEffect effect, IEffectHandle handle)
         {
             SetCurrentStatus("Cancelled: " + effect.ToString());
-        }
-
-        private IPayment GetPaymentCallback(IEffect effect, ICost cost)
-        {
-            //IPayment payment = null;
-
-            //Dispatch(() => choiceControl.Load(cost));
-
-            //BlockUntil(() => choiceControl.Payment != null || choiceControl.IsCancelled);
-
-            return null;
         }
 
         private void OfferChoiceCallback(IEffect effect, IChoice choice)

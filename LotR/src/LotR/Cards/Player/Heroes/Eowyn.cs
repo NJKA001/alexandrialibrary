@@ -34,26 +34,72 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public override IEffectHandle GetHandle(IGame game)
+            private void PlayerDiscardsOneCard(IGame game, IEffectHandle handle, IPlayer player, IPlayerCard card)
             {
-                var limit = new Limit(PlayerScope.AnyPlayer, TimeScope.Round, 1);
-                var cost = new DiscardCardsFromHand(source, game, 1);
-                return new EffectHandle(this, null, cost, limit);
-            }
+                if (player.Hand.Cards.Count() == 0)
+                {
+                    handle.Cancel(string.Format("{0} does not have any cards in their hand to discard", player.Name));
+                    return;
+                }
 
-            public override void Trigger(IGame game, IEffectHandle handle)
-            {
+                player.DiscardFromHand(new List<IPlayerCard> { card });
+
                 var controller = game.GetController(CardSource.Id);
                 if (controller == null)
-                    { handle.Cancel(GetCancelledString()); return; }
+                {
+                    handle.Cancel(string.Format("Could not determine the controller of {0}", CardSource.Title));
+                    return;
+                }
 
                 var willpowerful = controller.CardsInPlay.OfType<IWillpowerfulInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
                 if (willpowerful == null)
-                    { handle.Cancel(GetCancelledString()); return; }
+                {
+                    handle.Cancel(string.Format("'{0}' is no longer in player", CardSource.Title));
+                    return;
+                }
 
                 game.AddEffect(new WillpowerModifier(game.CurrentPhase.Code, source, willpowerful, TimeScope.Phase, 1));
 
-                handle.Resolve(GetCompletedStatus());
+                handle.Resolve(string.Format("{0} discarded a card to give '{0}' +1 Willpower until the end of the phase", player.Name, CardSource.Title));
+            }
+
+            private void CancelDiscard(IGame game, IEffectHandle handle, IPlayer player)
+            {
+                handle.Cancel(string.Format("{0} decided not to discard a card from their hand", player.Name));
+            }
+
+            public override IEffectHandle GetHandle(IGame game)
+            {
+                var limit = new Limit(PlayerScope.AnyPlayer, TimeScope.Round, 1);
+
+                var handSize = game.ActivePlayer.Hand.Cards.Count();
+
+                if (handSize == 0)
+                {
+                    return base.GetHandle(game);
+                }
+                else
+                {
+                    var builder =
+                        new ChoiceBuilder(string.Format("The active player may discard a card from their hand to give '{0}' +1 Willpower until the end of the phase", CardSource.Title), game, game.ActivePlayer);
+
+                    if (handSize == 1)
+                    {
+                        builder.Question("You only have 1 card in your hand, do you want to discard it?")
+                            .Answer("Yes, I will discard it", game.ActivePlayer.Hand.Cards.First(), (source, handle, card) => PlayerDiscardsOneCard(source, handle, game.ActivePlayer, card))
+                            .LastAnswer("No, I will not discard my last card from my hand", false, (source, handle, item) => CancelDiscard(source, handle, game.ActivePlayer));
+                    }
+                    else
+                    {
+                        builder.Question(string.Format("{0}, do you want to discard a card from your hand?", game.ActivePlayer.Name))
+                            .Answer("Yes, I will discard a card from my hand", true)
+                                .Question("Which card will you discard?")
+                                    .LastAnswers(game.ActivePlayer.Hand.Cards.ToList(), (item) => item.Title, (source, handle, card) => PlayerDiscardsOneCard(source, handle, game.ActivePlayer, card))
+                            .LastAnswer("No, I will not discard a card from my hand", false, (source, handle, item) => CancelDiscard(source, handle, game.ActivePlayer));
+                    }
+
+                    return new EffectHandle(this, builder.ToChoice());
+                }
             }
         }
     }

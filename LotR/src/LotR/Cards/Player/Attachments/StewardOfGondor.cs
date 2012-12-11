@@ -70,49 +70,38 @@ namespace LotR.Cards.Player.Attachments
             {
             }
 
+            private void ExhaustAndAddTwoResources(IGame game, IEffectHandle handle, IPlayer player, IExhaustableInPlay exhaustable, ICharacterInPlay resourceful)
+            {
+                exhaustable.Exhaust();
+                resourceful.Resources += 2;
+
+                handle.Resolve(string.Format("{0} chose to exhaust '{1}' to add 2 resources to {2}'s resource pool", player.Name, CardSource.Title, resourceful.Title));
+            }
+
+
             public override IEffectHandle GetHandle(IGame game)
             {
-                var exhaustable = game.GetCardInPlay<IExhaustableInPlay>(source.Id);
-                if (exhaustable == null)
+                var exhaustable = game.GetCardInPlay<IExhaustableInPlay>(CardSource.Id);
+                if (exhaustable == null || exhaustable.IsExhausted)
                     return base.GetHandle(game);
 
-                var cost = new ExhaustSelf(exhaustable);
-                return new EffectHandle(this, cost);
-            }
+                var controller = exhaustable.GetController(game);
 
-            public override void Validate(IGame game, IEffectHandle handle)
-            {
-                var exhaustPayment = handle.Payment as IExhaustCardPayment;
-                if (exhaustPayment == null || exhaustPayment.Exhaustable == null || exhaustPayment.Exhaustable.IsExhausted)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                exhaustPayment.Exhaustable.Exhaust();
-
-                handle.Accept();
-            }
-
-            public override void Trigger(IGame game, IEffectHandle handle)
-            {
-                var attachment = game.GetCardInPlay<IAttachmentInPlay>(source.Id);
+                var attachment = game.GetCardInPlay<IAttachableInPlay>(CardSource.Id);
                 if (attachment == null || attachment.AttachedTo == null)
-                {
-                    handle.Cancel(GetCancelledString());
-                    return;
-                }
+                    return base.GetHandle(game);
 
                 var resourceful = attachment.AttachedTo as ICharacterInPlay;
                 if (resourceful == null)
-                {
-                    handle.Cancel(GetCancelledString());
-                    return;
-                }
+                    return base.GetHandle(game);
 
-                resourceful.Resources += 2;
-
-                handle.Resolve(GetCompletedStatus());
+                var builder =
+                    new ChoiceBuilder(string.Format("You may exhaust '{0}' to add 2 resources to {1}'s resource pool", CardSource.Title, resourceful.Title), game, controller)
+                        .Question(string.Format("{0}, do you want to exhaust '{0}'?", controller, CardSource.Title))
+                            .Answer(string.Format("Yes, I want to exhaust '{0}' to add 2 resources to {1}'s resource pool", CardSource.Title, resourceful.Title), true, (source, handle, item) => ExhaustAndAddTwoResources(source, handle, controller, exhaustable, resourceful))
+                            .LastAnswer(string.Format("No, I do not to exhaust '{0}' to add 2 resources to {1}'s resource pool", CardSource.Title, resourceful.Title), false, (source, handle, item) => handle.Cancel(string.Format("{0} chose not to exhaust '{1}' to add 2 resources to {2}'s resource pool", controller.Name, CardSource.Title, resourceful.Title)));
+                
+                return new EffectHandle(this, builder.ToChoice());
             }
         }
     }

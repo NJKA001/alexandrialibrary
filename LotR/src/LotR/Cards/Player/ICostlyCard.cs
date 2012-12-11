@@ -15,7 +15,6 @@ namespace LotR.Cards.Player
     {
         byte PrintedCost { get; }
 
-        ICost GetResourceCost(IGame game);
-        IEffect GetPaymentEffect(IGame game, IPlayer player);
+        IEffect GetCost(IGame game, IPlayer player);
     }
 }

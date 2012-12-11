@@ -14,7 +14,6 @@ using LotR.Cards.Player.Treasures;
 using LotR.Cards.Quests;
 using LotR.Effects;
 
-using LotR.Effects.Costs;
 using LotR.Effects.Payments;
 using LotR.States;
 using LotR.States.Areas;
@@ -81,10 +80,10 @@ namespace LotR.Console
             controller.RegisterEffectAddedCallback((effect) => EffectAddedCallback(effect));
             controller.RegisterEffectCancelledCallback((effect, handle) => EffectCancelledCallback(effect, handle));
             controller.RegisterEffectResolvedCallback((effect, handle) => EffectResolvedCallback(effect, handle));
-            controller.RegisterGetPaymentCallback((effect, cost) => GetPaymentCallback(effect, cost));
+            //controller.RegisterGetPaymentCallback((effect, cost) => GetPaymentCallback(effect, cost));
             controller.RegisterOfferChoiceCallback((effect, choice) => OfferChoiceCallback(effect, choice));
-            controller.RegisterPaymentAcceptedCallback((effect, handle) => PaymentAcceptedCallback(effect, handle));
-            controller.RegisterPaymentRejectedCallback((effect, handle) => PaymentRejectedCallback(effect, handle));
+            //controller.RegisterPaymentAcceptedCallback((effect, handle) => PaymentAcceptedCallback(effect, handle));
+            //controller.RegisterPaymentRejectedCallback((effect, handle) => PaymentRejectedCallback(effect, handle));
 
             return controller;
         }
@@ -440,6 +439,7 @@ namespace LotR.Console
         //    return null;
         //}
 
+        /*
         private static void GetResourcePayment(IPayResources cost, string costSource, IResourcePayment payment, ICharacterInPlay character)
         {
             if (cost == null)
@@ -585,6 +585,7 @@ namespace LotR.Console
 
             return payment;
         }
+        */
 
         //private static IEffect ChooseEffectOnCardToPlay(IPlayer player, IChoosePlayerAction choice, IPlayerCard card)
         //{
@@ -921,6 +922,7 @@ namespace LotR.Console
             }
         }
 
+        /*
         private static IPayment GetPaymentCallback(IEffect effect, ICost cost)
         {
             WriteLine("Payment Required: {0}", cost.Description);
@@ -968,6 +970,7 @@ namespace LotR.Console
 
             return payment;
         }
+        */
 
         private static void PaymentAcceptedCallback(IEffect effect, IEffectHandle handle)
         {

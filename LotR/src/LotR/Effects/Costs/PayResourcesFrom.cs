@@ -9,6 +9,7 @@ using LotR.States;
 
 namespace LotR.Effects.Costs
 {
+    /*
     public class PayResourcesFrom
         : CostBase, IPayResourcesFrom
     {
@@ -68,4 +69,5 @@ namespace LotR.Effects.Costs
             return true;
         }
     }
+    */
 }

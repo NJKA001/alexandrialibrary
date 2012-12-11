@@ -15,9 +15,7 @@ namespace LotR.Effects
     {
         IEffect Effect { get; }
         IChoice Choice { get; }
-        ICost Cost { get; }
         ILimit Limit { get; }
-        IPayment Payment { get; }
 
         bool IsCancelled { get; }
         bool IsResolved { get; }
@@ -25,8 +23,6 @@ namespace LotR.Effects
         bool IsRejected { get; }
         string Status { get; }
         
-        void AddPayment(IPayment payment);
-
         void Accept();
         void Reject();
         void Cancel(string status);

@@ -7,11 +7,11 @@ using LotR.States;
 
 namespace LotR.Effects.Costs
 {
-    public interface IPayResourcesFrom
-        : ICost
-    {
-        ICharacterInPlay Target { get; }
-        byte NumberOfResources { get; }
-        bool IsVariableCost { get; }
-    }
+    //public interface IPayResourcesFrom
+    //    : ICost
+    //{
+    //    ICharacterInPlay Target { get; }
+    //    byte NumberOfResources { get; }
+    //    bool IsVariableCost { get; }
+    //}
 }

@@ -36,53 +36,10 @@ namespace LotR.Cards.Player.Heroes
             {
             }
 
-            public override IEffectHandle GetHandle(IGame game)
+            private void ExhaustToCancelRevealedTreachery(IGame game, IEffectHandle handle, IExhaustableInPlay exhaustable)
             {
-                var controller = game.GetController(CardSource.Id);
-                if (controller == null)
-                    return base.GetHandle(game);
+                exhaustable.Exhaust();
 
-                var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
-                if (exhaustable == null)
-                    return base.GetHandle(game);
-
-                var cost = new ExhaustSelf(exhaustable);
-                return new EffectHandle(this, cost);
-            }
-
-            public void DuringEncounterCardRevealed(IGame game)
-            {
-                if (game.StagingArea.RevealedEncounterCard == null)
-                    return;
-
-                if ((!(game.StagingArea.RevealedEncounterCard is IRevealableCard)) || (!(game.StagingArea.RevealedEncounterCard is ITreacheryCard)))
-                    return;
-
-                game.AddEffect(this);
-            }
-
-            public override void Validate(IGame game, IEffectHandle handle)
-            {
-                var exhaustPayment = handle.Payment as IExhaustCardPayment;
-                if (exhaustPayment == null)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                if (exhaustPayment.Exhaustable.IsExhausted)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                exhaustPayment.Exhaustable.Exhaust();
-
-                handle.Accept();
-            }
-
-            public override void Trigger(IGame game, IEffectHandle handle)
-            {
                 if (game.StagingArea.RevealedEncounterCard == null)
                 {
                     handle.Cancel(string.Format("There is no revealed encounter card for '{0}' to cancel", CardSource.Title));
@@ -100,7 +57,46 @@ namespace LotR.Cards.Player.Heroes
                 game.StagingArea.CancelRevealedCard(this);
                 game.StagingArea.RevealEncounterCards(1);
 
-                handle.Resolve(string.Format("'{0}' cancelled to the 'When Revealed' effect of '{1}'", CardSource.Title, revealedTitle));
+                handle.Resolve(string.Format("The 'when revealed' effect of '{1}' has been cancelled", CardSource.Title, revealedTitle));
+            }
+
+            public override IEffectHandle GetHandle(IGame game)
+            {
+                if (game.StagingArea.RevealedEncounterCard == null)
+                {
+                    return base.GetHandle(game);
+                }
+
+                if (!(game.StagingArea.RevealedEncounterCard.Card is ITreacheryCard) || !game.StagingArea.RevealedEncounterCard.Card.HasEffect<IWhenRevealedEffect>())
+                {
+                    return base.GetHandle(game);
+                }
+
+                var controller = game.GetController(CardSource.Id);
+                if (controller == null)
+                    return base.GetHandle(game);
+
+                var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
+                if (exhaustable == null || exhaustable.IsExhausted)
+                    return base.GetHandle(game);
+
+                var builder =
+                    new ChoiceBuilder(string.Format("Exhaust '{0}' to cancel the when revealed effects of a treachery just revealed by the encounter deck", CardSource.Title), game, controller)
+                        .Question(string.Format("{0}, do you want to exhaust '{1}' to cancel the revealed treachery?", controller.Name, CardSource.Title))
+                            .Answer(string.Format("Yes, exhaust '{0}' to cancel the revealed treachery", CardSource.Title), exhaustable, (source, handle, item) => ExhaustToCancelRevealedTreachery(source, handle, exhaustable));
+
+                return new EffectHandle(this, builder.ToChoice());
+            }
+
+            public void DuringEncounterCardRevealed(IGame game)
+            {
+                if (game.StagingArea.RevealedEncounterCard == null)
+                    return;
+
+                if ((!(game.StagingArea.RevealedEncounterCard is IRevealableCard)) || (!(game.StagingArea.RevealedEncounterCard is ITreacheryCard)))
+                    return;
+
+                game.AddEffect(this);
             }
         }
     }

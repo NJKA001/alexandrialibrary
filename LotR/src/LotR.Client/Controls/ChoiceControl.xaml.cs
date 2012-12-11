@@ -13,7 +13,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using LotR.Effects;
-using LotR.Effects.Costs;
 using LotR.Effects.Payments;
 using LotR.States;
 
@@ -34,7 +33,6 @@ namespace LotR.Client.Controls
 
         private IGame game;
         private IChoice choice;
-        private ICost cost;
         private IPayment payment;
         private ChoiceItemViewModel choiceViewModel;
         private bool isValid;
@@ -50,11 +48,6 @@ namespace LotR.Client.Controls
                 MessageBox.Show("Please choose an answer and then try submitting again", "This choice is not valid");
                 statusText.Text = "This choice is not valid";
                 return;
-            }
-
-            if (cost != null)
-            {
-
             }
 
             isValid = true;
@@ -146,7 +139,6 @@ namespace LotR.Client.Controls
                 throw new ArgumentNullException("choice");
 
             this.choice = choice;
-            this.cost = null;
             this.payment = null;
 
             this.choiceViewModel = new ChoiceItemViewModel(this.Dispatcher, choice);

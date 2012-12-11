@@ -14,52 +14,29 @@ namespace LotR.Effects
         : IEffectHandle
     {
         public EffectHandle(IEffect effect)
-            : this(effect, null, null, null)
+            : this(effect, null, null)
         {
         }
 
         public EffectHandle(IEffect effect, IChoice choice)
-            : this(effect, choice, null, null)
-        {
-        }
-
-        public EffectHandle(IEffect effect, IChoice choice, ICost cost)
-            : this(effect, choice, cost, null)
+            : this(effect, choice, null)
         {
         }
 
         public EffectHandle(IEffect effect, IChoice choice, ILimit limit)
-            : this(effect, choice, null, limit)
-        {
-        }
-
-        public EffectHandle(IEffect effect, ICost cost)
-            : this(effect, null, cost, null)
-        {
-        }
-
-        public EffectHandle(IEffect effect, ICost cost, ILimit limit)
-            : this(effect, null, cost, limit)
-        {
-        }
-
-        public EffectHandle(IEffect effect, IChoice choice, ICost cost, ILimit limit)
         {
             if (effect == null)
                 throw new ArgumentNullException("effect");
 
             this.effect = effect;
             this.choice = choice;
-            this.cost = cost;
             this.limit = limit;
         }
 
         private readonly IEffect effect;
         private readonly IChoice choice;
-        private readonly ICost cost;
         private readonly ILimit limit;
         
-        private IPayment payment;
         private bool isCancelled;
         private bool isResolved;
         private bool isAccepted;
@@ -84,19 +61,9 @@ namespace LotR.Effects
             get { return choice; }
         }
 
-        public ICost Cost
-        {
-            get { return cost; }
-        }
-
         public ILimit Limit
         {
             get { return limit; }
-        }
-
-        public IPayment Payment
-        {
-            get { return payment; }
         }
 
         public bool IsCancelled
@@ -164,17 +131,6 @@ namespace LotR.Effects
 
                 OnPropertyChanged("Status");
             }
-        }
-
-        public void AddPayment(IPayment payment)
-        {
-            if (payment == null)
-                throw new ArgumentNullException("payment");
-
-            if (this.payment != null)
-                throw new InvalidOperationException("payment is already defined, cannot add multiple payments");
-
-            this.payment = payment;
         }
 
         public void Accept()

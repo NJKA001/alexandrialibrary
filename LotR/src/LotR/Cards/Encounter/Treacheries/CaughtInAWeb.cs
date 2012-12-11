@@ -112,6 +112,25 @@ namespace LotR.Cards.Encounter.Treacheries
                 state.AddEffect(this);
             }
 
+            private void PayResourcesToReadyAttachedCharacter(IGame game, IEffectHandle handle, IPlayer player, ICharacterInPlay character)
+            {
+                var refreshPhase = game.CurrentPhase as IRefreshPhase;
+                if (refreshPhase == null)
+                    throw new InvalidOperationException("This effect can only be triggered during the refresh phase");
+
+                var readyingCard = refreshPhase.GetReadyingCards().Where(x => x.Exhaustable.Card.Id == source.Id).FirstOrDefault();
+                if (readyingCard == null)
+                {
+                    handle.Cancel(string.Format("Could not determine the readying state of '{0}'", character.Title));
+                    return;
+                }
+
+                character.Resources -= 2;
+                readyingCard.IsReadying = true;
+
+                handle.Resolve(string.Format("{0} chose to pay 2 resources from {1}'s resource pool to allow them to ready ({2})", player.Name, character.Title, CardSource.Title));
+            }
+
             public override IEffectHandle GetHandle(IGame game)
             {
                 IAttachableInPlay attachment = null;
@@ -124,49 +143,23 @@ namespace LotR.Cards.Encounter.Treacheries
                 }
 
                 if (attachment == null || attachment.AttachedTo == null)
-                    return new EffectHandle(this);
+                    return base.GetHandle(game);
 
                 var resourceful = attachment.AttachedTo as ICharacterInPlay;
                 if (resourceful == null)
-                    return new EffectHandle(this);
+                    return base.GetHandle(game);
 
-                var cost = new PayResourcesFrom(source, resourceful, 2, false);
-                cost.IsOptional = true;
+                var controller = resourceful.GetController(game);
+                if (controller == null)
+                    return base.GetHandle(game);
 
-                return new EffectHandle(this, cost);
-            }
+                var builder =
+                    new ChoiceBuilder(string.Format("You may pay 2 resources from {0}'s resource pool to allow them to ready as normal", resourceful.Title), game, controller)
+                        .Question(string.Format("{0}, do you want to pay 2 resources from {1}'s resource pool?", controller.Name, resourceful.Title))
+                            .Answer(string.Format("Yes, I want to pay 2 resources from {0}'s resource pool", resourceful.Title), true, (source, handle, item) => PayResourcesToReadyAttachedCharacter(source, handle, controller, resourceful))
+                            .LastAnswer(string.Format("No, I do not want to pay 2 resources from {0}'s resource pool", resourceful.Title), false, (source, handle, item) => handle.Cancel(string.Format("{0} chose not to pay 2 resources from {1}'s resource pool (2)", controller.Name, resourceful.Title, CardSource.Title)));
 
-            public override void Trigger(IGame game, IEffectHandle handle)
-            {
-                var refreshPhase = game.CurrentPhase as IRefreshPhase;
-                if (refreshPhase == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                var readyingCard = refreshPhase.GetReadyingCards().Where(x => x.Exhaustable.Card.Id == source.Id).FirstOrDefault();
-                if (readyingCard == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                var resourcePayment = handle.Payment as IResourcePayment;
-                if (resourcePayment == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                if (resourcePayment.Characters.Count() != 1)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                var attachment = game.GetCardInPlay<IAttachableInPlay>(CardSource.Id);
-                if (attachment == null || attachment.AttachedTo == null)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                var character = resourcePayment.Characters.First();
-                if (character.Card.Id != attachment.AttachedTo.Card.Id)
-                    { handle.Cancel(GetCancelledString()); return; }
-
-                if (resourcePayment.GetPaymentBy(character.Card.Id) != 2)
-                    { handle.Cancel(GetCancelledString()); return; }
-                
-                readyingCard.IsReadying = true;
-
-                handle.Resolve(GetCompletedStatus());
+                return new EffectHandle(this, builder.ToChoice());
             }
         }
     }

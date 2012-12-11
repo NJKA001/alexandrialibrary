@@ -48,68 +48,83 @@ namespace LotR.Cards.Player.Heroes
                 game.AddEffect(this);
             }
 
-            public override IEffectHandle GetHandle(IGame game)
-            {
-                var character = game.GetCardInPlay<ICharacterInPlay>(CardSource.Id);
-                if (character == null)
-                    return base.GetHandle(game);
-
-                var cost = new PayResourcesFrom(source, character, 1, false);
-                return new EffectHandle(this, cost);
-            }
-
-            public override void Validate(IGame game, IEffectHandle handle)
-            {
-                var resourcePayment = handle.Payment as IResourcePayment;
-                if (resourcePayment == null)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                if (resourcePayment.Characters.Count() != 1)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                var character = resourcePayment.Characters.First();
-                if (character.Card.Id != source.Id)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                if (resourcePayment.GetPaymentBy(character.Card.Id) != 1)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                if (character.Resources < 1)
-                {
-                    handle.Reject();
-                    return;
-                }
-
-                character.Resources -= 1;
-
-                handle.Accept();
-            }
-
-            public override void Trigger(IGame game, IEffectHandle handle)
+            private void PayOneResourceToReadyAragorn(IGame game, IEffectHandle handle, IPlayer controller)
             {
                 var exhaustable = game.GetCardInPlay<IExhaustableInPlay>(source.Id);
                 if (exhaustable == null)
-                    { handle.Cancel(GetCancelledString()); return; }
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 if (!exhaustable.IsExhausted)
-                    { handle.Cancel(GetCancelledString()); return; }
+                {
+                    handle.Cancel(GetCancelledString());
+                    return;
+                }
 
                 exhaustable.Ready();
 
-                handle.Resolve(GetCompletedStatus());
+                handle.Resolve(string.Format("{0} chose to pay 1 resource from '{0}' to ready him after committing to him to the quest", controller.Name, CardSource.Title));
             }
+
+            public override IEffectHandle GetHandle(IGame game)
+            {
+                var character = game.GetCardInPlay<ICharacterInPlay>(CardSource.Id);
+                if (character == null || character.Resources == 0)
+                    return base.GetHandle(game);
+
+                var controller = game.GetController(CardSource.Id);
+                if (controller == null)
+                    return base.GetHandle(game);
+
+                var builder =
+                    new ChoiceBuilder(string.Format("Pay 1 resource from his resource pool to ready '{0}' after commiting him to the quest", CardSource.Title), game, controller)
+                        .Question(string.Format("{0}, do you want to pay 1 resource from his resource pool to ready '{0}'?", CardSource.Title))
+                            .Answer("Yes, I want to ready him", controller, (source, handle, item) => PayOneResourceToReadyAragorn(source, handle, item))
+                            .LastAnswer("No, I do not want to ready him", false, (source, handle, item) => handle.Cancel(string.Format("", controller.Name)));
+
+                return new EffectHandle(this, builder.ToChoice());
+            }
+
+            //public override void Validate(IGame game, IEffectHandle handle)
+            //{
+            //    var resourcePayment = handle.Payment as IResourcePayment;
+            //    if (resourcePayment == null)
+            //    {
+            //        handle.Reject();
+            //        return;
+            //    }
+
+            //    if (resourcePayment.Characters.Count() != 1)
+            //    {
+            //        handle.Reject();
+            //        return;
+            //    }
+
+            //    var character = resourcePayment.Characters.First();
+            //    if (character.Card.Id != source.Id)
+            //    {
+            //        handle.Reject();
+            //        return;
+            //    }
+
+            //    if (resourcePayment.GetPaymentBy(character.Card.Id) != 1)
+            //    {
+            //        handle.Reject();
+            //        return;
+            //    }
+
+            //    if (character.Resources < 1)
+            //    {
+            //        handle.Reject();
+            //        return;
+            //    }
+
+            //    character.Resources -= 1;
+
+            //    handle.Accept();
+            //}
         }
     }
 }
