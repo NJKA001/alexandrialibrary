@@ -93,7 +93,9 @@
     <Compile Include="Effects\ChoiceBuilder.cs" />
     <Compile Include="Effects\ChoiceItemBase.cs" />
     <Compile Include="Effects\ICostlyEffect.cs" />
-    <Compile Include="Effects\Phases\Any\PlayCardEffectBase.cs" />
+    <Compile Include="Effects\Phases\Any\PayResourcesEffectBase.cs" />
+    <Compile Include="Effects\Phases\Any\PlayAttachableEffect.cs" />
+    <Compile Include="Effects\Phases\Any\PlayEventEffect.cs" />
     <Compile Include="Effects\PlayersExhaustCharactersChoiceFactory.cs" />
     <Compile Include="Effects\IAnswer.cs" />
     <Compile Include="Effects\IChoiceItem.cs" />

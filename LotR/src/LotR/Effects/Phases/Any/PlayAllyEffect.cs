@@ -11,7 +11,7 @@ using LotR.States;
 namespace LotR.Effects
 {
     public class PlayAllyEffect
-        : PlayCardEffectBase
+        : PayResourcesEffectBase
     {
         public PlayAllyEffect(IGame game, Sphere resourceSphere, byte numberOfResources, IPlayer player, IAllyCard allyCard)
             : base(game, resourceSphere, numberOfResources, false, player, allyCard)
@@ -21,7 +21,7 @@ namespace LotR.Effects
 
         private readonly IAllyCard allyCard;
 
-        protected override void ResolvePlayCardEffect()
+        protected override void AfterCostPaid(IGame game, IEffectHandle handle, IEnumerable<Tuple<ICharacterInPlay, byte>> charactersAndPayments)
         {
             var allyInPlay = new AllyInPlay(game, allyCard);
             player.AddCardInPlay(allyInPlay);

@@ -14,6 +14,7 @@ namespace LotR.Effects
         IEffect Effect { get; }
         IChoice Choice { get; }
         ILimit Limit { get; }
+        object Target { get; }
 
         bool IsCancelled { get; }
         bool IsResolved { get; }
@@ -25,5 +26,6 @@ namespace LotR.Effects
         void Reject();
         void Cancel(string status);
         void Resolve(string status);
+        void SetTarget(object target);
     }
 }

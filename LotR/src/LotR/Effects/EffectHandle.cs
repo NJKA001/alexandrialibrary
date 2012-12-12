@@ -34,12 +34,13 @@ namespace LotR.Effects
         private readonly IEffect effect;
         private readonly IChoice choice;
         private readonly ILimit limit;
-        
+
         private bool isCancelled;
         private bool isResolved;
         private bool isAccepted;
         private bool isRejected;
         private string status;
+        private object target;
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -62,6 +63,11 @@ namespace LotR.Effects
         public ILimit Limit
         {
             get { return limit; }
+        }
+
+        public object Target
+        {
+            get { return target; }
         }
 
         public bool IsCancelled
@@ -169,6 +175,14 @@ namespace LotR.Effects
 
             Status = status;
             IsResolved = true;
+        }
+
+        public void SetTarget(object target)
+        {
+            if (target == null)
+                throw new ArgumentNullException("target");
+
+            this.target = target;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
