@@ -93,12 +93,12 @@ namespace LotR.Effects.Phases.Any
 
             if (characters.Count == 0)
             {
-                builder.Question("You do not have any characters with a resource match to pay this cost")
-                    .Answer("Ok, cancel this payment", false, (source, handle, item) => UnableToPayCost(source, handle, player));
+                builder.Question(string.Format("You do not have any characters with a resource match to pay for '{0}'", attachableCard.Title))
+                    .Answer(string.Format("Ok, cancel playing this {0} from my hand", description), false, (source, handle, item) => CancelPayingCost(source, handle, player));
             }
             else if (hosts.Count == 0)
             {
-                builder.Question(string.Format("There are not valid targets to which you can attach '{0}'", attachableCard.Title))
+                builder.Question(string.Format("There are no valid targets to which you can attach '{0}'", attachableCard.Title))
                     .Answer(string.Format("Ok, cancel playing this {0} from my hand", description), false, (source, handle, item) => CancelPayingCost(source, handle, player));
             }
             else if (isVariableCost)
@@ -118,45 +118,59 @@ namespace LotR.Effects.Phases.Any
                 }
                 else
                 {
-                    //TODO: Choose attachment host
+                    builder.Question(string.Format("Which card do you want to attach '{0}' to?", attachableCard.Title));
 
-                    builder.Question(string.Format("This {0} has a variable cost. Do you want to pay this cost?", description))
-                        .Answer("Yes, pay this cost", true);
-
-                    foreach (var character in characters)
+                    foreach (var host in hosts)
                     {
-                        var amounts = new List<byte>();
-                        for (byte i = 1; i <= character.Resources; i++)
+                        builder.Answer(host.Title, host, (source, handle, item) => handle.SetTarget(item));
+
+                        builder.Question(string.Format("This {0} has a variable cost. Do you want to pay this cost?", description))
+                            .Answer("Yes, pay this cost", true);
+
+                        foreach (var character in characters)
                         {
-                            amounts.Add(i);
+                            var amounts = new List<byte>();
+                            for (byte i = 1; i <= character.Resources; i++)
+                            {
+                                amounts.Add(i);
+                            }
+
+                            builder.Question(string.Format("'{0}' has a resource match, and this {1} has a variable cost. How many resources do you want to spend from their resource pool?", character.Title, description))
+                                .LastAnswers(amounts, (item) => item == 1 ? "1 resource" : string.Format("{0} resources", item), (source, handle, number) => PayResourcesFromCharacter(source, handle, character, player, number));
+
                         }
 
-                        builder.Question(string.Format("'{0}' has a resource match, and this {1} has a variable cost. How many resources do you want to spend from their resource pool?", character.Title, description))
-                            .LastAnswers(amounts, (item) => item == 1 ? "1 resource" : string.Format("{0} resources", item), (source, handle, number) => PayResourcesFromCharacter(source, handle, character, player, number));
-
+                        builder.LastAnswer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
                     }
 
-                    builder.LastAnswer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                    builder.LastAnswer(string.Format("No, I do not want to attach '{0}' to any of these cards", attachableCard.Title), false, (source, handle, item) => CancelPayingCost(source, handle, player));
                 }
             }
             else if (numberOfResources == 0)
             {
                 var character = characters.First();
 
-                //TODO: Choose attachment host
-
                 if (costlyCard != null)
                 {
-                    builder.Question("This card does not have any cost. Do you want to play it?")
-                        .Answer("Yes, I want to play this card", true, (source, handle, item) => PayResourcesFromCharacter(game, handle, character, player, 0))
-                        .LastAnswer("No, I do not want to play this card", false, (source, handle, item) => CancelPayingCost(game, handle, player));
+                    builder.Question(string.Format("Which card do you want to attach '{0}' to?", attachableCard.Title));
+
+                    foreach (var host in hosts)
+                    {
+                        builder.Answer(host.Title, host, (source, handle, item) => handle.SetTarget(item));
+
+                        builder.Question("This card does not have any cost. Do you want to play it?")
+                            .Answer("Yes, I want to play this card", true, (source, handle, item) => PayResourcesFromCharacter(game, handle, character, player, 0))
+                            .LastAnswer("No, I do not want to play this card", false, (source, handle, item) => CancelPayingCost(game, handle, player));
+                    }
+
+                    builder.LastAnswer(string.Format("No, I do not want to attach '{0}' to any of these cards", attachableCard.Title), false, (source, handle, item) => CancelPayingCost(source, handle, player));
                 }
-                else if (cardEffect != null)
-                {
-                    builder.Question("This card effect does not have any cost. Do you want to trigger it?")
-                        .Answer("Yes, I want to trigger this card effect", true, (source, handle, item) => PayResourcesFromCharacter(game, handle, character, player, 0))
-                        .LastAnswer("No, I do not want to trigger this card effect", false, (source, handle, item) => CancelPayingCost(game, handle, player));
-                }
+                //else if (cardEffect != null)
+                //{
+                //    builder.Question("This card effect does not have any cost. Do you want to trigger it?")
+                //        .Answer("Yes, I want to trigger this card effect", true, (source, handle, item) => PayResourcesFromCharacter(game, handle, character, player, 0))
+                //        .LastAnswer("No, I do not want to trigger this card effect", false, (source, handle, item) => CancelPayingCost(game, handle, player));
+                //}
             }
             else if (sum < numberOfResources)
             {
@@ -173,29 +187,41 @@ namespace LotR.Effects.Phases.Any
                 }
                 else
                 {
-                    //TODO: Choose attachment host
+                    builder.Question(string.Format("Which card do you want to attach '{0}' to?", attachableCard.Title));
 
-                    var paymentText = numberOfResources == 1 ? "1 resource" : string.Format("{0} resources", numberOfResources);
+                    foreach (var host in hosts)
+                    {
+                        builder.Answer(host.Title, host, (source, handle, item) => handle.SetTarget(item));
 
-                    builder.Question(string.Format("'{0}' has a resource match, do you want to pay {1} from their resource pool?", first.Title, paymentText))
-                        .Answer("Yes, make this payment", first, (source, handle, character) => PayResourcesFromCharacter(source, handle, character, player, numberOfResources))
-                        .LastAnswer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                        var paymentText = numberOfResources == 1 ? "1 resource" : string.Format("{0} resources", numberOfResources);
+
+                        builder.Question(string.Format("'{0}' has a resource match, do you want to pay {1} from their resource pool?", first.Title, paymentText))
+                            .Answer("Yes, make this payment", first, (source, handle, character) => PayResourcesFromCharacter(source, handle, character, player, numberOfResources))
+                            .LastAnswer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                    }
+
+                    builder.LastAnswer(string.Format("No, I do not want to attach '{0}' to any of these cards", attachableCard.Title), false, (source, handle, item) => CancelPayingCost(source, handle, player));
                 }
             }
             else
             {
                 if (numberOfResources == 1)
                 {
-                    //TODO: Choose attachment host
+                    builder.Question(string.Format("Which card do you want to attach '{0}' to?", attachableCard.Title));
 
-                    builder.Question(string.Format("Multiple characters have a resource match, and this {0} costs 1 resource. Which character do you want to use to pay this cost?", description))
-                        .Answers(characters, (item) => item.Title, (source, handle, character) => PayResourcesFromCharacter(source, handle, character, player, numberOfResources))
-                        .LastAnswer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                    foreach (var host in hosts)
+                    {
+                        builder.Answer(host.Title, host, (source, handle, item) => handle.SetTarget(item));
+
+                        builder.Question(string.Format("Multiple characters have a resource match, and this {0} costs 1 resource. Which character do you want to use to pay this cost?", description))
+                            .Answers(characters, (item) => item.Title, (source, handle, character) => PayResourcesFromCharacter(source, handle, character, player, numberOfResources))
+                            .LastAnswer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                    }
+
+                    builder.LastAnswer(string.Format("No, I do not want to attach '{0}' to any of these cards", attachableCard.Title), false, (source, handle, item) => CancelPayingCost(source, handle, player));
                 }
                 else
                 {
-                    //TODO: Choose attachment host
-
                     if (sum == numberOfResources)
                     {
                         var paymentText = GetPaymentText(characters);
@@ -206,20 +232,38 @@ namespace LotR.Effects.Phases.Any
                             charactersAndPayments.Add(new Tuple<ICharacterInPlay, byte>(character, character.Resources));
                         }
 
-                        builder.Question("You have just enough resources on your character to pay this cost. Do you want to pay all of the resources from matching characters?")
-                            .Answer(string.Format("Yes, pay {0}", paymentText), characters, (source, handle, item) => PayResourcesFromCharacters(source, handle, charactersAndPayments, player))
-                            .LastAnswer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                        builder.Question(string.Format("Which card do you want to attach '{0}' to?", attachableCard.Title));
+
+                        foreach (var host in hosts)
+                        {
+                            builder.Answer(host.Title, host, (source, handle, item) => handle.SetTarget(item));
+
+                            builder.Question("You have just enough resources on your character to pay this cost. Do you want to pay all of the resources from matching characters?")
+                                .Answer(string.Format("Yes, pay {0}", paymentText), characters, (source, handle, item) => PayResourcesFromCharacters(source, handle, charactersAndPayments, player))
+                                .LastAnswer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                        }
+
+                        builder.LastAnswer(string.Format("No, I do not want to attach '{0}' to any of these cards", attachableCard.Title), false, (source, handle, item) => CancelPayingCost(source, handle, player));
                     }
                     else
                     {
                         var characterNames = GetCharacterNames(characters);
 
-                        builder.Question("You have muliple characters with a resource match to pay this cost. Do you want to choose the resources to pay from matching characters?")
-                            .Answer(string.Format("Yes, pay resources as follows:", characterNames), true);
+                        builder.Question(string.Format("Which card do you want to attach '{0}' to?", attachableCard.Title));
 
-                        AddPaymentAnswers(builder, characters, numberOfResources);
+                        foreach (var host in hosts)
+                        {
+                            builder.Answer(host.Title, host, (source, handle, item) => handle.SetTarget(item));
 
-                        builder.LastAnswer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                            builder.Question("You have muliple characters with a resource match to pay this cost. Do you want to choose the resources to pay from matching characters?")
+                                .Answer(string.Format("Yes, pay resources as follows:", characterNames), true);
+
+                            AddPaymentAnswers(builder, characters, numberOfResources);
+
+                            builder.LastAnswer("No, cancel this payment", false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                        }
+
+                        builder.LastAnswer(string.Format("No, I do not want to attach '{0}' to any of these cards", attachableCard.Title), false, (source, handle, item) => CancelPayingCost(source, handle, player));
                     }
                 }
             }
