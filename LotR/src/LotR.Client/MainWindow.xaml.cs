@@ -58,6 +58,7 @@ namespace LotR.Client
                     playerViewModels.Add(new PlayerViewModel(this.Dispatcher, game, player));
                 }
 
+                choiceControl.Initialize(game);
                 //System.Threading.Thread.Sleep(1000);
 
                 Action setupGame = () => game.Setup(players, ScenarioCode.Passage_Through_Mirkwood);

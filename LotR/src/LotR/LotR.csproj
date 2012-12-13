@@ -76,6 +76,7 @@
     <Compile Include="Cards\ICanHaveAttachments.cs" />
     <Compile Include="Cards\Player\Allies\Bofur_Dw.cs" />
     <Compile Include="Cards\Player\Events\CampfireTales.cs" />
+    <Compile Include="Cards\Player\IPlayableFromHand.cs" />
     <Compile Include="Cards\Quests\IQuestLoader.cs" />
     <Compile Include="Cards\Player\Allies\Radagast.cs" />
     <Compile Include="Cards\Player\Attachments\HeroAttachmentCardBase.cs" />
@@ -130,7 +131,6 @@
     <Compile Include="Effects\Phases\Any\IDuringDrawingCards.cs" />
     <Compile Include="Effects\Phases\Any\IBeforeStageDefeated.cs" />
     <Compile Include="Effects\Phases\Any\IPlayCardFromHandEffect.cs" />
-    <Compile Include="Effects\Phases\Any\PlayCardFromHandEffect.cs" />
     <Compile Include="Effects\Phases\Any\PlayerActionWindow.cs" />
     <Compile Include="Effects\Phases\Any\PlayerDefeat.cs" />
     <Compile Include="Effects\Phases\Any\PlayerVictory.cs" />

@@ -10,7 +10,7 @@ using LotR.States;
 namespace LotR.Effects
 {
     public abstract class PayResourcesEffectBase
-        : FrameworkEffectBase
+        : FrameworkEffectBase, ICostlyEffect
     {
         protected PayResourcesEffectBase(IGame game, Sphere resourceSphere, byte numberOfResources, bool isVariableCost, IPlayer player, ICostlyCard costlyCard)
             : this(game, resourceSphere, numberOfResources, isVariableCost, player, costlyCard, null)
@@ -211,9 +211,45 @@ namespace LotR.Effects
 
         protected virtual string GetChoiceText()
         {
-            var numberText = isVariableCost ? "You can pay any number of" : string.Format("You must pay {0}", numberOfResources);
-            var typeText = resourceSphere == Sphere.Neutral ? "resources from any sphere" : string.Format("{0} resources", resourceSphere.ToString());
-            return string.Format("{0}, {1} {2}", player.Name, numberText, typeText);
+            var sb = new StringBuilder();
+            if (isVariableCost)
+            {
+                if (resourceSphere == Sphere.Neutral)
+                {
+                    sb.AppendFormat("{0}, you can pay any number of resources from any sphere", player.Name);
+                }
+                else
+                {
+                    sb.AppendFormat("{0}, you can pay any number of {1} resources", player.Name, resourceSphere);
+                }
+            }
+            else
+            {
+                if (resourceSphere == Sphere.Neutral)
+                {
+                    if (numberOfResources == 1)
+                    {
+                        sb.AppendFormat("{0}, you must pay 1 resource from any sphere", player.Name);
+                    }
+                    else
+                    {
+                        sb.AppendFormat("{0}, you must pay {1} resources from any sphere", player.Name, numberOfResources);
+                    }
+                }
+                else
+                {
+                    if (numberOfResources == 1)
+                    {
+                        sb.AppendFormat("{0}, you must pay 1 {1} resource", player.Name, resourceSphere);
+                    }
+                    else
+                    {
+                        sb.AppendFormat("{0}, you must pay {1} {2} resources", player.Name, numberOfResources, resourceSphere);
+                    }
+                }
+            }
+
+            return sb.ToString();
         }
 
         protected virtual void ResolveEffect(IGame game, IEffectHandle handle, string paymentText)
@@ -358,14 +394,18 @@ namespace LotR.Effects
 
         protected string GetPaymentText(IEnumerable<Tuple<ICharacterInPlay, byte>> charactersAndPayments)
         {
+            if (charactersAndPayments == null)
+                throw new ArgumentNullException("charactersAndPayments");
+
+            var total = charactersAndPayments.Count();
+            
+            if (total == 0)
+                throw new ArgumentException("charactersAndPayments cannot be an empty list");
+
             var sb = new StringBuilder();
 
-            var available = charactersAndPayments.Where(x => x.Item1.Resources >= x.Item2).ToList();
-            if (available.Count == 0)
-                return "None of these character have available resources";
-
             var count = 0;
-            foreach (var tuple in available)
+            foreach (var tuple in charactersAndPayments)
             {
                 count++;
 
@@ -373,7 +413,7 @@ namespace LotR.Effects
                 {
                     if (count == 1)
                         sb.AppendFormat("1 resource from '{0}'", tuple.Item1.Title);
-                    else if (count < available.Count)
+                    else if (count < total)
                         sb.AppendFormat(", 1 resource from '{0}'", tuple.Item1.Title);
                     else
                         sb.AppendFormat(" and 1 resource from '{0}'", tuple.Item1.Title);
@@ -382,7 +422,7 @@ namespace LotR.Effects
                 {
                     if (count == 1)
                         sb.AppendFormat("{0} resources from '{1}'", tuple.Item2, tuple.Item1.Title);
-                    else if (count < available.Count)
+                    else if (count < total)
                         sb.AppendFormat(", {0} resources from '{1}'", tuple.Item2, tuple.Item1.Title);
                     else
                         sb.AppendFormat(" and {0} resources from '{1}'", tuple.Item2, tuple.Item1.Title);
@@ -541,6 +581,21 @@ namespace LotR.Effects
             }
 
             return new EffectHandle(this, builder.ToChoice());
+        }
+
+        public Sphere ResourceSphere
+        {
+            get { return resourceSphere; }
+        }
+
+        public byte NumberOfResources
+        {
+            get { return numberOfResources; }
+        }
+
+        public bool IsVariableCost
+        {
+            get { throw new NotImplementedException(); }
         }
     }
 }

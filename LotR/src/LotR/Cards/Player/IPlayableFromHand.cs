@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 
 using LotR.Effects;
-using LotR.Effects.Phases;
+using LotR.Effects.Phases.Any;
 using LotR.States;
 
 namespace LotR.Cards.Player
 {
-    public interface ICostlyCard
+    public interface IPlayableFromHand
         : IPlayerCard
     {
-        byte PrintedCost { get; }
-        bool IsVariableCost { get; }
+        IPlayCardFromHandEffect GetPlayFromHandEffect(IGame game, IPlayer player);
     }
 }

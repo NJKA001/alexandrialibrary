@@ -12,7 +12,7 @@ using LotR.States;
 namespace LotR.Effects.Phases.Any
 {
     public class PlayAttachableEffect
-        : PayResourcesEffectBase
+        : PayResourcesEffectBase, IPlayCardFromHandEffect
     {
         public PlayAttachableEffect(IGame game, Sphere resourceSphere, byte numberOfResources, bool isVariableCost, IPlayer player, ICostlyCard costlyCard)
             : base(game, resourceSphere, numberOfResources, isVariableCost, player, costlyCard)
@@ -22,13 +22,14 @@ namespace LotR.Effects.Phases.Any
             if (attachableCard == null)
                 throw new ArgumentException("costlyCard does not implement IAttachable - it cannot be played as an attachment");
 
+            if (!(attachableCard is IAttachmentCard) && !(attachableCard is ITreasureCard))
+                throw new ArgumentException("costlyCard does not implment IAttachmentCard or ITreasureCard - it is not a valid attachable player card");
+
             this.attachableCard = attachableCard;
-            this.playerCard = costlyCard as IPlayerCard;
             this.attachmentCard = costlyCard as IAttachmentCard;
             this.treasureCard = costlyCard as ITreasureCard;
         }
 
-        private readonly IPlayerCard playerCard;
         private readonly IAttachableCard attachableCard;
         private readonly IAttachmentCard attachmentCard;
         private readonly ITreasureCard treasureCard;
@@ -58,7 +59,7 @@ namespace LotR.Effects.Phases.Any
             if (attachedTo == null)
                 throw new InvalidOperationException("target undefined for this attachment");
 
-            player.Hand.RemoveCards(new List<IPlayerCard> { playerCard });
+            player.Hand.RemoveCards(new List<IPlayerCard> { costlyCard });
 
             if (attachmentCard != null)
             {
@@ -150,27 +151,18 @@ namespace LotR.Effects.Phases.Any
             {
                 var character = characters.First();
 
-                if (costlyCard != null)
+                builder.Question(string.Format("Which card do you want to attach '{0}' to?", attachableCard.Title));
+
+                foreach (var host in hosts)
                 {
-                    builder.Question(string.Format("Which card do you want to attach '{0}' to?", attachableCard.Title));
+                    builder.Answer(host.Title, host, (source, handle, item) => handle.SetTarget(item));
 
-                    foreach (var host in hosts)
-                    {
-                        builder.Answer(host.Title, host, (source, handle, item) => handle.SetTarget(item));
-
-                        builder.Question("This card does not have any cost. Do you want to play it?")
-                            .Answer("Yes, I want to play this card", true, (source, handle, item) => PayResourcesFromCharacter(game, handle, character, player, 0))
-                            .LastAnswer("No, I do not want to play this card", false, (source, handle, item) => CancelPayingCost(game, handle, player));
-                    }
-
-                    builder.LastAnswer(string.Format("No, I do not want to attach '{0}' to any of these cards", attachableCard.Title), false, (source, handle, item) => CancelPayingCost(source, handle, player));
+                    builder.Question("This card does not have any cost. Do you want to play it?")
+                        .Answer("Yes, I want to play this card", true, (source, handle, item) => PayResourcesFromCharacter(game, handle, character, player, 0))
+                        .LastAnswer("No, I do not want to play this card", false, (source, handle, item) => CancelPayingCost(game, handle, player));
                 }
-                //else if (cardEffect != null)
-                //{
-                //    builder.Question("This card effect does not have any cost. Do you want to trigger it?")
-                //        .Answer("Yes, I want to trigger this card effect", true, (source, handle, item) => PayResourcesFromCharacter(game, handle, character, player, 0))
-                //        .LastAnswer("No, I do not want to trigger this card effect", false, (source, handle, item) => CancelPayingCost(game, handle, player));
-                //}
+
+                builder.LastAnswer(string.Format("No, I do not want to attach '{0}' to any of these cards", attachableCard.Title), false, (source, handle, item) => CancelPayingCost(source, handle, player));
             }
             else if (sum < numberOfResources)
             {

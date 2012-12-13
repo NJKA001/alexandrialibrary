@@ -40,5 +40,10 @@ namespace LotR.Effects
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public override string ToString()
+        {
+            return text;
+        }
     }
 }

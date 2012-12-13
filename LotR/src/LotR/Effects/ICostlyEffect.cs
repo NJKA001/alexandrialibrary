@@ -8,7 +8,7 @@ using LotR.Cards;
 namespace LotR.Effects
 {
     public interface ICostlyEffect
-        : ICardEffect
+        : IEffect
     {
         Sphere ResourceSphere { get; }
         byte NumberOfResources { get; }

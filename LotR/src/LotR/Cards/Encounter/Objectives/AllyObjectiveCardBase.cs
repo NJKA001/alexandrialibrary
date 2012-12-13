@@ -83,14 +83,14 @@ namespace LotR.Cards.Encounter.Objectives
             get { return 0; }
         }
 
+        public bool IsVariableCost
+        {
+            get { return false; }
+        }
+
         public Sphere PrintedSphere
         {
             get { return Sphere.Neutral; }
         }
-
-        //public IEffect GetCost(IGame game, IPlayer player)
-        //{
-        //    return new PayResourcesEffect(game, PrintedSphere, PrintedCost, false, player, this);
-        //}
     }
 }

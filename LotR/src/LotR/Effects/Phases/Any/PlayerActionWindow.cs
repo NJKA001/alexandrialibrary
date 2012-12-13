@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards.Player;
-
+using LotR.Cards.Player.Events;
 using LotR.Effects.Payments;
 using LotR.States;
 
@@ -26,18 +26,18 @@ namespace LotR.Effects.Phases.Any
 
         private readonly IPlayer player;
 
-        private IList<ICostlyCard> GetPlayableCardsInHand(IGame game)
+        private IList<IPlayableFromHand> GetPlayableCardsInHand(IGame game)
         {
-            var cards = new List<ICostlyCard>();
+            var cards = new List<IPlayableFromHand>();
 
             if (game.CurrentPhase.StepCode == PhaseStep.Planning_Play_Allies_and_Attachments)
             {
-                foreach (var card in player.Hand.Cards.OfType<ICostlyCard>())
+                foreach (var card in player.Hand.Cards.OfType<IPlayableFromHand>())
                     cards.Add(card);
             }
             else
             {
-                foreach (var card in player.Hand.Cards.OfType<ICostlyCard>().Where(x => x.HasEffect<IPlayerActionEffect>()))
+                foreach (var card in player.Hand.Cards.OfType<IPlayableFromHand>().Where(x => x.HasEffect<IPlayerActionEffect>()))
                 {
                     foreach (var effect in card.Text.Effects.OfType<IPlayerActionEffect>())
                     {
@@ -54,6 +54,15 @@ namespace LotR.Effects.Phases.Any
         {
             var effects = new List<ICardEffect>();
 
+            foreach (var card in player.Hand.Cards.Where(x => !(x is IEventCard) && x.HasEffect<IPlayerActionEffect>()))
+            {
+                foreach (var effect in card.Text.Effects.OfType<IPlayerActionEffect>())
+                {
+                    if (effect.CanBeTriggered(game))
+                        effects.Add(effect);
+                }
+            }
+
             foreach (var card in player.CardsInPlay.Where(x => x.HasEffect<IPlayerActionEffect>()))
             {
                 foreach (var effect in card.BaseCard.Text.Effects.OfType<IPlayerActionEffect>())
@@ -66,13 +75,13 @@ namespace LotR.Effects.Phases.Any
             return effects;
         }
 
-        private void PlayCardFromHand(IGame game, IEffectHandle handle, ICostlyCard costlyCard)
+        private void PlayCardFromHand(IGame game, IEffectHandle handle, IPlayableFromHand playableCard)
         {
-            var playCardEffect = new PlayCardFromHandEffect(game, player, costlyCard);
+            var playCardEffect = playableCard.GetPlayFromHandEffect(game, player);
             game.AddEffect(playCardEffect);
             var playCardHandle = playCardEffect.GetHandle(game);
             game.TriggerEffect(playCardHandle);
-            handle.Resolve(string.Format("{0} played {1} from their hand", player.Name, costlyCard.Title));
+            handle.Resolve(string.Format("{0} played {1} from their hand", player.Name, playableCard.Title));
         }
 
         private void TriggerEffect(IGame game, IEffectHandle handle, ICardEffect cardEffect)
@@ -83,7 +92,7 @@ namespace LotR.Effects.Phases.Any
             handle.Resolve(string.Format("{0} triggered {1}", player.Name, cardEffect.ToString()));
         }
 
-        private void PassOnTakingAnAction(IGame game, IEffectHandle handle, uint number)
+        private void PassOnTakingAnAction(IGame game, IEffectHandle handle)
         {
             handle.Cancel(string.Format("{0} passed on taking an action", player.Name));
         }
@@ -94,15 +103,33 @@ namespace LotR.Effects.Phases.Any
             var playableEffects = GetPlayableEffects(game);
 
             var builder =
-                new ChoiceBuilder<IGame>(string.Format("{0} can choose to take an action during the {1} step of the {2} phase", player.Name, game.CurrentPhase.StepName, game.CurrentPhase.Name), game, player)
-                    .Question(string.Format("{0}, do you want to take an action?", player.Name))
-                        .Answer<uint>("Yes, I will play a card from my hand", 1)
-                            .Question("Which card would you like to play from your hand?")
-                                .LastAnswers(playableCards, (item) => item.Title, (source, handle, costlyCard) => PlayCardFromHand(game, handle, costlyCard))
-                        .Answer<uint>("Yes, I will trigger an effect on a card I control", 2)
-                            .Question("Which effect would you like to trigger?")
-                                .LastAnswers(playableEffects, (item) => item.ToString(), (source, handle, cardEffect) => TriggerEffect(source, handle, cardEffect))
-                        .LastAnswer<uint>("No, I will pass on taking an action right now", 3, (source, handle, number) => PassOnTakingAnAction(source, handle, number));
+                    new ChoiceBuilder<IGame>(string.Format("{0} can choose to take an action during the {1} step of the {2} phase", player.Name, game.CurrentPhase.StepName, game.CurrentPhase.Name), game, player);
+
+            if (playableCards.Count == 0 && playableEffects.Count == 0)
+            {
+                builder.Question(string.Format("{0}, there are no actions that you can take right now", player.Name))
+                        .LastAnswer("Ok, I will pass on taking actions right now", false, (source, handle, number) => PassOnTakingAnAction(source, handle));
+            }
+            else
+            {
+                builder.Question(string.Format("{0}, do you want to take an action?", player.Name));
+
+                if (playableCards.Count > 0)
+                {
+                    builder.Answer<uint>("Yes, I would like to play a card from my hand", 1)
+                        .Question("Which card would you like to play from your hand?")
+                            .LastAnswers(playableCards, (item) => item.Title, (source, handle, costlyCard) => PlayCardFromHand(game, handle, costlyCard));
+                }
+
+                if (playableEffects.Count > 0)
+                {
+                    builder.Answer<uint>("Yes, I would like to trigger an effect on a card I control", 2)
+                        .Question("Which effect would you like to trigger?")
+                            .LastAnswers(playableEffects, (item) => item.ToString(), (source, handle, cardEffect) => TriggerEffect(source, handle, cardEffect));
+                }
+
+                builder.LastAnswer("No, I will pass on taking an action right now", false, (source, handle, number) => PassOnTakingAnAction(source, handle));
+            }
 
             return new EffectHandle(this, builder.ToChoice()); //new ChoosePlayerAction(game, player));
         }

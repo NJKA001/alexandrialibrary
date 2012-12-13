@@ -11,18 +11,12 @@ using LotR.States;
 namespace LotR.Cards.Player
 {
     public abstract class CostlyCardBase
-        : PlayerCardBase, ICostlyCard
+        : PlayerCardBase, ICostlyCard, IPlayableFromHand
     {
         protected CostlyCardBase(CardType printedCardType, string title, CardSet cardSet, uint cardNumber, Sphere printedSphere, byte printedCost)
             : base(printedCardType, title, cardSet, cardNumber, printedSphere)
         {
             this.PrintedCost = printedCost;
-        }
-
-        protected bool IsVariableCost
-        {
-            get;
-            set;
         }
 
         public byte PrintedCost
@@ -31,9 +25,12 @@ namespace LotR.Cards.Player
             private set;
         }
 
-        //public IEffect GetCost(IGame game, IPlayer player)
-        //{
-        //    return new PayResourcesEffect(game, PrintedSphere, PrintedCost, IsVariableCost, player, this);
-        //}
+        public bool IsVariableCost
+        {
+            get;
+            protected set;
+        }
+
+        public abstract IPlayCardFromHandEffect GetPlayFromHandEffect(IGame game, IPlayer player);
     }
 }

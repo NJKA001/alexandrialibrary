@@ -16,7 +16,7 @@
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
             <Grid.RowDefinitions>
@@ -28,7 +28,7 @@
                 <ColumnDefinition Width="60"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="pauseButton" Click="pauseButton_Click" Grid.Row="0" Grid.Column="0" Margin="4" Width="80">Pause</Button>
+            <Button x:Name="pauseButton" Click="pauseButton_Click" Grid.Row="0" Grid.Column="0" Margin="4">Pause</Button>
             <TextBlock Margin="4" Text="Game Log" TextAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
             <ListBox x:Name="statusHistoryContainer" Margin="4" ItemsSource="{Binding StatusItems}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
         </Grid>

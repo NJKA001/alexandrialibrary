@@ -83,20 +83,27 @@ namespace LotR.Client.Controls
             var viewModel = item.DataContext as ChoiceItemViewModel;
             if (viewModel != null)
             {
-                if (viewModel.Parent != null && viewModel.Parent.MaximumChosenAnswers > 0)
+                if (viewModel.Parent != null)
                 {
-                    var numberChosen = viewModel.Parent.Children.Where(x => x.IsChosen).Count();
-                    while (numberChosen > viewModel.Parent.MinimumChosenAnswers)
+                    if (viewModel.Parent.MaximumChosenAnswers > 0)
                     {
-                        numberChosen--;
-                        var first = viewModel.Parent.Children.Where(x => x.IsChosen && x.ItemId != viewModel.ItemId).FirstOrDefault();
-                        if (first == null)
-                            continue;
+                        var numberChosen = viewModel.Parent.Children.Where(x => x.IsChosen).Count();
+                        while (numberChosen > viewModel.Parent.MinimumChosenAnswers)
+                        {
+                            numberChosen--;
+                            var first = viewModel.Parent.Children.Where(x => x.IsChosen && x.ItemId != viewModel.ItemId).FirstOrDefault();
+                            if (first == null)
+                                continue;
 
-                        first.IsChosen = false;
+                            first.IsChosen = false;
+                        }
+                    }
+
+                    if (viewModel.IsChosen && !viewModel.Parent.IsChosen)
+                    {
+                        viewModel.Parent.IsChosen = true;
                     }
                 }
-
             }
         }
 

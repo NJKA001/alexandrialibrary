@@ -8,8 +8,7 @@ using LotR.Cards.Player;
 namespace LotR.Effects.Phases.Any
 {
     public interface IPlayCardFromHandEffect
-        : IFrameworkEffect
+        : IFrameworkEffect, ICostlyEffect
     {
-        ICostlyCard CostlyCard { get; }
     }
 }

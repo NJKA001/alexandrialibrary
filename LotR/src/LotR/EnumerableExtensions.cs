@@ -16,7 +16,10 @@ namespace LotR
             var list = self.ToList();
 
             if (list.Count == 0)
-                return default(T);
+                throw new ArgumentException("cannot get a random element from an an empty list");
+
+            if (list.Count == 1)
+                return list.First();
 
             return list[random.Next(0, list.Count)];
         }

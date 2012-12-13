@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Effects;
+using LotR.Effects.Phases.Any;
+using LotR.States;
+
 namespace LotR.Cards.Player.Events
 {
     public abstract class EventCardBase
@@ -16,6 +20,11 @@ namespace LotR.Cards.Player.Events
         public byte PlayerActionCost
         {
             get { return PrintedCost; }
+        }
+
+        public override IPlayCardFromHandEffect GetPlayFromHandEffect(IGame game, IPlayer player)
+        {
+            return new PlayEventEffect(game, PrintedSphere, PrintedCost, IsVariableCost, player, this);
         }
     }
 }

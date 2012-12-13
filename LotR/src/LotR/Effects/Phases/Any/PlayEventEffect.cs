@@ -11,7 +11,7 @@ using LotR.States;
 namespace LotR.Effects.Phases.Any
 {
     public class PlayEventEffect
-        : PayResourcesEffectBase
+        : PayResourcesEffectBase, IPlayCardFromHandEffect
     {
         public PlayEventEffect(IGame game, Sphere resourceSphere, byte numberOfResources, bool isVariableCost, IPlayer player, IEventCard eventCard)
             : base(game, resourceSphere, numberOfResources, isVariableCost, player, eventCard)

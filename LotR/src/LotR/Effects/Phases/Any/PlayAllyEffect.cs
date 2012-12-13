@@ -8,10 +8,10 @@ using LotR.Cards.Player;
 using LotR.Cards.Player.Allies;
 using LotR.States;
 
-namespace LotR.Effects
+namespace LotR.Effects.Phases.Any
 {
     public class PlayAllyEffect
-        : PayResourcesEffectBase
+        : PayResourcesEffectBase, IPlayCardFromHandEffect
     {
         public PlayAllyEffect(IGame game, Sphere resourceSphere, byte numberOfResources, IPlayer player, IAllyCard allyCard)
             : base(game, resourceSphere, numberOfResources, false, player, allyCard)

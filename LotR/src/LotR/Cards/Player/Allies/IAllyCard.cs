@@ -6,7 +6,8 @@ using System.Text;
 namespace LotR.Cards.Player.Allies
 {
     public interface IAllyCard
-        : ICostlyCard, ICharacterCard
+        : ICostlyCard,
+        ICharacterCard
     {
     }
 }

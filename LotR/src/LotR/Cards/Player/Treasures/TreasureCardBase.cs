@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Effects.Phases.Any;
 using LotR.States;
 
 namespace LotR.Cards.Player.Treasures
@@ -40,6 +41,11 @@ namespace LotR.Cards.Player.Treasures
                 return false;
 
             return true;
+        }
+
+        public override IPlayCardFromHandEffect GetPlayFromHandEffect(IGame game, IPlayer player)
+        {
+            return new PlayAttachableEffect(game, PrintedSphere, PrintedCost, IsVariableCost, player, this);
         }
     }
 }
