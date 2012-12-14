@@ -47,7 +47,10 @@ namespace LotR.Client
 
                 var player1 = new PlayerInfo("Dan", "TheThreeHunters.txt");
                 var player2 = new PlayerInfo("Irma", "SpiritLeadership.txt");
-                var playersInfo = new List<PlayerInfo> { player1, player2 };
+                var playersInfo = new List<PlayerInfo> 
+                //{ player1 }; 
+                //, 
+                { player2 };
 
                 controller = GetController();
                 game = new Game(controller);
@@ -140,6 +143,34 @@ namespace LotR.Client
 
         private void EffectAddedCallback(IEffect effect)
         {
+            try
+            {
+                if (effect is IResponseEffect && effect.CanBeTriggered(game))
+                {
+                    var responseEffect = effect as IResponseEffect;
+                    
+                    IPlayer player = null;
+                    IPlayer owner = null;
+
+                    var controller = game.GetController(responseEffect.CardSource.Id);
+                    
+                    if (responseEffect.CardSource is IPlayerCard)
+                    {
+                        var playerCard = responseEffect.CardSource as IPlayerCard;
+                        owner = playerCard.Owner;
+                    }
+
+                    player = controller != null ? controller : owner;
+                    if (player == null)
+                        throw new InvalidOperationException("Could not determine the controller of this effect: " + effect.ToString());
+
+                    game.OpenPlayerResponseWindow(player, responseEffect);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("\r\nError in effect added callback: {0}\r\n{1}", ex.Message, ex.StackTrace), "ERROR: EffectAddedCallback");
+            }
         }
 
         private void EffectResolvedCallback(IEffect effect, IEffectHandle handle)

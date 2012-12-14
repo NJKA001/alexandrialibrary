@@ -346,6 +346,12 @@ namespace LotR.States
             Cleanup();
         }
 
+        public void OpenPlayerResponseWindow(IPlayer player, IResponseEffect responseEffect)
+        {
+            var responseWindow = new PlayerResponseWindowEffect(this, player, responseEffect);
+            TriggerImmediately(responseWindow);
+        }
+
         public IPlayer GetController(Guid cardId)
         {
             foreach (var player in players)

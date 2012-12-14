@@ -140,6 +140,40 @@ namespace LotR.Client.Controls
             this.game = game;
         }
 
+        private bool HasMultipleDescendants(IQuestion question)
+        {
+            var answerCount = question.Answers.Count();
+
+            if (answerCount == 0)
+            {
+                return false;
+            }
+            else if (answerCount == 1)
+            {
+                var first = question.Answers.First();
+                if (first.FollowUp != null)
+                    return HasMultipleDescendants(first.FollowUp);
+
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private void ChooseRequiredAnswers(IQuestion question)
+        {
+            if (question.Answers.Count() == 1)
+            {
+                var first = question.Answers.First();
+                first.IsChosen = true;
+
+                if (first.FollowUp != null)
+                    ChooseRequiredAnswers(first.FollowUp);
+            }
+        }
+
         public void Load(IChoice choice)
         {
             if (choice == null)
@@ -155,6 +189,16 @@ namespace LotR.Client.Controls
 
             choiceContainer.DataContext = choiceViewModel;
             choiceChildrenContainer.ItemsSource = choiceViewModel.Children;
+
+            if (!HasMultipleDescendants(choice.Question))
+            {
+                ChooseRequiredAnswers(choice.Question);
+
+                if (choice.IsValid(game))
+                {
+                    isValid = true;
+                }
+            }
         }
     }
 }

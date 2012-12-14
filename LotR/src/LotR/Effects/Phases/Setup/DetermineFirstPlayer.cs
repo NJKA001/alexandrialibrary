@@ -41,10 +41,20 @@ namespace LotR.Effects.Phases.Setup
         public override IEffectHandle GetHandle(IGame game)
         {
             var builder =
-                new ChoiceBuilder<IGame>("The players determine a first player based on a majority group decision. If this proves impossible, determine a first player at random.", game, game.Players.First())
-                    .Question("Who will be first player?")
-                        .Answers(game.Players, (player) => player.Name, (source, handle, item) => ChooseFirstPlayer(handle, item))
-                        .Answer("Determine a first player at random", game.Players.GetRandomItem(), (source, handle, item) => ChooseFirstPlayerRandomly(handle, item));
+                new ChoiceBuilder<IGame>("The players determine a first player based on a majority group decision. If this proves impossible, determine a first player at random.", game, game.Players.First());
+
+            if (game.Players.Count() > 1)
+            {
+                builder.Question("Who will be first player?")
+                    .Answers(game.Players, (player) => player.Name, (source, handle, item) => ChooseFirstPlayer(handle, item))
+                    .Answer("Determine a first player at random", game.Players.GetRandomItem(), (source, handle, item) => ChooseFirstPlayerRandomly(handle, item));
+            }
+            else
+            {
+                var first = game.Players.First();
+                builder.Question(string.Format("{0} is the only player so there is no need to determine first player", first.Name))
+                    .LastAnswer(string.Format("{0} is first player", first.Name), first, (source, handle, item) => ChooseFirstPlayer(handle, first));
+            }
 
             return new EffectHandle(this, builder.ToChoice());
         }

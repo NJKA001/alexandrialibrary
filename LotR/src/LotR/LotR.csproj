@@ -97,6 +97,7 @@
     <Compile Include="Effects\Phases\Any\PayResourcesEffectBase.cs" />
     <Compile Include="Effects\Phases\Any\PlayAttachableEffect.cs" />
     <Compile Include="Effects\Phases\Any\PlayEventEffect.cs" />
+    <Compile Include="Effects\Phases\Any\PlayerResponseWindowEffect.cs" />
     <Compile Include="Effects\PlayersExhaustCharactersChoiceFactory.cs" />
     <Compile Include="Effects\IAnswer.cs" />
     <Compile Include="Effects\IChoiceItem.cs" />
