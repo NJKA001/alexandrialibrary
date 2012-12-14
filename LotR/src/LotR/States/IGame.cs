@@ -33,7 +33,6 @@ namespace LotR.States
 
         void Setup(IEnumerable<IPlayer> players, ScenarioCode scenarioCode);
         void OpenPlayerActionWindow();
-        void OpenPlayerResponseWindow(IPlayer player, IResponseEffect responseEffect);
 
         IPlayer GetController(Guid cardId);
 

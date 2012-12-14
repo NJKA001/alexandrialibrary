@@ -139,6 +139,32 @@ namespace LotR.States
             }
         }
 
+        private void CheckForPlayerResponseWindow(IEffect effect)
+        {
+            if (effect is IResponseEffect && effect.CanBeTriggered(this))
+            {
+                var responseEffect = effect as IResponseEffect;
+
+                IPlayer player = null;
+                IPlayer owner = null;
+
+                var controller = GetController(responseEffect.CardSource.Id);
+
+                if (responseEffect.CardSource is IPlayerCard)
+                {
+                    var playerCard = responseEffect.CardSource as IPlayerCard;
+                    owner = playerCard.Owner;
+                }
+
+                player = controller != null ? controller : owner;
+                if (player == null)
+                    throw new InvalidOperationException("Could not determine the controller of this effect: " + effect.ToString());
+
+                var responseWindow = new PlayerResponseWindowEffect(this, player, responseEffect);
+                TriggerImmediately(responseWindow);
+            }
+        }
+
         #region Properties
 
         public Guid Id
@@ -246,6 +272,8 @@ namespace LotR.States
             currentEffects.Add(effect);
 
             controller.EffectAdded(effect);
+
+            CheckForPlayerResponseWindow(effect);
         }
 
         public void TriggerEffect(IEffectHandle handle)
@@ -344,12 +372,6 @@ namespace LotR.States
             }
 
             Cleanup();
-        }
-
-        public void OpenPlayerResponseWindow(IPlayer player, IResponseEffect responseEffect)
-        {
-            var responseWindow = new PlayerResponseWindowEffect(this, player, responseEffect);
-            TriggerImmediately(responseWindow);
         }
 
         public IPlayer GetController(Guid cardId)

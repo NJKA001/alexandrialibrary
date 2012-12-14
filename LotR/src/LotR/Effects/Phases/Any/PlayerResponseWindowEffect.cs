@@ -23,7 +23,6 @@ namespace LotR.Effects.Phases.Any
         private void TriggerResponse(IGame game, IEffectHandle handle)
         {
             var responseHandle = responseEffect.GetHandle(game);
-            game.AddEffect(responseEffect);
             game.TriggerEffect(responseHandle);
 
             handle.Resolve(string.Format("{0} decided to trigger '{1}'", player.Name, responseEffect));

@@ -145,27 +145,7 @@ namespace LotR.Client
         {
             try
             {
-                if (effect is IResponseEffect && effect.CanBeTriggered(game))
-                {
-                    var responseEffect = effect as IResponseEffect;
-                    
-                    IPlayer player = null;
-                    IPlayer owner = null;
 
-                    var controller = game.GetController(responseEffect.CardSource.Id);
-                    
-                    if (responseEffect.CardSource is IPlayerCard)
-                    {
-                        var playerCard = responseEffect.CardSource as IPlayerCard;
-                        owner = playerCard.Owner;
-                    }
-
-                    player = controller != null ? controller : owner;
-                    if (player == null)
-                        throw new InvalidOperationException("Could not determine the controller of this effect: " + effect.ToString());
-
-                    game.OpenPlayerResponseWindow(player, responseEffect);
-                }
             }
             catch (Exception ex)
             {
