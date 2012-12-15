@@ -64,11 +64,14 @@ namespace LotR.Effects
             if (question.MinimumChosenAnswers == 0)
                 return true;
 
+            if (question.Parent != null && !question.Parent.IsChosen)
+                return true;
+
             var numberChosen = question.Answers.Where(x => x.IsChosen).Count();
             if (numberChosen < question.MinimumChosenAnswers || numberChosen > question.MaximumChosenAnswers)
                 return false;
 
-            foreach (var answer in question.Answers.Where(x => x.FollowUp != null))
+            foreach (var answer in question.Answers.Where(x => x.IsChosen && x.FollowUp != null))
             {
                 if (!AnswersAreValid(answer.FollowUp))
                     return false;

@@ -39,44 +39,37 @@ namespace LotR.Client
             {
                 System.Threading.Thread.CurrentThread.Name = "UI Thread";
 
-                statusViewModel = new StatusViewModel(this.Dispatcher);
-
-                currentStatusLabel.DataContext = statusViewModel;
-                statusHistoryContainer.ItemsSource = statusViewModel.History;
-                playersContainer.ItemsSource = playerViewModels;
+                //currentStatusLabel.DataContext = statusViewModel;
+                //statusHistoryContainer.ItemsSource = statusViewModel.History;
+                //playersContainer.ItemsSource = playerViewModels;
 
                 var player1 = new PlayerInfo("Dan", "TheThreeHunters.txt");
                 var player2 = new PlayerInfo("Irma", "SpiritLeadership.txt");
-                var playersInfo = new List<PlayerInfo> 
-                //{ player1 }; 
-                //, 
-                { player2 };
+                var playersInfo = new List<PlayerInfo> { player2 };
 
                 controller = GetController();
                 game = new Game(controller);
 
                 var players = GetPlayers(game, playersInfo);
-                foreach (var player in players)
-                {
-                    playerViewModels.Add(new PlayerViewModel(this.Dispatcher, game, player));
-                }
-
-                choiceControl.Initialize(game);
-                //System.Threading.Thread.Sleep(1000);
-
                 Action setupGame = () => game.Setup(players, ScenarioCode.Passage_Through_Mirkwood);
 
                 gameThread = new System.Threading.Thread(new System.Threading.ThreadStart(setupGame));
                 gameThread.Name = "Game Thread";
                 gameThread.Start();
 
-                while (game.StagingArea == null)
-                {
-                    System.Threading.Thread.Sleep(150);
-                }
 
-                stagingAreaViewModel = new StagingAreaViewModel(this.Dispatcher, game);
-                stagingAreaContainer.ItemsSource = stagingAreaViewModel.CardsInPlay;
+                statusControl.Initialize(game);
+                playerAreaControl.Initialize(game, players);
+                stagingAreaControl.Initialize(game);
+                choiceControl.Initialize(game);
+
+                //while (game.StagingArea == null)
+                //{
+                //    System.Threading.Thread.Sleep(150);
+                //}
+
+                
+                //stagingAreaContainer.ItemsSource = stagingAreaViewModel.CardsInPlay;
             }
             catch (Exception ex)
             {
@@ -87,10 +80,7 @@ namespace LotR.Client
         private readonly IGame game;
         private readonly System.Threading.Thread gameThread;
         private readonly IGameController controller;
-        private readonly ObservableCollection<PlayerViewModel> playerViewModels = new ObservableCollection<PlayerViewModel>();
-        private readonly StagingAreaViewModel stagingAreaViewModel;
-        private readonly StatusViewModel statusViewModel;
-
+        
         private IGameController GetController()
         {
             var controller = new GameController();
@@ -137,8 +127,7 @@ namespace LotR.Client
 
         private void SetCurrentStatus(string status)
         {
-            Action action = () => statusViewModel.SetCurrentStatus(status);
-            Dispatch(action);
+            statusControl.SetCurrentStatus(status);
         }
 
         private void EffectAddedCallback(IEffect effect)
@@ -178,35 +167,6 @@ namespace LotR.Client
             }
             //statusViewModel.SetCurrentStatus("Choice: " + choice.Text);
             //MessageBox.Show(choice.Text, "OfferChoiceCallback");
-        }
-
-        private void PaymentAcceptedCallback(IEffect effect, IEffectHandle handle)
-        {
-            statusViewModel.SetCurrentStatus("Payment Accepted: " + effect.ToString());
-            //MessageBox.Show(effect.ToString(), "PaymentAcceptedCallback");
-        }
-
-        private void PaymentRejectedCallback(IEffect effect, IEffectHandle handle)
-        {
-            statusViewModel.SetCurrentStatus("Payment Rejected: " + effect.ToString());
-            //MessageBox.Show(effect.ToString(), "PaymentRejectedCallback");
-        }
-
-        public IEnumerable<PlayerViewModel> Players
-        {
-            get { return playerViewModels; }
-        }
-
-        private void pauseButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                game.Pause();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error Pausing/Resuming Game");
-            }
         }
     }
 }

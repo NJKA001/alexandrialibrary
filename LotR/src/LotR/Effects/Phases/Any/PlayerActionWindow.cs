@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards;
 using LotR.Cards.Player;
 using LotR.Cards.Player.Events;
 using LotR.Effects.Payments;
@@ -26,6 +27,14 @@ namespace LotR.Effects.Phases.Any
 
         private readonly IPlayer player;
 
+        private bool IsAffordable(ICostlyCard costlyCard)
+        {
+            var characters = player.CardsInPlay.OfType<ICharacterInPlay>().Where(x => x.CanPayFor(costlyCard)).ToList();
+            var sum = characters.Sum(x => x.Resources);
+
+            return (characters.Count > 0 && (costlyCard.IsVariableCost || sum >= costlyCard.PrintedCost));
+        }
+
         private IList<IPlayableFromHand> GetPlayableCardsInHand(IGame game)
         {
             var cards = new List<IPlayableFromHand>();
@@ -33,7 +42,16 @@ namespace LotR.Effects.Phases.Any
             if (game.CurrentPhase.StepCode == PhaseStep.Planning_Play_Allies_and_Attachments)
             {
                 foreach (var card in player.Hand.Cards.OfType<IPlayableFromHand>())
+                {
+                    var costlyCard = card as ICostlyCard;
+                    if (costlyCard != null)
+                    {
+                        if (!IsAffordable(costlyCard))
+                            continue;
+                    }
+
                     cards.Add(card);
+                }
             }
             else
             {

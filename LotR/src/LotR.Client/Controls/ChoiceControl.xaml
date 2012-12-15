@@ -12,36 +12,38 @@
     </UserControl.Resources>
     <Grid x:Name="choiceContainer">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="80*"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="{Binding Text}" Margin="4" Grid.Row="0" TextWrapping="Wrap"/>
-        <TreeView x:Name="choiceChildrenContainer" Grid.Row="1">
+        <TextBlock Text="Choices" TextAlignment="Center" Margin="4" Grid.Row="0" FontWeight="Bold"/>
+        <TextBlock Text="{Binding Text}" Margin="4" Grid.Row="1" TextWrapping="Wrap"/>
+        <TreeView x:Name="choiceChildrenContainer" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="4" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Children}" DataType="{x:Type viewModels:ChoiceItemViewModel}">
-                    <Border>
-                        <StackPanel Orientation="Vertical">
-                            <StackPanel Orientation="Horizontal">
-                                <CheckBox x:Name="chosenCheckBox" Margin="4" IsChecked="{Binding IsChosen, Mode=TwoWay}" Visibility="{Binding ChoosableVisibility}" Checked="chosenCheckBox_Checked" Unchecked="chosenCheckBox_Unchecked"/>
-                                <TextBlock Text="{Binding Text}" Margin="4"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Vertical" Visibility="{Binding CardVisibility}">
-                                <Image Margin="4" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="224" Width="120" />
-                                <TextBlock Text="{Binding CardTitle}" ToolTip="{Binding CardText}"/>
-                            </StackPanel>
-                            <StackPanel Visibility="{Binding CardInPlayVisibility}">
-                                
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
+                    <Grid MaxWidth="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}, Path=ActualWidth}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox x:Name="chosenCheckBox" Grid.Row="0" Grid.Column="0" Margin="4" IsChecked="{Binding IsChosen, Mode=TwoWay}" Visibility="{Binding ChoosableVisibility}" Checked="chosenCheckBox_Checked" Unchecked="chosenCheckBox_Unchecked"/>
+                        <TextBlock Text="{Binding Text}" Grid.Row="0" Grid.Column="1" Margin="4" TextWrapping="Wrap"/>
+                        <Image Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="4" Visibility="{Binding CardVisibility}" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Height="224" Width="120" />
+                        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Visibility="{Binding CardVisibility}" Text="{Binding CardTitle}" ToolTip="{Binding CardText}"/>
+                    </Grid>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
-        <StackPanel Orientation="Horizontal" Grid.Row="2">
-            <Button x:Name="submitButton" Margin="4" Click="submitButton_Click">Submit</Button>
-            <Button x:Name="cancelButton" Margin="12 4 8 4" Click="cancelButton_Click">Cancel</Button>
-            <TextBlock x:Name="statusText" Margin="4"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="3">
+            <Button x:Name="submitButton" Height="24" Margin="4" Click="submitButton_Click">Submit</Button>
+            <Button x:Name="cancelButton" Height="24" Margin="12 4 8 4" Click="cancelButton_Click">Cancel</Button>
+            <TextBlock x:Name="statusText" Height="20" Margin="4"/>
         </StackPanel>
     </Grid>
 </UserControl>

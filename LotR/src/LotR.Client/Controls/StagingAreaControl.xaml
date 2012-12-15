@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="LotR.Client.Controls.StagingAreaControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:LotR.Client.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converters:ImageSourceConverter x:Key="imageConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="Staging Area" Margin="4" FontWeight="Bold"/>
+            <ListBox x:Name="stagingAreaContainer">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="287"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Margin="4" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Height="224" Width="120" />
+                                <TextBlock Margin="4" Text="{Binding Title}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" FontSize="14" FontWeight="Bold" ToolTip="{Binding CardText}"/>
+                                <TextBlock Text="Resources" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="8 0 0 0" FontSize="10" Foreground="DarkGray"/>
+                                <TextBlock Text="{Binding Resources}" Grid.Row="2" Grid.Column="2" FontWeight="Bold" />
+                                <TextBlock Text="Damage" Grid.Row="2" Grid.Column="3" FontSize="10" Foreground="DarkGray"/>
+                                <TextBlock Text="{Binding Damage}" Grid.Row="2" Grid.Column="4" FontWeight="Bold"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </Grid>
+</UserControl>

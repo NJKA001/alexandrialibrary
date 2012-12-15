@@ -59,6 +59,15 @@
     <Compile Include="Controls\ChoiceControl.xaml.cs">
       <DependentUpon>ChoiceControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GameStatusControl.xaml.cs">
+      <DependentUpon>GameStatusControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PlayerAreaControl.xaml.cs">
+      <DependentUpon>PlayerAreaControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StagingAreaControl.xaml.cs">
+      <DependentUpon>StagingAreaControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\UIElementExtensions.cs" />
     <Compile Include="ViewModels\ChoiceItemViewModel.cs" />
     <Compile Include="ViewModels\EncounterCardInPlayViewModel.cs" />
@@ -70,6 +79,18 @@
     <Compile Include="ViewModels\StatusViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="Controls\ChoiceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GameStatusControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PlayerAreaControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StagingAreaControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

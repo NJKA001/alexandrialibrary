@@ -164,14 +164,14 @@ namespace LotR.Client.Controls
 
         private void ChooseRequiredAnswers(IQuestion question)
         {
-            if (question.Answers.Count() == 1)
-            {
-                var first = question.Answers.First();
-                first.IsChosen = true;
+            if (question.Answers.Count() != 1)
+                return;
 
-                if (first.FollowUp != null)
-                    ChooseRequiredAnswers(first.FollowUp);
-            }
+            var first = question.Answers.First();
+            first.IsChosen = true;
+
+            if (first.FollowUp != null)
+                ChooseRequiredAnswers(first.FollowUp);
         }
 
         public void Load(IChoice choice)
@@ -193,11 +193,6 @@ namespace LotR.Client.Controls
             if (!HasMultipleDescendants(choice.Question))
             {
                 ChooseRequiredAnswers(choice.Question);
-
-                if (choice.IsValid(game))
-                {
-                    isValid = true;
-                }
             }
         }
     }
