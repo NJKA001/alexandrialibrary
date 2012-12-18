@@ -57,10 +57,17 @@ namespace LotR.Effects.Phases.Any
             {
                 foreach (var card in player.Hand.Cards.OfType<IPlayableFromHand>().Where(x => x.HasEffect<IPlayerActionEffect>()))
                 {
+                    var costlyCard = card as ICostlyCard;
+
                     foreach (var effect in card.Text.Effects.OfType<IPlayerActionEffect>())
                     {
-                        if (effect.CanBeTriggered(game))
-                            cards.Add(card);
+                        if (!effect.CanBeTriggered(game))
+                            continue;
+
+                        if (costlyCard != null && !IsAffordable(costlyCard))
+                            continue;
+
+                        cards.Add(card);
                     }
                 }
             }
