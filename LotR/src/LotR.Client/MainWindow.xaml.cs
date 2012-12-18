@@ -49,14 +49,14 @@ namespace LotR.Client
 
                 controller = GetController();
                 game = new Game(controller);
+                game.RegisterGameSetupCallback(() => GameSetupCallback());
 
-                var players = GetPlayers(game, playersInfo);
+                players = GetPlayers(game, playersInfo);
                 Action setupGame = () => game.Setup(players, ScenarioCode.Passage_Through_Mirkwood);
 
                 gameThread = new System.Threading.Thread(new System.Threading.ThreadStart(setupGame));
                 gameThread.Name = "Game Thread";
                 gameThread.Start();
-
 
                 statusControl.Initialize(game);
                 playerAreaControl.Initialize(game, players);
@@ -78,9 +78,14 @@ namespace LotR.Client
         }
 
         private readonly IGame game;
+        private readonly IEnumerable<IPlayer> players;
         private readonly System.Threading.Thread gameThread;
         private readonly IGameController controller;
-        
+
+        private void GameSetupCallback()
+        {
+        }
+
         private IGameController GetController()
         {
             var controller = new GameController();

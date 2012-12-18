@@ -15,5 +15,10 @@ namespace LotR.States
             : base(game, card)
         {
         }
+
+        public IPlayerCard PlayerCard
+        {
+            get { return Card; }
+        }
     }
 }

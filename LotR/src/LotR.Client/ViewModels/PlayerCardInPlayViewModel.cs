@@ -9,20 +9,21 @@ using LotR.States;
 
 namespace LotR.Client.ViewModels
 {
-    public class PlayerCardInPlayViewModel<T>
+    public class PlayerCardInPlayViewModel
         : PlayerCardViewModel
-        where T : IPlayerCard
     {
-        public PlayerCardInPlayViewModel(Dispatcher dispatcher, IPlayerCardInPlay<T> cardInPlay)
-            : base(dispatcher, cardInPlay.Card)
+        public PlayerCardInPlayViewModel(Dispatcher dispatcher, IPlayerCardInPlay cardInPlay)
+            : base(dispatcher, cardInPlay.PlayerCard)
         {
-            if (cardInPlay == null)
-                throw new ArgumentNullException("cardInPlay");
-
             this.cardInPlay = cardInPlay;
         }
 
-        private readonly IPlayerCardInPlay<T> cardInPlay;
+        private readonly IPlayerCardInPlay cardInPlay;
+
+        public IPlayerCardInPlay CardInPlay
+        {
+            get { return cardInPlay; }
+        }
 
         public byte Resources
         {
@@ -33,5 +34,21 @@ namespace LotR.Client.ViewModels
         {
             get { return cardInPlay.Damage; }
         }
+    }
+
+    public class PlayerCardInPlayViewModel<T>
+        : PlayerCardInPlayViewModel
+        where T : IPlayerCard
+    {
+        public PlayerCardInPlayViewModel(Dispatcher dispatcher, IPlayerCardInPlay<T> cardInPlay)
+            : base(dispatcher, cardInPlay)
+        {
+            if (cardInPlay == null)
+                throw new ArgumentNullException("cardInPlay");
+
+            this.cardInPlay = cardInPlay;
+        }
+
+        private readonly IPlayerCardInPlay<T> cardInPlay;
     }
 }

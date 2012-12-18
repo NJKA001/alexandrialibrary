@@ -40,6 +40,9 @@ namespace LotR.Client.Controls
             if (status == null)
                 throw new ArgumentNullException("status");
 
+            if (statusViewModel == null)
+                return;
+
             statusViewModel.SetCurrentStatus(status);
         }
     }

@@ -8,10 +8,13 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <converters:ImageSourceConverter x:Key="imageConverter" />
+        <BitmapImage x:Key="damageIcon" UriSource="../Images/damage_token.png"/>
+        <BitmapImage x:Key="progressIcon" UriSource="../Images/progress_token.png"/>
+        <BitmapImage x:Key="resourceIcon" UriSource="../Images/resource_token.png"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Players Area" TextAlignment="Center" Grid.Row="0" Margin="4" FontWeight="Bold" />
@@ -25,40 +28,6 @@
                             <TextBlock Margin="2" Text="Threat" FontSize="10" Foreground="DarkGray"/>
                             <TextBlock Margin="2" Text="{Binding CurrentThreat}"/>
                         </StackPanel>
-                        <ListBox ItemsSource="{Binding Heroes}">
-                            <ListBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel IsItemsHost="True"/>
-                                </ItemsPanelTemplate>
-                            </ListBox.ItemsPanel>
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Border>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="287"/>
-                                                <RowDefinition Height="30"/>
-                                                <RowDefinition Height="30"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="20"/>
-                                                <ColumnDefinition Width="20"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="40"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Image Margin="4" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Height="279" Width="200" />
-                                            <Image Margin="2" Source="{Binding Path=ResourceIcon, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Grid.Row="1" Grid.Column="0" Height="16" Width="16"/>
-                                            <TextBlock Margin="4" Text="{Binding Title}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" FontSize="14" FontWeight="Bold" ToolTip="{Binding CardText}"/>
-                                            <TextBlock Text="Resources" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="8 0 0 0" FontSize="10" Foreground="DarkGray"/>
-                                            <TextBlock Text="{Binding Resources}" Grid.Row="2" Grid.Column="2" FontWeight="Bold" />
-                                            <TextBlock Text="Damage" Grid.Row="2" Grid.Column="3" FontSize="10" Foreground="DarkGray"/>
-                                            <TextBlock Text="{Binding Damage}" Grid.Row="2" Grid.Column="4" FontWeight="Bold"/>
-                                        </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
                         <StackPanel>
                             <TextBlock Text="Cards In Hand"/>
                             <ListBox ItemsSource="{Binding Hand}">
@@ -86,6 +55,76 @@
                                 </ListBox.ItemTemplate>
                             </ListBox>
                         </StackPanel>
+                        <TextBlock Margin="4" Text="Heroes"/>
+                        <ListBox ItemsSource="{Binding Heroes}">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel IsItemsHost="True"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="287"/>
+                                                <RowDefinition Height="30"/>
+                                                <RowDefinition Height="30"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="32"/>
+                                                <ColumnDefinition Width="32"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="32"/>
+                                                <ColumnDefinition Width="32"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Margin="4" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Height="279" Width="200" />
+                                            <!--<Image Margin="2" Source="{Binding Path=ResourceIcon, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Grid.Row="1" Grid.Column="0" Height="16" Width="16"/>-->
+                                            <TextBlock Margin="4" Text="{Binding Title}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" FontSize="14" FontWeight="Bold" ToolTip="{Binding CardText}"/>
+                                            <Image Grid.Row="2" Grid.Column="0" Margin="0" Source="{StaticResource resourceIcon}" ToolTip="Resources" Height="20" Width="20"/>
+                                            <TextBlock Text="{Binding Resources}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" FontWeight="Bold" />
+                                            <Image Grid.Row="2" Grid.Column="3" Margin="0" Source="{StaticResource damageIcon}" ToolTip="Damage" Height="20" Width="20"/>
+                                            <TextBlock Text="{Binding Damage}" Grid.Row="2" Grid.Column="4" VerticalAlignment="Center" FontWeight="Bold"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <TextBlock Margin="4" Text="Cards In Play"/>
+                        <ListBox ItemsSource="{Binding CardsInPlay}">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel IsItemsHost="True"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="30"/>
+                                                <RowDefinition Height="30"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="20"/>
+                                                <ColumnDefinition Width="20"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="20"/>
+                                                <ColumnDefinition Width="20"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Margin="4" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Width="120" />
+                                            <!--<Image Margin="2" Source="{Binding Path=ResourceIcon, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Grid.Row="1" Grid.Column="0" Height="16" Width="16"/>-->
+                                            <TextBlock Margin="4" Text="{Binding Title}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" FontSize="14" FontWeight="Bold" ToolTip="{Binding CardText}"/>
+                                            <Image Grid.Row="2" Grid.Column="0" Margin="0" Source="{StaticResource resourceIcon}" ToolTip="Resources" Height="20" Width="20"/>
+                                            <TextBlock Text="{Binding Resources}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" FontWeight="Bold"/>
+                                            <Image Grid.Row="2" Grid.Column="3" Margin="0" Source="{StaticResource damageIcon}" ToolTip="Damage" Height="20" Width="20"/>
+                                            <TextBlock Text="{Binding Damage}" Grid.Row="2" Grid.Column="4" VerticalAlignment="Center" FontWeight="Bold"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

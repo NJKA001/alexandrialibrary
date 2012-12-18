@@ -39,6 +39,9 @@ namespace LotR.States
 
         void DrawCards(uint numberOfCards);
 
+        void RegisterCardAddedToPlayCallback(Action<ICardInPlay> callback);
+        void RegisterCardRemovedFromPlayCallback(Action<ICardInPlay> callback);
+
         bool IsTheControllerOf(ICardInPlay card);
     }
 }

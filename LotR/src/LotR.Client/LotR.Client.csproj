@@ -283,6 +283,9 @@
     <Resource Include="Images\lore_small.png" />
     <Resource Include="Images\defense_small.png" />
     <Resource Include="Images\attack_small.png" />
+    <Resource Include="Images\damage_token.png" />
+    <Resource Include="Images\progress_token.png" />
+    <Resource Include="Images\resource_token.png" />
     <Content Include="SpiritLeadership.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

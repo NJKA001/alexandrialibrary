@@ -35,6 +35,8 @@ namespace LotR.States
         private readonly ObservableCollection<IAttachableInPlay> deckAttachments = new ObservableCollection<IAttachableInPlay>();
         private readonly ObservableCollection<ICardInPlay> cardsInPlay = new ObservableCollection<ICardInPlay>();
         private readonly ObservableCollection<IEnemyInPlay> engagedEnemies = new ObservableCollection<IEnemyInPlay>();
+        private readonly IList<Action<ICardInPlay>> cardAddedToPlayCallbacks = new List<Action<ICardInPlay>>();
+        private readonly IList<Action<ICardInPlay>> cardRemovedFromPlayCallbacks = new List<Action<ICardInPlay>>();
 
         private byte currentThreat;
         private bool isFirstPlayer;
@@ -161,6 +163,9 @@ namespace LotR.States
             var entersPlayHandle = entersPlayEffect.GetHandle(Game);
             Game.AddEffect(entersPlayEffect);
             Game.TriggerEffect(entersPlayHandle);
+
+            foreach (var callback in cardAddedToPlayCallbacks)
+                callback(card);
         }
 
         public void RemoveCardInPlay(ICardInPlay card)
@@ -177,6 +182,9 @@ namespace LotR.States
             var leavesPlayHandle = leavesPlayEffect.GetHandle(Game);
             Game.AddEffect(leavesPlayEffect);
             Game.TriggerEffect(leavesPlayHandle);
+
+            foreach (var callback in cardRemovedFromPlayCallbacks)
+                callback(card);
         }
 
         public void AddEngagedEnemy(IEnemyInPlay enemy)
@@ -204,6 +212,22 @@ namespace LotR.States
         public void DrawCards(uint numberOfCards)
         {
             Deck.Draw(numberOfCards, (cardsToDraw) => Hand.AddCards(cardsToDraw));
+        }
+
+        public void RegisterCardAddedToPlayCallback(Action<ICardInPlay> callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            cardAddedToPlayCallbacks.Add(callback);
+        }
+
+        public void RegisterCardRemovedFromPlayCallback(Action<ICardInPlay> callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            cardRemovedFromPlayCallbacks.Add(callback);
         }
 
         public bool IsTheControllerOf(ICardInPlay card)

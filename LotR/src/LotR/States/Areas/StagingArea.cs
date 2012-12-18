@@ -20,6 +20,8 @@ namespace LotR.States.Areas
         {
         }
 
+        private readonly IList<Action<IEncounterInPlay>> cardAddedToStagingAreaCallbacks = new List<Action<IEncounterInPlay>>();
+        private readonly IList<Action<IEncounterInPlay>> cardRemovedFromStagingAreaCallbacks = new List<Action<IEncounterInPlay>>();
         private readonly ObservableCollection<IEncounterInPlay> cardsInStagingArea = new ObservableCollection<IEncounterInPlay>();
 
         public IDeck<IEncounterCard> EncounterDeck
@@ -78,17 +80,26 @@ namespace LotR.States.Areas
             if (card == null)
                 throw new ArgumentNullException("card");
 
+            IEncounterInPlay encounterInPlay = null;
+
             if (card is IEnemyCard)
             {
-                cardsInStagingArea.Add(new EnemyInPlay(Game, card as IEnemyCard));
+                encounterInPlay = new EnemyInPlay(Game, card as IEnemyCard);
             }
             else if (card is ILocationCard)
             {
-                cardsInStagingArea.Add(new LocationInPlay(Game, card as ILocationCard));
+                encounterInPlay = new LocationInPlay(Game, card as ILocationCard);
             }
             else if (card is IObjectiveCard)
             {
-                cardsInStagingArea.Add(new UnclaimedObjectiveInPlay(Game, card as IObjectiveCard));
+                encounterInPlay = new UnclaimedObjectiveInPlay(Game, card as IObjectiveCard);
+            }
+
+            cardsInStagingArea.Add(encounterInPlay);
+
+            foreach (var callback in cardAddedToStagingAreaCallbacks)
+            {
+                callback(encounterInPlay);
             }
         }
 
@@ -101,6 +112,11 @@ namespace LotR.States.Areas
                 return;
 
             cardsInStagingArea.Remove(card);
+
+            foreach (var callback in cardRemovedFromStagingAreaCallbacks)
+            {
+                callback(card);
+            }
         }
 
         public void AddToEncounterDiscardPile(IEnumerable<IEncounterCard> cards)
@@ -119,6 +135,22 @@ namespace LotR.States.Areas
         {
             if (cards == null)
                 throw new ArgumentNullException("cards");
+        }
+
+        public void RegisterCardAddedToStagingAreaCallback(Action<IEncounterInPlay> callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            cardAddedToStagingAreaCallbacks.Add(callback);
+        }
+
+        public void RegisterCardRemovedFromStagingAreaCallback(Action<IEncounterInPlay> callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            cardRemovedFromStagingAreaCallbacks.Add(callback);
         }
 
         public byte GetTotalThreat()

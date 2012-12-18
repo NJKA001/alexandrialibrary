@@ -29,6 +29,9 @@ namespace LotR.States.Areas
         void AddToTopOfEncounterDeck(IEnumerable<IEncounterCard> cards);
         void AddToBottomOfEncounterDeck(IEnumerable<IEncounterCard> cards);
 
+        void RegisterCardAddedToStagingAreaCallback(Action<IEncounterInPlay> callback);
+        void RegisterCardRemovedFromStagingAreaCallback(Action<IEncounterInPlay> callback);
+
         byte GetTotalThreat();
     }
 }

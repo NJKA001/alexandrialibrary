@@ -7,7 +7,10 @@ using System.Windows.Threading;
 
 using LotR.Cards;
 using LotR.Cards.Player;
+using LotR.Cards.Player.Allies;
+using LotR.Cards.Player.Attachments;
 using LotR.Cards.Player.Heroes;
+using LotR.Cards.Player.Treasures;
 using LotR.States;
 
 namespace LotR.Client.ViewModels
@@ -25,18 +28,21 @@ namespace LotR.Client.ViewModels
 
             this.player = player;
 
-            foreach (var hero in player.Deck.Heroes)
-            {
-                var heroInPlay = new HeroInPlay(game, hero);
-                heroes.Add(new PlayerCardInPlayViewModel<IHeroCard>(dispatcher, heroInPlay));
-            }
+            //foreach (var hero in player.Deck.Heroes)
+            //{
+            //    var heroInPlay = new HeroInPlay(game, hero);
+            //    heroes.Add(new PlayerCardInPlayViewModel<IHeroCard>(dispatcher, heroInPlay));
+            //}
 
             player.Hand.RegisterCardAddedCallback(x => CardAddedToHand(x));
             player.Hand.RegisterCardRemovedCallback(x => CardRemovedFromHand(x));
+            player.RegisterCardAddedToPlayCallback(x => CardAddedToPlay(x));
+            player.RegisterCardRemovedFromPlayCallback(x => CardRemovedFromPlay(x));
         }
 
         private readonly IPlayer player;
         private readonly ObservableCollection<PlayerCardInPlayViewModel<IHeroCard>> heroes = new ObservableCollection<PlayerCardInPlayViewModel<IHeroCard>>();
+        private readonly ObservableCollection<PlayerCardInPlayViewModel> cardsInPlay = new ObservableCollection<PlayerCardInPlayViewModel>();
         private readonly ObservableCollection<PlayerCardViewModel> hand = new ObservableCollection<PlayerCardViewModel>();
 
         private void CardAddedToHand(IPlayerCard card)
@@ -51,6 +57,51 @@ namespace LotR.Client.ViewModels
                 return;
 
             Dispatch(() => hand.Remove(viewModel));
+        }
+
+        private void CardAddedToPlay(ICardInPlay cardInPlay)
+        {
+            var heroInPlay = cardInPlay as IHeroInPlay;
+            if (heroInPlay != null)
+            {
+                var heroViewModel = new PlayerCardInPlayViewModel<IHeroCard>(dispatcher, heroInPlay);
+                Dispatch(() => heroes.Add(heroViewModel));
+                return;
+            }
+
+            PlayerCardInPlayViewModel viewModel = null;
+
+            var allyInPlay = cardInPlay as IAllyInPlay;
+            if (allyInPlay != null)
+            {
+                viewModel = new PlayerCardInPlayViewModel<IAllyCard>(dispatcher, allyInPlay);
+            }
+
+            var attachmentInPlay = cardInPlay as IAttachmentInPlay;
+            if (attachmentInPlay != null)
+            {
+                viewModel = new PlayerCardInPlayViewModel<IAttachmentCard>(dispatcher, attachmentInPlay);
+            }
+
+            var treasureInPlay = cardInPlay as ITreasureInPlay;
+            if (treasureInPlay != null)
+            {
+                viewModel = new PlayerCardInPlayViewModel<ITreasureCard>(dispatcher, treasureInPlay);
+            }
+
+            if (viewModel == null)
+                return;
+
+            Dispatch(() => cardsInPlay.Add(viewModel));
+        }
+
+        private void CardRemovedFromPlay(ICardInPlay cardInPlay)
+        {
+            var viewModel = cardsInPlay.Where(x => x.CardId == cardInPlay.BaseCard.Id).FirstOrDefault();
+            if (viewModel == null)
+                return;
+
+            Dispatch(() => cardsInPlay.Remove(viewModel));
         }
 
         public string PlayerName
@@ -71,6 +122,11 @@ namespace LotR.Client.ViewModels
         public IEnumerable<PlayerCardViewModel> Hand
         {
             get { return hand; }
+        }
+
+        public IEnumerable<PlayerCardInPlayViewModel> CardsInPlay
+        {
+            get { return cardsInPlay; }
         }
     }
 }

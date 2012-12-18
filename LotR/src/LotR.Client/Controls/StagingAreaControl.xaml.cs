@@ -32,6 +32,8 @@ namespace LotR.Client.Controls
         public void Initialize(IGame game)
         {
             viewModel = new StagingAreaViewModel(this.Dispatcher, game);
+
+            stagingAreaContainer.ItemsSource = viewModel.CardsInPlay;
         }
     }
 }

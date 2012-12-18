@@ -22,6 +22,11 @@ namespace LotR.Client.ViewModels
 
         private readonly IEncounterInPlay encounterInPlay;
 
+        public byte Resources
+        {
+            get { return encounterInPlay.Resources; }
+        }
+
         public byte Damage
         {
             get { return encounterInPlay.Damage; }

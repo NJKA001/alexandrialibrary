@@ -20,13 +20,16 @@ namespace LotR.Client.ViewModels
 
             this.game = game;
 
-            if (game.StagingArea != null)
+            if (game.StagingArea == null)
+                throw new InvalidOperationException("staging area is undefined");
+
+            foreach (var cardInPlay in game.StagingArea.CardsInStagingArea)
             {
-                foreach (var cardInPlay in game.StagingArea.CardsInStagingArea)
-                {
-                    AddEncounterInPlay(cardInPlay);
-                }
+                AddEncounterInPlay(cardInPlay);
             }
+
+            this.game.StagingArea.RegisterCardAddedToStagingAreaCallback(x => AddEncounterInPlay(x));
+            this.game.StagingArea.RegisterCardRemovedFromStagingAreaCallback(x => RemoveEncounterInPlay(x));
         }
 
         private readonly IGame game;
@@ -37,7 +40,7 @@ namespace LotR.Client.ViewModels
             if (cardsInPlay.Any(x => x.CardId == encounterInPlay.Card.Id))
                 return;
 
-            cardsInPlay.Add(new EncounterCardInPlayViewModel(dispatcher, encounterInPlay));
+            Dispatch(() => cardsInPlay.Add(new EncounterCardInPlayViewModel(dispatcher, encounterInPlay)));
         }
 
         private void RemoveEncounterInPlay(IEncounterInPlay encounterInPlay)
@@ -46,7 +49,7 @@ namespace LotR.Client.ViewModels
             if (viewModel == null)
                 return;
 
-            cardsInPlay.Remove(viewModel);
+            Dispatch(() => cardsInPlay.Remove(viewModel));
         }
 
         public IEnumerable<EncounterCardInPlayViewModel> CardsInPlay

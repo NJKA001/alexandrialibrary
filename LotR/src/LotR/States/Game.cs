@@ -39,6 +39,9 @@ namespace LotR.States
 
             this.controller = controller;
             gameStatus = new GameStatus(this);
+
+            this.StagingArea = new StagingArea(this);
+            this.VictoryDisplay = new VictoryDisplay(this);
         }
 
         private readonly Guid id = Guid.NewGuid();
@@ -46,8 +49,9 @@ namespace LotR.States
         private readonly IList<IPlayer> players = new List<IPlayer>();
         private readonly IList<IEffect> currentEffects = new List<IEffect>();
         private readonly PhaseFactory phaseFactory = new PhaseFactory();
+        private readonly IList<Action> gameSetupCallbacks = new List<Action>();
+        
         private IPlayer activePlayer;
-
         private GameStatus gameStatus;
 
         private void OnPropertyChanged(string propertyName)
@@ -332,14 +336,16 @@ namespace LotR.States
             var questLoader = new QuestLoader();
             this.QuestArea = questLoader.Load(this, scenarioCode);
 
-            this.StagingArea = new StagingArea(this);
-            this.VictoryDisplay = new VictoryDisplay(this);
-
             var gameSetup = new GameSetup(this);
             gameSetup.Run();
 
             CurrentRound = 0;
             CurrentPhase = null;
+
+            foreach (var callback in gameSetupCallbacks)
+            {
+                callback();
+            }
 
             Run();
         }
@@ -372,6 +378,14 @@ namespace LotR.States
             }
 
             Cleanup();
+        }
+
+        public void RegisterGameSetupCallback(Action callback)
+        {
+            if (callback == null)
+                throw new ArgumentNullException("callback");
+
+            gameSetupCallbacks.Add(callback);
         }
 
         public IPlayer GetController(Guid cardId)

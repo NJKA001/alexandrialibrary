@@ -8,7 +8,7 @@ using LotR.Cards.Player.Treasures;
 namespace LotR.States
 {
     public interface ITreasureInPlay
-        : ICardInPlay<ITreasureCard>
+        : IPlayerCardInPlay<ITreasureCard>
     {
     }
 }

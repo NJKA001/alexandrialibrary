@@ -34,6 +34,8 @@ namespace LotR.States
         void Setup(IEnumerable<IPlayer> players, ScenarioCode scenarioCode);
         void OpenPlayerActionWindow();
 
+        void RegisterGameSetupCallback(Action callback);
+
         IPlayer GetController(Guid cardId);
 
         IEnumerable<T> GetAllCardsInPlay<T>()
