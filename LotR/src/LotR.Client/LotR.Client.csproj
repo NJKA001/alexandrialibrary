@@ -286,6 +286,7 @@
     <Resource Include="Images\damage_token.png" />
     <Resource Include="Images\progress_token.png" />
     <Resource Include="Images\resource_token.png" />
+    <Resource Include="Images\Dw_107.jpg" />
     <Content Include="SpiritLeadership.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

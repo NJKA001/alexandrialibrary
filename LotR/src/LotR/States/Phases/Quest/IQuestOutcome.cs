@@ -9,11 +9,19 @@ namespace LotR.States.Phases.Quest
         : IState
     {
         IEnumerable<Guid> Players { get; }
+        IEnumerable<IEncounterInPlay> RevealedEncounterCards { get; }
+
+        uint TotalWillpower { get; }
+        uint TotalThreat { get; }
         
-        bool IsQuestSuccessful { get; set; }
-        bool IsQuestUnsuccessful { get; set; }
+        bool IsQuestSuccessful { get; }
+        bool IsQuestFailed { get; }
+        bool IsQuestIndeterminate { get; }
 
         byte GetThreatIncrease(Guid playerId);
-        void SetThreatIncrease(Guid playerId);
+        void SetThreatIncrease(Guid playerId, byte value);
+
+        void Resolve(uint totalWillpower, uint totalThreat);
+        void EncounterCardRevealed(IEncounterInPlay encounterCardInPlay);
     }
 }

@@ -8,6 +8,7 @@ using LotR.States;
 namespace LotR.Effects.Phases.Quest
 {
     public interface IAfterCommittingToQuest
+        : IEffect
     {
         void AfterCommittingToQuest(IGame game);
     }
