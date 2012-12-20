@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Threading;
@@ -28,12 +29,37 @@ namespace LotR.Client.ViewModels
                 AddEncounterInPlay(cardInPlay);
             }
 
+            this.game.StagingArea.PropertyChanged += (sender, args) => StagingAreaPropertyChanged(sender, args);
             this.game.StagingArea.RegisterCardAddedToStagingAreaCallback(x => AddEncounterInPlay(x));
             this.game.StagingArea.RegisterCardRemovedFromStagingAreaCallback(x => RemoveEncounterInPlay(x));
         }
 
         private readonly IGame game;
         private readonly ObservableCollection<EncounterCardInPlayViewModel> cardsInPlay = new ObservableCollection<EncounterCardInPlayViewModel>();
+        private EncounterCardInPlayViewModel revealedEncounterCard;
+
+        private void StagingAreaPropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            switch (args.PropertyName)
+            {
+                case "RevealedEncounterCard":
+                    RefreshRevealedEncounterCard();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void RefreshRevealedEncounterCard()
+        {
+            if (game.StagingArea.RevealedEncounterCard == null)
+            {
+                RevealedEncounterCard = null;
+                return;
+            }
+
+            RevealedEncounterCard = new EncounterCardInPlayViewModel(dispatcher, game.StagingArea.RevealedEncounterCard);
+        }
 
         private void AddEncounterInPlay(IEncounterInPlay encounterInPlay)
         {
@@ -55,6 +81,16 @@ namespace LotR.Client.ViewModels
         public IEnumerable<EncounterCardInPlayViewModel> CardsInPlay
         {
             get { return cardsInPlay; }
+        }
+
+        public EncounterCardInPlayViewModel RevealedEncounterCard
+        {
+            get { return revealedEncounterCard; }
+            private set
+            {
+                revealedEncounterCard = value;
+                OnPropertyChanged("RevealedEncounterCard");
+            }
         }
     }
 }

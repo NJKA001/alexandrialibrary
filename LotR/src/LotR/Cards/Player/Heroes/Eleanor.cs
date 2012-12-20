@@ -53,7 +53,7 @@ namespace LotR.Cards.Player.Heroes
                 var revealedTitle = game.StagingArea.RevealedEncounterCard.Title;
 
                 game.StagingArea.CancelRevealedCard(this);
-                game.StagingArea.RevealEncounterCards(1);
+                game.StagingArea.RevealEncounterCard();
 
                 handle.Resolve(string.Format("The 'when revealed' effect of '{1}' has been cancelled", CardSource.Title, revealedTitle));
             }

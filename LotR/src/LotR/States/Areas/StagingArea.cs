@@ -4,11 +4,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards;
 using LotR.Cards.Encounter;
 using LotR.Cards.Encounter.Enemies;
 using LotR.Cards.Encounter.Locations;
 using LotR.Cards.Encounter.Objectives;
 using LotR.Effects;
+using LotR.Effects.Phases.Any;
 
 namespace LotR.States.Areas
 {
@@ -24,16 +26,28 @@ namespace LotR.States.Areas
         private readonly IList<Action<IEncounterInPlay>> cardRemovedFromStagingAreaCallbacks = new List<Action<IEncounterInPlay>>();
         private readonly ObservableCollection<IEncounterInPlay> cardsInStagingArea = new ObservableCollection<IEncounterInPlay>();
 
+        private IDeck<IEncounterCard> encounterDeck;
+        private IEncounterInPlay revealedEncounterCard;
+        private ICancelEffect cancelWhenRevealedEffect;
+
         public IDeck<IEncounterCard> EncounterDeck
         {
-            get;
-            private set;
+            get { return encounterDeck; }
+            private set
+            {
+                encounterDeck = value;
+                OnPropertyChanged("EncounterDeck");
+            }
         }
 
         public IEncounterInPlay RevealedEncounterCard
         {
-            get;
-            private set;
+            get { return revealedEncounterCard; }
+            private set
+            {
+                revealedEncounterCard = value;
+                OnPropertyChanged("RevealedEncounterCard");
+            }
         }
 
         public IEnumerable<IEncounterInPlay> CardsInStagingArea
@@ -56,11 +70,52 @@ namespace LotR.States.Areas
             this.EncounterDeck = encounterDeck;
         }
 
-        public void RevealEncounterCards(byte numberOfCards)
+        private void CheckForResponsesToRevealedCard()
         {
-            if (numberOfCards == 0)
-                throw new ArgumentException("numberOfCards must be greater than zero");
+            if (!RevealedEncounterCard.HasEffect<IWhenRevealedEffect>())
+                return;
 
+            var duringRevealCards = new List<ICard>();
+
+            duringRevealCards.AddRange(Game.GetCardsInPlayWithEffect<ICardInPlay, IDuringEncounterCardRevealed>().Select(x => x.BaseCard));
+
+            foreach (var player in Game.Players)
+            {
+                duringRevealCards.AddRange(player.Hand.Cards.Where(x => x.HasEffect<IDuringEncounterCardRevealed>()));
+            }
+
+            foreach (var card in duringRevealCards)
+            {
+            }
+        }
+
+        private IEncounterInPlay GetRevealedEncounterCard(IEncounterCard card)
+        {
+            return null;
+        }
+
+        public void RevealEncounterCard()
+        {
+            if (EncounterDeck.Cards.Count() == 0)
+            {
+                if (Game.CurrentPhase.Code == PhaseCode.Quest)
+                {
+                    EncounterDeck.ShuffleDiscardPileIntoDeck();
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            cancelWhenRevealedEffect = null;
+
+            var card = EncounterDeck.GetFromTop(1).First();
+            EncounterDeck.RemoveFromDeck(card);
+
+            CheckForResponsesToRevealedCard();
+
+            RevealedEncounterCard = GetRevealedEncounterCard(card);
         }
 
         public void CancelRevealedCard(ICancelEffect effect)
@@ -68,6 +123,7 @@ namespace LotR.States.Areas
             if (effect == null)
                 throw new ArgumentNullException("effect");
 
+            cancelWhenRevealedEffect = effect;
         }
 
         public void RemoveRevealedCard()

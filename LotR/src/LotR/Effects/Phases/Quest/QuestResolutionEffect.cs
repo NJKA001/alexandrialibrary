@@ -65,7 +65,7 @@ namespace LotR.Effects.Phases.Quest
             IChoiceBuilder builder = 
                 new ChoiceBuilder("Quest Resolution", game, game.FirstPlayer);
 
-            var check = outcome.TotalWillpower - outcome.TotalThreat;
+            var check = Math.Abs(outcome.TotalWillpower - outcome.TotalThreat);
             byte difference = check <= 255 ? (byte)check : (byte)255;
 
             if (outcome.IsQuestSuccessful && difference > 0)

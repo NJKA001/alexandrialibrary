@@ -34,6 +34,7 @@ namespace LotR.Client.Controls
             viewModel = new StagingAreaViewModel(this.Dispatcher, game);
 
             stagingAreaContainer.ItemsSource = viewModel.CardsInPlay;
+            revealedCardContainer.DataContext = viewModel.RevealedEncounterCard;
         }
     }
 }

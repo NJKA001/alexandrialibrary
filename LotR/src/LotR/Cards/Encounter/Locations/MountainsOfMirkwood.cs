@@ -32,7 +32,13 @@ namespace LotR.Cards.Encounter.Locations
 
             public override void Validate(IGame game, IEffectHandle handle)
             {
-                game.StagingArea.RevealEncounterCards(1);
+                if (game.StagingArea.EncounterDeck.Size == 0)
+                {
+                    handle.Reject();
+                    return;
+                }
+
+                game.StagingArea.RevealEncounterCard();
 
                 handle.Accept();
             }

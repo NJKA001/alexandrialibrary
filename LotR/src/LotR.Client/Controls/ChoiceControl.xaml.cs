@@ -98,7 +98,7 @@ namespace LotR.Client.Controls
                     if (viewModel.Parent.MaximumChosenAnswers > 0)
                     {
                         var numberChosen = viewModel.Parent.Children.Where(x => x.IsChosen).Count();
-                        while (numberChosen > viewModel.Parent.MinimumChosenAnswers)
+                        while (numberChosen > viewModel.Parent.MaximumChosenAnswers)
                         {
                             numberChosen--;
                             var first = viewModel.Parent.Children.Where(x => x.IsChosen && x.ItemId != viewModel.ItemId).FirstOrDefault();

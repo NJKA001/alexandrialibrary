@@ -18,7 +18,7 @@ namespace LotR.States.Areas
         IEnumerable<IEncounterInPlay> CardsInStagingArea { get; }
         void ChangeEncounterDeck(IDeck<IEncounterCard> encounterDeck);
 
-        void RevealEncounterCards(byte numberOfCards);
+        void RevealEncounterCard();
         void CancelRevealedCard(ICancelEffect effect);
         void RemoveRevealedCard();
 

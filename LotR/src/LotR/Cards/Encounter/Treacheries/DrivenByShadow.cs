@@ -37,8 +37,11 @@ namespace LotR.Cards.Encounter.Treacheries
             {
                 if (game.StagingArea.CardsInStagingArea.Count() == 0)
                 {
-                    game.StagingArea.RevealEncounterCards(1);
-                    { handle.Cancel(GetCancelledString()); return; }
+                    game.StagingArea.RevealEncounterCard();
+                    {
+                        handle.Cancel(GetCancelledString());
+                        return;
+                    }
                 }
 
                 foreach (var threatening in game.StagingArea.CardsInStagingArea.OfType<IThreateningInPlay>())

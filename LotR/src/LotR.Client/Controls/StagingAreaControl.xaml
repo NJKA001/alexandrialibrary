@@ -53,6 +53,37 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <Border x:Name="revealedCardContainer" Visibility="{Binding RevealedCardVisibility}" BorderBrush="Gray" BorderThickness="1">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Revealed Encounter Card" TextAlignment="Center"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Margin="4" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8"/>
+                        <!--Height="246" Width="130" -->
+                        <TextBlock Margin="4" Text="{Binding Title}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="8" FontSize="14" FontWeight="Bold" ToolTip="{Binding CardText}"/>
+                        <!--<Image Grid.Row="2" Grid.Column="0" Margin="0" Source="{StaticResource resourceIcon}" ToolTip="Resources" Height="20" Width="20"/>
+                                <TextBlock Text="{Binding Resources}" Grid.Row="2" Grid.Column="1" FontWeight="Bold" />-->
+                        <Image Grid.Row="2" Grid.Column="0" Margin="0" Source="{StaticResource damageIcon}" ToolTip="Damage" Height="20" Width="20"/>
+                        <TextBlock Text="{Binding Damage}" Grid.Row="2" Grid.Column="1" FontWeight="Bold"/>
+                        <Image Grid.Row="2" Grid.Column="3" Margin="0" Source="{StaticResource progressIcon}" ToolTip="Progress" Height="20" Width="20"/>
+                        <TextBlock Text="{Binding Progress}" Grid.Row="2" Grid.Column="4" FontWeight="Bold"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
         </StackPanel>
     </Grid>
 </UserControl>

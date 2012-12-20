@@ -32,13 +32,13 @@ namespace LotR.Effects
             var location = game.StagingArea.CardsInStagingArea.OfType<ILocationInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
             if (location == null)
             {
-                handle.Cancel(GetCancelledString());
+                handle.Cancel(string.Format("Could Not Travel To '{0}'", CardSource.Title));
                 return;
             }
 
             game.QuestArea.SetActiveLocation(location);
 
-            handle.Resolve(string.Format("Travel: {0}", text));
+            handle.Resolve(string.Format("Traveled To '{0}'", CardSource.Title));
         }
     }
 }

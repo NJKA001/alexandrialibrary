@@ -175,7 +175,7 @@ namespace LotR.States.Phases.Quest
                     Game.StagingArea.EncounterDeck.ShuffleDiscardPileIntoDeck();
                 }
 
-                Game.StagingArea.RevealEncounterCards(1);
+                Game.StagingArea.RevealEncounterCard();
 
                 if (Game.StagingArea.RevealedEncounterCard != null)
                 {
