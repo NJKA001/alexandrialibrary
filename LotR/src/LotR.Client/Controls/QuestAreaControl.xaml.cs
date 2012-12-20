@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 using LotR.Client.ViewModels;
 using LotR.States;
@@ -19,38 +20,34 @@ using LotR.States;
 namespace LotR.Client.Controls
 {
     /// <summary>
-    /// Interaction logic for GameStatusControl.xaml
+    /// Interaction logic for QuestAreaControl.xaml
     /// </summary>
-    public partial class GameStatusControl : UserControl
+    public partial class QuestAreaControl : UserControl
     {
-        public GameStatusControl()
+        public QuestAreaControl()
         {
             InitializeComponent();
         }
 
         private IGame game;
-        private StatusViewModel statusViewModel;
+        private QuestAreaViewModel viewModel;
 
         public void Initialize(IGame game)
         {
             if (game == null)
                 throw new ArgumentNullException("game");
-            
+
             this.game = game;
-            
-            this.statusViewModel = new StatusViewModel(this.Dispatcher, game);
-            gameStatusContainer.DataContext = statusViewModel;
-        }
+            this.viewModel = new QuestAreaViewModel(this.Dispatcher, game);
 
-        public void SetCurrentStatus(string status)
-        {
-            if (status == null)
-                throw new ArgumentNullException("status");
+            Action action = () =>
+            {
+            this.questAreaContainer.DataContext = viewModel;
+            this.activeLocationContainer.DataContext = viewModel.ActiveLocation;
+            this.activeQuestContainer.DataContext = viewModel.ActiveQuest;
+            };
 
-            if (statusViewModel == null)
-                return;
-
-            statusViewModel.SetCurrentStatus(status);
+            Dispatcher.Invoke(action, DispatcherPriority.DataBind);
         }
     }
 }

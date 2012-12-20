@@ -10,7 +10,7 @@ namespace LotR.States.Phases.Any
     public interface IDamageHealed
         : IState
     {
-        IDamagableInPlay Target { get; }
+        ICardInPlay Target { get; }
 
         byte Damage { get; set; }
         bool IsDamageHealed { get; set; }

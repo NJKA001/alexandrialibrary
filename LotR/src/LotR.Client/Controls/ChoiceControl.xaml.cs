@@ -70,6 +70,16 @@ namespace LotR.Client.Controls
             isCancelled = true;
         }
 
+        private void ChooseParent(ChoiceItemViewModel viewModel)
+        {
+            if (viewModel.Parent == null)
+                return;
+
+            viewModel.Parent.IsChosen = true;
+
+            ChooseParent(viewModel.Parent);
+        }
+
         private void CheckBoxChanged(object sender)
         {
             var element = sender as UIElement;
@@ -99,9 +109,9 @@ namespace LotR.Client.Controls
                         }
                     }
 
-                    if (viewModel.IsChosen && !viewModel.Parent.IsChosen)
+                    if (viewModel.IsChosen)
                     {
-                        viewModel.Parent.IsChosen = true;
+                        ChooseParent(viewModel);
                     }
                 }
             }
@@ -140,19 +150,21 @@ namespace LotR.Client.Controls
             this.game = game;
         }
 
-        private bool HasMultipleDescendants(IQuestion question)
+        private bool HasMultipleDescendants(ChoiceItemViewModel viewModel)
         {
-            var answerCount = question.Answers.Count();
 
-            if (answerCount == 0)
+            var count = viewModel.Children.Count();
+
+            if (count == 0)
             {
                 return false;
             }
-            else if (answerCount == 1)
+            else if (count == 1)
             {
-                var first = question.Answers.First();
-                if (first.FollowUp != null)
-                    return HasMultipleDescendants(first.FollowUp);
+                var first = viewModel.Children.First();
+                var childOfFirst = first.Children.FirstOrDefault();
+                if (childOfFirst != null)
+                    return HasMultipleDescendants(childOfFirst);
 
                 return false;
             }
@@ -162,16 +174,18 @@ namespace LotR.Client.Controls
             }
         }
 
-        private void ChooseRequiredAnswers(IQuestion question)
+        private void ChooseRequiredAnswers(ChoiceItemViewModel viewModel)
         {
-            if (question.Answers.Count() != 1)
+            if (viewModel.Children.Count() != 1)
                 return;
 
-            var first = question.Answers.First();
+            var first = viewModel.Children.First();
             first.IsChosen = true;
+            ChooseParent(first);
 
-            if (first.FollowUp != null)
-                ChooseRequiredAnswers(first.FollowUp);
+            var childOfFirst = first.Children.FirstOrDefault();
+            if (childOfFirst != null)
+                ChooseRequiredAnswers(childOfFirst);
         }
 
         public void Load(IChoice choice)
@@ -190,9 +204,14 @@ namespace LotR.Client.Controls
             choiceContainer.DataContext = choiceViewModel;
             choiceChildrenContainer.ItemsSource = choiceViewModel.Children;
 
-            if (!HasMultipleDescendants(choice.Question))
+
+            var questionViewModel = choiceViewModel.Children.FirstOrDefault();
+            if (questionViewModel == null)
+                return;
+
+            if (!HasMultipleDescendants(questionViewModel))
             {
-                ChooseRequiredAnswers(choice.Question);
+                ChooseRequiredAnswers(questionViewModel);
             }
         }
     }

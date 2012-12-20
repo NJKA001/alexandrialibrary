@@ -74,7 +74,7 @@ namespace LotR.Cards.Player.Heroes
                 if (controller == null)
                     return base.GetHandle(game);
 
-                var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
+                var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.BaseCard.Id == source.Id).FirstOrDefault();
                 if (exhaustable == null || exhaustable.IsExhausted)
                     return base.GetHandle(game);
 

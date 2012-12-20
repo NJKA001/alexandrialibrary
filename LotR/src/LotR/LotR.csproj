@@ -98,8 +98,9 @@
     <Compile Include="Effects\Phases\Any\PayResourcesEffectBase.cs" />
     <Compile Include="Effects\Phases\Any\PlayAttachableEffect.cs" />
     <Compile Include="Effects\Phases\Any\PlayEventEffect.cs" />
-    <Compile Include="Effects\Phases\Any\PlayerResponseWindowEffect.cs" />
+    <Compile Include="Effects\Phases\Any\PlayerResponseWindow.cs" />
     <Compile Include="Effects\Phases\Quest\CommitCharactersToQuestEffect.cs" />
+    <Compile Include="Effects\Phases\Quest\QuestResolutionEffect.cs" />
     <Compile Include="Effects\PlayersExhaustCharactersChoiceFactory.cs" />
     <Compile Include="Effects\IAnswer.cs" />
     <Compile Include="Effects\IChoiceItem.cs" />
@@ -180,7 +181,6 @@
     <Compile Include="States\IAttachmentInPlay.cs" />
     <Compile Include="States\IAttackingInPlay.cs" />
     <Compile Include="States\ICharacterInPlay.cs" />
-    <Compile Include="States\IDamagableInPlay.cs" />
     <Compile Include="States\IDefendingInPlay.cs" />
     <Compile Include="States\IEncounterInPlay.cs" />
     <Compile Include="States\IEnemyInPlay.cs" />

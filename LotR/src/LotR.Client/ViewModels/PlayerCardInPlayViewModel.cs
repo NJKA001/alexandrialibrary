@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Threading;
@@ -16,9 +17,28 @@ namespace LotR.Client.ViewModels
             : base(dispatcher, cardInPlay.PlayerCard)
         {
             this.cardInPlay = cardInPlay;
+            cardInPlay.PropertyChanged += (sender, args) => CardInPlayPropertyChanged(sender, args);
         }
 
         private readonly IPlayerCardInPlay cardInPlay;
+
+        private void CardInPlayPropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            switch (args.PropertyName)
+            {
+                case "Resources":
+                    OnPropertyChanged("Resources");
+                    break;
+                case "Damage":
+                    OnPropertyChanged("Damage");
+                    break;
+                case "Progress":
+                    OnPropertyChanged("Progress");
+                    break;
+                default:
+                    break;
+            }
+        }
 
         public IPlayerCardInPlay CardInPlay
         {
@@ -33,6 +53,11 @@ namespace LotR.Client.ViewModels
         public byte Damage
         {
             get { return cardInPlay.Damage; }
+        }
+
+        public byte Progress
+        {
+            get { return cardInPlay.Progress; }
         }
     }
 

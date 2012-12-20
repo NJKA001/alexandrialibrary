@@ -14,20 +14,5 @@ namespace LotR.States
             : base(game, card)
         {
         }
-
-        private byte progress;
-
-        public byte Progress
-        {
-            get { return progress; }
-            set
-            {
-                if (progress == value)
-                    return;
-
-                progress = value;
-                OnPropertyChanged("Progress");
-            }
-        }
     }
 }

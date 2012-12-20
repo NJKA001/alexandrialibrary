@@ -83,7 +83,7 @@ namespace LotR.Cards.Encounter.Enemies
 
                 var damage = enemyAttack.IsUndefended ? (byte)2 : (byte)1;
 
-                foreach (var damageable in enemyAttack.DefendingPlayer.CardsInPlay.OfType<IDamagableInPlay>())
+                foreach (var damageable in enemyAttack.DefendingPlayer.CardsInPlay.OfType<ICharacterInPlay>())
                 {
                     damageable.Damage += damage;
                 }

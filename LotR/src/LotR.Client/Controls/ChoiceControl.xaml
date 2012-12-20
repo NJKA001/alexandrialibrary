@@ -9,17 +9,20 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <converters:ImageSourceConverter x:Key="imageConverter" />
+        <Style x:Key="treeItemStyle" TargetType="{x:Type TreeViewItem}">
+            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+        </Style>
     </UserControl.Resources>
     <Grid x:Name="choiceContainer">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Choices" TextAlignment="Center" Margin="4" Grid.Row="0" FontWeight="Bold"/>
         <TextBlock Text="{Binding Text}" Margin="4" Grid.Row="1" TextWrapping="Wrap"/>
-        <TreeView x:Name="choiceChildrenContainer" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="4" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <TreeView x:Name="choiceChildrenContainer" Grid.Row="2" HorizontalAlignment="Stretch" Margin="4" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource treeItemStyle}">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Children}" DataType="{x:Type viewModels:ChoiceItemViewModel}">
                     <Grid MaxWidth="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}, Path=ActualWidth}">

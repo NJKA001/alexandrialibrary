@@ -18,6 +18,8 @@ namespace LotR.Effects.Phases.Any
             : base("Player Action Window", GetDescription(player), game)
         {
             this.player = player;
+
+            player.IsActivePlayer = true;
         }
 
         private static string GetDescription(IPlayer player)

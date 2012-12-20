@@ -32,6 +32,8 @@ namespace LotR.States.Areas
 
         private byte activeLocationProgress;
         private byte activeQuestProgress;
+        private IQuestInPlay activeQuest;
+        private ILocationInPlay activeLocation;
 
         public IDeck<IQuestCard> QuestDeck
         {
@@ -41,8 +43,12 @@ namespace LotR.States.Areas
 
         public IQuestInPlay ActiveQuest
         {
-            get;
-            private set;
+            get { return activeQuest; }
+            private set
+            {
+                activeQuest = value;
+                OnPropertyChanged("ActiveQuest");
+            }
         }
 
         public IEnumerable<IDeck<IEncounterCard>> EncounterDecks
@@ -59,8 +65,12 @@ namespace LotR.States.Areas
 
         public ILocationInPlay ActiveLocation
         {
-            get;
-            private set;
+            get { return activeLocation; }
+            private set
+            {
+                activeLocation = value;
+                OnPropertyChanged("ActiveLocation");
+            }
         }
 
         public byte ActiveQuestProgress
@@ -74,6 +84,8 @@ namespace LotR.States.Areas
                     activeQuestProgress = 255;
                 else 
                     activeQuestProgress = value;
+
+                OnPropertyChanged("ActiveQuestProgress");
             }
         }
 

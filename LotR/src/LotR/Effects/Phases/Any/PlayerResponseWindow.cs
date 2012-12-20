@@ -7,14 +7,16 @@ using LotR.States;
 
 namespace LotR.Effects.Phases.Any
 {
-    public class PlayerResponseWindowEffect
+    public class PlayerResponseWindow
         : FrameworkEffectBase
     {
-        public PlayerResponseWindowEffect(IGame game, IPlayer player, IResponseEffect responseEffect)
+        public PlayerResponseWindow(IGame game, IPlayer player, IResponseEffect responseEffect)
             : base("Player Response Window", string.Format("{0} has an opportunity to respond to a game effect", player.Name), game)
         {
             this.player = player;
             this.responseEffect = responseEffect;
+
+            player.IsActivePlayer = true;
         }
 
         private readonly IPlayer player;

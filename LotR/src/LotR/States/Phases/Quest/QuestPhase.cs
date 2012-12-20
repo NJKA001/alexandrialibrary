@@ -136,6 +136,8 @@ namespace LotR.States.Phases.Quest
                     effect.DuringCommittingToQuest(Game);
                 }
             }
+
+            ExhaustCommittedCharacters();
         }
 
         private void AfterCommittingToQuest()
@@ -226,6 +228,10 @@ namespace LotR.States.Phases.Quest
                     effect.DuringQuestResolution(outcome);
                 }
             }
+
+            var questResolution = new QuestResolutionEffect(Game, outcome);
+            var questResolutionHandle = questResolution.GetHandle(Game);
+            Game.TriggerEffect(questResolutionHandle);
         }
 
         private void AfterQuestResolution(IQuestOutcome outcome)
@@ -243,25 +249,10 @@ namespace LotR.States.Phases.Quest
         {
             foreach (var character in GetAllCharactersCommittedToQuest().OfType<IExhaustableInPlay>())
             {
-                if (IsExhaustedToQuest(character.Card.Id))
+                if (IsExhaustedToQuest(character.BaseCard.Id))
                 {
                     character.Exhaust();
                 }
-            }
-        }
-
-        private void RaisePlayersThreat(IQuestOutcome outcome)
-        {
-            if (!outcome.IsQuestFailed)
-                return;
-
-            foreach (var player in Game.Players)
-            {
-                var value = outcome.GetThreatIncrease(player.StateId);
-                if (value == 0)
-                    continue;
-
-                player.IncreaseThreat(value);
             }
         }
 
@@ -280,8 +271,6 @@ namespace LotR.States.Phases.Quest
             BeforeCommittingToQuest();
 
             DuringCommitingToQuest();
-
-            ExhaustCommittedCharacters();
 
             AfterCommittingToQuest();
 

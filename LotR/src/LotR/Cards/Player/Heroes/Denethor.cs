@@ -56,24 +56,22 @@ namespace LotR.Cards.Player.Heroes
                 if (controller == null)
                     return base.GetHandle(game);
 
-                var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
+                var exhaustable = controller.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.BaseCard.Id == source.Id).FirstOrDefault();
                 if (exhaustable == null)
                     return base.GetHandle(game);
-
-                var player = exhaustable.Card.Owner;
 
                 var encounterCard = game.StagingArea.EncounterDeck.GetFromTop(1).FirstOrDefault();
                 if (encounterCard == null)
                     return base.GetHandle(game);
 
                 var builder =
-                    new ChoiceBuilder(string.Format("Exhaust {0} to look at the top of the encounter deck. You may move that card to the bottom of the deck", CardSource.Title), game, player)
-                        .Question(string.Format("{0}, do you want to exhaust '{1}' to look at the top card of the encounter deck?", player.Name))
+                    new ChoiceBuilder(string.Format("Exhaust {0} to look at the top of the encounter deck. You may move that card to the bottom of the deck", CardSource.Title), game, controller)
+                        .Question(string.Format("{0}, do you want to exhaust '{1}' to look at the top card of the encounter deck?", controller.Name))
                             .Answer(string.Format("Yes, I want to exhaust '{0}' to look at the top card of the encounter deck", CardSource.Title), true)
-                                .Question(string.Format("{0}, do you want to put '{1}' on the bottom of the encounter deck?", player.Name, encounterCard.Title))
-                                    .Answer(string.Format("Yes, put '{0}' on the bottom of the encounter deck", encounterCard.Title), encounterCard, (source, handle, card) => PutEncounterCardOnBottomOfDeck(game, handle, player, exhaustable, card))
-                                    .LastAnswer(string.Format("No, put '{0}' back on the top of the encounter deck", encounterCard.Title), encounterCard, (source, handle, card) => PutEncounterCardBackOnTopOfDeck(game, handle, player, exhaustable, card))
-                            .LastAnswer(string.Format("No, I do not want to exhaust '{0}' to look at the top card of the encounter deck", CardSource.Title), false, (source, handle, item) => handle.Cancel(string.Format("{0} chose not to exhaust '{1}' to look at the top card of the encounter deck", player.Name, CardSource.Title)));
+                                .Question(string.Format("{0}, do you want to put '{1}' on the bottom of the encounter deck?", controller.Name, encounterCard.Title))
+                                    .Answer(string.Format("Yes, put '{0}' on the bottom of the encounter deck", encounterCard.Title), encounterCard, (source, handle, card) => PutEncounterCardOnBottomOfDeck(game, handle, controller, exhaustable, card))
+                                    .LastAnswer(string.Format("No, put '{0}' back on the top of the encounter deck", encounterCard.Title), encounterCard, (source, handle, card) => PutEncounterCardBackOnTopOfDeck(game, handle, controller, exhaustable, card))
+                            .LastAnswer(string.Format("No, I do not want to exhaust '{0}' to look at the top card of the encounter deck", CardSource.Title), false, (source, handle, item) => handle.Cancel(string.Format("{0} chose not to exhaust '{1}' to look at the top card of the encounter deck", controller.Name, CardSource.Title)));
 
                 return new EffectHandle(this, builder.ToChoice());
             }

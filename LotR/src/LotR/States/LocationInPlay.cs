@@ -19,20 +19,5 @@ namespace LotR.States
         {
             get { return Card as ILocationCard; }
         }
-
-        private byte progress;
-
-        public byte Progress
-        {
-            get { return progress; }
-            set
-            {
-                if (progress == value)
-                    return;
-
-                progress = value;
-                OnPropertyChanged("Progress");
-            }
-        }
     }
 }

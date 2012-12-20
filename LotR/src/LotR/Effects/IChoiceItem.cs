@@ -11,5 +11,8 @@ namespace LotR.Effects
     {
         Guid ItemId { get; }
         string Text { get; }
+
+        bool IsChosen { get; set; }
+        bool IsExpanded { get; set; }
     }
 }

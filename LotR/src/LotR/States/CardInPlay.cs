@@ -28,6 +28,7 @@ namespace LotR.States
 
         private byte damage;
         private byte resources;
+        private byte progress;
 
         private static Guid GetStateId(T card)
         {
@@ -73,6 +74,19 @@ namespace LotR.States
 
                 resources = value;
                 OnPropertyChanged("Resources");
+            }
+        }
+
+        public byte Progress
+        {
+            get { return progress; }
+            set
+            {
+                if (progress == value)
+                    return;
+
+                progress = value;
+                OnPropertyChanged("Progress");
             }
         }
 

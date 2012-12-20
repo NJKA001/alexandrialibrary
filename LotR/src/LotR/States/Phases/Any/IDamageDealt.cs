@@ -11,7 +11,7 @@ namespace LotR.States.Phases.Any
         : IState
     {
         ICard Source { get; }
-        IDamagableInPlay Target { get; }
+        ICardInPlay Target { get; }
         
         byte Damage { get; set; }
         bool IsDamageDealt { get; set; }

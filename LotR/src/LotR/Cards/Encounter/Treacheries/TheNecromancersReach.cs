@@ -31,12 +31,12 @@ namespace LotR.Cards.Encounter.Treacheries
             {
                 foreach (var player in game.Players)
                 {
-                    foreach (var exhaustable in player.CardsInPlay.OfType<IExhaustableInPlay>())
+                    foreach (var exhaustable in player.CardsInPlay.OfType<ICharacterInPlay>().OfType<IExhaustableInPlay>())
                     {
                         if (!exhaustable.IsExhausted)
                             continue;
 
-                        var damageable = exhaustable as IDamagableInPlay;
+                        var damageable = exhaustable as ICardInPlay;
                         if (damageable == null)
                             continue;
 

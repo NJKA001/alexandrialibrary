@@ -3,21 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using LotR.Cards;
+
 namespace LotR.States.Phases.Any
 {
     public class DetermineHitPoints
         : StateBase, IDetermineHitPoints
     {
-        public DetermineHitPoints(IGame game, IDamagableInPlay damageable)
+        public DetermineHitPoints(IGame game, ICardInPlay damageable)
             : base(game)
         {
             this.Damageable = damageable;
-            this.hitPoints = damageable.Card.PrintedHitPoints;
+
+            var damageableCard = damageable.BaseCard as IDamageableCard;
+
+            hitPoints = damageableCard != null ? damageableCard.PrintedHitPoints : (byte)0;
         }
 
         private byte hitPoints;
 
-        public IDamagableInPlay Damageable
+        public ICardInPlay Damageable
         {
             get;
             private set;

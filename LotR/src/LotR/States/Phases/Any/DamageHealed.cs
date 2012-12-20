@@ -8,7 +8,7 @@ namespace LotR.States.Phases.Any
     public class DamageHealed
         : StateBase, IDamageHealed
     {
-        public DamageHealed(IGame game, IDamagableInPlay target, byte damage)
+        public DamageHealed(IGame game, ICardInPlay target, byte damage)
             : base(game)
         {
             this.Target = target;
@@ -18,7 +18,7 @@ namespace LotR.States.Phases.Any
         private byte damage;
         private bool isDamageHealed = true;
 
-        public IDamagableInPlay Target
+        public ICardInPlay Target
         {
             get;
             private set;

@@ -10,7 +10,7 @@ namespace LotR.States.Phases.Any
     public class DamageDealt
         : StateBase, IDamageDealt
     {
-        public DamageDealt(IGame game, ICard source, IDamagableInPlay target, byte damage)
+        public DamageDealt(IGame game, ICard source, ICardInPlay target, byte damage)
             : base(game)
         {
             this.Source = source;
@@ -27,7 +27,7 @@ namespace LotR.States.Phases.Any
             private set;
         }
 
-        public IDamagableInPlay Target
+        public ICardInPlay Target
         {
             get;
             private set;

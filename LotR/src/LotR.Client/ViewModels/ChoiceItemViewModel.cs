@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -94,6 +95,21 @@ namespace LotR.Client.ViewModels
         private Visibility cardInPlayVisibility = Visibility.Collapsed;
         private bool isChosen;
 
+        private void ChoiceItemPropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            switch (args.PropertyName)
+            {
+                case "IsChosen":
+                    OnPropertyChanged("IsChosen");
+                    break;
+                case "IsExpanded":
+                    OnPropertyChanged("IsExpanded");
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public IEnumerable<ChoiceItemViewModel> Children
         {
             get { return children; }
@@ -127,9 +143,13 @@ namespace LotR.Client.ViewModels
             get { return question != null ? question.MaximumChosenAnswers : 0; }
         }
 
+        public bool IsChoice { get { return choice != null; } }
+        public bool IsQuestion { get { return question != null; } }
+        public bool IsAnswer { get { return answer != null; } }
+
         public bool IsChosen
         {
-            get { return isChosen; }
+            get { return answer != null ? answer.IsChosen : false; }
             set
             {
                 isChosen = value;
@@ -140,6 +160,12 @@ namespace LotR.Client.ViewModels
 
                 OnPropertyChanged("IsChosen");
             }
+        }
+
+        public bool IsExpanded
+        {
+            get { return item.IsExpanded; }
+            set { item.IsExpanded = value; }
         }
 
         public ChoiceItemViewModel Parent

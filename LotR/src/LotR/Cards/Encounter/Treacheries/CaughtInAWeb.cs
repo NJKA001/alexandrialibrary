@@ -100,7 +100,7 @@ namespace LotR.Cards.Encounter.Treacheries
 
             public void DuringReadyingCard(ICardReadying state)
             {
-                if (state.Exhaustable.Card.Id != source.Id)
+                if (state.Exhaustable.BaseCard.Id != source.Id)
                     return;
 
                 if (!state.Exhaustable.IsExhausted)
@@ -117,7 +117,7 @@ namespace LotR.Cards.Encounter.Treacheries
                 if (refreshPhase == null)
                     throw new InvalidOperationException("This effect can only be triggered during the refresh phase");
 
-                var readyingCard = refreshPhase.GetReadyingCards().Where(x => x.Exhaustable.Card.Id == source.Id).FirstOrDefault();
+                var readyingCard = refreshPhase.GetReadyingCards().Where(x => x.Exhaustable.BaseCard.Id == source.Id).FirstOrDefault();
                 if (readyingCard == null)
                 {
                     handle.Cancel(string.Format("Could not determine the readying state of '{0}'", character.Title));

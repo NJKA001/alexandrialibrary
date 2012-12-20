@@ -13,41 +13,49 @@ namespace LotR.States
 {
     public abstract class CharacterInPlay<T>
         : PlayerCardInPlay<T>, ICharacterInPlay, IAttachmentHostInPlay, IWillpowerfulInPlay, IAttackingInPlay, IDefendingInPlay
-        where T : IPlayerCard, IAttachmentHostCard
+        where T : ICharacterCard, IAttachmentHostCard
     {
         public CharacterInPlay(IGame game, T card)
             : base(game, card)
         {
+            this.characterCard = card as ICharacterCard;
+            willpower = characterCard.PrintedWillpower;
+            attack = characterCard.PrintedAttack;
+            defense = characterCard.PrintedDefense;
+            hitPoints = characterCard.PrintedHitPoints;
         }
 
         private readonly IDictionary<Guid, IAttachableInPlay> attachments = new Dictionary<Guid, IAttachableInPlay>();
         private byte willpower;
         private byte attack;
         private byte defense;
+        private byte hitPoints;
+
+        private readonly ICharacterCard characterCard;
 
         ICharacterCard ICardInPlay<ICharacterCard>.Card
         {
-            get { return Card as ICharacterCard; }
+            get { return characterCard; }
         }
 
         IAttachmentHostCard ICardInPlay<IAttachmentHostCard>.Card
         {
-            get { return Card as IAttachmentHostCard; }
+            get { return characterCard; }
         }
 
         IWillpowerfulCard ICardInPlay<IWillpowerfulCard>.Card
         {
-            get { return Card as IWillpowerfulCard; }
+            get { return characterCard; }
         }
 
         IAttackingCard ICardInPlay<IAttackingCard>.Card
         {
-            get { return Card as IAttackingCard; }
+            get { return characterCard; }
         }
 
         IDefendingCard ICardInPlay<IDefendingCard>.Card
         {
-            get { return Card as IDefendingCard; }
+            get { return characterCard; }
         }
 
         public IEnumerable<IAttachableInPlay> Attachments
@@ -91,6 +99,19 @@ namespace LotR.States
 
                 defense = value;
                 OnPropertyChanged("Defense");
+            }
+        }
+
+        public byte HitPoints
+        {
+            get { return hitPoints; }
+            set
+            {
+                if (hitPoints == value)
+                    return;
+
+                hitPoints = value;
+                OnPropertyChanged("HitPoints");
             }
         }
 

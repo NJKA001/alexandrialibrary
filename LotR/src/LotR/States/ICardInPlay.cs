@@ -23,6 +23,7 @@ namespace LotR.States
 
         byte Damage { get; set; }
         byte Resources { get; set; }
+        byte Progress { get; set; }
     }
 
     public interface ICardInPlay<T>

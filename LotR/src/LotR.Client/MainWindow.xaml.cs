@@ -59,6 +59,7 @@ namespace LotR.Client
                 gameThread.Start();
 
                 statusControl.Initialize(game);
+
                 playerAreaControl.Initialize(game, players);
                 stagingAreaControl.Initialize(game);
                 choiceControl.Initialize(game);
@@ -84,6 +85,7 @@ namespace LotR.Client
 
         private void GameSetupCallback()
         {
+            questAreaControl.Initialize(game);
         }
 
         private IGameController GetController()

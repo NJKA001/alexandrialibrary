@@ -8,7 +8,7 @@ using LotR.Cards.Player;
 namespace LotR.States
 {
     public interface IExhaustableInPlay
-        : ICardInPlay<IPlayerCard>
+        : ICardInPlay
     {
         bool IsExhausted { get; }
 

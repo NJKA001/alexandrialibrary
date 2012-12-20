@@ -8,7 +8,7 @@ namespace LotR.States.Phases.Any
     public interface IDetermineHitPoints
         : IState
     {
-        IDamagableInPlay Damageable { get; }
+        ICardInPlay Damageable { get; }
 
         byte HitPoints { get; set; }
     }

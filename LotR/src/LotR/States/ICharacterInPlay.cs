@@ -12,6 +12,8 @@ namespace LotR.States
     public interface ICharacterInPlay
         : ICardInPlay<ICharacterCard>
     {
+        byte HitPoints { get; set; }
+
         bool CanPayFor(ICostlyCard costlyCard);
         bool CanPayFor(ICardEffect cardEffect);
     }

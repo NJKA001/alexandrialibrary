@@ -34,7 +34,7 @@ namespace LotR.Cards.Player.Events
 
                 foreach (var player in game.Players)
                 {
-                    allies.AddRange(player.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.Card is IAllyCard && x.IsExhausted));
+                    allies.AddRange(player.CardsInPlay.OfType<IExhaustableInPlay>().Where(x => x.BaseCard is IAllyCard && x.IsExhausted));
                 }
 
                 return allies;
@@ -42,7 +42,7 @@ namespace LotR.Cards.Player.Events
 
             private void ReadyExhaustedAlly(IGame game, IEffectHandle handle, IPlayer player, IExhaustableInPlay ally)
             {
-                var controller = game.GetController(ally.Card.Id);
+                var controller = game.GetController(ally.BaseCard.Id);
 
                 ally.Ready();
 
@@ -73,7 +73,7 @@ namespace LotR.Cards.Player.Events
                 var builder =
                     new ChoiceBuilder("Choose an ally to ready", game, player)
                         .Question("Which exhausted ally will you ready?")
-                            .LastAnswers(allies, item => string.Format("'{0}' controlled by {1}", item.Title, game.GetController(item.Card.Id).Name), (src, handle, ally) => ReadyExhaustedAlly(src, handle, player, ally));
+                            .LastAnswers(allies, item => string.Format("'{0}' controlled by {1}", item.Title, game.GetController(item.BaseCard.Id).Name), (src, handle, ally) => ReadyExhaustedAlly(src, handle, player, ally));
 
                 return new EffectHandle(this, builder.ToChoice());
             }

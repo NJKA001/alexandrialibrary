@@ -10,6 +10,5 @@ namespace LotR.States
     public interface ILocationInPlay
         : ICardInPlay<ILocationCard>
     {
-        byte Progress { get; set; }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Threading;
 
 using LotR.Cards;
@@ -27,13 +29,8 @@ namespace LotR.Client.ViewModels
                 throw new ArgumentNullException("player");
 
             this.player = player;
-
-            //foreach (var hero in player.Deck.Heroes)
-            //{
-            //    var heroInPlay = new HeroInPlay(game, hero);
-            //    heroes.Add(new PlayerCardInPlayViewModel<IHeroCard>(dispatcher, heroInPlay));
-            //}
-
+            player.PropertyChanged += (sender, args) => PlayerPropertyChanged(sender, args);
+            
             player.Hand.RegisterCardAddedCallback(x => CardAddedToHand(x));
             player.Hand.RegisterCardRemovedCallback(x => CardRemovedFromHand(x));
             player.RegisterCardAddedToPlayCallback(x => CardAddedToPlay(x));
@@ -44,6 +41,26 @@ namespace LotR.Client.ViewModels
         private readonly ObservableCollection<PlayerCardInPlayViewModel<IHeroCard>> heroes = new ObservableCollection<PlayerCardInPlayViewModel<IHeroCard>>();
         private readonly ObservableCollection<PlayerCardInPlayViewModel> cardsInPlay = new ObservableCollection<PlayerCardInPlayViewModel>();
         private readonly ObservableCollection<PlayerCardViewModel> hand = new ObservableCollection<PlayerCardViewModel>();
+
+        private void PlayerPropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            switch (args.PropertyName)
+            {
+                case "CurrentThreat":
+                    OnPropertyChanged("CurrentThreat");
+                    break;
+                case "IsFirstPlayer":
+                    OnPropertyChanged("IsFirstPlayer");
+                    OnPropertyChanged("FirstPlayerVisibility");
+                    break;
+                case "IsActivePlayer":
+                    OnPropertyChanged("IsActivePlayer");
+                    OnPropertyChanged("ActivePlayerVisibility");
+                    break;
+                default:
+                    break;
+            }
+        }
 
         private void CardAddedToHand(IPlayerCard card)
         {
@@ -112,6 +129,26 @@ namespace LotR.Client.ViewModels
         public byte CurrentThreat
         {
             get { return player.CurrentThreat; }
+        }
+
+        public bool IsFirstPlayer
+        {
+            get { return player.IsFirstPlayer; }
+        }
+
+        public Visibility FirstPlayerVisibility
+        {
+            get { return player.IsFirstPlayer ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
+        public bool IsActivePlayer
+        {
+            get { return player.IsActivePlayer; }
+        }
+
+        public Visibility ActivePlayerVisibility
+        {
+            get { return player.IsActivePlayer ? Visibility.Visible : Visibility.Collapsed; }
         }
 
         public IEnumerable<PlayerCardInPlayViewModel<IHeroCard>> Heroes

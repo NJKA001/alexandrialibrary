@@ -14,8 +14,6 @@ namespace LotR.Effects
         IQuestion Parent { get; }
         IQuestion FollowUp { get; }
 
-        bool IsChosen { get; set; }
-
         T GetObject<T>() where T : class;
         T GetPrimative<T>() where T : struct;
 

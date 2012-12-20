@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Threading;
@@ -15,14 +16,56 @@ namespace LotR.Client.ViewModels
         public StatusViewModel(Dispatcher dispatcher, IGame game)
             : base(dispatcher)
         {
+            if (game == null)
+                throw new ArgumentNullException("game");
+
             this.game = game;
+            game.PropertyChanged += (sender, args) => GamePropertyChanged(sender, args);
+            RegisterCurrentPhaseNotification();
         }
 
         private readonly IGame game;
         private string currentStatus = string.Empty;
         private readonly ObservableCollection<string> history = new ObservableCollection<string>();
 
-        public int CurrentRound
+        private void RegisterCurrentPhaseNotification()
+        {
+            if (game.CurrentPhase == null)
+                return;
+
+            game.CurrentPhase.PropertyChanged += (sender, args) => PhasePropertyChanged(sender, args);
+        }
+
+        private void GamePropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            switch (args.PropertyName)
+            {
+                case "CurrentRound":
+                    OnPropertyChanged("CurrentRound");
+                    break;
+                case "CurrentPhase":
+                    OnPropertyChanged("CurrentPhase");
+                    OnPropertyChanged("CurrentStep");
+                    RegisterCurrentPhaseNotification();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void PhasePropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            switch (args.PropertyName)
+            {
+                case "StepName":
+                    OnPropertyChanged("CurrentStep");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public uint CurrentRound
         {
             get { return game.CurrentRound; }
         }
@@ -34,7 +77,7 @@ namespace LotR.Client.ViewModels
 
         public string CurrentStep
         {
-            get { return game.CurrentPhase != null ? game.CurrentPhase.StepName : "Follow Scenario Instructions"; }
+            get { return game.CurrentPhase != null ? game.CurrentPhase.StepName : CurrentStatus; }
         }
 
         public string CurrentStatus
@@ -47,6 +90,7 @@ namespace LotR.Client.ViewModels
 
                 currentStatus = value;
                 OnPropertyChanged("CurrentStatus");
+                OnPropertyChanged("CurrentStep");
             }
         }
 

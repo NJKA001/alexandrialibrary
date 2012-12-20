@@ -71,7 +71,7 @@ namespace LotR.Effects.Phases.Quest
                 var threat = game.StagingArea.CardsInStagingArea.OfType<IThreateningInPlay>().Sum(x => x.Threat);
                 builder.Question(string.Format("You have {0} available to commit to the quest and there is currently {1} threat in the staging area.\r\nDo you want to commit any characters to the quest?", description, threat))
                     .Answer("Yes, I want to commit characters to the quest", true)
-                        .Question("Which characters do you want to commit to the quest?")
+                        .Question("Which characters do you want to commit to the quest?", 0, (uint)characters.Count)
                             .LastAnswers(characters, (item) => string.Format("{0} ({1} willpower)", item.Title, item.Willpower), (source, handle, character) => CommitCharacterToTheQuest(source, handle, character))
                     .LastAnswer("No, I do not want to commit characters to the quest", false, (source, handle, item) => DoNotCommitAnyCharactersToTheQuest(handle));
                     

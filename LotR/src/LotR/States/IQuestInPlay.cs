@@ -10,6 +10,5 @@ namespace LotR.States
     public interface IQuestInPlay
         : ICardInPlay<IQuestCard>
     {
-        byte Progress { get; set; }
     }
 }

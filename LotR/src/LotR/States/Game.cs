@@ -50,7 +50,10 @@ namespace LotR.States
         private readonly IList<IEffect> currentEffects = new List<IEffect>();
         private readonly PhaseFactory phaseFactory = new PhaseFactory();
         private readonly IList<Action> gameSetupCallbacks = new List<Action>();
-        
+
+        private uint currentRound;
+        private IPhase currentPhase;
+
         private IPlayer activePlayer;
         private GameStatus gameStatus;
 
@@ -164,7 +167,7 @@ namespace LotR.States
                 if (player == null)
                     throw new InvalidOperationException("Could not determine the controller of this effect: " + effect.ToString());
 
-                var responseWindow = new PlayerResponseWindowEffect(this, player, responseEffect);
+                var responseWindow = new PlayerResponseWindow(this, player, responseEffect);
                 TriggerImmediately(responseWindow);
             }
         }
@@ -186,16 +189,27 @@ namespace LotR.States
             }
         }
 
-        public byte CurrentRound
+        public uint CurrentRound
         {
-            get;
-            private set;
+            get { return currentRound; }
+            private set
+            {
+                if (currentRound == value)
+                    return;
+
+                currentRound = value;
+                OnPropertyChanged("CurrentRound");
+            }
         }
 
         public IPhase CurrentPhase
         {
-            get;
-            private set;
+            get { return currentPhase; }
+            private set
+            {
+                currentPhase = value;
+                OnPropertyChanged("CurrentPhase");
+            }
         }
 
         public IQuestArea QuestArea

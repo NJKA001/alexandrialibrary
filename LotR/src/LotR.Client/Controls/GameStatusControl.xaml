@@ -5,26 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid x:Name="gameStatusContainer">
-        <StackPanel Orientation="Vertical">
-            <TextBlock TextAlignment="Center" Text="Status" Margin="4" FontWeight="Bold" />
-                    
-            <StackPanel Orientation="Horizontal">
-                <TextBlock x:Name="currentStatusLabel" Margin="4" Text="Status"/>
-                <TextBlock x:Name="currentStatusText" Margin="4" Text="{Binding CurrentStatus}"/>
-            </StackPanel>
-            
-            <StackPanel Orientation="Horizontal">
-                <TextBlock x:Name="currentRoundLabel" Margin="4" Text="Round"/>
-                <TextBlock x:Name="currentRoundText" Margin="4" Text="{Binding CurrentRound}"/>
-                <TextBlock x:Name="currentPhaseLabel" Margin="12 4 4 4" Text="Phase"/>
-                <TextBlock x:Name="currentPhaseText" Margin="4" Text="{Binding CurrentPhase}"/>
-                <TextBlock x:Name="currentPhaseStepLabel" Margin="12 4 4 4" Text="Step"/>
-                <TextBlock x:Name="currentPhaseSetpText" Margin="4" Text="{Binding CurrentStep}"/>
-            </StackPanel>
+    <Grid x:Name="gameStatusContainer" Margin="4">
+        <Border BorderBrush="Gray" BorderThickness="2">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="currentStatusLabel" Margin="4" Text="Status" Foreground="DarkGray"/>
+                    <TextBlock x:Name="currentStatusText" Margin="4" Padding="4 0 4 0" Text="{Binding CurrentStatus}" FontWeight="Bold"/>
+                </StackPanel>
 
-            <ListBox x:Name="statusHistoryContainer" Margin="4" ItemsSource="{Binding History}"/>
-        </StackPanel>
-        
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="currentRoundLabel" Margin="4" Text="Round" Foreground="DarkGray"/>
+                    <TextBlock x:Name="currentRoundText" Margin="4" Padding="4 0 4 0" Text="{Binding CurrentRound}" FontWeight="Bold"/>
+                    <TextBlock x:Name="currentPhaseLabel" Margin="12 4 4 4" Text="Phase" Foreground="DarkGray"/>
+                    <TextBlock x:Name="currentPhaseText" Margin="4" Padding="4 0 4 0" Text="{Binding CurrentPhase}" FontWeight="Bold"/>
+                    <TextBlock x:Name="currentPhaseStepLabel" Margin="12 4 4 4" Text="Step" Foreground="DarkGray"/>
+                    <TextBlock x:Name="currentPhaseSetpText" Margin="4" Padding="4 0 4 0" Text="{Binding CurrentStep}" FontWeight="Bold"/>
+                </StackPanel>
+
+                <Expander Header="History" ExpandDirection="Down">
+                    <ListBox x:Name="statusHistoryContainer" Margin="4" ItemsSource="{Binding History}"/>
+                </Expander>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

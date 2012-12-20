@@ -65,6 +65,9 @@
     <Compile Include="Controls\PlayerAreaControl.xaml.cs">
       <DependentUpon>PlayerAreaControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\QuestAreaControl.xaml.cs">
+      <DependentUpon>QuestAreaControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\StagingAreaControl.xaml.cs">
       <DependentUpon>StagingAreaControl.xaml</DependentUpon>
     </Compile>
@@ -75,6 +78,9 @@
     <Compile Include="ViewModels\PlayerCardInPlayViewModel.cs" />
     <Compile Include="ViewModels\PlayerCardViewModel.cs" />
     <Compile Include="ViewModels\PlayerViewModel.cs" />
+    <Compile Include="ViewModels\QuestAreaViewModel.cs" />
+    <Compile Include="ViewModels\QuestCardInPlayViewModel.cs" />
+    <Compile Include="ViewModels\QuestCardViewModel.cs" />
     <Compile Include="ViewModels\StagingAreaViewModel.cs" />
     <Compile Include="ViewModels\StatusViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -87,6 +93,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\PlayerAreaControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\QuestAreaControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

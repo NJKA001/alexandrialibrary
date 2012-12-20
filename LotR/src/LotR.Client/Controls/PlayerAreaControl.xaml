@@ -23,10 +23,16 @@
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Margin="2" Text="Name" FontSize="10" Foreground="DarkGray"/>
-                            <TextBlock Margin="2" Text="{Binding PlayerName}" FontSize="12" />
-                            <TextBlock Margin="2" Text="Threat" FontSize="10" Foreground="DarkGray"/>
-                            <TextBlock Margin="2" Text="{Binding CurrentThreat}"/>
+                            <TextBlock Margin="4" Text="Name" Foreground="DarkGray"/>
+                            <TextBlock Margin="6 4 4 4" Text="{Binding PlayerName}" FontWeight="Bold" />
+                            <TextBlock Margin="8 4 4 4" Text="Threat" Foreground="DarkGray"/>
+                            <TextBlock Margin="6 4 4 4" Text="{Binding CurrentThreat}" FontWeight="Bold"/>
+                            <Border Margin="8 2 4 4" BorderBrush="DarkGray" BorderThickness="1" Visibility="{Binding FirstPlayerVisibility}" CornerRadius="2">
+                                <TextBlock  Padding="2 0 2 2" Text="First Player" Background="LightGreen" FontWeight="Bold"/>
+                            </Border>
+                            <Border Margin="8 2 4 4" BorderBrush="DarkGray" BorderThickness="1" Visibility="{Binding ActivePlayerVisibility}" CornerRadius="2">
+                                <TextBlock Padding="2 0 2 2" Text="Active Player" Background="Yellow" FontWeight="Bold"/>
+                            </Border>
                         </StackPanel>
                         <StackPanel>
                             <TextBlock Text="Cards In Hand"/>
@@ -45,11 +51,11 @@
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="20"/>
-                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="88"/>
                                             </Grid.ColumnDefinitions>
                                             <Image Margin="4" Source="{Binding Path=ImageSource, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Height="140" Width="100" />
-                                            <Image Margin="2" Source="{Binding Path=ResourceIcon, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Grid.Row="1" Grid.Column="0" Height="16" Width="16"/>
-                                            <TextBlock Margin="2" Text="{Binding Title}" Grid.Row="1" Grid.Column="1" ToolTip="{Binding CardText}"/>
+                                            <!--<Image Margin="2" Source="{Binding Path=ResourceIcon, Converter={StaticResource imageConverter}, NotifyOnTargetUpdated=True}" Grid.Row="1" Grid.Column="0" Height="16" Width="16"/>-->
+                                            <TextBlock Margin="2" Text="{Binding Title}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ToolTip="{Binding CardText}"/>
                                         </Grid>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>

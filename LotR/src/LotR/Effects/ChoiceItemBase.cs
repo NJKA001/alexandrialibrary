@@ -20,6 +20,9 @@ namespace LotR.Effects
         private readonly Guid itemId;
         private readonly string text;
         protected readonly TSource source;
+        
+        private bool isChosen;
+        private bool isExpanded = true;
 
         protected void OnPropertyChanged(string propertyName)
         {
@@ -37,6 +40,32 @@ namespace LotR.Effects
         public string Text
         {
             get { return text; }
+        }
+
+        public bool IsChosen
+        {
+            get { return isChosen; }
+            set
+            {
+                if (isChosen == value)
+                    return;
+
+                isChosen = value;
+                OnPropertyChanged("IsChosen");
+            }
+        }
+
+        public bool IsExpanded
+        {
+            get { return isExpanded; }
+            set
+            {
+                if (isExpanded == value)
+                    return;
+
+                isExpanded = value;
+                OnPropertyChanged("IsExpanded");
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

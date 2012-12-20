@@ -9,6 +9,7 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -17,32 +18,33 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TabControl Grid.Column="0">
-            <TabItem Header="Current Game">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    
-                    <controls:PlayerAreaControl x:Name="playerAreaControl" Grid.Row="0" Grid.Column="0"/>
-
-                    <GridSplitter Grid.Row="0" Grid.Column="1" Height="Auto" Width="4" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
-
-                    <controls:StagingAreaControl x:Name="stagingAreaControl" Grid.Row="0" Grid.Column="2"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Status">
-                <controls:GameStatusControl x:Name="statusControl" Grid.Row="0" Grid.Column="0"/>
-            </TabItem>
-        </TabControl>
-
-        <GridSplitter Grid.Row="0" Grid.Column="1" Height="Auto" Width="4" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+        <controls:GameStatusControl x:Name="statusControl" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
         
-        <controls:ChoiceControl x:Name="choiceControl" Grid.Column="2"/>    
+        <Grid x:Name="gameAreaContainer" Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+                    
+            <controls:PlayerAreaControl x:Name="playerAreaControl" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"/>
+
+            <GridSplitter Grid.Row="0" Grid.Column="1" Height="Auto" Width="4" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+
+            <controls:StagingAreaControl x:Name="stagingAreaControl" Grid.Row="0" Grid.Column="2"/>
+
+            <GridSplitter Grid.Row="1" Grid.Column="2" Height="4" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+            
+            <controls:QuestAreaControl x:Name="questAreaControl" Grid.Row="2" Grid.Column="2"/>
+        </Grid>
+
+        <GridSplitter Grid.Row="1" Grid.Column="1" Height="Auto" Width="4" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+        
+        <controls:ChoiceControl x:Name="choiceControl" Grid.Row="1" Grid.Column="2"/>    
     </Grid>
 </Window>

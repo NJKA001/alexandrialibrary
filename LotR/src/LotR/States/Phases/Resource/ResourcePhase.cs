@@ -117,19 +117,19 @@ namespace LotR.States.Phases.Resource
                     var drawCardsHandle = drawCardsEffect.GetHandle(Game);
                     Game.TriggerEffect(drawCardsHandle);
 
-                    var gandalf = player.Deck.Cards.Where(x => x.Title == "Gandalf").FirstOrDefault();
-                    if (gandalf != null)
-                    {
-                        player.Deck.RemoveFromDeck(gandalf);
-                        player.Hand.AddCards(new List<IPlayerCard> { gandalf });
-                    }
+                    //var gandalf = player.Deck.Cards.Where(x => x.Title == "Gandalf").FirstOrDefault();
+                    //if (gandalf != null)
+                    //{
+                    //    player.Deck.RemoveFromDeck(gandalf);
+                    //    player.Hand.AddCards(new List<IPlayerCard> { gandalf });
+                    //}
 
-                    var sneakAttack = player.Deck.Cards.Where(x => x.Title == "Sneak Attack").FirstOrDefault();
-                    if (sneakAttack != null)
-                    {
-                        player.Deck.RemoveFromDeck(sneakAttack);
-                        player.Hand.AddCards(new List<IPlayerCard> { sneakAttack });
-                    }
+                    //var sneakAttack = player.Deck.Cards.Where(x => x.Title == "Sneak Attack").FirstOrDefault();
+                    //if (sneakAttack != null)
+                    //{
+                    //    player.Deck.RemoveFromDeck(sneakAttack);
+                    //    player.Hand.AddCards(new List<IPlayerCard> { sneakAttack });
+                    //}
                 }
             }
         }

@@ -29,8 +29,7 @@ namespace LotR.Effects
 
         private IQuestion parent;
         private IQuestion followUp;
-        private bool isChosen;
-
+        
         public Type ItemType
         {
             get { return itemType; }
@@ -44,19 +43,6 @@ namespace LotR.Effects
         public IQuestion FollowUp
         {
             get { return followUp; }
-        }
-
-        public bool IsChosen
-        {
-            get { return isChosen; }
-            set
-            {
-                if (isChosen == value)
-                    return;
-
-                isChosen = value;
-                OnPropertyChanged("IsChosen");
-            }
         }
 
         public T GetObject<T>()
