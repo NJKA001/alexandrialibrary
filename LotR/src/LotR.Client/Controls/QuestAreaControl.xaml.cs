@@ -27,6 +27,9 @@ namespace LotR.Client.Controls
         public QuestAreaControl()
         {
             InitializeComponent();
+
+            //this.activeLocationPanel.Visibility = System.Windows.Visibility.Collapsed;
+            //this.activeQuestPanel.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         private IGame game;
@@ -42,9 +45,9 @@ namespace LotR.Client.Controls
 
             Action action = () =>
             {
-            this.questAreaContainer.DataContext = viewModel;
-            this.activeLocationContainer.DataContext = viewModel.ActiveLocation;
-            this.activeQuestContainer.DataContext = viewModel.ActiveQuest;
+                this.questAreaContainer.DataContext = viewModel;
+                this.activeLocationContainer.DataContext = viewModel.ActiveLocation;
+                this.activeQuestContainer.DataContext = viewModel.ActiveQuest;
             };
 
             Dispatcher.Invoke(action, DispatcherPriority.DataBind);

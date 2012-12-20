@@ -22,7 +22,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" TextAlignment="Center" FontSize="12" Text="Quest Area" FontWeight="Bold"/>
-        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Visibility="{Binding ActiveLocationVisibility}">
+        <StackPanel x:Name="activeLocationPanel" Orientation="Vertical" Grid.Row="1" Grid.Column="0" Visibility="{Binding ActiveLocationVisibility}">
             <TextBlock TextAlignment="Center" Text="Active Location"/>
             <Border x:Name="activeLocationContainer">
                 <Grid>
@@ -53,7 +53,7 @@
                 </Grid>
             </Border>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Visibility="{Binding ActiveQuestVisibility}">
+        <StackPanel x:Name="activeQuestPanel" Orientation="Vertical" Grid.Row="1" Grid.Column="1" Visibility="{Binding ActiveQuestVisibility}">
             <TextBlock TextAlignment="Center" Text="Current Quest"/>
             <Border x:Name="activeQuestContainer">
                 <Grid>
