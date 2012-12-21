@@ -9,6 +9,7 @@ using LotR.Cards.Encounter;
 using LotR.Cards.Encounter.Enemies;
 using LotR.Cards.Encounter.Locations;
 using LotR.Cards.Encounter.Objectives;
+using LotR.Cards.Encounter.Treacheries;
 using LotR.Effects;
 using LotR.Effects.Phases.Any;
 
@@ -91,7 +92,23 @@ namespace LotR.States.Areas
 
         private IEncounterInPlay GetRevealedEncounterCard(IEncounterCard card)
         {
-            return null;
+            if (card is IEnemyCard)
+            {
+                return new EnemyInPlay(Game, card as IEnemyCard);
+            }
+            else if (card is ILocationCard)
+            {
+                return new LocationInPlay(Game, card as ILocationCard);
+            }
+            else if (card is IObjectiveCard)
+            {
+                return new UnclaimedObjectiveInPlay(Game, card as IObjectiveCard);
+            }
+            else if (card is ITreacheryCard)
+            {
+                return new TreacheryInPlay(Game, card as ITreacheryCard);
+            }
+            else throw new ArgumentException("card is not a valid encounter card");
         }
 
         public void RevealEncounterCard()
