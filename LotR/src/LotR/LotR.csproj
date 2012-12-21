@@ -89,6 +89,7 @@
     <Compile Include="Cards\Quests\BeornsPath.cs" />
     <Compile Include="Cards\Quests\DontLeaveThePath.cs" />
     <Compile Include="Cards\ScenarioCode.cs" />
+    <Compile Include="Effects\IRevealedEffect.cs" />
     <Compile Include="Effects\Phases\Any\PlayAllyEffect.cs" />
     <Compile Include="Effects\Answer.cs" />
     <Compile Include="Effects\Choice.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Effects\Phases\Any\PlayAttachableEffect.cs" />
     <Compile Include="Effects\Phases\Any\PlayEventEffect.cs" />
     <Compile Include="Effects\Phases\Any\PlayerResponseWindow.cs" />
+    <Compile Include="Effects\Phases\Encounter\EngagamentCheckEffect.cs" />
     <Compile Include="Effects\Phases\Quest\CommitCharactersToQuestEffect.cs" />
     <Compile Include="Effects\Phases\Quest\QuestResolutionEffect.cs" />
     <Compile Include="Effects\PlayersExhaustCharactersChoiceFactory.cs" />

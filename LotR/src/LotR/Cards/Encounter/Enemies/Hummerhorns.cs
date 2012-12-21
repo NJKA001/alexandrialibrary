@@ -21,6 +21,9 @@ namespace LotR.Cards.Encounter.Enemies
         {
             AddTrait(Trait.Creature);
             AddTrait(Trait.Insect);
+
+            AddEffect(new ForcedDealsFiveDamageToAHeroAfterEngaging(this));
+            AddEffect(new ShadowDealOneDamageToEachCharacter(this));
         }
 
         private class ForcedDealsFiveDamageToAHeroAfterEngaging

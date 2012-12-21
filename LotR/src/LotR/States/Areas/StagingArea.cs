@@ -87,6 +87,7 @@ namespace LotR.States.Areas
 
             foreach (var card in duringRevealCards)
             {
+
             }
         }
 
@@ -111,6 +112,24 @@ namespace LotR.States.Areas
             else throw new ArgumentException("card is not a valid encounter card");
         }
 
+        private void TriggerWhenRevealedEffects(IEncounterCard card)
+        {
+            foreach (var effect in card.Text.Effects.Where(x => x is IWhenRevealedEffect))
+            {
+                var handle = effect.GetHandle(Game);
+                Game.TriggerEffect(handle);
+            }
+        }
+
+        private void TriggerOtherEffects(IEncounterCard card)
+        {
+            foreach (var effect in card.Text.Effects.Where(x => x is IRevealedEffect  && !(x is IWhenRevealedEffect)))
+            {
+                var handle = effect.GetHandle(Game);
+                Game.TriggerEffect(handle);
+            }
+        }
+
         public void RevealEncounterCard()
         {
             if (EncounterDeck.Cards.Count() == 0)
@@ -130,9 +149,20 @@ namespace LotR.States.Areas
             var card = EncounterDeck.GetFromTop(1).First();
             EncounterDeck.RemoveFromDeck(card);
 
+            RevealedEncounterCard = GetRevealedEncounterCard(card);
+
             CheckForResponsesToRevealedCard();
 
-            RevealedEncounterCard = GetRevealedEncounterCard(card);
+            TriggerWhenRevealedEffects(card);
+            
+            TriggerOtherEffects(card);
+
+            if (!(RevealedEncounterCard.Card is ITreacheryCard))
+            {
+                AddToStagingArea(RevealedEncounterCard);
+            }
+
+            RevealedEncounterCard = null;
         }
 
         public void CancelRevealedCard(ICancelEffect effect)
@@ -146,6 +176,16 @@ namespace LotR.States.Areas
         public void RemoveRevealedCard()
         {
             RevealedEncounterCard = null;
+        }
+
+        private void AddToStagingArea(IEncounterInPlay encounterInPlay)
+        {
+            cardsInStagingArea.Add(encounterInPlay);
+
+            foreach (var callback in cardAddedToStagingAreaCallbacks)
+            {
+                callback(encounterInPlay);
+            }
         }
 
         public void AddToStagingArea(IEncounterCard card)
@@ -168,12 +208,7 @@ namespace LotR.States.Areas
                 encounterInPlay = new UnclaimedObjectiveInPlay(Game, card as IObjectiveCard);
             }
 
-            cardsInStagingArea.Add(encounterInPlay);
-
-            foreach (var callback in cardAddedToStagingAreaCallbacks)
-            {
-                callback(encounterInPlay);
-            }
+            AddToStagingArea(encounterInPlay);
         }
 
         public void RemoveFromStagingArea(IEncounterInPlay card)

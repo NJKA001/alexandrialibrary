@@ -21,6 +21,9 @@ namespace LotR.Cards.Encounter.Enemies
         {
             AddTrait(Trait.Dol_Guldur);
             AddTrait(Trait.Orc);
+
+            AddEffect(new WhenRevealedFirstPlayerDealsTwoDamageToQuestingCharacter(this));
+            AddEffect(new ShadowAttackingEnemyGainsPlusOneAttack(this));
         }
 
         private class WhenRevealedFirstPlayerDealsTwoDamageToQuestingCharacter

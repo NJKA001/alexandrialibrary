@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Threading;
 
 using LotR.States;
@@ -90,7 +91,13 @@ namespace LotR.Client.ViewModels
             {
                 revealedEncounterCard = value;
                 OnPropertyChanged("RevealedEncounterCard");
+                OnPropertyChanged("RevealedEncounterCardVisibility");
             }
+        }
+
+        public Visibility RevealedEncounterCardVisibility
+        {
+            get { return revealedEncounterCard != null ? Visibility.Visible : Visibility.Collapsed; }
         }
     }
 }

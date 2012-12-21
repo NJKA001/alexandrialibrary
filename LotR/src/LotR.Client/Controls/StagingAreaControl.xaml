@@ -12,10 +12,10 @@
         <BitmapImage x:Key="progressIcon" UriSource="../Images/progress_token.png"/>
         <BitmapImage x:Key="resourceIcon" UriSource="../Images/resource_token.png"/>
     </UserControl.Resources>
-    <Grid>
+    <Grid x:Name="stagingAreaContainer">
         <StackPanel Orientation="Vertical">
             <TextBlock Text="Staging Area" Margin="4" FontWeight="Bold"/>
-            <ListBox x:Name="stagingAreaContainer">
+            <ListBox x:Name="cardsInPlayContainer" ItemsSource="{Binding CardsInPlay}">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel IsItemsHost="True"/>
@@ -53,8 +53,8 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Border x:Name="revealedCardContainer" Visibility="{Binding RevealedCardVisibility}" BorderBrush="Gray" BorderThickness="1">
-                <StackPanel Orientation="Vertical">
+            <Border x:Name="revealedCardContainer" Visibility="{Binding RevealedEncounterCardVisibility}" BorderBrush="Gray" BorderThickness="1">
+                <StackPanel Orientation="Vertical" DataContext="{Binding RevealedEncounterCard}">
                     <TextBlock Text="Revealed Encounter Card" TextAlignment="Center"/>
                     <Grid>
                         <Grid.RowDefinitions>

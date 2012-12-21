@@ -2,9 +2,9 @@
 Heroes 3: Eleanor, Eowyn, Theodred
 Cards 50:
 
-Allies 20:
+Allies 21:
 Wandering Took  3
-Northern Tracker  2
+Northern Tracker  3
 Bofur (Dw)  3
 Snowborn Scout  3
 Gandalf (Core)  3
@@ -12,7 +12,7 @@ Lorien Guide  3
 Guard of the Citadel  3
 
 Attachments 9: 
-The Favor of the Lady  3
+The Favor of the Lady  2
 Steward of Gondor  3
 Unexpected Courage  3
 
@@ -22,6 +22,5 @@ Hasty Stroke  3
 Sneak Attack  3
 A Test of Will  3
 Campfire Tales  3
-Sneak Attack  3
-Stand and Fight  2
-Dwarven Tomb  1
+Stand and Fight  3
+Dwarven Tomb  3

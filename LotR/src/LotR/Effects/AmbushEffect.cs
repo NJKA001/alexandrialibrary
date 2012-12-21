@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
+using LotR.States;
+using LotR.States.Phases.Any;
 
 namespace LotR.Effects
 {
@@ -18,6 +20,15 @@ namespace LotR.Effects
         public override string ToString()
         {
             return "Ambush (after this enemy enters play, each player makes an engagement check against it.)";
+        }
+
+        public void AfterCardEntersPlay(ICardEntersPlay state)
+        {
+            var enemy = state.EnteringPlay as IEnemyInPlay;
+            if (enemy == null)
+                return;
+
+            //state.AddEffect(this);
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards;
+using LotR.Cards.Encounter.Treacheries;
 using LotR.Cards.Player;
 using LotR.Cards.Player.Heroes;
 using LotR.Effects;
@@ -232,6 +233,22 @@ namespace LotR.States
 
         public bool IsTheControllerOf(ICardInPlay card)
         {
+            if (card.BaseCard is ITreacheryCard)
+                return false;
+
+            foreach (var cardInPlay in cardsInPlay)
+            {
+                if (cardInPlay.BaseCard.Id == card.BaseCard.Id)
+                    return true;
+
+                if (cardInPlay is IAttachmentHostInPlay)
+                {
+                    var host = cardInPlay as IAttachmentHostInPlay;
+                    if (host.Attachments.Any(x => x.BaseCard.Id == card.BaseCard.Id))
+                        return true;
+                }
+            }
+
             return false;
         }
 

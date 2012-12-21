@@ -8,7 +8,7 @@ using LotR.States;
 namespace LotR.Effects
 {
     public interface IWhenRevealedEffect
-        : IForcedEffect
+        : IRevealedEffect
     {
         void WhenRevealed(IGame game);
     }

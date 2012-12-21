@@ -5,8 +5,8 @@ using System.Text;
 
 namespace LotR.Effects
 {
-    public interface ISurgeEffect
-        : IRevealedEffect
+    public interface IRevealedEffect
+        : ICardEffect
     {
     }
 }

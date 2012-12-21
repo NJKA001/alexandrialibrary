@@ -216,8 +216,10 @@ namespace LotR.States.Phases.Quest
 
         private void DuringQuestResolution(IQuestOutcome outcome)
         {
-            var totalWillpower = (uint)GetAllCharactersCommittedToQuest().Sum(x => x.Willpower);
-            var totalThreat = (uint)Game.StagingArea.CardsInStagingArea.OfType<IThreateningInPlay>().Sum(x => x.Threat);
+            var committedCharacters = GetAllCharactersCommittedToQuest();
+            var threateningCards = Game.StagingArea.CardsInStagingArea.OfType<IThreateningInPlay>();
+            var totalWillpower = (uint)committedCharacters.Sum(x => x.Willpower);
+            var totalThreat = (uint)threateningCards.Sum(x => x.Threat);
 
             outcome.Resolve(totalWillpower, totalThreat);
 
