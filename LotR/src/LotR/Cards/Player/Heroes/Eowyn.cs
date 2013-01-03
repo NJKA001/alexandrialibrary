@@ -52,7 +52,7 @@ namespace LotR.Cards.Player.Heroes
                 var willpowerful = controller.CardsInPlay.OfType<IWillpowerfulInPlay>().Where(x => x.Card.Id == source.Id).FirstOrDefault();
                 if (willpowerful == null)
                 {
-                    handle.Cancel(string.Format("'{0}' is no longer in player", CardSource.Title));
+                    handle.Cancel(string.Format("'{0}' is no longer in play", CardSource.Title));
                     return;
                 }
 

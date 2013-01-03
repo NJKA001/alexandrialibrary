@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using LotR.Cards.Player;
+using LotR.States;
 
 namespace LotR.Effects
 {
@@ -13,6 +14,11 @@ namespace LotR.Effects
         public ResponseCharacterAbilityBase(string text, IPlayerCard source)
             : base("Response", text, source)
         {
+        }
+
+        public override bool CanBeTriggered(IGame game)
+        {
+            return true;
         }
     }
 }

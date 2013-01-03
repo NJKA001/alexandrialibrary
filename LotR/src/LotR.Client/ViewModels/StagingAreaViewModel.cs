@@ -68,6 +68,8 @@ namespace LotR.Client.ViewModels
                 return;
 
             Dispatch(() => cardsInPlay.Add(new EncounterCardInPlayViewModel(dispatcher, encounterInPlay)));
+
+            OnPropertyChanged("CurrentThreat");
         }
 
         private void RemoveEncounterInPlay(IEncounterInPlay encounterInPlay)
@@ -77,11 +79,21 @@ namespace LotR.Client.ViewModels
                 return;
 
             Dispatch(() => cardsInPlay.Remove(viewModel));
+
+            OnPropertyChanged("CurrentThreat");
         }
 
         public IEnumerable<EncounterCardInPlayViewModel> CardsInPlay
         {
             get { return cardsInPlay; }
+        }
+
+        public byte CurrentThreat
+        {
+            get
+            {
+                return game.StagingArea.GetTotalThreat();
+            }
         }
 
         public EncounterCardInPlayViewModel RevealedEncounterCard

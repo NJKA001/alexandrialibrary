@@ -12,22 +12,22 @@ namespace LotR.Effects
     public abstract class PayResourcesEffectBase
         : FrameworkEffectBase, ICostlyEffect
     {
-        protected PayResourcesEffectBase(IGame game, Sphere resourceSphere, byte numberOfResources, bool isVariableCost, IPlayer player, ICostlyCard costlyCard)
-            : this(game, resourceSphere, numberOfResources, isVariableCost, player, costlyCard, null)
+        protected PayResourcesEffectBase(ISource source, Sphere resourceSphere, byte numberOfResources, bool isVariableCost, IPlayer player, ICostlyCard costlyCard)
+            : this(source, resourceSphere, numberOfResources, isVariableCost, player, costlyCard, null)
         {
             if (costlyCard == null)
                 throw new ArgumentNullException("costlyCard");
         }
 
-        protected PayResourcesEffectBase(IGame game, Sphere resourceSphere, byte numberOfResources, bool isVariableCost, IPlayer player, ICardEffect cardEffect)
-            : this(game, resourceSphere, numberOfResources, isVariableCost, player, null, cardEffect)
+        protected PayResourcesEffectBase(ISource source, Sphere resourceSphere, byte numberOfResources, bool isVariableCost, IPlayer player, ICardEffect cardEffect)
+            : this(source, resourceSphere, numberOfResources, isVariableCost, player, null, cardEffect)
         {
             if (cardEffect == null)
                 throw new ArgumentNullException("cardEffect");
         }
 
-        private PayResourcesEffectBase(IGame game, Sphere resourceSphere, byte numberOfResources, bool isVariableCost, IPlayer player, ICostlyCard costlyCard, ICardEffect cardEffect)
-            : base("Pay Resources", GetText(player, resourceSphere, numberOfResources, isVariableCost), game)
+        private PayResourcesEffectBase(ISource source, Sphere resourceSphere, byte numberOfResources, bool isVariableCost, IPlayer player, ICostlyCard costlyCard, ICardEffect cardEffect)
+            : base("Pay Resources", GetText(player, resourceSphere, numberOfResources, isVariableCost), source)
         {
             if (player == null)
                 throw new ArgumentNullException("player");

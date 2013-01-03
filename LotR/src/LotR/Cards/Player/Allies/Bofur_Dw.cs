@@ -23,18 +23,45 @@ namespace LotR.Cards.Player.Allies
         }
 
         private class PayOneSpiritResourceToCommitToQuest
-            : QuestActionCardEffectBase, IPlayerActionEffect, ICostlyEffect
+            : PayResourcesEffectBase, IQuestActionCardEffect, IPlayerActionEffect, ICostlyEffect
         {
             public PayOneSpiritResourceToCommitToQuest(Bofur_Dw cardSource)
-                : base("Spend 1 Spirit resource to put Bofur into play from your hand, exhausted and committed to a quest. If you quest successfully this phase and Bofur is still in play, return him to your hand.", cardSource)
+                : base(cardSource, Sphere.Spirit, 1, false, cardSource.Owner, cardSource)
             {
+                this.cardSource = cardSource;
+
+                type = "Quest Action";
+                text = "Spend 1 Spirit resource to put Bofur into play from your hand, exhausted and committed to a quest. If you quest successfully this phase and Bofur is still in play, return him to your hand.";
             }
 
-            public override IEffectHandle GetHandle(IGame game)
+            private readonly ICard cardSource;
+
+            protected override void AfterCostPaid(IGame game, IEffectHandle handle, IEnumerable<Tuple<ICharacterInPlay, byte>> charactersAndPayments)
             {
-                return base.GetHandle(game);
-                //var cost = new PayResources(source, Sphere.Spirit, 1, false);
-                //return new EffectHandle(this, //null, cost);
+                var allyCard = source as IAllyCard;
+                var allyInPlay = new AllyInPlay(game, allyCard);
+                player.AddCardInPlay(allyInPlay);
+                player.Hand.RemoveCards(new List<IPlayerCard> { allyCard });
+
+                game.AddEffect(new ReturnToHandAfterSuccessfulQuest(cardSource));
+            }
+
+            public ICard CardSource
+            {
+                get { return cardSource; }
+            }
+
+            public override bool CanBeTriggered(IGame game)
+            {
+                switch (game.CurrentPhase.StepCode)
+                {
+                    case PhaseStep.Quest_Player_Actions_Before_Commit_Characters:
+                    case PhaseStep.Quest_Player_Actions_Before_Staging:
+                    case PhaseStep.Quest_Player_Actions_Before_Quest_Resolution:
+                        return true;
+                    default:
+                        return false;
+                }
             }
 
             //public override void Validate(IGame game, IEffectHandle handle)
@@ -94,20 +121,20 @@ namespace LotR.Cards.Player.Allies
                 handle.Resolve(GetCompletedStatus());
             }
 
-            public Sphere ResourceSphere
-            {
-                get { return Sphere.Spirit; }
-            }
+            //public Sphere ResourceSphere
+            //{
+            //    get { return Sphere.Spirit; }
+            //}
 
-            public byte NumberOfResources
-            {
-                get { return 1; }
-            }
+            //public byte NumberOfResources
+            //{
+            //    get { return 1; }
+            //}
 
-            public bool IsVariableCost
-            {
-                get { return false; }
-            }
+            //public bool IsVariableCost
+            //{
+            //    get { return false; }
+            //}
         }
 
         private class ReturnToHandAfterSuccessfulQuest

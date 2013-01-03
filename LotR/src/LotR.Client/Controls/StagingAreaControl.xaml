@@ -15,6 +15,10 @@
     <Grid x:Name="stagingAreaContainer">
         <StackPanel Orientation="Vertical">
             <TextBlock Text="Staging Area" Margin="4" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Current Threat" Margin="4" Foreground="Gray"/>
+                <TextBlock Text="{Binding CurrentThreat}" Margin="4"/>
+            </StackPanel>
             <ListBox x:Name="cardsInPlayContainer" ItemsSource="{Binding CardsInPlay}">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>

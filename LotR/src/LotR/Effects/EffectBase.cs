@@ -26,8 +26,8 @@ namespace LotR.Effects
             this.source = source;
         }
 
-        protected readonly string type;
-        protected readonly string text;
+        protected string type;
+        protected string text;
         protected readonly ISource source;
 
         protected bool IsPlayAlliesAndAttachmentsStep(IGame game)
