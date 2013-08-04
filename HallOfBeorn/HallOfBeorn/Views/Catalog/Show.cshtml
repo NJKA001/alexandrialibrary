@@ -1,0 +1,68 @@
+﻿@using HallOfBeorn.Models
+@model Card
+
+@{
+    ViewBag.Title = "Card Detail";
+}
+
+<h2>@Model.Title</h2>
+<img src="@Url.Content(string.Format("~/Images/Cards/{0}.png", @Model.Id))" style="float:left;margin-right:10px;"/>
+@if (@Model.CardType == CardType.Hero)
+{
+<table>
+    <tr>
+        <td>Threat Cost</td>
+        <td>@Model.ThreatCost</td>
+    </tr>
+    <tr>
+        <td>Hit Points</td>
+        <td>@Model.HitPoints</td>
+    </tr>
+    <tr>
+        <td>Traits</td>
+        <td>@Model.TraitList</td>
+    </tr>
+    <tr>
+        <td>Text</td>
+        <td>@Model.GameText</td>
+    </tr>
+</table>
+}
+@if (@Model.CardType == CardType.Quest)
+{
+<table>
+    <tr>
+        <td>Scenario</td>
+        <td>@Model.ScenarioTitle</td>
+    </tr>
+    <tr>
+        <td>Stage Number</td>
+        <td>@Model.StageNumber</td>
+    </tr>
+    <tr>
+        <td>Quest Points</td>
+        <td>@Model.QuestPoints</td>
+    </tr>
+    <tr>
+        <td>Text</td>
+        <td>@Model.GameText</td>
+    </tr>
+</table>
+}
+@if (@Model.CardType == CardType.Location)
+{
+<table>
+    <tr>
+        <td>Traits</td>
+        <td>@Model.TraitList</td>
+    </tr>
+    <tr>
+        <td>Quest Points</td>
+        <td>@Model.QuestPoints</td>
+    </tr>
+    <tr>
+        <td>Text</td>
+        <td>@Model.GameText</td>
+    </tr>
+</table>
+}

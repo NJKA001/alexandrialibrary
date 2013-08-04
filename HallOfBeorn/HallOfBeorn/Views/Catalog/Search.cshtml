@@ -1,0 +1,37 @@
+﻿@using HallOfBeorn.Models
+@model List<Card>
+
+@{
+    ViewBag.Title = "Catalog";
+}
+
+<h2>Catalog</h2>
+
+<form method="post" action="">
+    <fieldset>
+        <input type="text" name="Text" maxlength="100" />
+        <input type="submit" value="Search" />
+    </fieldset>
+</form>
+
+@foreach (var card in @Model)
+{
+    <div style="width:800px;height:165px;clear:both;">
+
+        <div style="float:left;margin-right:10px;overflow:hidden;height:164px;width:119px;">
+            <img src="@Url.Content(string.Format("~/Images/Cards/{0}.png", @card.Id))" style="height:160px;width:115px;"/>
+        </div>
+    
+        <div style="float:left;margin-right:10px;overflow:hidden;height:170px;width:600px;">
+            <section>
+            <header>
+                <h3><a href="@Url.Content(string.Format("~/Catalog/Show/{0}", @card.Id))">@card.Title</a></h3>
+            </header>
+            <p>
+                @card.GameText
+            </p>
+            </section>
+        </div>
+
+    </div>
+}
