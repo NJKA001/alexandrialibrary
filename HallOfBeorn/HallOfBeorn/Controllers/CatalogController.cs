@@ -17,31 +17,66 @@ namespace HallOfBeorn.Controllers
 
         private readonly CardRepository repository = new CardRepository();
 
-        //public ActionResult Index()
+        private SearchResult GetResult(string query= null, string cardType = null)
+        {
+            var cards = !string.IsNullOrEmpty(query) ?
+                repository.Cards.Where(x => x.Title.ToLower().Contains(query.ToLower())).ToList()
+                : repository.Cards;
+
+            CardType cardTypeFilter = CardType.None;
+
+            if (cardType != null)
+            {
+                Enum.TryParse(cardType, out cardTypeFilter);
+
+                if (cardTypeFilter != CardType.None)
+                {
+                    cards = cards.Where(x => x.CardType == cardTypeFilter).ToList();
+                }
+            }
+
+            var model = new SearchResult()
+            {
+                Query = query,
+                CardType = cardTypeFilter,
+                Cards = cards
+            };
+
+            return model;
+        }
+
+        //public ActionResult Search()
         //{
-        //    return View(cards);
+        //    var model = GetResult();
+
+        //    return View(model);
         //}
 
-        public ActionResult Search()
+        public ActionResult Search(string query, string cardType)
         {
-            return View(repository.Cards);
+            var model = GetResult(query, cardType);
+
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult Search(SearchRequest request)
+        [ActionName("Search")]
+        public ActionResult Search_Post(string query, string cardType)
         {
-            var text = request.Text;
-
-            var results = !string.IsNullOrEmpty(text) ?
-                repository.Cards.Where(x => x.Title.ToLower().Contains(text.ToLower())).ToList()
-                : repository.Cards;
-
-            return View(results);
+            return RedirectToAction("Search", "Catalog", new { Query = query, CardType = cardType });
         }
 
         public ActionResult Show(string id)
         {
-            var card = repository.GetCard(id);
+            Card card = null;
+            
+            try
+            {
+                card = repository.GetCard(id);
+            }
+            catch (Exception)
+            {
+            }
 
             if (card == null)
                 return new HttpNotFoundResult();

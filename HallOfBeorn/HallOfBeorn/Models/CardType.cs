@@ -7,13 +7,18 @@ namespace HallOfBeorn.Models
 {
     public enum CardType
     {
-        Quest = 0,
-        Enemy = 1,
-        Location = 2,
-        Treachery = 3,
-        Hero = 4,
-        Ally = 5,
-        Attachment = 6,
-        Event = 7
+        None = 0,
+        Quest = 1,
+        Enemy = 2,
+        Location = 3,
+        Treachery = 4,
+        Objective = 5,
+        Hero = 6,
+        Ally = 7,
+        Attachment = 8,
+        Event = 9,
+        Treasure = 10,
+        Boon = 11,
+        Burden = 12
     }
 }

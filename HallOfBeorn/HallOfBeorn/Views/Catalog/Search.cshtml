@@ -1,5 +1,5 @@
 ﻿@using HallOfBeorn.Models
-@model List<Card>
+@model SearchResult
 
 @{
     ViewBag.Title = "Catalog";
@@ -7,14 +7,31 @@
 
 <h2>Catalog</h2>
 
-<form method="post" action="">
-    <fieldset>
-        <input type="text" name="Text" maxlength="100" />
+@using (Html.BeginForm("Search", "Catalog", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.TextBoxFor(x => x.Query)
         <input type="submit" value="Search" />
-    </fieldset>
-</form>
 
-@foreach (var card in @Model)
+        @*
+        <div>
+        @Html.CheckBoxFor(x => x.IsAdvancedSearch, new { style = "display: inline;" })
+        @Html.LabelFor(x => x.IsAdvancedSearch, new { style = "display: inline;" })
+        </div>
+        *@
+
+        <div>
+            <label>Advanced Search</label>
+            <br />
+            @Html.LabelFor(x => x.CardType, new { style="display:inline;"})
+            @Html.DropDownListFor(x => x.CardType, SearchResult.CardTypes)
+        </div>
+        <br />
+        <br />
+    </div>
+}
+
+@foreach (var card in @Model.Cards)
 {
     <div style="width:800px;height:165px;clear:both;">
 
@@ -28,7 +45,18 @@
                 <h3><a href="@Url.Content(string.Format("~/Catalog/Show/{0}", @card.Id))">@card.Title</a></h3>
             </header>
             <p>
-                @card.GameText
+                @foreach (var effect in @card.GameText)
+                {
+                    if (!string.IsNullOrEmpty(@effect.Prefix))
+                    {
+                        <strong>@effect.Prefix</strong>
+                    }
+                    
+                    @effect.Text
+
+                    <br />
+                    <br />
+                }
             </p>
             </section>
         </div>

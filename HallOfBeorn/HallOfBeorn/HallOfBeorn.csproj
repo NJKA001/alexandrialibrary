@@ -185,6 +185,7 @@
     <Compile Include="Controllers\CardRepository.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CatalogController.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -192,9 +193,12 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\CardDeckType.cs" />
+    <Compile Include="Models\CardEffect.cs" />
+    <Compile Include="Models\CardEffectType.cs" />
     <Compile Include="Models\CardSet.cs" />
     <Compile Include="Models\CardType.cs" />
     <Compile Include="Models\SearchRequest.cs" />
+    <Compile Include="Models\SearchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

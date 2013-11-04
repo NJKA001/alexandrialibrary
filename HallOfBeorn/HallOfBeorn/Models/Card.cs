@@ -7,6 +7,12 @@ namespace HallOfBeorn.Models
 {
     public class Card
     {
+        public Card()
+        {
+            Traits = new List<string>();
+            GameText = new List<CardEffect>();
+        }
+
         public string Id { get; set; }
         public string Title { get; set; }
         public CardSet CardSet { get; set; }
@@ -18,13 +24,16 @@ namespace HallOfBeorn.Models
         public string ScenarioTitle { get; set; }
         public byte StageNumber { get; set; }
         public byte ThreatCost { get; set; }
+        public byte Willpower { get; set; }
+        public byte Attack { get; set; }
+        public byte Defense { get; set; }
         public byte ResourceCost { get; set; }
         public byte HitPoints { get; set; }
         public byte QuestPoints { get; set; }
         public byte OriginalQuantity { get; set; }
 
         public List<string> Traits { get; set; }
-        public string GameText { get; set; }
+        public List<CardEffect> GameText { get; set; }
         public string FlavorText { get; set; }
         public string Artist { get; set; }
 
