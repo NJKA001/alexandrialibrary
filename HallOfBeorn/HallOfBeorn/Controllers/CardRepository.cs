@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 
 using HallOfBeorn.Models;
+using HallOfBeorn.Models.Sets;
 
 namespace HallOfBeorn.Controllers
 {
@@ -14,11 +15,57 @@ namespace HallOfBeorn.Controllers
             InitializeCards();
         }
 
+        private readonly List<CardSet> sets = new List<CardSet>();
         private readonly Dictionary<string, Card> cards = new Dictionary<string, Card>();
 
         private void InitializeCards()
         {
+            sets.Add(new AJourneytoRhosgobel());
+            sets.Add(new AssaultonOsgiliath());
+            sets.Add(new BoarandRaven());
+            sets.Add(new CelebrimborsForge());
+            sets.Add(new ConflictattheCarrock());
+            sets.Add(new CoreSet());
+            sets.Add(new CoreSetNightmare());
+            sets.Add(new EncounteratAmonDin());
+            sets.Add(new FoundationsofStone());
+            sets.Add(new HeirsofNumenor());
+            sets.Add(new IsengardCyclePlayerCards());
+            sets.Add(new Khazaddum());
+            sets.Add(new Ninineliph());
+            sets.Add(new ReturntoMirkwood());
+            sets.Add(new RoadtoRivendell());
+            sets.Add(new ShadowandFlame());
+            sets.Add(new TheBattleofLakeTown());
+            sets.Add(new TheBlackRiders());
+            sets.Add(new TheBloodofGondor());
+            sets.Add(new TheDeadMarshes());
+            sets.Add(new TheDruadanForest());
+            sets.Add(new TheDunlandTrap());
+            sets.Add(new TheHillsofEmynMuil());
+            sets.Add(new TheHobbitOntheDoorstep());
+            sets.Add(new TheHobbitOverHillandUnderHill());
+            sets.Add(new TheHuntforGollum());
+            sets.Add(new TheLongDark());
+            sets.Add(new TheMassingatOsgiliath());
+            sets.Add(new TheRedhornGate());
+            sets.Add(new TheRoadDarkens());
+            sets.Add(new TheStewardsFear());
+            sets.Add(new TheStoneofErech());
+            sets.Add(new TheThreeTrials());
+            sets.Add(new TheWatcherintheWater());
+            sets.Add(new TroubleinTharbad());
+
+            foreach (var set in sets)
+            {
+                foreach (var card in set.Cards)
+                    cards.Add(card.Id, card);
+            }
+
+            /*
             var coreSet = new CardSet() { Name = "Core" };
+
+
             var aragorn = new Card() { Id = "c1", ThreatCost = 12, Willpower = 2, Attack = 3, Defense = 2, HitPoints = 5, CardSet = coreSet, DeckType = CardDeckType.Player, CardType = CardType.Hero, Number = 1, FlavorText = "'I am Aragorn son of Arathorn, and if by life or death I can save you, I will.' -The Fellowship of the Ring", Title = "Aragorn", Traits = new List<string> { "Dunedain", "Noble", "Ranger" }, Artist = "John Stanko" };
             aragorn.GameText.Add(new CardEffect() { EffectType = CardEffectType.Keyword, Text = "Sentinel" });
             aragorn.GameText.Add(new CardEffect() { EffectType = CardEffectType.Response, Text = "After Aragorn commits to a quest, spend 1 resource from his resource pool to ready him." });
@@ -32,7 +79,7 @@ namespace HallOfBeorn.Controllers
             var forestGate = new Card() { Id = "c100", QuestPoints = 4, CardSet = coreSet, DeckType = CardDeckType.Encounter, CardType = Models.CardType.Location, Number = 100, Title = "Forest Gate", Traits = new List<string> { "Forest" } };
             forestGate.GameText.Add(new CardEffect() { EffectType = CardEffectType.Response, Text = "After you travel to Forest Gate, the first player may draw 2 cards." });
 
-            var fliesAndSpiders = new Card() { Id = "c119", ScenarioTitle = "Passage Through Mirkwood", StageNumber = 1, QuestPoints = 8, CardSet = coreSet, DeckType = CardDeckType.Quest, CardType = Models.CardType.Quest, Number = 119, Title = "Flies and Spiders" };
+            var fliesAndSpiders = new Card() { Id = "c119", EncounterSet = "Passage Through Mirkwood", StageNumber = 1, QuestPoints = 8, CardSet = coreSet, DeckType = CardDeckType.Quest, CardType = Models.CardType.Quest, Number = 119, Title = "Flies and Spiders" };
             fliesAndSpiders.GameText.Add(new CardEffect() { EffectType = CardEffectType.Setup, Text = "Search the encounter deck for 1 copy of the Forest Spider and 1 copy of the Old Forest Road, and add them to the staging area. Then, shuffle the encounter deck." });
 
             AddCard(aragorn);
@@ -40,6 +87,7 @@ namespace HallOfBeorn.Controllers
             AddCard(gloin);
             AddCard(forestGate);
             AddCard(fliesAndSpiders);
+            */
         }
 
         private void AddCard(Card card)

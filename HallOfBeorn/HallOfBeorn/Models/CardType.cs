@@ -18,7 +18,9 @@ namespace HallOfBeorn.Models
         Attachment = 8,
         Event = 9,
         Treasure = 10,
-        Boon = 11,
-        Burden = 12
+        Nightmare = 11,
+        Campaign = 12,
+        Boon = 13,
+        Burden = 14
     }
 }

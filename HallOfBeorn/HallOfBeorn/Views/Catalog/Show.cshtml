@@ -39,18 +39,13 @@
     </tr>
 </table>
 <p>
-    @foreach (var effect in @Model.GameText)
+    @foreach (var keyword in @Model.Keywords)
     {
-        if (!string.IsNullOrEmpty(@effect.Prefix))
-        {
-            <strong>@effect.Prefix</strong>
-        }
-                    
-        @effect.Text
-
-        <br />
+        @keyword
         <br />
     }
+    <br />
+    @Model.Text
 </p>
 }
 @if (@Model.CardType == CardType.Quest)
@@ -58,35 +53,22 @@
 <table>
     <tr>
         <td>Scenario</td>
-        <td>@Model.ScenarioTitle</td>
-    </tr>
-    <tr>
-        <td>Stage Number</td>
-        <td>@Model.StageNumber</td>
+        <td>@Model.EncounterSet</td>
     </tr>
     <tr>
         <td>Quest Points</td>
         <td>@Model.QuestPoints</td>
     </tr>
-    <tr>
-        <td>Text</td>
-        <td>
-                @foreach (var effect in @Model.GameText)
-                {
-                    if (!string.IsNullOrEmpty(@effect.Prefix))
-                    {
-                        <strong>@effect.Prefix</strong>
-                    }
-                    
-                    @effect.Text
-
-                    <br />
-                    <br />
-                }
-
-        </td>
-    </tr>
 </table>
+<p>
+    @foreach (var keyword in @Model.Keywords)
+    {
+        @keyword
+        <br />
+    }
+    <br />
+    @Model.Text
+</p>
 }
 @if (@Model.CardType == CardType.Location)
 {
@@ -99,23 +81,14 @@
         <td>Quest Points</td>
         <td>@Model.QuestPoints</td>
     </tr>
-    <tr>
-        <td>Text</td>
-        <td>
-                @foreach (var effect in @Model.GameText)
-                {
-                    if (!string.IsNullOrEmpty(@effect.Prefix))
-                    {
-                        <strong>@effect.Prefix</strong>
-                    }
-                    
-                    @effect.Text
-
-                    <br />
-                    <br />
-                }
-
-        </td>
-    </tr>
 </table>
+<p>
+    @foreach (var keyword in @Model.Keywords)
+    {
+        @keyword
+        <br />
+    }
+    <br />
+    @Model.Text
+</p>
 }

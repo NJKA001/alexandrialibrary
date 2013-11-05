@@ -45,18 +45,13 @@
                 <h3><a href="@Url.Content(string.Format("~/Catalog/Show/{0}", @card.Id))">@card.Title</a></h3>
             </header>
             <p>
-                @foreach (var effect in @card.GameText)
+                @foreach (var keyword in card.Keywords)
                 {
-                    if (!string.IsNullOrEmpty(@effect.Prefix))
-                    {
-                        <strong>@effect.Prefix</strong>
-                    }
-                    
-                    @effect.Text
-
-                    <br />
+                    @keyword
                     <br />
                 }
+                <br />
+                @card.Text
             </p>
             </section>
         </div>
