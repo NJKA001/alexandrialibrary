@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "The Dunland Trap";
+
             Cards.Add(new Card() {
                 Title = "The Road to Tharbad - 1A",
                 Id = "9472b675-605e-446e-a432-1146eec91001",

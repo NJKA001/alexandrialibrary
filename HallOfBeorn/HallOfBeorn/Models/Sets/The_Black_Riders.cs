@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "The Black Riders";
+
             Cards.Add(new Card() {
                 Title = "Sam Gamgee",
                 Id = "4124136c-8c86-4f86-830c-94c8c76df161",

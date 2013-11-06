@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "Conflict at the Carrock";
+
             Cards.Add(new Card() {
                 Title = "Frodo Baggins",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9001",

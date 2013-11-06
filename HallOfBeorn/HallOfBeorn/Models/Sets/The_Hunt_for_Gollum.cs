@@ -9,7 +9,10 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "The Hunt for Gollum";
+
             Cards.Add(new Card() {
+                ImageName = "M1148",
                 Title = "Bilbo Baggins",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9001",
                 CardType = CardType.Hero,
@@ -26,6 +29,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 1
             });
             Cards.Add(new Card() {
+                ImageName = "M1149",
                 Title = "Dunedain Mark",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9002",
                 CardType = CardType.Attachment,
@@ -38,6 +42,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 2
             });
             Cards.Add(new Card() {
+                ImageName = "M1150",
                 Title = "Campfire Tales",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9003",
                 CardType = CardType.Event,
@@ -48,6 +53,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 3
             });
             Cards.Add(new Card() {
+                ImageName = "M1154",
                 Title = "Mustering the Rohirrim",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9004",
                 CardType = CardType.Event,
@@ -58,6 +64,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 4
             });
             Cards.Add(new Card() {
+                ImageName = "M1155",
                 Title = "Rivendell Minstrel",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9005",
                 CardType = CardType.Ally,
@@ -73,6 +80,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 5
             });
             Cards.Add(new Card() {
+                ImageName = "M1157",
                 Title = "Song of Kings",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9006",
                 CardType = CardType.Attachment,
@@ -85,6 +93,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 6
             });
             Cards.Add(new Card() {
+                ImageName = "M1156",
                 Title = "Strider's Path",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9007",
                 CardType = CardType.Event,
@@ -95,6 +104,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 7
             });
             Cards.Add(new Card() {
+                ImageName = "M1152",
                 Title = "The Eagles Are Coming!",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9008",
                 CardType = CardType.Event,
@@ -106,6 +116,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 8
             });
             Cards.Add(new Card() {
+                ImageName = "M1153",
                 Title = "Westfold Horse-Breaker",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9009",
                 CardType = CardType.Ally,
@@ -121,6 +132,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 9
             });
             Cards.Add(new Card() {
+                ImageName = "M1151",
                 Title = "Winged Guardian",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9010",
                 CardType = CardType.Ally,
@@ -137,6 +149,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 10
             });
             Cards.Add(new Card() {
+                ImageName = "M1169",
                 Title = "False Lead",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9011",
                 CardType = CardType.Treachery,
@@ -146,6 +159,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 11
             });
             Cards.Add(new Card() {
+                ImageName = "M1170",
                 Title = "Flooding",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9012",
                 CardType = CardType.Treachery,
@@ -158,6 +172,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 12
             });
             Cards.Add(new Card() {
+                ImageName = "M1167",
                 Title = "Goblintown Scavengers",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9013",
                 CardType = CardType.Enemy,
@@ -173,6 +188,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 13
             });
             Cards.Add(new Card() {
+                ImageName = "M1168",
                 Title = "Hunters from Mordor",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9014",
                 CardType = CardType.Enemy,
@@ -189,6 +205,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 14
             });
             Cards.Add(new Card() {
+                ImageName = "M1171",
                 Title = "Old Wives' Tales",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9015",
                 CardType = CardType.Treachery,
@@ -199,6 +216,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 15
             });
             Cards.Add(new Card() {
+                ImageName = "M1164",
                 Title = "River Ninglor",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9016",
                 CardType = CardType.Location,
@@ -212,6 +230,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 16
             });
             Cards.Add(new Card() {
+                ImageName = "M1161",
                 Title = "Signs of Gollum",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9017",
                 CardType = CardType.Objective,
@@ -223,6 +242,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 17
             });
             Cards.Add(new Card() {
+                ImageName = "M1165",
                 Title = "The East Bank",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9018",
                 CardType = CardType.Location,
@@ -236,6 +256,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 18
             });
             Cards.Add(new Card() {
+                ImageName = "M1163",
                 Title = "The Eaves of Mirkwood",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9019",
                 CardType = CardType.Location,
@@ -248,6 +269,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 19
             });
             Cards.Add(new Card() {
+                ImageName = "M1162",
                 Title = "The Old Ford",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9020",
                 CardType = CardType.Location,
@@ -262,6 +284,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 20
             });
             Cards.Add(new Card() {
+                ImageName = "M1166",
                 Title = "The West Bank",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9021",
                 CardType = CardType.Location,
@@ -275,6 +298,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 21
             });
             Cards.Add(new Card() {
+                ImageName = "M1158",
                 Title = "The Hunt Begins - 1A",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9022",
                 CardType = CardType.Quest,
@@ -284,6 +308,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 22
             });
             Cards.Add(new Card() {
+                ImageName = "M1159",
                 Title = "A New Terror Abroad - 2A",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9024",
                 CardType = CardType.Quest,
@@ -292,6 +317,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 23
             });
             Cards.Add(new Card() {
+                ImageName = "M1160",
                 Title = "On the Trail - 3A",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9026",
                 CardType = CardType.Quest,

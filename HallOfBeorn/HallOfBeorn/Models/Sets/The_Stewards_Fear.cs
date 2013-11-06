@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "The Steward's Fear";
+
             Cards.Add(new Card() {
                 Title = "Hirluin the Fair",
                 Id = "85699571-9cc3-4ccc-98b0-0e1664893ef5",

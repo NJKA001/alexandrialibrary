@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "Celebrimbor's Forge";
+
             Cards.Add(new Card() {
                 Title = "The Ruins of Ost-in-edhil - 1A",
                 Id = "9472b675-605e-446e-a432-1146eec95001",

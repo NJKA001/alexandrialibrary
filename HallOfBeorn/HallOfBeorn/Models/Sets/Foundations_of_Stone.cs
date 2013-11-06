@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "Foundations of Stone";
+
             Cards.Add(new Card() {
                 Title = "Asfaloth",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9001",

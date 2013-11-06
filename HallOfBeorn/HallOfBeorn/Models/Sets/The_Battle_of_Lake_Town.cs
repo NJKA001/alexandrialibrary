@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "The Battle of Lake-town";
+
             Cards.Add(new Card() {
                 Title = "Catching Fire",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9001",

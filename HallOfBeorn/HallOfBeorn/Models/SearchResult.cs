@@ -20,6 +20,9 @@ namespace HallOfBeorn.Models
         [Display(Name="Card Type")]
         public CardType CardType { get; set; }
 
+        [Display(Name = "Card Set")]
+        public string CardSet { get; set; }
+
         [Display(Name="Results")]
         public List<Card> Cards { get; set; }
 
@@ -27,5 +30,7 @@ namespace HallOfBeorn.Models
         {
             get { return typeof(CardType).GetSelectListItems(); }
         }
+
+        public static List<SelectListItem> CardSets { get; set; }
     }
 }

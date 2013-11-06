@@ -25,6 +25,9 @@
             <br />
             @Html.LabelFor(x => x.CardType, new { style="display:inline;"})
             @Html.DropDownListFor(x => x.CardType, SearchResult.CardTypes)
+
+            @Html.LabelFor(x => x.CardSet, new { style="display:inline;"})
+            @Html.DropDownListFor(x => x.CardSet, SearchResult.CardSets)
         </div>
         <br />
         <br />
@@ -36,7 +39,7 @@
     <div style="width:800px;height:165px;clear:both;">
 
         <div style="float:left;margin-right:10px;overflow:hidden;height:164px;width:119px;">
-            <img src="@Url.Content(string.Format("~/Images/Cards/{0}.png", @card.Id))" style="height:160px;width:115px;"/>
+            <img src="@Url.Content(string.Format("~/Images/Cards/{0}.png", @card.ImageName))" style="height:160px;width:115px;"/>
         </div>
     
         <div style="float:left;margin-right:10px;overflow:hidden;height:170px;width:600px;">

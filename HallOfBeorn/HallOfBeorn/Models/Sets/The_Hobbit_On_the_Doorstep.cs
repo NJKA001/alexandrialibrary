@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "The Hobbit: On the Doorstep";
+
             Cards.Add(new Card() {
                 Title = "Balin",
                 Id = "bf2cb5a8-2ec6-4366-89f6-7e3010686a85",

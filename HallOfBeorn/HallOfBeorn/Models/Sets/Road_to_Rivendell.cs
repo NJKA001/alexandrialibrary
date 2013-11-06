@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "Road to Rivendell";
+
             Cards.Add(new Card() {
                 Title = "Along the Misty Mountains - 1A",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9001",

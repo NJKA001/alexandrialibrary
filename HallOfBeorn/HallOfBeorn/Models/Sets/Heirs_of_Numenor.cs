@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "Heirs of Númenor";
+
             Cards.Add(new Card() {
                 Title = "Alcaron's Scroll",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9001",

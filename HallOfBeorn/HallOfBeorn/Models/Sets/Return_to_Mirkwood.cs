@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "Return to Mirkwood";
+
             Cards.Add(new Card() {
                 Title = "Ambush - 4A",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9001",

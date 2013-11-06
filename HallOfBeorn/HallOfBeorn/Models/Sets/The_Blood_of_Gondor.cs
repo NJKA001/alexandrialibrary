@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "The Blood of Gondor";
+
             Cards.Add(new Card() {
                 Title = "Caldara",
                 Id = "60725069-031c-4251-9b2c-3f368545e9ac",

@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "The Redhorn Gate";
+
             Cards.Add(new Card() {
                 Title = "Arwen Undomiel",
                 Id = "231bf335-bf9b-44d9-a919-e59aa1d46473",

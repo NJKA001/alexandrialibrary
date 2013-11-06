@@ -9,7 +9,10 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "The Watcher in the Water";
+
             Cards.Add(new Card() {
+                ImageName = "M1414",
                 Title = "Aragorn",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9001",
                 CardType = CardType.Hero,

@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "The Drúadan Fores";
+
             Cards.Add(new Card() {
                 Title = "Mirlonde",
                 Id = "536c80ba-ad8b-447e-b378-1684508eb0f9",

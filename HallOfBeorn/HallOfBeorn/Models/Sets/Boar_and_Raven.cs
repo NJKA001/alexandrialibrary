@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "Board and Raven";
+
             Cards.Add(new Card() {
                 Title = "The Raven Tribe - 1A",
                 Id = "9472b675-605e-446e-a432-1146eec96001",

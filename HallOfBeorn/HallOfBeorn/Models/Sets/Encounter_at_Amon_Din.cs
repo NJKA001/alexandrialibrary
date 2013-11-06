@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "Encounter at Amon Dîn";
+
             Cards.Add(new Card() {
                 Title = "Pippin",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90021",

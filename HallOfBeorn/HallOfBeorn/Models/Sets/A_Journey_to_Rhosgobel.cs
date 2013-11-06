@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "A Journey To Rhosgobel";
+
             Cards.Add(new Card() {
                 Title = "Prince Imrahil",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9001",

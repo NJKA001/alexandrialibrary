@@ -6,7 +6,7 @@
 }
 
 <h2>@Model.Title</h2>
-<img src="@Url.Content(string.Format("~/Images/Cards/{0}.png", @Model.Id))" style="float:left;margin-right:10px;"/>
+<img src="@Url.Content(string.Format("~/Images/Cards/{0}.png", @Model.ImageName))" style="float:left;margin-right:10px;"/>
 @if (@Model.CardType == CardType.Hero)
 {
 <table>

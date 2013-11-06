@@ -12,14 +12,19 @@ namespace HallOfBeorn.Models
             Cards = new List<Card>();
 
             Initialize();
+
+            foreach (var card in Cards)
+            {
+                card.CardSet = this;
+            }
         }
 
         protected virtual void Initialize()
         {
         }
 
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public List<Card> Cards { get; set; }
+        public string Id { get; protected set; }
+        public string Name { get; protected set; }
+        public List<Card> Cards { get; protected set; }
     }
 }

@@ -15,7 +15,10 @@ namespace HallOfBeorn.Models
 
         public string Id { get; set; }
         public string Title { get; set; }
+        public string NormalizedTitle { get; set; }
         public uint Number { get; set; }
+        public string ImageName { get; set; }
+        public CardSet CardSet { get; set; }
 
         public bool IsUnique { get; set; }
         public CardType CardType { get; set; }
@@ -49,7 +52,7 @@ namespace HallOfBeorn.Models
                 if (Traits == null || Traits.Count == 0)
                     return string.Empty;
 
-                return string.Join(" ", Traits.Select(x => string.Format("{0}.", x)));
+                return string.Join(" ", Traits); //.Select(x => string.Format("{0}.", x)));
             }
         }
     }

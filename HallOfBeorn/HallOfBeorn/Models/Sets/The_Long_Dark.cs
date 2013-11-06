@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "The Long Dark";
+
             Cards.Add(new Card() {
                 Title = "Abandoned Mine",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9001",

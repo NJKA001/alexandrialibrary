@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "Khazad-dûm";
+
             Cards.Add(new Card() {
                 Title = "A Foe Beyond",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9001",

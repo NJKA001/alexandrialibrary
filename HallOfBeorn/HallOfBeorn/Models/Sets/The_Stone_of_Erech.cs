@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "The Stone of Erech";
+
             Cards.Add(new Card() {
                 Title = "Banks of Morthond",
                 Id = "14f7c98c-b425-4fac-850a-729d8fcdaa0c",

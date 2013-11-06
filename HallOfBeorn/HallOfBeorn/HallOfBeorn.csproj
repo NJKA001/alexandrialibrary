@@ -207,7 +207,7 @@
     <Compile Include="Models\Sets\Celebrimbors_Forge.cs" />
     <Compile Include="Models\Sets\Conflict_at_the_Carrock.cs" />
     <Compile Include="Models\Sets\Core_Set.cs" />
-    <Compile Include="Models\Sets\Core_Set__Nightmare.cs" />
+    <Compile Include="Models\Sets\Core_Set_Nightmare.cs" />
     <Compile Include="Models\Sets\Encounter_at_Amon_Din.cs" />
     <Compile Include="Models\Sets\Foundations_of_Stone.cs" />
     <Compile Include="Models\Sets\Heirs_of_Numenor.cs" />

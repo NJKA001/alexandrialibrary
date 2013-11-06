@@ -20,42 +20,53 @@ namespace HallOfBeorn.Controllers
 
         private void InitializeCards()
         {
-            sets.Add(new AJourneytoRhosgobel());
-            sets.Add(new AssaultonOsgiliath());
-            sets.Add(new BoarandRaven());
-            sets.Add(new CelebrimborsForge());
-            sets.Add(new ConflictattheCarrock());
             sets.Add(new CoreSet());
             sets.Add(new CoreSetNightmare());
-            sets.Add(new EncounteratAmonDin());
-            sets.Add(new FoundationsofStone());
-            sets.Add(new HeirsofNumenor());
-            sets.Add(new IsengardCyclePlayerCards());
-            sets.Add(new Khazaddum());
-            sets.Add(new Ninineliph());
-            sets.Add(new ReturntoMirkwood());
-            sets.Add(new RoadtoRivendell());
-            sets.Add(new ShadowandFlame());
-            sets.Add(new TheBattleofLakeTown());
-            sets.Add(new TheBlackRiders());
-            sets.Add(new TheBloodofGondor());
-            sets.Add(new TheDeadMarshes());
-            sets.Add(new TheDruadanForest());
-            sets.Add(new TheDunlandTrap());
-            sets.Add(new TheHillsofEmynMuil());
-            sets.Add(new TheHobbitOntheDoorstep());
-            sets.Add(new TheHobbitOverHillandUnderHill());
+            
             sets.Add(new TheHuntforGollum());
-            sets.Add(new TheLongDark());
-            sets.Add(new TheMassingatOsgiliath());
-            sets.Add(new TheRedhornGate());
-            sets.Add(new TheRoadDarkens());
-            sets.Add(new TheStewardsFear());
-            sets.Add(new TheStoneofErech());
-            sets.Add(new TheThreeTrials());
-            sets.Add(new TheWatcherintheWater());
-            sets.Add(new TroubleinTharbad());
+            sets.Add(new ConflictattheCarrock());
+            sets.Add(new AJourneytoRhosgobel());
+            sets.Add(new TheHillsofEmynMuil());
+            sets.Add(new TheDeadMarshes());
+            sets.Add(new ReturntoMirkwood());
 
+            sets.Add(new Khazaddum());
+
+            sets.Add(new TheRedhornGate());
+            sets.Add(new RoadtoRivendell());
+            sets.Add(new TheWatcherintheWater());
+            sets.Add(new TheLongDark());
+            sets.Add(new FoundationsofStone());
+            sets.Add(new ShadowandFlame());
+
+            sets.Add(new TheHobbitOverHillandUnderHill());
+            sets.Add(new TheHobbitOntheDoorstep());
+
+            sets.Add(new TheMassingatOsgiliath());
+            sets.Add(new TheBattleofLakeTown());
+
+            sets.Add(new HeirsofNumenor());
+
+            sets.Add(new TheStewardsFear());
+            sets.Add(new TheDruadanForest());
+            sets.Add(new EncounteratAmonDin());
+            sets.Add(new AssaultonOsgiliath());
+            sets.Add(new TheBloodofGondor());
+
+            sets.Add(new TheStoneofErech());
+
+            sets.Add(new TheBlackRiders());
+            
+            //sets.Add(new IsengardCyclePlayerCards());
+            //sets.Add(new Ninineliph());
+            //sets.Add(new TheDunlandTrap());
+            //sets.Add(new TheThreeTrials());
+            //sets.Add(new TroubleinTharbad());
+            //sets.Add(new BoarandRaven());
+            //sets.Add(new CelebrimborsForge());
+
+            //sets.Add(new TheRoadDarkens());
+            
             foreach (var set in sets)
             {
                 foreach (var card in set.Cards)
@@ -98,6 +109,11 @@ namespace HallOfBeorn.Controllers
         public List<Card> Cards
         {
             get { return cards.Values.ToList(); }
+        }
+
+        public IEnumerable<CardSet> Sets
+        {
+            get { return sets; }
         }
 
         public Card GetCard(string id)

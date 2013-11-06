@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "The Hills of Emyn Muil";
+
             Cards.Add(new Card() {
                 Title = "Amon Hen",
                 Id = "51223bd0-ffd1-11df-a976-0801204c9001",

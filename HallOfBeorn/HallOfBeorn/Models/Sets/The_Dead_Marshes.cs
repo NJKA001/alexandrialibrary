@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "The Dead Marshes";
+
             Cards.Add(new Card() {
                 Title = "A Wisp of Pale Sheen",
                 Id = "51223bd0-ffd1-11df-a976-0801205c9001",

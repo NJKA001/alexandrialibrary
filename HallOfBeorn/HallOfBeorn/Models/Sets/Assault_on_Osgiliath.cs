@@ -9,6 +9,8 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "Assault on Osgiliath";
+
             Cards.Add(new Card() {
                 Title = "Faramir",
                 Id = "323ebfa3-57e5-4394-9f55-284b2f7ee0be",
