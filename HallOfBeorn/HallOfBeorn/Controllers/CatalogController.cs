@@ -25,8 +25,9 @@ namespace HallOfBeorn.Controllers
                     || (!string.IsNullOrEmpty(x.NormalizedTitle) && x.NormalizedTitle.ToLower().Contains(query.ToLower()))
                     || (!string.IsNullOrEmpty(x.Text) && x.Text.ToLower().Contains(query.ToLower()))
                     )
+                .OrderBy(x => x.ImageName)
                 .ToList()
-                : repository.Cards;
+                : repository.Cards.OrderBy(x => x.ImageName).ToList();
 
             CardType cardTypeFilter = CardType.None;
 

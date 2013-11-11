@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "Conflict at the Carrock";
 
             Cards.Add(new Card() {
+                ImageName = "M1172",
                 Title = "Frodo Baggins",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9001",
                 CardType = CardType.Hero,
@@ -28,6 +29,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 1
             });
             Cards.Add(new Card() {
+                ImageName = "M1194",
                 Title = "A Frightened Beast",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9002",
                 CardType = CardType.Treachery,
@@ -37,6 +39,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 2
             });
             Cards.Add(new Card() {
+                ImageName = "M1183",
                 Title = "Against the Trolls - 2A",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9003",
                 CardType = CardType.Quest,
@@ -45,6 +48,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 3
             });
             Cards.Add(new Card() {
+                ImageName = "M1192",
                 Title = "Bee Pastures",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9005",
                 CardType = CardType.Location,
@@ -57,6 +61,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 4
             });
             Cards.Add(new Card() {
+                ImageName = "M1175",
                 Title = "Beorning Beekeeper",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9006",
                 CardType = CardType.Ally,
@@ -72,6 +77,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 5
             });
             Cards.Add(new Card() {
+                ImageName = "M1176",
                 Title = "Born Aloft",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9007",
                 CardType = CardType.Attachment,
@@ -84,6 +90,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 6
             });
             Cards.Add(new Card() {
+                ImageName = "M1173",
                 Title = "Dunedain Warning",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9008",
                 CardType = CardType.Attachment,
@@ -96,6 +103,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 7
             });
             Cards.Add(new Card() {
+                ImageName = "M1177",
                 Title = "Eomund",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9009",
                 CardType = CardType.Ally,
@@ -112,6 +120,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 8
             });
             Cards.Add(new Card() {
+                ImageName = "M1180",
                 Title = "A Burning Brand",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9010",
                 CardType = CardType.Attachment,
@@ -124,6 +133,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 9
             });
             Cards.Add(new Card() {
+                ImageName = "M1184",
                 Title = "Grimbeorn the Old",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9011",
                 CardType = CardType.Objective,
@@ -139,6 +149,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 10
             });
             Cards.Add(new Card() {
+                ImageName = "M1182",
                 Title = "Grimbeorn's Quest - 1A",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9012",
                 CardType = CardType.Quest,
@@ -149,6 +160,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 11
             });
             Cards.Add(new Card() {
+                ImageName = "M1179",
                 Title = "Longbeard Map-Maker",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9014",
                 CardType = CardType.Ally,
@@ -164,6 +176,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 12
             });
             Cards.Add(new Card() {
+                ImageName = "M1185",
                 Title = "Louis",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9015",
                 CardType = CardType.Enemy,
@@ -180,6 +193,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 13
             });
             Cards.Add(new Card() {
+                ImageName = "M1186",
                 Title = "Morris",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9016",
                 CardType = CardType.Enemy,
@@ -196,6 +210,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 14
             });
             Cards.Add(new Card() {
+                ImageName = "M1189",
                 Title = "Muck Adder",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9017",
                 CardType = CardType.Enemy,
@@ -212,6 +227,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 15
             });
             Cards.Add(new Card() {
+                ImageName = "M1178",
                 Title = "Nor am I a Stranger",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9018",
                 CardType = CardType.Attachment,
@@ -224,6 +240,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 16
             });
             Cards.Add(new Card() {
+                ImageName = "M1193",
                 Title = "Oak-wood Grove",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9019",
                 CardType = CardType.Location,
@@ -236,6 +253,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 17
             });
             Cards.Add(new Card() {
+                ImageName = "M1191",
                 Title = "River Langflood",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9020",
                 CardType = CardType.Location,
@@ -248,6 +266,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 18
             });
             Cards.Add(new Card() {
+                ImageName = "M1196",
                 Title = "Roasted Slowly",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9021",
                 CardType = CardType.Treachery,
@@ -258,6 +277,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 19
             });
             Cards.Add(new Card() {
+                ImageName = "M1188",
                 Title = "Rupert",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9022",
                 CardType = CardType.Enemy,
@@ -274,6 +294,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 20
             });
             Cards.Add(new Card() {
+                ImageName = "M1195",
                 Title = "Sacked!",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9023",
                 CardType = CardType.Treachery,
@@ -284,6 +305,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 21
             });
             Cards.Add(new Card() {
+                ImageName = "M1174",
                 Title = "Second Breakfast",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9024",
                 CardType = CardType.Event,
@@ -294,6 +316,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 22
             });
             Cards.Add(new Card() {
+                ImageName = "M1181",
                 Title = "Song of Wisdom",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9025",
                 CardType = CardType.Attachment,
@@ -306,6 +329,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 23
             });
             Cards.Add(new Card() {
+                ImageName = "M1187",
                 Title = "Stuart",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9026",
                 CardType = CardType.Enemy,
@@ -322,6 +346,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 24
             });
             Cards.Add(new Card() {
+                ImageName = "M1190",
                 Title = "The Carrock",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9027",
                 CardType = CardType.Location,
