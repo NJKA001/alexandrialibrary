@@ -706,71 +706,112 @@ namespace HallOfBeorn.Models.Sets
                 Number = 51
             });
             Cards.Add(new Card() {
+                ImageName = "M1355",
                 Title = "Search for an Exit - 2A",
+                StageNumber = 2,
+                OppositeTitle = "Heading Down",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9056",
                 CardType = CardType.Quest,
                 EncounterSet = "Flight from Moria",
                 Quantity = 1,
                 Text = "While Search for an Exit is the active quest card, only flip it to side 2B at the beginning of the staging step.",
-                VictoryPoints = 2,
+                OppositeText = "Forced: If Heading Up is in the player's victory display at the end of any quest phase, shuffle Heading Up back into the quest deck. Players may bypass this quest card at the end of the combat phase.",
+                FlavorText = "As the presence draws near, doubt and fear surround you like a vast shadow. You must find daylight, you must escape from the Black Pit...",
+                QuestPoints = 5,
+                VictoryPoints = 1,
                 Number = 52
             });
             Cards.Add(new Card() {
+                ImageName = "M1356",
                 Title = "Search for an Exit - 2A",
+                StageNumber = 2,
+                OppositeTitle = "Heading Up",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9058",
                 CardType = CardType.Quest,
                 EncounterSet = "Flight from Moria",
                 Quantity = 1,
                 Text = "While Search for an Exit is the active quest card, only flip it to side 2B at the beginning of the staging step.",
+                OppositeText = "Forced: If Heading Down is in the player's victory display at the end of any quest phase, shuffle Heading DOwn back into the quest deck.",
+                FlavorText = "As the presence draws near, doubt and fear surround you like a vast shadow. You must find daylight, you must escape from the Black Pit...",
+                QuestPoints = 7,
+                VictoryPoints = 1,
                 Number = 53
             });
             Cards.Add(new Card() {
+                ImageName = "M1357",
                 Title = "Search for an Exit - 2A",
+                StageNumber = 2,
+                OppositeTitle = "A Wrong Turn",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9060",
                 CardType = CardType.Quest,
                 EncounterSet = "Flight from Moria",
                 Quantity = 1,
                 Text = "While Search for an Exit is the active quest card, only flip it to side 2B at the beginning of the staging step.",
+                OppositeText = "When Revealed: Reveal 1 encounter card per players, and add it to the staging area. Players may bypass this quest at the end of the combat phase.",
+                FlavorText = "As the presence draws near, doubt and fear surround you like a vast shadow. You must find daylight, you must escape from the Black Pit...",
+                QuestPoints = 1,
+                VictoryPoints = 2,
                 Number = 54
             });
             Cards.Add(new Card() {
+                ImageName = "M1358",
                 Title = "Search for an Exit - 2A",
+                StageNumber = 2,
+                OppositeTitle = "Narrow Paths",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9062",
                 CardType = CardType.Quest,
                 EncounterSet = "Flight from Moria",
                 Quantity = 1,
                 Text = "While Search for an Exit is the active quest card, only flip it to side 2B at the beginning of the staging step.",
-                VictoryPoints = 2,
+                OppositeText = "When Revealed: Each player chooses 1 questing character he controls. Each questing character not chosen does not count its willpower until the end of the turn. Forced: After placing the 1st progress token on Narrow Paths, search the encounter deck and discard pile for Abandoned Tools and add it to the staging area, if able. Players may bypas this quest card at the end of the combat phase.",
+                FlavorText = "As the presence draws near, doubt and fear surround you like a vast shadow. You must find daylight, you must escape from the Black Pit...",
+                QuestPoints = 3,
+                VictoryPoints = 1,
                 Number = 55
             });
             Cards.Add(new Card() {
+                ImageName = "M1359",
                 Title = "Search for an Exit - 2A",
+                StageNumber = 2,
+                OppositeTitle = "Hasty Council",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9064",
                 CardType = CardType.Quest,
                 EncounterSet = "Flight from Moria",
                 Quantity = 1,
                 Text = "While Search for an Exit is the active quest card, only flip it to side 2B at the beginning of the staging step.",
-                VictoryPoints = 1,
+                OppositeText = "When Revealed: Shuffle all copies of A Foe Beyond from the encounter discard pile back into the encounter deck. Reveal the top 2 cards of the quest deck. Choose 1 to become the active quest (flipped to side 2B) and put the other on the bottom of the quest deck. Then, add Hasty Council to your victory display.",
+                FlavorText = "As the presence draws near, doubt and fear surround you like a vast shadow. You must find daylight, you must escape from the Black Pit...",
+                VictoryPoints = 2,
                 Number = 56
             });
             Cards.Add(new Card() {
+                ImageName = "M1360",
                 Title = "Search for an Exit - 2A",
+                StageNumber = 2,
+                OppositeTitle = "Blocked By Shadow",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9066",
                 CardType = CardType.Quest,
                 EncounterSet = "Flight from Moria",
                 Quantity = 1,
                 Text = "While Search for an Exit is the active quest card, only flip it to side 2B at the beginning of the staging step.",
-                VictoryPoints = 1,
+                OppositeText = "When Revealed: The first player chooses 1 of the following:• Each player discards 1 card from the top of the encounter deck. If the card is a treachery card, the discarding player is eliminated from the game.• Reveals the next quest card, putting Blocked by Shadow on the bottom of the quest deck. Players may bypass this quest card at the end of the combat phase. If the players defeat this stage, they escape and win the game.",
+                FlavorText = "As the presence draws near, doubt and fear surround you like a vast shadow. You must find daylight, you must escape from the Black Pit...",
+                QuestPoints = 9,
                 Number = 57
             });
             Cards.Add(new Card() {
+                ImageName = "M1361",
                 Title = "Search for an Exit - 2A",
+                StageNumber = 2,
+                OppositeTitle = "Escape from Darkness",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9068",
                 CardType = CardType.Quest,
                 EncounterSet = "Flight from Moria",
                 Quantity = 1,
                 Text = "While Search for an Exit is the active quest card, only flip it to side 2B at the beginning of the staging step.",
-                VictoryPoints = 1,
+                OppositeText = "Abandoned Tools gains: 'Refresh Action: Exhaust attached hero to put a progress token on Escape from Darkness.' Players may bypass this quest card at the end of the combat phase. Progress tokens cannot be placed on Escape from Darkness except by Abandoned Tools. If the players defeat this stage, they escape and win the game.",
+                FlavorText = "As the presence draws near, doubt and fear surround you like a vast shadow. You must find daylight, you must escape from the Black Pit...",
+                QuestPoints = 4,
                 Number = 58
             });
             Cards.Add(new Card() {

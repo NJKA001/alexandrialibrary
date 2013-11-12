@@ -55,6 +55,12 @@
                 }
                 <br />
                 @card.Text
+
+                @if (!string.IsNullOrEmpty(@card.OppositeText))
+                {
+                    <br />
+                    @card.OppositeText
+                }
             </p>
             </section>
         </div>

@@ -16,7 +16,11 @@ namespace HallOfBeorn.Models
         public string Id { get; set; }
         public string Title { get; set; }
         public string NormalizedTitle { get; set; }
+        public string OppositeTitle { get; set; }
+        public string NormalizedOppositeTitle { get; set; }
+
         public uint Number { get; set; }
+        public uint StageNumber { get; set; }
         public string ImageName { get; set; }
         public CardSet CardSet { get; set; }
 
@@ -36,6 +40,7 @@ namespace HallOfBeorn.Models
         public List<string> Traits { get; set; }
         public List<string> Keywords { get; set; }
         public string Text { get; set; }
+        public string OppositeText { get; set; }
         public string Shadow { get; set; }
         public string EncounterSet { get; set; }
         public byte VictoryPoints { get; set; }
