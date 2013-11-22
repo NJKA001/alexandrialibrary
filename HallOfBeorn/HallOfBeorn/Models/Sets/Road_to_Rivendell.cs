@@ -106,6 +106,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 7
             });
             Cards.Add(new Card() {
+                ImageName = "M1389",
                 Title = "Elladan",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9010",
                 CardType = CardType.Hero,
