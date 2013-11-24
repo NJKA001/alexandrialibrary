@@ -41,6 +41,7 @@ namespace HallOfBeorn.Models
         public List<string> Keywords { get; set; }
         public string Text { get; set; }
         public string OppositeText { get; set; }
+        public string OppositeFlavorText { get; set; }
         public string Shadow { get; set; }
         public string EncounterSet { get; set; }
         public byte VictoryPoints { get; set; }

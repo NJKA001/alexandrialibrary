@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "The Long Dark";
 
             Cards.Add(new Card() {
+                ImageName = "M1451",
                 Title = "Abandoned Mine",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9001",
                 CardType = CardType.Location,
@@ -25,6 +26,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 1
             });
             Cards.Add(new Card() {
+                ImageName = "M1459",
                 Title = "Cave Spider",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9002",
                 CardType = CardType.Enemy,
@@ -40,14 +42,19 @@ namespace HallOfBeorn.Models.Sets
                 Number = 2
             });
             Cards.Add(new Card() {
+                ImageName = "M1449",
                 Title = "Continuing Eastward - 2A",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9003",
                 CardType = CardType.Quest,
                 EncounterSet = "The Long Dark",
                 Quantity = 1,
+                QuestPoints = 17,
+                FlavorText = "Time carries no weight in the darkness, and the hours creep by with no end in sight. The number of Orcs in the mines increase as you head toward the East-gate, but there appears to be little real organization within their ranks. You press onward!",
+                Text = "When Revealed: The first player makes a locate test. If this test is failed, reveal cards from the encounter deck equal to the number of players in the game and add them to the staging area. Then, trigger all \"Lost:\" effects in play.\r\nIf the players quest unsuccessfully, trigger all \"Lost:\" effects in play.\r\nIf the players defeat this stage, they have won the game.",
                 Number = 3
             });
             Cards.Add(new Card() {
+                ImageName = "M1450",
                 Title = "Durin's Greaves",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9005",
                 CardType = CardType.Objective,
@@ -59,6 +66,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 4
             });
             Cards.Add(new Card() {
+                ImageName = "M1452",
                 Title = "Dwarven Forge",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9006",
                 CardType = CardType.Location,
@@ -72,6 +80,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 5
             });
             Cards.Add(new Card() {
+                ImageName = "M1441",
                 Title = "Erebor Battle Master",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9007",
                 CardType = CardType.Ally,
@@ -87,6 +96,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 6
             });
             Cards.Add(new Card() {
+                ImageName = "M1439",
                 Title = "Erestor",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9008",
                 CardType = CardType.Ally,
@@ -103,6 +113,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 7
             });
             Cards.Add(new Card() {
+                ImageName = "M1444",
                 Title = "Ever My Heart Rises",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9009",
                 CardType = CardType.Attachment,
@@ -115,6 +126,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 8
             });
             Cards.Add(new Card() {
+                ImageName = "M1455",
                 Title = "Fatigue",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9010",
                 CardType = CardType.Treachery,
@@ -125,6 +137,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 9
             });
             Cards.Add(new Card() {
+                ImageName = "M1456",
                 Title = "Foul Air",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9011",
                 CardType = CardType.Treachery,
@@ -135,6 +148,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 10
             });
             Cards.Add(new Card() {
+                ImageName = "M1440",
                 Title = "Fresh Tracks",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9012",
                 CardType = CardType.Event,
@@ -145,6 +159,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 11
             });
             Cards.Add(new Card() {
+                ImageName = "M1457",
                 Title = "Gathering Ground",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9013",
                 CardType = CardType.Treachery,
@@ -155,6 +170,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 12
             });
             Cards.Add(new Card() {
+                ImageName = "M1460",
                 Title = "Goblin Sneak",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9014",
                 CardType = CardType.Enemy,
@@ -171,6 +187,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 13
             });
             Cards.Add(new Card() {
+                ImageName = "M1461",
                 Title = "Goblin Warlord",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9015",
                 CardType = CardType.Enemy,
@@ -187,7 +204,9 @@ namespace HallOfBeorn.Models.Sets
                 Number = 14
             });
             Cards.Add(new Card() {
-                Title = "Hama",
+                ImageName = "M1438",
+                Title = "Háma",
+                NormalizedTitle = "Hama",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9016",
                 CardType = CardType.Hero,
                 Sphere = Sphere.Tactics,
@@ -203,16 +222,21 @@ namespace HallOfBeorn.Models.Sets
                 Number = 15
             });
             Cards.Add(new Card() {
+                ImageName = "M1448",
                 Title = "Journey in the Black Pit - 1A",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9017",
                 CardType = CardType.Quest,
                 EncounterSet = "The Long Dark",
                 Quantity = 1,
+                QuestPoints = 13,
                 Setup = "t",
                 Text = "Setup: The first player attaches Cave Torch to a hero of his choice.",
+                OppositeText = "When Revealed: Discard cards from the top of the encounter deck until you discard X locations, where X is one less than the number of players in the game (minimum 1). Add those locations to the staging area, and shuffle the other discarded cards back into the encounter deck.\r\nEach location gets +1 threat. If the players quest unsuccessfully, trigger all \"Lost:\" effects in play.",
+                FlavorText = "Your party is scouting the Mines of Moria, searching for signs of Orcs. Dark tunnels and twisting passages spread out in all directions, a labyrinthine maze that you could wander in forever if you take the wrong path.",
                 Number = 16
             });
             Cards.Add(new Card() {
+                ImageName = "M1447",
                 Title = "Love of Tales",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9019",
                 CardType = CardType.Attachment,
@@ -225,6 +249,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 17
             });
             Cards.Add(new Card() {
+                ImageName = "M1443",
                 Title = "Out of Sight",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9020",
                 CardType = CardType.Event,
@@ -236,6 +261,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 18
             });
             Cards.Add(new Card() {
+                ImageName = "M1442",
                 Title = "Ring Mail",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9021",
                 CardType = CardType.Attachment,
@@ -264,6 +290,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 20
             });
             Cards.Add(new Card() {
+                ImageName = "M1453",
                 Title = "Silent Caverns",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9023",
                 CardType = CardType.Location,
@@ -277,6 +304,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 21
             });
             Cards.Add(new Card() {
+                ImageName = "M1454",
                 Title = "Twisting Passage",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9024",
                 CardType = CardType.Location,
@@ -290,6 +318,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 22
             });
             Cards.Add(new Card() {
+                ImageName = "M1458",
                 Title = "Vast and Intricate",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9025",
                 CardType = CardType.Treachery,
@@ -299,6 +328,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 23
             });
             Cards.Add(new Card() {
+                ImageName = "M1445",
                 Title = "Warden of Healing",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9026",
                 CardType = CardType.Ally,
@@ -314,6 +344,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 24
             });
             Cards.Add(new Card() {
+                ImageName = "M1446",
                 Title = "Word of Command",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9027",
                 CardType = CardType.Event,

@@ -30,6 +30,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 1
             });
             Cards.Add(new Card() {
+                ImageName = "M1419",
                 Title = "Arwen Undomiel",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9002",
                 CardType = CardType.Ally,
@@ -46,6 +47,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 2
             });
             Cards.Add(new Card() {
+                ImageName = "M1432",
                 Title = "Disturbed Waters",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9003",
                 CardType = CardType.Treachery,
@@ -55,6 +57,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 3
             });
             Cards.Add(new Card() {
+                ImageName = "M1426",
                 Title = "Doors of Durin",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9004",
                 CardType = CardType.Location,
@@ -69,6 +72,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 4
             });
             Cards.Add(new Card() {
+                ImageName = "M1420",
                 Title = "Elrond's Counsel",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9005",
                 CardType = CardType.Event,
@@ -79,6 +83,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 5
             });
             Cards.Add(new Card() {
+                ImageName = "M1434",
                 Title = "Grasping Tentacle",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9006",
                 CardType = CardType.Enemy,
@@ -94,6 +99,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 6
             });
             Cards.Add(new Card() {
+                ImageName = "M1415",
                 Title = "Grave Cairn",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9007",
                 CardType = CardType.Event,
@@ -104,6 +110,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 7
             });
             Cards.Add(new Card() {
+                ImageName = "M1431",
                 Title = "Ill Purpose",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9008",
                 CardType = CardType.Treachery,
@@ -114,6 +121,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 8
             });
             Cards.Add(new Card() {
+                ImageName = "M1422",
                 Title = "Legacy of Durin",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9009",
                 CardType = CardType.Attachment,
@@ -127,6 +135,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 9
             });
             Cards.Add(new Card() {
+                ImageName = "M1429",
                 Title = "Makeshift Passage",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9010",
                 CardType = CardType.Location,
@@ -139,6 +148,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 10
             });
             Cards.Add(new Card() {
+                ImageName = "M1428",
                 Title = "Perilous Swamp",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9011",
                 CardType = CardType.Location,
@@ -152,6 +162,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 11
             });
             Cards.Add(new Card() {
+                ImageName = "M1423",
                 Title = "Resourceful",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9012",
                 CardType = CardType.Attachment,
@@ -163,6 +174,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 12
             });
             Cards.Add(new Card() {
+                ImageName = "M1418",
                 Title = "Rivendell Bow",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9013",
                 CardType = CardType.Attachment,
@@ -174,6 +186,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 13
             });
             Cards.Add(new Card() {
+                ImageName = "M1421",
                 Title = "Short Cut",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9014",
                 CardType = CardType.Event,
@@ -184,6 +197,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 14
             });
             Cards.Add(new Card() {
+                ImageName = "M1430",
                 Title = "Stagnant Creek",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9015",
                 CardType = CardType.Location,
@@ -196,6 +210,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 15
             });
             Cards.Add(new Card() {
+                ImageName = "M1427",
                 Title = "Stair Falls",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9016",
                 CardType = CardType.Location,
@@ -210,6 +225,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 16
             });
             Cards.Add(new Card() {
+                ImageName = "M1436",
                 Title = "Striking Tentacle",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9017",
                 CardType = CardType.Enemy,
@@ -225,6 +241,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 17
             });
             Cards.Add(new Card() {
+                ImageName = "M1416",
                 Title = "Sword that was Broken",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9018",
                 CardType = CardType.Attachment,
@@ -238,14 +255,19 @@ namespace HallOfBeorn.Models.Sets
                 Number = 18
             });
             Cards.Add(new Card() {
+                ImageName = "M1425",
                 Title = "The Seething Lake - 2A",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9019",
                 CardType = CardType.Quest,
                 EncounterSet = "The Watcher in the Water",
                 Quantity = 1,
+                FlavorText = "The others swung round and saw the waters of the lake seething, as if a host of snakes were swimming up from the southern end. - The Fellowship of the Ring\r\nThe Doors of Durin are blocked by an ancient spell. You must figure out a way into the mines before the Seething bog and its Watcher consumes you all.",
+                OppositeText = "When Revealed: Add The Watcher to the staging area. Doors of Durin becomes the active location, moving any previous active location to the staging area. Shuffle all Tentacle cards in the encounter discard pile back into the encounter deck.\r\nIf the players have at least 3 victory points and defeat this stage, they have won the game.",
+                QuestPoints = 5,
                 Number = 19
             });
             Cards.Add(new Card() {
+                ImageName = "M1433",
                 Title = "The Watcher",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9021",
                 CardType = CardType.Enemy,
@@ -264,6 +286,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 20
             });
             Cards.Add(new Card() {
+                ImageName = "M1435",
                 Title = "Thrashing Tentacle",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9022",
                 CardType = CardType.Enemy,
@@ -279,16 +302,22 @@ namespace HallOfBeorn.Models.Sets
                 Number = 21
             });
             Cards.Add(new Card() {
+                ImageName = "M1424",
                 Title = "To the West-door - 1A",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9023",
                 CardType = CardType.Quest,
                 EncounterSet = "The Watcher in the Water",
                 Quantity = 1,
+                QuestPoints = 13,
                 Setup = "tt",
                 Text = "Setup: Remove The Watcher and Doors of Durin from the encounter deck and set them aside, out of play.",
+                FlavorText = "Elrond has asked you to scout the Mines of Moria on your return to Lorien, hoping to discover if it is the source of increased Orc activity along the Misty Mountains.",
+                OppositeText = "When Revealed: Reveal cards from the encounter deck and add them to the staging area until there is at least X threat in the staging area. X is twice the number of players in the game.",
+                OppositeFlavorText = "Your approach is blocked by a dark lake that slumbers beneath the face of the cliff. You must search for a way around the water.",
                 Number = 22
             });
             Cards.Add(new Card() {
+                ImageName = "M1417",
                 Title = "Watcher of the Bruinen",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9025",
                 CardType = CardType.Ally,
@@ -305,6 +334,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 23
             });
             Cards.Add(new Card() {
+                ImageName = "M1437",
                 Title = "Wrapped!",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9026",
                 CardType = CardType.Treachery,
