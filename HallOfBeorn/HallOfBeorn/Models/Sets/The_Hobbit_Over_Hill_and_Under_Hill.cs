@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "The Hobbit: Over Hill and Under Hill";
 
             Cards.Add(new Card() {
+                ImageName = "M1587",
                 Title = "A Deep Sack",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9001",
                 CardType = CardType.Objective,
@@ -22,6 +23,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 1
             });
             Cards.Add(new Card() {
+                ImageName = "M1588",
                 Title = "A Foul Sack",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9002",
                 CardType = CardType.Objective,
@@ -32,6 +34,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 2
             });
             Cards.Add(new Card() {
+                ImageName = "M1586",
                 Title = "A Large Sack",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9003",
                 CardType = CardType.Objective,
@@ -42,6 +45,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 3
             });
             Cards.Add(new Card() {
+                ImageName = "M1591",
                 Title = "A Nice Pickle",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9004",
                 CardType = CardType.Treachery,
@@ -53,16 +57,21 @@ namespace HallOfBeorn.Models.Sets
                 Number = 4
             });
             Cards.Add(new Card() {
+                ImageName = "M1565",
                 Title = "A Short Rest - 1A",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9005",
                 CardType = CardType.Quest,
                 EncounterSet = "Over the Misty Mountains Grim",
                 Quantity = 1,
+                QuestPoints = 0,
                 Setup = "s",
                 Text = "Setup: Shuffle the Over the Misty Mountains Grim and Western Lands encounter sets into one encounter deck and make it the active encounter deck. Then, shuffle the The Great Goblin and Misty Mountain Goblins encounter sets into a second encounter deck and set it aside, inactive.",
+                FlavorText = "After a refreshing stay in the House of Elrond, Bilbo and his companions resumed their quest for the Lonely Mountain. But to reach Erebor, they first had to climb the high pass over the Misty Mountains.",
+                OppositeText = "When Revealed: Each player may search his deck for 1 treasure card and add it to his hand, then shuffle his deck. Advance to stage 2A.",
                 Number = 5
             });
             Cards.Add(new Card() {
+                ImageName = "M1583",
                 Title = "A Smelly Sack",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9007",
                 CardType = CardType.Objective,
@@ -73,6 +82,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 6
             });
             Cards.Add(new Card() {
+                ImageName = "M1584",
                 Title = "A Strong Sack",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9008",
                 CardType = CardType.Objective,
@@ -83,6 +93,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 7
             });
             Cards.Add(new Card() {
+                ImageName = "M1574",
                 Title = "A Suspicious Crow",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9009",
                 CardType = CardType.Enemy,
@@ -99,6 +110,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 8
             });
             Cards.Add(new Card() {
+                ImageName = "M1585",
                 Title = "A Tough Sack",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9010",
                 CardType = CardType.Objective,
@@ -120,6 +132,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 10
             });
             Cards.Add(new Card() {
+                ImageName = "M1589",
                 Title = "A Worn Sack",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9012",
                 CardType = CardType.Objective,
@@ -162,6 +175,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 13
             });
             Cards.Add(new Card() {
+                ImageName = "M1572",
                 Title = "Bert",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9016",
                 CardType = CardType.Enemy,
@@ -196,6 +210,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 15
             });
             Cards.Add(new Card() {
+                ImageName = "M1618",
                 Title = "Bilbo's Magic Ring",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9018",
                 CardType = CardType.Objective,
@@ -236,6 +251,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 18
             });
             Cards.Add(new Card() {
+                ImageName = "M1580",
                 Title = "Cave Entrance",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9021",
                 CardType = CardType.Location,
@@ -248,6 +264,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 19
             });
             Cards.Add(new Card() {
+                ImageName = "M1610",
                 Title = "Chaos in the Cavern",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9022",
                 CardType = CardType.Treachery,
@@ -258,6 +275,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 20
             });
             Cards.Add(new Card() {
+                ImageName = "M1619",
                 Title = "Come down little bird",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9023",
                 CardType = CardType.Treachery,
@@ -309,15 +327,20 @@ namespace HallOfBeorn.Models.Sets
                 Number = 24
             });
             Cards.Add(new Card() {
+                ImageName = "M1567",
                 Title = "Down, Down to Goblin Town - 3A",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9028",
                 CardType = CardType.Quest,
                 EncounterSet = "The Great Goblin",
                 Quantity = 1,
+                QuestPoints = 20,
                 Text = "When Revealed: Shuffle all encounter cards back into the encounter deck and set it aside, inactive. The second encounter deck becomes the active encounter deck. Search the encounter deck for The Great Goblin and add it to the staging area. Then, shuffle the encounter deck.",
+                FlavorText = "Out jumped the goblins, big goblins, great ugly-looking goblins, lots of goblins, before you could say rocks and blocks. - The Hobbit",
+                OppositeText = "Players cannot defeat this stage unless The Great Goblin is in the victory display.\r\nWhen Revealed: Reveal 3 encounter cards per player, Bilbo Baggins may spend X resources to reduce the total number of encounter cards revealed by X. (To a minimum of 1.)\r\nIf the players defeat this stage, they have won the game.",
                 Number = 25
             });
             Cards.Add(new Card() {
+                ImageName = "M1578",
                 Title = "Dreary Hills",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9030",
                 CardType = CardType.Location,
@@ -369,6 +392,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 29
             });
             Cards.Add(new Card() {
+                ImageName = "M1605",
                 Title = "Front Porch",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9034",
                 CardType = CardType.Location,
@@ -381,6 +405,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 30
             });
             Cards.Add(new Card() {
+                ImageName = "M1611",
                 Title = "Galloping Boulders",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9035",
                 CardType = CardType.Treachery,
@@ -422,6 +447,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 33
             });
             Cards.Add(new Card() {
+                ImageName = "M1597",
                 Title = "Goblin Axeman",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9038",
                 CardType = CardType.Enemy,
@@ -438,6 +464,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 34
             });
             Cards.Add(new Card() {
+                ImageName = "M1601",
                 Title = "Goblin Bent-Swords",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9039",
                 CardType = CardType.Enemy,
@@ -454,6 +481,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 35
             });
             Cards.Add(new Card() {
+                ImageName = "M1600",
                 Title = "Goblin Driver",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9040",
                 CardType = CardType.Enemy,
@@ -470,6 +498,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 36
             });
             Cards.Add(new Card() {
+                ImageName = "M1598",
                 Title = "Goblin Miners",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9041",
                 CardType = CardType.Enemy,
@@ -486,6 +515,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 37
             });
             Cards.Add(new Card() {
+                ImageName = "M1599",
                 Title = "Goblin Runners",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9042",
                 CardType = CardType.Enemy,
@@ -514,6 +544,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 39
             });
             Cards.Add(new Card() {
+                ImageName = "M1613",
                 Title = "Gollum",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9044",
                 CardType = CardType.Enemy,
@@ -530,6 +561,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 40
             });
             Cards.Add(new Card() {
+                ImageName = "M1606",
                 Title = "Great Cavern Room",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9045",
                 CardType = CardType.Location,
@@ -542,6 +574,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 41
             });
             Cards.Add(new Card() {
+                ImageName = "M1614",
                 Title = "Great Gray Wolf",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9046",
                 CardType = CardType.Enemy,
@@ -557,6 +590,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 42
             });
             Cards.Add(new Card() {
+                ImageName = "M1609",
                 Title = "Grip, grab! Pinch, nab!",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9047",
                 CardType = CardType.Treachery,
@@ -567,6 +601,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 43
             });
             Cards.Add(new Card() {
+                ImageName = "M1612",
                 Title = "Guffawing of Giants",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9048",
                 CardType = CardType.Treachery,
@@ -576,6 +611,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 44
             });
             Cards.Add(new Card() {
+                ImageName = "M1621",
                 Title = "Hiding in the Trees",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9049",
                 CardType = CardType.Treachery,
@@ -585,6 +621,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 45
             });
             Cards.Add(new Card() {
+                ImageName = "M1577",
                 Title = "Hobbit-lands",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9050",
                 CardType = CardType.Location,
@@ -598,6 +635,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 46
             });
             Cards.Add(new Card() {
+                ImageName = "M1593",
                 Title = "Hungry Troll",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9051",
                 CardType = CardType.Treachery,
@@ -608,14 +646,19 @@ namespace HallOfBeorn.Models.Sets
                 Number = 47
             });
             Cards.Add(new Card() {
+                ImageName = "M1570",
                 Title = "Into the Fire - 3A",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9052",
                 CardType = CardType.Quest,
                 EncounterSet = "Dungeons Deep and Caverns Dim",
                 Quantity = 1,
+                QuestPoints = 16,
+                FlavorText = "To everyone's surprise, Bilbo Baggins rejoined his companions on the eastern side of the Misty Mountains. However, their celebration was cut short by the chilling sound of wolves howling close by. To the frightened hobbit, it seemed that they had escaped from the goblins only to be eaten by wargs.",
+                OppositeText = "When Revealed: The first player gains control of Bilbo Baggins. Reveal 1 encounter card per player and add it to the staging area.\r\nGollum engages the first player. Damage from undefended attacks made by Gollum must be placed on Bilbo Baggins.\r\nAll riddle effects are ignored. Treachery cards gain surge.\r\nIf players defeat this stage, they have won the game.",
                 Number = 48
             });
             Cards.Add(new Card() {
+                ImageName = "M1620",
                 Title = "It Likes Riddles?",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9054",
                 CardType = CardType.Treachery,
@@ -642,6 +685,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 50
             });
             Cards.Add(new Card() {
+                ImageName = "M1617",
                 Title = "Lake in the Cavern",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9056",
                 CardType = CardType.Location,
@@ -667,6 +711,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 52
             });
             Cards.Add(new Card() {
+                ImageName = "M1579",
                 Title = "Lone-Lands",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9058",
                 CardType = CardType.Location,
@@ -679,6 +724,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 53
             });
             Cards.Add(new Card() {
+                ImageName = "M1590",
                 Title = "Lots or None at All",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9059",
                 CardType = CardType.Treachery,
@@ -689,6 +735,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 54
             });
             Cards.Add(new Card() {
+                ImageName = "M1596",
                 Title = "More Like a Grocer",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9060",
                 CardType = CardType.Treachery,
@@ -699,6 +746,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 55
             });
             Cards.Add(new Card() {
+                ImageName = "M1594",
                 Title = "No Campfire",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9061",
                 CardType = CardType.Treachery,
@@ -727,6 +775,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 57
             });
             Cards.Add(new Card() {
+                ImageName = "M1623",
                 Title = "Not fair! Not fair!",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9063",
                 CardType = CardType.Treachery,
@@ -767,16 +816,21 @@ namespace HallOfBeorn.Models.Sets
                 Number = 60
             });
             Cards.Add(new Card() {
+                ImageName = "M1568",
                 Title = "Out of the Frying Pan - 1A",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9066",
                 CardType = CardType.Quest,
                 EncounterSet = "Dungeons Deep and Caverns Dim",
                 Quantity = 1,
+                QuestPoints = 14,
                 Setup = "stt",
                 Text = "Setup: Add Lake in the Cavern to the staging area. Create a riddle area with stage 2A and follow the setup instructions on that card.",
+                FlavorText = "After killing the Great Goblin, Bilbo's companions fought to win their escape from the goblins. By the time they realized that Bilbo had been lost in the darkness, it was too late to turn back and search for him.",
+                OppositeText = "Players cannot advance to stage 3A unless both 1B and 2B are complete.\r\nForced: Reveal 1 additional encounter card per player during the staging step.",
                 Number = 61
             });
             Cards.Add(new Card() {
+                ImageName = "M1607",
                 Title = "Overhanging Rock",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9068",
                 CardType = CardType.Location,
@@ -789,15 +843,20 @@ namespace HallOfBeorn.Models.Sets
                 Number = 62
             });
             Cards.Add(new Card() {
+                ImageName = "M1569",
                 Title = "Riddles in the Dark - 2A",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9069",
                 CardType = CardType.Quest,
                 EncounterSet = "Dungeons Deep and Caverns Dim",
                 Quantity = 1,
+                QuestPoints = 9,
                 Text = "Setup: Search the encounter deck for Gollum and Bilbo's Magic Ring. Place Gollum and Bilbo Baggins in the riddle area and attach Bilbo's Magic Ring to Bilbo Baggins. Then, shuffle the encounter deck.",
+                FlavorText = "During the confusion, bilbo stumbled won a tunnel and into Gollum's cave. There the Hobbit had to outwit the creature Gollum in a dangerous riddle contest to discover the way out.",
+                OppositeText = "Players cannot advance to stage 3A unless both 1B and 2B are complete.\r\nProgress tokens cannot be added to, or removed from, this quest except by answering riddles.\r\nCards in the riddle area are immune to player card effects and cannot leave the riddle area except by quest effects.",
                 Number = 63
             });
             Cards.Add(new Card() {
+                ImageName = "M1592",
                 Title = "Roast 'Em or Boil 'Em?",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9071",
                 CardType = CardType.Treachery,
@@ -848,6 +907,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 67
             });
             Cards.Add(new Card() {
+                ImageName = "M1603",
                 Title = "Stone-Giant",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9076",
                 CardType = CardType.Enemy,
@@ -863,6 +923,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 68
             });
             Cards.Add(new Card() {
+                ImageName = "M1604",
                 Title = "The Goblins' Caves",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9077",
                 CardType = CardType.Location,
@@ -876,6 +937,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 69
             });
             Cards.Add(new Card() {
+                ImageName = "M1602",
                 Title = "The Great Goblin",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9078",
                 CardType = CardType.Enemy,
@@ -893,6 +955,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 70
             });
             Cards.Add(new Card() {
+                ImageName = "M1608",
                 Title = "The High Pass",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9079",
                 CardType = CardType.Location,
@@ -906,14 +969,19 @@ namespace HallOfBeorn.Models.Sets
                 Number = 71
             });
             Cards.Add(new Card() {
+                ImageName = "M1566",
                 Title = "The Mountain Pass - 2A",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9080",
                 CardType = CardType.Quest,
                 EncounterSet = "Over the Misty Mountains Grim",
                 Quantity = 1,
+                QuestPoints = 16,
+                FlavorText = "When he peeped out in the lightning-flashes, he saw that across the valley the stone-giants were out and were hurling rocks at one another for a game, and catching them, and tossing them down into the darkness where they smashed the trees far below, or splintered into little bits with a bang. - The Hobbit ",
+                OppositeText = "When Revealed: Search the encounter deck for 1 copy of Stone-giant and add it to the staging area. Then, shuffle the encounter deck. Reveal 1 card per player from the encounter deck and add it to the staging area.",
                 Number = 72
             });
             Cards.Add(new Card() {
+                ImageName = "M1616",
                 Title = "The Wargs' Glade",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9082",
                 CardType = CardType.Location,
@@ -957,6 +1025,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 75
             });
             Cards.Add(new Card() {
+                ImageName = "M1573",
                 Title = "Tom",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9085",
                 CardType = CardType.Enemy,
@@ -974,6 +1043,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 76
             });
             Cards.Add(new Card() {
+                ImageName = "M1575",
                 Title = "Troll Camp",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9086",
                 CardType = CardType.Location,
@@ -986,6 +1056,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 77
             });
             Cards.Add(new Card() {
+                ImageName = "M1576",
                 Title = "Troll Cave",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9087",
                 CardType = CardType.Location,
@@ -1000,6 +1071,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 78
             });
             Cards.Add(new Card() {
+                ImageName = "M1582",
                 Title = "Troll Key",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9088",
                 CardType = CardType.Objective,
@@ -1011,6 +1083,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 79
             });
             Cards.Add(new Card() {
+                ImageName = "M1581",
                 Title = "Troll Purse",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9089",
                 CardType = CardType.Objective,
@@ -1022,6 +1095,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 80
             });
             Cards.Add(new Card() {
+                ImageName = "M1622",
                 Title = "What's In My Pocket?",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9090",
                 CardType = CardType.Treachery,
@@ -1031,6 +1105,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 81
             });
             Cards.Add(new Card() {
+                ImageName = "M1615",
                 Title = "Wild Wargs",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9091",
                 CardType = CardType.Enemy,
@@ -1046,6 +1121,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 82
             });
             Cards.Add(new Card() {
+                ImageName = "M1571",
                 Title = "William",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9092",
                 CardType = CardType.Enemy,
@@ -1063,6 +1139,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 83
             });
             Cards.Add(new Card() {
+                ImageName = "M1595",
                 Title = "Wind-whipped Rain",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9093",
                 CardType = CardType.Treachery,

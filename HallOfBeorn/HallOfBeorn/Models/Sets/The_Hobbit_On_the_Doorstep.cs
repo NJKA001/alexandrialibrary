@@ -61,6 +61,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 3
             });
             Cards.Add(new Card() {
+                ImageName = "M1624",
                 Title = "Bilbo Baggins",
                 Id = "4e61b160-2104-497f-9977-4b353e54fbb7",
                 CardType = CardType.Hero,
@@ -74,7 +75,7 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Attack = 1,
                 Defense = 1,
-                Text = "Bilbo Baggins does not count against the hero limit and cannot gain resources from non-treasure cards. The first player gains control of Bilbo Baggins.Action: Spend 1 Í resource to search your deck for a treasure card and add it to your hand.",
+                Text = "Bilbo Baggins does not count against the hero limit and cannot gain resources from non-treasure cards. The first player gains control of Bilbo Baggins.\r\nAction: Spend 1 Baggins resource to search your deck for a treasure card and add it to your hand.",
                 Number = 4
             });
             Cards.Add(new Card() {
