@@ -28,6 +28,9 @@
 
             @Html.LabelFor(x => x.CardSet, new { style="display:inline;"})
             @Html.DropDownListFor(x => x.CardSet, SearchResult.CardSets)
+
+            @Html.LabelFor(x => x.Trait, new { style = "display:inline;"})
+            @Html.DropDownListFor(x => x.Trait, SearchResult.Traits)
         </div>
         <br />
         <br />

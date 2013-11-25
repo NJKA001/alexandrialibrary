@@ -30,5 +30,23 @@ namespace HallOfBeorn
 
             return listItems;
         }
+
+        public static IEnumerable<SelectListItem> GetSelectListItems(this IEnumerable<string> list)
+        {
+            var listItems = new List<SelectListItem>() { new SelectListItem() { Selected = true, Text = "Any", Value = "Any" } };
+
+            foreach (var item in list)
+            {
+                listItems.Add(
+                    new SelectListItem()
+                    {
+                        Text = item.Replace(".", string.Empty),
+                        Value = item
+                    }
+                );
+            }
+
+            return listItems;
+        }
     }
 }

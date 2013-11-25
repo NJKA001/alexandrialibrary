@@ -17,6 +17,7 @@ namespace HallOfBeorn.Controllers
 
         private readonly List<CardSet> sets = new List<CardSet>();
         private readonly Dictionary<string, Card> cards = new Dictionary<string, Card>();
+        private readonly Dictionary<string, string> traits = new Dictionary<string, string>();
 
         private void InitializeCards()
         {
@@ -70,7 +71,16 @@ namespace HallOfBeorn.Controllers
             foreach (var set in sets)
             {
                 foreach (var card in set.Cards)
+                {
                     cards.Add(card.Id, card);
+
+                    foreach (var trait in card.Traits)
+                    {
+                        var traitKey = trait.Replace(".", string.Empty);
+                        if (!traits.ContainsKey(traitKey))
+                            traits.Add(traitKey, trait);
+                    }
+                }
             }
 
             /*
@@ -119,6 +129,11 @@ namespace HallOfBeorn.Controllers
         public Card GetCard(string id)
         {
             return cards.ContainsKey(id) ? cards[id] : null;
+        }
+
+        public IEnumerable<string> Traits()
+        {
+            return traits.Values.OrderBy(x => x);
         }
     }
 }

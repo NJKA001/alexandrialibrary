@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "Foundations of Stone";
 
             Cards.Add(new Card() {
+                ImageName = "M1471",
                 Title = "Asfaloth",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9001",
                 CardType = CardType.Attachment,
@@ -25,38 +26,59 @@ namespace HallOfBeorn.Models.Sets
                 Number = 1
             });
             Cards.Add(new Card() {
+                ImageName = "M1475",
                 Title = "Below the Mines - 4A",
+                OppositeTitle = "Sheltered Rocks",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9002",
                 CardType = CardType.Quest,
                 EncounterSet = "Foundations of Stone",
                 Quantity = 1,
+                QuestPoints = 11,
+                FlavorText = "The river has deposited you at...",
+                OppositeText = "When Revealed: Create your own staging area. Reveal 2 cards from the encounter deck and add them to your staging area.\r\nForced: After the 11th progress token is placed on Sheltered Rocks, join another player at the beginning of the travel phase. If you cannot join another player, all players continue to stage 5 together.",
                 Number = 2
             });
             Cards.Add(new Card() {
+                ImageName = "M1476",
                 Title = "Below the Mines - 4A",
+                OppositeTitle = "The Endless Caves",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9004",
                 CardType = CardType.Quest,
                 EncounterSet = "Foundations of Stone",
                 Quantity = 1,
+                QuestPoints = 17,
+                FlavorText = "The river has deposited you at...",
+                OppositeText = "When Revealed: Create your own staging area. Discard all resources from your heroes.\r\nForced: After the 17th progress token is placed on The Endless Caves, join another player at the beginning of the travel phase. If you cannot join another player, all players continue on to stage 5 together.",
                 Number = 3
             });
             Cards.Add(new Card() {
+                ImageName = "M1477",
                 Title = "Below the Mines - 4A",
+                OppositeTitle = "The Shivering Bank",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9006",
                 CardType = CardType.Quest,
                 EncounterSet = "Foundations of Stone",
                 Quantity = 1,
+                QuestPoints = 7,
+                FlavorText = "The river has deposited you at...",
+                OppositeText = "When Revealed: Create your own staging area. Discard your hand. Reveal 2 cards from the encounter deck and add them to your staging area.\r\nForced: After the 7th progress token is placed on The Shivering Bank, join another player at the beginning of the travel phase. If you cannot join another player, all players continue on to stage 5 together.",
                 Number = 4
             });
             Cards.Add(new Card() {
+                ImageName = "M1478",
                 Title = "Below the Mines - 4A",
+                OppositeTitle = "Old One Lair",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9008",
                 CardType = CardType.Quest,
                 EncounterSet = "Foundations of Stone",
                 Quantity = 1,
+                QuestPoints = 5,
+                FlavorText = "The river has deposited you at...",
+                OppositeText = "When Revealed: Create you own staging area. Reveal 4 cards from the encounter deck and add them to your staging area.\r\nForced: After the 5th progress token is placed on Old One Lair, join another player at the beginning of the travel phase. If you cannot join another player, all players continue on to stage 5 together.",
                 Number = 5
             });
             Cards.Add(new Card() {
+                ImageName = "M1469",
                 Title = "Daeron's Runes",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9010",
                 CardType = CardType.Event,
@@ -67,6 +89,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 6
             });
             Cards.Add(new Card() {
+                ImageName = "M1484",
                 Title = "Deep Deep Dark",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9011",
                 CardType = CardType.Treachery,
@@ -78,6 +101,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 7
             });
             Cards.Add(new Card() {
+                ImageName = "M1482",
                 Title = "Drowned Treasury",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9012",
                 CardType = CardType.Location,
@@ -90,6 +114,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 8
             });
             Cards.Add(new Card() {
+                ImageName = "M1480",
                 Title = "Durin's Axe",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9013",
                 CardType = CardType.Objective,
@@ -102,6 +127,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 9
             });
             Cards.Add(new Card() {
+                ImageName = "M1481",
                 Title = "Durin's Helm",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9014",
                 CardType = CardType.Objective,
@@ -114,6 +140,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 10
             });
             Cards.Add(new Card() {
+                ImageName = "M1487",
                 Title = "Elder Nameless Thing",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9015",
                 CardType = CardType.Enemy,
@@ -130,6 +157,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 11
             });
             Cards.Add(new Card() {
+                ImageName = "M1462",
                 Title = "Glorfindel",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9016",
                 CardType = CardType.Hero,
@@ -146,6 +174,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 12
             });
             Cards.Add(new Card() {
+                ImageName = "M1470",
                 Title = "Healing Herbs",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9017",
                 CardType = CardType.Attachment,
@@ -157,6 +186,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 13
             });
             Cards.Add(new Card() {
+                ImageName = "M1466",
                 Title = "Heavy Stroke",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9018",
                 CardType = CardType.Event,
@@ -167,6 +197,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 14
             });
             Cards.Add(new Card() {
+                ImageName = "M1467",
                 Title = "Imladris Stargazer",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9019",
                 CardType = CardType.Ally,
@@ -182,6 +213,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 15
             });
             Cards.Add(new Card() {
+                ImageName = "M1468",
                 Title = "Light of Valinor",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9020",
                 CardType = CardType.Attachment,
@@ -195,6 +227,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 16
             });
             Cards.Add(new Card() {
+                ImageName = "M1463",
                 Title = "Longbeard Elder",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9021",
                 CardType = CardType.Ally,
@@ -210,6 +243,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 17
             });
             Cards.Add(new Card() {
+                ImageName = "M1485",
                 Title = "Lost and Alone",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9022",
                 CardType = CardType.Treachery,
@@ -220,6 +254,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 18
             });
             Cards.Add(new Card() {
+                ImageName = "M1483",
                 Title = "Mithril Lode",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9023",
                 CardType = CardType.Location,
@@ -233,6 +268,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 19
             });
             Cards.Add(new Card() {
+                ImageName = "M1488",
                 Title = "Moria Bats",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9024",
                 CardType = CardType.Enemy,
@@ -248,6 +284,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 20
             });
             Cards.Add(new Card() {
+                ImageName = "M1486",
                 Title = "Nameless Thing",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9025",
                 CardType = CardType.Enemy,
@@ -264,14 +301,19 @@ namespace HallOfBeorn.Models.Sets
                 Number = 21
             });
             Cards.Add(new Card() {
+                ImageName = "M1479",
                 Title = "Out of the Depths - 5A",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9026",
                 CardType = CardType.Quest,
                 EncounterSet = "Foundations of Stone",
                 Quantity = 1,
+                QuestPoints = 11,
+                FlavorText = "The shaft shoots upwards, the glimmering lines of mithril illuminating your way out of the depths of the mountain. The makeshift ladder is narrow, but you cannot linger in the realm of those things of darkness, who gnaw at the roots of the world.",
+                OppositeText = "When Revealed: Reveal 1 card from the encounter deck per player, and add it to the staging area.\r\nEach player cannot commit more allies to the quest than the number of heroes he is also committing to the quest.\r\nIf the players defeat this stage, they have won the game.",
                 Number = 22
             });
             Cards.Add(new Card() {
+                ImageName = "M1464",
                 Title = "Path of Need",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9028",
                 CardType = CardType.Attachment,
@@ -284,24 +326,34 @@ namespace HallOfBeorn.Models.Sets
                 Number = 23
             });
             Cards.Add(new Card() {
+                ImageName = "M1472",
                 Title = "The Dripping Walls - 1A",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9029",
                 CardType = CardType.Quest,
                 EncounterSet = "Foundations of Stone",
                 Quantity = 1,
+                QuestPoints = 9,
                 Setup = "t",
                 Text = "Setup: Place the Foundations of Stone encounter set aside, out of play. The first player attaches Cave Torch to a hero of his choice.",
+                FlavorText = "Your journey has led to a decrepit portion of the mines, untouched by Dwarven pick for many a year. The air grows thick with moisture, and the walls almost appear to be weeping.",
+                OppositeFlavorText = "A low rumble sounds from below. There are a variety of underground waterways in Moria, but they should not be disturbed.",
+                OppositeText = "When Revealed: Reveal 1 card from the encounter deck per player, and add it to the staging area.",
                 Number = 24
             });
             Cards.Add(new Card() {
+                ImageName = "M1473",
                 Title = "The Water's Edge - 2A",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9031",
                 CardType = CardType.Quest,
                 EncounterSet = "Foundations of Stone",
                 Quantity = 1,
+                QuestPoints = 12,
+                FlavorText = "Small rivers cut their way across your path. Some are not much more than a trickle, and recent looking too. Another rumble shakes the walls, this time it seems to be above you.",
+                OppositeText = "Forced: After a player commits characters to the quest, he must discard the top 2 cards of his deck.",
                 Number = 25
             });
             Cards.Add(new Card() {
+                ImageName = "M1465",
                 Title = "Trollshaw Scout",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9033",
                 CardType = CardType.Ally,
@@ -318,11 +370,15 @@ namespace HallOfBeorn.Models.Sets
                 Number = 26
             });
             Cards.Add(new Card() {
+                ImageName = "M1474",
                 Title = "Washed Away! - 3A",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9034",
                 CardType = CardType.Quest,
                 EncounterSet = "Foundations of Stone",
                 Quantity = 1,
+                FlavorText = "With a groan the ground crumbles under your feet, the entire section of the tunnel giving way to a deep darkness and the rush of water. There is a feeling of weightlessness, followed by the icy wet clutches of an underground river.",
+                QuestPoints = 0,
+                OppositeText = "When Revealed: Discard all Item, Armor, Weapon, Light cards and all encounter deck cards from play, Shuffle all enemy and treachery cards in the encounter discard pile together with the Foundations of Stone encounter set. This deck becomes the new encounter deck. remove all other encounter deck cards from the game. Then, starting with the first player, each player draws a random stage 4 quest card. Remove all other stage 4 quest cards from the game.",
                 Number = 27
             });
         }

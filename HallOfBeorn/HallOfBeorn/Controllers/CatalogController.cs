@@ -17,7 +17,7 @@ namespace HallOfBeorn.Controllers
 
         private readonly CardRepository repository = new CardRepository();
 
-        private SearchResult GetResult(string query= null, string cardType = null, string cardSet = null, string title = null)
+        private SearchResult GetResult(string query= null, string cardType = null, string cardSet = null, string title = null, string trait = null)
         {
             var cards = !string.IsNullOrEmpty(query) ?
                 repository.Cards.Where(
@@ -46,16 +46,23 @@ namespace HallOfBeorn.Controllers
                 cards = cards.Where(x => x.CardSet.Name == cardSet).ToList();
             }
 
+            if (trait != null && trait != "Any")
+            {
+                cards = cards.Where(x => x.Traits.Any(y => y == trait)).ToList();
+            }
+
             if (!string.IsNullOrEmpty(title))
             {
                 cards = cards.Where(x => x.Title.ToLower() == title.ToLower()).ToList();
             }
 
+            SearchResult.Traits = repository.Traits().GetSelectListItems();
+
             var model = new SearchResult()
             {
                 Query = query,
                 CardType = cardTypeFilter,
-                Cards = cards
+                Cards = cards,
             };
 
             SearchResult.CardSets = new List<SelectListItem>() { new SelectListItem() { Text = "Any", Value = "Any" } };
@@ -75,18 +82,18 @@ namespace HallOfBeorn.Controllers
         //    return View(model);
         //}
 
-        public ActionResult Search(string query, string cardType, string cardSet, string title = null)
+        public ActionResult Search(string query, string cardType, string cardSet, string title = null, string trait = null)
         {
-            var model = GetResult(query, cardType, cardSet, title);
+            var model = GetResult(query, cardType, cardSet, title, trait);
 
             return View(model);
         }
 
         [HttpPost]
         [ActionName("Search")]
-        public ActionResult Search_Post(string query, string cardType, string cardSet)
+        public ActionResult Search_Post(string query, string cardType, string cardSet, string trait)
         {
-            return RedirectToAction("Search", "Catalog", new { Query = query, CardType = cardType, CardSet = cardSet });
+            return RedirectToAction("Search", "Catalog", new { Query = query, CardType = cardType, CardSet = cardSet, Trait = trait });
         }
 
         public ActionResult Show(string id)
