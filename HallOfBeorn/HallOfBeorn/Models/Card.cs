@@ -35,7 +35,7 @@ namespace HallOfBeorn.Models
         public byte Attack { get; set; }
         public byte Defense { get; set; }
         public byte HitPoints { get; set; }
-        public byte QuestPoints { get; set; }
+        public byte? QuestPoints { get; set; }
 
         public List<string> Traits { get; set; }
         public List<string> Keywords { get; set; }

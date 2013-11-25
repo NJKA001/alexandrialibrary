@@ -109,6 +109,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 9
             });
             Cards.Add(new Card() {
+                ImageName = "M1553",
                 Title = "A Very Good Tale",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9011",
                 CardType = CardType.Event,
@@ -129,16 +130,21 @@ namespace HallOfBeorn.Models.Sets
                 Number = 11
             });
             Cards.Add(new Card() {
+                ImageName = "M1562",
                 Title = "An Unexpected Party - 1A",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9013",
                 CardType = CardType.Quest,
                 EncounterSet = "We Must Away, Ere Break of Day",
                 Quantity = 1,
+                QuestPoints = 7,
                 Setup = "tttt",
                 Text = "Setup: Remove and shuffle the 7 Sack cards into a Sack deck and set it aside face down. Remove the 3 Troll enemies and the Troll Cave from the encounter deck and set them aside out of play. Then, shuffle the encounter deck. Each player reveals 1 card from the top of the encounter deck and adds it to the staging area.",
+                FlavorText = "The wizard Gandalf has chosen Bilbo Baggins to join Thorin and company on their quest to the Lonley Mountain.",
+                OppositeFlavorText = "At first they had passed through hobbit-lands, a wild respectable country inhabited by decent folk, with good roads, an inn or two, and now and then, a dwarf or a farmer ambling by on business. Then they came to lands where people spoke strangely, and sang songs Bilbo had never heard before. - The Hobbit.",
                 Number = 12
             });
             Cards.Add(new Card() {
+                ImageName = "M1544",
                 Title = "Beorn",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9015",
                 CardType = CardType.Hero,
@@ -173,6 +179,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 14
             });
             Cards.Add(new Card() {
+                ImageName = "M1540",
                 Title = "Bilbo Baggins",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9017",
                 CardType = CardType.Hero,
@@ -201,6 +208,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 16
             });
             Cards.Add(new Card() {
+                ImageName = "M1547",
                 Title = "Bofur",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9019",
                 CardType = CardType.Ally,
@@ -217,6 +225,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 17
             });
             Cards.Add(new Card() {
+                ImageName = "M1558",
                 Title = "Burglar Baggins",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9020",
                 CardType = CardType.Event,
@@ -258,6 +267,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 21
             });
             Cards.Add(new Card() {
+                ImageName = "M1550",
                 Title = "Cram",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9024",
                 CardType = CardType.Attachment,
@@ -270,14 +280,19 @@ namespace HallOfBeorn.Models.Sets
                 Number = 22
             });
             Cards.Add(new Card() {
+                ImageName = "M1564",
                 Title = "Dawn Take You All - 3A",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9025",
                 CardType = CardType.Quest,
                 EncounterSet = "We Must Away, Ere Break of Day",
                 Quantity = 1,
+                QuestPoints = 0,
+                FlavorText = "\"Dawn take you all, and be stone to you!\" - Gandalf, The Hobbit ",
+                OppositeText = "Play after shadow cards have been dealt, before any attacks have resloved.\r\nCombat Action: Each player may choose and discard 1 facedown shadow card from an enemy with which he is engaged.",
                 Number = 23
             });
             Cards.Add(new Card() {
+                ImageName = "M1548",
                 Title = "Dori",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9027",
                 CardType = CardType.Ally,
@@ -315,6 +330,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 26
             });
             Cards.Add(new Card() {
+                ImageName = "M1557",
                 Title = "Expecting Mischief",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9031",
                 CardType = CardType.Event,
@@ -325,6 +341,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 27
             });
             Cards.Add(new Card() {
+                ImageName = "M1545",
                 Title = "Fili",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9032",
                 CardType = CardType.Ally,
@@ -341,6 +358,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 28
             });
             Cards.Add(new Card() {
+                ImageName = "M1554",
                 Title = "Foe-hammer",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9033",
                 CardType = CardType.Event,
@@ -373,6 +391,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 31
             });
             Cards.Add(new Card() {
+                ImageName = "M1549",
                 Title = "Gandalf",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9036",
                 CardType = CardType.Ally,
@@ -389,6 +408,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 32
             });
             Cards.Add(new Card() {
+                ImageName = "M1561",
                 Title = "Glamdring",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9037",
                 CardType = CardType.Treasure,
@@ -483,6 +503,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 38
             });
             Cards.Add(new Card() {
+                ImageName = "M1555",
                 Title = "Goblin-cleaver",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9043",
                 CardType = CardType.Event,
@@ -604,6 +625,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 49
             });
             Cards.Add(new Card() {
+                ImageName = "M1546",
                 Title = "Kili",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9055",
                 CardType = CardType.Ally,
@@ -634,6 +656,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 51
             });
             Cards.Add(new Card() {
+                ImageName = "M1556",
                 Title = "Late Adventurer",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9057",
                 CardType = CardType.Event,
@@ -687,6 +710,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 56
             });
             Cards.Add(new Card() {
+                ImageName = "M1542",
                 Title = "Nori",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9062",
                 CardType = CardType.Hero,
@@ -712,6 +736,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 58
             });
             Cards.Add(new Card() {
+                ImageName = "M1560",
                 Title = "Orcrist",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9064",
                 CardType = CardType.Treasure,
@@ -725,6 +750,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 59
             });
             Cards.Add(new Card() {
+                ImageName = "M1543",
                 Title = "Ori",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9065",
                 CardType = CardType.Hero,
@@ -782,15 +808,20 @@ namespace HallOfBeorn.Models.Sets
                 Number = 64
             });
             Cards.Add(new Card() {
+                ImageName = "M1563",
                 Title = "Roast Mutton - 2A",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9072",
                 CardType = CardType.Quest,
                 EncounterSet = "We Must Away, Ere Break of Day",
                 Quantity = 1,
+                QuestPoints = 1,
                 Text = "When Revealed: Add the set-aside Troll enemies and the Troll Cave to the staging area. Shuffle the encounter discard pile back into the encounter deck.",
+                FlavorText = "Obviously trolls. Even Bilbo, in spite of his sheltered life, could see that: from the great heavy faces of them, and their size, and the shape of their legs, not to mention their language, which was not drawing-room fashion at all - The Hobbit",
+                OppositeText = "Forced: If there are no Troll enemies left in play, or if there are no cards left in the encounter deck, advance it to the next stage.\r\nAny time players would place progress tokens on this quest, discard an equal number of cards from the encounter deck instead. (Progress is placed on the active location before triggering this effect.)",
                 Number = 65
             });
             Cards.Add(new Card() {
+                ImageName = "M1551",
                 Title = "Spare Hood and Cloak",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9074",
                 CardType = CardType.Attachment,
@@ -803,6 +834,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 66
             });
             Cards.Add(new Card() {
+                ImageName = "M1559",
                 Title = "Sting",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9075",
                 CardType = CardType.Treasure,
@@ -894,6 +926,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 73
             });
             Cards.Add(new Card() {
+                ImageName = "M1541",
                 Title = "Thorin Oakenshield",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9083",
                 CardType = CardType.Hero,
@@ -910,6 +943,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 74
             });
             Cards.Add(new Card() {
+                ImageName = "M1552",
                 Title = "Thror's Map",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9084",
                 CardType = CardType.Attachment,

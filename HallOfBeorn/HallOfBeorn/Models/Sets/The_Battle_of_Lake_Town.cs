@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "The Battle of Lake-town";
 
             Cards.Add(new Card() {
+                ImageName = "M1528",
                 Title = "Catching Fire",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9001",
                 CardType = CardType.Treachery,
@@ -22,6 +23,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 1
             });
             Cards.Add(new Card() {
+                ImageName = "M1524",
                 Title = "Close to the Flame",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9002",
                 CardType = CardType.Treachery,
@@ -32,6 +34,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 2
             });
             Cards.Add(new Card() {
+                ImageName = "M1527",
                 Title = "Dire Magnificence",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9003",
                 CardType = CardType.Treachery,
@@ -42,6 +45,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 3
             });
             Cards.Add(new Card() {
+                ImageName = "M1535", 
                 Title = "East Pier",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9004",
                 CardType = CardType.Location,
@@ -56,6 +60,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 4
             });
             Cards.Add(new Card() {
+                ImageName = "M1539",
                 Title = "Esgaroth Wharf",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9005",
                 CardType = CardType.Location,
@@ -71,14 +76,19 @@ namespace HallOfBeorn.Models.Sets
                 Number = 5
             });
             Cards.Add(new Card() {
+                ImageName = "M1517",
                 Title = "Fire and Water - 2A",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9006",
                 CardType = CardType.Quest,
                 EncounterSet = "The Battle of Lake-Town",
                 Quantity = 1,
+                QuestPoints = 10,
+                FlavorText = "\"...every vessel in the town was filled with water, every warrior was armed... before the roar of Smaug's terrible approach grew loud, and the lake rippled red as fire beneath the awful beating of his wings.\" - The Hobbit ",
+                OppositeText = "Smaug cannot have more than 12 damage on him.\r\nWhen the players quest successfully, any number of progress tokens that would be placed on this quest may instead be discarded to remove the same amount of damage from Lake-town.",
                 Number = 6
             });
             Cards.Add(new Card() {
+                ImageName = "M1538",
                 Title = "Fisherman's Dock",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9008",
                 CardType = CardType.Location,
@@ -94,6 +104,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 7
             });
             Cards.Add(new Card() {
+                ImageName = "M1537",
                 Title = "Great Bridge",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9009",
                 CardType = CardType.Location,
@@ -108,6 +119,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 8
             });
             Cards.Add(new Card() {
+                ImageName = "M1536", 
                 Title = "Great House",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9010",
                 CardType = CardType.Location,
@@ -122,6 +134,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 9
             });
             Cards.Add(new Card() {
+                ImageName = "M1522",
                 Title = "Lake-town",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9011",
                 CardType = CardType.Objective,
@@ -133,6 +146,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 10
             });
             Cards.Add(new Card() {
+                ImageName = "M1534",
                 Title = "Merchant's District",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9012",
                 CardType = CardType.Location,
@@ -148,6 +162,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 11
             });
             Cards.Add(new Card() {
+                ImageName = "M1533",
                 Title = "North Pier",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9013",
                 CardType = CardType.Location,
@@ -162,6 +177,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 12
             });
             Cards.Add(new Card() {
+                ImageName = "M1529",
                 Title = "Reckless in His Rage",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9014",
                 CardType = CardType.Treachery,
@@ -172,6 +188,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 13
             });
             Cards.Add(new Card() {
+                ImageName = "M1525",
                 Title = "Scorching Blast",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9015",
                 CardType = CardType.Treachery,
@@ -182,6 +199,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 14
             });
             Cards.Add(new Card() {
+                ImageName = "M1521",
                 Title = "Smaug the Magnificent",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9016",
                 CardType = CardType.Enemy,
@@ -199,6 +217,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 15
             });
             Cards.Add(new Card() {
+                ImageName = "M1519",
                 Title = "Smaug the Mighty",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9017",
                 CardType = CardType.Enemy,
@@ -216,6 +235,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 16
             });
             Cards.Add(new Card() {
+                ImageName = "M1520",
                 Title = "Smaug the Terrible",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9018",
                 CardType = CardType.Enemy,
@@ -233,6 +253,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 17
             });
             Cards.Add(new Card() {
+                ImageName = "M1532",
                 Title = "South Pier",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9019",
                 CardType = CardType.Location,
@@ -247,24 +268,33 @@ namespace HallOfBeorn.Models.Sets
                 Number = 18
             });
             Cards.Add(new Card() {
+                ImageName = "M1516",
                 Title = "Terror from the Mountain - 1A",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9020",
                 CardType = CardType.Quest,
                 EncounterSet = "The Battle of Lake-Town",
                 Quantity = 1,
+                QuestPoints = 14,
                 Setup = "s",
                 Text = "Setup: Shuffle all copies of Smaug into a separate Smaug Deck. Search the encounter deck for Lake-town and add it to the staging area. Shuffle the encounter deck. Then reveal 1 card from the encounter deck per player, and add it to the staging area.",
+                OppositeText = "Smaug cannot have more than 6 damage on him.\r\nWhen Revealed: Deal 1 damage to Lake-town for each player in the game.",
+                FlavorText = "\"Then warning trumpets were suddenly sounded, and echoed along the rocky shores. The cheering stopped and the joy was quickly turned to dread. So it was that the dragon did not find them quite unprepared.\" - The Hobbit",
                 Number = 19
             });
             Cards.Add(new Card() {
+                ImageName = "M1518",
                 Title = "The Dragon's Wrath - 3A",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9022",
                 CardType = CardType.Quest,
                 EncounterSet = "The Battle of Lake-Town",
                 Quantity = 1,
+                QuestPoints = null,
+                FlavorText = "\"Roaring he swept back over the town. A hail of dark arrows leaped up and snapped and rattled on his scales and jewels, and their shafts fell back kindled by his breath burning and hissing into the lake.\" - The Hobbit",
+                OppositeText = "Forced: During the quest phase, reveal 1 additional card from the encounter deck.\r\nRefresh Action: Reset the quest deck to stage 2B.\r\nThe players must defeat Smaug to defeat this stage. When Smaug is defeated, compare the number of damage tokens on Lake-town with the number of Victory points in the victory display. If the players have more victory points, they have won the game. Otherwise, Lake-town has burned and the players have lost.",
                 Number = 20
             });
             Cards.Add(new Card() {
+                ImageName = "M1531",
                 Title = "The Master's Manor",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9024",
                 CardType = CardType.Location,
@@ -280,6 +310,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 21
             });
             Cards.Add(new Card() {
+                ImageName = "M1523",
                 Title = "The Old Thrush",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9025",
                 CardType = CardType.Objective,
@@ -292,6 +323,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 22
             });
             Cards.Add(new Card() {
+                ImageName = "M1526",
                 Title = "Town-Baiting",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9026",
                 CardType = CardType.Treachery,
@@ -301,6 +333,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 23
             });
             Cards.Add(new Card() {
+                ImageName = "M1530",
                 Title = "West Pier",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9027",
                 CardType = CardType.Location,

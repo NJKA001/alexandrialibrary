@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "Shadow and Flame";
 
             Cards.Add(new Card() {
+                ImageName = "M1507",
                 Title = "Counter-Spell",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9001",
                 CardType = CardType.Treachery,
@@ -22,6 +23,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 1
             });
             Cards.Add(new Card() {
+                ImageName = "M1503",
                 Title = "Dark Pit",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9002",
                 CardType = CardType.Location,
@@ -34,6 +36,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 2
             });
             Cards.Add(new Card() {
+                ImageName = "M1512",
                 Title = "Durin's Bane",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9003",
                 CardType = CardType.Enemy,
@@ -51,6 +54,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 3
             });
             Cards.Add(new Card() {
+                ImageName = "M1490",
                 Title = "Elrond",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9004",
                 CardType = CardType.Hero,
@@ -67,6 +71,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 4
             });
             Cards.Add(new Card() {
+                ImageName = "M1514",
                 Title = "Fiery Sword",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9005",
                 CardType = CardType.Treachery,
@@ -78,6 +83,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 5
             });
             Cards.Add(new Card() {
+                ImageName = "M1506",
                 Title = "Fires in the Deep",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9006",
                 CardType = CardType.Treachery,
@@ -88,6 +94,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 6
             });
             Cards.Add(new Card() {
+                ImageName = "M1493",
                 Title = "Hands Upon the Bow",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9007",
                 CardType = CardType.Event,
@@ -98,6 +105,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 7
             });
             Cards.Add(new Card() {
+                ImageName = "M1492",
                 Title = "Hardy Leadership",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9008",
                 CardType = CardType.Attachment,
@@ -110,6 +118,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 8
             });
             Cards.Add(new Card() {
+                ImageName = "M1508",
                 Title = "Inner Flame",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9009",
                 CardType = CardType.Treachery,
@@ -120,6 +129,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 9
             });
             Cards.Add(new Card() {
+                ImageName = "M1509",
                 Title = "Inner Shadow",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9010",
                 CardType = CardType.Treachery,
@@ -130,14 +140,19 @@ namespace HallOfBeorn.Models.Sets
                 Number = 10
             });
             Cards.Add(new Card() {
+                ImageName = "M1502",
                 Title = "Last Lord of Moria - 3A",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9011",
                 CardType = CardType.Quest,
                 EncounterSet = "Shadow and Flame",
+                FlavorText = "There is a crumbling pile of boulders on the edge of a teetering cliff, and it gives you a sudden idea. There are chasms and pits along the path you are traveling, and perhaps a well-timed rockslide could send the Balrog down into the depths below...",
+                OppositeText = "When Revealed: Durin's Bane makes an immediate attack on the first player. Add Dark Pit to the staging area.\r\nPlayers cannot win the game while Durin's Bane is in play. If Durin's Bane leaves play by the effect on Dark Pit, the players have won the game.",
                 Quantity = 1,
+                QuestPoints = 1,
                 Number = 11
             });
             Cards.Add(new Card() {
+                ImageName = "M1511",
                 Title = "Leaping Flame",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9013",
                 CardType = CardType.Treachery,
@@ -148,6 +163,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 12
             });
             Cards.Add(new Card() {
+                ImageName = "M1515",
                 Title = "Many Thonged Whip",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9014",
                 CardType = CardType.Treachery,
@@ -159,6 +175,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 13
             });
             Cards.Add(new Card() {
+                ImageName = "M1496",
                 Title = "Master of the Forge",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9015",
                 CardType = CardType.Ally,
@@ -174,6 +191,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 14
             });
             Cards.Add(new Card() {
+                ImageName = "M1495",
                 Title = "Miruvor",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9016",
                 CardType = CardType.Attachment,
@@ -186,16 +204,22 @@ namespace HallOfBeorn.Models.Sets
                 Number = 15
             });
             Cards.Add(new Card() {
+                ImageName = "M1500",
                 Title = "Nearing the Gate - 1A",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9017",
                 CardType = CardType.Quest,
                 EncounterSet = "Shadow and Flame",
                 Quantity = 1,
+                QuestPoints = 9,
+                FlavorText = "As you reach the eastern realm of Darrowdelf the craftsmanship of the Dwarves is proudly displayed. But the sound of drums sound in the deep, and it appears that these halls are infested with Orcs.",
+                OppositeFlavorText = "A crack like lightning sounds before you, and a creature of shadow and flame blocks your way. It is an ancient demon of Morgoth, and its presence explains the massing in Moria.",
                 Setup = "ts",
                 Text = "Setup: Remove Dark Pit from the encounter deck and place it aside, out of play. Add Durin's Bane to the staging area. Shuffle the encounter deck.",
+                OppositeText = "When Revealed: Reduce each player's threat to 0. Reveal X cards from the encounter deck, where X is one less than the number of players in the game, and add them to the staging area.",
                 Number = 16
             });
             Cards.Add(new Card() {
+                ImageName = "M1494",
                 Title = "O Elbereth! Gilthonial!",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9019",
                 CardType = CardType.Event,
@@ -207,6 +231,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 17
             });
             Cards.Add(new Card() {
+                ImageName = "M1497",
                 Title = "Peace, and Thought",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9020",
                 CardType = CardType.Event,
@@ -217,6 +242,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 18
             });
             Cards.Add(new Card() {
+                ImageName = "M1513",
                 Title = "Ranging Goblin",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9021",
                 CardType = CardType.Enemy,
@@ -232,6 +258,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 19
             });
             Cards.Add(new Card() {
+                ImageName = "M1498",
                 Title = "Risk Some Light",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9022",
                 CardType = CardType.Event,
@@ -243,6 +270,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 20
             });
             Cards.Add(new Card() {
+                ImageName = "M1505",
                 Title = "Second Deep",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9023",
                 CardType = CardType.Location,
@@ -255,6 +283,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 21
             });
             Cards.Add(new Card() {
+                ImageName = "M1504",
                 Title = "Second Hall",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9024",
                 CardType = CardType.Location,
@@ -268,14 +297,19 @@ namespace HallOfBeorn.Models.Sets
                 Number = 22
             });
             Cards.Add(new Card() {
+                ImageName = "M1501",
                 Title = "The Rear Guard - 2A",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9025",
                 CardType = CardType.Quest,
                 EncounterSet = "Shadow and Flame",
+                FlavorText = "The fire-demon is Durin's Bane, doom of the Dwarves and the new Lord of Moria. It cannot be destroyed by mere strength of arms. You must find another way to deal with this Balrog as it relentlessly attacks, sword and whip weaving a deadly pattern of flame.",
+                OppositeText = "Forced: If at least 1 hero committed to the quest this round, place 4 progress tokens on The Rear Guard (bypassing any active location) at the end of the quest phase.\r\nIf Durin's Bane has 0 hit points, advance to the next stage of the scenario immediately.",
                 Quantity = 1,
+                QuestPoints = 16,
                 Number = 23
             });
             Cards.Add(new Card() {
+                ImageName = "M1499",
                 Title = "Vilya",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9027",
                 CardType = CardType.Attachment,
@@ -289,6 +323,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 24
             });
             Cards.Add(new Card() {
+                ImageName = "M1491",
                 Title = "We Are Not Idle",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9028",
                 CardType = CardType.Event,
@@ -299,6 +334,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 25
             });
             Cards.Add(new Card() {
+                ImageName = "M1510",
                 Title = "Whip Lash",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9029",
                 CardType = CardType.Treachery,

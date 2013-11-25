@@ -48,7 +48,7 @@ namespace HallOfBeorn.Controllers
 
             if (trait != null && trait != "Any")
             {
-                cards = cards.Where(x => x.Traits.Any(y => y == trait)).ToList();
+                cards = cards.Where(x => x.Traits.Any(y => string.Equals(y, trait))).ToList();
             }
 
             if (!string.IsNullOrEmpty(title))
