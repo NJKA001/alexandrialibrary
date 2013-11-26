@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "The Hobbit: On the Doorstep";
 
             Cards.Add(new Card() {
+                ImageName = "M1625",
                 Title = "Balin",
                 Id = "bf2cb5a8-2ec6-4366-89f6-7e3010686a85",
                 CardType = CardType.Hero,
@@ -28,6 +29,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 1
             });
             Cards.Add(new Card() {
+                ImageName = "M1626",
                 Title = "Bard the Bowman",
                 Id = "e2cf87be-ccdc-48e9-8127-57bee67d4a0c",
                 CardType = CardType.Hero,
@@ -106,6 +108,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 6
             });
             Cards.Add(new Card() {
+                ImageName = "M1628",
                 Title = "Bombur",
                 Id = "66f66c2e-36e7-4d97-aebb-1ca413f9edeb",
                 CardType = CardType.Hero,
@@ -215,7 +218,9 @@ namespace HallOfBeorn.Models.Sets
                 Number = 14
             });
             Cards.Add(new Card() {
-                Title = "Oin",
+                ImageName = "M1627",
+                Title = "Óin",
+                NormalizedTitle = "Oin",
                 Id = "b21a2af5-7443-4630-9503-1b334ae51c6e",
                 CardType = CardType.Hero,
                 Sphere = Sphere.Spirit,
