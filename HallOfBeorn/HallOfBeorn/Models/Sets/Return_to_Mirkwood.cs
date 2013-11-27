@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Return to Mirkwood";
+            SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {
                 ImageName = "M1276",

@@ -9,6 +9,7 @@ body {
     border-top: solid 10px #000;
     color: #333;
     font-size: .85em;
+    /*font-family: "Tolkien", Verdana, Helvetica, sans-serif;*/
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0;
@@ -114,13 +115,13 @@ h5, h6 {
 }
 
     .main-content {
-        background: url("../Images/accent.png") no-repeat;
+        /*background: url("../Images/accent.png") no-repeat;*/
         padding-left: 10px;
         padding-top: 30px;
     }
 
     .featured + .main-content {
-        background: url("../Images/heroAccent.png") no-repeat;
+        /*background: url("../Images/heroAccent.png") no-repeat;*/
     }
 
 header .content-wrapper {
@@ -762,4 +763,9 @@ tr.pager td {
         footer p {
             margin: 0;
         }
+}
+
+@font-face {
+    font-family: 'Tolkien'; /*a name to be used later*/
+    src: url('~/Content/fonts/tolkien.ttf'); /*URL to font*/
 }

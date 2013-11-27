@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Hobbit: Over Hill and Under Hill";
+            SetType = Models.SetType.Saga_Expansion;
 
             Cards.Add(new Card() {
                 ImageName = "M1587",

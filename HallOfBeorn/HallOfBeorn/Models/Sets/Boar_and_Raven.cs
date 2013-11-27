@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Board and Raven";
+            SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {
                 Title = "The Raven Tribe - 1A",

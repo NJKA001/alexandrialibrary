@@ -10,8 +10,10 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Encounter at Amon Dîn";
+            SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {
+                ImageName = "M1834",
                 Title = "Pippin",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90021",
                 IsUnique = true,
@@ -28,6 +30,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 1
             });
             Cards.Add(new Card() {
+                ImageName = "M1835",
                 Title = "Denethor",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90022",
                 IsUnique = true,
@@ -44,6 +47,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 2
             });
             Cards.Add(new Card() {
+                ImageName = "M1836",
                 Title = "Lord of Morthond",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90023",
                 IsUnique = true,
@@ -57,6 +61,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 3
             });
             Cards.Add(new Card() {
+                ImageName = "M1837",
                 Title = "Book of Eldacar",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90024",
                 IsUnique = true,
@@ -70,6 +75,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 4
             });
             Cards.Add(new Card() {
+                ImageName = "M1838",
                 Title = "Gondorian Discipline",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90025",
                 CardType = CardType.Event,
@@ -81,6 +87,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 5
             });
             Cards.Add(new Card() {
+                ImageName = "M1839",
                 Title = "Minas Tirith Lampwright",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90026",
                 CardType = CardType.Ally,
@@ -96,6 +103,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 6
             });
             Cards.Add(new Card() {
+                ImageName = "M1840",
                 Title = "Small Target",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90027",
                 CardType = CardType.Event,
@@ -106,6 +114,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 7
             });
             Cards.Add(new Card() {
+                ImageName = "M1841",
                 Title = "Ithilien Archer",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90028",
                 CardType = CardType.Ally,
@@ -122,6 +131,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 8
             });
             Cards.Add(new Card() {
+                ImageName = "M1842",
                 Title = "Ithilien Pit",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90029",
                 CardType = CardType.Attachment,
@@ -133,6 +143,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 9
             });
             Cards.Add(new Card() {
+                ImageName = "M1843",
                 Title = "Hobbit-sense",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90030",
                 CardType = CardType.Event,
@@ -144,6 +155,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 10
             });
             Cards.Add(new Card() {
+                ImageName = "M1844",
                 Title = "Savagery of the Orcs - 1A",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93001",
                 CardType = CardType.Quest,
@@ -154,15 +166,18 @@ namespace HallOfBeorn.Models.Sets
                 Number = 11
             });
             Cards.Add(new Card() {
+                ImageName = "M1845",
                 Title = "Protect the Villagers - 1A",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93002",
                 CardType = CardType.Quest,
                 Text = "When Revealed: Add Ghulat to the staging area.",
                 EncounterSet = "Encounter at Amon Dîn",
                 Quantity = 1,
+                QuestPoints = 15,
                 Number = 12
             });
             Cards.Add(new Card() {
+                ImageName = "M1848",
                 Title = "Lord Alcaron",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93070",
                 IsUnique = true,
@@ -179,6 +194,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 13
             });
             Cards.Add(new Card() {
+                ImageName = "M1846",
                 Title = "Rescued Villagers",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93068",
                 CardType = CardType.Objective,
@@ -188,6 +204,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 14
             });
             Cards.Add(new Card() {
+                ImageName = "M1847",
                 Title = "Dead Villagers",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93069",
                 CardType = CardType.Objective,
@@ -197,6 +214,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 15
             });
             Cards.Add(new Card() {
+                ImageName = "M1849",
                 Title = "Ghulat",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93071",
                 IsUnique = true,
@@ -215,6 +233,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 16
             });
             Cards.Add(new Card() {
+                ImageName = "M1850",
                 Title = "Marauding Orc",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93072",
                 CardType = CardType.Enemy,
@@ -231,6 +250,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 17
             });
             Cards.Add(new Card() {
+                ImageName = "M1851",
                 Title = "Orc Ravager",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93073",
                 CardType = CardType.Enemy,
@@ -247,6 +267,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 18
             });
             Cards.Add(new Card() {
+                ImageName = "M1852",
                 Title = "Craven Eagle",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93074",
                 CardType = CardType.Enemy,
@@ -262,6 +283,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 19
             });
             Cards.Add(new Card() {
+                ImageName = "M1853",
                 Title = "Burning Farmhouse",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93075",
                 CardType = CardType.Location,
@@ -276,6 +298,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 20
             });
             Cards.Add(new Card() {
+                ImageName = "M1854",
                 Title = "Gondorian Hamlet",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93076",
                 CardType = CardType.Location,
@@ -290,6 +313,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 21
             });
             Cards.Add(new Card() {
+                ImageName = "M1855",
                 Title = "Secluded Farmhouse",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93077",
                 CardType = CardType.Location,
@@ -304,6 +328,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 22
             });
             Cards.Add(new Card() {
+                ImageName = "M1856",
                 Title = "Burnt Homestead",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93078",
                 CardType = CardType.Treachery,
@@ -315,6 +340,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 23
             });
             Cards.Add(new Card() {
+                ImageName = "M1857",
                 Title = "Trapped Inside",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93079",
                 CardType = CardType.Treachery,
@@ -326,6 +352,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 24
             });
             Cards.Add(new Card() {
+                ImageName = "M1858",
                 Title = "Panicked!",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93080",
                 CardType = CardType.Treachery,

@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Celebrimbor's Forge";
+            SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {
                 Title = "The Ruins of Ost-in-edhil - 1A",

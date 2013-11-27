@@ -11,6 +11,8 @@ namespace HallOfBeorn.Models
         {
             Traits = new List<string>();
             Keywords = new List<string>();
+            ImageHeight = 290;
+            ImageWidth = 207;
         }
 
         public string Id { get; set; }
@@ -21,11 +23,26 @@ namespace HallOfBeorn.Models
 
         public uint Number { get; set; }
         public uint StageNumber { get; set; }
+        
         public string ImageName { get; set; }
+        public string ImagePath
+        {
+            get
+            {
+                return string.IsNullOrEmpty(ImageName) ?
+                    string.Format("/Images/Cards/{0}/{1}.jpg", CardSet.Name.ToUrlSafeString(), Title.ToUrlSafeString())
+                    : string.Format("/Images/Cards/{0}.png", ImageName.ToUrlSafeString());
+            }
+        }
+        public int ImageHeight { get; set; }
+        public int ImageWidth { get; set; }
+
+
         public CardSet CardSet { get; set; }
 
         public bool IsUnique { get; set; }
         public CardType CardType { get; set; }
+        public CampaignCardType CampaignCardType { get; set; }
         public Sphere Sphere { get; set; }
         public byte ThreatCost { get; set; }
         public byte ResourceCost { get; set; }

@@ -10,8 +10,10 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Heirs of Númenor";
+            SetType = Models.SetType.Deluxe_Expansion;
 
             Cards.Add(new Card() {
+                ImageName = "M1721",
                 Title = "Alcaron's Scroll",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9001",
                 CardType = CardType.Objective,
@@ -23,6 +25,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 1
             });
             Cards.Add(new Card() {
+                ImageName = "M1714",
                 Title = "A Watchful Peace",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9002",
                 CardType = CardType.Event,
@@ -33,6 +36,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 2
             });
             Cards.Add(new Card() {
+                ImageName = "M1733",
                 Title = "Battering Ram",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9003",
                 CardType = CardType.Enemy,
@@ -50,6 +54,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 3
             });
             Cards.Add(new Card() {
+                ImageName = "M1710",
                 Title = "Behind Strong Walls",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9004",
                 CardType = CardType.Event,
@@ -60,6 +65,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 4
             });
             Cards.Add(new Card() {
+                ImageName = "M1703",
                 Title = "Beregond",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9005",
                 CardType = CardType.Hero,
@@ -77,6 +83,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 5
             });
             Cards.Add(new Card() {
+                ImageName = "M1731",
                 Title = "Blocking Wargs",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9006",
                 CardType = CardType.Treachery,
@@ -88,7 +95,9 @@ namespace HallOfBeorn.Models.Sets
                 Number = 6
             });
             Cards.Add(new Card() {
-                Title = "Blood of Numenor",
+                ImageName = "M1715",
+                Title = "Blood of Númenor",
+                NormalizedTitle = "Blood of Numenor",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9007",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Spirit,
@@ -100,6 +109,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 7
             });
             Cards.Add(new Card() {
+                ImageName = "M1704",
                 Title = "Boromir",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9008",
                 CardType = CardType.Hero,
@@ -116,6 +126,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 8
             });
             Cards.Add(new Card() {
+                ImageName = "M1727",
                 Title = "Celador",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9009",
                 CardType = CardType.Objective,
@@ -131,6 +142,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 9
             });
             Cards.Add(new Card() {
+                ImageName = "M1706",
                 Title = "Citadel Custodian",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9010",
                 CardType = CardType.Ally,
@@ -146,6 +158,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 10
             });
             Cards.Add(new Card() {
+                ImageName = "M1740",
                 Title = "City Street",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9011",
                 CardType = CardType.Location,
@@ -160,6 +173,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 11
             });
             Cards.Add(new Card() {
+                ImageName = "M1726",
                 Title = "Collateral Damage",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9012",
                 CardType = CardType.Treachery,
@@ -170,6 +184,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 12
             });
             Cards.Add(new Card() {
+                ImageName = "M1712",
                 Title = "Damrod",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9013",
                 CardType = CardType.Ally,
@@ -186,6 +201,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 13
             });
             Cards.Add(new Card() {
+                ImageName = "M1709",
                 Title = "Defender of Rammas",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9014",
                 CardType = CardType.Ally,
@@ -200,6 +216,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 14
             });
             Cards.Add(new Card() {
+                ImageName = "M1720",
                 Title = "Envoy of Pelargir",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9015",
                 CardType = CardType.Ally,
@@ -215,6 +232,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 15
             });
             Cards.Add(new Card() {
+                ImageName = "M1705",
                 Title = "Errand-rider",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9016",
                 CardType = CardType.Ally,
@@ -230,6 +248,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 16
             });
             Cards.Add(new Card() {
+                ImageName = "M1752",
                 Title = "Forest Bat",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9017",
                 CardType = CardType.Enemy,
@@ -246,6 +265,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 17
             });
             Cards.Add(new Card() {
+                ImageName = "M1755",
                 Title = "Haradrim Elite",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9018",
                 CardType = CardType.Enemy,
@@ -262,6 +282,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 18
             });
             Cards.Add(new Card() {
+                ImageName = "M1725",
                 Title = "Harbor Storehouse",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9019",
                 CardType = CardType.Location,
@@ -275,6 +296,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 19
             });
             Cards.Add(new Card() {
+                ImageName = "M1722",
                 Title = "Harbor Thug",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9020",
                 CardType = CardType.Enemy,
@@ -291,109 +313,134 @@ namespace HallOfBeorn.Models.Sets
                 Number = 20
             });
             Cards.Add(new Card() {
+                ImageName = "M1767",
                 Title = "The Leaping Fish - 1A",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9021",
                 CardType = CardType.Quest,
                 Setup = "lt",
                 Quantity = 1,
+                QuestPoints = 6,
                 Text = "Setup: Search the encounter deck for The Leaping Fish and Alcaron's Scroll. Make The Leaping Fish the active location and attach Alcaron's Scroll to a hero.",
                 EncounterSet = "Peril in Pelargir",
                 Number = 21
             });
             Cards.Add(new Card() {
+                ImageName = "M1768",
                 Title = "Fighting in the Streets - 2A",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9023",
                 CardType = CardType.Quest,
                 Quantity = 1,
+                QuestPoints = 13,
                 EncounterSet = "Peril in Pelargir",
                 Number = 22
             });
             Cards.Add(new Card() {
+                ImageName = "M1769",
                 Title = "Escape to the Quays - 3A",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9025",
                 CardType = CardType.Quest,
                 Quantity = 1,
+                QuestPoints = 15,
                 Text = "When Revealed: Each player searches the encounter deck and discard pile for 1 enemy and adds it to the staging area.",
                 EncounterSet = "Peril in Pelargir",
                 Number = 23
             });
             Cards.Add(new Card() {
+                ImageName = "M1770",
                 Title = "Ambush in Ithilien - 1A",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9027",
                 CardType = CardType.Quest,
                 Setup = "sl",
                 Quantity = 1,
+                QuestPoints = 15,
                 Text = "Setup: Add Celador to the staging area. Search the encounter deck for a copy of Ithilien Road and make it the active location. Each player must search the encounter deck for a copy of Southron Company and add it to the staging area. Shuffle the encounter deck.",
                 EncounterSet = "Into Ithilien",
                 Number = 24
             });
             Cards.Add(new Card() {
+                ImageName = "M1771",
                 Title = "Southron Counter-attack - 2A",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9029",
                 CardType = CardType.Quest,
                 Quantity = 1,
+                QuestPoints = 9,
                 EncounterSet = "Into Ithilien",
                 Number = 25
             });
             Cards.Add(new Card() {
+                ImageName = "M1772",
                 Title = "The Hidden Way - 3A",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9031",
                 CardType = CardType.Quest,
                 Quantity = 1,
+                QuestPoints = 12,
                 EncounterSet = "Into Ithilien",
                 Number = 26
             });
             Cards.Add(new Card() {
+                ImageName = "M1773",
                 Title = "Approaching Cair Andros - 4A",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9033",
                 CardType = CardType.Quest,
                 Quantity = 1,
+                QuestPoints = 15,
                 EncounterSet = "Into Ithilien",
                 Number = 27
             });
             Cards.Add(new Card() {
+                ImageName = "M1774",
                 Title = "The Defense - 1A",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9035",
                 CardType = CardType.Quest,
                 Setup = "sss",
                 Quantity = 1,
+                QuestPoints = 9,
                 Text = "Setup: Add The Approach, The Citadel, and The Banks to the staging area. Shuffle the encounter deck.",
                 EncounterSet = "The Siege of Cair Andros",
                 Number = 28
             });
             Cards.Add(new Card() {
+                ImageName = "M1775",
                 Title = "Reinforcing the Banks - 2A",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9037",
                 CardType = CardType.Quest,
                 Quantity = 1,
+                QuestPoints = 9,
                 EncounterSet = "The Siege of Cair Andros",
                 Number = 29
             });
             Cards.Add(new Card() {
+                ImageName = "M1776",
                 Title = "Breakthrough at the Approach - 3A",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9039",
                 CardType = CardType.Quest,
                 Quantity = 1,
+                QuestPoints = 7,
                 EncounterSet = "The Siege of Cair Andros",
                 Number = 30
             });
             Cards.Add(new Card() {
+                ImageName = "M1777",
                 Title = "Breakthrough at the Citadel - 4A",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9041",
                 CardType = CardType.Quest,
                 Quantity = 1,
+                QuestPoints = 5,
                 EncounterSet = "The Siege of Cair Andros",
                 Number = 31
             });
             Cards.Add(new Card() {
+                ImageName = "M1778",
                 Title = "The Last Battle - 5A",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9043",
                 CardType = CardType.Quest,
                 Quantity = 1,
+                QuestPoints = 15,
                 EncounterSet = "The Siege of Cair Andros",
                 Number = 32
             });
             Cards.Add(new Card() {
+                ImageName = "M1716",
                 Title = "Hunter of Lamedon",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9045",
                 CardType = CardType.Ally,
@@ -409,6 +456,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 33
             });
             Cards.Add(new Card() {
+                ImageName = "M1728",
                 Title = "Ithilien Guardian",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9046",
                 CardType = CardType.Objective,
@@ -424,6 +472,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 34
             });
             Cards.Add(new Card() {
+                ImageName = "M1730",
                 Title = "Ithilien Road",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9047",
                 CardType = CardType.Location,
@@ -437,6 +486,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 35
             });
             Cards.Add(new Card() {
+                ImageName = "M1717",
                 Title = "Ithilien Tracker",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9048",
                 CardType = CardType.Ally,
@@ -452,6 +502,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 36
             });
             Cards.Add(new Card() {
+                ImageName = "M1758",
                 Title = "Lieutenant of Mordor",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9049",
                 CardType = CardType.Enemy,
@@ -468,6 +519,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 37
             });
             Cards.Add(new Card() {
+                ImageName = "M1713",
                 Title = "Light the Beacons",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9050",
                 CardType = CardType.Event,
@@ -478,6 +530,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 38
             });
             Cards.Add(new Card() {
+                ImageName = "M1743",
                 Title = "Local Trouble",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9051",
                 CardType = CardType.Treachery,
@@ -487,6 +540,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 39
             });
             Cards.Add(new Card() {
+                ImageName = "M1745",
                 Title = "Lossarnach Bandit",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9052",
                 CardType = CardType.Enemy,
@@ -502,6 +556,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 40
             });
             Cards.Add(new Card() {
+                ImageName = "M1750",
                 Title = "Lost Companion",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9053",
                 CardType = CardType.Treachery,
@@ -511,6 +566,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 41
             });
             Cards.Add(new Card() {
+                ImageName = "M1742",
                 Title = "Lost in the City",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9054",
                 CardType = CardType.Treachery,
@@ -521,6 +577,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 42
             });
             Cards.Add(new Card() {
+                ImageName = "M1747",
                 Title = "Lurking in Shadows",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9055",
                 CardType = CardType.Treachery,
@@ -531,6 +588,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 43
             });
             Cards.Add(new Card() {
+                ImageName = "M1741",
                 Title = "Market Square",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9056",
                 CardType = CardType.Location,
@@ -545,6 +603,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 44
             });
             Cards.Add(new Card() {
+                ImageName = "M1718",
                 Title = "Master of Lore",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9057",
                 CardType = CardType.Ally,
@@ -560,6 +619,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 45
             });
             Cards.Add(new Card() {
+                ImageName = "M1751",
                 Title = "Morgul Spider",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9058",
                 CardType = CardType.Enemy,
@@ -575,7 +635,9 @@ namespace HallOfBeorn.Models.Sets
                 Number = 46
             });
             Cards.Add(new Card() {
-                Title = "Mumak",
+                ImageName = "M1756",
+                Title = "Mûmak",
+                NormalizedTitle = "Mumak",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9059",
                 CardType = CardType.Enemy,
                 Quantity = 1,
@@ -590,6 +652,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 47
             });
             Cards.Add(new Card() {
+                ImageName = "M1707",
                 Title = "Mutual Accord",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9060",
                 CardType = CardType.Event,
@@ -600,6 +663,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 48
             });
             Cards.Add(new Card() {
+                ImageName = "M1759",
                 Title = "Orc Arbalesters",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9061",
                 CardType = CardType.Enemy,
@@ -617,6 +681,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 49
             });
             Cards.Add(new Card() {
+                ImageName = "M1765",
                 Title = "Orc Arsonist",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9062",
                 CardType = CardType.Enemy,
@@ -633,6 +698,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 50
             });
             Cards.Add(new Card() {
+                ImageName = "M1738",
                 Title = "Orc Assault",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9063",
                 CardType = CardType.Treachery,
@@ -643,6 +709,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 51
             });
             Cards.Add(new Card() {
+                ImageName = "M1764",
                 Title = "Orc Rabble",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9064",
                 CardType = CardType.Enemy,
@@ -659,6 +726,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 52
             });
             Cards.Add(new Card() {
+                ImageName = "M1732",
                 Title = "Orc Scramblers",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9065",
                 CardType = CardType.Enemy,
@@ -676,6 +744,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 53
             });
             Cards.Add(new Card() {
+                ImageName = "M1760",
                 Title = "Orc Vanguard",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9066",
                 CardType = CardType.Enemy,
@@ -692,6 +761,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 54
             });
             Cards.Add(new Card() {
+                ImageName = "M1761",
                 Title = "Orc War Camp",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9067",
                 CardType = CardType.Location,
@@ -705,6 +775,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 55
             });
             Cards.Add(new Card() {
+                ImageName = "M1748",
                 Title = "Overgrown Trail",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9068",
                 CardType = CardType.Location,
@@ -718,6 +789,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 56
             });
             Cards.Add(new Card() {
+                ImageName = "M1724",
                 Title = "Pelargir Docks",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9069",
                 CardType = CardType.Location,
@@ -730,6 +802,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 57
             });
             Cards.Add(new Card() {
+                ImageName = "M1739",
                 Title = "Pickpocket",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9070",
                 CardType = CardType.Enemy,
@@ -746,6 +819,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 58
             });
             Cards.Add(new Card() {
+                ImageName = "M1719",
                 Title = "Ranger Spikes",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9071",
                 CardType = CardType.Attachment,
@@ -757,6 +831,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 59
             });
             Cards.Add(new Card() {
+                ImageName = "M1766",
                 Title = "Scourge of Mordor",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9072",
                 CardType = CardType.Treachery,
@@ -767,6 +842,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 60
             });
             Cards.Add(new Card() {
+                ImageName = "M1749",
                 Title = "Secluded Glade",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9073",
                 CardType = CardType.Location,
@@ -780,6 +856,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 61
             });
             Cards.Add(new Card() {
+                ImageName = "M1734",
                 Title = "Siege Raft",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9074",
                 CardType = CardType.Enemy,
@@ -796,6 +873,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 62
             });
             Cards.Add(new Card() {
+                ImageName = "M1729",
                 Title = "Southron Company",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9075",
                 CardType = CardType.Enemy,
@@ -812,6 +890,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 63
             });
             Cards.Add(new Card() {
+                ImageName = "M1754",
                 Title = "Southron Mercenaries",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9076",
                 CardType = CardType.Enemy,
@@ -829,6 +908,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 64
             });
             Cards.Add(new Card() {
+                ImageName = "M1757",
                 Title = "Southron Support",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9077",
                 CardType = CardType.Treachery,
@@ -839,6 +919,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 65
             });
             Cards.Add(new Card() {
+                ImageName = "M1711",
                 Title = "Spear of the Citadel",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9078",
                 CardType = CardType.Attachment,
@@ -851,6 +932,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 66
             });
             Cards.Add(new Card() {
+                ImageName = "M1736",
                 Title = "The Approach",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9079",
                 CardType = CardType.Location,
@@ -864,6 +946,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 67
             });
             Cards.Add(new Card() {
+                ImageName = "M1737",
                 Title = "The Banks",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9080",
                 CardType = CardType.Location,
@@ -877,6 +960,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 68
             });
             Cards.Add(new Card() {
+                ImageName = "M1735",
                 Title = "The Citadel",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9081",
                 CardType = CardType.Location,
@@ -890,6 +974,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 69
             });
             Cards.Add(new Card() {
+                ImageName = "M1723",
                 Title = "The Leaping Fish",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9082",
                 CardType = CardType.Location,
@@ -904,6 +989,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 70
             });
             Cards.Add(new Card() {
+                ImageName = "M1762",
                 Title = "The Master's Malice",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9083",
                 CardType = CardType.Treachery,
@@ -913,6 +999,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 71
             });
             Cards.Add(new Card() {
+                ImageName = "M1763",
                 Title = "The Power of Mordor",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9084",
                 CardType = CardType.Treachery,
@@ -923,6 +1010,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 72
             });
             Cards.Add(new Card() {
+                ImageName = "M1746",
                 Title = "Umbar Assassin",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9085",
                 CardType = CardType.Enemy,
@@ -939,6 +1027,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 73
             });
             Cards.Add(new Card() {
+                ImageName = "M1753",
                 Title = "Watcher in the Wood",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9086",
                 CardType = CardType.Treachery,
@@ -949,6 +1038,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 74
             });
             Cards.Add(new Card() {
+                ImageName = "M1708",
                 Title = "Wealth of Gondor",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9087",
                 CardType = CardType.Event,
@@ -959,6 +1049,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 75
             });
             Cards.Add(new Card() {
+                ImageName = "M1744",
                 Title = "Zealous Traitor",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9088",
                 CardType = CardType.Enemy,

@@ -9,6 +9,9 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
+            Name = "Voice of Isengard";
+            SetType = Models.SetType.Deluxe_Expansion;
+
             Cards.Add(new Card() {
                 Title = "Eomer",
                 Id = "9472b675-605e-446e-a432-1146eec90001",

@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Hobbit: On the Doorstep";
+            SetType = Models.SetType.Saga_Expansion;
 
             Cards.Add(new Card() {
                 ImageName = "M1625",
@@ -47,6 +48,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 2
             });
             Cards.Add(new Card() {
+                ImageName = "M1630",
                 Title = "Bifur",
                 Id = "c4b959f5-92a9-4f46-8656-f9da08a5cb86",
                 CardType = CardType.Ally,
@@ -81,6 +83,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 4
             });
             Cards.Add(new Card() {
+                ImageName = "M1642",
                 Title = "Bilbo's Magic Ring",
                 Id = "9dd6bf3e-e090-4ebf-a056-765c94e8a199",
                 CardType = CardType.Treasure,
@@ -94,6 +97,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 5
             });
             Cards.Add(new Card() {
+                ImageName = "M1638",
                 Title = "Black Arrow",
                 Id = "ae16236d-886e-4f65-9129-5ead1d373bfe",
                 CardType = CardType.Attachment,
@@ -125,6 +129,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 7
             });
             Cards.Add(new Card() {
+                ImageName = "M1633",
                 Title = "Desperate Alliance",
                 Id = "7465c18b-440e-4a90-8ac0-c50c0de03b5d",
                 CardType = CardType.Event,
@@ -135,6 +140,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 8
             });
             Cards.Add(new Card() {
+                ImageName = "M1631",
                 Title = "Dwalin",
                 Id = "c66638a7-95ae-4913-bf11-2e8dcf8d6104",
                 CardType = CardType.Ally,
@@ -152,6 +158,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 9
             });
             Cards.Add(new Card() {
+                ImageName = "M1640",
                 Title = "Expert Treasure-hunter",
                 Id = "2d550e71-f2a6-41f2-8aac-4533a965eb71",
                 CardType = CardType.Attachment,
@@ -164,7 +171,9 @@ namespace HallOfBeorn.Models.Sets
                 Number = 10
             });
             Cards.Add(new Card() {
-                Title = "Gloin",
+                ImageName = "M1629",
+                Title = "Glóin",
+                NormalizedTitle = "Gloin",
                 Id = "6778eb01-6b07-4dbe-87f1-e854ab548813",
                 CardType = CardType.Ally,
                 Sphere = Sphere.Leadership,
@@ -180,6 +189,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 11
             });
             Cards.Add(new Card() {
+                ImageName = "M1637",
                 Title = "Great Yew Bow",
                 Id = "833664a0-6bab-4e93-b5f1-88e7b6456569",
                 CardType = CardType.Attachment,
@@ -192,6 +202,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 12
             });
             Cards.Add(new Card() {
+                ImageName = "M1641",
                 Title = "King Under the Mountain",
                 Id = "9152834a-5355-42ba-9592-1a3c1940d1a8",
                 CardType = CardType.Attachment,
@@ -205,6 +216,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 13
             });
             Cards.Add(new Card() {
+                ImageName = "M1644",
                 Title = "Mithril Shirt",
                 Id = "12d51424-0edd-4977-9df1-5f6a7a5a96e1",
                 CardType = CardType.Treasure,
@@ -236,6 +248,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 15
             });
             Cards.Add(new Card() {
+                ImageName = "M1634",
                 Title = "Ravens of the Mountain",
                 Id = "6d442a61-e9e9-4729-bac1-da3d76af6afa",
                 CardType = CardType.Event,
@@ -246,6 +259,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 16
             });
             Cards.Add(new Card() {
+                ImageName = "M1632",
                 Title = "Straight Shot",
                 Id = "c2a79823-e4f9-4449-b467-5916d7e58979",
                 CardType = CardType.Event,
@@ -256,6 +270,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 17
             });
             Cards.Add(new Card() {
+                ImageName = "M1643",
                 Title = "The Arkenstone",
                 Id = "ae774680-c6e9-49eb-96b8-fcdebe90b49d",
                 CardType = CardType.Treasure,
@@ -269,6 +284,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 18
             });
             Cards.Add(new Card() {
+                ImageName = "M1636",
                 Title = "The Lucky Number",
                 Id = "65407141-e013-4d1c-8f70-4328e707d0cc",
                 CardType = CardType.Event,
@@ -279,6 +295,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 19
             });
             Cards.Add(new Card() {
+                ImageName = "M1645",
                 Title = "Thror's Battle Axe",
                 Id = "857d6dc8-ba1e-4839-8e96-a8a0136a2302",
                 CardType = CardType.Treasure,
@@ -292,6 +309,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 20
             });
             Cards.Add(new Card() {
+                ImageName = "M1647",
                 Title = "Thror's Golden Cup",
                 Id = "ff7b0b9d-f8ae-4464-9db3-7205c5ae4db7",
                 CardType = CardType.Treasure,
@@ -306,6 +324,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 21
             });
             Cards.Add(new Card() {
+                ImageName = "M1646",
                 Title = "Thror's Hunting Bow",
                 Id = "7adc49c0-640d-4934-89c5-312ab584b77c",
                 CardType = CardType.Treasure,
@@ -319,6 +338,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 22
             });
             Cards.Add(new Card() {
+                ImageName = "M1639",
                 Title = "Thror's Key",
                 Id = "f4490261-317e-4e9e-9440-a5c58dcddcbf",
                 CardType = CardType.Attachment,
@@ -332,6 +352,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 23
             });
             Cards.Add(new Card() {
+                ImageName = "M1635",
                 Title = "To me! O my kinsfolk!",
                 Id = "16ae4f56-d8bb-41b8-a992-1da3b6ec1fdb",
                 CardType = CardType.Event,
@@ -342,24 +363,29 @@ namespace HallOfBeorn.Models.Sets
                 Number = 24
             });
             Cards.Add(new Card() {
+                ImageName = "M1690",
                 Title = "Into Mirkwood - 1A",
                 Id = "1866ce74-8552-4ac5-8b0a-1e7a6f3b4338",
                 CardType = CardType.Quest,
                 Setup = "t",
                 Quantity = 1,
+                QuestPoints = 9,
                 Text = "Setup: Each player may shuffle 1 copy Bilbo's Magic Ring into his deck. Search the encounter deck for The Spider's Glade and set it aside, out of play. Then, shuffle the encounter deck and reveal 1 encounter card per player.",
                 EncounterSet = "Flies and Spiders",
                 Number = 25
             });
             Cards.Add(new Card() {
+                ImageName = "M1691",
                 Title = "Lost in the Dark - 2A",
                 Id = "a4ffb8cd-fd95-4b47-95d1-637bd2bd78a1",
                 CardType = CardType.Quest,
                 Quantity = 1,
+                QuestPoints = null,
                 EncounterSet = "Flies and Spiders",
                 Number = 26
             });
             Cards.Add(new Card() {
+                ImageName = "M1692",
                 Title = "Captured by Spiders - 3A",
                 Id = "d99e07f6-7a57-4b5f-a108-13bd7ce6fa4b",
                 CardType = CardType.Quest,
@@ -369,6 +395,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 27
             });
             Cards.Add(new Card() {
+                ImageName = "M1693",
                 Title = "Battle with the Spiders - 4A",
                 Id = "1ee75e10-bcc5-4243-ab28-3dc1978a50af",
                 CardType = CardType.Quest,
@@ -378,16 +405,19 @@ namespace HallOfBeorn.Models.Sets
                 Number = 28
             });
             Cards.Add(new Card() {
+                ImageName = "M1694",
                 Title = "A Warm Welcome - 1A",
                 Id = "57fc374c-ca6d-4556-9181-c1b578d7a01d",
                 CardType = CardType.Quest,
                 Setup = "sstt",
                 Quantity = 1,
+                QuestPoints = null,
                 Text = "Setup: Search the encounter deck for Smaug the Golden, Smaug the Magnificent, The Lonely Mountain, and A Bare Patch. Set Smaug the Magnificent and A Bare Patch aside, out of play. Add Smaug the Golden and The Lonely Mountain to the staging area. Shuffle the five Erebor treasure cards and stack them facedown under The Lonely Mountain.",
                 EncounterSet = "The Lonely Mountain",
                 Number = 29
             });
             Cards.Add(new Card() {
+                ImageName = "M1695",
                 Title = "The Burglar's Turn - 2A",
                 Id = "4355352b-307e-407b-98f9-3d4fb2a14a49",
                 CardType = CardType.Quest,
@@ -396,66 +426,81 @@ namespace HallOfBeorn.Models.Sets
                 Number = 30
             });
             Cards.Add(new Card() {
+                ImageName = "M1696",
                 Title = "Inside Information - 3A",
                 Id = "a944e2e1-56e4-461d-b703-db991b673b9b",
                 CardType = CardType.Quest,
                 Quantity = 1,
+                QuestPoints = 20,
                 Text = "When Revealed: Set Smaug the Golden aside, out of play. Add Smaug the Magnificent and A Bare Patch to the staging area.",
                 EncounterSet = "The Lonely Mountain",
                 Number = 31
             });
             Cards.Add(new Card() {
+                ImageName = "M1697",
                 Title = "Thieves! Fire! Murder! - 4A",
                 Id = "240a9f5b-17dc-4182-b854-3d2dd5a33f68",
                 CardType = CardType.Quest,
                 Quantity = 1,
+                QuestPoints = 7,
                 Text = "When Revealed: Remove all progress from Smaug the Golden and set him aside, out of play. Then, add Smaug the Magnificent to the staging area.",
                 EncounterSet = "The Lonely Mountain",
                 Number = 32
             });
             Cards.Add(new Card() {
+                ImageName = "M1698",
                 Title = "The Gathering of the Clouds - 1A",
                 Id = "dfd05c9f-1dc1-4af6-a22f-fe39969c6371",
                 CardType = CardType.Quest,
                 Setup = "s",
                 Quantity = 1,
+                QuestPoints = null,
                 Text = "Setup: Search the encounter deck for Bolg and add it to the staging area. Then, shuffle the encounter deck and reveal 1 encounter card per player.",
                 EncounterSet = "The Battle of Five Armies",
                 Number = 33
             });
             Cards.Add(new Card() {
+                ImageName = "M1699",
                 Title = "The Eastern Spur - 2A",
                 Id = "aa3355cb-57e1-4d8b-8a1b-9be22581a9f3",
                 CardType = CardType.Quest,
                 Quantity = 1,
+                QuestPoints = 8,
                 EncounterSet = "The Battle of Five Armies",
                 Number = 34
             });
             Cards.Add(new Card() {
+                ImageName = "M1700",
                 Title = "Battle in the Dale - 3A",
                 Id = "81e81787-13b1-4bbf-a9ef-b8516deebbbc",
                 CardType = CardType.Quest,
                 Quantity = 1,
+                QuestPoints = 8,
                 EncounterSet = "The Battle of Five Armies",
                 Number = 35
             });
             Cards.Add(new Card() {
+                ImageName = "M1701",
                 Title = "The Defense of Ravenhill - 4A",
                 Id = "54ed3453-1df4-458d-bc7d-e1f7c10de237",
                 CardType = CardType.Quest,
                 Quantity = 1,
+                QuestPoints = 8,
                 EncounterSet = "The Battle of Five Armies",
                 Number = 36
             });
             Cards.Add(new Card() {
+                ImageName = "M1702",
                 Title = "The Clouds Burst - 5A",
                 Id = "82514713-7cc4-4b76-a5f2-42a69ccff76b",
                 CardType = CardType.Quest,
                 Quantity = 1,
+                QuestPoints = null,
                 EncounterSet = "The Battle of Five Armies",
                 Number = 37
             });
             Cards.Add(new Card() {
+                ImageName = "M1662",
                 Title = "A Bare Patch",
                 Id = "9a37677f-6bb6-4ff1-bf0e-8d0798e268c9",
                 CardType = CardType.Objective,
@@ -466,6 +511,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 38
             });
             Cards.Add(new Card() {
+                ImageName = "M1673",
                 Title = "Belching Fire",
                 Id = "6f999889-bd70-42c9-ad2a-b159a5e2f73c",
                 CardType = CardType.Treachery,
@@ -475,6 +521,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 39
             });
             Cards.Add(new Card() {
+                ImageName = "M1677",
                 Title = "Bodyguard of Bolg",
                 Id = "66812347-fac2-4a76-aa69-ac0861071c0d",
                 CardType = CardType.Enemy,
@@ -491,6 +538,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 40
             });
             Cards.Add(new Card() {
+                ImageName = "M1676",
                 Title = "Bolg",
                 Id = "624d5999-1a76-4783-b4e4-d9b596242d18",
                 CardType = CardType.Enemy,
@@ -508,6 +556,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 41
             });
             Cards.Add(new Card() {
+                ImageName = "M1656",
                 Title = "Caught in Webs",
                 Id = "7a165c5c-caba-4af1-880e-845a124344d7",
                 CardType = CardType.Treachery,
@@ -517,6 +566,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 42
             });
             Cards.Add(new Card() {
+                ImageName = "M1652",
                 Title = "Crazy Cob",
                 Id = "b06030a9-7ab9-48a6-b7da-5ffd8ce3a1a6",
                 CardType = CardType.Enemy,
@@ -534,6 +584,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 43
             });
             Cards.Add(new Card() {
+                ImageName = "M1665",
                 Title = "Croaking Crows",
                 Id = "babeedb8-f7cd-4e8a-a5c4-fbfdd57238fb",
                 CardType = CardType.Enemy,
@@ -543,13 +594,14 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 2,
                 Attack = 1,
                 Defense = 1,
-                Text = "Forced: When a location is revealed from the encounter deck, put 1 progress on Smaug the Golden.Burgle: The first player shuffles his deck and reveals the top card. He may discard 1 card from his hand that matches the revealed card's sphere and type.",
+                Text = "Forced: When a location is revealed from the encounter deck, put 1 progress on Smaug the Golden.\r\nBurgle: The first player shuffles his deck and reveals the top card. He may discard 1 card from his hand that matches the revealed card's sphere and type.",
                 EncounterSet = "The Lonely Mountain",
                 EngagementCost = 33,
                 Threat = 1,
                 Number = 44
             });
             Cards.Add(new Card() {
+                ImageName = "M1659",
                 Title = "Dark Bats",
                 Id = "323842f5-457f-4dd4-95b8-eb19c24664cb",
                 CardType = CardType.Enemy,
@@ -566,6 +618,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 45
             });
             Cards.Add(new Card() {
+                ImageName = "M1669",
                 Title = "Desolation of Smaug",
                 Id = "435e12a1-d479-42f6-a40d-8067615ec9e1",
                 CardType = CardType.Location,
@@ -578,6 +631,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 46
             });
             Cards.Add(new Card() {
+                ImageName = "M1674",
                 Title = "Dragon-Spell",
                 Id = "db6355c7-3edd-4573-a63c-1b6fc08bb8fa",
                 CardType = CardType.Treachery,
@@ -588,6 +642,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 47
             });
             Cards.Add(new Card() {
+                ImageName = "M1654",
                 Title = "Fat Spider",
                 Id = "5b038648-7a06-4014-b207-a5d68c99e76d",
                 CardType = CardType.Enemy,
@@ -605,6 +660,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 48
             });
             Cards.Add(new Card() {
+                ImageName = "M1660",
                 Title = "Fighting Among Friends",
                 Id = "ffe307bf-dd8e-4df3-9355-55564137d311",
                 CardType = CardType.Treachery,
@@ -615,6 +671,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 49
             });
             Cards.Add(new Card() {
+                ImageName = "M1650",
                 Title = "Forest Stream",
                 Id = "818e2f2f-4070-4056-85bd-5e729ccbad30",
                 CardType = CardType.Location,
@@ -627,6 +684,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 50
             });
             Cards.Add(new Card() {
+                ImageName = "M1649",
                 Title = "Giant Web",
                 Id = "eb353293-1a80-445c-b4a9-422c83dadfd5",
                 CardType = CardType.Location,
@@ -639,6 +697,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 51
             });
             Cards.Add(new Card() {
+                ImageName = "M1688",
                 Title = "Goblins are Upon You!",
                 Id = "ac4724db-a3cc-4984-bef5-f51b0f4421f8",
                 CardType = CardType.Treachery,
@@ -649,6 +708,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 52
             });
             Cards.Add(new Card() {
+                ImageName = "M1667",
                 Title = "Great Hall",
                 Id = "1c65b78b-6b68-458f-9510-a00a9576a042",
                 CardType = CardType.Location,
@@ -661,6 +721,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 53
             });
             Cards.Add(new Card() {
+                ImageName = "M1679",
                 Title = "Gundabad Climber",
                 Id = "771c6c83-a602-4c35-92f6-5ac349c4ec8c",
                 CardType = CardType.Enemy,
@@ -676,6 +737,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 54
             });
             Cards.Add(new Card() {
+                ImageName = "M1678",
                 Title = "Gundabad Wolf Rider",
                 Id = "058a5508-6b20-4305-94ea-53d5d2f33595",
                 CardType = CardType.Enemy,
@@ -692,6 +754,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 55
             });
             Cards.Add(new Card() {
+                ImageName = "M1687",
                 Title = "Hatred Rekindled",
                 Id = "87d2f0c4-8874-4910-9bb4-4f2d06c64168",
                 CardType = CardType.Treachery,
@@ -702,6 +765,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 56
             });
             Cards.Add(new Card() {
+                ImageName = "M1689",
                 Title = "Heedless of Order",
                 Id = "19e2470a-94c6-4f14-b824-7d2f952b60fd",
                 CardType = CardType.Treachery,
@@ -712,6 +776,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 57
             });
             Cards.Add(new Card() {
+                ImageName = "M1658",
                 Title = "Hidden Path",
                 Id = "3f78ed57-49cc-4886-b84f-3fe886203794",
                 CardType = CardType.Location,
@@ -724,6 +789,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 58
             });
             Cards.Add(new Card() {
+                ImageName = "M1672",
                 Title = "Known to an Ounce",
                 Id = "da46fcb3-2810-4c21-9070-43969532ef9b",
                 CardType = CardType.Treachery,
@@ -733,6 +799,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 59
             });
             Cards.Add(new Card() {
+                ImageName = "M1653",
                 Title = "Lazy Lob",
                 Id = "8815a340-fc16-41c5-ac2c-d647876c2bbd",
                 CardType = CardType.Enemy,
@@ -750,6 +817,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 60
             });
             Cards.Add(new Card() {
+                ImageName = "M1675",
                 Title = "Misty Mountain Eagle",
                 Id = "6e193811-584d-4888-a1b8-5296522b5cd1",
                 CardType = CardType.Objective,
@@ -765,6 +833,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 61
             });
             Cards.Add(new Card() {
+                ImageName = "M1683",
                 Title = "Northern Slopes",
                 Id = "29005ca1-107a-4473-8769-ce7d944e9844",
                 CardType = CardType.Location,
@@ -777,6 +846,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 62
             });
             Cards.Add(new Card() {
+                ImageName = "M1651",
                 Title = "Old Tomnoddy",
                 Id = "b0d31a1c-2155-4a97-a5ff-912e32a4809e",
                 CardType = CardType.Enemy,
@@ -793,6 +863,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 63
             });
             Cards.Add(new Card() {
+                ImageName = "M1657",
                 Title = "Poisoned by Spiders",
                 Id = "31ada226-448d-48f8-9f9a-c1f5046ad041",
                 CardType = CardType.Treachery,
@@ -803,6 +874,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 64
             });
             Cards.Add(new Card() {
+                ImageName = "M1671",
                 Title = "Pretending to Sleep",
                 Id = "b7b62c58-7d5d-483d-807e-f4d7e2869579",
                 CardType = CardType.Treachery,
@@ -813,6 +885,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 65
             });
             Cards.Add(new Card() {
+                ImageName = "M1685",
                 Title = "Ravenhill",
                 Id = "f388bf8b-461c-4478-8155-74775bf27714",
                 CardType = CardType.Location,
@@ -828,6 +901,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 66
             });
             Cards.Add(new Card() {
+                ImageName = "M1682",
                 Title = "Ravenous Warg",
                 Id = "f29b2736-9499-4e1d-9e53-96be59f78741",
                 CardType = CardType.Enemy,
@@ -844,6 +918,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 67
             });
             Cards.Add(new Card() {
+                ImageName = "M1684",
                 Title = "Ruins of Dale",
                 Id = "ee451e81-d7ee-40a6-9079-7f6538a26a26",
                 CardType = CardType.Location,
@@ -859,6 +934,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 68
             });
             Cards.Add(new Card() {
+                ImageName = "M1668",
                 Title = "Secret Entrance",
                 Id = "de8d68fc-15c4-4689-933e-1b2ca638cd78",
                 CardType = CardType.Location,
@@ -871,6 +947,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 69
             });
             Cards.Add(new Card() {
+                ImageName = "M1663",
                 Title = "Smaug the Golden",
                 Id = "81b31016-bcc3-4445-8f4d-64187e99aff3",
                 CardType = CardType.Enemy,
@@ -888,6 +965,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 70
             });
             Cards.Add(new Card() {
+                ImageName = "M1664",
                 Title = "Smaug the Magnificent",
                 Id = "65ad784f-d82e-4659-8d1c-53d2e4d19336",
                 CardType = CardType.Enemy,
@@ -905,6 +983,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 71
             });
             Cards.Add(new Card() {
+                ImageName = "M1686",
                 Title = "The Front Gate",
                 Id = "19f36ec5-7ad4-4dab-80a7-4a7a6c716941",
                 CardType = CardType.Location,
@@ -920,6 +999,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 72
             });
             Cards.Add(new Card() {
+                ImageName = "M1666",
                 Title = "The Lonely Mountain",
                 Id = "0554f2f9-c578-4644-9c28-b617e846b787",
                 CardType = CardType.Location,
@@ -934,6 +1014,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 73
             });
             Cards.Add(new Card() {
+                ImageName = "M1648",
                 Title = "The Spider's Glade",
                 Id = "4d423c39-09c1-4c0b-b46f-6983fae4c07b",
                 CardType = CardType.Location,
@@ -948,6 +1029,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 74
             });
             Cards.Add(new Card() {
+                ImageName = "M1680",
                 Title = "Vanguard of Bolg",
                 Id = "56e98bd5-c952-436e-b552-832031d4bb20",
                 CardType = CardType.Enemy,
@@ -964,6 +1046,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 75
             });
             Cards.Add(new Card() {
+                ImageName = "M1661",
                 Title = "Weighed Down",
                 Id = "10c41b09-adf9-4a78-a67a-a9a1e04d7e8d",
                 CardType = CardType.Treachery,
@@ -974,6 +1057,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 76
             });
             Cards.Add(new Card() {
+                ImageName = "M1670",
                 Title = "Western Slopes",
                 Id = "1e54fa6e-c2a1-4456-ac48-8912ecc4722a",
                 CardType = CardType.Location,
@@ -986,6 +1070,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 77
             });
             Cards.Add(new Card() {
+                ImageName = "M1655",
                 Title = "Wicked Spider",
                 Id = "2c20ea14-e7bc-4a38-a809-8834d659adf5",
                 CardType = CardType.Enemy,
@@ -1003,6 +1088,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 78
             });
             Cards.Add(new Card() {
+                ImageName = "M1681",
                 Title = "Gundabad Archer",
                 Id = "fca6840a-ae90-42c7-b0cb-79ef8c7de099",
                 CardType = CardType.Enemy,

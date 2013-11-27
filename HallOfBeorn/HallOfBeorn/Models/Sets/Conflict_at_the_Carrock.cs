@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Conflict at the Carrock";
+            SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {
                 ImageName = "M1172",

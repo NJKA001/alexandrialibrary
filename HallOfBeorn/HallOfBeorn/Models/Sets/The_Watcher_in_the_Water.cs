@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Watcher in the Water";
+            SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {
                 ImageName = "M1414",

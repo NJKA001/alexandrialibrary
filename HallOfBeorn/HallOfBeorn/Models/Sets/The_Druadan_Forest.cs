@@ -9,9 +9,11 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
-            Name = "The Drúadan Fores";
+            Name = "The Drúadan Forest";
+            SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {
+                ImageName = "M1810",
                 Title = "Mirlonde",
                 Id = "536c80ba-ad8b-447e-b378-1684508eb0f9",
                 CardType = CardType.Hero,
@@ -28,6 +30,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 1
             });
             Cards.Add(new Card() {
+                ImageName = "M1811",
                 Title = "Forlong",
                 Id = "c6ae1840-dd7d-46ea-baf8-6d30614506de",
                 CardType = CardType.Ally,
@@ -44,6 +47,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 2
             });
             Cards.Add(new Card() {
+                ImageName = "M1812",
                 Title = "Strength of Arms",
                 Id = "91f28bdf-4b78-4750-9853-65e783e4cb15",
                 CardType = CardType.Event,
@@ -54,6 +58,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 3
             });
             Cards.Add(new Card() {
+                ImageName = "M1813",
                 Title = "Mighty Prowess",
                 Id = "4ed8bd53-0453-4490-a4bb-20a7d793c17f",
                 CardType = CardType.Attachment,
@@ -66,6 +71,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 4
             });
             Cards.Add(new Card() {
+                ImageName = "M1814",
                 Title = "Trained for War",
                 Id = "5c7a6b89-0439-4b46-b9f1-09189f981a0d",
                 CardType = CardType.Event,
@@ -76,6 +82,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 5
             });
             Cards.Add(new Card() {
+                ImageName = "M1815",
                 Title = "Silvan Refugee",
                 Id = "e4fd6e25-982a-464f-82d8-812269864d46",
                 CardType = CardType.Ally,
@@ -91,6 +98,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 6
             });
             Cards.Add(new Card() {
+                ImageName = "M1816",
                 Title = "Against the Shadow",
                 Id = "0801c2c0-2bf7-4a0a-838a-13740f6cdbaf",
                 CardType = CardType.Event,
@@ -101,6 +109,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 7
             });
             Cards.Add(new Card() {
+                ImageName = "M1817",
                 Title = "Harbor Master",
                 Id = "b7f8b82b-c448-4f43-a025-bf6b7e6f0310",
                 CardType = CardType.Ally,
@@ -116,6 +125,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 8
             });
             Cards.Add(new Card() {
+                ImageName = "M1818",
                 Title = "Advance Warning",
                 Id = "e678be7e-8048-458d-b4f9-25c2a718fabb",
                 CardType = CardType.Event,
@@ -126,6 +136,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 9
             });
             Cards.Add(new Card() {
+                ImageName = "M1819",
                 Title = "White Tower Watchman",
                 Id = "31cd848b-a1bc-4ccd-af0c-eb3cc3ba593b",
                 CardType = CardType.Ally,
@@ -141,7 +152,9 @@ namespace HallOfBeorn.Models.Sets
                 Number = 10
             });
             Cards.Add(new Card() {
+                ImageName = "M1823",
                 Title = "Drû-buri-Drû",
+                NormalizedTitle = "Dru-buri-Dru",
                 Id = "19b732b9-a26a-4535-a438-7dd83cd4ecf2",
                 CardType = CardType.Enemy,
                 EngagementCost = 1,
@@ -157,7 +170,9 @@ namespace HallOfBeorn.Models.Sets
                 Number = 11
             });
             Cards.Add(new Card() {
+                ImageName = "M1824",
                 Title = "Drúadan Drummer",
+                NormalizedTitle = "Druadan Drummer",
                 Id = "e2c02f11-fdfb-402b-89de-1729d1364e4c",
                 CardType = CardType.Enemy,
                 EngagementCost = 40,
@@ -173,7 +188,9 @@ namespace HallOfBeorn.Models.Sets
                 Number = 12
             });
             Cards.Add(new Card() {
+                ImageName = "M1825",
                 Title = "Drúadan Elite",
+                NormalizedTitle = "Druadan Elite",
                 Id = "607c3e44-5add-4c80-bb3b-55b016b6cd0e",
                 CardType = CardType.Enemy,
                 EngagementCost = 35,
@@ -190,7 +207,9 @@ namespace HallOfBeorn.Models.Sets
                 Number = 13
             });
             Cards.Add(new Card() {
+                ImageName = "M1826",
                 Title = "Drúadan Hunter",
+                NormalizedTitle = "Druadan Hunter",
                 Id = "809ff5de-8273-4491-adfb-3a27d4b316f3",
                 CardType = CardType.Enemy,
                 EngagementCost = 25,
@@ -207,7 +226,9 @@ namespace HallOfBeorn.Models.Sets
                 Number = 14
             });
             Cards.Add(new Card() {
+                ImageName = "M1827",
                 Title = "Drúadan Thief",
+                NormalizedTitle = "Druadan Thief",
                 Id = "85045e14-3abc-4d58-824f-249b1fb3643d",
                 CardType = CardType.Enemy,
                 EngagementCost = 5,
@@ -223,6 +244,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 15
             });
             Cards.Add(new Card() {
+                ImageName = "M1828",
                 Title = "Ancestral Clearing",
                 Id = "0ebedc5b-fd8b-46b8-a2a1-1a6f739e8819",
                 CardType = CardType.Location,
@@ -235,6 +257,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 16
             });
             Cards.Add(new Card() {
+                ImageName = "M1829",
                 Title = "Garden of Poisons",
                 Id = "41c3779a-a28a-44db-8b9b-bc5e81d1111a",
                 CardType = CardType.Location,
@@ -247,6 +270,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 17
             });
             Cards.Add(new Card() {
+                ImageName = "M1830",
                 Title = "Glade of Cleansing",
                 Id = "801078c6-56a9-45f2-b5a4-7e38cb5bc507",
                 CardType = CardType.Location,
@@ -259,6 +283,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 18
             });
             Cards.Add(new Card() {
+                ImageName = "M1831",
                 Title = "Men in the Dark",
                 Id = "24e431be-cde9-4f93-943a-de5e5ca9108b",
                 CardType = CardType.Treachery,
@@ -269,6 +294,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 19
             });
             Cards.Add(new Card() {
+                ImageName = "M1832",
                 Title = "Stars in Sky",
                 Id = "7cbf23fd-28c4-494c-97aa-b7fed050ad8b",
                 CardType = CardType.Treachery,
@@ -280,6 +306,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 20
             });
             Cards.Add(new Card() {
+                ImageName = "M1833",
                 Title = "Leaves on Tree",
                 Id = "9dda3cf1-e5bd-4cab-8c3b-b29db1220249",
                 CardType = CardType.Treachery,
@@ -291,6 +318,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 21
             });
             Cards.Add(new Card() {
+                ImageName = "M1820",
                 Title = "The Pursuit - 1A",
                 Id = "71079813-3afe-41b7-8746-92dcc1f91084",
                 CardType = CardType.Quest,
@@ -298,23 +326,28 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Setup: Search the encounter deck for Drû-buri-Drû and set him aside, out of play. Shuffle the encounter deck.",
                 EncounterSet = "The Drúadan Forest",
                 Quantity = 1,
+                QuestPoints = 11,
                 Number = 22
             });
             Cards.Add(new Card() {
+                ImageName = "M1821",
                 Title = "An Untimely End - 2A",
                 Id = "346fda89-94df-410a-8027-41eacbf27238",
                 CardType = CardType.Quest,
                 EncounterSet = "The Drúadan Forest",
                 Quantity = 1,
+                QuestPoints = 17,
                 Number = 23
             });
             Cards.Add(new Card() {
+                ImageName = "M1822",
                 Title = "The Passage Out - 3A",
                 Id = "f6578eb7-1b94-458b-aba1-82b406507a4d",
                 CardType = CardType.Quest,
                 Text = "When Revealed: Add Drû-buri-Drû to the staging area.",
                 EncounterSet = "The Drúadan Forest",
                 Quantity = 1,
+                QuestPoints = 14,
                 Number = 24
             });
         }

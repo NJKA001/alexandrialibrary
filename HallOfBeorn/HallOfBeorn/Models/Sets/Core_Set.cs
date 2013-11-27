@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Core Set";
+            SetType = Models.SetType.Core;
 
             Cards.Add(new Card() {
                 ImageName = "M1001",

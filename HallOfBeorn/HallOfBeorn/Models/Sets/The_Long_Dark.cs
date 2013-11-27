@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Long Dark";
+            SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {
                 ImageName = "M1451",
@@ -274,6 +275,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 19
             });
             Cards.Add(new Card() {
+                ImageName = "Rock Adder",
                 Title = "Rock Adder",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9022",
                 CardType = CardType.Enemy,

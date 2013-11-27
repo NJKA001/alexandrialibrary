@@ -22,7 +22,7 @@ namespace HallOfBeorn.Controllers
         private void InitializeCards()
         {
             sets.Add(new CoreSet());
-            sets.Add(new CoreSetNightmare());
+            //sets.Add(new CoreSetNightmare());
             
             sets.Add(new TheHuntforGollum());
             sets.Add(new ConflictattheCarrock());
@@ -76,9 +76,9 @@ namespace HallOfBeorn.Controllers
 
                     foreach (var trait in card.Traits)
                     {
-                        var traitKey = trait.Replace(".", string.Empty);
+                        var traitKey = trait.Replace(".", string.Empty).Trim();
                         if (!traits.ContainsKey(traitKey))
-                            traits.Add(traitKey, trait);
+                            traits.Add(traitKey, trait.Trim());
                     }
                 }
             }
@@ -133,7 +133,7 @@ namespace HallOfBeorn.Controllers
 
         public IEnumerable<string> Traits()
         {
-            return traits.Values.OrderBy(x => x);
+            return traits.Values.ToList().OrderBy(x => x).ToList();
         }
     }
 }

@@ -39,34 +39,72 @@
 
 @foreach (var card in @Model.Cards)
 {
-    <div style="width:800px;height:165px;clear:both;">
+    <div>
+        <table>
+            <tr>
+                <td rowspan="2">
+                    <img src="@card.ImagePath" style="height:160px;"/>
+                </td>
+                <td style="min-width:100px">
+                    <h3><a href="@Url.Content(string.Format("~/Catalog/Show/{0}", @card.Id))">@card.Title</a></h3>
+                    <!--
+                    <div style="vertical-align:top">
+                    <!--<section>-->
+                    <!--<header>-->
+                        
+                    <!--</header>-->
+                    @*
+                    <p>
+                        @foreach (var keyword in card.Keywords)
+                        {
+                            @keyword
+                            <br />
+                        }
+                        <br />
+                        @card.Text
 
-        <div style="float:left;margin-right:10px;overflow:hidden;height:164px;width:119px;">
-            <img src="@Url.Content(string.Format("~/Images/Cards/{0}.png", @card.ImageName))" style="height:160px;width:115px;"/>
+                        @if (!string.IsNullOrEmpty(@card.OppositeText))
+                        {
+                            <br />
+                            @card.OppositeText
+                        }
+                    </p>
+                    </section>
+                    </div>
+                    *@
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <p>
+                            @foreach (var keyword in card.Keywords)
+                            {
+                                @keyword
+                                <br />
+                            }
+                            <br />
+                            @card.Text
+
+                            @if (!string.IsNullOrEmpty(@card.OppositeText))
+                            {
+                                <br />
+                                @card.OppositeText
+                            }
+                        </p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <!--
+        <div style="float:left;margin-right:10px;overflow:hidden;height:164px;">
+            
         </div>
     
-        <div style="float:left;margin-right:10px;overflow:hidden;height:170px;width:600px;">
-            <section>
-            <header>
-                <h3><a href="@Url.Content(string.Format("~/Catalog/Show/{0}", @card.Id))">@card.Title</a></h3>
-            </header>
-            <p>
-                @foreach (var keyword in card.Keywords)
-                {
-                    @keyword
-                    <br />
-                }
-                <br />
-                @card.Text
+        <div style="float:left;margin-right:10px;overflow:hidden;height:170px;width:80%;">
 
-                @if (!string.IsNullOrEmpty(@card.OppositeText))
-                {
-                    <br />
-                    @card.OppositeText
-                }
-            </p>
-            </section>
         </div>
-
+        -->
     </div>
 }

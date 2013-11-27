@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Khazad-dûm";
+            SetType = Models.SetType.Deluxe_Expansion;
 
             Cards.Add(new Card() {
                 ImageName = "M1313",

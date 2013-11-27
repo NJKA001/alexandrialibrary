@@ -8,6 +8,17 @@ namespace HallOfBeorn
 {
     public static class Extensions
     {
+        public static string ToUrlSafeString(this string self)
+        {
+            if (self == null)
+                throw new ArgumentNullException("self");
+
+            return self
+                .Replace(' ', '_')
+                .Replace("?", string.Empty)
+                .Replace("!", string.Empty);
+        }
+
         public static IEnumerable<SelectListItem> GetSelectListItems(this Type enumType)
         {
             var listItems = new List<SelectListItem>();

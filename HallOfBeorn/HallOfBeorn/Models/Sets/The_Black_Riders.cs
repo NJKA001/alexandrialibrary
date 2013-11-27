@@ -10,8 +10,10 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Black Riders";
+            SetType = Models.SetType.Saga_Expansion;
 
             Cards.Add(new Card() {
+                ImageName = "M1940",
                 Title = "Sam Gamgee",
                 Id = "4124136c-8c86-4f86-830c-94c8c76df161",
                 IsUnique = true,
@@ -27,6 +29,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 1
             });
             Cards.Add(new Card() {
+                ImageName = "M1941",
                 Title = "Merry",
                 Id = "052b1f85-8b9c-4bb0-a735-bdbd5ac1b2c4",
                 IsUnique = true,
@@ -42,6 +45,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 2
             });
             Cards.Add(new Card() {
+                ImageName = "M1942",
                 Title = "Pippin",
                 Id = "ce96b767-c569-48b8-a998-d8009b0143c7",
                 IsUnique = true,
@@ -57,6 +61,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 3
             });
             Cards.Add(new Card() {
+                ImageName = "M1943",
                 Title = "Fatty Bolger",
                 Id = "5d75d4dd-7300-43d7-87f2-963271c9c904",
                 IsUnique = true,
@@ -72,6 +77,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 4
             });
             Cards.Add(new Card() {
+                ImageName = "M1939",
                 Title = "Frodo Baggins",
                 Id = "3217a119-6b86-47dd-b451-c5e45be3f874",
                 IsUnique = true,
@@ -96,6 +102,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 6
             });
             Cards.Add(new Card() {
+                ImageName = "M1945",
                 Title = "Barliman Butterbur",
                 Id = "77f58774-86e7-4449-b31e-3833700b3e60",
                 IsUnique = true,
@@ -111,6 +118,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 7
             });
             Cards.Add(new Card() {
+                ImageName = "M1954",
                 Title = "Elf-stone",
                 Id = "9bb32f2c-29fb-43ba-b7ba-2227b28f7b58",
                 IsUnique = true,
@@ -122,6 +130,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 8
             });
             Cards.Add(new Card() {
+                ImageName = "M1946",
                 Title = "Farmer Maggot",
                 Id = "9d8ccd1a-48d3-4123-bcca-3c0ab88347ec",
                 IsUnique = true,
@@ -137,6 +146,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 9
             });
             Cards.Add(new Card() {
+                ImageName = "M1947",
                 Title = "Halfling Determination",
                 Id = "8e7e5c8d-0ea4-46df-ae38-d8d2fee7ca8b",
                 CardType = CardType.Event,
@@ -146,6 +156,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 10
             });
             Cards.Add(new Card() {
+                ImageName = "M1952",
                 Title = "Dagger of Westernesse",
                 Id = "418e6de7-af19-4ea7-bfbe-2a02838c6de4",
                 CardType = CardType.Attachment,
@@ -157,6 +168,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 11
             });
             Cards.Add(new Card() {
+                ImageName = "M1944",
                 Title = "Bill the Pony",
                 Id = "1f7fc118-94a7-48a0-bd0c-9c15a36ddc23",
                 IsUnique = true,
@@ -173,6 +185,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 12
             });
             Cards.Add(new Card() {
+                ImageName = "M1949",
                 Title = "Take No Notice",
                 Id = "768ae041-2d15-44a3-a928-62838536a160",
                 CardType = CardType.Event,
@@ -182,6 +195,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 13
             });
             Cards.Add(new Card() {
+                ImageName = "M1948",
                 Title = "Smoke Rings",
                 Id = "9418c634-54c6-47de-9aae-798038a4a35b",
                 CardType = CardType.Event,
@@ -191,6 +205,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 14
             });
             Cards.Add(new Card() {
+                ImageName = "M1950",
                 Title = "Frodo's Intuition",
                 Id = "96350b97-5c68-4033-bb2f-4305696a7ae7",
                 CardType = CardType.Event,
@@ -200,6 +215,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 15
             });
             Cards.Add(new Card() {
+                ImageName = "M1951",
                 Title = "Hobbit Cloak",
                 Id = "8e49ea86-375a-472e-b497-16a1164ae27f",
                 CardType = CardType.Attachment,
@@ -211,6 +227,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 16
             });
             Cards.Add(new Card() {
+                ImageName = "M1953",
                 Title = "Hobbit Pipe",
                 Id = "9c455b1a-a2d4-44f7-a9d3-9a3134c21a2a",
                 CardType = CardType.Attachment,
@@ -222,10 +239,12 @@ namespace HallOfBeorn.Models.Sets
                 Number = 17
             });
             Cards.Add(new Card() {
-                Title = "Mr Underhill",
+                ImageName = "M1955",
+                Title = "Mr. Underhill",
                 Id = "d0ed393c-162a-4715-bed4-e338c24e9e36",
                 IsUnique = true,
                 CardType = CardType.Attachment,
+                CampaignCardType = Models.CampaignCardType.Boon,
                 ResourceCost = 0,
                 Traits = new List<string>() { "Title." },
                 Keywords = new List<string>() { "Permanent." },
@@ -235,10 +254,12 @@ namespace HallOfBeorn.Models.Sets
                 Number = 18
             });
             Cards.Add(new Card() {
+                ImageName = "M1958",
                 Title = "Valiant Warrior",
                 Id = "ff574390-bd68-4277-9065-dd9dbf552d00",
                 IsUnique = true,
                 CardType = CardType.Attachment,
+                CampaignCardType = Models.CampaignCardType.Boon,
                 ResourceCost = 0,
                 Traits = new List<string>() { "Title." },
                 Keywords = new List<string>() { "Permanent." },
@@ -247,10 +268,12 @@ namespace HallOfBeorn.Models.Sets
                 Number = 19
             });
             Cards.Add(new Card() {
+                ImageName = "M1959",
                 Title = "Noble Hero",
                 Id = "af49e5ea-c6a2-4be4-bbf3-ac53c100e887",
                 IsUnique = true,
                 CardType = CardType.Attachment,
+                CampaignCardType = Models.CampaignCardType.Boon,
                 ResourceCost = 0,
                 Traits = new List<string>() { "Title." },
                 Keywords = new List<string>() { "Permanent." },
@@ -259,10 +282,12 @@ namespace HallOfBeorn.Models.Sets
                 Number = 20
             });
             Cards.Add(new Card() {
+                ImageName = "M1957",
                 Title = "Skilled Healer",
                 Id = "1d1ab8a3-ad76-4992-ae5c-6a89fd0ed463",
                 IsUnique = true,
                 CardType = CardType.Attachment,
+                CampaignCardType = Models.CampaignCardType.Boon,
                 ResourceCost = 0,
                 Traits = new List<string>() { "Title." },
                 Keywords = new List<string>() { "Permanent." },
@@ -271,10 +296,12 @@ namespace HallOfBeorn.Models.Sets
                 Number = 21
             });
             Cards.Add(new Card() {
+                ImageName = "M1956",
                 Title = "Tireless Ranger",
                 Id = "ef014a91-c2d9-44ca-acd0-cc1a339c051f",
                 IsUnique = true,
                 CardType = CardType.Attachment,
+                CampaignCardType = Models.CampaignCardType.Boon,
                 ResourceCost = 0,
                 Traits = new List<string>() { "Title." },
                 Keywords = new List<string>() { "Permanent." },
@@ -283,7 +310,8 @@ namespace HallOfBeorn.Models.Sets
                 Number = 22
             });
             Cards.Add(new Card() {
-                Title = "Gildor Inglorian",
+                ImageName = "The Black Riders/Gildor Inglorion.png",
+                Title = "Gildor Inglorion",
                 Id = "6c04a40a-0666-4b4f-a768-ddff46857cf0",
                 IsUnique = true,
                 CardType = CardType.Objective,
@@ -297,6 +325,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 23
             });
             Cards.Add(new Card() {
+                ImageName = "Overcome by Terror",
                 Title = "Overcome by Terror",
                 Id = "cdc303cb-bb1a-4409-a479-aa4155bd8ed5",
                 CardType = CardType.Treachery,
@@ -362,6 +391,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card() {
                 Title = "A Shadow of the Past",
                 Id = "307411f3-4a45-44ae-bc64-4e16deb97d10",
+                CampaignCardType = Models.CampaignCardType.Campaign,
                 CardType = CardType.Campaign,
                 Keywords = new List<string>() { "You are playing Campaign Mode." },
                 EncounterSet = "The Lord of the Rings Part 1",
@@ -390,23 +420,28 @@ namespace HallOfBeorn.Models.Sets
                 Number = 33
             });
             Cards.Add(new Card() {
+                ImageName = "M1960",
                 Title = "Three is Company - 1A",
                 Id = "6b34adb4-b510-4db9-aaba-9a1876626dce",
                 CardType = CardType.Quest,
                 EncounterSet = "A Shadow of the Past",
                 Quantity = 1,
+                QuestPoints = 1,
                 Setup = "ttsl",
                 Number = 34
             });
             Cards.Add(new Card() {
+                ImageName = "M1961",
                 Title = "A Shortcut to Mushrooms - 2A",
                 Id = "40c7a675-d48f-4e71-8818-5f0ffb9fa0dd",
                 CardType = CardType.Quest,
                 EncounterSet = "A Shadow of the Past",
                 Quantity = 1,
+                QuestPoints = 14,
                 Number = 35
             });
             Cards.Add(new Card() {
+                ImageName = "M1962",
                 Title = "Escape to Buckland - 3A",
                 Id = "7371cfea-03d0-4bc0-98a1-d99e0acdbf88",
                 CardType = CardType.Quest,
@@ -415,23 +450,28 @@ namespace HallOfBeorn.Models.Sets
                 Number = 36
             });
             Cards.Add(new Card() {
+                ImageName = "M1963",
                 Title = "Trouble in Bree - 1A",
                 Id = "d0b6992d-9dc4-41fa-a483-b4ad0a3d60b3",
                 CardType = CardType.Quest,
                 EncounterSet = "A Knife in the Dark",
                 Quantity = 1,
+                QuestPoints = 8,
                 Setup = "ttttsstttt",
                 Number = 37
             });
             Cards.Add(new Card() {
+                ImageName = "M1964",
                 Title = "Into the Wild - 2A",
                 Id = "28a4721b-3696-4fae-9eea-01b5a250c892",
                 CardType = CardType.Quest,
                 EncounterSet = "A Knife in the Dark",
                 Quantity = 1,
+                QuestPoints = 6,
                 Number = 38
             });
             Cards.Add(new Card() {
+                ImageName = "M1965",
                 Title = "The Ringwraiths Attack - 3A",
                 Id = "257f9b44-2744-4f02-bbf6-115d12b52e8d",
                 CardType = CardType.Quest,
@@ -440,15 +480,18 @@ namespace HallOfBeorn.Models.Sets
                 Number = 39
             });
             Cards.Add(new Card() {
+                ImageName = "M1966",
                 Title = "Pursued by the Enemy - 1A",
                 Id = "f9824e39-fda8-4e4b-bc74-83b4bd40c72d",
                 CardType = CardType.Quest,
                 EncounterSet = "Flight to the Ford",
                 Quantity = 1,
+                QuestPoints = 15,
                 Setup = "ttttstttt",
                 Number = 40
             });
             Cards.Add(new Card() {
+                ImageName = "M1967",
                 Title = "Race To Rivendell - 2A",
                 Id = "6b2673af-c764-4599-a265-6e43d3b75310",
                 CardType = CardType.Quest,
@@ -494,7 +537,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 44
             });
             Cards.Add(new Card() {
-                Title = "Pain Assaulted Him",
+                Title = "Pain Assailed Him",
                 Id = "98bf5fdc-ff74-48e2-88c8-0e4134fd6984",
                 CardType = CardType.Treachery,
                 EncounterSet = "Flight to the Ford",
@@ -775,6 +818,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 68
             });
             Cards.Add(new Card() {
+                ImageName = "M1969",
                 Title = "Bag End",
                 Id = "0d30fbf1-6e8f-480f-9f2f-3196777f6e11",
                 IsUnique = true,
@@ -788,6 +832,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 69
             });
             Cards.Add(new Card() {
+                ImageName = "M1970",
                 Title = "Woody End",
                 Id = "b194fe1c-18c8-47d2-a674-8e209339c7e2",
                 IsUnique = true,
