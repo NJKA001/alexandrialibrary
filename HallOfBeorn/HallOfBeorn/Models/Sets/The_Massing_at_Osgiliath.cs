@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Massing at Osgiliath";
+            Number = 2001;
             SetType = Models.SetType.GenCon_Expansion;
 
             Cards.Add(new Card() {

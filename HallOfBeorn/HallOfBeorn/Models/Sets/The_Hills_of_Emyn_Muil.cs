@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Hills of Emyn Muil";
+            Number = 5;
             SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {

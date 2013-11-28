@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Core Set";
+            Number = 1;
             SetType = Models.SetType.Core;
 
             Cards.Add(new Card() {
@@ -993,7 +994,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Traits = new List<string>() { "Condition." },
                 Text = "Response: Exhaust Dark Knowledge to look at 1 shadow card that was just dealt to an enemy attacking you.",
-                Keywords = new List<string>() { "Attach to a hero.", " Attached hero gets -1 Ò." },
+                Keywords = new List<string>() { "Attach to a hero.", " Attached hero gets -1 Willpower." },
                 Quantity = 1,
                 Number = 71
             });
@@ -1276,7 +1277,7 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 6,
                 Traits = new List<string>() { "Dol Guldur.", " Orc." },
                 Text = "Forced: After Chieftain Ufthak attacks, place 1 resource token on him.",
-                Keywords = new List<string>() { "Chieftain Ufthak get +2Attack for each resource token on him." },
+                Keywords = new List<string>() { "Chieftain Ufthak get +2 Attack for each resource token on him." },
                 Threat = 2,
                 EncounterSet = "Dol Guldur Orcs",
                 Quantity = 1,
@@ -1423,7 +1424,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 100
             });
             Cards.Add(new Card() {
-                ImageName = "M1100",
+                ImageName = "M1101",
                 Title = "Dungeon Jailor",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9101",
                 CardType = CardType.Enemy,
@@ -1440,7 +1441,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 101
             });
             Cards.Add(new Card() {
-                ImageName = "M1101",
+                ImageName = "M1102",
                 Title = "Nazgul of Dol Guldur",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9102",
                 CardType = CardType.Enemy,
@@ -1457,7 +1458,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 102
             });
             Cards.Add(new Card() {
-                ImageName = "M1102",
+                ImageName = "M1103",
                 Title = "Cavern Guardian",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9103",
                 CardType = CardType.Enemy,
@@ -1475,7 +1476,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 103
             });
             Cards.Add(new Card() {
-                ImageName = "M1103",
+                ImageName = "M1104",
                 Title = "Under the Shadow",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9104",
                 CardType = CardType.Treachery,
@@ -1486,7 +1487,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 104
             });
             Cards.Add(new Card() {
-                ImageName = "M1104",
+                ImageName = "M1105",
                 Title = "Iron Shackles",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9105",
                 CardType = CardType.Treachery,
@@ -1497,7 +1498,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 105
             });
             Cards.Add(new Card() {
-                ImageName = "M1105",
+                ImageName = "M1106",
                 Title = "Endless Caverns",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9106",
                 CardType = CardType.Location,
@@ -1510,7 +1511,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 106
             });
             Cards.Add(new Card() {
-                ImageName = "M1106",
+                ImageName = "M1107",
                 Title = "Tower Gate",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9107",
                 CardType = CardType.Location,
@@ -1523,7 +1524,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 107
             });
             Cards.Add(new Card() {
-                ImageName = "M1107",
+                ImageName = "M1108",
                 Title = "Gandalf's Map",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9108",
                 CardType = CardType.Objective,
@@ -1535,7 +1536,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 108
             });
             Cards.Add(new Card() {
-                ImageName = "M1108",
+                ImageName = "M1109",
                 Title = "Dungeon Torch",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9109",
                 CardType = CardType.Objective,
@@ -1547,7 +1548,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 109
             });
             Cards.Add(new Card() {
-                ImageName = "M1109",
+                ImageName = "M1110",
                 Title = "Shadow Key",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9110",
                 CardType = CardType.Objective,

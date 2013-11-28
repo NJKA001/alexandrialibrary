@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Road to Rivendell";
+            Number = 10;
             SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {
@@ -329,7 +330,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Response: After Song of Earendil enters play, draw 1 card.Response: After another player raises his threat, raise your threat by 1 to reduce that player's threat by 1.",
-                Keywords = new List<string>() { "Attach to a Ê hero." },
+                Keywords = new List<string>() { "Attach to a Spirit hero." },
                 Number = 23
             });
             Cards.Add(new Card() {

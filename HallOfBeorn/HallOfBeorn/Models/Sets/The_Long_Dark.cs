@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Long Dark";
+            Number = 12;
             SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {
@@ -246,7 +247,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 0,
                 Text = "Response: After a Song card is played, add 1 resource to attached hero's resource pool.",
-                Keywords = new List<string>() { "Attach to a Î hero.", " Limit 1 per hero." },
+                Keywords = new List<string>() { "Attach to a Lore hero.", " Limit 1 per hero." },
                 Number = 17
             });
             Cards.Add(new Card() {

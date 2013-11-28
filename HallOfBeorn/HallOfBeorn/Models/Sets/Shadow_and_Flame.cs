@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Shadow and Flame";
+            Number = 14;
             SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {
@@ -115,7 +116,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 2,
                 IsUnique = true,
                 Text = "Each Dwarf character gets +1 hit point.",
-                Keywords = new List<string>() { "Attach to a Ì hero." },
+                Keywords = new List<string>() { "Attach to a Leadership hero." },
                 Number = 8
             });
             Cards.Add(new Card() {
@@ -320,7 +321,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 2,
                 IsUnique = true,
                 Text = "Action: Exhaust Elrond and Vilya to reveal the top card of your deck. You can immediately play or put into play the revealed card for no cost, if able. Otherwise, move the revealed card to the bottom of your deck.",
-                Keywords = new List<string>() { "Attach to Elrond.", " He gains a Ê resource icon." },
+                Keywords = new List<string>() { "Attach to Elrond.", "He gains a Spirit resource icon." },
                 Number = 24
             });
             Cards.Add(new Card() {

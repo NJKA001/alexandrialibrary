@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Watcher in the Water";
+            Number = 11;
             SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {

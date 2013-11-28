@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "A Journey To Rhosgobel";
+            Number = 4;
             SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {

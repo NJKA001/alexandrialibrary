@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Assault on Osgiliath";
+            Number = 19;
             SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {
@@ -104,7 +105,7 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Spirit,
                 ResourceCost = 4,
                 Traits = new List<string>() { "Record." },
-                Keywords = new List<string>() { "Attach to a Ê hero." },
+                Keywords = new List<string>() { "Attach to a Spirit hero." },
                 Quantity = 3,
                 Number = 7
             });

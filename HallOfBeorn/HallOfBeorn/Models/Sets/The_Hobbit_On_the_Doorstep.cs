@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Hobbit: On the Doorstep";
+            Number = 1002;
             SetType = Models.SetType.Saga_Expansion;
 
             Cards.Add(new Card() {

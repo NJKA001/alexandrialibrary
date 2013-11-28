@@ -182,10 +182,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CardRepository.cs" />
     <Compile Include="Controllers\CardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\CatalogController.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -198,11 +196,13 @@
     <Compile Include="Models\CardEffectType.cs" />
     <Compile Include="Models\CardSet.cs" />
     <Compile Include="Models\CardType.cs" />
+    <Compile Include="Models\CardViewModel.cs" />
     <Compile Include="Models\OCTGN\OctgnCard.cs" />
     <Compile Include="Models\OCTGN\OctgnProperty.cs" />
     <Compile Include="Models\OCTGN\OctgnSet.cs" />
     <Compile Include="Models\SearchRequest.cs" />
     <Compile Include="Models\SearchResult.cs" />
+    <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Models\Sets\Assault_on_Osgiliath.cs" />
     <Compile Include="Models\Sets\A_Journey_to_Rhosgobel.cs" />
     <Compile Include="Models\Sets\Boar_and_Raven.cs" />
@@ -241,6 +241,7 @@
     <Compile Include="Models\SetType.cs" />
     <Compile Include="Models\Sphere.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CardService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -1379,14 +1380,12 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Catalog\Index.cshtml" />
-    <Content Include="Views\Catalog\Search.cshtml" />
-    <Content Include="Views\Catalog\Show.cshtml" />
     <Content Include="Views\Cards\Index.cshtml" />
+    <Content Include="Views\Cards\Search.cshtml" />
+    <Content Include="Views\Cards\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

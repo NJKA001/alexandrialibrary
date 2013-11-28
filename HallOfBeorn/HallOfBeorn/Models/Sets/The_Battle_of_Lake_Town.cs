@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Battle of Lake-town";
+            Number = 2002;
             SetType = Models.SetType.GenCon_Expansion;
 
             Cards.Add(new Card() {

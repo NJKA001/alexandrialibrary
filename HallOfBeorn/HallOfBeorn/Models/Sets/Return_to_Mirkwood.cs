@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Return to Mirkwood";
+            Number = 7;
             SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {
@@ -233,7 +234,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 3,
                 Text = "Action: Exhaust Support of the Eagles to choose an Eagle ally. Until the end of the phase, attached hero adds that ally's Attack or Defense (choose 1) to its own.",
-                Keywords = new List<string>() { "Attach to a Ï hero." },
+                Keywords = new List<string>() { "Attach to a Tactics hero." },
                 Number = 17
             });
             Cards.Add(new Card() {

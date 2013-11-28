@@ -11,8 +11,8 @@ namespace HallOfBeorn.Models
         {
             Traits = new List<string>();
             Keywords = new List<string>();
-            ImageHeight = 290;
-            ImageWidth = 207;
+            //ImageHeight = 290;
+            //ImageWidth = 207;
         }
 
         public string Id { get; set; }
@@ -25,17 +25,9 @@ namespace HallOfBeorn.Models
         public uint StageNumber { get; set; }
         
         public string ImageName { get; set; }
-        public string ImagePath
-        {
-            get
-            {
-                return string.IsNullOrEmpty(ImageName) ?
-                    string.Format("/Images/Cards/{0}/{1}.jpg", CardSet.Name.ToUrlSafeString(), Title.ToUrlSafeString())
-                    : string.Format("/Images/Cards/{0}.png", ImageName.ToUrlSafeString());
-            }
-        }
-        public int ImageHeight { get; set; }
-        public int ImageWidth { get; set; }
+
+        //public int ImageHeight { get; set; }
+        //public int ImageWidth { get; set; }
 
 
         public CardSet CardSet { get; set; }
@@ -77,6 +69,21 @@ namespace HallOfBeorn.Models
 
                 return string.Join(" ", Traits); //.Select(x => string.Format("{0}.", x)));
             }
+        }
+
+        public bool HasKeyword(string keyword)
+        {
+            return Keywords.Any(x => x != null && string.Equals(x.Trim(), keyword));
+        }
+
+        public bool HasTrait(string trait)
+        {
+            return Traits.Any(x => x != null && string.Equals(x.Trim(), trait));
+        }
+
+        public bool HasFaction(Sphere sphere, string trait)
+        {
+            return Sphere == sphere && HasTrait(trait);
         }
     }
 }

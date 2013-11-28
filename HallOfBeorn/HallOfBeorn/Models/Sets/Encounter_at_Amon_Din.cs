@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Encounter at Amon Dîn";
+            Number = 18;
             SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {
@@ -69,7 +70,7 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Tactics,
                 ResourceCost = 4,
                 Traits = new List<string>() { "Record." },
-                Keywords = new List<string>() { "Attach to a Ï hero." },
+                Keywords = new List<string>() { "Attach to a Tactics hero." },
                 Text = "Reduce the cost to play Book of Eldacar by 1 for each hero you control with a printed Tactics resource icon.Action: Discard Book of Eldacar to play any Tactics event card in your discard pile as if it were in your hand. Then, place that event on the bottom of your deck.",
                 Quantity = 3,
                 Number = 4

@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Conflict at the Carrock";
+            Number = 3;
             SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {
@@ -130,7 +131,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 2,
                 Text = "While attached character is defending, cancel any shadow effects on cards dealt to the attacking enemy.",
-                Keywords = new List<string>() { "Attach to a Î character." },
+                Keywords = new List<string>() { "Attach to a Lore character." },
                 Number = 9
             });
             Cards.Add(new Card() {

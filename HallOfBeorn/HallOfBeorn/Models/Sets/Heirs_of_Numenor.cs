@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Heirs of Númenor";
+            Number = 15;
             SetType = Models.SetType.Deluxe_Expansion;
 
             Cards.Add(new Card() {
@@ -924,7 +925,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9078",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Tactics,
-                Keywords = new List<string>() { "Attach to a Ï character.", " Restricted." },
+                Keywords = new List<string>() { "Attach to a Tactics character.", " Restricted." },
                 ResourceCost = 2,
                 Quantity = 3,
                 Traits = new List<string>() { "Item.", " Weapon." },

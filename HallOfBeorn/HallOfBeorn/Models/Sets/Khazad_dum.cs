@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Khazad-dûm";
+            Number = 8;
             SetType = Models.SetType.Deluxe_Expansion;
 
             Cards.Add(new Card() {
@@ -311,7 +312,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 23
             });
             Cards.Add(new Card() {
-                ImageName = "M1293",
+                ImageName = "M1292",
                 Title = "Dwarrowdelf Axe",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9026",
                 CardType = CardType.Attachment,

@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Drúadan Forest";
+            Number = 17;
             SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {
@@ -66,7 +67,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Traits = new List<string>() { "Skill." },
                 Text = "Response: After attached hero attacks and destroys an enemy, deal 1 damage to another enemy that shares a Trait with the enemy just destroyed.",
-                Keywords = new List<string>() { "Attach to a Ï hero.", " Limit 1 per hero." },
+                Keywords = new List<string>() { "Attach to a Tactics hero.", " Limit 1 per hero." },
                 Quantity = 3,
                 Number = 4
             });

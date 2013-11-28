@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Blood of Gondor";
+            Number = 20;
             SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {
@@ -84,7 +85,7 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Leadership,
                 ResourceCost = 4,
                 Traits = new List<string>() { "Record." },
-                Keywords = new List<string>() { "Attach to a Ì hero." },
+                Keywords = new List<string>() { "Attach to a Leadership hero." },
                 Quantity = 3,
                 Number = 6
             });

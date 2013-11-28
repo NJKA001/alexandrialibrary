@@ -1,0 +1,50 @@
+﻿@using HallOfBeorn.Models
+@model CardViewModel
+
+@{
+    ViewBag.Title = @Model.Title;
+}
+
+<h2>@Model.Title</h2>
+
+    <div>
+        <table>
+            <tr>
+                <td rowspan="2">
+                    <img src="@Model.ImagePath"/>
+                </td>
+                <td>
+                    <div>
+                        <table>
+                            <tr>
+                                <td><label>Set</label></td>
+                                <td>@Model.SetName</td>
+                                <td><label>Type</label></td>
+                                <td>@Model.CardType</td>
+                            </tr>
+                        </table>
+
+                        <p>
+                            @foreach (var trait in Model.Traits)
+                            {
+                                <b><i>@trait</i></b> @: &nbsp; &nbsp;
+                            }
+                            <br />
+                            @foreach (var keyword in Model.Keywords)
+                            {
+                                @keyword @: &nbsp; &nbsp;
+                            }
+                            <br />
+                            @Model.Text
+
+                            @if (!string.IsNullOrEmpty(@Model.OppositeText))
+                            {
+                                <br />
+                                @Model.OppositeText
+                            }
+                        </p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>

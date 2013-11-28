@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Stone of Erech";
+            Number = 2003;
             SetType = Models.SetType.GenCon_Expansion;
 
             Cards.Add(new Card() {

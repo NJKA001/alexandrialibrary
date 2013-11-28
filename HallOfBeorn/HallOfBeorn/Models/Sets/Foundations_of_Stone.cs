@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Foundations of Stone";
+            Number = 13;
             SetType = Models.SetType.Adventure_Pack;
 
             Cards.Add(new Card() {
@@ -183,7 +184,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 0,
                 Text = "Action: Discard Healing Herbs and exhaust attached hero to heal all damage on 1 character.",
-                Keywords = new List<string>() { "Attach to a Î hero." },
+                Keywords = new List<string>() { "Attach to a Lore hero." },
                 Number = 13
             });
             Cards.Add(new Card() {

@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Black Riders";
+            Number = 1003;
             SetType = Models.SetType.Saga_Expansion;
 
             Cards.Add(new Card() {
@@ -310,7 +311,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 22
             });
             Cards.Add(new Card() {
-                ImageName = "The Black Riders/Gildor Inglorion.png",
+                ImageName = "Gildor_Inglorion",
                 Title = "Gildor Inglorion",
                 Id = "6c04a40a-0666-4b4f-a768-ddff46857cf0",
                 IsUnique = true,
@@ -325,10 +326,10 @@ namespace HallOfBeorn.Models.Sets
                 Number = 23
             });
             Cards.Add(new Card() {
-                ImageName = "Overcome by Terror",
                 Title = "Overcome by Terror",
                 Id = "cdc303cb-bb1a-4409-a479-aa4155bd8ed5",
                 CardType = CardType.Treachery,
+                CampaignCardType = Models.CampaignCardType.Burden,
                 Keywords = new List<string>() { "Surge." },
                 EncounterSet = "Flight to the Ford",
                 Quantity = 1,
@@ -338,6 +339,7 @@ namespace HallOfBeorn.Models.Sets
                 Title = "Fear of Discovery",
                 Id = "074cad39-ce55-4dc1-9775-e95363682ef7",
                 CardType = CardType.Treachery,
+                CampaignCardType = Models.CampaignCardType.Burden,
                 Keywords = new List<string>() { "Surge." },
                 EncounterSet = "Flight to the Ford",
                 Quantity = 1,
@@ -347,6 +349,7 @@ namespace HallOfBeorn.Models.Sets
                 Title = "Eaten Alive!",
                 Id = "e8f413bf-3593-47fc-8813-4553d55dbb2a",
                 CardType = CardType.Treachery,
+                CampaignCardType = Models.CampaignCardType.Burden,
                 Keywords = new List<string>() { "Surge." },
                 EncounterSet = "Flight to the Ford",
                 Quantity = 1,
@@ -356,6 +359,7 @@ namespace HallOfBeorn.Models.Sets
                 Title = "Panicked",
                 Id = "50c19cd1-3094-4bf7-b2dc-e21b145827b7",
                 CardType = CardType.Treachery,
+                CampaignCardType = Models.CampaignCardType.Burden,
                 Keywords = new List<string>() { "Surge." },
                 EncounterSet = "Flight to the Ford",
                 Quantity = 1,
@@ -365,6 +369,7 @@ namespace HallOfBeorn.Models.Sets
                 Title = "Weight of the Ring",
                 Id = "40c95b3d-6216-4def-bb93-f44871f3ec70",
                 CardType = CardType.Treachery,
+                CampaignCardType = Models.CampaignCardType.Burden,
                 Keywords = new List<string>() { "Surge." },
                 EncounterSet = "Flight to the Ford",
                 Quantity = 1,
