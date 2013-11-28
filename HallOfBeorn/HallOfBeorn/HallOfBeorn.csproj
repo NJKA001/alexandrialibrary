@@ -194,6 +194,7 @@
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\CardEffect.cs" />
     <Compile Include="Models\CardEffectType.cs" />
+    <Compile Include="Models\CardEffectViewModel.cs" />
     <Compile Include="Models\CardSet.cs" />
     <Compile Include="Models\CardType.cs" />
     <Compile Include="Models\CardViewModel.cs" />

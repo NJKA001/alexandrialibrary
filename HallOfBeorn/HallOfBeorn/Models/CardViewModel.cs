@@ -167,5 +167,66 @@ namespace HallOfBeorn.Models
             }
         }
 
+        private CardEffectViewModel GetEffect(string text, bool isLastLine)
+        {
+            string prefix = null;
+
+            var index = text.IndexOf(':');
+            if (index > -1 && index < 20)
+            {
+                prefix = text.Substring(0, index);
+                text = text.Substring(index + 1, text.Length - index - 1).Trim();
+            }
+
+            var isCritical = false;
+            if (isLastLine && (text.Contains("must") || text.Contains("cannot")))
+                isCritical = true;
+
+            return new CardEffectViewModel() { Prefix = prefix, Text = text, IsCritical = isCritical };
+        }
+
+        public IEnumerable<CardEffectViewModel> GetCardEffects()
+        {
+            var effects = new List<CardEffectViewModel>();
+
+            if (!string.IsNullOrEmpty(Text))
+            {
+                var lines = Text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                var count = 0;
+                var isLastLine = false;
+                foreach (var line in lines)
+                {
+                    count++;
+                    isLastLine = (count == lines.Length);
+                    if (!string.IsNullOrEmpty(line))
+                    {
+                        effects.Add(GetEffect(line, isLastLine));
+                    }
+                }
+            }
+
+            if (!string.IsNullOrEmpty(OppositeText))
+            {
+                var lines = OppositeText.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                var count = 0;
+                var isLastLine = false;
+                foreach (var line in lines)
+                {
+                    count++;
+                    isLastLine = (count == lines.Length);
+                    if (!string.IsNullOrEmpty(line))
+                    {
+                        effects.Add(GetEffect(line, isLastLine));
+                    }
+                }
+            }
+
+            if (!string.IsNullOrEmpty(Shadow))
+            {
+                effects.Add(GetEffect(Shadow, false));
+            }
+
+            return effects;
+        }
     }
 }

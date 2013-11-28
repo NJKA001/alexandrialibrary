@@ -25,7 +25,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 2,
                 Willpower = 2,
                 HitPoints = 5,
-                Traits = new List<string>() { "Dunedain.", " Noble.", " Ranger." },
+                Traits = new List<string>() { "Dúnedain.", " Noble.", " Ranger." },
                 Text = "Response: After Aragorn commits to a quest, spend 1 resource from his resource pool to ready him.",
                 Keywords = new List<string>() { "Sentinel." },
                 Quantity = 1,
@@ -214,7 +214,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 2,
                 Willpower = 2,
                 HitPoints = 4,
-                Traits = new List<string>() { "Dunedain.", " Ranger." },
+                Traits = new List<string>() { "Dúnedain.", " Ranger." },
                 Text = "Action: Exhaust Beravor to choose a player. That player draws 2 cards. Limit once per round.",
                 Quantity = 1,
                 Number = 12
@@ -262,7 +262,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 0,
                 Willpower = 0,
                 HitPoints = 2,
-                Traits = new List<string>() { "Dunedain." },
+                Traits = new List<string>() { "Dúnedain." },
                 Text = "Response: After Son of Arnor enters play, choose an enemy card in the staging area or currently engaged with another player. Engage that enemy.",
                 Quantity = 2,
                 Number = 15
@@ -666,7 +666,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 2,
                 Willpower = 1,
                 HitPoints = 3,
-                Traits = new List<string>() { "Dunedain.", " Ranger." },
+                Traits = new List<string>() { "Dúnedain.", " Ranger." },
                 Text = "Response: After Northern Tracker commits to a quest, place 1 progress token on each location in the staging area.",
                 Quantity = 2,
                 Number = 45
@@ -1317,6 +1317,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "51223bd0-ffd1-11df-a976-0801200c9093",
                 CardType = CardType.Treachery,
                 Text = "When Revealed: Deal 1 damage to each exhausted character.",
+                FlavorText = "There was an eye in the Dark Tower that did not sleep. He knew that it had become aware of his gaze. A fierce eager will was there. - The Fellowship of the Ring",
                 EncounterSet = "Dol Guldur Orcs",
                 Quantity = 3,
                 Number = 93
@@ -1684,7 +1685,9 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Quest,
                 EncounterSet = "Passage Through Mirkwood",
                 Quantity = 1,
+                FlavorText = "As you move through Mirkwood, hounded by spiders, the forest path forks before you...",
                 OppositeText = "Forced: When you defeat this stage, proceed to one of the 2 \"A Chosen Path\" stages, at random.",
+                OppositeFlavorText = "Unsure of what lies ahead but spurred by the urgency of your message, you choose a path and proceed... ",
                 QuestPoints = 2,
                 Number = 120
             });

@@ -109,7 +109,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "51223bd0-ffd1-11df-a976-0801209c9009",
                 CardType = CardType.Ally,
                 Sphere = Sphere.Leadership,
-                Traits = new List<string>() { "Dunedain.", " Ranger." },
+                Traits = new List<string>() { "Dúnedain.", " Ranger." },
                 Quantity = 3,
                 ResourceCost = 5,
                 Attack = 2,

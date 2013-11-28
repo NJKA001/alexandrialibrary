@@ -188,6 +188,29 @@
                         }
 
                         <div style="padding:4px;">
+                            @foreach (var effect in @Model.GetCardEffects())
+                            {
+                                if (@effect.IsShadow)
+                                {
+                                    <hr style="margin-left:24px;margin-right:24px;"/>
+                                }
+                                
+                                if (@effect.HasPrefix)
+                                {
+                                    <b>@effect.Prefix:</b>
+                                }
+                                if (@effect.IsCritical)
+                                {
+                                    <span><b>@effect.Text</b></span>
+                                }
+                                else
+                                {
+                                    <span>@effect.Text</span>
+                                }
+                                <br />
+                                <br />
+                            }
+                            @*
                             <p>@Model.Text</p>
                             
                             @if (!string.IsNullOrEmpty(@Model.OppositeText))
@@ -199,13 +222,13 @@
                             {
                                 <hr style="margin-left:24px;margin-right:24px;"/>
                                 <p>@Model.Shadow</p>
-                            }
+                            }*@
                         </div>
 
                         @if (!string.IsNullOrEmpty(@Model.FlavorText) || !string.IsNullOrEmpty(@Model.OppositeFlavorText))
                         {
                             <br />
-                        <div style="align-content:center"><label>Flavor Text</label></div>
+                        <div style="text-align:center"></div>
                         <p>
                             @if (!string.IsNullOrEmpty(@Model.FlavorText))
                             {

@@ -1239,7 +1239,7 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Spirit,
                 ResourceCost = 3,
                 Quantity = 3,
-                Traits = new List<string>() { "Dunedain.", " Ranger." },
+                Traits = new List<string>() { "Dúnedain.", " Ranger." },
                 Willpower = 2,
                 HitPoints = 2,
                 Attack = 1,

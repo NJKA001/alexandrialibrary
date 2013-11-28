@@ -19,7 +19,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "51223bd0-ffd1-11df-a976-0801210c9001",
                 CardType = CardType.Hero,
                 Sphere = Sphere.Lore,
-                Traits = new List<string>() { "Dunedain.", " Ranger." },
+                Traits = new List<string>() { "Dúnedain.", " Ranger." },
                 Quantity = 1,
                 ThreatCost = 12,
                 IsUnique = true,
