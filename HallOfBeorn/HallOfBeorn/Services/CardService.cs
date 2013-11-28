@@ -85,9 +85,11 @@ namespace HallOfBeorn.Services
         private readonly Dictionary<string, string> keywords = new Dictionary<string, string>();
         private readonly Dictionary<string, string> traits = new Dictionary<string, string>();
 
+        const int maxResults = 128;
+
         public IEnumerable<Card> All()
         {
-            return cards.Values.ToList();
+            return cards.Values.ToList().Take(maxResults);
         }
 
         public IEnumerable<Card> Search(SearchViewModel model)
@@ -148,7 +150,7 @@ namespace HallOfBeorn.Services
             //    cards = cards.Where(x => x.Title.ToLower() == title.ToLower()).ToList();
             //}
 
-            return results;//.OrderBy(x => x.Title);
+            return results.Take(maxResults);//.OrderBy(x => x.Title);
         }
 
         public Card Find(string id)
