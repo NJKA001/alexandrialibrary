@@ -1670,8 +1670,11 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Quest,
                 Setup = "ss",
                 Text = "Setup: Search the encounter deck for 1 copy of the Forest Spider and 1 copy of the Old Forest Road, and add them to the staging area. Then, shuffle the encounter deck.",
+                FlavorText = "You are traveling through Mirkwood forest, carrying an urgent message from King Thanduil to the Lady Galadriel of Lorien. As you move along the dark trail, the spiders gather around you...",
+                OppositeFlavorText = "The nastiest things they saw were the cobwebs; dark dense cobwebs, with threads extradionairly thick, often stretched from tree to tree, or tangled in the lower branches on either side of them. There were none stretched across the path, but whether because some magic kept it clear, or for what other reasons they could not guess. - The Hobbit",
                 EncounterSet = "Passage Through Mirkwood",
                 Quantity = 1,
+                QuestPoints = 8,
                 Number = 119
             });
             Cards.Add(new Card() {
@@ -1681,24 +1684,32 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Quest,
                 EncounterSet = "Passage Through Mirkwood",
                 Quantity = 1,
+                OppositeText = "Forced: When you defeat this stage, proceed to one of the 2 \"A Chosen Path\" stages, at random.",
+                QuestPoints = 2,
                 Number = 120
             });
             Cards.Add(new Card() {
                 ImageName = "M1121",
                 Title = "A Chosen Path - 3A",
+                OppositeTitle = "Don't Leave the Path",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9123",
                 CardType = CardType.Quest,
                 EncounterSet = "Passage Through Mirkwood",
+                OppositeText = "When Revealed: Each player must search the encounter deck and discard pile for 1 Spider card of his choice, and add it to the staging area.\r\nThe players must find and defeat Ungoliant's Spawn to win this game.",
                 Quantity = 1,
+                QuestPoints = 0,
                 Number = 121
             });
             Cards.Add(new Card() {
                 ImageName = "M1122",
                 Title = "A Chosen Path - 3A",
+                OppositeTitle = "Beorn's Path",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9125",
                 CardType = CardType.Quest,
                 EncounterSet = "Passage Through Mirkwood",
+                OppositeText = "Players cannot defeat this stage while Ungoliant's Spawn is in play. If players defeat this stage, they have won the game.",
                 Quantity = 1,
+                QuestPoints = 10,
                 Number = 122
             });
             Cards.Add(new Card() {
@@ -1708,8 +1719,11 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Quest,
                 Setup = "ssst",
                 Text = "Setup: Search the encounter deck for the 3 objective cards, reveal and place them in the staging area. Also, place the Nazgul of Dol Guldur face up but out of play, alongside the quest deck. Then, shuffle the encounter deck, and attach 1 encounter to each objective card.",
+                FlavorText = "The Lady Galadriel of Lorien has asked you to investigate the area in the vicinity of Dol Guldar. While doing so, one of your allies was ambushed by Orcs, captured, and is now held in a dungeon cell...",
+                OppositeText = "When Revealed: Randomly select 1 hero card (among all the heroes controlled by the players) and turn it facedown. The hero is now considered a \"prisoner\", cannot be used, cannot be damaged, and does not collect resources, until it is \"rescued\" (as instructed by card effects) later in this quest.\r\nThe players, as a group, cannot play more than 1 ally card each round.\r\nPlayers cannot advance to the next stage of this quest unless they have at least 1 objective card.",
                 EncounterSet = "Escape from Dol Guldur",
                 Quantity = 1,
+                QuestPoints = 9,
                 Number = 123
             });
             Cards.Add(new Card() {
@@ -1718,7 +1732,9 @@ namespace HallOfBeorn.Models.Sets
                 Id = "51223bd0-ffd1-11df-a976-0801200c9129",
                 CardType = CardType.Quest,
                 EncounterSet = "Escape from Dol Guldur",
+                OppositeText = "Response: After placing any number of progress tokens on this card, flip the \"prisoner\" hero card face-up, and place 1 damage toke on it. The hero has been \"rescued\" and may now be used by its controller.\r\nThe players, as a group, cannot play more than 1 ally card each round.\r\nPlayers cannot advance to the next stage of the quest unless they have rescued the prisoner and have all 3 \"Escape from Dol Guldur\" objective cards.",
                 Quantity = 1,
+                QuestPoints = 15,
                 Number = 124
             });
             Cards.Add(new Card() {
@@ -1727,7 +1743,9 @@ namespace HallOfBeorn.Models.Sets
                 Id = "51223bd0-ffd1-11df-a976-0801200c9131",
                 CardType = CardType.Quest,
                 EncounterSet = "Escape from Dol Guldur",
+                OppositeText = "Forced: At the beginning of each quest phase, each player places the top card of his deck, face down in front of him as if it just engaged him from the staging area. These cards are called \"Orc Guard\" and act as enemies with: 1 hit point, 1 Attack, and 1 Defense.\r\nPlayers cannot defeat this stage while Nazgul of Dol Guldur is in play. If this stage is defeated and Nazgul of Dol Guldur is not in play, the players have won the game.",
                 Quantity = 1,
+                QuestPoints = 7,
                 Number = 125
             });
             Cards.Add(new Card() {
@@ -1736,8 +1754,10 @@ namespace HallOfBeorn.Models.Sets
                 Id = "51223bd0-ffd1-11df-a976-0801200c9133",
                 CardType = CardType.Quest,
                 Text = "Setup: Each player reveals 1 card from the top of the encounter deck, and adds it to the staging area.",
+                OppositeText = "When Revealed: Search the encounter deck for 1 Hill Troll is one is not already in play, and place it in the staging area. Shuffle the encounter deck.\r\nPlayers cannot defeat this stage while any Hill Troll cards are in play.",
                 EncounterSet = "Journey Down the Anduin",
                 Quantity = 1,
+                QuestPoints = 8,
                 Number = 126
             });
             Cards.Add(new Card() {
@@ -1747,6 +1767,8 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Quest,
                 EncounterSet = "Journey Down the Anduin",
                 Quantity = 1,
+                Text = "Reveal 1 additional card from the encounter deck each quest phase. Do not make engagement checks during the encounter phase. (Each player may still optionally engage 1 enemy each encounter phase.)",
+                QuestPoints = 16,
                 Number = 127
             });
             Cards.Add(new Card() {
@@ -1756,6 +1778,8 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Quest,
                 EncounterSet = "Journey Down the Anduin",
                 Quantity = 1,
+                Text = "When Revealed: Reveal 2 encounter cards per player, and add them to the staging area.\r\nSkip the staging step of the quest phase for the remainder of the game.\r\nOnce there are no enemies in play, the players have won the game.",
+                QuestPoints = 0,
                 Number = 128
             });
         }

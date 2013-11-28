@@ -10,30 +10,29 @@
 @using (Html.BeginForm("Search", "Cards", FormMethod.Post))
 {
     <div class="form-group">
-        @Html.TextBoxFor(x => x.Query)
-        <input type="submit" value="Search" />
+        @Html.TextBoxFor(x => x.Query, new { style="margin-right:2px;" })
+        <input type="submit" value="Search" style="border-radius:8px;background-color:lightgray;" />
 
         <div>
-            @*<label>Advanced Search</label>*@
             <br />
-            @Html.LabelFor(x => x.CardType, new { style="display:inline;"})
-            @Html.DropDownListFor(x => x.CardType, SearchViewModel.CardTypes)
+            @Html.LabelFor(x => x.CardSet, new { style="display:inline;margin-right:2px;"})
+            @Html.DropDownListFor(x => x.CardSet, SearchViewModel.CardSets, new { style="margin-right:12px;" })
 
-            @Html.LabelFor(x => x.CardSet, new { style="display:inline;"})
-            @Html.DropDownListFor(x => x.CardSet, SearchViewModel.CardSets)
+            @Html.LabelFor(x => x.CardType, new { style="display:inline;margin-right:2px;"})
+            @Html.DropDownListFor(x => x.CardType, SearchViewModel.CardTypes, new { style="margin-right:12px;" })
 
-            @Html.LabelFor(x => x.Sphere, new { style = "display:inline;"})
-            @Html.DropDownListFor(x => x.Sphere, SearchViewModel.Spheres)
+            @Html.LabelFor(x => x.Sphere, new { style = "display:inline;margin-right:2px;"})
+            @Html.DropDownListFor(x => x.Sphere, SearchViewModel.Spheres, new { style="margin-right:12px;" })
 
-            @Html.LabelFor(x => x.Cost, new { style = "display:inline;"})
-            @Html.DropDownListFor(x => x.Cost, SearchViewModel.Costs)
+            @Html.LabelFor(x => x.Cost, new { style = "display:inline;margin-right:2px;"})
+            @Html.DropDownListFor(x => x.Cost, SearchViewModel.Costs, new { style="margin-right:0px;" })
             <br />
             <br />
-            @Html.LabelFor(x => x.Trait, new { style = "display:inline;"})
-            @Html.DropDownListFor(x => x.Trait, SearchViewModel.Traits)
+            @Html.LabelFor(x => x.Trait, new { style = "display:inline;margin-right:2px;"})
+            @Html.DropDownListFor(x => x.Trait, SearchViewModel.Traits, new { style="margin-right:12px;" })
 
-            @Html.LabelFor(x => x.Keyword, new { style = "display:inline;"})
-            @Html.DropDownListFor(x => x.Keyword, SearchViewModel.Keywords)
+            @Html.LabelFor(x => x.Keyword, new { style = "display:inline;margin-right:2px;"})
+            @Html.DropDownListFor(x => x.Keyword, SearchViewModel.Keywords, new { style="margin-right:0px;" })
             <br />
             <br />
         </div>
@@ -44,41 +43,73 @@
 
 @foreach (var card in @Model.Cards)
 {
-    <div>
-        <table>
+    <div style="margin:6px;border: 1px solid gray;border-radius: 8px;">
+        <table style="margin:0px;">
             <tr>
-                <td rowspan="2">
-                    <img src="@card.ImagePath" style="height:160px;"/>
+                <td style="vertical-align:top;">
+                    <a href="@Href(string.Format("/Cards/Details/{0}", @card.Id))"><img src="@card.ImagePath" style="height:160px;"/></a>
                 </td>
-                <td style="min-width:100px">
-                    <h3>@Html.ActionLink(@card.Title, "Details", new { id = @card.Id })</h3>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>
-                        <p>
-                            @foreach (var trait in card.Traits)
-                            {
-                                @trait @: &nbsp; &nbsp;
-                            }
-                            <br />
-                            @foreach (var keyword in card.Keywords)
-                            {
-                                @keyword @: &nbsp; &nbsp;
-                            }
-                            <br />
-                            @card.Text
+                <td style="vertical-align:top;">
+                    @Html.ActionLink(@card.FullTitle, "Details", new { id = @card.Id }, new { style="margin-top:0px;font-weight:bold;"})
+                    <div style="vertical-align:top;">
+                        @foreach (var trait in card.Traits)
+                        {
+                            @trait @: &nbsp; &nbsp;
+                        }
+                        <br />
+                        @foreach (var keyword in card.Keywords)
+                        {
+                            @keyword @: &nbsp; &nbsp;
+                        }
+                        <br />
+                        @card.Text
 
-                            @*
-                            @if (!string.IsNullOrEmpty(@card.OppositeText))
-                            {
-                                <br />
-                                @card.OppositeText
-                            }*@
-                        </p>
+                        @if (!string.IsNullOrEmpty(@card.OppositeText))
+                        {
+                            <br />
+                            @card.OppositeText
+                        }
+                        @if (!string.IsNullOrEmpty(@card.Shadow))
+                        {
+                            <br />
+                            <hr style="margin-left:24px;margin-right:24px;"/>    
+                            @card.Shadow
+                        }
                     </div>
-                </td>
+                    @*
+                    <table>
+                        <tr>
+                            <td>
+                                <h3>@Html.ActionLink(@card.FullTitle, "Details", new { id = @card.Id })</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:top;">
+                                <div>
+                                    <p>
+                                        @foreach (var trait in card.Traits)
+                                        {
+                                            @trait @: &nbsp; &nbsp;
+                                        }
+                                        <br />
+                                        @foreach (var keyword in card.Keywords)
+                                        {
+                                            @keyword @: &nbsp; &nbsp;
+                                        }
+                                        <br />
+                                        @card.Text
+
+                                        @if (!string.IsNullOrEmpty(@card.OppositeText))
+                                        {
+                                            <br />
+                                            @card.OppositeText
+                                        }
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>*@
+                </td>            
             </tr>
         </table>
     </div>

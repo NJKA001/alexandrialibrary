@@ -78,6 +78,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Traits = new List<string>() { "Gondor." },
                 Keywords = new List<string>() { "Attach to a Gondor or Dunedain hero." },
+                Text = "Action: Spend 1 resource from attached hero's resource pool to give attached hero +1 Attack for each resource in its resource pool until the end of the phase. (Limit once per phase.)",
                 Quantity = 3,
                 Number = 5
             });
