@@ -732,7 +732,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "51223bd0-ffd1-11df-a976-0801200c9051",
                 CardType = CardType.Event,
                 Sphere = Sphere.Spirit,
-                ResourceCost = 0,
+                IsVariableCost = true,
                 Text = "Action: Choose an ally with a printed cost of X in any player's discard pile. Put that ally into play under your control. (The chosen ally can belong to any sphere of influence.)",
                 Quantity = 3,
                 Number = 51
@@ -942,7 +942,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "51223bd0-ffd1-11df-a976-0801200c9067",
                 CardType = CardType.Event,
                 Sphere = Sphere.Lore,
-                ResourceCost = 0,
+                IsVariableCost = true,
                 Text = "Action: Look at the top X cards of any player's deck, add 1 of those cards to its owner's hand, and return the rest to the top of the deck in any order.",
                 Quantity = 2,
                 Number = 67

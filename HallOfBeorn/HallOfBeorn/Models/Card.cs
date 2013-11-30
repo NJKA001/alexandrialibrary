@@ -25,6 +25,7 @@ namespace HallOfBeorn.Models
         public uint StageNumber { get; set; }
         
         public string ImageName { get; set; }
+        public ImageType ImageType { get; set; }
 
         //public int ImageHeight { get; set; }
         //public int ImageWidth { get; set; }
@@ -40,6 +41,9 @@ namespace HallOfBeorn.Models
         public byte ResourceCost { get; set; }
         public byte EngagementCost { get; set; }
         public byte Threat { get; set; }
+        public bool IsVariableCost { get; set; }
+        public bool IsVariableThreat { get; set; }
+        public bool IsVariableQuestPoints { get; set; }
         public byte Willpower { get; set; }
         public byte Attack { get; set; }
         public byte Defense { get; set; }

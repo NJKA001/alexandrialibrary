@@ -38,6 +38,7 @@ namespace HallOfBeorn.Services
             sets.Add(new EncounteratAmonDin());
             sets.Add(new AssaultonOsgiliath());
             sets.Add(new TheBloodofGondor());
+            sets.Add(new TheMorgulVale());
 
             sets.Add(new TheHobbitOverHillandUnderHill());
             sets.Add(new TheHobbitOntheDoorstep());

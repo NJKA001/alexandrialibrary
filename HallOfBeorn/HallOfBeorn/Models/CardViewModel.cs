@@ -76,7 +76,11 @@ namespace HallOfBeorn.Models
 
         public string ResourceCost
         {
-            get { return _card.ResourceCost.ToString(); }
+            get { 
+                return _card.IsVariableCost ?
+                    "X"
+                    : _card.ResourceCost.ToString();
+            }
         }
 
         public string Willpower
@@ -101,12 +105,24 @@ namespace HallOfBeorn.Models
 
         public string QuestPoints
         {
-            get { return _card.QuestPoints.ToString(); }
+            get {
+
+                if (_card.IsVariableQuestPoints)
+                    return "X";
+
+                return _card.QuestPoints.HasValue ?
+                    _card.QuestPoints.ToString()
+                    : "-";
+            }
         }
 
         public string Threat
         {
-            get { return _card.Threat.ToString(); }
+            get { return 
+                _card.IsVariableThreat ?
+                "X"
+                : _card.Threat.ToString(); 
+            }
         }
 
         public string EngagementCost
@@ -148,9 +164,18 @@ namespace HallOfBeorn.Models
         {
             get
             {
+                var format = ImageType.Jpg;
+                if (_card.ImageType != ImageType.None)
+                    format = _card.ImageType;
+                else if (!string.IsNullOrEmpty(_card.ImageName)) {
+                    format = ImageType.Png;
+                }
+
+                var ext = string.Format(".{0}", format.ToString().ToLower());
+
                 return string.IsNullOrEmpty(_card.ImageName) ?
-                    string.Format("/Images/Cards/{0}/{1}.jpg", _card.CardSet.Name.ToUrlSafeString(), Title.ToUrlSafeString())
-                    : string.Format("/Images/Cards/{0}.png", _card.ImageName.ToUrlSafeString());
+                    string.Format("/Images/Cards/{0}/{1}{2}", _card.CardSet.Name.ToUrlSafeString(), Title.ToUrlSafeString(), ext)
+                    : string.Format("/Images/Cards/{0}{1}", _card.ImageName.ToUrlSafeString(), ext);
             }
         }
 
@@ -179,7 +204,7 @@ namespace HallOfBeorn.Models
             }
 
             var isCritical = false;
-            if (isLastLine && (text.Contains("must") || text.Contains("cannot")))
+            if (isLastLine && (text.Contains(" must") || text.Contains(" cannot") || text.Contains(" won") || text.Contains(" win")))
                 isCritical = true;
 
             return new CardEffectViewModel() { Prefix = prefix, Text = text, IsCritical = isCritical };
