@@ -10,9 +10,8 @@ namespace HallOfBeorn.Models
         public Card()
         {
             Traits = new List<string>();
+            NormalizedTraits = new List<string>();
             Keywords = new List<string>();
-            //ImageHeight = 290;
-            //ImageWidth = 207;
         }
 
         public string Id { get; set; }
@@ -26,10 +25,6 @@ namespace HallOfBeorn.Models
         
         public string ImageName { get; set; }
         public ImageType ImageType { get; set; }
-
-        //public int ImageHeight { get; set; }
-        //public int ImageWidth { get; set; }
-
 
         public CardSet CardSet { get; set; }
 
@@ -51,6 +46,8 @@ namespace HallOfBeorn.Models
         public byte? QuestPoints { get; set; }
 
         public List<string> Traits { get; set; }
+        public List<string> NormalizedTraits { get; set; }
+
         public List<string> Keywords { get; set; }
         public string Text { get; set; }
         public string OppositeText { get; set; }
@@ -82,7 +79,8 @@ namespace HallOfBeorn.Models
 
         public bool HasTrait(string trait)
         {
-            return Traits.Any(x => x != null && string.Equals(x.Trim(), trait));
+            return Traits.Any(x => x != null && string.Equals(x.Trim(), trait))
+                || NormalizedTraits.Any(x => x != null && string.Equals(x.Trim(), trait));
         }
 
         public bool HasFaction(Sphere sphere, string trait)

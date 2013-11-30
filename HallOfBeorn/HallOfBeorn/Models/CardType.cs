@@ -13,6 +13,7 @@ namespace HallOfBeorn.Models
         Location = 3,
         Treachery = 4,
         Objective = 5,
+        Objective_Ally = 15,
         Hero = 6,
         Ally = 7,
         Attachment = 8,

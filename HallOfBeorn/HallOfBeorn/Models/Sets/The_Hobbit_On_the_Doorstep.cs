@@ -72,7 +72,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Hero,
                 Sphere = Sphere.Baggins,
                 IsUnique = true,
-                Keywords = new List<string>() { "If Bilbo Baggins leaves play, the players have lost the game." },
+                Keywords = new List<string>() { "Bilbo Baggins does not count against the hero limit and cannot gain resources from non-treasure cards.", "The first player gains control of Bilbo Baggins." },
                 ThreatCost = 0,
                 Quantity = 1,
                 Traits = new List<string>() { "Hobbit.", " Burglar." },
@@ -80,7 +80,7 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Attack = 1,
                 Defense = 1,
-                Text = "Bilbo Baggins does not count against the hero limit and cannot gain resources from non-treasure cards. The first player gains control of Bilbo Baggins.\r\nAction: Spend 1 Baggins resource to search your deck for a treasure card and add it to your hand.",
+                Text = "Action: Spend 1 Baggins resource to search your deck for a treasure card and add it to your hand.\r\nIf Bilbo Baggins leaves play, the players have lost the game.",
                 Number = 4
             });
             Cards.Add(new Card() {
@@ -94,7 +94,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Quantity = 1,
                 Traits = new List<string>() { "Artifact.", " Item.", " Ring." },
-                Text = "Action: Exhaust Bilbo's Magic Ring and raise your threat by 1 to gain 1 Í resource. (Limit once per round.)Response: After Bilbo Baggins exhausts to defend an attack, exhaust Bilbo's Magic Ring and raise your threat by 3 to cancel all damage from this attack.",
+                Text = "Action: Exhaust Bilbo's Magic Ring and raise your threat by 1 to gain 1 Baggins resource. (Limit once per round.)Response: After Bilbo Baggins exhausts to defend an attack, exhaust Bilbo's Magic Ring and raise your threat by 3 to cancel all damage from this attack.",
                 Number = 5
             });
             Cards.Add(new Card() {
@@ -783,7 +783,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Location,
                 Quantity = 3,
                 Traits = new List<string>() { "Forest.", " Mountain." },
-                Text = "While Hidden Path is the active location, locations in the staging area get -1 Threat.Travel: Spend 2 Í resources to travel here.",
+                Text = "While Hidden Path is the active location, locations in the staging area get -1 Threat.Travel: Spend 2 Baggins resources to travel here.",
                 QuestPoints = 1,
                 EncounterSet = "Wilderland",
                 Threat = 3,
@@ -821,14 +821,14 @@ namespace HallOfBeorn.Models.Sets
                 ImageName = "M1675",
                 Title = "Misty Mountain Eagle",
                 Id = "6e193811-584d-4888-a1b8-5296522b5cd1",
-                CardType = CardType.Objective,
+                CardType = CardType.Objective_Ally,
                 Quantity = 1,
                 Traits = new List<string>() { "Creature.", " Eagle." },
                 Willpower = 3,
                 HitPoints = 2,
                 Attack = 3,
                 Defense = 3,
-                Text = "Action: The first player may spend 2 Í resources to (choose one): take control of Misty Mountain Eagle, or discard this ally to discard a non-unique enemy in the staging area.",
+                Text = "Action: The first player may spend 2 Baggins resources to (choose one): take control of Misty Mountain Eagle, or discard this ally to discard a non-unique enemy in the staging area.",
                 EncounterSet = "The Battle of Five Armies",
                 Shadow = "Shadow: Deal 3 damage to attacking enemy.",
                 Number = 61
@@ -881,7 +881,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 Keywords = new List<string>() { "Surge." },
                 Quantity = 3,
-                Text = "When Revealed: Put 1 progress token on Smaug the Golden. Then, spend X Í resources or advance to stage 4A. X is the number of progress tokens on Smaug the Golden.Burgle: The first player shuffles his deck and reveals the top card. He may discard 2 cards from his hand that match the revealed card's type.",
+                Text = "When Revealed: Put 1 progress token on Smaug the Golden. Then, spend X Baggins resources or advance to stage 4A. X is the number of progress tokens on Smaug the Golden.Burgle: The first player shuffles his deck and reveals the top card. He may discard 2 cards from his hand that match the revealed card's type.",
                 EncounterSet = "The Lonely Mountain",
                 Number = 65
             });
@@ -894,7 +894,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Immune to player card effects." },
                 Quantity = 1,
                 Traits = new List<string>() { "Ruins.", " Mountain." },
-                Text = "Forced: Remove 2 progress from stage 4B at the end of each round, if able.Travel: Spend 3 Í resources to travel here. (1 Í instead if stage 4B is the current quest.)",
+                Text = "Forced: Remove 2 progress from stage 4B at the end of each round, if able.Travel: Spend 3 Baggins resources to travel here. (1 Baggins resource instead if stage 4B is the current quest.)",
                 QuestPoints = 2,
                 EncounterSet = "The Battle of Five Armies",
                 Threat = 2,
@@ -927,7 +927,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Immune to player card effects." },
                 Quantity = 1,
                 Traits = new List<string>() { "Ruins.", " Valley." },
-                Text = "Forced: Remove 2 progress from stage 3B at the end of each round, if able.Travel: Spend 3 Í resources to travel here. (1 Í instead if stage 3B is the current quest.)",
+                Text = "Forced: Remove 2 progress from stage 3B at the end of each round, if able.Travel: Spend 3 Baggins resources to travel here. (1 Baggins resource instead if stage 3B is the current quest.)",
                 QuestPoints = 2,
                 EncounterSet = "The Battle of Five Armies",
                 Threat = 2,
@@ -992,7 +992,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Immune to player card effects." },
                 Quantity = 1,
                 Traits = new List<string>() { "Ruins.", " Mountain." },
-                Text = "Forced: Remove 2 progress from stage 2B at the end of each round, if able.Travel: Spend 3 Í resources to travel here. (1 Í instead if stage 2B is the current quest.)",
+                Text = "Forced: Remove 2 progress from stage 2B at the end of each round, if able.Travel: Spend 3 Baggins resources to travel here. (1 Baggins resource instead if stage 2B is the current quest.)",
                 QuestPoints = 2,
                 EncounterSet = "The Battle of Five Armies",
                 Threat = 2,
@@ -1007,7 +1007,7 @@ namespace HallOfBeorn.Models.Sets
                 IsUnique = true,
                 Quantity = 1,
                 Traits = new List<string>() { "Mountain." },
-                Text = "While at least 1 card is stacked underneath, The Lonely Mountain is immune to player card effects, cannot leave the staging area, and gets -2 Threat for each card stacked under it.Action: While making a burgle attempt, the first player may spend 2 Í resources to take the revealed card into hand and reveal the next card of his deck.",
+                Text = "While at least 1 card is stacked underneath, The Lonely Mountain is immune to player card effects, cannot leave the staging area, and gets -2 Threat for each card stacked under it.Action: While making a burgle attempt, the first player may spend 2 Baggins resources to take the revealed card into hand and reveal the next card of his deck.",
                 QuestPoints = 4,
                 EncounterSet = "The Lonely Mountain",
                 Threat = 12,

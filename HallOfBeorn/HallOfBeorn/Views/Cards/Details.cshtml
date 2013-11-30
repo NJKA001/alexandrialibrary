@@ -22,7 +22,7 @@
                             <tr>
                                 <td><label>Set</label></td><td style="min-width:100px;">@Model.SetName</td>
                                 <td><label>Number</label></td><td>@Model.Number</td>
-                                <td><label>Type</label></td><td>@Model.CardType</td>
+                                <td><label>Type</label></td><td>@Model.CardTypeName</td>
                                 <td><label>Sphere</label></td><td>@Model.Sphere</td>
                                 <td><label>Quantity</label></td><td>@Model.Quantity</td>
                             </tr>
@@ -172,7 +172,7 @@
                             <div style="text-align:center;">
                             @foreach (var trait in Model.Traits)
                             {
-                                <b><i>@trait</i></b> @: &nbsp; &nbsp;
+                                <b><i>@trait</i></b> @: &nbsp;
                             }
                             <br />
                             </div>
@@ -182,12 +182,13 @@
                             <br />
                             foreach (var keyword in Model.Keywords)
                             {
-                                @keyword @: &nbsp; &nbsp;
+                                @keyword @: &nbsp;
                             }
                             <br />
                         }
 
                         <div style="padding:4px;">
+                            <br />
                             @foreach (var effect in @Model.GetCardEffects())
                             {
                                 if (@effect.IsShadow)

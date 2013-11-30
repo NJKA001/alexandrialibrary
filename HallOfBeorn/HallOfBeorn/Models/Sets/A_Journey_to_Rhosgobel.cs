@@ -119,13 +119,14 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1198",
-                Title = "Dunedain Quest",
+                Title = "Dúnedain Quest",
+                NormalizedTitle = "Dunedain Quest",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9008",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Leadership,
                 ResourceCost = 2,
                 Traits = new List<string>() { "Signal." },
-                Text = "Attached hero gains +1 Willpower.Action: Pay 1 resource from attached hero's pool to attach Dunedain Quest to another hero.",
+                Text = "Attached hero gains +1 Willpower.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Quest to another hero.",
                 Keywords = new List<string>() { "Attach to a hero." },
                 Quantity = 3,
                 Number = 8

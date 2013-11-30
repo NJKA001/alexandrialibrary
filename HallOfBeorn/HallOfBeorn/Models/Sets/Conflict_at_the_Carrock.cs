@@ -93,14 +93,15 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1173",
-                Title = "Dunedain Warning",
+                Title = "Dúnedain Warning",
+                NormalizedTitle = "Dunedain Warning",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9008",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Leadership,
                 Traits = new List<string>() { "Signal." },
                 Quantity = 3,
                 ResourceCost = 1,
-                Text = "Attached hero gains +1 Defense.Action: Pay 1 resource from attached hero's pool to attach Dunedain Warning to another hero.",
+                Text = "Attached hero gains +1 Defense.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Warning to another hero.",
                 Keywords = new List<string>() { "Attach to a hero." },
                 Number = 7
             });

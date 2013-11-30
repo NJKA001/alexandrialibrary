@@ -43,24 +43,27 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1244",
-                Title = "Dunedain Cache",
+                Title = "Dúnedain Cache",
+                NormalizedTitle = "Dunedain Cache",
                 Id = "51223bd0-ffd1-11df-a976-0801205c9003",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Leadership,
                 Traits = new List<string>() { "Item." },
                 Quantity = 3,
                 ResourceCost = 2,
-                Text = "Attached hero gains ranged.Action: Pay 1 resource from attached hero's pool to attach Dunedain Cache to another hero.",
+                Text = "Attached hero gains ranged.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Cache to another hero.",
                 Keywords = new List<string>() { "Attach to a hero." },
                 Number = 3
             });
             Cards.Add(new Card() {
                 ImageName = "M1243",
-                Title = "Dunedain Watcher",
+                Title = "Dúnedain Watcher",
+                NormalizedTitle = "Dunedain Watcher",
                 Id = "51223bd0-ffd1-11df-a976-0801205c9004",
                 CardType = CardType.Ally,
                 Sphere = Sphere.Leadership,
                 Traits = new List<string>() { "Dúnedain." },
+                NormalizedTraits = new List<string> { "Dunedain." },
                 Quantity = 3,
                 ResourceCost = 3,
                 Attack = 1,

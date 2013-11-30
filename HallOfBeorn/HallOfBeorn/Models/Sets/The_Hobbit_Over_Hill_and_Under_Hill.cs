@@ -201,6 +201,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Hero,
                 Sphere = Sphere.Baggins,
                 Traits = new List<string>() { "Hobbit." },
+                Keywords = new List<string> { "The first player gains control of Bilbo Baggins.", "Bilbo Baggins cannot gain resources from player card effects." },
                 Quantity = 1,
                 ThreatCost = 0,
                 IsUnique = true,
@@ -208,7 +209,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 1,
                 Willpower = 1,
                 HitPoints = 3,
-                Text = "The first player gains control of Bilbo Baggins. Bilbo Baggins cannot gain resources from player card effects.If Bilbo Baggins leaves play, the players lose the game.",
+                Text = "If Bilbo Baggins leaves play, the players lose the game.",
                 Number = 15
             });
             Cards.Add(new Card() {
@@ -220,7 +221,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Artifact.", " Ring." },
                 Quantity = 1,
                 IsUnique = true,
-                Text = "Action: When answering a riddle, spend 1 Í resource to discard an additional player card from the top of your deck.Action: Exhaust Bilbo's Magic Ring and raise each player's threat by 2 to add 1 Í resource to Bilbo Baggins' resource pool.",
+                Text = "Action: When answering a riddle, spend 1 Baggins resource to discard an additional player card from the top of your deck.Action: Exhaust Bilbo's Magic Ring and raise each player's threat by 2 to add 1 Baggins resource to Bilbo Baggins' resource pool.",
                 Keywords = new List<string>() { "Attach to Bilbo Baggins." },
                 Number = 16
             });
@@ -249,7 +250,7 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Baggins,
                 Quantity = 3,
                 ResourceCost = 1,
-                Text = "Action: Bilbo Baggins gets +2 Willpower, +2 Attack, and +2 Defense until the end of the phase. (You may spend a Í resource from Bilbo Baggins' resource pool to play this card even if you do not control Bilbo Baggins.)",
+                Text = "Action: Bilbo Baggins gets +2 Willpower, +2 Attack, and +2 Defense until the end of the phase. (You may spend a Baggins resource from Bilbo Baggins' resource pool to play this card even if you do not control Bilbo Baggins.)",
                 Number = 18
             });
             Cards.Add(new Card() {
@@ -401,7 +402,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Great Goblin",
                 Traits = new List<string>() { "Cave." },
                 Quantity = 2,
-                Text = "While Front Porch is the active location, players cannot attack Goblin enemies.Action: The first player may spend 2 Í resources to treat Front Porch's printed text box as if it were blank until the end of the round.",
+                Text = "While Front Porch is the active location, players cannot attack Goblin enemies.Action: The first player may spend 2 Baggins resources to treat Front Porch's printed text box as if it were blank until the end of the round.",
                 Threat = 4,
                 QuestPoints = 4,
                 Number = 30
@@ -644,7 +645,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "We Must Away, Ere Break of Day",
                 Quantity = 3,
                 Text = "When Revealed: The first player chooses a Troll enemy in the staging area and engages that enemy. If there are no Troll enemies in the staging area, this card gains Surge.",
-                Shadow = "Shadow: Deal 4 damage to each character with a Sack card attached. (The first player may spend 2 Í resources to cancel this effect.)",
+                Shadow = "Shadow: Deal 4 damage to each character with a Sack card attached. (The first player may spend 2 Baggins resources to cancel this effect.)",
                 Number = 47
             });
             Cards.Add(new Card() {
@@ -733,7 +734,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "We Must Away, Ere Break of Day",
                 Quantity = 3,
                 Text = "When Revealed: If there is a Troll enemy in the staging area, Sack 1. If there are no Troll enemies in the staging area, this card gains Doomed 2.",
-                Shadow = "Shadow: If the attacking enemy is a Troll, Sack 1. (The first player may spend 1 Í resource to cancel this effect.)",
+                Shadow = "Shadow: If the attacking enemy is a Troll, Sack 1. (The first player may spend 1 Baggins resource to cancel this effect.)",
                 Number = 54
             });
             Cards.Add(new Card() {
@@ -743,7 +744,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 EncounterSet = "Western Lands",
                 Quantity = 1,
-                Text = "When Revealed: Discard all Í resources.",
+                Text = "When Revealed: Discard all Baggins resources.",
                 Shadow = "Shadow: Resolve this card's 'When Revealed' effect.",
                 Number = 55
             });
@@ -839,7 +840,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Over the Misty Mountains Grim",
                 Traits = new List<string>() { "Mountain." },
                 Quantity = 2,
-                Text = "While Overhanging Rock is the active location, it gains: 'Action: Spend 1 Í resource to look at the top 2 cards of your deck. Add 1 of those to your hand and discard the other.'",
+                Text = "While Overhanging Rock is the active location, it gains: 'Action: Spend 1 Baggins resource to look at the top 2 cards of your deck. Add 1 of those to your hand and discard the other.'",
                 Threat = 2,
                 QuestPoints = 3,
                 Number = 62
@@ -1052,7 +1053,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "We Must Away, Ere Break of Day",
                 Traits = new List<string>() { "Forest.", " Trollshaws." },
                 Quantity = 3,
-                Text = "While Troll Camp is in the staging area, Troll enemies get +1 Threat for each player in the game.While Troll Camp is in play, Bilbo Baggins gains: 'Action: Exhaust Bilbo Baggins and spend 1 Í resource to remove 1 Sack card from a character. Bilbo Baggins may trigger this effect even with a Sack card attached to him.'",
+                Text = "While Troll Camp is in the staging area, Troll enemies get +1 Threat for each player in the game.While Troll Camp is in play, Bilbo Baggins gains: 'Action: Exhaust Bilbo Baggins and spend 1 Baggins resource to remove 1 Sack card from a character. Bilbo Baggins may trigger this effect even with a Sack card attached to him.'",
                 Threat = 3,
                 QuestPoints = 3,
                 Number = 77
@@ -1065,7 +1066,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "We Must Away, Ere Break of Day",
                 Traits = new List<string>() { "Cave.", " Trollshaws." },
                 Quantity = 1,
-                Text = "Players cannot travel to Troll Cave unless Bilbo Baggins has the Troll Key attached and the first player spends 5 Í resources. (2 Í resources instead if Bilbo Baggins has the Troll Purse attached.)",
+                Text = "Players cannot travel to Troll Cave unless Bilbo Baggins has the Troll Key attached and the first player spends 5 Baggins resources. (2 Baggins resources instead if Bilbo Baggins has the Troll Purse attached.)",
                 Keywords = new List<string>() { "Immune to player card effects." },
                 Threat = 2,
                 QuestPoints = 4,
@@ -1093,7 +1094,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Item." },
                 Quantity = 1,
                 IsUnique = true,
-                Text = "If Troll Purse is discarded, add it to the staging area.If Troll Purse is unattached and in the staging area, attach it to a Troll enemy, if able.Response: After attached Troll enemy is destroyed, the first player may spend 1 Í resource to claim this objective and attach it to Bilbo Baggins.",
+                Text = "If Troll Purse is discarded, add it to the staging area.If Troll Purse is unattached and in the staging area, attach it to a Troll enemy, if able.Response: After attached Troll enemy is destroyed, the first player may spend 1 Baggins resource to claim this objective and attach it to Bilbo Baggins.",
                 Number = 80
             });
             Cards.Add(new Card() {

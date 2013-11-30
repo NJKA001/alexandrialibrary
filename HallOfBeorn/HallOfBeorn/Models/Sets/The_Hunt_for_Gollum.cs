@@ -32,13 +32,14 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1149",
-                Title = "Dunedain Mark",
+                Title = "Dúnedain Mark",
+                NormalizedTitle = "Dunedain Mark",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9002",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Leadership,
                 ResourceCost = 1,
                 Traits = new List<string>() { "Signal." },
-                Text = "Attached hero gains +1 Attack.Action: Pay 1 resource from attached hero's pool to attach Dunedain Mark to another hero.",
+                Text = "Attached hero gains +1 Attack.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Mark to another hero.",
                 Keywords = new List<string>() { "Attach to a hero." },
                 Quantity = 3,
                 Number = 2

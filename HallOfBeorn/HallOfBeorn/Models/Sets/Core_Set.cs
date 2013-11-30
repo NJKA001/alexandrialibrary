@@ -26,6 +26,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 2,
                 HitPoints = 5,
                 Traits = new List<string>() { "Dúnedain.", " Noble.", " Ranger." },
+                NormalizedTraits = new List<string> { "Dunedain." },
                 Text = "Response: After Aragorn commits to a quest, spend 1 resource from his resource pool to ready him.",
                 Keywords = new List<string>() { "Sentinel." },
                 Quantity = 1,
@@ -215,6 +216,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 2,
                 HitPoints = 4,
                 Traits = new List<string>() { "Dúnedain.", " Ranger." },
+                NormalizedTraits = new List<string> { "Dunedain." },
                 Text = "Action: Exhaust Beravor to choose a player. That player draws 2 cards. Limit once per round.",
                 Quantity = 1,
                 Number = 12
@@ -263,6 +265,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 0,
                 HitPoints = 2,
                 Traits = new List<string>() { "Dúnedain." },
+                NormalizedTraits = new List<string> { "Dunedain." },
                 Text = "Response: After Son of Arnor enters play, choose an enemy card in the staging area or currently engaged with another player. Engage that enemy.",
                 Quantity = 2,
                 Number = 15
@@ -667,6 +670,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 3,
                 Traits = new List<string>() { "Dúnedain.", " Ranger." },
+                NormalizedTraits = new List<string> { "Dunedain." },
                 Text = "Response: After Northern Tracker commits to a quest, place 1 progress token on each location in the staging area.",
                 Quantity = 2,
                 Number = 45
@@ -1443,14 +1447,16 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1102",
-                Title = "Nazgul of Dol Guldur",
+                Title = "Nazgûl of Dol Guldur",
+                NormalizedTitle = "Nazgul of Dol Guldur",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9102",
                 CardType = CardType.Enemy,
                 EngagementCost = 40,
                 Attack = 4,
                 Defense = 3,
                 HitPoints = 9,
-                Traits = new List<string>() { "Nazgul." },
+                Traits = new List<string>() { "Nazgûl." },
+                NormalizedTraits = new List<string> { "Nazgul." },
                 Text = "Forced: When the prisoner is 'rescued', move Nazgul of Dol Guldur into the staging area.Forced: After a shadow effect dealt to Nazgul of Dol Guldur resolves, the engaged player must choose and discard 1 character he controls.",
                 Keywords = new List<string>() { "No attachments can be played on Nazgul of Dol Guldur." },
                 Threat = 5,

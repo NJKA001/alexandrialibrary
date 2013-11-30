@@ -20,6 +20,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Hero,
                 Sphere = Sphere.Lore,
                 Traits = new List<string>() { "Dúnedain.", " Ranger." },
+                NormalizedTraits = new List<string> { "Dunedain." },
                 Quantity = 1,
                 ThreatCost = 12,
                 IsUnique = true,

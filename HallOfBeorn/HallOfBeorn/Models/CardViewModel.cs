@@ -64,6 +64,11 @@ namespace HallOfBeorn.Models
             get { return _card.CardType; }
         }
 
+        public string CardTypeName
+        {
+            get { return _card.CardType.ToString().Replace('_', '-'); }
+        }
+
         public string Sphere
         {
             get { return _card.Sphere.ToString(); }
@@ -204,7 +209,7 @@ namespace HallOfBeorn.Models
             }
 
             var isCritical = false;
-            if (isLastLine && (text.Contains(" must") || text.Contains(" cannot") || text.Contains(" won") || text.Contains(" win")))
+            if (isLastLine && (text.Contains(" must") || text.Contains(" cannot") || text.Contains(" won") || text.Contains(" win")) || text.Contains(" lose") || text.Contains(" lost"))
                 isCritical = true;
 
             return new CardEffectViewModel() { Prefix = prefix, Text = text, IsCritical = isCritical };

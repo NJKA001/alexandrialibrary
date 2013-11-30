@@ -105,11 +105,13 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1390",
-                Title = "Dunedain Wanderer",
+                Title = "Dúnedain Wanderer",
+                NormalizedTitle = "Dunedain Wanderer",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9009",
                 CardType = CardType.Ally,
                 Sphere = Sphere.Leadership,
                 Traits = new List<string>() { "Dúnedain.", " Ranger." },
+                NormalizedTraits = new List<string> { "Dunedain." },
                 Quantity = 3,
                 ResourceCost = 5,
                 Attack = 2,

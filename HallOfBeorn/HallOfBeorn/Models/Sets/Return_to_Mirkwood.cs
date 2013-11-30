@@ -100,7 +100,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Signal." },
                 Quantity = 3,
                 ResourceCost = 1,
-                Text = "Attached hero gains sentinel.Action: Pay 1 resource from attached hero's pool to attach Dunedain Signal to another hero.",
+                Text = "Attached hero gains sentinel.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Signal to another hero.",
                 Keywords = new List<string>() { "Attach to a hero." },
                 Number = 7
             });

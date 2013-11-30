@@ -100,12 +100,12 @@ namespace HallOfBeorn.Services
                     x => x.Title.ToLower().Contains(model.Query.ToLower())
                     || (!string.IsNullOrEmpty(x.NormalizedTitle) && x.NormalizedTitle.ToLower().Contains(model.Query.ToLower()))
                     || (!string.IsNullOrEmpty(x.Text) && x.Text.ToLower().Contains(model.Query.ToLower()))
+                    || x.Traits.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
+                    || x.NormalizedTraits.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
                     )
                 .OrderBy(x => x.ImageName)
                 .ToList()
                 : cards.Values.OrderBy(x => x.CardSet.Number).ThenBy(x => x.Number).ToList();
-
-            //CardType cardTypeFilter = CardType.None;
 
             if (model.CardType != CardType.None)
             {
