@@ -26,8 +26,10 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 1,
                 HitPoints = 3,
                 Traits = new List<string>() { "Hobbit." },
+                Text = "Response: After you engage an enemy with a higher engagement cost than your threat, ready Sam Gamgee. He gets +1 Willpower, +1 Attack and +1 Defense until the end of the round.",
+                FlavorText = "\"I'm going with him...and if any of those Black Riders try to stop him, they'll have Sam Gamgee to reckon with\" -The Fellowship of the Ring",
                 Quantity = 1,
-                Number = 1
+                Number = 2
             });
             Cards.Add(new Card() {
                 ImageName = "M1941",
@@ -42,8 +44,10 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 1,
                 HitPoints = 2,
                 Traits = new List<string>() { "Hobbit." },
+                Text = "Merry gets +1 Attack for each Hobbit hero you control.\r\nResponse: After Merry participates in an attack that destroys an enemy, ready another character that participated in that attack.",
+                FlavorText = "\"You can trust us to stick to you through thick and thin to the bitter end\" -The Fellowship of the Ring",
                 Quantity = 1,
-                Number = 2
+                Number = 3
             });
             Cards.Add(new Card() {
                 ImageName = "M1942",
@@ -58,8 +62,10 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 1,
                 HitPoints = 2,
                 Traits = new List<string>() { "Hobbit." },
+                Text = "Each enemy in play gets +1 engagement cost for each Hobbit hero you control.\r\nResponse: After you engage an enemy with an engagement cost higher than your threat, draw a card.",
+                FlavorText = "\"We Hobbits ought to stick together, and we will\"\r\n-The Fellowship of the Ring",
                 Quantity = 1,
-                Number = 3
+                Number = 4
             });
             Cards.Add(new Card() {
                 ImageName = "M1943",
@@ -74,8 +80,10 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 2,
                 HitPoints = 3,
                 Traits = new List<string>() { "Hobbit." },
+                Text = "Action: Exhaust Fatty Bolger to choose an enemy in the staging area and raise your threat by that enemy's Threat. Until the end of the phase, that enemy does not contribute its Threat. (Limit once per round.)",
+                FlavorText = "\"I only hope that you do not need rescuing before the day is out\" -The Fellowship of the Ring",
                 Quantity = 1,
-                Number = 4
+                Number = 5
             });
             Cards.Add(new Card() {
                 ImageName = "M1939",
@@ -90,8 +98,10 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 2,
                 HitPoints = 2,
                 Traits = new List<string>() { "Hobbit.", " Ring-bearer." },
+                Text = "Response: Spend 1 Fellowship resource and exhaust The One Ring to cancel the effect of an encounter card just revealed from the encounter deck. Shuffle that card back into the encounter deck and reveal another encounter card.",
+                FlavorText = "\"I will take the Ring,\" he said, \"though I do not know the way.\" -The Fellowship of the Ring",
                 Quantity = 1,
-                Number = 5
+                Number = 1
             });
             Cards.Add(new Card() {
                 Title = "The One Ring",
@@ -99,6 +109,7 @@ namespace HallOfBeorn.Models.Sets
                 IsUnique = true,
                 CardType = CardType.Objective,
                 Traits = new List<string>() { "Artifact.", " Item.", " Ring." },
+                Text = "Setup:The first player claims The One Ring and attaches it to the Ring-bearer.\r\nAttached hero does not count against the hero limit. The first player gains control of attached hero.\r\nIf The One Ring leaves play, the players lose the game.",
                 Quantity = 1,
                 Number = 6
             });
@@ -115,6 +126,8 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 1,
                 HitPoints = 3,
                 Traits = new List<string>() { "Bree." },
+                Text = "If each hero you control has the Hobbit trait, damage from undefended attacks against you may be assigned to Barliman Butterbur.",
+                FlavorText = "\"But spooks or no spooks, they won't get in The Prancing Pony so easy.\" -The Fellowship of the Ring",
                 Quantity = 3,
                 Number = 7
             });
@@ -127,6 +140,9 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Lore,
                 ResourceCost = 1,
                 Traits = new List<string>() { "Artifact.", " Item." },
+                Keywords = new List<string> { "Attach to the active location.", "Attached location gets +1 quest point."},
+                Text = "Response: After attached location leaves play as an explored location, the first player puts 1 ally into play from his hand.",
+                FlavorText = "\"It is a beryl, an elf-stone. Whether it was set there, or let fall by chance, I cannot say, but it brings hope to me\"\r\n-Aragorn, The Fellowship of the Ring",
                 Quantity = 3,
                 Number = 8
             });
@@ -143,6 +159,8 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 0,
                 HitPoints = 2,
                 Traits = new List<string>() { "Hobbit." },
+                Text = "Response: After Farmer Maggot enters play, deal 1 damage to an enemy engaged with you. (Deal 2 damage instead if that enemy's engagement cost is higher than your threat.)",
+                FlavorText = "\"It is lucky for you that I know you. I was going out to set my dogs on any strangers.\" -The Fellowship of the Ring",
                 Quantity = 3,
                 Number = 9
             });
@@ -153,6 +171,8 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Event,
                 Sphere = Sphere.Tactics,
                 ResourceCost = 1,
+                Text = "Action: Choose a Hobbit character. That character gets +2 Willpower, +2 Attack and +2 Defense until the end of the phase.",
+                FlavorText = "\"I have something to do before the end, and it lies ahead, not in the Shire. I must see it through, sir, if you understand me.\" -Sam Gamgee, The Fellowship of the Ring",
                 Quantity = 3,
                 Number = 10
             });
@@ -165,6 +185,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Traits = new List<string>() { "Artifact.", " Item.", " Weapon." },
                 Keywords = new List<string>() { "Attach to the hero.", " Restricted." },
+                Text = "Attached hero gets +1 Attack (+2 Attack instead if attacking an enemy with an engagement cost higher than your threat).",
+                FlavorText = "...these blades were forged many long years ago by Men of Westernesse: they were foes of the Dark Lord...\r\n-The Fellowship of the Ring",
                 Quantity = 3,
                 Number = 11
             });
@@ -181,7 +203,9 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 0,
                 HitPoints = 2,
                 Traits = new List<string>() { "Creature.", " Pony." },
-                Keywords = new List<string>() { "Cannot have attachments." },
+                Keywords = new List<string>() { "Lower the cost to play Bill the Pony by 2 if you control Sam Gamgee.", "Cannot have attachments." },
+                Text = "Each Hobbit character gets +1 hit point.",
+                FlavorText = "\"He gave me a look as plain as Mr. Pippin could speak it: if you don't let me go with you, Sam, I'll follow on my own\" -Sam Gamgee, The Fellowship of the Ring",
                 Quantity = 3,
                 Number = 12
             });
@@ -192,6 +216,9 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Event,
                 Sphere = Sphere.Lore,
                 ResourceCost = 3,
+                Keywords = new List<string> { "Lower the cost play Take No Notice by 1 for each Hobbit or Ranger hero you control." },
+                Text = "Action: Add 5 to each enemy's engagement cost until the end of the round.",
+                FlavorText = "...they made no noise that even hobbits would hear. Event the wild things in the fields and woods hardly noticed their passing. -The Fellowship of the Ring",
                 Quantity = 3,
                 Number = 13
             });
@@ -202,6 +229,8 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Event,
                 Sphere = Sphere.Spirit,
                 ResourceCost = 2,
+                Text = "Action: Reduce your threat by 1 for each Pipe you control. Each hero with a Pipe attachment gets +1 Willpower until the end of the phase.",
+                FlavorText = "...he smoked and blew smoke-rings with the same vigour and delight...-The Fellowship of the Ring",
                 Quantity = 3,
                 Number = 14
             });
@@ -212,6 +241,8 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Event,
                 Sphere = Sphere.Fellowship,
                 ResourceCost = 2,
+                Text = "Action: Each hero you control gets +1 Willpower until the end of the round. Draw 1 card for each Hobbit hero you control.",
+                FlavorText = "\"I wonder if that is Gandalf coming after us\" said Frodo, but even as he said it, he had a feeling that it was not so... -The Fellowship of the Ring",
                 Quantity = 3,
                 Number = 15
             });
@@ -224,6 +255,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Traits = new List<string>() { "Item." },
                 Keywords = new List<string>() { "Attach to a Hobbit hero.", " Limit 1 per hero." },
+                Text = "Attached hero gets +2 Defense while defending against an attack by an enemy with an egagement cost higher than your threat.",
+                FlavorText = "In their dark cloaks they were invisible as if they all had magic rings. -The Fellowship of the Ring",
                 Quantity = 3,
                 Number = 16
             });
@@ -236,6 +269,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Traits = new List<string>() { "Item." },
                 Keywords = new List<string>() { "Attach to a Hobbit.", " Limit 1 per character." },
+                Text = "Response: After your threat is reduced by an event card effect, exhaust Hobbit Pipe to draw a card.",
+                FlavorText = "But even the Dúnedain of Gondor allow us this credit: Hobbits first put it into pipes. Not even the Wizards first thought of that before we did. -The Fellowship of the Ring",
                 Quantity = 3,
                 Number = 17
             });
@@ -249,6 +284,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Traits = new List<string>() { "Title." },
                 Keywords = new List<string>() { "Permanent." },
+                Text = "Setup: Attach to the Ring-bearer.\r\nAction: Add Mr. Underhill to the victory display to choose an enemy engaged with you. Until the end of the round, that enemy cannot attack you.",
+                FlavorText = "\"I will give you a travelling name now. When you go, go as Mr. Underhill.\" -Gandalf, The Fellowship of the Ring",
                 VictoryPoints = 1,
                 Quantity = 1,
                 Setup = "t",
@@ -264,6 +301,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Traits = new List<string>() { "Title." },
                 Keywords = new List<string>() { "Permanent." },
+                Text = "Setup: Attach to a hero.\r\nAttached hero gets +1 Attack and gains the Warrior trait.",
+                FlavorText = "\"Three of the servants of Sauron were upon the Bridge, but they withdrew and I pursued them westward.\" -Glorfindel, The Fellowship of the Ring",
                 Quantity = 1,
                 Setup = "t",
                 Number = 19
@@ -278,6 +317,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Traits = new List<string>() { "Title." },
                 Keywords = new List<string>() { "Permanent." },
+                Text = "Setup: Attach to a hero.\r\nAttached hero gets +1 Willpower and gainst the Noble trait.",
+                FlavorText = "Venerable he seemed as a king crowned with many winters, and yet hale as a tried warrior in the fullness of his strength\r\nThe Fellowship of the Ring",
                 Quantity = 1,
                 Setup = "t",
                 Number = 20
@@ -292,6 +333,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Traits = new List<string>() { "Title." },
                 Keywords = new List<string>() { "Permanent." },
+                Text = "Setup: Attach to a hero.\r\nAttached hero gets +2 hit points and gains the Healer trait.",
+                FlavorText = "\"Few now have the skill of healing to match such evil weapons. But I will do what I can.\"\r\n-Aragorn, The Fellowship of the Ring",
                 Quantity = 1,
                 Setup = "t",
                 Number = 21
@@ -306,6 +349,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Traits = new List<string>() { "Title." },
                 Keywords = new List<string>() { "Permanent." },
+                Text = "Setup: Attach to a hero.\r\nAttached hero gets +1 defense and gains the Ranger trait.",
+                FlavorText = "\"What roads would any dare to tread, what safety would there be in quiet lands, or in the homes of simple men at night, if the Dúnedain were asleep, or were all gone into the grave?\"\r\nAragorn, The Fellowship of the Ring",
                 Quantity = 1,
                 Setup = "t",
                 Number = 22
@@ -315,13 +360,15 @@ namespace HallOfBeorn.Models.Sets
                 Title = "Gildor Inglorion",
                 Id = "6c04a40a-0666-4b4f-a768-ddff46857cf0",
                 IsUnique = true,
-                CardType = CardType.Objective,
+                CardType = CardType.Objective_Ally,
                 Willpower = 3,
                 Attack = 2,
                 Defense = 3,
                 HitPoints = 3,
                 Traits = new List<string>() { "Noldor." },
                 Keywords = new List<string>() { "The first player gains control of Gildor Inglorian." },
+                Text = "Forced: At the end of the round, discard Gildor Inglorion. The first player may spend 1 Fellowship resource to cancel this effect.",
+                FlavorText = "\"We think you had best come now with us.\"\r\n-The Fellowship of the Ring",
                 Quantity = 1,
                 Number = 23
             });

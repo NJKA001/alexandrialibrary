@@ -1278,6 +1278,7 @@
     <Content Include="Images\Cards\M1970.png" />
     <Content Include="Images\Cards\The_Black_Riders\A_Knife_in_the_Dark.jpg" />
     <Content Include="Images\Cards\The_Black_Riders\An_Evil_Wound.jpg" />
+    <Content Include="Images\Cards\The_Black_Riders\A_Shadow_of_the_Past.jpg" />
     <Content Include="Images\Cards\The_Black_Riders\Bamfurlong.jpg" />
     <Content Include="Images\Cards\The_Black_Riders\Bill_Ferny.jpg" />
     <Content Include="Images\Cards\The_Black_Riders\Black_Breath.jpg" />
@@ -1289,16 +1290,19 @@
     <Content Include="Images\Cards\The_Black_Riders\Eaten_Alive.jpg" />
     <Content Include="Images\Cards\The_Black_Riders\Ettenmoors.jpg" />
     <Content Include="Images\Cards\The_Black_Riders\Evil_Crow.jpg" />
+    <Content Include="Images\Cards\The_Black_Riders\Fear_of_Discovery.jpg" />
     <Content Include="Images\Cards\The_Black_Riders\Fea_of_Discovery.png" />
     <Content Include="Images\Cards\The_Black_Riders\Fell_Rider.jpg" />
     <Content Include="Images\Cards\The_Black_Riders\Flight_to_the_Ford.jpg" />
     <Content Include="Images\Cards\The_Black_Riders\Ford_of_Bruinen.jpg" />
+    <Content Include="Images\Cards\The_Black_Riders\Gandalf%27s_Delay.jpg" />
     <Content Include="Images\Cards\The_Black_Riders\Gandalf%27s_Delay.png" />
     <Content Include="Images\Cards\The_Black_Riders\Green_Hill_Country.jpg" />
     <Content Include="Images\Cards\The_Black_Riders\Have_You_Seen_Baggins.jpg" />
     <Content Include="Images\Cards\The_Black_Riders\Hunting_for_the_Ring.jpg" />
     <Content Include="Images\Cards\The_Black_Riders\Lure_of_the_Ring.jpg" />
     <Content Include="Images\Cards\The_Black_Riders\Midgewater.jpg" />
+    <Content Include="Images\Cards\The_Black_Riders\Overcome_by_Terror.jpg" />
     <Content Include="Images\Cards\The_Black_Riders\Overcome_By_Terror.png" />
     <Content Include="Images\Cards\The_Black_Riders\Pain_Assailed_Him.jpg" />
     <Content Include="Images\Cards\The_Black_Riders\Pale_Blade.jpg" />

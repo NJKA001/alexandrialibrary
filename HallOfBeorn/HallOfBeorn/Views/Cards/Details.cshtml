@@ -211,6 +211,14 @@
                                 <br />
                                 <br />
                             }
+
+
+                            @if (!string.IsNullOrEmpty(@Model.VictoryPoints))
+                            {
+                                <br />
+                                <span style="text-align:right;"><b>@Model.VictoryPoints</b></span>
+                            }
+                            
                             @*
                             <p>@Model.Text</p>
                             

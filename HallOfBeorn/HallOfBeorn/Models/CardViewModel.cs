@@ -130,6 +130,16 @@ namespace HallOfBeorn.Models
             }
         }
 
+        public string VictoryPoints
+        {
+            get
+            {
+                return _card.VictoryPoints > 0 ?
+                    string.Format("Victory: {0}", _card.VictoryPoints)
+                    : (string)null;
+            }
+        }
+
         public string EngagementCost
         {
             get { return _card.EngagementCost.ToString(); }
@@ -209,7 +219,7 @@ namespace HallOfBeorn.Models
             }
 
             var isCritical = false;
-            if (isLastLine && (text.Contains(" must") || text.Contains(" cannot") || text.Contains(" won") || text.Contains(" win")) || text.Contains(" lose") || text.Contains(" lost"))
+            if (isLastLine && prefix == null && (text.Contains(" must") || text.Contains(" cannot") || text.Contains(" won") || text.Contains(" win")) || text.Contains(" lose") || text.Contains(" lost"))
                 isCritical = true;
 
             return new CardEffectViewModel() { Prefix = prefix, Text = text, IsCritical = isCritical };
