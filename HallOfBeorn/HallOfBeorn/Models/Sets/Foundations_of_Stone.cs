@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "Foundations of Stone";
             Number = 13;
             SetType = Models.SetType.Adventure_Pack;
+            Cycle = "Dwarrowdelf";
 
             Cards.Add(new Card() {
                 ImageName = "M1471",

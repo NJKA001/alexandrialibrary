@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "Road to Rivendell";
             Number = 10;
             SetType = Models.SetType.Adventure_Pack;
+            Cycle = "Dwarrowdelf";
 
             Cards.Add(new Card() {
                 ImageName = "M1399",

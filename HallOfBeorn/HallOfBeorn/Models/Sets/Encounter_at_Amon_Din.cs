@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "Encounter at Amon Dîn";
             Number = 18;
             SetType = Models.SetType.Adventure_Pack;
+            Cycle = "Against the Shadow";
 
             Cards.Add(new Card() {
                 ImageName = "M1834",

@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "The Drúadan Forest";
             Number = 17;
             SetType = Models.SetType.Adventure_Pack;
+            Cycle = "Against the Shadow";
 
             Cards.Add(new Card() {
                 ImageName = "M1810",

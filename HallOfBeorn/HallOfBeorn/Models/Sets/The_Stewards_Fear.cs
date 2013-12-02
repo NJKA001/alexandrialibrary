@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "The Steward's Fear";
             Number = 16;
             SetType = Models.SetType.Adventure_Pack;
+            Cycle = "Against the Shadow";
 
             Cards.Add(new Card() {
                 ImageName = "M1779",

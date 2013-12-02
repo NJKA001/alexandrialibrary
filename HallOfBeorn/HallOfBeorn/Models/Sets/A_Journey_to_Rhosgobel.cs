@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "A Journey To Rhosgobel";
             Number = 4;
             SetType = Models.SetType.Adventure_Pack;
+            Cycle = "Shadows of Mirkwood";
 
             Cards.Add(new Card() {
                 ImageName = "M1197",

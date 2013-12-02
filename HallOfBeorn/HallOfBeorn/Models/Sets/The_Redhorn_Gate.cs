@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "The Redhorn Gate";
             Number = 9;
             SetType = Models.SetType.Adventure_Pack;
+            Cycle = "Dwarrowdelf";
 
             Cards.Add(new Card() {
                 ImageName = "M1375",

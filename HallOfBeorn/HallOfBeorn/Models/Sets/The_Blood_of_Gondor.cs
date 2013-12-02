@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "The Blood of Gondor";
             Number = 20;
             SetType = Models.SetType.Adventure_Pack;
+            Cycle = "Against the Shadow";
 
             Cards.Add(new Card() {
                 ImageName = "M1885",

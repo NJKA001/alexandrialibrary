@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "The Morgul Vale";
             Number = 21;
             SetType = Models.SetType.Adventure_Pack;
+            Cycle = "Against the Shadow";
 
             Cards.Add(new Card()
             {

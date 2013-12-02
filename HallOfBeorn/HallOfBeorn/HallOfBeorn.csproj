@@ -305,6 +305,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\fonts\tolkien.ttf" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Images\attack.gif" />
     <Content Include="Images\Cards\Gildor_Inglorion.png" />
     <Content Include="Images\Cards\M1001.png" />
     <Content Include="Images\Cards\M1002.png" />
@@ -1363,7 +1364,15 @@
     <Content Include="Images\Cards\The_Morgul_Vale\Théoden.png" />
     <Content Include="Images\Cards\The_Morgul_Vale\To_the_Tower.png" />
     <Content Include="Images\Cards\The_Morgul_Vale\Visionary_Leadership.png" />
+    <Content Include="Images\defense.gif" />
     <Content Include="Images\Happy_Grizzly_Bear.jpg" />
+    <Content Include="Images\heart.png" />
+    <Content Include="Images\Leadership.png" />
+    <Content Include="Images\Lore.png" />
+    <Content Include="Images\Spirit.png" />
+    <Content Include="Images\Tactics.png" />
+    <Content Include="Images\threat.png" />
+    <Content Include="Images\willpower.gif" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

@@ -25,7 +25,7 @@ namespace HallOfBeorn.Controllers
             SearchViewModel.Keywords = _cardService.Keywords().GetSelectListItems();
             SearchViewModel.Traits = _cardService.Traits().GetSelectListItems();
             SearchViewModel.Costs = _cardService.Costs().GetSelectListItems();
-            SearchViewModel.CardSets = _cardService.Sets.Select(x => x.Name).GetSelectListItems();
+            SearchViewModel.CardSets = _cardService.SetNames.GetSelectListItems();
         }
 
         public ActionResult Index()

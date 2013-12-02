@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "The Dead Marshes";
             Number = 6;
             SetType = Models.SetType.Adventure_Pack;
+            Cycle = "Shadows of Mirkwood";
 
             Cards.Add(new Card() {
                 ImageName = "M1255",

@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "The Long Dark";
             Number = 12;
             SetType = Models.SetType.Adventure_Pack;
+            Cycle = "Dwarrowdelf";
 
             Cards.Add(new Card() {
                 ImageName = "M1451",

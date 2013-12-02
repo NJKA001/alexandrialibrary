@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "Shadow and Flame";
             Number = 14;
             SetType = Models.SetType.Adventure_Pack;
+            Cycle = "Dwarrowdelf";
 
             Cards.Add(new Card() {
                 ImageName = "M1507",

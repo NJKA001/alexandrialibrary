@@ -12,81 +12,89 @@ namespace HallOfBeorn.Services
     {
         public CardService()
         {
-            sets.Add(new CoreSet());
-            //sets.Add(new CoreSetNightmare());
+            AddSet(new CoreSet());
+            //AddSet(new CoreSetNightmare());
 
-            sets.Add(new TheHuntforGollum());
-            sets.Add(new ConflictattheCarrock());
-            sets.Add(new AJourneytoRhosgobel());
-            sets.Add(new TheHillsofEmynMuil());
-            sets.Add(new TheDeadMarshes());
-            sets.Add(new ReturntoMirkwood());
+            AddSet(new TheHuntforGollum());
+            AddSet(new ConflictattheCarrock());
+            AddSet(new AJourneytoRhosgobel());
+            AddSet(new TheHillsofEmynMuil());
+            AddSet(new TheDeadMarshes());
+            AddSet(new ReturntoMirkwood());
 
-            sets.Add(new Khazaddum());
+            AddSet(new Khazaddum());
 
-            sets.Add(new TheRedhornGate());
-            sets.Add(new RoadtoRivendell());
-            sets.Add(new TheWatcherintheWater());
-            sets.Add(new TheLongDark());
-            sets.Add(new FoundationsofStone());
-            sets.Add(new ShadowandFlame());
+            AddSet(new TheRedhornGate());
+            AddSet(new RoadtoRivendell());
+            AddSet(new TheWatcherintheWater());
+            AddSet(new TheLongDark());
+            AddSet(new FoundationsofStone());
+            AddSet(new ShadowandFlame());
 
-            sets.Add(new HeirsofNumenor());
+            AddSet(new HeirsofNumenor());
 
-            sets.Add(new TheStewardsFear());
-            sets.Add(new TheDruadanForest());
-            sets.Add(new EncounteratAmonDin());
-            sets.Add(new AssaultonOsgiliath());
-            sets.Add(new TheBloodofGondor());
-            sets.Add(new TheMorgulVale());
+            AddSet(new TheStewardsFear());
+            AddSet(new TheDruadanForest());
+            AddSet(new EncounteratAmonDin());
+            AddSet(new AssaultonOsgiliath());
+            AddSet(new TheBloodofGondor());
+            AddSet(new TheMorgulVale());
 
-            sets.Add(new TheHobbitOverHillandUnderHill());
-            sets.Add(new TheHobbitOntheDoorstep());
-            sets.Add(new TheBlackRiders());
+            AddSet(new TheHobbitOverHillandUnderHill());
+            AddSet(new TheHobbitOntheDoorstep());
+            AddSet(new TheBlackRiders());
 
-            sets.Add(new TheMassingatOsgiliath());
-            sets.Add(new TheBattleofLakeTown());
-            sets.Add(new TheStoneofErech());
+            AddSet(new TheMassingatOsgiliath());
+            AddSet(new TheBattleofLakeTown());
+            AddSet(new TheStoneofErech());
 
-            //sets.Add(new IsengardCyclePlayerCards());
-            //sets.Add(new Ninineliph());
-            //sets.Add(new TheDunlandTrap());
-            //sets.Add(new TheThreeTrials());
-            //sets.Add(new TroubleinTharbad());
-            //sets.Add(new BoarandRaven());
-            //sets.Add(new CelebrimborsForge());
+            //AddSet(new IsengardCyclePlayerCards());
+            //AddSet(new Ninineliph());
+            //AddSet(new TheDunlandTrap());
+            //AddSet(new TheThreeTrials());
+            //AddSet(new TroubleinTharbad());
+            //AddSet(new BoarandRaven());
+            //AddSet(new CelebrimborsForge());
 
-            //sets.Add(new TheRoadDarkens());
-
-            foreach (var set in sets)
-            {
-                foreach (var card in set.Cards)
-                {
-                    cards.Add(card.Id, card);
-
-                    foreach (var keyword in card.Keywords)
-                    {
-                        var keywordKey = keyword.Trim();
-                        if (!keywords.ContainsKey(keywordKey))
-                            keywords.Add(keywordKey, keywordKey);
-                    }
-
-                    foreach (var trait in card.Traits)
-                    {
-                        var traitKey = trait.Replace(".", string.Empty).Trim();
-                        if (!traits.ContainsKey(traitKey))
-                            traits.Add(traitKey, trait.Trim());
-                    }
-                }
-            }
+            //AddSet(new TheRoadDarkens());
         }
 
         private readonly List<CardSet> sets = new List<CardSet>();
+        private readonly List<string> setNames = new List<string>();
         private readonly Dictionary<string, Card> cards = new Dictionary<string, Card>();
         private readonly Dictionary<string, string> keywords = new Dictionary<string, string>();
         private readonly Dictionary<string, string> traits = new Dictionary<string, string>();
 
         const int maxResults = 128;
+
+        private void AddSet(CardSet cardSet)
+        {
+            sets.Add(cardSet);
+
+            if (!string.IsNullOrEmpty(cardSet.Cycle) && !setNames.Contains(cardSet.Cycle.ToUpper()))
+                setNames.Add(cardSet.Cycle.ToUpper());
+
+            setNames.Add(cardSet.Name);
+
+            foreach (var card in cardSet.Cards)
+            {
+                cards.Add(card.Id, card);
+
+                foreach (var keyword in card.Keywords)
+                {
+                    var keywordKey = keyword.Trim();
+                    if (!keywords.ContainsKey(keywordKey))
+                        keywords.Add(keywordKey, keywordKey);
+                }
+
+                foreach (var trait in card.Traits)
+                {
+                    var traitKey = trait.Replace(".", string.Empty).Trim();
+                    if (!traits.ContainsKey(traitKey))
+                        traits.Add(traitKey, trait.Trim());
+                }
+            }
+        }
 
         public IEnumerable<Card> All()
         {
@@ -137,7 +145,7 @@ namespace HallOfBeorn.Services
 
             if (model.CardSet != null && model.CardSet != "Any")
             {
-                results = results.Where(x => x.CardSet.Name == model.CardSet).ToList();
+                results = results.Where(x => x.CardSet.Name == model.CardSet || (!string.IsNullOrEmpty(x.CardSet.Cycle) && x.CardSet.Cycle.ToUpper() == model.CardSet)).ToList();
             }
 
             if (model.Trait != null && model.Trait != "Any")
@@ -180,9 +188,9 @@ namespace HallOfBeorn.Services
             return cards.Values.Select(x => x.ResourceCost).Distinct().OrderBy(x => x).ToList();
         }
 
-        public IEnumerable<CardSet> Sets
+        public IEnumerable<string> SetNames
         {
-            get { return sets; }
+            get { return setNames; }
         }
 
         public IEnumerable<string> Keywords()

@@ -69,6 +69,17 @@ namespace HallOfBeorn.Models
             get { return _card.CardType.ToString().Replace('_', '-'); }
         }
 
+        public string CampaignCardType
+        {
+            get
+            {
+                return (_card.CampaignCardType == Models.CampaignCardType.Boon || _card.CampaignCardType == Models.CampaignCardType.Burden) ?
+                    _card.CampaignCardType.ToString()
+                    : (string)null;
+
+            }
+        }
+
         public string Sphere
         {
             get { return _card.Sphere.ToString(); }
@@ -205,6 +216,11 @@ namespace HallOfBeorn.Models
             {
                 return _card.Willpower > 0 || _card.Attack > 0 || _card.Defense > 0 || _card.HitPoints > 0;
             }
+        }
+
+        public bool HasSphere
+        {
+            get { return _card.Sphere == Models.Sphere.Leadership || _card.Sphere == Models.Sphere.Tactics || _card.Sphere == Models.Sphere.Spirit || _card.Sphere == Models.Sphere.Lore; }
         }
 
         private CardEffectViewModel GetEffect(string text, bool isLastLine)

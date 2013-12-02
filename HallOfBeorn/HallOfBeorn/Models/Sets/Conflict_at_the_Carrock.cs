@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "Conflict at the Carrock";
             Number = 3;
             SetType = Models.SetType.Adventure_Pack;
+            Cycle = "Shadows of Mirkwood";
 
             Cards.Add(new Card() {
                 ImageName = "M1172",

@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "Assault on Osgiliath";
             Number = 19;
             SetType = Models.SetType.Adventure_Pack;
+            Cycle = "Against the Shadow";
 
             Cards.Add(new Card() {
                 ImageName = "M1859",

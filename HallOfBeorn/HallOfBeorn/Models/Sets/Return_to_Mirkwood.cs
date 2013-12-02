@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "Return to Mirkwood";
             Number = 7;
             SetType = Models.SetType.Adventure_Pack;
+            Cycle = "Shadows of Mirkwood";
 
             Cards.Add(new Card() {
                 ImageName = "M1276",

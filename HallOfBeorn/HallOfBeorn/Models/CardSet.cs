@@ -25,6 +25,7 @@ namespace HallOfBeorn.Models
 
         public string Id { get; protected set; }
         public string Name { get; protected set; }
+        public string Cycle { get; protected set; }
         public int Number { get; protected set; }
         public SetType SetType { get; protected set; }
         public List<Card> Cards { get; protected set; }

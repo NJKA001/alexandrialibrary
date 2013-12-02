@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "The Watcher in the Water";
             Number = 11;
             SetType = Models.SetType.Adventure_Pack;
+            Cycle = "Dwarrowdelf";
 
             Cards.Add(new Card() {
                 ImageName = "M1414",

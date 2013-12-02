@@ -6,6 +6,9 @@
 }
 
 <h2>@Model.Title</h2>
+<div style="color:#616161;font-weight:bold;">
+    <span>@Model.SetName</span><span style="margin-left:6px;">@string.Format("#{0} (x{1})", @Model.Number, @Model.Quantity)</span>
+</div>
 @if (!string.IsNullOrEmpty(@Model.OppositeTitle))
 {
     <h3>@Model.OppositeTitle</h3>
@@ -20,147 +23,110 @@
                     <div style="margin:-8px;">
                         <table>
                             <tr>
-                                <td><label>Set</label></td><td style="min-width:100px;">@Model.SetName</td>
-                                <td><label>Number</label></td><td>@Model.Number</td>
-                                <td><label>Type</label></td><td>@Model.CardTypeName</td>
-                                <td><label>Sphere</label></td><td>@Model.Sphere</td>
-                                <td><label>Quantity</label></td><td>@Model.Quantity</td>
+                                <td>
+                                @if (@Model.HasSphere)
+                                {
+                                    <img style="margin-bottom:-4px;margin-right:8px;height:24px;width:24px;" src='@string.Format("/Images/{0}.png", @Model.Sphere)' />
+                                }
+                                <span style="font-weight:bold;font-size:14pt;">@Model.CardTypeName</span>
+                                @if (!string.IsNullOrEmpty(@Model.CampaignCardType))
+                                {
+                                    <span>(@Model.CampaignCardType)</span>
+                                }
+                                </td>
                             </tr>
                             <tr>
+                                <td>
                                 @switch (@Model.CardType)
                                 {
                                     case CardType.Hero:
                                         {
-                                            <td><label>Threat Cost</label></td><td>@Model.ThreatCost</td>
-                                            <td><label>Willpower</label></td><td>@Model.Willpower</td>
-                                            <td><label>Attack</label></td><td>@Model.Attack</td>
-                                            <td><label>Defense</label></td><td>@Model.Defense</td>
-                                            <td><label>Hit Points</label></td><td>@Model.HitPoints</td>
+                                            <span style="width:40px;color:darkgray;">Threat Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.ThreatCost</span>
+                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/willpower.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Willpower</span>
+                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Attack</span>
+                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Defense</span>
+                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;width:16px;height:16px;" src="/Images/heart.png"/></span><span style="margin-left:8px;font-weight:bold;">@Model.HitPoints</span>
                                         }
                                         break;
                                     case CardType.Ally:
                                         {
-                                            <td><label>Resource Cost</label></td><td>@Model.ResourceCost</td>
-                                            <td><label>Willpower</label></td><td>@Model.Willpower</td>
-                                            <td><label>Attack</label></td><td>@Model.Attack</td>
-                                            <td><label>Defense</label></td><td>@Model.Defense</td>
-                                            <td><label>Hit Points</label></td><td>@Model.HitPoints</td>
+                                            <span style="width:50px;color:darkgray;">Resource Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.ResourceCost</span>
+                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/willpower.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Willpower</span>
+                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Attack</span>
+                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Defense</span>
+                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;width:16px;height:16px;" src="/Images/heart.png"/></span><span style="margin-left:8px;font-weight:bold;">@Model.HitPoints</span>
                                         }
                                         break;
                                     case CardType.Attachment:
                                         {
-                                            <td><label>Resource Cost</label></td><td>@Model.ResourceCost</td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
+                                            <span style="width:50px;color:darkgray;">Resource Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.ResourceCost</span>
                                         }
                                         break;
                                     case CardType.Event:
                                         {
-                                            <td><label>Resource Cost</label></td><td>@Model.ResourceCost</td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
+                                            <span style="width:50px;color:darkgray;">Resource Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.ResourceCost</span>
                                         }
                                         break;
                                     case CardType.Enemy:
                                         {
-                                            <td><label>Engagement Cost</label></td><td>@Model.EngagementCost</td>
-                                            <td><label>Threat</label></td><td>@Model.Threat</td>
-                                            <td><label>Attack</label></td><td>@Model.Attack</td>
-                                            <td><label>Defense</label></td><td>@Model.Defense</td>
-                                            <td><label>Hit Points</label></td><td>@Model.HitPoints</td>
+                                            <span style="width:60px;color:darkgray;">Engagement Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.EngagementCost</span>
+                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/threat.png" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Threat</span>
+                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Attack</span>
+                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Defense</span>
+                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;width:16px;height:16px;" src="/Images/heart.png"/></span><span style="margin-left:8px;font-weight:bold;">@Model.HitPoints</span>
                                         }
                                         break;
                                     case CardType.Location:
                                         {
-                                            <td><label>Quest Points</label></td><td>@Model.QuestPoints</td>
-                                            <td><label>Threat</label></td><td>@Model.Threat</td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
+                                            <span style="width:60px;color:darkgray;">Quest Points</span><span style="margin-left:8px;font-weight:bold;">@Model.QuestPoints</span>
+                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/threat.png" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Threat</span>
                                         }
                                         break;
                                     case CardType.Treachery:
                                         {
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
                                         }
                                         break;
+                                    case CardType.Objective_Ally:
                                     case CardType.Objective:
-                                    case CardType.Boon:
                                         {
                                             if (@Model.HasCharacterStats)
                                             {
-                                            <td><label></label></td><td></td>
-                                            <td><label>Willpower</label></td><td>@Model.Willpower</td>
-                                            <td><label>Attack</label></td><td>@Model.Attack</td>
-                                            <td><label>Defense</label></td><td>@Model.Defense</td>
-                                            <td><label>Hit Points</label></td><td>@Model.HitPoints</td>
+                                                <span style="width:24px;"><img style="margin-bottom:-3px;" src="/Images/willpower.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Willpower</span>
+                                                <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Attack</span>
+                                                <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Defense</span>
+                                                <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;width:16px;height:16px;" src="/Images/heart.png"/></span><span style="margin-left:8px;font-weight:bold;">@Model.HitPoints</span>
                                             }
                                             else
                                             {
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
                                             }
                                         }
                                         break;
                                     case CardType.Quest:
                                         {
-                                            <td><label>Quest Points</label></td><td>@Model.QuestPoints</td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
+                                            <span style="width:50px;color:darkgray;">Quest Points</span><span style="margin-left:8px;font-weight:bold;">@Model.QuestPoints</span>
                                         }
                                         break;
                                     case CardType.Treasure:
                                         {
-                                            <td><label>Resource Cost</label></td><td>@Model.ResourceCost</td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
+                                            <span style="width:50px;color:darkgray;">Resource Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.ResourceCost</span>
                                         }
                                         break;
                                     case CardType.Nightmare:
                                         {
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
                                         }
                                         break;
                                     case CardType.Campaign:
                                         {
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
                                         }
                                         break;
                                     case CardType.Burden:
                                         {
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
-                                            <td><label></label></td><td></td>
                                         }
                                         break;
                                     default:
                                         break;
                                 }
+                                </td>
                             </tr>
                         </table>
                         <br />
@@ -168,7 +134,6 @@
 
                         @if (@Model.Traits.Count() > 0)
                         {
-                            <br />
                             <div style="text-align:center;">
                             @foreach (var trait in Model.Traits)
                             {
@@ -179,7 +144,6 @@
                         }
                         @if (@Model.Keywords.Count() > 0)
                         {
-                            <br />
                             foreach (var keyword in Model.Keywords)
                             {
                                 @keyword @: &nbsp;
