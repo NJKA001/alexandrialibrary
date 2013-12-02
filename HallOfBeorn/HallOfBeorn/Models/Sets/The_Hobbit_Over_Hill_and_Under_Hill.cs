@@ -172,7 +172,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 1,
                 Willpower = 0,
                 HitPoints = 10,
-                Text = "Immune to player card effects.Beorn does not exhaust to defend.",
+                Text = "Immune to player card effects.\r\nBeorn does not exhaust to defend.",
                 Keywords = new List<string>() { "Sentinel.", " Cannot have attachments." },
                 Number = 13
             });
@@ -201,7 +201,6 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Hero,
                 Sphere = Sphere.Baggins,
                 Traits = new List<string>() { "Hobbit." },
-                Keywords = new List<string> { "The first player gains control of Bilbo Baggins.", "Bilbo Baggins cannot gain resources from player card effects." },
                 Quantity = 1,
                 ThreatCost = 0,
                 IsUnique = true,
@@ -209,7 +208,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 1,
                 Willpower = 1,
                 HitPoints = 3,
-                Text = "If Bilbo Baggins leaves play, the players lose the game.",
+                Text = "The first player gains control of Bilbo Baggins.\r\nBilbo Baggins cannot gain resources from player card effects.\r\nIf Bilbo Baggins leaves play, the players lose the game.",
                 Number = 15
             });
             Cards.Add(new Card() {

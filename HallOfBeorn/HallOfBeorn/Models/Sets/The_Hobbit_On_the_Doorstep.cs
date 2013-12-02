@@ -72,7 +72,6 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Hero,
                 Sphere = Sphere.Baggins,
                 IsUnique = true,
-                Keywords = new List<string>() { "Bilbo Baggins does not count against the hero limit and cannot gain resources from non-treasure cards.", "The first player gains control of Bilbo Baggins." },
                 ThreatCost = 0,
                 Quantity = 1,
                 Traits = new List<string>() { "Hobbit.", " Burglar." },
@@ -80,7 +79,7 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Attack = 1,
                 Defense = 1,
-                Text = "Action: Spend 1 Baggins resource to search your deck for a treasure card and add it to your hand.\r\nIf Bilbo Baggins leaves play, the players have lost the game.",
+                Text = "Bilbo Baggins does not count against the hero limit and cannot gain resources from non-treasure cards.\r\nThe first player gains control of Bilbo Baggins.\r\nAction: Spend 1 Baggins resource to search your deck for a treasure card and add it to your hand.\r\nIf Bilbo Baggins leaves play, the players have lost the game.",
                 Number = 4
             });
             Cards.Add(new Card() {

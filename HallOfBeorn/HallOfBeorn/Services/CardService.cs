@@ -100,6 +100,8 @@ namespace HallOfBeorn.Services
                     x => x.Title.ToLower().Contains(model.Query.ToLower())
                     || (!string.IsNullOrEmpty(x.NormalizedTitle) && x.NormalizedTitle.ToLower().Contains(model.Query.ToLower()))
                     || (!string.IsNullOrEmpty(x.Text) && x.Text.ToLower().Contains(model.Query.ToLower()))
+                    || x.Keywords.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
+                    || x.NormalizedKeywords.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
                     || x.Traits.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
                     || x.NormalizedTraits.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
                     )
@@ -109,7 +111,19 @@ namespace HallOfBeorn.Services
 
             if (model.CardType != CardType.None)
             {
-                if (model.CardType == CardType.Boon)
+                if (model.CardType == CardType.Player)
+                {
+                    results = results.Where(x => x.CardType == CardType.Hero || x.CardType == CardType.Ally || x.CardType == CardType.Attachment || x.CardType == CardType.Event).ToList();
+                }
+                else if (model.CardType == CardType.Encounter)
+                {
+                    results = results.Where(x => x.CardType == CardType.Enemy || x.CardType == CardType.Location || x.CardType == CardType.Treachery || x.CardType == CardType.Objective || x.CardType == CardType.Objective_Ally).ToList();
+                }
+                else if (model.CardType == CardType.Objective)
+                {
+                    results = results.Where(x => x.CardType == CardType.Objective || x.CardType == CardType.Objective_Ally).ToList();
+                }
+                else if (model.CardType == CardType.Boon)
                 {
                     results = results.Where(x => x.CampaignCardType == CampaignCardType.Boon).ToList();
                 }

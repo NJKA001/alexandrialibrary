@@ -232,7 +232,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 9,
                 HitPoints = 20,
                 Text = "When Revealed: Smaug the Mighty makes an immediate attack against each player (deal and resolve a shodow card for each attack).",
-                Keywords = new List<string>() { "Immune to plater card effects." },
+                Keywords = new List<string>() { "Immune to player card effects." },
                 Threat = 7,
                 Number = 16
             });

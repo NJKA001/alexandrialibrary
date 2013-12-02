@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models
             Traits = new List<string>();
             NormalizedTraits = new List<string>();
             Keywords = new List<string>();
+            NormalizedKeywords = new List<string>();
         }
 
         public string Id { get; set; }
@@ -49,6 +50,8 @@ namespace HallOfBeorn.Models
         public List<string> NormalizedTraits { get; set; }
 
         public List<string> Keywords { get; set; }
+        public List<string> NormalizedKeywords { get; set; }
+
         public string Text { get; set; }
         public string OppositeText { get; set; }
         public string OppositeFlavorText { get; set; }

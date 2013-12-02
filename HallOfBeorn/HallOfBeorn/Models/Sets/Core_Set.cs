@@ -1028,8 +1028,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 4,
                 HitPoints = 4,
                 Traits = new List<string>() { "Istari." },
-                Text = "Response: After Gandalf enters play, (choose 1): draw 3 cards, deal 4 damage to 1 enemy in play, or reduce your threat by 5.",
-                Keywords = new List<string>() { "At the end of the round, discard Gandalf from play." },
+                Text = "At the end of the round, discard Gandalf from play.\r\nResponse: After Gandalf enters play, (choose 1): draw 3 cards, deal 4 damage to 1 enemy in play, or reduce your threat by 5.",
                 Quantity = 4,
                 Number = 73
             });
@@ -1280,8 +1279,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 3,
                 HitPoints = 6,
                 Traits = new List<string>() { "Dol Guldur.", " Orc." },
-                Text = "Forced: After Chieftain Ufthak attacks, place 1 resource token on him.",
-                Keywords = new List<string>() { "Chieftain Ufthak get +2 Attack for each resource token on him." },
+                Text = "Chieftain Ufthak get +2 Attack for each resource token on him.\r\nForced: After Chieftain Ufthak attacks, place 1 resource token on him.",
                 Threat = 2,
                 EncounterSet = "Dol Guldur Orcs",
                 Quantity = 1,
@@ -1457,7 +1455,7 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 9,
                 Traits = new List<string>() { "Nazgûl." },
                 NormalizedTraits = new List<string> { "Nazgul." },
-                Text = "Forced: When the prisoner is 'rescued', move Nazgul of Dol Guldur into the staging area.Forced: After a shadow effect dealt to Nazgul of Dol Guldur resolves, the engaged player must choose and discard 1 character he controls.",
+                Text = "Forced: When the prisoner is 'rescued', move Nazgul of Dol Guldur into the staging area.\r\nForced: After a shadow effect dealt to Nazgul of Dol Guldur resolves, the engaged player must choose and discard 1 character he controls.",
                 Keywords = new List<string>() { "No attachments can be played on Nazgul of Dol Guldur." },
                 Threat = 5,
                 EncounterSet = "Escape from Dol Guldur",
