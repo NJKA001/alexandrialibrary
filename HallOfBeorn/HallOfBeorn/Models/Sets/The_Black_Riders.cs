@@ -504,6 +504,10 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Quest,
                 EncounterSet = "A Shadow of the Past",
                 Quantity = 1,
+                Text = "Set Buckleberry Ferry aside, out of play. Add 1 Black Rider to the staging area and make Bag End the active location. Shuffle the encounter deck.",
+                FlavorText = "The ring Frodo Baggins inherited from his uncle Bilbo is indeed The One Ring. After conferring with the wizard Gandalf, Frodo decides to leave the Shire and take the ring to Rivendell.",
+                OppositeText = "When a player fails a Hide test, each Nazgûl enemy in the staging area engages that player. (Trigger Forced effects after resolving this effect.)\r\nThe player cannot advance unless Bag End is in the victory display.",
+                OppositeFlavorText = "Frodo's friend insist on joining him in his adventure, but danger finds them sooner than anticipated when Black Riders appear in the Shire.",
                 QuestPoints = 1,
                 Setup = "ttsl",
                 Number = 34
@@ -514,6 +518,8 @@ namespace HallOfBeorn.Models.Sets
                 Id = "40c7a675-d48f-4e71-8818-5f0ffb9fa0dd",
                 CardType = CardType.Quest,
                 EncounterSet = "A Shadow of the Past",
+                FlavorText = "",
+                OppositeText = "When Revealed: The first player searches the encounter deck and discard pile for a Black Rider, reveals it (cannot be canceled), and adds it to the staging area. Shuffle the encounter deck.\r\nWhen a player makes a Hide test, add 1 to the total Threat for each ally that player controls.\r\nWhen a player fails a Hide test, each Nazgûl enemy in the staging area engages that player. (Trigger Forced effects after resolving this effect.)",
                 Quantity = 1,
                 QuestPoints = 14,
                 Number = 35
@@ -523,6 +529,8 @@ namespace HallOfBeorn.Models.Sets
                 Title = "Escape to Buckland - 3A",
                 Id = "7371cfea-03d0-4bc0-98a1-d99e0acdbf88",
                 CardType = CardType.Quest,
+                Text = "When Revealed: Add Buckleberry Ferry to the staging area.",
+                OppositeText = "When Revealed: The first player searches the encounter deck and discard pile for a Black Rider, reveals it (cannot be canceled), and adds it to the staging area. Shuffle the encounter deck.\r\nWhen a player fails a Hide test, each Nazgûl enemy in the staging area engages that player. (Trigger Forced effects after resolving this effect.)\r\nResponse: After a player makes a successful Hide test, place X progress on a non-unique location in play. X is twice the number of players in the game.",
                 EncounterSet = "A Shadow of the Past",
                 Quantity = 1,
                 Number = 36
@@ -532,6 +540,8 @@ namespace HallOfBeorn.Models.Sets
                 Title = "Trouble in Bree - 1A",
                 Id = "d0b6992d-9dc4-41fa-a483-b4ad0a3d60b3",
                 CardType = CardType.Quest,
+                Text = "Setup: Set all copies of Ringwraith, The Witch-king, Midgewater, and Weathertop aside, out of play. Add The Prancing Pony and Bill Ferny to the staging area. Shuffle the encounter deck.",
+                OppositeText = "The player cannot advance while The Prancy Pony is in play.",
                 EncounterSet = "A Knife in the Dark",
                 Quantity = 1,
                 QuestPoints = 8,
@@ -543,6 +553,7 @@ namespace HallOfBeorn.Models.Sets
                 Title = "Into the Wild - 2A",
                 Id = "28a4721b-3696-4fae-9eea-01b5a250c892",
                 CardType = CardType.Quest,
+                OppositeText = "When Revealed: Add Midgewater to the staging area. Each player places 1 progress on the current quest.\r\nForced: At the end of the round, eithe remove X progress from the current quest or shuffle 1 out of play Ringwraith into the encounter deck. X is the number of players in the game.\r\nThe players cannot advance while Midgewater is in play.",
                 EncounterSet = "A Knife in the Dark",
                 Quantity = 1,
                 QuestPoints = 6,
@@ -553,6 +564,8 @@ namespace HallOfBeorn.Models.Sets
                 Title = "The Ringwraiths Attack - 3A",
                 Id = "257f9b44-2744-4f02-bbf6-115d12b52e8d",
                 CardType = CardType.Quest,
+                Text = "When Revealed: Add Weathertop and The Witch-king to the staging area. Search the encounter deck and discard pile and add each Nazgûl enemy found to the staging area. Shuffle the encounter deck.",
+                OppositeText = "If there are no Nazgûl enemies in play, the players win the game.",
                 EncounterSet = "A Knife in the Dark",
                 Quantity = 1,
                 Number = 39
@@ -562,6 +575,8 @@ namespace HallOfBeorn.Models.Sets
                 Title = "Pursued by the Enemy - 1A",
                 Id = "f9824e39-fda8-4e4b-bc74-83b4bd40c72d",
                 CardType = CardType.Quest,
+                Text = "Setup: Shuffle each burden card from the Flight to the Ford burden set into a Burden deck. Attach An Evil Wound to the Ring-bearer. Set Ford of Bruinen and The Witch-king aside, out of play. Add The Last Bridge and 1 Fell Rider per player to the staging area. Set the Ring-bearer's life at 15. Shuffle the encounter deck.",
+                OppositeText = "The players cannot advance unless The Last Bridge is in the victory display.\r\nForced: At the end of the round, reduce the Ring-bearer's life by 1.",
                 EncounterSet = "Flight to the Ford",
                 Quantity = 1,
                 QuestPoints = 15,
@@ -573,8 +588,10 @@ namespace HallOfBeorn.Models.Sets
                 Title = "Race To Rivendell - 2A",
                 Id = "6b2673af-c764-4599-a265-6e43d3b75310",
                 CardType = CardType.Quest,
+                OppositeText = "When Revealed: Add Ford of Bruinen and The Witch-king to the staging area.\r\nWhile at least 1 Nazgûl enemy is in play, Race to Rivendell gets +15 quest points.\r\nForced: At the end of the round, reduce the Ring-bearer's life by 1.\r\nIf the players defeat this stage, they have won the game.",
                 EncounterSet = "Flight to the Ford",
                 Quantity = 1,
+                QuestPoints = 15,
                 Number = 41
             });
             Cards.Add(new Card() {
@@ -583,6 +600,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Objective,
                 Traits = new List<string>() { "Morgul." },
                 Keywords = new List<string>() { "Attach to the Ring-bearer.", " Attached hero cannot be healed." },
+                Text = "When attached hero would take any amount of damage, reduce the Ring-bearer's life by an equal amount instead.\r\nIf the Ring-bearer's life reaches zero, the players lose the game.",
                 EncounterSet = "Flight to the Ford",
                 Quantity = 1,
                 Number = 42
