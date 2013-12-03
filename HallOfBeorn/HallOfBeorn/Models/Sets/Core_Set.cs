@@ -580,7 +580,7 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Tactics,
                 ResourceCost = 1,
                 Traits = new List<string>() { "Item.", " Weapon." },
-                Text = "Attached hero gets +1 Attack when attacking an Orc .Response: After attached hero attacks and destroys an enemy, place 1  progress token on the current quest.",
+                Text = "Attached hero gets +1 Attack when attacking an Orc.\r\nResponse: After attached hero attacks and destroys an enemy, place 1 progress token on the current quest.",
                 Keywords = new List<string>() { "Attach to a hero.", " Restricted." },
                 Quantity = 2,
                 Number = 39

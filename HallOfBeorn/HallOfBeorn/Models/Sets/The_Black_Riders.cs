@@ -203,8 +203,8 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 0,
                 HitPoints = 2,
                 Traits = new List<string>() { "Creature.", " Pony." },
-                Keywords = new List<string>() { "Lower the cost to play Bill the Pony by 2 if you control Sam Gamgee.", "Cannot have attachments." },
-                Text = "Each Hobbit character gets +1 hit point.",
+                Keywords = new List<string>() { "Cannot have attachments." },
+                Text = "Lower the cost to play Bill the Pony by 2 if you control Sam Gamgee.\r\nEach Hobbit character gets +1 hit point.",
                 FlavorText = "\"He gave me a look as plain as Mr. Pippin could speak it: if you don't let me go with you, Sam, I'll follow on my own\" -Sam Gamgee, The Fellowship of the Ring",
                 Quantity = 3,
                 Number = 12
@@ -216,8 +216,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Event,
                 Sphere = Sphere.Lore,
                 ResourceCost = 3,
-                Keywords = new List<string> { "Lower the cost play Take No Notice by 1 for each Hobbit or Ranger hero you control." },
-                Text = "Action: Add 5 to each enemy's engagement cost until the end of the round.",
+                Text = "Lower the cost play Take No Notice by 1 for each Hobbit or Ranger hero you control.\r\nAction: Add 5 to each enemy's engagement cost until the end of the round.",
                 FlavorText = "...they made no noise that even hobbits would hear. Event the wild things in the fields and woods hardly noticed their passing. -The Fellowship of the Ring",
                 Quantity = 3,
                 Number = 13

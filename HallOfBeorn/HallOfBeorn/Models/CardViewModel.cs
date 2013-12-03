@@ -166,15 +166,38 @@ namespace HallOfBeorn.Models
             get { return _card.Shadow; }
         }
 
-        public string FlavorText
+        public IEnumerable<string> FlavorText
         {
-            get { return _card.FlavorText; }
+            get
+            {
+                return
+                    !string.IsNullOrEmpty(_card.FlavorText) ?
+                    _card.FlavorText.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList()
+                    : Enumerable.Empty<string>();
+            }
         }
 
-        public string OppositeFlavorText
+        public bool HasFlavorText
         {
-            get { return _card.OppositeFlavorText; }
+            get { return FlavorText.Count() > 0; }
         }
+
+        public IEnumerable<string> OppositeFlavorText
+        {
+            get
+            {
+                return
+                    !string.IsNullOrEmpty(_card.OppositeFlavorText) ?
+                    _card.OppositeFlavorText.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList()
+                    : Enumerable.Empty<string>();
+            }
+        }
+
+        public bool HasOppositeFlavorText
+        {
+            get { return OppositeFlavorText.Count() > 0; }
+        }
+
 
         public string OppositeTitle
         {

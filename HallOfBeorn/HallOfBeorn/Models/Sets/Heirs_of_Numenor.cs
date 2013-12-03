@@ -617,7 +617,8 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 1,
                 Attack = 0,
                 Defense = 1,
-                Text = "Action: Exhaust Master of Lore to name a card type. Lower the cost for you to play the next Lore card of that type by 1 until the end of the phase (to a minimum of 1).",
+                Text = "Action: Exhaust Master of lore to name a card type. Lower the cost for you to play the next Lore card of that type by 1 until the end of the phase (to a minimum of 1).",
+                FlavorText = "\"If Cirith Ungol is named, old men and masters of lore will blanch and fall silent.\" -Faramir, The Two Towers",
                 Number = 45
             });
             Cards.Add(new Card() {

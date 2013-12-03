@@ -41,7 +41,7 @@
                                 {
                                     case CardType.Hero:
                                         {
-                                            <span style="width:40px;color:darkgray;">Threat Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.ThreatCost</span>
+                                            <span style="width:40px;color:#616161;">Threat Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.ThreatCost</span>
                                             <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/willpower.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Willpower</span>
                                             <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Attack</span>
                                             <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Defense</span>
@@ -50,7 +50,7 @@
                                         break;
                                     case CardType.Ally:
                                         {
-                                            <span style="width:50px;color:darkgray;">Resource Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.ResourceCost</span>
+                                            <span style="width:50px;color:#616161;">Resource Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.ResourceCost</span>
                                             <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/willpower.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Willpower</span>
                                             <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Attack</span>
                                             <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Defense</span>
@@ -59,17 +59,17 @@
                                         break;
                                     case CardType.Attachment:
                                         {
-                                            <span style="width:50px;color:darkgray;">Resource Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.ResourceCost</span>
+                                            <span style="width:50px;color:#616161;">Resource Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.ResourceCost</span>
                                         }
                                         break;
                                     case CardType.Event:
                                         {
-                                            <span style="width:50px;color:darkgray;">Resource Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.ResourceCost</span>
+                                            <span style="width:50px;color:#616161;">Resource Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.ResourceCost</span>
                                         }
                                         break;
                                     case CardType.Enemy:
                                         {
-                                            <span style="width:60px;color:darkgray;">Engagement Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.EngagementCost</span>
+                                            <span style="width:60px;color:#616161;">Engagement Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.EngagementCost</span>
                                             <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/threat.png" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Threat</span>
                                             <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Attack</span>
                                             <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Defense</span>
@@ -78,7 +78,7 @@
                                         break;
                                     case CardType.Location:
                                         {
-                                            <span style="width:60px;color:darkgray;">Quest Points</span><span style="margin-left:8px;font-weight:bold;">@Model.QuestPoints</span>
+                                            <span style="width:60px;color:#616161;">Quest Points</span><span style="margin-left:8px;font-weight:bold;">@Model.QuestPoints</span>
                                             <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/threat.png" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Threat</span>
                                         }
                                         break;
@@ -103,12 +103,12 @@
                                         break;
                                     case CardType.Quest:
                                         {
-                                            <span style="width:50px;color:darkgray;">Quest Points</span><span style="margin-left:8px;font-weight:bold;">@Model.QuestPoints</span>
+                                            <span style="width:50px;color:#616161;">Quest Points</span><span style="margin-left:8px;font-weight:bold;">@Model.QuestPoints</span>
                                         }
                                         break;
                                     case CardType.Treasure:
                                         {
-                                            <span style="width:50px;color:darkgray;">Resource Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.ResourceCost</span>
+                                            <span style="width:50px;color:#616161;">Resource Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.ResourceCost</span>
                                         }
                                         break;
                                     case CardType.Nightmare:
@@ -130,7 +130,7 @@
                             </tr>
                         </table>
                         <br />
-                        <div style="margin:2px;padding-top:0px;padding-left:6px;border: 1px solid gray;border-radius:4px;">
+                        <div style="margin:2px;padding-top:0px;padding-left:6px;padding-right:6px;border: 1px solid gray;border-radius:4px;">
 
                         @if (@Model.Traits.Count() > 0)
                         {
@@ -139,20 +139,20 @@
                             {
                                 <b><i>@trait</i></b> @: &nbsp;
                             }
-                            <br />
                             </div>
                         }
                         @if (@Model.Keywords.Count() > 0)
                         {
-                            foreach (var keyword in Model.Keywords)
+                            <span style="margin-left:6px;">
+                            @foreach (var keyword in Model.Keywords)
                             {
                                 @keyword @: &nbsp;
                             }
+                            </span>
                             <br />
                         }
 
                         <div style="padding:4px;">
-                            <br />
                             @foreach (var effect in @Model.GetCardEffects())
                             {
                                 if (@effect.IsShadow)
@@ -162,16 +162,162 @@
                                 
                                 if (@effect.HasPrefix)
                                 {
-                                    <b>@effect.Prefix:</b>
+                                    if (@effect.IsShadow)
+                                    {
+                                        <i><b>@effect.Prefix:</b></i>
+                                    }
+                                    else
+                                    {
+                                        <b>@effect.Prefix:</b>
+                                    }
                                 }
-                                if (@effect.IsCritical)
+                                if (@effect.IsShadow)
+                                {
+                                    if (@effect.HasIcon())
+                                    {
+                                        <span><i>
+                                        @foreach (var token in @effect.GetTokens())
+                                        {
+                                            switch (token)
+                                            {
+                                                case "Threat ":
+                                                    @: <img src="/Images/threat.png" />
+                                                    break;
+                                                case "Threat. ":
+                                                    @: <img src="/Images/threat.png" />.
+                                                    break;
+                                                case "Willpower ":
+                                                    @: <img src="/Images/willpower.gif" />
+                                                    break;
+                                                case "Willpower. ":
+                                                    @: <img src="/Images/willpower.gif" />.
+                                                    break;
+                                                case "Attack ":
+                                                    @: <img src="/Images/attack.gif" />
+                                                    break;
+                                                case "Attack. ":
+                                                    @: <img src="/Images/attack.gif" />.
+                                                    break;
+                                                case "Defense ":
+                                                    @: <img src="/Images/defense.gif" />
+                                                    break;
+                                                case "Defense. ":
+                                                    @: <img src="/Images/defense.gif" />.
+                                                    break;
+                                                case "Leadership ":
+                                                    @: <img src="/Images/Leadership.png" style="width:20px;height:20px;margin-bottom:-4px;"/>
+                                                    break;
+                                                case "Leadership. ":
+                                                    @: <img src="/Images/Leadership.png" style="width:20px;height:20px;margin-bottom:-4px;"/>.
+                                                    break;
+                                                case "Tactics ":
+                                                    @: <img src="/Images/Tactics.png" style="width:20px;height:20px;margin-bottom:-4px;"/>
+                                                    break;
+                                                case "Tactics. ":
+                                                    @: <img src="/Images/Tactics.png" style="width:20px;height:20px;margin-bottom:-4px;"/>.
+                                                    break;
+                                                case "Spirit ":
+                                                    @: <img src="/Images/Spirit.png" style="width:20px;height:20px;margin-bottom:-4px;"/>
+                                                    break;
+                                                case "Spirit. ":
+                                                    @: <img src="/Images/Spirit.png" style="width:20px;height:20px;margin-bottom:-4px;"/>.
+                                                    break;
+                                                case "Lore ":
+                                                    @: <img src="/Images/Lore.png" style="width:20px;height:20px;margin-bottom:-4px;"/>
+                                                    break;
+                                                case "Lore. ":
+                                                    @: <img src="/Images/Lore.png" style="width:20px;height:20px;margin-bottom:-4px;"/>.
+                                                    break;
+                                                default:
+                                                    {
+                                                        @token
+                                                    }
+                                                    break;
+                                            }
+                                        }
+                                        </i></span>
+                                    }
+                                    else
+                                    {
+                                        <span><i>@effect.Text</i></span>
+                                    }
+                                }
+                                else if (@effect.IsCritical)
                                 {
                                     <span><b>@effect.Text</b></span>
                                 }
                                 else
                                 {
-                                    <span>@effect.Text</span>
+                                    if (@effect.HasIcon())
+                                    {
+                                        <span>
+                                        @foreach (var token in @effect.GetTokens())
+                                        {
+                                            switch (token)
+                                            {
+                                                case "Threat ":
+                                                    @: <img src="/Images/threat.png" />
+                                                    break;
+                                                case "Threat. ":
+                                                    @: <img src="/Images/threat.png" />.
+                                                    break;
+                                                case "Willpower ":
+                                                    @: <img src="/Images/willpower.gif" />
+                                                    break;
+                                                case "Willpower. ":
+                                                    @: <img src="/Images/willpower.gif" />.
+                                                    break;
+                                                case "Attack ":
+                                                    @: <img src="/Images/attack.gif" />
+                                                    break;
+                                                case "Attack. ":
+                                                    @: <img src="/Images/attack.gif" />.
+                                                    break;
+                                                case "Defense ":
+                                                    @: <img src="/Images/defense.gif" />
+                                                    break;
+                                                case "Defense. ":
+                                                    @: <img src="/Images/defense.gif" />.
+                                                    break;
+                                                case "Leadership ":
+                                                    @: <img src="/Images/Leadership.png" style="width:20px;height:20px;margin-bottom:-4px;"/>
+                                                    break;
+                                                case "Leadership. ":
+                                                    @: <img src="/Images/Leadership.png" style="width:20px;height:20px;margin-bottom:-4px;"/>.
+                                                    break;
+                                                case "Tactics ":
+                                                    @: <img src="/Images/Tactics.png" style="width:20px;height:20px;margin-bottom:-4px;"/>
+                                                    break;
+                                                case "Tactics. ":
+                                                    @: <img src="/Images/Tactics.png" style="width:20px;height:20px;margin-bottom:-4px;"/>.
+                                                    break;
+                                                case "Spirit ":
+                                                    @: <img src="/Images/Spirit.png" style="width:20px;height:20px;margin-bottom:-4px;"/>
+                                                    break;
+                                                case "Spirit. ":
+                                                    @: <img src="/Images/Spirit.png" style="width:20px;height:20px;margin-bottom:-4px;"/>.
+                                                    break;
+                                                case "Lore ":
+                                                    @: <img src="/Images/Lore.png" style="width:20px;height:20px;margin-bottom:-4px;"/>
+                                                    break;
+                                                case "Lore. ":
+                                                    @: <img src="/Images/Lore.png" style="width:20px;height:20px;margin-bottom:-4px;"/>.
+                                                    break;
+                                                default:
+                                                    {
+                                                        @token
+                                                    }
+                                                    break;
+                                            }
+                                        }
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span>@effect.Text</span>
+                                    }
                                 }
+                                
                                 <br />
                                 <br />
                             }
@@ -198,24 +344,30 @@
                             }*@
                         </div>
 
-                        @if (!string.IsNullOrEmpty(@Model.FlavorText) || !string.IsNullOrEmpty(@Model.OppositeFlavorText))
+                        @if (@Model.HasFlavorText || @Model.HasOppositeFlavorText)
                         {
                             <br />
-                        <div style="text-align:center"></div>
-                        <p>
-                            @if (!string.IsNullOrEmpty(@Model.FlavorText))
+                        
+                        <p style="text-align:center;">
+                            @if (@Model.HasFlavorText)
                             {
-                                <i>@Model.FlavorText</i>
+                                foreach (var line in @Model.FlavorText)
+                                {
+                                    <i>@line</i><br />
+                                }
                             }
-                            @if (!string.IsNullOrEmpty(@Model.OppositeFlavorText))
+                            @if (@Model.HasOppositeFlavorText)
                             {
-                                if (!string.IsNullOrEmpty(@Model.FlavorText))
+                                if (@Model.HasFlavorText)
                                 {
                                     <br />
                                     <br />
                                 }
                                 
-                                <i>@Model.OppositeFlavorText</i>
+                                foreach (var line in @Model.OppositeFlavorText)
+                                {
+                                    <i>@line</i><br />
+                                }
                             }
                         </p>
                         }
