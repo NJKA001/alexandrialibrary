@@ -503,7 +503,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Quest,
                 EncounterSet = "A Shadow of the Past",
                 Quantity = 1,
-                Text = "Set Buckleberry Ferry aside, out of play. Add 1 Black Rider to the staging area and make Bag End the active location. Shuffle the encounter deck.",
+                Text = "Setup: Set Buckleberry Ferry aside, out of play. Add 1 Black Rider to the staging area and make Bag End the active location. Shuffle the encounter deck.",
                 FlavorText = "The ring Frodo Baggins inherited from his uncle Bilbo is indeed The One Ring. After conferring with the wizard Gandalf, Frodo decides to leave the Shire and take the ring to Rivendell.",
                 OppositeText = "When a player fails a Hide test, each Nazgûl enemy in the staging area engages that player. (Trigger Forced effects after resolving this effect.)\r\nThe player cannot advance unless Bag End is in the victory display.",
                 OppositeFlavorText = "Frodo's friend insist on joining him in his adventure, but danger finds them sooner than anticipated when Black Riders appear in the Shire.",
