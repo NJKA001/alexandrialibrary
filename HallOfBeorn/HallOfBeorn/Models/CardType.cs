@@ -19,11 +19,12 @@ namespace HallOfBeorn.Models
         Objective_Ally = 16,
         Burden = 17,
         Player = 21,
-        Hero = 22,
-        Ally = 23,
-        Attachment = 24,
-        Event = 25,
-        Treasure = 26,
-        Boon = 27
+        Character = 22,
+        Hero = 23,
+        Ally = 24,
+        Attachment = 25,
+        Event = 26,
+        Treasure = 27,
+        Boon = 28
     }
 }

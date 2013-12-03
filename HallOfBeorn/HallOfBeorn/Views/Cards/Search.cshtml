@@ -5,6 +5,20 @@
     ViewBag.Title = "Lord of the Rings: The Card Game - Search";
 }
 
+<script src="/Scripts/jquery-1.8.2.js" ></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#resetButton').click(function () {
+            $('#CardSet').val('Any');
+            $('#CardType').val('Any');
+            $('#Sphere').val('Any');
+            $('#Cost').val('-1');
+            $('#Trait').val('Any');
+            $('#Keyword').val('Any');
+        });
+    });
+</script>
+
 <h2>Search</h2>
 
 @using (Html.BeginForm("Search", "Cards", FormMethod.Post))
@@ -12,6 +26,7 @@
     <div class="form-group">
         @Html.TextBoxFor(x => x.Query, new { style="margin-right:2px;" })
         <input type="submit" value="Search" style="border-radius:8px;background-color:lightgray;" />
+        <a id="resetButton" href="#" style="margin-left:40px;">Reset Filters</a>
 
         <div>
             <br />
@@ -33,6 +48,8 @@
 
             @Html.LabelFor(x => x.Keyword, new { style = "display:inline;margin-right:2px;"})
             @Html.DropDownListFor(x => x.Keyword, SearchViewModel.Keywords, new { style="margin-right:0px;" })
+
+            
             <br />
             <br />
         </div>

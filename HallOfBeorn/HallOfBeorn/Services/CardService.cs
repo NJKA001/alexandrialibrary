@@ -123,6 +123,10 @@ namespace HallOfBeorn.Services
                 {
                     results = results.Where(x => x.CardType == CardType.Hero || x.CardType == CardType.Ally || x.CardType == CardType.Attachment || x.CardType == CardType.Event).ToList();
                 }
+                else if (model.CardType == CardType.Character)
+                {
+                    results = results.Where(x => x.CardType == CardType.Hero || x.CardType == CardType.Ally).ToList();
+                }
                 else if (model.CardType == CardType.Encounter)
                 {
                     results = results.Where(x => x.CardType == CardType.Enemy || x.CardType == CardType.Location || x.CardType == CardType.Treachery || x.CardType == CardType.Objective || x.CardType == CardType.Objective_Ally).ToList();

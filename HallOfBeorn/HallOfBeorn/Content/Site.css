@@ -767,5 +767,5 @@ tr.pager td {
 
 @font-face {
     font-family: 'Tolkien'; /*a name to be used later*/
-    src: url('~/Content/fonts/tolkien.ttf'); /*URL to font*/
+    src: url('/Content/fonts/tolkien.ttf'); /*URL to font*/
 }
