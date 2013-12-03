@@ -165,12 +165,20 @@ namespace HallOfBeorn.Models
 
         public string Text
         {
-            get { return _card.Text; }
+            get {
+                return !string.IsNullOrEmpty(_card.Text) ?
+                    _card.Text.Replace("~", string.Empty)
+                    : string.Empty;
+            }
         }
 
         public string Shadow
         {
-            get { return _card.Shadow; }
+            get {
+                return !string.IsNullOrEmpty(_card.Shadow) ?
+                    _card.Shadow.Replace("~", string.Empty)
+                    : string.Empty;
+            }
         }
 
         public IEnumerable<string> FlavorText
@@ -213,7 +221,11 @@ namespace HallOfBeorn.Models
 
         public string OppositeText
         {
-            get { return _card.OppositeText; }
+            get {
+                return !string.IsNullOrEmpty(_card.OppositeText) ?
+                    _card.OppositeText.Replace("~", string.Empty)
+                    : string.Empty;
+            }
         }
 
         public string ImagePath

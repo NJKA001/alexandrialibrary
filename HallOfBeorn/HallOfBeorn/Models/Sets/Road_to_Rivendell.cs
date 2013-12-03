@@ -332,7 +332,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Song." },
                 Quantity = 3,
                 ResourceCost = 1,
-                Text = "Response: After Song of Earendil enters play, draw 1 card.Response: After another player raises his threat, raise your threat by 1 to reduce that player's threat by 1.",
+                Text = "Response: After ~Song of Earendil enters play, draw 1 card.\r\nResponse: After another player raises his threat, raise your threat by 1 to reduce that player's threat by 1.",
                 Keywords = new List<string>() { "Attach to a Spirit hero." },
                 Number = 23
             });

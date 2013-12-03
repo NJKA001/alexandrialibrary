@@ -138,7 +138,7 @@ namespace HallOfBeorn.Controllers
                     if (part.Contains(" lost the game") || part.Contains(" lose the game") || part.Contains(" win the game") || part.Contains(" won the game"))
                         effect.IsCritical = true;
 
-                    token.Text = token.Prefix + part;
+                    token.Text = token.Prefix + part.TrimStart('~');
                 }
 
                 effect.Tokens.Add(token);
