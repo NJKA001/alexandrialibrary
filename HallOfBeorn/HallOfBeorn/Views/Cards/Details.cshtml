@@ -29,10 +29,15 @@
                                     <img style="margin-bottom:-4px;margin-right:8px;height:24px;width:24px;" src='@string.Format("/Images/{0}.png", @Model.Sphere)' />
                                 }
                                 <span style="font-weight:bold;font-size:14pt;">@Model.CardTypeName</span>
+                                @if (@Model.IsUnique)
+                                {
+                                    <span style="margin-left:6px;">(Unique)</span>
+                                }
+                                @*
                                 @if (!string.IsNullOrEmpty(@Model.CampaignCardType))
                                 {
                                     <span>(@Model.CampaignCardType)</span>
-                                }
+                                }*@
                                 </td>
                             </tr>
                             <tr>
@@ -144,15 +149,130 @@
                         @if (@Model.Keywords.Count() > 0)
                         {
                             <span style="margin-left:6px;">
+                            @foreach (var keyword in Model.KeywordEffects)
+                            {
+                                foreach (var token in keyword.Tokens)
+                                {
+                                    if (token.IsTrait)
+                                    {
+                                        <b><i>@token.Text</i></b>
+                                
+                                        if (token.HasSuffix)
+                                        {
+                                            @: @token.Suffix
+                                        }
+                                    }
+                                    else if (token.IsIcon)
+                                    {
+                                        if (token.HasSuffix)
+                                        {
+                                            <img src="@token.ImagePath" style="height:16px;width:16px;margin-left:2px;margin-right:-4px;margin-bottom:-2px;" />
+                                            @: @token.Suffix
+                                        }
+                                        else
+                                        {
+                                            <img src="@token.ImagePath" style="height:16px;width:16px;margin-left:2px;margin-right:2px;margin-bottom:-2px;" />
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @: @token.Text
+                                    }
+                                }
+                            }
+                            @*
                             @foreach (var keyword in Model.Keywords)
                             {
                                 @keyword @: &nbsp;
-                            }
+                            }*@
                             </span>
                             <br />
                         }
 
                         <div style="padding:4px;">
+                            @if (@Model.TextEffects.Count() > 0)
+                            {
+                                foreach (var effect in Model.TextEffects)
+                                {
+                                    foreach (var token in effect.Tokens)
+                                    {
+                                        if (token.IsTrigger)
+                                        {
+                                            <b>@token.Text</b>
+                                        }
+                                        else if (token.IsTrait)
+                                        {
+                                            <b><i>@token.Text</i></b>
+                                
+                                            if (token.HasSuffix)
+                                            {
+                                                @: @token.Suffix
+                                            }
+                                        }
+                                        else if (token.IsIcon)
+                                        {
+                                            if (token.HasSuffix)
+                                            {
+                                                <img src="@token.ImagePath" style="height:16px;width:16px;margin-left:2px;margin-right:-4px;margin-bottom:-2px;" />
+                                                @: @token.Suffix
+                                            }
+                                            else
+                                            {
+                                                <img src="@token.ImagePath" style="height:16px;width:16px;margin-left:2px;margin-right:2px;margin-bottom:-2px;" />
+                                            }
+                                        }
+                                        else
+                                        {
+                                            @: @token.Text
+                                        }
+                                    }
+                                    
+                                    <br />
+                                }
+                            }
+                            
+                            @if (@Model.ShadowEffects.Count() > 0)
+                            {
+                                <hr style="margin-left:24px;margin-right:24px;"/>
+                                
+                                foreach (var effect in Model.ShadowEffects)
+                                {
+                                    foreach (var token in effect.Tokens)
+                                    {
+                                        if (token.IsTrigger)
+                                        {
+                                            <b>@token.Text</b>
+                                        }
+                                        else if (token.IsTrait)
+                                        {
+                                            <b><i>@token.Text</i></b>
+                                
+                                            if (token.HasSuffix)
+                                            {
+                                                @: @token.Suffix
+                                            }
+                                        }
+                                        else if (token.IsIcon)
+                                        {
+                                            if (token.HasSuffix)
+                                            {
+                                                <img src="@token.ImagePath" style="height:16px;width:16px;margin-left:2px;margin-right:-4px;margin-bottom:-2px;" />
+                                                @: @token.Suffix
+                                            }
+                                            else
+                                            {
+                                                <img src="@token.ImagePath" style="height:16px;width:16px;margin-left:2px;margin-right:2px;margin-bottom:-2px;" />
+                                            }
+                                        }
+                                        else
+                                        {
+                                            @: @token.Text
+                                        }
+                                    }
+                                }
+                            }
+
+                            @*
                             @foreach (var effect in @Model.GetCardEffects())
                             {
                                 if (@effect.IsShadow)
@@ -321,7 +441,7 @@
                                 <br />
                                 <br />
                             }
-
+                            *@
 
                             @if (!string.IsNullOrEmpty(@Model.VictoryPoints))
                             {

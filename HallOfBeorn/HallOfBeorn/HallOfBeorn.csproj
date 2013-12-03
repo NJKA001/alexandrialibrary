@@ -193,7 +193,6 @@
     <Compile Include="Models\CampaignCardType.cs" />
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\CardEffect.cs" />
-    <Compile Include="Models\CardEffectType.cs" />
     <Compile Include="Models\CardEffectViewModel.cs" />
     <Compile Include="Models\CardSet.cs" />
     <Compile Include="Models\CardType.cs" />
@@ -243,6 +242,7 @@
     <Compile Include="Models\Sets\Trouble_in_Tharbad.cs" />
     <Compile Include="Models\SetType.cs" />
     <Compile Include="Models\Sphere.cs" />
+    <Compile Include="Models\Token.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CardService.cs" />
   </ItemGroup>

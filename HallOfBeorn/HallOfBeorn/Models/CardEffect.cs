@@ -7,27 +7,13 @@ namespace HallOfBeorn.Models
 {
     public class CardEffect
     {
-        public CardEffectType EffectType { get; set; }
-        public string Text { get; set; }
+        private readonly List<Token> tokens = new List<Token>();
 
-        public string Prefix
+        public bool IsCritical { get; set; }
+        
+        public List<Token> Tokens
         {
-            get
-            {
-                switch (EffectType)
-                {
-                    case CardEffectType.Action:
-                        return "Action: ";
-                    case CardEffectType.Forced:
-                        return "Forced: ";
-                    case CardEffectType.Response:
-                        return "Response: ";
-                    case CardEffectType.Setup:
-                        return "Setup: ";
-                    default:
-                        return string.Empty;
-                }
-            }
+            get { return tokens; }
         }
     }
 }

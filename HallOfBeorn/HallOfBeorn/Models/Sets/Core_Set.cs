@@ -425,7 +425,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 2,
                 IsUnique = true,
                 Traits = new List<string>() { "Artifact.", " Item." },
-                Text = "Attached hero gains +2 Willpower.If attached hero is Aragorn, he also gains a Spirit resource icon.",
+                Text = "Attached hero gains +2 Willpower.\r\nIf attached hero is Aragorn, he also gains a Spirit resource icon.",
                 Keywords = new List<string>() { "Attach to a hero.", " Restricted." },
                 Quantity = 1,
                 Number = 27

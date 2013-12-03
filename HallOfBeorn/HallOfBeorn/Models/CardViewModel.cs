@@ -13,6 +13,13 @@ namespace HallOfBeorn.Models
         }
 
         private Card _card;
+        private readonly List<CardEffect> _keywordEffects = new List<CardEffect>();
+        private readonly List<CardEffect> _textEffects = new List<CardEffect>();
+        private readonly List<CardEffect> _shadowEffects = new List<CardEffect>();
+
+        public List<CardEffect> KeywordEffects { get { return _keywordEffects; } }
+        public List<CardEffect> TextEffects { get { return _textEffects; } }
+        public List<CardEffect> ShadowEffects { get { return _shadowEffects; } }
 
         public string Id
         {
@@ -239,6 +246,11 @@ namespace HallOfBeorn.Models
             {
                 return _card.Willpower > 0 || _card.Attack > 0 || _card.Defense > 0 || _card.HitPoints > 0;
             }
+        }
+
+        public bool IsUnique
+        {
+            get { return _card.IsUnique; }
         }
 
         public bool HasSphere
