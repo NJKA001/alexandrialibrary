@@ -135,14 +135,14 @@ namespace HallOfBeorn.Controllers
                         continue;
                     }
 
-                    if (part.Contains(" lost the game") || part.Contains(" lose the game") || part.Contains(" win the game") || part.Contains(" won the game"))
-                        effect.IsCritical = true;
-
                     token.Text = token.Prefix + part.TrimStart('~');
                 }
 
                 effect.Tokens.Add(token);
             }
+
+            if (text.Contains(" lost the game") || text.Contains(" lose the game") || text.Contains(" win the game") || text.Contains(" won the game"))
+                effect.IsCritical = true;
 
             return effect;
         }

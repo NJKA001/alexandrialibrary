@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "The Stone of Erech";
             Number = 2003;
             SetType = Models.SetType.GenCon_Expansion;
+            Cycle = "GenCon";
 
             Cards.Add(new Card() {
                 ImageName = "M1928",

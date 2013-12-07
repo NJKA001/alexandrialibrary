@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "The Massing at Osgiliath";
             Number = 2001;
             SetType = Models.SetType.GenCon_Expansion;
+            Cycle = "GenCon";
 
             Cards.Add(new Card() {
                 ImageName = "M1129",

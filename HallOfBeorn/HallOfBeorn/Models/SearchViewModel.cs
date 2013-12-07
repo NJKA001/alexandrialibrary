@@ -35,8 +35,11 @@ namespace HallOfBeorn.Models
         [Display(Name = "Sphere")]
         public Sphere Sphere { get; set; }
 
-        //[Display(Name = "Faction")]
-        //public string Faction { get; set; }
+        [Display(Name = "Unique")]
+        public bool Unique { get; set; }
+
+        [Display(Name = "Sort")]
+        public Sort Sort { get; set; }
 
         [Display(Name = "Results")]
         public List<CardViewModel> Cards { get; set; }
@@ -58,12 +61,6 @@ namespace HallOfBeorn.Models
             set;
         }
 
-        //public static IEnumerable<SelectListItem> Factions
-        //{
-        //    get;
-        //    set;
-        //}
-
         public static IEnumerable<SelectListItem> CardSets { get; set; }
 
         public static IEnumerable<SelectListItem> Costs { get; set; }
@@ -71,6 +68,11 @@ namespace HallOfBeorn.Models
         public static IEnumerable<SelectListItem> Spheres
         {
             get { return typeof(Sphere).GetSelectListItems(); }
+        }
+
+        public static IEnumerable<SelectListItem> Sorts
+        {
+            get { return typeof(Sort).GetSelectListItems(); }
         }
     }
 }

@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "The Battle of Lake-town";
             Number = 2002;
             SetType = Models.SetType.GenCon_Expansion;
+            Cycle = "GenCon";
 
             Cards.Add(new Card() {
                 ImageName = "M1528",

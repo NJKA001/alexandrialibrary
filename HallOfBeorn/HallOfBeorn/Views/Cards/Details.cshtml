@@ -193,10 +193,10 @@
                             @if (@Model.TextEffects.Count() > 0)
                             {
                                 foreach (var effect in Model.TextEffects)
-                                {
+                                {    
                                     foreach (var token in effect.Tokens)
                                     {
-                                        if (token.IsTrigger)
+                                        if (token.IsTrigger || effect.IsCritical)
                                         {
                                             <b>@token.Text</b>
                                         }
@@ -226,7 +226,7 @@
                                             @: @token.Text
                                         }
                                     }
-                                    
+                                            
                                     <br />
                                     <br />
                                 }

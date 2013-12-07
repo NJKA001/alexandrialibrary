@@ -241,6 +241,7 @@
     <Compile Include="Models\Sets\The_Watcher_in_the_Water.cs" />
     <Compile Include="Models\Sets\Trouble_in_Tharbad.cs" />
     <Compile Include="Models\SetType.cs" />
+    <Compile Include="Models\Sort.cs" />
     <Compile Include="Models\Sphere.cs" />
     <Compile Include="Models\Token.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

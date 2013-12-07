@@ -270,6 +270,7 @@ namespace HallOfBeorn.Models
             get { return _card.Sphere == Models.Sphere.Leadership || _card.Sphere == Models.Sphere.Tactics || _card.Sphere == Models.Sphere.Spirit || _card.Sphere == Models.Sphere.Lore; }
         }
 
+        /*
         private CardEffectViewModel GetEffect(string text, bool isLastLine)
         {
             string prefix = null;
@@ -331,5 +332,6 @@ namespace HallOfBeorn.Models
 
             return effects;
         }
+        */
     }
 }

@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "The Black Riders";
             Number = 1003;
             SetType = Models.SetType.Saga_Expansion;
+            Cycle = "The Lord of the Rings";
 
             Cards.Add(new Card() {
                 ImageName = "M1940",

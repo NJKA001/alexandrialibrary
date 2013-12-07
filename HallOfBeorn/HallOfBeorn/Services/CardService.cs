@@ -113,9 +113,8 @@ namespace HallOfBeorn.Services
                     || x.Traits.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
                     || x.NormalizedTraits.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
                     )
-                .OrderBy(x => x.ImageName)
                 .ToList()
-                : cards.Values.OrderBy(x => x.CardSet.Number).ThenBy(x => x.Number).ToList();
+                : cards.Values.ToList();
 
             if (model.CardType != CardType.None)
             {
@@ -125,7 +124,7 @@ namespace HallOfBeorn.Services
                 }
                 else if (model.CardType == CardType.Character)
                 {
-                    results = results.Where(x => x.CardType == CardType.Hero || x.CardType == CardType.Ally).ToList();
+                    results = results.Where(x => x.CardType == CardType.Hero || x.CardType == CardType.Ally || x.CardType == CardType.Objective_Ally || (x.CardType == CardType.Objective && x.HitPoints > 0)).ToList();
                 }
                 else if (model.CardType == CardType.Encounter)
                 {
@@ -172,12 +171,24 @@ namespace HallOfBeorn.Services
                 results = results.Where(x => x.ResourceCost == model.Cost).ToList();
             }
 
-            //if (!string.IsNullOrEmpty(model.title))
-            //{
-            //    cards = cards.Where(x => x.Title.ToLower() == title.ToLower()).ToList();
-            //}
+            if (model.Unique)
+            {
+                results = results.Where(x => x.IsUnique).ToList();
+            }
 
-            return results.Take(maxResults);//.OrderBy(x => x.Title);
+            results = results.Take(maxResults).ToList();
+
+            switch (model.Sort)
+            {
+                case Sort.Set_and_number:
+                    return results.OrderBy(x => x.CardSet.Number).ThenBy(x => x.Number);
+                case Sort.Alphabetical:
+                    return results.OrderBy(x => x.Title);
+                case Sort.Sphere_type_cost:
+                    return results.OrderBy(x => x.Sphere).ThenBy(x => x.CardType).ThenBy(x => x.ResourceCost > 0 ? x.ResourceCost : x.ThreatCost);
+                default:
+                    return results;
+            }
         }
 
         public Card Find(string id)

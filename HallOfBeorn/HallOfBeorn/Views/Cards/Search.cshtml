@@ -25,32 +25,36 @@
 @using (Html.BeginForm("Search", "Cards", FormMethod.Post))
 {
     <div class="form-group">
-        @Html.TextBoxFor(x => x.Query, new { style="margin-right:2px;" })
+        @Html.TextBoxFor(x => x.Query, new { style = "margin-right:2px;" })
         <input type="submit" value="Search" style="border-radius:8px;background-color:lightgray;" />
         <a id="resetButton" href="#" style="margin-left:40px;">Reset Filters</a>
 
         <div>
             <br />
-            @Html.LabelFor(x => x.CardSet, new { style="display:inline;margin-right:2px;"})
-            @Html.DropDownListFor(x => x.CardSet, SearchViewModel.CardSets, new { style="margin-right:12px;" })
+            @Html.LabelFor(x => x.CardSet, new { style = "display:inline;margin-right:2px;" })
+            @Html.DropDownListFor(x => x.CardSet, SearchViewModel.CardSets, new { style = "margin-right:12px;" })
 
-            @Html.LabelFor(x => x.CardType, new { style="display:inline;margin-right:2px;"})
-            @Html.DropDownListFor(x => x.CardType, SearchViewModel.CardTypes, new { style="margin-right:12px;" })
+            @Html.LabelFor(x => x.CardType, new { style = "display:inline;margin-right:2px;" })
+            @Html.DropDownListFor(x => x.CardType, SearchViewModel.CardTypes, new { style = "margin-right:12px;" })
 
-            @Html.LabelFor(x => x.Sphere, new { style = "display:inline;margin-right:2px;"})
-            @Html.DropDownListFor(x => x.Sphere, SearchViewModel.Spheres, new { style="margin-right:12px;" })
+            @Html.LabelFor(x => x.Sphere, new { style = "display:inline;margin-right:2px;" })
+            @Html.DropDownListFor(x => x.Sphere, SearchViewModel.Spheres, new { style = "margin-right:12px;" })
 
-            @Html.LabelFor(x => x.Cost, new { style = "display:inline;margin-right:2px;"})
-            @Html.DropDownListFor(x => x.Cost, SearchViewModel.Costs, new { style="margin-right:0px;" })
+            @Html.LabelFor(x => x.Cost, new { style = "display:inline;margin-right:2px;" })
+            @Html.DropDownListFor(x => x.Cost, SearchViewModel.Costs, new { style = "margin-right:12px;" })
+
+            @Html.LabelFor(x => x.Unique, new { style = "display:inline;margin-right:2px;" })
+            @Html.CheckBoxFor(x => x.Unique, new { style = "margin-right:12px;" })
             <br />
             <br />
-            @Html.LabelFor(x => x.Trait, new { style = "display:inline;margin-right:2px;"})
-            @Html.DropDownListFor(x => x.Trait, SearchViewModel.Traits, new { style="margin-right:12px;" })
+            @Html.LabelFor(x => x.Trait, new { style = "display:inline;margin-right:2px;" })
+            @Html.DropDownListFor(x => x.Trait, SearchViewModel.Traits, new { style = "margin-right:12px;" })
 
-            @Html.LabelFor(x => x.Keyword, new { style = "display:inline;margin-right:2px;"})
-            @Html.DropDownListFor(x => x.Keyword, SearchViewModel.Keywords, new { style="margin-right:0px;" })
+            @Html.LabelFor(x => x.Keyword, new { style = "display:inline;margin-right:2px;" })
+            @Html.DropDownListFor(x => x.Keyword, SearchViewModel.Keywords, new { style = "margin-right:12px;" })
 
-            
+            @Html.LabelFor(x => x.Sort, new { style = "display:inline;margin-right:2px;" })
+            @Html.DropDownListFor(x => x.Sort, SearchViewModel.Sorts, new { style = "margin-right:0px;" })
             <br />
             <br />
         </div>
@@ -68,7 +72,7 @@
                     <a href="@Href(string.Format("/Cards/Details/{0}", @card.Id))"><img src="@card.ImagePath" style="height:160px;"/></a>
                 </td>
                 <td style="vertical-align:top;">
-                    @Html.ActionLink(@card.FullTitle, "Details", new { id = @card.Id }, new { style="margin-top:0px;font-weight:bold;"})
+                    @Html.ActionLink(@card.FullTitle, "Details", new { id = @card.Id }, new { style = "margin-top:0px;font-weight:bold;" })
                     <span>(@card.SetName)</span>
                     <div>
                         @if (@card.HasSphere)
@@ -106,7 +110,7 @@
                                 <span style="width:24px;margin-left:14px;"><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span><span style="margin-left:4px;font-weight:bold;">@card.Attack</span>
                                 <span style="width:24px;margin-left:14px;"><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span><span style="margin-left:4px;font-weight:bold;">@card.Defense</span>
                                 <span style="width:24px;margin-left:14px;"><img style="margin-bottom:-3px;width:16px;height:16px;" src="/Images/heart.png"/></span><span style="margin-left:4px;font-weight:bold;">@card.HitPoints</span>
-                                break;    
+                                break;
                             case CardType.Location:
                                 <span style="width:60px;color:#616161;">Quest Points</span><span style="margin-left:4px;font-weight:bold;">@card.QuestPoints</span>
                                 <span style="width:24px;margin-left:14px;"><img style="margin-bottom:-3px;" src="/Images/threat.png" /></span><span style="margin-left:4px;font-weight:bold;">@card.Threat</span>

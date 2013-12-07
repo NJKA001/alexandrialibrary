@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "The Hobbit: On the Doorstep";
             Number = 1002;
             SetType = Models.SetType.Saga_Expansion;
+            Cycle = "The Hobbit";
 
             Cards.Add(new Card() {
                 ImageName = "M1625",

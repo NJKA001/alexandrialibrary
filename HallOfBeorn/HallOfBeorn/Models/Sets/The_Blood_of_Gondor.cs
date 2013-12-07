@@ -294,7 +294,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Blood of Gondor",
                 FlavorText = "Faramir and Lord Alcaron have been captured! Through the throng of warriors, you see their bloodied torn forms rushed eastward by a band of Uruks. You must move quickly to prevent the unthinkable! If there is to be any hope of rescuing your friends, you must fight your way out of the ambush.",
                 Text = "When Revealed: Place Faramir and Lord Alcaron under Captured! (they are in play but players cannot gain control of them). Each player turns each of his hudden cards faceup.",
-                Keywords = new List<string> { "Battle. (Characters use their Attack instead of Willpower when questing.)" },
+                Keywords = new List<string> { "Battle." },
                 OppositeText = "At the beginning of the quest phase, each player takes 1 hidden card.\r\nIf a player has 5 hidden cards, he must turn them faceup.\r\nIf the players defeat this stage, they have won the game.",
                 Quantity = 1,
                 QuestPoints = 15,
