@@ -31,6 +31,24 @@ namespace HallOfBeorn.Models
             get { return _card.Title; }
         }
 
+        public string BlogSearchUrl
+        {
+            get
+            {
+                var search = _card.Title.Replace(' ', '+').Replace("!", string.Empty).Replace("?", string.Empty);
+                return string.Format("http://hallofbeorn.wordpress.com/?s={0}", search);
+            }
+        }
+
+        public string BlogTagUrl
+        {
+            get
+            {
+                var search = _card.Title.Replace(' ', '-').Replace("!", string.Empty).Replace("?", string.Empty);
+                return string.Format("http://hallofbeorn.wordpress.com/tag/{0}", search);
+            }
+        }
+
         public string FullTitle
         {
             get
