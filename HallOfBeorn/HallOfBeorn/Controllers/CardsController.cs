@@ -52,7 +52,8 @@ namespace HallOfBeorn.Controllers
         {
             if (part.Length > normalized.Length)
             {
-                var suffixLength = part.Length - normalized.Length;
+                var prefixLength = part.StartsWith("(") ? 1 : 0;
+                var suffixLength = part.Length - normalized.Length - prefixLength;
                 token.Suffix = part.Substring(part.Length - suffixLength, suffixLength);
             }
         }
@@ -102,7 +103,7 @@ namespace HallOfBeorn.Controllers
 
                 var token = new Token();
 
-                var normalized = part.TrimEnd('.', ',', ':', '"', '\'', ')');
+                var normalized = part.TrimStart('(').TrimEnd('.', ',', ':', '"', '\'', ')');
 
                 if ((count == 1 || count == 2) && part.EndsWith(":"))
                 {
@@ -130,6 +131,9 @@ namespace HallOfBeorn.Controllers
                     token.ImagePath = GetImagePath(normalized);
                     if (token.IsIcon)
                     {
+                        if (part.StartsWith("("))
+                            token.Prefix = token.Prefix + "(";
+
                         CheckForSuffix(token, part, normalized);
                         effect.Tokens.Add(token);
                         continue;

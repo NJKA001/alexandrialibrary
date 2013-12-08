@@ -213,6 +213,11 @@
                                         {
                                             if (token.HasSuffix)
                                             {
+                                                if (token.HasPrefix)
+                                                {
+                                                    <span style="margin-right:-6px;">@token.Prefix</span>
+                                                }
+                                                
                                                 <img src="@token.ImagePath" style="height:16px;margin-left:2px;margin-right:-4px;margin-bottom:-2px;" />
                                                 @: @token.Suffix
                                             }
@@ -273,196 +278,11 @@
                                 }
                             }
 
-                            @*
-                            @foreach (var effect in @Model.GetCardEffects())
-                            {
-                                if (@effect.IsShadow)
-                                {
-                                    <hr style="margin-left:24px;margin-right:24px;"/>
-                                }
-                                
-                                if (@effect.HasPrefix)
-                                {
-                                    if (@effect.IsShadow)
-                                    {
-                                        <i><b>@effect.Prefix:</b></i>
-                                    }
-                                    else
-                                    {
-                                        <b>@effect.Prefix:</b>
-                                    }
-                                }
-                                if (@effect.IsShadow)
-                                {
-                                    if (@effect.HasIcon())
-                                    {
-                                        <span><i>
-                                        @foreach (var token in @effect.GetTokens())
-                                        {
-                                            switch (token)
-                                            {
-                                                case "Threat ":
-                                                    @: <img src="/Images/threat.png" />
-                                                    break;
-                                                case "Threat. ":
-                                                    @: <img src="/Images/threat.png" />.
-                                                    break;
-                                                case "Willpower ":
-                                                    @: <img src="/Images/willpower.gif" />
-                                                    break;
-                                                case "Willpower. ":
-                                                    @: <img src="/Images/willpower.gif" />.
-                                                    break;
-                                                case "Attack ":
-                                                    @: <img src="/Images/attack.gif" />
-                                                    break;
-                                                case "Attack. ":
-                                                    @: <img src="/Images/attack.gif" />.
-                                                    break;
-                                                case "Defense ":
-                                                    @: <img src="/Images/defense.gif" />
-                                                    break;
-                                                case "Defense. ":
-                                                    @: <img src="/Images/defense.gif" />.
-                                                    break;
-                                                case "Leadership ":
-                                                    @: <img src="/Images/Leadership.png" style="width:20px;height:20px;margin-bottom:-4px;"/>
-                                                    break;
-                                                case "Leadership. ":
-                                                    @: <img src="/Images/Leadership.png" style="width:20px;height:20px;margin-bottom:-4px;"/>.
-                                                    break;
-                                                case "Tactics ":
-                                                    @: <img src="/Images/Tactics.png" style="width:20px;height:20px;margin-bottom:-4px;"/>
-                                                    break;
-                                                case "Tactics. ":
-                                                    @: <img src="/Images/Tactics.png" style="width:20px;height:20px;margin-bottom:-4px;"/>.
-                                                    break;
-                                                case "Spirit ":
-                                                    @: <img src="/Images/Spirit.png" style="width:20px;height:20px;margin-bottom:-4px;"/>
-                                                    break;
-                                                case "Spirit. ":
-                                                    @: <img src="/Images/Spirit.png" style="width:20px;height:20px;margin-bottom:-4px;"/>.
-                                                    break;
-                                                case "Lore ":
-                                                    @: <img src="/Images/Lore.png" style="width:20px;height:20px;margin-bottom:-4px;"/>
-                                                    break;
-                                                case "Lore. ":
-                                                    @: <img src="/Images/Lore.png" style="width:20px;height:20px;margin-bottom:-4px;"/>.
-                                                    break;
-                                                default:
-                                                    {
-                                                        @token
-                                                    }
-                                                    break;
-                                            }
-                                        }
-                                        </i></span>
-                                    }
-                                    else
-                                    {
-                                        <span><i>@effect.Text</i></span>
-                                    }
-                                }
-                                else if (@effect.IsCritical)
-                                {
-                                    <span><b>@effect.Text</b></span>
-                                }
-                                else
-                                {
-                                    if (@effect.HasIcon())
-                                    {
-                                        <span>
-                                        @foreach (var token in @effect.GetTokens())
-                                        {
-                                            switch (token)
-                                            {
-                                                case "Threat ":
-                                                    @: <img src="/Images/threat.png" />
-                                                    break;
-                                                case "Threat. ":
-                                                    @: <img src="/Images/threat.png" />.
-                                                    break;
-                                                case "Willpower ":
-                                                    @: <img src="/Images/willpower.gif" />
-                                                    break;
-                                                case "Willpower. ":
-                                                    @: <img src="/Images/willpower.gif" />.
-                                                    break;
-                                                case "Attack ":
-                                                    @: <img src="/Images/attack.gif" />
-                                                    break;
-                                                case "Attack. ":
-                                                    @: <img src="/Images/attack.gif" />.
-                                                    break;
-                                                case "Defense ":
-                                                    @: <img src="/Images/defense.gif" />
-                                                    break;
-                                                case "Defense. ":
-                                                    @: <img src="/Images/defense.gif" />.
-                                                    break;
-                                                case "Leadership ":
-                                                    @: <img src="/Images/Leadership.png" style="width:20px;height:20px;margin-bottom:-4px;"/>
-                                                    break;
-                                                case "Leadership. ":
-                                                    @: <img src="/Images/Leadership.png" style="width:20px;height:20px;margin-bottom:-4px;"/>.
-                                                    break;
-                                                case "Tactics ":
-                                                    @: <img src="/Images/Tactics.png" style="width:20px;height:20px;margin-bottom:-4px;"/>
-                                                    break;
-                                                case "Tactics. ":
-                                                    @: <img src="/Images/Tactics.png" style="width:20px;height:20px;margin-bottom:-4px;"/>.
-                                                    break;
-                                                case "Spirit ":
-                                                    @: <img src="/Images/Spirit.png" style="width:20px;height:20px;margin-bottom:-4px;"/>
-                                                    break;
-                                                case "Spirit. ":
-                                                    @: <img src="/Images/Spirit.png" style="width:20px;height:20px;margin-bottom:-4px;"/>.
-                                                    break;
-                                                case "Lore ":
-                                                    @: <img src="/Images/Lore.png" style="width:20px;height:20px;margin-bottom:-4px;"/>
-                                                    break;
-                                                case "Lore. ":
-                                                    @: <img src="/Images/Lore.png" style="width:20px;height:20px;margin-bottom:-4px;"/>.
-                                                    break;
-                                                default:
-                                                    {
-                                                        @token
-                                                    }
-                                                    break;
-                                            }
-                                        }
-                                        </span>
-                                    }
-                                    else
-                                    {
-                                        <span>@effect.Text</span>
-                                    }
-                                }
-                                
-                                <br />
-                                <br />
-                            }
-                            *@
-
                             @if (!string.IsNullOrEmpty(@Model.VictoryPoints))
                             {
                                 <br />
                                 <span style="text-align:right;"><b>@Model.VictoryPoints</b></span>
                             }
-                            
-                            @*
-                            <p>@Model.Text</p>
-                            
-                            @if (!string.IsNullOrEmpty(@Model.OppositeText))
-                            {
-                                <br />
-                                <p>@Model.OppositeText</p>
-                            }
-                            @if (!string.IsNullOrEmpty(@Model.Shadow))
-                            {
-                                <hr style="margin-left:24px;margin-right:24px;"/>
-                                <p>@Model.Shadow</p>
-                            }*@
                         </div>
 
                         @if (@Model.HasFlavorText || @Model.HasOppositeFlavorText)
