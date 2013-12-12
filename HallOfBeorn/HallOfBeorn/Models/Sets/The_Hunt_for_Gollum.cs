@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Hunt for Gollum";
+            Abbreviation = "THfG";
             Number = 2;
             SetType = Models.SetType.Adventure_Pack;
             Cycle = "Shadows of Mirkwood";

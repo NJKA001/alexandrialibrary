@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Hobbit: Over Hill and Under Hill";
+            Abbreviation = "THOHaUH";
             Number = 1001;
             SetType = Models.SetType.Saga_Expansion;
             Cycle = "The Hobbit";

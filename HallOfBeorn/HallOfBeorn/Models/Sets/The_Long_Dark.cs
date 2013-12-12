@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Long Dark";
+            Abbreviation = "TLD";
             Number = 12;
             SetType = Models.SetType.Adventure_Pack;
             Cycle = "Dwarrowdelf";

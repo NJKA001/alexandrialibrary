@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Morgul Vale";
+            Abbreviation = "TMV";
             Number = 21;
             SetType = Models.SetType.Adventure_Pack;
             Cycle = "Against the Shadow";

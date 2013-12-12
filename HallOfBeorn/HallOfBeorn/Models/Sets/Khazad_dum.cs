@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Khazad-dûm";
+            Abbreviation = "KD";
             Number = 8;
             SetType = Models.SetType.Deluxe_Expansion;
 

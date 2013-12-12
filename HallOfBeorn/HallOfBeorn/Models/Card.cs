@@ -13,7 +13,10 @@ namespace HallOfBeorn.Models
             NormalizedTraits = new List<string>();
             Keywords = new List<string>();
             NormalizedKeywords = new List<string>();
+            Decks = new List<Deck>();
         }
+
+        public List<Deck> Decks { get; set; }
 
         public string Id { get; set; }
         public string Title { get; set; }

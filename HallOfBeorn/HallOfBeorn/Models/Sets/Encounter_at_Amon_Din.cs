@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Encounter at Amon Dîn";
+            Abbreviation = "EaAD";
             Number = 18;
             SetType = Models.SetType.Adventure_Pack;
             Cycle = "Against the Shadow";

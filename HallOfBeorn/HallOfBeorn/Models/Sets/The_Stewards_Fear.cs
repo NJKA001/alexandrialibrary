@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Steward's Fear";
+            Abbreviation = "TSF";
             Number = 16;
             SetType = Models.SetType.Adventure_Pack;
             Cycle = "Against the Shadow";

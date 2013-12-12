@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Return to Mirkwood";
+            Abbreviation = "RtM";
             Number = 7;
             SetType = Models.SetType.Adventure_Pack;
             Cycle = "Shadows of Mirkwood";

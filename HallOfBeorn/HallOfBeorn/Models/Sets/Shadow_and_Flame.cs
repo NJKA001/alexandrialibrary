@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Shadow and Flame";
+            Abbreviation = "SaF";
             Number = 14;
             SetType = Models.SetType.Adventure_Pack;
             Cycle = "Dwarrowdelf";
@@ -70,7 +71,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 3,
                 Willpower = 3,
                 HitPoints = 4,
-                Text = "You may spend resources from Elrond's resource pool to pay for Spirit, Leadership, and Tactics allies.Response: After a character is healed by another card effect, heal 1 damage on it.",
+                Text = "You may spend resources from Elrond's resource pool to pay for Spirit, Leadership, and Tactics allies.\r\nResponse: After a character is healed by another card effect, heal 1 damage on it.",
                 Number = 4
             });
             Cards.Add(new Card() {

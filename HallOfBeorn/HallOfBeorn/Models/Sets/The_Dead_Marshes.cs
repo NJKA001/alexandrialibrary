@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Dead Marshes";
+            Abbreviation = "TDM";
             Number = 6;
             SetType = Models.SetType.Adventure_Pack;
             Cycle = "Shadows of Mirkwood";

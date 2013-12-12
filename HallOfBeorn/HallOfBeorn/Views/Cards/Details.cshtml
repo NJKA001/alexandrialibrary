@@ -314,6 +314,23 @@
                         }
                         </div>
                     </div>
+
+                    @if (@Model.Decks.Count > 0)
+                    {
+                        <br />
+                        <div style="margin-bottom:12px;">Featured Decks</div>
+                        <div>
+                        @*<ul style="list-style-type:none">*@
+                        @foreach (var deck in @Model.Decks)
+                        {
+                            @*<li>*@
+                            <a title="@deck.Name" href="@deck.Url" target="_blank">@deck.Name</a>
+                            <br />
+                            @*</li>*@
+                        }
+                        @*</ul>*@
+                        </div>
+                    }
                 </td>
             </tr>
             <tr>

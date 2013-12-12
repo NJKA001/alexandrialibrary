@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Drúadan Forest";
+            Abbreviation = "TDF";
             Number = 17;
             SetType = Models.SetType.Adventure_Pack;
             Cycle = "Against the Shadow";

@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Heirs of Númenor";
+            Abbreviation = "HoN";
             Number = 15;
             SetType = Models.SetType.Deluxe_Expansion;
 

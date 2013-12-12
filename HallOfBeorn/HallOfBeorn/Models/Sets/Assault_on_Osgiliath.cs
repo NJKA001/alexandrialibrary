@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Assault on Osgiliath";
+            Abbreviation = "AoO";
             Number = 19;
             SetType = Models.SetType.Adventure_Pack;
             Cycle = "Against the Shadow";

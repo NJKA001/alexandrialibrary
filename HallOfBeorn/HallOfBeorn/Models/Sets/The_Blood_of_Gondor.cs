@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Blood of Gondor";
+            Abbreviation = "TBoG";
             Number = 20;
             SetType = Models.SetType.Adventure_Pack;
             Cycle = "Against the Shadow";

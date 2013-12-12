@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Core Set";
+            Abbreviation = "Core";
             Number = 1;
             SetType = Models.SetType.Core;
 

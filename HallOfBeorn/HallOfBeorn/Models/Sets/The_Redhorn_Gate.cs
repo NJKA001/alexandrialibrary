@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Redhorn Gate";
+            Abbreviation = "TRG";
             Number = 9;
             SetType = Models.SetType.Adventure_Pack;
             Cycle = "Dwarrowdelf";

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 
 using HallOfBeorn.Models;
+using HallOfBeorn.Models.Decks.HallOfBeorn;
+using HallOfBeorn.Models.Decks.TalesFromTheCards;
 using HallOfBeorn.Models.Sets;
 
 namespace HallOfBeorn.Services
@@ -11,6 +13,88 @@ namespace HallOfBeorn.Services
     public class CardService
     {
         public CardService()
+        {
+            LoadSets();
+            LoadDecks();
+        }
+
+        private readonly List<CardSet> sets = new List<CardSet>();
+        private readonly List<string> setNames = new List<string>();
+        private readonly Dictionary<string, Card> cards = new Dictionary<string, Card>();
+        private readonly Dictionary<string, string> keywords = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> traits = new Dictionary<string, string>();
+        private readonly Dictionary<string, Deck> decks = new Dictionary<string, Deck>();
+
+        const int maxResults = 128;
+
+        private void AddSet(CardSet cardSet)
+        {
+            sets.Add(cardSet);
+
+            if (!string.IsNullOrEmpty(cardSet.Cycle) && !setNames.Contains(cardSet.Cycle.ToUpper()))
+                setNames.Add(cardSet.Cycle.ToUpper());
+
+            setNames.Add(cardSet.Name);
+
+            foreach (var card in cardSet.Cards)
+            {
+                cards.Add(card.Id, card);
+
+                foreach (var keyword in card.Keywords)
+                {
+                    var keywordKey = keyword.Trim();
+                    if (!keywords.ContainsKey(keywordKey))
+                        keywords.Add(keywordKey, keywordKey);
+                }
+
+                foreach (var trait in card.Traits)
+                {
+                    var traitKey = trait.Replace(".", string.Empty).Trim();
+                    if (!traits.ContainsKey(traitKey))
+                        traits.Add(traitKey, trait.Trim());
+                }
+            }
+        }
+
+        private void AddDeck(Deck deck)
+        {
+            decks.Add(deck.Url, deck);
+
+            foreach (var line in deck.DeckList.Split(new string [] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                var tokens = line.Split(' ').ToList();
+                if (tokens == null || tokens.Count == 0)
+                    continue;
+
+                if (tokens.Last().StartsWith("x"))
+                {
+                    tokens.Remove(tokens.Last());
+                }
+
+                var setName = string.Empty;
+
+                var last = tokens.LastOrDefault();
+                if (last != null && last.Contains('(') && last.Contains(')'))
+                {
+                    setName = last.Trim().TrimStart('(').TrimEnd(')');
+                    tokens.Remove(last);
+                }
+
+                if (tokens.Count == 0)
+                    continue;
+
+                var title = string.Join(" ", tokens);
+
+                var card = cards.Values.Where(x => (string.Equals(x.Title, title) || string.Equals(x.NormalizedTitle, title)) && (string.IsNullOrEmpty(setName) || string.Equals(x.CardSet.Abbreviation, setName))).FirstOrDefault();
+
+                if (card != null)
+                {
+                    card.Decks.Add(deck);
+                }
+            }
+        }
+
+        private void LoadSets()
         {
             AddSet(new CoreSet());
             //AddSet(new CoreSetNightmare());
@@ -55,45 +139,16 @@ namespace HallOfBeorn.Services
             //AddSet(new TroubleinTharbad());
             //AddSet(new BoarandRaven());
             //AddSet(new CelebrimborsForge());
-
             //AddSet(new TheRoadDarkens());
         }
 
-        private readonly List<CardSet> sets = new List<CardSet>();
-        private readonly List<string> setNames = new List<string>();
-        private readonly Dictionary<string, Card> cards = new Dictionary<string, Card>();
-        private readonly Dictionary<string, string> keywords = new Dictionary<string, string>();
-        private readonly Dictionary<string, string> traits = new Dictionary<string, string>();
-
-        const int maxResults = 128;
-
-        private void AddSet(CardSet cardSet)
+        private void LoadDecks()
         {
-            sets.Add(cardSet);
-
-            if (!string.IsNullOrEmpty(cardSet.Cycle) && !setNames.Contains(cardSet.Cycle.ToUpper()))
-                setNames.Add(cardSet.Cycle.ToUpper());
-
-            setNames.Add(cardSet.Name);
-
-            foreach (var card in cardSet.Cards)
-            {
-                cards.Add(card.Id, card);
-
-                foreach (var keyword in card.Keywords)
-                {
-                    var keywordKey = keyword.Trim();
-                    if (!keywords.ContainsKey(keywordKey))
-                        keywords.Add(keywordKey, keywordKey);
-                }
-
-                foreach (var trait in card.Traits)
-                {
-                    var traitKey = trait.Replace(".", string.Empty).Trim();
-                    if (!traits.ContainsKey(traitKey))
-                        traits.Add(traitKey, trait.Trim());
-                }
-            }
+            AddDeck(new BoromirLeadsTheCharge());
+            AddDeck(new CaldarasSacrifice());
+            AddDeck(new HamaTakesArcheryLessons());
+            AddDeck(new RideToRuin());
+            AddDeck(new SpearmanSuperhero());
         }
 
         public IEnumerable<Card> All()

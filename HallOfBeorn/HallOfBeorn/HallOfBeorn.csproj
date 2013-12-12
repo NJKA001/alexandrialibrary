@@ -197,6 +197,12 @@
     <Compile Include="Models\CardSet.cs" />
     <Compile Include="Models\CardType.cs" />
     <Compile Include="Models\CardViewModel.cs" />
+    <Compile Include="Models\Deck.cs" />
+    <Compile Include="Models\Decks\HallOfBeorn\BoromirLeadsTheCharge.cs" />
+    <Compile Include="Models\Decks\HallOfBeorn\CaldarasSacrifice.cs" />
+    <Compile Include="Models\Decks\HallOfBeorn\HamaTakesArcheryLessons.cs" />
+    <Compile Include="Models\Decks\TalesFromTheCards\RideToRuin.cs" />
+    <Compile Include="Models\Decks\TalesFromTheCards\SpearmanSuperhero.cs" />
     <Compile Include="Models\ImageType.cs" />
     <Compile Include="Models\OCTGN\OctgnCard.cs" />
     <Compile Include="Models\OCTGN\OctgnProperty.cs" />

@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Black Riders";
+            Abbreviation = "TBR";
             Number = 1003;
             SetType = Models.SetType.Saga_Expansion;
             Cycle = "The Lord of the Rings";

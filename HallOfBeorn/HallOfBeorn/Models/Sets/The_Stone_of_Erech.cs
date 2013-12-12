@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Stone of Erech";
+            Abbreviation = "TSoE";
             Number = 2003;
             SetType = Models.SetType.GenCon_Expansion;
             Cycle = "GenCon";

@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Foundations of Stone";
+            Abbreviation = "FoS";
             Number = 13;
             SetType = Models.SetType.Adventure_Pack;
             Cycle = "Dwarrowdelf";
