@@ -92,6 +92,7 @@ namespace HallOfBeorn.Services
                     (
                         (string.Equals(x.Title.ToLower(), title) || (!string.IsNullOrEmpty(x.NormalizedTitle) && string.Equals(x.NormalizedTitle.ToLower(), title)))
                         && ( string.IsNullOrEmpty(setName) || ( string.Equals(x.CardSet.Abbreviation, setName) || string.Equals(x.CardSet.Name, setName) ) )
+                        && ( x.CardType == CardType.Hero || x.CardType == CardType.Ally || x.CardType == CardType.Attachment || x.CardType == CardType.Event || x.CardType == CardType.Treasure || x.CardType == CardType.Boon )
                     )
                 ).FirstOrDefault();
 
@@ -171,6 +172,27 @@ namespace HallOfBeorn.Services
             AddDeck(new TwoKingdomsReunited());
             AddDeck(new HamaTakesArcheryLessons());
             AddDeck(new BardGoesHunting());
+            AddDeck(new TheIslandOfMisfitHeroes());
+            AddDeck(new BalinHoldsTheLine());
+            AddDeck(new TheRohirrimRideWithTheGreyCompany());
+            AddDeck(new ThePowerOfThePalantir());
+            AddDeck(new LoreMastery());
+            AddDeck(new EaglesAndHorsesAndBearsOhMy());
+            AddDeck(new TheDwarvesAndFaramir());
+            AddDeck(new LocationControl());
+            AddDeck(new Gluttony());
+            AddDeck(new BoromirAndTheSevenDwarves());
+            AddDeck(new VilyaTheRingOfAir());
+            AddDeck(new DirectDamageTacticsLeadership());
+            AddDeck(new DirectDamageLeadershipSpiritLore());
+            AddDeck(new RenewedFriendshipsDwarvesElvesAndMen());
+            AddDeck(new RenewedFriendshipsElvesAndElfFriends());
+            AddDeck(new BattleOfPelennorRideToRuin());
+            AddDeck(new BattleOfPelennorAndTheWorldsEnding());
+            AddDeck(new SecretsOfErebor());
+            AddDeck(new SecretsOfErebor2());
+            AddDeck(new TheOrcHuntersOfImladris());
+            AddDeck(new WardensOfImladris());
 
             AddDeck(new RideToRuin());
             AddDeck(new SpearmanSuperhero());
@@ -181,6 +203,17 @@ namespace HallOfBeorn.Services
             AddDeck(new BlazeOfGlory());
             AddDeck(new RidingWithRohan());
             AddDeck(new WhereEaglesDare());
+
+            AddDeck(new BeornsPathPTMLeadershipLore());
+            AddDeck(new BeornsPathJAtALeadershipLore());
+            AddDeck(new BeornsPathEFDGTacticsSpirit());
+            AddDeck(new BeornsPathTHFGLeadershipLore());
+            AddDeck(new BeornsPathTHFGTacticsSpirit());
+            AddDeck(new BeornsPathCatCLeadershipLore());
+            AddDeck(new BeornsPathAJtRLeadershipLore());
+            AddDeck(new BeornsPathTHoEMLeadershipLore());
+            AddDeck(new BeornsPathTDMLeadershipLore());
+            AddDeck(new BeornsPathRtMTacticsSpirit());
         }
 
         public IEnumerable<Card> All()

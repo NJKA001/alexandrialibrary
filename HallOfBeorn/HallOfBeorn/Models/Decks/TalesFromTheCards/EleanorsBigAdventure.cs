@@ -8,7 +8,7 @@ namespace HallOfBeorn.Models.Decks.TalesFromTheCards
     public class EleanorsBigAdventure : Deck
     {
         public EleanorsBigAdventure()
-            : base("Elanor's Big Adventure", "http://talesfromthecards.wordpress.com/2013/05/31/deck-spotlight-eleanors-big-adventureoutlands-gone-wild/")
+            : base("Eleanor's Big Adventure", "http://talesfromthecards.wordpress.com/2013/05/31/deck-spotlight-eleanors-big-adventureoutlands-gone-wild/")
         {
             DeckList =
 @"Eleanor (Core) x1
@@ -32,7 +32,7 @@ Horn of Gondor (Core) x2
 
 Hands Upon the Bow (SaF) x3
 A Test of Will (Core) x3
-Elrond’s Counsel (TWitW) x3
+Elrond's Counsel (TWitW) x3
 Feint (Core) x3
 Hasty Stroke (Core) x3";
         }

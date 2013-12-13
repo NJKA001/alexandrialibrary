@@ -318,7 +318,7 @@
                     @if (@Model.Decks.Count > 0)
                     {
                         <br />
-                        <div style="margin-bottom:12px;">Featured Decks</div>
+                        <div style="margin-bottom:12px;color:#616161;font-weight:bold;">Featured Decks</div>
                         <div>
                         @*<ul style="list-style-type:none">*@
                         @foreach (var deck in @Model.Decks)
@@ -334,7 +334,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="vertical-align:top;text-align:center;"><a href="@Model.BlogSearchUrl" target="_blank" title="Articles related to: @Model.Title">Related Articles</a></td>
+                <td style="vertical-align:top;text-align:center;"><a href="@Model.BlogSearchUrl" target="_blank" title="Search the Blog for: @Model.Title">Related Blog Posts</a></td>
             </tr>
             @*<tr>
                 <td><a href="@Model.BlogTagUrl" target="_blank" title="Tags related to: @Model.Title">Related Tags</a></td>
