@@ -23,7 +23,7 @@ namespace HallOfBeorn.Services
         private readonly Dictionary<string, Card> cards = new Dictionary<string, Card>();
         private readonly Dictionary<string, string> keywords = new Dictionary<string, string>();
         private readonly Dictionary<string, string> traits = new Dictionary<string, string>();
-        private readonly Dictionary<string, Deck> decks = new Dictionary<string, Deck>();
+        private readonly List<Deck> decks = new List<Deck>();
 
         const int maxResults = 128;
 
@@ -58,7 +58,10 @@ namespace HallOfBeorn.Services
 
         private void AddDeck(Deck deck)
         {
-            decks.Add(deck.Url, deck);
+            decks.Add(deck);
+
+            if (string.IsNullOrEmpty(deck.DeckList))
+                return;
 
             foreach (var line in deck.DeckList.Split(new string [] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
             {
@@ -83,9 +86,14 @@ namespace HallOfBeorn.Services
                 if (tokens.Count == 0)
                     continue;
 
-                var title = string.Join(" ", tokens);
+                var title = string.Join(" ", tokens).ToLower();
 
-                var card = cards.Values.Where(x => (string.Equals(x.Title, title) || string.Equals(x.NormalizedTitle, title)) && (string.IsNullOrEmpty(setName) || string.Equals(x.CardSet.Abbreviation, setName))).FirstOrDefault();
+                var card = cards.Values.Where(x => 
+                    (
+                        (string.Equals(x.Title.ToLower(), title) || (!string.IsNullOrEmpty(x.NormalizedTitle) && string.Equals(x.NormalizedTitle.ToLower(), title)))
+                        && ( string.IsNullOrEmpty(setName) || ( string.Equals(x.CardSet.Abbreviation, setName) || string.Equals(x.CardSet.Name, setName) ) )
+                    )
+                ).FirstOrDefault();
 
                 if (card != null)
                 {
@@ -146,9 +154,33 @@ namespace HallOfBeorn.Services
         {
             AddDeck(new BoromirLeadsTheCharge());
             AddDeck(new CaldarasSacrifice());
+            AddDeck(new KeepItSecretKeepItSafe());
+            AddDeck(new RangersAndTraps());
+            AddDeck(new SecretsOfTheWise());
+            AddDeck(new CalledToTheSea());
+            AddDeck(new PrisonerOfTheDarkForest());
+            AddDeck(new ReclaimingKhazadDum());
+            AddDeck(new ThreeKingsAQueenAndAPrince());
+            AddDeck(new TheGreyCompanyDefendsGondor());
+            AddDeck(new MagaliTribute());
+            AddDeck(new BeornAttacks());
+            AddDeck(new MastersOfTheForest());
+            AddDeck(new TheFieldOfCormallen());
+            AddDeck(new IsildursHeir());
+            AddDeck(new FlightToTheFord());
+            AddDeck(new TwoKingdomsReunited());
             AddDeck(new HamaTakesArcheryLessons());
+            AddDeck(new BardGoesHunting());
+
             AddDeck(new RideToRuin());
             AddDeck(new SpearmanSuperhero());
+            AddDeck(new PalantirSupport());
+            AddDeck(new TrapsOfIthilien());
+            AddDeck(new EleanorsBigAdventure());
+            AddDeck(new OutlandsGoneWild());
+            AddDeck(new BlazeOfGlory());
+            AddDeck(new RidingWithRohan());
+            AddDeck(new WhereEaglesDare());
         }
 
         public IEnumerable<Card> All()
