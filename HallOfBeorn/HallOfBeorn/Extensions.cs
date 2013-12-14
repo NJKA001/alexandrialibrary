@@ -19,6 +19,12 @@ namespace HallOfBeorn
                 .Replace("!", string.Empty);
         }
 
+        public static string ToSearchString(this string value)
+        {
+            return value.Replace(' ', '+').Replace("!", string.Empty).Replace("?", string.Empty);
+                //.Replace("'", string.Empty);
+        }
+
         public static IEnumerable<SelectListItem> GetSelectListItems(this Type enumType)
         {
             var listItems = new List<SelectListItem>();

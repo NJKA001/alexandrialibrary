@@ -14,9 +14,11 @@ namespace HallOfBeorn.Models
             Keywords = new List<string>();
             NormalizedKeywords = new List<string>();
             Decks = new List<Deck>();
+            RelatedCards = new List<Card>();
         }
 
         public List<Deck> Decks { get; set; }
+        public List<Card> RelatedCards { get; set; }
 
         public string Id { get; set; }
         public string Title { get; set; }

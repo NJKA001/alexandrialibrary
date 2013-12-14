@@ -31,12 +31,31 @@ namespace HallOfBeorn.Models
             get { return _card.Title; }
         }
 
-        public string BlogSearchUrl
+        public string Description
+        {
+            get { return string.Format("{0} ({1})", _card.Title, _card.CardSet.Abbreviation); }
+        }
+
+        public string Url
+        {
+            get { return string.Format("/Cards/Details/{0}", Id); }
+        }
+
+        public string HallOfBeornBlogSearchUrl
         {
             get
             {
-                var search = _card.Title.Replace(' ', '+').Replace("!", string.Empty).Replace("?", string.Empty);
+                var search = _card.Title.ToSearchString();
                 return string.Format("http://hallofbeorn.wordpress.com/?s={0}", search);
+            }
+        }
+
+        public string TalesFromTheCardsBlogSearchUrl
+        {
+            get
+            {
+                var search = _card.Title.ToSearchString();
+                return string.Format("http://talesfromthecards.wordpress.com/?s={0}", search);
             }
         }
 
@@ -291,6 +310,13 @@ namespace HallOfBeorn.Models
         public List<Deck> Decks
         {
             get { return _card.Decks; }
+        }
+
+        public List<CardViewModel> RelatedCards
+        {
+            get {
+                return _card.RelatedCards.Select(x => new CardViewModel(x)).ToList();
+            }
         }
     }
 }
