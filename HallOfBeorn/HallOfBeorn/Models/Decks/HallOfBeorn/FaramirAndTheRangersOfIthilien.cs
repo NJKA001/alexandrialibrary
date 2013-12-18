@@ -35,9 +35,9 @@ Protector of Lorien x2
 Great Yew Bow x2
 Scroll of Isildur x2
 
-Mithrandir’s Advice x3
+Mithrandir's Advice x3
 Take No Notice x2
-Radagast’s Cunning x2
+Radagast's Cunning x2
 Secret Paths x2";
         }
     }

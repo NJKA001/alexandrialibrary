@@ -162,7 +162,7 @@ namespace HallOfBeorn.Models.Sets
                 Title = "Scroll of Isildur",
                 Traits = new List<string> { "Record." },
                 Keywords = new List<string> { "Attach to a Lore hero." },
-                Text = "Reduce the cost to play Scroll of Isildur by 1 for each hero you control with a printed Lore resource icon.\r\nAction: Discard Scoll of Isildur to play any Lore event card in your discard pile as if it were in your hand. Then, place that event on the bottom of your deck.",
+                Text = "Reduce the cost to play ~Scroll of Isildur by 1 for each hero you control with a printed Lore resource icon.\r\nAction: Discard ~Scroll of Isildur to play any Lore event card in your discard pile as if it were in your hand. Then, place that event on the bottom of your deck.",
                 Quantity = 3,
                 Number = 142
             });

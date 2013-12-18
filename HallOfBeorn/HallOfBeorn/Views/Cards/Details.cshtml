@@ -33,11 +33,6 @@
                                 {
                                     <span style="margin-left:6px;">(Unique)</span>
                                 }
-                                @*
-                                @if (!string.IsNullOrEmpty(@Model.CampaignCardType))
-                                {
-                                    <span>(@Model.CampaignCardType)</span>
-                                }*@
                                 </td>
                             </tr>
                             <tr>
@@ -323,15 +318,10 @@
                                     <br />
                                     <div style="margin-bottom:12px;color:#616161;font-weight:bold;">Featured Decks</div>
                                     <div>
-                                    @*<ul style="list-style-type:none">*@
                                     @foreach (var deck in @Model.Decks)
                                     {
-                                        @*<li>*@
-                                        <a title="@deck.Name" href="@deck.Url" target="_blank">@deck.Name</a>
-                                        <br />
-                                        @*</li>*@
+                                        <div style="margin-bottom:4px;"><a title="@deck.Name" href="@deck.Url" target="_blank">@deck.Name</a></div>
                                     }
-                                    @*</ul>*@
                                     </div>
                                 }
                             </td>
@@ -344,8 +334,7 @@
                                     
                                     @foreach (var relatedCard in @Model.RelatedCards)
                                     {
-                                        <a title="@relatedCard.Title" href="@relatedCard.Url">@relatedCard.Description</a>
-                                        <br />
+                                        <div style="margin-bottom:4px;"><a title="@relatedCard.Title" href="@relatedCard.Url">@relatedCard.Description</a></div>
                                     }
                                     </div>
                                 }
