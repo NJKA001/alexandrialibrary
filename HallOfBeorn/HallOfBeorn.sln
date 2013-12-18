@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctgnImporter", "OctgnImpor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LotrDbImporter", "LotrDbImporter\LotrDbImporter.csproj", "{E88ABE4B-E385-42EE-9AB6-6C57BB31EBC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardAnalyzer", "CardAnalyzer\CardAnalyzer.csproj", "{E7B83B77-802A-42A8-AD33-7B07214BBE36}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,10 +31,6 @@ Global
 		{E88ABE4B-E385-42EE-9AB6-6C57BB31EBC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E88ABE4B-E385-42EE-9AB6-6C57BB31EBC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E88ABE4B-E385-42EE-9AB6-6C57BB31EBC9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E7B83B77-802A-42A8-AD33-7B07214BBE36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7B83B77-802A-42A8-AD33-7B07214BBE36}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7B83B77-802A-42A8-AD33-7B07214BBE36}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7B83B77-802A-42A8-AD33-7B07214BBE36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
