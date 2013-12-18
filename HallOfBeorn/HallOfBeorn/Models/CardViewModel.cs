@@ -45,7 +45,7 @@ namespace HallOfBeorn.Models
         {
             get
             {
-                var search = _card.Title.ToSearchString();
+                var search = !string.IsNullOrEmpty(_card.NormalizedTitle) ? _card.NormalizedTitle.ToSearchString() : _card.Title.ToSearchString();
                 return string.Format("http://hallofbeorn.wordpress.com/?s={0}", search);
             }
         }
@@ -54,8 +54,17 @@ namespace HallOfBeorn.Models
         {
             get
             {
-                var search = _card.Title.ToSearchString();
+                var search = !string.IsNullOrEmpty(_card.NormalizedTitle) ? _card.NormalizedTitle.ToSearchString() : _card.Title.ToSearchString();
                 return string.Format("http://talesfromthecards.wordpress.com/?s={0}", search);
+            }
+        }
+
+        public string MasterOfLoreBlogSearchUrl
+        {
+            get
+            {
+                var search = !string.IsNullOrEmpty(_card.NormalizedTitle) ? _card.NormalizedTitle.ToSearchString() : _card.Title.ToSearchString();
+                return string.Format("http://masteroflore.wordpress.com/?s={0}", search);
             }
         }
 

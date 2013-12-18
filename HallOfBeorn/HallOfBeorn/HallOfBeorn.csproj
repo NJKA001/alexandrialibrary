@@ -220,6 +220,7 @@
     <Compile Include="Models\Decks\HallOfBeorn\DirectDamageLeadershipSpiritLore.cs" />
     <Compile Include="Models\Decks\HallOfBeorn\DirectDamageTacticsLeadership.cs" />
     <Compile Include="Models\Decks\HallOfBeorn\EaglesAndHorsesAndBearsOhMy.cs" />
+    <Compile Include="Models\Decks\HallOfBeorn\FaramirAndTheRangersOfIthilien.cs" />
     <Compile Include="Models\Decks\HallOfBeorn\FlightToTheFord.cs" />
     <Compile Include="Models\Decks\HallOfBeorn\Gluttony.cs" />
     <Compile Include="Models\Decks\HallOfBeorn\HamaTakesArcheryLessons.cs" />

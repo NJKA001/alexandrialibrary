@@ -154,6 +154,7 @@ namespace HallOfBeorn.Services
 
         private void LoadDecks()
         {
+            AddDeck(new FaramirAndTheRangersOfIthilien());
             AddDeck(new BoromirLeadsTheCharge());
             AddDeck(new CaldarasSacrifice());
             AddDeck(new KeepItSecretKeepItSafe());
@@ -219,8 +220,8 @@ namespace HallOfBeorn.Services
 
         private void AddRelationship(string leftTitle, string leftSet, string rightTitle, string rightSet)
         {
-            var leftCard = cards.Values.Where(x => (string.Equals(x.Title, leftTitle) || string.Equals(x.NormalizedTitle, leftTitle)) && string.Equals(x.CardSet.Abbreviation, leftSet)).FirstOrDefault();
-            var rightCard = cards.Values.Where(x => (string.Equals(x.Title, rightTitle) || string.Equals(x.NormalizedTitle, rightTitle)) && string.Equals(x.CardSet.Abbreviation, rightSet)).FirstOrDefault();
+            var leftCard = cards.Values.Where(x => (string.Equals(x.Title, leftTitle) || string.Equals(x.NormalizedTitle, leftTitle)) && (string.IsNullOrEmpty(leftSet) || string.Equals(x.CardSet.Abbreviation, leftSet))).FirstOrDefault();
+            var rightCard = cards.Values.Where(x => (string.Equals(x.Title, rightTitle) || string.Equals(x.NormalizedTitle, rightTitle)) && (string.IsNullOrEmpty(rightSet) || string.Equals(x.CardSet.Abbreviation, rightSet))).FirstOrDefault();
 
             if (leftCard == null || rightCard == null)
                 return;
@@ -234,21 +235,22 @@ namespace HallOfBeorn.Services
 
         private void LoadRelationships()
         {
+            AddRelationship("Aragorn", "Core", "Aragorn", "TWitW");
             AddRelationship("Aragorn", "Core", "Faramir", "Core");
-            AddRelationship("Aragorn", "Core", "Sneak Attack", "Core");
             AddRelationship("Aragorn", "Core", "Steward of Gondor", "Core");
             AddRelationship("Aragorn", "Core", "Celebrian's Stone", "Core");
             AddRelationship("Aragorn", "Core", "Sword that was Broken", "TWitW");
+            AddRelationship("Aragorn", "Core", "Ring of Barahir", "TSF");
 
             AddRelationship("Theodred", "Core", "Snowbourn Scout", "Core");
             AddRelationship("Theodred", "Core", "Steward of Gondor", "Core");
-            AddRelationship("Theodred", "Core", "Faramir", "Core");
             AddRelationship("Theodred", "Core", "Aragorn", "Core");
 
             AddRelationship("Gloin", "Core", "Lure of Moria", "RtR");
             AddRelationship("Gloin", "Core", "Longbeard Elder", "FoS");
             AddRelationship("Gloin", "Core", "We Are Not Idle", "SaF");
             AddRelationship("Gloin", "Core", "Cram", "THOHaUH");
+            AddRelationship("Gloin", "Core", "Gloin", "THOtD");
 
             AddRelationship("Gimli", "Core", "Citadel Plate", "Core");
             AddRelationship("Gimli", "Core", "Horn of Gondor", "Core");
@@ -257,14 +259,11 @@ namespace HallOfBeorn.Services
             AddRelationship("Gimli", "Core", "Swift Strike", "Core");
             AddRelationship("Gimli", "Core", "Thalin", "Core");
 
-            AddRelationship("Legolas", "Core", "Gondorian Spearman", "Core");
-            AddRelationship("Legolas", "Core", "Feint", "Core");
             AddRelationship("Legolas", "Core", "Blade of Gondolin", "Core");
             AddRelationship("Legolas", "Core", "Rivendell Blade", "RtR");
             AddRelationship("Legolas", "Core", "Hands Upon the Bow", "SaF");
             AddRelationship("Legolas", "Core", "Foe-hammer", "THOHaUH");
             AddRelationship("Legolas", "Core", "Horn of Gondor", "Core");
-            AddRelationship("Legolas", "Core", "Hail of Stones", "RtR");
 
             AddRelationship("Thalin", "Core", "Gondorian Spearman", "Core");
             AddRelationship("Thalin", "Core", "Feint", "Core");
@@ -277,9 +276,11 @@ namespace HallOfBeorn.Services
             AddRelationship("Eowyn", "Core", "A Test of Will", "Core");
             AddRelationship("Eowyn", "Core", "Unexpected Courage", "Core");
             AddRelationship("Eowyn", "Core", "Gandalf", "Core");
+            AddRelationship("Eowyn", "Core", "Dunhere", "Core");
 
             AddRelationship("Faramir", "Core", "Steward of Gondor", "Core");
             AddRelationship("Faramir", "Core", "Celebrian's Stone", "Core");
+            AddRelationship("Faramir", "Core", "Faramir", "AoO");
 
             AddRelationship("Longbeard Orc Slayer", "Core", "Sneak Attack", "Core");
             AddRelationship("Longbeard Orc Slayer", "Core", "Steward of Gondor", "Core");
@@ -289,8 +290,6 @@ namespace HallOfBeorn.Services
             AddRelationship("Longbeard Orc Slayer", "Core", "We Are Not Idle", "SaF");
             AddRelationship("Longbeard Orc Slayer", "Core", "Miner of the Iron Hills", "Core");
 
-            AddRelationship("Sneak Attack", "Core", "Faramir", "Core");
-            AddRelationship("Sneak Attack", "Core", "Steward of Gondor", "Core");
             AddRelationship("Sneak Attack", "Core", "Gandalf", "Core");
 
             AddRelationship("Steward of Gondor", "Core", "Sneak Attack", "Core");
@@ -298,17 +297,16 @@ namespace HallOfBeorn.Services
 
             AddRelationship("Celebrian's Stone", "Core", "Steward of Gondor", "Core");
             AddRelationship("Celebrian's Stone", "Core", "Aragorn", "Core");
+            AddRelationship("Celebrian's Stone", "Core", "Aragorn", "TWitW");
             AddRelationship("Celebrian's Stone", "Core", "Faramir", "Core");
-            AddRelationship("Celebrian's Stone", "Core", "Gandalf", "Core");
             
             AddRelationship("Gondorian Spearman", "Core", "Feint", "Core");
             AddRelationship("Gondorian Spearman", "Core", "Gandalf", "Core");
             AddRelationship("Gondorian Spearman", "Core", "Horn of Gondor", "Core");
             
-            AddRelationship("Feint", "Core", "Gandalf", "Core");
-            AddRelationship("Feint", "Core", "A Test of Will", "Core");
-            AddRelationship("Feint", "Core", "Horn of Gondor", "Core");
-            
+            AddRelationship("Feint", "Core", "Quick Strike", "Core");
+            AddRelationship("Feint", "Core", "Hama", "TLD");
+
             AddRelationship("Quick Strike", "Core", "Gimli", "Core");
             AddRelationship("Quick Strike", "Core", "Feint", "Core");
             AddRelationship("Quick Strike", "Core", "Swift Strike", "Core");
@@ -317,57 +315,48 @@ namespace HallOfBeorn.Services
             AddRelationship("Swift Strike", "Core", "Gondorian Spearman", "Core");
             AddRelationship("Swift Strike", "Core", "Thalin", "Core");
 
-            AddRelationship("Blade of Gondolin", "Core", "Gondorian Spearman", "Core");
-            AddRelationship("Blade of Gondolin", "Core", "Feint", "Core");
-            AddRelationship("Blade of Gondolin", "Core", "Hands Upon the Bow", "SaF");
+            AddRelationship("Blade of Gondolin", "Core", "Legolas", "Core");
             AddRelationship("Blade of Gondolin", "Core", "Foe-hammer", "THOHaUH");
-            AddRelationship("Blade of Gondolin", "Core", "Horn of Gondor", "Core");
+            AddRelationship("Blade of Gondolin", "Core", "Goblin-cleaver", "THOHaUH");
             
             AddRelationship("Citadel Plate", "Core", "Gimli", "Core");
             AddRelationship("Citadel Plate", "Core", "Horn of Gondor", "Core");
 
-            AddRelationship("Horn of Gondor", "Core", "Gondorian Spearman", "Core");
-            AddRelationship("Horn of Gondor", "Core", "Feint", "Core");
-
-            AddRelationship("Northern Tracker", "Core", "A Test of Will", "Core");
-            AddRelationship("Northern Tracker", "Core", "Unexpected Courage", "Core");
-            AddRelationship("Northern Tracker", "Core", "Glorfindel", "FoS");
-            AddRelationship("Northern Tracker", "Core", "Imladris Stargazer", "FoS");
-            AddRelationship("Northern Tracker", "Core", "Light of Valinor", "FoS");
-            AddRelationship("Northern Tracker", "Core", "Gandalf", "Core");
+            AddRelationship("Horn of Gondor", "Core", "Sneak Attack", "Core");
+            AddRelationship("Horn of Gondor", "Core", "Prince Imrahil", "AJtR");
             
-            AddRelationship("The Galadhrim's Greeting", "Core", "Northern Tracker", "Core");
-            AddRelationship("The Galadhrim's Greeting", "Core", "A Test of Will", "Core");
-            AddRelationship("The Galadhrim's Greeting", "Core", "Unexpected Courage", "Core");
             AddRelationship("The Galadhrim's Greeting", "Core", "Gandalf", "Core");
-            AddRelationship("The Galadhrim's Greeting", "Core", "Imladris Stargazer", "FoS");
+            AddRelationship("The Galadhrim's Greeting", "Core", "Gandalf", "THOHaUH");
             
             AddRelationship("Hasty Stroke", "Core", "A Test of Will", "Core");
-            AddRelationship("Hasty Stroke", "Core", "Unexpected Courage", "Core");
+            AddRelationship("Hasty Stroke", "Core", "A Burning Brand", "CatC");
 
             AddRelationship("A Test of Will", "Core", "Unexpected Courage", "Core");
             AddRelationship("A Test of Will", "Core", "Gandalf", "Core");
             
             AddRelationship("Stand and Fight", "Core", "Eowyn", "Core");
             AddRelationship("Stand and Fight", "Core", "Horn of Gondor", "Core");
-            AddRelationship("Stand and Fight", "Core", "A Test of Will", "Core");
             AddRelationship("Stand and Fight", "Core", "Dwarven Tomb", "Core");
-            AddRelationship("Stand and Fight", "Core", "Unexpected Courage", "Core");
-            
-            AddRelationship("Dwarven Tomb", "Core", "Northern Tracker", "Core");
+            AddRelationship("Stand and Fight", "Core", "Escort from Edoras", "AJtR");
+
             AddRelationship("Dwarven Tomb", "Core", "A Test of Will", "Core");
-            AddRelationship("Dwarven Tomb", "Core", "Unexpected Courage", "Core");
-            
+            AddRelationship("Dwarven Tomb", "Core", "Hasty Stroke", "Core");
+            AddRelationship("Dwarven Tomb", "Core", "Elrond's Counsel", "SaF");
+            AddRelationship("Dwarven Tomb", "Core", "The Galadhrim's Greeting", "Core");
+            AddRelationship("Dwarven Tomb", "Core", "Escort from Edoras", "AJtR");
+            AddRelationship("Dwarven Tomb", "Core", "Miruvor", "SaF");
+
             AddRelationship("Unexpected Courage", "Core", "A Test of Will", "Core");
             AddRelationship("Unexpected Courage", "Core", "Imladris Stargazer", "FoS");
 
             AddRelationship("Erebor Hammersmith", "Core", "Gleowine", "Core");
 
             AddRelationship("Henamarth Riversong", "Core", "Denethor", "Core");
-            AddRelationship("Henamarth Riversong", "Core", "Master of the Forge", "SaF");
+            AddRelationship("Henamarth Riversong", "Core", "Rumour from the Earth", "RtM");
 
             AddRelationship("Miner of the Iron Hills", "Core", "Erebor Hammersmith", "Core");
 
+            AddRelationship("Beravor", "Core", "Aragorn", "TWitW");
             AddRelationship("Gleowine", "Core", "Beravor", "Core");
             
             AddRelationship("Radagast's Cunning", "Core", "Secret Paths", "Core");
@@ -375,69 +364,59 @@ namespace HallOfBeorn.Services
             AddRelationship("Secret Paths", "Core", "Radagast's Cunning", "Core");
             
             AddRelationship("Forest Snare", "Core", "Protector of Lorien", "Core");
-            
-            AddRelationship("Protector of Lorien", "Core", "Gandalf", "Core");
+            AddRelationship("Forest Snare", "Core", "Anborn", "TBoG");
+
             AddRelationship("Protector of Lorien", "Core", "Gleowine", "Core");
             AddRelationship("Protector of Lorien", "Core", "A Burning Brand", "CatC");
-            AddRelationship("Protector of Lorien", "Core", "Erebor Hammersmith", "Core");
-
-            AddRelationship("Self Preservation", "Core", "Elrond", "SaF");
-
-            AddRelationship("Dunedain Mark", "THfG", "Theodred", "Core");
-            AddRelationship("Dunedain Mark", "THfG", "Aragorn", "Core");
-            AddRelationship("Dunedain Mark", "THfG", "Celebrian's Stone", "Core");
+            AddRelationship("Protector of Lorien", "Core", "Beravor", "Core");
 
             AddRelationship("Rivendell Minstrel", "THfG", "Song of Kings", "THfG");
             AddRelationship("Rivendell Minstrel", "THfG", "Song of Travel", "THoEM");
             AddRelationship("Rivendell Minstrel", "THfG", "Song of Battle", "TDM");
+            AddRelationship("Rivendell Minstrel", "THfG", "Song of Wisdom", "CatC");
             AddRelationship("Rivendell Minstrel", "THfG", "Gleowine", "Core");
             
-
             AddRelationship("Westfold Horse-Breaker", "THfG", "Eowyn", "Core");
             AddRelationship("Westfold Horse-Breaker", "THfG", "A Test of Will", "Core");
             AddRelationship("Westfold Horse-Breaker", "THfG", "Unexpected Courage", "Core");
 
             AddRelationship("Winged Guardian", "THfG", "Horn of Gondor", "Core");
-            AddRelationship("Winged Guardian", "THfG", "Gandalf", "Core");
             AddRelationship("Winged Guardian", "THfG", "The Eagles Are Coming!", "THfG");
             AddRelationship("Winged Guardian", "THfG", "Vassal of the Windlord", "TDM");
             AddRelationship("Winged Guardian", "THfG", "Eagles of the Misty Mountains", "RtM");
-            AddRelationship("Winged Guardian", "THfG", "Feint", "Core");
+            AddRelationship("Winged Guardian", "THfG", "Descendant of Thorondor", "THoEM");
+            AddRelationship("Winged Guardian", "THfG", "Landroval", "AJtR");
 
-            AddRelationship("Frodo Baggins", "CatC", "A Test of Will", "Core");
-            AddRelationship("Frodo Baggins", "CatC", "Unexpected Courage", "Core");
-            AddRelationship("Frodo Baggins", "CatC", "Imladris Stargazer", "FoS");
+            AddRelationship("Frodo Baggins", "CatC", "Fast Hitch", null);
             AddRelationship("Frodo Baggins", "CatC", "The Galadhrim's Greeting", "Core");
             AddRelationship("Frodo Baggins", "CatC", "Aragorn", "TWitW");
             AddRelationship("Frodo Baggins", "CatC", "Wandering Took", "Core");
             AddRelationship("Frodo Baggins", "CatC", "Gandalf", "Core");
 
-            AddRelationship("Dunedain Warning", "CatC", "Sneak Attack", "Core");
-            AddRelationship("Dunedain Warning", "CatC", "Steward of Gondor", "Core");
-            AddRelationship("Dunedain Warning", "CatC", "Snowbourn Scout", "Core");
-            AddRelationship("Dunedain Warning", "CatC", "Celebrian's Stone", "Core");
+            AddRelationship("Dunedain Warning", "CatC", "Dunedain Quest", null);
+            AddRelationship("Dunedain Warning", "CatC", "Dunedain Mark", null);
+            AddRelationship("Dunedain Warning", "CatC", "Dunedain Cache", null);
+            AddRelationship("Dunedain Warning", "CatC", "Dunedain Signal", null);
 
+            AddRelationship("Haldir of Lorien", "AJtR", "Mirlonde", "TDF");
             AddRelationship("Haldir of Lorien", "AJtR", "Gildor Inglorion", "THoEM");
             AddRelationship("Haldir of Lorien", "AJtR", "Protector of Lorien", "Core");
             AddRelationship("Haldir of Lorien", "AJtR", "A Burning Brand", "CatC");
-            
-            AddRelationship("Ancient Mathom", "AJtR", "Northern Tracker", "Core");
-            AddRelationship("Ancient Mathom", "AJtR", "A Test of Will", "Core");
-            AddRelationship("Ancient Mathom", "AJtR", "Unexpected Courage", "Core");
-            AddRelationship("Ancient Mathom", "AJtR", "Escort from Edoras", "AJtR");
-            AddRelationship("Ancient Mathom", "AJtR", "Glorfindel", "FoS");
-            AddRelationship("Ancient Mathom", "AJtR", "Imladris Stargazer", "FoS");
-            AddRelationship("Ancient Mathom", "AJtR", "Light of Valinor", "FoS");
-            AddRelationship("Ancient Mathom", "AJtR", "Gandalf", "Core");
+            AddRelationship("Haldir of Lorien", "AJtR", "Silvan Tracker", "TDM");
+            AddRelationship("Haldir of Lorien", "AJtR", "Mirkwood Runner", "RtM");
+            AddRelationship("Haldir of Lorien", "AJtR", "Henamarth Riversong", "Core");
+            AddRelationship("Haldir of Lorien", "AJtR", "Daughter of the Nimrodel", "Core");
 
-            AddRelationship("Escort from Edoras", "AJtR", "Hasty Stroke", "Core");
+            AddRelationship("Ancient Mathom", "AJtR", "Northern Tracker", "Core");
+            AddRelationship("Ancient Mathom", "AJtR", "The Riddermark's Finest", "THoEM");
+            AddRelationship("Ancient Mathom", "AJtR", "Asfaloth", "FoS");
+            AddRelationship("Ancient Mathom", "AJtR", "West Road Traveller", "RtM");
+
+            AddRelationship("Escort from Edoras", "AJtR", "Horn of Gondor", "Core");
             AddRelationship("Escort from Edoras", "AJtR", "A Test of Will", "Core");
-            AddRelationship("Escort from Edoras", "AJtR", "Unexpected Courage", "Core");
             AddRelationship("Escort from Edoras", "AJtR", "Ancient Mathom", "AJtR");
             AddRelationship("Escort from Edoras", "AJtR", "West Road Traveller", "RtM");
 
-            AddRelationship("Descendant of Thorondor", "THoEM", "Steward of Gondor", "Core");
-            AddRelationship("Descendant of Thorondor", "THoEM", "Feint", "Core");
             AddRelationship("Descendant of Thorondor", "THoEM", "Winged Guardian", "THfG");
             AddRelationship("Descendant of Thorondor", "THoEM", "Radagast", "AJtR");
             AddRelationship("Descendant of Thorondor", "THoEM", "Vassal of the Windlord", "TDM");
@@ -445,65 +424,34 @@ namespace HallOfBeorn.Services
             AddRelationship("Descendant of Thorondor", "THoEM", "Hail of Stones", "RtR");
             AddRelationship("Descendant of Thorondor", "THoEM", "Sneak Attack", "Core");
             AddRelationship("Descendant of Thorondor", "THoEM", "Horn of Gondor", "Core");
-            AddRelationship("Descendant of Thorondor", "THoEM", "Gandalf", "Core");
+            AddRelationship("Descendant of Thorondor", "THoEM", "Born Aloft", "CatC");
             AddRelationship("Descendant of Thorondor", "THoEM", "Gondorian Spearman", "Core");
 
             AddRelationship("Gildor Inglorion", "THoEM", "Gleowine", "Core");
             AddRelationship("Gildor Inglorion", "THoEM", "Haldir of Lorien", "AJtR");
             AddRelationship("Gildor Inglorion", "THoEM", "Asfaloth", "FoS");
-            AddRelationship("Gildor Inglorion", "THoEM", "Master of the Forge", "SaF");
-            AddRelationship("Gildor Inglorion", "THoEM", "Protector of Lorien", "Core");
             AddRelationship("Gildor Inglorion", "THoEM", "A Burning Brand", "CatC");
-            AddRelationship("Song of Travel", "THoEM", "Protector of Lorien", "Core");
-            AddRelationship("Song of Travel", "THoEM", "A Burning Brand", "CatC");
-            AddRelationship("Song of Travel", "THoEM", "Master of the Forge", "SaF");
-            AddRelationship("Song of Travel", "THoEM", "A Test of Will", "Core");
-            AddRelationship("Song of Travel", "THoEM", "Unexpected Courage", "Core");
-            AddRelationship("The Riddermark's Finest", "THoEM", "A Test of Will", "Core");
-            AddRelationship("The Riddermark's Finest", "THoEM", "Gandalf", "Core");
-            AddRelationship("The Riddermark's Finest", "THoEM", "Elrond's Counsel", "TWitW");
-            AddRelationship("The Riddermark's Finest", "THoEM", "Glorfindel", "FoS");
-            AddRelationship("The Riddermark's Finest", "THoEM", "Light of Valinor", "FoS");
-            AddRelationship("The Riddermark's Finest", "THoEM", "Eowyn", "Core");
-            AddRelationship("The Riddermark's Finest", "THoEM", "Unexpected Courage", "Core");
-            AddRelationship("Elfhelm", "TDM", "Hasty Stroke", "Core");
-            AddRelationship("Elfhelm", "TDM", "A Test of Will", "Core");
-            AddRelationship("Elfhelm", "TDM", "Unexpected Courage", "Core");
-            AddRelationship("Elfhelm", "TDM", "Escort from Edoras", "AJtR");
-            AddRelationship("Elfhelm", "TDM", "Zigil Miner", "KD");
-            AddRelationship("Elfhelm", "TDM", "Arwen Undomiel", "TWitW");
-            AddRelationship("Elfhelm", "TDM", "Glorfindel", "FoS");
-            AddRelationship("Elfhelm", "TDM", "Imladris Stargazer", "FoS");
-            AddRelationship("Elfhelm", "TDM", "Damrod", "HoN");
-            AddRelationship("Elfhelm", "TDM", "Westfold Horse-Breaker", "THfG");
+
+            AddRelationship("Song of Travel", "THoEM", "Song of Battle", "");
+            AddRelationship("Song of Travel", "THoEM", "Song of Kings", "");
+            AddRelationship("Song of Travel", "THoEM", "Song of Wisdome", "");
+            
             AddRelationship("Elfhelm", "TDM", "Eowyn", "Core");
-            AddRelationship("Elfhelm", "TDM", "Gandalf", "Core");
+            AddRelationship("Elfhelm", "TDM", "Dunhere", "Core");
+            AddRelationship("Elfhelm", "TDM", "Eomund", "CatC");
+            AddRelationship("Elfhelm", "TDM", "Escort from Edoras", "AJtR");
+            AddRelationship("Elfhelm", "TDM", "Westfold Horse-Breaker", "THfG");
             AddRelationship("Elfhelm", "TDM", "The Riddermark's Finest", "THoEM");
+
             AddRelationship("Fast Hitch", "TDM", "Unexpected Courage", "Core");
-            AddRelationship("Fast Hitch", "TDM", "A Burning Brand", "CatC");
-            AddRelationship("Fast Hitch", "TDM", "Imladris Stargazer", "FoS");
-            AddRelationship("Fast Hitch", "TDM", "Master of the Forge", "SaF");
-            AddRelationship("Silvan Tracker", "TDM", "A Test of Will", "Core");
-            AddRelationship("Silvan Tracker", "TDM", "Protector of Lorien", "Core");
-            AddRelationship("Silvan Tracker", "TDM", "A Burning Brand", "CatC");
+            AddRelationship("Fast Hitch", "TDM", "Peace, and Thought", "SaF");
+
             AddRelationship("Silvan Tracker", "TDM", "Haldir of Lorien", "AJtR");
-            AddRelationship("Silvan Tracker", "TDM", "Gildor Inglorion", "THoEM");
-            AddRelationship("Silvan Tracker", "TDM", "Arwen Undomiel", "TWitW");
-            AddRelationship("Silvan Tracker", "TDM", "Resourceful", "TWitW");
-            AddRelationship("Silvan Tracker", "TDM", "Daeron's Runes", "FoS");
-            AddRelationship("Silvan Tracker", "TDM", "Glorfindel", "FoS");
-            AddRelationship("Silvan Tracker", "TDM", "Imladris Stargazer", "FoS");
-            AddRelationship("Silvan Tracker", "TDM", "Master of the Forge", "SaF");
             AddRelationship("Silvan Tracker", "TDM", "Mirlonde", "TDF");
             AddRelationship("Silvan Tracker", "TDM", "Daughter of the Nimrodel", "Core");
             AddRelationship("Silvan Tracker", "TDM", "Elrond", "SaF");
             AddRelationship("Silvan Tracker", "TDM", "Mirkwood Runner", "RtM");
-            AddRelationship("Song of Battle", "TDM", "Steward of Gondor", "Core");
-            AddRelationship("Song of Battle", "TDM", "Sneak Attack", "Core");
-            AddRelationship("Song of Battle", "TDM", "Feint", "Core");
-            AddRelationship("Song of Battle", "TDM", "Horn of Gondor", "Core");
-            AddRelationship("Song of Battle", "TDM", "Gandalf", "Core");
-            
+
             AddRelationship("Vassal of the Windlord", "TDM", "Sneak Attack", "Core");
             AddRelationship("Vassal of the Windlord", "TDM", "Steward of Gondor", "Core");
             AddRelationship("Vassal of the Windlord", "TDM", "Gondorian Spearman", "Core");
@@ -523,16 +471,8 @@ namespace HallOfBeorn.Services
             AddRelationship("Eagles of the Misty Mountains", "RtM", "Radagast", "AJtR");
             AddRelationship("Eagles of the Misty Mountains", "RtM", "Descendant of Thorondor", "THoEM");
 
-            AddRelationship("Bifur", "KD", "Erebor Hammersmith", "Core");
-            AddRelationship("Bifur", "KD", "Gleowine", "Core");
-            AddRelationship("Bifur", "KD", "Ranger Spikes", "HoN");
-            AddRelationship("Bifur", "KD", "Cram", "THOHaUH");
-            AddRelationship("Bifur", "KD", "Miner of the Iron Hills", "Core");
-            AddRelationship("Bifur", "KD", "Warden of Healing", "TLD");
-            AddRelationship("Bifur", "KD", "Erebor Record Keeper", "KD");
-            AddRelationship("Bifur", "KD", "Legacy of Durin", "TWitW");
-            AddRelationship("Bifur", "KD", "Daeron's Runes", "FoS");
-            AddRelationship("Bifur", "KD", "We Are Not Idle", "SaF");
+            AddRelationship("Bifur", "KD", "Bifur", "THOtD");
+
             AddRelationship("Erebor Record Keeper", "KD", "Miner of the Iron Hills", "Core");
             AddRelationship("Erebor Record Keeper", "KD", "Lure of Moria", "RtR");
             AddRelationship("Erebor Record Keeper", "KD", "Legacy of Durin", "TWitW");
@@ -544,105 +484,66 @@ namespace HallOfBeorn.Services
             AddRelationship("Erebor Record Keeper", "KD", "Erebor Hammersmith", "Core");
             AddRelationship("Erebor Record Keeper", "KD", "Longbeard Map-Maker", "CatC");
             AddRelationship("Erebor Record Keeper", "KD", "Bifur", "KD");
-            AddRelationship("Erebor Record Keeper", "KD", "Longbeard Elder", "FoS");
-            AddRelationship("Erebor Record Keeper", "KD", "Cram", "THOHaUH");
-            AddRelationship("Narvi's Belt", "KD", "Erebor Record Keeper", "KD");
-            AddRelationship("Narvi's Belt", "KD", "Bofur", "TRG");
-            AddRelationship("Narvi's Belt", "KD", "Lure of Moria", "RtR");
-            AddRelationship("Narvi's Belt", "KD", "Erebor Battle Master", "TLD");
-            AddRelationship("Narvi's Belt", "KD", "We Are Not Idle", "SaF");
-            AddRelationship("Narvi's Belt", "KD", "A Very Good Tale", "THOHaUH");
-            AddRelationship("Narvi's Belt", "KD", "Fili", "THOHaUH");
-            AddRelationship("Narvi's Belt", "KD", "Kili", "THOHaUH");
+
+            AddRelationship("Narvi's Belt", "KD", "Thorin Oakenshield", "THOtD");
+            AddRelationship("Narvi's Belt", "KD", "Dain Ironfoot", "RtM");
+            AddRelationship("Narvi's Belt", "KD", "Thorin Oakenshield", "THOtD");
+            AddRelationship("Narvi's Belt", "KD", "Gloin", "Core");
             AddRelationship("Narvi's Belt", "KD", "Balin", "THOtD");
-            AddRelationship("Narvi's Belt", "KD", "King Under the Mountain", "THOtD");
-            AddRelationship("Narvi's Belt", "KD", "Sneak Attack", "Core");
-            AddRelationship("Narvi's Belt", "KD", "Gandalf", "Core");
-            AddRelationship("Narvi's Belt", "KD", "Longbeard Elder", "FoS");
-            AddRelationship("Narvi's Belt", "KD", "Cram", "THOHaUH");
-            AddRelationship("Zigil Miner", "KD", "A Test of Will", "Core");
-            AddRelationship("Zigil Miner", "KD", "Glorfindel", "FoS");
+
             AddRelationship("Zigil Miner", "KD", "Imladris Stargazer", "FoS");
+            AddRelationship("Zigil Miner", "KD", "Hidden Cache", "TMV");
+
+            AddRelationship("Bofur", "TRG", "Bofur", "THOHaUH");
             AddRelationship("Bofur", "TRG", "Zigil Miner", "KD");
-            AddRelationship("Bofur", "TRG", "Lure of Moria", "RtR");
-            AddRelationship("Bofur", "TRG", "Erebor Battle Master", "TLD");
-            AddRelationship("Bofur", "TRG", "We Are Not Idle", "SaF");
-            AddRelationship("Bofur", "TRG", "A Very Good Tale", "THOHaUH");
             AddRelationship("Bofur", "TRG", "Fili", "THOHaUH");
             AddRelationship("Bofur", "TRG", "Kili", "THOHaUH");
-            AddRelationship("Bofur", "TRG", "Balin", "THOtD");
-            AddRelationship("Bofur", "TRG", "King Under the Mountain", "THOtD");
-            AddRelationship("Bofur", "TRG", "Sneak Attack", "Core");
-            AddRelationship("Bofur", "TRG", "Gandalf", "Core");
-            AddRelationship("Bofur", "TRG", "Feint", "Core");
-            AddRelationship("Bofur", "TRG", "A Test of Will", "Core");
+            AddRelationship("Bofur", "TRG", "Horn of Gondor", "Core");
             
             AddRelationship("Hail of Stones", "RtR", "Gondorian Spearman", "Core");
-            AddRelationship("Hail of Stones", "RtR", "Blade of Gondolin", "Core");
             AddRelationship("Hail of Stones", "RtR", "Horn of Gondor", "Core");
-            AddRelationship("Hail of Stones", "RtR", "The Eagles Are Coming!", "THfG");
             AddRelationship("Hail of Stones", "RtR", "Winged Guardian", "THfG");
             AddRelationship("Hail of Stones", "RtR", "Vassal of the Windlord", "TDM");
+            AddRelationship("Hail of Stones", "RtR", "Thalin", "Core");
             AddRelationship("Hail of Stones", "RtR", "Hands Upon the Bow", "SaF");
-            AddRelationship("Hail of Stones", "RtR", "Feint", "Core");
-            AddRelationship("Hail of Stones", "RtR", "Descendant of Thorondor", "THoEM");
-            
-            AddRelationship("Lure of Moria", "RtR", "Miner of the Iron Hills", "Core");
+
             AddRelationship("Lure of Moria", "RtR", "Erebor Record Keeper", "KD");
-            AddRelationship("Lure of Moria", "RtR", "Narvi's Belt", "KD");
-            AddRelationship("Lure of Moria", "RtR", "Bofur", "TRG");
-            AddRelationship("Lure of Moria", "RtR", "Legacy of Durin", "TWitW");
-            AddRelationship("Lure of Moria", "RtR", "Erebor Battle Master", "TLD");
-            AddRelationship("Lure of Moria", "RtR", "Daeron's Runes", "FoS");
             AddRelationship("Lure of Moria", "RtR", "We Are Not Idle", "SaF");
-            AddRelationship("Lure of Moria", "RtR", "A Very Good Tale", "THOHaUH");
             AddRelationship("Lure of Moria", "RtR", "Fili", "THOHaUH");
             AddRelationship("Lure of Moria", "RtR", "Kili", "THOHaUH");
-            AddRelationship("Lure of Moria", "RtR", "Balin", "THOtD");
-            AddRelationship("Lure of Moria", "RtR", "King Under the Mountain", "THOtD");
             AddRelationship("Lure of Moria", "RtR", "Longbeard Orc Slayer", "Core");
-            AddRelationship("Lure of Moria", "RtR", "Sneak Attack", "Core");
             AddRelationship("Lure of Moria", "RtR", "Longbeard Elder", "FoS");
             AddRelationship("Lure of Moria", "RtR", "Cram", "THOHaUH");
             
-            AddRelationship("Rivendell Blade", "RtR", "Sneak Attack", "Core");
-            AddRelationship("Rivendell Blade", "RtR", "Steward of Gondor", "Core");
-            AddRelationship("Rivendell Blade", "RtR", "Feint", "Core");
-            AddRelationship("Rivendell Blade", "RtR", "Gandalf", "Core");
-            AddRelationship("Rivendell Blade", "RtR", "Vassal of the Windlord", "TDM");
-            AddRelationship("Rivendell Blade", "RtR", "Light of Valinor", "FoS");
-            AddRelationship("Rivendell Blade", "RtR", "Horn of Gondor", "Core");
-            
-            AddRelationship("Aragorn", "TWitW", "Steward of Gondor", "Core");
+            AddRelationship("Rivendell Blade", "RtR", "Legolas", "Core");
+            AddRelationship("Rivendell Blade", "RtR", "Blade of Gondolin", "Core");
+            AddRelationship("Rivendell Blade", "RtR", "Elladan", "RtR");
+            AddRelationship("Rivendell Blade", "RtR", "Elrohir", "TRG");
+            AddRelationship("Rivendell Blade", "RtR", "Glorfindel", "Core");
+            AddRelationship("Rivendell Blade", "RtR", "Glorfindel", "FoS");
+            AddRelationship("Rivendell Blade", "RtR", "Rivendell Bow", "TWitW");
+            AddRelationship("Rivendell Blade", "RtR", "Mirlonde", "TDF");
+            AddRelationship("Rivendell Blade", "RtR", "Elrond", "SaF");
+            AddRelationship("Rivendell Blade", "RtR", "Foe-hammer", "THOHaUH");
+            AddRelationship("Rivendell Blade", "RtR", "Goblin-cleaver", "THOHaUH");
+
             AddRelationship("Aragorn", "TWitW", "Celebrian's Stone", "Core");
             AddRelationship("Aragorn", "TWitW", "Protector of Lorien", "Core");
             AddRelationship("Aragorn", "TWitW", "Rivendell Minstrel", "THfG");
             AddRelationship("Aragorn", "TWitW", "Song of Kings", "THfG");
             AddRelationship("Aragorn", "TWitW", "A Burning Brand", "CatC");
-            AddRelationship("Aragorn", "TWitW", "Gildor Inglorion", "THoEM");
             AddRelationship("Aragorn", "TWitW", "Song of Travel", "THoEM");
             AddRelationship("Aragorn", "TWitW", "Sword that was Broken", "TWitW");
-            AddRelationship("Aragorn", "TWitW", "Asfaloth", "FoS");
-            AddRelationship("Aragorn", "TWitW", "Daeron's Runes", "FoS");
-            AddRelationship("Aragorn", "TWitW", "Master of the Forge", "SaF");
-            AddRelationship("Aragorn", "TWitW", "Ranger Spikes", "HoN");
-            AddRelationship("Aragorn", "TWitW", "A Test of Will", "Core");
-            
-            AddRelationship("Arwen Undomiel", "TWitW", "A Test of Will", "Core");
-            AddRelationship("Arwen Undomiel", "TWitW", "Unexpected Courage", "Core");
-            AddRelationship("Arwen Undomiel", "TWitW", "Glorfindel", "FoS");
-            AddRelationship("Arwen Undomiel", "TWitW", "Imladris Stargazer", "FoS");
-            AddRelationship("Arwen Undomiel", "TWitW", "Light of Valinor", "FoS");
-            AddRelationship("Arwen Undomiel", "TWitW", "Gandalf", "Core");
+            AddRelationship("Aragorn", "TWitW", "Ring of Barahir", "TSF");
+
+            AddRelationship("Arwen Undomiel", "TWitW", "Gandalf", "THOHaUH");
             AddRelationship("Arwen Undomiel", "TWitW", "Elrond's Counsel", "TWitW");
             
             AddRelationship("Elrond's Counsel", "TWitW", "A Test of Will", "Core");
             AddRelationship("Elrond's Counsel", "TWitW", "Gandalf", "Core");
+            AddRelationship("Elrond's Counsel", "TWitW", "Gandalf", "THOHaUH");
             AddRelationship("Elrond's Counsel", "TWitW", "Arwen Undomiel", "TWitW");
             AddRelationship("Elrond's Counsel", "TWitW", "Glorfindel", "FoS");
-            AddRelationship("Elrond's Counsel", "TWitW", "Light of Valinor", "FoS");
-            AddRelationship("Elrond's Counsel", "TWitW", "Unexpected Courage", "Core");
-            AddRelationship("Elrond's Counsel", "TWitW", "Imladris Stargazer", "FoS");
             
             AddRelationship("Legacy of Durin", "TWitW", "Miner of the Iron Hills", "Core");
             AddRelationship("Legacy of Durin", "TWitW", "Erebor Record Keeper", "KD");
@@ -652,45 +553,37 @@ namespace HallOfBeorn.Services
             AddRelationship("Legacy of Durin", "TWitW", "Erebor Hammersmith", "Core");
             AddRelationship("Legacy of Durin", "TWitW", "Longbeard Map-Maker", "CatC");
             AddRelationship("Legacy of Durin", "TWitW", "Bifur", "KD");
-            AddRelationship("Legacy of Durin", "TWitW", "Longbeard Elder", "FoS");
+            AddRelationship("Legacy of Durin", "TWitW", "Ori", "THOHaUH");
+            AddRelationship("Legacy of Durin", "TWitW", "Bombur", "THOtD");
             
             AddRelationship("Resourceful", "TWitW", "Arwen Undomiel", "TWitW");
             AddRelationship("Resourceful", "TWitW", "Glorfindel", "FoS");
-            AddRelationship("Resourceful", "TWitW", "Imladris Stargazer", "FoS");
-            AddRelationship("Resourceful", "TWitW", "Light of Valinor", "FoS");
-            AddRelationship("Resourceful", "TWitW", "Gleowine", "Core");
-            AddRelationship("Resourceful", "TWitW", "Gildor Inglorion", "THoEM");
             
             AddRelationship("Sword that was Broken", "TWitW", "Steward of Gondor", "Core");
             AddRelationship("Sword that was Broken", "TWitW", "Celebrian's Stone", "Core");
             AddRelationship("Sword that was Broken", "TWitW", "Aragorn", "Core");
             AddRelationship("Sword that was Broken", "TWitW", "Faramir", "Core");
-            AddRelationship("Sword that was Broken", "TWitW", "Sneak Attack", "Core");
-            AddRelationship("Sword that was Broken", "TWitW", "Gandalf", "Core");
-            AddRelationship("Sword that was Broken", "TWitW", "Errand-rider", "HoN");
-            
-            AddRelationship("Erebor Battle Master", "TLD", "Zigil Miner", "KD");
-            AddRelationship("Erebor Battle Master", "TLD", "Bofur", "TRG");
-            AddRelationship("Erebor Battle Master", "TLD", "Lure of Moria", "RtR");
+            AddRelationship("Sword that was Broken", "TWitW", "Visionary Leadership", "TMV");
+
+            AddRelationship("Erebor Battle Master", "TLD", "Gimli", "Core");
+            AddRelationship("Erebor Battle Master", "TLD", "Thalin", "Core");
+            AddRelationship("Erebor Battle Master", "TLD", "Bofur", "THOHaUH");
+            AddRelationship("Erebor Battle Master", "TLD", "Veteran Axehand", "Core");
+            AddRelationship("Erebor Battle Master", "TLD", "Veteran of Nanduhirion", "Core");
             AddRelationship("Erebor Battle Master", "TLD", "We Are Not Idle", "SaF");
-            AddRelationship("Erebor Battle Master", "TLD", "Fili", "THOHaUH");
-            AddRelationship("Erebor Battle Master", "TLD", "Kili", "THOHaUH");
-            AddRelationship("Erebor Battle Master", "TLD", "Sneak Attack", "Core");
+            
+            AddRelationship("Warden of Healing", "TLD", "Elrond", "SaF");
+            AddRelationship("Warden of Healing", "TLD", "Daughter of the Nimrodel", "Core");
+            AddRelationship("Warden of Healing", "TLD", "Denethor", "Core");
+            AddRelationship("Warden of Healing", "TLD", "Faramir", "AoO");
 
-            AddRelationship("Warden of Healing", "TLD", "Gleowine", "Core");
-            AddRelationship("Warden of Healing", "TLD", "Gandalf", "Core");
+            AddRelationship("Asfaloth", "FoS", "Glorfindel", "Core");
+            AddRelationship("Asfaloth", "FoS", "Glorfindel", "FoS");
+            AddRelationship("Asfaloth", "FoS", "Elf-Stone", "TBR");
+            AddRelationship("Asfaloth", "FoS", "Ancient Mathom", "AJtR");
+            AddRelationship("Asfaloth", "FoS", "Northern Tracker", "Core");
 
-            AddRelationship("Asfaloth", "FoS", "A Test of Will", "Core");
-            AddRelationship("Asfaloth", "FoS", "Gleowine", "Core");
-            AddRelationship("Asfaloth", "FoS", "Gildor Inglorion", "THoEM");
-            AddRelationship("Asfaloth", "FoS", "Elrond's Counsel", "TWitW");
-            AddRelationship("Asfaloth", "FoS", "Light of Valinor", "FoS");
-            AddRelationship("Asfaloth", "FoS", "Master of the Forge", "SaF");
-            AddRelationship("Asfaloth", "FoS", "Unexpected Courage", "Core");
-            AddRelationship("Asfaloth", "FoS", "A Burning Brand", "CatC");
-            AddRelationship("Asfaloth", "FoS", "Imladris Stargazer", "FoS");
-
-            AddRelationship("Glorfindel", "FoS", "A Test of Will", "Core");
+            AddRelationship("Glorfindel", "FoS", "Glorfindel", "Core");
             AddRelationship("Glorfindel", "FoS", "Unexpected Courage", "Core");
             AddRelationship("Glorfindel", "FoS", "Arwen Undomiel", "TWitW");
             AddRelationship("Glorfindel", "FoS", "Imladris Stargazer", "FoS");
@@ -700,61 +593,44 @@ namespace HallOfBeorn.Services
             AddRelationship("Glorfindel", "FoS", "Elrond's Counsel", "TWitW");
             AddRelationship("Glorfindel", "FoS", "Asfaloth", "FoS");
 
-            AddRelationship("Imladris Stargazer", "FoS", "A Test of Will", "Core");
-            AddRelationship("Imladris Stargazer", "FoS", "Unexpected Courage", "Core");
-            AddRelationship("Imladris Stargazer", "FoS", "Glorfindel", "FoS");
-            AddRelationship("Imladris Stargazer", "FoS", "Light of Valinor", "FoS");
-            AddRelationship("Imladris Stargazer", "FoS", "Gandalf", "Core");
-            AddRelationship("Imladris Stargazer", "FoS", "Elrond's Counsel", "TWitW");
+            AddRelationship("Imladris Stargazer", "FoS", "Elrond", "SaF");
+            AddRelationship("Imladris Stargazer", "FoS", "Vilya", "SaF");
+            AddRelationship("Imladris Stargazer", "FoS", "Zigil Miner", "KD");
             
-            AddRelationship("Light of Valinor", "FoS", "A Test of Will", "Core");
-            AddRelationship("Light of Valinor", "FoS", "Unexpected Courage", "Core");
-            AddRelationship("Light of Valinor", "FoS", "Arwen Undomiel", "TWitW");
             AddRelationship("Light of Valinor", "FoS", "Glorfindel", "FoS");
-            AddRelationship("Light of Valinor", "FoS", "Imladris Stargazer", "FoS");
-            AddRelationship("Light of Valinor", "FoS", "Gandalf", "Core");
-            AddRelationship("Light of Valinor", "FoS", "Elrond's Counsel", "TWitW");
+            AddRelationship("Light of Valinor", "FoS", "Glorfindel", "Core");
+            AddRelationship("Light of Valinor", "FoS", "Elrond", "SaF");
+            AddRelationship("Light of Valinor", "FoS", "Elladan", "RtR");
+            AddRelationship("Light of Valinor", "FoS", "Elrohir", "TRG");
             
             AddRelationship("Longbeard Elder", "FoS", "Longbeard Orc Slayer", "Core");
             AddRelationship("Longbeard Elder", "FoS", "Lure of Moria", "RtR");
             AddRelationship("Longbeard Elder", "FoS", "We Are Not Idle", "SaF");
             AddRelationship("Longbeard Elder", "FoS", "Fili", "THOHaUH");
             AddRelationship("Longbeard Elder", "FoS", "Kili", "THOHaUH");
-            AddRelationship("Longbeard Elder", "FoS", "Miner of the Iron Hills", "Core");
-            AddRelationship("Longbeard Elder", "FoS", "Cram", "THOHaUH");
             AddRelationship("Longbeard Elder", "FoS", "Gloin", "Core");
-            AddRelationship("Longbeard Elder", "FoS", "Erebor Hammersmith", "Core");
-            AddRelationship("Longbeard Elder", "FoS", "Bifur", "KD");
-            AddRelationship("Longbeard Elder", "FoS", "Erebor Record Keeper", "KD");
-            AddRelationship("Longbeard Elder", "FoS", "Legacy of Durin", "TWitW");
-            
+            AddRelationship("Longbeard Elder", "FoS", "Brok Ironfist", "Core");
+
             AddRelationship("Elrond", "SaF", "Gildor Inglorion", "THoEM");
             AddRelationship("Elrond", "SaF", "A Burning Brand", "CatC");
             AddRelationship("Elrond", "SaF", "Vilya", "SaF");
             AddRelationship("Elrond", "SaF", "Warden of Healing", "TLD");
             AddRelationship("Elrond", "SaF", "Imladris Stargazer", "FoS");
             AddRelationship("Elrond", "SaF", "Unexpected Courage", "Core");
+            AddRelationship("Elrond", "SaF", "Miruvor", "SaF");
 
             AddRelationship("Hands Upon the Bow", "SaF", "Legolas", "Core");
-            AddRelationship("Hands Upon the Bow", "SaF", "Feint", "Core");
-            AddRelationship("Hands Upon the Bow", "SaF", "Blade of Gondolin", "Core");
-            AddRelationship("Hands Upon the Bow", "SaF", "Gandalf", "Core");
-            AddRelationship("Hands Upon the Bow", "SaF", "Foe-hammer", "THOHaUH");
+            AddRelationship("Hands Upon the Bow", "SaF", "Vassal of the Windlord", "TDM");
             AddRelationship("Hands Upon the Bow", "SaF", "Brand son of Bain", "THoEM");
             AddRelationship("Hands Upon the Bow", "SaF", "Bard the Bowman", "THOtD");
+            AddRelationship("Hands Upon the Bow", "SaF", "Horseback Archer", "Core");
+            AddRelationship("Hands Upon the Bow", "SaF", "Trollshaw Scout", "FoS");
 
             AddRelationship("Master of the Forge", "SaF", "Gleowine", "Core");
-            AddRelationship("Master of the Forge", "SaF", "Asfaloth", "FoS");
-            AddRelationship("Master of the Forge", "SaF", "Light of Valinor", "FoS");
-            AddRelationship("Master of the Forge", "SaF", "A Burning Brand", "CatC");
+            AddRelationship("Master of the Forge", "SaF", "Imladris Stargazer", "FoS");
+            AddRelationship("Master of the Forge", "SaF", "Gildor Inglorion", "THoEM");
             
-            AddRelationship("Miruvor", "SaF", "A Test of Will", "Core");
             AddRelationship("Miruvor", "SaF", "Unexpected Courage", "Core");
-            AddRelationship("Miruvor", "SaF", "A Burning Brand", "CatC");
-            AddRelationship("Miruvor", "SaF", "Elrond's Counsel", "TWitW");
-            AddRelationship("Miruvor", "SaF", "Imladris Stargazer", "FoS");
-            AddRelationship("Miruvor", "SaF", "Light of Valinor", "FoS");
-            AddRelationship("Miruvor", "SaF", "Master of the Forge", "SaF");
             
             AddRelationship("Peace, and Thought", "SaF", "Gleowine", "Core");
             AddRelationship("Peace, and Thought", "SaF", "Unexpected Courage", "Core");
@@ -762,21 +638,15 @@ namespace HallOfBeorn.Services
             AddRelationship("Peace, and Thought", "SaF", "Cram", "THOHaUH");
             AddRelationship("Peace, and Thought", "SaF", "Miruvor", "SaF");
 
-            AddRelationship("We Are Not Idle", "SaF", "Sneak Attack", "Core");
-            AddRelationship("We Are Not Idle", "SaF", "Gandalf", "Core");
             AddRelationship("We Are Not Idle", "SaF", "Lure of Moria", "RtR");
             AddRelationship("We Are Not Idle", "SaF", "Longbeard Elder", "FoS");
             AddRelationship("We Are Not Idle", "SaF", "Cram", "THOHaUH");
             
-            AddRelationship("Envoy of Pelargir", "HoN", "Faramir", "Core");
-            AddRelationship("Envoy of Pelargir", "HoN", "Sneak Attack", "Core");
-            AddRelationship("Envoy of Pelargir", "HoN", "Steward of Gondor", "Core");
-            AddRelationship("Envoy of Pelargir", "HoN", "Gandalf", "Core");
+            AddRelationship("Envoy of Pelargir", "HoN", "White Tower Watchman", "TDF");
             
             AddRelationship("Errand-rider", "HoN", "Faramir", "Core");
-            AddRelationship("Errand-rider", "HoN", "Sneak Attack", "Core");
             AddRelationship("Errand-rider", "HoN", "Steward of Gondor", "Core");
-            AddRelationship("Errand-rider", "HoN", "Gandalf", "Core");
+            AddRelationship("Errand-rider", "HoN", "Boromir", "HoN");
             
             AddRelationship("Ithilien Tracker", "HoN", "Denethor", "Core");
             AddRelationship("Ithilien Tracker", "HoN", "Warden of Healing", "TLD");
@@ -785,27 +655,24 @@ namespace HallOfBeorn.Services
             AddRelationship("Ithilien Tracker", "HoN", "Ithilien Archer", "EaAD");
             AddRelationship("Ithilien Tracker", "HoN", "Ranger Bow", "AoO");
             
-            AddRelationship("Ranger Spikes", "HoN", "Gleowine", "Core");
             AddRelationship("Ranger Spikes", "HoN", "Erebor Hammersmith", "Core");
+            AddRelationship("Ranger Spikes", "HoN", "Anborn", "TBoG");
+            AddRelationship("Ranger Spikes", "HoN", "Poisoned Stakes", "TBoG");
+            AddRelationship("Ranger Spikes", "HoN", "Ithilien Pit", "EaAD");
 
             AddRelationship("Gondorian Shield", "TSF", "Denethor", "Core");
+            AddRelationship("Gondorian Shield", "TSF", "Boromir", "TDM");
             AddRelationship("Gondorian Shield", "TSF", "Beregond", "HoN");
             AddRelationship("Gondorian Shield", "TSF", "Horn of Gondor", "Core");
             
             AddRelationship("A Very Good Tale", "THOHaUH", "Sneak Attack", "Core");
             AddRelationship("A Very Good Tale", "THOHaUH", "Steward of Gondor", "Core");
             AddRelationship("A Very Good Tale", "THOHaUH", "Gandalf", "Core");
+            AddRelationship("A Very Good Tale", "THOHaUH", "Gandalf", "THOHaUH");
             AddRelationship("A Very Good Tale", "THOHaUH", "We Are Not Idle", "SaF");
-            AddRelationship("A Very Good Tale", "THOHaUH", "Balin", "THOtD");
-            AddRelationship("A Very Good Tale", "THOHaUH", "King Under the Mountain", "THOtD");
             AddRelationship("A Very Good Tale", "THOHaUH", "Fili", "THOHaUH");
             AddRelationship("A Very Good Tale", "THOHaUH", "Kili", "THOHaUH");
             
-            AddRelationship("Cram", "THOHaUH", "Sneak Attack", "Core");
-            AddRelationship("Cram", "THOHaUH", "Gandalf", "Core");
-            AddRelationship("Cram", "THOHaUH", "We Are Not Idle", "SaF");
-            AddRelationship("Cram", "THOHaUH", "Erebor Hammersmith", "Core");
-
             AddRelationship("Fili", "THOHaUH", "Zigil Miner", "KD");
             AddRelationship("Fili", "THOHaUH", "Bofur", "TRG");
             AddRelationship("Fili", "THOHaUH", "Lure of Moria", "RtR");
@@ -832,14 +699,12 @@ namespace HallOfBeorn.Services
             AddRelationship("Kili", "THOHaUH", "Zigil Miner", "KD");
             AddRelationship("Kili", "THOHaUH", "Bofur", "TRG");
             AddRelationship("Kili", "THOHaUH", "Lure of Moria", "RtR");
-            AddRelationship("Kili", "THOHaUH", "Erebor Battle Master", "TLD");
             AddRelationship("Kili", "THOHaUH", "We Are Not Idle", "SaF");
             AddRelationship("Kili", "THOHaUH", "A Very Good Tale", "THOHaUH");
             AddRelationship("Kili", "THOHaUH", "Fili", "THOHaUH");
             AddRelationship("Kili", "THOHaUH", "Balin", "THOtD");
             AddRelationship("Kili", "THOHaUH", "King Under the Mountain", "THOtD");
             AddRelationship("Kili", "THOHaUH", "Longbeard Elder", "FoS");
-            AddRelationship("Kili", "THOHaUH", "Cram", "THOHaUH");
 
             AddRelationship("Balin", "THOtD", "Steward of Gondor", "Core");
             AddRelationship("Balin", "THOtD", "Gandalf", "Core");
@@ -849,10 +714,7 @@ namespace HallOfBeorn.Services
             AddRelationship("Balin", "THOtD", "A Very Good Tale", "THOHaUH");
             AddRelationship("Balin", "THOtD", "King Under the Mountain", "THOtD");
             AddRelationship("Balin", "THOtD", "Narvi's Belt", "KD");
-            AddRelationship("Balin", "THOtD", "Zigil Miner", "KD");
-            AddRelationship("Balin", "THOtD", "Bofur", "TRG");
             AddRelationship("Balin", "THOtD", "Lure of Moria", "RtR");
-            AddRelationship("Balin", "THOtD", "Erebor Battle Master", "TLD");
             AddRelationship("Balin", "THOtD", "Fili", "THOHaUH");
             AddRelationship("Balin", "THOtD", "Kili", "THOHaUH");
             
@@ -861,14 +723,14 @@ namespace HallOfBeorn.Services
             AddRelationship("King Under the Mountain", "THOtD", "A Very Good Tale", "THOHaUH");
             AddRelationship("King Under the Mountain", "THOtD", "Balin", "THOtD");
             AddRelationship("King Under the Mountain", "THOtD", "Narvi's Belt", "KD");
-            AddRelationship("King Under the Mountain", "THOtD", "Zigil Miner", "KD");
-            AddRelationship("King Under the Mountain", "THOtD", "Bofur", "TRG");
             AddRelationship("King Under the Mountain", "THOtD", "Lure of Moria", "RtR");
-            AddRelationship("King Under the Mountain", "THOtD", "Erebor Battle Master", "TLD");
             AddRelationship("King Under the Mountain", "THOtD", "Fili", "THOHaUH");
             AddRelationship("King Under the Mountain", "THOtD", "Kili", "THOHaUH");
 
+            AddRelationship("Boromir", "TDM", "Boromir", "HoN");
             AddRelationship("Boromir", "TDM", "Gandalf", "Core");
+
+            AddRelationship("Pippin", "EaAD", "Pippin", "TBR");
         }
 
         public IEnumerable<Card> All()
