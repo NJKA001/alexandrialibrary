@@ -8,7 +8,7 @@ namespace HallOfBeorn.Models.Decks.HallOfBeorn
     public class WarriorsOfTheWhiteTower : Deck
     {
         public WarriorsOfTheWhiteTower()
-            : base("Warrior's of the White Tower", "http://hallofbeorn.wordpress.com/2013/12/17/deck-warriors-of-the-white-tower/")
+            : base("Warriors of the White Tower", "http://hallofbeorn.wordpress.com/2013/12/17/deck-warriors-of-the-white-tower/")
         {
             DeckList =
 @"Beregond
