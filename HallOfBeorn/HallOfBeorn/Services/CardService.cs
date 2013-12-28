@@ -154,6 +154,8 @@ namespace HallOfBeorn.Services
 
         private void LoadDecks()
         {
+            AddDeck(new WarriorsOfTheWhiteTower());
+            AddDeck(new TheSpiritOfGondor());
             AddDeck(new FaramirAndTheRangersOfIthilien());
             AddDeck(new BoromirLeadsTheCharge());
             AddDeck(new CaldarasSacrifice());

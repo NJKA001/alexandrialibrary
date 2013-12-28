@@ -245,10 +245,12 @@
     <Compile Include="Models\Decks\HallOfBeorn\TheIslandOfMisfitHeroes.cs" />
     <Compile Include="Models\Decks\HallOfBeorn\ThePowerOfThePalantir.cs" />
     <Compile Include="Models\Decks\HallOfBeorn\TheRohirrimRideWithTheGreyCompany.cs" />
+    <Compile Include="Models\Decks\HallOfBeorn\TheSpiritOfGondor.cs" />
     <Compile Include="Models\Decks\HallOfBeorn\ThreeKingsAQueenAndAPrince.cs" />
     <Compile Include="Models\Decks\HallOfBeorn\TwoKingdomsReunited.cs" />
     <Compile Include="Models\Decks\HallOfBeorn\VilyaTheRingOfAir.cs" />
     <Compile Include="Models\Decks\HallOfBeorn\WardensOfImladris.cs" />
+    <Compile Include="Models\Decks\HallOfBeorn\WarriorsOfTheWhiteTower.cs" />
     <Compile Include="Models\Decks\TalesFromTheCards\BlazeOfGlory.cs" />
     <Compile Include="Models\Decks\TalesFromTheCards\EleanorsBigAdventure.cs" />
     <Compile Include="Models\Decks\TalesFromTheCards\OutlandsGoneWild.cs" />
