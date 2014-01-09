@@ -197,7 +197,7 @@
                                         }
                                         else if (token.IsTrait)
                                         {
-                                            <a title="Trait Search" href='@string.Format("/Cards/Search?Trait={0}.", @token.Text.Trim())'><b><i>@token.Text</i></b></a>
+                                            <a title="Trait Search" href='@string.Format("/Cards/Search?Trait={0}.", @token.Text.Trim().TrimEnd('.'))'><b><i>@token.Text</i></b></a>
                                 
                                             if (token.HasSuffix)
                                             {
