@@ -137,7 +137,7 @@
                             <div style="text-align:center;">
                             @foreach (var trait in Model.Traits)
                             {
-                                <b><i>@trait</i></b> @: &nbsp;
+                                <a title="Trait Search" href='@string.Format("/Cards/Search?Trait={0}", @trait.Trim())'><b><i>@trait</i></b></a> @: &nbsp;
                             }
                             </div>
                         }
@@ -150,7 +150,7 @@
                                 {
                                     if (token.IsTrait)
                                     {
-                                        <b><i>@token.Text</i></b>
+                                        <a title="Trait Search" href='@string.Format("/Cards/Search?Trait={0}", @token.Text.Trim())'><b><i>@token.Text</i></b></a>
                                 
                                         if (token.HasSuffix)
                                         {
@@ -197,7 +197,7 @@
                                         }
                                         else if (token.IsTrait)
                                         {
-                                            <b><i>@token.Text</i></b>
+                                            <a title="Trait Search" href='@string.Format("/Cards/Search?Trait={0}.", @token.Text.Trim())'><b><i>@token.Text</i></b></a>
                                 
                                             if (token.HasSuffix)
                                             {
