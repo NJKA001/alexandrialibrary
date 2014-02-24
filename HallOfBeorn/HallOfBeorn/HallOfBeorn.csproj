@@ -295,6 +295,7 @@
     <Compile Include="Models\Sets\The_Stewards_Fear.cs" />
     <Compile Include="Models\Sets\The_Stone_of_Erech.cs" />
     <Compile Include="Models\Sets\The_Watcher_in_the_Water.cs" />
+    <Compile Include="Models\Sets\Voice_of_Isengard.cs" />
     <Compile Include="Models\SetType.cs" />
     <Compile Include="Models\Sort.cs" />
     <Compile Include="Models\Sphere.cs" />

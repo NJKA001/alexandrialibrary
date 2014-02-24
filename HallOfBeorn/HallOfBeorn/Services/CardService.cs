@@ -134,6 +134,8 @@ namespace HallOfBeorn.Services
             AddSet(new TheBloodofGondor());
             AddSet(new TheMorgulVale());
 
+            AddSet(new VoiceofIsengard());
+
             AddSet(new TheHobbitOverHillandUnderHill());
             AddSet(new TheHobbitOntheDoorstep());
             AddSet(new TheBlackRiders());
@@ -733,6 +735,25 @@ namespace HallOfBeorn.Services
             AddRelationship("Boromir", "TDM", "Gandalf", "Core");
 
             AddRelationship("Pippin", "EaAD", "Pippin", "TBR");
+
+            AddRelationship("Eomer", "VoI", "Theoden", "TMV");
+            AddRelationship("Eomer", "VoI", "Hama", "TLD");
+            AddRelationship("Eomer", "VoI", "Eomund", "CatC");
+
+            AddRelationship("Legacy of Numenor", "VoI", "Deep Knowledge", "VoI");
+            AddRelationship("Legacy of Numenor", "VoI", "Power of Orthanc", "VoI");
+            AddRelationship("Legacy of Numenor", "VoI", "The Wizard's Voice", "VoI");
+            AddRelationship("Legacy of Numenor", "VoI", "The Seeing-stone", "VoI");
+            AddRelationship("Deep Knowledge", "VoI", "Power of Orthanc", "VoI");
+            AddRelationship("Deep Knowledge", "VoI", "The Wizard's Voice", "VoI");
+            AddRelationship("Deep Knowledge", "VoI", "The Seeing-stone", "VoI");
+            AddRelationship("Power of Orthanc", "VoI", "The Wizard's Voice", "VoI");
+            AddRelationship("Power of Orthanc", "VoI", "The Seeing-Stone", "VoI");
+            AddRelationship("The Wizard's Voice", "VoI", "The Seeing-Stone", "VoI");
+
+            AddRelationship("Westfold Horse-breeder", "VoI", "Steed of the Mark", "TMV");
+            AddRelationship("Westfold Horse-breeder", "VoI", "Rohan Warhorse", "VoI");
+            AddRelationship("Westfold Horse-breeder", "VoI", "Asfaloth", "FoS");
         }
 
         public IEnumerable<Card> All()

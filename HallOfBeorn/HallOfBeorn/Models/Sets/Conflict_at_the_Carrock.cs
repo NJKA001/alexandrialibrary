@@ -109,7 +109,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1177",
-                Title = "Eomund",
+                Title = "Éomund",
+                NormalizedTitle = "Eomund",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9009",
                 CardType = CardType.Ally,
                 Sphere = Sphere.Spirit,
@@ -121,7 +122,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 1,
                 Willpower = 2,
                 HitPoints = 2,
-                Text = "Response: After Eomund leaves play, ready all Rohan characters in play.",
+                Text = "Response: After Éomund leaves play, ready all Rohan characters in play.",
                 Number = 8
             });
             Cards.Add(new Card() {
