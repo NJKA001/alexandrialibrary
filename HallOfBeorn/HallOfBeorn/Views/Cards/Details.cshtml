@@ -7,7 +7,7 @@
 
 <h2>@Model.Title</h2>
 <div style="color:#616161;font-weight:bold;">
-    <span>@Model.SetName</span><span style="margin-left:6px;">@string.Format("#{0} (x{1})", @Model.Number, @Model.Quantity)</span>
+    <span><a href="@Model.SetSearchUrl" title="Search for @Model.SetName">@Model.SetName</a></span><span style="margin-left:6px;">@string.Format("#{0} (x{1})", @Model.Number, @Model.Quantity)</span>
 </div>
 @if (!string.IsNullOrEmpty(@Model.OppositeTitle))
 {
@@ -96,9 +96,6 @@
                                                 <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Defense</span>
                                                 <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;width:16px;height:16px;" src="/Images/heart.png"/></span><span style="margin-left:8px;font-weight:bold;">@Model.HitPoints</span>
                                             }
-                                            else
-                                            {
-                                            }
                                         }
                                         break;
                                     case CardType.Quest:
@@ -112,16 +109,8 @@
                                         }
                                         break;
                                     case CardType.Nightmare:
-                                        {
-                                        }
-                                        break;
                                     case CardType.Campaign:
-                                        {
-                                        }
-                                        break;
                                     case CardType.Burden:
-                                        {
-                                        }
                                         break;
                                     default:
                                         break;
@@ -175,11 +164,6 @@
                                     }
                                 }
                             }
-                            @*
-                            @foreach (var keyword in Model.Keywords)
-                            {
-                                @keyword @: &nbsp;
-                            }*@
                             </span>
                             <br />
                         }

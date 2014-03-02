@@ -26,6 +26,11 @@ namespace HallOfBeorn.Models
             get { return _card.Id; }
         }
 
+        public string Slug
+        {
+            get { return _card.Slug; }
+        }
+
         public string Title
         {
             get { return _card.Title; }
@@ -38,7 +43,15 @@ namespace HallOfBeorn.Models
 
         public string Url
         {
-            get { return string.Format("/Cards/Details/{0}", Id); }
+            get { return string.Format("/Cards/Details/{0}", Slug); }
+        }
+
+        public string SetSearchUrl
+        {
+            get
+            {
+                return string.Format("/Cards/Search?CardSet={0}", _card.CardSet.Name.Replace(" ", "+"));
+            }
         }
 
         public string HallOfBeornBlogSearchUrl

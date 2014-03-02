@@ -69,10 +69,10 @@
         <table style="margin:0px;">
             <tr>
                 <td style="vertical-align:top;">
-                    <a href="@Href(string.Format("/Cards/Details/{0}", @card.Id))"><img src="@card.ImagePath" style="height:160px;"/></a>
+                    <a href="@Href(string.Format("/Cards/Details/{0}", @card.Slug))"><img src="@card.ImagePath" style="height:160px;"/></a>
                 </td>
                 <td style="vertical-align:top;">
-                    @Html.ActionLink(@card.FullTitle, "Details", new { id = @card.Id }, new { style = "margin-top:0px;font-weight:bold;" })
+                    @Html.ActionLink(@card.FullTitle, "Details", new { id = @card.Slug }, new { style = "margin-top:0px;font-weight:bold;" })
                     <span>(@card.SetName)</span>
                     <div>
                         @if (@card.HasSphere)
@@ -154,39 +154,6 @@
                             @card.Shadow
                         }
                     </div>
-                    @*
-                    <table>
-                        <tr>
-                            <td>
-                                <h3>@Html.ActionLink(@card.FullTitle, "Details", new { id = @card.Id })</h3>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align:top;">
-                                <div>
-                                    <p>
-                                        @foreach (var trait in card.Traits)
-                                        {
-                                            @trait @: &nbsp; &nbsp;
-                                        }
-                                        <br />
-                                        @foreach (var keyword in card.Keywords)
-                                        {
-                                            @keyword @: &nbsp; &nbsp;
-                                        }
-                                        <br />
-                                        @card.Text
-
-                                        @if (!string.IsNullOrEmpty(@card.OppositeText))
-                                        {
-                                            <br />
-                                            @card.OppositeText
-                                        }
-                                    </p>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>*@
                 </td>            
             </tr>
         </table>

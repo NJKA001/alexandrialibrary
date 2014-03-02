@@ -180,7 +180,8 @@ namespace HallOfBeorn.Controllers
 
             var model = new SearchViewModel();
 
-            return RedirectToAction("Search", model);
+            return Redirect("/Cards/Search");
+            //ToAction("Search", model);
         }
 
         public ActionResult Search(SearchViewModel model)
@@ -202,11 +203,40 @@ namespace HallOfBeorn.Controllers
             return RedirectToAction("Search", model);
         }
 
+        private bool IsId(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+                return false;
+
+            if (id.Length != 36)
+                return false;
+
+            if (id[8] != '-' || id[13] != '-' || id[18] != '-')
+                return false;
+
+            return true;
+        }
+
         public ActionResult Details(string id)
         {
             CardViewModel model= null;
 
-            var card = _cardService.Find(id);
+            Card card = null;
+
+            if (IsId(id))
+            {
+                card = _cardService.Find(id);
+                if (card != null)
+                {
+                    var slugUrl = string.Format("/Cards/Details/{0}", card.Slug);
+                    return Redirect(slugUrl);
+                }
+            }
+            else
+            {
+                card = _cardService.FindBySlug(id);
+            }
+
             if (card != null)
             {
                 model = GetCardViewModel(card);

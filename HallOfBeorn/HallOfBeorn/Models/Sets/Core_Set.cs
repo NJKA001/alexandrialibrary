@@ -52,7 +52,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1003",
-                Title = "Gloin",
+                Title = "Glóin",
+                NormalizedTitle = "Gloin",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9003",
                 CardType = CardType.Hero,
                 Sphere = Sphere.Leadership,
@@ -155,7 +156,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1009",
-                Title = "Dunhere",
+                Title = "Dúnhere",
+                NormalizedTitle = "Dunhere",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9009",
                 CardType = CardType.Hero,
                 Sphere = Sphere.Spirit,
@@ -881,7 +883,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1062",
-                Title = "Gleowine",
+                Title = "Gléowine",
+                NormalizedTitle = "Gleowine",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9062",
                 CardType = CardType.Ally,
                 Sphere = Sphere.Lore,

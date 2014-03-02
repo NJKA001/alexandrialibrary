@@ -51,7 +51,8 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Rohan.", "Isengard." },
                 Text = "Action: Lower the cost of the next card you play from your hand this round by 1. That card gains Doomed 1. (Limit once per round.)",
                 FlavorText = "\"Let your counsellor Gríma keep all things till your return - and I pray that we may see it, though no wise man will deem it hopeful.\" -The Two Towers",
-                Number = 2
+                Number = 2,
+                SlugIncludesType = true,
             });
             Cards.Add(new Card() {
                 Title = "Saruman",

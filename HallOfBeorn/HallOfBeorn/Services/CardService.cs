@@ -858,6 +858,11 @@ namespace HallOfBeorn.Services
                 : null;
         }
 
+        public Card FindBySlug(string slug)
+        {
+            return cards.Values.Where(x => x.Slug == slug).FirstOrDefault();
+        }
+
         public IEnumerable<byte> Costs()
         {
             return cards.Values.Select(x => x.ResourceCost).Distinct().OrderBy(x => x).ToList();
