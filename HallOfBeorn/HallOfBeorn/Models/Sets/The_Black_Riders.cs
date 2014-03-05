@@ -449,6 +449,7 @@ namespace HallOfBeorn.Models.Sets
                 Title = "Gandalf's Delay",
                 Id = "d95a6076-3ead-4ff6-a1ba-ca320d2bd4e1",
                 CardType = CardType.Objective,
+                CampaignCardType = Models.CampaignCardType.Burden,
                 Text = "Setup: Add Gandalf's Delay to the staging area.\r\nEach player draws 1 less card in his starting hand.",
                 FlavorText = "The next day Frodo became really anxious, and kept a constant look-out for Gandalf. Thursday, his birthday morning, dawned as fair and clear as it had long ago for Bilbo's great party. Still Gandalf did not appear.\r\n-The Fellowship of the Ring",
                 EncounterSet = "A Shadow of the past",
