@@ -5,7 +5,13 @@
     ViewBag.Title = @Model.Title;
 }
 
-<h2>@Model.Title</h2>
+<h2>
+    @if (@Model.IsUnique)
+    {
+        <img src="/Images/unique.png" style="margin-right:-2px;margin-bottom:-2px;height:20px;width:20px;"/>
+    }
+    @Model.Title
+</h2>
 <div style="color:#616161;font-weight:bold;">
     <span><a href="@Model.SetSearchUrl" title="Search for @Model.SetName">@Model.SetName</a></span><span style="margin-left:6px;">@string.Format("#{0} (x{1})", @Model.Number, @Model.Quantity)</span>
 </div>
@@ -16,10 +22,10 @@
     <div>
         <table>
             <tr>
-                <td>
+                <td style="vertical-align:top;">
                     <img src="@Model.ImagePath" style="max-width: 285px;max-height: 400px;"/>
                 </td>
-                <td rowspan="2" style="vertical-align:top;">
+                <td style="vertical-align:top;">
                     <div style="margin:-8px;">
                         <table>
                             <tr>
@@ -29,10 +35,6 @@
                                     <img style="margin-bottom:-4px;margin-right:8px;height:24px;width:24px;" src='@string.Format("/Images/{0}.png", @Model.Sphere)' />
                                 }
                                 <span style="font-weight:bold;font-size:14pt;">@Model.CardTypeName</span>
-                                @if (@Model.IsUnique)
-                                {
-                                    <span style="margin-left:6px;">(Unique)</span>
-                                }
                                 </td>
                             </tr>
                             <tr>
@@ -42,19 +44,19 @@
                                     case CardType.Hero:
                                         {
                                             <span style="width:40px;color:#616161;">Threat Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.ThreatCost</span>
-                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/willpower.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Willpower</span>
-                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Attack</span>
-                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Defense</span>
-                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;width:16px;height:16px;" src="/Images/heart.png"/></span><span style="margin-left:8px;font-weight:bold;">@Model.HitPoints</span>
+                                            <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">@Model.Willpower</span><img style="margin-bottom:-3px;" src="/Images/willpower.gif" /></span>
+                                            <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">@Model.Attack</span><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span>
+                                            <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">@Model.Defense</span><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span>
+                                            <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">@Model.HitPoints</span><img style="margin-bottom:-4px;margin-left:-4px;width:20px;height:20px;" src="/Images/heart.png"/></span>
                                         }
                                         break;
                                     case CardType.Ally:
                                         {
                                             <span style="width:50px;color:#616161;">Resource Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.ResourceCost</span>
-                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/willpower.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Willpower</span>
-                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Attack</span>
-                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Defense</span>
-                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;width:16px;height:16px;" src="/Images/heart.png"/></span><span style="margin-left:8px;font-weight:bold;">@Model.HitPoints</span>
+                                            <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">@Model.Willpower</span><img style="margin-bottom:-3px;" src="/Images/willpower.gif" /></span>
+                                            <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">@Model.Attack</span><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span>
+                                            <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">@Model.Defense</span><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span>
+                                            <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">@Model.HitPoints</span><img style="margin-bottom:-4px;margin-left:-4px;width:20px;height:20px;" src="/Images/heart.png"/></span>
                                         }
                                         break;
                                     case CardType.Attachment:
@@ -70,16 +72,16 @@
                                     case CardType.Enemy:
                                         {
                                             <span style="width:60px;color:#616161;">Engagement Cost</span><span style="margin-left:8px;font-weight:bold;">@Model.EngagementCost</span>
-                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/threat.png" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Threat</span>
-                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Attack</span>
-                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Defense</span>
-                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;width:16px;height:16px;" src="/Images/heart.png"/></span><span style="margin-left:8px;font-weight:bold;">@Model.HitPoints</span>
+                                            <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">@Model.Threat</span><img style="margin-bottom:-3px;" src="/Images/threat.png" /></span>
+                                            <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">@Model.Attack</span><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span>
+                                            <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">@Model.Defense</span><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span>
+                                            <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">@Model.HitPoints</span><img style="margin-bottom:-4px;margin-left:-4px;width:20px;height:20px;" src="/Images/heart.png"/></span>
                                         }
                                         break;
                                     case CardType.Location:
                                         {
                                             <span style="width:60px;color:#616161;">Quest Points</span><span style="margin-left:8px;font-weight:bold;">@Model.QuestPoints</span>
-                                            <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/threat.png" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Threat</span>
+                                            <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">@Model.Threat</span><img style="margin-bottom:-3px;" src="/Images/threat.png" /></span>
                                         }
                                         break;
                                     case CardType.Treachery:
@@ -91,10 +93,10 @@
                                         {
                                             if (@Model.HasCharacterStats)
                                             {
-                                                <span style="width:24px;"><img style="margin-bottom:-3px;" src="/Images/willpower.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Willpower</span>
-                                                <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Attack</span>
-                                                <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span><span style="margin-left:8px;font-weight:bold;">@Model.Defense</span>
-                                                <span style="width:24px;margin-left:20px;"><img style="margin-bottom:-3px;width:16px;height:16px;" src="/Images/heart.png"/></span><span style="margin-left:8px;font-weight:bold;">@Model.HitPoints</span>
+                                                <span style="width:24px;"><span style="margin-right:2px;font-weight:bold;">@Model.Willpower</span><img style="margin-bottom:-3px;" src="/Images/willpower.gif" /></span>
+                                                <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">@Model.Attack</span><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span>
+                                                <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">@Model.Defense</span><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span>
+                                                <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">@Model.HitPoints</span><img style="margin-bottom:-4px;margin-left:-4px;width:20px;height:20px;" src="/Images/heart.png"/></span>
                                             }
                                         }
                                         break;
@@ -293,7 +295,17 @@
                         }
                         </div>
                     </div>
-
+                    @* Table Was Here *@
+                    
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align:top;">
+                    <div style="margin-top:12px;margin-left:4px;margin-bottom:4px;"><a href="@Model.HallOfBeornBlogSearchUrl" target="_blank" title="Search Hall of Beorn for: @Model.Title">On Hall of Beorn Blog</a></div>
+                    <div style="margin-left:4px;margin-bottom:4px;"><a href="@Model.TalesFromTheCardsBlogSearchUrl" target="_blank" title="Search Tales From the Cards for: @Model.Title">On Tales From The Cards</a></div>
+                    <div style="margin-left:4px;margin-bottom:4px;"><a href="@Model.MasterOfLoreBlogSearchUrl" target="_blank" title="Search Master of Lore for: @Model.Title">On Master of Lore</a></div>
+                </td>
+                <td>
                     <table>
                         <tr>
                             <td style="vertical-align:top;">
@@ -325,13 +337,6 @@
                             </td>
                         </tr>
                     </table>
-                </td>
-            </tr>
-            <tr>
-                <td style="vertical-align:top;">
-                    <div style="margin-bottom:4px;"><a href="@Model.HallOfBeornBlogSearchUrl" target="_blank" title="Search Hall of Beorn for: @Model.Title">On Hall of Beorn Blog</a></div>
-                    <div style="margin-bottom:4px;"><a href="@Model.TalesFromTheCardsBlogSearchUrl" target="_blank" title="Search Tales From the Cards for: @Model.Title">On Tales From The Cards</a></div>
-                    <div style="margin-bottom:4px;"><a href="@Model.MasterOfLoreBlogSearchUrl" target="_blank" title="Search Master of Lore for: @Model.Title">On Master of Lore</a></div>
                 </td>
             </tr>
         </table>

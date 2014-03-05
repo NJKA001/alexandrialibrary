@@ -161,7 +161,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Silver Lamp",
-                ImageType = Models.ImageType.Png,
+                ImageType = Models.ImageType.Jpg,
                 Id = "0FF953B2-66CB-4760-9F30-56066D94448C",
                 CardType = CardType.Attachment,
                 ResourceCost = 2,
@@ -192,7 +192,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card(){
                 Title = "Legacy of Númenor",
                 NormalizedTitle = "Legacy of Numenor",
-                ImageType = Models.ImageType.Png,
+                ImageType = Models.ImageType.Jpg,
                 Id = "9482929A-87C0-4993-8E76-D80E1A40C3DA",
                 CardType = CardType.Event,
                 ResourceCost = 0,
@@ -219,8 +219,8 @@ namespace HallOfBeorn.Models.Sets
                 Number = 12
             });
             Cards.Add(new Card() {
-                Title = "The Wizard's Voice",
-                ImageType = Models.ImageType.Png,
+                Title = "The Wizards's Voice",
+                ImageType = Models.ImageType.Jpg,
                 Id = "AB0B49A0-3A74-433F-AED3-206964FABD18",
                 CardType = CardType.Event,
                 ResourceCost = 0,
@@ -235,7 +235,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Power of Orthanc",
-                ImageType = Models.ImageType.Png,
+                ImageType = Models.ImageType.Jpg,
                 Id = "19FE9EB6-82EE-4967-9381-E9E7C97B2463",
                 CardType = CardType.Event,
                 ResourceCost = 0,
@@ -250,7 +250,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "The Seeing-stone",
-                ImageType = Models.ImageType.Png,
+                ImageType = Models.ImageType.Jpg,
                 Id = "F54077B5-277B-4E73-ADE0-98D0EA9EC2AC",
                 CardType = CardType.Event,
                 ResourceCost = 0,

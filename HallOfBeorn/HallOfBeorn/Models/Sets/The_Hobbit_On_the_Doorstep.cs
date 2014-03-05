@@ -829,7 +829,7 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 2,
                 Attack = 3,
                 Defense = 3,
-                Text = "Action: The first player may spend 2 Baggins resources to (choose one): take control of Misty Mountain Eagle, or discard this ally to discard a non-unique enemy in the staging area.",
+                Text = "Action: The first player may spend 2 Baggins resources to (choose one): take control of Misty ~Mountain ~Eagle, or discard this ally to discard a non-unique enemy in the staging area.",
                 EncounterSet = "The Battle of Five Armies",
                 Shadow = "Shadow: Deal 3 damage to attacking enemy.",
                 Number = 61

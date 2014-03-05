@@ -81,6 +81,8 @@ namespace HallOfBeorn.Controllers
                     return "/Images/Spirit.png";
                 case "Lore":
                     return "/Images/Lore.png";
+                case "Baggins":
+                    return "/Images/Baggins.png";
                 default:
                     return null;
             }

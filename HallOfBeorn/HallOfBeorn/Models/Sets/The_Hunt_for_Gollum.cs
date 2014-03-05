@@ -283,6 +283,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Discard from play all allies with a printed cost lower than the number of Riverland locations in play.",
                 Keywords = new List<string>() { "X is the number of ally cards in play." },
                 Threat = 0,
+                IsVariableThreat = true,
                 QuestPoints = 2,
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 2,
