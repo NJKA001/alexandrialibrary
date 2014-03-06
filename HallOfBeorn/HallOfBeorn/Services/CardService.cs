@@ -27,6 +27,7 @@ namespace HallOfBeorn.Services
         private readonly List<Deck> decks = new List<Deck>();
 
         const int maxResults = 128;
+        const string randomKeyword = "random";
 
         private void AddSet(CardSet cardSet)
         {
@@ -763,9 +764,14 @@ namespace HallOfBeorn.Services
 
         public IEnumerable<Card> Search(SearchViewModel model)
         {
+            if (!string.IsNullOrEmpty(model.Query) && model.Query.Trim().ToLower() == randomKeyword)
+            {
+                model.Random = true;
+            }
+
             var results = !string.IsNullOrEmpty(model.Query) ?
                 cards.Values.Where(
-                    x => x.Title.ToLower().Contains(model.Query.ToLower())
+                    x => (x.Title.ToLower().Contains(model.Query.ToLower()) || model.Query.ToLower() == randomKeyword)
                     || (!string.IsNullOrEmpty(x.NormalizedTitle) && x.NormalizedTitle.ToLower().Contains(model.Query.ToLower()))
                     || (!string.IsNullOrEmpty(x.Text) && x.Text.ToLower().Contains(model.Query.ToLower()))
                     || x.Keywords.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
@@ -838,16 +844,31 @@ namespace HallOfBeorn.Services
 
             results = results.Take(maxResults).ToList();
 
-            switch (model.Sort)
+            if (model.Random)
             {
-                case Sort.Set_and_number:
-                    return results.OrderBy(x => x.CardSet.Number).ThenBy(x => x.Number);
-                case Sort.Alphabetical:
-                    return results.OrderBy(x => x.Title);
-                case Sort.Sphere_type_cost:
-                    return results.OrderBy(x => x.Sphere).ThenBy(x => x.CardType).ThenBy(x => x.ResourceCost > 0 ? x.ResourceCost : x.ThreatCost);
-                default:
-                    return results;
+                var total = results.Count();
+                if (total > 1)
+                {
+                    var random = new Random();
+                    var choice = random.Next(0, total - 1);
+                    results = new List<Card> { results[choice] };
+                }
+
+                return results;
+            }
+            else
+            {
+                switch (model.Sort)
+                {
+                    case Sort.Set_and_number:
+                        return results.OrderBy(x => x.CardSet.Number).ThenBy(x => x.Number);
+                    case Sort.Alphabetical:
+                        return results.OrderBy(x => x.Title);
+                    case Sort.Sphere_type_cost:
+                        return results.OrderBy(x => x.Sphere).ThenBy(x => x.CardType).ThenBy(x => x.ResourceCost > 0 ? x.ResourceCost : x.ThreatCost);
+                    default:
+                        return results;
+                }
             }
         }
 

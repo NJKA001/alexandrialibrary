@@ -41,6 +41,8 @@ namespace HallOfBeorn.Models
         [Display(Name = "Sort")]
         public Sort Sort { get; set; }
 
+        public bool Random { get; set; }
+
         [Display(Name = "Results")]
         public List<CardViewModel> Cards { get; set; }
 
