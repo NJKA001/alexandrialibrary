@@ -881,7 +881,10 @@ namespace HallOfBeorn.Services
 
         public Card FindBySlug(string slug)
         {
-            return cards.Values.Where(x => x.Slug == slug).FirstOrDefault();
+            if (string.IsNullOrEmpty(slug))
+                return null;
+
+            return cards.Values.Where(x => x.Slug.ToLower() == slug.ToLower()).FirstOrDefault();
         }
 
         public IEnumerable<byte> Costs()

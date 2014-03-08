@@ -224,25 +224,33 @@ namespace HallOfBeorn.Controllers
             CardViewModel model= null;
 
             Card card = null;
+            var doRedirect = false;
 
             if (IsId(id))
             {
                 card = _cardService.Find(id);
                 if (card != null)
-                {
-                    var slugUrl = string.Format("/Cards/Details/{0}", card.Slug);
-                    return Redirect(slugUrl);
-                }
+                    doRedirect = true;
             }
             else
             {
                 card = _cardService.FindBySlug(id);
+                if (card != null && card.Slug != id)
+                    doRedirect = true;
             }
 
-            if (card != null)
+            if (card == null)
+                return HttpNotFound("I'm sorry Mario, your Princess is in another castle.\n\nNo card found matching this URL");
+
+            if (doRedirect)
+            {
+                var redirectURL = string.Format("/Cards/Details/{0}", card.Slug);
+                return Redirect(redirectURL);
+            }
+            else
             {
                 model = GetCardViewModel(card);
-            }
+            }   
 
             return View(model);
         }
