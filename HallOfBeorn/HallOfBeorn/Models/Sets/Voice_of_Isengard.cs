@@ -262,6 +262,24 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "\"...alone it could do nothing but see small images of things far off and days remote.\" -Gandalf, The Two Towers",
                 Number = 15
             });
+            Cards.Add(new Card() {
+                Title = "Gríma",
+                ImageName = "Voice_of_Isengard/Gríma-Objective",
+                ImageType = ImageType.Png,
+                Id = "C6DFAF1C-E925-4EF2-A5F2-E0B30B2BC8A8",
+                CardType = CardType.Objective_Ally,
+                SlugIncludesType = true,
+                EncounterSet = "The Fords of Isen",
+                Willpower = 2,
+                Attack = 1,
+                Defense = 2,
+                HitPoints = 3,
+                Traits = new List<string> { "Rohan." },
+                Keywords = new List<string> { "If free of encounters, the first player gains control of Gríma." },
+                Text = "Action: Exhaust Grima to draw a card.\r\n\r\nIf Gríma leaves play, the players lose the game.",
+                FlavorText = "Behind him cringing between two other men, came Gríma the Wormtongue. -The Two Towers",
+                Number = 16
+            });
         }
     }
 }

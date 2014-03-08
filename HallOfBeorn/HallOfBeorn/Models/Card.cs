@@ -74,7 +74,7 @@ namespace HallOfBeorn.Models
         {
             get {
                 var title = !string.IsNullOrEmpty(NormalizedTitle) ? NormalizedTitle.Replace(" ", "-") : Title.Replace(" ", "-");
-                var type = SlugIncludesType ? string.Format("{0}-", CardType) : string.Empty;
+                var type = SlugIncludesType ? string.Format("{0}-", CardType.ToString().Replace('_', '-')) : string.Empty;
                 var set = CardSet.Abbreviation.ToString();
                 return string.Format("{0}-{1}{2}", title, type, set); }
         }
