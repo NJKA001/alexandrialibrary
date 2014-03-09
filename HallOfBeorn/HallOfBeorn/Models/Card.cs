@@ -68,15 +68,19 @@ namespace HallOfBeorn.Models
 
         public string FlavorText { get; set; }
         public string Artist { get; set; }
+        public bool SlugIncludesOppositeTitle { get; set; }
         public bool SlugIncludesType { get; set; }
 
         public string Slug
         {
-            get {
-                var title = !string.IsNullOrEmpty(NormalizedTitle) ? NormalizedTitle.Replace(" ", "-") : Title.Replace(" ", "-");
-                var type = SlugIncludesType ? string.Format("{0}-", CardType.ToString().Replace('_', '-')) : string.Empty;
-                var set = CardSet.Abbreviation.ToString();
-                return string.Format("{0}-{1}{2}", title, type, set); }
+            get
+            {
+                var title = !string.IsNullOrEmpty(NormalizedTitle) ?  NormalizedTitle.ToUrlSafeString() : Title.ToUrlSafeString();
+                var subtitle = SlugIncludesOppositeTitle ? string.Format("{0}-", OppositeTitle.ToUrlSafeString()) : string.Empty;
+                var type = SlugIncludesType ? string.Format("{0}-", CardType.ToString().ToUrlSafeString()) : string.Empty;
+                var set = CardSet.Abbreviation.ToString().ToUrlSafeString();
+                return string.Format("{0}-{1}{2}{3}", title, subtitle, type, set); 
+            }
         }
 
         public string TraitList

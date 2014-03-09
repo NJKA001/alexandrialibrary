@@ -278,10 +278,11 @@ namespace HallOfBeorn.Models.Sets
                 Number = 19
             });
             Cards.Add(new Card() {
-                ImageName = "Rock Adder",
                 Title = "Rock Adder",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9022",
+                ImageName = "The_Long_Dark/Rock-Adder",
                 CardType = CardType.Enemy,
+                ImageType = Models.ImageType.Png,
                 EncounterSet = "The Long Dark",
                 Traits = new List<string>() { "Creature." },
                 Quantity = 3,

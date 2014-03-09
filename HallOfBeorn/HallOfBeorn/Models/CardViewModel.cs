@@ -299,10 +299,14 @@ namespace HallOfBeorn.Models
                 }
 
                 var ext = string.Format(".{0}", format.ToString().ToLower());
+                var set = _card.CardSet.Name.ToUrlSafeString();
+                var title = Title.ToUrlSafeString();
+                var type = _card.SlugIncludesType ? string.Format("-{0}", _card.CardType.ToString().ToUrlSafeString()) : string.Empty;
+                var image = _card.ImageName.ToUrlSafeString();
 
                 return string.IsNullOrEmpty(_card.ImageName) ?
-                    string.Format("/Images/Cards/{0}/{1}{2}", _card.CardSet.Name.ToUrlSafeString(), Title.ToUrlSafeString(), ext)
-                    : string.Format("/Images/Cards/{0}{1}", _card.ImageName.ToUrlSafeString(), ext);
+                    string.Format("/Images/Cards/{0}/{1}{2}{3}", set, title, type, ext)
+                    : string.Format("/Images/Cards/{0}{1}", image, ext);
             }
         }
 

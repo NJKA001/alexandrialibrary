@@ -161,7 +161,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Silver Lamp",
-                ImageType = Models.ImageType.Jpg,
+                ImageType = Models.ImageType.Png,
                 Id = "0FF953B2-66CB-4760-9F30-56066D94448C",
                 CardType = CardType.Attachment,
                 ResourceCost = 2,
@@ -192,7 +192,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card(){
                 Title = "Legacy of Númenor",
                 NormalizedTitle = "Legacy of Numenor",
-                ImageType = Models.ImageType.Jpg,
+                ImageType = Models.ImageType.Png,
                 Id = "9482929A-87C0-4993-8E76-D80E1A40C3DA",
                 CardType = CardType.Event,
                 ResourceCost = 0,
@@ -220,7 +220,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "The Wizards's Voice",
-                ImageType = Models.ImageType.Jpg,
+                ImageType = Models.ImageType.Png,
                 Id = "AB0B49A0-3A74-433F-AED3-206964FABD18",
                 CardType = CardType.Event,
                 ResourceCost = 0,
@@ -235,7 +235,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Power of Orthanc",
-                ImageType = Models.ImageType.Jpg,
+                ImageType = Models.ImageType.Png,
                 Id = "19FE9EB6-82EE-4967-9381-E9E7C97B2463",
                 CardType = CardType.Event,
                 ResourceCost = 0,
@@ -250,7 +250,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "The Seeing-stone",
-                ImageType = Models.ImageType.Jpg,
+                ImageType = Models.ImageType.Png,
                 Id = "F54077B5-277B-4E73-ADE0-98D0EA9EC2AC",
                 CardType = CardType.Event,
                 ResourceCost = 0,
@@ -264,7 +264,6 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Gríma",
-                ImageName = "Voice_of_Isengard/Gríma-Objective",
                 ImageType = ImageType.Png,
                 Id = "C6DFAF1C-E925-4EF2-A5F2-E0B30B2BC8A8",
                 CardType = CardType.Objective_Ally,

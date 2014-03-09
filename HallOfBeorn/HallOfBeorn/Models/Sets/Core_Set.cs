@@ -1674,7 +1674,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1119",
-                Title = "Flies and Spiders - 1A",
+                Title = "Flies and Spiders",
+                StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801200c9119",
                 CardType = CardType.Quest,
                 Setup = "ss",
@@ -1688,7 +1689,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1120",
-                Title = "A Fork in the Road - 2A",
+                Title = "A Fork in the Road",
+                StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801200c9121",
                 CardType = CardType.Quest,
                 EncounterSet = "Passage Through Mirkwood",
@@ -1701,7 +1703,9 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1121",
-                Title = "A Chosen Path - 3A",
+                Title = "A Chosen Path",
+                StageNumber = 3,
+                SlugIncludesOppositeTitle = true,
                 OppositeTitle = "Don't Leave the Path",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9123",
                 CardType = CardType.Quest,
@@ -1713,7 +1717,9 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1122",
-                Title = "A Chosen Path - 3A",
+                Title = "A Chosen Path",
+                StageNumber = 3,
+                SlugIncludesOppositeTitle = true,
                 OppositeTitle = "Beorn's Path",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9125",
                 CardType = CardType.Quest,
@@ -1725,7 +1731,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1123",
-                Title = "The Necromancer's Tower - 1A",
+                Title = "The Necromancer's Tower",
+                StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801200c9127",
                 CardType = CardType.Quest,
                 Setup = "ssst",
@@ -1739,7 +1746,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1124",
-                Title = "Through the Caverns - 2A",
+                Title = "Through the Caverns",
+                StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801200c9129",
                 CardType = CardType.Quest,
                 EncounterSet = "Escape from Dol Guldur",
@@ -1750,7 +1758,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1125",
-                Title = "Out of the Dungeons - 3A",
+                Title = "Out of the Dungeons",
+                StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-0801200c9131",
                 CardType = CardType.Quest,
                 EncounterSet = "Escape from Dol Guldur",
@@ -1761,7 +1770,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1126",
-                Title = "To the River... - 1A",
+                Title = "To the River...",
+                StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801200c9133",
                 CardType = CardType.Quest,
                 Text = "Setup: Each player reveals 1 card from the top of the encounter deck, and adds it to the staging area.",
@@ -1773,7 +1783,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1127",
-                Title = "Anduin Passage - 2A",
+                Title = "Anduin Passage",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9135",
                 CardType = CardType.Quest,
                 EncounterSet = "Journey Down the Anduin",
@@ -1784,7 +1794,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1128",
-                Title = "Ambush on the Shore - 3A",
+                Title = "Ambush on the Shore",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9137",
                 CardType = CardType.Quest,
                 EncounterSet = "Journey Down the Anduin",

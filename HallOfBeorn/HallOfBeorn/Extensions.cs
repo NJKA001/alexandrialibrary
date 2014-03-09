@@ -10,11 +10,14 @@ namespace HallOfBeorn
     {
         public static string ToUrlSafeString(this string self)
         {
-            if (self == null)
-                throw new ArgumentNullException("self");
+            if (string.IsNullOrEmpty(self))
+                return string.Empty;
 
-            return self
-                .Replace(' ', '_')
+            return self.Replace(" - ", "-")
+                .Replace(' ', '-')
+                .Replace('_', '-')
+                .Replace("&", "and")
+                .Replace(".", string.Empty)
                 .Replace("?", string.Empty)
                 .Replace("!", string.Empty);
         }

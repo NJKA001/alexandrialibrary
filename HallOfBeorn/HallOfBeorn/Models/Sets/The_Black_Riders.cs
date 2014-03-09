@@ -357,8 +357,8 @@ namespace HallOfBeorn.Models.Sets
                 Number = 22
             });
             Cards.Add(new Card() {
-                ImageName = "Gildor_Inglorion",
                 Title = "Gildor Inglorion",
+                ImageType = Models.ImageType.Png,
                 Id = "6c04a40a-0666-4b4f-a768-ddff46857cf0",
                 IsUnique = true,
                 CardType = CardType.Objective_Ally,
@@ -376,6 +376,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Overcome by Terror",
+                ImageType = Models.ImageType.Png,
                 Id = "cdc303cb-bb1a-4409-a479-aa4155bd8ed5",
                 CardType = CardType.Treachery,
                 CampaignCardType = Models.CampaignCardType.Burden,
@@ -388,6 +389,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Fear of Discovery",
+                ImageType = Models.ImageType.Png,
                 Id = "074cad39-ce55-4dc1-9775-e95363682ef7",
                 CardType = CardType.Treachery,
                 CampaignCardType = Models.CampaignCardType.Burden,
@@ -447,6 +449,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Gandalf's Delay",
+                ImageType = Models.ImageType.Png,
                 Id = "d95a6076-3ead-4ff6-a1ba-ca320d2bd4e1",
                 CardType = CardType.Objective,
                 CampaignCardType = Models.CampaignCardType.Burden,
