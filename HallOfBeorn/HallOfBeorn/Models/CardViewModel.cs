@@ -115,6 +115,11 @@ namespace HallOfBeorn.Models
             get { return _card.Quantity.ToString(); }
         }
 
+        public string EasyModeQuantity
+        {
+            get { return _card.EasyModeQuantity.HasValue ? _card.EasyModeQuantity.Value.ToString() : string.Empty; }
+        }
+
         public IEnumerable<string> Keywords
         {
             get { return _card.Keywords; }

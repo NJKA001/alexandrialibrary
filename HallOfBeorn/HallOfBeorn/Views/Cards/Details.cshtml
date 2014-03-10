@@ -15,6 +15,10 @@
 <div style="color:#616161;font-weight:bold;">
     <div style="margin-top:4px;margin-bottom:2px;">
         <span><a href="@Model.SetSearchUrl" title="Search for @Model.SetName">@Model.SetName</a></span><span style="margin-left:6px;">@string.Format("#{0} (x{1})", @Model.Number, @Model.Quantity)</span>
+        @if (!string.IsNullOrEmpty(@Model.EasyModeQuantity))
+        {
+            <span style="margin-left:8px;">@string.Format("(Easy Mode x{0})", @Model.EasyModeQuantity)</span>
+        }
     </div>
     @if (!string.IsNullOrEmpty(@Model.EncounterSet))
     {

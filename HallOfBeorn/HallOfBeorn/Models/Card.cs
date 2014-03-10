@@ -64,7 +64,7 @@ namespace HallOfBeorn.Models
         public string EncounterSet { get; set; }
         public byte VictoryPoints { get; set; }
         public byte Quantity { get; set; }
-        public byte EasyModeQuantity { get; set; }
+        public byte? EasyModeQuantity { get; set; }
         public string Setup { get; set; }
 
         public string FlavorText { get; set; }
