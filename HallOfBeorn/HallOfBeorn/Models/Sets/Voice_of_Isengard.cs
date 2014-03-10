@@ -277,12 +277,9 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string> { "If free of encounters, the first player gains control of Gríma." },
                 Text = "Action: Exhaust Grima to draw a card.\r\n\r\nIf Gríma leaves play, the players lose the game.",
                 FlavorText = "Behind him cringing between two other men, came Gríma the Wormtongue. -The Two Towers",
+                Quantity = 1,
                 Number = 16
             });
-            //The Fords of Isen (River), The Dunland Raiders (Knife), Dunland Warriors (Pitchfork)
-            //To Catch an Orc (Hands), Misty Mountain Orcs (Face), Broken Lands (Wolf)
-            //Into Fangorn (Huorn), Ancient Forest (Forest), Weary Travelers (Stooped Man)
-
             Cards.Add(new Card() {
                 Title = "The Islet",
                 IsUnique = true,
@@ -290,6 +287,12 @@ namespace HallOfBeorn.Models.Sets
                 Id = "ED21A7D1-B4EF-4BDD-B998-CACE0FA163BD",
                 CardType = CardType.Location,
                 EncounterSet = "The Fords of Isen",
+                Threat = 1,
+                QuestPoints = 1,
+                Traits = new List<string> { "River." },
+                Keywords = new List<string> { "Immune to player card effects." },
+                Text = "While Iselet is the active location, each Dunland enemy in play gets +1 Threat.",
+                FlavorText = "There were three lines of flat stepping-stones across the stream, and between them fords for horses, that went from either brink to a bare eyot in the midst. -The Two Towers",
                 Quantity = 1,
                 EasyModeQuantity = 1,
                 Number = 17
@@ -301,6 +304,11 @@ namespace HallOfBeorn.Models.Sets
                 Id = "4E8365C0-15F6-44AC-A6A8-FBDDFEE22A14",
                 CardType = CardType.Location,
                 EncounterSet = "The Fords of Isen",
+                Threat = 3,
+                QuestPoints = 4,
+                Traits = new List<string> { "River." },
+                Text = "While Fords of Isen is in the staging area, players cannot gain resources from card effects.\r\n\r\nForced: After Fords of Isen becomes the active location, each player with fewer than 5 cards in his hand draws cards until he has 5 in his hand.",
+                FlavorText = "The road dipped between rising turf-banks, carving its way through the terraces to the river's edge, and up again upon the further side. -The Two Towers",
                 Quantity = 3,
                 EasyModeQuantity = 3,
                 Number = 18
@@ -312,6 +320,10 @@ namespace HallOfBeorn.Models.Sets
                 Id = "86CB2BA1-EC96-45E3-97A0-9615BB11B6A7",
                 CardType = CardType.Location,
                 EncounterSet = "The Fords of Isen",
+                Threat = 2,
+                QuestPoints = 2,
+                Traits = new List<string> { "Road." },
+                Text = "While any player has 3 or more cards in hand, The King's Road gets +3 quest points.\r\n\r\nWhile any player has 5 or more cards in hand, The King's Road gains: \"When faced with the option to travel, the players must travel to The King's Road, if able.\"",
                 Quantity = 2,
                 EasyModeQuantity = 2,
                 Number = 19
@@ -323,6 +335,11 @@ namespace HallOfBeorn.Models.Sets
                 Id = "FB63AD99-2F89-4DE6-B5C1-BF9DB78D45E0",
                 CardType = CardType.Location,
                 EncounterSet = "The Fords of Isen",
+                Threat = 2,
+                QuestPoints = 3,
+                Traits = new List<string> { "Valley." },
+                Text = "While Gap of Rohan is in the staging area, Dunland enemies get +1 Attack.",
+                Shadow = "Shadow: Attacking enemy gets +1 Attack. If this attack destroys a character, remove 1 time counter from the current quest.",
                 Quantity = 4,
                 EasyModeQuantity = 2,
                 Number = 20
@@ -334,6 +351,8 @@ namespace HallOfBeorn.Models.Sets
                 Id = "880C9C97-3664-4EE1-8E96-00F96D4D9D0A",
                 CardType = CardType.Treachery,
                 EncounterSet = "The Fords of Isen",
+                Text = "When Revealed: Each player draws a card. Each player raises his threat by 1 for each card in his hand.",
+                Shadow = "Shadow: Defending player discards an attachment he controls (each attachment he controls instead if this attack is undefended).",
                 Quantity = 2,
                 EasyModeQuantity = 1,
                 Number = 21
@@ -343,8 +362,9 @@ namespace HallOfBeorn.Models.Sets
                 Title = "Down from the Hills",
                 ImageType = ImageType.Png,
                 Id = "F3203B8D-A669-4693-8F72-D53508462C16",
-                CardType = CardType.Location,
+                CardType = CardType.Treachery,
                 EncounterSet = "The Fords of Isen",
+                Text = "When Revealed: Each player must choose: Either remove 1 time counter from the current quest, or search the encounter deck and discard pile for a Dunland enemy, reveal it, and add it to the staging area. Shuffle the encounter deck. If any player has 5 or more cards in hand, this effect cannot be canceled.",
                 Quantity = 1,
                 EasyModeQuantity = 0,
                 Number = 22
@@ -354,8 +374,10 @@ namespace HallOfBeorn.Models.Sets
                 Title = "Ill Tidings",
                 ImageType = ImageType.Png,
                 Id = "66EE86BE-D5D4-41AC-97F1-610110F3EB02",
-                CardType = CardType.Location,
+                CardType = CardType.Treachery,
                 EncounterSet = "The Fords of Isen",
+                Text = "When Revealed: The first player draws this card into his hand. Ill Tidings cannot leave that player's hand. Then, if the first player has 5 or more cards in his hand, Ill Tidings gains surge.",
+                FlavorText = "\"Troubles follow you like crows, and ever the oftener the wrose.\" -Gríma, The Two Towers",
                 Quantity = 2,
                 EasyModeQuantity = 2,
                 Number = 23

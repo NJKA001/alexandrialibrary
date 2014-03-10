@@ -860,14 +860,13 @@ namespace HallOfBeorn.Services
             {
                 switch (model.Sort)
                 {
-                    case Sort.Set_and_number:
-                        return results.OrderBy(x => x.CardSet.Number).ThenBy(x => x.Number);
                     case Sort.Alphabetical:
                         return results.OrderBy(x => x.Title);
                     case Sort.Sphere_type_cost:
                         return results.OrderBy(x => x.Sphere).ThenBy(x => x.CardType).ThenBy(x => x.ResourceCost > 0 ? x.ResourceCost : x.ThreatCost);
+                    case Sort.Set_and_number:
                     default:
-                        return results;
+                        return results.OrderBy(x => x.CardSet.Number).ThenBy(x => x.Number);
                 }
             }
         }

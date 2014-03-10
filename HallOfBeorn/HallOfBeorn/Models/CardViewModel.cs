@@ -185,6 +185,11 @@ namespace HallOfBeorn.Models
             get { return _card.HitPoints.ToString(); }
         }
 
+        public string EncounterSet
+        {
+            get { return _card.EncounterSet; }
+        }
+
         public string StageNumber
         {
             get { return _card.StageNumber > 0 ? _card.StageNumber.ToString() : string.Empty; }
