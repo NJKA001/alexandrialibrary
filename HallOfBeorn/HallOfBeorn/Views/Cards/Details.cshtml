@@ -23,7 +23,17 @@
         <table>
             <tr>
                 <td style="vertical-align:top;">
-                    <img src="@Model.ImagePath" style="max-width: 285px;max-height: 400px;"/>
+                    @if (@Model.HasSecondImage)
+                    {
+                        <span>
+                            <img src="@Model.ImagePath1" style="max-height:200px;"/>
+                            <img src="@Model.ImagePath2" style="max-height:200px;"/>
+                        </span>
+                    }
+                    else
+                    {
+                        <img src="@Model.ImagePath" style="max-width: 285px;max-height: 400px;"/>
+                    }
                 </td>
                 <td style="vertical-align:top;">
                     <div style="margin:-8px;">
@@ -102,7 +112,8 @@
                                         break;
                                     case CardType.Quest:
                                         {
-                                            <span style="width:50px;color:#616161;">Quest Points</span><span style="margin-left:8px;font-weight:bold;">@Model.QuestPoints</span>
+                                            <span style="width:40px;color:#616161;">Stage</span><span style="margin-left:4px;font-weight:bold;">@Model.StageNumber</span>
+                                            <span style="width:40px;color:#616161;margin-left:14px;">Quest Points</span><span style="margin-left:4px;font-weight:bold;">@Model.QuestPoints</span>
                                         }
                                         break;
                                     case CardType.Treasure:

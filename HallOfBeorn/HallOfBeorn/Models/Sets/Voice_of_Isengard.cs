@@ -279,6 +279,591 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "Behind him cringing between two other men, came Gríma the Wormtongue. -The Two Towers",
                 Number = 16
             });
+            //The Fords of Isen (River), The Dunland Raiders (Knife), Dunland Warriors (Pitchfork)
+            //To Catch an Orc (Hands), Misty Mountain Orcs (Face), Broken Lands (Wolf)
+            //Into Fangorn (Huorn), Ancient Forest (Forest), Weary Travelers (Stooped Man)
+
+            Cards.Add(new Card() {
+                Title = "The Islet",
+                IsUnique = true,
+                ImageType = ImageType.Png,
+                Id = "ED21A7D1-B4EF-4BDD-B998-CACE0FA163BD",
+                CardType = CardType.Location,
+                EncounterSet = "The Fords of Isen",
+                Quantity = 1,
+                EasyModeQuantity = 1,
+                Number = 17
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Fords of Isen",
+                ImageType = ImageType.Png,
+                Id = "4E8365C0-15F6-44AC-A6A8-FBDDFEE22A14",
+                CardType = CardType.Location,
+                EncounterSet = "The Fords of Isen",
+                Quantity = 3,
+                EasyModeQuantity = 3,
+                Number = 18
+            });
+            Cards.Add(new Card()
+            {
+                Title = "The King's Road",
+                ImageType = ImageType.Png,
+                Id = "86CB2BA1-EC96-45E3-97A0-9615BB11B6A7",
+                CardType = CardType.Location,
+                EncounterSet = "The Fords of Isen",
+                Quantity = 2,
+                EasyModeQuantity = 2,
+                Number = 19
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Gap of Rohan",
+                ImageType = ImageType.Png,
+                Id = "FB63AD99-2F89-4DE6-B5C1-BF9DB78D45E0",
+                CardType = CardType.Location,
+                EncounterSet = "The Fords of Isen",
+                Quantity = 4,
+                EasyModeQuantity = 2,
+                Number = 20
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Pillaging and Burning",
+                ImageType = ImageType.Png,
+                Id = "880C9C97-3664-4EE1-8E96-00F96D4D9D0A",
+                CardType = CardType.Treachery,
+                EncounterSet = "The Fords of Isen",
+                Quantity = 2,
+                EasyModeQuantity = 1,
+                Number = 21
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Down from the Hills",
+                ImageType = ImageType.Png,
+                Id = "F3203B8D-A669-4693-8F72-D53508462C16",
+                CardType = CardType.Location,
+                EncounterSet = "The Fords of Isen",
+                Quantity = 1,
+                EasyModeQuantity = 0,
+                Number = 22
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Ill Tidings",
+                ImageType = ImageType.Png,
+                Id = "66EE86BE-D5D4-41AC-97F1-610110F3EB02",
+                CardType = CardType.Location,
+                EncounterSet = "The Fords of Isen",
+                Quantity = 2,
+                EasyModeQuantity = 2,
+                Number = 23
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Mugash",
+                IsUnique = true,
+                SlugIncludesType = true,
+                ImageType = ImageType.Png,
+                Id = "EB8CE576-9546-4D19-9070-F7D47638E069",
+                CardType = CardType.Enemy,
+                EncounterSet = "To Catch an Orc",
+                Quantity = 1,
+                EasyModeQuantity = 1,
+                Number = 24
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Mugash's Guard",
+                ImageType = ImageType.Png,
+                Id = "E0BA3FAF-C260-45B8-A918-CE2A74E1920B",
+                CardType = CardType.Enemy,
+                EncounterSet = "To Catch an Orc",
+                Quantity = 3,
+                EasyModeQuantity = 3,
+                Number = 25
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Methedras Orc",
+                ImageType = ImageType.Png,
+                Id = "83B385DA-EB5D-4B20-8C6E-E3133C9CF29F",
+                CardType = CardType.Enemy,
+                EncounterSet = "To Catch an Orc",
+                Quantity = 3,
+                EasyModeQuantity = 3,
+                Number = 26
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Methedras",
+                ImageType = ImageType.Png,
+                Id = "11C24A02-4D8F-4D49-9A55-04348FD61C18",
+                CardType = CardType.Location,
+                EncounterSet = "To Catch an Orc",
+                Quantity = 4,
+                EasyModeQuantity = 4,
+                Number = 27
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Orc Cave",
+                ImageType = ImageType.Png,
+                Id = "472DE81E-675F-4A0C-BD30-A22E415884A9",
+                CardType = CardType.Location,
+                EncounterSet = "To Catch an Orc",
+                Quantity = 3,
+                EasyModeQuantity = 3,
+                Number = 28
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Mugash's Lair",
+                ImageType = ImageType.Png,
+                Id = "29B4F4B0-7C3B-4702-A24B-92FF83D3F6B9",
+                CardType = CardType.Location,
+                EncounterSet = "To Catch an Orc",
+                Quantity = 2,
+                EasyModeQuantity = 2,
+                Number = 29
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Orc Territory",
+                ImageType = ImageType.Png,
+                Id = "08040309-1CF0-401B-9125-E6A7D0E1B875",
+                CardType = CardType.Treachery,
+                EncounterSet = "To Catch an Orc",
+                Quantity = 2,
+                EasyModeQuantity = 0,
+                Number = 30
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Mugash",
+                IsUnique = true,
+                SlugIncludesType = true,
+                ImageType = ImageType.Png,
+                Id = "D926470B-02E3-4A06-9428-5F3F5186E62A",
+                CardType = CardType.Enemy,
+                EncounterSet = "Into Fangorn",
+                Quantity = 1,
+                EasyModeQuantity = 1,
+                Number = 31
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Edge of Fangorn",
+                IsUnique = true,
+                ImageType = ImageType.Png,
+                Id = "12EE099F-7D5D-42FB-8A09-4420030CAA3C",
+                CardType = CardType.Location,
+                EncounterSet = "Into Fangorn",
+                Quantity = 1,
+                EasyModeQuantity = 1,
+                Number = 32
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Dark-Hearted Huorn",
+                ImageType = ImageType.Png,
+                Id = "E8C84525-B138-47D8-9761-9336A87A9A77",
+                CardType = CardType.Enemy,
+                EncounterSet = "Into Fangorn",
+                Quantity = 4,
+                EasyModeQuantity = 3,
+                Number = 33
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Angry Huorn",
+                ImageType = ImageType.Png,
+                Id = "599FBFC7-1864-4959-9096-7531741C5004",
+                CardType = CardType.Enemy,
+                EncounterSet = "Into Fangorn",
+                Quantity = 3,
+                EasyModeQuantity = 2,
+                Number = 34
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Deadly Huorn",
+                ImageType = ImageType.Png,
+                Id = "C56394C3-4953-4896-8D47-3E84547D4789",
+                CardType = CardType.Enemy,
+                EncounterSet = "Into Fangorn",
+                Quantity = 3,
+                EasyModeQuantity = 2,
+                Number = 35
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Heart of Fangorn",
+                ImageType = ImageType.Png,
+                Id = "4B4E19C1-A025-46D1-95B3-D7BF85052B45",
+                CardType = CardType.Location,
+                EncounterSet = "Into Fangorn",
+                Quantity = 3,
+                EasyModeQuantity = 3,
+                Number = 36
+            });
+            Cards.Add(new Card()
+            {
+                Title = "The Forest's Malice",
+                ImageType = ImageType.Png,
+                Id = "3A7F339F-A300-4CDA-BDB1-19A6E21789C9",
+                CardType = CardType.Treachery,
+                EncounterSet = "Into Fangorn",
+                Quantity = 4,
+                EasyModeQuantity = 1,
+                Number = 37
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Orc Skirmisher",
+                ImageType = ImageType.Png,
+                Id = "5745026F-AABE-49D7-BF33-B7C70A42B93E",
+                CardType = CardType.Enemy,
+                EncounterSet = "Misty Mountain Orcs",
+                Quantity = 3,
+                EasyModeQuantity = 3,
+                Number = 38
+            });
+             Cards.Add(new Card()
+            {
+                Title = "Orc Hunter",
+                ImageType = ImageType.Png,
+                Id = "7D907B4B-8D64-4F15-80FB-73DD3146FA1F",
+                CardType = CardType.Enemy,
+                EncounterSet = "Misty Mountain Orcs",
+                Quantity = 3,
+                EasyModeQuantity = 1,
+                Number = 39
+            });
+             Cards.Add(new Card()
+            {
+                Title = "Orc Hound",
+                ImageType = ImageType.Png,
+                Id = "16DB3C77-DCF6-4547-94ED-3249C4D18824",
+                CardType = CardType.Enemy,
+                EncounterSet = "Misty Mountain Orcs",
+                Quantity = 2,
+                EasyModeQuantity = 1,
+                Number = 40
+            });
+             Cards.Add(new Card()
+            {
+                Title = "Orc Hunting Party",
+                ImageType = ImageType.Png,
+                Id = "B7380292-B4B6-495F-9A04-6AF1D3AAA7C2",
+                CardType = CardType.Treachery,
+                EncounterSet = "Misty Mountain Orcs",
+                Quantity = 2,
+                EasyModeQuantity = 2,
+                Number = 41
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Dunland Prowler",
+                ImageType = ImageType.Png,
+                Id = "3978167C-C2A9-4ED1-9E2D-AA1B711C50A6",
+                CardType = CardType.Enemy,
+                EncounterSet = "The Dunland Raiders",
+                Quantity = 3,
+                EasyModeQuantity = 3,
+                Number = 42
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Dunlending Bandit",
+                ImageType = ImageType.Png,
+                Id = "738ED376-48BF-45CF-BBB0-428DB6CB5869",
+                CardType = CardType.Enemy,
+                EncounterSet = "The Dunland Raiders",
+                Quantity = 2,
+                EasyModeQuantity = 2,
+                Number = 43
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Dunland Raider",
+                ImageType = ImageType.Png,
+                Id = "E461B1C0-6887-46DE-B1E7-A7A98F04FAEF",
+                CardType = CardType.Enemy,
+                EncounterSet = "The Dunland Raiders",
+                Quantity = 2,
+                EasyModeQuantity = 0,
+                Number = 44
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Old Hatreds",
+                ImageType = ImageType.Png,
+                Id = "AEDC7B12-2B48-4644-8881-92C6BA3E4FBA",
+                CardType = CardType.Treachery,
+                EncounterSet = "The Dunland Raiders",
+                Quantity = 2,
+                EasyModeQuantity = 1,
+                Number = 45
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Dunland Tribesman",
+                ImageType = ImageType.Png,
+                Id = "10450FC9-315B-4F2B-B227-D4CE0E9B784C",
+                CardType = CardType.Enemy,
+                EncounterSet = "The Dunland Warriors",
+                Quantity = 2,
+                EasyModeQuantity = 2,
+                Number = 46
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Dunland Chieftain",
+                ImageType = ImageType.Png,
+                Id = "F94C1AB8-C0CE-4F1A-9B31-E0B88E833BA0",
+                CardType = CardType.Enemy,
+                EncounterSet = "The Dunland Warriors",
+                Quantity = 2,
+                EasyModeQuantity = 0,
+                Number = 47
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Dunland Berserker",
+                ImageType = ImageType.Png,
+                Id = "78ACB894-103C-41CC-B2D1-F9A6F81FB322",
+                CardType = CardType.Enemy,
+                EncounterSet = "The Dunland Warriors",
+                Quantity = 3,
+                EasyModeQuantity = 3,
+                Number = 48
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Wild Men of Dunland",
+                ImageType = ImageType.Png,
+                Id = "176B2C82-0C3C-48EC-BB7E-B7C61C9DDC11",
+                CardType = CardType.Treachery,
+                EncounterSet = "The Dunland Warriors",
+                Quantity = 2,
+                EasyModeQuantity = 1,
+                Number = 49
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Ancient Forest",
+                ImageType = ImageType.Png,
+                Id = "AA0B89D9-02C5-4A15-9C81-0E1AF2CC906D",
+                CardType = CardType.Location,
+                EncounterSet = "Ancient Forest",
+                Quantity = 3,
+                EasyModeQuantity = 1,
+                Number = 50
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Tangled Woods",
+                ImageType = ImageType.Png,
+                Id = "1DEE93C2-E861-48CD-9DD0-02CB46491D4E",
+                CardType = CardType.Location,
+                EncounterSet = "Ancient Forest",
+                Quantity = 3,
+                EasyModeQuantity = 3,
+                Number = 51
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Turned Around",
+                ImageType = ImageType.Png,
+                Id = "5CEF2C98-F61D-4766-8A07-42BA17B0CB4B",
+                CardType = CardType.Treachery,
+                EncounterSet = "Ancient Forest",
+                Quantity = 3,
+                EasyModeQuantity = 3,
+                Number = 52
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Prowling Wolf",
+                ImageType = ImageType.Png,
+                Id = "7BFE696F-DA00-4D2F-ACA9-3044F22D6431",
+                CardType = CardType.Enemy,
+                EncounterSet = "Broken Lands",
+                Quantity = 3,
+                EasyModeQuantity = 3,
+                Number = 53
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Broken Lands",
+                ImageType = ImageType.Png,
+                Id = "39982128-25C4-49E7-B7CB-66916E62A69A",
+                CardType = CardType.Location,
+                EncounterSet = "Broken Lands",
+                Quantity = 2,
+                EasyModeQuantity = 1,
+                Number = 54
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Take Cover!",
+                ImageType = ImageType.Png,
+                Id = "350DC354-534A-4FE6-BC4F-475F8C1DDC30",
+                CardType = CardType.Treachery,
+                EncounterSet = "Broken Lands",
+                Quantity = 3,
+                EasyModeQuantity = 2,
+                Number = 55
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Low on Provisions",
+                ImageType = ImageType.Png,
+                Id = "E38C9171-4B13-43E0-A729-18C99C35489E",
+                CardType = CardType.Treachery,
+                EncounterSet = "Weary Travelers",
+                Quantity = 3,
+                EasyModeQuantity = 2,
+                Number = 56
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Off Track",
+                ImageType = ImageType.Png,
+                Id = "3B4CB88B-F9E5-4C70-91A8-9F2AC1B98636",
+                CardType = CardType.Treachery,
+                EncounterSet = "Weary Travelers",
+                Quantity = 2,
+                EasyModeQuantity = 2,
+                Number = 57
+            });
+            Cards.Add(new Card()
+            {
+                Title = "In Need of Rest",
+                ImageType = ImageType.Png,
+                Id = "C22ADAF6-954E-4212-AFA9-5CEA555117D3",
+                CardType = CardType.Treachery,
+                EncounterSet = "Weary Travelers",
+                Quantity = 2,
+                EasyModeQuantity = 1,
+                Number = 58
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Fight at the Fords",
+                HasSecondImage = true,
+                StageNumber = 1,
+                ImageType = ImageType.Png,
+                Id = "4BEF0C09-6FB2-4021-BD27-816EEBFBDDCC",
+                CardType = CardType.Quest,
+                QuestPoints = 6,
+                EncounterSet = "The Fords of Isen",
+                Quantity = 1,
+                Number = 59
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Dunlending Attack",
+                HasSecondImage = true,
+                StageNumber = 2,
+                ImageType = ImageType.Png,
+                Id = "FEBD2BE9-DF9E-4391-A498-86EE6758E2AB",
+                CardType = CardType.Quest,
+                QuestPoints = 14,
+                EncounterSet = "The Fords of Isen",
+                Quantity = 1,
+                Number = 60
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Hold the Fords",
+                HasSecondImage = true,
+                StageNumber = 3,
+                ImageType = ImageType.Png,
+                Id = "8D5B83EB-5A77-492D-897A-1A5341550731",
+                CardType = CardType.Quest,
+                QuestPoints = 16,
+                EncounterSet = "The Fords of Isen",
+                Quantity = 1,
+                Number = 61
+            });
+            Cards.Add(new Card() {
+                Title = "Orders from Orthanc",
+                HasSecondImage = true,
+                StageNumber = 1,
+                ImageType = ImageType.Png,
+                Id = "3ED48AE6-66BB-45B2-B07A-0F549A952F75",
+                CardType = CardType.Quest,
+                QuestPoints = null,
+                EncounterSet = "To Catch an Orc",
+                Quantity = 1,
+                Number = 62
+            });
+            Cards.Add(new Card() {
+                Title = "Searching for Mugash",
+                HasSecondImage = true,
+                StageNumber = 2,
+                ImageType = ImageType.Png,
+                Id = "EA763FD7-64E8-4E39-B318-0F110B20F241",
+                CardType = CardType.Quest,
+                QuestPoints = null,
+                EncounterSet = "To Catch an Orc",
+                Quantity = 1,
+                Number = 63
+            });
+            Cards.Add(new Card() {
+                Title = "The Wizard's Prize",
+                HasSecondImage = true,
+                StageNumber = 3,
+                ImageType = ImageType.Png,
+                Id = "BAD7F11E-961B-49B0-9B67-7924E52F7309",
+                CardType = CardType.Quest,
+                QuestPoints = 15,
+                EncounterSet = "To Catch an Orc",
+                Quantity = 1,
+                Number = 64
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Into the Woods",
+                HasSecondImage = true,
+                StageNumber = 1,
+                ImageType = ImageType.Png,
+                Id = "3D3EFB85-5EDA-45EB-A992-A8146673AECA",
+                CardType = CardType.Quest,
+                QuestPoints = 9,
+                EncounterSet = "Into Fangorn",
+                Quantity = 1,
+                Number = 65
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Escape from Fangorn",
+                HasSecondImage = true,
+                StageNumber = 2,
+                ImageType = ImageType.Png,
+                Id = "C3572881-CF4C-421A-B555-7D40DC91E720",
+                CardType = CardType.Quest,
+                QuestPoints = 12,
+                EncounterSet = "Into Fangorn",
+                Quantity = 1,
+                Number = 66
+            });
+            Cards.Add(new Card()
+            {
+                Title = "The Angry Forest",
+                HasSecondImage = true,
+                StageNumber = 3,
+                ImageType = ImageType.Png,
+                Id = "AD53EA8E-E050-4BCE-B826-945EF6A6F227",
+                CardType = CardType.Quest,
+                QuestPoints = null,
+                EncounterSet = "Into Fangorn",
+                Quantity = 1,
+                Number = 67
+            });
         }
     }
 }

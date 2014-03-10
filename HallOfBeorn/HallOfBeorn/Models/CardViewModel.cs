@@ -185,6 +185,11 @@ namespace HallOfBeorn.Models
             get { return _card.HitPoints.ToString(); }
         }
 
+        public string StageNumber
+        {
+            get { return _card.StageNumber > 0 ? _card.StageNumber.ToString() : string.Empty; }
+        }
+
         public string QuestPoints
         {
             get {
@@ -308,6 +313,41 @@ namespace HallOfBeorn.Models
                     string.Format("/Images/Cards/{0}/{1}{2}{3}", set, title, type, ext)
                     : string.Format("/Images/Cards/{0}{1}", image, ext);
             }
+        }
+
+        string getQuestCardImagePath(bool isFirst)
+        {
+            var format = ImageType.Jpg;
+            if (_card.ImageType != ImageType.None)
+                format = _card.ImageType;
+            else if (!string.IsNullOrEmpty(_card.ImageName))
+            {
+                format = ImageType.Png;
+            }
+
+            var ext = string.Format(".{0}", format.ToString().ToLower());
+            var set = _card.CardSet.Name.ToUrlSafeString();
+            var title = Title.ToUrlSafeString();
+            var number = _card.StageNumber.ToString();
+            var image = _card.ImageName.ToUrlSafeString();
+            var suffix = isFirst ? "A" : "B";
+
+            return string.Format("/Images/Cards/{0}/{1}-{2}{3}{4}", set, title, number, suffix, ext);
+        }
+
+        public string ImagePath1
+        {
+            get { return getQuestCardImagePath(true); }
+        }
+
+        public string ImagePath2
+        {
+            get { return getQuestCardImagePath(false); }
+        }
+
+        public bool HasSecondImage
+        {
+            get { return _card.HasSecondImage; }
         }
 
         public string DetailPath

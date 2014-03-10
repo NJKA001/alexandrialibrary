@@ -69,7 +69,19 @@
         <table style="margin:0px;">
             <tr>
                 <td style="vertical-align:top;">
-                    <a href="@Href(string.Format("/Cards/Details/{0}", @card.Slug))"><img src="@card.ImagePath" style="height:160px;"/></a>
+                    <a href="@Href(string.Format("/Cards/Details/{0}", @card.Slug))">
+                        @if (@card.HasSecondImage)
+                        {
+                            <span>
+                                <img src="@card.ImagePath1" style="height:160px;"/>
+                                <img src="@card.ImagePath2" style="height:160px;"/>
+                            </span>
+                        }
+                        else
+                        {
+                        <img src="@card.ImagePath" style="height:160px;"/>
+                        }
+                    </a>
                 </td>
                 <td style="vertical-align:top;">
                     @if (@card.IsUnique)
@@ -129,6 +141,10 @@
                                 <span style="width:24px;margin-left:14px;"><span style="margin-right:2px;font-weight:bold;">@card.HitPoints</span><img style="margin-bottom:-4px;margin-left:-4px;width:20px;height:20px;" src="/Images/heart.png"/></span>
                                 }
                                 break;
+                            case CardType.Quest:
+                                <span style="width:40px;color:#616161;">Stage</span><span style="margin-left:4px;font-weight:bold;">@card.StageNumber</span>
+                                <span style="width:40px;color:#616161;margin-left:14px;">Quest Points</span><span style="margin-left:4px;font-weight:bold;">@card.QuestPoints</span>
+                                break;    
                             default:
                                 break;
                         }

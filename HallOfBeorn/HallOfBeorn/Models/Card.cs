@@ -64,12 +64,14 @@ namespace HallOfBeorn.Models
         public string EncounterSet { get; set; }
         public byte VictoryPoints { get; set; }
         public byte Quantity { get; set; }
+        public byte EasyModeQuantity { get; set; }
         public string Setup { get; set; }
 
         public string FlavorText { get; set; }
         public string Artist { get; set; }
         public bool SlugIncludesOppositeTitle { get; set; }
         public bool SlugIncludesType { get; set; }
+        public bool HasSecondImage { get; set; }
 
         public string Slug
         {
