@@ -122,7 +122,7 @@ namespace HallOfBeorn.Models.Sets
                 IsUnique = false,
                 Quantity = 3,
                 Traits = new List<string>() { "Rohan.", "Scout." },
-                Text = "Action: Discard Westfold Outdier to choose an enemy not engaged with you. Engage the chosen enemy.",
+                Text = "Action: Discard Westfold Outrider to choose an enemy not engaged with you. Engage the chosen enemy.",
                 FlavorText = "\"Erkenbrand of Westfold has drawn off those men he could gather towards his fastness at Helm's Deep. The rest are scattered.\"-Rider of Rohan, The Two Towers",
                 Number = 6
             });

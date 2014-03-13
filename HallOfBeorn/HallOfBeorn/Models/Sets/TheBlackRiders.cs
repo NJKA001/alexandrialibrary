@@ -489,8 +489,10 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Shire." },
                 EncounterSet = "A Shadow of the Past",
                 Text = "Response: After Bag End leaves play, each player draws 1 card for each Hobbit hero he controls.",
+                FlavorText = "...it was popularly believed, whatever the old folk might say, that the Hill at Bag End was full of tunnels stuffed with treasure. -The Fellowship of the Ring",
                 VictoryPoints = 1,
                 Quantity = 1,
+                EasyModeQuantity = 1,
                 Number = 31
             });
             Cards.Add(new Card()
@@ -505,8 +507,10 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Forest." },
                 EncounterSet = "A Shadow of the Past",
                 Text = "While Woody End is the active location, reduce each Hide X value by 1.",
+                FlavorText = "At the south end of the greensward there was an opening. There the green floor ran on into the wood, and formed a wide space like a hall, roofed by the boughs of trees.\r\n-The Fellowship of the Ring",
                 VictoryPoints = 1,
                 Quantity = 1,
+                EasyModeQuantity = 1,
                 Number = 32
             });
             Cards.Add(new Card()
@@ -520,8 +524,10 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Forest.", " Stream." },
                 EncounterSet = "A Shadow of the Past",
                 Text = "When Revealed: Immediately travel to Stock-brook. If another location is currently active, return it to the staging area.",
+                FlavorText = "\"Why, this is the Stock-brook!\" said Pippin. \"If we are going to try and get back on to our course, we must cross at once and bear right.\" -The Fellowship of the Ring",
                 VictoryPoints = 1,
                 Quantity = 1,
+                EasyModeQuantity = 1,
                 Number = 33
             });
             Cards.Add(new Card()
@@ -535,8 +541,10 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Shire." },
                 EncounterSet = "A Shadow of the Past",
                 Text = "Response: After the players travel to Bamfurlong, each player engaged with a Nazgûl enemy may ready a hero he controls.",
+                FlavorText = "\"This is Bamfurlong, old Farmer Maggot's land.\"\r\n-Pippin, The Fellowship of the Ring",
                 VictoryPoints = 1,
                 Quantity = 1,
+                EasyModeQuantity = 1,
                 Number = 34
             });
             Cards.Add(new Card()
@@ -552,6 +560,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "A Shadow of the Past",
                 Text = "While there is at least 1 other location in play, players cannot travel here.\r\n\r\nTravel: The first player must make a Hide 3 test to travel here.\r\n\r\nAfter Bucklebury Ferry leaves play as an explored location, the players win the game.",
                 Quantity = 1,
+                EasyModeQuantity = 1,
                 Number = 35
             });
             Cards.Add(new Card()
@@ -566,6 +575,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "While Green Hill Country is the active location, characters get +1 Willpower while committed to Hide tests.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack (+2 Attack instead if you have failed a Hide test this round)",
                 Quantity = 3,
+                EasyModeQuantity = 3,
                 Number = 36
             });
             Cards.Add(new Card()
@@ -577,7 +587,9 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 Traits = new List<string>() { "Road." },
                 EncounterSet = "A Shadow of the Past",
+                Text = "While Stock Road is in the staging area, add 2 to the total Threat of the discarded cards when a player resolves a Hide test.\r\n\r\nTravel: The first player must make a Hide 1 test to travel here.",
                 Quantity = 3,
+                EasyModeQuantity = 1,
                 Number = 37
             });
             Cards.Add(new Card()
@@ -589,7 +601,10 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 4,
                 Traits = new List<string>() { "Marshland." },
                 EncounterSet = "A Shadow of the Past",
+                Text = "Forced: After a player fails a Hide test, shuffle a Nazgûl enemy from the discard pile into the encounter deck, if able.",
+                Shadow = "Shadow: Attacking enemy gets +1 Attack (+2 Attack instead if the defending player failed a Hide test this round).",
                 Quantity = 2,
+                EasyModeQuantity = 1,
                 Number = 38
             });
             Cards.Add(new Card()
@@ -606,7 +621,10 @@ namespace HallOfBeorn.Models.Sets
                 NormalizedTraits = new List<string> { "Nazgul." },
                 Keywords = new List<string>() { "Hide 2.", " Cannot have non-Morgul attachments." },
                 EncounterSet = "A Shadow of the Past",
+                Text = "Forced: After engaged player fails a Hide test, Black Rider makes an immediate attack.",
+                FlavorText = "The riding figure sat quite still with its head bowed, as if listening. From inside the hood came a noise as of someone sniffing...-The Fellowship of the Ring",
                 Quantity = 5,
+                EasyModeQuantity = 3,
                 Number = 39
             });
             Cards.Add(new Card()
@@ -621,7 +639,10 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 2,
                 Traits = new List<string>() { "Creature." },
                 EncounterSet = "A Shadow of the Past",
+                Text = "While Evil Crow is engaged with a player, that player adds 1 to the Hide value for each Hide test he makes.",
+                Shadow = "Shadow: If you have failed a Hide test this round, this attack is considered undefended",
                 Quantity = 3,
+                EasyModeQuantity = 3,
                 Number = 40
             });
             Cards.Add(new Card()
@@ -631,7 +652,10 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 Keywords = new List<string>() { "Peril.", " Hide 2." },
                 EncounterSet = "A Shadow of the Past",
+                Text = "When Revealed: If you have failed a Hide test this phase, remove each character you control from the quest.",
+                Shadow = "Shadow: Return attacking enemy to the staging area after this attack.",
                 Quantity = 3,
+                EasyModeQuantity = 2,
                 Number = 41
             });
             Cards.Add(new Card()
@@ -641,6 +665,8 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 Keywords = new List<string>() { "Doomed 2." },
                 EncounterSet = "A Shadow of the Past",
+                Text = "When Revealed: Starting with the last player, each player must either return a Nazgûl enemy engaged with him to the staging area or make a Hide 2 test.",
+                FlavorText = "\"So he is seeking it, seeking it, and all his thought is bent on it.\" -Gandalf, The Fellowship of the Ring",
                 Quantity = 3,
                 Number = 42
             });
@@ -651,7 +677,10 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 Keywords = new List<string>() { "Peril.", " Surge." },
                 EncounterSet = "A Shadow of the Past",
+                Text = "When Revealed: Attach to a hero. (Counts as a Condition attachment with the text: \"Limit 1 per hero. Forced: After a player fails a Hide test, discard attached hero.\")",
+                FlavorText = "\"He is not far away. I wish to find him. If he passes will you tell me? I will come back with gold.\"\r\n-Black Rider, The Fellowship of the Ring",
                 Quantity = 2,
+                EasyModeQuantity = 0,
                 Number = 43
             });
             Cards.Add(new Card()
@@ -677,8 +706,10 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 4,
                 Traits = new List<string>() { "Bree." },
                 EncounterSet = "A Knife in the Dark",
+                Text = "Response: After players travel here, the first player puts 1 ally into play from his hand.\r\n\r\nForced: After The Prancing Pony leaves play, discard cards from the top of the encounter deck until X enemies have been discarded. X is the number of players in the game. Put each enemy discarded by this effect into play engaged with the first player.",
                 VictoryPoints = 1,
-                Quantity = 2,
+                Quantity = 1,
+                EasyModeQuantity = 1,
                 Number = 45
             });
             Cards.Add(new Card()
@@ -692,8 +723,11 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Hills.", " Ruins." },
                 Keywords = new List<string>() { "Immune to player card effects." },
                 EncounterSet = "A Knife in the Dark",
+                Text = "While Weathertop is in the victory display, each enemy in play gets -1 Threat.\r\n\r\nTravel: The first player must exhaust The One Ring to travel here.",
+                FlavorText = "\"It was burned and broken, and nothing remains of it now but a tumbled ring...\"\r\n-Strider, The Fellowship of the Ring",
                 VictoryPoints = 4,
                 Quantity = 1,
+                EasyModeQuantity = 1,
                 Number = 46
             });
             Cards.Add(new Card()
@@ -705,7 +739,11 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 2,
                 Traits = new List<string>() { "Forest." },
                 EncounterSet = "A Knife in the Dark",
+                Text = "While Chetwood is in the staging area, Spy enemies get +1 Threat and +1 Attack.",
+                Shadow = "Shadow: Defending player discards 1 random card from his hand.",
+                FlavorText = "On the third day out from Bree they came out of the Chetwood. -The Fellowship of the Ring",
                 Quantity = 3,
+                EasyModeQuantity = 3,
                 Number = 47
             });
             Cards.Add(new Card()
@@ -718,8 +756,11 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 6,
                 Traits = new List<string>() { "Marshland." },
                 EncounterSet = "A Knife in the Dark",
+                Text = "While Midgewater is the active location, enemies cannot attack, take damage, or be engaged.\r\n\r\nForced: After Midgewater becomes the active location, return each engaged enemy in play to the staging area.",
+                FlavorText = "...there was no permanent trail even for Rangers to find through their shifting quagmires.\r\n-The Fellowship of the Ring",
                 VictoryPoints = 1,
                 Quantity = 1,
+                EasyModeQuantity = 1,
                 Number = 48
             });
             Cards.Add(new Card()
@@ -731,7 +772,9 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 2,
                 Traits = new List<string>() { "Forest.", " Hills." },
                 EncounterSet = "A Knife in the Dark",
+                Text = "Response: After the players travel here, place 1 non-unique enemy in play facedown under this location. While an enemy is under this location, it is out of play.\r\n\r\n Forced: After this location leaves play, return each enemy under it to the staging area face-up.",
                 Quantity = 3,
+                EasyModeQuantity = 3,
                 Number = 49
             });
             Cards.Add(new Card()
@@ -748,7 +791,9 @@ namespace HallOfBeorn.Models.Sets
                 NormalizedTraits = new List<string> { "Nazgul." },
                 Keywords = new List<string>() { "Cannot have non-Morgul attachments." },
                 EncounterSet = "A Knife in the Dark",
+                Text = "While Rider of Mordor is engaged with a player, characters that player controls get -1 Willpower.\r\n\r\nWhile The One Ring is exhausted, Rider of Mordor gets -10 engagement cost.",
                 Quantity = 2,
+                EasyModeQuantity = 2,
                 Number = 50
             });
             Cards.Add(new Card()
@@ -765,8 +810,10 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Bree.", " Spy." },
                 Keywords = new List<string>() { "Players cannot optionally engage Bill Ferny." },
                 EncounterSet = "A Knife in the Dark",
+                Text = "Forced: At the beginning of the staging step, either shuffle 1 out of play Ringwraith into the encounter deck or each player raises their threat by 1 for each non-Fellowship hero he committed to the quest.",
                 VictoryPoints = 1,
                 Quantity = 1,
+                EasyModeQuantity = 1,
                 Number = 51
             });
             Cards.Add(new Card()
@@ -781,7 +828,10 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 4,
                 Traits = new List<string>() { "Bree.", " Spy." },
                 EncounterSet = "A Knife in the Dark",
+                Text = "While The One Ring is exhausted, Shady Bree-lander gains: \"Cannot be optionally engaged.\"",
+                Shadow = "Shadow: Defending character get -1 Defense (-2 Defense instead if The One Ring is exhausted).",
                 Quantity = 4,
+                EasyModeQuantity = 4,
                 Number = 52
             });
             Cards.Add(new Card()
@@ -796,7 +846,10 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Traits = new List<string>() { "Spy." },
                 EncounterSet = "A Knife in the Dark",
+                Text = "When Revealed: You must either shuffle an out of play Ringwraith into the encounter deck or reveal an additional encounter card.",
+                FlavorText = "Presently he slipped out of the door, followed by the squint-eyed southerner: the two had been whispering together a good deal during the evening.\r\n-The Fellowship of the Ring",
                 Quantity = 3,
+                EasyModeQuantity = 2,
                 Number = 53
             });
             Cards.Add(new Card()
@@ -806,7 +859,10 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 Keywords = new List<string>() { "Peril." },
                 EncounterSet = "A Knife in the Dark",
+                Text = "When Revealed: You must either remove 2 heroes you control from the quest or shuffle an out of play Ringwraith into the encounter deck.",
+                Shadow = "Shadow: Return attacking enemy to the staging area after this attack.",
                 Quantity = 3,
+                EasyModeQuantity = 3,
                 Number = 54
             });
             Cards.Add(new Card()
@@ -816,7 +872,10 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 Keywords = new List<string>() { "Peril." },
                 EncounterSet = "A Knife in the Dark",
+                Text = "When Revealed: Attach to a hero you control. (Counts as a Condition attachment with the text: \"Limit 1 per hero. Reduce attached hero's Willpower, Attack and Defense to 0.\")",
+                FlavorText = "",
                 Quantity = 2,
+                EasyModeQuantity = 0,
                 Number = 55
             });
             Cards.Add(new Card()
@@ -843,6 +902,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When attached hero would take any amount of damage, reduce the Ring-bearer's life by an equal amount instead.\r\nIf the Ring-bearer's life reaches zero, the players lose the game.",
                 EncounterSet = "Flight to the Ford",
                 Quantity = 1,
+                EasyModeQuantity = 1,
                 Number = 57
             });
             Cards.Add(new Card()
@@ -852,12 +912,15 @@ namespace HallOfBeorn.Models.Sets
                 IsUnique = true,
                 CardType = CardType.Location,
                 Threat = 0,
+                IsVariableThreat = true,
                 QuestPoints = 4,
                 Traits = new List<string>() { "Bridge.", " River." },
                 Keywords = new List<string>() { "Immune to player card effects." },
                 EncounterSet = "Flight to the Ford",
+                Text = "X is the number of players in the game.\r\n\r\nTravel: The first player must reveal the top card of the burden deck and resolve that card as if it were just revealed from the encounter deck to travel here.",
                 VictoryPoints = 3,
                 Quantity = 1,
+                EasyModeQuantity = 1,
                 Number = 58
             });
             Cards.Add(new Card()
@@ -871,8 +934,10 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "River." },
                 Keywords = new List<string>() { "Immune to player card effects." },
                 EncounterSet = "Flight to the Ford",
+                Text = "Response: After Ford of Bruinen leaves play as an explored location, all engaged enemies are discarded.\r\n\r\nTravel: The first player must reveal the top card of the encounter deck to travel here.",
                 VictoryPoints = 5,
                 Quantity = 1,
+                EasyModeQuantity = 1,
                 Number = 59
             });
             Cards.Add(new Card()
@@ -885,8 +950,11 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 2,
                 Traits = new List<string>() { "Forest." },
                 EncounterSet = "Flight to the Ford",
+                Text = "While The Troll's Camp is the active location, each hero gets +1 Willpower, +1 Attack and +1 Defense.",
+                FlavorText = "\"We are forgetting our family history! These must be the very three that were caught by Gandalf, quarrelling over the right way to cook thirteen dwarves and one hobbit.\"\r\n-Frodo, The Fellowship of the Ring",
                 VictoryPoints = 1,
                 Quantity = 1,
+                EasyModeQuantity = 1,
                 Number = 60
             });
             Cards.Add(new Card()
@@ -898,7 +966,10 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 Traits = new List<string>() { "Forest." },
                 EncounterSet = "Flight to the Ford",
+                Text = "While Ettenmoors is the active location, do not deal Nazgûl enemies a shadow card during the combat phase.\r\n\r\nForced: After any amount of progress is placed on Ettenmoors, reduce the Ring-bearer's life by 1.",
+                FlavorText = "Before long Frodo was obliged to dismount and stuggle along on foot. -The Fellowship of the Ring",
                 Quantity = 3,
+
                 Number = 61
             });
             Cards.Add(new Card()
@@ -910,7 +981,10 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 4,
                 Traits = new List<string>() { "Road." },
                 EncounterSet = "Flight to the Ford",
+                Text = "Action: Place the top card of the burden deck on top of the encounter deck to place 4 progress on The Old Road. (Use this action only if you are playing campaign mode.)",
+                FlavorText = "\"The Road is watched, be we should have to cross it, if we tried to take cover in the thickets away to the south.\"\r\n-Aragorn, The Fellowship of the Ring",
                 Quantity = 3,
+                EasyModeQuantity = 3,
                 Number = 62
             });
             Cards.Add(new Card()
@@ -927,7 +1001,9 @@ namespace HallOfBeorn.Models.Sets
                 NormalizedTraits = new List<string> { "Nazgul." },
                 Keywords = new List<string>() { "Cannot have non-Morgul attachments." },
                 EncounterSet = "Flight to the Ford",
+                Text = "While Fell Rider is in the staging area, it gains: \"Forced: At the beginning of the encounter phase, the first player must either reduce the Ring-bearer's life by 1 or engage Fell Rider.\"",
                 Quantity = 4,
+                EasyModeQuantity = 4,
                 Number = 63
             });
             Cards.Add(new Card()
