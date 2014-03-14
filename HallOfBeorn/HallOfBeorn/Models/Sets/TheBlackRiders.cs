@@ -1013,16 +1013,23 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 Keywords = new List<string>() { "Peril." },
                 EncounterSet = "Flight to the Ford",
+                Text = "When Revealed: You must either shuffle the top card of the burden deck into the encounter deck and reveal an additional encounter card, or raise each player's threat by 3 and immediately end the quest phase (do not resolve the quest).",
+                FlavorText = "Then the leader, who was now half across the Ford, stood up menacing in his stirrups, and raised up his hand.\r\n-The Fellowship of the Ring",
                 Quantity = 3,
+                EasyModeQuantity = 3,
                 Number = 64
             });
             Cards.Add(new Card()
             {
                 Title = "The Enemy is Upon Us!",
+                NormalizedTitle = "The Enemy is Upon Us",
                 Id = "0e12b3e5-d330-4a13-be7b-5a07a57a2273",
                 CardType = CardType.Treachery,
                 EncounterSet = "Flight to the Ford",
+                Text = "When Revealed: Each engaged enemy makes an immediate attack. If no attack is made this way, The Enemy is Upon Us! gains surge",
+                Shadow = "Shadow: If this attack destroys a character, remove all progress from the current quest.",
                 Quantity = 2,
+                EasyModeQuantity = 0,
                 Number = 65
             });
             Cards.Add(new Card()
@@ -1031,7 +1038,10 @@ namespace HallOfBeorn.Models.Sets
                 Id = "98bf5fdc-ff74-48e2-88c8-0e4134fd6984",
                 CardType = CardType.Treachery,
                 EncounterSet = "Flight to the Ford",
+                Text = "When Revealed: Reduce the Ring-bearer's life by 1. Then, reduce the Ring-bearer's Willpower, Attack, and Defense to 0 until the end of the round.",
+                Shadow = "Shadow: If this attack destroys a character, reduce the Ring-bearer's life by 1.",
                 Quantity = 3,
+                EasyModeQuantity = 3,
                 Number = 66
             });
             Cards.Add(new Card()
@@ -1041,7 +1051,10 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 Keywords = new List<string>() { "Peril." },
                 EncounterSet = "Flight to the Ford",
+                Text = "When Revealed: Treat the text box of each character in play as blank (except for Traits) until the end of the round. If there is a Nazgûl enemy in the staging area, The Nine are Abroad gains surge.",
+                Shadow = "Shadow: Return attacking enemy to the staging area after this attack.",
                 Quantity = 2,
+                EasyModeQuantity = 1,
                 Number = 67
             });
             Cards.Add(new Card()
@@ -1058,8 +1071,10 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Nazgûl." },
                 NormalizedTraits = new List<string> { "Nazgul." },
                 Keywords = new List<string>() { "Immune to player card effects." },
+                Text = "The Witch-king gets -30 engagement cost while The One Ring is exhausted.\r\n\r\nCharacters with 1 Willpower or less cannot defend attacks made by The Witch-king.",
                 EncounterSet = "The Nazgul",
                 Quantity = 1,
+                EasyModeQuantity = 1,
                 Number = 68
             });
             Cards.Add(new Card()
@@ -1076,7 +1091,10 @@ namespace HallOfBeorn.Models.Sets
                 NormalizedTraits = new List<string> { "Nazgul." },
                 Keywords = new List<string>() { "Cannot have non-Morgul attachments." },
                 EncounterSet = "The Nazgul",
+                Text = "Forced: When Ringwraith attacks, deal it an additional shadow card if The One Ring is exhausted.",
+                Shadow = "Shadow: Shuffle this card into the encounter deck.",
                 Quantity = 4,
+                EasyModeQuantity = 2,
                 Number = 69
             });
             Cards.Add(new Card()
@@ -1086,7 +1104,10 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 Keywords = new List<string>() { "Surge." },
                 EncounterSet = "The Nazgul",
+                Text = "When Revealed: Attach to a Nazgûl enemy in play, if able. (Counts as a Weapon attachment with the text: \"Limit 1 per enemy. Attached enemy gets +1 Attack and cannot take non-combat damage.\")",
+                FlavorText = "...in their haggard hands were swords of steel.\r\n-The Fellowship of the Ring",
                 Quantity = 3,
+                EasyModeQuantity = 1,
                 Number = 70
             });
             Cards.Add(new Card()
@@ -1095,7 +1116,10 @@ namespace HallOfBeorn.Models.Sets
                 Id = "4765cbea-5ae8-4e39-a811-a67f1f6ca2a0",
                 CardType = CardType.Treachery,
                 EncounterSet = "The Nazgul",
+                Text = "When Revealed: Each ally gets -1 Willpower until the end of the round. Deal 2 damage to each ally with 0 willpower.",
+                Shadow = "Shadow: Discard a non-objective attachment you control.",
                 Quantity = 3,
+                EasyModeQuantity = 1,
                 Number = 71
             });
             Cards.Add(new Card()
@@ -1107,7 +1131,10 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 Traits = new List<string>() { "Forest." },
                 EncounterSet = "Hunted",
+                Text = "Pathless Country gets +4 quest points while in the staging area.",
+                Shadow = "Shadow: After this attack, the attacking enemy engages the next player then makes an immediate attack.",
                 Quantity = 3,
+                EasyModeQuantity = 3,
                 Number = 72
             });
             Cards.Add(new Card()
@@ -1117,7 +1144,10 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 Keywords = new List<string>() { "Peril." },
                 EncounterSet = "Hunted",
+                Text = "When Revealed: Search the encounter deck and discard pile for a Nazgûl enemy. Either add it to the staging area or put it into play engaged with the first player. Shuffle the encounter deck.",
+                Shadow = "Shadow: Attacking enemy makes an additional attack after this one.",
                 Quantity = 3,
+                EasyModeQuantity = 1,
                 Number = 73
             });
             Cards.Add(new Card()
@@ -1127,7 +1157,9 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 Keywords = new List<string>() { "Surge." },
                 EncounterSet = "The Black Riders",
+                Text = "When Revealed: Attach to a Nazgûl enemy in play, if able. (Counts as a Mount attachment with the text: \"Limit 1 per enemy. Attached enemy gets -10 engagement cost and gains: 'Forced: At the end of the refresh phase, return attached enemy to the staging area.'\")",
                 Quantity = 3,
+                EasyModeQuantity = 1,
                 Number = 74
             });
             Cards.Add(new Card()
@@ -1136,7 +1168,10 @@ namespace HallOfBeorn.Models.Sets
                 Id = "1851fafb-7f9a-46d7-a0f0-7fb2ad9ee567",
                 CardType = CardType.Treachery,
                 EncounterSet = "The Black Riders",
+                Text = "When Revealed: Return each engaged Nazgûl enemy to the staging area. If no enemies were returned to the staging area by this effect, Rode Like a Gale gains surge.",
+                Shadow = "Shadow: Return attacking enemy to the staging area after this attack.",
                 Quantity = 2,
+                EasyModeQuantity = 2,
                 Number = 75
             });
             Cards.Add(new Card()
@@ -1146,6 +1181,8 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 Keywords = new List<string>() { "Surge." },
                 EncounterSet = "The Ring",
+                Text = "When Revealed: The first player must either exhaust The One Ring or raise his threat 3.",
+                Shadow = "Shadow: Attacking enemy gets +1 Attack (+2 Attack instead if The One Ring is exhausted).",
                 Quantity = 3,
                 Number = 76
             });
