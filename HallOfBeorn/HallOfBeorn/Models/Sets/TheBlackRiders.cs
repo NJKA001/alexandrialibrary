@@ -362,7 +362,8 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 ImageName = "M1960",
-                Title = "Three is Company - 1A",
+                Title = "Three is Company",
+                StageNumber = 1,
                 Id = "6b34adb4-b510-4db9-aaba-9a1876626dce",
                 CardType = CardType.Quest,
                 EncounterSet = "A Shadow of the Past",
@@ -377,7 +378,8 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 ImageName = "M1961",
-                Title = "A Shortcut to Mushrooms - 2A",
+                Title = "A Shortcut to Mushrooms",
+                StageNumber = 2,
                 Id = "40c7a675-d48f-4e71-8818-5f0ffb9fa0dd",
                 CardType = CardType.Quest,
                 EncounterSet = "A Shadow of the Past",
@@ -390,7 +392,8 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 ImageName = "M1962",
-                Title = "Escape to Buckland - 3A",
+                Title = "Escape to Buckland",
+                StageNumber = 3,
                 Id = "7371cfea-03d0-4bc0-98a1-d99e0acdbf88",
                 CardType = CardType.Quest,
                 Text = "When Revealed: Add Buckleberry Ferry to the staging area.",
@@ -402,7 +405,8 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 ImageName = "M1963",
-                Title = "Trouble in Bree - 1A",
+                Title = "Trouble in Bree",
+                StageNumber = 1,
                 Id = "d0b6992d-9dc4-41fa-a483-b4ad0a3d60b3",
                 CardType = CardType.Quest,
                 Text = "Setup: Set all copies of Ringwraith, The Witch-king, Midgewater, and Weathertop aside, out of play. Add The Prancing Pony and Bill Ferny to the staging area. Shuffle the encounter deck.",
@@ -415,7 +419,8 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 ImageName = "M1964",
-                Title = "Into the Wild - 2A",
+                Title = "Into the Wild",
+                StageNumber = 2,
                 Id = "28a4721b-3696-4fae-9eea-01b5a250c892",
                 CardType = CardType.Quest,
                 OppositeText = "When Revealed: Add Midgewater to the staging area. Each player places 1 progress on the current quest.\r\nForced: At the end of the round, eithe remove X progress from the current quest or shuffle 1 out of play Ringwraith into the encounter deck. X is the number of players in the game.\r\nThe players cannot advance while Midgewater is in play.",
@@ -427,7 +432,8 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 ImageName = "M1965",
-                Title = "The Ringwraiths Attack - 3A",
+                Title = "The Ringwraiths Attack",
+                StageNumber = 3,
                 Id = "257f9b44-2744-4f02-bbf6-115d12b52e8d",
                 CardType = CardType.Quest,
                 Text = "When Revealed: Add Weathertop and The Witch-king to the staging area. Search the encounter deck and discard pile and add each Nazgûl enemy found to the staging area. Shuffle the encounter deck.",
@@ -439,7 +445,8 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 ImageName = "M1966",
-                Title = "Pursued by the Enemy - 1A",
+                Title = "Pursued by the Enemy",
+                StageNumber = 1,
                 Id = "f9824e39-fda8-4e4b-bc74-83b4bd40c72d",
                 CardType = CardType.Quest,
                 Text = "Setup: Shuffle each burden card from the Flight to the Ford burden set into a Burden deck. Attach An Evil Wound to the Ring-bearer. Set Ford of Bruinen and The Witch-king aside, out of play. Add The Last Bridge and 1 Fell Rider per player to the staging area. Set the Ring-bearer's life at 15. Shuffle the encounter deck.",
@@ -453,7 +460,8 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 ImageName = "M1967",
-                Title = "Race To Rivendell - 2A",
+                Title = "Race To Rivendell",
+                StageNumber = 2,
                 Id = "6b2673af-c764-4599-a265-6e43d3b75310",
                 CardType = CardType.Quest,
                 OppositeText = "When Revealed: Add Ford of Bruinen and The Witch-king to the staging area.\r\nWhile at least 1 Nazgûl enemy is in play, Race to Rivendell gets +15 quest points.\r\nForced: At the end of the round, reduce the Ring-bearer's life by 1.\r\nIf the players defeat this stage, they have won the game.",
