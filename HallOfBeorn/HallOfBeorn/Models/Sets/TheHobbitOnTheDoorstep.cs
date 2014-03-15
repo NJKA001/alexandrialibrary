@@ -30,7 +30,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 1,
                 Defense = 2,
                 Text = "Response: Pay 1 resource from Balin's resource pool to cancel a shadow effect just triggered during an attack. Then, deal the attacking enemy another shadow card. (Limit once per attack.)",
-                Number = 1
+                Number = 2
             });
             Cards.Add(new Card() {
                 ImageName = "M1626",
@@ -48,7 +48,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 3,
                 Defense = 2,
                 Text = "When Bard the Bowman makes a ranged attack, the enemy he attacks gets -2 Defense until the end of the phase.",
-                Number = 2
+                Number = 3
             });
             Cards.Add(new Card() {
                 ImageName = "M1630",
@@ -65,7 +65,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 2,
                 Defense = 1,
                 Text = "While you control at least 5 Dwarf characters, Bifur gains: 'Response: After you play Bifur from your hand, draw 2 cards.'",
-                Number = 3
+                Number = 7
             });
             Cards.Add(new Card() {
                 ImageName = "M1624",
@@ -82,7 +82,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 1,
                 Defense = 1,
                 Text = "Bilbo ~Baggins does not count against the hero limit and cannot gain resources from non-treasure cards.\r\nThe first player gains control of Bilbo ~Baggins.\r\nAction: Spend 1 Baggins resource to search your deck for a treasure card and add it to your hand.\r\nIf Bilbo ~Baggins leaves play, the players have lost the game.",
-                Number = 4
+                Number = 1
             });
             Cards.Add(new Card() {
                 ImageName = "M1642",
@@ -94,9 +94,9 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Attach to Bilbo ~Baggins." },
                 ResourceCost = 0,
                 Quantity = 1,
-                Traits = new List<string>() { "Artifact.", " Item.", " Ring." },
+                Traits = new List<string>() { "Artifact.", "Item.", "Ring." },
                 Text = "Action: Exhaust Bilbo's Magic ~Ring and raise your threat by 1 to gain 1 Baggins resource. (Limit once per round.)\r\n\r\nResponse: After Bilbo ~Baggins exhausts to defend an attack, exhaust Bilbo's Magic ~Ring and raise your threat by 3 to cancel all damage from this attack.",
-                Number = 5
+                Number = 19
             });
             Cards.Add(new Card() {
                 ImageName = "M1638",
@@ -105,13 +105,13 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Tactics,
                 IsUnique = true,
-                Keywords = new List<string>() { "Limit 1 per deck.", " Attach to a hero with Ranged." },
+                Keywords = new List<string>() { "Limit 1 per deck.", "Attach to a hero with Ranged." },
                 ResourceCost = 0,
                 Quantity = 3,
                 Traits = new List<string>() { "Artifact.", " Item." },
                 Text = "Response: After attached hero declares an attack, add Black Arrow to the victory display to give attached hero +5 Attack for this attack.",
                 VictoryPoints = 1,
-                Number = 6
+                Number = 15
             });
             Cards.Add(new Card() {
                 ImageName = "M1628",
@@ -128,7 +128,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 1,
                 Defense = 2,
                 Text = "When counting the number of Dwarf characters you control, Bombur counts as two.",
-                Number = 7
+                Number = 5
             });
             Cards.Add(new Card() {
                 ImageName = "M1633",
@@ -139,7 +139,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Quantity = 3,
                 Text = "Action: Choose a hero you control. Until the end of the phase, give control of that hero and all resources in that hero's resource pool to another player. (Limit 1 per phase.)",
-                Number = 8
+                Number = 10
             });
             Cards.Add(new Card() {
                 ImageName = "M1631",
@@ -157,7 +157,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 1,
                 Defense = 2,
                 Text = "While you control at least 5 Dwarf characters, lower the cost to play Dwalin by 2.",
-                Number = 9
+                Number = 8
             });
             Cards.Add(new Card() {
                 ImageName = "M1640",
@@ -170,7 +170,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Traits = new List<string>() { "Skill." },
                 Text = "Response: After attached hero quests successfully, name a card type and discard the top card of your deck. If the discarded card is the named type, take it into your hand.",
-                Number = 10
+                Number = 17
             });
             Cards.Add(new Card() {
                 ImageName = "M1629",
@@ -188,7 +188,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 1,
                 Defense = 1,
                 Text = "While you control at least 5 Dwarf characters, Gloin gains: 'Response: After you play Gloin from your hand, choose a hero. Add 2 resources to that hero's resource pool.'",
-                Number = 11
+                Number = 6
             });
             Cards.Add(new Card() {
                 ImageName = "M1637",
@@ -201,7 +201,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Traits = new List<string>() { "Item.", " Weapon." },
                 Text = "Combat Action: Choose an enemy in the staging area. Exhaust Great Yew Bow and attached hero to make a ranged attack against that enemy. Declare attached hero as the attacker. No other attackers can be declared for this attack.",
-                Number = 12
+                Number = 14
             });
             Cards.Add(new Card() {
                 ImageName = "M1641",
@@ -215,7 +215,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Traits = new List<string>() { "Title." },
                 Text = "Action: Exhaust King Under the Mountain to look at the top 2 cards of your deck. Add 1 to your hand and discard the other.",
-                Number = 13
+                Number = 18
             });
             Cards.Add(new Card() {
                 ImageName = "M1644",
@@ -229,7 +229,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Traits = new List<string>() { "Artifact.", " Erebor.", " Item." },
                 Text = "Attached hero gets +1 Defense and +1 hit point.",
-                Number = 14
+                Number = 21
             });
             Cards.Add(new Card() {
                 ImageName = "M1627",
@@ -247,7 +247,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 1,
                 Defense = 1,
                 Text = "While you control at least 5 Dwarf characters, Oin gets +1 Attack and gains the Tactics resource icon.",
-                Number = 15
+                Number = 4
             });
             Cards.Add(new Card() {
                 ImageName = "M1634",
@@ -258,7 +258,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Quantity = 3,
                 Text = "Action: Exhaust a hero you control to shuffle the encounter deck and look at its top card. Place progress tokens on the current quest equal to the revealed card's Threat. Then, put that card back on top of the encounter deck.",
-                Number = 16
+                Number = 11
             });
             Cards.Add(new Card() {
                 ImageName = "M1632",
@@ -269,7 +269,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Quantity = 3,
                 Text = "Action: Exhaust a Weapon attachment to choose a non-unique enemy with 0 Defense. Discard the chosen enemy.",
-                Number = 17
+                Number = 9
             });
             Cards.Add(new Card() {
                 ImageName = "M1643",
@@ -283,7 +283,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Traits = new List<string>() { "Artifact.", " Erebor.", " Item." },
                 Text = "Action: Exhaust The Arkenstone and raise your threat by X to lower by X the cost of the next ally you play this phase that matches the attached hero's sphere.",
-                Number = 18
+                Number = 20
             });
             Cards.Add(new Card() {
                 ImageName = "M1636",
@@ -294,7 +294,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Quantity = 3,
                 Text = "Action: Choose a character in play (other than Bilbo ~Baggins). Add Bilbo ~Baggins' total Willpower, Attack, and Defense to that character's Willpower, Attack, and Defense respectively until the end of the phase.",
-                Number = 19
+                Number = 13
             });
             Cards.Add(new Card() {
                 ImageName = "M1645",
@@ -308,7 +308,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Traits = new List<string>() { "Artifact.", " Erebor.", " Item." },
                 Text = "Attached hero gets +2 Attack.Response: After attached hero attacks and destroys an enemy, deal 1 damage to another enemy engaged with you.",
-                Number = 20
+                Number = 22
             });
             Cards.Add(new Card() {
                 ImageName = "M1647",
@@ -323,7 +323,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Artifact.", " Erebor.", " Item." },
                 Text = "Action: Add Thror's Golden Cup to the victory display to draw 3 cards.",
                 VictoryPoints = 3,
-                Number = 21
+                Number = 24
             });
             Cards.Add(new Card() {
                 ImageName = "M1646",
@@ -337,7 +337,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Traits = new List<string>() { "Artifact.", " Erebor.", " Item." },
                 Text = "Attached hero gains Ranged.When making a ranged attack, attached hero gets +2 Attack.",
-                Number = 22
+                Number = 23
             });
             Cards.Add(new Card() {
                 ImageName = "M1639",
@@ -351,7 +351,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Traits = new List<string>() { "Artifact.", " Item." },
                 Text = "Response: After a location is added to the staging area, attach Thror's Key to that location. While attached to a location, Thror's Key gains: 'Treat attached location's printed text box as blank, except for traits.'",
-                Number = 23
+                Number = 16
             });
             Cards.Add(new Card() {
                 ImageName = "M1635",
@@ -362,144 +362,212 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Quantity = 3,
                 Text = "Action: If you control at least 1 Dwarf hero, put a Dwarf ally from your discard pile into play under your control. Put that ally on the bottom of your deck at the end of the phase.",
-                Number = 24
+                Number = 12
             });
             Cards.Add(new Card() {
                 ImageName = "M1690",
-                Title = "Into Mirkwood - 1A",
+                Title = "Into Mirkwood",
+                StageNumber = 1,
                 Id = "1866ce74-8552-4ac5-8b0a-1e7a6f3b4338",
                 CardType = CardType.Quest,
                 Setup = "t",
                 Quantity = 1,
                 QuestPoints = 9,
-                Text = "Setup: Each player may shuffle 1 copy Bilbo's Magic Ring into his deck. Search the encounter deck for The Spider's Glade and set it aside, out of play. Then, shuffle the encounter deck and reveal 1 encounter card per player.",
+                Text = "Setup: Each player may shuffle 1 copy Bilbo's Magic ~Ring into his deck. Search the encounter deck for The Spider's Glade and set it aside, out of play. Then, shuffle the encounter deck and reveal 1 encounter card per player.",
+                OppositeText = "Unconscious characters cannot quest, attack, defend, collect resources, trigger abilities, be poisoned, or ready (except by effects that target unconscious character).",
                 EncounterSet = "Flies and Spiders",
-                Number = 25
+                Number = 67
             });
             Cards.Add(new Card() {
                 ImageName = "M1691",
-                Title = "Lost in the Dark - 2A",
+                Title = "Lost in the Dark",
+                StageNumber = 2,
                 Id = "a4ffb8cd-fd95-4b47-95d1-637bd2bd78a1",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 QuestPoints = null,
                 EncounterSet = "Flies and Spiders",
-                Number = 26
+                OppositeText = "When Revealed: Reveal stage 3 and create a separate staging area for the first player use that stage. If there are not other players in the game, discard this stage and each card in the stage area. All other players advance to stage 4.",
+                Number = 68
             });
             Cards.Add(new Card() {
                 ImageName = "M1692",
-                Title = "Captured by Spiders - 3A",
+                Title = "Captured by Spiders",
+                StageNumber = 3,
                 Id = "d99e07f6-7a57-4b5f-a108-13bd7ce6fa4b",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 Text = "When Revealed: Remove all resources from each hero's resource pool. Then, make each character you control (except Bilbo ~Baggins) unconscious.",
                 EncounterSet = "Flies and Spiders",
-                Number = 27
+                OppositeText = 
+@"Unconscious characters cannot quest, attack, defend, collect resources, trigger abilities, be poisoned, or ready (except by effects that target unconscious character).
+
+Do not pass the first player token. When this stage is complete, do not advance to stage 4 until the end of the quest phase. (Combine staging areas if necessary.)
+
+Action: Spend 2 Baggins resources to ready and unconscious character you control.",
+                Number = 69
             });
             Cards.Add(new Card() {
                 ImageName = "M1693",
-                Title = "Battle with the Spiders - 4A",
+                Title = "Battle with the Spiders",
+                StageNumber = 4,
                 Id = "1ee75e10-bcc5-4243-ab28-3dc1978a50af",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 Text = "When Revealed: Add The Spider's Glade to the staging area.",
+                OppositeText = 
+@"Unconscious characters cannot quest, attack, defend, collect resources, trigger abilities, be poisoned, or ready (except by effects that target unconscious character).
+
+Progress cannot be placed on this stage while The Spider's Glade is in play.
+
+Action: Spend 2 Baggins resources to ready an unconscious character you control.
+
+If the players defeat this stage, they have won the game and discovered the treasure card Bilbo's Magic Ring.",
                 EncounterSet = "Flies and Spiders",
-                Number = 28
+                Number = 70
             });
             Cards.Add(new Card() {
                 ImageName = "M1694",
-                Title = "A Warm Welcome - 1A",
+                Title = "A Warm Welcome",
+                StageNumber = 1,
                 Id = "57fc374c-ca6d-4556-9181-c1b578d7a01d",
                 CardType = CardType.Quest,
                 Setup = "sstt",
                 Quantity = 1,
                 QuestPoints = null,
                 Text = "Setup: Search the encounter deck for Smaug the Golden, Smaug the Magnificent, The Lonely Mountain, and A Bare Patch. Set Smaug the Magnificent and A Bare Patch aside, out of play. Add Smaug the Golden and The Lonely Mountain to the staging area. Shuffle the five Erebor treasure cards and stack them facedown under The Lonely Mountain.",
+                OppositeText =
+@"Skip the Quest phase.
+
+Forced: At the end of the round, advance to stage 2.
+",
                 EncounterSet = "The Lonely Mountain",
-                Number = 29
+                Number = 71
             });
             Cards.Add(new Card() {
                 ImageName = "M1695",
-                Title = "The Burglar's Turn - 2A",
+                Title = "The Burglar's Turn",
+                StageNumber = 2,
                 Id = "4355352b-307e-407b-98f9-3d4fb2a14a49",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 EncounterSet = "The Lonely Mountain",
-                Number = 30
+                OppositeText =
+@"Forced: After questing successfully, place 1 progress on Smaug the Golden. Then, he first player makes a burgle attempt. If successful, the first player takes the top card from under The Lonely Mountain into his hand. Then, the players may advance to stage 3.
+
+Forced: After the first player makes an unsuccessful burgle attempt, Smaug the Golden attacks the first player.",
+                Number = 72
             });
             Cards.Add(new Card() {
                 ImageName = "M1696",
-                Title = "Inside Information - 3A",
+                Title = "Inside Information",
+                StageNumber = 3,
                 Id = "a944e2e1-56e4-461d-b703-db991b673b9b",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 QuestPoints = 20,
                 Text = "When Revealed: Set Smaug the Golden aside, out of play. Add Smaug the Magnificent and A Bare Patch to the staging area.",
+                OppositeText =
+@"Players cannot defeat this stage while Smaug the Magnificent is in play.
+
+Forced: If the total number of progress on this stage is greater than the total remaining hit points on Smaug the Magnificent, remove Smaug the Magnificent from play.
+
+If the players defeat this stage, they have won the game and discovered any treasure successfully burgled from The Lonely Mountain.",
                 EncounterSet = "The Lonely Mountain",
-                Number = 31
+                Number = 73
             });
             Cards.Add(new Card() {
                 ImageName = "M1697",
-                Title = "Thieves! Fire! Murder! - 4A",
+                Title = "Thieves! Fire! Murder!",
+                NormalizedTitle = "Thieves Fire Murder",
+                StageNumber = 4,
                 Id = "240a9f5b-17dc-4182-b854-3d2dd5a33f68",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 QuestPoints = 7,
                 Text = "When Revealed: Remove all progress from Smaug the Golden and set him aside, out of play. Then, add Smaug the Magnificent to the staging area.",
+                OppositeText =
+@"Forced: After placing the 7th progress token on this stage, remove all damage from Smaug the Magnificent and set him aside, out of play. Then, add Smaug the Golden to the staging area and reset the quest deck to stage 2B.",
                 EncounterSet = "The Lonely Mountain",
-                Number = 32
+                Number = 74
             });
             Cards.Add(new Card() {
                 ImageName = "M1698",
-                Title = "The Gathering of the Clouds - 1A",
+                Title = "The Gathering of the Clouds",
+                StageNumber = 1,
                 Id = "dfd05c9f-1dc1-4af6-a22f-fe39969c6371",
                 CardType = CardType.Quest,
                 Setup = "s",
                 Quantity = 1,
                 QuestPoints = null,
                 Text = "Setup: Search the encounter deck for Bolg and add it to the staging area. Then, shuffle the encounter deck and reveal 1 encounter card per player.",
+                OppositeText = "When Revealed: Put stage 2, stage 3 and stage 4 into play at the same time. Then remove this stage from play.",
                 EncounterSet = "The Battle of Five Armies",
-                Number = 33
+                Number = 75
             });
             Cards.Add(new Card() {
                 ImageName = "M1699",
-                Title = "The Eastern Spur - 2A",
+                Title = "The Eastern Spur",
+                StageNumber = 2,
                 Id = "aa3355cb-57e1-4d8b-8a1b-9be22581a9f3",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 QuestPoints = 8,
                 EncounterSet = "The Battle of Five Armies",
-                Number = 34
+                OppositeText = 
+@"Players cannot advance from this stage unless stage 3 and stage 4 are complete.
+
+Forced: If there is no progress on this stage at the end of the round, each player must discard 1 random card from his hand.",
+                Number = 76
             });
             Cards.Add(new Card() {
                 ImageName = "M1700",
-                Title = "Battle in the Dale - 3A",
+                Title = "Battle in the Dale",
+                StageNumber = 3,
                 Id = "81e81787-13b1-4bbf-a9ef-b8516deebbbc",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 QuestPoints = 8,
+                Keywords = new List<string> { "Battle. (Characters use Attack instead of Willpower when questing here.)" },
                 EncounterSet = "The Battle of Five Armies",
-                Number = 35
+                OppositeText = 
+@"Players cannot advance from this stage unless stage 2 and stage 4 are complete.
+
+Forced: If there is no progress on this stage at the end of the round, the first player adds the topmost enemy in the discard pile to the staging area, if able.",
+                Number = 77
             });
             Cards.Add(new Card() {
                 ImageName = "M1701",
-                Title = "The Defense of Ravenhill - 4A",
+                Title = "The Defense of Ravenhill",
+                StageNumber = 4,
                 Id = "54ed3453-1df4-458d-bc7d-e1f7c10de237",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 QuestPoints = 8,
+                Keywords = new List<string> { "Siege. (Characters use Defense instead of Willpower when questing here.)" },
                 EncounterSet = "The Battle of Five Armies",
-                Number = 36
+                OppositeText =
+@"Players cannot advance from this stage unless stage 2 and stage 3 are complete.
+
+Forced: If there is no progress on this stage at the end of the round, each player must discard all resources from each hero's resource pool.",
+                Number = 78
             });
             Cards.Add(new Card() {
                 ImageName = "M1702",
-                Title = "The Clouds Burst - 5A",
+                Title = "The Clouds Burst",
+                StageNumber = 5,
                 Id = "82514713-7cc4-4b76-a5f2-42a69ccff76b",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 QuestPoints = null,
                 EncounterSet = "The Battle of Five Armies",
-                Number = 37
+                OppositeText =
+@"When Revealed: Each player must search the encounter deck and discard pile for a copy of Bodyguard of Bolg and add it to the staging area, if able. Shuffle the encounter deck.
+
+Progress cannot be placed in this stage. While Bolg is in the staging area, it is considered to be engaged with the first player.
+
+If Bolg is destroyed, the players win the game.",
+                Number = 79
             });
             Cards.Add(new Card() {
                 ImageName = "M1662",
@@ -510,7 +578,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Information." },
                 Text = "While attached, Smaug the Magnificent gets -3 Defense.Response: After the players quest successfully, the first player makes a burgle attempt. If successful, attach A Bare Patch to Smaug the Magnificent.",
                 EncounterSet = "The Lonely Mountain",
-                Number = 38
+                Number = 39
             });
             Cards.Add(new Card() {
                 ImageName = "M1673",
@@ -520,7 +588,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 4,
                 Text = "When Revealed: Each Dragon enemy in the staging area makes an immediate attack against the player with the highest total Willpower committed to the quest. (Do not deal a shadow card for this attack.)Burgle: The first player shuffles his deck and reveals the top card. He may discard 1 card from his hand that matches the revealed card's type and cost.",
                 EncounterSet = "The Lonely Mountain",
-                Number = 39
+                Number = 50
             });
             Cards.Add(new Card() {
                 ImageName = "M1677",
@@ -537,7 +605,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Battle of Five Armies",
                 EngagementCost = 35,
                 Threat = 2,
-                Number = 40
+                Number = 54
             });
             Cards.Add(new Card() {
                 ImageName = "M1676",
@@ -555,7 +623,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Battle of Five Armies",
                 EngagementCost = 50,
                 Threat = 0,
-                Number = 41
+                Number = 53
             });
             Cards.Add(new Card() {
                 ImageName = "M1656",
@@ -565,7 +633,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 2,
                 Text = "When Revealed: Choose a hero to be removed from the quest and make that hero unconscious. If no hero was removed from the quest by this effect, this card gains surge.",
                 EncounterSet = "Flies and Spiders",
-                Number = 42
+                Number = 33
             });
             Cards.Add(new Card() {
                 ImageName = "M1652",
@@ -583,7 +651,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 30,
                 Shadow = "Shadow: Defending character gets 1 poison.",
                 Threat = 2,
-                Number = 43
+                Number = 29
             });
             Cards.Add(new Card() {
                 ImageName = "M1665",
@@ -600,7 +668,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Lonely Mountain",
                 EngagementCost = 33,
                 Threat = 1,
-                Number = 44
+                Number = 42
             });
             Cards.Add(new Card() {
                 ImageName = "M1659",
@@ -617,7 +685,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 15,
                 Shadow = "Shadow: Attach this card to the defending character.",
                 Threat = 2,
-                Number = 45
+                Number = 36
             });
             Cards.Add(new Card() {
                 ImageName = "M1669",
@@ -641,7 +709,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Enchantment." },
                 Text = "When Revealed: Attach to the hero with the most resources without Dragon-Spell attached. (Counts as a Condition attachment with the text: 'Attached hero gets -1 Willpower for each resource in its resource pool. Forced: When attached hero spends resources, attached hero takes X damage. X is equal to the number of resources spent.')",
                 EncounterSet = "The Lonely Mountain",
-                Number = 47
+                Number = 51
             });
             Cards.Add(new Card() {
                 ImageName = "M1654",
@@ -659,7 +727,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 28,
                 Shadow = "Shadow: Defending character gets 1 poison. (Give 2 poison to a character you control if undefended.)",
                 Threat = 2,
-                Number = 48
+                Number = 31
             });
             Cards.Add(new Card() {
                 ImageName = "M1660",
@@ -670,7 +738,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: The first player names a sphere. Then, all non-Baggins characters who do not belong to the named sphere are removed from the quest.",
                 EncounterSet = "Wilderland",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack. (+2 Attack instead if undefended.)",
-                Number = 49
+                Number = 37
             });
             Cards.Add(new Card() {
                 ImageName = "M1650",
@@ -683,7 +751,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 4,
                 EncounterSet = "Flies and Spiders",
                 Threat = 2,
-                Number = 50
+                Number = 27
             });
             Cards.Add(new Card() {
                 ImageName = "M1649",
@@ -696,7 +764,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 EncounterSet = "Flies and Spiders",
                 Threat = 3,
-                Number = 51
+                Number = 26
             });
             Cards.Add(new Card() {
                 ImageName = "M1688",
@@ -707,7 +775,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Each player must search the encounter deck and discard pile for a Goblin enemy and put it into play, engaged with him. Then, shuffle the encounter deck. (This effect cannot be canceled.)",
                 EncounterSet = "The Battle of Five Armies",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack for each Goblin enemy engaged with you.",
-                Number = 52
+                Number = 65
             });
             Cards.Add(new Card() {
                 ImageName = "M1667",
@@ -720,7 +788,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 4,
                 EncounterSet = "The Lonely Mountain",
                 Threat = 4,
-                Number = 53
+                Number = 44
             });
             Cards.Add(new Card() {
                 ImageName = "M1679",
@@ -736,7 +804,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Battle of Five Armies",
                 EngagementCost = 33,
                 Threat = 1,
-                Number = 54
+                Number = 56
             });
             Cards.Add(new Card() {
                 ImageName = "M1678",
@@ -764,7 +832,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Each enemy engaged with a player makes an immediate attack. Do not deal shadow cards for attacks made by this effect. If no attacks were made by this effect, this card gains surge.",
                 EncounterSet = "The Battle of Five Armies",
                 Shadow = "Shadow: Attacking enemy makes an additional attack immediately after this one.",
-                Number = 56
+                Number = 64
             });
             Cards.Add(new Card() {
                 ImageName = "M1689",
@@ -775,7 +843,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 2,
                 Text = "When Revealed: Choose a different quest to be the current quest until the end of the round, if able. If the current quest did not change as a result of this effect, this card gains Doomed 3.",
                 EncounterSet = "The Battle of Five Armies",
-                Number = 57
+                Number = 66
             });
             Cards.Add(new Card() {
                 ImageName = "M1658",
@@ -788,7 +856,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 1,
                 EncounterSet = "Wilderland",
                 Threat = 3,
-                Number = 58
+                Number = 35
             });
             Cards.Add(new Card() {
                 ImageName = "M1672",
@@ -798,7 +866,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 2,
                 Text = "When Revealed: Each player discards 2 random cards from hand. Until the end of the phase, each Dragon enemy in play gets +1 Threat for each event discarded by this effect.Burgle: The first player shuffles his deck and reveals the top card. He may discard 1 card from his hand that matches the revealed card's sphere and cost.",
                 EncounterSet = "The Lonely Mountain",
-                Number = 59
+                Number = 49
             });
             Cards.Add(new Card() {
                 ImageName = "M1653",
@@ -816,7 +884,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 33,
                 Shadow = "Shadow: If defending character is poisoned, make that character unconscious.",
                 Threat = 3,
-                Number = 60
+                Number = 30
             });
             Cards.Add(new Card() {
                 ImageName = "M1675",
@@ -832,7 +900,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: The first player may spend 2 Baggins resources to (choose one): take control of Misty ~Mountain ~Eagle, or discard this ally to discard a non-unique enemy in the staging area.",
                 EncounterSet = "The Battle of Five Armies",
                 Shadow = "Shadow: Deal 3 damage to attacking enemy.",
-                Number = 61
+                Number = 52
             });
             Cards.Add(new Card() {
                 ImageName = "M1683",
@@ -845,7 +913,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 EncounterSet = "The Battle of Five Armies",
                 Threat = 3,
-                Number = 62
+                Number = 60
             });
             Cards.Add(new Card() {
                 ImageName = "M1651",
@@ -862,7 +930,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Flies and Spiders",
                 EngagementCost = 37,
                 Threat = 3,
-                Number = 63
+                Number = 28
             });
             Cards.Add(new Card() {
                 ImageName = "M1657",
@@ -873,7 +941,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Each character takes damage equal to the number of poison it has. If no characters were damaged by this effect, this card gains surge.",
                 EncounterSet = "Flies and Spiders",
                 Shadow = "Shadow: Discard an unconscious character you control.",
-                Number = 64
+                Number = 34
             });
             Cards.Add(new Card() {
                 ImageName = "M1671",
@@ -884,7 +952,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Text = "When Revealed: Put 1 progress token on Smaug the Golden. Then, spend X Baggins resources or advance to stage 4A. X is the number of progress tokens on Smaug the Golden.Burgle: The first player shuffles his deck and reveals the top card. He may discard 2 cards from his hand that match the revealed card's type.",
                 EncounterSet = "The Lonely Mountain",
-                Number = 65
+                Number = 48
             });
             Cards.Add(new Card() {
                 ImageName = "M1685",
@@ -900,7 +968,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Battle of Five Armies",
                 Threat = 2,
                 VictoryPoints = 3,
-                Number = 66
+                Number = 62
             });
             Cards.Add(new Card() {
                 ImageName = "M1682",
@@ -917,7 +985,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 30,
                 Shadow = "Shadow: Defending character gets -1 Defense for each quest stage in play with no progress on it.",
                 Threat = 2,
-                Number = 67
+                Number = 59
             });
             Cards.Add(new Card() {
                 ImageName = "M1684",
@@ -933,7 +1001,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Battle of Five Armies",
                 Threat = 2,
                 VictoryPoints = 3,
-                Number = 68
+                Number = 61
             });
             Cards.Add(new Card() {
                 ImageName = "M1668",
@@ -946,7 +1014,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 1,
                 EncounterSet = "The Lonely Mountain",
                 Threat = 1,
-                Number = 69
+                Number = 45
             });
             Cards.Add(new Card() {
                 ImageName = "M1663",
@@ -964,7 +1032,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Lonely Mountain",
                 EngagementCost = 50,
                 Threat = 0,
-                Number = 70
+                Number = 40
             });
             Cards.Add(new Card() {
                 ImageName = "M1664",
@@ -982,7 +1050,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Lonely Mountain",
                 EngagementCost = 50,
                 Threat = 6,
-                Number = 71
+                Number = 41
             });
             Cards.Add(new Card() {
                 ImageName = "M1686",
@@ -998,7 +1066,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Battle of Five Armies",
                 Threat = 2,
                 VictoryPoints = 3,
-                Number = 72
+                Number = 63
             });
             Cards.Add(new Card() {
                 ImageName = "M1666",
@@ -1013,7 +1081,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Lonely Mountain",
                 Threat = 12,
                 VictoryPoints = 10,
-                Number = 73
+                Number = 43
             });
             Cards.Add(new Card() {
                 ImageName = "M1648",
@@ -1028,7 +1096,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 9,
                 EncounterSet = "Flies and Spiders",
                 Threat = 1,
-                Number = 74
+                Number = 25
             });
             Cards.Add(new Card() {
                 ImageName = "M1680",
@@ -1045,7 +1113,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 20,
                 Shadow = "Shadow: If this attack destroys a character, remove all progress from the current quest.",
                 Threat = 1,
-                Number = 75
+                Number = 57
             });
             Cards.Add(new Card() {
                 ImageName = "M1661",
@@ -1056,7 +1124,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Until the end of the round, exhausted characters get -1 Willpower, -1 Attack, and -1 Defense.",
                 EncounterSet = "Wilderland",
                 Shadow = "Shadow: If the defending character is destroyed by this attack, its controller must raise his threat by 5.",
-                Number = 76
+                Number = 38
             });
             Cards.Add(new Card() {
                 ImageName = "M1670",
@@ -1069,7 +1137,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 5,
                 EncounterSet = "The Lonely Mountain",
                 Threat = 2,
-                Number = 77
+                Number = 47
             });
             Cards.Add(new Card() {
                 ImageName = "M1655",
@@ -1087,7 +1155,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 25,
                 Shadow = "Shadow: Defending character gets 2 poison.",
                 Threat = 1,
-                Number = 78
+                Number = 32
             });
             Cards.Add(new Card() {
                 ImageName = "M1681",
@@ -1104,7 +1172,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 40,
                 Shadow = "Shadow: Deal 1 damage to defending character for each quest stage in play with no progress on it.",
                 Threat = 2,
-                Number = 79
+                Number = 58
             });
         }
     }

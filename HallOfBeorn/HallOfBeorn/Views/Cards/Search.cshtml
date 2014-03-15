@@ -72,7 +72,7 @@
                     <a href="@Href(string.Format("/Cards/Details/{0}", @card.Slug))">
                         @if (@card.HasSecondImage)
                         {
-                            <span>
+                            <span style="text-align:left;">
                                 <img src="@card.ImagePath1" style="height:160px;"/>
                                 <img src="@card.ImagePath2" style="height:160px;margin-left:4px;"/>
                             </span>
@@ -83,7 +83,7 @@
                         }
                     </a>
                 </td>
-                <td style="vertical-align:top;">
+                <td style="vertical-align:top;text-align:left;">
                     @if (@card.IsUnique)
                     {
                         <img src="/Images/unique.png" style="margin-right:-4px;margin-bottom:-4px;height:16px;width:16px;"/>
@@ -149,7 +149,7 @@
                                 break;
                         }
                     </div>
-                    <div style="vertical-align:top;">
+                    <div style="vertical-align:top;text-align:left;">
                         @foreach (var trait in card.Traits)
                         {
                             <i>@trait</i> @: &nbsp;

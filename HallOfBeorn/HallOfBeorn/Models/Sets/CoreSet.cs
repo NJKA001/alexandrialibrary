@@ -1784,6 +1784,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card() {
                 ImageName = "M1127",
                 Title = "Anduin Passage",
+                StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801200c9135",
                 CardType = CardType.Quest,
                 EncounterSet = "Journey Down the Anduin",
@@ -1794,6 +1795,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1128",
+                StageNumber = 3,
                 Title = "Ambush on the Shore",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9137",
                 CardType = CardType.Quest,

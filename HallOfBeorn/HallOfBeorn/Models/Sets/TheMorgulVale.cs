@@ -183,13 +183,15 @@ namespace HallOfBeorn.Models.Sets
 
             Cards.Add(new Card()
             {
-                ImageName = "The Morgul Vale/The Rearguard 1b",
+                //ImageName = "The Rearguard",
+                HasSecondImage = true,
                 ImageType = Models.ImageType.Png,
                 Id = "30a319ff-6092-4d5f-9b94-2a9b4f44f9c1",
+                StageNumber = 1,
                 CardType = Models.CardType.Quest,
                 Title = "The Rearguard",
                 FlavorText = "Lord Alcaron and Faramir have been captured by forces from Minas Morgul. You pursue their captors eastward into the dreaded vale.",
-                Text = "Set aside Lord Alcaron, Nazgûl of Minas Morgul, and The White Bridge. Add To the Tower, Murzag and 1 copy of Morgul Vale to the staging area.",
+                Text = "Set aside Lord Alcaron, ~Nazgûl of Minas ~Morgul, and The White ~Bridge. Add To the Tower, Murzag and 1 copy of ~Morgul Vale to the staging area.",
                 OppositeFlavorText = "You are betrayed! Lord Alcaron has revealed himself as in league with the Enemy. A large Uruk, Murzag, has been left in charge of finishing you off while Faramir is rushed ahead to the Dead City.",
                 OppositeText = "Murzag cannot leave play unless destroyed. If Murzag is defeated, advance to the next stage.",
                 Quantity = 1,
@@ -198,9 +200,11 @@ namespace HallOfBeorn.Models.Sets
 
             Cards.Add(new Card()
             {
-                ImageName = "The Morgul Vale/The Betrayal 2b",
+                //ImageName = "The Betrayal",
+                HasSecondImage = true,
                 ImageType = Models.ImageType.Png,
                 Id = "49aa4e88-3774-43f7-ab8d-05268ed3fb7e",
+                StageNumber = 2,
                 CardType = Models.CardType.Quest,
                 Title = "The Betrayal",
                 FlavorText = "You've defeated Murzag and his kin. There is no time for rest as you follow Faramir depper into the vale. Soon you find the traitor Alcaron blocking the road, a grimace of anger on his formerly handsome face. \"By the the thousand thorn-drakes of Morgai, you do temp my patience!\" he sneers.",
@@ -213,14 +217,16 @@ namespace HallOfBeorn.Models.Sets
 
             Cards.Add(new Card()
             {
-                ImageName = "The Morgul Vale/The Morgul Rider 3b",
+                //ImageName = "The Morgul Rider",
+                HasSecondImage = true,
                 ImageType = Models.ImageType.Png,
                 Id = "8b4dd0c5-3847-46f6-a69b-a4c7ee2b21c8",
+                StageNumber = 3,
                 CardType = Models.CardType.Quest,
                 Title = "The Morgul Rider",
                 FlavorText = "You've delivered justice to the traitor Alcaron. You rush forward to help Lord Faramir, who is still struggling with his captors. Then another shrill crwy emanates from the city. It pierces your ears and chills your heart. With a dull clangor; the gates of Minas Morgul open. Mounted on a great black horse, a Nazgûl rides forth to claim Sauron's prize.",
-                Text = "When Revealed: Add Nazgûl of Minas Morgul and The White Bridge to the staging area.",
-                OppositeText = "When Revealed: Reveal 1 card per player from the encounter deck and add it to the staging area.\r\nNazgûl of Minas Morgul cannot leave play unless destroyed.\r\nIf Nazgûl of Minas Morgul is defeated, the players have won the game.",
+                Text = "When Revealed: Add ~Nazgûl of Minas ~Morgul and The White ~Bridge to the staging area.",
+                OppositeText = "When Revealed: Reveal 1 card per player from the encounter deck and add it to the staging area.\r\n~Nazgûl of Minas ~Morgul cannot leave play unless destroyed.\r\nIf ~Nazgûl of Minas ~Morgul is defeated, the players have won the game.",
                 Quantity = 1,
                 Number = 146
             });

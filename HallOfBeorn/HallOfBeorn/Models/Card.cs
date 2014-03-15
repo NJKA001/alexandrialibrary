@@ -72,6 +72,7 @@ namespace HallOfBeorn.Models
         public bool SlugIncludesOppositeTitle { get; set; }
         public bool SlugIncludesType { get; set; }
         public bool HasSecondImage { get; set; }
+        public bool HasErrata { get; set; }
 
         public string Slug
         {
