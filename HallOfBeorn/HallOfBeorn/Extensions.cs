@@ -22,6 +22,14 @@ namespace HallOfBeorn
                 .Replace("!", string.Empty);
         }
 
+        public static string ToDisplayString(this string self)
+        {
+            if (string.IsNullOrEmpty(self))
+                return string.Empty;
+
+            return self.Replace("~", string.Empty);
+        }
+
         public static string ToSearchString(this string value)
         {
             return value.Replace(' ', '+').Replace("!", string.Empty).Replace("?", string.Empty);

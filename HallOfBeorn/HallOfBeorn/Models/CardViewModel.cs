@@ -122,7 +122,13 @@ namespace HallOfBeorn.Models
 
         public IEnumerable<string> Keywords
         {
-            get { return _card.Keywords; }
+            get
+            {
+                foreach (var keyword in _card.Keywords)
+                {
+                    yield return keyword.ToDisplayString();
+                }
+            }
         }
 
         public IEnumerable<string> Traits
@@ -241,7 +247,7 @@ namespace HallOfBeorn.Models
         {
             get {
                 return !string.IsNullOrEmpty(_card.Text) ?
-                    _card.Text.Replace("~", string.Empty)
+                    _card.Text.ToDisplayString()
                     : string.Empty;
             }
         }
@@ -250,7 +256,7 @@ namespace HallOfBeorn.Models
         {
             get {
                 return !string.IsNullOrEmpty(_card.Shadow) ?
-                    _card.Shadow.Replace("~", string.Empty)
+                    _card.Shadow.ToDisplayString()
                     : string.Empty;
             }
         }
@@ -297,7 +303,7 @@ namespace HallOfBeorn.Models
         {
             get {
                 return !string.IsNullOrEmpty(_card.OppositeText) ?
-                    _card.OppositeText.Replace("~", string.Empty)
+                    _card.OppositeText.ToDisplayString()
                     : string.Empty;
             }
         }

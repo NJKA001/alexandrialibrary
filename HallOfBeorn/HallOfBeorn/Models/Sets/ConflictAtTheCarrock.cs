@@ -28,7 +28,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 2,
                 HitPoints = 2,
                 Traits = new List<string>() { "Hobbit." },
-                Text = "Response: After Frodo Baggins is damaged, cancel the damage and instead raise your threat by the amount of damage he would have been dealt. (Limit once per phase.)",
+                Text = "Response: After Frodo ~Baggins is damaged, cancel the damage and instead raise your threat by the amount of damage he would have been dealt. (Limit once per phase.)",
                 Quantity = 1,
                 Number = 1
             });

@@ -62,7 +62,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1565",
-                Title = "A Short Rest - 1A",
+                Title = "A Short Rest",
+                StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9005",
                 CardType = CardType.Quest,
                 EncounterSet = "Over the Misty Mountains Grim",
@@ -148,14 +149,15 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1562",
-                Title = "An Unexpected Party - 1A",
+                Title = "An Unexpected Party",
+                StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9013",
                 CardType = CardType.Quest,
                 EncounterSet = "We Must Away, Ere Break of Day",
                 Quantity = 1,
                 QuestPoints = 7,
                 Setup = "tttt",
-                Text = "Setup: Remove and shuffle the 7 Sack cards into a Sack deck and set it aside face down. Remove the 3 Troll enemies and the Troll Cave from the encounter deck and set them aside out of play. Then, shuffle the encounter deck. Each player reveals 1 card from the top of the encounter deck and adds it to the staging area.",
+                Text = "Setup: Remove and shuffle the 7 Sack cards into a Sack deck and set it aside face down. Remove the 3 Troll enemies and the ~Troll Cave from the encounter deck and set them aside out of play. Then, shuffle the encounter deck. Each player reveals 1 card from the top of the encounter deck and adds it to the staging area.",
                 FlavorText = "The wizard Gandalf has chosen Bilbo Baggins to join Thorin and company on their quest to the Lonley Mountain.",
                 OppositeFlavorText = "At first they had passed through hobbit-lands, a wild respectable country inhabited by decent folk, with good roads, an inn or two, and now and then, a dwarf or a farmer ambling by on business. Then they came to lands where people spoke strangely, and sang songs Bilbo had never heard before. - The Hobbit.",
                 Number = 12
@@ -191,7 +193,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 5,
                 Defense = 2,
                 HitPoints = 10,
-                Text = "Players cannot play attachment cards on Troll enemies.Forced: After Bert engages a player, sack 1.Forced: Return Bert to the staging area at the end of the combat phase. The engaged player may raise his threat by 1 to cancel this effect.",
+                Text = "Players cannot play attachment cards on Troll enemies.\r\n\r\nForced: After Bert engages a player, sack 1.Forced: Return Bert to the staging area at the end of the combat phase. The engaged player may raise his threat by 1 to cancel this effect.",
                 Threat = 3,
                 VictoryPoints = 3,
                 Number = 14
@@ -210,7 +212,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 1,
                 Willpower = 1,
                 HitPoints = 3,
-                Text = "The first player gains control of Bilbo Baggins.\r\nBilbo Baggins cannot gain resources from player card effects.\r\nIf Bilbo Baggins leaves play, the players lose the game.",
+                Text = "The first player gains control of Bilbo ~Baggins.\r\nBilbo ~Baggins cannot gain resources from player card effects.\r\nIf Bilbo ~Baggins leaves play, the players lose the game.",
                 Number = 15
             });
             Cards.Add(new Card() {
@@ -222,7 +224,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Artifact.", " Ring." },
                 Quantity = 1,
                 IsUnique = true,
-                Text = "Action: When answering a riddle, spend 1 Baggins resource to discard an additional player card from the top of your deck.Action: Exhaust Bilbo's Magic Ring and raise each player's threat by 2 to add 1 Baggins resource to Bilbo Baggins' resource pool.",
+                Text = "Action: When answering a riddle, spend 1 Baggins resource to discard an additional player card from the top of your deck.\r\n\r\nAction: Exhaust Bilbo's Magic ~Ring and raise each player's threat by 2 to add 1 Baggins resource to Bilbo ~Baggins' resource pool.",
                 Keywords = new List<string>() { "Attach to Bilbo Baggins." },
                 Number = 16
             });
@@ -251,7 +253,7 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Baggins,
                 Quantity = 3,
                 ResourceCost = 1,
-                Text = "Action: Bilbo Baggins gets +2 Willpower, +2 Attack, and +2 Defense until the end of the phase. (You may spend a Baggins resource from Bilbo Baggins' resource pool to play this card even if you do not control Bilbo Baggins.)",
+                Text = "Action: Bilbo ~Baggins gets +2 Willpower, +2 Attack, and +2 Defense until the end of the phase. (You may spend a Baggins resource from Bilbo ~Baggins' resource pool to play this card even if you do not control Bilbo ~Baggins.)",
                 Number = 18
             });
             Cards.Add(new Card() {
@@ -303,7 +305,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1564",
-                Title = "Dawn Take You All - 3A",
+                Title = "Dawn Take You All",
+                StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9025",
                 CardType = CardType.Quest,
                 EncounterSet = "We Must Away, Ere Break of Day",
@@ -332,7 +335,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1567",
-                Title = "Down, Down to Goblin Town - 3A",
+                Title = "Down, Down to Goblin Town",
+                StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9028",
                 CardType = CardType.Quest,
                 EncounterSet = "The Great Goblin",
@@ -340,7 +344,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 20,
                 Text = "When Revealed: Shuffle all encounter cards back into the encounter deck and set it aside, inactive. The second encounter deck becomes the active encounter deck. Search the encounter deck for The Great Goblin and add it to the staging area. Then, shuffle the encounter deck.",
                 FlavorText = "Out jumped the goblins, big goblins, great ugly-looking goblins, lots of goblins, before you could say rocks and blocks. - The Hobbit",
-                OppositeText = "Players cannot defeat this stage unless The Great Goblin is in the victory display.\r\nWhen Revealed: Reveal 3 encounter cards per player, Bilbo Baggins may spend X resources to reduce the total number of encounter cards revealed by X. (To a minimum of 1.)\r\nIf the players defeat this stage, they have won the game.",
+                OppositeText = "Players cannot defeat this stage unless The Great Goblin is in the victory display.\r\nWhen Revealed: Reveal 3 encounter cards per player, Bilbo ~Baggins may spend X resources to reduce the total number of encounter cards revealed by X. (To a minimum of 1.)\r\nIf the players defeat this stage, they have won the game.",
                 Number = 25
             });
             Cards.Add(new Card() {
@@ -351,7 +355,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Western Lands",
                 Traits = new List<string>() { "Western Lands." },
                 Quantity = 2,
-                Text = "Forced: After placing 1 or more progress tokens on Dreary Hills, each player must discard 1 card at random from his hand.Response: After Dreary Hills leaves play as an explored location, Bilbo Baggins gains 1 resource.",
+                Text = "Forced: After placing 1 or more progress tokens on Dreary ~Hills, each player must discard 1 card at random from his hand.\r\n\r\nResponse: After Dreary ~Hills leaves play as an explored location, Bilbo ~Baggins gains 1 resource.",
                 Threat = 3,
                 QuestPoints = 2,
                 Number = 26
@@ -403,7 +407,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Great Goblin",
                 Traits = new List<string>() { "Cave." },
                 Quantity = 2,
-                Text = "While Front Porch is the active location, players cannot attack Goblin enemies.Action: The first player may spend 2 Baggins resources to treat Front Porch's printed text box as if it were blank until the end of the round.",
+                Text = "While Front Porch is the active location, players cannot attack Goblin enemies.\r\n\r\nAction: The first player may spend 2 Baggins resources to treat Front Porch's printed text box as if it were blank until the end of the round.",
                 Threat = 4,
                 QuestPoints = 4,
                 Number = 30
@@ -560,7 +564,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 2,
                 Defense = 3,
                 HitPoints = 5,
-                Text = "Forced: After the first player answers a riddle and fails to find at least 1 match, Gollum attacks Bilbo Baggins. (Do not deal a shadow card for this attack.)",
+                Text = "Forced: After the first player answers a riddle and fails to find at least 1 match, ~Gollum attacks Bilbo ~Baggins. (Do not deal a shadow card for this attack.)",
                 Threat = 0,
                 Number = 40
             });
@@ -651,14 +655,15 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1570",
-                Title = "Into the Fire - 3A",
+                Title = "Into the Fire",
+                StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9052",
                 CardType = CardType.Quest,
                 EncounterSet = "Dungeons Deep and Caverns Dim",
                 Quantity = 1,
                 QuestPoints = 16,
                 FlavorText = "To everyone's surprise, Bilbo Baggins rejoined his companions on the eastern side of the Misty Mountains. However, their celebration was cut short by the chilling sound of wolves howling close by. To the frightened hobbit, it seemed that they had escaped from the goblins only to be eaten by wargs.",
-                OppositeText = "When Revealed: The first player gains control of Bilbo Baggins. Reveal 1 encounter card per player and add it to the staging area.\r\nGollum engages the first player. Damage from undefended attacks made by Gollum must be placed on Bilbo Baggins.\r\nAll riddle effects are ignored. Treachery cards gain surge.\r\nIf players defeat this stage, they have won the game.",
+                OppositeText = "When Revealed: The first player gains control of Bilbo Baggins. Reveal 1 encounter card per player and add it to the staging area.\r\nGollum engages the first player. Damage from undefended attacks made by Gollum must be placed on Bilbo ~Baggins.\r\nAll riddle effects are ignored. Treachery cards gain surge.\r\nIf players defeat this stage, they have won the game.",
                 Number = 48
             });
             Cards.Add(new Card() {
@@ -722,7 +727,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Western Lands",
                 Traits = new List<string>() { "Western Lands." },
                 Quantity = 2,
-                Text = "Forced: After placing 1 or more progress tokens on Lone-Lands, each player removes 1 resource from one of his hero's resource pools, if able.Response: After Lone-Lands leaves play as an explored location, Bilbo Baggins gains 1 resource.",
+                Text = "Forced: After placing 1 or more progress tokens on Lone-Lands, each player removes 1 resource from one of his hero's resource pools, if able.\r\n\r\nResponse: After Lone-Lands leaves play as an explored location, Bilbo ~Baggins gains 1 resource.",
                 Threat = 2,
                 QuestPoints = 3,
                 Number = 53
@@ -821,7 +826,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1568",
-                Title = "Out of the Frying Pan - 1A",
+                Title = "Out of the Frying Pan",
+                StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9066",
                 CardType = CardType.Quest,
                 EncounterSet = "Dungeons Deep and Caverns Dim",
@@ -841,20 +847,21 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Over the Misty Mountains Grim",
                 Traits = new List<string>() { "Mountain." },
                 Quantity = 2,
-                Text = "While Overhanging Rock is the active location, it gains: 'Action: Spend 1 Baggins resource to look at the top 2 cards of your deck. Add 1 of those to your hand and discard the other.'",
+                Text = "While Overhanging Rock is the active location, it gains: \"Action: Spend 1 Baggins resource to look at the top 2 cards of your deck. Add 1 of those to your hand and discard the other.\"",
                 Threat = 2,
                 QuestPoints = 3,
                 Number = 62
             });
             Cards.Add(new Card() {
                 ImageName = "M1569",
-                Title = "Riddles in the Dark - 2A",
+                Title = "Riddles in the Dark",
+                StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9069",
                 CardType = CardType.Quest,
                 EncounterSet = "Dungeons Deep and Caverns Dim",
                 Quantity = 1,
                 QuestPoints = 9,
-                Text = "Setup: Search the encounter deck for Gollum and Bilbo's Magic Ring. Place Gollum and Bilbo Baggins in the riddle area and attach Bilbo's Magic Ring to Bilbo Baggins. Then, shuffle the encounter deck.",
+                Text = "Setup: Search the encounter deck for Gollum and Bilbo's Magic Ring. Place Gollum and Bilbo ~Baggins in the riddle area and attach Bilbo's Magic Ring to Bilbo ~Baggins. Then, shuffle the encounter deck.",
                 FlavorText = "During the confusion, bilbo stumbled won a tunnel and into Gollum's cave. There the Hobbit had to outwit the creature Gollum in a dangerous riddle contest to discover the way out.",
                 OppositeText = "Players cannot advance to stage 3A unless both 1B and 2B are complete.\r\nProgress tokens cannot be added to, or removed from, this quest except by answering riddles.\r\nCards in the riddle area are immune to player card effects and cannot leave the riddle area except by quest effects.",
                 Number = 63
@@ -867,18 +874,19 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "We Must Away, Ere Break of Day",
                 Quantity = 3,
                 Text = "When Revealed: Deal 1 damage to each ally. (2 damage instead if there is a Troll enemy in the staging area.)",
-                Shadow = "Shadow: Search the encounter deck for Troll Camp and add it to the staging area. Then, shuffle the encounter deck.",
+                Shadow = "Shadow: Search the encounter deck for ~Troll Camp and add it to the staging area. Then, shuffle the encounter deck.",
                 Number = 64
             });
             Cards.Add(new Card() {
                 ImageName = "M1563",
-                Title = "Roast Mutton - 2A",
+                Title = "Roast Mutton",
+                StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9072",
                 CardType = CardType.Quest,
                 EncounterSet = "We Must Away, Ere Break of Day",
                 Quantity = 1,
                 QuestPoints = 1,
-                Text = "When Revealed: Add the set-aside Troll enemies and the Troll Cave to the staging area. Shuffle the encounter discard pile back into the encounter deck.",
+                Text = "When Revealed: Add the set-aside Troll enemies and the ~Troll Cave to the staging area. Shuffle the encounter discard pile back into the encounter deck.",
                 FlavorText = "Obviously trolls. Even Bilbo, in spite of his sheltered life, could see that: from the great heavy faces of them, and their size, and the shape of their legs, not to mention their language, which was not drawing-room fashion at all - The Hobbit",
                 OppositeText = "Forced: If there are no Troll enemies left in play, or if there are no cards left in the encounter deck, advance it to the next stage.\r\nAny time players would place progress tokens on this quest, discard an equal number of cards from the encounter deck instead. (Progress is placed on the active location before triggering this effect.)",
                 Number = 65
@@ -906,8 +914,9 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 ResourceCost = 0,
                 IsUnique = true,
-                Text = "Bilbo Baggins gets +1 Willpower, +1 Attack, and +1 Defense.Response: After Bilbo Baggins exhausts to defend, discard the top card of the encounter deck. Deal damage to the attacking enemy equal to the discarded card's Threat.",
-                Keywords = new List<string>() { "Attach to Bilbo Baggins.", " Restricted." },
+                Text = "Bilbo ~Baggins gets +1 Willpower, +1 Attack, and +1 Defense.\r\n\r\nResponse: After Bilbo ~Baggins exhausts to defend, discard the top card of the encounter deck. Deal damage to the attacking enemy equal to the discarded card's Threat.",
+                FlavorText = "\"I shall call you Sting.\" -Bilbo, The Hobbit",
+                Keywords = new List<string>() { "Attach to Bilbo Baggins.", "Restricted." },
                 Number = 67
             });
             Cards.Add(new Card() {
@@ -922,7 +931,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 6,
                 Defense = 3,
                 HitPoints = 9,
-                Text = "While at least one Stone-Giant is in the staging area, the Galloping Boulders card gains surge.Forced: After Stone-Giant engages a player, that player chooses and discards 1 ally he controls.",
+                Text = "While at least one Stone-Giant is in the staging area, the Galloping Boulders card gains surge.\r\n\r\nForced: After Stone-Giant engages a player, that player chooses and discards 1 ally he controls.",
                 Threat = 4,
                 Number = 68
             });
@@ -967,14 +976,15 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Mountain." },
                 Quantity = 1,
                 IsUnique = true,
-                Text = "X is the number of players in the game.Forced: At the end of the round, remove X progress tokens from the current quest.",
+                Text = "X is the number of players in the game.\r\n\r\nForced: At the end of the round, remove X progress tokens from the current quest.",
                 Threat = 0,
                 QuestPoints = 5,
                 Number = 71
             });
             Cards.Add(new Card() {
                 ImageName = "M1566",
-                Title = "The Mountain Pass - 2A",
+                Title = "The Mountain Pass",
+                StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9080",
                 CardType = CardType.Quest,
                 EncounterSet = "Over the Misty Mountains Grim",
@@ -1041,7 +1051,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 5,
                 Defense = 2,
                 HitPoints = 11,
-                Text = "Troll enemies can only be attacked by one character at a time.Forced: After Tom engages a player, sack 1.Forced: Return Tom to the staging area at the end of the combat phase. The engaged player may raise his threat by 1 to cancel this effect.",
+                Text = "Troll enemies can only be attacked by one character at a time.\r\n\r\nForced: After Tom engages a player, sack 1.Forced: Return Tom to the staging area at the end of the combat phase. The engaged player may raise his threat by 1 to cancel this effect.",
                 Threat = 3,
                 VictoryPoints = 4,
                 Number = 76
@@ -1054,7 +1064,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "We Must Away, Ere Break of Day",
                 Traits = new List<string>() { "Forest.", " Trollshaws." },
                 Quantity = 3,
-                Text = "While Troll Camp is in the staging area, Troll enemies get +1 Threat for each player in the game.While Troll Camp is in play, Bilbo Baggins gains: 'Action: Exhaust Bilbo Baggins and spend 1 Baggins resource to remove 1 Sack card from a character. Bilbo Baggins may trigger this effect even with a Sack card attached to him.'",
+                Text = "While ~Troll Camp is in the staging area, Troll enemies get +1 Threat for each player in the game.\r\n\r\nWhile ~Troll Camp is in play, Bilbo ~Baggins gains: \"Action: Exhaust Bilbo ~Baggins and spend 1 Baggins resource to remove 1 Sack card from a character. Bilbo ~Baggins may trigger this effect even with a Sack card attached to him.\"",
                 Threat = 3,
                 QuestPoints = 3,
                 Number = 77
@@ -1067,7 +1077,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "We Must Away, Ere Break of Day",
                 Traits = new List<string>() { "Cave.", " Trollshaws." },
                 Quantity = 1,
-                Text = "Players cannot travel to Troll Cave unless Bilbo Baggins has the Troll Key attached and the first player spends 5 Baggins resources. (2 Baggins resources instead if Bilbo Baggins has the Troll Purse attached.)",
+                Text = "Players cannot travel to ~Troll Cave unless Bilbo ~Baggins has the ~Troll Key attached and the first player spends 5 Baggins resources. (2 Baggins resources instead if Bilbo ~Baggins has the ~Troll Purse attached.)",
                 Keywords = new List<string>() { "Immune to player card effects." },
                 Threat = 2,
                 QuestPoints = 4,
@@ -1083,7 +1093,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Item." },
                 Quantity = 1,
                 IsUnique = true,
-                Text = "If Troll Key is discarded, add it to the staging area.If Troll Key is unattached and in the staging area, attach it to a Troll enemy, if able.Response: After attached Troll enemy takes damage as the result of an attack, the first player may exhaust Bilbo Baggins to claim this objective and attach it to him.",
+                Text = "If ~Troll Key is discarded, add it to the staging area.If ~Troll Key is unattached and in the staging area, attach it to a Troll enemy, if able.Response: After attached Troll enemy takes damage as the result of an attack, the first player may exhaust Bilbo ~Baggins to claim this objective and attach it to him.",
                 Number = 79
             });
             Cards.Add(new Card() {
@@ -1095,7 +1105,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Item." },
                 Quantity = 1,
                 IsUnique = true,
-                Text = "If Troll Purse is discarded, add it to the staging area.If Troll Purse is unattached and in the staging area, attach it to a Troll enemy, if able.Response: After attached Troll enemy is destroyed, the first player may spend 1 Baggins resource to claim this objective and attach it to Bilbo Baggins.",
+                Text = "If ~Troll Purse is discarded, add it to the staging area.\r\n\r\nIf ~Troll Purse is unattached and in the staging area, attach it to a Troll enemy, if able.\r\n\r\nResponse: After attached Troll enemy is destroyed, the first player may spend 1 Baggins resource to claim this objective and attach it to Bilbo ~Baggins.",
                 Number = 80
             });
             Cards.Add(new Card() {

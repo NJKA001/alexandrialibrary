@@ -81,7 +81,7 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Attack = 1,
                 Defense = 1,
-                Text = "Bilbo Baggins does not count against the hero limit and cannot gain resources from non-treasure cards.\r\nThe first player gains control of Bilbo Baggins.\r\nAction: Spend 1 Baggins resource to search your deck for a treasure card and add it to your hand.\r\nIf Bilbo Baggins leaves play, the players have lost the game.",
+                Text = "Bilbo ~Baggins does not count against the hero limit and cannot gain resources from non-treasure cards.\r\nThe first player gains control of Bilbo ~Baggins.\r\nAction: Spend 1 Baggins resource to search your deck for a treasure card and add it to your hand.\r\nIf Bilbo ~Baggins leaves play, the players have lost the game.",
                 Number = 4
             });
             Cards.Add(new Card() {
@@ -91,11 +91,11 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treasure,
                 Sphere = Sphere.Neutral,
                 IsUnique = true,
-                Keywords = new List<string>() { "Attach to Bilbo Baggins." },
+                Keywords = new List<string>() { "Attach to Bilbo ~Baggins." },
                 ResourceCost = 0,
                 Quantity = 1,
                 Traits = new List<string>() { "Artifact.", " Item.", " Ring." },
-                Text = "Action: Exhaust Bilbo's Magic Ring and raise your threat by 1 to gain 1 Baggins resource. (Limit once per round.)Response: After Bilbo Baggins exhausts to defend an attack, exhaust Bilbo's Magic Ring and raise your threat by 3 to cancel all damage from this attack.",
+                Text = "Action: Exhaust Bilbo's Magic ~Ring and raise your threat by 1 to gain 1 Baggins resource. (Limit once per round.)\r\n\r\nResponse: After Bilbo ~Baggins exhausts to defend an attack, exhaust Bilbo's Magic ~Ring and raise your threat by 3 to cancel all damage from this attack.",
                 Number = 5
             });
             Cards.Add(new Card() {
@@ -224,7 +224,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treasure,
                 Sphere = Sphere.Neutral,
                 IsUnique = true,
-                Keywords = new List<string>() { "Attach to Bilbo Baggins." },
+                Keywords = new List<string>() { "Attach to Bilbo ~Baggins." },
                 ResourceCost = 0,
                 Quantity = 1,
                 Traits = new List<string>() { "Artifact.", " Erebor.", " Item." },
@@ -293,7 +293,7 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Baggins,
                 ResourceCost = 1,
                 Quantity = 3,
-                Text = "Action: Choose a character in play (other than Bilbo Baggins). Add Bilbo Baggins' total Willpower, Attack, and Defense to that character's Willpower, Attack, and Defense respectively until the end of the phase.",
+                Text = "Action: Choose a character in play (other than Bilbo ~Baggins). Add Bilbo ~Baggins' total Willpower, Attack, and Defense to that character's Willpower, Attack, and Defense respectively until the end of the phase.",
                 Number = 19
             });
             Cards.Add(new Card() {
@@ -392,7 +392,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "d99e07f6-7a57-4b5f-a108-13bd7ce6fa4b",
                 CardType = CardType.Quest,
                 Quantity = 1,
-                Text = "When Revealed: Remove all resources from each hero's resource pool. Then, make each character you control (except Bilbo Baggins) unconscious.",
+                Text = "When Revealed: Remove all resources from each hero's resource pool. Then, make each character you control (except Bilbo ~Baggins) unconscious.",
                 EncounterSet = "Flies and Spiders",
                 Number = 27
             });
@@ -1024,7 +1024,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Immune to player card effects." },
                 Quantity = 1,
                 Traits = new List<string>() { "Forest." },
-                Text = "Travel: Exhaust Bilbo Baggins to travel here.Forced: At the start of each quest phase, search the encounter deck for 1 Spider enemy and add it to the staging area. (2 Spider enemies instead if 3 or more players are at this stage.) Shuffle the encounter deck.",
+                Text = "Travel: Exhaust Bilbo ~Baggins to travel here.Forced: At the start of each quest phase, search the encounter deck for 1 Spider enemy and add it to the staging area. (2 Spider enemies instead if 3 or more players are at this stage.) Shuffle the encounter deck.",
                 QuestPoints = 9,
                 EncounterSet = "Flies and Spiders",
                 Threat = 1,
