@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Drúadan Forest";
+            NormalizedName = "The Druadan Forest";
             Abbreviation = "TDF";
             Number = 17;
             SetType = Models.SetType.Adventure_Pack;
@@ -168,7 +169,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Wose." },
                 Text = "Allies cannot defend against Drû-buri-Drû.While Drû-buri-Drû is in the victory display, characters get +1 Willpower and +1 Defense.Unless Drû-buri-Drû is in the victory display, the players cannot win.",
                 Threat = 4,
-                EncounterSet = "The Drúadan Forest",
+                EncounterSet = "The Druadan Forest",
                 Quantity = 1,
                 Number = 11
             });
@@ -186,7 +187,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Each Wose enemy in the staging area gets +2 Threat.",
                 Shadow = "Shadow: Each Wose enemy engaged with the defending player gets +1 Attack.",
                 Threat = 0,
-                EncounterSet = "The Drúadan Forest",
+                EncounterSet = "The Druadan Forest",
                 Quantity = 3,
                 Number = 12
             });
@@ -205,7 +206,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Archery 2.", " Prowl X." },
                 Text = "X is the number of players in the game.",
                 Threat = 2,
-                EncounterSet = "The Drúadan Forest",
+                EncounterSet = "The Druadan Forest",
                 Quantity = 3,
                 Number = 13
             });
@@ -224,7 +225,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Prowl 1.", " Archery X." },
                 Text = "X is the number of heroes in play with no resources in their resource pool.",
                 Threat = 2,
-                EncounterSet = "The Drúadan Forest",
+                EncounterSet = "The Druadan Forest",
                 Quantity = 4,
                 Number = 14
             });
@@ -242,7 +243,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Return attacking enemy to the staging area after it attacks unless any player pays 1 resource.",
                 Keywords = new List<string>() { "Surge.", " Prowl 1." },
                 Threat = 2,
-                EncounterSet = "The Drúadan Forest",
+                EncounterSet = "The Druadan Forest",
                 Quantity = 3,
                 Number = 15
             });
@@ -255,7 +256,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "The cost to play each player card is increased by 1.Travel: Exhaust a hero to travel here.",
                 Threat = 4,
                 QuestPoints = 3,
-                EncounterSet = "The Drúadan Forest",
+                EncounterSet = "The Druadan Forest",
                 Quantity = 1,
                 Number = 16
             });
@@ -268,7 +269,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Heroes cannot gain resources from card effects.Travel: Each player must pay 1 resource to travel here.",
                 Threat = 2,
                 QuestPoints = 3,
-                EncounterSet = "The Drúadan Forest",
+                EncounterSet = "The Druadan Forest",
                 Quantity = 3,
                 Number = 17
             });
@@ -281,7 +282,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Each Wose enemy gains Archery 1.X is equal to the total archery value of the highest archery Wose enemy in play.",
                 Threat = 0,
                 QuestPoints = 5,
-                EncounterSet = "The Drúadan Forest",
+                EncounterSet = "The Druadan Forest",
                 Quantity = 3,
                 Number = 18
             });
@@ -292,7 +293,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 Text = "When Revealed: Each hero must pay 1 resource or take 1 damage. If no hero takes damage from this effect, Men in the Dark gains surge.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack for each hero the defending player controls with no resources.",
-                EncounterSet = "The Drúadan Forest",
+                EncounterSet = "The Druadan Forest",
                 Quantity = 3,
                 Number = 19
             });
@@ -304,7 +305,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Each questing hero must pay 1 resource or it is removed from the quest.",
                 Shadow = "Shadow: Discard all resources from the defending character's resource pool.",
                 Keywords = new List<string>() { "Prowl 2." },
-                EncounterSet = "The Drúadan Forest",
+                EncounterSet = "The Druadan Forest",
                 Quantity = 3,
                 Number = 20
             });
@@ -316,7 +317,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Each player must pay 1 resource for each attachment he controls or discard all attachments he controls.",
                 Shadow = "Shadow: Discard an attachment from the defending character.",
                 Keywords = new List<string>() { "Surge." },
-                EncounterSet = "The Drúadan Forest.",
+                EncounterSet = "The Druadan Forest.",
                 Quantity = 2,
                 Number = 21
             });
@@ -327,7 +328,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Quest,
                 Setup = "t",
                 Text = "Setup: Search the encounter deck for Drû-buri-Drû and set him aside, out of play. Shuffle the encounter deck.",
-                EncounterSet = "The Drúadan Forest",
+                EncounterSet = "The Druadan Forest",
                 Quantity = 1,
                 QuestPoints = 11,
                 Number = 22
@@ -337,7 +338,7 @@ namespace HallOfBeorn.Models.Sets
                 Title = "An Untimely End - 2A",
                 Id = "346fda89-94df-410a-8027-41eacbf27238",
                 CardType = CardType.Quest,
-                EncounterSet = "The Drúadan Forest",
+                EncounterSet = "The Druadan Forest",
                 Quantity = 1,
                 QuestPoints = 17,
                 Number = 23
@@ -348,7 +349,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "f6578eb7-1b94-458b-aba1-82b406507a4d",
                 CardType = CardType.Quest,
                 Text = "When Revealed: Add Drû-buri-Drû to the staging area.",
-                EncounterSet = "The Drúadan Forest",
+                EncounterSet = "The Druadan Forest",
                 Quantity = 1,
                 QuestPoints = 14,
                 Number = 24

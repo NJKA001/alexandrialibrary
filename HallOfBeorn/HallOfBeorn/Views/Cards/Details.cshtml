@@ -20,11 +20,12 @@
             <span style="margin-left:8px;">@string.Format("(Easy Mode x{0})", @Model.EasyModeQuantity)</span>
         }
     </div>
-    @if (!string.IsNullOrEmpty(@Model.EncounterSet))
+    @if (@Model.HasEncounterSet)
     {
-        <div style="margin-top:4px;">
+        <div style="margin-top:8px;">
             <span style="color:#616161;margin-right:4px;margin-left:2px;font-weight:normal;">Encounter Set</span>
             <span style="color:black;">@Model.EncounterSet</span>
+            <img src="@Model.EncounterSetImagePath" style="margin-left:4px;margin-bottom:-4px;width:30px;height:30px;" />
         </div>
     }
 </div>

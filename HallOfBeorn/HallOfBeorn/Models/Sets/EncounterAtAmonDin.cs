@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Encounter at Amon Dîn";
+            NormalizedName = "Encounter at Amon Din";
             Abbreviation = "EaAD";
             Number = 18;
             SetType = Models.SetType.Adventure_Pack;
@@ -163,7 +164,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93001",
                 CardType = CardType.Quest,
                 Text = "Setup: Set Ghulat aside, out of play. Put Lord Alcaron into play. Make Burning Farmhouse the active location. Add the Rescued Villagers and Dead Villagers objectives to the staging area. Then, shuffle the encounter deck and reveal 1 encounter card per player and add it to the staging area.",
-                EncounterSet = "Encounter at Amon Dîn",
+                EncounterSet = "Encounter at Amon Din",
                 Quantity = 1,
                 Setup = "ttlss",
                 Number = 11
@@ -174,7 +175,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93002",
                 CardType = CardType.Quest,
                 Text = "When Revealed: Add Ghulat to the staging area.",
-                EncounterSet = "Encounter at Amon Dîn",
+                EncounterSet = "Encounter at Amon Din",
                 Quantity = 1,
                 QuestPoints = 15,
                 Number = 12
@@ -192,7 +193,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Gondor.", " Noble." },
                 Keywords = new List<string>() { "The first player gains control of Lord Alcaron." },
                 Text = "Response: After a villager token is discarded, exhaust Lord Alcaron to place that villager token on a location instead.If Lord Alcaron leaves play, the players have lost the game.",
-                EncounterSet = "Encounter at Amon Dîn",
+                EncounterSet = "Encounter at Amon Din",
                 Quantity = 1,
                 Number = 13
             });
@@ -202,7 +203,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93068",
                 CardType = CardType.Objective,
                 Text = "If a location leaves play as an explored location, move any villager tokens from that location to Rescued Villagers.At the end of the game, if there are more villager tokens here than damage tokens on Dead Vilagers, the players have won.",
-                EncounterSet = "Encounter at Amon Dîn",
+                EncounterSet = "Encounter at Amon Din",
                 Quantity = 1,
                 Number = 14
             });
@@ -212,7 +213,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93069",
                 CardType = CardType.Objective,
                 Text = "If a villager token is discarded from a location, objective or quest stage, place a damage token on Dead Villagers.At the end of the game, if there are more damage tokens here than villager tokens on Rescued Villagers, the players have lost.",
-                EncounterSet = "Encounter at Amon Dîn",
+                EncounterSet = "Encounter at Amon Din",
                 Quantity = 1,
                 Number = 15
             });
@@ -230,7 +231,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Orc.", " Uruk." },
                 Keywords = new List<string>() { "X is the number of damage tokens on Dead Villagers." },
                 Text = "Forced: When Ghulat attacks, place 1 damage token on Dead Villagers.While Ghulat is in play, the game cannot end.",
-                EncounterSet = "Encounter at Amon Dîn",
+                EncounterSet = "Encounter at Amon Din",
                 VictoryPoints = 2,
                 Quantity = 1,
                 Number = 16
@@ -248,7 +249,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Orc." },
                 Text = "Forced: After Marauding Orc attacks and destroys a character, place 1 damage token on Dead Villagers.",
                 Shadow = "Shadow: If this attack destroys a character, discard 1 villager token from Rescued Villagers.",
-                EncounterSet = "Encounter at Amon Dîn",
+                EncounterSet = "Encounter at Amon Din",
                 Quantity = 4,
                 Number = 17
             });
@@ -265,7 +266,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Orc." },
                 Text = "When Revealed: Discard 1 villager token from the active location. If no villager token is discarded by this effect, Orc Ravager gains surge.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack. (+2 Attack instead if undefended.)",
-                EncounterSet = "Encounter at Amon Dîn",
+                EncounterSet = "Encounter at Amon Din",
                 Quantity = 3,
                 Number = 18
             });
@@ -281,7 +282,7 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Traits = new List<string>() { "Creature.", " Eagle." },
                 Text = "When Revealed: Discard the character with the fewest remaining hit points. That character's controller may discard 3 cards at random from his hand to prevent this effect.",
-                EncounterSet = "Encounter at Amon Dîn",
+                EncounterSet = "Encounter at Amon Din",
                 Quantity = 2,
                 Number = 19
             });
@@ -295,7 +296,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Gondor." },
                 Keywords = new List<string>() { "Villagers 4." },
                 Text = "Forced: At the end of the round, discard 1 villager token from Burning Farmhouse.",
-                EncounterSet = "Encounter at Amon Dîn",
+                EncounterSet = "Encounter at Amon Din",
                 VictoryPoints = 1,
                 Quantity = 4,
                 Number = 20
@@ -310,7 +311,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Gondor." },
                 Keywords = new List<string>() { "Villagers 3." },
                 Text = "While Gondorian Hamlet is in the staging area it gains: 'Forced: After a treachery card is revealed from the encounter deck, discard 1 villager token from Gondorian Hamlet.'",
-                EncounterSet = "Encounter at Amon Dîn",
+                EncounterSet = "Encounter at Amon Din",
                 VictoryPoints = 1,
                 Quantity = 4,
                 Number = 21
@@ -325,7 +326,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Gondor." },
                 Keywords = new List<string>() { "Villagers 2." },
                 Text = "Travel: Reveal the top card of the encounter deck and add it to the staging area to travel here.",
-                EncounterSet = "Encounter at Amon Dîn",
+                EncounterSet = "Encounter at Amon Din",
                 VictoryPoints = 1,
                 Quantity = 3,
                 Number = 22
@@ -338,7 +339,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Surge." },
                 Text = "When Revealed: Raise each player's threat by the number of damage tokens on Dead Villagers.",
                 Shadow = "Shadow: Defending player raises his threat by 1 for each damage token on Dead Villagers.",
-                EncounterSet = "Encounter at Amon Dîn",
+                EncounterSet = "Encounter at Amon Din",
                 Quantity = 2,
                 Number = 23
             });
@@ -350,7 +351,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Doomed 2." },
                 Text = "When Revealed: Discard 1 villager token from the active location for each player in the game. If no villager tokens were removed by this effect, Trapped Inside gains surge.",
                 Shadow = "Shadow: If this attack destroys a character, discard 1 villager token from Rescued Villagers.",
-                EncounterSet = "Encounter at Amon Dîn",
+                EncounterSet = "Encounter at Amon Din",
                 Quantity = 2,
                 Number = 24
             });
@@ -361,7 +362,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 Text = "When Revealed: Each player must take a villager token from Rescued Villagers and place it on a location in the staging area, if able. If no villager tokens were placed on a location by this effect, Panicked! gains surge.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack for each damage token on Dead Villagers.",
-                EncounterSet = "Encounter at Amon Dîn",
+                EncounterSet = "Encounter at Amon Din",
                 Quantity = 2,
                 Number = 25
             });

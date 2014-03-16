@@ -473,15 +473,16 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 Title = "A Shadow of the Past",
+                SlugIncludesType = true,
                 Id = "307411f3-4a45-44ae-bc64-4e16deb97d10",
                 CampaignCardType = Models.CampaignCardType.Campaign,
                 CardType = CardType.Campaign,
                 Keywords = new List<string>() { "You are playing Campaign Mode." },
-                Text = "Setup: Attach Mr. Underhill to the Ring-bearer. Add Gandalf's Delay to the staging area. Shuffle Gildor Inglorion and The Ring Draws Them into the encounter deck.",
+                Text = "Setup: Attach Mr. Underhill to the Ring-bearer. Add Gandalf's Delay to the staging area. Shuffle Gildor Inglorion and The ~Ring Draws Them into the encounter deck.",
                 FlavorText = "\"The Shire, he may be seeking for it now, if has has not already found out where it lies. Indeed, Frodo, I fear that he may even think that the long-unnoticed name of Baggins has become important.\"\r\n-Gandalf, The Fellowship of the Ring",
-                OppositeText = "Resolution: Choose Gandalf's Delay or The Ring Draws Them and add it to the Campaign Pool. Then, choose Gildor Inglorion or Mr. Underhill and add it to the Campaign Pool. The chosen cards have been earned by the players.",
+                OppositeTitle = "The Lord of the Rings Part 1",
+                OppositeText = "Resolution: Choose Gandalf's Delay or The ~Ring Draws Them and add it to the Campaign Pool. Then, choose Gildor Inglorion or Mr. Underhill and add it to the Campaign Pool. The chosen cards have been earned by the players.",
                 OppositeFlavorText = "The ferry-boat moved slowly across the water. The Buckland shore drew nearer. Sam was the only member of the party who had not been over the river before. He had a stange feeling as the slow gurgling stream slipped by: his old life lay behind in the mists, dark adventure lay in front. He scratched his head, and for a moment had a passing wish that Mr. Frodo could have gone on living quietly at Bag End.\r\n-The Fellowship of the Ring",
-                EncounterSet = "The Lord of the Rings Part 1",
                 Quantity = 1,
                 Number = 30
             });
@@ -698,9 +699,9 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Campaign,
                 Keywords = new List<string>() { "You are playing Campaign Mode." },
                 FlavorText = "Black horsemen have passed through Bree. On Monday one came down the Greenway, they say; and another appeared later, coming up the Greenway from the south.\r\n-Aragorn, The Fellowship of the Ring",
-                OppositeText = "Resolution: Starting with the first player, each player may choose one of the following boon cards and attach it to a hero he controls: Tireless Ranger, Skilled Healer, Valiant Warrior, Noble Hero. The chosen cards have been earned by the players.",
+                OppositeTitle = "The Lord of the Rings Part 2",
+                OppositeText = "Resolution: Starting with the first player, each player may choose one of the following boon cards and attach it to a hero he controls: Tireless ~Ranger, Skilled ~Healer, Valiant ~Warrior, ~Noble Hero. The chosen cards have been earned by the players.",
                 OppositeFlavorText = "At that moment Frodo threw himself forward on the ground, and he heard himself crying aloud: O Elbereth! Gilthoniel! At the same time he struck at the feet of his enemy. A shrill cry rang out in the night; and he felt a pain like a dart of poisoned ice pierce his left shoulder. Even as he swooned he caught, as through a swirling mist, a glimpse of Strider leaping out of the darkness with a flaming brand of wood in either hand. With a last effort Frodo, dropping his sword, slipped the Ring from his finger and closed his right hand tight about it.\r\n-The Fellowship of the Ring",
-                EncounterSet = "The Lord of the Rings Part 2",
                 Quantity = 1,
                 Number = 44
             });
@@ -894,9 +895,9 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "You are playing Campaign Mode." },
                 Text = "Response: After an ememy is declared as an attacker, shuffle the top card of the burden deck into the encounter deck to cancel that attack. (Any player may trigger this ability.)",
                 FlavorText = "\"They have drawn off for the time being. But not far, I fear. They will come again another night, if we cannot escape. They are only waiting, because they think that their purpose is almost accomplished, and that the Ring cannot fly much further.\"\r\n-Aragorn, The Fellowship of the Ring",
+                OppositeTitle = "The Lord of the Rings Part 3",
                 OppositeText = "Resolution: Add each burder card in play, in the encounter deck, and in the discard pile to the Campaign Pool. The added cards have been earned by the players.",
                 OppositeFlavorText = "The black horses were filled with madness, and leaping forward in terror they bore their riders into the rushing flood. Their piercing cries were drowned in the roaring of the river as it carried them away. Then Frodo felt himself falling, and the roaring and confusion seemed to rise and engulf him together with his enemies. He heard and saw no more.\r\n-The Fellowship of the Ring",
-                EncounterSet = "The Lord of the Rings Part 3",
                 Quantity = 1,
                 Number = 56
             });

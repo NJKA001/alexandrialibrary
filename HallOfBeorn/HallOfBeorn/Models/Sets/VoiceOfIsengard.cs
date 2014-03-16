@@ -837,6 +837,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 Title = "Ancient Forest",
+                SlugIncludesType = true,
                 ImageType = ImageType.Png,
                 Id = "AA0B89D9-02C5-4A15-9C81-0E1AF2CC906D",
                 CardType = CardType.Location,
@@ -901,6 +902,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 Title = "Broken Lands",
+                SlugIncludesType = true,
                 ImageType = ImageType.Png,
                 Id = "39982128-25C4-49E7-B7CB-66916E62A69A",
                 CardType = CardType.Location,
@@ -910,8 +912,8 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string> { "Highlands." },
                 Text = "While Broken Lands is in the staging area, progress cannot be placed on locations in the staging area.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack for each location in the staging area.",
-                Quantity = 2,
-                EasyModeQuantity = 1,
+                Quantity = 3,
+                EasyModeQuantity = 3,
                 Number = 54
             });
             Cards.Add(new Card()

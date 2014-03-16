@@ -183,7 +183,6 @@ namespace HallOfBeorn.Models.Sets
 
             Cards.Add(new Card()
             {
-                //ImageName = "The Rearguard",
                 HasSecondImage = true,
                 ImageType = Models.ImageType.Png,
                 Id = "30a319ff-6092-4d5f-9b94-2a9b4f44f9c1",
@@ -194,13 +193,13 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Set aside Lord Alcaron, ~Nazgûl of Minas ~Morgul, and The White ~Bridge. Add To the Tower, Murzag and 1 copy of ~Morgul Vale to the staging area.",
                 OppositeFlavorText = "You are betrayed! Lord Alcaron has revealed himself as in league with the Enemy. A large Uruk, Murzag, has been left in charge of finishing you off while Faramir is rushed ahead to the Dead City.",
                 OppositeText = "Murzag cannot leave play unless destroyed. If Murzag is defeated, advance to the next stage.",
+                EncounterSet = "The Morgul Vale",
                 Quantity = 1,
                 Number = 144
             });
 
             Cards.Add(new Card()
             {
-                //ImageName = "The Betrayal",
                 HasSecondImage = true,
                 ImageType = Models.ImageType.Png,
                 Id = "49aa4e88-3774-43f7-ab8d-05268ed3fb7e",
@@ -211,13 +210,13 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Add Lord Alcaron to the staging area.",
                 OppositeText = "Lord Alcaron cannot leave play unless destroyed. If Lord Alcaron is defeated, advance to the next stage.",
                 OppositeFlavorText = "Alcaron utters an ancient word, and a ghastly shriek rises from Minas Morgul. Something cold and terrible has awoken. Something that is aware of your presence. A short distance ahread, the Uruk carrying Faramir pauses, intimidated by the carrion cry from the city. There may still be time. But first you must deal with the traitor...",
+                EncounterSet = "The Morgul Vale",
                 Quantity = 1,
                 Number = 145
             });
 
             Cards.Add(new Card()
             {
-                //ImageName = "The Morgul Rider",
                 HasSecondImage = true,
                 ImageType = Models.ImageType.Png,
                 Id = "8b4dd0c5-3847-46f6-a69b-a4c7ee2b21c8",
@@ -227,6 +226,7 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "You've delivered justice to the traitor Alcaron. You rush forward to help Lord Faramir, who is still struggling with his captors. Then another shrill crwy emanates from the city. It pierces your ears and chills your heart. With a dull clangor; the gates of Minas Morgul open. Mounted on a great black horse, a Nazgûl rides forth to claim Sauron's prize.",
                 Text = "When Revealed: Add ~Nazgûl of Minas ~Morgul and The White ~Bridge to the staging area.",
                 OppositeText = "When Revealed: Reveal 1 card per player from the encounter deck and add it to the staging area.\r\n~Nazgûl of Minas ~Morgul cannot leave play unless destroyed.\r\nIf ~Nazgûl of Minas ~Morgul is defeated, the players have won the game.",
+                EncounterSet = "The Morgul Vale",
                 Quantity = 1,
                 Number = 146
             });
@@ -239,6 +239,7 @@ namespace HallOfBeorn.Models.Sets
                 Title = "To the Tower",
                 Traits = new List<string> { "Captured." },
                 Text = "To the Tower cannot leave the staging area.\r\nRemove Faramir from the game.\r\nIf 10 or more progress tokens are on To the Tower, the players have lost the game.",
+                EncounterSet = "The Morgul Vale",
                 Quantity = 1,
                 Number = 147
             });
@@ -257,6 +258,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string> { "Mordor." },
                 Text = "Any damage that would be dealt to a Captain enemy is dealt to 1 Morgul Bodyguard instead.",
                 Shadow = "Shadow: Attacking enemy engages the next player and makes an immediate attack, if able.",
+                EncounterSet = "The Morgul Vale",
                 Quantity = 3,
                 Number = 148
             });
@@ -275,6 +277,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string> { "Mordor." },
                 Text = "Forced: After any number of progress tokens are placed on To the Tower, deal Morgul Sorcerer a shadow card.",
                 Shadow = "Shadow: Defending player must place 1 progress token on To the Tower or treat this attack as undefended.",
+                EncounterSet = "The Morgul Vale",
                 Quantity = 2,
                 Number = 149
             });
@@ -293,6 +296,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string> { "Orc.", "Mordor." },
                 Text = "Forced: When Morgul Tracker is optionally engaged, place 1 progress token on To the Tower.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack. If undefended, place 1 progress token on To the Tower as well.",
+                EncounterSet = "The Morgul Vale",
                 Quantity = 3,
                 Number = 150
             });
@@ -311,6 +315,7 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 7,
                 Traits = new List<string> { "Orc.", "Uruk.", "Captain." },
                 Text = "Forced: After Murzag attacks, reveal the top card of the encounter deck. If that card is an enemy, put it into play engaged with the defending player.",
+                EncounterSet = "The Morgul Vale",
                 Quantity = 1,
                 Number = 151
             });
@@ -329,6 +334,7 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 5,
                 Traits = new List<string> { "Gondor.", "Traitor.", "Captain." },
                 Text = "Forced: When Lord Alcaron attacks, place 1 progress token on To the Tower.\r\nForced: When Lord Alcaron is dealt a shadow card with no shadow effect, he makes an additional attack after this one (deal and resolve another shadow card).",
+                EncounterSet = "The Morgul Vale",
                 Quantity = 1,
                 Number = 152
             });
@@ -350,6 +356,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string> { "Nazgûl of Minas Morgul cannot have attachments." },
                 Text = "Reduce any amount of damage dealt to Nazgûl of Minas Morgul to 1.",
                 FlavorText = "\"Come not between the Nazgûl and his prey!\"\r\n-The Witch King, The Return of the King",
+                EncounterSet = "The Morgul Vale",
                 Quantity = 1,
                 Number = 153
             });
@@ -365,6 +372,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string> { "Road." },
                 Text = "Response: After Morgul Road leaves play as an explored location, the first player may remove 1 progress token from To the Tower or deal 1 damage to any enemy in play.",
                 Shadow = "Shadow: Return attacking enemy to the staging area after this attack.",
+                EncounterSet = "The Morgul Vale",
                 Quantity = 3,
                 Number = 154
             });
@@ -380,6 +388,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string> { "Valley." },
                 Text = "Forced: At the end of the round, each player returns 1 enemy engaged with him to the staging area.",
                 Shadow = "Shadow: If this attack destroys a character, place 1 progress token on To the Tower.",
+                EncounterSet = "The Morgul Vale",
                 Quantity = 2,
                 Number = 155
             });
@@ -395,6 +404,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string> { "Bridge." },
                 Text = "X is the number of progress tokens on To the Tower.",
                 FlavorText = "So they came slowly to the white bridge.\r\n-The Two Towers",
+                EncounterSet = "The Morgul Vale",
                 Quantity = 1,
                 Number = 156
             });
@@ -407,6 +417,7 @@ namespace HallOfBeorn.Models.Sets
                 Title = "Impenetrable Fog",
                 Text = "When Revealed: The first player places 3 progress tokens on To the Tower or reveals X additional cards from the encounter deck and adds them to the staging area. X is the number of players in the game.",
                 FlavorText = "The air above was heavy with fog, and a reek lay on the land about them.\r\nThe Two Towers",
+                EncounterSet = "The Morgul Vale",
                 Quantity = 2,
                 Number = 157
             });
@@ -420,6 +431,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string> { "Doomed 2." },
                 Text = "When Revealed: Each player must discard 3 random cards from his hand or place 1 progress token on To the Tower.",
                 Shadow = "Shadow: Return attacking enemy to the staging area after this attack.",
+                EncounterSet = "The Morgul Vale",
                 Quantity = 2,
                 Number = 158
             });
@@ -433,6 +445,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string> { "Surge." },
                 Text = "When Revealed: Place 1 progress token on To the Tower.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack for each progress token on To the Tower.",
+                EncounterSet = "The Morgul Vale",
                 Quantity = 2,
                 Number = 159
             });
@@ -445,6 +458,7 @@ namespace HallOfBeorn.Models.Sets
                 Title = "The Dead City Looms",
                 Text = "When Revealed: Raise each players' threat by the number of progress tokens on To the Tower. If there are no progress tokens on To the Tower, The Dead City Looms gains surge.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack for each progress token on To the Tower.",
+                EncounterSet = "The Morgul Vale",
                 Quantity = 2,
                 Number = 160
             });

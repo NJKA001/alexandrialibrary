@@ -18,6 +18,8 @@ namespace HallOfBeorn
                 .Replace('_', '-')
                 .Replace("&", "and")
                 .Replace(".", string.Empty)
+                .Replace(",", string.Empty)
+                .Replace(":", string.Empty)
                 .Replace("?", string.Empty)
                 .Replace("!", string.Empty);
         }
