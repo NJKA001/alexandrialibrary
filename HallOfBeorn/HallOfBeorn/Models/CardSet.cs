@@ -19,12 +19,29 @@ namespace HallOfBeorn.Models
             }
         }
 
+        private string normalizedName;
+
         protected virtual void Initialize()
         {
         }
 
         public string Id { get; protected set; }
         public string Name { get; protected set; }
+        
+        public string NormalizedName
+        {
+            get
+            {
+                return (!string.IsNullOrEmpty(normalizedName)) ?
+                    normalizedName
+                    : Name;
+            }
+            protected set
+            {
+                normalizedName = value;
+            }
+        }
+
         public string Abbreviation { get; protected set; }
         public string Cycle { get; protected set; }
         public int Number { get; protected set; }

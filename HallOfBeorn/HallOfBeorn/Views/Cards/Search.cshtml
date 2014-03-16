@@ -84,17 +84,24 @@
                     </a>
                 </td>
                 <td style="vertical-align:top;text-align:left;">
+                    <div style="margin-bottom:8px;vertical-align:middle;">
                     @if (@card.IsUnique)
                     {
-                        <img src="/Images/unique.png" style="margin-right:-4px;margin-bottom:-4px;height:16px;width:16px;"/>
+                        <img src="/Images/unique.png" style="margin-bottom:-3px;margin-right:-4px;height:16px;width:16px;"/>
                     }
-                    @Html.ActionLink(@card.FullTitle, "Details", new { id = @card.Slug }, new { style = "margin-top:0px;font-weight:bold;" })
+                    @Html.ActionLink(@card.FullTitle, "Details", new { id = @card.Slug }, new { style = "margin-bottom:2px;font-size:medium;font-weight:bold;" })
                     <span>(@card.SetName)</span>
-                    <div>
                         @if (@card.HasSphere)
                         {
-                            <span><img style="width:20px;height:20px;margin-bottom:-4px;margin-right:10px;" src='@string.Format("/Images/{0}.png", @card.Sphere)' /></span>
+                            <span><img style="width:30px;height:30px;margin-bottom:-4px;margin-right:10px;" src='@string.Format("/Images/{0}.png", @card.Sphere)' /></span>
                         }
+                        @if (@card.HasEncounterSet)
+                        {
+                            <span><img style="width:30px;height:30px;margin-bottom:-4px;margin-right:10px;" src='@card.EncounterSetImagePath' /></span>
+                        }
+                    </div>
+                    
+                    <div style="margin-bottom:4px;">
                         @switch (@card.CardType)
                         {
                             case CardType.Hero:
@@ -147,6 +154,7 @@
                                 break;    
                             default:
                                 break;
+                            
                         }
                     </div>
                     <div style="vertical-align:top;text-align:left;">

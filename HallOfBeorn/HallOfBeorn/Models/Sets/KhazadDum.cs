@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Khazad-dûm";
+            NormalizedName = "Khazad-dum";
             Abbreviation = "KD";
             Number = 8;
             SetType = Models.SetType.Deluxe_Expansion;
@@ -27,7 +28,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1354",
-                Title = "A Presence in the Dark - 1A",
+                Title = "A Presence in the Dark",
+                StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801207c9002",
                 CardType = CardType.Quest,
                 EncounterSet = "Flight from Moria",
@@ -39,7 +41,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1351",
-                Title = "A Way Up - 3A",
+                Title = "A Way Up",
+                StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-0801207c9004",
                 CardType = CardType.Quest,
                 EncounterSet = "Into the Pit",
@@ -343,7 +346,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1349",
-                Title = "Entering the Mines - 1A",
+                Title = "Entering the Mines",
+                StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801207c9028",
                 CardType = CardType.Quest,
                 EncounterSet = "Into the Pit",
@@ -443,7 +447,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1350",
-                Title = "Goblin Patrol - 2A",
+                Title = "Goblin Patrol",
+                StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801207c9036",
                 CardType = CardType.Quest,
                 EncounterSet = "Into the Pit",
@@ -710,7 +715,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1355",
-                Title = "Search for an Exit - 2A",
+                Title = "Search for an Exit",
                 StageNumber = 2,
                 OppositeTitle = "Heading Down",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9056",
@@ -726,7 +731,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1356",
-                Title = "Search for an Exit - 2A",
+                Title = "Search for an Exit",
                 StageNumber = 2,
                 OppositeTitle = "Heading Up",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9058",
@@ -742,7 +747,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1357",
-                Title = "Search for an Exit - 2A",
+                Title = "Search for an Exit",
                 StageNumber = 2,
                 OppositeTitle = "A Wrong Turn",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9060",
@@ -758,7 +763,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1358",
-                Title = "Search for an Exit - 2A",
+                Title = "Search for an Exit",
                 StageNumber = 2,
                 OppositeTitle = "Narrow Paths",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9062",
@@ -774,7 +779,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1359",
-                Title = "Search for an Exit - 2A",
+                Title = "Search for an Exit",
                 StageNumber = 2,
                 OppositeTitle = "Hasty Council",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9064",
@@ -789,7 +794,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1360",
-                Title = "Search for an Exit - 2A",
+                Title = "Search for an Exit",
                 StageNumber = 2,
                 OppositeTitle = "Blocked By Shadow",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9066",
@@ -804,7 +809,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1361",
-                Title = "Search for an Exit - 2A",
+                Title = "Search for an Exit",
                 StageNumber = 2,
                 OppositeTitle = "Escape from Darkness",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9068",
@@ -819,7 +824,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1352",
-                Title = "Search for the Chamber - 1A",
+                Title = "Search for the Chamber",
+                StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801207c9070",
                 CardType = CardType.Quest,
                 EncounterSet = "The Seventh Level",
@@ -895,7 +901,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1353",
-                Title = "The Fate of Balin - 2A",
+                Title = "The Fate of Balin",
+                StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801207c9077",
                 CardType = CardType.Quest,
                 EncounterSet = "The Seventh Level",

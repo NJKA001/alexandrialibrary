@@ -389,6 +389,21 @@ namespace HallOfBeorn.Models
             get { return _card.Sphere == Models.Sphere.Leadership || _card.Sphere == Models.Sphere.Tactics || _card.Sphere == Models.Sphere.Spirit || _card.Sphere == Models.Sphere.Lore; }
         }
 
+        public bool HasEncounterSet
+        {
+            get { return !string.IsNullOrEmpty(_card.EncounterSet); }
+        }
+
+        public string EncounterSetImagePath
+        {
+            get
+            {
+                return HasEncounterSet ?
+                    string.Format("/Images/Cards/{0}/{1}.png", _card.CardSet.NormalizedName.ToUrlSafeString(), _card.EncounterSet.ToUrlSafeString())
+                    : string.Empty;
+            }
+        }
+
         public List<Deck> Decks
         {
             get { return _card.Decks; }

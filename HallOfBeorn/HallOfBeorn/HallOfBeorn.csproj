@@ -364,6 +364,13 @@
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\attack.gif" />
     <Content Include="Images\Baggins.png" />
+    <Content Include="Images\Cards\Core-Set\Dol-Guldur-Orcs.png" />
+    <Content Include="Images\Cards\Core-Set\Escape-from-Dol-Guldur.png" />
+    <Content Include="Images\Cards\Core-Set\Journey-Down-the-Anduin.png" />
+    <Content Include="Images\Cards\Core-Set\Passage-Through-Mirkwood.png" />
+    <Content Include="Images\Cards\Core-Set\Sauron%27s-Reach.png" />
+    <Content Include="Images\Cards\Core-Set\Spiders-of-Mirkwood.png" />
+    <Content Include="Images\Cards\Core-Set\Wilderlands.png" />
     <Content Include="Images\Cards\M1001.png" />
     <Content Include="Images\Cards\M1002.png" />
     <Content Include="Images\Cards\M1003.png" />
@@ -1564,6 +1571,29 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\Cards\A-Journey-to-Rhosgobel\" />
+    <Folder Include="Images\Cards\Assault-on-Osgiliath\" />
+    <Folder Include="Images\Cards\Conflict-at-the-Carrock\" />
+    <Folder Include="Images\Cards\Encounter-Amon-Din\" />
+    <Folder Include="Images\Cards\Foundations-of-Stone\" />
+    <Folder Include="Images\Cards\Heirs-of-Numenor\" />
+    <Folder Include="Images\Cards\Khazad-dum\" />
+    <Folder Include="Images\Cards\Return-to-Mirkwood\" />
+    <Folder Include="Images\Cards\Road-to-Rivendell\" />
+    <Folder Include="Images\Cards\Shadow-and-Flame\" />
+    <Folder Include="Images\Cards\The-Battle-of-Lake-town\" />
+    <Folder Include="Images\Cards\The-Blood-of-Gondor\" />
+    <Folder Include="Images\Cards\The-Dead-Marshes\" />
+    <Folder Include="Images\Cards\The-Druadan-Forest\" />
+    <Folder Include="Images\Cards\The-Hills-of-Emyn-Muil\" />
+    <Folder Include="Images\Cards\The-Hobbit-On-the-Doorstep\" />
+    <Folder Include="Images\Cards\The-Hobbit-Over-Hill-and-Under-Hill\" />
+    <Folder Include="Images\Cards\The-Hunt-For-Gollum\" />
+    <Folder Include="Images\Cards\The-Massing-at-Osgiliath\" />
+    <Folder Include="Images\Cards\The-Redhorn-Gate\" />
+    <Folder Include="Images\Cards\The-Steward%27s-Fear\" />
+    <Folder Include="Images\Cards\The-Stone-of-Erech\" />
+    <Folder Include="Images\Cards\The-Watcher-in-the-Water\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
