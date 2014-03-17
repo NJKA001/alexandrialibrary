@@ -25,7 +25,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Scroll." },
                 Text = "If unattached, return Alcaron's Scroll to the staging area and it gains: 'Action: Exhaust a hero to attach Alcaron's Scroll to that hero.'Forced: When the hero with Alcaron's Scroll attached is damaged by an enemy attack, attach Alcaron's Scroll to that enemy.",
                 EncounterSet = "Peril in Pelargir",
-                Number = 1
+                Number = 19
             });
             Cards.Add(new Card() {
                 ImageName = "M1714",
@@ -36,7 +36,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Quantity = 3,
                 Text = "Response: After a location leaves play as an explored location, return it to the top of the encounter deck.",
-                Number = 2
+                Number = 12
             });
             Cards.Add(new Card() {
                 ImageName = "M1733",
@@ -54,7 +54,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 33,
                 Shadow = "Shadow: Deal 2 damage to The Approach if it is in play. Otherwise, attacking enemy gets +2 Attack.",
                 Threat = 2,
-                Number = 3
+                Number = 31
             });
             Cards.Add(new Card() {
                 ImageName = "M1710",
@@ -65,7 +65,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Quantity = 3,
                 Text = "Action: Ready a defending Gondor character. That character gets +1 Defense until the end of the phase.",
-                Number = 4
+                Number = 8
             });
             Cards.Add(new Card() {
                 ImageName = "M1703",
@@ -83,7 +83,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 1,
                 Defense = 4,
                 Text = "Lower the cost to play Weapon and Armor attachments on Beregond by 2.",
-                Number = 5
+                Number = 1
             });
             Cards.Add(new Card() {
                 ImageName = "M1731",
@@ -95,7 +95,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Deal 1 damage to each character committed to the quest.",
                 EncounterSet = "Into Ithilien",
                 Shadow = "Shadow: Deal 1 damage to the defending character.",
-                Number = 6
+                HasErrata = true,
+                Number = 29
             });
             Cards.Add(new Card() {
                 ImageName = "M1715",
@@ -110,7 +111,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Traits = new List<string>() { "Condition." },
                 Text = "Action: Spend 1 resource from attached hero's resource pool to give attached hero +1 Defense for each resource in its resource pool until the end of the phase. (Limit once per phase.)",
-                Number = 7
+                Number = 13
             });
             Cards.Add(new Card() {
                 ImageName = "M1704",
@@ -127,7 +128,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 3,
                 Defense = 2,
                 Text = "While Boromir has at least 1 resource in his resource pool, Gondor allies get +1 Attack.",
-                Number = 8
+                Number = 2
             });
             Cards.Add(new Card() {
                 ImageName = "M1727",
@@ -143,7 +144,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 2,
                 Text = "While Celador is in the staging area, he is committed to the current quest.Forced: After players quest unsuccessfully or a character leaves play, deal 1 damage to Celador.If Celador leaves play, remove him from the game.",
                 EncounterSet = "Into Ithilien",
-                Number = 9
+                Number = 25
             });
             Cards.Add(new Card() {
                 ImageName = "M1706",
@@ -159,7 +160,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 0,
                 Defense = 1,
                 Text = "Lower the cost to play Citadel Custodian by 1 for each Gondor ally in play.",
-                Number = 10
+                Number = 4
             });
             Cards.Add(new Card() {
                 ImageName = "M1740",
@@ -174,7 +175,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Streets of Gondor",
                 Shadow = "Shadow: attacking enemy gets +2 Attack.",
                 Threat = 2,
-                Number = 11
+                Number = 38
             });
             Cards.Add(new Card() {
                 ImageName = "M1726",
@@ -185,7 +186,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Discard 2 cards from the top of the encounter deck. Discard an additional 2 cards for each copy of Collateral Damage in the discard pile. Then, raise each player's threat by 2 for each location discarded by this effect.",
                 EncounterSet = "Peril in Pelargir",
                 Shadow = "Shadow: Any damage dealt by this attack is dealt to the hero with Alcaron's Scroll attached, if able.",
-                Number = 12
+                Number = 24
             });
             Cards.Add(new Card() {
                 ImageName = "M1712",
@@ -202,7 +203,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 2,
                 Defense = 2,
                 Text = "Action: Discard Damrod from play to lower your threat by 1 for each enemy in the staging area.",
-                Number = 13
+                Number = 10
             });
             Cards.Add(new Card() {
                 ImageName = "M1709",
@@ -217,7 +218,7 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 1,
                 Attack = 1,
                 Defense = 4,
-                Number = 14
+                Number = 7
             });
             Cards.Add(new Card() {
                 ImageName = "M1720",
@@ -233,7 +234,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 1,
                 Defense = 0,
                 Text = "Response: After Envoy of Pelargir enters play, add 1 resource to a Gondor or Noble hero's resource pool.",
-                Number = 15
+                Number = 18
             });
             Cards.Add(new Card() {
                 ImageName = "M1705",
@@ -249,7 +250,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 0,
                 Defense = 0,
                 Text = "Action: Exhaust Errand-rider to move 1 resource from the resource pool of a hero you control to another hero's resource pool.",
-                Number = 16
+                Number = 3
             });
             Cards.Add(new Card() {
                 ImageName = "M1752",
@@ -266,7 +267,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 18,
                 Shadow = "Shadow: Defending player raises his threat by X where X is the attacking enemy's Threat.",
                 Threat = 1,
-                Number = 17
+                Number = 50
             });
             Cards.Add(new Card() {
                 ImageName = "M1755",
@@ -283,7 +284,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 27,
                 Shadow = "Shadow: This enemy attacks again after this attack resolves. (Deal a new shadow card for that attack.)",
                 Threat = 3,
-                Number = 18
+                Number = 53
             });
             Cards.Add(new Card() {
                 ImageName = "M1725",
@@ -297,7 +298,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Peril in Pelargir",
                 Shadow = "Shadow: Deal attacking enemy an additional shadow card for each Thug enemy in play.",
                 Threat = 1,
-                Number = 19
+                Number = 23
             });
             Cards.Add(new Card() {
                 ImageName = "M1722",
@@ -318,130 +319,184 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1767",
-                Title = "The Leaping Fish - 1A",
+                Title = "The Leaping Fish",
+                SlugIncludesType = true,
+                StageNumber = 1,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9021",
                 CardType = CardType.Quest,
                 Setup = "lt",
                 Quantity = 1,
                 QuestPoints = 6,
-                Text = "Setup: Search the encounter deck for The Leaping Fish and Alcaron's Scroll. Make The Leaping Fish the active location and attach Alcaron's Scroll to a hero.",
+                Keywords = new List<string> { "Battle. (Characters use their Attack instead of Willpower when questing.)" },
+                Text = "Setup: Search the encounter deck for The Leaping Fish and Alcaron's ~Scroll. Make The Leaping Fish the active location and attach Alcaron's ~Scroll to a hero.",
+                OppositeText = "When Revealed: Each player must search the encounter deck for a copy of Harbor Thug and add it to the staging area. Shuffle the encounter deck.",
                 EncounterSet = "Peril in Pelargir",
-                Number = 21
+                Number = 65
             });
             Cards.Add(new Card() {
                 ImageName = "M1768",
-                Title = "Fighting in the Streets - 2A",
+                Title = "Fighting in the Streets",
+                StageNumber = 2,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9023",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 QuestPoints = 13,
                 EncounterSet = "Peril in Pelargir",
-                Number = 22
+                Keywords = new List<string> { "Battle. (Characters use their Attack instead of Willpower when questing.)" },
+                OppositeText = "When Revealed: Attach Alcaron's ~Scroll to the highest engagement cost enemy in play, if able. Otherwise, add Alcaron's Scroll to the staging area.",
+                Number = 66
             });
             Cards.Add(new Card() {
                 ImageName = "M1769",
-                Title = "Escape to the Quays - 3A",
+                Title = "Escape to the Quays",
+                StageNumber = 3,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9025",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 QuestPoints = 15,
                 Text = "When Revealed: Each player searches the encounter deck and discard pile for 1 enemy and adds it to the staging area.",
+                OppositeText = 
+@"Enemies cannot be optionally engaged.
+
+Forced: The first enemy revealed from the encounter deck each round makes an immediate attack against the player who controls Alcaron's Scroll from the staging area.
+
+The players cannot defeat this stage unless Alcaron's ~Scroll is attached to a hero. If the players defeat this stage, they have won the game.",
                 EncounterSet = "Peril in Pelargir",
-                Number = 23
+                Number = 67
             });
             Cards.Add(new Card() {
                 ImageName = "M1770",
-                Title = "Ambush in Ithilien - 1A",
+                Title = "Ambush in Ithilien",
+                StageNumber = 1,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9027",
                 CardType = CardType.Quest,
                 Setup = "sl",
                 Quantity = 1,
                 QuestPoints = 15,
+                Keywords = new List<string> { "Battle. (Characters use their Attack instead of Willpower when questing.)" },
                 Text = "Setup: Add Celador to the staging area. Search the encounter deck for a copy of Ithilien Road and make it the active location. Each player must search the encounter deck for a copy of Southron Company and add it to the staging area. Shuffle the encounter deck.",
+                OppositeText = "If the players complete this stage with Celador in the staging area, advance to stage 3A (bypassing stage 2).",
                 EncounterSet = "Into Ithilien",
-                Number = 24
+                Number = 68
             });
             Cards.Add(new Card() {
                 ImageName = "M1771",
-                Title = "Southron Counter-attack - 2A",
+                Title = "Southron Counter-attack",
+                StageNumber = 2,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9029",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 QuestPoints = 9,
                 EncounterSet = "Into Ithilien",
-                Number = 25
+                Keywords = new List<string> { "Siege. (Characters use their Attack instead of Willpower when questing.)", "Archery X." },
+                OppositeText = 
+@"X is the number of players in the game.
+
+After this stage is completed advance to stage 4A (bypassing stage 3).",
+                Number = 69
             });
             Cards.Add(new Card() {
                 ImageName = "M1772",
-                Title = "The Hidden Way - 3A",
+                Title = "The Hidden Way",
+                StageNumber = 3,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9031",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 QuestPoints = 12,
                 EncounterSet = "Into Ithilien",
-                Number = 26
+                OppositeText = 
+@"When Revealed: The first player takes contorl of all Ranger objectives in the staging area.
+
+Enemies do not make engagement checks and cannot be optionally engaged.",
+                Number = 70
             });
             Cards.Add(new Card() {
                 ImageName = "M1773",
-                Title = "Approaching Cair Andros - 4A",
+                Title = "Approaching Cair Andros",
+                StageNumber = 4,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9033",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 QuestPoints = 15,
                 EncounterSet = "Into Ithilien",
-                Number = 27
+                OppositeText = 
+@"If any players threat is 37 or higher, Approaching Cair Andros gains Siege.
+
+Forced: At the end of each round, raise each player's threat by 2.
+
+If the players defeat this stage, they have won the game.",
+                Number = 71
             });
             Cards.Add(new Card() {
                 ImageName = "M1774",
-                Title = "The Defense - 1A",
+                Title = "The Defense",
+                StageNumber = 1,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9035",
                 CardType = CardType.Quest,
                 Setup = "sss",
                 Quantity = 1,
                 QuestPoints = 9,
+                Keywords = new List<string> { "Siege. (Characters use their Defense instead of Willpower when questing.)" },
                 Text = "Setup: Add The Approach, The Citadel, and The Banks to the staging area. Shuffle the encounter deck.",
+                OppositeText = "Players must deal damage from undefended attacks to the lowest Threat Battleground location in play. If there are no Battleground locations in play, immediate advance to the next stage.",
                 EncounterSet = "The Siege of Cair Andros",
-                Number = 28
+                Number = 72
             });
             Cards.Add(new Card() {
                 ImageName = "M1775",
-                Title = "Reinforcing the Banks - 2A",
+                Title = "Reinforcing the Banks",
+                StageNumber = 2,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9037",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 QuestPoints = 9,
                 EncounterSet = "The Siege of Cair Andros",
-                Number = 29
+                OppositeText = "Reveal 1 additional card from the encounter deck and add it to the staging area during the staging step each round.",
+                Number = 73
             });
             Cards.Add(new Card() {
                 ImageName = "M1776",
-                Title = "Breakthrough at the Approach - 3A",
+                Title = "Breakthrough at the Approach",
+                StageNumber = 3,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9039",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 QuestPoints = 7,
                 EncounterSet = "The Siege of Cair Andros",
-                Number = 30
+                Keywords = new List<string> { "Battle. (Characters use their Attack instead of Willpower when questing.)" },
+                OppositeText = "Forced: After the players quest unsuccessfully, instead of raising threat each player must choose and discard 1 character he controls.",
+                Number = 74
             });
             Cards.Add(new Card() {
                 ImageName = "M1777",
-                Title = "Breakthrough at the Citadel - 4A",
+                Title = "Breakthrough at the Citadel",
+                StageNumber = 4,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9041",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 QuestPoints = 5,
                 EncounterSet = "The Siege of Cair Andros",
-                Number = 31
+                Keywords = new List<string> { "Siege. (Characters use their Defense instead of Willpower when questing.)" },
+                OppositeText = "Breakthrough at the Citadel adds 5 Threat to the staging area.",
+                Number = 75
             });
             Cards.Add(new Card() {
                 ImageName = "M1778",
-                Title = "The Last Battle - 5A",
+                Title = "The Last Battle",
+                StageNumber = 5,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9043",
                 CardType = CardType.Quest,
                 Quantity = 1,
                 QuestPoints = 15,
                 EncounterSet = "The Siege of Cair Andros",
-                Number = 32
+                Keywords = new List<string> { "Siege. (Characters use their Defense instead of Willpower when questing.)" },
+                OppositeText =
+@"When Revealed: Reveal 1 card per player from the encounter deck and add it to the staging area.
+
+If the players have collected 4 or more victory points, The Last Battle gains Battle and loses Siege.
+
+If the players defeat this stage, they have won the game.",
+                Number = 76
             });
             Cards.Add(new Card() {
                 ImageName = "M1716",
@@ -457,7 +512,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 1,
                 Defense = 1,
                 Text = "Response: After you play Hunter of Lamedon from your hand, reveal the top card of your deck. If it is an Outlands card, add it to your hand. Otherwise, discard it.",
-                Number = 33
+                Number = 14
             });
             Cards.Add(new Card() {
                 ImageName = "M1728",
@@ -473,7 +528,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "While Ithilien Guardian is in the staging area, he is committed to the current quest.When Revealed: Add Ithilien Guardian to the staging area and Ithilien Guardian gains surge.",
                 EncounterSet = "Into Ithilien",
                 Shadow = "Shadow: Deal 2 damage to the attacking enemy.",
-                Number = 34
+                Number = 26
             });
             Cards.Add(new Card() {
                 ImageName = "M1730",
@@ -487,7 +542,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Into Ithilien",
                 Shadow = "Shadow: Return attacking enemy to the staging area after it attacks.",
                 Threat = 4,
-                Number = 35
+                Number = 28
             });
             Cards.Add(new Card() {
                 ImageName = "M1717",
@@ -503,7 +558,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 1,
                 Defense = 0,
                 Text = "Action: Exhaust Ithilien Tracker to lower the Threat of the next enemy added to the staging area to 0 until the end of the phase.",
-                Number = 36
+                Number = 15
             });
             Cards.Add(new Card() {
                 ImageName = "M1758",
@@ -520,7 +575,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 33,
                 Threat = 2,
                 VictoryPoints = 3,
-                Number = 37
+                Number = 56
             });
             Cards.Add(new Card() {
                 ImageName = "M1713",
@@ -531,7 +586,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 5,
                 Quantity = 3,
                 Text = "Action: All characters get +2 Defense and do not exhaust to defend until the end of the round.",
-                Number = 38
+                Number = 11
             });
             Cards.Add(new Card() {
                 ImageName = "M1743",
@@ -541,7 +596,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 2,
                 Text = "When Revealed: Attach this card to the hero with the highest threat cost without a copy of Local Trouble attached. (Counts as a Condition attachment with the text: 'When attached hero exhausts, readies, or triggers an ability, raise its controller's threat by 1.')",
                 EncounterSet = "Streets of Gondor",
-                Number = 39
+                Number = 41
             });
             Cards.Add(new Card() {
                 ImageName = "M1745",
@@ -557,7 +612,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Brigands",
                 EngagementCost = 24,
                 Threat = 3,
-                Number = 40
+                Number = 43
             });
             Cards.Add(new Card() {
                 ImageName = "M1750",
@@ -567,7 +622,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 2,
                 Text = "When Revealed: Each player removes 1 character he controls from the quest, if able. Then, if any player has no characters committed to the quest, remove all characters from the quest.",
                 EncounterSet = "Brooding Forest",
-                Number = 41
+                Number = 48
             });
             Cards.Add(new Card() {
                 ImageName = "M1742",
@@ -578,7 +633,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Each player must search the encounter deck and discard pile for 1 City location and add it to the staging area, if able. Shuffle the encounter deck. This effect cannot be canceled.",
                 EncounterSet = "Streets of Gondor",
                 Shadow = "Shadow: Defending player discards his hand.",
-                Number = 42
+                Number = 40
             });
             Cards.Add(new Card() {
                 ImageName = "M1747",
@@ -589,7 +644,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Return all Brigand enemies engaged with players to the staging area. If this effect returned no Brigand enemies to the staging area, Lurking in Shadows gains surge.",
                 EncounterSet = "Brigands",
                 Shadow = "Shadow: Return attacking enemy to the staging area after it attacks.",
-                Number = 43
+                Number = 45
             });
             Cards.Add(new Card() {
                 ImageName = "M1741",
@@ -604,7 +659,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Streets of Gondor",
                 Shadow = "Shadow: Defending player discards all resources in his heroes' resource pools.",
                 Threat = 3,
-                Number = 44
+                Number = 39
             });
             Cards.Add(new Card() {
                 ImageName = "M1718",
@@ -621,7 +676,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 1,
                 Text = "Action: Exhaust Master of ~Lore to name a card type. Lower the cost for you to play the next Lore card of that type by 1 until the end of the phase (to a minimum of 1).",
                 FlavorText = "\"If Cirith Ungol is named, old men and masters of lore will blanch and fall silent.\" -Faramir, The Two Towers",
-                Number = 45
+                Number = 16
             });
             Cards.Add(new Card() {
                 ImageName = "M1751",
@@ -637,7 +692,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Creatures of the Forest",
                 EngagementCost = 25,
                 Threat = 3,
-                Number = 46
+                Number = 49
             });
             Cards.Add(new Card() {
                 ImageName = "M1756",
@@ -654,7 +709,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Southrons",
                 EngagementCost = 38,
                 Threat = 4,
-                Number = 47
+                Number = 54
             });
             Cards.Add(new Card() {
                 ImageName = "M1707",
@@ -665,7 +720,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Quantity = 3,
                 Text = "Action: Until the end of the phase, each Gondor card in play gains the Rohan trait, and each Rohan card in play gains the Gondor trait.",
-                Number = 48
+                Number = 5
             });
             Cards.Add(new Card() {
                 ImageName = "M1759",
@@ -683,7 +738,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 35,
                 Shadow = "Shadow: attacking enemy gets +2 Attack.",
                 Threat = 2,
-                Number = 49
+                Number = 57
             });
             Cards.Add(new Card() {
                 ImageName = "M1765",
@@ -700,7 +755,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 30,
                 Shadow = "Shadow: attacking enemy gets +1 Attack. Deal it another shadow card.",
                 Threat = 3,
-                Number = 50
+                Number = 63
             });
             Cards.Add(new Card() {
                 ImageName = "M1738",
@@ -711,7 +766,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Each character gets -2 Attack and -2 Defense until the end of the round.",
                 EncounterSet = "The Siege of Cair Andros",
                 Shadow = "Shadow: Deal 2 damage to all Battleground locations in play.",
-                Number = 51
+                Number = 36
             });
             Cards.Add(new Card() {
                 ImageName = "M1764",
@@ -728,7 +783,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 28,
                 Shadow = "Shadow: Deal the attacking enemy an additional shadow card for each player in the game.",
                 Threat = 2,
-                Number = 52
+                Number = 62
             });
             Cards.Add(new Card() {
                 ImageName = "M1732",
@@ -746,7 +801,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 15,
                 Shadow = "Shadow: Deal 2 damage to The Citadel if it is in play. Otherwise, attacking enemy gets +2 Attack.",
                 Threat = 1,
-                Number = 53
+                Number = 30
             });
             Cards.Add(new Card() {
                 ImageName = "M1760",
@@ -763,7 +818,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 40,
                 Shadow = "Shadow: Deal the attacking enemy two additional shadow cards.",
                 Threat = 2,
-                Number = 54
+                Number = 58
             });
             Cards.Add(new Card() {
                 ImageName = "M1761",
@@ -777,7 +832,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Mordor Elite",
                 Shadow = "Shadow: attacking enemy gets +1 Attack for each shadow card dealt to it.",
                 Threat = 5,
-                Number = 55
+                Number = 59
             });
             Cards.Add(new Card() {
                 ImageName = "M1748",
@@ -791,7 +846,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Brooding Forest",
                 Shadow = "Shadow: Remove X progress tokens from the current quest, where X is the attacking enemy's Threat.",
                 Threat = 4,
-                Number = 56
+                Number = 46
             });
             Cards.Add(new Card() {
                 ImageName = "M1724",
@@ -804,7 +859,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 EncounterSet = "Peril in Pelargir",
                 Threat = 4,
-                Number = 57
+                Number = 22
             });
             Cards.Add(new Card() {
                 ImageName = "M1739",
@@ -821,7 +876,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 28,
                 Shadow = "Shadow: Defending player discards 1 of his attachments. (Discard all of his attachments instead if undefended.)",
                 Threat = 3,
-                Number = 58
+                Number = 37
             });
             Cards.Add(new Card() {
                 ImageName = "M1719",
@@ -833,7 +888,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Traits = new List<string>() { "Trap." },
                 Text = "Play Ranger Spikes into the staging area unattached.If unattached, attach Ranger Spikes to the next eligible enemy that enters the staging area.Players do not make engagement checks against attached enemy. Attached enemy gets -2 Threat.",
-                Number = 59
+                Number = 17
             });
             Cards.Add(new Card() {
                 ImageName = "M1766",
@@ -844,7 +899,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Each player discards the top card of his deck. Until the end of the phase, raise the total Threat in the staging area by X, where X is the total cost of all cards discarded by this effect.",
                 EncounterSet = "Ravaging Orcs",
                 Shadow = "Shadow: attacking enemy gets +1 Attack. Deal it another shadow card.",
-                Number = 60
+                Number = 64
             });
             Cards.Add(new Card() {
                 ImageName = "M1749",
@@ -858,7 +913,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Brooding Forest",
                 Shadow = "Shadow: Remove X progress tokens from the current quest, where X is the attacking enemy's Threat.",
                 Threat = 3,
-                Number = 61
+                Number = 47
             });
             Cards.Add(new Card() {
                 ImageName = "M1734",
@@ -875,7 +930,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 30,
                 Shadow = "Shadow: Deal 2 damage to The Banks if it is in play. Otherwise, attacking enemy gets +2 Attack.",
                 Threat = 3,
-                Number = 62
+                Number = 32
             });
             Cards.Add(new Card() {
                 ImageName = "M1729",
@@ -892,7 +947,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 34,
                 Shadow = "Shadow: attacking enemy gets +1 Attack. (+2 Attack instead if the current quest card has a keyword.)",
                 Threat = 1,
-                Number = 63
+                Number = 27
             });
             Cards.Add(new Card() {
                 ImageName = "M1754",
@@ -910,7 +965,7 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 35,
                 Shadow = "Shadow: attacking enemy gets +1 Attack. (+3 Attack instead if it has the Harad trait.)",
                 Threat = 2,
-                Number = 64
+                Number = 52
             });
             Cards.Add(new Card() {
                 ImageName = "M1757",
@@ -921,7 +976,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 2,
                 Text = "When Revealed: Each player must search the encounter deck and discard pile for 1 Harad enemy and add it to the staging area, if able. Shuffle the encounter deck.",
                 EncounterSet = "Southrons",
-                Number = 65
+                Number = 55
             });
             Cards.Add(new Card() {
                 ImageName = "M1711",
@@ -934,7 +989,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Traits = new List<string>() { "Item.", " Weapon." },
                 Text = "Limit 1 per character.Response: After attached character is declared as a defender, deal 1 damage to the attacking enemy.",
-                Number = 66
+                Number = 9
             });
             Cards.Add(new Card() {
                 ImageName = "M1736",
@@ -948,7 +1003,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Siege of Cair Andros",
                 Threat = 2,
                 VictoryPoints = 2,
-                Number = 67
+                Number = 34
             });
             Cards.Add(new Card() {
                 ImageName = "M1737",
@@ -962,7 +1017,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Siege of Cair Andros",
                 Threat = 1,
                 VictoryPoints = 1,
-                Number = 68
+                Number = 35
             });
             Cards.Add(new Card() {
                 ImageName = "M1735",
@@ -976,11 +1031,12 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Siege of Cair Andros",
                 Threat = 3,
                 VictoryPoints = 3,
-                Number = 69
+                Number = 33
             });
             Cards.Add(new Card() {
                 ImageName = "M1723",
                 Title = "The Leaping Fish",
+                SlugIncludesType = true,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9082",
                 CardType = CardType.Location,
                 IsUnique = true,
@@ -991,7 +1047,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Peril in Pelargir",
                 Threat = 2,
                 VictoryPoints = 3,
-                Number = 70
+                Number = 21
             });
             Cards.Add(new Card() {
                 ImageName = "M1762",
@@ -1001,7 +1057,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 2,
                 Text = "When Revealed: Each player chooses 1 sphere of influence (Leadership, Tactics, Spirit, or Lore). Each character a player controls that does not belong to his chosen sphere takes 3 damage.",
                 EncounterSet = "Mordor Elite",
-                Number = 71
+                Number = 60
             });
             Cards.Add(new Card() {
                 ImageName = "M1763",
@@ -1012,7 +1068,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Text = "When Revealed: Count the number of encounter cards in the staging area and shuffle them into the encounter deck. Then, reveal an equal number of cards from the encounter deck and add them to the staging area. This effect cannot be canceled.",
                 EncounterSet = "Mordor Elite",
-                Number = 72
+                Number = 61
             });
             Cards.Add(new Card() {
                 ImageName = "M1746",
@@ -1029,7 +1085,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Brigands",
                 EngagementCost = 40,
                 Threat = 4,
-                Number = 73
+                Number = 44
             });
             Cards.Add(new Card() {
                 ImageName = "M1753",
@@ -1040,7 +1096,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Raise each player's threat by the number of questing characters. (If the current quest has the battle or siege keyword, Watcher in the Wood gains surge.)",
                 EncounterSet = "Creatures of the Forest",
                 Shadow = "Shadow: Each player raises his threat by the number of enemies engaged with him.",
-                Number = 74
+                Number = 51
             });
             Cards.Add(new Card() {
                 ImageName = "M1708",
@@ -1051,7 +1107,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Quantity = 3,
                 Text = "Action: Choose a Gondor hero. Add 1 resource to that hero's resource pool.",
-                Number = 75
+                Number = 6
             });
             Cards.Add(new Card() {
                 ImageName = "M1744",
@@ -1067,7 +1123,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Brigands",
                 EngagementCost = 17,
                 Threat = 2,
-                Number = 76
+                Number = 42
             });
         }
     }

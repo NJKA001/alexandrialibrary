@@ -66,7 +66,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Text = "Action: Search the top 10 cards of your deck for any 1 Rohan ally card and add it to your hand. Then, shuffle the other cards back into your deck.",
                 Quantity = 3,
-                Number = 4
+                Number = 7
             });
             Cards.Add(new Card() {
                 ImageName = "M1155",
@@ -82,7 +82,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Noldor." },
                 Text = "Response: After you play Rivendell Minstrel from your hand, search your deck for 1 Song card and add it to your hand. Shuffle your deck.",
                 Quantity = 3,
-                Number = 5
+                Number = 8
             });
             Cards.Add(new Card() {
                 ImageName = "M1157",
@@ -95,7 +95,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Attached hero gains a Leadership resource icon.",
                 Keywords = new List<string>() { "Attach to a hero." },
                 Quantity = 3,
-                Number = 6
+                Number = 10
             });
             Cards.Add(new Card() {
                 ImageName = "M1156",
@@ -106,7 +106,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Text = "Response: After a location is revealed from the encounter deck, immediately travel to that location without resolving its Travel effect. If another location is currently active, return it to the staging area.",
                 Quantity = 3,
-                Number = 7
+                Number = 9
             });
             Cards.Add(new Card() {
                 ImageName = "M1152",
@@ -118,7 +118,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Eagle." },
                 Text = "Action: Search the top 5 cards of your deck for any number of Eagle cards and add them to your hand. Shuffle the other cards back into your deck.",
                 Quantity = 3,
-                Number = 8
+                Number = 5
             });
             Cards.Add(new Card() {
                 ImageName = "M1153",
@@ -134,7 +134,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Rohan." },
                 Text = "Action: Discard Westfold Horse-Breaker to choose and ready a hero.",
                 Quantity = 3,
-                Number = 9
+                Number = 6
             });
             Cards.Add(new Card() {
                 ImageName = "M1151",
@@ -151,7 +151,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Winged Guardian cannot have restricted attachments.Forced: After an attack in which Winged Guardian defends resolves, pay 1 Tactics resource or discard Winged Guardian from play.",
                 Keywords = new List<string>() { "Sentinel." },
                 Quantity = 3,
-                Number = 10
+                Number = 4
             });
             Cards.Add(new Card() {
                 ImageName = "M1169",
@@ -161,7 +161,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: The first player chooses and shuffles a card with the printed Clue trait back into the encounter deck. If there are no Clue cards in play, False Lead gains surge.",
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 2,
-                Number = 11
+                Number = 22
             });
             Cards.Add(new Card() {
                 ImageName = "M1170",
@@ -174,7 +174,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Doomed 1.", " Surge." },
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 2,
-                Number = 12
+                Number = 23
             });
             Cards.Add(new Card() {
                 ImageName = "M1167",
@@ -190,7 +190,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 1,
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 2,
-                Number = 13
+                Number = 20
             });
             Cards.Add(new Card() {
                 ImageName = "M1168",
@@ -207,7 +207,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 5,
-                Number = 14
+                Number = 21
             });
             Cards.Add(new Card() {
                 ImageName = "M1171",
@@ -218,7 +218,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Discard 1 resource from each hero's resource pool, if able. Exhaust any hero that could not discard a resource from its pool.",
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 3,
-                Number = 15
+                Number = 24
             });
             Cards.Add(new Card() {
                 ImageName = "M1164",
@@ -232,7 +232,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 4,
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 2,
-                Number = 16
+                Number = 17
             });
             Cards.Add(new Card() {
                 ImageName = "M1161",
@@ -244,7 +244,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Guarded." },
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 4,
-                Number = 17
+                Number = 14
             });
             Cards.Add(new Card() {
                 ImageName = "M1165",
@@ -271,7 +271,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 2,
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 3,
-                Number = 19
+                Number = 16
             });
             Cards.Add(new Card() {
                 ImageName = "M1162",
@@ -287,7 +287,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 2,
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 2,
-                Number = 20
+                Number = 15
             });
             Cards.Add(new Card() {
                 ImageName = "M1166",
@@ -301,35 +301,44 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 2,
-                Number = 21
+                Number = 19
             });
             Cards.Add(new Card() {
                 ImageName = "M1158",
-                Title = "The Hunt Begins - 1A",
+                Title = "The Hunt Begins",
+                StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801201c9022",
                 CardType = CardType.Quest,
                 Text = "Setup: Reveal 1 card per player from the encounter deck, and add it to the staging area.",
+                OppositeText = "Forced: After the players quest successfully, the first player looks at the top 3 card fo the encounter deck. Reveal and add 1 of those cards to the staging area, and discard the other 2 cards.",
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 1,
-                Number = 22
+                Number = 11
             });
             Cards.Add(new Card() {
                 ImageName = "M1159",
-                Title = "A New Terror Abroad - 2A",
+                Title = "A New Terror Abroad",
+                StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801201c9024",
                 CardType = CardType.Quest,
                 EncounterSet = "The Hunt for Gollum",
+                OppositeText = "Forced: At the beginning of the quest phase, the first player looks at the top 2 cards of the encounter deck. Reveal and add 1 of those cards to the staging area, and discard the other.",
                 Quantity = 1,
-                Number = 23
+                Number = 12
             });
             Cards.Add(new Card() {
                 ImageName = "M1160",
-                Title = "On the Trail - 3A",
+                Title = "On the Trail",
+                StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-0801201c9026",
                 CardType = CardType.Quest,
                 EncounterSet = "The Hunt for Gollum",
+                OppositeText =
+@"Any player who does not control a hero with at least 1 Clue objective attached cannot commit characters to this quest. If there are ever no heroes with Clue objectives attached in play, reset the quest deck to stage 2B.
+
+If the players defeat this stage, the players have once again found a true sign of Gollum's passing, and have won the game.",
                 Quantity = 1,
-                Number = 24
+                Number = 13
             });
         }
     }

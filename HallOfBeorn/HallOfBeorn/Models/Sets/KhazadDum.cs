@@ -24,7 +24,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 4,
                 Text = "When Revealed: The last player deals damage equal to The Nameless Fear's attack to a hero he controls. This effect cannot be canceled.",
                 Shadow = "Shadow: Deal damage equal to The Nameless Fear's Attack to the defending character.",
-                Number = 1
+                Number = 28
             });
             Cards.Add(new Card() {
                 ImageName = "M1354",
@@ -36,8 +36,9 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Setup = "stttt",
                 Text = "Setup: Prepare the quest deck. Add The Nameless Fear to the staging area. Remove all copies of A Foe Beyond from the encounter deck. Then, shuffle 1 copy of A Foe Beyond per player back into the encounter deck.",
+                OppositeText = "When Revealed: Reveal 1 encounter card per player, and add it to the staging area. Then, add A Presence in the Dark to your victory display.",
                 VictoryPoints = 2,
-                Number = 2
+                Number = 69
             });
             Cards.Add(new Card() {
                 ImageName = "M1351",
@@ -46,8 +47,12 @@ namespace HallOfBeorn.Models.Sets
                 Id = "51223bd0-ffd1-11df-a976-0801207c9004",
                 CardType = CardType.Quest,
                 EncounterSet = "Into the Pit",
+                OppositeText = 
+@"Heroes do not collect resources during the resource phase.
+
+If players defeat this stage, they win the game.",
                 Quantity = 1,
-                Number = 3
+                Number = 66
             });
             Cards.Add(new Card() {
                 ImageName = "M1314",
@@ -57,9 +62,9 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Flight from Moria",
                 Traits = new List<string>() { "Tools." },
                 Quantity = 1,
-                Text = "Action: Exhaust a hero to claim this objective if it has no encounters attached. Then, attach Abandoned Tools to that hero. (If detached, return Abandoned Tools to the staging area.)",
+                Text = "Action: Exhaust a hero to claim this objective if it has no encounters attached. Then, attach Abandoned ~Tools to that hero. (If detached, return Abandoned ~Tools to the staging area.)",
                 Keywords = new List<string>() { "Guarded.", " Restricted." },
-                Number = 4
+                Number = 29
             });
             Cards.Add(new Card() {
                 ImageName = "M1297",
@@ -70,7 +75,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Action: Exhaust a Dwarf character to place 2 progress tokens on the active location. (4 progress tokens instead if it is an Underground or Mountain location.)",
-                Number = 5
+                Number = 12
             });
             Cards.Add(new Card() {
                 ImageName = "M1287",
@@ -87,7 +92,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 2,
                 HitPoints = 3,
                 Text = "Action: Pay 1 resource from a hero's resource pool to add 1 resource to Bifur's resource pool. Any player may trigger this ability. (Limit once per round.)",
-                Number = 6
+                Number = 2
             });
             Cards.Add(new Card() {
                 ImageName = "M1341",
@@ -98,7 +103,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Text = "When Revealed: The first player must discard 3 resources from each hero he controls.",
                 Shadow = "Shadow: Defending player must discard 2 resources from each hero he controls.",
-                Number = 7
+                Number = 56
             });
             Cards.Add(new Card() {
                 ImageName = "M1339",
@@ -115,7 +120,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: The first player must choose and discard an attachment from a questing character, if able.",
                 Shadow = "Shadow: If this attack is undefended, deal 2 additional shadow cards to attacking enemy.",
                 Threat = 2,
-                Number = 8
+                Number = 54
             });
             Cards.Add(new Card() {
                 ImageName = "M1309",
@@ -128,7 +133,7 @@ namespace HallOfBeorn.Models.Sets
                 IsUnique = true,
                 Text = "Action: Exhaust a hero to claim this objective. Then, attach Book of Mazarbul to that hero. (If detached, return Book of Mazarbul to the staging area.)Attached hero cannot attack and does not exhaust to commit to a quest.",
                 Keywords = new List<string>() { "Restricted." },
-                Number = 9
+                Number = 24
             });
             Cards.Add(new Card() {
                 ImageName = "M1298",
@@ -141,7 +146,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Text = "Limit 1 Boots from Erebor per character.Attached character gets +1 hit point.",
                 Keywords = new List<string>() { "Attach to a Dwarf or Hobbit character." },
-                Number = 10
+                Number = 13
             });
             Cards.Add(new Card() {
                 ImageName = "M1321",
@@ -154,7 +159,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "While Branching Paths is in the staging area, each Dark location gets +1 Threat.Forced: After Branching Paths leaves play as an explored location, look at the top 3 cards of the encounter deck. Players must choose 1 of those to reveal and add to the staging area, moving the other 2 to the bottom of the deck.",
                 Threat = 1,
                 QuestPoints = 3,
-                Number = 11
+                Number = 36
             });
             Cards.Add(new Card() {
                 ImageName = "M1303",
@@ -169,7 +174,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 3,
                 QuestPoints = 3,
                 VictoryPoints = 2,
-                Number = 12
+                Number = 18
             });
             Cards.Add(new Card() {
                 ImageName = "M1325",
@@ -180,7 +185,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Text = "When Revealed: Each enemy and location currently in the staging area gets +1 Threat until the end of the phase. (+3 Threat instead if it is a Dark location.) Players may exhaust a Cave Torch to cancel this effect.",
                 Shadow = "Shadow: attacking enemy gets +2 Attack.",
-                Number = 13
+                Number = 40
             });
             Cards.Add(new Card() {
                 ImageName = "M1333",
@@ -191,7 +196,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Hazard." },
                 Quantity = 3,
                 Text = "When Revealed: Remove all progress tokens from the current quest card and active location. If Cave In removed no progress tokens, it gains surge.",
-                Number = 14
+                Number = 48
             });
             Cards.Add(new Card() {
                 ImageName = "M1326",
@@ -203,7 +208,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Text = "Action: Exhaust Cave Torch to place up to 3 progress tokens on a Dark location.Forced: After Cave Torch exhausts, discard the top card of the encounter deck. If that card is an enemy, add it to the staging area.",
                 Keywords = new List<string>() { "Attach to a hero.", " Restricted." },
-                Number = 15
+                Number = 41
             });
             Cards.Add(new Card() {
                 ImageName = "M1305",
@@ -220,7 +225,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "For each excess point of combat damage dealt by Cave-troll (damage that is dealt beyond the remaining hit points of the character damaged by its attack) you must damage another character you control.",
                 Threat = 4,
                 VictoryPoints = 2,
-                Number = 16
+                Number = 20
             });
             Cards.Add(new Card() {
                 ImageName = "M1330",
@@ -231,7 +236,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Text = "When Revealed: Put the top enemy in the encounter discard pile into play, engaged with the first player. If this effect put no enemies into play, Chance Encounter gains surge.",
                 Shadow = "Shadow: attacking enemy gets +1 Attack. (+3 Attack instead if engaged with the first player.)",
-                Number = 17
+                Number = 45
             });
             Cards.Add(new Card() {
                 ImageName = "M1315",
@@ -248,7 +253,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Chieftain of the Pit gets +3 Attack until the end of the round.",
                 Shadow = "Shadow: attacking enemy attacks again after this attack. Deal it another shadow card for the next attack.",
                 Threat = 2,
-                Number = 18
+                Number = 30
             });
             Cards.Add(new Card() {
                 ImageName = "M1334",
@@ -259,7 +264,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Hazard." },
                 Quantity = 2,
                 Text = "When Revealed: Each player must exhaust a character and discard the top card of his deck, if able. If the printed cost of the discarded card is equal to or higher than the remaining hit points of the exhausted character, discard the exhausted character.",
-                Number = 19
+                Number = 49
             });
             Cards.Add(new Card() {
                 ImageName = "M1335",
@@ -270,7 +275,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 2,
                 Text = "When Revealed: Deal 1 damage to each exhausted character. (2 damage instead if the active location is a Dark location.)",
                 Shadow = "Shadow: Deal 1 damage to the defending character. (Attacking enemy gets +2 Attack instead if this attack is undefended.)",
-                Number = 20
+                Number = 50
             });
             Cards.Add(new Card() {
                 ImageName = "M1337",
@@ -284,7 +289,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 QuestPoints = 0,
                 VictoryPoints = 3,
-                Number = 21
+                Number = 52
             });
             Cards.Add(new Card() {
                 ImageName = "M1289",
@@ -296,7 +301,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Action: Choose a Dwarf hero. That hero gets +2 Willpower, +2 Attack, and +2 Defense until the end of the round.",
-                Number = 22
+                Number = 4
             });
             Cards.Add(new Card() {
                 ImageName = "M1286",
@@ -313,7 +318,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 4,
                 Text = "Response: After Dwalin attacks and destroys an Orc enemy, lower your threat by 2.",
-                Number = 23
+                Number = 1
             });
             Cards.Add(new Card() {
                 ImageName = "M1292",
@@ -326,7 +331,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Text = "Attached character gets +1 Attack.Response: After attached character attacks, deal 1 damage to the defending enemy.",
                 Keywords = new List<string>() { "Attach to a Dwarf character.", " Restricted." },
-                Number = 24
+                Number = 7
             });
             Cards.Add(new Card() {
                 ImageName = "M1301",
@@ -342,7 +347,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 7,
                 QuestPoints = 7,
                 VictoryPoints = 1,
-                Number = 25
+                Number = 16
             });
             Cards.Add(new Card() {
                 ImageName = "M1349",
@@ -354,7 +359,11 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Setup = "lttt",
                 Text = "Setup: Search the encounter deck for East-gate and Cave Torch. Put East-gate into play as the active location, and have the first player attach Cave Torch to a hero of his choice. Set First Hall and Bridge of Khazad-dum aside, out of play. Shuffle the encounter deck.",
-                Number = 26
+                OppositeText = 
+@"When Revealed: Reveal 1 encounter card per player, and add it to the staging area.
+
+Player cannot advance to the next stage of the scenario unless Bridge of Khazad-dum is in their victory display.",
+                Number = 64
             });
             Cards.Add(new Card() {
                 ImageName = "M1296",
@@ -369,8 +378,11 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 0,
                 Willpower = 1,
                 HitPoints = 1,
-                Text = "Erebor Record Keeper cannot attack or defend.Action: Exhaust Erebor Record Keeper and pay 1 Lore resource to choose and ready a Dwarf character.",
-                Number = 27
+                Text = 
+@"Erebor ~Record Keeper cannot attack or defend.
+
+Action: Exhaust Erebor ~Record Keeper and pay 1 Lore resource to choose and ready a Dwarf character.",
+                Number = 11
             });
             Cards.Add(new Card() {
                 ImageName = "M1290",
@@ -381,7 +393,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 3,
                 Text = "Response: After players quest unsuccessfully, choose a player. That player does not raise his threat.",
-                Number = 28
+                Number = 5
             });
             Cards.Add(new Card() {
                 ImageName = "M1302",
@@ -396,7 +408,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 QuestPoints = 2,
                 VictoryPoints = 1,
-                Number = 29
+                Number = 17
             });
             Cards.Add(new Card() {
                 ImageName = "M1338",
@@ -409,7 +421,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Each player may choose and discard 1 card at random from his hand. If all players did not discard 1 card, Fouled Well gains surge.",
                 Threat = 3,
                 QuestPoints = 5,
-                Number = 30
+                Number = 53
             });
             Cards.Add(new Card() {
                 ImageName = "M1317",
@@ -426,7 +438,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Characters with ranged are eligible to attack Goblin Archer while it is in the staging area.Forced: After an enemy is revealed from the encounter deck, the first player must deal 1 damage to 1 character he controls.",
                 Keywords = new List<string>() { "Players cannot optionally engage Goblin Archer." },
                 Threat = 2,
-                Number = 31
+                Number = 32
             });
             Cards.Add(new Card() {
                 ImageName = "M1320",
@@ -443,7 +455,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Goblin Follower engages the last player.",
                 Shadow = "Shadow: attacking enemy gets +1 Attack. (+2 Attack instead if attacking the last player.)",
                 Threat = 1,
-                Number = 32
+                Number = 35
             });
             Cards.Add(new Card() {
                 ImageName = "M1350",
@@ -452,8 +464,14 @@ namespace HallOfBeorn.Models.Sets
                 Id = "51223bd0-ffd1-11df-a976-0801207c9036",
                 CardType = CardType.Quest,
                 EncounterSet = "Into the Pit",
+                OppositeText =
+@"When Revealed: Each player must search the encounter deck and discard pile for 1 enemy of his choice, and add it to the staging area. One choice must be Patrol Leader, if able.
+
+Forced: After an enemy is revealed from the encounter deck, discard it instead of adding it to the staging area.
+
+If there are no enemies in play, immediately advance to the next stage of the scenario. (Players can also advance by placing 11 progress tokens on ~Goblin Patrol.)",
                 Quantity = 1,
-                Number = 33
+                Number = 65
             });
             Cards.Add(new Card() {
                 ImageName = "M1345",
@@ -469,7 +487,7 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 2,
                 Text = "Each player with a threat of 25 or higher cannot optionally engage Goblin Scout.",
                 Threat = 3,
-                Number = 34
+                Number = 60
             });
             Cards.Add(new Card() {
                 ImageName = "M1316",
@@ -486,7 +504,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Goblin Spearman gets +2 Attack if its attack is undefended.",
                 Shadow = "Shadow: Add Goblin Spearman to the staging area.",
                 Threat = 2,
-                Number = 35
+                Number = 31
             });
             Cards.Add(new Card() {
                 ImageName = "M1346",
@@ -503,7 +521,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Goblin Swordsman gets +2 Attack if its attack is undefended.",
                 Shadow = "Shadow: Add Goblin Swordsman to the staging area.",
                 Threat = 1,
-                Number = 36
+                Number = 61
             });
             Cards.Add(new Card() {
                 ImageName = "M1348",
@@ -517,7 +535,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: attacking enemy gets +1 Attack. (+3 Attack instead if attacking enemy is a Goblin.)",
                 Threat = 2,
                 QuestPoints = 7,
-                Number = 37
+                Number = 63
             });
             Cards.Add(new Card() {
                 ImageName = "M1327",
@@ -535,7 +553,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Immune to ranged damage." },
                 Threat = 2,
                 VictoryPoints = 3,
-                Number = 38
+                Number = 42
             });
             Cards.Add(new Card() {
                 ImageName = "M1307",
@@ -545,7 +563,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Seventh Level",
                 Quantity = 2,
                 Text = "When Revealed: Each player must raise his threat by 1 for each enemy in the staging area. Then, the last player discards an attachment he controls.",
-                Number = 39
+                Number = 22
             });
             Cards.Add(new Card() {
                 ImageName = "M1293",
@@ -556,7 +574,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 0,
                 Text = "Action: Choose a Dwarf character. Until the end of the phase, that character gets +3 Attack.",
-                Number = 40
+                Number = 8
             });
             Cards.Add(new Card() {
                 ImageName = "M1342",
@@ -569,7 +587,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "While Knees of the Mountain is in the staging area, it gains: 'Forced: After an enemy engages a player, it gets +1 Attack until the end of the round.'",
                 Threat = 2,
                 QuestPoints = 3,
-                Number = 41
+                Number = 57
             });
             Cards.Add(new Card() {
                 ImageName = "M1322",
@@ -583,7 +601,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Cancel all combat damage dealt to attacking enemy.",
                 Threat = 4,
                 QuestPoints = 4,
-                Number = 42
+                Number = 37
             });
             Cards.Add(new Card() {
                 ImageName = "M1324",
@@ -594,7 +612,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Text = "When Revealed: Shuffle all locations in the encounter discard pile back into the encounter deck.",
                 Keywords = new List<string>() { "Surge." },
-                Number = 43
+                Number = 39
             });
             Cards.Add(new Card() {
                 ImageName = "M1331",
@@ -606,7 +624,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Reveal X additional cards from the encounter deck and add them to the staging area. X is the number of players in the game.",
                 Shadow = "Shadow: attacking enemy gets +X Attack. X is the number of players in the game.",
                 Keywords = new List<string>() { "Doomed 1." },
-                Number = 44
+                Number = 46
             });
             Cards.Add(new Card() {
                 ImageName = "M1340",
@@ -623,7 +641,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "If Mountain Warg is dealt a shadow card with no effect, return Mountain Warg to the staging area after it attacks.",
                 Shadow = "Shadow: attacking enemy gets +1 Attack. (+2 Attack instead if a Mountain is the active location.)",
                 Threat = 2,
-                Number = 45
+                Number = 55
             });
             Cards.Add(new Card() {
                 ImageName = "M1288",
@@ -637,7 +655,7 @@ namespace HallOfBeorn.Models.Sets
                 IsUnique = true,
                 Text = "Action: Exhaust Narvi's Belt to give attached hero a Leadership, Lore, Tactics, or Spirit icon until the end of the phase.",
                 Keywords = new List<string>() { "Attach to a Dwarf hero." },
-                Number = 46
+                Number = 3
             });
             Cards.Add(new Card() {
                 ImageName = "M1311",
@@ -648,7 +666,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Text = "When Revealed: If the players are not on stage 1, shuffle the current quest card into the quest deck, then reveal a new quest card. Otherwise, New Devilry gains surge.",
                 Shadow = "Shadow: If this attack is undefended, raise your threat by The Nameless Fear's Threat.",
-                Number = 47
+                Number = 26
             });
             Cards.Add(new Card() {
                 ImageName = "M1328",
@@ -664,7 +682,7 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 1,
                 Text = "While Orc Drummer is in the staging area, each enemy gets +X Threat. X is the number of players in the game.",
                 Threat = 1,
-                Number = 48
+                Number = 43
             });
             Cards.Add(new Card() {
                 ImageName = "M1306",
@@ -681,7 +699,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Reveal 1 card from the encounter deck and add it to the staging area.",
                 Keywords = new List<string>() { "Surge." },
                 Threat = 2,
-                Number = 49
+                Number = 21
             });
             Cards.Add(new Card() {
                 ImageName = "M1299",
@@ -698,7 +716,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Forced: Before Patrol Leader is dealt damage, discard the top card of the encounter deck. If the discarded card is an enemy, cancel that damage.",
                 Shadow = "Shadow: Cancel all damage dealt to this enemy.",
                 Threat = 3,
-                Number = 50
+                Number = 14
             });
             Cards.Add(new Card() {
                 ImageName = "M1319",
@@ -711,11 +729,12 @@ namespace HallOfBeorn.Models.Sets
                 Text = "While Plundered Armoury is in the staging area, enemies get +1 Attack.Response: After Plundered Armoury leaves play as an explored location, each player may attach a Weapon or Armour attachment from his hand to 1 character he controls.",
                 Threat = 3,
                 QuestPoints = 2,
-                Number = 51
+                Number = 34
             });
             Cards.Add(new Card() {
                 ImageName = "M1355",
                 Title = "Search for an Exit",
+                SlugIncludesOppositeTitle = true,
                 StageNumber = 2,
                 OppositeTitle = "Heading Down",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9056",
@@ -727,11 +746,12 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "As the presence draws near, doubt and fear surround you like a vast shadow. You must find daylight, you must escape from the Black Pit...",
                 QuestPoints = 5,
                 VictoryPoints = 1,
-                Number = 52
+                Number = 70
             });
             Cards.Add(new Card() {
                 ImageName = "M1356",
                 Title = "Search for an Exit",
+                SlugIncludesOppositeTitle = true,
                 StageNumber = 2,
                 OppositeTitle = "Heading Up",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9058",
@@ -743,11 +763,12 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "As the presence draws near, doubt and fear surround you like a vast shadow. You must find daylight, you must escape from the Black Pit...",
                 QuestPoints = 7,
                 VictoryPoints = 1,
-                Number = 53
+                Number = 71
             });
             Cards.Add(new Card() {
                 ImageName = "M1357",
                 Title = "Search for an Exit",
+                SlugIncludesOppositeTitle = true,
                 StageNumber = 2,
                 OppositeTitle = "A Wrong Turn",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9060",
@@ -759,11 +780,12 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "As the presence draws near, doubt and fear surround you like a vast shadow. You must find daylight, you must escape from the Black Pit...",
                 QuestPoints = 1,
                 VictoryPoints = 2,
-                Number = 54
+                Number = 72
             });
             Cards.Add(new Card() {
                 ImageName = "M1358",
                 Title = "Search for an Exit",
+                SlugIncludesOppositeTitle = true,
                 StageNumber = 2,
                 OppositeTitle = "Narrow Paths",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9062",
@@ -775,11 +797,12 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "As the presence draws near, doubt and fear surround you like a vast shadow. You must find daylight, you must escape from the Black Pit...",
                 QuestPoints = 3,
                 VictoryPoints = 1,
-                Number = 55
+                Number = 73
             });
             Cards.Add(new Card() {
                 ImageName = "M1359",
                 Title = "Search for an Exit",
+                SlugIncludesOppositeTitle = true,
                 StageNumber = 2,
                 OppositeTitle = "Hasty Council",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9064",
@@ -790,11 +813,12 @@ namespace HallOfBeorn.Models.Sets
                 OppositeText = "When Revealed: Shuffle all copies of A Foe Beyond from the encounter discard pile back into the encounter deck. Reveal the top 2 cards of the quest deck. Choose 1 to become the active quest (flipped to side 2B) and put the other on the bottom of the quest deck. Then, add Hasty Council to your victory display.",
                 FlavorText = "As the presence draws near, doubt and fear surround you like a vast shadow. You must find daylight, you must escape from the Black Pit...",
                 VictoryPoints = 2,
-                Number = 56
+                Number = 74
             });
             Cards.Add(new Card() {
                 ImageName = "M1360",
                 Title = "Search for an Exit",
+                SlugIncludesOppositeTitle = true,
                 StageNumber = 2,
                 OppositeTitle = "Blocked By Shadow",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9066",
@@ -805,11 +829,12 @@ namespace HallOfBeorn.Models.Sets
                 OppositeText = "When Revealed: The first player chooses 1 of the following:• Each player discards 1 card from the top of the encounter deck. If the card is a treachery card, the discarding player is eliminated from the game.• Reveals the next quest card, putting Blocked by Shadow on the bottom of the quest deck. Players may bypass this quest card at the end of the combat phase. If the players defeat this stage, they escape and win the game.",
                 FlavorText = "As the presence draws near, doubt and fear surround you like a vast shadow. You must find daylight, you must escape from the Black Pit...",
                 QuestPoints = 9,
-                Number = 57
+                Number = 75
             });
             Cards.Add(new Card() {
                 ImageName = "M1361",
                 Title = "Search for an Exit",
+                SlugIncludesOppositeTitle = true,
                 StageNumber = 2,
                 OppositeTitle = "Escape from Darkness",
                 Id = "51223bd0-ffd1-11df-a976-0801207c9068",
@@ -820,7 +845,7 @@ namespace HallOfBeorn.Models.Sets
                 OppositeText = "Abandoned Tools gains: 'Refresh Action: Exhaust attached hero to put a progress token on Escape from Darkness.' Players may bypass this quest card at the end of the combat phase. Progress tokens cannot be placed on Escape from Darkness except by Abandoned Tools. If the players defeat this stage, they escape and win the game.",
                 FlavorText = "As the presence draws near, doubt and fear surround you like a vast shadow. You must find daylight, you must escape from the Black Pit...",
                 QuestPoints = 4,
-                Number = 58
+                Number = 76
             });
             Cards.Add(new Card() {
                 ImageName = "M1352",
@@ -832,7 +857,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Setup = "t",
                 Text = "Setup: Search the encounter deck for Book of Mazarbul, and have the first player attach it to a hero of his choice. Shuffle the encounter deck.",
-                Number = 59
+                OppositeText = "When Revealed: Reveal 1 encounter card per player, and add it to the staging area.",
+                Number = 67
             });
             Cards.Add(new Card() {
                 ImageName = "M1312",
@@ -842,7 +868,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Flight from Moria",
                 Quantity = 3,
                 Text = "When Revealed: The first player attaches Shadow of Fear to one of his heroes. (Counts as a Condition attachment with the text: 'Limit 1 per hero. Attached hero cannot exhaust or ready and its text box is treated as if it were blank. Action: Pay 3 resources from attached hero's pool to discard this card.')",
-                Number = 60
+                Number = 27
             });
             Cards.Add(new Card() {
                 ImageName = "M1300",
@@ -854,7 +880,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = " ",
                 Shadow = "Shadow: Defending player raises his threat by 2.",
                 Keywords = new List<string>() { "Doomed 2.", " Surge." },
-                Number = 61
+                Number = 15
             });
             Cards.Add(new Card() {
                 ImageName = "M1304",
@@ -868,7 +894,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Defending player must choose and exhaust 1 character he controls.",
                 Threat = 2,
                 QuestPoints = 4,
-                Number = 62
+                Number = 19
             });
             Cards.Add(new Card() {
                 ImageName = "M1329",
@@ -885,7 +911,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "X is the number of players in the game.",
                 Shadow = "Shadow: attacking enemy gets +X Attack. X is the number of players in the game.",
                 Threat = 0,
-                Number = 63
+                Number = 44
             });
             Cards.Add(new Card() {
                 ImageName = "M1336",
@@ -897,7 +923,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Text = "When Revealed: The first player must discard 1 questing character he controls, if able. This effect cannot be canceled.",
                 Shadow = "Shadow: Discard the defending character from play.",
-                Number = 64
+                Number = 51
             });
             Cards.Add(new Card() {
                 ImageName = "M1353",
@@ -906,8 +932,14 @@ namespace HallOfBeorn.Models.Sets
                 Id = "51223bd0-ffd1-11df-a976-0801207c9077",
                 CardType = CardType.Quest,
                 EncounterSet = "The Seventh Level",
+                OppositeText = 
+@"When Revealed: Remove Book of Mazarbul from the game.
+
+Forced: At the end of the staging step, reveal the top X cards of the encounter deck, adding all enemies to the staging area. Discard the other revealed cards without resolving them. X is the number of players.
+
+If the players defeat this stage, they win the game.",
                 Quantity = 1,
-                Number = 65
+                Number = 68
             });
             Cards.Add(new Card() {
                 ImageName = "M1332",
@@ -921,7 +953,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: attacking enemy gets +X Attack. X is the number of players in the game.",
                 Threat = 0,
                 QuestPoints = 0,
-                Number = 66
+                Number = 47
             });
             Cards.Add(new Card() {
                 ImageName = "M1310",
@@ -939,7 +971,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "The Nameless Fear cannot engage or be engaged.X is the number of victory points in the victory display.",
                 Keywords = new List<string>() { "Immune to player card effects." },
                 Threat = 0,
-                Number = 67
+                IsVariableThreat = true,
+                Number = 25
             });
             Cards.Add(new Card() {
                 ImageName = "M1343",
@@ -952,7 +985,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "While Turbulent Waters is the active location, players cannot optionally engage enemies.",
                 Threat = 3,
                 QuestPoints = 2,
-                Number = 68
+                Number = 58
             });
             Cards.Add(new Card() {
                 ImageName = "M1318",
@@ -963,7 +996,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Text = "When Revealed: Each player must deal X damage to 1 ally he controls. X is the number of allies he controls.",
                 Shadow = "Shadow: If the defending character is an ally, discard it from play.",
-                Number = 69
+                Number = 33
             });
             Cards.Add(new Card() {
                 ImageName = "M1295",
@@ -974,7 +1007,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 2,
                 Text = "Action: Each Dwarf character gets +1 Willpower until the end of the phase. (+2 Willpower instead if the active location is an Underground or Dark location.)",
-                Number = 70
+                Number = 10
             });
             Cards.Add(new Card() {
                 ImageName = "M1308",
@@ -987,7 +1020,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Doomed 2." },
                 Threat = 3,
                 QuestPoints = 4,
-                Number = 71
+                Number = 23
             });
             Cards.Add(new Card() {
                 ImageName = "M1291",
@@ -1003,7 +1036,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 0,
                 HitPoints = 3,
                 Text = "Veteran of Nanduhirion enters play with 1 damage on it.",
-                Number = 72
+                Number = 6
             });
             Cards.Add(new Card() {
                 ImageName = "M1344",
@@ -1016,7 +1049,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Search the encounter deck and discard pile for 1 copy of Mountain Warg and add it to the staging area, if able. Shuffle the encounter deck.Response: After Warg Lair leaves play as an explored location, each player draws 1 card.",
                 Threat = 1,
                 QuestPoints = 3,
-                Number = 73
+                Number = 59
             });
             Cards.Add(new Card() {
                 ImageName = "M1347",
@@ -1026,7 +1059,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Goblins of the Deep",
                 Quantity = 3,
                 Text = "When Revealed: The first player attaches Watchful Eyes to one of his heroes. (Counts as a Condition attachment with the text: 'Limit 1 per hero. Forced: If attached hero is exhausted at the end of the combat phase, reveal 1 card from the encounter deck and add it to the staging area.')",
-                Number = 74
+                Number = 62
             });
             Cards.Add(new Card() {
                 ImageName = "M1294",
@@ -1042,7 +1075,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 1,
                 Text = "Action: Exhaust Zigil Miner and name a number to discard the top 2 cards of your deck. If at least one of those cards has cost equal to the named number, choose a hero you control. For each card that matches the named number, add 1 resource to that hero's resource pool.",
-                Number = 75
+                Number = 9
             });
             Cards.Add(new Card() {
                 ImageName = "M1323",
@@ -1055,7 +1088,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Raise each player's threat by 1 to place 1 progress token on Zigil Mineshaft.",
                 Threat = 5,
                 QuestPoints = 5,
-                Number = 76
+                Number = 38
             });
         }
     }
