@@ -695,6 +695,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 Title = "A Knife in the Dark",
+                SlugIncludesType = true,
                 Id = "2efa631a-eb16-4078-84a5-18c7033b86f3",
                 CardType = CardType.Campaign,
                 Keywords = new List<string>() { "You are playing Campaign Mode." },
@@ -890,6 +891,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 Title = "Flight to the Ford",
+                SlugIncludesType = true,
                 Id = "0ee09c42-34c9-41aa-aa98-b582608b15bb",
                 CardType = CardType.Campaign,
                 Keywords = new List<string>() { "You are playing Campaign Mode." },
