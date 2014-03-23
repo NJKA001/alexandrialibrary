@@ -45,6 +45,7 @@ namespace HallOfBeorn.Models
         public bool IsVariableCost { get; set; }
         public bool IsVariableThreat { get; set; }
         public bool IsVariableQuestPoints { get; set; }
+        public bool IsVariableAttack { get; set; }
         public byte Willpower { get; set; }
         public byte Attack { get; set; }
         public byte Defense { get; set; }
@@ -65,6 +66,7 @@ namespace HallOfBeorn.Models
         public byte VictoryPoints { get; set; }
         public byte Quantity { get; set; }
         public byte? EasyModeQuantity { get; set; }
+        public byte? NightmareModeQuantity { get; set; }
         public string Setup { get; set; }
 
         public string FlavorText { get; set; }
@@ -93,13 +95,13 @@ namespace HallOfBeorn.Models
                 if (Traits == null || Traits.Count == 0)
                     return string.Empty;
 
-                return string.Join(" ", Traits); //.Select(x => string.Format("{0}.", x)));
+                return string.Join(" ", Traits);
             }
         }
 
         public bool HasKeyword(string keyword)
         {
-            return Keywords.Any(x => x != null && string.Equals(x.Trim(), keyword));
+            return Keywords.Any(x => x != null && string.Equals(x.Trim().Replace("~", string.Empty), keyword));
         }
 
         public bool HasTrait(string trait)

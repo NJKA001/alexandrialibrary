@@ -528,7 +528,7 @@ Forced: If there is no progress on this stage at the end of the round, each play
                 CardType = CardType.Quest,
                 Quantity = 1,
                 QuestPoints = 8,
-                Keywords = new List<string> { "Battle. (Characters use Attack instead of Willpower when questing here.)" },
+                Keywords = new List<string> { "Battle." },
                 EncounterSet = "The Battle of Five Armies",
                 OppositeText = 
 @"Players cannot advance from this stage unless stage 2 and stage 4 are complete.
@@ -544,7 +544,7 @@ Forced: If there is no progress on this stage at the end of the round, the first
                 CardType = CardType.Quest,
                 Quantity = 1,
                 QuestPoints = 8,
-                Keywords = new List<string> { "Siege. (Characters use Defense instead of Willpower when questing here.)" },
+                Keywords = new List<string> { "Siege." },
                 EncounterSet = "The Battle of Five Armies",
                 OppositeText =
 @"Players cannot advance from this stage unless stage 2 and stage 3 are complete.
@@ -595,13 +595,15 @@ If Bolg is destroyed, the players win the game.",
                 Title = "Bodyguard of Bolg",
                 Id = "66812347-fac2-4a76-aa69-ac0861071c0d",
                 CardType = CardType.Enemy,
-                Keywords = new List<string>() { "Bolg cannot take damage." },
                 Quantity = 4,
                 Traits = new List<string>() { "Goblin.", " Orc." },
                 HitPoints = 5,
                 Attack = 4,
                 Defense = 2,
-                Text = "Forced: When this enemy attacks, deal it an additional shadow card for each quest stage in play with no progress tokens on it.",
+                Text =
+@"Bolg cannot take damage.
+
+Forced: When this enemy attacks, deal it an additional shadow card for each quest stage in play with no progress tokens on it.",
                 EncounterSet = "The Battle of Five Armies",
                 EngagementCost = 35,
                 Threat = 2,

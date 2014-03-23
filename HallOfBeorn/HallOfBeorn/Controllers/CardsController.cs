@@ -28,7 +28,7 @@ namespace HallOfBeorn.Controllers
             SearchViewModel.CardSets = _cardService.SetNames.GetSelectListItems();
         }
 
-        private IEnumerable<CardEffect> ParseCardEffects(string text)
+        private IEnumerable<CardEffect> ParseCardEffects(Card card, string text)
         {
             if (string.IsNullOrEmpty(text))
                 return Enumerable.Empty<CardEffect>();
@@ -41,20 +41,40 @@ namespace HallOfBeorn.Controllers
                 if (string.IsNullOrEmpty(line))
                     continue;
 
-                effects.Add(ParseCardEffect(line, isFirst));
+                effects.Add(ParseCardEffect(card, line, isFirst));
                 isFirst = false;
             }
 
             return effects;
         }
 
-        private void CheckForSuffix(Token token, string part, string normalized)
+        private void checkForSuffix(Token token, string part, string normalized)
         {
             if (part.Length > normalized.Length)
             {
                 var prefixLength = part.StartsWith("(") ? 1 : 0;
                 var suffixLength = part.Length - normalized.Length - prefixLength;
                 token.Suffix = part.Substring(part.Length - suffixLength, suffixLength);
+            }
+        }
+
+        private void checkForTitleReference(Token token, string part)
+        {
+            const string titleTag = "[Card]";
+
+            if (part.Contains(titleTag))
+            {
+                token.IsTitleReference = true;
+
+                if (part.Length > titleTag.Length && !part.EndsWith("]"))
+                {
+                    token.Text = part.Substring(0, titleTag.Length);
+                    token.Suffix = part.Substring(titleTag.Length, part.Length - titleTag.Length);
+                }
+                else
+                {
+                    token.Text = part;
+                }
             }
         }
 
@@ -83,12 +103,14 @@ namespace HallOfBeorn.Controllers
                     return "/Images/Lore.png";
                 case "Baggins":
                     return "/Images/Baggins.png";
+                case "Fellowship":
+                    return "/Images/Fellowship.png";
                 default:
                     return null;
             }
         }
 
-        private CardEffect ParseCardEffect(string text, bool isFirst)
+        private CardEffect ParseCardEffect(Card card, string text, bool isFirst)
         {
             if (text == null)
                 return null;
@@ -106,6 +128,8 @@ namespace HallOfBeorn.Controllers
                 var token = new Token();
 
                 var normalized = part.TrimStart('(').TrimEnd('.', ',', ':', '"', '\'', ')');
+                var escaped = part.StartsWith("~");
+
 
                 if ((count == 1 || count == 2) && part.EndsWith(":"))
                 {
@@ -116,18 +140,23 @@ namespace HallOfBeorn.Controllers
                     {
                         effect.Tokens.First().IsTrigger = true;
                     }
+
+                    checkForTitleReference(token, part);
                 }
                 else
                 {
                     token.Prefix = count > 1 ? " " : string.Empty;
 
-                    if (_cardService.Traits().Any(x => string.Equals(x, normalized + ".")))
+                    if (!escaped)
                     {
-                        token.IsTrait = true;
-                        token.Text = token.Prefix + part;
-                        CheckForSuffix(token, part, normalized);
-                        effect.Tokens.Add(token);
-                        continue;
+                        if (_cardService.Traits().Any(x => string.Equals(x, normalized + ".")))
+                        {
+                            token.IsTrait = true;
+                            token.Text = token.Prefix + part;
+                            checkForSuffix(token, part, normalized);
+                            effect.Tokens.Add(token);
+                            continue;
+                        }
                     }
 
                     token.ImagePath = GetImagePath(normalized);
@@ -136,7 +165,7 @@ namespace HallOfBeorn.Controllers
                         if (part.StartsWith("("))
                             token.Prefix = token.Prefix + "(";
 
-                        CheckForSuffix(token, part, normalized);
+                        checkForSuffix(token, part, normalized);
                         effect.Tokens.Add(token);
                         continue;
                     }
@@ -144,11 +173,18 @@ namespace HallOfBeorn.Controllers
                     token.Text = token.Prefix + part.TrimStart('~');
                 }
 
+                checkForTitleReference(token, part);
+                
                 effect.Tokens.Add(token);
             }
 
-            if (text.Contains(" lost the game") || text.Contains(" lose the game") || text.Contains(" win the game") || text.Contains(" won the game"))
-                effect.IsCritical = true;
+            if (text.Contains("lost the game") || text.Contains("lose the game") || text.Contains("win the game") || text.Contains("won the game") || text.Contains("end the game"))
+            {
+                if (!effect.Tokens[0].IsTrigger)
+                {
+                    effect.IsCritical = true;
+                }
+            }
 
             return effect;
         }
@@ -158,13 +194,13 @@ namespace HallOfBeorn.Controllers
             var viewModel = new CardViewModel(card);
 
             foreach (var keyword in card.Keywords)
-                viewModel.KeywordEffects.Add(ParseCardEffect(keyword, true));
+                viewModel.KeywordEffects.Add(ParseCardEffect(card, keyword, true));
 
-            viewModel.TextEffects.AddRange(ParseCardEffects(card.Text));
-            viewModel.TextEffects.AddRange(ParseCardEffects(card.OppositeText));
+            viewModel.TextEffects.AddRange(ParseCardEffects(card, card.Text));
+            viewModel.TextEffects.AddRange(ParseCardEffects(card, card.OppositeText));
 
             if (!string.IsNullOrEmpty(card.Shadow))
-                viewModel.ShadowEffects.Add(ParseCardEffect(card.Shadow, true));
+                viewModel.ShadowEffects.Add(ParseCardEffect(card, card.Shadow, true));
 
             return viewModel;
         }

@@ -225,7 +225,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 IsUnique = true,
                 Text = "Action: When answering a riddle, spend 1 Baggins resource to discard an additional player card from the top of your deck.\r\n\r\nAction: Exhaust Bilbo's Magic ~Ring and raise each player's threat by 2 to add 1 Baggins resource to Bilbo ~Baggins' resource pool.",
-                Keywords = new List<string>() { "Attach to Bilbo Baggins." },
+                Keywords = new List<string>() { "Attach to Bilbo ~Baggins." },
                 Number = 79
             });
             Cards.Add(new Card() {
@@ -702,9 +702,16 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Cave." },
                 Quantity = 1,
                 IsUnique = true,
-                Text = "Players cannot travel here.Immune to player card effects.Forced: After players advance to stage 3, remove Lake in the Cavern from the game.",
-                Keywords = new List<string>() { "X is twice the number of players in the game." },
+                Text = 
+@"X is twice the number of players in the game.
+
+Players cannot travel here.
+
+Immune to player card effects.
+
+Forced: After players advance to stage 3, remove Lake in the Cavern from the game.",
                 Threat = 0,
+                IsVariableThreat = true,
                 QuestPoints = 0,
                 Number = 78
             });
@@ -917,7 +924,7 @@ namespace HallOfBeorn.Models.Sets
                 IsUnique = true,
                 Text = "Bilbo ~Baggins gets +1 Willpower, +1 Attack, and +1 Defense.\r\n\r\nResponse: After Bilbo ~Baggins exhausts to defend, discard the top card of the encounter deck. Deal damage to the attacking enemy equal to the discarded card's Threat.",
                 FlavorText = "\"I shall call you Sting.\" -Bilbo, The Hobbit",
-                Keywords = new List<string>() { "Attach to Bilbo Baggins.", "Restricted." },
+                Keywords = new List<string>() { "Attach to Bilbo ~Baggins.", "Restricted." },
                 Number = 20
             });
             Cards.Add(new Card() {

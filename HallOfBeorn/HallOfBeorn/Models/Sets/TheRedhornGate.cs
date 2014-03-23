@@ -19,7 +19,7 @@ namespace HallOfBeorn.Models.Sets
                 ImageName = "M1375",
                 Title = "Arwen Undomiel",
                 Id = "231bf335-bf9b-44d9-a919-e59aa1d46473",
-                CardType = CardType.Objective,
+                CardType = CardType.Objective_Ally,
                 IsUnique = true,
                 Attack = 0,
                 Defense = 1,

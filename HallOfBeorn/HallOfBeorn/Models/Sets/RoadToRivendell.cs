@@ -44,7 +44,7 @@ namespace HallOfBeorn.Models.Sets
                 ImageName = "M1402",
                 Title = "Arwen Undomiel",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9005",
-                CardType = CardType.Objective,
+                CardType = CardType.Objective_Ally,
                 EncounterSet = "Road to Rivendell",
                 Traits = new List<string>() { "Noldor.", " Noble.", " Ally." },
                 Quantity = 1,

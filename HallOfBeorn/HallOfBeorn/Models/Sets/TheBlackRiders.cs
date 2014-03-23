@@ -29,7 +29,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 2,
                 HitPoints = 2,
                 Traits = new List<string>() { "Hobbit.", " Ring-bearer." },
-                Text = "Response: Spend 1 Fellowship resource and exhaust The One Ring to cancel the effect of an encounter card just revealed from the encounter deck. Shuffle that card back into the encounter deck and reveal another encounter card.",
+                Text = "Response: Spend 1 Fellowship resource and exhaust The One ~Ring to cancel the effect of an encounter card just revealed from the encounter deck. Shuffle that card back into the encounter deck and reveal another encounter card.",
                 FlavorText = "\"I will take the Ring,\" he said, \"though I do not know the way.\" -The Fellowship of the Ring",
                 Quantity = 1,
                 Number = 1
@@ -255,7 +255,7 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Spirit,
                 ResourceCost = 0,
                 Traits = new List<string>() { "Item." },
-                Keywords = new List<string>() { "Attach to a Hobbit.", " Limit 1 per character." },
+                Keywords = new List<string>() { "Attach to a Hobbit character.", " Limit 1 per character." },
                 Text = "Response: After your threat is reduced by an event card effect, exhaust Hobbit Pipe to draw a card.",
                 FlavorText = "But even the Dúnedain of Gondor allow us this credit: Hobbits first put it into pipes. Not even the Wizards first thought of that before we did. -The Fellowship of the Ring",
                 Quantity = 3,
@@ -477,8 +477,10 @@ namespace HallOfBeorn.Models.Sets
                 Id = "307411f3-4a45-44ae-bc64-4e16deb97d10",
                 CampaignCardType = Models.CampaignCardType.Campaign,
                 CardType = CardType.Campaign,
-                Keywords = new List<string>() { "You are playing Campaign Mode." },
-                Text = "Setup: Attach Mr. Underhill to the Ring-bearer. Add Gandalf's Delay to the staging area. Shuffle Gildor Inglorion and The ~Ring Draws Them into the encounter deck.",
+                Text =
+@"You are playing Campaign Mode.
+
+Setup: Attach Mr. Underhill to the Ring-bearer. Add Gandalf's Delay to the staging area. Shuffle Gildor Inglorion and The ~Ring Draws Them into the encounter deck.",
                 FlavorText = "\"The Shire, he may be seeking for it now, if has has not already found out where it lies. Indeed, Frodo, I fear that he may even think that the long-unnoticed name of Baggins has become important.\"\r\n-Gandalf, The Fellowship of the Ring",
                 OppositeTitle = "The Lord of the Rings Part 1",
                 OppositeText = "Resolution: Choose Gandalf's Delay or The ~Ring Draws Them and add it to the Campaign Pool. Then, choose Gildor Inglorion or Mr. Underhill and add it to the Campaign Pool. The chosen cards have been earned by the players.",
@@ -698,7 +700,7 @@ namespace HallOfBeorn.Models.Sets
                 SlugIncludesType = true,
                 Id = "2efa631a-eb16-4078-84a5-18c7033b86f3",
                 CardType = CardType.Campaign,
-                Keywords = new List<string>() { "You are playing Campaign Mode." },
+                Text = "You are playing Campaign Mode.",
                 FlavorText = "Black horsemen have passed through Bree. On Monday one came down the Greenway, they say; and another appeared later, coming up the Greenway from the south.\r\n-Aragorn, The Fellowship of the Ring",
                 OppositeTitle = "The Lord of the Rings Part 2",
                 OppositeText = "Resolution: Starting with the first player, each player may choose one of the following boon cards and attach it to a hero he controls: Tireless ~Ranger, Skilled ~Healer, Valiant ~Warrior, ~Noble Hero. The chosen cards have been earned by the players.",
@@ -733,7 +735,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Hills.", " Ruins." },
                 Keywords = new List<string>() { "Immune to player card effects." },
                 EncounterSet = "A Knife in the Dark",
-                Text = "While Weathertop is in the victory display, each enemy in play gets -1 Threat.\r\n\r\nTravel: The first player must exhaust The One Ring to travel here.",
+                Text = "While Weathertop is in the victory display, each enemy in play gets -1 Threat.\r\n\r\nTravel: The first player must exhaust The One ~Ring to travel here.",
                 FlavorText = "\"It was burned and broken, and nothing remains of it now but a tumbled ring...\"\r\n-Strider, The Fellowship of the Ring",
                 VictoryPoints = 4,
                 Quantity = 1,
@@ -801,7 +803,7 @@ namespace HallOfBeorn.Models.Sets
                 NormalizedTraits = new List<string> { "Nazgul." },
                 Keywords = new List<string>() { "Cannot have non-Morgul attachments." },
                 EncounterSet = "A Knife in the Dark",
-                Text = "While Rider of Mordor is engaged with a player, characters that player controls get -1 Willpower.\r\n\r\nWhile The One Ring is exhausted, Rider of Mordor gets -10 engagement cost.",
+                Text = "While Rider of Mordor is engaged with a player, characters that player controls get -1 Willpower.\r\n\r\nWhile The One ~Ring is exhausted, Rider of Mordor gets -10 engagement cost.",
                 Quantity = 2,
                 EasyModeQuantity = 2,
                 Number = 50
@@ -818,7 +820,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 3,
                 HitPoints = 5,
                 Traits = new List<string>() { "Bree.", " Spy." },
-                Keywords = new List<string>() { "Players cannot optionally engage Bill Ferny." },
+                Keywords = new List<string>() { "Players cannot optionally engage [Card]." },
                 EncounterSet = "A Knife in the Dark",
                 Text = "Forced: At the beginning of the staging step, either shuffle 1 out of play Ringwraith into the encounter deck or each player raises their threat by 1 for each non-Fellowship hero he committed to the quest.",
                 VictoryPoints = 1,
@@ -839,7 +841,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Bree.", " Spy." },
                 EncounterSet = "A Knife in the Dark",
                 Text = "While The One Ring is exhausted, Shady Bree-lander gains: \"Cannot be optionally engaged.\"",
-                Shadow = "Shadow: Defending character get -1 Defense (-2 Defense instead if The One Ring is exhausted).",
+                Shadow = "Shadow: Defending character get -1 Defense (-2 Defense instead if The One ~Ring is exhausted).",
                 Quantity = 4,
                 EasyModeQuantity = 4,
                 Number = 52
@@ -894,8 +896,10 @@ namespace HallOfBeorn.Models.Sets
                 SlugIncludesType = true,
                 Id = "0ee09c42-34c9-41aa-aa98-b582608b15bb",
                 CardType = CardType.Campaign,
-                Keywords = new List<string>() { "You are playing Campaign Mode." },
-                Text = "Response: After an ememy is declared as an attacker, shuffle the top card of the burden deck into the encounter deck to cancel that attack. (Any player may trigger this ability.)",
+                Text =
+@"You are playing Campaign Mode.
+
+Response: After an ememy is declared as an attacker, shuffle the top card of the burden deck into the encounter deck to cancel that attack. (Any player may trigger this ability.)",
                 FlavorText = "\"They have drawn off for the time being. But not far, I fear. They will come again another night, if we cannot escape. They are only waiting, because they think that their purpose is almost accomplished, and that the Ring cannot fly much further.\"\r\n-Aragorn, The Fellowship of the Ring",
                 OppositeTitle = "The Lord of the Rings Part 3",
                 OppositeText = "Resolution: Add each burder card in play, in the encounter deck, and in the discard pile to the Campaign Pool. The added cards have been earned by the players.",
@@ -1082,7 +1086,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Nazgûl." },
                 NormalizedTraits = new List<string> { "Nazgul." },
                 Keywords = new List<string>() { "Immune to player card effects." },
-                Text = "The Witch-king gets -30 engagement cost while The One Ring is exhausted.\r\n\r\nCharacters with 1 Willpower or less cannot defend attacks made by The Witch-king.",
+                Text = "The Witch-king gets -30 engagement cost while The One ~Ring is exhausted.\r\n\r\nCharacters with 1 Willpower or less cannot defend attacks made by The Witch-king.",
                 EncounterSet = "The Nazgul",
                 Quantity = 1,
                 EasyModeQuantity = 1,
@@ -1102,7 +1106,7 @@ namespace HallOfBeorn.Models.Sets
                 NormalizedTraits = new List<string> { "Nazgul." },
                 Keywords = new List<string>() { "Cannot have non-Morgul attachments." },
                 EncounterSet = "The Nazgul",
-                Text = "Forced: When Ringwraith attacks, deal it an additional shadow card if The One Ring is exhausted.",
+                Text = "Forced: When Ringwraith attacks, deal it an additional shadow card if The One ~Ring is exhausted.",
                 Shadow = "Shadow: Shuffle this card into the encounter deck.",
                 Quantity = 4,
                 EasyModeQuantity = 2,
@@ -1192,8 +1196,8 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 Keywords = new List<string>() { "Surge." },
                 EncounterSet = "The Ring",
-                Text = "When Revealed: The first player must either exhaust The One Ring or raise his threat 3.",
-                Shadow = "Shadow: Attacking enemy gets +1 Attack (+2 Attack instead if The One Ring is exhausted).",
+                Text = "When Revealed: The first player must either exhaust The One ~Ring or raise his threat 3.",
+                Shadow = "Shadow: Attacking enemy gets +1 Attack (+2 Attack instead if The One ~Ring is exhausted).",
                 Quantity = 3,
                 Number = 76
             });
@@ -1210,7 +1214,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 3,
                 HitPoints = 3,
                 Traits = new List<string>() { "Noldor." },
-                Keywords = new List<string>() { "The first player gains control of Gildor Inglorian." },
+                Keywords = new List<string>() { "The first player gains control of [Card]." },
                 Text = "Forced: At the end of the round, discard Gildor Inglorion. The first player may spend 1 Fellowship resource to cancel this effect.",
                 FlavorText = "\"We think you had best come now with us.\"\r\n-The Fellowship of the Ring",
                 Quantity = 1,
@@ -1236,7 +1240,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "1c5f4854-c10c-430b-9c40-2d84c5997b8f",
                 CardType = CardType.Treachery,
                 Keywords = new List<string>() { "Surge." },
-                Text = "When Revealed: At the end of the phase, each enemy in the staging area engages the first player. If the One Ring is exhausted, this effect cannot be canceled.",
+                Text = "When Revealed: At the end of the phase, each enemy in the staging area engages the first player. If the One ~Ring is exhausted, this effect cannot be canceled.",
                 FlavorText = "\"Also,\" he added, and his voice sank to a whisper, \"the Ring draws them\" -The Fellowship of the Ring",
                 EncounterSet = "A Shadow of the past",
                 Quantity = 1,
@@ -1249,7 +1253,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 CampaignCardType = Models.CampaignCardType.Burden,
                 Keywords = new List<string>() { "Surge." },
-                Text = "When Revealed: Attach to the Ring-bearer. (Counts as a Condition attachment with the text: \"Forced: At the beginning of each quest phase, either exhaust The One Ring or reveal and additional encounter card this phase.\")",
+                Text = "When Revealed: Attach to the Ring-bearer. (Counts as a Condition attachment with the text: \"Forced: At the beginning of each quest phase, either exhaust The One ~Ring or reveal and additional encounter card this phase.\")",
                 FlavorText = "Once more the desire to slip on the Ring came over Frodo... -The Fellowship of the Ring",
                 EncounterSet = "Flight to the Ford",
                 Quantity = 1,
@@ -1303,7 +1307,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 CampaignCardType = Models.CampaignCardType.Burden,
                 Keywords = new List<string>() { "Surge." },
-                Text = "When Revealed: The first player must exhaust The One Ring. If The One Ring is already exhausted, the first player must discard 2 cards at random from his hand.",
+                Text = "When Revealed: The first player must exhaust The One ~Ring. If The One ~Ring is already exhausted, the first player must discard 2 cards at random from his hand.",
                 Shadow = "Shadow: Defending player discards 1 card at random from his hand.",
                 EncounterSet = "Flight to the Ford",
                 Quantity = 1,
@@ -1315,7 +1319,12 @@ namespace HallOfBeorn.Models.Sets
                 IsUnique = true,
                 CardType = CardType.Objective,
                 Traits = new List<string>() { "Artifact.", " Item.", " Ring." },
-                Text = "Setup:The first player claims The One Ring and attaches it to the Ring-bearer.\r\nAttached hero does not count against the hero limit. The first player gains control of attached hero.\r\nIf The One Ring leaves play, the players lose the game.",
+                Text = 
+@"Setup: The first player claims The One ~Ring and attaches it to the Ring-bearer.
+
+Attached hero does not count against the hero limit. The first player gains control of attached hero.
+
+If The One ~Ring leaves play, the players lose the game.",
                 Quantity = 1,
                 Number = 85
             });

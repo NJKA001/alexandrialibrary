@@ -17,6 +17,9 @@ namespace HallOfBeorn.Services
             LoadSets();
             LoadDecks();
             LoadRelationships();
+
+            //NOTE: These traits are referenced by scenarios but not included on a player card or encounter card as a trait
+            traits["Captive."] = "Captive.";
         }
 
         private readonly List<CardSet> sets = new List<CardSet>();
@@ -45,8 +48,9 @@ namespace HallOfBeorn.Services
                 foreach (var keyword in card.Keywords)
                 {
                     var keywordKey = keyword.Trim();
+                    var keywordValue = keywordKey.Replace("~", string.Empty);
                     if (!keywords.ContainsKey(keywordKey))
-                        keywords.Add(keywordKey, keywordKey);
+                        keywords.Add(keywordKey, keywordValue);
                 }
 
                 foreach (var trait in card.Traits)

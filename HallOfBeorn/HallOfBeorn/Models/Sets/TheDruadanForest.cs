@@ -81,7 +81,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Event,
                 Sphere = Sphere.Tactics,
                 ResourceCost = 2,
-                Text = "Play only if each hero you control has the printed Tactics resource icon.Action: Until the end of the phase, if the current quest has no keyword it gains battle. (Characters quest using Attack instead of Willpower.)",
+                Text = "Play only if each hero you control has the printed Tactics resource icon.Action: Until the end of the phase, if the current quest has no keyword it gains Battle.",
                 Quantity = 3,
                 Number = 5
             });

@@ -168,7 +168,7 @@
                                     {
                                         <a title="Trait Search" href='@string.Format("/Cards/Search?Trait={0}", @token.Text.Trim())'><b><i>@token.Text</i></b></a>
                                 
-                                        if (token.HasSuffix)
+                                        if (token.HasSuffix && token.Suffix != ".")
                                         {
                                             @: @token.Suffix
                                         }
@@ -183,6 +183,17 @@
                                         else
                                         {
                                             <img src="@token.ImagePath" style="height:16px;margin-left:2px;margin-right:2px;margin-bottom:-2px;" />
+                                        }
+                                    }
+                                    else if (token.IsTitleReference)
+                                    {
+                                        if (token.HasSuffix)
+                                        {
+                                            @: @string.Format("{0}{1}", @Model.Title, @token.Suffix)
+                                        }
+                                        else
+                                        {
+                                        @: @Model.Title
                                         }
                                     }
                                     else

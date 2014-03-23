@@ -68,8 +68,11 @@ namespace HallOfBeorn.Models.Sets
                 IsUnique = true,
                 Quantity = 3,
                 Traits = new List<string>() { "Istari.", "Isengard." },
-                Keywords = new List<string> { "Doomed 3.", "At the end of the round, discard Saruman from play." },
-                Text = "Response: After Saruman enters play, choose a non-unique enemy or location in the staging area. While Saruman is in play, the chosen enemy or location is considered to be out of play.",
+                Keywords = new List<string> { "Doomed 3." },
+                Text = 
+@"At the end of the round, discard Saruman from play.
+
+Response: After Saruman enters play, choose a non-unique enemy or location in the staging area. While Saruman is in play, the chosen enemy or location is considered to be out of play.",
                 Number = 3
             });
             Cards.Add(new Card() {
@@ -274,8 +277,12 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 2,
                 HitPoints = 3,
                 Traits = new List<string> { "Rohan." },
-                Keywords = new List<string> { "If free of encounters, the first player gains control of Gríma." },
-                Text = "Action: Exhaust Grima to draw a card.\r\n\r\nIf Gríma leaves play, the players lose the game.",
+                Text = 
+@"If free of encounters, the first player gains control of Gríma.
+
+Action: Exhaust Grima to draw a card.
+
+If Gríma leaves play, the players lose the game.",
                 FlavorText = "Behind him cringing between two other men, came Gríma the Wormtongue. -The Two Towers",
                 Quantity = 1,
                 Number = 16
@@ -548,7 +555,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 4,
                 HitPoints = 5,
                 Traits = new List<string> { "Huorn." },
-                Keywords = new List<string> { "Hinder.", "Cannot have atachments." },
+                Keywords = new List<string> { "Hinder.", "Cannot have attachments." },
                 Text = "Forced: At the beginning of each resource phase, the engaged player must raise his threat by 2.",
                 FlavorText = "\"There is a great power in them, and they seem able to wrap themselves in shadow...\" -Merry, The Two Towers",
                 Quantity = 4,

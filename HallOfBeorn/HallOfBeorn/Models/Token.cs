@@ -9,6 +9,7 @@ namespace HallOfBeorn.Models
     {
         public bool IsTrigger { get; set; }
         public bool IsTrait { get; set; }
+        public bool IsTitleReference { get; set; }
 
         public bool IsIcon { get { return !string.IsNullOrEmpty(ImagePath); } }
         public string ImagePath { get; set; }

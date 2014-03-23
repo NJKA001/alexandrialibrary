@@ -353,7 +353,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 4,
                 HitPoints = 5,
                 Traits = new List<string> { "Nazgûl.", "Captain." },
-                Keywords = new List<string> { "Nazgûl of Minas Morgul cannot have attachments." },
+                Keywords = new List<string> { "Cannot have attachments." },
                 Text = "Reduce any amount of damage dealt to Nazgûl of Minas Morgul to 1.",
                 FlavorText = "\"Come not between the Nazgûl and his prey!\"\r\n-The Witch King, The Return of the King",
                 EncounterSet = "The Morgul Vale",

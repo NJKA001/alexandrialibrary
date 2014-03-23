@@ -24,7 +24,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Text = "When Revealed: Place 2 resource tokens on Gollum. Any player may exhaust a Lore hero to reduce this effect to 1 resource token.Escape: 4",
                 EncounterSet = "The Dead Marshes",
-                Number = 1
+                Number = 108
             });
             Cards.Add(new Card() {
                 ImageName = "M1242",
@@ -41,7 +41,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 5,
                 Text = "Action: Raise your threat by 1 to ready Boromir.Action: Discard Boromir to deal 2 damage to each enemy engaged with a single player.",
-                Number = 2
+                Number = 95
             });
             Cards.Add(new Card() {
                 ImageName = "M1244",
@@ -55,7 +55,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 2,
                 Text = "Attached hero gains ranged.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Cache to another hero.",
                 Keywords = new List<string>() { "Attach to a hero." },
-                Number = 3
+                Number = 97
             });
             Cards.Add(new Card() {
                 ImageName = "M1243",
@@ -73,7 +73,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 2,
                 Text = "Response: Discard Dunedain Watcher from play to cancel the shadow effects of a card just triggered.",
-                Number = 4
+                Number = 96
             });
             Cards.Add(new Card() {
                 ImageName = "M1247",
@@ -90,7 +90,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 3,
                 Text = "While Elfhelm is ready, he gains: 'Response: After your threat is raised as the result of questing unsuccessfully, or by an encounter or quest card effect, reduce your threat by 1.'",
-                Number = 5
+                Number = 100
             });
             Cards.Add(new Card() {
                 ImageName = "M1250",
@@ -103,7 +103,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Text = "Action: Exhaust Fast Hitch to ready attached character.",
                 Keywords = new List<string>() { "Attach to a Hobbit character." },
-                Number = 6
+                Number = 103
             });
             Cards.Add(new Card() {
                 ImageName = "M1262",
@@ -116,7 +116,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 QuestPoints = 2,
                 EncounterSet = "The Dead Marshes",
-                Number = 7
+                Number = 115
             });
             Cards.Add(new Card() {
                 ImageName = "M1259",
@@ -132,7 +132,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Forced: Remove 2 damage from Giant Marsh Worm at the end of each round.Escape: 2",
                 Threat = 1,
                 EncounterSet = "The Dead Marshes",
-                Number = 8
+                Number = 112
             });
             Cards.Add(new Card() {
                 ImageName = "M1254",
@@ -144,7 +144,7 @@ namespace HallOfBeorn.Models.Sets
                 IsUnique = true,
                 Text = "If Gollum ever has 8 or more resource tokens on him, shuffle him back into the encounter deck.Forced: At the end of the quest phase, the party must make an escape test, dealing 1 card per player from the encounter deck. If this test is failed, place 2 resource tokens on Gollum.",
                 EncounterSet = "The Dead Marshes",
-                Number = 9
+                Number = 107
             });
             Cards.Add(new Card() {
                 ImageName = "M1260",
@@ -158,18 +158,20 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 12,
                 EncounterSet = "The Dead Marshes",
                 VictoryPoints = 7,
-                Number = 10
+                Number = 113
             });
             Cards.Add(new Card() {
                 ImageName = "M1252",
-                Title = "Into the Marshes - 1A",
+                Title = "Into the Marshes",
+                StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801205c9011",
                 CardType = CardType.Quest,
+                QuestPoints = 12,
                 Quantity = 1,
                 Setup = "s",
                 Text = "Setup: Search the encounter deck for Gollum, and add it to the staging area. Shuffle the encounter deck, then reveal 1 card per player from the encounter deck and add it to the staging area.",
                 EncounterSet = "The Dead Marshes",
-                Number = 11
+                Number = 105
             });
             Cards.Add(new Card() {
                 ImageName = "M1256",
@@ -180,7 +182,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Text = "When Revealed: The first player makes an escape test, dealing 2 cards from the encounter deck. If this test is failed, place 1 resource token on Gollum and raise each player's threat by 2.Escape: 2",
                 EncounterSet = "The Dead Marshes",
-                Number = 12
+                Number = 109
             });
             Cards.Add(new Card() {
                 ImageName = "M1249",
@@ -196,7 +198,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 3,
                 Text = "Response: After a Silvan character readies during the refresh phase, heal 1 damage from that character.",
-                Number = 13
+                Number = 102
             });
             Cards.Add(new Card() {
                 ImageName = "M1251",
@@ -209,7 +211,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Text = "Attached hero gains a Tactics resource icon.",
                 Keywords = new List<string>() { "Attach to a hero." },
-                Number = 14
+                Number = 104
             });
             Cards.Add(new Card() {
                 ImageName = "M1246",
@@ -222,16 +224,22 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Text = "Action: Exhaust Song of Mocking to choose another hero. Until the end of the phase, attached hero takes all damage assigned to the chosen hero.",
                 Keywords = new List<string>() { "Attach to a hero." },
-                Number = 15
+                Number = 99
             });
             Cards.Add(new Card() {
                 ImageName = "M1253",
-                Title = "The Capture - 2A",
+                Title = "The Capture",
+                StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801205c9017",
                 CardType = CardType.Quest,
+                OppositeText = 
+@"Forced: After this stage is defeated, the first player chooses a player. That player must pass an Escape test, dealing 1 card from the encounter deck for each resource token on Gollum, to capture him. If Gollum is not captured at this time, reset the quest deck to stage 1B.
+
+If this final Escape test is passed, the players have captured Gollum and won the game.",
+                QuestPoints = 3,
                 Quantity = 1,
                 EncounterSet = "The Dead Marshes",
-                Number = 16
+                Number = 106
             });
             Cards.Add(new Card() {
                 ImageName = "M1261",
@@ -244,7 +252,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 3,
                 QuestPoints = 4,
                 EncounterSet = "The Dead Marshes",
-                Number = 17
+                Number = 114
             });
             Cards.Add(new Card() {
                 ImageName = "M1258",
@@ -255,7 +263,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 4,
                 Text = "When Revealed: Each player must make an escape test, dealing 2 cards from the encounter deck for each test. Each player that fails this test places 1 resource token on Gollum, and raises his threat by 1.Escape: 5",
                 EncounterSet = "The Dead Marshes",
-                Number = 18
+                Number = 111
             });
             Cards.Add(new Card() {
                 ImageName = "M1257",
@@ -266,7 +274,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Text = "When Revealed: The first player makes an escape test counting Attack instead of Willpower, dealing 2 cards from the encounter deck. If this test is failed, place 1 resource token on Gollum and raise each player's threat by 1.Escape: 3",
                 EncounterSet = "The Dead Marshes",
-                Number = 19
+                Number = 110
             });
             Cards.Add(new Card() {
                 ImageName = "M1245",
@@ -283,7 +291,7 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 1,
                 Text = "Vassal of the Windlord cannot have restricted attachments.Forced: After an attack in which Vassal of the Windlord attacked resolves, discard Vassal of the Windlord from play.",
                 Keywords = new List<string>() { "Ranged." },
-                Number = 20
+                Number = 98
             });
             Cards.Add(new Card() {
                 ImageName = "M1248",
@@ -294,7 +302,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 5,
                 Text = "Action: Until the end of the phase, Rohan characters do not exhaust to commit to quests.",
-                Number = 21
+                Number = 101
             });
         }
     }

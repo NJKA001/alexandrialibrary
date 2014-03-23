@@ -24,12 +24,14 @@ namespace HallOfBeorn
                 .Replace("!", string.Empty);
         }
 
-        public static string ToDisplayString(this string self)
+        public static string ToDisplayString(this string self, string title)
         {
             if (string.IsNullOrEmpty(self))
                 return string.Empty;
 
-            return self.Replace("~", string.Empty);
+            return self
+                .Replace("~", string.Empty)
+                .Replace("[Card]", title);
         }
 
         public static string ToSearchString(this string value)

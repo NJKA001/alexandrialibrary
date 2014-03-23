@@ -122,7 +122,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1007",
-                Title = "Eowyn",
+                Title = "Éowyn",
+                NormalizedTitle = "Eowyn",
                 Id = "51223bd0-ffd1-11df-a976-0801200c9007",
                 CardType = CardType.Hero,
                 Sphere = Sphere.Spirit,
@@ -133,7 +134,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 4,
                 HitPoints = 3,
                 Traits = new List<string>() { "Noble.", " Rohan." },
-                Text = "Action: Discard 1 card from your hand to give Eowyn +1 Willpower until the end of the phase. This effect may be triggered by each player once each round.",
+                Text = "Action: Discard 1 card from your hand to give Éowyn +1 Willpower until the end of the phase. This effect may be triggered by each player once each round.",
                 Quantity = 1,
                 Number = 7
             });
@@ -1460,7 +1461,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Nazgûl." },
                 NormalizedTraits = new List<string> { "Nazgul." },
                 Text = "Forced: When the prisoner is 'rescued', move Nazgul of Dol Guldur into the staging area.\r\nForced: After a shadow effect dealt to Nazgul of Dol Guldur resolves, the engaged player must choose and discard 1 character he controls.",
-                Keywords = new List<string>() { "No attachments can be played on Nazgul of Dol Guldur." },
+                Keywords = new List<string>() { "No attachments." },
                 Threat = 5,
                 EncounterSet = "Escape from Dol Guldur",
                 Quantity = 1,

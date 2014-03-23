@@ -126,7 +126,7 @@ namespace HallOfBeorn.Models
             {
                 foreach (var keyword in _card.Keywords)
                 {
-                    yield return keyword.ToDisplayString();
+                    yield return keyword.ToDisplayString(_card.Title);
                 }
             }
         }
@@ -183,7 +183,7 @@ namespace HallOfBeorn.Models
 
         public string Attack
         {
-            get { return _card.Attack.ToString(); }
+            get { return _card.IsVariableAttack ? "X" : _card.Attack.ToString(); }
         }
 
         public string Defense
@@ -247,7 +247,7 @@ namespace HallOfBeorn.Models
         {
             get {
                 return !string.IsNullOrEmpty(_card.Text) ?
-                    _card.Text.ToDisplayString()
+                    _card.Text.ToDisplayString(_card.Title)
                     : string.Empty;
             }
         }
@@ -256,7 +256,7 @@ namespace HallOfBeorn.Models
         {
             get {
                 return !string.IsNullOrEmpty(_card.Shadow) ?
-                    _card.Shadow.ToDisplayString()
+                    _card.Shadow.ToDisplayString(_card.Title)
                     : string.Empty;
             }
         }
@@ -303,7 +303,7 @@ namespace HallOfBeorn.Models
         {
             get {
                 return !string.IsNullOrEmpty(_card.OppositeText) ?
-                    _card.OppositeText.ToDisplayString()
+                    _card.OppositeText.ToDisplayString(_card.Title)
                     : string.Empty;
             }
         }

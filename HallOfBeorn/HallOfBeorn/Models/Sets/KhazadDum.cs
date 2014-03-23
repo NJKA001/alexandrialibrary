@@ -436,7 +436,7 @@ Action: Exhaust Erebor ~Record Keeper and pay 1 Lore resource to choose and read
                 Defense = 3,
                 HitPoints = 1,
                 Text = "Characters with ranged are eligible to attack Goblin Archer while it is in the staging area.Forced: After an enemy is revealed from the encounter deck, the first player must deal 1 damage to 1 character he controls.",
-                Keywords = new List<string>() { "Players cannot optionally engage Goblin Archer." },
+                Keywords = new List<string>() { "Players cannot optionally engage [Card]." },
                 Threat = 2,
                 Number = 32
             });

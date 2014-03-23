@@ -327,7 +327,7 @@ namespace HallOfBeorn.Models.Sets
                 Setup = "lt",
                 Quantity = 1,
                 QuestPoints = 6,
-                Keywords = new List<string> { "Battle. (Characters use their Attack instead of Willpower when questing.)" },
+                Keywords = new List<string> { "Battle." },
                 Text = "Setup: Search the encounter deck for The Leaping Fish and Alcaron's ~Scroll. Make The Leaping Fish the active location and attach Alcaron's ~Scroll to a hero.",
                 OppositeText = "When Revealed: Each player must search the encounter deck for a copy of Harbor Thug and add it to the staging area. Shuffle the encounter deck.",
                 EncounterSet = "Peril in Pelargir",
@@ -342,7 +342,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 QuestPoints = 13,
                 EncounterSet = "Peril in Pelargir",
-                Keywords = new List<string> { "Battle. (Characters use their Attack instead of Willpower when questing.)" },
+                Keywords = new List<string> { "Battle." },
                 OppositeText = "When Revealed: Attach Alcaron's ~Scroll to the highest engagement cost enemy in play, if able. Otherwise, add Alcaron's Scroll to the staging area.",
                 Number = 66
             });
@@ -373,7 +373,7 @@ The players cannot defeat this stage unless Alcaron's ~Scroll is attached to a h
                 Setup = "sl",
                 Quantity = 1,
                 QuestPoints = 15,
-                Keywords = new List<string> { "Battle. (Characters use their Attack instead of Willpower when questing.)" },
+                Keywords = new List<string> { "Battle." },
                 Text = "Setup: Add Celador to the staging area. Search the encounter deck for a copy of Ithilien Road and make it the active location. Each player must search the encounter deck for a copy of Southron Company and add it to the staging area. Shuffle the encounter deck.",
                 OppositeText = "If the players complete this stage with Celador in the staging area, advance to stage 3A (bypassing stage 2).",
                 EncounterSet = "Into Ithilien",
@@ -388,7 +388,7 @@ The players cannot defeat this stage unless Alcaron's ~Scroll is attached to a h
                 Quantity = 1,
                 QuestPoints = 9,
                 EncounterSet = "Into Ithilien",
-                Keywords = new List<string> { "Siege. (Characters use their Attack instead of Willpower when questing.)", "Archery X." },
+                Keywords = new List<string> { "Siege.", "Archery X." },
                 OppositeText = 
 @"X is the number of players in the game.
 
@@ -436,7 +436,7 @@ If the players defeat this stage, they have won the game.",
                 Setup = "sss",
                 Quantity = 1,
                 QuestPoints = 9,
-                Keywords = new List<string> { "Siege. (Characters use their Defense instead of Willpower when questing.)" },
+                Keywords = new List<string> { "Siege." },
                 Text = "Setup: Add The Approach, The Citadel, and The Banks to the staging area. Shuffle the encounter deck.",
                 OppositeText = "Players must deal damage from undefended attacks to the lowest Threat Battleground location in play. If there are no Battleground locations in play, immediate advance to the next stage.",
                 EncounterSet = "The Siege of Cair Andros",
@@ -463,7 +463,7 @@ If the players defeat this stage, they have won the game.",
                 Quantity = 1,
                 QuestPoints = 7,
                 EncounterSet = "The Siege of Cair Andros",
-                Keywords = new List<string> { "Battle. (Characters use their Attack instead of Willpower when questing.)" },
+                Keywords = new List<string> { "Battle." },
                 OppositeText = "Forced: After the players quest unsuccessfully, instead of raising threat each player must choose and discard 1 character he controls.",
                 Number = 74
             });
@@ -476,7 +476,7 @@ If the players defeat this stage, they have won the game.",
                 Quantity = 1,
                 QuestPoints = 5,
                 EncounterSet = "The Siege of Cair Andros",
-                Keywords = new List<string> { "Siege. (Characters use their Defense instead of Willpower when questing.)" },
+                Keywords = new List<string> { "Siege." },
                 OppositeText = "Breakthrough at the Citadel adds 5 Threat to the staging area.",
                 Number = 75
             });
@@ -489,7 +489,7 @@ If the players defeat this stage, they have won the game.",
                 Quantity = 1,
                 QuestPoints = 15,
                 EncounterSet = "The Siege of Cair Andros",
-                Keywords = new List<string> { "Siege. (Characters use their Defense instead of Willpower when questing.)" },
+                Keywords = new List<string> { "Siege." },
                 OppositeText =
 @"When Revealed: Reveal 1 card per player from the encounter deck and add it to the staging area.
 

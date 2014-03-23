@@ -160,25 +160,38 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1844",
-                Title = "Savagery of the Orcs - 1A",
+                Title = "Savagery of the Orcs",
+                StageNumber = 1,
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93001",
                 CardType = CardType.Quest,
+                Keywords = new List<string> { "Villagers 5." },
                 Text = "Setup: Set Ghulat aside, out of play. Put Lord Alcaron into play. Make Burning Farmhouse the active location. Add the Rescued Villagers and Dead Villagers objectives to the staging area. Then, shuffle the encounter deck and reveal 1 encounter card per player and add it to the staging area.",
+                FlavorText = "Emerging from the Druadan Forest with news of the conspirators' demise, you begin your journey to Minas Tirith. As you wake the following day, you see dark plumes of smoke rising across the lands of Anórien.",
+                OppositeText =
+@"When progress would be placed on Savagery of the Orcs, move an equal number of villager tokens from this quest onto Rescued Villagers instead.
+
+If there are no villager tokens on Savagery of the Orcs, advance to the next stage.",
+                OppositeFlavorText = "In a smoldering village near Amon Dîn, you find none other than a tired Lord Alcaron. Pleased to see you, he requests your assistance in protecting the village.",
                 EncounterSet = "Encounter at Amon Din",
                 Quantity = 1,
-                Setup = "ttlss",
-                Number = 11
+                Number = 66
             });
             Cards.Add(new Card() {
                 ImageName = "M1845",
-                Title = "Protect the Villagers - 1A",
+                Title = "Protect the Villagers",
+                StageNumber = 2,
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93002",
                 CardType = CardType.Quest,
                 Text = "When Revealed: Add Ghulat to the staging area.",
+                FlavorText = "The orcs pillaging Anórien are remnants of the army defeated at Cair Andros. Stranded on the western bank of the Anduin, They are now punishing the local population. One of the roving bands is led by a cunning orc captain by the name of Ghulat. You must stop Ghulat and his orcs, or many innocents will die...",
+                OppositeText = 
+@"If an attack goes undefended, discard X villager tokens from Rescued Villagers instead of damaging a hero. X is the amount of damage that would have been dealt.
+
+When the players defeat this stage, end the game. Compare the number of tokens on Rescued Villagers to the number of tokens on Dead Villagers.",
                 EncounterSet = "Encounter at Amon Din",
                 Quantity = 1,
                 QuestPoints = 15,
-                Number = 12
+                Number = 67
             });
             Cards.Add(new Card() {
                 ImageName = "M1848",
@@ -191,7 +204,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 2,
                 HitPoints = 3,
                 Traits = new List<string>() { "Gondor.", " Noble." },
-                Keywords = new List<string>() { "The first player gains control of Lord Alcaron." },
+                Keywords = new List<string>() { "The first player gains control of [Card]." },
                 Text = "Response: After a villager token is discarded, exhaust Lord Alcaron to place that villager token on a location instead.If Lord Alcaron leaves play, the players have lost the game.",
                 EncounterSet = "Encounter at Amon Din",
                 Quantity = 1,
@@ -226,11 +239,16 @@ namespace HallOfBeorn.Models.Sets
                 EngagementCost = 30,
                 Threat = 3,
                 Attack = 0,
+                IsVariableAttack = true,
                 Defense = 3,
                 HitPoints = 7,
                 Traits = new List<string>() { "Orc.", " Uruk." },
-                Keywords = new List<string>() { "X is the number of damage tokens on Dead Villagers." },
-                Text = "Forced: When Ghulat attacks, place 1 damage token on Dead Villagers.While Ghulat is in play, the game cannot end.",
+                Text =
+@"X is the number of damage tokens on Dead Villagers.
+
+Forced: When Ghulat attacks, place 1 damage token on Dead Villagers.
+
+While Ghulat is in play, the game cannot end.",
                 EncounterSet = "Encounter at Amon Din",
                 VictoryPoints = 2,
                 Quantity = 1,

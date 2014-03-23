@@ -308,8 +308,15 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Blackroot Vale." },
                 Quantity = 1,
                 IsUnique = true,
-                Keywords = new List<string>() { "Immune to player card effects.", " X is twice the number of players in the game." },
+                Keywords = new List<string>() { "Immune to player card effects.", },
+                Text =
+@"X is twice the number of players in the game.
+
+While The Stone of Erech is that active location, characters with less than 2 Willpower cannot ready.
+
+Travel: Exhaust each character with less than 2 Willpower.",
                 Threat = 0,
+                IsVariableThreat = true,
                 QuestPoints = 6,
                 VictoryPoints = 5,
                 Number = 25

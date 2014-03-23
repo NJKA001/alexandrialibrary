@@ -23,13 +23,15 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Emyn Muil." },
                 Quantity = 1,
                 IsUnique = true,
-                Text = "While Amon Hen is the active location, players cannot play events.",
-                Keywords = new List<string>() { "X is double the number of players in the game." },
+                Text = 
+@"X is double the number of players in the game.
+
+While Amon Hen is the active location, players cannot play events.",
                 Threat = 0,
                 QuestPoints = 5,
                 EncounterSet = "The Hills of Emyn Muil",
                 VictoryPoints = 5,
-                Number = 1
+                Number = 83
             });
             Cards.Add(new Card() {
                 ImageName = "M1231",
@@ -39,13 +41,15 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Emyn Muil." },
                 Quantity = 1,
                 IsUnique = true,
-                Text = "While Amon Lhaw is the active location, treat all attachments as if their printed text boxes were blank.",
-                Keywords = new List<string>() { "X is double the number of players in the game." },
+                Text = 
+@"X is double the number of players in the game.
+
+While Amon Lhaw is the active location, treat all attachments as if their printed text boxes were blank.",
                 Threat = 0,
                 QuestPoints = 5,
                 EncounterSet = "The Hills of Emyn Muil",
                 VictoryPoints = 5,
-                Number = 2
+                Number = 84
             });
             Cards.Add(new Card() {
                 ImageName = "M1219",
@@ -63,7 +67,7 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Text = "Response: After Brand son of Bain attacks and defeats an enemy engaged with another player, choose and ready one of that player's characters.",
                 Keywords = new List<string>() { "Ranged." },
-                Number = 3
+                Number = 72
             });
             Cards.Add(new Card() {
                 ImageName = "M1222",
@@ -79,7 +83,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 2,
                 Text = "Descendant of Thorondor cannot have restricted attachments.Response: After Descendant of Thorondor enters or leaves play, deal 2 damage to any 1 enemy in the staging area.",
-                Number = 4
+                Number = 75
             });
             Cards.Add(new Card() {
                 ImageName = "M1226",
@@ -96,7 +100,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 3,
                 HitPoints = 3,
                 Text = "Action: Exhaust Gildor Inglorion to look at the top 3 cards of your deck. Switch one of those cards with a card from your hand. Then, return the 3 cards to the top of your deck, in any order.",
-                Number = 5
+                Number = 79
             });
             Cards.Add(new Card() {
                 ImageName = "M1227",
@@ -107,7 +111,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 3,
                 Text = "Play during the Quest phase, before characters are committed to the Quest.Action: Reveal 1 less card from the encounter deck this phase. (To a minimum of 1.)",
-                Number = 6
+                Number = 80
             });
             Cards.Add(new Card() {
                 ImageName = "M1238",
@@ -118,7 +122,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 4,
                 Text = "When Revealed: If there is an active location, remove all progress tokens from that location and return it to the staging area. If no location is moved by this effect, this card gains surge.",
                 EncounterSet = "The Hills of Emyn Muil",
-                Number = 7
+                Number = 91
             });
             Cards.Add(new Card() {
                 ImageName = "M1220",
@@ -134,7 +138,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 2,
                 Text = "Response: After Keen-eyed Took enters play, reveal the top card of each player's deck.Action: Return Keen-eyed Took to your hand to discard the top card of each player's deck.",
-                Number = 8
+                Number = 73
             });
             Cards.Add(new Card() {
                 ImageName = "M1223",
@@ -145,7 +149,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 0,
                 Text = "Action: Choose an Eagle ally. Return that character to its owner's hand.",
-                Number = 9
+                Number = 76
             });
             Cards.Add(new Card() {
                 ImageName = "M1241",
@@ -162,7 +166,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Doomed 2." },
                 Threat = 3,
                 EncounterSet = "The Hills of Emyn Muil",
-                Number = 10
+                Number = 94
             });
             Cards.Add(new Card() {
                 ImageName = "M1234",
@@ -177,7 +181,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 4,
                 EncounterSet = "The Hills of Emyn Muil",
                 VictoryPoints = 3,
-                Number = 11
+                Number = 87
             });
             Cards.Add(new Card() {
                 ImageName = "M1221",
@@ -188,7 +192,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Quest Action: Discard a Leadership ally to give each hero committed to this quest +1 Willpower until the end of the phase.",
-                Number = 12
+                Number = 74
             });
             Cards.Add(new Card() {
                 ImageName = "M1225",
@@ -199,7 +203,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Action: Discard a Rohan ally to choose a location. Place 3 progress tokens on that location.",
-                Number = 13
+                Number = 78
             });
             Cards.Add(new Card() {
                 ImageName = "M1239",
@@ -211,7 +215,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Deal 2 damage to each character committed to this quest.",
                 Shadow = "Shadow: Remove defending character from combat. This attack is considered undefended.",
                 EncounterSet = "The Hills of Emyn Muil",
-                Number = 14
+                Number = 92
             });
             Cards.Add(new Card() {
                 ImageName = "M1240",
@@ -222,7 +226,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Text = "When Revealed: Remove 1 progress token from each location in play. Then, discard the top card of each player's deck for each progress token removed by this effect.",
                 EncounterSet = "The Hills of Emyn Muil",
-                Number = 15
+                Number = 93
             });
             Cards.Add(new Card() {
                 ImageName = "M1228",
@@ -235,7 +239,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Text = "Attached hero gains a Spirit resource icon.",
                 Keywords = new List<string>() { "Attach to a hero." },
-                Number = 16
+                Number = 81
             });
             Cards.Add(new Card() {
                 ImageName = "M1232",
@@ -249,7 +253,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 2,
                 EncounterSet = "The Hills of Emyn Muil",
                 VictoryPoints = 3,
-                Number = 17
+                Number = 85
             });
             Cards.Add(new Card() {
                 ImageName = "M1237",
@@ -263,18 +267,24 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 1,
                 EncounterSet = "The Hills of Emyn Muil",
                 VictoryPoints = 1,
-                Number = 18
+                Number = 90
             });
             Cards.Add(new Card() {
                 ImageName = "M1229",
-                Title = "The Hills of Emyn Muil - 1A",
+                Title = "The Hills of Emyn Muil",
+                StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801204c9019",
                 CardType = CardType.Quest,
+                QuestPoints = 1,
                 Quantity = 1,
                 Setup = "ss",
                 Text = "Setup: Search the encounter deck for Amon Hen and Amon Lhaw, and add them to the staging area. Then shuffle the encounter deck.",
+                OppositeText =
+@"Forced: If there are no location cards in the staging area, the first treachery card revealed during the quest phase gains surge.
+
+Players cannot defeat this stage until there are no Emyn Muil locations in play, and they have collected at least 20 victory points.",
                 EncounterSet = "The Hills of Emyn Muil",
-                Number = 19
+                Number = 82
             });
             Cards.Add(new Card() {
                 ImageName = "M1233",
@@ -288,7 +298,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 EncounterSet = "The Hills of Emyn Muil",
                 VictoryPoints = 3,
-                Number = 20
+                Number = 86
             });
             Cards.Add(new Card() {
                 ImageName = "M1236",
@@ -303,7 +313,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 2,
                 EncounterSet = "The Hills of Emyn Muil",
                 VictoryPoints = 2,
-                Number = 21
+                Number = 89
             });
             Cards.Add(new Card() {
                 ImageName = "M1224",
@@ -319,7 +329,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 2,
                 Text = "Action: Exhaust and discard The Riddermark's Finest to place 2 progress tokens on any location.",
-                Number = 22
+                Number = 77
             });
             Cards.Add(new Card() {
                 ImageName = "M1235",
@@ -334,7 +344,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 2,
                 EncounterSet = "The Hills of Emyn Muil",
                 VictoryPoints = 2,
-                Number = 23
+                Number = 88
             });
         }
     }

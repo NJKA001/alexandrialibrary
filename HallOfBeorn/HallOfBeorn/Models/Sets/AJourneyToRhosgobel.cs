@@ -30,7 +30,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Gondor.", " Noble." },
                 Text = "Response: After a character leaves play, ready Prince Imrahil. (Limit once per round.)",
                 Quantity = 1,
-                Number = 1
+                Number = 50
             });
             Cards.Add(new Card() {
                 ImageName = "M1204",
@@ -47,7 +47,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Silvan." },
                 Keywords = new List<string>() { "Ranged.", " Sentinel." },
                 Quantity = 3,
-                Number = 2
+                Number = 57
             });
             Cards.Add(new Card() {
                 ImageName = "M1206",
@@ -64,7 +64,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Istari." },
                 Text = "Radagast collects 1 resource each resource phase. These resources can be used to pay for Creature cards played from your hand.Action: Spend X resources from Radagast's pool to heal X wounds on any 1 Creature.",
                 Quantity = 3,
-                Number = 3
+                Number = 59
             });
             Cards.Add(new Card() {
                 ImageName = "M1200",
@@ -82,7 +82,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Landroval cannot have restricted attachments.Response: After a hero card is destroyed, return Landroval to his owner's hand to put that hero back into play, with 1 damage token on it. (Limit once per game.)",
                 Keywords = new List<string>() { "Sentinel." },
                 Quantity = 3,
-                Number = 4
+                Number = 53
             });
             Cards.Add(new Card() {
                 ImageName = "M1203",
@@ -95,7 +95,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: After attached location is explored, the first player draws 3 cards.",
                 Keywords = new List<string>() { "Attach to a location." },
                 Quantity = 3,
-                Number = 5
+                Number = 56
             });
             Cards.Add(new Card() {
                 ImageName = "M1205",
@@ -106,7 +106,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Text = "Action: Move any number of damage from one enemy to another.",
                 Quantity = 3,
-                Number = 6
+                Number = 58
             });
             Cards.Add(new Card() {
                 ImageName = "M1199",
@@ -117,7 +117,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Text = "Action: Move any number of resource tokens from a Leadership hero's resource pool to any other hero's resource pool.",
                 Quantity = 3,
-                Number = 7
+                Number = 52
             });
             Cards.Add(new Card() {
                 ImageName = "M1198",
@@ -131,7 +131,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Attached hero gains +1 Willpower.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Quest to another hero.",
                 Keywords = new List<string>() { "Attach to a hero." },
                 Quantity = 3,
-                Number = 8
+                Number = 51
             });
             Cards.Add(new Card() {
                 ImageName = "M1202",
@@ -147,7 +147,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Rohan." },
                 Text = "While committed to a quest, Escort from Edoras gets +2 Willpower.Forced: After resolving a quest to which Escort from Edoras was committed, discard Escort from Edoras from play.",
                 Quantity = 3,
-                Number = 9
+                Number = 55
             });
             Cards.Add(new Card() {
                 ImageName = "M1201",
@@ -158,7 +158,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 2,
                 Text = "Response: After an ally is destroyed, exhaust 1 Eagle character to move that ally from the discard pile to its owner's hand.",
                 Quantity = 3,
-                Number = 10
+                Number = 54
             });
             Cards.Add(new Card() {
                 ImageName = "M1216",
@@ -169,7 +169,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Deal 1 damage to each wounded character. (2 damage instead if this attack is undefended.)",
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 2,
-                Number = 11
+                Number = 69
             });
             Cards.Add(new Card() {
                 ImageName = "M1210",
@@ -181,7 +181,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Guarded." },
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 4,
-                Number = 12
+                Number = 63
             });
             Cards.Add(new Card() {
                 ImageName = "M1218",
@@ -198,7 +198,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 1,
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 5,
-                Number = 13
+                Number = 71
             });
             Cards.Add(new Card() {
                 ImageName = "M1214",
@@ -209,7 +209,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Deal 1 damage to each exhausted character.",
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 4,
-                Number = 14
+                Number = 67
             });
             Cards.Add(new Card() {
                 ImageName = "M1213",
@@ -222,7 +222,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 4,
-                Number = 15
+                Number = 66
             });
             Cards.Add(new Card() {
                 ImageName = "M1217",
@@ -239,7 +239,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 1,
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 4,
-                Number = 16
+                Number = 70
             });
             Cards.Add(new Card() {
                 ImageName = "M1212",
@@ -248,14 +248,16 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Location,
                 IsUnique = true,
                 Traits = new List<string>() { "Forest." },
-                Text = "While Rhosgobel is in the staging area, Wilyador cannot be healed.Travel: Players must complete stage one of this quest before they can travel to Rhosgobel.",
-                Keywords = new List<string>() { "X is the number of players in the game." },
+                Text =
+@"X is the number of players in the game.
+While Rhosgobel is in the staging area, Wilyador cannot be healed.Travel: Players must complete stage one of this quest before they can travel to Rhosgobel.",
                 Threat = 0,
+                IsVariableThreat = true,
                 QuestPoints = 4,
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 1,
                 VictoryPoints = 4,
-                Number = 17
+                Number = 65
             });
             Cards.Add(new Card() {
                 ImageName = "M1215",
@@ -266,53 +268,72 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: If a character (including Wilyador) has more damage than each other character, deal 3 additional damage to that character.",
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 4,
-                Number = 18
+                Number = 68
             });
             Cards.Add(new Card() {
                 ImageName = "M1211",
                 Title = "Wilyador",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9019",
-                CardType = CardType.Objective,
+                CardType = CardType.Objective_Ally,
                 IsUnique = true,
                 Attack = 1,
                 Defense = 1,
                 Willpower = 1,
                 HitPoints = 20,
                 Traits = new List<string>() { "Creature.", " Eagle." },
-                Text = "Forced: At the end of each round, Wilyador suffers 2 damage.Wilyador cannot be healed of more than 5 wounds by a single effect. If Wilyador leaves play, the players have lost the game.",
-                Keywords = new List<string>() { "No attachments.", " The first player gains control of Wilyador, as an ally." },
+                Text = 
+@"Forced: At the end of each round, Wilyador suffers 2 damage.
+
+Wilyador cannot be healed of more than 5 wounds by a single effect. 
+
+If Wilyador leaves play, the players have lost the game.",
+                Keywords = new List<string>() { "No attachments.", " The first player gains control of [Card]." },
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 1,
-                Number = 19
+                Number = 64
             });
             Cards.Add(new Card() {
                 ImageName = "M1207",
-                Title = "The Wounded Eagle - 1A",
+                Title = "The Wounded Eagle",
+                StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801203c9020",
                 CardType = CardType.Quest,
+                QuestPoints = 8,
                 Setup = "ss",
                 Text = "Setup: Search the encounter deck for Rhosgobel and Wilyador, and add them to the staging area with 2 damage tokens on Wilyador. Then, shuffle the encounter deck.",
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 1,
-                Number = 20
+                Number = 60
             });
             Cards.Add(new Card() {
                 ImageName = "M1208",
-                Title = "Radagast's Request - 2A",
+                Title = "Radagast's Request",
+                StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801203c9022",
                 CardType = CardType.Quest,
+                QuestPoints = 12,
                 EncounterSet = "A Journey to Rhosgobel",
+                OppositeText = 
+@"Reponse: After the quest phase begins, the first player may place X damage tokens on Wilyador to look at the top 3 cards of the encounter deck. Reveal and add 1 of these cards to the staging area, and discard the other 2. X is the number of players in the game.
+
+Forced: After a card effect heals Wilyador, remove that card from the game.",
                 Quantity = 1,
-                Number = 21
+                Number = 61
             });
             Cards.Add(new Card() {
                 ImageName = "M1209",
-                Title = "Return to Rhosgobel - 3A",
+                Title = "Return to Rhosgobel",
+                StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-0801203c9024",
                 CardType = CardType.Quest,
+                QuestPoints = 0,
                 EncounterSet = "A Journey to Rhosgobel",
+                OppositeText = 
+@"When Revealed: Heal 5 wounds from Wilyador for each Athelas objective card the players controls.
+
+If Wilyador is completely healed when this effect resolves, Wilyador survives and the players have won the game. Otherwise, the players have lost the game.",
                 Quantity = 1,
-                Number = 22
+                Number = 62
             });
         }
     }

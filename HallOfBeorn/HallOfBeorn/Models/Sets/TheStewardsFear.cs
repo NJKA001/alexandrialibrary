@@ -291,8 +291,11 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Location,
                 IsUnique = true,
                 Traits = new List<string>() { "City." },
-                Text = "Response: When The Fourth Star leaves play as an explored location, each player may draw 1 card.",
-                Keywords = new List<string>() { "Underworld X.", " X is the number of players in the game." },
+                Text = 
+@"X is the number of players in the game.
+
+Response: When The Fourth Star leaves play as an explored location, each player may draw 1 card.",
+                Keywords = new List<string>() { "Underworld X." },
                 Threat = 3,
                 QuestPoints = 5,
                 EncounterSet = "The Steward's Fear",

@@ -28,7 +28,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Nazgûl.", " Captain." },
                 NormalizedTraits = new List<string> { "Nazgul." },
                 Text = "While The Witch-king is in the staging area, each character gets -1 Willpower.Forced: After The Witch-king attacks, he returns to the staging area unless the defending player raises his threat by 3.",
-                Keywords = new List<string>() { "Players cannot play attachments on The Witch-king." },
+                Keywords = new List<string>() { "No attachments." },
                 Threat = 6,
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 1,

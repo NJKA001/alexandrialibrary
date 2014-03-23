@@ -283,8 +283,10 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 1,
                 QuestPoints = 5,
                 Traits = new List<string>() { "Osgiliath." },
-                Keywords = new List<string>() { "The players cannot travel here." },
-                Text = "Combat Action: Exhaust a hero to place 1 progress token on Ancient Harbor.\r\nForced: After the player who controls Ancient Harbor lets an attack go undefended, return Ancient Harbor to the staging area.",
+                Text = 
+@"The players cannot travel here.
+
+Combat Action: Exhaust a hero to place 1 progress token on Ancient Harbor.\r\nForced: After the player who controls Ancient Harbor lets an attack go undefended, return Ancient Harbor to the staging area.",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 1,
                 Number = 98
@@ -298,8 +300,10 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 1,
                 QuestPoints = 6,
                 Traits = new List<string>() { "Osgiliath." },
-                Keywords = new List<string>() { "The players cannot travel here." },
-                Text = "Planning Action: Spend 2 resources to play 1 progress token on The Old Bridge. (1 resource instead if there is another Osgiliath location in the staging area.)\r\nForced: After the player who controls The Old Bridge lets an attack go undefended, return The Old Bridge to the staging area.",
+                Text =
+@"The players cannot travel here.
+
+Planning Action: Spend 2 resources to play 1 progress token on The Old Bridge. (1 resource instead if there is another Osgiliath location in the staging area.)\r\nForced: After the player who controls The Old Bridge lets an attack go undefended, return The Old Bridge to the staging area.",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 1,
                 Number = 99
@@ -312,7 +316,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 QuestPoints = 3,
                 Traits = new List<string>() { "Osgiliath." },
-                Text = "While West Quarter is the active location, the current quest gains siege. (Characters quest using Defense instead of Willpower.)",
+                Text = "While West Quarter is the active location, the current quest gains Siege.",
                 Shadow = "Shadow: If this attack destroys a character, that character's controller must return a location he controls with the highest Threat to the staging area.",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 2,
@@ -326,7 +330,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 QuestPoints = 3,
                 Traits = new List<string>() { "Osgiliath." },
-                Text = "While East Quarter is the active location, the current quest gains battle. (Characters quest using Attack instead of Willpower.)",
+                Text = "While East Quarter is the active location, the current quest gains Battle.",
                 Shadow = "Shadow: If this attack destroys a character, that character's controller must return a location he controls with the highest Threat to the staging area.",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 2,
