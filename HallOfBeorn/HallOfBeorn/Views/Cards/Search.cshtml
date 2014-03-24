@@ -63,12 +63,14 @@
     </div>
 }
 
+<div ">
 @foreach (var card in @Model.Cards)
 {
-    <div style="margin:6px;border: 1px solid gray;border-radius: 8px;">
-        <table style="margin:0px;">
+    <div style="margin:6px;border: 1px solid gray;border-radius: 8px;min-height:164px;">
+        @*<table style="margin:0px;">
             <tr>
-                <td style="vertical-align:top;">
+                <td style="vertical-align:top;">*@
+                   <div style="float:left">
                     <a href="@Href(string.Format("/Cards/Details/{0}", @card.Slug))">
                         @if (@card.HasSecondImage)
                         {
@@ -82,8 +84,9 @@
                         <img src="@card.ImagePath" style="height:160px;"/>
                         }
                     </a>
-                </td>
-                <td style="vertical-align:top;text-align:left;">
+                    </div>
+                @*</td>
+                <td style="vertical-align:top;text-align:left;">*@
                     <div style="margin-bottom:8px;vertical-align:middle;">
                     @if (@card.IsUnique)
                     {
@@ -91,44 +94,44 @@
                     }
                     @Html.ActionLink(@card.FullTitle, "Details", new { id = @card.Slug }, new { style = "margin-bottom:2px;font-size:medium;font-weight:bold;" })
                     <span>(@card.SetName)</span>
-                        @if (@card.HasSphere)
-                        {
-                            <span><img style="width:30px;height:30px;margin-bottom:-4px;margin-right:10px;" src='@string.Format("/Images/{0}.png", @card.Sphere)' /></span>
-                        }
-                        @if (@card.HasEncounterSet)
-                        {
-                            <span><img style="width:30px;height:30px;margin-bottom:-4px;margin-right:10px;" src='@card.EncounterSetImagePath' /></span>
-                        }
                     </div>
                     
                     <div style="margin-bottom:4px;">
+                        @if (@card.HasSphere)
+                        {
+                            <span><img style="width:30px;height:30px;margin-bottom:-4px;margin-right:2px;" src='@string.Format("/Images/{0}.png", @card.Sphere)' /></span>
+                        }
+                        @if (@card.HasEncounterSet)
+                        {
+                            <span><img style="width:30px;height:30px;margin-bottom:-4px;margin-right:2px;" src='@card.EncounterSetImagePath' /></span>
+                        }
                         @switch (@card.CardType)
                         {
                             case CardType.Hero:
-                                <span style="width:40px;color:#616161;">Threat Cost</span><span style="margin-left:4px;font-weight:bold;">@card.ThreatCost</span>
+                                <span style="color:#616161;">(</span><span style="margin-left:4px;margin-right:4px;font-weight:bold;">@card.ThreatCost</span><span style="color:#616161;">)</span>
                                 <span style="width:24px;margin-left:14px;"><span style="margin-right:2px;font-weight:bold;">@card.Willpower</span><img style="margin-bottom:-3px;" src="/Images/willpower.gif" /></span>
                                 <span style="width:24px;margin-left:14px;"><span style="margin-right:2px;font-weight:bold;">@card.Attack</span><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span>
                                 <span style="width:24px;margin-left:14px;"><span style="margin-right:2px;font-weight:bold;">@card.Defense</span><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span>
                                 <span style="width:24px;margin-left:14px;"><span style="margin-right:2px;font-weight:bold;">@card.HitPoints</span><img style="margin-bottom:-4px;margin-left:-4px;width:20px;height:20px;" src="/Images/heart.png"/></span>
                                 break;
                             case CardType.Ally:
-                                <span style="width:50px;color:#616161;">Resource Cost</span><span style="margin-left:4px;font-weight:bold;">@card.ResourceCost</span>
+                                <span style="color:#616161;">(</span><span style="margin-left:4px;margin-right:4px;font-weight:bold;">@card.ResourceCost</span><span style="color:#616161;">)</span>
                                 <span style="width:24px;margin-left:14px;"><span style="margin-right:2px;font-weight:bold;">@card.Willpower</span><img style="margin-bottom:-3px;" src="/Images/willpower.gif" /></span>
                                 <span style="width:24px;margin-left:14px;"><span style="margin-right:2px;font-weight:bold;">@card.Attack</span><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span>
                                 <span style="width:24px;margin-left:14px;"><span style="margin-right:2px;font-weight:bold;">@card.Defense</span><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span>
                                 <span style="width:24px;margin-left:14px;"><span style="margin-right:2px;font-weight:bold;">@card.HitPoints</span><img style="margin-bottom:-4px;margin-left:-4px;width:20px;height:20px;" src="/Images/heart.png"/></span>
                                 break;
                             case CardType.Attachment:
-                                <span style="width:50px;color:#616161;">Resource Cost</span><span style="margin-left:4px;font-weight:bold;">@card.ResourceCost</span>
+                                <span style="width:50px;color:#616161;">Cost</span><span style="margin-left:4px;font-weight:bold;">@card.ResourceCost</span>
                                 break;
                             case CardType.Event:
-                                <span style="width:50px;color:#616161;">Resource Cost</span><span style="margin-left:4px;font-weight:bold;">@card.ResourceCost</span>
+                                <span style="width:50px;color:#616161;">Cost</span><span style="margin-left:4px;font-weight:bold;">@card.ResourceCost</span>
                                 break;
                             case CardType.Treasure:
-                                <span style="width:50px;color:#616161;">Resource Cost</span><span style="margin-left:4px;font-weight:bold;">@card.ResourceCost</span>
+                                <span style="width:50px;color:#616161;">Cost</span><span style="margin-left:4px;font-weight:bold;">@card.ResourceCost</span>
                                 break;
                             case CardType.Enemy:
-                                <span style="width:60px;color:#616161;">Engagement Cost</span><span style="margin-left:4px;font-weight:bold;">@card.EngagementCost</span>
+                                <span style="color:#616161;">(</span><span style="margin-left:4px;margin-right:4px;font-weight:bold;">@card.EngagementCost</span><span style="color:#616161;">)</span>
                                 <span style="width:24px;margin-left:14px;"><span style="margin-right:2px;font-weight:bold;">@card.Threat</span><img style="margin-bottom:-3px;" src="/Images/threat.png" /></span>
                                 <span style="width:24px;margin-left:14px;"><span style="margin-right:2px;font-weight:bold;">@card.Attack</span><img style="margin-bottom:-3px;" src="/Images/attack.gif" /></span>
                                 <span style="width:24px;margin-left:14px;"><span style="margin-right:2px;font-weight:bold;">@card.Defense</span><img style="margin-bottom:-3px;" src="/Images/defense.gif" /></span>
@@ -182,8 +185,9 @@
                             @card.Shadow
                         }
                     </div>
-                </td>            
+                @*</td>            
             </tr>
-        </table>
+        </table>*@
     </div>
 }
+</div>

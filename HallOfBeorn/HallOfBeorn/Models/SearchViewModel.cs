@@ -17,10 +17,10 @@ namespace HallOfBeorn.Models
         [Display(Name = "Search")]
         public string Query { get; set; }
 
-        [Display(Name = "Card Type")]
+        [Display(Name = "Type")]
         public CardType CardType { get; set; }
 
-        [Display(Name = "Card Set")]
+        [Display(Name = "Set")]
         public string CardSet { get; set; }
 
         [Display(Name = "Trait")]
