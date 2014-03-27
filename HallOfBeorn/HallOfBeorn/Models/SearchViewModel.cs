@@ -74,7 +74,7 @@ namespace HallOfBeorn.Models
 
         public static IEnumerable<SelectListItem> Sorts
         {
-            get { return typeof(Sort).GetSelectListItems(); }
+            get { return typeof(Sort).GetSelectListItems(", "); }
         }
     }
 }

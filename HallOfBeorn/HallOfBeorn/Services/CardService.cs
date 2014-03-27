@@ -866,9 +866,9 @@ namespace HallOfBeorn.Services
                 {
                     case Sort.Alphabetical:
                         return results.OrderBy(x => x.Title);
-                    case Sort.Sphere_type_cost:
+                    case Sort.Sphere_Type_Cost:
                         return results.OrderBy(x => x.Sphere).ThenBy(x => x.CardType).ThenBy(x => x.ResourceCost > 0 ? x.ResourceCost : x.ThreatCost);
-                    case Sort.Set_and_number:
+                    case Sort.Set_Number:
                     default:
                         return results.OrderBy(x => x.CardSet.Number).ThenBy(x => x.Number);
                 }

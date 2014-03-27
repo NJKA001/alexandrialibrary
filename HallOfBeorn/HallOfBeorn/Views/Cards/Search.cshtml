@@ -31,43 +31,50 @@
 
         <div>
             <span style="display:inline-block;">
-            @Html.LabelFor(x => x.CardSet, new { style = "display:inline;margin-right:2px;" })
-            @Html.DropDownListFor(x => x.CardSet, SearchViewModel.CardSets, new { style = "margin-right:12px;" })
+            @* @Html.LabelFor(x => x.CardSet, new { style = "display:inline;margin-right:2px;width:70px;" }) *@
+            <span style="margin-right:2px;width:55px;display:inline-block;">Set</span>
+            @Html.DropDownListFor(x => x.CardSet, SearchViewModel.CardSets, new { style = "margin-right:12px;max-width:170px;" })
             </span>
 
             <span style="display:inline-block;">
-            @Html.LabelFor(x => x.CardType, new { style = "display:inline;margin-right:2px;" })
+            @* @Html.LabelFor(x => x.CardType, new { style = "display:inline;margin-right:2px;width:70px;" }) *@
+            <span style="margin-right:2px;width:55px;display:inline-block;">Type</span>
             @Html.DropDownListFor(x => x.CardType, SearchViewModel.CardTypes, new { style = "margin-right:12px;" })
             </span>
 
             <span style="display:inline-block;">
-            @Html.LabelFor(x => x.Sphere, new { style = "display:inline;margin-right:2px;" })
+            @*@Html.LabelFor(x => x.Sphere, new { style = "display:inline;margin-right:2px;width:70px;" })*@
+            <span style="margin-right:2px;width:55px;display:inline-block;">Sphere</span>
             @Html.DropDownListFor(x => x.Sphere, SearchViewModel.Spheres, new { style = "margin-right:12px;" })
             </span>
 
             <span style="display:inline-block;">
-            @Html.LabelFor(x => x.Cost, new { style = "display:inline;margin-right:2px;" })
+            @* @Html.LabelFor(x => x.Cost, new { style = "display:inline;margin-right:2px;width:70px;" }) *@
+            <span style="margin-right:2px;width:55px;display:inline-block;">Cost</span>
             @Html.DropDownListFor(x => x.Cost, SearchViewModel.Costs, new { style = "margin-right:12px;" })
-            </span>
 
-            <span style="display:inline-block;">
-            @Html.LabelFor(x => x.Unique, new { style = "display:inline;margin-right:2px;" })
+
+            @*@Html.LabelFor(x => x.Unique, new { style = "display:inline;margin-right:2px;" })*@
+            <span style="margin-right:2px;width:55px;display:inline-block;">Unique</span>
             @Html.CheckBoxFor(x => x.Unique, new { style = "margin-right:12px;" })
             </span>
         </div>
         <div>
             <span style="display:inline-block;">
-            @Html.LabelFor(x => x.Trait, new { style = "display:inline;margin-right:2px;" })
+            @*@Html.LabelFor(x => x.Trait, new { style = "display:inline;margin-right:2px;width:70px;" })*@
+            <span style="margin-right:2px;width:55px;display:inline-block;">Trait</span>
             @Html.DropDownListFor(x => x.Trait, SearchViewModel.Traits, new { style = "margin-right:12px;" })
             </span>
 
             <span style="display:inline-block;">
-            @Html.LabelFor(x => x.Keyword, new { style = "display:inline;margin-right:2px;" })
-            @Html.DropDownListFor(x => x.Keyword, SearchViewModel.Keywords, new { style = "margin-right:12px;max-width:200px;" })
+            @*@Html.LabelFor(x => x.Keyword, new { style = "display:inline;margin-right:2px;width:70px;" })*@
+            <span style="margin-right:2px;width:55px;display:inline-block;">Keyword</span>
+            @Html.DropDownListFor(x => x.Keyword, SearchViewModel.Keywords, new { style = "margin-right:12px;max-width:161px;" })
             </span>
 
             <span style="display:inline-block;">
-            @Html.LabelFor(x => x.Sort, new { style = "display:inline;margin-right:2px;" })
+            @*@Html.LabelFor(x => x.Sort, new { style = "display:inline;margin-right:2px;width:70px;" })*@
+            <span style="margin-right:2px;width:55px;display:inline-block;">Sort</span>
             @Html.DropDownListFor(x => x.Sort, SearchViewModel.Sorts, new { style = "margin-right:0px;" })
             </span>
         </div>
@@ -77,14 +84,15 @@
 <div ">
 @foreach (var card in @Model.Cards)
 {
-    <div style="margin:6px;border: 1px solid gray;border-radius: 8px;min-height:200px;">
+    <hr style="color:#616161;" />
+    <div style="margin:6px;border: 0px solid gray;border-radius: 8px;min-height:200px;">
         <div style="margin-bottom:2px;">
             @if (@card.IsUnique)
             {
                 <img src="/Images/unique.png" style="margin-bottom:-3px;margin-right:-4px;height:16px;width:16px;"/>
             }
             @Html.ActionLink(@card.FullTitle, "Details", new { id = @card.Slug }, new { style = "margin-bottom:2px;font-size:medium;font-weight:bold;" })
-            <span style="display:inline-block;">(@card.SetName)</span>
+            <span style="display:inline-block;color:#616161;">@card.SetName</span>
             <span style="display:inline-block;">
             @if (@card.HasSphere)
             {
@@ -131,13 +139,13 @@
                     <span style="width:24px;margin-left:14px;"><span style="margin-right:2px;font-weight:bold;">@card.HitPoints</span><img style="margin-bottom:-4px;margin-left:-4px;width:20px;height:20px;" src="/Images/heart.png"/></span>
                     break;
                 case CardType.Attachment:
-                    <span style="width:50px;color:#616161;">Cost</span><span style="margin-left:4px;font-weight:bold;">@card.ResourceCost</span>
+                    <span style="width:50px;color:#616161;">(</span><span style="margin-left:4px;margin-right:4px;font-weight:bold;">@card.ResourceCost</span><span style="color:#616161;">)</span>
                     break;
                 case CardType.Event:
-                    <span style="width:50px;color:#616161;">Cost</span><span style="margin-left:4px;font-weight:bold;">@card.ResourceCost</span>
+                    <span style="width:50px;color:#616161;">(</span><span style="margin-left:4px;margin-right:4px;font-weight:bold;">@card.ResourceCost</span><span style="color:#616161;">)</span>
                     break;
                 case CardType.Treasure:
-                    <span style="width:50px;color:#616161;">Cost</span><span style="margin-left:4px;font-weight:bold;">@card.ResourceCost</span>
+                    <span style="width:50px;color:#616161;">(</span><span style="margin-left:4px;margin-right:4px;font-weight:bold;">@card.ResourceCost</span><span style="color:#616161;">)</span>
                     break;
                 case CardType.Enemy:
                     <span style="color:#616161;">(</span><span style="margin-left:4px;margin-right:4px;font-weight:bold;">@card.EngagementCost</span><span style="color:#616161;">)</span>
@@ -163,7 +171,7 @@
                 case CardType.Quest:
                     <span style="width:40px;color:#616161;">Stage</span><span style="margin-left:4px;font-weight:bold;">@card.StageNumber</span>
                     <span style="width:40px;color:#616161;margin-left:14px;">Quest Points</span><span style="margin-left:4px;font-weight:bold;">@card.QuestPoints</span>
-                    break;    
+                    break;
                 default:
                     break;
             }

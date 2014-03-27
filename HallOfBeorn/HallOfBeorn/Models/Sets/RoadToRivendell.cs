@@ -17,28 +17,29 @@ namespace HallOfBeorn.Models.Sets
 
             Cards.Add(new Card() {
                 ImageName = "M1399",
-                Title = "Along the Misty Mountains - 1A",
+                Title = "Along the Misty Mountains",
+                StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801209c9001",
                 CardType = CardType.Quest,
                 EncounterSet = "Road to Rivendell",
                 Quantity = 1,
                 QuestPoints = 20,
-                Setup = "t",
                 Text = "Setup: Put Arwen Undomiel into play under the control of the first player. Shuffle the encounter deck. Reveal 1 card from the encounter deck per player, and add them to the staging area.",
                 FlavorText = "This is a wild and perilous country, and it is dangerous to follow the roads. The mountains rise up on the right, impassively watching your slow trek among their foothills.",
-                Number = 1
+                Number = 38
             });
             Cards.Add(new Card() {
                 ImageName = "M1401",
-                Title = "Approaching Rivendell - 3A",
+                Title = "Approaching Rivendell",
+                StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-0801209c9003",
                 CardType = CardType.Quest,
                 EncounterSet = "Road to Rivendell",
                 Quantity = 1,
                 QuestPoints = 13,
-                Text = "When Revealed: Reveal 1 card from the encounter deck per player, and add it to the staging area.\r\nCharacters cannot be healed.\r\nIf the players defeat this stage, they have won the game.",
+                OppositeText = "When Revealed: Reveal 1 card from the encounter deck per player, and add it to the staging area.\r\nCharacters cannot be healed.\r\nIf the players defeat this stage, they have won the game.",
                 FlavorText = "Orcs and other creatures have hounded you since fighting your way free of the orc outpost. Soon you will reach the safety of Rivendell's borders, but supplies have dwindled and you are dead weary from sleepless nights of keeping watch, as dark forms shadow your camp.",
-                Number = 2
+                Number = 40
             });
             Cards.Add(new Card() {
                 ImageName = "M1402",
@@ -54,7 +55,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 2,
                 HitPoints = 2,
                 Text = "The first player gains control of Arwen Undomiel, as an ally.Response: After Arwen Undomiel exhausts, choose a hero. Add 1 resource to that hero's resource pool.If Arwen Undomiel leaves play, the players are defeated.",
-                Number = 3
+                Number = 41
             });
             Cards.Add(new Card() {
                 ImageName = "M1406",
@@ -68,7 +69,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Return attacking enemy to the staging area after it attacks.",
                 Threat = 2,
                 QuestPoints = 4,
-                Number = 4
+                Number = 45
             });
             Cards.Add(new Card() {
                 ImageName = "M1396",
@@ -85,7 +86,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 0,
                 HitPoints = 3,
                 Text = "Action: Exhaust Bombur to choose a location. That location gets -1 Threat until the end of the phase. (That location does not contribute its Threat instead if it is an Underground location.)",
-                Number = 5
+                Number = 35
             });
             Cards.Add(new Card() {
                 ImageName = "M1412",
@@ -103,7 +104,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Return attacking enemy to the staging area after it attacks.",
                 Keywords = new List<string>() { "Surge." },
                 Threat = 2,
-                Number = 6
+                Number = 51
             });
             Cards.Add(new Card() {
                 ImageName = "M1390",
@@ -121,7 +122,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 2,
                 Keywords = new List<string>() { "Ranged.", " Sentinel.", " Secrecy 3." },
-                Number = 7
+                Number = 29
             });
             Cards.Add(new Card() {
                 ImageName = "M1389",
@@ -138,7 +139,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 2,
                 HitPoints = 4,
                 Text = "While Elrohir is in play, Elladan gets +2 Attack.Response: After Elladan is declared as an attacker, pay 1 resource from his resource pool to ready him.",
-                Number = 8
+                Number = 28
             });
             Cards.Add(new Card() {
                 ImageName = "M1408",
@@ -149,7 +150,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Text = "When Revealed: The first player (choose 1): deals 1 damage to all allies in play and Followed by Night gains surge, or all enemies engaged with players make an immediate attack, if able.",
                 Shadow = "Shadow: Return attacking enemy to the staging area after it attacks.",
-                Number = 9
+                Number = 47
             });
             Cards.Add(new Card() {
                 ImageName = "M1404",
@@ -162,7 +163,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "While Goblin Gate is the active location, the first enemy revealed from the encounter deck each round gains ambush. If that enemy engages a player, it makes an immediate attack (deal and resolve a shadow card).",
                 Threat = 5,
                 QuestPoints = 4,
-                Number = 10
+                Number = 43
             });
             Cards.Add(new Card() {
                 ImageName = "M1410",
@@ -179,7 +180,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Forced: After Goblin Taskmaster engages a player, that player deals 2 damage to 1 character he controls.",
                 Keywords = new List<string>() { "Ambush." },
                 Threat = 2,
-                Number = 11
+                Number = 49
             });
             Cards.Add(new Card() {
                 ImageName = "M1393",
@@ -190,7 +191,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Action: Exhaust X characters to deal X damage to an enemy in the staging area.",
-                Number = 12
+                Number = 32
             });
             Cards.Add(new Card() {
                 ImageName = "M1391",
@@ -201,7 +202,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 3,
                 Text = "Action: Ready all Dwarf characters.",
-                Number = 13
+                Number = 30
             });
             Cards.Add(new Card() {
                 ImageName = "M1409",
@@ -212,18 +213,19 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 2,
                 Text = "When Revealed: All Orc enemies in the staging area engage the first player. If there are no Orc enemies in the staging area, return all Orc enemies in the encounter discard pile to the staging area, if able.",
                 Keywords = new List<string>() { "Surge." },
-                Number = 14
+                Number = 48
             });
             Cards.Add(new Card() {
                 ImageName = "M1400",
-                Title = "Orc Outpost - 2A",
+                Title = "Orc Outpost",
+                StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801209c9017",
                 CardType = CardType.Quest,
                 EncounterSet = "Road to Rivendell",
                 Quantity = 1,
                 QuestPoints = 7,
-                Number = 15,
-                Text = "When Revealed: Search the encounter deck and discard pile for Goblin Gate and add it to the staging area, if able. Then, if there is no active location, Goblin Gate becomes the active location.",
+                Number = 39,
+                OppositeText = "When Revealed: Search the encounter deck and discard pile for Goblin Gate and add it to the staging area, if able. Then, if there is no active location, Goblin Gate becomes the active location.",
                 FlavorText = "Heavy rain drives you to seek shelter among the caves of the mountains. They are dry, and the fire you start seeps into your bones and restores your spirit. Your eyes are heavy when teh soft clatter of falling pebbles reaches your ears. Perhaps you are not alone.",
             });
             Cards.Add(new Card() {
@@ -241,7 +243,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Forced: After Orc Raiders engages a player, that player discards 2 attachments he controls, if able.",
                 Keywords = new List<string>() { "Ambush." },
                 Threat = 1,
-                Number = 16
+                Number = 50
             });
             Cards.Add(new Card() {
                 ImageName = "M1397",
@@ -253,7 +255,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 3,
                 Text = "Action: Search the top 5 cards of the encounter deck for any 1 non-objective card worth no victory points and add it to your victory display. Shuffle the encounter deck.",
                 Keywords = new List<string>() { "Secrecy 2." },
-                Number = 17
+                Number = 36
             });
             Cards.Add(new Card() {
                 ImageName = "M1405",
@@ -267,7 +269,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Deal 1 damage to each ally in play.",
                 Threat = 3,
                 QuestPoints = 5,
-                Number = 18
+                Number = 44
             });
             Cards.Add(new Card() {
                 ImageName = "M1394",
@@ -283,7 +285,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 2,
                 HitPoints = 2,
                 Text = "Action: Spend 1 Spirit resource to give control of Rider of the Mark to another player. (Limit once per round.)Response: After Rider of the Mark changes control, discard a shadow card dealt to an enemy you are engaged with.",
-                Number = 19
+                Number = 33
             });
             Cards.Add(new Card() {
                 ImageName = "M1392",
@@ -296,7 +298,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Text = "When attached character attacks an enemy, that enemy gets -2 Defense until the end of the phase.",
                 Keywords = new List<string>() { "Attach to a Noldor or Silvan character.", " Restricted." },
-                Number = 20
+                Number = 31
             });
             Cards.Add(new Card() {
                 ImageName = "M1403",
@@ -310,7 +312,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Return attacking enemy to the staging area after it attacks.",
                 Threat = 1,
                 QuestPoints = 5,
-                Number = 21
+                Number = 42
             });
             Cards.Add(new Card() {
                 ImageName = "M1407",
@@ -321,7 +323,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 2,
                 Text = "When Revealed: Deal 1 damage to each exhausted character. Then, exhaust all ready characters.",
                 Shadow = "Shadow: Defending player must discard all exhausted characters he controls.",
-                Number = 22
+                Number = 46
             });
             Cards.Add(new Card() {
                 ImageName = "M1395",
@@ -333,9 +335,12 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Song." },
                 Quantity = 3,
                 ResourceCost = 1,
-                Text = "Response: After ~Song of Earendil enters play, draw 1 card.\r\nResponse: After another player raises his threat, raise your threat by 1 to reduce that player's threat by 1.",
+                Text = 
+@"Response: After ~Song of Eärendil enters play, draw 1 card.
+                
+Response: After another player raises his threat, raise your threat by 1 to reduce that player's threat by 1.",
                 Keywords = new List<string>() { "Attach to a Spirit hero." },
-                Number = 23
+                Number = 34
             });
             Cards.Add(new Card() {
                 ImageName = "M1398",
@@ -346,7 +351,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 0,
                 Text = "Response: After a Dwarf character leaves play, shuffle the encounter discard pile back into the encounter deck.",
-                Number = 24
+                Number = 37
             });
             Cards.Add(new Card() {
                 ImageName = "M1413",
@@ -363,7 +368,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Forced: After Wild Bear engages a player, it makes an immediate attack.",
                 Keywords = new List<string>() { "Ambush." },
                 Threat = 0,
-                Number = 25
+                Number = 52
             });
         }
     }

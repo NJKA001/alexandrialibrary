@@ -42,13 +42,18 @@ namespace HallOfBeorn
 
         public static IEnumerable<SelectListItem> GetSelectListItems(this Type enumType)
         {
+            return enumType.GetSelectListItems(" ");
+        }
+
+        public static IEnumerable<SelectListItem> GetSelectListItems(this Type enumType, string separator)
+        {
             var listItems = new List<SelectListItem>();
 
             foreach (var item in System.Enum.GetValues(enumType))
             {
                 var number = (int)item;
-                
-                var text = number > 0 ? item.ToString().Replace('_', ' ') : "Any";
+
+                var text = number > 0 ? item.ToString().Replace("_", separator) : "Any";
                 var value = item.ToString();
 
                 listItems.Add(

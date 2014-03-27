@@ -29,7 +29,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "The first player gains control of Arwen Undomiel, as an ally.Response: After Arwen Undomiel exhausts, choose a hero. Add 1 resource to that hero's resource pool.If Arwen Undomiel leaves play, the players are defeated.",
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 1,
-                Number = 1
+                Number = 14
             });
             Cards.Add(new Card() {
                 ImageName = "M1385",
@@ -40,7 +40,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Exhaust each ready character and if it is the quest phase commit them to the quest.",
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 1,
-                Number = 2
+                Number = 24
             });
             Cards.Add(new Card() {
                 ImageName = "M1367",
@@ -57,7 +57,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Dwarf." },
                 Text = "Quest Action: Spend 1 Spirit resource to put Bofur into play from your hand, exhausted and committed to a quest. If you quest successfully this phase and Bofur is still in play, return him to your hand.",
                 Quantity = 3,
-                Number = 3
+                Number = 6
             });
             Cards.Add(new Card() {
                 ImageName = "M1376",
@@ -72,7 +72,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 1,
                 VictoryPoints = 3,
-                Number = 4
+                Number = 15
             });
             Cards.Add(new Card() {
                 ImageName = "M1378",
@@ -87,7 +87,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 1,
                 VictoryPoints = 2,
-                Number = 5
+                Number = 17
             });
             Cards.Add(new Card() {
                 ImageName = "M1362",
@@ -104,7 +104,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Noldor.", " Noble.", " Ranger." },
                 Text = "While Elladan is in play, Elrohir gets +2 Defense.Response: After Elrohir is declared as a defender, pay 1 resource from his resource pool to ready him.",
                 Quantity = 1,
-                Number = 6
+                Number = 1
             });
             Cards.Add(new Card() {
                 ImageName = "M1382",
@@ -115,7 +115,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: attacking enemy gets +1 Attack for each progress token on the active location.",
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 2,
-                Number = 7
+                Number = 21
             });
             Cards.Add(new Card() {
                 ImageName = "M1377",
@@ -130,7 +130,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 1,
                 VictoryPoints = 2,
-                Number = 8
+                Number = 16
             });
             Cards.Add(new Card() {
                 ImageName = "M1381",
@@ -140,7 +140,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Return the top 2 Snow cards in the encounter discard pile to the top of the encounter deck. If this effect returned less than 2 Snow treachery cards, Fell Voices gains surge.",
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 2,
-                Number = 9
+                Number = 20
             });
             Cards.Add(new Card() {
                 ImageName = "M1384",
@@ -151,7 +151,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: The first player attaches this card to a hero he controls. Counts as a Condition Attachment with the text: 'Attached hero gets -2 Willpower and cannot commit to a quest. If attached hero has more than 1 copy of Freezing Cold attached, discard attached hero from play.'",
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 3,
-                Number = 10
+                Number = 23
             });
             Cards.Add(new Card() {
                 ImageName = "M1371",
@@ -163,7 +163,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Discard Good Meal to lower the cost of the next event you play this round that matches attached hero's sphere by 2.",
                 Keywords = new List<string>() { "Attach to a Hobbit hero." },
                 Quantity = 3,
-                Number = 11
+                Number = 10
             });
             Cards.Add(new Card() {
                 ImageName = "M1366",
@@ -172,10 +172,13 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Tactics,
                 ResourceCost = 0,
-                Text = "Attached hero gets +1 Attack for each resource token on another copy of Keeping Count that is above the current number of resource tokens on this card.Forced: After attached hero attacks and destroys an enemy, place 1 resource token on this card.",
+                Text = 
+@"Attached hero gets +1 Attack for each resource token on another copy of Keeping Count that is above the current number of resource tokens on this card.
+
+Forced: After attached hero attacks and destroys an enemy, place 1 resource token on this card.",
                 Keywords = new List<string>() { "Attach to a hero.", " Limit 1 per hero." },
                 Quantity = 3,
-                Number = 12
+                Number = 5
             });
             Cards.Add(new Card() {
                 ImageName = "M1386",
@@ -187,12 +190,12 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 2,
                 HitPoints = 3,
                 Traits = new List<string>() { "Goblin.", " Orc." },
-                Text = "Mountain Goblin gets +1 Attack for each Mountain location in the staging area.",
+                Text = "~Mountain Goblin gets +1 Attack for each Mountain location in the staging area.",
                 Shadow = "Shadow: attacking enemy gets +1 Attack. (+2 Attack instead if the active location is a Mountain.)",
                 Threat = 1,
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 3,
-                Number = 13
+                Number = 25
             });
             Cards.Add(new Card() {
                 ImageName = "M1387",
@@ -204,12 +207,12 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 5,
                 HitPoints = 7,
                 Traits = new List<string>() { "Troll." },
-                Text = "Mountain Troll gets +1 Attack for each Mountain location in the staging area.",
+                Text = "~Mountain ~Troll gets +1 Attack for each Mountain location in the staging area.",
                 Shadow = "Shadow: attacking enemy gets +1 Attack. (+2 Attack instead if the active location is a Mountain.)",
                 Threat = 2,
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 2,
-                Number = 14
+                Number = 26
             });
             Cards.Add(new Card() {
                 ImageName = "M1370",
@@ -221,7 +224,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Raise your threat by 1 to look at the top card of the ecnounter deck. Then, reduce your threat by X, where X is the threat of that card.",
                 Keywords = new List<string>() { "Secrecy 2." },
                 Quantity = 3,
-                Number = 15
+                Number = 9
             });
             Cards.Add(new Card() {
                 ImageName = "M1369",
@@ -237,7 +240,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Dale.", " Scout." },
                 Text = "Action: Exhaust Ravenhill Scout to move up to 2 progress tokens from 1 location to another location.",
                 Quantity = 3,
-                Number = 16
+                Number = 8
             });
             Cards.Add(new Card() {
                 ImageName = "M1368",
@@ -248,7 +251,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Text = "Response: After another player plays an attachment on a hero you control, you may (choose 1): ready 1 of that player's heroes, have that player draw 1 card, or lower that player's threat by 2.",
                 Quantity = 3,
-                Number = 17
+                Number = 7
             });
             Cards.Add(new Card() {
                 ImageName = "M1380",
@@ -262,7 +265,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 2,
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 3,
-                Number = 18
+                Number = 19
             });
             Cards.Add(new Card() {
                 ImageName = "M1383",
@@ -274,7 +277,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Until the end of the phase, characters defending this attack get -1 Willpower and are discarded if their Willpower is 0.",
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 5,
-                Number = 19
+                Number = 22
             });
             Cards.Add(new Card() {
                 ImageName = "M1388",
@@ -286,11 +289,14 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 1,
                 HitPoints = 4,
                 Traits = new List<string>() { "Creature.", " Snow." },
-                Text = "Allies cannot defend while Snow Warg is attacking.Forced: After a character is declared as a defender against Snow Warg, deal 1 damage to the defending character, if able.",
+                Text = 
+@"Allies cannot defend while Snow Warg is attacking.
+
+Forced: After a character is declared as a defender against Snow Warg, deal 1 damage to the defending character, if able.",
                 Threat = 3,
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 3,
-                Number = 20
+                Number = 27
             });
             Cards.Add(new Card() {
                 ImageName = "M1363",
@@ -301,7 +307,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Text = "Action: Discard the top card of your deck. If the discarded card's printed cost is equal to or higher than the number of characters you control, draw 2 cards and deal 2 damage to any enemy.",
                 Quantity = 3,
-                Number = 21
+                Number = 2
             });
             Cards.Add(new Card() {
                 ImageName = "M1379",
@@ -316,7 +322,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 1,
                 VictoryPoints = 1,
-                Number = 22
+                Number = 18
             });
             Cards.Add(new Card() {
                 ImageName = "M1364",
@@ -328,7 +334,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Reveal the top 5 cards of your deck and put 1 revealed ally into play, if able. Shuffle all other revealed cards back into your deck.",
                 Keywords = new List<string>() { "Secrecy 3." },
                 Quantity = 3,
-                Number = 23
+                Number = 3
             });
             Cards.Add(new Card() {
                 ImageName = "M1365",
@@ -339,33 +345,41 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Text = "Action: Choose a character you control. Until the end of the phase, that character gets +3 Attack while attacking an enemy with a higher engagement cost than your threat.",
                 Quantity = 3,
-                Number = 24
+                Number = 4
             });
             Cards.Add(new Card() {
                 ImageName = "M1373",
-                Title = "Snowdrifts - 2A",
+                Title = "Snowdrifts",
+                StageNumber = 2,
                 Id = "737a8d5f-2f82-47e4-844e-52fdae95ccf5",
                 CardType = CardType.Quest,
                 EncounterSet = "The Redhorn Gate",
                 OppositeText = "When Revealed: Shuffle 1 more copy of Snowstorm into the encounter deck than the number of players in the game.\r\nForced: After playing the 11th progress token on Snowdrifts, discard any active location. Caradhras becomes the active location.",
                 QuestPoints = 11,
                 Quantity = 1,
-                Number = 25
+                Number = 12
             });
             Cards.Add(new Card() {
                 ImageName = "M1374",
-                Title = "The Mountains' Peaks - 3A",
+                Title = "The Mountains' Peaks",
+                StageNumber = 3,
                 Id = "001dbc8b-3b8e-4f02-bdbd-7e78c6ecd348",
                 CardType = CardType.Quest,
                 EncounterSet = "The Redhorn Gate",
-                OppositeText = "When Revealed: Shuffle all copies of Snowstorm in the encounter discard pile back into the encounter deck.\r\nCharacters are discarded from play if their Willpower is ever 0.\r\nPlayers cannot defeat this stage unless they have 5 victory points. If the players defeat this stage, they have won the game.",
+                OppositeText = 
+@"When Revealed: Shuffle all copies of Snowstorm in the encounter discard pile back into the encounter deck.
+
+Characters are discarded from play if their Willpower is ever 0.
+
+Players cannot defeat this stage unless they have 5 victory points. If the players defeat this stage, they have won the game.",
                 Quantity = 1,
                 QuestPoints = 13,
-                Number = 26
+                Number = 13
             });
             Cards.Add(new Card() {
                 ImageName = "M1372",
-                Title = "Up the Pass - 1A",
+                Title = "Up the Pass",
+                StageNumber = 1,
                 Id = "0ec5f691-e5b3-41b5-bcec-2f963786ef4d",
                 CardType = CardType.Quest,
                 Setup = "stttttt",
@@ -375,7 +389,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Redhorn Gate",
                 QuestPoints = 9,
                 Quantity = 1,
-                Number = 27
+                Number = 11
             });
         }
     }
