@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Core Set - Nightmare";
+            Abbreviation = "CoreNM";
             SetType = Models.SetType.Nightmare_Expansion;
 
             Cards.Add(new Card() {

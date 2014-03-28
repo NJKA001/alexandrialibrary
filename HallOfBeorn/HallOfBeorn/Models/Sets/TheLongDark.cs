@@ -27,7 +27,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 3,
                 QuestPoints = 3,
                 VictoryPoints = 0,
-                Number = 1
+                Number = 89
             });
             Cards.Add(new Card() {
                 ImageName = "M1459",
@@ -43,19 +43,21 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 4,
                 Text = "When Revealed: The first player draws 1 card. Then, that player must choose and discard 4 cards from his hand, if able.Forced: After Cave Spider engages a player, that player must choose and discard 1 card from his hand, if able.",
                 Threat = 3,
-                Number = 2
+                Number = 97
             });
             Cards.Add(new Card() {
                 ImageName = "M1449",
-                Title = "Continuing Eastward - 2A",
+                Title = "Continuing Eastward",
+                StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801211c9003",
                 CardType = CardType.Quest,
                 EncounterSet = "The Long Dark",
                 Quantity = 1,
                 QuestPoints = 17,
                 FlavorText = "Time carries no weight in the darkness, and the hours creep by with no end in sight. The number of Orcs in the mines increase as you head toward the East-gate, but there appears to be little real organization within their ranks. You press onward!",
-                Text = "When Revealed: The first player makes a locate test. If this test is failed, reveal cards from the encounter deck equal to the number of players in the game and add them to the staging area. Then, trigger all \"Lost:\" effects in play.\r\nIf the players quest unsuccessfully, trigger all \"Lost:\" effects in play.\r\nIf the players defeat this stage, they have won the game.",
-                Number = 3
+                OppositeText =
+"When Revealed: The first player makes a locate test. If this test is failed, reveal cards from the encounter deck equal to the number of players in the game and add them to the staging area. Then, trigger all \"Lost:\" effects in play.\r\n\r\nIf the players quest unsuccessfully, trigger all \"Lost:\" effects in play.\r\n\r\nIf the players defeat this stage, they have won the game.",
+                Number = 87
             });
             Cards.Add(new Card() {
                 ImageName = "M1450",
@@ -66,8 +68,11 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Artifact.", " Armour." },
                 Quantity = 1,
                 IsUnique = true,
-                Text = "When Revealed: The first player attaches Durin's Greaves to a hero of his choice as an attachment.Attached hero gets +1 Defense.",
-                Number = 4
+                Text = 
+@"When Revealed: The first player attaches Durin's Greaves to a hero of his choice as an attachment.
+                
+Attached hero gets +1 Defense.",
+                Number = 88
             });
             Cards.Add(new Card() {
                 ImageName = "M1452",
@@ -81,7 +86,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 QuestPoints = 4,
                 VictoryPoints = 0,
-                Number = 5
+                Number = 90
             });
             Cards.Add(new Card() {
                 ImageName = "M1441",
@@ -96,8 +101,9 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 1,
                 Willpower = 0,
                 HitPoints = 2,
-                Text = "Erebor Battle Master gets +1 Attack for each other Dwarf character you control.",
-                Number = 6
+                Text = "Erebor Battle Master gets +1 Attack for each other Dwarf ally you control.",
+                HasErrata = true,
+                Number = 79
             });
             Cards.Add(new Card() {
                 ImageName = "M1439",
@@ -114,7 +120,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 2,
                 HitPoints = 3,
                 Text = "Action: Choose and discard 1 card from your hand to draw 1 card. (Limit once per round.)",
-                Number = 7
+                Number = 77
             });
             Cards.Add(new Card() {
                 ImageName = "M1444",
@@ -127,7 +133,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Text = "Response: After you travel to a Mountain or Underground location, ready attached character and reduce your threat by 1.",
                 Keywords = new List<string>() { "Attach to a Dwarf character." },
-                Number = 8
+                Number = 82
             });
             Cards.Add(new Card() {
                 ImageName = "M1455",
@@ -138,7 +144,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 2,
                 Text = "When Revealed: Each player must exhaust 1 character he controls, if able. Then, if any player controls no unexhausted characters, Fatigue gains surge.",
                 Shadow = "Shadow: The defending player must exhaust 1 character he controls, if able.",
-                Number = 9
+                Number = 93
             });
             Cards.Add(new Card() {
                 ImageName = "M1456",
@@ -149,7 +155,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 4,
                 Text = "When Revealed: The first player makes a locate test. If this test is failed, deal 2 damage to all characters and trigger all 'Lost:' effects in play.",
                 VictoryPoints = 0,
-                Number = 10
+                Number = 94
             });
             Cards.Add(new Card() {
                 ImageName = "M1440",
@@ -160,7 +166,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Response: After an enemy is added to the staging area, deal 1 damage to that enemy. Players ignore that enemy while making engagement checks this round.",
-                Number = 11
+                Number = 78
             });
             Cards.Add(new Card() {
                 ImageName = "M1457",
@@ -171,7 +177,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Text = "When Revealed: Attach this card to a location in the staging area with the highest combined threat and remaining quest points. (Counts as a Condition attachment with the text: 'Each enemy revealed from the encounter deck gains surge.')",
                 VictoryPoints = 0,
-                Number = 12
+                Number = 95
             });
             Cards.Add(new Card() {
                 ImageName = "M1460",
@@ -188,7 +194,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Forced: After Goblin Sneak engages a player, discard the top card of the encounter deck. If it is a treachery card, Goblin Sneak engages the next player, if able.",
                 Shadow = "Shadow: Add Goblin Sneak to the staging area.",
                 Threat = 2,
-                Number = 13
+                Number = 98
             });
             Cards.Add(new Card() {
                 ImageName = "M1461",
@@ -205,7 +211,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Lost: Each player must choose and discard 1 ally he controls from play, if able.",
                 Shadow = "Shadow: Trigger all 'Lost:' effects in play.",
                 Threat = 4,
-                Number = 14
+                Number = 99
             });
             Cards.Add(new Card() {
                 ImageName = "M1438",
@@ -223,11 +229,12 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 4,
                 Text = "Response: After Hama is declared as an attacker, return a Tactics event from your discard pile to your hand. Then, choose and discard 1 card from your hand.",
-                Number = 15
+                Number = 76
             });
             Cards.Add(new Card() {
                 ImageName = "M1448",
-                Title = "Journey in the Black Pit - 1A",
+                Title = "Journey in the Black Pit",
+                StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801211c9017",
                 CardType = CardType.Quest,
                 EncounterSet = "The Long Dark",
@@ -237,7 +244,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Setup: The first player attaches Cave Torch to a hero of his choice.",
                 OppositeText = "When Revealed: Discard cards from the top of the encounter deck until you discard X locations, where X is one less than the number of players in the game (minimum 1). Add those locations to the staging area, and shuffle the other discarded cards back into the encounter deck.\r\nEach location gets +1 threat. If the players quest unsuccessfully, trigger all \"Lost:\" effects in play.",
                 FlavorText = "Your party is scouting the Mines of Moria, searching for signs of Orcs. Dark tunnels and twisting passages spread out in all directions, a labyrinthine maze that you could wander in forever if you take the wrong path.",
-                Number = 16
+                Number = 86
             });
             Cards.Add(new Card() {
                 ImageName = "M1447",
@@ -250,7 +257,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Text = "Response: After a Song card is played, add 1 resource to attached hero's resource pool.",
                 Keywords = new List<string>() { "Attach to a Lore hero.", " Limit 1 per hero." },
-                Number = 17
+                Number = 85
             });
             Cards.Add(new Card() {
                 ImageName = "M1443",
@@ -262,7 +269,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 5,
                 Text = "Action: Enemies engaged with you cannot attack you this phase.",
                 Keywords = new List<string>() { "Secrecy 3." },
-                Number = 18
+                Number = 81
             });
             Cards.Add(new Card() {
                 ImageName = "M1442",
@@ -275,7 +282,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 2,
                 Text = "Attached character gets +1 hit point and +1 Defense.",
                 Keywords = new List<string>() { "Attach to a Dwarf or Hobbit character.", " Restricted." },
-                Number = 19
+                Number = 80
             });
             Cards.Add(new Card() {
                 Title = "Rock Adder",
@@ -293,7 +300,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Rock Adder cannot be attacked unless it has dealt at least 1 damage this round.",
                 Shadow = "Shadow: If this attack is undefended, the defending player must discard 1 character he controls from play.",
                 Threat = 1,
-                Number = 20
+                Number = 100
             });
             Cards.Add(new Card() {
                 ImageName = "M1453",
@@ -307,7 +314,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 1,
                 QuestPoints = 3,
                 VictoryPoints = 0,
-                Number = 21
+                Number = 91
             });
             Cards.Add(new Card() {
                 ImageName = "M1454",
@@ -321,7 +328,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 3,
                 QuestPoints = 5,
                 VictoryPoints = 0,
-                Number = 22
+                Number = 92
             });
             Cards.Add(new Card() {
                 ImageName = "M1458",
@@ -331,7 +338,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Long Dark",
                 Quantity = 2,
                 Text = "When Revealed: The first player makes a locate test. If this test is failed, raise each player's threat by 7, remove all progress tokens from play, and trigger all 'Lost:' effects in play.",
-                Number = 23
+                Number = 96
             });
             Cards.Add(new Card() {
                 ImageName = "M1445",
@@ -347,7 +354,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 1,
                 Text = "Action: Exhaust Warden of Healing to heal 1 damage on up to 2 different characters. Then, you may pay 2 Lore resources to ready Warden of Healing.",
-                Number = 24
+                Number = 83
             });
             Cards.Add(new Card() {
                 ImageName = "M1446",
@@ -358,7 +365,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Action: Exhaust an Istari character to search your deck for 1 card and add it to your hand. Shuffle your deck.",
-                Number = 25
+                Number = 84
             });
         }
     }

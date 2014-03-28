@@ -148,15 +148,6 @@ namespace HallOfBeorn.Services
             AddSet(new TheMassingatOsgiliath());
             AddSet(new TheBattleofLakeTown());
             AddSet(new TheStoneofErech());
-
-            //AddSet(new IsengardCyclePlayerCards());
-            //AddSet(new Ninineliph());
-            //AddSet(new TheDunlandTrap());
-            //AddSet(new TheThreeTrials());
-            //AddSet(new TroubleinTharbad());
-            //AddSet(new BoarandRaven());
-            //AddSet(new CelebrimborsForge());
-            //AddSet(new TheRoadDarkens());
         }
 
         private void LoadDecks()
