@@ -172,7 +172,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 3,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 5,
-                Number = 11
+                Number = 14
             });
             Cards.Add(new Card() {
                 ImageName = "M1793",
@@ -189,7 +189,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 3,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 12
+                Number = 15
             });
             Cards.Add(new Card() {
                 ImageName = "M1794",
@@ -206,7 +206,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 3,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 13
+                Number = 16
             });
             Cards.Add(new Card() {
                 ImageName = "M1795",
@@ -223,7 +223,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 3,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 14
+                Number = 17
             });
             Cards.Add(new Card() {
                 ImageName = "M1796",
@@ -237,7 +237,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 3,
-                Number = 15
+                Number = 18
             });
             Cards.Add(new Card() {
                 ImageName = "M1797",
@@ -252,7 +252,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 5,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 16
+                Number = 19
             });
             Cards.Add(new Card() {
                 ImageName = "M1798",
@@ -267,7 +267,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 2,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 2,
-                Number = 17
+                Number = 20
             });
             Cards.Add(new Card() {
                 ImageName = "M1799",
@@ -282,7 +282,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 4,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 18
+                Number = 21
             });
             Cards.Add(new Card() {
                 ImageName = "M1800",
@@ -300,7 +300,7 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 QuestPoints = 5,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 19
+                Number = 22
             });
             Cards.Add(new Card() {
                 ImageName = "M1801",
@@ -311,7 +311,7 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 Keywords = new List<string>() { "Surge." },
                 EncounterSet = "The Steward's Fear",
                 Quantity = 2,
-                Number = 20
+                Number = 23
             });
             Cards.Add(new Card() {
                 ImageName = "M1802",
@@ -321,7 +321,7 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 Text = "When Revealed: Randomly select 1 ally controlled by the first player, if able. The first player deals X damage to one of his heroes, where X is that ally's Attack. Then discard that ally. If no ally is discarded by this effect, A Knife in the Back gains surge.",
                 EncounterSet = "The Steward's Fear",
                 Quantity = 3,
-                Number = 21
+                Number = 24
             });
             Cards.Add(new Card() {
                 ImageName = "M1803",
@@ -332,7 +332,7 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 Shadow = "Shadow: If this attack destroys a character, remove all tokens from the current quest.",
                 EncounterSet = "The Steward's Fear",
                 Quantity = 2,
-                Number = 22
+                Number = 25
             });
             Cards.Add(new Card() {
                 ImageName = "M1804",
@@ -344,7 +344,7 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
                 VictoryPoints = 1,
-                Number = 23
+                Number = 26
             });
             Cards.Add(new Card() {
                 ImageName = "M1805",
@@ -356,7 +356,7 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
                 VictoryPoints = 1,
-                Number = 24
+                Number = 27
             });
             Cards.Add(new Card() {
                 ImageName = "M1806",
@@ -368,7 +368,7 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
                 VictoryPoints = 1,
-                Number = 25
+                Number = 28
             });
             Cards.Add(new Card() {
                 ImageName = "M1807",
@@ -379,7 +379,7 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 Text = "Reveal 1 additional card from the encounter deck and add it to the staging area during the staging step each round.If a hero is destroyed by an enemy attack, the players have lost the game.",
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 26
+                Number = 29
             });
             Cards.Add(new Card() {
                 ImageName = "M1808",
@@ -390,7 +390,7 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 Text = "Forced: At the end of the round, place 1 resource token on Up in Flames and discard the top X cards of each player's deck. X is the number of resource tokens on Up in Flames.If any player has no cards in his deck, the players have lost the game.",
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 27
+                Number = 30
             });
             Cards.Add(new Card() {
                 ImageName = "M1809",
@@ -401,39 +401,57 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 Text = "At the end of each round, raise each player's threat by 2.",
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 28
+                Number = 31
             });
             Cards.Add(new Card() {
                 ImageName = "M1789",
-                Title = "Conspiracy - 1A",
+                Title = "Conspiracy",
+                StageNumber = 1,
                 Id = "4e12f20f-aec3-4311-a656-10a517fd97fe",
                 CardType = CardType.Quest,
-                Setup = "ttttttt-",
                 Text = "Setup: Create the underworld deck. Remove Roots of Mindolluin from the encounter deck and set it aside, out of play. Shuffle all Villain cards and randomly set one aside, out of play, without looking at it. Remove the others from the game. Repeat this with all Plot cards.",
+                OppositeText =
+@"When Revealed: Search the encounter deck for The Fourth Star and make it the active location. Shuffle the encounter deck.
+
+Forced: After the active location leaves play as an explored location, place 1 resource token on this quest.
+
+If there are 4 or more resource tokens on Conspiracy, advance to the next stage.",
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 29
+                Number = 11
             });
             Cards.Add(new Card() {
                 ImageName = "M1790",
-                Title = "The Grand Design - 2A",
+                Title = "The Grand Design",
+                StageNumber = 2,
                 Id = "21ee317d-9aca-43be-9782-521539827cb8",
                 CardType = CardType.Quest,
                 Text = "When Revealed: Reveal the set aside Plot card and add it to the staging area.",
+                OppositeText = 
+@"When Revealed: Make Roots of Mindolluin the active location, returning any other active location to the staging area.
+
+Forced: After the active location leaves play as an explored location place 1 resource token on this quest.
+
+If there are 4 or more resource tokens on The Grand Design, advance to the next stage.",
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 30
+                Number = 12
             });
             Cards.Add(new Card() {
                 ImageName = "M1791",
-                Title = "The Confrontation - 3A",
+                Title = "The Confrontation",
+                StageNumber = 3,
                 Id = "8239e81a-f779-4c7c-b586-cd5ad732f061",
                 CardType = CardType.Quest,
                 Text = "When Revealed: Reveal the set aside Villain card and add it to the staging area.",
+                OppositeText = 
+@"When Revealed: Shuffle the underworld deck into the encounter deck.
+
+The players cannot defeat this stage while a Villain is in play. If this stage is defeated, the players have won the game.",
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
                 QuestPoints = 15,
-                Number = 31
+                Number = 13
             });
         }
     }
