@@ -31,7 +31,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Discard Caldara to put 1 Spirit ally from your discard pile into play for each other hero you control with a printed Spirit resource icon.",
                 FlavorText = "...there is no purpose higher in the world as it now stands than the good of Gondor...\r\n-Denethor, The Return of the King",
                 Quantity = 1,
-                Number = 197
+                Number = 107
             });
             Cards.Add(new Card() {
                 ImageName = "M1892",
@@ -49,7 +49,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Exhaust Anborn to return 1 Trap card from your discard pile to your hand.",
                 FlavorText = "\"I sent my keenest huntsmen to seek him, but he slipped them, and they had no sight of him till now, save Anborn.\"\r\n-Faramir, The Two Towers",
                 Quantity = 3,
-                Number = 204
+                Number = 114
             });
             Cards.Add(new Card() {
                 ImageName = "M1893",
@@ -61,7 +61,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Trap." },
                 Text = "Play Poisoned Stakes into the staging area unattached.\r\nIf unattached, attach Poisoned Stakes to the next eligble enemy that enters the staging area.\r\nAt the end of each round, deal 2 damage to attached enemy.",
                 Quantity = 3,
-                Number = 205
+                Number = 115
             });
             Cards.Add(new Card() {
                 ImageName = "M1891",
@@ -73,7 +73,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Choose a Silvan or Noldor ally you control. That ally gets +2 Willpower until the end of the phase. At the end of the phase, shuffle that ally into its owner's deck if it is still in play.",
                 FlavorText = "\"For deep in the hears of all my kindred lies the sea-longing, which it is perilous to stir\"\r\n-Legolas, The Return of the King",
                 Quantity = 3,
-                Number = 203
+                Number = 113
             });
             Cards.Add(new Card() {
                 ImageName = "M1889",
@@ -85,7 +85,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Encounter Action: Engage each enemy in play.",
                 FlavorText = "..we have this honour: ever we bear the brunt of the chief hatred of the Dark Lord, for that hatred comes down out of the of the depths of time and over the deeps of the Sea.\r\n-Denethor, The Return of the King",
                 Quantity = 3,
-                Number = 201
+                Number = 111
             });
             Cards.Add(new Card() {
                 ImageName = "M1887",
@@ -99,7 +99,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Attach to a Leadership hero." },
                 Text = "Reduce the cost to play Tome of Atanator by 1 for each you control with the printed Leadership resource icon.\r\nAction: Discard Tome of Atanator to play any Leadership event card in your discard pile as if it were in your hand. Then, place that event on the bottom of your deck.",
                 Quantity = 3,
-                Number = 199
+                Number = 109
             });
             Cards.Add(new Card() {
                 ImageName = "M1888",
@@ -116,7 +116,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Rohan." },
                 Text = "If there is at least 1 Rohan hero in play, lower the cost to play Guthlaf by 1.\r\nIf there is at least 1 Gondor hero in play, Guthlaf gains sentinel.",
                 Quantity = 3,
-                Number = 200
+                Number = 110
             });
             Cards.Add(new Card() {
                 ImageName = "M1890",
@@ -133,7 +133,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Gondor." },
                 Text = "Action: Discard the top 3 card of your deck to put Emery into play from your hand, under any player's control. Then, if any of the discarded cards have the Tactics, Lore or Leadership sphere, discard Emery.",
                 Quantity = 3,
-                Number = 202
+                Number = 112
             });
             Cards.Add(new Card() {
                 ImageName = "M1886",
@@ -150,7 +150,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: After Squire of the Citadel leaves play, add 1 resource to a Gondor hero's resource pool.",
                 FlavorText = "As he spoke he struck a small silver gong that stood near his footstool, and at once servants came forward.\r\n-The Return of the King",
                 Quantity = 3,
-                Number = 198
+                Number = 108
             });
             Cards.Add(new Card() {
                 ImageName = "M1894",
@@ -162,7 +162,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Text = "Action: Discard the top 2 cards of your deck. You may attach 1 attachment card discarded by this effect to an eligible Dwarf character in play.",
                 FlavorText = "Gimli the Dwarf alone wore openly a short shirt of steel-rings, for dwarves make light of burdens...\r\n-The Fellowship of the Ring",
-                Number = 206
+                Number = 116
             });
             Cards.Add(new Card() {
                 ImageName = "M1902",
@@ -274,7 +274,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1895",
-                Title = "The Ambush - 1A",
+                Title = "The Ambush",
+                StageNumber = 1,
                 Id = "23768a0d-bf6c-4405-9b09-ea8fdbfded31",
                 CardType = CardType.Quest,
                 EncounterSet = "The Blood of Gondor",
@@ -289,14 +290,21 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1896",
-                Title = "Captured! - 2A",
+                Title = "Captured!",
+                NormalizedTitle = "Captured",
+                StageNumber = 2,
                 Id = "d2bf00ad-2e1e-4537-b662-f6f20f9a1cfe",
                 CardType = CardType.Quest,
                 EncounterSet = "The Blood of Gondor",
                 FlavorText = "Faramir and Lord Alcaron have been captured! Through the throng of warriors, you see their bloodied torn forms rushed eastward by a band of Uruks. You must move quickly to prevent the unthinkable! If there is to be any hope of rescuing your friends, you must fight your way out of the ambush.",
                 Text = "When Revealed: Place Faramir and Lord Alcaron under Captured! (they are in play but players cannot gain control of them). Each player turns each of his hudden cards faceup.",
                 Keywords = new List<string> { "Battle." },
-                OppositeText = "At the beginning of the quest phase, each player takes 1 hidden card.\r\nIf a player has 5 hidden cards, he must turn them faceup.\r\nIf the players defeat this stage, they have won the game.",
+                OppositeText = 
+@"At the beginning of the quest phase, each player takes 1 hidden card.
+
+If a player has 5 hidden cards, he must turn them faceup.
+
+If the players defeat this stage, they have won the game.",
                 Quantity = 1,
                 QuestPoints = 15,
                 Number = 118
@@ -378,7 +386,10 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 4,
                 Traits = new List<string>() { "Gondor.", " Noble.", " Ranger." },
                 Keywords = new List<string>() { "The first player gains control of [Card]." },
-                Text = "Combat Action: Exhaust Faramir to turn 1 hidden card faceup. If that card is an enemy, deal 3 damage to it.\r\nIf Faramir leaves play, the players have lost the game.",
+                Text = 
+@"Combat Action: Exhaust Faramir to turn 1 hidden card faceup. If that card is an enemy, deal 3 damage to it.
+
+If Faramir leaves play, the players have lost the game.",
                 EncounterSet = "The Blood of Gondor",
                 Quantity = 1,
                 Number = 132
@@ -413,7 +424,10 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Traits = new List<string>() { "Gondor.", " Noble." },
                 Keywords = new List<string>() { "The first player gains control of [Card]." },
-                Text = "Action: Exhaust Lord Alcaron to return an enemy engaged with you to the staging area.\r\nIf Lord Alcaron leaves play, the players have lost the game.",
+                Text = 
+@"Action: Exhaust Lord Alcaron to return an enemy engaged with you to the staging area.
+
+If Lord Alcaron leaves play, the players have lost the game.",
                 EncounterSet = "The Blood of Gondor",
                 Quantity = 1,
                 Number = 133

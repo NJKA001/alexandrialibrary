@@ -31,7 +31,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Silvan." },
                 Text = "Each hero you control with a printed Lore resource icon gets -1 threat cost.",
                 Quantity = 1,
-                Number = 1
+                Number = 32
             });
             Cards.Add(new Card() {
                 ImageName = "M1811",
@@ -48,7 +48,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Outlands." },
                 Text = "While you control Outlands allies that belong to 4 different spheres, ready Forlong at the beginning of each phase.",
                 Quantity = 3,
-                Number = 2
+                Number = 33
             });
             Cards.Add(new Card() {
                 ImageName = "M1812",
@@ -59,7 +59,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 2,
                 Text = "Play only if each hero you control has a printed Leadership resource icon.Action: Ready each ally in play.",
                 Quantity = 3,
-                Number = 3
+                Number = 34
             });
             Cards.Add(new Card() {
                 ImageName = "M1813",
@@ -72,7 +72,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: After attached hero attacks and destroys an enemy, deal 1 damage to another enemy that shares a Trait with the enemy just destroyed.",
                 Keywords = new List<string>() { "Attach to a Tactics hero.", " Limit 1 per hero." },
                 Quantity = 3,
-                Number = 4
+                Number = 35
             });
             Cards.Add(new Card() {
                 ImageName = "M1814",
@@ -83,7 +83,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 2,
                 Text = "Play only if each hero you control has the printed Tactics resource icon.Action: Until the end of the phase, if the current quest has no keyword it gains Battle.",
                 Quantity = 3,
-                Number = 5
+                Number = 36
             });
             Cards.Add(new Card() {
                 ImageName = "M1815",
@@ -99,7 +99,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Silvan." },
                 Text = "Forced: After a character leaves play, discard Silvan Refugee from play.",
                 Quantity = 3,
-                Number = 6
+                Number = 37
             });
             Cards.Add(new Card() {
                 ImageName = "M1816",
@@ -110,7 +110,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 2,
                 Text = "Play only if each hero you control has the printed Spirit resource icon.Action: Until the end of the phase, Spirit characters use their Willpower instead of Defense.",
                 Quantity = 3,
-                Number = 7
+                Number = 38
             });
             Cards.Add(new Card() {
                 ImageName = "M1817",
@@ -126,7 +126,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Noldor." },
                 Text = "Response: After a card effect adds any number of resources to the resource pool of a hero you control, Harbor Master gains +1 Defense until the end of the round.",
                 Quantity = 3,
-                Number = 8
+                Number = 39
             });
             Cards.Add(new Card() {
                 ImageName = "M1818",
@@ -137,7 +137,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 2,
                 Text = "Play only if each hero you control has a printed Lore resource icon.Action: Until the end of the phase, enemies do not make engagement checks",
                 Quantity = 3,
-                Number = 9
+                Number = 40
             });
             Cards.Add(new Card() {
                 ImageName = "M1819",
@@ -153,7 +153,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Gondor." },
                 Text = "If each hero you control belongs to the same sphere of influence, you may assign damage from undefended enemy attacks to White Tower Watchman instead of a hero you control.",
                 Quantity = 3,
-                Number = 10
+                Number = 41
             });
             Cards.Add(new Card() {
                 ImageName = "M1823",
@@ -171,7 +171,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 4,
                 EncounterSet = "The Druadan Forest",
                 Quantity = 1,
-                Number = 11
+                Number = 45
             });
             Cards.Add(new Card() {
                 ImageName = "M1824",
@@ -189,7 +189,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 0,
                 EncounterSet = "The Druadan Forest",
                 Quantity = 3,
-                Number = 12
+                Number = 46
             });
             Cards.Add(new Card() {
                 ImageName = "M1825",
@@ -208,7 +208,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 EncounterSet = "The Druadan Forest",
                 Quantity = 3,
-                Number = 13
+                Number = 47
             });
             Cards.Add(new Card() {
                 ImageName = "M1826",
@@ -227,7 +227,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 EncounterSet = "The Druadan Forest",
                 Quantity = 4,
-                Number = 14
+                Number = 48
             });
             Cards.Add(new Card() {
                 ImageName = "M1827",
@@ -245,7 +245,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 EncounterSet = "The Druadan Forest",
                 Quantity = 3,
-                Number = 15
+                Number = 49
             });
             Cards.Add(new Card() {
                 ImageName = "M1828",
@@ -258,7 +258,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 EncounterSet = "The Druadan Forest",
                 Quantity = 1,
-                Number = 16
+                Number = 50
             });
             Cards.Add(new Card() {
                 ImageName = "M1829",
@@ -271,7 +271,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 EncounterSet = "The Druadan Forest",
                 Quantity = 3,
-                Number = 17
+                Number = 51
             });
             Cards.Add(new Card() {
                 ImageName = "M1830",
@@ -284,7 +284,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 5,
                 EncounterSet = "The Druadan Forest",
                 Quantity = 3,
-                Number = 18
+                Number = 52
             });
             Cards.Add(new Card() {
                 ImageName = "M1831",
@@ -295,7 +295,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Attacking enemy gets +1 Attack for each hero the defending player controls with no resources.",
                 EncounterSet = "The Druadan Forest",
                 Quantity = 3,
-                Number = 19
+                Number = 53
             });
             Cards.Add(new Card() {
                 ImageName = "M1832",
@@ -307,7 +307,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Prowl 2." },
                 EncounterSet = "The Druadan Forest",
                 Quantity = 3,
-                Number = 20
+                Number = 54
             });
             Cards.Add(new Card() {
                 ImageName = "M1833",
@@ -319,40 +319,49 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Surge." },
                 EncounterSet = "The Druadan Forest.",
                 Quantity = 2,
-                Number = 21
+                Number = 55
             });
             Cards.Add(new Card() {
                 ImageName = "M1820",
-                Title = "The Pursuit - 1A",
+                Title = "The Pursuit",
+                StageNumber = 1,
                 Id = "71079813-3afe-41b7-8746-92dcc1f91084",
                 CardType = CardType.Quest,
-                Setup = "t",
                 Text = "Setup: Search the encounter deck for Drû-buri-Drû and set him aside, out of play. Shuffle the encounter deck.",
+                OppositeText = "When Revealed: Reveal 1 card from the encounter deck per player and add it to the staging area.",
                 EncounterSet = "The Druadan Forest",
                 Quantity = 1,
                 QuestPoints = 11,
-                Number = 22
+                Number = 42
             });
             Cards.Add(new Card() {
                 ImageName = "M1821",
-                Title = "An Untimely End - 2A",
+                Title = "An Untimely End",
+                StageNumber = 2,
                 Id = "346fda89-94df-410a-8027-41eacbf27238",
                 CardType = CardType.Quest,
                 EncounterSet = "The Druadan Forest",
+                OppositeText = "Archery damage must be assigned to allies, if able.",
                 Quantity = 1,
                 QuestPoints = 17,
-                Number = 23
+                Number = 43
             });
             Cards.Add(new Card() {
                 ImageName = "M1822",
-                Title = "The Passage Out - 3A",
+                Title = "The Passage Out",
+                StageNumber = 3,
                 Id = "f6578eb7-1b94-458b-aba1-82b406507a4d",
                 CardType = CardType.Quest,
+                Keywords = new List<string> { "Siege." },
                 Text = "When Revealed: Add Drû-buri-Drû to the staging area.",
+                OppositeText =
+@"Characters use their Willpower instead of Attack when attacking enemies. If an enemy would be damaged this way, place progress tokens on it instead of damage tokens. When an enemy has progress equal to its hit points, add it to the victory display and place those progress tokens on the quest.
+
+If the players defeat this stage, they have won the game.",
                 EncounterSet = "The Druadan Forest",
                 Quantity = 1,
                 QuestPoints = 14,
-                Number = 24
+                Number = 44
             });
         }
     }

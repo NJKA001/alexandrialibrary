@@ -31,7 +31,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Hobbit." },
                 Text = "If each hero you control has the Hobbit trait, Pippin gains: 'Response: After an enemy engages you, raise your threat by 3 to return it to the staging area. Until the end of the round, that enemy cannot engage you.'",
                 Quantity = 1,
-                Number = 1
+                Number = 56
             });
             Cards.Add(new Card() {
                 ImageName = "M1835",
@@ -48,7 +48,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Gondor.", " Noble." },
                 Text = "Denethor gets -1 Willpower for each damaged hero you control.Discard Denethor if his Willpower is 0 or less.",
                 Quantity = 3,
-                Number = 2
+                Number = 57
             });
             Cards.Add(new Card() {
                 ImageName = "M1836",
@@ -62,7 +62,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Attach to a Gondor or Outlands hero." },
                 Text = "If each hero you control has a printed Leadership resource icon, Lord of Morthond gains: 'Response: After you play a Lore, Spirit, or Tactics ally, draw 1 card.'",
                 Quantity = 3,
-                Number = 3
+                Number = 58
             });
             Cards.Add(new Card() {
                 ImageName = "M1837",
@@ -76,7 +76,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Attach to a Tactics hero." },
                 Text = "Reduce the cost to play Book of Eldacar by 1 for each hero you control with a printed Tactics resource icon.Action: Discard Book of Eldacar to play any Tactics event card in your discard pile as if it were in your hand. Then, place that event on the bottom of your deck.",
                 Quantity = 3,
-                Number = 4
+                Number = 59
             });
             Cards.Add(new Card() {
                 ImageName = "M1838",
@@ -88,7 +88,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Gondor." },
                 Text = "Response: Cancel up to 2 points of damage just dealt to a Gondor character.",
                 Quantity = 3,
-                Number = 5
+                Number = 60
             });
             Cards.Add(new Card() {
                 ImageName = "M1839",
@@ -104,7 +104,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Gondor.", " Craftsman." },
                 Text = "Response: After an encounter card with surge is revealed, discard Minas Tirith Lampwright to name enemy, location, or treachery. If the next encounter card revealed is the named type, discard it without resolving its effects.",
                 Quantity = 3,
-                Number = 6
+                Number = 61
             });
             Cards.Add(new Card() {
                 ImageName = "M1840",
@@ -115,7 +115,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Text = "Response: After a Hobbit hero you control exhausts to defend an attack, choose another enemy engaged with you and reveal the attacking enemy's shadow card. If that shadow card has no shadow effect, resolve this enemy's attack against the chosen enemy. If that shadow card has a shadow effect, resolve this attack as normal.",
                 Quantity = 3,
-                Number = 7
+                Number = 62
             });
             Cards.Add(new Card() {
                 ImageName = "M1841",
@@ -132,7 +132,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Ranged." },
                 Text = "Response: After Ithilien Archer attacks and damages an enemy, return that enemy to the staging area.",
                 Quantity = 3,
-                Number = 8
+                Number = 63
             });
             Cards.Add(new Card() {
                 ImageName = "M1842",
@@ -144,7 +144,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Trap." },
                 Text = "Play Ithilien Pit into the staging area unattached.If unattached, attach Ithilien Pit to the next eligible enemy that enters the staging area.Any character may choose attached enemy as the target of an attack.",
                 Quantity = 3,
-                Number = 9
+                Number = 64
             });
             Cards.Add(new Card() {
                 ImageName = "M1843",
@@ -156,7 +156,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Play only if each of your heroes is a Hobbit." },
                 Text = "Combat Action: Enemies engaged with you do not attack this round. You cannot declare attacks this round.",
                 Quantity = 3,
-                Number = 10
+                Number = 65
             });
             Cards.Add(new Card() {
                 ImageName = "M1844",
@@ -208,7 +208,7 @@ When the players defeat this stage, end the game. Compare the number of tokens o
                 Text = "Response: After a villager token is discarded, exhaust Lord Alcaron to place that villager token on a location instead.If Lord Alcaron leaves play, the players have lost the game.",
                 EncounterSet = "Encounter at Amon Din",
                 Quantity = 1,
-                Number = 13
+                Number = 70
             });
             Cards.Add(new Card() {
                 ImageName = "M1846",
@@ -218,7 +218,7 @@ When the players defeat this stage, end the game. Compare the number of tokens o
                 Text = "If a location leaves play as an explored location, move any villager tokens from that location to Rescued Villagers.At the end of the game, if there are more villager tokens here than damage tokens on Dead Vilagers, the players have won.",
                 EncounterSet = "Encounter at Amon Din",
                 Quantity = 1,
-                Number = 14
+                Number = 68
             });
             Cards.Add(new Card() {
                 ImageName = "M1847",
@@ -228,7 +228,7 @@ When the players defeat this stage, end the game. Compare the number of tokens o
                 Text = "If a villager token is discarded from a location, objective or quest stage, place a damage token on Dead Villagers.At the end of the game, if there are more damage tokens here than villager tokens on Rescued Villagers, the players have lost.",
                 EncounterSet = "Encounter at Amon Din",
                 Quantity = 1,
-                Number = 15
+                Number = 69
             });
             Cards.Add(new Card() {
                 ImageName = "M1849",
@@ -252,7 +252,7 @@ While Ghulat is in play, the game cannot end.",
                 EncounterSet = "Encounter at Amon Din",
                 VictoryPoints = 2,
                 Quantity = 1,
-                Number = 16
+                Number = 71
             });
             Cards.Add(new Card() {
                 ImageName = "M1850",
@@ -269,7 +269,7 @@ While Ghulat is in play, the game cannot end.",
                 Shadow = "Shadow: If this attack destroys a character, discard 1 villager token from Rescued Villagers.",
                 EncounterSet = "Encounter at Amon Din",
                 Quantity = 4,
-                Number = 17
+                Number = 72
             });
             Cards.Add(new Card() {
                 ImageName = "M1851",
@@ -286,7 +286,7 @@ While Ghulat is in play, the game cannot end.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack. (+2 Attack instead if undefended.)",
                 EncounterSet = "Encounter at Amon Din",
                 Quantity = 3,
-                Number = 18
+                Number = 73
             });
             Cards.Add(new Card() {
                 ImageName = "M1852",
@@ -302,7 +302,7 @@ While Ghulat is in play, the game cannot end.",
                 Text = "When Revealed: Discard the character with the fewest remaining hit points. That character's controller may discard 3 cards at random from his hand to prevent this effect.",
                 EncounterSet = "Encounter at Amon Din",
                 Quantity = 2,
-                Number = 19
+                Number = 74
             });
             Cards.Add(new Card() {
                 ImageName = "M1853",
@@ -317,7 +317,7 @@ While Ghulat is in play, the game cannot end.",
                 EncounterSet = "Encounter at Amon Din",
                 VictoryPoints = 1,
                 Quantity = 4,
-                Number = 20
+                Number = 75
             });
             Cards.Add(new Card() {
                 ImageName = "M1854",
@@ -332,7 +332,7 @@ While Ghulat is in play, the game cannot end.",
                 EncounterSet = "Encounter at Amon Din",
                 VictoryPoints = 1,
                 Quantity = 4,
-                Number = 21
+                Number = 76
             });
             Cards.Add(new Card() {
                 ImageName = "M1855",
@@ -347,7 +347,7 @@ While Ghulat is in play, the game cannot end.",
                 EncounterSet = "Encounter at Amon Din",
                 VictoryPoints = 1,
                 Quantity = 3,
-                Number = 22
+                Number = 77
             });
             Cards.Add(new Card() {
                 ImageName = "M1856",
@@ -359,7 +359,7 @@ While Ghulat is in play, the game cannot end.",
                 Shadow = "Shadow: Defending player raises his threat by 1 for each damage token on Dead Villagers.",
                 EncounterSet = "Encounter at Amon Din",
                 Quantity = 2,
-                Number = 23
+                Number = 78
             });
             Cards.Add(new Card() {
                 ImageName = "M1857",
@@ -371,7 +371,7 @@ While Ghulat is in play, the game cannot end.",
                 Shadow = "Shadow: If this attack destroys a character, discard 1 villager token from Rescued Villagers.",
                 EncounterSet = "Encounter at Amon Din",
                 Quantity = 2,
-                Number = 24
+                Number = 79
             });
             Cards.Add(new Card() {
                 ImageName = "M1858",
@@ -382,7 +382,7 @@ While Ghulat is in play, the game cannot end.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack for each damage token on Dead Villagers.",
                 EncounterSet = "Encounter at Amon Din",
                 Quantity = 2,
-                Number = 25
+                Number = 80
             });
         }
     }

@@ -167,7 +167,8 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1869",
-                Title = "Retake the City - 1A",
+                Title = "Retake the City",
+                StageNumber = 1,
                 Id = "c46c37c3-b2e7-4e28-9466-e3a371417c8b",
                 CardType = CardType.Quest,
                 EncounterSet = "Assault on Osgiliath",

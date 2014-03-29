@@ -225,7 +225,12 @@ namespace HallOfBeorn.Models.Sets
                 Title = "The Morgul Rider",
                 FlavorText = "You've delivered justice to the traitor Alcaron. You rush forward to help Lord Faramir, who is still struggling with his captors. Then another shrill crwy emanates from the city. It pierces your ears and chills your heart. With a dull clangor; the gates of Minas Morgul open. Mounted on a great black horse, a Nazgûl rides forth to claim Sauron's prize.",
                 Text = "When Revealed: Add ~Nazgûl of Minas ~Morgul and The White ~Bridge to the staging area.",
-                OppositeText = "When Revealed: Reveal 1 card per player from the encounter deck and add it to the staging area.\r\n~Nazgûl of Minas ~Morgul cannot leave play unless destroyed.\r\nIf ~Nazgûl of Minas ~Morgul is defeated, the players have won the game.",
+                OppositeText = 
+@"When Revealed: Reveal 1 card per player from the encounter deck and add it to the staging area.
+
+~Nazgûl of Minas ~Morgul cannot leave play unless destroyed.
+
+If ~Nazgûl of Minas ~Morgul is defeated, the players have won the game.",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 1,
                 Number = 146
@@ -238,7 +243,12 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Objective,
                 Title = "To the Tower",
                 Traits = new List<string> { "Captured." },
-                Text = "To the Tower cannot leave the staging area.\r\nRemove Faramir from the game.\r\nIf 10 or more progress tokens are on To the Tower, the players have lost the game.",
+                Text = 
+@"To the Tower cannot leave the staging area.
+
+Remove Faramir from the game.
+
+If 10 or more progress tokens are on To the Tower, the players have lost the game.",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 1,
                 Number = 147
