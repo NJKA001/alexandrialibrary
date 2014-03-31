@@ -16,7 +16,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card() {
                 Title = "Passage Through Mirkwood",
                 Id = "e84f94bf-201b-4adf-95d2-0012e0bb5001",
-                CardType = CardType.Nightmare,
+                CardType = CardType.Nightmare_Setup,
                 Keywords = new List<string>() { "Setup." },
                 Text = "The Quest Deck has been modified for Nightmare Mode. Flip this card over and keep it next to the quest deck. Its effect remains active throughout the game, which is now ready to begin.",
                 EncounterSet = "Passage Through Mirkwood - Nightmare",
@@ -27,7 +27,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card() {
                 Title = "Journey Along the Anduin",
                 Id = "e84f94bf-201b-4adf-95d2-0012e0bb5003",
-                CardType = CardType.Nightmare,
+                CardType = CardType.Nightmare_Setup,
                 Keywords = new List<string>() { "Setup." },
                 Text = "The Quest Deck has been modified for Nightmare Mode. Flip this card over and keep it next to the quest deck. Its effect remains active throughout the game, which is now ready to begin.",
                 EncounterSet = "Journey Along the Anduin - Nightmare",
@@ -37,7 +37,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card() {
                 Title = "Escape from Dol Guldur",
                 Id = "e84f94bf-201b-4adf-95d2-0012e0bb5005",
-                CardType = CardType.Nightmare,
+                CardType = CardType.Nightmare_Setup,
                 Keywords = new List<string>() { "Setup." },
                 Text = "The Quest Deck has been modified for Nightmare Mode. Flip this card over and keep it next to the quest deck. Its effect remains active throughout the game, which is now ready to begin.",
                 EncounterSet = "Escape from Dol Guldur - Nightmare",

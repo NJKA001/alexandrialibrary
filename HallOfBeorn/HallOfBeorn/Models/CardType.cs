@@ -9,7 +9,7 @@ namespace HallOfBeorn.Models
     {
         None = 0,
         Quest = 1,
-        Nightmare = 2,
+        Nightmare_Setup = 2,
         Campaign = 3,
         Encounter = 11,
         Enemy = 12,

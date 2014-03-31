@@ -276,6 +276,7 @@
     <Compile Include="Models\Sets\FoundationsOfStone.cs" />
     <Compile Include="Models\Sets\HeirsOfNumenor.cs" />
     <Compile Include="Models\Sets\KhazadDum.cs" />
+    <Compile Include="Models\Sets\PassageThroughMirkwoodnNightmare.cs" />
     <Compile Include="Models\Sets\ReturnToMirkwood.cs" />
     <Compile Include="Models\Sets\RoadToRivendell.cs" />
     <Compile Include="Models\Sets\ShadowAndFlame.cs" />
@@ -379,8 +380,9 @@
     <Content Include="Images\Cards\Escape-from-Dol-Guldur-Nightmare\Crazed-Captive.jpg" />
     <Content Include="Images\Cards\Escape-from-Dol-Guldur-Nightmare\Dark-Interrogation.jpg" />
     <Content Include="Images\Cards\Escape-from-Dol-Guldur-Nightmare\Dungeon-Labyrinth.jpg" />
-    <Content Include="Images\Cards\Escape-from-Dol-Guldur-Nightmare\Escape-from-Dol-Guldur-Nightmare-Setup.jpg" />
-    <Content Include="Images\Cards\Escape-from-Dol-Guldur-Nightmare\Escape-from-Dol-Guldur-Nightmare.jpg" />
+    <Content Include="Images\Cards\Escape-from-Dol-Guldur-Nightmare\Escape-from-Dol-Guldur-Nightmare-SetupA.jpg" />
+    <Content Include="Images\Cards\Escape-from-Dol-Guldur-Nightmare\Escape-from-Dol-Guldur-Nightmare-SetupB.jpg" />
+    <Content Include="Images\Cards\Escape-from-Dol-Guldur-Nightmare\Escape-from-Dol-Guldur-Nightmare.png" />
     <Content Include="Images\Cards\Escape-from-Dol-Guldur-Nightmare\Sentinel-of-Shadow.jpg" />
     <Content Include="Images\Cards\Escape-from-Dol-Guldur-Nightmare\Spider-of-Dol-Guldur.jpg" />
     <Content Include="Images\Cards\Escape-from-Dol-Guldur-Nightmare\Torture-Chamber.jpg" />
@@ -400,8 +402,9 @@
     <Content Include="Images\Cards\Journey-Along-The-Anduin-Nightmare\Anduin-Troll-Spawn.jpg" />
     <Content Include="Images\Cards\Journey-Along-The-Anduin-Nightmare\Brown-Water-Rats.jpg" />
     <Content Include="Images\Cards\Journey-Along-The-Anduin-Nightmare\Gladden-Marshlands.jpg" />
-    <Content Include="Images\Cards\Journey-Along-The-Anduin-Nightmare\Journey-Along-the-Anduin-Nightmare-Setup.jpg" />
-    <Content Include="Images\Cards\Journey-Along-The-Anduin-Nightmare\Journey-Along-the-Anduin-Nightmare.jpg" />
+    <Content Include="Images\Cards\Journey-Along-The-Anduin-Nightmare\Journey-Along-the-Anduin-Nightmare-SetupA.jpg" />
+    <Content Include="Images\Cards\Journey-Along-The-Anduin-Nightmare\Journey-Along-the-Anduin-Nightmare-SetupB.jpg" />
+    <Content Include="Images\Cards\Journey-Along-The-Anduin-Nightmare\Journey-Along-the-Anduin-Nightmare.png" />
     <Content Include="Images\Cards\Journey-Along-The-Anduin-Nightmare\Marshland-Outlaws.jpg" />
     <Content Include="Images\Cards\Journey-Along-The-Anduin-Nightmare\Pursuit-on-the-Shore.jpg" />
     <Content Include="Images\Cards\Journey-Along-The-Anduin-Nightmare\Smoking-Blood.jpg" />
@@ -1389,8 +1392,9 @@
     <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\Backtrack.jpg" />
     <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\Forest-Flies.jpg" />
     <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\Glade-of-the-Spawn.jpg" />
-    <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\Passage-Through-Mirkwood-Nightmare-Setup.jpg" />
-    <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\Passage-Through-Mirkwood-Nightmare.jpg" />
+    <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\Passage-Through-Mirkwood-Nightmare-SetupA.jpg" />
+    <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\Passage-Through-Mirkwood-Nightmare-SetupB.jpg" />
+    <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\Passage-Through-Mirkwood-Nightmare.png" />
     <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\Spiders-of-Mirkwood.jpg" />
     <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\The-Spiders-Web.jpg" />
     <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\Ungoliant%27s-Brood.jpg" />

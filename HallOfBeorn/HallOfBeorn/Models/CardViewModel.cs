@@ -337,9 +337,7 @@ namespace HallOfBeorn.Models
             if (_card.ImageType != ImageType.None)
                 format = _card.ImageType;
             else if (!string.IsNullOrEmpty(_card.ImageName))
-            {
                 format = ImageType.Png;
-            }
 
             var ext = string.Format(".{0}", format.ToString().ToLower());
             var set = _card.CardSet.Name.ToUrlSafeString();
@@ -351,14 +349,51 @@ namespace HallOfBeorn.Models
             return string.Format("/Images/Cards/{0}/{1}-{2}{3}{4}", set, title, number, suffix, ext);
         }
 
+        string getSetupCardImagePath(bool isFirst)
+        {
+            var format = ImageType.Jpg;
+            if (_card.ImageType != ImageType.None)
+                format = _card.ImageType;
+            else if (!string.IsNullOrEmpty(_card.ImageName))
+                format = ImageType.Png;
+
+            var ext = string.Format(".{0}", format.ToString().ToLower());
+            var set = _card.CardSet.Name.ToUrlSafeString();
+            var title = _card.Title.ToUrlSafeString();
+            var suffix = isFirst ? "A" : "B";
+
+            return string.Format("/Images/Cards/{0}/{1}-Setup{2}{3}", set, title, suffix, ext);
+        }
+
         public string ImagePath1
         {
-            get { return getQuestCardImagePath(true); }
+            get {
+                switch (_card.CardType)
+                {
+                    case Models.CardType.Quest:
+                        return getQuestCardImagePath(true); 
+                    case Models.CardType.Nightmare_Setup:
+                        return getSetupCardImagePath(true);
+                    default:
+                        return null;
+                }
+            }
         }
 
         public string ImagePath2
         {
-            get { return getQuestCardImagePath(false); }
+            get
+            {
+                switch (_card.CardType)
+                {
+                    case Models.CardType.Quest:
+                        return getQuestCardImagePath(false);
+                    case Models.CardType.Nightmare_Setup:
+                        return getSetupCardImagePath(false);
+                    default:
+                        return null;
+                }
+            }
         }
 
         public bool HasSecondImage

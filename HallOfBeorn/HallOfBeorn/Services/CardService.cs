@@ -148,6 +148,8 @@ namespace HallOfBeorn.Services
             AddSet(new TheMassingatOsgiliath());
             AddSet(new TheBattleofLakeTown());
             AddSet(new TheStoneofErech());
+
+            AddSet(new PassageThroughMirkwoodnNightmare());
         }
 
         private void LoadDecks()
