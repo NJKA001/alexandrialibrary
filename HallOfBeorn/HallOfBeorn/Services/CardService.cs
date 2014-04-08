@@ -150,6 +150,7 @@ namespace HallOfBeorn.Services
             AddSet(new TheStoneofErech());
 
             AddSet(new PassageThroughMirkwoodnNightmare());
+            AddSet(new JourneyAlongTheAnduinNightmare());
         }
 
         private void LoadDecks()

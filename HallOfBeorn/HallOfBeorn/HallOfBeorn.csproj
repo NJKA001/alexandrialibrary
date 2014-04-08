@@ -275,6 +275,7 @@
     <Compile Include="Models\Sets\EncounterAtAmonDin.cs" />
     <Compile Include="Models\Sets\FoundationsOfStone.cs" />
     <Compile Include="Models\Sets\HeirsOfNumenor.cs" />
+    <Compile Include="Models\Sets\JourneyAlongTheAnduinNightmare.cs" />
     <Compile Include="Models\Sets\KhazadDum.cs" />
     <Compile Include="Models\Sets\PassageThroughMirkwoodnNightmare.cs" />
     <Compile Include="Models\Sets\ReturnToMirkwood.cs" />
@@ -1396,7 +1397,7 @@
     <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\Passage-Through-Mirkwood-Nightmare-SetupB.jpg" />
     <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\Passage-Through-Mirkwood-Nightmare.png" />
     <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\Spiders-of-Mirkwood.jpg" />
-    <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\The-Spiders-Web.jpg" />
+    <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\The-Spider%27s-Web.jpg" />
     <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\Ungoliant%27s-Brood.jpg" />
     <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\Ungoliant%27s-Spawn.jpg" />
     <Content Include="Images\Cards\Return-to-Mirkwood\Return-to-Mirkwood.png" />

@@ -103,5 +103,20 @@ namespace HallOfBeorn
 
             return listItems;
         }
+
+        // Returns the first letter in a string, or a space if there are no letters in the given string
+        public static char GetFirstLetter(this string self)
+        {
+            if (!string.IsNullOrEmpty(self))
+            {
+                for (var i = 0; i < self.Length; i++)
+                {
+                    if (char.IsLetter(self[i]))
+                        return self[i];
+                }
+            }
+
+            return ' ';
+        }
     }
 }

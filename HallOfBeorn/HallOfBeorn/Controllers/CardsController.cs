@@ -130,8 +130,7 @@ namespace HallOfBeorn.Controllers
                 var normalized = part.TrimStart('(').TrimEnd('.', ',', ':', '"', '\'', ')');
                 var escaped = part.StartsWith("~");
 
-
-                if ((count == 1 || count == 2) && part.EndsWith(":"))
+                if (part.Length > 0 && part.EndsWith(":") && char.IsUpper(part.GetFirstLetter()))
                 {
                     token.IsTrigger = true;
                     token.Text = part;

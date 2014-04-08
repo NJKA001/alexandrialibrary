@@ -193,7 +193,12 @@ namespace HallOfBeorn.Models
 
         public string HitPoints
         {
-            get { return _card.HitPoints.ToString(); }
+            get
+            {
+                return _card.HitPoints.HasValue ?
+                _card.HitPoints.ToString()
+                : "-";
+            }
         }
 
         public string EncounterSet
