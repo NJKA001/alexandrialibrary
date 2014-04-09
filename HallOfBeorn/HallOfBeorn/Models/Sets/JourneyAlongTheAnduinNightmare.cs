@@ -110,7 +110,7 @@ Forced: At the beginning of the combat phase, Anduin Troll Spawn engages a playe
                 QuestPoints = 6,
                 Traits = new List<string> { "Riverland." },
                 Text = "Each card revealed by the encounter deck gains doomed X. X is the number of progress tokens on this card.",
-                Shadow = "Shadow: If this attack is undefended, put A Flooed Ford into the staging area with 1 progress token on it.",
+                Shadow = "Shadow: If this attack is undefended, put A Flooded Ford into the staging area with 1 progress token on it.",
                 EncounterSet = "Journey Along the Anduin Nightmare",
                 Quantity = 1,
                 Number = 5

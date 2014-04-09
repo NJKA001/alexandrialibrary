@@ -151,6 +151,7 @@ namespace HallOfBeorn.Services
 
             AddSet(new PassageThroughMirkwoodnNightmare());
             AddSet(new JourneyAlongTheAnduinNightmare());
+            AddSet(new EscapeFromDolGuldurNightmare());
         }
 
         private void LoadDecks()
@@ -861,7 +862,19 @@ namespace HallOfBeorn.Services
                     case Sort.Alphabetical:
                         return results.OrderBy(x => x.Title);
                     case Sort.Sphere_Type_Cost:
-                        return results.OrderBy(x => x.Sphere).ThenBy(x => x.CardType).ThenBy(x => x.ResourceCost > 0 ? x.ResourceCost : x.ThreatCost);
+                        return results.OrderBy(x => x.Sphere).ThenBy(x => x.CardType).ThenBy(x => 
+                            {
+                                if (x.ThreatCost > 0)
+                                    return x.ThreatCost;
+                                else if (x.ResourceCost > 0)
+                                    return x.ResourceCost;
+                                else if (x.EngagementCost > 0)
+                                    return x.EngagementCost;
+                                else if (x.QuestPoints.HasValue && x.QuestPoints > 0)
+                                    return x.QuestPoints.Value;
+                                else
+                                    return -1;
+                            });
                     case Sort.Set_Number:
                     default:
                         return results.OrderBy(x => x.CardSet.Number).ThenBy(x => x.Number);

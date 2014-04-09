@@ -273,6 +273,7 @@
     <Compile Include="Models\Sets\CoreSet.cs" />
     <Compile Include="Models\Sets\CoreSetNightmare.cs" />
     <Compile Include="Models\Sets\EncounterAtAmonDin.cs" />
+    <Compile Include="Models\Sets\EscapeFromDolGuldurNightmare.cs" />
     <Compile Include="Models\Sets\FoundationsOfStone.cs" />
     <Compile Include="Models\Sets\HeirsOfNumenor.cs" />
     <Compile Include="Models\Sets\JourneyAlongTheAnduinNightmare.cs" />
