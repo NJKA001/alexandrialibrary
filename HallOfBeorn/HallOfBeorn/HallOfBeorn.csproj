@@ -291,6 +291,7 @@
     <Compile Include="Models\Sets\TheHobbitOnTheDoorstep.cs" />
     <Compile Include="Models\Sets\TheHobbitOverHillAndUnderHill.cs" />
     <Compile Include="Models\Sets\TheHuntForGollum.cs" />
+    <Compile Include="Models\Sets\TheHuntForGollumNightmare.cs" />
     <Compile Include="Models\Sets\TheLongDark.cs" />
     <Compile Include="Models\Sets\TheMassingAtOsgiliath.cs" />
     <Compile Include="Models\Sets\TheMorgulVale.cs" />

@@ -152,6 +152,8 @@ namespace HallOfBeorn.Services
             AddSet(new PassageThroughMirkwoodnNightmare());
             AddSet(new JourneyAlongTheAnduinNightmare());
             AddSet(new EscapeFromDolGuldurNightmare());
+
+            AddSet(new TheHuntForGollumNightmare());
         }
 
         private void LoadDecks()

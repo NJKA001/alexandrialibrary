@@ -26,7 +26,7 @@ namespace HallOfBeorn.Models.Sets
 
 Forced: During setup, each player reveals 1 card from the encounter deck and adds it to the staging area.",
                 OppositeText =
-@"Begin wit the standard quest deck and encounter deck for the Passage Through Mirkwood scenario found in the LOTR LCG core set.
+@"Begin with the standard quest deck and encounter deck for the Passage Through Mirkwood scenario found in the LOTR LCG core set.
 
 Remove the following cards, in the specified quantities, from the standard encounter deck:
 
