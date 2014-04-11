@@ -18,8 +18,8 @@ namespace HallOfBeorn.Models.Sets
             {
                 Title = "The Hunt for Gollum Nightmare",
                 HasSecondImage = true,
-                ImageType = Models.ImageType.Jpg,
-                Id = "",
+                ImageType = Models.ImageType.Png,
+                Id = "EAC4C67B-297A-4E6D-AA8E-DA33D57C87E7",
                 CardType = CardType.Nightmare_Setup,
                 Text =
 @"You are playing in Nightmare mode.
@@ -29,21 +29,21 @@ Forced: At the end of the refresh phase, choose an unclaimed Clue card not attac
 If at any point there are four or more Clue cards attached to Mordor enemies, the players lose the game.",
                 FlavorText = "\"Through Mirkwood and back again it led them, though they never caught him.\"\r\n-Gandalf, The Fellowship of the Ring",
                 OppositeText =
-@"Begin with the standard quest deck and encounter deck for The Hunt for Gollum scenario.
+@"Begin with the standard quest deck and encounter deck for The Hunt for ~Gollum scenario.
 
 Remove the following cards, in the specified quantities, from the standard encounter deck:
 
-2x River Ninglor
-1x Eaves of Mirkwood
+2x ~River Ninglor
+1x Eaves of ~Mirkwood
 2x False Lead
-2x Misty Mountain Goblins
+2x Misty ~Mountain Goblins
 2x Banks of the Anduin
 3x Gladden Fields
 3x Eastern Crows
 2x Treacherous Fog
 3x Evil Storm
 
-Then, shuffle the encounter cards in this Nightmare Deck into the remainder of the standard The Hunt for Gollum encounter deck.
+Then, shuffle the encounter cards in this Nightmare Deck into the remainder of the standard The Hunt for ~Gollum encounter deck.
 
 Finally, flip this setup card over and place it next to the quest deck. Its effect remains active throughout the game, which is now ready to begin.",
 
