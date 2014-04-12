@@ -259,7 +259,9 @@
                             
                             @if (@Model.ShadowEffects.Count() > 0)
                             {
-                                <hr style="margin-left:24px;margin-right:24px;"/>
+                                @* <hr style="margin-left:24px;margin-right:24px;"/> *@
+                                <img src="/Images/ShadowDivider.png" style="display:block;margin-left:auto;margin-right:auto;width:285px;"/>
+                                <br />
                                 
                                 foreach (var effect in Model.ShadowEffects)
                                 {
