@@ -270,6 +270,7 @@
     <Compile Include="Models\Sets\AssaultOnOsgiliath.cs" />
     <Compile Include="Models\Sets\AJourneyToRhosgobel.cs" />
     <Compile Include="Models\Sets\ConflictAtTheCarrock.cs" />
+    <Compile Include="Models\Sets\ConflictAtTheCarrockNightmare.cs" />
     <Compile Include="Models\Sets\CoreSet.cs" />
     <Compile Include="Models\Sets\CoreSetNightmare.cs" />
     <Compile Include="Models\Sets\EncounterAtAmonDin.cs" />
