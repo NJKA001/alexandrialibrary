@@ -290,6 +290,7 @@
     <Compile Include="Models\Sets\TheDeadMarshes.cs" />
     <Compile Include="Models\Sets\TheDruadanForest.cs" />
     <Compile Include="Models\Sets\TheHillsOfEmynMuil.cs" />
+    <Compile Include="Models\Sets\TheHillsOfEmynMuilNightmare.cs" />
     <Compile Include="Models\Sets\TheHobbitOnTheDoorstep.cs" />
     <Compile Include="Models\Sets\TheHobbitOverHillAndUnderHill.cs" />
     <Compile Include="Models\Sets\TheHuntForGollum.cs" />
@@ -1541,7 +1542,7 @@
     <Content Include="Images\Cards\The-Dead-Marshes\The-Dead-Marshes.png" />
     <Content Include="Images\Cards\The-Druadan-Forest\The-Druadan-Forest.png" />
     <Content Include="Images\Cards\The-Hills-of-Emyn-Muil-Nightmare\A-Hurrying-Darkness.png" />
-    <Content Include="Images\Cards\The-Hills-of-Emyn-Muil-Nightmare\Blast-of-the-Savage-Wind.png" />
+    <Content Include="Images\Cards\The-Hills-of-Emyn-Muil-Nightmare\Blast-of-Savage-Wind.png" />
     <Content Include="Images\Cards\The-Hills-of-Emyn-Muil-Nightmare\Brambles-and-Thorns.png" />
     <Content Include="Images\Cards\The-Hills-of-Emyn-Muil-Nightmare\Hazardous-Terrain.png" />
     <Content Include="Images\Cards\The-Hills-of-Emyn-Muil-Nightmare\Orc-Interceptor.png" />
