@@ -273,13 +273,14 @@
     <Compile Include="Models\Sets\ConflictAtTheCarrock.cs" />
     <Compile Include="Models\Sets\ConflictAtTheCarrockNightmare.cs" />
     <Compile Include="Models\Sets\CoreSet.cs" />
-    <Compile Include="Models\Sets\CoreSetNightmare.cs" />
+    <Compile Include="Models\Sets\DungeonsDeepAndCavernsDimNightmare.cs" />
     <Compile Include="Models\Sets\EncounterAtAmonDin.cs" />
     <Compile Include="Models\Sets\EscapeFromDolGuldurNightmare.cs" />
     <Compile Include="Models\Sets\FoundationsOfStone.cs" />
     <Compile Include="Models\Sets\HeirsOfNumenor.cs" />
     <Compile Include="Models\Sets\JourneyAlongTheAnduinNightmare.cs" />
     <Compile Include="Models\Sets\KhazadDum.cs" />
+    <Compile Include="Models\Sets\OverTheMistyMountainsGrimNightmare.cs" />
     <Compile Include="Models\Sets\PassageThroughMirkwoodnNightmare.cs" />
     <Compile Include="Models\Sets\ReturnToMirkwood.cs" />
     <Compile Include="Models\Sets\ReturnToMirkwoodNightmare.cs" />
@@ -305,6 +306,7 @@
     <Compile Include="Models\Sets\TheStoneOfErech.cs" />
     <Compile Include="Models\Sets\TheWatcherInTheWater.cs" />
     <Compile Include="Models\Sets\VoiceOfIsengard.cs" />
+    <Compile Include="Models\Sets\WeMustAwayEreBreakOfDayNightmare.cs" />
     <Compile Include="Models\SetType.cs" />
     <Compile Include="Models\Sort.cs" />
     <Compile Include="Models\Sphere.cs" />
@@ -1438,7 +1440,7 @@
     <Content Include="Images\Cards\Over-the-Misty-Mountains-Grim-Nightmare\Over-the-Misty-Mountains-Grim-Nightmare-SetupA.png" />
     <Content Include="Images\Cards\Over-the-Misty-Mountains-Grim-Nightmare\Over-the-Misty-Mountains-Grim-Nightmare-SetupB.png" />
     <Content Include="Images\Cards\Over-the-Misty-Mountains-Grim-Nightmare\Over-the-Misty-Mountains-Grim-Nightmare.png" />
-    <Content Include="Images\Cards\Over-the-Misty-Mountains-Grim-Nightmare\Swish,-Smack,-Whip-Crack.png" />
+    <Content Include="Images\Cards\Over-the-Misty-Mountains-Grim-Nightmare\Swish-smack-Whip-crack.png" />
     <Content Include="Images\Cards\Over-the-Misty-Mountains-Grim-Nightmare\The-Great-Goblin-Nightmare.png" />
     <Content Include="Images\Cards\Over-the-Misty-Mountains-Grim-Nightmare\The-Great-Goblin.png" />
     <Content Include="Images\Cards\Passage-Through-Mirkwood-Nightmare\Abandoned-Camp.jpg" />

@@ -28,7 +28,7 @@ No more than 1 progress can be placed on each location in the staging area each 
                 FlavorText = "Over them was a lane of pale-blue sky, around them the dark overshadowed River, and before them black, shutting out the sun, the hills of Emyn Muil, in which no opening could be seen. -The Fellowship of the Ring",
 
                 OppositeText =
-@"Begin with the standard quest deck and encounter deck for The Hills of Emyn Muil scenario.
+@"Begin with the standard quest deck and encounter deck for The ~Hills of Emyn Muil scenario.
 
 Remove the following cards, in the specified quantities, from the standard encounter deck:
 
@@ -47,7 +47,7 @@ Remove the following cards, in the specified quantities, from the standard encou
 3x Evil Storm
 2x Pursued by ~Shadow
 
-Then, shuffle the encounter cards in this Nightmare Deck into the remainder of the standard The Hills of Emyn Muil encounter deck.
+Then, shuffle the encounter cards in this Nightmare Deck into the remainder of the standard The ~Hills of Emyn Muil encounter deck.
 
 Finally, flip this setup card over and place it next to the quest deck. Its effect remains active throughout the game, which is now ready to begin.",
 

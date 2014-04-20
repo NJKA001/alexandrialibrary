@@ -24,9 +24,9 @@ namespace HallOfBeorn.Models.Sets
                 Text =
 @"You are playing Nightmare mode.
 
-" + "Stage 1A should read \"Remove 5 unique Troll cards\" instead of 4.\r\n\r\n" +
+" + "Stage 1A should read, \"Remove 5 unique Troll cards\" instead of 4.\r\n\r\n" +
 
-"Stage 2B should read. \"When Revealed: Place Louis, Morris, Rupert and Stuart into the staging area.\"\r\n\r\n" +
+"Stage 2B should read, \"When Revealed: Place Louis, Morris, Rupert and Stuart into the staging area.\"\r\n\r\n" +
 
 @"Forced: At the end of the quest phase, if no progress was placed on the current quest this phase, place 1 progress on the current quest (bypassing the active location).
 

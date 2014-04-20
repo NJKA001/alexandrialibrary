@@ -24,7 +24,7 @@ namespace HallOfBeorn.Models.Sets
                 Text =
 @"You are playing Nightmare mode.
 
-Setup: Search the encounter deck for 1 copy of Goblin Eagle-hunter and add it to the staging area. Then shuffle the encounter deck.
+Setup: Search the encounter deck for 1 copy of ~Goblin Eagle-hunter and add it to the staging area. Then shuffle the encounter deck.
 
 Forced: The first Creature enemy revealed during each quest phase gains surge.
 

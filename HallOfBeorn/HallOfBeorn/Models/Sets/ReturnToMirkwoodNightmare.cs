@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "Return to Mirkwood Nightmare";
-            Abbreviation = "TDMN";
+            Abbreviation = "RtMN";
             SetType = Models.SetType.Nightmare_Expansion;
             Cycle = "NIGHTMARE";
 
@@ -21,9 +21,9 @@ namespace HallOfBeorn.Models.Sets
                 ImageType = Models.ImageType.Png,
                 Id = "C9A56A9F-F13D-4DA9-916C-D6CE5408B7A5",
                 CardType = CardType.Nightmare_Setup,
-                Text = "You are playing Nightmare mode.\r\n\r\nForced: At the beginning of the quest phase, the player who is guarding Gollum must either exhaust a hero he controls or resolve the \"when revealed\" effect of the topmost Tantrum card in the encounter discard pile.\r\n\r\nForced: When Stage 4A is revealed, search the encounter deck and discard pile for 1 copy of Attercop, Attercop and add it to the staging area, if able. Shuffle the encounter deck.",
+                Text = "You are playing Nightmare mode.\r\n\r\nForced: At the beginning of the quest phase, the player who is guarding ~Gollum must either exhaust a hero he controls or resolve the \"when revealed\" effect of the topmost Tantrum card in the encounter discard pile.\r\n\r\nForced: When Stage 4A is revealed, search the encounter deck and discard pile for 1 copy of Attercop, Attercop and add it to the staging area, if able. Shuffle the encounter deck.",
                 OppositeText =
-@"Begin with the standard quest deck and encounter deck for the Return to Mirkwood scenario.
+@"Begin with the standard quest deck and encounter deck for the Return to ~Mirkwood scenario.
 
 Remove the following cards, in the specified quantities, from the standard encounter deck:
 
@@ -37,7 +37,7 @@ Remove the following cards, in the specified quantities, from the standard encou
 2x The Brown Lands
 2x The East Bight
 
-Then, shuffle the encounter cards in this Nightmare Deck into the remainder of the standard Return to Mirkwood encounter deck.
+Then, shuffle the encounter cards in this Nightmare Deck into the remainder of the standard Return to ~Mirkwood encounter deck.
 
 Finally, flip this setup card over and place it next to the quest deck. Its effect remains active throughout the game, which is now ready to begin.",
 

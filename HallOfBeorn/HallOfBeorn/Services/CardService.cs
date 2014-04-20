@@ -159,6 +159,9 @@ namespace HallOfBeorn.Services
             AddSet(new TheHillsOfEmynMuilNightmare());
             AddSet(new TheDeadMarshesNightmare());
             AddSet(new ReturnToMirkwoodNightmare());
+            AddSet(new WeMustAwayEreBreakOfDayNightmare());
+            AddSet(new OverTheMistyMountainsGrimNightmare());
+            AddSet(new DungeonsDeepAndCavernsDimNightmare());
         }
 
         private void LoadDecks()

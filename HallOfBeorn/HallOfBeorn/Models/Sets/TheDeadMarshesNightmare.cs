@@ -28,7 +28,7 @@ Players cannot reduce their threat.
 
 Setup: Search the encounter deck for The Mere of Dead Faces, and add it to the stage area. Then, shuffle the encounter deck.
 
-Forced: After Gollum is placed in the discard pile, shuffle him into the encounter deck.",
+Forced: After ~Gollum is placed in the discard pile, shuffle him into the encounter deck.",
                 FlavorText = "\"They lie in all the pools, pale faces, deep deep under the dark water.\" -Frodo, The Two Towers",
                 OppositeText =
 @"Begin with the standard quest deck and encounter deck for The Dead Marshes scenario.
