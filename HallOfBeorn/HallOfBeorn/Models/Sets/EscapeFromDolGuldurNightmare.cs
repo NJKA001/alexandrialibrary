@@ -21,21 +21,21 @@ namespace HallOfBeorn.Models.Sets
                 ImageType = Models.ImageType.Jpg,
                 Id = "3E562129-6B4E-4DA9-B7DD-8165BB91931B",
                 CardType = CardType.Nightmare_Setup,
-                Text = "You are playing in Nightmare mode.\r\n\r\nForced: When stage 1B is revealed, the number of random heroes captured is determined by the number of players, as follows: 1-2 players = 1 hero captured, 3 players = 2 heroes captured, 4 players = 3 heroes captured. All captured heroes are turned face down and considered \"the prisoner,\" cannot be used, cannot be damaged, and do not collect resources until they are rescued, (A single player cannot have more than 1 hero captured by this effect.)",
+                Text = "You are playing Nightmare mode.\r\n\r\nForced: When stage 1B is revealed, the number of random heroes captured is determined by the number of players, as follows: 1-2 players = 1 hero captured, 3 players = 2 heroes captured, 4 players = 3 heroes captured. All captured heroes are turned face down and considered \"the prisoner,\" cannot be used, cannot be damaged, and do not collect resources until they are rescued, (A single player cannot have more than 1 hero captured by this effect.)",
                 OppositeText =
 @"Begin with the standard quest deck and encounter deck for the Escape from Dol Guldur scenario found in the LOTR LCG core set.
 
 Remove the following cards, in the specified quantities, from the standard encounter deck:
 
 2x Dol Guldur Orcs
-2x Enchanted Stream
-1x Great Forest Web
-3x Mountains of Mirkwood
+2x Enchanted ~Stream
+1x Great ~Forest Web
+3x Mountains of ~Mirkwood
 2x Caught in a Web
 1x The Necromancer's Reach
 1x Necromancer's Pass
-2x Under the Shadow
-2x Tower Gate
+2x Under the ~Shadow
+2x Tower ~Gate
 1x Iron Shackles
 
 Then, shuffle the encounter cards in this Nightmare Deck into the remainder of the standard Escape from Dol Guldur encounter deck.

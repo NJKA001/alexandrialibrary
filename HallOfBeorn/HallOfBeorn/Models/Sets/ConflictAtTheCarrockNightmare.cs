@@ -22,7 +22,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "2E094DA7-6760-45AB-9E2E-E2BAA5F58BE7",
                 CardType = CardType.Nightmare_Setup,
                 Text =
-@"You are playing in Nightmare mode.
+@"You are playing Nightmare mode.
 
 " + "Stage 1A should read \"Remove 5 unique Troll cards\" instead of 4.\r\n\r\n" +
 
@@ -47,10 +47,10 @@ Remove the following cards, in the specified quantities, from the standard encou
 3x Bee Pastures
 3x Oak-wood Grove
 1x Roasted Slowly
-3x Misty Mountain Goblins
+3x Misty ~Mountain Goblins
 2x Banks of the Anduin
 1x Wolf Rider
-2x Goblin Sniper
+2x ~Goblin Sniper
 2x Wargs
 2x Despair
 2x The Brown Lands

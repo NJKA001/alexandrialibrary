@@ -22,7 +22,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "e84f94bf-201b-4adf-95d2-0012e0bb5001",
                 CardType = CardType.Nightmare_Setup,
                 Text = 
-@"You are playing in Nightmare mode.
+@"You are playing Nightmare mode.
 
 Forced: During setup, each player reveals 1 card from the encounter deck and adds it to the staging area.",
                 OppositeText =
@@ -36,7 +36,7 @@ Black ~Forest Bats x1
 Dol Guldur Orcs x3
 Old ~Forest ~Road x1
 ~Forest ~Gate x2
-Mountains of Mirkwood x3
+Mountains of ~Mirkwood x3
 Caught in a Web x2
 
 Then, shuffle the encounter cards in this Nightmare Deck into the remainder of the standard Passage Through Mirkwood encounter deck.

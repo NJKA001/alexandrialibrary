@@ -22,7 +22,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "146793CB-7609-49D7-B8F5-FC25826CC85E",
                 CardType = CardType.Nightmare_Setup,
                 Text =
-@"You are playing in Nightmare mode.
+@"You are playing Nightmare mode.
 
 Setup: Search the encounter deck for 1 copy of Goblin Eagle-hunter and add it to the staging area. Then shuffle the encounter deck.
 
@@ -41,10 +41,10 @@ Remove the following cards, in the specified quantities, from the standard encou
 3x ~Mountains of ~Mirkwood
 1x Chieftan Ufthak
 2x Dol Guldur Beastmaster
-1x Driven by Shadow
+1x Driven by ~Shadow
 1x The Necromancer's Reach
 2x Necromancer's Pass
-2x Enchanted Stream
+2x Enchanted ~Stream
 
 Then, shuffle the encounter cards in this Nightmare Deck into the remainder of the standard A Journey to Rhosgobel encounter deck.
 

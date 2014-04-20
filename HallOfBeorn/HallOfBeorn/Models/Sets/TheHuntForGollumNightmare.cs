@@ -22,7 +22,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "EAC4C67B-297A-4E6D-AA8E-DA33D57C87E7",
                 CardType = CardType.Nightmare_Setup,
                 Text =
-@"You are playing in Nightmare mode.
+@"You are playing Nightmare mode.
 
 Forced: At the end of the refresh phase, choose an unclaimed Clue card not attached to a Mordor enemy and attach it to a Mordor enemy, if able. (If it was guarded, detach the encounter guarding it first. The newly attached Mordor enemy is now guarding it.)
 

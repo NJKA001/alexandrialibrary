@@ -32,10 +32,10 @@ No more than 1 progress can be placed on each location in the staging area each 
 
 Remove the following cards, in the specified quantities, from the standard encounter deck:
 
-1x The East Wall of Rohan
-1x The North Stair
+1x The East Wall of ~Rohan
+1x The North ~Stair
 2x The Shores of Nen Hithoel
-4x The Highlands
+4x The ~Highlands
 2x Slick Footing
 2x Impassable Chasm
 2x Dol Guldur Orcs
@@ -43,9 +43,9 @@ Remove the following cards, in the specified quantities, from the standard encou
 2x Dol Guldur Beastmaster
 2x The Necromancer's Reach
 2x Necromancer's Pass
-2x Enchanted Stream
+2x Enchanted ~Stream
 3x Evil Storm
-2x Pursued by Shadow
+2x Pursued by ~Shadow
 
 Then, shuffle the encounter cards in this Nightmare Deck into the remainder of the standard The Hills of Emyn Muil encounter deck.
 

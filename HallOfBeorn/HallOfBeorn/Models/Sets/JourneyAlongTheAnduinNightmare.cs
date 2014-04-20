@@ -21,7 +21,7 @@ namespace HallOfBeorn.Models.Sets
                 ImageType = Models.ImageType.Jpg,
                 Id = "9AE317F1-0CDF-410C-A063-C6A0A340DE45",
                 CardType = CardType.Nightmare_Setup,
-                Text = "You are playing in Nightmare mode.\r\n\r\nAll Troll enemies gain the text: \"Cannot have attachments.\"\r\n\r\nIf the encounter deck is empty (at any time), shuffle the encounter discard pile back into the encounter deck.",
+                Text = "You are playing Nightmare mode.\r\n\r\nAll Troll enemies gain the text: \"Cannot have attachments.\"\r\n\r\nIf the encounter deck is empty (at any time), shuffle the encounter discard pile back into the encounter deck.",
                 OppositeText = 
 @"Begin with the standard quest deck and encounter deck for the Journey Along the Anduin scenario found in the LOTR LCG core set.
 
@@ -31,9 +31,9 @@ Remove the following cards, in the specified quantities, from the standard encou
 2x Treacherous Fog
 2x Banks of the Anduin
 3x Dol Guldur Orcs
-2x Enchanted Stream
+2x Enchanted ~Stream
 2x Despair
-3x Misty Mountain Goblins
+3x Misty ~Mountain Goblins
 2x Necromancer's Pass
 
 Then, shuffle the encounter cards in this Nightmare Deck into the remainder of the standard Journey Along the Anduin encounter deck.
