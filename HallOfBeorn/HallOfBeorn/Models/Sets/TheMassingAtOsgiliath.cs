@@ -236,38 +236,67 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageName = "M1144",
-                Title = "Beyond Expectations - 1A",
+                Title = "Beyond Expectations",
+                StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-1801202c9016",
                 CardType = CardType.Quest,
-                Setup = "ttttttttttttt",
+                QuestPoints = 7,
                 Text = "Setup: Search the encounter deck for 12 Scout cards, and add 3 per player (one of each title), to the staging area. Remove The Witch-king from the encounter deck and set him aside, out of play. Shuffle any unused Scoutcards back into the encounter deck.",
+                FlavorText = "There are reports of increased Orc activity around Ithilien, and you have been sent to investigate. You enter Osgiliath and cross the river. On the outskirts of the city, you see a horde that surpassses all expectations coming down the Morgul Road.",
+                OppositeText = "Players cannot travel to West Bank locations.",
+                OppositeFlavorText = "As the van of the army enters the city, some of the horde's outriders are aware of your presence, and head in your direction. Drawing back, your make a hasty retreat towards the river.",
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 1,
                 Number = 16
             });
             Cards.Add(new Card() {
                 ImageName = "M1145",
-                Title = "Through the Ruins - 2A",
+                Title = "Through the Ruins",
+                StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-1801202c9018",
                 CardType = CardType.Quest,
+                QuestPoints = 5,
+                Text = 
+@"Players cannot travel to West Bank locations.
+
+Each player cannot play or put into play more than 1 card from his hand each round.",
+                FlavorText = "The outriders and scouts of the army have cut you off from the bridge. You desperately seek the likeliest place to cross the Anduin.",
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 1,
                 Number = 17
             });
             Cards.Add(new Card() {
                 ImageName = "M1146",
-                Title = "Anduin Crossing - 3A",
+                Title = "Anduin Crossing",
+                StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-1801202c9020",
                 CardType = CardType.Quest,
+                QuestPoints = 1,
+                Text = 
+@"Progress tokens from card effects cannot be placed on this quest card or the active location.
+
+Players cannot travel to East Bank or West Bank locations.
+
+In order to commit characters to the quest, a player must first choose a hero or 1 Ranger of Ithilien card he controls. Discard each chosen card from play.",
+                FlavorText = "The cold waters of the Anduin river rush before you, but the current is weaker here and you have to cross. The outriders and van of the Dark Lord's army are closing fast behind, and their archers will make the attempted crossing even more dangerous. The bravest members of your band turn back to distract the oncoming horde, so that the rest of you might escape.",
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 1,
                 Number = 18
             });
             Cards.Add(new Card() {
                 ImageName = "M1147",
-                Title = "Race to Minas Tirith - 4A",
+                Title = "Race to Minas Tirith",
+                StageNumber = 4,
                 Id = "51223bd0-ffd1-11df-a976-1801202c9022",
                 CardType = CardType.Quest,
+                QuestPoints = 15,
+                Text = 
+@"When Revealed: Add The Witch-king to the staging area.
+
+Players have now crossed the Anduin. Players cannot travel to East Bank locations.
+
+If the players defeat this stage, they have won the game.",
+                FlavorText = "You made it across the Anduin and are leaving Osgiliath when a fell shriek splits the air. You begin the race across the Pelennor Fields to the safety of Minas Tirith, but a new enemy follows behind.",
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 1,
                 Number = 19
