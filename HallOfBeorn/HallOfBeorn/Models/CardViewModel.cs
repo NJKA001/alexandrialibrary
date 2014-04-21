@@ -326,7 +326,7 @@ namespace HallOfBeorn.Models
 
                 var ext = string.Format(".{0}", format.ToString().ToLower());
                 var set = _card.CardSet.Name.ToUrlSafeString();
-                var title = _card.SlugIncludesOppositeTitle ? string.Format("{0}-{1}", Title.ToUrlSafeString(), OppositeTitle.ToUrlSafeString()) : Title.ToUrlSafeString();
+                var title = Title.ToUrlSafeString();
                 var type = _card.SlugIncludesType ? string.Format("-{0}", _card.CardType.ToString().ToUrlSafeString()) : string.Empty;
                 var image = _card.ImageName.ToUrlSafeString();
 
