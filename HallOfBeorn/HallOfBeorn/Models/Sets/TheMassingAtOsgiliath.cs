@@ -16,7 +16,7 @@ namespace HallOfBeorn.Models.Sets
             Cycle = "GenCon";
 
             Cards.Add(new Card() {
-                ImageName = "M1129",
+                ImageType = Models.ImageType.Png,
                 Title = "The Witch-King",
                 Id = "51223bd0-ffd1-11df-a976-1801202c9001",
                 CardType = CardType.Enemy,
@@ -35,7 +35,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 1
             });
             Cards.Add(new Card() {
-                ImageName = "M1130",
+                ImageType = Models.ImageType.Png,
                 Title = "Snaga Scouts",
                 Id = "51223bd0-ffd1-11df-a976-1801202c9002",
                 CardType = CardType.Enemy,
@@ -51,7 +51,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 2
             });
             Cards.Add(new Card() {
-                ImageName = "M1131",
+                ImageType = Models.ImageType.Png,
                 Title = "Wolves from Mordor",
                 Id = "51223bd0-ffd1-11df-a976-1801202c9003",
                 CardType = CardType.Enemy,
@@ -68,7 +68,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 3
             });
             Cards.Add(new Card() {
-                ImageName = "M1132",
+                ImageType = Models.ImageType.Png,
                 Title = "Wainriders",
                 Id = "51223bd0-ffd1-11df-a976-1801202c9004",
                 CardType = CardType.Enemy,
@@ -84,7 +84,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 4
             });
             Cards.Add(new Card() {
-                ImageName = "M1133",
+                ImageType = Models.ImageType.Png,
                 Title = "Wainrider Captain",
                 Id = "51223bd0-ffd1-11df-a976-1801202c9005",
                 CardType = CardType.Enemy,
@@ -101,7 +101,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 5
             });
             Cards.Add(new Card() {
-                ImageName = "M1134",
+                ImageType = Models.ImageType.Png,
                 Title = "Uruk Vanguard",
                 Id = "51223bd0-ffd1-11df-a976-1801202c9006",
                 CardType = CardType.Enemy,
@@ -118,7 +118,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 6
             });
             Cards.Add(new Card() {
-                ImageName = "M1135",
+                ImageType = Models.ImageType.Png,
                 Title = "Captured Watchtower",
                 Id = "51223bd0-ffd1-11df-a976-1801202c9007",
                 CardType = CardType.Location,
@@ -132,7 +132,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 7
             });
             Cards.Add(new Card() {
-                ImageName = "M1136",
+                ImageType = Models.ImageType.Png,
                 Title = "Emyn Arnen Overlook",
                 Id = "51223bd0-ffd1-11df-a976-1801202c9008",
                 CardType = CardType.Location,
@@ -145,7 +145,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 8
             });
             Cards.Add(new Card() {
-                ImageName = "M1137",
+                ImageType = Models.ImageType.Png,
                 Title = "Morgulduin",
                 Id = "51223bd0-ffd1-11df-a976-1801202c9009",
                 CardType = CardType.Location,
@@ -159,7 +159,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 9
             });
             Cards.Add(new Card() {
-                ImageName = "M1138",
+                ImageType = Models.ImageType.Png,
                 Title = "Pelennor Fields",
                 Id = "51223bd0-ffd1-11df-a976-1801202c9010",
                 CardType = CardType.Location,
@@ -173,7 +173,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 10
             });
             Cards.Add(new Card() {
-                ImageName = "M1139",
+                ImageType = Models.ImageType.Png,
                 Title = "Ruins of Osgiliath",
                 Id = "51223bd0-ffd1-11df-a976-1801202c9011",
                 CardType = CardType.Location,
@@ -186,7 +186,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 11
             });
             Cards.Add(new Card() {
-                ImageName = "M1140",
+                ImageType = Models.ImageType.Png,
                 Title = "Cut Off",
                 Id = "51223bd0-ffd1-11df-a976-1801202c9012",
                 CardType = CardType.Treachery,
@@ -198,7 +198,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 12
             });
             Cards.Add(new Card() {
-                ImageName = "M1141",
+                ImageType = Models.ImageType.Png,
                 Title = "Dark Pursuit",
                 Id = "51223bd0-ffd1-11df-a976-1801202c9013",
                 CardType = CardType.Treachery,
@@ -208,7 +208,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 13
             });
             Cards.Add(new Card() {
-                ImageName = "M1142",
+                ImageType = Models.ImageType.Png,
                 Title = "Massing at Osgiliath",
                 Id = "51223bd0-ffd1-11df-a976-1801202c9014",
                 CardType = CardType.Treachery,
@@ -219,7 +219,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 14
             });
             Cards.Add(new Card() {
-                ImageName = "M1143",
+                ImageType = Models.ImageType.Png,
                 Title = "Ranger of Ithilien",
                 Id = "51223bd0-ffd1-11df-a976-1801202c9015",
                 CardType = CardType.Objective,
@@ -235,7 +235,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 15
             });
             Cards.Add(new Card() {
-                ImageName = "M1144",
+                ImageType = Models.ImageType.Png,
                 Title = "Beyond Expectations",
                 StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-1801202c9016",
@@ -250,7 +250,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 16
             });
             Cards.Add(new Card() {
-                ImageName = "M1145",
+                ImageType = Models.ImageType.Png,
                 Title = "Through the Ruins",
                 StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-1801202c9018",
@@ -266,7 +266,7 @@ Each player cannot play or put into play more than 1 card from his hand each rou
                 Number = 17
             });
             Cards.Add(new Card() {
-                ImageName = "M1146",
+                ImageType = Models.ImageType.Png,
                 Title = "Anduin Crossing",
                 StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-1801202c9020",
@@ -284,7 +284,7 @@ In order to commit characters to the quest, a player must first choose a hero or
                 Number = 18
             });
             Cards.Add(new Card() {
-                ImageName = "M1147",
+                ImageType = Models.ImageType.Png,
                 Title = "Race to Minas Tirith",
                 StageNumber = 4,
                 Id = "51223bd0-ffd1-11df-a976-1801202c9022",

@@ -48,7 +48,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 4,
                 Traits = new List<string>() { "Noble.", " Rohan.", " Warrior." },
-                Text = "Response: After Theodred commits to a quest, choose a hero committed to that quest. Add 1 resource to that hero's resource pool.",
+                Text = "Response: After Théodred commits to a quest, choose a hero committed to that quest. Add 1 resource to that hero's resource pool.",
                 Quantity = 1,
                 Number = 2
             });
@@ -66,7 +66,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 2,
                 HitPoints = 4,
                 Traits = new List<string>() { "Dwarf.", " Noble." },
-                Text = "Response: After Gloin suffers damage, add 1 resource to his resource pool for each point of damage he just suffered.",
+                Text = "Response: After Glóin suffers damage, add 1 resource to his resource pool for each point of damage he just suffered.",
                 Quantity = 1,
                 Number = 3
             });
@@ -171,7 +171,7 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 4,
                 Traits = new List<string>() { "Rohan.", " Warrior." },
-                Text = "Dunhere can target enemies in the staging area when he attacks alone. When doing so, he gets +1 Attack.",
+                Text = "Dúnhere can target enemies in the staging area when he attacks alone. When doing so, he gets +1 Attack.",
                 Quantity = 1,
                 Number = 9
             });
