@@ -312,8 +312,11 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "We Must Away, Ere Break of Day",
                 Quantity = 1,
                 QuestPoints = 0,
-                FlavorText = "\"Dawn take you all, and be stone to you!\" - Gandalf, The Hobbit ",
-                OppositeText = "Play after shadow cards have been dealt, before any attacks have resloved.\r\nCombat Action: Each player may choose and discard 1 facedown shadow card from an enemy with which he is engaged.",
+                FlavorText = "\"Dawn take you all, and be stone to you!\" said a voice that sounded like William's but it wasn't. For just at that moment the light came over the hill, and there was a mighty twitter in the branches. William never spoke for he stood turned to stone as he stooped; and Bert and Tom were stuck like rocks as they looked at him. -The Hobbit",
+                OppositeText =            
+@"When Revealed: Remove all Troll enemies and Sack cards from the game. If ~Troll ~Cave is in the victory display, the players have discovered the treasure cards Sting, Glamdring, and Orcrist.
+
+The players have won the game.",
                 Number = 25
             });
             Cards.Add(new Card() {

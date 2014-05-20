@@ -149,7 +149,7 @@
                             </tr>
                         </table>
                         <br />
-                        <div style="margin:2px;padding-top:0px;padding-left:6px;padding-right:6px;border: 1px solid gray;border-radius:4px;">
+                        <div style="margin:2px;padding-top:0px;padding-left:6px;padding-right:6px;border: 1px solid gray;border-radius:4px;max-width:500px;">
 
                         @if (@Model.Traits.Count() > 0)
                         {
@@ -337,11 +337,19 @@
                         </div>
                     </div>
                  </div>  
-                @* 
-                </td>
-            </tr>
-            <tr>
-                <td style="vertical-align:top;">*@
+
+                <div>
+                @if (!string.IsNullOrEmpty(@Model.Artist))
+                {
+                    <span style="margin-left:5px;margin-right:10px;">Illus. @Model.Artist</span>
+                }
+                @*
+                @if (!string.IsNullOrEmpty(@Model.Year))
+                {
+                    <span style="margin-left:5px;">©@Model.Year Middle-earth Enterprises ©@Model.Year FFG</span>
+                }
+                *@
+                </div>
         <div>
                 <div>
                     <div style="margin-top:12px;margin-left:4px;margin-bottom:4px;"><a href="@Model.HallOfBeornBlogSearchUrl" target="_blank" title="Search Hall of Beorn for: @Model.Title">On Hall of Beorn Blog</a></div>

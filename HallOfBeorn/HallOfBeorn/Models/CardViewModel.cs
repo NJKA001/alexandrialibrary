@@ -424,6 +424,16 @@ namespace HallOfBeorn.Models
             get { return _card.IsUnique; }
         }
 
+        public string Artist
+        {
+            get { return _card.Artist; }
+        }
+
+        public string Year
+        {
+            get { return _card.Year > 0 ? _card.Year.ToString() : string.Empty; }
+        }
+
         public bool HasSphere
         {
             get { return _card.Sphere == Models.Sphere.Leadership || _card.Sphere == Models.Sphere.Tactics || _card.Sphere == Models.Sphere.Spirit || _card.Sphere == Models.Sphere.Lore; }
