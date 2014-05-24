@@ -190,6 +190,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\CampaignCardType.cs" />
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\CardEffect.cs" />
