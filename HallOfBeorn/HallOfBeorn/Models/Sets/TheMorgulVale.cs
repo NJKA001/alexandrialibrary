@@ -22,7 +22,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = Models.CardType.Hero,
                 IsUnique = true,
                 Sphere = Models.Sphere.Tactics,
-                Artist = "Magali Villeneuve",
+                Artist = Artist.Magali_Villeneuve,
                 ThreatCost = 12,
                 Willpower = 2,
                 Attack = 3,

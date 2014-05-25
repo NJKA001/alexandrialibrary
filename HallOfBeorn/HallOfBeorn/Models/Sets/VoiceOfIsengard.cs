@@ -173,7 +173,7 @@ Response: After Saruman enters play, choose a non-unique enemy or location in th
                 Quantity = 3,
                 Traits = new List<string>() { "Item." },
                 Keywords = new List<string> { "Attach to a Spirit hero." },
-                Text = "While attached hero is ready, shadow cards dealt to enemies engaged with you are dealt face up. (Shadow card effects are still resolved when resolving enemy attacks.)",
+                Text = "While attached hero is ready, shadow cards dealt to enemies engaged with you are dealt face up. ~(Shadow card effects are still resolved when resolving enemy attacks.)",
                 FlavorText = "...one of them uncovered a small lamp that gave out a slender silver beam. -The Fellowship of the Ring",
                 Number = 9
             });

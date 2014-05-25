@@ -32,7 +32,8 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 5,
                 Text = "Refresh Action: Reduce your threat to your starting threat level. (Limit once per game.)",
                 Keywords = new List<string>() { "Sentinel." },
-                Number = 53
+                Number = 53,
+                Artist = Artist.Tony_Foti
             });
             Cards.Add(new Card() {
                 ImageName = "M1419",

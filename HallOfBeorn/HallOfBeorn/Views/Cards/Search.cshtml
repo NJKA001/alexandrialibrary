@@ -73,6 +73,11 @@
             </span>
 
             <span style="display:inline-block;">
+                <span style="margin-right:2px;width:55px;display:inline-block;">Artist</span>
+                @Html.DropDownListFor(x => x.Artist, SearchViewModel.Artists, new { style = "margin-right:12px;max-width:161px;" })
+            </span>
+
+            <span style="display:inline-block;">
             @*@Html.LabelFor(x => x.Sort, new { style = "display:inline;margin-right:2px;width:70px;" })*@
             <span style="margin-right:2px;width:55px;display:inline-block;">Sort</span>
             @Html.DropDownListFor(x => x.Sort, SearchViewModel.Sorts, new { style = "margin-right:0px;" })

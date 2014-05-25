@@ -41,6 +41,9 @@ namespace HallOfBeorn.Models
         [Display(Name = "Sort")]
         public Sort Sort { get; set; }
 
+        [Display(Name = "Artist")]
+        public string Artist { get; set; }
+
         public bool Random { get; set; }
 
         [Display(Name = "Results")]
@@ -75,6 +78,17 @@ namespace HallOfBeorn.Models
         public static IEnumerable<SelectListItem> Sorts
         {
             get { return typeof(Sort).GetSelectListItems(", "); }
+        }
+
+        public static IEnumerable<SelectListItem> Artists
+        {
+            get
+            {
+                yield return new SelectListItem { Text = "Any", Value = "Any" };
+
+                foreach (var artist in HallOfBeorn.Models.Artist.All())
+                    yield return new SelectListItem { Text = artist.Name, Value = artist.Name };
+            }
         }
     }
 }

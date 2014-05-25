@@ -148,7 +148,8 @@ namespace HallOfBeorn.Controllers
 
                     if (!escaped)
                     {
-                        if (_cardService.Traits().Any(x => string.Equals(x, normalized + ".")))
+                        //NOTE: A Sphere token has priority over a Trait token
+                        if (_cardService.Traits().Any(x => string.Equals(x, normalized + ".")) && !_cardService.Spheres().Any(x => string.Equals(x, normalized)))
                         {
                             token.IsTrait = true;
                             token.Text = token.Prefix + part;

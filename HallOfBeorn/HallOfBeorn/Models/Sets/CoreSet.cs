@@ -33,7 +33,7 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Sentinel." },
                 Quantity = 1,
                 Year = 2010,
-                Artist = "John Stanko",
+                Artist = Artist.John_Stanko,
                 Number = 1
             });
             Cards.Add(new Card() {
@@ -737,7 +737,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Text = "Response: Cancel the 'when revealed' effects of a card that was just revealed from the encounter deck.",
                 Quantity = 2,
-                Number = 50
+                Number = 50,
+                Artist = Artist.Ryan_Barger
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -759,7 +760,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 2,
                 Text = "Action: Choose an enemy engaged with a player. Return that enemy to the staging area.",
                 Quantity = 2,
-                Number = 52
+                Number = 52,
+                Artist = Artist.Erfian_Asafat
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -770,7 +772,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Text = "Action: Return 1 Spirit card from your discard pile to your hand.",
                 Quantity = 1,
-                Number = 53
+                Number = 53,
+                Artist = Artist.Kaya
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1706,7 +1709,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeText = "Forced: When you defeat this stage, proceed to one of the 2 \"A Chosen Path\" stages, at random.",
                 OppositeFlavorText = "Unsure of what lies ahead but spurred by the urgency of your message, you choose a path and proceed... ",
                 QuestPoints = 2,
-                Number = 120
+                Number = 120,
+                Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1720,7 +1724,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeText = "When Revealed: Each player must search the encounter deck and discard pile for 1 Spider card of his choice, and add it to the staging area.\r\nThe players must find and defeat Ungoliant's Spawn to win this game.",
                 Quantity = 1,
                 QuestPoints = 0,
-                Number = 121
+                Number = 121,
+                Artist = Artist.Yoann_Boissonnet
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1734,7 +1739,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeText = "Players cannot defeat this stage while Ungoliant's Spawn is in play. If players defeat this stage, they have won the game.",
                 Quantity = 1,
                 QuestPoints = 10,
-                Number = 122
+                Number = 122,
+                Artist = Artist.Yoann_Boissonnet
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1798,7 +1804,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Text = "Reveal 1 additional card from the encounter deck each quest phase. Do not make engagement checks during the encounter phase. (Each player may still optionally engage 1 enemy each encounter phase.)",
                 QuestPoints = 16,
-                Number = 127
+                Number = 127,
+                Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1810,7 +1817,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Text = "When Revealed: Reveal 2 encounter cards per player, and add them to the staging area.\r\nSkip the staging step of the quest phase for the remainder of the game.\r\nOnce there are no enemies in play, the players have won the game.",
                 QuestPoints = 0,
-                Number = 128
+                Number = 128,
+                Artist = Artist.David_A_Nash
             });
         }
     }

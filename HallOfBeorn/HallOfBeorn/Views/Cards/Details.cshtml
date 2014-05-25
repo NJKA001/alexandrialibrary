@@ -160,48 +160,63 @@
                             }
                             </div>
                         }
+                        
                         @if (@Model.Keywords.Count() > 0)
                         {
                             <span style="margin-left:6px;">
                             @foreach (var keyword in Model.KeywordEffects)
                             {
-                                foreach (var token in keyword.Tokens)
+                                if (keyword.Tokens.Count > 1 && !keyword.Tokens.Any(t => t.IsIcon))
                                 {
-                                    if (token.IsTrait)
+                                    <a title="Keyword Search" href='@string.Format("/Cards/Search?Keyword={0}", @keyword.GetText("[Card]"))'>@keyword.GetText(@Model.Title)</a>
+                                }
+                                else
+                                {
+                                    foreach (var token in keyword.Tokens)
                                     {
-                                        <a title="Trait Search" href='@string.Format("/Cards/Search?Trait={0}", @token.Text.Trim())'><b><i>@token.Text</i></b></a>
+                                        if (token.IsTrait)
+                                        {
+                                            <a title="Trait Search" href='@string.Format("/Cards/Search?Trait={0}", @token.Text.Trim())'><b><i>@token.Text</i></b></a>
                                 
-                                        if (token.HasSuffix && token.Suffix != ".")
-                                        {
-                                            @: @token.Suffix
+                                            if (token.HasSuffix && token.Suffix != ".")
+                                            {
+                                                @: @token.Suffix
+                                            }
                                         }
-                                    }
-                                    else if (token.IsIcon)
-                                    {
-                                        if (token.HasSuffix)
+                                        else if (token.IsIcon)
                                         {
-                                            <img src="@token.ImagePath" style="height:16px;margin-left:2px;margin-right:-4px;margin-bottom:-2px;" />
-                                            @: @token.Suffix
+                                            if (token.HasSuffix)
+                                            {
+                                                <img src="@token.ImagePath" style="height:16px;margin-left:2px;margin-right:-4px;margin-bottom:-2px;" />
+                                                @: @token.Suffix
+                                            }
+                                            else
+                                            {
+                                                <img src="@token.ImagePath" style="height:16px;margin-left:2px;margin-right:2px;margin-bottom:-2px;" />
+                                            }
+                                        }
+                                        else if (token.IsTitleReference)
+                                        {
+                                            if (token.HasSuffix)
+                                            {
+                                                @: @string.Format("{0}{1}", @Model.Title, @token.Suffix)
+                                            }
+                                            else
+                                            {
+                                            @: @Model.Title
+                                            }
                                         }
                                         else
                                         {
-                                            <img src="@token.ImagePath" style="height:16px;margin-left:2px;margin-right:2px;margin-bottom:-2px;" />
+                                            if (keyword.Tokens.Count == 1)
+                                            {
+                                                <a title="Keyword Search" href='@string.Format("/Cards/Search?Keyword={0}", @token.Text)'>@token.Text</a>
+                                            }
+                                            else
+                                            {
+                                                @: @token.Text
+                                            }                    
                                         }
-                                    }
-                                    else if (token.IsTitleReference)
-                                    {
-                                        if (token.HasSuffix)
-                                        {
-                                            @: @string.Format("{0}{1}", @Model.Title, @token.Suffix)
-                                        }
-                                        else
-                                        {
-                                        @: @Model.Title
-                                        }
-                                    }
-                                    else
-                                    {
-                                        @: @token.Text
                                     }
                                 }
                             }
@@ -341,7 +356,14 @@
                 <div>
                 @if (!string.IsNullOrEmpty(@Model.Artist))
                 {
-                    <span style="margin-left:5px;margin-right:10px;">Illus. @Model.Artist</span>
+                    if (!string.IsNullOrEmpty(@Model.ArtistURL))
+                    {
+                        <a style="margin-left:5px;margin-right:10px;" href="@Model.ArtistURL" target="_blank">Illus. @Model.Artist</a>
+                    }
+                    else
+                    {
+                        <span style="margin-left:5px;margin-right:10px;">Illus. @Model.Artist</span>
+                    }
                 }
                 @*
                 @if (!string.IsNullOrEmpty(@Model.Year))

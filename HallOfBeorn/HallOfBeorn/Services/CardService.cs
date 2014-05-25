@@ -851,6 +851,11 @@ namespace HallOfBeorn.Services
                 results = results.Where(x => x.IsUnique).ToList();
             }
 
+            if (!string.IsNullOrEmpty(model.Artist) && model.Artist != "Any")
+            {
+                results = results.Where(x => x.Artist != null && x.Artist.Name == model.Artist).ToList();
+            }
+
             results = results.Take(maxResults).ToList();
 
             if (model.Random)
@@ -925,6 +930,12 @@ namespace HallOfBeorn.Services
         public IEnumerable<string> Traits()
         {
             return traits.Values.ToList().OrderBy(x => x).ToList();
+        }
+
+        public IEnumerable<string> Spheres()
+        {
+            foreach (var item in SearchViewModel.Spheres)
+                yield return item.Text;
         }
     }
 }

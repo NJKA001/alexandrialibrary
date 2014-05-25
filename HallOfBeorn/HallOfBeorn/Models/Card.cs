@@ -70,7 +70,7 @@ namespace HallOfBeorn.Models
         public string Setup { get; set; }
 
         public string FlavorText { get; set; }
-        public string Artist { get; set; }
+        public Artist Artist { get; set; }
         public ushort Year { get; set; }
         public bool SlugIncludesOppositeTitle { get; set; }
         public bool SlugIncludesType { get; set; }

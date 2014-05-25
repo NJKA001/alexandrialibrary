@@ -205,7 +205,7 @@ When the players defeat this stage, end the game. Compare the number of tokens o
                 HitPoints = 3,
                 Traits = new List<string>() { "Gondor.", " Noble." },
                 Keywords = new List<string>() { "The first player gains control of [Card]." },
-                Text = "Response: After a villager token is discarded, exhaust Lord Alcaron to place that villager token on a location instead.If Lord Alcaron leaves play, the players have lost the game.",
+                Text = "Response: After a villager token is discarded, exhaust Lord Alcaron to place that villager token on a location instead.\r\n\r\nIf Lord Alcaron leaves play, the players have lost the game.",
                 EncounterSet = "Encounter at Amon Din",
                 Quantity = 1,
                 Number = 70
