@@ -170,6 +170,10 @@
                                 {
                                     <a title="Keyword Search" href='@string.Format("/Cards/Search?Keyword={0}", @keyword.GetText("[Card]"))'>@keyword.GetText(@Model.Title)</a>
                                 }
+                                else if (keyword.Tokens.Count > 1 && keyword.Tokens.Any(t => t.IsIcon))
+                                {
+                                    <a title="Keyword Search" href='@string.Format("/Cards/Search?Keyword={0}", @keyword.GetText("[Card]"))'><span>@keyword.GetIconPrefix(@Model.Title) <img src="@keyword.GetIconPath()" style="height:16px;margin-left:2px;margin-right:-4px;margin-bottom:-2px;" /> @keyword.GetIconSuffix(@Model.Title)</span></a>
+                                }
                                 else
                                 {
                                     foreach (var token in keyword.Tokens)

@@ -165,6 +165,7 @@ namespace HallOfBeorn.Controllers
                         if (part.StartsWith("("))
                             token.Prefix = token.Prefix + "(";
 
+                        token.Text = normalized;
                         checkForSuffix(token, part, normalized);
                         effect.Tokens.Add(token);
                         continue;

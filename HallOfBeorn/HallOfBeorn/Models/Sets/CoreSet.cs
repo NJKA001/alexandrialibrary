@@ -193,7 +193,8 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Gondor.", "Noble.", "Steward." },
                 Text = "Action: Exhaust Denethor to look at the top card of the encounter deck. You may move that card to the bottom of the deck.",
                 Quantity = 1,
-                Number = 10
+                Number = 10,
+                Artist = Artist.Tiziano_Baracchi
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -228,7 +229,8 @@ namespace HallOfBeorn.Models.Sets
                 NormalizedTraits = new List<string> { "Dunedain." },
                 Text = "Action: Exhaust Beravor to choose a player. That player draws 2 cards. Limit once per round.",
                 Quantity = 1,
-                Number = 12
+                Number = 12,
+                Artist = Artist.Tiziano_Baracchi
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -342,7 +344,8 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Dwarf.", "Warrior." },
                 Text = "Response: After a Dwarf hero you control leaves play, put Brok Ironfist into play from your hand.",
                 Quantity = 1,
-                Number = 19
+                Number = 19,
+                Artist = Artist.Even_Mehl_Amundsen
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -364,7 +367,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Text = "Action: Exhaust 1 hero you control to choose and ready a different hero.",
                 Quantity = 2,
-                Number = 21
+                Number = 21,
+                Artist = Artist.Tony_Foti
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -437,7 +441,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Attached hero gains +2 Willpower.\r\nIf attached hero is Aragorn, he also gains a Spirit resource icon.",
                 Keywords = new List<string>() { "Attach to a hero.", " Restricted." },
                 Quantity = 1,
-                Number = 27
+                Number = 27,
+                Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -502,7 +507,8 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Beorning.", "Warrior." },
                 Text = "Action: Beorn gains +5 Attack until the end of the phase. At the end of the phase in which you trigger this effect, shuffle Beorn back into your deck. (Limit once per round.)",
                 Quantity = 1,
-                Number = 31
+                Number = 31,
+                Artist = Artist.Tiziano_Baracchi
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -513,7 +519,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Text = "Action: Choose a character. Until the end of the phase, that character gains +1 Attack and +1 Defense.",
                 Quantity = 3,
-                Number = 32
+                Number = 32,
+                Artist = Artist.Leonardo_Borazio
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -592,7 +599,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Attached hero gets +1 Attack when attacking an Orc.\r\nResponse: After attached hero attacks and destroys an enemy, place 1 progress token on the current quest.",
                 Keywords = new List<string>() { "Attach to a hero.", " Restricted." },
                 Quantity = 2,
-                Number = 39
+                Number = 39,
+                Artist = Artist.David_Lecossu
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -605,7 +613,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Attached hero gets +4 Hit Points.",
                 Keywords = new List<string>() { "Attach to a hero.", " Restricted." },
                 Quantity = 2,
-                Number = 40
+                Number = 40,
+                Artist = Artist.Fredrik_Dahl_Tyskerud
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -839,7 +848,8 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Silvan." },
                 Text = "Action: Exhaust Daughter of the Nimrodel to heal up to 2 damage on any 1 hero.",
                 Quantity = 3,
-                Number = 58
+                Number = 58,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -973,7 +983,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 5,
                 Text = "Action: Choose a player. Heal all damage on each hero controlled by that player.",
                 Quantity = 1,
-                Number = 68
+                Number = 68,
+                Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1013,7 +1024,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: Exhaust Dark Knowledge to look at 1 shadow card that was just dealt to an enemy attacking you.",
                 Keywords = new List<string>() { "Attach to a hero.", " Attached hero gets -1 Willpower." },
                 Quantity = 1,
-                Number = 71
+                Number = 71,
+                Artist = Artist.Empty_Room_Studios
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1141,7 +1153,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: The player with the highest threat level attaches this card to one of his heroes. (Counts as a Condition attachment with the text: 'Attached hero does not ready during the refresh phase unless you pay 2 resources from that hero's pool.')",
                 EncounterSet = "Spiders of Mirkwood",
                 Quantity = 2,
-                Number = 80
+                Number = 80,
+                Artist = Artist.Daryl_Mandryk
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1237,7 +1250,8 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Defending character does not count its Defense.",
                 EncounterSet = "Wilderlands",
                 Quantity = 2,
-                Number = 86
+                Number = 86,
+                Artist = Artist.Marc_Scheff
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1281,7 +1295,8 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 EncounterSet = "Dol Guldur Orcs",
                 Quantity = 3,
-                Number = 89
+                Number = 89,
+                Artist = Artist.Anna_Christenson
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1298,7 +1313,8 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Dol Guldur Orcs",
                 Quantity = 1,
                 VictoryPoints = 4,
-                Number = 90
+                Number = 90,
+                Artist = Artist.Mathias_Kollros
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1314,7 +1330,8 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 EncounterSet = "Dol Guldur Orcs",
                 Quantity = 2,
-                Number = 91
+                Number = 91,
+                Artist = Artist.David_Lecossu
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1325,7 +1342,8 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Choose and discard 1 attachment from the defending character. (If this attack is undefended, discard all attachments you control.)",
                 EncounterSet = "Dol Guldur Orcs",
                 Quantity = 1,
-                Number = 92
+                Number = 92,
+                Artist = Artist.Alexandru_Sabo
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1412,7 +1430,8 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 1,
                 EncounterSet = "Passage Through Mirkwood",
                 Quantity = 1,
-                Number = 98
+                Number = 98,
+                Artist = Artist.David_Lecossu
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1455,7 +1474,8 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Escape from Dol Guldur",
                 Quantity = 2,
                 VictoryPoints = 5,
-                Number = 101
+                Number = 101,
+                Artist = Artist.Tiziano_Baracchi
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1492,7 +1512,8 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 EncounterSet = "Escape from Dol Guldur",
                 Quantity = 2,
-                Number = 103
+                Number = 103,
+                Artist = Artist.Mark_Winters
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1617,7 +1638,8 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 EncounterSet = "Journey Down the Anduin",
                 Quantity = 2,
-                Number = 113
+                Number = 113,
+                Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
