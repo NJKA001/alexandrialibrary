@@ -71,6 +71,7 @@ namespace HallOfBeorn.Models
 
         public string FlavorText { get; set; }
         public Artist Artist { get; set; }
+        public Artist OppositeArtist { get; set; }
         public ushort Year { get; set; }
         public bool SlugIncludesOppositeTitle { get; set; }
         public bool SlugIncludesType { get; set; }

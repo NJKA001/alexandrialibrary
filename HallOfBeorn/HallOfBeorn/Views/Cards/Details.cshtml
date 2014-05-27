@@ -368,6 +368,18 @@
                     {
                         <span style="margin-left:5px;margin-right:10px;">Illus. @Model.Artist</span>
                     }
+
+                    if (!string.IsNullOrEmpty(@Model.OppositeArtist))
+                    {
+                        if (!string.IsNullOrEmpty(@Model.OppositeArtistURL))
+                        {
+                            <a style="margin-left:5px;margin-right:10px;" href="@Model.OppositeArtistURL" target="_blank">Illus. @Model.OppositeArtist</a>
+                        }
+                        else
+                        {
+                            <span style="margin-left:5px;margin-right:10px;">Illus. @Model.OppositeArtist</span>
+                        }
+                    }
                 }
                 @*
                 @if (!string.IsNullOrEmpty(@Model.Year))
