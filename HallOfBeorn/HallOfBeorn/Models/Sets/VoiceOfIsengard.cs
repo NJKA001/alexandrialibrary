@@ -13,7 +13,6 @@ namespace HallOfBeorn.Models.Sets
             Abbreviation = "VoI";
             Number = 2;
             SetType = Models.SetType.Deluxe_Expansion;
-            Cycle = "Ring-Maker";
 
             Cards.Add(new Card() {
                 Title = "Éomer",
