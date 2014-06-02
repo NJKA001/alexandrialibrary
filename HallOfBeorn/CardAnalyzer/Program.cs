@@ -11,6 +11,22 @@ namespace CardAnalyzer
 {
     public static class Extensions
     {
+        public static double StdDev(this IEnumerable<int> values)
+        {
+            var mean = values.Average();
+
+            var deltas = new List<double>();
+
+            foreach (var value in values)
+            {
+                deltas.Add((double)Math.Pow((value - mean), 2));
+            }
+
+            var deltaMean = deltas.Average();
+
+            return (double)Math.Sqrt(deltaMean);
+        }
+
         public static IEnumerable<int> Mode(this IEnumerable<int> values)
         {
             var valueCountMap = new Dictionary<int, int>();
@@ -44,6 +60,11 @@ namespace CardAnalyzer
             System.Console.WriteLine(string.Join(", ", mode.Select(x => x.ToString())));
 
             return mode.OrderBy(x => x);
+        }
+
+        public static string ToNumberList(this IEnumerable<int> values)
+        {
+            return string.Join(", ", values.Select(x => string.Format("{0,2:#0}", x)));
         }
     }
 
@@ -114,14 +135,25 @@ namespace CardAnalyzer
 
             var sb = new StringBuilder();
 
-            var avgHeroThreatLeadership = service.All().Where(x => x.Sphere == Sphere.Leadership && x.CardType == CardType.Hero).Select(x => (int)x.ThreatCost).Average();
-            var modeHeroThreatLeadership = service.All().Where(x => x.Sphere == Sphere.Leadership && x.CardType == CardType.Hero).Select(x => (int)x.ThreatCost).Mode();
-            var avgHeroThreatTactics = service.All().Where(x => x.Sphere == Sphere.Tactics && x.CardType == CardType.Hero).Select(x => (int)x.ThreatCost).Average();
-            var modeHeroThreatTactics = service.All().Where(x => x.Sphere == Sphere.Tactics && x.CardType == CardType.Hero).Select(x => (int)x.ThreatCost).Mode();
-            var avgHeroThreatSpirit = service.All().Where(x => x.Sphere == Sphere.Spirit && x.CardType == CardType.Hero).Select(x => (int)x.ThreatCost).Average();
-            var modeHeroThreatSpirit = service.All().Where(x => x.Sphere == Sphere.Spirit && x.CardType == CardType.Hero).Select(x => (int)x.ThreatCost).Mode();
-            var avgHeroThreatLore = service.All().Where(x => x.Sphere == Sphere.Lore && x.CardType == CardType.Hero).Select(x => (int)x.ThreatCost).Average();
-            var modeHeroThreatLore = service.All().Where(x => x.Sphere == Sphere.Lore && x.CardType == CardType.Hero).Select(x => (int)x.ThreatCost).Mode();
+            var heroThreatLeadership = service.All().Where(x => x.Sphere == Sphere.Leadership && x.CardType == CardType.Hero).Select(x => (int)x.ThreatCost);
+            var avgHeroThreatLeadership = heroThreatLeadership.Average();
+            var stdDevHeroThreatLeadership = heroThreatLeadership.StdDev();
+            var modeHeroThreatLeadership = heroThreatLeadership.Mode();
+
+            var heroThreatTactics = service.All().Where(x => x.Sphere == Sphere.Tactics && x.CardType == CardType.Hero).Select(x => (int)x.ThreatCost);
+            var avgHeroThreatTactics = heroThreatTactics.Average();
+            var modeHeroThreatTactics = heroThreatTactics.Mode();
+            var stdDevHeroThreatTactics = heroThreatTactics.StdDev();
+
+            var heroThreatSpirit = service.All().Where(x => x.Sphere == Sphere.Spirit && x.CardType == CardType.Hero).Select(x => (int)x.ThreatCost);
+            var avgHeroThreatSpirit = heroThreatSpirit.Average();
+            var modeHeroThreatSpirit = heroThreatSpirit.Mode();
+            var stdDevHeroThreatSpirit = heroThreatSpirit.StdDev();
+            
+            var heroThreatLore = service.All().Where(x => x.Sphere == Sphere.Lore && x.CardType == CardType.Hero).Select(x => (int)x.ThreatCost);
+            var avgHeroThreatLore = heroThreatLore.Average();
+            var modeHeroThreatLore = heroThreatLore.Mode();
+            var stdDevHeroThreatLore = heroThreatLore.StdDev();
 
             var avgAllyCostLeadership = service.All().Where(x => x.Sphere == Sphere.Leadership && x.CardType == CardType.Ally).Select(x => (int)x.ResourceCost).Average();
             var modeAllyCostLeadership = service.All().Where(x => x.Sphere == Sphere.Leadership && x.CardType == CardType.Ally).Select(x => (int)x.ResourceCost).Mode();
@@ -149,22 +181,84 @@ namespace CardAnalyzer
             var modeEventCostSpirit = service.All().Where(x => x.Sphere == Sphere.Spirit && x.CardType == CardType.Event).Select(x => (int)x.ResourceCost).Mode();
             var avgEventCostLore = service.All().Where(x => x.Sphere == Sphere.Lore && x.CardType == CardType.Event).Select(x => (int)x.ResourceCost).Average();
             var modeEventCostLore = service.All().Where(x => x.Sphere == Sphere.Lore && x.CardType == CardType.Event).Select(x => (int)x.ResourceCost).Mode();
+            /*
+            sb.AppendLine("Hero Threat Cost");
+            sb.AppendLine("                Mean   (σ)     Mode");
+            sb.AppendFormat("    Leadership: {0,5:#0.00} {1,5:#0.00}    {2}\r\n", avgHeroThreatLeadership, stdDevHeroThreatLeadership, modeHeroThreatLeadership.ToNumberList());
+            sb.AppendFormat("    Tactics   : {0,5:#0.00} {1,5:#0.00}    {2}\r\n", avgHeroThreatTactics, stdDevHeroThreatTactics, modeHeroThreatTactics.ToNumberList());
+            sb.AppendFormat("    Spirit    : {0,5:#0.00} {1,5:#0.00}    {2}\r\n", avgHeroThreatSpirit, stdDevHeroThreatSpirit, modeHeroThreatSpirit.ToNumberList());
+            sb.AppendFormat("    Lore      : {0,5:#0.00} {1,5:#0.00}    {2}\r\n", avgHeroThreatLore, stdDevHeroThreatLore, modeHeroThreatLore.ToNumberList());
+            */
 
             sb.AppendLine("Hero Threat Cost");
-            sb.AppendLine("                Mean     Mode");
-            sb.AppendFormat("    Leadership: {0,5:#0.00}    {1}\r\n", avgHeroThreatLeadership, string.Join(", ", modeHeroThreatLeadership.Select(x => string.Format("{0,2:#0}", x))));
-            sb.AppendFormat("    Tactics   : {0,5:#0.00}    {1}\r\n", avgHeroThreatTactics, string.Join(", ", modeHeroThreatTactics.Select(x => string.Format("{0,2:#0}", x))));
-            sb.AppendFormat("    Spirit    : {0,5:#0.00}    {1}\r\n", avgHeroThreatSpirit, string.Join(", ", modeHeroThreatSpirit.Select(x => string.Format("{0,2:#0}", x))));
-            sb.AppendFormat("    Lore      : {0,5:#0.00}    {1}\r\n", avgHeroThreatLore, string.Join(", ", modeHeroThreatLore.Select(x => string.Format("{0,2:#0}", x))));
+            sb.AppendLine("                Mean   (σ)     Mode");
+
+            var sphere = Sphere.None;
+            for (var i = 2; i <= 5; i++)
+            {
+                sphere = (Sphere)i;
+                var heroThreats = service.All().Where(x => x.CardType == CardType.Hero && x.Sphere == sphere).Select(x => (int)x.ThreatCost);
+                var meanHeroThreats = heroThreats.Average();
+                var modeHeroThreats = heroThreats.Mode();
+                var stdDevHeroThreats = heroThreats.StdDev();
+
+                sb.AppendFormat("    {0,10}: {1,5:#0.00} {2,5:#0.00}    {3}\r\n", sphere, meanHeroThreats, stdDevHeroThreats, modeHeroThreats.ToNumberList());
+            }
 
             sb.AppendLine();
             sb.AppendLine("Ally Resource Cost");
+            sb.AppendLine("                Mean   (σ)     Mode");
+
+            for (var i = 2; i <= 5; i++)
+            {
+                sphere = (Sphere)i;
+                var allyCosts = service.All().Where(x => x.CardType == CardType.Ally && x.Sphere == sphere).Select(x => (int)x.ResourceCost);
+                var meanAllyCosts = allyCosts.Average();
+                var modeAllyCosts = allyCosts.Mode();
+                var stdDevAllyCosts = allyCosts.StdDev();
+
+                sb.AppendFormat("    {0,10}: {1,5:#0.00} {2,5:#0.00}    {3}\r\n", sphere, meanAllyCosts, stdDevAllyCosts, modeAllyCosts.ToNumberList());
+            }
+
+            sb.AppendLine();
+            sb.AppendLine("Attachment Resource Cost");
+            sb.AppendLine("                Mean   (σ)     Mode");
+
+            for (var i = 2; i <= 5; i++)
+            {
+                sphere = (Sphere)i;
+                var attachmentCosts = service.All().Where(x => x.CardType == CardType.Attachment && x.Sphere == sphere).Select(x => (int)x.ResourceCost);
+                var meanAttachmentCosts = attachmentCosts.Average();
+                var modeAttachmentCosts = attachmentCosts.Mode();
+                var stdDevAttachmentCosts = attachmentCosts.StdDev();
+
+                sb.AppendFormat("    {0,10}: {1,5:#0.00} {2,5:#0.00}    {3}\r\n", sphere, meanAttachmentCosts, stdDevAttachmentCosts, modeAttachmentCosts.ToNumberList());
+            }
+
+            sb.AppendLine();
+            sb.AppendLine("Event Resource Cost");
+            sb.AppendLine("                Mean   (σ)     Mode");
+
+            for (var i = 2; i <= 5; i++)
+            {
+                sphere = (Sphere)i;
+                var eventCosts = service.All().Where(x => x.CardType == CardType.Event && x.Sphere == sphere).Select(x => (int)x.ResourceCost);
+                var meanEventCosts = eventCosts.Average();
+                var modeEventCosts = eventCosts.Mode();
+                var stdDevEventCosts = eventCosts.StdDev();
+
+                sb.AppendFormat("    {0,10}: {1,5:#0.00} {2,5:#0.00}    {3}\r\n", sphere, meanEventCosts, stdDevEventCosts, modeEventCosts.ToNumberList());
+            }
+
+            /*
             sb.AppendLine("                Mean     Mode");
             sb.AppendFormat("    Leadership: {0,5:#0.00}    {1}\r\n", avgAllyCostLeadership, string.Join(", ", modeAllyCostLeadership.Select(x => string.Format("{0,1:#}", x))));
             sb.AppendFormat("    Tactics   : {0,5:#0.00}    {1}\r\n", avgAllyCostTactics, string.Join(", ", modeAllyCostTactics.Select(x => string.Format("{0,1:#}", x))));
             sb.AppendFormat("    Spirit    : {0,5:#0.00}    {1}\r\n", avgAllyCostSpirit, string.Join(", ", modeAllyCostSpirit.Select(x => string.Format("{0,1:#}", x))));
             sb.AppendFormat("    Lore      : {0,5:#0.00}    {1}\r\n", avgAllyCostLore, string.Join(", ", modeAllyCostLore.Select(x => string.Format("{0,1:#}", x))));
+            */
 
+            /*
             sb.AppendLine();
             sb.AppendLine("Attachment Resource Cost");
             sb.AppendLine("                Mean     Mode");
@@ -180,6 +274,7 @@ namespace CardAnalyzer
             sb.AppendFormat("    Tactics   : {0,5:#0.00}    {1}\r\n", avgEventCostTactics, string.Join(", ", modeEventCostTactics.Select(x => string.Format("{0,1:0}", x))));
             sb.AppendFormat("    Spirit    : {0,5:#0.00}    {1}\r\n", avgEventCostSpirit, string.Join(", ", modeEventCostSpirit.Select(x => string.Format("{0,1:0}", x))));
             sb.AppendFormat("    Lore      : {0,5:#0.00}    {1}\r\n", avgEventCostLore, string.Join(", ", modeEventCostLore.Select(x => string.Format("{0,1:0}", x))));
+            */
 
             System.IO.File.WriteAllText(path, sb.ToString());
         }
