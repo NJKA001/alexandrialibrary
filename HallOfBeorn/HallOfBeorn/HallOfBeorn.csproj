@@ -279,6 +279,7 @@
     <Compile Include="Models\Sets\EscapeFromDolGuldurNightmare.cs" />
     <Compile Include="Models\Sets\FoundationsOfStone.cs" />
     <Compile Include="Models\Sets\HeirsOfNumenor.cs" />
+    <Compile Include="Models\Sets\IntoThePitNightmare.cs" />
     <Compile Include="Models\Sets\JourneyAlongTheAnduinNightmare.cs" />
     <Compile Include="Models\Sets\KhazadDum.cs" />
     <Compile Include="Models\Sets\OverTheMistyMountainsGrimNightmare.cs" />
@@ -571,6 +572,7 @@
     <Content Include="Images\Cards\Heirs-of-Numenor\Southrons.png" />
     <Content Include="Images\Cards\Heirs-of-Numenor\Streets-of-Gondor.png" />
     <Content Include="Images\Cards\Heirs-of-Numenor\The-Siege-of-Cair-Andros.png" />
+    <Content Include="Images\Cards\Into-the-Pit-Nightmare\Into-the-Pit-Nightmare.png" />
     <Content Include="Images\Cards\Journey-Along-The-Anduin-Nightmare\A-Flooded-Ford.jpg" />
     <Content Include="Images\Cards\Journey-Along-The-Anduin-Nightmare\Anduin-Troll-Spawn.jpg" />
     <Content Include="Images\Cards\Journey-Along-The-Anduin-Nightmare\Brown-Water-Rats.jpg" />
