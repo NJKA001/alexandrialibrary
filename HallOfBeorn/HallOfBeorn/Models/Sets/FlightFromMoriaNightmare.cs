@@ -63,7 +63,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 StageNumber = 2,
                 Text = "While Search for an Exit is the active quest card, only flip it to side 2B at the beginning of the staging step.",
                 FlavorText = "As the presence draws near, doubt and fear surround you like a vast shadow. You must find daylight, your must escape from the Black Pit...",
-                OppositeText = "Forced: At the end of the round, shuffle the discard pile into the encounter deck and discard the top 5 cards. Resolve the" + 
+                OppositeText = "Forced: At the end of the round, shuffle the discard pile into the encounter deck and discard the top 5 cards. Resolve the " + 
                 "\"when revealed\" effects of each copy of A Foe Beyond discarded by this effect.\r\n\r\n" +
 @"No more than 1 progress can be placed on this stage each round. If the players defeat this stage, they win the game.
 
@@ -86,9 +86,9 @@ Players may bypass this quest card at the end of the combat phase.",
                 Text = "While Search for an Exit is the active quest card, only flip it to side 2B at the beginning of the staging step.",
                 FlavorText = "As the presence draws near, doubt and fear surround you like a vast shadow. You must find daylight, your must escape from the Black Pit...",
                 OppositeText = 
-@"The Nameless Fear attacks each player in turn order during the combat phase (deal and discard a shadow card for each attack). Characters are eligible to attack The Nameless Fear while it is in the staging area.
+@"The ~Nameless Fear attacks each player in turn order during the combat phase (deal and discard a shadow card for each attack). Characters are eligible to attack The ~Nameless Fear while it is in the staging area.
 
-If The Nameless Thing had 10 or more damage on it, remove all damage from it and advance to the next stage. Players may bypass this quest card at the end of the combat phase.",
+If The ~Nameless Fear has 10 or more damage on it, remove all damage from it and advance to the next stage. Players may bypass this quest card at the end of the combat phase.",
                 QuestPoints = null,
                 VictoryPoints = 1,
                 EncounterSet = "Flight from Moria Nightmare",
@@ -182,8 +182,8 @@ Players may bypass this quest card at the end of the combat phase.",
                 ImageType = ImageType.Jpg,
                 Id = "8724509F-5380-42E1-9434-FFFF1B03091D",
                 CardType = CardType.Treachery,
-                Text = "When Revealed: Choose and remove characters from the quest until the total Willpower of characters removed from the quest is equal to or higher than The Nameless Fear's Threat.",
-                Shadow = "Shadow: Discard each attachment you control with a cost less than The Nameless Fear's Threat.",
+                Text = "When Revealed: Choose and remove characters from the quest until the total Willpower of characters removed from the quest is equal to or higher than The ~Nameless Fear's Threat.",
+                Shadow = "Shadow: Discard each attachment you control with a cost less than The ~Nameless Fear's Threat.",
                 EncounterSet = "Flight from Moria Nightmare",
                 Quantity = 3,
                 Number = 8,

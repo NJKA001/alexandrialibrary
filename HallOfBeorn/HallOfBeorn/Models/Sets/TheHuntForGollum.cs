@@ -16,7 +16,7 @@ namespace HallOfBeorn.Models.Sets
             Cycle = "Shadows of Mirkwood";
 
             Cards.Add(new Card() {
-                ImageName = "M1148",
+                ImageType = Models.ImageType.Png,
                 Title = "Bilbo Baggins",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9001",
                 CardType = CardType.Hero,
@@ -29,11 +29,13 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 2,
                 Traits = new List<string>() { "Hobbit." },
                 Text = "The first player draws 1 additional card in the resource phase.",
+                FlavorText = "\"Well, my dear fellow,\" said bilbo, \"now you've heard the news, can't you spare me a moment? I want your help in something urgent.\" -The Fellowship of the Ring",
                 Quantity = 1,
-                Number = 1
+                Number = 1,
+                Artist = Artist.Tony_Foti
             });
             Cards.Add(new Card() {
-                ImageName = "M1149",
+                ImageType = Models.ImageType.Png,
                 Title = "Dúnedain Mark",
                 NormalizedTitle = "Dunedain Mark",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9002",
@@ -44,32 +46,38 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Attached hero gains +1 Attack.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Mark to another hero.",
                 Keywords = new List<string>() { "Attach to a hero." },
                 Quantity = 3,
-                Number = 2
+                Number = 2,
+                Artist = Artist.Joko_Mulyono,
+                SecondArtist = Artist.Lius_Lasahido
             });
             Cards.Add(new Card() {
-                ImageName = "M1150",
+                ImageType = Models.ImageType.Png,
                 Title = "Campfire Tales",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9003",
                 CardType = CardType.Event,
                 Sphere = Sphere.Leadership,
                 ResourceCost = 1,
                 Text = "Action: Each player draws 1 card.",
+                FlavorText = "\"It is a fair tale, though it is sad, as are all the tales of Middle-earth, and yet it may lift up your hearts.\" -Strider, The Fellowship of the Ring",
                 Quantity = 3,
-                Number = 3
+                Number = 3,
+                Artist = Artist.Felicia_Cano
             });
             Cards.Add(new Card() {
-                ImageName = "M1154",
+                ImageType = Models.ImageType.Png,
                 Title = "Mustering the Rohirrim",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9004",
                 CardType = CardType.Event,
                 Sphere = Sphere.Spirit,
                 ResourceCost = 1,
                 Text = "Action: Search the top 10 cards of your deck for any 1 Rohan ally card and add it to your hand. Then, shuffle the other cards back into your deck.",
+                FlavorText = "\"More speed we cannot make, if the strength of Rohan is to be gathered.\" -Éomer, The Return of the King",
                 Quantity = 3,
-                Number = 7
+                Number = 7,
+                Artist = Artist.Stu_Barnes
             });
             Cards.Add(new Card() {
-                ImageName = "M1155",
+                ImageType = Models.ImageType.Png,
                 Title = "Rivendell Minstrel",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9005",
                 CardType = CardType.Ally,
@@ -81,11 +89,13 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 1,
                 Traits = new List<string>() { "Noldor." },
                 Text = "Response: After you play Rivendell Minstrel from your hand, search your deck for 1 Song card and add it to your hand. Shuffle your deck.",
+                FlavorText = "As Elrond entered and went towards the seat prepared for him, Elvish minstrels began to make sweet music. -The Fellowship of the Ring",
                 Quantity = 3,
-                Number = 8
+                Number = 8,
+                Artist = Artist.Katherine_Dinger
             });
             Cards.Add(new Card() {
-                ImageName = "M1157",
+                ImageType = Models.ImageType.Png,
                 Title = "Song of Kings",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9006",
                 CardType = CardType.Attachment,
@@ -93,23 +103,32 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Traits = new List<string>() { "Song." },
                 Text = "Attached hero gains a Leadership resource icon.",
+                FlavorText = 
+@"From the ashes a fire shall be woken,
+A light from the shadows shall spring: 
+Renewed shall be blade that was broken,
+The crownless again shall be king.
+-The Fellowship of the Ring",
                 Keywords = new List<string>() { "Attach to a hero." },
                 Quantity = 3,
-                Number = 10
+                Number = 10,
+                Artist = Artist.John_Gravato
             });
             Cards.Add(new Card() {
-                ImageName = "M1156",
+                ImageType = Models.ImageType.Png,
                 Title = "Strider's Path",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9007",
                 CardType = CardType.Event,
                 Sphere = Sphere.Lore,
                 ResourceCost = 1,
                 Text = "Response: After a location is revealed from the encounter deck, immediately travel to that location without resolving its Travel effect. If another location is currently active, return it to the staging area.",
+                FlavorText = "\"My cuts, short or long, don't go wrong.\" -Strider, The Fellowship of the Ring",
                 Quantity = 3,
-                Number = 9
+                Number = 9,
+                Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
-                ImageName = "M1152",
+                ImageType = Models.ImageType.Png,
                 Title = "The Eagles Are Coming!",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9008",
                 CardType = CardType.Event,
@@ -117,11 +136,13 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 0,
                 Traits = new List<string>() { "Eagle." },
                 Text = "Action: Search the top 5 cards of your deck for any number of Eagle cards and add them to your hand. Shuffle the other cards back into your deck.",
+                FlavorText = "\"The Eagles! The Eagles!\" -Bilbo Baggins, The Hobbit",
                 Quantity = 3,
-                Number = 5
+                Number = 5,
+                Artist = Artist.Jake_Murray
             });
             Cards.Add(new Card() {
-                ImageName = "M1153",
+                ImageType = Models.ImageType.Png,
                 Title = "Westfold Horse-Breaker",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9009",
                 CardType = CardType.Ally,
@@ -133,11 +154,13 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 1,
                 Traits = new List<string>() { "Rohan." },
                 Text = "Action: Discard Westfold Horse-Breaker to choose and ready a hero.",
+                FlavorText = "\"Your own valour has done more, and the stout legs of the Westfold-men marching through the night.\" -Gandalf, The Two Towers",
                 Quantity = 3,
-                Number = 6
+                Number = 6,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1151",
+                ImageType = Models.ImageType.Png,
                 Title = "Winged Guardian",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9010",
                 CardType = CardType.Ally,
@@ -151,20 +174,22 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Winged Guardian cannot have restricted attachments.Forced: After an attack in which Winged Guardian defends resolves, pay 1 Tactics resource or discard Winged Guardian from play.",
                 Keywords = new List<string>() { "Sentinel." },
                 Quantity = 3,
-                Number = 4
+                Number = 4,
+                Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1169",
+                ImageType = Models.ImageType.Png,
                 Title = "False Lead",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9011",
                 CardType = CardType.Treachery,
                 Text = "When Revealed: The first player chooses and shuffles a card with the printed Clue trait back into the encounter deck. If there are no Clue cards in play, False Lead gains surge.",
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 2,
-                Number = 22
+                Number = 22,
+                Artist = Artist.Even_Mehl_Amundsen
             });
             Cards.Add(new Card() {
-                ImageName = "M1170",
+                ImageType = Models.ImageType.Png,
                 Title = "Flooding",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9012",
                 CardType = CardType.Treachery,
@@ -174,10 +199,11 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Doomed 1.", " Surge." },
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 2,
-                Number = 23
+                Number = 23,
+                Artist = Artist.David_Lecossu
             });
             Cards.Add(new Card() {
-                ImageName = "M1167",
+                ImageType = Models.ImageType.Png,
                 Title = "Goblintown Scavengers",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9013",
                 CardType = CardType.Enemy,
@@ -190,10 +216,11 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 1,
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 2,
-                Number = 20
+                Number = 20,
+                Artist = Artist.Jarreau_Wimberly
             });
             Cards.Add(new Card() {
-                ImageName = "M1168",
+                ImageType = Models.ImageType.Png,
                 Title = "Hunters from Mordor",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9014",
                 CardType = CardType.Enemy,
@@ -207,10 +234,11 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 5,
-                Number = 21
+                Number = 21,
+                Artist = Artist.Igor_Kieryluk
             });
             Cards.Add(new Card() {
-                ImageName = "M1171",
+                ImageType = Models.ImageType.Png,
                 Title = "Old Wives' Tales",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9015",
                 CardType = CardType.Treachery,
@@ -218,10 +246,11 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Discard 1 resource from each hero's resource pool, if able. Exhaust any hero that could not discard a resource from its pool.",
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 3,
-                Number = 24
+                Number = 24,
+                Artist = Artist.Brian_Valenzuela
             });
             Cards.Add(new Card() {
-                ImageName = "M1164",
+                ImageType = Models.ImageType.Png,
                 Title = "River Ninglor",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9016",
                 CardType = CardType.Location,
@@ -232,10 +261,11 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 4,
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 2,
-                Number = 17
+                Number = 17,
+                Artist = Artist.David_Lecossu
             });
             Cards.Add(new Card() {
-                ImageName = "M1161",
+                ImageType = Models.ImageType.Png,
                 Title = "Signs of Gollum",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9017",
                 CardType = CardType.Objective,
@@ -244,10 +274,11 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Guarded." },
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 4,
-                Number = 14
+                Number = 14,
+                Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1165",
+                ImageType = Models.ImageType.Png,
                 Title = "The East Bank",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9018",
                 CardType = CardType.Location,
@@ -258,23 +289,26 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 2,
-                Number = 18
+                Number = 18,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
-                ImageName = "M1163",
+                ImageType = Models.ImageType.Png,
                 Title = "The Eaves of Mirkwood",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9019",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Forest." },
                 Text = "While The Eaves of Mirkwood is the active location, encounter card effects cannot be canceled.",
+                FlavorText = "By the afternoon they had reached the eaves of Mirkwood, and were resting almost beneath the great overhanging boughs of its outer trees. -The Hobbit",
                 Threat = 2,
                 QuestPoints = 2,
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 3,
-                Number = 16
+                Number = 16,
+                Artist = Artist.Timo_Karhula
             });
             Cards.Add(new Card() {
-                ImageName = "M1162",
+                ImageType = Models.ImageType.Png,
                 Title = "The Old Ford",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9020",
                 CardType = CardType.Location,
@@ -286,10 +320,11 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 2,
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 2,
-                Number = 15
+                Number = 15,
+                Artist = Artist.Timo_Karhula
             });
             Cards.Add(new Card() {
-                ImageName = "M1166",
+                ImageType = Models.ImageType.Png,
                 Title = "The West Bank",
                 Id = "51223bd0-ffd1-11df-a976-0801201c9021",
                 CardType = CardType.Location,
@@ -300,44 +335,56 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 2,
-                Number = 19
+                Number = 19,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
-                ImageName = "M1158",
+                ImageType = Models.ImageType.Png,
                 Title = "The Hunt Begins",
                 StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801201c9022",
                 CardType = CardType.Quest,
+                QuestPoints = 8,
                 Text = "Setup: Reveal 1 card per player from the encounter deck, and add it to the staging area.",
+                FlavorText = "Gandalf has requested your assistance in the search for the elusive creature known as Gollum. Your search begins in the Anduin Valley between Mirkwood Forest and the Misty Mountains",
                 OppositeText = "Forced: After the players quest successfully, the first player looks at the top 3 card fo the encounter deck. Reveal and add 1 of those cards to the staging area, and discard the other 2 cards.",
+                OppositeFlavorText = "You make your way along the banks of the Anduin River, a likely place for Gollum to find food.",
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 1,
-                Number = 11
+                Number = 11,
+                Artist = Artist.Igor_Kieryluk
             });
             Cards.Add(new Card() {
-                ImageName = "M1159",
+                ImageType = Models.ImageType.Png,
                 Title = "A New Terror Abroad",
                 StageNumber = 2,
+                QuestPoints = 10,
                 Id = "51223bd0-ffd1-11df-a976-0801201c9024",
                 CardType = CardType.Quest,
                 EncounterSet = "The Hunt for Gollum",
+                FlavorText = "The wood was full of the rumor of him, dreadful tales even among beasts and birds. The Woodmen said that there was some new terror abroad, a ghost that drank blood. -The Fellowship of the Ring",
                 OppositeText = "Forced: At the beginning of the quest phase, the first player looks at the top 2 cards of the encounter deck. Reveal and add 1 of those cards to the staging area, and discard the other.",
+                OppositeFlavorText = "Rumors have led you to the eaves of Mirkwood Forest, where the Woodmen whisper of a new terror in the night...",
                 Quantity = 1,
-                Number = 12
+                Number = 12,
+                Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1160",
+                ImageType = Models.ImageType.Png,
                 Title = "On the Trail",
                 StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-0801201c9026",
                 CardType = CardType.Quest,
+                QuestPoints = 8,
                 EncounterSet = "The Hunt for Gollum",
+                FlavorText = "\"But at the western edge of Mirkwood the trail turned away. It wandered off southwards and passed out of the Wood-elves' ken, and was lost.\" -Gandalf, The Fellowship of the Ring",
                 OppositeText =
 @"Any player who does not control a hero with at least 1 Clue objective attached cannot commit characters to this quest. If there are ever no heroes with Clue objectives attached in play, reset the quest deck to stage 2B.
 
 If the players defeat this stage, the players have once again found a true sign of Gollum's passing, and have won the game.",
                 Quantity = 1,
-                Number = 13
+                Number = 13,
+                Artist = Artist.Carolina_Eade
             });
         }
     }

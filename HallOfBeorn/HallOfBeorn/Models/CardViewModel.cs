@@ -434,6 +434,16 @@ namespace HallOfBeorn.Models
             get { return _card.Artist != null ? _card.Artist.URL : string.Empty; }
         }
 
+        public string SecondArtist
+        {
+            get { return _card.SecondArtist != null ? _card.SecondArtist.Name : string.Empty; }
+        }
+
+        public string SecondArtistURL
+        {
+            get { return _card.SecondArtist != null ? _card.SecondArtist.URL : string.Empty; }
+        }
+
         public string OppositeArtist
         {
             get { return _card.OppositeArtist != null ? _card.OppositeArtist.Name : string.Empty; }

@@ -16,7 +16,7 @@ namespace HallOfBeorn.Models.Sets
             Cycle = "Shadows of Mirkwood";
 
             Cards.Add(new Card() {
-                ImageName = "M1172",
+                ImageType = Models.ImageType.Png,
                 Title = "Frodo Baggins",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9001",
                 CardType = CardType.Hero,
@@ -29,36 +29,42 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 2,
                 Traits = new List<string>() { "Hobbit." },
                 Text = "Response: After Frodo ~Baggins is damaged, cancel the damage and instead raise your threat by the amount of damage he would have been dealt. (Limit once per phase.)",
+                FlavorText = "Frodo began to feel restless, and the old paths seemed too well-trodden. he looked at maps and wondered what lay beyond their edges... -The Fellowship of the Ring",
                 Quantity = 1,
-                Number = 25
+                Number = 25,
+                Artist = Artist.John_Stanko
             });
             Cards.Add(new Card() {
-                ImageName = "M1194",
+                ImageType = Models.ImageType.Png,
                 Title = "A Frightened Beast",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9002",
                 CardType = CardType.Treachery,
                 Quantity = 3,
                 Text = "When Revealed: Each player raises his threat by the total Threat of all cards in the staging area. Any player may choose to discard from play 1 Creature ally card he controls to cancel this effect.",
+                FlavorText = "Then, one of the ponies took fright at nothing and bolted. -The Hobbit",
                 EncounterSet = "Conflict at the Carrock",
-                Number = 47
+                Number = 47,
+                Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1183",
+                ImageType = Models.ImageType.Png,
                 Title = "Against the Trolls",
                 StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801202c9003",
                 CardType = CardType.Quest,
                 Quantity = 1,
-                QuestPoints = 0,
+                QuestPoints = 1,
+                FlavorText = "You approach the Carrock, and find that the Trolls have been watching you from the top of the rocky river landmark. As you approach, the Trolls close in and attack!",
                 OppositeText = 
 @"When Revealed: Place the unique Troll cards previously set aside into the staging area.
 
 Players cannot defeat this stage if there are any Troll enemies in play.",
                 EncounterSet = "Conflict at the Carrock",
-                Number = 36
+                Number = 36,
+                Artist = Artist.Diego_Gisbert_Llorens
             });
             Cards.Add(new Card() {
-                ImageName = "M1192",
+                ImageType = Models.ImageType.Png,
                 Title = "Bee Pastures",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9005",
                 CardType = CardType.Location,
@@ -68,10 +74,11 @@ Players cannot defeat this stage if there are any Troll enemies in play.",
                 Threat = 1,
                 QuestPoints = 2,
                 EncounterSet = "Conflict at the Carrock",
-                Number = 45
+                Number = 45,
+                Artist = Artist.David_Lecossu
             });
             Cards.Add(new Card() {
-                ImageName = "M1175",
+                ImageType = Models.ImageType.Png,
                 Title = "Beorning Beekeeper",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9006",
                 CardType = CardType.Ally,
@@ -84,10 +91,12 @@ Players cannot defeat this stage if there are any Troll enemies in play.",
                 Willpower = 1,
                 HitPoints = 3,
                 Text = "Action: Discard Beorning Beekeeper from play to deal 1 damage to each enemy in the staging area.",
-                Number = 28
+                FlavorText = "\"We are getting near,\" said Gandalf. \"We are on th eedge of his bee pastures.\" - The Hobbit",
+                Number = 28,
+                Artist = Artist.John_Matson
             });
             Cards.Add(new Card() {
-                ImageName = "M1176",
+                ImageType = Models.ImageType.Png,
                 Title = "Born Aloft",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9007",
                 CardType = CardType.Attachment,
@@ -96,11 +105,13 @@ Players cannot defeat this stage if there are any Troll enemies in play.",
                 Quantity = 3,
                 ResourceCost = 0,
                 Text = "Action: Discard Born Aloft from play to return attached ally to its owner's hand.",
+                FlavorText = "\"Very well,\" said Gandalf. \"Take us where and as far as you will!\" -The Hobbit",
                 Keywords = new List<string>() { "Attach to an ally." },
-                Number = 29
+                Number = 29,
+                Artist = Artist.Salvador_Trakal
             });
             Cards.Add(new Card() {
-                ImageName = "M1173",
+                ImageType = Models.ImageType.Png,
                 Title = "Dúnedain Warning",
                 NormalizedTitle = "Dunedain Warning",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9008",
@@ -111,10 +122,12 @@ Players cannot defeat this stage if there are any Troll enemies in play.",
                 ResourceCost = 1,
                 Text = "Attached hero gains +1 Defense.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Warning to another hero.",
                 Keywords = new List<string>() { "Attach to a hero." },
-                Number = 26
+                Number = 26,
+                Artist = Artist.Taufiq,
+                SecondArtist = Artist.Vicki_Pangestu
             });
             Cards.Add(new Card() {
-                ImageName = "M1177",
+                ImageType = Models.ImageType.Png,
                 Title = "Éomund",
                 NormalizedTitle = "Eomund",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9009",
@@ -129,10 +142,12 @@ Players cannot defeat this stage if there are any Troll enemies in play.",
                 Willpower = 2,
                 HitPoints = 2,
                 Text = "Response: After Éomund leaves play, ready all Rohan characters in play.",
-                Number = 30
+                FlavorText = "\"You I have not seen before, for you are young, but I have spoken with Eomund your father...\" -Aragorn, The Two Towers",
+                Number = 30,
+                Artist = Artist.Katherine_Dinger
             });
             Cards.Add(new Card() {
-                ImageName = "M1180",
+                ImageType = Models.ImageType.Png,
                 Title = "A Burning Brand",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9010",
                 CardType = CardType.Attachment,
@@ -141,11 +156,13 @@ Players cannot defeat this stage if there are any Troll enemies in play.",
                 Quantity = 3,
                 ResourceCost = 2,
                 Text = "While attached character is defending, cancel any shadow effects on cards dealt to the attacking enemy.",
+                FlavorText = "\"Keep close to the fire, with your faces outward!\" cried Strider. \"Keep some of th elonger sticks ready in your hands.\" -The Fellowship of the Ring",
                 Keywords = new List<string>() { "Attach to a Lore character." },
-                Number = 33
+                Number = 33,
+                Artist = Artist.Toni_Justamante_Jacobs
             });
             Cards.Add(new Card() {
-                ImageName = "M1184",
+                ImageType = Models.ImageType.Png,
                 Title = "Grimbeorn the Old",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9011",
                 CardType = CardType.Objective_Ally,
@@ -165,10 +182,11 @@ If Grimbeorn the Old has 8 or more resource tokens on him, he joins the first pl
 
 Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.",
                 EncounterSet = "Conflict at the Carrock",
-                Number = 37
+                Number = 37,
+                Artist = Artist.Mark_Winters
             });
             Cards.Add(new Card() {
-                ImageName = "M1182",
+                ImageType = Models.ImageType.Png,
                 Title = "Grimbeorn's Quest",
                 StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801202c9012",
@@ -176,12 +194,15 @@ Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.
                 QuestPoints = 7,
                 Quantity = 1,
                 Text = "Setup: Add The Carrock to the staging area. Remove 4 unique Troll cards and 4 copies of the 'Sacked!' card from the encounter deck and set them aside, out of play. Then shuffle 1 'Sacked!' card per player back into the encounter deck.",
+                FlavorText = "While searching for Gollum in the Anduin valley, you recieve word that a group of Trolls have come to the Carrock.",
                 OppositeText = "Forced: After placing the 7th progress token on Grimbeorn's Quest, The Carrock becomes the active location. Discard the previous active location from play.",
+                OppositeFlavorText = "As this area is under the watch of the Beornings, you seek out their leader, Grimbeorn the Old, and discover he has already set out in a rage. You follow, hoping to find him before he confronts the Trolls.",
                 EncounterSet = "Conflict at the Carrock",
-                Number = 35
+                Number = 35,
+                Artist = Artist.Igor_Kieryluk
             });
             Cards.Add(new Card() {
-                ImageName = "M1179",
+                ImageType = Models.ImageType.Png,
                 Title = "Longbeard Map-Maker",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9014",
                 CardType = CardType.Ally,
@@ -194,10 +215,12 @@ Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.
                 Willpower = 1,
                 HitPoints = 3,
                 Text = "Action: Spend 1 Lore resource to give Longbeard Map-Maker +1 Willpower until the end of the phase.",
-                Number = 32
+                FlavorText = "On the table in the light of a big lamp with a red shade he spread a piece of parchment rather like a map. -The Hobbit",
+                Number = 32,
+                Artist = Artist.Andrew_Silver
             });
             Cards.Add(new Card() {
-                ImageName = "M1185",
+                ImageType = Models.ImageType.Png,
                 Title = "Louis",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9015",
                 CardType = CardType.Enemy,
@@ -211,10 +234,11 @@ Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.
                 Text = "While Louis is engaged with a player, all Troll enemies gain, \"Forced: After this enemy attacks, the defending player must raise his threat by 3.\"\r\n\r\nResponse: After defeating Louis, you may choose and discard 1 \"Sacked!\" card from play.",
                 Threat = 2,
                 EncounterSet = "Conflict at the Carrock",
-                Number = 38
+                Number = 38,
+                Artist = Artist.Brian_Valenzuela
             });
             Cards.Add(new Card() {
-                ImageName = "M1186",
+                ImageType = Models.ImageType.Png,
                 Title = "Morris",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9016",
                 CardType = CardType.Enemy,
@@ -228,10 +252,11 @@ Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.
                 Text = "While Morris is engaged with a player, all Troll enemies get +1 Attack.Response: After defeating Morris, you may choose and discard 1 'Sacked!' card from play.",
                 Threat = 2,
                 EncounterSet = "Conflict at the Carrock",
-                Number = 39
+                Number = 39,
+                Artist = Artist.Paul_Guzenko
             });
             Cards.Add(new Card() {
-                ImageName = "M1189",
+                ImageType = Models.ImageType.Png,
                 Title = "Muck Adder",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9017",
                 CardType = CardType.Enemy,
@@ -245,10 +270,11 @@ Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.
                 Shadow = "Shadow: Defending character gets -1 Defense for the duration of this attack.",
                 Threat = 1,
                 EncounterSet = "Conflict at the Carrock",
-                Number = 42
+                Number = 42,
+                Artist = Artist.Joe_Wilson
             });
             Cards.Add(new Card() {
-                ImageName = "M1178",
+                ImageType = Models.ImageType.Png,
                 Title = "Nor am I a Stranger",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9018",
                 CardType = CardType.Attachment,
@@ -257,11 +283,13 @@ Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Attached character gains the Rohan trait.",
+                FlavorText = "\"Nor indeed am I a stranger: for I have been in this land before, more than once, and ridden with the host of the Rohirrim, though under other name and in other guise.\" -Aragorn, The Two Towers",
                 Keywords = new List<string>() { "Attach to a character." },
                 Number = 31,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1193",
+                ImageType = Models.ImageType.Png,
                 Title = "Oak-wood Grove",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9019",
                 CardType = CardType.Location,
@@ -271,10 +299,11 @@ Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.
                 Threat = 2,
                 QuestPoints = 1,
                 EncounterSet = "Conflict at the Carrock",
-                Number = 46
+                Number = 46,
+                Artist = Artist.David_Lecossu
             });
             Cards.Add(new Card() {
-                ImageName = "M1191",
+                ImageType = Models.ImageType.Png,
                 Title = "River Langflood",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9020",
                 CardType = CardType.Location,
@@ -284,10 +313,11 @@ Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.
                 Threat = 2,
                 QuestPoints = 3,
                 EncounterSet = "Conflict at the Carrock",
-                Number = 44
+                Number = 44,
+                Artist = Artist.Marco_Caradonna
             });
             Cards.Add(new Card() {
-                ImageName = "M1196",
+                ImageType = Models.ImageType.Png,
                 Title = "Roasted Slowly",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9021",
                 CardType = CardType.Treachery,
@@ -295,10 +325,11 @@ Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.
                 Text = "When Revealed: Destroy all heroes with the card 'Sacked!' attached. Then, shuffle Roasted Slowly back into the encounter deck.",
                 Shadow = "Shadow: If attacking enemy is a Troll, remove 2 damage tokens from it.",
                 EncounterSet = "Conflict at the Carrock",
-                Number = 49
+                Number = 49,
+                Artist = Artist.Diego_Gisbert_Llorens
             });
             Cards.Add(new Card() {
-                ImageName = "M1188",
+                ImageType = Models.ImageType.Png,
                 Title = "Rupert",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9022",
                 CardType = CardType.Enemy,
@@ -312,10 +343,11 @@ Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.
                 Text = "Forced: After Rupert attacks, shuffle all copies of the 'Sacked!' card from the discard pile back into the encounter deck.Response: After defeating Rupert, you may choose and discard 1 'Sacked!' card from play.",
                 Threat = 2,
                 EncounterSet = "Conflict at the Carrock",
-                Number = 41
+                Number = 41,
+                Artist = Artist.Andrew_Silver
             });
             Cards.Add(new Card() {
-                ImageName = "M1195",
+                ImageType = Models.ImageType.Png,
                 Title = "Sacked!",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9023",
                 CardType = CardType.Treachery,
@@ -323,10 +355,11 @@ Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.
                 Text = "When Revealed: Attach to a hero with no 'Sacked!' cards attached controlled by the first player. (Cannot be canceled.) Counts as a condition attachment with the text: 'Attached hero cannot attack, defend, commit to a quest, trigger its effect, or collect resources.'",
                 Shadow = "Shadow: If attacking enemy is a Troll, resolve this card's 'when revealed' effect.",
                 EncounterSet = "Conflict at the Carrock",
-                Number = 48
+                Number = 48,
+                Artist = Artist.Lorraine_Schleter
             });
             Cards.Add(new Card() {
-                ImageName = "M1174",
+                ImageType = Models.ImageType.Png,
                 Title = "Second Breakfast",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9024",
                 CardType = CardType.Event,
@@ -334,10 +367,11 @@ Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Action: Each player returns the topmost attachment card from his discard pile to his hand.",
-                Number = 27
+                Number = 27,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1181",
+                ImageType = Models.ImageType.Png,
                 Title = "Song of Wisdom",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9025",
                 CardType = CardType.Attachment,
@@ -347,10 +381,11 @@ Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.
                 ResourceCost = 1,
                 Text = "Attached hero gains a Lore resource icon.",
                 Keywords = new List<string>() { "Attach to a hero." },
-                Number = 34
+                Number = 34,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1187",
+                ImageType = Models.ImageType.Png,
                 Title = "Stuart",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9026",
                 CardType = CardType.Enemy,
@@ -364,10 +399,11 @@ Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.
                 Text = "While Stuart is engaged with a player, all Troll enemies get +1 Defense.Response: After defeating Stuart, you may choose and discard 1 'Sacked!' card from play.",
                 Threat = 2,
                 EncounterSet = "Conflict at the Carrock",
-                Number = 40
+                Number = 40,
+                Artist = Artist.Paul_Guzenko
             });
             Cards.Add(new Card() {
-                ImageName = "M1190",
+                ImageType = Models.ImageType.Png,
                 Title = "The Carrock",
                 Id = "51223bd0-ffd1-11df-a976-0801202c9027",
                 CardType = CardType.Location,
@@ -379,7 +415,8 @@ Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.
                 Threat = 2,
                 QuestPoints = 6,
                 EncounterSet = "Conflict at the Carrock",
-                Number = 43
+                Number = 43,
+                Artist = Artist.Marco_Caradonna
             });
         }
     }

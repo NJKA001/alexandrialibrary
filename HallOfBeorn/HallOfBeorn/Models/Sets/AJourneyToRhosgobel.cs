@@ -16,7 +16,7 @@ namespace HallOfBeorn.Models.Sets
             Cycle = "Shadows of Mirkwood";
 
             Cards.Add(new Card() {
-                ImageName = "M1197",
+                ImageType = Models.ImageType.Png,
                 Title = "Prince Imrahil",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9001",
                 CardType = CardType.Hero,
@@ -29,12 +29,15 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 4,
                 Traits = new List<string>() { "Gondor.", " Noble." },
                 Text = "Response: After a character leaves play, ready Prince Imrahil. (Limit once per round.)",
+                FlavorText = "But beyond, in the great fief of Belfalas, dwelt Prince Imrahil in his castle of Dol Amroth by the sea, and he was of high blood, and his fold also, tall men and proud with sea-grey eyes. -The Return of the King.",
                 Quantity = 1,
-                Number = 50
+                Number = 50,
+                Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1204",
-                Title = "Haldir of Lorien",
+                ImageType = Models.ImageType.Png,
+                Title = "Haldir of Lórien",
+                NormalizedTitle = "Haldir of Lorien",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9002",
                 CardType = CardType.Ally,
                 Sphere = Sphere.Lore,
@@ -46,11 +49,13 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Traits = new List<string>() { "Silvan." },
                 Keywords = new List<string>() { "Ranged.", " Sentinel." },
+                FlavorText = "\"But there are some of us still who go abroad for the gathering of news and the watching of our enemies, and they speak the languages of other lands.\" -The Fellowship of the Ring",
                 Quantity = 3,
-                Number = 57
+                Number = 57,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1206",
+                ImageType = Models.ImageType.Png,
                 Title = "Radagast",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9003",
                 CardType = CardType.Ally,
@@ -63,11 +68,13 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Traits = new List<string>() { "Istari." },
                 Text = "Radagast collects 1 resource each resource phase. These resources can be used to pay for Creature cards played from your hand.Action: Spend X resources from Radagast's pool to heal X wounds on any 1 Creature.",
+                FlavorText = "\"I have an urgent errand. My news is evil.\"",
                 Quantity = 3,
-                Number = 59
+                Number = 59,
+                Artist = Artist.Rio_Sabda
             });
             Cards.Add(new Card() {
-                ImageName = "M1200",
+                ImageType = Models.ImageType.Png,
                 Title = "Landroval",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9004",
                 CardType = CardType.Ally,
@@ -82,10 +89,11 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Landroval cannot have restricted attachments.Response: After a hero card is destroyed, return Landroval to his owner's hand to put that hero back into play, with 1 damage token on it. (Limit once per game.)",
                 Keywords = new List<string>() { "Sentinel." },
                 Quantity = 3,
-                Number = 53
+                Number = 53,
+                Artist = Artist.Allison_Theus
             });
             Cards.Add(new Card() {
-                ImageName = "M1203",
+                ImageType = Models.ImageType.Png,
                 Title = "Ancient Mathom",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9005",
                 CardType = CardType.Attachment,
@@ -93,34 +101,40 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Traits = new List<string>() { "Mathom." },
                 Text = "Response: After attached location is explored, the first player draws 3 cards.",
+                FlavorText = "The Mathom-house it was called; for anything that Hobbits had no immediate use for, but were unwilling to throw away, they called a mathom. Their dwellings were apt to become rather crowded with mathoms... -The Fellowship of the Ring",
                 Keywords = new List<string>() { "Attach to a location." },
                 Quantity = 3,
-                Number = 56
+                Number = 56,
+                Artist = Artist.Anna_Mohrbacher
             });
             Cards.Add(new Card() {
-                ImageName = "M1205",
+                ImageType = Models.ImageType.Png,
                 Title = "Infighting",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9006",
                 CardType = CardType.Event,
                 Sphere = Sphere.Lore,
                 ResourceCost = 1,
                 Text = "Action: Move any number of damage from one enemy to another.",
+                FlavorText = "That's cursed rebel-talk, and I'll stick you, if you don't shut it down, see? -Orc Soldier, The Return of the King",
                 Quantity = 3,
-                Number = 58
+                Number = 58,
+                Artist = Artist.Felicia_Cano
             });
             Cards.Add(new Card() {
-                ImageName = "M1199",
+                ImageType = Models.ImageType.Png,
                 Title = "Parting Gifts",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9007",
                 CardType = CardType.Event,
                 Sphere = Sphere.Leadership,
                 ResourceCost = 0,
                 Text = "Action: Move any number of resource tokens from a Leadership hero's resource pool to any other hero's resource pool.",
+                FlavorText = "Inside the hall there was piled a large assortment of packages and parcels and small articles of furniture. -The Fellowship of the Ring",
                 Quantity = 3,
-                Number = 52
+                Number = 52,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
-                ImageName = "M1198",
+                ImageType = Models.ImageType.Png,
                 Title = "Dúnedain Quest",
                 NormalizedTitle = "Dunedain Quest",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9008",
@@ -131,10 +145,11 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Attached hero gains +1 Willpower.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Quest to another hero.",
                 Keywords = new List<string>() { "Attach to a hero." },
                 Quantity = 3,
-                Number = 51
+                Number = 51,
+                Artist = Artist.Leonardo_Borazio
             });
             Cards.Add(new Card() {
-                ImageName = "M1202",
+                ImageType = Models.ImageType.Png,
                 Title = "Escort from Edoras",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9009",
                 CardType = CardType.Ally,
@@ -147,21 +162,24 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Rohan." },
                 Text = "While committed to a quest, Escort from Edoras gets +2 Willpower.Forced: After resolving a quest to which Escort from Edoras was committed, discard Escort from Edoras from play.",
                 Quantity = 3,
-                Number = 55
+                Number = 55,
+                Artist = Artist.Mark_Winters
             });
             Cards.Add(new Card() {
-                ImageName = "M1201",
+                ImageType = Models.ImageType.Png,
                 Title = "To the Eyrie",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9010",
                 CardType = CardType.Event,
                 Sphere = Sphere.Tactics,
                 ResourceCost = 2,
                 Text = "Response: After an ally is destroyed, exhaust 1 Eagle character to move that ally from the discard pile to its owner's hand.",
+                FlavorText = "The pale peaks of the mountains were coming nearer, moonlit spikes of rock sticking out of black shadows. -The Hobbit",
                 Quantity = 3,
-                Number = 54
+                Number = 54,
+                Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
-                ImageName = "M1216",
+                ImageType = Models.ImageType.Png,
                 Title = "Festering Wounds",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9011",
                 CardType = CardType.Treachery,
@@ -169,10 +187,12 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Deal 1 damage to each wounded character. (2 damage instead if this attack is undefended.)",
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 2,
-                Number = 69
+                Number = 69,
+                Artist = Artist.Taufiq,
+                SecondArtist = Artist.Julia_Laud
             });
             Cards.Add(new Card() {
-                ImageName = "M1210",
+                ImageType = Models.ImageType.Png,
                 Title = "Athelas",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9012",
                 CardType = CardType.Objective,
@@ -181,10 +201,11 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Guarded." },
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 4,
-                Number = 63
+                Number = 63,
+                Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
-                ImageName = "M1218",
+                ImageType = Models.ImageType.Png,
                 Title = "Black Forest Bats",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9013",
                 CardType = CardType.Enemy,
@@ -198,10 +219,11 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 1,
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 5,
-                Number = 71
+                Number = 71,
+                Artist = Artist.Aurelien_Hubert
             });
             Cards.Add(new Card() {
-                ImageName = "M1214",
+                ImageType = Models.ImageType.Png,
                 Title = "Exhaustion",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9014",
                 CardType = CardType.Treachery,
@@ -209,10 +231,11 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Deal 1 damage to each exhausted character.",
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 4,
-                Number = 67
+                Number = 67,
+                Artist = Artist.Marco_Caradonna
             });
             Cards.Add(new Card() {
-                ImageName = "M1213",
+                ImageType = Models.ImageType.Png,
                 Title = "Forest Grove",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9015",
                 CardType = CardType.Location,
@@ -222,10 +245,11 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 4,
-                Number = 66
+                Number = 66,
+                Artist = Artist.Anna_Mohrbacher
             });
             Cards.Add(new Card() {
-                ImageName = "M1217",
+                ImageType = Models.ImageType.Png,
                 Title = "Mirkwood Flock",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9016",
                 CardType = CardType.Enemy,
@@ -239,10 +263,11 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 1,
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 4,
-                Number = 70
+                Number = 70,
+                Artist = Artist.Brandon_Leach
             });
             Cards.Add(new Card() {
-                ImageName = "M1212",
+                ImageType = Models.ImageType.Png,
                 Title = "Rhosgobel",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9017",
                 CardType = CardType.Location,
@@ -257,10 +282,11 @@ While Rhosgobel is in the staging area, Wilyador cannot be healed.Travel: Player
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 1,
                 VictoryPoints = 4,
-                Number = 65
+                Number = 65,
+                Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
-                ImageName = "M1215",
+                ImageType = Models.ImageType.Png,
                 Title = "Swarming Insects",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9018",
                 CardType = CardType.Treachery,
@@ -268,10 +294,12 @@ While Rhosgobel is in the staging area, Wilyador cannot be healed.Travel: Player
                 Shadow = "Shadow: If a character (including Wilyador) has more damage than each other character, deal 3 additional damage to that character.",
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 4,
-                Number = 68
+                Number = 68,
+                Artist = Artist.Taufiq,
+                SecondArtist = Artist.Julia_Laud
             });
             Cards.Add(new Card() {
-                ImageName = "M1211",
+                ImageType = Models.ImageType.Png,
                 Title = "Wilyador",
                 Id = "51223bd0-ffd1-11df-a976-0801203c9019",
                 CardType = CardType.Objective_Ally,
@@ -290,10 +318,12 @@ If Wilyador leaves play, the players have lost the game.",
                 Keywords = new List<string>() { "No attachments.", " The first player gains control of [Card]." },
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 1,
-                Number = 64
+                Number = 64,
+                Artist = Artist.Taufiq,
+                SecondArtist = Artist.Julia_Laud
             });
             Cards.Add(new Card() {
-                ImageName = "M1207",
+                ImageType = Models.ImageType.Png,
                 Title = "The Wounded Eagle",
                 StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801203c9020",
@@ -303,25 +333,29 @@ If Wilyador leaves play, the players have lost the game.",
                 Text = "Setup: Search the encounter deck for Rhosgobel and Wilyador, and add them to the staging area with 2 damage tokens on Wilyador. Then, shuffle the encounter deck.",
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 1,
-                Number = 60
+                Number = 60,
+                Artist = Artist.Joko_Mulyono,
+                SecondArtist = Artist.Fandy_Sugiarto
             });
             Cards.Add(new Card() {
-                ImageName = "M1208",
+                ImageType = Models.ImageType.Png,
                 Title = "Radagast's Request",
                 StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801203c9022",
                 CardType = CardType.Quest,
                 QuestPoints = 12,
                 EncounterSet = "A Journey to Rhosgobel",
+                FlavorText = "The Eagle's health has grown worse, but you have at last arrived at Rhosgobel, where Radagast examines the bird. He then asks you to head out into the wilderness to find the healing plant, Athelas. Meantime, any healing lore or supplies your party has it its disposal could be used to assist in comforting the Eagle until you return.",
                 OppositeText = 
 @"Reponse: After the quest phase begins, the first player may place X damage tokens on Wilyador to look at the top 3 cards of the encounter deck. Reveal and add 1 of these cards to the staging area, and discard the other 2. X is the number of players in the game.
 
 Forced: After a card effect heals Wilyador, remove that card from the game.",
                 Quantity = 1,
-                Number = 61
+                Number = 61,
+                Artist = Artist.Ijur
             });
             Cards.Add(new Card() {
-                ImageName = "M1209",
+                ImageType = Models.ImageType.Png,
                 Title = "Return to Rhosgobel",
                 StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-0801203c9024",
@@ -333,7 +367,8 @@ Forced: After a card effect heals Wilyador, remove that card from the game.",
 
 If Wilyador is completely healed when this effect resolves, Wilyador survives and the players have won the game. Otherwise, the players have lost the game.",
                 Quantity = 1,
-                Number = 62
+                Number = 62,
+                Artist = Artist.Ben_Zweifel
             });
         }
     }

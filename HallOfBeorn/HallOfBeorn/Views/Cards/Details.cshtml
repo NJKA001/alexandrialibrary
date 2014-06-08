@@ -360,24 +360,40 @@
                 <div>
                 @if (!string.IsNullOrEmpty(@Model.Artist))
                 {
+                    <span style="margin-left:5px;margin-right:-3px;">Illus.</span>
                     if (!string.IsNullOrEmpty(@Model.ArtistURL))
                     {
-                        <a style="margin-left:5px;margin-right:10px;" href="@Model.ArtistURL" target="_blank">Illus. @Model.Artist</a>
+                        <a style="margin-left:5px;margin-right:10px;" href="@Model.ArtistURL" target="_blank">@Model.Artist</a>
                     }
                     else
                     {
-                        <span style="margin-left:5px;margin-right:10px;">Illus. @Model.Artist</span>
+                        <span style="margin-left:5px;margin-right:10px;">@Model.Artist</span>
                     }
 
-                    if (!string.IsNullOrEmpty(@Model.OppositeArtist))
+                    if (!string.IsNullOrEmpty(@Model.SecondArtist))
                     {
-                        if (!string.IsNullOrEmpty(@Model.OppositeArtistURL))
+                        <span style="margin-left:-5px;">&amp;</span>
+                        if (!string.IsNullOrEmpty(@Model.SecondArtistURL))
                         {
-                            <a style="margin-left:5px;margin-right:10px;" href="@Model.OppositeArtistURL" target="_blank">Illus. @Model.OppositeArtist</a>
+                            <a style="margin-left:1px;margin-right:10px;" href="@Model.SecondArtistURL" target="_blank">@Model.SecondArtist</a>
                         }
                         else
                         {
-                            <span style="margin-left:5px;margin-right:10px;">Illus. @Model.OppositeArtist</span>
+                            <span style="margin-left:1px;margin-right:10px;">@Model.SecondArtist</span>
+                        }
+                    }
+                    
+                    
+                    if (!string.IsNullOrEmpty(@Model.OppositeArtist))
+                    {
+                        <span style="margin-left:5px;margin-right:-3px;">Opposite</span>
+                        if (!string.IsNullOrEmpty(@Model.OppositeArtistURL))
+                        {
+                            <a style="margin-left:5px;margin-right:10px;" href="@Model.OppositeArtistURL" target="_blank">@Model.OppositeArtist</a>
+                        }
+                        else
+                        {
+                            <span style="margin-left:5px;margin-right:10px;">@Model.OppositeArtist</span>
                         }
                     }
                 }
