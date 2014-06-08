@@ -24,7 +24,7 @@ namespace HallOfBeorn.Models.Sets
                 Text =
 @"You are playing Nightmare mode.
 
-Forced: After Cave Torch exhausts, place 1 damage token on this card. Then, if there are 5 or more damage tokens on this card, remove Cave Torch from the game.",
+Forced: After ~Cave Torch exhausts, place 1 damage token on this card. Then, if there are 5 or more damage tokens on this card, remove ~Cave Torch from the game.",
                 FlavorText = "All about them as they lay hung the darkness, hollow and immense, and they were oppressed by the lonliness and vastness of the dolven halls and endlessly branching stairs and passages. -The Fellowship of the Ring",
 
                 OppositeText =
@@ -36,7 +36,7 @@ Remove the following cards, in the specified quantities, from the standard encou
 2x Stairs of Náin
 2x ~Goblin Follower
 2x Crumbling Ruin
-3x Cave In
+3x ~Cave In
 2x Fouled Well
 2x ~Goblin Tunnels
 5x ~Goblin Swordsman
@@ -47,7 +47,8 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
 
                 EncounterSet = "Into the Pit Nightmare",
                 Quantity = 1,
-                Number = 1
+                Number = 1,
+                Artist = Artist.Guillaume_Ducos
             });
             Cards.Add(new Card()
             {

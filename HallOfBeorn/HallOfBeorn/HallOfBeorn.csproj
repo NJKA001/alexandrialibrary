@@ -277,6 +277,7 @@
     <Compile Include="Models\Sets\DungeonsDeepAndCavernsDimNightmare.cs" />
     <Compile Include="Models\Sets\EncounterAtAmonDin.cs" />
     <Compile Include="Models\Sets\EscapeFromDolGuldurNightmare.cs" />
+    <Compile Include="Models\Sets\FlightFromMoriaNightmare.cs" />
     <Compile Include="Models\Sets\FoundationsOfStone.cs" />
     <Compile Include="Models\Sets\HeirsOfNumenor.cs" />
     <Compile Include="Models\Sets\IntoThePitNightmare.cs" />
@@ -304,6 +305,7 @@
     <Compile Include="Models\Sets\TheMassingAtOsgiliath.cs" />
     <Compile Include="Models\Sets\TheMorgulVale.cs" />
     <Compile Include="Models\Sets\TheRedhornGate.cs" />
+    <Compile Include="Models\Sets\TheSeventhLevelNightmare.cs" />
     <Compile Include="Models\Sets\TheStewardsFear.cs" />
     <Compile Include="Models\Sets\TheStoneOfErech.cs" />
     <Compile Include="Models\Sets\TheWatcherInTheWater.cs" />
@@ -561,6 +563,7 @@
     <Content Include="Images\Cards\Escape-from-Dol-Guldur-Nightmare\Spider-of-Dol-Guldur.jpg" />
     <Content Include="Images\Cards\Escape-from-Dol-Guldur-Nightmare\Torture-Chamber.jpg" />
     <Content Include="Images\Cards\Escape-from-Dol-Guldur-Nightmare\Torture-Master.jpg" />
+    <Content Include="Images\Cards\Flight-from-Moria-Nightmare\Flight-from-Moria-Nightmare.png" />
     <Content Include="Images\Cards\Foundations-of-Stone\Foundations-of-Stone.png" />
     <Content Include="Images\Cards\Heirs-of-Numenor\Brigands.png" />
     <Content Include="Images\Cards\Heirs-of-Numenor\Brooding-Forest.png" />
@@ -1617,6 +1620,7 @@
     <Content Include="Images\Cards\The-Morgul-Vale\To-the-Tower.png" />
     <Content Include="Images\Cards\The-Morgul-Vale\Visionary-Leadership.png" />
     <Content Include="Images\Cards\The-Redhorn-Gate\The-Redhorn-Gate.png" />
+    <Content Include="Images\Cards\The-Seventh-Level-Nightmare\The-Seventh-Level-Nightmare.png" />
     <Content Include="Images\Cards\The-Steward%27s-Fear\The-Steward%27s-Fear.png" />
     <Content Include="Images\Cards\The-Stone-of-Erech\The-Stone-of-Erech.png" />
     <Content Include="Images\Cards\The-Watcher-in-the-Water\The-Watcher-in-the-Water.png" />

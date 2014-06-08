@@ -169,6 +169,11 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Mark_Bulahao);
             all.Add(Artist.Katy_Grierson);
             all.Add(Artist.Anthony_Feliciano);
+            all.Add(Artist.Juan_Carlos_Barquet);
+            all.Add(Artist.Rick_Price);
+            all.Add(Artist.Gabriel_Verdon);
+            all.Add(Artist.Mark_Behm);
+            
         }
 
         private static List<Artist> all = new List<Artist>();
@@ -234,6 +239,7 @@ namespace HallOfBeorn.Models
         public static Artist Florian_Stitz = new Artist { Name = "Florian Stitz", URL = "http://fstitz.deviantart.com" };
         public static Artist Frank_Walls = new Artist { Name = "Frank Walls", URL = "http://frank-walls.deviantart.com" };
         public static Artist Fredrik_Dahl_Tyskerud = new Artist { Name = "Fredrik Dahl Tyskerud", URL = "http://dcept.deviantart.com" };
+        public static Artist Gabriel_Verdon = new Artist { Name = "Gabriel Verdon", URL = "http://gabriel-verdon.deviantart.com" };
         public static Artist Gabrielle_Portal = new Artist { Name = "Gabrielle Portal", URL = "http://gabrielleportaldesign.blogspot.com" };
         public static Artist Guido_Kuip = new Artist { Name = "Guido Kuip", URL = "http://yoitisi.deviantart.com" };
         public static Artist Guillaume_Ducos = new Artist { Name = "Guillaume Ducos", URL = "http://herckeim.deviantart.com" };
@@ -254,6 +260,7 @@ namespace HallOfBeorn.Models
         public static Artist John_Gravato = new Artist { Name = "John Gravato", URL = "http://www.conceptboxstudios.com" };
         public static Artist John_Stanko = new Artist { Name = "John Stanko", URL = "http://stankoillustration.com" };
         public static Artist John_Wigley = new Artist { Name = "John Wigley", URL = "http://wiggers123.deviantart.com" };
+        public static Artist Juan_Carlos_Barquet = new Artist { Name = "Juan Carlos Barquet", URL = "http://jcbarquet.deviantart.com" };
         public static Artist Katherine_Dinger = new Artist { Name = "Katherine Dinger", URL = "http://jezebel.deviantart.com" };
         public static Artist Katy_Grierson = new Artist { Name = "Katy Grierson", URL = "http://kovah.deviantart.com" };
         public static Artist Kaya = new Artist { Name = "Kaya", URL = "http://gkb3rk.deviantart.com" };
@@ -269,6 +276,7 @@ namespace HallOfBeorn.Models
         public static Artist Marcia_George_Begdan = new Artist { Name = "Marcia George-Begdan", URL = "https://www.google.com/search?q=marcia+george-bogdan+art" };
         public static Artist Marco_Caradonna = new Artist { Name = "Marco Caradonna", URL = "http://ming1918.deviantart.com" };
         public static Artist Margaret_Hardy = new Artist { Name = "Margaret Hardy", URL = "http://kiwikitty37.deviantart.com" };
+        public static Artist Mark_Behm = new Artist { Name = "Mark Behm", URL = "http://www.markbehm.com" };
         public static Artist Mark_Bulahao = new Artist { Name = "Mark Bulahao", URL = "http://markbulahao.deviantart.com" };
         public static Artist Mark_Winters = new Artist { Name = "Mark Winters", URL = "http://markwinters.deviantart.com" };
         public static Artist Mathias_Kollros = new Artist { Name = "Mathias Kollros", URL = "http://guterrez.deviantart.com" };
@@ -288,6 +296,7 @@ namespace HallOfBeorn.Models
         public static Artist Piya_Wannachaiwong = new Artist { Name = "Piya Wannachaiwong", URL = "http://www.piyastudios.com" };
         public static Artist Rafal_Hrynkiewicz = new Artist { Name = "Rafal Hrynkiewicz", URL = "http://mcf.deviantart.com" };
         public static Artist Regis_Moulun = new Artist { Name = "Régis Moulun", URL = "http://moulunerie.deviantart.com" };
+        public static Artist Rick_Price = new Artist { Name = "Rick Price", URL = "https://www.google.com/search?q=rick+price+fantasy+art" };
         public static Artist Rio_Sabda = new Artist { Name = "Rio Sabda", URL = "http://kepondangkuning.deviantart.com" };
         public static Artist Roman_V_Papsuev = new Artist { Name = "Roman V. Papsuev", URL = "http://en.amokanet.ru" };
         public static Artist Ryan_Barger = new Artist { Name = "Ryan Barger", URL = "http://ryanbarger.deviantart.com" };

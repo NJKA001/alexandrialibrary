@@ -160,6 +160,8 @@ namespace HallOfBeorn.Services
             AddSet(new TheDeadMarshesNightmare());
             AddSet(new ReturnToMirkwoodNightmare());
             AddSet(new IntoThePitNightmare());
+            AddSet(new TheSeventhLevelNightmare());
+            AddSet(new FlightFromMoriaNightmare());
             AddSet(new WeMustAwayEreBreakOfDayNightmare());
             AddSet(new OverTheMistyMountainsGrimNightmare());
             AddSet(new DungeonsDeepAndCavernsDimNightmare());
