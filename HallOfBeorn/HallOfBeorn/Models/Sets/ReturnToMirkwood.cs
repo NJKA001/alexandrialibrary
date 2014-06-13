@@ -22,13 +22,16 @@ namespace HallOfBeorn.Models.Sets
                 Id = "51223bd0-ffd1-11df-a976-0801206c9001",
                 CardType = CardType.Quest,
                 QuestPoints = 2,
+                FlavorText = "As you make the final push to Thranduil's Palace, your enemies make a desperate attempt to ambush your party, and seize Gollum for themselves.",
                 OppositeText =
 @"Forced: At the beginning of the combat phase, all enemies in play enage the player guarding ~Gollum.
 
 Player cannot defeat this stage if there are any enemies in play. If players defeat this stahe, they have won the game.",
                 Quantity = 1,
                 EncounterSet = "Return to Mirkwood",
-                Number = 129
+                Number = 129,
+                Artist = Artist.John_Gravato,
+                SecondArtist = Artist.Dmitri_Bielak
             });
             Cards.Add(new Card() {
                 ImageName = "M1269",
@@ -39,7 +42,9 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 Quantity = 3,
                 ResourceCost = 3,
                 Text = "Action: Until the end of the phase, all Rohan characters get +2 Willpower.",
-                Number = 122
+                FlavorText = "With astonishing speed and skill they checked their steeds, wheeled, and came charging round. -The Two Towers",
+                Number = 122,
+                Artist = Artist.Anna_Christenson
             });
             Cards.Add(new Card() {
                 ImageName = "M1489",
@@ -53,9 +58,11 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 Defense = 4,
                 HitPoints = 6,
                 Text = "Forced: At the beginning of the encounter phase, Attercop, Attercop automatically engages the player guarding ~Gollum, regardless of his threat.",
+                FlavorText = "\"Attercop! Attercop! Won't you stop...\" -Bilbo Baggins, The Hobbit",
                 Threat = 2,
                 EncounterSet = "Return to Mirkwood",
-                Number = 139
+                Number = 139,
+                Artist = Artist.Aaron_B_Miller
             });
             Cards.Add(new Card() {
                 ImageName = "M1263",
@@ -72,7 +79,9 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 Willpower = 1,
                 HitPoints = 5,
                 Text = "While Dain Ironfoot is ready, Dwarf characters get +1 Attack and +1 Willpower.",
-                Number = 116
+                FlavorText = "\"You have not heard of Dain and the dwarves of the Iron Hills?\" -Bilbo Baggins, The Hobbit",
+                Number = 116,
+                Artist = Artist.Tiziano_Baracchi
             });
             Cards.Add(new Card() {
                 ImageName = "M1265",
@@ -83,7 +92,9 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 Quantity = 3,
                 ResourceCost = 2,
                 Text = "Play after shadow cards have been dealt, before any attacks have resolved.Combat Action: Each player may choose and discard 1 facedown shadow card from an enemy with which he is engaged.",
-                Number = 118
+                FlavorText = "\"Dawn take you all, and be stone to you!\" -Gandalf, The Hobbit",
+                Number = 118,
+                Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
                 ImageName = "M1279",
@@ -96,7 +107,8 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 Threat = 2,
                 QuestPoints = 2,
                 EncounterSet = "Return to Mirkwood",
-                Number = 132
+                Number = 132,
+                Artist = Artist.Bill_Corbett
             });
             Cards.Add(new Card() {
                 ImageName = "M1264",
@@ -110,7 +122,8 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 ResourceCost = 1,
                 Text = "Attached hero gains sentinel.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Signal to another hero.",
                 Keywords = new List<string>() { "Attach to a hero." },
-                Number = 117
+                Number = 117,
+                Artist = Artist.Ijur
             });
             Cards.Add(new Card() {
                 ImageName = "M1266",
@@ -126,7 +139,8 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 Willpower = 2,
                 HitPoints = 4,
                 Text = "Eagles of the Misty Mountains cannot have restricted attachments. Eagles of the Misty Mountains gets +1 Attack and +1 Defense for each facedown attachment it has.Response: After another Eagle character leaves play, you may attach that card facedown to Eagles of the Misty Mountains.",
-                Number = 119
+                Number = 119,
+                Artist = Artist.Sandara_Tang
             });
             Cards.Add(new Card() {
                 ImageName = "M1274",
@@ -136,12 +150,14 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 CardType = CardType.Quest,
                 QuestPoints = 3,
                 Quantity = 1,
+                FlavorText = "As soon as he thinks that no one is watching, Gollum attempts to slip his bonds and escape.",
                 OppositeText = 
 @"The player guarding ~Gollum cannot commit characters to this quest (unless he is the only player in the game).
 
 If the players quest unsuccessfully, Gollum escapes and the players have lost the game.",
                 EncounterSet = "Return to Mirkwood",
-                Number = 127
+                Number = 127,
+                Artist = Artist.Tom_Garden
             });
             Cards.Add(new Card() {
                 ImageName = "M1277",
@@ -160,7 +176,8 @@ If the players quest unsuccessfully, Gollum escapes and the players have lost th
                 
 Forced: At the end of each round, raise the threat of the player guarding ~Gollum by 3. Then, that player may choose a new player to guard ~Gollum.",
                 EncounterSet = "Return to Mirkwood",
-                Number = 130
+                Number = 130,
+                Artist = Artist.Tiziano_Baracchi
             });
             Cards.Add(new Card() {
                 ImageName = "M1282",
@@ -172,7 +189,8 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Text = "When Revealed: Raise the threat of the player guarding ~Gollum by 8. That player must choose a new player to guard Gollum, if able.",
                 Shadow = "Shadow: Raise the threat of the player guarding ~Gollum by 4.",
                 EncounterSet = "Return to Mirkwood",
-                Number = 135
+                Number = 135,
+                Artist = Artist.Tom_Garden
             });
             Cards.Add(new Card() {
                 ImageName = "M1283",
@@ -184,7 +202,8 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Text = "When Revealed: Deal 4 damage to a hero controlled by the player guarding ~Gollum. That player must choose a new player to guard Gollum, if able.",
                 Shadow = "Shadow: Deal 2 damage to a hero controlled by the player guarding ~Gollum.",
                 EncounterSet = "Return to Mirkwood",
-                Number = 136
+                Number = 136,
+                Artist = Artist.Tom_Garden
             });
             Cards.Add(new Card() {
                 ImageName = "M1285",
@@ -201,7 +220,8 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Keywords = new List<string>() { "Surge." },
                 Threat = 1,
                 EncounterSet = "Return to Mirkwood",
-                Number = 138
+                Number = 138,
+                Artist = Artist.Felicia_Cano
             });
             Cards.Add(new Card() {
                 ImageName = "M1270",
@@ -217,7 +237,9 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Willpower = 1,
                 HitPoints = 2,
                 Text = "While Mirkwood Runner is attacking alone, the defending enemy does not count its Defense.",
-                Number = 123
+                FlavorText = "\"...let a ploughman plough, but choose an otter for swimming, and for running light over grass and leaf or over snow-an Elf.\" -Legolas, The Fellowship of the Ring",
+                Number = 123,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1271",
@@ -228,7 +250,9 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Quantity = 3,
                 ResourceCost = 0,
                 Text = "Action: Look at the top card of the encounter deck. Then, you may pay 1 Lore resource to return Rumour from the Earth to your hand.",
-                Number = 124
+                FlavorText = "'Where sight fails the earth may bring us rumour,' said Aragorn. 'The land must groan under their hated feet.' -The Two Towers",
+                Number = 124,
+                Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
                 ImageName = "M1272",
@@ -239,7 +263,9 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Quantity = 3,
                 ResourceCost = 2,
                 Text = "Action: Move the top card of the encounter discard pile to the top of the encounter deck.",
-                Number = 125
+                FlavorText = "The wizard's face remained grave and attentive, and only a flicker in his deep eyes showed that he was startled and indeed alarmed. 'It has been called that before,' he said, 'but not by you.' -The Fellowship of the Ring",
+                Number = 125,
+                Artist = Artist.Henning_Ludvigsen
             });
             Cards.Add(new Card() {
                 ImageName = "M1267",
@@ -251,8 +277,10 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Quantity = 3,
                 ResourceCost = 3,
                 Text = "Action: Exhaust Support of the Eagles to choose an Eagle ally. Until the end of the phase, attached hero adds that ally's Attack or Defense (choose 1) to its own.",
+                FlavorText = "\"I would bear you, whither you will, even were you made of stone.\" -Gwaihir, The Return of the King",
                 Keywords = new List<string>() { "Attach to a Tactics hero." },
-                Number = 120
+                Number = 120,
+                Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
                 ImageName = "M1278",
@@ -266,7 +294,8 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Threat = 3,
                 QuestPoints = 2,
                 EncounterSet = "Return to Mirkwood",
-                Number = 131
+                Number = 131,
+                Artist = Artist.Andrew_Johanson
             });
             Cards.Add(new Card() {
                 ImageName = "M1273",
@@ -277,8 +306,12 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 QuestPoints = 12,
                 Quantity = 1,
                 Text = "Setup: Search the encounter deck for Gollum. Choose a player to guard Gollum at the start of the game, and place Gollum in front of that player. Then shuffle the encounter deck. Reveal 1 card per player from the encounter deck, and add it to the staging area.",
+                OppositeFlavorText = 
+@"Having captured Gollum, you must now escort him through Mirkwood Forest for interrogation at Thranduil's Palace.
+Mirkwood is always a dangerous place, but it is even worse with Gollum. Between the outbursts, tantrums, and the flying provisions, you are not afforded a moment's peace",
                 EncounterSet = "Return to Mirkwood",
-                Number = 126
+                Number = 126,
+                Artist = Artist.Ignacio_Bazan_Lazcano
             });
             Cards.Add(new Card() {
                 ImageName = "M1275",
@@ -286,11 +319,13 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-0801206c9023",
                 CardType = CardType.Quest,
+                FlavorText = "Having thwarted Gollum's escape attempt, you tighten his rope and push on through Mirkwood, to Thranduil's palace.",
                 OppositeText = "The player guarding ~Gollum cannot play cards from his hand.",
                 QuestPoints = 7,
                 Quantity = 1,
                 EncounterSet = "Return to Mirkwood",
-                Number = 128
+                Number = 128,
+                Artist = Artist.Timo_Karhula
             });
             Cards.Add(new Card() {
                 ImageName = "M1284",
@@ -302,7 +337,8 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Text = "When Revealed: Discard the top 10 cards from the deck of the player guarding ~Gollum. That player must choose a new player to guard Gollum, if able.",
                 Shadow = "Shadow: Discard the top 5 cards from the deck of the player guarding ~Gollum.",
                 EncounterSet = "Return to Mirkwood",
-                Number = 137
+                Number = 137,
+                Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
                 ImageName = "M1268",
@@ -318,7 +354,9 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Willpower = 2,
                 HitPoints = 1,
                 Text = "Response: After you play West Road Traveller from your hand, switch the active location with any other location in the staging area.",
-                Number = 121
+                FlavorText = "The dark world was rushing by, and the wind sang loudly in his ears. -The Return of the King",
+                Number = 121,
+                Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
                 ImageName = "M1281",
@@ -331,7 +369,8 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Threat = 1,
                 QuestPoints = 3,
                 EncounterSet = "Return to Mirkwood",
-                Number = 134
+                Number = 134,
+                Artist = Artist.Stacey_Diana_Clark
             });
             Cards.Add(new Card() {
                 ImageName = "M1280",
@@ -344,7 +383,8 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Threat = 2,
                 QuestPoints = 2,
                 EncounterSet = "Return to Mirkwood",
-                Number = 133
+                Number = 133,
+                Artist = Artist.Mark_Poole
             });
         }
     }

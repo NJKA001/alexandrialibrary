@@ -23,8 +23,10 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Escape." },
                 Quantity = 3,
                 Text = "When Revealed: Place 2 resource tokens on Gollum. Any player may exhaust a Lore hero to reduce this effect to 1 resource token.Escape: 4",
+                FlavorText = "Presently it grew altogether dark; the air itself seemed black and heavy to breathe. When lights appeared Sam rubbed his eyes: he thought his head was going queer. He first saw one with the corner of his left eye, a wisp of pale sheen that faded away... -The Two Towers",
                 EncounterSet = "The Dead Marshes",
-                Number = 108
+                Number = 108,
+                Artist = Artist.Carolina_Eade
             });
             Cards.Add(new Card() {
                 ImageName = "M1242",
@@ -41,7 +43,9 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 5,
                 Text = "Action: Raise your threat by 1 to ready Boromir.Action: Discard Boromir to deal 2 damage to each enemy engaged with a single player.",
-                Number = 95
+                FlavorText = "\"...in Gondor we must trust to such weapons as we have.\" -The Fellowship of the Ring",
+                Number = 95,
+                Artist = Artist.Tiziano_Baracchi
             });
             Cards.Add(new Card() {
                 ImageName = "M1244",
@@ -55,7 +59,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 2,
                 Text = "Attached hero gains ranged.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Cache to another hero.",
                 Keywords = new List<string>() { "Attach to a hero." },
-                Number = 97
+                Number = 97,
+                Artist = Artist.Stephanie_M_Brown
             });
             Cards.Add(new Card() {
                 ImageName = "M1243",
@@ -73,7 +78,9 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 2,
                 Text = "Response: Discard Dunedain Watcher from play to cancel the shadow effects of a card just triggered.",
-                Number = 96
+                FlavorText = "\"If simple folk are free from care and fear, simple they will be, and we must be secret to keep them so. That has been the task of my kindred, while the years have lengthened and the grass has grown.\" -Strider, The Fellowship of the Ring",
+                Number = 96,
+                Artist = Artist.Lindsey_Messecar
             });
             Cards.Add(new Card() {
                 ImageName = "M1247",
@@ -90,7 +97,9 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 3,
                 Text = "While Elfhelm is ready, he gains: 'Response: After your threat is raised as the result of questing unsuccessfully, or by an encounter or quest card effect, reduce your threat by 1.'",
-                Number = 100
+                FlavorText = "\"Buy my lord sends word that we must set ourselves in readiness: orders may come for a sudden move.\" -The Return of the King",
+                Number = 100,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1250",
@@ -102,8 +111,10 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Action: Exhaust Fast Hitch to ready attached character.",
+                FlavorText = "'And I put as fast a hitch over the stump as any one could have done, in the Shire or out of it.' -Sam, The Two Towers",
                 Keywords = new List<string>() { "Attach to a Hobbit character." },
-                Number = 103
+                Number = 103,
+                Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
                 ImageName = "M1262",
@@ -116,7 +127,8 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 QuestPoints = 2,
                 EncounterSet = "The Dead Marshes",
-                Number = 115
+                Number = 115,
+                Artist = Artist.Stacey_Diana_Clark
             });
             Cards.Add(new Card() {
                 ImageName = "M1259",
@@ -130,9 +142,11 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 2,
                 HitPoints = 6,
                 Text = "Forced: Remove 2 damage from Giant Marsh Worm at the end of each round.Escape: 2",
+                FlavorText = "\"No birds here. There are snakeses, wormses, things in the pools. Lot of things, lots of nasty things.\" -Gollum, The Two Towers",
                 Threat = 1,
                 EncounterSet = "The Dead Marshes",
-                Number = 112
+                Number = 112,
+                Artist = Artist.Jake_Murray
             });
             Cards.Add(new Card() {
                 ImageName = "M1254",
@@ -144,7 +158,8 @@ namespace HallOfBeorn.Models.Sets
                 IsUnique = true,
                 Text = "If Gollum ever has 8 or more resource tokens on him, shuffle him back into the encounter deck.Forced: At the end of the quest phase, the party must make an escape test, dealing 1 card per player from the encounter deck. If this test is failed, place 2 resource tokens on Gollum.",
                 EncounterSet = "The Dead Marshes",
-                Number = 107
+                Number = 107,
+                Artist = Artist.John_Matson
             });
             Cards.Add(new Card() {
                 ImageName = "M1260",
@@ -158,7 +173,8 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 12,
                 EncounterSet = "The Dead Marshes",
                 VictoryPoints = 7,
-                Number = 113
+                Number = 113,
+                Artist = Artist.Yoann_Boissonnet
             });
             Cards.Add(new Card() {
                 ImageName = "M1252",
@@ -170,8 +186,11 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Setup = "s",
                 Text = "Setup: Search the encounter deck for Gollum, and add it to the staging area. Shuffle the encounter deck, then reveal 1 card per player from the encounter deck and add it to the staging area.",
+                FlavorText = "You have followed Gollum's trail for days, and are now closing in fast pursuit. In a last ditch effort to escape you, the creature has fled to The Dead Marshes.",
+                OppositeFlavorText = "'Yes, yes,' said Gollum. 'All dead, all rotten. Elves and Men and Orcs. The Dead Marshes. There was a great battle long ago, yes, so they told him when Smeagol was young, when I was young before teh Precious came. It was a great battle. Tall Men with long swords, and terrible Elves and Orcses shrieking. They fought on th eplain for days and months at the Black Gates. But the Marshes have grown since then, swallowed up the graves; always creeping, creeping.' -The Two Towers.",
                 EncounterSet = "The Dead Marshes",
-                Number = 105
+                Number = 105,
+                Artist = Artist.Ignacio_Bazan_Lazcano
             });
             Cards.Add(new Card() {
                 ImageName = "M1256",
@@ -182,7 +201,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Text = "When Revealed: The first player makes an escape test, dealing 2 cards from the encounter deck. If this test is failed, place 1 resource token on Gollum and raise each player's threat by 2.Escape: 2",
                 EncounterSet = "The Dead Marshes",
-                Number = 109
+                Number = 109,
+                Artist = Artist.David_Lecossu
             });
             Cards.Add(new Card() {
                 ImageName = "M1249",
@@ -198,7 +218,9 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 3,
                 Text = "Response: After a Silvan character readies during the refresh phase, heal 1 damage from that character.",
-                Number = 102
+                FlavorText = "\"The Wood-elves tracked him first, an easy task for them, for his trail was still fresh then.\" -Gandalf, The Fellowship of the Rings",
+                Number = 102,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1251",
@@ -210,8 +232,10 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Attached hero gains a Tactics resource icon.",
+                FlavorText = "We go, we go, we go to war, to hew the stone and break the door. -The Two Towers",
                 Keywords = new List<string>() { "Attach to a hero." },
-                Number = 104
+                Number = 104,
+                Artist = Artist.Leonardo_Borazio
             });
             Cards.Add(new Card() {
                 ImageName = "M1246",
@@ -223,8 +247,14 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Action: Exhaust Song of Mocking to choose another hero. Until the end of the phase, attached hero takes all damage assigned to the chosen hero.",
+                FlavorText = @"Old fat spider spinning in a tree!
+Old fat spider can't see me!
+Attercop! Attercop!
+Won't you stop. Stop your spinning and look for me! 
+-Bilbo Baggins, The Hobbit ",
                 Keywords = new List<string>() { "Attach to a hero." },
-                Number = 99
+                Number = 99,
+                Artist = Artist.Carolina_Eade
             });
             Cards.Add(new Card() {
                 ImageName = "M1253",
@@ -232,6 +262,7 @@ namespace HallOfBeorn.Models.Sets
                 StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801205c9017",
                 CardType = CardType.Quest,
+                FlavorText = "After a tiring pursuit through the treacherous marshland, you have cornered Gollum, and move in for the capture.",
                 OppositeText = 
 @"Forced: After this stage is defeated, the first player chooses a player. That player must pass an Escape test, dealing 1 card from the encounter deck for each resource token on Gollum, to capture him. If Gollum is not captured at this time, reset the quest deck to stage 1B.
 
@@ -239,7 +270,8 @@ If this final Escape test is passed, the players have captured Gollum and won th
                 QuestPoints = 3,
                 Quantity = 1,
                 EncounterSet = "The Dead Marshes",
-                Number = 106
+                Number = 106,
+                Artist = Artist.Ignacio_Bazan_Lazcano
             });
             Cards.Add(new Card() {
                 ImageName = "M1261",
@@ -252,7 +284,8 @@ If this final Escape test is passed, the players have captured Gollum and won th
                 Threat = 3,
                 QuestPoints = 4,
                 EncounterSet = "The Dead Marshes",
-                Number = 114
+                Number = 114,
+                Artist = Artist.Noah_Bradley
             });
             Cards.Add(new Card() {
                 ImageName = "M1258",
@@ -263,7 +296,8 @@ If this final Escape test is passed, the players have captured Gollum and won th
                 Quantity = 4,
                 Text = "When Revealed: Each player must make an escape test, dealing 2 cards from the encounter deck for each test. Each player that fails this test places 1 resource token on Gollum, and raises his threat by 1.Escape: 5",
                 EncounterSet = "The Dead Marshes",
-                Number = 111
+                Number = 111,
+                Artist = Artist.Henning_Ludvigsen
             });
             Cards.Add(new Card() {
                 ImageName = "M1257",
@@ -274,7 +308,8 @@ If this final Escape test is passed, the players have captured Gollum and won th
                 Quantity = 3,
                 Text = "When Revealed: The first player makes an escape test counting Attack instead of Willpower, dealing 2 cards from the encounter deck. If this test is failed, place 1 resource token on Gollum and raise each player's threat by 1.Escape: 3",
                 EncounterSet = "The Dead Marshes",
-                Number = 110
+                Number = 110,
+                Artist = Artist.Igor_Kieryluk
             });
             Cards.Add(new Card() {
                 ImageName = "M1245",
@@ -291,7 +326,8 @@ If this final Escape test is passed, the players have captured Gollum and won th
                 HitPoints = 1,
                 Text = "Vassal of the Windlord cannot have restricted attachments.Forced: After an attack in which Vassal of the Windlord attacked resolves, discard Vassal of the Windlord from play.",
                 Keywords = new List<string>() { "Ranged." },
-                Number = 98
+                Number = 98,
+                Artist = Artist.Anna_Christenson
             });
             Cards.Add(new Card() {
                 ImageName = "M1248",
@@ -302,7 +338,9 @@ If this final Escape test is passed, the players have captured Gollum and won th
                 Quantity = 3,
                 ResourceCost = 5,
                 Text = "Action: Until the end of the phase, Rohan characters do not exhaust to commit to quests.",
-                Number = 101
+                FlavorText = "\"But we must ride more warily; for war is abroad, and the Rohirrim, the Horse-lords, do not sleep, even if it seems so from afar.\" -Gandalf, The Two Towers",
+                Number = 101,
+                Artist = Artist.Lin_Bo
             });
         }
     }

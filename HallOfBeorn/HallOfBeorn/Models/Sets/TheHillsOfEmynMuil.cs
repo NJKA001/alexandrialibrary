@@ -31,7 +31,8 @@ While Amon Hen is the active location, players cannot play events.",
                 QuestPoints = 5,
                 EncounterSet = "The Hills of Emyn Muil",
                 VictoryPoints = 5,
-                Number = 83
+                Number = 83,
+                Artist = Artist.Vincent_Proce
             });
             Cards.Add(new Card() {
                 ImageName = "M1231",
@@ -49,7 +50,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 QuestPoints = 5,
                 EncounterSet = "The Hills of Emyn Muil",
                 VictoryPoints = 5,
-                Number = 84
+                Number = 84,
+                Artist = Artist.Vincent_Proce
             });
             Cards.Add(new Card() {
                 ImageName = "M1219",
@@ -67,7 +69,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 HitPoints = 3,
                 Text = "Response: After Brand son of Bain attacks and defeats an enemy engaged with another player, choose and ready one of that player's characters.",
                 Keywords = new List<string>() { "Ranged." },
-                Number = 72
+                Number = 72,
+                Artist = Artist.Tiziano_Baracchi
             });
             Cards.Add(new Card() {
                 ImageName = "M1222",
@@ -83,7 +86,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 Willpower = 1,
                 HitPoints = 2,
                 Text = "Descendant of Thorondor cannot have restricted attachments.Response: After Descendant of Thorondor enters or leaves play, deal 2 damage to any 1 enemy in the staging area.",
-                Number = 75
+                Number = 75,
+                Artist = Artist.Igor_Kieryluk
             });
             Cards.Add(new Card() {
                 ImageName = "M1226",
@@ -100,7 +104,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 Willpower = 3,
                 HitPoints = 3,
                 Text = "Action: Exhaust Gildor Inglorion to look at the top 3 cards of your deck. Switch one of those cards with a card from your hand. Then, return the 3 cards to the top of your deck, in any order.",
-                Number = 79
+                Number = 79,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1227",
@@ -111,7 +116,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 Quantity = 3,
                 ResourceCost = 3,
                 Text = "Play during the Quest phase, before characters are committed to the Quest.Action: Reveal 1 less card from the encounter deck this phase. (To a minimum of 1.)",
-                Number = 80
+                Number = 80,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1238",
@@ -122,7 +128,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 Quantity = 4,
                 Text = "When Revealed: If there is an active location, remove all progress tokens from that location and return it to the staging area. If no location is moved by this effect, this card gains surge.",
                 EncounterSet = "The Hills of Emyn Muil",
-                Number = 91
+                Number = 91,
+                Artist = Artist.Noah_Bradley
             });
             Cards.Add(new Card() {
                 ImageName = "M1220",
@@ -138,7 +145,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 Willpower = 1,
                 HitPoints = 2,
                 Text = "Response: After Keen-eyed Took enters play, reveal the top card of each player's deck.Action: Return Keen-eyed Took to your hand to discard the top card of each player's deck.",
-                Number = 73
+                Number = 73,
+                Artist = Artist.Anna_Mohrbacher
             });
             Cards.Add(new Card() {
                 ImageName = "M1223",
@@ -149,7 +157,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 Quantity = 3,
                 ResourceCost = 0,
                 Text = "Action: Choose an Eagle ally. Return that character to its owner's hand.",
-                Number = 76
+                Number = 76,
+                Artist = Artist.A_M_Sartor
             });
             Cards.Add(new Card() {
                 ImageName = "M1241",
@@ -166,7 +175,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 Keywords = new List<string>() { "Doomed 2." },
                 Threat = 3,
                 EncounterSet = "The Hills of Emyn Muil",
-                Number = 94
+                Number = 94,
+                Artist = Artist.Brian_Valenzuela
             });
             Cards.Add(new Card() {
                 ImageName = "M1234",
@@ -181,7 +191,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 QuestPoints = 4,
                 EncounterSet = "The Hills of Emyn Muil",
                 VictoryPoints = 3,
-                Number = 87
+                Number = 87,
+                Artist = Artist.Aaron_B_Miller
             });
             Cards.Add(new Card() {
                 ImageName = "M1221",
@@ -192,7 +203,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Quest Action: Discard a Leadership ally to give each hero committed to this quest +1 Willpower until the end of the phase.",
-                Number = 74
+                Number = 74,
+                Artist = Artist.Lin_Bo
             });
             Cards.Add(new Card() {
                 ImageName = "M1225",
@@ -203,7 +215,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Action: Discard a Rohan ally to choose a location. Place 3 progress tokens on that location.",
-                Number = 78
+                Number = 78,
+                Artist = Artist.Erfian_Asafat
             });
             Cards.Add(new Card() {
                 ImageName = "M1239",
@@ -215,7 +228,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 Text = "When Revealed: Deal 2 damage to each character committed to this quest.",
                 Shadow = "Shadow: Remove defending character from combat. This attack is considered undefended.",
                 EncounterSet = "The Hills of Emyn Muil",
-                Number = 92
+                Number = 92,
+                Artist = Artist.Stu_Barnes
             });
             Cards.Add(new Card() {
                 ImageName = "M1240",
@@ -226,7 +240,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 Quantity = 3,
                 Text = "When Revealed: Remove 1 progress token from each location in play. Then, discard the top card of each player's deck for each progress token removed by this effect.",
                 EncounterSet = "The Hills of Emyn Muil",
-                Number = 93
+                Number = 93,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1228",
@@ -239,7 +254,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 ResourceCost = 1,
                 Text = "Attached hero gains a Spirit resource icon.",
                 Keywords = new List<string>() { "Attach to a hero." },
-                Number = 81
+                Number = 81,
+                Artist = Artist.Tiziano_Baracchi
             });
             Cards.Add(new Card() {
                 ImageName = "M1232",
@@ -253,7 +269,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 QuestPoints = 2,
                 EncounterSet = "The Hills of Emyn Muil",
                 VictoryPoints = 3,
-                Number = 85
+                Number = 85,
+                Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
                 ImageName = "M1237",
@@ -267,7 +284,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 QuestPoints = 1,
                 EncounterSet = "The Hills of Emyn Muil",
                 VictoryPoints = 1,
-                Number = 90
+                Number = 90,
+                Artist = Artist.Bill_Corbett
             });
             Cards.Add(new Card() {
                 ImageName = "M1229",
@@ -284,7 +302,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
 
 Players cannot defeat this stage until there are no Emyn Muil locations in play, and they have collected at least 20 victory points.",
                 EncounterSet = "The Hills of Emyn Muil",
-                Number = 82
+                Number = 82,
+                Artist = Artist.Igor_Kieryluk
             });
             Cards.Add(new Card() {
                 ImageName = "M1233",
@@ -298,7 +317,8 @@ Players cannot defeat this stage until there are no Emyn Muil locations in play,
                 QuestPoints = 3,
                 EncounterSet = "The Hills of Emyn Muil",
                 VictoryPoints = 3,
-                Number = 86
+                Number = 86,
+                Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card() {
                 ImageName = "M1236",
@@ -313,7 +333,8 @@ Players cannot defeat this stage until there are no Emyn Muil locations in play,
                 QuestPoints = 2,
                 EncounterSet = "The Hills of Emyn Muil",
                 VictoryPoints = 2,
-                Number = 89
+                Number = 89,
+                Artist = Artist.Lin_Bo
             });
             Cards.Add(new Card() {
                 ImageName = "M1224",
@@ -329,7 +350,8 @@ Players cannot defeat this stage until there are no Emyn Muil locations in play,
                 Willpower = 1,
                 HitPoints = 2,
                 Text = "Action: Exhaust and discard The Riddermark's Finest to place 2 progress tokens on any location.",
-                Number = 77
+                Number = 77,
+                Artist = Artist.Andrew_Johanson
             });
             Cards.Add(new Card() {
                 ImageName = "M1235",
@@ -344,7 +366,8 @@ Players cannot defeat this stage until there are no Emyn Muil locations in play,
                 QuestPoints = 2,
                 EncounterSet = "The Hills of Emyn Muil",
                 VictoryPoints = 2,
-                Number = 88
+                Number = 88,
+                Artist = Artist.Lin_Bo
             });
         }
     }
