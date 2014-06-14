@@ -11,7 +11,7 @@ namespace HallOfBeorn.Models.Sets
         {
             Name = "Voice of Isengard";
             Abbreviation = "VoI";
-            Number = 2;
+            Number = 22;
             SetType = Models.SetType.Deluxe_Expansion;
 
             Cards.Add(new Card() {
@@ -31,7 +31,8 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Rohan.", "Noble.", "Warrior." },
                 Text = "Response: After a character leaves play, Éomer gets +2 Attack until the end of the round. (Limit once per round.)",
                 FlavorText = "\"I am named Éomer son of Éomund, and am called the Third Marshal of Riddermark.\" -The Two Towers",
-                Number = 1
+                Number = 1,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 Title = "Gríma",
@@ -52,6 +53,7 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "\"Let your counsellor Gríma keep all things till your return - and I pray that we may see it, though no wise man will deem it hopeful.\" -The Two Towers",
                 Number = 2,
                 SlugIncludesType = true,
+                Artist = Artist.Matt_Stewart
             });
             Cards.Add(new Card() {
                 Title = "Saruman",
@@ -72,7 +74,8 @@ namespace HallOfBeorn.Models.Sets
 @"At the end of the round, discard Saruman from play.
 
 Response: After Saruman enters play, choose a non-unique enemy or location in the staging area. While Saruman is in play, the chosen enemy or location is considered to be out of play.",
-                Number = 3
+                Number = 3,
+                Artist = Artist.Matt_Stewart
             });
             Cards.Add(new Card() {
                 Title = "Orthanc Guard",
@@ -90,7 +93,8 @@ Response: After Saruman enters play, choose a non-unique enemy or location in th
                 Traits = new List<string>() { "Isengard." },
                 Text = "Response: After you raise your threat from the Doomed keyword, ready Orthanc Guard.",
                 FlavorText = "\"...the keepers of the gate were on the watch for me and told me that Saruman awaited me.\" -Gandalf, The Fellowship of the Ring",
-                Number = 4
+                Number = 4,
+                Artist = Artist.Adam_Lane
             });
             Cards.Add(new Card() {
                 Title = "Isengard Messenger",
@@ -108,7 +112,8 @@ Response: After Saruman enters play, choose a non-unique enemy or location in th
                 Traits = new List<string>() { "Isengard." },
                 Text = "Response: After you raise your threat from the Doomed keyword, Isengard Messenger gets +1 Willpower until the end of the round. (Limit twice per round.)",
                 FlavorText = "\"I have an urgent errand,\" he said. \"My news is evil.\" -Radagast, The Fellowship of the Ring",
-                Number = 5
+                Number = 5,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
                 Title = "Westfold Outrider",
@@ -126,7 +131,8 @@ Response: After Saruman enters play, choose a non-unique enemy or location in th
                 Traits = new List<string>() { "Rohan.", "Scout." },
                 Text = "Action: Discard Westfold Outrider to choose an enemy not engaged with you. Engage the chosen enemy.",
                 FlavorText = "\"Erkenbrand of Westfold has drawn off those men he could gather towards his fastness at Helm's Deep. The rest are scattered.\"-Rider of Rohan, The Two Towers",
-                Number = 6
+                Number = 6,
+                Artist = Artist.Diego_Gisbert_Llorens
             });
             Cards.Add(new Card() {
                 Title = "Westfold Horse-breeder",
@@ -144,7 +150,8 @@ Response: After Saruman enters play, choose a non-unique enemy or location in th
                 Traits = new List<string>() { "Rohan." },
                 Text = "Response: After Westfold Horse-breeder enters play, search the top 10 cards of your deck for a Mount attachment and add it to your hand. Shuffle your deck.",
                 FlavorText = "\"They love their horses next to their kin.\" -Boromir, The Fellowship of the Ring",
-                Number = 7
+                Number = 7,
+                Artist = Artist.Mike_Capprotti
             });
             Cards.Add(new Card() {
                 Title = "Rohan Warhorse",
@@ -159,7 +166,8 @@ Response: After Saruman enters play, choose a non-unique enemy or location in th
                 Keywords = new List<string> { "Attach to a Tactics or Rohan hero.", "Restricted." },
                 Text = "Response: After attached hero participates in an attack that destroys an enemy, exhaust Rohan Warhorse to ready attached hero.",
                 FlavorText = "Their horses were of great stature, strong and clean-limbed... -The Two Towers",
-                Number = 8
+                Number = 8,
+                Artist = Artist.Jeff_Lee_Johnson
             });
             Cards.Add(new Card() {
                 Title = "Silver Lamp",
@@ -174,7 +182,8 @@ Response: After Saruman enters play, choose a non-unique enemy or location in th
                 Keywords = new List<string> { "Attach to a Spirit hero." },
                 Text = "While attached hero is ready, shadow cards dealt to enemies engaged with you are dealt face up. ~(Shadow card effects are still resolved when resolving enemy attacks.)",
                 FlavorText = "...one of them uncovered a small lamp that gave out a slender silver beam. -The Fellowship of the Ring",
-                Number = 9
+                Number = 9,
+                Artist = Artist.Owen_William_Weber
             });
             Cards.Add(new Card() {
                 Title = "Keys of Orthanc",
@@ -189,7 +198,8 @@ Response: After Saruman enters play, choose a non-unique enemy or location in th
                 Keywords = new List<string> { "Attach to a hero." },
                 Text = "Response: After you raise your threat from the Doomed keyword, exhaust Keys of Othanc to add 1 resource to attached hero's resource pool.",
                 FlavorText = "\"He has the Key of Orthanc\" -Gandalf, The Two Towers",
-                Number = 10
+                Number = 10,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card(){
                 Title = "Legacy of Númenor",
@@ -204,7 +214,8 @@ Response: After Saruman enters play, choose a non-unique enemy or location in th
                 Keywords = new List<string> { "Doomed 4." },
                 Text = "Action: Add 1 resource to each hero's resource pool.",
                 FlavorText = "\"...in the midst of that valley is a tower of stone called Orthanc. It was not made by Saruman, but by the Men of Númenor long ago: and it is very tall and has many secrets...\" -Gandalf, The Fellowship of the Ring",
-                Number = 11
+                Number = 11,
+                Artist = Artist.Matt_Stewart
             });
             Cards.Add(new Card() {
                 Title = "Deep Knowledge",
@@ -218,7 +229,8 @@ Response: After Saruman enters play, choose a non-unique enemy or location in th
                 Keywords = new List<string> { "Doomed 2." },
                 Text = "Action: Each player draws 2 cards.",
                 FlavorText = "\"His knowledge is deep, but his pride has grown with it...\" -Gandalf, The Fellowship of the Ring",
-                Number = 12
+                Number = 12,
+                Artist = Artist.Titus_Lunter
             });
             Cards.Add(new Card() {
                 Title = "The Wizards's Voice",
@@ -233,7 +245,8 @@ Response: After Saruman enters play, choose a non-unique enemy or location in th
                 Keywords = new List<string> { "Doomed 3." },
                 Text = "Action: Each player chooses 1 enemy engaged with him. Until the end of the phase, each chosen enemy cannot attack the player that chose it.",
                 FlavorText = "...it was a delight to hear the voice speaking, all that it said seemed wise and reasonable... -The Two Towers",
-                Number = 13
+                Number = 13,
+                Artist = Artist.Andrew_Johanson
             });
             Cards.Add(new Card() {
                 Title = "Power of Orthanc",
@@ -248,7 +261,8 @@ Response: After Saruman enters play, choose a non-unique enemy or location in th
                 Keywords = new List<string> { "Doomed 2." },
                 Text = "Action: Each player may choose and discard a Condition attachment from play.",
                 FlavorText = "\"But Saruman has long studied the arts of the Enemy himself, and thus we have often been able to forestall him.\" -Gandalf, The Fellowship of the Ring",
-                Number = 14
+                Number = 14,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
                 Title = "The Seeing-stone",
@@ -262,7 +276,8 @@ Response: After Saruman enters play, choose a non-unique enemy or location in th
                 Keywords = new List<string> { "Doomed 1." },
                 Text = "Action: Search your deck for a card with the Doomed keyword and add it to your hand. Shuffle your deck.",
                 FlavorText = "\"...alone it could do nothing but see small images of things far off and days remote.\" -Gandalf, The Two Towers",
-                Number = 15
+                Number = 15,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card() {
                 Title = "Gríma",
@@ -284,7 +299,8 @@ Action: Exhaust Grima to draw a card.
 If Gríma leaves play, the players lose the game.",
                 FlavorText = "Behind him cringing between two other men, came Gríma the Wormtongue. -The Two Towers",
                 Quantity = 1,
-                Number = 16
+                Number = 16,
+                Artist = Artist.Nacho_Molina
             });
             Cards.Add(new Card() {
                 Title = "The Islet",
@@ -301,7 +317,8 @@ If Gríma leaves play, the players lose the game.",
                 FlavorText = "There were three lines of flat stepping-stones across the stream, and between them fords for horses, that went from either brink to a bare eyot in the midst. -The Two Towers",
                 Quantity = 1,
                 EasyModeQuantity = 1,
-                Number = 17
+                Number = 17,
+                Artist = Artist.Alyn_Spiller
             });
             Cards.Add(new Card()
             {
@@ -317,7 +334,8 @@ If Gríma leaves play, the players lose the game.",
                 FlavorText = "The road dipped between rising turf-banks, carving its way through the terraces to the river's edge, and up again upon the further side. -The Two Towers",
                 Quantity = 3,
                 EasyModeQuantity = 3,
-                Number = 18
+                Number = 18,
+                Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card()
             {
@@ -332,7 +350,8 @@ If Gríma leaves play, the players lose the game.",
                 Text = "While any player has 3 or more cards in hand, The King's Road gets +3 quest points.\r\n\r\nWhile any player has 5 or more cards in hand, The King's Road gains: \"When faced with the option to travel, the players must travel to The King's Road, if able.\"",
                 Quantity = 2,
                 EasyModeQuantity = 2,
-                Number = 19
+                Number = 19,
+                Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card()
             {
@@ -348,7 +367,8 @@ If Gríma leaves play, the players lose the game.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack. If this attack destroys a character, remove 1 time counter from the current quest.",
                 Quantity = 4,
                 EasyModeQuantity = 2,
-                Number = 20
+                Number = 20,
+                Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card()
             {
@@ -361,7 +381,8 @@ If Gríma leaves play, the players lose the game.",
                 Shadow = "Shadow: Defending player discards an attachment he controls (each attachment he controls instead if this attack is undefended).",
                 Quantity = 2,
                 EasyModeQuantity = 1,
-                Number = 21
+                Number = 21,
+                Artist = Artist.Sabin_Boykinov
             });
             Cards.Add(new Card()
             {
@@ -373,7 +394,8 @@ If Gríma leaves play, the players lose the game.",
                 Text = "When Revealed: Each player must choose: Either remove 1 time counter from the current quest, or search the encounter deck and discard pile for a Dunland enemy, reveal it, and add it to the staging area. Shuffle the encounter deck. If any player has 5 or more cards in hand, this effect cannot be canceled.",
                 Quantity = 1,
                 EasyModeQuantity = 0,
-                Number = 22
+                Number = 22,
+                Artist = Artist.David_Horne
             });
             Cards.Add(new Card()
             {
@@ -386,7 +408,8 @@ If Gríma leaves play, the players lose the game.",
                 FlavorText = "\"Troubles follow you like crows, and ever the oftener the wrose.\" -Gríma, The Two Towers",
                 Quantity = 2,
                 EasyModeQuantity = 2,
-                Number = 23
+                Number = 23,
+                Artist = Artist.John_Gravato
             });
             Cards.Add(new Card()
             {
@@ -407,7 +430,8 @@ If Gríma leaves play, the players lose the game.",
                 Text = "Forced: After Mugash is defeated, the first player attaches a hero he controls and exhausts that hero. (Counts as a Captive attachment with the text: \"Attached hero cannot ready. If attached hero leaves play, the players lose the game.\")",
                 Quantity = 1,
                 EasyModeQuantity = 1,
-                Number = 24
+                Number = 24,
+                Artist = Artist.Brent_Hollowel
             });
             Cards.Add(new Card()
             {
@@ -426,7 +450,8 @@ If Gríma leaves play, the players lose the game.",
                 VictoryPoints = 3,
                 Quantity = 3,
                 EasyModeQuantity = 3,
-                Number = 25
+                Number = 25,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card()
             {
@@ -445,7 +470,8 @@ If Gríma leaves play, the players lose the game.",
                 Shadow = "Shadow: If this attack destroys a character, remove 1 time counter from the current quest.",
                 Quantity = 3,
                 EasyModeQuantity = 3,
-                Number = 26
+                Number = 26,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card()
             {
@@ -461,7 +487,8 @@ If Gríma leaves play, the players lose the game.",
                 FlavorText = "Beyond there glimmered far away, as if floating on a grey cloud, the white head of tall Methedras, the last peak of the Misty Mountains. -The Two Towers",
                 Quantity = 4,
                 EasyModeQuantity = 4,
-                Number = 27
+                Number = 27,
+                Artist = Artist.Stacey_Diana_Clark
             });
             Cards.Add(new Card()
             {
@@ -476,7 +503,8 @@ If Gríma leaves play, the players lose the game.",
                 Text = "Forced: After ~Orc Cave leaves play as an explored location, the first player Searches 5.\r\n\r\nTravel: Discard the top X cards of the encounter deck to travel here. X is the number of players in the game. Add each Orc enemy discarded this way to the staging area.",
                 Quantity = 3,
                 EasyModeQuantity = 3,
-                Number = 28
+                Number = 28,
+                Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card()
             {
@@ -492,7 +520,8 @@ If Gríma leaves play, the players lose the game.",
                 Shadow = "Shadow: Defending player discards an attachment he controls.",
                 Quantity = 2,
                 EasyModeQuantity = 2,
-                Number = 29
+                Number = 29,
+                Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card()
             {
@@ -504,7 +533,8 @@ If Gríma leaves play, the players lose the game.",
                 Text = "When Revealed: Each player searches the encounter deck and discard pile for a location and adds it to the staging area. If the total Threat in the staging area is less than the total Willpower of all characters committed to the quest, each Orc enemy engaged with a player makes an immediate attack.",
                 Quantity = 2,
                 EasyModeQuantity = 0,
-                Number = 30
+                Number = 30,
+                Artist = Artist.Joel_Hustak
             });
             Cards.Add(new Card()
             {
@@ -520,7 +550,8 @@ If Gríma leaves play, the players lose the game.",
                 Text = "Action: Exhaust a hero to claim this objective when it is free of encounters. Attach Mugash to that hero.\r\n\r\nForced: After attached hero takes damage, return Mugash to the top of the encounter deck.",
                 Quantity = 1,
                 EasyModeQuantity = 1,
-                Number = 31
+                Number = 31,
+                Artist = Artist.Brent_Hollowel
             });
             Cards.Add(new Card()
             {
@@ -539,7 +570,8 @@ If Gríma leaves play, the players lose the game.",
                 VictoryPoints = 1,
                 Quantity = 1,
                 EasyModeQuantity = 1,
-                Number = 32
+                Number = 32,
+                Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card()
             {
@@ -559,7 +591,8 @@ If Gríma leaves play, the players lose the game.",
                 FlavorText = "\"There is a great power in them, and they seem able to wrap themselves in shadow...\" -Merry, The Two Towers",
                 Quantity = 4,
                 EasyModeQuantity = 3,
-                Number = 33
+                Number = 33,
+                Artist = Artist.Mike_Nash
             });
             Cards.Add(new Card()
             {
@@ -579,7 +612,8 @@ If Gríma leaves play, the players lose the game.",
                 FlavorText = "\"I should be terrified of meeting them, if there were no true Ents about to look after them.\" -Merry, The Two Towers",
                 Quantity = 3,
                 EasyModeQuantity = 2,
-                Number = 34
+                Number = 34,
+                Artist = Artist.Jim_Pavelec
             });
             Cards.Add(new Card()
             {
@@ -599,7 +633,8 @@ If Gríma leaves play, the players lose the game.",
                 FlavorText = "\"We could not see them, of course, but the whole air was full of creaking.\" -Merry, The Two Towers",
                 Quantity = 3,
                 EasyModeQuantity = 2,
-                Number = 35
+                Number = 35,
+                Artist = Artist.Mike_Nash
             });
             Cards.Add(new Card()
             {
@@ -615,7 +650,8 @@ If Gríma leaves play, the players lose the game.",
                 Shadow = "Attacking enemy makes an additional attack after this one.",
                 Quantity = 3,
                 EasyModeQuantity = 3,
-                Number = 36
+                Number = 36,
+                Artist = Artist.Alyn_Spiller
             });
             Cards.Add(new Card()
             {
@@ -627,7 +663,8 @@ If Gríma leaves play, the players lose the game.",
                 Text = "When Revealed: Each Huorn enemy engaged with a player makes an immediate attack. If no attack was made as a result of this effect, each player must search encounter deck and discard pile for a Huorn enemu and pit it into play engaged with him. This effect cannot be canceled.",
                 Quantity = 4,
                 EasyModeQuantity = 1,
-                Number = 37
+                Number = 37,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card()
             {
@@ -646,7 +683,8 @@ If Gríma leaves play, the players lose the game.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack.",
                 Quantity = 3,
                 EasyModeQuantity = 3,
-                Number = 38
+                Number = 38,
+                Artist = Artist.Diego_Gisbert_Llorens
             });
              Cards.Add(new Card()
             {
@@ -665,7 +703,8 @@ If Gríma leaves play, the players lose the game.",
                 Shadow = "Shadow: Attacking enemy makes an additional attack after this one.",
                 Quantity = 3,
                 EasyModeQuantity = 1,
-                Number = 39
+                Number = 39,
+                Artist = Artist.Diego_Gisbert_Llorens
             });
              Cards.Add(new Card()
             {
@@ -684,7 +723,8 @@ If Gríma leaves play, the players lose the game.",
                 Text = "Forced: After ~Orc Hound engages a player, that player must exhaust a character he controls.",
                 Quantity = 2,
                 EasyModeQuantity = 1,
-                Number = 40
+                Number = 40,
+                Artist = Artist.Ilich_Henriquez
             });
              Cards.Add(new Card()
             {
@@ -697,7 +737,8 @@ If Gríma leaves play, the players lose the game.",
                 FlavorText = "'The scouts have come back at last,' said an Orc close at hand. -The Two Towers",
                 Quantity = 2,
                 EasyModeQuantity = 2,
-                Number = 41
+                Number = 41,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card()
             {
@@ -716,7 +757,8 @@ If Gríma leaves play, the players lose the game.",
                 FlavorText = "...the wild men of the Dunland fells. -The Two Towers",
                 Quantity = 3,
                 EasyModeQuantity = 3,
-                Number = 42
+                Number = 42,
+                Artist = Artist.Jason_Ward
             });
             Cards.Add(new Card()
             {
@@ -735,7 +777,8 @@ If Gríma leaves play, the players lose the game.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack (+2 Attack instead if the defending player has at least 3 cards in his hand).",
                 Quantity = 2,
                 EasyModeQuantity = 2,
-                Number = 43
+                Number = 43,
+                Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card()
             {
@@ -754,7 +797,8 @@ If Gríma leaves play, the players lose the game.",
                 Shadow = "Shadow: Discard an attachment you control.",
                 Quantity = 2,
                 EasyModeQuantity = 0,
-                Number = 44
+                Number = 44,
+                Artist = Artist.Jason_Ward
             });
             Cards.Add(new Card()
             {
@@ -768,7 +812,8 @@ If Gríma leaves play, the players lose the game.",
                 FlavorText = "\"They hate us, and they are glad; for our doom seems certain to them.\" -Gamling, The Two Towers",
                 Quantity = 2,
                 EasyModeQuantity = 1,
-                Number = 45
+                Number = 45,
+                Artist =  Artist.Ilich_Henriquez
             });
             Cards.Add(new Card()
             {
@@ -787,7 +832,8 @@ If Gríma leaves play, the players lose the game.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack.",
                 Quantity = 2,
                 EasyModeQuantity = 2,
-                Number = 46
+                Number = 46,
+                Artist = Artist.David_Horne
             });
             Cards.Add(new Card()
             {
@@ -805,7 +851,8 @@ If Gríma leaves play, the players lose the game.",
                 Text = "Forced: After ~Dunland Chieftain engages a player, discard X cards from the top of the encounter deck where X is the number of cards in the engages player's hand. Put the topmost Dunland enemy discarded this way into play engaged with that player.",
                 Quantity = 2,
                 EasyModeQuantity = 0,
-                Number = 47
+                Number = 47,
+                Artist = Artist.Jim_Pavelec
             });
             Cards.Add(new Card()
             {
@@ -824,7 +871,8 @@ If Gríma leaves play, the players lose the game.",
                 Shadow = "Shadow: Attacking enemy makes an additional attack after this one.",
                 Quantity = 3,
                 EasyModeQuantity = 3,
-                Number = 48
+                Number = 48,
+                Artist = Artist.Alvaro_Calvo_Escudero
             });
             Cards.Add(new Card()
             {
@@ -838,7 +886,8 @@ If Gríma leaves play, the players lose the game.",
                 FlavorText = "\"I looked on the hillmen and they seemed over large for me...\" -Gimli, The Two Towers",
                 Quantity = 2,
                 EasyModeQuantity = 1,
-                Number = 49
+                Number = 49,
+                Artist = Artist.Alvaro_Calvo_Escudero
             });
             Cards.Add(new Card()
             {
@@ -855,7 +904,8 @@ If Gríma leaves play, the players lose the game.",
                 Shadow = "Shadow: Defending player exhausts a character he controls.",
                 Quantity = 3,
                 EasyModeQuantity = 1,
-                Number = 50
+                Number = 50,
+                Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card()
             {
@@ -871,7 +921,8 @@ If Gríma leaves play, the players lose the game.",
                 FlavorText = "The forest was dark and close. -The Two Towers",
                 Quantity = 3,
                 EasyModeQuantity = 3,
-                Number = 51
+                Number = 51,
+                Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card()
             {
@@ -884,7 +935,8 @@ If Gríma leaves play, the players lose the game.",
                 Shadow = "Shadow: If this attack is undefended, return the active location to the staging area.",
                 Quantity = 3,
                 EasyModeQuantity = 3,
-                Number = 52
+                Number = 52,
+                Artist = Artist.Derek_Zabrocki
             });
             Cards.Add(new Card()
             {
@@ -903,7 +955,8 @@ If Gríma leaves play, the players lose the game.",
                 Shadow = "Shadow: Defending player exhausts a character he controls.",
                 Quantity = 3,
                 EasyModeQuantity = 3,
-                Number = 53
+                Number = 53,
+                Artist = Artist.Piya_Wannachaiwong
             });
             Cards.Add(new Card()
             {
@@ -920,7 +973,8 @@ If Gríma leaves play, the players lose the game.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack for each location in the staging area.",
                 Quantity = 3,
                 EasyModeQuantity = 3,
-                Number = 54
+                Number = 54,
+                Artist = Artist.Joel_Hustak
             });
             Cards.Add(new Card()
             {
@@ -934,7 +988,8 @@ If Gríma leaves play, the players lose the game.",
                 FlavorText = "Out of the darkness arrows whistled. -The Two Towers",
                 Quantity = 3,
                 EasyModeQuantity = 2,
-                Number = 55
+                Number = 55,
+                Artist = Artist.Sandra_Duchiewicz
             });
             Cards.Add(new Card()
             {
@@ -947,7 +1002,8 @@ If Gríma leaves play, the players lose the game.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack (+2 Attack instead if the defending character is undamaged.)",
                 Quantity = 3,
                 EasyModeQuantity = 2,
-                Number = 56
+                Number = 56,
+                Artist = Artist.Regis_Moulun
             });
             Cards.Add(new Card()
             {
@@ -960,7 +1016,8 @@ If Gríma leaves play, the players lose the game.",
                 Text = "When Revealed: Attach to a location in play. (Counts as a Condition attachment with the text: \"Limit 1 per location. Attached location gets +2 quest points and Gain: 'Forced: Remove an additional time counter from the current quest at the end of each refresh phase, if able.'\")",
                 Quantity = 2,
                 EasyModeQuantity = 2,
-                Number = 57
+                Number = 57,
+                Artist = Artist.Sarah_Morris
             });
             Cards.Add(new Card()
             {
@@ -973,7 +1030,8 @@ If Gríma leaves play, the players lose the game.",
                 FlavorText = "I have just about enough strength left to find some hole away up there. And then I must rest a little.\r\n-Frodo, The Return of the King",
                 Quantity = 2,
                 EasyModeQuantity = 1,
-                Number = 58
+                Number = 58,
+                Artist = Artist.Sara_Betsy
             });
             Cards.Add(new Card()
             {
@@ -990,7 +1048,8 @@ If Gríma leaves play, the players lose the game.",
                 Keywords = new List<string> { "Time 5." },
                 OppositeText = "Forced: After the last time counter is removed from this stage, discard Gríma from play.\r\n\r\nThe players cannot advance unless the first player controls Gríma.",
                 Quantity = 1,
-                Number = 59
+                Number = 59,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card()
             {
@@ -1006,7 +1065,8 @@ If Gríma leaves play, the players lose the game.",
                 Keywords = new List<string> { "Time 2." },
                 OppositeText = "When Revealed: Each player searches the encounter deck and discard pile for 1 different Dunland enemy and adds it to the staging area. Shuffle the encounter deck.\r\n\r\nForced: After the last time counter is removed from this stage, each player assigns X damage among characters he controls where X is the number of cards in his hand. Place 2 time counters on this stage.",
                 Quantity = 1,
-                Number = 60
+                Number = 60,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card()
             {
@@ -1023,7 +1083,8 @@ If Gríma leaves play, the players lose the game.",
                 Keywords = new List<string> { "Time 3." },
                 OppositeText = "Forced: After the last time counter is removed from this stage, discard the top X cards from the encounter deck. X is the number of cards in the first player's hand. Add each enemy discarded this way to the staging area. Put 3 time counters on this stage.\r\n\r\nWhile there is at least 1 enemy in play, the players cannot defeat this stage. If the players defeat this stage, they win the game.",
                 Quantity = 1,
-                Number = 61
+                Number = 61,
+                Artist = Artist.Adam_Lane
             });
             Cards.Add(new Card() {
                 Title = "Orders from Orthanc",
@@ -1039,7 +1100,8 @@ If Gríma leaves play, the players lose the game.",
                 OppositeFlavorText = "Mugash and his Orcs have been raiding the surrounding coutryside from their hidden lair in Methedras, and carrying loot and captives back into the mountains. It's time to put an end to this menace...",
                 OppositeText = "When Revealed: Each player searches the encounter deck for a Mountain location and adds it to the staging area. Shuffle the encounter deck. Then, advance to stage 2.",
                 Quantity = 1,
-                Number = 62
+                Number = 62,
+                Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
                 Title = "Searching for Mugash",
@@ -1054,7 +1116,8 @@ If Gríma leaves play, the players lose the game.",
                 Keywords = new List<string> { "Time 2." },
                 OppositeText = "Forced: After the last time counter is removed for this stage, shuffle the discard pile into the encounter deck and reveal 2 encounter cards per player. Place 2 time counters on this stage.\r\n\r\nResponse: After questing successfully, cancel all progress that would be placed on this stage. Then, place 1 time counter on this stage. Or, if Mugash is in play, advance to stage 3.",
                 Quantity = 1,
-                Number = 63
+                Number = 63,
+                Artist = Artist.Sebastian_Giacobino
             });
             Cards.Add(new Card() {
                 Title = "The Wizard's Prize",
@@ -1069,7 +1132,8 @@ If Gríma leaves play, the players lose the game.",
                 Keywords = new List<string> { "Time 3." },
                 Text = "Forced: After the last time counter is removed from this stage, return Mugash to the staging area and reveal X encounter cards. X is the number of players in the game minus 1. Place 3 time counters on this stage.\r\n\r\nProgress cannot be placed on this stage unless Mugash is attached to a hero.\r\n\r\nIf the players defeat this stage, they win the game.",
                 Quantity = 1,
-                Number = 64
+                Number = 64,
+                Artist = Artist.Adam_Lane
             });
             Cards.Add(new Card()
             {
@@ -1087,7 +1151,8 @@ If Gríma leaves play, the players lose the game.",
                 Keywords = new List<string> { "Time 4." },
                 OppositeText = "Forced: After the last time counter is removed from this stage, shuffle Mugash into the encounter deck and advance to stage 3.\r\n\r\nThe players cannot advance to stage 2 unless Mugash is attached to a hero.",
                 Quantity = 1,
-                Number = 65
+                Number = 65,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card()
             {
@@ -1104,7 +1169,8 @@ If Gríma leaves play, the players lose the game.",
                 Keywords = new List<string> { "Time 4." },
                 OppositeText = "Forced: After the last time counter is removed from this stage, shuffle Mugash into the encounter deck and advance to stage 3A.\r\n\r\nThe players cannot defeat this stage unless Mugash is attached to a hero.\r\n\r\nIf the players defeat this stage, they win the game.",
                 Quantity = 1,
-                Number = 66
+                Number = 66,
+                Artist = Artist.Alexandre_Dainche
             });
             Cards.Add(new Card()
             {
@@ -1120,7 +1186,8 @@ If Gríma leaves play, the players lose the game.",
                 Keywords = new List<string> { "Time 3." },
                 OppositeText = "Forced: After the last time counter is removed from this stage, discard the top 5 cards of the encounter deck. Each player must choose an enemy or objective in the discard pile, reveal it and add it to the staging area. Place 3 time counters on this stage.\r\n\r\nForced: After placing progress here, if there is at least 6 progress on this stage and Mugash is attached to a hero, advance to stage 2A.",
                 Quantity = 1,
-                Number = 67
+                Number = 67,
+                Artist = Artist.Alyn_Spiller
             });
         }
     }

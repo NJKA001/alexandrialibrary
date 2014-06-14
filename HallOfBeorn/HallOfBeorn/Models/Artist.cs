@@ -148,7 +148,6 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Dan_Masso);
             all.Add(Artist.David_Gaillet);
 
-            /*
             //The Voice of Isengard
             all.Add(Artist.Joel_Hustak);
             all.Add(Artist.Alvaro_Calvo_Escudero);
@@ -167,7 +166,6 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Sebastian_Giacobino);
             all.Add(Artist.Owen_William_Weber);
             all.Add(Artist.Sandra_Duchiewicz);
-            */
 
             /*
             //The Hobbit: Over Hill and Under Hill

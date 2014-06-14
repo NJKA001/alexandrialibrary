@@ -859,7 +859,7 @@ namespace HallOfBeorn.Services
                 results = results.Where(x => x.Artist != null && x.Artist.Name == model.Artist).ToList();
             }
 
-            var takeCount = model.Random ? results.Count : maxResults;
+            var takeCount = model.Random || !string.IsNullOrEmpty(model.Artist) ? results.Count : maxResults;
 
             results = results.Take(takeCount).ToList();
 
