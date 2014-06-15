@@ -167,6 +167,26 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Dan_Masso);
             all.Add(Artist.David_Gaillet);
 
+            //Against the Shadow
+            all.Add(Artist.Milek_Jakubiec);
+            all.Add(Artist.Grzegorz_Pedrycz);
+            all.Add(Artist.Dan_Howard);
+
+            all.Add(Artist.Andrew_Ryan);
+            all.Add(Artist.Simon_Dominic);
+            all.Add(Artist.Jon_Bosco);
+
+            all.Add(Artist.Julian_Kok);
+            all.Add(Artist.Tomasz_Jedruszek);
+            all.Add(Artist.J_Lonnee);
+
+            all.Add(Artist.Scott_Murphy);
+
+            all.Add(Artist.Tim_Tsang);
+
+            all.Add(Artist.Oleg_Saakyan);
+            all.Add(Artist.Yigit_Koroglu);
+
             //The Voice of Isengard
             all.Add(Artist.Joel_Hustak);
             all.Add(Artist.Alvaro_Calvo_Escudero);
@@ -240,6 +260,7 @@ namespace HallOfBeorn.Models
         public static Artist Alyn_Spiller = new Artist { Name = "Alyn Spiller", URL = "http://niltrace.deviantart.com" };
         public static Artist Andrew_Johanson = new Artist { Name = "Andrew Johanson", URL = "http://andrewjohanson.blogspot.com" };
         public static Artist Andrew_Olson = new Artist { Name = "Andrew Olson", URL = "http://mysticaldonkey1.deviantart.com" };
+        public static Artist Andrew_Ryan = new Artist { Name = "Andrew Ryan", URL = "http://andrewryanart.deviantart.com" };
         public static Artist Andrew_Silver = new Artist { Name = "Andrew Silver", URL = "http://drewsil.deviantart.com" };
         public static Artist Angela_Sung = new Artist { Name = "Angela Sung", URL = "http://flyingmilkpig.deviantart.com" };
         public static Artist Anna_Christenson = new Artist { Name = "Anna Christenson", URL = "http://freshpaint.deviantart.com" };
@@ -268,6 +289,7 @@ namespace HallOfBeorn.Models
         public static Artist Chun_Lo = new Artist { Name = "Chun Lo", URL = "http://chunlo.deviantart.com" };
         public static Artist Cristi_Balanescu = new Artist { Name = "Cristi Balanescu", URL = "http://cristi-b.deviantart.com" };
         public static Artist Daarken = new Artist { Name = "Daarken", URL = "http://daarken.deviantart.com" };
+        public static Artist Dan_Howard = new Artist { Name = "Dan Howard", URL = "http://danhowardart.deviantart.com" };
         public static Artist Dan_Masso = new Artist { Name = "Dan Masso", URL = "http://danmasso.com" };
         public static Artist Daryl_Mandryk = new Artist { Name = "Daryl Mandryk", URL = "http://www.mandrykart.com" };
         public static Artist David_Chen = new Artist { Name = "David Chen", URL = "https://www.google.com/search?q=David+Chen+Fantasy+Art" };
@@ -301,6 +323,7 @@ namespace HallOfBeorn.Models
         public static Artist Gabrielle_Portal = new Artist { Name = "Gabrielle Portal", URL = "http://gabrielleportaldesign.blogspot.com" };
         public static Artist Garret_DeChellis = new Artist { Name = "Garret DeChellis", URL = "http://www.gdillustration.com" };
         public static Artist Greg_Opalinski = new Artist { Name = "Greg Opalinski", URL = "http://greg-opalinski.deviantart.com" };
+        public static Artist Grzegorz_Pedrycz = new Artist { Name = "Grzegorz Pedrycz", URL = "http://grzegorzpedrycz.deviantart.com" };
         public static Artist Guido_Kuip = new Artist { Name = "Guido Kuip", URL = "http://yoitisi.deviantart.com" };
         public static Artist Guillaume_Ducos = new Artist { Name = "Guillaume Ducos", URL = "http://herckeim.deviantart.com" };
         public static Artist Helmutt = new Artist { Name = "Helmutt", URL = "http://helmuttt.deviantart.com" };
@@ -309,6 +332,7 @@ namespace HallOfBeorn.Models
         public static Artist Igor_Kieryluk = new Artist { Name = "Igor Kieryluk", URL = "http://igorkieryluk.deviantart.com" };
         public static Artist Ilich_Henriquez = new Artist { Name = "Ilich Henriquez", URL = "http://ilacha.deviantart.com" };
         public static Artist Ijur = new Artist { Name = "Ijur", URL = "http://ijur.deviantart.com" };
+        public static Artist J_Lonnee = new Artist { Name = "J. Lonnee", URL = "http://www.jisforgenius.com" };
         public static Artist Jake_Murray = new Artist { Name = "Jake Murray", URL = "http://www.jakemurrayart.blogspot.com" };
         public static Artist Jarreau_Wimberly = new Artist { Name = "Jarreau Wimberly", URL = "http://reau.deviantart.com" };
         public static Artist Jason_Juta = new Artist { Name = "Jason Juta", URL = "http://jasonjuta.deviantart.com" };
@@ -326,8 +350,10 @@ namespace HallOfBeorn.Models
         public static Artist John_Stanko = new Artist { Name = "John Stanko", URL = "http://stankoillustration.com" };
         public static Artist John_Wigley = new Artist { Name = "John Wigley", URL = "http://wiggers123.deviantart.com" };
         public static Artist Joko_Mulyono = new Artist { Name = "Joko Mulyono", URL = "http://jokomulyono.deviantart.com" };
+        public static Artist Jon_Bosco = new Artist { Name = "Jon Bosco", URL = "http://boscopenciller.deviantart.com" };
         public static Artist Juan_Carlos_Barquet = new Artist { Name = "Juan Carlos Barquet", URL = "http://jcbarquet.deviantart.com" };
         public static Artist Julia_Laud = new Artist { Name = "Julia Laud", URL = "http://julialaud.deviantart.com" };
+        public static Artist Julian_Kok = new Artist { Name = "Julian Kok", URL = "http://juliankokart.blogspot.com" };
         public static Artist K_R_Harris = new Artist { Name = "K. R. Harris", URL = "http://krhart.com" };
         public static Artist Katherine_Dinger = new Artist { Name = "Katherine Dinger", URL = "http://jezebel.deviantart.com" };
         public static Artist Katy_Grierson = new Artist { Name = "Katy Grierson", URL = "http://kovah.deviantart.com" };
@@ -360,11 +386,13 @@ namespace HallOfBeorn.Models
         public static Artist Michael_Rasmussen = new Artist { Name = "Michael Rasmussen", URL = "http://www.rasmussenillustration.com" };
         public static Artist Mike_Capprotti = new Artist { Name = "Mike Capprotti", URL = "http://capprotti.deviantart.com" };
         public static Artist Mike_Nash = new Artist { Name = "Mike Nash", URL = "http://www.mike-nash.com/HOME.html" };
+        public static Artist Milek_Jakubiec = new Artist { Name = "Milek Jakubiec", URL = "http://ethicallychallenged.deviantart.com" };
         public static Artist Nacho_Molina = new Artist { Name = "Nacho Molina", URL = "http://nachomolina.deviantart.com" };
         public static Artist Nicholas_Cloister = new Artist { Name = "Nicholas Cloister", URL = "http://cloister.deviantart.com" };
         public static Artist Nick_Deligaris = new Artist { Name = "Nick Deligaris", URL = "http://deligaris.deviantart.com" };
         public static Artist Nikolay_Stoyanov = new Artist { Name = "Nikolay Stoyanov", URL = "http://nstoyanov.deviantart.com" };
         public static Artist Noah_Bradley = new Artist { Name = "Noah Bradley", URL = "http://noahbradley.deviantart.com" };
+        public static Artist Oleg_Saakyan = new Artist { Name = "Oleg Saakyan", URL = "http://ultracold.deviantart.com" };
         public static Artist Owen_William_Weber = new Artist { Name = "Owen William Weber", URL = "http://oweber.blogspot.com" };
         public static Artist Paul_Guzenko = new Artist { Name = "Paul Guzenko", URL = "http://www.guzboroda.com/?author=1" };
         public static Artist Paulo_Puggioni = new Artist { Name = "Paulo Puggioni", URL = "http://www.paolopuggioni.com" };
@@ -384,8 +412,10 @@ namespace HallOfBeorn.Models
         public static Artist Sara_Biddle = new Artist { Name = "Sara Biddle", URL = "http://mckadesinsanity.deviantart.com" };
         public static Artist Sara_K_Diesel = new Artist { Name = "Sara K. Diesel", URL = "http://skdiesel.deviantart.com" };
         public static Artist Sarah_Morris = new Artist { Name = "Sarah Morris", URL = "https://www.google.com/search?q=sarah+morris+fantasy+art" };
+        public static Artist Scott_Murphy = new Artist { Name = "Scott Murphy", URL = "http://murphyillustration.deviantart.com" };
         public static Artist Sebastian_Giacobino = new Artist { Name = "Sebastian Giacobino", URL = "http://giacobino.deviantart.com" };
         public static Artist Sidharth_Chatursedi = new Artist { Name = "Sidharth Chatursedi", URL = "http://sidharthchaturvedi.deviantart.com" };
+        public static Artist Simon_Dominic = new Artist { Name = "Simon Dominic", URL = "https://www.google.com/search?q=Simon+Dominic+fantasy+art" };
         public static Artist Soul_Core = new Artist { Name = "Soul Core", URL = "http://en.amokanet.ru" };
         public static Artist Stacey_Diana_Clark = new Artist { Name = "Stacey Diana Clark", URL = "http://staceydiana.blogspot.com" };
         public static Artist Stephane_Gantiez = new Artist { Name = "Stephane Gantiez", URL = "http://lodin111.deviantart.com" };
@@ -395,10 +425,12 @@ namespace HallOfBeorn.Models
         public static Artist Suzanne_Helmigh = new Artist { Name = "Suzanne Helmigh", URL = "http://suzanne-helmigh.deviantart.com" };
         public static Artist Taufiq = new Artist { Name = "Taufiq", URL = "http://toviz.deviantart.com" };
         public static Artist Taylor_Ingvarsson = new Artist { Name = "Taylor Ingvarsson", URL = "http://www.artoftaylor.com" };
+        public static Artist Tim_Tsang = new Artist { Name = "Tim Tsang", URL = "http://www.timtsang.com" };
         public static Artist Timo_Karhula = new Artist { Name = "Timo Karhula", URL = "http://tmza.deviantart.com" };
         public static Artist Titus_Lunter = new Artist { Name = "Titus Lunter", URL = "http://tituslunter.deviantart.com" };
         public static Artist Tiziano_Baracchi = new Artist { Name = "Tiziano Baracchi", URL = "http://thaldir.deviantart.com" };
         public static Artist Tom_Garden = new Artist { Name = "Tom Garden", URL = " http://tgconceptart.deviantart.com" };
+        public static Artist Tomasz_Jedruszek = new Artist { Name = "Tomasz Jedruszek", URL = "http://morano.deviantart.com" };
         public static Artist Toni_Justamante_Jacobs = new Artist { Name = "Toni Justamante Jacobs", URL = "http://artofjustaman.deviantart.com" };
         public static Artist Tony_Foti = new Artist { Name = "Tony Foti", URL = "http://anthonyfoti.deviantart.com" };
         public static Artist Trudi_Castle = new Artist { Name = "Trudi Castle", URL = "http://www.artcastles.com/trudi/commerical.html" };
@@ -406,6 +438,7 @@ namespace HallOfBeorn.Models
         public static Artist Vincent_Proce = new Artist { Name = "Vincent Proce", URL = "http://vincentproceart.blogspot.com" };
         public static Artist West_Clendinning = new Artist { Name = "West Clendinning", URL = "http://vomisalabs.blogspot.com" };
         public static Artist Winona_Nelson = new Artist { Name = "Winona Nelson", URL = "http://winonanelson.blogspot.com" };
+        public static Artist Yigit_Koroglu = new Artist { Name = "Yigit Koroglu", URL = "http://yigitkoroglu.deviantart.com" };
         public static Artist Yoann_Boissonnet = new Artist { Name = "Yoann Boissonnet", URL = "http://yoannboissonnet.carbonmade.com" };
     }
 }
