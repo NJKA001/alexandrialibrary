@@ -237,6 +237,10 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Chris_Rallis);
             all.Add(Artist.Lane_Brown);
 
+            //Passage Through Mirkwood Nightmare
+            all.Add(Artist.Dana_Li);
+            all.Add(Artist.S_C_Watson);
+
             //Khazad-dum Nightmare
             all.Add(Artist.Guillaume_Ducos);
             all.Add(Artist.Mark_Bulahao);
@@ -300,6 +304,7 @@ namespace HallOfBeorn.Models
         public static Artist Chun_Lo = new Artist { Name = "Chun Lo", URL = "http://chunlo.deviantart.com" };
         public static Artist Cristi_Balanescu = new Artist { Name = "Cristi Balanescu", URL = "http://cristi-b.deviantart.com" };
         public static Artist Daarken = new Artist { Name = "Daarken", URL = "http://daarken.deviantart.com" };
+        public static Artist Dana_Li = new Artist { Name = "Dana Li", URL = "https://www.google.com/search?q=Dana+Li+Fantasy+Art" };
         public static Artist Dan_Howard = new Artist { Name = "Dan Howard", URL = "http://danhowardart.deviantart.com" };
         public static Artist Dan_Masso = new Artist { Name = "Dan Masso", URL = "http://danmasso.com" };
         public static Artist Daryl_Mandryk = new Artist { Name = "Daryl Mandryk", URL = "http://www.mandrykart.com" };
@@ -418,6 +423,7 @@ namespace HallOfBeorn.Models
         public static Artist Rio_Sabda = new Artist { Name = "Rio Sabda", URL = "http://kepondangkuning.deviantart.com" };
         public static Artist Roman_V_Papsuev = new Artist { Name = "Roman V. Papsuev", URL = "http://en.amokanet.ru" };
         public static Artist Ryan_Barger = new Artist { Name = "Ryan Barger", URL = "http://ryanbarger.deviantart.com" };
+        public static Artist S_C_Watson = new Artist { Name = "S. C. Watson", URL = "http://oreganal.deviantart.com" };
         public static Artist Sabin_Boykinov = new Artist { Name = "Sabin Boykinov", URL = "http://sabin-boykinov.deviantart.com" };
         public static Artist Salvador_Trakal = new Artist { Name = "Salvador Trakal", URL = "http://saturnoarg.deviantart.com" };
         public static Artist Sandara_Tang = new Artist { Name = "Sandara Tang", URL = "http://sandara.deviantart.com" };
