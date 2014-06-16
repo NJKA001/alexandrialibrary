@@ -237,6 +237,13 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Chris_Rallis);
             all.Add(Artist.Lane_Brown);
 
+            //The Battle of Lake-town
+            all.Add(Artist.Lino_Drieghe);
+
+            //The Stone of Erech
+            all.Add(Artist.Jose_Vega);
+            all.Add(Artist.Logan_Feliciano);
+
             //Passage Through Mirkwood Nightmare
             all.Add(Artist.Dana_Li);
             all.Add(Artist.S_C_Watson);
@@ -368,6 +375,7 @@ namespace HallOfBeorn.Models
         public static Artist John_Wigley = new Artist { Name = "John Wigley", URL = "http://wiggers123.deviantart.com" };
         public static Artist Joko_Mulyono = new Artist { Name = "Joko Mulyono", URL = "http://jokomulyono.deviantart.com" };
         public static Artist Jon_Bosco = new Artist { Name = "Jon Bosco", URL = "http://boscopenciller.deviantart.com" };
+        public static Artist Jose_Vega = new Artist { Name = "Jose Vega", URL = "http://cheo36.deviantart.com" };
         public static Artist Juan_Carlos_Barquet = new Artist { Name = "Juan Carlos Barquet", URL = "http://jcbarquet.deviantart.com" };
         public static Artist Julia_Laud = new Artist { Name = "Julia Laud", URL = "http://julialaud.deviantart.com" };
         public static Artist Julian_Kok = new Artist { Name = "Julian Kok", URL = "http://juliankokart.blogspot.com" };
@@ -381,7 +389,9 @@ namespace HallOfBeorn.Models
         public static Artist Leonardo_Borazio = new Artist { Name = "Leonardo Borazio", URL = "http://dleoblack.deviantart.com" };
         public static Artist Lin_Bo = new Artist { Name = "Lin Bo", URL = "http://0bo.deviantart.com/" };
         public static Artist Lindsey_Messecar = new Artist { Name = "Lindsey Messecar", URL = "http://lmessecar.deviantart.com" };
+        public static Artist Lino_Drieghe = new Artist { Name = "Lino Drieghe", URL = "http://lyno3ghe.deviantart.com" };
         public static Artist Lius_Lasahido = new Artist { Name = "Lius Lasahido", URL = "http://lasahido.deviantart.com" };
+        public static Artist Logan_Feliciano = new Artist { Name = "Logan Feliciano", URL = "http://2wenty.deviantart.com" };
         public static Artist Loren_Fetterman = new Artist { Name = "Loren Fetterman", URL = "http://loren86.deviantart.com" };
         public static Artist Lorraine_Schleter = new Artist { Name = "Lorraine Schleter", URL = "http://lorraine-schleter.deviantart.com" };
         public static Artist Lucas_Graciano = new Artist { Name = "Lucas Graciano", URL = "http://lucasgraciano.deviantart.com" };
