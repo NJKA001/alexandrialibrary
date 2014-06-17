@@ -29,9 +29,11 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 4,
                 Traits = new List<string>() { "Outlands." },
                 Text = "You may use resources from Hirluin the Fair's resource pool to pay for Outlands ally cards of any sphere.",
+                FlavorText = "Hirluin the Fair of the Green Hills from Pinnath Gelin... -The Return of the King",
                 Keywords = new List<string>() { "Ranged." },
                 Quantity = 1,
-                Number = 1
+                Number = 1,
+                Artist = Artist.Tony_Foti
             });
             Cards.Add(new Card() {
                 ImageName = "M1780",
@@ -46,8 +48,10 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 1,
                 Traits = new List<string>() { "Outlands." },
                 Text = "Each Outlands character you control gets +1 Defense.",
+                FlavorText = "... grim-faced they were, and shorter and somewhat swarthier than any men that Pippin had yet seen in Gondor. - The Return of the King",
                 Quantity = 3,
-                Number = 2
+                Number = 2,
+                Artist = Artist.Mark_Winters
             });
             Cards.Add(new Card() {
                 ImageName = "M1781",
@@ -57,8 +61,10 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Leadership,
                 ResourceCost = 0,
                 Text = "Action: Discard 2 resources from your hero's resource pool to add 3 resources to that hero's resource pool.",
+                FlavorText = "\"Nay, my friends, I am the lawful master of the Stone, and I had both the right and the strength to use it...\" -Aragorn, The Return of the King",
                 Quantity = 3,
-                Number = 3
+                Number = 3,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1782",
@@ -73,8 +79,10 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 1,
                 Traits = new List<string>() { "Outlands." },
                 Text = "Each Outlands character you control gets +1 Attack.",
+                FlavorText = "...foremost on the field rode the swan-knights of Dol Amroth with their Prince and his blue banner at their head. -The Return of the King",
                 Quantity = 3,
-                Number = 4
+                Number = 4,
+                Artist = Artist.Marcia_George_Begdan
             });
             Cards.Add(new Card() {
                 ImageName = "M1783",
@@ -85,9 +93,11 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Traits = new List<string>() { "Armor.", " Item." },
                 Text = "Attached hero gains +1 Defense. (+2 Defense instead if attached hero has the Gondor trait.)",
+                FlavorText = "There flowered a White Tree, and that was for Gondor... -The Return of the King",
                 Keywords = new List<string>() { "Attach to a hero.", " Restricted.", " Limit 1 per hero." },
                 Quantity = 3,
-                Number = 5
+                Number = 5,
+                Artist = Artist.Owen_William_Weber
             });
             Cards.Add(new Card() {
                 ImageName = "M1784",
@@ -103,7 +113,8 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Outlands." },
                 Text = "Each Outlands character you control gets +1 Willpower.",
                 Quantity = 3,
-                Number = 6
+                Number = 6,
+                Artist = Artist.Adam_Schumpert
             });
             Cards.Add(new Card() {
                 ImageName = "M1785",
@@ -117,7 +128,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Attached hero gets +1 hit point for each Artifact attachment attached to it.If attached hero is Aragorn, he also gains a Lore resource icon.",
                 Keywords = new List<string>() { "Attach to a hero." },
                 Quantity = 3,
-                Number = 7
+                Number = 7,
+                Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
                 ImageName = "M1786",
@@ -132,8 +144,10 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 1,
                 Traits = new List<string>() { "Outlands." },
                 Text = "Each Outlands character you control gets +1 hit point.",
+                FlavorText = "From the Anfalas, the Langstrand far away, a long line of men of many sorts, hunters and herdsmen and men of little villages... -The Return of the King",
                 Quantity = 3,
-                Number = 8
+                Number = 8,
+                Artist = Artist.Blake_Henriksen
             });
             Cards.Add(new Card() {
                 ImageName = "M1787",
@@ -143,8 +157,10 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Lore,
                 ResourceCost = 1,
                 Text = "Action: Draw 1 card for each hero you control with a printed Lore resource icon.",
+                FlavorText = "\"Let none now reject the counsels of Gandalf, whose long labours against Sauron come at last to their test.\" -Aragorn, The Return of the King",
                 Quantity = 3,
-                Number = 9
+                Number = 9,
+                Artist = Artist.Nacho_Molina
             });
             Cards.Add(new Card() {
                 ImageName = "M1788",
@@ -154,8 +170,10 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Neutral,
                 ResourceCost = 0,
                 Text = "Action: Name a sphere. Until the end of the phase, you can spend resources of any sphere when paying for cards that belong to the named sphere.",
+                FlavorText = "The townlands were rich, with wide tilth and many orchards, and homesteads there were with oast and garner, fold and byre, and many rills rippling through the green from the highlands down to the Anduin. -The Return of the King",
                 Quantity = 3,
-                Number = 10
+                Number = 10,
+                Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
                 ImageName = "M1792",
@@ -172,11 +190,13 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 3,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 5,
-                Number = 14
+                Number = 14,
+                Artist = Artist.Dan_Howard
             });
             Cards.Add(new Card() {
                 ImageName = "M1793",
                 Title = "Daughter of Berúthiel",
+                NormalizedTitle = "Daughter of Beruthiel",
                 Id = "408148e1-3391-4734-aeac-3e3a7b69c1c1",
                 CardType = CardType.Enemy,
                 EngagementCost = 10,
@@ -189,7 +209,8 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 3,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 15
+                Number = 15,
+                Artist = Artist.Anna_Steinbauer
             });
             Cards.Add(new Card() {
                 ImageName = "M1794",
@@ -206,7 +227,8 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 3,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 16
+                Number = 16,
+                Artist = Artist.Tiziano_Baracchi
             });
             Cards.Add(new Card() {
                 ImageName = "M1795",
@@ -223,7 +245,8 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 3,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 17
+                Number = 17,
+                Artist = Artist.Aurelien_Hubert
             });
             Cards.Add(new Card() {
                 ImageName = "M1796",
@@ -237,7 +260,8 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 3,
-                Number = 18
+                Number = 18,
+                Artist = Artist.Titus_Lunter
             });
             Cards.Add(new Card() {
                 ImageName = "M1797",
@@ -247,12 +271,14 @@ namespace HallOfBeorn.Models.Sets
                 IsUnique = true,
                 Traits = new List<string>() { "Underworld." },
                 Text = "Each location in the staging area gets +2 quest points.",
+                FlavorText = "\"Were it buried beneath the roots of Mindolluin, still it would burn your mind away...\" -Gandalf, The Return of the King",
                 Keywords = new List<string>() { "Underworld 1." },
                 Threat = 2,
                 QuestPoints = 5,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 19
+                Number = 19,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card() {
                 ImageName = "M1798",
@@ -260,14 +286,16 @@ namespace HallOfBeorn.Models.Sets
                 Id = "b89a5a01-88c0-434a-a061-1654c6f84477",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Underworld.", " City." },
-                Text = " ",
+                Text = string.Empty,
+                FlavorText = "Great stores of goods and food, and beer, were found that had been hidden away... -The Return of the King",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack. (+2 Attack instead if undefended.)",
                 Keywords = new List<string>() { "Underworld 1." },
                 Threat = 2,
                 QuestPoints = 2,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 2,
-                Number = 20
+                Number = 20,
+                Artist = Artist.Titus_Lunter
             });
             Cards.Add(new Card() {
                 ImageName = "M1799",
@@ -277,12 +305,14 @@ namespace HallOfBeorn.Models.Sets
                 IsUnique = true,
                 Traits = new List<string>() { "Underworld.", " City." },
                 Text = "Forced: After Houses of the Dead becomes the active location, exhaust all characters.",
+                FlavorText = "\"The houses of the dead are no places for the living.\" -Gandalf, The Return of the King",
                 Keywords = new List<string>() { "Underworld 2." },
                 Threat = 4,
                 QuestPoints = 4,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 21
+                Number = 21,
+                Artist = Artist.Titus_Lunter
             });
             Cards.Add(new Card() {
                 ImageName = "M1800",
@@ -300,7 +330,8 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 QuestPoints = 5,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 22
+                Number = 22,
+                Artist = Artist.Sabin_Boykinov
             });
             Cards.Add(new Card() {
                 ImageName = "M1801",
@@ -311,7 +342,8 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 Keywords = new List<string>() { "Surge." },
                 EncounterSet = "The Steward's Fear",
                 Quantity = 2,
-                Number = 23
+                Number = 23,
+                Artist = Artist.David_Gaillet
             });
             Cards.Add(new Card() {
                 ImageName = "M1802",
@@ -321,7 +353,8 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 Text = "When Revealed: Randomly select 1 ally controlled by the first player, if able. The first player deals X damage to one of his heroes, where X is that ally's Attack. Then discard that ally. If no ally is discarded by this effect, A Knife in the Back gains surge.",
                 EncounterSet = "The Steward's Fear",
                 Quantity = 3,
-                Number = 24
+                Number = 24,
+                Artist = Artist.Carmen_Cianelli
             });
             Cards.Add(new Card() {
                 ImageName = "M1803",
@@ -332,7 +365,8 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 Shadow = "Shadow: If this attack destroys a character, remove all tokens from the current quest.",
                 EncounterSet = "The Steward's Fear",
                 Quantity = 2,
-                Number = 25
+                Number = 25,
+                Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
                 ImageName = "M1804",
@@ -344,7 +378,8 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
                 VictoryPoints = 1,
-                Number = 26
+                Number = 26,
+                Artist = Artist.Aurelien_Hubert
             });
             Cards.Add(new Card() {
                 ImageName = "M1805",
@@ -356,7 +391,8 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
                 VictoryPoints = 1,
-                Number = 27
+                Number = 27,
+                Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
                 ImageName = "M1806",
@@ -368,7 +404,8 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
                 VictoryPoints = 1,
-                Number = 28
+                Number = 28,
+                Artist = Artist.Even_Mehl_Amundsen
             });
             Cards.Add(new Card() {
                 ImageName = "M1807",
@@ -379,7 +416,8 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 Text = "Reveal 1 additional card from the encounter deck and add it to the staging area during the staging step each round.If a hero is destroyed by an enemy attack, the players have lost the game.",
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 29
+                Number = 29,
+                Artist = Artist.Blake_Henriksen
             });
             Cards.Add(new Card() {
                 ImageName = "M1808",
@@ -390,7 +428,8 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 Text = "Forced: At the end of the round, place 1 resource token on Up in Flames and discard the top X cards of each player's deck. X is the number of resource tokens on Up in Flames.If any player has no cards in his deck, the players have lost the game.",
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 30
+                Number = 30,
+                Artist = Artist.Marcia_George_Begdan
             });
             Cards.Add(new Card() {
                 ImageName = "M1809",
@@ -399,9 +438,11 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 CardType = CardType.Objective,
                 Traits = new List<string>() { "Plot." },
                 Text = "At the end of each round, raise each player's threat by 2.",
+                FlavorText = "\"... whispering was in your ears, poisoning your thought...\" -Gandalf, The Two Towers",
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 31
+                Number = 31,
+                Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
                 ImageName = "M1789",
@@ -410,15 +451,18 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 Id = "4e12f20f-aec3-4311-a656-10a517fd97fe",
                 CardType = CardType.Quest,
                 Text = "Setup: Create the underworld deck. Remove Roots of Mindolluin from the encounter deck and set it aside, out of play. Shuffle all Villain cards and randomly set one aside, out of play, without looking at it. Remove the others from the game. Repeat this with all Plot cards.",
+                FlavorText = "Even as foes mass from without, the Steward of Minas Tirith fears there are enemies within. You have been asked to investigate the possibility of a conspiracy within the White City...",
                 OppositeText =
 @"When Revealed: Search the encounter deck for The Fourth Star and make it the active location. Shuffle the encounter deck.
 
 Forced: After the active location leaves play as an explored location, place 1 resource token on this quest.
 
 If there are 4 or more resource tokens on Conspiracy, advance to the next stage.",
+                OppositeFlavorText = "You begin your investigation at The Fourth Star, a popular tavern...",
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 11
+                Number = 11,
+                Artist = Artist.Milek_Jakubiec
             });
             Cards.Add(new Card() {
                 ImageName = "M1790",
@@ -427,6 +471,7 @@ If there are 4 or more resource tokens on Conspiracy, advance to the next stage.
                 Id = "21ee317d-9aca-43be-9782-521539827cb8",
                 CardType = CardType.Quest,
                 Text = "When Revealed: Reveal the set aside Plot card and add it to the staging area.",
+                FlavorText = "You have uncovered crucial information about the dissident plot, and even gleaned hints of teh conspirator's secretive leader. Clues have led you to a cavern deep in the heart of Mount Mindolluin. As you descend into the ancient rock, you begin to suspect the clues that led you here may have been misleading... that you may have been lured away from the city streets for a purpose.",
                 OppositeText = 
 @"When Revealed: Make Roots of Mindolluin the active location, returning any other active location to the staging area.
 
@@ -435,7 +480,8 @@ Forced: After the active location leaves play as an explored location place 1 re
 If there are 4 or more resource tokens on The Grand Design, advance to the next stage.",
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
-                Number = 12
+                Number = 12,
+                Artist = Artist.Grzegorz_Pedrycz
             });
             Cards.Add(new Card() {
                 ImageName = "M1791",
@@ -444,6 +490,7 @@ If there are 4 or more resource tokens on The Grand Design, advance to the next 
                 Id = "8239e81a-f779-4c7c-b586-cd5ad732f061",
                 CardType = CardType.Quest,
                 Text = "When Revealed: Reveal the set aside Villain card and add it to the staging area.",
+                FlavorText = "You have unmasked the conspiracy and its champion is upon you. The wheels of treachery are in motion, and only a heroic effort can stop the cabal's plan in time...",
                 OppositeText = 
 @"When Revealed: Shuffle the underworld deck into the encounter deck.
 
@@ -451,7 +498,8 @@ The players cannot defeat this stage while a Villain is in play. If this stage i
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
                 QuestPoints = 15,
-                Number = 13
+                Number = 13,
+                Artist = Artist.David_A_Nash
             });
         }
     }

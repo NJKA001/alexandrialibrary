@@ -936,7 +936,7 @@ If Gríma leaves play, the players lose the game.",
                 Quantity = 3,
                 EasyModeQuantity = 3,
                 Number = 52,
-                Artist = Artist.Derek_Zabrocki
+                Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card()
             {

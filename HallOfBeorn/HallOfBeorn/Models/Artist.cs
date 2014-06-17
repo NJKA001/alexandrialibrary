@@ -144,7 +144,7 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Emrah_Elmasli);
             all.Add(Artist.Matt_Smith);
             all.Add(Artist.Marcia_George_Begdan);
-            all.Add(Artist.Derek_Zabrocki);
+            all.Add(Artist.Darek_Zabrocki);
             all.Add(Artist.Lorraine_Schleter);
             all.Add(Artist.Anna_Steinbauer);
             all.Add(Artist.Aurelien_Hubert);
@@ -314,6 +314,7 @@ namespace HallOfBeorn.Models
         public static Artist Dana_Li = new Artist { Name = "Dana Li", URL = "https://www.google.com/search?q=Dana+Li+Fantasy+Art" };
         public static Artist Dan_Howard = new Artist { Name = "Dan Howard", URL = "http://danhowardart.deviantart.com" };
         public static Artist Dan_Masso = new Artist { Name = "Dan Masso", URL = "http://danmasso.com" };
+        public static Artist Darek_Zabrocki = new Artist { Name = "Darek Zabrocki", URL = "http://daroz.deviantart.com" };
         public static Artist Daryl_Mandryk = new Artist { Name = "Daryl Mandryk", URL = "http://www.mandrykart.com" };
         public static Artist David_Chen = new Artist { Name = "David Chen", URL = "https://www.google.com/search?q=David+Chen+Fantasy+Art" };
         public static Artist David_Demaret = new Artist { Name = "David Demaret", URL = "http://moonxels.deviantart.com" };
@@ -323,7 +324,6 @@ namespace HallOfBeorn.Models
         public static Artist David_Lecossu = new Artist { Name = "David Lecossu", URL = "http://d--co.deviantart.com" };
         public static Artist David_A_Nash = new Artist { Name = "David A. Nash", URL = "http://davidnashart.blogspot.com" };
         public static Artist Dean_Spencer = new Artist { Name = "Dean Spencer", URL = "http://www.deanspencerart.com" };
-        public static Artist Derek_Zabrocki = new Artist { Name = "Derek Zabrocki", URL = "http://daroz.deviantart.com" };
         public static Artist Diego_Gisbert_Llorens = new Artist { Name = "Diego Gisbert Llorens", URL = "http://diegogisbertllorens.deviantart.com" };
         public static Artist Dleoblack = new Artist { Name = "Dleoblack", URL = "http://dleoblack.deviantart.com" };
         public static Artist Dmitri_Bielak = new Artist { Name = "Dmitri Bielak", URL = "http://bielakdimitri.canalblog.com" };

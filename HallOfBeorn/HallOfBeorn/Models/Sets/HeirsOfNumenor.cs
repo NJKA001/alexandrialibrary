@@ -202,7 +202,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Peril in Pelargir",
                 Shadow = "Shadow: Any damage dealt by this attack is dealt to the hero with Alcaron's Scroll attached, if able.",
                 Number = 24,
-                Artist = Artist.Derek_Zabrocki
+                Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
                 ImageName = "M1712",
@@ -360,7 +360,7 @@ namespace HallOfBeorn.Models.Sets
                 OppositeFlavorText = "Inside the tavern, Lord Alcaron looks nervously toward the door as he hands you a scroll bearing the seal of Gondor. He asks that you deliver it to Faramir in Ithilen, but the brigands who just entered look intent on taking it from you",
                 EncounterSet = "Peril in Pelargir",
                 Number = 65,
-                Artist = Artist.Derek_Zabrocki
+                Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
                 ImageName = "M1768",
@@ -527,7 +527,7 @@ If the players defeat this stage, they have won the game.",
                 FlavorText = "Orc scramblers have infiltrated the island and climbed over the walls. They fought to the western gate, and the gate fell. Now a new host of enemies that were lying in wait are breaching the Citadel itself!",
                 OppositeText = "Breakthrough at the Citadel adds 5 Threat to the staging area.",
                 Number = 75,
-                Artist = Artist.Derek_Zabrocki
+                Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
                 ImageName = "M1778",
@@ -793,7 +793,7 @@ If the players defeat this stage, they have won the game.",
                 Text = "Action: Until the end of the phase, each Gondor card in play gains the Rohan trait, and each Rohan card in play gains the Gondor trait.",
                 FlavorText = "\"These are the Rohirrim, as we name them, masters of horses... and have ever proved true to us, aiding us at need, and guarding our northern marches and the Gap of Rohan.\" -Faramir, The Two Towers",
                 Number = 5,
-                Artist = Artist.Derek_Zabrocki
+                Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
                 ImageName = "M1759",
@@ -842,7 +842,7 @@ If the players defeat this stage, they have won the game.",
                 EncounterSet = "The Siege of Cair Andros",
                 Shadow = "Shadow: Deal 2 damage to all Battleground locations in play.",
                 Number = 36,
-                Artist = Artist.Derek_Zabrocki
+                Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
                 ImageName = "M1764",
@@ -1146,7 +1146,7 @@ If the players defeat this stage, they have won the game.",
                 Threat = 2,
                 VictoryPoints = 3,
                 Number = 21,
-                Artist = Artist.Derek_Zabrocki
+                Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
                 ImageName = "M1762",
@@ -1213,7 +1213,7 @@ If the players defeat this stage, they have won the game.",
                 Text = "Action: Choose a Gondor hero. Add 1 resource to that hero's resource pool.",
                 FlavorText = "Kings made tombs more splendid than houses of the living, and counted old names in the rolls of their descent dearer than the names of sons. -The Two Towers",
                 Number = 6,
-                Artist = Artist.Derek_Zabrocki
+                Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
                 ImageName = "M1744",

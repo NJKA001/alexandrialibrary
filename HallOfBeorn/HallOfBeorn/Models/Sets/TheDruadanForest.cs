@@ -31,7 +31,8 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Silvan." },
                 Text = "Each hero you control with a printed Lore resource icon gets -1 threat cost.",
                 Quantity = 1,
-                Number = 32
+                Number = 32,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1811",
@@ -47,8 +48,10 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Traits = new List<string>() { "Outlands." },
                 Text = "While you control Outlands allies that belong to 4 different spheres, ready Forlong at the beginning of each phase.",
+                FlavorText = "\"Forlong!\" men shouted. \"True heart, true friend!\" -The Return of the King",
                 Quantity = 3,
-                Number = 33
+                Number = 33,
+                Artist = Artist.Emile_Denis
             });
             Cards.Add(new Card() {
                 ImageName = "M1812",
@@ -58,8 +61,10 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Leadership,
                 ResourceCost = 2,
                 Text = "Play only if each hero you control has a printed Leadership resource icon.Action: Ready each ally in play.",
+                FlavorText = "And so the companies came and were hailed and cheered and passed through the Gate, men of the Outlands marching to defend the City of Gondor in a dark hour... -The Return of the King",
                 Quantity = 3,
-                Number = 34
+                Number = 34,
+                Artist = Artist.Jon_Bosco
             });
             Cards.Add(new Card() {
                 ImageName = "M1813",
@@ -70,9 +75,11 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Traits = new List<string>() { "Skill." },
                 Text = "Response: After attached hero attacks and destroys an enemy, deal 1 damage to another enemy that shares a Trait with the enemy just destroyed.",
+                FlavorText = "He slew many of them and the rest fled. - The Two Towers",
                 Keywords = new List<string>() { "Attach to a Tactics hero.", " Limit 1 per hero." },
                 Quantity = 3,
-                Number = 35
+                Number = 35,
+                Artist = Artist.Blake_Henriksen
             });
             Cards.Add(new Card() {
                 ImageName = "M1814",
@@ -83,7 +90,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 2,
                 Text = "Play only if each hero you control has the printed Tactics resource icon.Action: Until the end of the phase, if the current quest has no keyword it gains Battle.",
                 Quantity = 3,
-                Number = 36
+                Number = 36,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1815",
@@ -98,8 +106,10 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 1,
                 Traits = new List<string>() { "Silvan." },
                 Text = "Forced: After a character leaves play, discard Silvan Refugee from play.",
+                FlavorText = "\"The Elves have their own labours and their own sorrows...\" -Gildor, The Fellowship of the Ring",
                 Quantity = 3,
-                Number = 37
+                Number = 37,
+                Artist = Artist.Lorraine_Schleter
             });
             Cards.Add(new Card() {
                 ImageName = "M1816",
@@ -109,8 +119,10 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Spirit,
                 ResourceCost = 2,
                 Text = "Play only if each hero you control has the printed Spirit resource icon.Action: Until the end of the phase, Spirit characters use their Willpower instead of Defense.",
+                FlavorText = "\"Courage will now be your best defense against the storm that is at hand...\" -Gandalf, The Return of the King",
                 Quantity = 3,
-                Number = 38
+                Number = 38,
+                Artist = Artist.Andrew_Ryan
             });
             Cards.Add(new Card() {
                 ImageName = "M1817",
@@ -125,8 +137,10 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 2,
                 Traits = new List<string>() { "Noldor." },
                 Text = "Response: After a card effect adds any number of resources to the resource pool of a hero you control, Harbor Master gains +1 Defense until the end of the round.",
+                FlavorText = "For the Elves of the High Kindred had not yet forsaken Middle-earth, and they dwelt still at that time at the Grey Havens...-The Fellowship of the Ring",
                 Quantity = 3,
-                Number = 39
+                Number = 39,
+                Artist = Artist.Kristina_Gehrmann
             });
             Cards.Add(new Card() {
                 ImageName = "M1818",
@@ -136,8 +150,10 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Lore,
                 ResourceCost = 2,
                 Text = "Play only if each hero you control has a printed Lore resource icon.Action: Until the end of the phase, enemies do not make engagement checks",
+                FlavorText = "Suddenly he halted and listened. Had he heard a whistle or not? Or was it the call of some strange bird? -The Two Towers",
                 Quantity = 3,
-                Number = 40
+                Number = 40,
+                Artist = Artist.Adam_Lane
             });
             Cards.Add(new Card() {
                 ImageName = "M1819",
@@ -152,8 +168,10 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Traits = new List<string>() { "Gondor." },
                 Text = "If each hero you control belongs to the same sphere of influence, you may assign damage from undefended enemy attacks to White Tower Watchman instead of a hero you control.",
+                FlavorText = "The watchmen cried aloud, and all men in the City stood to arms. -The Return of the King",
                 Quantity = 3,
-                Number = 41
+                Number = 41,
+                Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
                 ImageName = "M1823",
@@ -169,9 +187,10 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Wose." },
                 Text = "Allies cannot defend against Drû-buri-Drû.While Drû-buri-Drû is in the victory display, characters get +1 Willpower and +1 Defense.Unless Drû-buri-Drû is in the victory display, the players cannot win.",
                 Threat = 4,
-                EncounterSet = "The Druadan Forest",
+                EncounterSet = "The Drúadan Forest",
                 Quantity = 1,
-                Number = 45
+                Number = 45,
+                Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
                 ImageName = "M1824",
@@ -187,9 +206,10 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Each Wose enemy in the staging area gets +2 Threat.",
                 Shadow = "Shadow: Each Wose enemy engaged with the defending player gets +1 Attack.",
                 Threat = 0,
-                EncounterSet = "The Druadan Forest",
+                EncounterSet = "The Drúadan Forest",
                 Quantity = 3,
-                Number = 46
+                Number = 46,
+                Artist = Artist.Jason_Ward
             });
             Cards.Add(new Card() {
                 ImageName = "M1825",
@@ -206,9 +226,10 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Archery 2.", " Prowl X." },
                 Text = "X is the number of players in the game.",
                 Threat = 2,
-                EncounterSet = "The Druadan Forest",
+                EncounterSet = "The Drúadan Forest",
                 Quantity = 3,
-                Number = 47
+                Number = 47,
+                Artist = Artist.Jason_Ward
             });
             Cards.Add(new Card() {
                 ImageName = "M1826",
@@ -225,9 +246,10 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Prowl 1.", " Archery X." },
                 Text = "X is the number of heroes in play with no resources in their resource pool.",
                 Threat = 2,
-                EncounterSet = "The Druadan Forest",
+                EncounterSet = "The Drúadan Forest",
                 Quantity = 4,
-                Number = 48
+                Number = 48,
+                Artist = Artist.Jason_Ward
             });
             Cards.Add(new Card() {
                 ImageName = "M1827",
@@ -243,9 +265,10 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Return attacking enemy to the staging area after it attacks unless any player pays 1 resource.",
                 Keywords = new List<string>() { "Surge.", " Prowl 1." },
                 Threat = 2,
-                EncounterSet = "The Druadan Forest",
+                EncounterSet = "The Drúadan Forest",
                 Quantity = 3,
-                Number = 49
+                Number = 49,
+                Artist = Artist.Jason_Ward
             });
             Cards.Add(new Card() {
                 ImageName = "M1828",
@@ -254,11 +277,13 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Forest." },
                 Text = "The cost to play each player card is increased by 1.Travel: Exhaust a hero to travel here.",
+                FlavorText = "\"They still haunt The Drúadan Forest...\" -Elfhelm, The Return of the King",
                 Threat = 4,
                 QuestPoints = 3,
-                EncounterSet = "The Druadan Forest",
+                EncounterSet = "The Drúadan Forest",
                 Quantity = 1,
-                Number = 50
+                Number = 50,
+                Artist = Artist.Grzegorz_Pedrycz
             });
             Cards.Add(new Card() {
                 ImageName = "M1829",
@@ -267,11 +292,13 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Forest." },
                 Text = "Heroes cannot gain resources from card effects.Travel: Each player must pay 1 resource to travel here.",
+                FlavorText = "\"...they use poisoned arrows, it is said...\" - Elfhelm, The Return of the King",
                 Threat = 2,
                 QuestPoints = 3,
-                EncounterSet = "The Druadan Forest",
+                EncounterSet = "The Drúadan Forest",
                 Quantity = 3,
-                Number = 51
+                Number = 51,
+                Artist = Artist.Simon_Dominic
             });
             Cards.Add(new Card() {
                 ImageName = "M1830",
@@ -280,11 +307,13 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Forest." },
                 Text = "Each Wose enemy gains Archery 1.X is equal to the total archery value of the highest archery Wose enemy in play.",
+                FlavorText = "\"...they are woodcrafty beyond compare.\" -Elfhelm, The Return of the King",
                 Threat = 0,
                 QuestPoints = 5,
-                EncounterSet = "The Druadan Forest",
+                EncounterSet = "The Drúadan Forest",
                 Quantity = 3,
-                Number = 52
+                Number = 52,
+                Artist = Artist.Titus_Lunter
             });
             Cards.Add(new Card() {
                 ImageName = "M1831",
@@ -293,9 +322,10 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 Text = "When Revealed: Each hero must pay 1 resource or take 1 damage. If no hero takes damage from this effect, Men in the Dark gains surge.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack for each hero the defending player controls with no resources.",
-                EncounterSet = "The Druadan Forest",
+                EncounterSet = "The Drúadan Forest",
                 Quantity = 3,
-                Number = 53
+                Number = 53,
+                Artist = Artist.Marcia_George_Begdan
             });
             Cards.Add(new Card() {
                 ImageName = "M1832",
@@ -305,9 +335,10 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Each questing hero must pay 1 resource or it is removed from the quest.",
                 Shadow = "Shadow: Discard all resources from the defending character's resource pool.",
                 Keywords = new List<string>() { "Prowl 2." },
-                EncounterSet = "The Druadan Forest",
+                EncounterSet = "The Drúadan Forest",
                 Quantity = 3,
-                Number = 54
+                Number = 54,
+                Artist = Artist.Blake_Henriksen
             });
             Cards.Add(new Card() {
                 ImageName = "M1833",
@@ -317,9 +348,10 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Each player must pay 1 resource for each attachment he controls or discard all attachments he controls.",
                 Shadow = "Shadow: Discard an attachment from the defending character.",
                 Keywords = new List<string>() { "Surge." },
-                EncounterSet = "The Druadan Forest.",
+                EncounterSet = "The Drúadan Forest.",
                 Quantity = 2,
-                Number = 55
+                Number = 55,
+                Artist = Artist.Jason_Ward
             });
             Cards.Add(new Card() {
                 ImageName = "M1820",
@@ -328,11 +360,14 @@ namespace HallOfBeorn.Models.Sets
                 Id = "71079813-3afe-41b7-8746-92dcc1f91084",
                 CardType = CardType.Quest,
                 Text = "Setup: Search the encounter deck for Drû-buri-Drû and set him aside, out of play. Shuffle the encounter deck.",
+                FlavorText = "The leader of the underworld cabal from Minas Tirith has fled with his remaining henchmen. You have followed his trail to The Drúadan Forest, hoping to bring the nameless villain to justice.",
                 OppositeText = "When Revealed: Reveal 1 card from the encounter deck per player and add it to the staging area.",
-                EncounterSet = "The Druadan Forest",
+                OppositeFlavorText = "The Drúadan Forest is a wild and dangerous place. It is said that Woses, reclusive forest dwellers, still reside among the trees. You wonder if your quarry has considered the dangers of this course.",
+                EncounterSet = "The Drúadan Forest",
                 Quantity = 1,
                 QuestPoints = 11,
-                Number = 42
+                Number = 42,
+                Artist = Artist.Emile_Denis
             });
             Cards.Add(new Card() {
                 ImageName = "M1821",
@@ -340,11 +375,14 @@ namespace HallOfBeorn.Models.Sets
                 StageNumber = 2,
                 Id = "346fda89-94df-410a-8027-41eacbf27238",
                 CardType = CardType.Quest,
-                EncounterSet = "The Druadan Forest",
+                EncounterSet = "The Drúadan Forest",
+                FlavorText = "As you move deeper into the forest, the wilderness quickly swallows all trace of civilization. Pushing through a dense patch of undergrowth, you came upon a dark and tangled grove. The scent of death strikes you.",
                 OppositeText = "Archery damage must be assigned to allies, if able.",
+                OppositeFlavorText = "In the grove, the fleeing traitors lie slain, pierced by poisoned arrows. As you search the pain-wracked corpses for the body of their leader, the ominous echo of drums begins to sound among the trees. You desperately begin to retrace your steps from the woods, lest the fate of the traitors becomes your own.",
                 Quantity = 1,
                 QuestPoints = 17,
-                Number = 43
+                Number = 43,
+                Artist = Artist.Adam_Lane
             });
             Cards.Add(new Card() {
                 ImageName = "M1822",
@@ -354,14 +392,16 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Quest,
                 Keywords = new List<string> { "Siege." },
                 Text = "When Revealed: Add Drû-buri-Drû to the staging area.",
+                FlavorText = "You sense that the edge of the forest must be near at hand, but Woses are master huntsmen and a band of them block your path. your situation seems hopeless: there are simply too many of them. As they begin their attack, you realize your only hope of survival is to convince the Pukel-men that you are not their enemy.",
                 OppositeText =
 @"Characters use their Willpower instead of Attack when attacking enemies. If an enemy would be damaged this way, place progress tokens on it instead of damage tokens. When an enemy has progress equal to its hit points, add it to the victory display and place those progress tokens on the quest.
 
 If the players defeat this stage, they have won the game.",
-                EncounterSet = "The Druadan Forest",
+                EncounterSet = "The Drúadan Forest",
                 Quantity = 1,
                 QuestPoints = 14,
-                Number = 44
+                Number = 44,
+                Artist = Artist.Jason_Ward
             });
         }
     }
