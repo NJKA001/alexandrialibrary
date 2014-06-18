@@ -347,11 +347,12 @@ namespace HallOfBeorn.Models
             var ext = string.Format(".{0}", format.ToString().ToLower());
             var set = _card.CardSet.Name.ToUrlSafeString();
             var title = Title.ToUrlSafeString();
+            var subtitle = _card.SlugIncludesOppositeTitle ? "-" + _card.OppositeTitle.ToUrlSafeString() : string.Empty;
             var number = _card.StageNumber.ToString();
             var image = _card.ImageName.ToUrlSafeString();
             var suffix = isFirst ? "A" : "B";
 
-            return string.Format("/Images/Cards/{0}/{1}-{2}{3}{4}", set, title, number, suffix, ext);
+            return string.Format("/Images/Cards/{0}/{1}{2}-{3}{4}{5}", set, title, subtitle, number, suffix, ext);
         }
 
         string getSetupCardImagePath(bool isFirst)
