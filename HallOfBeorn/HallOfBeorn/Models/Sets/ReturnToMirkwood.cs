@@ -16,7 +16,7 @@ namespace HallOfBeorn.Models.Sets
             Cycle = "Shadows of Mirkwood";
 
             Cards.Add(new Card() {
-                ImageName = "M1276",
+                ImageType = Models.ImageType.Png,
                 Title = "Ambush",
                 StageNumber = 4,
                 Id = "51223bd0-ffd1-11df-a976-0801206c9001",
@@ -34,7 +34,7 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 SecondArtist = Artist.Dmitri_Bielak
             });
             Cards.Add(new Card() {
-                ImageName = "M1269",
+                ImageType = Models.ImageType.Png,
                 Title = "Astonishing Speed",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9003",
                 CardType = CardType.Event,
@@ -47,7 +47,7 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 Artist = Artist.Anna_Christenson
             });
             Cards.Add(new Card() {
-                ImageName = "M1489",
+                ImageType = Models.ImageType.Png,
                 Title = "Attercop, Attercop",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9004",
                 CardType = CardType.Enemy,
@@ -65,7 +65,7 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 Artist = Artist.Aaron_B_Miller
             });
             Cards.Add(new Card() {
-                ImageName = "M1263",
+                ImageType = Models.ImageType.Png,
                 Title = "Dain Ironfoot",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9005",
                 CardType = CardType.Hero,
@@ -84,7 +84,7 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 Artist = Artist.Tiziano_Baracchi
             });
             Cards.Add(new Card() {
-                ImageName = "M1265",
+                ImageType = Models.ImageType.Png,
                 Title = "Dawn Take You All",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9006",
                 CardType = CardType.Event,
@@ -97,7 +97,7 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
-                ImageName = "M1279",
+                ImageType = Models.ImageType.Png,
                 Title = "Dry Watercourse",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9007",
                 CardType = CardType.Location,
@@ -111,7 +111,7 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 Artist = Artist.Bill_Corbett
             });
             Cards.Add(new Card() {
-                ImageName = "M1264",
+                ImageType = Models.ImageType.Png,
                 Title = "Dúnedain Signal",
                 NormalizedTitle = "Dunedain Signal",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9008",
@@ -126,7 +126,7 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 Artist = Artist.Ijur
             });
             Cards.Add(new Card() {
-                ImageName = "M1266",
+                ImageType = Models.ImageType.Png,
                 Title = "Eagles of the Misty Mountains",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9009",
                 CardType = CardType.Ally,
@@ -143,7 +143,7 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 Artist = Artist.Sandara_Tang
             });
             Cards.Add(new Card() {
-                ImageName = "M1274",
+                ImageType = Models.ImageType.Png,
                 Title = "Escape Attempt",
                 StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801206c9010",
@@ -160,7 +160,7 @@ If the players quest unsuccessfully, Gollum escapes and the players have lost th
                 Artist = Artist.Tom_Garden
             });
             Cards.Add(new Card() {
-                ImageName = "M1277",
+                ImageType = Models.ImageType.Png,
                 Title = "Gollum",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9012",
                 CardType = CardType.Objective_Ally,
@@ -180,7 +180,7 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Artist = Artist.Tiziano_Baracchi
             });
             Cards.Add(new Card() {
-                ImageName = "M1282",
+                ImageType = Models.ImageType.Png,
                 Title = "Gollum's Anguish",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9013",
                 CardType = CardType.Treachery,
@@ -193,7 +193,7 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Artist = Artist.Tom_Garden
             });
             Cards.Add(new Card() {
-                ImageName = "M1283",
+                ImageType = Models.ImageType.Png,
                 Title = "Gollum's Bite",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9014",
                 CardType = CardType.Treachery,
@@ -206,7 +206,7 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Artist = Artist.Tom_Garden
             });
             Cards.Add(new Card() {
-                ImageName = "M1285",
+                ImageType = Models.ImageType.Png,
                 Title = "Mirkwood Bats",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9015",
                 CardType = CardType.Enemy,
@@ -224,7 +224,7 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Artist = Artist.Felicia_Cano
             });
             Cards.Add(new Card() {
-                ImageName = "M1270",
+                ImageType = Models.ImageType.Png,
                 Title = "Mirkwood Runner",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9016",
                 CardType = CardType.Ally,
@@ -242,7 +242,7 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1271",
+                ImageType = Models.ImageType.Png,
                 Title = "Rumour from the Earth",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9017",
                 CardType = CardType.Event,
@@ -255,7 +255,7 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
-                ImageName = "M1272",
+                ImageType = Models.ImageType.Png,
                 Title = "Shadow of the Past",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9018",
                 CardType = CardType.Event,
@@ -268,7 +268,7 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Artist = Artist.Henning_Ludvigsen
             });
             Cards.Add(new Card() {
-                ImageName = "M1267",
+                ImageType = Models.ImageType.Png,
                 Title = "Support of the Eagles",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9019",
                 CardType = CardType.Attachment,
@@ -283,8 +283,8 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
-                ImageName = "M1278",
-                Title = "The Spider's Ring",
+                ImageType = Models.ImageType.Png,
+                Title = "The Spiders' Ring",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9020",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Forest." },
@@ -298,7 +298,7 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Artist = Artist.Andrew_Johanson
             });
             Cards.Add(new Card() {
-                ImageName = "M1273",
+                ImageType = Models.ImageType.Png,
                 Title = "Through the Forest",
                 StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801206c9021",
@@ -314,7 +314,7 @@ Mirkwood is always a dangerous place, but it is even worse with Gollum. Between 
                 Artist = Artist.Ignacio_Bazan_Lazcano
             });
             Cards.Add(new Card() {
-                ImageName = "M1275",
+                ImageType = Models.ImageType.Png,
                 Title = "To the Elvin King's Halls",
                 StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-0801206c9023",
@@ -328,7 +328,7 @@ Mirkwood is always a dangerous place, but it is even worse with Gollum. Between 
                 Artist = Artist.Timo_Karhula
             });
             Cards.Add(new Card() {
-                ImageName = "M1284",
+                ImageType = Models.ImageType.Png,
                 Title = "Wasted Provisions",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9025",
                 CardType = CardType.Treachery,
@@ -341,7 +341,7 @@ Mirkwood is always a dangerous place, but it is even worse with Gollum. Between 
                 Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1268",
+                ImageType = Models.ImageType.Png,
                 Title = "West Road Traveller",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9026",
                 CardType = CardType.Ally,
@@ -359,7 +359,7 @@ Mirkwood is always a dangerous place, but it is even worse with Gollum. Between 
                 Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
-                ImageName = "M1281",
+                ImageType = Models.ImageType.Png,
                 Title = "Wood Elf Path",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9027",
                 CardType = CardType.Location,
@@ -373,7 +373,7 @@ Mirkwood is always a dangerous place, but it is even worse with Gollum. Between 
                 Artist = Artist.Stacey_Diana_Clark
             });
             Cards.Add(new Card() {
-                ImageName = "M1280",
+                ImageType = Models.ImageType.Png,
                 Title = "Woodman's Glade",
                 Id = "51223bd0-ffd1-11df-a976-0801206c9028",
                 CardType = CardType.Location,
