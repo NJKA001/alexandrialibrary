@@ -325,7 +325,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Drúadan Forest",
                 Quantity = 3,
                 Number = 53,
-                Artist = Artist.Marcia_George_Begdan
+                Artist = Artist.Marcia_George_Bogdan
             });
             Cards.Add(new Card() {
                 ImageName = "M1832",

@@ -82,7 +82,7 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "...foremost on the field rode the swan-knights of Dol Amroth with their Prince and his blue banner at their head. -The Return of the King",
                 Quantity = 3,
                 Number = 4,
-                Artist = Artist.Marcia_George_Begdan
+                Artist = Artist.Marcia_George_Bogdan
             });
             Cards.Add(new Card() {
                 ImageName = "M1783",
@@ -429,7 +429,7 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
                 Number = 30,
-                Artist = Artist.Marcia_George_Begdan
+                Artist = Artist.Marcia_George_Bogdan
             });
             Cards.Add(new Card() {
                 ImageName = "M1809",

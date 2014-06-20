@@ -102,7 +102,7 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Lindsey_Messecar);
             all.Add(Artist.Henning_Ludvigsen);
 
-            all.Add(Artist.Dmitri_Bielak);
+            all.Add(Artist.Dimitri_Bielak);
             all.Add(Artist.Mark_Poole);
 
             //Khazad-dum
@@ -143,7 +143,7 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Jeff_Lee_Johnson);
             all.Add(Artist.Emrah_Elmasli);
             all.Add(Artist.Matt_Smith);
-            all.Add(Artist.Marcia_George_Begdan);
+            all.Add(Artist.Marcia_George_Bogdan);
             all.Add(Artist.Darek_Zabrocki);
             all.Add(Artist.Lorraine_Schleter);
             all.Add(Artist.Anna_Steinbauer);
@@ -325,8 +325,8 @@ namespace HallOfBeorn.Models
         public static Artist David_A_Nash = new Artist { Name = "David A. Nash", URL = "http://davidnashart.blogspot.com" };
         public static Artist Dean_Spencer = new Artist { Name = "Dean Spencer", URL = "http://www.deanspencerart.com" };
         public static Artist Diego_Gisbert_Llorens = new Artist { Name = "Diego Gisbert Llorens", URL = "http://diegogisbertllorens.deviantart.com" };
+        public static Artist Dimitri_Bielak = new Artist { Name = "Dimitri Bielak", URL = "http://bielakdimitri.canalblog.com" };
         public static Artist Dleoblack = new Artist { Name = "Dleoblack", URL = "http://dleoblack.deviantart.com" };
-        public static Artist Dmitri_Bielak = new Artist { Name = "Dmitri Bielak", URL = "http://bielakdimitri.canalblog.com" };
         public static Artist Dmitry_Burmak = new Artist { Name = "Dmitry Burmak", URL = "http://devburmak.deviantart.com" };
         public static Artist Drazenka_Kimpel = new Artist { Name = "Drazenka Kimpel", URL = "http://www.creativedust.com" };
         public static Artist Drew_Whitmore = new Artist { Name = "Drew Whitmore", URL = "http://toasty.deviantart.com" };
@@ -397,7 +397,7 @@ namespace HallOfBeorn.Models
         public static Artist Lucas_Graciano = new Artist { Name = "Lucas Graciano", URL = "http://lucasgraciano.deviantart.com" };
         public static Artist Magali_Villeneuve = new Artist { Name = "Magali Villeneuve", URL = "http://magali-villeneuve.blogspot.com" };
         public static Artist Marc_Scheff = new Artist { Name = "Marc Scheff", URL = "http://www.marcscheff.com" };
-        public static Artist Marcia_George_Begdan = new Artist { Name = "Marcia George-Begdan", URL = "https://www.google.com/search?q=marcia+george-bogdan+art" };
+        public static Artist Marcia_George_Bogdan = new Artist { Name = "Marcia George-Bogdan", URL = "https://www.google.com/search?q=marcia+george-bogdan+art" };
         public static Artist Marco_Caradonna = new Artist { Name = "Marco Caradonna", URL = "http://ming1918.deviantart.com" };
         public static Artist Margaret_Hardy = new Artist { Name = "Margaret Hardy", URL = "http://kiwikitty37.deviantart.com" };
         public static Artist Mariana_Vieira = new Artist { Name = "Mariana Vieira", URL = "http://mariana-vieira.deviantart.com" };

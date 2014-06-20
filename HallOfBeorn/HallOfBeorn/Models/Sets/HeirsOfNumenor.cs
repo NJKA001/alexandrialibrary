@@ -104,7 +104,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Deal 1 damage to the defending character.",
                 HasErrata = true,
                 Number = 29,
-                Artist = Artist.Marcia_George_Begdan
+                Artist = Artist.Marcia_George_Bogdan
             });
             Cards.Add(new Card() {
                 ImageName = "M1715",
@@ -237,7 +237,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 4,
                 Number = 7,
                 FlavorText = "\"And the Enemy must pay dearly for the crossing of the River.\" -Denethor, The Return of the King",
-                Artist = Artist.Marcia_George_Begdan
+                Artist = Artist.Marcia_George_Bogdan
             });
             Cards.Add(new Card() {
                 ImageName = "M1720",
@@ -1158,7 +1158,7 @@ If the players defeat this stage, they have won the game.",
                 FlavorText = "\"I doubt not that the days of Gondor are numbered, and the walls of Minas Tirith are doomed, so great is His strength and malice.\" -Damrod, The Two Towers",
                 EncounterSet = "Mordor Elite",
                 Number = 60,
-                Artist = Artist.Marcia_George_Begdan
+                Artist = Artist.Marcia_George_Bogdan
             });
             Cards.Add(new Card() {
                 ImageName = "M1763",

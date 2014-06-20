@@ -31,7 +31,7 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 EncounterSet = "Return to Mirkwood",
                 Number = 129,
                 Artist = Artist.John_Gravato,
-                SecondArtist = Artist.Dmitri_Bielak
+                SecondArtist = Artist.Dimitri_Bielak
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
