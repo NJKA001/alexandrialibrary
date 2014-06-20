@@ -32,7 +32,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Faramir gets +1 Attack for each enemy in the staging area.",
                 FlavorText = "\"The road may pass, but they shall not! Not while Faramir is Captain.\" -Mablung, The Two Towers",
                 Quantity = 1,
-                Number = 81
+                Number = 81,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1860",
@@ -47,7 +48,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Attached ally gains the Outlands trait.",
                 FlavorText = "The Morthond Valye made a great bay that beat up against the sheer southern faces of the mountains.\r\n-The Return of the King",
                 Quantity = 3,
-                Number = 82
+                Number = 82,
+                Artist = Artist.Sara_K_Diesel
             });
             Cards.Add(new Card() {
                 ImageName = "M1861",
@@ -60,7 +62,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Return X Outlands allies from your discard pile to your hand.",
                 FlavorText = "Death in the morning and at day's ending\r\nlords took and lowly. Long now they sleep\r\nunder grass in Gondor by the Great River.\r\n-The Return of the King ",
                 Quantity = 3,
-                Number = 83
+                Number = 83,
+                Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
                 ImageName = "M1862",
@@ -76,7 +79,8 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Gondor.", " Warrior." },
                 Text = "If each of your heroes has a printed Tactics resource icon, Knight of Minas Tirith gains: \"Response: After Knight of Minas Tirith enters play, choose an enemy in the staging area. Engage that enemy and exhaust Knight of Minas Tirith to declare it as attacker (and resolve its attack) against that enemy.\"",
                 Quantity = 3,
-                Number = 84
+                Number = 84,
+                Artist = Artist.Emile_Denis
             });
             Cards.Add(new Card() {
                 ImageName = "M1863",
@@ -90,7 +94,8 @@ namespace HallOfBeorn.Models.Sets
                 NormalizedKeywords = new List<string>() { "Attach to a Gondor or Dunedain hero." },
                 Text = "Action: Spend 1 resource from attached hero's resource pool to give attached hero +1 Attack for each resource in its resource pool until the end of the phase. (Limit once per phase.)",
                 Quantity = 3,
-                Number = 85
+                Number = 85,
+                Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card() {
                 ImageName = "M1864",
@@ -107,7 +112,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Pelargir Shipwright gets +1 Willpower for each hero you control with a printed Spirit resource icon.",
                 FlavorText = "\"It is forty leagues and two from Pelargir to the landings at the Harlond...\"\r\n-Aragorn, The Return of the King",
                 Quantity = 3,
-                Number = 86
+                Number = 86,
+                Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
                 ImageName = "M1865",
@@ -121,7 +127,8 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Attach to a Spirit hero." },
                 Text = "Reduce the cost to play Map of Earnil by 1 for each hero you control with a printed Spirit resource icon.\r\nAction: Discard Map of Earnil to play any Spirit event card in your discard pile as if it were in your hand. Then, place that event on the bottom of your dekc.",
                 Quantity = 3,
-                Number = 87
+                Number = 87,
+                Artist = Artist.Florian_Stitz
             });
             Cards.Add(new Card() {
                 ImageName = "M1866",
@@ -135,7 +142,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Exhaust Ranger Bow and attached character to deal 1 damage to an enemy in the staging area.",
                 FlavorText = "Two had great bows, almost of their own height, and great quivers of long green-feathered arrows.\r\n-The Two Towers",
                 Quantity = 3,
-                Number = 88
+                Number = 88,
+                Artist = Artist.Aurelien_Hubert
             });
             Cards.Add(new Card() {
                 ImageName = "M1867",
@@ -149,7 +157,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Deal 3 damage to an enemy with at least 1 Trap card attached to it.",
                 FlavorText = "\"For coming unbidden to this play death is our law.\" -Anborn, The Two Towers",
                 Quantity = 3,
-                Number = 89
+                Number = 89,
+                Artist = Artist.Kristina_Gehrmann
             });
             Cards.Add(new Card() {
                 ImageName = "M1868",
@@ -163,7 +172,8 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Attach to a Noble hero." },
                 Text = "Planning Action: Exhaust Palantir and attached hero to name a card type and look at the top 3 cards of the encounter deck. For each of those cards that matches the named type, draw a card. For each of those cards that does not match the named type, raise your threat by 2.",
                 Quantity = 3,
-                Number = 90
+                Number = 90,
+                Artist = Artist.Sandara_Tang
             });
             Cards.Add(new Card() {
                 ImageName = "M1869",
@@ -176,7 +186,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeText = "Player card effects cannot place progress tokens on locations in the staging area.\r\nForced: When an Osgiliath location leaves play as an explored location, the first player takes control of that location.\r\nIf the players control all Osgiliath locations in play at the end of the round, they have won the game.",
                 FlavorText = "You have returned to Minas Tirith just in time to join the army of Gondor as it marches to Osgiliath. An army of orcs and southrons have garrisoned the ancient city, but Lord Boromir means to retake it. Eager to strike a blow against Mordor, you will see the city retaken or die in the attempt... ",
                 Quantity = 1,
-                Number = 91
+                Number = 91,
+                Artist = Artist.Tomasz_Jedruszek
             });
             Cards.Add(new Card() {
                 ImageName = "M1870",
@@ -193,7 +204,8 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Defending player discards an attachment he controls. (All attachments he controls instead if undefended.)",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 2,
-                Number = 92
+                Number = 92,
+                Artist = Artist.Blake_Henriksen
             });
             Cards.Add(new Card() {
                 ImageName = "M1871",
@@ -210,7 +222,8 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Defending player raises his threat by 1 for each location he controls.",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 4,
-                Number = 93
+                Number = 93,
+                Artist = Artist.Blake_Henriksen
             });
             Cards.Add(new Card() {
                 ImageName = "M1872",
@@ -227,7 +240,8 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Attacking enemy gets +1 Attack for each location the defending player controls.",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 3,
-                Number = 94
+                Number = 94,
+                Artist = Artist.J_Lonnee
             });
             Cards.Add(new Card() {
                 ImageName = "M1873",
@@ -244,7 +258,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "\"...the Southrons were bold men and grim...\"\r\n-The Return of the King",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 2,
-                Number = 95
+                Number = 95,
+                Artist = Artist.J_Lonnee
             });
             Cards.Add(new Card() {
                 ImageName = "M1874",
@@ -258,7 +273,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: If there is no active location, search the encounter deck and discard pile for an Osgiliath location, reveal it and add it to the staging area. Then, make West Gate the active location. Shuffle the encounter deck.\r\nForced: After the player who controls West Gate lets an attack go undefended, return West Gate to the staging area.",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 1,
-                Number = 96
+                Number = 96,
+                Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card() {
                 ImageName = "M1875",
@@ -273,7 +289,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "\"For that is the ruin of Osgiliath on either side of Anduin, which our enemies took and burned long ago.\"\r\n-Beregond, The Return of the King",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 1,
-                Number = 97
+                Number = 97,
+                Artist = Artist.Julian_Kok
             });
             Cards.Add(new Card() {
                 ImageName = "M1876",
@@ -290,7 +307,8 @@ namespace HallOfBeorn.Models.Sets
 Combat Action: Exhaust a hero to place 1 progress token on Ancient Harbor.\r\nForced: After the player who controls Ancient Harbor lets an attack go undefended, return Ancient Harbor to the staging area.",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 1,
-                Number = 98
+                Number = 98,
+                Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card() {
                 ImageName = "M1877",
@@ -307,7 +325,8 @@ Combat Action: Exhaust a hero to place 1 progress token on Ancient Harbor.\r\nFo
 Planning Action: Spend 2 resources to play 1 progress token on The Old Bridge. (1 resource instead if there is another Osgiliath location in the staging area.)\r\nForced: After the player who controls The Old Bridge lets an attack go undefended, return The Old Bridge to the staging area.",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 1,
-                Number = 99
+                Number = 99,
+                Artist = Artist.Adam_Lane
             });
             Cards.Add(new Card() {
                 ImageName = "M1878",
@@ -321,7 +340,8 @@ Planning Action: Spend 2 resources to play 1 progress token on The Old Bridge. (
                 Shadow = "Shadow: If this attack destroys a character, that character's controller must return a location he controls with the highest Threat to the staging area.",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 2,
-                Number = 100
+                Number = 100,
+                Artist = Artist.Marcia_George_Bogdan
             });
             Cards.Add(new Card() {
                 ImageName = "M1879",
@@ -335,7 +355,8 @@ Planning Action: Spend 2 resources to play 1 progress token on The Old Bridge. (
                 Shadow = "Shadow: If this attack destroys a character, that character's controller must return a location he controls with the highest Threat to the staging area.",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 2,
-                Number = 101
+                Number = 101,
+                Artist = Artist.Julian_Kok
             });
             Cards.Add(new Card() {
                 ImageName = "M1880",
@@ -349,7 +370,8 @@ Planning Action: Spend 2 resources to play 1 progress token on The Old Bridge. (
                 Text = "Response: After an enemy is defeated, place 1 progress token on Ruined Square.\r\nForced: If a player controls Ruined Square when a character leaves play, return Ruined Square to the staging area.",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 3,
-                Number = 102
+                Number = 102,
+                Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
                 ImageName = "M1881",
@@ -362,7 +384,8 @@ Planning Action: Spend 2 resources to play 1 progress token on The Old Bridge. (
                 Text = "Travel: If there is 1 active location, exhaust a character to travel here. (There are now 2 active locations.)\r\nForced: After the player who controls Ruined Tower loses control of a location, return Ruined Tower to the staging area.",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 3,
-                Number = 103
+                Number = 103,
+                Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
                 ImageName = "M1882",
@@ -373,7 +396,8 @@ Planning Action: Spend 2 resources to play 1 progress token on The Old Bridge. (
                 Text = "When Revealed: Add X to the archery total this round. X is the number of locations the players control. If the players control less than 4 locations, Pinned Down gains surge.",
                 Shadow = "Shadow: If this attack destroys a character, that character's controller must return a location he controls with the highest Threat to the staging area.",
                 Quantity = 2,
-                Number = 104
+                Number = 104,
+                Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
                 ImageName = "M1883",
@@ -384,7 +408,8 @@ Planning Action: Spend 2 resources to play 1 progress token on The Old Bridge. (
                 FlavorText = "And now the fighting waxed furious...\r\n-The Return of the King",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 2,
-                Number = 105
+                Number = 105,
+                Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
                 ImageName = "M1884",
@@ -395,7 +420,8 @@ Planning Action: Spend 2 resources to play 1 progress token on The Old Bridge. (
                 Text = "When Revealed: Each player must return the location he controls with the highest Threat to the staging area, or raise his threat by the total Threat of all locations he controls.",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 2,
-                Number = 106
+                Number = 106,
+                Artist = Artist.Blake_Henriksen
             });
         }
     }

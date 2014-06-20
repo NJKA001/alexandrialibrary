@@ -31,7 +31,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Discard Caldara to put 1 Spirit ally from your discard pile into play for each other hero you control with a printed Spirit resource icon.",
                 FlavorText = "...there is no purpose higher in the world as it now stands than the good of Gondor...\r\n-Denethor, The Return of the King",
                 Quantity = 1,
-                Number = 107
+                Number = 107,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1892",
@@ -49,7 +50,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Exhaust Anborn to return 1 Trap card from your discard pile to your hand.",
                 FlavorText = "\"I sent my keenest huntsmen to seek him, but he slipped them, and they had no sight of him till now, save Anborn.\"\r\n-Faramir, The Two Towers",
                 Quantity = 3,
-                Number = 114
+                Number = 114,
+                Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
                 ImageName = "M1893",
@@ -61,7 +63,8 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Trap." },
                 Text = "Play Poisoned Stakes into the staging area unattached.\r\nIf unattached, attach Poisoned Stakes to the next eligble enemy that enters the staging area.\r\nAt the end of each round, deal 2 damage to attached enemy.",
                 Quantity = 3,
-                Number = 115
+                Number = 115,
+                Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
                 ImageName = "M1891",
@@ -73,7 +76,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Choose a Silvan or Noldor ally you control. That ally gets +2 Willpower until the end of the phase. At the end of the phase, shuffle that ally into its owner's deck if it is still in play.",
                 FlavorText = "\"For deep in the hears of all my kindred lies the sea-longing, which it is perilous to stir\"\r\n-Legolas, The Return of the King",
                 Quantity = 3,
-                Number = 113
+                Number = 113,
+                Artist = Artist.Mark_Winters
             });
             Cards.Add(new Card() {
                 ImageName = "M1889",
@@ -85,7 +89,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Encounter Action: Engage each enemy in play.",
                 FlavorText = "..we have this honour: ever we bear the brunt of the chief hatred of the Dark Lord, for that hatred comes down out of the of the depths of time and over the deeps of the Sea.\r\n-Denethor, The Return of the King",
                 Quantity = 3,
-                Number = 111
+                Number = 111,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1887",
@@ -99,7 +104,8 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Attach to a Leadership hero." },
                 Text = "Reduce the cost to play Tome of Atanator by 1 for each you control with the printed Leadership resource icon.\r\nAction: Discard Tome of Atanator to play any Leadership event card in your discard pile as if it were in your hand. Then, place that event on the bottom of your deck.",
                 Quantity = 3,
-                Number = 109
+                Number = 109,
+                Artist = Artist.Jason_Ward
             });
             Cards.Add(new Card() {
                 ImageName = "M1888",
@@ -116,7 +122,8 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Rohan." },
                 Text = "If there is at least 1 Rohan hero in play, lower the cost to play Guthlaf by 1.\r\nIf there is at least 1 Gondor hero in play, Guthlaf gains sentinel.",
                 Quantity = 3,
-                Number = 110
+                Number = 110,
+                Artist = Artist.Aaron_B_Miller
             });
             Cards.Add(new Card() {
                 ImageName = "M1890",
@@ -133,7 +140,8 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Gondor." },
                 Text = "Action: Discard the top 3 card of your deck to put Emery into play from your hand, under any player's control. Then, if any of the discarded cards have the Tactics, Lore or Leadership sphere, discard Emery.",
                 Quantity = 3,
-                Number = 112
+                Number = 112,
+                Artist = Artist.Christina_Davis
             });
             Cards.Add(new Card() {
                 ImageName = "M1886",
@@ -150,7 +158,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: After Squire of the Citadel leaves play, add 1 resource to a Gondor hero's resource pool.",
                 FlavorText = "As he spoke he struck a small silver gong that stood near his footstool, and at once servants came forward.\r\n-The Return of the King",
                 Quantity = 3,
-                Number = 108
+                Number = 108,
+                Artist = Artist.Anna_Steinbauer
             });
             Cards.Add(new Card() {
                 ImageName = "M1894",
@@ -162,7 +171,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Text = "Action: Discard the top 2 cards of your deck. You may attach 1 attachment card discarded by this effect to an eligible Dwarf character in play.",
                 FlavorText = "Gimli the Dwarf alone wore openly a short shirt of steel-rings, for dwarves make light of burdens...\r\n-The Fellowship of the Ring",
-                Number = 116
+                Number = 116,
+                Artist = Artist.Blake_Henriksen
             });
             Cards.Add(new Card() {
                 ImageName = "M1902",
@@ -177,7 +187,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "This road, too, ran straight for a while, but soon it began to bend away southwards...-The Two Towers",
                 EncounterSet = "The Blood of Gondor",
                 Quantity = 1,
-                Number = 124
+                Number = 124,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
                 ImageName = "M1903",
@@ -192,7 +203,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "...he saw, beyond an arch of boughs, the road to Osgiliath running almost as straight as a streched ribbon down, down, into the West. -The Two Towers",
                 EncounterSet = "The Blood of Gondor",
                 Quantity = 1,
-                Number = 125
+                Number = 125,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
                 ImageName = "M1904",
@@ -207,7 +219,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "Behind them lay the road to the Morannon...\r\n-The Two Towers",
                 EncounterSet = "The Blood of Gondor",
                 Quantity = 1,
-                Number = 126
+                Number = 126,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
                 ImageName = "M1905",
@@ -222,7 +235,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "Black and forbidding it loomed above them, darker than the dark sky behind. -The Two Towers",
                 EncounterSet = "The Blood of Gondor",
                 Quantity = 1,
-                Number = 127
+                Number = 127,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
                 ImageName = "M1906",
@@ -236,7 +250,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "X is the number of players in the game.\r\nForced: After The Dark Woods leaves play as an explored location, the first player discards 1 hidden card.",
                 EncounterSet = "The Blood of Gondor",
                 Quantity = 4,
-                Number = 128
+                Number = 128,
+                Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card() {
                 ImageName = "M1907",
@@ -247,7 +262,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "Up came the Orcs, yelling, with their long arms stretched out to seize him. -The Two Towers",
                 EncounterSet = "The Blood of Gondor",
                 Quantity = 4,
-                Number = 129
+                Number = 129,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card() {
                 ImageName = "M1908",
@@ -259,7 +275,8 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: If this attack destoys a characters, that character's controller turns each of his hidden cards faceup.",
                 EncounterSet = "The Blood of Gondor",
                 Quantity = 3,
-                Number = 130
+                Number = 130,
+                Artist = Artist.Sidharth_Chatursedi
             });
             Cards.Add(new Card() {
                 ImageName = "M1909",
@@ -270,7 +287,8 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Take 1 hidden card.",
                 EncounterSet = "The Blood of Gondor",
                 Quantity = 2,
-                Number = 131
+                Number = 131,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
                 ImageName = "M1895",
@@ -285,8 +303,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "After the assault on Osgiliath, Lord Alcaron urges Boromi to pursue the retreating enemy. Boromir agrees and gives permission to Faramir and his rangers. Grateful for you valiant efforts in Gondor's defense, Faramir invites you to join the hunt...",
                 OppositeFlavorText = "You've pursued the enemy all the way to the Crossroads when a wicked horn blares in the distance. Within minutes, a host of orcs swarms out of the trees from all sides, led by a foreboding robed figure...",
                 OppositeText = "At the beginning of the quest phase, each player takes 1 hidden card.\r\nAt the beginning of the combat phase, each player must turn each of his hidden cards faceup or take 1 hidden card.",
-                Setup = "sstt",
-                Number = 117
+                Number = 117,
+                Artist = Artist.Adam_Lane
             });
             Cards.Add(new Card() {
                 ImageName = "M1896",
@@ -307,7 +325,8 @@ If a player has 5 hidden cards, he must turn them faceup.
 If the players defeat this stage, they have won the game.",
                 Quantity = 1,
                 QuestPoints = 15,
-                Number = 118
+                Number = 118,
+                Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
                 ImageName = "M1898",
@@ -324,7 +343,8 @@ If the players defeat this stage, they have won the game.",
                 Shadow = "Shadow: Attack enemy gets +1 Attack. (+3 Attack instead if undefended.)",
                 EncounterSet = "The Blood of Gondor",
                 Quantity = 4,
-                Number = 120
+                Number = 120,
+                Artist = Artist.Jim_Pavelec
             });
             Cards.Add(new Card() {
                 ImageName = "M1899",
@@ -340,7 +360,8 @@ If the players defeat this stage, they have won the game.",
                 Text = "Forced: After Brutual Uruk attacks and destroys a character, that character's controller turns all hidden cards in his play area faceup. Deal a shadow card to each enemy turned faceup by this effect and resolve their attacks as normal.",
                 EncounterSet = "The Blood of Gondor",
                 Quantity = 3,
-                Number = 121
+                Number = 121,
+                Artist = Artist.Tim_Tsang
             });
             Cards.Add(new Card() {
                 ImageName = "M1900",
@@ -357,7 +378,8 @@ If the players defeat this stage, they have won the game.",
                 Shadow = "Shadow: Take 1 hidden card.",
                 EncounterSet = "The Blood of Gondor",
                 Quantity = 2,
-                Number = 122
+                Number = 122,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card() {
                 ImageName = "M1901",
@@ -372,7 +394,8 @@ If the players defeat this stage, they have won the game.",
                 EncounterSet = "The Blood of Gondor",
                 VictoryPoints = 3,
                 Quantity = 1,
-                Number = 123
+                Number = 123,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
                 ImageName = "M1910",
@@ -392,7 +415,8 @@ If the players defeat this stage, they have won the game.",
 If Faramir leaves play, the players have lost the game.",
                 EncounterSet = "The Blood of Gondor",
                 Quantity = 1,
-                Number = 132
+                Number = 132,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1897",
@@ -410,7 +434,8 @@ If Faramir leaves play, the players have lost the game.",
                 Text = "X is the total number of hidden cards in the game.\r\nForced: At the end of the round, each player must raise his threat by 1 for each hiddien card in his play area.",
                 VictoryPoints = 3,
                 Quantity = 1,
-                Number = 119
+                Number = 119,
+                Artist = Artist.Scott_Murphy
             });
             Cards.Add(new Card() {
                 ImageName = "M1911",
@@ -430,7 +455,8 @@ If Faramir leaves play, the players have lost the game.",
 If Lord Alcaron leaves play, the players have lost the game.",
                 EncounterSet = "The Blood of Gondor",
                 Quantity = 1,
-                Number = 133
+                Number = 133,
+                Artist = Artist.Magali_Villeneuve
             });
         }
     }

@@ -53,7 +53,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: After Pelargir Ship Captain enters play, move 1 resource from the resource pool of a hero you control to anoter hero's resource pool.",
                 Title = "Pelargir Ship Captain",
                 Quantity = 3,
-                Number = 135
+                Number = 135,
+                Artist = Artist.Jake_Murray
             });
 
             Cards.Add(new Card()
@@ -70,7 +71,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "While attached hero has at least 1 resource in its resource pool, Gondor characters get +1 Willpower.",
                 FlavorText = "\"...still the lords of Gondor have keener sight than lesser men...\" -Denethor, The Return of the King",
                 Quantity = 3,
-                Number = 136
+                Number = 136,
+                Artist = Artist.Milek_Jakubiec
             });
 
             Cards.Add(new Card()
@@ -86,7 +88,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Attached character gets +1 Attack. (+2 Attack instead if attacking an enemy in the staging area).",
                 FlavorText = "Right through the press drove Théoden Thengel's son, and his spear was shivered as he threw down thier chieftan. -The Return of the King",
                 Quantity = 3,
-                Number = 137
+                Number = 137,
+                Artist = Artist.Jon_Bosco
             });
 
             Cards.Add(new Card()
@@ -100,7 +103,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Combat Action: Each Rohan hero can be declared as an attacker against enemies in the staging area this phase.",
                 FlavorText = "\"Oaths ye have taken: now fulfill them all, to lord and land and league of friendship!\" -Théoden, The Return of the King",
                 Quantity = 3,
-                Number = 138
+                Number = 138,
+                Artist = Artist.Darek_Zabrocki
             });
 
             Cards.Add(new Card()
@@ -116,7 +120,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: after attached hero commits to a quest, spend 1 resource from attached hero's resource pool to ready attached hero.",
                 FlavorText = "...fresh horses were always in readiness to bear his errand-riders to Rohan in the Noth... -The Return of the King",
                 Quantity = 3,
-                Number = 139
+                Number = 139,
+                Artist = Artist.Sandara_Tang
             });
 
             Cards.Add(new Card()
@@ -131,7 +136,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Choose a Spirit hero. Until the end of the phase, that hero gets +1 Willpower for each resource in its resource pool.",
                 FlavorText = "An Elven-made there was of old.\r\nA shining star by day:\r\nHer mantle white was hemmed with hold,\r\nHer shoes of silver-grey.\r\n-The Fellowship of the Ring",
                 Quantity = 3,
-                Number = 140
+                Number = 140,
+                Artist = Artist.Magali_Villeneuve
             });
 
             Cards.Add(new Card()
@@ -149,7 +155,8 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string> { "Dwarf." },
                 Text = "Response: After Ered Nimrais Prospector enters play, discard the top 3 cards of your deck. Then, choose and shuffle 1 card from your discard pile back into your deck.",
                 Quantity = 3,
-                Number = 141
+                Number = 141,
+                Artist = Artist.Jason_Ward
             });
 
             Cards.Add(new Card()
@@ -164,7 +171,8 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string> { "Attach to a Lore hero." },
                 Text = "Reduce the cost to play ~Scroll of Isildur by 1 for each hero you control with a printed Lore resource icon.\r\nAction: Discard ~Scroll of Isildur to play any Lore event card in your discard pile as if it were in your hand. Then, place that event on the bottom of your deck.",
                 Quantity = 3,
-                Number = 142
+                Number = 142,
+                Artist = Artist.Sara_Biddle
             });
 
             Cards.Add(new Card()
@@ -178,7 +186,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: After Hidden Cache is discarded from your deck, add 2 resources to the resource pool of a hero you control.\r\nAction: Spend 1 resource to draw 1 card.",
                 FlavorText = "...there was a good deal of food jumbled carlessly on shelves and on the ground, among an untidy litter of plunder...\r\n-The Hobbit",
                 Quantity = 3,
-                Number = 143
+                Number = 143,
+                Artist = Artist.Aurelien_Hubert
             });
 
             Cards.Add(new Card()
@@ -195,7 +204,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeText = "Murzag cannot leave play unless destroyed. If Murzag is defeated, advance to the next stage.",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 1,
-                Number = 144
+                Number = 144,
+                Artist = Artist.Sidharth_Chatursedi
             });
 
             Cards.Add(new Card()
@@ -212,7 +222,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeFlavorText = "Alcaron utters an ancient word, and a ghastly shriek rises from Minas Morgul. Something cold and terrible has awoken. Something that is aware of your presence. A short distance ahread, the Uruk carrying Faramir pauses, intimidated by the carrion cry from the city. There may still be time. But first you must deal with the traitor...",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 1,
-                Number = 145
+                Number = 145,
+                Artist = Artist.Magali_Villeneuve
             });
 
             Cards.Add(new Card()
@@ -233,7 +244,8 @@ namespace HallOfBeorn.Models.Sets
 If ~Nazgûl of Minas ~Morgul is defeated, the players have won the game.",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 1,
-                Number = 146
+                Number = 146,
+                Artist = Artist.Magali_Villeneuve
             });
 
             Cards.Add(new Card()
@@ -251,7 +263,8 @@ Remove Faramir from the game.
 If 10 or more progress tokens are on To the Tower, the players have lost the game.",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 1,
-                Number = 147
+                Number = 147,
+                Artist = Artist.Darek_Zabrocki
             });
 
             Cards.Add(new Card()
@@ -270,7 +283,8 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
                 Shadow = "Shadow: Attacking enemy engages the next player and makes an immediate attack, if able.",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 3,
-                Number = 148
+                Number = 148,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
 
             Cards.Add(new Card()
@@ -289,7 +303,8 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
                 Shadow = "Shadow: Defending player must place 1 progress token on To the Tower or treat this attack as undefended.",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 2,
-                Number = 149
+                Number = 149,
+                Artist = Artist.Jim_Pavelec
             });
 
             Cards.Add(new Card()
@@ -308,7 +323,8 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
                 Shadow = "Shadow: Attacking enemy gets +1 Attack. If undefended, place 1 progress token on To the Tower as well.",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 3,
-                Number = 150
+                Number = 150,
+                Artist = Artist.Yigit_Koroglu
             });
 
             Cards.Add(new Card()
@@ -327,7 +343,8 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
                 Text = "Forced: After Murzag attacks, reveal the top card of the encounter deck. If that card is an enemy, put it into play engaged with the defending player.",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 1,
-                Number = 151
+                Number = 151,
+                Artist = Artist.Jim_Pavelec
             });
 
             Cards.Add(new Card()
@@ -346,7 +363,8 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
                 Text = "Forced: When Lord Alcaron attacks, place 1 progress token on To the Tower.\r\nForced: When Lord Alcaron is dealt a shadow card with no shadow effect, he makes an additional attack after this one (deal and resolve another shadow card).",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 1,
-                Number = 152
+                Number = 152,
+                Artist = Artist.Magali_Villeneuve
             });
 
             Cards.Add(new Card()
@@ -368,7 +386,8 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
                 FlavorText = "\"Come not between the Nazgûl and his prey!\"\r\n-The Witch King, The Return of the King",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 1,
-                Number = 153
+                Number = 153,
+                Artist = Artist.Jake_Murray
             });
 
             Cards.Add(new Card()
@@ -384,7 +403,8 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
                 Shadow = "Shadow: Return attacking enemy to the staging area after this attack.",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 3,
-                Number = 154
+                Number = 154,
+                Artist = Artist.Trudi_Castle
             });
 
             Cards.Add(new Card()
@@ -400,7 +420,8 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
                 Shadow = "Shadow: If this attack destroys a character, place 1 progress token on To the Tower.",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 2,
-                Number = 155
+                Number = 155,
+                Artist = Artist.Jake_Murray
             });
 
             Cards.Add(new Card()
@@ -416,7 +437,8 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
                 FlavorText = "So they came slowly to the white bridge.\r\n-The Two Towers",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 1,
-                Number = 156
+                Number = 156,
+                Artist = Artist.Jake_Murray
             });
 
             Cards.Add(new Card()
@@ -429,7 +451,8 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
                 FlavorText = "The air above was heavy with fog, and a reek lay on the land about them.\r\nThe Two Towers",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 2,
-                Number = 157
+                Number = 157,
+                Artist = Artist.Oleg_Saakyan
             });
 
             Cards.Add(new Card()
@@ -443,7 +466,8 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
                 Shadow = "Shadow: Return attacking enemy to the staging area after this attack.",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 2,
-                Number = 158
+                Number = 158,
+                Artist = Artist.Jim_Pavelec
             });
 
             Cards.Add(new Card()
@@ -457,7 +481,8 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
                 Shadow = "Shadow: Attacking enemy gets +1 Attack for each progress token on To the Tower.",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 2,
-                Number = 159
+                Number = 159,
+                Artist = Artist.Darek_Zabrocki
             });
 
             Cards.Add(new Card()
@@ -470,7 +495,8 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
                 Shadow = "Shadow: Attacking enemy gets +1 Attack for each progress token on To the Tower.",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 2,
-                Number = 160
+                Number = 160,
+                Artist = Artist.Igor_Kieryluk
             });
         }
     }
