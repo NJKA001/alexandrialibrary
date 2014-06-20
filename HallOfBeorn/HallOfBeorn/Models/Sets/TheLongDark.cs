@@ -27,7 +27,8 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 3,
                 QuestPoints = 3,
                 VictoryPoints = 0,
-                Number = 89
+                Number = 89,
+                Artist = Artist.Paulo_Puggioni
             });
             Cards.Add(new Card() {
                 ImageName = "M1459",
@@ -43,7 +44,8 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 4,
                 Text = "When Revealed: The first player draws 1 card. Then, that player must choose and discard 4 cards from his hand, if able.Forced: After Cave Spider engages a player, that player must choose and discard 1 card from his hand, if able.",
                 Threat = 3,
-                Number = 97
+                Number = 97,
+                Artist = Artist.Allison_Theus
             });
             Cards.Add(new Card() {
                 ImageName = "M1449",
@@ -57,7 +59,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "Time carries no weight in the darkness, and the hours creep by with no end in sight. The number of Orcs in the mines increase as you head toward the East-gate, but there appears to be little real organization within their ranks. You press onward!",
                 OppositeText =
 "When Revealed: The first player makes a locate test. If this test is failed, reveal cards from the encounter deck equal to the number of players in the game and add them to the staging area. Then, trigger all \"Lost:\" effects in play.\r\n\r\nIf the players quest unsuccessfully, trigger all \"Lost:\" effects in play.\r\n\r\nIf the players defeat this stage, they have won the game.",
-                Number = 87
+                Number = 87,
+                Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
                 ImageName = "M1450",
@@ -72,7 +75,8 @@ namespace HallOfBeorn.Models.Sets
 @"When Revealed: The first player attaches Durin's Greaves to a hero of his choice as an attachment.
                 
 Attached hero gets +1 Defense.",
-                Number = 88
+                Number = 88,
+                Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
                 ImageName = "M1452",
@@ -86,7 +90,8 @@ Attached hero gets +1 Defense.",
                 Threat = 2,
                 QuestPoints = 4,
                 VictoryPoints = 0,
-                Number = 90
+                Number = 90,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
                 ImageName = "M1441",
@@ -103,7 +108,8 @@ Attached hero gets +1 Defense.",
                 HitPoints = 2,
                 Text = "Erebor Battle Master gets +1 Attack for each other Dwarf ally you control.",
                 HasErrata = true,
-                Number = 79
+                Number = 79,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card() {
                 ImageName = "M1439",
@@ -120,7 +126,8 @@ Attached hero gets +1 Defense.",
                 Willpower = 2,
                 HitPoints = 3,
                 Text = "Action: Choose and discard 1 card from your hand to draw 1 card. (Limit once per round.)",
-                Number = 77
+                Number = 77,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1444",
@@ -133,7 +140,8 @@ Attached hero gets +1 Defense.",
                 ResourceCost = 0,
                 Text = "Response: After you travel to a Mountain or Underground location, ready attached character and reduce your threat by 1.",
                 Keywords = new List<string>() { "Attach to a Dwarf character." },
-                Number = 82
+                Number = 82,
+                Artist = Artist.Carolina_Eade
             });
             Cards.Add(new Card() {
                 ImageName = "M1455",
@@ -144,7 +152,8 @@ Attached hero gets +1 Defense.",
                 Quantity = 2,
                 Text = "When Revealed: Each player must exhaust 1 character he controls, if able. Then, if any player controls no unexhausted characters, Fatigue gains surge.",
                 Shadow = "Shadow: The defending player must exhaust 1 character he controls, if able.",
-                Number = 93
+                Number = 93,
+                Artist = Artist.Charles_Urbach
             });
             Cards.Add(new Card() {
                 ImageName = "M1456",
@@ -155,7 +164,8 @@ Attached hero gets +1 Defense.",
                 Quantity = 4,
                 Text = "When Revealed: The first player makes a locate test. If this test is failed, deal 2 damage to all characters and trigger all 'Lost:' effects in play.",
                 VictoryPoints = 0,
-                Number = 94
+                Number = 94,
+                Artist = Artist.Jasper_Sandner
             });
             Cards.Add(new Card() {
                 ImageName = "M1440",
@@ -166,7 +176,8 @@ Attached hero gets +1 Defense.",
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Response: After an enemy is added to the staging area, deal 1 damage to that enemy. Players ignore that enemy while making engagement checks this round.",
-                Number = 78
+                Number = 78,
+                Artist = Artist.Garret_DeChellis
             });
             Cards.Add(new Card() {
                 ImageName = "M1457",
@@ -177,7 +188,8 @@ Attached hero gets +1 Defense.",
                 Quantity = 1,
                 Text = "When Revealed: Attach this card to a location in the staging area with the highest combined threat and remaining quest points. (Counts as a Condition attachment with the text: 'Each enemy revealed from the encounter deck gains surge.')",
                 VictoryPoints = 0,
-                Number = 95
+                Number = 95,
+                Artist = Artist.Jason_Juta
             });
             Cards.Add(new Card() {
                 ImageName = "M1460",
@@ -194,7 +206,8 @@ Attached hero gets +1 Defense.",
                 Text = "Forced: After Goblin Sneak engages a player, discard the top card of the encounter deck. If it is a treachery card, Goblin Sneak engages the next player, if able.",
                 Shadow = "Shadow: Add Goblin Sneak to the staging area.",
                 Threat = 2,
-                Number = 98
+                Number = 98,
+                Artist = Artist.Timo_Karhula
             });
             Cards.Add(new Card() {
                 ImageName = "M1461",
@@ -211,7 +224,8 @@ Attached hero gets +1 Defense.",
                 Text = "Lost: Each player must choose and discard 1 ally he controls from play, if able.",
                 Shadow = "Shadow: Trigger all 'Lost:' effects in play.",
                 Threat = 4,
-                Number = 99
+                Number = 99,
+                Artist = Artist.Matthew_Starbuck
             });
             Cards.Add(new Card() {
                 ImageName = "M1438",
@@ -229,7 +243,8 @@ Attached hero gets +1 Defense.",
                 Willpower = 1,
                 HitPoints = 4,
                 Text = "Response: After Hama is declared as an attacker, return a Tactics event from your discard pile to your hand. Then, choose and discard 1 card from your hand.",
-                Number = 76
+                Number = 76,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1448",
@@ -244,7 +259,8 @@ Attached hero gets +1 Defense.",
                 Text = "Setup: The first player attaches Cave Torch to a hero of his choice.",
                 OppositeText = "When Revealed: Discard cards from the top of the encounter deck until you discard X locations, where X is one less than the number of players in the game (minimum 1). Add those locations to the staging area, and shuffle the other discarded cards back into the encounter deck.\r\nEach location gets +1 threat. If the players quest unsuccessfully, trigger all \"Lost:\" effects in play.",
                 FlavorText = "Your party is scouting the Mines of Moria, searching for signs of Orcs. Dark tunnels and twisting passages spread out in all directions, a labyrinthine maze that you could wander in forever if you take the wrong path.",
-                Number = 86
+                Number = 86,
+                Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
                 ImageName = "M1447",
@@ -257,7 +273,8 @@ Attached hero gets +1 Defense.",
                 ResourceCost = 0,
                 Text = "Response: After a Song card is played, add 1 resource to attached hero's resource pool.",
                 Keywords = new List<string>() { "Attach to a Lore hero.", " Limit 1 per hero." },
-                Number = 85
+                Number = 85,
+                Artist = Artist.Winona_Nelson
             });
             Cards.Add(new Card() {
                 ImageName = "M1443",
@@ -269,7 +286,8 @@ Attached hero gets +1 Defense.",
                 ResourceCost = 5,
                 Text = "Action: Enemies engaged with you cannot attack you this phase.",
                 Keywords = new List<string>() { "Secrecy 3." },
-                Number = 81
+                Number = 81,
+                Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
                 ImageName = "M1442",
@@ -282,7 +300,8 @@ Attached hero gets +1 Defense.",
                 ResourceCost = 2,
                 Text = "Attached character gets +1 hit point and +1 Defense.",
                 Keywords = new List<string>() { "Attach to a Dwarf or Hobbit character.", " Restricted." },
-                Number = 80
+                Number = 80,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 Title = "Rock Adder",
@@ -300,7 +319,8 @@ Attached hero gets +1 Defense.",
                 Text = "Rock Adder cannot be attacked unless it has dealt at least 1 damage this round.",
                 Shadow = "Shadow: If this attack is undefended, the defending player must discard 1 character he controls from play.",
                 Threat = 1,
-                Number = 100
+                Number = 100,
+                Artist = Artist.Allison_Theus
             });
             Cards.Add(new Card() {
                 ImageName = "M1453",
@@ -314,7 +334,8 @@ Attached hero gets +1 Defense.",
                 Threat = 1,
                 QuestPoints = 3,
                 VictoryPoints = 0,
-                Number = 91
+                Number = 91,
+                Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
                 ImageName = "M1454",
@@ -328,7 +349,8 @@ Attached hero gets +1 Defense.",
                 Threat = 3,
                 QuestPoints = 5,
                 VictoryPoints = 0,
-                Number = 92
+                Number = 92,
+                Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
                 ImageName = "M1458",
@@ -338,7 +360,8 @@ Attached hero gets +1 Defense.",
                 EncounterSet = "The Long Dark",
                 Quantity = 2,
                 Text = "When Revealed: The first player makes a locate test. If this test is failed, raise each player's threat by 7, remove all progress tokens from play, and trigger all 'Lost:' effects in play.",
-                Number = 96
+                Number = 96,
+                Artist = Artist.Eric_Braddock
             });
             Cards.Add(new Card() {
                 ImageName = "M1445",
@@ -354,7 +377,9 @@ Attached hero gets +1 Defense.",
                 Willpower = 1,
                 HitPoints = 1,
                 Text = "Action: Exhaust Warden of Healing to heal 1 damage on up to 2 different characters. Then, you may pay 2 Lore resources to ready Warden of Healing.",
-                Number = 83
+                FlavorText = "\"But for long years we healers have only sought to patch the rents made by the men of swords.\" -Return of the King",
+                Number = 83,
+                Artist = Artist.Paulo_Puggioni
             });
             Cards.Add(new Card() {
                 ImageName = "M1446",
@@ -365,7 +390,9 @@ Attached hero gets +1 Defense.",
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Action: Exhaust an Istari character to search your deck for 1 card and add it to your hand. Shuffle your deck.",
-                Number = 84
+                FlavorText = "\"Picking up a faggot he held it aloft for a moment, and then with a word of command, naur an edraith ammen! he thrust the end of his staff into the midst of it. At once a great spout of green and blue flame sprang out, and the wood flared and sputtered.\" -The Fellowship of the Ring",
+                Number = 84,
+                Artist = Artist.Magali_Villeneuve
             });
         }
     }

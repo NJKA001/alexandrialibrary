@@ -50,7 +50,8 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 2,
                 HitPoints = 2,
                 Text = "Response: After Arwen Undomiel exhausts, choose a character. That character gains sentinel and gets +1 Defense until the end of the round.",
-                Number = 58
+                Number = 58,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1432",
@@ -60,7 +61,8 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Watcher in the Water",
                 Quantity = 3,
                 Keywords = new List<string>() { "Doomed 5." },
-                Number = 71
+                Number = 71,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
                 ImageName = "M1426",
@@ -75,7 +77,8 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 QuestPoints = 0,
                 VictoryPoints = 3,
-                Number = 65
+                Number = 65,
+                Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
                 ImageName = "M1420",
@@ -86,7 +89,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 0,
                 Text = "Action: If you control a unique Noldor character, give another character +1 Willpower until the end of the phase and lower your threat by 3.",
-                Number = 59
+                Number = 59,
+                Artist = Artist.Anthony_Palumbo
             });
             Cards.Add(new Card() {
                 ImageName = "M1434",
@@ -102,7 +106,8 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Text = "Forced: When Grasping Tentacle is attacked, discard the top card of the encounter deck. If that card has a shadow effect or is a Tentacle enemy, attach this card to an attacking character as a Tentacle attachment with the text: 'Attached character's Attack and Defense are reduced to 0.'",
                 Threat = 2,
-                Number = 73
+                Number = 73,
+                Artist = Artist.Mark_Tarrisse
             });
             Cards.Add(new Card() {
                 ImageName = "M1415",
@@ -113,7 +118,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Response: After a character leaves play, add its Attack to another character's Attack until the end of the round.",
-                Number = 54
+                Number = 54,
+                Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
                 ImageName = "M1431",
@@ -124,7 +130,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Text = "When Revealed: All enemies in the staging area engage the player with the highest threat. Then, each player raises his threat by the total Threat of all cards in the staging area.",
                 Shadow = "Shadow: attacking enemy gets +1 Attack. (+3 Attack instead if it is a Tentacle.)",
-                Number = 70
+                Number = 70,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
                 ImageName = "M1422",
@@ -138,7 +145,8 @@ namespace HallOfBeorn.Models.Sets
                 IsUnique = true,
                 Text = "Response: After you play a Dwarf character from your hand, draw 1 card.",
                 Keywords = new List<string>() { "Attach to a Dwarf hero." },
-                Number = 61
+                Number = 61,
+                Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
                 ImageName = "M1429",
@@ -149,9 +157,11 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Swamp." },
                 Quantity = 2,
                 Text = "Forced: After you travel to Makeshift Passage, place 2 progress tokens on the current quest card, bypassing any active location.",
+                FlavorText = "They reached the strip of dry land between the lake and the cliffs: it was narrow, often hardly a dozen yards across, and encumbered with fallen rock and stones; but they found a way, hugging the cliff, and keeping as far from the dark water as they might. - The Fellowship of the Ring",
                 Threat = 1,
                 QuestPoints = 5,
-                Number = 68
+                Number = 68,
+                Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
                 ImageName = "M1428",
@@ -165,7 +175,8 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Remove 1 progress token from the current quest.",
                 Threat = 4,
                 QuestPoints = 2,
-                Number = 67
+                Number = 67,
+                Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
                 ImageName = "M1423",
@@ -177,7 +188,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 4,
                 Text = "Attach to a hero you control.Attached hero collects 1 additional resource during the resource phase each round.",
                 Keywords = new List<string>() { "Secrecy 3." },
-                Number = 62
+                Number = 62,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1418",
@@ -189,7 +201,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Attach to a Noldor or Silvan character, or to Aragorn. Limit 1 per character.Attached character gains ranged.If attached character has a printed ranged keyword, it gets +1 Attack during a ranged attack.",
-                Number = 57
+                Number = 57,
+                Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
                 ImageName = "M1421",
@@ -200,7 +213,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Response: After a location enters play, exhaust a Hobbit character to shuffle that location back into the encounter deck. Then, reveal 1 card from the encounter deck and add it to the staging area.",
-                Number = 60
+                Number = 60,
+                Artist = Artist.Igor_Kieryluk
             });
             Cards.Add(new Card() {
                 ImageName = "M1430",
@@ -213,7 +227,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Discard the top card of the encounter deck. If the discarded card is a Tentacle enemy, add that card to the staging area and raise each player's threat by 5.",
                 Threat = 3,
                 QuestPoints = 3,
-                Number = 69
+                Number = 69,
+                Artist = Artist.David_Lecossu
             });
             Cards.Add(new Card() {
                 ImageName = "M1427",
@@ -228,7 +243,8 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Remove 1 progress token from the current quest.",
                 Threat = 2,
                 QuestPoints = 4,
-                Number = 66
+                Number = 66,
+                Artist = Artist.Lin_Bo
             });
             Cards.Add(new Card() {
                 ImageName = "M1436",
@@ -244,7 +260,8 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Text = "Forced: When Striking Tentacle attacks, discard the top card of the encounter deck. If that card has a shadow effect or is a Tentacle enemy, this attack is considered undefended.",
                 Threat = 2,
-                Number = 75
+                Number = 75,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
                 ImageName = "M1416",
@@ -258,7 +275,8 @@ namespace HallOfBeorn.Models.Sets
                 IsUnique = true,
                 Text = "Attached hero gains a Leadership resource icon.If attached hero is Aragorn, each character you control gets +1 Willpower.",
                 Keywords = new List<string>() { "Attach to a hero." },
-                Number = 55
+                Number = 55,
+                Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
                 ImageName = "M1425",
@@ -274,7 +292,8 @@ namespace HallOfBeorn.Models.Sets
 
 If the players have at least 3 victory points and defeat this stage, they have won the game.",
                 QuestPoints = 5,
-                Number = 64
+                Number = 64,
+                Artist = Artist.Adam_Schumpert
             });
             Cards.Add(new Card() {
                 ImageName = "M1433",
@@ -293,7 +312,8 @@ If the players have at least 3 victory points and defeat this stage, they have w
                 Keywords = new List<string>() { "Regenerate 2." },
                 Threat = 4,
                 VictoryPoints = 3,
-                Number = 72
+                Number = 72,
+                Artist = Artist.Matthew_Starbuck
             });
             Cards.Add(new Card() {
                 ImageName = "M1435",
@@ -309,7 +329,8 @@ If the players have at least 3 victory points and defeat this stage, they have w
                 HitPoints = 3,
                 Text = "Forced: When Thrashing Tentacle is attacked, discard the top card of the encounter deck. If that card has a shadow effect or is a Tentacle enemy, deal the damage from the attack to 1 character an attacking player controls (ignoring defense).",
                 Threat = 2,
-                Number = 74
+                Number = 74,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
                 ImageName = "M1424",
@@ -325,7 +346,8 @@ If the players have at least 3 victory points and defeat this stage, they have w
                 FlavorText = "Elrond has asked you to scout the Mines of Moria on your return to Lorien, hoping to discover if it is the source of increased Orc activity along the Misty Mountains.",
                 OppositeText = "When Revealed: Reveal cards from the encounter deck and add them to the staging area until there is at least X threat in the staging area. X is twice the number of players in the game.",
                 OppositeFlavorText = "Your approach is blocked by a dark lake that slumbers beneath the face of the cliff. You must search for a way around the water.",
-                Number = 63
+                Number = 63,
+                Artist = Artist.Jason_Juta
             });
             Cards.Add(new Card() {
                 ImageName = "M1417",
@@ -342,7 +364,8 @@ If the players have at least 3 victory points and defeat this stage, they have w
                 HitPoints = 2,
                 Text = "Watcher of the Bruinen does not exhaust to defend.Forced: After Watcher of the Bruinen defends, either discard it from play or discard 1 card from your hand.",
                 Keywords = new List<string>() { "Sentinel." },
-                Number = 56
+                Number = 56,
+                Artist = Artist.Kristina_Carroll
             });
             Cards.Add(new Card() {
                 ImageName = "M1437",
@@ -354,7 +377,8 @@ If the players have at least 3 victory points and defeat this stage, they have w
                 Traits = new List<string>() { "Tentacle." },
                 Quantity = 4,
                 Text = "When Revealed: The first player attaches Wrapped! to a hero he controls. (Counts as a Tentacle attachment with the text: 'Limit 1 per hero. Attached hero cannot exhaust or ready. At the end of the round, discard attached hero from play. Combat Action: Exhaust a hero you control without a Tentacle attachment to discard Wrapped!.')",
-                Number = 76
+                Number = 76,
+                Artist = Artist.Cristi_Balanescu
             });
         }
     }

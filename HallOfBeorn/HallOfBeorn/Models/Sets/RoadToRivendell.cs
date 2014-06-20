@@ -26,7 +26,8 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 20,
                 Text = "Setup: Put Arwen Undomiel into play under the control of the first player. Shuffle the encounter deck. Reveal 1 card from the encounter deck per player, and add them to the staging area.",
                 FlavorText = "This is a wild and perilous country, and it is dangerous to follow the roads. The mountains rise up on the right, impassively watching your slow trek among their foothills.",
-                Number = 38
+                Number = 38,
+                Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
                 ImageName = "M1401",
@@ -39,7 +40,8 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 13,
                 OppositeText = "When Revealed: Reveal 1 card from the encounter deck per player, and add it to the staging area.\r\nCharacters cannot be healed.\r\nIf the players defeat this stage, they have won the game.",
                 FlavorText = "Orcs and other creatures have hounded you since fighting your way free of the orc outpost. Soon you will reach the safety of Rivendell's borders, but supplies have dwindled and you are dead weary from sleepless nights of keeping watch, as dark forms shadow your camp.",
-                Number = 40
+                Number = 40,
+                Artist = Artist.Noah_Bradley
             });
             Cards.Add(new Card() {
                 ImageName = "M1402",
@@ -55,7 +57,8 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 2,
                 HitPoints = 2,
                 Text = "The first player gains control of Arwen Undomiel, as an ally.Response: After Arwen Undomiel exhausts, choose a hero. Add 1 resource to that hero's resource pool.If Arwen Undomiel leaves play, the players are defeated.",
-                Number = 41
+                Number = 41,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1406",
@@ -69,7 +72,8 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Return attacking enemy to the staging area after it attacks.",
                 Threat = 2,
                 QuestPoints = 4,
-                Number = 45
+                Number = 45,
+                Artist = Artist.David_Lecossu
             });
             Cards.Add(new Card() {
                 ImageName = "M1396",
@@ -86,7 +90,8 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 0,
                 HitPoints = 3,
                 Text = "Action: Exhaust Bombur to choose a location. That location gets -1 Threat until the end of the phase. (That location does not contribute its Threat instead if it is an Underground location.)",
-                Number = 35
+                Number = 35,
+                Artist = Artist.Winona_Nelson
             });
             Cards.Add(new Card() {
                 ImageName = "M1412",
@@ -104,7 +109,8 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Return attacking enemy to the staging area after it attacks.",
                 Keywords = new List<string>() { "Surge." },
                 Threat = 2,
-                Number = 51
+                Number = 51,
+                Artist = Artist.Allison_Theus
             });
             Cards.Add(new Card() {
                 ImageName = "M1390",
@@ -122,7 +128,8 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 1,
                 HitPoints = 2,
                 Keywords = new List<string>() { "Ranged.", " Sentinel.", " Secrecy 3." },
-                Number = 29
+                Number = 29,
+                Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
                 ImageName = "M1389",
@@ -139,7 +146,8 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 2,
                 HitPoints = 4,
                 Text = "While Elrohir is in play, Elladan gets +2 Attack.Response: After Elladan is declared as an attacker, pay 1 resource from his resource pool to ready him.",
-                Number = 28
+                Number = 28,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1408",
@@ -150,7 +158,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Text = "When Revealed: The first player (choose 1): deals 1 damage to all allies in play and Followed by Night gains surge, or all enemies engaged with players make an immediate attack, if able.",
                 Shadow = "Shadow: Return attacking enemy to the staging area after it attacks.",
-                Number = 47
+                Number = 47,
+                Artist = Artist.Jasper_Sandner
             });
             Cards.Add(new Card() {
                 ImageName = "M1404",
@@ -163,7 +172,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "While Goblin Gate is the active location, the first enemy revealed from the encounter deck each round gains ambush. If that enemy engages a player, it makes an immediate attack (deal and resolve a shadow card).",
                 Threat = 5,
                 QuestPoints = 4,
-                Number = 43
+                Number = 43,
+                Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
                 ImageName = "M1410",
@@ -180,7 +190,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Forced: After Goblin Taskmaster engages a player, that player deals 2 damage to 1 character he controls.",
                 Keywords = new List<string>() { "Ambush." },
                 Threat = 2,
-                Number = 49
+                Number = 49,
+                Artist = Artist.Mike_Nash
             });
             Cards.Add(new Card() {
                 ImageName = "M1393",
@@ -191,7 +202,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = "Action: Exhaust X characters to deal X damage to an enemy in the staging area.",
-                Number = 32
+                Number = 32,
+                Artist = Artist.Stu_Barnes
             });
             Cards.Add(new Card() {
                 ImageName = "M1391",
@@ -202,7 +214,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 3,
                 Text = "Action: Ready all Dwarf characters.",
-                Number = 30
+                Number = 30,
+                Artist = Artist.Mike_Nash
             });
             Cards.Add(new Card() {
                 ImageName = "M1409",
@@ -213,7 +226,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 2,
                 Text = "When Revealed: All Orc enemies in the staging area engage the first player. If there are no Orc enemies in the staging area, return all Orc enemies in the encounter discard pile to the staging area, if able.",
                 Keywords = new List<string>() { "Surge." },
-                Number = 48
+                Number = 48,
+                Artist = Artist.Anton_Kolyukh
             });
             Cards.Add(new Card() {
                 ImageName = "M1400",
@@ -227,6 +241,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 39,
                 OppositeText = "When Revealed: Search the encounter deck and discard pile for Goblin Gate and add it to the staging area, if able. Then, if there is no active location, Goblin Gate becomes the active location.",
                 FlavorText = "Heavy rain drives you to seek shelter among the caves of the mountains. They are dry, and the fire you start seeps into your bones and restores your spirit. Your eyes are heavy when teh soft clatter of falling pebbles reaches your ears. Perhaps you are not alone.",
+                Artist = Artist.Nick_Deligaris
             });
             Cards.Add(new Card() {
                 ImageName = "M1411",
@@ -243,7 +258,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Forced: After Orc Raiders engages a player, that player discards 2 attachments he controls, if able.",
                 Keywords = new List<string>() { "Ambush." },
                 Threat = 1,
-                Number = 50
+                Number = 50,
+                Artist = Artist.Mark_Tarrisse
             });
             Cards.Add(new Card() {
                 ImageName = "M1397",
@@ -255,7 +271,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 3,
                 Text = "Action: Search the top 5 cards of the encounter deck for any 1 non-objective card worth no victory points and add it to your victory display. Shuffle the encounter deck.",
                 Keywords = new List<string>() { "Secrecy 2." },
-                Number = 36
+                Number = 36,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1405",
@@ -269,7 +286,8 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Deal 1 damage to each ally in play.",
                 Threat = 3,
                 QuestPoints = 5,
-                Number = 44
+                Number = 44,
+                Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
                 ImageName = "M1394",
@@ -285,7 +303,8 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 2,
                 HitPoints = 2,
                 Text = "Action: Spend 1 Spirit resource to give control of Rider of the Mark to another player. (Limit once per round.)Response: After Rider of the Mark changes control, discard a shadow card dealt to an enemy you are engaged with.",
-                Number = 33
+                Number = 33,
+                Artist = Artist.David_Horne
             });
             Cards.Add(new Card() {
                 ImageName = "M1392",
@@ -298,7 +317,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Text = "When attached character attacks an enemy, that enemy gets -2 Defense until the end of the phase.",
                 Keywords = new List<string>() { "Attach to a Noldor or Silvan character.", " Restricted." },
-                Number = 31
+                Number = 31,
+                Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
                 ImageName = "M1403",
@@ -312,7 +332,8 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Return attacking enemy to the staging area after it attacks.",
                 Threat = 1,
                 QuestPoints = 5,
-                Number = 42
+                Number = 42,
+                Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
                 ImageName = "M1407",
@@ -323,7 +344,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 2,
                 Text = "When Revealed: Deal 1 damage to each exhausted character. Then, exhaust all ready characters.",
                 Shadow = "Shadow: Defending player must discard all exhausted characters he controls.",
-                Number = 46
+                Number = 46,
+                Artist = Artist.Tiziano_Baracchi
             });
             Cards.Add(new Card() {
                 ImageName = "M1395",
@@ -340,7 +362,8 @@ namespace HallOfBeorn.Models.Sets
                 
 Response: After another player raises his threat, raise your threat by 1 to reduce that player's threat by 1.",
                 Keywords = new List<string>() { "Attach to a Spirit hero." },
-                Number = 34
+                Number = 34,
+                Artist = Artist.K_R_Harris
             });
             Cards.Add(new Card() {
                 ImageName = "M1398",
@@ -351,7 +374,8 @@ Response: After another player raises his threat, raise your threat by 1 to redu
                 Quantity = 3,
                 ResourceCost = 0,
                 Text = "Response: After a Dwarf character leaves play, shuffle the encounter discard pile back into the encounter deck.",
-                Number = 37
+                Number = 37,
+                Artist = Artist.Ryan_Barger
             });
             Cards.Add(new Card() {
                 ImageName = "M1413",
@@ -368,7 +392,8 @@ Response: After another player raises his threat, raise your threat by 1 to redu
                 Text = "Forced: After Wild Bear engages a player, it makes an immediate attack.",
                 Keywords = new List<string>() { "Ambush." },
                 Threat = 0,
-                Number = 52
+                Number = 52,
+                Artist = Artist.Salvador_Trakal
             });
         }
     }

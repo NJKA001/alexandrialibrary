@@ -134,7 +134,7 @@ namespace HallOfBeorn.Models.Sets
                 Title = "Lay of Nimrodel",
                 Traits = new List<string> { "Song." },
                 Text = "Action: Choose a Spirit hero. Until the end of the phase, that hero gets +1 Willpower for each resource in its resource pool.",
-                FlavorText = "An Elven-made there was of old.\r\nA shining star by day:\r\nHer mantle white was hemmed with hold,\r\nHer shoes of silver-grey.\r\n-The Fellowship of the Ring",
+                FlavorText = "An Elven-maid there was of old.\r\nA shining star by day:\r\nHer mantle white was hemmed with hold,\r\nHer shoes of silver-grey.\r\n-The Fellowship of the Ring",
                 Quantity = 3,
                 Number = 140,
                 Artist = Artist.Magali_Villeneuve
