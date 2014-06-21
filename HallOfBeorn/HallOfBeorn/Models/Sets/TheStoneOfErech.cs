@@ -27,7 +27,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 2,
                 Threat = 2,
                 QuestPoints = 7,
-                Number = 17
+                Number = 17,
+                Artist = Artist.Alyn_Spiller
             });
             Cards.Add(new Card() {
                 ImageName = "M1930",
@@ -41,7 +42,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Threat = 4,
                 QuestPoints = 1,
-                Number = 19
+                Number = 19,
+                Artist = Artist.Jose_Vega
             });
             Cards.Add(new Card() {
                 ImageName = "M1915",
@@ -64,7 +66,8 @@ If Derufin leaves play, the players lose the game.",
                 Defense = 1,
                 Willpower = 3,
                 HitPoints = 2,
-                Number = 4
+                Number = 4,
+                Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
                 ImageName = "M1936",
@@ -74,7 +77,8 @@ If Derufin leaves play, the players lose the game.",
                 EncounterSet = "The Stone of Erech",
                 Text = "When Revealed: The first player attached Driven by Fear to a hero he controls. Counts as a Condition attachment with the text: \"Attached character's Willpower is reduced to 0. Treat attacked character's text box as if it was blank (except for Traits.)\"",
                 Quantity = 2,
-                Number = 25
+                Number = 25,
+                Artist = Artist.Melanie_Maier
             });
             Cards.Add(new Card() {
                 ImageName = "M1920",
@@ -88,7 +92,8 @@ If Derufin leaves play, the players lose the game.",
 
 If there are 4 or more progress on Dusk, add it to the victory display and put Midnight into play.",
                 Quantity = 1,
-                Number = 9
+                Number = 9,
+                Artist = Artist.Titus_Lunter
             });
             Cards.Add(new Card() {
                 ImageName = "M1919",
@@ -102,7 +107,8 @@ If there are 4 or more progress on Dusk, add it to the victory display and put M
 
 If there are 4 or more progress on Eventide, add it to the victory display and put Dusk into play.",
                 Quantity = 1,
-                Number = 8
+                Number = 8,
+                Artist = Artist.Titus_Lunter
             });
             Cards.Add(new Card() {
                 ImageName = "M1935",
@@ -115,7 +121,8 @@ If there are 4 or more progress on Eventide, add it to the victory display and p
 
 Midnight. Groping Horror gains surge.",
                 Quantity = 2,
-                Number = 24
+                Number = 24,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card() {
                 ImageName = "M1932",
@@ -131,7 +138,8 @@ Planning Action: Exhuast a hero. Any player may trigger this action.",
                 Quantity = 2,
                 Threat = 2,
                 QuestPoints = 3,
-                Number = 21
+                Number = 21,
+                Artist = Artist.Anthony_Feliciano
             });
             Cards.Add(new Card() {
                 ImageName = "M1921",
@@ -142,7 +150,8 @@ Planning Action: Exhuast a hero. Any player may trigger this action.",
                 Traits = new List<string>() { "Night." },
                 Text = "Forced: At the end of the round, place 1 progress on Midnight. Then, raise each player's threat by the number of progress on Midnight.",
                 Quantity = 1,
-                Number = 10
+                Number = 10,
+                Artist = Artist.Titus_Lunter
             });
             Cards.Add(new Card() {
                 ImageName = "M1933",
@@ -156,7 +165,8 @@ Planning Action: Exhuast a hero. Any player may trigger this action.",
 Midnight. THe effect cannot be canceled.",
                 Shadow = "Attacking enemy gets +1 Attack (Dusk. +2 Attack instead. Midnight. +3 Attack instead).",
                 Quantity = 2,
-                Number = 22
+                Number = 22,
+                Artist = Artist.Ignacio_Bazan_Lazcano
             });
             Cards.Add(new Card() {
                 ImageName = "M1934",
@@ -170,7 +180,8 @@ Midnight. THe effect cannot be canceled.",
                 
 Midnight. This effect cannot be canceled.",
                 Quantity = 2,
-                Number = 23
+                Number = 23,
+                Artist = Artist.David_Gaillet
             });
             Cards.Add(new Card() {
                 ImageName = "M1927",
@@ -187,7 +198,8 @@ Midnight. This effect cannot be canceled.",
                 Keywords = new List<string>() { "Spectral.", " Surge." },
                 Shadow = "Deal Attacking enemy 1 additional shadow card (Dusk. 2 additional cards instead. Midnight. 3 additional cards instead).",
                 Threat = 1,
-                Number = 16
+                Number = 16,
+                Artist = Artist.Aurelien_Hubert
             });
             Cards.Add(new Card() {
                 ImageName = "M1922",
@@ -198,7 +210,8 @@ Midnight. This effect cannot be canceled.",
                 Traits = new List<string>() { "Item.", " Artifact." },
                 Text = "Midnight. Action: Claim this objective and attach it to a hero you control. Counts as an Artifact attachment with the text: \"When attached hero attacks and Oathbreaker, that enemy loses the Spectral keyword until the end of the phase.\"",
                 Quantity = 1,
-                Number = 11
+                Number = 11,
+                Artist = Artist.Logan_Feliciano
             });
             Cards.Add(new Card() {
                 ImageName = "M1924",
@@ -215,7 +228,8 @@ Midnight. This effect cannot be canceled.",
                 Keywords = new List<string>() { "Spectral." },
                 Text = "When Revealed: Return the topmost Undead enemy in the encounter discard pile to the staging area.",
                 Threat = 2,
-                Number = 13
+                Number = 13,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card() {
                 ImageName = "M1926",
@@ -235,7 +249,8 @@ Midnight. This effect cannot be canceled.",
 
 Midnight. Shadow Host Captain gets +2 Attack and +2 Defense.",
                 Threat = 3,
-                Number = 15
+                Number = 15,
+                Artist = Artist.Alexandre_Dainche
             });
             Cards.Add(new Card() {
                 ImageName = "M1923",
@@ -253,7 +268,8 @@ Midnight. Shadow Host Captain gets +2 Attack and +2 Defense.",
                 Text = "When Revealed: Players cannot play events until the end of the round.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack (Dusk. +2 Attack instead. Midnight. +3 Attack instead).",
                 Threat = 2,
-                Number = 12
+                Number = 12,
+                Artist = Artist.Emile_Denis
             });
             Cards.Add(new Card() {
                 ImageName = "M1931",
@@ -270,7 +286,8 @@ Midnight. Shadow of Dwimorberg gets +4 Threat.",
                 Quantity = 2,
                 Threat = 1,
                 QuestPoints = 4,
-                Number = 20
+                Number = 20,
+                Artist = Artist.Logan_Feliciano
             });
             Cards.Add(new Card() {
                 ImageName = "M1918",
@@ -285,7 +302,8 @@ Midnight. Shadow of Dwimorberg gets +4 Threat.",
                 Threat = 3,
                 QuestPoints = 6,
                 VictoryPoints = 1,
-                Number = 7
+                Number = 7,
+                Artist = Artist.Anthony_Feliciano
             });
             Cards.Add(new Card() {
                 ImageName = "M1913",
@@ -298,7 +316,8 @@ Midnight. Shadow of Dwimorberg gets +4 Threat.",
                 OppositeText = "Forced: At the beginning of each round, the players must choose: each player skips the next planning phase, or heroes do not collect resources during the resource phase this round.",
                 Quantity = 1,
                 QuestPoints = 8,
-                Number = 2
+                Number = 2,
+                Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
                 ImageName = "M1937",
@@ -308,7 +327,8 @@ Midnight. Shadow of Dwimorberg gets +4 Threat.",
                 EncounterSet = "The Stone of Erech",
                 Text = "When Revealed: Deal 1 damage to each character with less than 2 Willpower. (Dusk. less than 3 Willpower insread. Midnight. less than 4 Willpower instead).",
                 Quantity = 2,
-                Number = 26
+                Number = 26,
+                Artist = Artist.Jose_Vega
             });
             Cards.Add(new Card() {
                 ImageName = "M1912",
@@ -324,7 +344,8 @@ Midnight. Shadow of Dwimorberg gets +4 Threat.",
 @"When Revealed: Reveal 1 encounter card per player, adding them to the staging area.
 
 Players cannot defeat this stage while Tarlang's Next is in play.",
-                Number = 1
+                Number = 1,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1938",
@@ -335,7 +356,8 @@ Players cannot defeat this stage while Tarlang's Next is in play.",
                 Quantity = 2,
                 Keywords = new List<string>() { "Surge." },
                 Text = "When Revealed: Add 1 progress to the current Night objective.",
-                Number = 27
+                Number = 27,
+                Artist = Artist.Jose_Vega
             });
             Cards.Add(new Card() {
                 ImageName = "M1916",
@@ -353,7 +375,8 @@ Players cannot defeat this stage while Tarlang's Next is in play.",
                 Keywords = new List<string>() { "Spectral.", " Cannot have attachments." },
                 Text = "While you are engaged with The Lord of the Dead, treat all printed text boxes on characters you control as if they were blank (except Traits.)",
                 Threat = 5,
-                Number = 5
+                Number = 5,
+                Artist = Artist.Jim_Pavelec
             });
             Cards.Add(new Card() {
                 ImageName = "M1914",
@@ -374,7 +397,8 @@ Players cannot place progress on this stage unless they control Derufin.
 If the players defeat this stage, they have escaped the Blackroot Vale with Derufin and won the game.",
                 Quantity = 1,
                 QuestPoints = 14,
-                Number = 3
+                Number = 3,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
                 ImageName = "M1917",
@@ -396,7 +420,8 @@ Travel: Exhaust each character with less than 2 Willpower.",
                 IsVariableThreat = true,
                 QuestPoints = 6,
                 VictoryPoints = 5,
-                Number = 6
+                Number = 6,
+                Artist = Artist.Titus_Lunter
             });
             Cards.Add(new Card() {
                 ImageName = "M1929",
@@ -414,7 +439,8 @@ Midnight. Vale of Shadows gets +4 quest points.",
                 Quantity = 2,
                 Threat = 1,
                 QuestPoints = 3,
-                Number = 18
+                Number = 18,
+                Artist = Artist.Stacey_Diana_Clark
             });
             Cards.Add(new Card() {
                 ImageName = "M1925",
@@ -434,7 +460,8 @@ Midnight. Vale of Shadows gets +4 quest points.",
 
 Midnight. Whisperer gets +2 Threat and gains Doomed 2.",
                 Threat = 2,
-                Number = 14
+                Number = 14,
+                Artist = Artist.Sara_Betsy
             });
         }
     }

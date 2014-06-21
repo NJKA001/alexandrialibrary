@@ -35,7 +35,8 @@ Forced: After The Witch-king attacks, he returns to the staging area unless the 
                 Threat = 6,
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 1,
-                Number = 1
+                Number = 1,
+                Artist = Artist.Igor_Kieryluk
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -51,7 +52,8 @@ Forced: After The Witch-king attacks, he returns to the staging area unless the 
                 Threat = 1,
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 4,
-                Number = 2
+                Number = 2,
+                Artist = Artist.Paul_Guzenko
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -68,7 +70,8 @@ Forced: After The Witch-king attacks, he returns to the staging area unless the 
                 Threat = 1,
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 4,
-                Number = 3
+                Number = 3,
+                Artist = Artist.Allison_Theus
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -84,7 +87,8 @@ Forced: After The Witch-king attacks, he returns to the staging area unless the 
                 Threat = 2,
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 4,
-                Number = 4
+                Number = 4,
+                Artist = Artist.David_Chen
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -101,7 +105,8 @@ Forced: After The Witch-king attacks, he returns to the staging area unless the 
                 Threat = 3,
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 3,
-                Number = 5
+                Number = 5,
+                Artist = Artist.David_Horne
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -118,7 +123,8 @@ Forced: After The Witch-king attacks, he returns to the staging area unless the 
                 Threat = 2,
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 3,
-                Number = 6
+                Number = 6,
+                Artist = Artist.Matthew_Starbuck
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -132,7 +138,8 @@ Forced: After The Witch-king attacks, he returns to the staging area unless the 
                 QuestPoints = 2,
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 3,
-                Number = 7
+                Number = 7,
+                Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -145,7 +152,8 @@ Forced: After The Witch-king attacks, he returns to the staging area unless the 
                 QuestPoints = 5,
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 1,
-                Number = 8
+                Number = 8,
+                Artist = Artist.Igor_Kieryluk
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -159,7 +167,8 @@ Forced: After The Witch-king attacks, he returns to the staging area unless the 
                 QuestPoints = 3,
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 2,
-                Number = 9
+                Number = 9,
+                Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -173,7 +182,8 @@ Forced: After The Witch-king attacks, he returns to the staging area unless the 
                 VictoryPoints = 1,
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 2,
-                Number = 10
+                Number = 10,
+                Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -186,7 +196,8 @@ Forced: After The Witch-king attacks, he returns to the staging area unless the 
                 QuestPoints = 2,
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 3,
-                Number = 11
+                Number = 11,
+                Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -198,7 +209,8 @@ Forced: After The Witch-king attacks, he returns to the staging area unless the 
                 Keywords = new List<string>() { "Doomed 1." },
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 4,
-                Number = 12
+                Number = 12,
+                Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -208,7 +220,8 @@ Forced: After The Witch-king attacks, he returns to the staging area unless the 
                 Text = "When Revealed: Raise the total Threat of the staging area by 1 for each Scout enemy in play. If there are no Scout enemies in play, Dark Pursuit gains surge.",
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 2,
-                Number = 13
+                Number = 13,
+                Artist = Artist.Jake_Murray
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -219,7 +232,8 @@ Forced: After The Witch-king attacks, he returns to the staging area unless the 
                 Keywords = new List<string>() { "Surge." },
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 3,
-                Number = 14
+                Number = 14,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -235,7 +249,8 @@ Forced: After The Witch-king attacks, he returns to the staging area unless the 
                 Shadow = "Shadow: Deal 2 damage to attacking enemy. The defending player may exhaust a character he controls to take control of Ranger of Ithilien.",
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 2,
-                Number = 15
+                Number = 15,
+                Artist = Artist.Eric_Braddock
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -250,7 +265,8 @@ Forced: After The Witch-king attacks, he returns to the staging area unless the 
                 OppositeFlavorText = "As the van of the army enters the city, some of the horde's outriders are aware of your presence, and head in your direction. Drawing back, your make a hasty retreat towards the river.",
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 1,
-                Number = 16
+                Number = 16,
+                Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -266,7 +282,8 @@ Each player cannot play or put into play more than 1 card from his hand each rou
                 FlavorText = "The outriders and scouts of the army have cut you off from the bridge. You desperately seek the likeliest place to cross the Anduin.",
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 1,
-                Number = 17
+                Number = 17,
+                Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -284,7 +301,8 @@ In order to commit characters to the quest, a player must first choose a hero or
                 FlavorText = "The cold waters of the Anduin river rush before you, but the current is weaker here and you have to cross. The outriders and van of the Dark Lord's army are closing fast behind, and their archers will make the attempted crossing even more dangerous. The bravest members of your band turn back to distract the oncoming horde, so that the rest of you might escape.",
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 1,
-                Number = 18
+                Number = 18,
+                Artist = Artist.Marco_Caradonna
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -302,7 +320,8 @@ If the players defeat this stage, they have won the game.",
                 FlavorText = "You made it across the Anduin and are leaving Osgiliath when a fell shriek splits the air. You begin the race across the Pelennor Fields to the safety of Minas Tirith, but a new enemy follows behind.",
                 EncounterSet = "The Massing at Osgiliath",
                 Quantity = 1,
-                Number = 19
+                Number = 19,
+                Artist = Artist.Igor_Kieryluk
             });
         }
     }
