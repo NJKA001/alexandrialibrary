@@ -45,7 +45,8 @@ Then, shuffle the encounter cards in this Nightmare Deck into the remainder of t
 Finally, flip this setup card over and place it next to the quest deck. Its effects remain active throughout the game, which is now ready to begin.",
                 EncounterSet = "Dungeons Deep and Caverns Dim Nightmare",
                 Quantity = 1,
-                Number = 1
+                Number = 1,
+                Artist = Artist.Jake_Murray
             });
             Cards.Add(new Card()
             {
@@ -66,7 +67,8 @@ Goblin enemies get +1 Defense.",
                 FlavorText = "It was still ajar, but a goblin had pushed it nearly to. Bilbo struggled but he could not move it. -The Hobbit",
                 EncounterSet = "Dungeons Deep and Caverns Dim Nightmare",
                 Quantity = 1,
-                Number = 2
+                Number = 2,
+                Artist = Artist.Nicholas_Gregory
             });
             Cards.Add(new Card()
             {
@@ -84,7 +86,8 @@ Goblin enemies get +1 Defense.",
                 Shadow = "Shadow: Return attacking enemy to the staging area after this attack.",
                 EncounterSet = "Dungeons Deep and Caverns Dim Nightmare",
                 Quantity = 1,
-                Number = 3
+                Number = 3,
+                Artist = Artist.J_B_Casacop
             });
             Cards.Add(new Card()
             {
@@ -102,7 +105,8 @@ Goblin enemies get +1 Defense.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack. (+3 Attack instead if Bilbo's Magic ~Ring is exhausted.)",
                 EncounterSet = "Dungeons Deep and Caverns Dim Nightmare",
                 Quantity = 1,
-                Number = 4
+                Number = 4,
+                Artist = Artist.Mark_Behm
             });
             Cards.Add(new Card()
             {
@@ -117,7 +121,8 @@ Goblin enemies get +1 Defense.",
                 Shadow = "Shadow: Deal attacking enemy 2 additional shadow cards for this attack.",
                 EncounterSet = "Dungeons Deep and Caverns Dim Nightmare",
                 Quantity = 1,
-                Number = 5
+                Number = 5,
+                Artist = Artist.Alyn_Spiller
             });
             Cards.Add(new Card()
             {
@@ -135,7 +140,8 @@ Riddle: The first player names a card title, shuffles his deck, and discards the
                 FlavorText = "",
                 EncounterSet = "Dungeons Deep and Caverns Dim Nightmare",
                 Quantity = 1,
-                Number = 6
+                Number = 6,
+                Artist = Artist.Mariusz_Gandzel
             });
             Cards.Add(new Card()
             {
@@ -149,7 +155,8 @@ Riddle: The first player names a card title, shuffles his deck, and discards the
 Riddle: The first player names a sphere, a cost, and a card type, shuffles his deck, and discards the top 3 cards. For each card that matches all three items, place 1 progress on stage 2.",
                 EncounterSet = "Dungeons Deep and Caverns Dim Nightmare",
                 Quantity = 1,
-                Number = 7
+                Number = 7,
+                Artist = Artist.Jake_Murray
             });
             Cards.Add(new Card()
             {
@@ -160,7 +167,8 @@ Riddle: The first player names a sphere, a cost, and a card type, shuffles his d
                 Text = "When Revealed: Attach We Hates Is! to Gollum. (Counts as a Condition attachment with the text: \"If the players are on stage 3, Gollum gets +2 Attack.\")\r\n\r\nRiddle: The first player names a Trait, shuffles his deck, and discards the top card. For each card that has at least 1 matching Trait, place 1 progress on stage 2.",
                 EncounterSet = "Dungeons Deep and Caverns Dim Nightmare",
                 Quantity = 1,
-                Number = 8
+                Number = 8,
+                Artist = Artist.Jake_Murray
             });
         }
     }
