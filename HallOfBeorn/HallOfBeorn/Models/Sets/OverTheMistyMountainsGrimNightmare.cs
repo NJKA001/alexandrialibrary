@@ -41,7 +41,8 @@ Then, shuffle the encounter cards in this Nightmare Deck with the Over the Misty
 Finally, flip this setup card over and place it next to the quest deck. Its effects remain active throughout the game, which is now ready to begin.",
                 EncounterSet = "Over the Misty Mountains Grim Nightmare",
                 Quantity = 1,
-                Number = 1
+                Number = 1,
+                Artist = Artist.Mark_Bulahao
             });
             Cards.Add(new Card()
             {
@@ -56,7 +57,8 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 Shadow = "Shadow: Shuffle all copies of Galloping Boulders from the encounter discard pile into the encounter deck.",
                 EncounterSet = "Over the Misty Mountains Grim Nightmare",
                 Quantity = 1,
-                Number = 2
+                Number = 2,
+                Artist = Artist.Niten
             });
             Cards.Add(new Card()
             {
@@ -74,7 +76,8 @@ Forced: At the end of the round, each player must discard a random card from his
                 FlavorText = "They were high up in a narrow place, with a dreadful fall into a dim vally at one side of them. -The Hobbit",
                 EncounterSet = "Over the Misty Mountains Grim Nightmare",
                 Quantity = 1,
-                Number = 3
+                Number = 3,
+                Artist = Artist.Sabin_Boykinov
             });
             Cards.Add(new Card()
             {
@@ -86,7 +89,8 @@ Forced: At the end of the round, each player must discard a random card from his
                 FlavorText = "The lighning splinters on the peaks, and rocks shiver, and great crashes split the air and go rolling and tumbling into every cave and hallow... -The Hobbit",
                 EncounterSet = "Over the Misty Mountains Grim Nightmare",
                 Quantity = 1,
-                Number = 4
+                Number = 4,
+                Artist = Artist.JB_Casacop
             });
             Cards.Add(new Card()
             {
@@ -106,7 +110,8 @@ Forced: At the end of the round, each player must discard a random card from his
                 VictoryPoints = 3,
                 EncounterSet = "The Great Goblin Nightmare",
                 Quantity = 1,
-                Number = 5
+                Number = 5,
+                Artist = Artist.Mark_Bulahao
             });
             Cards.Add(new Card()
             {
@@ -127,7 +132,8 @@ Forced: When Goblin Prowler engages you, discard a character you control.",
                 FlavorText = "...neither Bilbo, nor the dwarves, nor even Gandalf heard them coming. -The Hobbit",
                 EncounterSet = "The Great Goblin Nightmare",
                 Quantity = 1,
-                Number = 6
+                Number = 6,
+                Artist = Artist.Mariusz_Gandzel
             });
             Cards.Add(new Card()
             {
@@ -144,7 +150,8 @@ Forced: When Goblin Prowler engages you, discard a character you control.",
 Travel: Raise each player's threat by X to travel here, where X is the number of Cave locations in the staging area.",
                 EncounterSet = "The Great Goblin Nightmare",
                 Quantity = 1,
-                Number = 7
+                Number = 7,
+                Artist = Artist.Nicholas_Gregory
             });
             Cards.Add(new Card()
             {
@@ -156,7 +163,8 @@ Travel: Raise each player's threat by X to travel here, where X is the number of
                 Shadow = "Shadow: Attacking enemy cannot take damage this round.",
                 EncounterSet = "The Great Goblin Nightmare",
                 Quantity = 1,
-                Number = 8
+                Number = 8,
+                Artist = Artist.Adam_Lane
             });
         }
     }

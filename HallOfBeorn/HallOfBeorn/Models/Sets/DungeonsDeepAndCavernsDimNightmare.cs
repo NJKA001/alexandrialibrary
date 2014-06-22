@@ -87,7 +87,7 @@ Goblin enemies get +1 Defense.",
                 EncounterSet = "Dungeons Deep and Caverns Dim Nightmare",
                 Quantity = 1,
                 Number = 3,
-                Artist = Artist.J_B_Casacop
+                Artist = Artist.JB_Casacop
             });
             Cards.Add(new Card()
             {
