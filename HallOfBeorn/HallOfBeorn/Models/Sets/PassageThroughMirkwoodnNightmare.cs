@@ -45,7 +45,8 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
 
                 EncounterSet = "Passage Through Mirkwood Nightmare",
                 Quantity = 1,
-                Number = 1
+                Number = 1,
+                Artist = Artist.Stacey_Diana_Clark
             });
             Cards.Add(new Card()
             {
@@ -64,6 +65,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 EncounterSet = "Passage Through Mirkwood Nightmare",
                 Quantity = 1,
                 Number = 2,
+                Artist = Artist.Christopher_Burdett
             });
             Cards.Add(new Card()
             {
@@ -82,6 +84,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 EncounterSet = "Passage Through Mirkwood Nightmare",
                 Quantity = 3,
                 Number = 3,
+                Artist = Artist.S_C_Watson
             });
             Cards.Add(new Card()
             {
@@ -100,6 +103,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 EncounterSet = "Passage Through Mirkwood Nightmare",
                 Quantity = 3,
                 Number = 4,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card()
             {
@@ -118,6 +122,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 EncounterSet = "Passage Through Mirkwood Nightmare",
                 Quantity = 2,
                 Number = 5,
+                Artist = Artist.Andrew_Ryan
             });
             Cards.Add(new Card()
             {
@@ -129,6 +134,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 EncounterSet = "Passage Through Mirkwood Nightmare",
                 Quantity = 3,
                 Number = 6,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card()
             {
@@ -142,6 +148,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 EncounterSet = "Passage Through Mirkwood Nightmare",
                 Quantity = 2,
                 Number = 7,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card()
             {
@@ -158,6 +165,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 EncounterSet = "Passage Through Mirkwood Nightmare",
                 Quantity = 3,
                 Number = 8,
+                Artist = Artist.Dana_Li
             });
             Cards.Add(new Card()
             {
@@ -173,6 +181,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 EncounterSet = "Passage Through Mirkwood Nightmare",
                 Quantity = 2,
                 Number = 9,
+                Artist = Artist.S_C_Watson
             });
         }
     }

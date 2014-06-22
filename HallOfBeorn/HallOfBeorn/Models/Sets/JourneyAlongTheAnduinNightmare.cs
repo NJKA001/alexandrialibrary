@@ -41,7 +41,8 @@ Then, shuffle the encounter cards in this Nightmare Deck into the remainder of t
 Finally, flip this setup card over and place it next to the quest deck. Its effects remain active throughout the game, which is now ready to begin.",
                 EncounterSet = "Journey Along the Anduin Nightmare",
                 Quantity = 1,
-                Number = 1
+                Number = 1,
+                Artist = Artist.Alexandre_Dainche
             });
             Cards.Add(new Card()
             {
@@ -59,7 +60,8 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 Shadow = "Shadow: Raise your threat by X. X is the amount of damage dealt by this attack.",
                 EncounterSet = "Journey Along the Anduin Nightmare",
                 Quantity = 2,
-                Number = 2
+                Number = 2,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card()
             {
@@ -79,7 +81,8 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
 Forced: At the beginning of the combat phase, Anduin Troll Spawn engages a player engaged with a Hill Troll.",
                 EncounterSet = "Journey Along the Anduin Nightmare",
                 Quantity = 3,
-                Number = 3
+                Number = 3,
+                Artist = Artist.Chun_Lo
             });
             Cards.Add(new Card()
             {
@@ -98,7 +101,8 @@ Forced: At the beginning of the combat phase, Anduin Troll Spawn engages a playe
                 Shadow = "Shadow: Attacking enemy cannot be damaged this round.",
                 EncounterSet = "Journey Along the Anduin Nightmare",
                 Quantity = 3,
-                Number = 4
+                Number = 4,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card()
             {
@@ -113,7 +117,8 @@ Forced: At the beginning of the combat phase, Anduin Troll Spawn engages a playe
                 Shadow = "Shadow: If this attack is undefended, put A Flooded Ford into the staging area with 1 progress token on it.",
                 EncounterSet = "Journey Along the Anduin Nightmare",
                 Quantity = 1,
-                Number = 5
+                Number = 5,
+                Artist = Artist.Alexandre_Dainche
             });
             Cards.Add(new Card()
             {
@@ -128,7 +133,8 @@ Forced: At the beginning of the combat phase, Anduin Troll Spawn engages a playe
                 Shadow = "Shadow: Each enemy engaged with the defender player gets +1 Attack until the end of the phase. (+2 Attack instead if this attack is undefended.)",
                 EncounterSet = "Journey Along the Anduin Nightmare",
                 Quantity = 3,
-                Number = 6
+                Number = 6,
+                Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card()
             {
@@ -139,7 +145,8 @@ Forced: At the beginning of the combat phase, Anduin Troll Spawn engages a playe
                 Text = "When Revealed: Search the victory display and encounter discard pile for the enemy with the most hit points. Return that enemy to the staging area. If no enemy is returned by this effect, Pursuit on the Shore gains surge. (Cannot be canceled.)",
                 EncounterSet = "Journey Along the Anduin Nightmare",
                 Quantity = 2,
-                Number = 7
+                Number = 7,
+                Artist = Artist.Allison_Theus
             });
             Cards.Add(new Card()
             {
@@ -151,7 +158,8 @@ Forced: At the beginning of the combat phase, Anduin Troll Spawn engages a playe
                 Shadow = "Shadow: If attacking enemy is a Troll, resolve this attack against each player. (Attack is undefended against each player not engaged with this enemy.)",
                 EncounterSet = "Journey Along the Anduin Nightmare",
                 Quantity = 2,
-                Number = 8
+                Number = 8,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card()
             {
@@ -163,7 +171,8 @@ Forced: At the beginning of the combat phase, Anduin Troll Spawn engages a playe
                 Shadow = "Shadow: Move all damage on this enemy to the defending character. (If undefended, move the damage to the hero damaged by this attack.)",
                 EncounterSet = "Journey Along the Anduin Nightmare",
                 Quantity = 2,
-                Number = 9
+                Number = 9,
+                Artist = Artist.Magali_Villeneuve
             });
         }
     }

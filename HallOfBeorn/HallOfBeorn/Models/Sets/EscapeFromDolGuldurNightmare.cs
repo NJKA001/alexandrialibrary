@@ -43,7 +43,8 @@ Then, shuffle the encounter cards in this Nightmare Deck into the remainder of t
 Finally, flip this setup card over and place it next to the quest deck. Its effects remain active throughout the game, which is now ready to begin.",
                 EncounterSet = "Escape from Dol Guldur Nightmare",
                 Quantity = 1,
-                Number = 1
+                Number = 1,
+                Artist = Artist.Jim_Pavelec
             });
             Cards.Add(new Card()
             {
@@ -62,6 +63,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 EncounterSet = "Escape from Dol Guldur Nightmare",
                 Quantity = 3,
                 Number = 2,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card()
             {
@@ -81,6 +83,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 EncounterSet = "Escape from Dol Guldur Nightmare",
                 Quantity = 2,
                 Number = 3,
+                Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card()
             {
@@ -99,6 +102,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 EncounterSet = "Escape from Dol Guldur Nightmare",
                 Quantity = 3,
                 Number = 4,
+                Artist = Artist.Andrew_Ryan
             });
             Cards.Add(new Card()
             {
@@ -113,6 +117,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 EncounterSet = "Escape from Dol Guldur Nightmare",
                 Quantity = 2,
                 Number = 5,
+                Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card()
             {
@@ -131,6 +136,7 @@ Forced: At the end of each round, place 1 resource token on Dungeon Labyrinth fo
                 EncounterSet = "Escape from Dol Guldur Nightmare",
                 Quantity = 3,
                 Number = 6,
+                Artist = Artist.S_C_Watson
             });
             Cards.Add(new Card()
             {
@@ -142,6 +148,7 @@ Forced: At the end of each round, place 1 resource token on Dungeon Labyrinth fo
                 EncounterSet = "Escape from Dol Guldur Nightmare",
                 Quantity = 2,
                 Number = 7,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card()
             {
@@ -155,6 +162,7 @@ Forced: At the end of each round, place 1 resource token on Dungeon Labyrinth fo
                 EncounterSet = "Escape from Dol Guldur Nightmare",
                 Quantity = 2,
                 Number = 8,
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card()
             {
@@ -167,6 +175,7 @@ Forced: At the end of each round, place 1 resource token on Dungeon Labyrinth fo
                 EncounterSet = "Escape from Dol Guldur Nightmare",
                 Quantity = 2,
                 Number = 9,
+                Artist = Artist.Magali_Villeneuve
             });
         }
     }
