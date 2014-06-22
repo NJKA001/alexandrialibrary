@@ -56,7 +56,8 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
 
                 EncounterSet = "The Dead Marshes Nightmare",
                 Quantity = 1,
-                Number = 1
+                Number = 1,
+                Artist = Artist.Diego_Gisbert_Llorens
             });
             Cards.Add(new Card()
             {
@@ -77,7 +78,8 @@ If Gollum is not in play, any resource tokens that would be placed on Gollum are
 Forced: After Gollum enters play, place 2 resource tokens on Gollum, then move all resource tokens from The Mere of Dead Faces to Gollum.",
                 EncounterSet = "The Dead Marshes Nightmare",
                 Quantity = 1,
-                Number = 2
+                Number = 2,
+                Artist = Artist.Alyn_Spiller
             });
             Cards.Add(new Card()
             {
@@ -95,7 +97,8 @@ Escape: 2",
                 Shadow = "Shadow: Perform an escape test, dealing 1 card the encounter deck. If this test is failed, discard the defending character.",
                 EncounterSet = "The Dead Marshes Nightmare",
                 Quantity = 3,
-                Number = 3
+                Number = 3,
+                Artist = Artist.Alexandr_Shaldin
             });
             Cards.Add(new Card()
             {
@@ -114,6 +117,7 @@ Escape: 2",
                 EncounterSet = "The Dead Marshes Nightmare",
                 Quantity = 3,
                 Number = 4,
+                Artist = Artist.Gabriel_Verdon
             });
             Cards.Add(new Card()
             {
@@ -132,6 +136,7 @@ Escape: 2",
                 EncounterSet = "The Dead Marshes Nightmare",
                 Quantity = 2,
                 Number = 5,
+                Artist = Artist.Yan_Wen_Tang
             });
             Cards.Add(new Card()
             {
@@ -150,6 +155,7 @@ Escape: 2",
                 EncounterSet = "The Dead Marshes Nightmare",
                 Quantity = 3,
                 Number = 6,
+                Artist = Artist.Yan_Wen_Tang
             });
             Cards.Add(new Card()
             {
@@ -168,6 +174,7 @@ Escape: 2",
                 EncounterSet = "The Dead Marshes Nightmare",
                 Quantity = 3,
                 Number = 7,
+                Artist = Artist.Mariana_Vieira
             });
             Cards.Add(new Card()
             {
@@ -184,6 +191,7 @@ Escape: 5",
                 EncounterSet = "The Dead Marshes Nightmare",
                 Quantity = 1,
                 Number = 8,
+                Artist = Artist.Adam_Lane
             });
             Cards.Add(new Card()
             {
@@ -199,6 +207,7 @@ Escape: 3",
                 EncounterSet = "The Dead Marshes Nightmare",
                 Quantity = 2,
                 Number = 9,
+                Artist = Artist.Owen_William_Weber
             });
             Cards.Add(new Card()
             {
@@ -215,6 +224,7 @@ Escape: 10",
                 EncounterSet = "The Dead Marshes Nightmare",
                 Quantity = 1,
                 Number = 10,
+                Artist = Artist.Jose_Vega
             });
         }
     }

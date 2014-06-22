@@ -62,7 +62,8 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
 
                 EncounterSet = "Conflict at the Carrock Nightmare",
                 Quantity = 1,
-                Number = 1
+                Number = 1,
+                Artist = Artist.Jake_Murray
             });
             Cards.Add(new Card()
             {
@@ -81,7 +82,8 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 VictoryPoints = 1,
                 EncounterSet = "Conflict at the Carrock Nightmare",
                 Quantity = 4,
-                Number = 2
+                Number = 2,
+                Artist = Artist.Jim_Pavelec
             });
             Cards.Add(new Card()
             {
@@ -100,7 +102,8 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 FlavorText = "Yes, I am afraid trolls do behave like that, even those with only one head each. -The Hobbit",
                 EncounterSet = "Conflict at the Carrock Nightmare",
                 Quantity = 1,
-                Number = 3
+                Number = 3,
+                Artist = Artist.Jim_Pavelec
             });
             Cards.Add(new Card()
             {
@@ -119,7 +122,8 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 VictoryPoints = 2,
                 EncounterSet = "Conflict at the Carrock Nightmare",
                 Quantity = 1,
-                Number = 4
+                Number = 4,
+                Artist = Artist.Jake_Murray
             });
             Cards.Add(new Card()
             {
@@ -139,7 +143,8 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 VictoryPoints = 2,
                 EncounterSet = "Conflict at the Carrock Nightmare",
                 Quantity = 1,
-                Number = 5
+                Number = 5,
+                Artist = Artist.Mariusz_Gandzel
             });
             Cards.Add(new Card()
             {
@@ -159,7 +164,8 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 VictoryPoints = 2,
                 EncounterSet = "Conflict at the Carrock Nightmare",
                 Quantity = 1,
-                Number = 6
+                Number = 6,
+                Artist = Artist.Sidharth_Chatursedi
             });
             Cards.Add(new Card()
             {
@@ -179,7 +185,8 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 VictoryPoints = 2,
                 EncounterSet = "Conflict at the Carrock Nightmare",
                 Quantity = 1,
-                Number = 7
+                Number = 7,
+                Artist = Artist.Mariusz_Gandzel
             });
             Cards.Add(new Card()
             {
@@ -194,7 +201,8 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 Shadow = "Shadow: If attacking enemy is a Troll, remove 4 damage tokens from it.",
                 EncounterSet = "Conflict at the Carrock Nightmare",
                 Quantity = 3,
-                Number = 8
+                Number = 8,
+                Artist = Artist.Ed_Mattinian
             });
             Cards.Add(new Card()
             {
@@ -210,7 +218,8 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 FlavorText = "There was a buzzing and a whirring and a droning in the air. Bees were busy everywhere. And such bees! Bilbo had never seen anything like them. -The Hobbit",
                 EncounterSet = "Conflict at the Carrock Nightmare",
                 Quantity = 3,
-                Number = 9
+                Number = 9,
+                Artist = Artist.Jose_Vega
             });
             Cards.Add(new Card()
             {
@@ -222,7 +231,8 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 FlavorText = "In the end they decided to mince them fine and boil them. So they got a black pot, and they took out their knives. -The Hobbit",
                 EncounterSet = "Conflict at the Carrock Nightmare",
                 Quantity = 3,
-                Number = 10
+                Number = 10,
+                Artist = Artist.Alvaro_Calvo_Escudero
             });
             Cards.Add(new Card()
             {
@@ -239,7 +249,8 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 OppositeFlavorText = "A nice pickle they were all in now. -The Hobbit",
                 EncounterSet = "Conflict at the Carrock Nightmare",
                 Quantity = 3,
-                Number = 11
+                Number = 11,
+                Artist = Artist.Tiziano_Baracchi
             });
         }
     }

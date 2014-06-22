@@ -446,7 +446,8 @@ After this stage is completed advance to stage 4A (bypassing stage 3).",
 @"When Revealed: The first player takes contorl of all Ranger objectives in the staging area.
 
 Enemies do not make engagement checks and cannot be optionally engaged.",
-                Number = 70
+                Number = 70,
+                Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
                 ImageName = "M1773",
@@ -545,7 +546,8 @@ If the players defeat this stage, they have won the game.",
 If the players have collected 4 or more victory points, The Last Battle gains Battle and loses Siege.
 
 If the players defeat this stage, they have won the game.",
-                Number = 76
+                Number = 76,
+                Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
                 ImageName = "M1716",
