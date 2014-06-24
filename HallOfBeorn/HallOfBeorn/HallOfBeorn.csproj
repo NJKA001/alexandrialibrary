@@ -598,7 +598,7 @@
     <Content Include="Images\Cards\Dungeons-Deep-and-Caverns-Dim-Nightmare\We-Hates-It.png" />
     <Content Include="Images\Cards\Dungeons-Deep-and-Caverns-Dim-Nightmare\Where-Isss-It.png" />
     <Content Include="Images\Cards\Dungeons-Deep-and-Caverns-Dim-Nightmare\Wicked-Wolf.png" />
-    <Content Include="Images\Cards\Encounter-at-Amon-Din\Encounter-at-Amon-Din.png" />
+    <Content Include="Images\Cards\Encounter-at-Amon-Din\Encounter-at-Amon-Dîn.png" />
     <Content Include="Images\Cards\Escape-from-Dol-Guldur-Nightmare\Catacomb-Inspection.jpg" />
     <Content Include="Images\Cards\Escape-from-Dol-Guldur-Nightmare\Crazed-Captive.jpg" />
     <Content Include="Images\Cards\Escape-from-Dol-Guldur-Nightmare\Dark-Interrogation.jpg" />
@@ -1507,7 +1507,7 @@
     <Content Include="Images\Cards\The-Dead-Marshes\Through-the-Mist.png" />
     <Content Include="Images\Cards\The-Dead-Marshes\Vassal-of-the-Windlord.png" />
     <Content Include="Images\Cards\The-Dead-Marshes\We-Do-Not-Sleep.png" />
-    <Content Include="Images\Cards\The-Druadan-Forest\The-Druadan-Forest.png" />
+    <Content Include="Images\Cards\The-Druadan-Forest\The-Drúadan-Forest.png" />
     <Content Include="Images\Cards\The-Hills-of-Emyn-Muil-Nightmare\A-Hurrying-Darkness.png" />
     <Content Include="Images\Cards\The-Hills-of-Emyn-Muil-Nightmare\Blast-of-Savage-Wind.png" />
     <Content Include="Images\Cards\The-Hills-of-Emyn-Muil-Nightmare\Brambles-and-Thorns.png" />

@@ -13,6 +13,7 @@ namespace HallOfBeorn.Models.Sets
             Abbreviation = "JAtAN";
             SetType = Models.SetType.Nightmare_Expansion;
             Cycle = "NIGHTMARE";
+            Number = 2001;
 
             Cards.Add(new Card()
             {

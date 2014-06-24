@@ -11,7 +11,7 @@ namespace HallOfBeorn.Models.Sets
         {
             Name = "The Battle of Lake-town";
             Abbreviation = "TBoLT";
-            Number = 2002;
+            Number = 3002;
             SetType = Models.SetType.GenCon_Expansion;
             Cycle = "GenCon";
 

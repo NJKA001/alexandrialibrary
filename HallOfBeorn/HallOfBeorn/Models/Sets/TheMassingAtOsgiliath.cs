@@ -11,7 +11,7 @@ namespace HallOfBeorn.Models.Sets
         {
             Name = "The Massing at Osgiliath";
             Abbreviation = "TMaO";
-            Number = 2001;
+            Number = 3001;
             SetType = Models.SetType.GenCon_Expansion;
             Cycle = "GenCon";
 
