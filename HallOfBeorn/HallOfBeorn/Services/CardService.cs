@@ -140,6 +140,7 @@ namespace HallOfBeorn.Services
             AddSet(new TheMorgulVale());
 
             AddSet(new VoiceofIsengard());
+            AddSet(new TheDunlandTrap());
 
             AddSet(new TheHobbitOverHillandUnderHill());
             AddSet(new TheHobbitOntheDoorstep());

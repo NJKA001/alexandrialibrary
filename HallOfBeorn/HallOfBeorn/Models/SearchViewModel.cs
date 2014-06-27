@@ -7,6 +7,18 @@ using System.Web.Mvc;
 
 namespace HallOfBeorn.Models
 {
+    public class FilterViewModel
+    {
+        [Display(Name="Search")]
+        public string Query { get; set; }
+
+        [Display(Name="Type")]
+        public CardType CardType { get; set; }
+
+        [Display(Name = "Set")]
+        public string CardSet { get; set; }
+    }
+
     public class SearchViewModel
     {
         public SearchViewModel()
@@ -48,6 +60,26 @@ namespace HallOfBeorn.Models
 
         [Display(Name = "Results")]
         public List<CardViewModel> Cards { get; set; }
+
+        // Advanced Search Properties
+
+        [Display(Name = "Search")]
+        public string Filter1Query { get; set; }
+
+        [Display(Name = "Type")]
+        public CardType Filter1CardType { get; set; }
+
+        [Display(Name = "Set")]
+        public string Filter1CardSet { get; set; }
+
+        [Display(Name = "Search")]
+        public string Filter2Query { get; set; }
+
+        [Display(Name = "Type")]
+        public CardType Filter2CardType { get; set; }
+
+        [Display(Name = "Set")]
+        public string Filter2CardSet { get; set; }
 
         public static IEnumerable<SelectListItem> CardTypes
         {
