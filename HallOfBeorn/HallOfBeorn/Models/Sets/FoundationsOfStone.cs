@@ -16,7 +16,7 @@ namespace HallOfBeorn.Models.Sets
             Cycle = "Dwarrowdelf";
 
             Cards.Add(new Card() {
-                ImageName = "M1471",
+                ImageType = Models.ImageType.Png,
                 Title = "Asfaloth",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9001",
                 CardType = CardType.Attachment,
@@ -32,7 +32,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Sandara_Tang
             });
             Cards.Add(new Card() {
-                ImageName = "M1475",
+                ImageType = Models.ImageType.Png,
                 Title = "Below the Mines",
                 StageNumber = 4,
                 SlugIncludesOppositeTitle = true,
@@ -49,7 +49,7 @@ namespace HallOfBeorn.Models.Sets
                 OppositeArtist = Artist.David_Lecossu
             });
             Cards.Add(new Card() {
-                ImageName = "M1476",
+                ImageType = Models.ImageType.Png,
                 Title = "Below the Mines",
                 StageNumber = 4,
                 SlugIncludesOppositeTitle = true,
@@ -66,7 +66,7 @@ namespace HallOfBeorn.Models.Sets
                 OppositeArtist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
-                ImageName = "M1477",
+                ImageType = Models.ImageType.Png,
                 Title = "Below the Mines",
                 StageNumber = 4,
                 SlugIncludesOppositeTitle = true,
@@ -83,7 +83,7 @@ namespace HallOfBeorn.Models.Sets
                 OppositeArtist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
-                ImageName = "M1478",
+                ImageType = Models.ImageType.Png,
                 Title = "Below the Mines",
                 StageNumber = 4,
                 SlugIncludesOppositeTitle = true,
@@ -100,7 +100,7 @@ namespace HallOfBeorn.Models.Sets
                 OppositeArtist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
-                ImageName = "M1469",
+                ImageType = Models.ImageType.Png,
                 Title = "Daeron's Runes",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9010",
                 CardType = CardType.Event,
@@ -113,7 +113,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Carolina_Eade
             });
             Cards.Add(new Card() {
-                ImageName = "M1484",
+                ImageType = Models.ImageType.Png,
                 Title = "Deep Deep Dark",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9011",
                 CardType = CardType.Treachery,
@@ -126,7 +126,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card() {
-                ImageName = "M1482",
+                ImageType = Models.ImageType.Png,
                 Title = "Drowned Treasury",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9012",
                 CardType = CardType.Location,
@@ -140,7 +140,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Carolina_Eade
             });
             Cards.Add(new Card() {
-                ImageName = "M1480",
+                ImageType = Models.ImageType.Png,
                 Title = "Durin's Axe",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9013",
                 CardType = CardType.Objective,
@@ -154,7 +154,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Stephen_M_Mabee
             });
             Cards.Add(new Card() {
-                ImageName = "M1481",
+                ImageType = Models.ImageType.Png,
                 Title = "Durin's Helm",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9014",
                 CardType = CardType.Objective,
@@ -168,7 +168,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Stephen_M_Mabee
             });
             Cards.Add(new Card() {
-                ImageName = "M1487",
+                ImageType = Models.ImageType.Png,
                 Title = "Elder Nameless Thing",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9015",
                 CardType = CardType.Enemy,
@@ -186,7 +186,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Allison_Theus
             });
             Cards.Add(new Card() {
-                ImageName = "M1462",
+                ImageType = Models.ImageType.Png,
                 Title = "Glorfindel",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9016",
                 CardType = CardType.Hero,
@@ -205,7 +205,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1470",
+                ImageType = Models.ImageType.Png,
                 Title = "Healing Herbs",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9017",
                 CardType = CardType.Attachment,
@@ -218,7 +218,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
-                ImageName = "M1466",
+                ImageType = Models.ImageType.Png,
                 Title = "Heavy Stroke",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9018",
                 CardType = CardType.Event,
@@ -231,7 +231,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Adam_Schumpert
             });
             Cards.Add(new Card() {
-                ImageName = "M1467",
+                ImageType = Models.ImageType.Png,
                 Title = "Imladris Stargazer",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9019",
                 CardType = CardType.Ally,
@@ -248,7 +248,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1468",
+                ImageType = Models.ImageType.Png,
                 Title = "Light of Valinor",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9020",
                 CardType = CardType.Attachment,
@@ -264,7 +264,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Lin_Bo
             });
             Cards.Add(new Card() {
-                ImageName = "M1463",
+                ImageType = Models.ImageType.Png,
                 Title = "Longbeard Elder",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9021",
                 CardType = CardType.Ally,
@@ -281,7 +281,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Eric_Braddock
             });
             Cards.Add(new Card() {
-                ImageName = "M1485",
+                ImageType = Models.ImageType.Png,
                 Title = "Lost and Alone",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9022",
                 CardType = CardType.Treachery,
@@ -293,7 +293,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.David_Chen
             });
             Cards.Add(new Card() {
-                ImageName = "M1483",
+                ImageType = Models.ImageType.Png,
                 Title = "Mithril Lode",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9023",
                 CardType = CardType.Location,
@@ -308,7 +308,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
-                ImageName = "M1488",
+                ImageType = Models.ImageType.Png,
                 Title = "Moria Bats",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9024",
                 CardType = CardType.Enemy,
@@ -325,7 +325,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
-                ImageName = "M1486",
+                ImageType = Models.ImageType.Png,
                 Title = "Nameless Thing",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9025",
                 CardType = CardType.Enemy,
@@ -343,7 +343,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Timo_Karhula
             });
             Cards.Add(new Card() {
-                ImageName = "M1479",
+                ImageType = Models.ImageType.Png,
                 Title = "Out of the Depths",
                 StageNumber = 5,
                 Id = "51223bd0-ffd1-11df-a976-0801212c9026",
@@ -357,7 +357,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Anthony_Palumbo
             });
             Cards.Add(new Card() {
-                ImageName = "M1464",
+                ImageType = Models.ImageType.Png,
                 Title = "Path of Need",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9028",
                 CardType = CardType.Attachment,
@@ -371,7 +371,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1472",
+                ImageType = Models.ImageType.Png,
                 Title = "The Dripping Walls",
                 StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801212c9029",
@@ -388,7 +388,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
-                ImageName = "M1473",
+                ImageType = Models.ImageType.Png,
                 Title = "The Water's Edge",
                 StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801212c9031",
@@ -402,7 +402,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
-                ImageName = "M1465",
+                ImageType = Models.ImageType.Png,
                 Title = "Trollshaw Scout",
                 Id = "51223bd0-ffd1-11df-a976-0801212c9033",
                 CardType = CardType.Ally,
@@ -420,7 +420,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Anna_Steinbauer
             });
             Cards.Add(new Card() {
-                ImageName = "M1474",
+                ImageType = Models.ImageType.Png,
                 Title = "Washed Away!",
                 StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-0801212c9034",

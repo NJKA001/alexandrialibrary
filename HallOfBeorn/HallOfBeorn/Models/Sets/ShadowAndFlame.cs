@@ -16,7 +16,7 @@ namespace HallOfBeorn.Models.Sets
             Cycle = "Dwarrowdelf";
 
             Cards.Add(new Card() {
-                ImageName = "M1507",
+                ImageType = Models.ImageType.Png,
                 Title = "Counter-Spell",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9001",
                 CardType = CardType.Treachery,
@@ -28,7 +28,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1503",
+                ImageType = Models.ImageType.Png,
                 Title = "Dark Pit",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9002",
                 CardType = CardType.Location,
@@ -42,7 +42,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Igor_Kieryluk
             });
             Cards.Add(new Card() {
-                ImageName = "M1512",
+                ImageType = Models.ImageType.Png,
                 Title = "Durin's Bane",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9003",
                 CardType = CardType.Enemy,
@@ -61,7 +61,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1490",
+                ImageType = Models.ImageType.Png,
                 Title = "Elrond",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9004",
                 CardType = CardType.Hero,
@@ -79,7 +79,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1514",
+                ImageType = Models.ImageType.Png,
                 Title = "Fiery Sword",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9005",
                 CardType = CardType.Treachery,
@@ -92,7 +92,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Timo_Karhula
             });
             Cards.Add(new Card() {
-                ImageName = "M1506",
+                ImageType = Models.ImageType.Png,
                 Title = "Fires in the Deep",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9006",
                 CardType = CardType.Treachery,
@@ -104,7 +104,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Nick_Deligaris
             });
             Cards.Add(new Card() {
-                ImageName = "M1493",
+                ImageType = Models.ImageType.Png,
                 Title = "Hands Upon the Bow",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9007",
                 CardType = CardType.Event,
@@ -116,7 +116,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1492",
+                ImageType = Models.ImageType.Png,
                 Title = "Hardy Leadership",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9008",
                 CardType = CardType.Attachment,
@@ -130,7 +130,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Jake_Murray
             });
             Cards.Add(new Card() {
-                ImageName = "M1508",
+                ImageType = Models.ImageType.Png,
                 Title = "Inner Flame",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9009",
                 CardType = CardType.Treachery,
@@ -142,7 +142,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Matthew_Starbuck
             });
             Cards.Add(new Card() {
-                ImageName = "M1509",
+                ImageType = Models.ImageType.Png,
                 Title = "Inner Shadow",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9010",
                 CardType = CardType.Treachery,
@@ -154,7 +154,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card() {
-                ImageName = "M1502",
+                ImageType = Models.ImageType.Png,
                 Title = "Last Lord of Moria",
                 StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-0801213c9011",
@@ -171,7 +171,7 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Artist = Artist.Dmitry_Burmak
             });
             Cards.Add(new Card() {
-                ImageName = "M1511",
+                ImageType = Models.ImageType.Png,
                 Title = "Leaping Flame",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9013",
                 CardType = CardType.Treachery,
@@ -183,7 +183,7 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Artist = Artist.Timo_Karhula
             });
             Cards.Add(new Card() {
-                ImageName = "M1515",
+                ImageType = Models.ImageType.Png,
                 Title = "Many Thonged Whip",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9014",
                 CardType = CardType.Treachery,
@@ -196,7 +196,7 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Artist = Artist.Timo_Karhula
             });
             Cards.Add(new Card() {
-                ImageName = "M1496",
+                ImageType = Models.ImageType.Png,
                 Title = "Master of the Forge",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9015",
                 CardType = CardType.Ally,
@@ -213,7 +213,7 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Artist = Artist.Paul_Guzenko
             });
             Cards.Add(new Card() {
-                ImageName = "M1495",
+                ImageType = Models.ImageType.Png,
                 Title = "Miruvor",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9016",
                 CardType = CardType.Attachment,
@@ -227,7 +227,7 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
-                ImageName = "M1500",
+                ImageType = Models.ImageType.Png,
                 Title = "Nearing the Gate",
                 StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801213c9017",
@@ -244,7 +244,7 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
-                ImageName = "M1494",
+                ImageType = Models.ImageType.Png,
                 Title = "O Elbereth! Gilthonial!",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9019",
                 CardType = CardType.Event,
@@ -257,7 +257,7 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Artist = Artist.Aaron_B_Miller
             });
             Cards.Add(new Card() {
-                ImageName = "M1497",
+                ImageType = Models.ImageType.Png,
                 Title = "Peace, and Thought",
                 NormalizedTitle = "Peace and Thought",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9020",
@@ -270,7 +270,7 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1513",
+                ImageType = Models.ImageType.Png,
                 Title = "Ranging Goblin",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9021",
                 CardType = CardType.Enemy,
@@ -287,7 +287,7 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Artist = Artist.Jasper_Sandner
             });
             Cards.Add(new Card() {
-                ImageName = "M1498",
+                ImageType = Models.ImageType.Png,
                 Title = "Risk Some Light",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9022",
                 CardType = CardType.Event,
@@ -300,7 +300,7 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Artist = Artist.Dmitry_Burmak
             });
             Cards.Add(new Card() {
-                ImageName = "M1505",
+                ImageType = Models.ImageType.Png,
                 Title = "Second Deep",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9023",
                 CardType = CardType.Location,
@@ -314,7 +314,7 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Artist = Artist.Nick_Deligaris
             });
             Cards.Add(new Card() {
-                ImageName = "M1504",
+                ImageType = Models.ImageType.Png,
                 Title = "Second Hall",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9024",
                 CardType = CardType.Location,
@@ -330,7 +330,7 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
-                ImageName = "M1501",
+                ImageType = Models.ImageType.Png,
                 Title = "The Rear Guard",
                 StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801213c9025",
@@ -344,7 +344,7 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Artist = Artist.Jason_Juta
             });
             Cards.Add(new Card() {
-                ImageName = "M1499",
+                ImageType = Models.ImageType.Png,
                 Title = "Vilya",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9027",
                 CardType = CardType.Attachment,
@@ -359,7 +359,7 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
-                ImageName = "M1491",
+                ImageType = Models.ImageType.Png,
                 Title = "We Are Not Idle",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9028",
                 CardType = CardType.Event,
@@ -372,7 +372,7 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Artist = Artist.Charles_Urbach
             });
             Cards.Add(new Card() {
-                ImageName = "M1510",
+                ImageType = Models.ImageType.Png,
                 Title = "Whip Lash",
                 Id = "51223bd0-ffd1-11df-a976-0801213c9029",
                 CardType = CardType.Treachery,
