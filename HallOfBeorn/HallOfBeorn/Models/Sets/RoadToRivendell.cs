@@ -16,7 +16,7 @@ namespace HallOfBeorn.Models.Sets
             Cycle = "Dwarrowdelf";
 
             Cards.Add(new Card() {
-                ImageName = "M1399",
+                ImageType = Models.ImageType.Png,
                 Title = "Along the Misty Mountains",
                 StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801209c9001",
@@ -24,13 +24,13 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Road to Rivendell",
                 Quantity = 1,
                 QuestPoints = 20,
-                Text = "Setup: Put Arwen Undomiel into play under the control of the first player. Shuffle the encounter deck. Reveal 1 card from the encounter deck per player, and add them to the staging area.",
+                Text = "Setup: Put Arwen Undómiel into play under the control of the first player. Shuffle the encounter deck. Reveal 1 card from the encounter deck per player, and add them to the staging area.",
                 FlavorText = "This is a wild and perilous country, and it is dangerous to follow the roads. The mountains rise up on the right, impassively watching your slow trek among their foothills.",
                 Number = 38,
                 Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
-                ImageName = "M1401",
+                ImageType = Models.ImageType.Png,
                 Title = "Approaching Rivendell",
                 StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-0801209c9003",
@@ -44,8 +44,9 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Noah_Bradley
             });
             Cards.Add(new Card() {
-                ImageName = "M1402",
-                Title = "Arwen Undomiel",
+                ImageType = Models.ImageType.Png,
+                Title = "Arwen Undómiel",
+                NormalizedTitle = "Arwen Undomiel",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9005",
                 CardType = CardType.Objective_Ally,
                 EncounterSet = "Road to Rivendell",
@@ -56,12 +57,12 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 1,
                 Willpower = 2,
                 HitPoints = 2,
-                Text = "The first player gains control of Arwen Undomiel, as an ally.Response: After Arwen Undomiel exhausts, choose a hero. Add 1 resource to that hero's resource pool.If Arwen Undomiel leaves play, the players are defeated.",
+                Text = "The first player gains control of Arwen Undómiel, as an ally.Response: After Arwen Undómiel exhausts, choose a hero. Add 1 resource to that hero's resource pool.\r\n\r\nIf Arwen Undómiel leaves play, the players are defeated.",
                 Number = 41,
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1406",
+                ImageType = Models.ImageType.Png,
                 Title = "Barren Hills",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9006",
                 CardType = CardType.Location,
@@ -76,7 +77,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.David_Lecossu
             });
             Cards.Add(new Card() {
-                ImageName = "M1396",
+                ImageType = Models.ImageType.Png,
                 Title = "Bombur",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9007",
                 CardType = CardType.Ally,
@@ -94,7 +95,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Winona_Nelson
             });
             Cards.Add(new Card() {
-                ImageName = "M1412",
+                ImageType = Models.ImageType.Png,
                 Title = "Crebain",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9008",
                 CardType = CardType.Enemy,
@@ -113,7 +114,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Allison_Theus
             });
             Cards.Add(new Card() {
-                ImageName = "M1390",
+                ImageType = Models.ImageType.Png,
                 Title = "Dúnedain Wanderer",
                 NormalizedTitle = "Dunedain Wanderer",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9009",
@@ -132,7 +133,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
-                ImageName = "M1389",
+                ImageType = Models.ImageType.Png,
                 Title = "Elladan",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9010",
                 CardType = CardType.Hero,
@@ -150,7 +151,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1408",
+                ImageType = Models.ImageType.Png,
                 Title = "Followed by Night",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9011",
                 CardType = CardType.Treachery,
@@ -162,7 +163,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Jasper_Sandner
             });
             Cards.Add(new Card() {
-                ImageName = "M1404",
+                ImageType = Models.ImageType.Png,
                 Title = "Goblin Gate",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9012",
                 CardType = CardType.Location,
@@ -176,7 +177,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
-                ImageName = "M1410",
+                ImageType = Models.ImageType.Png,
                 Title = "Goblin Taskmaster",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9013",
                 CardType = CardType.Enemy,
@@ -194,7 +195,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Mike_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1393",
+                ImageType = Models.ImageType.Png,
                 Title = "Hail of Stones",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9014",
                 CardType = CardType.Event,
@@ -206,7 +207,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Stu_Barnes
             });
             Cards.Add(new Card() {
-                ImageName = "M1391",
+                ImageType = Models.ImageType.Png,
                 Title = "Lure of Moria",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9015",
                 CardType = CardType.Event,
@@ -218,7 +219,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Mike_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1409",
+                ImageType = Models.ImageType.Png,
                 Title = "Orc Ambush",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9016",
                 CardType = CardType.Treachery,
@@ -230,7 +231,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Anton_Kolyukh
             });
             Cards.Add(new Card() {
-                ImageName = "M1400",
+                ImageType = Models.ImageType.Png,
                 Title = "Orc Outpost",
                 StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801209c9017",
@@ -244,7 +245,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Nick_Deligaris
             });
             Cards.Add(new Card() {
-                ImageName = "M1411",
+                ImageType = Models.ImageType.Png,
                 Title = "Orc Raiders",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9019",
                 CardType = CardType.Enemy,
@@ -262,7 +263,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Mark_Tarrisse
             });
             Cards.Add(new Card() {
-                ImageName = "M1397",
+                ImageType = Models.ImageType.Png,
                 Title = "Out of the Wild",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9020",
                 CardType = CardType.Event,
@@ -275,7 +276,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1405",
+                ImageType = Models.ImageType.Png,
                 Title = "Pathless Country",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9021",
                 CardType = CardType.Location,
@@ -290,7 +291,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
-                ImageName = "M1394",
+                ImageType = Models.ImageType.Png,
                 Title = "Rider of the Mark",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9022",
                 CardType = CardType.Ally,
@@ -307,7 +308,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.David_Horne
             });
             Cards.Add(new Card() {
-                ImageName = "M1392",
+                ImageType = Models.ImageType.Png,
                 Title = "Rivendell Blade",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9023",
                 CardType = CardType.Attachment,
@@ -321,7 +322,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
-                ImageName = "M1403",
+                ImageType = Models.ImageType.Png,
                 Title = "Ruined Road",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9024",
                 CardType = CardType.Location,
@@ -336,7 +337,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
-                ImageName = "M1407",
+                ImageType = Models.ImageType.Png,
                 Title = "Sleeping Sentry",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9025",
                 CardType = CardType.Treachery,
@@ -348,7 +349,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Tiziano_Baracchi
             });
             Cards.Add(new Card() {
-                ImageName = "M1395",
+                ImageType = Models.ImageType.Png,
                 Title = "Song of Eärendil",
                 NormalizedTitle = "Song of Earendil",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9026",
@@ -366,7 +367,7 @@ Response: After another player raises his threat, raise your threat by 1 to redu
                 Artist = Artist.K_R_Harris
             });
             Cards.Add(new Card() {
-                ImageName = "M1398",
+                ImageType = Models.ImageType.Png,
                 Title = "The End Comes",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9027",
                 CardType = CardType.Event,
@@ -378,7 +379,7 @@ Response: After another player raises his threat, raise your threat by 1 to redu
                 Artist = Artist.Ryan_Barger
             });
             Cards.Add(new Card() {
-                ImageName = "M1413",
+                ImageType = Models.ImageType.Png,
                 Title = "Wild Bear",
                 Id = "51223bd0-ffd1-11df-a976-0801209c9028",
                 CardType = CardType.Enemy,

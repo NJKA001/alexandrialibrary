@@ -16,7 +16,7 @@ namespace HallOfBeorn.Models.Sets
             Cycle = "Dwarrowdelf";
 
             Cards.Add(new Card() {
-                ImageName = "M1451",
+                ImageType = Models.ImageType.Png,
                 Title = "Abandoned Mine",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9001",
                 CardType = CardType.Location,
@@ -31,7 +31,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Paulo_Puggioni
             });
             Cards.Add(new Card() {
-                ImageName = "M1459",
+                ImageType = Models.ImageType.Png,
                 Title = "Cave Spider",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9002",
                 CardType = CardType.Enemy,
@@ -48,7 +48,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Allison_Theus
             });
             Cards.Add(new Card() {
-                ImageName = "M1449",
+                ImageType = Models.ImageType.Png,
                 Title = "Continuing Eastward",
                 StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801211c9003",
@@ -63,7 +63,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1450",
+                ImageType = Models.ImageType.Png,
                 Title = "Durin's Greaves",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9005",
                 CardType = CardType.Objective,
@@ -79,7 +79,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
-                ImageName = "M1452",
+                ImageType = Models.ImageType.Png,
                 Title = "Dwarven Forge",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9006",
                 CardType = CardType.Location,
@@ -94,7 +94,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
-                ImageName = "M1441",
+                ImageType = Models.ImageType.Png,
                 Title = "Erebor Battle Master",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9007",
                 CardType = CardType.Ally,
@@ -112,7 +112,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card() {
-                ImageName = "M1439",
+                ImageType = Models.ImageType.Png,
                 Title = "Erestor",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9008",
                 CardType = CardType.Ally,
@@ -130,7 +130,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1444",
+                ImageType = Models.ImageType.Png,
                 Title = "Ever My Heart Rises",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9009",
                 CardType = CardType.Attachment,
@@ -144,7 +144,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Carolina_Eade
             });
             Cards.Add(new Card() {
-                ImageName = "M1455",
+                ImageType = Models.ImageType.Png,
                 Title = "Fatigue",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9010",
                 CardType = CardType.Treachery,
@@ -156,7 +156,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Charles_Urbach
             });
             Cards.Add(new Card() {
-                ImageName = "M1456",
+                ImageType = Models.ImageType.Png,
                 Title = "Foul Air",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9011",
                 CardType = CardType.Treachery,
@@ -168,7 +168,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Jasper_Sandner
             });
             Cards.Add(new Card() {
-                ImageName = "M1440",
+                ImageType = Models.ImageType.Png,
                 Title = "Fresh Tracks",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9012",
                 CardType = CardType.Event,
@@ -180,7 +180,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Garret_DeChellis
             });
             Cards.Add(new Card() {
-                ImageName = "M1457",
+                ImageType = Models.ImageType.Png,
                 Title = "Gathering Ground",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9013",
                 CardType = CardType.Treachery,
@@ -192,7 +192,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Jason_Juta
             });
             Cards.Add(new Card() {
-                ImageName = "M1460",
+                ImageType = Models.ImageType.Png,
                 Title = "Goblin Sneak",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9014",
                 CardType = CardType.Enemy,
@@ -210,7 +210,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Timo_Karhula
             });
             Cards.Add(new Card() {
-                ImageName = "M1461",
+                ImageType = Models.ImageType.Png,
                 Title = "Goblin Warlord",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9015",
                 CardType = CardType.Enemy,
@@ -228,7 +228,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Matthew_Starbuck
             });
             Cards.Add(new Card() {
-                ImageName = "M1438",
+                ImageType = Models.ImageType.Png,
                 Title = "Háma",
                 NormalizedTitle = "Hama",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9016",
@@ -247,7 +247,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1448",
+                ImageType = Models.ImageType.Png,
                 Title = "Journey in the Black Pit",
                 StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801211c9017",
@@ -263,7 +263,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1447",
+                ImageType = Models.ImageType.Png,
                 Title = "Love of Tales",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9019",
                 CardType = CardType.Attachment,
@@ -277,7 +277,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Winona_Nelson
             });
             Cards.Add(new Card() {
-                ImageName = "M1443",
+                ImageType = Models.ImageType.Png,
                 Title = "Out of Sight",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9020",
                 CardType = CardType.Event,
@@ -290,7 +290,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
-                ImageName = "M1442",
+                ImageType = Models.ImageType.Png,
                 Title = "Ring Mail",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9021",
                 CardType = CardType.Attachment,
@@ -306,9 +306,8 @@ Attached hero gets +1 Defense.",
             Cards.Add(new Card() {
                 Title = "Rock Adder",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9022",
-                ImageName = "The_Long_Dark/Rock-Adder",
-                CardType = CardType.Enemy,
                 ImageType = Models.ImageType.Png,
+                CardType = CardType.Enemy,
                 EncounterSet = "The Long Dark",
                 Traits = new List<string>() { "Creature." },
                 Quantity = 3,
@@ -323,7 +322,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Allison_Theus
             });
             Cards.Add(new Card() {
-                ImageName = "M1453",
+                ImageType = Models.ImageType.Png,
                 Title = "Silent Caverns",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9023",
                 CardType = CardType.Location,
@@ -338,7 +337,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
-                ImageName = "M1454",
+                ImageType = Models.ImageType.Png,
                 Title = "Twisting Passage",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9024",
                 CardType = CardType.Location,
@@ -353,7 +352,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
-                ImageName = "M1458",
+                ImageType = Models.ImageType.Png,
                 Title = "Vast and Intricate",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9025",
                 CardType = CardType.Treachery,
@@ -364,7 +363,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Eric_Braddock
             });
             Cards.Add(new Card() {
-                ImageName = "M1445",
+                ImageType = Models.ImageType.Png,
                 Title = "Warden of Healing",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9026",
                 CardType = CardType.Ally,
@@ -382,7 +381,7 @@ Attached hero gets +1 Defense.",
                 Artist = Artist.Paulo_Puggioni
             });
             Cards.Add(new Card() {
-                ImageName = "M1446",
+                ImageType = Models.ImageType.Png,
                 Title = "Word of Command",
                 Id = "51223bd0-ffd1-11df-a976-0801211c9027",
                 CardType = CardType.Event,

@@ -16,7 +16,7 @@ namespace HallOfBeorn.Models.Sets
             Cycle = "Dwarrowdelf";
 
             Cards.Add(new Card() {
-                ImageName = "M1414",
+                ImageType = Models.ImageType.Png,
                 Title = "Aragorn",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9001",
                 CardType = CardType.Hero,
@@ -36,8 +36,9 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Tony_Foti
             });
             Cards.Add(new Card() {
-                ImageName = "M1419",
-                Title = "Arwen Undomiel",
+                ImageType = Models.ImageType.Png,
+                Title = "Arwen Undómiel",
+                NormalizedTitle = "Arwen Undomiel",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9002",
                 CardType = CardType.Ally,
                 Sphere = Sphere.Spirit,
@@ -49,12 +50,12 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 1,
                 Willpower = 2,
                 HitPoints = 2,
-                Text = "Response: After Arwen Undomiel exhausts, choose a character. That character gains sentinel and gets +1 Defense until the end of the round.",
+                Text = "Response: After Arwen Undómiel exhausts, choose a character. That character gains sentinel and gets +1 Defense until the end of the round.",
                 Number = 58,
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1432",
+                ImageType = Models.ImageType.Png,
                 Title = "Disturbed Waters",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9003",
                 CardType = CardType.Treachery,
@@ -65,7 +66,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
-                ImageName = "M1426",
+                ImageType = Models.ImageType.Png,
                 Title = "Doors of Durin",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9004",
                 CardType = CardType.Location,
@@ -81,7 +82,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
-                ImageName = "M1420",
+                ImageType = Models.ImageType.Png,
                 Title = "Elrond's Counsel",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9005",
                 CardType = CardType.Event,
@@ -93,7 +94,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Anthony_Palumbo
             });
             Cards.Add(new Card() {
-                ImageName = "M1434",
+                ImageType = Models.ImageType.Png,
                 Title = "Grasping Tentacle",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9006",
                 CardType = CardType.Enemy,
@@ -110,7 +111,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Mark_Tarrisse
             });
             Cards.Add(new Card() {
-                ImageName = "M1415",
+                ImageType = Models.ImageType.Png,
                 Title = "Grave Cairn",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9007",
                 CardType = CardType.Event,
@@ -122,7 +123,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
-                ImageName = "M1431",
+                ImageType = Models.ImageType.Png,
                 Title = "Ill Purpose",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9008",
                 CardType = CardType.Treachery,
@@ -134,7 +135,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
-                ImageName = "M1422",
+                ImageType = Models.ImageType.Png,
                 Title = "Legacy of Durin",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9009",
                 CardType = CardType.Attachment,
@@ -149,7 +150,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
-                ImageName = "M1429",
+                ImageType = Models.ImageType.Png,
                 Title = "Makeshift Passage",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9010",
                 CardType = CardType.Location,
@@ -164,7 +165,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
-                ImageName = "M1428",
+                ImageType = Models.ImageType.Png,
                 Title = "Perilous Swamp",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9011",
                 CardType = CardType.Location,
@@ -179,7 +180,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
-                ImageName = "M1423",
+                ImageType = Models.ImageType.Png,
                 Title = "Resourceful",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9012",
                 CardType = CardType.Attachment,
@@ -192,7 +193,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1418",
+                ImageType = Models.ImageType.Png,
                 Title = "Rivendell Bow",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9013",
                 CardType = CardType.Attachment,
@@ -205,7 +206,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
-                ImageName = "M1421",
+                ImageType = Models.ImageType.Png,
                 Title = "Short Cut",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9014",
                 CardType = CardType.Event,
@@ -217,7 +218,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Igor_Kieryluk
             });
             Cards.Add(new Card() {
-                ImageName = "M1430",
+                ImageType = Models.ImageType.Png,
                 Title = "Stagnant Creek",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9015",
                 CardType = CardType.Location,
@@ -231,7 +232,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.David_Lecossu
             });
             Cards.Add(new Card() {
-                ImageName = "M1427",
+                ImageType = Models.ImageType.Png,
                 Title = "Stair Falls",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9016",
                 CardType = CardType.Location,
@@ -247,7 +248,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Lin_Bo
             });
             Cards.Add(new Card() {
-                ImageName = "M1436",
+                ImageType = Models.ImageType.Png,
                 Title = "Striking Tentacle",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9017",
                 CardType = CardType.Enemy,
@@ -264,7 +265,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
-                ImageName = "M1416",
+                ImageType = Models.ImageType.Png,
                 Title = "Sword that was Broken",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9018",
                 CardType = CardType.Attachment,
@@ -279,7 +280,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
-                ImageName = "M1425",
+                ImageType = Models.ImageType.Png,
                 Title = "The Seething Lake",
                 StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-0801210c9019",
@@ -296,7 +297,7 @@ If the players have at least 3 victory points and defeat this stage, they have w
                 Artist = Artist.Adam_Schumpert
             });
             Cards.Add(new Card() {
-                ImageName = "M1433",
+                ImageType = Models.ImageType.Png,
                 Title = "The Watcher",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9021",
                 CardType = CardType.Enemy,
@@ -316,7 +317,7 @@ If the players have at least 3 victory points and defeat this stage, they have w
                 Artist = Artist.Matthew_Starbuck
             });
             Cards.Add(new Card() {
-                ImageName = "M1435",
+                ImageType = Models.ImageType.Png,
                 Title = "Thrashing Tentacle",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9022",
                 CardType = CardType.Enemy,
@@ -333,7 +334,7 @@ If the players have at least 3 victory points and defeat this stage, they have w
                 Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
-                ImageName = "M1424",
+                ImageType = Models.ImageType.Png,
                 Title = "To the West-door",
                 StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-0801210c9023",
@@ -350,7 +351,7 @@ If the players have at least 3 victory points and defeat this stage, they have w
                 Artist = Artist.Jason_Juta
             });
             Cards.Add(new Card() {
-                ImageName = "M1417",
+                ImageType = Models.ImageType.Png,
                 Title = "Watcher of the Bruinen",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9025",
                 CardType = CardType.Ally,
@@ -368,7 +369,7 @@ If the players have at least 3 victory points and defeat this stage, they have w
                 Artist = Artist.Kristina_Carroll
             });
             Cards.Add(new Card() {
-                ImageName = "M1437",
+                ImageType = Models.ImageType.Png,
                 Title = "Wrapped!",
                 NormalizedTitle = "Wrapped",
                 Id = "51223bd0-ffd1-11df-a976-0801210c9026",
