@@ -16,7 +16,7 @@ namespace HallOfBeorn.Models.Sets
             Cycle = "The Hobbit";
 
             Cards.Add(new Card() {
-                ImageName = "M1587",
+                ImageType = Models.ImageType.Png,
                 Title = "A Deep Sack",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9001",
                 CardType = CardType.Objective,
@@ -28,7 +28,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.David_Kegg
             });
             Cards.Add(new Card() {
-                ImageName = "M1588",
+                ImageType = Models.ImageType.Png,
                 Title = "A Foul Sack",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9002",
                 CardType = CardType.Objective,
@@ -40,7 +40,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Diego_Gisbert_Llorens
             });
             Cards.Add(new Card() {
-                ImageName = "M1586",
+                ImageType = Models.ImageType.Png,
                 Title = "A Large Sack",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9003",
                 CardType = CardType.Objective,
@@ -52,7 +52,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Florian_Stitz
             });
             Cards.Add(new Card() {
-                ImageName = "M1591",
+                ImageType = Models.ImageType.Png,
                 Title = "A Nice Pickle",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9004",
                 CardType = CardType.Treachery,
@@ -65,7 +65,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
-                ImageName = "M1565",
+                ImageType = Models.ImageType.Png,
                 Title = "A Short Rest",
                 StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9005",
@@ -81,7 +81,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1583",
+                ImageType = Models.ImageType.Png,
                 Title = "A Smelly Sack",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9007",
                 CardType = CardType.Objective,
@@ -93,7 +93,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1584",
+                ImageType = Models.ImageType.Png,
                 Title = "A Strong Sack",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9008",
                 CardType = CardType.Objective,
@@ -105,7 +105,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Adam_Lane
             });
             Cards.Add(new Card() {
-                ImageName = "M1574",
+                ImageType = Models.ImageType.Png,
                 Title = "A Suspicious Crow",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9009",
                 CardType = CardType.Enemy,
@@ -123,7 +123,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Dean_Spencer
             });
             Cards.Add(new Card() {
-                ImageName = "M1585",
+                ImageType = Models.ImageType.Png,
                 Title = "A Tough Sack",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9010",
                 CardType = CardType.Objective,
@@ -135,7 +135,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Ignacio_Bazan_Lazcano
             });
             Cards.Add(new Card() {
-                ImageName = "M1553",
+                ImageType = Models.ImageType.Png,
                 Title = "A Very Good Tale",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9011",
                 CardType = CardType.Event,
@@ -147,7 +147,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1589",
+                ImageType = Models.ImageType.Png,
                 Title = "A Worn Sack",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9012",
                 CardType = CardType.Objective,
@@ -159,7 +159,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Blake_Henriksen
             });
             Cards.Add(new Card() {
-                ImageName = "M1562",
+                ImageType = Models.ImageType.Png,
                 Title = "An Unexpected Party",
                 StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9013",
@@ -175,7 +175,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Chris_Rahn
             });
             Cards.Add(new Card() {
-                ImageName = "M1544",
+                ImageType = Models.ImageType.Png,
                 Title = "Beorn",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9015",
                 CardType = CardType.Hero,
@@ -194,7 +194,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Emrah_Elmasli
             });
             Cards.Add(new Card() {
-                ImageName = "M1572",
+                ImageType = Models.ImageType.Png,
                 Title = "Bert",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9016",
                 CardType = CardType.Enemy,
@@ -213,7 +213,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Mike_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1540",
+                ImageType = Models.ImageType.Png,
                 Title = "Bilbo Baggins",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9017",
                 CardType = CardType.Hero,
@@ -231,7 +231,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1618",
+                ImageType = Models.ImageType.Png,
                 Title = "Bilbo's Magic Ring",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9018",
                 CardType = CardType.Objective,
@@ -245,7 +245,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1547",
+                ImageType = Models.ImageType.Png,
                 Title = "Bofur",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9019",
                 CardType = CardType.Ally,
@@ -263,7 +263,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1558",
+                ImageType = Models.ImageType.Png,
                 Title = "Burglar Baggins",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9020",
                 CardType = CardType.Event,
@@ -275,7 +275,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Emrah_Elmasli
             });
             Cards.Add(new Card() {
-                ImageName = "M1580",
+                ImageType = Models.ImageType.Png,
                 Title = "Cave Entrance",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9021",
                 CardType = CardType.Location,
@@ -289,7 +289,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card() {
-                ImageName = "M1610",
+                ImageType = Models.ImageType.Png,
                 Title = "Chaos in the Cavern",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9022",
                 CardType = CardType.Treachery,
@@ -301,7 +301,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
-                ImageName = "M1619",
+                ImageType = Models.ImageType.Png,
                 Title = "Come Down Little Bird",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9023",
                 CardType = CardType.Treachery,
@@ -312,7 +312,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Marco_Caradonna
             });
             Cards.Add(new Card() {
-                ImageName = "M1550",
+                ImageType = Models.ImageType.Png,
                 Title = "Cram",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9024",
                 CardType = CardType.Attachment,
@@ -326,7 +326,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Adam_Lane
             });
             Cards.Add(new Card() {
-                ImageName = "M1564",
+                ImageType = Models.ImageType.Png,
                 Title = "Dawn Take You All",
                 StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9025",
@@ -343,7 +343,7 @@ The players have won the game.",
                 Artist = Artist.Titus_Lunter
             });
             Cards.Add(new Card() {
-                ImageName = "M1548",
+                ImageType = Models.ImageType.Png,
                 Title = "Dori",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9027",
                 CardType = CardType.Ally,
@@ -361,7 +361,7 @@ The players have won the game.",
                 Artist = Artist.Jake_Murray
             });
             Cards.Add(new Card() {
-                ImageName = "M1567",
+                ImageType = Models.ImageType.Png,
                 Title = "Down, Down to Goblin Town",
                 StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9028",
@@ -376,7 +376,7 @@ The players have won the game.",
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1578",
+                ImageType = Models.ImageType.Png,
                 Title = "Dreary Hills",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9030",
                 CardType = CardType.Location,
@@ -390,7 +390,7 @@ The players have won the game.",
                 Artist = Artist.David_Demaret
             });
             Cards.Add(new Card() {
-                ImageName = "M1557",
+                ImageType = Models.ImageType.Png,
                 Title = "Expecting Mischief",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9031",
                 CardType = CardType.Event,
@@ -402,7 +402,7 @@ The players have won the game.",
                 Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
-                ImageName = "M1545",
+                ImageType = Models.ImageType.Png,
                 Title = "Fili",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9032",
                 CardType = CardType.Ally,
@@ -420,7 +420,7 @@ The players have won the game.",
                 Artist = Artist.Carmen_Cianelli
             });
             Cards.Add(new Card() {
-                ImageName = "M1554",
+                ImageType = Models.ImageType.Png,
                 Title = "Foe-hammer",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9033",
                 CardType = CardType.Event,
@@ -432,7 +432,7 @@ The players have won the game.",
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1605",
+                ImageType = Models.ImageType.Png,
                 Title = "Front Porch",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9034",
                 CardType = CardType.Location,
@@ -446,7 +446,7 @@ The players have won the game.",
                 Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
-                ImageName = "M1611",
+                ImageType = Models.ImageType.Png,
                 Title = "Galloping Boulders",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9035",
                 CardType = CardType.Treachery,
@@ -458,7 +458,7 @@ The players have won the game.",
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1549",
+                ImageType = Models.ImageType.Png,
                 Title = "Gandalf",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9036",
                 CardType = CardType.Ally,
@@ -476,7 +476,7 @@ The players have won the game.",
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1561",
+                ImageType = Models.ImageType.Png,
                 Title = "Glamdring",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9037",
                 CardType = CardType.Treasure,
@@ -491,7 +491,7 @@ The players have won the game.",
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1597",
+                ImageType = Models.ImageType.Png,
                 Title = "Goblin Axeman",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9038",
                 CardType = CardType.Enemy,
@@ -509,7 +509,7 @@ The players have won the game.",
                 Artist = Artist.Florian_Stitz
             });
             Cards.Add(new Card() {
-                ImageName = "M1601",
+                ImageType = Models.ImageType.Png,
                 Title = "Goblin Bent-Swords",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9039",
                 CardType = CardType.Enemy,
@@ -527,7 +527,7 @@ The players have won the game.",
                 Artist = Artist.Johann_Bodin
             });
             Cards.Add(new Card() {
-                ImageName = "M1600",
+                ImageType = Models.ImageType.Png,
                 Title = "Goblin Driver",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9040",
                 CardType = CardType.Enemy,
@@ -545,7 +545,7 @@ The players have won the game.",
                 Artist = Artist.Stephane_Gantiez
             });
             Cards.Add(new Card() {
-                ImageName = "M1598",
+                ImageType = Models.ImageType.Png,
                 Title = "Goblin Miners",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9041",
                 CardType = CardType.Enemy,
@@ -563,7 +563,7 @@ The players have won the game.",
                 Artist = Artist.C_B_Sorge
             });
             Cards.Add(new Card() {
-                ImageName = "M1599",
+                ImageType = Models.ImageType.Png,
                 Title = "Goblin Runners",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9042",
                 CardType = CardType.Enemy,
@@ -582,7 +582,7 @@ The players have won the game.",
                 Artist = Artist.Stephane_Gantiez
             });
             Cards.Add(new Card() {
-                ImageName = "M1555",
+                ImageType = Models.ImageType.Png,
                 Title = "Goblin-cleaver",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9043",
                 CardType = CardType.Event,
@@ -595,7 +595,7 @@ The players have won the game.",
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1613",
+                ImageType = Models.ImageType.Png,
                 Title = "Gollum",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9044",
                 CardType = CardType.Enemy,
@@ -614,7 +614,7 @@ The players have won the game.",
                 Artist = Artist.Jason_Ward
             });
             Cards.Add(new Card() {
-                ImageName = "M1606",
+                ImageType = Models.ImageType.Png,
                 Title = "Great Cavern Room",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9045",
                 CardType = CardType.Location,
@@ -628,7 +628,7 @@ The players have won the game.",
                 Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card() {
-                ImageName = "M1614",
+                ImageType = Models.ImageType.Png,
                 Title = "Great Gray Wolf",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9046",
                 CardType = CardType.Enemy,
@@ -645,7 +645,7 @@ The players have won the game.",
                 Artist = Artist.Allison_Theus
             });
             Cards.Add(new Card() {
-                ImageName = "M1609",
+                ImageType = Models.ImageType.Png,
                 Title = "Grip, Grab! Pinch, Nab!",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9047",
                 CardType = CardType.Treachery,
@@ -657,7 +657,7 @@ The players have won the game.",
                 Artist = Artist.Blake_Henriksen
             });
             Cards.Add(new Card() {
-                ImageName = "M1612",
+                ImageType = Models.ImageType.Png,
                 Title = "Guffawing of Giants",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9048",
                 CardType = CardType.Treachery,
@@ -668,7 +668,7 @@ The players have won the game.",
                 Artist = Artist.Chun_Lo
             });
             Cards.Add(new Card() {
-                ImageName = "M1621",
+                ImageType = Models.ImageType.Png,
                 Title = "Hiding in the Trees",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9049",
                 CardType = CardType.Treachery,
@@ -679,7 +679,7 @@ The players have won the game.",
                 Artist = Artist.David_Demaret
             });
             Cards.Add(new Card() {
-                ImageName = "M1577",
+                ImageType = Models.ImageType.Png,
                 Title = "Hobbit-lands",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9050",
                 CardType = CardType.Location,
@@ -694,7 +694,7 @@ The players have won the game.",
                 Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
-                ImageName = "M1593",
+                ImageType = Models.ImageType.Png,
                 Title = "Hungry Troll",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9051",
                 CardType = CardType.Treachery,
@@ -706,7 +706,7 @@ The players have won the game.",
                 Artist = Artist.Jason_Ward
             });
             Cards.Add(new Card() {
-                ImageName = "M1570",
+                ImageType = Models.ImageType.Png,
                 Title = "Into the Fire",
                 StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9052",
@@ -720,7 +720,7 @@ The players have won the game.",
                 Artist = Artist.Adam_Schumpert
             });
             Cards.Add(new Card() {
-                ImageName = "M1620",
+                ImageType = Models.ImageType.Png,
                 Title = "It Likes Riddles?",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9054",
                 CardType = CardType.Treachery,
@@ -731,7 +731,7 @@ The players have won the game.",
                 Artist = Artist.Jason_Ward
             });
             Cards.Add(new Card() {
-                ImageName = "M1546",
+                ImageType = Models.ImageType.Png,
                 Title = "Kili",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9055",
                 CardType = CardType.Ally,
@@ -749,7 +749,7 @@ The players have won the game.",
                 Artist = Artist.Carmen_Cianelli
             });
             Cards.Add(new Card() {
-                ImageName = "M1617",
+                ImageType = Models.ImageType.Png,
                 Title = "Lake in the Cavern",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9056",
                 CardType = CardType.Location,
@@ -772,7 +772,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Cristi_Balanescu
             });
             Cards.Add(new Card() {
-                ImageName = "M1556",
+                ImageType = Models.ImageType.Png,
                 Title = "Late Adventurer",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9057",
                 CardType = CardType.Event,
@@ -785,7 +785,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Carmen_Cianelli
             });
             Cards.Add(new Card() {
-                ImageName = "M1579",
+                ImageType = Models.ImageType.Png,
                 Title = "Lone-Lands",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9058",
                 CardType = CardType.Location,
@@ -799,7 +799,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
-                ImageName = "M1590",
+                ImageType = Models.ImageType.Png,
                 Title = "Lots or None at All",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9059",
                 CardType = CardType.Treachery,
@@ -811,7 +811,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1596",
+                ImageType = Models.ImageType.Png,
                 Title = "More Like a Grocer",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9060",
                 CardType = CardType.Treachery,
@@ -824,7 +824,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1594",
+                ImageType = Models.ImageType.Png,
                 Title = "No Campfire",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9061",
                 CardType = CardType.Treachery,
@@ -837,7 +837,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1542",
+                ImageType = Models.ImageType.Png,
                 Title = "Nori",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9062",
                 CardType = CardType.Hero,
@@ -857,7 +857,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Blake_Henriksen
             });
             Cards.Add(new Card() {
-                ImageName = "M1623",
+                ImageType = Models.ImageType.Png,
                 Title = "Not Fair! Not Fair!",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9063",
                 CardType = CardType.Treachery,
@@ -868,7 +868,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Jason_Ward
             });
             Cards.Add(new Card() {
-                ImageName = "M1560",
+                ImageType = Models.ImageType.Png,
                 Title = "Orcrist",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9064",
                 CardType = CardType.Treasure,
@@ -884,7 +884,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1543",
+                ImageType = Models.ImageType.Png,
                 Title = "Ori",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9065",
                 CardType = CardType.Hero,
@@ -903,7 +903,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Blake_Henriksen
             });
             Cards.Add(new Card() {
-                ImageName = "M1568",
+                ImageType = Models.ImageType.Png,
                 Title = "Out of the Frying Pan",
                 StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9066",
@@ -919,7 +919,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Adam_Schumpert
             });
             Cards.Add(new Card() {
-                ImageName = "M1607",
+                ImageType = Models.ImageType.Png,
                 Title = "Overhanging Rock",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9068",
                 CardType = CardType.Location,
@@ -934,7 +934,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Helmutt
             });
             Cards.Add(new Card() {
-                ImageName = "M1569",
+                ImageType = Models.ImageType.Png,
                 Title = "Riddles in the Dark",
                 StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9069",
@@ -949,7 +949,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1592",
+                ImageType = Models.ImageType.Png,
                 Title = "Roast 'Em or Boil 'Em?",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9071",
                 CardType = CardType.Treachery,
@@ -961,7 +961,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Chun_Lo
             });
             Cards.Add(new Card() {
-                ImageName = "M1563",
+                ImageType = Models.ImageType.Png,
                 Title = "Roast Mutton",
                 StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9072",
@@ -976,7 +976,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1551",
+                ImageType = Models.ImageType.Png,
                 Title = "Spare Hood and Cloak",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9074",
                 CardType = CardType.Attachment,
@@ -991,7 +991,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.David_Kegg
             });
             Cards.Add(new Card() {
-                ImageName = "M1559",
+                ImageType = Models.ImageType.Png,
                 Title = "Sting",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9075",
                 CardType = CardType.Treasure,
@@ -1007,7 +1007,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1603",
+                ImageType = Models.ImageType.Png,
                 Title = "Stone-Giant",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9076",
                 CardType = CardType.Enemy,
@@ -1024,7 +1024,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Timo_Karhula
             });
             Cards.Add(new Card() {
-                ImageName = "M1604",
+                ImageType = Models.ImageType.Png,
                 Title = "The Goblins' Caves",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9077",
                 CardType = CardType.Location,
@@ -1039,11 +1039,12 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.David_Demaret
             });
             Cards.Add(new Card() {
-                ImageName = "M1602",
+                ImageType = Models.ImageType.Png,
                 Title = "The Great Goblin",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9078",
                 CardType = CardType.Enemy,
                 EncounterSet = "The Great Goblin",
+                SlugIncludesType = true,
                 Traits = new List<string>() { "Goblin.", " Orc." },
                 Quantity = 1,
                 EngagementCost = 15,
@@ -1058,7 +1059,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Johann_Bodin
             });
             Cards.Add(new Card() {
-                ImageName = "M1608",
+                ImageType = Models.ImageType.Png,
                 Title = "The High Pass",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9079",
                 CardType = CardType.Location,
@@ -1074,7 +1075,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Titus_Lunter
             });
             Cards.Add(new Card() {
-                ImageName = "M1566",
+                ImageType = Models.ImageType.Png,
                 Title = "The Mountain Pass",
                 StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9080",
@@ -1088,7 +1089,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Chun_Lo
             });
             Cards.Add(new Card() {
-                ImageName = "M1616",
+                ImageType = Models.ImageType.Png,
                 Title = "The Wargs' Glade",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9082",
                 CardType = CardType.Location,
@@ -1102,7 +1103,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card() {
-                ImageName = "M1541",
+                ImageType = Models.ImageType.Png,
                 Title = "Thorin Oakenshield",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9083",
                 CardType = CardType.Hero,
@@ -1120,7 +1121,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Tiziano_Baracchi
             });
             Cards.Add(new Card() {
-                ImageName = "M1552",
+                ImageType = Models.ImageType.Png,
                 Title = "Thror's Map",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9084",
                 CardType = CardType.Attachment,
@@ -1136,7 +1137,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Jake_Murray
             });
             Cards.Add(new Card() {
-                ImageName = "M1573",
+                ImageType = Models.ImageType.Png,
                 Title = "Tom",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9085",
                 CardType = CardType.Enemy,
@@ -1155,7 +1156,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Mike_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1575",
+                ImageType = Models.ImageType.Png,
                 Title = "Troll Camp",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9086",
                 CardType = CardType.Location,
@@ -1169,7 +1170,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Stephane_Gantiez
             });
             Cards.Add(new Card() {
-                ImageName = "M1576",
+                ImageType = Models.ImageType.Png,
                 Title = "Troll Cave",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9087",
                 CardType = CardType.Location,
@@ -1185,7 +1186,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card() {
-                ImageName = "M1582",
+                ImageType = Models.ImageType.Png,
                 Title = "Troll Key",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9088",
                 CardType = CardType.Objective,
@@ -1198,7 +1199,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
-                ImageName = "M1581",
+                ImageType = Models.ImageType.Png,
                 Title = "Troll Purse",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9089",
                 CardType = CardType.Objective,
@@ -1211,7 +1212,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Blake_Henriksen
             });
             Cards.Add(new Card() {
-                ImageName = "M1622",
+                ImageType = Models.ImageType.Png,
                 Title = "What's In My Pocket?",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9090",
                 CardType = CardType.Treachery,
@@ -1222,7 +1223,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1615",
+                ImageType = Models.ImageType.Png,
                 Title = "Wild Wargs",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9091",
                 CardType = CardType.Enemy,
@@ -1239,7 +1240,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Piya_Wannachaiwong
             });
             Cards.Add(new Card() {
-                ImageName = "M1571",
+                ImageType = Models.ImageType.Png,
                 Title = "William",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9092",
                 CardType = CardType.Enemy,
@@ -1258,7 +1259,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Artist = Artist.Mike_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1595",
+                ImageType = Models.ImageType.Png,
                 Title = "Wind-whipped Rain",
                 Id = "51223bd0-ffd1-11df-a976-1801204c9093",
                 CardType = CardType.Treachery,

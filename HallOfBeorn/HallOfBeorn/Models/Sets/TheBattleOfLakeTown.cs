@@ -17,7 +17,7 @@ namespace HallOfBeorn.Models.Sets
 
             Cards.Add(new Card()
             {
-                ImageName = "M1516",
+                ImageType = Models.ImageType.Png,
                 Title = "Terror from the Mountain",
                 StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-1801203c9020",
@@ -34,7 +34,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1517",
+                ImageType = Models.ImageType.Png,
                 Title = "Fire and Water",
                 StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-1801203c9006",
@@ -49,7 +49,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1518",
+                ImageType = Models.ImageType.Png,
                 Title = "The Dragon's Wrath",
                 StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-1801203c9022",
@@ -64,7 +64,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1519",
+                ImageType = Models.ImageType.Png,
                 Title = "Smaug the Mighty",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9017",
                 CardType = CardType.Enemy,
@@ -84,7 +84,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1520",
+                ImageType = Models.ImageType.Png,
                 Title = "Smaug the Terrible",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9018",
                 CardType = CardType.Enemy,
@@ -103,7 +103,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Christopher_Burdett
             });
             Cards.Add(new Card() {
-                ImageName = "M1521",
+                ImageType = Models.ImageType.Png,
                 Title = "Smaug the Magnificent",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9016",
                 CardType = CardType.Enemy,
@@ -123,7 +123,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1522",
+                ImageType = Models.ImageType.Png,
                 Title = "Lake-town",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9011",
                 CardType = CardType.Objective,
@@ -137,7 +137,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1523",
+                ImageType = Models.ImageType.Png,
                 Title = "The Old Thrush",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9025",
                 CardType = CardType.Objective,
@@ -152,7 +152,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1524",
+                ImageType = Models.ImageType.Png,
                 Title = "Close to the Flame",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9002",
                 CardType = CardType.Treachery,
@@ -165,7 +165,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1525",
+                ImageType = Models.ImageType.Png,
                 Title = "Scorching Blast",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9015",
                 CardType = CardType.Treachery,
@@ -178,7 +178,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1526",
+                ImageType = Models.ImageType.Png,
                 Title = "Town-Baiting",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9026",
                 CardType = CardType.Treachery,
@@ -190,7 +190,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1527",
+                ImageType = Models.ImageType.Png,
                 Title = "Dire Magnificence",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9003",
                 CardType = CardType.Treachery,
@@ -203,7 +203,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1528",
+                ImageType = Models.ImageType.Png,
                 Title = "Catching Fire",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9001",
                 CardType = CardType.Treachery,
@@ -216,7 +216,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1529",
+                ImageType = Models.ImageType.Png,
                 Title = "Reckless in His Rage",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9014",
                 CardType = CardType.Treachery,
@@ -229,7 +229,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1530",
+                ImageType = Models.ImageType.Png,
                 Title = "West Pier",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9027",
                 CardType = CardType.Location,
@@ -245,7 +245,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1531",
+                ImageType = Models.ImageType.Png,
                 Title = "The Master's Manor",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9024",
                 CardType = CardType.Location,
@@ -262,7 +262,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Alexandre_Dainche
             });
             Cards.Add(new Card() {
-                ImageName = "M1532",
+                ImageType = Models.ImageType.Png,
                 Title = "South Pier",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9019",
                 CardType = CardType.Location,
@@ -279,7 +279,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1533",
+                ImageType = Models.ImageType.Png,
                 Title = "North Pier",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9013",
                 CardType = CardType.Location,
@@ -296,7 +296,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1534",
+                ImageType = Models.ImageType.Png,
                 Title = "Merchant's District",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9012",
                 CardType = CardType.Location,
@@ -314,7 +314,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1535",
+                ImageType = Models.ImageType.Png,
                 Title = "East Pier",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9004",
                 CardType = CardType.Location,
@@ -331,7 +331,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1536",
+                ImageType = Models.ImageType.Png,
                 Title = "Great House",
                 IsUnique = true,
                 Id = "51223bd0-ffd1-11df-a976-1801203c9010",
@@ -349,7 +349,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1537",
+                ImageType = Models.ImageType.Png,
                 Title = "Great Bridge",
                 IsUnique = true,
                 Id = "51223bd0-ffd1-11df-a976-1801203c9009",
@@ -367,7 +367,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1538",
+                ImageType = Models.ImageType.Png,
                 Title = "Fisherman's Dock",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9008",
                 CardType = CardType.Location,
@@ -385,7 +385,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1539",
+                ImageType = Models.ImageType.Png,
                 Title = "Esgaroth Wharf",
                 Id = "51223bd0-ffd1-11df-a976-1801203c9005",
                 CardType = CardType.Location,
