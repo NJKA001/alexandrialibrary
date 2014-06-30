@@ -16,7 +16,7 @@ namespace HallOfBeorn.Models.Sets
             Cycle = "The Hobbit";
 
             Cards.Add(new Card() {
-                ImageName = "M1625",
+                ImageType = Models.ImageType.Png,
                 Title = "Balin",
                 Id = "bf2cb5a8-2ec6-4366-89f6-7e3010686a85",
                 CardType = CardType.Hero,
@@ -35,7 +35,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Winona_Nelson
             });
             Cards.Add(new Card() {
-                ImageName = "M1626",
+                ImageType = Models.ImageType.Png,
                 Title = "Bard the Bowman",
                 Id = "e2cf87be-ccdc-48e9-8127-57bee67d4a0c",
                 CardType = CardType.Hero,
@@ -55,7 +55,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1630",
+                ImageType = Models.ImageType.Png,
                 Title = "Bifur",
                 Id = "c4b959f5-92a9-4f46-8656-f9da08a5cb86",
                 CardType = CardType.Ally,
@@ -74,7 +74,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Taylor_Ingvarsson
             });
             Cards.Add(new Card() {
-                ImageName = "M1624",
+                ImageType = Models.ImageType.Png,
                 Title = "Bilbo Baggins",
                 Id = "4e61b160-2104-497f-9977-4b353e54fbb7",
                 CardType = CardType.Hero,
@@ -92,7 +92,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1642",
+                ImageType = Models.ImageType.Png,
                 Title = "Bilbo's Magic Ring",
                 Id = "9dd6bf3e-e090-4ebf-a056-765c94e8a199",
                 CardType = CardType.Treasure,
@@ -107,7 +107,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1638",
+                ImageType = Models.ImageType.Png,
                 Title = "Black Arrow",
                 Id = "ae16236d-886e-4f65-9129-5ead1d373bfe",
                 CardType = CardType.Attachment,
@@ -124,7 +124,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Melissa_Findley
             });
             Cards.Add(new Card() {
-                ImageName = "M1628",
+                ImageType = Models.ImageType.Png,
                 Title = "Bombur",
                 Id = "66f66c2e-36e7-4d97-aebb-1ca413f9edeb",
                 CardType = CardType.Hero,
@@ -143,7 +143,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
-                ImageName = "M1633",
+                ImageType = Models.ImageType.Png,
                 Title = "Desperate Alliance",
                 Id = "7465c18b-440e-4a90-8ac0-c50c0de03b5d",
                 CardType = CardType.Event,
@@ -156,7 +156,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1631",
+                ImageType = Models.ImageType.Png,
                 Title = "Dwalin",
                 Id = "c66638a7-95ae-4913-bf11-2e8dcf8d6104",
                 CardType = CardType.Ally,
@@ -175,7 +175,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Melanie_Maier
             });
             Cards.Add(new Card() {
-                ImageName = "M1640",
+                ImageType = Models.ImageType.Png,
                 Title = "Expert Treasure-hunter",
                 Id = "2d550e71-f2a6-41f2-8aac-4533a965eb71",
                 CardType = CardType.Attachment,
@@ -189,7 +189,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1629",
+                ImageType = Models.ImageType.Png,
                 Title = "Glóin",
                 NormalizedTitle = "Gloin",
                 Id = "6778eb01-6b07-4dbe-87f1-e854ab548813",
@@ -209,7 +209,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Jeff_Lee_Johnson
             });
             Cards.Add(new Card() {
-                ImageName = "M1637",
+                ImageType = Models.ImageType.Png,
                 Title = "Great Yew Bow",
                 Id = "833664a0-6bab-4e93-b5f1-88e7b6456569",
                 CardType = CardType.Attachment,
@@ -223,7 +223,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
-                ImageName = "M1641",
+                ImageType = Models.ImageType.Png,
                 Title = "King Under the Mountain",
                 Id = "9152834a-5355-42ba-9592-1a3c1940d1a8",
                 CardType = CardType.Attachment,
@@ -239,7 +239,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1644",
+                ImageType = Models.ImageType.Png,
                 Title = "Mithril Shirt",
                 Id = "12d51424-0edd-4977-9df1-5f6a7a5a96e1",
                 CardType = CardType.Treasure,
@@ -255,7 +255,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Tiziano_Baracchi
             });
             Cards.Add(new Card() {
-                ImageName = "M1627",
+                ImageType = Models.ImageType.Png,
                 Title = "Óin",
                 NormalizedTitle = "Oin",
                 Id = "b21a2af5-7443-4630-9503-1b334ae51c6e",
@@ -275,7 +275,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Jeff_Lee_Johnson
             });
             Cards.Add(new Card() {
-                ImageName = "M1634",
+                ImageType = Models.ImageType.Png,
                 Title = "Ravens of the Mountain",
                 Id = "6d442a61-e9e9-4729-bac1-da3d76af6afa",
                 CardType = CardType.Event,
@@ -289,7 +289,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Adam_Lane
             });
             Cards.Add(new Card() {
-                ImageName = "M1632",
+                ImageType = Models.ImageType.Png,
                 Title = "Straight Shot",
                 Id = "c2a79823-e4f9-4449-b467-5916d7e58979",
                 CardType = CardType.Event,
@@ -302,7 +302,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
-                ImageName = "M1643",
+                ImageType = Models.ImageType.Png,
                 Title = "The Arkenstone",
                 Id = "ae774680-c6e9-49eb-96b8-fcdebe90b49d",
                 CardType = CardType.Treasure,
@@ -318,7 +318,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Mike_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1636",
+                ImageType = Models.ImageType.Png,
                 Title = "The Lucky Number",
                 Id = "65407141-e013-4d1c-8f70-4328e707d0cc",
                 CardType = CardType.Event,
@@ -330,8 +330,9 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1645",
-                Title = "Thror's Battle Axe",
+                ImageType = Models.ImageType.Png,
+                Title = "Thrór's Battle Axe",
+                NormalizedTitle = "Thror's Battle Axe",
                 Id = "857d6dc8-ba1e-4839-8e96-a8a0136a2302",
                 CardType = CardType.Treasure,
                 Sphere = Sphere.Neutral,
@@ -346,8 +347,9 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Tiziano_Baracchi
             });
             Cards.Add(new Card() {
-                ImageName = "M1647",
-                Title = "Thror's Golden Cup",
+                ImageType = Models.ImageType.Png,
+                Title = "Thrór's Golden Cup",
+                NormalizedTitle = "Thror's Golden Cup",
                 Id = "ff7b0b9d-f8ae-4464-9db3-7205c5ae4db7",
                 CardType = CardType.Treasure,
                 Sphere = Sphere.Neutral,
@@ -363,8 +365,9 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Melanie_Maier
             });
             Cards.Add(new Card() {
-                ImageName = "M1646",
-                Title = "Thror's Hunting Bow",
+                ImageType = Models.ImageType.Png,
+                Title = "Thrór's Hunting Bow",
+                NormalizedTitle = "Thror's Hunting Bow",
                 Id = "7adc49c0-640d-4934-89c5-312ab584b77c",
                 CardType = CardType.Treasure,
                 Sphere = Sphere.Neutral,
@@ -379,8 +382,9 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.David_Horne
             });
             Cards.Add(new Card() {
-                ImageName = "M1639",
-                Title = "Thror's Key",
+                ImageType = Models.ImageType.Png,
+                Title = "Thrór's Key",
+                NormalizedTitle = "Thror's Key",
                 Id = "f4490261-317e-4e9e-9440-a5c58dcddcbf",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Spirit,
@@ -395,7 +399,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Eric_Braddock
             });
             Cards.Add(new Card() {
-                ImageName = "M1635",
+                ImageType = Models.ImageType.Png,
                 Title = "To me! O my kinsfolk!",
                 Id = "16ae4f56-d8bb-41b8-a992-1da3b6ec1fdb",
                 CardType = CardType.Event,
@@ -408,7 +412,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Tiziano_Baracchi
             });
             Cards.Add(new Card() {
-                ImageName = "M1690",
+                ImageType = Models.ImageType.Png,
                 Title = "Into Mirkwood",
                 StageNumber = 1,
                 Id = "1866ce74-8552-4ac5-8b0a-1e7a6f3b4338",
@@ -424,7 +428,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1691",
+                ImageType = Models.ImageType.Png,
                 Title = "Lost in the Dark",
                 StageNumber = 2,
                 Id = "a4ffb8cd-fd95-4b47-95d1-637bd2bd78a1",
@@ -439,7 +443,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Adam_Lane
             });
             Cards.Add(new Card() {
-                ImageName = "M1692",
+                ImageType = Models.ImageType.Png,
                 Title = "Captured by Spiders",
                 StageNumber = 3,
                 Id = "d99e07f6-7a57-4b5f-a108-13bd7ce6fa4b",
@@ -458,7 +462,7 @@ Action: Spend 2 Baggins resources to ready and unconscious character you control
                 Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
-                ImageName = "M1693",
+                ImageType = Models.ImageType.Png,
                 Title = "Battle with the Spiders",
                 StageNumber = 4,
                 Id = "1ee75e10-bcc5-4243-ab28-3dc1978a50af",
@@ -479,7 +483,7 @@ If the players defeat this stage, they have won the game and discovered the trea
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1694",
+                ImageType = Models.ImageType.Png,
                 Title = "A Warm Welcome",
                 StageNumber = 1,
                 Id = "57fc374c-ca6d-4556-9181-c1b578d7a01d",
@@ -499,7 +503,7 @@ Forced: At the end of the round, advance to stage 2.
                 Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
-                ImageName = "M1695",
+                ImageType = Models.ImageType.Png,
                 Title = "The Burglar's Turn",
                 StageNumber = 2,
                 Id = "4355352b-307e-407b-98f9-3d4fb2a14a49",
@@ -515,7 +519,7 @@ Forced: After the first player makes an unsuccessful burgle attempt, Smaug the G
                 Artist = Artist.Diego_Gisbert_Llorens
             });
             Cards.Add(new Card() {
-                ImageName = "M1696",
+                ImageType = Models.ImageType.Png,
                 Title = "Inside Information",
                 StageNumber = 3,
                 Id = "a944e2e1-56e4-461d-b703-db991b673b9b",
@@ -535,7 +539,7 @@ If the players defeat this stage, they have won the game and discovered any trea
                 Artist = Artist.Sidharth_Chatursedi
             });
             Cards.Add(new Card() {
-                ImageName = "M1697",
+                ImageType = Models.ImageType.Png,
                 Title = "Thieves! Fire! Murder!",
                 NormalizedTitle = "Thieves Fire Murder",
                 StageNumber = 4,
@@ -553,7 +557,7 @@ If the players defeat this stage, they have won the game and discovered any trea
                 Artist = Artist.Chris_Rahn
             });
             Cards.Add(new Card() {
-                ImageName = "M1698",
+                ImageType = Models.ImageType.Png,
                 Title = "The Gathering of the Clouds",
                 StageNumber = 1,
                 Id = "dfd05c9f-1dc1-4af6-a22f-fe39969c6371",
@@ -570,7 +574,7 @@ If the players defeat this stage, they have won the game and discovered any trea
                 Artist = Artist.Sidharth_Chatursedi
             });
             Cards.Add(new Card() {
-                ImageName = "M1699",
+                ImageType = Models.ImageType.Png,
                 Title = "The Eastern Spur",
                 StageNumber = 2,
                 Id = "aa3355cb-57e1-4d8b-8a1b-9be22581a9f3",
@@ -587,7 +591,7 @@ Forced: If there is no progress on this stage at the end of the round, each play
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1700",
+                ImageType = Models.ImageType.Png,
                 Title = "Battle in the Dale",
                 StageNumber = 3,
                 Id = "81e81787-13b1-4bbf-a9ef-b8516deebbbc",
@@ -605,7 +609,7 @@ Forced: If there is no progress on this stage at the end of the round, the first
                 Artist = Artist.Adam_Schumpert
             });
             Cards.Add(new Card() {
-                ImageName = "M1701",
+                ImageType = Models.ImageType.Png,
                 Title = "The Defense of Ravenhill",
                 StageNumber = 4,
                 Id = "54ed3453-1df4-458d-bc7d-e1f7c10de237",
@@ -623,7 +627,7 @@ Forced: If there is no progress on this stage at the end of the round, each play
                 Artist = Artist.Adam_Lane
             });
             Cards.Add(new Card() {
-                ImageName = "M1702",
+                ImageType = Models.ImageType.Png,
                 Title = "The Clouds Burst",
                 StageNumber = 5,
                 Id = "82514713-7cc4-4b76-a5f2-42a69ccff76b",
@@ -642,7 +646,7 @@ If Bolg is destroyed, the players win the game.",
                 Artist = Artist.Adam_Schumpert
             });
             Cards.Add(new Card() {
-                ImageName = "M1662",
+                ImageType = Models.ImageType.Png,
                 Title = "A Bare Patch",
                 Id = "9a37677f-6bb6-4ff1-bf0e-8d0798e268c9",
                 CardType = CardType.Objective,
@@ -654,7 +658,7 @@ If Bolg is destroyed, the players win the game.",
                 Artist = Artist.Mike_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1673",
+                ImageType = Models.ImageType.Png,
                 Title = "Belching Fire",
                 Id = "6f999889-bd70-42c9-ad2a-b159a5e2f73c",
                 CardType = CardType.Treachery,
@@ -665,7 +669,7 @@ If Bolg is destroyed, the players win the game.",
                 Artist = Artist.Christina_Davis
             });
             Cards.Add(new Card() {
-                ImageName = "M1677",
+                ImageType = Models.ImageType.Png,
                 Title = "Bodyguard of Bolg",
                 Id = "66812347-fac2-4a76-aa69-ac0861071c0d",
                 CardType = CardType.Enemy,
@@ -686,7 +690,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Aurelien_Hubert
             });
             Cards.Add(new Card() {
-                ImageName = "M1676",
+                ImageType = Models.ImageType.Png,
                 Title = "Bolg",
                 Id = "624d5999-1a76-4783-b4e4-d9b596242d18",
                 CardType = CardType.Enemy,
@@ -705,7 +709,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Jim_Pavelec
             });
             Cards.Add(new Card() {
-                ImageName = "M1656",
+                ImageType = Models.ImageType.Png,
                 Title = "Caught in Webs",
                 Id = "7a165c5c-caba-4af1-880e-845a124344d7",
                 CardType = CardType.Treachery,
@@ -717,7 +721,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
-                ImageName = "M1652",
+                ImageType = Models.ImageType.Png,
                 Title = "Crazy Cob",
                 Id = "b06030a9-7ab9-48a6-b7da-5ffd8ce3a1a6",
                 CardType = CardType.Enemy,
@@ -736,7 +740,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Jason_Ward
             });
             Cards.Add(new Card() {
-                ImageName = "M1665",
+                ImageType = Models.ImageType.Png,
                 Title = "Croaking Crows",
                 Id = "babeedb8-f7cd-4e8a-a5c4-fbfdd57238fb",
                 CardType = CardType.Enemy,
@@ -754,7 +758,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Aurelien_Hubert
             });
             Cards.Add(new Card() {
-                ImageName = "M1659",
+                ImageType = Models.ImageType.Png,
                 Title = "Dark Bats",
                 Id = "323842f5-457f-4dd4-95b8-eb19c24664cb",
                 CardType = CardType.Enemy,
@@ -772,7 +776,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Aurelien_Hubert
             });
             Cards.Add(new Card() {
-                ImageName = "M1669",
+                ImageType = Models.ImageType.Png,
                 Title = "Desolation of Smaug",
                 Id = "435e12a1-d479-42f6-a40d-8067615ec9e1",
                 CardType = CardType.Location,
@@ -786,7 +790,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card() {
-                ImageName = "M1674",
+                ImageType = Models.ImageType.Png,
                 Title = "Dragon-Spell",
                 Id = "db6355c7-3edd-4573-a63c-1b6fc08bb8fa",
                 CardType = CardType.Treachery,
@@ -798,7 +802,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
-                ImageName = "M1654",
+                ImageType = Models.ImageType.Png,
                 Title = "Fat Spider",
                 Id = "5b038648-7a06-4014-b207-a5d68c99e76d",
                 CardType = CardType.Enemy,
@@ -817,7 +821,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Piya_Wannachaiwong
             });
             Cards.Add(new Card() {
-                ImageName = "M1660",
+                ImageType = Models.ImageType.Png,
                 Title = "Fighting Among Friends",
                 Id = "ffe307bf-dd8e-4df3-9355-55564137d311",
                 CardType = CardType.Treachery,
@@ -829,7 +833,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1650",
+                ImageType = Models.ImageType.Png,
                 Title = "Forest Stream",
                 Id = "818e2f2f-4070-4056-85bd-5e729ccbad30",
                 CardType = CardType.Location,
@@ -844,7 +848,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
-                ImageName = "M1649",
+                ImageType = Models.ImageType.Png,
                 Title = "Giant Web",
                 Id = "eb353293-1a80-445c-b4a9-422c83dadfd5",
                 CardType = CardType.Location,
@@ -858,7 +862,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
-                ImageName = "M1688",
+                ImageType = Models.ImageType.Png,
                 Title = "Goblins are Upon You!",
                 Id = "ac4724db-a3cc-4984-bef5-f51b0f4421f8",
                 CardType = CardType.Treachery,
@@ -870,7 +874,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Diego_Gisbert_Llorens
             });
             Cards.Add(new Card() {
-                ImageName = "M1667",
+                ImageType = Models.ImageType.Png,
                 Title = "Great Hall",
                 Id = "1c65b78b-6b68-458f-9510-a00a9576a042",
                 CardType = CardType.Location,
@@ -884,7 +888,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Emilio_Rodriguez
             });
             Cards.Add(new Card() {
-                ImageName = "M1679",
+                ImageType = Models.ImageType.Png,
                 Title = "Gundabad Climber",
                 Id = "771c6c83-a602-4c35-92f6-5ac349c4ec8c",
                 CardType = CardType.Enemy,
@@ -902,7 +906,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1678",
+                ImageType = Models.ImageType.Png,
                 Title = "Gundabad Wolf Rider",
                 Id = "058a5508-6b20-4305-94ea-53d5d2f33595",
                 CardType = CardType.Enemy,
@@ -920,7 +924,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Andrew_Olson
             });
             Cards.Add(new Card() {
-                ImageName = "M1687",
+                ImageType = Models.ImageType.Png,
                 Title = "Hatred Rekindled",
                 Id = "87d2f0c4-8874-4910-9bb4-4f2d06c64168",
                 CardType = CardType.Treachery,
@@ -932,7 +936,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Adam_Lane
             });
             Cards.Add(new Card() {
-                ImageName = "M1689",
+                ImageType = Models.ImageType.Png,
                 Title = "Heedless of Order",
                 Id = "19e2470a-94c6-4f14-b824-7d2f952b60fd",
                 CardType = CardType.Treachery,
@@ -945,7 +949,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Sidharth_Chatursedi
             });
             Cards.Add(new Card() {
-                ImageName = "M1658",
+                ImageType = Models.ImageType.Png,
                 Title = "Hidden Path",
                 Id = "3f78ed57-49cc-4886-b84f-3fe886203794",
                 CardType = CardType.Location,
@@ -960,7 +964,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
-                ImageName = "M1672",
+                ImageType = Models.ImageType.Png,
                 Title = "Known to an Ounce",
                 Id = "da46fcb3-2810-4c21-9070-43969532ef9b",
                 CardType = CardType.Treachery,
@@ -971,7 +975,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Alex_Stone
             });
             Cards.Add(new Card() {
-                ImageName = "M1653",
+                ImageType = Models.ImageType.Png,
                 Title = "Lazy Lob",
                 Id = "8815a340-fc16-41c5-ac2c-d647876c2bbd",
                 CardType = CardType.Enemy,
@@ -990,7 +994,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Andrew_Olson
             });
             Cards.Add(new Card() {
-                ImageName = "M1675",
+                ImageType = Models.ImageType.Png,
                 Title = "Misty Mountain Eagle",
                 Id = "6e193811-584d-4888-a1b8-5296522b5cd1",
                 CardType = CardType.Objective_Ally,
@@ -1007,7 +1011,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Mike_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1683",
+                ImageType = Models.ImageType.Png,
                 Title = "Northern Slopes",
                 Id = "29005ca1-107a-4473-8769-ce7d944e9844",
                 CardType = CardType.Location,
@@ -1021,7 +1025,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card() {
-                ImageName = "M1651",
+                ImageType = Models.ImageType.Png,
                 Title = "Old Tomnoddy",
                 Id = "b0d31a1c-2155-4a97-a5ff-912e32a4809e",
                 CardType = CardType.Enemy,
@@ -1040,7 +1044,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Jim_Pavelec
             });
             Cards.Add(new Card() {
-                ImageName = "M1657",
+                ImageType = Models.ImageType.Png,
                 Title = "Poisoned by Spiders",
                 Id = "31ada226-448d-48f8-9f9a-c1f5046ad041",
                 CardType = CardType.Treachery,
@@ -1052,7 +1056,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Adam_Lane
             });
             Cards.Add(new Card() {
-                ImageName = "M1671",
+                ImageType = Models.ImageType.Png,
                 Title = "Pretending to Sleep",
                 Id = "b7b62c58-7d5d-483d-807e-f4d7e2869579",
                 CardType = CardType.Treachery,
@@ -1064,7 +1068,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Mike_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1685",
+                ImageType = Models.ImageType.Png,
                 Title = "Ravenhill",
                 Id = "f388bf8b-461c-4478-8155-74775bf27714",
                 CardType = CardType.Location,
@@ -1081,7 +1085,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Emilio_Rodriguez
             });
             Cards.Add(new Card() {
-                ImageName = "M1682",
+                ImageType = Models.ImageType.Png,
                 Title = "Ravenous Warg",
                 Id = "f29b2736-9499-4e1d-9e53-96be59f78741",
                 CardType = CardType.Enemy,
@@ -1099,7 +1103,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Jim_Pavelec
             });
             Cards.Add(new Card() {
-                ImageName = "M1684",
+                ImageType = Models.ImageType.Png,
                 Title = "Ruins of Dale",
                 Id = "ee451e81-d7ee-40a6-9079-7f6538a26a26",
                 CardType = CardType.Location,
@@ -1116,7 +1120,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Titus_Lunter
             });
             Cards.Add(new Card() {
-                ImageName = "M1668",
+                ImageType = Models.ImageType.Png,
                 Title = "Secret Entrance",
                 Id = "de8d68fc-15c4-4689-933e-1b2ca638cd78",
                 CardType = CardType.Location,
@@ -1130,7 +1134,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1663",
+                ImageType = Models.ImageType.Png,
                 Title = "Smaug the Golden",
                 Id = "81b31016-bcc3-4445-8f4d-64187e99aff3",
                 CardType = CardType.Enemy,
@@ -1149,7 +1153,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Christopher_Burdett
             });
             Cards.Add(new Card() {
-                ImageName = "M1664",
+                ImageType = Models.ImageType.Png,
                 Title = "Smaug the Magnificent",
                 Id = "65ad784f-d82e-4659-8d1c-53d2e4d19336",
                 CardType = CardType.Enemy,
@@ -1168,7 +1172,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Christopher_Burdett
             });
             Cards.Add(new Card() {
-                ImageName = "M1686",
+                ImageType = Models.ImageType.Png,
                 Title = "The Front Gate",
                 Id = "19f36ec5-7ad4-4dab-80a7-4a7a6c716941",
                 CardType = CardType.Location,
@@ -1185,8 +1189,9 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Emilio_Rodriguez
             });
             Cards.Add(new Card() {
-                ImageName = "M1666",
+                ImageType = Models.ImageType.Png,
                 Title = "The Lonely Mountain",
+                SlugIncludesType = true,
                 Id = "0554f2f9-c578-4644-9c28-b617e846b787",
                 CardType = CardType.Location,
                 IsUnique = true,
@@ -1201,7 +1206,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Joel_Hustak
             });
             Cards.Add(new Card() {
-                ImageName = "M1648",
+                ImageType = Models.ImageType.Png,
                 Title = "The Spider's Glade",
                 Id = "4d423c39-09c1-4c0b-b46f-6983fae4c07b",
                 CardType = CardType.Location,
@@ -1217,7 +1222,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Joel_Hustak
             });
             Cards.Add(new Card() {
-                ImageName = "M1680",
+                ImageType = Models.ImageType.Png,
                 Title = "Vanguard of Bolg",
                 Id = "56e98bd5-c952-436e-b552-832031d4bb20",
                 CardType = CardType.Enemy,
@@ -1235,7 +1240,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Diego_Gisbert_Llorens
             });
             Cards.Add(new Card() {
-                ImageName = "M1661",
+                ImageType = Models.ImageType.Png,
                 Title = "Weighed Down",
                 Id = "10c41b09-adf9-4a78-a67a-a9a1e04d7e8d",
                 CardType = CardType.Treachery,
@@ -1247,7 +1252,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Anna_Steinbauer
             });
             Cards.Add(new Card() {
-                ImageName = "M1670",
+                ImageType = Models.ImageType.Png,
                 Title = "Western Slopes",
                 Id = "1e54fa6e-c2a1-4456-ac48-8912ecc4722a",
                 CardType = CardType.Location,
@@ -1261,7 +1266,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Sara_K_Diesel
             });
             Cards.Add(new Card() {
-                ImageName = "M1655",
+                ImageType = Models.ImageType.Png,
                 Title = "Wicked Spider",
                 Id = "2c20ea14-e7bc-4a38-a809-8834d659adf5",
                 CardType = CardType.Enemy,
@@ -1280,7 +1285,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 Artist = Artist.Aurelien_Hubert
             });
             Cards.Add(new Card() {
-                ImageName = "M1681",
+                ImageType = Models.ImageType.Png,
                 Title = "Gundabad Archer",
                 Id = "fca6840a-ae90-42c7-b0cb-79ef8c7de099",
                 CardType = CardType.Enemy,
