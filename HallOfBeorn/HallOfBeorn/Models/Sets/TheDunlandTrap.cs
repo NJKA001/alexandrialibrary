@@ -306,7 +306,7 @@ Forced: After an enemy engages a player, remove 1 time counter from the current 
                 IsUnique = true,
                 ImageType = ImageType.Jpg,
                 Id = "2D464AC7-6602-40FB-B8C2-F2712009E000",
-                CardType = CardType.Event,
+                CardType = CardType.Location,
                 Threat = 1,
                 QuestPoints = 4,
                 Quantity = 1,

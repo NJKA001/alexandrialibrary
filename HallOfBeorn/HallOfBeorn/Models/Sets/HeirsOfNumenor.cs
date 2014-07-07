@@ -16,7 +16,7 @@ namespace HallOfBeorn.Models.Sets
             SetType = Models.SetType.Deluxe_Expansion;
 
             Cards.Add(new Card() {
-                ImageName = "M1721",
+                ImageType = Models.ImageType.Png,
                 Title = "Alcaron's Scroll",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9001",
                 CardType = CardType.Objective,
@@ -29,7 +29,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Jason_Ward
             });
             Cards.Add(new Card() {
-                ImageName = "M1714",
+                ImageType = Models.ImageType.Png,
                 Title = "A Watchful Peace",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9002",
                 CardType = CardType.Event,
@@ -41,7 +41,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Titus_Lunter
             });
             Cards.Add(new Card() {
-                ImageName = "M1733",
+                ImageType = Models.ImageType.Png,
                 Title = "Battering Ram",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9003",
                 CardType = CardType.Enemy,
@@ -60,7 +60,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Lin_Bo
             });
             Cards.Add(new Card() {
-                ImageName = "M1710",
+                ImageType = Models.ImageType.Png,
                 Title = "Behind Strong Walls",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9004",
                 CardType = CardType.Event,
@@ -73,7 +73,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Matt_Smith
             });
             Cards.Add(new Card() {
-                ImageName = "M1703",
+                ImageType = Models.ImageType.Png,
                 Title = "Beregond",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9005",
                 CardType = CardType.Hero,
@@ -93,7 +93,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1731",
+                ImageType = Models.ImageType.Png,
                 Title = "Blocking Wargs",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9006",
                 CardType = CardType.Treachery,
@@ -107,7 +107,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Marcia_George_Bogdan
             });
             Cards.Add(new Card() {
-                ImageName = "M1715",
+                ImageType = Models.ImageType.Png,
                 Title = "Blood of Númenor",
                 NormalizedTitle = "Blood of Numenor",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9007",
@@ -124,7 +124,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1704",
+                ImageType = Models.ImageType.Png,
                 Title = "Boromir",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9008",
                 CardType = CardType.Hero,
@@ -143,7 +143,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1727",
+                ImageType = Models.ImageType.Png,
                 Title = "Celador",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9009",
                 CardType = CardType.Objective,
@@ -160,7 +160,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1706",
+                ImageType = Models.ImageType.Png,
                 Title = "Citadel Custodian",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9010",
                 CardType = CardType.Ally,
@@ -177,7 +177,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Lorraine_Schleter
             });
             Cards.Add(new Card() {
-                ImageName = "M1740",
+                ImageType = Models.ImageType.Png,
                 Title = "City Street",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9011",
                 CardType = CardType.Location,
@@ -193,7 +193,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Stu_Barnes
             });
             Cards.Add(new Card() {
-                ImageName = "M1726",
+                ImageType = Models.ImageType.Png,
                 Title = "Collateral Damage",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9012",
                 CardType = CardType.Treachery,
@@ -205,7 +205,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1712",
+                ImageType = Models.ImageType.Png,
                 Title = "Damrod",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9013",
                 CardType = CardType.Ally,
@@ -223,7 +223,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1709",
+                ImageType = Models.ImageType.Png,
                 Title = "Defender of Rammas",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9014",
                 CardType = CardType.Ally,
@@ -240,7 +240,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Marcia_George_Bogdan
             });
             Cards.Add(new Card() {
-                ImageName = "M1720",
+                ImageType = Models.ImageType.Png,
                 Title = "Envoy of Pelargir",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9015",
                 CardType = CardType.Ally,
@@ -257,7 +257,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1705",
+                ImageType = Models.ImageType.Png,
                 Title = "Errand-rider",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9016",
                 CardType = CardType.Ally,
@@ -275,7 +275,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Anna_Steinbauer
             });
             Cards.Add(new Card() {
-                ImageName = "M1752",
+                ImageType = Models.ImageType.Png,
                 Title = "Forest Bat",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9017",
                 CardType = CardType.Enemy,
@@ -293,7 +293,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Aurelien_Hubert
             });
             Cards.Add(new Card() {
-                ImageName = "M1755",
+                ImageType = Models.ImageType.Png,
                 Title = "Haradrim Elite",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9018",
                 CardType = CardType.Enemy,
@@ -311,7 +311,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Adam_Lane
             });
             Cards.Add(new Card() {
-                ImageName = "M1725",
+                ImageType = Models.ImageType.Png,
                 Title = "Harbor Storehouse",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9019",
                 CardType = CardType.Location,
@@ -326,7 +326,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Titus_Lunter
             });
             Cards.Add(new Card() {
-                ImageName = "M1722",
+                ImageType = Models.ImageType.Png,
                 Title = "Harbor Thug",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9020",
                 CardType = CardType.Enemy,
@@ -344,7 +344,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Ellyson_Ferrari_Lifante
             });
             Cards.Add(new Card() {
-                ImageName = "M1767",
+                ImageType = Models.ImageType.Png,
                 Title = "The Leaping Fish",
                 SlugIncludesType = true,
                 StageNumber = 1,
@@ -363,7 +363,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1768",
+                ImageType = Models.ImageType.Png,
                 Title = "Fighting in the Streets",
                 StageNumber = 2,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9023",
@@ -378,7 +378,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Ben_Zweifel
             });
             Cards.Add(new Card() {
-                ImageName = "M1769",
+                ImageType = Models.ImageType.Png,
                 Title = "Escape to the Quays",
                 StageNumber = 3,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9025",
@@ -398,7 +398,7 @@ The players cannot defeat this stage unless Alcaron's ~Scroll is attached to a h
                 Artist = Artist.Jeff_Lee_Johnson
             });
             Cards.Add(new Card() {
-                ImageName = "M1770",
+                ImageType = Models.ImageType.Png,
                 Title = "Ambush in Ithilien",
                 StageNumber = 1,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9027",
@@ -416,7 +416,7 @@ The players cannot defeat this stage unless Alcaron's ~Scroll is attached to a h
                 Artist = Artist.Jeff_Lee_Johnson
             });
             Cards.Add(new Card() {
-                ImageName = "M1771",
+                ImageType = Models.ImageType.Png,
                 Title = "Southron Counter-attack",
                 StageNumber = 2,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9029",
@@ -434,7 +434,7 @@ After this stage is completed advance to stage 4A (bypassing stage 3).",
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1772",
+                ImageType = Models.ImageType.Png,
                 Title = "The Hidden Way",
                 StageNumber = 3,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9031",
@@ -450,7 +450,7 @@ Enemies do not make engagement checks and cannot be optionally engaged.",
                 Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
-                ImageName = "M1773",
+                ImageType = Models.ImageType.Png,
                 Title = "Approaching Cair Andros",
                 StageNumber = 4,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9033",
@@ -469,7 +469,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Emrah_Elmasli
             });
             Cards.Add(new Card() {
-                ImageName = "M1774",
+                ImageType = Models.ImageType.Png,
                 Title = "The Defense",
                 StageNumber = 1,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9035",
@@ -487,7 +487,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Lin_Bo
             });
             Cards.Add(new Card() {
-                ImageName = "M1775",
+                ImageType = Models.ImageType.Png,
                 Title = "Reinforcing the Banks",
                 StageNumber = 2,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9037",
@@ -501,7 +501,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Timo_Karhula
             });
             Cards.Add(new Card() {
-                ImageName = "M1776",
+                ImageType = Models.ImageType.Png,
                 Title = "Breakthrough at the Approach",
                 StageNumber = 3,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9039",
@@ -516,7 +516,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Lin_Bo
             });
             Cards.Add(new Card() {
-                ImageName = "M1777",
+                ImageType = Models.ImageType.Png,
                 Title = "Breakthrough at the Citadel",
                 StageNumber = 4,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9041",
@@ -531,7 +531,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1778",
+                ImageType = Models.ImageType.Png,
                 Title = "The Last Battle",
                 StageNumber = 5,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9043",
@@ -550,7 +550,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1716",
+                ImageType = Models.ImageType.Png,
                 Title = "Hunter of Lamedon",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9045",
                 CardType = CardType.Ally,
@@ -568,7 +568,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Lorraine_Schleter
             });
             Cards.Add(new Card() {
-                ImageName = "M1728",
+                ImageType = Models.ImageType.Png,
                 Title = "Ithilien Guardian",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9046",
                 CardType = CardType.Objective,
@@ -585,7 +585,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1730",
+                ImageType = Models.ImageType.Png,
                 Title = "Ithilien Road",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9047",
                 CardType = CardType.Location,
@@ -600,7 +600,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
-                ImageName = "M1717",
+                ImageType = Models.ImageType.Png,
                 Title = "Ithilien Tracker",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9048",
                 CardType = CardType.Ally,
@@ -618,7 +618,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1758",
+                ImageType = Models.ImageType.Png,
                 Title = "Lieutenant of Mordor",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9049",
                 CardType = CardType.Enemy,
@@ -636,7 +636,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Jim_Pavelec
             });
             Cards.Add(new Card() {
-                ImageName = "M1713",
+                ImageType = Models.ImageType.Png,
                 Title = "Light the Beacons",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9050",
                 CardType = CardType.Event,
@@ -649,7 +649,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Titus_Lunter
             });
             Cards.Add(new Card() {
-                ImageName = "M1743",
+                ImageType = Models.ImageType.Png,
                 Title = "Local Trouble",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9051",
                 CardType = CardType.Treachery,
@@ -661,7 +661,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Ryan_Barger
             });
             Cards.Add(new Card() {
-                ImageName = "M1745",
+                ImageType = Models.ImageType.Png,
                 Title = "Lossarnach Bandit",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9052",
                 CardType = CardType.Enemy,
@@ -678,7 +678,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Dan_Masso
             });
             Cards.Add(new Card() {
-                ImageName = "M1750",
+                ImageType = Models.ImageType.Png,
                 Title = "Lost Companion",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9053",
                 CardType = CardType.Treachery,
@@ -690,7 +690,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1742",
+                ImageType = Models.ImageType.Png,
                 Title = "Lost in the City",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9054",
                 CardType = CardType.Treachery,
@@ -702,7 +702,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Dleoblack
             });
             Cards.Add(new Card() {
-                ImageName = "M1747",
+                ImageType = Models.ImageType.Png,
                 Title = "Lurking in Shadows",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9055",
                 CardType = CardType.Treachery,
@@ -714,7 +714,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Sabin_Boykinov
             });
             Cards.Add(new Card() {
-                ImageName = "M1741",
+                ImageType = Models.ImageType.Png,
                 Title = "Market Square",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9056",
                 CardType = CardType.Location,
@@ -730,7 +730,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
-                ImageName = "M1718",
+                ImageType = Models.ImageType.Png,
                 Title = "Master of Lore",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9057",
                 CardType = CardType.Ally,
@@ -748,7 +748,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
-                ImageName = "M1751",
+                ImageType = Models.ImageType.Png,
                 Title = "Morgul Spider",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9058",
                 CardType = CardType.Enemy,
@@ -766,7 +766,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Dean_Spencer
             });
             Cards.Add(new Card() {
-                ImageName = "M1756",
+                ImageType = Models.ImageType.Png,
                 Title = "Mûmak",
                 NormalizedTitle = "Mumak",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9059",
@@ -785,7 +785,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Piya_Wannachaiwong
             });
             Cards.Add(new Card() {
-                ImageName = "M1707",
+                ImageType = Models.ImageType.Png,
                 Title = "Mutual Accord",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9060",
                 CardType = CardType.Event,
@@ -798,7 +798,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1759",
+                ImageType = Models.ImageType.Png,
                 Title = "Orc Arbalesters",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9061",
                 CardType = CardType.Enemy,
@@ -817,7 +817,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Timo_Karhula
             });
             Cards.Add(new Card() {
-                ImageName = "M1765",
+                ImageType = Models.ImageType.Png,
                 Title = "Orc Arsonist",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9062",
                 CardType = CardType.Enemy,
@@ -835,7 +835,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.David_Kegg
             });
             Cards.Add(new Card() {
-                ImageName = "M1738",
+                ImageType = Models.ImageType.Png,
                 Title = "Orc Assault",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9063",
                 CardType = CardType.Treachery,
@@ -847,7 +847,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1764",
+                ImageType = Models.ImageType.Png,
                 Title = "Orc Rabble",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9064",
                 CardType = CardType.Enemy,
@@ -865,7 +865,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.David_A_Nash
             });
             Cards.Add(new Card() {
-                ImageName = "M1732",
+                ImageType = Models.ImageType.Png,
                 Title = "Orc Scramblers",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9065",
                 CardType = CardType.Enemy,
@@ -884,7 +884,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Anton_Kokarev
             });
             Cards.Add(new Card() {
-                ImageName = "M1760",
+                ImageType = Models.ImageType.Png,
                 Title = "Orc Vanguard",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9066",
                 CardType = CardType.Enemy,
@@ -902,7 +902,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Lin_Bo
             });
             Cards.Add(new Card() {
-                ImageName = "M1761",
+                ImageType = Models.ImageType.Png,
                 Title = "Orc War Camp",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9067",
                 CardType = CardType.Location,
@@ -917,7 +917,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Emilio_Rodriguez
             });
             Cards.Add(new Card() {
-                ImageName = "M1748",
+                ImageType = Models.ImageType.Png,
                 Title = "Overgrown Trail",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9068",
                 CardType = CardType.Location,
@@ -932,7 +932,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
-                ImageName = "M1724",
+                ImageType = Models.ImageType.Png,
                 Title = "Pelargir Docks",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9069",
                 CardType = CardType.Location,
@@ -947,7 +947,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Emilio_Rodriguez
             });
             Cards.Add(new Card() {
-                ImageName = "M1739",
+                ImageType = Models.ImageType.Png,
                 Title = "Pickpocket",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9070",
                 CardType = CardType.Enemy,
@@ -965,7 +965,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Asahi
             });
             Cards.Add(new Card() {
-                ImageName = "M1719",
+                ImageType = Models.ImageType.Png,
                 Title = "Ranger Spikes",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9071",
                 CardType = CardType.Attachment,
@@ -979,7 +979,7 @@ If the players defeat this stage, they have won the game.",
                 SecondArtist = Artist.Suzanne_Helmigh
             });
             Cards.Add(new Card() {
-                ImageName = "M1766",
+                ImageType = Models.ImageType.Png,
                 Title = "Scourge of Mordor",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9072",
                 CardType = CardType.Treachery,
@@ -991,7 +991,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Caravan_Studio
             });
             Cards.Add(new Card() {
-                ImageName = "M1749",
+                ImageType = Models.ImageType.Png,
                 Title = "Secluded Glade",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9073",
                 CardType = CardType.Location,
@@ -1007,7 +1007,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Trudi_Castle
             });
             Cards.Add(new Card() {
-                ImageName = "M1734",
+                ImageType = Models.ImageType.Png,
                 Title = "Siege Raft",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9074",
                 CardType = CardType.Enemy,
@@ -1025,7 +1025,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Marco_Caradonna
             });
             Cards.Add(new Card() {
-                ImageName = "M1729",
+                ImageType = Models.ImageType.Png,
                 Title = "Southron Company",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9075",
                 CardType = CardType.Enemy,
@@ -1043,7 +1043,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Ignacio_Bazan_Lazcano
             });
             Cards.Add(new Card() {
-                ImageName = "M1754",
+                ImageType = Models.ImageType.Png,
                 Title = "Southron Mercenaries",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9076",
                 CardType = CardType.Enemy,
@@ -1062,7 +1062,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Emile_Denis
             });
             Cards.Add(new Card() {
-                ImageName = "M1757",
+                ImageType = Models.ImageType.Png,
                 Title = "Southron Support",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9077",
                 CardType = CardType.Treachery,
@@ -1075,7 +1075,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.C_B_Sorge
             });
             Cards.Add(new Card() {
-                ImageName = "M1711",
+                ImageType = Models.ImageType.Png,
                 Title = "Spear of the Citadel",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9078",
                 CardType = CardType.Attachment,
@@ -1089,7 +1089,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Dan_Masso
             });
             Cards.Add(new Card() {
-                ImageName = "M1736",
+                ImageType = Models.ImageType.Png,
                 Title = "The Approach",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9079",
                 CardType = CardType.Location,
@@ -1104,7 +1104,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Titus_Lunter
             });
             Cards.Add(new Card() {
-                ImageName = "M1737",
+                ImageType = Models.ImageType.Png,
                 Title = "The Banks",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9080",
                 CardType = CardType.Location,
@@ -1119,7 +1119,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.David_Lecossu
             });
             Cards.Add(new Card() {
-                ImageName = "M1735",
+                ImageType = Models.ImageType.Png,
                 Title = "The Citadel",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9081",
                 CardType = CardType.Location,
@@ -1134,7 +1134,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card() {
-                ImageName = "M1723",
+                ImageType = Models.ImageType.Png,
                 Title = "The Leaping Fish",
                 SlugIncludesType = true,
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9082",
@@ -1151,7 +1151,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1762",
+                ImageType = Models.ImageType.Png,
                 Title = "The Master's Malice",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9083",
                 CardType = CardType.Treachery,
@@ -1163,7 +1163,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Marcia_George_Bogdan
             });
             Cards.Add(new Card() {
-                ImageName = "M1763",
+                ImageType = Models.ImageType.Png,
                 Title = "The Power of Mordor",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9084",
                 CardType = CardType.Treachery,
@@ -1175,7 +1175,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Ryan_Barger
             });
             Cards.Add(new Card() {
-                ImageName = "M1746",
+                ImageType = Models.ImageType.Png,
                 Title = "Umbar Assassin",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9085",
                 CardType = CardType.Enemy,
@@ -1193,7 +1193,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Greg_Opalinski
             });
             Cards.Add(new Card() {
-                ImageName = "M1753",
+                ImageType = Models.ImageType.Png,
                 Title = "Watcher in the Wood",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9086",
                 CardType = CardType.Treachery,
@@ -1205,7 +1205,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Igor_Kieryluk
             });
             Cards.Add(new Card() {
-                ImageName = "M1708",
+                ImageType = Models.ImageType.Png,
                 Title = "Wealth of Gondor",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9087",
                 CardType = CardType.Event,
@@ -1218,7 +1218,7 @@ If the players defeat this stage, they have won the game.",
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1744",
+                ImageType = Models.ImageType.Png,
                 Title = "Zealous Traitor",
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9088",
                 CardType = CardType.Enemy,
