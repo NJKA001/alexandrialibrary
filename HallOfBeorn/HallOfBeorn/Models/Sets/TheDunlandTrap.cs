@@ -283,7 +283,7 @@ Forced: After an enemy engages a player, remove 1 time counter from the current 
             });
             Cards.Add(new Card()
             {
-                Title = "Munuv Dûv Ravine",
+                Title = "Munuv Dûv Ravine",
                 NormalizedTitle = "Munuv Duv Ravine",
                 IsUnique = true,
                 ImageType = ImageType.Jpg,
