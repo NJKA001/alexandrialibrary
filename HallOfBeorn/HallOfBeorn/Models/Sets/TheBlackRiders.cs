@@ -17,7 +17,7 @@ namespace HallOfBeorn.Models.Sets
 
             Cards.Add(new Card()
             {
-                ImageName = "M1939",
+                ImageType = Models.ImageType.Png,
                 Title = "Frodo Baggins",
                 Id = "3217a119-6b86-47dd-b451-c5e45be3f874",
                 IsUnique = true,
@@ -36,7 +36,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Jake_Murray
             });
             Cards.Add(new Card() {
-                ImageName = "M1940",
+                ImageType = Models.ImageType.Png,
                 Title = "Sam Gamgee",
                 Id = "4124136c-8c86-4f86-830c-94c8c76df161",
                 IsUnique = true,
@@ -55,7 +55,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Alexandre_Dainche
             });
             Cards.Add(new Card() {
-                ImageName = "M1941",
+                ImageType = Models.ImageType.Png,
                 Title = "Merry",
                 Id = "052b1f85-8b9c-4bb0-a735-bdbd5ac1b2c4",
                 IsUnique = true,
@@ -74,7 +74,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Alexandre_Dainche
             });
             Cards.Add(new Card() {
-                ImageName = "M1942",
+                ImageType = Models.ImageType.Png,
                 Title = "Pippin",
                 Id = "ce96b767-c569-48b8-a998-d8009b0143c7",
                 IsUnique = true,
@@ -93,7 +93,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Alexandre_Dainche
             });
             Cards.Add(new Card() {
-                ImageName = "M1943",
+                ImageType = Models.ImageType.Png,
                 Title = "Fatty Bolger",
                 Id = "5d75d4dd-7300-43d7-87f2-963271c9c904",
                 IsUnique = true,
@@ -113,7 +113,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1944",
+                ImageType = Models.ImageType.Png,
                 Title = "Bill the Pony",
                 Id = "1f7fc118-94a7-48a0-bd0c-9c15a36ddc23",
                 IsUnique = true,
@@ -134,7 +134,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1945",
+                ImageType = Models.ImageType.Png,
                 Title = "Barliman Butterbur",
                 Id = "77f58774-86e7-4449-b31e-3833700b3e60",
                 IsUnique = true,
@@ -154,7 +154,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1946",
+                ImageType = Models.ImageType.Png,
                 Title = "Farmer Maggot",
                 Id = "9d8ccd1a-48d3-4123-bcca-3c0ab88347ec",
                 IsUnique = true,
@@ -174,7 +174,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1947",
+                ImageType = Models.ImageType.Png,
                 Title = "Halfling Determination",
                 Id = "8e7e5c8d-0ea4-46df-ae38-d8d2fee7ca8b",
                 CardType = CardType.Event,
@@ -188,7 +188,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1948",
+                ImageType = Models.ImageType.Png,
                 Title = "Smoke Rings",
                 Id = "9418c634-54c6-47de-9aae-798038a4a35b",
                 CardType = CardType.Event,
@@ -202,7 +202,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1949",
+                ImageType = Models.ImageType.Png,
                 Title = "Take No Notice",
                 Id = "768ae041-2d15-44a3-a928-62838536a160",
                 CardType = CardType.Event,
@@ -216,7 +216,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1950",
+                ImageType = Models.ImageType.Png,
                 Title = "Frodo's Intuition",
                 Id = "96350b97-5c68-4033-bb2f-4305696a7ae7",
                 CardType = CardType.Event,
@@ -230,7 +230,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1951",
+                ImageType = Models.ImageType.Png,
                 Title = "Hobbit Cloak",
                 Id = "8e49ea86-375a-472e-b497-16a1164ae27f",
                 CardType = CardType.Attachment,
@@ -246,7 +246,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1952",
+                ImageType = Models.ImageType.Png,
                 Title = "Dagger of Westernesse",
                 Id = "418e6de7-af19-4ea7-bfbe-2a02838c6de4",
                 CardType = CardType.Attachment,
@@ -262,7 +262,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1953",
+                ImageType = Models.ImageType.Png,
                 Title = "Hobbit Pipe",
                 Id = "9c455b1a-a2d4-44f7-a9d3-9a3134c21a2a",
                 CardType = CardType.Attachment,
@@ -278,7 +278,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1954",
+                ImageType = Models.ImageType.Png,
                 Title = "Elf-stone",
                 Id = "9bb32f2c-29fb-43ba-b7ba-2227b28f7b58",
                 IsUnique = true,
@@ -295,7 +295,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1955",
+                ImageType = Models.ImageType.Png,
                 Title = "Mr. Underhill",
                 Id = "d0ed393c-162a-4715-bed4-e338c24e9e36",
                 IsUnique = true,
@@ -314,7 +314,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1956",
+                ImageType = Models.ImageType.Png,
                 Title = "Tireless Ranger",
                 Id = "ef014a91-c2d9-44ca-acd0-cc1a339c051f",
                 IsUnique = true,
@@ -331,7 +331,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1957",
+                ImageType = Models.ImageType.Png,
                 Title = "Skilled Healer",
                 Id = "1d1ab8a3-ad76-4992-ae5c-6a89fd0ed463",
                 IsUnique = true,
@@ -348,7 +348,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1958",
+                ImageType = Models.ImageType.Png,
                 Title = "Valiant Warrior",
                 Id = "ff574390-bd68-4277-9065-dd9dbf552d00",
                 IsUnique = true,
@@ -365,7 +365,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1959",
+                ImageType = Models.ImageType.Png,
                 Title = "Noble Hero",
                 Id = "af49e5ea-c6a2-4be4-bbf3-ac53c100e887",
                 IsUnique = true,
@@ -382,7 +382,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1960",
+                ImageType = Models.ImageType.Png,
                 Title = "Three is Company",
                 StageNumber = 1,
                 Id = "6b34adb4-b510-4db9-aaba-9a1876626dce",
@@ -399,7 +399,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1961",
+                ImageType = Models.ImageType.Png,
                 Title = "A Shortcut to Mushrooms",
                 StageNumber = 2,
                 Id = "40c7a675-d48f-4e71-8818-5f0ffb9fa0dd",
@@ -414,7 +414,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1962",
+                ImageType = Models.ImageType.Png,
                 Title = "Escape to Buckland",
                 StageNumber = 3,
                 Id = "7371cfea-03d0-4bc0-98a1-d99e0acdbf88",
@@ -428,7 +428,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1963",
+                ImageType = Models.ImageType.Png,
                 Title = "Trouble in Bree",
                 StageNumber = 1,
                 Id = "d0b6992d-9dc4-41fa-a483-b4ad0a3d60b3",
@@ -445,7 +445,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1964",
+                ImageType = Models.ImageType.Png,
                 Title = "Into the Wild",
                 StageNumber = 2,
                 Id = "28a4721b-3696-4fae-9eea-01b5a250c892",
@@ -460,7 +460,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1965",
+                ImageType = Models.ImageType.Png,
                 Title = "The Ringwraiths Attack",
                 StageNumber = 3,
                 Id = "257f9b44-2744-4f02-bbf6-115d12b52e8d",
@@ -476,7 +476,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1966",
+                ImageType = Models.ImageType.Png,
                 Title = "Pursued by the Enemy",
                 StageNumber = 1,
                 Id = "f9824e39-fda8-4e4b-bc74-83b4bd40c72d",
@@ -491,7 +491,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1967",
+                ImageType = Models.ImageType.Png,
                 Title = "Race To Rivendell",
                 StageNumber = 2,
                 Id = "6b2673af-c764-4599-a265-6e43d3b75310",
@@ -524,7 +524,7 @@ Setup: Attach Mr. Underhill to the Ring-bearer. Add Gandalf's Delay to the stagi
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1969",
+                ImageType = Models.ImageType.Png,
                 Title = "Bag End",
                 Id = "0d30fbf1-6e8f-480f-9f2f-3196777f6e11",
                 IsUnique = true,
@@ -543,7 +543,7 @@ Setup: Attach Mr. Underhill to the Ring-bearer. Add Gandalf's Delay to the stagi
             });
             Cards.Add(new Card()
             {
-                ImageName = "M1970",
+                ImageType = Models.ImageType.Png,
                 Title = "Woody End",
                 Id = "b194fe1c-18c8-47d2-a674-8e209339c7e2",
                 IsUnique = true,

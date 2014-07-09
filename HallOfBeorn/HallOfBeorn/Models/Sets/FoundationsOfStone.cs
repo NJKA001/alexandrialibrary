@@ -148,7 +148,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Weapon.", " Artifact." },
                 Quantity = 1,
                 IsUnique = true,
-                Text = "Attached hero gets +3 Attack. If attached hero is a Dwarf, it gets +1 Willpower.Action: Exhaust a hero to claim this objective. Then, attach Durin's Axe to that hero as an attachment.",
+                Text = "Attached hero gets +3 Attack. If attached hero is a Dwarf, it gets +1 Willpower.\r\n\r\nAction: Exhaust a hero to claim this objective. Then, attach Durin's Axe to that hero as an attachment.",
                 Keywords = new List<string>() { "Surge.", " Restricted." },
                 Number = 119,
                 Artist = Artist.Stephen_M_Mabee
@@ -162,7 +162,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Armor.", " Artifact." },
                 Quantity = 1,
                 IsUnique = true,
-                Text = "Attached hero gets +1 Defense. If attached hero is a Dwarf, it gets +2 hit points.Action: Exhaust a hero to claim this objective. Then, attach Durin's Helm to that hero as an attachment.",
+                Text = "Attached hero gets +1 Defense. If attached hero is a Dwarf, it gets +2 hit points.\r\n\r\nAction: Exhaust a hero to claim this objective. Then, attach Durin's Helm to that hero as an attachment.",
                 Keywords = new List<string>() { "Surge." },
                 Number = 120,
                 Artist = Artist.Stephen_M_Mabee

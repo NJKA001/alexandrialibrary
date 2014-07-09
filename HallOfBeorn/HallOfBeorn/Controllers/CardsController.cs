@@ -152,7 +152,7 @@ namespace HallOfBeorn.Controllers
                         if (_cardService.Traits().Any(x => string.Equals(x, normalized + ".")) && !_cardService.Spheres().Any(x => string.Equals(x, normalized)))
                         {
                             token.IsTrait = true;
-                            token.Text = token.Prefix + part;
+                            token.Text = token.Prefix + part.Trim(',');
                             checkForSuffix(token, part, normalized);
                             effect.Tokens.Add(token);
                             continue;
@@ -208,19 +208,9 @@ namespace HallOfBeorn.Controllers
 
         public ActionResult Index()
         {
-            //var model = new SearchViewModel();
-
-            //InitializeSearch(model);
-
-            //foreach (var card in _cardService.All())
-            //    model.Cards.Add(new CardViewModel(card));
-
-            //return View(model);
-
             var model = new SearchViewModel();
 
             return Redirect("/Cards/Search");
-            //ToAction("Search", model);
         }
 
         public ActionResult Search(SearchViewModel model)

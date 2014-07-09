@@ -17,7 +17,7 @@ namespace HallOfBeorn.Models.Sets
             Cycle = "Against the Shadow";
 
             Cards.Add(new Card() {
-                ImageName = "M1834",
+                ImageType = Models.ImageType.Png,
                 Title = "Pippin",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90021",
                 IsUnique = true,
@@ -36,7 +36,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1835",
+                ImageType = Models.ImageType.Png,
                 Title = "Denethor",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90022",
                 IsUnique = true,
@@ -55,7 +55,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1836",
+                ImageType = Models.ImageType.Png,
                 Title = "Lord of Morthond",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90023",
                 IsUnique = true,
@@ -71,7 +71,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Sara_Biddle
             });
             Cards.Add(new Card() {
-                ImageName = "M1837",
+                ImageType = Models.ImageType.Png,
                 Title = "Book of Eldacar",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90024",
                 IsUnique = true,
@@ -86,7 +86,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Florian_Stitz
             });
             Cards.Add(new Card() {
-                ImageName = "M1838",
+                ImageType = Models.ImageType.Png,
                 Title = "Gondorian Discipline",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90025",
                 CardType = CardType.Event,
@@ -100,7 +100,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Jake_Murray
             });
             Cards.Add(new Card() {
-                ImageName = "M1839",
+                ImageType = Models.ImageType.Png,
                 Title = "Minas Tirith Lampwright",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90026",
                 CardType = CardType.Ally,
@@ -117,7 +117,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Melanie_Maier
             });
             Cards.Add(new Card() {
-                ImageName = "M1840",
+                ImageType = Models.ImageType.Png,
                 Title = "Small Target",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90027",
                 CardType = CardType.Event,
@@ -129,7 +129,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Jake_Murray
             });
             Cards.Add(new Card() {
-                ImageName = "M1841",
+                ImageType = Models.ImageType.Png,
                 Title = "Ithilien Archer",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90028",
                 CardType = CardType.Ally,
@@ -147,7 +147,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Carmen_Cianelli
             });
             Cards.Add(new Card() {
-                ImageName = "M1842",
+                ImageType = Models.ImageType.Png,
                 Title = "Ithilien Pit",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90029",
                 CardType = CardType.Attachment,
@@ -160,7 +160,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.David_Gaillet
             });
             Cards.Add(new Card() {
-                ImageName = "M1843",
+                ImageType = Models.ImageType.Png,
                 Title = "Hobbit-sense",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a90030",
                 CardType = CardType.Event,
@@ -174,7 +174,7 @@ namespace HallOfBeorn.Models.Sets
                 Artist = Artist.Blake_Henriksen
             });
             Cards.Add(new Card() {
-                ImageName = "M1844",
+                ImageType = Models.ImageType.Png,
                 Title = "Savagery of the Orcs",
                 StageNumber = 1,
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93001",
@@ -193,7 +193,7 @@ If there are no villager tokens on Savagery of the Orcs, advance to the next sta
                 Artist = Artist.Jake_Murray
             });
             Cards.Add(new Card() {
-                ImageName = "M1845",
+                ImageType = Models.ImageType.Png,
                 Title = "Protect the Villagers",
                 StageNumber = 2,
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93002",
@@ -211,7 +211,7 @@ When the players defeat this stage, end the game. Compare the number of tokens o
                 Artist = Artist.Jake_Murray
             });
             Cards.Add(new Card() {
-                ImageName = "M1848",
+                ImageType = Models.ImageType.Png,
                 Title = "Lord Alcaron",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93070",
                 IsUnique = true,
@@ -229,7 +229,7 @@ When the players defeat this stage, end the game. Compare the number of tokens o
                 Artist = Artist.Magali_Villeneuve
             });
             Cards.Add(new Card() {
-                ImageName = "M1846",
+                ImageType = Models.ImageType.Png,
                 Title = "Rescued Villagers",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93068",
                 CardType = CardType.Objective,
@@ -240,7 +240,7 @@ When the players defeat this stage, end the game. Compare the number of tokens o
                 Artist = Artist.Jake_Murray
             });
             Cards.Add(new Card() {
-                ImageName = "M1847",
+                ImageType = Models.ImageType.Png,
                 Title = "Dead Villagers",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93069",
                 CardType = CardType.Objective,
@@ -251,7 +251,7 @@ When the players defeat this stage, end the game. Compare the number of tokens o
                 Artist = Artist.Greg_Opalinski
             });
             Cards.Add(new Card() {
-                ImageName = "M1849",
+                ImageType = Models.ImageType.Png,
                 Title = "Ghulat",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93071",
                 IsUnique = true,
@@ -276,7 +276,7 @@ While Ghulat is in play, the game cannot end.",
                 Artist = Artist.Diego_Gisbert_Llorens
             });
             Cards.Add(new Card() {
-                ImageName = "M1850",
+                ImageType = Models.ImageType.Png,
                 Title = "Marauding Orc",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93072",
                 CardType = CardType.Enemy,
@@ -294,7 +294,7 @@ While Ghulat is in play, the game cannot end.",
                 Artist = Artist.Ellyson_Ferrari_Lifante
             });
             Cards.Add(new Card() {
-                ImageName = "M1851",
+                ImageType = Models.ImageType.Png,
                 Title = "Orc Ravager",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93073",
                 CardType = CardType.Enemy,
@@ -312,7 +312,7 @@ While Ghulat is in play, the game cannot end.",
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1852",
+                ImageType = Models.ImageType.Png,
                 Title = "Craven Eagle",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93074",
                 CardType = CardType.Enemy,
@@ -330,7 +330,7 @@ While Ghulat is in play, the game cannot end.",
                 Artist = Artist.Dean_Spencer
             });
             Cards.Add(new Card() {
-                ImageName = "M1853",
+                ImageType = Models.ImageType.Png,
                 Title = "Burning Farmhouse",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93075",
                 CardType = CardType.Location,
@@ -347,7 +347,7 @@ While Ghulat is in play, the game cannot end.",
                 Artist = Artist.Ilich_Henriquez
             });
             Cards.Add(new Card() {
-                ImageName = "M1854",
+                ImageType = Models.ImageType.Png,
                 Title = "Gondorian Hamlet",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93076",
                 CardType = CardType.Location,
@@ -364,7 +364,7 @@ While Ghulat is in play, the game cannot end.",
                 Artist = Artist.Sabin_Boykinov
             });
             Cards.Add(new Card() {
-                ImageName = "M1855",
+                ImageType = Models.ImageType.Png,
                 Title = "Secluded Farmhouse",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93077",
                 CardType = CardType.Location,
@@ -381,7 +381,7 @@ While Ghulat is in play, the game cannot end.",
                 Artist = Artist.Sabin_Boykinov
             });
             Cards.Add(new Card() {
-                ImageName = "M1856",
+                ImageType = Models.ImageType.Png,
                 Title = "Burnt Homestead",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93078",
                 CardType = CardType.Treachery,
@@ -394,7 +394,7 @@ While Ghulat is in play, the game cannot end.",
                 Artist = Artist.Darek_Zabrocki
             });
             Cards.Add(new Card() {
-                ImageName = "M1857",
+                ImageType = Models.ImageType.Png,
                 Title = "Trapped Inside",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93079",
                 CardType = CardType.Treachery,
@@ -407,7 +407,7 @@ While Ghulat is in play, the game cannot end.",
                 Artist = Artist.Jake_Murray
             });
             Cards.Add(new Card() {
-                ImageName = "M1858",
+                ImageType = Models.ImageType.Png,
                 Title = "Panicked!",
                 Id = "fd89bdbf-7475-4f3e-96fc-8f5315a93080",
                 CardType = CardType.Treachery,
