@@ -217,9 +217,9 @@ namespace HallOfBeorn.Controllers
         {
             var model = new BrowseViewModel();
 
-            foreach (var product in _cardService.Products())
+            foreach (var productGroup in _cardService.ProductGroups())
             {
-                model.Products.Add(new ProductViewModel(product));
+                model.ProductGroups.Add(new ProductGroupViewModel(productGroup));
             }
 
             return View(model);

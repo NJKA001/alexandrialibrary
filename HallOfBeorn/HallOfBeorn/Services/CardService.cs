@@ -24,6 +24,7 @@ namespace HallOfBeorn.Services
         }
 
         private readonly List<Product> products = new List<Product>();
+        private readonly List<ProductGroup> productGroups = new List<ProductGroup>();
         private readonly List<CardSet> sets = new List<CardSet>();
         private readonly List<string> setNames = new List<string>();
         private readonly Dictionary<string, Card> cards = new Dictionary<string, Card>();
@@ -123,58 +124,29 @@ namespace HallOfBeorn.Services
 
         private void LoadProducts()
         {
-            AddProduct(new CoreSetProduct());
-            
-            AddProduct(new TheHuntForGollumProduct());
-            AddProduct(new ConflictAtTheCarrokProduct());
-            AddProduct(new AJourneyToRhosgobelProduct());
-            AddProduct(new TheHillsOfEmynMuilProduct());
-            AddProduct(new TheDeadMarshesProduct());
-            AddProduct(new ReturnToMirkwoodProduct());
+            productGroups.Add(new ShadowsOfMirkwoodProductGroup());
+            productGroups.Add(new TheDwarrowdelfProductGroup());
+            productGroups.Add(new AgainstTheShadowProductGroup());
+            productGroups.Add(new TheRingMakerProductGroup());
 
-            AddProduct(new KhazadDumProduct());
+            productGroups.Add(new TheHobbitSagaProductGroup());
+            productGroups.Add(new TheLordOfTheRingsSagaProductGroup());
 
-            AddProduct(new TheRedhornGateProduct());
-            AddProduct(new RoadToRivendellProduct());
-            AddProduct(new TheWatcherInTheWaterProduct());
-            AddProduct(new TheLongDarkProduct());
-            AddProduct(new FoundationsOfStoneProduct());
-            AddProduct(new ShadowAndFlameProduct());
+            productGroups.Add(new GenConDeckProductGroup());
+            productGroups.Add(new NightmareDeckProductGroup());
 
-            AddProduct(new HeirsOfNumenorProduct());
+            foreach (var productGroup in productGroups)
+            {
+                if (productGroup.MainProduct != null)
+                {
+                    AddProduct(productGroup.MainProduct);
+                }
 
-            AddProduct(new TheStewardsFearProduct());
-            AddProduct(new TheDruadanForestProduct());
-            AddProduct(new EncounterAtAmonDinProduct());
-            AddProduct(new AssaultOnOsgiliathProduct());
-            AddProduct(new TheBloodOfGondorProduct());
-            AddProduct(new TheMorgulValeProduct());
-
-            AddProduct(new TheVoiceOfIsengardProduct());
-            AddProduct(new TheDunlandTrapProduct());
-
-            AddProduct(new TheHobbitOverHillAndUnderHillProduct());
-            AddProduct(new TheHobbitOnTheDoorstepProduct());
-
-            AddProduct(new TheBlackRidersProduct());
-
-            AddProduct(new TheMassingAtOsgiliathProduct());
-            AddProduct(new TheBattleOfLakeTownProduct());
-            AddProduct(new TheStoneOfErechProduct());
-
-            AddProduct(new PassageThroughMirkwoodNightmareProduct());
-            AddProduct(new JourneyAlongTheAnduinNightmareProduct());
-            AddProduct(new EscapeFromDolGuldurNightmareProduct());
-
-            AddProduct(new TheHuntForGollumNightmareProduct());
-            AddProduct(new ConflictAtTheCarrockNightmareProduct());
-            AddProduct(new AJourneyToRhosgobelNightmareProduct());
-            AddProduct(new TheHillsOfEmynMuilNightmareProduct());
-            AddProduct(new TheDeadMarshesNightmareProduct());
-            AddProduct(new ReturnToMirkwoodNightmareProduct());
-
-            AddProduct(new KhazadDumNightmareProduct());
-            AddProduct(new TheHobbitOverHillAndUnderHillNightmareProduct());
+                foreach (var product in productGroup.ChildProducts)
+                {
+                    AddProduct(product);
+                }
+            }
 
             /*
             AddSet(new CoreSet());
@@ -1015,6 +987,11 @@ namespace HallOfBeorn.Services
         public IEnumerable<Product> Products()
         {
             return products;
+        }
+
+        public IEnumerable<ProductGroup> ProductGroups()
+        {
+            return productGroups;
         }
     }
 }

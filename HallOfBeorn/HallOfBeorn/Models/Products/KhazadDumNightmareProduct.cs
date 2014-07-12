@@ -8,7 +8,7 @@ namespace HallOfBeorn.Models.Products
     public class KhazadDumNightmareProduct : Product
     {
         public KhazadDumNightmareProduct()
-            : base("Khazad-dûm Nightmare Decks", "MEN10", ImageType.Jpg)
+            : base("Khazad-dûm Nightmare Decks", "MEN10", ImageType.Png)
         {
             CardSets.Add(new Sets.IntoThePitNightmare());
             CardSets.Add(new Sets.TheSeventhLevelNightmare());

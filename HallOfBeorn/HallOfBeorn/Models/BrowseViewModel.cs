@@ -9,9 +9,9 @@ namespace HallOfBeorn.Models
     {
         public BrowseViewModel()
         {
-            Products = new List<ProductViewModel>();
+            ProductGroups = new List<ProductGroupViewModel>();
         }
 
-        public List<ProductViewModel> Products { get; set; }
+        public List<ProductGroupViewModel> ProductGroups { get; private set; }
     }
 }
