@@ -1844,6 +1844,7 @@
     <Content Include="Images\Products\MEC12.png" />
     <Content Include="Images\Products\MEC13.png" />
     <Content Include="Images\Products\MEC14.png" />
+    <Content Include="Images\Products\MEC15.jpg" />
     <Content Include="Images\Products\MEC16.png" />
     <Content Include="Images\Products\MEC17.png" />
     <Content Include="Images\Products\MEC18.png" />
@@ -1860,7 +1861,9 @@
     <Content Include="Images\Products\MEC29.png" />
     <Content Include="Images\Products\MEC30.png" />
     <Content Include="Images\Products\MEC32.png" />
+    <Content Include="Images\Products\MEC33.jpg" />
     <Content Include="Images\Products\MEC34.png" />
+    <Content Include="Images\Products\MEC35.jpg" />
     <Content Include="Images\Products\MEN01.jpg" />
     <Content Include="Images\Products\MEN02.jpg" />
     <Content Include="Images\Products\MEN03.jpg" />
@@ -1870,6 +1873,8 @@
     <Content Include="Images\Products\MEN07.jpg" />
     <Content Include="Images\Products\MEN08.jpg" />
     <Content Include="Images\Products\MEN09.jpg" />
+    <Content Include="Images\Products\MEN10.jpg" />
+    <Content Include="Images\Products\MEN11.jpg" />
     <Content Include="Images\ShadowDivider.png" />
     <Content Include="Images\Spirit.png" />
     <Content Include="Images\Tactics.png" />
