@@ -141,10 +141,6 @@ namespace HallOfBeorn.Services
             AddProduct(new FoundationsOfStoneProduct());
             AddProduct(new ShadowAndFlameProduct());
 
-            AddProduct(new TheMassingAtOsgiliathProduct());
-
-            AddProduct(new TheHobbitOverHillAndUnderHillProduct());
-
             AddProduct(new HeirsOfNumenorProduct());
 
             AddProduct(new TheStewardsFearProduct());
@@ -154,15 +150,17 @@ namespace HallOfBeorn.Services
             AddProduct(new TheBloodOfGondorProduct());
             AddProduct(new TheMorgulValeProduct());
 
-            AddProduct(new TheHobbitOnTheDoorstepProduct());
-
             AddProduct(new TheVoiceOfIsengardProduct());
             AddProduct(new TheDunlandTrapProduct());
 
+            AddProduct(new TheHobbitOverHillAndUnderHillProduct());
+            AddProduct(new TheHobbitOnTheDoorstepProduct());
+
             AddProduct(new TheBlackRidersProduct());
 
-            AddProduct(new TheStoneOfErechProduct());
+            AddProduct(new TheMassingAtOsgiliathProduct());
             AddProduct(new TheBattleOfLakeTownProduct());
+            AddProduct(new TheStoneOfErechProduct());
 
             AddProduct(new PassageThroughMirkwoodNightmareProduct());
             AddProduct(new JourneyAlongTheAnduinNightmareProduct());
