@@ -213,6 +213,18 @@ namespace HallOfBeorn.Controllers
             return Redirect("/Cards/Search");
         }
 
+        public ActionResult Browse()
+        {
+            var model = new BrowseViewModel();
+
+            foreach (var product in _cardService.Products())
+            {
+                model.Products.Add(new ProductViewModel(product));
+            }
+
+            return View(model);
+        }
+
         public ActionResult Search(SearchViewModel model)
         {
             InitializeSearch(model);

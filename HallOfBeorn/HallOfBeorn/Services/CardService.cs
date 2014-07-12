@@ -6,7 +6,8 @@ using System.Web;
 using HallOfBeorn.Models;
 using HallOfBeorn.Models.Decks.HallOfBeorn;
 using HallOfBeorn.Models.Decks.TalesFromTheCards;
-using HallOfBeorn.Models.Sets;
+using HallOfBeorn.Models.Products;
+//using HallOfBeorn.Models.Sets;
 
 namespace HallOfBeorn.Services
 {
@@ -14,7 +15,7 @@ namespace HallOfBeorn.Services
     {
         public CardService()
         {
-            LoadSets();
+            LoadProducts();
             LoadDecks();
             LoadRelationships();
 
@@ -22,6 +23,7 @@ namespace HallOfBeorn.Services
             traits["Captive."] = "Captive.";
         }
 
+        private readonly List<Product> products = new List<Product>();
         private readonly List<CardSet> sets = new List<CardSet>();
         private readonly List<string> setNames = new List<string>();
         private readonly Dictionary<string, Card> cards = new Dictionary<string, Card>();
@@ -31,6 +33,16 @@ namespace HallOfBeorn.Services
 
         const int maxResults = 128;
         const string randomKeyword = "random";
+
+        private void AddProduct(Product product)
+        {
+            products.Add(product);
+
+            foreach (var cardSet in product.CardSets)
+            {
+                AddSet(cardSet);
+            }
+        }
 
         private void AddSet(CardSet cardSet)
         {
@@ -109,10 +121,65 @@ namespace HallOfBeorn.Services
             }
         }
 
-        private void LoadSets()
+        private void LoadProducts()
         {
+            AddProduct(new CoreSetProduct());
+            
+            AddProduct(new TheHuntForGollumProduct());
+            AddProduct(new ConflictAtTheCarrokProduct());
+            AddProduct(new AJourneyToRhosgobelProduct());
+            AddProduct(new TheHillsOfEmynMuilProduct());
+            AddProduct(new TheDeadMarshesProduct());
+            AddProduct(new ReturnToMirkwoodProduct());
+
+            AddProduct(new KhazadDumProduct());
+
+            AddProduct(new TheRedhornGateProduct());
+            AddProduct(new RoadToRivendellProduct());
+            AddProduct(new TheWatcherInTheWaterProduct());
+            AddProduct(new TheLongDarkProduct());
+            AddProduct(new FoundationsOfStoneProduct());
+            AddProduct(new ShadowAndFlameProduct());
+
+            AddProduct(new TheMassingAtOsgiliathProduct());
+
+            AddProduct(new TheHobbitOverHillAndUnderHillProduct());
+
+            AddProduct(new HeirsOfNumenorProduct());
+
+            AddProduct(new TheStewardsFearProduct());
+            AddProduct(new TheDruadanForestProduct());
+            AddProduct(new EncounterAtAmonDinProduct());
+            AddProduct(new AssaultOnOsgiliathProduct());
+            AddProduct(new TheBloodOfGondorProduct());
+            AddProduct(new TheMorgulValeProduct());
+
+            AddProduct(new TheHobbitOnTheDoorstepProduct());
+
+            AddProduct(new TheVoiceOfIsengardProduct());
+            AddProduct(new TheDunlandTrapProduct());
+
+            AddProduct(new TheBlackRidersProduct());
+
+            AddProduct(new TheStoneOfErechProduct());
+            AddProduct(new TheBattleOfLakeTownProduct());
+
+            AddProduct(new PassageThroughMirkwoodNightmareProduct());
+            AddProduct(new JourneyAlongTheAnduinNightmareProduct());
+            AddProduct(new EscapeFromDolGuldurNightmareProduct());
+
+            AddProduct(new TheHuntForGollumNightmareProduct());
+            AddProduct(new ConflictAtTheCarrockNightmareProduct());
+            AddProduct(new AJourneyToRhosgobelNightmareProduct());
+            AddProduct(new TheHillsOfEmynMuilNightmareProduct());
+            AddProduct(new TheDeadMarshesNightmareProduct());
+            AddProduct(new ReturnToMirkwoodNightmareProduct());
+
+            AddProduct(new KhazadDumNightmareProduct());
+            AddProduct(new TheHobbitOverHillAndUnderHillNightmareProduct());
+
+            /*
             AddSet(new CoreSet());
-            //AddSet(new CoreSetNightmare());
 
             AddSet(new TheHuntforGollum());
             AddSet(new ConflictattheCarrock());
@@ -130,6 +197,8 @@ namespace HallOfBeorn.Services
             AddSet(new FoundationsofStone());
             AddSet(new ShadowandFlame());
 
+            //Massing at Osgiliath 
+             
             AddSet(new HeirsofNumenor());
 
             AddSet(new TheStewardsFear());
@@ -166,6 +235,7 @@ namespace HallOfBeorn.Services
             AddSet(new WeMustAwayEreBreakOfDayNightmare());
             AddSet(new OverTheMistyMountainsGrimNightmare());
             AddSet(new DungeonsDeepAndCavernsDimNightmare());
+            */
         }
 
         private void LoadDecks()
@@ -942,6 +1012,11 @@ namespace HallOfBeorn.Services
         {
             foreach (var item in SearchViewModel.Spheres)
                 yield return item.Text;
+        }
+
+        public IEnumerable<Product> Products()
+        {
+            return products;
         }
     }
 }
