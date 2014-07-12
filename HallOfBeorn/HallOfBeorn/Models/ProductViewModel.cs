@@ -40,5 +40,11 @@ namespace HallOfBeorn.Models
                 return 235;
             }
         }
+        public string Link
+        {
+            get {
+                return string.Format("/Cards/Search?CardSet={0}", _product.CardSets.First().Name.Replace(' ','+'));
+            }
+        }
     }
 }
