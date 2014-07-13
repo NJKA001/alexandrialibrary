@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public TheStewardsFearProduct()
             : base("The Steward's Fear", "MEC18", ImageType.Png)
         {
-            CardSets.Add(new Sets.TheStewardsFear());
+            CardSets.Add(CardSet.TheStewardsFear);
         }
     }
 }

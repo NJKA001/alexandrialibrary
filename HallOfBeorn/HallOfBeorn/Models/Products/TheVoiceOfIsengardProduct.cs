@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public TheVoiceOfIsengardProduct()
             : base("The Voice of Isengard", "MEC25", ImageType.Png)
         {
-            CardSets.Add(new Sets.VoiceofIsengard());
+            CardSets.Add(CardSet.TheVoiceOfIsengard);
         }
     }
 }

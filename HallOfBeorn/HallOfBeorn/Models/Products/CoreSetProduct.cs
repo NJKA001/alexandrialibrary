@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public CoreSetProduct()
             : base("Core Set", "MEC01", ImageType.Png)
         {
-            CardSets.Add(new Sets.CoreSet());
+            CardSets.Add(CardSet.CoreSet);
         }
     }
 }

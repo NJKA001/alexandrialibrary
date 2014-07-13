@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public TheDruadanForestProduct()
             : base("The Drúadan Forest", "MEC19", ImageType.Png)
         {
-            CardSets.Add(new Sets.TheDruadanForest());
+            CardSets.Add(CardSet.TheDruadanForest);
         }
     }
 }

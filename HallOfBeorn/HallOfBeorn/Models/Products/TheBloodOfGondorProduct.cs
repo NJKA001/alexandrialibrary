@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public TheBloodOfGondorProduct()
             : base("The Blood of Gondor", "MEC22", ImageType.Png)
         {
-            CardSets.Add(new Sets.TheBloodofGondor());
+            CardSets.Add(CardSet.TheBloodOfGondor);
         }
     }
 }

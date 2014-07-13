@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public RoadToRivendellProduct()
             : base("Road to Rivendell", "MEC10", ImageType.Png)
         {
-            CardSets.Add(new Sets.RoadtoRivendell());
+            CardSets.Add(CardSet.RoadToRivendell);
         }
     }
 }

@@ -338,7 +338,7 @@
     <Compile Include="Models\Sets\KhazadDum.cs" />
     <Compile Include="Models\Products\KhazadDumNightmareProduct.cs" />
     <Compile Include="Models\Sets\OverTheMistyMountainsGrimNightmare.cs" />
-    <Compile Include="Models\Sets\PassageThroughMirkwoodnNightmare.cs" />
+    <Compile Include="Models\Sets\PassageThroughMirkwoodNightmare.cs" />
     <Compile Include="Models\Sets\ReturnToMirkwood.cs" />
     <Compile Include="Models\Sets\ReturnToMirkwoodNightmare.cs" />
     <Compile Include="Models\Sets\RoadToRivendell.cs" />

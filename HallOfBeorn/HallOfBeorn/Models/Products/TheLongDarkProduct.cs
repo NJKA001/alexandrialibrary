@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public TheLongDarkProduct()
             : base("The Long Dark", "MEC12", ImageType.Png)
         {
-            CardSets.Add(new Sets.TheLongDark());
+            CardSets.Add(CardSet.TheLongDark);
         }
     }
 }

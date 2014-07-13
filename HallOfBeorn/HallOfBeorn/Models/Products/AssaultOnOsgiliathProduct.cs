@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public AssaultOnOsgiliathProduct()
             : base("Assault on Osgiliath", "MEC21", ImageType.Png)
         {
-            CardSets.Add(new Sets.AssaultonOsgiliath());
+            CardSets.Add(CardSet.AssaultOnOsgiliath);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public TheHobbitOverHillAndUnderHillProduct()
             : base("The Hobbit: Over Hill and Under Hill", "MEC16", ImageType.Png)
         {
-            CardSets.Add(new Sets.TheHobbitOverHillandUnderHill());
+            CardSets.Add(CardSet.TheHobbitOverHillAndUnderHill);
         }
     }
 }

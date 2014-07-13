@@ -1824,7 +1824,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 QuestPoints = 8,
                 Number = 119,
-                Artist = Artist.Ben_Zweifel
+                Artist = Artist.Ben_Zweifel,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.PassageThroughMirkwood, EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1839,7 +1840,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeFlavorText = "Unsure of what lies ahead but spurred by the urgency of your message, you choose a path and proceed... ",
                 QuestPoints = 2,
                 Number = 120,
-                Artist = Artist.Ben_Zweifel
+                Artist = Artist.Ben_Zweifel,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.PassageThroughMirkwood, EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1855,7 +1857,8 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 0,
                 Number = 121,
                 Artist = Artist.Yoann_Boissonnet,
-                OppositeArtist = Artist.Ben_Zweifel
+                OppositeArtist = Artist.Ben_Zweifel,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.PassageThroughMirkwood, EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1871,7 +1874,8 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 10,
                 Number = 122,
                 Artist = Artist.Yoann_Boissonnet,
-                OppositeArtist = Artist.David_Lecossu
+                OppositeArtist = Artist.David_Lecossu,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.PassageThroughMirkwood, EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1887,7 +1891,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 QuestPoints = 9,
                 Number = 123,
-                Artist = Artist.Ben_Zweifel
+                Artist = Artist.Ben_Zweifel,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.EscapeFromDolGuldur, EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1900,7 +1905,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 QuestPoints = 15,
                 Number = 124,
-                Artist = Artist.Kaya
+                Artist = Artist.Kaya,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.EscapeFromDolGuldur, EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1913,7 +1919,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 QuestPoints = 7,
                 Number = 125,
-                Artist = Artist.Kaya
+                Artist = Artist.Kaya,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.EscapeFromDolGuldur, EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1927,7 +1934,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 QuestPoints = 8,
                 Number = 126,
-                Artist = Artist.Ben_Zweifel
+                Artist = Artist.Ben_Zweifel,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.JourneyDownTheAnduin, EncounterSet.DolGuldurOrcs, EncounterSet.SauronsReach, EncounterSet.Wilderlands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1940,7 +1948,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Reveal 1 additional card from the encounter deck each quest phase. Do not make engagement checks during the encounter phase. (Each player may still optionally engage 1 enemy each encounter phase.)",
                 QuestPoints = 16,
                 Number = 127,
-                Artist = Artist.Ben_Zweifel
+                Artist = Artist.Ben_Zweifel,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.JourneyDownTheAnduin, EncounterSet.DolGuldurOrcs, EncounterSet.SauronsReach, EncounterSet.Wilderlands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1953,7 +1962,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Reveal 2 encounter cards per player, and add them to the staging area.\r\nSkip the staging step of the quest phase for the remainder of the game.\r\nOnce there are no enemies in play, the players have won the game.",
                 QuestPoints = 0,
                 Number = 128,
-                Artist = Artist.David_A_Nash
+                Artist = Artist.David_A_Nash,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.JourneyDownTheAnduin, EncounterSet.DolGuldurOrcs, EncounterSet.SauronsReach, EncounterSet.Wilderlands }
             });
         }
     }

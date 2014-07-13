@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public ShadowAndFlameProduct()
             : base("Shadow and Flame", "MEC14", ImageType.Png)
         {
-            CardSets.Add(new Sets.ShadowandFlame());
+            CardSets.Add(CardSet.ShadowAndFlame);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public TheHillsOfEmynMuilProduct()
             : base("The Hills of Emyn Muil", "MEC05", ImageType.Png)
         {
-            CardSets.Add(new Sets.TheHillsofEmynMuil());
+            CardSets.Add(CardSet.TheHillsOfEmynMuil);
         }
     }
 }

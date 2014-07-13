@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public TheHuntForGollumProduct()
             : base("The Hunt for Gollum", "MEC02", ImageType.Png)
         {
-            CardSets.Add(new Sets.TheHuntforGollum());
+            CardSets.Add(CardSet.TheHuntForGollum);
         }
     }
 }

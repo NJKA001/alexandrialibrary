@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public ReturnToMirkwoodProduct()
             : base("Return to Mirkwood", "MEC07", ImageType.Png)
         {
-            CardSets.Add(new Sets.ReturntoMirkwood());
+            CardSets.Add(CardSet.ReturnToMirkwood);
         }
     }
 }

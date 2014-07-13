@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public EscapeFromDolGuldurNightmareProduct()
             : base("Escape from Dol Guldur Nightmare Deck", "MEN03", ImageType.Jpg)
         {
-            CardSets.Add(new Sets.EscapeFromDolGuldurNightmare());
+            CardSets.Add(CardSet.EscapeFromDolGuldurNightmare);
         }
     }
 }

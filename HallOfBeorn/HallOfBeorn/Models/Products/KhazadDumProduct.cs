@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public KhazadDumProduct()
             : base("Khazad-dûm", "MEC08", ImageType.Png)
         {
-            CardSets.Add(new Sets.Khazaddum());
+            CardSets.Add(CardSet.KhazadDum);
         }
     }
 }

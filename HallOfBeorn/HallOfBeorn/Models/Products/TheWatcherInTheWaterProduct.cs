@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public TheWatcherInTheWaterProduct()
             : base("The Watcher in the Water", "MEC11", ImageType.Png)
         {
-            CardSets.Add(new Sets.TheWatcherintheWater());
+            CardSets.Add(CardSet.TheWatcherInTheWater);
         }
     }
 }

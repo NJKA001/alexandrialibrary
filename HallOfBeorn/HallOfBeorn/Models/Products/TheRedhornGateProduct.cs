@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public TheRedhornGateProduct()
             : base("The Redhorn Gate", "MEC09", ImageType.Png)
         {
-            CardSets.Add(new Sets.TheRedhornGate());
+            CardSets.Add(CardSet.TheRedhornGate);
         }
     }
 }

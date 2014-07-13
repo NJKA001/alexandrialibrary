@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public TheDeadMarshesProduct()
             : base("The Dead Marshes", "MEC06", ImageType.Png)
         {
-            CardSets.Add(new Sets.TheDeadMarshes());
+            CardSets.Add(CardSet.TheDeadMarshes);
         }
     }
 }

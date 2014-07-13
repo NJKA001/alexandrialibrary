@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public AJourneyToRhosgobelProduct()
             : base("A Journey to Rhosgobel", "MEC04", ImageType.Png)
         {
-            CardSets.Add(new Sets.AJourneytoRhosgobel());
+            CardSets.Add(CardSet.AJourneyToRhosgobel);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public HeirsOfNumenorProduct()
             : base("Heirs of Númenor", "MEC17", ImageType.Png)
         {
-            CardSets.Add(new Sets.HeirsofNumenor());
+            CardSets.Add(CardSet.HeirsOfNumenor);
         }
     }
 }

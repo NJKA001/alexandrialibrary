@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public EncounterAtAmonDinProduct()
             : base("Encounter at Amon Dîn", "MEC20", ImageType.Png)
         {
-            CardSets.Add(new Sets.EncounteratAmonDin());
+            CardSets.Add(CardSet.EncounterAtAmonDin);
         }
     }
 }

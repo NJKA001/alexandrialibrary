@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public ConflictAtTheCarrockNightmareProduct()
             : base("Conflict at the Carrock Nightmare Deck", "MEN05", ImageType.Jpg)
         {
-            CardSets.Add(new Sets.ConflictAtTheCarrockNightmare());
+            CardSets.Add(CardSet.ConflictAtTheCarrockNightmare);
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace HallOfBeorn.Models.Sets
 {
-    public class PassageThroughMirkwoodnNightmare : CardSet
+    public class PassageThroughMirkwoodNightmare : CardSet
     {
         protected override void Initialize()
         {

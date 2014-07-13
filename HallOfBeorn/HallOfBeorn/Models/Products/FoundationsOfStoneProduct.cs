@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public FoundationsOfStoneProduct()
             : base("Foundations of Stone", "MEC13", ImageType.Png)
         {
-            CardSets.Add(new Sets.FoundationsofStone());
+            CardSets.Add(CardSet.FoundationsOfStone);
         }
     }
 }

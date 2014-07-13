@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public TheDunlandTrapProduct()
             : base("The Dunland Trap", "MEC26", ImageType.Png)
         {
-            CardSets.Add(new Sets.TheDunlandTrap());
+            CardSets.Add(CardSet.TheDunlandTrap);
         }
     }
 }

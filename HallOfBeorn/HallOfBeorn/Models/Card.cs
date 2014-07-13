@@ -15,6 +15,7 @@ namespace HallOfBeorn.Models
             NormalizedKeywords = new List<string>();
             Decks = new List<Deck>();
             RelatedCards = new List<Card>();
+            IncludedEncounterSets = new List<EncounterSet>();
         }
 
         public List<Deck> Decks { get; set; }
@@ -63,6 +64,7 @@ namespace HallOfBeorn.Models
         public string OppositeFlavorText { get; set; }
         public string Shadow { get; set; }
         public string EncounterSet { get; set; }
+        public List<EncounterSet> IncludedEncounterSets { get; set; }
         public byte VictoryPoints { get; set; }
         public byte Quantity { get; set; }
         public byte? EasyModeQuantity { get; set; }

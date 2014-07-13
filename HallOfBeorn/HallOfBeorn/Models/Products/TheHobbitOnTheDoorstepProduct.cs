@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public TheHobbitOnTheDoorstepProduct()
             : base("The Hobbit: On the Doorstep", "MEC24", ImageType.Png)
         {
-            CardSets.Add(new Sets.TheHobbitOntheDoorstep());
+            CardSets.Add(CardSet.TheHobbitOnTheDoorstep);
         }
     }
 }

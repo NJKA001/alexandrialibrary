@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public TheBlackRidersProduct()
             : base("The Black Riders", "MEC32", ImageType.Png)
         {
-            CardSets.Add(new Sets.TheBlackRiders());
+            CardSets.Add(CardSet.TheBlackRiders);
         }
     }
 }

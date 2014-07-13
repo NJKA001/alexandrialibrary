@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Products
         public TheHuntForGollumNightmareProduct()
             : base("The Hunt for Gollum Nightmare Deck", "MEN04", ImageType.Jpg)
         {
-            CardSets.Add(new Sets.TheHuntForGollumNightmare());
+            CardSets.Add(CardSet.TheHuntForGollumNightmare);
         }
     }
 }

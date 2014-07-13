@@ -10,9 +10,9 @@ namespace HallOfBeorn.Models.Products
         public KhazadDumNightmareProduct()
             : base("Khazad-dûm Nightmare Decks", "MEN10", ImageType.Png)
         {
-            CardSets.Add(new Sets.IntoThePitNightmare());
-            CardSets.Add(new Sets.TheSeventhLevelNightmare());
-            CardSets.Add(new Sets.FlightFromMoriaNightmare());
+            CardSets.Add(CardSet.IntoThePitNightmare);
+            CardSets.Add(CardSet.TheSeventhLevelNightmare);
+            CardSets.Add(CardSet.FlightFromMoriaNightmare);
         }
     }
 }
