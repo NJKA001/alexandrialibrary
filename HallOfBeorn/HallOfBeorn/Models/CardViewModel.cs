@@ -10,16 +10,25 @@ namespace HallOfBeorn.Models
         public CardViewModel(Card card)
         {
             _card = card;
+
+            foreach (var encounterSet in _card.IncludedEncounterSets)
+            {
+                _includedEncounterSets.Add(new EncounterSetViewModel(encounterSet));
+            }
         }
 
         private Card _card;
         private readonly List<CardEffect> _keywordEffects = new List<CardEffect>();
         private readonly List<CardEffect> _textEffects = new List<CardEffect>();
         private readonly List<CardEffect> _shadowEffects = new List<CardEffect>();
+        private readonly List<EncounterSetViewModel> _includedEncounterSets = new List<EncounterSetViewModel>();
 
         public List<CardEffect> KeywordEffects { get { return _keywordEffects; } }
         public List<CardEffect> TextEffects { get { return _textEffects; } }
         public List<CardEffect> ShadowEffects { get { return _shadowEffects; } }
+
+        public bool HasIncludedEncounterSets { get { return _includedEncounterSets.Count > 0; } }
+        public List<EncounterSetViewModel> IncludedEncounterSets { get { return _includedEncounterSets; } }
 
         public string Id
         {

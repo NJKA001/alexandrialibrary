@@ -48,6 +48,10 @@ namespace HallOfBeorn.Models
         public SetType SetType { get; protected set; }
         public List<Card> Cards { get; protected set; }
 
+        static CardSet()
+        {
+        }
+
         public static CardSet CoreSet = new Sets.CoreSet();
         public static CardSet TheHuntForGollum = new Sets.TheHuntforGollum();
         public static CardSet ConflictAtTheCarrock = new Sets.ConflictattheCarrock();

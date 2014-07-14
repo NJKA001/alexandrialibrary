@@ -28,6 +28,18 @@
             <img src="@Model.EncounterSetImagePath" style="margin-left:4px;margin-bottom:-4px;width:30px;height:30px;" />
         </div>
     }
+    @if (@Model.HasIncludedEncounterSets)
+    {
+        <div style="margin-top:4px;margin-bottom:4px;">
+        <span style="color:#616161;margin-right:4px;margin-left:2px;font-weight:normal;">Included Encounter Sets</span>
+        @foreach (var encounterSet in @Model.IncludedEncounterSets)
+        {
+            <span>
+                <img src="@encounterSet.ImagePath" style="width:30px;height:30px;margin-left:4px;margin-right:4px;margin-bottom:-4px;" title="@encounterSet.Name" />
+            </span>
+        }
+        </div>
+    }
 </div>
 @if (!string.IsNullOrEmpty(@Model.OppositeTitle))
 {
