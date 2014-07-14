@@ -352,7 +352,8 @@ The crownless again shall be king.
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 1,
                 Number = 11,
-                Artist = Artist.Igor_Kieryluk
+                Artist = Artist.Igor_Kieryluk,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.JourneyDownTheAnduin, EncounterSet.SauronsReach }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -367,7 +368,8 @@ The crownless again shall be king.
                 OppositeFlavorText = "Rumors have led you to the eaves of Mirkwood Forest, where the Woodmen whisper of a new terror in the night...",
                 Quantity = 1,
                 Number = 12,
-                Artist = Artist.David_A_Nash
+                Artist = Artist.David_A_Nash,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.JourneyDownTheAnduin, EncounterSet.SauronsReach }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -384,7 +386,8 @@ The crownless again shall be king.
 If the players defeat this stage, the players have once again found a true sign of Gollum's passing, and have won the game.",
                 Quantity = 1,
                 Number = 13,
-                Artist = Artist.Carolina_Eade
+                Artist = Artist.Carolina_Eade,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.JourneyDownTheAnduin, EncounterSet.SauronsReach }
             });
         }
     }

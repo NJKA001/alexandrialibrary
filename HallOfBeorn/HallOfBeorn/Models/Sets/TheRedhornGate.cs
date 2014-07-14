@@ -384,7 +384,8 @@ Forced: After a character is declared as a defender against Snow Warg, deal 1 da
                 QuestPoints = 11,
                 Quantity = 1,
                 Number = 12,
-                Artist = Artist.Stu_Barnes
+                Artist = Artist.Stu_Barnes,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.MistyMountains }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -402,7 +403,8 @@ Players cannot defeat this stage unless they have 5 victory points. If the playe
                 Quantity = 1,
                 QuestPoints = 13,
                 Number = 13,
-                Artist = Artist.Cristi_Balanescu
+                Artist = Artist.Cristi_Balanescu,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.MistyMountains }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -418,7 +420,8 @@ Players cannot defeat this stage unless they have 5 victory points. If the playe
                 QuestPoints = 9,
                 Quantity = 1,
                 Number = 11,
-                Artist = Artist.Jason_Juta
+                Artist = Artist.Jason_Juta,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.MistyMountains }
             });
         }
     }

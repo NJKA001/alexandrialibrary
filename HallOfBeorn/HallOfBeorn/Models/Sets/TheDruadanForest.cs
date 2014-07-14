@@ -367,7 +367,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 QuestPoints = 11,
                 Number = 42,
-                Artist = Artist.Emile_Denis
+                Artist = Artist.Emile_Denis,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.BroodingForest }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -382,7 +383,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 QuestPoints = 17,
                 Number = 43,
-                Artist = Artist.Adam_Lane
+                Artist = Artist.Adam_Lane,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.BroodingForest }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -401,7 +403,8 @@ If the players defeat this stage, they have won the game.",
                 Quantity = 1,
                 QuestPoints = 14,
                 Number = 44,
-                Artist = Artist.Jason_Ward
+                Artist = Artist.Jason_Ward,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.BroodingForest }
             });
         }
     }

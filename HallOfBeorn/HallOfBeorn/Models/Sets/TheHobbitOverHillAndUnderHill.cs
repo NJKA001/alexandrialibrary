@@ -66,6 +66,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
+                ScenarioTitle = "Over the Misty Mountains Grim",
                 Title = "A Short Rest",
                 StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9005",
@@ -78,7 +79,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "After a refreshing stay in the House of Elrond, Bilbo and his companions resumed their quest for the Lonely Mountain. But to reach Erebor, they first had to climb the high pass over the Misty Mountains.",
                 OppositeText = "When Revealed: Each player may search his deck for 1 treasure card and add it to his hand, then shuffle his deck. Advance to stage 2A.",
                 Number = 26,
-                Artist = Artist.Magali_Villeneuve
+                Artist = Artist.Magali_Villeneuve,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.WesternLands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -172,7 +174,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "The wizard Gandalf has chosen Bilbo Baggins to join Thorin and company on their quest to the Lonley Mountain.",
                 OppositeFlavorText = "At first they had passed through hobbit-lands, a wild respectable country inhabited by decent folk, with good roads, an inn or two, and now and then, a dwarf or a farmer ambling by on business. Then they came to lands where people spoke strangely, and sang songs Bilbo had never heard before. - The Hobbit.",
                 Number = 23,
-                Artist = Artist.Chris_Rahn
+                Artist = Artist.Chris_Rahn,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.WesternLands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -340,7 +343,8 @@ namespace HallOfBeorn.Models.Sets
 
 The players have won the game.",
                 Number = 25,
-                Artist = Artist.Titus_Lunter
+                Artist = Artist.Titus_Lunter,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.WesternLands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -362,6 +366,7 @@ The players have won the game.",
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
+                ScenarioTitle = "Over the Misty Mountains Grim",
                 Title = "Down, Down to Goblin Town",
                 StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9028",
@@ -373,7 +378,8 @@ The players have won the game.",
                 FlavorText = "Out jumped the goblins, big goblins, great ugly-looking goblins, lots of goblins, before you could say rocks and blocks. - The Hobbit",
                 OppositeText = "Players cannot defeat this stage unless The Great Goblin is in the victory display.\r\nWhen Revealed: Reveal 3 encounter cards per player, Bilbo ~Baggins may spend X resources to reduce the total number of encounter cards revealed by X. (To a minimum of 1.)\r\nIf the players defeat this stage, they have won the game.",
                 Number = 28,
-                Artist = Artist.Darek_Zabrocki
+                Artist = Artist.Darek_Zabrocki,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.TheGreatGoblin, EncounterSet.MistyMountainGoblins }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -717,7 +723,8 @@ The players have won the game.",
                 FlavorText = "To everyone's surprise, Bilbo Baggins rejoined his companions on the eastern side of the Misty Mountains. However, their celebration was cut short by the chilling sound of wolves howling close by. To the frightened hobbit, it seemed that they had escaped from the goblins only to be eaten by wargs.",
                 OppositeText = "When Revealed: The first player gains control of Bilbo Baggins. Reveal 1 encounter card per player and add it to the staging area.\r\nGollum engages the first player. Damage from undefended attacks made by Gollum must be placed on Bilbo ~Baggins.\r\nAll riddle effects are ignored. Treachery cards gain surge.\r\nIf players defeat this stage, they have won the game.",
                 Number = 31,
-                Artist = Artist.Adam_Schumpert
+                Artist = Artist.Adam_Schumpert,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.MistyMountainGoblins }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -916,7 +923,8 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 FlavorText = "After killing the Great Goblin, Bilbo's companions fought to win their escape from the goblins. By the time they realized that Bilbo had been lost in the darkness, it was too late to turn back and search for him.",
                 OppositeText = "Players cannot advance to stage 3A unless both 1B and 2B are complete.\r\nForced: Reveal 1 additional encounter card per player during the staging step.",
                 Number = 29,
-                Artist = Artist.Adam_Schumpert
+                Artist = Artist.Adam_Schumpert,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.MistyMountainGoblins }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -946,7 +954,8 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 FlavorText = "During the confusion, bilbo stumbled won a tunnel and into Gollum's cave. There the Hobbit had to outwit the creature Gollum in a dangerous riddle contest to discover the way out.",
                 OppositeText = "Players cannot advance to stage 3A unless both 1B and 2B are complete.\r\nProgress tokens cannot be added to, or removed from, this quest except by answering riddles.\r\nCards in the riddle area are immune to player card effects and cannot leave the riddle area except by quest effects.",
                 Number = 30,
-                Artist = Artist.Magali_Villeneuve
+                Artist = Artist.Magali_Villeneuve,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.MistyMountainGoblins }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -973,7 +982,8 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 FlavorText = "Obviously trolls. Even Bilbo, in spite of his sheltered life, could see that: from the great heavy faces of them, and their size, and the shape of their legs, not to mention their language, which was not drawing-room fashion at all - The Hobbit",
                 OppositeText = "Forced: If there are no Troll enemies left in play, or if there are no cards left in the encounter deck, advance it to the next stage.\r\nAny time players would place progress tokens on this quest, discard an equal number of cards from the encounter deck instead. (Progress is placed on the active location before triggering this effect.)",
                 Number = 24,
-                Artist = Artist.Darek_Zabrocki
+                Artist = Artist.Darek_Zabrocki,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.WesternLands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1076,6 +1086,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
+                ScenarioTitle = "Over the Misty Mountains Grim",
                 Title = "The Mountain Pass",
                 StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-1801204c9080",
@@ -1086,7 +1097,8 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 FlavorText = "When he peeped out in the lightning-flashes, he saw that across the valley the stone-giants were out and were hurling rocks at one another for a game, and catching them, and tossing them down into the darkness where they smashed the trees far below, or splintered into little bits with a bang. - The Hobbit ",
                 OppositeText = "When Revealed: Search the encounter deck for 1 copy of Stone-giant and add it to the staging area. Then, shuffle the encounter deck. Reveal 1 card per player from the encounter deck and add it to the staging area.",
                 Number = 27,
-                Artist = Artist.Chun_Lo
+                Artist = Artist.Chun_Lo,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.WesternLands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

@@ -304,7 +304,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeFlavorText = "You've pursued the enemy all the way to the Crossroads when a wicked horn blares in the distance. Within minutes, a host of orcs swarms out of the trees from all sides, led by a foreboding robed figure...",
                 OppositeText = "At the beginning of the quest phase, each player takes 1 hidden card.\r\nAt the beginning of the combat phase, each player must turn each of his hidden cards faceup or take 1 hidden card.",
                 Number = 117,
-                Artist = Artist.Adam_Lane
+                Artist = Artist.Adam_Lane,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.RavagingOrcs }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -326,7 +327,8 @@ If the players defeat this stage, they have won the game.",
                 Quantity = 1,
                 QuestPoints = 15,
                 Number = 118,
-                Artist = Artist.Darek_Zabrocki
+                Artist = Artist.Darek_Zabrocki,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.RavagingOrcs }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

@@ -1817,7 +1817,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "51223bd0-ffd1-11df-a976-0801200c9119",
                 CardType = CardType.Quest,
                 Setup = "ss",
-                Text = "Setup: Search the encounter deck for 1 copy of the Forest Spider and 1 copy of the Old Forest Road, and add them to the staging area. Then, shuffle the encounter deck.",
+                Text = "Setup: Search the encounter deck for 1 copy of the ~Forest ~Spider and 1 copy of the Old ~Forest ~Road, and add them to the staging area. Then, shuffle the encounter deck.",
                 FlavorText = "You are traveling through Mirkwood forest, carrying an urgent message from King Thanduil to the Lady Galadriel of Lorien. As you move along the dark trail, the spiders gather around you...",
                 OppositeFlavorText = "The nastiest things they saw were the cobwebs; dark dense cobwebs, with threads extradionairly thick, often stretched from tree to tree, or tangled in the lower branches on either side of them. There were none stretched across the path, but whether because some magic kept it clear, or for what other reasons they could not guess. - The Hobbit",
                 EncounterSet = "Passage Through Mirkwood",
@@ -1825,7 +1825,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 8,
                 Number = 119,
                 Artist = Artist.Ben_Zweifel,
-                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.PassageThroughMirkwood, EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1841,7 +1841,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 2,
                 Number = 120,
                 Artist = Artist.Ben_Zweifel,
-                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.PassageThroughMirkwood, EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1858,7 +1858,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 121,
                 Artist = Artist.Yoann_Boissonnet,
                 OppositeArtist = Artist.Ben_Zweifel,
-                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.PassageThroughMirkwood, EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1875,7 +1875,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 122,
                 Artist = Artist.Yoann_Boissonnet,
                 OppositeArtist = Artist.David_Lecossu,
-                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.PassageThroughMirkwood, EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1892,7 +1892,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 9,
                 Number = 123,
                 Artist = Artist.Ben_Zweifel,
-                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.EscapeFromDolGuldur, EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1906,7 +1906,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 15,
                 Number = 124,
                 Artist = Artist.Kaya,
-                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.EscapeFromDolGuldur, EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1920,7 +1920,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 7,
                 Number = 125,
                 Artist = Artist.Kaya,
-                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.EscapeFromDolGuldur, EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1935,7 +1935,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 8,
                 Number = 126,
                 Artist = Artist.Ben_Zweifel,
-                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.JourneyDownTheAnduin, EncounterSet.DolGuldurOrcs, EncounterSet.SauronsReach, EncounterSet.Wilderlands }
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DolGuldurOrcs, EncounterSet.SauronsReach, EncounterSet.Wilderlands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1949,7 +1949,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 16,
                 Number = 127,
                 Artist = Artist.Ben_Zweifel,
-                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.JourneyDownTheAnduin, EncounterSet.DolGuldurOrcs, EncounterSet.SauronsReach, EncounterSet.Wilderlands }
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DolGuldurOrcs, EncounterSet.SauronsReach, EncounterSet.Wilderlands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1963,7 +1963,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 0,
                 Number = 128,
                 Artist = Artist.David_A_Nash,
-                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.JourneyDownTheAnduin, EncounterSet.DolGuldurOrcs, EncounterSet.SauronsReach, EncounterSet.Wilderlands }
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DolGuldurOrcs, EncounterSet.SauronsReach, EncounterSet.Wilderlands }
             });
         }
     }

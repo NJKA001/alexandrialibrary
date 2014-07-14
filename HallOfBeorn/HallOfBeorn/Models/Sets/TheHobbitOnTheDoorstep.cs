@@ -425,7 +425,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeText = "Unconscious characters cannot quest, attack, defend, collect resources, trigger abilities, be poisoned, or ready (except by effects that target unconscious character).",
                 EncounterSet = "Flies and Spiders",
                 Number = 67,
-                Artist = Artist.Magali_Villeneuve
+                Artist = Artist.Magali_Villeneuve,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Wilderland }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -440,7 +441,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeText = "When Revealed: Reveal stage 3 and create a separate staging area for the first player use that stage. If there are not other players in the game, discard this stage and each card in the stage area. All other players advance to stage 4.",
                 OppositeFlavorText = "... the cries of the others got steadily further and fainter, and though after a while it seemed to him they changed to yells and cries for help in the far distance, all noise at last died right away, and he was left alone in complete silence and darkness. -The Hobbit",
                 Number = 68,
-                Artist = Artist.Adam_Lane
+                Artist = Artist.Adam_Lane,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Wilderland }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -459,7 +461,8 @@ Do not pass the first player token. When this stage is complete, do not advance 
 
 Action: Spend 2 Baggins resources to ready and unconscious character you control.",
                 Number = 69,
-                Artist = Artist.Ben_Zweifel
+                Artist = Artist.Ben_Zweifel,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Wilderland }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -480,7 +483,8 @@ Action: Spend 2 Baggins resources to ready an unconscious character you control.
 If the players defeat this stage, they have won the game and discovered the treasure card Bilbo's Magic Ring.",
                 EncounterSet = "Flies and Spiders",
                 Number = 70,
-                Artist = Artist.Darek_Zabrocki
+                Artist = Artist.Darek_Zabrocki,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Wilderland }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -500,7 +504,8 @@ Forced: At the end of the round, advance to stage 2.
                 OppositeFlavorText = "So one day, although autumn was now getting far on, and winds were cold, and leaves were falling fast, three large boats left Lake-town, laden with rowers, dwarves, Mr. Baggins, and many provisions. -The Hobbit",
                 EncounterSet = "The Lonely Mountain",
                 Number = 71,
-                Artist = Artist.Ben_Zweifel
+                Artist = Artist.Ben_Zweifel,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Wilderland }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -516,7 +521,8 @@ Forced: At the end of the round, advance to stage 2.
 
 Forced: After the first player makes an unsuccessful burgle attempt, Smaug the Golden attacks the first player.",
                 Number = 72,
-                Artist = Artist.Diego_Gisbert_Llorens
+                Artist = Artist.Diego_Gisbert_Llorens,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Wilderland }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -536,7 +542,8 @@ Forced: If the total number of progress on this stage is greater than the total 
 If the players defeat this stage, they have won the game and discovered any treasure successfully burgled from The Lonely Mountain.",
                 EncounterSet = "The Lonely Mountain",
                 Number = 73,
-                Artist = Artist.Sidharth_Chatursedi
+                Artist = Artist.Sidharth_Chatursedi,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Wilderland }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -554,7 +561,8 @@ If the players defeat this stage, they have won the game and discovered any trea
                 OppositeFlavorText = "To hunt the whole mountain till he had caught the thief and had torn and trampled him was his one thought -The Hobbit",
                 EncounterSet = "The Lonely Mountain",
                 Number = 74,
-                Artist = Artist.Chris_Rahn
+                Artist = Artist.Chris_Rahn,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Wilderland }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -571,7 +579,8 @@ If the players defeat this stage, they have won the game and discovered any trea
                 OppositeFlavorText = "Ever since the fall of the Great Goblin of the Misty Mountains the hatred of their race for the dwarves had been rekindled to fury. Messengers had passed to and from between all their cities, colonies and strongholds; for they resolved now to win the dominion of the north. -The Hobbit",
                 EncounterSet = "The Battle of Five Armies",
                 Number = 75,
-                Artist = Artist.Sidharth_Chatursedi
+                Artist = Artist.Sidharth_Chatursedi,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Wilderland }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -588,7 +597,8 @@ If the players defeat this stage, they have won the game and discovered any trea
 
 Forced: If there is no progress on this stage at the end of the round, each player must discard 1 random card from his hand.",
                 Number = 76,
-                Artist = Artist.Darek_Zabrocki
+                Artist = Artist.Darek_Zabrocki,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Wilderland }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -606,7 +616,8 @@ Forced: If there is no progress on this stage at the end of the round, each play
 
 Forced: If there is no progress on this stage at the end of the round, the first player adds the topmost enemy in the discard pile to the staging area, if able.",
                 Number = 77,
-                Artist = Artist.Adam_Schumpert
+                Artist = Artist.Adam_Schumpert,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Wilderland }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -624,7 +635,8 @@ Forced: If there is no progress on this stage at the end of the round, the first
 
 Forced: If there is no progress on this stage at the end of the round, each player must discard all resources from each hero's resource pool.",
                 Number = 78,
-                Artist = Artist.Adam_Lane
+                Artist = Artist.Adam_Lane,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Wilderland }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -643,7 +655,8 @@ Progress cannot be placed in this stage. While Bolg is in the staging area, it i
 
 If Bolg is destroyed, the players win the game.",
                 Number = 79,
-                Artist = Artist.Adam_Schumpert
+                Artist = Artist.Adam_Schumpert,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Wilderland }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

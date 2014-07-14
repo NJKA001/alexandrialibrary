@@ -46,7 +46,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeText = "When Revealed: Create your own staging area. Reveal 2 cards from the encounter deck and add them to your staging area.\r\nForced: After the 11th progress token is placed on Sheltered Rocks, join another player at the beginning of the travel phase. If you cannot join another player, all players continue to stage 5 together.",
                 Number = 114,
                 Artist = Artist.Cristi_Balanescu,
-                OppositeArtist = Artist.David_Lecossu
+                OppositeArtist = Artist.David_Lecossu,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.GoblinsOfTheDeep, EncounterSet.HazardsOfThePit, EncounterSet.TwistsAndTurns }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -63,7 +64,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeText = "When Revealed: Create your own staging area. Discard all resources from your heroes.\r\nForced: After the 17th progress token is placed on The Endless Caves, join another player at the beginning of the travel phase. If you cannot join another player, all players continue on to stage 5 together.",
                 Number = 115,
                 Artist = Artist.Cristi_Balanescu,
-                OppositeArtist = Artist.Cristi_Balanescu
+                OppositeArtist = Artist.Cristi_Balanescu,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.GoblinsOfTheDeep, EncounterSet.HazardsOfThePit, EncounterSet.TwistsAndTurns }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -80,7 +82,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeText = "When Revealed: Create your own staging area. Discard your hand. Reveal 2 cards from the encounter deck and add them to your staging area.\r\nForced: After the 7th progress token is placed on The Shivering Bank, join another player at the beginning of the travel phase. If you cannot join another player, all players continue on to stage 5 together.",
                 Number = 116,
                 Artist = Artist.Cristi_Balanescu,
-                OppositeArtist = Artist.Cristi_Balanescu
+                OppositeArtist = Artist.Cristi_Balanescu,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.GoblinsOfTheDeep, EncounterSet.HazardsOfThePit, EncounterSet.TwistsAndTurns }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -97,7 +100,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeText = "When Revealed: Create you own staging area. Reveal 4 cards from the encounter deck and add them to your staging area.\r\nForced: After the 5th progress token is placed on Old One Lair, join another player at the beginning of the travel phase. If you cannot join another player, all players continue on to stage 5 together.",
                 Number = 117,
                 Artist = Artist.Cristi_Balanescu,
-                OppositeArtist = Artist.Cristi_Balanescu
+                OppositeArtist = Artist.Cristi_Balanescu,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.GoblinsOfTheDeep, EncounterSet.HazardsOfThePit, EncounterSet.TwistsAndTurns }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -354,7 +358,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "The shaft shoots upwards, the glimmering lines of mithril illuminating your way out of the depths of the mountain. The makeshift ladder is narrow, but you cannot linger in the realm of those things of darkness, who gnaw at the roots of the world.",
                 OppositeText = "When Revealed: Reveal 1 card from the encounter deck per player, and add it to the staging area.\r\nEach player cannot commit more allies to the quest than the number of heroes he is also committing to the quest.\r\nIf the players defeat this stage, they have won the game.",
                 Number = 118,
-                Artist = Artist.Anthony_Palumbo
+                Artist = Artist.Anthony_Palumbo,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.GoblinsOfTheDeep, EncounterSet.HazardsOfThePit, EncounterSet.TwistsAndTurns }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -385,7 +390,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeFlavorText = "A low rumble sounds from below. There are a variety of underground waterways in Moria, but they should not be disturbed.",
                 OppositeText = "When Revealed: Reveal 1 card from the encounter deck per player, and add it to the staging area.",
                 Number = 111,
-                Artist = Artist.Ilich_Henriquez
+                Artist = Artist.Ilich_Henriquez,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.GoblinsOfTheDeep, EncounterSet.HazardsOfThePit, EncounterSet.TwistsAndTurns }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -399,7 +405,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "Small rivers cut their way across your path. Some are not much more than a trickle, and recent looking too. Another rumble shakes the walls, this time it seems to be above you.",
                 OppositeText = "Forced: After a player commits characters to the quest, he must discard the top 2 cards of his deck.",
                 Number = 112,
-                Artist = Artist.Trudi_Castle
+                Artist = Artist.Trudi_Castle,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.GoblinsOfTheDeep, EncounterSet.HazardsOfThePit, EncounterSet.TwistsAndTurns }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -431,7 +438,8 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 0,
                 OppositeText = "When Revealed: Discard all Item, Armor, Weapon, Light cards and all encounter deck cards from play, Shuffle all enemy and treachery cards in the encounter discard pile together with the Foundations of Stone encounter set. This deck becomes the new encounter deck. remove all other encounter deck cards from the game. Then, starting with the first player, each player draws a random stage 4 quest card. Remove all other stage 4 quest cards from the game.",
                 Number = 113,
-                Artist = Artist.Marco_Caradonna
+                Artist = Artist.Marco_Caradonna,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.GoblinsOfTheDeep, EncounterSet.HazardsOfThePit, EncounterSet.TwistsAndTurns }
             });
         }
     }

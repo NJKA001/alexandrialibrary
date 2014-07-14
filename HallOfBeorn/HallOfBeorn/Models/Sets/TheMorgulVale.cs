@@ -205,7 +205,8 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Morgul Vale",
                 Quantity = 1,
                 Number = 144,
-                Artist = Artist.Sidharth_Chatursedi
+                Artist = Artist.Sidharth_Chatursedi,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.MordorElite, EncounterSet.CreaturesOfTheForest }
             });
 
             Cards.Add(new Card()
@@ -223,7 +224,8 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "The Morgul Vale",
                 Quantity = 1,
                 Number = 145,
-                Artist = Artist.Magali_Villeneuve
+                Artist = Artist.Magali_Villeneuve,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.MordorElite, EncounterSet.CreaturesOfTheForest }
             });
 
             Cards.Add(new Card()
@@ -245,7 +247,8 @@ If ~Nazgûl of Minas ~Morgul is defeated, the players have won the game.",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 1,
                 Number = 146,
-                Artist = Artist.Magali_Villeneuve
+                Artist = Artist.Magali_Villeneuve,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.MordorElite, EncounterSet.CreaturesOfTheForest }
             });
 
             Cards.Add(new Card()

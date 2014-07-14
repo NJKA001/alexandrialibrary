@@ -395,7 +395,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeFlavorText = "Frodo's friend insist on joining him in his adventure, but danger finds them sooner than anticipated when Black Riders appear in the Shire.",
                 QuestPoints = 1,
                 Number = 22,
-                Artist = Artist.Cristi_Balanescu
+                Artist = Artist.Cristi_Balanescu,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Hunted, EncounterSet.TheRing, EncounterSet.TheBlackRiders }
             });
             Cards.Add(new Card()
             {
@@ -410,7 +411,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 QuestPoints = 14,
                 Number = 23,
-                Artist = Artist.Chris_Rahn
+                Artist = Artist.Chris_Rahn,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Hunted, EncounterSet.TheRing, EncounterSet.TheBlackRiders }
             });
             Cards.Add(new Card()
             {
@@ -424,7 +426,8 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "A Shadow of the Past",
                 Quantity = 1,
                 Number = 24,
-                Artist = Artist.Diego_Gisbert_Llorens
+                Artist = Artist.Diego_Gisbert_Llorens,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Hunted, EncounterSet.TheRing, EncounterSet.TheBlackRiders }
             });
             Cards.Add(new Card()
             {
@@ -441,7 +444,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 QuestPoints = 8,
                 Number = 25,
-                Artist = Artist.Darek_Zabrocki
+                Artist = Artist.Darek_Zabrocki,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Hunted, EncounterSet.TheRing, EncounterSet.TheNazgul }
             });
             Cards.Add(new Card()
             {
@@ -456,7 +460,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 QuestPoints = 6,
                 Number = 26,
-                Artist = Artist.Adam_Lane
+                Artist = Artist.Adam_Lane,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Hunted, EncounterSet.TheRing, EncounterSet.TheNazgul }
             });
             Cards.Add(new Card()
             {
@@ -472,7 +477,8 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "A Knife in the Dark",
                 Quantity = 1,
                 Number = 27,
-                Artist = Artist.David_A_Nash
+                Artist = Artist.David_A_Nash,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Hunted, EncounterSet.TheRing, EncounterSet.TheNazgul }
             });
             Cards.Add(new Card()
             {
@@ -487,7 +493,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 QuestPoints = 15,
                 Number = 28,
-                Artist = Artist.Magali_Villeneuve
+                Artist = Artist.Magali_Villeneuve,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Hunted, EncounterSet.TheBlackRiders, EncounterSet.TheNazgul }
             });
             Cards.Add(new Card()
             {
@@ -501,7 +508,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 QuestPoints = 15,
                 Number = 29,
-                Artist = Artist.Darek_Zabrocki
+                Artist = Artist.Darek_Zabrocki,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Hunted, EncounterSet.TheBlackRiders, EncounterSet.TheNazgul }
             });
             Cards.Add(new Card()
             {
@@ -1159,7 +1167,7 @@ Response: After an ememy is declared as an attacker, shuffle the top card of the
                 NormalizedTraits = new List<string> { "Nazgul." },
                 Keywords = new List<string>() { "Immune to player card effects." },
                 Text = "The Witch-king gets -30 engagement cost while The One ~Ring is exhausted.\r\n\r\nCharacters with 1 Willpower or less cannot defend attacks made by The Witch-king.",
-                EncounterSet = "The Nazgul",
+                EncounterSet = "The Nazgûl",
                 Quantity = 1,
                 EasyModeQuantity = 1,
                 Number = 68,
@@ -1178,7 +1186,7 @@ Response: After an ememy is declared as an attacker, shuffle the top card of the
                 Traits = new List<string>() { "Nazgûl." },
                 NormalizedTraits = new List<string> { "Nazgul." },
                 Keywords = new List<string>() { "Cannot have non-Morgul attachments." },
-                EncounterSet = "The Nazgul",
+                EncounterSet = "The Nazgûl",
                 Text = "Forced: When Ringwraith attacks, deal it an additional shadow card if The One ~Ring is exhausted.",
                 Shadow = "Shadow: Shuffle this card into the encounter deck.",
                 Quantity = 4,
@@ -1192,7 +1200,7 @@ Response: After an ememy is declared as an attacker, shuffle the top card of the
                 Id = "4b36df3f-d75b-4b3a-9324-9ab31c10d7b9",
                 CardType = CardType.Treachery,
                 Keywords = new List<string>() { "Surge." },
-                EncounterSet = "The Nazgul",
+                EncounterSet = "The Nazgûl",
                 Text = "When Revealed: Attach to a Nazgûl enemy in play, if able. (Counts as a Weapon attachment with the text: \"Limit 1 per enemy. Attached enemy gets +1 Attack and cannot take non-combat damage.\")",
                 FlavorText = "...in their haggard hands were swords of steel.\r\n-The Fellowship of the Ring",
                 Quantity = 3,
@@ -1205,7 +1213,7 @@ Response: After an ememy is declared as an attacker, shuffle the top card of the
                 Title = "Power In Their Terror",
                 Id = "4765cbea-5ae8-4e39-a811-a67f1f6ca2a0",
                 CardType = CardType.Treachery,
-                EncounterSet = "The Nazgul",
+                EncounterSet = "The Nazgûl",
                 Text = "When Revealed: Each ally gets -1 Willpower until the end of the round. Deal 2 damage to each ally with 0 willpower.",
                 Shadow = "Shadow: Discard a non-objective attachment you control.",
                 Quantity = 3,

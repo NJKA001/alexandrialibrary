@@ -40,7 +40,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeText = "When Revealed: Reveal 1 encounter card per player, and add it to the staging area. Then, add A Presence in the Dark to your victory display.",
                 VictoryPoints = 2,
                 Number = 69,
-                Artist = Artist.Igor_Kieryluk
+                Artist = Artist.Igor_Kieryluk,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.HazardsOfThePit, EncounterSet.DeepsOfMoria, EncounterSet.PlunderingGoblins }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -55,7 +56,8 @@ namespace HallOfBeorn.Models.Sets
 If players defeat this stage, they win the game.",
                 Quantity = 1,
                 Number = 66,
-                Artist = Artist.Ben_Zweifel
+                Artist = Artist.Ben_Zweifel,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.TwistsAndTurns, EncounterSet.HazardsOfThePit, EncounterSet.GoblinsOfTheDeep }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -400,7 +402,8 @@ Player cannot advance to the next stage of the scenario unless Bridge of Khazad-
                 FlavorText = "You have been sent by the White Council to Moria, to deliver a message to Balin and his Dwarven colony. No one has heard from him in a while.",
                 OppositeFlavorText = "The doors of the East-gate hang crooked on their henges. The darkness inside the doorway is still and impenetrable, shutting out the last beams of a sinking sun.",
                 Number = 64,
-                Artist = Artist.Ben_Zweifel
+                Artist = Artist.Ben_Zweifel,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.TwistsAndTurns, EncounterSet.HazardsOfThePit, EncounterSet.GoblinsOfTheDeep }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -516,7 +519,8 @@ If there are no enemies in play, immediately advance to the next stage of the sc
                 FlavorText = "The skeletons of Dwarves and Orcs lie undisturbed, but you have discovered no recent sign of the Dwarven colony. The sound of scampering feet travels to your ears, and you move in that direction to investigate. There is a patrol of Goblins, marching in a loose formation through the shadows.",
                 Quantity = 1,
                 Number = 65,
-                Artist = Artist.Ilich_Henriquez
+                Artist = Artist.Ilich_Henriquez,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.TwistsAndTurns, EncounterSet.HazardsOfThePit, EncounterSet.GoblinsOfTheDeep }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -811,7 +815,8 @@ If there are no enemies in play, immediately advance to the next stage of the sc
                 VictoryPoints = 1,
                 Number = 70,
                 Artist = Artist.Cristi_Balanescu,
-                OppositeArtist = Artist.Magali_Villeneuve
+                OppositeArtist = Artist.Magali_Villeneuve,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.HazardsOfThePit, EncounterSet.DeepsOfMoria, EncounterSet.PlunderingGoblins }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -830,7 +835,8 @@ If there are no enemies in play, immediately advance to the next stage of the sc
                 VictoryPoints = 1,
                 Number = 71,
                 Artist = Artist.Cristi_Balanescu,
-                OppositeArtist = Artist.Magali_Villeneuve
+                OppositeArtist = Artist.Magali_Villeneuve,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.HazardsOfThePit, EncounterSet.DeepsOfMoria, EncounterSet.PlunderingGoblins }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -849,7 +855,8 @@ If there are no enemies in play, immediately advance to the next stage of the sc
                 VictoryPoints = 2,
                 Number = 72,
                 Artist = Artist.Cristi_Balanescu,
-                OppositeArtist = Artist.David_Lecossu
+                OppositeArtist = Artist.David_Lecossu,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.HazardsOfThePit, EncounterSet.DeepsOfMoria, EncounterSet.PlunderingGoblins }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -868,7 +875,8 @@ If there are no enemies in play, immediately advance to the next stage of the sc
                 VictoryPoints = 1,
                 Number = 73,
                 Artist = Artist.Cristi_Balanescu,
-                OppositeArtist = Artist.Ilich_Henriquez
+                OppositeArtist = Artist.Ilich_Henriquez,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.HazardsOfThePit, EncounterSet.DeepsOfMoria, EncounterSet.PlunderingGoblins }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -886,7 +894,8 @@ If there are no enemies in play, immediately advance to the next stage of the sc
                 VictoryPoints = 2,
                 Number = 74,
                 Artist = Artist.Cristi_Balanescu,
-                OppositeArtist = Artist.Stacey_Diana_Clark
+                OppositeArtist = Artist.Stacey_Diana_Clark,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.HazardsOfThePit, EncounterSet.DeepsOfMoria, EncounterSet.PlunderingGoblins }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -904,7 +913,8 @@ If there are no enemies in play, immediately advance to the next stage of the sc
                 QuestPoints = 9,
                 Number = 75,
                 Artist = Artist.Cristi_Balanescu,
-                OppositeArtist = Artist.Magali_Villeneuve
+                OppositeArtist = Artist.Magali_Villeneuve,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.HazardsOfThePit, EncounterSet.DeepsOfMoria, EncounterSet.PlunderingGoblins }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -922,7 +932,8 @@ If there are no enemies in play, immediately advance to the next stage of the sc
                 QuestPoints = 4,
                 Number = 76,
                 Artist = Artist.Cristi_Balanescu,
-                OppositeArtist = Artist.Magali_Villeneuve
+                OppositeArtist = Artist.Magali_Villeneuve,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.HazardsOfThePit, EncounterSet.DeepsOfMoria, EncounterSet.PlunderingGoblins }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -936,7 +947,8 @@ If there are no enemies in play, immediately advance to the next stage of the sc
                 Text = "Setup: Search the encounter deck for Book of Mazarbul, and have the first player attach it to a hero of his choice. Shuffle the encounter deck.",
                 OppositeText = "When Revealed: Reveal 1 encounter card per player, and add it to the staging area.",
                 Number = 67,
-                Artist = Artist.Cristi_Balanescu
+                Artist = Artist.Cristi_Balanescu,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.GoblinsOfTheDeep, EncounterSet.PlunderingGoblins }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1024,7 +1036,8 @@ Forced: At the end of the staging step, reveal the top X cards of the encounter 
 If the players defeat this stage, they win the game.",
                 Quantity = 1,
                 Number = 68,
-                Artist = Artist.Ben_Zweifel
+                Artist = Artist.Ben_Zweifel,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.GoblinsOfTheDeep, EncounterSet.PlunderingGoblins }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

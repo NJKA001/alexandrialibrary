@@ -1049,7 +1049,8 @@ If Gríma leaves play, the players lose the game.",
                 OppositeText = "Forced: After the last time counter is removed from this stage, discard Gríma from play.\r\n\r\nThe players cannot advance unless the first player controls Gríma.",
                 Quantity = 1,
                 Number = 59,
-                Artist = Artist.Cristi_Balanescu
+                Artist = Artist.Cristi_Balanescu,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DunlandWarriors, EncounterSet.DunlandRaiders }
             });
             Cards.Add(new Card()
             {
@@ -1066,7 +1067,8 @@ If Gríma leaves play, the players lose the game.",
                 OppositeText = "When Revealed: Each player searches the encounter deck and discard pile for 1 different Dunland enemy and adds it to the staging area. Shuffle the encounter deck.\r\n\r\nForced: After the last time counter is removed from this stage, each player assigns X damage among characters he controls where X is the number of cards in his hand. Place 2 time counters on this stage.",
                 Quantity = 1,
                 Number = 60,
-                Artist = Artist.Cristi_Balanescu
+                Artist = Artist.Cristi_Balanescu,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DunlandWarriors, EncounterSet.DunlandRaiders }
             });
             Cards.Add(new Card()
             {
@@ -1084,7 +1086,8 @@ If Gríma leaves play, the players lose the game.",
                 OppositeText = "Forced: After the last time counter is removed from this stage, discard the top X cards from the encounter deck. X is the number of cards in the first player's hand. Add each enemy discarded this way to the staging area. Put 3 time counters on this stage.\r\n\r\nWhile there is at least 1 enemy in play, the players cannot defeat this stage. If the players defeat this stage, they win the game.",
                 Quantity = 1,
                 Number = 61,
-                Artist = Artist.Adam_Lane
+                Artist = Artist.Adam_Lane,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DunlandWarriors, EncounterSet.DunlandRaiders }
             });
             Cards.Add(new Card() {
                 Title = "Orders from Orthanc",
@@ -1101,7 +1104,8 @@ If Gríma leaves play, the players lose the game.",
                 OppositeText = "When Revealed: Each player searches the encounter deck for a Mountain location and adds it to the staging area. Shuffle the encounter deck. Then, advance to stage 2.",
                 Quantity = 1,
                 Number = 62,
-                Artist = Artist.Ilich_Henriquez
+                Artist = Artist.Ilich_Henriquez,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.MistyMountainOrcs, EncounterSet.BrokenLands }
             });
             Cards.Add(new Card() {
                 Title = "Searching for Mugash",
@@ -1117,7 +1121,8 @@ If Gríma leaves play, the players lose the game.",
                 OppositeText = "Forced: After the last time counter is removed for this stage, shuffle the discard pile into the encounter deck and reveal 2 encounter cards per player. Place 2 time counters on this stage.\r\n\r\nResponse: After questing successfully, cancel all progress that would be placed on this stage. Then, place 1 time counter on this stage. Or, if Mugash is in play, advance to stage 3.",
                 Quantity = 1,
                 Number = 63,
-                Artist = Artist.Sebastian_Giacobino
+                Artist = Artist.Sebastian_Giacobino,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.MistyMountainOrcs, EncounterSet.BrokenLands }
             });
             Cards.Add(new Card() {
                 Title = "The Wizard's Prize",
@@ -1133,7 +1138,8 @@ If Gríma leaves play, the players lose the game.",
                 Text = "Forced: After the last time counter is removed from this stage, return Mugash to the staging area and reveal X encounter cards. X is the number of players in the game minus 1. Place 3 time counters on this stage.\r\n\r\nProgress cannot be placed on this stage unless Mugash is attached to a hero.\r\n\r\nIf the players defeat this stage, they win the game.",
                 Quantity = 1,
                 Number = 64,
-                Artist = Artist.Adam_Lane
+                Artist = Artist.Adam_Lane,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.MistyMountainOrcs, EncounterSet.BrokenLands }
             });
             Cards.Add(new Card()
             {
@@ -1152,7 +1158,8 @@ If Gríma leaves play, the players lose the game.",
                 OppositeText = "Forced: After the last time counter is removed from this stage, shuffle Mugash into the encounter deck and advance to stage 3.\r\n\r\nThe players cannot advance to stage 2 unless Mugash is attached to a hero.",
                 Quantity = 1,
                 Number = 65,
-                Artist = Artist.Cristi_Balanescu
+                Artist = Artist.Cristi_Balanescu,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.AncientForest, EncounterSet.WearyTravelers }
             });
             Cards.Add(new Card()
             {
@@ -1170,7 +1177,8 @@ If Gríma leaves play, the players lose the game.",
                 OppositeText = "Forced: After the last time counter is removed from this stage, shuffle Mugash into the encounter deck and advance to stage 3A.\r\n\r\nThe players cannot defeat this stage unless Mugash is attached to a hero.\r\n\r\nIf the players defeat this stage, they win the game.",
                 Quantity = 1,
                 Number = 66,
-                Artist = Artist.Alexandre_Dainche
+                Artist = Artist.Alexandre_Dainche,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.AncientForest, EncounterSet.WearyTravelers }
             });
             Cards.Add(new Card()
             {
@@ -1187,7 +1195,8 @@ If Gríma leaves play, the players lose the game.",
                 OppositeText = "Forced: After the last time counter is removed from this stage, discard the top 5 cards of the encounter deck. Each player must choose an enemy or objective in the discard pile, reveal it and add it to the staging area. Place 3 time counters on this stage.\r\n\r\nForced: After placing progress here, if there is at least 6 progress on this stage and Mugash is attached to a hero, advance to stage 2A.",
                 Quantity = 1,
                 Number = 67,
-                Artist = Artist.Alyn_Spiller
+                Artist = Artist.Alyn_Spiller,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.AncientForest, EncounterSet.WearyTravelers }
             });
         }
     }

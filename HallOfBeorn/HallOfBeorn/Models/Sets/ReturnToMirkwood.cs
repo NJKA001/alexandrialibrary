@@ -31,7 +31,8 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 EncounterSet = "Return to Mirkwood",
                 Number = 129,
                 Artist = Artist.John_Gravato,
-                SecondArtist = Artist.Dimitri_Bielak
+                SecondArtist = Artist.Dimitri_Bielak,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.SpidersOfMirkwood, EncounterSet.Wilderlands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -157,7 +158,8 @@ Player cannot defeat this stage if there are any enemies in play. If players def
 If the players quest unsuccessfully, Gollum escapes and the players have lost the game.",
                 EncounterSet = "Return to Mirkwood",
                 Number = 127,
-                Artist = Artist.Tom_Garden
+                Artist = Artist.Tom_Garden,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.SpidersOfMirkwood, EncounterSet.Wilderlands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -311,7 +313,8 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
 Mirkwood is always a dangerous place, but it is even worse with Gollum. Between the outbursts, tantrums, and the flying provisions, you are not afforded a moment's peace",
                 EncounterSet = "Return to Mirkwood",
                 Number = 126,
-                Artist = Artist.Ignacio_Bazan_Lazcano
+                Artist = Artist.Ignacio_Bazan_Lazcano,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.SpidersOfMirkwood, EncounterSet.Wilderlands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -325,7 +328,8 @@ Mirkwood is always a dangerous place, but it is even worse with Gollum. Between 
                 Quantity = 1,
                 EncounterSet = "Return to Mirkwood",
                 Number = 128,
-                Artist = Artist.Timo_Karhula
+                Artist = Artist.Timo_Karhula,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.SpidersOfMirkwood, EncounterSet.Wilderlands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

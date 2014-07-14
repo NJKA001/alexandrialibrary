@@ -190,7 +190,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeFlavorText = "'Yes, yes,' said Gollum. 'All dead, all rotten. Elves and Men and Orcs. The Dead Marshes. There was a great battle long ago, yes, so they told him when Smeagol was young, when I was young before teh Precious came. It was a great battle. Tall Men with long swords, and terrible Elves and Orcses shrieking. They fought on th eplain for days and months at the Black Gates. But the Marshes have grown since then, swallowed up the graves; always creeping, creeping.' -The Two Towers.",
                 EncounterSet = "The Dead Marshes",
                 Number = 105,
-                Artist = Artist.Ignacio_Bazan_Lazcano
+                Artist = Artist.Ignacio_Bazan_Lazcano,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.SauronsReach, EncounterSet.Wilderlands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -271,7 +272,8 @@ If this final Escape test is passed, the players have captured Gollum and won th
                 Quantity = 1,
                 EncounterSet = "The Dead Marshes",
                 Number = 106,
-                Artist = Artist.Ignacio_Bazan_Lazcano
+                Artist = Artist.Ignacio_Bazan_Lazcano,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.SauronsReach, EncounterSet.Wilderlands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

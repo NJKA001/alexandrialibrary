@@ -462,7 +462,8 @@ If there are 4 or more resource tokens on Conspiracy, advance to the next stage.
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
                 Number = 11,
-                Artist = Artist.Milek_Jakubiec
+                Artist = Artist.Milek_Jakubiec,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Brigands, EncounterSet.StreetsOfGondor }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -481,7 +482,8 @@ If there are 4 or more resource tokens on The Grand Design, advance to the next 
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
                 Number = 12,
-                Artist = Artist.Grzegorz_Pedrycz
+                Artist = Artist.Grzegorz_Pedrycz,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Brigands, EncounterSet.StreetsOfGondor }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -499,7 +501,8 @@ The players cannot defeat this stage while a Villain is in play. If this stage i
                 Quantity = 1,
                 QuestPoints = 15,
                 Number = 13,
-                Artist = Artist.David_A_Nash
+                Artist = Artist.David_A_Nash,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Brigands, EncounterSet.StreetsOfGondor }
             });
         }
     }

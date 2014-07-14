@@ -294,7 +294,8 @@ namespace HallOfBeorn.Models.Sets
 If the players have at least 3 victory points and defeat this stage, they have won the game.",
                 QuestPoints = 5,
                 Number = 64,
-                Artist = Artist.Adam_Schumpert
+                Artist = Artist.Adam_Schumpert,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.MistyMountains }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -348,7 +349,8 @@ If the players have at least 3 victory points and defeat this stage, they have w
                 OppositeText = "When Revealed: Reveal cards from the encounter deck and add them to the staging area until there is at least X threat in the staging area. X is twice the number of players in the game.",
                 OppositeFlavorText = "Your approach is blocked by a dark lake that slumbers beneath the face of the cliff. You must search for a way around the water.",
                 Number = 63,
-                Artist = Artist.Jason_Juta
+                Artist = Artist.Jason_Juta,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.MistyMountains }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

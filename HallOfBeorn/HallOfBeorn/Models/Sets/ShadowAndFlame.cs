@@ -168,7 +168,8 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Quantity = 1,
                 QuestPoints = 1,
                 Number = 140,
-                Artist = Artist.Dmitry_Burmak
+                Artist = Artist.Dmitry_Burmak,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.GoblinsOfTheDeep, EncounterSet.DeepsOfMoria }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -241,7 +242,8 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Text = "Setup: Remove Dark Pit from the encounter deck and place it aside, out of play. Add Durin's Bane to the staging area. Shuffle the encounter deck.",
                 OppositeText = "When Revealed: Reduce each player's threat to 0. Reveal X cards from the encounter deck, where X is one less than the number of players in the game, and add them to the staging area.",
                 Number = 138,
-                Artist = Artist.Ben_Zweifel
+                Artist = Artist.Ben_Zweifel,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.GoblinsOfTheDeep, EncounterSet.DeepsOfMoria }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -341,7 +343,8 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Quantity = 1,
                 QuestPoints = 16,
                 Number = 139,
-                Artist = Artist.Jason_Juta
+                Artist = Artist.Jason_Juta,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.GoblinsOfTheDeep, EncounterSet.DeepsOfMoria }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

@@ -190,7 +190,8 @@ If there are no villager tokens on Savagery of the Orcs, advance to the next sta
                 EncounterSet = "Encounter at Amon Dîn",
                 Quantity = 1,
                 Number = 66,
-                Artist = Artist.Jake_Murray
+                Artist = Artist.Jake_Murray,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.RavagingOrcs }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -208,7 +209,8 @@ When the players defeat this stage, end the game. Compare the number of tokens o
                 Quantity = 1,
                 QuestPoints = 15,
                 Number = 67,
-                Artist = Artist.Jake_Murray
+                Artist = Artist.Jake_Murray,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.RavagingOrcs }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

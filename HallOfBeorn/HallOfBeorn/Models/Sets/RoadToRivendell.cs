@@ -27,7 +27,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Setup: Put Arwen Undómiel into play under the control of the first player. Shuffle the encounter deck. Reveal 1 card from the encounter deck per player, and add them to the staging area.",
                 FlavorText = "This is a wild and perilous country, and it is dangerous to follow the roads. The mountains rise up on the right, impassively watching your slow trek among their foothills.",
                 Number = 38,
-                Artist = Artist.Ben_Zweifel
+                Artist = Artist.Ben_Zweifel,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.MistyMountains, EncounterSet.PlunderingGoblins }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -41,7 +42,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeText = "When Revealed: Reveal 1 card from the encounter deck per player, and add it to the staging area.\r\nCharacters cannot be healed.\r\nIf the players defeat this stage, they have won the game.",
                 FlavorText = "Orcs and other creatures have hounded you since fighting your way free of the orc outpost. Soon you will reach the safety of Rivendell's borders, but supplies have dwindled and you are dead weary from sleepless nights of keeping watch, as dark forms shadow your camp.",
                 Number = 40,
-                Artist = Artist.Noah_Bradley
+                Artist = Artist.Noah_Bradley,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.MistyMountains, EncounterSet.PlunderingGoblins }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -242,7 +244,8 @@ namespace HallOfBeorn.Models.Sets
                 Number = 39,
                 OppositeText = "When Revealed: Search the encounter deck and discard pile for Goblin Gate and add it to the staging area, if able. Then, if there is no active location, Goblin Gate becomes the active location.",
                 FlavorText = "Heavy rain drives you to seek shelter among the caves of the mountains. They are dry, and the fire you start seeps into your bones and restores your spirit. Your eyes are heavy when teh soft clatter of falling pebbles reaches your ears. Perhaps you are not alone.",
-                Artist = Artist.Nick_Deligaris
+                Artist = Artist.Nick_Deligaris,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.MistyMountains, EncounterSet.PlunderingGoblins }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

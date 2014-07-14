@@ -360,7 +360,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeFlavorText = "Inside the tavern, Lord Alcaron looks nervously toward the door as he hands you a scroll bearing the seal of Gondor. He asks that you deliver it to Faramir in Ithilen, but the brigands who just entered look intent on taking it from you",
                 EncounterSet = "Peril in Pelargir",
                 Number = 65,
-                Artist = Artist.Darek_Zabrocki
+                Artist = Artist.Darek_Zabrocki,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.StreetsOfGondor, EncounterSet.Brigands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -375,7 +376,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "During the fight in the tavern, one of your adversaries managed to grab Alcaron's Scroll and flee outside. You chase the thief into the street where you are surrounded by a gang of his fellow brigands. You must fight your way through the mob and recover the scroll!",
                 OppositeText = "When Revealed: Attach Alcaron's ~Scroll to the highest engagement cost enemy in play, if able. Otherwise, add Alcaron's Scroll to the staging area.",
                 Number = 66,
-                Artist = Artist.Ben_Zweifel
+                Artist = Artist.Ben_Zweifel,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.StreetsOfGondor, EncounterSet.Brigands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -395,7 +397,8 @@ Forced: The first enemy revealed from the encounter deck each round makes an imm
 The players cannot defeat this stage unless Alcaron's ~Scroll is attached to a hero. If the players defeat this stage, they have won the game.",
                 EncounterSet = "Peril in Pelargir",
                 Number = 67,
-                Artist = Artist.Jeff_Lee_Johnson
+                Artist = Artist.Jeff_Lee_Johnson,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.StreetsOfGondor, EncounterSet.Brigands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -413,7 +416,8 @@ The players cannot defeat this stage unless Alcaron's ~Scroll is attached to a h
                 OppositeFlavorText = "Faramir has left a company of rangers in Ithilien, tasked on ambushing Southrons as the march toward Cair Andros. Their captain, Celador, offers to lead you to Cair Andros after the approaching enemy is destroyed...",
                 EncounterSet = "Into Ithilien",
                 Number = 68,
-                Artist = Artist.Jeff_Lee_Johnson
+                Artist = Artist.Jeff_Lee_Johnson,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.BroodingForest, EncounterSet.CreaturesOfTheForest, EncounterSet.Southrons }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -431,7 +435,8 @@ The players cannot defeat this stage unless Alcaron's ~Scroll is attached to a h
 
 After this stage is completed advance to stage 4A (bypassing stage 3).",
                 Number = 69,
-                Artist = Artist.Magali_Villeneuve
+                Artist = Artist.Magali_Villeneuve,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.BroodingForest, EncounterSet.CreaturesOfTheForest, EncounterSet.Southrons }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -447,7 +452,8 @@ After this stage is completed advance to stage 4A (bypassing stage 3).",
 
 Enemies do not make engagement checks and cannot be optionally engaged.",
                 Number = 70,
-                Artist = Artist.Ilich_Henriquez
+                Artist = Artist.Ilich_Henriquez,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.BroodingForest, EncounterSet.CreaturesOfTheForest, EncounterSet.Southrons }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -466,7 +472,8 @@ Forced: At the end of each round, raise each player's threat by 2.
 
 If the players defeat this stage, they have won the game.",
                 Number = 71,
-                Artist = Artist.Emrah_Elmasli
+                Artist = Artist.Emrah_Elmasli,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.BroodingForest, EncounterSet.CreaturesOfTheForest, EncounterSet.Southrons }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -484,7 +491,8 @@ If the players defeat this stage, they have won the game.",
                 OppositeFlavorText = "The assault is relentless, and the defenders grow weary. The tide is slowly but surely turning against you...",
                 EncounterSet = "The Siege of Cair Andros",
                 Number = 72,
-                Artist = Artist.Lin_Bo
+                Artist = Artist.Lin_Bo,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Southrons, EncounterSet.RavagingOrcs, EncounterSet.MordorElite }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -498,7 +506,8 @@ If the players defeat this stage, they have won the game.",
                 FlavorText = "As smoke and rending cries fill the air, rafts of Orcs beach their crafts all along the northern banks. You must reach the shore and drive them back into the river before a solid foothold can be established.",
                 OppositeText = "Reveal 1 additional card from the encounter deck and add it to the staging area during the staging step each round.",
                 Number = 73,
-                Artist = Artist.Timo_Karhula
+                Artist = Artist.Timo_Karhula,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Southrons, EncounterSet.RavagingOrcs, EncounterSet.MordorElite }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -513,7 +522,8 @@ If the players defeat this stage, they have won the game.",
                 FlavorText = "With a crashing boom the eastern gate shatters. A ram has broken through, and the pressing host of Orcs pour into the courtyard beyond. Engage them in hand-to-hand combat and secure the gate!",
                 OppositeText = "Forced: After the players quest unsuccessfully, instead of raising threat each player must choose and discard 1 character he controls.",
                 Number = 74,
-                Artist = Artist.Lin_Bo
+                Artist = Artist.Lin_Bo,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Southrons, EncounterSet.RavagingOrcs, EncounterSet.MordorElite }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -528,7 +538,8 @@ If the players defeat this stage, they have won the game.",
                 FlavorText = "Orc scramblers have infiltrated the island and climbed over the walls. They fought to the western gate, and the gate fell. Now a new host of enemies that were lying in wait are breaching the Citadel itself!",
                 OppositeText = "Breakthrough at the Citadel adds 5 Threat to the staging area.",
                 Number = 75,
-                Artist = Artist.Darek_Zabrocki
+                Artist = Artist.Darek_Zabrocki,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Southrons, EncounterSet.RavagingOrcs, EncounterSet.MordorElite }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -547,7 +558,8 @@ If the players have collected 4 or more victory points, The Last Battle gains Ba
 
 If the players defeat this stage, they have won the game.",
                 Number = 76,
-                Artist = Artist.Darek_Zabrocki
+                Artist = Artist.Darek_Zabrocki,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Southrons, EncounterSet.RavagingOrcs, EncounterSet.MordorElite }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

@@ -187,7 +187,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "You have returned to Minas Tirith just in time to join the army of Gondor as it marches to Osgiliath. An army of orcs and southrons have garrisoned the ancient city, but Lord Boromir means to retake it. Eager to strike a blow against Mordor, you will see the city retaken or die in the attempt... ",
                 Quantity = 1,
                 Number = 91,
-                Artist = Artist.Tomasz_Jedruszek
+                Artist = Artist.Tomasz_Jedruszek,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.MordorElite, EncounterSet.Southrons }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

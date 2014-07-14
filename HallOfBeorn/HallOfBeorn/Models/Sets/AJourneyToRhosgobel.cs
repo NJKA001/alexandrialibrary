@@ -335,7 +335,8 @@ If Wilyador leaves play, the players have lost the game.",
                 Quantity = 1,
                 Number = 60,
                 Artist = Artist.Joko_Mulyono,
-                SecondArtist = Artist.Fandy_Sugiarto
+                SecondArtist = Artist.Fandy_Sugiarto,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -352,7 +353,8 @@ If Wilyador leaves play, the players have lost the game.",
 Forced: After a card effect heals Wilyador, remove that card from the game.",
                 Quantity = 1,
                 Number = 61,
-                Artist = Artist.Ijur
+                Artist = Artist.Ijur,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -368,7 +370,8 @@ Forced: After a card effect heals Wilyador, remove that card from the game.",
 If Wilyador is completely healed when this effect resolves, Wilyador survives and the players have won the game. Otherwise, the players have lost the game.",
                 Quantity = 1,
                 Number = 62,
-                Artist = Artist.Ben_Zweifel
+                Artist = Artist.Ben_Zweifel,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
             });
         }
     }

@@ -22,6 +22,7 @@ namespace HallOfBeorn.Models
         public List<Card> RelatedCards { get; set; }
 
         public string Id { get; set; }
+        public string ScenarioTitle { get; set; }
         public string Title { get; set; }
         public string NormalizedTitle { get; set; }
         public string OppositeTitle { get; set; }

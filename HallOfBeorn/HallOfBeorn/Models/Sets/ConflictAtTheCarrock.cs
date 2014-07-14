@@ -61,7 +61,8 @@ namespace HallOfBeorn.Models.Sets
 Players cannot defeat this stage if there are any Troll enemies in play.",
                 EncounterSet = "Conflict at the Carrock",
                 Number = 36,
-                Artist = Artist.Diego_Gisbert_Llorens
+                Artist = Artist.Diego_Gisbert_Llorens,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.JourneyDownTheAnduin, EncounterSet.Wilderlands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -199,7 +200,8 @@ Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.
                 OppositeFlavorText = "As this area is under the watch of the Beornings, you seek out their leader, Grimbeorn the Old, and discover he has already set out in a rage. You follow, hoping to find him before he confronts the Trolls.",
                 EncounterSet = "Conflict at the Carrock",
                 Number = 35,
-                Artist = Artist.Igor_Kieryluk
+                Artist = Artist.Igor_Kieryluk,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.JourneyDownTheAnduin, EncounterSet.Wilderlands }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

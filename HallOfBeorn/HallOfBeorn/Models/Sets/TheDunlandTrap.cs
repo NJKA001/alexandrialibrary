@@ -214,7 +214,8 @@ Forced: After the last time counter is removed from this stage, each player disc
                 OppositeFlavorText = "Already weary from a full day of travel, you struggle to hold off the ferocious Dunlending attack. You must rally your companions and drive back the enemy, or you will be defeated.",
                 EncounterSet = "The Dunland Trap",
                 Number = 11,
-                Artist = Artist.Sacha_Diener
+                Artist = Artist.Sacha_Diener,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DunlandWarriors, EncounterSet.WearyTravelers }
             });
             Cards.Add(new Card()
             {
@@ -234,7 +235,8 @@ Forced: At the end of the combat phase, advance to stage 3A.",
                 OppositeFlavorText = "In your zeal to recover the gold, you have been led into an ambush.",
                 EncounterSet = "The Dunland Trap",
                 Number = 12,
-                Artist = Artist.Sacha_Diener
+                Artist = Artist.Sacha_Diener,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DunlandWarriors, EncounterSet.WearyTravelers }
             });
             Cards.Add(new Card()
             {
@@ -255,7 +257,8 @@ If a hero is destroyed at this stage, the players lose the game.
 Forced: After the last time counter is removed from this stage, the players make engagement checks. Then, each engaged enemy makes an attack. If no heroes are destroyed by these attacks, the players win the game.",
                 EncounterSet = "The Dunland Trap",
                 Number = 13,
-                Artist = Artist.Silver_Saaremael
+                Artist = Artist.Silver_Saaremael,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DunlandWarriors, EncounterSet.WearyTravelers }
             });
             Cards.Add(new Card()
             {

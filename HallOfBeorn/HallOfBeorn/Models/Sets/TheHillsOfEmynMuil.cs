@@ -304,7 +304,8 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
 Players cannot defeat this stage until there are no Emyn Muil locations in play, and they have collected at least 20 victory points.",
                 EncounterSet = "The Hills of Emyn Muil",
                 Number = 82,
-                Artist = Artist.Igor_Kieryluk
+                Artist = Artist.Igor_Kieryluk,
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DolGuldurOrcs, EncounterSet.SauronsReach }
             });
             Cards.Add(new Card() {
                 ImageType = ImageType.Png,
