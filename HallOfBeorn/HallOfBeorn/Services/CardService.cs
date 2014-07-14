@@ -27,6 +27,7 @@ namespace HallOfBeorn.Services
         private readonly List<ProductGroup> productGroups = new List<ProductGroup>();
         private readonly List<CardSet> sets = new List<CardSet>();
         private readonly List<string> setNames = new List<string>();
+        private readonly Dictionary<string, string> encounterSetNames = new Dictionary<string, string>();
         private readonly Dictionary<string, Card> cards = new Dictionary<string, Card>();
         private readonly Dictionary<string, string> keywords = new Dictionary<string, string>();
         private readonly Dictionary<string, string> traits = new Dictionary<string, string>();
@@ -56,6 +57,14 @@ namespace HallOfBeorn.Services
 
             foreach (var card in cardSet.Cards)
             {
+                if (!string.IsNullOrEmpty(card.EncounterSet))
+                {
+                    if (!encounterSetNames.ContainsKey(card.EncounterSet))
+                    {
+                        encounterSetNames.Add(card.EncounterSet, cardSet.Name);
+                    }
+                }
+
                 cards.Add(card.Id, card);
 
                 foreach (var keyword in card.Keywords)
@@ -822,6 +831,8 @@ namespace HallOfBeorn.Services
                 model.Random = true;
             }
 
+            var hasFilter = false;
+
             var results = !string.IsNullOrEmpty(model.Query) ?
                 cards.Values.Where(
                     x => (x.Title.ToLower().Contains(model.Query.ToLower()) || model.Query.ToLower() == randomKeyword)
@@ -835,8 +846,14 @@ namespace HallOfBeorn.Services
                 .ToList()
                 : cards.Values.ToList();
 
+            if (string.IsNullOrEmpty(model.Query))
+            {
+                hasFilter = true;
+            }
+
             if (model.CardType != CardType.None)
             {
+                hasFilter = true;
                 if (model.CardType == CardType.Player)
                 {
                     results = results.Where(x => x.CardType == CardType.Hero || x.CardType == CardType.Ally || x.CardType == CardType.Attachment || x.CardType == CardType.Event).ToList();
@@ -867,40 +884,53 @@ namespace HallOfBeorn.Services
 
             if (model.CardSet != null && model.CardSet != "Any")
             {
+                hasFilter = true;
                 results = results.Where(x => x.CardSet.Name == model.CardSet || (!string.IsNullOrEmpty(x.CardSet.Cycle) && x.CardSet.Cycle.ToUpper() == model.CardSet)).ToList();
             }
 
             if (model.Trait != null && model.Trait != "Any")
             {
+                hasFilter = true;
                 results = results.Where(x => x.HasTrait(model.Trait)).ToList();
             }
 
             if (model.Keyword != null && model.Keyword != "Any")
             {
+                hasFilter = true;
                 results = results.Where(x => x.HasKeyword(model.Keyword)).ToList();
             }
 
             if (model.Sphere != Sphere.None)
             {
+                hasFilter = true;
                 results = results.Where(x => x.Sphere == model.Sphere).ToList();
             }
 
-            if (model.Cost != -1)
+            if (!string.IsNullOrEmpty(model.Cost) && model.Cost != "Any")
             {
-                results = results.Where(x => x.ResourceCost == model.Cost).ToList();
+                hasFilter = true;
+                results = results.Where(x => !string.IsNullOrEmpty(x.ResourceCostLabel) && x.ResourceCostLabel == model.Cost).ToList();
             }
 
             if (model.Unique)
             {
+                hasFilter = true;
                 results = results.Where(x => x.IsUnique).ToList();
             }
 
             if (!string.IsNullOrEmpty(model.Artist) && model.Artist != "Any")
             {
+                hasFilter = true;
                 results = results.Where(x => x.Artist != null && x.Artist.Name == model.Artist).ToList();
             }
 
-            var takeCount = model.Random || !string.IsNullOrEmpty(model.Artist) ? results.Count : maxResults;
+            if (!string.IsNullOrEmpty(model.EncounterSet) && model.EncounterSet != "Any")
+            {
+                hasFilter = true;
+                results = results.Where(x => !string.IsNullOrEmpty(x.EncounterSet) && x.EncounterSet == model.EncounterSet).ToList();
+            }
+
+            var takeCount = (model.Random || !string.IsNullOrEmpty(model.Artist)) && !hasFilter ? results.Count : maxResults;
 
             results = results.Take(takeCount).ToList();
 
@@ -925,12 +955,12 @@ namespace HallOfBeorn.Services
                     case Sort.Sphere_Type_Cost:
                         return results.OrderBy(x => x.Sphere).ThenBy(x => x.CardType).ThenBy(x => 
                             {
-                                if (x.ThreatCost > 0)
-                                    return x.ThreatCost;
-                                else if (x.ResourceCost > 0)
-                                    return x.ResourceCost;
-                                else if (x.EngagementCost > 0)
-                                    return x.EngagementCost;
+                                if (x.ThreatCost.HasValue && x.ThreatCost.Value > 0)
+                                    return x.ThreatCost.Value;
+                                else if (x.ResourceCost.HasValue && x.ResourceCost.Value > 0)
+                                    return x.ResourceCost.Value;
+                                else if (x.EngagementCost.HasValue && x.EngagementCost.Value > 0)
+                                    return x.EngagementCost.Value;
                                 else if (x.QuestPoints.HasValue && x.QuestPoints > 0)
                                     return x.QuestPoints.Value;
                                 else
@@ -958,14 +988,19 @@ namespace HallOfBeorn.Services
             return cards.Values.Where(x => x.Slug.ToLower() == slug.ToLower()).FirstOrDefault();
         }
 
-        public IEnumerable<byte> Costs()
+        public IEnumerable<string> Costs()
         {
-            return cards.Values.Select(x => x.ResourceCost).Distinct().OrderBy(x => x).ToList();
+            return cards.Values.Where(x => !string.IsNullOrEmpty(x.ResourceCostLabel)).Select(x => x.ResourceCostLabel).Distinct().OrderBy(x => x).ToList();
         }
 
         public IEnumerable<string> SetNames
         {
             get { return setNames; }
+        }
+
+        public IEnumerable<string> EncounterSetNames
+        {
+            get { return encounterSetNames.Keys; }
         }
 
         public IEnumerable<string> Keywords()

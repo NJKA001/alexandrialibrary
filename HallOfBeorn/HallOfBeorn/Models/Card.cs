@@ -40,9 +40,23 @@ namespace HallOfBeorn.Models
         public CardType CardType { get; set; }
         public CampaignCardType CampaignCardType { get; set; }
         public Sphere Sphere { get; set; }
-        public byte ThreatCost { get; set; }
-        public byte ResourceCost { get; set; }
-        public byte EngagementCost { get; set; }
+        public byte? ThreatCost { get; set; }
+        public byte? ResourceCost { get; set; }
+        
+        public string ResourceCostLabel
+        {
+            get
+            {
+                if (IsVariableCost)
+                    return "X";
+                else if (!ResourceCost.HasValue)
+                    return string.Empty;
+                else
+                    return ResourceCost.Value.ToString();
+            }
+        }
+
+        public byte? EngagementCost { get; set; }
         public byte Threat { get; set; }
         public bool IsVariableCost { get; set; }
         public bool IsVariableThreat { get; set; }

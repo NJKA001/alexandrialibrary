@@ -26,6 +26,7 @@ namespace HallOfBeorn.Controllers
             SearchViewModel.Traits = _cardService.Traits().GetSelectListItems();
             SearchViewModel.Costs = _cardService.Costs().GetSelectListItems();
             SearchViewModel.CardSets = _cardService.SetNames.GetSelectListItems();
+            SearchViewModel.EncounterSets = _cardService.EncounterSetNames.GetSelectListItems();
         }
 
         private IEnumerable<CardEffect> ParseCardEffects(Card card, string text)

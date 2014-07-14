@@ -23,7 +23,6 @@ namespace HallOfBeorn.Models
     {
         public SearchViewModel()
         {
-            Cost = -1;
         }
 
         [Display(Name = "Search")]
@@ -42,7 +41,7 @@ namespace HallOfBeorn.Models
         public string Keyword { get; set; }
 
         [Display(Name = "Cost")]
-        public int Cost { get; set; }
+        public string Cost { get; set; }
 
         [Display(Name = "Sphere")]
         public Sphere Sphere { get; set; }
@@ -55,6 +54,9 @@ namespace HallOfBeorn.Models
 
         [Display(Name = "Artist")]
         public string Artist { get; set; }
+
+        [Display(Name="Encounter Set")]
+        public string EncounterSet { get; set; }
 
         public bool Random { get; set; }
 
@@ -99,6 +101,8 @@ namespace HallOfBeorn.Models
         }
 
         public static IEnumerable<SelectListItem> CardSets { get; set; }
+
+        public static IEnumerable<SelectListItem> EncounterSets { get; set; }
 
         public static IEnumerable<SelectListItem> Costs { get; set; }
 

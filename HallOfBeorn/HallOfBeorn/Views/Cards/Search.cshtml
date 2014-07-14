@@ -32,62 +32,61 @@
 
         <div>
             <span style="display:inline-block;">
-            @* @Html.LabelFor(x => x.CardSet, new { style = "display:inline;margin-right:2px;width:70px;" }) *@
             <span style="margin-right:2px;width:55px;display:inline-block;">Set</span>
-            @Html.DropDownListFor(x => x.CardSet, SearchViewModel.CardSets, new { style = "margin-right:12px;max-width:170px;" })
+            @Html.DropDownListFor(x => x.CardSet, SearchViewModel.CardSets, new { style = "margin-right:12px;max-width:170px;width:170px;" })
             </span>
 
             <span style="display:inline-block;">
-            @* @Html.LabelFor(x => x.CardType, new { style = "display:inline;margin-right:2px;width:70px;" }) *@
             <span style="margin-right:2px;width:55px;display:inline-block;">Type</span>
-            @Html.DropDownListFor(x => x.CardType, SearchViewModel.CardTypes, new { style = "margin-right:12px;" })
+            @Html.DropDownListFor(x => x.CardType, SearchViewModel.CardTypes, new { style = "margin-right:12px;;max-width:120px;width:120px;" })
             </span>
 
             <span style="display:inline-block;">
-            @*@Html.LabelFor(x => x.Sphere, new { style = "display:inline;margin-right:2px;width:70px;" })*@
             <span style="margin-right:2px;width:55px;display:inline-block;">Sphere</span>
             @Html.DropDownListFor(x => x.Sphere, SearchViewModel.Spheres, new { style = "margin-right:12px;" })
             </span>
 
             <span style="display:inline-block;">
-            @* @Html.LabelFor(x => x.Cost, new { style = "display:inline;margin-right:2px;width:70px;" }) *@
             <span style="margin-right:2px;width:55px;display:inline-block;">Cost</span>
             @Html.DropDownListFor(x => x.Cost, SearchViewModel.Costs, new { style = "margin-right:12px;" })
+            </span>
 
-
-            @*@Html.LabelFor(x => x.Unique, new { style = "display:inline;margin-right:2px;" })*@
+            <span style="display:inline-block;">
             <span style="margin-right:2px;width:55px;display:inline-block;">Unique</span>
             @Html.CheckBoxFor(x => x.Unique, new { style = "margin-right:12px;" })
             </span>
         </div>
         <div>
             <span style="display:inline-block;">
-            @*@Html.LabelFor(x => x.Trait, new { style = "display:inline;margin-right:2px;width:70px;" })*@
             <span style="margin-right:2px;width:55px;display:inline-block;">Trait</span>
-            @Html.DropDownListFor(x => x.Trait, SearchViewModel.Traits, new { style = "margin-right:12px;" })
+            @Html.DropDownListFor(x => x.Trait, SearchViewModel.Traits, new { style = "margin-right:12px;max-width:170px;width:170px;" })
             </span>
 
             <span style="display:inline-block;">
-            @*@Html.LabelFor(x => x.Keyword, new { style = "display:inline;margin-right:2px;width:70px;" })*@
             <span style="margin-right:2px;width:55px;display:inline-block;">Keyword</span>
-            @Html.DropDownListFor(x => x.Keyword, SearchViewModel.Keywords, new { style = "margin-right:12px;max-width:161px;" })
+            @Html.DropDownListFor(x => x.Keyword, SearchViewModel.Keywords, new { style = "margin-right:12px;max-width:120px;width:120px;" })
             </span>
 
             <span style="display:inline-block;">
-                <span style="margin-right:2px;width:55px;display:inline-block;">Artist</span>
-                @Html.DropDownListFor(x => x.Artist, SearchViewModel.Artists, new { style = "margin-right:12px;max-width:161px;" })
-            </span>
-
-            <span style="display:inline-block;">
-            @*@Html.LabelFor(x => x.Sort, new { style = "display:inline;margin-right:2px;width:70px;" })*@
-            <span style="margin-right:2px;width:55px;display:inline-block;">Sort</span>
-            @Html.DropDownListFor(x => x.Sort, SearchViewModel.Sorts, new { style = "margin-right:0px;" })
+            <span style="margin-right:2px;width:85px;display:inline-block;">Encounter Set</span>
+            @Html.DropDownListFor(x => x.EncounterSet, SearchViewModel.EncounterSets, new { style = "margin-right:12px;max-width:292px;" })
             </span>
 
             @*
             <span style="display:inline-block;margin-left:12px;margin-bottom:-8px;">
                 <img src="/Images/plus.png" onclick="addFilter();" />
             </span>*@
+        </div>
+        <div>
+            <span style="display:inline-block;">
+            <span style="margin-right:2px;width:55px;display:inline-block;">Artist</span>
+            @Html.DropDownListFor(x => x.Artist, SearchViewModel.Artists, new { style = "margin-right:12px;max-width:170px;width:170px;" })
+            </span>
+
+            <span style="display:inline-block;">
+            <span style="margin-right:2px;width:55px;display:inline-block;">Sort</span>
+            @Html.DropDownListFor(x => x.Sort, SearchViewModel.Sorts, new { style = "margin-right:12px;;max-width:120px;width:120px;" })
+            </span>
         </div>
     </div>
     @*
