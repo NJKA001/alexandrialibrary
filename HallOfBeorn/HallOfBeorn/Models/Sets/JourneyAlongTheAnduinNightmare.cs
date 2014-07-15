@@ -40,7 +40,7 @@ Remove the following cards, in the specified quantities, from the standard encou
 Then, shuffle the encounter cards in this Nightmare Deck into the remainder of the standard Journey Along the Anduin encounter deck.
 
 Finally, flip this setup card over and place it next to the quest deck. Its effects remain active throughout the game, which is now ready to begin.",
-                EncounterSet = "Journey Along the Anduin Nightmare",
+                EncounterSet = "Journey Down the Anduin Nightmare",
                 Quantity = 1,
                 Number = 1,
                 Artist = Artist.Alexandre_Dainche
@@ -59,7 +59,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 Traits = new List<string> { "Marshland." },
                 Text = "If you are engaged with this enemy, you cannot attack or deal damage (through effects) to enemies with a title other than Marshland Outlaws.",
                 Shadow = "Shadow: Raise your threat by X. X is the amount of damage dealt by this attack.",
-                EncounterSet = "Journey Along the Anduin Nightmare",
+                EncounterSet = "Journey Down the Anduin Nightmare",
                 Quantity = 2,
                 Number = 2,
                 Artist = Artist.Rafal_Hrynkiewicz
@@ -80,7 +80,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
 @"If there is no Hill Troll in play, Anduin Troll Spawn gains surge.
 
 Forced: At the beginning of the combat phase, Anduin Troll Spawn engages a player engaged with a Hill Troll.",
-                EncounterSet = "Journey Along the Anduin Nightmare",
+                EncounterSet = "Journey Down the Anduin Nightmare",
                 Quantity = 3,
                 Number = 3,
                 Artist = Artist.Chun_Lo
@@ -100,7 +100,7 @@ Forced: At the beginning of the combat phase, Anduin Troll Spawn engages a playe
                 Keywords = new List<string> { "Brown Water Rats cannot be damaged." },
                 Text = "Forced: If the players are on stage 3 and all remaining enemies have the printed Rat trait, discard Brown Water Rats from play.",
                 Shadow = "Shadow: Attacking enemy cannot be damaged this round.",
-                EncounterSet = "Journey Along the Anduin Nightmare",
+                EncounterSet = "Journey Down the Anduin Nightmare",
                 Quantity = 3,
                 Number = 4,
                 Artist = Artist.Rafal_Hrynkiewicz
@@ -116,7 +116,7 @@ Forced: At the beginning of the combat phase, Anduin Troll Spawn engages a playe
                 Traits = new List<string> { "Riverland." },
                 Text = "Each card revealed by the encounter deck gains doomed X. X is the number of progress tokens on this card.",
                 Shadow = "Shadow: If this attack is undefended, put A Flooded Ford into the staging area with 1 progress token on it.",
-                EncounterSet = "Journey Along the Anduin Nightmare",
+                EncounterSet = "Journey Down the Anduin Nightmare",
                 Quantity = 1,
                 Number = 5,
                 Artist = Artist.Alexandre_Dainche
@@ -132,7 +132,7 @@ Forced: At the beginning of the combat phase, Anduin Troll Spawn engages a playe
                 Traits = new List<string> { "Marshland." },
                 Text = "Action: Deal 1 damage to a hero you control to reduce Gladden Marshlands Threat by 1 until the end of the phase. Any player may trigger this effect.",
                 Shadow = "Shadow: Each enemy engaged with the defender player gets +1 Attack until the end of the phase. (+2 Attack instead if this attack is undefended.)",
-                EncounterSet = "Journey Along the Anduin Nightmare",
+                EncounterSet = "Journey Down the Anduin Nightmare",
                 Quantity = 3,
                 Number = 6,
                 Artist = Artist.Trudi_Castle
@@ -144,7 +144,7 @@ Forced: At the beginning of the combat phase, Anduin Troll Spawn engages a playe
                 Id = "E721FF49-E1B1-4728-970F-BC1F9834461E",
                 CardType = CardType.Treachery,
                 Text = "When Revealed: Search the victory display and encounter discard pile for the enemy with the most hit points. Return that enemy to the staging area. If no enemy is returned by this effect, Pursuit on the Shore gains surge. (Cannot be canceled.)",
-                EncounterSet = "Journey Along the Anduin Nightmare",
+                EncounterSet = "Journey Down the Anduin Nightmare",
                 Quantity = 2,
                 Number = 7,
                 Artist = Artist.Allison_Theus
@@ -157,7 +157,7 @@ Forced: At the beginning of the combat phase, Anduin Troll Spawn engages a playe
                 CardType = CardType.Treachery,
                 Text = "When Revealed: All engaged Troll enemies attack. If no Troll enemies are engaged, Troll Attack gains surge.",
                 Shadow = "Shadow: If attacking enemy is a Troll, resolve this attack against each player. (Attack is undefended against each player not engaged with this enemy.)",
-                EncounterSet = "Journey Along the Anduin Nightmare",
+                EncounterSet = "Journey Down the Anduin Nightmare",
                 Quantity = 2,
                 Number = 8,
                 Artist = Artist.Rafal_Hrynkiewicz
@@ -170,7 +170,7 @@ Forced: At the beginning of the combat phase, Anduin Troll Spawn engages a playe
                 CardType = CardType.Treachery,
                 Text = "When Revealed: Remove all damage from all enemies. Then, each player raises his threat by the amount of just removed from his engaged enemies. If no damage is removed by this effect, Smoking Blood gains surge.",
                 Shadow = "Shadow: Move all damage on this enemy to the defending character. (If undefended, move the damage to the hero damaged by this attack.)",
-                EncounterSet = "Journey Along the Anduin Nightmare",
+                EncounterSet = "Journey Down the Anduin Nightmare",
                 Quantity = 2,
                 Number = 9,
                 Artist = Artist.Magali_Villeneuve

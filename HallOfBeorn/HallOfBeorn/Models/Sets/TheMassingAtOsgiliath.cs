@@ -258,6 +258,7 @@ Forced: After The Witch-king attacks, he returns to the staging area unless the 
                 StageNumber = 1,
                 Id = "51223bd0-ffd1-11df-a976-1801202c9016",
                 CardType = CardType.Quest,
+                ScenarioNumber = 1,
                 QuestPoints = 7,
                 Text = "Setup: Search the encounter deck for 12 Scout cards, and add 3 per player (one of each title), to the staging area. Remove The Witch-king from the encounter deck and set him aside, out of play. Shuffle any unused Scoutcards back into the encounter deck.",
                 FlavorText = "There are reports of increased Orc activity around Ithilien, and you have been sent to investigate. You enter Osgiliath and cross the river. On the outskirts of the city, you see a horde that surpassses all expectations coming down the Morgul Road.",
@@ -274,6 +275,7 @@ Forced: After The Witch-king attacks, he returns to the staging area unless the 
                 StageNumber = 2,
                 Id = "51223bd0-ffd1-11df-a976-1801202c9018",
                 CardType = CardType.Quest,
+                ScenarioNumber = 1,
                 QuestPoints = 5,
                 Text = 
 @"Players cannot travel to West Bank locations.
@@ -291,6 +293,7 @@ Each player cannot play or put into play more than 1 card from his hand each rou
                 StageNumber = 3,
                 Id = "51223bd0-ffd1-11df-a976-1801202c9020",
                 CardType = CardType.Quest,
+                ScenarioNumber = 1,
                 QuestPoints = 1,
                 Text = 
 @"Progress tokens from card effects cannot be placed on this quest card or the active location.
@@ -310,6 +313,7 @@ In order to commit characters to the quest, a player must first choose a hero or
                 StageNumber = 4,
                 Id = "51223bd0-ffd1-11df-a976-1801202c9022",
                 CardType = CardType.Quest,
+                ScenarioNumber = 1,
                 QuestPoints = 15,
                 Text = 
 @"When Revealed: Add The Witch-king to the staging area.

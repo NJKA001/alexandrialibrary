@@ -18,6 +18,7 @@ namespace HallOfBeorn.Services
             LoadProducts();
             LoadDecks();
             LoadRelationships();
+            LoadScenarioCards();
 
             //NOTE: These traits are referenced by scenarios but not included on a player card or encounter card as a trait
             traits["Captive."] = "Captive.";
@@ -32,6 +33,7 @@ namespace HallOfBeorn.Services
         private readonly Dictionary<string, string> keywords = new Dictionary<string, string>();
         private readonly Dictionary<string, string> traits = new Dictionary<string, string>();
         private readonly Dictionary<string, Deck> decks = new Dictionary<string, Deck>();
+        private readonly Dictionary<string, Scenario> scenarios = new Dictionary<string, Scenario>();
 
         const int maxResults = 128;
         const string randomKeyword = "random";
@@ -57,6 +59,37 @@ namespace HallOfBeorn.Services
 
             foreach (var card in cardSet.Cards)
             {
+                if (!string.IsNullOrEmpty(card.ScenarioTitle))
+                {
+                    var escapedTitle = card.ScenarioTitle.ToUrlSafeString();
+
+                    if (card.CardType == CardType.Quest)
+                    {
+                        if (!scenarios.ContainsKey(escapedTitle))
+                        {
+                            var cycle = !string.IsNullOrEmpty(card.CardSet.Cycle) ? card.CardSet.Cycle : card.CardSet.Name;
+                            if (cycle == "NIGHTMARE")
+                            {
+                                var encounterSet = card.EncounterSet.Replace(" Nightmare", string.Empty);
+                                var original = cards.Values.Where(x => x.CardType == CardType.Quest && x.EncounterSet == encounterSet && x.CardSet.Cycle != "NIGHTMARE").FirstOrDefault();
+                                if (original != null)
+                                {
+                                    cycle = !string.IsNullOrEmpty(original.CardSet.Cycle) ? original.CardSet.Cycle : original.CardSet.Name;
+                                }
+                            }
+
+                            var scenario = new Scenario { Title = card.ScenarioTitle, GroupName = cycle, Number = card.ScenarioNumber };
+                            scenario.AddQuestCard(card);
+
+                            scenarios.Add(escapedTitle, scenario);
+                        }
+                        else
+                        {
+                            scenarios[escapedTitle].AddQuestCard(card);
+                        }
+                    }
+                }
+
                 if (!string.IsNullOrEmpty(card.EncounterSet))
                 {
                     if (!encounterSetNames.ContainsKey(card.EncounterSet))
@@ -130,6 +163,39 @@ namespace HallOfBeorn.Services
                 if (card != null && !card.Decks.ContainsKey(deck.Name))
                 {
                     card.Decks.Add(deck.Name, deck);
+                }
+            }
+        }
+
+        private void LoadScenarioCards()
+        {
+            foreach (var card in cards.Values.Where(x => !string.IsNullOrEmpty(x.ScenarioTitle)))
+            {
+                var escapedTitle = card.ScenarioTitle.ToUrlSafeString();
+
+                if (card.CardType == CardType.Location || card.CardType == CardType.Enemy || card.CardType == CardType.Treachery || card.CardType == CardType.Objective || card.CardType == CardType.Objective_Ally)
+                {
+                    if (scenarios.ContainsKey(escapedTitle))
+                    {
+                        scenarios[escapedTitle].AddScenarioCard(card);
+                    }
+                    else
+                    {
+                        if (card.ScenarioTitle.EndsWith(" Nightmare"))
+                        {
+                            var originalTitle = card.ScenarioTitle.Replace(" Nightmare", string.Empty).ToUrlSafeString();
+
+                            if (scenarios.ContainsKey(originalTitle))
+                            {
+                                scenarios[originalTitle].AddScenarioCard(card);
+                            }
+                        }
+
+                        foreach (var otherScenario in scenarios.Values.Where(x => x.IncludesEncounterSet(card.ScenarioTitle)).ToList())
+                        {
+                            otherScenario.AddScenarioCard(card);
+                        }
+                    }
                 }
             }
         }
@@ -1035,6 +1101,32 @@ namespace HallOfBeorn.Services
         public IEnumerable<ProductGroup> ProductGroups()
         {
             return productGroups;
+        }
+
+        public IEnumerable<ScenarioGroup> ScenarioGroups()
+        {
+            var scenarioGroups = new Dictionary<string, ScenarioGroup>();
+
+            foreach (var scenario in scenarios)
+            {
+                var name = scenario.Value.GroupName;
+
+                if (!scenarioGroups.ContainsKey(name))
+                {
+                    scenarioGroups.Add(name, new ScenarioGroup() { Name = name });
+                }
+
+                scenarioGroups[name].AddScenario(scenario.Value);
+            }
+
+            return scenarioGroups.Values.ToList();
+        }
+
+        public Scenario GetScenario(string scenarioTitle)
+        {
+            return scenarios.ContainsKey(scenarioTitle) ?
+                scenarios[scenarioTitle]
+                : null;
         }
     }
 }

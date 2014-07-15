@@ -11,21 +11,22 @@ namespace HallOfBeorn.Models
         {
             _product = product;
 
-            var scenarioTitle = string.Empty;
-            const string linkFormat = "/Scenarios/Details/{0}";
+            //var scenarioTitle = string.Empty;
+            //const string linkFormat = "/Scenarios/Details/{0}";
 
+            /*
             foreach (var cardSet in product.CardSets)
             {
                 foreach (var card in cardSet.Cards.Where(x => (x.CardType == CardType.Quest || (x.EncounterSet != null && x.EncounterSet.EndsWith("Nightmare"))) && !string.IsNullOrEmpty(x.EncounterSet)))
                 {
                     scenarioTitle = !string.IsNullOrEmpty(card.ScenarioTitle) ? card.ScenarioTitle : card.EncounterSet;
 
-                    if (!_scenarios.Any(x => x.Name == scenarioTitle))
+                    if (!_scenarios.Any(x => x.Title == scenarioTitle))
                     {
-                        _scenarios.Add(new ScenarioViewModel { Name = scenarioTitle, Link = string.Format(linkFormat, scenarioTitle.ToUrlSafeString()) });
+                        _scenarios.Add(new ScenarioViewModel { Title = scenarioTitle, Link = string.Format(linkFormat, scenarioTitle.ToUrlSafeString()) });
                     }
                 }
-            }
+            }*/
         }
 
         private readonly Product _product;

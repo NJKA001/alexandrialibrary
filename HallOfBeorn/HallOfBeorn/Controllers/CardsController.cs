@@ -226,24 +226,43 @@ namespace HallOfBeorn.Controllers
             return View(model);
         }
 
+        /*
         public ActionResult Scenarios()
         {
             var model = new ScenarioIndexViewModel();
 
-            var scenarioTitle = string.Empty;
-            const string linkFormat = "/Cards/Scenarios/Details/{0}";
-
-            foreach (var cardSet in _cardService.CardSets())
+            foreach (var scenario in _cardService.Scenarios())
             {
-                foreach (var card in cardSet.Cards.Where(x => (x.CardType == CardType.Quest || (x.EncounterSet != null && x.EncounterSet.EndsWith("Nightmare"))) && !string.IsNullOrEmpty(x.EncounterSet)))
-                {
-                    scenarioTitle = !string.IsNullOrEmpty(card.ScenarioTitle) ? card.ScenarioTitle : card.EncounterSet;
+                model.Scenarios.Add(new ScenarioViewModel(scenario));
+            }
 
-                    if (!model.Scenarios.Any(x => x.Name == scenarioTitle))
-                    {
-                        model.Scenarios.Add(new ScenarioViewModel { Name = scenarioTitle, Link = string.Format(linkFormat, scenarioTitle.ToUrlSafeString()) });
-                    }
+            return View(model);
+        }
+        */
+
+        public ActionResult Scenarios(string id)
+        {
+            var model = new ScenarioListViewModel();
+
+            if (string.IsNullOrEmpty(id))
+            {
+                foreach (var scenarioGroup in _cardService.ScenarioGroups())
+                {
+                    model.ScenarioGroups.Add(new ScenarioGroupViewModel(scenarioGroup));
                 }
+            }
+            else
+            {
+                var scenario = _cardService.GetScenario(id);
+
+                if (scenario == null)
+                {
+                    return HttpNotFound("I'm sorry Mario, your Princess is in another castle.\n\nNo scenario found matching this URL");
+                }
+
+                model.Detail = new ScenarioViewModel(scenario);
+
+                return View(model);
             }
 
             return View(model);

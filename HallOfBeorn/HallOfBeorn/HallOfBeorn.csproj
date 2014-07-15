@@ -319,7 +319,12 @@
     <Compile Include="Models\Products\TheVoiceOfIsengardProduct.cs" />
     <Compile Include="Models\Products\TheWatcherInTheWaterProduct.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
-    <Compile Include="Models\ScenarioIndexViewModel.cs" />
+    <Compile Include="Models\Scenario.cs" />
+    <Compile Include="Models\ScenarioCard.cs" />
+    <Compile Include="Models\ScenarioCardViewModel.cs" />
+    <Compile Include="Models\ScenarioGroup.cs" />
+    <Compile Include="Models\ScenarioGroupViewModel.cs" />
+    <Compile Include="Models\ScenarioListViewModel.cs" />
     <Compile Include="Models\ScenarioViewModel.cs" />
     <Compile Include="Models\SearchRequest.cs" />
     <Compile Include="Models\SearchResult.cs" />

@@ -489,6 +489,11 @@ namespace HallOfBeorn.Models
             }
         }
 
+        public bool IsNightmare
+        {
+            get { return _card.CardSet.Cycle == "NIGHTMARE"; }
+        }
+
         public IEnumerable<Deck> Decks
         {
             get { return _card.Decks.Values; }

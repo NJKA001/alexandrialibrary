@@ -28,6 +28,7 @@ namespace HallOfBeorn.Models.Sets
 
 While Amon Hen is the active location, players cannot play events.",
                 Threat = 0,
+                IsVariableThreat = true,
                 QuestPoints = 5,
                 EncounterSet = "The Hills of Emyn Muil",
                 VictoryPoints = 5,
@@ -47,6 +48,7 @@ While Amon Hen is the active location, players cannot play events.",
 
 While Amon Lhaw is the active location, treat all attachments as if their printed text boxes were blank.",
                 Threat = 0,
+                IsVariableThreat = true,
                 QuestPoints = 5,
                 EncounterSet = "The Hills of Emyn Muil",
                 VictoryPoints = 5,
