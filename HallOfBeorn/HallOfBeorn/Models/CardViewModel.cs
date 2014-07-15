@@ -489,9 +489,9 @@ namespace HallOfBeorn.Models
             }
         }
 
-        public List<Deck> Decks
+        public IEnumerable<Deck> Decks
         {
-            get { return _card.Decks; }
+            get { return _card.Decks.Values; }
         }
 
         public List<CardViewModel> RelatedCards

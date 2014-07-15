@@ -10,9 +10,26 @@ namespace HallOfBeorn.Models
         public ProductViewModel(Product product)
         {
             _product = product;
+
+            var scenarioTitle = string.Empty;
+            const string linkFormat = "/Scenarios/Details/{0}";
+
+            foreach (var cardSet in product.CardSets)
+            {
+                foreach (var card in cardSet.Cards.Where(x => (x.CardType == CardType.Quest || (x.EncounterSet != null && x.EncounterSet.EndsWith("Nightmare"))) && !string.IsNullOrEmpty(x.EncounterSet)))
+                {
+                    scenarioTitle = !string.IsNullOrEmpty(card.ScenarioTitle) ? card.ScenarioTitle : card.EncounterSet;
+
+                    if (!_scenarios.Any(x => x.Name == scenarioTitle))
+                    {
+                        _scenarios.Add(new ScenarioViewModel { Name = scenarioTitle, Link = string.Format(linkFormat, scenarioTitle.ToUrlSafeString()) });
+                    }
+                }
+            }
         }
 
         private readonly Product _product;
+        private readonly List<ScenarioViewModel> _scenarios = new List<ScenarioViewModel>();
 
         public string Name { get { return _product.Name; } }
         public string Code { get { return _product.Code; } }
@@ -43,25 +60,15 @@ namespace HallOfBeorn.Models
         
         public string Link
         {
-            get {
+            get
+            {
                 return string.Format("/Cards/Search?CardSet={0}", _product.CardSets.First().Name.Replace(' ','+'));
             }
         }
 
-        public bool IsStartOfProductGroup
+        public IEnumerable<ScenarioViewModel> Scenarios
         {
-            get
-            {
-                return _product.CardSets.Any(x => (x.SetType == SetType.Core || x.SetType == SetType.Deluxe_Expansion || x.Name == "The Hobbit: Over Hill and Under Hill" || x.Name == "The Black Riders" || x.Name == "The Massing at Osgiliath" || x.Name == "Passage Through Mirkwood Nightmare" || x.Name == "The Hunt for Gollum Nightmare") || (_product.Name == "Khazad-dûm Nightmare" || _product.Name == "The Hobbit: Over Hill and Under Hill Nightmare"));
-            }
-        }
-
-        public bool IsEndOfProductGroup
-        {
-            get
-            {
-                return _product.CardSets.Any(x => (x.SetType == SetType.Core || x.SetType == SetType.Deluxe_Expansion));
-            }
+            get { return _scenarios; }
         }
     }
 }

@@ -8,7 +8,7 @@
 <h2>
     @if (@Model.IsUnique)
     {
-        <img src="/Images/unique.png" style="margin-right:-2px;margin-bottom:-2px;height:20px;width:20px;"/>
+        <img src="/Images/unique-card.png" style="margin-right:-2px;margin-bottom:-2px;height:22px;width:22px;"/>
     }
     @Model.Title
 </h2>
@@ -431,7 +431,7 @@
                         <tr>
                             <td style="vertical-align:top;">*@
                             <div>
-                                @if (@Model.Decks.Count > 0)
+                                @if (@Model.Decks.Count() > 0)
                                 {
                                     <br />
                                     <div style="margin-bottom:12px;color:#616161;font-weight:bold;">Featured Decks</div>

@@ -31,7 +31,7 @@ namespace HallOfBeorn.Services
         private readonly Dictionary<string, Card> cards = new Dictionary<string, Card>();
         private readonly Dictionary<string, string> keywords = new Dictionary<string, string>();
         private readonly Dictionary<string, string> traits = new Dictionary<string, string>();
-        private readonly List<Deck> decks = new List<Deck>();
+        private readonly Dictionary<string, Deck> decks = new Dictionary<string, Deck>();
 
         const int maxResults = 128;
         const string randomKeyword = "random";
@@ -86,7 +86,10 @@ namespace HallOfBeorn.Services
 
         private void AddDeck(Deck deck)
         {
-            decks.Add(deck);
+            if (deck == null || decks.ContainsKey(deck.Name))
+                return;
+
+            decks.Add(deck.Name, deck);
 
             if (string.IsNullOrEmpty(deck.DeckList))
                 return;
@@ -124,9 +127,9 @@ namespace HallOfBeorn.Services
                     )
                 ).FirstOrDefault();
 
-                if (card != null)
+                if (card != null && !card.Decks.ContainsKey(deck.Name))
                 {
-                    card.Decks.Add(deck);
+                    card.Decks.Add(deck.Name, deck);
                 }
             }
         }
@@ -996,6 +999,11 @@ namespace HallOfBeorn.Services
         public IEnumerable<string> SetNames
         {
             get { return setNames; }
+        }
+
+        public IEnumerable<CardSet> CardSets()
+        {
+            return sets;
         }
 
         public IEnumerable<string> EncounterSetNames

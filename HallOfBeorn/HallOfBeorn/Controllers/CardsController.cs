@@ -226,6 +226,29 @@ namespace HallOfBeorn.Controllers
             return View(model);
         }
 
+        public ActionResult Scenarios()
+        {
+            var model = new ScenarioIndexViewModel();
+
+            var scenarioTitle = string.Empty;
+            const string linkFormat = "/Cards/Scenarios/Details/{0}";
+
+            foreach (var cardSet in _cardService.CardSets())
+            {
+                foreach (var card in cardSet.Cards.Where(x => (x.CardType == CardType.Quest || (x.EncounterSet != null && x.EncounterSet.EndsWith("Nightmare"))) && !string.IsNullOrEmpty(x.EncounterSet)))
+                {
+                    scenarioTitle = !string.IsNullOrEmpty(card.ScenarioTitle) ? card.ScenarioTitle : card.EncounterSet;
+
+                    if (!model.Scenarios.Any(x => x.Name == scenarioTitle))
+                    {
+                        model.Scenarios.Add(new ScenarioViewModel { Name = scenarioTitle, Link = string.Format(linkFormat, scenarioTitle.ToUrlSafeString()) });
+                    }
+                }
+            }
+
+            return View(model);
+        }
+
         public ActionResult Search(SearchViewModel model)
         {
             InitializeSearch(model);
