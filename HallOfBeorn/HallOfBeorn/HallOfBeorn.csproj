@@ -1753,7 +1753,9 @@
     <Content Include="Images\Cards\Voice-of-Isengard\Dunland-Chieftain.png" />
     <Content Include="Images\Cards\Voice-of-Isengard\Dunland-Prowler.png" />
     <Content Include="Images\Cards\Voice-of-Isengard\Dunland-Raider.png" />
+    <Content Include="Images\Cards\Voice-of-Isengard\Dunland-Raiders.png" />
     <Content Include="Images\Cards\Voice-of-Isengard\Dunland-Tribesman.png" />
+    <Content Include="Images\Cards\Voice-of-Isengard\Dunland-Warriors.png" />
     <Content Include="Images\Cards\Voice-of-Isengard\Dunlending-Attack-2A.png" />
     <Content Include="Images\Cards\Voice-of-Isengard\Dunlending-Attack-2B.png" />
     <Content Include="Images\Cards\Voice-of-Isengard\Dunlending-Bandit.png" />
@@ -1808,8 +1810,6 @@
     <Content Include="Images\Cards\Voice-of-Isengard\Tangled-Woods.png" />
     <Content Include="Images\Cards\Voice-of-Isengard\The-Angry-Forest-3A.png" />
     <Content Include="Images\Cards\Voice-of-Isengard\The-Angry-Forest-3B.png" />
-    <Content Include="Images\Cards\Voice-of-Isengard\The-Dunland-Raiders.png" />
-    <Content Include="Images\Cards\Voice-of-Isengard\The-Dunland-Warriors.png" />
     <Content Include="Images\Cards\Voice-of-Isengard\The-Fords-of-Isen.png" />
     <Content Include="Images\Cards\Voice-of-Isengard\The-Forest%27s-Malice.png" />
     <Content Include="Images\Cards\Voice-of-Isengard\The-Islet.png" />
