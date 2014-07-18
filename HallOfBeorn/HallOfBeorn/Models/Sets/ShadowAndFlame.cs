@@ -23,6 +23,7 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Shadow and Flame",
                 Traits = new List<string>() { "Shadow." },
                 Quantity = 3,
+                EasyModeQuantity = 1,
                 Text = "When Revealed: Attach Counter-spell to Durin's Bane. (Counts as a Condition attachment with the text: 'Forced: When a player plays an event, discard the top card of the encounter deck. If that card is a treachery card, cancel the effects of the event, discard the event player's hand, and discard Counter-spell from play.')",
                 Number = 145,
                 Artist = Artist.Magali_Villeneuve
@@ -98,6 +99,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 EncounterSet = "Shadow and Flame",
                 Quantity = 2,
+                EasyModeQuantity = 0,
                 Text = "When Revealed: Each player must discard 1 ally he controls, if able. If Fires in the Deep discarded no allies, it gains surge.",
                 Shadow = "Shadow: The defending player discards 1 ally he controls, if able.",
                 Number = 144,
@@ -178,6 +180,7 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 CardType = CardType.Treachery,
                 EncounterSet = "Shadow and Flame",
                 Quantity = 3,
+                EasyModeQuantity = 1,
                 Text = "When Revealed: Durin's Bane makes an immediate attack against the first player (deal and resolve a shadow card).",
                 Shadow = "Shadow: If attacking enemy is Durin's Bane, it gets +3 Attack.",
                 Number = 149,

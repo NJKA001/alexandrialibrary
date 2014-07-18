@@ -208,6 +208,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 0,
                 EncounterSet = "The Drúadan Forest",
                 Quantity = 3,
+                EasyModeQuantity = 1,
                 Number = 46,
                 Artist = Artist.Jason_Ward
             });
@@ -248,6 +249,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 EncounterSet = "The Drúadan Forest",
                 Quantity = 4,
+                EasyModeQuantity = 2,
                 Number = 48,
                 Artist = Artist.Jason_Ward
             });
@@ -282,6 +284,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 EncounterSet = "The Drúadan Forest",
                 Quantity = 1,
+                EasyModeQuantity = 0,
                 Number = 50,
                 Artist = Artist.Grzegorz_Pedrycz
             });
@@ -312,6 +315,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 5,
                 EncounterSet = "The Drúadan Forest",
                 Quantity = 3,
+                EasyModeQuantity = 1,
                 Number = 52,
                 Artist = Artist.Titus_Lunter
             });

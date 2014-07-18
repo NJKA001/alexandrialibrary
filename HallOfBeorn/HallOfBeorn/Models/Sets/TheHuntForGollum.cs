@@ -216,6 +216,7 @@ The crownless again shall be king.
                 Threat = 1,
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 2,
+                EasyModeQuantity = 1,
                 Number = 20,
                 Artist = Artist.Jarreau_Wimberly
             });
@@ -234,6 +235,7 @@ The crownless again shall be king.
                 Threat = 2,
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 5,
+                EasyModeQuantity = 2,
                 Number = 21,
                 Artist = Artist.Igor_Kieryluk
             });
@@ -246,6 +248,7 @@ The crownless again shall be king.
                 Text = "When Revealed: Discard 1 resource from each hero's resource pool, if able. Exhaust any hero that could not discard a resource from its pool.",
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 3,
+                EasyModeQuantity = 1,
                 Number = 24,
                 Artist = Artist.Brian_Valenzuela
             });
@@ -320,6 +323,7 @@ The crownless again shall be king.
                 QuestPoints = 2,
                 EncounterSet = "The Hunt for Gollum",
                 Quantity = 2,
+                EasyModeQuantity = 0,
                 Number = 15,
                 Artist = Artist.Timo_Karhula
             });

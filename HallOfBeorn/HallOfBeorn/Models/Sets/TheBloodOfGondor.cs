@@ -287,6 +287,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Take 1 hidden card.",
                 EncounterSet = "The Blood of Gondor",
                 Quantity = 2,
+                EasyModeQuantity = 0,
                 Number = 131,
                 Artist = Artist.Cristi_Balanescu
             });
@@ -345,6 +346,7 @@ If the players defeat this stage, they have won the game.",
                 Shadow = "Shadow: Attack enemy gets +1 Attack. (+3 Attack instead if undefended.)",
                 EncounterSet = "The Blood of Gondor",
                 Quantity = 4,
+                EasyModeQuantity = 2,
                 Number = 120,
                 Artist = Artist.Jim_Pavelec
             });
@@ -362,6 +364,7 @@ If the players defeat this stage, they have won the game.",
                 Text = "Forced: After Brutual Uruk attacks and destroys a character, that character's controller turns all hidden cards in his play area faceup. Deal a shadow card to each enemy turned faceup by this effect and resolve their attacks as normal.",
                 EncounterSet = "The Blood of Gondor",
                 Quantity = 3,
+                EasyModeQuantity = 1,
                 Number = 121,
                 Artist = Artist.Tim_Tsang
             });

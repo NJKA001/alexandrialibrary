@@ -454,6 +454,7 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
                 FlavorText = "The air above was heavy with fog, and a reek lay on the land about them.\r\nThe Two Towers",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 2,
+                EasyModeQuantity = 0,
                 Number = 157,
                 Artist = Artist.Oleg_Saakyan
             });
@@ -498,6 +499,7 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
                 Shadow = "Shadow: Attacking enemy gets +1 Attack for each progress token on To the Tower.",
                 EncounterSet = "The Morgul Vale",
                 Quantity = 2,
+                EasyModeQuantity = 1,
                 Number = 160,
                 Artist = Artist.Igor_Kieryluk
             });

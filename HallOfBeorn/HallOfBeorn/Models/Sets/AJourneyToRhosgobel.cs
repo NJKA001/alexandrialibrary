@@ -187,6 +187,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Deal 1 damage to each wounded character. (2 damage instead if this attack is undefended.)",
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 2,
+                EasyModeQuantity = 1,
                 Number = 69,
                 Artist = Artist.Taufiq,
                 SecondArtist = Artist.Julia_Laud
@@ -231,6 +232,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Deal 1 damage to each exhausted character.",
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 4,
+                EasyModeQuantity = 1,
                 Number = 67,
                 Artist = Artist.Marco_Caradonna
             });
@@ -294,6 +296,7 @@ While Rhosgobel is in the staging area, Wilyador cannot be healed.Travel: Player
                 Shadow = "Shadow: If a character (including Wilyador) has more damage than each other character, deal 3 additional damage to that character.",
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 4,
+                EasyModeQuantity = 1,
                 Number = 68,
                 Artist = Artist.Taufiq,
                 SecondArtist = Artist.Julia_Laud

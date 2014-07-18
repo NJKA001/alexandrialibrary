@@ -328,6 +328,7 @@ While Ghulat is in play, the game cannot end.",
                 FlavorText = "Eagles are not kindly birds. Some are cowardly and cruel. -The Hobbit",
                 EncounterSet = "Encounter at Amon Dîn",
                 Quantity = 2,
+                EasyModeQuantity = 0,
                 Number = 74,
                 Artist = Artist.Dean_Spencer
             });
@@ -392,6 +393,7 @@ While Ghulat is in play, the game cannot end.",
                 Shadow = "Shadow: Defending player raises his threat by 1 for each damage token on Dead Villagers.",
                 EncounterSet = "Encounter at Amon Dîn",
                 Quantity = 2,
+                EasyModeQuantity = 0,
                 Number = 78,
                 Artist = Artist.Darek_Zabrocki
             });

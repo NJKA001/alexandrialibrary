@@ -311,6 +311,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 4,
                 EncounterSet = "The Steward's Fear",
                 Quantity = 1,
+                EasyModeQuantity = 0,
                 Number = 21,
                 Artist = Artist.Titus_Lunter
             });
@@ -353,6 +354,7 @@ Response: When The Fourth Star leaves play as an explored location, each player 
                 Text = "When Revealed: Randomly select 1 ally controlled by the first player, if able. The first player deals X damage to one of his heroes, where X is that ally's Attack. Then discard that ally. If no ally is discarded by this effect, A Knife in the Back gains surge.",
                 EncounterSet = "The Steward's Fear",
                 Quantity = 3,
+                EasyModeQuantity = 1,
                 Number = 24,
                 Artist = Artist.Carmen_Cianelli
             });

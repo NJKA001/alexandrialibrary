@@ -1161,6 +1161,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 1,
                 EncounterSet = "Spiders of Mirkwood",
                 Quantity = 1,
+                EasyModeQuantity = 0,
                 VictoryPoints = 5,
                 Number = 75,
                 Artist = Artist.David_Lecossu
@@ -1219,6 +1220,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Each player discards all event cards in his hand.",
                 EncounterSet = "Spiders of Mirkwood",
                 Quantity = 1,
+                EasyModeQuantity = 0,
                 Number = 79,
                 Artist = Artist.Yoann_Boissonnet
             });
@@ -1230,6 +1232,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: The player with the highest threat level attaches this card to one of his heroes. (Counts as a Condition attachment with the text: 'Attached hero does not ready during the refresh phase unless you pay 2 resources from that hero's pool.')",
                 EncounterSet = "Spiders of Mirkwood",
                 Quantity = 2,
+                EasyModeQuantity = 0,
                 Number = 80,
                 Artist = Artist.Daryl_Mandryk
             });
@@ -1266,6 +1269,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 1,
                 EncounterSet = "Wilderlands",
                 Quantity = 2,
+                EasyModeQuantity = 1,
                 VictoryPoints = 4,
                 Number = 82,
                 Artist = Artist.Florian_Stitz
@@ -1301,6 +1305,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 3,
                 EncounterSet = "Wilderlands",
                 Quantity = 1,
+                EasyModeQuantity = 0,
                 VictoryPoints = 3,
                 Number = 84,
                 Artist = Artist.Sandara_Tang
@@ -1332,6 +1337,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Defending character does not count its Defense.",
                 EncounterSet = "Wilderlands",
                 Quantity = 2,
+                EasyModeQuantity = 0,
                 Number = 86,
                 Artist = Artist.Marc_Scheff
             });
@@ -1396,6 +1402,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 EncounterSet = "Dol Guldur Orcs",
                 Quantity = 1,
+                EasyModeQuantity = 0,
                 VictoryPoints = 4,
                 Number = 90,
                 Artist = Artist.Mathias_Kollros
@@ -1414,6 +1421,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 2,
                 EncounterSet = "Dol Guldur Orcs",
                 Quantity = 2,
+                EasyModeQuantity = 1,
                 Number = 91,
                 Artist = Artist.David_Lecossu
             });
@@ -1438,6 +1446,7 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "There was an eye in the Dark Tower that did not sleep. He knew that it had become aware of his gaze. A fierce eager will was there. - The Fellowship of the Ring",
                 EncounterSet = "Dol Guldur Orcs",
                 Quantity = 3,
+                EasyModeQuantity = 1,
                 Number = 93,
                 Artist = Artist.Anna_Christenson
             });
@@ -1450,6 +1459,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Travel: The first player must discard 2 cards from his hand at random to travel here.",
                 Threat = 3,
                 QuestPoints = 2,
+                EasyModeQuantity = 0,
                 EncounterSet = "Dol Guldur Orcs",
                 Quantity = 2,
                 Number = 94,
@@ -1564,6 +1574,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 1,
                 EncounterSet = "Escape from Dol Guldur",
                 Quantity = 2,
+                EasyModeQuantity = 0,
                 VictoryPoints = 5,
                 Number = 101,
                 Artist = Artist.Tiziano_Baracchi
@@ -1725,6 +1736,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Deal X shadow cards to this attacker. X is the number of players in the game.",
                 EncounterSet = "Journey Down the Anduin",
                 Quantity = 1,
+                EasyModeQuantity = 0,
                 Number = 112,
                 Artist = Artist.Mathias_Kollros
             });
@@ -1753,6 +1765,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 EncounterSet = "Journey Down the Anduin",
                 Quantity = 3,
+                EasyModeQuantity = 1,
                 VictoryPoints = 3,
                 Number = 114,
                 Artist = Artist.Ben_Zweifel
@@ -1773,6 +1786,7 @@ namespace HallOfBeorn.Models.Sets
                 Threat = 1,
                 EncounterSet = "Sauron's Reach",
                 Quantity = 3,
+                EasyModeQuantity = 1,
                 Number = 115,
                 Artist = Artist.Matthew_Starbuck
             });
@@ -1784,6 +1798,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Deal 1 damage to each character controlled by each player with a threat of 35 or higher.",
                 EncounterSet = "Sauron's Reach",
                 Quantity = 3,
+                EasyModeQuantity = 2,
                 Number = 116,
                 Artist = Artist.Tom_Garden
             });

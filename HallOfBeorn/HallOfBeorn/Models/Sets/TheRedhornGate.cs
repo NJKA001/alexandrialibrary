@@ -42,6 +42,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Exhaust each ready character and if it is the quest phase commit them to the quest.",
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 1,
+                EasyModeQuantity = 0,
                 Number = 24,
                 Artist = Artist.David_Lecossu
             });
@@ -161,6 +162,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: The first player attaches this card to a hero he controls. Counts as a Condition Attachment with the text: 'Attached hero gets -2 Willpower and cannot commit to a quest. If attached hero has more than 1 copy of Freezing Cold attached, discard attached hero from play.'",
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 3,
+                EasyModeQuantity = 1,
                 Number = 23,
                 Artist = Artist.Eric_Braddock
             });
@@ -226,6 +228,7 @@ Forced: After attached hero attacks and destroys an enemy, place 1 resource toke
                 Threat = 2,
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 2,
+                EasyModeQuantity = 0,
                 Number = 26,
                 Artist = Artist.Rafal_Hrynkiewicz
             });
@@ -284,6 +287,7 @@ Forced: After attached hero attacks and destroys an enemy, place 1 resource toke
                 QuestPoints = 2,
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 3,
+                EasyModeQuantity = 1,
                 Number = 19,
                 Artist = Artist.David_Lecossu
             });

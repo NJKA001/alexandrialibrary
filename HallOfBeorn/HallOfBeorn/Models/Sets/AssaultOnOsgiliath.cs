@@ -205,6 +205,7 @@ namespace HallOfBeorn.Models.Sets
                 Shadow = "Shadow: Defending player discards an attachment he controls. (All attachments he controls instead if undefended.)",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 2,
+                EasyModeQuantity = 0,
                 Number = 92,
                 Artist = Artist.Blake_Henriksen
             });
@@ -259,6 +260,7 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "\"...the Southrons were bold men and grim...\"\r\n-The Return of the King",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 2,
+                EasyModeQuantity = 0,
                 Number = 95,
                 Artist = Artist.J_Lonnee
             });
@@ -341,6 +343,7 @@ Planning Action: Spend 2 resources to play 1 progress token on The Old Bridge. (
                 Shadow = "Shadow: If this attack destroys a character, that character's controller must return a location he controls with the highest Threat to the staging area.",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 2,
+                EasyModeQuantity = 1,
                 Number = 100,
                 Artist = Artist.Marcia_George_Bogdan
             });
@@ -356,6 +359,7 @@ Planning Action: Spend 2 resources to play 1 progress token on The Old Bridge. (
                 Shadow = "Shadow: If this attack destroys a character, that character's controller must return a location he controls with the highest Threat to the staging area.",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 2,
+                EasyModeQuantity = 1,
                 Number = 101,
                 Artist = Artist.Julian_Kok
             });
@@ -421,6 +425,7 @@ Planning Action: Spend 2 resources to play 1 progress token on The Old Bridge. (
                 Text = "When Revealed: Each player must return the location he controls with the highest Threat to the staging area, or raise his threat by the total Threat of all locations he controls.",
                 EncounterSet = "Assault on Osgiliath",
                 Quantity = 2,
+                EasyModeQuantity = 1,
                 Number = 106,
                 Artist = Artist.Blake_Henriksen
             });
