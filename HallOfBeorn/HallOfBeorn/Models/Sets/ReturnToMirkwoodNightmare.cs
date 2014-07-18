@@ -28,7 +28,7 @@ namespace HallOfBeorn.Models.Sets
 
 Remove the following cards, in the specified quantities, from the standard encounter deck:
 
-3x Woodmans' Glade
+3x Woodman's Glade
 3x Wood Elf Path
 3x Mountains of ~Mirkwood
 2x ~Goblin Sniper
@@ -45,7 +45,54 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 EncounterSet = "Return to Mirkwood Nightmare",
                 Quantity = 1,
                 Number = 1,
-                Artist = Artist.Jose_Vega
+                Artist = Artist.Jose_Vega,
+                UpdateScenarioCards = (groups) =>
+                {
+                    foreach (var group in groups)
+                    {
+                        var scenario = group.Scenarios.Where(x => x.Title == "Return to Mirkwood").FirstOrDefault();
+                        if (scenario == null)
+                            continue;
+
+                        foreach (var card in scenario.ScenarioCards.Where(x => !x.EncounterSet.EndsWith(" Nightmare")))
+                        {
+                            switch (card.Title)
+                            {
+                                case "Woodman's Glade":
+                                    card.NightmareQuantity -= 3;
+                                    break;
+                                case "Wood Elf Path":
+                                    card.NightmareQuantity -= 3;
+                                    break;
+                                case "Mountains of Mirkwood":
+                                    card.NightmareQuantity -= 3;
+                                    break;
+                                case "Goblin Sniper":
+                                    card.NightmareQuantity -= 2;
+                                    break;
+                                case "Marsh Adder":
+                                    card.NightmareQuantity -= 1;
+                                    break;
+                                case "Wargs":
+                                    card.NightmareQuantity -= 2;
+                                    break;
+                                case "Despair":
+                                    card.NightmareQuantity -= 2;
+                                    break;
+                                case "The Brown Lands":
+                                    card.NightmareQuantity -= 2;
+                                    break;
+                                case "The East Bight":
+                                    card.NightmareQuantity -= 2;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+
+                    return true;
+                }
             });
             Cards.Add(new Card()
             {

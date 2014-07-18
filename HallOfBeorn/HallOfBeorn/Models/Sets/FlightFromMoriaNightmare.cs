@@ -52,7 +52,54 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 EncounterSet = "Flight from Moria Nightmare",
                 Quantity = 1,
                 Number = 1,
-                Artist = Artist.Mark_Behm
+                Artist = Artist.Mark_Behm,
+                UpdateScenarioCards = (groups) =>
+                {
+                    foreach (var group in groups)
+                    {
+                        var scenario = group.Scenarios.Where(x => x.Title == "Flight from Moria").FirstOrDefault();
+                        if (scenario == null)
+                            continue;
+
+                        foreach (var card in scenario.ScenarioCards.Where(x => !x.EncounterSet.EndsWith(" Nightmare")))
+                        {
+                            switch (card.Title)
+                            {
+                                case "New Devilry":
+                                    card.NightmareQuantity -= 1;
+                                    break;
+                                case "Stray Goblin":
+                                    card.NightmareQuantity -= 3;
+                                    break;
+                                case "The Mountains' Roots":
+                                    card.NightmareQuantity -= 2;
+                                    break;
+                                case "Chance Encounter":
+                                    card.NightmareQuantity -= 3;
+                                    break;
+                                case "Goblin Archer":
+                                    card.NightmareQuantity -= 2;
+                                    break;
+                                case "Goblin Spearman":
+                                    card.NightmareQuantity -= 1;
+                                    break;
+                                case "Plundered Armoury":
+                                    card.NightmareQuantity -= 2;
+                                    break;
+                                case "Cave In":
+                                    card.NightmareQuantity -= 3;
+                                    break;
+                                case "Dark and Dreadful":
+                                    card.NightmareQuantity -= 2;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+
+                    return true;
+                }
             });
             Cards.Add(new Card()
             {
