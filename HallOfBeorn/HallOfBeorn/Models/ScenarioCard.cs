@@ -14,9 +14,11 @@ namespace HallOfBeorn.Models
             EncounterSetNumber = card.CardSet.Number;
             Link = string.Format("/Cards/Details/{0}", card.Slug);
 
+            NightmareQuantity = card.Quantity;
+
             if (card.CardSet.Cycle == "NIGHTMARE")
             {
-                NightmareQuantity = card.Quantity;
+                NormalQuantity = 0;
                 EasyQuantity = 0;
             }
             else
@@ -31,8 +33,8 @@ namespace HallOfBeorn.Models
         public int EncounterSetNumber { get; private set; }
         public string Link { get; private set; }
 
-        public int NormalQuantity { get; private set; }
-        public int NightmareQuantity { get; private set; }
-        public int EasyQuantity { get; private set; }
+        public int NormalQuantity { get; set; }
+        public int NightmareQuantity { get; set; }
+        public int EasyQuantity { get; set; }
     }
 }

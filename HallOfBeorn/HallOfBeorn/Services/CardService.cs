@@ -190,12 +190,21 @@ namespace HallOfBeorn.Services
                                 scenarios[originalTitle].AddScenarioCard(card);
                             }
                         }
-
-                        foreach (var otherScenario in scenarios.Values.Where(x => x.IncludesEncounterSet(card.ScenarioTitle)).ToList())
-                        {
-                            otherScenario.AddScenarioCard(card);
-                        }
                     }
+
+                    foreach (var otherScenario in scenarios.Values.Where(x => x.IncludesEncounterSet(card.ScenarioTitle)).ToList())
+                    {
+                        otherScenario.AddScenarioCard(card);
+                    }
+                }
+            }
+
+            //load nightmare setup cards
+            foreach (var setupCard in cards.Values.Where(x => x.CardType == CardType.Nightmare_Setup))
+            {
+                if (setupCard.UpdateScenarioCards != null)
+                {
+                    setupCard.UpdateScenarioCards(ScenarioGroups());
                 }
             }
         }

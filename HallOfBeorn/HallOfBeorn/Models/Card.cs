@@ -147,5 +147,7 @@ namespace HallOfBeorn.Models
         {
             return Sphere == sphere && HasTrait(trait);
         }
+
+        public Func<IEnumerable<ScenarioGroup>, bool> UpdateScenarioCards { get; set; }
     }
 }

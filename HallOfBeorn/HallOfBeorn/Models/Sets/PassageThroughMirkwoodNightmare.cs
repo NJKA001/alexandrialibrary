@@ -22,7 +22,7 @@ namespace HallOfBeorn.Models.Sets
                 ImageType = Models.ImageType.Jpg,
                 Id = "e84f94bf-201b-4adf-95d2-0012e0bb5001",
                 CardType = CardType.Nightmare_Setup,
-                Text = 
+                Text =
 @"You are playing Nightmare mode.
 
 Forced: During setup, each player reveals 1 card from the encounter deck and adds it to the staging area.",
@@ -47,7 +47,51 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 EncounterSet = "Passage Through Mirkwood Nightmare",
                 Quantity = 1,
                 Number = 1,
-                Artist = Artist.Stacey_Diana_Clark
+                Artist = Artist.Stacey_Diana_Clark,
+                UpdateScenarioCards = (groups) => 
+                {
+                    foreach (var group in groups)
+                    {
+                        var scenario = group.Scenarios.Where(x => x.Title == "Passage Through Mirkwood").FirstOrDefault();
+                        if (scenario == null)
+                            continue;
+
+                        foreach (var card in scenario.ScenarioCards.Where(x => !x.EncounterSet.EndsWith(" Nightmare")))
+                        {
+                            switch (card.Title)
+                            {
+                                case "Ungoliant's Spawn":
+                                    card.NightmareQuantity -= 1;
+                                    break;
+                                case "Black Forest Bats":
+                                    card.NightmareQuantity -= 1;
+                                    break;
+                                case "Forest Spider":
+                                    card.NightmareQuantity -= 3;
+                                    break;
+                                case "Dol Guldur Orcs":
+                                    card.NightmareQuantity -= 3;
+                                    break;
+                                case "Old Forest Road":
+                                    card.NightmareQuantity -= 1;
+                                    break;
+                                case "Forest Gate":
+                                    card.NightmareQuantity -= 2;
+                                    break;
+                                case "Mountains of Mirkwood":
+                                    card.NightmareQuantity -= 3;
+                                    break;
+                                case "Caught in a Web":
+                                    card.NightmareQuantity -= 2;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+
+                    return true;
+                }
             });
             Cards.Add(new Card()
             {
