@@ -8,8 +8,16 @@ namespace HallOfBeorn.Models
     public class EncounterSet
     {
         public string Set { get; set; }
-        public string Name { get; set; }
 
+        private string normalizedSet;
+        public string NormalizedSet
+        {
+            get { return !string.IsNullOrEmpty(this.normalizedSet) ? this.normalizedSet : Set; }
+            private set { this.normalizedSet = value; }
+        }
+        
+        public string Name { get; set; }
+        
         private static List<EncounterSet> all = new List<EncounterSet>();
 
         public static List<EncounterSet> All()
@@ -30,34 +38,34 @@ namespace HallOfBeorn.Models
         public static EncounterSet TheHillsOfEmynMuil = new EncounterSet { Name = "The Hills of Emyn Muil", Set = "The Hills of Emyn Muil" };
         public static EncounterSet TheDeadMarshes = new EncounterSet { Name = "The Dead Marshes", Set = "The Dead Marshes" };
         public static EncounterSet ReturnToMirkwood = new EncounterSet { Name = "Return to Mirkwood", Set = "Return to Mirkwood" };
-        public static EncounterSet IntoThePit = new EncounterSet { Name = "Into the Pit", Set = "Khazad-dûm" };
-        public static EncounterSet TwistsAndTurns = new EncounterSet { Name = "Twists and Turns", Set = "Khazad-dûm" };
-        public static EncounterSet HazardsOfThePit = new EncounterSet { Name = "Hazards of the Pit", Set = "Khazad-dûm" };
-        public static EncounterSet GoblinsOfTheDeep = new EncounterSet { Name = "Goblins of the Deep", Set = "Khazad-dûm" };
-        public static EncounterSet TheSeventhLevel = new EncounterSet { Name = "The Seventh Level", Set = "Khazad-dûm" };
-        public static EncounterSet PlunderingGoblins = new EncounterSet { Name = "Plundering Goblins", Set = "Khazad-dûm" };
-        public static EncounterSet FlightFromMoria = new EncounterSet { Name = "Flight from Moria", Set = "Khazad-dûm" };
-        public static EncounterSet DeepsOfMoria = new EncounterSet { Name = "Deeps of Moria", Set = "Khazad-dûm" };
-        public static EncounterSet MistyMountains = new EncounterSet { Name = "Misty Mountains", Set = "Khazad-dûm" };
+        public static EncounterSet IntoThePit = new EncounterSet { Name = "Into the Pit", Set = "Khazad-dûm", NormalizedSet = "Khazad-dum" };
+        public static EncounterSet TwistsAndTurns = new EncounterSet { Name = "Twists and Turns", Set = "Khazad-dûm", NormalizedSet = "Khazad-dum" };
+        public static EncounterSet HazardsOfThePit = new EncounterSet { Name = "Hazards of the Pit", Set = "Khazad-dûm", NormalizedSet = "Khazad-dum" };
+        public static EncounterSet GoblinsOfTheDeep = new EncounterSet { Name = "Goblins of the Deep", Set = "Khazad-dûm", NormalizedSet = "Khazad-dum" };
+        public static EncounterSet TheSeventhLevel = new EncounterSet { Name = "The Seventh Level", Set = "Khazad-dûm", NormalizedSet = "Khazad-dum" };
+        public static EncounterSet PlunderingGoblins = new EncounterSet { Name = "Plundering Goblins", Set = "Khazad-dûm", NormalizedSet = "Khazad-dum" };
+        public static EncounterSet FlightFromMoria = new EncounterSet { Name = "Flight from Moria", Set = "Khazad-dûm", NormalizedSet = "Khazad-dum" };
+        public static EncounterSet DeepsOfMoria = new EncounterSet { Name = "Deeps of Moria", Set = "Khazad-dûm", NormalizedSet = "Khazad-dum" };
+        public static EncounterSet MistyMountains = new EncounterSet { Name = "Misty Mountains", Set = "Khazad-dûm", NormalizedSet = "Khazad-dum" };
         public static EncounterSet TheRedhornGate = new EncounterSet { Name = "The Redhorn Gate", Set = "The Redhorn Gate" };
         public static EncounterSet RoadToRivendell = new EncounterSet { Name = "Road to Rivendell", Set = "Road to Rivendell" };
         public static EncounterSet TheWatcherInTheWater = new EncounterSet { Name = "The Watcher in the Water", Set = "The Watcher in the Water" };
         public static EncounterSet TheLongDark = new EncounterSet { Name = "The Long Dark", Set = "The Long Dark" };
         public static EncounterSet FoundationsOfStone = new EncounterSet { Name = "Foundations of Stone", Set = "Foundations of Stone" };
         public static EncounterSet ShadowAndFlame = new EncounterSet { Name = "Shadow and Flame", Set = "Shadow and Flame" };
-        public static EncounterSet PerilInPelargir = new EncounterSet { Name = "Peril in Pelargir", Set = "Heirs of Númenor" };
-        public static EncounterSet StreetsOfGondor = new EncounterSet { Name = "Streets of Gondor", Set = "Heirs of Númenor" };
-        public static EncounterSet Brigands = new EncounterSet { Name = "Brigands", Set = "Heirs of Númenor" };
-        public static EncounterSet IntoIthilien = new EncounterSet { Name = "Into Ithilien", Set = "Heirs of Númenor" };
-        public static EncounterSet BroodingForest = new EncounterSet { Name = "Brooding Forest", Set = "Heirs of Númenor" };
-        public static EncounterSet CreaturesOfTheForest = new EncounterSet { Name = "Creatures of the Forest", Set = "Heirs of Númenor" };
-        public static EncounterSet Southrons = new EncounterSet { Name = "Southrons", Set = "Heirs of Númenor" };
-        public static EncounterSet TheSiegeOfCairAndros = new EncounterSet { Name = "The Siege of Cair Andros", Set = "Heirs of Númenor" };
-        public static EncounterSet RavagingOrcs = new EncounterSet { Name = "Ravaging Orcs", Set = "Heirs of Númenor" };
-        public static EncounterSet MordorElite = new EncounterSet { Name = "Mordor Elite", Set = "Heirs of Númenor" };
+        public static EncounterSet PerilInPelargir = new EncounterSet { Name = "Peril in Pelargir", Set = "Heirs of Númenor", NormalizedSet = "Heirs of Numenor" };
+        public static EncounterSet StreetsOfGondor = new EncounterSet { Name = "Streets of Gondor", Set = "Heirs of Númenor", NormalizedSet = "Heirs of Numenor" };
+        public static EncounterSet Brigands = new EncounterSet { Name = "Brigands", Set = "Heirs of Númenor", NormalizedSet = "Heirs of Numenor" };
+        public static EncounterSet IntoIthilien = new EncounterSet { Name = "Into Ithilien", Set = "Heirs of Númenor", NormalizedSet = "Heirs of Numenor" };
+        public static EncounterSet BroodingForest = new EncounterSet { Name = "Brooding Forest", Set = "Heirs of Númenor", NormalizedSet = "Heirs of Numenor" };
+        public static EncounterSet CreaturesOfTheForest = new EncounterSet { Name = "Creatures of the Forest", Set = "Heirs of Númenor", NormalizedSet = "Heirs of Numenor" };
+        public static EncounterSet Southrons = new EncounterSet { Name = "Southrons", Set = "Heirs of Númenor", NormalizedSet = "Heirs of Numenor" };
+        public static EncounterSet TheSiegeOfCairAndros = new EncounterSet { Name = "The Siege of Cair Andros", Set = "Heirs of Númenor", NormalizedSet = "Heirs of Numenor" };
+        public static EncounterSet RavagingOrcs = new EncounterSet { Name = "Ravaging Orcs", Set = "Heirs of Númenor", NormalizedSet = "Heirs of Numenor" };
+        public static EncounterSet MordorElite = new EncounterSet { Name = "Mordor Elite", Set = "Heirs of Númenor", NormalizedSet = "Heirs of Numenor" };
         public static EncounterSet TheStewardsFear = new EncounterSet { Name = "The Steward's Fear", Set = "The Steward's Fear" };
-        public static EncounterSet TheDruadanForest = new EncounterSet { Name = "The Drúadan Forest", Set = "The Drúadan Forest" };
-        public static EncounterSet EncounterAtAmonDin = new EncounterSet { Name = "Encounter at Amon-Dîn", Set = "Encounter at Amon-Dîn" };
+        public static EncounterSet TheDruadanForest = new EncounterSet { Name = "The Drúadan Forest", Set = "The Drúadan Forest", NormalizedSet = "The Druadan Forest" };
+        public static EncounterSet EncounterAtAmonDin = new EncounterSet { Name = "Encounter at Amon-Dîn", Set = "Encounter at Amon-Dîn", NormalizedSet = "Encounter at Amon-Din", };
         public static EncounterSet AssaultOnOsgiliath = new EncounterSet { Name = "Assault on Osgiliath", Set = "Assault on Osgiliath" };
         public static EncounterSet TheBloodOfGondor = new EncounterSet { Name = "The Blood of Gondor", Set = "The Blood of Gondor" };
         public static EncounterSet TheMorgulVale = new EncounterSet { Name = "The Morgul Vale", Set = "The Morgul Vale" };
