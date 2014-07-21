@@ -352,7 +352,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Each player must pay 1 resource for each attachment he controls or discard all attachments he controls.",
                 Shadow = "Shadow: Discard an attachment from the defending character.",
                 Keywords = new List<string>() { "Surge." },
-                EncounterSet = "The Drúadan Forest.",
+                EncounterSet = "The Drúadan Forest",
                 Quantity = 2,
                 Number = 55,
                 Artist = Artist.Jason_Ward

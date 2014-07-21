@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models
         public ScenarioCard(Card card)
         {
             Title = card.Title;
+            Set = card.CardSet.NormalizedName;
             EncounterSet = card.EncounterSet;
             EncounterSetNumber = card.CardSet.Number;
             Link = string.Format("/Cards/Details/{0}", card.Slug);
@@ -29,8 +30,13 @@ namespace HallOfBeorn.Models
         }
 
         public string Title { get; private set; }
+        public string Set { get; private set; }
         public string EncounterSet { get; private set; }
         public int EncounterSetNumber { get; private set; }
+        public string EncounterSetImage
+        {
+            get { return string.Format("/Images/Cards/{0}/{1}.png", Set.ToUrlSafeString(), EncounterSet.ToUrlSafeString()); }
+        }
         public string Link { get; private set; }
 
         public int NormalQuantity { get; set; }

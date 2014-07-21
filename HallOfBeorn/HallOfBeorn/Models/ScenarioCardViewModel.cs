@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models
             Title = scenarioCard.Title;
             EncounterSet = scenarioCard.EncounterSet;
             EncounterSetLink = string.Format("/Cards/Search?EncounterSet={0}", scenarioCard.EncounterSet.Replace(" ", "%20"));
+            EncounterSetImage = scenarioCard.EncounterSetImage;
             Link = scenarioCard.Link;
 
             NormalQuantity = scenarioCard.NormalQuantity > 0 ? scenarioCard.NormalQuantity.ToString() : "-";
@@ -22,6 +23,7 @@ namespace HallOfBeorn.Models
         public string Title { get; private set; }
         public string EncounterSet { get; private set; }
         public string EncounterSetLink { get; private set; }
+        public string EncounterSetImage { get; private set; }
         public string Link { get; private set; }
         public string NormalQuantity { get; private set; }
         public string NightmareQuantity { get; private set; }
