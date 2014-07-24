@@ -78,6 +78,7 @@ namespace HallOfBeorn.Models
 
         public static CardSet TheVoiceOfIsengard = new Sets.VoiceofIsengard();
         public static CardSet TheDunlandTrap = new Sets.TheDunlandTrap();
+        public static CardSet TheThreeTrials = new Sets.TheThreeTrials();
 
         public static CardSet TheHobbitOverHillAndUnderHill = new Sets.TheHobbitOverHillandUnderHill();
         public static CardSet TheHobbitOnTheDoorstep = new Sets.TheHobbitOntheDoorstep();

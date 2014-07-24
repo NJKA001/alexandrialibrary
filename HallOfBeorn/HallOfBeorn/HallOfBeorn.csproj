@@ -316,6 +316,7 @@
     <Compile Include="Models\Products\TheRingMakerProductGroup.cs" />
     <Compile Include="Models\Products\TheStewardsFearProduct.cs" />
     <Compile Include="Models\Products\TheStoneOfErechProduct.cs" />
+    <Compile Include="Models\Products\TheThreeTrialsProduct.cs" />
     <Compile Include="Models\Products\TheVoiceOfIsengardProduct.cs" />
     <Compile Include="Models\Products\TheWatcherInTheWaterProduct.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
@@ -371,6 +372,7 @@
     <Compile Include="Models\Sets\TheSeventhLevelNightmare.cs" />
     <Compile Include="Models\Sets\TheStewardsFear.cs" />
     <Compile Include="Models\Sets\TheStoneOfErech.cs" />
+    <Compile Include="Models\Sets\TheThreeTrials.cs" />
     <Compile Include="Models\Sets\TheWatcherInTheWater.cs" />
     <Compile Include="Models\Sets\VoiceOfIsengard.cs" />
     <Compile Include="Models\Sets\WeMustAwayEreBreakOfDayNightmare.cs" />
@@ -1720,6 +1722,15 @@
     <Content Include="Images\Cards\The-Stone-of-Erech\The-Stone-of-Erech.png" />
     <Content Include="Images\Cards\The-Stone-of-Erech\Vale-of-Shadows.png" />
     <Content Include="Images\Cards\The-Stone-of-Erech\Whisperer.png" />
+    <Content Include="Images\Cards\The-Three-Trials\Boar%27s-Guardian.png" />
+    <Content Include="Images\Cards\The-Three-Trials\Cursed-Forest.png" />
+    <Content Include="Images\Cards\The-Three-Trials\Hallowed-Circle.png" />
+    <Content Include="Images\Cards\The-Three-Trials\Hill-Barrow.png" />
+    <Content Include="Images\Cards\The-Three-Trials\Idraen.png" />
+    <Content Include="Images\Cards\The-Three-Trials\Raven%27s-Guardian.png" />
+    <Content Include="Images\Cards\The-Three-Trials\Stone-Barrow.png" />
+    <Content Include="Images\Cards\The-Three-Trials\The-Three-Trials.png" />
+    <Content Include="Images\Cards\The-Three-Trials\Wolf%27s-Guardian.png" />
     <Content Include="Images\Cards\The-Watcher-in-the-Water\Aragorn.png" />
     <Content Include="Images\Cards\The-Watcher-in-the-Water\Arwen-Undómiel.png" />
     <Content Include="Images\Cards\The-Watcher-in-the-Water\Disturbed-Waters.png" />

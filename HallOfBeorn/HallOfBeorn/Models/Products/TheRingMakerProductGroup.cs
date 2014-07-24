@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Products
         {
             MainProduct = new TheVoiceOfIsengardProduct();
             AddProduct(new TheDunlandTrapProduct());
+            AddProduct(new TheThreeTrialsProduct());
         }
     }
 }
