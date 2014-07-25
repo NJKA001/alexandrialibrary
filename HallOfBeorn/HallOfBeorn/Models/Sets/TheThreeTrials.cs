@@ -233,7 +233,7 @@ When the players control the current trial's Key objective, add all Barrow locat
                 OppositeText =
 @"Each Guardian enemy engages the first player. Guardian enemies cannot be damaged or leave play except by quest effect.
 
-When the players control the current trial's Key objective, add all Barrow locations in play to the victory display and immediately advance to a stage 2A of the players' choice. If all stage 2 quests have been defeated, advance to stage 3A, instead.",
+When the players control the current trial's Key objective, add all Guardian enemies in play to the victory display and immediately advance to a stage 2A of the players' choice. If all stage 2 quests have been defeated, advance to stage 3A, instead.",
                 EncounterSet = "The Three Trials",
                 IncludedEncounterSets = new List<EncounterSet> { EncounterSet.AncientForest },
                 Number = 37,
@@ -253,7 +253,7 @@ When the players control the current trial's Key objective, add all Barrow locat
                 OppositeText =
 @"Each Guardian enemy engages the first player. Any time players would place progress on this quest, discard an equal number of cards from the encounter deck instead. (Progress is placed on the active location before triggering this effect.)
 
-When the players control the current trial's Key objective, add all Barrow locations in play to the victory display and immediately advance to a stage 2A of the players' choice. If all stage 2 quests have been defeated, advance to stage 3A, instead.",
+When the players control the current trial's Key objective, add all Guardian enemies and Barrow locations in play to the victory display and immediately advance to a stage 2A of the players' choice. If all stage 2 quests have been defeated, advance to stage 3A, instead.",
                 EncounterSet = "The Three Trials",
                 IncludedEncounterSets = new List<EncounterSet> { EncounterSet.AncientForest },
                 Number = 38,
