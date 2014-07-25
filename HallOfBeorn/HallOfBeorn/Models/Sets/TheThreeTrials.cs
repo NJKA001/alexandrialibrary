@@ -46,7 +46,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 2,
                 Willpower = 1,
                 Attack = 1,
-                Defense = 1,
+                Defense = 0,
                 HitPoints = 2,
                 Traits = new List<string> { "Noldor.", "Scout." },
                 Keywords = new List<string> { "Secrecy 2." },
