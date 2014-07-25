@@ -18,7 +18,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 Title = "Idraen",
-                ImageType = Models.ImageType.Png,
+                ImageType = Models.ImageType.Jpg,
                 Id = "1AB9D3C4-C97E-4121-B08C-968839DABE6D",
                 CardType = CardType.Hero,
                 ThreatCost = 11,
@@ -39,7 +39,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 Title = "Rivendell Scout",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "DACE5750-8E0F-4CBB-BF33-470792092026",
                 CardType = CardType.Ally,
                 Quantity = 3,
@@ -58,7 +58,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 Title = "Feigned Voices",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "9B821B9F-6279-4EDF-8D1A-BF208C310AC9",
                 CardType = CardType.Event,
                 Quantity = 3,
@@ -72,7 +72,7 @@ namespace HallOfBeorn.Models.Sets
             {
                 Title = "Rúmil",
                 NormalizedTitle = "Rumil",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "56ADA7E6-4981-4BEB-851B-E12633FE1408",
                 CardType = CardType.Ally,
                 Quantity = 3,
@@ -92,7 +92,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 Title = "Elven Mail",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "5AA8270F-DA60-4B28-8B8C-6EFB1D0E012C",
                 CardType = CardType.Attachment,
                 Quantity = 3,
@@ -107,7 +107,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 Title = "Greyflood Wanderer",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "02F7C276-FDBE-4574-915D-3FC01B479879",
                 CardType = CardType.Ally,
                 Quantity = 3,
@@ -126,7 +126,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 Title = "Warden of Arnor",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "12423D4F-1E04-48C2-96A8-3E012DB954AA",
                 CardType = CardType.Attachment,
                 IsUnique = true,
@@ -142,7 +142,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 Title = "Message from Elrond",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "D1C87F36-6371-47B1-90D1-E5A5767050F9",
                 CardType = CardType.Event,
                 Quantity = 3,
@@ -155,7 +155,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 Title = "Noiseless Movement",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "EBC8BD16-93D7-483D-B001-E0C21D727B31",
                 CardType = CardType.Event,
                 Quantity = 3,
@@ -168,7 +168,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 Title = "Leaf Brooch",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "4C52BE83-0B8F-4D9A-A54D-4D8BF23B34A4",
                 CardType = CardType.Attachment,
                 Quantity = 3,
@@ -184,7 +184,8 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 Title = "The Trials Begin",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
+                HasSecondImage = true,
                 Id = "C3367A1E-7110-4025-8274-DBA2836778BC",
                 CardType = Models.CardType.Quest,
                 Quantity = 1,
@@ -202,7 +203,8 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 Title = "The Trial of Strength",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
+                HasSecondImage = true,
                 Id = "704201A2-5A88-465A-B304-1AF7CBCEA156",
                 CardType = CardType.Quest,
                 Quantity = 1,
@@ -222,7 +224,8 @@ When the players control the current trial's Key objective, add all Barrow locat
             Cards.Add(new Card()
             {
                 Title = "The Trial of Perseverance",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
+                HasSecondImage = true,
                 Id = "AF8B9515-2CCE-45CC-BB9C-D77733AD45F4",
                 CardType = CardType.Quest,
                 Quantity = 1,
@@ -242,7 +245,8 @@ When the players control the current trial's Key objective, add all Guardian ene
             Cards.Add(new Card()
             {
                 Title = "The Trial of Intuition",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
+                HasSecondImage = true,
                 Id = "3C484CBD-ADFF-4C20-8AF3-FDFAD91C50EA",
                 CardType = CardType.Quest,
                 Quantity = 1,
@@ -262,7 +266,8 @@ When the players control the current trial's Key objective, add all Guardian ene
             Cards.Add(new Card()
             {
                 Title = "The Antlered Crown",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
+                HasSecondImage = true,
                 Id = "9331EBC1-B5A5-407F-9841-D753BD080546",
                 CardType = CardType.Quest,
                 Quantity = 1,
@@ -283,7 +288,7 @@ Players cannot defeat this stage unless Hallowed Circle is in the victory displa
             Cards.Add(new Card()
             {
                 Title = "Boar's Guardian",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "FE9E3B29-2686-4E9B-B52C-741B807CF527",
                 CardType = Models.CardType.Enemy,
                 IsUnique = true,
@@ -304,7 +309,7 @@ Players cannot defeat this stage unless Hallowed Circle is in the victory displa
             Cards.Add(new Card()
             {
                 Title = "Wolf's Guardian",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "AD0ABA5C-2151-4332-BBB8-ECACF73694C2",
                 CardType = Models.CardType.Enemy,
                 IsUnique = true,
@@ -325,7 +330,7 @@ Players cannot defeat this stage unless Hallowed Circle is in the victory displa
             Cards.Add(new Card()
             {
                 Title = "Raven's Guardian",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "9D1F0475-0703-4FE3-8A29-81E521D69ADB",
                 CardType = Models.CardType.Enemy,
                 IsUnique = true,
@@ -346,7 +351,7 @@ Players cannot defeat this stage unless Hallowed Circle is in the victory displa
             Cards.Add(new Card()
             {
                 Title = "Key of the Boar",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "FB7F9E37-61DD-4BD2-BEA2-5035DC8FC4FE",
                 CardType = Models.CardType.Objective,
                 IsUnique = true,
@@ -364,7 +369,7 @@ If Key of the Boar is discarded, add it to the staging area.",
             Cards.Add(new Card()
             {
                 Title = "Key of the Wolf",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "DC98A8D8-3232-487E-8581-41128F6BD3C2",
                 CardType = Models.CardType.Objective,
                 IsUnique = true,
@@ -382,7 +387,7 @@ If Key of the Wolf is discarded, add it to the staging area.",
             Cards.Add(new Card()
             {
                 Title = "Key of the Raven",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "E723AC0A-3193-4759-A86B-58A2FA904EB5",
                 CardType = Models.CardType.Objective,
                 IsUnique = true,
@@ -400,7 +405,7 @@ If Key of the Raven is discarded, add it to the staging area.",
             Cards.Add(new Card()
             {
                 Title = "Hill Barrow",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "F7A746AE-3F01-42D2-8BBA-7E87CE46F4DF",
                 CardType = Models.CardType.Location,
                 Quantity = 1,
@@ -417,7 +422,7 @@ If Key of the Raven is discarded, add it to the staging area.",
             Cards.Add(new Card()
             {
                 Title = "Cave Barrow",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "B3DD5D12-DB0F-4096-8F5F-D73D22185C23",
                 CardType = Models.CardType.Location,
                 Quantity = 1,
@@ -433,7 +438,7 @@ If Key of the Raven is discarded, add it to the staging area.",
             Cards.Add(new Card()
             {
                 Title = "Stone Barrow",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "3ECA9B52-EBEC-490C-A6F8-6B1F48818B6F",
                 CardType = Models.CardType.Location,
                 Quantity = 1,
@@ -450,7 +455,7 @@ If Key of the Raven is discarded, add it to the staging area.",
             Cards.Add(new Card()
             {
                 Title = "Hallowed Circle",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "394D9B67-A302-4493-8D3F-497F5327DD4A",
                 CardType = Models.CardType.Location,
                 IsUnique = true,
@@ -472,7 +477,7 @@ Forced: After the players travel here, each engaged Guardian enemy makes an imme
             Cards.Add(new Card()
             {
                 Title = "Spirit of the Wild",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "9D9C0590-43C6-434D-A277-CA2EE47B3132",
                 CardType = Models.CardType.Enemy,
                 Quantity = 5,
@@ -493,7 +498,7 @@ Forced: After the players travel here, each engaged Guardian enemy makes an imme
             Cards.Add(new Card()
             {
                 Title = "Cursed Forest",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "DEB14C86-8786-4166-A8CB-1D85CDDB350D",
                 CardType = Models.CardType.Location,
                 Quantity = 2,
@@ -509,7 +514,7 @@ Forced: After the players travel here, each engaged Guardian enemy makes an imme
             Cards.Add(new Card()
             {
                 Title = "Grim Foothills",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "3B2A21DF-E6D2-4A3F-8F22-D059E32BB051",
                 CardType = Models.CardType.Location,
                 Quantity = 3,
@@ -527,7 +532,7 @@ Forced: After the players travel here, each engaged Guardian enemy makes an imme
             Cards.Add(new Card()
             {
                 Title = "Curse of the Wild Men",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "E1286A47-B5AC-4F10-806E-8C2179AB3B7D",
                 CardType = Models.CardType.Treachery,
                 Quantity = 2,
@@ -541,7 +546,7 @@ Forced: After the players travel here, each engaged Guardian enemy makes an imme
             Cards.Add(new Card()
             {
                 Title = "The Guardian's Fury",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "75C803E2-AA34-4D40-BD00-7A17DA344842",
                 CardType = Models.CardType.Treachery,
                 Quantity = 2,
@@ -555,9 +560,9 @@ Forced: After the players travel here, each engaged Guardian enemy makes an imme
             Cards.Add(new Card()
             {
                 Title = "Wild Tenacity",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "3CF889F6-7603-48C0-8A98-2B6DD5EC3633",
-                CardType = Models.CardType.Enemy,
+                CardType = Models.CardType.Treachery,
                 Quantity = 3,
                 EasyModeQuantity = 2,
                 Text = "When Revealed: Remove X time counters from each enemy in play with the time keyword, where X is the number of players.",
