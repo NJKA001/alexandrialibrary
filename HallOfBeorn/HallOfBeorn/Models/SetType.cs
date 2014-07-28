@@ -13,6 +13,7 @@ namespace HallOfBeorn.Models
         Deluxe_Expansion = 3,
         Saga_Expansion = 4,
         GenCon_Expansion = 5,
-        Nightmare_Expansion = 6
+        Nightmare_Expansion = 6,
+        Custom_Expansion = 7
     }
 }

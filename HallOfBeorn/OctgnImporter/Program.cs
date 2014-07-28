@@ -29,6 +29,9 @@ namespace OctgnImporter
                     if (!File.Exists(filePath))
                         continue;
 
+                    if (!filePath.Contains("dd60d037-3c50-4bd3-b994-2732b8218d7e"))
+                        continue;
+
                     using (var stream = new FileStream(filePath, FileMode.Open))
                     //using (var reader = new StreamReader(stream))
                     {
@@ -100,6 +103,7 @@ namespace OctgnImporter
 
             sb.AppendLine("            Cards.Add(new Card() {");
             sb.AppendFormat("                Title = \"{0}\",\r\n", card.Name);
+            sb.AppendLine("                ImageType = ImageType.Png,");
             sb.AppendFormat("                Id = \"{0}\",\r\n", card.Id);
             
             foreach (var property in card.Properties)
@@ -339,7 +343,7 @@ namespace OctgnImporter
             {
                 Console.WriteLine("Name: " + set.Name);
 
-                if (set.Name == "Markers and Tokens" || set.Name.StartsWith("Custom Set"))
+                if (set.Name == "Markers and Tokens") //|| set.Name.StartsWith("Custom Set"))
                 {
                     Console.WriteLine();
                     return;

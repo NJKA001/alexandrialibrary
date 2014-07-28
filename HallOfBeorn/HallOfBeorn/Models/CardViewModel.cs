@@ -212,7 +212,12 @@ namespace HallOfBeorn.Models
 
         public string EncounterSet
         {
-            get { return _card.EncounterSet; }
+            get
+            {
+                return _card.CardType != Models.CardType.Hero && _card.CardType != Models.CardType.Ally && _card.CardType != Models.CardType.Attachment && _card.CardType != Models.CardType.Event ?
+                    _card.EncounterSet
+                    : string.Empty;
+            }
         }
 
         public string StageNumber
@@ -387,6 +392,7 @@ namespace HallOfBeorn.Models
                 {
                     case Models.CardType.Quest:
                         return getQuestCardImagePath(true); 
+                    case Models.CardType.Campaign:
                     case Models.CardType.Nightmare_Setup:
                         return getSetupCardImagePath(true);
                     default:
@@ -403,6 +409,7 @@ namespace HallOfBeorn.Models
                 {
                     case Models.CardType.Quest:
                         return getQuestCardImagePath(false);
+                    case Models.CardType.Campaign:
                     case Models.CardType.Nightmare_Setup:
                         return getSetupCardImagePath(false);
                     default:
@@ -471,12 +478,12 @@ namespace HallOfBeorn.Models
 
         public bool HasSphere
         {
-            get { return _card.Sphere == Models.Sphere.Leadership || _card.Sphere == Models.Sphere.Tactics || _card.Sphere == Models.Sphere.Spirit || _card.Sphere == Models.Sphere.Lore; }
+            get { return _card.Sphere == Models.Sphere.Leadership || _card.Sphere == Models.Sphere.Tactics || _card.Sphere == Models.Sphere.Spirit || _card.Sphere == Models.Sphere.Lore || _card.Sphere == Models.Sphere.Mastery; }
         }
 
         public bool HasEncounterSet
         {
-            get { return !string.IsNullOrEmpty(_card.EncounterSet); }
+            get { return !string.IsNullOrEmpty(EncounterSet); }
         }
 
         public string EncounterSetImagePath

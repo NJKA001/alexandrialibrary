@@ -279,6 +279,36 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Nicholas_Gregory);
             all.Add(Artist.JB_Casacop);
 
+            //First Age
+            all.Add(Artist.Unknown);
+            all.Add(Artist.Ted_Nasmith);
+            all.Add(Artist.Cloudminedesign);
+            all.Add(Artist.Daniel_Ljunggren);
+            all.Add(Artist.MD_Arts);
+            all.Add(Artist.Moon_Blossom);
+            all.Add(Artist.Alan_Lee);
+            all.Add(Artist.MischeviousLittleElf);
+            all.Add(Artist.Echo539);
+            all.Add(Artist.MCFrog);
+            all.Add(Artist.Jenny_Dolfen);
+            all.Add(Artist.Saturnoarg);
+            all.Add(Artist.BrokenMachine86);
+            all.Add(Artist.DigitalFantasy);
+            all.Add(Artist.Anke_Eissmann);
+            all.Add(Artist.Peter_Xavier_Pric);
+            all.Add(Artist.Htogrom);
+            all.Add(Artist.DaLomacchi);
+            all.Add(Artist.Aogachou);
+            all.Add(Artist.OmegaBolt);
+            all.Add(Artist.WavingMonsterStudios);
+            all.Add(Artist.Dechambo);
+            all.Add(Artist.StrangerToTheRain);
+            all.Add(Artist.EthalenSky);
+            all.Add(Artist.Danny_Staten);
+            all.Add(Artist.Steamey);
+            all.Add(Artist.Cloiste);
+            all.Add(Artist.Pete_Amachree);
+            all.Add(Artist.Roger_Garland);
         }
 
         private static List<Artist> all = new List<Artist>();
@@ -287,6 +317,36 @@ namespace HallOfBeorn.Models
         {
             return all.OrderBy(a => a.Name).ToList();
         }
+
+        public static Artist Unknown = new Artist { Name = "Unknown", URL = "https://www.google.com/search?q=unknown+artist" };
+        public static Artist Ted_Nasmith = new Artist { Name = "Ted Nasmith", URL = "" };
+        public static Artist Cloudminedesign = new Artist { Name = "cloudminedesign", URL = "" };
+        public static Artist Daniel_Ljunggren = new Artist { Name = "Daniel Ljunggren", URL = "" };
+        public static Artist MD_Arts = new Artist { Name = "md arts", URL = "" };
+        public static Artist Moon_Blossom = new Artist { Name = "moon-blosson", URL = "" };
+        public static Artist Alan_Lee = new Artist { Name = "Alan Lee", URL = "" };
+        public static Artist MischeviousLittleElf = new Artist { Name = "mischeviouslittleelf", URL = "" };
+        public static Artist Echo539 = new Artist { Name = "echo539", URL = "" };
+        public static Artist MCFrog = new Artist { Name = "MCfrog", URL = "" };
+        public static Artist Jenny_Dolfen = new Artist { Name = "Jenny Dolfen", URL = "" };
+        public static Artist Saturnoarg = new Artist { Name = "saturnoarg", URL = "" };
+        public static Artist BrokenMachine86 = new Artist { Name = "brokenmachine86", URL = "" };
+        public static Artist DigitalFantasy = new Artist { Name = "digital-fantasy", URL = "" };
+        public static Artist Anke_Eissmann = new Artist { Name = "Anke Eissmann", URL = "" };
+        public static Artist Peter_Xavier_Pric = new Artist { Name = "Peter Xavier Pric", URL = "" };
+        public static Artist Htogrom = new Artist { Name = "Htogrom", URL = "" };
+        public static Artist DaLomacchi = new Artist { Name = "daLomacchi", URL = "" };
+        public static Artist Aogachou = new Artist { Name = "Aogachou", URL = "" };
+        public static Artist OmegaBolt = new Artist { Name = "OMEGABOLT", URL = "" };
+        public static Artist WavingMonsterStudios = new Artist { Name = "WavingMonsterStudios", URL = "" };
+        public static Artist Dechambo = new Artist { Name = "Dechambo", URL = "" };
+        public static Artist StrangerToTheRain = new Artist { Name = "StrangertotheRain", URL = "" };
+        public static Artist EthalenSky = new Artist { Name = "EthalenSky", URL = "" };
+        public static Artist Danny_Staten = new Artist { Name = "Danny Staten", URL = "" };
+        public static Artist Steamey = new Artist { Name = "steamey", URL = "" };
+        public static Artist Cloiste = new Artist { Name = "Cloiste", URL = "" };
+        public static Artist Pete_Amachree = new Artist { Name = "Pete Amachree", URL = "" };
+        public static Artist Roger_Garland = new Artist { Name = "Roger Garland", URL = "" };
 
         public static Artist Aaron_B_Miller = new Artist { Name = "Aaron B. Miller", URL = "http://aaronmiller.deviantart.com" };
         public static Artist A_M_Sartor = new Artist { Name = "A. M. Sartor", URL = "http://amsartor.com" };

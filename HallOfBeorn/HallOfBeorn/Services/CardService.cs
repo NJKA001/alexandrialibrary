@@ -222,6 +222,8 @@ namespace HallOfBeorn.Services
             productGroups.Add(new GenConDeckProductGroup());
             productGroups.Add(new NightmareDeckProductGroup());
 
+            productGroups.Add(new CustomProductGroup());
+
             foreach (var productGroup in productGroups)
             {
                 if (productGroup.MainProduct != null)
@@ -1011,6 +1013,14 @@ namespace HallOfBeorn.Services
             var takeCount = (model.Random || !string.IsNullOrEmpty(model.Artist)) && !hasFilter ? results.Count : maxResults;
 
             results = results.Take(takeCount).ToList();
+
+            if (!model.Custom)
+            {
+                if (model.CardSet == "Any" && model.EncounterSet == "Any" && model.Trait == "Any" && model.Keyword == "Any" && model.Artist == "Any" && model.Sphere != Sphere.Mastery)
+                {
+                    results = results.Where(x => x.CardSet.SetType != SetType.Custom_Expansion).ToList();
+                }
+            }
 
             if (model.Random)
             {
