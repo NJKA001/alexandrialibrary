@@ -43,6 +43,16 @@ namespace HallOfBeorn.Models
         }
 
         public string Abbreviation { get; protected set; }
+
+        public bool DisablePublicImages { get; set; }
+
+        private string publicSlug;
+        public string PublicSlug
+        {
+            get { return !string.IsNullOrEmpty(publicSlug) ? publicSlug : Abbreviation.ToLower(); }
+            private set { publicSlug = value; }
+        }
+
         public string Cycle { get; protected set; }
         public int Number { get; protected set; }
         public SetType SetType { get; protected set; }

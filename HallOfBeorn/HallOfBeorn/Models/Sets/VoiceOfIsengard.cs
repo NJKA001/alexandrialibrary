@@ -281,6 +281,7 @@ Response: After Saruman enters play, choose a non-unique enemy or location in th
             });
             Cards.Add(new Card() {
                 Title = "Gríma",
+                NormalizedTitle = "Grima",
                 ImageType = ImageType.Png,
                 Id = "C6DFAF1C-E925-4EF2-A5F2-E0B30B2BC8A8",
                 CardType = CardType.Objective_Ally,

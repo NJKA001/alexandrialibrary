@@ -16,6 +16,8 @@ namespace HallOfBeorn.Models
             Decks = new Dictionary<string, Deck>();
             RelatedCards = new List<Card>();
             IncludedEncounterSets = new List<EncounterSet>();
+
+            UsePublicImageURL = true;
         }
 
         private string scenarioTitle;
@@ -108,6 +110,31 @@ namespace HallOfBeorn.Models
         public bool SlugIncludesType { get; set; }
         public bool HasSecondImage { get; set; }
         public bool HasErrata { get; set; }
+
+        private string publicSlug;
+        public string PublicSlug
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(publicSlug))
+                    return publicSlug;
+
+                return !string.IsNullOrEmpty(NormalizedTitle) ?
+                    NormalizedTitle.ToUrlSafeString().Replace("'", string.Empty).ToLower()
+                    : Title.ToUrlSafeString().Replace("'", string.Empty).ToLower();
+            }
+            private set { publicSlug = value; }
+        }
+
+        public bool UsePublicImageURL { get; set; }
+
+        public string PublicImageURL
+        {
+            get
+            {
+                return string.Format("http://www.cardgamedb.com/forums/uploads/lotr/{0}-{1}.jpg", PublicSlug, CardSet.PublicSlug);
+            }
+        }
 
         public string Slug
         {
