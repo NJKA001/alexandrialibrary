@@ -11,6 +11,7 @@ namespace HallOfBeorn.Models.Sets
         {
             Name = "The Hobbit: Over Hill and Under Hill";
             Abbreviation = "THOHaUH";
+            PublicSlug = "ohauh";
             Number = 1001;
             SetType = Models.SetType.Saga_Expansion;
             Cycle = "The Hobbit";

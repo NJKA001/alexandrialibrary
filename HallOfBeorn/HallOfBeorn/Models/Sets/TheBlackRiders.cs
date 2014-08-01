@@ -529,10 +529,10 @@ namespace HallOfBeorn.Models.Sets
                 Text =
 @"You are playing Campaign Mode.
 
-Setup: Attach Mr. Underhill to the Ring-bearer. Add Gandalf's Delay to the staging area. Shuffle Gildor Inglorion and The ~Ring Draws Them into the encounter deck.",
+Setup: Attach Mr. Underhill to the Ring-bearer. Add Gandalf's Delay to the staging area. Shuffle Gildor Inglorian and The ~Ring Draws Them into the encounter deck.",
                 FlavorText = "\"The Shire, he may be seeking for it now, if has has not already found out where it lies. Indeed, Frodo, I fear that he may even think that the long-unnoticed name of Baggins has become important.\"\r\n-Gandalf, The Fellowship of the Ring",
                 OppositeTitle = "The Lord of the Rings Part 1",
-                OppositeText = "Resolution: Choose Gandalf's Delay or The ~Ring Draws Them and add it to the Campaign Pool. Then, choose Gildor Inglorion or Mr. Underhill and add it to the Campaign Pool. The chosen cards have been earned by the players.",
+                OppositeText = "Resolution: Choose Gandalf's Delay or The ~Ring Draws Them and add it to the Campaign Pool. Then, choose Gildor Inglorian or Mr. Underhill and add it to the Campaign Pool. The chosen cards have been earned by the players.",
                 OppositeFlavorText = "The ferry-boat moved slowly across the water. The Buckland shore drew nearer. Sam was the only member of the party who had not been over the river before. He had a stange feeling as the slow gurgling stream slipped by: his old life lay behind in the mists, dark adventure lay in front. He scratched his head, and for a moment had a passing wish that Mr. Frodo could have gone on living quietly at Bag End.\r\n-The Fellowship of the Ring",
                 Quantity = 1,
                 Number = 30,
@@ -1300,7 +1300,7 @@ Response: After an ememy is declared as an attacker, shuffle the top card of the
             });
             Cards.Add(new Card()
             {
-                Title = "Gildor Inglorion",
+                Title = "Gildor Inglorian",
                 ImageType = Models.ImageType.Png,
                 Id = "6c04a40a-0666-4b4f-a768-ddff46857cf0",
                 IsUnique = true,
@@ -1312,7 +1312,7 @@ Response: After an ememy is declared as an attacker, shuffle the top card of the
                 HitPoints = 3,
                 Traits = new List<string>() { "Noldor." },
                 Keywords = new List<string>() { "The first player gains control of [Card]." },
-                Text = "Forced: At the end of the round, discard Gildor Inglorion. The first player may spend 1 Fellowship resource to cancel this effect.",
+                Text = "Forced: At the end of the round, discard Gildor Inglorian. The first player may spend 1 Fellowship resource to cancel this effect.",
                 FlavorText = "\"We think you had best come now with us.\"\r\n-The Fellowship of the Ring",
                 Quantity = 1,
                 Number = 77,

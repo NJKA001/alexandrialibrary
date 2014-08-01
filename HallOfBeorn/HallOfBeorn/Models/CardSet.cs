@@ -50,7 +50,7 @@ namespace HallOfBeorn.Models
         public string PublicSlug
         {
             get { return !string.IsNullOrEmpty(publicSlug) ? publicSlug : Abbreviation.ToLower(); }
-            private set { publicSlug = value; }
+            protected set { publicSlug = value; }
         }
 
         public string Cycle { get; protected set; }

@@ -94,7 +94,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
-                Title = "Tome of Atanator",
+                Title = "Tome of Atanatar",
                 Id = "e88d7165-821c-4b04-9869-80ee1f33905c",
                 IsUnique = true,
                 CardType = CardType.Attachment,
@@ -102,7 +102,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 4,
                 Traits = new List<string>() { "Record." },
                 Keywords = new List<string>() { "Attach to a Leadership hero." },
-                Text = "Reduce the cost to play Tome of Atanator by 1 for each you control with the printed Leadership resource icon.\r\nAction: Discard Tome of Atanator to play any Leadership event card in your discard pile as if it were in your hand. Then, place that event on the bottom of your deck.",
+                Text = "Reduce the cost to play Tome of Atanatar by 1 for each you control with the printed Leadership resource icon.\r\n\r\nAction: Discard Tome of Atanatar to play any Leadership event card in your discard pile as if it were in your hand. Then, place that event on the bottom of your deck.",
                 Quantity = 3,
                 Number = 109,
                 Artist = Artist.Jason_Ward

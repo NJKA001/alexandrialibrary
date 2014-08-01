@@ -11,6 +11,7 @@ namespace HallOfBeorn.Models.Sets
         {
             Name = "The Hobbit: On the Doorstep";
             Abbreviation = "THOtD";
+            PublicSlug = "otd";
             Number = 1002;
             SetType = Models.SetType.Saga_Expansion;
             Cycle = "The Hobbit";

@@ -331,8 +331,14 @@ namespace HallOfBeorn.Models
         {
             get
             {
-                if (_card.CardType != Models.CardType.Quest && _card.UsePublicImageURL && !_card.CardSet.DisablePublicImages)
+                if (_card.CardType != Models.CardType.Quest &&
+                    _card.UsePublicImageURL &&
+                    !_card.CardSet.DisablePublicImages &&
+                    _card.CardSet.SetType != SetType.Nightmare_Expansion &&
+                    _card.CardSet.SetType != SetType.Custom_Expansion)
+                {
                     return _card.PublicImageURL;
+                }
 
                 var format = ImageType.Jpg;
                 if (_card.ImageType != ImageType.None)
