@@ -1010,7 +1010,7 @@ namespace HallOfBeorn.Services
                 results = results.Where(x => !string.IsNullOrEmpty(x.EncounterSet) && x.EncounterSet == model.EncounterSet).ToList();
             }
 
-            var takeCount = (model.Random || !string.IsNullOrEmpty(model.Artist)) && !hasFilter ? results.Count : maxResults;
+            var takeCount = hasFilter || model.Random ? results.Count : maxResults;
 
             results = results.Take(takeCount).ToList();
 
