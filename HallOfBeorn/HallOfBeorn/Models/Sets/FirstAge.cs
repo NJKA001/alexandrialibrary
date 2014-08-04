@@ -2239,7 +2239,7 @@ Planning Action: Exhaust a hero with X Willpower. Wolf-Sauron gets -X Defense un
 If the players destroy Wolf-Sauron, they have rescued the prisoners and won the game.",
                 EncounterSet = "The Isle of Werewolves",
                 Number = 115,
-                Artist = Artist.Htogrom
+                Artist = Artist.Bogdan_Amidzic
             });
             Cards.Add(new Card() {
                 Title = "Upon the Bridge",
