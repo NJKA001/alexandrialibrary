@@ -252,7 +252,8 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 2,
                 Text = "Forced: Damage from undefended attacks must be assigned to Finduilas. After Finduilas leaves play, raise your threat by 2.",
                 EncounterSet = "First Age",
-                Number = 41
+                Number = 41,
+                Artist = Artist.Kuun_Suru
             });
             Cards.Add(new Card() {
                 Title = "Gondolin Guard",
@@ -1033,7 +1034,8 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
                 ResourceCost = 3,
                 Text = "Action: All characters gain ranged and sentinel until the end of the phase.",
                 EncounterSet = "First Age",
-                Number = 84
+                Number = 84,
+                Artist = Artist.Pieter_Claesz
             });
             Cards.Add(new Card() {
                 Title = "Fire of Life",
@@ -1045,7 +1047,8 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
                 ResourceCost = 0,
                 Text = "Response: After a character with the House of Fëanor trait is damaged, cancel 1 point of that damage and attach Fire of Life to that character. (Counts as a Condition attachment with the text: 'Limit 1 per character. Attached character gets +1 Attack.')",
                 EncounterSet = "First Age",
-                Number = 79
+                Number = 79,
+                Artist = Artist.Rick_Ritchie
             });
             Cards.Add(new Card() {
                 Title = "Flame Light! Flee Night!",
@@ -1056,7 +1059,8 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
                 ResourceCost = 1,
                 Text = "Play only if you control a hero with the Edain trait.Action: Search your deck for a character with the Edain trait and put it into play. That character does not exhaust to quest, attack, or defend until the end of the round. Discard that character at the end of the round.",
                 EncounterSet = "First Age",
-                Number = 96
+                Number = 96,
+                Artist = Artist.John_Howe
             });
             Cards.Add(new Card() {
                 Title = "Friendship of Ulmo",
@@ -1068,7 +1072,8 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
                 ResourceCost = 2,
                 Text = "If the active location is a River or Water location, reduce the cost to play Friendship of Ulmo by 2.Action: Reveal all shadow cards in play. Then, choose two shadow cards from different enemies and switch them.",
                 EncounterSet = "First Age",
-                Number = 91
+                Number = 91,
+                Artist = Artist.John_Howe
             });
             Cards.Add(new Card() {
                 Title = "Hold to the Oath",
@@ -1364,7 +1369,8 @@ Action: Reduce your threat by 3.",
                 
 Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of influence for no cost.",
                 EncounterSet = "First Age",
-                Number = 7
+                Number = 7,
+                Artist = Artist.Vishal
             });
             Cards.Add(new Card() {
                 Title = "Fingolfin",
@@ -1382,7 +1388,8 @@ Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of i
                 HitPoints = 6,
                 Text = "Action: Raise your threat by 3 to choose an enemy in play. Engage the chosen enemy. Until the end of the round, Fingolfin does not exhaust to defend against the chosen enemy.",
                 EncounterSet = "First Age",
-                Number = 10
+                Number = 10,
+                Artist = Artist.Murat_Calis
             });
             Cards.Add(new Card() {
                 Title = "Fingon",
@@ -1399,7 +1406,8 @@ Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of i
                 HitPoints = 5,
                 Text = "Action: Exhaust Fingon to remove 1 Corruption from a character in play. (Limit once per round.)",
                 EncounterSet = "First Age",
-                Number = 3
+                Number = 3,
+                Artist = Artist.Venlian
             });
             Cards.Add(new Card() {
                 Title = "Finrod Felagund",
@@ -1416,7 +1424,8 @@ Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of i
                 HitPoints = 4,
                 Text = "While Finrod Felagund is in play, each Edain character gets +1 Willpower.",
                 EncounterSet = "First Age",
-                Number = 2
+                Number = 2,
+                Artist = Artist.Niyochara
             });
             Cards.Add(new Card() {
                 Title = "Haleth",
@@ -1935,7 +1944,8 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
                 Text = "When Revealed: Remove 5 damage from Carcharoth and assign it to characters the first player controls. If Carcharoth has no damage, Flame of Anguish gains surge.",
                 Shadow = "Shadow: Remove 5 damage from the attacking enemy.",
                 EncounterSet = "Hunting of the Wolf",
-                Number = 184
+                Number = 184,
+                Artist = Artist.Ted_Nasmith
             });
             Cards.Add(new Card() {
                 Title = "Fled in Fear",
@@ -1946,7 +1956,8 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
                 Text = "When Revealed: Remove all allies from the quest. Allies cannot be declared as attackers or defenders until the end of the round.",
                 Shadow = "Shadow: Allies cannot participate in an attack against the attacking enemy this round.",
                 EncounterSet = "Hunting of the Wolf",
-                Number = 182
+                Number = 182,
+                Artist = Artist.Ted_Nasmith
             });
             Cards.Add(new Card() {
                 Title = "Stood Now in Wrath",
@@ -2253,7 +2264,8 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
                 Quantity = 1,
                 Text = "Action: Discard Finrod Felagund to deal 5 points of damage to an engaged enemy.",
                 EncounterSet = "The Isle of Werewolves",
-                Number = 116
+                Number = 116,
+                Artist = Artist.Elfkin
             });
             Cards.Add(new Card() {
                 Title = "The Pits of Sauron",
@@ -2346,7 +2358,8 @@ Heroes in the pit area are immune to player card effects and cannot leave the pi
                 Text = "When Revealed: Each character in play gets -X Attack and -X Defense until the end of the round. X is the number of enemies with the Werewolf trait engaged with the controlling player. If there are no engaged enemies with the Werewolf trait, Foul Vapour gains surge.",
                 Shadow = "Shadow: The defending character gets -1 Defense until the end of the phase.",
                 EncounterSet = "The Isle of Werewolves",
-                Number = 104
+                Number = 104,
+                Artist = Artist.Alex_McVey
             });
             Cards.Add(new Card() {
                 Title = "Lord of Werewolves",
@@ -2472,7 +2485,8 @@ Forced: Players cannot reduce their threat while Carcharoth is in play.",
                 Text = "Forced: At the beginning of the combat phase, deal 1 damage to each character controlled by the engaged player.",
                 Shadow = "Shadow: Deal 1 damage to each character controlled by the engaged player.",
                 EncounterSet = "The Seat of Morgoth",
-                Number = 138
+                Number = 138,
+                Artist = Artist.Sansyu
             });
             Cards.Add(new Card() {
                 Title = "Gothmog",
@@ -2898,7 +2912,8 @@ When engaged with an enemy with the Sneak keyword, players may cancel all progre
                 Text = "When Revealed: Each player must either deal 1 damage to each character he committed to the quest or reduce the Willpower of each character he controls by 1 until the end of the round.",
                 Shadow = "Shadow: Exhaust a character that the defending player controls.",
                 EncounterSet = "The Seat of Morgoth",
-                Number = 156
+                Number = 156,
+                Artist = Artist.Aledin
             });
             Cards.Add(new Card() {
                 Title = "Foolish Ruckus",
@@ -2910,7 +2925,8 @@ When engaged with an enemy with the Sneak keyword, players may cancel all progre
                 Text = "When Revealed: Raise the Threat of the active enemy by 3 until the end of the phase. If there is no active enemy, raise the Threat of all enemies in the staging area by 1 until the end of the phase.",
                 Shadow = "Shadow: If this attack destroys a character, raise the defending player's threat by 2.",
                 EncounterSet = "The Seat of Morgoth",
-                Number = 155
+                Number = 155,
+                Artist = Artist.Unknown
             });
             Cards.Add(new Card() {
                 Title = "Heroic Diversion",
