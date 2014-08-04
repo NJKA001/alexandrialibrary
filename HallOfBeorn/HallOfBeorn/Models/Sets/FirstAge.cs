@@ -29,7 +29,8 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 2,
                 Text = "Response: After the active location is explored, discard the top card of your deck. If it is an ally, take it into your hand.",
                 EncounterSet = "First Age",
-                Number = 29
+                Number = 29,
+                Artist = Artist.Miao_Yu
             });
             Cards.Add(new Card() {
                 Title = "Azaghâl",
@@ -47,7 +48,8 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 4,
                 Text = "Response: After Azaghâl is destroyed as the result of an enemy attack, deal 3 damage to the attacking enemy.",
                 EncounterSet = "First Age",
-                Number = 42
+                Number = 42,
+                Artist = Artist.Even_Mehl_Amundsen
             });
             Cards.Add(new Card() {
                 Title = "Barahir",
@@ -66,7 +68,8 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Text = "Response: After a shadow card is revealed, exhaust Barahir to add his Defense to the Defense of the defending character until the end of the phase.",
                 EncounterSet = "First Age",
-                Number = 38
+                Number = 38,
+                Artist = Artist.Saturnoarg
             });
             Cards.Add(new Card() {
                 Title = "Bëor",
@@ -85,7 +88,8 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 2,
                 Text = "Action: Attach Bëor facedown to a character with the House of Finarfin trait. (Counts as a Vassal attachment with the text: 'Attached character gets +2 Willpower.')",
                 EncounterSet = "First Age",
-                Number = 36
+                Number = 36,
+                Artist = Artist.Stefan_Meisl
             });
             Cards.Add(new Card() {
                 Title = "Caranthir",
@@ -103,7 +107,8 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Text = "Response: After a treachery is revealed and resolved, attach that card facedown to Caranthir. That attachment gains the Fury trait.(Limit once per round.)Action: Attach a Fury attachment to an enemy engaged with you. That enemy gets +1 Attack and -1 Defense.",
                 EncounterSet = "First Age",
-                Number = 20
+                Number = 20,
+                Artist = Artist.Lomacchi
             });
             Cards.Add(new Card() {
                 Title = "Celegorm",
@@ -121,7 +126,8 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Text = "Celegorm gets +1 Attack for each non-unique location in the staging area.Action: Place 1 Corruption on Celegorm to search the top 10 cards of the encounter deck for a location and add it to the staging area.",
                 EncounterSet = "First Age",
-                Number = 18
+                Number = 18,
+                Artist = Artist.Lomacchi
             });
             Cards.Add(new Card() {
                 Title = "Chieftain of Men",
@@ -137,7 +143,8 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 2,
                 Text = "Response: After your threat is raised by an encounter card effect, discard Chieftain of Men from play to cancel that effect.",
                 EncounterSet = "First Age",
-                Number = 25
+                Number = 25,
+                Artist = Artist.Unknown
             });
             Cards.Add(new Card() {
                 Title = "Curufin",
@@ -155,7 +162,8 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Text = "While Fëanor is in play, Curufin gains: 'Action: Place 1 Corruption on Curufin. Until the end of the round, Curufin's Willpower, Attack and Defense are equal to the printed Willpower, Attack, and Defense of Fëanor.'",
                 EncounterSet = "First Age",
-                Number = 43
+                Number = 43,
+                Artist = Artist.Alan_Michael_S
             });
             Cards.Add(new Card() {
                 Title = "Daeron",
@@ -172,7 +180,8 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 2,
                 Text = "Action: Exhaust Daeron to draw 2 cards. Then discard 1 card from your hand.",
                 EncounterSet = "First Age",
-                Number = 33
+                Number = 33,
+                Artist = Artist.Ebe_Kastein
             });
             Cards.Add(new Card() {
                 Title = "Dwarf of the Blue Mountains",
@@ -188,7 +197,8 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 2,
                 Text = "Dwarf of the Blue Mountains gets +1 hit point for each unique attachment you control.",
                 EncounterSet = "First Age",
-                Number = 30
+                Number = 30,
+                Artist = Artist.David_Gaillet
             });
             Cards.Add(new Card() {
                 Title = "Elwing",
@@ -205,7 +215,8 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 1,
                 Text = "While Eärendil is in play, Elwing gains: 'Response: After Elwing is destroyed, you may immediately put her back into play for 1 Spirit resource. (Limit once per round.)'",
                 EncounterSet = "First Age",
-                Number = 34
+                Number = 34,
+                Artist = Artist.Miao_Yu
             });
             Cards.Add(new Card() {
                 Title = "Eöl",
@@ -223,7 +234,8 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 2,
                 Text = "Action: Place 1 Corruption on Eöl to search the top 15 cards of your deck for an attachment and add it to your hand.",
                 EncounterSet = "First Age",
-                Number = 17
+                Number = 17,
+                Artist = Artist.CS_Marks
             });
             Cards.Add(new Card() {
                 Title = "Finduilas",
@@ -528,7 +540,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 2,
                 Text = "Action: Exhaust Aranrúth to give attached hero a Leadership, Lore, Tactics, or Spirit icon until the end of the phase.If attached hero is Thingol, Aranrúth gains, 'Attached hero gets +2 Attack.'",
                 EncounterSet = "First Age",
-                Number = 161
+                Number = 161,
+                Artist = Artist.Mathieu_Degrotte
             });
             Cards.Add(new Card() {
                 Title = "Ard-galen Horse",
@@ -540,7 +553,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 3,
                 Text = "Attach to a Noldor hero. Limit 1 per hero.Action: Exhaust Ard-galen Horse to place 1 progress token on each location in the staging area.",
                 EncounterSet = "First Age",
-                Number = 57
+                Number = 57,
+                Artist = Artist.Unknown
             });
             Cards.Add(new Card() {
                 Title = "Blue Shield",
@@ -553,7 +567,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Text = "Attach to a hero with the House of Fingolfin trait.\r\n\r\nAttached hero gets +1 Defense (+2 Defense if the attached hero is Fingolfin).",
                 EncounterSet = "First Age",
-                Number = 63
+                Number = 63,
+                Artist = Artist.Peter_Xavier_Pric
             });
             Cards.Add(new Card() {
                 Title = "Dragon-helm",
@@ -570,7 +585,8 @@ namespace HallOfBeorn.Models.Sets
                 
 If attached hero is Túrin, Dragon-helm gains, 'Response: After an enemy engages with you, it gets -1 Attack and -1 Defense until the end of the round.'",
                 EncounterSet = "First Age",
-                Number = 64
+                Number = 64,
+                Artist = Artist.Mahdi_Mehrnegar
             });
             Cards.Add(new Card() {
                 Title = "Elf-friend",
@@ -582,7 +598,8 @@ If attached hero is Túrin, Dragon-helm gains, 'Response: After an enemy engages
                 ResourceCost = 1,
                 Text = "Attach to an Edain hero.Attached hero gains the Noldor trait.",
                 EncounterSet = "First Age",
-                Number = 45
+                Number = 45,
+                Artist = Artist.Anke_Eissmann
             });
             Cards.Add(new Card() {
                 Title = "Galvorn Armor",
@@ -879,7 +896,8 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
                 ResourceCost = 1,
                 Text = "Response: After you attack and destroy an enemy, choose one: add 1 resource to the resource pool of a hero you control, draw 1 card, or lower your threat by 1.",
                 EncounterSet = "First Age",
-                Number = 94
+                Number = 94,
+                Artist = Artist.Ted_Nasmith
             });
             Cards.Add(new Card() {
                 Title = "A Great Doom",
@@ -891,7 +909,8 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
                 ResourceCost = 2,
                 Text = "Response: After a player card is drawn or an encounter card is revealed (including a shadow effect), shuffle that card back into its deck and draw a new card.",
                 EncounterSet = "First Age",
-                Number = 78
+                Number = 78,
+                Artist = Artist.Ted_Nasmith
             });
             Cards.Add(new Card() {
                 Title = "Arts of Felagund",
@@ -904,7 +923,8 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
                 VictoryPoints = 1,
                 Text = "Quest Action: Until the end of the phase, each enemy revealed during staging is discarded and replaced with the next encounter card instead. Add this card to the victory display.",
                 EncounterSet = "First Age",
-                Number = 73
+                Number = 73,
+                Artist = Artist.Alan_Lee
             });
             Cards.Add(new Card() {
                 Title = "Banners and Horns",
@@ -915,7 +935,8 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
                 ResourceCost = 1,
                 Text = "Response: After a unique ally you control enters play, choose any non-unique enemy in play. That enemy gets -X Attack and -X Defense until the end of the round. (X is equal to the cost of that ally.)",
                 EncounterSet = "First Age",
-                Number = 85
+                Number = 85,
+                Artist = Artist.Jenny_Dolfen
             });
             Cards.Add(new Card() {
                 Title = "Dark Elf",
@@ -926,7 +947,8 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
                 ResourceCost = 0,
                 Text = "Action: Place X Corruption on heroes you control to draw X cards. (X cannot be greater than the number of heroes you control.)",
                 EncounterSet = "First Age",
-                Number = 159
+                Number = 159,
+                Artist = Artist.Ted_Nasmith
             });
             Cards.Add(new Card() {
                 Title = "Dark Heart of the Smith",
@@ -937,7 +959,8 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
                 ResourceCost = 0,
                 Text = "Action: Place 1 Corruption on a character with a unique Weapon attached. All damage dealt by that character is doubled this round. Only 1 copy of Dark Heart of the Smith may be played on a character each round.",
                 EncounterSet = "First Age",
-                Number = 82
+                Number = 82,
+                Artist = Artist.Noldomirwen
             });
             Cards.Add(new Card() {
                 Title = "Day Shall Come Again",
@@ -948,7 +971,8 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
                 ResourceCost = 1,
                 Text = "Response: After a character you control destroys an enemy, ready that character. That character gets +1 Attack until the end of the round. You may pay 1 Tactics resource to return Day Shall Come Again to your hand.",
                 EncounterSet = "First Age",
-                Number = 98
+                Number = 98,
+                Artist = Artist.Julia_Alekseeva
             });
             Cards.Add(new Card() {
                 Title = "Defied and Mocked",
@@ -959,7 +983,8 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
                 ResourceCost = 1,
                 Text = "Action: Choose an ally. That ally can be assigned damage from undefended attacks until the end of the phase.",
                 EncounterSet = "First Age",
-                Number = 80
+                Number = 80,
+                Artist = Artist.Ted_Nasmith
             });
             Cards.Add(new Card() {
                 Title = "Dreadful Death",
@@ -970,7 +995,8 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
                 ResourceCost = 0,
                 Text = "Response: After a corrupted character destroys a hero or ally, remove all Corruption from that character and place it under your control.",
                 EncounterSet = "First Age",
-                Number = 81
+                Number = 81,
+                Artist = Artist.Ted_Nasmith
             });
             Cards.Add(new Card() {
                 Title = "Dreams from Ulmo",
@@ -982,7 +1008,8 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
                 ResourceCost = 1,
                 Text = "If the active location is a River or Water location, reduce the cost to play Dreams from Ulmo by 1.Action: Choose one character you control. Shuffle the encounter deck and look at its top card. Until the end of the phase, the chosen character gets +X Willpower. X is equal to the revealed card's Threat.",
                 EncounterSet = "First Age",
-                Number = 90
+                Number = 90,
+                Artist = Artist.Ted_Nasmith
             });
             Cards.Add(new Card() {
                 Title = "Erchamion",
@@ -994,7 +1021,8 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
                 ResourceCost = 3,
                 Text = "Response: After a character is destroyed, put that character back into play under its owner's control. Attach Erchamion to that character. (Counts as a Condition attachment with the text: 'The attached character gets -1 Attack and -1 Defense.'",
                 EncounterSet = "First Age",
-                Number = 69
+                Number = 69,
+                Artist = Artist.Dylan_Palmer
             });
             Cards.Add(new Card() {
                 Title = "Feast of Reuniting",
@@ -1257,7 +1285,8 @@ Action: Reduce your threat by 3.",
                 HitPoints = 4,
                 Text = "While Beren is committed to the quest, he gains: 'Response: After an encounter card with at least 3 Threat is revealed from the encounter deck, add 1 resource to Beren's resource pool.'",
                 EncounterSet = "First Age",
-                Number = 87
+                Number = 87,
+                Artist = Artist.Anke_Eissmann
             });
             Cards.Add(new Card() {
                 Title = "Círdan",
@@ -1275,7 +1304,8 @@ Action: Reduce your threat by 3.",
                 HitPoints = 4,
                 Text = "Círdan gets +1 Defense for each attached character.Planning Action: Attach a character to Círdan. This character is considered to be out of play. At the end of the round, heal 3 damage on that character and put it back into play. (Limit twice per round.)",
                 EncounterSet = "First Age",
-                Number = 13
+                Number = 13,
+                Artist = Artist.MouMou38
             });
             Cards.Add(new Card() {
                 Title = "Eärendil",
@@ -1293,7 +1323,8 @@ Action: Reduce your threat by 3.",
                 HitPoints = 3,
                 Text = "Response: After Eärendil commits to the quest, shuffle the encounter deck and discard the top card. If it is a treachery, deal 1 damage to Eärendil. Otherwise, reduce your threat by 1 and draw 1 card.",
                 EncounterSet = "First Age",
-                Number = 5
+                Number = 5,
+                Artist = Artist.Jenny_Dolfen
             });
             Cards.Add(new Card() {
                 Title = "Ecthelion",
@@ -1310,7 +1341,8 @@ Action: Reduce your threat by 3.",
                 HitPoints = 4,
                 Text = "When Ecthelion attacks alone, the defending enemy does not count its Defense.",
                 EncounterSet = "First Age",
-                Number = 12
+                Number = 12,
+                Artist = Artist.Jan_Pospisil
             });
             Cards.Add(new Card() {
                 Title = "Fëanor",
@@ -1527,7 +1559,8 @@ Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of i
 
 When Revealed: Add 1 damage to the current quest stage.",
                 EncounterSet = "Hunting of the Wolf",
-                Number = 167
+                Number = 167,
+                Artist = Artist.Razielmn
             });
             Cards.Add(new Card() {
                 Title = "Carcharoth the Devouring Spirit",
@@ -1548,7 +1581,8 @@ When Revealed: Add 1 damage to the current quest stage.",
                 
 When Revealed: Carcharoth the Devouring Spirit makes an immediate attack on the first player.",
                 EncounterSet = "Hunting of the Wolf",
-                Number = 168
+                Number = 168,
+                Artist = Artist.Nasko_Moskov
             });
             Cards.Add(new Card() {
                 Title = "Carcharoth the Red Maw",
@@ -1569,7 +1603,8 @@ When Revealed: Carcharoth the Devouring Spirit makes an immediate attack on the 
 
 Forced: Caracharoth the Red Maw makes two attacks during the combat phase. (Deal a separate shadow card for each attack.)",
                 EncounterSet = "Hunting of the Wolf",
-                Number = 166
+                Number = 166,
+                Artist = Artist.WavingMonsterStudios
             });
             Cards.Add(new Card() {
                 Title = "Carcharoth the Tormented",
@@ -1590,7 +1625,8 @@ Forced: Caracharoth the Red Maw makes two attacks during the combat phase. (Deal
 
 Forced: After an attack by Carcharoth the Tormented resolves, discard one character the defending player controls.",
                 EncounterSet = "Hunting of the Wolf",
-                Number = 169
+                Number = 169,
+                Artist = Artist.Dechambo
             });
             Cards.Add(new Card() {
                 Title = "Banks of the Esgalduin",
@@ -1603,7 +1639,8 @@ Forced: After an attack by Carcharoth the Tormented resolves, discard one charac
                 Quantity = 2,
                 Text = "Forced: If Banks of the Esgalduin is destroyed, remove 5 damage from Carcharoth.Travel: Each player must discard an attachment he controls.",
                 EncounterSet = "Hunting of the Wolf",
-                Number = 175
+                Number = 175,
+                Artist = Artist.Ao_Yi_Chuan
             });
             Cards.Add(new Card() {
                 Title = "Brethil Dwelling",
@@ -1616,7 +1653,8 @@ Forced: After an attack by Carcharoth the Tormented resolves, discard one charac
                 Quantity = 3,
                 Text = "Forced: After Brethil Dwelling is destroyed, each player must deal 3 Corruption among heroes he controls.",
                 EncounterSet = "Hunting of the Wolf",
-                Number = 173
+                Number = 173,
+                Artist = Artist.Unknown
             });
             Cards.Add(new Card() {
                 Title = "Dark Valley",
@@ -1630,7 +1668,8 @@ Forced: After an attack by Carcharoth the Tormented resolves, discard one charac
                 Quantity = 2,
                 Text = "While Dark Valley is the active location, you may choose which Carcharoth is revealed at the beginning of the quest phase. Shuffle the Carcharoth deck.Travel: Carcharoth makes an immediate attack against the first player.",
                 EncounterSet = "Hunting of the Wolf",
-                Number = 179
+                Number = 179,
+                Artist = Artist.Albert_Bierstadt
             });
             Cards.Add(new Card() {
                 Title = "Dimbar Field",
@@ -1644,7 +1683,8 @@ Forced: After an attack by Carcharoth the Tormented resolves, discard one charac
                 Text = "While Dimbar Field is the active location, all heroes gain ranged.Travel: Discard all allies in each player's hand.",
                 Shadow = "Shadow: The attacking enemy makes an additional attack after this one.",
                 EncounterSet = "Hunting of the Wolf",
-                Number = 172
+                Number = 172,
+                Artist = Artist.Bobby_Fieldhouse
             });
             Cards.Add(new Card() {
                 Title = "Eaves of Region",
@@ -1658,7 +1698,8 @@ Forced: After an attack by Carcharoth the Tormented resolves, discard one charac
                 Text = "While Eaves of Region is the active location, Carcharoth takes 1 damage at the end of the round.Travel: Each player must discard 1 random card from his hand.",
                 Shadow = "Shadow: Either destroy a location in play or choose a new defender. (You may choose a location that is the target of this attack.)",
                 EncounterSet = "Hunting of the Wolf",
-                Number = 174
+                Number = 174,
+                Artist = Artist.FrozenStocks
             });
             Cards.Add(new Card() {
                 Title = "Gates of Menegroth",
@@ -1742,7 +1783,8 @@ Forced: After an attack by Carcharoth the Tormented resolves, discard one charac
                 Quantity = 1,
                 Text = "The first player gains control of Beleg Strongbow.Action: Exhaust Beleg Strongbow to remove 2 damage from a location in play.",
                 EncounterSet = "Hunting of the Wolf",
-                Number = 165
+                Number = 165,
+                Artist = Artist.BrokenMachine86
             });
             Cards.Add(new Card() {
                 Title = "At Last Upon the Wolf",
@@ -1848,7 +1890,8 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
                 Text = "When Revealed: Attach to Carcharoth as a Condition attachment with the text, 'After an attack against Carcharoth resolves, discard one character that participated in the attack and discard A Doom Fulfilled.'",
                 Shadow = "Shadow: The attacking enemy cannot be damaged this turn unless the defending player discards one character.",
                 EncounterSet = "Hunting of the Wolf",
-                Number = 183
+                Number = 183,
+                Artist = Artist.Ted_Nasmith
             });
             Cards.Add(new Card() {
                 Title = "Devil's Cunning",
@@ -1858,7 +1901,8 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
                 Quantity = 3,
                 Text = "When Revealed: Carcharoth makes an immediate attack on the player with the most Willpower committed to the quest.",
                 EncounterSet = "Hunting of the Wolf",
-                Number = 186
+                Number = 186,
+                Artist = Artist.Igor_Kordey
             });
             Cards.Add(new Card() {
                 Title = "Espied from Afar",
@@ -1868,7 +1912,8 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
                 Quantity = 2,
                 Text = "When Revealed: The players must either discard the location in the victory display with the highest Hunt value or prevent all exhausted characters from readying during the refresh phase this round.",
                 EncounterSet = "Hunting of the Wolf",
-                Number = 185
+                Number = 185,
+                Artist = Artist.Unknown
             });
             Cards.Add(new Card() {
                 Title = "Evil Days",
@@ -1878,7 +1923,8 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
                 Quantity = 3,
                 Text = "When Revealed: Each player must either deal 1 damage to each location in play or deal 1 Corruption to each character he controls.",
                 EncounterSet = "Hunting of the Wolf",
-                Number = 180
+                Number = 180,
+                Artist = Artist.Justin_Gerard
             });
             Cards.Add(new Card() {
                 Title = "Flame of Anguish",
@@ -1928,7 +1974,8 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
                 Quantity = 3,
                 Text = "Forced: Reveal 1 encounter card at the end of the round.Forced: After Crazed Thrall is destroyed by an attack, place 1 Corruption on each participating character.Response: After questing successfully, cancel all progress and instead remove Crazed Thrall from play.",
                 EncounterSet = "The Isle of Werewolves",
-                Number = 124
+                Number = 124,
+                Artist = Artist.Unknown
             });
             Cards.Add(new Card() {
                 Title = "Devouring Werewolf",
@@ -1946,7 +1993,8 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
                 Quantity = 1,
                 Text = "Forced: Characters destroyed by Devouring Werewolf are removed from the game.",
                 EncounterSet = "The Isle of Werewolves",
-                Number = 125
+                Number = 125,
+                Artist = Artist.David_Wuertemburg
             });
             Cards.Add(new Card() {
                 Title = "Draugluin",
@@ -1965,7 +2013,8 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
                 VictoryPoints = 3,
                 Text = "Forced: After Draugluin is damaged by an attack, deal 1 damage to each character that participated in that attack.",
                 EncounterSet = "The Isle of Werewolves",
-                Number = 117
+                Number = 117,
+                Artist = Artist.Taina_Dos
             });
             Cards.Add(new Card() {
                 Title = "Guard Wolf",
@@ -2095,7 +2144,8 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
                 VictoryPoints = 0,
                 Text = "While Bridge to the Isle is the active location, enemies with the Werewolf trait get +1 Attack and +1 Defense.Forced: After Bridge to the Isle is explored, add Draugluin to the staging area.",
                 EncounterSet = "The Isle of Werewolves",
-                Number = 111
+                Number = 111,
+                Artist = Artist.Bogdan_Amidzic
             });
             Cards.Add(new Card() {
                 Title = "Dark Hills",
@@ -2108,7 +2158,8 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
                 Text = "While Dark Hills is in play, players cannot use player card effects that allow them to look at cards in the encounter deck or player decks.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack for each shadow card it has been dealt.",
                 EncounterSet = "The Isle of Werewolves",
-                Number = 109
+                Number = 109,
+                Artist = Artist.Silvery
             });
             Cards.Add(new Card() {
                 Title = "Deep Pit",
@@ -2120,7 +2171,8 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
                 Quantity = 2,
                 Text = "Response: After Deep Pit is explored, the first player chooses one: add 1 resource to Eyes in the Dark or move one hero to the pit area.",
                 EncounterSet = "The Isle of Werewolves",
-                Number = 105
+                Number = 105,
+                Artist = Artist.Alyn_Spiller
             });
             Cards.Add(new Card() {
                 Title = "Gates of Tol-in-Gaurhoth",
@@ -2183,7 +2235,8 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
                 Quantity = 1,
                 Text = "Place 8 resource tokens on Eyes in the Dark.At the end of each round, discard 1 resource token from Eyes in the Dark.If there are no resource tokens to discard, remove Eyes in the Dark from play and put Devouring Werewolf into play in the pit area, engaged with the prisoners.",
                 EncounterSet = "The Isle of Werewolves",
-                Number = 112
+                Number = 112,
+                Artist = Artist.Graeme_Skinner
             });
             Cards.Add(new Card() {
                 Title = "Finrod Felagund",
@@ -2356,7 +2409,8 @@ Heroes in the pit area are immune to player card effects and cannot leave the pi
                 Text = "Forced: While Angband Orc is engaged with a player, raise that player's threat by an additional 1 at the end of the round.",
                 Shadow = "Shadow: Add Angband Orc to the staging area.",
                 EncounterSet = "The Seat of Morgoth",
-                Number = 142
+                Number = 142,
+                Artist = Artist.Christian_Quinot
             });
             Cards.Add(new Card() {
                 Title = "Balrog of Angband",
@@ -2375,7 +2429,8 @@ Heroes in the pit area are immune to player card effects and cannot leave the pi
                 Text = "Forced: After an event is played, lower the engagement cost of Balrog of Angband by 20 and increase its Threat by 1 until the end of the round.",
                 Shadow = "Shadow: Discard all event cards from your hand.",
                 EncounterSet = "The Seat of Morgoth",
-                Number = 136
+                Number = 136,
+                Artist = Artist.Echo539
             });
             Cards.Add(new Card() {
                 Title = "Carcharoth",
@@ -2397,7 +2452,8 @@ Heroes in the pit area are immune to player card effects and cannot leave the pi
                 
 Forced: Players cannot reduce their threat while Carcharoth is in play.",
                 EncounterSet = "The Seat of Morgoth",
-                Number = 135
+                Number = 135,
+                Artist = Artist.Aogachou
             });
             Cards.Add(new Card() {
                 Title = "Fire-drake",
@@ -2519,7 +2575,8 @@ Forced: Players cannot reduce their threat while Carcharoth is in play.",
                 Text = "Forced: At the beginning of the staging step, players must raise their threat by the number of characters they committed to the quest while Echoing Corridor is the active location.",
                 Shadow = "Shadow: Raise the threat of the defending player by the Threat of the attacking enemy.",
                 EncounterSet = "The Seat of Morgoth",
-                Number = 148
+                Number = 148,
+                Artist = Artist.Robert_Ryminiecki
             });
             Cards.Add(new Card() {
                 Title = "Labyrinthine Stairs",
@@ -2651,7 +2708,8 @@ Forced: Players cannot reduce their threat while Carcharoth is in play.",
                 Quantity = 1,
                 Text = "Attached hero gains +5 Attack. Attached hero gains an additional +1 Attack for each resource on Angband Sword.Action: Attach Angband Sword to a hero. Place 1 Corruption on that hero.Response: After attached hero deals damage, add 1 resource to Angband Sword.",
                 EncounterSet = "The Seat of Morgoth",
-                Number = 131
+                Number = 131,
+                Artist = Artist.Daniel_Ljunggren
             });
             Cards.Add(new Card() {
                 Title = "Dreadful Garments",
@@ -2662,7 +2720,8 @@ Forced: Players cannot reduce their threat while Carcharoth is in play.",
                 Quantity = 1,
                 Text = "Action: Attach Dreadful Garments to a hero.Action: Exhaust Dreadful Garments to place 5 progress tokens on the active enemy.",
                 EncounterSet = "The Seat of Morgoth",
-                Number = 132
+                Number = 132,
+                Artist = Artist.Ted_Nasmith
             });
             Cards.Add(new Card() {
                 Title = "Element of Surprise",
@@ -2673,7 +2732,8 @@ Forced: Players cannot reduce their threat while Carcharoth is in play.",
                 Quantity = 1,
                 Text = "Action: Attach Element of Surprise to a hero.Combat Action: Exhaust Element of Surprise. Player attacks are made before enemy attacks during this phase.",
                 EncounterSet = "The Seat of Morgoth",
-                Number = 133
+                Number = 133,
+                Artist = Artist.Kieran_Tatsue
             });
             Cards.Add(new Card() {
                 Title = "Silmaril",
@@ -2704,7 +2764,8 @@ Forced: After traveling to a unique location, players raise their threat by its 
 
 The players cannot advance unless Nethermost Hall is in the victory display.",
                 EncounterSet = "The Seat of Morgoth",
-                Number = 127
+                Number = 127,
+                Artist = Artist.David_J_Findlay
             });
             Cards.Add(new Card() {
                 Title = "Doors of Angband",
@@ -2801,7 +2862,8 @@ When engaged with an enemy with the Sneak keyword, players may cancel all progre
                 Quantity = 3,
                 Text = "When Revealed: Discard an additional encounter card when resolving Sneak tests this round. If there is no active enemy, Clumsy Step gains surge.",
                 EncounterSet = "The Seat of Morgoth",
-                Number = 154
+                Number = 154,
+                Artist = Artist.Sam_R_Kennedy
             });
             Cards.Add(new Card() {
                 Title = "Devouring Spirit",
@@ -2812,7 +2874,8 @@ When engaged with an enemy with the Sneak keyword, players may cancel all progre
                 Quantity = 2,
                 Text = "When Revealed: Attach to the enemy in play with the lowest Threat. Attached enemy gets +1 Threat, +1 Attack, +1 Defense, and +3 hit points. If there are no enemies in play, Devouring Spirit gains surge.",
                 EncounterSet = "The Seat of Morgoth",
-                Number = 153
+                Number = 153,
+                Artist = Artist.Sarah_Finnigan
             });
             Cards.Add(new Card() {
                 Title = "Evil Lust",
@@ -2823,7 +2886,8 @@ When engaged with an enemy with the Sneak keyword, players may cancel all progre
                 Quantity = 2,
                 Text = "When Revealed: Attach to a hero. (Counts as a Condition attachment with the text: 'This hero must be declared as the defender against Morgoth (even if exhausted). Morgoth uses his Threat to attack and the attached hero uses his Willpower to defend. Limit 1 per hero.')",
                 EncounterSet = "The Seat of Morgoth",
-                Number = 158
+                Number = 158,
+                Artist = Artist.Andreas_Marschall
             });
             Cards.Add(new Card() {
                 Title = "Filth and Desolation",
