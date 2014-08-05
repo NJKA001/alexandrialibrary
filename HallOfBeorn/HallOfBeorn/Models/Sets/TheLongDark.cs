@@ -28,7 +28,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 3,
                 VictoryPoints = 0,
                 Number = 89,
-                Artist = Artist.Paulo_Puggioni
+                Artist = Artist.Paolo_Puggioni
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -384,7 +384,7 @@ Attached hero gets +1 Defense.",
                 Text = "Action: Exhaust Warden of Healing to heal 1 damage on up to 2 different characters. Then, you may pay 2 Lore resources to ready Warden of Healing.",
                 FlavorText = "\"But for long years we healers have only sought to patch the rents made by the men of swords.\" -Return of the King",
                 Number = 83,
-                Artist = Artist.Paulo_Puggioni
+                Artist = Artist.Paolo_Puggioni
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

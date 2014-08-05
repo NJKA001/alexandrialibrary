@@ -136,7 +136,7 @@ namespace HallOfBeorn.Models.Sets
                 IsUnique = true,
                 Text = "If Lake-town has 50 or more damage on it, Lake-town has completely burned and the players have lost the game.",
                 Number = 7,
-                Artist = Artist.Paulo_Puggioni
+                Artist = Artist.Paolo_Puggioni
             });
             Cards.Add(new Card()
             {
@@ -151,7 +151,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Exhaust a hero to claim this objective and attach it to that hero when it is free of encounters. (Counts as an attachment with the text:'If detached discard The Old ThrushResponse: After attached hero exhausts to attack Smaug, discard X cards from hand to reduce Smaug's Defense by X.')",
                 Keywords = new List<string>() { "Guarded." },
                 Number = 8,
-                Artist = Artist.Paulo_Puggioni
+                Artist = Artist.Paolo_Puggioni
             });
             Cards.Add(new Card()
             {

@@ -132,7 +132,7 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Kristina_Carroll);
             all.Add(Artist.Jason_Juta);
 
-            all.Add(Artist.Paulo_Puggioni);
+            all.Add(Artist.Paolo_Puggioni);
             all.Add(Artist.Charles_Urbach);
 
             all.Add(Artist.Stephen_M_Mabee);
@@ -444,7 +444,7 @@ namespace HallOfBeorn.Models
         public static Artist David_J_Findlay = new Artist { Name = "David J. Findlay", URL = "http://ethalenskye.deviantart.com" };
         public static Artist FangornSpirit = new Artist { Name = "fangornspirit", URL = "https://www.google.com/search?q=Fangorn+Spirit+Art" };
         public static Artist Felix_Sotomayor = new Artist { Name = "Félix Sotomayor", URL = "http://feliche.deviantart.com" };
-        public static Artist Ferdinand_Dumago_Ladera = new Artist { Name = "digitalhadz", URL = "http://ferdinandladera.deviantart.com" };
+        public static Artist Ferdinand_Dumago_Ladera = new Artist { Name = "Ferdinand Dumago Ladera", URL = "http://ferdinandladera.deviantart.com" };
         public static Artist FrozenStocks = new Artist { Name = "frozenstocks", URL = "http://frozenstocks.deviantart.com" };
         public static Artist Gerwell = new Artist { Name = "Gerwell", URL = "http://gerwell.deviantart.com" };
         public static Artist Graeme_Skinner = new Artist { Name = "Graeme Skinner", URL = "http://graemeskinner.deviantart.com" };
@@ -690,7 +690,7 @@ namespace HallOfBeorn.Models
         public static Artist Oleg_Saakyan = new Artist { Name = "Oleg Saakyan", URL = "http://ultracold.deviantart.com" };
         public static Artist Owen_William_Weber = new Artist { Name = "Owen William Weber", URL = "http://oweber.blogspot.com" };
         public static Artist Paul_Guzenko = new Artist { Name = "Paul Guzenko", URL = "http://www.guzboroda.com/?author=1" };
-        public static Artist Paulo_Puggioni = new Artist { Name = "Paulo Puggioni", URL = "http://www.paolopuggioni.com" };
+        public static Artist Paolo_Puggioni = new Artist { Name = "Paulo Puggioni", URL = "http://www.paolopuggioni.com" };
         public static Artist Piya_Wannachaiwong = new Artist { Name = "Piya Wannachaiwong", URL = "http://www.piyastudios.com" };
         public static Artist Rafal_Hrynkiewicz = new Artist { Name = "Rafał Hrynkiewicz", URL = "http://mcf.deviantart.com" };
         public static Artist Raymond_Bonilla = new Artist { Name = "Raymond Bonilla", URL = "http://raybonilla.deviantart.com" };
