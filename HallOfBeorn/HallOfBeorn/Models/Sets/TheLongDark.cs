@@ -108,9 +108,9 @@ Attached hero gets +1 Defense.",
                 Willpower = 0,
                 HitPoints = 2,
                 Text = "Erebor Battle Master gets +1 Attack for each other Dwarf ally you control.",
-                HasErrata = true,
                 Number = 79,
-                Artist = Artist.Rafal_Hrynkiewicz
+                Artist = Artist.Rafal_Hrynkiewicz,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -292,7 +292,8 @@ Attached hero gets +1 Defense.",
                 Text = "Action: Enemies engaged with you cannot attack you this phase.",
                 Keywords = new List<string>() { "Secrecy 3." },
                 Number = 81,
-                Artist = Artist.Ilich_Henriquez
+                Artist = Artist.Ilich_Henriquez,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

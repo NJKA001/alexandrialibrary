@@ -877,9 +877,9 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 HitPoints = 4,
                 Text = "Response: After you play a Dwarf character from your hand, reduce your threat by 1.",
                 FlavorText = "\"Nori, at your service.\" -Nori, The Hobbit",
-                HasErrata = true,
                 Number = 3,
-                Artist = Artist.Blake_Henriksen
+                Artist = Artist.Blake_Henriksen,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1171,7 +1171,8 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 FlavorText = "\"This was made by Thror, your grandfather, Thorin.\" he said in answer to the dwarves' excited questions. \"It is a plan of the Mountain.\" -Gandalf, The Hobbit",
                 Keywords = new List<string>() { "Attach to a hero." },
                 Number = 13,
-                Artist = Artist.Jake_Murray
+                Artist = Artist.Jake_Murray,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1234,7 +1235,8 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 IsUnique = true,
                 Text = "If ~Troll Key is discarded, add it to the staging area.If ~Troll Key is unattached and in the staging area, attach it to a Troll enemy, if able.Response: After attached Troll enemy takes damage as the result of an attack, the first player may exhaust Bilbo ~Baggins to claim this objective and attach it to him.",
                 Number = 43,
-                Artist = Artist.Trudi_Castle
+                Artist = Artist.Trudi_Castle,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1247,7 +1249,8 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 IsUnique = true,
                 Text = "If ~Troll Purse is discarded, add it to the staging area.\r\n\r\nIf ~Troll Purse is unattached and in the staging area, attach it to a Troll enemy, if able.\r\n\r\nResponse: After attached Troll enemy is destroyed, the first player may spend 1 Baggins resource to claim this objective and attach it to Bilbo ~Baggins.",
                 Number = 42,
-                Artist = Artist.Blake_Henriksen
+                Artist = Artist.Blake_Henriksen,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

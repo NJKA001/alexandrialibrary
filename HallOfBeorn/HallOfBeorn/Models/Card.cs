@@ -109,7 +109,6 @@ namespace HallOfBeorn.Models
         public bool SlugIncludesOppositeTitle { get; set; }
         public bool SlugIncludesType { get; set; }
         public bool HasSecondImage { get; set; }
-        public bool HasErrata { get; set; }
 
         private string publicSlug;
         public string PublicSlug
@@ -176,5 +175,26 @@ namespace HallOfBeorn.Models
         }
 
         public Func<IEnumerable<ScenarioGroup>, bool> UpdateScenarioCards { get; set; }
+
+        public bool HasErrata { get; set; }
+
+        private string errataUrl;
+        public string ErrataUrl
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(errataUrl))
+                {
+                    return errataUrl;
+                }
+                else if (this.HasErrata)
+                {
+                    return "http://www.fantasyflightgames.com/ffg_content/lotr-lcg/support/LotR-FAQ.pdf";
+                }
+
+                return null;
+            }
+            set { errataUrl = value; } 
+        }
     }
 }

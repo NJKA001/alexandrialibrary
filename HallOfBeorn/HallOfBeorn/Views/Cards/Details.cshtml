@@ -410,6 +410,10 @@
                         }
                     }
                 }
+                @if (@Model.HasErrata)
+                {
+                    <span style="margin-left:10px;margin-top:10px;display:inline-block;"><a title="Official LotR FAQ" href="@Model.ErrataUrl" target="_blank">Errata</a></span>
+                }
                 @*
                 @if (!string.IsNullOrEmpty(@Model.Year))
                 {

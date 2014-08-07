@@ -322,7 +322,8 @@ Forced: After a character is declared as a defender against Snow Warg, deal 1 da
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 3,
                 Number = 27,
-                Artist = Artist.Allison_Theus
+                Artist = Artist.Allison_Theus,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

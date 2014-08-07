@@ -732,7 +732,8 @@ If there are no enemies in play, immediately advance to the next stage of the sc
                 Text = "Action: Exhaust Narvi's Belt to give attached hero a Leadership, Lore, Tactics, or Spirit icon until the end of the phase.",
                 Keywords = new List<string>() { "Attach to a Dwarf hero." },
                 Number = 3,
-                Artist = Artist.Carolina_Eade
+                Artist = Artist.Carolina_Eade,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1217,7 +1218,8 @@ If the players defeat this stage, they win the game.",
                 HitPoints = 1,
                 Text = "Action: Exhaust Zigil Miner and name a number to discard the top 2 cards of your deck. If at least one of those cards has cost equal to the named number, choose a hero you control. For each card that matches the named number, add 1 resource to that hero's resource pool.",
                 Number = 9,
-                Artist = Artist.Magali_Villeneuve
+                Artist = Artist.Magali_Villeneuve,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

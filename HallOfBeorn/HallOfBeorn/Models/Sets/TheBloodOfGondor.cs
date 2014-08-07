@@ -306,7 +306,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeText = "At the beginning of the quest phase, each player takes 1 hidden card.\r\nAt the beginning of the combat phase, each player must turn each of his hidden cards faceup or take 1 hidden card.",
                 Number = 117,
                 Artist = Artist.Adam_Lane,
-                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.RavagingOrcs }
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.RavagingOrcs },
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -400,7 +401,8 @@ If the players defeat this stage, they have won the game.",
                 VictoryPoints = 3,
                 Quantity = 1,
                 Number = 123,
-                Artist = Artist.Cristi_Balanescu
+                Artist = Artist.Cristi_Balanescu,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

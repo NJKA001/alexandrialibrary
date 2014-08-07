@@ -99,6 +99,16 @@ namespace HallOfBeorn.Models
             }
         }
 
+        public bool HasErrata
+        {
+            get { return !string.IsNullOrEmpty(_card.ErrataUrl); }
+        }
+
+        public string ErrataUrl
+        {
+            get { return _card.ErrataUrl; }
+        }
+
         public string FullTitle
         {
             get

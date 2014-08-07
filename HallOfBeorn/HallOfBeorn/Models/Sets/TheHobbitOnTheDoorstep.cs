@@ -181,13 +181,14 @@ namespace HallOfBeorn.Models.Sets
                 Id = "2d550e71-f2a6-41f2-8aac-4533a965eb71",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Lore,
-                Keywords = new List<string>() { "Attach to a hero." },
+                Keywords = new List<string>() { "Attach to a hero.", "Limit 1 per hero." },
                 ResourceCost = 0,
                 Quantity = 3,
                 Traits = new List<string>() { "Skill." },
                 Text = "Response: After attached hero quests successfully, name a card type and discard the top card of your deck. If the discarded card is the named type, take it into your hand.",
                 Number = 17,
-                Artist = Artist.Magali_Villeneuve
+                Artist = Artist.Magali_Villeneuve,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -285,9 +286,9 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Text = "Action: Exhaust a hero you control to shuffle the encounter deck and look at its top card. Place progress tokens on the current quest equal to the revealed card's Threat. Then, put that card back on top of the encounter deck.",
                 FlavorText = "As they worked the ravens brought them constant tidings. -The Hobbit",
-                HasErrata = true,
                 Number = 11,
-                Artist = Artist.Adam_Lane
+                Artist = Artist.Adam_Lane,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -445,7 +446,8 @@ namespace HallOfBeorn.Models.Sets
                 OppositeFlavorText = "... the cries of the others got steadily further and fainter, and though after a while it seemed to him they changed to yells and cries for help in the far distance, all noise at last died right away, and he was left alone in complete silence and darkness. -The Hobbit",
                 Number = 68,
                 Artist = Artist.Adam_Lane,
-                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Wilderland }
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.Wilderland },
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

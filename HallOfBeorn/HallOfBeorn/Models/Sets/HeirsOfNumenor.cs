@@ -104,9 +104,9 @@ namespace HallOfBeorn.Models.Sets
                 Text = "When Revealed: Deal 1 damage to each character committed to the quest.",
                 EncounterSet = "Into Ithilien",
                 Shadow = "Shadow: Deal 1 damage to the defending character.",
-                HasErrata = true,
                 Number = 29,
-                Artist = Artist.Marcia_George_Bogdan
+                Artist = Artist.Marcia_George_Bogdan,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -774,7 +774,8 @@ If the players defeat this stage, they have won the game.",
                 Text = "Action: Exhaust Master of ~Lore to name a card type. Lower the cost for you to play the next Lore card of that type by 1 until the end of the phase (to a minimum of 1).",
                 FlavorText = "\"If Cirith Ungol is named, old men and masters of lore will blanch and fall silent.\" -Faramir, The Two Towers",
                 Number = 16,
-                Artist = Artist.Ilich_Henriquez
+                Artist = Artist.Ilich_Henriquez,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,

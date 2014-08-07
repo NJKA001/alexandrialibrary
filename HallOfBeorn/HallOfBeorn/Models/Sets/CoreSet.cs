@@ -129,7 +129,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "While Thalin is committed to a quest, deal 1 damage to each enemy as it is revealed by the encounter deck.",
                 Quantity = 1,
                 Number = 6,
-                Artist = Artist.Jen_Zee
+                Artist = Artist.Jen_Zee,
+                HasErrata = true,
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -166,7 +167,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: Exhaust Eleanor to cancel the 'when revealed' effects of a treachery card just revealed by the encounter deck. Then, discard that card, and replace it with the next card from the encounter deck.",
                 Quantity = 1,
                 Number = 8,
-                Artist = Artist.Magali_Villeneuve
+                Artist = Artist.Magali_Villeneuve,
+                HasErrata = true,
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -240,7 +242,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Exhaust Beravor to choose a player. That player draws 2 cards. Limit once per round.",
                 Quantity = 1,
                 Number = 12,
-                Artist = Artist.Tiziano_Baracchi
+                Artist = Artist.Tiziano_Baracchi,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -599,7 +602,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "You must use resources from 3 different heroes' pools to pay for this card.Action: Choose a player. That player's engaged enemies cannot attack that player this phase.",
                 Quantity = 2,
                 Number = 36,
-                Artist = Artist.David_Horne
+                Artist = Artist.David_Horne,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -810,7 +814,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "\"...we will fight on.\" -Boromir, The Fellowship of the Ring",
                 Quantity = 3,
                 Number = 51,
-                Artist = Artist.Rio_Sabda
+                Artist = Artist.Rio_Sabda,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1080,7 +1085,8 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Attach to a hero." },
                 Quantity = 2,
                 Number = 70,
-                Artist = Artist.Magali_Villeneuve
+                Artist = Artist.Magali_Villeneuve,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1423,7 +1429,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 2,
                 EasyModeQuantity = 1,
                 Number = 91,
-                Artist = Artist.David_Lecossu
+                Artist = Artist.David_Lecossu,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1597,7 +1604,8 @@ namespace HallOfBeorn.Models.Sets
                 EncounterSet = "Escape from Dol Guldur",
                 Quantity = 1,
                 Number = 102,
-                Artist = Artist.David_A_Nash
+                Artist = Artist.David_A_Nash,
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1912,7 +1920,8 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 9,
                 Number = 123,
                 Artist = Artist.Ben_Zweifel,
-                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood },
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -1942,7 +1951,8 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 7,
                 Number = 125,
                 Artist = Artist.Kaya,
-                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood }
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.DolGuldurOrcs, EncounterSet.SpidersOfMirkwood },
+                HasErrata = true
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
