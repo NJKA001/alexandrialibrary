@@ -268,6 +268,27 @@ namespace HallOfBeorn.Controllers
             return View(model);
         }
 
+        public ActionResult AdvancedSearch(AdvancedSearchViewModel model)
+        {
+            //InitializeSearch(model);
+
+            /*
+            foreach (var card in _cardService.Search(model))
+            {
+                model.Cards.Add(new CardViewModel(card));
+            }
+            */
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("AdvancedSearch")]
+        public ActionResult AdvancedSearch_Post(AdvancedSearchViewModel model)
+        {
+            return RedirectToAction("AdvancedSearch", model);
+        }
+
         public ActionResult Search(SearchViewModel model)
         {
             InitializeSearch(model);

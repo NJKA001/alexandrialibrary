@@ -190,6 +190,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AdvancedSearchViewModel.cs" />
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\BrowseViewModel.cs" />
     <Compile Include="Models\CampaignCardType.cs" />
@@ -1225,6 +1226,7 @@
     <Content Include="Views\Cards\Details.cshtml" />
     <Content Include="Views\Cards\Browse.cshtml" />
     <Content Include="Views\Cards\Scenarios.cshtml" />
+    <Content Include="Views\Cards\AdvancedSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
