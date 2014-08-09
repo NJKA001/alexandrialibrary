@@ -121,7 +121,7 @@ Goblin enemies get +1 Defense.",
                 Text = "Forced: If Wicked Wolf is dealt a shadow card with a riddle, the defending player must exhaust a character he controls.",
                 Shadow = "Shadow: Return attacking enemy to the staging area after this attack.",
                 EncounterSet = "Dungeons Deep and Caverns Dim Nightmare",
-                Quantity = 1,
+                Quantity = 3,
                 Number = 3,
                 Artist = Artist.JB_Casacop
             });
@@ -140,7 +140,7 @@ Goblin enemies get +1 Defense.",
                 Text = "Bilbo's Magic ~Ring does not ready during the refresh phase.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack. (+3 Attack instead if Bilbo's Magic ~Ring is exhausted.)",
                 EncounterSet = "Dungeons Deep and Caverns Dim Nightmare",
-                Quantity = 1,
+                Quantity = 3,
                 Number = 4,
                 Artist = Artist.Mark_Behm
             });
@@ -156,7 +156,7 @@ Goblin enemies get +1 Defense.",
                 Text = "Forced: Each time a Baggins resource is spent or discarded, raise each player's threat by 1.",
                 Shadow = "Shadow: Deal attacking enemy 2 additional shadow cards for this attack.",
                 EncounterSet = "Dungeons Deep and Caverns Dim Nightmare",
-                Quantity = 1,
+                Quantity = 3,
                 Number = 5,
                 Artist = Artist.Alyn_Spiller
             });
@@ -175,13 +175,13 @@ Goblin enemies get +1 Defense.",
 Riddle: The first player names a card title, shuffles his deck, and discards the top 5 cards. For each card that matches, place 1 progress on stage 2.",
                 FlavorText = "",
                 EncounterSet = "Dungeons Deep and Caverns Dim Nightmare",
-                Quantity = 1,
+                Quantity = 3,
                 Number = 6,
                 Artist = Artist.Mariusz_Gandzel
             });
             Cards.Add(new Card()
             {
-                Title = "Where isss It?",
+                Title = "Where Isss It?",
                 ImageType = ImageType.Png,
                 Id = "BB1ED846-C9D3-4313-82F6-CE194FC84F81",
                 CardType = CardType.Treachery,
@@ -190,7 +190,7 @@ Riddle: The first player names a card title, shuffles his deck, and discards the
 
 Riddle: The first player names a sphere, a cost, and a card type, shuffles his deck, and discards the top 3 cards. For each card that matches all three items, place 1 progress on stage 2.",
                 EncounterSet = "Dungeons Deep and Caverns Dim Nightmare",
-                Quantity = 1,
+                Quantity = 3,
                 Number = 7,
                 Artist = Artist.Jake_Murray
             });
@@ -202,7 +202,7 @@ Riddle: The first player names a sphere, a cost, and a card type, shuffles his d
                 CardType = CardType.Treachery,
                 Text = "When Revealed: Attach We Hates Is! to Gollum. (Counts as a Condition attachment with the text: \"If the players are on stage 3, Gollum gets +2 Attack.\")\r\n\r\nRiddle: The first player names a Trait, shuffles his deck, and discards the top card. For each card that has at least 1 matching Trait, place 1 progress on stage 2.",
                 EncounterSet = "Dungeons Deep and Caverns Dim Nightmare",
-                Quantity = 1,
+                Quantity = 3,
                 Number = 8,
                 Artist = Artist.Jake_Murray
             });

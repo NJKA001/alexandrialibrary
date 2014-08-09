@@ -101,7 +101,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 Text = "While Narrow Ledge is the active location, each player cannot commit more than 3 characters to the quest.",
                 Shadow = "Shadow: Shuffle all copies of Galloping Boulders from the encounter discard pile into the encounter deck.",
                 EncounterSet = "Over the Misty Mountains Grim Nightmare",
-                Quantity = 1,
+                Quantity = 3,
                 Number = 2,
                 Artist = Artist.Niten
             });
@@ -120,7 +120,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
 Forced: At the end of the round, each player must discard a random card from his hand.",
                 FlavorText = "They were high up in a narrow place, with a dreadful fall into a dim vally at one side of them. -The Hobbit",
                 EncounterSet = "Over the Misty Mountains Grim Nightmare",
-                Quantity = 1,
+                Quantity = 4,
                 Number = 3,
                 Artist = Artist.Sabin_Boykinov
             });
@@ -133,7 +133,7 @@ Forced: At the end of the round, each player must discard a random card from his
                 Text = "When Revealed: Each player must choose and discard 3 cards from his hand. Each player assigns X damage among characters he controls, where X is the combined printed cost of the cards he discarded.",
                 FlavorText = "The lighning splinters on the peaks, and rocks shiver, and great crashes split the air and go rolling and tumbling into every cave and hallow... -The Hobbit",
                 EncounterSet = "Over the Misty Mountains Grim Nightmare",
-                Quantity = 1,
+                Quantity = 2,
                 Number = 4,
                 Artist = Artist.JB_Casacop
             });
@@ -154,6 +154,7 @@ Forced: At the end of the round, each player must discard a random card from his
                 Text = "Forced: When The Great Goblin attacks, discard the top card of the encounter deck. If it is a Goblin enemy, put it into play engaged with the defending player and deal it a shadow card.",
                 VictoryPoints = 3,
                 EncounterSet = "The Great Goblin Nightmare",
+                ScenarioTitle = "Over the Misty Mountains Grim Nightmare",
                 Quantity = 1,
                 Number = 5,
                 Artist = Artist.Mark_Bulahao
@@ -176,7 +177,8 @@ Forced: At the end of the round, each player must discard a random card from his
 Forced: When Goblin Prowler engages you, discard a character you control.",
                 FlavorText = "...neither Bilbo, nor the dwarves, nor even Gandalf heard them coming. -The Hobbit",
                 EncounterSet = "The Great Goblin Nightmare",
-                Quantity = 1,
+                ScenarioTitle = "Over the Misty Mountains Grim Nightmare",
+                Quantity = 4,
                 Number = 6,
                 Artist = Artist.Mariusz_Gandzel
             });
@@ -194,7 +196,8 @@ Forced: When Goblin Prowler engages you, discard a character you control.",
 
 Travel: Raise each player's threat by X to travel here, where X is the number of Cave locations in the staging area.",
                 EncounterSet = "The Great Goblin Nightmare",
-                Quantity = 1,
+                ScenarioTitle = "Over the Misty Mountains Grim Nightmare",
+                Quantity = 3,
                 Number = 7,
                 Artist = Artist.Nicholas_Gregory
             });
@@ -207,7 +210,8 @@ Travel: Raise each player's threat by X to travel here, where X is the number of
                 Text = "When Revealed: Each player must assign damage among characters he controls equal to the total number of Goblin enemies engaged with him and in the staging area.",
                 Shadow = "Shadow: Attacking enemy cannot take damage this round.",
                 EncounterSet = "The Great Goblin Nightmare",
-                Quantity = 1,
+                ScenarioTitle = "Over the Misty Mountains Grim Nightmare",
+                Quantity = 2,
                 Number = 8,
                 Artist = Artist.Adam_Lane
             });

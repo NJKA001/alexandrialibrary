@@ -100,7 +100,7 @@ Play Tip: The treachery card, ~Night Wanes Slow, has a Forced effect that trigge
 
 Forced: If A Murder of Crows would be destroyed, shuffle it back into the encounter deck instead.",
                 EncounterSet = "We Must Away, Ere Break of Day Nightmare",
-                Quantity = 2,
+                Quantity = 3,
                 Number = 2,
                 Artist = Artist.Niten
             });
@@ -116,7 +116,7 @@ Forced: If A Murder of Crows would be destroyed, shuffle it back into the encoun
                 Text = "Forced: At the beginning of the refresh phase, place the top card of the encounter discard pile on the bottom of the encounter deck and raise each player's threat bu that card's Threat.",
                 FlavorText = "I don't know what river is way, a rushing red one, swollen with the rains of the last few days... -The Hobbit",
                 EncounterSet = "We Must Away, Ere Break of Day Nightmare",
-                Quantity = 2,
+                Quantity = 3,
                 Number = 3,
                 Artist = Artist.JB_Casacop
             });
@@ -132,7 +132,7 @@ Forced: If A Murder of Crows would be destroyed, shuffle it back into the encoun
                 Text = "Forced: After placing 1 or more progress tokens on Wicked Hilltops, each player must discard an ally he controls without an attached Sack card.",
                 Shadow = "Shadow: Attacking enemy gets +2 Attack. (+3 Attack instead if attacking enemy is a Troll.)",
                 EncounterSet = "We Must Away, Ere Break of Day Nightmare",
-                Quantity = 1,
+                Quantity = 3,
                 Number = 4,
                 Artist = Artist.Wibben
             });
@@ -152,7 +152,7 @@ Forced: If A Murder of Crows would be destroyed, shuffle it back into the encoun
 Forced: After Comfortable Light becomes the active location, discard it.",
                 FlavorText = "Out of the dark mass of the trees they could now see a light shining, a reddish comfortable-looking light... -The Hobbit",
                 EncounterSet = "We Must Away, Ere Break of Day Nightmare",
-                Quantity = 1,
+                Quantity = 3,
                 Number = 5,
                 Artist = Artist.Mark_Behm
             });
@@ -165,7 +165,7 @@ Forced: After Comfortable Light becomes the active location, discard it.",
                 Text = "When Revealed: Each engaged Troll enemy makes an immediate attack. If the players are at stage 1, immediately advance to stage 2A.",
                 Shadow = "Shadow: If attacking enemy is a Troll, return it to the staging area after this attack.",
                 EncounterSet = "We Must Away, Ere Break of Day Nightmare",
-                Quantity = 1,
+                Quantity = 3,
                 Number = 6,
                 Artist = Artist.Ilich_Henriquez
             });
@@ -195,7 +195,7 @@ When Revealed: Shuffle the encounter discard pile into the encounter deck. Revea
                 Text = "When Revealed: Choose and destroy a character with a Sack card attached. Then, return that Sack card to the top of the Sack deck and Sack 1.",
                 FlavorText = "...at last they decided to sit on the sacks one by one and squash them, and boil them next time. -The Hobbit",
                 EncounterSet = "We Must Away, Ere Break of Day Nightmare",
-                Quantity = 1,
+                Quantity = 2,
                 Number = 8,
                 Artist = Artist.Rafal_Hrynkiewicz
             });
