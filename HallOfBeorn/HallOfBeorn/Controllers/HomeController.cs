@@ -13,6 +13,7 @@ namespace HallOfBeorn.Controllers
             return RedirectToAction("Search", "Cards");
         }
 
+        /*
         public ActionResult Search()
         {
             ViewBag.Message = "Search page";
@@ -33,5 +34,6 @@ namespace HallOfBeorn.Controllers
 
             return View();
         }
+        */
     }
 }
