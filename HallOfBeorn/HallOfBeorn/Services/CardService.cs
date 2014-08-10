@@ -926,7 +926,7 @@ namespace HallOfBeorn.Services
                 .ToList()
                 : cards.Values.ToList();
 
-            if (string.IsNullOrEmpty(model.Query))
+            if (!string.IsNullOrEmpty(model.Query))
             {
                 hasFilter = true;
             }
