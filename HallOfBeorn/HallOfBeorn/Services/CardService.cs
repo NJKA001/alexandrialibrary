@@ -1016,7 +1016,7 @@ namespace HallOfBeorn.Services
 
             if (!model.Custom)
             {
-                if (model.CardSet == "Any" && model.EncounterSet == "Any" && model.Trait == "Any" && model.Keyword == "Any" && model.Artist == "Any" && model.Sphere != Sphere.Mastery)
+                if (model.CardSet == "Any" && model.EncounterSet == "Any" && model.Sphere != Sphere.Mastery)
                 {
                     results = results.Where(x => x.CardSet.SetType != SetType.Custom_Expansion).ToList();
                 }
