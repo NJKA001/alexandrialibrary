@@ -266,6 +266,7 @@
     <Compile Include="Models\Decks\TalesFromTheCards\WhereEaglesDare.cs" />
     <Compile Include="Models\EncounterSet.cs" />
     <Compile Include="Models\EncounterSetViewModel.cs" />
+    <Compile Include="Models\Simple\SimpleCard.cs" />
     <Compile Include="Models\ImageType.cs" />
     <Compile Include="Models\OCTGN\OctgnCard.cs" />
     <Compile Include="Models\OCTGN\OctgnProperty.cs" />
@@ -382,6 +383,10 @@
     <Compile Include="Models\Sets\VoiceOfIsengard.cs" />
     <Compile Include="Models\Sets\WeMustAwayEreBreakOfDayNightmare.cs" />
     <Compile Include="Models\SetType.cs" />
+    <Compile Include="Models\Simple\SimpleEncounterInfo.cs" />
+    <Compile Include="Models\Simple\SimpleEncounterSet.cs" />
+    <Compile Include="Models\Simple\SimpleScenario.cs" />
+    <Compile Include="Models\Simple\SimpleScenarioCard.cs" />
     <Compile Include="Models\Sort.cs" />
     <Compile Include="Models\Sphere.cs" />
     <Compile Include="Models\Token.cs" />
@@ -495,6 +500,7 @@
     <Content Include="Images\Cards\Core-Set\Passage-Through-Mirkwood.png" />
     <Content Include="Images\Cards\Core-Set\Sauron%27s-Reach.png" />
     <Content Include="Images\Cards\Core-Set\Spiders-of-Mirkwood.png" />
+    <Content Include="Images\Cards\Core-Set\The-Necromancer%27s-Tower.png" />
     <Content Include="Images\Cards\Core-Set\Through-the-Caverns.png" />
     <Content Include="Images\Cards\Core-Set\To-the-River.png" />
     <Content Include="Images\Cards\Core-Set\Wilderlands.png" />
