@@ -383,6 +383,7 @@
     <Compile Include="Models\Sets\VoiceOfIsengard.cs" />
     <Compile Include="Models\Sets\WeMustAwayEreBreakOfDayNightmare.cs" />
     <Compile Include="Models\SetType.cs" />
+    <Compile Include="Models\Simple\SimpleCardSet.cs" />
     <Compile Include="Models\Simple\SimpleEncounterInfo.cs" />
     <Compile Include="Models\Simple\SimpleEncounterSet.cs" />
     <Compile Include="Models\Simple\SimpleScenario.cs" />

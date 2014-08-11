@@ -59,7 +59,10 @@ namespace HallOfBeorn.Controllers
 
                     result.Data = scenarios;
                     break;
-                case "Sets":
+                case "CardSets":
+                    result.Data = _cardService.CardSets().Select(x => new SimpleCardSet { Name = x.Name, Cycle = x.Cycle, SetType = x.SetType.ToString() }).ToList();
+                    break;
+                case "EncounterSets":
                     result.Data = _cardService.EncounterSetNames;
                     break;
                 default:
