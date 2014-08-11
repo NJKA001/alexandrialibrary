@@ -109,7 +109,10 @@ namespace HallOfBeorn.Models.Sets
                 Willpower = 2,
                 HitPoints = 4,
                 Traits = new List<string>() { "Noldor.", " Noble.", " Ranger." },
-                Text = "While Elladan is in play, Elrohir gets +2 Defense.Response: After Elrohir is declared as a defender, pay 1 resource from his resource pool to ready him.",
+                Text = 
+@"While Elladan is in play, Elrohir gets +2 Defense.
+
+Response: After Elrohir is declared as a defender, pay 1 resource from his resource pool to ready him.",
                 Quantity = 1,
                 Number = 1,
                 Artist = Artist.Magali_Villeneuve

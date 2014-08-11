@@ -3,14 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HallOfBeorn", "HallOfBeorn\HallOfBeorn.csproj", "{2AB13CDF-0847-47FA-908C-CA0E7CBAA9CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HallOfBeorn.Tests", "HallOfBeorn.Tests\HallOfBeorn.Tests.csproj", "{103A1BA0-B127-4BC7-8B17-B847429CB430}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctgnImporter", "OctgnImporter\OctgnImporter.csproj", "{06CF7CF9-0EA2-476C-9876-1F2D0200CADA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LotrDbImporter", "LotrDbImporter\LotrDbImporter.csproj", "{E88ABE4B-E385-42EE-9AB6-6C57BB31EBC9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardAnalyzer", "CardAnalyzer\CardAnalyzer.csproj", "{E7B83B77-802A-42A8-AD33-7B07214BBE36}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,22 +13,6 @@ Global
 		{2AB13CDF-0847-47FA-908C-CA0E7CBAA9CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AB13CDF-0847-47FA-908C-CA0E7CBAA9CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AB13CDF-0847-47FA-908C-CA0E7CBAA9CF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{103A1BA0-B127-4BC7-8B17-B847429CB430}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{103A1BA0-B127-4BC7-8B17-B847429CB430}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{103A1BA0-B127-4BC7-8B17-B847429CB430}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{103A1BA0-B127-4BC7-8B17-B847429CB430}.Release|Any CPU.Build.0 = Release|Any CPU
-		{06CF7CF9-0EA2-476C-9876-1F2D0200CADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{06CF7CF9-0EA2-476C-9876-1F2D0200CADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{06CF7CF9-0EA2-476C-9876-1F2D0200CADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06CF7CF9-0EA2-476C-9876-1F2D0200CADA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E88ABE4B-E385-42EE-9AB6-6C57BB31EBC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E88ABE4B-E385-42EE-9AB6-6C57BB31EBC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E88ABE4B-E385-42EE-9AB6-6C57BB31EBC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E88ABE4B-E385-42EE-9AB6-6C57BB31EBC9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E7B83B77-802A-42A8-AD33-7B07214BBE36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7B83B77-802A-42A8-AD33-7B07214BBE36}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7B83B77-802A-42A8-AD33-7B07214BBE36}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7B83B77-802A-42A8-AD33-7B07214BBE36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -148,7 +148,10 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 2,
                 Willpower = 2,
                 HitPoints = 4,
-                Text = "While Elrohir is in play, Elladan gets +2 Attack.Response: After Elladan is declared as an attacker, pay 1 resource from his resource pool to ready him.",
+                Text = 
+@"While Elrohir is in play, Elladan gets +2 Attack.
+
+Response: After Elladan is declared as an attacker, pay 1 resource from his resource pool to ready him.",
                 Number = 28,
                 Artist = Artist.Magali_Villeneuve
             });

@@ -182,7 +182,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ExportController.cs" />
     <Compile Include="Controllers\CardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Extensions.cs" />
@@ -266,7 +265,6 @@
     <Compile Include="Models\Decks\TalesFromTheCards\WhereEaglesDare.cs" />
     <Compile Include="Models\EncounterSet.cs" />
     <Compile Include="Models\EncounterSetViewModel.cs" />
-    <Compile Include="Models\Simple\SimpleCard.cs" />
     <Compile Include="Models\ImageType.cs" />
     <Compile Include="Models\OCTGN\OctgnCard.cs" />
     <Compile Include="Models\OCTGN\OctgnProperty.cs" />
@@ -324,6 +322,7 @@
     <Compile Include="Models\Products\TheThreeTrialsProduct.cs" />
     <Compile Include="Models\Products\TheVoiceOfIsengardProduct.cs" />
     <Compile Include="Models\Products\TheWatcherInTheWaterProduct.cs" />
+    <Compile Include="Models\Products\TroubleInTharbadProduct.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\Scenario.cs" />
     <Compile Include="Models\ScenarioCard.cs" />
@@ -380,14 +379,10 @@
     <Compile Include="Models\Sets\TheStoneOfErech.cs" />
     <Compile Include="Models\Sets\TheThreeTrials.cs" />
     <Compile Include="Models\Sets\TheWatcherInTheWater.cs" />
+    <Compile Include="Models\Sets\TroubleInTharbad.cs" />
     <Compile Include="Models\Sets\VoiceOfIsengard.cs" />
     <Compile Include="Models\Sets\WeMustAwayEreBreakOfDayNightmare.cs" />
     <Compile Include="Models\SetType.cs" />
-    <Compile Include="Models\Simple\SimpleCardSet.cs" />
-    <Compile Include="Models\Simple\SimpleEncounterInfo.cs" />
-    <Compile Include="Models\Simple\SimpleEncounterSet.cs" />
-    <Compile Include="Models\Simple\SimpleScenario.cs" />
-    <Compile Include="Models\Simple\SimpleScenarioCard.cs" />
     <Compile Include="Models\Sort.cs" />
     <Compile Include="Models\Sphere.cs" />
     <Compile Include="Models\Token.cs" />

@@ -13,11 +13,13 @@ namespace HallOfBeorn
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            /*
             routes.MapRoute(
                 "Export",
                 "Export/{name}",
                 new { controller = "Export", action = "Get" }
             );
+            */
 
             routes.MapRoute(
                 name: "Default",
