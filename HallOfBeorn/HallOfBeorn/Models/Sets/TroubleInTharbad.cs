@@ -69,6 +69,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "879112FB-689B-45AA-BD4A-DE7FDB1D31AB",
                 CardType = CardType.Attachment,
                 Sphere = Models.Sphere.Leadership,
+                IsUnique = true,
                 ResourceCost = 1,
                 Traits = new List<string> { "Song." },
                 Keywords = new List<string> { "Attach to a hero." },
