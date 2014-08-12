@@ -217,6 +217,8 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Jordy_Lakiere);
             all.Add(Artist.Matt_Bradbury);
             all.Add(Artist.Alexander_Kozachenko);
+            all.Add(Artist.Romana_Kendelic);
+            all.Add(Artist.Christine_Griffin);
 
             //The Hobbit: Over Hill and Under Hill
             all.Add(Artist.Blake_Henriksen);
@@ -562,6 +564,7 @@ namespace HallOfBeorn.Models
         public static Artist Chris_Rallis = new Artist { Name = "Chris Rallis", URL = "http://chrisra.deviantart.com" };
         public static Artist Christina_Davis = new Artist { Name = "Christina Davis", URL = "http://sentinel13.deviantart.com" };
         public static Artist Christine_Bian = new Artist { Name = "Christine Bian", URL = "http://christinebian.tumblr.com" };
+        public static Artist Christine_Griffin = new Artist { Name = "Christine Griffin", URL = "http://quickreaver.deviantart.com" };
         public static Artist Christine_Mitzuk = new Artist { Name = "Christine Mitzuk", URL = "http://www.christinemitzuk.com" };
         public static Artist Christopher_Burdett = new Artist { Name = "Christopher Burdett", URL = "http://christopherburdett.deviantart.com" };
         public static Artist Chun_Lo = new Artist { Name = "Chun Lo", URL = "http://chunlo.deviantart.com" };
@@ -698,6 +701,7 @@ namespace HallOfBeorn.Models
         public static Artist Rick_Price = new Artist { Name = "Rick Price", URL = "https://www.google.com/search?q=rick+price+fantasy+art" };
         public static Artist Rio_Sabda = new Artist { Name = "Rio Sabda", URL = "http://kepondangkuning.deviantart.com" };
         public static Artist Roman_V_Papsuev = new Artist { Name = "Roman V. Papsuev", URL = "http://en.amokanet.ru" };
+        public static Artist Romana_Kendelic = new Artist { Name = "Romana Kendelic", URL = "http://alisaryn.cgsociety.org" };
         public static Artist Ryan_Barger = new Artist { Name = "Ryan Barger", URL = "http://ryanbarger.deviantart.com" };
         public static Artist S_C_Watson = new Artist { Name = "S. C. Watson", URL = "http://oreganal.deviantart.com" };
         public static Artist Sabin_Boykinov = new Artist { Name = "Sabin Boykinov", URL = "http://sabin-boykinov.deviantart.com" };

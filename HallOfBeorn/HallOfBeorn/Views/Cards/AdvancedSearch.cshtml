@@ -5,26 +5,6 @@
     ViewBag.Title = "Advanced Search";
 }
 
-<script src="/Scripts/jquery-1.8.2.js" ></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#resetButton').click(function () {
-            $('#Query').val('');
-            $('#CardSet').val('Any');
-            $('#CardType').val('Any');
-            $('#Sphere').val('Any');
-            $('#Cost').val('Any');
-            $('#Unique').attr('checked', false);
-            $('#Trait').val('Any');
-            $('#Keyword').val('Any');
-            $('#Artist').val('Any');
-            $('#EncounterSet').val('Any');
-            $('#Sort').val('Any');
-            $('#Custom').attr('checked', false);
-        });
-    });
-</script>
-
 <h2>Advanced Search</h2>
 
 @using (Html.BeginForm("AdvancedSearch", "Cards", FormMethod.Post))
@@ -32,46 +12,22 @@
     <div class="form-group">
         @Html.TextBoxFor(x => x.Query, new { style = "margin-right:2px;" })
         <input type="submit" value="Search" style="border-radius:8px;background-color:lightgray;" />
-        <a id="resetButton" href="#" style="margin-left:40px;">Clear Filters</a>
-
-        <div>
-            <div style="margin-top:8px;color:darkgray;font-weight:bold;">Sets</div>
-            <div><span>Any</span>@Html.CheckBoxFor(x => x.Sets_Any, new { style = "margin-left:4px;margin-right:12px;" })</div>
-            <div>
-            <span>Core Set</span>@Html.CheckBoxFor(x => x.Sets_CoreSet, new { style = "margin-left:4px;margin-right:12px;" })
-            </div>
-            <div>
-            <span>The Hunt for Gollum</span>@Html.CheckBoxFor(x => x.Sets_TheHuntForGollum, new { style = "margin-left:4px;margin-right:12px;" })
-            <span>Conflict at the Carrock</span>@Html.CheckBoxFor(x => x.Sets_ConflictAtTheCarrock, new { style = "margin-left:4px;margin-right:12px;" })
-            <span>A Journey to Rhosgobel</span>@Html.CheckBoxFor(x => x.Sets_AJoruneyToRhosgobel, new { style = "margin-left:4px;margin-right:12px;" })
-            <span>The Hills of Emyn Muil</span>@Html.CheckBoxFor(x => x.Sets_TheHillsOfEmynMuil, new { style = "margin-left:4px;margin-right:12px;" })
-            <span>The Dead Marshes</span>@Html.CheckBoxFor(x => x.Sets_TheDeadMarshes, new { style = "margin-left:4px;margin-right:12px;" })
-            <span>Return to Mirkwood</span>@Html.CheckBoxFor(x => x.Sets_ReturnToMirkwood, new { style = "margin-left:4px;margin-right:12px;" })
-            </div>
-
-            <div>
-            <span>Khazad-dûm</span>@Html.CheckBoxFor(x => x.Sets_KhazadDum, new { style = "margin-left:4px;margin-right:12px;" })
-            </div>
-            <div>
-            <span>Redhorn Gate</span>@Html.CheckBoxFor(x => x.Sets_RedhornGate, new { style = "margin-left:4px;margin-right:12px;" })
-            <span>Road to Rivendell</span>@Html.CheckBoxFor(x => x.Sets_RoadToRivendell, new { style = "margin-left:4px;margin-right:12px;" })
-            <span>Watcher in the Water</span>@Html.CheckBoxFor(x => x.Sets_WatcherInTheWater, new { style = "margin-left:4px;margin-right:12px;" })
-            <span>The Long Dark</span>@Html.CheckBoxFor(x => x.Sets_TheLongDark, new { style = "margin-left:4px;margin-right:12px;" })
-            <span>Foundations of Stone</span>@Html.CheckBoxFor(x => x.Sets_FoundationsOfStone, new { style = "margin-left:4px;margin-right:12px;" })
-            <span>Shadow and Flame</span>@Html.CheckBoxFor(x => x.Sets_ShadowAndFlame, new { style = "margin-left:4px;margin-right:12px;" })
-            </div>
-
-            <div style="margin-top:8px;color:darkgray;font-weight:bold;">Spheres</div>
-            <span>Any</span>@Html.CheckBoxFor(x => x.Spheres_Any, new { style = "margin-left:4px;margin-right:12px;" })
-            <span>Leadership</span>@Html.CheckBoxFor(x => x.Spheres_Leadership, new { style = "margin-left:4px;margin-right:12px;" })
-            <span>Tactics</span>@Html.CheckBoxFor(x => x.Spheres_Tactics, new { style = "margin-left:4px;margin-right:12px;" })
-            <span>Spirit</span>@Html.CheckBoxFor(x => x.Spheres_Spirit, new { style = "margin-left:4px;margin-right:12px;" })
-            <span>Lore</span>@Html.CheckBoxFor(x => x.Spheres_Lore, new { style = "margin-left:4px;margin-right:12px;" })
-            <span>Neutral</span>@Html.CheckBoxFor(x => x.Spheres_Neutral, new { style = "margin-left:4px;margin-right:12px;" })
-
-            <div style="margin-top:8px;color:darkgray;font-weight:bold;">Cost</div>
-            @Html.DropDownListFor(x => x.CostOperator, AdvancedSearchViewModel.NumericOperators, new { style = "margin-right:12px;max-width:170px;width:170px;" })
-            @Html.DropDownListFor(x => x.CostValue, AdvancedSearchViewModel.ResourceCosts, new { style = "margin-right:12px;max-width:170px;width:170px;" })
-        </div>
     </div>
+    
+    foreach (var filter in @Model.Filters)
+    {
+        if (filter.IsEnabled)
+        {
+        <div>
+            <span># @filter.Number</span>
+            
+            @Html.DropDownList("FilterType" + filter.Number, AdvancedSearchFilter.FilterTypes)
+
+            @if (@filter.Next != null)
+            {
+                <span id='@string.Format("enableFilter{0}", filter.Next.Number)'>Add Filter</span>
+            }
+        </div>
+        }
+    }
 }
