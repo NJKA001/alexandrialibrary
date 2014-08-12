@@ -87,6 +87,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "AAD1F231-94C0-4AF7-BD97-F1FA4A04A561",
                 CardType = Models.CardType.Ally,
                 Sphere = Models.Sphere.Tactics,
+                IsUnique = true,
                 ResourceCost = 5,
                 Willpower = 2,
                 Attack = 3,
