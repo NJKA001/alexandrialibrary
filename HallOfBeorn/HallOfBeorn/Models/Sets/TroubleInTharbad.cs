@@ -199,6 +199,283 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Artist = Artist.Christine_Griffin
             });
+            Cards.Add(new Card()
+            {
+                Title = "Nalir",
+                PublicImageURL = "http://www.cardgamedb.com/forums/uploads/lotr/nalir-trouble-in-tharbad-68.jpg",
+                Id = "52000AB7-E523-45F6-B4AA-1114B8477986",
+                CardType = CardType.Objective_Ally,
+                Willpower = 0,
+                Attack = 1,
+                Defense = 2,
+                HitPoints = 3,
+                Traits = new List<string> { "Dwarf." },
+                Keywords = new List<string> { "The first player gains control of [Card]." },
+                Text = 
+@"Forced: At the beginning of the refresh phase, raise your threat by 1 for each player in the game.
+
+If Nalir leaves play, the players lose the game.",
+                EncounterSet = "Trouble in Tharbad",
+                Number = 68,
+                Quantity = 1,
+                Artist = Artist.Mariusz_Gandzel
+            });
+            Cards.Add(new Card()
+            {
+                Title = "The Empty Mug",
+                PublicImageURL = "http://www.cardgamedb.com/forums/uploads/lotr/the-empty-mug-trouble-in-tharbad-69.jpg",
+                Id = "696A364D-8114-4256-AA35-638A0D198CCB",
+                CardType = CardType.Location,
+                IsUnique = true,
+                Threat = 1,
+                QuestPoints = 4,
+                Traits = new List<string> { "City." },
+                Keywords = new List<string> { "Players cannot reduce their threat." },
+                Text = "While The Empty Mug is in the victory display, the current quest gains \"Forced: After a player card effect reduces a player's threat, remove it from the game.\"",
+                VictoryPoints = 4,
+                EncounterSet = "Trouble in Tharbad",
+                Number = 69,
+                Quantity = 1,
+                Artist = Artist.Darek_Zabrocki
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Bellach",
+                PublicImageURL = "http://www.cardgamedb.com/forums/uploads/lotr/bellach-trouble-in-tharbad-70.jpg",
+                Id = "",
+                CardType = CardType.Enemy,
+                IsUnique = true,
+                IsVariableThreat = true,
+                Attack = 5,
+                Defense = 4,
+                HitPoints = 7,
+                Traits = new List<string> { "Mordor.", "Spy." },
+                Keywords = new List<string> { "X is the number of players in the game." },
+                Text = 
+@"Orc and Creature enemies get -30 engagement cost and +1 Threat.
+
+Forced: When Bellach is destroyed, shuffle him into the encounter deck.",
+                EncounterSet = "Trouble in Tharbad",
+                Number = 70,
+                Quantity = 1,
+                Artist = Artist.Rafal_Hrynkiewicz
+            });
+            Cards.Add(new Card()
+            {
+                Title = "The Crossing at Tharbad",
+                PublicImageURL = "http://www.cardgamedb.com/forums/uploads/lotr/the-crossing-at-tharbad-trouble-in-tharbad-71.jpg",
+                Id = "F293EF80-8E47-4418-9EFE-F2BB6238C215",
+                CardType = CardType.Location,
+                Threat = 2,
+                QuestPoints = 10,
+                Traits = new List<string> { "City.", "Ruins.", "River." },
+                Keywords = new List<string> { "Immune to player card effects. ", "Cannot leave the staging area." },
+                Text = 
+@"The Crossing at Tharbad gets +2 quest points for each player in the game.
+                
+When The Crossing at Tharbad is explored, the players win the game.",
+                EncounterSet = "Trouble in Tharbad",
+                Number = 71,
+                Quantity = 1,
+                Artist = Artist.Alyn_Spiller
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Spy from Mordor",
+                PublicImageURL = "http://www.cardgamedb.com/forums/uploads/lotr/spy-from-mordor-trouble-in-tharbad-72.jpg",
+                Id = "6417354E-4762-4F31-A461-8395F2EDAB49",
+                CardType = CardType.Enemy,
+                EngagementCost = 40,
+                Threat = 2,
+                Attack = 3,
+                Defense = 2,
+                HitPoints = 4,
+                Traits = new List<string> { "Mordor.", "Orc.", "Spy." },
+                Text = "Forced: When Spy from Modor attacks, remove 1 time counter from the current quest.",
+                FlavorText = "\"Some spying breed of Orc, I guess, or a creature of theirs.\" -Faramir, The Two Towers",
+                EncounterSet = "Trouble in Tharbad",
+                Number = 72,
+                Quantity = 4,
+                Artist = Artist.Jose_Vega
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Bellach's Marauder",
+                PublicImageURL = "http://www.cardgamedb.com/forums/uploads/lotr/bellach-s-marauder-trouble-in-tharbad-73.jpg",
+                Id = "A7C09783-E0B0-40BC-B4C2-D96B331881BF",
+                CardType = CardType.Enemy,
+                EngagementCost = 30,
+                Threat = 3,
+                Attack = 5,
+                Defense = 4,
+                HitPoints = 5,
+                Traits = new List<string> { "Orc." },
+                Text = "While Bellach's Marauder is engaged with a player, it gains: \"Forced: After a time counter is removed from the current quest, deal Bellach's Marauder 2 shadow cards.\"",
+                Shadow = "Shadow: Remove 1 time counter from the current quest.",
+                EncounterSet = "Trouble in Tharbad",
+                Number = 73,
+                Quantity = 3,
+                Artist = Artist.Alexander_Kozachenko
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Streets of Tharbad",
+                PublicImageURL = "http://www.cardgamedb.com/forums/uploads/lotr/streets-of-tharbad-trouble-in-tharbad-74.jpg",
+                Id = "4D1B749A-29E4-44C8-9E63-5E2616938BB3",
+                CardType = CardType.Location,
+                Threat = 3,
+                QuestPoints = 1,
+                Traits = new List<string> { "City.", "Road." },
+                Keywords = new List<string> { "Progress cannot be placed on [Card] while it is in the staging area." },
+                Text = "While Streets of Tharbad is the active location, enemies get -20 engagement cost.",
+                FlavorText = "As soon as his back was turned, a dark figure climbed quickly in over the gate and melted into the shadows of the village street. -The Fellowship of the Ring",
+                EncounterSet = "Trouble in Tharbad",
+                Number = 74,
+                Quantity = 2,
+                Artist = Artist.Unknown
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Tharbad Hideout",
+                PublicImageURL = "http://www.cardgamedb.com/forums/uploads/lotr/tharbad-hideout-trouble-in-tharbad-75.jpg",
+                Id = "7F47899D-91EB-4016-B143-7EF2808716A9",
+                CardType = CardType.Location,
+                Threat = 1,
+                QuestPoints = 1,
+                Traits = new List<string> { "City." },
+                Keywords = new List<string> { "Surge." },
+                Text = 
+@"While Tharbad Hideout is the active location, time counters cannot be removed from the current quest.
+                
+Forced: At the beginning of the quest phase, place 1 progress on Tharbad Hideout.",
+                EncounterSet = "Trouble in Tharbad",
+                Number = 75,
+                Quantity = 2,
+                Artist = Artist.Unknown
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Ruins of the Second Age",
+                PublicImageURL = "http://www.cardgamedb.com/forums/uploads/lotr/ruins-of-the-second-age-trouble-in-tharbad-76.jpg",
+                Id = "D4411EC3-D56B-41E5-9BF0-760E4346E913",
+                CardType = CardType.Location,
+                Threat = 1,
+                QuestPoints = 5,
+                Traits = new List<string> { "City.", "Ruins." },
+                Text = 
+@"While ~Ruins of the Second Age is in the staging area, City locations get +1 Threat.
+
+While ~Ruins of the Second Age is the active location, deal engaged enemies 1 additional shadow card at the beginning of the combat phase.",
+                FlavorText = "...as far as Tharbad, where the old North Road crossed the river by a ruined town. -The Fellowship of the Ring",
+                EncounterSet = "Trouble in Tharbad",
+                Number = 76,
+                Quantity = 2,
+                Artist = Artist.Unknown
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Seedy Inn",
+                PublicImageURL = "http://www.cardgamedb.com/forums/uploads/lotr/seedy-in-trouble-in-tharbad-77.jpg",
+                Id = "7B918CB0-4C4F-4DA6-A090-8BA99A52D9FE",
+                CardType = CardType.Location,
+                Threat = 3,
+                QuestPoints = 3,
+                Traits = new List<string> { "City." },
+                Text = "Travel: Search the encounter deck and discard pile for a Spy enemy and add it to the staging area. Shuffle the encounter deck.",
+                Shadow = "Shadow: Raise the defending player's threat by X, where X is the amount of damage dealt by this attack.",
+                EncounterSet = "Trouble in Tharbad",
+                Number = 77,
+                Quantity = 2,
+                Artist = Artist.Claudio_Pozas
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Hidden Alleyway",
+                PublicImageURL = "http://www.cardgamedb.com/forums/uploads/lotr/hidden-alleyway-trouble-in-tharbad-78.jpg",
+                Id = "F2567C68-49A1-4BC1-9E36-C0BB1415964C",
+                CardType = CardType.Location,
+                Threat = 3,
+                QuestPoints = 5,
+                Traits = new List<string> { "City." },
+                Text = 
+@"Travel: Raise each player's threat by X to travel here. X is the number of enemies in play.
+
+Forced: After traveling to Hidden Alleyway, add 1 time counter to the current quest.",
+                EncounterSet = "Trouble in Tharbad",
+                Number = 78,
+                Quantity = 2,
+                Artist = Artist.Jose_Vega
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Decrepit Rooftops",
+                PublicImageURL = "http://www.cardgamedb.com/forums/uploads/lotr/decrepit-rooftops-trouble-in-tharbad-79.jpg",
+                Id = "89F5A19A-459C-49D6-B5A0-492672BE280C",
+                CardType = CardType.Location,
+                Threat = 2,
+                QuestPoints = 3,
+                Traits = new List<string> { "City." },
+                Text = 
+@"While Decrepit Rooftops is the active location, enemies get +1 Threat and do not make engagement checks.
+
+Forced: After traveling to Decrepit Rooftops, return all engaged enemies to the staging area.",
+                EncounterSet = "Trouble in Tharbad",
+                Number = 79,
+                Quantity = 2,
+                Artist = Artist.Jose_Vega
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Constant Tail",
+                PublicImageURL = "http://www.cardgamedb.com/forums/uploads/lotr/constant-tail-trouble-in-tharbad-80.jpg",
+                Id = "A0B25995-3D8E-4EF2-810C-BF3F375FF214",
+                CardType = CardType.Treachery,
+                Text = "When Revealed: Return all engaged enemies to the staging area. Then, the first player either removes 1 time counter from the current quest or each Spy enemy in the staging area gets +2 Threat until the end of the phase.",
+                FlavorText = "Concealment was no longer possible, and they could only hope that no enemy or spy was observing them. -The Fellowship of the Ring",
+                EncounterSet = "Trouble in Tharbad",
+                Number = 80,
+                Quantity = 2,
+                Artist = Artist.Jason_Ward
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Conspicuous Lot",
+                PublicImageURL = "http://www.cardgamedb.com/forums/uploads/lotr/conspicous-lot-trouble-in-tharbad-81.jpg",
+                Id = "79E29881-2AC0-4625-BBAF-32CBB42BC2BC",
+                CardType = CardType.Treachery,
+                Text = "When Revealed: Each player raises his threat by 1 for each ally he controls. Then, if any player's threat is 20 or less, this card gains surge.",
+                Shadow = "Shadow: Attacking enemy gets +1 Attack. (+2 Attack instead if the defending player's threat is 20 or less).",
+                EncounterSet = "Trouble in Tharbad",
+                Number = 81,
+                Quantity = 2,
+                Artist = Artist.Jake_Murray
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Cornered",
+                PublicImageURL = "http://www.cardgamedb.com/forums/uploads/lotr/cornered-trouble-in-tharbad-82.jpg",
+                Id = "D8EA5691-6522-4472-BC4C-88EBA9B92248",
+                CardType = CardType.Treachery,
+                Text = "When Revealed: The first player either removes 1 time counter from the current quest or each enemy gets -20 engagement cost and +1 Attack until the end of the round.",
+                Shadow = "Shadow: Attacking enemy gets +1 Attack (+2 Attack instead if the defending player's threat is 20 or less).",
+                EncounterSet = "Trouble in Tharbad",
+                Number = 82,
+                Quantity = 2,
+                Artist = Artist.Aurelien_Hubert
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Get That Dwarf!",
+                PublicImageURL = "http://www.cardgamedb.com/forums/uploads/lotr/get-that-dwarf-trouble-in-tharbad-83.jpg",
+                Id = "B8B4D480-3311-46BF-964B-8519939937A4",
+                CardType = CardType.Treachery,
+                Text = "When Revealed: The enemy in the staging area with the highest Attack engages the first player and makes an immediate attack against Nalir. If there are no enemies in the staging area, Get That Dwarf! gains surge.",
+                Shadow = "Shadow: If this attack is undefended, deal 2 damage to Nalir.",
+                EncounterSet = "Trouble in Tharbad",
+                Number = 83,
+                Quantity = 2,
+                Artist = Artist.Ellyson_Ferrari_Lifante
+            });
         }
     }
 }
