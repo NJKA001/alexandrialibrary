@@ -152,7 +152,6 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Event,
                 Sphere = Sphere.Lore,
                 ResourceCost = 1,
-                Traits = new List<string>() { "Trap." },
                 Keywords = new List<string>() { "Play only if you control at least 1 Ranger character." },
                 Text = "Action: Deal 3 damage to an enemy with at least 1 Trap card attached to it.",
                 FlavorText = "\"For coming unbidden to this play death is our law.\" -Anborn, The Two Towers",
