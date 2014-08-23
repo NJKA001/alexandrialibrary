@@ -315,6 +315,7 @@
     <Compile Include="Models\Products\TheLordOfTheRingsSagaProductGroup.cs" />
     <Compile Include="Models\Products\TheMassingAtOsgiliathProduct.cs" />
     <Compile Include="Models\Products\TheMorgulValeProduct.cs" />
+    <Compile Include="Models\Products\TheOldForestProduct.cs" />
     <Compile Include="Models\Products\TheRedhornGateProduct.cs" />
     <Compile Include="Models\Products\TheRingMakerProductGroup.cs" />
     <Compile Include="Models\Products\TheStewardsFearProduct.cs" />
@@ -373,6 +374,7 @@
     <Compile Include="Models\Sets\TheLongDark.cs" />
     <Compile Include="Models\Sets\TheMassingAtOsgiliath.cs" />
     <Compile Include="Models\Sets\TheMorgulVale.cs" />
+    <Compile Include="Models\Sets\TheOldForest.cs" />
     <Compile Include="Models\Sets\TheRedhornGate.cs" />
     <Compile Include="Models\Sets\TheSeventhLevelNightmare.cs" />
     <Compile Include="Models\Sets\TheStewardsFear.cs" />

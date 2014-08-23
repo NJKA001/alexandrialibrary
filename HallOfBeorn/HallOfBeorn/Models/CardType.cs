@@ -11,6 +11,7 @@ namespace HallOfBeorn.Models
         Quest = 1,
         Nightmare_Setup = 2,
         Campaign = 3,
+        GenCon_Setup = 4,
         Encounter = 11,
         Enemy = 12,
         Location = 13,

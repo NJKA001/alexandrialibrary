@@ -13,6 +13,7 @@ namespace HallOfBeorn.Models.Products
             AddProduct(new TheMassingAtOsgiliathProduct());
             AddProduct(new TheBattleOfLakeTownProduct());
             AddProduct(new TheStoneOfErechProduct());
+            AddProduct(new TheOldForestProduct());
         }
     }
 }

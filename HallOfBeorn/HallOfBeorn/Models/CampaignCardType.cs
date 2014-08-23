@@ -11,6 +11,8 @@ namespace HallOfBeorn.Models
         Nightmare = 1,
         Campaign = 2,
         Boon = 3,
-        Burden = 4
+        Burden = 4,
+        Scenario_Rules = 5,
+        Introduction = 6,
     }
 }

@@ -281,6 +281,9 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Nicholas_Gregory);
             all.Add(Artist.JB_Casacop);
 
+            //The Old Forest
+            all.Add(Artist.Nathalia_Gomes);
+
             //First Age
             all.Add(Artist.Unknown);
             all.Add(Artist.Ted_Nasmith);
@@ -482,6 +485,7 @@ namespace HallOfBeorn.Models
         public static Artist MouMou38 = new Artist { Name = "moumou38", URL = "http://moumou38.deviantart.com" };
         public static Artist Murasaki_Ri = new Artist { Name = "Murasaki-Ri", URL = "http://murasaki-ri.deviantart.com" };
         public static Artist Nasko_Moskov = new Artist { Name = "Nasko Moskov", URL = "http://omegabolt.deviantart.com" };
+        public static Artist Nathalia_Gomes = new Artist { Name = "Nathália Gomes", URL = "http://nathaliagomes.deviantart.com" };
         public static Artist Neal_Hanson = new Artist { Name = "Neal Hanson", URL = "http://nordic66.deviantart.com" };
         public static Artist Nimarra = new Artist { Name = "nimarra", URL = "http://nimarra.deviantart.com" };
         public static Artist Niyochara = new Artist { Name = "niyochara", URL = "http://forevermedhok.deviantart.com" };

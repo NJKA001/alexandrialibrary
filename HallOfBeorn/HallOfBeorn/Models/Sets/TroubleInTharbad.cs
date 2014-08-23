@@ -201,6 +201,50 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
+                Title = "Double Dealings",
+                Id = "5151ED54-9132-452C-90AB-7ED2E5313B86",
+                CardType = CardType.Quest,
+                StageNumber = 1,
+                QuestPoints = null,
+                Text = "Setup: Set Bellach and The Crossing at Tharbad aside, out of play. Search the encounter deck for 1 copy of Spy From Mordor per player, and add them to the staging area. Make The Empty Mug the active location. The first player takes control of Nalir, as an ally. Shuffle the encounter deck.",
+                FlavorText = "Your meeting with Nalir is interrupted by a host of Orcs led by a man, Bellach. In the ensuing chaos, you manage to escape with the Dwarf but the Orcs pursue. Outnumbered, you must throw the Orcs off your trail if you hope to escape...",
+                OppositeText = 
+@"Time 4.
+
+Forced: After the last time counter is removed from this quest, reduce each player's threat elmination level by 10 for the remainder of the game. Then, place 4 time counters on this stage.
+
+Forced: After one or more progress is placed on this quest, cancell all progress and reduce each players threat by an equal amount.
+
+When all players have 0 threat, immediately proceed to stage 2.",
+                EncounterSet = "Trouble in Tharbad",
+                Number = 66,
+                Quantity = 1,
+                Artist = Artist.Mariusz_Gandzel
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Escape from Tharbad",
+                Id = "D465B5CE-493D-4163-90F4-5DED3E55CFA0",
+                CardType = CardType.Quest,
+                StageNumber = 2,
+                QuestPoints = null,
+                Text = "When Revealed: Add Bellach and The Crossing at Tharbad to the staging area. Then shuffle the encounter discard discard pile into the encounter deck and discard cards from the encounter deck until X Orc enemies have been discarded, where X is the number of players in the game. Add all discarded Orc enemies to the staging area.",
+                FlavorText = "You've eluded the Orcs and you make haste for the river crossing. If you can get across, perhaps you can escape. But, Bellach has cleverly set a patrol at the ford, and you are quickly spotted. You make a dash for the river...",
+                OppositeText = 
+@"Time 3. 
+
+Forced: After the last time counter is removed from the quest, either raise each player's threat by 3 or Bellach makes an immediate attack against Nalir. Then, place 3 time counters on this stage.
+
+Progress that would be placed on this quest are instead placed on The Crossing at Tharbad.
+
+Forced: After a character leaves play, raise its controller's threat by 2.",
+                EncounterSet = "Trouble in Tharbad",
+                Number = 67,
+                Quantity = 1,
+                Artist = Artist.Ben_Zweifel
+            });
+            Cards.Add(new Card()
+            {
                 Title = "Nalir",
                 PublicImageURL = "http://www.cardgamedb.com/forums/uploads/lotr/nalir-trouble-in-tharbad-68.jpg",
                 Id = "52000AB7-E523-45F6-B4AA-1114B8477986",
@@ -314,7 +358,8 @@ When The Crossing at Tharbad is explored, the players win the game.",
                 Shadow = "Shadow: Remove 1 time counter from the current quest.",
                 EncounterSet = "Trouble in Tharbad",
                 Number = 73,
-                Quantity = 3,
+                Quantity = 2,
+                EasyModeQuantity = 1,
                 Artist = Artist.Alexander_Kozachenko
             });
             Cards.Add(new Card()
@@ -370,6 +415,7 @@ While ~Ruins of the Second Age is the active location, deal engaged enemies 1 ad
                 EncounterSet = "Trouble in Tharbad",
                 Number = 76,
                 Quantity = 2,
+                EasyModeQuantity = 1,
                 Artist = Artist.Unknown
             });
             Cards.Add(new Card()
@@ -386,6 +432,7 @@ While ~Ruins of the Second Age is the active location, deal engaged enemies 1 ad
                 EncounterSet = "Trouble in Tharbad",
                 Number = 77,
                 Quantity = 2,
+                EasyModeQuantity = 1,
                 Artist = Artist.Claudio_Pozas
             });
             Cards.Add(new Card()
@@ -448,6 +495,7 @@ Forced: After traveling to Decrepit Rooftops, return all engaged enemies to the 
                 EncounterSet = "Trouble in Tharbad",
                 Number = 81,
                 Quantity = 2,
+                EasyModeQuantity = 1,
                 Artist = Artist.Jake_Murray
             });
             Cards.Add(new Card()
@@ -474,6 +522,7 @@ Forced: After traveling to Decrepit Rooftops, return all engaged enemies to the 
                 EncounterSet = "Trouble in Tharbad",
                 Number = 83,
                 Quantity = 2,
+                EasyModeQuantity = 1,
                 Artist = Artist.Ellyson_Ferrari_Lifante
             });
         }
