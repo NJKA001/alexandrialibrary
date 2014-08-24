@@ -1007,6 +1007,7 @@
     <Content Include="Images\Cards\The-Morgul-Vale\The-Morgul-Vale.png" />
     <Content Include="Images\Cards\The-Morgul-Vale\The-Rearguard-1A.png" />
     <Content Include="Images\Cards\The-Morgul-Vale\The-Rearguard-1B.png" />
+    <Content Include="Images\Cards\The-Old-Forest\Aragorn.png" />
     <Content Include="Images\Cards\The-Old-Forest\Old-Man-Willow.jpg" />
     <Content Include="Images\Cards\The-Old-Forest\The-Old-Forest.png" />
     <Content Include="Images\Cards\The-Redhorn-Gate\Snowdrifts.png" />
@@ -1162,6 +1163,7 @@
     <Content Include="Images\Products\MEC33.jpg" />
     <Content Include="Images\Products\MEC34.png" />
     <Content Include="Images\Products\MEC35.jpg" />
+    <Content Include="Images\Products\MEC37.jpg" />
     <Content Include="Images\Products\MEN01.jpg" />
     <Content Include="Images\Products\MEN02.jpg" />
     <Content Include="Images\Products\MEN03.jpg" />
