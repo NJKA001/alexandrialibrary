@@ -77,6 +77,7 @@ namespace HallOfBeorn.Models
         public bool IsVariableThreat { get; set; }
         public bool IsVariableQuestPoints { get; set; }
         public bool IsVariableAttack { get; set; }
+        public bool IsVariableVictoryPoints { get; set; }
         public byte Willpower { get; set; }
         public byte Attack { get; set; }
         public byte Defense { get; set; }

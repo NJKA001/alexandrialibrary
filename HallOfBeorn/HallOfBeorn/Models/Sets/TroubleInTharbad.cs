@@ -203,6 +203,7 @@ namespace HallOfBeorn.Models.Sets
             {
                 Title = "Double Dealings",
                 Id = "5151ED54-9132-452C-90AB-7ED2E5313B86",
+                HasSecondImage = true,
                 CardType = CardType.Quest,
                 StageNumber = 1,
                 QuestPoints = null,
@@ -225,6 +226,7 @@ When all players have 0 threat, immediately proceed to stage 2.",
             {
                 Title = "Escape from Tharbad",
                 Id = "D465B5CE-493D-4163-90F4-5DED3E55CFA0",
+                HasSecondImage = true,
                 CardType = CardType.Quest,
                 StageNumber = 2,
                 QuestPoints = null,

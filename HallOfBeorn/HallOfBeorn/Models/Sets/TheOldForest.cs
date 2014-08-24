@@ -9,11 +9,12 @@ namespace HallOfBeorn.Models.Sets
     {
         protected override void Initialize()
         {
-            Name = "The Old Forest ";
+            Name = "The Old Forest";
             Abbreviation = "TOF";
             Number = 3004;
             SetType = Models.SetType.GenConSaga_Expansion;
             Cycle = "GenCon";
+            DisablePublicImages = true;
 
             Cards.Add(new Card()
             {
@@ -22,7 +23,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.GenCon_Setup,
                 CampaignCardType = CampaignCardType.Introduction,
                 OppositeText = 
-@"~Escape the agents of ~Mordor searching for you in the ~Shire by braving a trip through the strange woods on its border in The Old ~Forest, a scenario designed for The Lord of the ~Rings: The Card Game special event at Gen Con 2014! This scenario can be played as a stand-alone adventure or as part of your Lord of the Rings campaign. To play The Old ~Forest in campaign mode, see page 4/4 of this expansion.
+@"~Escape the agents of ~Mordor searching for you in the ~Shire by braving a trip through the strange woods on its border in The Old ~Forest, a scenario designed for The Lord of the ~Rings : The Card Game special event at Gen Con 2014! This scenario can be played as a stand-alone adventure or as part of your Lord of the ~Rings campaign. To play The Old ~Forest in campaign mode, see page 4/4 of this expansion.
 
 Expansion Symbol
 
@@ -40,7 +41,7 @@ The cards in The Old ~Forest scenario can be identified by this symbol before ea
                 Text =
 @"New Staging Rules
 
-When playing The Old Forest, players reveal encounter cards individually in player order during the Staging step of the Quest phase. If an encounter card has and effect that uses the word 'you' then the encounter card is referring to the player who revealed the card. If the revealed card has the Surge keyword, the player who revealed it reveals an additional card card. Encounter cards with the Doomed X keyword still affect each player.
+When playing The Old ~Forest, players reveal encounter cards individually in player order during the Staging step of the Quest phase. If an encounter card has and effect that uses the word 'you' then the encounter card is referring to the player who revealed the card. If the revealed card has the Surge keyword, the player who revealed it reveals an additional card card. Encounter cards with the Doomed X keyword still affect each player.
 
 Peril Keyword
 
@@ -67,21 +68,45 @@ An enemy with the indestructible keyword cannot be destroyed by damage, even whe
                 Id = "13A4D055-9C6B-4ADF-A3D5-2EAEBC309B97",
                 CardType = CardType.GenCon_Setup,
                 Text = 
-@"The Old Forest can be played as part of The Lord of the Rings campaign. It should be played after A Shadow of the Past, found in The Black Riders Saga Expansion. To play The Old Forest in campaign mode, follow the setup instructions found on page 2 of The Black Riders rules insert.
+@"The Old ~Forest can be played as part of The Lord of the ~Rings campaign. It should be played after A ~Shadow of the Past, found in The Black Riders Saga Expansion. To play The Old ~Forest in campaign mode, follow the setup instructions found on page 2 of The Black Riders rules insert.
 
 Campaign Mode Components
 
-The Old Forest expansion includes 2 cards that can only be used when playing the scenario in campaign mode: one double-sided campaign card and one boon card. The description for each of these card types can be found on page 4 of The Black Riders rules insert.
+The Old ~Forest expansion includes 2 cards that can only be used when playing the scenario in campaign mode: one double-sided campaign card and one boon card. The description for each of these card types can be found on page 4 of The Black Riders rules insert.
 
-The Lord of the Rings: The Black Riders Saga Expansion is required to play The Old Forest in campaign mode.",
+The Lord of the ~Rings : The Black Riders Saga Expansion is required to play The Old ~Forest in campaign mode.",
                 Number = 0,
                 Quantity = 1
+            });
+            Cards.Add(new Card()
+            {
+                ImageType = Models.ImageType.Png,
+                Title = "Aragorn",
+                Id = "638BAEF3-2B18-431F-9855-B61A6CD283EA",
+                CardType = CardType.Hero,
+                Sphere = Sphere.Leadership,
+                ThreatCost = 12,
+                IsUnique = true,
+                Attack = 3,
+                Defense = 2,
+                Willpower = 2,
+                HitPoints = 5,
+                Traits = new List<string>() { "Dúnedain.", "Noble.", "Ranger." },
+                NormalizedTraits = new List<string> { "Dunedain." },
+                Text = "Response: After Aragorn commits to a quest, spend 1 resource from his resource pool to ready him.",
+                FlavorText = "\"I am Aragorn son of Arathorn; and if by life or death I can save you, I will.\" -The Fellowship of the Ring",
+                Keywords = new List<string>() { "Sentinel." },
+                Quantity = 1,
+                Year = 2014,
+                Artist = Artist.Sebastian_Giacobino,
+                Number = 1
             });
             Cards.Add(new Card()
             {
                 Title = "Farewell to the Shire",
                 Id = "1351C3CA-4CC0-445E-BF8F-7FBE21E3F407",
                 CardType = Models.CardType.Quest,
+                ScenarioNumber = 4,
                 StageNumber = 1,
                 QuestPoints = 0,
                 Text = 
@@ -101,6 +126,7 @@ The Lord of the Rings: The Black Riders Saga Expansion is required to play The O
                 OppositeTitle = "Dark Bad Place",
                 SlugIncludesOppositeTitle = true,
                 CardType = CardType.Quest,
+                ScenarioNumber = 4,
                 StageNumber = 2,
                 QuestPoints = null,
                 Text = 
@@ -204,6 +230,284 @@ If the players defeat this stage, they win the game.",
                 Number = 7,
                 Quantity = 1,
                 Artist = Artist.Silver_Saaremael
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Long Trailer",
+                Id = "4D16EECF-4F3B-4C7A-BA37-5BF58CC105EE",
+                CardType = CardType.Enemy,
+                EngagementCost = 40,
+                Threat = 2,
+                Attack = 4,
+                Defense = 2,
+                HitPoints = 6,
+                Traits = new List<string> { "Tree." },
+                Text = "While Long Trailer is in the staging area it gains: \"Forced: After the active location leaves play as an explored location, Long Trailer makes an immediate attack against the first player.\"",
+                FlavorText = "\"Occasionally the most unfriendly ones may drop a branch, or stick a root out, or grasp at you with a long trailer.\" -Merry, The Fellowship of the Ring",
+                EncounterSet = "The Old Forest",
+                Number = 8,
+                Quantity = 4,
+                EasyModeQuantity = 2,
+                Artist = Artist.Jose_Vega
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Grasping Root",
+                Id = "C546E328-111E-4F79-8A5E-D2C0B1394A37",
+                CardType = CardType.Enemy,
+                EngagementCost = 30,
+                Threat = 3,
+                Attack = 3,
+                Defense = 3,
+                HitPoints = 5,
+                Traits = new List<string> { "Tree." },
+                Text = "Forced: After Grasping Root engages a player, that player must assign X damage among characters he controls. X is the number of locations in the victory display.",
+                FlavorText = "...a great tree-root seemed to be over him and holding him down... -The Fellowship of the Ring",
+                EncounterSet = "The Old Forest",
+                Number = 9,
+                Quantity = 4,
+                Artist = Artist.Guillaume_Ducos
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Army of Flies",
+                Id = "E5B64CB4-2BAD-4309-B2B4-CEFF4DFD4904",
+                CardType = CardType.Enemy,
+                EngagementCost = 20,
+                Threat = 1,
+                Attack = 1,
+                Defense = 0,
+                HitPoints = 2,
+                Traits = new List<string> { "Creature.", "Insect." },
+                Keywords = new List<string> { "Surge." },
+                Text = "Forced: After Army of Flies engages a player, that player discards a non-objective attachment he controls.",
+                Shadow = "Shadow: Defending player discards a non-objective attachment he controls.",
+                EncounterSet = "The Old Forest",
+                Number = 10,
+                Quantity = 3,
+                Artist = Artist.Victor_Garcia
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Withywindle",
+                Id = "6CEB45D9-8E7C-4492-BC11-221E2C8F88B0",
+                IsUnique = true,
+                CardType = CardType.Location,
+                Threat = 0,
+                QuestPoints = 0,
+                Traits = new List<string> { "Forest.", "River." },
+                Keywords = new List<string> { "Immune to player card effects." },
+                Text = 
+@"The player cannot win the game while Withywindle is in play.
+
+While Withywindle is the active location, the first player reveals 1 additional encounter card during the quest phase.",
+                FlavorText = "\"The Withywindle valley is said to be the queerest part of the whole wood...\" -Merry, The Fellowship of the Ring",
+                VictoryPoints = 3,
+                EncounterSet = "The Old Forest",
+                Number = 11,
+                Quantity = 1,
+                Artist = Artist.Alyn_Spiller
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Misleading Path",
+                Id = "4FF38187-FBEF-497C-B2CB-2C47E8F83C56",
+                CardType = CardType.Location,
+                Threat = 1,
+                QuestPoints = 2,
+                Traits = new List<string> { "Forest." },
+                Keywords = new List<string> { "Surge." },
+                Text = "When faced with the option to travel, the players must travel to Misleading Path if there is no active location.",
+                Shadow = "Shadow: Defending player discards each ally card in his hand.",
+                EncounterSet = "The Old Forest",
+                Number = 12,
+                Quantity = 2,
+                EasyModeQuantity = 1,
+                Artist = Artist.Katy_Grierson
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Deep Gulley",
+                Id = "0A8958A4-2C59-4FE4-8AD1-6FCFC1C342FC",
+                CardType = CardType.Location,
+                Threat = 2,
+                QuestPoints = 4,
+                Traits = new List<string> { "Forest." },
+                Text = "While Deep Gulley is in the staging area, it gains : \"Forced: After a player optionally engages an enemy, that player raises his threat by X, where X is the engaged enemy's Attack.\"",
+                FlavorText = "Each time they clambered out, the trees seemed deeper and darker... -The Fellowship of the Ring",
+                VictoryPoints = 2,
+                EncounterSet = "The Old Forest",
+                Number = 13,
+                Quantity = 4,
+                Artist = Artist.Silver_Saaremael
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Strange Woods",
+                Id = "B16D2C3D-BCA7-4E59-BEB2-0B879FB3984E",
+                CardType = CardType.Location,
+                Threat = 3,
+                QuestPoints = 3,
+                Traits = new List<string> { "Forest." },
+                Text = "While Strange Woods is in the staging area, characters cannot be healed.",
+                Shadow = "Shadow: Attacking enemy gets +1 Attack. If this attack destroys a character, raise each player's threat by 2.",
+                VictoryPoints = 1,
+                EncounterSet = "The Old Forest",
+                Number = 14,
+                Quantity = 3,
+                Artist = Artist.Jose_Vega
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Wall of Trees",
+                Id = "D343B3AE-F70D-49F9-9FE1-A378F27DB30D",
+                CardType = CardType.Location,
+                Threat = 0,
+                IsVariableThreat = true,
+                QuestPoints = 4,
+                Traits = new List<string> { "Forest." },
+                Keywords = new List<string> { "X equals the number of players in the game." },
+                Text = "While Wall of Trees is in the staging area, progress must be placed on Wall of Trees before it can be placed on the current quest.",
+                FlavorText = "The trees drew close again on either side, and they could no longer see far ahead. -The Fellowship of the Ring",
+                IsVariableVictoryPoints = true,
+                EncounterSet = "The Old Forest",
+                Number = 15,
+                Quantity = 4,
+                Artist = Artist.Silver_Saaremael
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Oppressive Forest",
+                Id = "8E6132EA-72D8-4D1D-AAA5-7F76B4BEEA4C",
+                CardType = CardType.Location,
+                Threat = 0,
+                QuestPoints = 0,
+                Traits = new List<string> { "Forest." },
+                Text = "While Oppressive Forest is in the staging area, each player cannot play more than 1 card each round.",
+                Shadow = "Shadow: If there are no locations in the staging area, add this location to the staging area.",
+                VictoryPoints = 2,
+                EncounterSet = "The Old Forest",
+                Number = 16,
+                Quantity = 2,
+                EasyModeQuantity = 1,
+                Artist = Artist.Joel_Hustak
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Swaying Without Wind",
+                Id = "84A22DEC-A9D1-4CA4-80EA-9AAC0F0F4167",
+                CardType = CardType.Treachery,
+                Keywords = new List<string> { "Peril." },
+                Text = "When Revealed: Choose a location in the victory display and return it to the staging area. If no location was returned to the staging area this way, Swaying Without Wind gains surge.",
+                FlavorText = "\"...the branches swayed and groped without any wind.\"\r\n-Merry, The Fellowship of the Ring",
+                EncounterSet = "The Old Forest",
+                Number = 17,
+                Quantity = 2,
+                Artist = Artist.Jake_Bullock
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Falling Branches",
+                Id = "60FC80BA-E90C-4C5D-B721-0702D56497C3",
+                CardType = CardType.Treachery,
+                Text = "When Revealed: Each player removes a character he controls from the quest and deals 2 damage to that character (3 damage instead if that character is an ally).",
+                Shadow = "Shadow: Attacking enemy gets +1 Attack (+2 Attack instead if the defending character is any ally.)",
+                EncounterSet = "The Old Forest",
+                Number = 18,
+                Quantity = 3,
+                EasyModeQuantity = 1,
+                Artist = Artist.Victor_Garcia
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Song of Sleep",
+                Id = "BB2564F1-132E-4F86-A6AC-E6557DE938F1",
+                CardType = CardType.Treachery,
+                Traits = new List<string> { "Enchantment." },
+                Keywords = new List<string> { "Peril." },
+                Text = "When Revealed: Remove a questing hero you control from the quest and attach Song of Sleep to that hero. Counts as a Condition attachment with the text: \"Limit 1 per hero. Treat attached hero's printed text box as if it were blank (except for Traits). Attached hero cannot ready.\"",
+                EncounterSet = "The Old Forest",
+                Number = 19,
+                Quantity = 2,
+                EasyModeQuantity = 1,
+                Artist = Artist.Romana_Kendelic
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Lost and Witless",
+                Id = "8C62902E-50A5-4001-B32A-2023359B36F8",
+                CardType = CardType.Treachery,
+                Keywords = new List<string> { "Surge." },
+                Text = "When Revealed: Discard all progress from each location in the staging area. If there is a non-unique active location, randomly choose a location in the staging area and switch it with the active location.",
+                FlavorText = "But Frodo, without any clear idea of why he did so, our what he hoped for, ran along the path crying help! help! help! -The Fellowship of the Ring",
+                EncounterSet = "The Old Forest",
+                Number = 20,
+                Quantity = 2,
+                Artist = Artist.Romana_Kendelic
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Ending and Failing",
+                Id = "82422B43-911D-4E5F-9AA3-9A509BAD418C",
+                CardType = CardType.Treachery,
+                Keywords = new List<string> { "Doomed 2." },
+                Text = "When Revealed: At the end of the phase, raise each player's threat by X where X is the number of enemies in the staging area.",
+                Shadow = "Shadow: Return attacking enemy to the staging area after this attack.",
+                EncounterSet = "The Old Forest",
+                Number = 21,
+                Quantity = 2,
+                Artist = Artist.Romana_Kendelic
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Tom Bombadil",
+                Id = "F7082AC6-0FBA-4D00-8943-B2B6CEE32530",
+                IsUnique = true,
+                CardType = CardType.Objective_Ally,
+                Traits = new List<string> { "Legend." },
+                Text = "When Revealed: Choose a player. That player gains control of Tom Bombadil, ready and committed to the quest. At the end of the round, discard Tom Bombadil. Then Shuffle the encounter discard pile into the encounter deck. This effect cannot be canceled.",
+                FlavorText = "\"Tom Bom, jolly Tom, Tom Bombadillo!\"\r\n-Tom Bombadil, The Fellowship of the Ring",
+                EncounterSet = "The Old Forest",
+                Number = 22,
+                Quantity = 1,
+                Artist = Artist.Romana_Kendelic
+            });
+            Cards.Add(new Card()
+            {
+                Title = "The Old Forest",
+                OppositeTitle = "The Lord of the Rings Part 1.1",
+                SlugIncludesType = true,
+                Id = "17EC1E54-1D21-49FF-9B10-2E44AB8AA993",
+                CardType = CardType.Campaign,
+                Text = 
+@"You are playing Campaign Mode.
+
+Setup: The first player attaches Old Bogey-stories to a hero in play.",
+                FlavorText = "It was not called the Old Forest without reason, for it was indeed ancient, a survivor of vast forgotten woods; and in it there lived yet, ageing no quicker than the hills, the fathers of the fathers of trees, remembering times when they were lords. The countless years had filled them with pride and rooted wisdom, and with malice. -The Fellowship of the Ring",
+                OppositeText = "Resolution: If there are at least 12 damage tokens on Old Man Willow, the players have earned the Old Bogey-Stories boon card.",
+                OppositeFlavorText = "Tom Bombadil burst out laughing, \"Well, my little fellows!\" said he, stooping so that he peered into their faces. \"You shall come home with me! The table is all laden with yellow cream, honeycomb, and white bread and butter. Goldberry is waiting. Time enough for questions around the supper table. You follow after me as quick as you are able!\" With that he picked up his lilies, and then with a beckoning wave of his hand went hopping and dancing along the path eastward, still singing loudly and nonsensically.\r\n-The Fellowship of the Ring",
+                EncounterSet = "The Old Forest",
+                Number = 23,
+                Quantity = 1,
+                Artist = Artist.Brian_Valenzuela
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Old Bogey-stories",
+                Id = "85658147-E88C-469A-AD77-BE903B1A826F",
+                CardType = CardType.Boon,
+                CampaignCardType = Models.CampaignCardType.Boon,
+                ResourceCost = 0,
+                Traits = new List<string> { "Tale." },
+                Text = 
+@"Setup: The first player attaches Old Bogey-stories to a hero in play.
+
+Action: Add Old Bogey-stories to the victory display to shuffle your hand of at least 6 cards into your deck. Then, draw 6 cards.",
+                FlavorText = "\"If you mean the old bogey-stories Fatty's nurses used to tell him, about goblins and wolves and things of that sort, I should say no.\" -Merry, The Fellowship of the Ring",
+                VictoryPoints = 1,
+                Number = 24,
+                Quantity = 1,
+                Artist = Artist.Brian_Valenzuela
             });
         }
     }

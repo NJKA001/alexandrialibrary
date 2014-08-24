@@ -261,6 +261,9 @@ namespace HallOfBeorn.Models
         {
             get
             {
+                if (_card.IsVariableVictoryPoints)
+                    return "X";
+
                 return _card.VictoryPoints > 0 ?
                     string.Format("Victory: {0}", _card.VictoryPoints)
                     : (string)null;

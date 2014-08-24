@@ -1007,6 +1007,8 @@
     <Content Include="Images\Cards\The-Morgul-Vale\The-Morgul-Vale.png" />
     <Content Include="Images\Cards\The-Morgul-Vale\The-Rearguard-1A.png" />
     <Content Include="Images\Cards\The-Morgul-Vale\The-Rearguard-1B.png" />
+    <Content Include="Images\Cards\The-Old-Forest\Old-Man-Willow.jpg" />
+    <Content Include="Images\Cards\The-Old-Forest\The-Old-Forest.png" />
     <Content Include="Images\Cards\The-Redhorn-Gate\Snowdrifts.png" />
     <Content Include="Images\Cards\The-Redhorn-Gate\The-Mountains%27-Peaks.png" />
     <Content Include="Images\Cards\The-Redhorn-Gate\The-Redhorn-Gate.png" />
@@ -1071,6 +1073,10 @@
     <Content Include="Images\Cards\The-Watcher-in-the-Water\The-Seething-Lake.png" />
     <Content Include="Images\Cards\The-Watcher-in-the-Water\The-Watcher-in-the-Water.png" />
     <Content Include="Images\Cards\The-Watcher-in-the-Water\To-the-West-Door.png" />
+    <Content Include="Images\Cards\Trouble-in-Tharbad\Double-Dealings-1A.jpg" />
+    <Content Include="Images\Cards\Trouble-in-Tharbad\Double-Dealings-1B.jpg" />
+    <Content Include="Images\Cards\Trouble-in-Tharbad\Escape-from-Tharbad-2A.jpg" />
+    <Content Include="Images\Cards\Trouble-in-Tharbad\Escape-from-Tharbad-2B.jpg" />
     <Content Include="Images\Cards\Trouble-in-Tharbad\Trouble-in-Tharbad.png" />
     <Content Include="Images\Cards\Voice-of-Isengard\Ancient-Forest.png" />
     <Content Include="Images\Cards\Voice-of-Isengard\Broken-Lands.png" />
