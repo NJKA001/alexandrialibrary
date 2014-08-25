@@ -222,7 +222,7 @@ namespace HallOfBeorn.Services
             productGroups.Add(new GenConDeckProductGroup());
             productGroups.Add(new NightmareDeckProductGroup());
 
-            productGroups.Add(new CustomProductGroup());
+            //productGroups.Add(new CustomProductGroup());
 
             foreach (var productGroup in productGroups)
             {
@@ -236,65 +236,6 @@ namespace HallOfBeorn.Services
                     AddProduct(product);
                 }
             }
-
-            /*
-            AddSet(new CoreSet());
-
-            AddSet(new TheHuntforGollum());
-            AddSet(new ConflictattheCarrock());
-            AddSet(new AJourneytoRhosgobel());
-            AddSet(new TheHillsofEmynMuil());
-            AddSet(new TheDeadMarshes());
-            AddSet(new ReturntoMirkwood());
-
-            AddSet(new Khazaddum());
-
-            AddSet(new TheRedhornGate());
-            AddSet(new RoadtoRivendell());
-            AddSet(new TheWatcherintheWater());
-            AddSet(new TheLongDark());
-            AddSet(new FoundationsofStone());
-            AddSet(new ShadowandFlame());
-
-            //Massing at Osgiliath 
-             
-            AddSet(new HeirsofNumenor());
-
-            AddSet(new TheStewardsFear());
-            AddSet(new TheDruadanForest());
-            AddSet(new EncounteratAmonDin());
-            AddSet(new AssaultonOsgiliath());
-            AddSet(new TheBloodofGondor());
-            AddSet(new TheMorgulVale());
-
-            AddSet(new VoiceofIsengard());
-            AddSet(new TheDunlandTrap());
-
-            AddSet(new TheHobbitOverHillandUnderHill());
-            AddSet(new TheHobbitOntheDoorstep());
-            AddSet(new TheBlackRiders());
-
-            AddSet(new TheMassingatOsgiliath());
-            AddSet(new TheBattleofLakeTown());
-            AddSet(new TheStoneofErech());
-
-            AddSet(new PassageThroughMirkwoodnNightmare());
-            AddSet(new JourneyAlongTheAnduinNightmare());
-            AddSet(new EscapeFromDolGuldurNightmare());
-
-            AddSet(new TheHuntForGollumNightmare());
-            AddSet(new ConflictAtTheCarrockNightmare());
-            AddSet(new AJourneyToRhosgobelNightmare());
-            AddSet(new TheHillsOfEmynMuilNightmare());
-            AddSet(new TheDeadMarshesNightmare());
-            AddSet(new ReturnToMirkwoodNightmare());
-            AddSet(new IntoThePitNightmare());
-            AddSet(new TheSeventhLevelNightmare());
-            AddSet(new FlightFromMoriaNightmare());
-            AddSet(new WeMustAwayEreBreakOfDayNightmare());
-            AddSet(new OverTheMistyMountainsGrimNightmare());
-            AddSet(new DungeonsDeepAndCavernsDimNightmare());
-            */
         }
 
         private void LoadDecks()

@@ -133,12 +133,16 @@ namespace HallOfBeorn.Models
         {
             get
             {
+                /*
                 if (!string.IsNullOrEmpty(publicImageURL))
                 {
                     return publicImageURL;
                 }
 
                 return string.Format("http://www.cardgamedb.com/forums/uploads/lotr/{0}-{1}.jpg", PublicSlug, CardSet.PublicSlug);
+                */
+
+                return null;
             }
             set { publicImageURL = value; }
         }
