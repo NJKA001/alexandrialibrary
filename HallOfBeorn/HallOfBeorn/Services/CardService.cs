@@ -955,6 +955,7 @@ namespace HallOfBeorn.Services
 
             results = results.Take(takeCount).ToList();
 
+            /*
             if (!model.Custom)
             {
                 if ((model.CardSet == null || model.CardSet == "Any") && (model.EncounterSet == null || model.EncounterSet == "Any") && model.Sphere != Sphere.Mastery)
@@ -962,6 +963,7 @@ namespace HallOfBeorn.Services
                     results = results.Where(x => x.CardSet.SetType != SetType.Custom_Expansion).ToList();
                 }
             }
+            */
 
             if (model.Random)
             {
