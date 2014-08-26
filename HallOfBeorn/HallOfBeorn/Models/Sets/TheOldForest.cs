@@ -132,6 +132,10 @@ The Lord of the ~Rings : The Black Riders Saga Expansion is required to play The
                 Text = 
 @"When Revealed: If the number of locations in the staging area is less than the number of players in the game, search the encounter deck and discard pile for a location and add it to the staging area. Shuffle the encounter deck.",
                 FlavorText = "\"Everything in it is very much more alive, more aware of what is going on, so to speak, than things are in the Shire. And the trees do not like strangers.\"\r\n-Merry, The Fellowship of the Ring",
+                OppositeText = 
+@"Forced: At the beginning of the planning phase, each player must exhaust a hero he controls.
+
+Forced: After placing progress as a result of questing successfully, if there are X or more total victory points on locations in the victory display, advance to stage 3A. Otherwise, advance to a different random stage 2A. X is the number of players in the game times 5.",
                 EncounterSet = "The Old Forest",
                 Number = 2,
                 Quantity = 1,
@@ -150,6 +154,10 @@ The Lord of the ~Rings : The Black Riders Saga Expansion is required to play The
                 Text =
 @"When Revealed: If the number of locations in the staging area is less than the number of players in the game, search the encounter deck and discard pile for a location and add it to the staging area. Shuffle the encounter deck.",
                 FlavorText = "\"Everything in it is very much more alive, more aware of what is going on, so to speak, than things are in the Shire. And the trees do not like strangers.\"\r\n-Merry, The Fellowship of the Ring",
+                OppositeText =
+@"Forced: At the beginning of the ropund, remove all progress from each location in play.
+
+Forced: After placing progress as a result of questing successfully, if there are X or more total victory points on locations in the victory display, advance to stage 3A. Otherwise, advance to a different random stage 2A. X is the number of players in the game times 5.",
                 EncounterSet = "The Old Forest",
                 Number = 3,
                 Quantity = 1,
@@ -168,6 +176,10 @@ The Lord of the ~Rings : The Black Riders Saga Expansion is required to play The
                 Text =
 @"When Revealed: If the number of locations in the staging area is less than the number of players in the game, search the encounter deck and discard pile for a location and add it to the staging area. Shuffle the encounter deck.",
                 FlavorText = "\"Everything in it is very much more alive, more aware of what is going on, so to speak, than things are in the Shire. And the trees do not like strangers.\"\r\n-Merry, The Fellowship of the Ring",
+                OppositeText =
+@"Forced: At the end of the round, discard a random location from the victory display.
+
+Forced: After placing progress as a result of questing successfully, if there are X or more total victory points on locations in the victory display, advance to stage 3A. Otherwise, advance to a different random stage 2A. X is the number of players in the game times 5.",
                 EncounterSet = "The Old Forest",
                 Number = 4,
                 Quantity = 1,
@@ -186,6 +198,10 @@ The Lord of the ~Rings : The Black Riders Saga Expansion is required to play The
                 Text =
 @"When Revealed: If the number of locations in the staging area is less than the number of players in the game, search the encounter deck and discard pile for a location and add it to the staging area. Shuffle the encounter deck.",
                 FlavorText = "\"Everything in it is very much more alive, more aware of what is going on, so to speak, than things are in the Shire. And the trees do not like strangers.\"\r\n-Merry, The Fellowship of the Ring",
+                OppositeText =
+@"Forced: The first player reveals 1 additional encounter card during the quest phase.
+
+Forced: After placing progress as a result of questing successfully, if there are X or more total victory points on locations in the victory display, advance to stage 3A. Otherwise, advance to a different random stage 2A. X is the number of players in the game times 5.",
                 EncounterSet = "The Old Forest",
                 Number = 5,
                 Quantity = 1,
@@ -293,8 +309,8 @@ If the players defeat this stage, they win the game.",
                 Id = "6CEB45D9-8E7C-4492-BC11-221E2C8F88B0",
                 IsUnique = true,
                 CardType = CardType.Location,
-                Threat = 0,
-                QuestPoints = 0,
+                Threat = 1,
+                QuestPoints = 5,
                 Traits = new List<string> { "Forest.", "River." },
                 Keywords = new List<string> { "Immune to player card effects." },
                 Text = 
@@ -411,7 +427,7 @@ While Withywindle is the active location, the first player reveals 1 additional 
                 Id = "60FC80BA-E90C-4C5D-B721-0702D56497C3",
                 CardType = CardType.Treachery,
                 Text = "When Revealed: Each player removes a character he controls from the quest and deals 2 damage to that character (3 damage instead if that character is an ally).",
-                Shadow = "Shadow: Attacking enemy gets +1 Attack (+2 Attack instead if the defending character is any ally.)",
+                Shadow = "Shadow: Attacking enemy gets +1 Attack (+2 Attack instead if the defending character is an ally.)",
                 EncounterSet = "The Old Forest",
                 Number = 18,
                 Quantity = 3,
@@ -464,6 +480,10 @@ While Withywindle is the active location, the first player reveals 1 additional 
                 Id = "F7082AC6-0FBA-4D00-8943-B2B6CEE32530",
                 IsUnique = true,
                 CardType = CardType.Objective_Ally,
+                Willpower = 3,
+                Attack = 3,
+                Defense = 3,
+                HitPoints = 6,
                 Traits = new List<string> { "Legend." },
                 Text = "When Revealed: Choose a player. That player gains control of Tom Bombadil, ready and committed to the quest. At the end of the round, discard Tom Bombadil. Then Shuffle the encounter discard pile into the encounter deck. This effect cannot be canceled.",
                 FlavorText = "\"Tom Bom, jolly Tom, Tom Bombadillo!\"\r\n-Tom Bombadil, The Fellowship of the Ring",
