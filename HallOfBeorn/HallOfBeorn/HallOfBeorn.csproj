@@ -359,6 +359,7 @@
     <Compile Include="Models\Sets\ReturnToMirkwood.cs" />
     <Compile Include="Models\Sets\ReturnToMirkwoodNightmare.cs" />
     <Compile Include="Models\Sets\RoadToRivendell.cs" />
+    <Compile Include="Models\Sets\RoadToRivendellNightmare.cs" />
     <Compile Include="Models\Sets\ShadowAndFlame.cs" />
     <Compile Include="Models\Sets\TheBattleOfLakeTown.cs" />
     <Compile Include="Models\Sets\TheBlackRiders.cs" />
@@ -385,6 +386,7 @@
     <Compile Include="Models\Sets\TheStoneOfErech.cs" />
     <Compile Include="Models\Sets\TheThreeTrials.cs" />
     <Compile Include="Models\Sets\TheWatcherInTheWater.cs" />
+    <Compile Include="Models\Sets\TheWatcherInTheWaterNightmare.cs" />
     <Compile Include="Models\Sets\TroubleInTharbad.cs" />
     <Compile Include="Models\Sets\VoiceOfIsengard.cs" />
     <Compile Include="Models\Sets\WeMustAwayEreBreakOfDayNightmare.cs" />

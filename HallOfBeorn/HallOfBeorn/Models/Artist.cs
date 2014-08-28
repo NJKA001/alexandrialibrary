@@ -286,6 +286,10 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Victor_Garcia);
             all.Add(Artist.Jake_Bullock);
 
+            //Road to Rivendell Nightmare
+            all.Add(Artist.Anthony_Devine);
+            all.Add(Artist.Lukasz_Jaskolski);
+
             //First Age
             all.Add(Artist.Unknown);
             all.Add(Artist.Ted_Nasmith);
@@ -548,6 +552,7 @@ namespace HallOfBeorn.Models
         public static Artist Anna_Christenson = new Artist { Name = "Anna Christenson", URL = "http://freshpaint.deviantart.com" };
         public static Artist Anna_Mohrbacher = new Artist { Name = "Anna Mohrbacher", URL = "http://aniamohrbacher.deviantart.com" };
         public static Artist Anna_Steinbauer = new Artist { Name = "Anna Steinbauer", URL = "http://depingo.deviantart.com" };
+        public static Artist Anthony_Devine = new Artist { Name = "Anthony Devine", URL = "http://anthonydevine.deviantart.com" };
         public static Artist Anthony_Feliciano = new Artist { Name = "Anthony Feliciano", URL = "http://hurr-hurr-hurr.deviantart.com" };
         public static Artist Anthony_Palumbo = new Artist { Name = "Anthony Palumbo", URL = "http://anthonypalumboillustration.com" };
         public static Artist Anton_Kokarev = new Artist { Name = "Anton Kokarev", URL = "http://kanartist.deviantart.com" };
@@ -666,6 +671,7 @@ namespace HallOfBeorn.Models
         public static Artist Loren_Fetterman = new Artist { Name = "Loren Fetterman", URL = "http://loren86.deviantart.com" };
         public static Artist Lorraine_Schleter = new Artist { Name = "Lorraine Schleter", URL = "http://lorraine-schleter.deviantart.com" };
         public static Artist Lucas_Graciano = new Artist { Name = "Lucas Graciano", URL = "http://lucasgraciano.deviantart.com" };
+        public static Artist Lukasz_Jaskolski = new Artist { Name = "Lukasz Jaskolski", URL = "http://www.fadingray.com" };
         public static Artist Magali_Villeneuve = new Artist { Name = "Magali Villeneuve", URL = "http://magali-villeneuve.blogspot.com" };
         public static Artist Marc_Scheff = new Artist { Name = "Marc Scheff", URL = "http://www.marcscheff.com" };
         public static Artist Marcia_George_Bogdan = new Artist { Name = "Marcia George-Bogdan", URL = "https://www.google.com/search?q=marcia+george-bogdan+art" };
