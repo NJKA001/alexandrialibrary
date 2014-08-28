@@ -22,6 +22,11 @@ namespace HallOfBeorn.Models.Products
             AddProduct(new ReturnToMirkwoodNightmareProduct());
 
             AddProduct(new KhazadDumNightmareProduct());
+
+            AddProduct(new TheRedhornGateNightmareProduct());
+            AddProduct(new RoadToRivendellNightmareProduct());
+            AddProduct(new TheWatcherInTheWaterNightmareProduct());
+
             AddProduct(new TheHobbitOverHillAndUnderHillNightmareProduct());
         }
     }

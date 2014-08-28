@@ -292,6 +292,7 @@
     <Compile Include="Models\Products\PassageThroughMirkwoodNightmareProduct.cs" />
     <Compile Include="Models\Products\ReturnToMirkwoodNightmareProduct.cs" />
     <Compile Include="Models\Products\ReturnToMirkwoodProduct.cs" />
+    <Compile Include="Models\Products\RoadToRivendellNightmareProduct.cs" />
     <Compile Include="Models\Products\RoadToRivendellProduct.cs" />
     <Compile Include="Models\Products\ShadowAndFlameProduct.cs" />
     <Compile Include="Models\Products\ShadowsOfMirkwoodProductGroup.cs" />
@@ -316,12 +317,14 @@
     <Compile Include="Models\Products\TheMassingAtOsgiliathProduct.cs" />
     <Compile Include="Models\Products\TheMorgulValeProduct.cs" />
     <Compile Include="Models\Products\TheOldForestProduct.cs" />
+    <Compile Include="Models\Products\TheRedhornGateNightmareProduct.cs" />
     <Compile Include="Models\Products\TheRedhornGateProduct.cs" />
     <Compile Include="Models\Products\TheRingMakerProductGroup.cs" />
     <Compile Include="Models\Products\TheStewardsFearProduct.cs" />
     <Compile Include="Models\Products\TheStoneOfErechProduct.cs" />
     <Compile Include="Models\Products\TheThreeTrialsProduct.cs" />
     <Compile Include="Models\Products\TheVoiceOfIsengardProduct.cs" />
+    <Compile Include="Models\Products\TheWatcherInTheWaterNightmareProduct.cs" />
     <Compile Include="Models\Products\TheWatcherInTheWaterProduct.cs" />
     <Compile Include="Models\Products\TroubleInTharbadProduct.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
@@ -376,6 +379,7 @@
     <Compile Include="Models\Sets\TheMorgulVale.cs" />
     <Compile Include="Models\Sets\TheOldForest.cs" />
     <Compile Include="Models\Sets\TheRedhornGate.cs" />
+    <Compile Include="Models\Sets\TheRedhornGateNightmare.cs" />
     <Compile Include="Models\Sets\TheSeventhLevelNightmare.cs" />
     <Compile Include="Models\Sets\TheStewardsFear.cs" />
     <Compile Include="Models\Sets\TheStoneOfErech.cs" />
@@ -1931,7 +1935,6 @@
     <Content Include="Images\Leadership.png" />
     <Content Include="Images\Lore.png" />
     <Content Include="Images\Mastery.png" />
-    <Content Include="Images\player-card-back.jpg" />
     <Content Include="Images\plus.png" />
     <Content Include="Images\Products\FA01.jpg" />
     <Content Include="Images\Products\MEC01.png" />
@@ -1980,6 +1983,9 @@
     <Content Include="Images\Products\MEN09.jpg" />
     <Content Include="Images\Products\MEN10.png" />
     <Content Include="Images\Products\MEN11.jpg" />
+    <Content Include="Images\Products\MEN12.jpg" />
+    <Content Include="Images\Products\MEN13.jpg" />
+    <Content Include="Images\Products\MEN17.jpg" />
     <Content Include="Images\ShadowDivider.png" />
     <Content Include="Images\Spirit.png" />
     <Content Include="Images\Tactics.png" />
