@@ -117,6 +117,7 @@ namespace HallOfBeorn.Models
 
         public static CardSet TheRedhornGateNightmare = new Sets.TheRedhornGateNightmare();
         public static CardSet RoadToRivendellNightmare = new Sets.RoadToRivendellNightmare();
+        public static CardSet TheWatcherInTheWaterNightmare = new Sets.TheWatcherInTheWaterNightmare();
 
         //public static CardSet FirstAge = new Sets.FirstAge();
     }

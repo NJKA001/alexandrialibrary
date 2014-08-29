@@ -7,7 +7,6 @@ namespace HallOfBeorn.Models.Sets
 {
     public class TheWatcherInTheWaterNightmare : CardSet
     {
-        /*
         protected override void Initialize()
         {
             Name = "The Watcher in the Water Nightmare";
@@ -19,29 +18,27 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 Title = "The Watcher in the Water Nightmare",
-                Id = "",
+                Id = "F0B86657-B29E-4428-BD3D-7111E78A8B3A",
                 CardType = Models.CardType.Nightmare_Setup,
                 Text =
 @"You are playing in Nightmare mode.
 
-Setup: Remove all copies of Blinding Blizzard from the encounter deck and set them aside, out of play. During this game, player cards in the victory display do not count their victory points.
+While Doors of Durin is in play, The Watcher cannot be engaged.
 
-Forced: When stage 2b is revealed, shuffle each set aside copy of Blinding Blizzard into the encounter deck.",
-                FlavorText = "A cold wind flowed down behind them, as they turned their backs on The Watcher in the Water, and stumbled wearily down the slope. Caradhras had defeated them.\r\n-The Fellowship of the Ring",
+Forced: When a Tentacle enemy is destroyed, deal 1 damage to The Watcher if it is in play.
+
+The players cannot win the game unless both Doors of Durin and The Watcher are in the victory display.",
+                FlavorText = "\"Something has crept, or has been driven out of dark waters under the mountains. There are older and fouler things than Orcs in the deep places of the world.\"\r\n-Gandalf, Lord of the Rings",
                 OppositeText =
 @"Begin with the standard quest deck and encounter deck for The Watcher in the Water scenario.
 
 Remove the following cards, in the specified quantities, from the standard encounter deck:
 
-1x Black Uruks
+1x The Watcher
+2x Makeshift Passage
+4x Black Uruks
 3x Mountain Warg
-1x Knees of the Mountain
-2x Turbulent Waters
 2x Warg Lair
-1x The Dimrill Stair
-2x Fell Voices
-2x Fallen Stones
-3x Mountain Goblin
 
 Then, shuffle the encounter cards in this Nightmare Deck into the remainder of the standard The Watcher in the Water encounter deck.
 
@@ -49,7 +46,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 EncounterSet = "The Watcher in the Water Nightmare",
                 Quantity = 1,
                 Number = 1,
-                Artist = Artist.Unknown,
+                Artist = Artist.Alvaro_Calvo_Escudero,
                 UpdateScenarioCards = (groups) =>
                 {
                     foreach (var group in groups)
@@ -62,32 +59,20 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                         {
                             switch (card.Title)
                             {
-                                case "Black Uruks":
+                                case "The Watcher":
                                     card.NightmareQuantity -= 1;
+                                    break;
+                                case "Makeshift Passage":
+                                    card.NightmareQuantity -= 2;
+                                    break;
+                                case "Black Uruks":
+                                    card.NightmareQuantity -= 4;
                                     break;
                                 case "Mountain Warg":
                                     card.NightmareQuantity -= 3;
                                     break;
-                                case "Knees of the Mountain":
-                                    card.NightmareQuantity -= 1;
-                                    break;
-                                case "Turbulent Waters":
-                                    card.NightmareQuantity -= 2;
-                                    break;
                                 case "Warg Lair":
                                     card.NightmareQuantity -= 2;
-                                    break;
-                                case "The Dimrill Stair":
-                                    card.NightmareQuantity -= 1;
-                                    break;
-                                case "Fell Voices":
-                                    card.NightmareQuantity -= 2;
-                                    break;
-                                case "Fallen Stones":
-                                    card.NightmareQuantity -= 2;
-                                    break;
-                                case "Mountain Goblin":
-                                    card.NightmareQuantity -= 3;
                                     break;
                                 default:
                                     break;
@@ -100,120 +85,122 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             });
             Cards.Add(new Card()
             {
-                Title = "",
-                Id = "",
+                Title = "The Watcher",
+                Id = "38396B24-B249-4A91-A458-1008FF0F0B48",
                 ImageType = Models.ImageType.Png,
                 CardType = CardType.Enemy,
-                EngagementCost = 20,
-                Threat = 2,
-                Attack = 3,
-                Defense = 2,
-                HitPoints = 4,
-                Traits = new List<string> { "Goblin.", "Orc.", "Snow." },
-                Keywords = new List<string> { "Surge." },
-                Text = "",
+                EngagementCost = 50,
+                Threat = 4,
+                Attack = 7,
+                Defense = 7,
+                HitPoints = 21,
+                Traits = new List<string> { "Creature.", "Tentacle." },
+                Text = 
+@"While THe Watcher is in the staging area, it cannot be damage by player card effects.
+
+If The Watcher is in the staging area at the end of the combat phase, each player must deal 3 damage to 1 character he controls.",
+                VictoryPoints = 3,
                 EncounterSet = "The Watcher in the Water Nightmare",
-                Quantity = 3,
+                Quantity = 1,
                 Number = 2,
-                Artist = Artist.
+                Artist = Artist.Lukasz_Jaskolski
             });
             Cards.Add(new Card()
             {
-                Title = "",
-                Id = "",
+                Title = "Writhing Tentacle",
+                Id = "08482A88-5C28-42A4-B21A-C603E2835F75",
                 ImageType = Models.ImageType.Png,
                 CardType = CardType.Enemy,
-                EngagementCost = 28,
-                Threat = 2,
-                Attack = 3,
-                Defense = 3,
-                HitPoints = 6,
-                Traits = new List<string> { "Orc." },
+                EngagementCost = 46,
+                Threat = 4,
+                Attack = 4,
+                Defense = 0,
+                HitPoints = 3,
+                Traits = new List<string> { "Tentacle." },
                 Text = "",
-                Shadow = "",
+                EncounterSet = "The Watcher in the Water Nightmare",
+                Quantity = 3,
+                Number = 3,
+                Artist = Artist.Lukasz_Jaskolski
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Choking Tentacle",
+                Id = "4CF9E883-D264-495A-B57A-15B8B8995505",
+                ImageType = Models.ImageType.Png,
+                CardType = CardType.Enemy,
+                EngagementCost = 10,
+                Threat = 2,
+                Attack = 5,
+                Defense = 1,
+                HitPoints = 4,
+                Traits = new List<string> { "Tentacle." },
+                Text = "",
                 EncounterSet = "The Watcher in the Water Nightmare",
                 Quantity = 4,
-                Number = 3,
-                Artist = Artist.
-            });
-            Cards.Add(new Card()
-            {
-                Title = "",
-                Id = "",
-                ImageType = Models.ImageType.Png,
-                CardType = CardType.Enemy,
-                EngagementCost = 42,
-                Threat = 4,
-                Attack = 6,
-                Defense = 4,
-                HitPoints = 10,
-                Traits = new List<string> { "Giant.", "Snow." },
-                Text = "",
-                EncounterSet = "The Watcher in the Water Nightmare",
-                Quantity = 3,
                 Number = 4,
-                Artist = Artist.
+                Artist = Artist.Jon_Bosco
             });
             Cards.Add(new Card()
             {
-                Title = "",
-                Id = "",
+                Title = "Banks of Sirannon",
+                Id = "149AC0A6-D778-4A5E-9F6C-CE9CF91CE15F",
                 ImageType = Models.ImageType.Png,
                 CardType = CardType.Location,
-                Threat = 0,
-                IsVariableThreat = true,
-                QuestPoints = 6,
-                Traits = new List<string> { "Mountain.", "Snow." },
+                Threat = 3,
+                QuestPoints = 3,
+                Traits = new List<string> { "Mountain.", "Swamp." },
                 Text = "",
                 Shadow = "",
                 EncounterSet = "The Watcher in the Water Nightmare",
                 Quantity = 3,
                 Number = 5,
-                Artist = Artist.
+                Artist = Artist.Rick_Price
             });
             Cards.Add(new Card()
             {
-                Title = "",
-                Id = "",
+                Title = "Hideous Depths",
+                Id = "ED5D88D2-9559-4CF5-8BA5-562B383062F1",
                 ImageType = Models.ImageType.Png,
                 CardType = CardType.Location,
                 Threat = 3,
-                QuestPoints = 3,
-                Traits = new List<string> { "Mountain.", "River." },
+                QuestPoints = 5,
+                Traits = new List<string> { "Swamp." },
                 Text = "",
                 Shadow = "",
-                FlavorText = "",
                 EncounterSet = "The Watcher in the Water Nightmare",
                 Quantity = 3,
                 Number = 6,
-                Artist = Artist.
+                Artist = Artist.Mark_Behm
             });
             Cards.Add(new Card()
             {
-                Title = "",
-                Id = "",
+                Title = "Pulled Under",
+                Id = "B4E0019A-44E3-411C-8C8C-2812C62C41D8",
                 ImageType = Models.ImageType.Png,
                 CardType = CardType.Treachery,
-                Traits = new List<string> { "Snow." },
+                Traits = new List<string> { "Tentacle." },
                 Text = "",
                 EncounterSet = "The Watcher in the Water Nightmare",
                 Quantity = 2,
                 Number = 7,
-                Artist = Artist.
+                Artist = Artist.Guillaume_Ducos
             });
             Cards.Add(new Card()
             {
-                Title = "",
-                Id = "",
+                Title = "Rippling From Beneath",
+                Id = "BF528396-B36D-4326-B626-1DE41267EA8B",
                 ImageType = Models.ImageType.Png,
                 CardType = CardType.Treachery,
+                Traits = new List<string> { "Tentacle." },
+                Keywords = new List<string> { "Surge." },
                 Text = "",
                 FlavorText = "",
                 EncounterSet = "The Watcher in the Water Nightmare",
-                Quantity = 2,
+                Quantity = 3,
                 Number = 8,
-                Artist = Artist.
+                Artist = Artist.Alvaro_Calvo_Escudero
             });
-        }*/
+        }
     }
 }

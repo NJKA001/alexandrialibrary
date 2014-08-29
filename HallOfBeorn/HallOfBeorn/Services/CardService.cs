@@ -67,10 +67,15 @@ namespace HallOfBeorn.Services
                     {
                         if (!scenarios.ContainsKey(escapedTitle))
                         {
+                            var scenarioTitle = card.ScenarioTitle;
+                            var scenarioNumber = card.ScenarioNumber;
+
                             var cycle = !string.IsNullOrEmpty(card.CardSet.Cycle) ? card.CardSet.Cycle : card.CardSet.Name;
+                            
                             if (cycle == "NIGHTMARE")
                             {
                                 var encounterSet = card.EncounterSet.Replace(" Nightmare", string.Empty);
+                                scenarioTitle = scenarioTitle.Replace(" Nightmare", string.Empty);
                                 var original = cards.Values.Where(x => x.CardType == CardType.Quest && x.EncounterSet == encounterSet && x.CardSet.Cycle != "NIGHTMARE").FirstOrDefault();
                                 if (original != null)
                                 {
@@ -78,7 +83,7 @@ namespace HallOfBeorn.Services
                                 }
                             }
 
-                            var scenario = new Scenario { Title = card.ScenarioTitle, GroupName = cycle, Number = card.ScenarioNumber };
+                            var scenario = new Scenario { Title = scenarioTitle, GroupName = cycle, Number = scenarioNumber };
                             scenario.AddQuestCard(card);
 
                             scenarios.Add(escapedTitle, scenario);
@@ -175,7 +180,7 @@ namespace HallOfBeorn.Services
 
                 if (card.CardType == CardType.Location || card.CardType == CardType.Enemy || card.CardType == CardType.Treachery || card.CardType == CardType.Objective || card.CardType == CardType.Objective_Ally)
                 {
-                    if (scenarios.ContainsKey(escapedTitle))
+                    if (scenarios.ContainsKey(escapedTitle) && !card.ScenarioTitle.EndsWith(" Nightmare"))
                     {
                         scenarios[escapedTitle].AddScenarioCard(card);
                     }
