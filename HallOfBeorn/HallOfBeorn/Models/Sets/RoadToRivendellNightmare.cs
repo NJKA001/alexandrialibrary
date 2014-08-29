@@ -190,6 +190,7 @@ Progress cannot be placed on this stage unless the players control Arwen Undómi
                 Id = "45F25FBC-4722-4C8E-9F06-F1D7E4AB27FA",
                 ImageType = Models.ImageType.Png,
                 CardType = CardType.Enemy,
+                EngagementCost = 16,
                 Threat = 1,
                 Attack = 3,
                 Defense = 2,
