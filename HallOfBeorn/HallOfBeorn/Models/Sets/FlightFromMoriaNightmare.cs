@@ -61,6 +61,18 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                         if (scenario == null)
                             continue;
 
+                        foreach (var quest in scenario.QuestCards.Where(x => x.IsNightmare))
+                        {
+                            quest.EasyModeQuantity = 0;
+                            quest.NormalModeQuantity = 0;
+                        }
+
+                        var blocked = scenario.QuestCards.Where(x => x.StageNumber == 2 && x.OppositeTitle == "Blocked By Shadow").FirstOrDefault();
+                        if (blocked != null)
+                        {
+                            blocked.NightmareModeQuantity = 0;
+                        }
+
                         foreach (var card in scenario.ScenarioCards.Where(x => !x.EncounterSet.EndsWith(" Nightmare")))
                         {
                             switch (card.Title)

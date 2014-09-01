@@ -334,6 +334,8 @@
     <Compile Include="Models\ScenarioGroup.cs" />
     <Compile Include="Models\ScenarioGroupViewModel.cs" />
     <Compile Include="Models\ScenarioListViewModel.cs" />
+    <Compile Include="Models\ScenarioQuestCard.cs" />
+    <Compile Include="Models\ScenarioQuestViewModel.cs" />
     <Compile Include="Models\ScenarioViewModel.cs" />
     <Compile Include="Models\SearchRequest.cs" />
     <Compile Include="Models\SearchResult.cs" />

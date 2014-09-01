@@ -73,6 +73,20 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                         if (scenario == null)
                             continue;
 
+                        foreach (var quest in scenario.QuestCards)
+                        {
+                            switch (quest.Title)
+                            {
+                                case "Grimbeorn's Folly":
+                                    quest.EasyModeQuantity = 0;
+                                    quest.NormalModeQuantity = 0;
+                                    quest.NightmareModeQuantity = 1;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
                         foreach (var card in scenario.ScenarioCards.Where(x => !x.EncounterSet.EndsWith(" Nightmare")))
                         {
                             switch (card.Title)

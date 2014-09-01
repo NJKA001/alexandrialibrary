@@ -933,7 +933,12 @@ If there are no enemies in play, immediately advance to the next stage of the sc
                 EncounterSet = "Flight from Moria",
                 Quantity = 1,
                 Text = "While Search for an Exit is the active quest card, only flip it to side 2B at the beginning of the staging step.",
-                OppositeText = "When Revealed: The first player chooses 1 of the following:• Each player discards 1 card from the top of the encounter deck. If the card is a treachery card, the discarding player is eliminated from the game.• Reveals the next quest card, putting Blocked by Shadow on the bottom of the quest deck. Players may bypass this quest card at the end of the combat phase. If the players defeat this stage, they escape and win the game.",
+                OppositeText = 
+@"When Revealed: The first player chooses 1 of the following:
+• Each player discards 1 card from the top of the encounter deck. If the card is a treachery card, the discarding player is eliminated from the game.
+• Reveals the next quest card, putting Blocked by ~Shadow on the bottom of the quest deck. 
+
+Players may bypass this quest card at the end of the combat phase. If the players defeat this stage, they escape and win the game.",
                 FlavorText = "As the presence draws near, doubt and fear surround you like a vast shadow. You must find daylight, you must escape from the Black Pit...",
                 QuestPoints = 9,
                 Number = 75,
