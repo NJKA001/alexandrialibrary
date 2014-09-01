@@ -58,6 +58,22 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                         if (scenario == null)
                             continue;
 
+                        foreach (var quest in scenario.QuestCards)
+                        {
+                            switch (quest.Title)
+                            {
+                                case "Goblin Patrol":
+                                    quest.NightmareModeQuantity = 0;
+                                    break;
+                                case "Goblin Ambush":
+                                    quest.NormalModeQuantity = 0;
+                                    quest.EasyModeQuantity = 0;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
                         foreach (var card in scenario.ScenarioCards.Where(x => !x.EncounterSet.EndsWith(" Nightmare")))
                         {
                             switch (card.Title)
