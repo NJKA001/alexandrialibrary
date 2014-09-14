@@ -20,6 +20,7 @@ namespace HallOfBeorn.Models.Sets
                 Title = "Road to Rivendell Nightmare",
                 Id = "1770122B-7F4B-424A-A714-A23DB128E355",
                 CardType = Models.CardType.Nightmare_Setup,
+                HasSecondImage = true,
                 Text =
 @"You are playing in Nightmare mode.
 
@@ -123,7 +124,6 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 Title = "Ambush in the Night",
                 ScenarioTitle = "Road to Rivendell",
                 Id = "2EC4C17D-CB7C-4B1A-94AB-A755644577C5",
-                ImageType = Models.ImageType.Png,
                 HasSecondImage = true,
                 CardType = CardType.Quest,
                 StageNumber = 2,
@@ -145,7 +145,6 @@ Progress cannot be placed on this stage unless the players control Arwen Undómi
             {
                 Title = "Uruk Elf-stalker",
                 Id = "4A8E8DDA-F44E-4DD5-AACE-3D4F7C4D22EA",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Enemy,
                 EngagementCost = 5,
                 Threat = 3,
@@ -165,7 +164,6 @@ Progress cannot be placed on this stage unless the players control Arwen Undómi
             {
                 Title = "Goblin Trapper",
                 Id = "93C87E29-E9DF-4596-A65D-D776CCC8F4B0",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Enemy,
                 EngagementCost = 30,
                 Threat = 3,
@@ -185,7 +183,6 @@ Progress cannot be placed on this stage unless the players control Arwen Undómi
             {
                 Title = "Raiding Party",
                 Id = "EC66FDED-E287-4FE7-B536-B8A2CA51F767",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Enemy,
                 EngagementCost = 34,
                 Threat = 2,
@@ -204,7 +201,6 @@ Progress cannot be placed on this stage unless the players control Arwen Undómi
             {
                 Title = "Vicious Trackers",
                 Id = "45F25FBC-4722-4C8E-9F06-F1D7E4AB27FA",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Enemy,
                 EngagementCost = 16,
                 Threat = 1,
@@ -223,7 +219,6 @@ Progress cannot be placed on this stage unless the players control Arwen Undómi
             {
                 Title = "Treacherous Bluffs",
                 Id = "E9C28758-7EB8-4958-B324-2024D90B7DC6",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Location,
                 Threat = 1,
                 QuestPoints = 7,
@@ -239,7 +234,6 @@ Progress cannot be placed on this stage unless the players control Arwen Undómi
             {
                 Title = "Concealed Woods",
                 Id = "E9DBE592-324F-4B1D-8FC3-F1B0A685AF02",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Location,
                 Threat = 4,
                 QuestPoints = 4,
@@ -255,7 +249,6 @@ Progress cannot be placed on this stage unless the players control Arwen Undómi
             {
                 Title = "Tumultuous Assault",
                 Id = "64653BB9-7682-4EAD-9892-29E305968F89",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Treachery,
                 Text = "When Revealed: Return each engaged enemy with the ambush keyword to the staging area. Each player makes engagement checks against each enemy in the staging area, as if it were the encounter phase. If there are no enemies with the ambush keyword in play, Tumultuous Assault gains surge.",
                 EncounterSet = "Road to Rivendell Nightmare",

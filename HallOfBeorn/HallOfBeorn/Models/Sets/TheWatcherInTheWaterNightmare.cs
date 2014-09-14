@@ -20,6 +20,7 @@ namespace HallOfBeorn.Models.Sets
                 Title = "The Watcher in the Water Nightmare",
                 Id = "F0B86657-B29E-4428-BD3D-7111E78A8B3A",
                 CardType = Models.CardType.Nightmare_Setup,
+                HasSecondImage = true,
                 Text =
 @"You are playing in Nightmare mode.
 
@@ -87,7 +88,6 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             {
                 Title = "The Watcher",
                 Id = "38396B24-B249-4A91-A458-1008FF0F0B48",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Enemy,
                 EngagementCost = 50,
                 Threat = 4,
@@ -109,7 +109,6 @@ If The Watcher is in the staging area at the end of the combat phase, each playe
             {
                 Title = "Writhing Tentacle",
                 Id = "08482A88-5C28-42A4-B21A-C603E2835F75",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Enemy,
                 EngagementCost = 46,
                 Threat = 4,
@@ -127,7 +126,6 @@ If The Watcher is in the staging area at the end of the combat phase, each playe
             {
                 Title = "Choking Tentacle",
                 Id = "4CF9E883-D264-495A-B57A-15B8B8995505",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Enemy,
                 EngagementCost = 10,
                 Threat = 2,
@@ -145,7 +143,6 @@ If The Watcher is in the staging area at the end of the combat phase, each playe
             {
                 Title = "Banks of Sirannon",
                 Id = "149AC0A6-D778-4A5E-9F6C-CE9CF91CE15F",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Location,
                 Threat = 3,
                 QuestPoints = 3,
@@ -161,7 +158,6 @@ If The Watcher is in the staging area at the end of the combat phase, each playe
             {
                 Title = "Hideous Depths",
                 Id = "ED5D88D2-9559-4CF5-8BA5-562B383062F1",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Location,
                 Threat = 3,
                 QuestPoints = 5,
@@ -179,7 +175,6 @@ Travel: Reveal the topmost Tentacle enemy in the encounter discard pile to trave
             {
                 Title = "Pulled Under",
                 Id = "B4E0019A-44E3-411C-8C8C-2812C62C41D8",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Treachery,
                 Traits = new List<string> { "Tentacle." },
                 Text = "When Revealed: Deal 3 damage to each character with a Tentacle attachment. If no characters were damaged by this effect, Pulled Under gains surge.",
@@ -193,7 +188,6 @@ Travel: Reveal the topmost Tentacle enemy in the encounter discard pile to trave
             {
                 Title = "Rippling From Beneath",
                 Id = "BF528396-B36D-4326-B626-1DE41267EA8B",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Treachery,
                 Traits = new List<string> { "Tentacle." },
                 Keywords = new List<string> { "Surge." },

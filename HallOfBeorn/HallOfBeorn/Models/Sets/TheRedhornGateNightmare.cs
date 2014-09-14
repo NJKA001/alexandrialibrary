@@ -20,6 +20,7 @@ namespace HallOfBeorn.Models.Sets
                 Title = "The Redhorn Gate Nightmare",
                 Id = "F8597C3E-9FCA-4ED4-9326-AD1A383605DA",
                 CardType = Models.CardType.Nightmare_Setup,
+                HasSecondImage = true,
                 Text = 
 @"You are playing in Nightmare mode.
 
@@ -101,7 +102,6 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             {
                 Title = "Wolfpelt Goblin",
                 Id = "5D83D480-CDC8-4F25-8E36-E1166DF88581",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Enemy,
                 EngagementCost = 20,
                 Threat = 2,
@@ -120,7 +120,6 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             {
                 Title = "Silvertine Marauder",
                 Id = "726E6D3C-1479-4BB5-BF7D-8C877C971179",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Enemy,
                 EngagementCost = 28,
                 Threat = 2,
@@ -139,7 +138,6 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             {
                 Title = "Snow-Giant",
                 Id = "CAA9EE36-ABFA-4AE4-A059-9C5812761A8F",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Enemy,
                 EngagementCost = 42,
                 Threat = 4,
@@ -161,7 +159,6 @@ Forced: After Snow-Giant engages you, discard the ally you control with the high
             {
                 Title = "Icy Cavern",
                 Id = "47B84E97-41DB-4F98-B3CE-5F8690EECDC6",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Location,
                 Threat = 0,
                 IsVariableThreat = true,
@@ -181,7 +178,6 @@ Travel: Search the encounter deck and discard pile for 1 copy of Freezing Cold a
             {
                 Title = "Frozen Silverlode",
                 Id = "56F5BD69-1A03-4180-BF93-D06B1FF66209",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Location,
                 Threat = 3,
                 QuestPoints = 3,
@@ -198,7 +194,6 @@ Travel: Search the encounter deck and discard pile for 1 copy of Freezing Cold a
             {
                 Title = "Blinding Blizzard",
                 Id = "20685464-DE05-4FC3-8318-A196627EAF0B",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Treachery,
                 Traits = new List<string> { "Snow." },
                 Text = 
@@ -214,7 +209,6 @@ When Revealed: Add Blinding Blizzard to the staging area. Progress that would be
             {
                 Title = "Caradhras the Cruel",
                 Id = "5A25C393-5FA4-4BE7-9572-7451D7D841CB",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Treachery,
                 Text = "When Revealed: Return all Snow cards in the encounter discard pile to the top of the encounter deck, in random order. Reveal the top card of the encounter deck (reveal the top 2 cards instead if there are 3 or 4 players in the game).",
                 FlavorText = "\"Caradhras has not forgiven us,\" he said. \"He has more snow yet to fling at us, if we go on.\"\r\n-Gimli, The Fellowship of the Ring",
