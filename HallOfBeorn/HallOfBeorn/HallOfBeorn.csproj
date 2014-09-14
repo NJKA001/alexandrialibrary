@@ -200,6 +200,7 @@
     <Compile Include="Models\CardSet.cs" />
     <Compile Include="Models\CardType.cs" />
     <Compile Include="Models\CardViewModel.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Deck.cs" />
     <Compile Include="Models\Decks\HallOfBeorn\BalinHoldsTheLine.cs" />
     <Compile Include="Models\Decks\HallOfBeorn\BardGoesHunting.cs" />
