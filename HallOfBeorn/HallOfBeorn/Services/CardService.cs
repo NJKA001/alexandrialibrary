@@ -34,6 +34,7 @@ namespace HallOfBeorn.Services
         private readonly Dictionary<string, string> traits = new Dictionary<string, string>();
         private readonly Dictionary<string, Deck> decks = new Dictionary<string, Deck>();
         private readonly Dictionary<string, Scenario> scenarios = new Dictionary<string, Scenario>();
+        private readonly Dictionary<string, Category> categories = new Dictionary<string, Category>();
 
         const int maxResults = 128;
         const string randomKeyword = "random";
@@ -118,6 +119,13 @@ namespace HallOfBeorn.Services
                     var traitKey = trait.Replace(".", string.Empty).Trim();
                     if (!traits.ContainsKey(traitKey))
                         traits.Add(traitKey, trait.Trim());
+                }
+
+                foreach (var category in card.Categories)
+                {
+                    var categoryKey = category.ToString();
+                    if (!categories.ContainsKey(categoryKey))
+                        categories.Add(categoryKey, category);
                 }
             }
         }
@@ -932,6 +940,12 @@ namespace HallOfBeorn.Services
                 results = results.Where(x => x.Sphere == model.Sphere).ToList();
             }
 
+            if (model.Category != Category.None)
+            {
+                hasFilter = true;
+                results = results.Where(x => x.Categories.Any(y => y == model.Category)).ToList();
+            }
+
             if (!string.IsNullOrEmpty(model.Cost) && model.Cost != "Any")
             {
                 hasFilter = true;
@@ -1058,6 +1072,11 @@ namespace HallOfBeorn.Services
         {
             foreach (var item in SearchViewModel.Spheres)
                 yield return item.Text;
+        }
+
+        public IEnumerable<Category> Categories()
+        {
+            return categories.Values.ToList().OrderBy(x => x).ToList();
         }
 
         public IEnumerable<Product> Products()

@@ -58,6 +58,9 @@ namespace HallOfBeorn.Models
         [Display(Name="Encounter Set")]
         public string EncounterSet { get; set; }
 
+        [Display(Name="Category")]
+        public Category Category { get; set; }
+
         public bool Random { get; set; }
 
         [Display(Name = "Results")]
@@ -78,6 +81,12 @@ namespace HallOfBeorn.Models
         }
 
         public static IEnumerable<SelectListItem> Traits
+        {
+            get;
+            set;
+        }
+
+        public static IEnumerable<SelectListItem> Categories
         {
             get;
             set;

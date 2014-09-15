@@ -34,7 +34,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Year = 2010,
                 Artist = Artist.John_Stanko,
-                Number = 1
+                Number = 1,
+                Categories = new List<Category> { Category.Response_Commit, Category.Scope_Self, Category.Readying }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -54,7 +55,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "\"Not all is dark. Take courage, Lord of the Mark...\"\r\n\r\n-Gandalf, The Two Towers",
                 Quantity = 1,
                 Number = 2,
-                Artist = Artist.Jeff_Himmelman
+                Artist = Artist.Jeff_Himmelman,
+                Categories = new List<Category> { Category.Response_Commit, Category.Resource_Acceleration, Category.Scope_Hero }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -73,7 +75,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: After Glóin suffers damage, add 1 resource to his resource pool for each point of damage he just suffered.",
                 Quantity = 1,
                 Number = 3,
-                Artist = Artist.Tom_Garden
+                Artist = Artist.Tom_Garden,
+                Categories = new List<Category> { Category.Resource_Acceleration, Category.Response_Character_Damaged, Category.Scope_Self }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -92,7 +95,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "\"Men need many words before deeds. My axe is restless in my hands\" -The Two Towers",
                 Quantity = 1,
                 Number = 4,
-                Artist = Artist.Tony_Foti
+                Artist = Artist.Tony_Foti,
+                Categories = new List<Category> { Category.Offensive_Boost, Category.Passive_Damage_Tokens, Category.Scope_Self }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -111,7 +115,8 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Ranged." },
                 Quantity = 1,
                 Number = 5,
-                Artist = Artist.Magali_Villeneuve
+                Artist = Artist.Magali_Villeneuve,
+                Categories = new List<Category> { Category.Response_Enemy_Destroyed, Category.Control_Location, Category.Scope_Quest }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
