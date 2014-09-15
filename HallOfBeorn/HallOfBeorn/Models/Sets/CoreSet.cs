@@ -116,7 +116,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Number = 5,
                 Artist = Artist.Magali_Villeneuve,
-                Categories = new List<Category> { Category.Response_Enemy_Destroyed, Category.Control_Location, Category.Scope_Quest }
+                Categories = new List<Category> { Category.Response_Enemy_Destroyed, Category.Control_Location_Active, Category.Scope_Quest }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -136,6 +136,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 6,
                 Artist = Artist.Jen_Zee,
                 HasErrata = true,
+                Categories = new List<Category> { Category.Passive_While_Enemy_Revealed, Category.Passive_While_Committed }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -154,7 +155,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Discard 1 card from your hand to give Éowyn +1 Willpower until the end of the phase. This effect may be triggered by each player once each round.",
                 Quantity = 1,
                 Number = 7,
-                Artist = Artist.Gabrielle_Portal
+                Artist = Artist.Gabrielle_Portal,
+                Categories = new List<Category> { Category.Questing_Boost, Category.Limit_Once_Per_Round }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -174,6 +176,7 @@ namespace HallOfBeorn.Models.Sets
                 Number = 8,
                 Artist = Artist.Magali_Villeneuve,
                 HasErrata = true,
+                Categories = new List<Category> { Category.Cancellation_Treachery, Category.Response_Treachery_Revealed }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -192,7 +195,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Dúnhere can target enemies in the staging area when he attacks alone. When doing so, he gets +1 Attack.",
                 Quantity = 1,
                 Number = 9,
-                Artist = Artist.Jeff_Himmelman
+                Artist = Artist.Jeff_Himmelman,
+                Categories = new List<Category> { Category.Offensive, Category.Control_Enemy_Staging, Category.Offensive_Boost }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -210,7 +214,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Exhaust Denethor to look at the top card of the encounter deck. You may move that card to the bottom of the deck.",
                 Quantity = 1,
                 Number = 10,
-                Artist = Artist.Tiziano_Baracchi
+                Artist = Artist.Tiziano_Baracchi,
+                Categories = new List<Category> { Category.Scrying_Encounter_Deck, Category.Control_Encounter_Deck }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -228,7 +233,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Pay 1 resource from Glorfindel's pool to heal 1 damage on any character. (Limit once per round.)",
                 Quantity = 1,
                 Number = 11,
-                Artist = Artist.Katherine_Dinger
+                Artist = Artist.Katherine_Dinger,
+                Categories = new List<Category> { Category.Healing }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -248,7 +254,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 1,
                 Number = 12,
                 Artist = Artist.Tiziano_Baracchi,
-                HasErrata = true
+                HasErrata = true,
+                Categories = new List<Category> { Category.Draw_From_Deck, Category.Action_Any_Phase }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -282,7 +289,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Exhaust Faramir to choose a player. Each character controlled by that player gets +1 Willpower until the end of the phase.",
                 Quantity = 2,
                 Number = 14,
-                Artist = Artist.Jeff_Himmelman
+                Artist = Artist.Jeff_Himmelman,
+                Categories = new List<Category> { Category.Action_Any_Phase, Category.Questing_Boost, Category.Scope_Player }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -301,7 +309,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "...and the North-realm they made in Arnor, and the South-realm in Gondor above the mouths of Anduin. -The Fellowship of the Ring",
                 Quantity = 2,
                 Number = 15,
-                Artist = Artist.Ryan_Barger
+                Artist = Artist.Ryan_Barger,
+                Categories = new List<Category> { Category.Response_Enters_Play, Category.Control_Engagement }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -319,7 +328,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "...he saw not a shadow, nor a blur, but the small figures of horsemen, many horsemen, and the glint of morning on the tips of their spears was like the twinkle of minute stars beyond the edge of mortal sight. -The Two Towers",
                 Quantity = 3,
                 Number = 16,
-                Artist = Artist.David_Horne
+                Artist = Artist.David_Horne,
+                Categories = new List<Category> { Category.Control_Location_Any, Category.Response_Enters_Play }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -354,7 +364,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: After Longbeard Orc Slayer enters play, deal 1 damage to each Orc enemy in play.",
                 Quantity = 2,
                 Number = 18,
-                Artist = Artist.Kaya
+                Artist = Artist.Kaya,
+                Categories = new List<Category> { Category.Response_Enters_Play, Category.Control_Enemy_Any, Category.Scope_Enemy_Trait }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -372,7 +383,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: After a Dwarf hero you control leaves play, put Brok Ironfist into play from your hand.",
                 Quantity = 1,
                 Number = 19,
-                Artist = Artist.Even_Mehl_Amundsen
+                Artist = Artist.Even_Mehl_Amundsen,
+                Categories = new List<Category> { Category.Response_Hero_Destroyed, Category.Scope_Hero, Category.Mustering_Ally }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -396,7 +408,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Exhaust 1 hero you control to choose and ready a different hero.",
                 Quantity = 2,
                 Number = 21,
-                Artist = Artist.Tony_Foti
+                Artist = Artist.Tony_Foti,
+                Categories = new List<Category> { Category.Scope_Hero, Category.Readying }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -420,7 +433,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Put 1 ally card into play from your hand. At the end of the phase, if that ally is still in play, return it to your hand.",
                 Quantity = 2,
                 Number = 23,
-                Artist = Artist.Winona_Nelson
+                Artist = Artist.Winona_Nelson,
+                Categories = new List<Category> { Category.Mustering_Ally, Category.Action_Any_Phase }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -432,7 +446,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: After an ally card leaves play, that card's controller draws 2 cards.",
                 Quantity = 2,
                 Number = 24,
-                Artist = Artist.David_A_Nash
+                Artist = Artist.David_A_Nash,
+                Categories = new List<Category> { Category.Draw_From_Deck, Category.Response_Leaves_Play, Category.Scope_Character }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -444,7 +459,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Ready all character cards in play.",
                 Quantity = 1,
                 Number = 25,
-                Artist = Artist.Daarken
+                Artist = Artist.Daarken,
+                Categories = new List<Category> { Category.Readying, Category.Scope_Global }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -460,7 +476,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "\"It was commanded yesterday.\" -Denethor, The Return of the King",
                 Quantity = 2,
                 Number = 26,
-                Artist = Artist.Empty_Room_Studios
+                Artist = Artist.Empty_Room_Studios,
+                Categories = new List<Category> { Category.Resource_Acceleration, Category.Bonus_Trait }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -476,7 +493,8 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Attach to a hero.", " Restricted." },
                 Quantity = 1,
                 Number = 27,
-                Artist = Artist.Sara_Biddle
+                Artist = Artist.Sara_Biddle,
+                Categories = new List<Category> { Category.Questing_Boost, Category.Bonus_Sphere }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -510,7 +528,8 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Sentinel." },
                 Quantity = 3,
                 Number = 29,
-                Artist = Artist.Winona_Nelson
+                Artist = Artist.Winona_Nelson,
+                Categories = new List<Category> { Category.Response_Character_Defend, Category.Control_Direct_Damage }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -545,7 +564,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Beorn gains +5 Attack until the end of the phase. At the end of the phase in which you trigger this effect, shuffle Beorn back into your deck. (Limit once per round.)",
                 Quantity = 1,
                 Number = 31,
-                Artist = Artist.Tiziano_Baracchi
+                Artist = Artist.Tiziano_Baracchi,
+                Categories = new List<Category> { Category.Action_Any_Phase, Category.Limit_Once_Per_Phase, Category.Offensive_Boost }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -557,7 +577,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Action: Choose a character. Until the end of the phase, that character gains +1 Attack and +1 Defense.",
                 Quantity = 3,
                 Number = 32,
-                Artist = Artist.Leonardo_Borazio
+                Artist = Artist.Leonardo_Borazio,
+                Categories = new List<Category> { Category.Action_Any_Phase, Category.Offensive_Boost, Category.Defensive_Boost }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -570,7 +591,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "Arrows thick as the rain came whistling over the battlements, and fell clinking and glancing on th estones. Many found their mark. -The Two Towers",
                 Quantity = 2,
                 Number = 33,
-                Artist = Artist.Frank_Walls
+                Artist = Artist.Frank_Walls,
+                Categories = new List<Category> { Category.Control_Direct_Damage, Category.Control_Enemy_Engaged, Category.Scope_Player }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -582,7 +604,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Combat Action: Choose an enemy engaged with a player. That enemy cannot attack that player this phase.",
                 Quantity = 2,
                 Number = 34,
-                Artist = Artist.Lius_Lasahido
+                Artist = Artist.Lius_Lasahido,
+                Categories = new List<Category> { Category.Scope_Enemy_Engaged, Category.Control_Enemy_Engaged, Category.Defensive, Category.Control_Combat }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -595,7 +618,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "\"...for he that strikes the first blow, if he strikes it hard enough, may need to strike no more.\" -Gandalf, The Two Towers",
                 Quantity = 2,
                 Number = 35,
-                Artist = Artist.Sara_Biddle
+                Artist = Artist.Sara_Biddle,
+                Categories = new List<Category> { Category.Offensive, Category.Control_Enemy_Any, Category.Scope_Character }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -604,11 +628,15 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Event,
                 Sphere = Sphere.Tactics,
                 ResourceCost = 3,
-                Text = "You must use resources from 3 different heroes' pools to pay for this card.Action: Choose a player. That player's engaged enemies cannot attack that player this phase.",
+                Text = 
+@"You must use resources from 3 different heroes' pools to pay for this card.
+                
+Action: Choose a player. That player's engaged enemies cannot attack that player this phase.",
                 Quantity = 2,
                 Number = 36,
                 Artist = Artist.David_Horne,
-                HasErrata = true
+                HasErrata = true,
+                Categories = new List<Category> { Category.Scope_Player, Category.Control_Enemy_Engaged, Category.Defensive, Category.Control_Combat }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -620,7 +648,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: After a character is declared as a defender, deal 2 damage to the attacking enemy.",
                 Quantity = 1,
                 Number = 37,
-                Artist = Artist.Ijur
+                Artist = Artist.Ijur,
+                Categories = new List<Category> { Category.Defensive, Category.Response_Character_Defend, Category.Control_Direct_Damage }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -633,7 +662,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "...and when the task was done, there they would come to an end, alone, houseless, foodless in the midst of a terrible desert. There could be no return. -The Return of the King",
                 Quantity = 1,
                 Number = 38,
-                Artist = Artist.Daarken
+                Artist = Artist.Daarken,
+                Categories = new List<Category> { Category.Defensive, Category.Scope_Player, Category.Action_Any_Phase }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -647,7 +677,8 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Attach to a hero.", " Restricted." },
                 Quantity = 2,
                 Number = 39,
-                Artist = Artist.David_Lecossu
+                Artist = Artist.David_Lecossu,
+                Categories = new List<Category> { Category.Bonus_Attack, Category.Limit_Trait, Category.Response_Enemy_Destroyed, Category.Scope_Quest }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -661,7 +692,8 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Attach to a hero.", " Restricted." },
                 Quantity = 2,
                 Number = 40,
-                Artist = Artist.Fredrik_Dahl_Tyskerud
+                Artist = Artist.Fredrik_Dahl_Tyskerud,
+                Categories = new List<Category> { Category.Defensive, Category.Bonus_Hit_Points }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -675,7 +707,8 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Attach to a hero.", " Restricted." },
                 Quantity = 2,
                 Number = 41,
-                Artist = Artist.Drew_Whitmore
+                Artist = Artist.Drew_Whitmore,
+                Categories = new List<Category> { Category.Offensive, Category.Scope_Hero, Category.Bonus_Attack, Category.Limit_Trait }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -690,7 +723,8 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string>() { "Attach to a hero.", " Restricted." },
                 Quantity = 1,
                 Number = 42,
-                Artist = Artist.Mark_Winters
+                Artist = Artist.Mark_Winters,
+                Categories = new List<Category> { Category.Response_Character_Leaves_Play, Category.Resource_Acceleration }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -725,7 +759,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: After Lórien Guide commits to a quest, place 1 progress token on the active location.",
                 Quantity = 3,
                 Number = 44,
-                Artist = Artist.Kristina_Gehrmann
+                Artist = Artist.Kristina_Gehrmann,
+                Categories = new List<Category> { Category.Response_Commit, Category.Scope_Location_Active, Category.Control_Location_Active }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -744,7 +779,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "\"What roads would any dare to tread, what safety would there be in quiet lands, or in the homes of simple men at night, if the Dúnedain were asleep, or were all gone into the grave?\" -Aragorn, The Fellowship of the Ring",
                 Quantity = 2,
                 Number = 45,
-                Artist = Artist.Kristina_Gehrmann
+                Artist = Artist.Kristina_Gehrmann,
+                Categories = new List<Category> { Category.Response_Commit, Category.Scope_Location_Staging, Category.Control_Location_Staging }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -757,7 +793,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "\"Welcome to Caras Galadhan!\" he said. \"Here is the city of the Galadhrim where dwell the Lord Celeborn and Galadriel the Lady of Lórien\" -The Fellowship of the Ring",
                 Quantity = 2,
                 Number = 46,
-                Artist = Artist.Magali_Villeneuve
+                Artist = Artist.Magali_Villeneuve,
+                Categories = new List<Category> { Category.Threat_Reduction, Category.Scope_Player, Category.Scope_All_Players }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -769,7 +806,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: After you travel to a location, exhaust a Spirit character to place 2 progress tokens on that location.",
                 Quantity = 2,
                 Number = 47,
-                Artist = Artist.Ryan_Barger
+                Artist = Artist.Ryan_Barger,
+                Categories = new List<Category> { Category.Scope_Location_Active, Category.Control_Location_Active, Category.Response_Travel }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -781,7 +819,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: Cancel a shadow effect just triggered during combat.",
                 Quantity = 2,
                 Number = 48,
-                Artist = Artist.Lius_Lasahido
+                Artist = Artist.Lius_Lasahido,
+                Categories = new List<Category> { Category.Response_Shadow_Trigger, Category.Control_Combat, Category.Cancellation_Shadow }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -794,7 +833,8 @@ namespace HallOfBeorn.Models.Sets
                 FlavorText = "\"If Gondor has such men still in these days of fading, great must have been its glory in the days of its rising.\" -Legolas, The Return of the King",
                 Quantity = 2,
                 Number = 49,
-                Artist = Artist.Erfian_Asafat
+                Artist = Artist.Erfian_Asafat,
+                Categories = new List<Category> { Category.Action_Any_Phase, Category.Recursion }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
@@ -806,7 +846,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: Cancel the 'when revealed' effects of a card that was just revealed from the encounter deck.",
                 Quantity = 2,
                 Number = 50,
-                Artist = Artist.Ryan_Barger
+                Artist = Artist.Ryan_Barger,
+                Categories = new List<Category> { Category.Response_Treachery_Revealed, Category.Cancellation_Treachery, Category.Control_Treachery }
             });
             Cards.Add(new Card() {
                 ImageType = Models.ImageType.Png,
