@@ -200,7 +200,16 @@ namespace HallOfBeorn.Services
             var patterns = new Dictionary<string, Category>
             {
                 { @"add[\s]{1}[\d]{1}[\s]{1}resource", Category.Resource_Acceleration },
-                { @"move[\s]{1}[\d]{1}[\s]{1}resource|Pay 1 resource from a hero's resource pool to add 1 resource", Category.Resource_Smoothing}
+                { @"move[\s]{1}[\d]{1}[\s]{1}resource|Pay 1 resource from a hero's resource pool to add 1 resource", Category.Resource_Smoothing},
+                { @"(ally|allies){1,}.*into[\s]play", Category.Ally_Mustering },
+                { @"\+[\d]*[\s]Attack", Category.Attack_Boost },
+                { @"\+[\d]*[\s]Defense", Category.Defense_Boost },
+                { @"\+[\d]*[\s]Willpower", Category.Willpower_Boost },
+                { @"(draw|draws)[\s][\w]*[\s]card", Category.Card_Draw },
+                { @"search[\s].*your[\s]deck", Category.Card_Search },
+                //TODO: Change patterns into functions which return a Category (.None for no match)
+                //{ @"^.*look[\s]at.*((?!.*(encounter)).*)$", Category.Player_Scrying },
+                { @"look[\s]at[\s].*encounter[\s]deck", Category.Encounter_Scrying },
             };
 
             foreach (var card in cards.Values.Where(x => IsCategorizable(x)))
