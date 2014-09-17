@@ -30,7 +30,8 @@ Expansion Symbol
 The cards in The Old ~Forest scenario can be identified by this symbol before each card's collector number.",
                 OppositeFlavorText = "\"But you won't have any luck in the Old Forest,\" objected Fedegar, \"No one ever had luck there. You'll get lost.\"\r\n-The Fellowship of the Ring",
                 Number = 0,
-                Quantity = 1
+                Quantity = 1,
+                Artist = Artist.Unknown
             });
             Cards.Add(new Card()
             {
@@ -60,7 +61,8 @@ Indestructible
 
 An enemy with the indestructible keyword cannot be destroyed by damage, even when it has damage on it equal to its hit points.",
                 Number = 0,
-                Quantity = 1
+                Quantity = 1,
+                Artist = Artist.Unknown
             });
             Cards.Add(new Card()
             {
@@ -76,7 +78,8 @@ The Old ~Forest expansion includes 2 cards that can only be used when playing th
 
 The Lord of the ~Rings : The Black Riders Saga Expansion is required to play The Old ~Forest in campaign mode.",
                 Number = 0,
-                Quantity = 1
+                Quantity = 1,
+                Artist = Artist.Unknown
             });
             Cards.Add(new Card()
             {

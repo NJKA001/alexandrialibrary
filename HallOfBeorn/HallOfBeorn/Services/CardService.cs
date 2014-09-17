@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 using HallOfBeorn.Models;
@@ -19,6 +20,7 @@ namespace HallOfBeorn.Services
             LoadDecks();
             LoadRelationships();
             LoadScenarioCards();
+            LoadCategories();
 
             //NOTE: These traits are referenced by scenarios but not included on a player card or encounter card as a trait
             traits["Captive."] = "Captive.";
@@ -120,13 +122,6 @@ namespace HallOfBeorn.Services
                     if (!traits.ContainsKey(traitKey))
                         traits.Add(traitKey, trait.Trim());
                 }
-
-                foreach (var category in card.Categories)
-                {
-                    var categoryKey = category.ToString();
-                    if (!categories.ContainsKey(categoryKey))
-                        categories.Add(categoryKey, category);
-                }
             }
         }
 
@@ -176,6 +171,59 @@ namespace HallOfBeorn.Services
                 if (card != null && !card.Decks.ContainsKey(deck.Name))
                 {
                     card.Decks.Add(deck.Name, deck);
+                }
+            }
+        }
+
+        private bool IsCategorizable(Card card)
+        {
+            if (string.IsNullOrEmpty(card.Text))
+                return false;
+
+            switch (card.CardType)
+            {
+                case CardType.Hero:
+                    return true;
+                case CardType.Ally:
+                    return true;
+                case CardType.Attachment:
+                    return true;
+                case CardType.Event:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        private void LoadCategories()
+        {
+            var patterns = new Dictionary<string, Category>
+            {
+                { @"add[\s]{1}[\d]{1}[\s]{1}resource", Category.Resource_Acceleration },
+                { @"move[\s]{1}[\d]{1}[\s]{1}resource|Pay 1 resource from a hero's resource pool to add 1 resource", Category.Resource_Smoothing}
+            };
+
+            foreach (var card in cards.Values.Where(x => IsCategorizable(x)))
+            {
+                foreach (var pattern in patterns)
+                {
+                    foreach (var line in card.Text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        if (string.IsNullOrEmpty(line))
+                            continue;
+
+                        if (Regex.IsMatch(line, pattern.Key, RegexOptions.IgnoreCase))
+                        {
+                            var category = pattern.Value;
+                            card.Categories.Add(category);
+
+                            var categoryKey = category.ToString();
+                            if (!categories.ContainsKey(categoryKey))
+                            {
+                                categories.Add(categoryKey, category);
+                            }
+                        }
+                    }
                 }
             }
         }

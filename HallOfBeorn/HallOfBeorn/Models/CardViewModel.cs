@@ -447,6 +447,27 @@ namespace HallOfBeorn.Models
             get { return _card.HasSecondImage; }
         }
 
+        public bool HasCategories
+        {
+            get { return _card.Categories.Count > 0; }
+        }
+
+        public Dictionary<string, string> Categories()
+        {
+            var categoryMap = new Dictionary<string, string>();
+
+            foreach (var category in _card.Categories)
+            {
+                var key = category.ToString().Replace('_', ' ');
+                if (!categoryMap.ContainsKey(key))
+                {
+                    categoryMap.Add(key, string.Format("/Cards/Search?Category={0}", category.ToString()));
+                }
+            }
+
+            return categoryMap;
+        }
+
         public string DetailPath
         {
             get { return string.Format("/Cards/Details/{0}", Id); }
