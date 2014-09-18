@@ -154,7 +154,12 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Lore,
                 ResourceCost = 1,
                 Traits = new List<string>() { "Trap." },
-                Text = "Play Ithilien Pit into the staging area unattached.If unattached, attach Ithilien Pit to the next eligible enemy that enters the staging area.Any character may choose attached enemy as the target of an attack.",
+                Text = 
+@"Play ~Ithilien Pit into the staging area unattached.
+
+If unattached, attach ~Ithilien Pit to the next eligible enemy that enters the staging area.
+
+Any character may choose attached enemy as the target of an attack.",
                 Quantity = 3,
                 Number = 64,
                 Artist = Artist.David_Gaillet

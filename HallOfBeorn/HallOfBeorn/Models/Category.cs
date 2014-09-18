@@ -27,6 +27,7 @@ namespace HallOfBeorn.Models
         Shadow_Control,
         Threat_Control,
         Staging_Area_Attack,
+        Direct_Damage,
         Staging_Area_Control
     }
 }
