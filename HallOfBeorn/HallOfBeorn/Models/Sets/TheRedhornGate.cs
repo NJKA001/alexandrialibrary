@@ -242,7 +242,7 @@ Forced: After attached hero attacks and destroys an enemy, place 1 resource toke
                 CardType = CardType.Event,
                 Sphere = Sphere.Lore,
                 ResourceCost = 2,
-                Text = "Action: Raise your threat by 1 to look at the top card of the ecnounter deck. Then, reduce your threat by X, where X is the threat of that card.",
+                Text = "Action: Raise your threat by 1 to look at the top card of the encounter deck. Then, reduce your threat by X, where X is the threat of that card.",
                 Keywords = new List<string>() { "Secrecy 2." },
                 Quantity = 3,
                 Number = 9,

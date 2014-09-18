@@ -26,6 +26,7 @@ namespace HallOfBeorn.Models
         Treachery_Control,
         Shadow_Control,
         Threat_Control,
+        Staging_Area_Attack,
         Staging_Area_Control
     }
 }

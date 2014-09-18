@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -116,6 +117,14 @@ namespace HallOfBeorn
             }
 
             return ' ';
+        }
+
+        public static bool MatchesPattern(this string self, string pattern)
+        {
+            if (string.IsNullOrEmpty(self))
+                return false;
+
+            return Regex.IsMatch(self, pattern, RegexOptions.IgnoreCase);
         }
     }
 }

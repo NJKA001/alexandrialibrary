@@ -50,7 +50,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 0,
                 HitPoints = 2,
                 Traits = new List<string> { "Gondor." },
-                Text = "Response: After Pelargir Ship Captain enters play, move 1 resource from the resource pool of a hero you control to anoter hero's resource pool.",
+                Text = "Response: After Pelargir Ship Captain enters play, move 1 resource from the resource pool of a hero you control to another hero's resource pool.",
                 Title = "Pelargir Ship Captain",
                 Quantity = 3,
                 Number = 135,

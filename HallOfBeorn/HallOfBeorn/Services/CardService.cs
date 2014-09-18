@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web;
 
 using HallOfBeorn.Models;
@@ -195,43 +194,62 @@ namespace HallOfBeorn.Services
             }
         }
 
+        private Func<Card, Category> CreateCategoryFilter(string pattern, Category category)
+        {
+            return CreateCategoryFilter(pattern, category, null);
+        }
+
+        private Func<Card, Category> CreateCategoryFilter(string pattern, Category category, string negation)
+        {
+            Func<Card, Category> filter = (card) =>
+                {
+                    foreach (var line in card.Text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        if (line.MatchesPattern(pattern) && (string.IsNullOrEmpty(negation) || !line.ToLower().Contains(negation.ToLower())))
+                            return category;
+                    }
+
+                    return Category.None;
+                };
+
+            return filter;
+        }
+
         private void LoadCategories()
         {
-            var patterns = new Dictionary<string, Category>
+            var filters = new List<Func<Card, Category>>
             {
-                { @"add[\s]{1}[\d]{1}[\s]{1}resource", Category.Resource_Acceleration },
-                { @"move[\s]{1}[\d]{1}[\s]{1}resource|Pay 1 resource from a hero's resource pool to add 1 resource", Category.Resource_Smoothing},
-                { @"(ally|allies){1,}.*into[\s]play", Category.Ally_Mustering },
-                { @"\+[\d]*[\s]Attack", Category.Attack_Boost },
-                { @"\+[\d]*[\s]Defense", Category.Defense_Boost },
-                { @"\+[\d]*[\s]Willpower", Category.Willpower_Boost },
-                { @"(draw|draws)[\s][\w]*[\s]card", Category.Card_Draw },
-                { @"search[\s].*your[\s]deck", Category.Card_Search },
-                //TODO: Change patterns into functions which return a Category (.None for no match)
-                //{ @"^.*look[\s]at.*((?!.*(encounter)).*)$", Category.Player_Scrying },
-                { @"look[\s]at[\s].*encounter[\s]deck", Category.Encounter_Scrying },
+                CreateCategoryFilter(@"add[\s]{1}[\d]{1}[\s]{1}resource", Category.Resource_Acceleration),
+                CreateCategoryFilter(@"move[\s]{1}[\d]{1}[\s]{1}resource|Pay 1 resource from a hero's resource pool to add 1 resource", Category.Resource_Smoothing),
+                CreateCategoryFilter(@"(ally|allies){1,}.*into[\s]play", Category.Ally_Mustering),
+                CreateCategoryFilter(@"\+[\d]*[\s]Attack", Category.Attack_Boost),
+                CreateCategoryFilter(@"\+[\d]*[\s]Defense", Category.Defense_Boost),
+                CreateCategoryFilter(@"\+[\d]*[\s]Willpower", Category.Willpower_Boost),
+                CreateCategoryFilter(@"(draw|draws)[\s][\w]*[\s]card", Category.Card_Draw),
+                CreateCategoryFilter(@"search[\s].*your[\s]deck", Category.Card_Search),
+                CreateCategoryFilter(@"(look|looks)[\s]at[\s].*[\s]deck", Category.Player_Scrying, "encounter deck"),
+                CreateCategoryFilter(@"(look|looks)[\s]at[\s].*encounter[\s]deck", Category.Encounter_Scrying),
+                CreateCategoryFilter("(enemy|enemies) cannot attack", Category.Combat_Control),
+                CreateCategoryFilter(@"heal[\s].*damage", Category.Healing),
+                CreateCategoryFilter(@"place[\s].*progress", Category.Location_Control),
+                CreateCategoryFilter("ready.*(character|hero)", Category.Readying),
+                CreateCategoryFilter(@"(return.*discard[\s]pile.*hand|shuffle.*discard[\s]pile.*back)", Category.Recursion, "encounter discard pile")
             };
 
             foreach (var card in cards.Values.Where(x => IsCategorizable(x)))
             {
-                foreach (var pattern in patterns)
+                foreach (var filter in filters)
                 {
-                    foreach (var line in card.Text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
+                    var category = filter(card);
+                    if (category == Category.None)
+                        continue;
+                    
+                    card.Categories.Add(category);
+
+                    var categoryKey = category.ToString();
+                    if (!categories.ContainsKey(categoryKey))
                     {
-                        if (string.IsNullOrEmpty(line))
-                            continue;
-
-                        if (Regex.IsMatch(line, pattern.Key, RegexOptions.IgnoreCase))
-                        {
-                            var category = pattern.Value;
-                            card.Categories.Add(category);
-
-                            var categoryKey = category.ToString();
-                            if (!categories.ContainsKey(categoryKey))
-                            {
-                                categories.Add(categoryKey, category);
-                            }
-                        }
+                        categories.Add(categoryKey, category);
                     }
                 }
             }
