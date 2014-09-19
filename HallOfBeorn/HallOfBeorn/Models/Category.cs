@@ -28,6 +28,9 @@ namespace HallOfBeorn.Models
         Threat_Control,
         Staging_Area_Attack,
         Direct_Damage,
-        Staging_Area_Control
+        Staging_Area_Control,
+        Enters_Play,
+        Leaves_Play,
+        Played_From_Hand
     }
 }

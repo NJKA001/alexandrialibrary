@@ -220,7 +220,7 @@ namespace HallOfBeorn.Services
             var filters = new List<Func<Card, Category>>
             {
                 CreateCategoryFilter(@"add[\s]{1}[\d]{1}[\s]{1}resource", Category.Resource_Acceleration),
-                CreateCategoryFilter(@"move[\s]{1}[\d]{1}[\s]{1}resource|Pay 1 resource from a hero's resource pool to add 1 resource", Category.Resource_Smoothing),
+                CreateCategoryFilter(@"move[\s]{1}.*[\s]{1}resource|Pay 1 resource from a hero's resource pool to add 1 resource", Category.Resource_Smoothing),
                 CreateCategoryFilter(@"(ally|allies){1,}.*into[\s]play", Category.Ally_Mustering),
                 CreateCategoryFilter(@"\+[\d]*[\s]Attack", Category.Attack_Boost),
                 CreateCategoryFilter(@"\+[\d]*[\s]Defense", Category.Defense_Boost),
@@ -239,7 +239,10 @@ namespace HallOfBeorn.Services
                 CreateCategoryFilter(@"(reduce|lower).*(your|player).*threat", Category.Threat_Control, "your threat is lower"),
                 CreateCategoryFilter(@"((enemy|enemies).*staging[\s]area.*attack|attacker.*against.*enemy not engaged with you|Any character may choose attached enemy as the target of an attack)", Category.Staging_Area_Attack),
                 CreateCategoryFilter("(choose (an enemy|a location).*(staging area|not engaged with you))|add.*each enemy's engagement cost|each enemy.*gets.*engagement cost", Category.Staging_Area_Control),
-                CreateCategoryFilter(@"(deal[\s][\S]+[\s]damage|excess damage dealt)", Category.Direct_Damage)
+                CreateCategoryFilter(@"(deal[\s][\S]+[\s]damage|excess damage dealt)", Category.Direct_Damage),
+                CreateCategoryFilter(@"after[\s].*[\s]enters[\s]play", Category.Enters_Play),
+                CreateCategoryFilter(@"after[\s].*[\s]leaves[\s]play", Category.Leaves_Play),
+                CreateCategoryFilter(@"(after[\s]you[\s]play[\s].*[\s]from[\s]your[\s]hand|after you play)", Category.Played_From_Hand)
             };
 
             foreach (var card in cards.Values.Where(x => IsCategorizable(x)))
