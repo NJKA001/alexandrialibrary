@@ -147,7 +147,7 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 Defense = 0,
                 Willpower = 1,
                 HitPoints = 2,
-                Text = "Response: After Keen-eyed Took enters play, reveal the top card of each player's deck.Action: Return Keen-eyed Took to your hand to discard the top card of each player's deck.",
+                Text = "Response: After Keen-eyed Took enters play, reveal the top card of each player's deck.\r\nAction: Return Keen-eyed Took to your hand to discard the top card of each player's deck.",
                 Number = 73,
                 Artist = Artist.Anna_Mohrbacher
             });

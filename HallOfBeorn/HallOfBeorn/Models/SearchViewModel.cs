@@ -59,7 +59,20 @@ namespace HallOfBeorn.Models
         public string EncounterSet { get; set; }
 
         [Display(Name="Category")]
-        public Category Category { get; set; }
+        public string Category { get; set; }
+
+        public Category GetCategory()
+        {
+            var category = HallOfBeorn.Models.Category.None;
+            if (string.IsNullOrEmpty(this.Category))
+                return category;
+
+            var decoded = HttpUtility.HtmlDecode(this.Category).Replace(' ', '_');
+
+            Enum.TryParse<HallOfBeorn.Models.Category>(decoded, true, out category);
+            
+            return category;
+        }
 
         public bool Random { get; set; }
 

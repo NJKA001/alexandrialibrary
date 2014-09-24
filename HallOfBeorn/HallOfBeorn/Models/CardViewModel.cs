@@ -459,9 +459,10 @@ namespace HallOfBeorn.Models
             foreach (var category in _card.Categories)
             {
                 var key = category.ToString().Replace('_', ' ');
+                var value = string.Format("/Cards/Search?Category={0}", category.ToString().Replace('_', '+'));
                 if (!categoryMap.ContainsKey(key))
                 {
-                    categoryMap.Add(key, string.Format("/Cards/Search?Category={0}", category.ToString()));
+                    categoryMap.Add(key, value);
                 }
             }
 

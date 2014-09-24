@@ -220,22 +220,28 @@ namespace HallOfBeorn.Services
             var filters = new List<Func<Card, Category>>
             {
                 CreateCategoryFilter(@"add[\s]{1}[\d]{1}[\s]{1}resource", Category.Resource_Acceleration),
-                CreateCategoryFilter(@"move[\s]{1}.*[\s]{1}resource|Pay 1 resource from a hero's resource pool to add 1 resource", Category.Resource_Smoothing),
+                CreateCategoryFilter(@"move[\s]{1}.*[\s]{1}resource|Pay 1 resource from a hero's resource pool to add 1 resource|add 1 resource to a Gondor or Noble", Category.Resource_Smoothing),
                 CreateCategoryFilter(@"(ally|allies){1,}.*into[\s]play", Category.Ally_Mustering),
-                CreateCategoryFilter(@"\+[\d]*[\s]Attack", Category.Attack_Boost),
-                CreateCategoryFilter(@"\+[\d]*[\s]Defense", Category.Defense_Boost),
-                CreateCategoryFilter(@"\+[\d]*[\s]Willpower", Category.Willpower_Boost),
+                CreateCategoryFilter(@"\+[\d]*[\s]Attack", Category.Attack_Bonus),
+                CreateCategoryFilter(@"\+[\d]*[\s]Defense", Category.Defense_Bonus),
+                CreateCategoryFilter(@"\+[\d]*[\s]Willpower", Category.Willpower_Bonus),
+                CreateCategoryFilter(@"\+[\d]*[\s]Hit[\s]Point", Category.Hit_Point_Bonus),
                 CreateCategoryFilter(@"(draw|draws)[\s][\w]*[\s]card", Category.Card_Draw),
                 CreateCategoryFilter(@"search[\s].*your[\s]deck", Category.Card_Search),
                 CreateCategoryFilter(@"(look|looks)[\s]at[\s].*[\s]deck", Category.Player_Scrying, "encounter deck"),
                 CreateCategoryFilter(@"(look|looks)[\s]at[\s].*encounter[\s]deck", Category.Encounter_Scrying),
                 CreateCategoryFilter("(enemy|enemies).*cannot attack", Category.Combat_Control),
                 CreateCategoryFilter(@"heal[\s].*damage", Category.Healing),
+                CreateCategoryFilter(@"place[\s].*progress|switch the active location|location enters play", Category.Location_Control),
+                CreateCategoryFilter("ready.*(character|hero|ally|allies|him|her|them)", Category.Readying, "While Dain Ironfoot is ready"),
+                CreateCategoryFilter(@"(return.*discard[\s]pile.*hand|shuffle.*discard[\s]pile.*back)", Category.Recursion, "encounter discard pile"),
+                CreateCategoryFilter(@"deal[\s]([\d]|X)*[\s]damage|Deal damage to the attacking enemy|Excess damage dealt by this attack is assigned", Category.Direct_Damage),
+                CreateCategoryFilter(@"(look at|revealed|enters play).*encounter[\s]deck", Category.Encounter_Control),
+                CreateCategoryFilter(@"cancel.*shadow|shadow[\s]cards", Category.Shadow_Control),
                 CreateCategoryFilter(@"place[\s].*progress", Category.Location_Control),
                 CreateCategoryFilter("ready.*(character|hero|him|her)", Category.Readying, "While Dain Ironfoot is ready"),
                 CreateCategoryFilter(@"(return.*discard[\s]pile.*hand|shuffle.*discard[\s]pile.*back)", Category.Recursion, "encounter discard pile"),
                 CreateCategoryFilter(@"(cancel[\s].*shadow[\s]effect|discard[\s].*shadow[\s].*card|shadow (card|cards) dealt|look at.*shadow card)", Category.Shadow_Control),
-                CreateCategoryFilter(@"(cancel.*when.*revealed|cancel the effect of an encounter card)", Category.Treachery_Control),
                 CreateCategoryFilter(@"(reduce|lower).*(your|player).*threat", Category.Threat_Control, "your threat is lower"),
                 CreateCategoryFilter(@"((enemy|enemies).*staging[\s]area.*attack|attacker.*against.*enemy not engaged with you|Any character may choose attached enemy as the target of an attack)", Category.Staging_Area_Attack),
                 CreateCategoryFilter("(choose (an enemy|a location).*(staging area|not engaged with you))|add.*each enemy's engagement cost|each enemy.*gets.*engagement cost", Category.Staging_Area_Control),
@@ -1024,10 +1030,11 @@ namespace HallOfBeorn.Services
                 results = results.Where(x => x.Sphere == model.Sphere).ToList();
             }
 
-            if (model.Category != Category.None)
+            var category = model.GetCategory();
+            if (category != Category.None)
             {
                 hasFilter = true;
-                results = results.Where(x => x.Categories.Any(y => y == model.Category)).ToList();
+                results = results.Where(x => x.Categories.Any(y => y == category)).ToList();
             }
 
             if (!string.IsNullOrEmpty(model.Cost) && model.Cost != "Any")
