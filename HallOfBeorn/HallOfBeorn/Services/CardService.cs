@@ -238,7 +238,6 @@ namespace HallOfBeorn.Services
                 CreateCategoryFilter(@"deal[\s]([\d]|X)*[\s]damage|Deal damage to the attacking enemy|Excess damage dealt by this attack is assigned", Category.Direct_Damage),
                 CreateCategoryFilter(@"(look at|revealed|enters play).*encounter[\s]deck", Category.Encounter_Control),
                 CreateCategoryFilter(@"cancel.*shadow|shadow[\s]cards", Category.Shadow_Control),
-                CreateCategoryFilter(@"place[\s].*progress", Category.Location_Control),
                 CreateCategoryFilter("ready.*(character|hero|him|her)", Category.Readying, "While Dain Ironfoot is ready"),
                 CreateCategoryFilter(@"(return.*discard[\s]pile.*hand|shuffle.*discard[\s]pile.*back)", Category.Recursion, "encounter discard pile"),
                 CreateCategoryFilter(@"(cancel[\s].*shadow[\s]effect|discard[\s].*shadow[\s].*card|shadow (card|cards) dealt|look at.*shadow card)", Category.Shadow_Control),
