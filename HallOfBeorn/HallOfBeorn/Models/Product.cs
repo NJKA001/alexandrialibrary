@@ -18,6 +18,7 @@ namespace HallOfBeorn.Models
         public string Name { get; private set; }
         public string Code { get; private set; }
         public ImageType ImageType { get; private set; }
+        public bool IsPremier { get; protected set; }
 
         public List<CardSet> CardSets { get; private set; }
     }

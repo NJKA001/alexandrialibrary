@@ -10,6 +10,8 @@ namespace HallOfBeorn.Models.Products
         public PassageThroughMirkwoodNightmareProduct()
             : base("Passage Through Mirkwood Nightmare Deck", "MEN01", ImageType.Jpg)
         {
+            this.IsPremier = true;
+
             CardSets.Add(CardSet.PassageThroughMirkwoodNightmare);
         }
     }

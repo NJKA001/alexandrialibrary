@@ -284,6 +284,7 @@
     <Compile Include="Models\Products\EncounterAtAmonDinProduct.cs" />
     <Compile Include="Models\Products\EscapeFromDolGuldurNightmareProduct.cs" />
     <Compile Include="Models\Products\FirstAgeProduct.cs" />
+    <Compile Include="Models\Products\FoundationsOfStoneNightmareProduct.cs" />
     <Compile Include="Models\Products\FoundationsOfStoneProduct.cs" />
     <Compile Include="Models\Products\GenConDeckProductGroup.cs" />
     <Compile Include="Models\Products\HeirsOfNumenorProduct.cs" />
@@ -295,6 +296,7 @@
     <Compile Include="Models\Products\ReturnToMirkwoodProduct.cs" />
     <Compile Include="Models\Products\RoadToRivendellNightmareProduct.cs" />
     <Compile Include="Models\Products\RoadToRivendellProduct.cs" />
+    <Compile Include="Models\Products\ShadowAndFlameNightmareProduct.cs" />
     <Compile Include="Models\Products\ShadowAndFlameProduct.cs" />
     <Compile Include="Models\Products\ShadowsOfMirkwoodProductGroup.cs" />
     <Compile Include="Models\Products\TheBattleOfLakeTownProduct.cs" />
@@ -313,6 +315,7 @@
     <Compile Include="Models\Products\TheHobbitSagaProductGroup.cs" />
     <Compile Include="Models\Products\TheHuntForGollumNightmareProduct.cs" />
     <Compile Include="Models\Products\TheHuntForGollumProduct.cs" />
+    <Compile Include="Models\Products\TheLongDarkNightmareProduct.cs" />
     <Compile Include="Models\Products\TheLongDarkProduct.cs" />
     <Compile Include="Models\Products\TheLordOfTheRingsSagaProductGroup.cs" />
     <Compile Include="Models\Products\TheMassingAtOsgiliathProduct.cs" />
@@ -2022,6 +2025,9 @@
     <Content Include="Images\Products\MEN11.jpg" />
     <Content Include="Images\Products\MEN12.jpg" />
     <Content Include="Images\Products\MEN13.jpg" />
+    <Content Include="Images\Products\MEN14.jpg" />
+    <Content Include="Images\Products\MEN15.jpg" />
+    <Content Include="Images\Products\MEN16.jpg" />
     <Content Include="Images\Products\MEN17.jpg" />
     <Content Include="Images\ShadowDivider.png" />
     <Content Include="Images\Spirit.png" />

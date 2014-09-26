@@ -10,6 +10,8 @@ namespace HallOfBeorn.Models.Products
         public JourneyAlongTheAnduinNightmareProduct()
             : base("Journey Along the Anduin Nightmare Deck", "MEN02", ImageType.Jpg)
         {
+            IsPremier = true;
+
             CardSets.Add(CardSet.JourneyAlongTheAnduinNightmare);
         }
     }

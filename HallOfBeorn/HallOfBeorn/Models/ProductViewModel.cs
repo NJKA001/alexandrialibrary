@@ -34,6 +34,8 @@ namespace HallOfBeorn.Models
 
         public string Name { get { return _product.Name; } }
         public string Code { get { return _product.Code; } }
+        public bool IsPremier { get { return _product.IsPremier; } }
+
         public string ImagePath
         {
             get
