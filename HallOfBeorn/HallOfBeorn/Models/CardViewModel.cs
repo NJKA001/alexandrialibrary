@@ -214,6 +214,10 @@ namespace HallOfBeorn.Models
         {
             get
             {
+                if (_card.IsVariableHitPoints) {
+                    return "X";
+                }
+
                 return _card.HitPoints.HasValue ?
                 _card.HitPoints.ToString()
                 : "-";
@@ -262,11 +266,21 @@ namespace HallOfBeorn.Models
             get
             {
                 if (_card.IsVariableVictoryPoints)
-                    return "X";
+                    return "Victory X.";
 
                 return _card.VictoryPoints > 0 ?
-                    string.Format("Victory: {0}", _card.VictoryPoints)
+                    string.Format("Victory {0}.", _card.VictoryPoints)
                     : (string)null;
+            }
+        }
+
+        public string PassValue
+        {
+            get
+            {
+                return (_card.PassValue.HasValue && _card.PassValue.Value) ?
+                    "PASS"
+                    : string.Empty;
             }
         }
 

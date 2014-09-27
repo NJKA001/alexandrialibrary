@@ -148,7 +148,7 @@ namespace HallOfBeorn.Controllers
                 {
                     token.Prefix = count > 1 ? " " : string.Empty;
 
-                    if (!escaped)
+                    if (!escaped && normalized != "Attack")
                     {
                         //NOTE: A Sphere token has priority over a Trait token
                         if (_cardService.Traits().Any(x => string.Equals(x, normalized + ".")) && !_cardService.Spheres().Any(x => string.Equals(x, normalized)))

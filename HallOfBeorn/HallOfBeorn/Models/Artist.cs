@@ -290,6 +290,9 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Anthony_Devine);
             all.Add(Artist.Lukasz_Jaskolski);
 
+            //Foundations of Stone Nightmare
+            all.Add(Artist.Florian_Devos);
+
             //First Age
             all.Add(Artist.Unknown);
             all.Add(Artist.Ted_Nasmith);
@@ -613,6 +616,7 @@ namespace HallOfBeorn.Models
         public static Artist Even_Mehl_Amundsen = new Artist { Name = "Even Mehl Amundsen", URL = "http://mischeviouslittleelf.deviantart.com" };
         public static Artist Fandy_Sugiarto = new Artist { Name = "Fandy Sugiarto", URL = "https://www.google.com/search?q=fandy+sugiarto+fantasy+art" };
         public static Artist Felicia_Cano = new Artist { Name = "Felicia Cano", URL = "http://feliciacano.deviantart.com" };
+        public static Artist Florian_Devos = new Artist { Name = "Florian Devos", URL = "https://www.google.com/search?q=florian+devos+art" };
         public static Artist Florian_Stitz = new Artist { Name = "Florian Stitz", URL = "http://fstitz.deviantart.com" };
         public static Artist Frank_Walls = new Artist { Name = "Frank Walls", URL = "http://frank-walls.deviantart.com" };
         public static Artist Fredrik_Dahl_Tyskerud = new Artist { Name = "Fredrik Dahl Tyskerud", URL = "http://dcept.deviantart.com" };

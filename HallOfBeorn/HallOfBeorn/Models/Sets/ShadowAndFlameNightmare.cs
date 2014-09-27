@@ -93,6 +93,141 @@ Play Tip: This scenario contains 10 treachery cards with the Attack trait that h
                     return true;
                 }
             });
+            Cards.Add(new Card()
+            {
+                Title = "Terrible Strength",
+                Id = "F0B82FA2-95E0-476A-84DC-5690632ED167",
+                CardType = CardType.Treachery,
+                Traits = new List<string> { "Attack." },
+                Shadow = "Shadow: For each excess point of combat damage dealt by this attack (damage that is dealt beyond the remaining hit points of the character damaged by this attack) you must damage another character you control. Exhaust all characters damaged by this effect.",
+                EncounterSet = "Shadow and Flame Nightmare",
+                Quantity = 2,
+                Number = 2,
+                Artist = Artist.Adam_Lane
+            });
+            Cards.Add(new Card()
+            {
+                Title = "The Dark Fire",
+                Id = "C51679AE-3BF7-4B3A-81C4-EC1E854E4599",
+                CardType = CardType.Treachery,
+                Traits = new List<string> { "Attack." },
+                Shadow = "Shadow: For each point of damage dealt by this attack, heal 1 damage from Durin's Bane.",
+                FlavorText = "The flames roared up to greet it, and wreathed about it; and a black smoke swirled in the air. -The Fellowship of the Ring",
+                EncounterSet = "Shadow and Flame Nightmare",
+                Quantity = 2,
+                Number = 3,
+                Artist = Artist.Anthony_Feliciano
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Blazing Grip",
+                Id = "886F5736-146D-42E0-9C1A-47BCE7EC0AAC",
+                CardType = CardType.Treachery,
+                Traits = new List<string> { "Attack." },
+                Shadow = "Shadow: Discard all cards attached to the defending character and deal it 1 damage. Cannot be canceled.",
+                FlavorText = "Fire came from its nostrils. -The Fellowship of the Ring",
+                EncounterSet = "Shadow and Flame Nightmare",
+                Quantity = 2,
+                Number = 4,
+                Artist = Artist.Jon_Bosco
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Morgoth's Bidding",
+                Id = "62CDF7FE-B451-4FCB-A30C-F6C917E0168A",
+                CardType = CardType.Treachery,
+                Traits = new List<string> { "Attack." },
+                Shadow = "Shadow: If this attack destroys a character, Durin's Bane makes an additional attack against the defending player after this one.",
+                FlavorText = "From out of the shadow a red sword leaped flaming. -The Fellowship of the Ring",
+                EncounterSet = "Shadow and Flame Nightmare",
+                Quantity = 2,
+                Number = 5,
+                Artist = Artist.Alvaro_Calvo_Escudero
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Flame of Udûn",
+                NormalizedTitle = "Flame of Udun",
+                Id = "488E2850-8EE2-425C-9258-6AC3B493EE4F",
+                CardType = CardType.Treachery,
+                Traits = new List<string> { "Attack." },
+                Shadow = "Shadow: Deal Durin's Bane 3 additional shadow cards from the encounter deck (not the Balrog deck).",
+                FlavorText = "The dark figure streaming with fire raced towards them. -The Fellowship of the Ring",
+                EncounterSet = "Shadow and Flame Nightmare",
+                Quantity = 2,
+                Number = 6,
+                Artist = Artist.Anthony_Feliciano
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Servant of Flame",
+                Id = "B95E40F4-DB1A-4D87-9E15-3C247AE77913",
+                CardType = CardType.Enemy,
+                EngagementCost = 12,
+                Threat = 3,
+                Attack = 3,
+                Defense = 2,
+                HitPoints = 5,
+                Traits = new List<string> { "Mordor.", "Orc.", "Uruk." },
+                Text = "Forced: While Durin's Bane has no damage, Servant of Flame gets +2 Attack and +2 Defense.",
+                Shadow = "Shadow: Search the encounter deck for a treachery card with the Shadow or Flame trait and reveal it, if able. Shuffle the encounter deck.",
+                EncounterSet = "Shadow and Flame Nightmare",
+                Quantity = 3,
+                Number = 7,
+                Artist = Artist.Guillaume_Ducos
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Captain of Mordor",
+                Id = "1D4246FD-3712-44EF-AE50-E241F36B019A",
+                CardType = CardType.Enemy,
+                EngagementCost = 42,
+                Threat = 4,
+                Attack = 4,
+                Defense = 3,
+                HitPoints = 7,
+                Traits = new List<string> { "Mordor.", "Orc.", "Uruk." },
+                Text = "Each enemy gets -20 engagement cost.",
+                Shadow = "Shadow: If this attack destroys a character, attacking enemy cannot take damage this round.",
+                FlavorText = "\"And some are large and evil: Black Uruks of Mordor.\" -Gandalf, The Fellowship of the Ring",
+                EncounterSet = "Shadow and Flame Nightmare",
+                Quantity = 2,
+                Number = 8,
+                Artist = Artist.Lukasz_Jaskolski
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Fiery Depths",
+                Id = "E21ECEE3-8A17-4BE6-BC07-A0A39E56022A",
+                CardType = CardType.Location,
+                Threat = 5,
+                QuestPoints = 2,
+                Traits = new List<string> { "Underground." },
+                Text = 
+@"Progress cannot be placed on Fiery Depths while it is in the staging area.
+
+Travel: Each player must move 1 damage from Durin's Bane to a hero to travel here.",
+                FlavorText = "Out of it a fierce red light came, and now and again flames licked at the brink and curled about the bases of the columns. -The Fellowship of the Ring",
+                EncounterSet = "Shadow and Flame Nightmare",
+                Quantity = 2,
+                Number = 9,
+                Artist = Artist.Alvaro_Calvo_Escudero
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Crumbling Stairs",
+                Id = "7178014D-828F-4BDF-A1F5-7B76396BE1A5",
+                CardType = CardType.Location,
+                Threat = 2,
+                QuestPoints = 7,
+                Traits = new List<string> { "Underground." },
+                Text = "While Crumbling Stairs is in the staging area, event cards cost 1 additional matching resource to play from hand.",
+                Shadow = "Shadow: If this attack destroys a character, the defending player must discard all event cards in his hand.",
+                EncounterSet = "Shadow and Flame Nightmare",
+                Quantity = 2,
+                Number = 10,
+                Artist = Artist.Alyn_Spiller
+            });
         }
     }
 }

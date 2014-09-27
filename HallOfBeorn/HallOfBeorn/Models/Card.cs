@@ -78,6 +78,7 @@ namespace HallOfBeorn.Models
         public bool IsVariableThreat { get; set; }
         public bool IsVariableQuestPoints { get; set; }
         public bool IsVariableAttack { get; set; }
+        public bool IsVariableHitPoints { get; set; }
         public bool IsVariableVictoryPoints { get; set; }
         public byte Willpower { get; set; }
         public byte Attack { get; set; }
@@ -100,6 +101,7 @@ namespace HallOfBeorn.Models
         public string EncounterSet { get; set; }
         public List<EncounterSet> IncludedEncounterSets { get; set; }
         public byte VictoryPoints { get; set; }
+        public bool? PassValue { get; set; }
         public byte Quantity { get; set; }
         public byte? EasyModeQuantity { get; set; }
         public byte? NightmareModeQuantity { get; set; }

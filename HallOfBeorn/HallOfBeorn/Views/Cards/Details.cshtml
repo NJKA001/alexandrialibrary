@@ -335,7 +335,12 @@
                             @if (!string.IsNullOrEmpty(@Model.VictoryPoints))
                             {
                                 <br />
-                                <div style="text-align:right;"><b>@Model.VictoryPoints</b></div>
+                                <div style="text-align:right;font-weight:bold;">@Model.VictoryPoints</div>
+                            }
+                            @if (!string.IsNullOrEmpty(@Model.PassValue))
+                            {
+                                <br />
+                                <div style="text-align:right;font-weight:bold;">@Model.PassValue</div>
                             }
                         </div>
 
