@@ -1121,7 +1121,15 @@ namespace HallOfBeorn.Services
             if (string.IsNullOrEmpty(slug))
                 return null;
 
-            return cards.Values.Where(x => x.Slug.ToLower() == slug.ToLower()).FirstOrDefault();
+            var exact = cards.Values.Where(x => x.Slug.ToLower() == slug.ToLower()).FirstOrDefault();
+            if (exact != null)
+                return exact;
+
+            var partials = cards.Values.Where(x => x.Slug.ToLower().StartsWith(slug.ToLower())).ToList();
+            if (partials.Count == 1)
+                return partials.First();
+
+            return null;
         }
 
         public IEnumerable<string> Costs()
