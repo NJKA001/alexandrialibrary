@@ -355,6 +355,7 @@
     <Compile Include="Models\Sets\EscapeFromDolGuldurNightmare.cs" />
     <Compile Include="Models\Sets\FlightFromMoriaNightmare.cs" />
     <Compile Include="Models\Sets\FoundationsOfStone.cs" />
+    <Compile Include="Models\Sets\FoundationsOfStoneNightmare.cs" />
     <Compile Include="Models\Sets\HeirsOfNumenor.cs" />
     <Compile Include="Models\Sets\IntoThePitNightmare.cs" />
     <Compile Include="Models\Sets\JourneyAlongTheAnduinNightmare.cs" />
@@ -367,6 +368,7 @@
     <Compile Include="Models\Sets\RoadToRivendell.cs" />
     <Compile Include="Models\Sets\RoadToRivendellNightmare.cs" />
     <Compile Include="Models\Sets\ShadowAndFlame.cs" />
+    <Compile Include="Models\Sets\ShadowAndFlameNightmare.cs" />
     <Compile Include="Models\Sets\TheBattleOfLakeTown.cs" />
     <Compile Include="Models\Sets\TheBlackRiders.cs" />
     <Compile Include="Models\Sets\TheBloodOfGondor.cs" />
@@ -382,6 +384,7 @@
     <Compile Include="Models\Sets\TheHuntForGollum.cs" />
     <Compile Include="Models\Sets\TheHuntForGollumNightmare.cs" />
     <Compile Include="Models\Sets\TheLongDark.cs" />
+    <Compile Include="Models\Sets\TheLongDarkNightmare.cs" />
     <Compile Include="Models\Sets\TheMassingAtOsgiliath.cs" />
     <Compile Include="Models\Sets\TheMorgulVale.cs" />
     <Compile Include="Models\Sets\TheOldForest.cs" />
@@ -760,6 +763,10 @@
     <Content Include="Images\Cards\Flight-from-Moria-Nightmare\Search-for-an-Exit-Pursued-by-Shadow-2B.png" />
     <Content Include="Images\Cards\Flight-from-Moria-Nightmare\Shadowed-Corridor.png" />
     <Content Include="Images\Cards\Flight-from-Moria-Nightmare\Swarming-Goblins.png" />
+    <Content Include="Images\Cards\Foundations-of-Stone-Nightmare\Foundations-of-Stone-Nightmare.png" />
+    <Content Include="Images\Cards\Foundations-of-Stone-Nightmare\Giant-Cave-Centipede.png" />
+    <Content Include="Images\Cards\Foundations-of-Stone-Nightmare\Goblins-of-the-Deep-Nightmare.png" />
+    <Content Include="Images\Cards\Foundations-of-Stone-Nightmare\Nest-of-Horrors.png" />
     <Content Include="Images\Cards\Foundations-of-Stone\Asfaloth.png" />
     <Content Include="Images\Cards\Foundations-of-Stone\Below-the-Mines-Old-One-Lair.png" />
     <Content Include="Images\Cards\Foundations-of-Stone\Below-the-Mines-Sheltered-Rocks.png" />
@@ -1077,6 +1084,8 @@
     <Content Include="Images\Cards\Road-to-Rivendell\Song-of-Eärendil.png" />
     <Content Include="Images\Cards\Road-to-Rivendell\The-End-Comes.png" />
     <Content Include="Images\Cards\Road-to-Rivendell\Wild-Bear.png" />
+    <Content Include="Images\Cards\Shadow-and-Flame-Nightmare\Shadow-and-Flame-Nightmare-SetupA.png" />
+    <Content Include="Images\Cards\Shadow-and-Flame-Nightmare\Shadow-and-Flame-Nightmare.png" />
     <Content Include="Images\Cards\Shadow-and-Flame\Counter-Spell.png" />
     <Content Include="Images\Cards\Shadow-and-Flame\Dark-Pit.png" />
     <Content Include="Images\Cards\Shadow-and-Flame\Durin%27s-Bane.png" />
@@ -1577,6 +1586,8 @@
     <Content Include="Images\Cards\The-Hunt-For-Gollum\The-West-Bank.png" />
     <Content Include="Images\Cards\The-Hunt-For-Gollum\Westfold-Horse-Breaker.png" />
     <Content Include="Images\Cards\The-Hunt-For-Gollum\Winged-Guardian.png" />
+    <Content Include="Images\Cards\The-Long-Dark-Nightmare\The-Long-Dark-Nightmare-SetupA.png" />
+    <Content Include="Images\Cards\The-Long-Dark-Nightmare\The-Long-Dark-Nightmare.png" />
     <Content Include="Images\Cards\The-Long-Dark\Abandoned-Mine.png" />
     <Content Include="Images\Cards\The-Long-Dark\Cave-Spider.png" />
     <Content Include="Images\Cards\The-Long-Dark\Continuing-Eastward.png" />

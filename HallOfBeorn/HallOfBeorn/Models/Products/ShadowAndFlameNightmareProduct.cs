@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using HallOfBeorn.Models.Sets;
 
 namespace HallOfBeorn.Models.Products
 {
@@ -10,6 +11,7 @@ namespace HallOfBeorn.Models.Products
         public ShadowAndFlameNightmareProduct()
             : base("Shadow and Flame Nightmare Deck", "MEN16", ImageType.Jpg)
         {
+            CardSets.Add(new ShadowAndFlameNightmare());
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using HallOfBeorn.Models.Sets;
 
 namespace HallOfBeorn.Models.Products
 {
@@ -10,6 +11,7 @@ namespace HallOfBeorn.Models.Products
         public FoundationsOfStoneNightmareProduct()
             : base("Foundations of Stone Nightmare Deck", "MEN15", ImageType.Jpg)
         {
+            CardSets.Add(new FoundationsOfStoneNightmare());
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using HallOfBeorn.Models.Sets;
 
 namespace HallOfBeorn.Models.Products
 {
@@ -10,6 +11,7 @@ namespace HallOfBeorn.Models.Products
         public TheLongDarkNightmareProduct()
             : base("The Long Dark Nightmare Deck", "MEN14", ImageType.Jpg)
         {
+            CardSets.Add(new TheLongDarkNightmare());
         }
     }
 }
