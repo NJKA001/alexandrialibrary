@@ -768,12 +768,11 @@
     <Content Include="Images\Cards\Foundations-of-Stone-Nightmare\Foundations-of-Stone-Nightmare-SetupB.jpg" />
     <Content Include="Images\Cards\Foundations-of-Stone-Nightmare\Foundations-of-Stone-Nightmare.png" />
     <Content Include="Images\Cards\Foundations-of-Stone-Nightmare\Giant-Cave-Centipede.jpg" />
-    <Content Include="Images\Cards\Foundations-of-Stone-Nightmare\Giant-Cave-Centipede.png" />
     <Content Include="Images\Cards\Foundations-of-Stone-Nightmare\Goblins-of-the-Deep-Nightmare.png" />
     <Content Include="Images\Cards\Foundations-of-Stone-Nightmare\Mithril-Seeker.jpg" />
     <Content Include="Images\Cards\Foundations-of-Stone-Nightmare\Nest-of-Horrors.jpg" />
     <Content Include="Images\Cards\Foundations-of-Stone-Nightmare\Nest-of-Horrors.png" />
-    <Content Include="Images\Cards\Foundations-of-Stone-Nightmare\Primevel-Thing.jpg" />
+    <Content Include="Images\Cards\Foundations-of-Stone-Nightmare\Primeval-Thing.jpg" />
     <Content Include="Images\Cards\Foundations-of-Stone-Nightmare\Shivering-River.jpg" />
     <Content Include="Images\Cards\Foundations-of-Stone-Nightmare\Unspeakable-Thing.jpg" />
     <Content Include="Images\Cards\Foundations-of-Stone\Asfaloth.png" />
@@ -1101,7 +1100,6 @@
     <Content Include="Images\Cards\Shadow-and-Flame-Nightmare\Morgoth%27s-Bidding.jpg" />
     <Content Include="Images\Cards\Shadow-and-Flame-Nightmare\Servant-of-Flame.jpg" />
     <Content Include="Images\Cards\Shadow-and-Flame-Nightmare\Shadow-and-Flame-Nightmare-SetupA.jpg" />
-    <Content Include="Images\Cards\Shadow-and-Flame-Nightmare\Shadow-and-Flame-Nightmare-SetupA.png" />
     <Content Include="Images\Cards\Shadow-and-Flame-Nightmare\Shadow-and-Flame-Nightmare-SetupB.jpg" />
     <Content Include="Images\Cards\Shadow-and-Flame-Nightmare\Shadow-and-Flame-Nightmare.png" />
     <Content Include="Images\Cards\Shadow-and-Flame-Nightmare\Terrible-Strength.jpg" />
@@ -1613,7 +1611,6 @@
     <Content Include="Images\Cards\The-Long-Dark-Nightmare\Lost-and-Helpless.jpg" />
     <Content Include="Images\Cards\The-Long-Dark-Nightmare\Sentinel-of-the-Deep.jpg" />
     <Content Include="Images\Cards\The-Long-Dark-Nightmare\The-Long-Dark-Nightmare-SetupA.jpg" />
-    <Content Include="Images\Cards\The-Long-Dark-Nightmare\The-Long-Dark-Nightmare-SetupA.png" />
     <Content Include="Images\Cards\The-Long-Dark-Nightmare\The-Long-Dark-Nightmare-SetupB.jpg" />
     <Content Include="Images\Cards\The-Long-Dark-Nightmare\The-Long-Dark-Nightmare.png" />
     <Content Include="Images\Cards\The-Long-Dark-Nightmare\Trapdoor-Spider.jpg" />

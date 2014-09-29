@@ -19,7 +19,7 @@ namespace HallOfBeorn.Models.Sets
             {
                 Title = "The Long Dark Nightmare",
                 HasSecondImage = true,
-                ImageType = Models.ImageType.Png,
+                ImageType = Models.ImageType.Jpg,
                 Id = "A4144835-46A7-460A-8D58-CC1C25D973ED",
                 CardType = CardType.Nightmare_Setup,
                 Text =
@@ -115,6 +115,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             {
                 Title = "Goblin Stalker",
                 Id = "3E3EBBD8-C3B2-4745-98BE-F329F68AB7D1",
+                ImageType = Models.ImageType.Jpg,
                 CardType = CardType.Enemy,
                 EngagementCost = 28,
                 Threat = 3,
@@ -136,6 +137,7 @@ Forced: When ~Goblin Stalker is dealt a shadow card with 'PASS' printed in its t
             {
                 Title = "Trapdoor Spider",
                 Id = "D50CA363-DA45-4AEB-8DAC-160A23158B5D",
+                ImageType = Models.ImageType.Jpg,
                 CardType = CardType.Enemy,
                 EngagementCost = 42,
                 Threat = 4,
@@ -157,6 +159,7 @@ Lost: Trapdoor ~Spider engages the last player and makes an immediate attack.",
             {
                 Title = "Sentinel of the Deep",
                 Id = "C9674FC1-259A-48DE-947A-2D04B34BFFE4",
+                ImageType = Models.ImageType.Jpg,
                 CardType = CardType.Enemy,
                 EngagementCost = 12,
                 Threat = 2,
@@ -175,6 +178,7 @@ Lost: Trapdoor ~Spider engages the last player and makes an immediate attack.",
             {
                 Title = "Eastern Mines",
                 Id = "FF85DD28-BAF1-4447-A088-C12B2C395778",
+                ImageType = Models.ImageType.Jpg,
                 CardType = CardType.Location,
                 Threat = 5,
                 QuestPoints = 4,
@@ -190,6 +194,7 @@ Lost: Trapdoor ~Spider engages the last player and makes an immediate attack.",
             {
                 Title = "Bottomless Chasm",
                 Id = "FC9A11F8-7CCA-45AE-A726-B6A8AFE1F82B",
+                ImageType = Models.ImageType.Jpg,
                 CardType = CardType.Location,
                 Threat = 3,
                 QuestPoints = 6,
@@ -201,10 +206,11 @@ Lost: Trapdoor ~Spider engages the last player and makes an immediate attack.",
                 Number = 6,
                 Artist = Artist.Jake_Bullock
             });
-                                    Cards.Add(new Card()
+            Cards.Add(new Card()
             {
                 Title = "Dreadful Deep",
                 Id = "73E7606B-B5E7-4AAC-BC71-2D4576E24A3C",
+                ImageType = Models.ImageType.Jpg,
                 CardType = CardType.Treachery,
                 Text = "When Revealed: Starting with the first player, each player must choose and trigger a different \"Lost:\" effect in play.",
                 Shadow = "Shadow: Make a locate test. If this test is failed, return attacking enemy to the staging area after this attack and trigger all \"Lost:\" effects in play.",
@@ -213,10 +219,11 @@ Lost: Trapdoor ~Spider engages the last player and makes an immediate attack.",
                 Number = 7,
                 Artist = Artist.Brian_Valenzuela
             });
-                                    Cards.Add(new Card()
+            Cards.Add(new Card()
             {
                 Title = "Lost and Helpless",
                 Id = "46EB8929-9363-49FE-A509-578AF5D52D7A",
+                ImageType = Models.ImageType.Jpg,
                 CardType = CardType.Treachery,
                 Keywords = new List<string> { "Surge." },
                 Text = "When Revealed: Attach to a hero. (Counts as a Condition attachment with the text: \"Lost: Discard attached hero.\")",

@@ -19,7 +19,7 @@ namespace HallOfBeorn.Models.Sets
             {
                 Title = "Foundations of Stone Nightmare",
                 HasSecondImage = true,
-                ImageType = Models.ImageType.Png,
+                ImageType = Models.ImageType.Jpg,
                 Id = "42D3C22B-7DAA-4C93-A7EE-2AA5927E8304",
                 CardType = CardType.Nightmare_Setup,
                 Text =
@@ -104,8 +104,9 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             });
             Cards.Add(new Card()
             {
-                Title = "Mitril Seeker",
+                Title = "Mithril Seeker",
                 Id = "7B51A03B-2531-4BCA-85C0-3056B8BB8E2E",
+                ImageType = Models.ImageType.Jpg,
                 CardType = CardType.Enemy,
                 EngagementCost = 18,
                 Threat = 2,
@@ -128,7 +129,7 @@ Forced: When Mithril Seeker attacks, move 1 resource from each of the defending 
             {
                 Title = "Giant Cave Centipede",
                 Id = "F196C7C0-B375-4DF9-BBD1-961945D2CD5A",
-                ImageType = Models.ImageType.Png,
+                ImageType = Models.ImageType.Jpg,
                 CardType = CardType.Enemy,
                 EngagementCost = 28,
                 Threat = 3,
@@ -139,7 +140,7 @@ Forced: When Mithril Seeker attacks, move 1 resource from each of the defending 
                 Text = 
 @"When Revealed: Each player at this stage shuffles the card in his hand with the highest printed cost back into his deck.
 
-Forced: At the end of the combat phase, if Giant Centipede is engaged with a player, that player chooses and adds it to a different player's staging area.",
+Forced: At the end of the combat phase, if ~Giant Centipede is engaged with a player, that player chooses and adds it to a different player's staging area.",
                 EncounterSet = "Goblins of the Deep Nightmare",
                 ScenarioTitle = "Foundations of Stone Nightmare",
                 Quantity = 2,
@@ -149,7 +150,8 @@ Forced: At the end of the combat phase, if Giant Centipede is engaged with a pla
             Cards.Add(new Card()
             {
                 Title = "Unspeakable Thing",
-                Id = "5B254574-F4C5-430C-A976-3224F3293267",
+                Id = "D004426E-A967-4D47-AA80-58067833C531",
+                ImageType = Models.ImageType.Jpg,
                 CardType = CardType.Enemy,
                 EngagementCost = 15,
                 Threat = 5,
@@ -171,7 +173,8 @@ X is the printed cost of all attached cards on this card. If there are no cards 
             Cards.Add(new Card()
             {
                 Title = "Primeval Thing",
-                Id = "3B17D22E-D2A1-4D5E-982C-A042338D2FA1",
+                Id = "93BC53CD-B8C6-4385-B80E-AD244AC73CA6",
+                ImageType = Models.ImageType.Jpg,
                 CardType = CardType.Enemy,
                 EngagementCost = 45,
                 Threat = 6,
@@ -190,11 +193,11 @@ X is the printed cost of all attached cards on this card. If there are no cards 
                 Number = 5,
                 Artist = Artist.Alvaro_Calvo_Escudero
             });
-             Cards.Add(new Card()
+            Cards.Add(new Card()
             {
                 Title = "Nest of Horrors",
                 Id = "E4C39446-C358-40B4-8487-BA73FD9BDDF6",
-                ImageType = Models.ImageType.Png,
+                ImageType = Models.ImageType.Jpg,
                 CardType = CardType.Location,
                 Threat = 4,
                 QuestPoints = 4,
@@ -209,6 +212,7 @@ X is the printed cost of all attached cards on this card. If there are no cards 
             {
                 Title = "Shivering River",
                 Id = "2CA05E2A-9775-40BC-A7D6-16C0B746A75C",
+                ImageType = Models.ImageType.Jpg,
                 CardType = CardType.Location,
                 Threat = 3,
                 QuestPoints = 7,
@@ -224,6 +228,7 @@ X is the printed cost of all attached cards on this card. If there are no cards 
             {
                 Title = "Chill of the Roots",
                 Id = "A374694E-1C4F-4A4D-9510-7980D4912D8D",
+                ImageType = Models.ImageType.Jpg,
                 CardType = CardType.Treachery,
                 Text = "When Revealed: Each player must either discard his hand, or raise his threat by the number of cards in his hand. If no cards were discarded by this effect, Chill of the Roots gains surge.",
                 Shadow = "Shadow: If attacking enemy is Nameless, attach the top card of the defending player's deck to it.",
