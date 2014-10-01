@@ -19,6 +19,22 @@ namespace HallOfBeorn.Controllers
 
         private CardService _cardService;
 
+        private bool IsPlayerCard(Card card)
+        {
+            switch (card.CardType)
+            {
+                case CardType.Hero:
+                case CardType.Ally:
+                case CardType.Attachment:
+                case CardType.Event:
+                case CardType.Boon:
+                case CardType.Treasure:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
         public ActionResult Get(string name)
         {
             var result = new JsonResult() { JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -28,6 +44,9 @@ namespace HallOfBeorn.Controllers
                 case "Cards":
                     result.Data = _cardService.All().Select(x => new SimpleCard(x)).ToList();
                     break;
+                case "PlayerCards":
+                    result.Data = _cardService.All().Where(x => IsPlayerCard(x)).Select(y => new SimpleCard(y)).ToList();
+                    break;
                 case "Scenarios":
                     var scenarios = new List<SimpleScenario>();
                     foreach (var group in _cardService.ScenarioGroups())
@@ -36,7 +55,7 @@ namespace HallOfBeorn.Controllers
                         {
                             var scenario = new SimpleScenario() { Title = item.Title, Number = (uint)item.Number };
 
-                            foreach (var quest in item.QuestCards)
+                            foreach (var quest in item.QuestCards.Select(x => x.Quest))
                             {
                                 scenario.QuestCards.Add(new SimpleCard(quest));
                             }

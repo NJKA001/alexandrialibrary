@@ -55,6 +55,16 @@ namespace HallOfBeorn.Models.Simple
                 this.Front.Keywords.Add(keyword);
             }
 
+            if (card.PassValue.HasValue && card.PassValue.Value)
+            {
+                this.Front.Keywords.Add("PASS.");
+            }
+
+            if (card.VictoryPoints > 0)
+            {
+                this.Front.Keywords.Add("Victory " + card.VictoryPoints.ToString() + ".");
+            }
+
             switch (card.CardType)
             {
                 case Models.CardType.Hero:
@@ -172,11 +182,11 @@ namespace HallOfBeorn.Models.Simple
 
         private void InitializeEnemy(Card card)
         {
-            this.Front.Stats[STAT_ENGAGEMENT_COST] = card.EngagementCost.HasValue ? "X" : card.EngagementCost.Value.ToString();
+            this.Front.Stats[STAT_ENGAGEMENT_COST] = card.EngagementCost.HasValue ? card.EngagementCost.Value.ToString() : "X";
             this.Front.Stats[STAT_THREAT] = card.IsVariableThreat ? "X" : card.Threat.ToString();
             this.Front.Stats[STAT_ATTACK] = card.IsVariableAttack ? "X" : card.Attack.ToString();
             this.Front.Stats[STAT_DEFENSE] = card.Defense.ToString();
-            this.Front.Stats[STAT_HIT_POINTS] = !card.HitPoints.HasValue ? "X" : card.HitPoints.Value.ToString();
+            this.Front.Stats[STAT_HIT_POINTS] = card.IsVariableHitPoints || !card.HitPoints.HasValue ? "X" : card.HitPoints.Value.ToString();
         }
 
         private void InitializeLocation(Card card)
