@@ -47,12 +47,12 @@ namespace HallOfBeorn.Models.Simple
 
             foreach (var trait in card.Traits)
             {
-                this.Front.Traits.Add(trait);
+                this.Front.Traits.Add(trait.Trim());
             }
 
             foreach (var keyword in card.Keywords)
             {
-                this.Front.Keywords.Add(keyword);
+                this.Front.Keywords.Add(keyword.Replace("~", string.Empty).Replace("[Card]", card.Title).Trim());
             }
 
             if (card.PassValue.HasValue && card.PassValue.Value)
@@ -140,16 +140,25 @@ namespace HallOfBeorn.Models.Simple
         public const string STAT_HIT_POINTS = "HitPoints";
         public const string STAT_QUEST_POINTS = "QuestPoints";
         public const string STAT_STAGE_NUMBER = "StageNumber";
+
+        private const string URL_ROOT = "http://hallofbeorn.com";
         #endregion
 
         private string GetFrontImagePath(Card card)
         {
-            return new CardViewModel(card).ImagePath1;
+            var viewModel = new CardViewModel(card);
+            return (!string.IsNullOrEmpty(viewModel.ImagePath1)) ?
+                URL_ROOT + viewModel.ImagePath1
+                : URL_ROOT + viewModel.ImagePath;
         }
 
         private string GetBackImagePath(Card card)
         {
-            return new CardViewModel(card).ImagePath2;
+            var viewModel = new CardViewModel(card);
+
+            return (!string.IsNullOrEmpty(viewModel.ImagePath2)) ?
+                URL_ROOT + viewModel.ImagePath2
+                : null;
         }
 
         private void InitializeHero(Card card)
@@ -254,7 +263,7 @@ namespace HallOfBeorn.Models.Simple
             {
                 foreach (var effect in card.Text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    this.Front.Text.Add(effect.Replace('"', '`'));
+                    this.Front.Text.Add(effect.Replace('"', '`').Replace("~", string.Empty));
                 }
             }
 
@@ -272,7 +281,7 @@ namespace HallOfBeorn.Models.Simple
 
                 foreach (var effect in card.OppositeText.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    this.Back.Text.Add(effect.Replace('"', '`'));
+                    this.Back.Text.Add(effect.Replace('"', '`').Replace("~", string.Empty));
                 }
             }
 
