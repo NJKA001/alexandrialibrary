@@ -94,6 +94,7 @@ namespace HallOfBeorn.Models
         public static CardSet TheHobbitOnTheDoorstep = new Sets.TheHobbitOntheDoorstep();
 
         public static CardSet TheBlackRiders = new Sets.TheBlackRiders();
+        public static CardSet TheRoadDarkens = new Sets.TheRoadDarkens();
 
         public static CardSet TheMassingAtOsgiliath = new Sets.TheMassingatOsgiliath();
         public static CardSet TheBattleOfLakeTown = new Sets.TheBattleofLakeTown();
@@ -118,7 +119,10 @@ namespace HallOfBeorn.Models
         public static CardSet TheRedhornGateNightmare = new Sets.TheRedhornGateNightmare();
         public static CardSet RoadToRivendellNightmare = new Sets.RoadToRivendellNightmare();
         public static CardSet TheWatcherInTheWaterNightmare = new Sets.TheWatcherInTheWaterNightmare();
+        public static CardSet TheLongDarkNightmare = new Sets.TheLongDarkNightmare();
+        public static CardSet FoundationsOfStoneNightmare = new Sets.FoundationsOfStoneNightmare();
+        public static CardSet ShadowAndFlameNightmare = new Sets.ShadowAndFlameNightmare();
 
-        //public static CardSet FirstAge = new Sets.FirstAge();
+        public static CardSet FirstAge = new Sets.FirstAge();
     }
 }

@@ -320,7 +320,7 @@ namespace HallOfBeorn.Services
             productGroups.Add(new GenConDeckProductGroup());
             productGroups.Add(new NightmareDeckProductGroup());
 
-            //productGroups.Add(new CustomProductGroup());
+            productGroups.Add(new CustomProductGroup());
 
             foreach (var productGroup in productGroups)
             {

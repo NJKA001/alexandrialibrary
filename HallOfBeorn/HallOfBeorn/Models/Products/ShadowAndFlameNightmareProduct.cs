@@ -11,7 +11,7 @@ namespace HallOfBeorn.Models.Products
         public ShadowAndFlameNightmareProduct()
             : base("Shadow and Flame Nightmare Deck", "MEN16", ImageType.Jpg)
         {
-            CardSets.Add(new ShadowAndFlameNightmare());
+            CardSets.Add(CardSet.ShadowAndFlameNightmare);
         }
     }
 }

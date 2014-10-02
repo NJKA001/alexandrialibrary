@@ -14,7 +14,7 @@ namespace HallOfBeorn.Models
         Spirit = 4,
         Lore = 5,
         Baggins = 6,
-        Fellowship = 7
-        //,Mastery = 8
+        Fellowship = 7,
+        Mastery = 8
     }
 }

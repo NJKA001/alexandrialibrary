@@ -5,7 +5,6 @@ using System.Web;
 
 namespace HallOfBeorn.Models.Sets
 {
-    /*
     public class FirstAge : CardSet
     {
         protected override void Initialize()
@@ -443,7 +442,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Ally,
                 Sphere = Sphere.Neutral,
                 Traits = new List<string>() { "Maia." },
-                Keywords = new List<string>() { "At the end of the round, discard Melian from play.", "Melian cannot attack or defend." },
+                Keywords = new List<string>() { "At the end of the round, discard [Card] from play.", "Melian cannot attack or defend." },
                 ResourceCost = 3,
                 Willpower = 4,
                 Attack = 0,
@@ -3091,5 +3090,5 @@ When engaged with an enemy with the Sneak keyword, players may cancel all progre
                 Artist = Artist.Jenny_Dolfen
             });
         }
-    }*/
+    }
 }

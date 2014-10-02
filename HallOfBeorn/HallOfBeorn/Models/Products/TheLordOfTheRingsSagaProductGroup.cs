@@ -11,6 +11,7 @@ namespace HallOfBeorn.Models.Products
             : base("The Lord of the Rings Saga")
         {
             AddProduct(new TheBlackRidersProduct());
+            AddProduct(new TheRoadDarkensProduct());
         }
     }
 }
