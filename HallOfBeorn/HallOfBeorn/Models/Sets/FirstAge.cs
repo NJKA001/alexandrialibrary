@@ -5,6 +5,7 @@ using System.Web;
 
 namespace HallOfBeorn.Models.Sets
 {
+    /*
     public class FirstAge : CardSet
     {
         protected override void Initialize()
@@ -3090,5 +3091,5 @@ When engaged with an enemy with the Sneak keyword, players may cancel all progre
                 Artist = Artist.Jenny_Dolfen
             });
         }
-    }
+    }*/
 }

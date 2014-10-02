@@ -123,6 +123,6 @@ namespace HallOfBeorn.Models
         public static CardSet FoundationsOfStoneNightmare = new Sets.FoundationsOfStoneNightmare();
         public static CardSet ShadowAndFlameNightmare = new Sets.ShadowAndFlameNightmare();
 
-        public static CardSet FirstAge = new Sets.FirstAge();
+        //public static CardSet FirstAge = new Sets.FirstAge();
     }
 }

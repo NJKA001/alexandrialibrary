@@ -7,7 +7,6 @@ using HallOfBeorn.Models;
 using HallOfBeorn.Models.Decks.HallOfBeorn;
 using HallOfBeorn.Models.Decks.TalesFromTheCards;
 using HallOfBeorn.Models.Products;
-//using HallOfBeorn.Models.Sets;
 
 namespace HallOfBeorn.Services
 {
@@ -320,7 +319,7 @@ namespace HallOfBeorn.Services
             productGroups.Add(new GenConDeckProductGroup());
             productGroups.Add(new NightmareDeckProductGroup());
 
-            productGroups.Add(new CustomProductGroup());
+            //productGroups.Add(new CustomProductGroup());
 
             foreach (var productGroup in productGroups)
             {
