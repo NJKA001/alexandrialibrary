@@ -260,6 +260,43 @@ namespace HallOfBeorn.Models.Sets
                 Number = 18,
                 Quantity = 1
             });
+            Cards.Add(new Card()
+            {
+                Title = "The Ring Goes South",
+                CardType = Models.CardType.Campaign,
+                CampaignCardType = Models.CampaignCardType.Campaign,
+                SlugIncludesType = true,
+                Id = "DFF44707-3468-4E8F-AB49-DF4E5E6D93FC",
+                OppositeTitle = "The Lord of the Rings Part 4",
+                Text = 
+@"You are playing in Campaign Mode.
+
+Setup: Each player may change hero cards he controls without incurring the +1 threat penalty. The players have earned the boon cards: Sting, Mithril Shirt, Glamdring, and Andúril. Each player chooses one and adds it to his hand. If any of those boon cards remain unchosen, shuffle them into the first player's deck.",
+                FlavorText = "\"I think that this task is appointed for you, Frodo; and that if you do not find a way, no one will.\" -Elrond, The Fellowship of the Ring",
+                OppositeText = "Resolution: If Lust for the Ring is attached to a hero, the players have earned that burden.",
+                OppositeFlavorText = "They were just in time. Sam and Frodo were only a few steps up, and Gandalf had just begun to climb, when the groping tentacles writhed across the narrow shore and fingered the cliff-wall and the doors. One came wriggling over the threshold, glistening in the starlight. Gandalf turned and paused. If he was considering what word would close the gate again from within, there was no need. Many coiling arms seized the doors on either side, and with horrible strength, swung them round. With a shattering echo they slammed, and all light was lost. -The Fellowship of the Ring",
+                EncounterSet = "The Ring Goes South",
+                Number = 19,
+                Quantity = 1,
+                Artist = Artist.Ignacio_Bazan_Lazcano
+            });
+            Cards.Add(new Card()
+            {
+                Title = "The Council of Elrond",
+                Id = "D49C15DD-1D36-4716-A754-B192CC59D5E3",
+                ImageType = Models.ImageType.Jpg,
+                HasSecondImage = true,
+                CardType = CardType.Quest,
+                StageNumber = 1,
+                EncounterSet = "The Ring Goes South",
+                Text = "Setup: Set Lust for the Ring, Redhorn Pass, Doors of Durin and Watcher in the Water aside, out of play. Shuffle the encounter deck.",
+                FlavorText = "In the House of Elrond, the evil wound that Frodo received on Weathertop is healed and he is reunited with his uncle Bilbo. The One Ring cannot remain hidden in Rivendell for long, so Lord Elrond summons a council to decide what should be done to protect the Free Peoples of Middle-earth.",
+                QuestPoints = null,
+                OppositeText = "Forced: At the end of the planning phase, each player places the top card of his deck faceup in front of him, in player order, until there are a total of 4 faceup cards between the players. The first player chooses 1 faceup card to be played for 0 cost, 1 to add to its owner's hand, 1 to discard, and 1 to shuffle into its owner's deck. Then, either shuffle Lust for the Ring into the encounter deck, or raise each player's threat by 5. Advance to stage 2.",
+                Number = 20,
+                Quantity = 1,
+                Artist = Artist.Ignacio_Bazan_Lazcano
+            });
         }
     }
 }
