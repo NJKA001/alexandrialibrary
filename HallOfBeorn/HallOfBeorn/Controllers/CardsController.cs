@@ -27,7 +27,7 @@ namespace HallOfBeorn.Controllers
             SearchViewModel.Costs = _cardService.Costs().GetSelectListItems();
             SearchViewModel.CardSets = _cardService.SetNames.GetSelectListItems();
             SearchViewModel.EncounterSets = _cardService.EncounterSetNames.GetSelectListItems();
-            SearchViewModel.Categories = _cardService.Categories().Select(x => x.ToString().Replace('_', ' ')).GetSelectListItems();
+            SearchViewModel.Categories = _cardService.Categories().Select(x => x.ToString().Replace('_', ' ')).GetSelectListItems().OrderBy(x => x.Text).ToList();
         }
 
         private IEnumerable<CardEffect> ParseCardEffects(Card card, string text)

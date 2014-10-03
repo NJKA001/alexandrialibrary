@@ -220,17 +220,18 @@ namespace HallOfBeorn.Services
             {
                 CreateCategoryFilter(@"add[\s]{1}[\d]{1}[\s]{1}resource", Category.Resource_Acceleration),
                 CreateCategoryFilter(@"move[\s]{1}.*[\s]{1}resource|Pay 1 resource from a hero's resource pool to add 1 resource|add 1 resource to a Gondor or Noble", Category.Resource_Smoothing),
-                CreateCategoryFilter(@"(ally|allies){1,}.*into[\s]play", Category.Ally_Mustering),
+                CreateCategoryFilter(@"(ally|allies){1,}.*into[\s]play", Category.Mustering),
                 CreateCategoryFilter(@"\+[\d]*[\s]Attack", Category.Attack_Bonus),
                 CreateCategoryFilter(@"\+[\d]*[\s]Defense", Category.Defense_Bonus),
                 CreateCategoryFilter(@"\+[\d]*[\s]Willpower", Category.Willpower_Bonus),
                 CreateCategoryFilter(@"\+[\d]*[\s]Hit[\s]Point", Category.Hit_Point_Bonus),
-                CreateCategoryFilter(@"(draw|draws)[\s][\w]*[\s]card", Category.Card_Draw),
+                CreateCategoryFilter(@"(draw|draws)[\s][\w]*[\s]card|look at the top 2 cards of your deck. Add 1 to your hand", Category.Card_Draw),
                 CreateCategoryFilter(@"search[\s].*your[\s]deck", Category.Card_Search),
                 CreateCategoryFilter(@"(look|looks)[\s]at[\s].*[\s]deck", Category.Player_Scrying, "encounter deck"),
                 CreateCategoryFilter(@"(look|looks)[\s]at[\s].*encounter[\s]deck", Category.Encounter_Scrying),
                 CreateCategoryFilter("(enemy|enemies).*cannot attack", Category.Combat_Control),
                 CreateCategoryFilter(@"heal[\s].*damage", Category.Healing),
+                CreateCategoryFilter(@"discard.*Condition[\s]attachment", Category.Condition_Control),
                 CreateCategoryFilter(@"place[\s].*progress|switch the active location|location enters play", Category.Location_Control),
                 CreateCategoryFilter("ready.*(character|hero|ally|allies|him|her|them)", Category.Readying, "While Dain Ironfoot is ready"),
                 CreateCategoryFilter(@"(return.*discard[\s]pile.*hand|shuffle.*discard[\s]pile.*back)", Category.Recursion, "encounter discard pile"),
@@ -242,7 +243,8 @@ namespace HallOfBeorn.Services
                 CreateCategoryFilter("(choose (an enemy|a location).*(staging area|not engaged with you))|add.*each enemy's engagement cost|each enemy.*gets.*engagement cost", Category.Staging_Area_Control),
                 CreateCategoryFilter(@"after[\s].*[\s]enters[\s]play", Category.Enters_Play),
                 CreateCategoryFilter(@"after[\s].*[\s]leaves[\s]play", Category.Leaves_Play),
-                CreateCategoryFilter(@"(after[\s]you[\s]play[\s].*[\s]from[\s]your[\s]hand|after you play)", Category.Played_From_Hand)
+                CreateCategoryFilter(@"(after[\s]you[\s]play[\s].*[\s]from[\s]your[\s]hand|after you play)", Category.Played_From_Hand),
+                CreateCategoryFilter(@"attach 1 attachment card|an attachment of cost 3 or less and put it into play|you may attach that card facedown|to play Weapon and Armor attachments on", Category.Equipping)
             };
 
             foreach (var card in cards.Values.Where(x => IsCategorizable(x)))

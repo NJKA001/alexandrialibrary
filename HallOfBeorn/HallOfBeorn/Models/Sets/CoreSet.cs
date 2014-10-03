@@ -962,7 +962,7 @@ Action: Choose a player. That player's engaged enemies cannot attack that player
                 Willpower = 0,
                 HitPoints = 2,
                 Traits = new List<string>() { "Dwarf." },
-                Text = "Response: After Miner of the Iron Hills enters play, choose and discard 1 Condition attachment from play.",
+                Text = "Response: After Miner of the Iron ~Hills enters play, choose and discard 1 Condition attachment from play.",
                 Quantity = 2,
                 Number = 61,
                 Artist = Artist.Loren_Fetterman
