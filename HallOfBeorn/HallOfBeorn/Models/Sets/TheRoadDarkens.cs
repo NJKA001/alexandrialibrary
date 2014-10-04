@@ -579,7 +579,7 @@ If there are 9 damage tokens, the players lose the game.",
             Cards.Add(new Card()
             {
                 Title = "Tree-crowned Hill",
-                Id = "",
+                Id = "E5ADB36D-58A3-480B-8782-E3750B71BDD0",
                 CardType = CardType.Location,
                 Threat = 3,
                 QuestPoints = 6,
@@ -591,7 +591,7 @@ Forced: When Tree-crowned hill is explored, the players, as a group, exhaust X c
                 FlavorText = "For their defense in the night the Company climbed to the top of the small hill... -The Fellowship of the Ring",
                 VictoryPoints = 1,
                 EncounterSet = "The Ring Goes South",
-                Number = 30,
+                Number = 31,
                 Quantity = 1,
                 Artist = Artist.Ferdinand_Dumago_Ladera
             });
