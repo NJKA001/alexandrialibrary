@@ -301,6 +301,7 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Dylan_Pierpont);
             all.Add(Artist.Nate_Abell);
             all.Add(Artist.Mikhail_Yakovlev);
+            all.Add(Artist.Carly_Janine_Mazur);
 
             //First Age
             all.Add(Artist.Unknown);
@@ -582,6 +583,7 @@ namespace HallOfBeorn.Models
         public static Artist C_B_Sorge = new Artist { Name = "C. B. Sorge", URL = "http://psychohazard.deviantart.com" };
         public static Artist Caravan_Studio = new Artist { Name = "Caravan Studio", URL = "http://caravanstudio.com" };
         public static Artist Carmen_Cianelli = new Artist { Name = "Carmen Cianelti", URL = "http://arteche.deviantart.com" };
+        public static Artist Carly_Janine_Mazur = new Artist { Name = "Carly Janine Mazur", URL = "http://carlyjanine.com/home.html" };
         public static Artist Carolina_Eade = new Artist { Name = "Carolina Eade", URL = "http://carolina-eade.deviantart.com" };
         public static Artist Charles_Urbach = new Artist { Name = "Charles Urbach", URL = "http://charlesurbachart.deviantart.com" };
         public static Artist Chris_Rahn = new Artist { Name = "Chris Rahn", URL = "http://www.rahnart.com" };

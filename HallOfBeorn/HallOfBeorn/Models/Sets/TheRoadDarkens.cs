@@ -645,6 +645,57 @@ Forced: When ~Hills of Hollin is explored, each player raises his threat by 1 fo
             });
             Cards.Add(new Card()
             {
+                Title = "Regiments of Crows",
+                Id = "F9524610-C38E-41B8-A26F-D11BC6EB8969",
+                CardType = CardType.Treachery,
+                Text = "When Revealed: Place 3 damage on each active location.",
+                Shadow = "Shadow: Undefended damage from this attack must be assigned to the active location.",
+                FlavorText = "\"I think they are spying out the land.\" -Aragorn, The Fellowship of the Ring",
+                EncounterSet = "The Ring Goes South",
+                Number = 35,
+                Quantity = 2,
+                Artist = Artist.Sandra_Duchiewicz
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Snowdrifts",
+                Id = "45A01A09-7FB1-4AA6-AF9B-D06D86764C3C",
+                CardType = CardType.Treachery,
+                Traits = new List<string> { "Weather." },
+                Text = "When Revealed: Attach to the active location. (Countss as a Condition attachment with the text, \"Limit 1 per location. No more than 3 progress can be placed on attached location each round.\") If Snowdrifts is not attached to the active location, it gains surge.",
+                FlavorText = "Soon even Boromir found it hard to keep going. -The Fellowship of the Ring",
+                EncounterSet = "The Ring Goes South",
+                Number = 36,
+                Quantity = 2,
+                Artist = Artist.Mark_Behm
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Bitter Cold",
+                Id = "B83DC4E9-DD6C-4D4A-ABC5-C0A846DEB571",
+                CardType = CardType.Treachery,
+                Traits = new List<string> { "Weather." },
+                Text = "When Revealed: Each player must choose: either discard each ally he controls, or raise his threat by 1 for each ally he controls.",
+                Shadow = "Shadow: Attacking enemy makes an additional attack after this one.",
+                EncounterSet = "The Ring Goes South",
+                Number = 37,
+                Quantity = 2,
+                Artist = Artist.Carly_Janine_Mazur
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Storm of Howls",
+                Id = "1CFB37BB-1DD1-44DC-A907-778EE15D9EE9",
+                CardType = CardType.Treachery,
+                Keywords = new List<string> { "Peril." },
+                Text = "When Revealed: Either the Warg enemy in the staging area with the highest engagement cost attacks you, or each Warg enemy gets -20 engagement until the end of the round. If no Warg enemy is in the staging area, Storm of Howls gains surge.",
+                EncounterSet = "The Ring Goes South",
+                Number = 38,
+                Quantity = 3,
+                Artist = Artist.Jake_Bullock
+            });
+            Cards.Add(new Card()
+            {
                 Title = "Lust for the Ring",
                 Id = "BF5429AB-9AD8-4BD1-AFB0-A781D0846B6B",
                 CardType = CardType.Treachery,
@@ -699,6 +750,19 @@ Forced: When ~Hills of Hollin is explored, each player raises his threat by 1 fo
             });
             Cards.Add(new Card()
             {
+                Title = "Grievous Wound",
+                Id = "B8C72B5E-3A9A-4161-A167-4F8EB59FDD84",
+                CardType = CardType.Objective,
+                CampaignCardType = CampaignCardType.Burden,
+                Traits = new List<string> { "Wound." },
+                Text = "Setup: Add Grievous Wound to the staging area.\r\n\"Forced: After a hero takes damage, if Grievous Wound is unattached, attach to that hero. (Counts as a Condition attachment with the text: \"Forced: After attached hero exhausts, deal 1 damage to it.\")",
+                EncounterSet = "Journey in the Dark",
+                Number = 88,
+                Quantity = 1,
+                Artist = Artist.Sara_K_Diesel
+            });
+            Cards.Add(new Card()
+            {
                 Title = "Followed by Night",
                 Id = "876E404F-F85A-4218-B7D8-6466ACA84ABC",
                 CardType = CardType.Objective,
@@ -707,23 +771,9 @@ Forced: When ~Hills of Hollin is explored, each player raises his threat by 1 fo
                 Text = "When Revealed: Put the topmost enemy of the encounter deck discard pile into play engaged with you.",
                 FlavorText = "\"Quite apart from murder by night on his own account, he may put any enemy that is about on our track.\" -Aragorn, The Fellowship of the Ring",
                 EncounterSet = "Breaking of the Fellowship",
-                Number = 88,
-                Quantity = 1,
-                Artist = Artist.Gabriel_Verdon
-            });
-            Cards.Add(new Card()
-            {
-                Title = "Pursued by the Enemy",
-                Id = "B8C72B5E-3A9A-4161-A167-4F8EB59FDD84",
-                CardType = CardType.Treachery,
-                CampaignCardType = CampaignCardType.Burden,
-                Keywords = new List<string> { "Doomed 1.", "Surge." },
-                Text = "When Revealed: Each enemy engaged with a player, and not in the staging area, makes an immediate attack.",
-                Shadow = "Shadow: Attacking enemy makes an additional attack after this one.",
-                EncounterSet = "Breaking of the Fellowship",
                 Number = 89,
                 Quantity = 1,
-                Artist = Artist.Claudio_Pozas
+                Artist = Artist.Gabriel_Verdon
             });
             Cards.Add(new Card()
             {
