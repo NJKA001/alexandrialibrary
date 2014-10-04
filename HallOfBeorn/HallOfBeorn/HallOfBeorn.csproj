@@ -2034,6 +2034,7 @@
     <Content Include="Images\close-button.png" />
     <Content Include="Images\defense.gif" />
     <Content Include="Images\encounter-card-back.jpg" />
+    <Content Include="Images\error.jpg" />
     <Content Include="Images\Fellowship.png" />
     <Content Include="Images\HallOfBeorn-AppleTouchIcon.png" />
     <Content Include="Images\Happy_Grizzly_Bear.jpg" />
@@ -2161,6 +2162,7 @@
     <Content Include="Views\Cards\Browse.cshtml" />
     <Content Include="Views\Cards\Scenarios.cshtml" />
     <Content Include="Views\Cards\AdvancedSearch.cshtml" />
+    <Content Include="Error.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
