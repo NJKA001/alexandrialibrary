@@ -302,6 +302,8 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Nate_Abell);
             all.Add(Artist.Mikhail_Yakovlev);
             all.Add(Artist.Carly_Janine_Mazur);
+            all.Add(Artist.Ben_Peek);
+            all.Add(Artist.Pedro_Amato);
 
             //First Age
             all.Add(Artist.Unknown);
@@ -574,6 +576,7 @@ namespace HallOfBeorn.Models
         public static Artist Arden_Beckwith = new Artist { Name = "Arden Beckwith", URL = "http://ardenbeckwith.blogspot.com" };
         public static Artist Asahi = new Artist { Name = "Asahi", URL = "http://asahisuperdry.deviantart.com" };
         public static Artist Aurelien_Hubert = new Artist { Name = "Aurelien Hubert", URL = "http://aurelien-hubert-ash.blogspot.com" };
+        public static Artist Ben_Peek = new Artist { Name = "Ben Peek", URL = "https://www.google.com/search?q=been+peek+art" };
         public static Artist Ben_Zweifel = new Artist { Name = "Ben Zweifel", URL = "http://benzweifel.com" };
         public static Artist Bill_Corbett = new Artist { Name = "Bill Corbett", URL = "http://billcorbett.deviantart.com" };
         public static Artist Blake_Henriksen = new Artist { Name = "Blake Henriksen", URL = "http://pinkhavok.deviantart.com" };
@@ -727,6 +730,7 @@ namespace HallOfBeorn.Models
         public static Artist Owen_William_Weber = new Artist { Name = "Owen William Weber", URL = "http://oweber.blogspot.com" };
         public static Artist Paul_Guzenko = new Artist { Name = "Paul Guzenko", URL = "http://www.guzboroda.com/?author=1" };
         public static Artist Paolo_Puggioni = new Artist { Name = "Paulo Puggioni", URL = "http://www.paolopuggioni.com" };
+        public static Artist Pedro_Amato = new Artist { Name = "Pedro Amato", URL = "http://aragah.deviantart.com" };
         public static Artist Piya_Wannachaiwong = new Artist { Name = "Piya Wannachaiwong", URL = "http://www.piyastudios.com" };
         public static Artist Rafal_Hrynkiewicz = new Artist { Name = "Rafał Hrynkiewicz", URL = "http://mcf.deviantart.com" };
         public static Artist Raymond_Bonilla = new Artist { Name = "Raymond Bonilla", URL = "http://raybonilla.deviantart.com" };

@@ -696,6 +696,345 @@ Forced: When ~Hills of Hollin is explored, each player raises his threat by 1 fo
             });
             Cards.Add(new Card()
             {
+                Title = "Journey in the Dark",
+                CardType = Models.CardType.Campaign,
+                CampaignCardType = Models.CampaignCardType.Campaign,
+                SlugIncludesType = true,
+                Id = "952913FB-ACC2-4A0C-A802-D841D9F18198",
+                OppositeTitle = "The Lord of the Rings Part 5",
+                Text =
+@"You are playing in Campaign Mode.
+
+Setup: Shuffle the burder treachery cards Pursued by the Enemy and Shadow of Fear, into the encounter deck. Add the burden objective cards Grievous Wound and Overcome by Grief to the staging area.",
+                FlavorText = "\"Well, well!\" said the wizard. \"The passage is blocked behind us now and there is only one way out - on the other side of the mountains.\" -The Fellowship of the Ring",
+                OppositeText = "Resolution: The first player must choose one of the burden treachery cards (Pursued by the Enemy or Shadow of Fear), and one of the burden objective cards (Grievous Wound or Overcome by Grief) and add to the Campaign Pool. If The Balrog is still in play, the first player must choose all 4 burden cards instead. The chosen burdens have been earned by the players.",
+                OppositeFlavorText = "They ran on. The light grew before them; great shafts pierced the roof. They ran swifter. They passed into a hall, bright with daylight from its high windows in the east. They fled across it. Through its huge broken doors they passed, and suddenly before them the Great Gates opened, an arch of blazing light. -The Fellowship of the Ring",
+                EncounterSet = "The Ring Goes South",
+                Number = 39,
+                Quantity = 1,
+                Artist = Artist.Juan_Carlos_Barquet
+            });
+            Cards.Add(new Card()
+            {
+                Title = "The Long Dark of Moria",
+                Id = "1C1EC6D0-14E5-4563-A52C-7B2B51FCA760",
+                HasSecondImage = true,
+                CardType = CardType.Quest,
+                StageNumber = 1,
+                EncounterSet = "Journey in the Dark",
+                Text = "Setup: Set The Balrog, The Great Bridge, and Chamber of Mazarbul aside out of play. Add Doom, Doom, Doom to the staging area and place 10 damage tokens on it. Each player adds 1 different location to the staging area.",
+                FlavorText = "Trapped inside the Mines of Moria, the Company of the Ring must find their way through many twisting passages to reach the eastern door. But with every step they take into the Mines, there is a growing sense of dread...",
+                QuestPoints = 14,
+                OppositeText = "Forced: After a player optionally engages an enemy, remove 1 damage from Doom, Doom, Doom.",
+                OppositeFlavorText = "There were not only many roads to choose from, there were also in many places holes and pitfalls, and dark wells beside the path in which their passing feet echoed. -The Fellowship of the Ring",
+                Number = 40,
+                Quantity = 1,
+                Artist = Artist.Juan_Carlos_Barquet
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Drums in the Deep",
+                Id = "8AF12E34-E1F4-490E-9926-74929D6F9649",
+                HasSecondImage = true,
+                CardType = CardType.Quest,
+                StageNumber = 2,
+                EncounterSet = "Journey in the Dark",
+                Text = "When Revealed: Add Chamber of Mazarbul to the staging area.",
+                FlavorText = "Then there came an echoing blast: a great horn was blown in the hall, and answering horns and harsh cries were heard further off. There was a hurrying sound of many feet. -The Fellowship of the Ring",
+                QuestPoints = 9,
+                OppositeText = 
+@"If there are no enemies in the staging area at the beginning of the quest phase, the first player reveals an additional encounter card during the staging step.
+
+The players cannot advance unless there are X resource tokens on this stage. X is the number of players times 3.
+
+Forced: After an enemy is defeated, place 1 resource token on this stage.",
+                Number = 41,
+                Quantity = 1,
+                Artist = Artist.Nate_Abell
+            });
+            Cards.Add(new Card()
+            {
+                Title = "The Bridge of Khazad-dûm",
+                Id = "F836D78D-C291-43DE-A562-144D4ABC4F4A",
+                HasSecondImage = true,
+                CardType = CardType.Quest,
+                StageNumber = 3,
+                EncounterSet = "Journey in the Dark",
+                Text = "When Revealed: Add The Great Bridge to the staging area. Each player reveals 1 encounter card and removes 1 damage token from Doom, Doom, Doom.",
+                FlavorText = "The outer door could only be reached by a slender bridge of stone, without kerb or rail, that spanned the chasm with one curving spring of fifty feet. -The Fellowship of the Ring",
+                QuestPoints = 15,
+                OppositeText =
+@"No more than 5 progress can be placed on this stage each round.
+
+The players cannot defeat this stage while The Great Bridge is in play. If the players defeat this stage, they win the game.",
+                OppositeFlavorText = "\"Now for the last race!\" said Gandalf. \"If the sun is shining outside we may still escape. After me!\" -The Fellowship of the Ring",
+                Number = 42,
+                Quantity = 1,
+                Artist = Artist.Silver_Saaremael
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Doom, Doom, Doom",
+                Id = "4289DFBC-7164-490F-9905-92BA78C0037F",
+                CardType = CardType.Objective,
+                Traits = new List<string> { "Shadow.", "Flame." },
+                Text = 
+@"Forced: At the end of the quest phase, remove 1 damage token from Doom, Doom, Doom. Then, if there are no damage tokens here, add The ~Balrog to the staging area.
+
+Forced: At the end of the quest phase, The ~Balrog makes an attack if it is in play.",
+                EncounterSet = "Journey in the Dark",
+                Number = 43,
+                Quantity = 1,
+                Artist = Artist.Silver_Saaremael
+            });
+            Cards.Add(new Card()
+            {
+                Title = "The Balrog",
+                Id = "88D5E35D-37C2-404C-83B6-F30D916405E0",
+                IsUnique = true,
+                CardType = CardType.Enemy,
+                EngagementCost = 50,
+                Threat = 5,
+                Attack = 8,
+                Defense = 9,
+                HitPoints = 25,
+                Traits = new List<string> { "Balrog.", "Shadow.", "Flame." },
+                Keywords = new List<string> { "Indestructible.", "Cannot be optionally engaged.", "The Balrog and shadow cards dealt to The Balrog are immune to player card effects." },
+                Text = "While in the staging area, The ~Balrog is considered to be engaged with the first player and only the first player can declare attackers against The ~Balrog.",
+                VictoryPoints = 50,
+                EncounterSet = "Journey in the Dark",
+                Number = 44,
+                Quantity = 1,
+                Artist = Artist.Jim_Pavelec
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Orc-chieftain",
+                Id = "54E8B892-5DDF-4883-B54B-563323884C3A",
+                CardType = CardType.Enemy,
+                EngagementCost = 40,
+                Threat = 4,
+                Attack = 4,
+                Defense = 3,
+                HitPoints = 6,
+                Traits = new List<string> { "Orc.", "Uruk." },
+                Keywords = new List<string> { "Cannot have attachments.", "Allies cannot defend against [Card]." },
+                Text = "Forced: At the beginning of the encounter phase, Orc-chieftain engages the first player.",
+                FlavorText = "...he charged into the Company and thrust his spear straight at Frodo. -The Fellowship of the Ring",
+                EncounterSet = "Journey in the Dark",
+                Number = 45,
+                Quantity = 1,
+                Artist = Artist.Alvaro_Calvo_Escudero
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Great Cave-troll",
+                Id = "052DC0A2-B1D6-4833-960E-FE8C34A0857B",
+                CardType = CardType.Enemy,
+                EngagementCost = 36,
+                Threat = 3,
+                Attack = 6,
+                Defense = 4,
+                HitPoints = 6,
+                Traits = new List<string> { "Troll." },
+                Keywords = new List<string> { "Cannot have attachments." },
+                Text = "For each point of excess damage dealt by Cave-troll (damage that is dealt beyond the remaining hit points of the character damaged by its attack) remove 1 progress from the current quest.",
+                EncounterSet = "Journey in the Dark",
+                Number = 46,
+                Quantity = 2,
+                Artist = Artist.Nicholas_Gregory
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Uruk from Mordor",
+                Id = "48E64AED-A5E7-4427-946C-C24260DA163E",
+                CardType = CardType.Enemy,
+                EngagementCost = 34,
+                Threat = 2,
+                Attack = 4,
+                Defense = 2,
+                HitPoints = 5,
+                Traits = new List<string> { "Orc.", "Uruk." },
+                Text = "When Revealed: Uruk from Mordor makes an immediate attack against the first player.",
+                Shadow = "Shadow: Attacking enemy gets +1 Attack. If this attack destroys a character, attacking enemy makes an additional attack.",
+                EncounterSet = "Journey in the Dark",
+                Number = 47,
+                Quantity = 3,
+                Artist = Artist.Guillaume_Ducos
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Moria Orc",
+                Id = "30D5D5BB-6517-4BCA-B06C-273D27CBFB25",
+                CardType = CardType.Enemy,
+                EngagementCost = 38,
+                Threat = 2,
+                Attack = 3,
+                Defense = 1,
+                HitPoints = 3,
+                Traits = new List<string> { "Orc.", "Uruk." },
+                Text = "When Revealed: Either remove 1 damage from Doom, Doom, Doom, or reveal an additional encounter card.",
+                Shadow = "Shadow: The defending player raises his threat by 1 for each enemy engaged with him.",
+                EncounterSet = "Journey in the Dark",
+                Number = 48,
+                Quantity = 3,
+                Artist = Artist.Ben_Peek
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Moria Archer",
+                Id = "798A9EB5-AB16-4DC6-9228-61E670EF5784",
+                CardType = CardType.Enemy,
+                EngagementCost = 42,
+                Threat = 0,
+                IsVariableThreat = true,
+                Attack = 3,
+                Defense = 3,
+                HitPoints = 3,
+                Traits = new List<string> { "Orc." },
+                Keywords = new List<string> { "Peril.", "Archery 2." },
+                Text = "When Revealed: Assign X damage among characters you control.",
+                EncounterSet = "Journey in the Dark",
+                Number = 49,
+                Quantity = 3,
+                Artist = Artist.Ben_Peek
+            });
+            Cards.Add(new Card()
+            {
+                Title = "The Great Bridge",
+                IsUnique = true,
+                Id = "F42AAEF4-1F89-417B-8E7D-483F91C62527",
+                CardType = CardType.Location,
+                Threat = 5,
+                QuestPoints = 5,
+                Traits = new List<string> { "Underground.", "Bridge." },
+                Keywords = new List<string> { "Immune to player card effects." },
+                Text = "Response: When The Great Bridge is explored, discard a hero from play to deal X damage to The Balrog. X is that hero's threat cost. Then, The Balrog loses all keywords for the remainder of the game. Any player may trigger this response.",
+                VictoryPoints = 5,
+                Number = 50,
+                Quantity = 1,
+                Artist = Artist.Emilio_Rodriguez
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Chamber of Mazarbul",
+                IsUnique = true,
+                Id = "5206815D-292B-475C-9887-FE9CBB2D4CAF",
+                CardType = CardType.Location,
+                Threat = 4,
+                QuestPoints = 4,
+                Traits = new List<string> { "Underground." },
+                Keywords = new List<string> { "Immune to player card effects." },
+                Text = "The player cannot advance to the next stage.\r\nTravel: Each player searches the encounter deck and discard pile for a different enemy and adds it to the staging area to travel here. One of those enemies must be Orc-chieftain, if able.",
+                VictoryPoints = 4,
+                Number = 51,
+                Quantity = 1,
+                Artist = Artist.Emilio_Rodriguez
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Mines of Moria",
+                Id = "BE234B07-D1FD-4673-9680-639CE3104424",
+                CardType = CardType.Location,
+                Threat = 2,
+                QuestPoints = 4,
+                Traits = new List<string> { "Underground." },
+                Text = "Whiles Mines of Moria is in the staging area, progress must be placed on Mines of Moria before it can be placed on the current quest.",
+                Shadow = "Shadow: Defending player discards a non-objective attachment he controls (2 non-objective attachments instead if his threat is 35 or higher).",
+                Number = 52,
+                Quantity = 4,
+                Artist = Artist.Juan_Carlos_Barquet
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Many-pillared Hall",
+                Id = "8C8FC2DF-034B-43CB-BD08-8F6EE7911732",
+                CardType = CardType.Location,
+                Threat = 1,
+                QuestPoints = 6,
+                Traits = new List<string> { "Underground." },
+                Text = "Many-pillared Hall gets +1 Threat for each Many-pillared Hall in play.",
+                Shadow = "Shadow: Attacking enemy gets +1 Attack (+2 Attack instead if the defending player's threat is 35 or higher).",
+                Number = 53,
+                Quantity = 4,
+                Artist = Artist.Jose_Vega
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Darkened Stairway",
+                Id = "D3E23B2F-CEFA-4E83-A724-1151D2090433",
+                CardType = CardType.Location,
+                Threat = 4,
+                QuestPoints = 2,
+                Traits = new List<string> { "Underground." },
+                Text = "Forced: After Darkened Stairway is explored, discard the top card of the encounter deck. If the discarded card is a location, add it to the staging area.",
+                FlavorText = "Frodo caught glimpses of stairs and arches and of other passages and tunnels, sloping up, or running steeply down, or opening blankly dakr on either side. -The Fellowship of the Ring",
+                Number = 54,
+                Quantity = 2,
+                Artist = Artist.Nate_Abell
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Ancient Guardroom",
+                Id = "20B1B404-F6E5-4E29-B9D8-C869525AA272",
+                CardType = CardType.Location,
+                Threat = 3,
+                QuestPoints = 3,
+                Traits = new List<string> { "Underground." },
+                Text = "While Ancient Guardroom is the active location, each enemy in play gets -1 Attack.\r\nTravel: Discard the top card of the encounter deck to travel here. Each player raises his threat by X, where X is the discarded card's Threat.",
+                Number = 55,
+                Quantity = 2,
+                Artist = Artist.Pedro_Amato
+            });
+            Cards.Add(new Card()
+            {
+                Title = "They Are Coming!",
+                Id = "33A5425A-1827-4672-8B7B-28FA52CBD2C2",
+                CardType = CardType.Treachery,
+                Keywords = new List<string> { "Doomed 2." },
+                Text = "When Revealed: Shuffle the encounter discard pile into the encounter deck and discard cards from the top of the encounter deck until X enemies are discarded. X is the number of players in the game. Add each enemy discarded this way to the staging area.",
+                Number = 56,
+                Quantity = 2,
+                Artist = Artist.Sara_Betsy
+            });
+            Cards.Add(new Card()
+            {
+                Title = "We Cannot Get Out",
+                Id = "BF2720F0-A766-48AB-B23E-408FB6ECFFD2",
+                CardType = CardType.Treachery,
+                Text = "When Revealed: Each player assigns X damage among characters he controls. X is the number of exhausted characters he controls.",
+                Shadow = "Shadow: Assign X damage among characters you control. X is the number of enemies engaged with you.",
+                Number = 57,
+                Quantity = 3,
+                Artist = Artist.Nate_Abell
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Deep Fissure",
+                Id = "49C6D3E2-52D6-4807-BB52-D2C3AA062836",
+                CardType = CardType.Treachery,
+                Traits = new List<string> { "Hazard." },
+                Text = "When Revealed: Remove a character you control from the quest and discard the top card of the encounter deck. If that character's printed Willpower is less than the discarded card's Threat, discard that character.",
+                FlavorText = "...it was long before Pippin could summon enough courage to leap... -The Fellowship of the Ring",
+                Number = 58,
+                Quantity = 3,
+                Artist = Artist.Pedro_Amato
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Fool of a Took!",
+                Id = "0777D985-660F-4CC7-BE97-7B4BD09FDB13",
+                CardType = CardType.Treachery,
+                Keywords = new List<string> { "Doomed 1." },
+                Text = "When Revealed: Remove 1 damage token from Doom, Doom, Doom, or The Balrog makes an attack, if able.",
+                Shadow = "Shadow: If this attack destroys a character, reveal 1 card from the encounter deck.",
+                Number = 59,
+                Quantity = 2,
+                Artist = Artist.Chris_Rahn
+            });
+            //
+            Cards.Add(new Card()
+            {
                 Title = "Lust for the Ring",
                 Id = "BF5429AB-9AD8-4BD1-AFB0-A781D0846B6B",
                 CardType = CardType.Treachery,
