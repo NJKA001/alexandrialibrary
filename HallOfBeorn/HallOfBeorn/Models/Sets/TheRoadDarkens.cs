@@ -253,7 +253,7 @@ Response: After attached character destroys an Orc enemy, draw 1 card.",
             });
             Cards.Add(new Card()
             {
-                Title = "Andúril",
+                Title = "Andúril",
                 IsUnique = true,
                 NormalizedTitle = "Anduril",
                 Id = "A4E77553-5376-452A-974B-601C35FEB5BA",
@@ -313,7 +313,7 @@ Action: Add Three Golden Hairs to the victory display and remove it from the cam
             });
             Cards.Add(new Card()
             {
-                Title = "Lórien Rope",
+                Title = "Lórien Rope",
                 IsUnique = true,
                 NormalizedTitle = "Lorien Rope",
                 Id = "DF542407-56E4-4643-BD32-5BE349AA86FF",
@@ -594,6 +594,54 @@ Forced: When Tree-crowned hill is explored, the players, as a group, exhaust X c
                 Number = 31,
                 Quantity = 1,
                 Artist = Artist.Ferdinand_Dumago_Ladera
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Hills of Hollin",
+                Id = "6194470F-0592-4ECD-9D8A-21D413F96500",
+                CardType = CardType.Location,
+                Threat = 2,
+                QuestPoints = 4,
+                Traits = new List<string> { "Hills." },
+                Text =
+@"While ~Hills of Hollin is the active location, each enemy in the staging area gets +5 engagement cost.
+                
+Forced: When ~Hills of Hollin is explored, each player raises his threat by 1 for each damage here.",
+                FlavorText = "For their defense in the night the Company climbed to the top of the small hill... -The Fellowship of the Ring",
+                VictoryPoints = 1,
+                EncounterSet = "The Ring Goes South",
+                Number = 32,
+                Quantity = 3,
+                Artist = Artist.Mikhail_Yakovlev
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Redhorn Foothills",
+                Id = "C1D01F3E-8DCD-489C-AD0D-18CFEF78DAC2",
+                CardType = CardType.Location,
+                Threat = 4,
+                QuestPoints = 5,
+                Traits = new List<string> { "Hills." },
+                Text = "While ~Hills of Hollin is the active location, it gains: \"Forced: After an enemy is added to the staging area, it gets -5 engagement cost until the end of the round.\"\r\nForced: When Redhorn Foothills is explored, each player must discard X cards from his hand at random. X is the number of damage here.",
+                EncounterSet = "The Ring Goes South",
+                Number = 33,
+                Quantity = 3,
+                Artist = Artist.Victor_Garcia
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Eregion",
+                Id = "B8F593C8-3BDD-4E98-AE44-1EBA952754B6",
+                CardType = CardType.Location,
+                Threat = 3,
+                QuestPoints = 4,
+                Traits = new List<string> { "Hills." },
+                Text = "Forced: When Eregion is explored, the players, as a group, must discard X allies from play. X is the number of damage here.",
+                Shadow = "Shadow: Defending player discards a non-objective attachment he controls.",
+                EncounterSet = "The Ring Goes South",
+                Number = 34,
+                Quantity = 3,
+                Artist = Artist.Michael_Rasmussen
             });
             Cards.Add(new Card()
             {

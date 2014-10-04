@@ -300,6 +300,7 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Rovina_Cai);
             all.Add(Artist.Dylan_Pierpont);
             all.Add(Artist.Nate_Abell);
+            all.Add(Artist.Mikhail_Yakovlev);
 
             //First Age
             all.Add(Artist.Unknown);
@@ -710,6 +711,7 @@ namespace HallOfBeorn.Models
         public static Artist Michael_Rasmussen = new Artist { Name = "Michael Rasmussen", URL = "http://www.rasmussenillustration.com" };
         public static Artist Mike_Capprotti = new Artist { Name = "Mike Capprotti", URL = "http://capprotti.deviantart.com" };
         public static Artist Mike_Nash = new Artist { Name = "Mike Nash", URL = "http://www.mike-nash.com/HOME.html" };
+        public static Artist Mikhail_Yakovlev = new Artist { Name = "Mikhail Yakovlev", URL = "http://yakovlevart.blogspot.com" };
         public static Artist Milek_Jakubiec = new Artist { Name = "Milek Jakubiec", URL = "http://ethicallychallenged.deviantart.com" };
         public static Artist Nacho_Molina = new Artist { Name = "Nacho Molina", URL = "http://nachomolina.deviantart.com" };
         public static Artist Nicholas_Cloister = new Artist { Name = "Nicholas Cloister", URL = "http://cloister.deviantart.com" };
