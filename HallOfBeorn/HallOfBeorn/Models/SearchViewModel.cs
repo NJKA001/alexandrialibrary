@@ -82,6 +82,9 @@ namespace HallOfBeorn.Models
         [Display(Name = "Custom")]
         public bool Custom { get; set; }
 
+        [Display(Name = "Victory")]
+        public string VictoryPoints { get; set; }
+
         public static IEnumerable<SelectListItem> CardTypes
         {
             get { return typeof(CardType).GetSelectListItems(); }
@@ -131,5 +134,7 @@ namespace HallOfBeorn.Models
                     yield return new SelectListItem { Text = artist.Name, Value = artist.Name };
             }
         }
+
+        public static IEnumerable<SelectListItem> VictoryPointValues { get; set; }
     }
 }

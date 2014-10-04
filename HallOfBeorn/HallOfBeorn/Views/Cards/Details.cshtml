@@ -245,9 +245,11 @@
                             @if (@Model.TextEffects.Count() > 0)
                             {
                                 foreach (var effect in Model.TextEffects)
-                                {    
+                                {   
+                                    var count = 0;
                                     foreach (var token in effect.Tokens)
                                     {
+                                        count++;
                                         if (token.IsTrigger || effect.IsCritical)
                                         {
                                             <b>@token.Text</b>
@@ -258,7 +260,10 @@
                                 
                                             if (token.HasSuffix)
                                             {
-                                                @: @token.Suffix
+                                                if (token.Suffix != "." || count != effect.Tokens.Count)
+                                                {
+                                                    @: @token.Suffix
+                                                }
                                             }
                                         }
                                         else if (token.IsIcon)

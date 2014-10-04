@@ -35,6 +35,7 @@ namespace HallOfBeorn.Services
         private readonly Dictionary<string, Deck> decks = new Dictionary<string, Deck>();
         private readonly Dictionary<string, Scenario> scenarios = new Dictionary<string, Scenario>();
         private readonly Dictionary<string, Category> categories = new Dictionary<string, Category>();
+        private readonly Dictionary<byte, string> victoryPointValues = new Dictionary<byte, string>();
 
         const int maxResults = 128;
         const string randomKeyword = "random";
@@ -119,6 +120,11 @@ namespace HallOfBeorn.Services
                     var traitKey = trait.Replace(".", string.Empty).Trim();
                     if (!traits.ContainsKey(traitKey))
                         traits.Add(traitKey, trait.Trim());
+                }
+
+                if (card.VictoryPoints > 0 && !victoryPointValues.ContainsKey(card.VictoryPoints))
+                {
+                    victoryPointValues.Add(card.VictoryPoints, string.Format("Victory {0}.", card.VictoryPoints));
                 }
             }
         }
@@ -1057,6 +1063,16 @@ namespace HallOfBeorn.Services
                 results = results.Where(x => !string.IsNullOrEmpty(x.EncounterSet) && x.EncounterSet == model.EncounterSet).ToList();
             }
 
+            if (!string.IsNullOrEmpty(model.VictoryPoints) && model.VictoryPoints != "Any")
+            {
+                byte victoryPoints = 0;
+                if (byte.TryParse(model.VictoryPoints.Replace("Victory", string.Empty).Trim('.'), out victoryPoints))
+                {
+                    hasFilter = true;
+                    results = results.Where(x => x.VictoryPoints == victoryPoints).ToList();
+                }
+            }
+
             var takeCount = hasFilter || model.Random ? results.Count : maxResults;
 
             results = results.Take(takeCount).ToList();
@@ -1208,6 +1224,11 @@ namespace HallOfBeorn.Services
             return scenarios.ContainsKey(scenarioTitle) ?
                 scenarios[scenarioTitle]
                 : null;
+        }
+
+        public IEnumerable<string> VictoryPointValues()
+        {
+            return victoryPointValues.Keys.OrderBy(x => x).Select(y => victoryPointValues[y]).ToList();
         }
     }
 }

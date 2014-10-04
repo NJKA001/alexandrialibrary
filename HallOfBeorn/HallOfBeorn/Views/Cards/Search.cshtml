@@ -21,6 +21,7 @@
             $('#EncounterSet').val('Any');
             $('#Category').val('Any');
             $('#Sort').val('Any');
+            $('#Victory').val('Any');
             //$('#Custom').attr('checked', false);
         });
     });
@@ -53,7 +54,7 @@
 
             <span style="display:inline-block;">
             <span style="margin-right:2px;width:60px;display:inline-block;">Cost</span>
-            @Html.DropDownListFor(x => x.Cost, SearchViewModel.Costs, new { style = "margin-right:12px;" })
+            @Html.DropDownListFor(x => x.Cost, SearchViewModel.Costs, new { style = "margin-right:12px;width:90px;" })
             </span>
         </div>
         <div>
@@ -85,12 +86,17 @@
 
             <span style="display:inline-block;">
             <span style="margin-right:2px;width:60px;display:inline-block;">Sort</span>
-            @Html.DropDownListFor(x => x.Sort, SearchViewModel.Sorts, new { style = "margin-right:12px;;max-width:140px;width:140px;" })
+            @Html.DropDownListFor(x => x.Sort, SearchViewModel.Sorts, new { style = "margin-right:12px;max-width:140px;width:140px;" })
             </span>
 
             <span style="display:inline-block;">
             <span style="margin-right:2px;width:76px;display:inline-block;">Category</span>
             @Html.DropDownListFor(x => x.Category, SearchViewModel.Categories, new { style = "margin-right:12px;max-width:170px;width:170px;" })
+            </span>
+
+            <span style="display:inline-block;">
+            <span style="margin-right:2px;width:60px;display:inline-block;">Victory</span>
+            @Html.DropDownListFor(x => x.VictoryPoints, SearchViewModel.VictoryPointValues, new { style = "margin-right:12px;width:90px;" })
             </span>
             @*
             <span style="display:inline-block;">
